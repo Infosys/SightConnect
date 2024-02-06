@@ -369,44 +369,41 @@ class VisualAcuityTestProvider with ChangeNotifier {
 
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
-    final visionAcuityTumblingResponse =
-        await getVisionAcuityTumblingResponse().catchError((e) {
-      throw ServerFailure(
-          errorMessage: "Could not fetch vision acuity response");
-    });
-    final reportModel = await getTriageReportByReportId(diagnosticReportId!);
-
-    if (reportModel == null) {
-      throw ServerFailure(
-          errorMessage: "Could not fetch report of id $diagnosticReportId");
-    }
-
-    TriageUpdateModel triage = TriageUpdateModel(
-      patientId: reportModel.subject,
-      diagnosticReportId: reportModel.diagnosticReportId,
-      organizationCode: reportModel.organizationCode,
-      performer: [
-        Performer(
-          role: PerformerRole.PATIENT,
-          identifier: reportModel.subject,
-        ),
-      ],
-      assessmentCode: reportModel.assessmentCode,
-      assessmentVersion: reportModel.assessmentVersion,
-      issued: reportModel.issued,
-      source: Source.PATIENT_APP,
-      sourceVersion: AppText.appVersion,
-      incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
-      score: _getScore(visionAcuityTumblingResponse),
-      cummulativeScore: _getCummulativeScore(visionAcuityTumblingResponse),
-      observations: _getObservationsToBeUpdated(
-          reportModel.observations ?? [], visionAcuityTumblingResponse),
-    );
-
     try {
-      logger.d({"observationDTO": triage.observations});
+      final visionAcuityTumblingResponse =
+          await getVisionAcuityTumblingResponse();
+      final reportModel = await getTriageReportByReportId(diagnosticReportId!);
+
+      if (reportModel == null) {
+        throw ServerFailure(
+            errorMessage: "Could not fetch report of id $diagnosticReportId");
+      }
+
+      TriageUpdateModel triage = TriageUpdateModel(
+        patientId: reportModel.subject,
+        diagnosticReportId: reportModel.diagnosticReportId,
+        organizationCode: reportModel.organizationCode,
+        performer: [
+          Performer(
+            role: PerformerRole.PATIENT,
+            identifier: reportModel.subject,
+          ),
+        ],
+        assessmentCode: reportModel.assessmentCode,
+        assessmentVersion: reportModel.assessmentVersion,
+        issued: reportModel.issued,
+        source: Source.PATIENT_APP,
+        sourceVersion: AppText.appVersion,
+        incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
+        score: _getScore(visionAcuityTumblingResponse),
+        cummulativeScore: _getCummulativeScore(visionAcuityTumblingResponse),
+        observations: _getObservationsToBeUpdated(
+            reportModel.observations ?? [], visionAcuityTumblingResponse),
+      );
+
       return triageRepositoryProvider.updateTriageResponse(
-          triageResponse: triage);
+        triageResponse: triage,
+      );
     } catch (e) {
       rethrow;
     }
