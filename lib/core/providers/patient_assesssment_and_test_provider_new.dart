@@ -369,14 +369,14 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
           notifyListeners();
         }
         _selfTestReportPage = _selfTestReportPage + 1;
-        final output = triageAssessment
-            .where((element) => element.performerRole == PerformerRole.PATIENT)
-            .toList();
+        // final output = triageAssessment
+        //     .where((element) => element.performerRole == PerformerRole.PATIENT)
+        //     .toList();
 
-        output.sort((a, b) => b.issued!.compareTo(a.issued!));
+        triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
         _isSelfTestReportLoading = false;
         _isClinicalReportLoading = false;
-        _selfTestReportList.addAll(_assessmentReportMapper(output));
+        _selfTestReportList.addAll(_assessmentReportMapper(triageAssessment));
         notifyListeners();
       } else {
         if (triageAssessment.length < pageSize) {
@@ -384,22 +384,22 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
           notifyListeners();
         }
         _clinicalReportPage = _clinicalReportPage + 1;
-        final output = triageAssessment
-            .where((element) => element.performerRole != PerformerRole.PATIENT)
-            .toList();
-        if (output.isEmpty && triageAssessment.isNotEmpty) {
-          await getTriageReportByEncounterId(encounterId, isPatient);
-        }
+        // final output = triageAssessment
+        //     .where((element) => element.performerRole != PerformerRole.PATIENT)
+        //     .toList();
+        // if (output.isEmpty && triageAssessment.isNotEmpty) {
+        //   await getTriageReportByEncounterId(encounterId, isPatient);
+        // }
 
-        output.sort((a, b) => b.issued!.compareTo(a.issued!));
+        triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
         _isSelfTestReportLoading = false;
         _isClinicalReportLoading = false;
-        _clinicalReportList.addAll(_assessmentReportMapper(output));
+        _clinicalReportList.addAll(_assessmentReportMapper(triageAssessment));
         notifyListeners();
         logger.d({
           "hasClinicalReportMore": _hasClinicalReportMore,
           "length": triageAssessment.length,
-          "output": output.length,
+          "output": triageAssessment.length,
         });
       }
     });
