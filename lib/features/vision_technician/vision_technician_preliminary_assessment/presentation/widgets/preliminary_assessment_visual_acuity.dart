@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/vision_technician_triage_provider.dart';
@@ -14,9 +13,11 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var rightEyeController = useTextEditingController();
-    var leftEyeController = useTextEditingController();
-    var bothEyeController = useTextEditingController();
+    // var rightEyeController = useTextEditingController();
+    // var leftEyeController = useTextEditingController();
+    // var bothEyeController = useTextEditingController();
+
+    var refWatch = ref.watch(preliminaryAssessmentHelperProvider);
 
     return Container(
       width: double.infinity,
@@ -51,12 +52,19 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                     ? AppSize.width(context) * 0.4
                     : AppSize.width(context) * 0.2,
                 child: TextField(
-                  controller: rightEyeController,
                   onChanged: (value) {
                     bool isNumeric =
-                        RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
+                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
+                    double? numericValue =
+                        isNumeric ? double.tryParse(value) : null;
 
-                    if (!isNumeric) return;
+                    if (!isNumeric ||
+                        (numericValue != null && numericValue > 99.999)) {
+                      ref
+                          .read(preliminaryAssessmentHelperProvider)
+                          .setVisualAcuityRightEyeValueEntered(false);
+                      return;
+                    }
 
                     ref
                         .read(preliminaryAssessmentHelperProvider)
@@ -73,6 +81,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                       ),
                     ),
                     labelText: "Right Eye",
+                    error: refWatch.visualAcuityRightEyeValueEntered
+                        ? null
+                        : errorText(),
                   ),
                 ),
               ),
@@ -82,12 +93,20 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                     ? AppSize.width(context) * 0.4
                     : AppSize.width(context) * 0.2,
                 child: TextField(
-                  controller: leftEyeController,
                   onChanged: (value) {
                     bool isNumeric =
-                        RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
+                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
+                    double? numericValue =
+                        isNumeric ? double.tryParse(value) : null;
 
-                    if (!isNumeric) return;
+                    if (!isNumeric ||
+                        (numericValue != null && numericValue > 99.999)) {
+                      ref
+                          .read(preliminaryAssessmentHelperProvider)
+                          .setVisualAcuityLeftEyeValueEntered(false);
+                      return;
+                    }
+
                     ref
                         .read(preliminaryAssessmentHelperProvider)
                         .setVisualAcuityLeftEyeValueEntered(value.isNotEmpty);
@@ -103,6 +122,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                       ),
                     ),
                     labelText: "Left Eye",
+                    error: refWatch.visualAcuityLeftEyeValueEntered
+                        ? null
+                        : errorText(),
                   ),
                 ),
               ),
@@ -112,12 +134,19 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                     ? AppSize.width(context) * 0.4
                     : AppSize.width(context) * 0.2,
                 child: TextField(
-                  controller: bothEyeController,
                   onChanged: (value) {
                     bool isNumeric =
-                        RegExp(r'^-?([0-9]+[.])?[0-9]*$').hasMatch(value);
+                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
+                    double? numericValue =
+                        isNumeric ? double.tryParse(value) : null;
 
-                    if (!isNumeric) return;
+                    if (!isNumeric ||
+                        (numericValue != null && numericValue > 99.999)) {
+                      ref
+                          .read(preliminaryAssessmentHelperProvider)
+                          .setVisualAcuityBothEyeValueEntered(false);
+                      return;
+                    }
 
                     ref
                         .read(preliminaryAssessmentHelperProvider)
@@ -134,6 +163,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                       ),
                     ),
                     labelText: "Both Eye",
+                    error: refWatch.visualAcuityBothEyeValueEntered
+                        ? null
+                        : errorText(),
                   ),
                 ),
               ),
@@ -143,4 +175,14 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
       ),
     );
   }
+}
+
+Widget errorText() {
+  return Text(
+    "Invalid value",
+    style: applyRobotoFont(
+      color: AppColor.red,
+      fontSize: 14,
+    ),
+  );
 }

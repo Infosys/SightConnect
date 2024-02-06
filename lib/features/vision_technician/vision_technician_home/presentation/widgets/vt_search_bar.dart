@@ -13,7 +13,6 @@ class VTSearchBar extends ConsumerWidget {
     this.onSearched,
   });
   final bool readOnly;
-
   final Function(String)? onSearched;
 
   @override
