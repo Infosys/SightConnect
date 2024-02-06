@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var patientProfileProvider =
-    ChangeNotifierProvider.family<PatientProfileProvider, int?>((ref, id) {
+var patientProfileProvider = ChangeNotifierProvider.family
+    .autoDispose<PatientProfileProvider, int?>((ref, id) {
   return PatientProfileProvider(id);
 });
 

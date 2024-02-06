@@ -128,7 +128,7 @@ Widget _content(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: AppSize.klelevation * 3),
+        const SizedBox(height: AppSize.klelevation * 3.5),
         AppointmentPatientSelector(
           patient: patient,
           relations:

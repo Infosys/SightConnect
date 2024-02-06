@@ -1,4 +1,6 @@
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -32,6 +34,7 @@ class PatientConsentFormPage extends HookWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: CustomAppbar(
           title: Text(
             "Privacy & Data Protection",
@@ -43,13 +46,25 @@ class PatientConsentFormPage extends HookWidget {
           automaticallyImplyLeading: false,
           centerTitle: false,
         ),
-        body: LoadingOverlay(
-          isLoading: isLoading.value,
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSize.kmpadding),
+        body: Container(
+          height: AppSize.height(context),
+          width: AppSize.width(context),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                AppImages.scaffoldBg,
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: LoadingOverlay(
+            isLoading: isLoading.value,
+            child: SafeArea(
               child: Container(
                 width: double.infinity,
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                ),
                 decoration: BoxDecoration(
                   color: AppColor.white,
                   boxShadow: applyLightShadow(),
@@ -59,13 +74,16 @@ class PatientConsentFormPage extends HookWidget {
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSize.kmpadding,
+                      vertical: AppSize.kmpadding,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data-',
+                          'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.',
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
@@ -220,7 +238,8 @@ class PatientConsentFormPage extends HookWidget {
                               fontWeight: FontWeight.w500, fontSize: 18),
                         ),
                         const SizedBox(height: 16),
-                        Text.rich(TextSpan(
+                        Text.rich(
+                          TextSpan(
                             style: const TextStyle(
                                 color: AppColor.black), //apply style to all
                             children: [
@@ -231,15 +250,16 @@ class PatientConsentFormPage extends HookWidget {
                                       fontWeight: FontWeight.w400,
                                       fontSize: 14)),
                               TextSpan(
-                                  text:
-                                      '<LVPEI to provide generic mail ID for DSR>.',
+                                  text: AppText.lvpeiEmail,
                                   style: applyRobotoFont(
                                       color: AppColor.blue,
                                       decoration: TextDecoration.combine(
                                           [TextDecoration.underline]),
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14))
-                            ])),
+                            ],
+                          ),
+                        ),
                         const SizedBox(height: 20),
                         Text(
                           'Right to Withdrawal:',
@@ -249,26 +269,30 @@ class PatientConsentFormPage extends HookWidget {
                               fontWeight: FontWeight.w500, fontSize: 18),
                         ),
                         const SizedBox(height: 16),
-                        Text.rich(TextSpan(
+                        Text.rich(
+                          TextSpan(
                             style: const TextStyle(
                                 color: AppColor.black), //apply style to all
                             children: [
                               TextSpan(
                                   text:
-                                      'Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to',
+                                      'Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to ',
                                   style: applyRobotoFont(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 14)),
                               TextSpan(
-                                  text:
-                                      ' <LVPEI to provide generic mail ID for DSR>.',
-                                  style: applyRobotoFont(
-                                      color: AppColor.blue,
-                                      decoration: TextDecoration.combine(
-                                          [TextDecoration.underline]),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14))
-                            ])),
+                                text: AppText.lvpeiEmail,
+                                style: applyRobotoFont(
+                                    color: AppColor.blue,
+                                    decoration: TextDecoration.combine(
+                                      [TextDecoration.underline],
+                                    ),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14),
+                              )
+                            ],
+                          ),
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           'By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.',

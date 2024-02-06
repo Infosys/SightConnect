@@ -157,7 +157,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         builder: (context) {
           if (role == Role.ROLE_PATIENT) {
             return const PatientConsentFormPage();
+          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+            return const VTConsentFormPage();
           } else {
+            // This is for vision guardian
             return const VTConsentFormPage();
           }
         },
