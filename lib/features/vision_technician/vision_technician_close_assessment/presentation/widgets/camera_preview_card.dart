@@ -121,6 +121,22 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     }
   }
 
+  Future<void> _toggleFlash() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+    
+    isLoading = true;
+
+    if (_controller.value.flashMode == FlashMode.off) {
+      await _controller.setFlashMode(FlashMode.torch);
+    } else {
+      await _controller.setFlashMode(FlashMode.off);
+    }
+    isLoading = false;
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     var refRead = ref.read(vtCloseAssessmentHelperProvider);
@@ -165,8 +181,13 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.flash_on),
+                    onPressed: () async {
+                await _toggleFlash();
+              },
+                    icon:  Icon(_controller.value.flashMode == FlashMode.off
+                      ? Icons.flash_off
+                      : Icons.flash_on,
+                  color: AppColor.white,),
                   ),
                 ),
               ),

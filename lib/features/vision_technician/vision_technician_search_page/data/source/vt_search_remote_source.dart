@@ -22,6 +22,8 @@ class VTSearchRemoteSourceImpl implements VTSearchRemoteSource {
     var endPoint =
         '/services/orchestration/api/patients/triage-reports?queryText=$query';
 
+    logger.d("endpoint for search $endPoint");
+
     return _dio.get(endPoint).then((value) {
       List<VTPatientDto> list = [];
 

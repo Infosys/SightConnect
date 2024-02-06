@@ -1,16 +1,21 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/providers/vision_technician_register_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/patient_info_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_patient_button.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_search_bar.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianRegisterPage extends StatelessWidget {
+class VisionTechnicianRegisterPage extends HookConsumerWidget {
   const VisionTechnicianRegisterPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var query = useState<String>("");
     return Scaffold(
       appBar: CustomAppbar(
         centerTitle: false,
@@ -22,22 +27,30 @@ class VisionTechnicianRegisterPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            RegisterSearchBar(),
-            InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const PatientRegistrationMiniappPage(
-                        actionType: MiniAppActionType.REGISTER,
-                        displayName: "Register Patient",
-                      ),
-                    ),
-                  );
-                },
-                child: Text("Register Patient")),
+            RegisterSearchBar(
+              onSearched: (value) {
+                query.value = value;
+                logger.d("search by mobile ${query.value}");
+              },
+            ),
+            const SizedBox(height: AppSize.klheight),
+            ref.watch(vtRegisterProvider(query.value)).when(
+              data: (data) {
+                if (data.length == 0) return RegisterPatientButton();
+
+                return RegisterPatientInfoCard(
+                  data: data,
+                );
+              },
+              error: (e, s) {
+                return RegisterPatientButton();
+              },
+              loading: () {
+                return CircularProgressIndicator();
+              },
+            ),
           ],
         ),
       ),

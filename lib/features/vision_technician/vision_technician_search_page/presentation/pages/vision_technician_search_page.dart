@@ -184,7 +184,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           );
         },
         error: (e, s) {
-          
+          logger.d("error for search $e");
           return const Center(child: EmptyResultCard());
         },
         loading: () {
