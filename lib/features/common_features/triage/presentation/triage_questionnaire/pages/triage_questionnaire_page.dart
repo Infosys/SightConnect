@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -196,7 +197,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                               );
                                             }
                                           },
-                                          child: Text(
+                                          child: AutoSizeText(
                                             question.answerOption?.first.answer
                                                     ?.answerDisplayString ??
                                                 "",
@@ -206,23 +207,27 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                             ),
                                           ),
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            pageController.animateToPage(
-                                              index + 1,
-                                              duration: const Duration(
-                                                milliseconds: 80,
-                                              ),
-                                              curve: Curves.easeIn,
-                                            );
-                                          },
-                                          child: Text(
-                                            question.answerOption?.last.answer
-                                                    ?.answerDisplayString ??
-                                                "",
-                                            style: applyRobotoFont(
+                                        Flexible(
+                                          child: TextButton(
+                                            onPressed: () {
+                                              pageController.animateToPage(
+                                                index + 1,
+                                                duration: const Duration(
+                                                  milliseconds: 80,
+                                                ),
+                                                curve: Curves.easeIn,
+                                              );
+                                            },
+                                            child: AutoSizeText(
+                                              question.answerOption?.last.answer
+                                                      ?.answerDisplayString ??
+                                                  "",
+                                              textAlign: TextAlign.center,
+                                              style: applyRobotoFont(
                                                 fontSize: 14,
-                                                color: AppColor.primary),
+                                                color: AppColor.primary,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
