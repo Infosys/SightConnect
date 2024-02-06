@@ -12,11 +12,9 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class EventPatientsTab extends ConsumerWidget {
   final String patientsType;
@@ -92,10 +90,10 @@ Widget vgPatientTabs(
       }
       var data = response[index];
 
-      String formattedDate = DateFormat("dd MMM yy")
+/*       String formattedDate = DateFormat("dd MMM yy")
           .format(DateTime.parse(data.encounterStartDate!));
       String formattedTime = DateFormat("hh:mm a")
-          .format(DateTime.parse(data.encounterStartDate!).toLocal());
+          .format(DateTime.parse(data.encounterStartDate!).toLocal()); */
       return GestureDetector(
         onTap: () async {
           readModel.loadingToggle();
@@ -180,7 +178,7 @@ Widget vgPatientTabs(
                               child: Text(
                                 data.category ?? "",
                                 style: applyRobotoFont(
-                                  fontSize: 11,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                   color: AppColor.red,
                                 ),
@@ -216,7 +214,7 @@ Widget vgPatientTabs(
                               ),
                             ),
                             const Spacer(),
-                            Text(
+/*                             Text(
                               data.encounterStartDate != null
                                   ? formattedDate
                                   : "",
@@ -228,7 +226,7 @@ Widget vgPatientTabs(
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            const SizedBox(height: AppSize.ksheight / 3),
+                            const SizedBox(height: AppSize.ksheight / 3), */
                           ],
                         ),
                       ),
@@ -242,7 +240,7 @@ Widget vgPatientTabs(
                             SizedBox(
                               width: AppSize.width(context) * 0.5,
                               child: Text(
-                                "Assessment ID: AT ${data.encounterId.toString()}",
+                                "Report ID: ${data.diagnosticReportId.toString()}",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
@@ -253,7 +251,7 @@ Widget vgPatientTabs(
                               ),
                             ),
                             const Spacer(),
-                            Text(
+                            /*  Text(
                               data.encounterStartDate != null
                                   ? formattedTime
                                   : "",
@@ -264,7 +262,7 @@ Widget vgPatientTabs(
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                            ),
+                            ), */
                             const SizedBox(height: AppSize.ksheight / 3),
                           ],
                         ),

@@ -133,6 +133,7 @@ Widget customTextFieldDatePicker({
 }) {
   return Expanded(
     child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: dateController,
       readOnly: true,
       validator: (value) {
@@ -180,6 +181,7 @@ Widget customTextFieldTimePicker(
     String? Function(String?)? customValidation) {
   return Expanded(
     child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       readOnly: true,
       controller: timeController,
       onChanged: (value) {

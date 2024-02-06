@@ -41,7 +41,10 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
             data.venueName,
             "Venue Name",
             validationFunction: (value) {
-              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value!)) {
+              if (value == "" || value == null) {
+                return "Please enter Venue name";
+              }
+              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value)) {
                 return "Should not contain any special character";
               }
               return null;
@@ -65,7 +68,10 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
             data.city,
             "City/Town/Village",
             validationFunction: (value) {
-              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value!)) {
+              if (value == "" || value == null) {
+                return "Please enter City/Town/Village name";
+              }
+              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value)) {
                 return "Should not contain any special character";
               }
               return null;

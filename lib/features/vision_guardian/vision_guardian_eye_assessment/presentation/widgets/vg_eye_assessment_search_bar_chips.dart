@@ -22,14 +22,12 @@ Widget vgEyeAssessmentHeaderChips(ValueNotifier<int> isSelected,
 
             return InkWell(
               onTap: () {
-                if (isSelected.value == index) {
-                  isSelected.value = -1;
-                } else {
+                if (isSelected.value != index) {
                   isSelected.value = index;
+                  ref
+                      .read(visionGuardianEyeAssessmentProvider)
+                      .filterPatientList(isSelected.value, data);
                 }
-                ref
-                    .read(visionGuardianEyeAssessmentProvider)
-                    .filterPatientList(isSelected.value, data);
               },
               child: Container(
                 margin: const EdgeInsets.only(right: AppSize.kspadding),

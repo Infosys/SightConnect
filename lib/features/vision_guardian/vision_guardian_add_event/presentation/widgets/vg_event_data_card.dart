@@ -194,7 +194,7 @@ class VgEventDataCards extends StatelessWidget {
                       Flexible(
                         child: AutoSizeText(
                           "${data.addresses?[0].addressLine1},${data.addresses?[0].city},${data.addresses?[0].state},${data.addresses?[0].pinCode}",
-                          maxLines: 2,
+                          maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(
                             fontSize: 10,
