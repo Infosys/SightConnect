@@ -276,7 +276,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       "queryText": patientQueryData["searchParams"],
     };
 
-    logger.f(queryParams);
+    logger.d(queryParams);
     try {
       var response = await _dio.get(
         endpoint,
