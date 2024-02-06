@@ -28,6 +28,7 @@ abstract class RemoteTriageReportSource {
     DiagnosticReportStatus status,
     int? page,
     int? size,
+    String? filter,
   );
 }
 
@@ -112,8 +113,9 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     DiagnosticReportStatus status,
     int? page,
     int? size,
+    String? filter,
   ) async {
-    final String endpoint;
+    String endpoint;
 
     if (page == null || size == null) {
       endpoint =
@@ -121,6 +123,9 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     } else {
       endpoint =
           "/services/triage/api/triage/triage-report?encounter-id=$encounterId&page=$page&size=$size";
+    }
+    if (filter != null) {
+      endpoint += "&$filter";
     }
 
     final response = await dio.get(endpoint);

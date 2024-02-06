@@ -100,11 +100,13 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
     DiagnosticReportStatus status,
     int? page,
     int? size,
+    String? filter,
   ) async {
     if (await networkInfo.isConnected()) {
       try {
-        final remoteResponse = await triageReportSource
-            .getTriageReportByEncounterId(encounterId, status, page, size);
+        final remoteResponse =
+            await triageReportSource.getTriageReportByEncounterId(
+                encounterId, status, page, size, filter);
 
         return Right(remoteResponse);
       } on ServerException catch (e) {

@@ -22,5 +22,6 @@ abstract class TriageReportRepository {
     DiagnosticReportStatus status,
     int? page,
     int? size,
+    String? filter,
   );
 }

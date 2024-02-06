@@ -349,6 +349,9 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       DiagnosticReportStatus.FINAL,
       isPatient ? _selfTestReportPage : _clinicalReportPage,
       pageSize,
+      isPatient
+          ? "participant-role=PATIENT"
+          : "participant-role=VISION_TECHNICIAN&participant-role=VISION_GUARDIAN", // This is the filter parameter
     );
 
     return response.fold((failure) {
