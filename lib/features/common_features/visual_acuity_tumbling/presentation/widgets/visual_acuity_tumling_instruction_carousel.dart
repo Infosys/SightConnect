@@ -57,15 +57,17 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
       itemBuilder: (context, index, _) {
         return Container(
           decoration: BoxDecoration(
+            color: AppColor.white,
+            borderRadius: BorderRadius.circular(16),
             boxShadow: applyLightShadow(),
           ),
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.kmpadding,
                 ),
                 child: Image.asset(
                   slideShowData[index]["image"]!,
@@ -76,17 +78,15 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                height: 100,
                 child: Container(
-                  height: 100,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.black.withOpacity(0.7),
                   ),
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.kmpadding),
                   child: AutoSizeText(
                     slideShowData[index]["text"]!,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: applyFiraSansFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
