@@ -99,8 +99,10 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      _canProcess = true;
-      _isBusy = false;
+      if (Platform.isAndroid) {
+        _canProcess = true;
+        _isBusy = false;
+      }
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
@@ -128,7 +130,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage);
+        if (Platform.isAndroid) {
+          _controller.startImageStream(_processCameraImage);
+        }
       },
     );
     if (mounted) {

@@ -91,8 +91,10 @@ class _VisualAcuityFaceDistancePageViewState
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      _canProcess = true;
-      _isBusy = false;
+      if (Platform.isAndroid) {
+        _canProcess = true;
+        _isBusy = false;
+      }
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
@@ -120,7 +122,9 @@ class _VisualAcuityFaceDistancePageViewState
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage);
+        if (Platform.isAndroid) {
+          _controller.startImageStream(_processCameraImage);
+        }
       },
     );
     if (mounted) {
@@ -375,10 +379,14 @@ class _VisualAcuityFaceDistancePageViewState
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: _controller.value.isInitialized
-                              ? CameraPreview(
-                                  _controller,
-                                  child: _customPaint,
-                                )
+                              ? Platform.isAndroid
+                                  ? CameraPreview(
+                                      _controller,
+                                      child: _customPaint,
+                                    )
+                                  : CameraPreview(
+                                      _controller,
+                                    )
                               : Container(),
                         ),
                       ),
