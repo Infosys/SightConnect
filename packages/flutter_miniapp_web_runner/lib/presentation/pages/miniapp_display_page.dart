@@ -163,7 +163,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                   final host = request.url.host.trim();
 
                   if (widget.token.isNotEmpty &&
-                      host == "eyecare4all-dev.infosysapps.com") {
+                      host == "healthconnecttech.org") {
                     request.headers!["Authorization"] =
                         "Bearer ${widget.token}";
                   }
