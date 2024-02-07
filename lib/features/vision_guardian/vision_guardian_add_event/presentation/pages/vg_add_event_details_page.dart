@@ -69,7 +69,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                                 value.trimRight().isEmpty) {
                               return "Please Enter End time";
                             }
-                            if (!RegExp(r'^[a-zA-Z0-9]+\s+[a-zA-Z0-9]+$')
+                            if (!RegExp(r'^[a-zA-Z0-9]+[ ]{0,1}[a-zA-Z0-9]*$')
                                 .hasMatch(value)) {
                               return "Should not contain any special character";
                             }

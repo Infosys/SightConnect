@@ -13,7 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 final addEventDetailsProvider =
-    ChangeNotifierProvider<AddEventDetailsNotifier>((ref) {
+    ChangeNotifierProvider.autoDispose<AddEventDetailsNotifier>((ref) {
   return AddEventDetailsNotifier(
     vgAddEventRepository: ref.watch(vgAddEventRepository),
     globalVGProvider: ref.read(globalVGProvider),
@@ -137,6 +137,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void getVgEvents(previousList, type) async {
+    logger.f("callledddddddddddddddd");
     try {
       eventLoading = true;
       List<VisionGuardianEventModel> response =
