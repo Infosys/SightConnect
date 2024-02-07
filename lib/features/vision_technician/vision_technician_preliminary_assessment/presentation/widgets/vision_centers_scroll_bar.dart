@@ -66,6 +66,15 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
 
+    if (viewState.isLoading) const Center(child: CircularProgressIndicator());
+
+    if (viewState.errorMessage != null) {
+      return VisionCenterError(
+        viewState: viewState,
+        ref: ref,
+      );
+    }
+
     return Container(
       width: Responsive.isMobile(context)
           ? AppSize.width(context)
@@ -80,115 +89,114 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
         border: Border.all(color: AppColor.lightGrey),
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (viewState.isLoading)
-            const Center(child: CircularProgressIndicator()),
-          if (viewState.errorMessage != null)
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/location_empty_state.svg",
-                  height: 32,
-                  width: 32,
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                AutoSizeText(
-                  viewState.errorMessage
-                      .toString()
-                      .replaceAll("Exception: ", ""),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                ),
-                Builder(builder: (context) {
-                  if (viewState.permissionStatus ==
-                      location.PermissionStatus.denied) {
-                    return Flexible(
-                      child: TextButton(
-                        onPressed: () {
-                          ref.read(nearByVisionCenterProvider.notifier).init();
-                        },
-                        child: const Text("Request Location Permission"),
-                      ),
-                    );
-                  } else if (viewState.permissionStatus ==
-                      location.PermissionStatus.deniedForever) {
-                    return Flexible(
-                      child: TextButton(
-                        onPressed: () {
-                          openAppSettings();
-                        },
-                        child: const Text("App Settings"),
-                      ),
-                    );
-                  }
+      child: Scrollbar(
+        thumbVisibility: true,
+        controller: firstcontroller,
+        child: ListView.builder(
+          shrinkWrap: true,
+          controller: firstcontroller,
+          itemCount: viewState.visionCenters!.length,
+          itemBuilder: (BuildContext context, int index) {
+            final data = viewState.visionCenters!;
+            final isSelected = ref
+                .watch(preliminaryAssessmentHelperProvider)
+                .isSelectVisionCenter(data[index]);
 
-                  return const SizedBox();
-                }),
-              ],
-            ),
-          if (viewState.visionCenters != null)
-            Scrollbar(
-              thumbVisibility: true,
-              controller: firstcontroller,
-              child: ListView.builder(
-                shrinkWrap: true,
-                controller: firstcontroller,
-                itemCount: viewState.visionCenters!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final data = viewState.visionCenters!;
-                  final isSelected = ref
-                      .watch(preliminaryAssessmentHelperProvider)
-                      .isSelectVisionCenter(data[index]);
+            return Padding(
+              padding: const EdgeInsets.all(AppSize.kspadding),
+              child: InkWell(
+                onTap: () {
+                  logger.d("selected vision center ${data[index]}");
 
-                  return Padding(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
-                    child: InkWell(
-                      onTap: () {
-                        logger.d("selected vision center ${data[index]}");
-
-                        ref
-                            .read(preliminaryAssessmentHelperProvider)
-                            .setSelectedVisionCenter(data[index]);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: isSelected ? AppColor.green : AppColor.blue,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(AppSize.ksradius),
-                        ),
-                        padding: const EdgeInsets.all(AppSize.kspadding + 3),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              data[index].facilityInformation?.facilityName ??
-                                  "",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Icon(
-                              Icons.check_circle,
-                              size: 20,
-                              color:
-                                  isSelected ? AppColor.green : AppColor.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
+                  ref
+                      .read(preliminaryAssessmentHelperProvider)
+                      .setSelectedVisionCenter(data[index]);
                 },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: isSelected ? AppColor.green : AppColor.blue,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  ),
+                  padding: const EdgeInsets.all(AppSize.kspadding + 3),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        data[index].facilityInformation?.facilityName ?? "",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(
+                        Icons.check_circle,
+                        size: 20,
+                        color: isSelected ? AppColor.green : AppColor.grey,
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-        ],
+            );
+          },
+        ),
       ),
+    );
+  }
+}
+
+class VisionCenterError extends StatelessWidget {
+  const VisionCenterError({
+    super.key,
+    required this.viewState,
+    this.ref,
+  });
+  final NearByVisionCenterState viewState;
+  final ref;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SvgPicture.asset(
+          "assets/icons/location_empty_state.svg",
+          height: 32,
+          width: 32,
+        ),
+        const SizedBox(height: AppSize.ksheight),
+        AutoSizeText(
+          viewState.errorMessage.toString().replaceAll("Exception: ", ""),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+        ),
+        Builder(builder: (context) {
+          if (viewState.permissionStatus == location.PermissionStatus.denied) {
+            return Flexible(
+              child: TextButton(
+                onPressed: () {
+                  ref.read(nearByVisionCenterProvider.notifier).init();
+                },
+                child: const Text("Request Location Permission"),
+              ),
+            );
+          } else if (viewState.permissionStatus ==
+              location.PermissionStatus.deniedForever) {
+            return Flexible(
+              child: TextButton(
+                onPressed: () {
+                  openAppSettings();
+                },
+                child: const Text("App Settings"),
+              ),
+            );
+          }
+
+          return const SizedBox();
+        }),
+      ],
     );
   }
 }
