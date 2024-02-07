@@ -55,6 +55,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
         width: Responsive.isMobile(context)
             ? AppSize.width(context) * 0.87
             : AppSize.width(context) * 0.35,
+        height: AppSize.height(context) * 0.35,
         padding: const EdgeInsets.all(AppSize.kmpadding),
         decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.7),

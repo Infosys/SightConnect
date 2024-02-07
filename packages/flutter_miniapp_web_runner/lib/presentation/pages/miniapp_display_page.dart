@@ -34,6 +34,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
   InAppWebViewController? webViewController;
   InAppWebViewSettings settings = InAppWebViewSettings(
     isInspectable: kDebugMode,
+    useShouldOverrideUrlLoading: true,
     mediaPlaybackRequiresUserGesture: false,
     allowsInlineMediaPlayback: true,
     iframeAllow: "camera; microphone",
@@ -159,23 +160,6 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 },
                 shouldInterceptRequest: (controller, request) async {
                   logger.d("androidShouldInterceptRequest: ${request.url}");
-                  // final path = request.url.path.trim();
-                  final host = request.url.host.trim();
-
-                  if (widget.token.isNotEmpty &&
-                      host == "eyecare4all-dev.infosysapps.com") {
-                    request.headers!["Authorization"] =
-                        "Bearer ${widget.token}";
-                  }
-
-                  // if (path == "/failure") {
-                  //   Navigator.of(context).pop(false);
-                  //   Future.value(WebResourceResponse(data: Uint8List(0)));
-                  // } else if (path == "/success") {
-                  //   Navigator.of(context).pop(true);
-                  //   Future.value(WebResourceResponse(data: Uint8List(0)));
-                  // }
-
                   return null;
                 },
                 shouldOverrideUrlLoading: (controller, navigationAction) async {

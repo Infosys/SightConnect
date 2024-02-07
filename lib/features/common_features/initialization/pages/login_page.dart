@@ -225,8 +225,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 } catch (e) {
                                   isLoading.value = false;
                                   Fluttertoast.showToast(
-                                      msg:
-                                          "'Unable to send OTP to this number");
+                                      msg: "Unable to send OTP to this number");
                                 }
                               }
                             },
