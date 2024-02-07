@@ -44,7 +44,8 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
               if (value == "" || value == null) {
                 return "Please enter Venue name";
               }
-              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value)) {
+              if (!RegExp(r'^[a-zA-Z0-9]+[ ]{0,1}[a-zA-Z0-9]*$')
+                  .hasMatch(value)) {
                 return "Should not contain any special character";
               }
               return null;
