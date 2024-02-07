@@ -89,7 +89,7 @@ class PatientHomePage extends ConsumerWidget {
               // const SizedBox(height: AppSize.kmheight),
               // const CampaginsList(),
               const PartnerCard(),
-              const SizedBox(height: AppSize.klheight * 3.2),
+              const SizedBox(height: AppSize.klheight * 3),
             ],
           ),
         ),

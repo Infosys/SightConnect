@@ -227,6 +227,9 @@
     "profilePageGender": "Gender",
     "profilePageMobile": "Mobile",
     "profilePageHealthCardTitle": "Health Card",
+    "inviteNowText": "Invite Now",
+    "poweredByText": "Powered by",
+    "digitalHealthCard": "Digital Public Health Stack",
   
   
     "bottomNavItemEyeTest" : "Eye Test",
