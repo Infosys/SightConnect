@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:camera/camera.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 
 double translateX(
   double x,
