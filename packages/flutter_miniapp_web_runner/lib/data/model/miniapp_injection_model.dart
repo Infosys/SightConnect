@@ -9,6 +9,7 @@ class MiniAppInjectionModel with _$MiniAppInjectionModel {
     MiniAppActionType? action,
     String? parentPatientId,
     String? mobileNumber,
+    String? token,
     MiniAppInjectionModelRole? role,
   }) = _MiniAppInjectionModel;
   factory MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =>
