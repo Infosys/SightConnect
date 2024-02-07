@@ -72,11 +72,9 @@ class _PatientTriageEyeCapturingPageState
     _isLoading = false;
     scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (Platform.isAndroid) {
-        _checkPermissions(context);
-      }
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _checkPermissions(context),
+    );
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
@@ -111,8 +109,10 @@ class _PatientTriageEyeCapturingPageState
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      _canProcess = true;
-      _isBusy = false;
+      if (Platform.isAndroid) {
+        _canProcess = true;
+        _isBusy = false;
+      }
       await _startLiveFeed();
     } catch (e) {
       logger.d('Error initializing camera: $e');
@@ -139,7 +139,9 @@ class _PatientTriageEyeCapturingPageState
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage);
+        if (Platform.isAndroid) {
+          _controller.startImageStream(_processCameraImage);
+        }
       },
     );
     if (mounted) {

@@ -103,7 +103,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
 
     await cameraController!.initialize().then(
       (value) {
-        logger.f("Camera Initialized");
+        logger.d("Camera Initialized");
         if (!mounted) {
           return;
         }
@@ -216,7 +216,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
   }
 
   void releaseResources() {
-    logger.f("ReleaseResources Called");
+    logger.d("ReleaseResources Called");
     if (cameraController != null) {
       cameraController!.stopImageStream();
       cameraController!.dispose();

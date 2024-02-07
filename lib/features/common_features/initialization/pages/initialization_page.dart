@@ -79,11 +79,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
     if (role == Role.ROLE_PATIENT) {
-      final consentGiven = await _showConsentForm(navigator, role);
-      if (consentGiven != null && consentGiven) {
+      if (await _isConsentAlreadyAccepted()) {
         await _registerUser(navigator, role);
       } else {
-        await _invalidateAndLogout("Consent not given. Please login again.");
+        final consentGiven = await _showConsentForm(navigator, role);
+        if (consentGiven != null && consentGiven) {
+          await _registerUser(navigator, role);
+        } else {
+          await _invalidateAndLogout("Consent not given. Please login again.");
+        }
       }
     } else if (role == Role.ROLE_VISION_TECHNICIAN) {
       await _invalidateAndLogout("You are not authorized to login.");
@@ -153,7 +157,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         builder: (context) {
           if (role == Role.ROLE_PATIENT) {
             return const PatientConsentFormPage();
+          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+            return const VTConsentFormPage();
           } else {
+            // This is for vision guardian
             return const VTConsentFormPage();
           }
         },

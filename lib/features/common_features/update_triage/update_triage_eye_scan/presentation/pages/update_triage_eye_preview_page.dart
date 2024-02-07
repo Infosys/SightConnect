@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class UpdateTriageEyePreviewPage extends StatelessWidget {
   const UpdateTriageEyePreviewPage({super.key, required this.imageFile});
-  final XFile? imageFile;
+  final XFile imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,10 @@ class UpdateTriageEyePreviewPage extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned.fill(
+          Center(
             child: Image.file(
-              File(imageFile!.path),
-              fit: BoxFit.cover,
+              File(imageFile.path),
+              fit: BoxFit.contain,
             ),
           ),
           Positioned(

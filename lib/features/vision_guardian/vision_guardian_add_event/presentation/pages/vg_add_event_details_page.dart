@@ -64,10 +64,13 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                           data.eventTitle,
                           "Event Title",
                           validationFunction: (value) {
-                            if (value == null || value.isEmpty) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.trimRight().isEmpty) {
                               return "Please Enter End time";
                             }
-                            if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value)) {
+                            if (!RegExp(r'^[a-zA-Z0-9]+\s+[a-zA-Z0-9]+$')
+                                .hasMatch(value)) {
                               return "Should not contain any special character";
                             }
                             return null;

@@ -49,7 +49,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                     icon: const Icon(Icons.search, color: AppColor.white),
                   )
                 : const Expanded(
-                    child: VTSearchBar(readOnly: true),
+                    child: VTSearchBar(readOnly: true,),
                   ),
           ],
         ),

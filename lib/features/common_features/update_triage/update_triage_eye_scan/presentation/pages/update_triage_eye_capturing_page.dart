@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_detector_painter.dart';
@@ -18,6 +19,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image/image.dart' as img;
+import 'package:path_provider/path_provider.dart';
 
 class UpdateTriageEyeCapturingPage extends ConsumerStatefulWidget {
   const UpdateTriageEyeCapturingPage({
@@ -34,74 +37,104 @@ class UpdateTriageEyeCapturingPage extends ConsumerStatefulWidget {
 class _UpdateTriageEyeCapturingPageState
     extends ConsumerState<UpdateTriageEyeCapturingPage>
     with WidgetsBindingObserver {
-  late CameraController _controller;
-  ResolutionPreset defaultResolution = ResolutionPreset.high;
-  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
-  bool isLoading = false;
-  String _progressMessage = "Loading...";
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool isCompleted = false;
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
-  CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
+  late CameraController _controller;
+  CameraLensDirection _cameraLensDirection = CameraLensDirection.back;
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
+  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
+  final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
   Size _canvasSize = Size.zero;
+  bool _isLoading = false;
+  String _progressMessage = "Loading...";
+  bool _isPermissionGranted = false;
   bool _isEyeValid = false;
-  bool _eyesInsideTheBox = false;
-  double _eyeWidthRatio = 0.0;
   List<Point<double>> _translatedEyeContours = [];
-  Map<String, double> _eyeCorners = {};
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
-  bool isIOS = Platform.isIOS;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    logger.d('EyeDetectorView initState');
+    logger.d('TriageEyeCapturingPage: initState');
     super.initState();
+    _isPermissionGranted = false;
+    _isLoading = false;
+    scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
-    if (isCompleted == false && !isIOS) {
-      _initializeCamera();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _checkPermissions(context),
+    );
+  }
+
+  Future<void> _checkPermissions(BuildContext context) async {
+    logger.d("TriageEyeCapturingPage: Check Permission Called");
+    final NavigatorState navigator = Navigator.of(context);
+    if (mounted) {
+      setState(() {
+        _isPermissionGranted = false;
+        _isLoading = false;
+      });
+    }
+    final bool isGranted =
+        await CameraPermissionService.checkPermissions(context);
+    if (isGranted) {
+      if (mounted) {
+        setState(() {
+          _isPermissionGranted = true;
+        });
+      }
+      await _initializeCamera();
+    } else {
+      logger.d("TriageEyeCapturingPage: Permission not granted");
+      navigator.pop();
+      Fluttertoast.showToast(msg: "Permission not granted");
     }
   }
 
-  void _initializeCamera() async {
-    logger.d('EyeDetectorView _initializeCamera');
+  Future<void> _initializeCamera() async {
+    logger.d('TriageEyeCapturingPage: _initializeCamera');
     final NavigatorState navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      _canProcess = true;
-      _isBusy = false;
+      if (Platform.isAndroid) {
+        _canProcess = true;
+        _isBusy = false;
+      }
       await _startLiveFeed();
     } catch (e) {
       logger.d('Error initializing camera: $e');
       navigator.pop();
+      Fluttertoast.showToast(msg: "Service not available");
     }
   }
 
   Future<void> _startLiveFeed() async {
-    logger.d('EyeDetectorView _startLiveFeed');
+    logger.d('TriageEyeCapturingPage: _startLiveFeed');
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      defaultResolution,
+      _defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
           : ImageFormatGroup.bgra8888,
     );
+
     await _controller.initialize().then(
       (value) {
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage);
+        if (Platform.isAndroid) {
+          _controller.startImageStream(_processCameraImage);
+        }
       },
     );
     if (mounted) {
@@ -120,33 +153,35 @@ class _UpdateTriageEyeCapturingPageState
       deviceOrientation: orientation,
     );
     if (inputImage == null) return;
+
     _processImage(inputImage);
   }
 
   // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
-    logger.d('EyeDetectorView _processImage');
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final meshes = await _meshDetector.processImage(inputImage);
+    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
 
     // Measurement of the Fixed Center Eye Scanner Box
-    final boxWidth = _canvasSize.width * (3 / 5);
-    final boxHeight = _canvasSize.height * (1 / 5);
-    final boxCenter = Point(
-      _canvasSize.width * (1 / 2),
-      _canvasSize.height * (1 / 2),
+    const double boxCenterRatio = 0.5;
+    final double boxWidth = _canvasSize.width * (3 / 5);
+    final double boxHeight = _canvasSize.height * (1 / 5);
+    final Point<double> boxCenter = Point(
+      _canvasSize.width * boxCenterRatio,
+      _canvasSize.height * boxCenterRatio,
     );
 
     if (meshes.isNotEmpty) {
-      final mesh = meshes[0];
-      final leftEyeContour = mesh.contours[FaceMeshContourType.leftEye];
-      final rightEyeContour = mesh.contours[FaceMeshContourType.rightEye];
+      final FaceMesh mesh = meshes[0];
+      final List<FaceMeshPoint>? leftEyeContour =
+          mesh.contours[FaceMeshContourType.leftEye];
+      final List<FaceMeshPoint>? rightEyeContour =
+          mesh.contours[FaceMeshContourType.rightEye];
 
       if (leftEyeContour != null && rightEyeContour != null) {
-        logger.d("current eye in detector is : $_currentEye ");
         final List<FaceMeshPoint> eyePoints =
             EyeDetectorService.isLeftEye(_currentEye)
                 ? leftEyeContour
@@ -163,24 +198,26 @@ class _UpdateTriageEyeCapturingPageState
             );
           },
         ).toList();
+
         // Check if Eyes are inside the box
-        _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+        final bool eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
           _translatedEyeContours,
           boxCenter,
           boxWidth,
           boxHeight,
         );
         // Get the corner point of the eyes which is needed to calculate eye width
-        _eyeCorners = EyeDetectorService.getEyeCorners(_translatedEyeContours);
+        final Map<String, double> eyeCorners =
+            EyeDetectorService.getEyeCorners(_translatedEyeContours);
         // Calculate the eyeWidth ratio to the boxWidth
-        _eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
-          _eyeCorners,
+        final double eyeWidthRatio = EyeDetectorService.getEyeWidthRatio(
+          eyeCorners,
           boxWidth,
           boxHeight,
         );
         // Validity of the eye
-        _isEyeValid = _eyesInsideTheBox &&
-            EyeDetectorService.areEyesCloseEnough(_eyeWidthRatio);
+        _isEyeValid = eyesInsideTheBox &&
+            EyeDetectorService.areEyesCloseEnough(eyeWidthRatio);
       } else {
         _translatedEyeContours = [];
       }
@@ -190,7 +227,7 @@ class _UpdateTriageEyeCapturingPageState
 
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final painter = EyeDetectorPainter(
+      final EyeDetectorPainter painter = EyeDetectorPainter(
         _translatedEyeContours,
         boxCenter,
         boxWidth,
@@ -204,68 +241,65 @@ class _UpdateTriageEyeCapturingPageState
     } else {
       _customPaint = null;
     }
+
     _isBusy = false;
     if (mounted) {
       setState(() {});
     }
   }
-  // Future<bool> _cameraPermisson() async {
-  //   final status = await Permission.camera.status;
-  //   if (status.isGranted) {
-  //     return true;
-  //   } else if (status.isDenied) {
-  //     final result = await Permission.camera.request();
-  //     if (result.isGranted) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!(_controller.value.isInitialized)) return;
+    logger.d({
+      "TriageEyeCapturingPage: AppLifecycleState": "$state",
+      "isPermissionGranted": "$_isPermissionGranted",
+      "isLoading": "$_isLoading",
+    });
+    if (!_isPermissionGranted) {
+      return;
+    }
+
     if (state == AppLifecycleState.inactive) {
-      logger.d('EyeDetectorView AppLifecycleState.inactive');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.inactive');
+      setLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d('EyeDetectorView AppLifecycleState.resumed');
-      _initializeCamera();
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.resumed');
+      if (mounted) {
+        _checkPermissions(context);
+      }
     } else if (state == AppLifecycleState.paused) {
-      logger.d('EyeDetectorView AppLifecycleState.paused');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.paused');
+      setLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d('EyeDetectorView AppLifecycleState.detached');
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.hidden) {
-      logger.d('EyeDetectorView AppLifecycleState.hidden');
+      logger.d('TriageEyeCapturingPage: AppLifecycleState.detached');
+      setLoading();
       _stopLiveFeed();
     }
   }
 
   @override
   void dispose() {
-    logger.d('EyeDetectorView dispose');
+    logger.d('TriageEyeCapturingPage: dispose');
     WidgetsBinding.instance.removeObserver(this);
-    _stopLiveFeed();
+    if (mounted) {
+      _stopLiveFeed();
+    }
     super.dispose();
   }
 
   Future<void> _stopLiveFeed() async {
-    logger.d('EyeDetectorView _stopLiveFeed');
+    logger.d('TriageEyeCapturingPage: _stopLiveFeed');
+
     try {
       _canProcess = false;
       _meshDetector.close();
-      // if (_controller.value.isInitialized &&
-      //     _controller.value.isStreamingImages) {
-      //   await _controller.stopImageStream();
-      //   await _controller.dispose();
-      // }
-      await _controller.stopImageStream();
-      await _controller.dispose();
+      if (_controller.value.isInitialized &&
+          _controller.value.isStreamingImages) {
+        await _controller.stopImageStream();
+        await _controller.dispose();
+      }
     } catch (e) {
       logger.d('Error stopping live feed: $e');
     }
@@ -273,14 +307,14 @@ class _UpdateTriageEyeCapturingPageState
 
   void setLoading([String message = "Loading..."]) {
     setState(() {
-      isLoading = true;
+      _isLoading = true;
       _progressMessage = message;
     });
   }
 
   void removeLoading() {
     setState(() {
-      isLoading = false;
+      _isLoading = false;
     });
   }
 
@@ -288,6 +322,13 @@ class _UpdateTriageEyeCapturingPageState
   Widget build(BuildContext context) {
     final model = ref.watch(updateTriageEyeScanProvider);
     final loc = context.loc!;
+    if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
@@ -329,21 +370,21 @@ class _UpdateTriageEyeCapturingPageState
           ],
         ),
         body: LoadingOverlay(
-          isLoading: isLoading,
+          isLoading: _isLoading,
           progressMessage: _progressMessage,
           child: Container(
             color: Colors.black,
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                !isIOS
-                    ? Positioned.fill(
+                Platform.isAndroid
+                    ? Center(
                         child: CameraPreview(
                           _controller,
                           child: _customPaint,
                         ),
                       )
-                    : Positioned.fill(
+                    : Center(
                         child: CameraPreview(
                           _controller,
                         ),
@@ -438,7 +479,6 @@ class _UpdateTriageEyeCapturingPageState
                     ),
                   ],
                 ),
-                // _flas
               ],
             ),
           ),
@@ -456,39 +496,51 @@ class _UpdateTriageEyeCapturingPageState
     };
   }
 
-  Future<bool> _validateImage(XFile? image) async {
-    XFile? verifiedImage = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => UpdateTriageEyePreviewPage(imageFile: image),
-      ),
-    );
-    if (verifiedImage != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  Future<XFile?> _capturePicture(BuildContext context) async {
+  Future<void> _toggleCamera() async {
     if (!_controller.value.isInitialized) {
-      return null;
+      return;
     }
     setLoading();
-    final image = await _controller.takePicture();
+    if (_controller.description.lensDirection == CameraLensDirection.front) {
+      _cameraLensDirection = CameraLensDirection.back;
+    } else {
+      _cameraLensDirection = CameraLensDirection.front;
+    }
+    await _stopLiveFeed();
+    _initializeCamera();
     removeLoading();
-    return image;
+  }
+
+  Future<void> _toggleFlash() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+    setLoading();
+    if (_controller.value.flashMode == FlashMode.off ||
+        _controller.value.flashMode == FlashMode.auto) {
+      await _controller.setFlashMode(FlashMode.torch);
+    } else {
+      await _controller.setFlashMode(FlashMode.off);
+    }
+
+    removeLoading();
   }
 
   Future<void> _takePicture(BuildContext context) async {
     var navigator = Navigator.of(context);
 
     try {
-      final image = await _capturePicture(context);
+      final XFile? image = await _capturePicture(context);
       if (image == null) {
         return;
       }
 
-      final isVerfied = await _validateImage(image);
+      final XFile? croppedImage = await _cropImage(image);
+      if (croppedImage == null) {
+        return;
+      }
+
+      final bool isVerfied = await _validateImage(croppedImage);
       if (!isVerfied) {
         return;
       }
@@ -529,33 +581,66 @@ class _UpdateTriageEyeCapturingPageState
     }
   }
 
-  Future<void> _toggleCamera() async {
-    logger.d("toggle camera called");
+  Future<XFile?> _capturePicture(BuildContext context) async {
     if (!_controller.value.isInitialized) {
-      return;
+      return null;
     }
     setLoading();
-    if (_controller.description.lensDirection == CameraLensDirection.front) {
-      _cameraLensDirection = CameraLensDirection.back;
-    } else {
-      _cameraLensDirection = CameraLensDirection.front;
-    }
-    await _stopLiveFeed();
-    _initializeCamera();
+    final XFile image = await _controller.takePicture();
     removeLoading();
+    return image;
   }
 
-  Future<void> _toggleFlash() async {
-    if (!_controller.value.isInitialized) {
-      return;
+  Future<XFile?> _cropImage(XFile image) async {
+    final img.Image? capturedImage =
+        img.decodeImage(File(image.path).readAsBytesSync());
+    if (capturedImage == null) {
+      return null;
     }
-    setLoading();
 
-    if (_controller.value.flashMode == FlashMode.off) {
-      await _controller.setFlashMode(FlashMode.torch);
+    final img.Image mirroredImage = img.flipHorizontal(capturedImage);
+
+    final int croppedImageWidth = mirroredImage.width;
+    final double croppedImageHeight = mirroredImage.height * (1 / 3);
+    final Point<double> mirroredImageCenter = Point(
+      mirroredImage.width / 2,
+      mirroredImage.height / 2,
+    );
+
+    int x = 0;
+    int y = (mirroredImageCenter.y - croppedImageHeight / 2).toInt();
+
+    final img.Image croppedImage = img.copyCrop(
+      mirroredImage,
+      x: x,
+      y: y,
+      width: croppedImageWidth,
+      height: croppedImageHeight.toInt(),
+    );
+
+    Directory tempDir = await getTemporaryDirectory();
+    String cachePath = tempDir.path;
+
+    final String now = DateTime.now().millisecondsSinceEpoch.toString();
+
+    File croppedImageFile = File('$cachePath/cropped_eyes_$now.jpg')
+      ..writeAsBytesSync(img.encodeJpg(croppedImage));
+
+    final XFile croppedXFileImage = XFile(croppedImageFile.path);
+
+    return croppedXFileImage;
+  }
+
+  Future<bool> _validateImage(XFile image) async {
+    XFile? verifiedImage = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => UpdateTriageEyePreviewPage(imageFile: image),
+      ),
+    );
+    if (verifiedImage != null) {
+      return true;
     } else {
-      await _controller.setFlashMode(FlashMode.off);
+      return false;
     }
-    removeLoading();
   }
 }

@@ -101,8 +101,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   var offset = 0;
   get getOffset => offset;
-    bool initialValue = true;
-   get initialVal => initialValue;
+  bool initialValue = true;
+  get initialVal => initialValue;
 
   var eventOffset = 0;
   var searchEventOffset = 0;
@@ -371,7 +371,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   void setEventPatients(List<VisionGuardianPatientResponseModel> response) {
     listOfEventPatients = response;
-    logger.f(listOfEventPatients);
+    logger.d(listOfEventPatients);
   }
 
   void setSearchEventPatients(
