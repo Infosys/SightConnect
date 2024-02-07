@@ -150,7 +150,7 @@ class VisualAcuityDialog {
       case Eye.right:
         return "assets/images/visualAcuityRightEye.png";
       case Eye.both:
-        return "assets/images/visualAcuityBothEye.png";
+        return "assets/images/visualAcuityBothEyes.png";
       default:
         return "";
     }
