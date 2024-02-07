@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/features/chatbot/utils/language_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -11,7 +10,7 @@ class ChatMessageComposer extends StatefulWidget {
     required this.onSubmit,
   });
 
-  final LanguageOption selectedLanguage;
+  final String selectedLanguage;
   final bool enabled;
   final void Function(String) onTextChange;
   final void Function(String) onSubmit;
@@ -139,7 +138,7 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
         });
         // translateText(result.recognizedWords);
       },
-      localeId: resolveLocale(widget.selectedLanguage),
+      localeId: widget.selectedLanguage,
     );
   }
 

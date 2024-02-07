@@ -3,11 +3,9 @@ import 'package:eye_care_for_all/features/chatbot/data/source/remote/chat_servic
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_composer.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_query_suggestions.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/language_select_dropdown.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/loading_indicator.dart';
 import 'package:eye_care_for_all/features/chatbot/standard_responses.dart';
 import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
-import 'package:eye_care_for_all/features/chatbot/utils/language_utils.dart';
 import 'package:eye_care_for_all/features/chatbot/utils/triage_utils.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/action_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
@@ -23,11 +21,13 @@ class ChatBotPage extends ConsumerStatefulWidget {
     this.loadChatHistory,
     this.saveChatHistory,
     required this.selectedLanguage,
+    required this.selectedLanguageCode,
   });
 
   final List<String> defaultQuerySuggestions;
   final List<QuestionnaireItemFHIRModel> loadedTriageQuestionnaire;
   final String selectedLanguage;
+  final String selectedLanguageCode;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
 
@@ -37,14 +37,13 @@ class ChatBotPage extends ConsumerStatefulWidget {
 
 class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   // State variables
-  LanguageOption _selectedLanguage = LanguageOption.en;
+  // LanguageOption _selectedLanguage = LanguageOption.en;
   List<ChatMessage> _chatMessages = [];
   List<String> _querySuggestions = [];
   bool _isLoading = false;
   bool _isLoadingQuerySuggestions = false;
   List<QuestionnaireItemFHIRModel> _triageQuestionnaire = [];
   final Map<QuestionnaireItemFHIRModel, String> _triageResponses = {};
-  // List<String> _triageResponses = [];
   int _currentQuestionIndex = -1;
   bool _isAssessmentGoingOn = false;
 
@@ -52,17 +51,11 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   late Future<List<ChatMessage>> Function() _loadChatHistory;
   late Future<dynamic> Function(List<ChatMessage>) _saveChatHistory;
 
-//   var chatbotProvider = Provider((ref) {
-//   return ChatService(ref.read(chatbotDioProvider));
-// });
 
   // Init methods
   @override
   void initState() {
-    // LocalStorage.init();
-    _chatService = 
-       ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
-    
+    _chatService = ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
 
     _loadChatHistory = widget.loadChatHistory != null
         ? widget.loadChatHistory!
@@ -91,8 +84,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
         isMe: false,
       ));
     } else {
-      // _chatService.setContext(chatHistory.toList());
-      // _chatService.read(node)
 
       if (chatHistory.length > 1) {
         querySuggestions = await _getQuerySuggestions();
@@ -107,7 +98,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _initTts() async {
-    _setTtsLang(_selectedLanguage);
+    _setTtsLang(widget.selectedLanguageCode);
   }
 
   Future _initEyeAssessment() async {
@@ -151,17 +142,9 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   // Cleanup methods
   @override
   void dispose() {
-    debugPrint("Dispose start");
-    // List<Map<String, dynamic>> chatHistory =
-    //     _chatMessages.reversed.map((e) => e.toJson()).toList();
-    // debugPrint("Chat History: ${jsonEncode(chatHistory)}");
     _saveChatHistory(_chatMessages);
-
     _chatService.clearContext(); // TODO: Make this conditional
-    debugPrint("Before super");
     super.dispose();
-    debugPrint("After super");
-    
   }
 
   Future _endEyeAssessment() async {
@@ -187,10 +170,9 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   // Utils
-  Future _setTtsLang(LanguageOption lang) async {
-    // await flutterTts.setLanguage(resolveLocale(_selectedLanguage));
-    await flutterTts.setLanguage(resolveLocale(LanguageOption
-        .en)); // English option is working for every other language as of now.
+  Future _setTtsLang(String language) async {
+    await flutterTts.setLanguage(
+        language); // English option is working for every other language as of now.
   }
 
   @override
@@ -198,14 +180,10 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("SightConnect"),
-            LanguageSelectDropdown(
-              selectedLanguage: _selectedLanguage,
-              onLanguageChange: _onLanguageChange,
-            )
+            Text("SightConnect"),
           ],
         ),
       ),
@@ -213,13 +191,11 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Chat messages
             Flexible(
               child: ListView.builder(
                 itemCount: _chatMessages.length,
                 reverse: true,
                 itemBuilder: (_, ind) {
-                  // final messages = [..._chatMessages.reversed];
                   final messages = _chatMessages.reversed.toList();
                   return ChatMessageTile(
                     message: messages[ind],
@@ -249,7 +225,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
 
             // Text Field
             ChatMessageComposer(
-              selectedLanguage: _selectedLanguage,
+              selectedLanguage: widget.selectedLanguageCode,
               enabled: !_isLoading,
               onTextChange: (newText) {
                 debugPrint("Changed text: $newText");
@@ -306,7 +282,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   // UI Methods
   void _myMessage(ChatMessage message) {
     setState(() {
-      // _chatMessages.insert(0, message);
       _chatMessages.add(message);
       _querySuggestions = [];
       _isLoading = true;
@@ -314,24 +289,9 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   void _chatMessage(ChatMessage message) {
-    // debugPrint("Initial Message: ${message.toJson()}");
     setState(() {
-      // _chatMessages.insert(0, message);
       _chatMessages.add(message);
       _isLoading = false;
-      // if (!_isAssessmentGoingOn) {
-      //   _querySuggestions = widget.defaultQuerySuggestions;
-      // }
-    });
-  }
-
-  // Handlers
-  void _onLanguageChange(LanguageOption? newLanguage) async {
-    final newLang = newLanguage ?? LanguageOption.en;
-    debugPrint("LanguageChanged: $newLang");
-    await _setTtsLang(newLang);
-    setState(() {
-      _selectedLanguage = newLang;
     });
   }
 
@@ -381,7 +341,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     await Future.delayed(Durations.extralong4);
     setState(() {
       _isLoadingQuerySuggestions = false;
-      // _querySuggestions = suggestions;
     });
     return suggestions;
   }

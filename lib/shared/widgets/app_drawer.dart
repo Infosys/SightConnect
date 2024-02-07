@@ -82,8 +82,6 @@ class AppDrawer extends StatelessWidget {
                   (item) {
                     return Consumer(
                       builder: (context, ref, child) {
-                        final triage =
-                            ref.watch(getTriageProvider).asData?.value;
                         return ListTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -149,6 +147,9 @@ class AppDrawer extends StatelessWidget {
                                       var currentLanguage = ref
                                           .watch(globalLanguageProvider)
                                           .currentLanguage;
+                                      var currentLanguageCode = ref
+                                          .watch(globalLanguageProvider)
+                                          .currentLocale.languageCode;         
                                       debugPrint("language: $currentLanguage");
                                       return Consumer(
                                         builder: (context, ref, child) {
@@ -157,6 +158,7 @@ class AppDrawer extends StatelessWidget {
                                               .when(
                                             data: (data) {
                                               return ChatBotPage(
+                                                selectedLanguageCode: currentLanguageCode,
                                                 selectedLanguage: currentLanguage,
                                                 defaultQuerySuggestions: const [
                                                   "Start Eye Assessment",

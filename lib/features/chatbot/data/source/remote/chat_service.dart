@@ -8,8 +8,6 @@ import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_mess
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// final chatService = ChatService();
-
 var chatbotProvider = Provider((ref) {
   return ChatService(ref.read(chatbotDioProvider));
 });
@@ -128,7 +126,7 @@ class ChatService {
     }
 
     for (final message in messages) {
-      // (message.isMe ? _addUserMessageToContext : _addUserMessageToContext)(message.message);
+      
       if (message.isMe) {
         _addUserMessageToContext(message.message);
       } else {
@@ -138,6 +136,5 @@ class ChatService {
     debugPrint("ChatService: setContext: complete");
   }
 
-  // bool isConversationOngoing() => _previousConversation.isNotEmpty;
   bool isConversationEnded() => _previousConversation.isEmpty;
 }
