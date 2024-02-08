@@ -671,5 +671,20 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+
+  @override
+  String get bottomNavItemServices => 'Services';
+
+  @override
+  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+
+  @override
+  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+
+  @override
+  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+
+  @override
+  String get recentServicesRedEyeTest => 'Red Eye Test';
   }
   

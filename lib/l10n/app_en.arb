@@ -231,5 +231,10 @@
   "profilePageHealthCardTitle": "Health Card",
   "appointmentTitle": "Appointments",
   "appointmentSubtitle": "All Appointments",
-  "eyeBoxText": "Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye."
+  "eyeBoxText": "Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.",
+  "bottomNavItemServices": "Services",
+  "smsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install",
+  "emailSubject": "Prioritize your eye health with SightConnect App!",
+  "recentServicesCataractEyeTest": "Cataract Eye Test",
+  "recentServicesRedEyeTest": "Red Eye Test"
 }

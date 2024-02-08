@@ -671,5 +671,20 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get eyeBoxText => 'कृपया छवि को तब तक समायोजित और स्थिति में रखें जब तक आंखों के चारों ओर हरे रंग के बक्से दिखाई न दें। आंख को पास ले जाएं और सुनिश्चित करें कि बॉक्स का 40% हिस्सा आंख से ढका हो।';
+
+  @override
+  String get bottomNavItemServices => 'Services';
+
+  @override
+  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+
+  @override
+  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+
+  @override
+  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+
+  @override
+  String get recentServicesRedEyeTest => 'Red Eye Test';
   }
   

@@ -18,11 +18,21 @@
     "profilePageHealthCardTitle",
     "appointmentTitle",
     "appointmentSubtitle",
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "bn": [
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "gu": [
@@ -44,21 +54,49 @@
     "profilePageHealthCardTitle",
     "appointmentTitle",
     "appointmentSubtitle",
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
+  ],
+
+  "hi": [
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "kn": [
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "ml": [
-    "privacyPolicyPurposeOfProcessingSubTitle"
+    "privacyPolicyPurposeOfProcessingSubTitle",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "mr": [
     "eyeAssessmentUnsupportedQuestion",
     "viewHistoryButton",
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "or": [
@@ -80,7 +118,12 @@
     "profilePageHealthCardTitle",
     "appointmentTitle",
     "appointmentSubtitle",
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "ta": [
@@ -102,11 +145,21 @@
     "profilePageHealthCardTitle",
     "appointmentTitle",
     "appointmentSubtitle",
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "te": [
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ],
 
   "ur": [
@@ -128,6 +181,11 @@
     "profilePageHealthCardTitle",
     "appointmentTitle",
     "appointmentSubtitle",
-    "eyeBoxText"
+    "eyeBoxText",
+    "bottomNavItemServices",
+    "smsContent",
+    "emailSubject",
+    "recentServicesCataractEyeTest",
+    "recentServicesRedEyeTest"
   ]
 }
