@@ -33,7 +33,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 var updateTriageEyeScanProvider = ChangeNotifierProvider(
   (ref) => UpdateTriageEyeScanProvider(
     TriageEyeType.RIGHT,
-    "99000001",
     ref.read(patientAssessmentAndTestProvider),
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
@@ -44,7 +43,7 @@ var updateTriageEyeScanProvider = ChangeNotifierProvider(
 
 class UpdateTriageEyeScanProvider with ChangeNotifier {
   TriageEyeType _currentEye;
-  final String _patientID;
+
   PatientAssessmentAndTestProviderNew patientAssessmentAndTestProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
@@ -57,7 +56,6 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
   UpdateTriageEyeScanProvider(
       this._currentEye,
-      this._patientID,
       this.patientAssessmentAndTestProvider,
       this._triageReportRepository,
       this._triageUrgencyRepository,
@@ -127,10 +125,10 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     return key;
   }
 
-  String getUniqueFileName(String fileName) {
-    String uniqueKey = generateUniqueKey();
-    return "${_patientID}_$fileName-$uniqueKey";
-  }
+  // String getUniqueFileName(String fileName) {
+  //   String uniqueKey = generateUniqueKey();
+  //   return "${_patientID}_$fileName-$uniqueKey";
+  // }
 
   Future<TriageDetailedReportModel?> getTriageReportByReportId(
       int reportId) async {

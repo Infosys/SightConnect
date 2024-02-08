@@ -8,20 +8,63 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_self_and_clinical_report_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/patient_dropdown_widget.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AssessmentsAndTestsPage extends StatelessWidget {
+class AssessmentsAndTestsPage extends StatefulHookConsumerWidget {
   const AssessmentsAndTestsPage({super.key});
+
+  @override
+  ConsumerState<AssessmentsAndTestsPage> createState() =>
+      _AssessmentsAndTestsPageState();
+}
+
+class _AssessmentsAndTestsPageState
+    extends ConsumerState<AssessmentsAndTestsPage> {
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref
+          .read(patientAssessmentAndTestProvider)
+          .getTriageReportByPatientIdAndStatus();
+
+      _loadData();
+    });
+  }
+
+  _loadData() async {
+    scrollController.addListener(() {
+      logger.f({
+        "pixels": scrollController.position.pixels,
+        "maxScrollExtent": scrollController.position.maxScrollExtent,
+      });
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        ref
+            .read(patientAssessmentAndTestProvider)
+            .getTriageReportByPatientIdAndStatus();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: CustomAppbar(
@@ -53,38 +96,22 @@ class AssessmentsAndTestsPage extends StatelessWidget {
               Consumer(
                 builder: (context, ref, _) {
                   final model = ref.watch(patientAssessmentAndTestProvider);
+                  // logger.d({
+                  //   "isLoading": model.isFinalReportLoading,
+                  //   "hasMore": model.hasFinalReportMore,
+                  //   "currentReportId": model.currentTriageReportId,
+                  //   "data": model.finalReportList.length,
+                  // });
 
-                  if (model.isFinalReportLoading) {
-                    return Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(height: AppSize.height(context) * 0.3),
-                          const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
                   return _content(
                     context: context,
                     currentReportId: model.currentTriageReportId,
                     data: model.finalReportList,
-                    isLoading: model.isReportLoading,
-                    hasMore: model.hasMore,
+                    isLoading: model.isFinalReportLoading,
+                    hasMore: model.hasFinalReportMore,
                     onRefresh: () async {
                       try {
                         await model.refeshReports();
-                      } catch (e) {
-                        Fluttertoast.showToast(msg: "Error in fetching report");
-                      }
-                    },
-                    onLoadMore: () async {
-                      try {
-                        await model.incrementPage();
                       } catch (e) {
                         Fluttertoast.showToast(msg: "Error in fetching report");
                       }
@@ -117,6 +144,7 @@ class AssessmentsAndTestsPage extends StatelessWidget {
                         ),
                       );
                     },
+                    scrollController: scrollController,
                   );
                 },
               ),
@@ -138,154 +166,136 @@ class AssessmentsAndTestsPage extends StatelessWidget {
     }
   }
 
-  _content(
-      {required BuildContext context,
-      required List<TriageReportBriefEntity> data,
-      required bool hasMore,
-      required Function(TriageReportBriefEntity) onViewReport,
-      required Function(TriageReportBriefEntity) onViewHistory,
-      required bool isLoading,
-      required int currentReportId,
-      required Function onLoadMore,
-      required Function() onRefresh}) {
-    if (data.isEmpty) {
-      return Expanded(
-        child: Center(
-          child: Text(
-            context.loc!.noPreviewAvailable,
-            style: applyRobotoFont(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      );
-    }
+  _content({
+    required BuildContext context,
+    required List<TriageReportBriefEntity> data,
+    required bool hasMore,
+    required Function(TriageReportBriefEntity) onViewReport,
+    required Function(TriageReportBriefEntity) onViewHistory,
+    required bool isLoading,
+    required int currentReportId,
+    required Function() onRefresh,
+    required ScrollController scrollController,
+  }) {
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () async {
           onRefresh();
         },
         child: ListView.builder(
+          controller: scrollController,
           padding: const EdgeInsets.all(0),
           itemCount: data.length + 1,
           itemBuilder: (context, index) {
-            if (index == data.length) {
-              if (hasMore) {
-                onLoadMore();
-              }
-              return hasMore
-                  ? Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        height: 20,
-                        width: 20,
-                        child: const CircularProgressIndicator(),
-                      ),
-                    )
-                  : Center(
-                      child: Container(
-                          margin: const EdgeInsets.only(top: 20),
-                          child: const Text("No more Reports")));
-            }
-            final currentData = data[index];
-
-            return Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: AppColor.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
+            if (index < data.length) {
+              final currentData = data[index];
+              return Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                'EID: ${currentData.encounterId}',
+                                minFontSize: 12,
+                                maxLines: 1,
+                                style: applyFiraSansFont(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                currentData.triageResultStartDate
+                                        ?.formatDateTimeMonthName ??
+                                    "",
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Spacer(),
+                        Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AutoSizeText(
-                              'EID: ${currentData.encounterId}',
-                              minFontSize: 12,
-                              maxLines: 1,
-                              style: applyFiraSansFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
                               ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              currentData.triageResultStartDate
-                                      ?.formatDateTimeMonthName ??
-                                  "",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: _checkColorMapper(
+                                  currentData.encounterStatus,
+                                ),
                               ),
-                            ),
+                              child: Text(
+                                _formatStatus(
+                                    currentData.encounterStatus?.name),
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                      const Spacer(),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: _checkColorMapper(
-                                currentData.encounterStatus,
-                              ),
-                            ),
-                            child: Text(
-                              _formatStatus(currentData.encounterStatus?.name),
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.white,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    currentData.triageResultDescription ?? "",
-                    softWrap: true,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(fontSize: 14),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () => onViewHistory(currentData),
-                        child: Text(context.loc!.viewHistoryButton),
-                      ),
-                      (isLoading &&
-                              currentReportId == currentData.triageResultID)
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(),
-                            )
-                          : TextButton(
-                              onPressed: () => onViewReport(currentData),
-                              child: Text(context.loc!.viewReportButton),
-                            )
-                    ],
-                  )
-                ],
-              ),
-            );
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      currentData.triageResultDescription ?? "",
+                      softWrap: true,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyRobotoFont(fontSize: 14),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () => onViewHistory(currentData),
+                          child: Text(context.loc!.viewHistoryButton),
+                        ),
+                        (isLoading &&
+                                currentReportId == currentData.triageResultID)
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(),
+                              )
+                            : TextButton(
+                                onPressed: () => onViewReport(currentData),
+                                child: Text(context.loc!.viewReportButton),
+                              )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            } else {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: hasMore
+                      ? const CircularProgressIndicator()
+                      : const Text("No more data"),
+                ),
+              );
+            }
           },
         ),
       ),
