@@ -241,6 +241,8 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                               } catch (e) {
                                 logger.d({"VisualAcuitySuccessDialog": e});
                                 isLoading.value = false;
+                                Fluttertoast.showToast(
+                                    msg: "Failed to save observation");
                               }
                             },
                             child: Text(
