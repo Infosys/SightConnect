@@ -164,31 +164,32 @@ class NearbyVisionCentersCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: AppSize.ksheight),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  AppIcon.call,
-                  width: 18,
-                  height: 18,
-                  colorFilter: const ColorFilter.mode(
-                    AppColor.grey,
-                    BlendMode.srcATop,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Flexible(
-                  child: Text(
-                    "$email, $contact",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: const Color(0xff333333),
+            Flexible(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    AppIcon.call,
+                    width: 18,
+                    height: 18,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.grey,
+                      BlendMode.srcATop,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  Flexible(
+                    child: Text(
+                      "$email, $contact",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: const Color(0xff333333),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: AppSize.ksheight),
           ],
         ),
       ),

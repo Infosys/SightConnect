@@ -151,7 +151,9 @@ class PatientProfilePage extends ConsumerWidget {
                                     Fluttertoast.showToast(
                                         msg: "Profile updated");
                                     ref.invalidate(getPatientProfileProvider);
-                                    ref.invalidate(patientProfileProvider);
+                                    ref.invalidate(
+                                        getPatientProfileByIdProvider(
+                                            selectedPatientId));
                                   }
                                 });
                               },
