@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 // import 'package:millimeters/millimeters.dart';
 import '../../../../../main.dart';
@@ -38,12 +38,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
   CustomPaint? _customPaint;
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
-  final FaceDetector _faceDetector = FaceDetector(
-    options: FaceDetectorOptions(
-      enableContours: true,
-      enableLandmarks: true,
-      enableClassification: true,
-    ),
+  final FaceMeshDetector _meshDetector = FaceMeshDetector(
+    option: FaceMeshDetectorOptions.faceMesh,
   );
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset _defaultResolution = ResolutionPreset.high;
@@ -103,8 +99,10 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      _canProcess = true;
-      _isBusy = false;
+      if (Platform.isAndroid) {
+        _canProcess = true;
+        _isBusy = false;
+      }
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
@@ -132,7 +130,9 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage);
+        if (Platform.isAndroid) {
+          _controller.startImageStream(_processCameraImage);
+        }
       },
     );
     if (mounted) {
@@ -190,8 +190,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final List<Face> faces = await _faceDetector.processImage(inputImage);
-
+    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
     // Measurement of the Fixed Center Eye Scanner Box
     const double boxSizeRatio = 0.7;
     const double boxCenterRatio = 0.5;
@@ -202,19 +201,16 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
       _canvasSize.height * boxCenterRatio,
     );
 
-    if (faces.isNotEmpty) {
-      final Face face = MachineLearningCameraService.getLargestFace(faces);
-      final FaceLandmark? leftEyeLandmark =
-          face.landmarks[FaceLandmarkType.leftEye];
-      final FaceLandmark? rightEyeLandmark =
-          face.landmarks[FaceLandmarkType.rightEye];
-      if (leftEyeLandmark != null && rightEyeLandmark != null) {
-        final Point<int> leftEyeLandmarkPosition = leftEyeLandmark.position;
-        final Point<int> rightEyeLandmarkPosition = rightEyeLandmark.position;
-
-        final List<Point<int>> eyeLandmarks = [
-          leftEyeLandmarkPosition,
-          rightEyeLandmarkPosition
+    if (meshes.isNotEmpty) {
+      final FaceMesh mesh = MachineLearningCameraService.getLargestFace(meshes);
+      final List<FaceMeshPoint>? leftEyeContour =
+          mesh.contours[FaceMeshContourType.leftEye];
+      final List<FaceMeshPoint>? rightEyeContour =
+          mesh.contours[FaceMeshContourType.rightEye];
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final List<Point<double>> eyeLandmarks = [
+          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
+          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
@@ -237,8 +233,8 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
         if (eyeLandmarksInsideTheBox) {
           int newDistance =
               MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: leftEyeLandmarkPosition,
-            rightEyeLandmark: rightEyeLandmarkPosition,
+            leftEyeLandmark: eyeLandmarks[0],
+            rightEyeLandmark: eyeLandmarks[1],
             focalLength: _focalLength,
             sensorX: _sensorX,
             sensorY: _sensorY,
@@ -326,7 +322,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     logger.d("TopReadingCard: Stop Live Feed Called");
     try {
       _canProcess = false;
-      _faceDetector.close();
+      _meshDetector.close();
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();

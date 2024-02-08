@@ -457,7 +457,10 @@ class _PatientTriageEyeCapturingPageState
       return null;
     }
 
-    final img.Image mirroredImage = img.flipHorizontal(capturedImage);
+    final img.Image mirroredImage =
+        _cameraLensDirection == CameraLensDirection.front
+            ? img.flipHorizontal(capturedImage)
+            : capturedImage;
 
     final int croppedImageWidth = mirroredImage.width;
     final double croppedImageHeight = mirroredImage.height * (1 / 3);
