@@ -632,7 +632,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyPolicyPurposeOfProcessingTitle.
   ///
   /// In en, this message translates to:
-  /// **'Purpose of Processing: We process the Personal Data provided by you for the below purposes such as:'**
+  /// **'Purpose of Processing:'**
   String get privacyPolicyPurposeOfProcessingTitle;
 
   /// No description provided for @privacyPolicyPurposeOfProcessingDescription.

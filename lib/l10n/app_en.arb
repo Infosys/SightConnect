@@ -96,7 +96,7 @@
   "privacyPolicyDescription": "LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.",
   "privacyPolicyPersonalDataTitle": "Personal data elements collected/processed:",
   "privacyPolicyPersonalDataDescription": "You and your connections personal data such as (Some of these data would be optional) Mobile number, Name, Date of birth, Gender (Male/Female), Address (Pin code), patient ID, Connection, eye triage questionnaire responses, eye triage report, eye images, symptoms tagged against your eye image, Photograph, Address details such as address, district name (including District code), state name (including state code), sub district name, village name, town name, Email address, Last Name, Middle Name, Blood Group, Height, Weight, Occupation, ABHA details (as provided by you), based on your app permissions access to Camera, GPS Location, Gallery for accessing the application, full network access, view network connections, Device information.",
-  "privacyPolicyPurposeOfProcessingTitle": "Purpose of Processing: We process the Personal Data provided by you for the below purposes such as:",
+  "privacyPolicyPurposeOfProcessingTitle": "Purpose of Processing:",
   "privacyPolicyPurposeOfProcessingDescription": "To enable you to access our application and its features for eye related online health checkup for you and your connections (as provided by you).|To enable you to contact Vision Technicians, Ophthalmologists under LVPEI, as applicable, in case of any eye related illness/health difficulties.|For providing any eye health-related data (including reports etc.) as part of your health consultation and diagnosis and in order to contact you or your connections as part of health-related concerns.|For sharing of your eye health data with our authorized LVPEI ophthalmologists/ doctors for better diagnosis and further sharing the same with the Village Chief/ Mayor etc. (where applicable based on your GPS location) depending on the severity of the eye issue in case you are unable to reach out to/ inform the LVPEI doctors for treatment.|To provide the list of Eye clinics/ hospitals affiliated with LVPEI near you, for you to reach out to in case of any eye related problems.|For using the information such as Eye Image, symptoms related to the eye image, Age, Blood Group, Location without any identifiers to help train our machine learning or artificial intelligence models for the purpose of providing proper diagnosis in the future|For sending reminder, communication, campaign mailers, to create awareness for eye health.",
   "privacyPolicyDataRecipientsTitle": "Data Recipients/ Accessible to:",
   "privacyPolicyDataRecipientsDescription": "The personal data shared by you (including sensitive personal data) will be accessible to authorized LVPEI personnel such as Doctors/ Ophthalmologists, Vision Technicians, Vision Guardians, representatives from LVPEI, internal/external auditors, Government authorities where applicable, and our authorized service provider Infosys as applicable.",
@@ -236,10 +236,5 @@
   "smsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install",
   "emailSubject": "Prioritize your eye health with SightConnect App!",
   "recentServicesCataractEyeTest": "Cataract Eye Test",
-  "recentServicesRedEyeTest": "Red Eye Test",
-
- "inviteNowText": "Invite Now",
- "digitalHealthCard": "Digital Public Health Stack",
-
- "poweredByText": "Powered by"
+  "recentServicesRedEyeTest": "Red Eye Test"
 }
