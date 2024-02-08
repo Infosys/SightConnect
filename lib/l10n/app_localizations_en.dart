@@ -686,5 +686,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recentServicesRedEyeTest => 'Red Eye Test';
-  }
-  
+}

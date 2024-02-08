@@ -16,6 +16,7 @@ import 'app_localizations_mr.dart';
 import 'app_localizations_or.dart';
 import 'app_localizations_ta.dart';
 import 'app_localizations_te.dart';
+import 'app_localizations_ur.dart';
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
@@ -108,7 +109,8 @@ abstract class AppLocalizations {
     Locale('mr'),
     Locale('or'),
     Locale('ta'),
-    Locale('te')
+    Locale('te'),
+    Locale('ur')
   ];
 
   /// No description provided for @stepNumber.
@@ -438,13 +440,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeCarousal2Title.
   ///
   /// In en, this message translates to:
-  /// **'7 eye problems not to mfakeiss out!'**
+  /// **'7 eye problems not to miss out!'**
   String get homeCarousal2Title;
 
   /// No description provided for @homeCarousal2Description.
   ///
   /// In en, this message translates to:
-  /// **'\n7 eye problems to get tested for: \n \n• Redness of eye\n• Watering of eyes\n• White spots on eyes'**
+  /// **'\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes'**
   String get homeCarousal2Description;
 
   /// No description provided for @homeCarousal3Title.
@@ -456,7 +458,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeCarousal3Description.
   ///
   /// In en, this message translates to:
-  /// **'But a vision care expert can.\nGet eye problems identified\nand treated in time to avoid\ncomplications later'**
+  /// **'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later'**
   String get homeCarousal3Description;
 
   /// No description provided for @myConnectionsTitle.
@@ -525,6 +527,12 @@ abstract class AppLocalizations {
   /// **'Menu'**
   String get appDrawerTitle;
 
+  /// No description provided for @appDrawerHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get appDrawerHome;
+
   /// No description provided for @appDrawerLanguageSelection.
   ///
   /// In en, this message translates to:
@@ -536,12 +544,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Accessibility Settings'**
   String get appDrawerAccessibility;
-
-  /// No description provided for @appDrawerHome.
-  ///
-  /// In en, this message translates to:
-  /// **'Home'**
-  String get appDrawerHome;
 
   /// No description provided for @appDrawerMyProfile.
   ///
@@ -588,7 +590,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutUsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\n\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. '**
+  /// **'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. '**
   String get aboutUsDescription;
 
   /// No description provided for @aboutUsFeaturesTitle.
@@ -780,7 +782,7 @@ abstract class AppLocalizations {
   /// No description provided for @eyeAssessmentUnsupportedQuestion.
   ///
   /// In en, this message translates to:
-  /// **'Question not supported yet'**
+  /// **'Question not supported yet - can this be translated as answer/feedback not available yet?'**
   String get eyeAssessmentUnsupportedQuestion;
 
   /// No description provided for @eyeAssessmentPopUpHeading.
@@ -830,12 +832,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested.'**
   String get visualAcuityTestInstructionFour;
-
-  /// No description provided for @visualAcuityTestDistanceInstruction.
-  ///
-  /// In en, this message translates to:
-  /// **'Position the camera 40cm away from the eye.'**
-  String get visualAcuityTestDistanceInstruction;
 
   /// No description provided for @skipAndProceedButton.
   ///
@@ -1170,19 +1166,19 @@ abstract class AppLocalizations {
   /// No description provided for @assessmentResultCardAssessmentQuestions.
   ///
   /// In en, this message translates to:
-  /// **'Assessment\nQuestions'**
+  /// **'Assessment\r\nQuestions'**
   String get assessmentResultCardAssessmentQuestions;
 
   /// No description provided for @assessmentResultCardAcuityTest.
   ///
   /// In en, this message translates to:
-  /// **'Acuity\nTest'**
+  /// **'Acuity\r\nTest'**
   String get assessmentResultCardAcuityTest;
 
   /// No description provided for @assessmentResultCardEyeScan.
   ///
   /// In en, this message translates to:
-  /// **'Eye\nScan'**
+  /// **'Eye\r\nScan'**
   String get assessmentResultCardEyeScan;
 
   /// No description provided for @viewReportButton.
@@ -1335,6 +1331,12 @@ abstract class AppLocalizations {
   /// **'Scanner'**
   String get scannerTitle;
 
+  /// No description provided for @visualAcuityTestDistanceInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Position the camera 40cm away from the eye.'**
+  String get visualAcuityTestDistanceInstruction;
+
   /// No description provided for @somethingWentWrong.
   ///
   /// In en, this message translates to:
@@ -1353,6 +1355,78 @@ abstract class AppLocalizations {
   /// **'No Preview Available'**
   String get noPreviewAvailable;
 
+  /// No description provided for @privacyPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy & Data Protection'**
+  String get privacyPolicyTitle;
+
+  /// No description provided for @privacyPolicyPurposeOfProcessingSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We process the Personal Data provided by you for the below purposes such as:'**
+  String get privacyPolicyPurposeOfProcessingSubTitle;
+
+  /// No description provided for @visualAcuityTestDistanceInstructionTooClose.
+  ///
+  /// In en, this message translates to:
+  /// **'You are too close to the Camera, Position the camera 40cm away from the eye.'**
+  String get visualAcuityTestDistanceInstructionTooClose;
+
+  /// No description provided for @visualAcuityTestDistanceInstructionTooFar.
+  ///
+  /// In en, this message translates to:
+  /// **'You are too far from the Camera, Position the camera 40cm away from the eye.'**
+  String get visualAcuityTestDistanceInstructionTooFar;
+
+  /// No description provided for @myProfileABHAID.
+  ///
+  /// In en, this message translates to:
+  /// **'ABHA ID'**
+  String get myProfileABHAID;
+
+  /// No description provided for @myProfileEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get myProfileEmail;
+
+  /// No description provided for @viewHistoryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View History'**
+  String get viewHistoryButton;
+
+  /// No description provided for @profilePagePersonalDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Details'**
+  String get profilePagePersonalDetails;
+
+  /// No description provided for @profilePageDateOfBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get profilePageDateOfBirth;
+
+  /// No description provided for @profilePageGender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get profilePageGender;
+
+  /// No description provided for @profilePageMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get profilePageMobile;
+
+  /// No description provided for @profilePageHealthCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Card'**
+  String get profilePageHealthCardTitle;
+
   /// No description provided for @appointmentTitle.
   ///
   /// In en, this message translates to:
@@ -1364,6 +1438,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All Appointments'**
   String get appointmentSubtitle;
+
+  /// No description provided for @eyeBoxText.
+  ///
+  /// In en, this message translates to:
+  /// **'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.'**
+  String get eyeBoxText;
+
+  /// No description provided for @bottomNavItemServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get bottomNavItemServices;
+
+  /// No description provided for @smsContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install'**
+  String get smsContent;
+
+  /// No description provided for @emailSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Prioritize your eye health with SightConnect App!'**
+  String get emailSubject;
+
+  /// No description provided for @recentServicesCataractEyeTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Cataract Eye Test'**
+  String get recentServicesCataractEyeTest;
+
+  /// No description provided for @recentServicesRedEyeTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Red Eye Test'**
+  String get recentServicesRedEyeTest;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -1375,7 +1485,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'ta', 'te'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['as', 'bn', 'en', 'gu', 'hi', 'kn', 'ml', 'mr', 'or', 'ta', 'te', 'ur'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1397,6 +1507,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     case 'or': return AppLocalizationsOr();
     case 'ta': return AppLocalizationsTa();
     case 'te': return AppLocalizationsTe();
+    case 'ur': return AppLocalizationsUr();
   }
 
   throw FlutterError(

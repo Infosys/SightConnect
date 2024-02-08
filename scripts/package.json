@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "app-translations:arb": "node ./appTranslations.js",
-    "app-translations:arb:watch": "nodemon ./appTranslations.js",
+    "app-translations": "node ./appTranslations.js",
+    "app-translations:arb": "node ./appTranslationsARB.js",
+    "app-translations:arb:watch": "nodemon ./appTranslationsARB.js",
     "app-translations:dart": "node ./appTranslationsDart.js",
     "app-translations:dart:watch": "nodemon ./appTranslationsDart.js"
   },

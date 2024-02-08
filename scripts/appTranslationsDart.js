@@ -3,10 +3,7 @@ const path = require("path");
 const { getLanguageName } = require("./utils/language");
 const { capitalize } = require("./utils/string");
 
-appTranslationsDart();
-
 function appTranslationsDart() {
-  console.log("Reading the app_translations folder...");
   const arbFilesFolder = path.join(__dirname, "../lib/l10n");
   const dartFilesFolder = path.join(__dirname, "../lib/l10n");
   if (!fs.existsSync(arbFilesFolder)) {
@@ -52,11 +49,11 @@ function appTranslationsDart() {
 
 /// The translations for ${getLanguageName(languageCode)} (\`${languageCode}\`).
 class AppLocalizations${capitalize(languageCode)} extends AppLocalizations {
-AppLocalizations${capitalize(
-      languageCode
-    )}([String locale = '${languageCode}']) : super(locale);
+  AppLocalizations${capitalize(
+    languageCode
+  )}([String locale = '${languageCode}']) : super(locale);
 
-${getters.join("\n\n  ")}
+  ${getters.join("\n\n  ")}
 }
 `;
     fs.writeFileSync(dartFile, dartContent);
@@ -294,3 +291,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     return content;
   }
 }
+
+module.exports = {
+  appTranslationsDart,
+};
