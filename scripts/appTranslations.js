@@ -49,8 +49,8 @@ function appTranslations() {
 
     const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);
     fs.writeFileSync(arbFile, JSON.stringify(translationsObj, null, 2));
-    console.log(`Generated ${arbFile}`);
+    console.log(`Generated app_${language}.arb`);
   });
 
-  console.log("Process completed successfully.");
+  console.log("All the arb files are generated successfully.");
 }

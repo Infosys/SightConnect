@@ -71,8 +71,9 @@ ${getters.join("\n\n  ")}
       arbFiles.map((file) => file.slice(4, -4)) // Language codes
     )
   );
+  console.log("Generated app_localizations.dart");
 
-  console.log("Process completed successfully.");
+  console.log("All the dart files are generated successfully.");
 
   // Utils
   /**
