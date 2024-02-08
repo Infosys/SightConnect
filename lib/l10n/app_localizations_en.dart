@@ -169,16 +169,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCarousal1Description => 'Schematic presentation of sampling procedure on prevalence of cataract and associated factors';
 
   @override
-  String get homeCarousal2Title => '7 eye problems not to mfakeiss out!';
+  String get homeCarousal2Title => '7 eye problems not to miss out!';
 
   @override
-  String get homeCarousal2Description => '\n7 eye problems to get tested for: \n \n• Redness of eye\n• Watering of eyes\n• White spots on eyes';
+  String get homeCarousal2Description => '\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes';
 
   @override
   String get homeCarousal3Title => 'Eye problems. There are many that you can\'t see';
 
   @override
-  String get homeCarousal3Description => 'But a vision care expert can.\nGet eye problems identified\nand treated in time to avoid\ncomplications later';
+  String get homeCarousal3Description => 'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later';
 
   @override
   String get myConnectionsTitle => 'My Members';
@@ -214,13 +214,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDrawerTitle => 'Menu';
 
   @override
+  String get appDrawerHome => 'Home';
+
+  @override
   String get appDrawerLanguageSelection => 'Language Selection';
 
   @override
   String get appDrawerAccessibility => 'Accessibility Settings';
-
-  @override
-  String get appDrawerHome => 'Home';
 
   @override
   String get appDrawerMyProfile => 'My Profile';
@@ -244,7 +244,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDrawerSignOut => 'Sign Out';
 
   @override
-  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\n\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
+  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
 
   @override
   String get aboutUsFeaturesTitle => 'Features';
@@ -340,7 +340,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeAssessmentBrightnessError => 'Please set the brightness manually to 80%';
 
   @override
-  String get eyeAssessmentUnsupportedQuestion => 'Question not supported yet';
+  String get eyeAssessmentUnsupportedQuestion => 'Question not supported yet - can this be translated as answer/feedback not available yet?';
 
   @override
   String get eyeAssessmentPopUpHeading => 'Assessment';
@@ -365,9 +365,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get visualAcuityTestInstructionFour => 'If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested.';
-
-  @override
-  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
 
   @override
   String get skipAndProceedButton => 'Skip & Proceed to Scan';
@@ -535,13 +532,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get swipeGestureCardText => 'Swipe in the direction of the symbol';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'Assessment\nQuestions';
+  String get assessmentResultCardAssessmentQuestions => 'Assessment\r\nQuestions';
 
   @override
-  String get assessmentResultCardAcuityTest => 'Acuity\nTest';
+  String get assessmentResultCardAcuityTest => 'Acuity\r\nTest';
 
   @override
-  String get assessmentResultCardEyeScan => 'Eye\nScan';
+  String get assessmentResultCardEyeScan => 'Eye\r\nScan';
 
   @override
   String get viewReportButton => 'View Report';
@@ -619,6 +616,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scannerTitle => 'Scanner';
 
   @override
+  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
+
+  @override
   String get somethingWentWrong => 'Something went wrong.';
 
   @override
@@ -628,8 +628,62 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noPreviewAvailable => 'No Preview Available';
 
   @override
+  String get privacyPolicyTitle => 'Privacy & Data Protection';
+
+  @override
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooClose => 'You are too close to the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooFar => 'You are too far from the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get myProfileABHAID => 'ABHA ID';
+
+  @override
+  String get myProfileEmail => 'Email';
+
+  @override
+  String get viewHistoryButton => 'View History';
+
+  @override
+  String get profilePagePersonalDetails => 'Personal Details';
+
+  @override
+  String get profilePageDateOfBirth => 'Date of Birth';
+
+  @override
+  String get profilePageGender => 'Gender';
+
+  @override
+  String get profilePageMobile => 'Mobile';
+
+  @override
+  String get profilePageHealthCardTitle => 'Health Card';
+
+  @override
   String get appointmentTitle => 'Appointments';
 
   @override
   String get appointmentSubtitle => 'All Appointments';
+
+  @override
+  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+
+  @override
+  String get bottomNavItemServices => 'Services';
+
+  @override
+  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+
+  @override
+  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+
+  @override
+  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+
+  @override
+  String get recentServicesRedEyeTest => 'Red Eye Test';
 }

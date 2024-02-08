@@ -13,31 +13,25 @@ class AppLocalizationsGu extends AppLocalizations {
   String get questionnaireTitle => 'આંખના મૂલ્યાંકનના પ્રશ્નો';
 
   @override
-  String get questionnaireExitDialog =>
-      'આ પ્રશ્નોના જવાબ આપવાથી તમારી આંખની સમસ્યાઓને ઓળખવામાં મદદ મળશે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?';
+  String get questionnaireExitDialog => 'આ પ્રશ્નોના જવાબ આપવાથી તમારી આંખની સમસ્યાઓને ઓળખવામાં મદદ મળશે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?';
 
   @override
-  String get visualAcuityTitle => 'વિઝ્યુઅલ એક્યુટી ટેસ્ટ';
+  String get visualAcuityTitle => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ';
 
   @override
-  String get visualAcuityDescription =>
-      'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ એ આંખની પરીક્ષા છે જે તપાસે છે કે તમે ચોક્કસ અંતરથી અક્ષર અથવા પ્રતીકની વિગતો કેટલી સારી રીતે જુઓ છો. આ ઝડપી પરીક્ષણ હમણાં કરો!';
+  String get visualAcuityDescription => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ એ આંખની પરીક્ષા છે જે તપાસે છે કે તમે ચોક્કસ અંતરથી અક્ષર અથવા પ્રતીકની વિગતો કેટલી સારી રીતે જુઓ છો. આ ઝડપી પરીક્ષણ હમણાં કરો!';
 
   @override
-  String get visualAcuityHowToPerform =>
-      'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ કેવી રીતે કરવું?';
+  String get visualAcuityHowToPerform => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ કેવી રીતે કરવું?';
 
   @override
-  String get visualAcuityViewStepsToPerform =>
-      'વિઝ્યુઅલ એક્યુટી ટેસ્ટ કરવાના પગલાંઓ જુઓ';
+  String get visualAcuityViewStepsToPerform => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ કરવાના પગલાંઓ જુઓ';
 
   @override
-  String get visualAcuityCompletionDialog =>
-      'પૂર્ણ થયું! બંને આંખો માટે દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ પૂર્ણ થયું છે. તમારે આગળ તમારી આંખના ફોટા લેવાની જરૂર છે.';
+  String get visualAcuityCompletionDialog => 'પૂર્ણ થયું! બંને આંખો માટે દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ પૂર્ણ થયું છે. તમારે આગળ તમારી આંખના ફોટા લેવાની જરૂર છે.';
 
   @override
-  String get visualAcuityExitDialog =>
-      'તમારી આંખની સમસ્યા વિશે સમજવા માટે દૃષ્ટિની તીક્ષ્ણતા એ એક મહત્વપૂર્ણ કસોટી છે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?';
+  String get visualAcuityExitDialog => 'તમારી આંખની સમસ્યા વિશે સમજવા માટે દૃષ્ટિની તીક્ષ્ણતા એ એક મહત્વપૂર્ણ કસોટી છે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?';
 
   @override
   String get swipeGestureTab => 'સ્વાઇપ હાવભાવ';
@@ -58,32 +52,28 @@ class AppLocalizationsGu extends AppLocalizations {
   String get bothEyeString => 'બન્ને આંખો';
 
   @override
-  String get visualAcuityLeftEyeHeader => 'ટેસ્ટ 2-ડાબી આંખ';
+  String get visualAcuityLeftEyeHeader => 'ટેસ્ટ 2 -ડાબી આંખ';
 
   @override
-  String get visualAcuityLeftEyeInstructions =>
-      'પોપચાને દબાવ્યા વિના, તમારી જમણી આંખને તમારા હાથથી ઢાંકી દો. જો તમે ચશ્મા પહેર્યા હોય તો તમારો હાથ ચશ્મા પર મૂકો.';
+  String get visualAcuityLeftEyeInstructions => 'પોપચાને દબાવ્યા વિના, તમારી જમણી આંખને તમારા હાથથી ઢાંકી દો. જો તમે ચશ્મા પહેર્યા હોય તો તમારો હાથ ચશ્મા પર મૂકો.';
 
   @override
   String get visualAcuityRightEyeHeader => 'પરીક્ષણ 1-જમણી આંખ';
 
   @override
-  String get visualAcuityRightEyeInstructions =>
-      'પોપચાને દબાવ્યા વિના, તમારી ડાબી આંખને તમારા હાથથી ઢાંકી દો. જો તમે ચશ્મા પહેર્યા હોય તો તમારો હાથ ચશ્મા પર મૂકો.';
+  String get visualAcuityRightEyeInstructions => 'પોપચાને દબાવ્યા વિના, તમારી ડાબી આંખને તમારા હાથથી ઢાંકી દો. જો તમે ચશ્મા પહેર્યા હોય તો તમારો હાથ ચશ્મા પર મૂકો.';
 
   @override
   String get visualAcuityBothEyeHeader => 'પરીક્ષણ 3-બન્ને આંખો';
 
   @override
-  String get visualAcuityBothEyeInstructions =>
-      'તમારી કોઈપણ આંખને ઢાંકશો નહીં અને બંને આંખો સાથે આગળ દેખાતા પ્રતીકોને જોશો નહીં.';
+  String get visualAcuityBothEyeInstructions => 'તમારી કોઈપણ આંખને ઢાંકશો નહીં અને બંને આંખો સાથે આગળ દેખાતા પ્રતીકોને જોશો નહીં.';
 
   @override
   String get overlayHeaderDirection => 'દિશા નિર્દેશ';
 
   @override
-  String get overlayDescription =>
-      'અહીં તમે દરેક પ્રતીકની દિશાઓને કેવી રીતે સમજો છો તે અહીં છે.';
+  String get overlayDescription => 'તમે દરેક પ્રતીકની દિશાઓને કેવી રીતે સમજો છો તે અહીં છે.';
 
   @override
   String get overlaySymbolDirectionText => 'પ્રતીક દિશાઃ';
@@ -92,43 +82,40 @@ class AppLocalizationsGu extends AppLocalizations {
   String get directionDown => 'નીચે';
 
   @override
-  String get directionUp => 'ઉપર.';
+  String get directionUp => 'ઉપર';
 
   @override
-  String get directionLeft => 'ડાબેથી';
+  String get directionLeft => 'ડાબી';
 
   @override
-  String get directionRight => 'બરાબર.';
+  String get directionRight => 'જમણી';
 
   @override
   String get dontShowAgainString => 'ફરી ન બતાવો';
 
   @override
-  String get visualAcuityCarouselTitle => 'વિઝ્યુઅલ એક્યુટી ટેસ્ટ કરવાના પગલાં';
+  String get visualAcuityCarouselTitle => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ કરવાના પગલાં';
 
   @override
   String get eyeScanTitle => 'આંખનું સ્કેન';
 
   @override
-  String get eyeScanDescription =>
-      'તમે નજીક છો! માત્ર એક વધુ કસોટી બાકી છે. પછી તમારી આંખોના ફોટા લો.';
+  String get eyeScanDescription => 'તમે નજીક છો! માત્ર એક વધુ પરીક્ષણ બાકી છે. પછી તમારી આંખોના ફોટા લો. ';
 
   @override
   String get eyeScanHowToPerform => 'તમારી આંખોને કેવી રીતે સ્કેન કરવી?';
 
   @override
-  String get eyeScanViewStepsToPerform =>
-      'તમારી આંખોને કેવી રીતે સ્કેન કરવી તે જાણવા માટે પગલાંઓ જુઓ.';
+  String get eyeScanViewStepsToPerform => 'તમારી આંખોને કેવી રીતે સ્કેન કરવી તે જાણવા માટે પગલાંઓ જુઓ.';
 
   @override
-  String get eyeScanExitDialog =>
-      'આંખની તપાસ તમારી આંખની સમસ્યા વિશે વધુ સમજવામાં મદદ કરે છે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?';
+  String get eyeScanExitDialog => 'આંખની તપાસ તમારી આંખની સમસ્યા વિશે વધુ સમજવામાં મદદ કરે છે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?';
 
   @override
-  String get captureRightEyeString => 'જમણી આંખને પકડો';
+  String get captureRightEyeString => 'જમણી આંખનું  કેપ્ચર';
 
   @override
-  String get captureLeftEyeString => 'ડાબી આંખને પકડો';
+  String get captureLeftEyeString => 'ડાબી આંખનું  કેપ્ચર';
 
   @override
   String get skipButton => 'સ્કિપ કરો';
@@ -176,27 +163,22 @@ class AppLocalizationsGu extends AppLocalizations {
   String get retryButton => 'ફરી પ્રયાસ કરો';
 
   @override
-  String get homeCarousal1Title =>
-      '40 વર્ષ અને તેથી વધુ ઉંમરના પુખ્ત વયના લોકોમાં મોતિયાનો ફેલાવો અને તેની સાથે સંકળાયેલા પરિબળો';
+  String get homeCarousal1Title => '40 વર્ષ અને તેથી વધુ ઉંમરના પુખ્ત વયના લોકોમાં મોતિયાનો ફેલાવો અને તેની સાથે સંકળાયેલા પરિબળો';
 
   @override
-  String get homeCarousal1Description =>
-      'મોતિયા અને તેની સાથે સંકળાયેલા પરિબળોની વ્યાપકતા પર નમૂનાની પ્રક્રિયાની યોજનાબદ્ધ રજૂઆત';
+  String get homeCarousal1Description => 'મોતિયા અને તેની સાથે સંકળાયેલા પરિબળોની વ્યાપકતા પર નમૂનાની પ્રક્રિયાની યોજનાબદ્ધ રજૂઆત';
 
   @override
   String get homeCarousal2Title => 'આંખની 7 સમસ્યાઓ ચૂકી ન જવી જોઈએ!';
 
   @override
-  String get homeCarousal2Description =>
-      '\nઆંખની 7 સમસ્યાઓનું પરીક્ષણ કરાવવુંઃ \n \n• આંખની લાલાશ, \n•આંખોમાંથી પાણી આવવું, \n•આંખો પર સફેદ ડાઘા પડવા';
+  String get homeCarousal2Description => '\r\nઆંખની 7 સમસ્યાઓનું પરીક્ષણ કરાવવુંઃ \r\n \r\n• આંખની લાલાશ, \r\n•આંખોમાંથી પાણી આવવું, \r\n•આંખો પર સફેદ ડાઘા પડવા';
 
   @override
-  String get homeCarousal3Title =>
-      'આંખની સમસ્યાઓ. એવી ઘણી બાબતો છે જે તમે જોઈ શકતા નથી.';
+  String get homeCarousal3Title => 'આંખની સમસ્યાઓ. એવી ઘણી બાબતો છે જે તમે જોઈ શકતા નથી.';
 
   @override
-  String get homeCarousal3Description =>
-      'પણ દ્રષ્ટિ સંભાળ નિષ્ણાત કરી શકે છે. \nઆંખની સમસ્યાઓ ઓળખી કાઢો અને સમયસર સારવાર કરાવો જેથી પછીથી જટિલતાઓને ટાળી શકાય.';
+  String get homeCarousal3Description => 'પણ દ્રષ્ટિ સંભાળ નિષ્ણાત કરી શકે છે. \r\nઆંખની સમસ્યાઓ ઓળખી કાઢો અને સમયસર સારવાર કરાવો જેથી પછીથી જટિલતાઓને ટાળી શકાય.';
 
   @override
   String get myConnectionsTitle => 'મારા સભ્યો';
@@ -217,7 +199,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get recentServicesEyeAssessment => 'આંખનું મૂલ્યાંકન';
 
   @override
-  String get recentServicesVisualAcuityTest => 'વિઝ્યુઅલ એક્યુટી ટેસ્ટ';
+  String get recentServicesVisualAcuityTest => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ ';
 
   @override
   String get nearbyVisionCentersTitle => 'નજીકના દ્રષ્ટિ કેન્દ્રો';
@@ -232,13 +214,13 @@ class AppLocalizationsGu extends AppLocalizations {
   String get appDrawerTitle => 'મેનુ';
 
   @override
+  String get appDrawerHome => 'ઘરગથ્થુ';
+
+  @override
   String get appDrawerLanguageSelection => 'ભાષા પસંદગી';
 
   @override
   String get appDrawerAccessibility => 'ઍક્સેસિબિલિટી સેટિંગ્સ';
-
-  @override
-  String get appDrawerHome => 'ઘરગથ્થુ';
 
   @override
   String get appDrawerMyProfile => 'મારી પ્રોફાઇલ';
@@ -262,85 +244,70 @@ class AppLocalizationsGu extends AppLocalizations {
   String get appDrawerSignOut => 'સાઇન આઉટ કરો';
 
   @override
-  String get aboutUsDescription =>
-      'Sightconnect એક વપરાશકર્તા-મૈત્રીપૂર્ણ આંખની સંભાળ માટેની એપ્લિકેશન છે જે કૉલ પર સ્વ-મૂલ્યાંકન અને પરામર્શમાં મદદ કરે છે. \n\nઅમારા મિશનના કેન્દ્રમાં આંખની સંભાળને બધા માટે સુલભ બનાવવાની પ્રતિબદ્ધતા છે. એપ્લિકેશનને જીવનના તમામ ક્ષેત્રોના વપરાશકર્તાઓ દ્વારા તેમની ઉંમર, તકનીકી પૃષ્ઠભૂમિ અને સામાજિક અથવા આર્થિક પૃષ્ઠભૂમિને ધ્યાનમાં લીધા વિના સર્વસમાવેશક અને સુલભ બનાવવા માટે ડિઝાઇન કરવામાં આવી છે. એપ્લિકેશન અને તેની સામગ્રી અંગ્રેજી અને અન્ય સ્થાનિક ભાષાઓમાં ઉપલબ્ધ કરાવવામાં આવી છે. તે વપરાશકર્તાઓને તેમની આંખોનું સ્વ-મૂલ્યાંકન કરવામાં અને સમયસર સારવારની સલાહ મેળવવામાં મદદ કરે છે. એપ્લિકેશન અમારા વપરાશકર્તાઓને વ્યક્તિગત આંખની સંભાળના ઉકેલો પ્રદાન કરવા માટે નવીનતમ તકનીકો અને સાધનોનો ઉપયોગ કરે છે. તે તેમના જીવનને સરળ બનાવવા માટે વિવિધ સુવિધાઓ સાથે આવે છે.';
+  String get aboutUsDescription => 'Sightconnect એક વપરાશકર્તા-મૈત્રીપૂર્ણ આંખની સંભાળ માટેની એપ્લિકેશન છે જે કૉલ પર સ્વ-મૂલ્યાંકન અને પરામર્શમાં મદદ કરે છે. \r\n\r\nઅમારા મિશનના કેન્દ્રમાં આંખની સંભાળને બધા માટે સુલભ બનાવવાની પ્રતિબદ્ધતા છે. એપ્લિકેશનને જીવનના તમામ ક્ષેત્રોના વપરાશકર્તાઓ દ્વારા તેમની ઉંમર, તકનીકી પૃષ્ઠભૂમિ અને સામાજિક અથવા આર્થિક પૃષ્ઠભૂમિને ધ્યાનમાં લીધા વિના સર્વસમાવેશક અને સુલભ બનાવવા માટે ડિઝાઇન કરવામાં આવી છે. એપ્લિકેશન અને તેની સામગ્રી અંગ્રેજી અને અન્ય સ્થાનિક ભાષાઓમાં ઉપલબ્ધ કરાવવામાં આવી છે. તે વપરાશકર્તાઓને તેમની આંખોનું સ્વ-મૂલ્યાંકન કરવામાં અને સમયસર સારવારની સલાહ મેળવવામાં મદદ કરે છે. એપ્લિકેશન અમારા વપરાશકર્તાઓને વ્યક્તિગત આંખની સંભાળના ઉકેલો પ્રદાન કરવા માટે નવીનતમ તકનીકો અને સાધનોનો ઉપયોગ કરે છે. તે તેમના જીવનને સરળ બનાવવા માટે વિવિધ સુવિધાઓ સાથે આવે છે.';
 
   @override
   String get aboutUsFeaturesTitle => 'વિશેષતાઓ';
 
   @override
-  String get aboutUsFeaturesDescription =>
-      'ઇન-એપ્લિકેશન આઈ ટેસ્ટિંગઃ આ એપ્લિકેશન તેના વપરાશકર્તાઓને થોડા પ્રશ્નોના જવાબ આપીને અને આગળના પગલાઓ અને ડૉક્ટરની મુલાકાત લેવા માટે યોગ્ય ભલામણો મેળવીને તેમની આંખોનું સ્વ-મૂલ્યાંકન કરવાની મંજૂરી આપે છે. વપરાશકર્તાઓના મિત્રો અને પરિવારને પણ ફાયદો થઈ શકે છે. | એપોઇન્ટમેન્ટ બુકિંગઃ વપરાશકર્તાઓ તેમની આંખોનું નિદાન કરવા માટે ઓનલાઇન ટેલી-પરામર્શ અને ડોકટરોની ઇન-ક્લિનિક મુલાકાતો બુક કરી શકે છે. | આઈ. વી. આર. કૉલ સેવાઓઃ અમારી આઈ. વી. આર. કૉલ સેવાઓ અંગ્રેજી અને સ્થાનિક ભાષાઓમાં ઉપલબ્ધ છે અને તે મૂળભૂત ફીચર ફોન ધરાવતા વપરાશકર્તાઓને પણ પૂરી પાડે છે. વપરાશકર્તાઓ કટોકટી દરમિયાન અથવા આંખ સંબંધિત કોઈપણ સમસ્યાઓ માટે તાત્કાલિક મદદ મેળવવા માટે અમારા આંખ સંભાળ વ્યાવસાયિકોને ડાયલ કરી શકે છે. તેઓ એપોઇન્ટમેન્ટ બુક કરવા અથવા વધુ સ્પષ્ટતા મેળવવા માટે પણ ફોન કરી શકે છે. | નજીકના ક્લિનિક્સઃ વપરાશકર્તાઓ તેમની નજીકના આંખની સંભાળ ક્લિનિક્સને શોધી શકે છે. | પ્રિસ્ક્રિપ્શનો અને અહેવાલોઃ વપરાશકર્તાઓના તમામ પ્રિસ્ક્રિપ્શનો અને અહેવાલો ખૂબ મુશ્કેલી વિના એક જ જગ્યાએથી મેળવી શકાય છે. | આંખના શિબિરઃ વપરાશકર્તાઓ તેમના મિત્રો અને પરિવારની આંખોની મફત તપાસ કરાવવા માટે નજીકના આંખના શિબિર વિશે માહિતી મેળવી શકે છે. | રીમાઇન્ડર્સ અને ચેતવણીઓઃ વપરાશકર્તાઓ તેમની આગામી મુલાકાત, દવા, અહેવાલો વગેરે સંબંધિત સમયસર ચેતવણીઓ અને રીમાઇન્ડર્સ પ્રાપ્ત કરી શકે છે.| વહેંચણીઃ વપરાશકર્તાઓ આ એપ્લિકેશન અને એપ્લિકેશનમાં પ્રદાન કરેલી અન્ય ઉપયોગી માહિતી તેમના મિત્રો અને પરિવારના સભ્યો સાથે શેર કરી શકે છે.';
+  String get aboutUsFeaturesDescription => 'ઇન-એપ્લિકેશન આઈ ટેસ્ટિંગઃ આ એપ્લિકેશન તેના વપરાશકર્તાઓને થોડા પ્રશ્નોના જવાબ આપીને અને આગળના પગલાઓ અને ડૉક્ટરની મુલાકાત લેવા માટે યોગ્ય ભલામણો મેળવીને તેમની આંખોનું સ્વ-મૂલ્યાંકન કરવાની મંજૂરી આપે છે. વપરાશકર્તાઓના મિત્રો અને પરિવારને પણ ફાયદો થઈ શકે છે. | એપોઇન્ટમેન્ટ બુકિંગઃ વપરાશકર્તાઓ તેમની આંખોનું નિદાન કરવા માટે ઓનલાઇન ટેલી-પરામર્શ અને ડોકટરોની ઇન-ક્લિનિક મુલાકાતો બુક કરી શકે છે. | આઈ. વી. આર. કૉલ સેવાઓઃ અમારી આઈ. વી. આર. કૉલ સેવાઓ અંગ્રેજી અને સ્થાનિક ભાષાઓમાં ઉપલબ્ધ છે અને તે મૂળભૂત ફીચર ફોન ધરાવતા વપરાશકર્તાઓને પણ પૂરી પાડે છે. વપરાશકર્તાઓ કટોકટી દરમિયાન અથવા આંખ સંબંધિત કોઈપણ સમસ્યાઓ માટે તાત્કાલિક મદદ મેળવવા માટે અમારા આંખ સંભાળ વ્યાવસાયિકોને ડાયલ કરી શકે છે. તેઓ એપોઇન્ટમેન્ટ બુક કરવા અથવા વધુ સ્પષ્ટતા મેળવવા માટે પણ ફોન કરી શકે છે. | નજીકના ક્લિનિક્સઃ વપરાશકર્તાઓ તેમની નજીકના આંખની સંભાળ ક્લિનિક્સને શોધી શકે છે. | પ્રિસ્ક્રિપ્શનો અને અહેવાલોઃ વપરાશકર્તાઓના તમામ પ્રિસ્ક્રિપ્શનો અને અહેવાલો ખૂબ મુશ્કેલી વિના એક જ જગ્યાએથી મેળવી શકાય છે. | આંખના શિબિરઃ વપરાશકર્તાઓ તેમના મિત્રો અને પરિવારની આંખોની મફત તપાસ કરાવવા માટે નજીકના આંખના શિબિર વિશે માહિતી મેળવી શકે છે. | રીમાઇન્ડર્સ અને ચેતવણીઓઃ વપરાશકર્તાઓ તેમની આગામી મુલાકાત, દવા, અહેવાલો વગેરે સંબંધિત સમયસર ચેતવણીઓ અને રીમાઇન્ડર્સ પ્રાપ્ત કરી શકે છે.| વહેંચણીઃ વપરાશકર્તાઓ આ એપ્લિકેશન અને એપ્લિકેશનમાં પ્રદાન કરેલી અન્ય ઉપયોગી માહિતી તેમના મિત્રો અને પરિવારના સભ્યો સાથે શેર કરી શકે છે.';
 
   @override
-  String get aboutUsConclusion =>
-      'અમારા વપરાશકર્તા સમુદાયને વધુ સારી રીતે સેવા આપવા માટે અગ્રણી આંખની સંભાળના વ્યાવસાયિકોની મદદથી આ એપ્લિકેશન વિકસાવવામાં આવી છે. એક ઉજ્જવળ, તંદુરસ્ત વિશ્વ બનાવવા માટેના અમારા મિશનમાં અમારી સાથે જોડાઓ. આજે જ સાઇટકનેક્ટ એપ્લિકેશન ડાઉનલોડ કરો અને શેર કરો!';
+  String get aboutUsConclusion => 'અમારા વપરાશકર્તા સમુદાયને વધુ સારી રીતે સેવા આપવા માટે અગ્રણી આંખની સંભાળના વ્યાવસાયિકોની મદદથી આ એપ્લિકેશન વિકસાવવામાં આવી છે. એક ઉજ્જવળ, તંદુરસ્ત વિશ્વ બનાવવા માટેના અમારા મિશનમાં અમારી સાથે જોડાઓ. આજે જ સાઇટકનેક્ટ એપ્લિકેશન ડાઉનલોડ કરો અને શેર કરો!';
 
   @override
-  String get privacyPolicyDescription =>
-      'એલ. વી. પ્રસાદ આઈ ઇન્સ્ટિટ્યૂટ, તેની પેટાકંપનીઓ, સહયોગીઓ અને સંલગ્ન કંપનીઓ (સામૂહિક રીતે \'એલવીપીઇઆઈ\', \'અમને\', \'અમે\' તરીકે ઓળખાય છે) તમારા અધિકારક્ષેત્રના કાયદા અનુસાર તમારા વ્યક્તિગત ડેટાની પ્રક્રિયા કરવા માટે પ્રતિબદ્ધ છે. અમે તમને વ્યક્તિગત ડેટાની પ્રક્રિયા વિશે નીચેની માહિતી સૂચિત કરીએ છીએ.';
+  String get privacyPolicyDescription => 'એલ. વી. પ્રસાદ આઈ ઇન્સ્ટિટ્યૂટ, તેની પેટાકંપનીઓ, સહયોગીઓ અને સંલગ્ન કંપનીઓ (સામૂહિક રીતે "એલવીપીઇઆઈ", "અમને", "અમે" તરીકે ઓળખાય છે) તમારા અધિકારક્ષેત્રના કાયદા અનુસાર તમારા વ્યક્તિગત ડેટાની પ્રક્રિયા કરવા માટે પ્રતિબદ્ધ છે. અમે તમને વ્યક્તિગત ડેટાની પ્રક્રિયા વિશે નીચેની માહિતી સૂચિત કરીએ છીએ.';
 
   @override
-  String get privacyPolicyPersonalDataTitle =>
-      'એકત્રિત/પ્રક્રિયા કરાયેલ વ્યક્તિગત ડેટા ઘટકોઃ';
+  String get privacyPolicyPersonalDataTitle => 'એકત્રિત/પ્રક્રિયા કરાયેલ વ્યક્તિગત ડેટા ઘટકોઃ';
 
   @override
-  String get privacyPolicyPersonalDataDescription =>
-      'તમે અને તમારા જોડાણોના વ્યક્તિગત ડેટા જેમ કે (આમાંના કેટલાક ડેટા વૈકલ્પિક હશે) મોબાઇલ નંબર, નામ, જન્મ તારીખ, લિંગ (પુરુષ/સ્ત્રી), સરનામું (પિન કોડ), દર્દી આઈડી, જોડાણ, આંખના ટ્રાઇએજ પ્રશ્નાવલીના જવાબો, આંખના ટ્રાઇએજ અહેવાલ, આંખની છબીઓ, તમારી આંખની છબી સામે ટેગ કરેલા લક્ષણો, ફોટોગ્રાફ, સરનામું, જિલ્લાનું નામ (જિલ્લા કોડ સહિત), રાજ્યનું નામ (રાજ્ય કોડ સહિત), પેટા જિલ્લાનું નામ, ગામનું નામ, નગરનું નામ, ઇમેઇલ સરનામું, છેલ્લું નામ, મધ્ય નામ, રક્ત જૂથ, ઊંચાઈ, વજન, વ્યવસાય, આભા વિગતો (તમારા દ્વારા પ્રદાન કરેલ), તમારી એપ્લિકેશનની પરવાનગીઓના આધારે એપ્લિકેશનને ઍક્સેસ કરવા માટે કેમેરા, જીપીએસ સ્થાન ગેલેરી, સંપૂર્ણ નેટવર્ક ઍક્સેસ, નેટવર્ક જોડાણો, ઉપકરણ માહિતી જુઓ.';
+  String get privacyPolicyPersonalDataDescription => 'તમે અને તમારા જોડાણોના વ્યક્તિગત ડેટા જેમ કે (આમાંના કેટલાક ડેટા વૈકલ્પિક હશે) મોબાઇલ નંબર, નામ, જન્મ તારીખ, લિંગ (પુરુષ/સ્ત્રી), સરનામું (પિન કોડ), દર્દી આઈડી, જોડાણ, આંખના ટ્રાઇએજ પ્રશ્નાવલીના જવાબો, આંખના ટ્રાઇએજ અહેવાલ, આંખની છબીઓ, તમારી આંખની છબી સામે ટેગ કરેલા લક્ષણો, ફોટોગ્રાફ, સરનામું, જિલ્લાનું નામ (જિલ્લા કોડ સહિત), રાજ્યનું નામ (રાજ્ય કોડ સહિત), પેટા જિલ્લાનું નામ, ગામનું નામ, નગરનું નામ, ઇમેઇલ સરનામું, છેલ્લું નામ, મધ્ય નામ, રક્ત જૂથ, ઊંચાઈ, વજન, વ્યવસાય, આભા વિગતો (તમારા દ્વારા પ્રદાન કરેલ), તમારી એપ્લિકેશનની પરવાનગીઓના આધારે એપ્લિકેશનને ઍક્સેસ કરવા માટે કેમેરા, જીપીએસ સ્થાન ગેલેરી, સંપૂર્ણ નેટવર્ક ઍક્સેસ, નેટવર્ક જોડાણો, ઉપકરણ માહિતી જુઓ.';
 
   @override
-  String get privacyPolicyPurposeOfProcessingTitle =>
-      'પ્રક્રિયાનો હેતુઃ અમે નીચે આપેલા હેતુઓ માટે તમારા દ્વારા પ્રદાન કરવામાં આવેલા વ્યક્તિગત ડેટાની પ્રક્રિયા કરીએ છીએ જેમ કેઃ';
+  String get privacyPolicyPurposeOfProcessingTitle => 'પ્રક્રિયાનો હેતુઃ અમે નીચે આપેલા હેતુઓ માટે તમારા દ્વારા પ્રદાન કરવામાં આવેલા વ્યક્તિગત ડેટાની પ્રક્રિયા કરીએ છીએ જેમ કેઃ';
 
   @override
-  String get privacyPolicyPurposeOfProcessingDescription =>
-      'તમને અને તમારા જોડાણો માટે (તમારા દ્વારા પૂરા પાડવામાં આવેલ) આંખ સંબંધિત ઓનલાઇન આરોગ્ય તપાસ માટે અમારી એપ્લિકેશન અને તેની સુવિધાઓને ઍક્સેસ કરવા માટે તમને સક્ષમ કરવા માટે. | આંખ સંબંધિત કોઈપણ બીમારી/આરોગ્ય સમસ્યાઓના કિસ્સામાં, લાગુ પડે તે પ્રમાણે, એલ. વી. પી. ઈ. આઈ. હેઠળ વિઝન ટેકનિશિયન, નેત્રરોગ વિશેષજ્ઞોનો સંપર્ક કરવા માટે તમને સક્ષમ કરવા માટે. | તમારા સ્વાસ્થ્ય પરામર્શ અને નિદાનના ભાગ રૂપે કોઈપણ આંખના સ્વાસ્થ્ય સંબંધિત માહિતી (અહેવાલો વગેરે સહિત) પ્રદાન કરવા માટે અને સ્વાસ્થ્ય સંબંધિત ચિંતાઓના ભાગ રૂપે તમારો અથવા તમારા જોડાણોનો સંપર્ક કરવા માટે.| વધુ સારા નિદાન માટે અમારા અધિકૃત એલ. વી. પી. ઈ. આઈ. નેત્રરોગ વિશેષજ્ઞો/ડોકટરો સાથે તમારી આંખના સ્વાસ્થ્યની માહિતી શેર કરવા માટે અને જો તમે સારવાર માટે એલ. વી. પી. ઈ. આઈ. ડોકટરો સુધી પહોંચવામાં/જાણ કરવામાં અસમર્થ હોવ તો આંખની સમસ્યાની ગંભીરતાને આધારે ગ્રામ પ્રમુખ/મેયર વગેરે (જ્યાં લાગુ હોય ત્યાં તમારા જી. પી. એસ. સ્થાનના આધારે) સાથે શેર કરવા માટે.|  તમારી નજીકના એલ. વી. પી. ઈ. આઈ. સાથે જોડાયેલા આંખના ક્લિનિક્સ/હોસ્પિટલોની સૂચિ પ્રદાન કરવા માટે, જેથી તમે આંખ સંબંધિત કોઈ પણ સમસ્યાના કિસ્સામાં સંપર્ક કરી શકો. | આંખની છબી, આંખની છબી સંબંધિત લક્ષણો, ઉંમર, રક્ત જૂથ, કોઈપણ ઓળખકર્તા વિનાનું સ્થાન જેવી માહિતીનો ઉપયોગ કરવા માટે ભવિષ્યમાં યોગ્ય નિદાન પ્રદાન કરવાના હેતુથી અમારા મશીન લર્નિંગ અથવા આર્ટિફિશિયલ ઇન્ટેલિજન્સ મોડેલ્સને તાલીમ આપવામાં મદદ કરવા માટે. | આંખના સ્વાસ્થ્ય માટે જાગૃતિ લાવવા માટે રીમાઇન્ડર, સંદેશાવ્યવહાર, ઝુંબેશ મેલર્સ મોકલવા માટે.';
+  String get privacyPolicyPurposeOfProcessingDescription => 'તમને અને તમારા જોડાણો માટે (તમારા દ્વારા પૂરા પાડવામાં આવેલ) આંખ સંબંધિત ઓનલાઇન આરોગ્ય તપાસ માટે અમારી એપ્લિકેશન અને તેની સુવિધાઓને ઍક્સેસ કરવા માટે તમને સક્ષમ કરવા માટે. | આંખ સંબંધિત કોઈપણ બીમારી/આરોગ્ય સમસ્યાઓના કિસ્સામાં, લાગુ પડે તે પ્રમાણે, એલ. વી. પી. ઈ. આઈ. હેઠળ વિઝન ટેકનિશિયન, નેત્રરોગ વિશેષજ્ઞોનો સંપર્ક કરવા માટે તમને સક્ષમ કરવા માટે. | તમારા સ્વાસ્થ્ય પરામર્શ અને નિદાનના ભાગ રૂપે કોઈપણ આંખના સ્વાસ્થ્ય સંબંધિત માહિતી (અહેવાલો વગેરે સહિત) પ્રદાન કરવા માટે અને સ્વાસ્થ્ય સંબંધિત ચિંતાઓના ભાગ રૂપે તમારો અથવા તમારા જોડાણોનો સંપર્ક કરવા માટે.| વધુ સારા નિદાન માટે અમારા અધિકૃત એલ. વી. પી. ઈ. આઈ. નેત્રરોગ વિશેષજ્ઞો/ડોકટરો સાથે તમારી આંખના સ્વાસ્થ્યની માહિતી શેર કરવા માટે અને જો તમે સારવાર માટે એલ. વી. પી. ઈ. આઈ. ડોકટરો સુધી પહોંચવામાં/જાણ કરવામાં અસમર્થ હોવ તો આંખની સમસ્યાની ગંભીરતાને આધારે ગ્રામ પ્રમુખ/મેયર વગેરે (જ્યાં લાગુ હોય ત્યાં તમારા જી. પી. એસ. સ્થાનના આધારે) સાથે શેર કરવા માટે.|  તમારી નજીકના એલ. વી. પી. ઈ. આઈ. સાથે જોડાયેલા આંખના ક્લિનિક્સ/હોસ્પિટલોની સૂચિ પ્રદાન કરવા માટે, જેથી તમે આંખ સંબંધિત કોઈ પણ સમસ્યાના કિસ્સામાં સંપર્ક કરી શકો. | આંખની છબી, આંખની છબી સંબંધિત લક્ષણો, ઉંમર, રક્ત જૂથ, કોઈપણ ઓળખકર્તા વિનાનું સ્થાન જેવી માહિતીનો ઉપયોગ કરવા માટે ભવિષ્યમાં યોગ્ય નિદાન પ્રદાન કરવાના હેતુથી અમારા મશીન લર્નિંગ અથવા આર્ટિફિશિયલ ઇન્ટેલિજન્સ મોડેલ્સને તાલીમ આપવામાં મદદ કરવા માટે. | આંખના સ્વાસ્થ્ય માટે જાગૃતિ લાવવા માટે રીમાઇન્ડર, સંદેશાવ્યવહાર, ઝુંબેશ મેલર્સ મોકલવા માટે.';
 
   @override
   String get privacyPolicyDataRecipientsTitle => 'ડેટા પ્રાપ્તકર્તાઓ/સુલભઃ';
 
   @override
-  String get privacyPolicyDataRecipientsDescription =>
-      'તમારા દ્વારા શેર કરવામાં આવેલ વ્યક્તિગત ડેટા (સંવેદનશીલ વ્યક્તિગત ડેટા સહિત) અધિકૃત એલ. વી. પી. ઈ. આઈ. કર્મચારીઓ જેમ કે ડોકટરો/નેત્રરોગ વિશેષજ્ઞો, વિઝન ટેકનિશિયન, વિઝન ગાર્ડિયન્સ, એલ. વી. પી. ઈ. આઈ. ના પ્રતિનિધિઓ, આંતરિક/બાહ્ય ઓડિટર્સ, જ્યાં લાગુ હોય ત્યાં સરકારી અધિકારીઓ અને અમારા અધિકૃત સેવા પ્રદાતા ઇન્ફોસિસ માટે સુલભ હશે.';
+  String get privacyPolicyDataRecipientsDescription => 'તમારા દ્વારા શેર કરવામાં આવેલ વ્યક્તિગત ડેટા (સંવેદનશીલ વ્યક્તિગત ડેટા સહિત) અધિકૃત એલ. વી. પી. ઈ. આઈ. કર્મચારીઓ જેમ કે ડોકટરો/નેત્રરોગ વિશેષજ્ઞો, વિઝન ટેકનિશિયન, વિઝન ગાર્ડિયન્સ, એલ. વી. પી. ઈ. આઈ. ના પ્રતિનિધિઓ, આંતરિક/બાહ્ય ઓડિટર્સ, જ્યાં લાગુ હોય ત્યાં સરકારી અધિકારીઓ અને અમારા અધિકૃત સેવા પ્રદાતા ઇન્ફોસિસ માટે સુલભ હશે.';
 
   @override
   String get privacyPolicyDataTransferTitle => 'ડેટા ટ્રાન્સફર અને સંગ્રહઃ';
 
   @override
-  String get privacyPolicyDataTransferDescription =>
-      'તમારા દ્વારા શેર કરવામાં આવેલ વ્યક્તિગત ડેટા અમારા આંતરિક સર્વર પર સંગ્રહિત થશે, જે ભારતમાં અમારા અધિકૃત સેવા પ્રદાતાના સર્વર છે.';
+  String get privacyPolicyDataTransferDescription => 'તમારા દ્વારા શેર કરવામાં આવેલ વ્યક્તિગત ડેટા અમારા આંતરિક સર્વર પર સંગ્રહિત થશે, જે ભારતમાં અમારા અધિકૃત સેવા પ્રદાતાના સર્વર છે.';
 
   @override
   String get privacyPolicyDataSecurityTitle => 'ડેટા સુરક્ષાઃ';
 
   @override
-  String get privacyPolicyDataSecurityDescription =>
-      'LVPEI તમારા વ્યક્તિગત ડેટાની સુરક્ષા માટે વહીવટી, ભૌતિક સુરક્ષા અને તકનીકી નિયંત્રણો સહિત વાજબી અને યોગ્ય સુરક્ષા પદ્ધતિઓ અને પ્રક્રિયાઓ અપનાવે છે.';
+  String get privacyPolicyDataSecurityDescription => 'LVPEI તમારા વ્યક્તિગત ડેટાની સુરક્ષા માટે વહીવટી, ભૌતિક સુરક્ષા અને તકનીકી નિયંત્રણો સહિત વાજબી અને યોગ્ય સુરક્ષા પદ્ધતિઓ અને પ્રક્રિયાઓ અપનાવે છે.';
 
   @override
   String get privacyPolicyDataRetentionTitle => 'ડેટા જાળવણીઃ';
 
   @override
-  String get privacyPolicyDataRetentionDescription =>
-      'વ્યક્તિગત ડેટા કે જેને હવે કાનૂની અને વ્યવસાયિક જરૂરિયાતો અનુસાર જાળવી રાખવાની જરૂર નથી, તેનો સુરક્ષિત રીતે નિકાલ કરવામાં આવશે.';
+  String get privacyPolicyDataRetentionDescription => 'વ્યક્તિગત ડેટા કે જેને હવે કાનૂની અને વ્યવસાયિક જરૂરિયાતો અનુસાર જાળવી રાખવાની જરૂર નથી, તેનો સુરક્ષિત રીતે નિકાલ કરવામાં આવશે.';
 
   @override
   String get privacyPolicyDataSubjectRightsTitle => 'ડેટા વિષય અધિકારોઃ';
 
   @override
-  String get privacyPolicyDataSubjectRightsDescription =>
-      'તમે કોઈપણ સમયે તમારી વ્યક્તિગત માહિતીને ઍક્સેસ કરવા અને સુધારવા માટે હકદાર છો. કોઈપણ વિનંતીઓ, મુદ્દાઓ, ચિંતાઓ અથવા પ્રશ્નોના કિસ્સામાં તમે DSR> માટે સામાન્ય મેઇલ ID પ્રદાન કરવા માટે <LVPEI પર ઇમેઇલ મોકલીને LV પ્રસાદ ઓફિસનો સંપર્ક કરી શકો છો.';
+  String get privacyPolicyDataSubjectRightsDescription => 'તમે કોઈપણ સમયે તમારી વ્યક્તિગત માહિતીને ઍક્સેસ કરવા અને સુધારવા માટે હકદાર છો. કોઈપણ વિનંતીઓ, મુદ્દાઓ, ચિંતાઓ અથવા પ્રશ્નોના કિસ્સામાં તમે DSR> માટે સામાન્ય મેઇલ ID પ્રદાન કરવા માટે <LVPEI પર ઇમેઇલ મોકલીને LV પ્રસાદ ઓફિસનો સંપર્ક કરી શકો છો.';
 
   @override
   String get privacyPolicyRightToWithdrawTitle => 'ઉપાડનો અધિકારઃ';
 
   @override
-  String get privacyPolicyRightToWithdrawDescription =>
-      'જ્યાં અમે તમારી સંમતિના આધારે તમારા વ્યક્તિગત ડેટાની પ્રક્રિયા કરીએ છીએ, ત્યાં તમે ભવિષ્ય માટે કોઈપણ સમયે લાગુ DP કાયદા અનુસાર પ્રક્રિયા માટે તમારી સંમતિ પાછી ખેંચી શકો છો. આ તમારા ઉપાડ પહેલાં કોઈપણ પ્રક્રિયા કામગીરીની કાયદેસરતાને અસર કરશે નહીં. તમારી સંમતિ પાછી ખેંચવા માટે, તમે DSR> માટે સામાન્ય મેઇલ ID પ્રદાન કરવા માટે <LVPEI ને ઇમેઇલ મોકલી શકો છો.';
+  String get privacyPolicyRightToWithdrawDescription => 'જ્યાં અમે તમારી સંમતિના આધારે તમારા વ્યક્તિગત ડેટાની પ્રક્રિયા કરીએ છીએ, ત્યાં તમે ભવિષ્ય માટે કોઈપણ સમયે લાગુ DP કાયદા અનુસાર પ્રક્રિયા માટે તમારી સંમતિ પાછી ખેંચી શકો છો. આ તમારા ઉપાડ પહેલાં કોઈપણ પ્રક્રિયા કામગીરીની કાયદેસરતાને અસર કરશે નહીં. તમારી સંમતિ પાછી ખેંચવા માટે, તમે DSR> માટે સામાન્ય મેઇલ ID પ્રદાન કરવા માટે <LVPEI ને ઇમેઇલ મોકલી શકો છો.';
 
   @override
-  String get privacyPolicyAcknowledgement =>
-      'નીચે આપેલા બટન પર ક્લિક કરીને, તમે આથી સ્વીકારો છો અને સમજો છો કે સંવેદનશીલ વ્યક્તિગત ડેટા સહિત તમારો વ્યક્તિગત ડેટા ઉપરોક્ત રીતે એકત્રિત અને પ્રક્રિયા કરી શકાય છે અને આથી ઉપરોક્ત હેતુઓ માટે તેની સંમતિ આપો છો. તમે એ પણ સ્વીકારો છો કે સંવેદનશીલ વ્યક્તિગત ડેટા (તમારા સિવાય) સહિત કોઈપણ વ્યક્તિગત ડેટા તમે શેર કર્યો છે તે તેમની પાસેથી યોગ્ય સંમતિ લીધા પછી જ છે. તમે એ પણ સ્વીકારો છો કે તમે કોઈપણ વ્યક્તિગત ડેટા (સંવેદનશીલ વ્યક્તિગત ડેટા સહિત) શેર કરશો નહીં જે ઉપરોક્ત હેતુઓ માટે જરૂરી નથી. તમે એ પણ સ્વીકારો છો કે જ્યારે તમે સગીરનો વ્યક્તિગત ડેટા તેમના માતાપિતા/કાનૂની વાલી તરીકે શેર કરી રહ્યાં હોવ ત્યારે તમે ઉપર જણાવ્યા મુજબ તેમના ડેટા સંગ્રહ અને પ્રક્રિયા માટે સંમતિ આપો છો.';
+  String get privacyPolicyAcknowledgement => 'નીચે આપેલા બટન પર ક્લિક કરીને, તમે આથી સ્વીકારો છો અને સમજો છો કે સંવેદનશીલ વ્યક્તિગત ડેટા સહિત તમારો વ્યક્તિગત ડેટા ઉપરોક્ત રીતે એકત્રિત અને પ્રક્રિયા કરી શકાય છે અને આથી ઉપરોક્ત હેતુઓ માટે તેની સંમતિ આપો છો. તમે એ પણ સ્વીકારો છો કે સંવેદનશીલ વ્યક્તિગત ડેટા (તમારા સિવાય) સહિત કોઈપણ વ્યક્તિગત ડેટા તમે શેર કર્યો છે તે તેમની પાસેથી યોગ્ય સંમતિ લીધા પછી જ છે. તમે એ પણ સ્વીકારો છો કે તમે કોઈપણ વ્યક્તિગત ડેટા (સંવેદનશીલ વ્યક્તિગત ડેટા સહિત) શેર કરશો નહીં જે ઉપરોક્ત હેતુઓ માટે જરૂરી નથી. તમે એ પણ સ્વીકારો છો કે જ્યારે તમે સગીરનો વ્યક્તિગત ડેટા તેમના માતાપિતા/કાનૂની વાલી તરીકે શેર કરી રહ્યાં હોવ ત્યારે તમે ઉપર જણાવ્યા મુજબ તેમના ડેટા સંગ્રહ અને પ્રક્રિયા માટે સંમતિ આપો છો.';
 
   @override
   String get privacyPolicyBottomAppBarLabel => 'ગોપનીયતા નીતિ સ્વીકારવામાં આવી';
@@ -349,8 +316,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get helpAndSupportReachTitle => 'અમારો સંપર્ક કરો';
 
   @override
-  String get assessmentAndTestsSubtitle =>
-      'અહીં અત્યાર સુધી કરવામાં આવેલા મૂલ્યાંકનોની ઝડપી ઝાંખી છે.';
+  String get assessmentAndTestsSubtitle => 'અહીં અત્યાર સુધી કરવામાં આવેલા મૂલ્યાંકનોની ઝડપી ઝાંખી છે.';
 
   @override
   String get assessmentAndTestsReportsNotFound => 'કોઈ અહેવાલો મળ્યા નથી';
@@ -359,8 +325,7 @@ class AppLocalizationsGu extends AppLocalizations {
   String get eyeAssessmentTitle => 'આંખનું મૂલ્યાંકન';
 
   @override
-  String get eyeAssessmentSubtitle =>
-      'તમારી, તમારા મિત્રો અને પરિવારના સભ્યોની આંખની સમસ્યાઓનું થોડા પગલાંઓમાં મૂલ્યાંકન કરાવો. તમને તમારી આંખની સમસ્યાઓથી સંબંધિત લક્ષણોને સમજવા માટે પ્રશ્નો પૂછવામાં આવશે અને ત્યારબાદ દ્રશ્ય પરીક્ષણો કરવામાં આવશે.';
+  String get eyeAssessmentSubtitle => 'તમારી, તમારા મિત્રો અને પરિવારના સભ્યોની આંખની સમસ્યાઓનું થોડા પગલાંઓમાં મૂલ્યાંકન કરાવો. તમને તમારી આંખની સમસ્યાઓથી સંબંધિત લક્ષણોને સમજવા માટે પ્રશ્નો પૂછવામાં આવશે અને ત્યારબાદ દ્રશ્ય પરીક્ષણો કરવામાં આવશે.';
 
   @override
   String get eyeAssessmentGetMemberLabel => 'સભ્ય બદલો';
@@ -369,12 +334,10 @@ class AppLocalizationsGu extends AppLocalizations {
   String get eyeAssessmentProceedButton => 'આગળ વધો';
 
   @override
-  String get eyeAssessmentBrightnessLabel =>
-      'તેજસ્વીતા 80 ટકા પર સેટ કરવામાં આવી છે';
+  String get eyeAssessmentBrightnessLabel => 'તેજસ્વીતા 80 ટકા પર સેટ કરવામાં આવી છે';
 
   @override
-  String get eyeAssessmentBrightnessError =>
-      'મહેરબાની કરીને હાથ વડે તેજને 80 ટકા પર સેટ કરો';
+  String get eyeAssessmentBrightnessError => 'મહેરબાની કરીને હાથ વડે તેજને 80 ટકા પર સેટ કરો';
 
   @override
   String get eyeAssessmentUnsupportedQuestion => 'પ્રશ્ન હજુ સુધી આધારભૂત નથી';
@@ -392,24 +355,16 @@ class AppLocalizationsGu extends AppLocalizations {
   String get eyeAssessmentPopUpNoButton => 'ના.';
 
   @override
-  String get visualAcuityTestInstructionOne =>
-      'સારી રીતે પ્રકાશમાં આરામથી બેસો. તમે તેજમાં અચાનક ફેરફાર અનુભવી શકો છો, ચિંતા કરશો નહીં કે શ્રેષ્ઠ પરિણામ આપવા માટે સ્ક્રીન ઓટો-બ્રાઇટનેસ પર સેટ થઈ ગઈ છે.';
+  String get visualAcuityTestInstructionOne => 'સારી રીતે પ્રકાશમાં આરામથી બેસો. તમે તેજમાં અચાનક ફેરફાર અનુભવી શકો છો, ચિંતા કરશો નહીં કે શ્રેષ્ઠ પરિણામ આપવા માટે સ્ક્રીન ઓટો-બ્રાઇટનેસ પર સેટ થઈ ગઈ છે.';
 
   @override
-  String get visualAcuityTestInstructionTwo =>
-      'ખાતરી કરો કે તમે ઉપકરણને આંખના સ્તરે પકડો છો. જો તમે ચશ્મા અથવા કોન્ટેક્ટ લેન્સ પહેરો છો, તો તેને ચાલુ રાખો.';
+  String get visualAcuityTestInstructionTwo => 'ખાતરી કરો કે તમે ઉપકરણને આંખના સ્તરે પકડો છો. જો તમે ચશ્મા અથવા કોન્ટેક્ટ લેન્સ પહેરો છો, તો તેને ચાલુ રાખો.';
 
   @override
-  String get visualAcuityTestInstructionThree =>
-      'તમારી જાતને સ્ક્રીનથી 40 સે. મી. દૂર મૂકો. પરીક્ષણ સ્ક્રીનમાં અંતર બતાવવામાં આવશે.';
+  String get visualAcuityTestInstructionThree => 'તમારી જાતને સ્ક્રીનથી 40 સે. મી. દૂર મૂકો. પરીક્ષણ સ્ક્રીનમાં અંતર બતાવવામાં આવશે.';
 
   @override
-  String get visualAcuityTestInstructionFour =>
-      'જો તમે ચશ્મા પહેરીને પરીક્ષણ કરી રહ્યા હોવ, તો જ્યારે માત્ર એક આંખની તપાસ કરવામાં આવે ત્યારે ચશ્મા પર તમારા હાથથી એક આંખને ઢાંકી દો.';
-
-  @override
-  String get visualAcuityTestDistanceInstruction =>
-      'Position the camera 40cm away from the eye.';
+  String get visualAcuityTestInstructionFour => 'જો તમે ચશ્મા પહેરીને પરીક્ષણ કરી રહ્યા હોવ, તો જ્યારે માત્ર એક આંખની તપાસ કરવામાં આવે ત્યારે ચશ્મા પર તમારા હાથથી એક આંખને ઢાંકી દો.';
 
   @override
   String get skipAndProceedButton => 'સ્કિપ કરો અને સ્કેન માટે આગળ વધો';
@@ -442,44 +397,34 @@ class AppLocalizationsGu extends AppLocalizations {
   String get eyeAssessmentResults => 'મૂલ્યાંકન પરિણામો';
 
   @override
-  String get eyeAssessmentCompleteSteps =>
-      'પરિણામો જોવા માટે તમામ પગલાંઓ પૂર્ણ કરો';
+  String get eyeAssessmentCompleteSteps => 'પરિણામો જોવા માટે તમામ પગલાંઓ પૂર્ણ કરો';
 
   @override
-  String get eyeAssessmentToolTip =>
-      'મહેરબાની કરીને ખાતરી કરો કે ફ્લેશ બંધ છે અને તેજ 80 ટકા પર સેટ છે';
+  String get eyeAssessmentToolTip => 'મહેરબાની કરીને ખાતરી કરો કે ફ્લેશ બંધ છે અને તેજ 80 ટકા પર સેટ છે';
 
   @override
-  String get eyeScanInstructionOne =>
-      'ફ્રેમ પર ચહેરો યોગ્ય રીતે મૂકીને કેમેરાને પકડી રાખો.';
+  String get eyeScanInstructionOne => 'ફ્રેમ પર ચહેરો યોગ્ય રીતે મૂકીને કેમેરાને પકડી રાખો.';
 
   @override
-  String get eyeScanInstructionTwo =>
-      'તમારા ફોનના પાછળના કેમેરાનો ઉપયોગ કરીને આંખોની છબી લો.';
+  String get eyeScanInstructionTwo => 'તમારા ફોનના પાછળના કેમેરાનો ઉપયોગ કરીને આંખોની છબી લો.';
 
   @override
-  String get eyeScanInstructionThree =>
-      'ખાતરી કરો કે ફ્લેશ સાથે સારી રીતે પ્રકાશિત વિસ્તારમાં રહો.';
+  String get eyeScanInstructionThree => 'ખાતરી કરો કે ફ્લેશ સાથે સારી રીતે પ્રકાશિત વિસ્તારમાં રહો.';
 
   @override
-  String get eyeScanInstructionFour =>
-      'વધુ સારી રીતે કેપ્ચર કરવા અને સ્પષ્ટતા માટે, ચિત્રને ક્લિક કરવા માટે કોઈ બીજાને કહો.';
+  String get eyeScanInstructionFour => 'વધુ સારી રીતે કેપ્ચર કરવા અને સ્પષ્ટતા માટે, ચિત્રને ક્લિક કરવા માટે કોઈ બીજાને કહો.';
 
   @override
-  String get eyeScanInstructionFive =>
-      'ચિત્ર લેતી વખતે તમારા હાથથી એક આંખને ઢાંકી દો અને બીજી આંખથી સીધું આગળ જુઓ.';
+  String get eyeScanInstructionFive => 'ચિત્ર લેતી વખતે તમારા હાથથી એક આંખને ઢાંકી દો અને બીજી આંખથી સીધું આગળ જુઓ.';
 
   @override
-  String get eyeScanInstructionSix =>
-      'ચિત્ર શરૂ કરતા પહેલા પેનલની અંદર આંખને કેન્દ્રિત કરો.';
+  String get eyeScanInstructionSix => 'ચિત્ર શરૂ કરતા પહેલા પેનલની અંદર આંખને કેન્દ્રિત કરો.';
 
   @override
-  String get eyeScanInstructionSeven =>
-      'જ્યાં સુધી \'બીપ\' અવાજ ફોટાના અંતનો સંકેત ન આપે ત્યાં સુધી ફ્લેશ બંધ ન થાય ત્યાં સુધી આંખો ખુલ્લી રાખો.';
+  String get eyeScanInstructionSeven => 'જ્યાં સુધી \'બીપ\' અવાજ ફોટાના અંતનો સંકેત ન આપે ત્યાં સુધી ફ્લેશ બંધ ન થાય ત્યાં સુધી આંખો ખુલ્લી રાખો.';
 
   @override
-  String get eyeAssessmentNote =>
-      'નોંધ: અહીં બતાવેલ છબીઓ માત્ર સંકેત માટે છે. તેઓ વાસ્તવિક જીવનમાં સમાન રીતે દેખાતા નથી.';
+  String get eyeAssessmentNote => 'નોંધ: અહીં બતાવેલ છબીઓ માત્ર સંકેત માટે છે. તેઓ વાસ્તવિક જીવનમાં સમાન રીતે દેખાતા નથી.';
 
   @override
   String get agreeButton => 'હું સંમત છું.';
@@ -500,22 +445,19 @@ class AppLocalizationsGu extends AppLocalizations {
   String get eyeCaptureCompletionDialogHeading => 'પરીક્ષણ પૂર્ણ થયું';
 
   @override
-  String get eyeCaptureCompletionDialogBody =>
-      'તમે પરીક્ષા પૂર્ણ કરી લીધી છે. પરિણામ જોવા માટે મહેરબાની કરીને નીચેના બટન પર ક્લિક કરો.';
+  String get eyeCaptureCompletionDialogBody => 'તમે પરીક્ષા પૂર્ણ કરી લીધી છે. પરિણામ જોવા માટે મહેરબાની કરીને નીચેના બટન પર ક્લિક કરો.';
 
   @override
   String get eyeCaptureCompletionDialogViewResult => 'પરિણામ જુઓ';
 
   @override
-  String get eyeCaptureTriageSavedLocally =>
-      'ટ્રાઇએજને સ્થાનિક રીતે સાચવવામાં આવ્યું';
+  String get eyeCaptureTriageSavedLocally => 'ટ્રાઇએજને સ્થાનિક રીતે સાચવવામાં આવ્યું';
 
   @override
-  String get visualAcuityTestResults => 'વિઝ્યુઅલ એક્યુટી ટેસ્ટ પરિણામો';
+  String get visualAcuityTestResults => 'દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ પરિણામો';
 
   @override
-  String get assessmentResultPageMoreDetailsText =>
-      'વધુ વિગતો માટે નજીકના વિઝન સેન્ટરની મુલાકાત લો. અમારા વિઝન ટેકનિશિયન સાથે વાત કરવા માટે ટોલ ફ્રી નંબર પર કૉલ કરો.';
+  String get assessmentResultPageMoreDetailsText => 'વધુ વિગતો માટે નજીકના વિઝન સેન્ટરની મુલાકાત લો. અમારા વિઝન ટેકનિશિયન સાથે વાત કરવા માટે ટોલ ફ્રી નંબર પર કૉલ કરો.';
 
   @override
   String get assessmentReportButton => 'આંખ મૂલ્યાંકન અહેવાલ';
@@ -584,20 +526,19 @@ class AppLocalizationsGu extends AppLocalizations {
   String get submitButton => 'સબમિટ કરો';
 
   @override
-  String get swipeGestureError =>
-      'ખોટો સ્વાઇપ! મહેરબાની કરીને ફરીથી પ્રયતન કરો.';
+  String get swipeGestureError => 'ખોટો સ્વાઇપ! મહેરબાની કરીને ફરીથી પ્રયતન કરો.';
 
   @override
   String get swipeGestureCardText => 'પ્રતીકની દિશામાં સ્વાઇપ કરો';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'મૂલ્યાંકન\nપ્રશ્નો';
+  String get assessmentResultCardAssessmentQuestions => 'મૂલ્યાંકન\r\nપ્રશ્નો';
 
   @override
-  String get assessmentResultCardAcuityTest => 'ઉગ્રતા\nપરીક્ષણ';
+  String get assessmentResultCardAcuityTest => 'ઉગ્રતા\r\nપરીક્ષણ';
 
   @override
-  String get assessmentResultCardEyeScan => 'આંખ\nસ્કેન';
+  String get assessmentResultCardEyeScan => 'આંખ\r\nસ્કેન';
 
   @override
   String get viewReportButton => 'રિપોર્ટ જુઓ';
@@ -624,22 +565,19 @@ class AppLocalizationsGu extends AppLocalizations {
   String get homeTriageCardTitle => 'આપણા આંખો સૌથી મૂલ્યવાન સંપત્તિ છે.';
 
   @override
-  String get homeTriageCardDescription =>
-      'આંખના સમસ્યાઓને રોકવા સમયે તેની ટેસ્ટિંગ કરો.';
+  String get homeTriageCardDescription => 'આંખના સમસ્યાઓને રોકવા સમયે તેની ટેસ્ટિંગ કરો.';
 
   @override
   String get homeTriageCardTest => 'આંખ ટેસ્ટ શરૂ કરો';
 
   @override
-  String get homeHelplineCardDescrition =>
-      'અચાનક દૃષ્ટિ નુકશાન થતાં, આ આપત્તિ હેલ્પલાઇનને કોલ કરો';
+  String get homeHelplineCardDescrition => 'અચાનક દૃષ્ટિ નુકશાન થતાં, આ આપત્તિ હેલ્પલાઇનને કોલ કરો';
 
   @override
   String get inviteCardTitle => 'અન્યોને આમંત્રિત કરો';
 
   @override
-  String get inviteCardDescription =>
-      '5 મિત્રો અને પરિવારના સભ્યોને આમંત્રિત કરો જેથી તેઓ તેમની આંખ મૂલ્યાંકન કરી શકે અને ભવિષ્યમાં આંખની સમસ્યાઓને રોકી શકે.';
+  String get inviteCardDescription => '5 મિત્રો અને પરિવારના સભ્યોને આમંત્રિત કરો જેથી તેઓ તેમની આંખ મૂલ્યાંકન કરી શકે અને ભવિષ્યમાં આંખની સમસ્યાઓને રોકી શકે.';
 
   @override
   String get inviteCardInvitation => 'હવે આમંત્રિત કરો';
@@ -678,6 +616,9 @@ class AppLocalizationsGu extends AppLocalizations {
   String get scannerTitle => 'સ્કેનર';
 
   @override
+  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
+
+  @override
   String get somethingWentWrong => 'Something went wrong.';
 
   @override
@@ -687,8 +628,62 @@ class AppLocalizationsGu extends AppLocalizations {
   String get noPreviewAvailable => 'No Preview Available';
 
   @override
+  String get privacyPolicyTitle => 'Privacy & Data Protection';
+
+  @override
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooClose => 'You are too close to the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooFar => 'You are too far from the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get myProfileABHAID => 'ABHA ID';
+
+  @override
+  String get myProfileEmail => 'Email';
+
+  @override
+  String get viewHistoryButton => 'View History';
+
+  @override
+  String get profilePagePersonalDetails => 'Personal Details';
+
+  @override
+  String get profilePageDateOfBirth => 'Date of Birth';
+
+  @override
+  String get profilePageGender => 'Gender';
+
+  @override
+  String get profilePageMobile => 'Mobile';
+
+  @override
+  String get profilePageHealthCardTitle => 'Health Card';
+
+  @override
   String get appointmentTitle => 'Appointments';
 
   @override
   String get appointmentSubtitle => 'All Appointments';
+
+  @override
+  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+
+  @override
+  String get bottomNavItemServices => 'Services';
+
+  @override
+  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+
+  @override
+  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+
+  @override
+  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+
+  @override
+  String get recentServicesRedEyeTest => 'Red Eye Test';
 }

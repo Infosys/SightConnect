@@ -189,7 +189,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get homeCarousal2Description =>
-      '\nচকুৰ 7টা সমস্যাৰ বাবে পৰীক্ষা কৰা হ \'বঃ \n \n• চকু ৰঙা হোৱা, \n• চকুৰ পৰা পানী ওলোৱা, \n• চকুত বগা দাগ পৰীক্ষা কৰা হ\' ব।';
+      '\r\nচকুৰ 7টা সমস্যাৰ বাবে পৰীক্ষা কৰা হ \'বঃ \r\n \r\n• চকু ৰঙা হোৱা, \r\n• চকুৰ পৰা পানী ওলোৱা, \r\n• চকুত বগা দাগ পৰীক্ষা কৰা হ\' ব।';
 
   @override
   String get homeCarousal3Title =>
@@ -197,7 +197,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get homeCarousal3Description =>
-      'কিন্তু এজন দৃষ্টিশক্তিৰ যত্ন লোৱা বিশেষজ্ঞই কৰিব পাৰে। \nপৰৱৰ্তী সময়ত জটিলতাৰ পৰা হাত \nসাৰিবলৈ সময়মতে চকুৰ সমস্যা চিনাক্ত \nআৰু চিকিৎসা কৰাব পাৰে।';
+      'কিন্তু এজন দৃষ্টিশক্তিৰ যত্ন লোৱা বিশেষজ্ঞই কৰিব পাৰে। \r\nপৰৱৰ্তী সময়ত জটিলতাৰ পৰা হাত \r\nসাৰিবলৈ সময়মতে চকুৰ সমস্যা চিনাক্ত \r\nআৰু চিকিৎসা কৰাব পাৰে।';
 
   @override
   String get myConnectionsTitle => 'মোৰ সদস্যসকল';
@@ -233,13 +233,13 @@ class AppLocalizationsAs extends AppLocalizations {
   String get appDrawerTitle => 'মেনু';
 
   @override
+  String get appDrawerHome => 'ঘৰ।';
+
+  @override
   String get appDrawerLanguageSelection => 'ভাষা নিৰ্বাচন';
 
   @override
   String get appDrawerAccessibility => 'অভিগম্যতা সংহতিসমূহ';
-
-  @override
-  String get appDrawerHome => 'ঘৰ।';
 
   @override
   String get appDrawerMyProfile => 'মোৰ প্ৰফাইল';
@@ -264,7 +264,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get aboutUsDescription =>
-      'Sightconnect হৈছে এক ব্যৱহাৰকাৰী-অনুকূল চকুৰ যত্নৰ এপ যিয়ে কলৰ জৰিয়তে আত্ম-মূল্যায়ন আৰু পৰামৰ্শ প্ৰদান কৰাত সহায় কৰে। \n\nআমাৰ লক্ষ্যৰ কেন্দ্ৰবিন্দু হৈছে চকুৰ যত্ন সকলোৰে বাবে সুলভ কৰাৰ প্ৰতিশ্ৰুতি। এই এপটো জীৱনৰ সকলো ক্ষেত্ৰৰ ব্যৱহাৰকাৰীৰ বাবে অন্তৰ্ভুক্তিমূলক আৰু সুগম হোৱাকৈ ডিজাইন কৰা হৈছে, তেওঁলোকৰ বয়স, কাৰিকৰী পটভূমি, আৰু সামাজিক বা অৰ্থনৈতিক পটভূমি নিৰ্বিশেষে। এপটো আৰু ইয়াৰ সমলবোৰ ইংৰাজী আৰু অন্যান্য স্থানীয় ভাষাত উপলব্ধ কৰা হৈছে। ই ব্যৱহাৰকাৰীসকলক নিজৰ চকুৰ মূল্যায়ন কৰাত আৰু সময়মতে চিকিৎসাৰ পৰামৰ্শ লাভ কৰাত সহায় কৰে। এপটোৱে আমাৰ ব্যৱহাৰকাৰীসকলক ব্যক্তিগত চকুৰ যত্নৰ সমাধান প্ৰদান কৰিবলৈ শেহতীয়া প্ৰযুক্তি আৰু সঁজুলি ব্যৱহাৰ কৰে। তেওঁলোকৰ জীৱনটো সহজ কৰি তুলিবলৈ ইয়াত বিভিন্ন ধৰণৰ বৈশিষ্ট্য আছে।';
+      'Sightconnect হৈছে এক ব্যৱহাৰকাৰী-অনুকূল চকুৰ যত্নৰ এপ যিয়ে কলৰ জৰিয়তে আত্ম-মূল্যায়ন আৰু পৰামৰ্শ প্ৰদান কৰাত সহায় কৰে। \r\n\r\nআমাৰ লক্ষ্যৰ কেন্দ্ৰবিন্দু হৈছে চকুৰ যত্ন সকলোৰে বাবে সুলভ কৰাৰ প্ৰতিশ্ৰুতি। এই এপটো জীৱনৰ সকলো ক্ষেত্ৰৰ ব্যৱহাৰকাৰীৰ বাবে অন্তৰ্ভুক্তিমূলক আৰু সুগম হোৱাকৈ ডিজাইন কৰা হৈছে, তেওঁলোকৰ বয়স, কাৰিকৰী পটভূমি, আৰু সামাজিক বা অৰ্থনৈতিক পটভূমি নিৰ্বিশেষে। এপটো আৰু ইয়াৰ সমলবোৰ ইংৰাজী আৰু অন্যান্য স্থানীয় ভাষাত উপলব্ধ কৰা হৈছে। ই ব্যৱহাৰকাৰীসকলক নিজৰ চকুৰ মূল্যায়ন কৰাত আৰু সময়মতে চিকিৎসাৰ পৰামৰ্শ লাভ কৰাত সহায় কৰে। এপটোৱে আমাৰ ব্যৱহাৰকাৰীসকলক ব্যক্তিগত চকুৰ যত্নৰ সমাধান প্ৰদান কৰিবলৈ শেহতীয়া প্ৰযুক্তি আৰু সঁজুলি ব্যৱহাৰ কৰে। তেওঁলোকৰ জীৱনটো সহজ কৰি তুলিবলৈ ইয়াত বিভিন্ন ধৰণৰ বৈশিষ্ট্য আছে।';
 
   @override
   String get aboutUsFeaturesTitle => 'বৈশিষ্ট্যসমূহ';
@@ -279,7 +279,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get privacyPolicyDescription =>
-      'এলভি প্ৰসাদ আই ইনষ্টিটিউট, ইয়াৰ সহযোগী, সহযোগী আৰু অনুমোদিত কোম্পানীসমূহ (সামূহিকভাৱে \'এলভিপিইআই\', \'আমাক\', \'আমি\' বুলি কোৱা হয়) আপোনাৰ অধিকাৰক্ষেত্ৰৰ আইন অনুসৰি আপোনাৰ ব্যক্তিগত তথ্য প্ৰক্ৰিয়া কৰিবলৈ প্ৰতিশ্ৰুতিবদ্ধ। আমি ইয়াৰ দ্বাৰা আপোনাক ব্যক্তিগত তথ্য প্ৰক্ৰিয়াকৰণৰ বিষয়ে তলত দিয়া তথ্যসমূহ অৱগত কৰো।';
+      'এলভি প্ৰসাদ আই ইনষ্টিটিউট, ইয়াৰ সহযোগী, সহযোগী আৰু অনুমোদিত কোম্পানীসমূহ (সামূহিকভাৱে "এলভিপিইআই", "আমাক", "আমি" বুলি কোৱা হয়) আপোনাৰ অধিকাৰক্ষেত্ৰৰ আইন অনুসৰি আপোনাৰ ব্যক্তিগত তথ্য প্ৰক্ৰিয়া কৰিবলৈ প্ৰতিশ্ৰুতিবদ্ধ। আমি ইয়াৰ দ্বাৰা আপোনাক ব্যক্তিগত তথ্য প্ৰক্ৰিয়াকৰণৰ বিষয়ে তলত দিয়া তথ্যসমূহ অৱগত কৰো।';
 
   @override
   String get privacyPolicyPersonalDataTitle =>
@@ -408,10 +408,6 @@ class AppLocalizationsAs extends AppLocalizations {
   @override
   String get visualAcuityTestInstructionFour =>
       'যদি আপুনি চশমা পিন্ধি পৰীক্ষা কৰি আছে, কেৱল এটা চকু পৰীক্ষা কৰাৰ সময়ত চশমাৰ ওপৰত আপোনাৰ হাতেৰে এটা চকু ঢাকি ৰাখক।';
-
-  @override
-  String get visualAcuityTestDistanceInstruction =>
-      'Position the camera 40cm away from the eye.';
 
   @override
   String get skipAndProceedButton => 'স্কিপ কৰক আৰু স্কেনলৈ আগবাঢ়ক';
@@ -592,13 +588,13 @@ class AppLocalizationsAs extends AppLocalizations {
   String get swipeGestureCardText => 'চিহ্নৰ দিশত চুইপ কৰক';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'মূল্যায়ন\nপ্ৰশ্ন';
+  String get assessmentResultCardAssessmentQuestions => 'মূল্যায়ন\r\nপ্ৰশ্ন';
 
   @override
-  String get assessmentResultCardAcuityTest => 'তীক্ষ্ণতা\nপৰীক্ষা';
+  String get assessmentResultCardAcuityTest => 'তীক্ষ্ণতা\r\nপৰীক্ষা';
 
   @override
-  String get assessmentResultCardEyeScan => 'চকু\nস্কেন কৰক';
+  String get assessmentResultCardEyeScan => 'চকু\r\nস্কেন কৰক';
 
   @override
   String get viewReportButton => 'প্ৰতিবেদন চাওক';
@@ -680,6 +676,10 @@ class AppLocalizationsAs extends AppLocalizations {
   String get scannerTitle => 'স্ক্যানাৰ';
 
   @override
+  String get visualAcuityTestDistanceInstruction =>
+      'Position the camera 40cm away from the eye.';
+
+  @override
   String get somethingWentWrong => 'Something went wrong.';
 
   @override
@@ -689,8 +689,68 @@ class AppLocalizationsAs extends AppLocalizations {
   String get noPreviewAvailable => 'No Preview Available';
 
   @override
+  String get privacyPolicyTitle => 'Privacy & Data Protection';
+
+  @override
+  String get privacyPolicyPurposeOfProcessingSubTitle =>
+      'We process the Personal Data provided by you for the below purposes such as:';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooClose =>
+      'You are too close to the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooFar =>
+      'You are too far from the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get myProfileABHAID => 'ABHA ID';
+
+  @override
+  String get myProfileEmail => 'Email';
+
+  @override
+  String get viewHistoryButton => 'View History';
+
+  @override
+  String get profilePagePersonalDetails => 'Personal Details';
+
+  @override
+  String get profilePageDateOfBirth => 'Date of Birth';
+
+  @override
+  String get profilePageGender => 'Gender';
+
+  @override
+  String get profilePageMobile => 'Mobile';
+
+  @override
+  String get profilePageHealthCardTitle => 'Health Card';
+
+  @override
   String get appointmentTitle => 'Appointments';
 
   @override
   String get appointmentSubtitle => 'All Appointments';
+
+  @override
+  String get eyeBoxText =>
+      'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+
+  @override
+  String get bottomNavItemServices => 'Services';
+
+  @override
+  String get smsContent =>
+      'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+
+  @override
+  String get emailSubject =>
+      'Prioritize your eye health with SightConnect App!';
+
+  @override
+  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+
+  @override
+  String get recentServicesRedEyeTest => 'Red Eye Test';
 }

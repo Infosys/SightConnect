@@ -10,22 +10,22 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get questionnaireTitle => 'கண் ஆய்வு கேள்விகள்';
+  String get questionnaireTitle => 'கண் பரிசோதனை கேள்விகள்';
 
   @override
   String get questionnaireExitDialog => 'இந்த கேள்விகளுக்கு பதில் அளிப்பது உங்கள் கண் பிரச்சினைகளை கண்டறிய உதவும். நீங்கள் உண்மையில் வெளியேற விரும்புகிறீர்களா?';
 
   @override
-  String get visualAcuityTitle => 'பார்வை தெளிவுச்சோதனை';
+  String get visualAcuityTitle => 'பார்வைக் கூர்மை சோதனை';
 
   @override
-  String get visualAcuityDescription => 'பார்வை தெளிவுச் சோதனை என்பது ஒரு குறிப்பிட்ட தூரத்திலிருந்து எழுத்து அல்லது சின்னத்தின் விவரங்களை நீங்கள் எவ்வாறு பார்க்கிறீர்கள் என்பதை சோதிக்கும் ஒரு கண் பரிசோதனையாகும். இந்த விரைவான சோதனையை இப்போது செய்யுங்கள்!';
+  String get visualAcuityDescription => 'பார்வை கூர்மை சோதனை என்பது ஒரு குறிப்பிட்ட தூரத்திலிருந்து எழுத்து அல்லது சின்னத்தின் விவரங்களை நீங்கள் எவ்வாறு பார்க்கிறீர்கள் என்பதை சோதிக்கும் ஒரு கண் பரிசோதனையாகும். இந்த விரைவான சோதனையை இப்போது செய்யுங்கள்!';
 
   @override
-  String get visualAcuityHowToPerform => 'பார்வை தெளிவுச் சோதனையை எவ்வாறு செய்வது?';
+  String get visualAcuityHowToPerform => 'பார்வை கூர்மை சோதனையை எவ்வாறு செய்வது?';
 
   @override
-  String get visualAcuityViewStepsToPerform => 'பார்வை தெளிவுச் சோதனையை செய்வதற்கான படிகளை காண்க';
+  String get visualAcuityViewStepsToPerform => 'பார்வை கூர்மை சோதனையை செய்வதற்கான படிகளை காண்க';
 
   @override
   String get visualAcuityCompletionDialog => 'முடிந்தது! இரு கண்களுக்குமான பார்வை தெளிவுச் சோதனை முடிந்துவிட்டது. அடுத்து உங்கள் கண் புகைப்படங்களை எடுக்க வேண்டும்.';
@@ -172,13 +172,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get homeCarousal2Title => 'கவனிக்க வேண்டிய 7 கண் பிரச்சனைகள்!';
 
   @override
-  String get homeCarousal2Description => '\nசோதிக்க வேண்டிய 7 கண் பிரச்சனைகள்: \n \n• கண்களின் சிவப்பு\n• கண்களில் நீர் கசிவு\n• கண்களில் வெள்ளை புள்ளிகள்';
+  String get homeCarousal2Description => '\r\nசோதிக்க வேண்டிய 7 கண் பிரச்சனைகள்: \r\n \r\n• கண்களின் சிவப்பு\r\n• கண்களில் நீர் கசிவு\r\n• கண்களில் வெள்ளை புள்ளிகள்';
 
   @override
   String get homeCarousal3Title => 'கண் பிரச்சனைகள். நீங்கள் பார்க்க முடியாத பலவுண்டு';
 
   @override
-  String get homeCarousal3Description => 'ஆனால் ஒரு பார்வை பராமரிப்பு நிபுணர் முடியும்.\nகண் பிரச்சனைகள் அடையாளம் காணப்பட்டு\nபின்னாளில் சிக்கல்களை தவிர்க்க\nசரியான நேரத்தில் சிகிச்சை பெறுங்கள்';
+  String get homeCarousal3Description => 'ஆனால் ஒரு பார்வை பராமரிப்பு நிபுணர் முடியும்.\r\nகண் பிரச்சனைகள் அடையாளம் காணப்பட்டு\r\nபின்னாளில் சிக்கல்களை தவிர்க்க\r\nசரியான நேரத்தில் சிகிச்சை பெறுங்கள்';
 
   @override
   String get myConnectionsTitle => 'என் உறுப்பினர்கள்';
@@ -214,13 +214,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get appDrawerTitle => 'மெனு';
 
   @override
+  String get appDrawerHome => 'முகப்பு';
+
+  @override
   String get appDrawerLanguageSelection => 'மொழி தேர்வு';
 
   @override
   String get appDrawerAccessibility => 'அணுகல்தன்மை அமைப்புகள்';
-
-  @override
-  String get appDrawerHome => 'முகப்பு';
 
   @override
   String get appDrawerMyProfile => 'எனது சுயவிவரம்';
@@ -244,7 +244,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get appDrawerSignOut => 'வெளியேறு';
 
   @override
-  String get aboutUsDescription => 'சைட்கனெக்ட் என்பது ஒரு பயனர்-நட்பு கண் பராமரிப்பு செயலி ஆகும், இது சுய-மதிப்பீடு மற்றும் அழைப்பு மூலம் ஆலோசனை பெறுவதில் உதவுகிறது.\n\nஎங்கள் பணியின் மையத்தில் உள்ளது கண் பராமரிப்பை அனைவருக்கும் அணுகக்கூடியதாக மாற்றுவதற்கான உறுதிப்பாடு. இந்த செயலி வயது, தொழில்நுட்ப பின்னணி, மற்றும் சமூக அல்லது பொருளாதார பின்னணியைப் பொருத்தமட்டும் இல்லாமல், வாழ்க்கையின் அனைத்து நடைபாதைகளிலிருந்தும் பயனர்களால் அணுகக்கூடியதாக வடிவமைக்கப்பட்டுள்ளது. இந்த செயலி மற்றும் அதன் உள்ளடக்கம் ஆங்கிலம் மற்றும் பிற உள்ளூர் மொழிகளில் கிடைக்கின்றன. இது பயனர்களுக்கு அவர்களது கண்களை சுய-மதிப்பிட மற்றும் சமயோசிதமான சிகிச்சை ஆலோசனை பெற உதவுகிறது. இந்த செயலி புதிய தொழில்நுட்பங்கள் மற்றும் கருவிகளை பயன்படுத்தி எங்கள் பயனர்களுக்கு தனிப்பயன் கண் பராமரிப்பு தீர்வுகளை வழங்குகிறது. அவர்களது வாழ்க்கையை எளிதாக்குவதற்கு பல்வேறு அம்சங்களுடன் கூடியது.';
+  String get aboutUsDescription => 'சைட்கனெக்ட் என்பது ஒரு பயனர்-நட்பு கண் பராமரிப்பு செயலி ஆகும், இது சுய-மதிப்பீடு மற்றும் அழைப்பு மூலம் ஆலோசனை பெறுவதில் உதவுகிறது.\r\n\r\nஎங்கள் பணியின் மையத்தில் உள்ளது கண் பராமரிப்பை அனைவருக்கும் அணுகக்கூடியதாக மாற்றுவதற்கான உறுதிப்பாடு. இந்த செயலி வயது, தொழில்நுட்ப பின்னணி, மற்றும் சமூக அல்லது பொருளாதார பின்னணியைப் பொருத்தமட்டும் இல்லாமல், வாழ்க்கையின் அனைத்து நடைபாதைகளிலிருந்தும் பயனர்களால் அணுகக்கூடியதாக வடிவமைக்கப்பட்டுள்ளது. இந்த செயலி மற்றும் அதன் உள்ளடக்கம் ஆங்கிலம் மற்றும் பிற உள்ளூர் மொழிகளில் கிடைக்கின்றன. இது பயனர்களுக்கு அவர்களது கண்களை சுய-மதிப்பிட மற்றும் சமயோசிதமான சிகிச்சை ஆலோசனை பெற உதவுகிறது. இந்த செயலி புதிய தொழில்நுட்பங்கள் மற்றும் கருவிகளை பயன்படுத்தி எங்கள் பயனர்களுக்கு தனிப்பயன் கண் பராமரிப்பு தீர்வுகளை வழங்குகிறது. அவர்களது வாழ்க்கையை எளிதாக்குவதற்கு பல்வேறு அம்சங்களுடன் கூடியது.';
 
   @override
   String get aboutUsFeaturesTitle => 'அம்சங்கள்';
@@ -365,9 +365,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get visualAcuityTestInstructionFour => 'நீங்கள் கண்ணாடியுடன் சோதனை செய்கிறீர்கள் என்றால், ஒரு கண் மட்டுமே சோதிக்கப்படும்போது கண்ணாடியின் மீது உங்கள் கையால் ஒரு கண்ணை மூடுங்கள்.';
-
-  @override
-  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
 
   @override
   String get skipAndProceedButton => 'தவிர்க்கவும் & ஸ்கேன் செய்ய தொடருங்கள்';
@@ -535,13 +532,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get swipeGestureCardText => 'சின்னத்தின் திசையில் ஸ்வைப் செய்யவும்';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'மதிப்பாய்வு\nகேள்விகள்';
+  String get assessmentResultCardAssessmentQuestions => 'மதிப்பாய்வு\r\nகேள்விகள்';
 
   @override
-  String get assessmentResultCardAcuityTest => 'கண்\nசரிபார்க்கப்பட்டுள்ளது';
+  String get assessmentResultCardAcuityTest => 'கண்\r\nசரிபார்க்கப்பட்டுள்ளது';
 
   @override
-  String get assessmentResultCardEyeScan => 'கண்\nஸ்கேன்';
+  String get assessmentResultCardEyeScan => 'கண்\r\nஸ்கேன்';
 
   @override
   String get viewReportButton => 'அறிக்கையைப் பார்க்கவும்';
@@ -619,6 +616,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get scannerTitle => 'ஸ்கேனர்';
 
   @override
+  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
+
+  @override
   String get somethingWentWrong => 'Something went wrong.';
 
   @override
@@ -628,8 +628,62 @@ class AppLocalizationsTa extends AppLocalizations {
   String get noPreviewAvailable => 'No Preview Available';
 
   @override
+  String get privacyPolicyTitle => 'Privacy & Data Protection';
+
+  @override
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooClose => 'You are too close to the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get visualAcuityTestDistanceInstructionTooFar => 'You are too far from the Camera, Position the camera 40cm away from the eye.';
+
+  @override
+  String get myProfileABHAID => 'ABHA ID';
+
+  @override
+  String get myProfileEmail => 'Email';
+
+  @override
+  String get viewHistoryButton => 'View History';
+
+  @override
+  String get profilePagePersonalDetails => 'Personal Details';
+
+  @override
+  String get profilePageDateOfBirth => 'Date of Birth';
+
+  @override
+  String get profilePageGender => 'Gender';
+
+  @override
+  String get profilePageMobile => 'Mobile';
+
+  @override
+  String get profilePageHealthCardTitle => 'Health Card';
+
+  @override
   String get appointmentTitle => 'Appointments';
 
   @override
   String get appointmentSubtitle => 'All Appointments';
+
+  @override
+  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+
+  @override
+  String get bottomNavItemServices => 'Services';
+
+  @override
+  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+
+  @override
+  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+
+  @override
+  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+
+  @override
+  String get recentServicesRedEyeTest => 'Red Eye Test';
 }
