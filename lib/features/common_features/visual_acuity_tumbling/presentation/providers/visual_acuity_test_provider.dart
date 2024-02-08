@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart'
     hide Performer;
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
@@ -283,7 +284,8 @@ class VisualAcuityTestProvider with ChangeNotifier {
   }
 
   /// set patient vision acuity tumbling based on the TriageAssessment model
-  List<PostTriageObservationsModel> getVisionAcuityTumblingResponse() {
+  Future<List<PostTriageObservationsModel>>
+      getVisionAcuityTumblingResponse() async {
     double leftEyeSight = calculateEyeSight(Eye.left);
     double rightEyeSight = calculateEyeSight(Eye.right);
     double bothEyeSight = calculateEyeSight(Eye.both);
@@ -292,19 +294,39 @@ class VisualAcuityTestProvider with ChangeNotifier {
     double rightEyeScore = _calculateScore(rightEyeSight);
     double bothEyeScore = _calculateScore(bothEyeSight);
 
+    int? rightEyeIndentifier;
+    int? leftEyeIndentifier;
+    int? bothEyeIndentifier;
+
+    final response = await triageRepositoryProvider.getAssessment();
+    final assessment = response.fold((l) {
+      throw ServerFailure(errorMessage: "Failed to get assessment");
+    }, (r) => r);
+    if (assessment.observations?.bodySite == BodySite.BOTH_EYES) {
+      bothEyeIndentifier = assessment.observations?.id;
+    }
+    assessment.observations?.observationDefinition?.forEach((element) {
+      if (element.bodySite == BodySite.LEFT_EYE) {
+        leftEyeIndentifier = element.id;
+      }
+      if (element.bodySite == BodySite.RIGHT_EYE) {
+        rightEyeIndentifier = element.id;
+      }
+    });
+
     List<PostTriageObservationsModel> observationList = [
       PostTriageObservationsModel(
-        identifier: 1751,
+        identifier: leftEyeIndentifier,
         value: leftEyeSight.toStringAsFixed(3),
         score: leftEyeScore,
       ),
       PostTriageObservationsModel(
-        identifier: 1752,
+        identifier: rightEyeIndentifier,
         value: rightEyeSight.toStringAsFixed(3),
         score: rightEyeScore,
       ),
       PostTriageObservationsModel(
-        identifier: 1753,
+        identifier: bothEyeIndentifier,
         value: bothEyeSight.toStringAsFixed(3),
         score: bothEyeScore,
       ),
@@ -324,11 +346,18 @@ class VisualAcuityTestProvider with ChangeNotifier {
   }
 
   Future<void> saveVisionAcuityResponseToDB() async {
-    var res = getVisionAcuityTumblingResponse();
-    logger.d({"saveVisionAcuityResponseToDB ": res});
-    await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
-      triageVisualAcuity: getVisionAcuityTumblingResponse(),
-    );
+    try {
+      var res = await getVisionAcuityTumblingResponse();
+      logger.d({"saveVisionAcuityResponseToDB ": res});
+      await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
+        triageVisualAcuity: res,
+      );
+    } catch (e) {
+      logger.e("$e");
+      throw ServerFailure(
+        errorMessage: "Failed to save vision acuity response locally",
+      );
+    }
   }
 
   int? _diagnosticReportId;
@@ -340,55 +369,53 @@ class VisualAcuityTestProvider with ChangeNotifier {
 
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
-    final reportModel = await getTriageReportByReportId(diagnosticReportId!);
-
-    if (reportModel == null) {
-      throw ServerFailure(
-          errorMessage: "Could not fetch report of id $diagnosticReportId");
-    }
-
-    TriageUpdateModel triage = TriageUpdateModel(
-      patientId: reportModel.subject,
-      diagnosticReportId: reportModel.diagnosticReportId,
-      organizationCode: reportModel.organizationCode,
-      performer: [
-        Performer(
-          role: PerformerRole.PATIENT,
-          identifier: reportModel.subject,
-        ),
-      ],
-      assessmentCode: reportModel.assessmentCode,
-      assessmentVersion: reportModel.assessmentVersion,
-      issued: reportModel.issued,
-      source: Source.PATIENT_APP,
-      sourceVersion: AppText.appVersion,
-      incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
-      score: _getScore(),
-      cummulativeScore: _getCummulativeScore(),
-      observations: _getObservationsToBeUpdated(
-        reportModel.observations ?? [],
-        getVisionAcuityTumblingResponse(),
-      ),
-    );
-
     try {
-      logger.d({"observationDTO": triage.observations});
+      final visionAcuityTumblingResponse =
+          await getVisionAcuityTumblingResponse();
+      final reportModel = await getTriageReportByReportId(diagnosticReportId!);
+
+      if (reportModel == null) {
+        throw ServerFailure(
+            errorMessage: "Could not fetch report of id $diagnosticReportId");
+      }
+
+      TriageUpdateModel triage = TriageUpdateModel(
+        patientId: reportModel.subject,
+        diagnosticReportId: reportModel.diagnosticReportId,
+        organizationCode: reportModel.organizationCode,
+        performer: [
+          Performer(
+            role: PerformerRole.PATIENT,
+            identifier: reportModel.subject,
+          ),
+        ],
+        assessmentCode: reportModel.assessmentCode,
+        assessmentVersion: reportModel.assessmentVersion,
+        issued: reportModel.issued,
+        source: Source.PATIENT_APP,
+        sourceVersion: AppText.appVersion,
+        incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
+        score: _getScore(visionAcuityTumblingResponse),
+        cummulativeScore: _getCummulativeScore(visionAcuityTumblingResponse),
+        observations: _getObservationsToBeUpdated(
+            reportModel.observations ?? [], visionAcuityTumblingResponse),
+      );
+
       return triageRepositoryProvider.updateTriageResponse(
-          triageResponse: triage);
+        triageResponse: triage,
+      );
     } catch (e) {
       rethrow;
     }
   }
 
-  int _getCummulativeScore() {
-    final observationScore = _triageUrgencyRepository
-        .visualAcuityUrgency(getVisionAcuityTumblingResponse());
+  int _getCummulativeScore(res) {
+    final observationScore = _triageUrgencyRepository.visualAcuityUrgency(res);
     return observationScore.toInt();
   }
 
-  List<Map<String, int>> _getScore() {
-    final observationScore = _triageUrgencyRepository
-        .visualAcuityUrgency(getVisionAcuityTumblingResponse());
+  List<Map<String, int>> _getScore(res) {
+    final observationScore = _triageUrgencyRepository.visualAcuityUrgency(res);
 
     return [
       {"QUESTIONNAIRE": 0},
