@@ -13,11 +13,11 @@ class DioErrorHandler {
   static void handleDioError(DioException e) {
     if (e.error is Exception) {
       // Handle general exceptions
-      _logger.e('Exception: ${e.error}');
+      print('Exception: ${e.error}');
     } else if (e.response != null) {
       // Handle HTTP errors
 
-      _logger.e({
+      print({
         "url": e.response!.data["path"],
         "title": e.response!.data["title"],
         "statusCode": e.response!.data["status"],
@@ -27,7 +27,7 @@ class DioErrorHandler {
       });
     } else {
       // Handle connection errors
-      _logger.e('Connection error: ${e.message}');
+      print('Connection error: ${e.message}');
     }
   }
 }

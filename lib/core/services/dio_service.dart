@@ -15,7 +15,7 @@ var keycloakDioProvider = Provider(
     );
     dio.interceptors.addAll(
       [
-        DioCertificateInterceptor(dio),
+        // DioCertificateInterceptor(dio),
       ],
     );
     return dio;
