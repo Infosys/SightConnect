@@ -27,6 +27,8 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
   bool isMiniApp = false;
   bool isUPI = false;
 
+  bool _shouldShowSnackbar = true;
+
   @override
   void initState() {
     super.initState();
@@ -127,6 +129,10 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
       });
 
       _checkData(result!.code, context);
+
+      setState(() {
+        result = null;
+      });
     });
   }
 
@@ -135,20 +141,22 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
       if (data.trimLeft().startsWith("https")) {
         launchInWebViewWithoutJavaScript(data);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("QR Code Data: $data"),
-          ),
-        );
+        showSnackbar(context, SnackBar(content: Text("QR Code Data: $data")));
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Invalid QR Code"),
-        ),
-      );
+      showSnackbar(context, const SnackBar(content: Text("Invalid QR Code")));
       Navigator.of(context).pop();
     }
+  }
+
+  Future<void> showSnackbar(BuildContext context, SnackBar snackbar) async {
+    if (!_shouldShowSnackbar) return;
+
+    _shouldShowSnackbar = false;
+    ScaffoldMessenger.of(context)
+        .showSnackBar(snackbar)
+        .closed
+        .then((value) => _shouldShowSnackbar = true);
   }
 
   Future<PermissionStatus> _getCameraPermission() async {
