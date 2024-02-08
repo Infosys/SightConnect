@@ -6,17 +6,25 @@ appTranslations();
 
 function appTranslations() {
   console.log("Reading the Excel file...");
-  const workbook = xlsx.readFile(path.join(__dirname, "App_Translations.xlsx"));
+  // If the file is not found, show an error message and stop the process.
+  const xlsxFilePath = path.join(__dirname, "App_Translations.xlsx");
+  if (!fs.existsSync(xlsxFilePath)) {
+    console.error("The file 'App_Translations.xlsx' was not found.");
+    return;
+  }
+  const workbook = xlsx.readFile(xlsxFilePath);
   const sheet_name_list = workbook.SheetNames;
   const translations = xlsx.utils.sheet_to_json(
     workbook.Sheets[sheet_name_list[0]]
   );
   const languages = Object.keys(translations[0]).slice(1);
 
-  console.log("Creating the app_translations folder...");
-  const appTranslationsFolder = path.join(__dirname, "app_translations");
-  if (!fs.existsSync(appTranslationsFolder)) {
-    fs.mkdirSync(appTranslationsFolder);
+  // console.log("Creating the app_translations folder...");
+  const arbFilesFolderPath = path.join(__dirname, "../lib/l10n");
+  // if arbFilesFolderPath does not exist, show an error message and stop the process.
+  if (!fs.existsSync(arbFilesFolderPath)) {
+    console.error("The folder 'lib/l10n' was not found.");
+    return;
   }
 
   console.log("Generating the arb files...");
@@ -39,7 +47,7 @@ function appTranslations() {
       translationsObj[translation.id] = translation[language];
     });
 
-    const arbFile = path.join(appTranslationsFolder, `app_${language}.arb`);
+    const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);
     fs.writeFileSync(arbFile, JSON.stringify(translationsObj, null, 2));
     console.log(`Generated ${arbFile}`);
   });
