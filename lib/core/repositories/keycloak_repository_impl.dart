@@ -99,7 +99,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       DioErrorHandler.handleDioError(e);
       rethrow;
     } catch (e) {
-      print("Sending OTP failed : $e");
+      logger.e("Sending OTP failed : $e");
       throw ServerFailure(errorMessage: "Sending OTP failed : $e");
     }
   }
