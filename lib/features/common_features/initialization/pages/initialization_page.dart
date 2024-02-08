@@ -125,7 +125,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<bool> _isConsentAlreadyAccepted() async {
     final model = ref.watch(consentRepositoryProvider);
-    final consent = await model.getConsent();
+    final consent = await model.getConsent().catchError((e) async {
+      logger.e("getConsent: $e");
+      await _invalidateAndLogout("Server Error. Please login again.");
+    });
     return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
   }
 
