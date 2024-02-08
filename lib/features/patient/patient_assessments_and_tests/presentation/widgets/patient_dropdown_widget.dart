@@ -58,7 +58,7 @@ class PatientDropDownWidget extends HookConsumerWidget {
                         ),
                   const SizedBox(width: 8),
                   Text(
-                    person.name.capitalize(),
+                    person.name.capitalizeFirstOfEach(),
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,

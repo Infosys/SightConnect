@@ -26,26 +26,23 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final loc = context.loc!;
-      try {
-        await ref.read(accessibilityProvider).setBrightness(80.0);
+      await ref.read(accessibilityProvider).setBrightness(80.0).then((value) {
         Fluttertoast.showToast(msg: loc.eyeAssessmentBrightnessLabel);
-      } catch (e) {
+      }).catchError((e) {
         Fluttertoast.showToast(
           msg: loc.eyeAssessmentBrightnessError,
         );
-      }
+      });
     });
     MatomoTracker.instance.trackEvent(
-        eventInfo: EventInfo(
-            category: 'Triage',
-            action: 'Triage Entered',
-            name: 'Triage Entered'),
-        dimensions: {
-          'dimension1': '${PersistentAuthStateService.authState.activeRole}'
-        });
+      eventInfo: EventInfo(
+          category: 'Triage', action: 'Triage Entered', name: 'Triage Entered'),
+      dimensions: {
+        'dimension1': '${PersistentAuthStateService.authState.activeRole}'
+      },
+    );
   }
 
   @override

@@ -130,7 +130,7 @@ class ProfileHeader extends ConsumerWidget {
                                       children: [
                                         Text(
                                           patient.profile?.patient?.name
-                                                  ?.toUpperCase() ??
+                                                  .capitalizeFirstOfEach() ??
                                               "",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,

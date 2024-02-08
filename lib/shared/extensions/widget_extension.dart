@@ -27,29 +27,21 @@ extension DateExtension on DateTime? {
 
 extension StringExtension on String? {
   String capitalize() {
-    if (this == null) {
-      return "";
-    } else {
-      final String str = this!;
-      return "${str[0].toUpperCase()}${str.substring(1)}";
-    }
+    final String str = this ?? '';
+    if (str.isEmpty) return '';
+    return "${str[0].toUpperCase()}${str.substring(1)}";
   }
 
   String sentenceCase() {
-    if (this == null) {
-      return "";
-    } else {
-      final String str = this!;
-      return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
-    }
+    final String str = this ?? '';
+    if (str.isEmpty) return '';
+    return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
   }
 
   String capitalizeFirstOfEach() {
-    if (this == null) {
-      return "";
-    } else {
-      final String str = this!;
-      return str.split(" ").map((str) => str.capitalize()).join(" ");
-    }
+    String str = this ?? '';
+    str = str.toLowerCase();
+    if (str.isEmpty) return '';
+    return str.split(" ").map((str) => str.capitalize()).join(" ");
   }
 }
