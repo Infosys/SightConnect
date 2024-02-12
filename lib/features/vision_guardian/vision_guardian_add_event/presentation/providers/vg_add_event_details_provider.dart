@@ -216,15 +216,18 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
   Future<void> addEventDetails() async {
     try {
+      logger.d("inside add event details");
       isLoading = true;
       notifyListeners();
-      String file = await fileMsProvider.uploadImage(File(_image!.path));
+      String file = await fileMsProvider.uploadImage(File(_image?.path ?? ""));
       Map<String, String> fileMap = fileMsProvider.parseUrl(file);
       Map<String, dynamic> actors = {
         "role": "MEDICAL_DOCTOR",
         "identifier": globalVGProvider.userId.toString(),
         "isOwner": true
       };
+
+      logger.d("after uplopading image");
 
       DateTime startDateFormat = DateFormat("yyyy-MM-dd")
           .parse(DateFormat('d MMM yyyy').parse(_startDate.text).toString());
@@ -277,6 +280,8 @@ class AddEventDetailsNotifier extends ChangeNotifier {
                 addressType: "HOME",
                 isDeleted: true)
           ]);
+
+      logger.d("vgEventModel is: $vgEventModel");
 
       await vgAddEventRepository.postVGEvents(
         vgEventModel: vgEventModel,

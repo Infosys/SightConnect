@@ -40,7 +40,7 @@ class NearByVisionCenterProvider
       switch (permissionStatus) {
         case PermissionStatus.granted:
         case PermissionStatus.grantedLimited:
-          onPermissionGranted(permissionStatus);
+          await onPermissionGranted(permissionStatus);
           break;
         case PermissionStatus.denied:
         case PermissionStatus.deniedForever:
@@ -62,7 +62,7 @@ class NearByVisionCenterProvider
     }
   }
 
-  void onPermissionGranted(PermissionStatus permissionStatus) async {
+  Future<void> onPermissionGranted(PermissionStatus permissionStatus) async {
     state = state.copyWith(permissionStatus: permissionStatus);
 
     data = await location.getLocation();

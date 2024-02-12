@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -107,17 +108,20 @@ class PatientServiceCategory extends ConsumerWidget {
                           ),
                         );
                       } else if (miniapp == MiniApp.APPOINTMENT) {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientAppointmentPage(),
-                          ),
+                        Fluttertoast.showToast(
+                          msg: "This feature is not available yet",
                         );
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         const PatientAppointmentPage(),
+                        //   ),
+                        // );
                       }
                     },
                     child: SizedBox(
                       // color: Colors.pink,
-                      width: Responsive.isMobile(context) ? 60 : 80,
+                      width: Responsive.isMobile(context) ? 80 : 100,
                       height: Responsive.isMobile(context) ? 80 : 100,
                       child: Column(
                         children: [

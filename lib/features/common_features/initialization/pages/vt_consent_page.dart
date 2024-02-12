@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -22,22 +22,16 @@ class VTConsentFormPage extends HookWidget {
   Widget build(BuildContext context) {
     final selectedValue = useState<bool>(false);
     var isLoading = useState<bool>(false);
-    List<String> privacyPoints = [
-      'To enable you to access our application and its features for eye related online health checkup for you and your connections (as provided by you). ',
-      'To enable you to contact Vision Technicians, Ophthalmologists under LVPEI, as applicable, in case of any eye related illness/health difficulties.',
-      'For providing any eye health-related data (including reports etc.) as part of your health consultation and diagnosis and in order to contact you or your connections as part of health-related concerns.',
-      'For sharing of your eye health data with our authorized LVPEI ophthalmologists/ doctors for better diagnosis and further sharing the same with the Village Chief/ Mayor etc. (where applicable based on your GPS location) depending on the severity of the eye issue in case you are unable to reach out to/ inform the LVPEI doctors for treatment.',
-      'To provide the list of Eye clinics/ hospitals affiliated with LVPEI near you, for you to reach out to in case of any eye related problems.',
-      'For using the information such as Eye Image, symptoms related to the eye image, Age, Blood Group, Location without any identifiers to help train our machine learning or artificial intelligence models for the purpose of providing proper diagnosis in the future',
-      'For sending reminder, communication, campaign mailers, to create awareness for eye health.',
-    ];
+    final loc = context.loc!;
+    List<String> privacyPoints =
+        loc.privacyPolicyPurposeOfProcessingDescription.split("|");
     return PopScope(
       canPop: false,
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: CustomAppbar(
           title: Text(
-            "Privacy & Data Protection",
+            loc.privacyPolicyTitle,
             style: applyFiraSansFont(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
@@ -83,14 +77,14 @@ class VTConsentFormPage extends HookWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.',
+                          loc.privacyPolicyDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Personal data elements collected/processed:',
+                          loc.privacyPolicyPersonalDataTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -108,7 +102,7 @@ class VTConsentFormPage extends HookWidget {
                             Expanded(
                               flex: 9,
                               child: Text(
-                                'You and your connections personal data such as (Some of these data would be optional) Mobile number, Name, Date of birth, Gender (Male/Female), Address (Pin code), patient ID, Connection, eye triage questionnaire responses, eye triage report, eye images, symptoms tagged against your eye image, Photograph, Address details such as address, district name (including District code), state name (including state code), sub district name, village name, town name, Email address, Last Name, Middle Name, Blood Group, Height, Weight, Occupation, ABHA details (as provided by you), based on your app permissions access to Camera, GPS Location, Gallery for accessing the application, full network access, view network connections, Device information.',
+                                loc.privacyPolicyPersonalDataDescription,
                                 softWrap: true,
                                 style: applyRobotoFont(
                                     fontWeight: FontWeight.w400, fontSize: 14),
@@ -118,7 +112,7 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Purpose of Processing: We process the Personal Data provided by you for the below purposes such as:',
+                          loc.privacyPolicyPurposeOfProcessingTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -151,7 +145,7 @@ class VTConsentFormPage extends HookWidget {
                                 .toList()),
                         const SizedBox(height: 20),
                         Text(
-                          'Data Recipients/ Accessible to:',
+                          loc.privacyPolicyDataRecipientsTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -159,14 +153,14 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'The personal data shared by you (including sensitive personal data) will be accessible to authorized LVPEI personnels such as Doctors/ Ophthalmologists, Vision Technicians, Vision Guardians, representatives from LVPEI, internal/external auditors, Government authorities where applicable, and our authorized service provider Infosys as applicable.',
+                          loc.privacyPolicyDataRecipientsDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Data Transfer & Storage:',
+                          loc.privacyPolicyDataTransferTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -174,14 +168,14 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'The personal data shared by you will get stored on our internal servers, our authorized service provider’s server in India.',
+                          loc.privacyPolicyDataTransferDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Data Security:',
+                          loc.privacyPolicyDataSecurityTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -189,14 +183,14 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'LVPEI adopts reasonable and appropriate security practices and procedures including administrative, physical security, and technical controls in order to safeguard your Personal Data.',
+                          loc.privacyPolicyDataSecurityDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Data Retention:',
+                          loc.privacyPolicyDataRetentionTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -204,14 +198,14 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Personal Data that is no longer required to be retained as per legal and business requirements will be disposed in a secure manner.',
+                          loc.privacyPolicyDataRetentionDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Data subject rights:',
+                          loc.privacyPolicyDataSubjectRightsTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -219,14 +213,14 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'You are entitled at any time to access and rectify your personal information. In case of any requests, issues, concerns or queries you may reach out to LV Prasad Office by sending an email to ${AppText.lvpeiEmail}. ',
+                          loc.privacyPolicyDataSubjectRightsDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Right to Withdrawal:',
+                          loc.privacyPolicyRightToWithdrawTitle,
                           softWrap: true,
                           textAlign: TextAlign.left,
                           style: applyRobotoFont(
@@ -234,14 +228,14 @@ class VTConsentFormPage extends HookWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to ${AppText.lvpeiEmail}',
+                          loc.privacyPolicyRightToWithdrawDescription,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w400, fontSize: 14),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.',
+                          loc.privacyPolicyAcknowledgement,
                           softWrap: true,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w500, fontSize: 16),
@@ -256,7 +250,7 @@ class VTConsentFormPage extends HookWidget {
                             },
                           ),
                           title: Text(
-                            'I agree to the terms and conditions',
+                            loc.consentPageCheckbox,
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.grey,
@@ -305,11 +299,11 @@ class VTConsentFormPage extends HookWidget {
                                                 isLoading.value = false;
                                                 Fluttertoast.showToast(
                                                     msg:
-                                                        "Something went wrong, please try again later");
+                                                        loc.somethingWentWrong);
                                               }
                                             }
                                           : null,
-                                      child: const Text("I Agree"),
+                                      child: Text(loc.agreeButton),
                                     ),
                                   );
                                 },

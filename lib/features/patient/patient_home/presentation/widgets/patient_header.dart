@@ -120,7 +120,7 @@ class PatientHeader extends HookWidget {
                                       ),
                                     )
                                   : AutoSizeText(
-                                      "Invite Now",
+                                      context.loc!.inviteNowText,
                                       minFontSize: 10,
                                       maxLines: 1,
                                       style: applyRobotoFont(

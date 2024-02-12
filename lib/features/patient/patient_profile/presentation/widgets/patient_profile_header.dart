@@ -129,7 +129,9 @@ class ProfileHeader extends ConsumerWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          patient.profile?.patient?.name ?? "",
+                                          patient.profile?.patient?.name
+                                                  .capitalizeFirstOfEach() ??
+                                              "",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: applyRobotoFont(

@@ -104,7 +104,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["images"] = [vgEventModel.images![0].toJson()];
 
     vgeventjson["actors"] = [actor];
+
+    logger.d("inside add event data is : ${vgeventjson.toString()}");
+
     try {
+
       final response = await _dio.post(endpoint, data: vgeventjson);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         return response.data;

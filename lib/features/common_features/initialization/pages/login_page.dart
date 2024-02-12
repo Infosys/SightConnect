@@ -213,8 +213,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   Size(AppSize.width(context) * 0.9, 40),
                             ),
                             onPressed: () async {
-                              final scaffold = ScaffoldMessenger.of(context);
-
                               if (formKey.value.currentState!.validate()) {
                                 try {
                                   isLoading.value = true;
@@ -226,13 +224,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   showOtp.value = true;
                                 } catch (e) {
                                   isLoading.value = false;
-                                  scaffold.showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        'Unable to send OTP to this number',
-                                      ),
-                                    ),
-                                  );
+                                  Fluttertoast.showToast(
+                                      msg: "Unable to send OTP to this number");
                                 }
                               }
                             },

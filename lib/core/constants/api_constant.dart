@@ -3,7 +3,7 @@
 class ApiConstant {
   ApiConstant._();
 
-  static String baseUrl = 'https://healthconnecttech.org';
+  static String baseUrl = "https://healthconnecttech.org";
   static String patientRegistrationMiniappUrl =
       '$baseUrl/patient-registration/';
 

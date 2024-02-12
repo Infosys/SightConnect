@@ -146,11 +146,11 @@ class VisualAcuityDialog {
   static String _mapEyeInstructionImage(BuildContext context, Eye currentEye) {
     switch (currentEye) {
       case Eye.left:
-        return "assets/images/Test1LeftEye.png";
+        return "assets/images/visualAcuityLeftEye.png";
       case Eye.right:
-        return "assets/images/Test1RightEye.png";
+        return "assets/images/visualAcuityRightEye.png";
       case Eye.both:
-        return "assets/images/Test1BothEye.png";
+        return "assets/images/visualAcuityBothEyes.png";
       default:
         return "";
     }
@@ -241,6 +241,8 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                               } catch (e) {
                                 logger.d({"VisualAcuitySuccessDialog": e});
                                 isLoading.value = false;
+                                Fluttertoast.showToast(
+                                    msg: "Failed to save observation");
                               }
                             },
                             child: Text(

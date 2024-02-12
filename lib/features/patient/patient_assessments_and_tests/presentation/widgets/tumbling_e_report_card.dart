@@ -63,7 +63,7 @@ class TumblingEReportCard extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.all(16),
-                  itemCount: 3,
+                  itemCount: tumblingEData!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 1.4,

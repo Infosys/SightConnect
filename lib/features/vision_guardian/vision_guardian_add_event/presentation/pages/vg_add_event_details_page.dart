@@ -34,6 +34,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
       ),
       bottomNavigationBar: const VisionGuardianEventBottomNavigationBar(),
       body: LoadingOverlay(
+        progressMessage: "Uploading Image and adding event",
         overlayColor: Colors.black45,
         isLoading: ref.watch(addEventDetailsProvider).isLoading,
         child: SingleChildScrollView(

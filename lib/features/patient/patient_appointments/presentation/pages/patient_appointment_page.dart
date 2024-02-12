@@ -114,6 +114,8 @@ Widget _content(
   WidgetRef ref,
 ) {
   final loc = context.loc!;
+  bool isEmpty =
+      patient.profile?.patient?.relatedParty?.reversed.toList().isEmpty ?? true;
 
   return Container(
     padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -149,175 +151,183 @@ Widget _content(
           ),
         ),
         const SizedBox(height: AppSize.kmheight),
-        Expanded(
-            child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            ...patient.profile!.patient!.relatedParty!.asMap().entries.map((e) {
-              // final index = e.key;
-              final patient = e.value;
-              return Container(
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(bottom: AppSize.kmheight),
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "${patient.name?.capitalize() ?? ""} has an appointment",
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                        color: AppColor.black,
+        isEmpty
+            ? const Center(
+                child: SizedBox(),
+              )
+            : Expanded(
+                child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ...patient.profile!.patient!.relatedParty!
+                      .asMap()
+                      .entries
+                      .map((e) {
+                    // final index = e.key;
+
+                    final patient = e.value;
+                    return Container(
+                      padding: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.only(bottom: AppSize.kmheight),
+                      decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            leading: patient.profilePicture != null
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: AppColor.blue,
-                                        width: 3,
-                                      ),
-                                    ),
-                                    child: AppNetworkImage(
-                                      imageUrl: patient.profilePicture!,
-                                    ),
-                                  )
-                                : AppNameAvatar(
-                                    name: patient.name!,
-                                    radius: 18,
-                                  ),
-                            title: Text(
-                              patient.name?.capitalize() ?? "",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                              ),
-                            ),
-                            subtitle: Text(
-                              "${patient.parentPatientId ?? ""}",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: AppColor.grey,
-                              ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "${patient.name?.capitalize() ?? ""} has an appointment",
+                            style: applyFiraSansFont(
+                              fontSize: 16,
+                              color: AppColor.black,
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColor.lightLavanderBlue,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 2,
-                              vertical: 4,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Telephone Consultation",
-                                textAlign: TextAlign.center,
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.primary,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  leading: patient.profilePicture != null
+                                      ? Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: AppColor.blue,
+                                              width: 3,
+                                            ),
+                                          ),
+                                          child: AppNetworkImage(
+                                            imageUrl: patient.profilePicture!,
+                                          ),
+                                        )
+                                      : AppNameAvatar(
+                                          name: patient.name!,
+                                          radius: 18,
+                                        ),
+                                  title: Text(
+                                    patient.name?.capitalize() ?? "",
+                                    style: applyRobotoFont(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    "${patient.parentPatientId ?? ""}",
+                                    style: applyRobotoFont(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColor.grey,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColor.lightLavanderBlue,
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 2,
+                                    vertical: 4,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Telephone Consultation",
+                                      textAlign: TextAlign.center,
+                                      style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColor.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    Text(
-                      "2 Sep 2023, 3:00 - 3:30 pm",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: AppSize.ksheight,
-                    ),
-                    Text(
-                      "Address -",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.grey,
-                      ),
-                      softWrap: true,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                          onPressed: () async {
-                            try {} catch (e) {
-                              Fluttertoast.showToast(msg: "$e");
-                            }
-                          },
-                          child: Text(
-                            "Reschedule",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          Text(
+                            "2 Sep 2023, 3:00 - 3:30 pm",
                             style: applyRobotoFont(
                               fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.primary,
                             ),
                           ),
-                        ),
+                          const SizedBox(
+                            height: AppSize.ksheight,
+                          ),
+                          Text(
+                            "Address -",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColor.grey,
+                            ),
+                            softWrap: true,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              TextButton(
+                                onPressed: () async {
+                                  try {} catch (e) {
+                                    Fluttertoast.showToast(msg: "$e");
+                                  }
+                                },
+                                child: Text(
+                                  "Reschedule",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.primary,
+                                  ),
+                                ),
+                              ),
 
-                        const SizedBox(width: 24),
-                        TextButton(
-                          onPressed: () async {
-                            try {} catch (e) {
-                              Fluttertoast.showToast(msg: "$e");
-                            }
-                          },
-                          child: Text(
-                            "Cancel",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.primary,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        //share icon in an Inkwell
-                        InkWell(
-                            onTap: () {},
-                            child: const Icon(
-                              Icons.share_outlined,
-                              color: AppColor.primary,
-                              size: 20,
-                              weight: 5,
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-              );
-            })
-          ],
-        )),
+                              const SizedBox(width: 24),
+                              TextButton(
+                                onPressed: () async {
+                                  try {} catch (e) {
+                                    Fluttertoast.showToast(msg: "$e");
+                                  }
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.primary,
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              //share icon in an Inkwell
+                              InkWell(
+                                  onTap: () {},
+                                  child: const Icon(
+                                    Icons.share_outlined,
+                                    color: AppColor.primary,
+                                    size: 20,
+                                    weight: 5,
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  })
+                ],
+              )),
       ],
     ),
   );

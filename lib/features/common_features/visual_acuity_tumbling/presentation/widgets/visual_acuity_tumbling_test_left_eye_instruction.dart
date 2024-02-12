@@ -62,7 +62,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                   height: AppSize.height(context) * 0.5,
                   width: AppSize.width(context) * 0.7,
                   child: Image.asset(
-                    "assets/images/Test1RightEye.png",
+                    "assets/images/visualAcuityRightEye.png",
                   ),
                 ),
               ),

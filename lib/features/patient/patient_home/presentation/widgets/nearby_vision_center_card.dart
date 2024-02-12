@@ -55,6 +55,8 @@ class NearbyVisionCentersCard extends StatelessWidget {
         width: Responsive.isMobile(context)
             ? AppSize.width(context) * 0.87
             : AppSize.width(context) * 0.35,
+        height: AppSize.height(context) * 0.2,
+        margin: const EdgeInsets.only(right: AppSize.kspadding),
         padding: const EdgeInsets.all(AppSize.kmpadding),
         decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.7),
@@ -162,31 +164,32 @@ class NearbyVisionCentersCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: AppSize.ksheight),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  AppIcon.call,
-                  width: 18,
-                  height: 18,
-                  colorFilter: const ColorFilter.mode(
-                    AppColor.grey,
-                    BlendMode.srcATop,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Flexible(
-                  child: Text(
-                    "$email, $contact",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: const Color(0xff333333),
+            Flexible(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    AppIcon.call,
+                    width: 18,
+                    height: 18,
+                    colorFilter: const ColorFilter.mode(
+                      AppColor.grey,
+                      BlendMode.srcATop,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  Flexible(
+                    child: Text(
+                      "$email, $contact",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: const Color(0xff333333),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: AppSize.ksheight),
           ],
         ),
       ),
