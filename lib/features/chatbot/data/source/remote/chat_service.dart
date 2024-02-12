@@ -19,10 +19,11 @@ class ChatService {
 
   List<String> _previousConversation = [];
 
-  Future<List<String>> getQuerySuggestions() async {
+  Future<List<String>> getQuerySuggestions(String language) async {
     const url = "query-suggestions";
     final body = jsonEncode({
       "conversation": _previousConversation,
+      "language": language,
     });
 
     debugPrint("ChatService: body: $body");
@@ -34,10 +35,12 @@ class ChatService {
 
     if (response.statusCode == 200) {
       // Request successful, handle the response
-      List<String> suggestions = utf8
-          .decode(
-            response.data.runes.toList(),
-          )
+      List<String> suggestions = 
+      // utf8
+      //     .decode(
+      //       response.data.runes.toList(),
+      //     )
+          response.data
           .split("|");
 
       debugPrint('ChatService: unfiltered querySuggestions: $suggestions');
@@ -54,11 +57,12 @@ class ChatService {
     }
   }
 
-  Future<String?> ask(String query) async {
+  Future<String?> ask(String query, String language) async {
     const chatResponseUrl = "stream";
     final body = jsonEncode({
       "message": query,
       "previousConversation": _previousConversation,
+      "language": language,
     });
 
     _addUserMessageToContext(query);
@@ -72,9 +76,11 @@ class ChatService {
 
     if (response.statusCode == 200) {
       // Request successful, handle the response
-      final responseText = utf8.decode(
-        response.data.runes.toList(),
-      );
+      debugPrint("Response text: ${response.data}");
+      // final responseText = utf8.decode(
+      //   response.data.runes.toList(),
+      // );
+      final responseText = response.data;
       debugPrint('Response body: ${response.data}');
       debugPrint('Response decoded body: $responseText');
       _addChatBotMessageToContext(responseText);

@@ -144,11 +144,10 @@ class AppDrawer extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      var currentLanguage = ref
-                                          .watch(globalLanguageProvider)
+                                      var languageProvider = ref.watch(globalLanguageProvider);
+                                      var currentLanguage = languageProvider
                                           .currentLanguage;
-                                      var currentLanguageCode = ref
-                                          .watch(globalLanguageProvider)
+                                      var currentLanguageCode = languageProvider
                                           .currentLocale.languageCode;         
                                       debugPrint("language: $currentLanguage");
                                       return Consumer(

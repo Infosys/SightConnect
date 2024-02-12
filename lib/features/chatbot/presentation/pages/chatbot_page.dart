@@ -318,7 +318,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _askChatBot(String message) async {
-    final response = await _chatService.ask(message);
+    final response = await _chatService.ask(message, widget.selectedLanguage);
 
     if (response != null) {
       _chatMessage(
@@ -337,7 +337,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     setState(() {
       _isLoadingQuerySuggestions = true;
     });
-    final suggestions = await _chatService.getQuerySuggestions();
+    final suggestions = await _chatService.getQuerySuggestions(widget.selectedLanguage);
     await Future.delayed(Durations.extralong4);
     setState(() {
       _isLoadingQuerySuggestions = false;
