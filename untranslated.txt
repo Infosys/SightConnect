@@ -24,9 +24,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "bn": [
@@ -36,9 +36,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "gu": [
@@ -66,9 +66,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "hi": [
@@ -77,9 +77,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "kn": [
@@ -89,9 +89,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "ml": [
@@ -101,9 +101,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "mr": [
@@ -115,9 +115,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "or": [
@@ -145,9 +145,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "ta": [
@@ -175,9 +175,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "te": [
@@ -187,9 +187,9 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ],
 
   "ur": [
@@ -217,8 +217,8 @@
     "emailSubject",
     "recentServicesCataractEyeTest",
     "recentServicesRedEyeTest",
-    "inviteNowText",
+    "poweredByText",
     "digitalHealthCard",
-    "poweredByText"
+    "inviteNowText"
   ]
 }

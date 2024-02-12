@@ -236,5 +236,8 @@
   "smsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install",
   "emailSubject": "Prioritize your eye health with SightConnect App!",
   "recentServicesCataractEyeTest": "Cataract Eye Test",
-  "recentServicesRedEyeTest": "Red Eye Test"
+  "recentServicesRedEyeTest": "Red Eye Test",
+  "poweredByText": "Powered by",
+  "digitalHealthCard": "Digital Public Health Stack",
+  "inviteNowText": "Invite Now"
 }
