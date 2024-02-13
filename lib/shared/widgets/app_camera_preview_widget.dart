@@ -14,9 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../../../../../../shared/widgets/custom_app_bar.dart';
+import 'custom_app_bar.dart';
 
-class TriageEyeCameraDisplay extends StatelessWidget {
+class AppCamerPreviewWidget extends StatelessWidget {
   final VoidCallback onCameraSwitch;
   final VoidCallback onFlashToggle;
   final VoidCallback onCapture;
@@ -29,7 +29,7 @@ class TriageEyeCameraDisplay extends StatelessWidget {
   final bool isEyeValid;
   final bool isDrawerEnabled;
 
-  const TriageEyeCameraDisplay({
+  const AppCamerPreviewWidget({
     super.key,
     required this.onCameraSwitch,
     required this.onFlashToggle,
