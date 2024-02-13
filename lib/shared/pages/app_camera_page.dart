@@ -50,7 +50,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   bool _isLoading = false;
   String _progressMessage = "Loading...";
   bool _isPermissionGranted = false;
-  final ValueNotifier<bool> _isEyeValid = ValueNotifier<bool>(false);
+  bool _isEyeValid = false;
   List<Point<double>> _translatedEyeContours = [];
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -64,7 +64,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        _isEyeValid.addListener(_checkEyeValidity);
         final activeRole = PersistentAuthStateService.authState.activeRole;
         final role = roleMapper(activeRole);
         if (role == Role.ROLE_OPTOMETRIST) {
@@ -74,12 +73,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         _checkPermissions(context);
       },
     );
-  }
-
-  void _checkEyeValidity() {
-    if (_isEyeValid.value) {
-      _takePicture(context);
-    }
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
@@ -228,8 +221,20 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
           boxHeight,
         );
         // Validity of the eye
-        _isEyeValid.value = eyesInsideTheBox &&
+        _isEyeValid = eyesInsideTheBox &&
             EyeDetectorService.areEyesCloseEnough(eyeWidthRatio);
+
+        ////// TESTING
+        await Future.delayed(const Duration(seconds: 1));
+        if (_isEyeValid && mounted) {
+          final image = await _takePicture(context);
+          setState(() {
+            _isBusy = false;
+          });
+          widget.onCapture(image);
+          return;
+        }
+        ////// TESTING
       } else {
         _translatedEyeContours = [];
       }
@@ -244,7 +249,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         boxCenter,
         boxWidth,
         boxHeight,
-        _isEyeValid.value,
+        _isEyeValid,
         (size) {
           _canvasSize = size;
         },
@@ -296,7 +301,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     logger.d('AppCameraPage: dispose');
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
-      _isEyeValid.removeListener(_checkEyeValidity);
       _stopLiveFeed();
     }
     super.dispose();
@@ -350,7 +354,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       return TriageEyeCameraDisplay(
         isDrawerEnabled: widget.isDrawerEnabled,
         scaffoldKey: scaffoldKey,
-        isEyeValid: Platform.isAndroid ? _isEyeValid.value : true,
+        isEyeValid: Platform.isAndroid ? _isEyeValid : true,
         onCameraSwitch: () async {
           await _toggleCamera();
         },
