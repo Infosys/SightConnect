@@ -64,7 +64,7 @@ class _NearbyVisionCentersListState
     final loc = context.loc!;
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
-    logger.d("nearByVisionCenterProvider, viewState: $viewState");
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
       child: Column(

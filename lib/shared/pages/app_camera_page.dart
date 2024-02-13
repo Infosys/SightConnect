@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
@@ -38,7 +40,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     with WidgetsBindingObserver {
   final FaceMeshDetector meshDetector =
       FaceMeshDetector(option: FaceMeshDetectorOptions.faceMesh);
-  CameraLensDirection _cameraLensDirection = CameraLensDirection.back;
+  CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
   final ResolutionPreset defaultResolution = ResolutionPreset.high;
   late CameraController _controller;
   List<CameraDescription> _cameras = [];
@@ -62,7 +64,14 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => _checkPermissions(context),
+      (_) {
+        final activeRole = PersistentAuthStateService.authState.activeRole;
+        final role = roleMapper(activeRole);
+        if (role == Role.ROLE_OPTOMETRIST) {
+          _cameraLensDirection = CameraLensDirection.back;
+        }
+        _checkPermissions(context);
+      },
     );
   }
 
