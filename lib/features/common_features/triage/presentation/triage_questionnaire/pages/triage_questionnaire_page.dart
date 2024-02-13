@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/triage_text_type_question.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -160,6 +161,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                         TextButton(
                                           onPressed: () async {
                                             if (index == 0) {
+                                              ref
+                                                  .read(accessibilityProvider)
+                                                  .resetBrightness();
                                               Navigator.of(context).pop();
                                             }
                                             int groupSectionCount = 0;

@@ -97,7 +97,7 @@ class TriageExitAlertBox extends HookConsumerWidget {
                           } finally {
                             isLoading.value = false;
                             ref.read(resetProvider).reset();
-                            ref.read(accessibilityProvider).reset();
+                            ref.read(accessibilityProvider).resetBrightness();
                             navigator.popUntil((route) => route.isFirst);
                           }
                         },

@@ -29,8 +29,6 @@ class AccessibilityProvider extends ChangeNotifier {
 
   Future<void> setBrightness() async {
     try {
-      final current = await ScreenBrightness().current;
-      _brightness = current;
       await ScreenBrightness().setScreenBrightness(0.8);
     } catch (e) {
       logger.d(e.toString());
@@ -41,17 +39,9 @@ class AccessibilityProvider extends ChangeNotifier {
 
   Future<void> resetBrightness() async {
     try {
-      await ScreenBrightness().setScreenBrightness(_brightness);
-      reset();
+      await ScreenBrightness().resetScreenBrightness();
     } catch (e) {
       logger.d(e.toString());
     }
-  }
-
-  void reset() {
-    _brightness = 0.0;
-    _threshold = 60.0;
-    _serverThreshold = 60;
-    notifyListeners();
   }
 }

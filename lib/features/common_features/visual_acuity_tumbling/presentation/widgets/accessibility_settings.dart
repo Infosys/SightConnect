@@ -56,7 +56,7 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                         ),
                         TextButton(
                           onPressed: () {
-                            ref.read(accessibilityProvider).reset();
+                            ref.read(accessibilityProvider).resetBrightness();
                             Navigator.of(context).pop();
                           },
                           child: const Text('Reset to Default'),
