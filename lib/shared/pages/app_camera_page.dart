@@ -136,16 +136,13 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         if (!mounted) {
           return;
         }
-        // if (Platform.isAndroid) {
-        //   _canProcess = true;
-        //   _isBusy = false;
-        //   _controller.startImageStream(_processCameraImage);
-        // } else {
-        //   logger.d('AppCameraPage: _startLiveFeed: iOS');
-        // }
-        _canProcess = true;
-        _isBusy = false;
-        _controller.startImageStream(_processCameraImage);
+        if (Platform.isAndroid) {
+          _canProcess = true;
+          _isBusy = false;
+          _controller.startImageStream(_processCameraImage);
+        } else {
+          logger.d('AppCameraPage: _startLiveFeed: iOS');
+        }
       },
     );
     if (mounted) {
@@ -361,7 +358,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         controller: _controller,
         customPaint: Platform.isAndroid ? customPaint : null,
         onCapture: () async {
-          if (!_isEyeValid) {
+          if (Platform.isAndroid && !_isEyeValid) {
             return;
           }
           final XFile? image = await _takePicture(context);

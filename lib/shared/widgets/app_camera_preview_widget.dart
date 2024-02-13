@@ -225,6 +225,7 @@ class AppCamerPreviewWidget extends StatelessWidget {
                               Material(
                                 color: Colors.transparent,
                                 child: InkWell(
+                                  customBorder: const CircleBorder(),
                                   onTap: () {
                                     onCapture();
                                   },
