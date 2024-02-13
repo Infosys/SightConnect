@@ -6,24 +6,22 @@ class LoadingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 8),
-            Text(
-              'Loading...',
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Loading...',
+            style: applyRobotoFont(
+              fontSize: 14,
             ),
-            const CircularProgressIndicator(),
-          ],
-        ),
+          ),
+          const SizedBox(height: 8),
+          const CircularProgressIndicator(),
+        ],
       ),
     );
   }
