@@ -223,18 +223,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         // Validity of the eye
         _isEyeValid = eyesInsideTheBox &&
             EyeDetectorService.areEyesCloseEnough(eyeWidthRatio);
-
-        ////// TESTING
-        await Future.delayed(const Duration(seconds: 1));
-        if (_isEyeValid && mounted) {
-          final image = await _takePicture(context);
-          setState(() {
-            _isBusy = false;
-          });
-          widget.onCapture(image);
-          return;
-        }
-        ////// TESTING
       } else {
         _translatedEyeContours = [];
       }
@@ -367,6 +355,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         controller: _controller,
         customPaint: Platform.isAndroid ? customPaint : null,
         onCapture: () async {
+          if (!_isEyeValid) {
+            return;
+          }
           final XFile? image = await _takePicture(context);
           logger.d("_takePicture: $image");
           widget.onCapture(image);
@@ -422,9 +413,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         return null;
       }
       return croppedImage;
-    } on CameraException {
-      Fluttertoast.showToast(msg: "Camera not found");
-      return null;
+    } on CameraException catch (e, s) {
+      logger.e("Camera exception: $e $s");
+      rethrow;
     } catch (e) {
       logger.e("Camera exception: $e");
       Fluttertoast.showToast(msg: "Camera exception");
