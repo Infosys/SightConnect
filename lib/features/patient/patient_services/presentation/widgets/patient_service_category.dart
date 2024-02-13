@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/pages/patient_appointment_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';

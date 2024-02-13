@@ -90,7 +90,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            person.name?.capitalize() ?? "",
+                            person.name?.capitalizeFirstOfEach() ?? "",
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,

@@ -5,7 +5,6 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_detector_painter.dart';
@@ -70,6 +69,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         if (role == Role.ROLE_OPTOMETRIST) {
           _cameraLensDirection = CameraLensDirection.back;
         }
+
         _checkPermissions(context);
       },
     );
@@ -223,6 +223,18 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         // Validity of the eye
         _isEyeValid = eyesInsideTheBox &&
             EyeDetectorService.areEyesCloseEnough(eyeWidthRatio);
+
+        ////// TESTING
+        await Future.delayed(const Duration(seconds: 1));
+        if (_isEyeValid && mounted) {
+          final image = await _takePicture(context);
+          setState(() {
+            _isBusy = false;
+          });
+          widget.onCapture(image);
+          return;
+        }
+        ////// TESTING
       } else {
         _translatedEyeContours = [];
       }

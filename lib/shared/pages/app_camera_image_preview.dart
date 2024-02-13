@@ -32,7 +32,7 @@ class AppCameraImagePreview extends StatelessWidget {
               color: AppColor.black.withOpacity(0.5),
               padding: EdgeInsets.symmetric(
                 horizontal: AppSize.width(context) * 0.05,
-                vertical: AppSize.height(context) * 0.02,
+                vertical: AppSize.height(context) * 0.05,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
