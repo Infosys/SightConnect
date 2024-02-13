@@ -21,11 +21,13 @@ class AppCameraPage extends ConsumerStatefulWidget {
   const AppCameraPage({
     required this.onCapture,
     required this.topHeading,
+    this.isDrawerEnabled = true,
     super.key,
   });
 
   final Function(XFile?) onCapture;
   final String topHeading;
+  final bool isDrawerEnabled;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -329,6 +331,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       );
     } else {
       return TriageEyeCameraDisplay(
+        isDrawerEnabled: widget.isDrawerEnabled,
         scaffoldKey: scaffoldKey,
         isEyeValid: Platform.isAndroid ? _isEyeValid : true,
         onCameraSwitch: () async {

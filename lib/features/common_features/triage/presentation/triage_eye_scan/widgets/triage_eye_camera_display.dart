@@ -27,6 +27,7 @@ class TriageEyeCameraDisplay extends StatelessWidget {
   final CustomPaint? customPaint;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final bool isEyeValid;
+  final bool isDrawerEnabled;
 
   const TriageEyeCameraDisplay({
     super.key,
@@ -40,6 +41,7 @@ class TriageEyeCameraDisplay extends StatelessWidget {
     required this.customPaint,
     required this.scaffoldKey,
     required this.isEyeValid,
+    required this.isDrawerEnabled,
   });
 
   @override
@@ -64,7 +66,7 @@ class TriageEyeCameraDisplay extends StatelessWidget {
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: AppColor.black,
-          drawer: const TriageStepsDrawer(),
+          drawer: isDrawerEnabled ? const TriageStepsDrawer() : null,
           appBar: CustomAppbar(
             iconTheme: const IconThemeData(
               color: AppColor.white,
@@ -76,20 +78,22 @@ class TriageEyeCameraDisplay extends StatelessWidget {
             leadingWidth: 60,
             titleSpacing: 0.0,
             centerTitle: false,
-            leadingIcon: InkWell(
-              customBorder: const CircleBorder(),
-              onTap: () {
-                scaffoldKey.currentState!.openDrawer();
-              },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Image.asset(
-                  AppIcon.hamburgerIcon,
-                  color: AppColor.white,
-                ),
-              ),
-            ),
+            leadingIcon: !isDrawerEnabled
+                ? const SizedBox()
+                : InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Image.asset(
+                        AppIcon.hamburgerIcon,
+                        color: AppColor.white,
+                      ),
+                    ),
+                  ),
             title: Text(
               loc.eyeScanTitle,
               style: applyFiraSansFont(

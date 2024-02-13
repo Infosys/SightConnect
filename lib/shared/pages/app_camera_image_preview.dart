@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +30,9 @@ class AppCameraImagePreview extends StatelessWidget {
             right: 0,
             child: Container(
               color: AppColor.black.withOpacity(0.5),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.width(context) * 0.05,
+                vertical: AppSize.height(context) * 0.02,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
