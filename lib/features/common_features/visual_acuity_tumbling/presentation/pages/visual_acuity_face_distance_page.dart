@@ -406,39 +406,60 @@ class _VisualAcuityFaceDistancePageViewState
                                 : 'Bring your face inside the box',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: (_distanceToFace != null &&
-                                      (_distanceToFace! >= 35 &&
-                                          _distanceToFace! <= 45))
+                              color: isValidDistance
                                   ? const Color(0xff22BF85)
                                   : AppColor.red,
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: AppSize.height(context) * 0.04,
-                        left: AppSize.width(context) * 0.1,
-                        right: AppSize.width(context) * 0.1,
-                        child: ElevatedButton(
-                          onPressed: _distanceToFace != null &&
-                                  (_distanceToFace! >= 35 &&
-                                      _distanceToFace! <= 45)
-                              ? () {
-                                  final NavigatorState navigator =
-                                      Navigator.of(context);
-                                  logger.d("Next Button Pressed");
-                                  _addLoading();
-                                  navigator.pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VisualAcuityTumblingLeftEyeInstruction(),
-                                    ),
-                                  );
-                                }
-                              : null,
-                          child: const Text("Proceed"),
-                        ),
-                      )
+                      () {
+                        if (Platform.isAndroid) {
+                          return Positioned(
+                            bottom: AppSize.height(context) * 0.04,
+                            left: AppSize.width(context) * 0.1,
+                            right: AppSize.width(context) * 0.1,
+                            child: ElevatedButton(
+                              onPressed: isValidDistance
+                                  ? () {
+                                      final NavigatorState navigator =
+                                          Navigator.of(context);
+                                      logger.d("Next Button Pressed");
+                                      _addLoading();
+                                      navigator.pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VisualAcuityTumblingLeftEyeInstruction(),
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              child: const Text("Proceed"),
+                            ),
+                          );
+                        } else {
+                          return Positioned(
+                            bottom: AppSize.height(context) * 0.04,
+                            left: AppSize.width(context) * 0.1,
+                            right: AppSize.width(context) * 0.1,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                final NavigatorState navigator =
+                                    Navigator.of(context);
+                                logger.d("Next Button Pressed");
+                                _addLoading();
+                                navigator.pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisualAcuityTumblingLeftEyeInstruction(),
+                                  ),
+                                );
+                              },
+                              child: const Text("Proceed"),
+                            ),
+                          );
+                        }
+                      }(),
                     ],
                   ),
                 ),
@@ -449,4 +470,9 @@ class _VisualAcuityFaceDistancePageViewState
       );
     }
   }
+
+  bool get isValidDistance =>
+      _distanceToFace != null &&
+      _distanceToFace! >= 35 &&
+      _distanceToFace! <= 45;
 }

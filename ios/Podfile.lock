@@ -66,10 +66,6 @@ PODS:
   - google_mlkit_commons (0.6.1):
     - Flutter
     - MLKitVision
-  - google_mlkit_face_detection (0.9.0):
-    - Flutter
-    - google_mlkit_commons
-    - GoogleMLKit/FaceDetection (~> 4.0.0)
   - google_mlkit_face_mesh_detection (0.0.2):
     - Flutter
     - google_mlkit_commons
@@ -77,11 +73,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleMLKit/FaceDetection (4.0.0):
-    - GoogleMLKit/MLKitCore
-    - MLKitFaceDetection (~> 3.0.0)
-  - GoogleMLKit/MLKitCore (4.0.0):
-    - MLKitCommon (~> 9.0.0)
   - GoogleToolboxForMac/DebugUtils (2.3.2):
     - GoogleToolboxForMac/Defines (= 2.3.2)
   - GoogleToolboxForMac/Defines (2.3.2)
@@ -117,9 +108,6 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.0)
     - GoogleUtilitiesComponents (~> 1.0)
     - GTMSessionFetcher/Core (< 3.0, >= 1.1)
-  - MLKitFaceDetection (3.0.0):
-    - MLKitCommon (~> 9.0)
-    - MLKitVision (~> 5.0)
   - MLKitVision (5.0.0):
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
@@ -147,9 +135,9 @@ PODS:
   - ReachabilitySwift (5.0.0)
   - screen_brightness_ios (0.1.0):
     - Flutter
-  - SDWebImage (5.18.10):
-    - SDWebImage/Core (= 5.18.10)
-  - SDWebImage/Core (5.18.10)
+  - SDWebImage (5.18.8):
+    - SDWebImage/Core (= 5.18.8)
+  - SDWebImage/Core (5.18.8)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -173,9 +161,11 @@ PODS:
   - SQLCipher/standard (4.5.4):
     - SQLCipher/common
   - SwiftyGif (5.4.4)
-  - Toast (4.1.0)
+  - Toast (4.0.0)
   - Try (2.1.1)
   - url_launcher_ios (0.0.1):
+    - Flutter
+  - workmanager (0.0.1):
     - Flutter
 
 DEPENDENCIES:
@@ -190,7 +180,6 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
-  - google_mlkit_face_detection (from `.symlinks/plugins/google_mlkit_face_detection/ios`)
   - google_mlkit_face_mesh_detection (from `.symlinks/plugins/google_mlkit_face_mesh_detection/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - location (from `.symlinks/plugins/location/ios`)
@@ -206,6 +195,7 @@ DEPENDENCIES:
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - sqflite_sqlcipher (from `.symlinks/plugins/sqflite_sqlcipher/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - workmanager (from `.symlinks/plugins/workmanager/ios`)
 
 SPEC REPOS:
   trunk:
@@ -213,7 +203,6 @@ SPEC REPOS:
     - DKPhotoGallery
     - FMDB
     - GoogleDataTransport
-    - GoogleMLKit
     - GoogleToolboxForMac
     - GoogleUtilities
     - GoogleUtilitiesComponents
@@ -221,7 +210,6 @@ SPEC REPOS:
     - IOSSecuritySuite
     - MLImage
     - MLKitCommon
-    - MLKitFaceDetection
     - MLKitVision
     - MTBBarcodeScanner
     - nanopb
@@ -257,8 +245,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   google_mlkit_commons:
     :path: ".symlinks/plugins/google_mlkit_commons/ios"
-  google_mlkit_face_detection:
-    :path: ".symlinks/plugins/google_mlkit_face_detection/ios"
   google_mlkit_face_mesh_detection:
     :path: ".symlinks/plugins/google_mlkit_face_mesh_detection/ios"
   image_picker_ios:
@@ -289,6 +275,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite_sqlcipher/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
+  workmanager:
+    :path: ".symlinks/plugins/workmanager/ios"
 
 SPEC CHECKSUMS:
   camera_avfoundation: 3125e8cd1a4387f6f31c6c63abb8a55892a9eeeb
@@ -305,20 +293,17 @@ SPEC CHECKSUMS:
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   google_mlkit_commons: 3857c1e9f23ca02073f8dd34a7a3580feb814cef
-  google_mlkit_face_detection: 52f7e4c15a7c49b98940fa32af4c2b10fd8608fc
   google_mlkit_face_mesh_detection: 8d536ecd0323efb7595445be86800bf37afb3e53
   GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
-  GoogleMLKit: 2bd0dc6253c4d4f227aad460f69215a504b2980e
   GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
-  image_picker_ios: 99dfe1854b4fa34d0364e74a78448a0151025425
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   IOSSecuritySuite: e764318117aabd1f894cbdfc5ac013a59352953d
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
   MLImage: 7bb7c4264164ade9bf64f679b40fb29c8f33ee9b
   MLKitCommon: c1b791c3e667091918d91bda4bba69a91011e390
-  MLKitFaceDetection: 4981488f71ea8ed718cda692a29ab562637d9ae5
   MLKitVision: 8baa5f46ee3352614169b85250574fde38c36f49
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
@@ -330,7 +315,7 @@ SPEC CHECKSUMS:
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   screen_brightness_ios: 715ca807df953bf676d339f11464e438143ee625
-  SDWebImage: fc8f2d48bbfd72ef39d70e981bd24a3f3be53fec
+  SDWebImage: a81bbb3ba4ea5f810f4069c68727cb118467a04a
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
@@ -339,10 +324,11 @@ SPEC CHECKSUMS:
   sqflite_sqlcipher: 2f7e72fbda46fe3255493ba3f21ebe232ff9a243
   SQLCipher: 905b145f65f349f26da9e60a19901ad24adcd381
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
-  Toast: ec33c32b8688982cecc6348adeae667c1b9938da
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Try: 5ef669ae832617b3cee58cb2c6f99fb767a4ff96
   url_launcher_ios: bf5ce03e0e2088bad9cc378ea97fa0ed5b49673b
+  workmanager: 0afdcf5628bbde6924c21af7836fed07b42e30e6
 
-PODFILE CHECKSUM: 46a5e20176245e03b9caf2e1ec7f31cb9fd8a9a1
+PODFILE CHECKSUM: 53bee026bc51f860c00bab2642d9893a19cf03a0
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

@@ -133,7 +133,7 @@ import AVFoundation
                     return ["width": 1.0, "height": 1.2]
                     #endif
                 }
-               logger.d(identifier)
+            //    logger.d(identifier)
                 return mapToDevice(identifier: identifier)
             }()
         

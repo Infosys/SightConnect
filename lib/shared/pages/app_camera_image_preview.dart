@@ -5,8 +5,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
-class TriageEyePreviewPage extends StatelessWidget {
-  const TriageEyePreviewPage({super.key, required this.imageFile});
+class AppCameraImagePreview extends StatelessWidget {
+  const AppCameraImagePreview({super.key, required this.imageFile});
   final XFile imageFile;
 
   @override
@@ -57,7 +57,6 @@ class TriageEyePreviewPage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         Navigator.of(context).pop(imageFile);
-                        
                       },
                       icon: const Icon(Icons.check_circle, size: 22),
                       label: Text(

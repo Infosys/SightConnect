@@ -1,52 +1,46 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_detector_painter.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_preview_page.dart';
-import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/provider/update_triage_eye_scan_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/triage_eye_camera_display.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:path_provider/path_provider.dart';
 
-class UpdateTriageEyeCapturingPage extends ConsumerStatefulWidget {
-  const UpdateTriageEyeCapturingPage({
-    required this.diagnosticReportId,
+class AppCameraPage extends ConsumerStatefulWidget {
+  const AppCameraPage({
+    required this.onCapture,
+    required this.topHeading,
     super.key,
   });
-  final int diagnosticReportId;
+
+  final Function(XFile?) onCapture;
+  final String topHeading;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _UpdateTriageEyeCapturingPageState();
+      _PatientAppCameraPageState();
 }
 
-class _UpdateTriageEyeCapturingPageState
-    extends ConsumerState<UpdateTriageEyeCapturingPage>
+class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     with WidgetsBindingObserver {
-  List<CameraDescription> _cameras = [];
-  CustomPaint? _customPaint;
-  late CameraController _controller;
+  final FaceMeshDetector meshDetector =
+      FaceMeshDetector(option: FaceMeshDetectorOptions.faceMesh);
   CameraLensDirection _cameraLensDirection = CameraLensDirection.back;
-  final FaceMeshDetector _meshDetector = FaceMeshDetector(
-    option: FaceMeshDetectorOptions.faceMesh,
-  );
-  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
-  final ResolutionPreset _defaultResolution = ResolutionPreset.high;
+  final ResolutionPreset defaultResolution = ResolutionPreset.high;
+  late CameraController _controller;
+  List<CameraDescription> _cameras = [];
+  CustomPaint? customPaint;
   bool _canProcess = false;
   bool _isBusy = false;
   Size _canvasSize = Size.zero;
@@ -55,15 +49,14 @@ class _UpdateTriageEyeCapturingPageState
   bool _isPermissionGranted = false;
   bool _isEyeValid = false;
   List<Point<double>> _translatedEyeContours = [];
-  TriageEyeType _currentEye = TriageEyeType.RIGHT;
+  final TriageEyeType _currentEye = TriageEyeType.RIGHT;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    logger.d('TriageEyeCapturingPage: initState');
     super.initState();
-    _isPermissionGranted = false;
-    _isLoading = false;
+    logger.d('AppCameraPage: initState');
+
     scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback(
@@ -72,7 +65,7 @@ class _UpdateTriageEyeCapturingPageState
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
-    logger.d("TriageEyeCapturingPage: Check Permission Called");
+    logger.d("AppCameraPage: Check Permission Called");
     final NavigatorState navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -90,38 +83,34 @@ class _UpdateTriageEyeCapturingPageState
       }
       await _initializeCamera();
     } else {
-      logger.d("TriageEyeCapturingPage: Permission not granted");
+      logger.d("AppCameraPage: Permission not granted");
       navigator.pop();
       Fluttertoast.showToast(msg: "Permission not granted");
     }
   }
 
   Future<void> _initializeCamera() async {
-    logger.d('TriageEyeCapturingPage: _initializeCamera');
+    logger.d('AppCameraPage: _initializeCamera');
     final NavigatorState navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      if (Platform.isAndroid) {
-        _canProcess = true;
-        _isBusy = false;
-      }
       await _startLiveFeed();
     } catch (e) {
       logger.d('Error initializing camera: $e');
       navigator.pop();
-      Fluttertoast.showToast(msg: "Service not available");
+      Fluttertoast.showToast(msg: "Camera not found");
     }
   }
 
   Future<void> _startLiveFeed() async {
-    logger.d('TriageEyeCapturingPage: _startLiveFeed');
+    logger.d('AppCameraPage: _startLiveFeed');
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      _defaultResolution,
+      defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
@@ -134,7 +123,11 @@ class _UpdateTriageEyeCapturingPageState
           return;
         }
         if (Platform.isAndroid) {
+          _canProcess = true;
+          _isBusy = false;
           _controller.startImageStream(_processCameraImage);
+        } else {
+          logger.d('AppCameraPage: _startLiveFeed: iOS');
         }
       },
     );
@@ -164,7 +157,7 @@ class _UpdateTriageEyeCapturingPageState
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
+    final List<FaceMesh> meshes = await meshDetector.processImage(inputImage);
 
     // Measurement of the Fixed Center Eye Scanner Box
     const double boxCenterRatio = 0.5;
@@ -238,9 +231,9 @@ class _UpdateTriageEyeCapturingPageState
           _canvasSize = size;
         },
       );
-      _customPaint = CustomPaint(painter: painter);
+      customPaint = CustomPaint(painter: painter);
     } else {
-      _customPaint = null;
+      customPaint = null;
     }
 
     _isBusy = false;
@@ -252,7 +245,7 @@ class _UpdateTriageEyeCapturingPageState
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
-      "TriageEyeCapturingPage: AppLifecycleState": "$state",
+      "AppCameraPage: AppLifecycleState": "$state",
       "isPermissionGranted": "$_isPermissionGranted",
       "isLoading": "$_isLoading",
     });
@@ -261,20 +254,20 @@ class _UpdateTriageEyeCapturingPageState
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d('TriageEyeCapturingPage: AppLifecycleState.inactive');
+      logger.d('AppCameraPage: AppLifecycleState.inactive');
       setLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d('TriageEyeCapturingPage: AppLifecycleState.resumed');
+      logger.d('AppCameraPage: AppLifecycleState.resumed');
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d('TriageEyeCapturingPage: AppLifecycleState.paused');
+      logger.d('AppCameraPage: AppLifecycleState.paused');
       setLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d('TriageEyeCapturingPage: AppLifecycleState.detached');
+      logger.d('AppCameraPage: AppLifecycleState.detached');
       setLoading();
       _stopLiveFeed();
     }
@@ -282,7 +275,7 @@ class _UpdateTriageEyeCapturingPageState
 
   @override
   void dispose() {
-    logger.d('TriageEyeCapturingPage: dispose');
+    logger.d('AppCameraPage: dispose');
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
       _stopLiveFeed();
@@ -291,11 +284,11 @@ class _UpdateTriageEyeCapturingPageState
   }
 
   Future<void> _stopLiveFeed() async {
-    logger.d('TriageEyeCapturingPage: _stopLiveFeed');
+    logger.d('AppCameraPage: _stopLiveFeed');
 
     try {
       _canProcess = false;
-      _meshDetector.close();
+      meshDetector.close();
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();
@@ -321,8 +314,6 @@ class _UpdateTriageEyeCapturingPageState
 
   @override
   Widget build(BuildContext context) {
-    final model = ref.watch(updateTriageEyeScanProvider);
-    final loc = context.loc!;
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
@@ -337,174 +328,27 @@ class _UpdateTriageEyeCapturingPageState
         ),
       );
     } else {
-      return Scaffold(
-        key: scaffoldKey,
-        backgroundColor: AppColor.black,
-        appBar: CustomAppbar(
-          backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(
-            color: AppColor.white,
-          ),
-          actionsIconTheme: const IconThemeData(
-            color: AppColor.white,
-          ),
-          leadingIcon: const SizedBox(),
-          title: Text(
-            loc.eyeScanTitle,
-            style: applyRobotoFont(
-              color: AppColor.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          actions: [
-            InkWell(
-              onTap: () async {
-                await _toggleFlash();
-              },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-                child: Icon(
-                  _controller.value.flashMode == FlashMode.off
-                      ? Icons.flash_off
-                      : Icons.flash_on,
-                  color: AppColor.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: LoadingOverlay(
-          isLoading: _isLoading,
-          progressMessage: _progressMessage,
-          child: Container(
-            color: Colors.black,
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                Platform.isAndroid
-                    ? AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: CameraPreview(
-                          _controller,
-                          child: _customPaint,
-                        ),
-                      )
-                    : AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: CameraPreview(
-                          _controller,
-                        ),
-                      ),
-                Positioned(
-                  top: AppSize.height(context) * 0.05,
-                  left: AppSize.width(context) * 0.1,
-                  right: AppSize.width(context) * 0.1,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      _eyeLocalization(model.currentEye, context),
-                      style: applyRobotoFont(
-                        fontSize: 16,
-                        color: AppColor.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Visibility(
-                      visible: Platform.isAndroid && !_isEyeValid,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Container(
-                          width: AppSize.width(context) * 0.8,
-                          decoration: BoxDecoration(
-                            color: AppColor.black.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          child: Text(
-                            loc.eyeBoxText,
-                            textAlign: TextAlign.center,
-                            style: applyRobotoFont(
-                              fontSize: 16,
-                              color: AppColor.white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: AppSize.height(context) * 0.05,
-                        horizontal: AppSize.width(context) * 0.1,
-                      ),
-                      color: Colors.transparent,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                await _toggleCamera();
-                              },
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: AppSize.kmpadding,
-                                ),
-                                child: Icon(
-                                  Icons.flip_camera_ios,
-                                  color: AppColor.white,
-                                ),
-                              ),
-                            ),
-                            const Spacer(),
-                            InkWell(
-                              onTap: () async {
-                                if (Platform.isAndroid && !_isEyeValid) {
-                                  return;
-                                }
-                                await _takePicture(context);
-                              },
-                              child:
-                                  SvgPicture.asset("assets/icons/camera.svg"),
-                            ),
-                            const Spacer(),
-                            Tooltip(
-                              message: loc.eyeAssessmentToolTip,
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: AppSize.kmpadding,
-                                ),
-                                child: Icon(
-                                  Icons.info_outline,
-                                  color: AppColor.white,
-                                ),
-                              ),
-                            ),
-                          ]),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+      return TriageEyeCameraDisplay(
+        scaffoldKey: scaffoldKey,
+        isEyeValid: Platform.isAndroid ? _isEyeValid : true,
+        onCameraSwitch: () async {
+          await _toggleCamera();
+        },
+        onFlashToggle: () async {
+          await _toggleFlash();
+        },
+        isLoading: _isLoading,
+        progressMessage: _progressMessage,
+        topHeadingTitle: widget.topHeading,
+        controller: _controller,
+        customPaint: Platform.isAndroid ? customPaint : null,
+        onCapture: () async {
+          final XFile? image = await _takePicture(context);
+          logger.d("_takePicture: $image");
+          widget.onCapture(image);
+        },
       );
     }
-  }
-
-  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
-    return switch (eye) {
-      TriageEyeType.LEFT => context.loc!.leftEyeString,
-      TriageEyeType.RIGHT => context.loc!.rightEyeString,
-      TriageEyeType.BOTH => context.loc!.bothEyeString,
-      _ => "",
-    };
   }
 
   Future<void> _toggleCamera() async {
@@ -537,58 +381,30 @@ class _UpdateTriageEyeCapturingPageState
     removeLoading();
   }
 
-  Future<void> _takePicture(BuildContext context) async {
-    var navigator = Navigator.of(context);
-
+  Future<XFile?> _takePicture(BuildContext context) async {
     try {
       final XFile? image = await _capturePicture(context);
       if (image == null) {
-        return;
+        return null;
       }
 
       final XFile? croppedImage = await _cropImage(image);
       if (croppedImage == null) {
-        return;
+        return null;
       }
 
       final bool isVerfied = await _validateImage(croppedImage);
       if (!isVerfied) {
-        return;
+        return null;
       }
-      var model = ref.read(updateTriageEyeScanProvider);
-
-      if (model.currentEye == TriageEyeType.RIGHT) {
-        model.setRightEyeImage(image);
-        model.setCurrentEye(TriageEyeType.LEFT);
-        setState(() {
-          _currentEye = TriageEyeType.LEFT;
-        });
-      } else if (model.currentEye == TriageEyeType.LEFT) {
-        model.setLeftEyeImage(image);
-
-        setLoading("Uploading...");
-
-        bool response =
-            await model.updateEyeScanReport(widget.diagnosticReportId);
-
-        removeLoading();
-        if (response) {
-          dispose();
-          navigator.pop();
-          navigator.pop();
-          Fluttertoast.showToast(msg: "Eye scan report updated");
-        } else {
-          Fluttertoast.showToast(msg: "Something went wrong");
-        }
-
-        model.setCurrentEye(TriageEyeType.UNKNOWN);
-      }
+      return image;
     } on CameraException {
       Fluttertoast.showToast(msg: "Camera not found");
-      removeLoading();
+      return null;
     } catch (e) {
-      removeLoading();
-      Fluttertoast.showToast(msg: "Something went wrong");
+      logger.e("Camera exception: $e");
+      Fluttertoast.showToast(msg: "Camera exception");
+      return null;
     }
   }
 
@@ -648,7 +464,7 @@ class _UpdateTriageEyeCapturingPageState
   Future<bool> _validateImage(XFile image) async {
     XFile? verifiedImage = await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => UpdateTriageEyePreviewPage(imageFile: image),
+        builder: (context) => AppCameraImagePreview(imageFile: image),
       ),
     );
     if (verifiedImage != null) {
