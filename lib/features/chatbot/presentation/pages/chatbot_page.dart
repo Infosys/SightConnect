@@ -308,7 +308,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       ),
     );
 
-    StandardAction? action = await resolveStandardAction(message);
+    StandardAction? action = await resolveStandardAction(message, widget.selectedLanguageCode);
 
     if (action != null) {
       return _handleStandardAction(action);
