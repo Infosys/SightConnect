@@ -394,21 +394,24 @@ class _VisualAcuityFaceDistancePageViewState
                         top: AppSize.height(context) * 0.06,
                         left: AppSize.width(context) * 0.2,
                         right: AppSize.width(context) * 0.2,
-                        child: Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                          child: AutoSizeText(
-                            _distanceToFace != null
-                                ? 'Distance to Face: $_distanceToFace cm'
-                                : 'Bring your face inside the box',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: isValidDistance
-                                  ? const Color(0xff22BF85)
-                                  : AppColor.red,
+                        child: Visibility(
+                          visible: Platform.isAndroid,
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                            child: AutoSizeText(
+                              _distanceToFace != null
+                                  ? 'Distance to Face: $_distanceToFace cm'
+                                  : 'Bring your face inside the box',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: isValidDistance
+                                    ? const Color(0xff22BF85)
+                                    : AppColor.red,
+                              ),
                             ),
                           ),
                         ),

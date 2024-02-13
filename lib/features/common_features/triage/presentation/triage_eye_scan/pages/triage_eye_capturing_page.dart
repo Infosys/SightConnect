@@ -60,6 +60,7 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
         }
       },
       topHeading: _eyeLocalization(model.currentEye, context),
+      eye: model.currentEye,
     );
   }
 
