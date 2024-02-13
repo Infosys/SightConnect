@@ -109,7 +109,7 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
                   value: model.brightness,
                   label: '${model.brightness.round()}',
                   onChanged: (double value) async {
-                    model.setBrightness(value);
+                    // model.setBrightness(value);
                   },
                 ),
               ),
