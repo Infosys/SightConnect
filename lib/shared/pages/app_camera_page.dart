@@ -409,7 +409,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       if (!isVerfied) {
         return null;
       }
-      return image;
+      return croppedImage;
     } on CameraException {
       Fluttertoast.showToast(msg: "Camera not found");
       return null;
