@@ -33,7 +33,7 @@ class LoadingOverlay extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator.adaptive(),
                     ),
                     const SizedBox(height: 20),
                     Text(

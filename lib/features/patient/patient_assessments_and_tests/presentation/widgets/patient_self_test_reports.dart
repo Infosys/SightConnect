@@ -209,7 +209,7 @@ class _PatientSelfTestReportsState
                               ? const SizedBox(
                                   height: 24,
                                   width: 24,
-                                  child: CircularProgressIndicator(),
+                                  child: CircularProgressIndicator.adaptive(),
                                 )
                               : Flexible(
                                   child: TextButton(
@@ -261,7 +261,7 @@ class _PatientSelfTestReportsState
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: model.hasSelfTestReportMore
-                    ? const CircularProgressIndicator()
+                    ? const CircularProgressIndicator.adaptive()
                     : const Text("No more data"),
               ),
             );

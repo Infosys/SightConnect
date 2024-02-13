@@ -50,7 +50,7 @@ class TriageExitAlertBox extends HookConsumerWidget {
               height: 45,
               width: 45,
               child: Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               ),
             )
           : SizedBox(

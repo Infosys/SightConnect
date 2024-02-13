@@ -91,7 +91,7 @@ class _NearbyVisionCentersListState
             builder: (context) {
               if (viewState.isLoading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator.adaptive(),
                 );
               } else if (viewState.errorMessage != null) {
                 return Container(

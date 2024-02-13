@@ -56,7 +56,7 @@ class _OptometritianDashboardPageState
           },
           loading: () => const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             ),
           ),
           error: (error, stackTrace) {

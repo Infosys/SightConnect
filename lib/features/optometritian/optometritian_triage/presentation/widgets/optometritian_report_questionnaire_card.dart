@@ -144,7 +144,7 @@ class _QuestionnaireList extends ConsumerWidget {
 
     if (model.isLoading) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator.adaptive(),
       );
     }
 

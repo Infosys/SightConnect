@@ -274,7 +274,7 @@ class _AssessmentsAndTestsPageState
                             ? const SizedBox(
                                 height: 20,
                                 width: 20,
-                                child: CircularProgressIndicator(),
+                                child: CircularProgressIndicator.adaptive(),
                               )
                             : TextButton(
                                 onPressed: () => onViewReport(currentData),
@@ -290,7 +290,7 @@ class _AssessmentsAndTestsPageState
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: hasMore
-                      ? const CircularProgressIndicator()
+                      ? const CircularProgressIndicator.adaptive()
                       : const Text("No more data"),
                 ),
               );

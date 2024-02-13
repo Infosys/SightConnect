@@ -59,7 +59,7 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
         ),
         body: model.isLoading
             ? const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               )
             : Consumer(
                 builder: (context, ref, _) {

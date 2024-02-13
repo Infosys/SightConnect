@@ -144,7 +144,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
       return Container();
     }, loading: () {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator.adaptive(),
       );
     });
   }

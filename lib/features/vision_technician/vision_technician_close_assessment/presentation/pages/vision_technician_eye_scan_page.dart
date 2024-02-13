@@ -60,7 +60,7 @@ class _VisionTechnicianEyeCaptureState
               //       boxShadow: applyMediumShadow(),
               //     ),
               //     alignment: Alignment.center,
-              //     child: const CircularProgressIndicator(),
+              //     child: constCircularProgressIndicator.adaptive(),
               //   ),
               if (isImageCaptured) const ImagePreview(),
             ],

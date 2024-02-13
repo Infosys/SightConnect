@@ -37,7 +37,7 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
     if (isLoading.value) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     }

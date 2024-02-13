@@ -133,7 +133,7 @@ class ResultImageCard extends ConsumerWidget {
                           height: 40,
                           width: 40,
                           child: Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator.adaptive(),
                           ),
                         ),
                       ),
@@ -143,7 +143,7 @@ class ResultImageCard extends ConsumerWidget {
                           child: SizedBox(
                             height: 40,
                             width: 40,
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator.adaptive(),
                           ),
                         ),
                       ),

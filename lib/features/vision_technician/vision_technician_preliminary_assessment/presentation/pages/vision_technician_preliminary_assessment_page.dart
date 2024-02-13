@@ -79,7 +79,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
         child: isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator.adaptive())
             : ElevatedButton(
                 onPressed: canSubmit
                     ? () async {

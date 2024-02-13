@@ -174,7 +174,7 @@ class _PatientClinicalTestReportsState
                               ? const SizedBox(
                                   height: 24,
                                   width: 24,
-                                  child: CircularProgressIndicator(),
+                                  child: CircularProgressIndicator.adaptive(),
                                 )
                               : Flexible(
                                   child: TextButton(
@@ -226,7 +226,7 @@ class _PatientClinicalTestReportsState
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: model.hasClinicalReportMore
-                    ? const CircularProgressIndicator()
+                    ? const CircularProgressIndicator.adaptive()
                     : const Text("No more data"),
               ),
             );

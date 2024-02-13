@@ -118,7 +118,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
       loading: () {
         return const Scaffold(
           body: Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           ),
         );
       },

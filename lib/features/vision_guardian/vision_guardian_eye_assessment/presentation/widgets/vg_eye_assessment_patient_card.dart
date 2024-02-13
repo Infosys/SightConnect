@@ -51,7 +51,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
     }
     return loading
         ? const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           )
         : ListView.builder(
             controller: ref
@@ -70,7 +70,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
               if (index == response.length) {
                 return const Padding(
                   padding: EdgeInsets.all(AppSize.klpadding),
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator.adaptive(),
                 );
               }
               return InkWell(

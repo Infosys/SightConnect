@@ -38,17 +38,17 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
             const SizedBox(height: AppSize.klheight),
             ref.watch(vtRegisterProvider(query.value)).when(
               data: (data) {
-                if (data.length == 0) return RegisterPatientButton();
+                if (data.length == 0) return const RegisterPatientButton();
 
                 return RegisterPatientInfoCard(
                   data: data,
                 );
               },
               error: (e, s) {
-                return RegisterPatientButton();
+                return const RegisterPatientButton();
               },
               loading: () {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator.adaptive();
               },
             ),
           ],

@@ -323,14 +323,14 @@ class _VisualAcuityFaceDistancePageViewState
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     } else {

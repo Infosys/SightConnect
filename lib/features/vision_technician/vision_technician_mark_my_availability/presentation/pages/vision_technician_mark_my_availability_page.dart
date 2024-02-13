@@ -67,7 +67,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 ),
               ),
             )
-          : const Center(child: CircularProgressIndicator()),
+          : const Center(child: CircularProgressIndicator.adaptive()),
       appBar: CustomAppbar(
         titleSpacing: 0,
         preferredSizeHeight: 70,

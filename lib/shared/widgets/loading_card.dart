@@ -20,7 +20,7 @@ class LoadingCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const CircularProgressIndicator(),
+          const CircularProgressIndicator.adaptive(),
         ],
       ),
     );
