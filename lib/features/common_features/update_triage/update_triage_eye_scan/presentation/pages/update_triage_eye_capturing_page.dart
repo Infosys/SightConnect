@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/provider/update_triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/main.dart';
