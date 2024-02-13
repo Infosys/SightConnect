@@ -53,7 +53,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   bool _isPermissionGranted = false;
   bool _isEyeValid = false;
   List<Point<double>> _translatedEyeContours = [];
-  final TriageEyeType _currentEye = TriageEyeType.RIGHT;
+
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -188,7 +188,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<FaceMeshPoint> eyePoints =
-            EyeDetectorService.isLeftEye(_currentEye)
+            EyeDetectorService.isLeftEye(widget.topHeading)
                 ? leftEyeContour
                 : rightEyeContour;
 

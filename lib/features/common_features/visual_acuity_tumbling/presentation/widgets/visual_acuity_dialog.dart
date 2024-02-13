@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -166,24 +167,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       insetPadding: EdgeInsets.zero,
       actionsPadding: EdgeInsets.zero,
       content: isLoading.value
-          ? Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Loading...",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const SizedBox(
-                  height: 45,
-                  width: 45,
-                  child: CircularProgressIndicator(),
-                ),
-              ],
-            )
+          ? const LoadingCard()
           : SizedBox(
               width: AppSize.width(context) * 0.8,
               child: Column(

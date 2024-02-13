@@ -76,10 +76,15 @@ class EyeDetectorService {
     );
   }
 
-  static bool isLeftEye(TriageEyeType? currentEye) {
+  static bool isLeftEye(String value) {
     /* We should flip the value because we are considering the user perspective 
      but google_ml_kit considers the viewers perspective.*/
-    return !(currentEye == TriageEyeType.LEFT);
+    if (value.toLowerCase().contains("left")) {
+      return false;
+    } else if (value.toLowerCase().contains("right")) {
+      return true;
+    }
+    return true;
   }
 
   static Point<double> translator(

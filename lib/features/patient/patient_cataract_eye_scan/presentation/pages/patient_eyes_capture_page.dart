@@ -152,7 +152,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
 
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<FaceMeshPoint> eyePoints =
-            EyeDetectorService.isLeftEye(_currentEye)
+            EyeDetectorService.isLeftEye(_currentEye.name)
                 ? leftEyeContour
                 : rightEyeContour;
         // Translate Eye Points
