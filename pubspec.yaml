@@ -94,6 +94,7 @@ dependencies:
   shimmer: ^3.0.0
   workmanager: ^0.5.2
 
+
 dependency_overrides:
   camera:
     git:
