@@ -26,7 +26,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
-    final minSwipeLength = AppSize.width(context) * 0.4;
+    final minSwipeLength = AppSize.width(context) * 0.1;
     // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
     // final distanceText =
     //     ref.watch(distanceNotifierProvider).getDistanceText(context);
@@ -80,7 +80,10 @@ class SwipeGestureCard extends HookConsumerWidget {
         logger.d("distance between start and end point $distanceBetweenPoints");
 
         if (distanceBetweenPoints < minSwipeLength) {
-          await shortSwipeDialog(context, "Swipe is too short");
+          AppToast.showToast(
+            context,
+            "Swipe is too short",
+          );
           return;
         }
 
@@ -211,31 +214,4 @@ class SwipeGestureCard extends HookConsumerWidget {
     double swipeLength = (endPoint - startPoint).distance;
     return swipeLength;
   }
-}
-
-Future<void> shortSwipeDialog(BuildContext context, String message) {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(AppSize.klradius))),
-        content: Text(
-          message,
-          style: applyRobotoFont(),
-        ),
-        actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('Try Again'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
 }
