@@ -26,7 +26,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
-
+    final minSwipeLength = AppSize.width(context) * 0.4;
     // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
     // final distanceText =
     //     ref.watch(distanceNotifierProvider).getDistanceText(context);
@@ -73,7 +73,19 @@ class SwipeGestureCard extends HookConsumerWidget {
       onPanUpdate: (details) {
         endPoint.value = details.localPosition;
       },
-      onPanEnd: (details) {
+      onPanEnd: (details) async {
+        double distanceBetweenPoints =
+            _getDistanceBetweenPoints(startPoint.value, endPoint.value);
+
+        logger.d("distance between start and end point $distanceBetweenPoints");
+
+        if (distanceBetweenPoints < minSwipeLength) {
+          await shortSwipeDialog(context, "Swipe is too short");
+          return;
+        }
+
+        logger.d("distance is greater than $minSwipeLength");
+
         double angleDegrees =
             _getAngleOfSwipe(startPoint.value, endPoint.value);
 
@@ -194,4 +206,36 @@ class SwipeGestureCard extends HookConsumerWidget {
     }
     return angleDegrees;
   }
+
+  double _getDistanceBetweenPoints(Offset startPoint, Offset endPoint) {
+    double swipeLength = (endPoint - startPoint).distance;
+    return swipeLength;
+  }
+}
+
+Future<void> shortSwipeDialog(BuildContext context, String message) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.klradius))),
+        content: Text(
+          message,
+          style: applyRobotoFont(),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Try Again'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
