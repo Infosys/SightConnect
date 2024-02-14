@@ -194,7 +194,7 @@ class EventTeammatesTab extends HookConsumerWidget {
       );
     }, loading: () {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator.adaptive(),
       );
     }, error: (error, stack) {
       return const Center(

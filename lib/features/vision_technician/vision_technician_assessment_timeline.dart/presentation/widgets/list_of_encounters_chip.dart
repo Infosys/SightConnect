@@ -98,7 +98,7 @@ class ListOfEncountersChip extends HookConsumerWidget {
             );
           },
           loading: () => const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           ),
         );
   }

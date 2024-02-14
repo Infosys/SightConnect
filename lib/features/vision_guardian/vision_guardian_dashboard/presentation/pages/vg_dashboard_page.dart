@@ -43,7 +43,7 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
           },
           loading: () => const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             ),
           ),
           error: (error, stackTrace) {

@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 
 import '../../../../visual_acuity_tumbling/presentation/widgets/coordinates_translator.dart';
+import '../../../domain/models/enums/triage_enums.dart';
 
 class EyeDetectorService {
   static final Map<DeviceOrientation, int> _orientations = {
@@ -76,10 +76,10 @@ class EyeDetectorService {
     );
   }
 
-  static bool isLeftEye(TriageEyeType? currentEye) {
+  static bool isLeftEye(TriageEyeType eye) {
     /* We should flip the value because we are considering the user perspective 
      but google_ml_kit considers the viewers perspective.*/
-    return !(currentEye == TriageEyeType.LEFT);
+    return !(eye == TriageEyeType.LEFT);
   }
 
   static Point<double> translator(

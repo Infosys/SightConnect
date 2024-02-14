@@ -106,7 +106,7 @@ class SwipeGestureCard extends HookConsumerWidget {
           return;
         }
 
-        if (distance.isDistanceValid() == true) {
+        if (distance.isDistanceValid()) {
           model.handUserResponse(
             UserResponse(
               levelNumber: model.currentLevel!,
@@ -154,7 +154,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                 fit: BoxFit.fill,
               ),
               Positioned(
-                  child: distance.isDistanceValid() == true
+                  child: distance.isDistanceValid()
                       ? Center(
                           child: Text(
                             loc.swipeGestureCardText,

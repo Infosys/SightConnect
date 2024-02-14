@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -28,9 +29,11 @@ class _TriagePageState extends ConsumerState<TriagePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final loc = context.loc!;
-      await ref.read(accessibilityProvider).setBrightness(80.0).then((value) {
+      ref.read(accessibilityProvider).setBrightness().then((value) {
         Fluttertoast.showToast(msg: loc.eyeAssessmentBrightnessLabel);
+        logger.d('Brightness set to 80');
       }).catchError((e) {
+        logger.e(e.toString());
         Fluttertoast.showToast(
           msg: loc.eyeAssessmentBrightnessError,
         );
@@ -58,16 +61,6 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         });
 
     super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (ref.exists(accessibilityProvider)) {
-        await ref.read(accessibilityProvider).resetBrightness();
-      }
-    });
   }
 
   @override
@@ -125,7 +118,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
       loading: () {
         return const Scaffold(
           body: Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           ),
         );
       },

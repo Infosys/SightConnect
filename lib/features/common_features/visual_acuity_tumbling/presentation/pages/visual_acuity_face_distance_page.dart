@@ -323,14 +323,14 @@ class _VisualAcuityFaceDistancePageViewState
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     } else {
@@ -394,51 +394,75 @@ class _VisualAcuityFaceDistancePageViewState
                         top: AppSize.height(context) * 0.06,
                         left: AppSize.width(context) * 0.2,
                         right: AppSize.width(context) * 0.2,
-                        child: Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                          child: AutoSizeText(
-                            _distanceToFace != null
-                                ? 'Distance to Face: $_distanceToFace cm'
-                                : 'Bring your face inside the box',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: (_distanceToFace != null &&
-                                      (_distanceToFace! >= 35 &&
-                                          _distanceToFace! <= 45))
-                                  ? const Color(0xff22BF85)
-                                  : AppColor.red,
+                        child: Visibility(
+                          visible: Platform.isAndroid,
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                            child: AutoSizeText(
+                              _distanceToFace != null
+                                  ? 'Distance to Face: $_distanceToFace cm'
+                                  : 'Bring your face inside the box',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: isValidDistance
+                                    ? const Color(0xff22BF85)
+                                    : AppColor.red,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: AppSize.height(context) * 0.04,
-                        left: AppSize.width(context) * 0.1,
-                        right: AppSize.width(context) * 0.1,
-                        child: ElevatedButton(
-                          onPressed: _distanceToFace != null &&
-                                  (_distanceToFace! >= 35 &&
-                                      _distanceToFace! <= 45)
-                              ? () {
-                                  final NavigatorState navigator =
-                                      Navigator.of(context);
-                                  logger.d("Next Button Pressed");
-                                  _addLoading();
-                                  navigator.pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VisualAcuityTumblingLeftEyeInstruction(),
-                                    ),
-                                  );
-                                }
-                              : null,
-                          child: const Text("Proceed"),
-                        ),
-                      )
+                      () {
+                        if (Platform.isAndroid) {
+                          return Positioned(
+                            bottom: AppSize.height(context) * 0.04,
+                            left: AppSize.width(context) * 0.1,
+                            right: AppSize.width(context) * 0.1,
+                            child: ElevatedButton(
+                              onPressed: isValidDistance
+                                  ? () {
+                                      final NavigatorState navigator =
+                                          Navigator.of(context);
+                                      logger.d("Next Button Pressed");
+                                      _addLoading();
+                                      navigator.pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VisualAcuityTumblingLeftEyeInstruction(),
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              child: const Text("Proceed"),
+                            ),
+                          );
+                        } else {
+                          return Positioned(
+                            bottom: AppSize.height(context) * 0.04,
+                            left: AppSize.width(context) * 0.1,
+                            right: AppSize.width(context) * 0.1,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                final NavigatorState navigator =
+                                    Navigator.of(context);
+                                logger.d("Next Button Pressed");
+                                _addLoading();
+                                navigator.pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisualAcuityTumblingLeftEyeInstruction(),
+                                  ),
+                                );
+                              },
+                              child: const Text("Proceed"),
+                            ),
+                          );
+                        }
+                      }(),
                     ],
                   ),
                 ),
@@ -449,4 +473,9 @@ class _VisualAcuityFaceDistancePageViewState
       );
     }
   }
+
+  bool get isValidDistance =>
+      _distanceToFace != null &&
+      _distanceToFace! >= 35 &&
+      _distanceToFace! <= 45;
 }

@@ -185,7 +185,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                 height: AppSize.klheight,
               ),
               model.isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator.adaptive())
                   : Column(children: [
                       model.searchPatientList.isEmpty
                           ? Column(

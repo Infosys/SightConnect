@@ -69,7 +69,7 @@ class PatientProfilePage extends ConsumerWidget {
           },
           loading: () {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             );
           },
         ),
@@ -303,7 +303,7 @@ class PatientProfilePage extends ConsumerWidget {
               },
               loading: () {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator.adaptive(),
                 );
               },
             ),

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -49,15 +50,11 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
               ),
               Center(
                 child: Container(
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColor.primary.withOpacity(0.12),
-                        offset: const Offset(0, 2),
-                        blurRadius: 20,
-                        spreadRadius: 20,
-                      ),
-                    ],
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: applyLightShadow(),
                   ),
                   height: AppSize.height(context) * 0.5,
                   width: AppSize.width(context) * 0.7,

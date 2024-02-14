@@ -12,7 +12,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-
 import '../../domain/models/assessment_timeline_view_model.dart';
 
 class AssessmentTimelineView extends HookConsumerWidget {
@@ -26,7 +25,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
 
     return Column(
       children: [
-        if (isLoading.value) const CircularProgressIndicator(),
+        if (isLoading.value) const CircularProgressIndicator.adaptive(),
         ListView.separated(
           shrinkWrap: true,
           padding: EdgeInsets.zero,

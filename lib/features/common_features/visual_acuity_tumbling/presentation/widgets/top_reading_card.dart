@@ -429,50 +429,40 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                             );
                           },
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            // Icon(
-                            //   Icons.camera_alt_outlined,
-                            //   size: AppSize.width(context) * 0.057,
-                            //   color: AppColor.black.withOpacity(0.8),
-                            // ),
-                            // SizedBox(width: AppSize.width(context) * 0.02),
-                            Text(
-                              _distanceToFace != null
-                                  ? '$_distanceToFace cm'
-                                  : 'No Face',
+                        () {
+                          if (Platform.isAndroid) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  _distanceToFace != null
+                                      ? '$_distanceToFace cm'
+                                      : 'No Face',
+                                  style: applyRobotoFont(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: (_distanceToFace != null &&
+                                            (_distanceToFace! >= 35 &&
+                                                _distanceToFace! <= 45))
+                                        ? AppColor.green
+                                        : AppColor.red,
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Text(
+                              "40 cm",
                               style: applyRobotoFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: (_distanceToFace != null &&
-                                        (_distanceToFace! >= 35 &&
-                                            _distanceToFace! <= 45))
-                                    ? AppColor.green
-                                    : AppColor.red,
-                              ),
-                            ),
-                          ],
-                        ),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.green),
+                            );
+                          }
+                        }(),
                       ],
                     ),
                     const SizedBox(height: AppSize.kmheight),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Flexible(
-                    //       child: Text(
-                    //         ref
-                    //             .watch(distanceNotifierProvider)
-                    //             .getDistanceText(context),
-                    //         style: applyRobotoFont(
-                    //           fontSize: 10,
-                    //           color: AppColor.grey,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // )
                   ],
                 ),
               ),

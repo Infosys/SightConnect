@@ -39,7 +39,8 @@ class ResultPageTopCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data.profile?.patient?.name?.capitalize() ?? "",
+                      data.profile?.patient?.name?.capitalizeFirstOfEach() ??
+                          "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: applyRobotoFont(

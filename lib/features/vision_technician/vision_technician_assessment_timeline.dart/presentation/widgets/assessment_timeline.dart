@@ -24,8 +24,6 @@ class AssessmentTimeline extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
-
     Encounter? encounter =
         ref.watch(assessmentTimelineProvider).currentEncounter;
     int? encounterId = encounter?.id;
@@ -121,7 +119,7 @@ class AssessmentTimeline extends ConsumerWidget {
             );
           },
           loading: () => const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           ),
           error: (error, stack) {
             logger.d("timeline error $error");

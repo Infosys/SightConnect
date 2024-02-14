@@ -139,7 +139,9 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
   void _checkData(String? data, BuildContext context) async {
     if (data != null) {
       if (data.trimLeft().startsWith("https")) {
+        controller?.pauseCamera();
         launchInWebViewWithoutJavaScript(data);
+        controller?.pauseCamera();
       } else {
         showSnackbar(context, SnackBar(content: Text("QR Code Data: $data")));
       }
@@ -168,15 +170,31 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
     var scanArea = MediaQuery.of(context).size.width / 1.8;
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.black,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(CupertinoIcons.back),
+        iconTheme: const IconThemeData(color: Colors.white),
+        actionsIconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.transparent,
+        leading: const SizedBox.shrink(),
+        title: const Text(
+          "Scanner",
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        title: const Text("Scanner"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.close,
+              color: Colors.white,
+              size: 28,
+            ),
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: Container(
         color: _permissionStatus?.isGranted == true ? null : Colors.black,
@@ -203,7 +221,7 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
               return const SizedBox.shrink();
             }),
             Positioned(
-              top: 80,
+              top: MediaQuery.of(context).size.height * 0.2,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),

@@ -8,8 +8,10 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -74,15 +76,11 @@ class VisualAcuityDialog {
                     ),
                     Center(
                       child: Container(
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColor.primary.withOpacity(0.12),
-                              offset: const Offset(0, 2),
-                              blurRadius: 20,
-                              spreadRadius: 20,
-                            ),
-                          ],
+                          color: AppColor.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: applyLightShadow(),
                         ),
                         height: AppSize.height(context) * 0.5,
                         width: AppSize.width(context) * 0.7,
@@ -166,24 +164,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       insetPadding: EdgeInsets.zero,
       actionsPadding: EdgeInsets.zero,
       content: isLoading.value
-          ? Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Loading...",
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const SizedBox(
-                  height: 45,
-                  width: 45,
-                  child: CircularProgressIndicator(),
-                ),
-              ],
-            )
+          ? const LoadingCard()
           : SizedBox(
               width: AppSize.width(context) * 0.8,
               child: Column(

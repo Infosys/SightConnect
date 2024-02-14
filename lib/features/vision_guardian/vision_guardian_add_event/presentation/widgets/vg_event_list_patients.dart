@@ -41,7 +41,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
             height: AppSize.ksheight,
           ),
           ref.watch(addPatientEventProvider).isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator.adaptive())
               : const SizedBox(),
           data.isEmpty
               ? SingleChildScrollView(
@@ -134,7 +134,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
             if (index == data.length) {
               return const Padding(
                 padding: EdgeInsets.all(AppSize.klpadding),
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             }
 

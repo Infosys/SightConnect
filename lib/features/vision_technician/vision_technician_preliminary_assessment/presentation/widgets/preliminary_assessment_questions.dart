@@ -55,7 +55,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
       },
       loading: () {
         return const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         );
       },
     );
