@@ -17,6 +17,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
   return await FlutterJailbreakDetection.jailbroken;
@@ -61,7 +62,10 @@ class MyApp extends ConsumerWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              navigatorObservers: [matomoObserver],
+              navigatorObservers: [
+                matomoObserver,
+                // SentryNavigatorObserver(),
+              ],
               supportedLocales: appLocales.map((e) => Locale(e.locale)),
               debugShowCheckedModeBanner: false,
               themeMode: ref.watch(themeProvider),
