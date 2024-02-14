@@ -20,11 +20,15 @@ abstract class RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportByPatientIdAndStatus(
     int patientId,
     DiagnosticReportStatus status,
-    int ? page
+    int? page,
+    int? size,
   );
   Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
     DiagnosticReportStatus status,
+    int? page,
+    int? size,
+    String? filter,
   );
 }
 
@@ -78,17 +82,15 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportByPatientIdAndStatus(
     int patientId,
     DiagnosticReportStatus status,
-    int ? page
+    int? page,
+    int? size,
   ) async {
-    final String endpoint ;
-    int size = 20;
-    if(page == null){
-     endpoint= "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}";
-    }
-    else{
-      endpoint= "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}&page=$page&size=$size";
-    }
-       
+    page ??= 0;
+    size ??= 10;
+    final String endpoint;
+
+    endpoint =
+        "/services/triage/api/triage/triage-report?patient-id=$patientId&status=${status.name}&page=$page&size=$size";
 
     final response = await dio.get(endpoint);
 
@@ -109,9 +111,22 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
     DiagnosticReportStatus status,
+    int? page,
+    int? size,
+    String? filter,
   ) async {
-    final endpoint =
-        "/services/triage/api/triage/triage-report?encounter-id=$encounterId";
+    String endpoint;
+
+    if (page == null || size == null) {
+      endpoint =
+          "/services/triage/api/triage/triage-report?encounter-id=$encounterId";
+    } else {
+      endpoint =
+          "/services/triage/api/triage/triage-report?encounter-id=$encounterId&page=$page&size=$size";
+    }
+    if (filter != null) {
+      endpoint += "&$filter";
+    }
 
     final response = await dio.get(endpoint);
 

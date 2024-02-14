@@ -36,10 +36,20 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _patientAssessmentUpdateDataProvider;
   List<TriageReportBriefEntity> _triageReportList = [];
   final List<TriageReportBriefEntity> _clinicalReportList = [];
-  List<TriageReportBriefEntity> _finalReportList = [];
+  final List<TriageReportBriefEntity> _finalReportList = [];
   final List<TriageReportBriefEntity> _selfTestReportList = [];
-  int ? _page;
-  bool _hasMore = true;
+  static const int pageSize = 10;
+  int _finalReportPage = 0;
+  int _clinicalReportPage = 0;
+  int _selfTestReportPage = 0;
+  bool _hasFinalReportMore = true;
+  bool _hasClinicalReportMore = true;
+  bool _hasSelfTestReportMore = true;
+
+  bool get hasFinalReportMore => _hasFinalReportMore;
+  bool get hasClinicalReportMore => _hasClinicalReportMore;
+  bool get hasSelfTestReportMore => _hasSelfTestReportMore;
+  int get clinicalReportPage => _clinicalReportPage;
 
   bool _isLoading = false;
   bool _isUpdateLoading = false;
@@ -55,9 +65,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     this._patientAssessmentUpdateDataProvider,
   ) {
     getPatients();
-    _isFinalReportLoading=true;
-    notifyListeners();
-    getTriageReportByPatientIdAndStatus();
   }
 
   TriageReportUserEntity? get selectedPatient => _selectedPatient;
@@ -67,39 +74,19 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   bool get isFinalReportLoading => _isFinalReportLoading;
   bool get isSelfTestReportLoading => _isSelfTestReportLoading;
   bool get isClinicalReportLoading => _isClinicalReportLoading;
-  int ? get page => _page;
-  bool get hasMore => _hasMore;
-
 
   List<TriageReportBriefEntity> get triageReportList => _triageReportList;
   List<TriageReportBriefEntity> get finalReportList => _finalReportList;
   List<TriageReportBriefEntity> get clinicalReportList => _clinicalReportList;
   List<TriageReportBriefEntity> get selfTestReportList => _selfTestReportList;
 
-  void setHasMore(bool ? hasMore) {
-    _hasMore = hasMore!;
-    notifyListeners();
-  }
+  Future<void> refeshReports() async {
+    // _isFinalReportLoading = true;
+    // _finalReportList = [];
 
-  void setPatient(TriageReportUserEntity patient) {
-    _selectedPatient = patient;
-    _isFinalReportLoading=true;
-    _finalReportList=[];
-    _page=0;
-    notifyListeners();
-    getTriageReportByPatientIdAndStatus();
-  }
-  Future<void> refeshReports() async{
-    _isFinalReportLoading=true;
-    _finalReportList=[];
-    _page=0;
-    notifyListeners();
-    await getTriageReportByPatientIdAndStatus();
-    return;
-  }
-  void setPage(int ? page) {
-    _page = page;
-    notifyListeners();
+    // notifyListeners();
+    // await getTriageReportByPatientIdAndStatus();
+    // return;
   }
 
   List<TriageReportUserEntity> getPatients() {
@@ -294,21 +281,31 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       },
     );
   }
-  Future<void> incrementPage() async {
-    _page ??= 0;
-    _page = _page! + 1;
 
-    await getTriageReportByPatientIdAndStatus();
+  void setPatient(TriageReportUserEntity patient) {
+    _selectedPatient = patient;
+    _finalReportList.clear();
+    _clinicalReportList.clear();
+    _selfTestReportList.clear();
+    _finalReportPage = 0;
+    _hasFinalReportMore = true;
     notifyListeners();
+    getTriageReportByPatientIdAndStatus();
   }
-  Future<void> getTriageReportByPatientIdAndStatus() async {
 
+  Future<void> getTriageReportByPatientIdAndStatus() async {
+    if (_isFinalReportLoading) {
+      return;
+    }
+    _isFinalReportLoading = true;
+    notifyListeners();
     final selectedPatientId = _selectedPatient?.id;
     final response =
         await _triageReportRepository.getTriageReportByPatientIdAndStatus(
       selectedPatientId!,
       DiagnosticReportStatus.FINAL,
-      _page,
+      _finalReportPage,
+      pageSize,
     );
 
     response.fold((failure) {
@@ -316,33 +313,46 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _isFinalReportLoading = false;
       notifyListeners();
     }, (triageAssessment) {
-      triageAssessment.sort((a, b) {
-        return b.issued!.compareTo(a.issued!);
-      });
+      if (triageAssessment.length < pageSize) {
+        _hasFinalReportMore = false;
+        notifyListeners();
+      }
+      _finalReportPage = _finalReportPage + 1;
+      triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
+      _finalReportList.addAll(_assessmentReportMapper(triageAssessment));
+
       _isFinalReportLoading = false;
-      triageAssessment.isEmpty ? setHasMore(false) : setHasMore(true);
-      List<TriageReportBriefEntity> list = _assessmentReportMapper(triageAssessment);
-      _finalReportList.addAll( list);
       notifyListeners();
-      
-    
     });
   }
 
-  Future<List<TriageReportBriefEntity>> getTriageReportByEncounterId(
+  Future<void> getTriageReportByEncounterId(
     int encounterId,
     bool isPatient,
   ) async {
     if (isPatient) {
+      if (_isSelfTestReportLoading) {
+        return;
+      }
       _isSelfTestReportLoading = true;
       notifyListeners();
     } else {
+      if (_isClinicalReportLoading) {
+        return;
+      }
       _isClinicalReportLoading = true;
       notifyListeners();
     }
 
     final response = await _triageReportRepository.getTriageReportByEncounterId(
-        encounterId, DiagnosticReportStatus.FINAL);
+      encounterId,
+      DiagnosticReportStatus.FINAL,
+      isPatient ? _selfTestReportPage : _clinicalReportPage,
+      pageSize,
+      isPatient
+          ? "participant-role=PATIENT"
+          : "participant-role=VISION_TECHNICIAN&participant-role=VISION_GUARDIAN", // This is the filter parameter
+    );
 
     return response.fold((failure) {
       logger.d({"getTriageReportByEncounterId ": failure});
@@ -351,30 +361,46 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _isClinicalReportLoading = false;
       notifyListeners();
       throw failure;
-    }, (triageAssessment) {
+    }, (triageAssessment) async {
+      logger.d("Length: ${triageAssessment.length}");
       if (isPatient) {
-        final output = triageAssessment
-            .where((element) => element.performerRole == PerformerRole.PATIENT)
-            .toList();
+        if (triageAssessment.length < pageSize) {
+          _hasSelfTestReportMore = false;
+          notifyListeners();
+        }
+        _selfTestReportPage = _selfTestReportPage + 1;
+        // final output = triageAssessment
+        //     .where((element) => element.performerRole == PerformerRole.PATIENT)
+        //     .toList();
 
-        output.sort((a, b) {
-          return b.issued!.compareTo(a.issued!);
-        });
+        triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
         _isSelfTestReportLoading = false;
         _isClinicalReportLoading = false;
+        _selfTestReportList.addAll(_assessmentReportMapper(triageAssessment));
         notifyListeners();
-        return _assessmentReportMapper(output);
       } else {
-        final output = triageAssessment
-            .where((element) => element.performerRole != PerformerRole.PATIENT)
-            .toList();
-        output.sort((a, b) {
-          return b.issued!.compareTo(a.issued!);
-        });
+        if (triageAssessment.length < pageSize) {
+          _hasClinicalReportMore = false;
+          notifyListeners();
+        }
+        _clinicalReportPage = _clinicalReportPage + 1;
+        // final output = triageAssessment
+        //     .where((element) => element.performerRole != PerformerRole.PATIENT)
+        //     .toList();
+        // if (output.isEmpty && triageAssessment.isNotEmpty) {
+        //   await getTriageReportByEncounterId(encounterId, isPatient);
+        // }
+
+        triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
         _isSelfTestReportLoading = false;
         _isClinicalReportLoading = false;
+        _clinicalReportList.addAll(_assessmentReportMapper(triageAssessment));
         notifyListeners();
-        return _assessmentReportMapper(output);
+        logger.d({
+          "hasClinicalReportMore": _hasClinicalReportMore,
+          "length": triageAssessment.length,
+          "output": triageAssessment.length,
+        });
       }
     });
   }

@@ -39,7 +39,7 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
     //   ],
     // });
 
-    String url = "https://eyecare4all-dev.infosysapps.com/services/ai/api/detect/";
+    String url = "https://healthconnecttech.org/services/ai/api/detect/";
 
     logger.d("model post call initiated");
     logger.d(url);

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -26,21 +27,36 @@ class PatientClinicalTestReports extends ConsumerStatefulWidget {
 
 class _PatientClinicalTestReportsState
     extends ConsumerState<PatientClinicalTestReports> {
-  List<TriageReportBriefEntity> reports = [];
+  final scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
-    Future.microtask(() async {
-      try {
-        final result = await ref
-            .read(patientAssessmentAndTestProvider)
-            .getTriageReportByEncounterId(widget.encounterId, false);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      ref
+          .read(patientAssessmentAndTestProvider)
+          .getTriageReportByEncounterId(widget.encounterId, false);
 
-        reports.addAll(result);
-      } catch (e) {
-        Fluttertoast.showToast(msg: "Clinical Report not found");
+      _loadData();
+    });
+  }
+
+  _loadData() async {
+    scrollController.addListener(() {
+      final model = ref.read(patientAssessmentAndTestProvider);
+
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        logger.d({"Clinical Report": "Load More"});
+
+        model.getTriageReportByEncounterId(widget.encounterId, false);
       }
     });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,170 +64,174 @@ class _PatientClinicalTestReportsState
     final loc = context.loc!;
 
     var model = ref.watch(patientAssessmentAndTestProvider);
-    if (model.isClinicalReportLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-    if (reports.isEmpty) {
-      return Scaffold(
-        body: Center(
-          child: Text(
-            "No Clinical Report Found",
-            style: applyRobotoFont(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      );
-    }
+    logger.f({
+      "Clinical Report": model.clinicalReportList.length,
+      "Has More": model.hasClinicalReportMore,
+      "loading": model.isClinicalReportLoading,
+      "page": model.clinicalReportPage,
+    });
+
+    // ref.listen(patientAssessmentAndTestProvider, (previous, next) {
+    //   if (next.clinicalReportList.isEmpty) {
+    //     next.getTriageReportByEncounterId(widget.encounterId, false);
+    //   }
+    // });
 
     return Scaffold(
       body: ListView.builder(
+        controller: scrollController,
         padding: const EdgeInsets.all(16),
-        itemCount: reports.length,
+        itemCount: model.clinicalReportList.length + 1,
         itemBuilder: (BuildContext context, int index) {
-          final currentData = reports[index];
+          if (index < model.clinicalReportList.length) {
+            final currentData = model.clinicalReportList[index];
 
-          return Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
+            return Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              'RID: ${currentData.triageResultID}',
+                              minFontSize: 12,
+                              maxLines: 1,
+                              style: applyFiraSansFont(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              currentData.triageResultStartDate
+                                      ?.formatDateTimeMonthName ??
+                                  "",
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AutoSizeText(
-                            'RID: ${currentData.triageResultID}',
-                            minFontSize: 12,
-                            maxLines: 1,
-                            style: applyFiraSansFont(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
                             ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            currentData.triageResultStartDate
-                                    ?.formatDateTimeMonthName ??
-                                "",
-                            style: applyRobotoFont(
-                              fontSize: 12,
-                              color: AppColor.grey,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: AppColor.green,
                             ),
-                          ),
+                            child: Text(
+                              "Clinical Report",
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.white,
+                              ),
+                            ),
+                          )
                         ],
                       ),
-                    ),
-                    const Spacer(),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: AppColor.green,
-                          ),
-                          child: Text(
-                            "Clinical Report",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.white,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  currentData.triageResultDescription ?? "",
-                  softWrap: true,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(
-                    fontSize: 14,
+                    ],
                   ),
-                ),
-                const SizedBox(height: 8),
-                Consumer(
-                  builder: (context, ref, child) {
-                    final model = ref.watch(patientAssessmentAndTestProvider);
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        (model.isReportLoading &&
-                                model.currentTriageReportId ==
-                                    currentData.triageResultID)
-                            ? const SizedBox(
-                                height: 24,
-                                width: 24,
-                                child: CircularProgressIndicator(),
-                              )
-                            : Flexible(
-                                child: TextButton(
-                                  onPressed: () async {
-                                    try {
-                                      model.currentTriageReportId =
-                                          currentData.triageResultID;
-                                      final navigator = Navigator.of(context);
-                                      final reports = await ref
-                                          .read(
-                                              patientAssessmentAndTestProvider)
-                                          .getTriageDetailedReport(
-                                            currentData.triageResultID,
-                                          );
-                                      navigator.push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PatientAssessmentReportPage(
-                                            assessmentDetailsReport: reports,
+                  const SizedBox(height: 8),
+                  Text(
+                    currentData.triageResultDescription ?? "",
+                    softWrap: true,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final model = ref.watch(patientAssessmentAndTestProvider);
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          (model.isReportLoading &&
+                                  model.currentTriageReportId ==
+                                      currentData.triageResultID)
+                              ? const SizedBox(
+                                  height: 24,
+                                  width: 24,
+                                  child: CircularProgressIndicator(),
+                                )
+                              : Flexible(
+                                  child: TextButton(
+                                    onPressed: () async {
+                                      try {
+                                        model.currentTriageReportId =
+                                            currentData.triageResultID;
+                                        final navigator = Navigator.of(context);
+                                        final reports = await ref
+                                            .read(
+                                                patientAssessmentAndTestProvider)
+                                            .getTriageDetailedReport(
+                                              currentData.triageResultID,
+                                            );
+                                        navigator.push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                PatientAssessmentReportPage(
+                                              assessmentDetailsReport: reports,
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    } catch (e) {
-                                      Fluttertoast.showToast(
-                                          msg: "Clinical Report not found");
-                                    }
-                                  },
-                                  child: Text(
-                                    loc.viewReportButton,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColor.primary,
+                                        );
+                                      } catch (e) {
+                                        Fluttertoast.showToast(
+                                            msg: "Clinical Report not found");
+                                      }
+                                    },
+                                    child: Text(
+                                      loc.viewReportButton,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColor.primary,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                      ],
-                    );
-                  },
-                )
-              ],
-            ),
-          );
+                        ],
+                      );
+                    },
+                  )
+                ],
+              ),
+            );
+          } else {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32),
+                child: model.hasClinicalReportMore
+                    ? const CircularProgressIndicator()
+                    : const Text("No more data"),
+              ),
+            );
+          }
         },
       ),
     );
