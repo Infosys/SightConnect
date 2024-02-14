@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_dashboard_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
@@ -145,6 +146,7 @@ class _OptometritianDashboardPageState
                       )
                     ],
                   ),
+                  SizedBox(height: AppSize.height(context) * 0.04),
                   Text.rich(
                     TextSpan(
                       children: [
@@ -158,7 +160,8 @@ class _OptometritianDashboardPageState
                         TextSpan(
                           text: ref
                               .watch(globalOptometricianProvider)
-                              .activeUserFullName,
+                              .activeUserFullName
+                              .capitalizeFirstOfEach(),
                           style: applyFiraSansFont(
                             color: AppColor.white,
                             fontSize: 28,
@@ -168,7 +171,7 @@ class _OptometritianDashboardPageState
                       ],
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  SizedBox(height: AppSize.height(context) * 0.02),
                   Text(
                     "Let's get started",
                     style: applyFiraSansFont(
@@ -206,7 +209,7 @@ class _OptometritianDashboardPageState
                         "Today",
                       ),
                     ),
-                    const SizedBox(height: AppSize.klheight),
+                    const SizedBox(height: AppSize.klheight * 4),
                     Text(
                       "Services",
                       style: applyFiraSansFont(
