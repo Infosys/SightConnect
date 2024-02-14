@@ -126,19 +126,16 @@ class AppCamerPreviewWidget extends StatelessWidget {
             child: Container(
               color: AppColor.black,
               child: Stack(
-                fit: StackFit.expand,
                 clipBehavior: Clip.none,
                 children: <Widget>[
                   Platform.isAndroid
-                      ? AspectRatio(
-                          aspectRatio: controller.value.aspectRatio,
+                      ? Center(
                           child: CameraPreview(
                             controller,
                             child: customPaint,
                           ),
                         )
-                      : AspectRatio(
-                          aspectRatio: controller.value.aspectRatio,
+                      : Center(
                           child: CameraPreview(
                             controller,
                           ),
