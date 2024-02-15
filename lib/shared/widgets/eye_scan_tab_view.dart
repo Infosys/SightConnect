@@ -39,6 +39,7 @@ class EyeScanTabView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               height: 200,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: _EyeScanImage(

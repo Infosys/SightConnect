@@ -288,6 +288,10 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     _selfTestReportList.clear();
     _finalReportPage = 0;
     _hasFinalReportMore = true;
+    _clinicalReportPage=0;
+    _hasClinicalReportMore=true;
+    _selfTestReportPage=0;
+    _hasSelfTestReportMore=true;
     notifyListeners();
     getTriageReportByPatientIdAndStatus();
   }

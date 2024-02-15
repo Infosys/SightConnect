@@ -111,10 +111,8 @@ class _NearbyVisionCentersListState
                         width: 50,
                       ),
                       const SizedBox(height: AppSize.ksheight),
-                      Text(
-                        viewState.errorMessage
-                            .toString()
-                            .replaceAll("Exception: ", ""),
+                      const Text(
+                        "We are unable to fetch nearby vision centers at the moment. Please try again later.",
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
@@ -141,7 +139,14 @@ class _NearbyVisionCentersListState
                           );
                         }
 
-                        return const SizedBox();
+                        return TextButton(
+                          onPressed: () {
+                            ref
+                                .read(nearByVisionCenterProvider.notifier)
+                                .init();
+                          },
+                          child: const Text("Retry"),
+                        );
                       }),
                     ],
                   ),

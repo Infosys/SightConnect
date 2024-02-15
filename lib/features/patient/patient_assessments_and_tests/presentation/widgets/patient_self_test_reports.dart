@@ -191,8 +191,7 @@ class _PatientSelfTestReportsState
                                   }
                                 },
                                 child: Text(
-                                  //loc.updateButton,
-                                  "Update Test",
+                                  loc.updateButton,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: applyRobotoFont(
