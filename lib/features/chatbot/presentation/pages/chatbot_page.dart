@@ -338,7 +338,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       _isLoadingQuerySuggestions = true;
     });
     final suggestions = await _chatService.getQuerySuggestions(widget.selectedLanguage);
-    await Future.delayed(Durations.extralong4);
     setState(() {
       _isLoadingQuerySuggestions = false;
     });
