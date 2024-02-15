@@ -1,0 +1,22 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app-translations": "node ./appTranslations.js",
+    "app-translations:arb": "node ./appTranslationsARB.js",
+    "app-translations:arb:watch": "nodemon ./appTranslationsARB.js",
+    "app-translations:dart": "node ./appTranslationsDart.js",
+    "app-translations:dart:watch": "nodemon ./appTranslationsDart.js"
+  },
+  "keywords": [],
+  "author": "Nandan Reddy",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
