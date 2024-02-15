@@ -6,35 +6,40 @@ class CameraPermissionService {
   static Future<bool> checkPermissions(
     BuildContext context,
   ) async {
+    logger.d(
+        'VisualAcuityFaceDistancePage: Check Permissions CameraPermissionService called');
     final isGranted = await isCameraPermissionGranted();
-
     if (!isGranted) {
-      logger.d('Camera permission not granted. Requesting permission');
+      logger.d(
+          'VisualAcuityFaceDistancePage: Camera permission not granted. Requesting permission');
       final cameraStatus = await Permission.camera.request();
       final audioStatus = await Permission.microphone.request();
       if (cameraStatus.isGranted && audioStatus.isGranted) {
-        logger.d('Camera permission granted.');
-
+        logger.d('VisualAcuityFaceDistancePage: Camera permission granted.');
         return true;
       } else {
         if (context.mounted) {
-          logger.d('Camera permission not granted. Opening settings');
+          logger.d(
+              'VisualAcuityFaceDistancePage: Camera permission not granted. Opening settings');
           await _showCameraSettingsDialog(context);
         }
-        logger.d('Camera permission not granted.');
-        if(context.mounted) return await checkPermissions(context);
+        logger
+            .d('VisualAcuityFaceDistancePage: Camera permission not granted.');
+        if (context.mounted) return await checkPermissions(context);
       }
     }
     return isGranted;
   }
 
   static Future<bool> isCameraPermissionGranted() async {
+    logger.d('VisualAcuityFaceDistancePage: isCameraPermissionGranted called');
     PermissionStatus cameraStatus = await Permission.camera.status;
     PermissionStatus audioStatus = await Permission.microphone.status;
     return cameraStatus.isGranted && audioStatus.isGranted;
   }
 
   static _showCameraSettingsDialog(BuildContext context) {
+    logger.d('VisualAcuityFaceDistancePage: _showCameraSettingsDialog called');
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -49,6 +54,8 @@ class CameraPermissionService {
           TextButton(
             child: const Text('OK'),
             onPressed: () async {
+              logger.d(
+                  "VisualAcuityFaceDistancePage: _showCameraSettingsDialog: OK button pressed");
               await openAppSettings();
               await Future.delayed(const Duration(seconds: 1));
               if (context.mounted) {
