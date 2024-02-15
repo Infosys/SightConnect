@@ -4,32 +4,29 @@ import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_mess
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_query_suggestions.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/loading_indicator.dart';
-import 'package:eye_care_for_all/features/chatbot/standard_responses.dart';
 import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
-import 'package:eye_care_for_all/features/chatbot/utils/triage_utils.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/action_type.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatBotPage extends ConsumerStatefulWidget {
   const ChatBotPage({
     super.key,
-    this.defaultQuerySuggestions = const [],
-    this.loadedTriageQuestionnaire = const [],
-    this.loadChatHistory,
-    this.saveChatHistory,
     required this.selectedLanguage,
     required this.selectedLanguageCode,
+    this.defaultQuerySuggestions = const [],
+    this.loadChatHistory,
+    this.saveChatHistory,
+    this.onSendChatMessage,
+    this.onReceiveChatMessage,
   });
 
   final List<String> defaultQuerySuggestions;
-  final List<QuestionnaireItemFHIRModel> loadedTriageQuestionnaire;
   final String selectedLanguage;
   final String selectedLanguageCode;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
+  final Future<void> Function(ChatMessage)? onSendChatMessage;
+  final Future<void> Function(ChatMessage)? onReceiveChatMessage;
 
   @override
   ConsumerState<ChatBotPage> createState() => _ChatBotPageState();
@@ -42,15 +39,10 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   List<String> _querySuggestions = [];
   bool _isLoading = false;
   bool _isLoadingQuerySuggestions = false;
-  List<QuestionnaireItemFHIRModel> _triageQuestionnaire = [];
-  final Map<QuestionnaireItemFHIRModel, String> _triageResponses = {};
-  int _currentQuestionIndex = -1;
-  bool _isAssessmentGoingOn = false;
 
   late ChatService _chatService;
   late Future<List<ChatMessage>> Function() _loadChatHistory;
   late Future<dynamic> Function(List<ChatMessage>) _saveChatHistory;
-
 
   // Init methods
   @override
@@ -84,7 +76,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
         isMe: false,
       ));
     } else {
-
       if (chatHistory.length > 1) {
         querySuggestions = await _getQuerySuggestions();
       }
@@ -101,72 +92,12 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     _setTtsLang(widget.selectedLanguageCode);
   }
 
-  Future _initEyeAssessment() async {
-    debugPrint(
-        "Loaded Triage Questionnaire: ${widget.loadedTriageQuestionnaire}");
-
-    if (widget.loadedTriageQuestionnaire.isEmpty) {
-      debugPrint("No Triage Questionnaire loaded");
-      setState(() {
-        _querySuggestions = widget.defaultQuerySuggestions;
-        _chatMessage(
-          ChatMessage(
-            message:
-                "Unable to load questions at the moment. Is there anything else I can help you with?",
-            isMe: false,
-          ),
-        );
-      });
-      return;
-    }
-
-    setState(() {
-      _isAssessmentGoingOn = true;
-      _currentQuestionIndex = 0;
-      _triageQuestionnaire = widget.loadedTriageQuestionnaire;
-      debugPrint("Triage Questions: $_triageQuestionnaire");
-
-      final firstQuestion = _triageQuestionnaire[0];
-      debugPrint("First Questions: $firstQuestion");
-
-      _chatMessage(
-        ChatMessage(
-          message: firstQuestion.text!,
-          isMe: false,
-          question: firstQuestion,
-        ),
-      );
-    });
-  }
-
   // Cleanup methods
   @override
   void dispose() {
     _saveChatHistory(_chatMessages);
     _chatService.clearContext(); // TODO: Make this conditional
     super.dispose();
-  }
-
-  Future _endEyeAssessment() async {
-    // Do something with the stored responses
-    debugPrint(
-        "Eye Assessment Result: Last Question: ${_triageResponses[_triageQuestionnaire[_triageQuestionnaire.length - 1]]}");
-
-    setState(() {
-      _isAssessmentGoingOn = false;
-      _currentQuestionIndex = -1;
-      _triageQuestionnaire = [];
-      _querySuggestions = widget.defaultQuerySuggestions;
-    });
-
-    _chatMessage(
-      ChatMessage(
-        message: _triageResponses.length > 1
-            ? "Your Eye Assessment is done. You can view the results in \"My Assessments\" Section"
-            : "Well that was quick :)",
-        isMe: false,
-      ),
-    );
   }
 
   // Utils
@@ -199,7 +130,6 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
                   final messages = _chatMessages.reversed.toList();
                   return ChatMessageTile(
                     message: messages[ind],
-                    onOptionSelect: _onAssessmentResponse,
                   );
                 },
               ),
@@ -253,7 +183,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Widget _buildClearChatButton() {
-    if (_chatMessages.length < 2 || _isLoading || _isAssessmentGoingOn) {
+    if (_chatMessages.length < 2 || _isLoading) {
       return Container();
     }
     return Align(
@@ -281,6 +211,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
 
   // UI Methods
   void _myMessage(ChatMessage message) {
+    widget.onSendChatMessage?.call(message);
     setState(() {
       _chatMessages.add(message);
       _querySuggestions = [];
@@ -289,6 +220,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   void _chatMessage(ChatMessage message) {
+    widget.onReceiveChatMessage?.call(message);
     setState(() {
       _chatMessages.add(message);
       _isLoading = false;
@@ -296,23 +228,12 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _onChatMessageSubmit(String message) async {
-    if (_isAssessmentGoingOn) {
-      final currentQuestion = _triageQuestionnaire[_currentQuestionIndex];
-      return _onAssessmentResponse(currentQuestion, message);
-    }
-
     _myMessage(
       ChatMessage(
         message: message,
         isMe: true,
       ),
     );
-
-    StandardAction? action = await resolveStandardAction(message, widget.selectedLanguageCode);
-
-    if (action != null) {
-      return _handleStandardAction(action);
-    }
 
     _askChatBot(message);
   }
@@ -337,81 +258,11 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     setState(() {
       _isLoadingQuerySuggestions = true;
     });
-    final suggestions = await _chatService.getQuerySuggestions(widget.selectedLanguage);
+    final suggestions =
+        await _chatService.getQuerySuggestions(widget.selectedLanguage);
     setState(() {
       _isLoadingQuerySuggestions = false;
     });
     return suggestions;
-  }
-
-  Future _onAssessmentResponse(
-    QuestionnaireItemFHIRModel question,
-    String response,
-  ) async {
-    final option = resolveTriageOptionFromText(response);
-
-    if (option == null && question.type != QuestionnaireType.String) return;
-    /**
-     * option == null       | question.type != QuestionnaireType.String
-     * ----------------------------------------------------------------
-     * true                 | false         --> Last Question, Something other than YES/NO.         (Continue)    false
-     * true                 | true          --> Not the Last Question, Something other than YES/NO. (Do nothing)  true
-     * false                | false         --> Last Question, YES/NO                               (Continue)    false
-     * false                | true          --> Not the Last Question, YES/NO                       (Continue)    false
-     */
-
-    debugPrint("Current index: $_currentQuestionIndex, Response: $option");
-
-    _triageResponses[question] = response;
-    // _triageResponses.add(response);
-    _currentQuestionIndex += 1;
-    setState(() {
-      _chatMessages[0].markAsAnswered();
-    });
-
-    _myMessage(ChatMessage(message: response, isMe: true));
-
-// Handle checkpoint question
-    bool continueAssessment =
-        _currentQuestionIndex < _triageQuestionnaire.length;
-
-    if (question.actionOn!.isNotEmpty && option != null) {
-      continueAssessment = continueAssessment &&
-          await _handleCheckpointQuestion(question, option);
-    }
-
-    if (!continueAssessment) {
-      return _endEyeAssessment();
-    }
-
-    final nextQuestion = _triageQuestionnaire[_currentQuestionIndex];
-    _chatMessage(
-      ChatMessage(
-        message: nextQuestion.text!,
-        isMe: false,
-        question: nextQuestion,
-      ),
-    );
-  }
-
-  Future<bool> _handleCheckpointQuestion(
-      QuestionnaireItemFHIRModel question, TriageOption response) async {
-    // Return true to continue assessment, false to end assessment
-    if (question.actionOn![0].actionType! == ActionType.EXIT_QUESTIONNAIRE &&
-        response == TriageOption.NO) {
-      return false;
-    }
-    return true;
-  }
-
-  Future _handleStandardAction(StandardAction action) async {
-    debugPrint("Executing a standard action");
-    switch (action) {
-      case StandardAction.eyeAssessment:
-        _initEyeAssessment();
-        break;
-      default:
-        throw Exception("Unhandled Action: $action");
-    }
   }
 }

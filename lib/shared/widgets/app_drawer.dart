@@ -160,14 +160,14 @@ class AppDrawer extends StatelessWidget {
                                                 selectedLanguageCode: currentLanguageCode,
                                                 selectedLanguage: currentLanguage,
                                                 defaultQuerySuggestions: const [
-                                                  "Start Eye Assessment",
+                                                  "Tips to avoid eye strain",
                                                   "Common eye issues",
                                                   "Tips for a better eye sight",
                                                 ],
-                                                loadedTriageQuestionnaire: data
-                                                        .questionnaire
-                                                        ?.questionnaireItem ??
-                                                    [], 
+                                                // loadedTriageQuestionnaire: data
+                                                //         .questionnaire
+                                                //         ?.questionnaireItem ??
+                                                //     [], 
                                               );
                                             },
                                             error: (error, stackTrace) {
