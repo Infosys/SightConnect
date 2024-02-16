@@ -40,6 +40,13 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                "Select Patient",
+                style: applyFiraSansFont(fontSize: 18),
+              ),
+              const SizedBox(
+                height: AppSize.klelevation,
+              ),
               ref.watch(getPatientProfileProvider).when(data: (patient) {
                 return AppointmentPatientSelector(
                   patient: patient,
