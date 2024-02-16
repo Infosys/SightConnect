@@ -25,7 +25,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
     var endPoint = useState<Offset>(const Offset(0, 0));
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
-
+    final loc = context.loc!;
     var swipeText = useState<String>("Swipe Up");
     var currentDemoImage = useState<SvgPicture>(
         SvgPicture.asset("assets/images/swipe_gesture_up.svg"));
@@ -89,17 +89,63 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                   onPanEnd: (details) {
                     double angleDegrees =
                         _getAngleOfSwipe(startPoint.value, endPoint.value);
-                    _determineSwipeDirection(
-                        context, dragDirection, angleDegrees);
-                    _handleSwipeAction(
+
+                    if (angleDegrees >= 60 && angleDegrees <= 120) {
+                      dragDirection.value = QuestionDirection.down;
+                    } else if (angleDegrees >= 150 && angleDegrees <= 210) {
+                      dragDirection.value = QuestionDirection.left;
+                    } else if (angleDegrees >= 240 && angleDegrees <= 300) {
+                      dragDirection.value = QuestionDirection.up;
+                    } else if (angleDegrees >= 330 || angleDegrees <= 30) {
+                      dragDirection.value = QuestionDirection.right;
+                    } else {
+                      //Interactive toast, set [isIgnoring] false.
+                      AppToast.showToast(
                         context,
-                        dragDirection,
-                        currentDemoImage,
-                        countValue,
-                        swipeText,
-                        demoData,
-                        sliderValue,
-                        tumblingAngle);
+                        loc.swipeGestureError,
+                      );
+                      return;
+                    }
+
+                    if (countValue.value == 0) {
+                      if (dragDirection.value == QuestionDirection.up) {
+                        currentDemoImage.value =
+                            demoData[QuestionDirection.down];
+                        swipeText.value = "Swipe Down";
+                        tumblingAngle.value = 7.85;
+                        //slider value 0 represt tranform movement of up, i want a value that makes it rotate 180 to down
+                        sliderValue.value = 180.0;
+                        countValue.value++;
+                      }
+                    } else if (countValue.value == 1) {
+                      if (dragDirection.value == QuestionDirection.down) {
+                        currentDemoImage.value =
+                            demoData[QuestionDirection.left];
+                        swipeText.value = "Swipe Left";
+                        tumblingAngle.value = 3.14;
+                        sliderValue.value = 270.0;
+                        countValue.value++;
+                      }
+                    } else if (countValue.value == 2) {
+                      if (dragDirection.value == QuestionDirection.left) {
+                        currentDemoImage.value =
+                            demoData[QuestionDirection.right];
+                        swipeText.value = "Swipe Right";
+                        tumblingAngle.value = 0.0;
+                        sliderValue.value = 90.0;
+                        countValue.value++;
+                      }
+                    } else if (countValue.value == 3) {
+                      if (dragDirection.value == QuestionDirection.right) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const VisualAcuityFaceDistancePage(),
+                          ),
+                        );
+                      }
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -223,66 +269,6 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
         ),
       ),
     );
-  }
-
-  void _determineSwipeDirection(
-    BuildContext context,
-    ValueNotifier<QuestionDirection> dragDirection,
-    double angleDegrees,
-  ) {
-    if (angleDegrees >= 60 && angleDegrees <= 120) {
-      dragDirection.value = QuestionDirection.down;
-    } else if (angleDegrees >= 150 && angleDegrees <= 210) {
-      dragDirection.value = QuestionDirection.left;
-    } else if (angleDegrees >= 240 && angleDegrees <= 300) {
-      dragDirection.value = QuestionDirection.up;
-    } else if (angleDegrees >= 330 || angleDegrees <= 30) {
-      dragDirection.value = QuestionDirection.right;
-    } else {
-      AppToast.showToast(context, context.loc!.swipeGestureError);
-      return;
-    }
-  }
-
-  void _handleSwipeAction(
-    BuildContext context,
-    ValueNotifier<QuestionDirection> dragDirection,
-    ValueNotifier<SvgPicture> currentDemoImage,
-    ValueNotifier<int> countValue,
-    ValueNotifier<String> swipeText,
-    Map<QuestionDirection, dynamic> demoData,
-    ValueNotifier<double> sliderValue,
-    ValueNotifier<double> tumblingAngle,
-  ) {
-    if (countValue.value == 0 && dragDirection.value == QuestionDirection.up) {
-      currentDemoImage.value = demoData[QuestionDirection.down];
-      swipeText.value = "Swipe Down";
-      tumblingAngle.value = 7.85;
-      sliderValue.value = 180.0;
-      countValue.value++;
-    } else if (countValue.value == 1 &&
-        dragDirection.value == QuestionDirection.down) {
-      currentDemoImage.value = demoData[QuestionDirection.left];
-      swipeText.value = "Swipe Left";
-      tumblingAngle.value = 3.14;
-      sliderValue.value = 270.0;
-      countValue.value++;
-    } else if (countValue.value == 2 &&
-        dragDirection.value == QuestionDirection.left) {
-      currentDemoImage.value = demoData[QuestionDirection.right];
-      swipeText.value = "Swipe Right";
-      tumblingAngle.value = 0.0;
-      sliderValue.value = 90.0;
-      countValue.value++;
-    } else if (countValue.value == 3 &&
-        dragDirection.value == QuestionDirection.right) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const VisualAcuityFaceDistancePage(),
-        ),
-      );
-    }
   }
 
   double _getAngleOfSwipe(Offset startPoint, Offset endPoint) {

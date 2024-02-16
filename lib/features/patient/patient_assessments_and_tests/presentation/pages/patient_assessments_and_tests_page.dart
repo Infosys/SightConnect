@@ -42,7 +42,7 @@ class _AssessmentsAndTestsPageState
 
   _loadData() async {
     scrollController.addListener(() {
-      logger.d({
+      logger.f({
         "pixels": scrollController.position.pixels,
         "maxScrollExtent": scrollController.position.maxScrollExtent,
       });

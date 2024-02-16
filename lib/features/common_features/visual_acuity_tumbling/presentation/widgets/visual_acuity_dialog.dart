@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
@@ -242,11 +243,14 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
 
   Future<void> _saveTriageMode(WidgetRef ref, NavigatorState navigator) async {
     await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
-    navigator
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const TriageEyeScanPage(),
+        fullscreenDialog: true,
+      ),
+    );
   }
 
   void _saveStandAloneMode(NavigatorState navigator) {
@@ -272,11 +276,10 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       },
     );
     ref.invalidate(tumblingTestProvider);
-    navigator
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
+    navigator.pop();
   }
 }
