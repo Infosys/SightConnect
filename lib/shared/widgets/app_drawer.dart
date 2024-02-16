@@ -144,11 +144,12 @@ class AppDrawer extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      var languageProvider = ref.watch(globalLanguageProvider);
-                                      var currentLanguage = languageProvider
-                                          .currentLanguage;
+                                      var languageProvider =
+                                          ref.watch(globalLanguageProvider);
+                                      var currentLanguage =
+                                          languageProvider.currentLanguage;
                                       var currentLanguageCode = languageProvider
-                                          .currentLocale.languageCode;         
+                                          .currentLocale.languageCode;
                                       debugPrint("language: $currentLanguage");
                                       return Consumer(
                                         builder: (context, ref, child) {
@@ -157,17 +158,24 @@ class AppDrawer extends StatelessWidget {
                                               .when(
                                             data: (data) {
                                               return ChatBotPage(
-                                                selectedLanguageCode: currentLanguageCode,
-                                                selectedLanguage: currentLanguage,
-                                                defaultQuerySuggestions: const [
-                                                  "Tips to avoid eye strain",
-                                                  "Common eye issues",
-                                                  "Tips for a better eye sight",
-                                                ],
+                                                selectedLanguageCode:
+                                                    currentLanguageCode,
+                                                selectedLanguage:
+                                                    currentLanguage,
+                                                welcomeMessage:
+                                                    loc.chatBotWelcomeMessage,
+                                                // defaultQuerySuggestions: const [
+                                                //   "Tips to avoid eye strain",
+                                                //   "Common eye issues",
+                                                //   "Tips for a better eye sight",
+                                                // ],
+                                                defaultQuerySuggestions: loc
+                                                    .chatBotDefaultQuerySuggestions
+                                                    .split("|"),
                                                 // loadedTriageQuestionnaire: data
                                                 //         .questionnaire
                                                 //         ?.questionnaireItem ??
-                                                //     [], 
+                                                //     [],
                                               );
                                             },
                                             error: (error, stackTrace) {

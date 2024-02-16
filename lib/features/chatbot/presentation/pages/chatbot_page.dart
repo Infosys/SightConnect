@@ -13,6 +13,7 @@ class ChatBotPage extends ConsumerStatefulWidget {
     super.key,
     required this.selectedLanguage,
     required this.selectedLanguageCode,
+    required this.welcomeMessage,
     this.defaultQuerySuggestions = const [],
     this.loadChatHistory,
     this.saveChatHistory,
@@ -23,6 +24,7 @@ class ChatBotPage extends ConsumerStatefulWidget {
   final List<String> defaultQuerySuggestions;
   final String selectedLanguage;
   final String selectedLanguageCode;
+  final String welcomeMessage;
   final Future<List<ChatMessage>> Function()? loadChatHistory;
   final Future<dynamic> Function(List<ChatMessage>)? saveChatHistory;
   final Future<void> Function(ChatMessage)? onSendChatMessage;
@@ -72,7 +74,8 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
 
     if (chatHistory.isEmpty) {
       _chatMessage(ChatMessage(
-        message: "Hi, How may I help you today?",
+        // message: "Hi, How may I help you today?",
+        message: widget.welcomeMessage,
         isMe: false,
       ));
     } else {
