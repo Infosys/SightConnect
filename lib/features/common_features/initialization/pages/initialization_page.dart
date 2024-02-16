@@ -153,18 +153,33 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
   }
 
-  Future<bool?> _18PlusDeclaration() async {
-    if (SharedPreferenceService.get18PlusDeclaration) {
-      return true;
-    }
-
-    return showDialog<bool?>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return const EigtheenPlusDeclaration();
+  Future<bool> _18PlusDeclarationAccepted() async {
+    final model = ref.watch(consentRepositoryProvider);
+    final consent = await model.getConsent(type: "AGE_DECLARATION").catchError(
+      (e) async {
+        logger.e("18 Plus Declaration: $e");
+        await _invalidateAndLogout("Server Error. Please login again.");
       },
     );
+    return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
+  }
+
+  Future<bool?> _18PlusDeclaration() async {
+    final isAccepted = await _18PlusDeclarationAccepted();
+    if (isAccepted) {
+      return true;
+    } else {
+      if (context.mounted) {
+        return showDialog<bool?>(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return const EigtheenPlusDeclaration();
+          },
+        );
+      }
+    }
+    return null;
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {

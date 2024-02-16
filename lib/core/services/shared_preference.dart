@@ -26,10 +26,6 @@ class SharedPreferenceService {
     await _sharedPreferences.setDouble("fontScale", value);
   }
 
-  static Future<void> set18PlusDeclaration(bool value) async {
-    await _sharedPreferences.setBool("18PlusDeclaration", value);
-  }
-
   static set storeTumblingOverInfo(bool value) {
     _sharedPreferences.setBool("tumblingOverInfo", value);
   }
@@ -45,14 +41,10 @@ class SharedPreferenceService {
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 
-  static bool get get18PlusDeclaration =>
-      _sharedPreferences.getBool("18PlusDeclaration") ?? false;
-
   static Future<void> clearAll() async {
     await _sharedPreferences.remove("language");
     await _sharedPreferences.remove("fontScale");
     await _sharedPreferences.remove("dontShowVisualAcuityStatus");
     await _sharedPreferences.remove("tumblingOverInfo");
-    await _sharedPreferences.remove("18PlusDeclaration");
   }
 }
