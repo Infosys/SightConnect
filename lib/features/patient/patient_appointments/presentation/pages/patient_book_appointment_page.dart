@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/appointment_date_selector.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/appointment_patient_selector.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/consultation_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/eye_problem_type.dart';
@@ -62,65 +63,7 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
               ),
               const ConsultationType(),
               const SizedBox(height: AppSize.klheight),
-              Container(
-                padding: const EdgeInsets.all(8),
-                height: AppSize.height(context) * 0.18,
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: CircleAvatar(
-                            maxRadius: 15,
-                            backgroundColor: AppColor.altGrey.withOpacity(0.2),
-                            child: const Icon(
-                              Icons.chevron_left,
-                              color: AppColor.grey,
-                            )),
-                      ),
-                      SizedBox(
-                        width: AppSize.width(context) * 0.7,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text("Mo"),
-                            SizedBox(
-                              height: AppSize.height(context) * 0.02,
-                            ),
-                            Container(
-                                padding: const EdgeInsets.all(9),
-                                decoration: BoxDecoration(
-                                  color: AppColor.blue,
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                                child: const Text("12")),
-                            SizedBox(
-                              height: AppSize.height(context) * 0.037,
-                            ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: CircleAvatar(
-                            maxRadius: 15,
-                            backgroundColor: AppColor.altGrey.withOpacity(0.2),
-                            child: const Icon(
-                              Icons.chevron_right,
-                              color: AppColor.grey,
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              const AppointmentDateSelector(),
             ],
           ),
         ),
