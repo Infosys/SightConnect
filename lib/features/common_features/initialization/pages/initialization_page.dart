@@ -2,6 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
@@ -20,6 +22,7 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../../core/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
@@ -79,6 +82,14 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
     if (role == Role.ROLE_PATIENT) {
+      final is18Plus = await _18PlusDeclaration();
+      if (is18Plus == null || !is18Plus) {
+        // 18+ declaration not given do not proceed
+        // This will never happen
+        Fluttertoast.showToast(msg: "18+ Declaration not given");
+        return;
+      }
+
       if (await _isConsentAlreadyAccepted()) {
         await _registerUser(navigator, role);
       } else {
@@ -106,6 +117,16 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
 
     try {
+      if (role == Role.ROLE_PATIENT) {
+        final is18Plus = await _18PlusDeclaration();
+        if (is18Plus == null || !is18Plus) {
+          // 18+ declaration not given do not proceed
+          // This will never happen
+          Fluttertoast.showToast(msg: "18+ Declaration not given");
+          return;
+        }
+      }
+
       if (await _isConsentAlreadyAccepted()) {
         // consent already accepted
         await navigateBasedOnRole(navigator, role);
@@ -130,6 +151,20 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       await _invalidateAndLogout("Server Error. Please login again.");
     });
     return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
+  }
+
+  Future<bool?> _18PlusDeclaration() async {
+    if (SharedPreferenceService.get18PlusDeclaration) {
+      return true;
+    }
+
+    return showDialog<bool?>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const EigtheenPlusDeclaration();
+      },
+    );
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
