@@ -107,7 +107,9 @@ class _EyeProblemTypeState extends ConsumerState<EyeProblemType> {
             filled: true,
           ),
           controller: _controller,
-          onChanged: (value) {},
+          onChanged: (value) {
+            data.setSelectedEyeProblem(value);
+          },
           focusNode: _focusNode,
         ),
         if (_currentInput.isNotEmpty)
@@ -125,7 +127,7 @@ class _EyeProblemTypeState extends ConsumerState<EyeProblemType> {
                     (suggestion) => ListTile(
                       title: Text(suggestion),
                       onTap: () {
-                        // data.setEducationalQualification(suggestion);
+                        data.setSelectedEyeProblem(suggestion);
                         _controller.text = suggestion;
                         _filteredSuggestions = [];
                         _focusNode.unfocus();

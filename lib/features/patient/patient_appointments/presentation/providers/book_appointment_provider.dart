@@ -9,11 +9,18 @@ class BookAppointmentProvider extends ChangeNotifier {
   late DateTime _selectedDate;
   String _selectedPatientName = '';
   String _selectedPatientId = '';
+  String _selectedEyeProblem = '';
 
   String get selectedConsultationType => _selectedConsultationType;
   DateTime get selectedDate => _selectedDate;
   String get selectedPatientName => _selectedPatientName;
   String get selectedPatientId => _selectedPatientId;
+  String get selectedEyeProblem => _selectedEyeProblem;
+
+  void setSelectedEyeProblem(String value) {
+    _selectedEyeProblem = value;
+    notifyListeners();
+  }
 
   void setSelectedPatientDetails(String name, String id) {
     _selectedPatientName = name;
