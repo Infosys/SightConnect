@@ -36,7 +36,7 @@ class EigtheenPlusDeclaration extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "This app is intended for users aged 18 and above. By clicking 'I Agree', you are confirming that you are 18 years old or older.",
+              "This app is intended for users aged 18 and above. By clicking 'I Agree', you are confirming that you are 18 years or older.",
               style: applyRobotoFont(
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
