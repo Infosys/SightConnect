@@ -5,18 +5,23 @@ import 'package:eye_care_for_all/features/patient/patient_appointments/presentat
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/appointment_patient_selector.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/consultation_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/eye_problem_type.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/nearby_eye_clinic.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/select_time.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_images.dart';
 import '../../../../../shared/theme/text_theme.dart';
+import '../providers/book_appointment_provider.dart';
 
 class PatientBookAppointmentPage extends HookConsumerWidget {
   const PatientBookAppointmentPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(bookAppointmentProvider);
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

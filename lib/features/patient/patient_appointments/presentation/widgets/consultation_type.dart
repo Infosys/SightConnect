@@ -38,6 +38,7 @@ class ConsultationType extends HookConsumerWidget {
                     model.setConsultationType("In Clinic Consultation");
                   }
                 } else {
+                  model.setConsultationType("");
                   isSelected.value = -1;
                 }
               },

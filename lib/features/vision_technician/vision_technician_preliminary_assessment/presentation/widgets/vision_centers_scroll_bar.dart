@@ -66,8 +66,9 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
 
-    if (viewState.isLoading)
-      const Center(child: CircularProgressIndicator.adaptive());
+    if (viewState.isLoading) {
+      return const Center(child: CircularProgressIndicator.adaptive());
+    }
 
     if (viewState.errorMessage != null) {
       return VisionCenterError(
@@ -76,7 +77,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
       );
     }
 
-    if (viewState.visionCenters == null){
+    if (viewState.visionCenters == null) {
       return const Text("No Vision Centers Found");
     }
 
