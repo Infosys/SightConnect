@@ -20,7 +20,9 @@ class AppointmentDateSelector extends HookConsumerWidget {
       var date = currentDate.add(Duration(days: i));
       dates.add(date);
     }
-    
+
+    var scrollController = useScrollController();
+
     var isSelectedDate = useState<int>(-1);
 
     var model = ref.watch(bookAppointmentProvider);
@@ -38,7 +40,13 @@ class AppointmentDateSelector extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                scrollController.animateTo(
+                  scrollController.offset - 100,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
+                );
+              },
               child: CircleAvatar(
                   maxRadius: 15,
                   backgroundColor: AppColor.altGrey.withOpacity(0.2),
@@ -50,6 +58,7 @@ class AppointmentDateSelector extends HookConsumerWidget {
             SizedBox(
               width: AppSize.width(context) * 0.68,
               child: ListView.builder(
+                controller: scrollController,
                 scrollDirection: Axis.horizontal,
                 itemCount: dates.length,
                 itemBuilder: (context, index) {
@@ -69,7 +78,13 @@ class AppointmentDateSelector extends HookConsumerWidget {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                scrollController.animateTo(
+                  scrollController.offset + 100,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
+                );
+              },
               child: CircleAvatar(
                   maxRadius: 15,
                   backgroundColor: AppColor.altGrey.withOpacity(0.2),
