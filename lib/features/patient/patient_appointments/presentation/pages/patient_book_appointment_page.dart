@@ -35,7 +35,7 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
           padding: EdgeInsets.only(
             left: AppSize.kmpadding,
             right: AppSize.kmpadding,
-            top: AppSize.height(context) * 0.1,
+            top: AppSize.height(context) * 0.12,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

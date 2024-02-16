@@ -7,9 +7,19 @@ var bookAppointmentProvider =
 class BookAppointmentProvider extends ChangeNotifier {
   String _selectedConsultationType = '';
   late DateTime _selectedDate;
+  String _selectedPatientName = '';
+  String _selectedPatientId = '';
 
   String get selectedConsultationType => _selectedConsultationType;
   DateTime get selectedDate => _selectedDate;
+  String get selectedPatientName => _selectedPatientName;
+  String get selectedPatientId => _selectedPatientId;
+
+  void setSelectedPatientDetails(String name, String id) {
+    _selectedPatientName = name;
+    _selectedPatientId = id;
+    notifyListeners();
+  }
 
   void setSelectedDate(DateTime value) {
     _selectedDate = value;
