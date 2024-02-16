@@ -1,99 +1,100 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/providers/book_appointment_provider.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ConsultationType extends StatelessWidget {
+class ConsultationType extends HookConsumerWidget {
   const ConsultationType({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Consultation Type",
-          style: applyFiraSansFont(fontSize: 18),
-        ),
-        const SizedBox(height: AppSize.kmheight),
-        const Row(
-          children: [
-            ConsultationChip(
-              title: "Telephone Consultation",
-            ),
-            ConsultationChip(title: "In Clinic Consultation"),
-          ],
-        )
-      ],
-    );
-  }
-}
-
-class ConsultationChip extends ConsumerWidget {
-  const ConsultationChip({
-    super.key,
-    required this.title,
-  });
-  final String title;
-
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String? type = ref.watch(bookAppointmentHelperProvider).consultationType;
-
-    bool isSelected = title == type;
-
-    return Flexible(
-      child: InkWell(
-        onTap: () {
-          ref.read(bookAppointmentHelperProvider).updateConsultationType(title);
-        },
-        child: Container(
-          margin: const EdgeInsets.all(AppSize.kspadding),
-          // height: AppSize.height(context) * 0.06,
-          padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.kspadding, vertical: AppSize.kspadding - 2),
-          decoration: BoxDecoration(
-            color: AppColor.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: isSelected ? AppColor.blue : AppColor.white,
-              width: 1,
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 20,
-                height: 20,
+    var isSelected = useState<int>(-1);
+    var model = ref.watch(bookAppointmentProvider);
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: GridView.builder(
+          shrinkWrap: true,
+          itemCount: 2,
+          padding: EdgeInsets.zero,
+          scrollDirection: Axis.vertical,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 0,
+              childAspectRatio: 2.5),
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                if (isSelected.value != index) {
+                  isSelected.value = index;
+                  if (index == 0) {
+                    model.setConsultationType("Telephone Consultation");
+                  } else {
+                    model.setConsultationType("In Clinic Consultation");
+                  }
+                } else {
+                  isSelected.value = -1;
+                }
+              },
+              child: Container(
+                // height: AppSize.height(context) * 0.06,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSize.kspadding,
+                    vertical: AppSize.kspadding - 2),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColor.blue : AppColor.grey,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 12,
-                ),
-              ),
-              const SizedBox(width: AppSize.kspadding - 2),
-              Flexible(
-                child: Text(
-                  title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    color: isSelected ? AppColor.black : AppColor.grey,
-                    fontWeight: FontWeight.w500,
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: isSelected.value == index
+                        ? AppColor.blue
+                        : AppColor.white,
+                    width: 1,
                   ),
                 ),
-              )
-            ],
-          ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: isSelected.value == index
+                            ? AppColor.blue
+                            : AppColor.grey,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 12,
+                      ),
+                    ),
+                    const SizedBox(width: AppSize.kspadding - 2),
+                    Flexible(
+                      child: Text(
+                        index == 0
+                            ? "Telephone Consultation"
+                            : "In Clinic Consultation",
+                        softWrap: true,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          color: isSelected.value == index
+                              ? AppColor.black
+                              : AppColor.grey,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
