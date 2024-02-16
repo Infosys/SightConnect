@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
@@ -8,6 +10,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:location/location.dart';
+import 'dart:math';
 
 class NearbyEyeClinic extends HookConsumerWidget {
   const NearbyEyeClinic({super.key});
@@ -15,6 +19,8 @@ class NearbyEyeClinic extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var selectedVisionCenterIndex = useState<int>(-1);
+    LocationData? locationData =
+        ref.watch(nearByVisionCenterProvider.notifier).data;
 
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
@@ -53,10 +59,6 @@ class NearbyEyeClinic extends HookConsumerWidget {
 
             return InkWell(
               onTap: () {
-                logger.d(
-                    "address ${data[index].facilityInformation?.facilityAddressDetails}");
-                // logger.d(
-                //     "address ${data[index].facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}");
                 if (selectedVisionCenterIndex.value == index) {
                   selectedVisionCenterIndex.value = -1;
                   return;
@@ -120,7 +122,29 @@ class NearbyEyeClinic extends HookConsumerWidget {
                       ],
                     ),
                     const Spacer(),
-                    Text("2kms away"),
+                    Text(
+                      "${calculateDistance(
+                        locationData?.longitude ?? 0,
+                        locationData?.latitude ?? 0,
+                        double.parse(data[index]
+                                .facilityInformation
+                                ?.facilityAddressDetails
+                                ?.latitude ??
+                            "0"),
+                        double.parse(data[index]
+                                .facilityInformation
+                                ?.facilityAddressDetails
+                                ?.longitude ??
+                            "0"),
+                      ).toString()} Km",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                    // getLocation().then((value) => Text()),
                   ],
                 ),
               ),
@@ -129,5 +153,14 @@ class NearbyEyeClinic extends HookConsumerWidget {
         )
       ],
     );
+  }
+
+  int calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return int.parse((12742 * asin(sqrt(a))).floor().toString());
   }
 }

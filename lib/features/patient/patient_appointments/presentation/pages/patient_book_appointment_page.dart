@@ -1,9 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/providers/book_appointment_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/appointment_patient_selector.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/consultation_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/eye_problem_type.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/nearby_eye_clinic.dart';
+import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/widgets/select_time.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +19,8 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var model = ref.watch(bookAppointmentProvider);
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -62,6 +67,11 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
               ),
               const ConsultationType(),
               const SizedBox(height: AppSize.klheight),
+              Visibility(
+                visible:
+                    model.selectedConsultationType == "In Clinic Consultation",
+                child: const NearbyEyeClinic(),
+              ),
               Container(
                 padding: const EdgeInsets.all(8),
                 height: AppSize.height(context) * 0.18,
@@ -120,7 +130,8 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
                     ],
                   ),
                 ),
-              )
+              ),
+              const SelectTime(),
             ],
           ),
         ),
