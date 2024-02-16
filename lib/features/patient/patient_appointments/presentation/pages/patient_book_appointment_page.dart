@@ -75,7 +75,15 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
               ),
               const ConsultationType(),
               const SizedBox(height: AppSize.klheight),
+              Visibility(
+                visible:
+                    model.selectedConsultationType == "In Clinic Consultation",
+                child: const NearbyEyeClinic(),
+              ),
+              const SizedBox(height: AppSize.klheight),
               const AppointmentDateSelector(),
+              const SizedBox(height: AppSize.klheight),
+              const SelectTime(),
             ],
           ),
         ),
