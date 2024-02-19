@@ -6,12 +6,9 @@ class CameraPermissionService {
     BuildContext context,
   ) async {
     PermissionStatus cameraStatus = await Permission.camera.status;
-    PermissionStatus audioStatus = await Permission.microphone.status;
-    final isGranted = cameraStatus.isGranted && audioStatus.isGranted;
-    if (!isGranted) {
+    if (!cameraStatus.isGranted) {
       final cameraStatus = await Permission.camera.request();
-      final audioStatus = await Permission.microphone.request();
-      if (cameraStatus.isGranted && audioStatus.isGranted) {
+      if (cameraStatus.isGranted) {
         return true;
       } else {
         if (context.mounted) {
@@ -20,35 +17,32 @@ class CameraPermissionService {
         if (context.mounted) return await checkPermissions(context);
       }
     }
-    return isGranted;
+    return cameraStatus.isGranted;
   }
 
   static _showCameraSettingsDialog(BuildContext context) {
     return showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) => PopScope(
-        canPop: false,
-        child: AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          title: const Text('Permissions required'),
-          content: const Text(
-              'Please enable camera and microphone permissions in the app settings.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () async {
-                await openAppSettings();
-                await Future.delayed(const Duration(seconds: 1));
-                if (context.mounted) {
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-          ],
+      builder: (BuildContext context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
         ),
+        title: const Text('Permissions required'),
+        content: const Text(
+            'Please enable camera and microphone permissions in the app settings.'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () async {
+              await openAppSettings();
+              await Future.delayed(const Duration(seconds: 1));
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
+            },
+          ),
+        ],
       ),
     );
   }
