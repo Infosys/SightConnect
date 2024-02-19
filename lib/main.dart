@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:eye_care_for_all/app/app.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 
 import 'package:flutter/foundation.dart';
@@ -24,7 +25,7 @@ Future<void> main() async {
   }
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
-  await PackageInfoService.init();
+  await AppInfoService.init();
   // await IOSDeviceInfoService.init();
   await MatomoLogger.init();
 
