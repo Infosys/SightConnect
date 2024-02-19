@@ -93,7 +93,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   shimmer: ^3.0.0
   workmanager: ^0.5.2
-  sentry_flutter: ^7.16.0
+  package_info_plus: ^5.0.1
 
 
 dependency_overrides:
