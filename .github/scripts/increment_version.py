@@ -13,4 +13,4 @@ def increment_build_number(filename):
             file.write(new_content)
             file.truncate()
 
-increment_build_number('pubspec.yaml')
+increment_build_number('../../pubspec.yaml')
