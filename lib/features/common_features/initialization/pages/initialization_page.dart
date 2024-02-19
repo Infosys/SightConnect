@@ -1,8 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/models/consent_model.dart';
-import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -22,7 +19,6 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../../../core/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
@@ -46,7 +42,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           logger.d("with role: $role");
           _profileVerification(roleMapper(role)!);
         } else {
-          final selectedProfile = await showProfileSelectionDialog(navigator);
+          final selectedProfile = await _showProfileSelectionDialog(navigator);
           logger.d("Selected Role: $selectedProfile");
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
@@ -82,23 +78,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
     if (role == Role.ROLE_PATIENT) {
-      final is18Plus = await _18PlusDeclaration();
-      if (is18Plus == null || !is18Plus) {
-        // 18+ declaration not given do not proceed
-        // This will never happen
-        Fluttertoast.showToast(msg: "18+ Declaration not given");
-        return;
-      }
-
-      if (await _isConsentAlreadyAccepted()) {
+      final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
+      if (isAccepted != null && isAccepted) {
         await _registerUser(navigator, role);
       } else {
-        final consentGiven = await _showConsentForm(navigator, role);
-        if (consentGiven != null && consentGiven) {
-          await _registerUser(navigator, role);
-        } else {
-          await _invalidateAndLogout("Consent not given. Please login again.");
-        }
+        // User stay on the same page
       }
     } else if (role == Role.ROLE_VISION_TECHNICIAN) {
       await _invalidateAndLogout("You are not authorized to login.");
@@ -110,76 +94,89 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    if (role == Role.ROLE_OPTOMETRIST) {
-      //Skip consent for optometrist
-      await navigateBasedOnRole(navigator, role);
-      return;
-    }
-
-    try {
-      if (role == Role.ROLE_PATIENT) {
-        final is18Plus = await _18PlusDeclaration();
-        if (is18Plus == null || !is18Plus) {
-          // 18+ declaration not given do not proceed
-          // This will never happen
-          Fluttertoast.showToast(msg: "18+ Declaration not given");
-          return;
-        }
-      }
-
-      if (await _isConsentAlreadyAccepted()) {
-        // consent already accepted
-        await navigateBasedOnRole(navigator, role);
-      } else {
-        final isAccepted = await _showConsentForm(navigator, role);
-        if (isAccepted != null && isAccepted) {
-          await navigateBasedOnRole(navigator, role);
-        } else {
-          // it will never come here
-          await _invalidateAndLogout("Consent not given. Please login again.");
-        }
-      }
-    } catch (e) {
-      await _invalidateAndLogout("Server Error. Please login again.");
+    final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
+    if (isAccepted != null && isAccepted) {
+      await _navigateBasedOnRole(navigator, role);
+    } else {
+      // User stay on the same page
     }
   }
 
   Future<bool> _isConsentAlreadyAccepted() async {
-    final model = ref.watch(consentRepositoryProvider);
-    final consent = await model.getConsent().catchError((e) async {
-      logger.e("getConsent: $e");
-      await _invalidateAndLogout("Server Error. Please login again.");
-    });
-    return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
+    final model = ref.read(initializationProvider);
+    return model.getConsentStatus();
   }
 
   Future<bool> _18PlusDeclarationAccepted() async {
-    final model = ref.watch(consentRepositoryProvider);
-    final consent = await model.getConsent(type: "AGE_DECLARATION").catchError(
-      (e) async {
-        logger.e("18 Plus Declaration: $e");
-        await _invalidateAndLogout("Server Error. Please login again.");
-      },
-    );
-    return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
+    final model = ref.read(initializationProvider);
+    return model.getEighteenPlusDeclarationStatus();
   }
 
-  Future<bool?> _18PlusDeclaration() async {
-    final isAccepted = await _18PlusDeclarationAccepted();
-    if (isAccepted) {
-      return true;
-    } else {
-      if (context.mounted) {
-        return showDialog<bool?>(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) {
-            return const EigtheenPlusDeclaration();
-          },
-        );
+  Future<bool?> _verifyRoleSpecificConsent(
+    NavigatorState navigator,
+    Role role,
+  ) async {
+    try {
+      if (role == Role.ROLE_OPTOMETRIST) {
+        // Skip consent and 18+ declaration for optometrist
+        return true;
+      } else if (role == Role.ROLE_PATIENT) {
+        // 18+ declaration and consent check for patient
+        bool is18PlusDeclarationAccepted = await _18PlusDeclarationAccepted();
+        bool isConsentAccepted = await _isConsentAlreadyAccepted();
+        if (is18PlusDeclarationAccepted && isConsentAccepted) {
+          return true;
+        } else {
+          if (!is18PlusDeclarationAccepted) {
+            is18PlusDeclarationAccepted =
+                await _show18PlusDeclaration() ?? false;
+          }
+          if (!isConsentAccepted) {
+            isConsentAccepted =
+                await _showConsentForm(navigator, role) ?? false;
+          }
+        }
+        return is18PlusDeclarationAccepted && isConsentAccepted;
+      } else {
+        // Check consent for vision technician and guardian
+        bool isConsentAccepted = await _isConsentAlreadyAccepted();
+        if (!isConsentAccepted) {
+          isConsentAccepted = await _showConsentForm(navigator, role) ?? false;
+        }
+        return isConsentAccepted;
       }
+    } catch (e) {
+      logger.e("_verifyRoleSpecificConsent: $e");
+      return null;
     }
-    return null;
+  }
+
+  Future<bool?> _show18PlusDeclaration() async {
+    return showDialog<bool?>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const EigtheenPlusDeclaration();
+      },
+    );
+  }
+
+  Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
+    bool? consentGiven = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) {
+          if (role == Role.ROLE_PATIENT) {
+            return const PatientConsentFormPage();
+          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+            return const VTConsentFormPage();
+          } else {
+            // This is for vision guardian
+            return const VTConsentFormPage();
+          }
+        },
+      ),
+    );
+    return consentGiven;
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
@@ -204,24 +201,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-  Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) {
-          if (role == Role.ROLE_PATIENT) {
-            return const PatientConsentFormPage();
-          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
-            return const VTConsentFormPage();
-          } else {
-            // This is for vision guardian
-            return const VTConsentFormPage();
-          }
-        },
-      ),
-    );
-    return consentGiven;
-  }
-
   Future<void> _showRegistrationDialog(Role role) async {
     showDialog(
       context: context,
@@ -243,7 +222,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
   }
 
-  Future<Role?> showProfileSelectionDialog(NavigatorState navigator) {
+  Future<Role?> _showProfileSelectionDialog(NavigatorState navigator) {
     final currentRoles = PersistentAuthStateService.authState.roles;
     if (currentRoles == null) {
       return Future.value(null);
@@ -261,7 +240,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
   }
 
-  Future<void> navigateBasedOnRole(NavigatorState navigator, Role role) async {
+  Future<void> _navigateBasedOnRole(NavigatorState navigator, Role role) async {
     final rolePages = {
       Role.ROLE_PATIENT: const PatientDashboardPage(),
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
