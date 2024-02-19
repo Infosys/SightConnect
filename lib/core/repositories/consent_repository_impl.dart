@@ -13,9 +13,10 @@ var consentRepositoryProvider = Provider<ConsentRepository>((ref) {
 class ConsentRepositoryImpl implements ConsentRepository {
   final Dio _dio;
   ConsentRepositoryImpl(this._dio);
+
   @override
-  Future<ConsentModel> getConsent() async {
-    const endPoint = "/services/orchestration/api/consent?type=PRIVACY_POLICY";
+  Future<ConsentModel> getConsent({String type = "PRIVACY_POLICY"}) async {
+    final endPoint = "/services/orchestration/api/consent?type=$type";
     try {
       final response = await _dio.get(endPoint);
       return ConsentModel.fromJson(response.data);
