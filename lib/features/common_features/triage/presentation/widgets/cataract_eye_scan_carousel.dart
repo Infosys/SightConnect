@@ -89,11 +89,7 @@ class CataractEyeScanCarousel extends HookWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.black.withOpacity(0.5),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 30,
-                    ),
+                  child: Center(
                     child: Text(
                       slideShowData[index]["description"],
                       textAlign: TextAlign.center,
