@@ -231,6 +231,6 @@
   "profilePageHealthCardTitle": "স্বাস্থ্য কার্ড",
   "appointmentTitle": "অ্যাপয়েন্টমেন্ট",
   "appointmentSubtitle": "সমস্ত অ্যাপয়েন্টমেন্ট",
-  "chatBotDefaultQuerySuggestions": "চোখের মূল্যায়ন শুরু করুন। সাধারণ চোখের সমস্যা। আরও ভাল দৃষ্টিশক্তির জন্য টিপস",
+  "chatBotDefaultQuerySuggestions": "চোখের মূল্যায়ন শুরু করুন | সাধারণ চোখের সমস্যা | আরও ভাল দৃষ্টিশক্তির জন্য টিপস",
   "chatBotWelcomeMessage": "হাই, আজ আমি কিভাবে আপনাকে সাহায্য করতে পারি?"
 }
