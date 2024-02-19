@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'pubspec.yaml'  #The paths-ignore will prevent the workflow from being triggered when only the pubspec.yaml file is changed.
+    # paths-ignore:
+    #   - 'pubspec.yaml'  #The paths-ignore will prevent the workflow from being triggered when only the pubspec.yaml file is changed.
 
 jobs:
   build:
@@ -14,26 +14,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        # with:
+        #   token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'  
+      # - name: Set up Python
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: '3.x'  
           
-      - name: Increment build number
-        run: python .github/scripts/increment_version.py
+      # - name: Increment build number
+      #   run: python .github/scripts/increment_version.py
 
-      - name: Commit changes
-        run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git commit -m "Increment build number [skip ci]"
-          git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
-          git push origin --tags
-          git push  
+      # - name: Commit changes
+      #   run: |
+      #     git config --global user.name 'GitHub Actions'
+      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      #     git add .
+      #     git commit -m "Increment build number [skip ci]"
+      #     git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
+      #     git push origin --tags
+      #     git push  
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
