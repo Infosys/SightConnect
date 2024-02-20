@@ -96,9 +96,11 @@ class ImagePreview extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.arrow_back,
                       size: AppSize.klheight,
+                      color:
+                            currentStep == 0 ? AppColor.grey : AppColor.primary,
                     ),
                     const SizedBox(width: AppSize.kswidth / 2),
                     Text(
@@ -175,9 +177,10 @@ class ImagePreview extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: AppSize.kswidth / 2),
-                    const Icon(
+                    Icon(
                       Icons.arrow_forward,
                       size: AppSize.klheight,
+                      color: currentStep == 2 ? AppColor.grey : AppColor.primary,
                     ),
                   ],
                 ),
