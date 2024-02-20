@@ -616,74 +616,89 @@ class AppLocalizationsOr extends AppLocalizations {
   String get scannerTitle => 'ସ୍କାନର୍';
 
   @override
-  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstruction => 'କ୍ଯ଼ାମେରାଟିକୁ ଆଖିଠାରୁ 40 ସେ. ମି. ଦୂରରେ ରଖନ୍ତୁ।';
 
   @override
-  String get somethingWentWrong => 'Something went wrong.';
+  String get somethingWentWrong => 'କିଛି ଭୁଲ ହୋଇଗଲା';
 
   @override
-  String get triageUpdatedSuccessfully => 'Triage Updated successfully.';
+  String get triageUpdatedSuccessfully => 'ଟ୍ରାଇଏଜ୍ ସଫଳତାର ସହ ଅଦ୍ଯ଼ତନ ହୋଇଛି।';
 
   @override
-  String get noPreviewAvailable => 'No Preview Available';
+  String get noPreviewAvailable => 'କୌଣସି ପୂର୍ବରୂପ ଉପଲବ୍ଧ ନାହିଁ।';
 
   @override
-  String get privacyPolicyTitle => 'Privacy & Data Protection';
+  String get privacyPolicyTitle => 'ଗୋପନୀଯ଼ତା ଏବଂ ତଥ୍ଯ଼ ସୁରକ୍ଷା';
 
   @override
-  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'ଆମେ ନିମ୍ନୋକ୍ତ ଉଦ୍ଦେଶ୍ଯ଼ ପାଇଁ ଆପଣଙ୍କ ଦ୍ୱାରା ପ୍ରଦାନ କରାଯାଇଥିବା ବ୍ଯ଼କ୍ତିଗତ ତଥ୍ଯ଼କୁ ପ୍ରକ୍ରିଯ଼ାକରଣ କରୁ, ଯେପରିକିଃ';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooClose => 'You are too close to the Camera, Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstructionTooClose => 'ଆପଣ କ୍ଯ଼ାମେରାର ଅତି ନିକଟରେ ଅଛନ୍ତି, କ୍ଯ଼ାମେରାକୁ ଆଖିଠାରୁ 40 ସେ. ମି. ଦୂରରେ ରଖନ୍ତୁ।';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooFar => 'You are too far from the Camera, Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstructionTooFar => 'ଆପଣ କ୍ଯ଼ାମେରାରୁ ବହୁତ ଦୂରରେ ଅଛନ୍ତି, କ୍ଯ଼ାମେରାକୁ ଆଖିଠାରୁ 40 ସେ. ମି. ଦୂରରେ ରଖନ୍ତୁ।';
 
   @override
-  String get myProfileABHAID => 'ABHA ID';
+  String get myProfileABHAID => 'ଏବିଏଚଏ ଆଇଡି';
 
   @override
-  String get myProfileEmail => 'Email';
+  String get myProfileEmail => 'ଇମେଲ୍ କରନ୍ତୁ';
 
   @override
-  String get viewHistoryButton => 'View History';
+  String get viewHistoryButton => 'ଇତିହାସ ଦେଖନ୍ତୁ';
 
   @override
-  String get profilePagePersonalDetails => 'Personal Details';
+  String get profilePagePersonalDetails => 'ବ୍ଯ଼କ୍ତିଗତ ବିବରଣୀ';
 
   @override
-  String get profilePageDateOfBirth => 'Date of Birth';
+  String get profilePageDateOfBirth => 'ଜନ୍ମ ତାରିଖ';
 
   @override
-  String get profilePageGender => 'Gender';
+  String get profilePageGender => 'ଲିଙ୍ଗ';
 
   @override
-  String get profilePageMobile => 'Mobile';
+  String get profilePageMobile => 'ମୋବାଇଲ';
 
   @override
-  String get profilePageHealthCardTitle => 'Health Card';
+  String get profilePageHealthCardTitle => 'ସ୍ୱାସ୍ଥ୍ଯ଼ କାର୍ଡ';
 
   @override
-  String get appointmentTitle => 'Appointments';
+  String get appointmentTitle => 'ନିଯୁକ୍ତି';
 
   @override
-  String get appointmentSubtitle => 'All Appointments';
+  String get appointmentSubtitle => 'ସମସ୍ତ ନିଯୁକ୍ତି';
 
   @override
-  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'ଆଖି ଚାରିପାଖରେ ସବୁଜ ବାକ୍ସ ଦୃଶ୍ଯ଼ମାନ ହେବା ପର୍ଯ୍ଯ଼ନ୍ତ ଦଯ଼ାକରି ପ୍ରତିଛବିକୁ ଆଡଜଷ୍ଟ ଏବଂ ପୋଜିସନ୍ କରନ୍ତୁ | ଆଖିକୁ ନିକଟତର କରନ୍ତୁ ଏବଂ ସୁନିଶ୍ଚିତ କରନ୍ତୁ ଯେ ବାକ୍ସଟିର 40 ପ୍ରତିଶତ ଆଖି ଦ୍ୱାରା ଆଚ୍ଛାଦିତ ହୋଇଛି।';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'ସେବା';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'ଆରେ! ମୁଁ ମୋ ଆଖିର ଯତ୍ନ ନେବା ପାଇଁ ସାଇଟ୍କନେକ୍ଟ ଆପ୍ ବ୍ଯ଼ବହାର କରୁଛି, ଏବଂ ଆପଣ ମଧ୍ଯ଼ କରିବା ଉଚିତ! ନିଜ ଆଖିର ମୂଲ୍ଯ଼ାଙ୍କନ କରନ୍ତୁ ଏବଂ ସାଇଟ୍କନେକ୍ଟ ଆପ୍ ଜରିଆରେ ଠିକ୍ ସମଯ଼ରେ ଚିକିତ୍ସା କରନ୍ତୁ। ଏହା ଏକ ଅନନ୍ଯ଼ ଆପ୍ ଯାହା ଆପଣଙ୍କ ହାତରେ ପ୍ରତିଷେଧକ ଚକ୍ଷୁ ଯତ୍ନ ଆଣିଥାଏ | ବର୍ତ୍ତମାନ ଏହାକୁ ପ୍ରାପ୍ତ କରନ୍ତୁଃ https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'ସାଇଟ୍କନେକ୍ଟ ଆପ୍ ଦ୍ୱାରା ନିଜ ଚକ୍ଷୁ ସ୍ୱାସ୍ଥ୍ଯ଼କୁ ପ୍ରାଥମିକତା ଦିଅନ୍ତୁ!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'ମୋତିଆବିନ୍ଦୁ ଚକ୍ଷୁ ପରୀକ୍ଷା';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'ଲାଲ ଆଖି ପରୀକ୍ଷା';
+
+  @override
+  String get poweredByText => 'ଦ୍ୱାରା ପରିଚାଳିତ';
+
+  @override
+  String get digitalHealthCard => 'ଡିଜିଟାଲ ସାର୍ବଜନୀନ ସ୍ୱାସ୍ଥ୍ଯ଼ ଷ୍ଟାକ';
+
+  @override
+  String get inviteNowText => 'ବର୍ତ୍ତମାନ ନିମନ୍ତ୍ରଣ କରନ୍ତୁ';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'ଆଖି ମୂଲ୍ଯ଼ାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ | ସାଧାରଣ ଆଖି ସମସ୍ଯ଼ା | ଉତ୍ତମ ଦୃଷ୍ଟିଶକ୍ତି ପାଇଁ ଟିପ୍ସ';
+
+  @override
+  String get chatBotWelcomeMessage => 'ନମସ୍କାର, ମୁଁ ଆଜି ଆପଣଙ୍କୁ କିପରି ସାହାଯ୍ଯ଼ କରିପାରିବି?';
 }

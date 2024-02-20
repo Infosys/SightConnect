@@ -646,7 +646,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get myProfileEmail => 'ई-मेल';
 
   @override
-  String get viewHistoryButton => 'View History';
+  String get viewHistoryButton => 'इतिहास पहा';
 
   @override
   String get profilePagePersonalDetails => 'वैयक्तिक माहिती';
@@ -670,20 +670,35 @@ class AppLocalizationsMr extends AppLocalizations {
   String get appointmentSubtitle => 'सर्व नियोजित भेटी ';
 
   @override
-  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'डोळ्यांभोवती हिरवी पेटी दिसू लागेपर्यंत कृपया प्रतिमा समायोजित करा आणि स्थानबद्ध करा. डोळा जवळ घ्या आणि पेटीचा 40 टक्के भाग डोळ्याने झाकलेला आहे याची खात्री करा.';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'सेवा';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'अरे! मी माझ्या डोळ्यांची काळजी घेण्यासाठी साइटकनेक्ट अॅप वापरत आहे आणि तुम्हीही वापरायला हवे! तुमच्या डोळ्यांचे मूल्यांकन करा आणि साइटकनेक्ट अॅपद्वारे वेळेवर उपचार घ्या. हे एक अद्वितीय अॅप आहे जे तुमच्या हातात प्रतिबंधात्मक डोळ्यांची काळजी आणते. ते आता मिळवाः https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'साईटकनेक्ट अॅपद्वारे तुमच्या डोळ्यांच्या आरोग्याला प्राधान्य द्या!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'मोतीबिंदूची डोळ्यांची चाचणी';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'डोळ्यांची लाल चाचणी';
+
+  @override
+  String get poweredByText => 'द्वारे चालवले जाते';
+
+  @override
+  String get digitalHealthCard => 'डिजिटल सार्वजनिक आरोग्य संच';
+
+  @override
+  String get inviteNowText => 'आता आमंत्रित करा';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'डोळ्यांचे मूल्यमापन सुरू करा। डोळ्यांच्या सामान्य समस्या। डोळ्यांच्या चांगल्या दृष्टीसाठी टिपा';
+
+  @override
+  String get chatBotWelcomeMessage => 'नमस्कार, मी आज तुम्हाला कशी मदत करू शकतो?';
 }

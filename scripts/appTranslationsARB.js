@@ -29,28 +29,41 @@ function appTranslationsARB() {
   languages.forEach((language) => {
     const translationsObj = {};
 
-    translationsObj["@@locale"] = language;
-    translationsObj["@stepNumber"] = {
-      placeholders: {
-        current: {
-          type: "String",
-        },
-        total: {
-          type: "String",
-        },
-      },
-    };
+    // translationsObj["@@locale"] = language;
+    // translationsObj["@stepNumber"] = {
+    //   placeholders: {
+    //     current: {
+    //       type: "String",
+    //     },
+    //     total: {
+    //       type: "String",
+    //     },
+    //   },
+    // };
 
     translations.forEach((translation) => {
       translationsObj[translation.id] = translation[language];
     });
 
     const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);
-    fs.writeFileSync(arbFile, JSON.stringify(translationsObj, null, 2));
-    console.log(`Generated app_${language}.arb`);
+
+    if (fs.existsSync(arbFile)) {
+      // If the file already exists, read the file to get the original translationsObj
+      const existingTranslations = JSON.parse(fs.readFileSync(arbFile, "utf8"));
+      // Merge the new translationsObj with the existing translationsObj
+      const mergedTranslations = {
+        ...existingTranslations,
+        ...translationsObj,
+      };
+      fs.writeFileSync(arbFile, JSON.stringify(mergedTranslations, null, 2));
+      console.log(`Updated app_${language}.arb`);
+    } else {
+      fs.writeFileSync(arbFile, JSON.stringify(translationsObj, null, 2));
+      console.log(`Generated app_${language}.arb`);
+    }
   });
 
-  console.log("All the arb files are generated successfully.");
+  console.log("All the arb files are generated/updated successfully.");
 }
 
 module.exports = {

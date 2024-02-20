@@ -670,20 +670,35 @@ class AppLocalizationsTe extends AppLocalizations {
   String get appointmentSubtitle => 'అన్ని నియామకాలు';
 
   @override
-  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'కళ్ళ చుట్టూ ఆకుపచ్చ పెట్టెలు కనిపించే వరకు దయచేసి చిత్రాన్ని సర్దుబాటు చేసి ఉంచండి. కంటికి దగ్గరగా వెళ్లి, పెట్టెలో 40 శాతం కంటితో కప్పబడి ఉండేలా చూసుకోండి.';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'సేవలు';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'హేయ్! నేను నా కళ్ళను జాగ్రత్తగా చూసుకోవడానికి సైట్కనెక్ట్ యాప్ను ఉపయోగిస్తున్నాను, మీరు కూడా ఉపయోగించాలి! మీ కళ్ళను అంచనా వేసి, సైట్కనెక్ట్ యాప్ ద్వారా సకాలంలో చికిత్స పొందండి. ఇది మీ చేతికి నివారణ కంటి సంరక్షణను తీసుకువచ్చే ప్రత్యేకమైన అనువర్తనం. ఇప్పుడు దాన్ని పొందండిః https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'సైట్కనెక్ట్ యాప్ ద్వారా మీ కంటి ఆరోగ్యానికి ప్రాధాన్యత ఇవ్వండి!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'కంటిశుక్లం పరీక్ష';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'ఎర్ర కంటి పరీక్ష';
+
+  @override
+  String get poweredByText => 'సాధ్యం చేసింది';
+
+  @override
+  String get digitalHealthCard => 'డిజిటల్ పబ్లిక్ హెల్త్ స్టాక్';
+
+  @override
+  String get inviteNowText => 'ఇప్పుడు ఆహ్వానించండి';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'కంటి అంచనా ప్రారంభించండి | సాధారణ కంటి సమస్యలు | మెరుగైన కంటి చూపు కోసం చిట్కాలు';
+
+  @override
+  String get chatBotWelcomeMessage => 'హాయ్, ఈ రోజు నేను మీకు ఎలా సహాయపడగలను?';
 }

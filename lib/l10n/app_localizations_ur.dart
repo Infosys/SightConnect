@@ -616,74 +616,89 @@ class AppLocalizationsUr extends AppLocalizations {
   String get scannerTitle => 'اسکینر';
 
   @override
-  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstruction => 'کیمرے کو آنکھ سے 40 سینٹی میٹر کے فاصلے پر رکھیں۔';
 
   @override
-  String get somethingWentWrong => 'Something went wrong.';
+  String get somethingWentWrong => 'کچھ غلط ہو گیا';
 
   @override
-  String get triageUpdatedSuccessfully => 'Triage Updated successfully.';
+  String get triageUpdatedSuccessfully => 'ٹریج کو کامیابی سے اپ ڈیٹ کیا گیا';
 
   @override
-  String get noPreviewAvailable => 'No Preview Available';
+  String get noPreviewAvailable => 'کوئی پیش نظارہ دستیاب نہیں';
 
   @override
-  String get privacyPolicyTitle => 'Privacy & Data Protection';
+  String get privacyPolicyTitle => 'پرائیویسی اور ڈیٹا پروٹیکشن';
 
   @override
-  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'ہم مندرجہ ذیل مقاصد کے لیے آپ کے فراہم کردہ ذاتی ڈیٹا پر کارروائی کرتے ہیں جیسے:';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooClose => 'You are too close to the Camera, Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstructionTooClose => 'آپ کیمرے کے بہت قریب ہیں، کیمرے کو آنکھ سے 40 سینٹی میٹر دور رکھیں۔';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooFar => 'You are too far from the Camera, Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstructionTooFar => 'آپ کیمرے سے بہت دور ہیں، کیمرے کو آنکھ سے 40 سینٹی میٹر دور رکھیں۔';
 
   @override
-  String get myProfileABHAID => 'ABHA ID';
+  String get myProfileABHAID => 'اے بی ایچ اے آئی ڈی';
 
   @override
-  String get myProfileEmail => 'Email';
+  String get myProfileEmail => 'ای میل کریں';
 
   @override
-  String get viewHistoryButton => 'View History';
+  String get viewHistoryButton => 'تاریخ دیکھیں';
 
   @override
-  String get profilePagePersonalDetails => 'Personal Details';
+  String get profilePagePersonalDetails => 'ذاتی تفصیلات';
 
   @override
-  String get profilePageDateOfBirth => 'Date of Birth';
+  String get profilePageDateOfBirth => 'تاریخ پیدائش';
 
   @override
-  String get profilePageGender => 'Gender';
+  String get profilePageGender => 'جنس';
 
   @override
-  String get profilePageMobile => 'Mobile';
+  String get profilePageMobile => 'موبائل';
 
   @override
-  String get profilePageHealthCardTitle => 'Health Card';
+  String get profilePageHealthCardTitle => 'ہیلتھ کارڈ';
 
   @override
-  String get appointmentTitle => 'Appointments';
+  String get appointmentTitle => 'تقرریاں';
 
   @override
-  String get appointmentSubtitle => 'All Appointments';
+  String get appointmentSubtitle => 'تمام تقرریاں';
 
   @override
-  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'براہ کرم تصویر کو ایڈجسٹ کریں اور اس وقت تک پوزیشن میں رکھیں جب تک کہ آنکھوں کے ارد گرد سبز بکس ظاہر نہ ہوں۔ آنکھ کو قریب لے جائیں اور اس بات کو یقینی بنائیں کہ ڈبے کا 40 فیصد حصہ آنکھ سے ڈھکا ہوا ہے۔';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'خدمات';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'ارے! میں اپنی آنکھوں کی دیکھ بھال کے لیے سائٹ کنیکٹ ایپ استعمال کر رہا ہوں، اور آپ کو بھی کرنا چاہیے! اپنی آنکھوں کا جائزہ لیں اور سائٹ کنیکٹ ایپ سے بروقت علاج کروائیں۔ یہ ایک منفرد ایپ ہے جو آپ کے ہاتھ میں احتیاطی آنکھوں کی دیکھ بھال لاتا ہے۔ ابھی حاصل کریں: https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'سائٹ کنیکٹ ایپ کے ذریعے اپنی آنکھوں کی صحت کو ترجیح دیں!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'موتیابند آنکھ کا ٹیسٹ';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'سرخ آنکھ کا ٹیسٹ';
+
+  @override
+  String get poweredByText => 'کی طرف سے طاقت';
+
+  @override
+  String get digitalHealthCard => 'ڈیجیٹل پبلک ہیلتھ اسٹیک';
+
+  @override
+  String get inviteNowText => 'ابھی مدعو کریں';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'آنکھوں کی تشخیص شروع کریں۔ آنکھوں کے عام مسائل۔ بہتر بینائی کے لیے تجاویز';
+
+  @override
+  String get chatBotWelcomeMessage => 'ہیلو، میں آج آپ کی کس طرح مدد کر سکتا ہوں؟';
 }

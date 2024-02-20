@@ -239,5 +239,7 @@
   "recentServicesRedEyeTest": "Red Eye Test",
   "poweredByText": "Powered by",
   "digitalHealthCard": "Digital Public Health Stack",
-  "inviteNowText": "Invite Now"
+  "inviteNowText": "Invite Now",
+  "chatBotDefaultQuerySuggestions": "Start Eye Assessment|Common eye issues|Tips for a better eye sight",
+  "chatBotWelcomeMessage": "Hi, How may I help you today?"
 }

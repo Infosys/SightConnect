@@ -1474,6 +1474,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Red Eye Test'**
   String get recentServicesRedEyeTest;
+
+  /// No description provided for @poweredByText.
+  ///
+  /// In en, this message translates to:
+  /// **'Powered by'**
+  String get poweredByText;
+
+  /// No description provided for @digitalHealthCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital Public Health Stack'**
+  String get digitalHealthCard;
+
+  /// No description provided for @inviteNowText.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Now'**
+  String get inviteNowText;
+
+  /// No description provided for @chatBotDefaultQuerySuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Eye Assessment|Common eye issues|Tips for a better eye sight'**
+  String get chatBotDefaultQuerySuggestions;
+
+  /// No description provided for @chatBotWelcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi, How may I help you today?'**
+  String get chatBotWelcomeMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

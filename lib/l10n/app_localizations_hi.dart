@@ -673,17 +673,32 @@ class AppLocalizationsHi extends AppLocalizations {
   String get eyeBoxText => 'कृपया छवि को तब तक समायोजित और स्थिति में रखें जब तक आंखों के चारों ओर हरे रंग के बक्से दिखाई न दें। आंख को पास ले जाएं और सुनिश्चित करें कि बॉक्स का 40% हिस्सा आंख से ढका हो।';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'सेवाएँ';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'अरे! मैं अपनी आँखों की देखभाल करने के लिए साइटकनेक्ट ऐप का उपयोग कर रहा हूँ, और आपको भी करना चाहिए! अपनी आँखों का मूल्यांकन करें और साइटकनेक्ट ऐप के साथ समय पर उपचार प्राप्त करें। यह एक अनोखा ऐप है जो आपके हाथ में निवारक आईकेयर लाता है। इसे अभी प्राप्त करेंः https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'साइटकनेक्ट ऐप के साथ अपनी आँखों के स्वास्थ्य को प्राथमिकता दें!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'मोतियाबिंद नेत्र परीक्षण';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'लाल नेत्र परीक्षण';
+
+  @override
+  String get poweredByText => 'द्वारा संचालित';
+
+  @override
+  String get digitalHealthCard => 'डिजिटल सार्वजनिक स्वास्थ्य स्टैक';
+
+  @override
+  String get inviteNowText => 'अभी आमंत्रित करें';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'शुरू करें नेत्र मूल्यांकन। आम नेत्र समस्याएं। बेहतर दृष्टि के लिए सुझाव';
+
+  @override
+  String get chatBotWelcomeMessage => 'नमस्ते, आज मैं आपकी कैसे मदद कर सकता हूँ?';
 }

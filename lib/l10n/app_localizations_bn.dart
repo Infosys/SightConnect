@@ -670,20 +670,35 @@ class AppLocalizationsBn extends AppLocalizations {
   String get appointmentSubtitle => 'সমস্ত অ্যাপয়েন্টমেন্ট';
 
   @override
-  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'চোখের চারপাশে সবুজ বাক্স না দেখা পর্যন্ত দয়া করে ছবিটি সামঞ্জস্য করুন এবং অবস্থান করুন। চোখকে কাছাকাছি নিয়ে আসুন এবং নিশ্চিত করুন যে বাক্সের 40 শতাংশ চোখ দিয়ে ঢেকে আছে।';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'পরিষেবাগুলি';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'আরে! আমি আমার চোখের যত্ন নেওয়ার জন্য সাইট কানেক্ট অ্যাপ ব্যবহার করছি, এবং আপনারও করা উচিত! আপনার চোখের মূল্যায়ন করুন এবং সাইট কানেক্ট অ্যাপের মাধ্যমে সময়মতো চিকিৎসা করুন। এটি একটি অনন্য অ্যাপ যা আপনার হাতে প্রতিরোধমূলক চোখের যত্ন নিয়ে আসে। এখন এটি পানঃ https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'সাইট কানেক্ট অ্যাপের মাধ্যমে আপনার চোখের স্বাস্থ্যকে অগ্রাধিকার দিন!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'ছানি চক্ষু পরীক্ষা';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'লাল চোখের পরীক্ষা';
+
+  @override
+  String get poweredByText => 'দ্বারা চালিত';
+
+  @override
+  String get digitalHealthCard => 'ডিজিটাল জনস্বাস্থ্য স্ট্যাক';
+
+  @override
+  String get inviteNowText => 'এখনই আমন্ত্রণ জানান';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'চোখের মূল্যায়ন শুরু করুন। সাধারণ চোখের সমস্যা। আরও ভাল দৃষ্টিশক্তির জন্য টিপস';
+
+  @override
+  String get chatBotWelcomeMessage => 'হাই, আজ আমি কিভাবে আপনাকে সাহায্য করতে পারি?';
 }

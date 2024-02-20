@@ -686,4 +686,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recentServicesRedEyeTest => 'Red Eye Test';
+
+  @override
+  String get poweredByText => 'Powered by';
+
+  @override
+  String get digitalHealthCard => 'Digital Public Health Stack';
+
+  @override
+  String get inviteNowText => 'Invite Now';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'Start Eye Assessment|Common eye issues|Tips for a better eye sight';
+
+  @override
+  String get chatBotWelcomeMessage => 'Hi, How may I help you today?';
 }

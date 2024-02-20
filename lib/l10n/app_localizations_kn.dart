@@ -670,20 +670,35 @@ class AppLocalizationsKn extends AppLocalizations {
   String get appointmentSubtitle => 'ಎಲ್ಲಾ ನೇಮಕಾತಿಗಳು';
 
   @override
-  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'ಕಣ್ಣುಗಳ ಸುತ್ತಲೂ ಹಸಿರು ಪೆಟ್ಟಿಗೆಗಳು ಕಾಣಿಸಿಕೊಳ್ಳುವವರೆಗೆ ದಯವಿಟ್ಟು ಚಿತ್ರವನ್ನು ಸರಿಹೊಂದಿಸಿ ಮತ್ತು ಇರಿಸಿ. ಕಣ್ಣನ್ನು ಹತ್ತಿರಕ್ಕೆ ಸರಿಸಿ ಮತ್ತು ಪೆಟ್ಟಿಗೆಯ ಶೇಕಡಾ 40ರಷ್ಟು ಭಾಗವು ಕಣ್ಣಿನಿಂದ ಆವೃತವಾಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'ಸೇವೆಗಳು';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'ಹೇಯ್! ನನ್ನ ಕಣ್ಣುಗಳನ್ನು ನೋಡಿಕೊಳ್ಳಲು ನಾನು ಸೈಟ್ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಬಳಸುತ್ತಿದ್ದೇನೆ ಮತ್ತು ನೀವೂ ಸಹ ಬಳಸಬೇಕು! ನಿಮ್ಮ ಕಣ್ಣುಗಳನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ ಮತ್ತು ಸೈಟ್ ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ನೊಂದಿಗೆ ಸಕಾಲಿಕ ಚಿಕಿತ್ಸೆಯನ್ನು ಪಡೆಯಿರಿ. ಇದು ತಡೆಗಟ್ಟುವ ಕಣ್ಣಿನ ಆರೈಕೆಯನ್ನು ನಿಮ್ಮ ಕೈಗೆ ತರುವ ಒಂದು ವಿಶಿಷ್ಟವಾದ ಅಪ್ಲಿಕೇಶನ್ ಆಗಿದೆ. ಈಗ ಅದನ್ನು ಪಡೆಯಿರಿಃ https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'ಸೈಟ್ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ನೊಂದಿಗೆ ನಿಮ್ಮ ಕಣ್ಣಿನ ಆರೋಗ್ಯಕ್ಕೆ ಆದ್ಯತೆ ನೀಡಿ!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'ಕಣ್ಣಿನ ಪೊರೆ ಪರೀಕ್ಷೆ';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'ಕೆಂಪು ಕಣ್ಣಿನ ಪರೀಕ್ಷೆ';
+
+  @override
+  String get poweredByText => 'ಶಕ್ತಿಯುತವಾಗಿದೆ';
+
+  @override
+  String get digitalHealthCard => 'ಡಿಜಿಟಲ್ ಸಾರ್ವಜನಿಕ ಆರೋಗ್ಯ ಸ್ಟ್ಯಾಕ್';
+
+  @override
+  String get inviteNowText => 'ಈಗಲೇ ಆಹ್ವಾನಿಸಿ';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರಾರಂಭಿಸಿ | ಸಾಮಾನ್ಯ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳು | ಉತ್ತಮ ದೃಷ್ಟಿಗಾಗಿ ಸಲಹೆಗಳು';
+
+  @override
+  String get chatBotWelcomeMessage => 'ಹಾಯ್, ನಾನು ಇಂದು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?';
 }

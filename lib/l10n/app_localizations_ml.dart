@@ -631,7 +631,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get privacyPolicyTitle => 'പ്രൈവസി & ടാറ്റ പ്രൊട്ടക്ഷൻ ';
 
   @override
-  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'താഴെപ്പറയുന്ന ആവശ്യങ്ങൾക്കായി നിങ്ങൾ നൽകുന്ന വ്യക്തിഗത ഡാറ്റ ഞങ്ങൾ പ്രോസസ്സ് ചെയ്യുന്നുഃ';
 
   @override
   String get visualAcuityTestDistanceInstructionTooClose => 'നിങ്ങൾ ക്യാമറയുടെ വളരെ അടുത്താണ്, ക്യാമറ കണ്ണിൽ നിന്ന് 40cm അകലെ സ്ഥാപിക്കുക.';
@@ -673,17 +673,32 @@ class AppLocalizationsMl extends AppLocalizations {
   String get eyeBoxText => 'കണ്ണുകൾക്ക് ചുറ്റും പച്ച ബോക്സുകൾ ദൃശ്യമാകുന്നതുവരെ ചിത്രം ക്രമീകരിച്ച് സ്ഥാപിക്കുക. കണ്ണ് അടുത്തേക്ക് നീക്കി ബോക്‌സിൻ്റെ 40% കണ്ണിനാൽ മൂടപ്പെട്ടിരിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക.';
 
   @override
-  String get bottomNavItemServices => 'Services';
+  String get bottomNavItemServices => 'സേവനങ്ങൾ';
 
   @override
-  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'ഹേയ്! എൻ്റെ കണ്ണുകളെ പരിപാലിക്കാൻ ഞാൻ സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിക്കുന്നു, നിങ്ങളും ഉപയോഗിക്കണം! നിങ്ങളുടെ കണ്ണുകൾ വിലയിരുത്തുകയും സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിച്ച് സമയബന്ധിതമായ ചികിത്സ നേടുകയും ചെയ്യുക. പ്രതിരോധാത്മകമായ ഐക്കെയർ നിങ്ങളുടെ കൈകളിലേക്ക് കൊണ്ടുവരുന്ന സവിശേഷമായ ഒരു ആപ്ലിക്കേഷനാണിത്. ഇപ്പോൾ അത് നേടുകഃ https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിച്ച് നിങ്ങളുടെ കണ്ണിന്റെ ആരോഗ്യത്തിന് മുൻഗണന നൽകുക!';
 
   @override
-  String get recentServicesCataractEyeTest => 'Cataract Eye Test';
+  String get recentServicesCataractEyeTest => 'തിമിരം കണ്ണ് പരിശോധന';
 
   @override
-  String get recentServicesRedEyeTest => 'Red Eye Test';
+  String get recentServicesRedEyeTest => 'ചുവന്ന കണ്ണ് പരിശോധന';
+
+  @override
+  String get poweredByText => 'പവർ ചെയ്തിരിക്കുന്നത്';
+
+  @override
+  String get digitalHealthCard => 'ഡിജിറ്റൽ പൊതുജനാരോഗ്യ സ്റ്റാക്ക്';
+
+  @override
+  String get inviteNowText => 'ഇപ്പോൾ ക്ഷണിക്കുക';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'കണ്ണ് വിലയിരുത്തൽ ആരംഭിക്കുക | സാധാരണ കണ്ണ് പ്രശ്നങ്ങൾ | മെച്ചപ്പെട്ട കാഴ്ചയ്ക്കുള്ള നുറുങ്ങുകൾ';
+
+  @override
+  String get chatBotWelcomeMessage => 'ഹായ്, ഇന്ന് ഞാൻ നിങ്ങളെ എങ്ങനെ സഹായിക്കും?';
 }
