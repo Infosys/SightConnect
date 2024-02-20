@@ -211,4 +211,36 @@ class SwipeGestureCard extends HookConsumerWidget {
     }
     return angleDegrees;
   }
+
+  double _getDistanceBetweenPoints(Offset startPoint, Offset endPoint) {
+    double swipeLength = (endPoint - startPoint).distance;
+    return swipeLength;
+  }
+}
+
+Future<void> shortSwipeDialog(BuildContext context, String message) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.klradius))),
+        content: Text(
+          message,
+          style: applyRobotoFont(),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Try Again'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
