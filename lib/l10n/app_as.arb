@@ -1,6 +1,6 @@
 {
   "@@locale": "as",
-  "@@last_modified": "2024-02-20T11:16:28.045Z",
+  "@@last_modified": "2024-02-20T18:08:13.088Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -230,8 +231,6 @@
   "memberSelection": "সদস্য নিৰ্বাচন কৰক",
   "triageAlerDialogBoxTitle": "পুনৰায় কৰিবলৈ পদক্ষেপসমূহ নিৰ্ব্বাচন কৰক",
   "scannerTitle": "স্ক্যানাৰ",
-  "chatBotDefaultQuerySuggestions": "চকুৰ মূল্যায়ন আৰম্ভ কৰক। সাধাৰণ চকুৰ সমস্যা। দৃষ্টিশক্তি উন্নত কৰাৰ পৰামৰ্শ",
-  "chatBotWelcomeMessage": "হাই, মই আজি আপোনাক কেনেকৈ সহায় কৰিব পাৰো?",
   "visualAcuityTestDistanceInstruction": "কেমেৰাটো চকুৰ পৰা 40 ছে. মি. দূৰত ৰাখক।",
   "somethingWentWrong": "কিবা ভুল হৈছিল।",
   "triageUpdatedSuccessfully": "ট্ৰেইজ সফলতাৰে আপডেইট কৰা হৈছে",
@@ -256,7 +255,19 @@
   "emailSubject": "চাইট কানেক্ট এপৰ জৰিয়তে আপোনাৰ চকুৰ স্বাস্থ্যক অগ্ৰাধিকাৰ দিয়ক!",
   "recentServicesCataractEyeTest": "ছানি পৰা চকুৰ পৰীক্ষা",
   "recentServicesRedEyeTest": "ৰঙা চকুৰ পৰীক্ষা",
+  "chatBotDefaultQuerySuggestions": "চকুৰ মূল্যায়ন আৰম্ভ কৰক। সাধাৰণ চকুৰ সমস্যা। দৃষ্টিশক্তি উন্নত কৰাৰ পৰামৰ্শ",
+  "chatBotWelcomeMessage": "হাই, মই আজি আপোনাক কেনেকৈ সহায় কৰিব পাৰো?",
   "poweredByText": "ইয়াৰ দ্বাৰা চালিত",
   "digitalHealthCard": "ডিজিটেল জনস্বাস্থ্য স্তুপ",
-  "inviteNowText": "এতিয়া আমন্ত্ৰণ কৰক"
+  "inviteNowText": "এতিয়া আমন্ত্ৰণ কৰক",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

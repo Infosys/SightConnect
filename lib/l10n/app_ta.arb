@@ -1,6 +1,6 @@
 {
   "@@locale": "ta",
-  "@@last_modified": "2024-02-20T11:16:27.998Z",
+  "@@last_modified": "2024-02-20T18:08:13.049Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -230,8 +231,6 @@
   "memberSelection": "உறுப்பினரைத் தேர்ந்தெடுக்கவும்",
   "triageAlerDialogBoxTitle": "மீண்டும் செய்ய படிகளைத் தேர்ந்தெடுக்கவும்",
   "scannerTitle": "ஸ்கேனர்",
-  "chatBotDefaultQuerySuggestions": "கண் மதிப்பீட்டைத் தொடங்குங்கள் | பொதுவான கண் பிரச்சினைகள் | சிறந்த கண் பார்வைக்கு உதவிக்குறிப்புகள்",
-  "chatBotWelcomeMessage": "வணக்கம், இன்று நான் உங்களுக்கு எப்படி உதவ முடியும்?",
   "visualAcuityTestDistanceInstruction": "கேமிரடோ சக்கரம் 40 ஆண்டுகளுக்கு முன்பு. நான். தூர ராக்.",
   "somethingWentWrong": "ஏதோ தவறு நடந்துவிட்டது.",
   "triageUpdatedSuccessfully": "ட்ரைஜ் வெற்றிகரமாக புதுப்பிக்கப்பட்டது",
@@ -256,7 +255,19 @@
   "emailSubject": "சைட் கனெக்ட் செயலியின் மூலம் உங்கள் கண் ஆரோக்கியத்திற்கு முன்னுரிமை கொடுங்கள்!",
   "recentServicesCataractEyeTest": "கண்புரை கண் பரிசோதனை",
   "recentServicesRedEyeTest": "சிவப்பு கண் பரிசோதனை",
+  "chatBotDefaultQuerySuggestions": "கண் மதிப்பீட்டைத் தொடங்குங்கள் | பொதுவான கண் பிரச்சினைகள் | சிறந்த கண் பார்வைக்கு உதவிக்குறிப்புகள்",
+  "chatBotWelcomeMessage": "வணக்கம், இன்று நான் உங்களுக்கு எப்படி உதவ முடியும்?",
   "poweredByText": "இதன் மூலம் இயக்கப்படுகிறது",
   "digitalHealthCard": "டிஜிட்டல் பொது சுகாதார அடுக்கு",
-  "inviteNowText": "இப்போது அழைக்கவும்"
+  "inviteNowText": "இப்போது அழைக்கவும்",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

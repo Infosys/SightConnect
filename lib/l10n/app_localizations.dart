@@ -1516,6 +1516,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hi, How may I help you today?'**
   String get chatBotWelcomeMessage;
+
+  /// No description provided for @resend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resend;
+
+  /// No description provided for @mobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Number'**
+  String get mobileNumber;
+
+  /// No description provided for @loginVerifyMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your mobile number'**
+  String get loginVerifyMobileNumber;
+
+  /// No description provided for @loginEnterMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter mobile number'**
+  String get loginEnterMobileNumber;
+
+  /// No description provided for @loginEnterValidMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter valid mobile number'**
+  String get loginEnterValidMobileNumber;
+
+  /// No description provided for @loginUnableToSendOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to send OTP to this number'**
+  String get loginUnableToSendOTP;
+
+  /// No description provided for @loginGetOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Get OTP'**
+  String get loginGetOTP;
+
+  /// No description provided for @loginInvalidOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid OTP'**
+  String get loginInvalidOTP;
+
+  /// No description provided for @loginDidntReceiveOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Didn\'t receive the OTP?'**
+  String get loginDidntReceiveOTP;
+
+  /// No description provided for @loginOTPSent.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP sent successfully'**
+  String get loginOTPSent;
+
+  /// No description provided for @loginOTPResendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in {time}'**
+  String get loginOTPResendIn;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,5 +1,45 @@
 {
+  "as": [
+    "loginOTPResendIn"
+  ],
+
+  "bn": [
+    "loginOTPResendIn"
+  ],
+
+  "gu": [
+    "loginOTPResendIn"
+  ],
+
+  "hi": [
+    "loginOTPResendIn"
+  ],
+
+  "kn": [
+    "loginOTPResendIn"
+  ],
+
+  "ml": [
+    "loginOTPResendIn"
+  ],
+
   "mr": [
-    "eyeAssessmentUnsupportedQuestion"
+    "loginOTPResendIn"
+  ],
+
+  "or": [
+    "loginOTPResendIn"
+  ],
+
+  "ta": [
+    "loginOTPResendIn"
+  ],
+
+  "te": [
+    "loginOTPResendIn"
+  ],
+
+  "ur": [
+    "loginOTPResendIn"
   ]
 }

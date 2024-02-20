@@ -1,6 +1,6 @@
 {
   "@@locale": "kn",
-  "@@last_modified": "2024-02-20T11:16:27.972Z",
+  "@@last_modified": "2024-02-20T18:08:12.992Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -248,15 +249,25 @@
   "profilePageHealthCardTitle": "ಆರೋಗ್ಯ ಕಾರ್ಡ್",
   "appointmentTitle": "ನೇಮಕಾತಿಗಳು",
   "appointmentSubtitle": "ಎಲ್ಲಾ ನೇಮಕಾತಿಗಳು",
-  "chatBotDefaultQuerySuggestions": "ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರಾರಂಭಿಸಿ | ಸಾಮಾನ್ಯ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳು | ಉತ್ತಮ ದೃಷ್ಟಿಗಾಗಿ ಸಲಹೆಗಳು",
-  "chatBotWelcomeMessage": "ಹಾಯ್, ನಾನು ಇಂದು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
   "eyeBoxText": "ಕಣ್ಣುಗಳ ಸುತ್ತಲೂ ಹಸಿರು ಪೆಟ್ಟಿಗೆಗಳು ಕಾಣಿಸಿಕೊಳ್ಳುವವರೆಗೆ ದಯವಿಟ್ಟು ಚಿತ್ರವನ್ನು ಸರಿಹೊಂದಿಸಿ ಮತ್ತು ಇರಿಸಿ. ಕಣ್ಣನ್ನು ಹತ್ತಿರಕ್ಕೆ ಸರಿಸಿ ಮತ್ತು ಪೆಟ್ಟಿಗೆಯ ಶೇಕಡಾ 40ರಷ್ಟು ಭಾಗವು ಕಣ್ಣಿನಿಂದ ಆವೃತವಾಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
   "bottomNavItemServices": "ಸೇವೆಗಳು",
   "smsContent": "ಹೇಯ್! ನನ್ನ ಕಣ್ಣುಗಳನ್ನು ನೋಡಿಕೊಳ್ಳಲು ನಾನು ಸೈಟ್ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಬಳಸುತ್ತಿದ್ದೇನೆ ಮತ್ತು ನೀವೂ ಸಹ ಬಳಸಬೇಕು! ನಿಮ್ಮ ಕಣ್ಣುಗಳನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ ಮತ್ತು ಸೈಟ್ ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ನೊಂದಿಗೆ ಸಕಾಲಿಕ ಚಿಕಿತ್ಸೆಯನ್ನು ಪಡೆಯಿರಿ. ಇದು ತಡೆಗಟ್ಟುವ ಕಣ್ಣಿನ ಆರೈಕೆಯನ್ನು ನಿಮ್ಮ ಕೈಗೆ ತರುವ ಒಂದು ವಿಶಿಷ್ಟವಾದ ಅಪ್ಲಿಕೇಶನ್ ಆಗಿದೆ. ಈಗ ಅದನ್ನು ಪಡೆಯಿರಿಃ https://healthconnecttech.org/install",
   "emailSubject": "ಸೈಟ್ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ನೊಂದಿಗೆ ನಿಮ್ಮ ಕಣ್ಣಿನ ಆರೋಗ್ಯಕ್ಕೆ ಆದ್ಯತೆ ನೀಡಿ!",
   "recentServicesCataractEyeTest": "ಕಣ್ಣಿನ ಪೊರೆ ಪರೀಕ್ಷೆ",
   "recentServicesRedEyeTest": "ಕೆಂಪು ಕಣ್ಣಿನ ಪರೀಕ್ಷೆ",
+  "chatBotDefaultQuerySuggestions": "ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರಾರಂಭಿಸಿ | ಸಾಮಾನ್ಯ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳು | ಉತ್ತಮ ದೃಷ್ಟಿಗಾಗಿ ಸಲಹೆಗಳು",
+  "chatBotWelcomeMessage": "ಹಾಯ್, ನಾನು ಇಂದು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
   "poweredByText": "ಶಕ್ತಿಯುತವಾಗಿದೆ",
   "digitalHealthCard": "ಡಿಜಿಟಲ್ ಸಾರ್ವಜನಿಕ ಆರೋಗ್ಯ ಸ್ಟ್ಯಾಕ್",
-  "inviteNowText": "ಈಗಲೇ ಆಹ್ವಾನಿಸಿ"
+  "inviteNowText": "ಈಗಲೇ ಆಹ್ವಾನಿಸಿ",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

@@ -711,4 +711,37 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get chatBotWelcomeMessage => 'નમસ્તે, આજે હું તમને કેવી રીતે મદદ કરી શકું?';
+
+  @override
+  String get resend => 'Resend';
+
+  @override
+  String get mobileNumber => 'Mobile Number';
+
+  @override
+  String get loginVerifyMobileNumber => 'Verify your mobile number';
+
+  @override
+  String get loginEnterMobileNumber => 'Please enter mobile number';
+
+  @override
+  String get loginEnterValidMobileNumber => 'Please enter valid mobile number';
+
+  @override
+  String get loginUnableToSendOTP => 'Unable to send OTP to this number';
+
+  @override
+  String get loginGetOTP => 'Get OTP';
+
+  @override
+  String get loginInvalidOTP => 'Invalid OTP';
+
+  @override
+  String get loginDidntReceiveOTP => 'Didn\'t receive the OTP?';
+
+  @override
+  String get loginOTPSent => 'OTP sent successfully';
+
+  @override
+  String get loginOTPResendIn => 'Resend in {time}';
 }

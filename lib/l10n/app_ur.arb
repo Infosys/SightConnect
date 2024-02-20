@@ -1,6 +1,6 @@
 {
   "@@locale": "ur",
-  "@@last_modified": "2024-02-20T11:16:28.055Z",
+  "@@last_modified": "2024-02-20T18:08:13.101Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -230,8 +231,6 @@
   "memberSelection": "رکن منتخب کریں",
   "triageAlerDialogBoxTitle": "دوبارہ کرنے کے اقدامات منتخب کریں",
   "scannerTitle": "اسکینر",
-  "chatBotDefaultQuerySuggestions": "آنکھوں کی تشخیص شروع کریں۔ آنکھوں کے عام مسائل۔ بہتر بینائی کے لیے تجاویز",
-  "chatBotWelcomeMessage": "ہیلو، میں آج آپ کی کس طرح مدد کر سکتا ہوں؟",
   "visualAcuityTestDistanceInstruction": "کیمرے کو آنکھ سے 40 سینٹی میٹر کے فاصلے پر رکھیں۔",
   "somethingWentWrong": "کچھ غلط ہو گیا",
   "triageUpdatedSuccessfully": "ٹریج کو کامیابی سے اپ ڈیٹ کیا گیا",
@@ -256,7 +255,19 @@
   "emailSubject": "سائٹ کنیکٹ ایپ کے ذریعے اپنی آنکھوں کی صحت کو ترجیح دیں!",
   "recentServicesCataractEyeTest": "موتیابند آنکھ کا ٹیسٹ",
   "recentServicesRedEyeTest": "سرخ آنکھ کا ٹیسٹ",
+  "chatBotDefaultQuerySuggestions": "آنکھوں کی تشخیص شروع کریں۔ آنکھوں کے عام مسائل۔ بہتر بینائی کے لیے تجاویز",
+  "chatBotWelcomeMessage": "ہیلو، میں آج آپ کی کس طرح مدد کر سکتا ہوں؟",
   "poweredByText": "کی طرف سے طاقت",
   "digitalHealthCard": "ڈیجیٹل پبلک ہیلتھ اسٹیک",
-  "inviteNowText": "ابھی مدعو کریں"
+  "inviteNowText": "ابھی مدعو کریں",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

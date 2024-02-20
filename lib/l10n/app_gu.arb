@@ -1,6 +1,6 @@
 {
   "@@locale": "gu",
-  "@@last_modified": "2024-02-20T11:16:27.979Z",
+  "@@last_modified": "2024-02-20T18:08:13.005Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -230,8 +231,6 @@
   "memberSelection": "સભ્ય પસંદ કરો",
   "triageAlerDialogBoxTitle": "ફરીથી કરવાનાં પગલાં પસંદ કરો",
   "scannerTitle": "સ્કેનર",
-  "chatBotDefaultQuerySuggestions": "આંખનું મૂલ્યાંકન શરૂ કરો | સામાન્ય આંખની સમસ્યાઓ | વધુ સારી દૃષ્ટિ માટે ટીપ્સ",
-  "chatBotWelcomeMessage": "નમસ્તે, આજે હું તમને કેવી રીતે મદદ કરી શકું?",
   "visualAcuityTestDistanceInstruction": "કેમેરો ચોક્કોરથી 40 વર્ષ પહેલાં.",
   "somethingWentWrong": "કંઇક ખોટું થયું",
   "triageUpdatedSuccessfully": "ટ્રાઇજને સફળતાપૂર્વક અપડેટ કરવામાં આવ્યું",
@@ -256,7 +255,19 @@
   "emailSubject": "સાઇટકનેક્ટ એપ દ્વારા તમારી આંખના સ્વાસ્થ્યને પ્રાથમિકતા આપો!",
   "recentServicesCataractEyeTest": "મોતિયાની આંખની તપાસ",
   "recentServicesRedEyeTest": "લાલ આંખ પરીક્ષણ",
+  "chatBotDefaultQuerySuggestions": "આંખનું મૂલ્યાંકન શરૂ કરો | સામાન્ય આંખની સમસ્યાઓ | વધુ સારી દૃષ્ટિ માટે ટીપ્સ",
+  "chatBotWelcomeMessage": "નમસ્તે, આજે હું તમને કેવી રીતે મદદ કરી શકું?",
   "poweredByText": "દ્વારા સંચાલિત",
   "digitalHealthCard": "ડિજિટલ જાહેર આરોગ્ય માળખું",
-  "inviteNowText": "હમણાં આમંત્રણ આપો"
+  "inviteNowText": "હમણાં આમંત્રણ આપો",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

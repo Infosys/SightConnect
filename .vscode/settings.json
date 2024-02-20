@@ -1,4 +1,6 @@
-//  {
+{
+  "cSpell.words": ["Didnt", "Insec", "Matomo", "Roboto"]
+} //  {
 //        "files.exclude": {
 //         "**/user_details_model.dart": true,
 //             "**/*.freezed.dart": true,

@@ -93,6 +93,7 @@ class AppLocalizations${capitalize(languageCode)} extends AppLocalizations {
        * @type {String}
        */
       let returnStatement = translations[key];
+      if (!returnStatement) return "";
       for (const param of params) {
         returnStatement = returnStatement.replaceAll(`{${param}}`, `$${param}`);
       }

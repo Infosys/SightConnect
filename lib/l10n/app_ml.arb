@@ -1,6 +1,6 @@
 {
   "@@locale": "ml",
-  "@@last_modified": "2024-02-20T11:16:27.931Z",
+  "@@last_modified": "2024-02-20T18:08:12.931Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -235,6 +236,7 @@
   "triageUpdatedSuccessfully": "ട്രിയാജ് അപ്ഡേറ്റ് ചെയ്തിരിക്കുന്നു",
   "noPreviewAvailable": "പ്രിവ്യൂ ലഭ്യമല്ല",
   "privacyPolicyTitle": "പ്രൈവസി & ടാറ്റ പ്രൊട്ടക്ഷൻ ",
+  "privacyPolicyPurposeOfProcessingSubTitle": "താഴെപ്പറയുന്ന ആവശ്യങ്ങൾക്കായി നിങ്ങൾ നൽകുന്ന വ്യക്തിഗത ഡാറ്റ ഞങ്ങൾ പ്രോസസ്സ് ചെയ്യുന്നുഃ",
   "visualAcuityTestDistanceInstructionTooClose": "നിങ്ങൾ ക്യാമറയുടെ വളരെ അടുത്താണ്, ക്യാമറ കണ്ണിൽ നിന്ന് 40cm അകലെ സ്ഥാപിക്കുക.",
   "visualAcuityTestDistanceInstructionTooFar": "നിങ്ങൾ ക്യാമറയിൽ നിന്ന് വളരെ അകലെയാണ്, ക്യാമറ കണ്ണിൽ നിന്ന് 40cm അകലെ സ്ഥാപിക്കുക.",
   "myProfileABHAID": "ആഭ ഐഡി",
@@ -248,15 +250,24 @@
   "appointmentTitle": "അപ്പോയ്ന്റ്മെന്റ്സ്",
   "appointmentSubtitle": "എല്ലാ അപ്പോയ്ന്റ്മെന്റ്‌സും",
   "eyeBoxText": "കണ്ണുകൾക്ക് ചുറ്റും പച്ച ബോക്സുകൾ ദൃശ്യമാകുന്നതുവരെ ചിത്രം ക്രമീകരിച്ച് സ്ഥാപിക്കുക. കണ്ണ് അടുത്തേക്ക് നീക്കി ബോക്‌സിൻ്റെ 40% കണ്ണിനാൽ മൂടപ്പെട്ടിരിക്കുന്നുവെന്ന് ഉറപ്പാക്കുക.",
-  "chatBotDefaultQuerySuggestions": "കണ്ണ് വിലയിരുത്തൽ ആരംഭിക്കുക | സാധാരണ കണ്ണ് പ്രശ്നങ്ങൾ | മെച്ചപ്പെട്ട കാഴ്ചയ്ക്കുള്ള നുറുങ്ങുകൾ",
-  "chatBotWelcomeMessage": "ഹായ്, ഇന്ന് ഞാൻ നിങ്ങളെ എങ്ങനെ സഹായിക്കും?",
-  "privacyPolicyPurposeOfProcessingSubTitle": "താഴെപ്പറയുന്ന ആവശ്യങ്ങൾക്കായി നിങ്ങൾ നൽകുന്ന വ്യക്തിഗത ഡാറ്റ ഞങ്ങൾ പ്രോസസ്സ് ചെയ്യുന്നുഃ",
   "bottomNavItemServices": "സേവനങ്ങൾ",
   "smsContent": "ഹേയ്! എൻ്റെ കണ്ണുകളെ പരിപാലിക്കാൻ ഞാൻ സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിക്കുന്നു, നിങ്ങളും ഉപയോഗിക്കണം! നിങ്ങളുടെ കണ്ണുകൾ വിലയിരുത്തുകയും സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിച്ച് സമയബന്ധിതമായ ചികിത്സ നേടുകയും ചെയ്യുക. പ്രതിരോധാത്മകമായ ഐക്കെയർ നിങ്ങളുടെ കൈകളിലേക്ക് കൊണ്ടുവരുന്ന സവിശേഷമായ ഒരു ആപ്ലിക്കേഷനാണിത്. ഇപ്പോൾ അത് നേടുകഃ https://healthconnecttech.org/install",
   "emailSubject": "സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിച്ച് നിങ്ങളുടെ കണ്ണിന്റെ ആരോഗ്യത്തിന് മുൻഗണന നൽകുക!",
   "recentServicesCataractEyeTest": "തിമിരം കണ്ണ് പരിശോധന",
   "recentServicesRedEyeTest": "ചുവന്ന കണ്ണ് പരിശോധന",
+  "chatBotDefaultQuerySuggestions": "കണ്ണ് വിലയിരുത്തൽ ആരംഭിക്കുക | സാധാരണ കണ്ണ് പ്രശ്നങ്ങൾ | മെച്ചപ്പെട്ട കാഴ്ചയ്ക്കുള്ള നുറുങ്ങുകൾ",
+  "chatBotWelcomeMessage": "ഹായ്, ഇന്ന് ഞാൻ നിങ്ങളെ എങ്ങനെ സഹായിക്കും?",
   "poweredByText": "പവർ ചെയ്തിരിക്കുന്നത്",
   "digitalHealthCard": "ഡിജിറ്റൽ പൊതുജനാരോഗ്യ സ്റ്റാക്ക്",
-  "inviteNowText": "ഇപ്പോൾ ക്ഷണിക്കുക"
+  "inviteNowText": "ഇപ്പോൾ ക്ഷണിക്കുക",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

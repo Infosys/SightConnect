@@ -1,6 +1,6 @@
 {
   "@@locale": "or",
-  "@@last_modified": "2024-02-20T11:16:27.943Z",
+  "@@last_modified": "2024-02-20T18:08:12.948Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -20,6 +20,7 @@
       }
     }
   },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
   "@loginResendOTPIn": {
     "placeholders": {
       "time": {
@@ -230,8 +231,6 @@
   "memberSelection": "ସଦସ୍ୟ ଚୟନ କରନ୍ତୁ",
   "triageAlerDialogBoxTitle": "ପୁନର୍ବାର କରିବାକୁ ପଦକ୍ଷେପଗୁଡିକ ଚୟନ କରନ୍ତୁ",
   "scannerTitle": "ସ୍କାନର୍",
-  "chatBotDefaultQuerySuggestions": "ଆଖି ମୂଲ୍ଯ଼ାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ | ସାଧାରଣ ଆଖି ସମସ୍ଯ଼ା | ଉତ୍ତମ ଦୃଷ୍ଟିଶକ୍ତି ପାଇଁ ଟିପ୍ସ",
-  "chatBotWelcomeMessage": "ନମସ୍କାର, ମୁଁ ଆଜି ଆପଣଙ୍କୁ କିପରି ସାହାଯ୍ଯ଼ କରିପାରିବି?",
   "visualAcuityTestDistanceInstruction": "କ୍ଯ଼ାମେରାଟିକୁ ଆଖିଠାରୁ 40 ସେ. ମି. ଦୂରରେ ରଖନ୍ତୁ।",
   "somethingWentWrong": "କିଛି ଭୁଲ ହୋଇଗଲା",
   "triageUpdatedSuccessfully": "ଟ୍ରାଇଏଜ୍ ସଫଳତାର ସହ ଅଦ୍ଯ଼ତନ ହୋଇଛି।",
@@ -256,7 +255,19 @@
   "emailSubject": "ସାଇଟ୍କନେକ୍ଟ ଆପ୍ ଦ୍ୱାରା ନିଜ ଚକ୍ଷୁ ସ୍ୱାସ୍ଥ୍ଯ଼କୁ ପ୍ରାଥମିକତା ଦିଅନ୍ତୁ!",
   "recentServicesCataractEyeTest": "ମୋତିଆବିନ୍ଦୁ ଚକ୍ଷୁ ପରୀକ୍ଷା",
   "recentServicesRedEyeTest": "ଲାଲ ଆଖି ପରୀକ୍ଷା",
+  "chatBotDefaultQuerySuggestions": "ଆଖି ମୂଲ୍ଯ଼ାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ | ସାଧାରଣ ଆଖି ସମସ୍ଯ଼ା | ଉତ୍ତମ ଦୃଷ୍ଟିଶକ୍ତି ପାଇଁ ଟିପ୍ସ",
+  "chatBotWelcomeMessage": "ନମସ୍କାର, ମୁଁ ଆଜି ଆପଣଙ୍କୁ କିପରି ସାହାଯ୍ଯ଼ କରିପାରିବି?",
   "poweredByText": "ଦ୍ୱାରା ପରିଚାଳିତ",
   "digitalHealthCard": "ଡିଜିଟାଲ ସାର୍ବଜନୀନ ସ୍ୱାସ୍ଥ୍ଯ଼ ଷ୍ଟାକ",
-  "inviteNowText": "ବର୍ତ୍ତମାନ ନିମନ୍ତ୍ରଣ କରନ୍ତୁ"
+  "inviteNowText": "ବର୍ତ୍ତମାନ ନିମନ୍ତ୍ରଣ କରନ୍ତୁ",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully"
 }

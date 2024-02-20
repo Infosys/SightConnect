@@ -48,25 +48,34 @@ function appTranslationsARB() {
     });
 
     translations.forEach((translation) => {
-      translationsObj[translation.id] = translation[language];
+      translationsObj[translation.id] =
+        translation[language] || englishTranslations[translation.id] || "";
     });
 
     const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);
 
+    let finalTranslations = {
+      "@@locale": language,
+      "@@last_modified": new Date().toISOString(),
+      "@@author": "appTranslationsARB.js",
+      ...definitions,
+    };
+
     if (fs.existsSync(arbFile)) {
       const existingTranslations = JSON.parse(fs.readFileSync(arbFile, "utf8"));
-      const mergedTranslations = {
-        "@@locale": language,
-        "@@last_modified": new Date().toISOString(),
-        "@@author": "appTranslationsARB.js",
-        ...definitions,
+      finalTranslations = {
+        ...finalTranslations,
         ...existingTranslations,
         ...translationsObj,
       };
-      fs.writeFileSync(arbFile, JSON.stringify(mergedTranslations, null, 2));
+      fs.writeFileSync(arbFile, JSON.stringify(finalTranslations, null, 2));
       console.log(`Updated app_${language}.arb`);
     } else {
-      fs.writeFileSync(arbFile, JSON.stringify(translationsObj, null, 2));
+      finalTranslations = {
+        ...finalTranslations,
+        ...translationsObj,
+      };
+      fs.writeFileSync(arbFile, JSON.stringify(finalTranslations, null, 2));
       console.log(`Generated app_${language}.arb`);
     }
   });
