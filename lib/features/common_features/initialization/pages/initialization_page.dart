@@ -77,53 +77,54 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
-    if (role == Role.ROLE_PATIENT) {
-      final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
-      if (isAccepted != null && isAccepted) {
-        await _registerUser(navigator, role);
-      } else {
-        // User stay on the same page
+    try {
+      if (role == Role.ROLE_PATIENT) {
+        final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
+        if (isAccepted != null && isAccepted) {
+          await _registerUser(navigator, role);
+        } else {
+          // User stay on the same page
+        }
+      } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+        await _invalidateAndLogout("You are not authorized to login.");
+      } else if (role == Role.ROLE_VISION_GUARDIAN) {
+        await _invalidateAndLogout("You are not authorized to login.");
+      } else if (role == Role.ROLE_OPTOMETRIST) {
+        await _invalidateAndLogout("You are not authorized to login.");
       }
-    } else if (role == Role.ROLE_VISION_TECHNICIAN) {
-      await _invalidateAndLogout("You are not authorized to login.");
-    } else if (role == Role.ROLE_VISION_GUARDIAN) {
-      await _invalidateAndLogout("You are not authorized to login.");
-    } else if (role == Role.ROLE_OPTOMETRIST) {
-      await _invalidateAndLogout("You are not authorized to login.");
+    } catch (e) {
+      logger.e("_handleNewUser: $e");
+      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
-    if (isAccepted != null && isAccepted) {
-      await _navigateBasedOnRole(navigator, role);
-    } else {
-      // User stay on the same page
+    try {
+      final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
+      if (isAccepted != null && isAccepted) {
+        await _navigateBasedOnRole(navigator, role);
+      } else {
+        // User stay on the same page
+      }
+    } catch (e) {
+      logger.e("_handleExistingUser: $e");
+      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
-  Future<bool> _isConsentAlreadyAccepted() async {
-    final model = ref.read(initializationProvider);
-    return model.getConsentStatus();
-  }
-
-  Future<bool> _18PlusDeclarationAccepted() async {
-    final model = ref.read(initializationProvider);
-    return model.getEighteenPlusDeclarationStatus();
-  }
-
   Future<bool?> _verifyRoleSpecificConsent(
-    NavigatorState navigator,
-    Role role,
-  ) async {
+      NavigatorState navigator, Role role) async {
     try {
+      final model = ref.read(initializationProvider);
       if (role == Role.ROLE_OPTOMETRIST) {
         // Skip consent and 18+ declaration for optometrist
         return true;
       } else if (role == Role.ROLE_PATIENT) {
         // 18+ declaration and consent check for patient
-        bool is18PlusDeclarationAccepted = await _18PlusDeclarationAccepted();
-        bool isConsentAccepted = await _isConsentAlreadyAccepted();
+        bool is18PlusDeclarationAccepted =
+            await model.getEighteenPlusDeclarationStatus();
+        bool isConsentAccepted = await model.getConsentStatus();
+
         if (is18PlusDeclarationAccepted && isConsentAccepted) {
           return true;
         } else {
@@ -139,15 +140,14 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         return is18PlusDeclarationAccepted && isConsentAccepted;
       } else {
         // Check consent for vision technician and guardian
-        bool isConsentAccepted = await _isConsentAlreadyAccepted();
+        bool isConsentAccepted = await model.getConsentStatus();
         if (!isConsentAccepted) {
           isConsentAccepted = await _showConsentForm(navigator, role) ?? false;
         }
         return isConsentAccepted;
       }
     } catch (e) {
-      logger.e("_verifyRoleSpecificConsent: $e");
-      return null;
+      rethrow;
     }
   }
 
