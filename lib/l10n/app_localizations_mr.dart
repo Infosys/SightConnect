@@ -10,6 +10,16 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
+  String loginEnterOTP(String mobileNumber) {
+    return 'Please enter the OTP sent to $mobileNumber';
+  }
+
+  @override
+  String loginResendOTPIn(String time) {
+    return 'Resend in $time';
+  }
+
+  @override
   String get questionnaireTitle => 'डोळ्यांच्या तपासणीचे प्रश्न';
 
   @override

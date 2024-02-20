@@ -1,5 +1,7 @@
 {
   "@@locale": "bn",
+  "@@last_modified": "2024-02-20T11:16:28.008Z",
+  "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
       "current": {
@@ -11,6 +13,21 @@
     }
   },
   "stepNumber": "{current} এর মধ্যে {total}",
+  "@loginEnterOTP": {
+    "placeholders": {
+      "mobileNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "@loginResendOTPIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "loginResendOTPIn": "Resend in {time}",
   "questionnaireTitle": "চোখের মূল্যায়ন প্রশ্ন",
   "questionnaireExitDialog": "এই প্রশ্নগুলির উত্তর দেওয়া আপনার চোখের সমস্যাগুলি শনাক্ত করতে সাহায্য করবে। আপনি কি সত্যিই এই সমস্যা থেকে বেরিয়ে আসতে চান?",
   "visualAcuityTitle": "চাক্ষুষ তীক্ষ্ণতা পরীক্ষা",

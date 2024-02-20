@@ -119,6 +119,18 @@ abstract class AppLocalizations {
   /// **'{current} of {total}'**
   String stepNumber(String current, String total);
 
+  /// No description provided for @loginEnterOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the OTP sent to {mobileNumber}'**
+  String loginEnterOTP(String mobileNumber);
+
+  /// No description provided for @loginResendOTPIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in {time}'**
+  String loginResendOTPIn(String time);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:

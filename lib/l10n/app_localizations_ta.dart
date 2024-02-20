@@ -10,6 +10,16 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
+  String loginEnterOTP(String mobileNumber) {
+    return 'Please enter the OTP sent to $mobileNumber';
+  }
+
+  @override
+  String loginResendOTPIn(String time) {
+    return 'Resend in $time';
+  }
+
+  @override
   String get questionnaireTitle => 'கண் பரிசோதனை கேள்விகள்';
 
   @override

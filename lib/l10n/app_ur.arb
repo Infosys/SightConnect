@@ -1,5 +1,7 @@
 {
   "@@locale": "ur",
+  "@@last_modified": "2024-02-20T11:16:28.055Z",
+  "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
       "current": {
@@ -11,6 +13,21 @@
     }
   },
   "stepNumber": "{current} of {total}",
+  "@loginEnterOTP": {
+    "placeholders": {
+      "mobileNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "@loginResendOTPIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "loginResendOTPIn": "Resend in {time}",
   "questionnaireTitle": "آنکھوں کی تشخیص کے سوالات",
   "questionnaireExitDialog": "ان سوالوں کے جواب دینے سے آپ کی آنکھوں کے مسائل کی نشاندہی کرنے میں مدد ملے گی۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟",
   "visualAcuityTitle": "بصری ایکویٹی ٹیسٹ",

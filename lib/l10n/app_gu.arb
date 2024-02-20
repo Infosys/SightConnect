@@ -1,5 +1,7 @@
 {
   "@@locale": "gu",
+  "@@last_modified": "2024-02-20T11:16:27.979Z",
+  "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
       "current": {
@@ -11,6 +13,21 @@
     }
   },
   "stepNumber": "{current} ના {total}",
+  "@loginEnterOTP": {
+    "placeholders": {
+      "mobileNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "@loginResendOTPIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "loginResendOTPIn": "Resend in {time}",
   "questionnaireTitle": "આંખના મૂલ્યાંકનના પ્રશ્નો",
   "questionnaireExitDialog": "આ પ્રશ્નોના જવાબ આપવાથી તમારી આંખની સમસ્યાઓને ઓળખવામાં મદદ મળશે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?",
   "visualAcuityTitle": "દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ",

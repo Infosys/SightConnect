@@ -1,5 +1,7 @@
 {
   "@@locale": "en",
+  "@@last_modified": "2024-02-20T11:16:27.898Z",
+  "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
       "current": {
@@ -11,6 +13,22 @@
     }
   },
   "stepNumber": "{current} of {total}",
+  "@loginEnterOTP": {
+    "placeholders": {
+      "mobileNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "loginEnterOTP": "Please enter the OTP sent to {mobileNumber}",
+  "@loginResendOTPIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "loginResendOTPIn": "Resend in {time}",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",
@@ -241,5 +259,16 @@
   "digitalHealthCard": "Digital Public Health Stack",
   "inviteNowText": "Invite Now",
   "chatBotDefaultQuerySuggestions": "Start Eye Assessment|Common eye issues|Tips for a better eye sight",
-  "chatBotWelcomeMessage": "Hi, How may I help you today?"
+  "chatBotWelcomeMessage": "Hi, How may I help you today?",
+  "resend": "Resend",
+  "mobileNumber": "Mobile Number",
+  "loginVerifyMobileNumber": "Verify your mobile number",
+  "loginEnterMobileNumber": "Please enter mobile number",
+  "loginEnterValidMobileNumber": "Please enter valid mobile number",
+  "loginUnableToSendOTP": "Unable to send OTP to this number",
+  "loginGetOTP": "Get OTP",
+  "loginInvalidOTP": "Invalid OTP",
+  "loginDidntReceiveOTP": "Didn't receive the OTP?",
+  "loginOTPSent": "OTP sent successfully",
+  "loginOTPResendIn": "Resend in {time}"
 }

@@ -1,5 +1,7 @@
 {
   "@@locale": "te",
+  "@@last_modified": "2024-02-20T11:16:27.961Z",
+  "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
       "current": {
@@ -11,6 +13,22 @@
     }
   },
   "stepNumber": "{current} / {total}",
+  "@loginEnterOTP": {
+    "placeholders": {
+      "mobileNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "loginEnterOTP": "దయచేసి {mobileNumber}కి పంపిన OTPని నమోదు చేయండి",
+  "@loginResendOTPIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "loginResendOTPIn": "Resend in {time}",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",
@@ -241,5 +259,16 @@
   "recentServicesRedEyeTest": "ఎర్ర కంటి పరీక్ష",
   "poweredByText": "సాధ్యం చేసింది",
   "digitalHealthCard": "డిజిటల్ పబ్లిక్ హెల్త్ స్టాక్",
-  "inviteNowText": "ఇప్పుడు ఆహ్వానించండి"
+  "inviteNowText": "ఇప్పుడు ఆహ్వానించండి",
+  "resend": "మళ్లీ పంపండి",
+  "mobileNumber": "మొబైల్ నంబర్",
+  "loginVerifyMobileNumber": "మీ మొబైల్ నంబర్‌ని ధృవీకరించండి",
+  "loginEnterMobileNumber": "దయచేసి మీ మొబైల్ నంబర్‌ను నమోదు చేయండి",
+  "loginEnterValidMobileNumber": "దయచేసి పనిచేసే మొబైల్ నంబర్‌ను నమోదు చేయండి",
+  "loginUnableToSendOTP": "ఈ నంబర్‌కు OTP పంపడం సాధ్యం అవ్వటం లేదు",
+  "loginGetOTP": "OTP పొందండి",
+  "loginInvalidOTP": "ఈ OTP చెల్లదు ",
+  "loginDidntReceiveOTP": "మీరు నమోదు చేసిన OTP సరైనది కాదు ",
+  "loginOTPSent": "OTP విజయవంతంగా పంపబడింది",
+  "loginOTPResendIn": "{time}లో మళ్లీ పంపండి"
 }

@@ -1,5 +1,7 @@
 {
   "@@locale": "mr",
+  "@@last_modified": "2024-02-20T11:16:28.037Z",
+  "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
       "current": {
@@ -11,6 +13,21 @@
     }
   },
   "stepNumber": "{current} बाहेर {total}",
+  "@loginEnterOTP": {
+    "placeholders": {
+      "mobileNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "@loginResendOTPIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "loginResendOTPIn": "Resend in {time}",
   "questionnaireTitle": "डोळ्यांच्या तपासणीचे प्रश्न",
   "questionnaireExitDialog": "या प्रश्नांची उत्तरं देण्याने तुमच्या डोळ्यांच्या समस्या ओळखण्यास मदत होईल. तुम्ही तरीही बाहेर पडू इच्छिता का?",
   "visualAcuityTitle": "दृष्टी अचूकता चाचणी",
