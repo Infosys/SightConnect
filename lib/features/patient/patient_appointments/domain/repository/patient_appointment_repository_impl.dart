@@ -10,7 +10,7 @@ import '../../data/source/patient_appointment_remote_source.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 
 var patientAppointmentRepositoryProvider =
-    riverpod.Provider<PatientAppointmentRepository>(
+    riverpod.Provider.autoDispose<PatientAppointmentRepository>(
         (ref) => PatientAppointmentRepositoryImpl(
               ref.watch(appointmentRemoteSourceProvider),
             ));

@@ -11,7 +11,7 @@ import '../../../../../main.dart';
 import '../models/uhi_search_model.dart';
 
 var appointmentRemoteSourceProvider =
-    ChangeNotifierProvider((ref) => PatientAppointmentRemoteSource());
+    ChangeNotifierProvider.autoDispose((ref) => PatientAppointmentRemoteSource());
 
 class PatientAppointmentRemoteSource extends ChangeNotifier {
   late StompClient _client;
@@ -39,7 +39,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isAck(){
+  Future<bool> isAck() async{
     bool isDataAck = false;
     _client.subscribe(
       destination: '',
@@ -65,6 +65,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
         notifyListeners();
       },
     );
+    bool isDataAck = await isAck();
     return doctorsList;
   }
 
@@ -74,7 +75,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
       destination: '/eua/messages',
       body: data.toString(),
     );
-    bool isDataAck = isAck();
+    bool isDataAck = await isAck();
     return isDataAck;
   }
   
