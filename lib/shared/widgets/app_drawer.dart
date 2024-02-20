@@ -229,10 +229,10 @@ class AppDrawer extends HookWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "buildNumber : $buildNumber",
+                          "Version : $version",
                         ),
                         Text(
-                          "version : $version",
+                          "Buil dNumber : $buildNumber",
                         ),
                       ],
                     ),
