@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
-import 'package:eye_care_for_all/core/services/package_info.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
@@ -38,8 +38,7 @@ class AppDrawer extends HookWidget {
     final loc = context.loc!;
     var items = DrawerMenuItems.getAll(loc);
     var isLoading = useState(false);
-    String buildNumber = PackageInfoService.packageInfo.buildNumber;
-    String version = PackageInfoService.packageInfo.version;
+
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: Padding(
@@ -221,21 +220,19 @@ class AppDrawer extends HookWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Version : $version",
+                  const SizedBox(height: AppSize.klheight * 2),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Version: ${AppInfoService.version}",
+                        style: applyRobotoFont(
+                          fontWeight: FontWeight.normal,
+                          color: AppColor.grey,
+                          fontSize: 10,
                         ),
-                        Text(
-                          "Buil dNumber : $buildNumber",
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: AppSize.klheight * 2)
                 ],
