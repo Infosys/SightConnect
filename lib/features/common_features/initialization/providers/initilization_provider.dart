@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/models/consent_model.dart';
+import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -162,5 +164,51 @@ class InitializationProvider extends ChangeNotifier {
         }
       }
     });
+  }
+
+  Future<bool> getEighteenPlusDeclarationStatus() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
+    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> sumbitEighteenPlusDeclaration() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
+    await consentRepository.setConsent(
+      ConsentModel(
+        templateId: consent.templateId,
+        consentVersion: consent.consentVersion,
+        consentStatus: ConsentStatus.ACKNOWLEDGED,
+        acknowledgeDate: DateTime.now().toUtc().toIso8601String(),
+      ),
+    );
+  }
+
+  Future<bool> getConsentStatus() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent();
+    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> sumbitConsent() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent();
+    await consentRepository.setConsent(
+      ConsentModel(
+        templateId: consent.templateId,
+        consentVersion: consent.consentVersion,
+        consentStatus: ConsentStatus.ACKNOWLEDGED,
+        acknowledgeDate: DateTime.now().toUtc().toIso8601String(),
+      ),
+    );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/models/consent_model.dart';
-import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -265,41 +264,27 @@ class VTConsentFormPage extends HookWidget {
                             children: [
                               Consumer(
                                 builder: (context, ref, child) {
-                                  final model =
-                                      ref.watch(consentRepositoryProvider);
                                   return Expanded(
                                     child: ElevatedButton(
                                       onPressed: selectedValue.value
                                           ? () async {
                                               final navigator =
                                                   Navigator.of(context);
+                                              final model = ref
+                                                  .read(initializationProvider);
+
                                               try {
                                                 isLoading.value = true;
-                                                final consent =
-                                                    await model.getConsent();
-                                                await model.setConsent(
-                                                  ConsentModel(
-                                                    templateId:
-                                                        consent.templateId,
-                                                    consentVersion:
-                                                        consent.consentVersion,
-                                                    consentStatus: ConsentStatus
-                                                        .ACKNOWLEDGED,
-                                                    acknowledgeDate:
-                                                        DateTime.now()
-                                                            .toUtc()
-                                                            .toIso8601String(),
-                                                  ),
-                                                );
-
+                                                await model.sumbitConsent();
                                                 navigator.pop(true);
-                                                isLoading.value = false;
                                               } catch (e) {
                                                 logger.e(e);
-                                                isLoading.value = false;
+
                                                 Fluttertoast.showToast(
-                                                    msg:
-                                                        loc.somethingWentWrong);
+                                                  msg: loc.somethingWentWrong,
+                                                );
+                                              } finally {
+                                                isLoading.value = false;
                                               }
                                             }
                                           : null,
