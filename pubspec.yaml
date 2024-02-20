@@ -80,6 +80,7 @@ dependencies:
   auto_size_text: ^3.0.0
   web_socket_channel: ^2.4.0
   date_picker_timeline: ^1.2.5
+  stomp_dart_client: ^1.0.3
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
@@ -96,7 +97,6 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   shimmer: ^3.0.0
   workmanager: ^0.5.2
-  package_info_plus: ^5.0.1
 
 
 dependency_overrides:

@@ -10,10 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 // import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/services/matomo_logger.dart';
-import 'core/services/package_info.dart';
 import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
