@@ -26,6 +26,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
+        final minSwipeLength = AppSize.width(context) * 0.4;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -51,7 +52,19 @@ class SwipeGestureCard extends HookConsumerWidget {
         endPoint.value = details.localPosition;
       },
       onPanEnd: (details) {
+
+        double distanceBetweenPoints =
+            _getDistanceBetweenPoints(startPoint.value, endPoint.value);
+
+        logger.d("distance between start and end point $distanceBetweenPoints");
+
+        if (distanceBetweenPoints < minSwipeLength) {
+          shortSwipeDialog(context, "Swipe is too short");
+          return;
+        }
+
         final value = _getSwipeDirection(startPoint.value, endPoint.value);
+        
         if (value == null) {
           AppToast.showToast(context, loc.swipeGestureError);
           return;
