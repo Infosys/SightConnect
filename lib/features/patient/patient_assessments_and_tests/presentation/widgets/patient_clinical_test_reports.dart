@@ -63,7 +63,7 @@ class _PatientClinicalTestReportsState
     final loc = context.loc!;
 
     var model = ref.watch(patientAssessmentAndTestProvider);
-    logger.f({
+    logger.d({
       "Clinical Report": model.clinicalReportList.length,
       "Has More": model.hasClinicalReportMore,
       "loading": model.isClinicalReportLoading,

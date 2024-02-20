@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart' as location;
-import 'package:permission_handler/permission_handler.dart';
+import 'package:permission_handler/permission_handler.dart' as handler;
 
 class NearbyVisionCentersList extends ConsumerStatefulWidget {
   const NearbyVisionCentersList({super.key});
@@ -24,9 +24,7 @@ class _NearbyVisionCentersListState
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addObserver(this);
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(nearByVisionCenterProvider.notifier).init();
     });
@@ -111,43 +109,29 @@ class _NearbyVisionCentersListState
                         width: 50,
                       ),
                       const SizedBox(height: AppSize.ksheight),
-                      const Text(
-                        "We are unable to fetch nearby vision centers at the moment. Please try again later.",
+                      Text(
+                        viewState.errorMessage ?? '',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                       ),
                       const SizedBox(height: AppSize.ksheight),
-                      Builder(builder: (context) {
-                        if (viewState.permissionStatus ==
-                            location.PermissionStatus.denied) {
-                          return TextButton(
-                            onPressed: () {
-                              ref
-                                  .read(nearByVisionCenterProvider.notifier)
-                                  .init();
-                            },
-                            child: const Text("Request Location Permission"),
-                          );
-                        } else if (viewState.permissionStatus ==
-                            location.PermissionStatus.deniedForever) {
-                          return TextButton(
-                            onPressed: () {
-                              openAppSettings();
-                            },
-                            child: const Text("App Settings"),
-                          );
-                        }
-
-                        return TextButton(
-                          onPressed: () {
-                            ref
-                                .read(nearByVisionCenterProvider.notifier)
-                                .init();
-                          },
-                          child: const Text("Retry"),
-                        );
-                      }),
+                      TextButton(
+                        onPressed: () async {
+                          final status = viewState.permissionStatus;
+                          final model =
+                              ref.read(nearByVisionCenterProvider.notifier);
+                          if (status ==
+                              location.PermissionStatus.deniedForever) {
+                            if (await handler.openAppSettings()) {
+                              model.init();
+                            }
+                          } else {
+                            model.init();
+                          }
+                        },
+                        child: const Text("Request Location Permission"),
+                      ),
                     ],
                   ),
                 );

@@ -20,46 +20,51 @@ class NearByVisionCenterProvider
 
   LocationData? data;
   Location location = Location();
+  bool _isInitializing = false;
 
   NearByVisionCenterProvider(VisionCenterRepository visionCenterRepository)
       : _visionCenterRepository = visionCenterRepository,
         super(NearByVisionCenterState.initial());
 
   Future<void> init() async {
-    try {
-      state = state.copyWith(
-        isLoading: true,
-        visionCenters: null,
-        errorMessage: null,
-      );
-      location = Location();
-      final permissionStatus = await location.requestPermission();
-      logger
-          .d("nearByVisionCenterProvider, permissionStatus: $permissionStatus");
+    if (_isInitializing) return;
+    _isInitializing = true;
 
-      switch (permissionStatus) {
-        case PermissionStatus.granted:
-        case PermissionStatus.grantedLimited:
-          await onPermissionGranted(permissionStatus);
-          break;
-        case PermissionStatus.denied:
-        case PermissionStatus.deniedForever:
-          onPermissionDenied(permissionStatus);
-          break;
-        default:
-          onPermissionDenied(permissionStatus);
-          break;
+    state = state.copyWith(
+      isLoading: true,
+      visionCenters: null,
+      errorMessage: null,
+    );
+    location = Location();
+    final serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      final enableService = await location.requestService();
+      if (!enableService) {
+        state = state.copyWith(
+          isLoading: false,
+          errorMessage: "Location service is not enabled.",
+        );
+        _isInitializing = false;
+        return;
       }
-    } catch (e) {
-      logger.e(e);
-      data = null;
-      final formattedMessage = e.toString().substring(11);
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: formattedMessage,
-        visionCenters: null,
-      );
     }
+    final permissionStatus = await location.requestPermission();
+    logger.d("nearByVisionCenterProvider, permissionStatus: $permissionStatus");
+
+    switch (permissionStatus) {
+      case PermissionStatus.granted:
+      case PermissionStatus.grantedLimited:
+        await onPermissionGranted(permissionStatus);
+        break;
+      case PermissionStatus.denied:
+      case PermissionStatus.deniedForever:
+        onPermissionDenied(permissionStatus);
+        break;
+      default:
+        onPermissionDenied(permissionStatus);
+        break;
+    }
+    _isInitializing = false;
   }
 
   Future<void> onPermissionGranted(PermissionStatus permissionStatus) async {
@@ -67,19 +72,30 @@ class NearByVisionCenterProvider
 
     data = await location.getLocation();
     if (data == null) {
-      throw Exception("Unable to get the location.");
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: "Unable to get the location.",
+      );
+      return;
     }
 
-    final visionCenters = await _visionCenterRepository.getVisionCenters(
-      latitude: data?.latitude,
-      longitude: data?.longitude,
-    );
+    try {
+      final visionCenters = await _visionCenterRepository.getVisionCenters(
+        latitude: data?.latitude,
+        longitude: data?.longitude,
+      );
 
-    state = state.copyWith(
-      isLoading: false,
-      visionCenters: visionCenters,
-      errorMessage: null,
-    );
+      state = state.copyWith(
+        isLoading: false,
+        visionCenters: visionCenters,
+        errorMessage: null,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: "Failed to get vision centers: $e",
+      );
+    }
   }
 
   void onPermissionDenied(PermissionStatus permissionStatus) {

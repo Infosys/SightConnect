@@ -76,6 +76,10 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
       );
     }
 
+    if (viewState.visionCenters == null){
+      return const Text("No Vision Centers Found");
+    }
+
     return Container(
       width: Responsive.isMobile(context)
           ? AppSize.width(context)
