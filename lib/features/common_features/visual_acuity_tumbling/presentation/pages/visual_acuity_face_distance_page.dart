@@ -4,6 +4,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/machine_learning_camera_service_android.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/machine_learning_camera_service_ios.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -11,24 +13,128 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart' as mlkit;
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
+    as ios;
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:superapp_scanner/constants/app_color.dart';
-import '../providers/machine_learning_camera_service.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
 
-class VisualAcuityFaceDistancePage extends StatefulWidget {
-  const VisualAcuityFaceDistancePage({
-    Key? key,
-  }) : super(key: key);
+class VisualAcuityFaceDistancePage extends StatelessWidget {
+  const VisualAcuityFaceDistancePage({super.key});
 
   @override
-  State<VisualAcuityFaceDistancePage> createState() =>
-      _VisualAcuityFaceDistancePageViewState();
+  Widget build(BuildContext context) {
+    return AppFaceDistanceCamera(
+      onCameraCreated: (controller, paint, distance, isLoading) {
+        final isValidDistance =
+            distance != null && distance >= 35 && distance <= 45;
+        return Scaffold(
+          appBar: const CustomAppbar(
+            title: Text('Distance to Face'),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Text(
+                  "Please keep your face at 40 cm from the screen",
+                  textAlign: TextAlign.center,
+                  style: applyRobotoFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Expanded(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: controller.value.isInitialized
+                              ? (Platform.isAndroid || Platform.isIOS)
+                                  ? CameraPreview(
+                                      controller,
+                                      child: paint,
+                                    )
+                                  : CameraPreview(
+                                      controller,
+                                    )
+                              : Container(),
+                        ),
+                      ),
+                      Positioned(
+                        top: AppSize.height(context) * 0.06,
+                        left: AppSize.width(context) * 0.2,
+                        right: AppSize.width(context) * 0.2,
+                        child: Visibility(
+                          visible: Platform.isAndroid || Platform.isIOS,
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                            child: AutoSizeText(
+                              distance != null
+                                  ? 'Distance to Face: $distance cm'
+                                  : 'Bring your face inside the box',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: isValidDistance
+                                    ? const Color(0xff22BF85)
+                                    : AppColor.red,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: AppSize.height(context) * 0.04,
+                        left: AppSize.width(context) * 0.1,
+                        right: AppSize.width(context) * 0.1,
+                        child: ElevatedButton(
+                          onPressed: isValidDistance
+                              ? () {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VisualAcuityTumblingLeftEyeInstruction(),
+                                    ),
+                                  );
+                                }
+                              : null,
+                          child: const Text("Proceed"),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
-class _VisualAcuityFaceDistancePageViewState
-    extends State<VisualAcuityFaceDistancePage> with WidgetsBindingObserver {
+class AppFaceDistanceCamera extends StatefulWidget {
+  const AppFaceDistanceCamera({
+    super.key,
+    required this.onCameraCreated,
+  });
+
+  final Widget Function(CameraController, CustomPaint?, int?, bool)
+      onCameraCreated;
+
+  @override
+  State<AppFaceDistanceCamera> createState() => _AppFaceDistanceCameraState();
+}
+
+class _AppFaceDistanceCameraState extends State<AppFaceDistanceCamera>
+    with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
   late CameraController _controller;
@@ -36,8 +142,9 @@ class _VisualAcuityFaceDistancePageViewState
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
-  final mlkit.FaceDetector _faceDetectorIos = mlkit.FaceDetector(
-    options: mlkit.FaceDetectorOptions(
+
+  final ios.FaceDetector _faceDetectorIos = ios.FaceDetector(
+    options: ios.FaceDetectorOptions(
       enableContours: true,
       enableLandmarks: true,
       enableClassification: true,
@@ -48,9 +155,9 @@ class _VisualAcuityFaceDistancePageViewState
   final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
-  double _focalLength = 0.001;
-  double _sensorX = 0.001;
-  double _sensorY = 0.001;
+  double? _focalLength;
+  double? _sensorX;
+  double? _sensorY;
   int? _distanceToFace;
   List<Point<double>> _translatedEyeLandmarks = [];
   Size _canvasSize = Size.zero;
@@ -62,8 +169,14 @@ class _VisualAcuityFaceDistancePageViewState
     logger.d("VisualAcuityFaceDistancePage: Init State Called");
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _checkPermissions(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (Platform.isAndroid || Platform.isIOS) {
+        _checkPermissions(context);
+      } else {
+        Navigator.of(context).pop();
+        Fluttertoast.showToast(msg: "Platform not supported");
+      }
+    });
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
@@ -100,10 +213,8 @@ class _VisualAcuityFaceDistancePageViewState
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
-      if (Platform.isAndroid) {
-        _canProcess = true;
-        _isBusy = false;
-      }
+      _canProcess = true;
+      _isBusy = false;
       await _startLiveFeed();
       await _getCameraInfo();
     } catch (e) {
@@ -131,9 +242,7 @@ class _VisualAcuityFaceDistancePageViewState
         if (!mounted) {
           return;
         }
-        if (Platform.isAndroid || Platform.isIOS) {
-          _controller.startImageStream(_processCameraImage);
-        }
+        _controller.startImageStream(_processCameraImage);
       },
     );
     if (mounted) {
@@ -143,20 +252,23 @@ class _VisualAcuityFaceDistancePageViewState
 
   Future<void> _getCameraInfo() async {
     logger.d("VisualAcuityFaceDistancePage: Get Camera Info Called");
+
     try {
-      final Map<String, double>? cameraInfo =
-          await MachineLearningCameraService.getCameraInfo();
-      _focalLength = cameraInfo?['focalLength'] ?? 0.001;
-      _sensorX = cameraInfo?['sensorX'] ?? 0.001;
-      _sensorY = cameraInfo?['sensorY'] ?? 0.001;
+      final Map<String, double>? cameraInfo = Platform.isAndroid
+          ? await MachineLearningCameraServiceAndroid.getCameraInfo()
+          : await MachineLearningCameraServiceIOS.getCameraInfo();
+      _focalLength = cameraInfo?['focalLength'];
+      _sensorX = cameraInfo?['sensorX'];
+      _sensorY = cameraInfo?['sensorY'];
       logger.d({
         "VisualAcuityFaceDistancePage: Focal Length": "$_focalLength",
         "VisualAcuityFaceDistancePage: Sensor X": "$_sensorX",
         "VisualAcuityFaceDistancePage: Sensor Y": "$_sensorY",
       });
+      if (_focalLength == null || _sensorX == null || _sensorY == null) {
+        throw Exception("Camera info not available");
+      }
     } catch (error) {
-      logger
-          .e('VisualAcuityFaceDistancePage: Error getting camera info: $error');
       rethrow;
     }
   }
@@ -169,16 +281,16 @@ class _VisualAcuityFaceDistancePageViewState
 
     if (Platform.isAndroid) {
       final InputImage? inputImage =
-          MachineLearningCameraService.inputImageFromCameraImage(
+          MachineLearningCameraServiceAndroid.inputImageFromCameraImage(
         image: image,
         camera: camera,
         deviceOrientation: orientation,
       );
       if (inputImage == null) return;
       _processImage(inputImage);
-    } else if (Platform.isIOS) {
-      final mlkit.InputImage? inputImage =
-          MachineLearningCameraService.inputImageFromCameraImageIos(
+    } else {
+      final ios.InputImage? inputImage =
+          MachineLearningCameraServiceIOS.inputImageFromCameraImageIos(
         image: image,
         camera: camera,
         deviceOrientation: orientation,
@@ -206,19 +318,19 @@ class _VisualAcuityFaceDistancePageViewState
     );
 
     if (meshes.isNotEmpty) {
-      final mesh = MachineLearningCameraService.getLargestFace(meshes);
+      final mesh = MachineLearningCameraServiceAndroid.getLargestFace(meshes);
       final List<FaceMeshPoint>? leftEyeContour =
           mesh.contours[FaceMeshContourType.leftEye];
       final List<FaceMeshPoint>? rightEyeContour =
           mesh.contours[FaceMeshContourType.rightEye];
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<Point<double>> eyeLandmarks = [
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+          MachineLearningCameraServiceAndroid.getEyeLandmark(leftEyeContour),
+          MachineLearningCameraServiceAndroid.getEyeLandmark(rightEyeContour),
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraService.translator(
+          return MachineLearningCameraServiceAndroid.translator(
             landmark,
             inputImage,
             _canvasSize,
@@ -227,7 +339,7 @@ class _VisualAcuityFaceDistancePageViewState
         }).toList();
 
         final bool eyeLandmarksInsideTheBox =
-            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+            MachineLearningCameraServiceAndroid.areEyeLandmarksInsideTheBox(
           _translatedEyeLandmarks,
           boxCenter,
           boxWidth,
@@ -236,12 +348,12 @@ class _VisualAcuityFaceDistancePageViewState
 
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreen(
+              MachineLearningCameraServiceAndroid.calculateDistanceToScreen(
             leftEyeLandmark: eyeLandmarks[0],
             rightEyeLandmark: eyeLandmarks[1],
-            focalLength: _focalLength,
-            sensorX: _sensorX,
-            sensorY: _sensorY,
+            focalLength: _focalLength!,
+            sensorX: _sensorX!,
+            sensorY: _sensorY!,
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
@@ -281,12 +393,12 @@ class _VisualAcuityFaceDistancePageViewState
   }
 
   // Function to process the frames as per our requirements
-  Future<void> _processImageIos(mlkit.InputImage inputImage) async {
+  Future<void> _processImageIos(ios.InputImage inputImage) async {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final List<mlkit.Face> faces =
+    final List<ios.Face> faces =
         await _faceDetectorIos.processImage(inputImage);
 
     // Measurement of the Fixed Center Eye Scanner Box
@@ -300,12 +412,12 @@ class _VisualAcuityFaceDistancePageViewState
     );
 
     if (faces.isNotEmpty) {
-      final mlkit.Face face =
-          MachineLearningCameraService.getLargestFaceIos(faces);
-      final mlkit.FaceLandmark? leftEyeLandmark =
-          face.landmarks[mlkit.FaceLandmarkType.leftEye];
-      final mlkit.FaceLandmark? rightEyeLandmark =
-          face.landmarks[mlkit.FaceLandmarkType.rightEye];
+      final ios.Face face =
+          MachineLearningCameraServiceIOS.getLargestFaceIos(faces);
+      final ios.FaceLandmark? leftEyeLandmark =
+          face.landmarks[ios.FaceLandmarkType.leftEye];
+      final ios.FaceLandmark? rightEyeLandmark =
+          face.landmarks[ios.FaceLandmarkType.rightEye];
       if (leftEyeLandmark != null && rightEyeLandmark != null) {
         final Point<int> leftEyeLandmarkPosition = leftEyeLandmark.position;
         final Point<int> rightEyeLandmarkPosition = rightEyeLandmark.position;
@@ -316,7 +428,7 @@ class _VisualAcuityFaceDistancePageViewState
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraService.translatorIos(
+          return MachineLearningCameraServiceIOS.translatorIos(
             landmark,
             inputImage,
             _canvasSize,
@@ -325,7 +437,7 @@ class _VisualAcuityFaceDistancePageViewState
         }).toList();
 
         final bool eyeLandmarksInsideTheBox =
-            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+            MachineLearningCameraServiceIOS.areEyeLandmarksInsideTheBox(
           _translatedEyeLandmarks,
           boxCenter,
           boxWidth,
@@ -335,12 +447,12 @@ class _VisualAcuityFaceDistancePageViewState
 
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreenIos(
+              MachineLearningCameraServiceIOS.calculateDistanceToScreenIos(
             leftEyeLandmark: leftEyeLandmarkPosition,
             rightEyeLandmark: rightEyeLandmarkPosition,
-            focalLength: _focalLength,
-            sensorX: _sensorX,
-            sensorY: _sensorY,
+            focalLength: _focalLength!,
+            sensorX: _sensorX!,
+            sensorY: _sensorY!,
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
@@ -455,7 +567,6 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   Widget build(BuildContext context) {
-    logger.f("$_distanceToFace cm");
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
@@ -470,150 +581,12 @@ class _VisualAcuityFaceDistancePageViewState
         ),
       );
     } else {
-      return PopScope(
-        canPop: false,
-        onPopInvoked: (value) async {
-          final NavigatorState navigator = Navigator.of(context);
-          if (value) return;
-          logger.d("VisualAcuityFaceDistancePage: Pop Invoked");
-          _addLoading();
-          navigator.pop();
-        },
-        child: Scaffold(
-          appBar: CustomAppbar(
-            leadingIcon: IconButton(
-              onPressed: () async {
-                final NavigatorState navigator = Navigator.of(context);
-                logger.d("VisualAcuityFaceDistancePage: Back Button Pressed");
-                _addLoading();
-                navigator.pop();
-              },
-              icon: const Icon(Icons.close),
-            ),
-            title: const Text(
-              'Distance to Face',
-            ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Text(
-                  "Please keep your face at 40 cm from the screen",
-                  textAlign: TextAlign.center,
-                  style: applyRobotoFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Expanded(
-                  child: Stack(
-                    fit: StackFit.expand,
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: _controller.value.isInitialized
-                              ? (Platform.isAndroid || Platform.isIOS)
-                                  ? CameraPreview(
-                                      _controller,
-                                      child: _customPaint,
-                                    )
-                                  : CameraPreview(
-                                      _controller,
-                                    )
-                              : Container(),
-                        ),
-                      ),
-                      Positioned(
-                        top: AppSize.height(context) * 0.06,
-                        left: AppSize.width(context) * 0.2,
-                        right: AppSize.width(context) * 0.2,
-                        child: Visibility(
-                          visible: Platform.isAndroid || Platform.isIOS,
-                          child: Container(
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.black.withOpacity(0.8),
-                            ),
-                            child: AutoSizeText(
-                              _distanceToFace != null
-                                  ? 'Distance to Face: $_distanceToFace cm'
-                                  : 'Bring your face inside the box',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: isValidDistance
-                                    ? const Color(0xff22BF85)
-                                    : AppColor.red,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      () {
-                        if (Platform.isAndroid || Platform.isIOS) {
-                          return Positioned(
-                            bottom: AppSize.height(context) * 0.04,
-                            left: AppSize.width(context) * 0.1,
-                            right: AppSize.width(context) * 0.1,
-                            child: ElevatedButton(
-                              onPressed: isValidDistance
-                                  ? () {
-                                      final NavigatorState navigator =
-                                          Navigator.of(context);
-                                      logger.d(
-                                          "VisualAcuityFaceDistancePage: Next Button Pressed");
-                                      _addLoading();
-                                      navigator.pushReplacement(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const VisualAcuityTumblingLeftEyeInstruction(),
-                                        ),
-                                      );
-                                    }
-                                  : null,
-                              child: const Text("Proceed"),
-                            ),
-                          );
-                        } else {
-                          return Positioned(
-                            bottom: AppSize.height(context) * 0.04,
-                            left: AppSize.width(context) * 0.1,
-                            right: AppSize.width(context) * 0.1,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                final NavigatorState navigator =
-                                    Navigator.of(context);
-                                logger.d(
-                                    "VisualAcuityFaceDistancePage: Next Button Pressed");
-                                _addLoading();
-                                navigator.pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const VisualAcuityTumblingLeftEyeInstruction(),
-                                  ),
-                                );
-                              },
-                              child: const Text("Proceed"),
-                            ),
-                          );
-                        }
-                      }(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return widget.onCameraCreated(
+        _controller,
+        _customPaint,
+        _distanceToFace,
+        _isLoading,
       );
     }
   }
-
-  bool get isValidDistance =>
-      _distanceToFace != null &&
-      _distanceToFace! >= 35 &&
-      _distanceToFace! <= 45;
 }

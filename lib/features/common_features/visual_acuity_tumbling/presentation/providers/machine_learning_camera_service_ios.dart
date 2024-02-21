@@ -1,14 +1,13 @@
 import 'dart:math';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
-    as mlkit;
-import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+
 import 'dart:io';
 import 'package:camera/camera.dart';
 import '../widgets/coordinates_translator.dart';
 
-class MachineLearningCameraService {
+class MachineLearningCameraServiceIOS {
   static final Map<DeviceOrientation, int> _orientations = {
     DeviceOrientation.portraitUp: 0,
     DeviceOrientation.landscapeLeft: 90,
@@ -30,7 +29,7 @@ class MachineLearningCameraService {
     }
   }
 
-  static InputImage? inputImageFromCameraImage({
+  static InputImage? inputImageFromCameraImageIos({
     required CameraImage image,
     required CameraDescription camera,
     required DeviceOrientation deviceOrientation,
@@ -67,7 +66,9 @@ class MachineLearningCameraService {
     // * bgra8888 for iOS
     if (format == null ||
         (Platform.isAndroid && format != InputImageFormat.nv21) ||
-        (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
+        (Platform.isIOS && format != InputImageFormat.bgra8888)) {
+      return null;
+    }
 
     // since format is constraint to nv21 or bgra8888, both only have one plane
     if (image.planes.length != 1) return null;
@@ -88,69 +89,8 @@ class MachineLearningCameraService {
     );
   }
 
-  static mlkit.InputImage? inputImageFromCameraImageIos({
-    required CameraImage image,
-    required CameraDescription camera,
-    required DeviceOrientation deviceOrientation,
-  }) {
-    // get image rotation
-    // it is used in android to convert the InputImage from Dart to Java: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/google_mlkit_commons/android/src/main/java/com/google_mlkit_commons/InputImageConverter.java
-    // `rotation` is not used in iOS to convert the InputImage from Dart to Obj-C: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/google_mlkit_commons/ios/Classes/MLKVisionImage%2BFlutterPlugin.m
-    // in both platforms `rotation` and `camera.lensDirection` can be used to compensate `x` and `y` coordinates on a canvas: https://github.com/flutter-ml/google_ml_kit_flutter/blob/master/packages/example/lib/vision_detector_views/painters/coordinates_translator.dart
-
-    final sensorOrientation = camera.sensorOrientation;
-    mlkit.InputImageRotation? rotation;
-    if (Platform.isIOS) {
-      rotation = mlkit.InputImageRotationValue.fromRawValue(sensorOrientation);
-    } else if (Platform.isAndroid) {
-      var rotationCompensation = _orientations[deviceOrientation];
-      if (rotationCompensation == null) return null;
-      if (camera.lensDirection == CameraLensDirection.front) {
-        // front-facing
-        rotationCompensation = (sensorOrientation + rotationCompensation) % 360;
-      } else {
-        // back-facing
-        rotationCompensation =
-            (sensorOrientation - rotationCompensation + 360) % 360;
-      }
-      rotation =
-          mlkit.InputImageRotationValue.fromRawValue(rotationCompensation);
-    }
-    if (rotation == null) return null;
-
-    // get image format
-    final format = mlkit.InputImageFormatValue.fromRawValue(image.format.raw);
-    // validate format depending on platform
-    // only supported formats:
-    // * nv21 for Android
-    // * bgra8888 for iOS
-    if (format == null ||
-        (Platform.isAndroid && format != mlkit.InputImageFormat.nv21) ||
-        (Platform.isIOS && format != mlkit.InputImageFormat.bgra8888)) {
-      return null;
-    }
-
-    // since format is constraint to nv21 or bgra8888, both only have one plane
-    if (image.planes.length != 1) return null;
-    final plane = image.planes.first;
-
-    // compose InputImage using bytes
-    return mlkit.InputImage.fromBytes(
-      bytes: plane.bytes,
-      metadata: mlkit.InputImageMetadata(
-        size: Size(
-          image.width.toDouble(),
-          image.height.toDouble(),
-        ),
-        rotation: rotation, // used only in Android
-        format: format, // used only in iOS
-        bytesPerRow: plane.bytesPerRow, // used only in iOS
-      ),
-    );
-  }
-
-  static FaceMesh getLargestFace(List<FaceMesh> faces) {
-    FaceMesh largestFace = faces.reduce(
+  static Face getLargestFaceIos(List<Face> faces) {
+    Face largestFace = faces.reduce(
       (currentFace, nextFace) =>
           (currentFace.boundingBox.width * currentFace.boundingBox.height) >
                   (nextFace.boundingBox.width * nextFace.boundingBox.height)
@@ -158,68 +98,6 @@ class MachineLearningCameraService {
               : nextFace,
     );
     return largestFace;
-  }
-
-  static mlkit.Face getLargestFaceIos(List<mlkit.Face> faces) {
-    mlkit.Face largestFace = faces.reduce(
-      (currentFace, nextFace) =>
-          (currentFace.boundingBox.width * currentFace.boundingBox.height) >
-                  (nextFace.boundingBox.width * nextFace.boundingBox.height)
-              ? currentFace
-              : nextFace,
-    );
-    return largestFace;
-  }
-
-  static Point<double> getEyeLandmark(List<FaceMeshPoint> eyeContours) {
-    double leastX = 999999999;
-    double leastY = 999999999;
-    double highestX = 0;
-    double highestY = 0;
-
-    for (final point in eyeContours) {
-      final x = point.x;
-      final y = point.y;
-      if (x < leastX) {
-        leastX = x;
-      }
-      if (x > highestX) {
-        highestX = x;
-      }
-      if (y < leastY) {
-        leastY = y;
-      }
-      if (y > highestY) {
-        highestY = y;
-      }
-    }
-    double eyeLandmarkX = (highestX + leastX) / 2;
-    double eyeLandmarkY = (highestY + leastY) / 2;
-    Point<double> eyeLandmark = Point<double>(eyeLandmarkX, eyeLandmarkY);
-    return eyeLandmark;
-  }
-
-  static int calculateDistanceToScreen({
-    required Point<double> leftEyeLandmark,
-    required Point<double> rightEyeLandmark,
-    required double focalLength,
-    required double sensorX,
-    required double sensorY,
-    required int imageWidth,
-    required int imageHeight,
-    double averageEyeDistance = 63.0,
-  }) {
-    double deltaX = (leftEyeLandmark.x - rightEyeLandmark.x).abs().toDouble();
-    double deltaY = (leftEyeLandmark.y - rightEyeLandmark.y).abs().toDouble();
-    double distance;
-    if (deltaX >= deltaY) {
-      distance =
-          focalLength * (averageEyeDistance / sensorX) * (imageWidth / deltaX);
-    } else {
-      distance =
-          focalLength * (averageEyeDistance / sensorY) * (imageHeight / deltaY);
-    }
-    return (distance / 10).round();
   }
 
   static int calculateDistanceToScreenIos({
@@ -245,31 +123,9 @@ class MachineLearningCameraService {
     return (distance / 10).round();
   }
 
-  static Point<double> translator(
-    Point<double> point,
-    InputImage inputImage,
-    Size canvasSize,
-    CameraLensDirection cameraLensDirection,
-  ) {
-    final x = translateX(
-      point.x,
-      canvasSize,
-      inputImage.metadata!.size,
-      inputImage.metadata!.rotation,
-      cameraLensDirection,
-    );
-    final y = translateY(
-      point.y,
-      canvasSize,
-      inputImage.metadata!.size,
-      inputImage.metadata!.rotation,
-    );
-    return Point(x, y);
-  }
-
   static Point<double> translatorIos(
     Point<int> point,
-    mlkit.InputImage inputImage,
+    InputImage inputImage,
     Size canvasSize,
     CameraLensDirection cameraLensDirection,
   ) {
