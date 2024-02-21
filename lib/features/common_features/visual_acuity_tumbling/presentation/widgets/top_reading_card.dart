@@ -35,6 +35,7 @@ class TopReadingCard extends ConsumerStatefulWidget {
 class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
+  // ignore: unused_field
   CustomPaint? _customPaint;
   late CameraController _controller;
   final CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
@@ -365,7 +366,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
           horizontal: AppSize.kmpadding - 3,
           vertical: AppSize.kmpadding,
         ),
-        // add innershadow
+        // add inner shadow
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.klradius),
         ),
@@ -421,7 +422,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard>
                                   ? context.loc!.leftEyeString
                                   : (model.currentEye == Eye.right
                                       ? context.loc!.rightEyeString
-                                      : context.loc!.bothEyeString),
+                                      : context.loc!.bothEyesString),
                               style: applyFiraSansFont(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,

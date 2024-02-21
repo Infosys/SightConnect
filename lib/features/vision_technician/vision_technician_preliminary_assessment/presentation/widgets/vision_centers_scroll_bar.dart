@@ -66,8 +66,9 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
 
-    if (viewState.isLoading)
+    if (viewState.isLoading) {
       const Center(child: CircularProgressIndicator.adaptive());
+    }
 
     if (viewState.errorMessage != null) {
       return VisionCenterError(
@@ -156,6 +157,7 @@ class VisionCenterError extends StatelessWidget {
     this.ref,
   });
   final NearByVisionCenterState viewState;
+  // ignore: prefer_typing_uninitialized_variables
   final ref;
   @override
   Widget build(BuildContext context) {

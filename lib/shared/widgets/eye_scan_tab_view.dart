@@ -94,6 +94,7 @@ class _EyeScanImage extends StatelessWidget {
   const _EyeScanImage({
     required this.image,
     required this.name,
+    // ignore: unused_element
     super.key,
   });
 

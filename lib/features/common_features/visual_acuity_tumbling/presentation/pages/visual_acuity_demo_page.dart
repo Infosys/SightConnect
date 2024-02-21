@@ -113,7 +113,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                             demoData[QuestionDirection.down];
                         swipeText.value = loc.vaSwipeDown;
                         tumblingAngle.value = 7.85;
-                        //slider value 0 represt tranform movement of up, i want a value that makes it rotate 180 to down
+                        //slider value 0 repeat transform movement of up, i want a value that makes it rotate 180 to down
                         sliderValue.value = 180.0;
                         countValue.value++;
                       }

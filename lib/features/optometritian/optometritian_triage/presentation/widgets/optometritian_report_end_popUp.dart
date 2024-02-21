@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:ui';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';

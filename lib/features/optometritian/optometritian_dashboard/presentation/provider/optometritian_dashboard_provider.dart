@@ -30,12 +30,14 @@ class OptometricianDashboardProvider extends ChangeNotifier {
   OptometricianDashboardModel _optometricianDashboardModel =
       const OptometricianDashboardModel();
 
+  // ignore: unnecessary_getters_setters
   OptometricianDashboardModel get optometricianDashboard =>
       _optometricianDashboardModel;
 
   set optometricianDashboard(OptometricianDashboardModel value) =>
       _optometricianDashboardModel = value;
 
+  // ignore: unnecessary_getters_setters
   bool get isLoading => _isLoading;
 
   set isLoading(bool value) => _isLoading = value;

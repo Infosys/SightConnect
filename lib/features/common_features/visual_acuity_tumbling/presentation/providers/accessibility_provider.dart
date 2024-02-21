@@ -8,7 +8,7 @@ var accessibilityProvider = ChangeNotifierProvider(
 );
 
 class AccessibilityProvider extends ChangeNotifier {
-  double _brightness = 0.0;
+  final double _brightness = 0.0;
   double _threshold = 60.0;
   int _serverThreshold = 60;
   AccessibilityProvider();

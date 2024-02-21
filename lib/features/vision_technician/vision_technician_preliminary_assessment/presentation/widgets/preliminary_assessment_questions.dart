@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';

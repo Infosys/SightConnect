@@ -46,6 +46,7 @@ class VtTriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final VtProfileModel? _vtProfile;
+  // ignore: unused_field
   final TriageLocalSource _triageLocalSource;
   final VisionTechnicianTriageProvider _visionTechnicianTriageProvider;
   final CarePlanViewModel _carePlanViewModelProvider;
@@ -94,9 +95,9 @@ class VtTriageProvider extends ChangeNotifier {
     List<PostTriageQuestionModel> questionResponse =
         _visionTechnicianTriageProvider.getQuestionaireResponse();
     logger.d("question response called $questionResponse");
-    final quessionnaireUrgency =
+    final questionnaireUrgency =
         _triageUrgencyRepository.questionnaireUrgency(questionResponse);
-    logger.d("quessionnaireUrgency called $quessionnaireUrgency");
+    logger.d("questionnaireUrgency called $questionnaireUrgency");
     final visualAcuityUrgency =
         _triageUrgencyRepository.visualAcuityUrgency(observations);
     logger.d("visualAcuityUrgency called $visualAcuityUrgency");
@@ -104,12 +105,12 @@ class VtTriageProvider extends ChangeNotifier {
         _triageUrgencyRepository.eyeScanUrgency(imageSelection);
     logger.d("eyeScanUrgency called $eyeScanUrgency");
     final triageUrgency = _triageUrgencyRepository.totalTriageUrgency(
-      quessionnaireUrgency,
+      questionnaireUrgency,
       visualAcuityUrgency,
       eyeScanUrgency,
     );
     logger.d("triageUrgency called $triageUrgency");
-    //inject assesment
+    //inject assessment
     DiagnosticReportTemplateFHIRModel assessment =
         _visionTechnicianTriageProvider.assessment;
 
@@ -127,7 +128,7 @@ class VtTriageProvider extends ChangeNotifier {
       assessmentVersion: assessment.version, //questionnaire MS
       cummulativeScore: triageUrgency.toInt(),
       score: [
-        {"QUESTIONNAIRE": quessionnaireUrgency},
+        {"QUESTIONNAIRE": questionnaireUrgency},
         {"OBSERVATION": visualAcuityUrgency},
         {"IMAGE": eyeScanUrgency}
       ],
