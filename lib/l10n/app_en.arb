@@ -423,5 +423,22 @@
   "vtStatus": "Status",
   "vtTimeline": "Timeline",
   "vtCategory": "Category",
-  "vtNoDataFound": "No Data Found"
+  "vtNoDataFound": "No Data Found",
+  "appCameraCapture": "Capture",
+  "appCameraRetake": "Retake",
+  "appCameraUsePhoto": "Use Photo",
+  "appCameraCancel": "Cancel",
+  "appCameraNotFound": "Camera not found",
+  "appCameraException": "Camera Exception",
+  "appCameraProgressMessage": "Loading...",
+  "internetLostNoConnection": "No Internet Connection",
+  "internetLostRetry": "Retry",
+  "secureJailbreak": "It seems your device is jailbroken",
+  "secureRestrictedAccess": "For security reasons, access to this app is restricted on jailbroken devices.",
+  "secureExitApp": "Exit App",
+  "sharedErrorPageIssues": "We are facing some issues. Please try again later.",
+  "appointmentBookingTitle": "Appointment Booking",
+  "comingSoon": "Coming Soon...",
+  "miniappService": "Service",
+  "miniappConsole": "Console"
 }

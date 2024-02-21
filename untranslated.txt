@@ -147,7 +147,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "bn": [
@@ -298,7 +314,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "gu": [
@@ -449,7 +481,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "hi": [
@@ -600,7 +648,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "kn": [
@@ -751,7 +815,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "ml": [
@@ -902,7 +982,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "mr": [
@@ -1053,7 +1149,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "or": [
@@ -1204,7 +1316,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "ta": [
@@ -1355,7 +1483,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "te": [
@@ -1506,7 +1650,23 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ],
 
   "ur": [
@@ -1657,6 +1817,22 @@
     "vtStatus",
     "vtTimeline",
     "vtCategory",
-    "vtNoDataFound"
+    "vtNoDataFound",
+    "appCameraCapture",
+    "appCameraRetake",
+    "appCameraUsePhoto",
+    "appCameraNotFound",
+    "appCameraException",
+    "appCameraCancel",
+    "internetLostNoConnection",
+    "internetLostRetry",
+    "secureJailbreak",
+    "secureRestrictedAccess",
+    "secureExitApp",
+    "sharedErrorPageIssues",
+    "appointmentBookingTitle",
+    "comingSoon",
+    "miniappService",
+    "miniappConsole"
   ]
 }

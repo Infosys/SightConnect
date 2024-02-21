@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ class InternetLostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Scaffold(
       body: Center(
         child: Column(
@@ -17,8 +19,8 @@ class InternetLostPage extends StatelessWidget {
               Icons.wifi_off,
               size: 100,
             ),
-            const Center(
-              child: Text("No Internet Connection"),
+            Center(
+              child: Text(loc.internetLostNoConnection),
             ),
             const SizedBox(
               height: 20,
@@ -29,7 +31,7 @@ class InternetLostPage extends StatelessWidget {
                     InitializationPage.routeName,
                     (Route<dynamic> route) => false);
               },
-              child: const Text("Retry"),
+              child: Text(loc.internetLostRetry),
             ),
           ],
         ),
