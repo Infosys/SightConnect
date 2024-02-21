@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/provide
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,11 +33,12 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     ref.listen(getPatientProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.d("Logged out from PatientDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
-          Fluttertoast.showToast(msg: "You have been logged out");
+          Fluttertoast.showToast(msg: loc.patientLoggedOut);
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginPage.routeName,
@@ -45,9 +47,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
         }).catchError((e) {
           logger.e(
               "Apologies, we encountered a logout error in the mobile app. from PatientDashboardPage : $e");
-          Fluttertoast.showToast(
-              msg:
-                  "Apologies, we encountered a logout error in the mobile app.");
+          Fluttertoast.showToast(msg: loc.patientLogoutError);
         });
       }
     });

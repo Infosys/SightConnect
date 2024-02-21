@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_scan_carousel.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 
@@ -26,10 +27,11 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var carouselController = useState<CarouselController>(CarouselController());
     var activeIndex = useState<int>(0);
+    final loc = context.loc!;
     return Scaffold(
-      appBar: const CustomAppbar(
+      appBar: CustomAppbar(
         title: Text(
-          "Steps to do the retinal scanning",
+          loc.patientStepsToScan,
         ),
       ),
       body: Column(
@@ -112,8 +114,8 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
               },
               child: Text(
                 activeIndex.value == 6
-                    ? "Proceed to Scan"
-                    : "Skip & Proceed to Scan",
+                    ? loc.patientProceedToScan
+                    : loc.patientSkipAndProceedToScan,
                 style: applyRobotoFont(
                   fontWeight: FontWeight.w500,
                   color: activeIndex.value == 6

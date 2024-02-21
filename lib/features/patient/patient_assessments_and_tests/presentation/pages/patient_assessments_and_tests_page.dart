@@ -112,7 +112,8 @@ class _AssessmentsAndTestsPageState
                       try {
                         await model.refeshReports();
                       } catch (e) {
-                        Fluttertoast.showToast(msg: "Error in fetching report");
+                        Fluttertoast.showToast(
+                            msg: loc.patientErrorFetchingReport);
                       }
                     },
                     onViewReport: (report) async {
@@ -129,7 +130,8 @@ class _AssessmentsAndTestsPageState
                           ),
                         );
                       } catch (e) {
-                        Fluttertoast.showToast(msg: "Error in fetching report");
+                        Fluttertoast.showToast(
+                            msg: loc.patientErrorFetchingReport);
                       }
                     },
                     onViewHistory: (report) {
@@ -176,6 +178,7 @@ class _AssessmentsAndTestsPageState
     required Function() onRefresh,
     required ScrollController scrollController,
   }) {
+    final loc = context.loc!;
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () async {
@@ -204,7 +207,7 @@ class _AssessmentsAndTestsPageState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               AutoSizeText(
-                                'EID: ${currentData.encounterId}',
+                                '${loc.patientEID}: ${currentData.encounterId}',
                                 minFontSize: 12,
                                 maxLines: 1,
                                 style: applyFiraSansFont(
@@ -291,7 +294,7 @@ class _AssessmentsAndTestsPageState
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: hasMore
                       ? const CircularProgressIndicator.adaptive()
-                      : const Text("No more data"),
+                      : Text(loc.patientNoMoreData),
                 ),
               );
             }
