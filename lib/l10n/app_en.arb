@@ -284,5 +284,17 @@
   "triageEyeScanUpdatedSuccessfully": "Eye scan updated successfully",
   "triageErrorEyeScanNotUpdated": "Eye scan not updated!",
   "triageLeftEyeString": "Left Eye",
-  "triageRightEyeString": "Right Eye"
+  "triageRightEyeString": "Right Eye",
+  "vaEyeTest": "Eye Test",
+  "instructions": "Instructions",
+  "vaSwipeUp": "Swipe Up",
+  "vaSwipeDown": "Swipe Down",
+  "vaSwipeLeft": "Swipe Left",
+  "vaSwipeRight": "Swipe Right",
+  "vaSwipeGestureError": "Invalid swipe gesture. Please try again.",
+  "permissionNotGranted": "Permission not granted",
+  "serviceNotAvailable": "Service not available",
+  "vaDistanceToFace": "Distance to face",
+  "vaDistanceToFaceInstruction": "Please ensure that the camera is 40cm away from your face",
+  "vaBringFaceInsideBox": "Bring your face inside the box"
 }

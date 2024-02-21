@@ -15,7 +15,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "bn": [
@@ -34,7 +46,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "gu": [
@@ -53,7 +77,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "hi": [
@@ -72,7 +108,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "kn": [
@@ -91,7 +139,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "ml": [
@@ -110,7 +170,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "mr": [
@@ -129,7 +201,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "or": [
@@ -148,7 +232,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "ta": [
@@ -167,7 +263,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "te": [
@@ -186,7 +294,19 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ],
 
   "ur": [
@@ -205,6 +325,18 @@
     "triageEyeScanUpdatedSuccessfully",
     "triageErrorEyeScanNotUpdated",
     "triageLeftEyeString",
-    "triageRightEyeString"
+    "triageRightEyeString",
+    "vaEyeTest",
+    "instructions",
+    "vaSwipeUp",
+    "vaSwipeDown",
+    "vaSwipeLeft",
+    "vaSwipeRight",
+    "vaSwipeGestureError",
+    "permissionNotGranted",
+    "serviceNotAvailable",
+    "vaDistanceToFace",
+    "vaDistanceToFaceInstruction",
+    "vaBringFaceInsideBox"
   ]
 }

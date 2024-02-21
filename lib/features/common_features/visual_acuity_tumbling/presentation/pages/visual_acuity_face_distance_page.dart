@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -320,6 +321,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
@@ -354,8 +356,8 @@ class _VisualAcuityFaceDistancePageViewState
               },
               icon: const Icon(Icons.close),
             ),
-            title: const Text(
-              'Distance to Face',
+            title: Text(
+              loc.vaDistanceToFace,
             ),
           ),
           body: Padding(
@@ -363,7 +365,7 @@ class _VisualAcuityFaceDistancePageViewState
             child: Column(
               children: [
                 Text(
-                  "Please keep your face at 40 cm from the screen",
+                  loc.vaDistanceToFaceInstruction,
                   textAlign: TextAlign.center,
                   style: applyRobotoFont(
                     fontSize: 16,
@@ -404,8 +406,8 @@ class _VisualAcuityFaceDistancePageViewState
                             ),
                             child: AutoSizeText(
                               _distanceToFace != null
-                                  ? 'Distance to Face: $_distanceToFace cm'
-                                  : 'Bring your face inside the box',
+                                  ? '${loc.vaDistanceToFace}: $_distanceToFace cm'
+                                  : loc.vaBringFaceInsideBox,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: isValidDistance
@@ -437,7 +439,7 @@ class _VisualAcuityFaceDistancePageViewState
                                       );
                                     }
                                   : null,
-                              child: const Text("Proceed"),
+                              child: Text(loc.proceedButton),
                             ),
                           );
                         } else {
@@ -458,7 +460,7 @@ class _VisualAcuityFaceDistancePageViewState
                                   ),
                                 );
                               },
-                              child: const Text("Proceed"),
+                              child: Text(loc.proceedButton),
                             ),
                           );
                         }
