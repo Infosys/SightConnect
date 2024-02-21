@@ -16,6 +16,7 @@ import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PatientHomePage extends ConsumerWidget {
@@ -23,6 +24,10 @@ class PatientHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    AppUpdateInfo? updateInfo;
+    InAppUpdate.checkForUpdate().then((info) {
+      updateInfo = info;
+    });
     return Scaffold(
       extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(
