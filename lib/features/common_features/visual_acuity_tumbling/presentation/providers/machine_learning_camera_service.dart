@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
     as mlkit;
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
-
 import 'dart:io';
 import 'package:camera/camera.dart';
 import '../widgets/coordinates_translator.dart';
@@ -172,51 +171,6 @@ class MachineLearningCameraService {
     return largestFace;
   }
 
-  static int calculateDistanceToScreenIos({
-    required Point<int> leftEyeLandmark,
-    required Point<int> rightEyeLandmark,
-    required double focalLength,
-    required double sensorX,
-    required double sensorY,
-    required int imageWidth,
-    required int imageHeight,
-    double averageEyeDistance = 63.0,
-  }) {
-    double deltaX = (leftEyeLandmark.x - rightEyeLandmark.x).abs().toDouble();
-    double deltaY = (leftEyeLandmark.y - rightEyeLandmark.y).abs().toDouble();
-    double distance;
-    if (deltaX >= deltaY) {
-      distance =
-          focalLength * (averageEyeDistance / sensorX) * (imageWidth / deltaX);
-    } else {
-      distance =
-          focalLength * (averageEyeDistance / sensorY) * (imageHeight / deltaY);
-    }
-    return (distance / 10).round();
-  }
-
-  static Point<double> translatorIos(
-    Point<int> point,
-    mlkit.InputImage inputImage,
-    Size canvasSize,
-    CameraLensDirection cameraLensDirection,
-  ) {
-    final x = translateX(
-      point.x.toDouble(),
-      canvasSize,
-      inputImage.metadata!.size,
-      inputImage.metadata!.rotation,
-      cameraLensDirection,
-    );
-    final y = translateY(
-      point.y.toDouble(),
-      canvasSize,
-      inputImage.metadata!.size,
-      inputImage.metadata!.rotation,
-    );
-    return Point(x, y);
-  }
-
   static Point<double> getEyeLandmark(List<FaceMeshPoint> eyeContours) {
     double leastX = 999999999;
     double leastY = 999999999;
@@ -268,6 +222,29 @@ class MachineLearningCameraService {
     return (distance / 10).round();
   }
 
+  static int calculateDistanceToScreenIos({
+    required Point<int> leftEyeLandmark,
+    required Point<int> rightEyeLandmark,
+    required double focalLength,
+    required double sensorX,
+    required double sensorY,
+    required int imageWidth,
+    required int imageHeight,
+    double averageEyeDistance = 63.0,
+  }) {
+    double deltaX = (leftEyeLandmark.x - rightEyeLandmark.x).abs().toDouble();
+    double deltaY = (leftEyeLandmark.y - rightEyeLandmark.y).abs().toDouble();
+    double distance;
+    if (deltaX >= deltaY) {
+      distance =
+          focalLength * (averageEyeDistance / sensorX) * (imageWidth / deltaX);
+    } else {
+      distance =
+          focalLength * (averageEyeDistance / sensorY) * (imageHeight / deltaY);
+    }
+    return (distance / 10).round();
+  }
+
   static Point<double> translator(
     Point<double> point,
     InputImage inputImage,
@@ -283,6 +260,28 @@ class MachineLearningCameraService {
     );
     final y = translateY(
       point.y,
+      canvasSize,
+      inputImage.metadata!.size,
+      inputImage.metadata!.rotation,
+    );
+    return Point(x, y);
+  }
+
+  static Point<double> translatorIos(
+    Point<int> point,
+    mlkit.InputImage inputImage,
+    Size canvasSize,
+    CameraLensDirection cameraLensDirection,
+  ) {
+    final x = translateX(
+      point.x.toDouble(),
+      canvasSize,
+      inputImage.metadata!.size,
+      inputImage.metadata!.rotation,
+      cameraLensDirection,
+    );
+    final y = translateY(
+      point.y.toDouble(),
       canvasSize,
       inputImage.metadata!.size,
       inputImage.metadata!.rotation,

@@ -11,12 +11,11 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart' as mlkit;
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:superapp_scanner/constants/app_color.dart';
 import '../providers/machine_learning_camera_service.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
-    as mlkit;
 
 class VisualAcuityFaceDistancePage extends StatefulWidget {
   const VisualAcuityFaceDistancePage({
@@ -179,13 +178,105 @@ class _VisualAcuityFaceDistancePageViewState
       _processImage(inputImage);
     } else if (Platform.isIOS) {
       final mlkit.InputImage? inputImage =
-          MachineLearningCameraService.inputImageFromCameraImage(
+          MachineLearningCameraService.inputImageFromCameraImageIos(
         image: image,
         camera: camera,
         deviceOrientation: orientation,
       );
       if (inputImage == null) return;
       _processImageIos(inputImage);
+    }
+  }
+
+  // Function to process the frames as per our requirements
+  Future<void> _processImage(InputImage inputImage) async {
+    if (!_canProcess) return;
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
+    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
+    // Measurement of the Fixed Center Eye Scanner Box
+    const double boxSizeRatio = 0.7;
+    const double boxCenterRatio = 0.5;
+    final double boxWidth = _canvasSize.width * boxSizeRatio;
+    final double boxHeight = _canvasSize.height * boxSizeRatio;
+    final Point<double> boxCenter = Point(
+      _canvasSize.width * boxCenterRatio,
+      _canvasSize.height * boxCenterRatio,
+    );
+
+    if (meshes.isNotEmpty) {
+      final mesh = MachineLearningCameraService.getLargestFace(meshes);
+      final List<FaceMeshPoint>? leftEyeContour =
+          mesh.contours[FaceMeshContourType.leftEye];
+      final List<FaceMeshPoint>? rightEyeContour =
+          mesh.contours[FaceMeshContourType.rightEye];
+      if (leftEyeContour != null && rightEyeContour != null) {
+        final List<Point<double>> eyeLandmarks = [
+          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
+          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
+        ];
+
+        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+          return MachineLearningCameraService.translator(
+            landmark,
+            inputImage,
+            _canvasSize,
+            _cameraLensDirection,
+          );
+        }).toList();
+
+        final bool eyeLandmarksInsideTheBox =
+            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+          _translatedEyeLandmarks,
+          boxCenter,
+          boxWidth,
+          boxHeight,
+        );
+
+        if (eyeLandmarksInsideTheBox) {
+          _distanceToFace =
+              MachineLearningCameraService.calculateDistanceToScreen(
+            leftEyeLandmark: eyeLandmarks[0],
+            rightEyeLandmark: eyeLandmarks[1],
+            focalLength: _focalLength,
+            sensorX: _sensorX,
+            sensorY: _sensorY,
+            imageWidth: inputImage.metadata!.size.width.toInt(),
+            imageHeight: inputImage.metadata!.size.height.toInt(),
+          );
+        } else {
+          _distanceToFace = null;
+        }
+      } else {
+        _distanceToFace = null;
+      }
+    } else {
+      _distanceToFace = null;
+      _translatedEyeLandmarks = [];
+    }
+
+    // Calling the Distance Calculator Painter
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final VisualAcuityFaceDistancePainter painter =
+          VisualAcuityFaceDistancePainter(
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _translatedEyeLandmarks,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
+    _isBusy = false;
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -247,98 +338,6 @@ class _VisualAcuityFaceDistancePageViewState
               MachineLearningCameraService.calculateDistanceToScreenIos(
             leftEyeLandmark: leftEyeLandmarkPosition,
             rightEyeLandmark: rightEyeLandmarkPosition,
-            focalLength: _focalLength,
-            sensorX: _sensorX,
-            sensorY: _sensorY,
-            imageWidth: inputImage.metadata!.size.width.toInt(),
-            imageHeight: inputImage.metadata!.size.height.toInt(),
-          );
-        } else {
-          _distanceToFace = null;
-        }
-      } else {
-        _distanceToFace = null;
-      }
-    } else {
-      _distanceToFace = null;
-      _translatedEyeLandmarks = [];
-    }
-
-    // Calling the Distance Calculator Painter
-    if (inputImage.metadata?.size != null &&
-        inputImage.metadata?.rotation != null) {
-      final VisualAcuityFaceDistancePainter painter =
-          VisualAcuityFaceDistancePainter(
-        boxCenter,
-        boxWidth,
-        boxHeight,
-        _translatedEyeLandmarks,
-        (size) {
-          _canvasSize = size;
-        },
-      );
-      _customPaint = CustomPaint(painter: painter);
-    } else {
-      _customPaint = null;
-    }
-
-    _isBusy = false;
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  // Function to process the frames as per our requirements
-  Future<void> _processImage(InputImage inputImage) async {
-    if (!_canProcess) return;
-    if (_isBusy) return;
-    _isBusy = true;
-    setState(() {});
-    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
-    // Measurement of the Fixed Center Eye Scanner Box
-    const double boxSizeRatio = 0.7;
-    const double boxCenterRatio = 0.5;
-    final double boxWidth = _canvasSize.width * boxSizeRatio;
-    final double boxHeight = _canvasSize.height * boxSizeRatio;
-    final Point<double> boxCenter = Point(
-      _canvasSize.width * boxCenterRatio,
-      _canvasSize.height * boxCenterRatio,
-    );
-
-    if (meshes.isNotEmpty) {
-      final mesh = MachineLearningCameraService.getLargestFace(meshes);
-      final List<FaceMeshPoint>? leftEyeContour =
-          mesh.contours[FaceMeshContourType.leftEye];
-      final List<FaceMeshPoint>? rightEyeContour =
-          mesh.contours[FaceMeshContourType.rightEye];
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final List<Point<double>> eyeLandmarks = [
-          MachineLearningCameraService.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraService.getEyeLandmark(rightEyeContour),
-        ];
-
-        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraService.translator(
-            landmark,
-            inputImage,
-            _canvasSize,
-            _cameraLensDirection,
-          );
-        }).toList();
-
-        final bool eyeLandmarksInsideTheBox =
-            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
-          _translatedEyeLandmarks,
-          boxCenter,
-          boxWidth,
-          boxHeight,
-        );
-
-        if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              MachineLearningCameraService.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
             focalLength: _focalLength,
             sensorX: _sensorX,
             sensorY: _sensorY,
