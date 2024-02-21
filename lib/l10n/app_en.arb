@@ -29,6 +29,14 @@
     }
   },
   "loginResendOTPIn": "Resend in {time}",
+  "@patientHasAnAppointment": {
+    "placeholders": {
+      "patient": {
+        "type": "String"
+      }
+    }
+  },
+  "patientHasAnAppointment": "{patient} has an appointment",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",
@@ -270,7 +278,6 @@
   "loginInvalidOTP": "Invalid OTP",
   "loginDidntReceiveOTP": "Didn't receive the OTP?",
   "loginOTPSent": "OTP sent successfully",
-  "loginOTPResendIn": "Resend in {time}",
   "areYouSure": "Are you sure?",
   "triageExitConfirmation": "Do you want to exit the Test?",
   "triageReportEyeProblems": "Report Eye Problems",
@@ -333,14 +340,6 @@
   "patientAppointmentTitle": "Appointment",
   "patientBookAppointment": "Book Appointment",
   "patientAppointmentSubtitle": "Your Appointments",
-  "patientHasAnAppointment": "{patient} has an appointment",
-  "@patientHasAnAppointment": {
-    "placeholders": {
-      "patient": {
-        "type": "String"
-      }
-    }
-  },
   "patientTelephoneConsultation": "Telephone Consultation",
   "patientAddress": "Address",
   "patientReschedule": "Reschedule",
