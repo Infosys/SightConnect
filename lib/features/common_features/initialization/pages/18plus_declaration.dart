@@ -3,8 +3,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
+
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +21,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isLoading = useState(false);
-    final loc = context.loc!;
+    // final loc = context.loc!;
     return PopScope(
       canPop: false,
       child: BlurDialogBox(
@@ -68,28 +70,22 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                     }
                     return TextButton(
                       onPressed: () async {
-                        final model = ref.watch(consentRepositoryProvider);
+                        final model = ref.read(initializationProvider);
                         final navigator = Navigator.of(context);
                         try {
                           isLoading.value = true;
-                          final consent =
-                              await model.getConsent(type: "AGE_DECLARATION");
-                          await model.setConsent(
-                            ConsentModel(
-                              templateId: consent.templateId,
-                              consentVersion: consent.consentVersion,
-                              consentStatus: ConsentStatus.ACKNOWLEDGED,
-                              acknowledgeDate:
-                                  DateTime.now().toUtc().toIso8601String(),
-                            ),
-                          );
-
+                          await model.sumbitEighteenPlusDeclaration();
                           navigator.pop(true);
-                          isLoading.value = false;
                         } catch (e) {
                           logger.e(e);
+                          Fluttertoast.showToast(
+                            msg:
+                                "Failed to submit declaration. Please try again later.",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        } finally {
                           isLoading.value = false;
-                          Fluttertoast.showToast(msg: loc.somethingWentWrong);
                         }
                       },
                       child: const Text("I Agree"),

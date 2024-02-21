@@ -294,8 +294,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               InitializationPage.routeName, (route) => false);
                         } on DioException catch (e) {
                           otpError.value =
-                              e.response!.data["error_description"] ??
+                              e.response?.data["error_description"] ??
                                   loc.loginInvalidOTP;
+
                           Fluttertoast.showToast(msg: otpError.value);
                         } catch (e) {
                           Fluttertoast.showToast(msg: loc.loginInvalidOTP);

@@ -53,15 +53,13 @@ class _VisualAcuityFaceDistancePageViewState
   void initState() {
     logger.d("VisualAcuityFaceDistancePage: Init State Called");
     super.initState();
-    _isPermissionGranted = false;
-    _isLoading = false;
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _checkPermissions(context));
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
-    logger.d("VisualAcuityFaceDistancePage: Check Permission Called");
+    logger.d("VisualAcuityFaceDistancePage: Check Permissions Called");
     final NavigatorState navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -69,8 +67,10 @@ class _VisualAcuityFaceDistancePageViewState
         _isLoading = false;
       });
     }
+    logger.d("VisualAcuityFaceDistancePage: Checking Permissions");
     final bool isGranted =
         await CameraPermissionService.checkPermissions(context);
+    logger.d("VisualAcuityFaceDistancePage: isGranted: $isGranted");
     if (isGranted) {
       if (mounted) {
         setState(() {
@@ -142,7 +142,8 @@ class _VisualAcuityFaceDistancePageViewState
       _sensorX = cameraInfo?['sensorX'] ?? 0.001;
       _sensorY = cameraInfo?['sensorY'] ?? 0.001;
     } catch (error) {
-      logger.e('Error getting camera info: $error');
+      logger
+          .e('VisualAcuityFaceDistancePage: Error getting camera info: $error');
       rethrow;
     }
   }
@@ -259,8 +260,9 @@ class _VisualAcuityFaceDistancePageViewState
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
       "VisualAcuityFaceDistancePage: AppLifecycleState": "$state",
-      "isPermissionGranted": "$_isPermissionGranted",
-      "isLoading": "$_isLoading",
+      "VisualAcuityFaceDistancePage: isPermissionGranted":
+          "$_isPermissionGranted",
+      "VisualAcuityFaceDistancePage: isLoading": "$_isLoading",
     });
     if (!_isPermissionGranted) {
       return;
@@ -281,6 +283,10 @@ class _VisualAcuityFaceDistancePageViewState
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
       logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.detached");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.hidden) {
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.hidden");
       _addLoading();
       _stopLiveFeed();
     }
@@ -307,7 +313,7 @@ class _VisualAcuityFaceDistancePageViewState
         await _controller.dispose();
       }
     } catch (e) {
-      logger.d('Error stopping live feed: $e');
+      logger.d('VisualAcuityFaceDistancePage: Error stopping live feed: $e');
     }
   }
 
@@ -429,7 +435,8 @@ class _VisualAcuityFaceDistancePageViewState
                                   ? () {
                                       final NavigatorState navigator =
                                           Navigator.of(context);
-                                      logger.d("Next Button Pressed");
+                                      logger.d(
+                                          "VisualAcuityFaceDistancePage: Next Button Pressed");
                                       _addLoading();
                                       navigator.pushReplacement(
                                         MaterialPageRoute(
@@ -451,7 +458,8 @@ class _VisualAcuityFaceDistancePageViewState
                               onPressed: () {
                                 final NavigatorState navigator =
                                     Navigator.of(context);
-                                logger.d("Next Button Pressed");
+                                logger.d(
+                                    "VisualAcuityFaceDistancePage: Next Button Pressed");
                                 _addLoading();
                                 navigator.pushReplacement(
                                   MaterialPageRoute(
