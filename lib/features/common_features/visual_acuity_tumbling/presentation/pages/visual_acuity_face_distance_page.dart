@@ -15,6 +15,8 @@ import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detectio
 import 'package:superapp_scanner/constants/app_color.dart';
 import '../providers/machine_learning_camera_service.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
+    as mlkit;
 
 class VisualAcuityFaceDistancePage extends StatefulWidget {
   const VisualAcuityFaceDistancePage({
@@ -35,6 +37,14 @@ class _VisualAcuityFaceDistancePageViewState
   final FaceMeshDetector _meshDetector = FaceMeshDetector(
     option: FaceMeshDetectorOptions.faceMesh,
   );
+  final mlkit.FaceDetector _faceDetectorIos = mlkit.FaceDetector(
+    options: mlkit.FaceDetectorOptions(
+      enableContours: true,
+      enableLandmarks: true,
+      enableClassification: true,
+    ),
+  );
+
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
   final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
@@ -122,7 +132,7 @@ class _VisualAcuityFaceDistancePageViewState
         if (!mounted) {
           return;
         }
-        if (Platform.isAndroid) {
+        if (Platform.isAndroid || Platform.isIOS) {
           _controller.startImageStream(_processCameraImage);
         }
       },
@@ -140,6 +150,11 @@ class _VisualAcuityFaceDistancePageViewState
       _focalLength = cameraInfo?['focalLength'] ?? 0.001;
       _sensorX = cameraInfo?['sensorX'] ?? 0.001;
       _sensorY = cameraInfo?['sensorY'] ?? 0.001;
+      logger.d({
+        "VisualAcuityFaceDistancePage: Focal Length": "$_focalLength",
+        "VisualAcuityFaceDistancePage: Sensor X": "$_sensorX",
+        "VisualAcuityFaceDistancePage: Sensor Y": "$_sensorY",
+      });
     } catch (error) {
       logger
           .e('VisualAcuityFaceDistancePage: Error getting camera info: $error');
@@ -152,15 +167,125 @@ class _VisualAcuityFaceDistancePageViewState
       (element) => element.lensDirection == _cameraLensDirection,
     );
     final DeviceOrientation orientation = _controller.value.deviceOrientation;
-    final InputImage? inputImage =
-        MachineLearningCameraService.inputImageFromCameraImage(
-      image: image,
-      camera: camera,
-      deviceOrientation: orientation,
-    );
-    if (inputImage == null) return;
 
-    _processImage(inputImage);
+    if (Platform.isAndroid) {
+      final InputImage? inputImage =
+          MachineLearningCameraService.inputImageFromCameraImage(
+        image: image,
+        camera: camera,
+        deviceOrientation: orientation,
+      );
+      if (inputImage == null) return;
+      _processImage(inputImage);
+    } else if (Platform.isIOS) {
+      final mlkit.InputImage? inputImage =
+          MachineLearningCameraService.inputImageFromCameraImage(
+        image: image,
+        camera: camera,
+        deviceOrientation: orientation,
+      );
+      if (inputImage == null) return;
+      _processImageIos(inputImage);
+    }
+  }
+
+  // Function to process the frames as per our requirements
+  Future<void> _processImageIos(mlkit.InputImage inputImage) async {
+    if (!_canProcess) return;
+    if (_isBusy) return;
+    _isBusy = true;
+    setState(() {});
+    final List<mlkit.Face> faces =
+        await _faceDetectorIos.processImage(inputImage);
+
+    // Measurement of the Fixed Center Eye Scanner Box
+    const double boxSizeRatio = 0.7;
+    const double boxCenterRatio = 0.5;
+    final double boxWidth = _canvasSize.width * boxSizeRatio;
+    final double boxHeight = _canvasSize.height * boxSizeRatio;
+    final Point<double> boxCenter = Point(
+      _canvasSize.width * boxCenterRatio,
+      _canvasSize.height * boxCenterRatio,
+    );
+
+    if (faces.isNotEmpty) {
+      final mlkit.Face face =
+          MachineLearningCameraService.getLargestFaceIos(faces);
+      final mlkit.FaceLandmark? leftEyeLandmark =
+          face.landmarks[mlkit.FaceLandmarkType.leftEye];
+      final mlkit.FaceLandmark? rightEyeLandmark =
+          face.landmarks[mlkit.FaceLandmarkType.rightEye];
+      if (leftEyeLandmark != null && rightEyeLandmark != null) {
+        final Point<int> leftEyeLandmarkPosition = leftEyeLandmark.position;
+        final Point<int> rightEyeLandmarkPosition = rightEyeLandmark.position;
+
+        final List<Point<int>> eyeLandmarks = [
+          leftEyeLandmarkPosition,
+          rightEyeLandmarkPosition
+        ];
+
+        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+          return MachineLearningCameraService.translatorIos(
+            landmark,
+            inputImage,
+            _canvasSize,
+            _cameraLensDirection,
+          );
+        }).toList();
+
+        final bool eyeLandmarksInsideTheBox =
+            MachineLearningCameraService.areEyeLandmarksInsideTheBox(
+          _translatedEyeLandmarks,
+          boxCenter,
+          boxWidth,
+          boxHeight,
+        );
+        logger.f("eyeLandmarksInsideTheBox: $eyeLandmarksInsideTheBox");
+
+        if (eyeLandmarksInsideTheBox) {
+          _distanceToFace =
+              MachineLearningCameraService.calculateDistanceToScreenIos(
+            leftEyeLandmark: leftEyeLandmarkPosition,
+            rightEyeLandmark: rightEyeLandmarkPosition,
+            focalLength: _focalLength,
+            sensorX: _sensorX,
+            sensorY: _sensorY,
+            imageWidth: inputImage.metadata!.size.width.toInt(),
+            imageHeight: inputImage.metadata!.size.height.toInt(),
+          );
+        } else {
+          _distanceToFace = null;
+        }
+      } else {
+        _distanceToFace = null;
+      }
+    } else {
+      _distanceToFace = null;
+      _translatedEyeLandmarks = [];
+    }
+
+    // Calling the Distance Calculator Painter
+    if (inputImage.metadata?.size != null &&
+        inputImage.metadata?.rotation != null) {
+      final VisualAcuityFaceDistancePainter painter =
+          VisualAcuityFaceDistancePainter(
+        boxCenter,
+        boxWidth,
+        boxHeight,
+        _translatedEyeLandmarks,
+        (size) {
+          _canvasSize = size;
+        },
+      );
+      _customPaint = CustomPaint(painter: painter);
+    } else {
+      _customPaint = null;
+    }
+
+    _isBusy = false;
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   // Function to process the frames as per our requirements
@@ -305,7 +430,12 @@ class _VisualAcuityFaceDistancePageViewState
     logger.d("VisualAcuityFaceDistancePage: Stop Live Feed Called");
     try {
       _canProcess = false;
-      _meshDetector.close();
+      if (Platform.isAndroid) {
+        _meshDetector.close();
+      } else if (Platform.isIOS) {
+        _faceDetectorIos.close();
+      }
+
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();
@@ -326,6 +456,7 @@ class _VisualAcuityFaceDistancePageViewState
 
   @override
   Widget build(BuildContext context) {
+    logger.f("$_distanceToFace cm");
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
@@ -385,7 +516,7 @@ class _VisualAcuityFaceDistancePageViewState
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: _controller.value.isInitialized
-                              ? Platform.isAndroid
+                              ? (Platform.isAndroid || Platform.isIOS)
                                   ? CameraPreview(
                                       _controller,
                                       child: _customPaint,
@@ -401,7 +532,7 @@ class _VisualAcuityFaceDistancePageViewState
                         left: AppSize.width(context) * 0.2,
                         right: AppSize.width(context) * 0.2,
                         child: Visibility(
-                          visible: Platform.isAndroid,
+                          visible: Platform.isAndroid || Platform.isIOS,
                           child: Container(
                             padding: const EdgeInsets.all(14),
                             decoration: BoxDecoration(
@@ -423,7 +554,7 @@ class _VisualAcuityFaceDistancePageViewState
                         ),
                       ),
                       () {
-                        if (Platform.isAndroid) {
+                        if (Platform.isAndroid || Platform.isIOS) {
                           return Positioned(
                             bottom: AppSize.height(context) * 0.04,
                             left: AppSize.width(context) * 0.1,
