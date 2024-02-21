@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -22,7 +21,6 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../../../core/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
@@ -146,6 +144,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<bool> _isConsentAlreadyAccepted() async {
     final model = ref.watch(consentRepositoryProvider);
+    // ignore: body_might_complete_normally_catch_error
     final consent = await model.getConsent().catchError((e) async {
       logger.e("getConsent: $e");
       await _invalidateAndLogout("Server Error. Please login again.");
@@ -156,6 +155,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<bool> _18PlusDeclarationAccepted() async {
     final model = ref.watch(consentRepositoryProvider);
     final consent = await model.getConsent(type: "AGE_DECLARATION").catchError(
+      // ignore: body_might_complete_normally_catch_error
       (e) async {
         logger.e("18 Plus Declaration: $e");
         await _invalidateAndLogout("Server Error. Please login again.");
@@ -174,7 +174,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            return const EigtheenPlusDeclaration();
+            return const EighteenPlusDeclaration();
           },
         );
       }
