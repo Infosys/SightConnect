@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/camera_preview_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/image_preview.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/vt_eye_scan_stepper.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,13 +30,14 @@ class _VisionTechnicianEyeCaptureState
   int activeStep = 0;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     bool isImageCaptured =
         ref.watch(vtCloseAssessmentHelperProvider).isImageCaptured;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Eye Scan",
+          loc.vtEyeScan,
           style: applyFiraSansFont(fontWeight: FontWeight.w500),
         ),
       ),

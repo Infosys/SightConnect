@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_patient_button.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_search_bar.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,14 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     var query = useState<String>("");
+
     return Scaffold(
       appBar: CustomAppbar(
         centerTitle: false,
         title: Text(
-          "Register Patient",
+          loc.vtRegisterPatient,
           style: applyFiraSansFont(fontWeight: FontWeight.w500),
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/timeline_profile.dart';
 
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +20,13 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
   final VTPatientDto? patientDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     if (patientDetails == null) {
       return Scaffold(
         appBar: AppBar(),
         body: Center(
           child: Text(
-            "No patient found",
+            loc.vtNoPatientFound,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.grey,
@@ -44,7 +46,7 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
             Navigator.pop(context);
           },
           child: Text(
-            "Close",
+            loc.vtClose,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.white,
