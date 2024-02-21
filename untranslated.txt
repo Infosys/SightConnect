@@ -1,45 +1,210 @@
 {
   "as": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "bn": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "gu": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "hi": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "kn": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "ml": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "mr": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "or": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "ta": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "te": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ],
 
   "ur": [
-    "loginOTPResendIn"
+    "bothEyesString",
+    "loginOTPResendIn",
+    "areYouSure",
+    "triageExitConfirmation",
+    "triageReportEyeProblems",
+    "triageHowToReport",
+    "triageReportInstructions",
+    "assessment",
+    "triageOtherSymptomsQuestion",
+    "triageEnterSymptoms",
+    "triageEyeAssessmentResults",
+    "triageTestId",
+    "triageEyeScanUpdatedSuccessfully",
+    "triageErrorEyeScanNotUpdated",
+    "triageLeftEyeString",
+    "triageRightEyeString"
   ]
 }

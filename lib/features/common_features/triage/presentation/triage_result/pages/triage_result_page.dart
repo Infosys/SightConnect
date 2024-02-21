@@ -50,7 +50,7 @@ class TriageResultPage extends ConsumerWidget {
               color: AppColor.black,
             ),
           ),
-          title: Text(loc.eyeAssessmentResults),
+          title: Text(loc.triageEyeAssessmentResults),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -70,7 +70,7 @@ class TriageResultPage extends ConsumerWidget {
                   triageResult: model.getOverallTriageResult(),
                   id: triageResult.subject,
                   testDate: triageResult.userStartDate?.formateDate,
-                  testId: "Test ID: ${triageResult.id}",
+                  testId: "${loc.triageTestId} ${triageResult.id}",
                 ),
                 const SizedBox(height: AppSize.kmheight),
                 Container(

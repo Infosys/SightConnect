@@ -48,11 +48,12 @@ class UpdateTriageEyeCapturingPage extends HookConsumerWidget {
               bool response =
                   await model.updateEyeScanReport(diagnosticReportId);
               if (response) {
-                Fluttertoast.showToast(msg: "Eye scan updated successfully");
+                Fluttertoast.showToast(
+                    msg: loc.triageEyeScanUpdatedSuccessfully);
                 navigator.pop();
                 navigator.pop();
               } else {
-                Fluttertoast.showToast(msg: "Error: Eye scan not updated");
+                Fluttertoast.showToast(msg: loc.triageErrorEyeScanNotUpdated);
               }
             } catch (e) {
               logger.e("Error: $e");
@@ -72,7 +73,7 @@ class UpdateTriageEyeCapturingPage extends HookConsumerWidget {
     return switch (eye) {
       TriageEyeType.LEFT => context.loc!.leftEyeString,
       TriageEyeType.RIGHT => context.loc!.rightEyeString,
-      TriageEyeType.BOTH => context.loc!.bothEyeString,
+      TriageEyeType.BOTH => context.loc!.bothEyesString,
       _ => "",
     };
   }

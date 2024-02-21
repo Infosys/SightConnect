@@ -1,5 +1,20 @@
 {
-  "cSpell.words": ["Didnt", "Insec", "Matomo", "Roboto"]
+  "cSpell.words": [
+    "Appbar",
+    "Didnt",
+    "Fira",
+    "Fluttertoast",
+    "Insec",
+    "klheight",
+    "klpadding",
+    "kmheight",
+    "kmpadding",
+    "knavbarheight",
+    "knavbarwidth",
+    "ksradius",
+    "Matomo",
+    "Roboto"
+  ]
 } //  {
 //        "files.exclude": {
 //         "**/user_details_model.dart": true,
