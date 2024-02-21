@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_datetime_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_bottom_navigation.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_form_helper_widgets.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -20,6 +21,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(addEventDetailsProvider);
     var formKey = data.formKey;
+    final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       appBar: CustomAppbar(
@@ -29,12 +31,12 @@ class VGAddEventDetailsPage extends ConsumerWidget {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios_new)),
-        title: const Text("Add Event"),
+        title: Text(loc.vgAddEvent),
         centerTitle: false,
       ),
       bottomNavigationBar: const VisionGuardianEventBottomNavigationBar(),
       body: LoadingOverlay(
-        progressMessage: "Uploading Image and adding event",
+        progressMessage: loc.vgUploadingImageAddingEvent,
         overlayColor: Colors.black45,
         isLoading: ref.watch(addEventDetailsProvider).isLoading,
         child: SingleChildScrollView(
@@ -63,16 +65,16 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                       children: [
                         customTextField(
                           data.eventTitle,
-                          "Event Title",
+                          loc.vgEventTitle,
                           validationFunction: (value) {
                             if (value == null ||
                                 value.isEmpty ||
                                 value.trimRight().isEmpty) {
-                              return "Please Enter End time";
+                              return loc.vgPleaseEnterEndTime;
                             }
                             if (!RegExp(r'^[a-zA-Z0-9]+[ ]{0,1}[a-zA-Z0-9]*$')
                                 .hasMatch(value)) {
-                              return "Should not contain any special character";
+                              return loc.vgShouldNotContainSpecialCharacter;
                             }
                             return null;
                           },
@@ -80,7 +82,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                         const SizedBox(height: AppSize.kmheight),
                         customTextField(
                           data.eventDescription,
-                          "Event Description",
+                          loc.vgEventDescription,
                         ),
                       ],
                     ),

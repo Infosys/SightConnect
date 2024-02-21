@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
@@ -57,7 +59,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Welcome",
+                          loc.vgWelcome,
                           style: applyFiraSansFont(
                             color: AppColor.scaffold,
                             fontSize: 24,
@@ -101,7 +103,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Services",
+                    loc.vgServices,
                     style: applyFiraSansFont(
                       fontSize: 18,
                     ),
@@ -112,7 +114,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Events',
+                        loc.vgEvents,
                         style: applyFiraSansFont(
                           fontSize: 18,
                           color: AppColor.black,
@@ -123,7 +125,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                         builder: (context, ref, child) {
                           return TextButton(
                             child: Text(
-                              'View All',
+                              loc.vgViewAll,
                               style: applyFiraSansFont(
                                 fontSize: 14,
                                 color: AppColor.primary,
