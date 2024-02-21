@@ -131,6 +131,12 @@ abstract class AppLocalizations {
   /// **'Resend in {time}'**
   String loginResendOTPIn(String time);
 
+  /// No description provided for @patientHasAnAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'{patient} has an appointment'**
+  String patientHasAnAppointment(String patient);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
@@ -209,11 +215,11 @@ abstract class AppLocalizations {
   /// **'Right Eye'**
   String get rightEyeString;
 
-  /// No description provided for @bothEyeString.
+  /// No description provided for @bothEyesString.
   ///
   /// In en, this message translates to:
-  /// **'Both Eye'**
-  String get bothEyeString;
+  /// **'Both Eyes'**
+  String get bothEyesString;
 
   /// No description provided for @visualAcuityLeftEyeHeader.
   ///
@@ -1577,11 +1583,977 @@ abstract class AppLocalizations {
   /// **'OTP sent successfully'**
   String get loginOTPSent;
 
-  /// No description provided for @loginOTPResendIn.
+  /// No description provided for @areYouSure.
   ///
   /// In en, this message translates to:
-  /// **'Resend in {time}'**
-  String get loginOTPResendIn;
+  /// **'Are you sure?'**
+  String get areYouSure;
+
+  /// No description provided for @triageExitConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to exit the Test?'**
+  String get triageExitConfirmation;
+
+  /// No description provided for @triageReportEyeProblems.
+  ///
+  /// In en, this message translates to:
+  /// **'Report Eye Problems'**
+  String get triageReportEyeProblems;
+
+  /// No description provided for @triageHowToReport.
+  ///
+  /// In en, this message translates to:
+  /// **'How to report eye problems?'**
+  String get triageHowToReport;
+
+  /// No description provided for @triageReportInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.'**
+  String get triageReportInstructions;
+
+  /// No description provided for @assessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment'**
+  String get assessment;
+
+  /// No description provided for @triageOtherSymptomsQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you have any other symptoms?'**
+  String get triageOtherSymptomsQuestion;
+
+  /// No description provided for @triageEnterSymptoms.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your symptoms here'**
+  String get triageEnterSymptoms;
+
+  /// No description provided for @triageEyeAssessmentResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Assessment Results'**
+  String get triageEyeAssessmentResults;
+
+  /// No description provided for @triageTestId.
+  ///
+  /// In en, this message translates to:
+  /// **'Test ID'**
+  String get triageTestId;
+
+  /// No description provided for @triageEyeScanUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye scan updated successfully'**
+  String get triageEyeScanUpdatedSuccessfully;
+
+  /// No description provided for @triageErrorEyeScanNotUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye scan not updated!'**
+  String get triageErrorEyeScanNotUpdated;
+
+  /// No description provided for @triageLeftEyeString.
+  ///
+  /// In en, this message translates to:
+  /// **'Left Eye'**
+  String get triageLeftEyeString;
+
+  /// No description provided for @triageRightEyeString.
+  ///
+  /// In en, this message translates to:
+  /// **'Right Eye'**
+  String get triageRightEyeString;
+
+  /// No description provided for @vaEyeTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Test'**
+  String get vaEyeTest;
+
+  /// No description provided for @instructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Instructions'**
+  String get instructions;
+
+  /// No description provided for @vaSwipeUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe Up'**
+  String get vaSwipeUp;
+
+  /// No description provided for @vaSwipeDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe Down'**
+  String get vaSwipeDown;
+
+  /// No description provided for @vaSwipeLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe Left'**
+  String get vaSwipeLeft;
+
+  /// No description provided for @vaSwipeRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe Right'**
+  String get vaSwipeRight;
+
+  /// No description provided for @vaSwipeGestureError.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid swipe gesture. Please try again.'**
+  String get vaSwipeGestureError;
+
+  /// No description provided for @permissionNotGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission not granted'**
+  String get permissionNotGranted;
+
+  /// No description provided for @serviceNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Service not available'**
+  String get serviceNotAvailable;
+
+  /// No description provided for @vaDistanceToFace.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance to face'**
+  String get vaDistanceToFace;
+
+  /// No description provided for @vaDistanceToFaceInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Please ensure that the camera is 40cm away from your face'**
+  String get vaDistanceToFaceInstruction;
+
+  /// No description provided for @vaBringFaceInsideBox.
+  ///
+  /// In en, this message translates to:
+  /// **'Bring your face inside the box'**
+  String get vaBringFaceInsideBox;
+
+  /// No description provided for @startAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Assessment'**
+  String get startAssessment;
+
+  /// No description provided for @optoAddPatientInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Patient Information'**
+  String get optoAddPatientInfo;
+
+  /// No description provided for @loggedOutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been logged out'**
+  String get loggedOutMessage;
+
+  /// No description provided for @optoLogoutError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we encountered a logout error in the mobile app.'**
+  String get optoLogoutError;
+
+  /// No description provided for @optoLoggingOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Logging out...'**
+  String get optoLoggingOut;
+
+  /// No description provided for @hello.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello'**
+  String get hello;
+
+  /// No description provided for @optoGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s get started'**
+  String get optoGetStarted;
+
+  /// No description provided for @optoCompletedTests.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed tests'**
+  String get optoCompletedTests;
+
+  /// No description provided for @optoThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get optoThisMonth;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @services.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get services;
+
+  /// No description provided for @optoAssessmentHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment History'**
+  String get optoAssessmentHistory;
+
+  /// No description provided for @optoEyeAssessments.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Assessments'**
+  String get optoEyeAssessments;
+
+  /// No description provided for @feedback.
+  ///
+  /// In en, this message translates to:
+  /// **'FeedBack'**
+  String get feedback;
+
+  /// No description provided for @optoImproveApp.
+  ///
+  /// In en, this message translates to:
+  /// **'We would like your feedback to improve our application'**
+  String get optoImproveApp;
+
+  /// No description provided for @assessments.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessments'**
+  String get assessments;
+
+  /// No description provided for @optoPatientAssistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Did the patient need assistance?'**
+  String get optoPatientAssistance;
+
+  /// No description provided for @optoVisualAcuity.
+  ///
+  /// In en, this message translates to:
+  /// **'Visual Acuity'**
+  String get optoVisualAcuity;
+
+  /// No description provided for @optoPatientAided.
+  ///
+  /// In en, this message translates to:
+  /// **'Was the patient Aided?'**
+  String get optoPatientAided;
+
+  /// No description provided for @optoEyeScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Scan'**
+  String get optoEyeScan;
+
+  /// No description provided for @optoLeaveFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Please leave your feedback below'**
+  String get optoLeaveFeedback;
+
+  /// No description provided for @optoNoInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Internet Connection'**
+  String get optoNoInternet;
+
+  /// No description provided for @optoCheckInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection and try again'**
+  String get optoCheckInternet;
+
+  /// No description provided for @optoSearchPatientId.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Patient ID'**
+  String get optoSearchPatientId;
+
+  /// No description provided for @optoRecentAssessments.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Assessments'**
+  String get optoRecentAssessments;
+
+  /// No description provided for @optoSelectDateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a date range'**
+  String get optoSelectDateRange;
+
+  /// No description provided for @optoDataNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Data not found for this search'**
+  String get optoDataNotFound;
+
+  /// No description provided for @optoAssessmentReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment Report'**
+  String get optoAssessmentReport;
+
+  /// No description provided for @optoPID.
+  ///
+  /// In en, this message translates to:
+  /// **'PID'**
+  String get optoPID;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @patientAssessmentAndTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient Assessment and Test'**
+  String get patientAssessmentAndTest;
+
+  /// No description provided for @patientSelfTestReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Self Test Report'**
+  String get patientSelfTestReport;
+
+  /// No description provided for @patientClinicalReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinical Report'**
+  String get patientClinicalReport;
+
+  /// No description provided for @patientAppointmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment'**
+  String get patientAppointmentTitle;
+
+  /// No description provided for @patientBookAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Appointment'**
+  String get patientBookAppointment;
+
+  /// No description provided for @patientAppointmentSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Appointments'**
+  String get patientAppointmentSubtitle;
+
+  /// No description provided for @patientTelephoneConsultation.
+  ///
+  /// In en, this message translates to:
+  /// **'Telephone Consultation'**
+  String get patientTelephoneConsultation;
+
+  /// No description provided for @patientAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get patientAddress;
+
+  /// No description provided for @patientReschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule'**
+  String get patientReschedule;
+
+  /// No description provided for @patientCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get patientCancel;
+
+  /// No description provided for @patientPID.
+  ///
+  /// In en, this message translates to:
+  /// **'PID'**
+  String get patientPID;
+
+  /// No description provided for @patientReportID.
+  ///
+  /// In en, this message translates to:
+  /// **'Report ID'**
+  String get patientReportID;
+
+  /// No description provided for @patientHideDetailedReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide Detailed Report'**
+  String get patientHideDetailedReport;
+
+  /// No description provided for @patientShowDetailedReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Detailed Report'**
+  String get patientShowDetailedReport;
+
+  /// No description provided for @patientEID.
+  ///
+  /// In en, this message translates to:
+  /// **'EID'**
+  String get patientEID;
+
+  /// No description provided for @patientViewHistoryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View History'**
+  String get patientViewHistoryButton;
+
+  /// No description provided for @patientViewReportButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View Report'**
+  String get patientViewReportButton;
+
+  /// No description provided for @patientNoMoreData.
+  ///
+  /// In en, this message translates to:
+  /// **'No more data'**
+  String get patientNoMoreData;
+
+  /// No description provided for @patientErrorFetchingReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Error in fetching report'**
+  String get patientErrorFetchingReport;
+
+  /// No description provided for @patientTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get patientTimeline;
+
+  /// No description provided for @patientRoutineCheckup.
+  ///
+  /// In en, this message translates to:
+  /// **'Routine Checkup'**
+  String get patientRoutineCheckup;
+
+  /// No description provided for @patientAssessmentID.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment ID'**
+  String get patientAssessmentID;
+
+  /// No description provided for @patientStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get patientStartDate;
+
+  /// No description provided for @patientIVRAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'IVR Assessment'**
+  String get patientIVRAssessment;
+
+  /// No description provided for @patientEarlyConsultationRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Early Consultation Recommended'**
+  String get patientEarlyConsultationRecommended;
+
+  /// No description provided for @patientCataractEyeReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Cataract Eye Report'**
+  String get patientCataractEyeReport;
+
+  /// No description provided for @patientRedEyeReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Red Eye Report'**
+  String get patientRedEyeReport;
+
+  /// No description provided for @patientScanAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Again'**
+  String get patientScanAgain;
+
+  /// No description provided for @patientStepsToScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps to do the retinal scanning'**
+  String get patientStepsToScan;
+
+  /// No description provided for @patientProceedToScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to Scan'**
+  String get patientProceedToScan;
+
+  /// No description provided for @patientSkipAndProceedToScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip & Proceed to Scan'**
+  String get patientSkipAndProceedToScan;
+
+  /// No description provided for @patientEyeScanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Scanner'**
+  String get patientEyeScanner;
+
+  /// No description provided for @patientErrorSelectCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a camera first!'**
+  String get patientErrorSelectCamera;
+
+  /// No description provided for @patientEyeBoxText.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Box Text'**
+  String get patientEyeBoxText;
+
+  /// No description provided for @patientLoggedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been logged out'**
+  String get patientLoggedOut;
+
+  /// No description provided for @patientLogoutError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we encountered a logout error in the mobile app.'**
+  String get patientLogoutError;
+
+  /// No description provided for @patientUpdateProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile'**
+  String get patientUpdateProfile;
+
+  /// No description provided for @patientEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'edit'**
+  String get patientEdit;
+
+  /// No description provided for @patientProfileNotUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not updated'**
+  String get patientProfileNotUpdated;
+
+  /// No description provided for @patientProfileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated'**
+  String get patientProfileUpdated;
+
+  /// No description provided for @vgAddEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Event'**
+  String get vgAddEvent;
+
+  /// No description provided for @vgUploadingImageAddingEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading Image and adding event'**
+  String get vgUploadingImageAddingEvent;
+
+  /// No description provided for @vgEventTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Title'**
+  String get vgEventTitle;
+
+  /// No description provided for @vgPleaseEnterEndTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter End time'**
+  String get vgPleaseEnterEndTime;
+
+  /// No description provided for @vgShouldNotContainSpecialCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'Should not contain any special character'**
+  String get vgShouldNotContainSpecialCharacter;
+
+  /// No description provided for @vgEventDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Description'**
+  String get vgEventDescription;
+
+  /// No description provided for @vgAddPatient.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Patient'**
+  String get vgAddPatient;
+
+  /// No description provided for @vgPatients.
+  ///
+  /// In en, this message translates to:
+  /// **'Patients'**
+  String get vgPatients;
+
+  /// No description provided for @vgDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get vgDetails;
+
+  /// No description provided for @vgTeammates.
+  ///
+  /// In en, this message translates to:
+  /// **'Teammates'**
+  String get vgTeammates;
+
+  /// No description provided for @vgEyeAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Assessment'**
+  String get vgEyeAssessment;
+
+  /// No description provided for @vgStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get vgStart;
+
+  /// No description provided for @vgEyeAssessmentDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Get the eye problems of you, your friends, and family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.'**
+  String get vgEyeAssessmentDescription;
+
+  /// No description provided for @vgLogoutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been logged out'**
+  String get vgLogoutMessage;
+
+  /// No description provided for @vgLogoutErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we encountered a logout error in the mobile app.'**
+  String get vgLogoutErrorMessage;
+
+  /// No description provided for @vgWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get vgWelcome;
+
+  /// No description provided for @vgServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get vgServices;
+
+  /// No description provided for @vgEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'Events'**
+  String get vgEvents;
+
+  /// No description provided for @vgViewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get vgViewAll;
+
+  /// No description provided for @vtAssessmentReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment Report - EA'**
+  String get vtAssessmentReport;
+
+  /// No description provided for @vtRemarks.
+  ///
+  /// In en, this message translates to:
+  /// **'Remarks'**
+  String get vtRemarks;
+
+  /// No description provided for @vtNoPatientFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No patient found'**
+  String get vtNoPatientFound;
+
+  /// No description provided for @vtClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get vtClose;
+
+  /// No description provided for @vtBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get vtBack;
+
+  /// No description provided for @vtSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get vtSubmit;
+
+  /// No description provided for @vtSomethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get vtSomethingWentWrong;
+
+  /// No description provided for @vtAssessmentClosedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment Closed Successfully'**
+  String get vtAssessmentClosedSuccessfully;
+
+  /// No description provided for @vtEyeScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Scan'**
+  String get vtEyeScan;
+
+  /// No description provided for @vtDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get vtDashboard;
+
+  /// No description provided for @vtRegisterPatient.
+  ///
+  /// In en, this message translates to:
+  /// **'Register Patient'**
+  String get vtRegisterPatient;
+
+  /// No description provided for @vtTriage.
+  ///
+  /// In en, this message translates to:
+  /// **'Triage'**
+  String get vtTriage;
+
+  /// No description provided for @vtMarkMyAvailability.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark My Availability'**
+  String get vtMarkMyAvailability;
+
+  /// No description provided for @vtIVRCallHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'IVR Call History'**
+  String get vtIVRCallHistory;
+
+  /// No description provided for @vtMarked.
+  ///
+  /// In en, this message translates to:
+  /// **'Marked'**
+  String get vtMarked;
+
+  /// No description provided for @vtPreliminaryAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Preliminary Assessment'**
+  String get vtPreliminaryAssessment;
+
+  /// No description provided for @vtAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Age'**
+  String get vtAge;
+
+  /// No description provided for @vtGender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get vtGender;
+
+  /// No description provided for @vtAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get vtAddress;
+
+  /// No description provided for @vtProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get vtProfile;
+
+  /// No description provided for @vtLogoutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been logged out'**
+  String get vtLogoutMessage;
+
+  /// No description provided for @vtLogoutError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we encountered a logout error in the mobile app.'**
+  String get vtLogoutError;
+
+  /// No description provided for @vtError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get vtError;
+
+  /// No description provided for @vtPatient.
+  ///
+  /// In en, this message translates to:
+  /// **'Patient'**
+  String get vtPatient;
+
+  /// No description provided for @vtMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get vtMobile;
+
+  /// No description provided for @vtAssessmentID.
+  ///
+  /// In en, this message translates to:
+  /// **'Assessment ID'**
+  String get vtAssessmentID;
+
+  /// No description provided for @vtStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get vtStatus;
+
+  /// No description provided for @vtTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeline'**
+  String get vtTimeline;
+
+  /// No description provided for @vtCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get vtCategory;
+
+  /// No description provided for @vtNoDataFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Data Found'**
+  String get vtNoDataFound;
+
+  /// No description provided for @appCameraCapture.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture'**
+  String get appCameraCapture;
+
+  /// No description provided for @appCameraRetake.
+  ///
+  /// In en, this message translates to:
+  /// **'Retake'**
+  String get appCameraRetake;
+
+  /// No description provided for @appCameraUsePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Photo'**
+  String get appCameraUsePhoto;
+
+  /// No description provided for @appCameraCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get appCameraCancel;
+
+  /// No description provided for @appCameraNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera not found'**
+  String get appCameraNotFound;
+
+  /// No description provided for @appCameraException.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera Exception'**
+  String get appCameraException;
+
+  /// No description provided for @appCameraProgressMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get appCameraProgressMessage;
+
+  /// No description provided for @internetLostNoConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'No Internet Connection'**
+  String get internetLostNoConnection;
+
+  /// No description provided for @internetLostRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get internetLostRetry;
+
+  /// No description provided for @secureJailbreak.
+  ///
+  /// In en, this message translates to:
+  /// **'It seems your device is jailbroken'**
+  String get secureJailbreak;
+
+  /// No description provided for @secureRestrictedAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'For security reasons, access to this app is restricted on jailbroken devices.'**
+  String get secureRestrictedAccess;
+
+  /// No description provided for @secureExitApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get secureExitApp;
+
+  /// No description provided for @sharedErrorPageIssues.
+  ///
+  /// In en, this message translates to:
+  /// **'We are facing some issues. Please try again later.'**
+  String get sharedErrorPageIssues;
+
+  /// No description provided for @appointmentBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment Booking'**
+  String get appointmentBookingTitle;
+
+  /// No description provided for @comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon...'**
+  String get comingSoon;
+
+  /// No description provided for @miniappService.
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get miniappService;
+
+  /// No description provided for @miniappConsole.
+  ///
+  /// In en, this message translates to:
+  /// **'Console'**
+  String get miniappConsole;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

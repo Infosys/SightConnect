@@ -20,6 +20,11 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
+  String patientHasAnAppointment(String patient) {
+    return '$patient has an appointment';
+  }
+
+  @override
   String get questionnaireTitle => 'চোখের মূল্যায়ন প্রশ্ন';
 
   @override
@@ -59,7 +64,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get rightEyeString => 'ডান চোখ।';
 
   @override
-  String get bothEyeString => 'উভয় চোখ।';
+  String get bothEyesString => 'উভয় চোখ।';
 
   @override
   String get visualAcuityLeftEyeHeader => 'পরীক্ষা 2-বাম চোখ';
@@ -743,5 +748,488 @@ class AppLocalizationsBn extends AppLocalizations {
   String get loginOTPSent => 'OTP sent successfully';
 
   @override
-  String get loginOTPResendIn => 'Resend in {time}';
+  String get areYouSure => 'Are you sure?';
+
+  @override
+  String get triageExitConfirmation => 'Do you want to exit the Test?';
+
+  @override
+  String get triageReportEyeProblems => 'Report Eye Problems';
+
+  @override
+  String get triageHowToReport => 'How to report eye problems?';
+
+  @override
+  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\n\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
+
+  @override
+  String get assessment => 'Assessment';
+
+  @override
+  String get triageOtherSymptomsQuestion => 'Do you have any other symptoms?';
+
+  @override
+  String get triageEnterSymptoms => 'Enter your symptoms here';
+
+  @override
+  String get triageEyeAssessmentResults => 'Eye Assessment Results';
+
+  @override
+  String get triageTestId => 'Test ID';
+
+  @override
+  String get triageEyeScanUpdatedSuccessfully => 'Eye scan updated successfully';
+
+  @override
+  String get triageErrorEyeScanNotUpdated => 'Eye scan not updated!';
+
+  @override
+  String get triageLeftEyeString => 'Left Eye';
+
+  @override
+  String get triageRightEyeString => 'Right Eye';
+
+  @override
+  String get vaEyeTest => 'Eye Test';
+
+  @override
+  String get instructions => 'Instructions';
+
+  @override
+  String get vaSwipeUp => 'Swipe Up';
+
+  @override
+  String get vaSwipeDown => 'Swipe Down';
+
+  @override
+  String get vaSwipeLeft => 'Swipe Left';
+
+  @override
+  String get vaSwipeRight => 'Swipe Right';
+
+  @override
+  String get vaSwipeGestureError => 'Invalid swipe gesture. Please try again.';
+
+  @override
+  String get permissionNotGranted => 'Permission not granted';
+
+  @override
+  String get serviceNotAvailable => 'Service not available';
+
+  @override
+  String get vaDistanceToFace => 'Distance to face';
+
+  @override
+  String get vaDistanceToFaceInstruction => 'Please ensure that the camera is 40cm away from your face';
+
+  @override
+  String get vaBringFaceInsideBox => 'Bring your face inside the box';
+
+  @override
+  String get startAssessment => 'Start Assessment';
+
+  @override
+  String get optoAddPatientInfo => 'Add Patient Information';
+
+  @override
+  String get loggedOutMessage => 'You have been logged out';
+
+  @override
+  String get optoLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
+
+  @override
+  String get optoLoggingOut => 'Logging out...';
+
+  @override
+  String get hello => 'Hello';
+
+  @override
+  String get optoGetStarted => 'Let\'s get started';
+
+  @override
+  String get optoCompletedTests => 'Completed tests';
+
+  @override
+  String get optoThisMonth => 'This month';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get services => 'Services';
+
+  @override
+  String get optoAssessmentHistory => 'Assessment History';
+
+  @override
+  String get optoEyeAssessments => 'Eye Assessments';
+
+  @override
+  String get feedback => 'FeedBack';
+
+  @override
+  String get optoImproveApp => 'We would like your feedback to improve our application';
+
+  @override
+  String get assessments => 'Assessments';
+
+  @override
+  String get optoPatientAssistance => 'Did the patient need assistance?';
+
+  @override
+  String get optoVisualAcuity => 'Visual Acuity';
+
+  @override
+  String get optoPatientAided => 'Was the patient Aided?';
+
+  @override
+  String get optoEyeScan => 'Eye Scan';
+
+  @override
+  String get optoLeaveFeedback => 'Please leave your feedback below';
+
+  @override
+  String get optoNoInternet => 'No Internet Connection';
+
+  @override
+  String get optoCheckInternet => 'Please check your internet connection and try again';
+
+  @override
+  String get optoSearchPatientId => 'Search Patient ID';
+
+  @override
+  String get optoRecentAssessments => 'Recent Assessments';
+
+  @override
+  String get optoSelectDateRange => 'Please select a date range';
+
+  @override
+  String get optoDataNotFound => 'Data not found for this search';
+
+  @override
+  String get optoAssessmentReport => 'Assessment Report';
+
+  @override
+  String get optoPID => 'PID';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get patientAssessmentAndTest => 'Patient Assessment and Test';
+
+  @override
+  String get patientSelfTestReport => 'Self Test Report';
+
+  @override
+  String get patientClinicalReport => 'Clinical Report';
+
+  @override
+  String get patientAppointmentTitle => 'Appointment';
+
+  @override
+  String get patientBookAppointment => 'Book Appointment';
+
+  @override
+  String get patientAppointmentSubtitle => 'Your Appointments';
+
+  @override
+  String get patientTelephoneConsultation => 'Telephone Consultation';
+
+  @override
+  String get patientAddress => 'Address';
+
+  @override
+  String get patientReschedule => 'Reschedule';
+
+  @override
+  String get patientCancel => 'Cancel';
+
+  @override
+  String get patientPID => 'PID';
+
+  @override
+  String get patientReportID => 'Report ID';
+
+  @override
+  String get patientHideDetailedReport => 'Hide Detailed Report';
+
+  @override
+  String get patientShowDetailedReport => 'Show Detailed Report';
+
+  @override
+  String get patientEID => 'EID';
+
+  @override
+  String get patientViewHistoryButton => 'View History';
+
+  @override
+  String get patientViewReportButton => 'View Report';
+
+  @override
+  String get patientNoMoreData => 'No more data';
+
+  @override
+  String get patientErrorFetchingReport => 'Error in fetching report';
+
+  @override
+  String get patientTimeline => 'Timeline';
+
+  @override
+  String get patientRoutineCheckup => 'Routine Checkup';
+
+  @override
+  String get patientAssessmentID => 'Assessment ID';
+
+  @override
+  String get patientStartDate => 'Start Date';
+
+  @override
+  String get patientIVRAssessment => 'IVR Assessment';
+
+  @override
+  String get patientEarlyConsultationRecommended => 'Early Consultation Recommended';
+
+  @override
+  String get patientCataractEyeReport => 'Cataract Eye Report';
+
+  @override
+  String get patientRedEyeReport => 'Red Eye Report';
+
+  @override
+  String get patientScanAgain => 'Scan Again';
+
+  @override
+  String get patientStepsToScan => 'Steps to do the retinal scanning';
+
+  @override
+  String get patientProceedToScan => 'Proceed to Scan';
+
+  @override
+  String get patientSkipAndProceedToScan => 'Skip & Proceed to Scan';
+
+  @override
+  String get patientEyeScanner => 'Eye Scanner';
+
+  @override
+  String get patientErrorSelectCamera => 'Select a camera first!';
+
+  @override
+  String get patientEyeBoxText => 'Eye Box Text';
+
+  @override
+  String get patientLoggedOut => 'You have been logged out';
+
+  @override
+  String get patientLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
+
+  @override
+  String get patientUpdateProfile => 'Update Profile';
+
+  @override
+  String get patientEdit => 'edit';
+
+  @override
+  String get patientProfileNotUpdated => 'Profile not updated';
+
+  @override
+  String get patientProfileUpdated => 'Profile updated';
+
+  @override
+  String get vgAddEvent => 'Add Event';
+
+  @override
+  String get vgUploadingImageAddingEvent => 'Uploading Image and adding event';
+
+  @override
+  String get vgEventTitle => 'Event Title';
+
+  @override
+  String get vgPleaseEnterEndTime => 'Please Enter End time';
+
+  @override
+  String get vgShouldNotContainSpecialCharacter => 'Should not contain any special character';
+
+  @override
+  String get vgEventDescription => 'Event Description';
+
+  @override
+  String get vgAddPatient => 'Add Patient';
+
+  @override
+  String get vgPatients => 'Patients';
+
+  @override
+  String get vgDetails => 'Details';
+
+  @override
+  String get vgTeammates => 'Teammates';
+
+  @override
+  String get vgEyeAssessment => 'Eye Assessment';
+
+  @override
+  String get vgStart => 'Start';
+
+  @override
+  String get vgEyeAssessmentDescription => 'Get the eye problems of you, your friends, and family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
+
+  @override
+  String get vgLogoutMessage => 'You have been logged out';
+
+  @override
+  String get vgLogoutErrorMessage => 'Apologies, we encountered a logout error in the mobile app.';
+
+  @override
+  String get vgWelcome => 'Welcome';
+
+  @override
+  String get vgServices => 'Services';
+
+  @override
+  String get vgEvents => 'Events';
+
+  @override
+  String get vgViewAll => 'View All';
+
+  @override
+  String get vtAssessmentReport => 'Assessment Report - EA';
+
+  @override
+  String get vtRemarks => 'Remarks';
+
+  @override
+  String get vtNoPatientFound => 'No patient found';
+
+  @override
+  String get vtClose => 'Close';
+
+  @override
+  String get vtBack => 'Back';
+
+  @override
+  String get vtSubmit => 'Submit';
+
+  @override
+  String get vtSomethingWentWrong => 'Something went wrong';
+
+  @override
+  String get vtAssessmentClosedSuccessfully => 'Assessment Closed Successfully';
+
+  @override
+  String get vtEyeScan => 'Eye Scan';
+
+  @override
+  String get vtDashboard => 'Dashboard';
+
+  @override
+  String get vtRegisterPatient => 'Register Patient';
+
+  @override
+  String get vtTriage => 'Triage';
+
+  @override
+  String get vtMarkMyAvailability => 'Mark My Availability';
+
+  @override
+  String get vtIVRCallHistory => 'IVR Call History';
+
+  @override
+  String get vtMarked => 'Marked';
+
+  @override
+  String get vtPreliminaryAssessment => 'Preliminary Assessment';
+
+  @override
+  String get vtAge => 'Age';
+
+  @override
+  String get vtGender => 'Gender';
+
+  @override
+  String get vtAddress => 'Address';
+
+  @override
+  String get vtProfile => 'Profile';
+
+  @override
+  String get vtLogoutMessage => 'You have been logged out';
+
+  @override
+  String get vtLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
+
+  @override
+  String get vtError => 'Error';
+
+  @override
+  String get vtPatient => 'Patient';
+
+  @override
+  String get vtMobile => 'Mobile';
+
+  @override
+  String get vtAssessmentID => 'Assessment ID';
+
+  @override
+  String get vtStatus => 'Status';
+
+  @override
+  String get vtTimeline => 'Timeline';
+
+  @override
+  String get vtCategory => 'Category';
+
+  @override
+  String get vtNoDataFound => 'No Data Found';
+
+  @override
+  String get appCameraCapture => 'Capture';
+
+  @override
+  String get appCameraRetake => 'Retake';
+
+  @override
+  String get appCameraUsePhoto => 'Use Photo';
+
+  @override
+  String get appCameraCancel => 'Cancel';
+
+  @override
+  String get appCameraNotFound => 'Camera not found';
+
+  @override
+  String get appCameraException => 'Camera Exception';
+
+  @override
+  String get appCameraProgressMessage => 'Loading...';
+
+  @override
+  String get internetLostNoConnection => 'No Internet Connection';
+
+  @override
+  String get internetLostRetry => 'Retry';
+
+  @override
+  String get secureJailbreak => 'It seems your device is jailbroken';
+
+  @override
+  String get secureRestrictedAccess => 'For security reasons, access to this app is restricted on jailbroken devices.';
+
+  @override
+  String get secureExitApp => 'Exit App';
+
+  @override
+  String get sharedErrorPageIssues => 'We are facing some issues. Please try again later.';
+
+  @override
+  String get appointmentBookingTitle => 'Appointment Booking';
+
+  @override
+  String get comingSoon => 'Coming Soon...';
+
+  @override
+  String get miniappService => 'Service';
+
+  @override
+  String get miniappConsole => 'Console';
 }
