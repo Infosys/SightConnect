@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
 
     var model = ref.watch(optometritianReportProvider);
     // TriageUrgency urgency = model.calculateTriageUrgency();
+    final loc = context.loc!;
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).popUntil((route) => route.isFirst);
@@ -44,7 +46,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
           ),
           centerTitle: false,
           title: Text(
-            "Assessment Report",
+            loc.optoAssessmentReport,
             style: applyFiraSansFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -79,7 +81,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "PID : ${report.patientId}",
+                              "${loc.optoPID}: ${report.patientId}",
                               style: applyFiraSansFont(
                                   fontSize: 16,
                                   color: AppColor.white,
@@ -135,7 +137,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Category",
+                    loc.category,
                     style: applyRobotoFont(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

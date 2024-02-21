@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,6 +33,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var feedback = ref.watch(feedBackProvider);
+    final loc = context.loc!;
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: AlertDialog(
@@ -43,7 +45,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'FeedBack',
+              loc.feedback,
               style: applyFiraSansFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -62,7 +64,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "We would like your feedback to improve our application",
+                      loc.optoImproveApp,
                       style: applyRobotoFont(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -71,13 +73,13 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.kmheight),
                     AssistanceRatingBar(
-                      title: "Assessments",
+                      title: loc.assessments,
                       onChanged: (rating) {
                         feedback.questionarie = rating.toString();
                       },
                     ),
                     AssistanceCheckBox(
-                      question: "Did the patient need assistance?",
+                      question: loc.optoPatientAssistance,
                       value: feedback.assessmentAssistance,
                       onChanged: (value) {
                         feedback.assessmentAssistance = value;
@@ -85,20 +87,20 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.kmheight),
                     AssistanceRatingBar(
-                      title: "Visual Acuity",
+                      title: loc.optoVisualAcuity,
                       onChanged: (rating) {
                         feedback.observation = rating.toString();
                       },
                     ),
                     AssistanceCheckBox(
-                      question: "Did the patient need assistance?",
+                      question: loc.optoPatientAssistance,
                       value: feedback.visualAcuityAssistance,
                       onChanged: (value) {
                         feedback.visualAcuityAssistance = value;
                       },
                     ),
                     AssistanceCheckBox(
-                      question: "Was the patient Aided?",
+                      question: loc.optoPatientAided,
                       value: feedback.visualAcuityAided,
                       onChanged: (value) {
                         feedback.visualAcuityAided = value;
@@ -106,13 +108,13 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.kmheight),
                     AssistanceRatingBar(
-                      title: "Eye Scan",
+                      title: loc.optoEyeScan,
                       onChanged: (rating) {
                         feedback.eyeScan = rating.toString();
                       },
                     ),
                     AssistanceCheckBox(
-                      question: "Did the patient need assistance?",
+                      question: loc.optoPatientAssistance,
                       value: feedback.eyeScanAssistance,
                       onChanged: (value) {
                         feedback.eyeScanAssistance = value;
@@ -120,7 +122,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                     ),
                     const SizedBox(height: AppSize.kmheight),
                     Text(
-                      "Please leave your feedback below",
+                      loc.optoLeaveFeedback,
                       style: applyRobotoFont(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -149,7 +151,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                               .setCurrentLocale("en");
                         },
                         child: Text(
-                          "Submit",
+                          loc.submitButton,
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -212,20 +214,20 @@ class TriageFeedbackDialog extends HookConsumerWidget {
   }
 
   void showNoInternetDialog(BuildContext context) {
+    final loc = context.loc!;
     if (context.mounted) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("No Internet Connection"),
-            content: const Text(
-                "Please check your internet connection and try again"),
+            title: Text(loc.optoNoInternet),
+            content: Text(loc.optoCheckInternet),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 },
-                child: const Text("OK"),
+                child: Text(loc.okButton),
               )
             ],
           );
