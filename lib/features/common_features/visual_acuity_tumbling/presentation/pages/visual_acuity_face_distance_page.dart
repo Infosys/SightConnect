@@ -16,7 +16,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
     as ios;
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:superapp_scanner/constants/app_color.dart';
+import '../providers/distance_notifier_provider.dart';
 import '../widgets/visual_acuity_face_distance_painter.dart';
 
 class VisualAcuityFaceDistancePage extends StatelessWidget {
@@ -120,7 +122,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
   }
 }
 
-class AppFaceDistanceCamera extends StatefulWidget {
+class AppFaceDistanceCamera extends ConsumerStatefulWidget {
   const AppFaceDistanceCamera({
     super.key,
     required this.onCameraCreated,
@@ -130,10 +132,11 @@ class AppFaceDistanceCamera extends StatefulWidget {
       onCameraCreated;
 
   @override
-  State<AppFaceDistanceCamera> createState() => _AppFaceDistanceCameraState();
+  ConsumerState<AppFaceDistanceCamera> createState() =>
+      _AppFaceDistanceCameraState();
 }
 
-class _AppFaceDistanceCameraState extends State<AppFaceDistanceCamera>
+class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
@@ -357,6 +360,7 @@ class _AppFaceDistanceCameraState extends State<AppFaceDistanceCamera>
             imageWidth: inputImage.metadata!.size.width.toInt(),
             imageHeight: inputImage.metadata!.size.height.toInt(),
           );
+          ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
         } else {
           _distanceToFace = null;
         }
