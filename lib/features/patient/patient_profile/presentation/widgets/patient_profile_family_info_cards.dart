@@ -2,7 +2,9 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -28,7 +30,7 @@ class PatientFamilyDetails extends HookConsumerWidget {
     final loc = context.loc!;
     final model =
         ref.watch(patientProfileProvider(patient.profile?.patient?.patientId));
-
+    final model2 = ref.watch(patientAssessmentAndTestProvider);
     final isActive =
         model.selectPatientId == patient.profile?.patient?.patientId;
 
@@ -109,7 +111,15 @@ class PatientFamilyDetails extends HookConsumerWidget {
           customBorder: const CircleBorder(),
           onTap: () {
             final id = patient.profile?.patient?.patientId;
+
             if (id != null) {
+              model2.setPatient(
+                TriageReportUserEntity(
+                  id: id,
+                  image: patient.profile?.patient?.profilePhoto ?? "",
+                  name: patient.profile?.patient?.name ?? "",
+                ),
+              );
               model.setPatientId(id);
             }
           },
@@ -173,6 +183,15 @@ class PatientFamilyDetails extends HookConsumerWidget {
                     return InkWell(
                       customBorder: const CircleBorder(),
                       onTap: () {
+                        model2.setPatient(
+                          TriageReportUserEntity(
+                              // id: id,
+                              // image: patient.profile?.patient?.profilePhoto ?? "",
+                              // name: patient.profile?.patient?.name ?? "",
+                              id: data.patientId ?? 0,
+                              name: data.name ?? "",
+                              image: data.profilePicture ?? ""),
+                        );
                         model.setPatientId(data.patientId!);
                       },
                       child: Container(

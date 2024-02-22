@@ -117,7 +117,7 @@ class PatientServiceCategory extends ConsumerWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
-                                 WebSocket(),
+                                const PatientAppointmentPage(),
                           ),
                         );
                       }

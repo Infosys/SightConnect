@@ -137,7 +137,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   }
 
   void getVgEvents(previousList, type) async {
-    logger.f("callledddddddddddddddd");
+    logger.d("callledddddddddddddddd");
     try {
       eventLoading = true;
       List<VisionGuardianEventModel> response =

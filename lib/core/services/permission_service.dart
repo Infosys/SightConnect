@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -6,32 +5,19 @@ class CameraPermissionService {
   static Future<bool> checkPermissions(
     BuildContext context,
   ) async {
-    final isGranted = await isCameraPermissionGranted();
-
-    if (!isGranted) {
-      logger.d('Camera permission not granted. Requesting permission');
+    PermissionStatus cameraStatus = await Permission.camera.status;
+    if (!cameraStatus.isGranted) {
       final cameraStatus = await Permission.camera.request();
-      final audioStatus = await Permission.microphone.request();
-      if (cameraStatus.isGranted && audioStatus.isGranted) {
-        logger.d('Camera permission granted.');
-
+      if (cameraStatus.isGranted) {
         return true;
       } else {
         if (context.mounted) {
-          logger.d('Camera permission not granted. Opening settings');
           await _showCameraSettingsDialog(context);
         }
-        logger.d('Camera permission not granted.');
-        if(context.mounted) return await checkPermissions(context);
+        if (context.mounted) return await checkPermissions(context);
       }
     }
-    return isGranted;
-  }
-
-  static Future<bool> isCameraPermissionGranted() async {
-    PermissionStatus cameraStatus = await Permission.camera.status;
-    PermissionStatus audioStatus = await Permission.microphone.status;
-    return cameraStatus.isGranted && audioStatus.isGranted;
+    return cameraStatus.isGranted;
   }
 
   static _showCameraSettingsDialog(BuildContext context) {
@@ -53,7 +39,6 @@ class CameraPermissionService {
               await Future.delayed(const Duration(seconds: 1));
               if (context.mounted) {
                 Navigator.of(context).pop();
-                await checkPermissions(context);
               }
             },
           ),

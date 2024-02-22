@@ -10,7 +10,6 @@ var keycloakDioProvider = Provider(
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
       ),
     );
     dio.interceptors.addAll(
@@ -28,7 +27,6 @@ var dioProvider = Provider(
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
         headers: {
           "X-Accept-Language": lang,
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
