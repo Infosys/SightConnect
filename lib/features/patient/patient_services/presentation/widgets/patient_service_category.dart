@@ -18,6 +18,7 @@ import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../main.dart';
 import '../../../patient_appointments/domain/web_socket_test.dart';
+import '../../../patient_appointments/presentation/pages/patient_appointment_page.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {
@@ -108,17 +109,17 @@ class PatientServiceCategory extends ConsumerWidget {
                           ),
                         );
                       } else if (miniapp == MiniApp.APPOINTMENT) {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => WebSocket(),
-                          ),
-                        );
                         // Navigator.of(context).push(
                         //   MaterialPageRoute(
-                        //     builder: (context) =>
-                        //         const PatientAppointmentPage(),
+                        //     builder: (context) => WebSocket(),
                         //   ),
                         // );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientAppointmentPage(),
+                          ),
+                        );
                       }
                     },
                     child: SizedBox(
