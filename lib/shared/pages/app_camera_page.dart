@@ -8,7 +8,7 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_detector_painter.dart';
+import 'package:eye_care_for_all/shared/widgets/eye_detector_painter.dart';
 import 'package:eye_care_for_all/shared/widgets/app_camera_preview_widget.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';

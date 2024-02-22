@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/coordinates_translator_android.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/widgets/coordinates_translator_ios.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 

@@ -1,11 +1,10 @@
 import 'dart:math';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/widgets/coordinates_translator_android.dart';
 import 'package:flutter/services.dart';
-
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'dart:io';
 import 'package:camera/camera.dart';
-import '../widgets/coordinates_translator_android.dart';
 
 class MachineLearningCameraServiceAndroid {
   static final Map<DeviceOrientation, int> _orientations = {

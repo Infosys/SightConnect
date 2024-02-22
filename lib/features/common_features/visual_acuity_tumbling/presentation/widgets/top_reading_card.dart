@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_face_distance_page.dart';
 // import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/tumbling_models.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/pages/face_distance_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -39,8 +39,6 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
 
     return FaceDistanceDetector(
       onCameraCreated: (controller, paint, distance, isLoading) {
-        final isValidDistance =
-            distance != null && distance >= 35 && distance <= 45;
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.klradius),
