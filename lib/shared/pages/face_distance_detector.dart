@@ -143,7 +143,38 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
         if (!mounted) {
           return;
         }
-        _controller.startImageStream(_processCameraImage);
+        int streamCount = 0;
+        void processCameraImage(CameraImage image) {
+          streamCount++;
+          if (streamCount % 3 == 0) {
+            final CameraDescription camera = _cameras.firstWhere(
+              (element) => element.lensDirection == _cameraLensDirection,
+            );
+            final DeviceOrientation orientation =
+                _controller.value.deviceOrientation;
+
+            if (Platform.isAndroid) {
+              final InputImage? inputImage =
+                  FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
+                image: image,
+                camera: camera,
+                deviceOrientation: orientation,
+              );
+              if (inputImage == null) return;
+              _processImage(inputImage);
+            } else {
+              final ios.InputImage? inputImage =
+                  FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
+                image: image,
+                camera: camera,
+                deviceOrientation: orientation,
+              );
+              if (inputImage == null) return;
+              _processImageIOS(inputImage);
+            }
+          }
+        }
+        _controller.startImageStream(processCameraImage);
       },
     );
     if (mounted) {
@@ -171,33 +202,6 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
       }
     } catch (error) {
       rethrow;
-    }
-  }
-
-  void _processCameraImage(CameraImage image) {
-    final CameraDescription camera = _cameras.firstWhere(
-      (element) => element.lensDirection == _cameraLensDirection,
-    );
-    final DeviceOrientation orientation = _controller.value.deviceOrientation;
-
-    if (Platform.isAndroid) {
-      final InputImage? inputImage =
-          FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
-        image: image,
-        camera: camera,
-        deviceOrientation: orientation,
-      );
-      if (inputImage == null) return;
-      _processImage(inputImage);
-    } else {
-      final ios.InputImage? inputImage =
-          FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
-        image: image,
-        camera: camera,
-        deviceOrientation: orientation,
-      );
-      if (inputImage == null) return;
-      _processImageIOS(inputImage);
     }
   }
 
