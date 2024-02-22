@@ -343,7 +343,6 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
           boxWidth,
           boxHeight,
         );
-        logger.f("eyeLandmarksInsideTheBox: $eyeLandmarksInsideTheBox");
 
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
