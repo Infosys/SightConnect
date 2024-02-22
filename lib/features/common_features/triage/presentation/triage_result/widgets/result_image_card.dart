@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -216,11 +217,11 @@ class _EyeScanImage extends StatelessWidget {
             : Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.ksradius),
-                  child: CachedNetworkImage(
+                  child: AppNetworkImage(
                     imageUrl: image!,
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    shapeCircle: false,
+                    height: 100,
+                    width: 100,
                   ),
                 ),
               ),

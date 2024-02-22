@@ -16,36 +16,36 @@ class BottomNavItem {
 
 class BottomNavItems {
   static BottomNavItem home(AppLocalizations loc) => BottomNavItem(
-    name: loc.homeButton,
-    svgImage: "assets/icons/drawer_home.svg",
-    initialScale: 1,
-    isSelected: true,
-  );
+        name: loc.homeButton,
+        svgImage: "assets/icons/drawer_home.svg",
+        initialScale: 1,
+        isSelected: true,
+      );
   static BottomNavItem service(AppLocalizations loc) => BottomNavItem(
-    name: loc.bottomNavItemServices,
-    svgImage: AppIcon.navService,
-    initialScale: 1,
-  );
+        name: loc.bottomNavItemServices,
+        svgImage: AppIcon.navService,
+        initialScale: 1,
+      );
   static BottomNavItem triage(AppLocalizations loc) => BottomNavItem(
-    name: loc.bottomNavItemEyeTest,
-    svgImage: "assets/nav_icons/Assessmentdefault.svg",
-    initialScale: 1,
-  );
+        name: loc.bottomNavItemEyeTest,
+        svgImage: "assets/nav_icons/Assessmentdefault.svg",
+        initialScale: 1,
+      );
   static BottomNavItem notification(AppLocalizations loc) => BottomNavItem(
-    name: loc.profileTitle,
-    svgImage: AppIcon.navProfile,
-    initialScale: 1,
-  );
+        name: loc.profileTitle,
+        svgImage: AppIcon.navProfile,
+        initialScale: 1,
+      );
   static BottomNavItem drawer(AppLocalizations loc) => BottomNavItem(
-    name: loc.notificationsTitle,
-    svgImage: "assets/nav_icons/notificatoindefault.svg",
-    initialScale: 0.8,
-  );
+        name: loc.notificationsTitle,
+        svgImage: "assets/nav_icons/notificatoindefault.svg",
+        initialScale: 0.8,
+      );
   static List<BottomNavItem> all(AppLocalizations loc) => [
-    home(loc),
-    service(loc),
-    triage(loc),
-    notification(loc),
-    drawer(loc),
-  ];
+        home(loc),
+        service(loc),
+        triage(loc),
+        notification(loc),
+        drawer(loc),
+      ];
 }
