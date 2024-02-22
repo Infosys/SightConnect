@@ -6,12 +6,13 @@ import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/machine_learning_camera_service_android.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/machine_learning_camera_service_ios.dart';
-import 'package:eye_care_for_all/shared/widgets/visual_acuity_face_distance_painter.dart';
+import 'package:eye_care_for_all/shared/widgets/face_distance_painter.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart' as ios;
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
+    as ios;
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -272,8 +273,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     // Calling the Distance Calculator Painter
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final VisualAcuityFaceDistancePainter painter =
-          VisualAcuityFaceDistancePainter(
+      final FaceDistancePainter painter = FaceDistancePainter(
         boxCenter,
         boxWidth,
         boxHeight,
@@ -370,8 +370,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     // Calling the Distance Calculator Painter
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final VisualAcuityFaceDistancePainter painter =
-          VisualAcuityFaceDistancePainter(
+      final FaceDistancePainter painter = FaceDistancePainter(
         boxCenter,
         boxWidth,
         boxHeight,
