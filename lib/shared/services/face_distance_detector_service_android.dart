@@ -1,12 +1,12 @@
-import 'dart:io';
 import 'dart:math';
-import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/widgets/coordinates_translator_ios.dart';
+import 'package:eye_care_for_all/shared/widgets/coordinates_translator_android.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'dart:io';
+import 'package:camera/camera.dart';
 
-class MachineLearningCameraServiceIOS {
+class FaceDistanceDetectorServiceAndroid {
   static final Map<DeviceOrientation, int> _orientations = {
     DeviceOrientation.portraitUp: 0,
     DeviceOrientation.landscapeLeft: 90,
@@ -65,9 +65,7 @@ class MachineLearningCameraServiceIOS {
     // * bgra8888 for iOS
     if (format == null ||
         (Platform.isAndroid && format != InputImageFormat.nv21) ||
-        (Platform.isIOS && format != InputImageFormat.bgra8888)) {
-      return null;
-    }
+        (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
 
     // since format is constraint to nv21 or bgra8888, both only have one plane
     if (image.planes.length != 1) return null;
@@ -88,8 +86,8 @@ class MachineLearningCameraServiceIOS {
     );
   }
 
-  static Face getLargestFace(List<Face> faces) {
-    Face largestFace = faces.reduce(
+  static FaceMesh getLargestFace(List<FaceMesh> faces) {
+    FaceMesh largestFace = faces.reduce(
       (currentFace, nextFace) =>
           (currentFace.boundingBox.width * currentFace.boundingBox.height) >
                   (nextFace.boundingBox.width * nextFace.boundingBox.height)
@@ -99,9 +97,37 @@ class MachineLearningCameraServiceIOS {
     return largestFace;
   }
 
+  static Point<double> getEyeLandmark(List<FaceMeshPoint> eyeContours) {
+    double leastX = 999999999;
+    double leastY = 999999999;
+    double highestX = 0;
+    double highestY = 0;
+
+    for (final point in eyeContours) {
+      final x = point.x;
+      final y = point.y;
+      if (x < leastX) {
+        leastX = x;
+      }
+      if (x > highestX) {
+        highestX = x;
+      }
+      if (y < leastY) {
+        leastY = y;
+      }
+      if (y > highestY) {
+        highestY = y;
+      }
+    }
+    double eyeLandmarkX = (highestX + leastX) / 2;
+    double eyeLandmarkY = (highestY + leastY) / 2;
+    Point<double> eyeLandmark = Point<double>(eyeLandmarkX, eyeLandmarkY);
+    return eyeLandmark;
+  }
+
   static int calculateDistanceToScreen({
-    required Point<int> leftEyeLandmark,
-    required Point<int> rightEyeLandmark,
+    required Point<double> leftEyeLandmark,
+    required Point<double> rightEyeLandmark,
     required double focalLength,
     required double sensorX,
     required double sensorY,
@@ -123,20 +149,20 @@ class MachineLearningCameraServiceIOS {
   }
 
   static Point<double> translator(
-    Point<int> point,
+    Point<double> point,
     InputImage inputImage,
     Size canvasSize,
     CameraLensDirection cameraLensDirection,
   ) {
     final x = translateX(
-      point.x.toDouble(),
+      point.x,
       canvasSize,
       inputImage.metadata!.size,
       inputImage.metadata!.rotation,
       cameraLensDirection,
     );
     final y = translateY(
-      point.y.toDouble(),
+      point.y,
       canvasSize,
       inputImage.metadata!.size,
       inputImage.metadata!.rotation,

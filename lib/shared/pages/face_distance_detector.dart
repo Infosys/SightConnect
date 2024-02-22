@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
-import 'package:eye_care_for_all/shared/services/machine_learning_camera_service_android.dart';
-import 'package:eye_care_for_all/shared/services/machine_learning_camera_service_ios.dart';
+import 'package:eye_care_for_all/shared/services/face_distance_detector_service_android.dart';
+import 'package:eye_care_for_all/shared/services/face_distance_detector_service_ios.dart';
 import 'package:eye_care_for_all/shared/widgets/face_distance_painter.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -156,8 +156,8 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
 
     try {
       final Map<String, double>? cameraInfo = Platform.isAndroid
-          ? await MachineLearningCameraServiceAndroid.getCameraInfo()
-          : await MachineLearningCameraServiceIOS.getCameraInfo();
+          ? await FaceDistanceDetectorServiceAndroid.getCameraInfo()
+          : await FaceDistanceDetectorServiceIOS.getCameraInfo();
       _focalLength = cameraInfo?['focalLength'];
       _sensorX = cameraInfo?['sensorX'];
       _sensorY = cameraInfo?['sensorY'];
@@ -182,7 +182,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
 
     if (Platform.isAndroid) {
       final InputImage? inputImage =
-          MachineLearningCameraServiceAndroid.inputImageFromCameraImage(
+          FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
         image: image,
         camera: camera,
         deviceOrientation: orientation,
@@ -191,7 +191,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
       _processImage(inputImage);
     } else {
       final ios.InputImage? inputImage =
-          MachineLearningCameraServiceIOS.inputImageFromCameraImage(
+          FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
         image: image,
         camera: camera,
         deviceOrientation: orientation,
@@ -219,19 +219,19 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     );
 
     if (meshes.isNotEmpty) {
-      final mesh = MachineLearningCameraServiceAndroid.getLargestFace(meshes);
+      final mesh = FaceDistanceDetectorServiceAndroid.getLargestFace(meshes);
       final List<FaceMeshPoint>? leftEyeContour =
           mesh.contours[FaceMeshContourType.leftEye];
       final List<FaceMeshPoint>? rightEyeContour =
           mesh.contours[FaceMeshContourType.rightEye];
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<Point<double>> eyeLandmarks = [
-          MachineLearningCameraServiceAndroid.getEyeLandmark(leftEyeContour),
-          MachineLearningCameraServiceAndroid.getEyeLandmark(rightEyeContour),
+          FaceDistanceDetectorServiceAndroid.getEyeLandmark(leftEyeContour),
+          FaceDistanceDetectorServiceAndroid.getEyeLandmark(rightEyeContour),
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraServiceAndroid.translator(
+          return FaceDistanceDetectorServiceAndroid.translator(
             landmark,
             inputImage,
             _canvasSize,
@@ -240,7 +240,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
         }).toList();
 
         final bool eyeLandmarksInsideTheBox =
-            MachineLearningCameraServiceAndroid.areEyeLandmarksInsideTheBox(
+            FaceDistanceDetectorServiceAndroid.areEyeLandmarksInsideTheBox(
           _translatedEyeLandmarks,
           boxCenter,
           boxWidth,
@@ -249,7 +249,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
 
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
-              MachineLearningCameraServiceAndroid.calculateDistanceToScreen(
+              FaceDistanceDetectorServiceAndroid.calculateDistanceToScreen(
             leftEyeLandmark: eyeLandmarks[0],
             rightEyeLandmark: eyeLandmarks[1],
             focalLength: _focalLength!,
@@ -273,7 +273,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     // Calling the Distance Calculator Painter
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final FaceDistancePainter painter = FaceDistancePainter(
+      final FaceDistanceDectectorPainter painter = FaceDistanceDectectorPainter(
         boxCenter,
         boxWidth,
         boxHeight,
@@ -313,7 +313,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
 
     if (faces.isNotEmpty) {
       final ios.Face face =
-          MachineLearningCameraServiceIOS.getLargestFace(faces);
+          FaceDistanceDetectorServiceIOS.getLargestFace(faces);
       final ios.FaceLandmark? leftEyeLandmark =
           face.landmarks[ios.FaceLandmarkType.leftEye];
       final ios.FaceLandmark? rightEyeLandmark =
@@ -328,7 +328,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraServiceIOS.translator(
+          return FaceDistanceDetectorServiceIOS.translator(
             landmark,
             inputImage,
             _canvasSize,
@@ -337,7 +337,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
         }).toList();
 
         final bool eyeLandmarksInsideTheBox =
-            MachineLearningCameraServiceIOS.areEyeLandmarksInsideTheBox(
+            FaceDistanceDetectorServiceIOS.areEyeLandmarksInsideTheBox(
           _translatedEyeLandmarks,
           boxCenter,
           boxWidth,
@@ -347,7 +347,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
 
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
-              MachineLearningCameraServiceIOS.calculateDistanceToScreen(
+              FaceDistanceDetectorServiceIOS.calculateDistanceToScreen(
             leftEyeLandmark: leftEyeLandmarkPosition,
             rightEyeLandmark: rightEyeLandmarkPosition,
             focalLength: _focalLength!,
@@ -370,7 +370,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     // Calling the Distance Calculator Painter
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
-      final FaceDistancePainter painter = FaceDistancePainter(
+      final FaceDistanceDectectorPainter painter = FaceDistanceDectectorPainter(
         boxCenter,
         boxWidth,
         boxHeight,
