@@ -26,7 +26,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppFaceDistanceCamera(
+    return FaceDistanceDetector(
       onCameraCreated: (controller, paint, distance, isLoading) {
         final isValidDistance =
             distance != null && distance >= 35 && distance <= 45;
@@ -122,8 +122,8 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
   }
 }
 
-class AppFaceDistanceCamera extends ConsumerStatefulWidget {
-  const AppFaceDistanceCamera({
+class FaceDistanceDetector extends ConsumerStatefulWidget {
+  const FaceDistanceDetector({
     super.key,
     required this.onCameraCreated,
   });
@@ -132,11 +132,11 @@ class AppFaceDistanceCamera extends ConsumerStatefulWidget {
       onCameraCreated;
 
   @override
-  ConsumerState<AppFaceDistanceCamera> createState() =>
-      _AppFaceDistanceCameraState();
+  ConsumerState<FaceDistanceDetector> createState() =>
+      _FaceDistanceDetectorState();
 }
 
-class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
+class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   CustomPaint? _customPaint;
@@ -146,7 +146,7 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
     option: FaceMeshDetectorOptions.faceMesh,
   );
 
-  final ios.FaceDetector _faceDetectorIos = ios.FaceDetector(
+  final ios.FaceDetector _faceDetector = ios.FaceDetector(
     options: ios.FaceDetectorOptions(
       enableContours: true,
       enableLandmarks: true,
@@ -293,13 +293,13 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
       _processImage(inputImage);
     } else {
       final ios.InputImage? inputImage =
-          MachineLearningCameraServiceIOS.inputImageFromCameraImageIos(
+          MachineLearningCameraServiceIOS.inputImageFromCameraImage(
         image: image,
         camera: camera,
         deviceOrientation: orientation,
       );
       if (inputImage == null) return;
-      _processImageIos(inputImage);
+      _processImageIOS(inputImage);
     }
   }
 
@@ -397,13 +397,13 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
   }
 
   // Function to process the frames as per our requirements
-  Future<void> _processImageIos(ios.InputImage inputImage) async {
+  Future<void> _processImageIOS(ios.InputImage inputImage) async {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
     final List<ios.Face> faces =
-        await _faceDetectorIos.processImage(inputImage);
+        await _faceDetector.processImage(inputImage);
 
     // Measurement of the Fixed Center Eye Scanner Box
     const double boxSizeRatio = 0.7;
@@ -417,7 +417,7 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
 
     if (faces.isNotEmpty) {
       final ios.Face face =
-          MachineLearningCameraServiceIOS.getLargestFaceIos(faces);
+          MachineLearningCameraServiceIOS.getLargestFace(faces);
       final ios.FaceLandmark? leftEyeLandmark =
           face.landmarks[ios.FaceLandmarkType.leftEye];
       final ios.FaceLandmark? rightEyeLandmark =
@@ -432,7 +432,7 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
         ];
 
         _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return MachineLearningCameraServiceIOS.translatorIos(
+          return MachineLearningCameraServiceIOS.translator(
             landmark,
             inputImage,
             _canvasSize,
@@ -451,7 +451,7 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
 
         if (eyeLandmarksInsideTheBox) {
           _distanceToFace =
-              MachineLearningCameraServiceIOS.calculateDistanceToScreenIos(
+              MachineLearningCameraServiceIOS.calculateDistanceToScreen(
             leftEyeLandmark: leftEyeLandmarkPosition,
             rightEyeLandmark: rightEyeLandmarkPosition,
             focalLength: _focalLength!,
@@ -548,7 +548,7 @@ class _AppFaceDistanceCameraState extends ConsumerState<AppFaceDistanceCamera>
       if (Platform.isAndroid) {
         _meshDetector.close();
       } else if (Platform.isIOS) {
-        _faceDetectorIos.close();
+        _faceDetector.close();
       }
 
       if (_controller.value.isInitialized &&

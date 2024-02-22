@@ -5,7 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 
-import '../../../../visual_acuity_tumbling/presentation/widgets/coordinates_translator.dart';
+import '../../../../visual_acuity_tumbling/presentation/widgets/coordinates_translator_android.dart';
 import '../../../domain/models/enums/triage_enums.dart';
 
 class EyeDetectorService {
