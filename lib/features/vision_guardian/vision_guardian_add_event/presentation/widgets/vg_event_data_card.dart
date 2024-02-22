@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:intl/intl.dart';
@@ -56,9 +57,9 @@ class VgEventDataCards extends StatelessWidget {
               topLeft: Radius.circular(AppSize.kmradius - 5),
               bottomLeft: Radius.circular(AppSize.kmradius - 5),
             ),
-            child: CachedNetworkImage(
+            child: AppNetworkImage(
               imageUrl: _getImageUrl(data.images!.first),
-              fit: BoxFit.cover,
+              shapeCircle: false,
               width: Responsive.isMobile(context)
                   ? AppSize.width(context) * 0.25
                   : AppSize.width(context) * 0.25,
