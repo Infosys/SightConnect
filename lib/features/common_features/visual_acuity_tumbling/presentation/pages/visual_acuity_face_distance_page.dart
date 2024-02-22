@@ -19,8 +19,15 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
         final isValidDistance =
             distance != null && distance >= 35 && distance <= 45;
         return Scaffold(
-          appBar: const CustomAppbar(
-            title: Text('Distance to Face'),
+          appBar: CustomAppbar(
+            title: const Text('Distance to Face'),
+            leadingIcon: IconButton(
+              splashRadius: 20,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.close),
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
