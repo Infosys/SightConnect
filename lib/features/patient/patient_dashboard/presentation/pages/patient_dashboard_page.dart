@@ -59,7 +59,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
           },
           loading: () => const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             ),
           ),
           error: (error, stackTrace) {

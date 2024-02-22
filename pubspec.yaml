@@ -94,6 +94,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   shimmer: ^3.0.0
   workmanager: ^0.5.2
+  package_info_plus: ^5.0.1
+
 
 dependency_overrides:
   camera:

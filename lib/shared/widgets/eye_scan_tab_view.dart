@@ -5,6 +5,8 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'app_network_image.dart';
+
 class EyeScanTabView extends StatelessWidget {
   const EyeScanTabView({
     super.key,
@@ -39,6 +41,7 @@ class EyeScanTabView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               height: 200,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: _EyeScanImage(
@@ -118,11 +121,11 @@ class _EyeScanImage extends StatelessWidget {
             : Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.ksradius),
-                  child: CachedNetworkImage(
+                  child: AppNetworkImage(
                     imageUrl: image!,
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    shapeCircle: false,
+                    height: 100,
+                    width: 100,
                   ),
                 ),
               ),

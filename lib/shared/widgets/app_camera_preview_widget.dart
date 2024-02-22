@@ -4,7 +4,6 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -15,32 +14,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../../../../../../shared/widgets/custom_app_bar.dart';
+import 'custom_app_bar.dart';
 
-class TriageEyeCameraDisplay extends StatelessWidget {
+class AppCamerPreviewWidget extends StatelessWidget {
   final VoidCallback onCameraSwitch;
   final VoidCallback onFlashToggle;
   final VoidCallback onCapture;
   final bool isLoading;
   final String progressMessage;
-  final TriageEyeType currentEye;
+  final String topHeadingTitle;
   final CameraController controller;
   final CustomPaint? customPaint;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final bool isEyeValid;
+  final bool isDrawerEnabled;
 
-  const TriageEyeCameraDisplay({
+  const AppCamerPreviewWidget({
     super.key,
     required this.onCameraSwitch,
     required this.onFlashToggle,
     required this.onCapture,
     required this.isLoading,
     required this.progressMessage,
-    required this.currentEye,
+    required this.topHeadingTitle,
     required this.controller,
     required this.customPaint,
     required this.scaffoldKey,
     required this.isEyeValid,
+    required this.isDrawerEnabled,
   });
 
   @override
@@ -64,9 +65,8 @@ class TriageEyeCameraDisplay extends StatelessWidget {
         },
         child: Scaffold(
           key: scaffoldKey,
-          extendBodyBehindAppBar: true,
           backgroundColor: AppColor.black,
-          drawer: const TriageStepsDrawer(),
+          drawer: isDrawerEnabled ? const TriageStepsDrawer() : null,
           appBar: CustomAppbar(
             iconTheme: const IconThemeData(
               color: AppColor.white,
@@ -78,20 +78,22 @@ class TriageEyeCameraDisplay extends StatelessWidget {
             leadingWidth: 60,
             titleSpacing: 0.0,
             centerTitle: false,
-            leadingIcon: InkWell(
-              customBorder: const CircleBorder(),
-              onTap: () {
-                scaffoldKey.currentState!.openDrawer();
-              },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Image.asset(
-                  AppIcon.hamburgerIcon,
-                  color: AppColor.white,
-                ),
-              ),
-            ),
+            leadingIcon: !isDrawerEnabled
+                ? const SizedBox()
+                : InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Image.asset(
+                        AppIcon.hamburgerIcon,
+                        color: AppColor.white,
+                      ),
+                    ),
+                  ),
             title: Text(
               loc.eyeScanTitle,
               style: applyFiraSansFont(
@@ -125,7 +127,6 @@ class TriageEyeCameraDisplay extends StatelessWidget {
               color: AppColor.black,
               child: Stack(
                 clipBehavior: Clip.none,
-                alignment: Alignment.center,
                 children: <Widget>[
                   Platform.isAndroid
                       ? Center(
@@ -140,13 +141,13 @@ class TriageEyeCameraDisplay extends StatelessWidget {
                           ),
                         ),
                   Positioned(
-                    top: 100,
-                    left: null,
-                    right: null,
+                    top: AppSize.height(context) * 0.05,
+                    left: AppSize.width(context) * 0.1,
+                    right: AppSize.width(context) * 0.1,
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        _eyeLocalization(currentEye, context),
+                        topHeadingTitle,
                         style: applyRobotoFont(
                           fontSize: 16,
                           color: AppColor.white,
@@ -188,7 +189,10 @@ class TriageEyeCameraDisplay extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.all(24),
+                          padding: EdgeInsets.symmetric(
+                            vertical: AppSize.height(context) * 0.05,
+                            horizontal: AppSize.width(context) * 0.1,
+                          ),
                           // color: AppColor.black.withOpacity(0.5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -218,6 +222,7 @@ class TriageEyeCameraDisplay extends StatelessWidget {
                               Material(
                                 color: Colors.transparent,
                                 child: InkWell(
+                                  customBorder: const CircleBorder(),
                                   onTap: () {
                                     onCapture();
                                   },
@@ -269,14 +274,5 @@ class TriageEyeCameraDisplay extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _eyeLocalization(TriageEyeType eye, BuildContext context) {
-    return switch (eye) {
-      TriageEyeType.LEFT => context.loc!.leftEyeString,
-      TriageEyeType.RIGHT => context.loc!.rightEyeString,
-      TriageEyeType.BOTH => context.loc!.bothEyeString,
-      _ => "",
-    };
   }
 }

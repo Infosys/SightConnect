@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
-class TriageEyePreviewPage extends StatelessWidget {
-  const TriageEyePreviewPage({super.key, required this.imageFile});
+class AppCameraImagePreview extends StatelessWidget {
+  const AppCameraImagePreview({super.key, required this.imageFile});
   final XFile imageFile;
 
   @override
@@ -29,9 +30,9 @@ class TriageEyePreviewPage extends StatelessWidget {
             right: 0,
             child: Container(
               color: AppColor.black.withOpacity(0.5),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSize.width(context) * 0.05,
+                vertical: AppSize.height(context) * 0.05,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -57,7 +58,6 @@ class TriageEyePreviewPage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         Navigator.of(context).pop(imageFile);
-                        
                       },
                       icon: const Icon(Icons.check_circle, size: 22),
                       label: Text(

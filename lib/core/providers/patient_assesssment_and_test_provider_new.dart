@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
@@ -289,6 +288,10 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     _selfTestReportList.clear();
     _finalReportPage = 0;
     _hasFinalReportMore = true;
+    _clinicalReportPage=0;
+    _hasClinicalReportMore=true;
+    _selfTestReportPage=0;
+    _hasSelfTestReportMore=true;
     notifyListeners();
     getTriageReportByPatientIdAndStatus();
   }

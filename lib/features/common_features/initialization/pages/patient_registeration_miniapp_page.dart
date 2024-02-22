@@ -65,6 +65,9 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   }
 
   String validateMobile() {
+
+    if(PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") return "";
+
     final mobile = PersistentAuthStateService.authState.username;
     if (mobile == null) return "";
     final mobileNumber = mobile.substring(3);

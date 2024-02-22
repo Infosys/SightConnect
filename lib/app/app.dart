@@ -61,7 +61,10 @@ class MyApp extends ConsumerWidget {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              navigatorObservers: [matomoObserver],
+              navigatorObservers: [
+                matomoObserver,
+                // SentryNavigatorObserver(),
+              ],
               supportedLocales: appLocales.map((e) => Locale(e.locale)),
               debugShowCheckedModeBanner: false,
               themeMode: ref.watch(themeProvider),

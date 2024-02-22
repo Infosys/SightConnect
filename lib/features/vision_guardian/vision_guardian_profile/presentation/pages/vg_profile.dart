@@ -91,7 +91,7 @@ class VgProfile extends ConsumerWidget {
         },
         loading: () {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           );
         },
       ),

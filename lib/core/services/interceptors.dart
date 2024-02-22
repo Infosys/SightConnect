@@ -21,11 +21,10 @@ class DioTokenInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    logger.d("Dio Interceptor onRequest");
     //BYPASSING AUTH FOR EXOTEL
-    if (options.uri.path.contains("/services/exotel")) {
-      return super.onRequest(options, handler);
-    }
+    // if (options.uri.path.contains("/services/exotel")) {
+    //   return super.onRequest(options, handler);
+    // }
     options.headers.addAll({
       'Authorization':
           'Bearer ${PersistentAuthStateService.authState.accessToken}'
@@ -36,63 +35,68 @@ class DioTokenInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    logger.d("Dio Interceptor onERROR ${err.response?.statusCode}");
-    logger.d("Dio Interceptor onERROR_URL ${err.response?.realUri.path}");
     if (err.response?.statusCode == 401) {
-      final isAccessTokenExpired =
-          PersistentAuthStateService.authState.hasAccessTokenExpired();
-      final isRefreshTokenExpired =
-          PersistentAuthStateService.authState.hasRefreshTokenExpired();
+      // Add a retry limit
+      const retryLimit = 3;
+      int retryCount = 0;
 
-      logger.d({
-        "isAccessTokenExpired": isAccessTokenExpired,
-        "isRefreshTokenExpired": isRefreshTokenExpired,
-      });
+      while (retryCount <= retryLimit) {
+        retryCount++;
 
-      if (isAccessTokenExpired) {
-        if (isRefreshTokenExpired) {
-          await _ref.read(initializationProvider).logout();
-          AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-            LoginPage.routeName,
-            (route) => false,
-          );
-          logger.e("Both access token and refresh token expired");
-        } else {
+        final isAccessTokenExpired =
+            PersistentAuthStateService.authState.hasAccessTokenExpired();
+        final isRefreshTokenExpired =
+            PersistentAuthStateService.authState.hasRefreshTokenExpired();
+
+        if (isAccessTokenExpired && !isRefreshTokenExpired) {
           try {
-            final refreshToken =
-                PersistentAuthStateService.authState.refreshToken;
-            final tokens = await _ref
-                .read(initializationProvider)
-                .refreshTokens(refreshToken: refreshToken!);
-
-            logger.d({
-              "newAccessToken": tokens!.accessToken,
-              "newRefreshToken": tokens.refreshToken,
-            });
-            // update the tokens in the persistent storage
-            // and in the auth state
-            await PersistentAuthStateService.authState
-                .updateAccessToken(accessToken: tokens.accessToken);
-            await PersistentAuthStateService.authState
-                .updateRefreshToken(refreshToken: tokens.refreshToken);
+            // refresh the token
+            await _refreshToken();
             err.requestOptions.headers['Authorization'] =
                 'Bearer ${PersistentAuthStateService.authState.accessToken}';
+
+            // Retry the failed request with the new token
+            final response = await _dio.fetch(err.requestOptions);
+            return handler.resolve(response);
           } catch (e) {
-            // if there is an error while refreshing the tokens
+            // if the refresh token is expired, logout the user
             logger.e("Error while refreshing tokens $e");
-            await _ref.read(initializationProvider).logout();
-            AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-              LoginPage.routeName,
-              (route) => false,
-            );
+            await _logout();
+            break;
           }
+        } else if (isRefreshTokenExpired) {
+          logger.e("Both access token and refresh token expired");
+          await _logout();
+          break;
         }
       }
-
-      final response = await _dio.fetch(err.requestOptions);
-      return handler.resolve(response);
     }
     return handler.next(err);
+  }
+
+  Future<void> _refreshToken() async {
+    final refreshToken = PersistentAuthStateService.authState.refreshToken;
+    final tokens = await _ref
+        .read(initializationProvider)
+        .refreshTokens(refreshToken: refreshToken!);
+
+    logger.d({
+      "newAccessToken": tokens!.accessToken,
+      "newRefreshToken": tokens.refreshToken,
+    });
+    // update the tokens in the persistent storage
+    await PersistentAuthStateService.authState
+        .updateAccessToken(accessToken: tokens.accessToken);
+    await PersistentAuthStateService.authState
+        .updateRefreshToken(refreshToken: tokens.refreshToken);
+  }
+
+  Future<void> _logout() async {
+    await _ref.read(initializationProvider).logout();
+    AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+      LoginPage.routeName,
+      (route) => false,
+    );
   }
 }
 

@@ -125,7 +125,7 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     if (!_controller.value.isInitialized) {
       return;
     }
-    
+
     isLoading = true;
 
     if (_controller.value.flashMode == FlashMode.off) {
@@ -134,7 +134,6 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
       await _controller.setFlashMode(FlashMode.off);
     }
     isLoading = false;
-    
   }
 
   @override
@@ -143,13 +142,13 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
 
     if (_cameras.isEmpty) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator.adaptive(),
       );
     }
 
     if (!_controller.value.isInitialized) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator.adaptive(),
       );
     } else {
       return Container(
@@ -182,12 +181,14 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
                   ),
                   child: IconButton(
                     onPressed: () async {
-                await _toggleFlash();
-              },
-                    icon:  Icon(_controller.value.flashMode == FlashMode.off
-                      ? Icons.flash_off
-                      : Icons.flash_on,
-                  color: AppColor.white,),
+                      await _toggleFlash();
+                    },
+                    icon: Icon(
+                      _controller.value.flashMode == FlashMode.off
+                          ? Icons.flash_off
+                          : Icons.flash_on,
+                      color: AppColor.white,
+                    ),
                   ),
                 ),
               ),

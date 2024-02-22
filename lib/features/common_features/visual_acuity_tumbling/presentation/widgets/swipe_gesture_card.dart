@@ -26,10 +26,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
-
-    // final isValid = ref.watch(distanceNotifierProvider).isDistanceValid();
-    // final distanceText =
-    //     ref.watch(distanceNotifierProvider).getDistanceText(context);
+        final minSwipeLength = AppSize.width(context) * 0.4;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -43,30 +40,11 @@ class SwipeGestureCard extends HookConsumerWidget {
           },
         );
         next.startGame(Eye.left);
-      } else if (next.currentEye == Eye.left && next.isGameOver!) {
-        logger.d("Game Over for right eye");
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return VisualAcuityDialog.showEyeInstructionDialog(
-                context,
-                next.currentEye!,
-              );
-            });
-        next.startGame(Eye.both);
-      } else if (next.currentEye == Eye.both && next.isGameOver!) {
-        logger.d("Game Over for both eye");
-        showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return const VisualAcuitySuccessDialog();
-            });
       }
     });
 
     return GestureDetector(
+      onTap: () {},
       onPanStart: (details) {
         startPoint.value = details.localPosition;
       },
@@ -74,37 +52,41 @@ class SwipeGestureCard extends HookConsumerWidget {
         endPoint.value = details.localPosition;
       },
       onPanEnd: (details) {
-        double angleDegrees =
-            _getAngleOfSwipe(startPoint.value, endPoint.value);
 
-        if (angleDegrees >= 60 && angleDegrees <= 120) {
-          dragDirection.value = QuestionDirection.down;
-        } else if (angleDegrees >= 150 && angleDegrees <= 210) {
-          dragDirection.value = QuestionDirection.left;
-        } else if (angleDegrees >= 240 && angleDegrees <= 300) {
-          dragDirection.value = QuestionDirection.up;
-        } else if (angleDegrees >= 330 || angleDegrees <= 30) {
-          dragDirection.value = QuestionDirection.right;
-        } else {
-          //Interactive toast, set [isIgnoring] false.
-          AppToast.showToast(
-            context,
-            loc.swipeGestureError,
-          );
+        double distanceBetweenPoints =
+            _getDistanceBetweenPoints(startPoint.value, endPoint.value);
+
+        logger.d("distance between start and end point $distanceBetweenPoints");
+
+        if (distanceBetweenPoints < minSwipeLength) {
+          shortSwipeDialog(context, "Swipe is too short");
           return;
         }
 
-        if (distance.isDistanceValid() == true) {
-          model.handUserResponse(
-            UserResponse(
-              levelNumber: model.currentLevel!,
-              swipeDirection: dragDirection.value,
-              mode: model.gameMode!,
-              questionIndex: model.currentIndex!,
-              isUserResponseCorrect: false,
-            ),
-          );
+        final value = _getSwipeDirection(startPoint.value, endPoint.value);
+        
+        if (value == null) {
+          AppToast.showToast(context, loc.swipeGestureError);
+          return;
+        } else {
+          dragDirection.value = value;
         }
+
+        if (!distance.isDistanceValid()) {
+          return;
+        }
+
+        model.handUserResponse(
+          UserResponse(
+            levelNumber: model.currentLevel!,
+            swipeDirection: dragDirection.value,
+            mode: model.gameMode!,
+            questionIndex: model.currentIndex!,
+            isUserResponseCorrect: false,
+          ),
+        );
+
+        _handleGameOver(context, model);
       },
       child: Container(
         decoration: BoxDecoration(
@@ -131,7 +113,9 @@ class SwipeGestureCard extends HookConsumerWidget {
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(35), topRight: Radius.circular(35)),
+            topLeft: Radius.circular(35),
+            topRight: Radius.circular(35),
+          ),
           child: Stack(
             fit: StackFit.expand,
             clipBehavior: Clip.none,
@@ -142,7 +126,7 @@ class SwipeGestureCard extends HookConsumerWidget {
                 fit: BoxFit.fill,
               ),
               Positioned(
-                  child: distance.isDistanceValid() == true
+                  child: distance.isDistanceValid()
                       ? Center(
                           child: Text(
                             loc.swipeGestureCardText,
@@ -182,6 +166,52 @@ class SwipeGestureCard extends HookConsumerWidget {
     );
   }
 
+  QuestionDirection? _getSwipeDirection(Offset startPoint, Offset endPoint) {
+    double angleDegrees = _getAngleOfSwipe(startPoint, endPoint);
+
+    if (angleDegrees >= 60 && angleDegrees <= 120) {
+      return QuestionDirection.down;
+    } else if (angleDegrees >= 150 && angleDegrees <= 210) {
+      return QuestionDirection.left;
+    } else if (angleDegrees >= 240 && angleDegrees <= 300) {
+      return QuestionDirection.up;
+    } else if (angleDegrees >= 330 || angleDegrees <= 30) {
+      return QuestionDirection.right;
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> _handleGameOver(
+    BuildContext context,
+    VisualAcuityTestProvider model,
+  ) async {
+    if (!model.isGameOver!) {
+      return;
+    }
+    if (model.currentEye == Eye.left) {
+      logger.d("Game Over for left eye");
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return VisualAcuityDialog.showEyeInstructionDialog(
+              context, model.currentEye!);
+        },
+      );
+      model.startGame(Eye.both);
+    } else if (model.currentEye == Eye.both) {
+      logger.d("Game Over for both eyes");
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return const VisualAcuitySuccessDialog();
+        },
+      );
+    }
+  }
+
   double _getAngleOfSwipe(Offset startPoint, Offset endPoint) {
     double dx = endPoint.dx - startPoint.dx;
     double dy = endPoint.dy - startPoint.dy;
@@ -194,4 +224,36 @@ class SwipeGestureCard extends HookConsumerWidget {
     }
     return angleDegrees;
   }
+
+  double _getDistanceBetweenPoints(Offset startPoint, Offset endPoint) {
+    double swipeLength = (endPoint - startPoint).distance;
+    return swipeLength;
+  }
+}
+
+Future<void> shortSwipeDialog(BuildContext context, String message) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.klradius))),
+        content: Text(
+          message,
+          style: applyRobotoFont(),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Try Again'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

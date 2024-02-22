@@ -206,7 +206,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const SizedBox(height: AppSize.klheight * 4),
                     isLoading.value
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive())
                         : ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               minimumSize:
@@ -291,7 +292,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               InitializationPage.routeName, (route) => false);
                         } on DioException catch (e) {
                           otpError.value =
-                              e.response!.data["error_description"] ??
+                              e.response?.data["error_description"] ??
                                   "Invalid OTP";
                           Fluttertoast.showToast(msg: otpError.value);
                         } catch (e) {
@@ -382,7 +383,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Visibility(
                     visible: isLoading.value,
                     child: const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator.adaptive(),
                     ),
                   ),
                   // ElevatedButton(

@@ -8,11 +8,14 @@ import 'package:eye_care_for_all/features/common_features/triage/data/source/loc
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,24 +37,14 @@ class TriageExitAlertBox extends HookConsumerWidget {
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
       title: isLoading.value
-          ? Text(
-              "Loading..",
-              style: applyRobotoFont(
-                fontSize: 14,
-              ),
-            )
+          ? const SizedBox.shrink()
           : const Icon(
-              Icons.warning_amber_outlined,
+              CupertinoIcons.exclamationmark_triangle_fill,
               color: AppColor.orange,
+              size: 40,
             ),
       content: isLoading.value
-          ? const SizedBox(
-              height: 45,
-              width: 45,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            )
+          ? const LoadingCard()
           : SizedBox(
               width: AppSize.width(context) * 0.8,
               child: Column(
@@ -96,6 +89,7 @@ class TriageExitAlertBox extends HookConsumerWidget {
                           } finally {
                             isLoading.value = false;
                             ref.read(resetProvider).reset();
+                            ref.read(accessibilityProvider).resetBrightness();
                             navigator.popUntil((route) => route.isFirst);
                           }
                         },

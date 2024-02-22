@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/models/consent_model.dart';
-import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
@@ -43,7 +42,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           logger.d("with role: $role");
           _profileVerification(roleMapper(role)!);
         } else {
-          final selectedProfile = await showProfileSelectionDialog(navigator);
+          final selectedProfile = await _showProfileSelectionDialog(navigator);
           logger.d("Selected Role: $selectedProfile");
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
@@ -78,58 +77,106 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
-    if (role == Role.ROLE_PATIENT) {
-      if (await _isConsentAlreadyAccepted()) {
-        await _registerUser(navigator, role);
-      } else {
-        final consentGiven = await _showConsentForm(navigator, role);
-        if (consentGiven != null && consentGiven) {
+    try {
+      if (role == Role.ROLE_PATIENT) {
+        final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
+        if (isAccepted != null && isAccepted) {
           await _registerUser(navigator, role);
         } else {
-          await _invalidateAndLogout("Consent not given. Please login again.");
+          // User stay on the same page
         }
+      } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+        await _invalidateAndLogout("You are not authorized to login.");
+      } else if (role == Role.ROLE_VISION_GUARDIAN) {
+        await _invalidateAndLogout("You are not authorized to login.");
+      } else if (role == Role.ROLE_OPTOMETRIST) {
+        await _invalidateAndLogout("You are not authorized to login.");
       }
-    } else if (role == Role.ROLE_VISION_TECHNICIAN) {
-      await _invalidateAndLogout("You are not authorized to login.");
-    } else if (role == Role.ROLE_VISION_GUARDIAN) {
-      await _invalidateAndLogout("You are not authorized to login.");
-    } else if (role == Role.ROLE_OPTOMETRIST) {
-      await _invalidateAndLogout("You are not authorized to login.");
+    } catch (e) {
+      logger.e("_handleNewUser: $e");
+      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
   Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    if (role == Role.ROLE_OPTOMETRIST) {
-      //Skip consent for optometrist
-      await navigateBasedOnRole(navigator, role);
-      return;
-    }
-
     try {
-      if (await _isConsentAlreadyAccepted()) {
-        // consent already accepted
-        await navigateBasedOnRole(navigator, role);
+      final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
+      if (isAccepted != null && isAccepted) {
+        await _navigateBasedOnRole(navigator, role);
       } else {
-        final isAccepted = await _showConsentForm(navigator, role);
-        if (isAccepted != null && isAccepted) {
-          await navigateBasedOnRole(navigator, role);
-        } else {
-          // it will never come here
-          await _invalidateAndLogout("Consent not given. Please login again.");
-        }
+        // User stay on the same page
       }
     } catch (e) {
+      logger.e("_handleExistingUser: $e");
       await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
-  Future<bool> _isConsentAlreadyAccepted() async {
-    final model = ref.watch(consentRepositoryProvider);
-    final consent = await model.getConsent().catchError((e) async {
-      logger.e("getConsent: $e");
-      await _invalidateAndLogout("Server Error. Please login again.");
-    });
-    return consent.consentStatus == ConsentStatus.ACKNOWLEDGED;
+  Future<bool?> _verifyRoleSpecificConsent(
+      NavigatorState navigator, Role role) async {
+    try {
+      final model = ref.read(initializationProvider);
+      if (role == Role.ROLE_OPTOMETRIST) {
+        // Skip consent and 18+ declaration for optometrist
+        return true;
+      } else if (role == Role.ROLE_PATIENT) {
+        // 18+ declaration and consent check for patient
+        bool is18PlusDeclarationAccepted =
+            await model.getEighteenPlusDeclarationStatus();
+        bool isConsentAccepted = await model.getConsentStatus();
+
+        if (is18PlusDeclarationAccepted && isConsentAccepted) {
+          return true;
+        } else {
+          if (!is18PlusDeclarationAccepted) {
+            is18PlusDeclarationAccepted =
+                await _show18PlusDeclaration() ?? false;
+          }
+          if (!isConsentAccepted) {
+            isConsentAccepted =
+                await _showConsentForm(navigator, role) ?? false;
+          }
+        }
+        return is18PlusDeclarationAccepted && isConsentAccepted;
+      } else {
+        // Check consent for vision technician and guardian
+        bool isConsentAccepted = await model.getConsentStatus();
+        if (!isConsentAccepted) {
+          isConsentAccepted = await _showConsentForm(navigator, role) ?? false;
+        }
+        return isConsentAccepted;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool?> _show18PlusDeclaration() async {
+    return showDialog<bool?>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const EigtheenPlusDeclaration();
+      },
+    );
+  }
+
+  Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
+    bool? consentGiven = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) {
+          if (role == Role.ROLE_PATIENT) {
+            return const PatientConsentFormPage();
+          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
+            return const VTConsentFormPage();
+          } else {
+            // This is for vision guardian
+            return const VTConsentFormPage();
+          }
+        },
+      ),
+    );
+    return consentGiven;
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
@@ -154,24 +201,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-  Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) {
-          if (role == Role.ROLE_PATIENT) {
-            return const PatientConsentFormPage();
-          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
-            return const VTConsentFormPage();
-          } else {
-            // This is for vision guardian
-            return const VTConsentFormPage();
-          }
-        },
-      ),
-    );
-    return consentGiven;
-  }
-
   Future<void> _showRegistrationDialog(Role role) async {
     showDialog(
       context: context,
@@ -193,7 +222,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
   }
 
-  Future<Role?> showProfileSelectionDialog(NavigatorState navigator) {
+  Future<Role?> _showProfileSelectionDialog(NavigatorState navigator) {
     final currentRoles = PersistentAuthStateService.authState.roles;
     if (currentRoles == null) {
       return Future.value(null);
@@ -211,7 +240,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     );
   }
 
-  Future<void> navigateBasedOnRole(NavigatorState navigator, Role role) async {
+  Future<void> _navigateBasedOnRole(NavigatorState navigator, Role role) async {
     final rolePages = {
       Role.ROLE_PATIENT: const PatientDashboardPage(),
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),

@@ -91,7 +91,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                 );
               },
               loading: () => const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               ),
             ),
       ],
@@ -187,7 +187,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
       DataCell(
         ref.watch(ivrCallHistorySearchHelperProvider).isLoading
             ? const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               )
             : CircleAvatar(
                 backgroundColor: data.status == "COMPLETED"

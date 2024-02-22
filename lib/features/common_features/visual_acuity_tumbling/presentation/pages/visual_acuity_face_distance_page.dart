@@ -52,15 +52,13 @@ class _VisualAcuityFaceDistancePageViewState
   void initState() {
     logger.d("VisualAcuityFaceDistancePage: Init State Called");
     super.initState();
-    _isPermissionGranted = false;
-    _isLoading = false;
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _checkPermissions(context));
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
-    logger.d("VisualAcuityFaceDistancePage: Check Permission Called");
+    logger.d("VisualAcuityFaceDistancePage: Check Permissions Called");
     final NavigatorState navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -68,8 +66,10 @@ class _VisualAcuityFaceDistancePageViewState
         _isLoading = false;
       });
     }
+    logger.d("VisualAcuityFaceDistancePage: Checking Permissions");
     final bool isGranted =
         await CameraPermissionService.checkPermissions(context);
+    logger.d("VisualAcuityFaceDistancePage: isGranted: $isGranted");
     if (isGranted) {
       if (mounted) {
         setState(() {
@@ -141,7 +141,8 @@ class _VisualAcuityFaceDistancePageViewState
       _sensorX = cameraInfo?['sensorX'] ?? 0.001;
       _sensorY = cameraInfo?['sensorY'] ?? 0.001;
     } catch (error) {
-      logger.e('Error getting camera info: $error');
+      logger
+          .e('VisualAcuityFaceDistancePage: Error getting camera info: $error');
       rethrow;
     }
   }
@@ -258,8 +259,9 @@ class _VisualAcuityFaceDistancePageViewState
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
       "VisualAcuityFaceDistancePage: AppLifecycleState": "$state",
-      "isPermissionGranted": "$_isPermissionGranted",
-      "isLoading": "$_isLoading",
+      "VisualAcuityFaceDistancePage: isPermissionGranted":
+          "$_isPermissionGranted",
+      "VisualAcuityFaceDistancePage: isLoading": "$_isLoading",
     });
     if (!_isPermissionGranted) {
       return;
@@ -280,6 +282,10 @@ class _VisualAcuityFaceDistancePageViewState
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
       logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.detached");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.hidden) {
+      logger.d("VisualAcuityFaceDistancePage: AppLifecycleState.hidden");
       _addLoading();
       _stopLiveFeed();
     }
@@ -306,7 +312,7 @@ class _VisualAcuityFaceDistancePageViewState
         await _controller.dispose();
       }
     } catch (e) {
-      logger.d('Error stopping live feed: $e');
+      logger.d('VisualAcuityFaceDistancePage: Error stopping live feed: $e');
     }
   }
 
@@ -323,14 +329,14 @@ class _VisualAcuityFaceDistancePageViewState
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     }
     if (!_controller.value.isInitialized) {
       return const Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
     } else {
@@ -394,51 +400,77 @@ class _VisualAcuityFaceDistancePageViewState
                         top: AppSize.height(context) * 0.06,
                         left: AppSize.width(context) * 0.2,
                         right: AppSize.width(context) * 0.2,
-                        child: Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                          child: AutoSizeText(
-                            _distanceToFace != null
-                                ? 'Distance to Face: $_distanceToFace cm'
-                                : 'Bring your face inside the box',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: (_distanceToFace != null &&
-                                      (_distanceToFace! >= 35 &&
-                                          _distanceToFace! <= 45))
-                                  ? const Color(0xff22BF85)
-                                  : AppColor.red,
+                        child: Visibility(
+                          visible: Platform.isAndroid,
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.black.withOpacity(0.8),
+                            ),
+                            child: AutoSizeText(
+                              _distanceToFace != null
+                                  ? 'Distance to Face: $_distanceToFace cm'
+                                  : 'Bring your face inside the box',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: isValidDistance
+                                    ? const Color(0xff22BF85)
+                                    : AppColor.red,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: AppSize.height(context) * 0.04,
-                        left: AppSize.width(context) * 0.1,
-                        right: AppSize.width(context) * 0.1,
-                        child: ElevatedButton(
-                          onPressed: _distanceToFace != null &&
-                                  (_distanceToFace! >= 35 &&
-                                      _distanceToFace! <= 45)
-                              ? () {
-                                  final NavigatorState navigator =
-                                      Navigator.of(context);
-                                  logger.d("Next Button Pressed");
-                                  _addLoading();
-                                  navigator.pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VisualAcuityTumblingLeftEyeInstruction(),
-                                    ),
-                                  );
-                                }
-                              : null,
-                          child: const Text("Proceed"),
-                        ),
-                      )
+                      () {
+                        if (Platform.isAndroid) {
+                          return Positioned(
+                            bottom: AppSize.height(context) * 0.04,
+                            left: AppSize.width(context) * 0.1,
+                            right: AppSize.width(context) * 0.1,
+                            child: ElevatedButton(
+                              onPressed: isValidDistance
+                                  ? () {
+                                      final NavigatorState navigator =
+                                          Navigator.of(context);
+                                      logger.d(
+                                          "VisualAcuityFaceDistancePage: Next Button Pressed");
+                                      _addLoading();
+                                      navigator.pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VisualAcuityTumblingLeftEyeInstruction(),
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              child: const Text("Proceed"),
+                            ),
+                          );
+                        } else {
+                          return Positioned(
+                            bottom: AppSize.height(context) * 0.04,
+                            left: AppSize.width(context) * 0.1,
+                            right: AppSize.width(context) * 0.1,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                final NavigatorState navigator =
+                                    Navigator.of(context);
+                                logger.d(
+                                    "VisualAcuityFaceDistancePage: Next Button Pressed");
+                                _addLoading();
+                                navigator.pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisualAcuityTumblingLeftEyeInstruction(),
+                                  ),
+                                );
+                              },
+                              child: const Text("Proceed"),
+                            ),
+                          );
+                        }
+                      }(),
                     ],
                   ),
                 ),
@@ -449,4 +481,9 @@ class _VisualAcuityFaceDistancePageViewState
       );
     }
   }
+
+  bool get isValidDistance =>
+      _distanceToFace != null &&
+      _distanceToFace! >= 35 &&
+      _distanceToFace! <= 45;
 }

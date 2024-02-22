@@ -153,7 +153,7 @@ class _MemberTile extends StatelessWidget {
                     children: [
                       Flexible(
                         child: Text(
-                          name.capitalize(),
+                          name.capitalizeFirstOfEach(),
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

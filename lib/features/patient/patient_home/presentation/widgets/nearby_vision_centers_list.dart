@@ -3,14 +3,13 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/near_by_vision_center_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_center_card.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart' as location;
-import 'package:permission_handler/permission_handler.dart';
+import 'package:permission_handler/permission_handler.dart' as handler;
 
 class NearbyVisionCentersList extends ConsumerStatefulWidget {
   const NearbyVisionCentersList({super.key});
@@ -25,9 +24,7 @@ class _NearbyVisionCentersListState
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addObserver(this);
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(nearByVisionCenterProvider.notifier).init();
     });
@@ -64,7 +61,7 @@ class _NearbyVisionCentersListState
     final loc = context.loc!;
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
-    logger.d("nearByVisionCenterProvider, viewState: $viewState");
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
       child: Column(
@@ -92,7 +89,7 @@ class _NearbyVisionCentersListState
             builder: (context) {
               if (viewState.isLoading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator.adaptive(),
                 );
               } else if (viewState.errorMessage != null) {
                 return Container(
@@ -113,37 +110,28 @@ class _NearbyVisionCentersListState
                       ),
                       const SizedBox(height: AppSize.ksheight),
                       Text(
-                        viewState.errorMessage
-                            .toString()
-                            .replaceAll("Exception: ", ""),
+                        viewState.errorMessage ?? '',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                       ),
                       const SizedBox(height: AppSize.ksheight),
-                      Builder(builder: (context) {
-                        if (viewState.permissionStatus ==
-                            location.PermissionStatus.denied) {
-                          return TextButton(
-                            onPressed: () {
-                              ref
-                                  .read(nearByVisionCenterProvider.notifier)
-                                  .init();
-                            },
-                            child: const Text("Request Location Permission"),
-                          );
-                        } else if (viewState.permissionStatus ==
-                            location.PermissionStatus.deniedForever) {
-                          return TextButton(
-                            onPressed: () {
-                              openAppSettings();
-                            },
-                            child: const Text("App Settings"),
-                          );
-                        }
-
-                        return const SizedBox();
-                      }),
+                      TextButton(
+                        onPressed: () async {
+                          final status = viewState.permissionStatus;
+                          final model =
+                              ref.read(nearByVisionCenterProvider.notifier);
+                          if (status ==
+                              location.PermissionStatus.deniedForever) {
+                            if (await handler.openAppSettings()) {
+                              model.init();
+                            }
+                          } else {
+                            model.init();
+                          }
+                        },
+                        child: const Text("Request Location Permission"),
+                      ),
                     ],
                   ),
                 );
