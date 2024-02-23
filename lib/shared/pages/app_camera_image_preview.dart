@@ -3,18 +3,33 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:image_cropper/image_cropper.dart';
 
-class AppCameraImagePreview extends StatelessWidget {
+class AppCameraImagePreview extends HookWidget {
   const AppCameraImagePreview({super.key, required this.imageFile});
   final XFile imageFile;
 
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
+
     return Scaffold(
       backgroundColor: AppColor.black,
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final image = await _cropImage(context, imageFile);
+              logger.d(image);
+            },
+            icon: const Icon(Icons.crop),
+          ),
+        ],
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -74,5 +89,41 @@ class AppCameraImagePreview extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<CroppedFile?> _cropImage(
+    BuildContext context,
+    XFile imageFile,
+  ) async {
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: imageFile.path,
+      compressFormat: ImageCompressFormat.jpg,
+      compressQuality: 100,
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+        WebUiSettings(
+          context: context,
+          presentStyle: CropperPresentStyle.dialog,
+          boundary: const CroppieBoundary(
+            width: 520,
+            height: 520,
+          ),
+          viewPort:
+              const CroppieViewPort(width: 480, height: 480, type: 'circle'),
+          enableExif: true,
+          enableZoom: true,
+          showZoomer: true,
+        ),
+      ],
+    );
+    return croppedFile;
   }
 }
