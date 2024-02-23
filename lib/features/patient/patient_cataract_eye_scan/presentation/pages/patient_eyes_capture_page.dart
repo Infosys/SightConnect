@@ -168,7 +168,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
         ).toList();
 
         // Check if Eyes are inside the box
-        _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+        _eyesInsideTheBox = EyeDetectorService.areEyeContoursInsideTheBox(
           _translatedEyeContours,
           boxCenter,
           boxWidth,

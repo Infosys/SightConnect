@@ -102,7 +102,7 @@ class EyeDetectorService {
     return Point(x, y);
   }
 
-  static bool areEyesInsideTheBox(
+  static bool areEyeContoursInsideTheBox(
     List<Point<double>> contourPoints,
     Point<double> center,
     double boxWidth,

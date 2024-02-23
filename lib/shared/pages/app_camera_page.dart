@@ -40,33 +40,33 @@ class AppCameraPage extends ConsumerStatefulWidget {
 
 class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     with WidgetsBindingObserver {
-  final FaceMeshDetector meshDetector =
-      FaceMeshDetector(option: FaceMeshDetectorOptions.faceMesh);
-  CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
-  final ResolutionPreset defaultResolution = ResolutionPreset.high;
-  late CameraController _controller;
   List<CameraDescription> _cameras = [];
-  CustomPaint? customPaint;
+  CustomPaint? _customPaint;
+  late CameraController _controller;
+  CameraLensDirection _cameraLensDirection = CameraLensDirection.front;
+  final FaceMeshDetector _meshDetector = FaceMeshDetector(
+    option: FaceMeshDetectorOptions.faceMesh,
+  );
+  // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
+  final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
+  String _progressMessage = "Loading...";
+  bool _isEyeValid = false;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  List<Point<double>> _translatedEyeContours = [];
   Size _canvasSize = Size.zero;
   bool _isLoading = false;
-  String _progressMessage = "Loading...";
   bool _isPermissionGranted = false;
-  bool _isEyeValid = false;
-  List<Point<double>> _translatedEyeContours = [];
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
+    logger.d("AppCameraPage: Init State Called");
     super.initState();
-    logger.d('AppCameraPage: initState');
-
     scaffoldKey = GlobalKey<ScaffoldState>();
     WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (Platform.isAndroid || Platform.isIOS) {
         final activeRole = PersistentAuthStateService.authState.activeRole;
         final role = roleMapper(activeRole);
         if (role == Role.ROLE_OPTOMETRIST) {
@@ -74,12 +74,15 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         }
 
         _checkPermissions(context);
-      },
-    );
+      } else {
+        Navigator.of(context).pop();
+        Fluttertoast.showToast(msg: "Platform not supported");
+      }
+    });
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
-    logger.d("AppCameraPage: Check Permission Called");
+    logger.d("AppCameraPage: Check Permissions Called");
     final NavigatorState navigator = Navigator.of(context);
     if (mounted) {
       setState(() {
@@ -87,8 +90,10 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         _isLoading = false;
       });
     }
+    logger.d("AppCameraPage: Checking Permissions");
     final bool isGranted =
         await CameraPermissionService.checkPermissions(context);
+    logger.d("AppCameraPage: isGranted: $isGranted");
     if (isGranted) {
       if (mounted) {
         setState(() {
@@ -104,27 +109,29 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<void> _initializeCamera() async {
-    logger.d('AppCameraPage: _initializeCamera');
+    logger.d("AppCameraPage: Initialize Camera Called");
     final NavigatorState navigator = Navigator.of(context);
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
       }
+      _canProcess = true;
+      _isBusy = false;
       await _startLiveFeed();
     } catch (e) {
-      logger.d('Error initializing camera: $e');
+      logger.e("AppCameraPage: Error Initializing Camera: $e");
       navigator.pop();
-      Fluttertoast.showToast(msg: "Camera not found");
+      Fluttertoast.showToast(msg: "Service not available");
     }
   }
 
   Future<void> _startLiveFeed() async {
-    logger.d('AppCameraPage: _startLiveFeed');
+    logger.d("AppCameraPage: Start Live Feed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      defaultResolution,
+      _defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
@@ -136,12 +143,31 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         if (!mounted) {
           return;
         }
+        int streamCount = 0;
+        void processCameraImage(CameraImage image) {
+          streamCount++;
+          if (streamCount % 3 == 0) {
+            final CameraDescription camera = _cameras.firstWhere(
+              (element) => element.lensDirection == _cameraLensDirection,
+            );
+            final DeviceOrientation orientation =
+                _controller.value.deviceOrientation;
+
+            final InputImage? inputImage =
+                EyeDetectorService.inputImageFromCameraImage(
+              image: image,
+              camera: camera,
+              deviceOrientation: orientation,
+            );
+            if (inputImage == null) return;
+            _processImage(inputImage);
+          }
+        }
+
         if (Platform.isAndroid) {
-          _canProcess = true;
-          _isBusy = false;
-          _controller.startImageStream(_processCameraImage);
+          _controller.startImageStream(processCameraImage);
         } else {
-          logger.d('AppCameraPage: _startLiveFeed: iOS');
+          logger.d("AppCameraPage: Start Live Feed Called: IOS");
         }
       },
     );
@@ -150,29 +176,12 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     }
   }
 
-  void _processCameraImage(CameraImage image) {
-    final CameraDescription camera = _cameras.firstWhere(
-      (element) => element.lensDirection == _cameraLensDirection,
-    );
-    final DeviceOrientation orientation = _controller.value.deviceOrientation;
-    final InputImage? inputImage = EyeDetectorService.inputImageFromCameraImage(
-      image: image,
-      camera: camera,
-      deviceOrientation: orientation,
-    );
-    if (inputImage == null) return;
-
-    _processImage(inputImage);
-  }
-
   // Function to process the frames as per our requirements
   Future<void> _processImage(InputImage inputImage) async {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final List<FaceMesh> meshes = await meshDetector.processImage(inputImage);
-
     // Measurement of the Fixed Center Eye Scanner Box
     const double boxCenterRatio = 0.5;
     final double boxWidth = _canvasSize.width * (3 / 5);
@@ -181,6 +190,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       _canvasSize.width * boxCenterRatio,
       _canvasSize.height * boxCenterRatio,
     );
+    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
 
     if (meshes.isNotEmpty) {
       final FaceMesh mesh = meshes[0];
@@ -188,7 +198,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
           mesh.contours[FaceMeshContourType.leftEye];
       final List<FaceMeshPoint>? rightEyeContour =
           mesh.contours[FaceMeshContourType.rightEye];
-
       if (leftEyeContour != null && rightEyeContour != null) {
         final List<FaceMeshPoint> eyePoints =
             EyeDetectorService.isLeftEye(widget.eye)
@@ -208,7 +217,8 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         ).toList();
 
         // Check if Eyes are inside the box
-        final bool eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+        final bool eyeContoursInsideTheBox =
+            EyeDetectorService.areEyeContoursInsideTheBox(
           _translatedEyeContours,
           boxCenter,
           boxWidth,
@@ -224,7 +234,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
           boxHeight,
         );
         // Validity of the eye
-        _isEyeValid = eyesInsideTheBox &&
+        _isEyeValid = eyeContoursInsideTheBox &&
             EyeDetectorService.areEyesCloseEnough(eyeWidthRatio);
       } else {
         _translatedEyeContours = [];
@@ -233,6 +243,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       _translatedEyeContours = [];
     }
 
+    // Calling the Eye Detector Painter
     if (inputImage.metadata?.size != null &&
         inputImage.metadata?.rotation != null) {
       final EyeDetectorPainter painter = EyeDetectorPainter(
@@ -245,9 +256,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
           _canvasSize = size;
         },
       );
-      customPaint = CustomPaint(painter: painter);
+      _customPaint = CustomPaint(painter: painter);
     } else {
-      customPaint = null;
+      _customPaint = null;
     }
 
     _isBusy = false;
@@ -260,36 +271,40 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     logger.d({
       "AppCameraPage: AppLifecycleState": "$state",
-      "isPermissionGranted": "$_isPermissionGranted",
-      "isLoading": "$_isLoading",
+      "AppCameraPage: isPermissionGranted": "$_isPermissionGranted",
+      "AppCameraPage: isLoading": "$_isLoading",
     });
     if (!_isPermissionGranted) {
       return;
     }
 
     if (state == AppLifecycleState.inactive) {
-      logger.d('AppCameraPage: AppLifecycleState.inactive');
-      setLoading();
+      logger.d("AppCameraPage: AppLifecycleState.inactive");
+      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      logger.d('AppCameraPage: AppLifecycleState.resumed');
+      logger.d("AppCameraPage: AppLifecycleState.resumed");
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      logger.d('AppCameraPage: AppLifecycleState.paused');
-      setLoading();
+      logger.d("AppCameraPage: AppLifecycleState.paused");
+      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      logger.d('AppCameraPage: AppLifecycleState.detached');
-      setLoading();
+      logger.d("AppCameraPage: AppLifecycleState.detached");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.hidden) {
+      logger.d("AppCameraPage: AppLifecycleState.hidden");
+      _addLoading();
       _stopLiveFeed();
     }
   }
 
   @override
   void dispose() {
-    logger.d('AppCameraPage: dispose');
+    logger.d("AppCameraPage: Dispose Called");
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
       _stopLiveFeed();
@@ -298,32 +313,38 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<void> _stopLiveFeed() async {
-    logger.d('AppCameraPage: _stopLiveFeed');
-
+    logger.d("AppCameraPage: Stop Live Feed Called");
     try {
       _canProcess = false;
-      meshDetector.close();
+      if (Platform.isAndroid) {
+        _meshDetector.close();
+      }
+
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();
         await _controller.dispose();
       }
     } catch (e) {
-      logger.d('Error stopping live feed: $e');
+      logger.d("AppCameraPage: Error stopping live feed: $e");
     }
   }
 
-  void setLoading([String message = "Loading..."]) {
-    setState(() {
-      _isLoading = true;
-      _progressMessage = message;
-    });
+  void _addLoading([String message = "Loading..."]) {
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+        _progressMessage = message;
+      });
+    }
   }
 
   void removeLoading() {
-    setState(() {
-      _isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -356,7 +377,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         progressMessage: _progressMessage,
         topHeadingTitle: widget.topHeading,
         controller: _controller,
-        customPaint: Platform.isAndroid ? customPaint : null,
+        customPaint: Platform.isAndroid ? _customPaint : null,
         onCapture: () async {
           if (Platform.isAndroid && !_isEyeValid) {
             return;
@@ -373,7 +394,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     if (!_controller.value.isInitialized) {
       return;
     }
-    setLoading();
+    _addLoading();
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _cameraLensDirection = CameraLensDirection.back;
     } else {
@@ -388,7 +409,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     if (!_controller.value.isInitialized) {
       return;
     }
-    setLoading();
+    _addLoading();
     if (_controller.value.flashMode == FlashMode.off ||
         _controller.value.flashMode == FlashMode.auto) {
       await _controller.setFlashMode(FlashMode.torch);
@@ -430,7 +451,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     if (!_controller.value.isInitialized) {
       return null;
     }
-    setLoading();
+    _addLoading();
     final XFile image = await _controller.takePicture();
     removeLoading();
     return image;
