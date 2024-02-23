@@ -348,6 +348,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     eventStatusFilter = selectedValue;
 
     List<VisionGuardianEventModel> previousList = [];
+    listOfEventDetails = [];
     eventLoading = true;
     notifyListeners();
     getVgEvents(previousList, "default");

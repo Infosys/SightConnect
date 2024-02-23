@@ -38,8 +38,8 @@ class VgEventDataCards extends StatelessWidget {
 
     return Container(
       width: Responsive.isMobile(context)
-          ? AppSize.width(context) * 0.9
-          : AppSize.width(context) * 0.9,
+          ? AppSize.width(context) * 0.95
+          : AppSize.width(context) * 0.95,
       height: Responsive.isMobile(context)
           ? AppSize.height(context) * 0.16
           : AppSize.height(context) * 0.24,
