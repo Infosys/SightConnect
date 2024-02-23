@@ -5,9 +5,9 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 
-import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -51,9 +51,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                     child: data["profilePhoto"] == null ||
                             data["profilePhoto"] == ""
                         ? AppNameAvatar(
-                            name: data["personalInformation"]["lastName"] +
-                                    " " +
-                                    data["personalInformation"]["firstName"] ??
+                            name: data["firstName"] + " " + data["lastName"] ??
                                 "",
                             color: AppColor.blue,
                             fontSize: 16,
@@ -77,11 +75,9 @@ class TeammatesDataCards extends HookConsumerWidget {
                               Expanded(
                                 child: Text(
                                   nameController.value.text == ''
-                                      ? data["personalInformation"]
-                                              ["firstName"] +
+                                      ? data["firstName"] +
                                           " " +
-                                          data["personalInformation"]
-                                              ["lastName"]
+                                          data["lastName"]
                                       : nameController.value.text,
                                   style: applyFiraSansFont(
                                     fontSize: 14,
@@ -94,35 +90,33 @@ class TeammatesDataCards extends HookConsumerWidget {
                                 offset: const Offset(0, 10),
                                 child: InkWell(
                                   onTap: () async {
+                                    var userId =
+                                        ref.read(globalVGProvider).userId;
+                                    var navigator = Navigator.of(context);
+                                    var model =
+                                        ref.read(addEventDetailsProvider);
                                     await ref
                                         .read(visionGuadianAddMemberProvider)
                                         .deleteMember(data["id"].toString())
                                         .then((value) {
-                                      if (data["id"] ==
-                                          ref.read(globalVGProvider).userId) {
-                                        ref
-                                            .read(addEventDetailsProvider)
-                                            .filterListEvents(-1, "ALL");
+                                      if (data["id"] == userId) {
+                                        model.filterListEvents(-1, "ALL");
                                         if (type == "Search") {
-                                          Navigator.pop(context);
+                                          navigator.pop();
                                         }
-                                        Navigator.pop(context);
+                                        navigator.pop();
                                       } else {
                                         if (type == "Search") {
-                                          ref
-                                              .read(
-                                                  visionGuadianAddMemberProvider)
-                                              .setAdd();
-                                          Navigator.pop(context);
+                                          navigator.pop();
                                         }
                                       }
-                                      showToastMessage(
-                                          "TeamMate Deleted Succesfully",
-                                          context,
-                                          0);
-                                    }).catchError((error) {
-                                      showToastMessage(
-                                          "Something went wrong", context, 0);
+                                      Fluttertoast.showToast(
+                                        msg: "TeamMate Deleted Succesfully",
+                                      );
+                                    }).onError((error, stackTrace) {
+                                      Fluttertoast.showToast(
+                                        msg: "Something went wrong",
+                                      );
                                     });
                                   },
                                   child: const Icon(

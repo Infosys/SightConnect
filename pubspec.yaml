@@ -78,6 +78,7 @@ dependencies:
   google_mlkit_face_detection: ^0.9.0 
   envied: ^0.5.3
   auto_size_text: ^3.0.0
+  web_socket_channel: ^2.4.0
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
