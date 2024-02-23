@@ -2159,6 +2159,30 @@ abstract class AppLocalizations {
   /// **'Profile updated'**
   String get patientProfileUpdated;
 
+  /// No description provided for @patientReportUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Report not available'**
+  String get patientReportUnavailable;
+
+  /// No description provided for @patientClinicalReportNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinical Report not found'**
+  String get patientClinicalReportNotFound;
+
+  /// No description provided for @patientRID.
+  ///
+  /// In en, this message translates to:
+  /// **'RID'**
+  String get patientRID;
+
+  /// No description provided for @patientUpdateUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Update not available at this moment'**
+  String get patientUpdateUnavailable;
+
   /// No description provided for @vgAddEvent.
   ///
   /// In en, this message translates to:

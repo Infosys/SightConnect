@@ -36,7 +36,7 @@
       }
     }
   },
-  "patientHasAnAppointment": "{patient} has an appointment",
+  "patientHasAnAppointment": "{patient}కి అపాయింట్‌మెంట్ ఉంది",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",
@@ -440,7 +440,7 @@
   "secureRestrictedAccess": "భద్రతా కారణాల వల్ల, జెయిల్బ్రేక్ పరికరాల మీద ఈ అప్లికేషన్ యొక్క ప్రాప్యతను నియంత్రించాము.",
   "secureExitApp": "అప్లికేషన్ నుండి నిష్క్రమించండి",
   "sharedErrorPageIssues": "మేము కొన్ని సమస్యలను ఎదుర్కొంటున్నాము. దయచేసి తరువాత మళ్ళీ ప్రయత్నించండి.",
-  "appointmentBookingTitle": "ముంగిటి బుకింగ్",
+  "appointmentBookingTitle": "అపాయింట్‌మెంట్ బుకింగ్",
   "comingSoon": "త్వరలో రాబోతుంది...",
   "miniappService": "సేవ",
   "miniappConsole": "కన్సోల్"

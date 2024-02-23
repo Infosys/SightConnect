@@ -1036,6 +1036,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get patientProfileUpdated => 'Profile updated';
 
   @override
+  String get patientReportUnavailable => 'Report not available';
+
+  @override
+  String get patientClinicalReportNotFound => 'Clinical Report not found';
+
+  @override
+  String get patientRID => 'RID';
+
+  @override
+  String get patientUpdateUnavailable => 'Update not available at this moment';
+
+  @override
   String get vgAddEvent => 'Add Event';
 
   @override

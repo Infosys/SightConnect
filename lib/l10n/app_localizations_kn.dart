@@ -760,7 +760,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get triageHowToReport => 'How to report eye problems?';
 
   @override
-  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\n\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
+  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
 
   @override
   String get assessment => 'Assessment';
@@ -1034,6 +1034,18 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get patientProfileUpdated => 'Profile updated';
+
+  @override
+  String get patientReportUnavailable => 'Report not available';
+
+  @override
+  String get patientClinicalReportNotFound => 'Clinical Report not found';
+
+  @override
+  String get patientRID => 'RID';
+
+  @override
+  String get patientUpdateUnavailable => 'Update not available at this moment';
 
   @override
   String get vgAddEvent => 'Add Event';
