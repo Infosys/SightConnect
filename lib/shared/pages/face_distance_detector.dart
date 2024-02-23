@@ -19,15 +19,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class FaceDistanceDetector extends ConsumerStatefulWidget {
   const FaceDistanceDetector({
     super.key,
+    this.showLoader = true,
     required this.onCameraCreated,
   });
 
-  final Widget Function(
-    CameraController,
-    CustomPaint?,
-    int?,
-    bool,
-  ) onCameraCreated;
+  final Widget Function(CameraController, CustomPaint?, int?, bool)
+      onCameraCreated;
+  final bool showLoader;
 
   @override
   ConsumerState<FaceDistanceDetector> createState() =>
@@ -426,8 +424,11 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
+      if (!widget.showLoader) {
+        return const SizedBox.shrink();
+      }
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator.adaptive(),
@@ -435,6 +436,9 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
       );
     }
     if (!_controller.value.isInitialized) {
+      if (!widget.showLoader) {
+        return const SizedBox.shrink();
+      }
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator.adaptive(),

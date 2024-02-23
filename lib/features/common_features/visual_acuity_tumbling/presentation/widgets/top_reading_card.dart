@@ -38,6 +38,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
     final optoTypeSize = currentLevel!.size * 10 * 160 * 0.03937;
 
     return FaceDistanceDetector(
+      showLoader: false,
       onCameraCreated: (controller, paint, distance, isLoading) {
         return Container(
           decoration: BoxDecoration(
