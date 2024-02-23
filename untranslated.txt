@@ -1,1 +1,41 @@
-{}
+{
+  "as": [
+    "patientRID"
+  ],
+
+  "bn": [
+    "patientRID"
+  ],
+
+  "gu": [
+    "patientRID"
+  ],
+
+  "hi": [
+    "patientRID"
+  ],
+
+  "kn": [
+    "patientRID"
+  ],
+
+  "ml": [
+    "patientRID"
+  ],
+
+  "mr": [
+    "patientRID"
+  ],
+
+  "or": [
+    "patientRID"
+  ],
+
+  "ta": [
+    "patientRID"
+  ],
+
+  "ur": [
+    "patientRID"
+  ]
+}
