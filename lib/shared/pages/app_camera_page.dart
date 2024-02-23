@@ -430,11 +430,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         return null;
       }
 
-      final bool isVerfied = await _validateImage(croppedImage);
-      if (!isVerfied) {
-        return null;
-      }
-      return croppedImage;
+      final isVerfied = await _validateImage(croppedImage);
+
+      return isVerfied;
     } on CameraException {
       Fluttertoast.showToast(msg: "Camera not found");
       return null;
@@ -498,7 +496,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     return croppedXFileImage;
   }
 
-  Future<bool> _validateImage(XFile image) async {
+  Future<XFile?> _validateImage(XFile image) async {
     _addLoading("Verifying Image...");
     await _stopLiveFeed();
     XFile? verifiedImage;
@@ -512,10 +510,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     if (mounted) {
       await _checkPermissions(context);
     }
-    if (verifiedImage != null) {
-      return true;
-    } else {
-      return false;
-    }
+    return verifiedImage;
   }
 }
