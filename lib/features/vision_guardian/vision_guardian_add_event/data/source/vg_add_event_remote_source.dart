@@ -197,10 +197,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       var listofTeamMates = [];
       for (var i = 0; i < responseTeamMates.length; i++) {
         Map<String, dynamic> queryParameters = {
-          "practitionerId": int.parse(responseTeamMates[i]["identifier"]),
+          "practitioner-id": int.parse(responseTeamMates[i]["identifier"]),
         };
 
-        var endpoint = "/services/orchestration/api/practitioners";
+        var endpoint = "/services/orchestration/api/practitioners/custom";
         await _dio.get(endpoint, queryParameters: queryParameters).then(
           (value) {
             listofTeamMates.add(value.data);
