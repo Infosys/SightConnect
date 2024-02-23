@@ -269,7 +269,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
         _distanceToFace = null;
         _translatedEyeLandmarks = [];
       }
-    } else if (Platform.isIOS) {
+    } else {
       final List<ios.Face> faces = await _faceDetector.processImage(inputImage);
       if (faces.isNotEmpty) {
         final ios.Face face =
