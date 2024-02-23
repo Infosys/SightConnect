@@ -8,7 +8,6 @@ class ApiConstant {
   static String patientRegistrationMiniappUrl =
       '$baseUrl/patient-registration/';
 
-
   static void switchBaseUrl() {
     baseUrl = baseDevUrl;
   }

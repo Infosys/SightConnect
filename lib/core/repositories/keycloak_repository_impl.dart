@@ -84,6 +84,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
   @override
   Future<int> sendOtp({required String mobile}) async {
     try {
+      logger.d("Using the Prod URL");
       final response = await _dio.get<Map<String, dynamic>>(
         "/auth/realms/care/sms/authentication-code",
         queryParameters: {
