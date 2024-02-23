@@ -499,6 +499,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<bool> _validateImage(XFile image) async {
+    _addLoading("Verifying Image...");
     await _stopLiveFeed();
     XFile? verifiedImage;
     if (mounted) {
