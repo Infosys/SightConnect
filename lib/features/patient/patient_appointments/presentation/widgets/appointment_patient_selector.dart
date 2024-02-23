@@ -34,7 +34,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(bookAppointmentProvider);
     final loc = context.loc!;
-    var isSelected = useState<int>(-1);
+    var isSelected = useState<int>(patient.profile!.patient!.patientId!);
     return Row(
       children: [
         Center(

@@ -23,9 +23,12 @@ class AppointmentDateSelector extends HookConsumerWidget {
 
     var scrollController = useScrollController();
 
-    var isSelectedDate = useState<int>(-1);
+    var isSelectedDate = useState<int>(0);
 
     var model = ref.watch(bookAppointmentProvider);
+    if (isSelectedDate.value == 0) {
+      model.setSelectedDate(currentDate);
+    }
 
     return Container(
       padding: const EdgeInsets.all(8),

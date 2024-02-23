@@ -9,7 +9,7 @@ class SelectTime extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedTime = useState<int>(-1);
+    var selectedTime = useState<int>(0);
 
     List<String> timeSlots = [
       "10:00 am - 10:30 am",
