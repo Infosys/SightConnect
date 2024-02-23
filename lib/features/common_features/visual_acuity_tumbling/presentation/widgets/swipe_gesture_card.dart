@@ -26,7 +26,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
-        final minSwipeLength = AppSize.width(context) * 0.1;
+    final minSwipeLength = AppSize.width(context) * 0.1;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {
@@ -52,7 +52,6 @@ class SwipeGestureCard extends HookConsumerWidget {
         endPoint.value = details.localPosition;
       },
       onPanEnd: (details) {
-
         double distanceBetweenPoints =
             _getDistanceBetweenPoints(startPoint.value, endPoint.value);
 
@@ -64,7 +63,7 @@ class SwipeGestureCard extends HookConsumerWidget {
         }
 
         final value = _getSwipeDirection(startPoint.value, endPoint.value);
-        
+
         if (value == null) {
           AppToast.showToast(context, loc.swipeGestureError);
           return;
@@ -126,39 +125,39 @@ class SwipeGestureCard extends HookConsumerWidget {
                 fit: BoxFit.fill,
               ),
               Positioned(
-                  child: distance.isDistanceValid()
-                      ? Center(
-                          child: Text(
-                            loc.swipeGestureCardText,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.grey,
-                            ),
+                child: distance.isDistanceValid()
+                    ? Center(
+                        child: Text(
+                          loc.swipeGestureCardText,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.grey,
                           ),
-                        )
-                      : Center(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Container(
-                              width: AppSize.width(context) * 0.8,
-                              decoration: BoxDecoration(
-                                color: AppColor.black.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                distance.getDistanceText(context),
-                                textAlign: TextAlign.center,
-                                style: applyRobotoFont(
-                                  fontSize: 16,
-                                  color: AppColor.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        ),
+                      )
+                    : Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            width: AppSize.width(context) * 0.8,
+                            decoration: BoxDecoration(
+                              color: AppColor.black.withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            child: Text(
+                              distance.getDistanceText(context),
+                              textAlign: TextAlign.center,
+                              style: applyRobotoFont(
+                                fontSize: 16,
+                                color: AppColor.white,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                        )),
+                        ),
+                      ),
+              ),
             ],
           ),
         ),

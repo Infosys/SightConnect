@@ -115,37 +115,22 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
                                 );
                               },
                             ),
-                            () {
-                              if (Platform.isAndroid) {
-                                return Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      distance != null
-                                          ? '$distance cm'
-                                          : 'No Face',
-                                      style: applyRobotoFont(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: (distance != null &&
-                                                (distance >= 35 &&
-                                                    distance <= 45))
-                                            ? AppColor.green
-                                            : AppColor.red,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              } else {
-                                return Text(
-                                  "40 cm",
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  distance != null ? '$distance cm' : 'No Face',
                                   style: applyRobotoFont(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColor.green),
-                                );
-                              }
-                            }(),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: (distance != null &&
+                                            (distance >= 35 && distance <= 45))
+                                        ? AppColor.green
+                                        : AppColor.red,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         const SizedBox(height: AppSize.kmheight),

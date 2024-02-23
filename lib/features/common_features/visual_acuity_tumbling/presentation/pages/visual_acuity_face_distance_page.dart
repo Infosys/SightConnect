@@ -63,8 +63,8 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
                       ),
                       Positioned(
                         top: AppSize.height(context) * 0.06,
-                        left: AppSize.width(context) * 0.2,
-                        right: AppSize.width(context) * 0.2,
+                        left: AppSize.width(context) * 0.1,
+                        right: AppSize.width(context) * 0.1,
                         child: Visibility(
                           visible: Platform.isAndroid || Platform.isIOS,
                           child: Container(

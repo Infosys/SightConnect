@@ -315,6 +315,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
+            ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
           } else {
             _distanceToFace = null;
           }
@@ -425,7 +426,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
       if (!widget.showLoader) {
         return const SizedBox.shrink();
