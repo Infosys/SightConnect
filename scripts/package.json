@@ -8,7 +8,8 @@
     "app-translations:arb": "node ./appTranslationsARB.js",
     "app-translations:arb:watch": "nodemon ./appTranslationsARB.js",
     "app-translations:dart": "node ./appTranslationsDart.js",
-    "app-translations:dart:watch": "nodemon ./appTranslationsDart.js"
+    "app-translations:dart:watch": "nodemon ./appTranslationsDart.js",
+    "arb-to-excel": "node ./arbToExcel.js"
   },
   "keywords": [],
   "author": "Nandan Reddy",
