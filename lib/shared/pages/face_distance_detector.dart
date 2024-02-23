@@ -153,27 +153,23 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
             final DeviceOrientation orientation =
                 _controller.value.deviceOrientation;
 
-            if (Platform.isAndroid) {
-              final InputImage? inputImage =
-                  FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
-                image: image,
-                camera: camera,
-                deviceOrientation: orientation,
-              );
-              if (inputImage == null) return;
-              _processImage(inputImage);
-            } else {
-              final ios.InputImage? inputImage =
-                  FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
-                image: image,
-                camera: camera,
-                deviceOrientation: orientation,
-              );
-              if (inputImage == null) return;
-              _processImageIOS(inputImage);
-            }
+            final dynamic inputImage = Platform.isAndroid
+                ? FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
+                    image: image,
+                    camera: camera,
+                    deviceOrientation: orientation,
+                  )
+                : FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
+                    image: image,
+                    camera: camera,
+                    deviceOrientation: orientation,
+                  );
+
+            if (inputImage == null) return;
+            _processImage(inputImage);
           }
         }
+
         _controller.startImageStream(processCameraImage);
       },
     );
@@ -211,7 +207,6 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     if (_isBusy) return;
     _isBusy = true;
     setState(() {});
-    final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
     // Measurement of the Fixed Center Eye Scanner Box
     const double boxSizeRatio = 0.7;
     const double boxCenterRatio = 0.5;
@@ -221,153 +216,116 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
       _canvasSize.width * boxCenterRatio,
       _canvasSize.height * boxCenterRatio,
     );
+    if (Platform.isAndroid) {
+      final List<FaceMesh> meshes =
+          await _meshDetector.processImage(inputImage);
+      if (meshes.isNotEmpty) {
+        final mesh = FaceDistanceDetectorServiceAndroid.getLargestFace(meshes);
+        final List<FaceMeshPoint>? leftEyeContour =
+            mesh.contours[FaceMeshContourType.leftEye];
+        final List<FaceMeshPoint>? rightEyeContour =
+            mesh.contours[FaceMeshContourType.rightEye];
+        if (leftEyeContour != null && rightEyeContour != null) {
+          final List<Point<double>> eyeLandmarks = [
+            FaceDistanceDetectorServiceAndroid.getEyeLandmark(leftEyeContour),
+            FaceDistanceDetectorServiceAndroid.getEyeLandmark(rightEyeContour),
+          ];
 
-    if (meshes.isNotEmpty) {
-      final mesh = FaceDistanceDetectorServiceAndroid.getLargestFace(meshes);
-      final List<FaceMeshPoint>? leftEyeContour =
-          mesh.contours[FaceMeshContourType.leftEye];
-      final List<FaceMeshPoint>? rightEyeContour =
-          mesh.contours[FaceMeshContourType.rightEye];
-      if (leftEyeContour != null && rightEyeContour != null) {
-        final List<Point<double>> eyeLandmarks = [
-          FaceDistanceDetectorServiceAndroid.getEyeLandmark(leftEyeContour),
-          FaceDistanceDetectorServiceAndroid.getEyeLandmark(rightEyeContour),
-        ];
+          _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+            return FaceDistanceDetectorServiceAndroid.translator(
+              landmark,
+              inputImage,
+              _canvasSize,
+              _cameraLensDirection,
+            );
+          }).toList();
 
-        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return FaceDistanceDetectorServiceAndroid.translator(
-            landmark,
-            inputImage,
-            _canvasSize,
-            _cameraLensDirection,
+          final bool eyeLandmarksInsideTheBox =
+              FaceDistanceDetectorServiceAndroid.areEyeLandmarksInsideTheBox(
+            _translatedEyeLandmarks,
+            boxCenter,
+            boxWidth,
+            boxHeight,
           );
-        }).toList();
 
-        final bool eyeLandmarksInsideTheBox =
-            FaceDistanceDetectorServiceAndroid.areEyeLandmarksInsideTheBox(
-          _translatedEyeLandmarks,
-          boxCenter,
-          boxWidth,
-          boxHeight,
-        );
-
-        if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              FaceDistanceDetectorServiceAndroid.calculateDistanceToScreen(
-            leftEyeLandmark: eyeLandmarks[0],
-            rightEyeLandmark: eyeLandmarks[1],
-            focalLength: _focalLength!,
-            sensorX: _sensorX!,
-            sensorY: _sensorY!,
-            imageWidth: inputImage.metadata!.size.width.toInt(),
-            imageHeight: inputImage.metadata!.size.height.toInt(),
-          );
-          ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+          if (eyeLandmarksInsideTheBox) {
+            _distanceToFace =
+                FaceDistanceDetectorServiceAndroid.calculateDistanceToScreen(
+              leftEyeLandmark: eyeLandmarks[0],
+              rightEyeLandmark: eyeLandmarks[1],
+              focalLength: _focalLength!,
+              sensorX: _sensorX!,
+              sensorY: _sensorY!,
+              imageWidth: inputImage.metadata!.size.width.toInt(),
+              imageHeight: inputImage.metadata!.size.height.toInt(),
+            );
+            ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+          } else {
+            _distanceToFace = null;
+          }
         } else {
           _distanceToFace = null;
         }
       } else {
         _distanceToFace = null;
+        _translatedEyeLandmarks = [];
       }
-    } else {
-      _distanceToFace = null;
-      _translatedEyeLandmarks = [];
-    }
+    } else if (Platform.isIOS) {
+      final List<ios.Face> faces = await _faceDetector.processImage(inputImage);
+      if (faces.isNotEmpty) {
+        final ios.Face face =
+            FaceDistanceDetectorServiceIOS.getLargestFace(faces);
+        final ios.FaceLandmark? leftEyeLandmark =
+            face.landmarks[ios.FaceLandmarkType.leftEye];
+        final ios.FaceLandmark? rightEyeLandmark =
+            face.landmarks[ios.FaceLandmarkType.rightEye];
+        if (leftEyeLandmark != null && rightEyeLandmark != null) {
+          final Point<int> leftEyeLandmarkPosition = leftEyeLandmark.position;
+          final Point<int> rightEyeLandmarkPosition = rightEyeLandmark.position;
 
-    // Calling the Distance Calculator Painter
-    if (inputImage.metadata?.size != null &&
-        inputImage.metadata?.rotation != null) {
-      final FaceDistanceDectectorPainter painter = FaceDistanceDectectorPainter(
-        boxCenter,
-        boxWidth,
-        boxHeight,
-        _translatedEyeLandmarks,
-        (size) {
-          _canvasSize = size;
-        },
-      );
-      _customPaint = CustomPaint(painter: painter);
-    } else {
-      _customPaint = null;
-    }
+          final List<Point<int>> eyeLandmarks = [
+            leftEyeLandmarkPosition,
+            rightEyeLandmarkPosition
+          ];
 
-    _isBusy = false;
-    if (mounted) {
-      setState(() {});
-    }
-  }
+          _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
+            return FaceDistanceDetectorServiceIOS.translator(
+              landmark,
+              inputImage,
+              _canvasSize,
+              _cameraLensDirection,
+            );
+          }).toList();
 
-  // Function to process the frames as per our requirements
-  Future<void> _processImageIOS(ios.InputImage inputImage) async {
-    if (!_canProcess) return;
-    if (_isBusy) return;
-    _isBusy = true;
-    setState(() {});
-    final List<ios.Face> faces = await _faceDetector.processImage(inputImage);
-
-    // Measurement of the Fixed Center Eye Scanner Box
-    const double boxSizeRatio = 0.7;
-    const double boxCenterRatio = 0.5;
-    final double boxWidth = _canvasSize.width * boxSizeRatio;
-    final double boxHeight = _canvasSize.height * boxSizeRatio;
-    final Point<double> boxCenter = Point(
-      _canvasSize.width * boxCenterRatio,
-      _canvasSize.height * boxCenterRatio,
-    );
-
-    if (faces.isNotEmpty) {
-      final ios.Face face =
-          FaceDistanceDetectorServiceIOS.getLargestFace(faces);
-      final ios.FaceLandmark? leftEyeLandmark =
-          face.landmarks[ios.FaceLandmarkType.leftEye];
-      final ios.FaceLandmark? rightEyeLandmark =
-          face.landmarks[ios.FaceLandmarkType.rightEye];
-      if (leftEyeLandmark != null && rightEyeLandmark != null) {
-        final Point<int> leftEyeLandmarkPosition = leftEyeLandmark.position;
-        final Point<int> rightEyeLandmarkPosition = rightEyeLandmark.position;
-
-        final List<Point<int>> eyeLandmarks = [
-          leftEyeLandmarkPosition,
-          rightEyeLandmarkPosition
-        ];
-
-        _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-          return FaceDistanceDetectorServiceIOS.translator(
-            landmark,
-            inputImage,
-            _canvasSize,
-            _cameraLensDirection,
+          final bool eyeLandmarksInsideTheBox =
+              FaceDistanceDetectorServiceIOS.areEyeLandmarksInsideTheBox(
+            _translatedEyeLandmarks,
+            boxCenter,
+            boxWidth,
+            boxHeight,
           );
-        }).toList();
 
-        final bool eyeLandmarksInsideTheBox =
-            FaceDistanceDetectorServiceIOS.areEyeLandmarksInsideTheBox(
-          _translatedEyeLandmarks,
-          boxCenter,
-          boxWidth,
-          boxHeight,
-        );
-
-        if (eyeLandmarksInsideTheBox) {
-          _distanceToFace =
-              FaceDistanceDetectorServiceIOS.calculateDistanceToScreen(
-            leftEyeLandmark: leftEyeLandmarkPosition,
-            rightEyeLandmark: rightEyeLandmarkPosition,
-            focalLength: _focalLength!,
-            sensorX: _sensorX!,
-            sensorY: _sensorY!,
-            imageWidth: inputImage.metadata!.size.width.toInt(),
-            imageHeight: inputImage.metadata!.size.height.toInt(),
-          );
+          if (eyeLandmarksInsideTheBox) {
+            _distanceToFace =
+                FaceDistanceDetectorServiceIOS.calculateDistanceToScreen(
+              leftEyeLandmark: leftEyeLandmarkPosition,
+              rightEyeLandmark: rightEyeLandmarkPosition,
+              focalLength: _focalLength!,
+              sensorX: _sensorX!,
+              sensorY: _sensorY!,
+              imageWidth: inputImage.metadata!.size.width.toInt(),
+              imageHeight: inputImage.metadata!.size.height.toInt(),
+            );
+          } else {
+            _distanceToFace = null;
+          }
         } else {
           _distanceToFace = null;
         }
       } else {
         _distanceToFace = null;
+        _translatedEyeLandmarks = [];
       }
-    } else {
-      _distanceToFace = null;
-      _translatedEyeLandmarks = [];
     }
 
     // Calling the Distance Calculator Painter
