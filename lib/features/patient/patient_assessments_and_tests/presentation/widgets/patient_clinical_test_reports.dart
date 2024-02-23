@@ -104,7 +104,7 @@ class _PatientClinicalTestReportsState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AutoSizeText(
-                              'RID: ${currentData.triageResultID}',
+                              '${loc.patientRID}: ${currentData.triageResultID}',
                               minFontSize: 12,
                               maxLines: 1,
                               style: applyFiraSansFont(
@@ -140,7 +140,7 @@ class _PatientClinicalTestReportsState
                               color: AppColor.green,
                             ),
                             child: Text(
-                              "Clinical Report",
+                              loc.patientClinicalReport,
                               style: applyRobotoFont(
                                 fontSize: 14,
                                 color: AppColor.white,
@@ -199,7 +199,8 @@ class _PatientClinicalTestReportsState
                                         );
                                       } catch (e) {
                                         Fluttertoast.showToast(
-                                            msg: "Clinical Report not found");
+                                            msg: loc
+                                                .patientClinicalReportNotFound);
                                       }
                                     },
                                     child: Text(
@@ -227,7 +228,7 @@ class _PatientClinicalTestReportsState
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: model.hasClinicalReportMore
                     ? const CircularProgressIndicator.adaptive()
-                    : const Text("No more data"),
+                    : Text(loc.patientNoMoreData),
               ),
             );
           }

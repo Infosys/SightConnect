@@ -1,41 +1,71 @@
 {
   "as": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "bn": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "gu": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "hi": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "kn": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "ml": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "mr": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "or": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "ta": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ],
 
   "ur": [
-    "patientRID"
+    "patientReportUnavailable",
+    "patientClinicalReportNotFound",
+    "patientRID",
+    "patientUpdateUnavailable"
   ]
 }

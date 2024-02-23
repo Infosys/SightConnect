@@ -92,7 +92,7 @@ class _PatientSelfTestReportsState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AutoSizeText(
-                              'RID: ${currentData.triageResultID}',
+                              '${loc.patientRID}: ${currentData.triageResultID}',
                               minFontSize: 12,
                               maxLines: 1,
                               style: applyFiraSansFont(
@@ -128,7 +128,7 @@ class _PatientSelfTestReportsState
                               color: AppColor.darkOrange,
                             ),
                             child: Text(
-                              "Self Test",
+                              loc.patientSelfTestReport,
                               style: applyRobotoFont(
                                 fontSize: 14,
                                 color: AppColor.white,
@@ -186,8 +186,7 @@ class _PatientSelfTestReportsState
                                     }
                                   } catch (e) {
                                     Fluttertoast.showToast(
-                                        msg:
-                                            "Update not available at this moment");
+                                        msg: loc.patientUpdateUnavailable);
                                   }
                                 },
                                 child: Text(
@@ -233,7 +232,7 @@ class _PatientSelfTestReportsState
                                         );
                                       } catch (e) {
                                         Fluttertoast.showToast(
-                                            msg: "Report not available");
+                                            msg: loc.patientReportUnavailable);
                                       }
                                     },
                                     child: Text(
@@ -261,7 +260,7 @@ class _PatientSelfTestReportsState
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: model.hasSelfTestReportMore
                     ? const CircularProgressIndicator.adaptive()
-                    : const Text("No more data"),
+                    : Text(loc.patientNoMoreData),
               ),
             );
           }
