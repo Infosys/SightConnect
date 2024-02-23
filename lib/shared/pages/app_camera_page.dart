@@ -72,7 +72,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         if (role == Role.ROLE_OPTOMETRIST) {
           _cameraLensDirection = CameraLensDirection.back;
         }
-
         _checkPermissions(context);
       } else {
         Navigator.of(context).pop();
@@ -319,7 +318,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       if (Platform.isAndroid) {
         _meshDetector.close();
       }
-
       if (_controller.value.isInitialized &&
           _controller.value.isStreamingImages) {
         await _controller.stopImageStream();
@@ -501,11 +499,18 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<bool> _validateImage(XFile image) async {
-    XFile? verifiedImage = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => AppCameraImagePreview(imageFile: image),
-      ),
-    );
+    await _stopLiveFeed();
+    XFile? verifiedImage;
+    if (mounted) {
+      verifiedImage = await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => AppCameraImagePreview(imageFile: image),
+        ),
+      );
+    }
+    if (mounted) {
+      await _checkPermissions(context);
+    }
     if (verifiedImage != null) {
       return true;
     } else {
