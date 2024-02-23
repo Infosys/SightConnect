@@ -1,6 +1,6 @@
 {
   "@@locale": "mr",
-  "@@last_modified": "2024-02-21T17:58:08.655Z",
+  "@@last_modified": "2024-02-23T07:02:09.739Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -374,6 +374,10 @@
   "patientEdit": "edit",
   "patientProfileNotUpdated": "Profile not updated",
   "patientProfileUpdated": "Profile updated",
+  "patientReportUnavailable": "Report not available",
+  "patientClinicalReportNotFound": "Clinical Report not found",
+  "patientRID": "RID",
+  "patientUpdateUnavailable": "Update not available at this moment",
   "vgAddEvent": "Add Event",
   "vgUploadingImageAddingEvent": "Uploading Image and adding event",
   "vgEventTitle": "Event Title",
@@ -439,9 +443,5 @@
   "appointmentBookingTitle": "Appointment Booking",
   "comingSoon": "Coming Soon...",
   "miniappService": "Service",
-  "miniappConsole": "Console",
-  "patientReportUnavailable": "Report not available",
-  "patientClinicalReportNotFound": "Clinical Report not found",
-  "patientRID": "RID",
-  "patientUpdateUnavailable": "Update not available at this moment"
+  "miniappConsole": "Console"
 }
