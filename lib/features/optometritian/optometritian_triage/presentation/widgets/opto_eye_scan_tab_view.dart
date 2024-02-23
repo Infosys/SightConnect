@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 
 import 'package:flutter/material.dart';
 
@@ -55,13 +56,17 @@ class OptoEyeScanTabView extends StatelessWidget {
                 height: lerpDouble(
                     AppSize.height(context), AppSize.width(context), 1.05),
                 child: TabBarView(viewportFraction: 1, children: [
-                  CachedNetworkImage(
+                  AppNetworkImage(
                     imageUrl: report.mediaCapture?[0].fileName ?? "",
-                    fit: BoxFit.cover,
+                    shapeCircle: false,
+                    height: 100,
+                    width: 100,
                   ),
-                  CachedNetworkImage(
+                  AppNetworkImage(
                     imageUrl: report.mediaCapture?[1].fileName ?? "",
-                    fit: BoxFit.cover,
+                    shapeCircle: false,
+                    height: 100,
+                    width: 100,
                   ),
                 ]),
               ),

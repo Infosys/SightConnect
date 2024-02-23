@@ -4,8 +4,14 @@ class ApiConstant {
   ApiConstant._();
 
   static String baseUrl = "https://healthconnecttech.org";
+  static String baseDevUrl = "https://eyecare4all-dev.infosysapps.com";
   static String patientRegistrationMiniappUrl =
       '$baseUrl/patient-registration/';
+
+
+  static void switchBaseUrl() {
+    baseUrl = baseDevUrl;
+  }
 
   // kDebugMode
   //     ? '$baseUrl/patient-registration-dev/'

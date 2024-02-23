@@ -26,7 +26,7 @@ class SwipeGestureCard extends HookConsumerWidget {
     var model = ref.watch(tumblingTestProvider);
     final loc = context.loc!;
     final distance = ref.watch(distanceNotifierProvider);
-        final minSwipeLength = AppSize.width(context) * 0.4;
+        final minSwipeLength = AppSize.width(context) * 0.1;
 
     ref.listen(tumblingTestProvider, (previous, next) async {
       if (next.currentEye == Eye.right && next.isGameOver!) {

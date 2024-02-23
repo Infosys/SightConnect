@@ -12,7 +12,7 @@ Widget vgEventHeaderChips(ValueNotifier<int> isSelected, BuildContext context,
     builder: (context, ref, child) {
       return SizedBox(
         height: AppSize.height(context) * 0.04,
-        width: AppSize.width(context) * 0.9,
+        width: AppSize.width(context) * 0.95,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
