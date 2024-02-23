@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
@@ -162,7 +161,6 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
                     camera: camera,
                     deviceOrientation: orientation,
                   );
-
             if (inputImage == null) return;
             _processImage(inputImage);
           }
@@ -218,7 +216,8 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
       final List<FaceMesh> meshes =
           await _meshDetector.processImage(inputImage);
       if (meshes.isNotEmpty) {
-        final mesh = FaceDistanceDetectorServiceAndroid.getLargestFace(meshes);
+        final FaceMesh mesh =
+            FaceDistanceDetectorServiceAndroid.getLargestFace(meshes);
         final List<FaceMeshPoint>? leftEyeContour =
             mesh.contours[FaceMeshContourType.leftEye];
         final List<FaceMeshPoint>? rightEyeContour =
@@ -229,14 +228,16 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
             FaceDistanceDetectorServiceAndroid.getEyeLandmark(rightEyeContour),
           ];
 
-          _translatedEyeLandmarks = eyeLandmarks.map((landmark) {
-            return FaceDistanceDetectorServiceAndroid.translator(
-              landmark,
-              inputImage,
-              _canvasSize,
-              _cameraLensDirection,
-            );
-          }).toList();
+          _translatedEyeLandmarks = eyeLandmarks.map(
+            (landmark) {
+              return FaceDistanceDetectorServiceAndroid.translator(
+                landmark,
+                inputImage,
+                _canvasSize,
+                _cameraLensDirection,
+              );
+            },
+          ).toList();
 
           final bool eyeLandmarksInsideTheBox =
               FaceDistanceDetectorServiceAndroid.areEyeLandmarksInsideTheBox(
@@ -387,7 +388,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
 
   @override
   void dispose() {
-    logger.d('VisualAcuityFaceDistancePage: Dispose Called');
+    logger.d("VisualAcuityFaceDistancePage: Dispose Called");
     WidgetsBinding.instance.removeObserver(this);
     if (mounted) {
       _stopLiveFeed();
@@ -411,7 +412,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
         await _controller.dispose();
       }
     } catch (e) {
-      logger.d('VisualAcuityFaceDistancePage: Error stopping live feed: $e');
+      logger.d("VisualAcuityFaceDistancePage: Error stopping live feed: $e");
     }
   }
 
