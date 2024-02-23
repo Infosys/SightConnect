@@ -443,5 +443,12 @@
   "appointmentBookingTitle": "అపాయింట్‌మెంట్ బుకింగ్",
   "comingSoon": "త్వరలో రాబోతుంది...",
   "miniappService": "సేవ",
-  "miniappConsole": "కన్సోల్"
+  "miniappConsole": "కన్సోల్",
+  "roleChooseYourRole": "మీ పాత్రను ఎంచుకోండి",
+  "roleNote": "గమనిక: అప్లికేషన్ లోపల మీ పాత్రను మార్చుకోలేరు.",
+  "roleConfirm": "నిర్ధారించండి",
+  "roleEyeCareProfessional": "కంటి సంరక్షణ నిపుణులు",
+  "roleVisionTechnician": "దృష్టి సాంకేతిక నిపుణులు (VT)",
+  "rolePatient": "రోగి",
+  "roleVisionGuardian": "దృష్టి రక్షకుడు (VG)"
 }

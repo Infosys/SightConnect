@@ -1,71 +1,101 @@
 {
   "as": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "bn": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "gu": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "hi": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "kn": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "ml": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "mr": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "or": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "ta": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ],
 
   "ur": [
-    "patientReportUnavailable",
-    "patientClinicalReportNotFound",
-    "patientRID",
-    "patientUpdateUnavailable"
+    "roleChooseYourRole",
+    "roleNote",
+    "roleConfirm",
+    "roleEyeCareProfessional",
+    "roleVisionTechnician",
+    "rolePatient",
+    "roleVisionGuardian"
   ]
 }

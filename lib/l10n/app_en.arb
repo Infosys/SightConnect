@@ -443,5 +443,12 @@
   "appointmentBookingTitle": "Appointment Booking",
   "comingSoon": "Coming Soon...",
   "miniappService": "Service",
-  "miniappConsole": "Console"
+  "miniappConsole": "Console",
+  "roleChooseYourRole": "Choose Your Role",
+  "roleNote": "Note: You cannot change your role inside the app.",
+  "roleConfirm": "Confirm",
+  "roleEyeCareProfessional": "EYE CARE PROFESSIONAL",
+  "roleVisionTechnician": "VISION TECHNICIAN",
+  "rolePatient": "PATIENT",
+  "roleVisionGuardian": "VISION GUARDIAN"
 }

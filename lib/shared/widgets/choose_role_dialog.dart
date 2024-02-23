@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -17,6 +18,8 @@ class ChooseRoleDialog extends HookWidget {
     var selectedRole = useState<Role?>(
         roles.contains(Role.ROLE_PATIENT) ? Role.ROLE_PATIENT : roles.first);
 
+    final loc = context.loc!;
+
     return BackdropFilter(
       filter: ImageFilter.blur(
         sigmaX: 5,
@@ -32,14 +35,14 @@ class ChooseRoleDialog extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Choose Your Role',
+              loc.roleChooseYourRole,
               style: applyFiraSansFont(
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 2),
             Text(
-              'Note: You cannot change your role inside the app.',
+              loc.roleNote,
               style: applyFiraSansFont(
                 fontSize: 10,
               ),
@@ -86,7 +89,7 @@ class ChooseRoleDialog extends HookWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                _formateRoleName(role!),
+                                _formateRoleName(role!, context),
                                 textAlign: TextAlign.center,
                                 style: applyRobotoFont(
                                   fontSize: 16,
@@ -127,7 +130,7 @@ class ChooseRoleDialog extends HookWidget {
               Navigator.of(context).pop(selectedRole.value);
             },
             child: Text(
-              'Confirm',
+              loc.roleConfirm,
               style: applyFiraSansFont(
                 color: AppColor.primary,
                 fontWeight: FontWeight.w500,
@@ -139,12 +142,13 @@ class ChooseRoleDialog extends HookWidget {
     );
   }
 
-  _formateRoleName(Role role) {
+  _formateRoleName(Role role, BuildContext context) {
+    final loc = context.loc!;
     return switch (role) {
-      Role.ROLE_OPTOMETRIST => "EYE CARE PROFESSIONAL",
-      Role.ROLE_VISION_TECHNICIAN => "VISION TECHNICIAN",
-      Role.ROLE_PATIENT => "PATIENT",
-      Role.ROLE_VISION_GUARDIAN => "VISION GUARDIAN",
+      Role.ROLE_OPTOMETRIST => loc.roleEyeCareProfessional,
+      Role.ROLE_VISION_TECHNICIAN => loc.roleVisionTechnician,
+      Role.ROLE_PATIENT => loc.rolePatient,
+      Role.ROLE_VISION_GUARDIAN => loc.roleVisionGuardian,
     };
   }
 }
