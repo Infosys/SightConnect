@@ -1,14 +1,12 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/widgets/coordinates_translator_ios.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 
-import '../../../../visual_acuity_tumbling/presentation/widgets/coordinates_translator.dart';
-import '../../../domain/models/enums/triage_enums.dart';
-
-class EyeDetectorService {
+class FaceDistanceDetectorServiceIOS {
   static final Map<DeviceOrientation, int> _orientations = {
     DeviceOrientation.portraitUp: 0,
     DeviceOrientation.landscapeLeft: 90,
@@ -17,6 +15,18 @@ class EyeDetectorService {
   };
 
   Map<DeviceOrientation, int> get orientations => _orientations;
+
+  static Future<Map<String, double>?> getCameraInfo() async {
+    const platform = MethodChannel('com.healthconnect.sightconnect/camera');
+    try {
+      final cameraInfo =
+          await platform.invokeMapMethod<String, double>('getCameraInfo');
+      return cameraInfo;
+    } catch (e) {
+      logger.e('Error getting camera info: $e');
+      return {};
+    }
+  }
 
   static InputImage? inputImageFromCameraImage({
     required CameraImage image,
@@ -55,7 +65,9 @@ class EyeDetectorService {
     // * bgra8888 for iOS
     if (format == null ||
         (Platform.isAndroid && format != InputImageFormat.nv21) ||
-        (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
+        (Platform.isIOS && format != InputImageFormat.bgra8888)) {
+      return null;
+    }
 
     // since format is constraint to nv21 or bgra8888, both only have one plane
     if (image.planes.length != 1) return null;
@@ -76,27 +88,55 @@ class EyeDetectorService {
     );
   }
 
-  static bool isLeftEye(TriageEyeType eye) {
-    /* We should flip the value because we are considering the user perspective 
-     but google_ml_kit considers the viewers perspective.*/
-    return !(eye == TriageEyeType.LEFT);
+  static Face getLargestFace(List<Face> faces) {
+    Face largestFace = faces.reduce(
+      (currentFace, nextFace) =>
+          (currentFace.boundingBox.width * currentFace.boundingBox.height) >
+                  (nextFace.boundingBox.width * nextFace.boundingBox.height)
+              ? currentFace
+              : nextFace,
+    );
+    return largestFace;
+  }
+
+  static int calculateDistanceToScreen({
+    required Point<int> leftEyeLandmark,
+    required Point<int> rightEyeLandmark,
+    required double focalLength,
+    required double sensorX,
+    required double sensorY,
+    required int imageWidth,
+    required int imageHeight,
+    double averageEyeDistance = 63.0,
+  }) {
+    double deltaX = (leftEyeLandmark.x - rightEyeLandmark.x).abs().toDouble();
+    double deltaY = (leftEyeLandmark.y - rightEyeLandmark.y).abs().toDouble();
+    double distance;
+    if (deltaX >= deltaY) {
+      distance =
+          focalLength * (averageEyeDistance / sensorX) * (imageWidth / deltaX);
+    } else {
+      distance =
+          focalLength * (averageEyeDistance / sensorY) * (imageHeight / deltaY);
+    }
+    return (distance / 10).round();
   }
 
   static Point<double> translator(
-    FaceMeshPoint point,
+    Point<int> point,
     InputImage inputImage,
     Size canvasSize,
     CameraLensDirection cameraLensDirection,
   ) {
     final x = translateX(
-      point.x,
+      point.x.toDouble(),
       canvasSize,
       inputImage.metadata!.size,
       inputImage.metadata!.rotation,
       cameraLensDirection,
     );
     final y = translateY(
-      point.y,
+      point.y.toDouble(),
       canvasSize,
       inputImage.metadata!.size,
       inputImage.metadata!.rotation,
@@ -104,13 +144,13 @@ class EyeDetectorService {
     return Point(x, y);
   }
 
-  static bool areEyesInsideTheBox(
-    List<Point<double>> contourPoints,
+  static bool areEyeLandmarksInsideTheBox(
+    List<Point<double>> landmarkPoints,
     Point<double> center,
     double boxWidth,
     double boxHeight,
   ) {
-    if (contourPoints.isEmpty) return false;
+    if (landmarkPoints.isEmpty) return false;
     final halfWidth = boxWidth / 2;
     final halfHeight = boxHeight / 2;
     final topLeft = Point<double>(
@@ -130,9 +170,9 @@ class EyeDetectorService {
       center.y + halfHeight,
     );
 
-    for (final Point<double> point in contourPoints) {
+    for (final Point<double> point in landmarkPoints) {
       // Check if the point is inside the box
-      if (!_doesPointLieInsideBox(
+      if (!doesPointLieInsideBox(
         topLeft,
         topRight,
         bottomRight,
@@ -146,7 +186,7 @@ class EyeDetectorService {
     return true;
   }
 
-  static bool _doesPointLieInsideBox(
+  static bool doesPointLieInsideBox(
     Point<double> topLeft,
     Point<double> topRight,
     Point<double> bottomRight,
@@ -161,54 +201,5 @@ class EyeDetectorService {
       }
     }
     return false; // Point is outside the square
-  }
-
-  static Map<String, double> getEyeCorners(List<Point<double>> eyePoints) {
-    double leastX = 999999999;
-    double leastY = 999999999;
-    double highestX = 0;
-    double highestY = 0;
-
-    for (final point in eyePoints) {
-      final x = point.x;
-      final y = point.y;
-      if (x < leastX) {
-        leastX = x;
-      }
-      if (x > highestX) {
-        highestX = x;
-      }
-      if (y < leastY) {
-        leastY = y;
-      }
-      if (y > highestY) {
-        highestY = y;
-      }
-    }
-
-    return {
-      "leastX": leastX,
-      "leastY": leastY,
-      "highestX": highestX,
-      "highestY": highestY,
-    };
-  }
-
-  static double getEyeWidthRatio(
-    Map<String, double> eyeCorners,
-    double boxWidth,
-    double boxHeight,
-  ) {
-    // Calculate the eyeBox area
-    final leastX = eyeCorners["leastX"] ?? 0;
-    final highestX = eyeCorners["highestX"] ?? 9999999;
-    final eyeBoxWidth = (highestX - leastX);
-    final eyeWidthRatio = eyeBoxWidth / boxWidth;
-    return eyeWidthRatio;
-  }
-
-  static bool areEyesCloseEnough(double eyeWidthRatio,
-      {double threshold = 0.4}) {
-    return (eyeWidthRatio > threshold) && (eyeWidthRatio < 1);
   }
 }
