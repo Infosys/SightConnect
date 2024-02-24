@@ -20,8 +20,11 @@ class AppCameraImagePreview extends HookWidget {
     return Scaffold(
       backgroundColor: AppColor.black,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: AppColor.white),
+        backgroundColor: AppColor.black,
         actions: [
           IconButton(
+            color: AppColor.white,
             onPressed: () async {
               try {
                 final image = await _cropImage(context, imageFile);
@@ -34,6 +37,9 @@ class AppCameraImagePreview extends HookWidget {
               }
             },
             icon: const Icon(Icons.crop),
+          ),
+          const SizedBox(
+            width: 10,
           ),
         ],
       ),
@@ -116,8 +122,10 @@ class AppCameraImagePreview extends HookWidget {
         AndroidUiSettings(
           toolbarTitle: 'Cropper',
           toolbarColor: AppColor.primary,
-          toolbarWidgetColor: Colors.white,
+          toolbarWidgetColor: AppColor.white,
           initAspectRatio: CropAspectRatioPreset.original,
+          statusBarColor: AppColor.primary,
+          activeControlsWidgetColor: AppColor.primary,
           lockAspectRatio: false,
         ),
         IOSUiSettings(
@@ -142,7 +150,6 @@ class AppCameraImagePreview extends HookWidget {
   }
 
   _convertImage(CroppedFile file) {
-    //create xfile from file
     return XFile(file.path);
   }
 }
