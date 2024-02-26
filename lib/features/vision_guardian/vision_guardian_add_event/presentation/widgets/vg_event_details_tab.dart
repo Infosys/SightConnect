@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_color.dart';
@@ -180,17 +180,17 @@ class EventDetailsTab extends ConsumerWidget {
                               eventId: eventDetails.id.toString())
                           .then((statusCode) {
                         if (statusCode >= 200 && statusCode < 210) {
-                          showToastMessage(
-                              "Event Deleted Succesfully", context, 0);
+                          Fluttertoast.showToast(
+                              msg: "Event Deleted Succesfully");
                           ref
                               .read(addEventDetailsProvider)
                               .filterListEvents(0, "");
                           Navigator.pop(context);
                         } else {
-                          showToastMessage("Event Deletion Failed", context, 0);
+                          Fluttertoast.showToast(msg: "Event Deletion Failed");
                         }
                       }).catchError((error) {
-                        showToastMessage("Event Deletion Failed", context, 0);
+                        Fluttertoast.showToast(msg: "Event Deletion Failed");
                       });
                     },
                     style: ElevatedButton.styleFrom(

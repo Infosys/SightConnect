@@ -66,6 +66,10 @@ PODS:
   - google_mlkit_commons (0.6.1):
     - Flutter
     - MLKitVision
+  - google_mlkit_face_detection (0.9.0):
+    - Flutter
+    - google_mlkit_commons
+    - GoogleMLKit/FaceDetection (~> 4.0.0)
   - google_mlkit_face_mesh_detection (0.0.2):
     - Flutter
     - google_mlkit_commons
@@ -73,6 +77,11 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleMLKit/FaceDetection (4.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitFaceDetection (~> 3.0.0)
+  - GoogleMLKit/MLKitCore (4.0.0):
+    - MLKitCommon (~> 9.0.0)
   - GoogleToolboxForMac/DebugUtils (2.3.2):
     - GoogleToolboxForMac/Defines (= 2.3.2)
   - GoogleToolboxForMac/Defines (2.3.2)
@@ -108,6 +117,9 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.0)
     - GoogleUtilitiesComponents (~> 1.0)
     - GTMSessionFetcher/Core (< 3.0, >= 1.1)
+  - MLKitFaceDetection (3.0.0):
+    - MLKitCommon (~> 9.0)
+    - MLKitVision (~> 5.0)
   - MLKitVision (5.0.0):
     - GoogleToolboxForMac/Logger (~> 2.1)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
@@ -180,6 +192,7 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
+  - google_mlkit_face_detection (from `.symlinks/plugins/google_mlkit_face_detection/ios`)
   - google_mlkit_face_mesh_detection (from `.symlinks/plugins/google_mlkit_face_mesh_detection/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - location (from `.symlinks/plugins/location/ios`)
@@ -203,6 +216,7 @@ SPEC REPOS:
     - DKPhotoGallery
     - FMDB
     - GoogleDataTransport
+    - GoogleMLKit
     - GoogleToolboxForMac
     - GoogleUtilities
     - GoogleUtilitiesComponents
@@ -210,6 +224,7 @@ SPEC REPOS:
     - IOSSecuritySuite
     - MLImage
     - MLKitCommon
+    - MLKitFaceDetection
     - MLKitVision
     - MTBBarcodeScanner
     - nanopb
@@ -245,6 +260,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   google_mlkit_commons:
     :path: ".symlinks/plugins/google_mlkit_commons/ios"
+  google_mlkit_face_detection:
+    :path: ".symlinks/plugins/google_mlkit_face_detection/ios"
   google_mlkit_face_mesh_detection:
     :path: ".symlinks/plugins/google_mlkit_face_mesh_detection/ios"
   image_picker_ios:
@@ -293,8 +310,10 @@ SPEC CHECKSUMS:
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   google_mlkit_commons: 3857c1e9f23ca02073f8dd34a7a3580feb814cef
+  google_mlkit_face_detection: 52f7e4c15a7c49b98940fa32af4c2b10fd8608fc
   google_mlkit_face_mesh_detection: 8d536ecd0323efb7595445be86800bf37afb3e53
   GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
+  GoogleMLKit: 2bd0dc6253c4d4f227aad460f69215a504b2980e
   GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
@@ -304,6 +323,7 @@ SPEC CHECKSUMS:
   location: d5cf8598915965547c3f36761ae9cc4f4e87d22e
   MLImage: 7bb7c4264164ade9bf64f679b40fb29c8f33ee9b
   MLKitCommon: c1b791c3e667091918d91bda4bba69a91011e390
+  MLKitFaceDetection: 4981488f71ea8ed718cda692a29ab562637d9ae5
   MLKitVision: 8baa5f46ee3352614169b85250574fde38c36f49
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5

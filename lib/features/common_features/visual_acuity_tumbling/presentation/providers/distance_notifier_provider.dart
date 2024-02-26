@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,12 +25,10 @@ class DistanceNotifier extends ChangeNotifier {
   }
 
   bool isDistanceValid() {
-    if (Platform.isAndroid) {
-      return _currentDistance <= _maxDistance &&
-          _currentDistance >= _minDistance;
-    } else {
-      return true;
-    }
+    final value =
+        _currentDistance <= _maxDistance && _currentDistance >= _minDistance;
+
+    return value;
   }
 
   String getDistanceText(BuildContext context) {
