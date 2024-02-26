@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +9,12 @@ class TimeInput extends StatelessWidget {
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Flexible(
       child: TextFormField(
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter Time';
+            return loc.vtEnterTime;
           }
           return null;
         },

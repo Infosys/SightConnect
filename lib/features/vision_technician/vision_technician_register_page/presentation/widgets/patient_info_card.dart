@@ -1,4 +1,3 @@
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
@@ -19,6 +18,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int index = 0;
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
       margin: const EdgeInsets.symmetric(
@@ -83,8 +83,8 @@ class RegisterPatientInfoCard extends StatelessWidget {
                         visible: data[index].patientId != null,
                         child: Text(
                           data[index].parentPatientId == null
-                              ? "Primary"
-                              : "Dependent",
+                              ? loc.vtPrimary
+                              : loc.vtDependent,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(
@@ -109,7 +109,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                                   builder: (context) =>
                                       PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.ADD_MEMBER,
-                                    displayName: "Add Member",
+                                    displayName: loc.vtAddMember,
                                     parentPatientId:
                                         data[index].patientId.toString(),
                                     mobileNumber: data[index].phoneNumber,
@@ -119,17 +119,17 @@ class RegisterPatientInfoCard extends StatelessWidget {
                                 (value) {
                                   if (value == null || value == false) {
                                     Fluttertoast.showToast(
-                                        msg: "Dependent not added");
+                                        msg: loc.vtDependentNotAdded);
                                   } else if (value) {
                                     Fluttertoast.showToast(
-                                        msg: "Dependent added");
+                                        msg: loc.vtDependentAdded);
                                   }
                                 },
                               );
                             } catch (e) {
                               logger.d({"error": e});
                               Fluttertoast.showToast(
-                                msg: "Service Not Available",
+                                msg: loc.vtServiceNotAvailable,
                               );
                             }
                           },
@@ -142,7 +142,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                               ),
                               const SizedBox(width: AppSize.kspadding / 2),
                               Text(
-                                "Add Member",
+                                loc.vtAddMember,
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   color: AppColor.primary,
@@ -164,7 +164,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                                   builder: (context) =>
                                       PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.REGISTER,
-                                    displayName: "Register Patient",
+                                    displayName: loc.vtRegisterPatient,
                                     mobileNumber: data[index].phoneNumber,
                                   ),
                                 ),
@@ -173,17 +173,17 @@ class RegisterPatientInfoCard extends StatelessWidget {
                                 (value) {
                                   if (value == null || value == false) {
                                     Fluttertoast.showToast(
-                                        msg: "Patient not registered");
+                                        msg: loc.vtPatientNotRegistered);
                                   } else if (value) {
                                     Fluttertoast.showToast(
-                                        msg: "Patient registered");
+                                        msg: loc.vtPatientRegistered);
                                   }
                                 },
                               );
                             } catch (e) {
                               logger.d({"error": e});
                               Fluttertoast.showToast(
-                                msg: "Service Not Available",
+                                msg: loc.vtServiceNotAvailable,
                               );
                             }
                           },
@@ -196,7 +196,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                               ),
                               const SizedBox(width: AppSize.kspadding / 2),
                               Text(
-                                "Complete Profile",
+                                loc.vtCompleteProfile,
                                 textAlign: TextAlign.center,
                                 style: applyRobotoFont(
                                   fontSize: 12,

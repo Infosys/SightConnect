@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/moda
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/near_by_vision_center_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
     final firstcontroller = ScrollController();
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
+    final loc = context.loc!;
 
     if (viewState.isLoading) {
       const Center(child: CircularProgressIndicator.adaptive());
@@ -77,8 +79,8 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
       );
     }
 
-    if (viewState.visionCenters == null){
-      return const Text("No Vision Centers Found");
+    if (viewState.visionCenters == null) {
+      return Text(loc.vtNoVisionCentersFound);
     }
 
     return Container(
@@ -165,6 +167,7 @@ class VisionCenterError extends StatelessWidget {
   final ref;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -186,7 +189,7 @@ class VisionCenterError extends StatelessWidget {
                 onPressed: () {
                   ref.read(nearByVisionCenterProvider.notifier).init();
                 },
-                child: const Text("Request Location Permission"),
+                child: Text(loc.vtRequestLocationPermission),
               ),
             );
           } else if (viewState.permissionStatus ==
@@ -196,7 +199,7 @@ class VisionCenterError extends StatelessWidget {
                 onPressed: () {
                   openAppSettings();
                 },
-                child: const Text("App Settings"),
+                child: Text(loc.vtAppSettings),
               ),
             );
           }

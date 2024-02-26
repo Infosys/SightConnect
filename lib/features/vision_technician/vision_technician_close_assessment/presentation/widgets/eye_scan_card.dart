@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,7 @@ class EyeScanCard extends ConsumerWidget {
         ref.watch(vtCloseAssessmentHelperProvider).bothEyeImage.path;
     bool allImagesCaptured =
         ref.watch(vtCloseAssessmentHelperProvider).allImagesCaptured;
-
+    final loc = context.loc!;
     return Container(
       width: AppSize.width(context),
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -36,7 +37,7 @@ class EyeScanCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Eye Scan",
+            loc.vtEyeScan,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -45,15 +46,12 @@ class EyeScanCard extends ConsumerWidget {
           const SizedBox(height: AppSize.kmheight),
           if (!allImagesCaptured)
             TextButton(
-              onPressed: ()  {
-                
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const VisionTechnicianEyeCapture(),
-                    ),
-                  );
-                
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const VisionTechnicianEyeCapture(),
+                  ),
+                );
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
@@ -78,7 +76,7 @@ class EyeScanCard extends ConsumerWidget {
                   ),
                   const SizedBox(width: AppSize.kswidth),
                   Text(
-                    "Take Picture",
+                    loc.vtTakePicture,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,

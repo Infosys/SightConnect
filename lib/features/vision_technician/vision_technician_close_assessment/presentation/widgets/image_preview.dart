@@ -26,6 +26,7 @@ class ImagePreview extends ConsumerWidget {
         .split('.')
         .last
         .sentenceCase();
+    final loc = context.loc!;
     return Container(
       width: 536,
       height: 714,
@@ -74,7 +75,7 @@ class ImagePreview extends ConsumerWidget {
               ref.watch(vtCloseAssessmentHelperProvider).retakePicture();
             },
             child: Text(
-              "Retake Picture",
+              loc.vtRetakePicture,
               style: applyRobotoFont(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -100,11 +101,11 @@ class ImagePreview extends ConsumerWidget {
                       Icons.arrow_back,
                       size: AppSize.klheight,
                       color:
-                            currentStep == 0 ? AppColor.grey : AppColor.primary,
+                          currentStep == 0 ? AppColor.grey : AppColor.primary,
                     ),
                     const SizedBox(width: AppSize.kswidth / 2),
                     Text(
-                      "Back",
+                      loc.vtBack,
                       style: applyRobotoFont(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -145,7 +146,7 @@ class ImagePreview extends ConsumerWidget {
                         : MaterialStateProperty.all<Color>(AppColor.primary),
                   ),
                   child: Text(
-                    "Submit",
+                    loc.vtSubmit,
                     style: applyRobotoFont(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -168,7 +169,7 @@ class ImagePreview extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Next",
+                      loc.vtNext,
                       style: applyRobotoFont(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -180,7 +181,8 @@ class ImagePreview extends ConsumerWidget {
                     Icon(
                       Icons.arrow_forward,
                       size: AppSize.klheight,
-                      color: currentStep == 2 ? AppColor.grey : AppColor.primary,
+                      color:
+                          currentStep == 2 ? AppColor.grey : AppColor.primary,
                     ),
                   ],
                 ),

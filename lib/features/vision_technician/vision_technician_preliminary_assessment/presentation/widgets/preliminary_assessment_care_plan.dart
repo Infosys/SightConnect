@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,16 +19,16 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
       "Visit Center of Excellence"
     ];
     final selectedOption = useState<String?>('');
-
+    final loc = context.loc!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Recommendation',
-              style: TextStyle(
+            Text(
+              loc.vtRecommendation,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -48,7 +49,7 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
                         .setRecommendationSelected();
                     selectedOption.value = value;
                     data.setPatientInstruction(selectedOption.value!);
-                    
+
                     // ref.read(carePlanViewModelProvider).saveCarePlan();
                   },
                 );

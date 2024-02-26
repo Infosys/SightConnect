@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,11 @@ class VTRegisterDateInput extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter Date';
+          return loc.vtEnterDate;
         }
         return null;
       },
