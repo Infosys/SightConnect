@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/age_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/gender_pie_chart.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -28,6 +29,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
     List<List<Color>> colorsGender = model.colorsGender;
     List<double> totalValuesGender = model.totalValuesGender;
 
+    final loc = context.loc!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
@@ -47,7 +49,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "By Age",
+                  loc.vtByAge,
                   style: applyFiraSansFont(
                     fontWeight: FontWeight.w500,
                   ),
@@ -113,7 +115,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "By Gender",
+                  loc.vtByGender,
                   style: applyFiraSansFont(
                     fontWeight: FontWeight.w500,
                   ),

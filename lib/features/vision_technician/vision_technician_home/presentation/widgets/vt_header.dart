@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_cases_analytics.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_age_analytics.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_symptoms_ananlytics.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -23,7 +24,7 @@ class VTHeader extends HookWidget {
       const PatientAgeAnalytics(),
       const PatientSymptomsAnalytics(),
     ];
-
+    final loc = context.loc!;
     return Column(
       children: [
         Container(
@@ -32,46 +33,13 @@ class VTHeader extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Analytics',
+                loc.vtAnalytics,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
                   color: AppColor.white,
                 ),
               ),
-              // TextButton(
-              //   onPressed: () {},
-              //   style: ButtonStyle(
-              //     padding: MaterialStateProperty.all(
-              //       const EdgeInsets.only(
-              //         left: AppSize.kmpadding,
-              //         right: AppSize.kspadding,
-              //       ),
-              //     ),
-              //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              //       RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(AppSize.klradius),
-              //         side: const BorderSide(color: AppColor.white),
-              //       ),
-              //     ),
-              //   ),
-              //   child: Row(
-              //     children: [
-              //       Text(
-              //         "Overall",
-              //         style: applyRobotoFont(
-              //           fontSize: 12,
-              //           fontWeight: FontWeight.w400,
-              //           color: AppColor.white,
-              //         ),
-              //       ),
-              //       const Icon(
-              //         Icons.keyboard_arrow_down_outlined,
-              //         color: AppColor.white,
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),

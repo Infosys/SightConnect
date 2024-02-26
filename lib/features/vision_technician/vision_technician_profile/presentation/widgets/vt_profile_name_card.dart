@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -13,6 +14,7 @@ class VTProfileNameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       width: double.infinity,
@@ -68,7 +70,7 @@ class VTProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Gender",
+                            loc.vtGender,
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.darkGrey,
@@ -90,7 +92,7 @@ class VTProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Mobile",
+                            loc.vtMobile,
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.darkGrey,

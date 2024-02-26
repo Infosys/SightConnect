@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,11 @@ class VTProfileOrganisationDetailsCard extends StatelessWidget {
     super.key,
     required this.profileData,
   });
-  
+
   final VtProfileModel profileData;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
       width: double.infinity,
@@ -32,7 +34,7 @@ class VTProfileOrganisationDetailsCard extends StatelessWidget {
           children: [
             const Row(),
             Text(
-              "Organisation Details",
+              loc.vtOrganisationDetails,
               style: applyFiraSansFont(fontWeight: FontWeight.w500),
             ),
             const SizedBox(
@@ -56,7 +58,7 @@ class VTProfileOrganisationDetailsCard extends StatelessWidget {
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Org ID",
+                    loc.vtOrgId,
                     style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
                   ),
                   Text(
@@ -68,7 +70,7 @@ class VTProfileOrganisationDetailsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "FacilityType",
+                      loc.vtFacilityType,
                       style:
                           applyRobotoFont(fontSize: 14, color: AppColor.grey),
                     ),
