@@ -337,7 +337,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     }
   }
 
-  void removeLoading() {
+  void _removeLoading() {
     if (mounted) {
       setState(() {
         _isLoading = false;
@@ -347,7 +347,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
   @override
   Widget build(BuildContext context) {
-    if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
+    if (!_isPermissionGranted || _cameras.isEmpty) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator.adaptive(),
@@ -361,7 +361,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         ),
       );
     } else {
-      return AppCamerPreviewWidget(
+      return AppCameraPreviewWidget(
         isDrawerEnabled: widget.isDrawerEnabled,
         scaffoldKey: scaffoldKey,
         isEyeValid: Platform.isAndroid ? _isEyeValid : true,
@@ -399,8 +399,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       _cameraLensDirection = CameraLensDirection.front;
     }
     await _stopLiveFeed();
-    _initializeCamera();
-    removeLoading();
+    if (mounted) {
+      await _checkPermissions(context);
+    }
   }
 
   Future<void> _toggleFlash() async {
@@ -414,11 +415,11 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     } else {
       await _controller.setFlashMode(FlashMode.off);
     }
-
-    removeLoading();
+    _removeLoading();
   }
 
   Future<XFile?> _takePicture(BuildContext context) async {
+    _addLoading("Hold the camera steady...");
     try {
       final XFile? image = await _capturePicture(context);
       if (image == null) {
@@ -447,9 +448,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     if (!_controller.value.isInitialized) {
       return null;
     }
-    _addLoading();
     final XFile image = await _controller.takePicture();
-    removeLoading();
     return image;
   }
 
@@ -497,7 +496,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<XFile?> _validateImage(XFile image) async {
-    _addLoading("Verifying Image...");
     await _stopLiveFeed();
     XFile? verifiedImage;
     if (mounted) {

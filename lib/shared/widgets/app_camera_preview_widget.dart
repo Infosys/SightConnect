@@ -16,7 +16,7 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 
 import 'custom_app_bar.dart';
 
-class AppCamerPreviewWidget extends StatelessWidget {
+class AppCameraPreviewWidget extends StatelessWidget {
   final VoidCallback onCameraSwitch;
   final VoidCallback onFlashToggle;
   final VoidCallback onCapture;
@@ -29,7 +29,7 @@ class AppCamerPreviewWidget extends StatelessWidget {
   final bool isEyeValid;
   final bool isDrawerEnabled;
 
-  const AppCamerPreviewWidget({
+  const AppCameraPreviewWidget({
     super.key,
     required this.onCameraSwitch,
     required this.onFlashToggle,
