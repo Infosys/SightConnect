@@ -192,7 +192,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     final List<FaceMesh> meshes = await _meshDetector.processImage(inputImage);
 
     if (meshes.isNotEmpty) {
-      final FaceMesh mesh = meshes[0];
+      final FaceMesh mesh = EyeDetectorService.getLargestFace(meshes);
       final List<FaceMeshPoint>? leftEyeContour =
           mesh.contours[FaceMeshContourType.leftEye];
       final List<FaceMeshPoint>? rightEyeContour =
