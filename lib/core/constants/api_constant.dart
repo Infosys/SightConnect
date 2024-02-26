@@ -12,6 +12,8 @@ class ApiConstant {
     baseUrl = baseDevUrl;
   }
 
+  // /services/eua-service/api/v1/euaService/search-redirect
+
   // kDebugMode
   //     ? '$baseUrl/patient-registration-dev/'
   //     : '$baseUrl/patient-registration/';

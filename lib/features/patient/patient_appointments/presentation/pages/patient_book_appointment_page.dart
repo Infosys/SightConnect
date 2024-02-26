@@ -12,6 +12,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_images.dart';
 import '../../../../../shared/theme/text_theme.dart';
+import '../../data/models/uhi_search_model.dart';
+import '../../data/source/patient_appointment_remote_source.dart';
 import '../providers/book_appointment_provider.dart';
 
 class PatientBookAppointmentPage extends HookConsumerWidget {
@@ -20,7 +22,8 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(bookAppointmentProvider);
-
+    var data = ref.watch(appointmentRemoteSourceProvider);
+    UhiSearchModel a = const UhiSearchModel();
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -44,9 +47,14 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Select Patient",
-                style: applyFiraSansFont(fontSize: 18),
+              InkWell(
+                onTap: () {
+                  data.test();
+                },
+                child: Text(
+                  "Select Patient",
+                  style: applyFiraSansFont(fontSize: 18),
+                ),
               ),
               const SizedBox(
                 height: AppSize.klelevation,

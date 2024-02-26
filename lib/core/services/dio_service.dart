@@ -21,6 +21,24 @@ var keycloakDioProvider = Provider(
   },
 );
 
+var appointmentDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstant.baseDevUrl,
+      ),
+    );
+
+    dio.interceptors.addAll(
+      [
+        DioTokenInterceptor(ref, dio),
+        // DioCertificateInterceptor(dio),
+      ],
+    );
+    return dio;
+  },
+);
+
 var dioProvider = Provider(
   (ref) {
     final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;

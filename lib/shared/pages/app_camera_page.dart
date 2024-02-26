@@ -347,45 +347,52 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
   @override
   Widget build(BuildContext context) {
-    if (!_isPermissionGranted || _isLoading || _cameras.isEmpty) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator.adaptive(),
+    return Stack(
+      children: [
+        if (!_isPermissionGranted || _isLoading || _cameras.isEmpty)
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+              child: const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            ),
+          ),
+        if (!_controller.value.isInitialized)
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+              child: const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            ),
+          ),
+        AppCamerPreviewWidget(
+          isDrawerEnabled: widget.isDrawerEnabled,
+          scaffoldKey: scaffoldKey,
+          isEyeValid: Platform.isAndroid ? _isEyeValid : true,
+          onCameraSwitch: () async {
+            await _toggleCamera();
+          },
+          onFlashToggle: () async {
+            await _toggleFlash();
+          },
+          isLoading: _isLoading,
+          progressMessage: _progressMessage,
+          topHeadingTitle: widget.topHeading,
+          controller: _controller,
+          customPaint: Platform.isAndroid ? _customPaint : null,
+          onCapture: () async {
+            if (Platform.isAndroid && !_isEyeValid) {
+              return;
+            }
+            final XFile? image = await _takePicture(context);
+            logger.d("_takePicture: $image");
+            widget.onCapture(image);
+          },
         ),
-      );
-    }
-    if (!_controller.value.isInitialized) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
-      );
-    } else {
-      return AppCamerPreviewWidget(
-        isDrawerEnabled: widget.isDrawerEnabled,
-        scaffoldKey: scaffoldKey,
-        isEyeValid: Platform.isAndroid ? _isEyeValid : true,
-        onCameraSwitch: () async {
-          await _toggleCamera();
-        },
-        onFlashToggle: () async {
-          await _toggleFlash();
-        },
-        isLoading: _isLoading,
-        progressMessage: _progressMessage,
-        topHeadingTitle: widget.topHeading,
-        controller: _controller,
-        customPaint: Platform.isAndroid ? _customPaint : null,
-        onCapture: () async {
-          if (Platform.isAndroid && !_isEyeValid) {
-            return;
-          }
-          final XFile? image = await _takePicture(context);
-          logger.d("_takePicture: $image");
-          widget.onCapture(image);
-        },
-      );
-    }
+      ],
+    );
   }
 
   Future<void> _toggleCamera() async {

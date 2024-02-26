@@ -13,9 +13,7 @@ class ConsultationType extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(0);
     var model = ref.watch(bookAppointmentProvider);
-    if (isSelected.value == 0) {
-      model.setConsultationType("Telephone Consultation");
-    }
+ 
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 16),

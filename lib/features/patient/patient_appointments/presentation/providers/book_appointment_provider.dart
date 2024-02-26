@@ -5,8 +5,8 @@ var bookAppointmentProvider =
     ChangeNotifierProvider((ref) => BookAppointmentProvider());
 
 class BookAppointmentProvider extends ChangeNotifier {
-  String _selectedConsultationType = '';
-  late DateTime _selectedDate;
+  String _selectedConsultationType = "Telephone Consultation";
+  DateTime _selectedDate = DateTime.now();
   String _selectedPatientName = '';
   String _selectedPatientId = '';
   String _selectedEyeProblem = '';
