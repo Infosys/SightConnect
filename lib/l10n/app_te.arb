@@ -484,5 +484,14 @@
   "vtNoDataAvailable": "డేటా అందుబాటులో లేదు",
   "vtToday": "ఈ రోజు",
   "vtYesterday": "నిన్న",
-  "vtIvrCallNotAvailable": "IVR కాల్ అందుబాటులో లేదు.. మళ్లీ ప్రయత్నించండి!!"
+  "vtIvrCallNotAvailable": "IVR కాల్ అందుబాటులో లేదు.. మళ్లీ ప్రయత్నించండి!!",
+  "vtMarkUnavailable": "అందుబాటులో లేదు గా మార్క్ చేయండి",
+  "vtStartDate": "ప్రారంభ తేది",
+  "vtEndDate": "ముగింపు తేది",
+  "vtStartTime": "ప్రారంభ సమయం",
+  "vtEndTime": "ముగింపు సమయం",
+  "vtAddRemarksOptional": "వ్యాఖ్యలు జోడించండి (ఐచ్ఛికం)",
+  "vtSave": "సేవ్ చేయండి",
+  "vtCancel": "రద్దు చేయండి",
+  "vtPleaseEnterRemark": "దయచేసి వ్యాఖ్యను నమోదు చేయండి"
 }

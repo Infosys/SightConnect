@@ -40,7 +40,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "bn": [
@@ -84,7 +93,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "gu": [
@@ -128,7 +146,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "hi": [
@@ -172,7 +199,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "kn": [
@@ -216,7 +252,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "ml": [
@@ -260,7 +305,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "mr": [
@@ -304,7 +358,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "or": [
@@ -348,7 +411,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "ta": [
@@ -392,7 +464,16 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ],
 
   "ur": [
@@ -436,6 +517,15 @@
     "vtNoDataAvailable",
     "vtToday",
     "vtYesterday",
-    "vtIvrCallNotAvailable"
+    "vtIvrCallNotAvailable",
+    "vtMarkUnavailable",
+    "vtStartDate",
+    "vtEndDate",
+    "vtStartTime",
+    "vtEndTime",
+    "vtAddRemarksOptional",
+    "vtSave",
+    "vtCancel",
+    "vtPleaseEnterRemark"
   ]
 }

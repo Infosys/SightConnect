@@ -484,5 +484,14 @@
   "vtNoDataAvailable": "No Data available",
   "vtToday": "TODAY",
   "vtYesterday": "YESTERDAY",
-  "vtIvrCallNotAvailable": "IVR call not available.. Try Again!!"
+  "vtIvrCallNotAvailable": "IVR call not available.. Try Again!!",
+  "vtMarkUnavailable": "Mark as Unavailable",
+  "vtStartDate": "Start Date",
+  "vtEndDate": "End Date",
+  "vtStartTime": "Start Time",
+  "vtEndTime": "End Time",
+  "vtAddRemarksOptional": "Add Remarks (Optional)",
+  "vtSave": "Save",
+  "vtCancel": "Cancel",
+  "vtPleaseEnterRemark": "Please enter Remark"
 }
