@@ -31,6 +31,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
         ref.watch(addPatientEventProvider).patientListScrollController;
 
     var data = ref.watch(addPatientEventProvider).patientList;
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.all(AppSize.kspadding + 2),
       child: Column(
@@ -52,7 +53,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "No Patient with Name is registered. Click on the  Register Patient.",
+                            loc.vgNoPatientRegistered,
                             style: applyRobotoFont(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -65,14 +66,14 @@ class VisionGuardianPatientList extends HookConsumerWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const PatientRegistrationMiniappPage(
+                                      PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.REGISTER,
-                                    displayName: 'Register Patient',
+                                    displayName: loc.vgRegisterPatient,
                                   ),
                                 ),
                               );
                             },
-                            child: const Text("Register Patient"),
+                            child: Text(loc.vgRegisterPatient),
                           )
                         ],
                       ),
@@ -126,6 +127,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
       }
     });
     // data.add(data.last.copyWith(patientId: null));
+    final loc = context.loc!;
     return Expanded(
       child: ListView.separated(
           controller: scrollController,
@@ -180,6 +182,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                               ),
                               Text(
                                 _formateAge(
+                                  context,
                                   day: data[index].dayOfBirth,
                                   mon: data[index].monthOfBirth,
                                   year: data[index].yearOfBirth,
@@ -198,8 +201,8 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                 visible: data[index].patientId != null,
                                 child: Text(
                                   data[index].parentPatientId == null
-                                      ? "Primary"
-                                      : "Dependent",
+                                      ? loc.vgPrimary
+                                      : loc.vgDependent,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: applyRobotoFont(
@@ -225,7 +228,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                               PatientRegistrationMiniappPage(
                                             actionType:
                                                 MiniAppActionType.ADD_MEMBER,
-                                            displayName: "Add Member",
+                                            displayName: loc.vgAddMember,
                                             parentPatientId: data[index]
                                                 .patientId
                                                 .toString(),
@@ -237,10 +240,10 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                         (value) {
                                           if (value == null || value == false) {
                                             Fluttertoast.showToast(
-                                                msg: "Dependent not added");
+                                                msg: loc.vtDependentNotAdded);
                                           } else if (value) {
                                             Fluttertoast.showToast(
-                                                msg: "Dependent added");
+                                                msg: loc.vtDependentAdded);
                                             ref.invalidate(
                                                 addPatientEventProvider);
                                           }
@@ -249,7 +252,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                     } catch (e) {
                                       logger.d({"error": e});
                                       Fluttertoast.showToast(
-                                        msg: "Service Not Available",
+                                        msg: loc.vtServiceNotAvailable,
                                       );
                                     }
                                   },
@@ -263,7 +266,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                       const SizedBox(
                                           width: AppSize.kspadding / 2),
                                       Text(
-                                        "Add Member",
+                                        loc.vgAddMember,
                                         style: applyRobotoFont(
                                           fontSize: 12,
                                           color: AppColor.primary,
@@ -286,7 +289,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                               PatientRegistrationMiniappPage(
                                             actionType:
                                                 MiniAppActionType.REGISTER,
-                                            displayName: "Register Patient",
+                                            displayName: loc.vgRegisterPatient,
                                             mobileNumber:
                                                 data[index].phoneNumber,
                                           ),
@@ -296,10 +299,11 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                         (value) {
                                           if (value == null || value == false) {
                                             Fluttertoast.showToast(
-                                                msg: "Patient not registered");
+                                                msg:
+                                                    loc.vtPatientNotRegistered);
                                           } else if (value) {
                                             Fluttertoast.showToast(
-                                                msg: "Patient registered");
+                                                msg: loc.vtPatientRegistered);
 
                                             ref.invalidate(
                                                 addPatientEventProvider);
@@ -309,7 +313,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                     } catch (e) {
                                       logger.d({"error": e});
                                       Fluttertoast.showToast(
-                                        msg: "Service Not Available",
+                                        msg: loc.serviceNotAvailable,
                                       );
                                     }
                                   },
@@ -323,7 +327,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                       const SizedBox(
                                           width: AppSize.kspadding / 2),
                                       Text(
-                                        "Complete Profile",
+                                        loc.vgCompleteProfile,
                                         textAlign: TextAlign.center,
                                         style: applyRobotoFont(
                                           fontSize: 12,
@@ -361,7 +365,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                   );
                                 },
                           child: AutoSizeText(
-                            "Start\nAssessment",
+                            loc.vgStartAssessment,
                             minFontSize: 10,
                             maxFontSize: 14,
                             textAlign: TextAlign.center,
@@ -390,22 +394,23 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
     );
   }
 
-  String _formateAge({
+  String _formateAge(
+    BuildContext context, {
     required String? day,
     required String? mon,
     required String? year,
   }) {
     // calculate age with try catch
-
+    final loc = context.loc!;
     try {
       final dateOfBirth = DateTime(
         int.parse(year ?? "0"),
         int.parse(mon ?? "0"),
         int.parse(day ?? "0"),
       );
-      return "${calculateAge(dateOfBirth)} Yrs";
+      return "${calculateAge(dateOfBirth)} ${loc.vgSlideAge}";
     } catch (e) {
-      return "0 Yrs";
+      return "0 ${loc.vgSlideAge}";
     }
   }
 }

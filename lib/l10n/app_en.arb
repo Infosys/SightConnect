@@ -575,5 +575,80 @@
   "vgConjunctivitis": "Conjunctivitis",
   "vgServicesCreateEvent": "Create\nEvent",
   "vgServicesEyeAssessment": "Eye\nAssessment",
-  "vgServicesRegisterPatient": "Register\nNew Patient"
+  "vgServicesRegisterPatient": "Register\nNew Patient",
+  "vgAddPatients": "Add Patients",
+  "vgEvent": "Event",
+  "vgEmptyResults": "There are no {type}s at present. Tap on \"Add {type}\"",
+  "@vgEmptyResults": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "vgAddEventPhoto": "Add Event Photo",
+  "vgUploadImage": "Upload Image",
+  "vgAddPhotoInstruction": "Add a photo of the Event which\nwill be shown as thumbnail",
+  "vgAddressDetails": "Address Details",
+  "vgVenueName": "Venue Name",
+  "vgVenueNameError": "Please enter Venue name",
+  "vgVenueNameSpecialCharError": "Should not contain any special character",
+  "vgPincode": "Pincode",
+  "vgPincodeError": "Only 6 digit pincode allowed",
+  "vgCityTownVillage": "City/Town/Village",
+  "vgCityTownVillageError": "Please enter City/Town/Village name",
+  "vgCityTownVillageSpecialCharError": "Should not contain any special character",
+  "vgCancel": "Cancel",
+  "vgSave": "Save",
+  "vgAddEventImage": "Add Event Image",
+  "vgEventAdded": "Event added",
+  "vgEventNotAdded": "Event not added",
+  "vgDateTime": "Date & Time",
+  "vgStartDate": "Start Date",
+  "vgStartTime": "Start Time",
+  "vgLocation": "Location",
+  "vgViewOnMap": "View On Map",
+  "vgAddressAndDoorNumber": "Address and Door Number",
+  "vgSubDistrictName": "Sub District Name",
+  "vgVillageName": "Village Name",
+  "vgDistrictName": "District Name",
+  "vgAbout": "About",
+  "vgEditEvent": "Edit Event",
+  "vgDeleteEvent": "Delete Event",
+  "vgErrorFetchingEventDetails": "Error fetching event details",
+  "vgNoPatientRegistered": "No Patient with Name is registered. Click on the  Register Patient.",
+  "vgRegisterPatient": "Register Patient",
+  "vgPrimary": "Primary",
+  "vgDependent": "Dependent",
+  "vgAddMember": "Add Member",
+  "vgCompleteProfile": "Complete Profile",
+  "vgStartAssessment": "Start\nAssessment",
+  "vgSearchPatientByPhoneNumber": "Search Patient by Phone Number",
+  "vgInvalidPhoneNumber": "Please enter a valid phone number",
+  "vgServerError": "Server Error",
+  "vgPatient": "Patient",
+  "vgReportId": "Report ID",
+  "vgSearchByIdName": "Search by {searchType} ID, Name",
+  "@vgSearchByIdName": {
+    "placeholders": {
+      "searchType": {
+        "type": "String"
+      }
+    }
+  },
+  "vgNoEventFound": "No Event Found",
+  "vgTeamMateDeletedSuccessfully": "TeamMate Deleted Successfully",
+  "vgSomethingWentWrong": "Something went wrong",
+  "vgName": "Name",
+  "vgPhoneNumber": "Phone Number",
+  "vgErrorFetchingTeammatesDetails": "Error fetching teammates details",
+  "vgTeamMateAddedSuccessfully": "TeamMate Added Succesfully",
+  "vgAddTeammate": "Add Teammate",
+  "vgPleaseEnter": "Please enter",
+  "vgPleaseEnterField": "Please enter field",
+  "vgOr": "Or",
+  "vgSearch": "Search",
+  "vgEventDeletedSuccessfully": "Event Deleted Successfully",
+  "vgEventDeletionFailed": "Event Deletion Failed",
+  "vgEndTimeGreaterThanStartTime": "End time should be greater than start time"
 }

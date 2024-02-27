@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_form_helper_widgets.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(addEventDetailsProvider);
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       width: double.infinity,
@@ -29,7 +31,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Address Details",
+            loc.vgAddressDetails,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -38,15 +40,16 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           customTextFieldIcon(
+            context,
             data.venueName,
-            "Venue Name",
+            loc.vgVenueName,
             validationFunction: (value) {
               if (value == "" || value == null) {
-                return "Please enter Venue name";
+                return loc.vgVenueNameError;
               }
               if (!RegExp(r'^[a-zA-Z0-9]+[ ]{0,1}[a-zA-Z0-9]*$')
                   .hasMatch(value)) {
-                return "Should not contain any special character";
+                return loc.vgVenueNameSpecialCharError;
               }
               return null;
             },
@@ -54,11 +57,12 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           customTextFieldIcon(
+            context,
             data.pincode,
-            "Pincode",
+            loc.vgPincode,
             validationFunction: (value) {
               if (!RegExp(r'^[1-9][0-9]{5}$').hasMatch(value!)) {
-                return "Only 6 digit pincode allowed";
+                return loc.vgPincodeError;
               }
               return null;
             },
@@ -66,14 +70,15 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           customTextFieldIcon(
+            context,
             data.city,
-            "City/Town/Village",
+            loc.vgCityTownVillage,
             validationFunction: (value) {
               if (value == "" || value == null) {
-                return "Please enter City/Town/Village name";
+                return loc.vgCityTownVillageError;
               }
               if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value)) {
-                return "Should not contain any special character";
+                return loc.vgCityTownVillageSpecialCharError;
               }
               return null;
             },

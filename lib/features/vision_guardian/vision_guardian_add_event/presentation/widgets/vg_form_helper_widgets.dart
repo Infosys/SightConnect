@@ -1,8 +1,11 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Widget customTextField(TextEditingController controller, String label,
+Widget customTextField(
+    BuildContext context, TextEditingController controller, String label,
     {String? Function(String?)? validationFunction}) {
+  final loc = context.loc!;
   return TextFormField(
     autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
@@ -12,7 +15,7 @@ Widget customTextField(TextEditingController controller, String label,
     validator: validationFunction ??
         (value) {
           if (value == null || value.isEmpty) {
-            return "Please enter $label";
+            return "${loc.vgPleaseEnter} $label";
           }
           return null;
         },
@@ -31,9 +34,10 @@ Widget customTextField(TextEditingController controller, String label,
   );
 }
 
-Widget customTextFieldIcon(
+Widget customTextFieldIcon(BuildContext context,
     TextEditingController controller, String label, Widget icon,
     {String? Function(String?)? validationFunction}) {
+  final loc = context.loc!;
   return TextFormField(
     autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
@@ -43,7 +47,7 @@ Widget customTextFieldIcon(
     validator: validationFunction ??
         (value) {
           if (value == null || value.isEmpty) {
-            return "Please enter $label";
+            return "${loc.vgPleaseEnter} $label";
           }
           return null;
         },
@@ -67,10 +71,13 @@ Widget customTextFieldIcon(
 }
 
 Widget customTextFieldRows(
-    TextEditingController firstController,
-    TextEditingController secondController,
-    String firstLabel,
-    String secondLabel) {
+  BuildContext context,
+  TextEditingController firstController,
+  TextEditingController secondController,
+  String firstLabel,
+  String secondLabel,
+) {
+  final loc = context.loc!;
   return Row(
     children: [
       Expanded(
@@ -81,7 +88,7 @@ Widget customTextFieldRows(
           },
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter field";
+              return loc.vgPleaseEnterField;
             }
             return null;
           },
@@ -131,6 +138,7 @@ Widget customTextFieldDatePicker({
   required DateTime startDate,
   required Null Function(dynamic value) onDateChanged,
 }) {
+  final loc = context.loc!;
   return Expanded(
     child: TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -138,7 +146,7 @@ Widget customTextFieldDatePicker({
       readOnly: true,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Please enter $label";
+          return "${loc.vgPleaseEnter} $label";
         }
         return null;
       },
@@ -175,10 +183,11 @@ Widget customTextFieldDatePicker({
 }
 
 Widget customTextFieldTimePicker(
+    BuildContext context,
     TextEditingController timeController,
     String label,
-    BuildContext context,
     String? Function(String?)? customValidation) {
+  final loc = context.loc!;
   return Expanded(
     child: TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -190,7 +199,7 @@ Widget customTextFieldTimePicker(
       validator: customValidation ??
           (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter $label";
+              return "${loc.vgPleaseEnter} $label";
             }
             return null;
           },
@@ -224,11 +233,13 @@ Widget customTextFieldTimePicker(
 }
 
 Widget customTextFieldRowsAgeDob(
-    TextEditingController firstController,
-    TextEditingController secondController,
-    String firstLabel,
-    String secondLabel,
-    BuildContext context) {
+  BuildContext context,
+  TextEditingController firstController,
+  TextEditingController secondController,
+  String firstLabel,
+  String secondLabel,
+) {
+  final loc = context.loc!;
   return Row(
     children: [
       Expanded(
@@ -252,7 +263,7 @@ Widget customTextFieldRowsAgeDob(
         ),
       ),
       const SizedBox(width: 5),
-      const Text("Or"),
+      Text(loc.vgOr),
       const SizedBox(width: 5),
       Expanded(
         child: TextFormField(

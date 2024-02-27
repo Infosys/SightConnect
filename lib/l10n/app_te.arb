@@ -575,5 +575,80 @@
   "vgConjunctivitis": "కంజంక్టైవైటిస్",
   "vgServicesCreateEvent": "ఈవెంట్\nసృష్టించండి",
   "vgServicesEyeAssessment": "కళ్లు\nమూల్యాంకన",
-  "vgServicesRegisterPatient": "కొత్త\nరోగిని నమోదు చేయండి"
+  "vgServicesRegisterPatient": "కొత్త రోగిని\nనమోదు చేయండి",
+  "vgAddPatients": "రోగులను జోడించండి",
+  "vgEvent": "ఈవెంట్",
+  "vgEmptyResults": "ప్రస్తుతం {type}లు లేవు. \"Add {type}\" పై ట్యాప్ చేయండి",
+  "@vgEmptyResults": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "vgAddEventPhoto": "ఈవెంట్ ఫోటోను జోడించండి",
+  "vgUploadImage": "చిత్రాన్ని అప్లోడ్ చేయండి",
+  "vgAddPhotoInstruction": "ఈవెంట్ యొక్క ఫోటోను జోడించండి ఇది థంబ్నేల్ గా చూపిస్తుంది",
+  "vgAddressDetails": "చిరునామా వివరాలు",
+  "vgVenueName": "వేదిక పేరు",
+  "vgVenueNameError": "వేదిక పేరును నమోదు చేయండి",
+  "vgVenueNameSpecialCharError": "ప్రత్యేక అక్షరాలు ఉండకూడదు",
+  "vgPincode": "పిన్కోడ్",
+  "vgPincodeError": "మాత్రమే 6 అంకెల పిన్కోడ్ అనుమతిస్తుంది",
+  "vgCityTownVillage": "నగరం/పట్టణం/గ్రామం",
+  "vgCityTownVillageError": "నగరం/పట్టణం/గ్రామం పేరును నమోదు చేయండి",
+  "vgCityTownVillageSpecialCharError": "ప్రత్యేక అక్షరాలు ఉండకూడదు",
+  "vgCancel": "రద్దు చేయండి",
+  "vgSave": "సేవ్ చేయండి",
+  "vgAddEventImage": "ఈవెంట్ చిత్రాన్ని జోడించండి",
+  "vgEventAdded": "ఈవెంట్ జోడించబడింది",
+  "vgEventNotAdded": "ఈవెంట్ జోడించలేదు",
+  "vgDateTime": "తేదీ & సమయం",
+  "vgStartDate": "ప్రారంభ తేదీ",
+  "vgStartTime": "ప్రారంభ సమయం",
+  "vgLocation": "స్థలం",
+  "vgViewOnMap": "మ్యాప్ పై చూడండి",
+  "vgAddressAndDoorNumber": "చిరునామా మరియు ద్వార సంఖ్య",
+  "vgSubDistrictName": "ఉప జిల్లా పేరు",
+  "vgVillageName": "గ్రామం పేరు",
+  "vgDistrictName": "జిల్లా పేరు",
+  "vgAbout": "గురించి",
+  "vgEditEvent": "ఈవెంట్ సవరించండి",
+  "vgDeleteEvent": "ఈవెంట్ తొలగించండి",
+  "vgErrorFetchingEventDetails": "ఈవెంట్ వివరాలను పొందడంలో లోపం",
+  "vgNoPatientRegistered": "పేరుతో రోగి నమోదు కాలేదు. రోగిని నమోదు చేయడానికి క్లిక్ చేయండి.",
+  "vgRegisterPatient": "రోగిని నమోదు చేయండి",
+  "vgPrimary": "ప్రాథమిక",
+  "vgDependent": "ఆధారపడి",
+  "vgAddMember": "సభ్యుని జోడించండి",
+  "vgCompleteProfile": "ప్రొఫైల్ పూర్తి చేయండి",
+  "vgStartAssessment": "అంచనాను ప్రారంభించండి",
+  "vgSearchPatientByPhoneNumber": "ఫోన్ నంబర్ ద్వారా రోగిని శోధించండి",
+  "vgInvalidPhoneNumber": "చెల్లని ఫోన్ నంబర్ నమోదు చేయండి",
+  "vgServerError": "సర్వర్ లోపం",
+  "vgPatient": "రోగి",
+  "vgReportId": "నివేదిక ఐడి",
+  "vgSearchByIdName": "{searchType} ఐడి, పేరు ద్వారా శోధించండి",
+  "@vgSearchByIdName": {
+    "placeholders": {
+      "searchType": {
+        "type": "String"
+      }
+    }
+  },
+  "vgNoEventFound": "ఈవెంట్ కనబడలేదు",
+  "vgTeamMateDeletedSuccessfully": "టీమ్ మేట్ విజయవంతంగా తొలగించబడింది",
+  "vgSomethingWentWrong": "ఏదో తప్పు జరిగింది",
+  "vgName": "పేరు",
+  "vgPhoneNumber": "ఫోన్ నంబర్",
+  "vgErrorFetchingTeammatesDetails": "టీమ్ మేట్స్ వివరాలను పొందడంలో లోపం ఉంది",
+  "vgTeamMateAddedSuccessfully": "టీమ్ మేట్ విజయవంతంగా జోడించబడింది",
+  "vgAddTeammate": "టీమ్ మేట్ జోడించండి",
+  "vgPleaseEnter": "దయచేసి నమోదు చేయండి",
+  "vgPleaseEnterField": "దయచేసి ఫీల్డ్ నమోదు చేయండి",
+  "vgOr": "లేదా",
+  "vgSearch": "శోధించండి",
+  "vgEventDeletedSuccessfully": "ఈవెంట్ విజయవంతంగా తొలగించబడింది",
+  "vgEventDeletionFailed": "ఈవెంట్ తొలగింపు విఫలమైంది",
+  "vgEndTimeGreaterThanStartTime": "ముగింపు సమయం ప్రారంభ సమయం కంటే ఎక్కువ ఉండాలి"
 }

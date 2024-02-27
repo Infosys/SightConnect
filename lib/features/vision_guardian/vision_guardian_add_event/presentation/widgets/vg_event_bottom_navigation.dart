@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +12,7 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: Row(
@@ -31,7 +33,7 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                 ),
               ),
               child: Text(
-                "Cancel",
+                loc.vgCancel,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -50,14 +52,14 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                     .validate()) {
                   try {
                     if (ref.watch(addEventDetailsProvider).image == null) {
-                      Fluttertoast.showToast(msg: "Add Event Image");
+                      Fluttertoast.showToast(msg: loc.vgAddEventImage);
                     } else {
                       await ref.read(addEventDetailsProvider).addEventDetails();
                       navigator.pop();
-                      Fluttertoast.showToast(msg: "Event added");
+                      Fluttertoast.showToast(msg: loc.vgEventAdded);
                     }
                   } catch (e) {
-                    Fluttertoast.showToast(msg: "Event not added");
+                    Fluttertoast.showToast(msg: loc.vgEventNotAdded);
                   }
                 }
               },
@@ -71,7 +73,7 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                 ),
               ),
               child: Text(
-                "Save",
+                loc.vgSave,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,

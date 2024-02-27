@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,10 @@ class VisionGuardianEventPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(0);
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
-        title: const Text('Event'),
+        title: Text(loc.vgEvent),
         centerTitle: false,
         actions: [
           IconButton(
@@ -92,7 +94,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
                         fontWeight: FontWeight.w400),
                   ),
                   TextSpan(
-                    text: 'Add Event',
+                    text: loc.vgAddEvent,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,

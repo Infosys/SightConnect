@@ -64,6 +64,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         customTextField(
+                          context,
                           data.eventTitle,
                           loc.vgEventTitle,
                           validationFunction: (value) {
@@ -81,6 +82,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                         ),
                         const SizedBox(height: AppSize.kmheight),
                         customTextField(
+                          context,
                           data.eventDescription,
                           loc.vgEventDescription,
                         ),
