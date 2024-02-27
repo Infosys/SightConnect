@@ -1,6 +1,6 @@
 {
   "@@locale": "te",
-  "@@last_modified": "2024-02-23T07:02:09.705Z",
+  "@@last_modified": "2024-02-27T12:30:34.120Z",
   "@@author": "appTranslationsARB.js",
   "@stepNumber": {
     "placeholders": {
@@ -37,6 +37,22 @@
     }
   },
   "patientHasAnAppointment": "{patient}కి అపాయింట్‌మెంట్ ఉంది",
+  "@vgEmptyResults": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "vgEmptyResults": "ప్రస్తుతం {type}లు లేవు. \"Add {type}\" పై ట్యాప్ చేయండి",
+  "@vgSearchByIdName": {
+    "placeholders": {
+      "searchType": {
+        "type": "String"
+      }
+    }
+  },
+  "vgSearchByIdName": "{searchType} ఐడి, పేరు ద్వారా శోధించండి",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",
@@ -573,19 +589,11 @@
   "vgKeratitis": "కెరాటైటిస్",
   "vgBlepharitis": "బ్లెఫరైటిస్",
   "vgConjunctivitis": "కంజంక్టైవైటిస్",
-  "vgServicesCreateEvent": "ఈవెంట్\nసృష్టించండి",
-  "vgServicesEyeAssessment": "కళ్లు\nమూల్యాంకన",
-  "vgServicesRegisterPatient": "కొత్త రోగిని\nనమోదు చేయండి",
+  "vgServicesCreateEvent": "ఈవెంట్\r\nసృష్టించండి",
+  "vgServicesEyeAssessment": "కళ్లు\r\nమూల్యాంకన",
+  "vgServicesRegisterPatient": "కొత్త రోగిని\r\nనమోదు చేయండి",
   "vgAddPatients": "రోగులను జోడించండి",
   "vgEvent": "ఈవెంట్",
-  "vgEmptyResults": "ప్రస్తుతం {type}లు లేవు. \"Add {type}\" పై ట్యాప్ చేయండి",
-  "@vgEmptyResults": {
-    "placeholders": {
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "vgAddEventPhoto": "ఈవెంట్ ఫోటోను జోడించండి",
   "vgUploadImage": "చిత్రాన్ని అప్లోడ్ చేయండి",
   "vgAddPhotoInstruction": "ఈవెంట్ యొక్క ఫోటోను జోడించండి ఇది థంబ్నేల్ గా చూపిస్తుంది",
@@ -628,14 +636,6 @@
   "vgServerError": "సర్వర్ లోపం",
   "vgPatient": "రోగి",
   "vgReportId": "నివేదిక ఐడి",
-  "vgSearchByIdName": "{searchType} ఐడి, పేరు ద్వారా శోధించండి",
-  "@vgSearchByIdName": {
-    "placeholders": {
-      "searchType": {
-        "type": "String"
-      }
-    }
-  },
   "vgNoEventFound": "ఈవెంట్ కనబడలేదు",
   "vgTeamMateDeletedSuccessfully": "టీమ్ మేట్ విజయవంతంగా తొలగించబడింది",
   "vgSomethingWentWrong": "ఏదో తప్పు జరిగింది",

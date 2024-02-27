@@ -6,22 +6,32 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String stepNumber(String current, String total) {
-    return '$current बाहेर $total';
+    return '${current} बाहेर ${total}';
   }
 
   @override
   String loginEnterOTP(String mobileNumber) {
-    return 'Please enter the OTP sent to $mobileNumber';
+    return 'Please enter the OTP sent to ${mobileNumber}';
   }
 
   @override
   String loginResendOTPIn(String time) {
-    return 'Resend in $time';
+    return 'Resend in ${time}';
   }
 
   @override
   String patientHasAnAppointment(String patient) {
-    return '$patient has an appointment';
+    return '${patient} has an appointment';
+  }
+
+  @override
+  String vgEmptyResults(String type) {
+    return 'There are no ${type}s at present. Tap on "Add ${type}"';
+  }
+
+  @override
+  String vgSearchByIdName(String searchType) {
+    return 'Search by ${searchType} ID, Name';
   }
 
   @override
@@ -1244,4 +1254,580 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get miniappConsole => 'Console';
+
+  @override
+  String get roleChooseYourRole => 'Choose Your Role';
+
+  @override
+  String get roleNote => 'Note: You cannot change your role inside the app.';
+
+  @override
+  String get roleConfirm => 'Confirm';
+
+  @override
+  String get roleEyeCareProfessional => 'EYE CARE PROFESSIONAL';
+
+  @override
+  String get roleVisionTechnician => 'VISION TECHNICIAN';
+
+  @override
+  String get rolePatient => 'PATIENT';
+
+  @override
+  String get roleVisionGuardian => 'VISION GUARDIAN';
+
+  @override
+  String get vtSearchText => 'Search by Patient ID, Mobile No or Name';
+
+  @override
+  String get emptyPatientsInfo => 'Start searching for patients to view their details .. ';
+
+  @override
+  String get vtPersonalDetails => 'Personal Details';
+
+  @override
+  String get vtHprId => 'HPR ID';
+
+  @override
+  String get vtEmailId => 'Email ID';
+
+  @override
+  String get vtEducationalQualification => 'Educational Qualification';
+
+  @override
+  String get vtAddressAndDoorNumber => 'Address and Door Number';
+
+  @override
+  String get vtCity => 'City';
+
+  @override
+  String get vtState => 'State';
+
+  @override
+  String get vtPincode => 'Pincode';
+
+  @override
+  String get vtOrganisationDetails => 'Organisation Details';
+
+  @override
+  String get vtOrgId => 'Org ID';
+
+  @override
+  String get vtFacilityType => 'Facility Type';
+
+  @override
+  String get vtAssessments => 'Assessments';
+
+  @override
+  String get vtNoAssessmentsFound => 'No Assessments Found';
+
+  @override
+  String get vtAnalytics => 'Analytics';
+
+  @override
+  String get vtTotalCases => 'Total Cases';
+
+  @override
+  String get vtIvrCalls => 'IVR Calls';
+
+  @override
+  String get vtClinicVisits => 'Clinic Visits';
+
+  @override
+  String get vtCasesClosed => 'Cases Closed';
+
+  @override
+  String get vtCritical => 'Critical';
+
+  @override
+  String get vtRegular => 'Regular';
+
+  @override
+  String get vtAvgClosureTime => 'Avg. Closure Time';
+
+  @override
+  String get vtByAge => 'By Age';
+
+  @override
+  String get vtByGender => 'By Gender';
+
+  @override
+  String get vtSymptoms => 'Symptoms';
+
+  @override
+  String get vtSearchByMobileNo => 'Search by Mobile No.';
+
+  @override
+  String get vtInvalidMobileNo => 'Invalid Mobile No.';
+
+  @override
+  String get vtCallLogEmpty => 'Call Log is Empty.. No Calls made yet!!';
+
+  @override
+  String get vtNoDataAvailable => 'No Data available';
+
+  @override
+  String get vtToday => 'TODAY';
+
+  @override
+  String get vtYesterday => 'YESTERDAY';
+
+  @override
+  String get vtIvrCallNotAvailable => 'IVR call not available.. Try Again!!';
+
+  @override
+  String get vtMarkUnavailable => 'Mark as Unavailable';
+
+  @override
+  String get vtStartDate => 'Start Date';
+
+  @override
+  String get vtEndDate => 'End Date';
+
+  @override
+  String get vtStartTime => 'Start Time';
+
+  @override
+  String get vtEndTime => 'End Time';
+
+  @override
+  String get vtAddRemarksOptional => 'Add Remarks (Optional)';
+
+  @override
+  String get vtSave => 'Save';
+
+  @override
+  String get vtCancel => 'Cancel';
+
+  @override
+  String get vtPleaseEnterRemark => 'Please enter Remark';
+
+  @override
+  String get vtAssessment => 'Assessment';
+
+  @override
+  String get vtIvrSelections => 'IVR Selections';
+
+  @override
+  String get vtLanguageSelection => 'Language Selection';
+
+  @override
+  String get vtEnglish => 'English';
+
+  @override
+  String get vtPatientType => 'Patient Type';
+
+  @override
+  String get vtProblem => 'Problem';
+
+  @override
+  String get vtEyeSight => 'Eye Sight';
+
+  @override
+  String get vtVisionTechnician => 'Vision Technician';
+
+  @override
+  String get vtRecommendedCenter => 'Recommended Center';
+
+  @override
+  String get vtAssessmentIDEA => 'Assessment ID: EA';
+
+  @override
+  String get vtPid => 'PID: OP';
+
+  @override
+  String get vtAssessmentTimeline => 'Assessment Timeline';
+
+  @override
+  String get vtPleaseSelectEncounter => 'Please select an encounter';
+
+  @override
+  String get vtTimelineEA => 'Timeline: EA';
+
+  @override
+  String get vtGeneralInformation => 'General Information';
+
+  @override
+  String get vtDateOfBirth => 'Date of Birth';
+
+  @override
+  String get vtAssessmentEA => 'Assessment EA';
+
+  @override
+  String get vtNotRegistered => 'You are not registered in the system. Please give a missed call to';
+
+  @override
+  String get vtOkay => 'Okay';
+
+  @override
+  String get vtTakePicture => 'Take Picture';
+
+  @override
+  String get vtEye => 'Eye';
+
+  @override
+  String get vtRetakePicture => 'Retake Picture';
+
+  @override
+  String get vtNext => 'Next';
+
+  @override
+  String get vtMrCode => 'MR Code';
+
+  @override
+  String get vtEnterMrCode => 'Enter MR Code Here';
+
+  @override
+  String get vtPleaseEnterMrCode => 'Please enter MR Code';
+
+  @override
+  String get vtNote => 'Note';
+
+  @override
+  String get vtEnterRecommendations => 'Enter Recommendations Here';
+
+  @override
+  String get vtSolutions => 'Solutions(s)';
+
+  @override
+  String get vtLeftEye => 'Left Eye';
+
+  @override
+  String get vtRightEye => 'Right Eye';
+
+  @override
+  String get vtBothEyes => 'Both Eyes';
+
+  @override
+  String get vtFilterBy => 'Filter by';
+
+  @override
+  String get vtLocation => 'Location';
+
+  @override
+  String get vtEnterTime => 'Please enter Time';
+
+  @override
+  String get vtEnterDate => 'Please enter Date';
+
+  @override
+  String get vtRecommendation => 'Recommendation';
+
+  @override
+  String get vtVisitPrimaryCenter => 'Visit Primary Center';
+
+  @override
+  String get vtVisitSecondaryCenter => 'Visit Secondary Center';
+
+  @override
+  String get vtVisitTertiaryCenter => 'Visit Tertiary Center';
+
+  @override
+  String get vtVisitCenterOfExcellence => 'Visit Center of Excellence';
+
+  @override
+  String get vtIvrCallQuestion => 'Are you on IVR Call?';
+
+  @override
+  String get vtYes => 'Yes';
+
+  @override
+  String get vtNo => 'No';
+
+  @override
+  String get vtRetry => 'Retry';
+
+  @override
+  String get vtAssessmentQuestions => 'Assessment Questions';
+
+  @override
+  String get vtVisionCenter => 'Vision Center';
+
+  @override
+  String get vtVisualAcuity => 'Visual Acuity';
+
+  @override
+  String get vtInvalidValue => 'Invalid value';
+
+  @override
+  String get vtSeverity => 'Severity';
+
+  @override
+  String get vtNoVisionCentersFound => 'No Vision Centers Found';
+
+  @override
+  String get vtRequestLocationPermission => 'Request Location Permission';
+
+  @override
+  String get vtAppSettings => 'App Settings';
+
+  @override
+  String get vtEnterSomeText => 'Please enter some text';
+
+  @override
+  String get vtPrimary => 'Primary';
+
+  @override
+  String get vtDependent => 'Dependent';
+
+  @override
+  String get vtAddMember => 'Add Member';
+
+  @override
+  String get vtCompleteProfile => 'Complete Profile';
+
+  @override
+  String get vtPatientNotRegistered => 'Patient not registered';
+
+  @override
+  String get vtPatientRegistered => 'Patient registered';
+
+  @override
+  String get vtDependentNotAdded => 'Dependent not added';
+
+  @override
+  String get vtDependentAdded => 'Dependent added';
+
+  @override
+  String get vtServiceNotAvailable => 'Service Not Available';
+
+  @override
+  String get vgEyeAssessments => 'Eye Assessments';
+
+  @override
+  String get vgTotal => 'Total';
+
+  @override
+  String get vgCamps => 'Camps';
+
+  @override
+  String get vgDoorToDoor => 'Door to Door';
+
+  @override
+  String get vgByGender => 'By Gender';
+
+  @override
+  String get vgMale => 'Male';
+
+  @override
+  String get vgFemale => 'Female';
+
+  @override
+  String get vgOthers => 'Others';
+
+  @override
+  String get vgByAge => 'By Age';
+
+  @override
+  String get vgSlideAge => 'Yrs';
+
+  @override
+  String get vgSymptoms => 'Symptoms';
+
+  @override
+  String get vgRefractive => 'Refractive';
+
+  @override
+  String get vgCataract => 'Cataract';
+
+  @override
+  String get vgGlaucoma => 'Glaucoma';
+
+  @override
+  String get vgKeratitis => 'Keratitis';
+
+  @override
+  String get vgBlepharitis => 'Blepharitis';
+
+  @override
+  String get vgConjunctivitis => 'Conjunctivitis';
+
+  @override
+  String get vgServicesCreateEvent => 'Create\r\nEvent';
+
+  @override
+  String get vgServicesEyeAssessment => 'Eye\r\nAssessment';
+
+  @override
+  String get vgServicesRegisterPatient => 'Register\r\nNew Patient';
+
+  @override
+  String get vgAddPatients => 'Add Patients';
+
+  @override
+  String get vgEvent => 'Event';
+
+  @override
+  String get vgAddEventPhoto => 'Add Event Photo';
+
+  @override
+  String get vgUploadImage => 'Upload Image';
+
+  @override
+  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\nwill be shown as thumbnail';
+
+  @override
+  String get vgAddressDetails => 'Address Details';
+
+  @override
+  String get vgVenueName => 'Venue Name';
+
+  @override
+  String get vgVenueNameError => 'Please enter Venue name';
+
+  @override
+  String get vgVenueNameSpecialCharError => 'Should not contain any special character';
+
+  @override
+  String get vgPincode => 'Pincode';
+
+  @override
+  String get vgPincodeError => 'Only 6 digit pincode allowed';
+
+  @override
+  String get vgCityTownVillage => 'City/Town/Village';
+
+  @override
+  String get vgCityTownVillageError => 'Please enter City/Town/Village name';
+
+  @override
+  String get vgCityTownVillageSpecialCharError => 'Should not contain any special character';
+
+  @override
+  String get vgCancel => 'Cancel';
+
+  @override
+  String get vgSave => 'Save';
+
+  @override
+  String get vgAddEventImage => 'Add Event Image';
+
+  @override
+  String get vgEventAdded => 'Event added';
+
+  @override
+  String get vgEventNotAdded => 'Event not added';
+
+  @override
+  String get vgDateTime => 'Date & Time';
+
+  @override
+  String get vgStartDate => 'Start Date';
+
+  @override
+  String get vgStartTime => 'Start Time';
+
+  @override
+  String get vgLocation => 'Location';
+
+  @override
+  String get vgViewOnMap => 'View On Map';
+
+  @override
+  String get vgAddressAndDoorNumber => 'Address and Door Number';
+
+  @override
+  String get vgSubDistrictName => 'Sub District Name';
+
+  @override
+  String get vgVillageName => 'Village Name';
+
+  @override
+  String get vgDistrictName => 'District Name';
+
+  @override
+  String get vgAbout => 'About';
+
+  @override
+  String get vgEditEvent => 'Edit Event';
+
+  @override
+  String get vgDeleteEvent => 'Delete Event';
+
+  @override
+  String get vgErrorFetchingEventDetails => 'Error fetching event details';
+
+  @override
+  String get vgNoPatientRegistered => 'No Patient with Name is registered. Click on the  Register Patient.';
+
+  @override
+  String get vgRegisterPatient => 'Register Patient';
+
+  @override
+  String get vgPrimary => 'Primary';
+
+  @override
+  String get vgDependent => 'Dependent';
+
+  @override
+  String get vgAddMember => 'Add Member';
+
+  @override
+  String get vgCompleteProfile => 'Complete Profile';
+
+  @override
+  String get vgStartAssessment => 'Start\r\nAssessment';
+
+  @override
+  String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
+
+  @override
+  String get vgInvalidPhoneNumber => 'Please enter a valid phone number';
+
+  @override
+  String get vgServerError => 'Server Error';
+
+  @override
+  String get vgPatient => 'Patient';
+
+  @override
+  String get vgReportId => 'Report ID';
+
+  @override
+  String get vgNoEventFound => 'No Event Found';
+
+  @override
+  String get vgTeamMateDeletedSuccessfully => 'TeamMate Deleted Successfully';
+
+  @override
+  String get vgSomethingWentWrong => 'Something went wrong';
+
+  @override
+  String get vgName => 'Name';
+
+  @override
+  String get vgPhoneNumber => 'Phone Number';
+
+  @override
+  String get vgErrorFetchingTeammatesDetails => 'Error fetching teammates details';
+
+  @override
+  String get vgTeamMateAddedSuccessfully => 'TeamMate Added Successfully';
+
+  @override
+  String get vgAddTeammate => 'Add Teammate';
+
+  @override
+  String get vgPleaseEnter => 'Please enter';
+
+  @override
+  String get vgPleaseEnterField => 'Please enter field';
+
+  @override
+  String get vgOr => 'Or';
+
+  @override
+  String get vgSearch => 'Search';
+
+  @override
+  String get vgEventDeletedSuccessfully => 'Event Deleted Successfully';
+
+  @override
+  String get vgEventDeletionFailed => 'Event Deletion Failed';
+
+  @override
+  String get vgEndTimeGreaterThanStartTime => 'End time should be greater than start time';
+
+  @override
+  String get vgNoPatientsPresent => 'There are no patients at present. Tap on "Add Patient"';
 }

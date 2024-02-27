@@ -37,6 +37,22 @@
     }
   },
   "patientHasAnAppointment": "{patient} has an appointment",
+  "@vgEmptyResults": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "vgEmptyResults": "There are no {type}s at present. Tap on \"Add {type}\"",
+  "@vgSearchByIdName": {
+    "placeholders": {
+      "searchType": {
+        "type": "String"
+      }
+    }
+  },
+  "vgSearchByIdName": "Search by {searchType} ID, Name",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",
@@ -573,22 +589,14 @@
   "vgKeratitis": "Keratitis",
   "vgBlepharitis": "Blepharitis",
   "vgConjunctivitis": "Conjunctivitis",
-  "vgServicesCreateEvent": "Create\nEvent",
-  "vgServicesEyeAssessment": "Eye\nAssessment",
-  "vgServicesRegisterPatient": "Register\nNew Patient",
+  "vgServicesCreateEvent": "Create\r\nEvent",
+  "vgServicesEyeAssessment": "Eye\r\nAssessment",
+  "vgServicesRegisterPatient": "Register\r\nNew Patient",
   "vgAddPatients": "Add Patients",
   "vgEvent": "Event",
-  "vgEmptyResults": "There are no {type}s at present. Tap on \"Add {type}\"",
-  "@vgEmptyResults": {
-    "placeholders": {
-      "type": {
-        "type": "String"
-      }
-    }
-  },
   "vgAddEventPhoto": "Add Event Photo",
   "vgUploadImage": "Upload Image",
-  "vgAddPhotoInstruction": "Add a photo of the Event which\nwill be shown as thumbnail",
+  "vgAddPhotoInstruction": "Add a photo of the Event which\r\nwill be shown as thumbnail",
   "vgAddressDetails": "Address Details",
   "vgVenueName": "Venue Name",
   "vgVenueNameError": "Please enter Venue name",
@@ -622,20 +630,12 @@
   "vgDependent": "Dependent",
   "vgAddMember": "Add Member",
   "vgCompleteProfile": "Complete Profile",
-  "vgStartAssessment": "Start\nAssessment",
+  "vgStartAssessment": "Start\r\nAssessment",
   "vgSearchPatientByPhoneNumber": "Search Patient by Phone Number",
   "vgInvalidPhoneNumber": "Please enter a valid phone number",
   "vgServerError": "Server Error",
   "vgPatient": "Patient",
   "vgReportId": "Report ID",
-  "vgSearchByIdName": "Search by {searchType} ID, Name",
-  "@vgSearchByIdName": {
-    "placeholders": {
-      "searchType": {
-        "type": "String"
-      }
-    }
-  },
   "vgNoEventFound": "No Event Found",
   "vgTeamMateDeletedSuccessfully": "TeamMate Deleted Successfully",
   "vgSomethingWentWrong": "Something went wrong",
