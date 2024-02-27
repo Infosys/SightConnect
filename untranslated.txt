@@ -192,7 +192,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "bn": [
@@ -388,7 +389,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "gu": [
@@ -584,7 +586,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "hi": [
@@ -780,7 +783,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "kn": [
@@ -976,7 +980,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "ml": [
@@ -1172,7 +1177,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "mr": [
@@ -1368,7 +1374,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "or": [
@@ -1564,7 +1571,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "ta": [
@@ -1760,7 +1768,8 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ],
 
   "ur": [
@@ -1956,6 +1965,7 @@
     "vgSearch",
     "vgEventDeletedSuccessfully",
     "vgEventDeletionFailed",
-    "vgEndTimeGreaterThanStartTime"
+    "vgEndTimeGreaterThanStartTime",
+    "vgNoPatientsPresent"
   ]
 }

@@ -650,5 +650,6 @@
   "vgSearch": "శోధించండి",
   "vgEventDeletedSuccessfully": "ఈవెంట్ విజయవంతంగా తొలగించబడింది",
   "vgEventDeletionFailed": "ఈవెంట్ తొలగింపు విఫలమైంది",
-  "vgEndTimeGreaterThanStartTime": "ముగింపు సమయం ప్రారంభ సమయం కంటే ఎక్కువ ఉండాలి"
+  "vgEndTimeGreaterThanStartTime": "ముగింపు సమయం ప్రారంభ సమయం కంటే ఎక్కువ ఉండాలి",
+  "vgNoPatientsPresent": "ప్రస్తుతం రోగులు లేరు. \"రోగిని జోడించండి\" పై నొక్కండి"
 }

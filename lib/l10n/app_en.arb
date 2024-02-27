@@ -642,7 +642,7 @@
   "vgName": "Name",
   "vgPhoneNumber": "Phone Number",
   "vgErrorFetchingTeammatesDetails": "Error fetching teammates details",
-  "vgTeamMateAddedSuccessfully": "TeamMate Added Succesfully",
+  "vgTeamMateAddedSuccessfully": "TeamMate Added Successfully",
   "vgAddTeammate": "Add Teammate",
   "vgPleaseEnter": "Please enter",
   "vgPleaseEnterField": "Please enter field",
@@ -650,5 +650,6 @@
   "vgSearch": "Search",
   "vgEventDeletedSuccessfully": "Event Deleted Successfully",
   "vgEventDeletionFailed": "Event Deletion Failed",
-  "vgEndTimeGreaterThanStartTime": "End time should be greater than start time"
+  "vgEndTimeGreaterThanStartTime": "End time should be greater than start time",
+  "vgNoPatientsPresent": "There are no patients at present. Tap on \"Add Patient\""
 }
