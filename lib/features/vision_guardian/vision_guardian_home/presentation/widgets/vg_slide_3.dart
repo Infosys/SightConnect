@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_slide_1.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_symptom_chip.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -9,7 +10,7 @@ import 'package:pie_chart/pie_chart.dart';
 class VGSlide3 extends StatelessWidget {
   const VGSlide3({super.key, required this.values});
 
- final Map<String, dynamic> values;
+  final Map<String, dynamic> values;
 
   static List<Color> colorList = [
     AppColor.darkBlue,
@@ -29,14 +30,17 @@ class VGSlide3 extends StatelessWidget {
         values["blepharitis"] +
         values["conjunctivitis"];
 
+    final loc = context.loc!;
+
     Map<String, double> data = {
-      "Refractive": double.parse(values["refractive"].toString()),
-      "Cataract": double.parse(values["cataract"].toString()),
-      "Glaucoma": double.parse(values["glaucoma"].toString()),
-      "Keratitis": double.parse(values["keratitis"].toString()),
-      "Blepharitis": double.parse(values["blepharitis"].toString()),
-      "Conjunctivitis": double.parse(values["conjunctivitis"].toString()),
+      loc.vgRefractive: double.parse(values["refractive"].toString()),
+      loc.vgCataract: double.parse(values["cataract"].toString()),
+      loc.vgGlaucoma: double.parse(values["glaucoma"].toString()),
+      loc.vgKeratitis: double.parse(values["keratitis"].toString()),
+      loc.vgBlepharitis: double.parse(values["blepharitis"].toString()),
+      loc.vgConjunctivitis: double.parse(values["conjunctivitis"].toString()),
     };
+
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: AppSize.kspadding,
@@ -50,7 +54,7 @@ class VGSlide3 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Symptoms",
+              loc.vgSymptoms,
               style: applyFiraSansFont(
                 fontWeight: FontWeight.w500,
               ),
