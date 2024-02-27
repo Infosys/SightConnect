@@ -48,6 +48,7 @@ fs.readdirSync(l10nPath)
     const fileContent = fs.readFileSync(path.join(l10nPath, file), "utf8");
     const json = JSON.parse(fileContent);
     for (const key in json) {
+      if (key.startsWith("@") || key.startsWith("@@")) continue; // Ignore metadata keys (keys that start with @ or @@
       if (!translations[key]) {
         translations[key] = {};
       }
