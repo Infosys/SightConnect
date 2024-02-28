@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,14 +26,14 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
 
     // List<Observation> observations = report.observations!;
     logger.d("image urgency : ${report.observations}");
-
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Acuity Test - Tumbling E",
+            loc.reportTumblingTitle,
             style: applyRobotoFont(
               fontSize: 16,
               fontWeight: FontWeight.w800,
@@ -80,10 +81,10 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                       children: [
                         Text(
                           index == 0
-                              ? "Right Eye"
+                              ? loc.rightEyeString
                               : index == 1
-                                  ? "Left Eye"
-                                  : "Both Eye",
+                                  ? loc.leftEyeString
+                                  : loc.bothEyesString,
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -136,7 +137,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Category",
+                loc.category,
                 style: applyRobotoFont(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -168,10 +169,10 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                 child: Center(
                   child: Text(
                     report.observationsUrgency == Urgency.RED
-                        ? "Urgent Consult"
+                        ? loc.assessmentCardUrgentConsult
                         : report.observationsUrgency == Urgency.YELLOW
-                            ? "Early Consult"
-                            : "Regular Consult",
+                            ? loc.assessmentCardEarlyCheckUp
+                            : loc.patientRoutineCheckup,
                     style: applyRobotoFont(
                       fontSize: 16,
                       color: AppColor.white,

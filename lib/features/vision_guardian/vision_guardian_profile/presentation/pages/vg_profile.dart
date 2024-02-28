@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/provide
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_name_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_organisation_details_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_personal_details_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,13 +17,14 @@ class VgProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
         centerTitle: false,
         title: Row(
           children: [
-            const Text(
-              "Profile",
+            Text(
+              loc.profileTitle,
               textAlign: TextAlign.left,
             ),
             const Spacer(),
@@ -38,9 +40,7 @@ class VgProfile extends ConsumerWidget {
                     ref.invalidate(initializationProvider);
                   },
                 ).catchError((e) {
-                  Fluttertoast.showToast(
-                      msg:
-                          "Apologies, we encountered a logout error in the mobile app.");
+                  Fluttertoast.showToast(msg: loc.vgLogoutErrorMessage);
                 });
               },
               icon: const Icon(

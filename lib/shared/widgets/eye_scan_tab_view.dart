@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -46,14 +45,14 @@ class EyeScanTabView extends StatelessWidget {
                   Expanded(
                     child: _EyeScanImage(
                       image: getLeftEyeImageUrl(eyeScanData),
-                      name: "Left Eye",
+                      name: loc.leftEyeString,
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: _EyeScanImage(
                       image: getRightEyeImageUrl(eyeScanData),
-                      name: "Right Eye",
+                      name: loc.rightEyeString,
                     ),
                   ),
                 ],

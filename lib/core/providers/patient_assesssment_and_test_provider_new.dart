@@ -225,6 +225,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         },
       );
 
+      // ignore: use_build_context_synchronously
       return AssessmentDetailedReportMapper.toEntity(
         _selectedPatient!,
         triageReport as TriageDetailedReportModel,
@@ -288,10 +289,10 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     _selfTestReportList.clear();
     _finalReportPage = 0;
     _hasFinalReportMore = true;
-    _clinicalReportPage=0;
-    _hasClinicalReportMore=true;
-    _selfTestReportPage=0;
-    _hasSelfTestReportMore=true;
+    _clinicalReportPage = 0;
+    _hasClinicalReportMore = true;
+    _selfTestReportPage = 0;
+    _hasSelfTestReportMore = true;
     notifyListeners();
     getTriageReportByPatientIdAndStatus();
   }

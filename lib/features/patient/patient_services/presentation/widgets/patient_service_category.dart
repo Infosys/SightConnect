@@ -10,14 +10,12 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../main.dart';
-import '../../../patient_appointments/domain/web_socket_test.dart';
 import '../../../patient_appointments/presentation/pages/patient_appointment_page.dart';
 import '../../domain/enum/mini_app.dart';
 

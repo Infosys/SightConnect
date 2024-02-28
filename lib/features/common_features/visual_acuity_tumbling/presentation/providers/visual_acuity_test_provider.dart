@@ -17,7 +17,9 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../triage/domain/models/enums/performer_role.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
@@ -275,11 +277,12 @@ class VisualAcuityTestProvider with ChangeNotifier {
     }
   }
 
-  String getCurrentEyeText(Eye eye) {
+  String getCurrentEyeText(mat.BuildContext context, Eye eye) {
+    final loc = context.loc!;
     return switch (eye) {
-      Eye.left => "Left Eye",
-      Eye.right => "Right Eye",
-      Eye.both => "Both Eye",
+      Eye.left => loc.leftEyeString,
+      Eye.right => loc.rightEyeString,
+      Eye.both => loc.bothEyesString
     };
   }
 
