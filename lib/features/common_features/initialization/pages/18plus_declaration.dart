@@ -1,8 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/models/consent_model.dart';
-import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 

@@ -104,7 +104,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     } else {
       logger.d("AppCameraPage: Permission not granted");
       navigator.pop();
-      Fluttertoast.showToast(msg: loc.permissionNotGranted);
+      if (context.mounted) {
+        Fluttertoast.showToast(msg: context.loc!.permissionNotGranted);
+      }
     }
   }
 
