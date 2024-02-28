@@ -27,6 +27,7 @@ class AssessmentsAndTestsPage extends StatefulHookConsumerWidget {
 class _AssessmentsAndTestsPageState
     extends ConsumerState<AssessmentsAndTestsPage> {
   final scrollController = ScrollController();
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -64,96 +65,117 @@ class _AssessmentsAndTestsPageState
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: CustomAppbar(
-        title: Text(loc.appDrawerAssessmentsAndTests),
-      ),
-      body: Container(
-        height: AppSize.height(context),
-        width: AppSize.width(context),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              AppImages.scaffoldBg,
+    return isLoading
+        ? const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator.adaptive(),
             ),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: AppSize.klheight * 3.5),
-              const Row(
-                children: [
-                  PatientDropDownWidget(),
-                ],
+          )
+        : Scaffold(
+            extendBodyBehindAppBar: true,
+            appBar: CustomAppbar(
+              title: Text(loc.appDrawerAssessmentsAndTests),
+            ),
+            body: Container(
+              height: AppSize.height(context),
+              width: AppSize.width(context),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    AppImages.scaffoldBg,
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
-              const SizedBox(height: 16),
-              Consumer(
-                builder: (context, ref, _) {
-                  final model = ref.watch(patientAssessmentAndTestProvider);
-                  // logger.d({
-                  //   "isLoading": model.isFinalReportLoading,
-                  //   "hasMore": model.hasFinalReportMore,
-                  //   "currentReportId": model.currentTriageReportId,
-                  //   "data": model.finalReportList.length,
-                  // });
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: AppSize.klheight * 3.5),
+                    const Row(
+                      children: [
+                        PatientDropDownWidget(),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Consumer(
+                      builder: (context, ref, _) {
+                        final model =
+                            ref.watch(patientAssessmentAndTestProvider);
+                        // logger.d({
+                        //   "isLoading": model.isFinalReportLoading,
+                        //   "hasMore": model.hasFinalReportMore,
+                        //   "currentReportId": model.currentTriageReportId,
+                        //   "data": model.finalReportList.length,
+                        // });
 
-                  return _content(
-                    context: context,
-                    currentReportId: model.currentTriageReportId,
-                    data: model.finalReportList,
-                    isLoading: model.isFinalReportLoading,
-                    hasMore: model.hasFinalReportMore,
-                    onRefresh: () async {
-                      try {
-                        await model.refeshReports();
-                      } catch (e) {
-                        Fluttertoast.showToast(
-                            msg: loc.patientErrorFetchingReport);
-                      }
-                    },
-                    onViewReport: (report) async {
-                      final navigator = Navigator.of(context);
-                      try {
-                        model.currentTriageReportId = report.triageResultID;
-                        final detailedReport = await model
-                            .getTriageDetailedReport(report.triageResultID);
-                        navigator.push(
-                          MaterialPageRoute(
-                            builder: (context) => PatientAssessmentReportPage(
-                              assessmentDetailsReport: detailedReport,
-                            ),
-                          ),
+                        return _content(
+                          context: context,
+                          currentReportId: model.currentTriageReportId,
+                          data: model.finalReportList,
+                          isLoading: model.isFinalReportLoading,
+                          hasMore: model.hasFinalReportMore,
+                          onRefresh: () async {
+                            try {
+                              await model.refeshReports();
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                  msg: loc.patientErrorFetchingReport);
+                            }
+                          },
+                          onViewReport: (report) async {
+                            final navigator = Navigator.of(context);
+                            try {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              model.currentTriageReportId =
+                                  report.triageResultID;
+                              final detailedReport =
+                                  await model.getTriageDetailedReport(
+                                      report.triageResultID);
+
+                              navigator
+                                  .push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PatientAssessmentReportPage(
+                                        assessmentDetailsReport: detailedReport,
+                                      ),
+                                    ),
+                                  )
+                                  .then((value) => setState(() {
+                                        isLoading = false;
+                                      }));
+                            } catch (e) {
+                              Fluttertoast.showToast(
+                                  msg: loc.patientErrorFetchingReport);
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
+                          },
+                          onViewHistory: (report) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PatientSelfAndClinicalReportPage(
+                                  encounterId: report.encounterId,
+                                ),
+                              ),
+                            );
+                          },
+                          scrollController: scrollController,
                         );
-                      } catch (e) {
-                        Fluttertoast.showToast(
-                            msg: loc.patientErrorFetchingReport);
-                      }
-                    },
-                    onViewHistory: (report) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              PatientSelfAndClinicalReportPage(
-                            encounterId: report.encounterId,
-                          ),
-                        ),
-                      );
-                    },
-                    scrollController: scrollController,
-                  );
-                },
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 
   _checkColorMapper(EncounterStatus? encounterStatus) {
