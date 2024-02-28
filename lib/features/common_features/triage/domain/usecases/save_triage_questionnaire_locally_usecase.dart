@@ -22,6 +22,7 @@ class SaveTriageQuestionnaireLocallyUseCase
   ) async {
     final response = await _repository.saveTriageQuestionnaireLocally(
       triageQuestionnaireResponse: params.triageQuestionnaireResponse,
+      patientID: params.patientID,
     );
     return response;
   }
@@ -29,7 +30,9 @@ class SaveTriageQuestionnaireLocallyUseCase
 
 class SaveTriageQuestionnaireLocallyParam {
   final List<PostTriageQuestionModel> triageQuestionnaireResponse;
+  final String patientID;
   SaveTriageQuestionnaireLocallyParam({
     required this.triageQuestionnaireResponse,
+    required this.patientID,
   });
 }

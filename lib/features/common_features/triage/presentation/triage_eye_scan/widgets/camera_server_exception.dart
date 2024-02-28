@@ -27,7 +27,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Server Error",
+            "No Internet!",
             style: applyRobotoFont(
               color: AppColor.black,
               fontSize: 16,
@@ -36,7 +36,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            "Your result has been saved locally. Please try again later.",
+            "Your response has been saved locally and will be synced once internet is back.",
             style: applyRobotoFont(
               color: AppColor.black,
               fontSize: 14,

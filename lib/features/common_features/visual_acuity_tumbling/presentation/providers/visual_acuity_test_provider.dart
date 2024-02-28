@@ -11,6 +11,7 @@ import 'package:eye_care_for_all/features/common_features/triage/data/source/loc
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
@@ -33,12 +34,12 @@ typedef SingleEyeReport = Map<int, List<UserResponse>>;
 
 var tumblingTestProvider = ChangeNotifierProvider(
   (ref) => VisualAcuityTestProvider(
-    ref.watch(tumlingLocalSource),
-    ref.read(triageLocalSourceProvider),
-    ref.watch(triageRepositoryProvider),
-    ref.watch(triageReportRepositoryProvider),
-    ref.watch(triageUrgencyRepositoryProvider),
-  ),
+      ref.watch(tumlingLocalSource),
+      ref.read(triageLocalSourceProvider),
+      ref.watch(triageRepositoryProvider),
+      ref.watch(triageReportRepositoryProvider),
+      ref.watch(triageUrgencyRepositoryProvider),
+      ref.watch(triageMemberProvider).testPatientId!),
 );
 
 class VisualAcuityTestProvider with ChangeNotifier {
@@ -47,12 +48,14 @@ class VisualAcuityTestProvider with ChangeNotifier {
   TriageRepository triageRepositoryProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
+  final int _patientID;
   VisualAcuityTestProvider(
       this._dataSource,
       this.triageLocalSourceProvider,
       this.triageRepositoryProvider,
       this._triageReportRepository,
-      this._triageUrgencyRepository) {
+      this._triageUrgencyRepository,
+      this._patientID) {
     startGame(Eye.right);
   }
   late Level? _level;
@@ -351,6 +354,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
       logger.d({"saveVisionAcuityResponseToDB ": res});
       await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
         triageVisualAcuity: res,
+        patientID: _patientID.toString(),
       );
     } catch (e) {
       logger.e("$e");
