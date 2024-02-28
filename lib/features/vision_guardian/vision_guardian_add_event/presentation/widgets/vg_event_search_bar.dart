@@ -22,7 +22,7 @@ class VisionGuardianEventSearchBar extends ConsumerWidget {
       readOnly: readOnly,
       controller: ref.read(addEventDetailsProvider).searchController,
       onChanged: (data) {
-        if (searchType != "event") {
+        if (searchType == "teammate") {
           ref.read(visionGuadianAddMemberProvider).setSearchTeammateList(data);
         } else if (searchType == "patient") {
           ref.read(addEventDetailsProvider).setSearchPatientList(data);

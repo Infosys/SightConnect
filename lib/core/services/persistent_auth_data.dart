@@ -101,6 +101,11 @@ class PersistentAuthData {
     activeRole = await _storage.read(key: _activeRoleKey);
   }
 
+  Future<void> deleteActiveRole() async {
+    activeRole = null;
+    await _storage.delete(key: _activeRoleKey);
+  }
+
   Future<void> saveUserType(String userType) async {
     this.userType = userType;
     await _storage.write(key: _userType, value: userType);

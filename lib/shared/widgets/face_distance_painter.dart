@@ -2,8 +2,8 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class VisualAcuityFaceDistancePainter extends CustomPainter {
-  VisualAcuityFaceDistancePainter(
+class FaceDistanceDectectorPainter extends CustomPainter {
+  FaceDistanceDectectorPainter(
     this.boxCenter,
     this.boxWidth,
     this.boxHeight,

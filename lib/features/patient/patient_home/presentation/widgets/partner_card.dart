@@ -61,14 +61,16 @@ class PartnerCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                context.loc!.poweredByText,
+                // context.loc!.poweredByText,
+                "Powered by",
                 style: applyRobotoFont(
                   fontSize: 12,
                 ),
               ),
               const SizedBox(width: 4),
               Text(
-                context.loc!.digitalHealthCard,
+                // context.loc!.digitalHealthCard,
+                "Digital Public Health Stack",
                 style: applyFiraSansFont(
                   fontSize: 16,
                 ),

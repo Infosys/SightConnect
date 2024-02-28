@@ -11,7 +11,7 @@ class VgEventTeammateSearchResult extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionGuadianAddMemberProvider);
-    List teammates = model.teammateList;
+    List teammates = model.searchResults;
     var loading = model.loading;
 
     if (loading) {

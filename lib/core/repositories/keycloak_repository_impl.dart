@@ -139,9 +139,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           'id_token_hint': PersistentAuthStateService.authState.idToken,
         },
       );
-      logger.d({
-        "signOut response": response.data,
-      });
+      logger.d({"signOut response": response});
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       rethrow;

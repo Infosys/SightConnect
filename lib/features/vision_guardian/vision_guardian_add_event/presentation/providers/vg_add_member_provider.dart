@@ -31,6 +31,10 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetSearch() {
+    searchResults = teammateList;
+  }
+
   Future<void> getTeammatesList() async {
     try {
       loading = true;
@@ -66,6 +70,7 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
       getTeammatesList();
     } catch (error) {
       loading = false;
+      notifyListeners();
       rethrow;
     }
     notifyListeners();
@@ -74,22 +79,24 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
   void setSearchTeammateList(String query) async {
     List resultList = [];
 
-    for (int i = 0; i < teammateList.length; i++) {
-      if (teammateList[i]["personalInformation"]["firstName"]
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
-        resultList.add(teammateList[i]);
-      } else if (teammateList[i]["personalInformation"]["lastName"]
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
-        resultList.add(teammateList[i]);
-      } else if (teammateList[i]["officialMobile"]
-          .toString()
-          .contains(query.toLowerCase())) {
-        resultList.add(teammateList[i]);
+    if (teammateList.isNotEmpty) {
+      for (int i = 0; i < teammateList.length; i++) {
+        if (teammateList[i][0]["firstName"]
+            .toLowerCase()
+            .contains(query.toLowerCase())) {
+          resultList.add(teammateList[i]);
+        } else if (teammateList[i][0]["lastName"]
+            .toLowerCase()
+            .contains(query.toLowerCase())) {
+          resultList.add(teammateList[i]);
+        } else if (teammateList[i][0]["officialMobile"]
+            .toString()
+            .contains(query.toLowerCase())) {
+          resultList.add(teammateList[i]);
+        }
       }
+      searchResults = resultList;
     }
-    teammateList = resultList;
 
     notifyListeners();
   }
@@ -116,5 +123,6 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
 
   void setTeammates(teammates) {
     teammateList = teammates;
+    searchResults = teammates;
   }
 }

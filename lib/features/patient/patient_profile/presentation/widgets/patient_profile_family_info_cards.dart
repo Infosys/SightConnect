@@ -1,3 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
@@ -11,10 +17,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PatientFamilyDetails extends HookConsumerWidget {
   const PatientFamilyDetails({
@@ -123,52 +125,10 @@ class PatientFamilyDetails extends HookConsumerWidget {
               model.setPatientId(id);
             }
           },
-          child: Container(
-            padding: const EdgeInsets.only(right: AppSize.kmpadding),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                patient.profile?.patient?.profilePhoto != null
-                    ? Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: isActive
-                              ? Border.all(
-                                  color: AppColor.blue,
-                                  width: 3,
-                                )
-                              : null,
-                        ),
-                        child: AppNetworkImage(
-                          imageUrl: patient.profile!.patient!.profilePhoto!,
-                        ),
-                      )
-                    : Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: isActive
-                              ? Border.all(
-                                  color: AppColor.blue,
-                                  width: 3,
-                                )
-                              : null,
-                        ),
-                        child: AppNameAvatar(
-                          name: patient.profile!.patient!.name!,
-                          radius: 20,
-                        ),
-                      ),
-                const SizedBox(height: 4),
-                Text(
-                  _formateFirstName(patient.profile!.patient!.name!),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(
-                    fontSize: 10,
-                  ),
-                )
-              ],
-            ),
+          child: _FamilyCard(
+            name: patient.profile?.patient?.name ?? "",
+            isActive: isActive,
+            imageUrl: patient.profile?.patient?.profilePhoto,
           ),
         ),
         Expanded(
@@ -185,65 +145,20 @@ class PatientFamilyDetails extends HookConsumerWidget {
                       onTap: () {
                         model2.setPatient(
                           TriageReportUserEntity(
-                              // id: id,
-                              // image: patient.profile?.patient?.profilePhoto ?? "",
-                              // name: patient.profile?.patient?.name ?? "",
-                              id: data.patientId ?? 0,
-                              name: data.name ?? "",
-                              image: data.profilePicture ?? ""),
+                            // id: id,
+                            // image: patient.profile?.patient?.profilePhoto ?? "",
+                            // name: patient.profile?.patient?.name ?? "",
+                            id: data.patientId ?? 0,
+                            name: data.name ?? "",
+                            image: data.profilePicture ?? "",
+                          ),
                         );
                         model.setPatientId(data.patientId!);
                       },
-                      child: Container(
-                        width: 60,
-                        padding:
-                            const EdgeInsets.only(right: AppSize.kmpadding),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            data.profilePicture != null
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: isRelativeActive
-                                          ? Border.all(
-                                              color: AppColor.blue,
-                                              width: 3,
-                                            )
-                                          : null,
-                                    ),
-                                    child: AppNetworkImage(
-                                      imageUrl:
-                                          Uri.tryParse(data.profilePicture!)
-                                              .toString(),
-                                    ),
-                                  )
-                                : Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: isRelativeActive
-                                          ? Border.all(
-                                              color: AppColor.blue,
-                                              width: 3,
-                                            )
-                                          : null,
-                                    ),
-                                    child: AppNameAvatar(
-                                      name: data.name ?? "",
-                                      radius: 20,
-                                    ),
-                                  ),
-                            const SizedBox(height: 4),
-                            Text(
-                              _formateFirstName(data.name!),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyRobotoFont(
-                                fontSize: 10,
-                              ),
-                            )
-                          ],
-                        ),
+                      child: _FamilyCard(
+                        name: data.name ?? "",
+                        isActive: isRelativeActive,
+                        imageUrl: data.profilePicture,
                       ),
                     );
                   },
@@ -255,9 +170,76 @@ class PatientFamilyDetails extends HookConsumerWidget {
       ],
     );
   }
+}
 
-  _formateFirstName(String name) {
-    if (name.isEmpty) {
+class _FamilyCard extends StatelessWidget {
+  final String name;
+  final bool isActive;
+  final String? imageUrl;
+
+  const _FamilyCard({
+    Key? key,
+    required this.name,
+    required this.isActive,
+    this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 65,
+      margin: const EdgeInsets.only(right: AppSize.kspadding / 2),
+      padding: const EdgeInsets.only(right: AppSize.kmpadding),
+      // decoration: const BoxDecoration(color: Colors.amber),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 45,
+              width: 45,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: isActive
+                      ? Border.all(
+                          color: AppColor.primary,
+                          width: 2,
+                        )
+                      : null,
+                ),
+                child: imageUrl != null
+                    ? AppNetworkImage(
+                        imageUrl: imageUrl!,
+                        fit: BoxFit.cover,
+                      )
+                    : AppNameAvatar(
+                        name: name,
+                        radius: 20,
+                      ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Flexible(
+              child: AutoSizeText(
+                _formateFirstName(name),
+                maxFontSize: 10,
+                minFontSize: 8,
+                style: applyRobotoFont(fontSize: 10),
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  _formateFirstName(String? name) {
+    if (name == null || name.isEmpty) {
       return "";
     } else {
       return name.split(" ")[0].capitalize();

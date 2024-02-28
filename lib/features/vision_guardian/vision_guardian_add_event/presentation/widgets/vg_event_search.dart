@@ -27,7 +27,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
         ),
         body: LoadingOverlay(
           isLoading: loading,
-          overlayColor: null,
+          ignoreOverlayColor: true,
           child: response.isEmpty
               ? Center(
                   child: Text(loc.vgNoEventFound),

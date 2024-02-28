@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/eye_detector_service.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/widgets/eye_detector_painter.dart';
+import 'package:eye_care_for_all/shared/services/eye_detector_service.dart';
+import 'package:eye_care_for_all/shared/widgets/eye_detector_painter.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/modals/camera_capture_alert.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -168,7 +168,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
         ).toList();
 
         // Check if Eyes are inside the box
-        _eyesInsideTheBox = EyeDetectorService.areEyesInsideTheBox(
+        _eyesInsideTheBox = EyeDetectorService.areEyeContoursInsideTheBox(
           _translatedEyeContours,
           boxCenter,
           boxWidth,

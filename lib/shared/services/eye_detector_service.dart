@@ -1,12 +1,12 @@
+import 'dart:io';
 import 'dart:math';
-import 'package:eye_care_for_all/main.dart';
+import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/shared/widgets/coordinates_translator_android.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
-import 'dart:io';
-import 'package:camera/camera.dart';
-import '../widgets/coordinates_translator.dart';
+import '../../features/common_features/triage/domain/models/enums/triage_enums.dart';
 
-class MachineLearningCameraService {
+class EyeDetectorService {
   static final Map<DeviceOrientation, int> _orientations = {
     DeviceOrientation.portraitUp: 0,
     DeviceOrientation.landscapeLeft: 90,
@@ -15,18 +15,6 @@ class MachineLearningCameraService {
   };
 
   Map<DeviceOrientation, int> get orientations => _orientations;
-
-  static Future<Map<String, double>?> getCameraInfo() async {
-    const platform = MethodChannel('com.healthconnect.sightconnect/camera');
-    try {
-      final cameraInfo =
-          await platform.invokeMapMethod<String, double>('getCameraInfo');
-      return cameraInfo;
-    } catch (e) {
-      logger.e('Error getting camera info: $e');
-      return {};
-    }
-  }
 
   static InputImage? inputImageFromCameraImage({
     required CameraImage image,
@@ -86,7 +74,7 @@ class MachineLearningCameraService {
     );
   }
 
-  static FaceMesh getLargestFace(List<FaceMesh> faces) {
+    static FaceMesh getLargestFace(List<FaceMesh> faces) {
     FaceMesh largestFace = faces.reduce(
       (currentFace, nextFace) =>
           (currentFace.boundingBox.width * currentFace.boundingBox.height) >
@@ -97,59 +85,14 @@ class MachineLearningCameraService {
     return largestFace;
   }
 
-  static Point<double> getEyeLandmark(List<FaceMeshPoint> eyeContours) {
-    double leastX = 999999999;
-    double leastY = 999999999;
-    double highestX = 0;
-    double highestY = 0;
-
-    for (final point in eyeContours) {
-      final x = point.x;
-      final y = point.y;
-      if (x < leastX) {
-        leastX = x;
-      }
-      if (x > highestX) {
-        highestX = x;
-      }
-      if (y < leastY) {
-        leastY = y;
-      }
-      if (y > highestY) {
-        highestY = y;
-      }
-    }
-    double eyeLandmarkX = (highestX + leastX) / 2;
-    double eyeLandmarkY = (highestY + leastY) / 2;
-    Point<double> eyeLandmark = Point<double>(eyeLandmarkX, eyeLandmarkY);
-    return eyeLandmark;
-  }
-
-  static int calculateDistanceToScreen({
-    required Point<double> leftEyeLandmark,
-    required Point<double> rightEyeLandmark,
-    required double focalLength,
-    required double sensorX,
-    required double sensorY,
-    required int imageWidth,
-    required int imageHeight,
-    double averageEyeDistance = 63.0,
-  }) {
-    double deltaX = (leftEyeLandmark.x - rightEyeLandmark.x).abs().toDouble();
-    double deltaY = (leftEyeLandmark.y - rightEyeLandmark.y).abs().toDouble();
-    double distance;
-    if (deltaX >= deltaY) {
-      distance =
-          focalLength * (averageEyeDistance / sensorX) * (imageWidth / deltaX);
-    } else {
-      distance =
-          focalLength * (averageEyeDistance / sensorY) * (imageHeight / deltaY);
-    }
-    return (distance / 10).round();
+  static bool isLeftEye(TriageEyeType eye) {
+    /* We should flip the value because we are considering the user perspective 
+     but google_ml_kit considers the viewers perspective.*/
+    return !(eye == TriageEyeType.LEFT);
   }
 
   static Point<double> translator(
-    Point<double> point,
+    FaceMeshPoint point,
     InputImage inputImage,
     Size canvasSize,
     CameraLensDirection cameraLensDirection,
@@ -170,13 +113,13 @@ class MachineLearningCameraService {
     return Point(x, y);
   }
 
-  static bool areEyeLandmarksInsideTheBox(
-    List<Point<double>> landmarkPoints,
+  static bool areEyeContoursInsideTheBox(
+    List<Point<double>> contourPoints,
     Point<double> center,
     double boxWidth,
     double boxHeight,
   ) {
-    if (landmarkPoints.isEmpty) return false;
+    if (contourPoints.isEmpty) return false;
     final halfWidth = boxWidth / 2;
     final halfHeight = boxHeight / 2;
     final topLeft = Point<double>(
@@ -196,9 +139,9 @@ class MachineLearningCameraService {
       center.y + halfHeight,
     );
 
-    for (final Point<double> point in landmarkPoints) {
+    for (final Point<double> point in contourPoints) {
       // Check if the point is inside the box
-      if (!doesPointLieInsideBox(
+      if (!_doesPointLieInsideBox(
         topLeft,
         topRight,
         bottomRight,
@@ -212,7 +155,7 @@ class MachineLearningCameraService {
     return true;
   }
 
-  static bool doesPointLieInsideBox(
+  static bool _doesPointLieInsideBox(
     Point<double> topLeft,
     Point<double> topRight,
     Point<double> bottomRight,
@@ -227,5 +170,54 @@ class MachineLearningCameraService {
       }
     }
     return false; // Point is outside the square
+  }
+
+  static Map<String, double> getEyeCorners(List<Point<double>> eyePoints) {
+    double leastX = 999999999;
+    double leastY = 999999999;
+    double highestX = 0;
+    double highestY = 0;
+
+    for (final point in eyePoints) {
+      final x = point.x;
+      final y = point.y;
+      if (x < leastX) {
+        leastX = x;
+      }
+      if (x > highestX) {
+        highestX = x;
+      }
+      if (y < leastY) {
+        leastY = y;
+      }
+      if (y > highestY) {
+        highestY = y;
+      }
+    }
+
+    return {
+      "leastX": leastX,
+      "leastY": leastY,
+      "highestX": highestX,
+      "highestY": highestY,
+    };
+  }
+
+  static double getEyeWidthRatio(
+    Map<String, double> eyeCorners,
+    double boxWidth,
+    double boxHeight,
+  ) {
+    // Calculate the eyeBox area
+    final leastX = eyeCorners["leastX"] ?? 0;
+    final highestX = eyeCorners["highestX"] ?? 9999999;
+    final eyeBoxWidth = (highestX - leastX);
+    final eyeWidthRatio = eyeBoxWidth / boxWidth;
+    return eyeWidthRatio;
+  }
+
+  static bool areEyesCloseEnough(double eyeWidthRatio,
+      {double threshold = 0.4}) {
+    return (eyeWidthRatio > threshold) && (eyeWidthRatio < 1);
   }
 }
