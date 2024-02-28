@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_iv
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +23,12 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     ref.listen(getVTProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.d("Logged out from VisionTechnicianDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
-          Fluttertoast.showToast(msg: "You have been logged out");
+          Fluttertoast.showToast(msg: loc.vtLogoutMessage);
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginPage.routeName,
@@ -35,9 +37,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
         }).catchError((e) {
           logger.e(
               "Apologies, we encountered a logout error in the mobile app. from VisionTechnicianDashboardPage : $e");
-          Fluttertoast.showToast(
-              msg:
-                  "Apologies, we encountered a logout error in the mobile app.");
+          Fluttertoast.showToast(msg: loc.vtLogoutError);
         });
       }
     });
@@ -57,6 +57,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
   }
 
   Widget _content(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       body: const VisionTechnicianHomePage(),
       bottomNavigationBar: BottomNavigationBar(
@@ -128,7 +129,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: 'Dashboard',
+            label: loc.vtDashboard,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -143,7 +144,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: 'Register Patient',
+            label: loc.vtRegisterPatient,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -159,7 +160,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: 'Triage',
+            label: loc.vtTriage,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -174,7 +175,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: 'Mark My Availability',
+            label: loc.vtMarkMyAvailability,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -189,7 +190,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: 'IVR Call History',
+            label: loc.vtIVRCallHistory,
           ),
         ],
       ),

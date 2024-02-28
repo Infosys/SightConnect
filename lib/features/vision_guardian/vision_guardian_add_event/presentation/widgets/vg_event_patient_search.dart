@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isValid = useState(true);
+    final loc = context.loc!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -28,11 +30,6 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
               ref.read(addPatientEventProvider).setPatientSearchQuery(value);
             }
           },
-          // onSubmitted: (value) {
-          //   if (isValid.value) {
-          //     ref.read(addPatientEventProvider).setPatientSearchQuery(value);
-          //   }
-          // },
           decoration: InputDecoration(
             prefixIcon: const Icon(
               CupertinoIcons.search,
@@ -42,7 +39,7 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
                 const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
             filled: true,
             fillColor: AppColor.white,
-            hintText: 'Search Patient by Phone Number',
+            hintText: loc.vgSearchPatientByPhoneNumber,
             hintStyle: applyRobotoFont(
               color: AppColor.grey,
               fontSize: 14,
@@ -56,7 +53,7 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
         const SizedBox(height: AppSize.kspadding),
         Visibility(
           visible: !isValid.value,
-          child: Text("Please enter a valid phone number",
+          child: Text(loc.vgInvalidPhoneNumber,
               style: applyRobotoFont(
                 color: AppColor.red,
                 fontSize: 12,

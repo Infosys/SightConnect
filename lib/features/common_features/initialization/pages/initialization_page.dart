@@ -152,15 +152,17 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
+
   Future<bool?> _show18PlusDeclaration() async {
     return showDialog<bool?>(
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return const EigtheenPlusDeclaration();
+        return const EighteenPlusDeclaration();
       },
     );
   }
+
 
   Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
     bool? consentGiven = await navigator.push<bool?>(

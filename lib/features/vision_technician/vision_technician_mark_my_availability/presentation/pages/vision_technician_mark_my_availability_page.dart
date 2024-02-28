@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ma
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     var watchRef = ref.watch(markMyAvailabilityHelperProvider);
     bool? available = ref.watch(markMyAvailabilityHelperProvider).available;
     bool loading = ref.watch(markMyAvailabilityHelperProvider).isLoading;
@@ -57,7 +59,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                     ),
                     const SizedBox(width: AppSize.kswidth),
                     Text(
-                      available ? "Marked" : "Mark my availabilty",
+                      available ? loc.vtMarked : loc.vtMarkMyAvailability,
                       style: applyRobotoFont(
                         fontWeight: FontWeight.w400,
                         color: available ? AppColor.primary : AppColor.white,
@@ -73,7 +75,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
         preferredSizeHeight: 70,
         centerTitle: false,
         title: Text(
-          'Mark My Availability',
+          loc.vtMarkMyAvailability,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(

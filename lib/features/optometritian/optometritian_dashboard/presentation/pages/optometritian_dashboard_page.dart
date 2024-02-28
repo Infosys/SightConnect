@@ -31,11 +31,12 @@ class _OptometritianDashboardPageState
   @override
   Widget build(BuildContext context) {
     var isLoading = useState(false);
+    final loc = context.loc!;
     ref.listen(getOptometricianProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.d("Logged out from OptometritianDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
-          Fluttertoast.showToast(msg: "You have been logged out");
+          Fluttertoast.showToast(msg: loc.loggedOutMessage);
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginPage.routeName,
@@ -44,9 +45,7 @@ class _OptometritianDashboardPageState
         }).catchError((e) {
           logger.e(
               "Apologies, we encountered a logout error in the mobile app. from OptometritianDashboardPage : $e");
-          Fluttertoast.showToast(
-              msg:
-                  "Apologies, we encountered a logout error in the mobile app.");
+          Fluttertoast.showToast(msg: loc.optoLogoutError);
         });
       }
     });
@@ -79,13 +78,14 @@ class _OptometritianDashboardPageState
   ) {
     final model = ref.watch(optometricianDashboardProvider);
 
+    final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
       extendBody: true,
       body: LoadingOverlay(
         isLoading: isLoading.value,
-        progressMessage: "Logging out...",
+        progressMessage: loc.optoLoggingOut,
         child: Stack(
           children: [
             Container(
@@ -134,8 +134,7 @@ class _OptometritianDashboardPageState
                           }).catchError((e) {
                             isLoading.value = false;
                             Fluttertoast.showToast(
-                              msg:
-                                  "Apologies, we encountered a logout error in the mobile app.",
+                              msg: loc.optoLogoutError,
                             );
                           });
                         },
@@ -151,7 +150,7 @@ class _OptometritianDashboardPageState
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: "Hello, ",
+                          text: "${loc.hello}, ",
                           style: applyFiraSansFont(
                             color: AppColor.white,
                             fontSize: 28,
@@ -173,7 +172,7 @@ class _OptometritianDashboardPageState
                   ),
                   SizedBox(height: AppSize.height(context) * 0.02),
                   Text(
-                    "Let's get started",
+                    loc.optoGetStarted,
                     style: applyFiraSansFont(
                       fontSize: 14,
                       color: AppColor.white,
@@ -198,20 +197,20 @@ class _OptometritianDashboardPageState
                       margin: const EdgeInsets.only(top: 250),
                       width: AppSize.width(context),
                       child: InfoCardOptometric(
-                        "Completed tests",
+                        loc.optoCompletedTests,
                         model.optometricianDashboard
                             .totalAssessmentsThisMonthByOptometrist,
                         model.optometricianDashboard.totalAssessmentsThisMonth,
-                        "This month",
+                        loc.optoThisMonth,
                         model.optometricianDashboard
                             .totalAssessmentsTodayByOptometrist,
                         model.optometricianDashboard.totalAssessmentsToday,
-                        "Today",
+                        loc.today,
                       ),
                     ),
                     const SizedBox(height: AppSize.klheight * 4),
                     Text(
-                      "Services",
+                      loc.services,
                       style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -247,7 +246,7 @@ class _OptometritianDashboardPageState
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  "Start Assessment",
+                                  loc.startAssessment,
                                   softWrap: false,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -287,7 +286,7 @@ class _OptometritianDashboardPageState
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  "Assessment History",
+                                  loc.optoAssessmentHistory,
                                   softWrap: false,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -343,54 +342,54 @@ class InfoCardOptometric extends StatelessWidget {
         totalSecondValue == null ||
         secondsubTitle == null) {
       return Container();
-    } else {
-      return Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kmpadding, vertical: AppSize.kselevation + 2),
-        decoration: BoxDecoration(
-            color: AppColor.white.withOpacity(0.9),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(AppSize.kmradius + 2),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3),
-              )
-            ]),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Eye Assessments",
-              style: applyRobotoFont(fontSize: 12),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: _BuildScore(
-                    firstValue!.toString(),
-                    totalFirstValue!.toString(),
-                    firstsubTitle!,
-                  ),
-                ),
-                Flexible(
-                  child: _BuildScore(
-                    secondValue!.toString(),
-                    totalSecondValue!.toString(),
-                    secondsubTitle!,
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
-      );
     }
+    final loc = context.loc!;
+    return Container(
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSize.kmpadding, vertical: AppSize.kselevation + 2),
+      decoration: BoxDecoration(
+          color: AppColor.white.withOpacity(0.9),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppSize.kmradius + 2),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            )
+          ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            loc.optoEyeAssessments,
+            style: applyRobotoFont(fontSize: 12),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: _BuildScore(
+                  firstValue!.toString(),
+                  totalFirstValue!.toString(),
+                  firstsubTitle!,
+                ),
+              ),
+              Flexible(
+                child: _BuildScore(
+                  secondValue!.toString(),
+                  totalSecondValue!.toString(),
+                  secondsubTitle!,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 

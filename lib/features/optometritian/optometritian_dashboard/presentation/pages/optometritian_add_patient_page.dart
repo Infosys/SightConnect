@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/widgets/patient_id_input.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/widgets/professions_input.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
@@ -43,10 +44,11 @@ class _OptometricianAddPatientPage
       };
     }, const []);
 
+    final loc = context.loc!;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppbar(
-        title: const Text("Start Assessment"),
+        title: Text(loc.startAssessment),
         centerTitle: false,
         leadingIcon: InkWell(
             onTap: () {
@@ -75,7 +77,7 @@ class _OptometricianAddPatientPage
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Add Patient Information",
+                        loc.optoAddPatientInfo,
                         style: applyRobotoFont(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -112,7 +114,7 @@ class _OptometricianAddPatientPage
                       child: ElevatedButton(
                         onPressed: isButtonEnabled.value
                             ? () async {
-                                // ADD LANGUAGE PREFRENCE
+                                // ADD LANGUAGE PREFERENCE
                                 final currentLocaleCode = ref
                                     .read(globalLanguageProvider)
                                     .currentLocale;
@@ -142,7 +144,7 @@ class _OptometricianAddPatientPage
                                 });
                               }
                             : null,
-                        child: const Text("Start Assessment"),
+                        child: Text(loc.startAssessment),
                       ),
                     ),
                   ),

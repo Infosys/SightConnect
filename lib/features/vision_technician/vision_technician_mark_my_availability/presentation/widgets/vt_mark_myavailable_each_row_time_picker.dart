@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,14 +26,14 @@ class VtMarkMyAvailableEachRowTimePicker extends ConsumerWidget {
 
     TextEditingController controller =
         TextEditingController(text: dropdownvalue);
-
+    final loc = context.loc!;
     return Flexible(
       child: TextFormField(
         enabled: disable ? true : false,
         readOnly: true,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter Time';
+            return loc.vtEnterTime;
           }
           return null;
         },

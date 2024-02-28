@@ -1,15 +1,17 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_gender_pie_chart.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VGSlide1 extends ConsumerWidget {
-  const VGSlide1({super.key, required this.eyeAssessment, required this.byGender});
- final Map<String, dynamic> eyeAssessment;
- final Map<String, dynamic> byGender;
+  const VGSlide1(
+      {super.key, required this.eyeAssessment, required this.byGender});
+  final Map<String, dynamic> eyeAssessment;
+  final Map<String, dynamic> byGender;
 
   static List<List<Color>> genderColor = [
     [AppColor.primary],
@@ -19,14 +21,17 @@ class VGSlide1 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-    Map<String, double> dataMale = {"Male": double.parse(byGender["male"].toString())};
+    final loc = context.loc!;
+    Map<String, double> dataMale = {
+      loc.vgMale: double.parse(byGender["male"].toString())
+    };
     Map<String, double> dataFemale = {
-      "Female": double.parse(byGender["female"].toString())
+      loc.vgFemale: double.parse(byGender["female"].toString())
     };
     Map<String, double> dataOthers = {
-      "Others": double.parse(byGender["others"].toString())
+      loc.vgOthers: double.parse(byGender["others"].toString())
     };
+
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: AppSize.kspadding,
@@ -43,7 +48,7 @@ class VGSlide1 extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "Eye Assessments",
+                  loc.vgEyeAssessments,
                   style: applyFiraSansFont(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
@@ -63,7 +68,7 @@ class VGSlide1 extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          "Total",
+                          loc.vgTotal,
                           style: applyRobotoFont(
                             fontWeight: FontWeight.w400,
                             fontSize: 10,
@@ -83,7 +88,7 @@ class VGSlide1 extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          "Camps",
+                          loc.vgCamps,
                           style: applyRobotoFont(
                             fontWeight: FontWeight.w400,
                             fontSize: 10,
@@ -103,7 +108,7 @@ class VGSlide1 extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          "Door to Door",
+                          loc.vgDoorToDoor,
                           softWrap: true,
                           style: applyRobotoFont(
                             fontWeight: FontWeight.w400,
@@ -127,7 +132,7 @@ class VGSlide1 extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "By Gender",
+                  loc.vgByGender,
                   style: applyFiraSansFont(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,

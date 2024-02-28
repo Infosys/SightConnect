@@ -22,7 +22,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
     var model = ref.watch(vtHomeHelperProvider);
 
     bool isMobile = Responsive.isMobile(context);
-
+    final loc = context.loc!;
     if (model.listOfAssessments.isEmpty && !model.isLoading) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +37,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
               children: [
                 const SizedBox(height: AppSize.kmheight),
                 Text(
-                  "No Assessments Found",
+                  loc.vtNoAssessmentsFound,
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -62,7 +62,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
       columns: [
         DataColumn(
           label: Text(
-            "Patient",
+            loc.vtPatient,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
@@ -73,7 +73,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ),
         DataColumn(
           label: Text(
-            "Assessment ID",
+            loc.vtAssessmentID,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
@@ -84,7 +84,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ),
         DataColumn(
           label: Text(
-            "Status",
+            loc.vtStatus,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
@@ -95,7 +95,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ),
         DataColumn(
           label: Text(
-            "Category",
+            loc.vtCategory,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
@@ -135,7 +135,11 @@ class PatientAssessmentDataSource extends DataTableSource {
     if (isLoading) {
       return DataRow(
         cells: [
-          loadingDataCell(),loadingDataCell(),loadingDataCell(),loadingDataCell()],
+          loadingDataCell(),
+          loadingDataCell(),
+          loadingDataCell(),
+          loadingDataCell()
+        ],
       );
     }
     if (index >= data.length - 1 && !isLoading && model.hasMore) {
@@ -147,6 +151,7 @@ class PatientAssessmentDataSource extends DataTableSource {
     if (index >= data.length) {
       return null; // No more rows to display
     }
+    final loc = context.loc!;
 
     return DataRow.byIndex(
       index: index,
@@ -191,7 +196,7 @@ class PatientAssessmentDataSource extends DataTableSource {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "assessmentId".sentenceCase(),
+                loc.vtAssessmentID.sentenceCase(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(fontSize: 14),
@@ -329,7 +334,7 @@ DataCell loadingDataCell() {
 //                       columns: [
 //                         DataColumn(
 //                           label: Text(
-//                             "Patient",
+//                             loc.vtPatient,
 //                             maxLines: 1,
 //                             overflow: TextOverflow.ellipsis,
 //                             style: applyFiraSansFont(
@@ -340,7 +345,7 @@ DataCell loadingDataCell() {
 //                         ),
 //                         DataColumn(
 //                           label: Text(
-//                             "Assessment ID",
+//                             loc.vtAssessmentID,
 //                             maxLines: 1,
 //                             overflow: TextOverflow.ellipsis,
 //                             style: applyFiraSansFont(
@@ -351,7 +356,7 @@ DataCell loadingDataCell() {
 //                         ),
 //                         DataColumn(
 //                           label: Text(
-//                             "Status",
+//                             loc.vtStatus,
 //                             maxLines: 1,
 //                             overflow: TextOverflow.ellipsis,
 //                             style: applyFiraSansFont(
@@ -362,7 +367,7 @@ DataCell loadingDataCell() {
 //                         ),
 //                         DataColumn(
 //                           label: Text(
-//                             "Category",
+//                             loc.vtCategory,
 //                             maxLines: 1,
 //                             overflow: TextOverflow.ellipsis,
 //                             style: applyFiraSansFont(

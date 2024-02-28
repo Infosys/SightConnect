@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -18,6 +19,7 @@ class GeneralInformation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Container(
       decoration: const BoxDecoration(
         color: AppColor.white,
@@ -30,7 +32,7 @@ class GeneralInformation extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "General Information",
+            loc.vtGeneralInformation,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -48,13 +50,13 @@ class GeneralInformation extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Date of Birth",
+                      loc.vtDateOfBirth,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: applyFiraSansFont(fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      "Address",
+                      loc.vtAddress,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: applyFiraSansFont(fontWeight: FontWeight.w500),
@@ -106,7 +108,7 @@ class GeneralInformation extends ConsumerWidget {
                 child: Row(
                   children: [
                     Text(
-                      "Gender",
+                      loc.vtGender,
                       style: applyFiraSansFont(fontWeight: FontWeight.w500),
                     ),
                     SizedBox(

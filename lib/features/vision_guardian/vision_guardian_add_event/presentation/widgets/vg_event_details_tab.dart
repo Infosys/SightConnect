@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -28,6 +29,7 @@ class EventDetailsTab extends ConsumerWidget {
     String endTimeformattedTime = DateFormat('h a').format(endTime);
 
     logger.d(eventDetails.images);
+    final loc = context.loc!;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSize.kspadding),
@@ -135,11 +137,11 @@ class EventDetailsTab extends ConsumerWidget {
             const SizedBox(
               height: AppSize.kmheight,
             ),
-            aboutDetails(eventDetails.description ?? ""),
+            aboutDetails(eventDetails.description ?? "", context),
             const SizedBox(
               height: AppSize.kmheight,
             ),
-            locationDetails(eventDetails.addresses![0]),
+            locationDetails(eventDetails.addresses![0], context),
             const SizedBox(
               height: AppSize.kmheight,
             ),
@@ -159,7 +161,7 @@ class EventDetailsTab extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      "Edit Event",
+                      loc.vgEditEvent,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -181,16 +183,17 @@ class EventDetailsTab extends ConsumerWidget {
                           .then((statusCode) {
                         if (statusCode >= 200 && statusCode < 210) {
                           Fluttertoast.showToast(
-                              msg: "Event Deleted Succesfully");
+                              msg: loc.vgEventDeletedSuccessfully);
                           ref
                               .read(addEventDetailsProvider)
                               .filterListEvents(0, "");
                           Navigator.pop(context);
                         } else {
-                          Fluttertoast.showToast(msg: "Event Deletion Failed");
+                          Fluttertoast.showToast(
+                              msg: loc.vgEventDeletionFailed);
                         }
                       }).catchError((error) {
-                        Fluttertoast.showToast(msg: "Event Deletion Failed");
+                        Fluttertoast.showToast(msg: loc.vgEventDeletionFailed);
                       });
                     },
                     style: ElevatedButton.styleFrom(
@@ -202,7 +205,7 @@ class EventDetailsTab extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      "Delete Event",
+                      loc.vgDeleteEvent,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -220,7 +223,9 @@ class EventDetailsTab extends ConsumerWidget {
   }
 }
 
-Widget locationDetails(VisionGuardianEventAddress addressDetails) {
+Widget locationDetails(
+    VisionGuardianEventAddress addressDetails, BuildContext context) {
+  final loc = context.loc!;
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -231,7 +236,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Text("Location",
+            Text(loc.vgLocation,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -240,7 +245,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
             InkWell(
               onTap: () {},
               child: Text(
-                "View On Map",
+                loc.vgViewOnMap,
                 style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
               ),
             )
@@ -249,7 +254,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
             height: AppSize.kmheight,
           ),
           Text(
-            "Address and Door Number",
+            loc.vgAddressAndDoorNumber,
             style: applyFiraSansFont(
               fontSize: 12,
               color: AppColor.grey,
@@ -275,7 +280,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Pincode",
+                      loc.vgPincode,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -295,7 +300,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      "Sub District Name",
+                      loc.vgSubDistrictName,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -319,7 +324,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Village Name",
+                      loc.vgVillageName,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -339,7 +344,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      "District Name",
+                      loc.vgDistrictName,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -366,7 +371,8 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
   );
 }
 
-Widget aboutDetails(String description) {
+Widget aboutDetails(String description, BuildContext context) {
+  final loc = context.loc!;
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -377,7 +383,7 @@ Widget aboutDetails(String description) {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("About",
+          Text(loc.vgAbout,
               style: applyFiraSansFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -401,7 +407,7 @@ Widget aboutDetails(String description) {
             children: [
               InkWell(
                 child: Text(
-                  "View All",
+                  loc.vgViewAll,
                   style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
                 ),
               )

@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
@@ -26,6 +27,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
   final VTPatientDto? patientDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     if (patientDetails == null) return const SizedBox();
 
     var canSubmit = ref
@@ -74,7 +76,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                 ),
               ),
               child: Text(
-                "Back",
+                loc.vtBack,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -99,7 +101,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                       if (context.mounted) {
                         if (response == "success") {
                           await successDialogue(
-                              context, "Assessment Closed Successfully");
+                              context, loc.vtAssessmentClosedSuccessfully);
                           // ScaffoldMessenger.of(context).showSnackBar(
                           //   const SnackBar(
                           //     content: Text("Assessment Closed Successfully"),
@@ -107,8 +109,8 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           // );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Something went wrong"),
+                            SnackBar(
+                              content: Text(loc.vtSomethingWentWrong),
                             ),
                           );
                         }
@@ -131,7 +133,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                 ),
               ),
               child: Text(
-                "Submit",
+                loc.vtSubmit,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,

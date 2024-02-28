@@ -23,6 +23,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
     var isSelected = useState<int>(0);
     var patientIdController = useTextEditingController();
 
+    final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       body: SingleChildScrollView(
@@ -57,14 +58,14 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                       ),
                       child: TextField(
                           controller: patientIdController,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(16),
-                            hintText: "Search Patient ID",
-                            hintStyle: TextStyle(
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(16),
+                            hintText: loc.optoSearchPatientId,
+                            hintStyle: const TextStyle(
                               fontSize: 14,
                               color: AppColor.grey,
                             ),
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: AppColor.primary,
                               ),
@@ -154,8 +155,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                         });
                       }
                       if (pickedDateRange == null) {
-                        Fluttertoast.showToast(
-                            msg: "Please select a date range");
+                        Fluttertoast.showToast(msg: loc.optoSelectDateRange);
                         return;
                       }
                       model.setFromDate = pickedDateRange.start;
@@ -177,7 +177,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                 height: AppSize.klheight,
               ),
               Text(
-                "Recent Assessments",
+                loc.optoRecentAssessments,
                 style:
                     applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
               ),
@@ -203,7 +203,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                   height: AppSize.klheight,
                                 ),
                                 Text(
-                                  "Data not found for this search",
+                                  loc.optoDataNotFound,
                                   style: applyRobotoFont(
                                     fontSize: 14,
                                     color: AppColor.grey,

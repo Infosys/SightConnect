@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,12 @@ class PatientTestTimelinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
         title: Row(
           children: [
-            const Text("Timeline"),
+            Text(loc.patientTimeline),
             const Spacer(),
             Container(
               padding: const EdgeInsets.all(4),
@@ -22,7 +24,7 @@ class PatientTestTimelinePage extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "Routine Checkup",
+                  loc.patientRoutineCheckup,
                   style: applyRobotoFont(
                     fontSize: 11,
                     color: AppColor.white,
@@ -40,7 +42,7 @@ class PatientTestTimelinePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Assessment ID: -",
+              "${loc.patientAssessmentID}: -",
               style: applyRobotoFont(
                 fontSize: 16,
                 color: AppColor.black,
@@ -49,7 +51,7 @@ class PatientTestTimelinePage extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              "Start Date: 19 Sep 2023, 10:20 AM",
+              "${loc.patientStartDate}: 19 Sep 2023, 10:20 AM",
               style: applyRobotoFont(
                 fontSize: 12,
                 color: AppColor.black,
@@ -86,7 +88,7 @@ class PatientTestTimelinePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "IVR Assessment",
+                          loc.patientIVRAssessment,
                           style: applyRobotoFont(
                             fontSize: 14,
                             color: AppColor.black,
@@ -102,7 +104,7 @@ class PatientTestTimelinePage extends StatelessWidget {
                       ],
                     ),
                     subtitle: Text(
-                      "Early Consultation Recommended",
+                      loc.patientEarlyConsultationRecommended,
                       style: applyRobotoFont(
                         fontSize: 12,
                         color: AppColor.grey,

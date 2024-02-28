@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -11,17 +12,18 @@ class PatientCasesAnalytics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           AnalyticsCard(
-            title: "Total Cases",
+            title: loc.vtTotalCases,
             firstValue: "-",
             secondValue: "-",
-            firstAnalyticsDescription: "IVR Calls",
-            secondAnalyticsDescription: "Clinic Visits",
+            firstAnalyticsDescription: loc.vtIvrCalls,
+            secondAnalyticsDescription: loc.vtClinicVisits,
             firstValueColor: AppColor.black,
             secondValueColor: AppColor.black,
             width: Responsive.isMobile(context)
@@ -30,22 +32,22 @@ class PatientCasesAnalytics extends StatelessWidget {
           ),
           const SizedBox(width: AppSize.kswidth),
           AnalyticsCard(
-            title: "Cases Closed",
+            title: loc.vtCasesClosed,
             firstValue: "-",
             secondValue: "-",
-            firstAnalyticsDescription: "Critical",
-            secondAnalyticsDescription: "Regular",
+            firstAnalyticsDescription: loc.vtCritical,
+            secondAnalyticsDescription: loc.vtRegular,
             width: Responsive.isMobile(context)
                 ? AppSize.width(context) * 0.3
                 : AppSize.width(context) * 0.25,
           ),
           const SizedBox(width: AppSize.kswidth),
           AnalyticsCard(
-            title: "Avg. Closure Time",
+            title: loc.vtAvgClosureTime,
             firstValue: "-",
             secondValue: "-",
-            firstAnalyticsDescription: "Critical",
-            secondAnalyticsDescription: "Regular",
+            firstAnalyticsDescription: loc.vtCritical,
+            secondAnalyticsDescription: loc.vtRegular,
             width: Responsive.isMobile(context)
                 ? AppSize.width(context) * 0.3
                 : AppSize.width(context) * 0.25,

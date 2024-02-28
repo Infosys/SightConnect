@@ -3,8 +3,10 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/l
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/data/models/vg_bottom_nav_items.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,10 +21,11 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     ref.listen(getVGProfileProvider, (previous, next) {
       if (next.hasError) {
         ref.read(initializationProvider).logout().then((value) {
-          Fluttertoast.showToast(msg: "You have been logged out");
+          Fluttertoast.showToast(msg: loc.vgLogoutMessage);
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginPage.routeName,
@@ -31,9 +34,7 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
         }).catchError((e) {
           logger.e(
               "Apologies, we encountered a logout error in the mobile app. from VisionGuardianDashboardPage : $e");
-          Fluttertoast.showToast(
-              msg:
-                  "Apologies, we encountered a logout error in the mobile app.");
+          Fluttertoast.showToast(msg: loc.vgLogoutErrorMessage);
         });
       }
     });
@@ -66,13 +67,13 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
               left: 0,
               right: 0,
               child: VisionGuardianBottomNavBar(
-                onSelected: (index) async {
+                onSelected: (id, index) async {
                   ref.read(visionGuardianDashboardProvider).currentIndex =
                       index;
-                  switch (index) {
-                    case 0:
+                  switch (id) {
+                    case VisionGuardianBottomNavItemId.home:
                       break;
-                    case 1:
+                    case VisionGuardianBottomNavItemId.eye_assessment:
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
@@ -80,14 +81,14 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
                         ),
                       );
                       break;
-                    case 2:
+                    case VisionGuardianBottomNavItemId.notifications:
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => const PatientNotificationPage(),
                         ),
                       );
                       break;
-                    case 3:
+                    case VisionGuardianBottomNavItemId.profile:
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => const VgProfile(),

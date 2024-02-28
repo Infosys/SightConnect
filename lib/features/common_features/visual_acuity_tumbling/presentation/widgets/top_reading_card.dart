@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -107,7 +106,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
                                       ? context.loc!.leftEyeString
                                       : (model.currentEye == Eye.right
                                           ? context.loc!.rightEyeString
-                                          : context.loc!.bothEyeString),
+                                          : context.loc!.bothEyesString),
                                   style: applyFiraSansFont(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,

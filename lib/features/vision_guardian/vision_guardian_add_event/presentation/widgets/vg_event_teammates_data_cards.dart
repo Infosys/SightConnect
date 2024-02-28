@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_member_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
@@ -26,7 +27,7 @@ class TeammatesDataCards extends HookConsumerWidget {
     var nameController = useTextEditingController();
     var mobileController = useTextEditingController();
     var isEdit = useState<bool>(true);
-
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.all(AppSize.kspadding / 4),
       child: Container(
@@ -111,11 +112,11 @@ class TeammatesDataCards extends HookConsumerWidget {
                                         }
                                       }
                                       Fluttertoast.showToast(
-                                        msg: "TeamMate Deleted Succesfully",
+                                        msg: loc.vgTeamMateDeletedSuccessfully,
                                       );
                                     }).onError((error, stackTrace) {
                                       Fluttertoast.showToast(
-                                        msg: "Something went wrong",
+                                        msg: loc.vgSomethingWentWrong,
                                       );
                                     });
                                   },
@@ -159,7 +160,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                           nameController.text = value;
                         },
                         decoration: InputDecoration(
-                          hintText: "Name",
+                          hintText: loc.vgName,
                           hintStyle: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -179,7 +180,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                         },
                         controller: mobileController,
                         decoration: InputDecoration(
-                          hintText: "Phone Number",
+                          hintText: loc.vgPhoneNumber,
                           hintStyle: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

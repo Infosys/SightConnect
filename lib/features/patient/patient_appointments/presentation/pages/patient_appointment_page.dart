@@ -68,7 +68,7 @@ class PatientAppointmentPage extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Text(
-                    'Book Appointment',
+                    loc.patientBookAppointment,
                     style: applyRobotoFont(
                       fontSize: 14,
                     ),
@@ -90,7 +90,7 @@ class PatientAppointmentPage extends ConsumerWidget {
         error: (e, s) {
           return Center(
             child: Text(
-              "Something went wrong",
+              loc.somethingWentWrong,
               style: applyFiraSansFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -179,7 +179,8 @@ Widget _content(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "${patient.name?.capitalize() ?? ""} has an appointment",
+                            loc.patientHasAnAppointment(
+                                patient.name?.capitalize() ?? ""),
                             style: applyFiraSansFont(
                               fontSize: 16,
                               color: AppColor.black,
@@ -238,7 +239,7 @@ Widget _content(
                                   ),
                                   child: Center(
                                     child: Text(
-                                      "Telephone Consultation",
+                                      loc.patientTelephoneConsultation,
                                       textAlign: TextAlign.center,
                                       style: applyRobotoFont(
                                         fontSize: 14,
@@ -252,7 +253,7 @@ Widget _content(
                             ],
                           ),
                           Text(
-                            "2 Sep 2023, 3:00 - 3:30 pm",
+                            "2 Sep 2023, 3:00 - 3:30 pm", // TODO: Why is this hardcoded?
                             style: applyRobotoFont(
                               fontSize: 14,
                             ),
@@ -261,7 +262,7 @@ Widget _content(
                             height: AppSize.ksheight,
                           ),
                           Text(
-                            "Address -",
+                            "${loc.patientAddress} -",
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -282,7 +283,7 @@ Widget _content(
                                   }
                                 },
                                 child: Text(
-                                  "Reschedule",
+                                  loc.patientReschedule,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: applyRobotoFont(
@@ -301,7 +302,7 @@ Widget _content(
                                   }
                                 },
                                 child: Text(
-                                  "Cancel",
+                                  loc.patientCancel,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: applyRobotoFont(

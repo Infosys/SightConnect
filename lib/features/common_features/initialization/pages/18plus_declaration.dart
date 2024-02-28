@@ -1,6 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
@@ -10,8 +13,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EigtheenPlusDeclaration extends HookConsumerWidget {
-  const EigtheenPlusDeclaration({super.key});
+class EighteenPlusDeclaration extends HookConsumerWidget {
+  const EighteenPlusDeclaration({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

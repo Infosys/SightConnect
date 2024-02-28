@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search_bar.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var response = ref.watch(addEventDetailsProvider).searchEventResults;
     var loading = ref.watch(addEventDetailsProvider).eventLoading;
+    final loc = context.loc!;
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: AppSize.klheight * 3,
@@ -25,10 +27,10 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
         ),
         body: LoadingOverlay(
           isLoading: loading,
-          overlayColor: null,
+          ignoreOverlayColor: true,
           child: response.isEmpty
-              ? const Center(
-                  child: Text("No Event Found"),
+              ? Center(
+                  child: Text(loc.vgNoEventFound),
                 )
               : SingleChildScrollView(
                   controller: ref

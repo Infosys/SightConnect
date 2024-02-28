@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -16,6 +17,7 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(addEventDetailsProvider);
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       width: double.infinity,
@@ -31,7 +33,7 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Add Event Photo",
+            loc.vgAddEventPhoto,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -89,7 +91,7 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
                           ),
                           const SizedBox(width: AppSize.kswidth),
                           Text(
-                            "Upload Image",
+                            loc.vgUploadImage,
                             style: applyRobotoFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -101,7 +103,7 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      "Add a photo of the Event which\nwill be shown as thumbnail",
+                      loc.vgAddPhotoInstruction,
                       style: applyRobotoFont(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,

@@ -19,6 +19,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     var query = useState<String>("");
 
     var watchRef = ref.watch(visionTechnicianSearchProvider);
@@ -55,7 +56,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           if (list.isEmpty) {
             return Center(
               child: Text(
-                "No Data Found",
+                loc.vtNoDataFound,
                 style: applyRobotoFont(),
               ),
             );
@@ -88,7 +89,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                         columns: [
                           DataColumn(
                             label: Text(
-                              "Patient",
+                              loc.vtPatient,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(
@@ -99,7 +100,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              "Mobile",
+                              loc.vtMobile,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(
@@ -110,7 +111,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              "Assessment ID",
+                              loc.vtAssessmentID,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(
@@ -121,7 +122,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              "Status",
+                              loc.vtStatus,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(
@@ -132,7 +133,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              "Timeline",
+                              loc.vtTimeline,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(
@@ -143,7 +144,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              "Category",
+                              loc.vtCategory,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: applyFiraSansFont(

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_report_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -29,8 +30,10 @@ class EventPatientsTab extends ConsumerWidget {
     var loading = model.getisLoading;
     var error = model.error;
 
+    final loc = context.loc!;
+
     if (loading == false && error) {
-      Fluttertoast.showToast(msg: "Server Error");
+      Fluttertoast.showToast(msg: loc.vgServerError);
     }
 
     if (loading == false && response.isEmpty) {
@@ -38,18 +41,18 @@ class EventPatientsTab extends ConsumerWidget {
         width: Responsive.isMobile(context)
             ? AppSize.width(context) * 0.9
             : AppSize.width(context) * 0.95,
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            VisionGuardianEmptyResultCard(type: "Patient"),
+            VisionGuardianEmptyResultCard(type: loc.vgPatient),
           ],
         ),
       );
     }
 
     return LoadingOverlay(
-      overlayColor: model.initialValue ? null : Colors.black45,
+      ignoreOverlayColor: model.initialValue,
       isLoading: loading,
       child: vgPatientTabs(context, response, ref, patientsType),
     );
@@ -72,6 +75,7 @@ Widget vgPatientTabs(
     WidgetRef ref,
     String patientsType) {
   final readModel = ref.read(addEventDetailsProvider);
+  final loc = context.loc!;
   return ListView.separated(
     controller: ref.watch(addEventDetailsProvider).eventPatientController,
     shrinkWrap: true,
@@ -203,7 +207,7 @@ Widget vgPatientTabs(
                                     int.parse(data.yearOfBirth ?? ""),
                                     int.parse(data.monthOfBirth ?? ""),
                                     int.parse(data.dayOfBirth ?? ""),
-                                  )) : ""} yrs',
+                                  )) : ""} ${loc.vgSlideAge}',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: applyRobotoFont(
@@ -240,7 +244,7 @@ Widget vgPatientTabs(
                             SizedBox(
                               width: AppSize.width(context) * 0.5,
                               child: Text(
-                                "Report ID: ${data.diagnosticReportId.toString()}",
+                                "${loc.vgReportId}: ${data.diagnosticReportId.toString()}",
                                 style: applyRobotoFont(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,

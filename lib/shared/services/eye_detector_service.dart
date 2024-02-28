@@ -74,6 +74,17 @@ class EyeDetectorService {
     );
   }
 
+    static FaceMesh getLargestFace(List<FaceMesh> faces) {
+    FaceMesh largestFace = faces.reduce(
+      (currentFace, nextFace) =>
+          (currentFace.boundingBox.width * currentFace.boundingBox.height) >
+                  (nextFace.boundingBox.width * nextFace.boundingBox.height)
+              ? currentFace
+              : nextFace,
+    );
+    return largestFace;
+  }
+
   static bool isLeftEye(TriageEyeType eye) {
     /* We should flip the value because we are considering the user perspective 
      but google_ml_kit considers the viewers perspective.*/

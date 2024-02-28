@@ -101,7 +101,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                                   height: AppSize.height(context) * 0.22,
                                   child: Transform.translate(
                                     offset: const Offset(0, 28),
-                                    child: buildGuage(
+                                    child: buildGauge(
                                       max(max(leftEyeSight, rightEyeSight),
                                           bothEyeSight),
                                     ),
@@ -127,7 +127,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                                   getColourScheme(rightEyeSight),
                                 ),
                                 buildCol(
-                                  loc.bothEyeString,
+                                  loc.bothEyesString,
                                   bothEyeSight.toString(),
                                   getColourScheme(bothEyeSight),
                                 ),
@@ -193,7 +193,7 @@ class TumblingResultReportPage extends ConsumerWidget {
     }
   }
 
-  buildGuage(double value) {
+  buildGauge(double value) {
     return SfRadialGauge(
       axes: [
         RadialAxis(

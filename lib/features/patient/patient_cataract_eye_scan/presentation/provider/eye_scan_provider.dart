@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/data/local/User_details_model.dart';
@@ -65,7 +67,7 @@ class EyeScanProvider extends ChangeNotifier {
     "3. Improve the lightning in your home with more or brighter lamps",
     "4. When you go outside during the day, wear sunglasses or a broad-brimmed hat to reduce glare",
     "5. Limit your night driving",
-    "6. Consider sugery when vision deteriorates and starts affecting your daily activities"
+    "6. Consider sugary when vision deteriorates and starts affecting your daily activities"
   ];
   List<String> watchWhatYouEat = [
     "Nutrients that must be a part of your daily diet to support a good eye function :",
@@ -140,19 +142,19 @@ class EyeScanProvider extends ChangeNotifier {
     if (leftEyeMatureValue < 0.5 && leftEyeNormalValue > 0.5) {
       _leftEyeStatus = "Normal";
     } else if (leftEyeMatureValue > 0.5 && leftEyeNormalValue < 0.5) {
-      _leftEyeStatus = "Catract";
+      _leftEyeStatus = "Cataract";
     }
 
     if (rightEyeMatureValue < 0.5 && rightEyeNormalValue > 0.5) {
       _rightEyeStatus = "Normal";
     } else if (rightEyeMatureValue > 0.5 && rightEyeMatureValue < 0.5) {
-      _rightEyeStatus = "Catract";
+      _rightEyeStatus = "Cataract";
     }
 
     if (_leftEyeStatus == "Normal") {
       leftEyeScore =
           double.parse((leftEyeNormalValue * 100).toStringAsFixed(2));
-    } else if (_leftEyeStatus == "Catract") {
+    } else if (_leftEyeStatus == "Cataract") {
       leftEyeScore =
           double.parse((leftEyeMatureValue * 100).toStringAsFixed(2));
     }
@@ -160,7 +162,7 @@ class EyeScanProvider extends ChangeNotifier {
     if (_rightEyeStatus == "Normal") {
       rightEyeScore =
           double.parse((rightEyeNormalValue * 100).toStringAsFixed(2));
-    } else if (_rightEyeStatus == "Catract") {
+    } else if (_rightEyeStatus == "Cataract") {
       rightEyeScore =
           double.parse((rightEyeMatureValue * 100).toStringAsFixed(2));
     }
@@ -194,7 +196,7 @@ class EyeScanProvider extends ChangeNotifier {
       Navigator.popUntil(context, (route) => route.isFirst);
     }
     // Map<String, List<Map<String, double>>>.from(res).isEmpty
-    //     ? logger.d("Error Occured")
+    //     ? logger.d("Error Occurred")
     //     : res = Map<String, num>.from(res);
     return res;
   }

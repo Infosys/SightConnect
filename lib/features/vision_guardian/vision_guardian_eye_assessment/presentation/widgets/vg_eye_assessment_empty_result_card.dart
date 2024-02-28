@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class VisionGuardianEyeAssessmentResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,15 +30,14 @@ class VisionGuardianEyeAssessmentResultCard extends StatelessWidget {
               constraints: BoxConstraints(
                 maxWidth: AppSize.width(context) * 0.7,
               ),
-              child:
-                  Text('There are no patients at present. Tap on "Add Patient"',
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                      style: applyRobotoFont(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.grey,
-                      )),
+              child: Text(loc.vgNoPatientsPresent,
+                  textAlign: TextAlign.center,
+                  softWrap: true,
+                  style: applyRobotoFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.grey,
+                  )),
             ),
           ),
         ],

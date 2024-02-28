@@ -125,6 +125,7 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
   }
 }
 
+// ignore: unused_element
 class _BlurThreshold extends HookConsumerWidget {
   const _BlurThreshold();
 
