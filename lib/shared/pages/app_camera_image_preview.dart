@@ -33,7 +33,7 @@ class AppCameraImagePreview extends HookWidget {
                 }
                 logger.d(image);
               } on Exception catch (e) {
-                logger.f("$e");
+                logger.d("$e");
               }
             },
             icon: const Icon(Icons.crop),
