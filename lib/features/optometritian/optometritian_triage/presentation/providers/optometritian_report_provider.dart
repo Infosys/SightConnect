@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -60,23 +61,25 @@ class OptometritianReportProvider extends ChangeNotifier {
   }
 
   List<Map<String, dynamic>> getTumblingEData(
+    BuildContext context,
     double rightEyeSigth,
     double leftEyeSigth,
     double bothEyeSigth,
   ) {
+    final loc = context.loc!;
     return [
       {
-        "eye": "Right Eye",
+        "eye": loc.rightEyeString,
         "value": rightEyeSigth.toString(),
         "color": _getChipUrgencyColor(rightEyeSigth)
       },
       {
-        "eye": "Left Eye",
+        "eye": loc.leftEyeString,
         "value": leftEyeSigth.toString(),
         "color": _getChipUrgencyColor(leftEyeSigth)
       },
       {
-        "eye": "Both Eye",
+        "eye": loc.bothEyesString,
         "value": bothEyeSigth.toString(),
         "color": _getChipUrgencyColor(bothEyeSigth)
       },

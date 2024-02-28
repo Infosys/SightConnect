@@ -115,7 +115,7 @@ Widget vgPatientDataCards(BuildContext context,
   DateTime dateTime = DateTime.parse(dateTimeString);
   String formattedDate = DateFormat("dd MMM yy").format(dateTime);
   String formattedTime = DateFormat("hh:mm a").format(dateTime.toLocal()); */
-
+  final loc = context.loc!;
   return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       width: double.infinity,
@@ -154,7 +154,7 @@ Widget vgPatientDataCards(BuildContext context,
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      '${visionGuardianPatientResponseModel.gender ?? ""}, ${calculateAge(DateTime(int.parse(visionGuardianPatientResponseModel.yearOfBirth ?? ""), int.parse(visionGuardianPatientResponseModel.monthOfBirth ?? ""), int.parse(visionGuardianPatientResponseModel.dayOfBirth ?? "")))} yrs',
+                      '${_getGender(context, visionGuardianPatientResponseModel.gender ?? "")}, ${calculateAge(DateTime(int.parse(visionGuardianPatientResponseModel.yearOfBirth ?? ""), int.parse(visionGuardianPatientResponseModel.monthOfBirth ?? ""), int.parse(visionGuardianPatientResponseModel.dayOfBirth ?? "")))} ${loc.vgSlideAge}',
                       style: applyRobotoFont(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -164,7 +164,7 @@ Widget vgPatientDataCards(BuildContext context,
                     const SizedBox(height: 2),
                     SizedBox(
                       child: AutoSizeText(
-                        "Report ID: ${visionGuardianPatientResponseModel.diagnosticReportId}",
+                        "${loc.vgReportId}: ${visionGuardianPatientResponseModel.diagnosticReportId}",
                         style: applyRobotoFont(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -220,4 +220,16 @@ int calculateAge(DateTime dateOfBirth) {
     age--;
   }
   return age;
+}
+
+String _getGender(BuildContext context, String genderText) {
+  final loc = context.loc!;
+  switch (genderText.trim().toLowerCase()) {
+    case 'male':
+      return loc.vgMale;
+    case 'female':
+      return loc.vgFemale;
+    default:
+      return loc.vgOthers;
+  }
 }
