@@ -8,9 +8,9 @@ class ApiConstant {
   static String patientRegistrationMiniappUrl =
       '$baseUrl/patient-registration/';
 
-  static void switchBaseUrl() {
-    baseUrl = baseDevUrl;
-  }
+  // static void switchBaseUrl() {
+  //   baseUrl = baseDevUrl;
+  // }
 
   // /services/eua-service/api/v1/euaService/search-redirect
 

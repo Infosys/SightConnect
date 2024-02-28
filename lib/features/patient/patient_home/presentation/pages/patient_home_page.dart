@@ -19,15 +19,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_update/in_app_update.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../../core/services/app_update_service.dart';
+
 class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AppUpdateInfo? updateInfo;
-    InAppUpdate.checkForUpdate().then((info) {
-      updateInfo = info;
-    });
+    var updateStatus = ref.watch(appUpdateServiceProvider).checkForUpdate();
     return Scaffold(
       extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(

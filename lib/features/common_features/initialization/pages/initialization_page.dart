@@ -123,7 +123,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         // 18+ declaration and consent check for patient
         // bool is18PlusDeclarationAccepted =
         //     await model.getEighteenPlusDeclarationStatus();
-        bool is18PlusDeclarationAccepted = true;
+        bool is18PlusDeclarationAccepted = await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
 
         if (is18PlusDeclarationAccepted && isConsentAccepted) {

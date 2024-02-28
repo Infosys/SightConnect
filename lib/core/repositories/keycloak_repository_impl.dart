@@ -99,30 +99,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       return response.data!['expires_in'];
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-      try {
-        logger.d("Trying with Dev URl");
-        ApiConstant.switchBaseUrl();
-
-        final response = await _dio.get<Map<String, dynamic>>(
-          "/auth/realms/care/sms/authentication-code",
-          queryParameters: {
-            'phoneNumber': mobile,
-          },
-        );
-        logger.d({
-          "response": response.data,
-        });
-
-        return response.data!['expires_in'];
-      } on DioException catch (e) {
-        logger.e("Sending OTP failed : $e");
-
-        DioErrorHandler.handleDioError(e);
-        rethrow;
-      } catch (e) {
-        logger.e("Sending OTP failed : $e");
-        throw ServerFailure(errorMessage: "Sending OTP failed : $e");
-      }
+      rethrow;
     } catch (e) {
       logger.e("Sending OTP failed : $e");
       throw ServerFailure(errorMessage: "Sending OTP failed : $e");
