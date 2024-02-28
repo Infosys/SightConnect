@@ -9,7 +9,7 @@ class SecurePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = context.loc!;
+    final loc = context.loc;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.getLightTheme(context),
@@ -21,7 +21,7 @@ class SecurePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  loc.secureJailbreak,
+                  loc?.secureJailbreak ?? "",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class SecurePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  loc.secureRestrictedAccess,
+                  loc?.secureRestrictedAccess ?? "",
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -46,7 +46,7 @@ class SecurePage extends StatelessWidget {
                     exit(0);
                   },
                   child: Text(
-                    loc.secureExitApp,
+                    loc?.secureExitApp ?? "",
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

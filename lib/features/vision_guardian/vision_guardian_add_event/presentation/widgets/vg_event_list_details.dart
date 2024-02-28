@@ -49,7 +49,7 @@ class VisionEventListDetails extends ConsumerWidget {
     }
     return LoadingOverlay(
       isLoading: loading,
-      overlayColor: null,
+      ignoreOverlayColor: true,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

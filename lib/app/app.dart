@@ -42,54 +42,57 @@ class MyApp extends ConsumerWidget {
         logger.d("isJailBrokenProvider: $data");
         if (data) {
           return const SecurePage();
-        }
-        return Millimeters.fromView(
-          child: MediaQuery(
-            data: mediaQueryData.copyWith(
-              textScaler: Responsive.isMobile(context)
-                  ? TextScaler.linear(
-                      ref.watch(globalTextScaleFactorProvider).textScaleFactor,
-                    )
-                  : const TextScaler.linear(1.2),
-            ),
-            child: MaterialApp(
-              title: AppText.appName,
-              locale: ref.watch(globalLanguageProvider).currentLocale,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              navigatorObservers: [
-                matomoObserver,
-                // SentryNavigatorObserver(),
-              ],
-              supportedLocales: appLocales.map((e) => Locale(e.locale)),
-              debugShowCheckedModeBanner: false,
-              themeMode: ref.watch(themeProvider),
-              theme: ref.watch(themeProvider) == ThemeMode.light
-                  ? AppTheme.getLightTheme(context)
-                  : AppTheme.getDarkTheme(context),
-              routes: AppRouter.routes,
-              initialRoute: initialRoute,
+        } else {
+          return Millimeters.fromView(
+            child: MediaQuery(
+              data: mediaQueryData.copyWith(
+                textScaler: Responsive.isMobile(context)
+                    ? TextScaler.linear(
+                        ref
+                            .watch(globalTextScaleFactorProvider)
+                            .textScaleFactor,
+                      )
+                    : const TextScaler.linear(1.2),
+              ),
+              child: MaterialApp(
+                title: AppText.appName,
+                locale: ref.watch(globalLanguageProvider).currentLocale,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                navigatorObservers: [
+                  matomoObserver,
+                  // SentryNavigatorObserver(),
+                ],
+                supportedLocales: appLocales.map((e) => Locale(e.locale)),
+                debugShowCheckedModeBanner: false,
+                themeMode: ref.watch(themeProvider),
+                theme: ref.watch(themeProvider) == ThemeMode.light
+                    ? AppTheme.getLightTheme(context)
+                    : AppTheme.getDarkTheme(context),
+                routes: AppRouter.routes,
+                initialRoute: initialRoute,
 
-              navigatorKey: AppRouter.navigatorKey,
-              // builder: (context, child) {
-              //   return ref.watch(internetProvider).maybeWhen(
-              //         data: (value) {
-              //           if (!value) {
-              //             return const InternetLostPage();
-              //           } else {
-              //             return child!;
-              //           }
-              //         },
-              //         orElse: () => const InternetLostPage(),
-              //       );
-              // },
+                navigatorKey: AppRouter.navigatorKey,
+                // builder: (context, child) {
+                //   return ref.watch(internetProvider).maybeWhen(
+                //         data: (value) {
+                //           if (!value) {
+                //             return const InternetLostPage();
+                //           } else {
+                //             return child!;
+                //           }
+                //         },
+                //         orElse: () => const InternetLostPage(),
+                //       );
+                // },
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
       orElse: () {
         logger.d("isJailBrokenProvider: orElse");
