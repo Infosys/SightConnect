@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
     // var bothEyeController = useTextEditingController();
 
     var refWatch = ref.watch(preliminaryAssessmentHelperProvider);
-
+    final loc = context.loc!;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -38,7 +39,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Visual Acuity",
+            loc.vtVisualAcuity,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -80,10 +81,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                         AppSize.kmradius,
                       ),
                     ),
-                    labelText: "Right Eye",
+                    labelText: loc.vtRightEye,
                     error: refWatch.visualAcuityRightEyeValueEntered
                         ? null
-                        : errorText(),
+                        : errorText(loc.vtInvalidValue),
                   ),
                 ),
               ),
@@ -121,10 +122,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                         AppSize.kmradius,
                       ),
                     ),
-                    labelText: "Left Eye",
+                    labelText: loc.vtLeftEye,
                     error: refWatch.visualAcuityLeftEyeValueEntered
                         ? null
-                        : errorText(),
+                        : errorText(loc.vtInvalidValue),
                   ),
                 ),
               ),
@@ -162,10 +163,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                         AppSize.kmradius,
                       ),
                     ),
-                    labelText: "Both Eye",
+                    labelText: loc.vtBothEyes,
                     error: refWatch.visualAcuityBothEyeValueEntered
                         ? null
-                        : errorText(),
+                        : errorText(loc.vtInvalidValue),
                   ),
                 ),
               ),
@@ -177,9 +178,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
   }
 }
 
-Widget errorText() {
+Widget errorText(String text) {
   return Text(
-    "Invalid value",
+    text,
     style: applyRobotoFont(
       color: AppColor.red,
       fontSize: 14,

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
 class EmptyResultCard extends StatelessWidget {
@@ -5,9 +6,9 @@ class EmptyResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
-        "Start searching for patients to view their details .. ",
+        context.loc!.emptyPatientsInfo,
         textAlign: TextAlign.center,
       ),
     );

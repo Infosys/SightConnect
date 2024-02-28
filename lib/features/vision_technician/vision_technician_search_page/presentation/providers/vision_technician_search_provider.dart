@@ -5,7 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/repositories/vt_search_repository_impl.dart';
 
-var vtSearchProvider = FutureProvider.autoDispose.family<List<VTPatientDto>, String>((ref, query) {
+var vtSearchProvider =
+    FutureProvider.autoDispose.family<List<VTPatientDto>, String>((ref, query) {
   return ref.watch(vtPatientSearchRepositoryProvider).getPatientProfile(query);
 });
 
@@ -19,7 +20,7 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
 
   VTPatientDto? _patientDetails;
   VTPatientDto? get patientDetails => _patientDetails;
-  List<VTPatientDto> _patientSearchDto = [];
+  final List<VTPatientDto> _patientSearchDto = [];
   List<VTPatientDto> get patientSearchDto => _patientSearchDto;
 
   void setPatientDetails(VTPatientDto patientDetails) {
@@ -34,5 +35,4 @@ class VisionTechnicianSearchProvider extends ChangeNotifier {
   //       .getPatientProfile(query);
   //   notifyListeners();
   // }
-
 }

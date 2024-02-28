@@ -107,7 +107,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
                                       ? context.loc!.leftEyeString
                                       : (model.currentEye == Eye.right
                                           ? context.loc!.rightEyeString
-                                          : context.loc!.bothEyeString),
+                                          : context.loc!.bothEyesString),
                                   style: applyFiraSansFont(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,6 +24,7 @@ class VTRegisterInput extends HookConsumerWidget {
     _focusNode.addListener(() {
       hasFocus.value = _focusNode.hasFocus;
     });
+    final loc = context.loc!;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSize.kmpadding),
@@ -34,7 +36,7 @@ class VTRegisterInput extends HookConsumerWidget {
           controller: controller,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please enter some text';
+              return loc.vtEnterSomeText;
             }
             return null;
           },

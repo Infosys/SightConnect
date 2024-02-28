@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
 import 'package:eye_care_for_all/shared/services/eye_detector_service.dart';
 import 'package:eye_care_for_all/shared/widgets/eye_detector_painter.dart';
@@ -103,13 +104,14 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     } else {
       logger.d("AppCameraPage: Permission not granted");
       navigator.pop();
-      Fluttertoast.showToast(msg: "Permission not granted");
+      Fluttertoast.showToast(msg: loc.permissionNotGranted);
     }
   }
 
   Future<void> _initializeCamera() async {
     logger.d("AppCameraPage: Initialize Camera Called");
     final NavigatorState navigator = Navigator.of(context);
+    final loc = context.loc!;
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
@@ -120,7 +122,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     } catch (e) {
       logger.e("AppCameraPage: Error Initializing Camera: $e");
       navigator.pop();
-      Fluttertoast.showToast(msg: "Service not available");
+      Fluttertoast.showToast(msg: loc.appCameraNotFound);
     }
   }
 
@@ -419,7 +421,9 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<XFile?> _takePicture(BuildContext context) async {
+    final loc = context.loc!;
     _addLoading("Hold the camera steady...");
+
     try {
       final XFile? image = await _capturePicture(context);
       if (image == null) {
@@ -435,11 +439,11 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
       return isVerfied;
     } on CameraException {
-      Fluttertoast.showToast(msg: "Camera not found");
+      Fluttertoast.showToast(msg: loc.appCameraNotFound);
       return null;
     } catch (e) {
       logger.e("Camera exception: $e");
-      Fluttertoast.showToast(msg: "Camera exception");
+      Fluttertoast.showToast(msg: loc.appCameraException);
       return null;
     }
   }

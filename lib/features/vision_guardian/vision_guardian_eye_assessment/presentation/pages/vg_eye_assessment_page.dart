@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_as
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_patient_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_search_bar_chips.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/widgets/vg_eye_assessment_search_patient.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,9 +18,10 @@ class VisionGuardianEyeAssessmentPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(0);
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
-        title: const Text('Eye Assessment'),
+        title: Text(loc.recentServicesEyeAssessment),
         centerTitle: false,
         actions: [
           IconButton(

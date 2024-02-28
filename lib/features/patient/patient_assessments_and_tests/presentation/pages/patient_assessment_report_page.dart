@@ -28,10 +28,11 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
     // final loc = context.loc!;
     var showReport = useState(false);
     var scrollController = useScrollController();
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
         title: Text(
-            "PID - ${assessmentDetailsReport.patientId} - ${assessmentDetailsReport.patientName}"),
+            "${loc.patientPID} - ${assessmentDetailsReport.patientId} - ${assessmentDetailsReport.patientName}"),
       ),
       body: SingleChildScrollView(
         controller: scrollController,
@@ -50,7 +51,7 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Report ID: ${assessmentDetailsReport.diagnosticReportId}",
+                    "${loc.patientReportID}: ${assessmentDetailsReport.diagnosticReportId}",
                   ),
                   Text(
                     "${assessmentDetailsReport.reportDate?.formateDate}",
@@ -111,8 +112,8 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                 children: [
                   Text(
                     showReport.value
-                        ? "Hide Detailed Report"
-                        : "Show Detailed Report",
+                        ? loc.patientHideDetailedReport
+                        : loc.patientShowDetailedReport,
                     style: applyRobotoFont(
                       color: AppColor.primary,
                       fontSize: 14,

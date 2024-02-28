@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,11 +32,11 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     // );
 
     // String profileImage = model?.patient?.profilePhoto ?? "";
-    String  genderString = "MALE";
+    String genderString = "MALE";
     const address = "";
 
     String profileImage = "";
-
+    final loc = context.loc!;
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -88,7 +89,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    "Age",
+                    loc.vtAge,
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
@@ -106,12 +107,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 direction: Axis.vertical,
                 children: [
                   Text(
-                    "Gender",
+                    loc.vtGender,
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: AppSize.ksheight),
                   Text(
-                    genderString ,
+                    genderString,
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       color: AppColor.grey,
@@ -125,12 +126,12 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
               direction: Axis.vertical,
               children: [
                 Text(
-                  "Address",
+                  loc.vtAddress,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: AppSize.ksheight),
                 Text(
-                  address ,
+                  address,
                   style: applyRobotoFont(
                     fontWeight: FontWeight.w400,
                     color: AppColor.grey,
@@ -145,5 +146,3 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     );
   }
 }
-
-

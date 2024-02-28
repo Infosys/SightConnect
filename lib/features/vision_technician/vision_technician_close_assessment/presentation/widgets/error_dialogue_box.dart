@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +11,7 @@ Future<void> showErrorDialogue(BuildContext context) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
+      final loc = context.loc!;
       return AlertDialog(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(AppSize.klradius))),
@@ -17,7 +19,7 @@ Future<void> showErrorDialogue(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "You are not registered in the system. Please give a missed call to",
+              loc.vtNotRegistered,
               style: applyRobotoFont(),
             ),
             InkWell(
@@ -43,7 +45,7 @@ Future<void> showErrorDialogue(BuildContext context) {
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Ok'),
+            child: Text(loc.vtOkay),
             onPressed: () {
               Navigator.of(context).pop();
             },

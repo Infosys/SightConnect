@@ -68,7 +68,7 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
     return switch (eye) {
       TriageEyeType.LEFT => context.loc!.leftEyeString,
       TriageEyeType.RIGHT => context.loc!.rightEyeString,
-      TriageEyeType.BOTH => context.loc!.bothEyeString,
+      TriageEyeType.BOTH => context.loc!.bothEyesString,
       _ => "",
     };
   }
@@ -116,13 +116,13 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
     BuildContext context,
   ) async {
     Either<Failure, TriagePostModel> response;
-    var tiageModel = ref.read(triageProvider);
+    var triageModel = ref.read(triageProvider);
 
-    if (tiageModel.triageMode == TriageMode.EVENT) {
-      response = await tiageModel.saveTriageForEvent(
+    if (triageModel.triageMode == TriageMode.EVENT) {
+      response = await triageModel.saveTriageForEvent(
           3, ref.read(addEventDetailsProvider).eventId);
     } else {
-      response = await tiageModel.saveTriage(3);
+      response = await triageModel.saveTriage(3);
     }
     response.fold(
       (failure) async {

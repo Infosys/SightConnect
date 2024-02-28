@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -5,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_filter_checkbox.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,6 +18,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var initiated = useState<bool>(false);
+    final loc = context.loc!;
 
     return ref.watch(getTriageProvider).when(
       data: (data) {
@@ -36,8 +39,8 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Center(
-                child: Text("Something went wrong"),
+              Center(
+                child: Text(loc.vtSomethingWentWrong),
               ),
               const SizedBox(
                 height: AppSize.klheight,
@@ -47,7 +50,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
                   ref.invalidate(getTriageProvider);
                 },
                 icon: const Icon(Icons.refresh_outlined),
-                label: const Text("Retry"),
+                label: Text(loc.vtRetry),
               ),
             ],
           ),
@@ -70,6 +73,7 @@ class AssessmentQuestionCard extends StatelessWidget {
   final List<QuestionnaireItemFHIRModel> questionnaire;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -92,7 +96,7 @@ class AssessmentQuestionCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Assessment Questions",
+                loc.vtAssessmentQuestions,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,

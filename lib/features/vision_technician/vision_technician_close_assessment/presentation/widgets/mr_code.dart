@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class MRCode extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       margin: const EdgeInsets.all(AppSize.kspadding),
@@ -23,7 +25,7 @@ class MRCode extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "MR Code",
+            loc.vtMrCode,
             style: applyFiraSansFont(
               fontWeight: FontWeight.w500,
             ),
@@ -33,7 +35,7 @@ class MRCode extends ConsumerWidget {
               ref.read(vtCloseAssessmentHelperProvider).setMrCode(value);
             },
             decoration: InputDecoration(
-              hintText: "Enter MR Code Here",
+              hintText: loc.vtEnterMrCode,
               hintStyle: applyRobotoFont(fontSize: 14),
               error: ref
                           .watch(vtCloseAssessmentHelperProvider)
@@ -42,7 +44,7 @@ class MRCode extends ConsumerWidget {
                           .length <
                       4
                   ? Text(
-                      "Please enter MR Code",
+                      loc.vtPleaseEnterMrCode,
                       style: applyRobotoFont(
                         fontSize: 12,
                         color: AppColor.red,

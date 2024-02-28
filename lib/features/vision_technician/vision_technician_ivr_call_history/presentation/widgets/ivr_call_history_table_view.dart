@@ -20,6 +20,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tableHeading =
         ref.read(ivrCallHistorySearchHelperProvider).tableHeading;
+    final loc = context.loc!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -31,8 +32,8 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                 List<IvrCallHistoryModel> reversedData = data.reversed.toList();
 
                 if (reversedData.isEmpty) {
-                  return const Center(
-                    child: Text("Call Log is Empty.. No Calls made yet!!"),
+                  return Center(
+                    child: Text(loc.vtCallLogEmpty),
                   );
                 }
                 return SizedBox(
@@ -77,6 +78,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                           cells: generateIvrCallHistoryListTile(
                             reversedData[index],
                             ref,
+                            context,
                           ),
                         ),
                       ),
@@ -86,8 +88,8 @@ class IvrCallHistoryTableView extends ConsumerWidget {
               },
               error: (e, s) {
                 logger.d("error :$e");
-                return const Center(
-                  child: Text("No Data available"),
+                return Center(
+                  child: Text(loc.vtNoDataAvailable),
                 );
               },
               loading: () => const Center(
@@ -101,7 +103,9 @@ class IvrCallHistoryTableView extends ConsumerWidget {
   List<DataCell> generateIvrCallHistoryListTile(
     IvrCallHistoryModel data,
     WidgetRef ref,
+    BuildContext context,
   ) {
+    final loc = context.loc!;
     return [
       DataCell(
         Text(
@@ -204,7 +208,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                                   .makeIvrCall(data.mobile!);
                             } catch (e) {
                               Fluttertoast.showToast(
-                                  msg: "IVR call not available.. Try Again!!");
+                                  msg: loc.vtIvrCallNotAvailable);
                             }
                           }
                         },

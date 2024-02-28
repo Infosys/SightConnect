@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/provider/vision_technician_report_page_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -18,7 +19,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
     if (visionCenterId == null) {
       return Container();
     }
-
+    final loc = context.loc!;
     return ref.watch(visionTechnicianReportPageProvider(visionCenterId!)).when(
         data: (data) {
       logger.d(
@@ -27,7 +28,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recommended Center",
+            loc.vtRecommendedCenter,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,

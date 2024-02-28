@@ -1,11 +1,21 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+enum VisionGuardianBottomNavItemId {
+  home,
+  eye_assessment,
+  notifications,
+  profile,
+}
 
 class VisionGuardianBottomNavItem {
+  VisionGuardianBottomNavItemId id;
   String name;
   String svgImage;
   double initialScale;
   bool isSelected;
   VisionGuardianBottomNavItem({
+    required this.id,
     required this.name,
     required this.svgImage,
     this.initialScale = 1.0,
@@ -14,33 +24,33 @@ class VisionGuardianBottomNavItem {
 }
 
 class VisionGuardianBottomNavItems {
-  static VisionGuardianBottomNavItem home = VisionGuardianBottomNavItem(
-    name: "Home",
-    svgImage: AppIcon.navHome,
-    initialScale: 1,
-    isSelected: true,
-  );
-  static VisionGuardianBottomNavItem eye_assessment =
+  static List<VisionGuardianBottomNavItem> getAll(AppLocalizations loc) {
+    return [
       VisionGuardianBottomNavItem(
-    name: "Eye Assessment",
-    svgImage: AppIcon.navTriage,
-    initialScale: 1,
-  );
-  static VisionGuardianBottomNavItem notification = VisionGuardianBottomNavItem(
-    name: "Notification",
-    svgImage: AppIcon.navNotification,
-    initialScale: 1,
-  );
-  static VisionGuardianBottomNavItem profile = VisionGuardianBottomNavItem(
-    name: "My Profile",
-    svgImage: AppIcon.navProfile,
-    initialScale: 1,
-  );
-
-  static List<VisionGuardianBottomNavItem> all = [
-    home,
-    eye_assessment,
-    notification,
-    profile,
-  ];
+        id: VisionGuardianBottomNavItemId.home,
+        name: loc.appDrawerHome,
+        svgImage: AppIcon.navHome,
+        initialScale: 1,
+        isSelected: true,
+      ),
+      VisionGuardianBottomNavItem(
+        id: VisionGuardianBottomNavItemId.eye_assessment,
+        name: loc.vgEyeAssessment,
+        svgImage: AppIcon.navTriage,
+        initialScale: 1,
+      ),
+      VisionGuardianBottomNavItem(
+        id: VisionGuardianBottomNavItemId.notifications,
+        name: loc.notificationsTitle,
+        svgImage: AppIcon.navNotification,
+        initialScale: 1,
+      ),
+      VisionGuardianBottomNavItem(
+        id: VisionGuardianBottomNavItemId.profile,
+        name: loc.appDrawerMyProfile,
+        svgImage: AppIcon.navProfile,
+        initialScale: 1,
+      ),
+    ];
+  }
 }

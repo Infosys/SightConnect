@@ -25,6 +25,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var tabIndex = useState(0);
     var searchVisible = useState<bool>(true);
+    final loc = context.loc!;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -113,7 +114,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                                 color: AppColor.black,
                                 fontWeight: FontWeight.w400)),
                         TextSpan(
-                          text: 'Add Patient',
+                          text: loc.vgAddPatient,
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -151,10 +152,10 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 labelColor: AppColor.primary,
-                tabs: const [
-                  Tab(text: "Patients"),
-                  Tab(text: "Details"),
-                  Tab(text: "Teammates"),
+                tabs: [
+                  Tab(text: loc.vgPatients),
+                  Tab(text: loc.vgDetails),
+                  Tab(text: loc.vgTeammates),
                 ],
               ),
               const SizedBox(

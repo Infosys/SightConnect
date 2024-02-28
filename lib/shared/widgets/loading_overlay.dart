@@ -25,9 +25,7 @@ class LoadingOverlay extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Container(
-                color: overlayColor == null
-                    ? null
-                    : overlayColor!.withOpacity(0.6),
+                color: overlayColor ?? overlayColor!.withOpacity(0.6),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

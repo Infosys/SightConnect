@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/pages/face_distance_detector.dart';
@@ -14,13 +15,14 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return FaceDistanceDetector(
       onCameraCreated: (controller, paint, distance, isLoading) {
         final isValidDistance =
             distance != null && distance >= 35 && distance <= 45;
         return Scaffold(
           appBar: CustomAppbar(
-            title: const Text('Distance to Face'),
+            title: Text(loc.vaDistanceToFace),
             leadingIcon: IconButton(
               splashRadius: 20,
               onPressed: () {
@@ -34,7 +36,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Please keep your face at 40 cm from the screen",
+                  loc.vaDistanceToFaceInstruction,
                   textAlign: TextAlign.center,
                   style: applyRobotoFont(
                     fontSize: 16,
@@ -75,8 +77,8 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
                             ),
                             child: AutoSizeText(
                               distance != null
-                                  ? 'Distance to Face: $distance cm'
-                                  : 'Bring your face inside the box',
+                                  ? '${loc.vaDistanceToFace}: $distance cm'
+                                  : loc.vaBringFaceInsideBox,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: isValidDistance
@@ -102,7 +104,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
                                   );
                                 }
                               : null,
-                          child: const Text("Proceed"),
+                          child: Text(loc.proceedButton),
                         ),
                       )
                     ],

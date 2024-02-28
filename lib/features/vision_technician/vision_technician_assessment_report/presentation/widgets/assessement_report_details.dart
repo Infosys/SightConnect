@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class AssessmentReportDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -27,7 +29,7 @@ class AssessmentReportDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Assessment",
+            loc.vtAssessment,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -36,12 +38,12 @@ class AssessmentReportDetails extends StatelessWidget {
           const SizedBox(height: AppSize.ksheight),
           (questionResponseBreifModel == null ||
                   questionResponseBreifModel!.isEmpty)
-              ? const Padding(
-                  padding: EdgeInsets.only(top: 16),
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 16),
                   child: Center(
                     child: Text(
-                      "No Data Available",
-                      style: TextStyle(
+                      loc.vtNoDataAvailable,
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,

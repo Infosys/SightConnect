@@ -230,6 +230,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     ref.watch(patientEyeScanProvider).selectedEye == Eye.RIGHT_EYE
         ? _currentEye = TriageEyeType.RIGHT
         : _currentEye = TriageEyeType.LEFT;
+    final loc = context.loc!;
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
@@ -243,7 +244,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
       },
       child: Scaffold(
         appBar: CustomAppbar(
-          title: Text("Eye Scanner - $eye"),
+          title: Text("${loc.patientEyeScanner} - $eye"),
           leadingIcon: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -282,7 +283,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                             if (!_isEyeValid) {
                               return;
                             }
-                            _takePicture();
+                            _takePicture(context);
                           },
                           child: const Icon(Icons.camera),
                         ),
@@ -311,7 +312,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                             ),
                             padding: const EdgeInsets.all(8),
                             child: Text(
-                              context.loc!.eyeBoxText,
+                              loc.eyeBoxText,
                               textAlign: TextAlign.center,
                               style: applyRobotoFont(
                                 fontSize: 16,
@@ -330,9 +331,10 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     );
   }
 
-  _takePicture() {
+  _takePicture(BuildContext context) {
+    final loc = context.loc!;
     if (!cameraController!.value.isInitialized) {
-      Fluttertoast.showToast(msg: "Error: select a camera first.");
+      Fluttertoast.showToast(msg: loc.patientErrorSelectCamera);
 
       return null;
     }

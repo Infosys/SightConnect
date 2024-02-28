@@ -59,7 +59,7 @@ class PatientProfilePage extends ConsumerWidget {
           error: (e, s) {
             return Center(
               child: Text(
-                "Something went wrong",
+                loc.somethingWentWrong,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -135,9 +135,9 @@ class PatientProfilePage extends ConsumerWidget {
                                     .push<bool?>(
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const PatientRegistrationMiniappPage(
+                                        PatientRegistrationMiniappPage(
                                       actionType: MiniAppActionType.UPDATE,
-                                      displayName: "Update Profile",
+                                      displayName: loc.patientUpdateProfile,
                                     ),
                                   ),
                                 )
@@ -146,10 +146,10 @@ class PatientProfilePage extends ConsumerWidget {
                                       {"Profile Page Update Miniapp": value});
                                   if (value == null || value == false) {
                                     Fluttertoast.showToast(
-                                        msg: "Profile not updated");
+                                        msg: loc.patientProfileNotUpdated);
                                   } else if (value) {
                                     Fluttertoast.showToast(
-                                        msg: "Profile updated");
+                                        msg: loc.patientProfileUpdated);
                                     ref.invalidate(getPatientProfileProvider);
                                     ref.invalidate(
                                         getPatientProfileByIdProvider(
@@ -165,7 +165,7 @@ class PatientProfilePage extends ConsumerWidget {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    "edit",
+                                    loc.patientEdit,
                                     style: applyFiraSansFont(
                                       fontSize: 14,
                                     ),
@@ -293,7 +293,7 @@ class PatientProfilePage extends ConsumerWidget {
               error: (e, s) {
                 return Center(
                   child: Text(
-                    "Something went wrong",
+                    loc.somethingWentWrong,
                     style: applyFiraSansFont(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,

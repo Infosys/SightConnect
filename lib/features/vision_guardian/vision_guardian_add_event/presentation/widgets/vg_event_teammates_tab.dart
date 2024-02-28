@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class EventTeammatesTab extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     var model = ref.watch(visionGuadianAddMemberProvider);
     var addMember = useState<bool>(false);
     var data = model.teammateList;
@@ -27,7 +29,7 @@ class EventTeammatesTab extends HookConsumerWidget {
     ref.listen(visionGuadianAddMemberProvider, (previous, next) {
       if (next.error) {
         Fluttertoast.showToast(
-          msg: "Error fetching teammates details",
+          msg: loc.vgErrorFetchingTeammatesDetails,
         );
       }
     });
@@ -49,7 +51,7 @@ class EventTeammatesTab extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Teammates(${data.length})",
+              "${loc.vgTeammates}(${data.length})",
               style: applyRobotoFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -93,7 +95,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                         },
                         controller: nameController1,
                         decoration: InputDecoration(
-                          hintText: "Name",
+                          hintText: loc.vgName,
                           hintStyle: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -114,11 +116,11 @@ class EventTeammatesTab extends HookConsumerWidget {
                                             int.parse(mobileController1.text))
                                         .then((value) {
                                       Fluttertoast.showToast(
-                                        msg: "TeamMate Added Succesfully",
+                                        msg: loc.vgTeamMateAddedSuccessfully,
                                       );
                                     }).catchError((error) {
                                       Fluttertoast.showToast(
-                                          msg: "Something went wrong");
+                                          msg: loc.vgSomethingWentWrong);
                                     });
 
                                     addMember.value = false;
@@ -160,7 +162,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                         },
                         controller: mobileController1,
                         decoration: InputDecoration(
-                          hintText: "Phone Number",
+                          hintText: loc.vgPhoneNumber,
                           hintStyle: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -197,7 +199,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                     width: 10,
                   ),
                   Text(
-                    "Add Teammate",
+                    loc.vgAddTeammate,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,

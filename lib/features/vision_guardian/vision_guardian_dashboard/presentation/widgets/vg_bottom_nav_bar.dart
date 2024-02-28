@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,15 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
     required this.selectedIndex,
   }) : super(key: key);
 
-  final Function(int) onSelected;
+  final Function(VisionGuardianBottomNavItemId, int) onSelected;
   final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
     var isMobile = Responsive.isMobile(context);
-    var items = VisionGuardianBottomNavItems.all;
+    final loc = context.loc!;
+    var items = VisionGuardianBottomNavItems.getAll(loc);
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -62,7 +64,7 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
                   return InkWell(
                     customBorder: const CircleBorder(),
                     onTap: () {
-                      onSelected(index);
+                      onSelected(items[index].id, index);
                     },
                     child: AnimatedScale(
                       scale: items[index].initialScale.toDouble(),

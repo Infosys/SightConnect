@@ -46,14 +46,15 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var selectedOption = useState("Yes");
+    final loc = context.loc!;
+    var selectedOption = useState(loc.yesButton);
 
     if (patientDetails == null) {
       return Scaffold(
         appBar: AppBar(),
         body: Center(
           child: Text(
-            "No patient found",
+            loc.vtNoPatientFound,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.grey,
@@ -121,7 +122,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                   ),
                 ),
                 child: Text(
-                  "Submit",
+                  loc.vtSubmit,
                   style: applyRobotoFont(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -138,7 +139,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         },
         centerTitle: false,
         title: Text(
-          'Preliminary Assessment',
+          loc.vtPreliminaryAssessment,
           style: applyFiraSansFont(fontWeight: FontWeight.w500),
         ),
       ),
@@ -153,7 +154,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
               const SizedBox(height: AppSize.klheight),
               PreliminaryAssessmentIvrCall(
                 onSelectedOptionChanged: (value) {
-                  if (value == "Yes") {
+                  if (value == loc.yesButton) {
                     refRead.toggleIvrCall(true);
                   } else {
                     refRead.toggleIvrCall(false);
@@ -164,7 +165,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
               ),
               const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentQuestions(),
-              if (selectedOption.value == "No")
+              if (selectedOption.value == loc.noButton)
                 const Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -197,6 +198,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   final VTPatientDto? patient;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     if (patient == null) {
       return Container();
     }
@@ -251,7 +253,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Age",
+                loc.vtAge,
                 style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: AppSize.ksheight),
@@ -270,7 +272,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Gender",
+                loc.vtGender,
                 style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: AppSize.ksheight),
@@ -290,7 +292,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Address",
+                  loc.vtAddress,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
