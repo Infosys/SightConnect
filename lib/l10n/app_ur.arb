@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "تقریب کامیابی سے حذف کر دی گئی",
   "vgEventDeletionFailed": "تقریب حذف کرنے میں ناکام",
   "vgEndTimeGreaterThanStartTime": "اختتامی وقت شروع ہونے کے وقت سے زیادہ ہونا چاہیے",
-  "vgNoPatientsPresent": "اس وقت کوئی مریض نہیں ہے۔ \"ایڈ پیشنٹ\" پر ٹیپ کریں۔"
+  "vgNoPatientsPresent": "اس وقت کوئی مریض نہیں ہے۔ \"ایڈ پیشنٹ\" پر ٹیپ کریں۔",
+  "textSize": "متن کا حجم",
+  "increase": "بڑھائیں",
+  "decrease": "کم کریں",
+  "reset": "ری سیٹ کریں",
+  "minimumTextSizeReached": "کم سے کم متن کا سائز پہنچ گیا",
+  "maximumTextSizeReached": "زیادہ سے زیادہ متن کا سائز پہنچ گیا"
 }

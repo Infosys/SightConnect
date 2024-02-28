@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "ইভেন্ট সফলভাবে মুছে ফেলা হয়েছে",
   "vgEventDeletionFailed": "ইভেন্ট মুছে ফেলা ব্যর্থ হয়েছে",
   "vgEndTimeGreaterThanStartTime": "শেষ সময় শুরুর সময়ের চেয়ে বেশি হওয়া উচিত।",
-  "vgNoPatientsPresent": "বর্তমানে কোনও রোগী নেই। \"রোগী যোগ করুন\"-এ ট্যাপ করুন।"
+  "vgNoPatientsPresent": "বর্তমানে কোনও রোগী নেই। \"রোগী যোগ করুন\"-এ ট্যাপ করুন।",
+  "textSize": "পাঠ্যের আকার",
+  "increase": "বাড়ান",
+  "decrease": "কমান",
+  "reset": "রিসেট",
+  "minimumTextSizeReached": "ন্যূনতম পাঠের আকার পৌঁছে গেছে",
+  "maximumTextSizeReached": "সর্বাধিক পাঠের আকার পৌঁছে গেছে"
 }

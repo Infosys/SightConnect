@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "പരിപാടി വിജയകരമായി ഇല്ലാതാക്കി",
   "vgEventDeletionFailed": "ഇവന്റ് ഇല്ലാതാക്കൽ പരാജയപ്പെട്ടു",
   "vgEndTimeGreaterThanStartTime": "അവസാന സമയം ആരംഭ സമയത്തേക്കാൾ കൂടുതലായിരിക്കണം",
-  "vgNoPatientsPresent": "നിലവിൽ രോഗികളില്ല. \"ആഡ് പേഷ്യന്റ്\" എന്നതിൽ ടാപ്പുചെയ്യുക."
+  "vgNoPatientsPresent": "നിലവിൽ രോഗികളില്ല. \"ആഡ് പേഷ്യന്റ്\" എന്നതിൽ ടാപ്പുചെയ്യുക.",
+  "textSize": "വാചകത്തിന്റെ വലിപ്പം",
+  "increase": "വർദ്ധിപ്പിക്കുക",
+  "decrease": "കുറയ്ക്കുക",
+  "reset": "പുനഃസജ്ജീകരിക്കുക",
+  "minimumTextSizeReached": "ഏറ്റവും കുറഞ്ഞ വാചക വലിപ്പം എത്തി",
+  "maximumTextSizeReached": "ഏറ്റവും കൂടിയ വാചക വലിപ്പം എത്തി"
 }

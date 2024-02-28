@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "ઇવેન્ટ સફળતાપૂર્વક કાઢી નાખવામાં આવી",
   "vgEventDeletionFailed": "પ્રસંગ કાઢી નાખવામાં નિષ્ફળતા",
   "vgEndTimeGreaterThanStartTime": "અંતનો સમય શરૂઆતના સમય કરતાં વધારે હોવો જોઈએ.",
-  "vgNoPatientsPresent": "હાલમાં કોઈ દર્દી નથી. \"દર્દી ઉમેરો\" પર ટેપ કરો."
+  "vgNoPatientsPresent": "હાલમાં કોઈ દર્દી નથી. \"દર્દી ઉમેરો\" પર ટેપ કરો.",
+  "textSize": "ટેક્સ્ટનું કદ",
+  "increase": "વધારો",
+  "decrease": "ઘટાડો",
+  "reset": "ફરીથી સેટ કરો",
+  "minimumTextSizeReached": "ન્યૂનતમ ટેક્સ્ટ કદ પહોંચ્યો છે",
+  "maximumTextSizeReached": "મહત્તમ ટેક્સ્ટ કદ પહોંચ્યો છે"
 }

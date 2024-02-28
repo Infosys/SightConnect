@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -29,13 +30,14 @@ class TextScalePopupMenu extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(globalTextScaleFactorProvider);
     var defaultScale = useState<double>(model.textScaleFactor);
+    final loc = context.loc!;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       insetPadding: const EdgeInsets.all(0),
-      title: const Text("Text Size"),
+      title: Text(loc.textSize),
       content: SizedBox(
         child: Row(
           children: [
@@ -47,7 +49,7 @@ class TextScalePopupMenu extends HookConsumerWidget {
                 onTap: () async {
                   if (defaultScale.value < 0.5) {
                     Fluttertoast.showToast(
-                      msg: "Minimum text size reached",
+                      msg: loc.minimumTextSizeReached,
                       backgroundColor: AppColor.red,
                     );
                   } else {
@@ -71,7 +73,7 @@ class TextScalePopupMenu extends HookConsumerWidget {
                         size: 16,
                       ),
                       Text(
-                        "Decrease",
+                        loc.decrease,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
@@ -110,7 +112,7 @@ class TextScalePopupMenu extends HookConsumerWidget {
                         size: 16,
                       ),
                       Text(
-                        "Reset",
+                        loc.reset,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
@@ -132,7 +134,7 @@ class TextScalePopupMenu extends HookConsumerWidget {
                 onTap: () async {
                   if (defaultScale.value > 1.3) {
                     Fluttertoast.showToast(
-                      msg: "Maximum text size reached",
+                      msg: loc.maximumTextSizeReached,
                       backgroundColor: AppColor.red,
                     );
                   } else {
@@ -156,7 +158,7 @@ class TextScalePopupMenu extends HookConsumerWidget {
                         size: 16,
                       ),
                       Text(
-                        "Increase",
+                        loc.increase,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
@@ -177,7 +179,7 @@ class TextScalePopupMenu extends HookConsumerWidget {
           onPressed: () {
             Navigator.of(context).pop(true);
           },
-          child: const Text("Confirm"),
+          child: Text(loc.confirmButton),
         ),
       ],
     );

@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "நிகழ்வு வெற்றிகரமாக நீக்கப்பட்டது",
   "vgEventDeletionFailed": "நிகழ்வு நீக்குதல் தோல்வியடைந்தது",
   "vgEndTimeGreaterThanStartTime": "தொடக்க நேரத்தை விட இறுதி நேரம் அதிகமாக இருக்க வேண்டும்.",
-  "vgNoPatientsPresent": "தற்போது நோயாளிகள் யாரும் இல்லை. \"நோயாளியைச் சேர்க்கவும்\" என்பதைத் தட்டவும்."
+  "vgNoPatientsPresent": "தற்போது நோயாளிகள் யாரும் இல்லை. \"நோயாளியைச் சேர்க்கவும்\" என்பதைத் தட்டவும்.",
+  "textSize": "உரையின் அளவு",
+  "increase": "அதிகரிக்க",
+  "decrease": "குறைக்க",
+  "reset": "மீட்டமை",
+  "minimumTextSizeReached": "குறைந்தபட்ச உரை அளவு அடைந்துவிட்டது",
+  "maximumTextSizeReached": "அதிகபட்ச உரை அளவு அடைந்துவிட்டது"
 }

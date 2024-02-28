@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "ಈವೆಂಟ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ",
   "vgEventDeletionFailed": "ಈವೆಂಟ್ ಅಳಿಸುವಿಕೆಯು ವಿಫಲವಾಗಿದೆ",
   "vgEndTimeGreaterThanStartTime": "ಅಂತ್ಯದ ಸಮಯವು ಪ್ರಾರಂಭದ ಸಮಯಕ್ಕಿಂತ ಹೆಚ್ಚಾಗಿರಬೇಕು.",
-  "vgNoPatientsPresent": "ಪ್ರಸ್ತುತ ಯಾವುದೇ ರೋಗಿಗಳಿಲ್ಲ. \"ರೋಗಿಯನ್ನು ಸೇರಿಸಿ\" ಗುಂಡಿಯನ್ನು ಒತ್ತಿ."
+  "vgNoPatientsPresent": "ಪ್ರಸ್ತುತ ಯಾವುದೇ ರೋಗಿಗಳಿಲ್ಲ. \"ರೋಗಿಯನ್ನು ಸೇರಿಸಿ\" ಗುಂಡಿಯನ್ನು ಒತ್ತಿ.",
+  "textSize": "ಪಠ್ಯದ ಗಾತ್ರ",
+  "increase": "ಹೆಚ್ಚಿಸಿ",
+  "decrease": "ಕಡಿವಾಣಿಸಿ",
+  "reset": "ಮರುಹೊಂದಿಸಿ",
+  "minimumTextSizeReached": "ಕನಿಷ್ಠ ಪಠ್ಯ ಗಾತ್ರ ತಲುಪಿದೆ",
+  "maximumTextSizeReached": "ಗರಿಷ್ಠ ಪಠ್ಯ ಗಾತ್ರ ತಲುಪಿದೆ"
 }

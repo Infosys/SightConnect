@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "कार्यक्रम सफलतापूर्वक हटा दिया गया",
   "vgEventDeletionFailed": "घटना मिटाने में विफल",
   "vgEndTimeGreaterThanStartTime": "समाप्ति समय प्रारंभ समय से अधिक होना चाहिए।",
-  "vgNoPatientsPresent": "वर्तमान में कोई मरीज नहीं है। \"रोगी जोड़ें\" पर टैप करें।"
+  "vgNoPatientsPresent": "वर्तमान में कोई मरीज नहीं है। \"रोगी जोड़ें\" पर टैप करें।",
+  "textSize": "पाठ का आकार",
+  "increase": "बढ़ाएं",
+  "decrease": "घटाएं",
+  "reset": "रीसेट",
+  "minimumTextSizeReached": "न्यूनतम पाठ आकार पहुंच गया",
+  "maximumTextSizeReached": "अधिकतम पाठ आकार पहुंच गया"
 }

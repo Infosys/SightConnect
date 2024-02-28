@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "ଇଭେଣ୍ଟ ସଫଳତାର ସହ ଅପସାରିତ ହେଲା",
   "vgEventDeletionFailed": "କାର୍ଯ୍ଯ଼କ୍ରମ ଅପସାରଣ ବିଫଳ ହେଲା",
   "vgEndTimeGreaterThanStartTime": "ଶେଷ ସମଯ଼ ଆରମ୍ଭ ସମଯ଼ ଠାରୁ ଅଧିକ ହେବା ଉଚିତ।",
-  "vgNoPatientsPresent": "ବର୍ତ୍ତମାନ କୌଣସି ରୋଗୀ ନାହାନ୍ତି। \"ରୋଗୀ ଯୋଗ କରନ୍ତୁ\" ଉପରେ ଟିପନ୍ତୁ।"
+  "vgNoPatientsPresent": "ବର୍ତ୍ତମାନ କୌଣସି ରୋଗୀ ନାହାନ୍ତି। \"ରୋଗୀ ଯୋଗ କରନ୍ତୁ\" ଉପରେ ଟିପନ୍ତୁ।",
+  "textSize": "ପାଠ୍ୟର ଆକାର",
+  "increase": "ବାଡ଼ାଇବେ",
+  "decrease": "କମାଇବେ",
+  "reset": "ପୁନଃସେଟ କରନ୍ତୁ",
+  "minimumTextSizeReached": "ନୂନ୍ୟତମ ପାଠ ଆକାର ପହଞ୍ଚିଛି",
+  "maximumTextSizeReached": "ସର୍ବାଧିକ ପାଠ ଆକାର ପହଞ୍ଚିଛି"
 }

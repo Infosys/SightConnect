@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "অনুষ্ঠানটো সফলতাৰে মচি পেলোৱা হৈছে",
   "vgEventDeletionFailed": "অনুষ্ঠান মচি পেলোৱাত ব্যৰ্থ",
   "vgEndTimeGreaterThanStartTime": "শেষৰ সময় আৰম্ভণিৰ সময়তকৈ বেছি হ 'ব লাগে",
-  "vgNoPatientsPresent": "বৰ্তমান কোনো ৰোগী নাই। \"ৰোগী যোগ কৰক\" ত টেপ কৰক।"
+  "vgNoPatientsPresent": "বৰ্তমান কোনো ৰোগী নাই। \"ৰোগী যোগ কৰক\" ত টেপ কৰক।",
+  "textSize": "পাঠ্যৰ আকাৰ",
+  "increase": "বাৰাওক",
+  "decrease": "কমাওক",
+  "reset": "পুনৰ সেট কৰক",
+  "minimumTextSizeReached": "ন্যূনতম পাঠ আকাৰ পৌঁছাইছে",
+  "maximumTextSizeReached": "সৰ্বাধিক পাঠ আকাৰ পৌঁছাইছে"
 }
