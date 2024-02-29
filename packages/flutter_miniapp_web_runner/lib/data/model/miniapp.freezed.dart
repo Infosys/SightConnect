@@ -134,7 +134,7 @@ class _$MiniAppsImpl implements _MiniApps {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MiniAppsImpl &&
@@ -454,7 +454,7 @@ class _$MiniAppImpl implements _MiniApp {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MiniAppImpl &&
