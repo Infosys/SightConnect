@@ -146,97 +146,27 @@ class AppDrawer extends HookWidget {
                                     ),
                                   );
                                   break;
+
                                 case DrawerMenuItemId.chatbot:
                                   Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        var languageProvider =
-                                            ref.watch(globalLanguageProvider);
-                                        var currentLanguage =
-                                            languageProvider.currentLanguage;
-                                        var currentLanguageCode =
-                                            languageProvider
-                                                .currentLocale!.languageCode;
-                                        debugPrint(
-                                            "language: $currentLanguage");
-                                        return Consumer(
-                                          builder: (context, ref, child) {
-                                            return ref
-                                                .watch(getTriageProvider)
-                                                .when(
-                                              data: (data) {
-                                                return ChatBotPage(
-                                                  selectedLanguageCode:
-                                                      currentLanguageCode,
-                                                  selectedLanguage:
-                                                      currentLanguage,
-                                                  welcomeMessage:
-                                                      loc.chatBotWelcomeMessage,
-                                                  // defaultQuerySuggestions: const [
-                                                  //   "Tips to avoid eye strain",
-                                                  //   "Common eye issues",
-                                                  //   "Tips for a better eye sight",
-                                                  // ],
-                                                  defaultQuerySuggestions: loc
-                                                      .chatBotDefaultQuerySuggestions
-                                                      .split("|"),
-                                                  // loadedTriageQuestionnaire: data
-                                                  //         .questionnaire
-                                                  //         ?.questionnaireItem ??
-                                                  //     [],
-                                                );
-                                              },
-                                              error: (error, stackTrace) {
-                                                return Scaffold(
-                                                  body: Center(
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Center(
-                                                          child: Text(
-                                                              error.toString()),
-                                                        ),
-                                                        const SizedBox(
-                                                          height:
-                                                              AppSize.klheight,
-                                                        ),
-                                                        TextButton.icon(
-                                                          onPressed: () {
-                                                            ref.invalidate(
-                                                                getTriageProvider);
-                                                          },
-                                                          icon: const Icon(Icons
-                                                              .refresh_outlined),
-                                                          label: Text(
-                                                              loc.retryButton),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              loading: () {
-                                                return const Scaffold(
-                                                  body: Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  );
-                                  break;
+                                      MaterialPageRoute(builder: (context) {
+                                    var languageProvider =
+                                        ref.watch(globalLanguageProvider);
+                                    var currentLanguage =
+                                        languageProvider.currentLanguage;
+                                    var currentLanguageCode = languageProvider
+                                        .currentLocale!.languageCode;
+                                    debugPrint("language: $currentLanguage");
+                                    return ChatBotPage(
+                                      selectedLanguage: currentLanguage,
+                                      selectedLanguageCode: currentLanguageCode,
+                                      welcomeMessage: loc.chatBotWelcomeMessage,
+                                      defaultQuerySuggestions: loc
+                                          .chatBotDefaultQuerySuggestions
+                                          .split("|"),
+                                    );
+                                  }));
+
                                 default:
                               }
                             },
