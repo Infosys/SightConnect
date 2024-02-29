@@ -1,4 +1,4 @@
-String resolveLanguageByLocaleCode(String localeCode) {
+String resolveLanguageByLocaleCode(String? localeCode) {
   switch (localeCode) {
     case 'hi':
       return "Hindi";
@@ -9,7 +9,7 @@ String resolveLanguageByLocaleCode(String localeCode) {
     case 'kn':
       return "Kannada";
     case 'en':
-      return "English"; 
+      return "English";
     case 'ml':
       return 'Malayalam';
     case 'mr':
@@ -26,5 +26,3 @@ String resolveLanguageByLocaleCode(String localeCode) {
       return 'English';
   }
 }
-
-
