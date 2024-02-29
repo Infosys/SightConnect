@@ -41,6 +41,10 @@ class AppTheme extends StateNotifier<ThemeMode> {
         color: AppColor.black,
         size: Responsive.isMobile(context) ? 24 : 32,
       ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColor.primary,
+        circularTrackColor: AppColor.cyan,
+      ),
       appBarTheme: AppBarTheme(
         elevation: 0,
         backgroundColor: AppColor.scaffold,

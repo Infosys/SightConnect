@@ -93,7 +93,7 @@ class InitializationProvider extends ChangeNotifier {
       logger.e("Vision Technician Profile Not Found: $failure");
       throw failure;
     }, (result) async {
-      logger.f("Vision Technician Profile Found: $result");
+      logger.d("Vision Technician Profile Found: $result");
       if (result.isEmpty) {
         return false;
       } else {
