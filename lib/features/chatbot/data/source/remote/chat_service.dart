@@ -20,7 +20,7 @@ class ChatService {
   List<String> _previousConversation = [];
 
   Future<List<String>> getQuerySuggestions(String language) async {
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
     // return ["Good Afternoon", "Good Evening", "Good Night"];
     const url = "query-suggestions";
     final body = jsonEncode({
@@ -59,7 +59,7 @@ class ChatService {
   }
 
   Future<String?> ask(String query, String language) async {
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
     // return "Good Morning";
     const chatResponseUrl = "stream";
     final body = jsonEncode({
