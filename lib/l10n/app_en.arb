@@ -651,5 +651,11 @@
   "vgEventDeletedSuccessfully": "Event Deleted Successfully",
   "vgEventDeletionFailed": "Event Deletion Failed",
   "vgEndTimeGreaterThanStartTime": "End time should be greater than start time",
-  "vgNoPatientsPresent": "There are no patients at present. Tap on \"Add Patient\""
+  "vgNoPatientsPresent": "There are no patients at present. Tap on \"Add Patient\"",
+  "textSize": "Text Size",
+  "increase": "Increase",
+  "decrease": "Decrease",
+  "reset": "Reset",
+  "minimumTextSizeReached": "Minimum text size reached",
+  "maximumTextSizeReached": "Maximum text size reached"
 }

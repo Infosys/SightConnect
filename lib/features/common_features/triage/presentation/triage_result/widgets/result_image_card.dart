@@ -84,14 +84,14 @@ class ResultImageCard extends ConsumerWidget {
                       Expanded(
                         child: _EyeScanImage(
                           image: getLeftEyeImageUrl(data.imageBriefEntity),
-                          name: "Left Eye",
+                          name: loc.leftEyeString,
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _EyeScanImage(
                           image: getRightEyeImageUrl(data.imageBriefEntity),
-                          name: "Right Eye",
+                          name: loc.rightEyeString,
                         ),
                       ),
                     ],
@@ -199,6 +199,7 @@ class _EyeScanImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -212,7 +213,7 @@ class _EyeScanImage extends StatelessWidget {
         ),
         const SizedBox(height: AppSize.kmheight),
         image == null
-            ? const Center(child: Text("No Image"))
+            ? Center(child: Text(loc.imageNotCapturedToastMessage))
             : Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.ksradius),

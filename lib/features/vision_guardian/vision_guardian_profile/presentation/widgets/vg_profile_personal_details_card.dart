@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
   final VgProfileModel profileData;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
       width: double.infinity,
@@ -27,14 +29,14 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
             children: [
               const Row(),
               Text(
-                "Personal Details",
+                loc.profilePagePersonalDetails,
                 style: applyFiraSansFont(),
               ),
               const SizedBox(
                 height: AppSize.kmheight,
               ),
               Text(
-                "HPR ID",
+                loc.vtHprId,
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
@@ -45,7 +47,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 height: AppSize.ksheight,
               ),
               Text(
-                "Email ID",
+                loc.vtEmailId,
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
@@ -56,7 +58,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                 height: AppSize.ksheight,
               ),
               Text(
-                "Educational Qualification",
+                loc.vtEducationalQualification,
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
@@ -67,7 +69,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
               ),
               const Divider(),
               Text(
-                "Address and Door Number",
+                loc.vgAddressAndDoorNumber,
                 style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
               ),
               Text(
@@ -86,7 +88,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "City",
+                          loc.myProfileCity,
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
@@ -100,7 +102,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "State",
+                          loc.myProfileState,
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
@@ -114,7 +116,7 @@ class VgProfilePersonalDetailsCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Pincode",
+                          loc.myProfilePinCode,
                           style: applyRobotoFont(
                               fontSize: 12, color: AppColor.grey),
                         ),
