@@ -92,7 +92,7 @@ class PersistentAuthData {
     await _storage.write(key: _usernameKey, value: username);
   }
 
-  Future<void> setActiveRole(String role) async {
+  Future<void> setActiveRole(String? role) async {
     activeRole = role;
     await _storage.write(key: _activeRoleKey, value: role);
   }

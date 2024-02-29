@@ -15,7 +15,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 
 var initializationProvider =
-    ChangeNotifierProvider((ref) => InitializationProvider(ref));
+    ChangeNotifierProvider.autoDispose((ref) => InitializationProvider(ref));
 
 class InitializationProvider extends ChangeNotifier {
   final Ref _ref;
@@ -90,8 +90,10 @@ class InitializationProvider extends ChangeNotifier {
     final response =
         await _ref.read(vtAuthenticationRepositoryProvider).getVtProfile(phone);
     return response.fold((failure) {
+      logger.e("Vision Technician Profile Not Found: $failure");
       throw failure;
     }, (result) async {
+      logger.f("Vision Technician Profile Found: $result");
       if (result.isEmpty) {
         return false;
       } else {

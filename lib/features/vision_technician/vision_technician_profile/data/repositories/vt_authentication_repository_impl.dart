@@ -9,8 +9,8 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vtAuthenticationRepositoryProvider =
-    Provider<VtAuthenticationRepository>((ref) {
-  final dio = ref.read(dioProvider);
+    Provider.autoDispose<VtAuthenticationRepository>((ref) {
+  final dio = ref.watch(dioProvider);
   return VtAutheticationRepositoryImpl(dio);
 });
 

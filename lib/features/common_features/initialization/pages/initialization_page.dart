@@ -72,7 +72,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       logger.e("checkUserAlreadyExist: $e");
       // In case of any other error, logout the user
-      await _invalidateAndLogout("Server Error. Please login again.");
+      // await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 
@@ -151,7 +151,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-
   Future<bool?> _show18PlusDeclaration() async {
     return showDialog<bool?>(
       context: context,
@@ -161,7 +160,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       },
     );
   }
-
 
   Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
     bool? consentGiven = await navigator.push<bool?>(
