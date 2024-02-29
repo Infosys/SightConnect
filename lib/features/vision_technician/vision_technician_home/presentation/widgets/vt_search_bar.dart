@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,11 @@ class VTSearchBar extends ConsumerWidget {
     this.onSearched,
   });
   final bool readOnly;
-
   final Function(String)? onSearched;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return TextField(
       readOnly: readOnly,
       onChanged: (data) {
@@ -41,7 +42,7 @@ class VTSearchBar extends ConsumerWidget {
             const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
         filled: true,
         fillColor: AppColor.white,
-        hintText: 'Search by Patient ID, Mobile No., Name',
+        hintText: loc.vtSearchText,
         hintStyle: applyRobotoFont(
           color: AppColor.grey,
           fontSize: 14,

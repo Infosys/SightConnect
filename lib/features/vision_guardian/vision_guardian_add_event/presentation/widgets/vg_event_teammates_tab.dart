@@ -1,10 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -16,19 +17,41 @@ class EventTeammatesTab extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
+    var model = ref.watch(visionGuadianAddMemberProvider);
     var addMember = useState<bool>(false);
+    var data = model.teammateList;
+    var loading = model.loading;
 
     var nameController1 = useTextEditingController();
     var mobileController1 = useTextEditingController();
-    return ref.watch(teamListProvider).when(data: (data) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
+
+    ref.listen(visionGuadianAddMemberProvider, (previous, next) {
+      if (next.error) {
+        Fluttertoast.showToast(
+          msg: loc.vgErrorFetchingTeammatesDetails,
+        );
+      }
+    });
+
+    if (loading) {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
+    if (data.isEmpty) {
+      return const VisionGuardianEmptyResultCard(type: "teammates");
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Teammates(${data.length})",
+              "${loc.vgTeammates}(${data.length})",
               style: applyRobotoFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -42,7 +65,7 @@ class EventTeammatesTab extends HookConsumerWidget {
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 ...data.map((e) {
                   return TeammatesDataCards(
-                    data: e,
+                    data: e[0],
                     type: "default",
                   );
                 })
@@ -72,7 +95,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                         },
                         controller: nameController1,
                         decoration: InputDecoration(
-                          hintText: "Name",
+                          hintText: loc.vgName,
                           hintStyle: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -90,12 +113,15 @@ class EventTeammatesTab extends HookConsumerWidget {
                                     ref
                                         .read(visionGuadianAddMemberProvider)
                                         .addMemberData(
-                                            int.parse(mobileController1.text));
-                                    showToastMessage(
-                                        "TeamMate Added Succesfully",
-                                        context,
-                                        0);
-                       
+                                            int.parse(mobileController1.text))
+                                        .then((value) {
+                                      Fluttertoast.showToast(
+                                        msg: loc.vgTeamMateAddedSuccessfully,
+                                      );
+                                    }).catchError((error) {
+                                      Fluttertoast.showToast(
+                                          msg: loc.vgSomethingWentWrong);
+                                    });
 
                                     addMember.value = false;
                                   },
@@ -136,7 +162,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                         },
                         controller: mobileController1,
                         decoration: InputDecoration(
-                          hintText: "Phone Number",
+                          hintText: loc.vgPhoneNumber,
                           hintStyle: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -173,7 +199,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                     width: 10,
                   ),
                   Text(
-                    "Add Teammate",
+                    loc.vgAddTeammate,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -185,14 +211,7 @@ class EventTeammatesTab extends HookConsumerWidget {
             ),
           ],
         ),
-      );
-    }, loading: () {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }, error: (error, stack) {
-      return const Center(
-          child: VisionGuardianEmptyResultCard(type: "teamMates"));
-    });
+      ),
+    );
   }
 }

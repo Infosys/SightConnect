@@ -11,25 +11,23 @@ Widget vgEventHeaderChips(ValueNotifier<int> isSelected, BuildContext context,
   return Consumer(
     builder: (context, ref, child) {
       return SizedBox(
-            height: AppSize.height(context) * 0.04,
-        width: AppSize.width(context) * 0.9,
+        height: AppSize.height(context) * 0.04,
+        width: AppSize.width(context) * 0.95,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           itemCount: eventStatus.length,
           itemBuilder: (BuildContext context, int index) {
             var data = eventStatus[index];
-        
+
             return InkWell(
               onTap: () {
-                if (isSelected.value == index) {
-                  isSelected.value = -1;
-                } else {
+                if (isSelected.value != index) {
                   isSelected.value = index;
+                  ref
+                      .read(addEventDetailsProvider)
+                      .filterListEvents(isSelected.value, data);
                 }
-                ref
-                    .read(addEventDetailsProvider)
-                    .filterListEvents(isSelected.value, data);
               },
               child: Container(
                 margin: const EdgeInsets.only(right: AppSize.kspadding),

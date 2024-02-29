@@ -8,7 +8,7 @@ var accessibilityProvider = ChangeNotifierProvider(
 );
 
 class AccessibilityProvider extends ChangeNotifier {
-  double _brightness = 80.0;
+  final double _brightness = 0.0;
   double _threshold = 60.0;
   int _serverThreshold = 60;
   AccessibilityProvider();
@@ -27,19 +27,14 @@ class AccessibilityProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setBrightness(double brightness) async {
-    _brightness = brightness;
-    notifyListeners();
-    await screenBrightness(brightness / 100);
-  }
-
-  Future<void> screenBrightness(double brightness) async {
+  Future<void> setBrightness() async {
     try {
-      await ScreenBrightness().setScreenBrightness(brightness);
+      await ScreenBrightness().setScreenBrightness(0.8);
     } catch (e) {
       logger.d(e.toString());
       throw 'Failed to set brightness';
     }
+    notifyListeners();
   }
 
   Future<void> resetBrightness() async {
@@ -48,12 +43,5 @@ class AccessibilityProvider extends ChangeNotifier {
     } catch (e) {
       logger.d(e.toString());
     }
-  }
-
-  void reset() {
-    _brightness = 80.0;
-    _threshold = 60.0;
-    _serverThreshold = 60;
-    notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,6 +27,8 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
   bool isLink = false;
   bool isMiniApp = false;
   bool isUPI = false;
+
+  bool _shouldShowSnackbar = true;
 
   @override
   void initState() {
@@ -127,28 +130,36 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
       });
 
       _checkData(result!.code, context);
+
+      setState(() {
+        result = null;
+      });
     });
   }
 
   void _checkData(String? data, BuildContext context) async {
     if (data != null) {
       if (data.trimLeft().startsWith("https")) {
+        controller?.pauseCamera();
         launchInWebViewWithoutJavaScript(data);
+        controller?.pauseCamera();
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("QR Code Data: $data"),
-          ),
-        );
+        showSnackbar(context, SnackBar(content: Text("QR Code Data: $data")));
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Invalid QR Code"),
-        ),
-      );
+      showSnackbar(context, const SnackBar(content: Text("Invalid QR Code")));
       Navigator.of(context).pop();
     }
+  }
+
+  Future<void> showSnackbar(BuildContext context, SnackBar snackbar) async {
+    if (!_shouldShowSnackbar) return;
+
+    _shouldShowSnackbar = false;
+    ScaffoldMessenger.of(context)
+        .showSnackBar(snackbar)
+        .closed
+        .then((value) => _shouldShowSnackbar = true);
   }
 
   Future<PermissionStatus> _getCameraPermission() async {
@@ -160,15 +171,31 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
     var scanArea = MediaQuery.of(context).size.width / 1.8;
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.black,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(CupertinoIcons.back),
+        iconTheme: const IconThemeData(color: Colors.white),
+        actionsIconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.transparent,
+        leading: const SizedBox.shrink(),
+        title: const Text(
+          "Scanner",
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        title: const Text("Scanner"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.close,
+              color: Colors.white,
+              size: 28,
+            ),
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: Container(
         color: _permissionStatus?.isGranted == true ? null : Colors.black,
@@ -195,7 +222,7 @@ class _SuperAppScannerPageState extends State<SuperAppScannerPage>
               return const SizedBox.shrink();
             }),
             Positioned(
-              top: 80,
+              top: MediaQuery.of(context).size.height * 0.2,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),

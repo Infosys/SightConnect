@@ -24,8 +24,7 @@ class AssessmentTimeline extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    
-
+    final loc = context.loc!;
     Encounter? encounter =
         ref.watch(assessmentTimelineProvider).currentEncounter;
     int? encounterId = encounter?.id;
@@ -34,7 +33,7 @@ class AssessmentTimeline extends ConsumerWidget {
     if (encounterId == null) {
       return Center(
         child: Text(
-          "Please select an encounter",
+          loc.vtPleaseSelectEncounter,
           style: applyRobotoFont(fontSize: 18),
         ),
       );
@@ -65,7 +64,7 @@ class AssessmentTimeline extends ConsumerWidget {
                           SizedBox(
                             width: AppSize.width(context) / 5,
                             child: Text(
-                              "Timeline: EA $encounterId",
+                              "${loc.vtTimelineEA} $encounterId",
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: applyFiraSansFont(
@@ -100,7 +99,7 @@ class AssessmentTimeline extends ConsumerWidget {
                       SizedBox(
                         width: AppSize.width(context) / 5,
                         child: Text(
-                          "Start Date: ${encounterDate ?? ""}",
+                          "${loc.vtStartDate}: ${encounterDate ?? ""}",
                           style: applyRobotoFont(
                             color: AppColor.grey,
                             fontSize: 16,
@@ -121,13 +120,13 @@ class AssessmentTimeline extends ConsumerWidget {
             );
           },
           loading: () => const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           ),
           error: (error, stack) {
             logger.d("timeline error $error");
             return Center(
               child: Text(
-                "Error",
+                loc.vtError,
                 style: applyRobotoFont(),
               ),
             );

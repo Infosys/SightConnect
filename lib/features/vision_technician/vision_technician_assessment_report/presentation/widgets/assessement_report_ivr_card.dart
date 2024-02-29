@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -23,84 +25,91 @@ class AssessmentReportIvrCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("IVR Selections",
-              style: applyFiraSansFont(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),),
+          Text(
+            loc.vtIvrSelections,
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           const SizedBox(height: AppSize.ksheight),
-          Wrap(spacing: AppSize.kmwidth * 5, children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Language Selection",
-                  style: applyFiraSansFont(
-                      color: AppColor.grey, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text("English",
+          Wrap(
+            spacing: AppSize.kmwidth * 5,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.vtLanguageSelection,
+                    style: applyFiraSansFont(
+                        color: AppColor.grey, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    loc.vtEnglish,
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
-                    ),),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Patient Type",
-                  style: applyFiraSansFont(
-                      color: AppColor.grey, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(
-                  "English",
-                  style: applyRobotoFont(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Problem",
-                  style: applyFiraSansFont(
-                      color: AppColor.grey, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(
-                  "Eye Sight",
-                  style: applyRobotoFont(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.vtPatientType,
+                    style: applyFiraSansFont(
+                        color: AppColor.grey, fontWeight: FontWeight.w500),
                   ),
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Vision Technician",
-                  style: applyFiraSansFont(
-                      color: AppColor.grey, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(
-                  "Geetha R (ID314232)",
-                  style: applyRobotoFont(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    loc.vtEnglish,
+                    style: applyRobotoFont(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.vtProblem,
+                    style: applyFiraSansFont(
+                        color: AppColor.grey, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    loc.vtEyeSight,
+                    style: applyRobotoFont(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    loc.vtVisionTechnician,
+                    style: applyFiraSansFont(
+                        color: AppColor.grey, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    "Geetha R (ID314232)",
+                    style: applyRobotoFont(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );

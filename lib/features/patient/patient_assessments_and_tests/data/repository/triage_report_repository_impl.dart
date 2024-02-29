@@ -72,11 +72,13 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
       getTriageReportByPatientIdAndStatus(
     int patientId,
     DiagnosticReportStatus status,
+    int? page,
+    int? size,
   ) async {
     if (await networkInfo.isConnected()) {
       try {
         final remoteResponse = await triageReportSource
-            .getTriageReportByPatientIdAndStatus(patientId, status);
+            .getTriageReportByPatientIdAndStatus(patientId, status, page, size);
 
         return Right(remoteResponse);
       } on ServerException catch (e) {
@@ -94,11 +96,17 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
   @override
   Future<Either<Failure, List<TriageDetailedReportModel>>>
       getTriageReportByEncounterId(
-          int encounterId, DiagnosticReportStatus status) async {
+    int encounterId,
+    DiagnosticReportStatus status,
+    int? page,
+    int? size,
+    String? filter,
+  ) async {
     if (await networkInfo.isConnected()) {
       try {
-        final remoteResponse = await triageReportSource
-            .getTriageReportByEncounterId(encounterId, status);
+        final remoteResponse =
+            await triageReportSource.getTriageReportByEncounterId(
+                encounterId, status, page, size, filter);
 
         return Right(remoteResponse);
       } on ServerException catch (e) {

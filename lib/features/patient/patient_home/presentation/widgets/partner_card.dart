@@ -61,6 +61,7 @@ class PartnerCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+                // context.loc!.poweredByText,
                 "Powered by",
                 style: applyRobotoFont(
                   fontSize: 12,
@@ -68,7 +69,8 @@ class PartnerCard extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                "Health Connect Tech Stack",
+                // context.loc!.digitalHealthCard,
+                "Digital Public Health Stack",
                 style: applyFiraSansFont(
                   fontSize: 16,
                 ),

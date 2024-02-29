@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
@@ -34,11 +34,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               colorBlendMode: BlendMode.srcIn,
               color: AppColor.white,
             ),
-            isMobile
-                ? const Spacer()
-                : const SizedBox(
-                    width: AppSize.klwidth,
-                  ),
+            isMobile ? const Spacer() : const SizedBox(width: AppSize.kmwidth),
             isMobile
                 ? IconButton(
                     onPressed: () {
@@ -53,7 +49,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                     icon: const Icon(Icons.search, color: AppColor.white),
                   )
                 : const Expanded(
-                    child: VTSearchBar(readOnly: true),
+                    child: VTSearchBar(readOnly: true,),
                   ),
           ],
         ),

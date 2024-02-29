@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vision_centers_address_details.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vision_centers_scroll_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vt_register_input.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding - 2),
       decoration: BoxDecoration(
@@ -34,7 +36,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Vision Center",
+            loc.vtVisionCenter,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -67,7 +69,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
           const SizedBox(height: AppSize.klheight),
           const SeverityInput(),
           VTRegisterInput(
-            title: "Remarks",
+            title: loc.vtRemarks,
             keyboardType: TextInputType.multiline,
             controller:
                 ref.read(preliminaryAssessmentHelperProvider).remarksController,

@@ -148,7 +148,7 @@ class OptionCard extends StatelessWidget {
                       question?.relatedImage?.first.imageTitle == '0'
                   ? const SizedBox()
                   : Positioned(
-                      bottom: 10,
+                      bottom: 60,
                       left: 0,
                       right: 0,
                       child: Container(
@@ -212,6 +212,7 @@ class OptionCard extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           color: AppColor.primary,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -252,6 +253,7 @@ class OptionCard extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           color: AppColor.primary,
                         ),
+                        textAlign: TextAlign.center,
                         softWrap: true,
                       ),
                     ),

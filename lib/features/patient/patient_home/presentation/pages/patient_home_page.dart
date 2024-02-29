@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
@@ -32,24 +31,26 @@ class PatientHomePage extends ConsumerWidget {
         },
         onLanguageChange: () {
           final currentLocaleCode =
-              ref.read(globalLanguageProvider).currentLocale.toString();
+              ref.read(globalLanguageProvider).currentLocale;
           showBottomSheet(
             enableDrag: false,
             context: context,
             builder: (context) => TranslationPopUp(
-              currentLocaleCode: currentLocaleCode,
+              locale: currentLocaleCode,
             ),
           );
         },
       ),
       appBar: const PatientHomePageAppBar(),
       body: Container(
+        height: AppSize.height(context),
+        width: AppSize.width(context),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
               AppImages.scaffoldBg,
             ),
-            alignment: Alignment.topRight,
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(
@@ -77,8 +78,8 @@ class PatientHomePage extends ConsumerWidget {
               InviteCard(
                 onPressed: () {
                   Share.share(
-                    context.loc?.inviteCardDescription ?? "",
-                    subject: ApiConstant.playStoreUrl,
+                    context.loc?.smsContent ?? "",
+                    subject: context.loc?.emailSubject ?? "",
                   );
                 },
               ),
@@ -88,7 +89,7 @@ class PatientHomePage extends ConsumerWidget {
               // const SizedBox(height: AppSize.kmheight),
               // const CampaginsList(),
               const PartnerCard(),
-              const SizedBox(height: AppSize.klheight * 3.2),
+              const SizedBox(height: AppSize.klheight * 3),
             ],
           ),
         ),

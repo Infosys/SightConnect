@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/action_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/answer_constraint.dart';

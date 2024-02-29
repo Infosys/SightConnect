@@ -56,7 +56,7 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                         ),
                         TextButton(
                           onPressed: () {
-                            ref.read(accessibilityProvider).reset();
+                            ref.read(accessibilityProvider).resetBrightness();
                             Navigator.of(context).pop();
                           },
                           child: const Text('Reset to Default'),
@@ -109,7 +109,7 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
                   value: model.brightness,
                   label: '${model.brightness.round()}',
                   onChanged: (double value) async {
-                    model.setBrightness(value);
+                    // model.setBrightness(value);
                   },
                 ),
               ),
@@ -125,6 +125,7 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
   }
 }
 
+// ignore: unused_element
 class _BlurThreshold extends HookConsumerWidget {
   const _BlurThreshold();
 

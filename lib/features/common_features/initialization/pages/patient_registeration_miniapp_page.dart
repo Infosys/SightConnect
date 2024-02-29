@@ -7,14 +7,18 @@ import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_pa
 import 'package:matomo_tracker/matomo_tracker.dart';
 
 class PatientRegistrationMiniappPage extends StatelessWidget {
-  const PatientRegistrationMiniappPage({
-    required this.actionType,
-    super.key,
-    required this.displayName,
-  });
-
   final MiniAppActionType actionType;
   final String displayName;
+  final String? mobileNumber;
+  final String? parentPatientId;
+
+  const PatientRegistrationMiniappPage({
+    super.key,
+    required this.actionType,
+    required this.displayName,
+    this.mobileNumber,
+    this.parentPatientId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +34,10 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
         token: PersistentAuthStateService.authState.accessToken ?? "",
         injectionModel: MiniAppInjectionModel(
           action: actionType,
-          mobileNumber: validateMobile(),
-          parentPatientId: _getPateintId(),
+          mobileNumber: mobileNumber ?? validateMobile(),
+          parentPatientId: parentPatientId ?? _getPateintId(),
           role: _getCurrentActiveRole(),
+          token: PersistentAuthStateService.authState.accessToken,
         ),
         miniapp: MiniApp(
           id: "1",
@@ -44,15 +49,25 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
       ),
     );
   }
- MiniAppInjectionModelRole _getCurrentActiveRole(){
+
+  MiniAppInjectionModelRole? _getCurrentActiveRole() {
     final role = PersistentAuthStateService.authState.activeRole;
-    if(role == null) return MiniAppInjectionModelRole.PATIENT;
-    if(role == "ROLE_PATIENT") return MiniAppInjectionModelRole.PATIENT;
-    if(role == "ROLE_VISION_TECHNICIAN") return MiniAppInjectionModelRole.VISION_TECHNICIAN;
-    if(role == "ROLE_VISION_GUARDIAN") return MiniAppInjectionModelRole.VISION_GUARDIAN;
-    return MiniAppInjectionModelRole.PATIENT;
+    if (role == "ROLE_PATIENT") {
+      return MiniAppInjectionModelRole.PATIENT;
+    } else if (role == "ROLE_OPTOMETRITIAN") {
+      return MiniAppInjectionModelRole.OPTOMETRITIAN;
+    } else if (role == "ROLE_VISION_TECHNICIAN") {
+      return MiniAppInjectionModelRole.VISION_TECHNICIAN;
+    } else if (role == "ROLE_VISION_GUARDIAN") {
+      return MiniAppInjectionModelRole.VISION_GUARDIAN;
+    }
+    return null;
   }
+
   String validateMobile() {
+
+    if(PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") return "";
+
     final mobile = PersistentAuthStateService.authState.username;
     if (mobile == null) return "";
     final mobileNumber = mobile.substring(3);
@@ -62,6 +77,8 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
 }
 
 _getPateintId() {
-     final role = PersistentAuthStateService.authState.activeRole;
-  return role=="ROLE_PATIENT"?PersistentAuthStateService.authState.userId:null;
+  final role = PersistentAuthStateService.authState.activeRole;
+  return role == "ROLE_PATIENT"
+      ? PersistentAuthStateService.authState.userId
+      : null;
 }

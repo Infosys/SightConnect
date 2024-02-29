@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
+import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -12,6 +14,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_color.dart';
+import '../../../../../core/services/persistent_auth_service.dart';
+import '../../../../../main.dart';
+import '../../../patient_appointments/presentation/pages/patient_appointment_page.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {
@@ -25,7 +30,16 @@ class PatientServiceCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+
+    logger.d("isUserBeta $isUserBeta");
     final loc = context.loc!;
+    final displayServices = isUserBeta
+        ? services
+        : services.where((element) {
+            return element != MiniApp.CATARACT_EYE_TEST &&
+                element != MiniApp.RED_EYE_TEST;
+          }).toList();
     return Container(
       margin: Responsive.isMobile(context)
           ? const EdgeInsets.only(bottom: AppSize.klpadding)
@@ -50,8 +64,9 @@ class PatientServiceCategory extends ConsumerWidget {
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
-            alignment: WrapAlignment.start,
-            children: services
+            alignment:
+                !isUserBeta ? WrapAlignment.start : WrapAlignment.spaceAround,
+            children: displayServices
                 .map(
                   (miniapp) => InkWell(
                     onTap: () {
@@ -73,29 +88,58 @@ class PatientServiceCategory extends ConsumerWidget {
                                 const TriageMemberSelectionPage(),
                           ),
                         );
+                      } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
+                          isUserBeta) {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.CATARACT;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PatientEyeCapturePage(),
+                          ),
+                        );
+                      } else if (miniapp == MiniApp.RED_EYE_TEST &&
+                          isUserBeta) {
+                        ref.read(globalProvider).setVAMode =
+                            VisionAcuityMode.RED_EYE;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PatientEyeCapturePage(),
+                          ),
+                        );
+                      } else if (miniapp == MiniApp.APPOINTMENT) {
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => WebSocket(),
+                        //   ),
+                        // );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientAppointmentPage(),
+                          ),
+                        );
                       }
                     },
                     child: SizedBox(
-                      width: Responsive.isMobile(context) ? 80 : 120,
+                      // color: Colors.pink,
+                      width: Responsive.isMobile(context) ? 80 : 100,
+                      height: Responsive.isMobile(context) ? 80 : 100,
                       child: Column(
                         children: [
                           MINIAPP_LOGO_MAPPER[miniapp] != null
                               ? SvgPicture.asset(
+                                  width: Responsive.isMobile(context) ? 24 : 34,
                                   MINIAPP_LOGO_MAPPER[miniapp]!,
-                                  height:
-                                      Responsive.isMobile(context) ? 24 : 32,
-                                  width: Responsive.isMobile(context) ? 24 : 32,
                                   colorFilter: const ColorFilter.mode(
                                     AppColor.primary,
                                     BlendMode.srcIn,
                                   ),
-                                  fit: BoxFit.contain,
                                 )
                               : const CircleAvatar(),
                           const SizedBox(
                             height: AppSize.ksheight,
                           ),
-                          Text(
+                          AutoSizeText(
                             _getMiniAppText(miniapp, loc),
                             softWrap: true,
                             textAlign: TextAlign.center,
@@ -122,6 +166,9 @@ String _getMiniAppText(
 ) =>
     {
       MiniApp.EYE_ASSESSMENT: loc.recentServicesEyeAssessment,
-      MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest
+      MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest,
+      MiniApp.CATARACT_EYE_TEST: loc.recentServicesCataractEyeTest,
+      MiniApp.RED_EYE_TEST: loc.recentServicesRedEyeTest,
+      MiniApp.APPOINTMENT: loc.bottomNavItemAppointment,
     }[miniApp] ??
     "App";

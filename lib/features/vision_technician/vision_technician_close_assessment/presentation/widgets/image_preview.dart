@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,14 @@ class ImagePreview extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String imagePath = ref.watch(vtCloseAssessmentHelperProvider).imagePath;
     int currentStep = ref.watch(vtCloseAssessmentHelperProvider).currentStep;
+    String currentEye = ref
+        .watch(vtCloseAssessmentHelperProvider)
+        .currentEye
+        .toString()
+        .split('.')
+        .last
+        .sentenceCase();
+    final loc = context.loc!;
     return Container(
       width: 536,
       height: 714,
@@ -32,7 +41,7 @@ class ImagePreview extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "Left Eye",
+                "$currentEye Eye",
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -66,7 +75,7 @@ class ImagePreview extends ConsumerWidget {
               ref.watch(vtCloseAssessmentHelperProvider).retakePicture();
             },
             child: Text(
-              "Retake Picture",
+              loc.vtRetakePicture,
               style: applyRobotoFont(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
@@ -88,13 +97,15 @@ class ImagePreview extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.arrow_back,
                       size: AppSize.klheight,
+                      color:
+                          currentStep == 0 ? AppColor.grey : AppColor.primary,
                     ),
                     const SizedBox(width: AppSize.kswidth / 2),
                     Text(
-                      "Back",
+                      loc.vtBack,
                       style: applyRobotoFont(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -135,7 +146,7 @@ class ImagePreview extends ConsumerWidget {
                         : MaterialStateProperty.all<Color>(AppColor.primary),
                   ),
                   child: Text(
-                    "Submit",
+                    loc.vtSubmit,
                     style: applyRobotoFont(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -158,7 +169,7 @@ class ImagePreview extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Next",
+                      loc.vtNext,
                       style: applyRobotoFont(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -167,9 +178,11 @@ class ImagePreview extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: AppSize.kswidth / 2),
-                    const Icon(
+                    Icon(
                       Icons.arrow_forward,
                       size: AppSize.klheight,
+                      color:
+                          currentStep == 2 ? AppColor.grey : AppColor.primary,
                     ),
                   ],
                 ),

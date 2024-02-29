@@ -1,9 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'app_network_image.dart';
 
 class EyeScanTabView extends StatelessWidget {
   const EyeScanTabView({
@@ -32,25 +33,30 @@ class EyeScanTabView extends StatelessWidget {
           ),
         ),
         children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            height: 200,
-            child: Row(
-              children: [
-                Expanded(
-                  child: _EyeScanImage(
-                    image: getLeftEyeImageUrl(eyeScanData),
-                    name: "Left Eye",
+          Visibility(
+            visible: getLeftEyeImageUrl(eyeScanData) != null ||
+                getRightEyeImageUrl(eyeScanData) != null,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              height: 200,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: _EyeScanImage(
+                      image: getLeftEyeImageUrl(eyeScanData),
+                      name: loc.leftEyeString,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _EyeScanImage(
-                    image: getRightEyeImageUrl(eyeScanData),
-                    name: "Right Eye",
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _EyeScanImage(
+                      image: getRightEyeImageUrl(eyeScanData),
+                      name: loc.rightEyeString,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
         ],
@@ -89,6 +95,7 @@ class _EyeScanImage extends StatelessWidget {
   const _EyeScanImage({
     required this.image,
     required this.name,
+    // ignore: unused_element
     super.key,
   });
 
@@ -114,11 +121,11 @@ class _EyeScanImage extends StatelessWidget {
             : Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.ksradius),
-                  child: CachedNetworkImage(
+                  child: AppNetworkImage(
                     imageUrl: image!,
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    shapeCircle: false,
+                    height: 100,
+                    width: 100,
                   ),
                 ),
               ),

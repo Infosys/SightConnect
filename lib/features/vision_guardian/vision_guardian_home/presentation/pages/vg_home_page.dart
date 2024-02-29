@@ -1,17 +1,13 @@
-import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
-
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
@@ -22,59 +18,19 @@ class VisionGuardianHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
       extendBody: true,
       appBar: AppBar(
         backgroundColor: AppColor.primary,
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColor.white,
-              ),
-              child: SvgPicture.asset(
-                AppIcon.logo,
-                height: 20,
-                width: 20,
-              ),
-            ),
-            const SizedBox(width: AppSize.kmwidth),
-            Text(
-              AppText.appName,
-              style: applyFiraSansFont(
-                color: AppColor.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {
-                final navigator = Navigator.of(context);
-                ref.read(initializationProvider).logout().then(
-                  (value) async {
-                    navigator.pushNamedAndRemoveUntil(
-                      LoginPage.routeName,
-                      (route) => false,
-                    );
-                    ref.invalidate(initializationProvider);
-                  },
-                ).catchError((e) {
-                  Fluttertoast.showToast(
-                    msg: e.toString(),
-                  );
-                });
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: AppColor.white,
-              ),
-            )
-          ],
+        title: Image.asset(
+          AppImages.logo,
+          height: 40,
+          width: 140,
+          colorBlendMode: BlendMode.srcIn,
+          color: AppColor.white,
         ),
       ),
       body: SingleChildScrollView(
@@ -82,47 +38,47 @@ class VisionGuardianHomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: AppSize.height(context) / 4,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.kmpadding,
-                vertical: AppSize.kmpadding,
-              ),
+              height: Responsive.isMobile(context)
+                  ? AppSize.height(context) * 0.25
+                  : AppSize.height(context) * 0.35,
               decoration: const BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
+                  bottomLeft: Radius.circular(AppSize.kmradius),
+                  bottomRight: Radius.circular(AppSize.kmradius),
                 ),
               ),
               child: Stack(
-                clipBehavior: Clip.none,
-                fit: StackFit.expand,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome",
-                        style: applyFiraSansFont(
-                          color: AppColor.scaffold,
-                          fontSize: 24,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: AppSize.kmpadding,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          loc.vgWelcome,
+                          style: applyFiraSansFont(
+                            color: AppColor.scaffold,
+                            fontSize: 24,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: AppSize.ksheight - 5),
-                      Text(
-                        ref.watch(globalVGProvider).name,
-                        style: applyFiraSansFont(
-                          fontSize: 24,
-                          color: AppColor.white,
-                        ),
-                      )
-                    ],
+                        const SizedBox(height: AppSize.ksheight - 5),
+                        Text(
+                          ref.watch(globalVGProvider).name,
+                          style: applyFiraSansFont(
+                            fontSize: 24,
+                            color: AppColor.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  Positioned(
-                    bottom: -1 * (AppSize.height(context) / 7.5),
-                    left: (AppSize.kswidth * 2) * -1,
+                  Transform.translate(
+                    offset: Offset(0, AppSize.height(context) * 0.12),
                     child: SizedBox(
-                      width: AppSize.width(context),
                       child: ref.watch(getAnalyticsProvider).when(
                         data: (data) {
                           return VGCarousel(data: data);
@@ -139,28 +95,26 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSize.klheight * 3),
+            SizedBox(height: AppSize.height(context) * 0.06),
             Padding(
-              padding: const EdgeInsets.only(
-                left: AppSize.kmpadding,
-                right: AppSize.kmpadding,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Services",
+                    loc.vgServices,
                     style: applyFiraSansFont(
                       fontSize: 18,
                     ),
                   ),
                   const VisionGuardianServicesCardList(),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: AppSize.kmheight),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Events',
+                        loc.vgEvents,
                         style: applyFiraSansFont(
                           fontSize: 18,
                           color: AppColor.black,
@@ -171,7 +125,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                         builder: (context, ref, child) {
                           return TextButton(
                             child: Text(
-                              'View All',
+                              loc.vgViewAll,
                               style: applyFiraSansFont(
                                 fontSize: 14,
                                 color: AppColor.primary,

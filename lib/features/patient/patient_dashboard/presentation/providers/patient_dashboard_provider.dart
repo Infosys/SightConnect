@@ -7,13 +7,7 @@ var patientDashboardProvider = ChangeNotifierProvider(
 );
 
 class PatientDashboardProvider extends ChangeNotifier {
-  int currentIndex = 0;
   bool isVisible = true;
-
-  void changeIndex(int index) {
-    currentIndex = index;
-    notifyListeners();
-  }
 
   ScrollController? scrollController;
   PatientDashboardProvider() : scrollController = ScrollController() {

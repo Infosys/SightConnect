@@ -7,9 +7,12 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/mr_code.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
+
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
@@ -24,6 +27,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
   final VTPatientDto? patientDetails;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     if (patientDetails == null) return const SizedBox();
 
     var canSubmit = ref
@@ -42,7 +46,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
               Navigator.popUntil(context, (route) => route.isFirst);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (builder) {
-                return const VisionTechnicianHomePage();
+                return const VisionTechnicianDashboardPage();
               }));
             },
             child: const Icon(Icons.chevron_left)),
@@ -72,7 +76,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                 ),
               ),
               child: Text(
-                "Back",
+                loc.vtBack,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -91,11 +95,13 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           .submitCloseAssessmentInfo(patientDetails!);
                       ref.invalidate(vtTriageProvider);
                       ref.invalidate(vtCloseAssessmentHelperProvider);
+                      ref.invalidate(vtTriageProvider);
+                      ref.invalidate(preliminaryAssessmentHelperProvider);
 
                       if (context.mounted) {
                         if (response == "success") {
                           await successDialogue(
-                              context, "Assessment Closed Successfully");
+                              context, loc.vtAssessmentClosedSuccessfully);
                           // ScaffoldMessenger.of(context).showSnackBar(
                           //   const SnackBar(
                           //     content: Text("Assessment Closed Successfully"),
@@ -103,8 +109,8 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           // );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Something went wrong"),
+                            SnackBar(
+                              content: Text(loc.vtSomethingWentWrong),
                             ),
                           );
                         }
@@ -127,7 +133,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                 ),
               ),
               child: Text(
-                "Submit",
+                loc.vtSubmit,
                 style: applyRobotoFont(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -139,17 +145,17 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
           SizedBox(width: AppSize.width(context) * 0.05),
         ],
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(AppSize.kmpadding),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
         child: Column(
           children: [
-            CloseHeading(),
-            SizedBox(height: AppSize.klheight),
-            MRCode(),
-            SizedBox(height: AppSize.klheight),
-            SolutionCard(),
-            SizedBox(height: AppSize.klheight),
-            Recommendations(),
+            CloseHeading(encountedId: patientDetails?.encounterId),
+            const SizedBox(height: AppSize.klheight),
+            const MRCode(),
+            const SizedBox(height: AppSize.klheight),
+            const SolutionCard(),
+            const SizedBox(height: AppSize.klheight),
+            const Recommendations(),
           ],
         ),
       ),

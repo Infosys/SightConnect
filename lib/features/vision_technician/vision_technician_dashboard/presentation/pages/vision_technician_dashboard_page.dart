@@ -2,18 +2,18 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_search_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/pages/vision_technician_register_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,16 +23,21 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     ref.listen(getVTProfileProvider, (previous, next) {
       if (next.hasError) {
         logger.d("Logged out from VisionTechnicianDashboardPage ");
         ref.read(initializationProvider).logout().then((value) {
-          Fluttertoast.showToast(msg: "You have been logged out");
+          Fluttertoast.showToast(msg: loc.vtLogoutMessage);
           Navigator.pushNamedAndRemoveUntil(
             context,
             LoginPage.routeName,
             (route) => false,
           );
+        }).catchError((e) {
+          logger.e(
+              "Apologies, we encountered a logout error in the mobile app. from VisionTechnicianDashboardPage : $e");
+          Fluttertoast.showToast(msg: loc.vtLogoutError);
         });
       }
     });
@@ -42,7 +47,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           },
           loading: () => const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             ),
           ),
           error: (error, stackTrace) {
@@ -52,6 +57,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
   }
 
   Widget _content(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       body: const VisionTechnicianHomePage(),
       bottomNavigationBar: BottomNavigationBar(
@@ -74,10 +80,10 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const PatientRegistrationMiniappPage(
-                    actionType: MiniAppActionType.REGISTER,
-                    displayName: "Register Patient",
-                  ),
+                  builder: (context) => const VisionTechnicianRegisterPage(
+                      // actionType: MiniAppActionType.REGISTER,
+                      // displayName: "Register Patient",
+                      ),
                 ),
               );
               break;
@@ -116,15 +122,14 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
-                "assets/icons/drawer_home.svg",
-                height: Responsive.isMobile(context) ? 20 : 30,
+                AppIcon.vtHomeIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.primary,
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            label: 'Dashboard',
+            label: loc.vtDashboard,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -132,15 +137,14 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
-                AppIcon.navProfile,
-                height: Responsive.isMobile(context) ? 20 : 30,
+                AppIcon.vtRegisterIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            label: 'Register Patient',
+            label: loc.vtRegisterPatient,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -156,7 +160,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: 'Triage',
+            label: loc.vtTriage,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -164,15 +168,14 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
-                AppIcon.drawerAppoinments,
-                height: Responsive.isMobile(context) ? 20 : 30,
+                AppIcon.vtAvailabilityIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            label: 'Mark My Availability',
+            label: loc.vtMarkMyAvailability,
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -180,15 +183,14 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
-                AppIcon.call,
-                height: Responsive.isMobile(context) ? 20 : 30,
+                AppIcon.vtIVRCallIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            label: 'IVR Call History',
+            label: loc.vtIVRCallHistory,
           ),
         ],
       ),

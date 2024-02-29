@@ -1,21 +1,24 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 Widget customTextField(
-  TextEditingController controller,
-  String label,
-) {
+    BuildContext context, TextEditingController controller, String label,
+    {String? Function(String?)? validationFunction}) {
+  final loc = context.loc!;
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     onChanged: (value) {
       controller.text = value;
     },
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "Please enter $label";
-      }
-      return null;
-    },
+    validator: validationFunction ??
+        (value) {
+          if (value == null || value.isEmpty) {
+            return "${loc.vgPleaseEnter} $label";
+          }
+          return null;
+        },
     decoration: InputDecoration(
       label: Padding(
         padding: const EdgeInsets.only(left: 8.0),
@@ -31,19 +34,23 @@ Widget customTextField(
   );
 }
 
-Widget customTextFieldIcon(
-    TextEditingController controller, String label, Widget icon) {
+Widget customTextFieldIcon(BuildContext context,
+    TextEditingController controller, String label, Widget icon,
+    {String? Function(String?)? validationFunction}) {
+  final loc = context.loc!;
   return TextFormField(
+    autovalidateMode: AutovalidateMode.onUserInteraction,
     controller: controller,
     onChanged: (value) {
       controller.text = value;
     },
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "Please enter $label";
-      }
-      return null;
-    },
+    validator: validationFunction ??
+        (value) {
+          if (value == null || value.isEmpty) {
+            return "${loc.vgPleaseEnter} $label";
+          }
+          return null;
+        },
     decoration: InputDecoration(
       label: Padding(
         padding: const EdgeInsets.only(left: 8.0),
@@ -64,10 +71,13 @@ Widget customTextFieldIcon(
 }
 
 Widget customTextFieldRows(
-    TextEditingController firstController,
-    TextEditingController secondController,
-    String firstLabel,
-    String secondLabel) {
+  BuildContext context,
+  TextEditingController firstController,
+  TextEditingController secondController,
+  String firstLabel,
+  String secondLabel,
+) {
+  final loc = context.loc!;
   return Row(
     children: [
       Expanded(
@@ -78,7 +88,7 @@ Widget customTextFieldRows(
           },
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter field";
+              return loc.vgPleaseEnterField;
             }
             return null;
           },
@@ -121,17 +131,22 @@ Widget customTextFieldRows(
   );
 }
 
-Widget customTextFieldDatePicker(
-    TextEditingController dateController, String label, BuildContext context) {
+Widget customTextFieldDatePicker({
+  required TextEditingController dateController,
+  required BuildContext context,
+  required String label,
+  required DateTime startDate,
+  required Null Function(dynamic value) onDateChanged,
+}) {
+  final loc = context.loc!;
   return Expanded(
     child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: dateController,
-      onChanged: (value) {
-        dateController.text = value;
-      },
+      readOnly: true,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Please enter $label";
+          return "${loc.vgPleaseEnter} $label";
         }
         return null;
       },
@@ -140,8 +155,11 @@ Widget customTextFieldDatePicker(
           padding: const EdgeInsets.only(left: 12.0),
           child: InkWell(
             onTap: () async {
-              var dateTime = await selectDate(context);
-              dateController.text = dateTime.toString();
+              var dateTime = await selectDate(
+                context,
+                startDate,
+              );
+              onDateChanged(dateTime);
             },
             child: const Icon(
               Icons.calendar_month_outlined,
@@ -165,25 +183,32 @@ Widget customTextFieldDatePicker(
 }
 
 Widget customTextFieldTimePicker(
-    TextEditingController timeController, String label, BuildContext context) {
+    BuildContext context,
+    TextEditingController timeController,
+    String label,
+    String? Function(String?)? customValidation) {
+  final loc = context.loc!;
   return Expanded(
     child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      readOnly: true,
       controller: timeController,
       onChanged: (value) {
         timeController.text = value;
       },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Please enter $label";
-        }
-        return null;
-      },
+      validator: customValidation ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              return "${loc.vgPleaseEnter} $label";
+            }
+            return null;
+          },
       decoration: InputDecoration(
         suffixIcon: Padding(
           padding: const EdgeInsets.only(left: 12.0),
           child: InkWell(
             onTap: () async {
-              var dateTime = await selectTime(context);
+              var dateTime = await selectTime(context, timeController.text);
               timeController.text = dateTime.toString();
             },
             child: const Icon(
@@ -208,11 +233,13 @@ Widget customTextFieldTimePicker(
 }
 
 Widget customTextFieldRowsAgeDob(
-    TextEditingController firstController,
-    TextEditingController secondController,
-    String firstLabel,
-    String secondLabel,
-    BuildContext context) {
+  BuildContext context,
+  TextEditingController firstController,
+  TextEditingController secondController,
+  String firstLabel,
+  String secondLabel,
+) {
+  final loc = context.loc!;
   return Row(
     children: [
       Expanded(
@@ -236,7 +263,7 @@ Widget customTextFieldRowsAgeDob(
         ),
       ),
       const SizedBox(width: 5),
-      const Text("Or"),
+      Text(loc.vgOr),
       const SizedBox(width: 5),
       Expanded(
         child: TextFormField(
@@ -249,7 +276,7 @@ Widget customTextFieldRowsAgeDob(
               padding: const EdgeInsets.only(left: 12.0),
               child: InkWell(
                 onTap: () async {
-                  var dateTime = await selectDate(context);
+                  var dateTime = await selectDate(context, DateTime(1900));
                   secondController.text = dateTime.toString();
                 },
                 child: const Icon(
@@ -276,11 +303,11 @@ Widget customTextFieldRowsAgeDob(
 }
 
 //date picker method that return date like 12 Nov 2021
-Future<String?> selectDate(BuildContext context) async {
+Future<String?> selectDate(BuildContext context, DateTime startDate) async {
   final DateTime? picked = await showDatePicker(
     context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(1900),
+    initialDate: startDate,
+    firstDate: startDate,
     lastDate: DateTime(2100),
   );
   if (picked != null) {
@@ -291,14 +318,30 @@ Future<String?> selectDate(BuildContext context) async {
   }
 }
 
-Future<String?> selectTime(BuildContext context) async {
+Future<String?> selectTime(BuildContext context, previousValue) async {
+  DateTime currentDateTime = DateTime.now();
+  DateTime dateTime = DateTime.now();
+
+  if (previousValue != "") {
+    var values = previousValue.split(":");
+    dateTime = DateTime(
+      currentDateTime.year, // year
+      currentDateTime.month, // month
+      currentDateTime.day, // day
+      int.parse(values[0]), // hour
+      int.parse(values[1].split(" ")[0]), // minute
+    );
+  }
+
   final TimeOfDay? picked = await showTimePicker(
     context: context,
-    initialTime: TimeOfDay.now(),
+    initialTime: previousValue == ""
+        ? TimeOfDay.now()
+        : TimeOfDay.fromDateTime(dateTime),
   );
   if (picked != null) {
-    return "${picked.hour}:${picked.minute} ${picked.period.name.toUpperCase()}";
+    return "${picked.hour}:${picked.minute < 10 ? '0${picked.minute}' : picked.minute} ${picked.period.name.toUpperCase()}";
   } else {
-    return null;
+    return previousValue;
   }
 }

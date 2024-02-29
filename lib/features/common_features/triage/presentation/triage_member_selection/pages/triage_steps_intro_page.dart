@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,7 @@ class TriageStepsIntroPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return PopScope(
       canPop: false,
       onPopInvoked: (value) {
@@ -31,14 +32,14 @@ class TriageStepsIntroPage extends ConsumerWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppSize.klradius),
               ),
-              title: const Text('Are you sure?'),
-              content: const Text('Do you want to exit the Test?'),
+              title: Text(loc.areYouSure),
+              content: Text(loc.triageExitConfirmation),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('No'),
+                  child: Text(loc.noButton),
                 ),
                 TextButton(
                   onPressed: () {
@@ -47,9 +48,9 @@ class TriageStepsIntroPage extends ConsumerWidget {
                     ref.invalidate(triageEyeScanProvider);
                     ref.invalidate(tumblingTestProvider);
                     ref.invalidate(triageProvider);
-                    ref.read(patientDashboardProvider).changeIndex(0);
+                    // ref.read(patientDashboardProvider).changeIndex(0);
                   },
-                  child: const Text('Yes'),
+                  child: Text(loc.yesButton),
                 ),
               ],
             );
@@ -58,9 +59,9 @@ class TriageStepsIntroPage extends ConsumerWidget {
       },
       child: Scaffold(
         backgroundColor: AppColor.scaffold,
-        appBar: const CustomAppbar(
-          leadingIcon: SizedBox(),
-          title: Text('Report Eye Problems'),
+        appBar: CustomAppbar(
+          leadingIcon: const SizedBox(),
+          title: Text(loc.triageReportEyeProblems),
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.symmetric(
@@ -75,7 +76,7 @@ class TriageStepsIntroPage extends ConsumerWidget {
                 ),
               );
             },
-            child: const Text('Proceed'),
+            child: Text(loc.proceedButton),
           ),
         ),
         body: SingleChildScrollView(
@@ -85,7 +86,7 @@ class TriageStepsIntroPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "How to report eye problems?",
+                  loc.triageHowToReport,
                   style: applyFiraSansFont(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -95,7 +96,7 @@ class TriageStepsIntroPage extends ConsumerWidget {
                   height: 20,
                 ),
                 Text(
-                  "If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\n\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.",
+                  loc.triageReportInstructions,
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,

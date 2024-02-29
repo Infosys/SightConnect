@@ -2,5 +2,5 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 
 abstract class VgEyeAssessmentRepository {
   Future<List<VisionGuardianPatientResponseModel>> getVgEyeAssessmentReports(
-      {required int practitionerId,required String category});
+      {required int practitionerId, required Map<String, dynamic> queryparams});
 }

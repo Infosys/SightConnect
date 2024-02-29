@@ -33,7 +33,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 var updateTriageEyeScanProvider = ChangeNotifierProvider(
   (ref) => UpdateTriageEyeScanProvider(
     TriageEyeType.RIGHT,
-    "99000001",
     ref.read(patientAssessmentAndTestProvider),
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
@@ -44,7 +43,7 @@ var updateTriageEyeScanProvider = ChangeNotifierProvider(
 
 class UpdateTriageEyeScanProvider with ChangeNotifier {
   TriageEyeType _currentEye;
-  final String _patientID;
+
   PatientAssessmentAndTestProviderNew patientAssessmentAndTestProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
@@ -57,7 +56,6 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
 
   UpdateTriageEyeScanProvider(
       this._currentEye,
-      this._patientID,
       this.patientAssessmentAndTestProvider,
       this._triageReportRepository,
       this._triageUrgencyRepository,
@@ -69,21 +67,21 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   XFile get rightEyeImage => _rightEyeImage!;
   XFile get bothEyeImage => _bothEyeImage!;
 
-  void setLeftEyeImage(XFile image) {
+  Future<void> setLeftEyeImage(XFile image) async {
     _leftEyeImage = image;
-    uploadImage(image, TriageEyeType.LEFT);
+    await uploadImage(image, TriageEyeType.LEFT);
     notifyListeners();
   }
 
-  void setRightEyeImage(XFile image) {
+  Future<void> setRightEyeImage(XFile image) async {
     _rightEyeImage = image;
-    uploadImage(image, TriageEyeType.RIGHT);
+    await uploadImage(image, TriageEyeType.RIGHT);
     notifyListeners();
   }
 
-  void setBothEyeImage(XFile image) {
+  Future<void> setBothEyeImage(XFile image) async {
     _bothEyeImage = image;
-    uploadImage(image, TriageEyeType.BOTH);
+    await uploadImage(image, TriageEyeType.BOTH);
     notifyListeners();
   }
 
@@ -127,10 +125,10 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     return key;
   }
 
-  String getUniqueFileName(String fileName) {
-    String uniqueKey = generateUniqueKey();
-    return "${_patientID}_$fileName-$uniqueKey";
-  }
+  // String getUniqueFileName(String fileName) {
+  //   String uniqueKey = generateUniqueKey();
+  //   return "${_patientID}_$fileName-$uniqueKey";
+  // }
 
   Future<TriageDetailedReportModel?> getTriageReportByReportId(
       int reportId) async {
@@ -303,7 +301,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
   String rightImageUrl = "";
   String bothImageUrl = "";
 
-  void uploadImage(XFile image, TriageEyeType currentEye) async {
+  Future<void> uploadImage(XFile image, TriageEyeType currentEye) async {
     try {
       final response = await _fileMsService.uploadImage(File(image.path));
       logger.d({"response": response});

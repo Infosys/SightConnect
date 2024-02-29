@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
@@ -36,8 +35,20 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _patientAssessmentUpdateDataProvider;
   List<TriageReportBriefEntity> _triageReportList = [];
   final List<TriageReportBriefEntity> _clinicalReportList = [];
-  List<TriageReportBriefEntity> _finalReportList = [];
+  final List<TriageReportBriefEntity> _finalReportList = [];
   final List<TriageReportBriefEntity> _selfTestReportList = [];
+  static const int pageSize = 10;
+  int _finalReportPage = 0;
+  int _clinicalReportPage = 0;
+  int _selfTestReportPage = 0;
+  bool _hasFinalReportMore = true;
+  bool _hasClinicalReportMore = true;
+  bool _hasSelfTestReportMore = true;
+
+  bool get hasFinalReportMore => _hasFinalReportMore;
+  bool get hasClinicalReportMore => _hasClinicalReportMore;
+  bool get hasSelfTestReportMore => _hasSelfTestReportMore;
+  int get clinicalReportPage => _clinicalReportPage;
 
   bool _isLoading = false;
   bool _isUpdateLoading = false;
@@ -53,7 +64,6 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     this._patientAssessmentUpdateDataProvider,
   ) {
     getPatients();
-    getTriageReportByPatientIdAndStatus();
   }
 
   TriageReportUserEntity? get selectedPatient => _selectedPatient;
@@ -69,10 +79,13 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
   List<TriageReportBriefEntity> get clinicalReportList => _clinicalReportList;
   List<TriageReportBriefEntity> get selfTestReportList => _selfTestReportList;
 
-  void setPatient(TriageReportUserEntity patient) {
-    _selectedPatient = patient;
-    notifyListeners();
-    getTriageReportByPatientIdAndStatus();
+  Future<void> refeshReports() async {
+    // _isFinalReportLoading = true;
+    // _finalReportList = [];
+
+    // notifyListeners();
+    // await getTriageReportByPatientIdAndStatus();
+    // return;
   }
 
   List<TriageReportUserEntity> getPatients() {
@@ -212,6 +225,7 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         },
       );
 
+      // ignore: use_build_context_synchronously
       return AssessmentDetailedReportMapper.toEntity(
         _selectedPatient!,
         triageReport as TriageDetailedReportModel,
@@ -268,7 +282,25 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     );
   }
 
+  void setPatient(TriageReportUserEntity patient) {
+    _selectedPatient = patient;
+    _finalReportList.clear();
+    _clinicalReportList.clear();
+    _selfTestReportList.clear();
+    _finalReportPage = 0;
+    _hasFinalReportMore = true;
+    _clinicalReportPage = 0;
+    _hasClinicalReportMore = true;
+    _selfTestReportPage = 0;
+    _hasSelfTestReportMore = true;
+    notifyListeners();
+    getTriageReportByPatientIdAndStatus();
+  }
+
   Future<void> getTriageReportByPatientIdAndStatus() async {
+    if (_isFinalReportLoading) {
+      return;
+    }
     _isFinalReportLoading = true;
     notifyListeners();
     final selectedPatientId = _selectedPatient?.id;
@@ -276,6 +308,8 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
         await _triageReportRepository.getTriageReportByPatientIdAndStatus(
       selectedPatientId!,
       DiagnosticReportStatus.FINAL,
+      _finalReportPage,
+      pageSize,
     );
 
     response.fold((failure) {
@@ -283,28 +317,46 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _isFinalReportLoading = false;
       notifyListeners();
     }, (triageAssessment) {
-      triageAssessment.sort((a, b) {
-        return b.issued!.compareTo(a.issued!);
-      });
+      if (triageAssessment.length < pageSize) {
+        _hasFinalReportMore = false;
+        notifyListeners();
+      }
+      _finalReportPage = _finalReportPage + 1;
+      triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
+      _finalReportList.addAll(_assessmentReportMapper(triageAssessment));
+
       _isFinalReportLoading = false;
       notifyListeners();
-      _finalReportList = _assessmentReportMapper(triageAssessment);
     });
   }
 
-  Future<List<TriageReportBriefEntity>> getTriageReportByEncounterId(
+  Future<void> getTriageReportByEncounterId(
     int encounterId,
     bool isPatient,
   ) async {
     if (isPatient) {
+      if (_isSelfTestReportLoading) {
+        return;
+      }
       _isSelfTestReportLoading = true;
       notifyListeners();
     } else {
+      if (_isClinicalReportLoading) {
+        return;
+      }
       _isClinicalReportLoading = true;
       notifyListeners();
     }
+
     final response = await _triageReportRepository.getTriageReportByEncounterId(
-        encounterId, DiagnosticReportStatus.FINAL);
+      encounterId,
+      DiagnosticReportStatus.FINAL,
+      isPatient ? _selfTestReportPage : _clinicalReportPage,
+      pageSize,
+      isPatient
+          ? "participant-role=PATIENT"
+          : "participant-role=VISION_TECHNICIAN&participant-role=VISION_GUARDIAN", // This is the filter parameter
+    );
 
     return response.fold((failure) {
       logger.d({"getTriageReportByEncounterId ": failure});
@@ -313,30 +365,46 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
       _isClinicalReportLoading = false;
       notifyListeners();
       throw failure;
-    }, (triageAssessment) {
+    }, (triageAssessment) async {
+      logger.d("Length: ${triageAssessment.length}");
       if (isPatient) {
-        final output = triageAssessment
-            .where((element) => element.performerRole == PerformerRole.PATIENT)
-            .toList();
+        if (triageAssessment.length < pageSize) {
+          _hasSelfTestReportMore = false;
+          notifyListeners();
+        }
+        _selfTestReportPage = _selfTestReportPage + 1;
+        // final output = triageAssessment
+        //     .where((element) => element.performerRole == PerformerRole.PATIENT)
+        //     .toList();
 
-        output.sort((a, b) {
-          return b.issued!.compareTo(a.issued!);
-        });
+        triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
         _isSelfTestReportLoading = false;
         _isClinicalReportLoading = false;
+        _selfTestReportList.addAll(_assessmentReportMapper(triageAssessment));
         notifyListeners();
-        return _assessmentReportMapper(output);
       } else {
-        final output = triageAssessment
-            .where((element) => element.performerRole != PerformerRole.PATIENT)
-            .toList();
-        output.sort((a, b) {
-          return b.issued!.compareTo(a.issued!);
-        });
+        if (triageAssessment.length < pageSize) {
+          _hasClinicalReportMore = false;
+          notifyListeners();
+        }
+        _clinicalReportPage = _clinicalReportPage + 1;
+        // final output = triageAssessment
+        //     .where((element) => element.performerRole != PerformerRole.PATIENT)
+        //     .toList();
+        // if (output.isEmpty && triageAssessment.isNotEmpty) {
+        //   await getTriageReportByEncounterId(encounterId, isPatient);
+        // }
+
+        triageAssessment.sort((a, b) => b.issued!.compareTo(a.issued!));
         _isSelfTestReportLoading = false;
         _isClinicalReportLoading = false;
+        _clinicalReportList.addAll(_assessmentReportMapper(triageAssessment));
         notifyListeners();
-        return _assessmentReportMapper(output);
+        logger.d({
+          "hasClinicalReportMore": _hasClinicalReportMore,
+          "length": triageAssessment.length,
+          "output": triageAssessment.length,
+        });
       }
     });
   }

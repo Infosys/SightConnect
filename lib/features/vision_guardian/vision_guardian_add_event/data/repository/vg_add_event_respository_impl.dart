@@ -3,6 +3,8 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/source/vg_add_event_remote_source.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
+
 var vgAddEventRepository = Provider(
     (ref) => VgAddEventRepositoryImpl(ref.read(vgAddEventRemoteSource)));
 
@@ -12,19 +14,16 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
   VgAddEventRepositoryImpl(this.remoteDataSource);
   @override
   Future<List<VisionGuardianEventModel>> getVGEvents({
-    required String actorIdentifier,
-    required String eventStatusFilter,
+    required Map<String, dynamic> queryData,
   }) async {
-    return await remoteDataSource.getVGEvents(
-      actorIdentifier: actorIdentifier,
-      eventStatusFilter: eventStatusFilter,
-    );
+    return await remoteDataSource.getVGEvents(queryData: queryData);
   }
 
   @override
   Future postVGEvents(
       {required VisionGuardianEventModel vgEventModel,
       required Map<String, dynamic> actor}) async {
+    logger.d("inside add event impl");
     return await remoteDataSource.postVGEvents(
         vgEventModel: vgEventModel, actor: actor);
   }
@@ -64,13 +63,13 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
   }
 
   @override
-  Future getTriageReport(
-      {required int campaignEventId, required List<int> performerId}) {
-    return remoteDataSource.getTriageReport(
-        campaignEventId: campaignEventId, performerId: performerId);
+  Future getTriageReport({required Map<String, dynamic> queryData}) {
+    return remoteDataSource.getTriageReport(queryData: queryData);
   }
 
-  Future getEventPatientList({required String patientQueryData}) async {
+  @override
+  Future getEventPatientList(
+      {required Map<String, dynamic> patientQueryData}) async {
     return await remoteDataSource.getEventPatientList(
         patientQueryData: patientQueryData);
   }

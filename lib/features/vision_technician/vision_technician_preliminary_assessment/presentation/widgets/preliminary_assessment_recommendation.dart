@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class _PreliminaryAssessmentRecommendationState
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -31,7 +33,7 @@ class _PreliminaryAssessmentRecommendationState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recommendation",
+            loc.vtRecommendation,
             style: applyFiraSansFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -39,7 +41,7 @@ class _PreliminaryAssessmentRecommendationState
           ),
           const SizedBox(height: AppSize.ksheight),
           ListTile(
-            title: const Text('Visit Primary Center'),
+            title: Text(loc.vtVisitPrimaryCenter),
             leading: Radio(
               value: 1,
               groupValue: _selectedOption,
@@ -53,7 +55,7 @@ class _PreliminaryAssessmentRecommendationState
             ),
           ),
           ListTile(
-            title: const Text('Visit Secondary Center'),
+            title: Text(loc.vtVisitSecondaryCenter),
             leading: Radio(
               value: 2,
               groupValue: _selectedOption,
@@ -67,7 +69,7 @@ class _PreliminaryAssessmentRecommendationState
             ),
           ),
           ListTile(
-            title: const Text('Visit Tertiary Center'),
+            title: Text(loc.vtVisitTertiaryCenter),
             leading: Radio(
               value: 3,
               groupValue: _selectedOption,
@@ -81,7 +83,7 @@ class _PreliminaryAssessmentRecommendationState
             ),
           ),
           ListTile(
-            title: const Text('Visit Center of Excellence'),
+            title: Text(loc.vtVisitCenterOfExcellence),
             leading: Radio(
               value: 4,
               groupValue: _selectedOption,

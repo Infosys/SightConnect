@@ -10,12 +10,11 @@ var keycloakDioProvider = Provider(
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
       ),
     );
     dio.interceptors.addAll(
       [
-        DioCertificateInterceptor(dio),
+        // DioCertificateInterceptor(dio),
       ],
     );
     return dio;
@@ -41,11 +40,10 @@ var chatbotDioProvider = Provider(
 
 var dioProvider = Provider(
   (ref) {
-    final lang = ref.watch(globalLanguageProvider).currentLocale.languageCode;
+    final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
         headers: {
           "X-Accept-Language": lang,
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
@@ -56,7 +54,7 @@ var dioProvider = Provider(
     dio.interceptors.addAll(
       [
         DioTokenInterceptor(ref, dio),
-        DioCertificateInterceptor(dio),
+        // DioCertificateInterceptor(dio),
       ],
     );
     return dio;

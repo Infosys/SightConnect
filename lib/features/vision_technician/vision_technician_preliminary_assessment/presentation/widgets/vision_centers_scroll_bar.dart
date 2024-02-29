@@ -1,19 +1,87 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
+import 'package:eye_care_for_all/features/patient/patient_home/presentation/providers/near_by_vision_center_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:location/location.dart' as location;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class VisionCentersScrollBar extends ConsumerWidget {
+class VisionCentersScrollBar extends ConsumerStatefulWidget {
   const VisionCentersScrollBar({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<VisionCentersScrollBar> createState() =>
+      _VisionCentersScrollBarState();
+}
+
+class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(nearByVisionCenterProvider.notifier).init();
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        if (ref.read(nearByVisionCenterProvider).shouldForceReload) {
+          ref.read(nearByVisionCenterProvider.notifier).reload();
+          break;
+        }
+      case AppLifecycleState.paused:
+        if (ref.read(nearByVisionCenterProvider).permissionStatus !=
+            location.PermissionStatus.granted) {
+          ref.read(nearByVisionCenterProvider.notifier).enableForceReload();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final firstcontroller = ScrollController();
+    final NearByVisionCenterState viewState =
+        ref.watch(nearByVisionCenterProvider);
+    final loc = context.loc!;
+
+    if (viewState.isLoading) {
+      const Center(child: CircularProgressIndicator.adaptive());
+    }
+
+    if (viewState.errorMessage != null) {
+      return VisionCenterError(
+        viewState: viewState,
+        ref: ref,
+      );
+    }
+
+    if (viewState.visionCenters == null) {
+      return Text(loc.vtNoVisionCentersFound);
+    }
 
     return Container(
       width: Responsive.isMobile(context)
@@ -29,74 +97,116 @@ class VisionCentersScrollBar extends ConsumerWidget {
         border: Border.all(color: AppColor.lightGrey),
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
-      child: ref.watch(simpleNearByVisionCenterProvider).when(
-            data: (data) {
-              return Scrollbar(
-                thumbVisibility: true,
-                controller: firstcontroller,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  controller: firstcontroller,
-                  itemCount: data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final isSelected = ref
-                        .watch(preliminaryAssessmentHelperProvider)
-                        .isSelectVisionCenter(data[index]);
+      child: Scrollbar(
+        thumbVisibility: true,
+        controller: firstcontroller,
+        child: ListView.builder(
+          shrinkWrap: true,
+          controller: firstcontroller,
+          itemCount: viewState.visionCenters!.length,
+          itemBuilder: (BuildContext context, int index) {
+            final data = viewState.visionCenters!;
+            final isSelected = ref
+                .watch(preliminaryAssessmentHelperProvider)
+                .isSelectVisionCenter(data[index]);
 
-                    return Padding(
-                      padding: const EdgeInsets.all(AppSize.kspadding),
-                      child: InkWell(
-                        onTap: () {
-                          logger.d("selected vision center ${data[index]}");
+            return Padding(
+              padding: const EdgeInsets.all(AppSize.kspadding),
+              child: InkWell(
+                onTap: () {
+                  logger.d("selected vision center ${data[index]}");
 
-                          ref
-                              .read(preliminaryAssessmentHelperProvider)
-                              .setSelectedVisionCenter(data[index]);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color:
-                                  isSelected ? AppColor.green : AppColor.blue,
-                              width: 2,
-                            ),
-                            borderRadius:
-                                BorderRadius.circular(AppSize.ksradius),
-                          ),
-                          padding: const EdgeInsets.all(AppSize.kspadding + 3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                data[index].facilityInformation?.facilityName ??
-                                    "",
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Icon(
-                                Icons.check_circle,
-                                size: 20,
-                                color:
-                                    isSelected ? AppColor.green : AppColor.grey,
-                              )
-                            ],
-                          ),
+                  ref
+                      .read(preliminaryAssessmentHelperProvider)
+                      .setSelectedVisionCenter(data[index]);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: isSelected ? AppColor.green : AppColor.blue,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  ),
+                  padding: const EdgeInsets.all(AppSize.kspadding + 3),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        data[index].facilityInformation?.facilityName ?? "",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    );
-                  },
+                      Icon(
+                        Icons.check_circle,
+                        size: 20,
+                        color: isSelected ? AppColor.green : AppColor.grey,
+                      )
+                    ],
+                  ),
                 ),
-              );
-            },
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            error: (error, stackTrace) => const Center(
-              child: SizedBox(child: Text("Some Error Occurred")),
-            ),
-          ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class VisionCenterError extends StatelessWidget {
+  const VisionCenterError({
+    super.key,
+    required this.viewState,
+    this.ref,
+  });
+  final NearByVisionCenterState viewState;
+  // ignore: prefer_typing_uninitialized_variables
+  final ref;
+  @override
+  Widget build(BuildContext context) {
+    final loc = context.loc!;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SvgPicture.asset(
+          "assets/icons/location_empty_state.svg",
+          height: 32,
+          width: 32,
+        ),
+        const SizedBox(height: AppSize.ksheight),
+        AutoSizeText(
+          viewState.errorMessage.toString().replaceAll("Exception: ", ""),
+          textAlign: TextAlign.center,
+          maxLines: 2,
+        ),
+        Builder(builder: (context) {
+          if (viewState.permissionStatus == location.PermissionStatus.denied) {
+            return Flexible(
+              child: TextButton(
+                onPressed: () {
+                  ref.read(nearByVisionCenterProvider.notifier).init();
+                },
+                child: Text(loc.vtRequestLocationPermission),
+              ),
+            );
+          } else if (viewState.permissionStatus ==
+              location.PermissionStatus.deniedForever) {
+            return Flexible(
+              child: TextButton(
+                onPressed: () {
+                  openAppSettings();
+                },
+                child: Text(loc.vtAppSettings),
+              ),
+            );
+          }
+
+          return const SizedBox();
+        }),
+      ],
     );
   }
 }

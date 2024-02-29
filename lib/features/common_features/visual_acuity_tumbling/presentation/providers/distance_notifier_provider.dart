@@ -6,7 +6,7 @@ var distanceNotifierProvider =
     ChangeNotifierProvider((ref) => DistanceNotifier());
 
 class DistanceNotifier extends ChangeNotifier {
-  int _currentDistance = 40;
+  int _currentDistance = 0;
   final int _maxDistance = 45;
   final int _minDistance = 35;
   final int _doctorRecommendedDistance = 40;
@@ -25,7 +25,10 @@ class DistanceNotifier extends ChangeNotifier {
   }
 
   bool isDistanceValid() {
-    return _currentDistance <= _maxDistance && _currentDistance >= _minDistance;
+    final value =
+        _currentDistance <= _maxDistance && _currentDistance >= _minDistance;
+
+    return value;
   }
 
   String getDistanceText(BuildContext context) {

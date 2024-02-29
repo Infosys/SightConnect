@@ -8,6 +8,11 @@ abstract class TriageUrgencyRepository {
     double visualAcuityUrgency,
     double eyeScanUrgency,
   );
+  TriageUrgency maxTotalUrgency(
+    double quessionnaireUrgency,
+    double visualAcuityUrgency,
+    double eyeScanUrgency,
+  );
   double questionnaireUrgency(
     List<PostTriageQuestionModel> questionnaireResponse,
   );

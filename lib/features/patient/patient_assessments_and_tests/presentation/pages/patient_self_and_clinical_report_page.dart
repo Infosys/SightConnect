@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/patient_clinical_test_reports.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/patient_self_test_reports.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,10 @@ class PatientSelfAndClinicalReportPage extends StatelessWidget {
   final int encounterId;
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Patient Assessment and Test"),
+      appBar: CustomAppbar(
+        title: Text(loc.patientAssessmentAndTest),
       ),
       body: DefaultTabController(
         length: 2,
@@ -32,12 +34,12 @@ class PatientSelfAndClinicalReportPage extends StatelessWidget {
                   color: AppColor.grey,
                   fontSize: 16,
                 ),
-                tabs: const [
+                tabs: [
                   Tab(
-                    text: "Self Test Report",
+                    text: loc.patientSelfTestReport,
                   ),
                   Tab(
-                    text: "Clinical Report",
+                    text: loc.patientClinicalReport,
                   ),
                 ],
               ),

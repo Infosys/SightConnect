@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,7 @@ class AssessmentReportProfile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     VTPatientDto? patient =
         ref.read(visionTechnicianSearchProvider).patientDetails;
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
@@ -45,7 +46,7 @@ class AssessmentReportProfile extends ConsumerWidget {
                       color: AppColor.white),
                 ),
                 Text(
-                  "Assessment ID: EA $assessmentId",
+                  "${loc.vtAssessmentIDEA} $assessmentId",
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -58,7 +59,7 @@ class AssessmentReportProfile extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "PID: OP ${patient?.id ?? ""}",
+                  "${loc.vtPid} ${patient?.id ?? ""}",
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,

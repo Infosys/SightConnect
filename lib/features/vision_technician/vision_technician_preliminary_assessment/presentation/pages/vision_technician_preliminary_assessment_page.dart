@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/eye_scan_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
@@ -16,7 +15,6 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
@@ -48,14 +46,15 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var selectedOption = useState("Yes");
+    final loc = context.loc!;
+    var selectedOption = useState(loc.yesButton);
 
     if (patientDetails == null) {
       return Scaffold(
         appBar: AppBar(),
         body: Center(
           child: Text(
-            "No patient found",
+            loc.vtNoPatientFound,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.grey,
@@ -81,7 +80,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(AppSize.kmpadding),
         child: isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator.adaptive())
             : ElevatedButton(
                 onPressed: canSubmit
                     ? () async {
@@ -95,8 +94,8 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         response.fold(
                           (failure) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Some Error Occurred"),
+                              SnackBar(
+                                content: Text(failure.errorMessage),
                               ),
                             );
                           },
@@ -123,7 +122,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                   ),
                 ),
                 child: Text(
-                  "Submit",
+                  loc.vtSubmit,
                   style: applyRobotoFont(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -137,16 +136,12 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         onBackPress: () {
           ref.invalidate(vtTriageProvider);
           ref.invalidate(preliminaryAssessmentHelperProvider);
-          Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VisionTechnicianHomePage(),
-            ),
-          );
         },
         centerTitle: false,
-        title: const Text('Preliminary Assessment'),
+        title: Text(
+          loc.vtPreliminaryAssessment,
+          style: applyFiraSansFont(fontWeight: FontWeight.w500),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -159,7 +154,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
               const SizedBox(height: AppSize.klheight),
               PreliminaryAssessmentIvrCall(
                 onSelectedOptionChanged: (value) {
-                  if (value == "Yes") {
+                  if (value == loc.yesButton) {
                     refRead.toggleIvrCall(true);
                   } else {
                     refRead.toggleIvrCall(false);
@@ -170,7 +165,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
               ),
               const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentQuestions(),
-              if (selectedOption.value == "No")
+              if (selectedOption.value == loc.noButton)
                 const Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -203,6 +198,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
   final VTPatientDto? patient;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     if (patient == null) {
       return Container();
     }
@@ -257,7 +253,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Age",
+                loc.vtAge,
                 style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: AppSize.ksheight),
@@ -276,7 +272,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Gender",
+                loc.vtGender,
                 style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: AppSize.ksheight),
@@ -296,7 +292,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Address",
+                  loc.vtAddress,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),

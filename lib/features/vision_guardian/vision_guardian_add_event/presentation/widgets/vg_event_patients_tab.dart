@@ -7,14 +7,15 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_report_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class EventPatientsTab extends ConsumerWidget {
   final String patientsType;
@@ -24,62 +25,37 @@ class EventPatientsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (patientsType == "default") {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ref.watch(getPatientTriageReportsProvider).when(
-          data: (triageReportDetails) {
-            if (triageReportDetails.isEmpty) {
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  VisionGuardianEmptyResultCard(
-                    type: "Patient",
-                  ),
-                ],
-              );
-            }
+    final model = ref.watch(addEventDetailsProvider);
+    var response = model.listOfEventPatients;
+    var loading = model.getisLoading;
+    var error = model.error;
 
-            return vgPatientTabs(context, triageReportDetails, ref);
-          },
-          error: (error, stackTrace) {
-            return const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                VisionGuardianEmptyResultCard(
-                  type: "Patient",
-                ),
-              ],
-            );
-          },
-          loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+    final loc = context.loc!;
+
+    if (loading == false && error) {
+      Fluttertoast.showToast(msg: loc.vgServerError);
+    }
+
+    if (loading == false && response.isEmpty) {
+      return SizedBox(
+        width: Responsive.isMobile(context)
+            ? AppSize.width(context) * 0.9
+            : AppSize.width(context) * 0.95,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            VisionGuardianEmptyResultCard(type: loc.vgPatient),
+          ],
         ),
       );
-    } else {
-      var response = ref.watch(addEventDetailsProvider).listOfEventPatients;
-      if (response.isEmpty) {
-        return SizedBox(
-          width: Responsive.isMobile(context)
-              ? AppSize.width(context) * 0.9
-              : AppSize.width(context) * 0.95,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              VisionGuardianEmptyResultCard(type: "Event"),
-            ],
-          ),
-        );
-      }
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: vgPatientTabs(context, response, ref),
-      );
     }
+
+    return LoadingOverlay(
+      ignoreOverlayColor: model.initialValue,
+      isLoading: loading,
+      child: vgPatientTabs(context, response, ref, patientsType),
+    );
   }
 }
 
@@ -93,16 +69,38 @@ int calculateAge(DateTime dateOfBirth) {
   return age;
 }
 
-Widget vgPatientTabs(BuildContext context,
-    List<VisionGuardianPatientResponseModel> response, WidgetRef ref) {
+Widget vgPatientTabs(
+    BuildContext context,
+    List<VisionGuardianPatientResponseModel> response,
+    WidgetRef ref,
+    String patientsType) {
+  final readModel = ref.read(addEventDetailsProvider);
+  final loc = context.loc!;
   return ListView.separated(
+    controller: ref.watch(addEventDetailsProvider).eventPatientController,
     shrinkWrap: true,
     scrollDirection: Axis.vertical,
-    itemCount: response.length,
+    itemCount:
+        (ref.watch(addEventDetailsProvider).newEventPatientList.length == 10 &&
+                patientsType != "search")
+            ? response.length + 1
+            : response.length,
     itemBuilder: (context, index) {
+      if (index == response.length) {
+        return const Padding(
+          padding: EdgeInsets.all(AppSize.klpadding),
+          child: CircularProgressIndicator.adaptive(),
+        );
+      }
       var data = response[index];
+
+/*       String formattedDate = DateFormat("dd MMM yy")
+          .format(DateTime.parse(data.encounterStartDate!));
+      String formattedTime = DateFormat("hh:mm a")
+          .format(DateTime.parse(data.encounterStartDate!).toLocal()); */
       return GestureDetector(
         onTap: () async {
+          readModel.loadingToggle();
           try {
             var navigator = Navigator.of(context);
             TriageReportUserEntity profile = TriageReportUserEntity(
@@ -125,9 +123,10 @@ Widget vgPatientTabs(BuildContext context,
             logger.e(e);
             Fluttertoast.showToast(msg: e.toString());
           }
+          readModel.loadingToggle();
         },
         child: Container(
-          padding: const EdgeInsets.all(AppSize.kspadding),
+          padding: const EdgeInsets.all(AppSize.kmpadding),
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColor.white,
@@ -139,7 +138,7 @@ Widget vgPatientTabs(BuildContext context,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(AppSize.ksradius),
             child: Container(
-              padding: const EdgeInsets.all(AppSize.kspadding),
+              // padding: const EdgeInsets.all(AppSize.kspadding),
               width: Responsive.isMobile(context)
                   ? AppSize.width(context) * 0.9
                   : AppSize.width(context) * 0.6,
@@ -165,21 +164,30 @@ Widget vgPatientTabs(BuildContext context,
                             : AppSize.width(context) * 0.6,
                         child: Row(
                           children: [
-                            Text(
-                              "${data.name ?? ""} - PD ${data.id}",
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.black,
+                            SizedBox(
+                              width: AppSize.width(context) * 0.5,
+                              child: Text(
+                                "${data.name ?? ""} - PD ${data.id}",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.black,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             const Spacer(),
-                            Text(
-                              data.category ?? "",
-                              style: applyRobotoFont(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.red,
+                            SizedBox(
+                              child: Text(
+                                data.category ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.red,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
@@ -192,33 +200,37 @@ Widget vgPatientTabs(BuildContext context,
                             : AppSize.width(context) * 0.6,
                         child: Row(
                           children: [
-                            Text(
-                              '${data.gender ?? ""}, ${data.dayOfBirth != null && data.monthOfBirth != null && data.dayOfBirth != null ? calculateAge(DateTime(
-                                  int.parse(data.yearOfBirth ?? ""),
-                                  int.parse(data.monthOfBirth ?? ""),
-                                  int.parse(data.dayOfBirth ?? ""),
-                                )) : ""} yrs',
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.grey,
+                            SizedBox(
+                              width: AppSize.width(context) * 0.5,
+                              child: Text(
+                                '${data.gender ?? ""}, ${data.dayOfBirth != null && data.monthOfBirth != null && data.dayOfBirth != null ? calculateAge(DateTime(
+                                    int.parse(data.yearOfBirth ?? ""),
+                                    int.parse(data.monthOfBirth ?? ""),
+                                    int.parse(data.dayOfBirth ?? ""),
+                                  )) : ""} ${loc.vgSlideAge}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.grey,
+                                ),
                               ),
                             ),
                             const Spacer(),
-                            Text(
+/*                             Text(
                               data.encounterStartDate != null
-                                  ? DateFormat("dd MMM yy")
-                                      .format(DateTime.parse(
-                                          data.encounterStartDate!))
-                                      .toString()
+                                  ? formattedDate
                                   : "",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 color: AppColor.grey,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            const SizedBox(height: AppSize.ksheight / 3),
+                            const SizedBox(height: AppSize.ksheight / 3), */
                           ],
                         ),
                       ),
@@ -229,26 +241,32 @@ Widget vgPatientTabs(BuildContext context,
                             : AppSize.width(context) * 0.6,
                         child: Row(
                           children: [
-                            Text(
-                              "Assessment ID: AT ${data.encounterId.toString()}",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.grey,
+                            SizedBox(
+                              width: AppSize.width(context) * 0.5,
+                              child: Text(
+                                "${loc.vgReportId}: ${data.diagnosticReportId.toString()}",
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.grey,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             const Spacer(),
-                            Text(
+                            /*  Text(
                               data.encounterStartDate != null
-                                  ? DateFormat("hh:mm a").format(
-                                      DateTime.parse(data.encounterStartDate!))
+                                  ? formattedTime
                                   : "",
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 color: AppColor.grey,
                                 fontWeight: FontWeight.w500,
                               ),
-                            ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ), */
                             const SizedBox(height: AppSize.ksheight / 3),
                           ],
                         ),

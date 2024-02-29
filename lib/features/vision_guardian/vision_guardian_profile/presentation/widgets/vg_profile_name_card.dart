@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -13,6 +14,7 @@ class VgProfileNameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       width: double.infinity,
@@ -37,7 +39,7 @@ class VgProfileNameCard extends StatelessWidget {
                     )
                   : AppNameAvatar(
                       name: profileData.personalInformation?.firstName ?? "",
-                      color: AppColor.blue,
+                      color: const Color(0xffD4C1FF),
                       radius: 45,
                       fontSize: 30,
                     ),
@@ -49,7 +51,7 @@ class VgProfileNameCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${profileData.personalInformation?.firstName ?? ""} ${profileData.personalInformation?.lastName ?? ""}",
+                    "${profileData.personalInformation?.firstName!.capitalize() ?? ""} ${profileData.personalInformation?.lastName!.capitalize() ?? ""}",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -70,7 +72,7 @@ class VgProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Gender",
+                            loc.profilePageGender,
                             style: applyRobotoFont(
                                 fontSize: 10, color: AppColor.darkGrey),
                           ),
@@ -90,7 +92,7 @@ class VgProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Mobile",
+                            loc.profilePageMobile,
                             style: applyRobotoFont(
                                 fontSize: 10, color: AppColor.darkGrey),
                           ),

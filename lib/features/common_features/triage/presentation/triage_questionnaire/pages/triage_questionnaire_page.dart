@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -7,6 +8,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/triage_text_type_question.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -90,8 +92,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   TextScalePopupMenu.show(context, ref);
                 },
                 icon: SvgPicture.asset(
-                  "assets/drawer_icons/accessibility.svg",
-                  height: 22,
+                  "assets/icons/accessability.svg",
+                  height: 32,
                 ),
               ),
             ],
@@ -104,8 +106,6 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: model.questionnaireSections.length,
                   itemBuilder: (context, index) {
-                    logger.d(
-                        "${model.questionnaireSections.length}, is the length of the questions");
                     var question = model.questionnaireSections[index];
                     var isLastQuestion =
                         (model.questionnaireSections.length - 1 == index);
@@ -161,6 +161,9 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                         TextButton(
                                           onPressed: () async {
                                             if (index == 0) {
+                                              ref
+                                                  .read(accessibilityProvider)
+                                                  .resetBrightness();
                                               Navigator.of(context).pop();
                                             }
                                             int groupSectionCount = 0;
@@ -181,6 +184,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                                 model.questionnaireSections
                                                     .length) {
                                               model.saveQuestionaireResponse();
+
                                               await model
                                                   .saveQuestionaireResponseToDB();
                                               ref
@@ -191,33 +195,43 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                               pageController.animateToPage(
                                                 index + 1,
                                                 duration: const Duration(
-                                                    milliseconds: 80),
+                                                  milliseconds: 80,
+                                                ),
                                                 curve: Curves.easeIn,
                                               );
                                             }
                                           },
-                                          child: Text(
-                                            loc.noButton,
+                                          child: AutoSizeText(
+                                            question.answerOption?.first.answer
+                                                    ?.answerDisplayString ??
+                                                "",
                                             style: applyRobotoFont(
                                               fontSize: 14,
                                               color: AppColor.primary,
                                             ),
                                           ),
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            pageController.animateToPage(
-                                              index + 1,
-                                              duration: const Duration(
-                                                  milliseconds: 80),
-                                              curve: Curves.easeIn,
-                                            );
-                                          },
-                                          child: Text(
-                                            loc.yesButton,
-                                            style: applyRobotoFont(
+                                        Flexible(
+                                          child: TextButton(
+                                            onPressed: () {
+                                              pageController.animateToPage(
+                                                index + 1,
+                                                duration: const Duration(
+                                                  milliseconds: 80,
+                                                ),
+                                                curve: Curves.easeIn,
+                                              );
+                                            },
+                                            child: AutoSizeText(
+                                              question.answerOption?.last.answer
+                                                      ?.answerDisplayString ??
+                                                  "",
+                                              textAlign: TextAlign.center,
+                                              style: applyRobotoFont(
                                                 fontSize: 14,
-                                                color: AppColor.primary),
+                                                color: AppColor.primary,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -336,6 +350,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           }
                           if (isLastQuestion) {
                             model.saveQuestionaireResponse();
+
                             await model.saveQuestionaireResponseToDB();
                             ref.read(triageStepperProvider).goToNextStep();
                           } else {
@@ -366,6 +381,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             onPressed: () async {
                               if (isLastQuestion) {
                                 model.saveQuestionaireResponse();
+
                                 await model.saveQuestionaireResponseToDB();
                                 ref.read(triageStepperProvider).goToNextStep();
                               } else {

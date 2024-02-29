@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -108,21 +107,14 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
                     activeIndex.value == 6 ? AppColor.primary : AppColor.white,
               ),
               onPressed: () async {
-                var cameras = await availableCameras();
-                if (cameras.isEmpty) {
-                  return;
-                }
-                if (context.mounted) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (context) => UpdateTriageEyeCapturingPage(
-                        cameras: cameras,
-                        diagnosticReportId: diagnosticReportId,
-                      ),
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => UpdateTriageEyeCapturingPage(
+                      diagnosticReportId: diagnosticReportId,
                     ),
-                  );
-                }
+                  ),
+                );
               },
               child: Text(
                 activeIndex.value == 6

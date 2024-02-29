@@ -1,12 +1,14 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_member_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 
-import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -25,7 +27,7 @@ class TeammatesDataCards extends HookConsumerWidget {
     var nameController = useTextEditingController();
     var mobileController = useTextEditingController();
     var isEdit = useState<bool>(true);
-
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.all(AppSize.kspadding / 4),
       child: Container(
@@ -37,161 +39,164 @@ class TeammatesDataCards extends HookConsumerWidget {
           ),
         ),
         padding: const EdgeInsets.all(AppSize.kspadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  child: data["profilePhoto"] == ""
-                      ? AppNameAvatar(
-                          name: data["personalInformation"]["lastName"] +
-                                  " " +
-                                  data["personalInformation"]["firstName"] ??
-                              "",
-                          color: AppColor.blue,
-                          fontSize: 16,
-                        )
-                      : AppNetworkImage(imageUrl: data["profilePhoto"]),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Transform.translate(
-                  offset: const Offset(0, -5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: AppSize.width(context) * 0.7,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                nameController.value.text == ''
-                                    ? data["personalInformation"]["firstName"] +
-                                        " " +
-                                        data["personalInformation"]["lastName"]
-                                    : nameController.value.text,
-                                style: applyFiraSansFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.black,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Transform.translate(
-                              offset: const Offset(0, 10),
-                              child: InkWell(
-                                onTap: () {
-                                  ref
-                                      .read(visionGuadianAddMemberProvider)
-                                      .deleteMember(data["id"].toString());
-
-                                  if (data["id"] ==
-                                      ref.read(globalVGProvider).userId) {
-                                    ref
-                                        .read(addEventDetailsProvider)
-                                        .filterListEvents(-1, "ALL");
-                                    if (type == "Search") {
-                                      Navigator.pop(context);
-                                    }
-                                    Navigator.pop(context);
-                                  } else {
-                                    if (type == "Search") {
-                                      ref
-                                          .read(visionGuadianAddMemberProvider)
-                                          .setAdd();
-                                      Navigator.pop(context);
-                                    }
-                                  }
-                                  showToastMessage(
-                                      "TeamMate Deleted Succesfully",
-                                      context,
-                                      0);
-                                },
-                                child: const Icon(
-                                  Icons.delete_outline,
-                                  color: AppColor.red,
-                                  size: 30,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: AppSize.ksheight,
-                      ),
-                      Text(
-                        mobileController.value.text == ''
-                            ? data["officialMobile"]
-                            : mobileController.value.text,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            Visibility(
-              visible: !isEdit.value,
-              child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: TextField(
-                      controller: nameController,
-                      onChanged: (value) {
-                        nameController.text = value;
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Name",
-                        hintStyle: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    child: data["profilePhoto"] == null ||
+                            data["profilePhoto"] == ""
+                        ? AppNameAvatar(
+                            name: data["firstName"] + " " + data["lastName"] ??
+                                "",
+                            color: AppColor.blue,
+                            fontSize: 16,
+                          )
+                        : AppNetworkImage(imageUrl: data["profilePhoto"]),
                   ),
                   const SizedBox(
-                    height: AppSize.klheight,
+                    width: AppSize.kswidth,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: TextField(
-                      onChanged: (value) {
-                        mobileController.text = value;
-                      },
-                      controller: mobileController,
-                      decoration: InputDecoration(
-                        hintText: "Phone Number",
-                        hintStyle: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.grey,
+                  Transform.translate(
+                    offset: const Offset(0, -5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: Responsive.isMobile(context)
+                              ? AppSize.width(context) * 0.7
+                              : AppSize.width(context) * 0.85,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  nameController.value.text == ''
+                                      ? data["firstName"] +
+                                          " " +
+                                          data["lastName"]
+                                      : nameController.value.text,
+                                  style: applyFiraSansFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.black,
+                                  ),
+                                ),
+                              ),
+                              Transform.translate(
+                                offset: const Offset(0, 10),
+                                child: InkWell(
+                                  onTap: () async {
+                                    var userId =
+                                        ref.read(globalVGProvider).userId;
+                                    var navigator = Navigator.of(context);
+                                    var model =
+                                        ref.read(addEventDetailsProvider);
+                                    await ref
+                                        .read(visionGuadianAddMemberProvider)
+                                        .deleteMember(data["id"].toString())
+                                        .then((value) {
+                                      if (data["id"] == userId) {
+                                        model.filterListEvents(-1, "ALL");
+                                        if (type == "Search") {
+                                          navigator.pop();
+                                        }
+                                        navigator.pop();
+                                      } else {
+                                        if (type == "Search") {
+                                          navigator.pop();
+                                        }
+                                      }
+                                      Fluttertoast.showToast(
+                                        msg: loc.vgTeamMateDeletedSuccessfully,
+                                      );
+                                    }).onError((error, stackTrace) {
+                                      Fluttertoast.showToast(
+                                        msg: loc.vgSomethingWentWrong,
+                                      );
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.delete_outline,
+                                    color: AppColor.red,
+                                    size: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                        const SizedBox(
+                          height: AppSize.ksheight,
+                        ),
+                        Text(
+                          mobileController.value.text == ''
+                              ? data["officialMobile"]
+                              : mobileController.value.text,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.black,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.klheight,
-                  ),
+                  )
                 ],
               ),
-            ),
-          ],
+              Visibility(
+                visible: !isEdit.value,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: TextField(
+                        controller: nameController,
+                        onChanged: (value) {
+                          nameController.text = value;
+                        },
+                        decoration: InputDecoration(
+                          hintText: loc.vgName,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.klheight,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: TextField(
+                        onChanged: (value) {
+                          mobileController.text = value;
+                        },
+                        controller: mobileController,
+                        decoration: InputDecoration(
+                          hintText: loc.vgPhoneNumber,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.klheight,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -15,10 +15,10 @@ class PatientNotificationPage extends ConsumerWidget {
     return Scaffold(
       appBar: CustomAppbar(
         title: Text(loc.notificationsTitle),
-        actions: [],
+        actions: const [],
       ),
       body: notification.isEmpty
-          ?  Center(
+          ? Center(
               child: Text(loc.notificationsNotAvailable),
             )
           : ListView.builder(

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -48,6 +49,8 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       });
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
       throw ServerFailure(errorMessage: "Error signing in : $e ");
     }
   }
@@ -72,7 +75,8 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       return KeycloakResponse.fromJson(keycloakResponseMap.data!);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-
+      rethrow;
+    } catch (e) {
       throw ServerFailure(errorMessage: "Refresh token expired : $e");
     }
   }
@@ -94,7 +98,32 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       return response.data!['expires_in'];
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
+      try {
+        logger.d("Trying with Dev URl");
+        ApiConstant.switchBaseUrl();
 
+        final response = await _dio.get<Map<String, dynamic>>(
+          "/auth/realms/care/sms/authentication-code",
+          queryParameters: {
+            'phoneNumber': mobile,
+          },
+        );
+        logger.d({
+          "response": response.data,
+        });
+
+        return response.data!['expires_in'];
+      } on DioException catch (e) {
+        logger.e("Sending OTP failed : $e");
+
+        DioErrorHandler.handleDioError(e);
+        rethrow;
+      } catch (e) {
+        logger.e("Sending OTP failed : $e");
+        throw ServerFailure(errorMessage: "Sending OTP failed : $e");
+      }
+    } catch (e) {
+      logger.e("Sending OTP failed : $e");
       throw ServerFailure(errorMessage: "Sending OTP failed : $e");
     }
   }
@@ -102,7 +131,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
   @override
   Future<void> signOut() async {
     try {
-      await _dio.get(
+      final response = await _dio.get(
         "/auth/realms/care/protocol/openid-connect/logout",
         queryParameters: {
           'client_id': Env.clientId,
@@ -110,10 +139,12 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           'id_token_hint': PersistentAuthStateService.authState.idToken,
         },
       );
-      await PersistentAuthStateService.authState.logout();
+      logger.d({"signOut response": response});
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-      throw ServerFailure(errorMessage: "Sign out failed");
+      rethrow;
+    } catch (e) {
+      throw ServerFailure(errorMessage: "Error signing out : $e");
     }
   }
 }

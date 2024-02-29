@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/triage/data/source/rem
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vgAddEventRemoteSource = Provider(
@@ -17,8 +18,9 @@ var vgAddEventRemoteSource = Provider(
 );
 
 abstract class VgAddEventRemoteSource {
-  Future<List<VisionGuardianEventModel>> getVGEvents(
-      {required String actorIdentifier, required String eventStatusFilter});
+  Future<List<VisionGuardianEventModel>> getVGEvents({
+    required Map<String, dynamic> queryData,
+  });
   Future<dynamic> postVGEvents({
     required VisionGuardianEventModel vgEventModel,
     required Map<String, dynamic> actor,
@@ -42,12 +44,11 @@ abstract class VgAddEventRemoteSource {
   });
 
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   });
 
   Future getEventPatientList({
-    required String patientQueryData,
+    required Map<String, dynamic> patientQueryData,
   });
   Future getSearchEvent({
     required eventId,
@@ -62,14 +63,20 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       this._dio, this.getTriageModelProvider, this.globalVGProvider);
 
   @override
-  Future<List<VisionGuardianEventModel>> getVGEvents(
-      {required String actorIdentifier,
-      required String eventStatusFilter}) async {
+  Future<List<VisionGuardianEventModel>> getVGEvents({
+    required Map<String, dynamic> queryData,
+  }) async {
     const endpoint = "/services/triage/api/campaign-events";
     Map<String, dynamic> queryParameters = {
-      "actor-id": actorIdentifier,
-      "filter": eventStatusFilter
+      "actor-id": queryData["actorIdentifier"],
+      "filter": queryData["eventStatusFilter"],
+      "page": queryData["pageable"]["page"],
+      "size": queryData["pageable"]["size"]
     };
+    if (queryData["pageable"]["title-like"].length > 0) {
+      queryParameters
+          .addAll({"title-like": queryData["pageable"]["title-like"]});
+    }
     try {
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
@@ -97,7 +104,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     vgeventjson["images"] = [vgEventModel.images![0].toJson()];
 
     vgeventjson["actors"] = [actor];
+
+    logger.d("inside add event data is : ${vgeventjson.toString()}");
+
     try {
+
       final response = await _dio.post(endpoint, data: vgeventjson);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         return response.data;
@@ -139,7 +150,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         '/services/orchestration/api/practitioners/filter?officialMobile=$officialMobile}';
 
     return await _dio.get(endpoint).then((patientresponse) async {
-      if (patientresponse.data == null || patientresponse.data.length > 0) {
+      if (patientresponse.data == null || patientresponse.data.length == 0) {
         throw ServerException();
       }
       var roleType = patientresponse.data[0]["practitionerType"];
@@ -186,10 +197,10 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       var listofTeamMates = [];
       for (var i = 0; i < responseTeamMates.length; i++) {
         Map<String, dynamic> queryParameters = {
-          "practitionerId": int.parse(responseTeamMates[i]["identifier"]),
+          "practitioner-id": int.parse(responseTeamMates[i]["identifier"]),
         };
 
-        var endpoint = "/services/orchestration/api/practitioners";
+        var endpoint = "/services/orchestration/api/practitioners/custom";
         await _dio.get(endpoint, queryParameters: queryParameters).then(
           (value) {
             listofTeamMates.add(value.data);
@@ -235,17 +246,18 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
   @override
   Future getTriageReport({
-    required int campaignEventId,
-    required List<int> performerId,
+    required Map<String, dynamic> queryData,
   }) async {
     try {
       const endpoint =
           "/services/orchestration/api/patients/triage-reports/campaign-events";
       Map<String, dynamic> queryParameters = {
-        "campaignEventId": campaignEventId,
-        "performer-id": performerId,
+        "campaignEventId": queryData["campaignEventId"],
+        "performer-id": queryData["performerId"],
+        "page": queryData["pageable"]["page"],
+        "size": queryData["pageable"]["size"]
       };
-
+      logger.d(queryParameters);
       final response =
           await _dio.get(endpoint, queryParameters: queryParameters);
       List<VisionGuardianPatientResponseModel> data = (response.data as List)
@@ -259,13 +271,22 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   }
 
   @override
-  Future getEventPatientList({required String patientQueryData}) async {
+  Future getEventPatientList(
+      {required Map<String, dynamic> patientQueryData}) async {
     const endpoint = "/services/orchestration/api/patients/filter";
+    var queryParams = {
+      "offset": patientQueryData["offset"],
+      "limit": patientQueryData["limit"],
+      "queryText": patientQueryData["searchParams"],
+    };
+
+    logger.d(queryParams);
     try {
       var response = await _dio.get(
         endpoint,
-        queryParameters: {"name": patientQueryData},
+        queryParameters: queryParams,
       );
+
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         List<VisionGuardianEventPatientResponseModel> data =
             (response.data as List)
@@ -277,6 +298,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         throw ServerException();
       }
     } catch (error) {
+      logger.d(error);
       rethrow;
     }
   }

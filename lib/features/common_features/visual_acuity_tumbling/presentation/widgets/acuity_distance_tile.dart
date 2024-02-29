@@ -58,7 +58,7 @@ class AcuityDistanceTile extends StatelessWidget {
       case Eye.right:
         return context.loc!.rightEyeString;
       case Eye.both:
-        return context.loc!.bothEyeString;
+        return context.loc!.bothEyesString;
       default:
         return "";
     }

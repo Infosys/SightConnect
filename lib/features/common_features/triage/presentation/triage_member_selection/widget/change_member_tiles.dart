@@ -84,29 +84,33 @@ class ChangeMemberTiles extends HookConsumerWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          person.name?.capitalize() ?? "",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            person.name?.capitalizeFirstOfEach() ?? "",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Me",
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                            fontWeight: FontWeight.w400,
+                          const SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Me",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -152,29 +156,33 @@ class ChangeMemberTiles extends HookConsumerWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          person.name?.capitalize() ?? "",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            person.name?.capitalize() ?? "",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "${person.relation.toString().split(".").last.toLowerCase().capitalize()}, ${person.age} years",
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                            fontWeight: FontWeight.w400,
+                          const SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "${person.relation.toString().split(".").last.toLowerCase().capitalize()}, ${person.age} years",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.grey,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

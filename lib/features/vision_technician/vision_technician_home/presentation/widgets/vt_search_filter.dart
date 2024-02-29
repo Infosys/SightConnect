@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_filter_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/dashboard_filter_check_boxes.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void showVtSearchFilter(BuildContext context) {
+  final loc = context.loc!;
   showDialog(
     barrierDismissible: false,
     context: context,
@@ -25,7 +27,7 @@ void showVtSearchFilter(BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Filter by',
+                      loc.vtFilterBy,
                       style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -59,7 +61,7 @@ void showVtSearchFilter(BuildContext context) {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Age',
+                              loc.vtAge,
                               style: applyFiraSansFont(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -97,7 +99,7 @@ void showVtSearchFilter(BuildContext context) {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('Save'),
+                              child: Text(loc.vtSave),
                             ),
                             const SizedBox(
                               width: AppSize.klwidth,
@@ -106,7 +108,7 @@ void showVtSearchFilter(BuildContext context) {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('Cancel'),
+                              child: Text(loc.vtCancel),
                             ),
                           ],
                         )

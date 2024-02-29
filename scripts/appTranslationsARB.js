@@ -25,32 +25,62 @@ function appTranslationsARB() {
     return;
   }
 
+  // if app.en.arb does not exist, log an error
+  if (!fs.existsSync(path.join(arbFilesFolderPath, "app_en.arb"))) {
+    console.error("The file 'app_en.arb' was not found.");
+    return;
+  }
+
+  const englishTranslations = JSON.parse(
+    fs.readFileSync(path.join(arbFilesFolderPath, "app_en.arb"), "utf8")
+  );
+
   console.log("Generating the arb files...");
   languages.forEach((language) => {
     const translationsObj = {};
 
-    translationsObj["@@locale"] = language;
-    translationsObj["@stepNumber"] = {
-      placeholders: {
-        current: {
-          type: "String",
-        },
-        total: {
-          type: "String",
-        },
-      },
-    };
+    const definitions = {};
+    Object.keys(englishTranslations).forEach((key) => {
+      if (key.startsWith("@") && !key.startsWith("@@")) {
+        definitions[key] = englishTranslations[key];
+        definitions[key.slice(1)] = englishTranslations[key.slice(1)];
+      }
+    });
 
     translations.forEach((translation) => {
-      translationsObj[translation.id] = translation[language];
+      translationsObj[translation.id] =
+        translation[language] || englishTranslations[translation.id] || "";
     });
 
     const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);
-    fs.writeFileSync(arbFile, JSON.stringify(translationsObj, null, 2));
-    console.log(`Generated app_${language}.arb`);
+
+    let finalTranslations = {
+      "@@locale": language,
+      "@@last_modified": new Date().toISOString(),
+      "@@author": "appTranslationsARB.js",
+      ...definitions,
+    };
+
+    if (fs.existsSync(arbFile)) {
+      const existingTranslations = JSON.parse(fs.readFileSync(arbFile, "utf8"));
+      finalTranslations = {
+        ...finalTranslations,
+        ...existingTranslations,
+        ...translationsObj,
+      };
+      fs.writeFileSync(arbFile, JSON.stringify(finalTranslations, null, 2));
+      console.log(`Updated app_${language}.arb`);
+    } else {
+      finalTranslations = {
+        ...finalTranslations,
+        ...translationsObj,
+      };
+      fs.writeFileSync(arbFile, JSON.stringify(finalTranslations, null, 2));
+      console.log(`Generated app_${language}.arb`);
+    }
   });
 
-  console.log("All the arb files are generated successfully.");
+  console.log("All the arb files are generated/updated successfully.");
 }
 
 module.exports = {

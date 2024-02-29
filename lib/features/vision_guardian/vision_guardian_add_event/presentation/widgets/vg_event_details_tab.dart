@@ -1,10 +1,10 @@
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
-import 'package:eye_care_for_all/shared/widgets/toaster.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/constants/app_color.dart';
@@ -29,6 +29,7 @@ class EventDetailsTab extends ConsumerWidget {
     String endTimeformattedTime = DateFormat('h a').format(endTime);
 
     logger.d(eventDetails.images);
+    final loc = context.loc!;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSize.kspadding),
@@ -36,111 +37,111 @@ class EventDetailsTab extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Stack(
-              children: [
-                (eventDetails.images != null)
-                    ? SizedBox(
-                        height: AppSize.height(context) / 3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+            Container(
+              height: AppSize.height(context) / 3,
+              decoration: eventDetails.images != null
+                  ? BoxDecoration(
+                      image: DecorationImage(
+                        image:
+                            NetworkImage(_getImageUrl(eventDetails.images![0])),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    )
+                  : BoxDecoration(
+                      color: AppColor.grey.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    ),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      color: AppColor.black.withOpacity(0.3),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(AppSize.kmradius),
+                        bottomRight: Radius.circular(AppSize.kmradius),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            AppNetworkImage(
-                              shapeCircle: false,
-                              radius: 100,
-                              imageUrl: _getImageUrl(eventDetails.images![0]),
+                            const Icon(
+                              Icons.calendar_month_outlined,
+                              size: 15,
+                              color: AppColor.white,
+                            ),
+                            const SizedBox(
+                              width: AppSize.kswidth - 5,
+                            ),
+                            Text(
+                              "$startDateformattedDate - $endDateformattedDate",
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.white,
+                              ),
                             ),
                           ],
                         ),
-                      )
-                    : const SizedBox(
-                        height: 200,
-                        child: Center(
-                          child: Text(
-                            "No Image",
-                          ),
-                        ),
-                      ),
-                Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.calendar_month_outlined,
-                                size: 15,
-                              ),
-                              const SizedBox(
-                                width: AppSize.kswidth - 5,
-                              ),
-                              Text(
-                                "$startDateformattedDate - $endDateformattedDate",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.schedule_outlined,
+                                  size: 15,
+                                  color: AppColor.white,
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.schedule_outlined,
-                                    size: 15,
-                                  ),
-                                  const SizedBox(
-                                    width: AppSize.kswidth - 5,
-                                  ),
-                                  Text(
-                                    "$startformattedTime - $endTimeformattedTime",
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    AppSize.klradius,
-                                  ),
-                                  color: AppColor.orange,
+                                const SizedBox(
+                                  width: AppSize.kswidth - 5,
                                 ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSize.kmpadding, vertical: 3),
-                                child: Text(
-                                  eventDetails.eventStatus ?? "",
+                                Text(
+                                  "$startformattedTime - $endTimeformattedTime",
                                   style: applyRobotoFont(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500,
                                     color: AppColor.white,
                                   ),
                                 ),
+                              ],
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  AppSize.klradius,
+                                ),
+                                color: AppColor.orange,
                               ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              ],
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSize.kmpadding, vertical: 3),
+                              child: Text(
+                                eventDetails.eventStatus ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: AppSize.kmheight,
             ),
-            aboutDetails(eventDetails.description ?? ""),
+            aboutDetails(eventDetails.description ?? "", context),
             const SizedBox(
               height: AppSize.kmheight,
             ),
-            locationDetails(eventDetails.addresses![0]),
+            locationDetails(eventDetails.addresses![0], context),
             const SizedBox(
               height: AppSize.kmheight,
             ),
@@ -160,7 +161,7 @@ class EventDetailsTab extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      "Edit Event",
+                      loc.vgEditEvent,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -181,13 +182,18 @@ class EventDetailsTab extends ConsumerWidget {
                               eventId: eventDetails.id.toString())
                           .then((statusCode) {
                         if (statusCode >= 200 && statusCode < 210) {
-                          showToastMessage(
-                              "Event Deleted Succesfully", context, 0);
+                          Fluttertoast.showToast(
+                              msg: loc.vgEventDeletedSuccessfully);
                           ref
                               .read(addEventDetailsProvider)
                               .filterListEvents(0, "");
                           Navigator.pop(context);
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: loc.vgEventDeletionFailed);
                         }
+                      }).catchError((error) {
+                        Fluttertoast.showToast(msg: loc.vgEventDeletionFailed);
                       });
                     },
                     style: ElevatedButton.styleFrom(
@@ -199,7 +205,7 @@ class EventDetailsTab extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      "Delete Event",
+                      loc.vgDeleteEvent,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -217,7 +223,9 @@ class EventDetailsTab extends ConsumerWidget {
   }
 }
 
-Widget locationDetails(VisionGuardianEventAddress addressDetails) {
+Widget locationDetails(
+    VisionGuardianEventAddress addressDetails, BuildContext context) {
+  final loc = context.loc!;
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -228,7 +236,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Text("Location",
+            Text(loc.vgLocation,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -237,7 +245,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
             InkWell(
               onTap: () {},
               child: Text(
-                "View On Map",
+                loc.vgViewOnMap,
                 style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
               ),
             )
@@ -246,7 +254,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
             height: AppSize.kmheight,
           ),
           Text(
-            "Address and Door Number",
+            loc.vgAddressAndDoorNumber,
             style: applyFiraSansFont(
               fontSize: 12,
               color: AppColor.grey,
@@ -272,7 +280,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Pincode",
+                      loc.vgPincode,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -292,7 +300,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      "Sub District Name",
+                      loc.vgSubDistrictName,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -316,7 +324,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Village Name",
+                      loc.vgVillageName,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -336,7 +344,7 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
                       height: AppSize.ksheight,
                     ),
                     Text(
-                      "District Name",
+                      loc.vgDistrictName,
                       style: applyFiraSansFont(
                         fontSize: 12,
                         color: AppColor.grey,
@@ -363,7 +371,8 @@ Widget locationDetails(VisionGuardianEventAddress addressDetails) {
   );
 }
 
-Widget aboutDetails(String description) {
+Widget aboutDetails(String description, BuildContext context) {
+  final loc = context.loc!;
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(AppSize.ksradius),
@@ -374,7 +383,7 @@ Widget aboutDetails(String description) {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("About",
+          Text(loc.vgAbout,
               style: applyFiraSansFont(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -398,7 +407,7 @@ Widget aboutDetails(String description) {
             children: [
               InkWell(
                 child: Text(
-                  "View All",
+                  loc.vgViewAll,
                   style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
                 ),
               )

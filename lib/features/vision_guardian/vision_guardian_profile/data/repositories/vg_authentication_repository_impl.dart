@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/repositories/vg_authentication_repository.dart';
@@ -30,6 +31,7 @@ class VgAutheticationRepositoryImpl implements VgAuthenticationRepository {
       return Right(
           response.data!.map((e) => VgProfileModel.fromJson(e)).toList());
     } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
       return Left(
         ServerFailure(errorMessage: "${e.response!.data["message"]}"),
       );

@@ -26,7 +26,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
     var dragDirection = useState<QuestionDirection>(QuestionDirection.up);
     var pointerState = ref.watch(visualAcuityTumblingTestDialogProvider);
     final loc = context.loc!;
-    var swipeText = useState<String>("Swipe Up");
+    var swipeText = useState<String>(loc.vaSwipeUp);
     var currentDemoImage = useState<SvgPicture>(
         SvgPicture.asset("assets/images/swipe_gesture_up.svg"));
     Map<QuestionDirection, dynamic> demoData = {
@@ -40,8 +40,8 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
     var sliderValue = useState<double>(0.0);
 
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Eye Test"),
+      appBar: CustomAppbar(
+        title: Text(loc.vaEyeTest),
         centerTitle: false,
       ),
       body: VisualAcuityTumblingOverlay(
@@ -111,9 +111,9 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                       if (dragDirection.value == QuestionDirection.up) {
                         currentDemoImage.value =
                             demoData[QuestionDirection.down];
-                        swipeText.value = "Swipe Down";
+                        swipeText.value = loc.vaSwipeDown;
                         tumblingAngle.value = 7.85;
-                        //slider value 0 represt tranform movement of up, i want a value that makes it rotate 180 to down
+                        //slider value 0 repeat transform movement of up, i want a value that makes it rotate 180 to down
                         sliderValue.value = 180.0;
                         countValue.value++;
                       }
@@ -121,7 +121,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                       if (dragDirection.value == QuestionDirection.down) {
                         currentDemoImage.value =
                             demoData[QuestionDirection.left];
-                        swipeText.value = "Swipe Left";
+                        swipeText.value = loc.vaSwipeLeft;
                         tumblingAngle.value = 3.14;
                         sliderValue.value = 270.0;
                         countValue.value++;
@@ -130,7 +130,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                       if (dragDirection.value == QuestionDirection.left) {
                         currentDemoImage.value =
                             demoData[QuestionDirection.right];
-                        swipeText.value = "Swipe Right";
+                        swipeText.value = loc.vaSwipeRight;
                         tumblingAngle.value = 0.0;
                         sliderValue.value = 90.0;
                         countValue.value++;
@@ -193,7 +193,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                               children: [
                                 Center(
                                   child: Text(
-                                    "Instructions",
+                                    loc.instructions,
                                     style: applyRobotoFont(
                                       fontSize: 14,
                                       color: AppColor.grey,
@@ -245,7 +245,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12.0),
                                       child: Text(
-                                        "Skip",
+                                        loc.skipButton,
                                         style: applyRobotoFont(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,

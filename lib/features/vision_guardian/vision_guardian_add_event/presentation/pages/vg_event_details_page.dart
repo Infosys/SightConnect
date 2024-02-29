@@ -1,8 +1,10 @@
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_patient_card.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_patient_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patient_search_filter.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_teammate_search.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,11 +25,12 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var tabIndex = useState(0);
     var searchVisible = useState<bool>(true);
+    final loc = context.loc!;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppbar(
-        title: Text(eventDetails.title!),
+        title: Text(eventDetails.title!.capitalize()),
         centerTitle: false,
         actions: [
           Visibility(
@@ -42,11 +45,12 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                               search: "search",
                             )),
                   );
-                }else{
+                } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const VisionGuardianSearchTeammate(
+                        builder: (context) =>
+                            const VisionGuardianSearchTeammate(
                               search: "search",
                             )),
                   );
@@ -61,6 +65,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
         ],
         leadingIcon: InkWell(
           onTap: () {
+            ref.read(addEventDetailsProvider).resetListOfEventPatients();
             Navigator.pop(context);
           },
           child: const Icon(
@@ -72,13 +77,13 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
       floatingActionButton: tabIndex.value == 0
           ? InkWell(
               onTap: () {
-                ref.read(addPatientEventProvider).setPatientSearchQuery("");
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (context) => const VisionGuardianAddPatient(),
+                    builder: (context) => const VisionGuardianAddPatient(
+                      triageMode: TriageMode.EVENT,
+                    ),
                   ),
                 );
               },
@@ -109,7 +114,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                                 color: AppColor.black,
                                 fontWeight: FontWeight.w400)),
                         TextSpan(
-                          text: 'Add Patient',
+                          text: loc.vgAddPatient,
                           style: applyRobotoFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -147,10 +152,10 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                   fontWeight: FontWeight.w700,
                 ),
                 labelColor: AppColor.primary,
-                tabs: const [
-                  Tab(text: "Patients"),
-                  Tab(text: "Details"),
-                  Tab(text: "Teammates"),
+                tabs: [
+                  Tab(text: loc.vgPatients),
+                  Tab(text: loc.vgDetails),
+                  Tab(text: loc.vgTeammates),
                 ],
               ),
               const SizedBox(

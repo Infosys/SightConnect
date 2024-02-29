@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'dart:developer';
 import 'package:eye_care_for_all/main.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:password_generator/password_generator.dart';
@@ -22,6 +23,7 @@ class PersistentAuthData {
   final String _userIdKey = "userId";
   final String _id_token = "id_token";
   final String _sqfliteKey = 'sqflite_pass';
+  final String _userType = 'userType';
 
   String? accessToken;
   String? refreshToken;
@@ -30,8 +32,10 @@ class PersistentAuthData {
   String? username;
   String? userId;
   String? idToken;
+  String? userType;
 
   bool get isLoggedIn => accessToken != null && refreshToken != null;
+  bool get isUserTypeBeta => userType == 'BETA';
 
   Future<void> initialize() async {
     accessToken = await _storage.read(key: _accessKey);
@@ -42,15 +46,18 @@ class PersistentAuthData {
     final rolesJson = await _storage.read(key: _rolesKey);
     roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
     activeRole = await _storage.read(key: _activeRoleKey);
-    logger.d({
-      'accessTokenData': accessToken,
-      'refreshTokenData': refreshToken,
-      'roles': roles,
-      'username': username,
-      'userId': userId,
-      'idToken': idToken,
-      'activeRole': activeRole,
-    });
+    userType = await _storage.read(key: _userType);
+
+    if (kDebugMode) {
+      log("ACCESS TOKEN: $accessToken\n\n\n");
+      log("REFRESH TOKEN: $refreshToken\n\n\n");
+      log("ROLES: $roles\n\n\n");
+      log("USERNAME: $username\n\n\n");
+      log("USERID: $userId\n\n\n");
+      log("ID TOKEN: $idToken\n\n\n");
+      log("ACTIVE ROLE: $activeRole\n\n\n");
+      log("USER TYPE: $userType\n\n\n");
+    }
   }
 
   Future<void> saveUserProfileId(String id) async {
@@ -67,10 +74,12 @@ class PersistentAuthData {
     await _storage.write(key: _accessKey, value: accessToken);
     await _storage.write(key: _refreshKey, value: refreshToken);
     final decodedToken = JwtDecoder.decode(accessToken);
+
+    await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
+
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
 
     roles.removeWhere((element) => !element.toString().startsWith("ROLE_"));
-
     final username = decodedToken['preferred_username'];
     await _saveRolesAndUserName(roles, username);
   }
@@ -90,6 +99,16 @@ class PersistentAuthData {
 
   Future<void> getActiveRole() async {
     activeRole = await _storage.read(key: _activeRoleKey);
+  }
+
+  Future<void> deleteActiveRole() async {
+    activeRole = null;
+    await _storage.delete(key: _activeRoleKey);
+  }
+
+  Future<void> saveUserType(String userType) async {
+    this.userType = userType;
+    await _storage.write(key: _userType, value: userType);
   }
 
   Future<void> saveIdToken(String idToken) async {
@@ -142,6 +161,10 @@ class PersistentAuthData {
     }
   }
 
+  Future<void> deleteSQFlitePassword() async {
+    await _storage.delete(key: _sqfliteKey);
+  }
+
   Future<void> logout() async {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
@@ -151,10 +174,9 @@ class PersistentAuthData {
     await _storage.delete(key: _usernameKey);
     await _storage.delete(key: _userIdKey);
     await _storage.delete(key: _id_token);
+    await _storage.delete(key: _userType);
     //SQFLite
     // await _storage.delete(key: _sqfliteKey);
-
-    SharedPreferenceService.clear();
 
     accessToken = null;
     refreshToken = null;
@@ -163,6 +185,7 @@ class PersistentAuthData {
     userId = null;
     idToken = null;
     activeRole = null;
+    userType = null;
     logger.d("Logged out successfully");
     logger.d({
       'accessTokenData': accessToken,
@@ -172,7 +195,6 @@ class PersistentAuthData {
       'userId': userId,
       'idToken': idToken,
       'activeRole': activeRole,
-      'sqflite-pass': 'deleted',
     });
   }
 

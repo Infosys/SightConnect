@@ -9,44 +9,39 @@ extension ThemeExtension on BuildContext {
   TargetPlatform get platform => Theme.of(this).platform;
 }
 
-extension DateExtension on DateTime {
-  String get formateDate => DateFormat('dd/MM/yyyy').format(this);
+extension DateExtension on DateTime? {
+  String get formateDate =>
+      this == null ? "" : DateFormat('dd/MM/yyyy').format(this!);
 
-  String get formateTime => DateFormat('hh:mm a').format(this);
+  String get formateTime =>
+      this == null ? "" : DateFormat('hh:mm a').format(this!);
 
-  String get formatDateTimeMonthName => DateFormat("dd MMM yy").format(this);
+  String get formatDateTimeMonthName =>
+      this == null ? "" : DateFormat("dd MMM yy").format(this!);
 
   String get formateDateWithTime =>
-      DateFormat('dd/MM/yyyy hh:mm a').format(this);
+      this == null ? "" : DateFormat('dd/MM/yyyy hh:mm a').format(this!);
   String get formatDateTimeMonthNameWithTime =>
-      DateFormat("dd MMM yyyy, hh:mm a").format(this);
+      this == null ? "" : DateFormat("dd MMM yyyy, hh:mm a").format(this!);
 }
 
 extension StringExtension on String? {
   String capitalize() {
-    if (this == null) {
-      return "";
-    } else {
-      final String str = this!;
-      return "${str[0].toUpperCase()}${str.substring(1)}";
-    }
+    final String str = this ?? '';
+    if (str.isEmpty) return '';
+    return "${str[0].toUpperCase()}${str.substring(1)}";
   }
 
   String sentenceCase() {
-    if (this == null) {
-      return "";
-    } else {
-      final String str = this!;
-      return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
-    }
+    final String str = this ?? '';
+    if (str.isEmpty) return '';
+    return "${str[0].toUpperCase()}${str.substring(1).toLowerCase()}";
   }
 
   String capitalizeFirstOfEach() {
-    if (this == null) {
-      return "";
-    } else {
-      final String str = this!;
-      return str.split(" ").map((str) => str.capitalize()).join(" ");
-    }
+    String str = this ?? '';
+    str = str.toLowerCase();
+    if (str.isEmpty) return '';
+    return str.split(" ").map((str) => str.capitalize()).join(" ");
   }
 }

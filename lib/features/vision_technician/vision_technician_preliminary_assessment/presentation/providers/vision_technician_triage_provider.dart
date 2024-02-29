@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_search_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -165,15 +165,13 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
     String? rightEyeImage;
 
     try {
+      logger.d("Uploading Image");
       leftEyeImage = await fileMsService.uploadImage(File(XleftEyeImage.path));
       rightEyeImage =
           await fileMsService.uploadImage(File(XrightEyeImage.path));
     } catch (e) {
       logger.d("Error in uploading image: $e");
-    }
-
-    if (leftEyeImage == null || rightEyeImage == null) {
-      return [];
+      rethrow;
     }
 
     Map<String, String> leftEyeData = parseUrl(leftEyeImage);
@@ -203,6 +201,8 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
       score: 0,
       fileId: rightEyeData["fileId"]!,
     ));
+
+    logger.d("Triage Eye Scan Response 24 Jan : $mediaCaptureList");
 
     return mediaCaptureList;
   }

@@ -35,7 +35,12 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
     _isUpdateLoading = true;
     notifyListeners();
     var response = await _triageReportRepository.getTriageReportByEncounterId(
-        encounterId, status);
+      encounterId,
+      status,
+      null,
+      null,
+      null,
+    );
 
     return response.fold(
       (failure) {
@@ -79,6 +84,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
 
   Future<AssessmentAndTriageReportDetailedEntity>
       getTriageDetailedReportByReportId(
+    BuildContext context,
     int reportId,
   ) async {
     try {
@@ -101,8 +107,9 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
 
+      // ignore: use_build_context_synchronously
       return AssessmentDetailedAndTriageReportMapper.toEntity(
-          triageReport, triageAssessment);
+          context, triageReport, triageAssessment);
     } catch (e) {
       logger.e({
         "getTriageDetailedReport": e.toString(),
@@ -116,6 +123,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
 
   Future<AssessmentAndTriageReportDetailedEntity>
       getTriageDetailedReportByEncounterId(
+    BuildContext context,
     int encounterId,
     DiagnosticReportStatus status,
   ) async {
@@ -148,7 +156,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
       notifyListeners();
 
       return AssessmentDetailedAndTriageReportMapper.toEntity(
-          triageReport.first, triageAssessment);
+          context, triageReport.first, triageAssessment);
     } catch (e) {
       logger.e({
         "getTriageDetailedReport": e.toString(),

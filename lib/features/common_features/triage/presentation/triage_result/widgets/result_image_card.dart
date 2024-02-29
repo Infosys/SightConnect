@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
@@ -9,6 +8,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -84,14 +84,14 @@ class ResultImageCard extends ConsumerWidget {
                       Expanded(
                         child: _EyeScanImage(
                           image: getLeftEyeImageUrl(data.imageBriefEntity),
-                          name: "Left Eye",
+                          name: loc.leftEyeString,
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _EyeScanImage(
                           image: getRightEyeImageUrl(data.imageBriefEntity),
-                          name: "Right Eye",
+                          name: loc.rightEyeString,
                         ),
                       ),
                     ],
@@ -133,7 +133,7 @@ class ResultImageCard extends ConsumerWidget {
                           height: 40,
                           width: 40,
                           child: Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator.adaptive(),
                           ),
                         ),
                       ),
@@ -143,7 +143,7 @@ class ResultImageCard extends ConsumerWidget {
                           child: SizedBox(
                             height: 40,
                             width: 40,
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator.adaptive(),
                           ),
                         ),
                       ),
@@ -199,6 +199,7 @@ class _EyeScanImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -212,15 +213,15 @@ class _EyeScanImage extends StatelessWidget {
         ),
         const SizedBox(height: AppSize.kmheight),
         image == null
-            ? const Center(child: Text("No Image"))
+            ? Center(child: Text(loc.imageNotCapturedToastMessage))
             : Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.ksradius),
-                  child: CachedNetworkImage(
+                  child: AppNetworkImage(
                     imageUrl: image!,
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    shapeCircle: false,
+                    height: 100,
+                    width: 100,
                   ),
                 ),
               ),

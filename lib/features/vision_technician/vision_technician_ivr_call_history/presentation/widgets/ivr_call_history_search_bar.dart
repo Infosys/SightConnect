@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +14,14 @@ class IvrCallHistorySearchBarVT extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Expanded(
       child: TextField(
         readOnly: readOnly,
         onTap: () {},
         decoration: InputDecoration(
           prefixIcon: IconButton(
-            onPressed: () {
-    
-            },
+            onPressed: () {},
             icon: const Icon(
               CupertinoIcons.search,
               color: AppColor.primary,
@@ -41,7 +41,7 @@ class IvrCallHistorySearchBarVT extends ConsumerWidget {
               const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
           filled: true,
           fillColor: AppColor.white,
-          hintText: 'Search by Patient ID, Mobile No., Name',
+          hintText: loc.vtSearchText,
           hintStyle: applyRobotoFont(
             color: AppColor.grey,
             fontSize: 14,

@@ -17,9 +17,9 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
     final loc = context.loc!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Assessment",
-          style: TextStyle(
+        title: Text(
+          loc.assessment,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -49,7 +49,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                       horizontal: AppSize.kmpadding,
                     ),
                     child: Text(
-                      "Do you have any other symptoms?",
+                      loc.triageOtherSymptomsQuestion,
                       style: applyFiraSansFont(
                         fontSize: 18,
                       ),
@@ -82,7 +82,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                             color: AppColor.primary,
                           ),
                         ),
-                        labelText: "Enter your symptoms here",
+                        labelText: loc.triageEnterSymptoms,
                         labelStyle: applyRobotoFont(
                           fontSize: 14,
                           color: AppColor.grey,
@@ -154,9 +154,9 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
-                        "Skip",
-                        style: TextStyle(
+                      child: Text(
+                        loc.skipButton,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),

@@ -63,7 +63,7 @@ class TumblingEReportCard extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.all(16),
-                  itemCount: 3,
+                  itemCount: tumblingEData!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 1.4,
@@ -87,7 +87,7 @@ class TumblingEReportCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              tumblingEData![index].bodySite!,
+                              tumblingEData![index].bodySite ?? "",
                               style: applyRobotoFont(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,

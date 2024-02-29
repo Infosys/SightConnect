@@ -1,7 +1,11 @@
+import 'package:eye_care_for_all/core/models/consent_model.dart';
+import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_db_helper.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/repositories/vg_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -29,13 +33,29 @@ class InitializationProvider extends ChangeNotifier {
       return await _checkPatientExist(phone, role);
     } else if (role == Role.ROLE_VISION_GUARDIAN) {
       return await _checkVisionGuardianExist(phone, role);
+    } else if (role == Role.ROLE_OPTOMETRIST) {
+      //only for testing
+      return true;
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
   }
 
   Future<void> logout() async {
-    await _ref.read(keycloakRepositoryProvider).signOut();
+    try {
+      //keycloak logout
+      await _ref.read(keycloakRepositoryProvider).signOut();
+    } catch (e) {
+      logger.e(
+          "Apologies, we encountered a logout error in the mobile app. from keycloak: $e");
+      rethrow;
+    }
+    // Triage Database logout
+    await TriageDBHelper().deleteFullDatabase();
+    // Shared Preference logout
+    await SharedPreferenceService.clearAll();
+    // Flutter Secure Storage logout
+    await PersistentAuthStateService.authState.logout();
   }
 
   Future<KeycloakResponse?> refreshTokens({
@@ -55,25 +75,15 @@ class InitializationProvider extends ChangeNotifier {
     required String mobile,
     required String otp,
   }) async {
-    try {
-      await _ref
-          .read(keycloakRepositoryProvider)
-          .signIn(mobile: mobile, otp: otp);
-    } catch (e) {
-      rethrow;
-    }
+    await _ref
+        .read(keycloakRepositoryProvider)
+        .signIn(mobile: mobile, otp: otp);
   }
 
   Future<int> sendOtp({
     required String mobile,
   }) async {
-    try {
-      return await _ref
-          .read(keycloakRepositoryProvider)
-          .sendOtp(mobile: mobile);
-    } catch (e) {
-      return Future.error(e);
-    }
+    return await _ref.read(keycloakRepositoryProvider).sendOtp(mobile: mobile);
   }
 
   Future<bool> _checkVisionTechnicianExist(String phone, Role role) async {
@@ -154,5 +164,51 @@ class InitializationProvider extends ChangeNotifier {
         }
       }
     });
+  }
+
+  Future<bool> getEighteenPlusDeclarationStatus() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
+    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> sumbitEighteenPlusDeclaration() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
+    await consentRepository.setConsent(
+      ConsentModel(
+        templateId: consent.templateId,
+        consentVersion: consent.consentVersion,
+        consentStatus: ConsentStatus.ACKNOWLEDGED,
+        acknowledgeDate: DateTime.now().toUtc().toIso8601String(),
+      ),
+    );
+  }
+
+  Future<bool> getConsentStatus() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent();
+    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> sumbitConsent() async {
+    final consentRepository = _ref.read(consentRepositoryProvider);
+    final consent = await consentRepository.getConsent();
+    await consentRepository.setConsent(
+      ConsentModel(
+        templateId: consent.templateId,
+        consentVersion: consent.consentVersion,
+        consentStatus: ConsentStatus.ACKNOWLEDGED,
+        acknowledgeDate: DateTime.now().toUtc().toIso8601String(),
+      ),
+    );
   }
 }

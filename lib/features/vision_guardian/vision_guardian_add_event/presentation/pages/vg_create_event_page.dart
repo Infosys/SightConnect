@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +19,16 @@ class VisionGuardianEventPage extends HookConsumerWidget {
   final eventStatus = const ["ALL", "CURRENT", "UPCOMING", "PAST", "CANCELLED"];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var isSelected = useState<int>(-1);
+    var isSelected = useState<int>(0);
+    final loc = context.loc!;
     return Scaffold(
       appBar: CustomAppbar(
-        title: const Text('Event'),
+        title: Text(loc.vgEvent),
         centerTitle: false,
         actions: [
           IconButton(
             onPressed: () {
+              ref.read(addEventDetailsProvider).resetSearchEventList();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -43,6 +46,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         ],
         leadingIcon: InkWell(
           onTap: () {
+            ref.read(addEventDetailsProvider).resetPagination();
             ref.read(addEventDetailsProvider).filterListEvents(0, "");
             Navigator.popUntil(context, (route) => route.isFirst);
           },
@@ -54,6 +58,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
       ),
       floatingActionButton: InkWell(
         onTap: () {
+          ref.read(addEventDetailsProvider).setIsLoading();
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -71,8 +76,8 @@ class VisionGuardianEventPage extends HookConsumerWidget {
             color: AppColor.yellow,
             boxShadow: const <BoxShadow>[
               BoxShadow(
-                color: AppColor.black,
-                blurRadius: 10,
+                color: AppColor.grey,
+                blurRadius: 8,
                 offset: Offset(0, 4),
               ),
             ],
@@ -84,12 +89,12 @@ class VisionGuardianEventPage extends HookConsumerWidget {
                   TextSpan(
                     text: '+ ',
                     style: applyRobotoFont(
-                        fontSize: 21,
+                        fontSize: 24,
                         color: AppColor.black,
-                        fontWeight: FontWeight.w300),
+                        fontWeight: FontWeight.w400),
                   ),
                   TextSpan(
-                    text: 'Add Event',
+                    text: loc.vgAddEvent,
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -103,6 +108,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         ),
       ),
       body: SingleChildScrollView(
+        controller: ref.watch(addEventDetailsProvider).eventListController,
         child: Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
           return Padding(
@@ -113,7 +119,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
                 vgEventHeaderChips(isSelected, context, eventStatus),
                 const SizedBox(height: AppSize.klheight),
                 const VisionEventListDetails(
-                  eventType: 'default',
+                  eventType: 'viewAll',
                 ),
               ],
             ),
