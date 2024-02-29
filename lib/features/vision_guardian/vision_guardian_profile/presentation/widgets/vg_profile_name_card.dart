@@ -14,6 +14,7 @@ class VgProfileNameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       width: double.infinity,
@@ -71,7 +72,7 @@ class VgProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Gender",
+                            loc.profilePageGender,
                             style: applyRobotoFont(
                                 fontSize: 10, color: AppColor.darkGrey),
                           ),
@@ -91,7 +92,7 @@ class VgProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Mobile",
+                            loc.profilePageMobile,
                             style: applyRobotoFont(
                                 fontSize: 10, color: AppColor.darkGrey),
                           ),

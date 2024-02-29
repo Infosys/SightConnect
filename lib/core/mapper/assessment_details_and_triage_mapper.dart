@@ -4,9 +4,12 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/t
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:flutter/material.dart';
 
 class AssessmentDetailedAndTriageReportMapper {
   static AssessmentAndTriageReportDetailedEntity toEntity(
+    BuildContext context,
     TriageDetailedReportModel triageDetailedReport,
     DiagnosticReportTemplateFHIRModel triageAssessment,
   ) {
@@ -27,6 +30,7 @@ class AssessmentDetailedAndTriageReportMapper {
         triageDetailedReport,
       ),
       visualAcuityBreifEntity: _getObservationBriefEntity(
+        context,
         triageAssessment,
         triageDetailedReport,
       ),
@@ -96,6 +100,7 @@ class AssessmentDetailedAndTriageReportMapper {
   }
 
   static List<ObservationBriefEntity> _getObservationBriefEntity(
+    BuildContext context,
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
@@ -106,13 +111,13 @@ class AssessmentDetailedAndTriageReportMapper {
         int id = triageAssessment.observations?.id ?? 0;
         BodySite bodySite =
             triageAssessment.observations?.bodySite ?? BodySite.BOTH_EYES;
-        observationMap[id] = getBodySiteText(bodySite);
+        observationMap[id] = getBodySiteText(context, bodySite);
       }
       for (ObservationDefinitionModel observation
           in triageAssessment.observations!.observationDefinition!) {
         int id = observation.id ?? 0;
         BodySite bodySite = observation.bodySite!;
-        observationMap[id] = getBodySiteText(bodySite);
+        observationMap[id] = getBodySiteText(context, bodySite);
       }
       for (Observation observation in triageDetailedReport.observations!) {
         if (observationMap.containsKey(observation.identifier)) {
@@ -136,14 +141,18 @@ class AssessmentDetailedAndTriageReportMapper {
     }
   }
 
-  static String getBodySiteText(BodySite bodySite) {
+  static String getBodySiteText(
+    BuildContext context,
+    BodySite bodySite,
+  ) {
+    final loc = context.loc!;
     switch (bodySite) {
       case BodySite.LEFT_EYE:
-        return "Left Eye";
+        return loc.leftEyeString;
       case BodySite.RIGHT_EYE:
-        return "Right Eye";
+        return loc.rightEyeString;
       case BodySite.BOTH_EYES:
-        return "Both Eyes";
+        return loc.bothEyesString;
       default:
         return "";
     }

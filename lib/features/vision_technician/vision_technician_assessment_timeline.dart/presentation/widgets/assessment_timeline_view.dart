@@ -188,7 +188,7 @@ Widget TimeWidgetRender(
                   isLoading.value = true;
                   AssessmentAndTriageReportDetailedEntity response = await ref
                       .watch(vtAssessmentAndTestProvider)
-                      .getTriageDetailedReportByEncounterId(
+                      .getTriageDetailedReportByEncounterId(context,
                           timeLine.encounterId!, DiagnosticReportStatus.FINAL);
                   logger.d("report response ${response.toJson()}");
                   isLoading.value = false;
