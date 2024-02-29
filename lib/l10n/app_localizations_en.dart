@@ -713,6 +713,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recentServicesRedEyeTest => 'Red Eye Test';
 
   @override
+  String get chatBotDefaultQuerySuggestions => 'Start Eye Assessment|Common eye issues|Tips for a better eye sight';
+
+  @override
+  String get chatBotWelcomeMessage => 'Hi, How may I help you today?';
+
+  @override
   String get poweredByText => 'Powered by';
 
   @override
@@ -720,12 +726,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inviteNowText => 'Invite Now';
-
-  @override
-  String get chatBotDefaultQuerySuggestions => 'Start Eye Assessment|Common eye issues|Tips for a better eye sight';
-
-  @override
-  String get chatBotWelcomeMessage => 'Hi, How may I help you today?';
 
   @override
   String get resend => 'Resend';
@@ -1830,4 +1830,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vgNoPatientsPresent => 'There are no patients at present. Tap on "Add Patient"';
+
+  @override
+  String get textSize => 'Text Size';
+
+  @override
+  String get increase => 'Increase';
+
+  @override
+  String get decrease => 'Decrease';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get minimumTextSizeReached => 'Minimum text size reached';
+
+  @override
+  String get maximumTextSizeReached => 'Maximum text size reached';
 }

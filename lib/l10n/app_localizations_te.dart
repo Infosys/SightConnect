@@ -713,6 +713,12 @@ class AppLocalizationsTe extends AppLocalizations {
   String get recentServicesRedEyeTest => 'ఎర్ర కంటి పరీక్ష';
 
   @override
+  String get chatBotDefaultQuerySuggestions => 'కంటి అంచనా ప్రారంభించండి | సాధారణ కంటి సమస్యలు | మెరుగైన కంటి చూపు కోసం చిట్కాలు';
+
+  @override
+  String get chatBotWelcomeMessage => 'హాయ్, ఈ రోజు నేను మీకు ఎలా సహాయపడగలను?';
+
+  @override
   String get poweredByText => 'సాధ్యం చేసింది';
 
   @override
@@ -720,12 +726,6 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get inviteNowText => 'ఇప్పుడు ఆహ్వానించండి';
-
-  @override
-  String get chatBotDefaultQuerySuggestions => 'కంటి అంచనా ప్రారంభించండి | సాధారణ కంటి సమస్యలు | మెరుగైన కంటి చూపు కోసం చిట్కాలు';
-
-  @override
-  String get chatBotWelcomeMessage => 'హాయ్, ఈ రోజు నేను మీకు ఎలా సహాయపడగలను?';
 
   @override
   String get resend => 'మళ్లీ పంపండి';
@@ -1830,4 +1830,22 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get vgNoPatientsPresent => 'ప్రస్తుతం రోగులు లేరు. "రోగిని జోడించండి" పై నొక్కండి';
+
+  @override
+  String get textSize => 'పాఠ్య పరిమాణం';
+
+  @override
+  String get increase => 'పెంచు';
+
+  @override
+  String get decrease => 'తగ్గించు';
+
+  @override
+  String get reset => 'రీసెట్ చేయండి';
+
+  @override
+  String get minimumTextSizeReached => 'కనీసం పాఠ్య పరిమాణం చేరింది';
+
+  @override
+  String get maximumTextSizeReached => 'గరిష్ఠ పాఠ్య పరిమాణం చేరింది';
 }

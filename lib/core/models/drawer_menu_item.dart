@@ -9,6 +9,7 @@ enum DrawerMenuItemId {
   about,
   privacyPolicy,
   help,
+  chatbot,
 }
 
 class DrawerMenuItem {
@@ -59,6 +60,11 @@ class DrawerMenuItems {
     //   title: loc.appDrawerHelpAndSupport,
     //   icon: AppIcon.drawerHelpAndSupport,
     // );
+    DrawerMenuItem chatbot = const DrawerMenuItem(
+      id: DrawerMenuItemId.chatbot,
+      title: "SightConnect Assistant",
+      icon: AppIcon.drawerHelpAndSupport,
+    );
 
     return [
       language,
@@ -68,6 +74,7 @@ class DrawerMenuItems {
       about,
       privacyPolicy,
       // help,
+      chatbot
     ];
   }
 }

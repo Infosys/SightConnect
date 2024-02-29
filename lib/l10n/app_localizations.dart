@@ -1505,6 +1505,18 @@ abstract class AppLocalizations {
   /// **'Red Eye Test'**
   String get recentServicesRedEyeTest;
 
+  /// No description provided for @chatBotDefaultQuerySuggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Eye Assessment|Common eye issues|Tips for a better eye sight'**
+  String get chatBotDefaultQuerySuggestions;
+
+  /// No description provided for @chatBotWelcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi, How may I help you today?'**
+  String get chatBotWelcomeMessage;
+
   /// No description provided for @poweredByText.
   ///
   /// In en, this message translates to:
@@ -1522,18 +1534,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite Now'**
   String get inviteNowText;
-
-  /// No description provided for @chatBotDefaultQuerySuggestions.
-  ///
-  /// In en, this message translates to:
-  /// **'Start Eye Assessment|Common eye issues|Tips for a better eye sight'**
-  String get chatBotDefaultQuerySuggestions;
-
-  /// No description provided for @chatBotWelcomeMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Hi, How may I help you today?'**
-  String get chatBotWelcomeMessage;
 
   /// No description provided for @resend.
   ///
@@ -3742,6 +3742,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There are no patients at present. Tap on "Add Patient"'**
   String get vgNoPatientsPresent;
+
+  /// No description provided for @textSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Size'**
+  String get textSize;
+
+  /// No description provided for @increase.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase'**
+  String get increase;
+
+  /// No description provided for @decrease.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease'**
+  String get decrease;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @minimumTextSizeReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum text size reached'**
+  String get minimumTextSizeReached;
+
+  /// No description provided for @maximumTextSizeReached.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum text size reached'**
+  String get maximumTextSizeReached;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
