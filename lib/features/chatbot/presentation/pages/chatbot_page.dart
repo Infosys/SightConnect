@@ -1,12 +1,17 @@
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/features/chatbot/data/enum/standard_action.dart';
+import 'package:eye_care_for_all/features/chatbot/data/models/chat_query_resolver.dart';
 import 'package:eye_care_for_all/features/chatbot/data/source/remote/chat_service.dart';
+import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_intent_view.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_composer.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_query_suggestions.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/loading_indicator.dart';
 import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
+import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ChatBotPage extends ConsumerStatefulWidget {
   const ChatBotPage({
@@ -41,6 +46,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   List<String> _querySuggestions = [];
   bool _isLoading = false;
   bool _isLoadingQuerySuggestions = false;
+  ChatIntent? _currentIntent;
 
   late ChatService _chatService;
   late Future<List<ChatMessage>> Function() _loadChatHistory;
@@ -154,6 +160,8 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
               height: 16,
             ),
 
+            ChatIntentView(intent: _currentIntent),
+
             _buildClearChatButton(),
 
             // Text Field
@@ -161,7 +169,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
               selectedLanguage: widget.selectedLanguageCode,
               enabled: !_isLoading,
               onTextChange: (newText) {
-                debugPrint("Changed text: $newText");
+                // debugPrint("Changed text: $newText");
               },
               onSubmit: _onChatMessageSubmit,
             )
@@ -219,6 +227,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       _chatMessages.add(message);
       _querySuggestions = [];
       _isLoading = true;
+      _currentIntent = null;
     });
   }
 
@@ -238,16 +247,62 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       ),
     );
 
+    final standardAction = ChatQueryResolver.getStandardAction(
+        message, widget.selectedLanguageCode);
+
+    if (standardAction != null) {
+      return _handleStandardAction(standardAction);
+    }
+
     _askChatBot(message);
   }
 
-  Future _askChatBot(String message) async {
-    final response = await _chatService.ask(message, widget.selectedLanguage);
+  Future _handleStandardAction(StandardAction action) async {
+    switch (action) {
+      case StandardAction.startTriageEyeAssessment:
+        setState(() {
+          _chatMessage(ChatMessage(
+              message: "Eye assessment is recommended for you.", isMe: false));
+          _currentIntent = ChatIntent(
+            question: "Do you want to take the triage eye assessment?",
+            yesHandler: () {
+              showTriageBottomSheet(context: context);
+              setState(() {
+                _currentIntent = null;
+              });
+            },
+            noHandler: () {
+              setState(() {
+                _currentIntent = null;
+              });
+            },
+          );
+        });
+        break;
+      default:
+        break;
+    }
+    return;
+  }
 
-    if (response != null) {
-      _chatMessage(
-        ChatMessage(message: response, isMe: false),
-      );
+  Future _askChatBot(String message) async {
+    try {
+      final response = await _chatService.ask(message, widget.selectedLanguage);
+
+      if (response != null) {
+        _chatMessage(
+          ChatMessage(message: response, isMe: false),
+        );
+      }
+    } catch (e) {
+      debugPrint("ChatBotPage: _askChatBot: Error: $e");
+      Fluttertoast.showToast(
+          msg:
+              "Chatbot is not available at the moment. Please try again later.");
+      setState(() {
+        _isLoading = false;
+      });
+      return;
     }
 
     // Ask for query suggestions

@@ -21,7 +21,7 @@ class ChatService {
 
   Future<List<String>> getQuerySuggestions(String language) async {
     await Future.delayed(const Duration(seconds: 1));
-    return ["Good Afternoon", "Good Evening", "Good Night"];
+    // return ["Good Afternoon", "Good Evening", "Good Night"];
     const url = "query-suggestions";
     final body = jsonEncode({
       "conversation": _previousConversation,
@@ -37,13 +37,12 @@ class ChatService {
 
     if (response.statusCode == 200) {
       // Request successful, handle the response
-      List<String> suggestions = 
-      // utf8
-      //     .decode(
-      //       response.data.runes.toList(),
-      //     )
-          response.data
-          .split("|");
+      List<String> suggestions =
+          // utf8
+          //     .decode(
+          //       response.data.runes.toList(),
+          //     )
+          response.data.split("|");
 
       debugPrint('ChatService: unfiltered querySuggestions: $suggestions');
 
@@ -61,7 +60,7 @@ class ChatService {
 
   Future<String?> ask(String query, String language) async {
     await Future.delayed(const Duration(seconds: 1));
-    return "Good Morning";
+    // return "Good Morning";
     const chatResponseUrl = "stream";
     final body = jsonEncode({
       "message": query,
@@ -136,7 +135,6 @@ class ChatService {
     }
 
     for (final message in messages) {
-      
       if (message.isMe) {
         _addUserMessageToContext(message.message);
       } else {
