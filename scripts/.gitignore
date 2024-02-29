@@ -131,3 +131,6 @@ dist
 
 # Custom
 *.xlsx
+outputs
+resources/*
+!**/.gitkeep
