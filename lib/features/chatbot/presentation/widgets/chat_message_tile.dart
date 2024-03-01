@@ -1,7 +1,4 @@
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/triage_question_image.dart';
 import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
-import 'package:eye_care_for_all/features/chatbot/utils/triage_utils.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:flutter/material.dart';
 

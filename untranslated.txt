@@ -1,1 +1,81 @@
-{}
+{
+  "as": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "bn": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "gu": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "hi": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "kn": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "ml": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "mr": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "or": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "ta": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ],
+
+  "ur": [
+    "chatClearChat",
+    "chatEyeAssessmentRecommended",
+    "chatDoYouWantToTakeTheTriageEyeAssessment",
+    "chatChatbotNotAvailable",
+    "chatTypeHere"
+  ]
+}
