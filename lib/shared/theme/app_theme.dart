@@ -43,7 +43,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColor.primary,
-        circularTrackColor: AppColor.cyan,
+        circularTrackColor: AppColor.blue,
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
