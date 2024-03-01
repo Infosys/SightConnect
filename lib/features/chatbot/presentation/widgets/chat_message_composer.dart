@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -63,6 +64,7 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black45),
@@ -86,7 +88,7 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
               },
               onSubmitted: (_) => _submitHandler(),
               decoration: InputDecoration(
-                hintText: 'Type here...',
+                hintText: loc.chatTypeHere,
                 border: InputBorder.none,
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
