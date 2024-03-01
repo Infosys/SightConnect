@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -112,11 +113,15 @@ class PatientServiceCategory extends ConsumerWidget {
                         //     builder: (context) => WebSocket(),
                         //   ),
                         // );
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientAppointmentPage(),
-                          ),
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         const PatientAppointmentPage(),
+                        //   ),
+                        // );
+                        Fluttertoast.cancel();
+                        Fluttertoast.showToast(
+                          msg: "This feature is coming soon",
                         );
                       }
                     },
