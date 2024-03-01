@@ -4,15 +4,13 @@ import 'package:eye_care_for_all/features/patient/patient_services/presentation/
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
-import 'package:matomo_tracker/matomo_tracker.dart';
 
 class AppBottomNavBar extends HookConsumerWidget {
   const AppBottomNavBar({
@@ -57,33 +55,8 @@ class AppBottomNavBar extends HookConsumerWidget {
           // break;
 
           case 2:
-            showModalBottomSheet(
-              context: context,
-              isDismissible: false,
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-              ),
-              barrierLabel:
-                  MaterialLocalizations.of(context).modalBarrierDismissLabel,
-              builder: (context) {
-                MatomoTracker.instance.trackEvent(
-                    eventInfo: EventInfo(
-                      category: 'Main',
-                      action: 'Click',
-                      name: 'Triage member selection page click',
-                    ),
-                    dimensions: {
-                      'dimension1':
-                          '${PersistentAuthStateService.authState.activeRole}'
-                    });
-                return const TriageMemberSelectionPage();
-              },
-            ).then((value) => selectedIndex.value = 0);
+            showTriageBottomSheet(context: context)
+                .then((value) => selectedIndex.value = 0);
 
             break;
           case 3:

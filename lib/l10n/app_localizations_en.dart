@@ -6,63 +6,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String stepNumber(String current, String total) {
-    return '$current of $total';
+    return '${current} of ${total}';
   }
 
   @override
   String loginEnterOTP(String mobileNumber) {
-    return 'Please enter the OTP sent to $mobileNumber';
+    return 'Please enter the OTP sent to ${mobileNumber}';
   }
 
   @override
   String loginResendOTPIn(String time) {
-    return 'Resend in $time';
+    return 'Resend in ${time}';
   }
 
   @override
   String patientHasAnAppointment(String patient) {
-    return '$patient has an appointment';
+    return '${patient} has an appointment';
   }
 
   @override
   String vgEmptyResults(String type) {
-    return 'There are no ${type}s at present. Tap on "Add $type"';
+    return 'There are no ${type}s at present. Tap on "Add ${type}"';
   }
 
   @override
   String vgSearchByIdName(String searchType) {
-    return 'Search by $searchType ID, Name';
+    return 'Search by ${searchType} ID, Name';
   }
 
   @override
   String get questionnaireTitle => 'Eye Assessment Questions';
 
   @override
-  String get questionnaireExitDialog =>
-      'Answering these questions will help in identifying your eye problems. Do you really wish to exit?';
+  String get questionnaireExitDialog => 'Answering these questions will help in identifying your eye problems. Do you really wish to exit?';
 
   @override
   String get visualAcuityTitle => 'Visual Acuity Test';
 
   @override
-  String get visualAcuityDescription =>
-      'A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!';
+  String get visualAcuityDescription => 'A visual acuity test is an eye exam that checks how well you see the details of a letter or symbol from a specific distance. Do this quick test now!';
 
   @override
-  String get visualAcuityHowToPerform =>
-      'How to perform the visual acuity test?';
+  String get visualAcuityHowToPerform => 'How to perform the visual acuity test?';
 
   @override
-  String get visualAcuityViewStepsToPerform =>
-      'View Steps to perform Visual Acuity Test';
+  String get visualAcuityViewStepsToPerform => 'View Steps to perform Visual Acuity Test';
 
   @override
-  String get visualAcuityCompletionDialog =>
-      'Done! Visual Acuity Test is completed for both eyes. You need to capture your eye photos next.';
+  String get visualAcuityCompletionDialog => 'Done! Visual Acuity Test is completed for both eyes. You need to capture your eye photos next.';
 
   @override
-  String get visualAcuityExitDialog =>
-      'Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?';
+  String get visualAcuityExitDialog => 'Visual acuity is an important test to understand about your eye problem. Do you really wish to exit?';
 
   @override
   String get swipeGestureTab => 'Swipe Gesture';
@@ -86,29 +80,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get visualAcuityLeftEyeHeader => 'Test 2 - Left Eye';
 
   @override
-  String get visualAcuityLeftEyeInstructions =>
-      'Without pressing on the eyelid, cover the RIGHT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.';
+  String get visualAcuityLeftEyeInstructions => 'Without pressing on the eyelid, cover the RIGHT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.';
 
   @override
   String get visualAcuityRightEyeHeader => 'Test 1 - Right Eye';
 
   @override
-  String get visualAcuityRightEyeInstructions =>
-      'Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.';
+  String get visualAcuityRightEyeInstructions => 'Without pressing on the eyelid, cover the LEFT EYE with your hand. If you are wearing eyeglasses place your hand over the eyeglass.';
 
   @override
   String get visualAcuityBothEyeHeader => 'Test 3 - Both Eye';
 
   @override
-  String get visualAcuityBothEyeInstructions =>
-      'Do not cover any of your eyes and view the symbols that appear next with both eyes.';
+  String get visualAcuityBothEyeInstructions => 'Do not cover any of your eyes and view the symbols that appear next with both eyes.';
 
   @override
   String get overlayHeaderDirection => 'Direction';
 
   @override
-  String get overlayDescription =>
-      'Here is how you understand the directions for each symbol.';
+  String get overlayDescription => 'Here is how you understand the directions for each symbol.';
 
   @override
   String get overlaySymbolDirectionText => 'Symbol Direction : ';
@@ -135,19 +125,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeScanTitle => 'Eye Scan';
 
   @override
-  String get eyeScanDescription =>
-      'You are close! Just one more test to go. Capture the photos of your eyes next.';
+  String get eyeScanDescription => 'You are close! Just one more test to go. Capture the photos of your eyes next.';
 
   @override
   String get eyeScanHowToPerform => 'How to scan your eyes?';
 
   @override
-  String get eyeScanViewStepsToPerform =>
-      'View steps to know how to scan your eyes.';
+  String get eyeScanViewStepsToPerform => 'View steps to know how to scan your eyes.';
 
   @override
-  String get eyeScanExitDialog =>
-      'Eye Scan helps to understand more about your eye problem. Do you really wish to exit?';
+  String get eyeScanExitDialog => 'Eye Scan helps to understand more about your eye problem. Do you really wish to exit?';
 
   @override
   String get captureRightEyeString => 'Capture Right Eye';
@@ -201,27 +188,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retryButton => 'Retry';
 
   @override
-  String get homeCarousal1Title =>
-      'Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above';
+  String get homeCarousal1Title => 'Cataract Prevalence and Its Associated Factors among Adult Aged 40 Years and above';
 
   @override
-  String get homeCarousal1Description =>
-      'Schematic presentation of sampling procedure on prevalence of cataract and associated factors';
+  String get homeCarousal1Description => 'Schematic presentation of sampling procedure on prevalence of cataract and associated factors';
 
   @override
   String get homeCarousal2Title => '7 eye problems not to miss out!';
 
   @override
-  String get homeCarousal2Description =>
-      '\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes';
+  String get homeCarousal2Description => '\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes';
 
   @override
-  String get homeCarousal3Title =>
-      'Eye problems. There are many that you can\'t see';
+  String get homeCarousal3Title => 'Eye problems. There are many that you can\'t see';
 
   @override
-  String get homeCarousal3Description =>
-      'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later';
+  String get homeCarousal3Description => 'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later';
 
   @override
   String get myConnectionsTitle => 'My Members';
@@ -287,85 +269,70 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDrawerSignOut => 'Sign Out';
 
   @override
-  String get aboutUsDescription =>
-      'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
+  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
 
   @override
   String get aboutUsFeaturesTitle => 'Features';
 
   @override
-  String get aboutUsFeaturesDescription =>
-      'In-app Eye Testing: The app allows its users to self-assess their eyes by answering few questions and getting appropriate recommendations on the next steps and the doctor to be visited. Even friends and family of users can get benefitted too. |Appointment Booking: Users can book online teleconsultations and in-clinic visits with doctors to get their eyes diagnosed. |IVR Call Services: Our IVR call services are available in English and local languages and it caters to users with basic feature phones as well. Users can dial our eye care professionals to seek instant help during an emergency or for any eye related issues. They can also call to book appointments or seek any further clarifications. |Nearby Clinics: Users can locate the eye care clinics near to them. |Prescriptions and Reports: All prescriptions and reports of users can be accessed from one place without much hassle. |Eye Camps: Users can get information about nearby eye camps to get the eyes of their friends and family tested for free. |Reminders and Alerts: Users can receive timely alerts and reminders related to their upcoming appointments, medication, reports etc. |Sharing: Users can share this app and other useful information provided within the app with their friends and family members. ';
+  String get aboutUsFeaturesDescription => 'In-app Eye Testing: The app allows its users to self-assess their eyes by answering few questions and getting appropriate recommendations on the next steps and the doctor to be visited. Even friends and family of users can get benefitted too. |Appointment Booking: Users can book online teleconsultations and in-clinic visits with doctors to get their eyes diagnosed. |IVR Call Services: Our IVR call services are available in English and local languages and it caters to users with basic feature phones as well. Users can dial our eye care professionals to seek instant help during an emergency or for any eye related issues. They can also call to book appointments or seek any further clarifications. |Nearby Clinics: Users can locate the eye care clinics near to them. |Prescriptions and Reports: All prescriptions and reports of users can be accessed from one place without much hassle. |Eye Camps: Users can get information about nearby eye camps to get the eyes of their friends and family tested for free. |Reminders and Alerts: Users can receive timely alerts and reminders related to their upcoming appointments, medication, reports etc. |Sharing: Users can share this app and other useful information provided within the app with their friends and family members. ';
 
   @override
-  String get aboutUsConclusion =>
-      'The app is developed with the help of leading eye care professionals to serve our user community better. Join us in our mission to create a brighter, healthier world. Download and Share the Sightconnect app today!';
+  String get aboutUsConclusion => 'The app is developed with the help of leading eye care professionals to serve our user community better. Join us in our mission to create a brighter, healthier world. Download and Share the Sightconnect app today!';
 
   @override
-  String get privacyPolicyDescription =>
-      'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.';
+  String get privacyPolicyDescription => 'LV Prasad Eye Institute, its subsidiaries, associates and affiliated companies (collectively referred to as “LVPEI”, “us”, “we”) are committed to process your personal data as per the laws of your jurisdiction. We hereby notify you the following information about the processing of personal data.';
 
   @override
-  String get privacyPolicyPersonalDataTitle =>
-      'Personal data elements collected/processed:';
+  String get privacyPolicyPersonalDataTitle => 'Personal data elements collected/processed:';
 
   @override
-  String get privacyPolicyPersonalDataDescription =>
-      'You and your connections personal data such as (Some of these data would be optional) Mobile number, Name, Date of birth, Gender (Male/Female), Address (Pin code), patient ID, Connection, eye triage questionnaire responses, eye triage report, eye images, symptoms tagged against your eye image, Photograph, Address details such as address, district name (including District code), state name (including state code), sub district name, village name, town name, Email address, Last Name, Middle Name, Blood Group, Height, Weight, Occupation, ABHA details (as provided by you), based on your app permissions access to Camera, GPS Location, Gallery for accessing the application, full network access, view network connections, Device information.';
+  String get privacyPolicyPersonalDataDescription => 'You and your connections personal data such as (Some of these data would be optional) Mobile number, Name, Date of birth, Gender (Male/Female), Address (Pin code), patient ID, Connection, eye triage questionnaire responses, eye triage report, eye images, symptoms tagged against your eye image, Photograph, Address details such as address, district name (including District code), state name (including state code), sub district name, village name, town name, Email address, Last Name, Middle Name, Blood Group, Height, Weight, Occupation, ABHA details (as provided by you), based on your app permissions access to Camera, GPS Location, Gallery for accessing the application, full network access, view network connections, Device information.';
 
   @override
   String get privacyPolicyPurposeOfProcessingTitle => 'Purpose of Processing:';
 
   @override
-  String get privacyPolicyPurposeOfProcessingDescription =>
-      'To enable you to access our application and its features for eye related online health checkup for you and your connections (as provided by you).|To enable you to contact Vision Technicians, Ophthalmologists under LVPEI, as applicable, in case of any eye related illness/health difficulties.|For providing any eye health-related data (including reports etc.) as part of your health consultation and diagnosis and in order to contact you or your connections as part of health-related concerns.|For sharing of your eye health data with our authorized LVPEI ophthalmologists/ doctors for better diagnosis and further sharing the same with the Village Chief/ Mayor etc. (where applicable based on your GPS location) depending on the severity of the eye issue in case you are unable to reach out to/ inform the LVPEI doctors for treatment.|To provide the list of Eye clinics/ hospitals affiliated with LVPEI near you, for you to reach out to in case of any eye related problems.|For using the information such as Eye Image, symptoms related to the eye image, Age, Blood Group, Location without any identifiers to help train our machine learning or artificial intelligence models for the purpose of providing proper diagnosis in the future|For sending reminder, communication, campaign mailers, to create awareness for eye health.';
+  String get privacyPolicyPurposeOfProcessingDescription => 'To enable you to access our application and its features for eye related online health checkup for you and your connections (as provided by you).|To enable you to contact Vision Technicians, Ophthalmologists under LVPEI, as applicable, in case of any eye related illness/health difficulties.|For providing any eye health-related data (including reports etc.) as part of your health consultation and diagnosis and in order to contact you or your connections as part of health-related concerns.|For sharing of your eye health data with our authorized LVPEI ophthalmologists/ doctors for better diagnosis and further sharing the same with the Village Chief/ Mayor etc. (where applicable based on your GPS location) depending on the severity of the eye issue in case you are unable to reach out to/ inform the LVPEI doctors for treatment.|To provide the list of Eye clinics/ hospitals affiliated with LVPEI near you, for you to reach out to in case of any eye related problems.|For using the information such as Eye Image, symptoms related to the eye image, Age, Blood Group, Location without any identifiers to help train our machine learning or artificial intelligence models for the purpose of providing proper diagnosis in the future|For sending reminder, communication, campaign mailers, to create awareness for eye health.';
 
   @override
-  String get privacyPolicyDataRecipientsTitle =>
-      'Data Recipients/ Accessible to:';
+  String get privacyPolicyDataRecipientsTitle => 'Data Recipients/ Accessible to:';
 
   @override
-  String get privacyPolicyDataRecipientsDescription =>
-      'The personal data shared by you (including sensitive personal data) will be accessible to authorized LVPEI personnel such as Doctors/ Ophthalmologists, Vision Technicians, Vision Guardians, representatives from LVPEI, internal/external auditors, Government authorities where applicable, and our authorized service provider Infosys as applicable.';
+  String get privacyPolicyDataRecipientsDescription => 'The personal data shared by you (including sensitive personal data) will be accessible to authorized LVPEI personnel such as Doctors/ Ophthalmologists, Vision Technicians, Vision Guardians, representatives from LVPEI, internal/external auditors, Government authorities where applicable, and our authorized service provider Infosys as applicable.';
 
   @override
   String get privacyPolicyDataTransferTitle => 'Data Transfer & Storage:';
 
   @override
-  String get privacyPolicyDataTransferDescription =>
-      'The personal data shared by you will get stored on our internal servers, our authorized service provider’s server in India.';
+  String get privacyPolicyDataTransferDescription => 'The personal data shared by you will get stored on our internal servers, our authorized service provider’s server in India.';
 
   @override
   String get privacyPolicyDataSecurityTitle => 'Data Security:';
 
   @override
-  String get privacyPolicyDataSecurityDescription =>
-      'LVPEI adopts reasonable and appropriate security practices and procedures including administrative, physical security, and technical controls in order to safeguard your Personal Data.';
+  String get privacyPolicyDataSecurityDescription => 'LVPEI adopts reasonable and appropriate security practices and procedures including administrative, physical security, and technical controls in order to safeguard your Personal Data.';
 
   @override
   String get privacyPolicyDataRetentionTitle => 'Data Retention:';
 
   @override
-  String get privacyPolicyDataRetentionDescription =>
-      'Personal Data that is no longer required to be retained as per legal and business requirements will be disposed in a secure manner.';
+  String get privacyPolicyDataRetentionDescription => 'Personal Data that is no longer required to be retained as per legal and business requirements will be disposed in a secure manner.';
 
   @override
   String get privacyPolicyDataSubjectRightsTitle => 'Data subject rights:';
 
   @override
-  String get privacyPolicyDataSubjectRightsDescription =>
-      'You are entitled at any time to access and rectify your personal information. In case of any requests, issues, concerns or queries you may reach out to LV Prasad Office by sending an email to <LVPEI to provide generic mail ID for DSR>. ';
+  String get privacyPolicyDataSubjectRightsDescription => 'You are entitled at any time to access and rectify your personal information. In case of any requests, issues, concerns or queries you may reach out to LV Prasad Office by sending an email to <LVPEI to provide generic mail ID for DSR>. ';
 
   @override
   String get privacyPolicyRightToWithdrawTitle => 'Right to Withdrawal:';
 
   @override
-  String get privacyPolicyRightToWithdrawDescription =>
-      'Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to <LVPEI to provide generic mail ID for DSR>.';
+  String get privacyPolicyRightToWithdrawDescription => 'Where we process your Personal Data based on your consent, you may withdraw your consent to the processing as per applicable DP laws at any time for the future. This will not affect the lawfulness of any processing operation before your withdrawal. To withdraw your consent, you may send an email to <LVPEI to provide generic mail ID for DSR>.';
 
   @override
-  String get privacyPolicyAcknowledgement =>
-      'By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.';
+  String get privacyPolicyAcknowledgement => 'By clicking the below button, you hereby acknowledge and understand that your personal data including sensitive personal data may be collected and processed in the above-mentioned manner and hereby consent to the same for the above-mentioned purposes. You also acknowledge that any personal data including sensitive personal data (other than yourself) shared by you is only after taking appropriate consent from them. You also acknowledge that you will not share any personal data (including sensitive personal data) which is not required for the above-mentioned purposes. You also acknowledge that when you are sharing minor’s personal data as their parent/ legal guardian you consent to their data collection and processing as mentioned above.';
 
   @override
   String get privacyPolicyBottomAppBarLabel => 'Privacy Policy Accepted';
@@ -374,8 +341,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get helpAndSupportReachTitle => 'Reach out to us';
 
   @override
-  String get assessmentAndTestsSubtitle =>
-      'Here is a quick view of the assessments done so far.';
+  String get assessmentAndTestsSubtitle => 'Here is a quick view of the assessments done so far.';
 
   @override
   String get assessmentAndTestsReportsNotFound => 'No Reports Found';
@@ -384,8 +350,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeAssessmentTitle => 'Eye Assessment';
 
   @override
-  String get eyeAssessmentSubtitle =>
-      'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
+  String get eyeAssessmentSubtitle => 'Get the eye problems of you, your friends, and, family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
 
   @override
   String get eyeAssessmentGetMemberLabel => 'Change Member';
@@ -397,19 +362,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeAssessmentBrightnessLabel => 'Brightness set to 80%';
 
   @override
-  String get eyeAssessmentBrightnessError =>
-      'Please set the brightness manually to 80%';
+  String get eyeAssessmentBrightnessError => 'Please set the brightness manually to 80%';
 
   @override
-  String get eyeAssessmentUnsupportedQuestion =>
-      'Question not supported yet - can this be translated as answer/feedback not available yet?';
+  String get eyeAssessmentUnsupportedQuestion => 'Question not supported yet - can this be translated as answer/feedback not available yet?';
 
   @override
   String get eyeAssessmentPopUpHeading => 'Assessment';
 
   @override
-  String get eyeAssessmentPopUpBody =>
-      'Are you having any eyesight related problem?';
+  String get eyeAssessmentPopUpBody => 'Are you having any eyesight related problem?';
 
   @override
   String get eyeAssessmentPopUpYesButton => 'Yes';
@@ -418,20 +380,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeAssessmentPopUpNoButton => 'No';
 
   @override
-  String get visualAcuityTestInstructionOne =>
-      'Sit down comfortably in a well light location. You may feel a sudden change in brightness, don’t worry the screen is set to auto-brightness to provide optimal result';
+  String get visualAcuityTestInstructionOne => 'Sit down comfortably in a well light location. You may feel a sudden change in brightness, don’t worry the screen is set to auto-brightness to provide optimal result';
 
   @override
-  String get visualAcuityTestInstructionTwo =>
-      'Make sure you are holding the device at the eye level. If you wear glasses or contact lenses, keep them on';
+  String get visualAcuityTestInstructionTwo => 'Make sure you are holding the device at the eye level. If you wear glasses or contact lenses, keep them on';
 
   @override
-  String get visualAcuityTestInstructionThree =>
-      'Position yourself 40 cm from the screen. Distance will be shown in the test screen.';
+  String get visualAcuityTestInstructionThree => 'Position yourself 40 cm from the screen. Distance will be shown in the test screen.';
 
   @override
-  String get visualAcuityTestInstructionFour =>
-      'If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested.';
+  String get visualAcuityTestInstructionFour => 'If you are testing with glasses on, cover one eye with your hand over the glasses when only one eye is tested.';
 
   @override
   String get skipAndProceedButton => 'Skip & Proceed to Scan';
@@ -467,40 +425,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeAssessmentCompleteSteps => 'Complete all steps to view results';
 
   @override
-  String get eyeAssessmentToolTip =>
-      'Please make sure that the flash is turned off and the brightness is set to 80%';
+  String get eyeAssessmentToolTip => 'Please make sure that the flash is turned off and the brightness is set to 80%';
 
   @override
-  String get eyeScanInstructionOne =>
-      'Hold the camera placing the face properly on the frame.';
+  String get eyeScanInstructionOne => 'Hold the camera placing the face properly on the frame.';
 
   @override
-  String get eyeScanInstructionTwo =>
-      'Take an image of the eyes using the back camera of your phone.';
+  String get eyeScanInstructionTwo => 'Take an image of the eyes using the back camera of your phone.';
 
   @override
-  String get eyeScanInstructionThree =>
-      'Make sure to be in a well-lit area with the flash on.';
+  String get eyeScanInstructionThree => 'Make sure to be in a well-lit area with the flash on.';
 
   @override
-  String get eyeScanInstructionFour =>
-      'For better capture and clarity, have someone else to click the picture.';
+  String get eyeScanInstructionFour => 'For better capture and clarity, have someone else to click the picture.';
 
   @override
-  String get eyeScanInstructionFive =>
-      'Cover one eye with your hand and look straight ahead with the other eye while taking the picture.';
+  String get eyeScanInstructionFive => 'Cover one eye with your hand and look straight ahead with the other eye while taking the picture.';
 
   @override
-  String get eyeScanInstructionSix =>
-      'Centre the eye inside the panel before starting the picture.';
+  String get eyeScanInstructionSix => 'Centre the eye inside the panel before starting the picture.';
 
   @override
-  String get eyeScanInstructionSeven =>
-      'Keep the eyes wide open till the flash goes off, until a ‘beep’ sound signals the end of the Photo.';
+  String get eyeScanInstructionSeven => 'Keep the eyes wide open till the flash goes off, until a ‘beep’ sound signals the end of the Photo.';
 
   @override
-  String get eyeAssessmentNote =>
-      'Note: The images shown here are for indication only. They may not appear the same way in real life.';
+  String get eyeAssessmentNote => 'Note: The images shown here are for indication only. They may not appear the same way in real life.';
 
   @override
   String get agreeButton => 'I Agree';
@@ -521,8 +470,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeCaptureCompletionDialogHeading => 'Test Completed';
 
   @override
-  String get eyeCaptureCompletionDialogBody =>
-      'You have completed the test. Please click on the button below to view the result.';
+  String get eyeCaptureCompletionDialogBody => 'You have completed the test. Please click on the button below to view the result.';
 
   @override
   String get eyeCaptureCompletionDialogViewResult => 'View Result';
@@ -534,8 +482,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get visualAcuityTestResults => 'Visual Acuity Test Results';
 
   @override
-  String get assessmentResultPageMoreDetailsText =>
-      'Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.';
+  String get assessmentResultPageMoreDetailsText => 'Visit the nearest vision center for more details. Call the toll-free number to speak to our vision technician.';
 
   @override
   String get assessmentReportButton => 'Eye Assessment Report';
@@ -610,8 +557,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get swipeGestureCardText => 'Swipe in the direction of the symbol';
 
   @override
-  String get assessmentResultCardAssessmentQuestions =>
-      'Assessment\r\nQuestions';
+  String get assessmentResultCardAssessmentQuestions => 'Assessment\r\nQuestions';
 
   @override
   String get assessmentResultCardAcuityTest => 'Acuity\r\nTest';
@@ -644,22 +590,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeTriageCardTitle => 'Our eyes are the most valuable assets.';
 
   @override
-  String get homeTriageCardDescription =>
-      'Get them tested on time to prevent eye problems.';
+  String get homeTriageCardDescription => 'Get them tested on time to prevent eye problems.';
 
   @override
   String get homeTriageCardTest => 'Start Eye Test';
 
   @override
-  String get homeHelplineCardDescrition =>
-      'In the event of a sudden vision loss, call this emergency helpline';
+  String get homeHelplineCardDescrition => 'In the event of a sudden vision loss, call this emergency helpline';
 
   @override
   String get inviteCardTitle => 'Invite Others';
 
   @override
-  String get inviteCardDescription =>
-      'Invite 5 friends and family members so that they can get their eyes assessed and prevent eye issues in the future.';
+  String get inviteCardDescription => 'Invite 5 friends and family members so that they can get their eyes assessed and prevent eye issues in the future.';
 
   @override
   String get inviteCardInvitation => 'Invite Now';
@@ -698,8 +641,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scannerTitle => 'Scanner';
 
   @override
-  String get visualAcuityTestDistanceInstruction =>
-      'Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstruction => 'Position the camera 40cm away from the eye.';
 
   @override
   String get somethingWentWrong => 'Something went wrong.';
@@ -714,16 +656,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyPolicyTitle => 'Privacy & Data Protection';
 
   @override
-  String get privacyPolicyPurposeOfProcessingSubTitle =>
-      'We process the Personal Data provided by you for the below purposes such as:';
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooClose =>
-      'You are too close to the Camera, Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstructionTooClose => 'You are too close to the Camera, Position the camera 40cm away from the eye.';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooFar =>
-      'You are too far from the Camera, Position the camera 40cm away from the eye.';
+  String get visualAcuityTestDistanceInstructionTooFar => 'You are too far from the Camera, Position the camera 40cm away from the eye.';
 
   @override
   String get myProfileABHAID => 'ABHA ID';
@@ -756,25 +695,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appointmentSubtitle => 'All Appointments';
 
   @override
-  String get eyeBoxText =>
-      'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
+  String get eyeBoxText => 'Please adjust and position the image until green boxes appear around the eyes. Move the eye closer and ensure that 40% of the box is covered by the eye.';
 
   @override
   String get bottomNavItemServices => 'Services';
 
   @override
-  String get smsContent =>
-      'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
+  String get smsContent => 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hand. Get it now: https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject =>
-      'Prioritize your eye health with SightConnect App!';
+  String get emailSubject => 'Prioritize your eye health with SightConnect App!';
 
   @override
   String get recentServicesCataractEyeTest => 'Cataract Eye Test';
 
   @override
   String get recentServicesRedEyeTest => 'Red Eye Test';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'Start Eye Assessment|Common eye issues|Tips for a better eye sight';
+
+  @override
+  String get chatBotWelcomeMessage => 'Hi, How may I help you today?';
 
   @override
   String get poweredByText => 'Powered by';
@@ -784,13 +726,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get inviteNowText => 'Invite Now';
-
-  @override
-  String get chatBotDefaultQuerySuggestions =>
-      'Start Eye Assessment|Common eye issues|Tips for a better eye sight';
-
-  @override
-  String get chatBotWelcomeMessage => 'Hi, How may I help you today?';
 
   @override
   String get resend => 'Resend';
@@ -835,8 +770,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get triageHowToReport => 'How to report eye problems?';
 
   @override
-  String get triageReportInstructions =>
-      'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
+  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
 
   @override
   String get assessment => 'Assessment';
@@ -854,8 +788,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get triageTestId => 'Test ID';
 
   @override
-  String get triageEyeScanUpdatedSuccessfully =>
-      'Eye scan updated successfully';
+  String get triageEyeScanUpdatedSuccessfully => 'Eye scan updated successfully';
 
   @override
   String get triageErrorEyeScanNotUpdated => 'Eye scan not updated!';
@@ -897,8 +830,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vaDistanceToFace => 'Distance to face';
 
   @override
-  String get vaDistanceToFaceInstruction =>
-      'Please ensure that the camera is 40cm away from your face';
+  String get vaDistanceToFaceInstruction => 'Please ensure that the camera is 40cm away from your face';
 
   @override
   String get vaBringFaceInsideBox => 'Bring your face inside the box';
@@ -913,8 +845,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loggedOutMessage => 'You have been logged out';
 
   @override
-  String get optoLogoutError =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get optoLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
   String get optoLoggingOut => 'Logging out...';
@@ -947,8 +878,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get feedback => 'FeedBack';
 
   @override
-  String get optoImproveApp =>
-      'We would like your feedback to improve our application';
+  String get optoImproveApp => 'We would like your feedback to improve our application';
 
   @override
   String get assessments => 'Assessments';
@@ -972,8 +902,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get optoNoInternet => 'No Internet Connection';
 
   @override
-  String get optoCheckInternet =>
-      'Please check your internet connection and try again';
+  String get optoCheckInternet => 'Please check your internet connection and try again';
 
   @override
   String get optoSearchPatientId => 'Search Patient ID';
@@ -1069,8 +998,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get patientIVRAssessment => 'IVR Assessment';
 
   @override
-  String get patientEarlyConsultationRecommended =>
-      'Early Consultation Recommended';
+  String get patientEarlyConsultationRecommended => 'Early Consultation Recommended';
 
   @override
   String get patientCataractEyeReport => 'Cataract Eye Report';
@@ -1103,8 +1031,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get patientLoggedOut => 'You have been logged out';
 
   @override
-  String get patientLogoutError =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get patientLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
   String get patientUpdateProfile => 'Update Profile';
@@ -1143,8 +1070,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgPleaseEnterEndTime => 'Please Enter End time';
 
   @override
-  String get vgShouldNotContainSpecialCharacter =>
-      'Should not contain any special character';
+  String get vgShouldNotContainSpecialCharacter => 'Should not contain any special character';
 
   @override
   String get vgEventDescription => 'Event Description';
@@ -1168,15 +1094,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgStart => 'Start';
 
   @override
-  String get vgEyeAssessmentDescription =>
-      'Get the eye problems of you, your friends, and family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
+  String get vgEyeAssessmentDescription => 'Get the eye problems of you, your friends, and family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
 
   @override
   String get vgLogoutMessage => 'You have been logged out';
 
   @override
-  String get vgLogoutErrorMessage =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get vgLogoutErrorMessage => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
   String get vgWelcome => 'Welcome';
@@ -1254,8 +1178,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vtLogoutMessage => 'You have been logged out';
 
   @override
-  String get vtLogoutError =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get vtLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
   String get vtError => 'Error';
@@ -1312,15 +1235,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get secureJailbreak => 'It seems your device is jailbroken';
 
   @override
-  String get secureRestrictedAccess =>
-      'For security reasons, access to this app is restricted on jailbroken devices.';
+  String get secureRestrictedAccess => 'For security reasons, access to this app is restricted on jailbroken devices.';
 
   @override
   String get secureExitApp => 'Exit App';
 
   @override
-  String get sharedErrorPageIssues =>
-      'We are facing some issues. Please try again later.';
+  String get sharedErrorPageIssues => 'We are facing some issues. Please try again later.';
 
   @override
   String get appointmentBookingTitle => 'Appointment Booking';
@@ -1359,8 +1280,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vtSearchText => 'Search by Patient ID, Mobile No or Name';
 
   @override
-  String get emptyPatientsInfo =>
-      'Start searching for patients to view their details .. ';
+  String get emptyPatientsInfo => 'Start searching for patients to view their details .. ';
 
   @override
   String get vtPersonalDetails => 'Personal Details';
@@ -1534,8 +1454,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vtAssessmentEA => 'Assessment EA';
 
   @override
-  String get vtNotRegistered =>
-      'You are not registered in the system. Please give a missed call to';
+  String get vtNotRegistered => 'You are not registered in the system. Please give a missed call to';
 
   @override
   String get vtOkay => 'Okay';
@@ -1745,8 +1664,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgUploadImage => 'Upload Image';
 
   @override
-  String get vgAddPhotoInstruction =>
-      'Add a photo of the Event which\r\nwill be shown as thumbnail';
+  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\nwill be shown as thumbnail';
 
   @override
   String get vgAddressDetails => 'Address Details';
@@ -1758,8 +1676,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgVenueNameError => 'Please enter Venue name';
 
   @override
-  String get vgVenueNameSpecialCharError =>
-      'Should not contain any special character';
+  String get vgVenueNameSpecialCharError => 'Should not contain any special character';
 
   @override
   String get vgPincode => 'Pincode';
@@ -1774,8 +1691,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgCityTownVillageError => 'Please enter City/Town/Village name';
 
   @override
-  String get vgCityTownVillageSpecialCharError =>
-      'Should not contain any special character';
+  String get vgCityTownVillageSpecialCharError => 'Should not contain any special character';
 
   @override
   String get vgCancel => 'Cancel';
@@ -1832,8 +1748,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgErrorFetchingEventDetails => 'Error fetching event details';
 
   @override
-  String get vgNoPatientRegistered =>
-      'No Patient with Name is registered. Click on the  Register Patient.';
+  String get vgNoPatientRegistered => 'No Patient with Name is registered. Click on the  Register Patient.';
 
   @override
   String get vgRegisterPatient => 'Register Patient';
@@ -1884,8 +1799,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgPhoneNumber => 'Phone Number';
 
   @override
-  String get vgErrorFetchingTeammatesDetails =>
-      'Error fetching teammates details';
+  String get vgErrorFetchingTeammatesDetails => 'Error fetching teammates details';
 
   @override
   String get vgTeamMateAddedSuccessfully => 'TeamMate Added Successfully';
@@ -1912,10 +1826,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgEventDeletionFailed => 'Event Deletion Failed';
 
   @override
-  String get vgEndTimeGreaterThanStartTime =>
-      'End time should be greater than start time';
+  String get vgEndTimeGreaterThanStartTime => 'End time should be greater than start time';
 
   @override
-  String get vgNoPatientsPresent =>
-      'There are no patients at present. Tap on "Add Patient"';
+  String get vgNoPatientsPresent => 'There are no patients at present. Tap on "Add Patient"';
+
+  @override
+  String get textSize => 'Text Size';
+
+  @override
+  String get increase => 'Increase';
+
+  @override
+  String get decrease => 'Decrease';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get minimumTextSizeReached => 'Minimum text size reached';
+
+  @override
+  String get maximumTextSizeReached => 'Maximum text size reached';
 }

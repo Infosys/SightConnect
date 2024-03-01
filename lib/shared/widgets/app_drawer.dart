@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
@@ -53,7 +55,7 @@ class AppDrawer extends HookWidget {
             backgroundColor: AppColor.white,
             body: LoadingOverlay(
               isLoading: isLoading.value,
-              progressMessage: "Logging out...",
+              progressMessage: loc.optoLoggingOut,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -143,6 +145,27 @@ class AppDrawer extends HookWidget {
                                     ),
                                   );
                                   break;
+
+                                case DrawerMenuItemId.chatbot:
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    var languageProvider =
+                                        ref.watch(globalLanguageProvider);
+                                    var currentLanguage =
+                                        languageProvider.currentLanguage;
+                                    var currentLanguageCode = languageProvider
+                                        .currentLocale!.languageCode;
+                                    debugPrint("language: $currentLanguage");
+                                    return ChatBotPage(
+                                      selectedLanguage: currentLanguage,
+                                      selectedLanguageCode: currentLanguageCode,
+                                      welcomeMessage: loc.chatBotWelcomeMessage,
+                                      defaultQuerySuggestions: loc
+                                          .chatBotDefaultQuerySuggestions
+                                          .split("|"),
+                                    );
+                                  }));
+
                                 default:
                               }
                             },

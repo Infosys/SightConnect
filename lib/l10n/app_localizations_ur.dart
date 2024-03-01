@@ -6,63 +6,57 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String stepNumber(String current, String total) {
-    return '$current of $total';
+    return '${current} of ${total}';
   }
 
   @override
   String loginEnterOTP(String mobileNumber) {
-    return 'Please enter the OTP sent to $mobileNumber';
+    return 'براہ کرم بھیجا گیا او ٹی پی درج کریں ${mobileNumber}';
   }
 
   @override
   String loginResendOTPIn(String time) {
-    return 'Resend in $time';
+    return 'دوبارہ بھیجیں ${time}';
   }
 
   @override
   String patientHasAnAppointment(String patient) {
-    return '$patient has an appointment';
+    return '${patient} مریض کا ملاقات کا وقت ہے';
   }
 
   @override
   String vgEmptyResults(String type) {
-    return 'There are no ${type}s at present. Tap on "Add $type"';
+    return '${type} فی الحال کوئی قسم نہیں ہے۔ ایڈ پر ٹیپ کریں';
   }
 
   @override
   String vgSearchByIdName(String searchType) {
-    return 'Search by $searchType ID, Name';
+    return 'آئی ڈی، نام کے ذریعے تلاش کریں ${searchType}';
   }
 
   @override
   String get questionnaireTitle => 'آنکھوں کی تشخیص کے سوالات';
 
   @override
-  String get questionnaireExitDialog =>
-      'ان سوالوں کے جواب دینے سے آپ کی آنکھوں کے مسائل کی نشاندہی کرنے میں مدد ملے گی۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟';
+  String get questionnaireExitDialog => 'ان سوالوں کے جواب دینے سے آپ کی آنکھوں کے مسائل کی نشاندہی کرنے میں مدد ملے گی۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟';
 
   @override
   String get visualAcuityTitle => 'بصری ایکویٹی ٹیسٹ';
 
   @override
-  String get visualAcuityDescription =>
-      'بصری ایکویٹی ٹیسٹ ایک آنکھ کا امتحان ہے جو یہ چیک کرتا ہے کہ آپ کسی مخصوص فاصلے سے کسی حرف یا علامت کی تفصیلات کو کتنی اچھی طرح سے دیکھتے ہیں۔ یہ فوری ٹیسٹ ابھی کریں!';
+  String get visualAcuityDescription => 'بصری ایکویٹی ٹیسٹ ایک آنکھ کا امتحان ہے جو یہ چیک کرتا ہے کہ آپ کسی مخصوص فاصلے سے کسی حرف یا علامت کی تفصیلات کو کتنی اچھی طرح سے دیکھتے ہیں۔ یہ فوری ٹیسٹ ابھی کریں!';
 
   @override
-  String get visualAcuityHowToPerform =>
-      'بصری ایکویٹی ٹیسٹ کیسے انجام دیا جائے؟';
+  String get visualAcuityHowToPerform => 'بصری ایکویٹی ٹیسٹ کیسے انجام دیا جائے؟';
 
   @override
-  String get visualAcuityViewStepsToPerform =>
-      'بصری ایکویٹی ٹیسٹ انجام دینے کے اقدامات دیکھیں';
+  String get visualAcuityViewStepsToPerform => 'بصری ایکویٹی ٹیسٹ انجام دینے کے اقدامات دیکھیں';
 
   @override
-  String get visualAcuityCompletionDialog =>
-      'ہو گیا! دونوں آنکھوں کے لیے بصری ایکویٹی ٹیسٹ مکمل ہو گیا ہے۔ اس کے بعد آپ کو اپنی آنکھوں کی تصاویر لینے کی ضرورت ہے۔';
+  String get visualAcuityCompletionDialog => 'ہو گیا! دونوں آنکھوں کے لیے بصری ایکویٹی ٹیسٹ مکمل ہو گیا ہے۔ اس کے بعد آپ کو اپنی آنکھوں کی تصاویر لینے کی ضرورت ہے۔';
 
   @override
-  String get visualAcuityExitDialog =>
-      'آپ کی آنکھوں کے مسئلے کے بارے میں سمجھنے کے لیے بصری ایکویٹی ایک اہم امتحان ہے۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟';
+  String get visualAcuityExitDialog => 'آپ کی آنکھوں کے مسئلے کے بارے میں سمجھنے کے لیے بصری ایکویٹی ایک اہم امتحان ہے۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟';
 
   @override
   String get swipeGestureTab => 'اشارہ سوائپ کریں';
@@ -86,29 +80,25 @@ class AppLocalizationsUr extends AppLocalizations {
   String get visualAcuityLeftEyeHeader => 'ٹیسٹ 2-بائیں آنکھ';
 
   @override
-  String get visualAcuityLeftEyeInstructions =>
-      'پلک پر دبانے کے بغیر، دائیں آنکھ کو اپنے ہاتھ سے ڈھانپیں۔ اگر آپ چشمے پہنے ہوئے ہیں تو اپنا ہاتھ چشمے پر رکھیں۔';
+  String get visualAcuityLeftEyeInstructions => 'پلک پر دبانے کے بغیر، دائیں آنکھ کو اپنے ہاتھ سے ڈھانپیں۔ اگر آپ چشمے پہنے ہوئے ہیں تو اپنا ہاتھ چشمے پر رکھیں۔';
 
   @override
   String get visualAcuityRightEyeHeader => 'ٹیسٹ 1-دائیں آنکھ';
 
   @override
-  String get visualAcuityRightEyeInstructions =>
-      'پلک پر دبانے کے بغیر بائیں آنکھ کو اپنے ہاتھ سے ڈھانپیں۔ اگر آپ چشمے پہنے ہوئے ہیں تو اپنا ہاتھ چشمے کے اوپر رکھیں۔';
+  String get visualAcuityRightEyeInstructions => 'پلک پر دبانے کے بغیر بائیں آنکھ کو اپنے ہاتھ سے ڈھانپیں۔ اگر آپ چشمے پہنے ہوئے ہیں تو اپنا ہاتھ چشمے کے اوپر رکھیں۔';
 
   @override
   String get visualAcuityBothEyeHeader => 'ٹیسٹ 3-دونوں آنکھیں';
 
   @override
-  String get visualAcuityBothEyeInstructions =>
-      'اپنی کسی بھی آنکھ کو نہ ڈھانپیں اور ان علامتوں کو دیکھیں جو دونوں آنکھوں سے آگے دکھائی دیتی ہیں۔';
+  String get visualAcuityBothEyeInstructions => 'اپنی کسی بھی آنکھ کو نہ ڈھانپیں اور ان علامتوں کو دیکھیں جو دونوں آنکھوں سے آگے دکھائی دیتی ہیں۔';
 
   @override
   String get overlayHeaderDirection => 'سمت';
 
   @override
-  String get overlayDescription =>
-      'یہاں یہ ہے کہ آپ ہر علامت کی سمتوں کو کیسے سمجھتے ہیں۔';
+  String get overlayDescription => 'یہاں یہ ہے کہ آپ ہر علامت کی سمتوں کو کیسے سمجھتے ہیں۔';
 
   @override
   String get overlaySymbolDirectionText => 'علامت کی سمت:';
@@ -129,26 +119,22 @@ class AppLocalizationsUr extends AppLocalizations {
   String get dontShowAgainString => 'دوبارہ نہ دکھائیں';
 
   @override
-  String get visualAcuityCarouselTitle =>
-      'بصری ایکویٹی ٹیسٹ انجام دینے کے اقدامات';
+  String get visualAcuityCarouselTitle => 'بصری ایکویٹی ٹیسٹ انجام دینے کے اقدامات';
 
   @override
   String get eyeScanTitle => 'آنکھ کا اسکین';
 
   @override
-  String get eyeScanDescription =>
-      'آپ قریب ہیں! بس ایک اور امتحان باقی ہے۔ آگے اپنی آنکھوں کی تصاویر کھینچیں۔';
+  String get eyeScanDescription => 'آپ قریب ہیں! بس ایک اور امتحان باقی ہے۔ آگے اپنی آنکھوں کی تصاویر کھینچیں۔';
 
   @override
   String get eyeScanHowToPerform => 'اپنی آنکھوں کو کیسے اسکین کریں؟';
 
   @override
-  String get eyeScanViewStepsToPerform =>
-      'اپنی آنکھوں کو اسکین کرنے کا طریقہ جاننے کے لیے اقدامات دیکھیں۔';
+  String get eyeScanViewStepsToPerform => 'اپنی آنکھوں کو اسکین کرنے کا طریقہ جاننے کے لیے اقدامات دیکھیں۔';
 
   @override
-  String get eyeScanExitDialog =>
-      'آئی اسکین آپ کی آنکھوں کے مسئلے کے بارے میں مزید سمجھنے میں مدد کرتا ہے۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟';
+  String get eyeScanExitDialog => 'آئی اسکین آپ کی آنکھوں کے مسئلے کے بارے میں مزید سمجھنے میں مدد کرتا ہے۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟';
 
   @override
   String get captureRightEyeString => 'دائیں آنکھ پکڑو';
@@ -202,27 +188,22 @@ class AppLocalizationsUr extends AppLocalizations {
   String get retryButton => 'دوبارہ کوشش کریں';
 
   @override
-  String get homeCarousal1Title =>
-      '40 سال اور اس سے زیادہ عمر کے بالغوں میں موتیابند کا پھیلاؤ اور اس سے وابستہ عوامل';
+  String get homeCarousal1Title => '40 سال اور اس سے زیادہ عمر کے بالغوں میں موتیابند کا پھیلاؤ اور اس سے وابستہ عوامل';
 
   @override
-  String get homeCarousal1Description =>
-      'موتیابند اور اس سے وابستہ عوامل کے پھیلاؤ پر نمونے لینے کے طریقہ کار کی منصوبہ بند پیشکش';
+  String get homeCarousal1Description => 'موتیابند اور اس سے وابستہ عوامل کے پھیلاؤ پر نمونے لینے کے طریقہ کار کی منصوبہ بند پیشکش';
 
   @override
   String get homeCarousal2Title => 'آنکھوں کے 7 مسائل جن سے باہر نہ نکلیں!';
 
   @override
-  String get homeCarousal2Description =>
-      'آنکھوں کے 7 مسائل جن کی جانچ کروائی جانی چاہیے: آنکھ کی لالی آنکھوں سے پانی آنا آنکھوں پر سفید دھبے';
+  String get homeCarousal2Description => 'آنکھوں کے 7 مسائل جن کی جانچ کروائی جانی چاہیے: آنکھ کی لالی آنکھوں سے پانی آنا آنکھوں پر سفید دھبے';
 
   @override
-  String get homeCarousal3Title =>
-      'آنکھوں کے مسائل۔ بہت سے ایسے ہیں جنہیں آپ نہیں دیکھ سکتے۔';
+  String get homeCarousal3Title => 'آنکھوں کے مسائل۔ بہت سے ایسے ہیں جنہیں آپ نہیں دیکھ سکتے۔';
 
   @override
-  String get homeCarousal3Description =>
-      'لیکن بینائی کی دیکھ بھال کرنے والا ماہر کر سکتا ہے۔ بعد میں پیچیدگیوں سے بچنے کے لیے وقت پر آنکھوں کے مسائل کی نشاندہی اور علاج کروائیں۔';
+  String get homeCarousal3Description => 'لیکن بینائی کی دیکھ بھال کرنے والا ماہر کر سکتا ہے۔ بعد میں پیچیدگیوں سے بچنے کے لیے وقت پر آنکھوں کے مسائل کی نشاندہی اور علاج کروائیں۔';
 
   @override
   String get myConnectionsTitle => 'میرے اراکین';
@@ -288,86 +269,70 @@ class AppLocalizationsUr extends AppLocalizations {
   String get appDrawerSignOut => 'سائن آؤٹ کریں';
 
   @override
-  String get aboutUsDescription =>
-      'سائٹ کنیکٹ ایک صارف دوست آنکھوں کی دیکھ بھال کی ایپ ہے جو کال پر خود تشخیص اور مشاورت میں مدد کرتی ہے۔.ہمارے مشن کے مرکز میں آنکھوں کی دیکھ بھال کو سب کے لیے قابل رسائی بنانے کا عزم ہے۔.ایپ کو ان کی عمر، تکنیکی پس منظر، اور سماجی یا معاشی پس منظر سے قطع نظر، زندگی کے تمام شعبوں سے تعلق رکھنے والے صارفین کے لیے جامع اور قابل رسائی بنانے کے لیے ڈیزائن کیا گیا ہے۔.ایپ اور اس کا مواد انگریزی اور دیگر مقامی زبانوں میں دستیاب کرایا گیا ہے۔.یہ صارفین کو اپنی آنکھوں کا خود جائزہ لینے اور بروقت علاج کا مشورہ حاصل کرنے میں مدد کرتا ہے۔.ایپ ہمارے صارفین کو آنکھوں کی دیکھ بھال کے ذاتی حل فراہم کرنے کے لیے جدید ترین ٹیکنالوجیز اور ٹولز کا استعمال کرتی ہے۔.یہ ان کی زندگی کو آسان بنانے کے لیے مختلف خصوصیات کے ساتھ آتا ہے۔';
+  String get aboutUsDescription => 'سائٹ کنیکٹ ایک صارف دوست آنکھوں کی دیکھ بھال کی ایپ ہے جو کال پر خود تشخیص اور مشاورت میں مدد کرتی ہے۔.ہمارے مشن کے مرکز میں آنکھوں کی دیکھ بھال کو سب کے لیے قابل رسائی بنانے کا عزم ہے۔.ایپ کو ان کی عمر، تکنیکی پس منظر، اور سماجی یا معاشی پس منظر سے قطع نظر، زندگی کے تمام شعبوں سے تعلق رکھنے والے صارفین کے لیے جامع اور قابل رسائی بنانے کے لیے ڈیزائن کیا گیا ہے۔.ایپ اور اس کا مواد انگریزی اور دیگر مقامی زبانوں میں دستیاب کرایا گیا ہے۔.یہ صارفین کو اپنی آنکھوں کا خود جائزہ لینے اور بروقت علاج کا مشورہ حاصل کرنے میں مدد کرتا ہے۔.ایپ ہمارے صارفین کو آنکھوں کی دیکھ بھال کے ذاتی حل فراہم کرنے کے لیے جدید ترین ٹیکنالوجیز اور ٹولز کا استعمال کرتی ہے۔.یہ ان کی زندگی کو آسان بنانے کے لیے مختلف خصوصیات کے ساتھ آتا ہے۔';
 
   @override
   String get aboutUsFeaturesTitle => 'خصوصیات';
 
   @override
-  String get aboutUsFeaturesDescription =>
-      'ایپ میں آنکھوں کی جانچ: ایپ اپنے صارفین کو چند سوالات کے جوابات دے کر اور اگلے مراحل اور ڈاکٹر سے ملنے کے بارے میں مناسب سفارشات حاصل کر کے اپنی آنکھوں کا خود جائزہ لینے کی سہولت دیتی ہے۔ یہاں تک کہ صارفین کے دوست اور اہل خانہ بھی فائدہ اٹھا سکتے ہیں۔|تقرری کی بکنگ: صارفین اپنی آنکھوں کی تشخیص کروانے کے لیے آن لائن ٹیلی مشاورت اور ڈاکٹروں کے ساتھ کلینک کے دوروں کی بکنگ کر سکتے ہیں۔|آئی وی آر کال سروسز: ہماری آئی وی آر کال سروسز انگریزی اور مقامی زبانوں میں دستیاب ہیں اور یہ بنیادی فیچر فون والے صارفین کی ضروریات کو بھی پورا کرتی ہیں۔ صارفین ہنگامی صورت حال کے دوران یا آنکھوں سے متعلق کسی بھی مسئلے کے لیے فوری مدد حاصل کرنے کے لیے ہمارے آنکھوں کی دیکھ بھال کرنے والے پیشہ ور افراد کو ڈائل کر سکتے ہیں۔ وہ ملاقاتوں کو بک کرنے یا مزید وضاحت طلب کرنے کے لیے بھی کال کر سکتے ہیں۔|قریبی کلینک: صارفین اپنے قریب آنکھوں کی دیکھ بھال کے کلینک تلاش کر سکتے ہیں۔|نسخے اور رپورٹیں: صارفین کے تمام نسخے اور رپورٹس تک بغیر کسی پریشانی کے ایک جگہ سے رسائی حاصل کی جا سکتی ہے۔|آنکھوں کے کیمپ: صارفین اپنے دوستوں اور اہل خانہ کی آنکھوں کی مفت جانچ کروانے کے لیے قریبی آنکھوں کے کیمپوں کے بارے میں معلومات حاصل کر سکتے ہیں۔|یاد دہانی اور انتباہات: صارفین اپنی آنے والی ملاقاتوں، ادویات، رپورٹس وغیرہ سے متعلق بروقت انتباہات اور یاد دہانی حاصل کر سکتے ہیں۔|شیئرنگ: صارفین اس ایپ اور ایپ کے اندر فراہم کردہ دیگر مفید معلومات کو اپنے دوستوں اور کنبہ کے ممبروں کے ساتھ شیئر کر سکتے ہیں۔';
+  String get aboutUsFeaturesDescription => 'ایپ میں آنکھوں کی جانچ: ایپ اپنے صارفین کو چند سوالات کے جوابات دے کر اور اگلے مراحل اور ڈاکٹر سے ملنے کے بارے میں مناسب سفارشات حاصل کر کے اپنی آنکھوں کا خود جائزہ لینے کی سہولت دیتی ہے۔ یہاں تک کہ صارفین کے دوست اور اہل خانہ بھی فائدہ اٹھا سکتے ہیں۔|تقرری کی بکنگ: صارفین اپنی آنکھوں کی تشخیص کروانے کے لیے آن لائن ٹیلی مشاورت اور ڈاکٹروں کے ساتھ کلینک کے دوروں کی بکنگ کر سکتے ہیں۔|آئی وی آر کال سروسز: ہماری آئی وی آر کال سروسز انگریزی اور مقامی زبانوں میں دستیاب ہیں اور یہ بنیادی فیچر فون والے صارفین کی ضروریات کو بھی پورا کرتی ہیں۔ صارفین ہنگامی صورت حال کے دوران یا آنکھوں سے متعلق کسی بھی مسئلے کے لیے فوری مدد حاصل کرنے کے لیے ہمارے آنکھوں کی دیکھ بھال کرنے والے پیشہ ور افراد کو ڈائل کر سکتے ہیں۔ وہ ملاقاتوں کو بک کرنے یا مزید وضاحت طلب کرنے کے لیے بھی کال کر سکتے ہیں۔|قریبی کلینک: صارفین اپنے قریب آنکھوں کی دیکھ بھال کے کلینک تلاش کر سکتے ہیں۔|نسخے اور رپورٹیں: صارفین کے تمام نسخے اور رپورٹس تک بغیر کسی پریشانی کے ایک جگہ سے رسائی حاصل کی جا سکتی ہے۔|آنکھوں کے کیمپ: صارفین اپنے دوستوں اور اہل خانہ کی آنکھوں کی مفت جانچ کروانے کے لیے قریبی آنکھوں کے کیمپوں کے بارے میں معلومات حاصل کر سکتے ہیں۔|یاد دہانی اور انتباہات: صارفین اپنی آنے والی ملاقاتوں، ادویات، رپورٹس وغیرہ سے متعلق بروقت انتباہات اور یاد دہانی حاصل کر سکتے ہیں۔|شیئرنگ: صارفین اس ایپ اور ایپ کے اندر فراہم کردہ دیگر مفید معلومات کو اپنے دوستوں اور کنبہ کے ممبروں کے ساتھ شیئر کر سکتے ہیں۔';
 
   @override
-  String get aboutUsConclusion =>
-      'یہ ایپ آنکھوں کی دیکھ بھال کرنے والے سرکردہ پیشہ ور افراد کی مدد سے تیار کی گئی ہے تاکہ ہماری صارف برادری کی بہتر خدمت کی جا سکے۔ ایک روشن، صحت مند دنیا بنانے کے ہمارے مشن میں شامل ہوں۔ سائٹ کنیکٹ ایپ کو آج ہی ڈاؤن لوڈ اور شیئر کریں!';
+  String get aboutUsConclusion => 'یہ ایپ آنکھوں کی دیکھ بھال کرنے والے سرکردہ پیشہ ور افراد کی مدد سے تیار کی گئی ہے تاکہ ہماری صارف برادری کی بہتر خدمت کی جا سکے۔ ایک روشن، صحت مند دنیا بنانے کے ہمارے مشن میں شامل ہوں۔ سائٹ کنیکٹ ایپ کو آج ہی ڈاؤن لوڈ اور شیئر کریں!';
 
   @override
-  String get privacyPolicyDescription =>
-      'ایل وی پرساد آئی انسٹی ٹیوٹ، اس کے ماتحت ادارے، ساتھی اور منسلک کمپنیاں (جنہیں اجتماعی طور پر "ایل وی پی ای آئی"، "ہم"، "ہم" کہا جاتا ہے) آپ کے دائرہ اختیار کے قوانین کے مطابق آپ کے ذاتی ڈیٹا پر کارروائی کرنے کے لیے پرعزم ہیں۔ ہم آپ کو ذاتی ڈیٹا کی پروسیسنگ کے بارے میں درج ذیل معلومات مطلع کرتے ہیں۔';
+  String get privacyPolicyDescription => 'ایل وی پرساد آئی انسٹی ٹیوٹ، اس کے ماتحت ادارے، ساتھی اور منسلک کمپنیاں (جنہیں اجتماعی طور پر "ایل وی پی ای آئی"، "ہم"، "ہم" کہا جاتا ہے) آپ کے دائرہ اختیار کے قوانین کے مطابق آپ کے ذاتی ڈیٹا پر کارروائی کرنے کے لیے پرعزم ہیں۔ ہم آپ کو ذاتی ڈیٹا کی پروسیسنگ کے بارے میں درج ذیل معلومات مطلع کرتے ہیں۔';
 
   @override
-  String get privacyPolicyPersonalDataTitle =>
-      'ذاتی ڈیٹا کے عناصر کو اکٹھا/پروسیس کیا گیا:';
+  String get privacyPolicyPersonalDataTitle => 'ذاتی ڈیٹا کے عناصر کو اکٹھا/پروسیس کیا گیا:';
 
   @override
-  String get privacyPolicyPersonalDataDescription =>
-      'آپ اور آپ کے رابطوں کا ذاتی ڈیٹا جیسے (ان میں سے کچھ ڈیٹا اختیاری ہوگا) موبائل نمبر، نام، تاریخ پیدائش، صنف (مرد/عورت)، پتہ (پن کوڈ)، مریض کی شناختی کارڈ، کنیکشن، آئی ٹرائیج سوالنامے کے جوابات، آئی ٹرائیج رپورٹ، آنکھوں کی تصاویر، آپ کی آنکھ کی تصویر کے ساتھ ٹیگ کی گئی علامات، تصویر، پتے کی تفصیلات جیسے پتہ، ضلع کا نام (بشمول ضلع کو ریاست کا نام (بشمو ریاستی کوڈ)، ذیلی ضلع کا نام، گاؤں کا نام، قصبے کا نام، ای میل پتہ، آخری نام، درمیانی نام، بلڈ گروپ، اونچائی، وزن، پیشہ، اے بی ایچ اے کی تفصیلات (جیسا کہ آپ نے فراہم کیا ہے)، آپ کی ایپ کی اجازتوں کی بنیاد پر کیمرہ، جی پی ایس لوکیشن، ایپلی کیشن تک رسائی کے لیے گیلری، مکمل نیٹ ورک تک رسائی، نیٹ ورک کنکشن دیکھنے، ڈیوائس کی معلومات تک رسائی۔';
+  String get privacyPolicyPersonalDataDescription => 'آپ اور آپ کے رابطوں کا ذاتی ڈیٹا جیسے (ان میں سے کچھ ڈیٹا اختیاری ہوگا) موبائل نمبر، نام، تاریخ پیدائش، صنف (مرد/عورت)، پتہ (پن کوڈ)، مریض کی شناختی کارڈ، کنیکشن، آئی ٹرائیج سوالنامے کے جوابات، آئی ٹرائیج رپورٹ، آنکھوں کی تصاویر، آپ کی آنکھ کی تصویر کے ساتھ ٹیگ کی گئی علامات، تصویر، پتے کی تفصیلات جیسے پتہ، ضلع کا نام (بشمول ضلع کو ریاست کا نام (بشمو ریاستی کوڈ)، ذیلی ضلع کا نام، گاؤں کا نام، قصبے کا نام، ای میل پتہ، آخری نام، درمیانی نام، بلڈ گروپ، اونچائی، وزن، پیشہ، اے بی ایچ اے کی تفصیلات (جیسا کہ آپ نے فراہم کیا ہے)، آپ کی ایپ کی اجازتوں کی بنیاد پر کیمرہ، جی پی ایس لوکیشن، ایپلی کیشن تک رسائی کے لیے گیلری، مکمل نیٹ ورک تک رسائی، نیٹ ورک کنکشن دیکھنے، ڈیوائس کی معلومات تک رسائی۔';
 
   @override
-  String get privacyPolicyPurposeOfProcessingTitle =>
-      'پروسیسنگ کا مقصد: ہم مندرجہ ذیل مقاصد کے لیے آپ کے فراہم کردہ ذاتی ڈیٹا پر کارروائی کرتے ہیں جیسے:';
+  String get privacyPolicyPurposeOfProcessingTitle => 'پروسیسنگ کا مقصد: ہم مندرجہ ذیل مقاصد کے لیے آپ کے فراہم کردہ ذاتی ڈیٹا پر کارروائی کرتے ہیں جیسے:';
 
   @override
-  String get privacyPolicyPurposeOfProcessingDescription =>
-      'آپ کو آنکھوں سے متعلق آن لائن صحت کی جانچ کے لیے ہماری ایپلی کیشن اور اس کی خصوصیات تک رسائی حاصل کرنے کے قابل بنانے کے لیے (جیسا کہ آپ نے فراہم کیا ہے)۔|آنکھوں سے متعلق کسی بھی بیماری/صحت کی مشکلات کی صورت میں، آپ کو ایل وی پی ای آئی کے تحت بصارت کے تکنیکی ماہرین، ماہر امراض چشم سے رابطہ کرنے کے قابل بنانا۔|آپ کی صحت سے متعلق مشاورت اور تشخیص کے حصے کے طور پر آنکھوں کی صحت سے متعلق کوئی بھی ڈیٹا (بشمول رپورٹس وغیرہ) فراہم کرنے اور صحت سے متعلق خدشات کے حصے کے طور پر آپ سے یا آپ کے رابطوں سے رابطہ کرنے کے لیے۔|بہتر تشخیص کے لیے اپنے مجاز ایل وی پی ای آئی ماہر امراض چشم/ڈاکٹروں کے ساتھ اپنی آنکھوں کی صحت کا ڈیٹا شیئر کرنے اور اسے ولیج چیف/میئر وغیرہ کے ساتھ شیئر کرنے کے لیے (جہاں آپ کے جی پی ایس لوکیشن کی بنیاد پر لاگو ہوتا ہے) آنکھوں کے مسئلے کی شدت پر منحصر ہے اگر آپ علاج کے لیے ایل وی پی ای آئی ڈاکٹروں تک پہنچنے/مطلع کرنے سے قاصر ہیں۔|آنکھوں سے متعلق کسی بھی مسئلے کی صورت میں آپ تک پہنچنے کے لیے اپنے قریب ایل وی پی ای آئی سے وابستہ آنکھوں کے کلینکوں/اسپتالوں کی فہرست فراہم کرنا۔|مستقبل میں مناسب تشخیص فراہم کرنے کے مقصد سے ہماری مشین لرننگ یا مصنوعی ذہانت کے ماڈلز کو تربیت دینے میں مدد کے لیے آئی امیج، آنکھ کی تصویر سے متعلق علامات، عمر، بلڈ گروپ، بغیر کسی شناخت کے مقام جیسی معلومات کا استعمال کرنے کے لیے۔|آنکھوں کی صحت کے بارے میں بیداری پیدا کرنے کے لیے یاد دہانی، مواصلات، مہم میلر بھیجنے کے لیے۔';
+  String get privacyPolicyPurposeOfProcessingDescription => 'آپ کو آنکھوں سے متعلق آن لائن صحت کی جانچ کے لیے ہماری ایپلی کیشن اور اس کی خصوصیات تک رسائی حاصل کرنے کے قابل بنانے کے لیے (جیسا کہ آپ نے فراہم کیا ہے)۔|آنکھوں سے متعلق کسی بھی بیماری/صحت کی مشکلات کی صورت میں، آپ کو ایل وی پی ای آئی کے تحت بصارت کے تکنیکی ماہرین، ماہر امراض چشم سے رابطہ کرنے کے قابل بنانا۔|آپ کی صحت سے متعلق مشاورت اور تشخیص کے حصے کے طور پر آنکھوں کی صحت سے متعلق کوئی بھی ڈیٹا (بشمول رپورٹس وغیرہ) فراہم کرنے اور صحت سے متعلق خدشات کے حصے کے طور پر آپ سے یا آپ کے رابطوں سے رابطہ کرنے کے لیے۔|بہتر تشخیص کے لیے اپنے مجاز ایل وی پی ای آئی ماہر امراض چشم/ڈاکٹروں کے ساتھ اپنی آنکھوں کی صحت کا ڈیٹا شیئر کرنے اور اسے ولیج چیف/میئر وغیرہ کے ساتھ شیئر کرنے کے لیے (جہاں آپ کے جی پی ایس لوکیشن کی بنیاد پر لاگو ہوتا ہے) آنکھوں کے مسئلے کی شدت پر منحصر ہے اگر آپ علاج کے لیے ایل وی پی ای آئی ڈاکٹروں تک پہنچنے/مطلع کرنے سے قاصر ہیں۔|آنکھوں سے متعلق کسی بھی مسئلے کی صورت میں آپ تک پہنچنے کے لیے اپنے قریب ایل وی پی ای آئی سے وابستہ آنکھوں کے کلینکوں/اسپتالوں کی فہرست فراہم کرنا۔|مستقبل میں مناسب تشخیص فراہم کرنے کے مقصد سے ہماری مشین لرننگ یا مصنوعی ذہانت کے ماڈلز کو تربیت دینے میں مدد کے لیے آئی امیج، آنکھ کی تصویر سے متعلق علامات، عمر، بلڈ گروپ، بغیر کسی شناخت کے مقام جیسی معلومات کا استعمال کرنے کے لیے۔|آنکھوں کی صحت کے بارے میں بیداری پیدا کرنے کے لیے یاد دہانی، مواصلات، مہم میلر بھیجنے کے لیے۔';
 
   @override
-  String get privacyPolicyDataRecipientsTitle =>
-      'ڈیٹا وصول کنندگان/قابل رسائی:';
+  String get privacyPolicyDataRecipientsTitle => 'ڈیٹا وصول کنندگان/قابل رسائی:';
 
   @override
-  String get privacyPolicyDataRecipientsDescription =>
-      'آپ کی طرف سے شیئر کیا گیا ذاتی ڈیٹا (حساس ذاتی ڈیٹا سمیت) مجاز ایل وی پی ای آئی اہلکاروں جیسے ڈاکٹر/ماہر امراض چشم، ویژن ٹیکنیشن، ویژن گارڈین، ایل وی پی ای آئی کے نمائندوں، اندرونی/بیرونی آڈیٹرز، جہاں قابل اطلاق ہو سرکاری حکام، اور ہمارے مجاز سروس فراہم کنندہ انفوسس کے لیے قابل رسائی ہوگا۔';
+  String get privacyPolicyDataRecipientsDescription => 'آپ کی طرف سے شیئر کیا گیا ذاتی ڈیٹا (حساس ذاتی ڈیٹا سمیت) مجاز ایل وی پی ای آئی اہلکاروں جیسے ڈاکٹر/ماہر امراض چشم، ویژن ٹیکنیشن، ویژن گارڈین، ایل وی پی ای آئی کے نمائندوں، اندرونی/بیرونی آڈیٹرز، جہاں قابل اطلاق ہو سرکاری حکام، اور ہمارے مجاز سروس فراہم کنندہ انفوسس کے لیے قابل رسائی ہوگا۔';
 
   @override
   String get privacyPolicyDataTransferTitle => 'ڈیٹا ٹرانسفر اور اسٹوریج:';
 
   @override
-  String get privacyPolicyDataTransferDescription =>
-      'آپ کی طرف سے شیئر کیا گیا ذاتی ڈیٹا ہمارے اندرونی سرورز، ہندوستان میں ہمارے مجاز سروس فراہم کنندہ کے سرور پر محفوظ ہو جائے گا۔';
+  String get privacyPolicyDataTransferDescription => 'آپ کی طرف سے شیئر کیا گیا ذاتی ڈیٹا ہمارے اندرونی سرورز، ہندوستان میں ہمارے مجاز سروس فراہم کنندہ کے سرور پر محفوظ ہو جائے گا۔';
 
   @override
   String get privacyPolicyDataSecurityTitle => 'ڈیٹا سیکیورٹی:';
 
   @override
-  String get privacyPolicyDataSecurityDescription =>
-      'ایل وی پی ای آئی آپ کے ذاتی ڈیٹا کی حفاظت کے لیے انتظامی، جسمانی تحفظ، اور تکنیکی کنٹرول سمیت معقول اور مناسب حفاظتی طریقوں اور طریقہ کار کو اپناتا ہے۔';
+  String get privacyPolicyDataSecurityDescription => 'ایل وی پی ای آئی آپ کے ذاتی ڈیٹا کی حفاظت کے لیے انتظامی، جسمانی تحفظ، اور تکنیکی کنٹرول سمیت معقول اور مناسب حفاظتی طریقوں اور طریقہ کار کو اپناتا ہے۔';
 
   @override
   String get privacyPolicyDataRetentionTitle => 'ڈیٹا برقرار رکھنا:';
 
   @override
-  String get privacyPolicyDataRetentionDescription =>
-      'ذاتی ڈیٹا جسے قانونی اور کاروباری ضروریات کے مطابق برقرار رکھنے کی ضرورت نہیں ہے اسے محفوظ طریقے سے نمٹا دیا جائے گا۔';
+  String get privacyPolicyDataRetentionDescription => 'ذاتی ڈیٹا جسے قانونی اور کاروباری ضروریات کے مطابق برقرار رکھنے کی ضرورت نہیں ہے اسے محفوظ طریقے سے نمٹا دیا جائے گا۔';
 
   @override
   String get privacyPolicyDataSubjectRightsTitle => 'ڈیٹا سبجیکٹ رائٹس:';
 
   @override
-  String get privacyPolicyDataSubjectRightsDescription =>
-      'آپ کو کسی بھی وقت اپنی ذاتی معلومات تک رسائی اور اصلاح کا حق حاصل ہے۔ کسی بھی درخواست، مسائل، خدشات یا سوالات کی صورت میں آپ ڈی ایس آر> کے لیے عام میل آئی ڈی فراہم کرنے کے لیے <ایل وی پی ای آئی کو ای میل بھیج کر ایل وی پرساد آفس سے رابطہ کر سکتے ہیں۔';
+  String get privacyPolicyDataSubjectRightsDescription => 'آپ کو کسی بھی وقت اپنی ذاتی معلومات تک رسائی اور اصلاح کا حق حاصل ہے۔ کسی بھی درخواست، مسائل، خدشات یا سوالات کی صورت میں آپ ڈی ایس آر> کے لیے عام میل آئی ڈی فراہم کرنے کے لیے <ایل وی پی ای آئی کو ای میل بھیج کر ایل وی پرساد آفس سے رابطہ کر سکتے ہیں۔';
 
   @override
   String get privacyPolicyRightToWithdrawTitle => 'دستبرداری کا حق:';
 
   @override
-  String get privacyPolicyRightToWithdrawDescription =>
-      'جہاں ہم آپ کی رضامندی کی بنیاد پر آپ کے ذاتی ڈیٹا پر کارروائی کرتے ہیں، آپ مستقبل کے لیے کسی بھی وقت قابل اطلاق ڈی پی قوانین کے مطابق پروسیسنگ کے لیے اپنی رضامندی واپس لے سکتے ہیں۔ اس سے آپ کی واپسی سے پہلے کسی بھی پروسیسنگ آپریشن کی قانونی حیثیت متاثر نہیں ہوگی۔ اپنی رضامندی واپس لینے کے لیے، آپ ڈی ایس آر> کے لیے عام میل آئی ڈی فراہم کرنے کے لیے <ایل وی پی ای آئی کو ای میل بھیج سکتے ہیں۔';
+  String get privacyPolicyRightToWithdrawDescription => 'جہاں ہم آپ کی رضامندی کی بنیاد پر آپ کے ذاتی ڈیٹا پر کارروائی کرتے ہیں، آپ مستقبل کے لیے کسی بھی وقت قابل اطلاق ڈی پی قوانین کے مطابق پروسیسنگ کے لیے اپنی رضامندی واپس لے سکتے ہیں۔ اس سے آپ کی واپسی سے پہلے کسی بھی پروسیسنگ آپریشن کی قانونی حیثیت متاثر نہیں ہوگی۔ اپنی رضامندی واپس لینے کے لیے، آپ ڈی ایس آر> کے لیے عام میل آئی ڈی فراہم کرنے کے لیے <ایل وی پی ای آئی کو ای میل بھیج سکتے ہیں۔';
 
   @override
-  String get privacyPolicyAcknowledgement =>
-      'نیچے دیے گئے بٹن پر کلک کرکے، آپ اس بات کو تسلیم کرتے ہیں اور سمجھتے ہیں کہ آپ کا ذاتی ڈیٹا بشمول حساس ذاتی ڈیٹا مذکورہ بالا طریقے سے اکٹھا اور اس پر کارروائی کی جا سکتی ہے اور اس طرح مذکورہ بالا مقاصد کے لیے اسی پر رضامندی ظاہر کرتے ہیں۔.آپ یہ بھی تسلیم کرتے ہیں کہ آپ کے ذریعے شیئر کیا گیا کوئی بھی ذاتی ڈیٹا بشمول حساس ذاتی ڈیٹا (اپنے علاوہ) صرف ان سے مناسب رضامندی لینے کے بعد ہے۔.آپ یہ بھی تسلیم کرتے ہیں کہ آپ کوئی بھی ذاتی ڈیٹا (بشمول حساس ذاتی ڈیٹا) شیئر نہیں کریں گے جو مذکورہ بالا مقاصد کے لیے ضروری نہیں ہے۔.آپ یہ بھی تسلیم کرتے ہیں کہ جب آپ نابالغ کا ذاتی ڈیٹا ان کے والدین/قانونی سرپرست کے طور پر شیئر کر رہے ہوتے ہیں تو آپ ان کے ڈیٹا اکٹھا کرنے اور پروسیسنگ کے لیے رضامند ہوتے ہیں جیسا کہ اوپر ذکر کیا گیا ہے۔';
+  String get privacyPolicyAcknowledgement => 'نیچے دیے گئے بٹن پر کلک کرکے، آپ اس بات کو تسلیم کرتے ہیں اور سمجھتے ہیں کہ آپ کا ذاتی ڈیٹا بشمول حساس ذاتی ڈیٹا مذکورہ بالا طریقے سے اکٹھا اور اس پر کارروائی کی جا سکتی ہے اور اس طرح مذکورہ بالا مقاصد کے لیے اسی پر رضامندی ظاہر کرتے ہیں۔.آپ یہ بھی تسلیم کرتے ہیں کہ آپ کے ذریعے شیئر کیا گیا کوئی بھی ذاتی ڈیٹا بشمول حساس ذاتی ڈیٹا (اپنے علاوہ) صرف ان سے مناسب رضامندی لینے کے بعد ہے۔.آپ یہ بھی تسلیم کرتے ہیں کہ آپ کوئی بھی ذاتی ڈیٹا (بشمول حساس ذاتی ڈیٹا) شیئر نہیں کریں گے جو مذکورہ بالا مقاصد کے لیے ضروری نہیں ہے۔.آپ یہ بھی تسلیم کرتے ہیں کہ جب آپ نابالغ کا ذاتی ڈیٹا ان کے والدین/قانونی سرپرست کے طور پر شیئر کر رہے ہوتے ہیں تو آپ ان کے ڈیٹا اکٹھا کرنے اور پروسیسنگ کے لیے رضامند ہوتے ہیں جیسا کہ اوپر ذکر کیا گیا ہے۔';
 
   @override
   String get privacyPolicyBottomAppBarLabel => 'پرائیویسی پالیسی قبول کی گئی';
@@ -376,8 +341,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get helpAndSupportReachTitle => 'ہم سے رابطہ کریں';
 
   @override
-  String get assessmentAndTestsSubtitle =>
-      'یہاں اب تک کیے گئے جائزوں کا ایک فوری جائزہ ہے۔';
+  String get assessmentAndTestsSubtitle => 'یہاں اب تک کیے گئے جائزوں کا ایک فوری جائزہ ہے۔';
 
   @override
   String get assessmentAndTestsReportsNotFound => 'کوئی رپورٹ نہیں ملی';
@@ -386,8 +350,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get eyeAssessmentTitle => 'آنکھوں کی تشخیص';
 
   @override
-  String get eyeAssessmentSubtitle =>
-      'چند مراحل میں اپنے، اپنے دوستوں اور خاندان کے افراد کی آنکھوں کے مسائل کا جائزہ لیں۔ آپ سے آنکھوں کے مسائل سے متعلق علامات کو سمجھنے کے لیے سوالات کا ایک مجموعہ پوچھا جائے گا جس کے بعد بصری ٹیسٹ کیے جائیں گے۔';
+  String get eyeAssessmentSubtitle => 'چند مراحل میں اپنے، اپنے دوستوں اور خاندان کے افراد کی آنکھوں کے مسائل کا جائزہ لیں۔ آپ سے آنکھوں کے مسائل سے متعلق علامات کو سمجھنے کے لیے سوالات کا ایک مجموعہ پوچھا جائے گا جس کے بعد بصری ٹیسٹ کیے جائیں گے۔';
 
   @override
   String get eyeAssessmentGetMemberLabel => 'رکن تبدیل کریں';
@@ -399,19 +362,16 @@ class AppLocalizationsUr extends AppLocalizations {
   String get eyeAssessmentBrightnessLabel => 'چمک 80 ٪ مقرر کی گئی ہے';
 
   @override
-  String get eyeAssessmentBrightnessError =>
-      'براہ کرم چمک کو دستی طور پر 80 ٪ پر سیٹ کریں';
+  String get eyeAssessmentBrightnessError => 'براہ کرم چمک کو دستی طور پر 80 ٪ پر سیٹ کریں';
 
   @override
-  String get eyeAssessmentUnsupportedQuestion =>
-      'سوال کی ابھی تک تائید نہیں ہوئی';
+  String get eyeAssessmentUnsupportedQuestion => 'سوال کی ابھی تک تائید نہیں ہوئی';
 
   @override
   String get eyeAssessmentPopUpHeading => 'تشخیص';
 
   @override
-  String get eyeAssessmentPopUpBody =>
-      'کیا آپ کو بینائی سے متعلق کوئی مسئلہ ہے؟';
+  String get eyeAssessmentPopUpBody => 'کیا آپ کو بینائی سے متعلق کوئی مسئلہ ہے؟';
 
   @override
   String get eyeAssessmentPopUpYesButton => 'ہاں۔';
@@ -420,20 +380,16 @@ class AppLocalizationsUr extends AppLocalizations {
   String get eyeAssessmentPopUpNoButton => 'نہیں۔';
 
   @override
-  String get visualAcuityTestInstructionOne =>
-      'اچھی ہلکی جگہ پر آرام سے بیٹھیں۔ آپ کو چمک میں اچانک تبدیلی محسوس ہو سکتی ہے، فکر نہ کریں کہ اسکرین زیادہ سے زیادہ نتیجہ فراہم کرنے کے لیے خودکار چمک پر سیٹ ہو گئی ہے۔';
+  String get visualAcuityTestInstructionOne => 'اچھی ہلکی جگہ پر آرام سے بیٹھیں۔ آپ کو چمک میں اچانک تبدیلی محسوس ہو سکتی ہے، فکر نہ کریں کہ اسکرین زیادہ سے زیادہ نتیجہ فراہم کرنے کے لیے خودکار چمک پر سیٹ ہو گئی ہے۔';
 
   @override
-  String get visualAcuityTestInstructionTwo =>
-      'یقینی بنائیں کہ آپ آلہ کو آنکھوں کی سطح پر تھامے ہوئے ہیں۔ اگر آپ شیشے یا کانٹیکٹ لینس پہنتے ہیں تو انہیں آن رکھیں۔';
+  String get visualAcuityTestInstructionTwo => 'یقینی بنائیں کہ آپ آلہ کو آنکھوں کی سطح پر تھامے ہوئے ہیں۔ اگر آپ شیشے یا کانٹیکٹ لینس پہنتے ہیں تو انہیں آن رکھیں۔';
 
   @override
-  String get visualAcuityTestInstructionThree =>
-      'اپنے آپ کو اسکرین سے 40 سینٹی میٹر کے فاصلے پر رکھیں۔ فاصلہ ٹیسٹ اسکرین میں دکھایا جائے گا۔';
+  String get visualAcuityTestInstructionThree => 'اپنے آپ کو اسکرین سے 40 سینٹی میٹر کے فاصلے پر رکھیں۔ فاصلہ ٹیسٹ اسکرین میں دکھایا جائے گا۔';
 
   @override
-  String get visualAcuityTestInstructionFour =>
-      'اگر آپ شیشے پہن کر جانچ کر رہے ہیں، تو جب صرف ایک آنکھ کی جانچ کی جائے تو شیشے پر اپنے ہاتھ سے ایک آنکھ کو ڈھانپیں۔';
+  String get visualAcuityTestInstructionFour => 'اگر آپ شیشے پہن کر جانچ کر رہے ہیں، تو جب صرف ایک آنکھ کی جانچ کی جائے تو شیشے پر اپنے ہاتھ سے ایک آنکھ کو ڈھانپیں۔';
 
   @override
   String get skipAndProceedButton => 'سکپ کریں اور اسکین کے لیے آگے بڑھیں';
@@ -466,44 +422,34 @@ class AppLocalizationsUr extends AppLocalizations {
   String get eyeAssessmentResults => 'تشخیص کے نتائج';
 
   @override
-  String get eyeAssessmentCompleteSteps =>
-      'نتائج دیکھنے کے لیے تمام مراحل مکمل کریں';
+  String get eyeAssessmentCompleteSteps => 'نتائج دیکھنے کے لیے تمام مراحل مکمل کریں';
 
   @override
-  String get eyeAssessmentToolTip =>
-      'براہ کرم یقینی بنائیں کہ فلیش بند ہے اور چمک 80 ٪ پر سیٹ ہے';
+  String get eyeAssessmentToolTip => 'براہ کرم یقینی بنائیں کہ فلیش بند ہے اور چمک 80 ٪ پر سیٹ ہے';
 
   @override
-  String get eyeScanInstructionOne =>
-      'چہرے کو فریم پر اچھی طرح رکھ کر کیمرے کو پکڑیں۔';
+  String get eyeScanInstructionOne => 'چہرے کو فریم پر اچھی طرح رکھ کر کیمرے کو پکڑیں۔';
 
   @override
-  String get eyeScanInstructionTwo =>
-      'اپنے فون کے بیک کیمرے کا استعمال کرتے ہوئے آنکھوں کی تصویر لیں۔';
+  String get eyeScanInstructionTwo => 'اپنے فون کے بیک کیمرے کا استعمال کرتے ہوئے آنکھوں کی تصویر لیں۔';
 
   @override
-  String get eyeScanInstructionThree =>
-      'اس بات کو یقینی بنائیں کہ فلیش آن کے ساتھ اچھی طرح سے روشن جگہ پر ہوں۔';
+  String get eyeScanInstructionThree => 'اس بات کو یقینی بنائیں کہ فلیش آن کے ساتھ اچھی طرح سے روشن جگہ پر ہوں۔';
 
   @override
-  String get eyeScanInstructionFour =>
-      'بہتر تصویر کشی اور وضاحت کے لیے، تصویر پر کلک کرنے کے لیے کسی اور کو رکھیں۔';
+  String get eyeScanInstructionFour => 'بہتر تصویر کشی اور وضاحت کے لیے، تصویر پر کلک کرنے کے لیے کسی اور کو رکھیں۔';
 
   @override
-  String get eyeScanInstructionFive =>
-      'تصویر لیتے وقت ایک آنکھ کو اپنے ہاتھ سے ڈھانپیں اور دوسری آنکھ سے سیدھا آگے دیکھیں۔';
+  String get eyeScanInstructionFive => 'تصویر لیتے وقت ایک آنکھ کو اپنے ہاتھ سے ڈھانپیں اور دوسری آنکھ سے سیدھا آگے دیکھیں۔';
 
   @override
-  String get eyeScanInstructionSix =>
-      'تصویر شروع کرنے سے پہلے پینل کے اندر آنکھ کو مرکوز کریں۔';
+  String get eyeScanInstructionSix => 'تصویر شروع کرنے سے پہلے پینل کے اندر آنکھ کو مرکوز کریں۔';
 
   @override
-  String get eyeScanInstructionSeven =>
-      'اس وقت تک آنکھیں کھلی رکھیں جب تک کہ فلیش بند نہ ہو جائے، جب تک کہ \'بیپ\' کی آواز تصویر کے اختتام کا اشارہ نہ دے۔';
+  String get eyeScanInstructionSeven => 'اس وقت تک آنکھیں کھلی رکھیں جب تک کہ فلیش بند نہ ہو جائے، جب تک کہ \'بیپ\' کی آواز تصویر کے اختتام کا اشارہ نہ دے۔';
 
   @override
-  String get eyeAssessmentNote =>
-      'نوٹ: یہاں دکھائی گئی تصاویر صرف اشارے کے لیے ہیں۔ ہو سکتا ہے کہ وہ حقیقی زندگی میں اسی طرح نظر نہ آئیں۔';
+  String get eyeAssessmentNote => 'نوٹ: یہاں دکھائی گئی تصاویر صرف اشارے کے لیے ہیں۔ ہو سکتا ہے کہ وہ حقیقی زندگی میں اسی طرح نظر نہ آئیں۔';
 
   @override
   String get agreeButton => 'میں اتفاق کرتا ہوں';
@@ -524,22 +470,19 @@ class AppLocalizationsUr extends AppLocalizations {
   String get eyeCaptureCompletionDialogHeading => 'ٹیسٹ مکمل ہوا';
 
   @override
-  String get eyeCaptureCompletionDialogBody =>
-      'آپ نے ٹیسٹ مکمل کر لیا ہے۔ نتیجہ دیکھنے کے لیے براہ کرم نیچے دیے گئے بٹن پر کلک کریں۔';
+  String get eyeCaptureCompletionDialogBody => 'آپ نے ٹیسٹ مکمل کر لیا ہے۔ نتیجہ دیکھنے کے لیے براہ کرم نیچے دیے گئے بٹن پر کلک کریں۔';
 
   @override
   String get eyeCaptureCompletionDialogViewResult => 'نتیجہ دیکھیں';
 
   @override
-  String get eyeCaptureTriageSavedLocally =>
-      'ٹرائیج مقامی طور پر محفوظ کیا گیا';
+  String get eyeCaptureTriageSavedLocally => 'ٹرائیج مقامی طور پر محفوظ کیا گیا';
 
   @override
   String get visualAcuityTestResults => 'بصری ایکویٹی ٹیسٹ کے نتائج';
 
   @override
-  String get assessmentResultPageMoreDetailsText =>
-      'مزید تفصیلات کے لیے قریب ترین وژن سینٹر پر جائیں۔ ہمارے وژن ٹیکنیشن سے بات کرنے کے لیے ٹول فری نمبر پر کال کریں۔';
+  String get assessmentResultPageMoreDetailsText => 'مزید تفصیلات کے لیے قریب ترین وژن سینٹر پر جائیں۔ ہمارے وژن ٹیکنیشن سے بات کرنے کے لیے ٹول فری نمبر پر کال کریں۔';
 
   @override
   String get assessmentReportButton => 'آنکھوں کی تشخیص کی رپورٹ';
@@ -647,22 +590,19 @@ class AppLocalizationsUr extends AppLocalizations {
   String get homeTriageCardTitle => 'ہماری آنکھیں سب سے قیمتی اثاثے ہیں۔';
 
   @override
-  String get homeTriageCardDescription =>
-      'آنکھوں کے مسائل سے بچنے کے لیے وقت پر ان کی جانچ کروائیں۔';
+  String get homeTriageCardDescription => 'آنکھوں کے مسائل سے بچنے کے لیے وقت پر ان کی جانچ کروائیں۔';
 
   @override
   String get homeTriageCardTest => 'آنکھ کا ٹیسٹ شروع کریں';
 
   @override
-  String get homeHelplineCardDescrition =>
-      'اچانک بینائی کی کمی کی صورت میں، اس ہنگامی ہیلپ لائن پر کال کریں';
+  String get homeHelplineCardDescrition => 'اچانک بینائی کی کمی کی صورت میں، اس ہنگامی ہیلپ لائن پر کال کریں';
 
   @override
   String get inviteCardTitle => 'دوسروں کو مدعو کریں';
 
   @override
-  String get inviteCardDescription =>
-      '5 دوستوں اور خاندان کے افراد کو مدعو کریں تاکہ وہ اپنی آنکھوں کا جائزہ لے سکیں اور مستقبل میں آنکھوں کے مسائل سے بچ سکیں۔';
+  String get inviteCardDescription => '5 دوستوں اور خاندان کے افراد کو مدعو کریں تاکہ وہ اپنی آنکھوں کا جائزہ لے سکیں اور مستقبل میں آنکھوں کے مسائل سے بچ سکیں۔';
 
   @override
   String get inviteCardInvitation => 'ابھی مدعو کریں';
@@ -701,8 +641,7 @@ class AppLocalizationsUr extends AppLocalizations {
   String get scannerTitle => 'اسکینر';
 
   @override
-  String get visualAcuityTestDistanceInstruction =>
-      'کیمرے کو آنکھ سے 40 سینٹی میٹر کے فاصلے پر رکھیں۔';
+  String get visualAcuityTestDistanceInstruction => 'کیمرے کو آنکھ سے 40 سینٹی میٹر کے فاصلے پر رکھیں۔';
 
   @override
   String get somethingWentWrong => 'کچھ غلط ہو گیا';
@@ -717,16 +656,13 @@ class AppLocalizationsUr extends AppLocalizations {
   String get privacyPolicyTitle => 'پرائیویسی اور ڈیٹا پروٹیکشن';
 
   @override
-  String get privacyPolicyPurposeOfProcessingSubTitle =>
-      'ہم مندرجہ ذیل مقاصد کے لیے آپ کے فراہم کردہ ذاتی ڈیٹا پر کارروائی کرتے ہیں جیسے:';
+  String get privacyPolicyPurposeOfProcessingSubTitle => 'ہم مندرجہ ذیل مقاصد کے لیے آپ کے فراہم کردہ ذاتی ڈیٹا پر کارروائی کرتے ہیں جیسے:';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooClose =>
-      'آپ کیمرے کے بہت قریب ہیں، کیمرے کو آنکھ سے 40 سینٹی میٹر دور رکھیں۔';
+  String get visualAcuityTestDistanceInstructionTooClose => 'آپ کیمرے کے بہت قریب ہیں، کیمرے کو آنکھ سے 40 سینٹی میٹر دور رکھیں۔';
 
   @override
-  String get visualAcuityTestDistanceInstructionTooFar =>
-      'آپ کیمرے سے بہت دور ہیں، کیمرے کو آنکھ سے 40 سینٹی میٹر دور رکھیں۔';
+  String get visualAcuityTestDistanceInstructionTooFar => 'آپ کیمرے سے بہت دور ہیں، کیمرے کو آنکھ سے 40 سینٹی میٹر دور رکھیں۔';
 
   @override
   String get myProfileABHAID => 'اے بی ایچ اے آئی ڈی';
@@ -759,25 +695,28 @@ class AppLocalizationsUr extends AppLocalizations {
   String get appointmentSubtitle => 'تمام تقرریاں';
 
   @override
-  String get eyeBoxText =>
-      'براہ کرم تصویر کو ایڈجسٹ کریں اور اس وقت تک پوزیشن میں رکھیں جب تک کہ آنکھوں کے ارد گرد سبز بکس ظاہر نہ ہوں۔ آنکھ کو قریب لے جائیں اور اس بات کو یقینی بنائیں کہ ڈبے کا 40 فیصد حصہ آنکھ سے ڈھکا ہوا ہے۔';
+  String get eyeBoxText => 'براہ کرم تصویر کو ایڈجسٹ کریں اور اس وقت تک پوزیشن میں رکھیں جب تک کہ آنکھوں کے ارد گرد سبز بکس ظاہر نہ ہوں۔ آنکھ کو قریب لے جائیں اور اس بات کو یقینی بنائیں کہ ڈبے کا 40 فیصد حصہ آنکھ سے ڈھکا ہوا ہے۔';
 
   @override
   String get bottomNavItemServices => 'خدمات';
 
   @override
-  String get smsContent =>
-      'ارے! میں اپنی آنکھوں کی دیکھ بھال کے لیے سائٹ کنیکٹ ایپ استعمال کر رہا ہوں، اور آپ کو بھی کرنا چاہیے! اپنی آنکھوں کا جائزہ لیں اور سائٹ کنیکٹ ایپ سے بروقت علاج کروائیں۔ یہ ایک منفرد ایپ ہے جو آپ کے ہاتھ میں احتیاطی آنکھوں کی دیکھ بھال لاتا ہے۔ ابھی حاصل کریں: https://healthconnecttech.org/install';
+  String get smsContent => 'ارے! میں اپنی آنکھوں کی دیکھ بھال کے لیے سائٹ کنیکٹ ایپ استعمال کر رہا ہوں، اور آپ کو بھی کرنا چاہیے! اپنی آنکھوں کا جائزہ لیں اور سائٹ کنیکٹ ایپ سے بروقت علاج کروائیں۔ یہ ایک منفرد ایپ ہے جو آپ کے ہاتھ میں احتیاطی آنکھوں کی دیکھ بھال لاتا ہے۔ ابھی حاصل کریں: https://healthconnecttech.org/install';
 
   @override
-  String get emailSubject =>
-      'سائٹ کنیکٹ ایپ کے ذریعے اپنی آنکھوں کی صحت کو ترجیح دیں!';
+  String get emailSubject => 'سائٹ کنیکٹ ایپ کے ذریعے اپنی آنکھوں کی صحت کو ترجیح دیں!';
 
   @override
   String get recentServicesCataractEyeTest => 'موتیابند آنکھ کا ٹیسٹ';
 
   @override
   String get recentServicesRedEyeTest => 'سرخ آنکھ کا ٹیسٹ';
+
+  @override
+  String get chatBotDefaultQuerySuggestions => 'آنکھوں کی تشخیص شروع کریں۔ آنکھوں کے عام مسائل۔ بہتر بینائی کے لیے تجاویز';
+
+  @override
+  String get chatBotWelcomeMessage => 'ہیلو، میں آج آپ کی کس طرح مدد کر سکتا ہوں؟';
 
   @override
   String get poweredByText => 'کی طرف سے طاقت';
@@ -789,1137 +728,1124 @@ class AppLocalizationsUr extends AppLocalizations {
   String get inviteNowText => 'ابھی مدعو کریں';
 
   @override
-  String get chatBotDefaultQuerySuggestions =>
-      'آنکھوں کی تشخیص شروع کریں۔ آنکھوں کے عام مسائل۔ بہتر بینائی کے لیے تجاویز';
+  String get resend => 'دوبارہ بھیجیں';
 
   @override
-  String get chatBotWelcomeMessage =>
-      'ہیلو، میں آج آپ کی کس طرح مدد کر سکتا ہوں؟';
+  String get mobileNumber => 'موبائل نمبر';
 
   @override
-  String get resend => 'Resend';
+  String get loginVerifyMobileNumber => 'اپنے موبائل نمبر کی تصدیق کریں';
 
   @override
-  String get mobileNumber => 'Mobile Number';
+  String get loginEnterMobileNumber => 'براہ کرم موبائل نمبر درج کریں';
 
   @override
-  String get loginVerifyMobileNumber => 'Verify your mobile number';
+  String get loginEnterValidMobileNumber => 'براہ کرم درست موبائل نمبر درج کریں';
 
   @override
-  String get loginEnterMobileNumber => 'Please enter mobile number';
+  String get loginUnableToSendOTP => 'اس نمبر پر او ٹی پی بھیجنے سے قاصر';
 
   @override
-  String get loginEnterValidMobileNumber => 'Please enter valid mobile number';
+  String get loginGetOTP => 'او ٹی پی حاصل کریں';
 
   @override
-  String get loginUnableToSendOTP => 'Unable to send OTP to this number';
+  String get loginInvalidOTP => 'غلط او ٹی پی';
 
   @override
-  String get loginGetOTP => 'Get OTP';
+  String get loginDidntReceiveOTP => 'او ٹی پی موصول نہیں ہوا؟';
 
   @override
-  String get loginInvalidOTP => 'Invalid OTP';
+  String get loginOTPSent => 'کامیابی سے بھیجا گیا او ٹی پی';
 
   @override
-  String get loginDidntReceiveOTP => 'Didn\'t receive the OTP?';
+  String get areYouSure => 'کیا آپ کو یقین ہے؟';
 
   @override
-  String get loginOTPSent => 'OTP sent successfully';
+  String get triageExitConfirmation => 'کیا آپ ٹیسٹ سے باہر ہونا چاہتے ہیں؟';
 
   @override
-  String get areYouSure => 'Are you sure?';
+  String get triageReportEyeProblems => 'آنکھوں کے مسائل کی اطلاع دیں';
 
   @override
-  String get triageExitConfirmation => 'Do you want to exit the Test?';
+  String get triageHowToReport => 'آنکھوں کے مسائل کی اطلاع کیسے دی جائے؟';
 
   @override
-  String get triageReportEyeProblems => 'Report Eye Problems';
+  String get triageReportInstructions => 'اگر آپ ایک ایسے فرد ہیں جنہیں آنکھوں سے متعلق مسائل ہیں، تو آپ خود اعلان کر سکتے ہیں اور مناسب رہنمائی حاصل کرنے کے لیے یہاں اپنے مسائل کا ذکر کر سکتے ہیں۔ آپ یہاں اپنے دوستوں یا خاندان کے افراد کی آنکھوں کے مسائل کا بھی ذکر کر سکتے ہیں اور مناسب رہنمائی حاصل کر سکتے ہیں۔ آنکھوں کے مسئلے کی نوعیت اور شدت کو سمجھنے کے لیے آپ سے درج ذیل حصوں میں سوالات کا ایک مجموعہ پوچھا جائے گا۔ آپ کو کئے جانے والے ٹیسٹ اور تمام سوالات کے جوابات دینے کے بعد ان پر عمل کرنے کے اقدامات کی سفارش اور رہنمائی کی جائے گی۔';
 
   @override
-  String get triageHowToReport => 'How to report eye problems?';
+  String get assessment => 'تشخیص';
 
   @override
-  String get triageReportInstructions =>
-      'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
+  String get triageOtherSymptomsQuestion => 'کیا آپ کو کوئی اور علامات ہیں؟';
 
   @override
-  String get assessment => 'Assessment';
+  String get triageEnterSymptoms => 'اپنی علامات یہاں درج کریں';
 
   @override
-  String get triageOtherSymptomsQuestion => 'Do you have any other symptoms?';
+  String get triageEyeAssessmentResults => 'آنکھوں کی تشخیص کے نتائج';
 
   @override
-  String get triageEnterSymptoms => 'Enter your symptoms here';
+  String get triageTestId => 'ٹیسٹ آئی ڈی';
 
   @override
-  String get triageEyeAssessmentResults => 'Eye Assessment Results';
+  String get triageEyeScanUpdatedSuccessfully => 'آنکھ کے اسکین کو کامیابی سے اپ ڈیٹ کیا گیا';
 
   @override
-  String get triageTestId => 'Test ID';
+  String get triageErrorEyeScanNotUpdated => 'آنکھ کا اسکین اپ ڈیٹ نہیں کیا گیا!';
 
   @override
-  String get triageEyeScanUpdatedSuccessfully =>
-      'Eye scan updated successfully';
+  String get triageLeftEyeString => 'بائیں آنکھ';
 
   @override
-  String get triageErrorEyeScanNotUpdated => 'Eye scan not updated!';
+  String get triageRightEyeString => 'دائیں آنکھ';
 
   @override
-  String get triageLeftEyeString => 'Left Eye';
+  String get vaEyeTest => 'آنکھ کا ٹیسٹ';
 
   @override
-  String get triageRightEyeString => 'Right Eye';
+  String get instructions => 'ہدایات';
 
   @override
-  String get vaEyeTest => 'Eye Test';
+  String get vaSwipeUp => 'اوپر سوائپ کریں';
 
   @override
-  String get instructions => 'Instructions';
+  String get vaSwipeDown => 'نیچے سوائپ کریں';
 
   @override
-  String get vaSwipeUp => 'Swipe Up';
+  String get vaSwipeLeft => 'بائیں طرف سوائپ کریں';
 
   @override
-  String get vaSwipeDown => 'Swipe Down';
+  String get vaSwipeRight => 'دائیں طرف سوائپ کریں';
 
   @override
-  String get vaSwipeLeft => 'Swipe Left';
+  String get vaSwipeGestureError => 'غلط سوائپ اشارہ۔ براہ کرم دوبارہ کوشش کریں۔';
 
   @override
-  String get vaSwipeRight => 'Swipe Right';
+  String get permissionNotGranted => 'اجازت نہیں دی گئی';
 
   @override
-  String get vaSwipeGestureError => 'Invalid swipe gesture. Please try again.';
+  String get serviceNotAvailable => 'سروس دستیاب نہیں ہے';
 
   @override
-  String get permissionNotGranted => 'Permission not granted';
+  String get vaDistanceToFace => 'سامنا کرنے کا فاصلہ';
 
   @override
-  String get serviceNotAvailable => 'Service not available';
+  String get vaDistanceToFaceInstruction => 'براہ کرم یقینی بنائیں کہ کیمرہ آپ کے چہرے سے 40 سینٹی میٹر دور ہے۔';
 
   @override
-  String get vaDistanceToFace => 'Distance to face';
+  String get vaBringFaceInsideBox => 'اپنا چہرہ ڈبے کے اندر لائیں';
 
   @override
-  String get vaDistanceToFaceInstruction =>
-      'Please ensure that the camera is 40cm away from your face';
+  String get startAssessment => 'تشخیص شروع کریں';
 
   @override
-  String get vaBringFaceInsideBox => 'Bring your face inside the box';
+  String get optoAddPatientInfo => 'مریض کی معلومات شامل کریں';
 
   @override
-  String get startAssessment => 'Start Assessment';
+  String get loggedOutMessage => 'آپ کو لاگ آؤٹ کر دیا گیا ہے';
 
   @override
-  String get optoAddPatientInfo => 'Add Patient Information';
+  String get optoLogoutError => 'معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔';
 
   @override
-  String get loggedOutMessage => 'You have been logged out';
+  String get optoLoggingOut => 'لاگ آؤٹ ہو رہا ہے...';
 
   @override
-  String get optoLogoutError =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get hello => 'ہیلو۔';
 
   @override
-  String get optoLoggingOut => 'Logging out...';
+  String get optoGetStarted => 'چلو شروع کرتے ہیں';
 
   @override
-  String get hello => 'Hello';
+  String get optoCompletedTests => 'مکمل کیے گئے امتحانات';
 
   @override
-  String get optoGetStarted => 'Let\'s get started';
+  String get optoThisMonth => 'اس مہینے میں';
 
   @override
-  String get optoCompletedTests => 'Completed tests';
+  String get today => 'آج';
 
   @override
-  String get optoThisMonth => 'This month';
+  String get services => 'خدمات';
 
   @override
-  String get today => 'Today';
+  String get optoAssessmentHistory => 'تشخیص کی تاریخ';
 
   @override
-  String get services => 'Services';
+  String get optoEyeAssessments => 'آنکھوں کے جائزے';
 
   @override
-  String get optoAssessmentHistory => 'Assessment History';
+  String get feedback => 'فیڈ بیک';
 
   @override
-  String get optoEyeAssessments => 'Eye Assessments';
+  String get optoImproveApp => 'ہم چاہتے ہیں کہ آپ کی رائے ہماری درخواست کو بہتر بنائے';
 
   @override
-  String get feedback => 'FeedBack';
+  String get assessments => 'جائزے';
 
   @override
-  String get optoImproveApp =>
-      'We would like your feedback to improve our application';
+  String get optoPatientAssistance => 'کیا مریض کو مدد کی ضرورت تھی؟';
 
   @override
-  String get assessments => 'Assessments';
+  String get optoVisualAcuity => 'بصری ایکویٹی';
 
   @override
-  String get optoPatientAssistance => 'Did the patient need assistance?';
+  String get optoPatientAided => 'کیا مریض کی مدد کی گئی تھی؟';
 
   @override
-  String get optoVisualAcuity => 'Visual Acuity';
+  String get optoEyeScan => 'آنکھ کا اسکین';
 
   @override
-  String get optoPatientAided => 'Was the patient Aided?';
+  String get optoLeaveFeedback => 'براہ کرم اپنی رائے نیچے دیں';
 
   @override
-  String get optoEyeScan => 'Eye Scan';
+  String get optoNoInternet => 'انٹرنیٹ کنیکشن نہیں ہے';
 
   @override
-  String get optoLeaveFeedback => 'Please leave your feedback below';
+  String get optoCheckInternet => 'براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں';
 
   @override
-  String get optoNoInternet => 'No Internet Connection';
+  String get optoSearchPatientId => 'مریض کی شناخت تلاش کریں';
 
   @override
-  String get optoCheckInternet =>
-      'Please check your internet connection and try again';
+  String get optoRecentAssessments => 'حالیہ جائزے';
 
   @override
-  String get optoSearchPatientId => 'Search Patient ID';
+  String get optoSelectDateRange => 'براہ کرم تاریخ کی حد منتخب کریں';
 
   @override
-  String get optoRecentAssessments => 'Recent Assessments';
+  String get optoDataNotFound => 'اس تلاش کے لیے ڈیٹا نہیں ملا';
 
   @override
-  String get optoSelectDateRange => 'Please select a date range';
+  String get optoAssessmentReport => 'تشخیص کی رپورٹ';
 
   @override
-  String get optoDataNotFound => 'Data not found for this search';
+  String get optoPID => 'پی آئی ڈی';
 
   @override
-  String get optoAssessmentReport => 'Assessment Report';
+  String get category => 'زمرہ';
 
   @override
-  String get optoPID => 'PID';
+  String get patientAssessmentAndTest => 'مریض کی تشخیص اور ٹیسٹ';
 
   @override
-  String get category => 'Category';
+  String get patientSelfTestReport => 'سیلف ٹیسٹ رپورٹ';
 
   @override
-  String get patientAssessmentAndTest => 'Patient Assessment and Test';
+  String get patientClinicalReport => 'کلینیکل رپورٹ';
 
   @override
-  String get patientSelfTestReport => 'Self Test Report';
+  String get patientAppointmentTitle => 'تقرری';
 
   @override
-  String get patientClinicalReport => 'Clinical Report';
+  String get patientBookAppointment => 'کتاب کی تقرری';
 
   @override
-  String get patientAppointmentTitle => 'Appointment';
+  String get patientAppointmentSubtitle => 'آپ کی تقرریاں';
 
   @override
-  String get patientBookAppointment => 'Book Appointment';
+  String get patientTelephoneConsultation => 'ٹیلی فون مشاورت';
 
   @override
-  String get patientAppointmentSubtitle => 'Your Appointments';
+  String get patientAddress => 'پتہ';
 
   @override
-  String get patientTelephoneConsultation => 'Telephone Consultation';
+  String get patientReschedule => 'دوبارہ شیڈول کریں';
 
   @override
-  String get patientAddress => 'Address';
+  String get patientCancel => 'منسوخ کریں';
 
   @override
-  String get patientReschedule => 'Reschedule';
+  String get patientPID => 'پی آئی ڈی';
 
   @override
-  String get patientCancel => 'Cancel';
+  String get patientReportID => 'آئی ڈی کی اطلاع دیں';
 
   @override
-  String get patientPID => 'PID';
+  String get patientHideDetailedReport => 'تفصیلی رپورٹ چھپائیں';
 
   @override
-  String get patientReportID => 'Report ID';
+  String get patientShowDetailedReport => 'تفصیلی رپورٹ دکھائیں';
 
   @override
-  String get patientHideDetailedReport => 'Hide Detailed Report';
+  String get patientEID => 'ای آئی ڈی';
 
   @override
-  String get patientShowDetailedReport => 'Show Detailed Report';
+  String get patientViewHistoryButton => 'تاریخ دیکھیں';
 
   @override
-  String get patientEID => 'EID';
+  String get patientViewReportButton => 'رپورٹ دیکھیں';
 
   @override
-  String get patientViewHistoryButton => 'View History';
+  String get patientNoMoreData => 'مزید ڈیٹا نہیں';
 
   @override
-  String get patientViewReportButton => 'View Report';
+  String get patientErrorFetchingReport => 'رپورٹ حاصل کرنے میں غلطی';
 
   @override
-  String get patientNoMoreData => 'No more data';
+  String get patientTimeline => 'ٹائم لائن';
 
   @override
-  String get patientErrorFetchingReport => 'Error in fetching report';
+  String get patientRoutineCheckup => 'معمول کی جانچ';
 
   @override
-  String get patientTimeline => 'Timeline';
+  String get patientAssessmentID => 'تشخیص آئی ڈی';
 
   @override
-  String get patientRoutineCheckup => 'Routine Checkup';
+  String get patientStartDate => 'آغاز کی تاریخ';
 
   @override
-  String get patientAssessmentID => 'Assessment ID';
+  String get patientIVRAssessment => 'آئی وی آر تشخیص';
 
   @override
-  String get patientStartDate => 'Start Date';
+  String get patientEarlyConsultationRecommended => 'ابتدائی مشاورت کی سفارش کی گئی';
 
   @override
-  String get patientIVRAssessment => 'IVR Assessment';
+  String get patientCataractEyeReport => 'موتیابند کی آنکھ کی رپورٹ';
 
   @override
-  String get patientEarlyConsultationRecommended =>
-      'Early Consultation Recommended';
+  String get patientRedEyeReport => 'سرخ آنکھ کی رپورٹ';
 
   @override
-  String get patientCataractEyeReport => 'Cataract Eye Report';
+  String get patientScanAgain => 'دوبارہ اسکین کریں';
 
   @override
-  String get patientRedEyeReport => 'Red Eye Report';
+  String get patientStepsToScan => 'ریٹنا اسکیننگ کرنے کے اقدامات';
 
   @override
-  String get patientScanAgain => 'Scan Again';
+  String get patientProceedToScan => 'اسکین کے لیے آگے بڑھیں';
 
   @override
-  String get patientStepsToScan => 'Steps to do the retinal scanning';
+  String get patientSkipAndProceedToScan => 'سکپ کریں اور اسکین کے لیے آگے بڑھیں';
 
   @override
-  String get patientProceedToScan => 'Proceed to Scan';
+  String get patientEyeScanner => 'آنکھ کا اسکینر';
 
   @override
-  String get patientSkipAndProceedToScan => 'Skip & Proceed to Scan';
+  String get patientErrorSelectCamera => 'پہلے کیمرہ منتخب کریں!';
 
   @override
-  String get patientEyeScanner => 'Eye Scanner';
+  String get patientEyeBoxText => 'آنکھ کے خانے کا متن';
 
   @override
-  String get patientErrorSelectCamera => 'Select a camera first!';
+  String get patientLoggedOut => 'آپ کو لاگ آؤٹ کر دیا گیا ہے';
 
   @override
-  String get patientEyeBoxText => 'Eye Box Text';
+  String get patientLogoutError => 'معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔';
 
   @override
-  String get patientLoggedOut => 'You have been logged out';
+  String get patientUpdateProfile => 'پروفائل کو اپ ڈیٹ کریں';
 
   @override
-  String get patientLogoutError =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get patientEdit => 'ترمیم کریں';
 
   @override
-  String get patientUpdateProfile => 'Update Profile';
+  String get patientProfileNotUpdated => 'پروفائل کو اپ ڈیٹ نہیں کیا گیا';
 
   @override
-  String get patientEdit => 'edit';
+  String get patientProfileUpdated => 'پروفائل کو اپ ڈیٹ کیا گیا';
 
   @override
-  String get patientProfileNotUpdated => 'Profile not updated';
+  String get patientReportUnavailable => 'رپورٹ دستیاب نہیں ہے';
 
   @override
-  String get patientProfileUpdated => 'Profile updated';
+  String get patientClinicalReportNotFound => 'کلینیکل رپورٹ نہیں ملی';
 
   @override
-  String get patientReportUnavailable => 'Report not available';
+  String get patientRID => 'آر آئی ڈی';
 
   @override
-  String get patientClinicalReportNotFound => 'Clinical Report not found';
+  String get patientUpdateUnavailable => 'اپ ڈیٹ اس وقت دستیاب نہیں ہے';
 
   @override
-  String get patientRID => 'RID';
+  String get vgAddEvent => 'تقریب شامل کریں';
 
   @override
-  String get patientUpdateUnavailable => 'Update not available at this moment';
+  String get vgUploadingImageAddingEvent => 'تصویر اپ لوڈ کرنا اور تقریب شامل کرنا';
 
   @override
-  String get vgAddEvent => 'Add Event';
+  String get vgEventTitle => 'تقریب کا عنوان';
 
   @override
-  String get vgUploadingImageAddingEvent => 'Uploading Image and adding event';
+  String get vgPleaseEnterEndTime => 'براہ کرم اختتامی وقت درج کریں';
 
   @override
-  String get vgEventTitle => 'Event Title';
+  String get vgShouldNotContainSpecialCharacter => 'کوئی خاص کردار نہیں ہونا چاہیے';
 
   @override
-  String get vgPleaseEnterEndTime => 'Please Enter End time';
+  String get vgEventDescription => 'واقعہ کی تفصیل';
 
   @override
-  String get vgShouldNotContainSpecialCharacter =>
-      'Should not contain any special character';
+  String get vgAddPatient => 'مریض کو شامل کریں';
 
   @override
-  String get vgEventDescription => 'Event Description';
+  String get vgPatients => 'مریض';
 
   @override
-  String get vgAddPatient => 'Add Patient';
+  String get vgDetails => 'تفصیلات';
 
   @override
-  String get vgPatients => 'Patients';
+  String get vgTeammates => 'ٹیم کے ساتھی';
 
   @override
-  String get vgDetails => 'Details';
+  String get vgEyeAssessment => 'آنکھوں کی تشخیص';
 
   @override
-  String get vgTeammates => 'Teammates';
+  String get vgStart => 'شروع کریں';
 
   @override
-  String get vgEyeAssessment => 'Eye Assessment';
+  String get vgEyeAssessmentDescription => 'چند مراحل میں اپنے، اپنے دوستوں اور خاندان کے افراد کی آنکھوں کے مسائل کا جائزہ لیں۔ آپ سے آنکھوں کے مسائل سے متعلق علامات کو سمجھنے کے لیے سوالات کا ایک مجموعہ پوچھا جائے گا جس کے بعد بصری ٹیسٹ کیے جائیں گے۔';
 
   @override
-  String get vgStart => 'Start';
+  String get vgLogoutMessage => 'آپ کو لاگ آؤٹ کر دیا گیا ہے';
 
   @override
-  String get vgEyeAssessmentDescription =>
-      'Get the eye problems of you, your friends, and family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
+  String get vgLogoutErrorMessage => 'معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔';
 
   @override
-  String get vgLogoutMessage => 'You have been logged out';
+  String get vgWelcome => 'خوش آمدید۔';
 
   @override
-  String get vgLogoutErrorMessage =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get vgServices => 'خدمات';
 
   @override
-  String get vgWelcome => 'Welcome';
+  String get vgEvents => 'واقعات';
 
   @override
-  String get vgServices => 'Services';
+  String get vgViewAll => 'سب دیکھیں';
 
   @override
-  String get vgEvents => 'Events';
+  String get vtAssessmentReport => 'تشخیص کی رپورٹ-ای اے';
 
   @override
-  String get vgViewAll => 'View All';
+  String get vtRemarks => 'تبصرے';
 
   @override
-  String get vtAssessmentReport => 'Assessment Report - EA';
+  String get vtNoPatientFound => 'کوئی مریض نہیں ملا';
 
   @override
-  String get vtRemarks => 'Remarks';
+  String get vtClose => 'بند کریں';
 
   @override
-  String get vtNoPatientFound => 'No patient found';
+  String get vtBack => 'پیچھے';
 
   @override
-  String get vtClose => 'Close';
+  String get vtSubmit => 'جمع کروائیں';
 
   @override
-  String get vtBack => 'Back';
+  String get vtSomethingWentWrong => 'کچھ غلط ہو گیا';
 
   @override
-  String get vtSubmit => 'Submit';
+  String get vtAssessmentClosedSuccessfully => 'تشخیص کامیابی سے بند ہوئی';
 
   @override
-  String get vtSomethingWentWrong => 'Something went wrong';
+  String get vtEyeScan => 'آنکھ کا اسکین';
 
   @override
-  String get vtAssessmentClosedSuccessfully => 'Assessment Closed Successfully';
+  String get vtDashboard => 'ڈیش بورڈ';
 
   @override
-  String get vtEyeScan => 'Eye Scan';
+  String get vtRegisterPatient => 'مریض کو رجسٹر کریں';
 
   @override
-  String get vtDashboard => 'Dashboard';
+  String get vtTriage => 'ٹرائی۔';
 
   @override
-  String get vtRegisterPatient => 'Register Patient';
+  String get vtMarkMyAvailability => 'میری دستیابی کو نشان زد کریں';
 
   @override
-  String get vtTriage => 'Triage';
+  String get vtIVRCallHistory => 'آئی وی آر کال ہسٹری';
 
   @override
-  String get vtMarkMyAvailability => 'Mark My Availability';
+  String get vtMarked => 'نشان زد';
 
   @override
-  String get vtIVRCallHistory => 'IVR Call History';
+  String get vtPreliminaryAssessment => 'ابتدائی تشخیص';
 
   @override
-  String get vtMarked => 'Marked';
+  String get vtAge => 'عمر';
 
   @override
-  String get vtPreliminaryAssessment => 'Preliminary Assessment';
+  String get vtGender => 'جنس';
 
   @override
-  String get vtAge => 'Age';
+  String get vtAddress => 'پتہ';
 
   @override
-  String get vtGender => 'Gender';
+  String get vtProfile => 'پروفائل';
 
   @override
-  String get vtAddress => 'Address';
+  String get vtLogoutMessage => 'آپ کو لاگ آؤٹ کر دیا گیا ہے';
 
   @override
-  String get vtProfile => 'Profile';
+  String get vtLogoutError => 'معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔';
 
   @override
-  String get vtLogoutMessage => 'You have been logged out';
+  String get vtError => 'غلطی';
 
   @override
-  String get vtLogoutError =>
-      'Apologies, we encountered a logout error in the mobile app.';
+  String get vtPatient => 'مریض۔';
 
   @override
-  String get vtError => 'Error';
+  String get vtMobile => 'موبائل';
 
   @override
-  String get vtPatient => 'Patient';
+  String get vtAssessmentID => 'تشخیص آئی ڈی';
 
   @override
-  String get vtMobile => 'Mobile';
+  String get vtStatus => 'حیثیت';
 
   @override
-  String get vtAssessmentID => 'Assessment ID';
+  String get vtTimeline => 'ٹائم لائن';
 
   @override
-  String get vtStatus => 'Status';
+  String get vtCategory => 'زمرہ';
 
   @override
-  String get vtTimeline => 'Timeline';
+  String get vtNoDataFound => 'کوئی ڈیٹا نہیں ملا';
 
   @override
-  String get vtCategory => 'Category';
+  String get appCameraCapture => 'پکڑنا';
 
   @override
-  String get vtNoDataFound => 'No Data Found';
+  String get appCameraRetake => 'دوبارہ لے لو';
 
   @override
-  String get appCameraCapture => 'Capture';
+  String get appCameraUsePhoto => 'تصویر استعمال کریں';
 
   @override
-  String get appCameraRetake => 'Retake';
+  String get appCameraCancel => 'منسوخ کریں';
 
   @override
-  String get appCameraUsePhoto => 'Use Photo';
+  String get appCameraNotFound => 'کیمرہ نہیں ملا';
 
   @override
-  String get appCameraCancel => 'Cancel';
+  String get appCameraException => 'کیمرہ مستثنی';
 
   @override
-  String get appCameraNotFound => 'Camera not found';
+  String get appCameraProgressMessage => 'لوڈ ہو رہا ہے...';
 
   @override
-  String get appCameraException => 'Camera Exception';
+  String get internetLostNoConnection => 'انٹرنیٹ کنیکشن نہیں ہے';
 
   @override
-  String get appCameraProgressMessage => 'Loading...';
+  String get internetLostRetry => 'دوبارہ کوشش کریں';
 
   @override
-  String get internetLostNoConnection => 'No Internet Connection';
+  String get secureJailbreak => 'ایسا لگتا ہے کہ آپ کا آلہ جیل بروکن ہے';
 
   @override
-  String get internetLostRetry => 'Retry';
+  String get secureRestrictedAccess => 'حفاظتی وجوہات کی بناء پر، اس ایپ تک رسائی جیل بروکن ڈیوائسز پر محدود ہے۔';
 
   @override
-  String get secureJailbreak => 'It seems your device is jailbroken';
+  String get secureExitApp => 'ایپ سے باہر نکلیں';
 
   @override
-  String get secureRestrictedAccess =>
-      'For security reasons, access to this app is restricted on jailbroken devices.';
+  String get sharedErrorPageIssues => 'ہمیں کچھ مسائل کا سامنا ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔';
 
   @override
-  String get secureExitApp => 'Exit App';
+  String get appointmentBookingTitle => 'تقرری کی بکنگ';
 
   @override
-  String get sharedErrorPageIssues =>
-      'We are facing some issues. Please try again later.';
+  String get comingSoon => 'جلد ہی آ رہا ہے...';
 
   @override
-  String get appointmentBookingTitle => 'Appointment Booking';
+  String get miniappService => 'خدمت';
 
   @override
-  String get comingSoon => 'Coming Soon...';
+  String get miniappConsole => 'کنسول';
 
   @override
-  String get miniappService => 'Service';
+  String get roleChooseYourRole => 'اپنا کردار منتخب کریں';
 
   @override
-  String get miniappConsole => 'Console';
+  String get roleNote => 'نوٹ: آپ ایپ کے اندر اپنا کردار تبدیل نہیں کر سکتے۔';
 
   @override
-  String get roleChooseYourRole => 'Choose Your Role';
+  String get roleConfirm => 'تصدیق کریں';
 
   @override
-  String get roleNote => 'Note: You cannot change your role inside the app.';
+  String get roleEyeCareProfessional => 'آئی کیئر پروفیشنل';
 
   @override
-  String get roleConfirm => 'Confirm';
+  String get roleVisionTechnician => 'ویژن ٹیکنیشن';
 
   @override
-  String get roleEyeCareProfessional => 'EYE CARE PROFESSIONAL';
+  String get rolePatient => 'مریض';
 
   @override
-  String get roleVisionTechnician => 'VISION TECHNICIAN';
+  String get roleVisionGuardian => 'وژن گارڈین';
 
   @override
-  String get rolePatient => 'PATIENT';
+  String get vtSearchText => 'مریض کی شناخت، موبائل نمبر یا نام کے ذریعے تلاش کریں';
 
   @override
-  String get roleVisionGuardian => 'VISION GUARDIAN';
+  String get emptyPatientsInfo => 'مریضوں کو ان کی تفصیلات دیکھنے کے لیے تلاش کرنا شروع کریں۔';
 
   @override
-  String get vtSearchText => 'Search by Patient ID, Mobile No or Name';
+  String get vtPersonalDetails => 'ذاتی تفصیلات';
 
   @override
-  String get emptyPatientsInfo =>
-      'Start searching for patients to view their details .. ';
+  String get vtHprId => 'ایچ پی آر آئی ڈی';
 
   @override
-  String get vtPersonalDetails => 'Personal Details';
+  String get vtEmailId => 'ای میل آئی ڈی';
 
   @override
-  String get vtHprId => 'HPR ID';
+  String get vtEducationalQualification => 'تعلیمی قابلیت';
 
   @override
-  String get vtEmailId => 'Email ID';
+  String get vtAddressAndDoorNumber => 'پتہ اور دروازہ نمبر';
 
   @override
-  String get vtEducationalQualification => 'Educational Qualification';
+  String get vtCity => 'شہر';
 
   @override
-  String get vtAddressAndDoorNumber => 'Address and Door Number';
+  String get vtState => 'ریاست';
 
   @override
-  String get vtCity => 'City';
+  String get vtPincode => 'پن کوڈ';
 
   @override
-  String get vtState => 'State';
+  String get vtOrganisationDetails => 'تنظیم کی تفصیلات';
 
   @override
-  String get vtPincode => 'Pincode';
+  String get vtOrgId => 'او آر جی آئی ڈی';
 
   @override
-  String get vtOrganisationDetails => 'Organisation Details';
+  String get vtFacilityType => 'سہولت کی قسم';
 
   @override
-  String get vtOrgId => 'Org ID';
+  String get vtAssessments => 'جائزے';
 
   @override
-  String get vtFacilityType => 'Facility Type';
+  String get vtNoAssessmentsFound => 'کوئی تشخیص نہیں ملی';
 
   @override
-  String get vtAssessments => 'Assessments';
+  String get vtAnalytics => 'تجزیات';
 
   @override
-  String get vtNoAssessmentsFound => 'No Assessments Found';
+  String get vtTotalCases => 'کل مقدمات';
 
   @override
-  String get vtAnalytics => 'Analytics';
+  String get vtIvrCalls => 'آئی وی آر کالز';
 
   @override
-  String get vtTotalCases => 'Total Cases';
+  String get vtClinicVisits => 'کلینک کے دورے';
 
   @override
-  String get vtIvrCalls => 'IVR Calls';
+  String get vtCasesClosed => 'مقدمات بند کر دیے گئے';
 
   @override
-  String get vtClinicVisits => 'Clinic Visits';
+  String get vtCritical => 'تنقیدی';
 
   @override
-  String get vtCasesClosed => 'Cases Closed';
+  String get vtRegular => 'باقاعدگی سے';
 
   @override
-  String get vtCritical => 'Critical';
+  String get vtAvgClosureTime => 'اوسط۔ بند ہونے کا وقت';
 
   @override
-  String get vtRegular => 'Regular';
+  String get vtByAge => 'عمر کے لحاظ سے';
 
   @override
-  String get vtAvgClosureTime => 'Avg. Closure Time';
+  String get vtByGender => 'جنس کے لحاظ سے';
 
   @override
-  String get vtByAge => 'By Age';
+  String get vtSymptoms => 'علامات';
 
   @override
-  String get vtByGender => 'By Gender';
+  String get vtSearchByMobileNo => 'موبائل نمبر کے ذریعے تلاش کریں۔';
 
   @override
-  String get vtSymptoms => 'Symptoms';
+  String get vtInvalidMobileNo => 'غلط موبائل نمبر۔';
 
   @override
-  String get vtSearchByMobileNo => 'Search by Mobile No.';
+  String get vtCallLogEmpty => 'کال لاگ خالی ہے۔ ابھی تک کوئی کال نہیں کی گئی!!';
 
   @override
-  String get vtInvalidMobileNo => 'Invalid Mobile No.';
+  String get vtNoDataAvailable => 'کوئی ڈیٹا دستیاب نہیں ہے';
 
   @override
-  String get vtCallLogEmpty => 'Call Log is Empty.. No Calls made yet!!';
+  String get vtToday => 'آج';
 
   @override
-  String get vtNoDataAvailable => 'No Data available';
+  String get vtYesterday => 'گزشتہ روز';
 
   @override
-  String get vtToday => 'TODAY';
+  String get vtIvrCallNotAvailable => 'آئی وی آر کال دستیاب نہیں ہے۔ دوبارہ کوشش کریں!!';
 
   @override
-  String get vtYesterday => 'YESTERDAY';
+  String get vtMarkUnavailable => 'غیر دستیاب کے طور پر نشان زد کریں';
 
   @override
-  String get vtIvrCallNotAvailable => 'IVR call not available.. Try Again!!';
+  String get vtStartDate => 'آغاز کی تاریخ';
 
   @override
-  String get vtMarkUnavailable => 'Mark as Unavailable';
+  String get vtEndDate => 'اختتامی تاریخ';
 
   @override
-  String get vtStartDate => 'Start Date';
+  String get vtStartTime => 'آغاز کا وقت';
 
   @override
-  String get vtEndDate => 'End Date';
+  String get vtEndTime => 'اختتامی وقت';
 
   @override
-  String get vtStartTime => 'Start Time';
+  String get vtAddRemarksOptional => 'ریمارکس شامل کریں (اختیاری)';
 
   @override
-  String get vtEndTime => 'End Time';
+  String get vtSave => 'محفوظ کریں';
 
   @override
-  String get vtAddRemarksOptional => 'Add Remarks (Optional)';
+  String get vtCancel => 'منسوخ کریں';
 
   @override
-  String get vtSave => 'Save';
+  String get vtPleaseEnterRemark => 'براہ کرم تبصرہ درج کریں';
 
   @override
-  String get vtCancel => 'Cancel';
+  String get vtAssessment => 'تشخیص';
 
   @override
-  String get vtPleaseEnterRemark => 'Please enter Remark';
+  String get vtIvrSelections => 'آئی وی آر انتخاب';
 
   @override
-  String get vtAssessment => 'Assessment';
+  String get vtLanguageSelection => 'زبان کا انتخاب';
 
   @override
-  String get vtIvrSelections => 'IVR Selections';
+  String get vtEnglish => 'انگریزی';
 
   @override
-  String get vtLanguageSelection => 'Language Selection';
+  String get vtPatientType => 'مریض کی قسم';
 
   @override
-  String get vtEnglish => 'English';
+  String get vtProblem => 'مسئلہ';
 
   @override
-  String get vtPatientType => 'Patient Type';
+  String get vtEyeSight => 'آنکھوں کی بینائی';
 
   @override
-  String get vtProblem => 'Problem';
+  String get vtVisionTechnician => 'وژن ٹیکنیشن';
 
   @override
-  String get vtEyeSight => 'Eye Sight';
+  String get vtRecommendedCenter => 'تجویز کردہ مرکز';
 
   @override
-  String get vtVisionTechnician => 'Vision Technician';
+  String get vtAssessmentIDEA => 'اسسمنٹ آئی ڈی: ای اے';
 
   @override
-  String get vtRecommendedCenter => 'Recommended Center';
+  String get vtPid => 'پی آئی ڈی: او پی';
 
   @override
-  String get vtAssessmentIDEA => 'Assessment ID: EA';
+  String get vtAssessmentTimeline => 'تشخیص ٹائم لائن';
 
   @override
-  String get vtPid => 'PID: OP';
+  String get vtPleaseSelectEncounter => 'براہ کرم ایک ملاقات منتخب کریں';
 
   @override
-  String get vtAssessmentTimeline => 'Assessment Timeline';
+  String get vtTimelineEA => 'ٹائم لائن: ای اے';
 
   @override
-  String get vtPleaseSelectEncounter => 'Please select an encounter';
+  String get vtGeneralInformation => 'عمومی معلومات';
 
   @override
-  String get vtTimelineEA => 'Timeline: EA';
+  String get vtDateOfBirth => 'تاریخ پیدائش';
 
   @override
-  String get vtGeneralInformation => 'General Information';
+  String get vtAssessmentEA => 'تشخیص ای اے';
 
   @override
-  String get vtDateOfBirth => 'Date of Birth';
+  String get vtNotRegistered => 'آپ سسٹم میں رجسٹرڈ نہیں ہیں۔ براہ کرم ایک مسڈ کال دیں';
 
   @override
-  String get vtAssessmentEA => 'Assessment EA';
+  String get vtOkay => 'ٹھیک ہے۔';
 
   @override
-  String get vtNotRegistered =>
-      'You are not registered in the system. Please give a missed call to';
+  String get vtTakePicture => 'تصویر کھینچیں';
 
   @override
-  String get vtOkay => 'Okay';
+  String get vtEye => 'آنکھ۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔۔';
 
   @override
-  String get vtTakePicture => 'Take Picture';
+  String get vtRetakePicture => 'تصویر دوبارہ لیں';
 
   @override
-  String get vtEye => 'Eye';
+  String get vtNext => 'اگلا';
 
   @override
-  String get vtRetakePicture => 'Retake Picture';
+  String get vtMrCode => 'ایم آر کوڈ';
 
   @override
-  String get vtNext => 'Next';
+  String get vtEnterMrCode => 'یہاں ایم آر کوڈ درج کریں';
 
   @override
-  String get vtMrCode => 'MR Code';
+  String get vtPleaseEnterMrCode => 'براہ کرم ایم آر کوڈ درج کریں';
 
   @override
-  String get vtEnterMrCode => 'Enter MR Code Here';
+  String get vtNote => 'نوٹ';
 
   @override
-  String get vtPleaseEnterMrCode => 'Please enter MR Code';
+  String get vtEnterRecommendations => 'تجاویز یہاں درج کریں';
 
   @override
-  String get vtNote => 'Note';
+  String get vtSolutions => 'حل (ز)';
 
   @override
-  String get vtEnterRecommendations => 'Enter Recommendations Here';
+  String get vtLeftEye => 'بائیں آنکھ';
 
   @override
-  String get vtSolutions => 'Solutions(s)';
+  String get vtRightEye => 'دائیں آنکھ';
 
   @override
-  String get vtLeftEye => 'Left Eye';
+  String get vtBothEyes => 'دونوں آنکھیں';
 
   @override
-  String get vtRightEye => 'Right Eye';
+  String get vtFilterBy => 'کے ذریعے فلٹر کریں';
 
   @override
-  String get vtBothEyes => 'Both Eyes';
+  String get vtLocation => 'مقام';
 
   @override
-  String get vtFilterBy => 'Filter by';
+  String get vtEnterTime => 'براہ کرم وقت درج کریں';
 
   @override
-  String get vtLocation => 'Location';
+  String get vtEnterDate => 'براہ کرم تاریخ درج کریں';
 
   @override
-  String get vtEnterTime => 'Please enter Time';
+  String get vtRecommendation => 'سفارشات';
 
   @override
-  String get vtEnterDate => 'Please enter Date';
+  String get vtVisitPrimaryCenter => 'پرائمری سینٹر کا دورہ کریں';
 
   @override
-  String get vtRecommendation => 'Recommendation';
+  String get vtVisitSecondaryCenter => 'ثانوی مرکز کا دورہ کریں';
 
   @override
-  String get vtVisitPrimaryCenter => 'Visit Primary Center';
+  String get vtVisitTertiaryCenter => 'ترتیری مرکز کا دورہ کریں';
 
   @override
-  String get vtVisitSecondaryCenter => 'Visit Secondary Center';
+  String get vtVisitCenterOfExcellence => 'سینٹر آف ایکسی لینس کا دورہ کریں';
 
   @override
-  String get vtVisitTertiaryCenter => 'Visit Tertiary Center';
+  String get vtIvrCallQuestion => 'کیا آپ آئی وی آر کال پر ہیں؟';
 
   @override
-  String get vtVisitCenterOfExcellence => 'Visit Center of Excellence';
+  String get vtYes => 'ہاں۔';
 
   @override
-  String get vtIvrCallQuestion => 'Are you on IVR Call?';
+  String get vtNo => 'نہیں۔';
 
   @override
-  String get vtYes => 'Yes';
+  String get vtRetry => 'دوبارہ کوشش کریں';
 
   @override
-  String get vtNo => 'No';
+  String get vtAssessmentQuestions => 'تشخیص کے سوالات';
 
   @override
-  String get vtRetry => 'Retry';
+  String get vtVisionCenter => 'وژن سینٹر';
 
   @override
-  String get vtAssessmentQuestions => 'Assessment Questions';
+  String get vtVisualAcuity => 'بصری ایکویٹی';
 
   @override
-  String get vtVisionCenter => 'Vision Center';
+  String get vtInvalidValue => 'غلط قدر';
 
   @override
-  String get vtVisualAcuity => 'Visual Acuity';
+  String get vtSeverity => 'شدت پسندی';
 
   @override
-  String get vtInvalidValue => 'Invalid value';
+  String get vtNoVisionCentersFound => 'کوئی وژن سینٹر نہیں ملا';
 
   @override
-  String get vtSeverity => 'Severity';
+  String get vtRequestLocationPermission => 'مقام کی اجازت کی درخواست کریں';
 
   @override
-  String get vtNoVisionCentersFound => 'No Vision Centers Found';
+  String get vtAppSettings => 'ایپ کی ترتیبات';
 
   @override
-  String get vtRequestLocationPermission => 'Request Location Permission';
+  String get vtEnterSomeText => 'براہ کرم کچھ متن درج کریں';
 
   @override
-  String get vtAppSettings => 'App Settings';
+  String get vtPrimary => 'پرائمری';
 
   @override
-  String get vtEnterSomeText => 'Please enter some text';
+  String get vtDependent => 'منحصر';
 
   @override
-  String get vtPrimary => 'Primary';
+  String get vtAddMember => 'رکن شامل کریں';
 
   @override
-  String get vtDependent => 'Dependent';
+  String get vtCompleteProfile => 'مکمل پروفائل';
 
   @override
-  String get vtAddMember => 'Add Member';
+  String get vtPatientNotRegistered => 'مریض رجسٹرڈ نہیں ہے';
 
   @override
-  String get vtCompleteProfile => 'Complete Profile';
+  String get vtPatientRegistered => 'مریض رجسٹرڈ ہے';
 
   @override
-  String get vtPatientNotRegistered => 'Patient not registered';
+  String get vtDependentNotAdded => 'انحصار شامل نہیں کیا گیا';
 
   @override
-  String get vtPatientRegistered => 'Patient registered';
+  String get vtDependentAdded => 'انحصار شامل کیا گیا';
 
   @override
-  String get vtDependentNotAdded => 'Dependent not added';
+  String get vtServiceNotAvailable => 'خدمت دستیاب نہیں ہے';
 
   @override
-  String get vtDependentAdded => 'Dependent added';
+  String get vgEyeAssessments => 'آنکھوں کے جائزے';
 
   @override
-  String get vtServiceNotAvailable => 'Service Not Available';
+  String get vgTotal => 'کل';
 
   @override
-  String get vgEyeAssessments => 'Eye Assessments';
+  String get vgCamps => 'کیمپس';
 
   @override
-  String get vgTotal => 'Total';
+  String get vgDoorToDoor => 'دروازے کا دروازہ';
 
   @override
-  String get vgCamps => 'Camps';
+  String get vgByGender => 'جنس کے لحاظ سے';
 
   @override
-  String get vgDoorToDoor => 'Door to Door';
+  String get vgMale => 'مرد';
 
   @override
-  String get vgByGender => 'By Gender';
+  String get vgFemale => 'عورت';
 
   @override
-  String get vgMale => 'Male';
+  String get vgOthers => 'دیگر';
 
   @override
-  String get vgFemale => 'Female';
+  String get vgByAge => 'عمر کے لحاظ سے';
 
   @override
-  String get vgOthers => 'Others';
+  String get vgSlideAge => 'سالوں کا۔';
 
   @override
-  String get vgByAge => 'By Age';
+  String get vgSymptoms => 'علامات';
 
   @override
-  String get vgSlideAge => 'Yrs';
+  String get vgRefractive => 'ریفریکٹیو';
 
   @override
-  String get vgSymptoms => 'Symptoms';
+  String get vgCataract => 'موتیابند';
 
   @override
-  String get vgRefractive => 'Refractive';
+  String get vgGlaucoma => 'گلوکوما';
 
   @override
-  String get vgCataract => 'Cataract';
+  String get vgKeratitis => 'کیراٹائٹس';
 
   @override
-  String get vgGlaucoma => 'Glaucoma';
+  String get vgBlepharitis => 'بلیفرائٹس';
 
   @override
-  String get vgKeratitis => 'Keratitis';
+  String get vgConjunctivitis => 'کنجکٹوائٹس';
 
   @override
-  String get vgBlepharitis => 'Blepharitis';
+  String get vgServicesCreateEvent => 'تقریب بنائیں';
 
   @override
-  String get vgConjunctivitis => 'Conjunctivitis';
+  String get vgServicesEyeAssessment => 'آنکھوں کی تشخیص';
 
   @override
-  String get vgServicesCreateEvent => 'Create\r\nEvent';
+  String get vgServicesRegisterPatient => 'نئے مریض کو رجسٹر کریں';
 
   @override
-  String get vgServicesEyeAssessment => 'Eye\r\nAssessment';
+  String get vgAddPatients => 'مریضوں کو شامل کریں';
 
   @override
-  String get vgServicesRegisterPatient => 'Register\r\nNew Patient';
+  String get vgEvent => 'تقریب';
 
   @override
-  String get vgAddPatients => 'Add Patients';
+  String get vgAddEventPhoto => 'تقریب کی تصویر شامل کریں';
 
   @override
-  String get vgEvent => 'Event';
+  String get vgUploadImage => 'تصویر اپ لوڈ کریں';
 
   @override
-  String get vgAddEventPhoto => 'Add Event Photo';
+  String get vgAddPhotoInstruction => 'تقریب کی تصویر شامل کریں جو تھمب نیل کے طور پر دکھائی جائے گی';
 
   @override
-  String get vgUploadImage => 'Upload Image';
+  String get vgAddressDetails => 'پتے کی تفصیلات';
 
   @override
-  String get vgAddPhotoInstruction =>
-      'Add a photo of the Event which\r\nwill be shown as thumbnail';
+  String get vgVenueName => 'مقام کا نام';
 
   @override
-  String get vgAddressDetails => 'Address Details';
+  String get vgVenueNameError => 'براہ کرم مقام کا نام درج کریں';
 
   @override
-  String get vgVenueName => 'Venue Name';
+  String get vgVenueNameSpecialCharError => 'کوئی خاص کردار نہیں ہونا چاہیے';
 
   @override
-  String get vgVenueNameError => 'Please enter Venue name';
+  String get vgPincode => 'پن کوڈ';
 
   @override
-  String get vgVenueNameSpecialCharError =>
-      'Should not contain any special character';
+  String get vgPincodeError => 'صرف 6 ہندسوں کے پن کوڈ کی اجازت ہے';
 
   @override
-  String get vgPincode => 'Pincode';
+  String get vgCityTownVillage => 'شہر/قصبہ/گاؤں';
 
   @override
-  String get vgPincodeError => 'Only 6 digit pincode allowed';
+  String get vgCityTownVillageError => 'براہ کرم شہر/قصبہ/گاؤں کا نام درج کریں';
 
   @override
-  String get vgCityTownVillage => 'City/Town/Village';
+  String get vgCityTownVillageSpecialCharError => 'کوئی خاص کردار نہیں ہونا چاہیے';
 
   @override
-  String get vgCityTownVillageError => 'Please enter City/Town/Village name';
+  String get vgCancel => 'منسوخ کریں';
 
   @override
-  String get vgCityTownVillageSpecialCharError =>
-      'Should not contain any special character';
+  String get vgSave => 'محفوظ کریں';
 
   @override
-  String get vgCancel => 'Cancel';
+  String get vgAddEventImage => 'تقریب کی تصویر شامل کریں';
 
   @override
-  String get vgSave => 'Save';
+  String get vgEventAdded => 'تقریب شامل کی گئی';
 
   @override
-  String get vgAddEventImage => 'Add Event Image';
+  String get vgEventNotAdded => 'تقریب شامل نہیں کی گئی';
 
   @override
-  String get vgEventAdded => 'Event added';
+  String get vgDateTime => 'تاریخ اور وقت';
 
   @override
-  String get vgEventNotAdded => 'Event not added';
+  String get vgStartDate => 'آغاز کی تاریخ';
 
   @override
-  String get vgDateTime => 'Date & Time';
+  String get vgStartTime => 'آغاز کا وقت';
 
   @override
-  String get vgStartDate => 'Start Date';
+  String get vgLocation => 'مقام';
 
   @override
-  String get vgStartTime => 'Start Time';
+  String get vgViewOnMap => 'نقشے پر دیکھیں';
 
   @override
-  String get vgLocation => 'Location';
+  String get vgAddressAndDoorNumber => 'پتہ اور دروازہ نمبر';
 
   @override
-  String get vgViewOnMap => 'View On Map';
+  String get vgSubDistrictName => 'ذیلی ضلع کا نام';
 
   @override
-  String get vgAddressAndDoorNumber => 'Address and Door Number';
+  String get vgVillageName => 'گاؤں کا نام';
 
   @override
-  String get vgSubDistrictName => 'Sub District Name';
+  String get vgDistrictName => 'ضلع کا نام';
 
   @override
-  String get vgVillageName => 'Village Name';
+  String get vgAbout => 'کے بارے میں';
 
   @override
-  String get vgDistrictName => 'District Name';
+  String get vgEditEvent => 'تقریب میں ترمیم کریں';
 
   @override
-  String get vgAbout => 'About';
+  String get vgDeleteEvent => 'تقریب کو حذف کریں';
 
   @override
-  String get vgEditEvent => 'Edit Event';
+  String get vgErrorFetchingEventDetails => 'تقریب کی تفصیلات حاصل کرنے میں خرابی';
 
   @override
-  String get vgDeleteEvent => 'Delete Event';
+  String get vgNoPatientRegistered => 'نام کے ساتھ کوئی مریض رجسٹرڈ نہیں ہے۔ رجسٹر مریض پر کلک کریں۔';
 
   @override
-  String get vgErrorFetchingEventDetails => 'Error fetching event details';
+  String get vgRegisterPatient => 'مریض کو رجسٹر کریں';
 
   @override
-  String get vgNoPatientRegistered =>
-      'No Patient with Name is registered. Click on the  Register Patient.';
+  String get vgPrimary => 'پرائمری';
 
   @override
-  String get vgRegisterPatient => 'Register Patient';
+  String get vgDependent => 'منحصر';
 
   @override
-  String get vgPrimary => 'Primary';
+  String get vgAddMember => 'رکن شامل کریں';
 
   @override
-  String get vgDependent => 'Dependent';
+  String get vgCompleteProfile => 'مکمل پروفائل';
 
   @override
-  String get vgAddMember => 'Add Member';
+  String get vgStartAssessment => 'تشخیص شروع کریں';
 
   @override
-  String get vgCompleteProfile => 'Complete Profile';
+  String get vgSearchPatientByPhoneNumber => 'فون نمبر کے ذریعے مریض کو تلاش کریں';
 
   @override
-  String get vgStartAssessment => 'Start\r\nAssessment';
+  String get vgInvalidPhoneNumber => 'براہ کرم ایک درست فون نمبر درج کریں';
 
   @override
-  String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
+  String get vgServerError => 'سرور میں خرابی';
 
   @override
-  String get vgInvalidPhoneNumber => 'Please enter a valid phone number';
+  String get vgPatient => 'مریض۔';
 
   @override
-  String get vgServerError => 'Server Error';
+  String get vgReportId => 'آئی ڈی کی اطلاع دیں';
 
   @override
-  String get vgPatient => 'Patient';
+  String get vgNoEventFound => 'کوئی تقریب نہیں ملی';
 
   @override
-  String get vgReportId => 'Report ID';
+  String get vgTeamMateDeletedSuccessfully => 'ٹیم میٹ کامیابی سے حذف کر دیا گیا';
 
   @override
-  String get vgNoEventFound => 'No Event Found';
+  String get vgSomethingWentWrong => 'کچھ غلط ہو گیا';
 
   @override
-  String get vgTeamMateDeletedSuccessfully => 'TeamMate Deleted Successfully';
+  String get vgName => 'نام';
 
   @override
-  String get vgSomethingWentWrong => 'Something went wrong';
+  String get vgPhoneNumber => 'فون نمبر';
 
   @override
-  String get vgName => 'Name';
+  String get vgErrorFetchingTeammatesDetails => 'ٹیم کے ساتھیوں کی تفصیلات حاصل کرنے میں غلطی';
 
   @override
-  String get vgPhoneNumber => 'Phone Number';
+  String get vgTeamMateAddedSuccessfully => 'ٹیم میٹ کو کامیابی سے شامل کیا گیا';
 
   @override
-  String get vgErrorFetchingTeammatesDetails =>
-      'Error fetching teammates details';
+  String get vgAddTeammate => 'ٹیم میٹ شامل کریں';
 
   @override
-  String get vgTeamMateAddedSuccessfully => 'TeamMate Added Successfully';
+  String get vgPleaseEnter => 'براہ کرم داخل کریں';
 
   @override
-  String get vgAddTeammate => 'Add Teammate';
+  String get vgPleaseEnterField => 'براہ کرم فیلڈ درج کریں';
 
   @override
-  String get vgPleaseEnter => 'Please enter';
+  String get vgOr => 'یا';
 
   @override
-  String get vgPleaseEnterField => 'Please enter field';
+  String get vgSearch => 'تلاش کریں';
 
   @override
-  String get vgOr => 'Or';
+  String get vgEventDeletedSuccessfully => 'تقریب کامیابی سے حذف کر دی گئی';
 
   @override
-  String get vgSearch => 'Search';
+  String get vgEventDeletionFailed => 'تقریب حذف کرنے میں ناکام';
 
   @override
-  String get vgEventDeletedSuccessfully => 'Event Deleted Successfully';
+  String get vgEndTimeGreaterThanStartTime => 'اختتامی وقت شروع ہونے کے وقت سے زیادہ ہونا چاہیے';
 
   @override
-  String get vgEventDeletionFailed => 'Event Deletion Failed';
+  String get vgNoPatientsPresent => 'اس وقت کوئی مریض نہیں ہے۔ "ایڈ پیشنٹ" پر ٹیپ کریں۔';
 
   @override
-  String get vgEndTimeGreaterThanStartTime =>
-      'End time should be greater than start time';
+  String get textSize => 'متن کا حجم';
 
   @override
-  String get vgNoPatientsPresent =>
-      'There are no patients at present. Tap on "Add Patient"';
+  String get increase => 'بڑھائیں';
+
+  @override
+  String get decrease => 'کم کریں';
+
+  @override
+  String get reset => 'ری سیٹ کریں';
+
+  @override
+  String get minimumTextSizeReached => 'کم سے کم متن کا سائز پہنچ گیا';
+
+  @override
+  String get maximumTextSizeReached => 'زیادہ سے زیادہ متن کا سائز پہنچ گیا';
 }

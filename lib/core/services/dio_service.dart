@@ -21,6 +21,23 @@ var keycloakDioProvider = Provider(
   },
 );
 
+var chatbotDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstant.chatbotUrl,
+        connectTimeout: const Duration(seconds: 30),
+      ),
+    );
+    // dio.interceptors.addAll(
+    //   [
+    //     DioCertificateInterceptor(dio),
+    //   ],
+    // );
+    return dio;
+  },
+);
+
 var dioProvider = Provider(
   (ref) {
     final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;

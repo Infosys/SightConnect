@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { getLanguageName } = require("./utils/language");
-const { capitalize } = require("./utils/string");
+const { capitalize, encodeEscapeChars } = require("./utils/string");
 
 function appTranslationsDart() {
   const arbFilesFolder = path.join(__dirname, "../lib/l10n");
@@ -95,9 +95,8 @@ class AppLocalizations${capitalize(languageCode)} extends AppLocalizations {
       let returnStatement = translations[key];
       if (!returnStatement) return "";
       for (const param of params) {
-        returnStatement = returnStatement.replaceAll(
-          `{${param}}`,
-          `$\{${param}}`
+        returnStatement = encodeEscapeChars(
+          returnStatement.replaceAll(`{${param}}`, `$\{${param}}`)
         );
       }
 
@@ -111,10 +110,7 @@ ${leftPadding}}`;
     let value = translations[key] || englishTranslations[key];
 
     return `@override
-${leftPadding}String get ${key} => '${value
-      .replaceAll("'", "\\'")
-      .replaceAll("\r", "\\r")
-      .replaceAll("\n", "\\n")}';`;
+${leftPadding}String get ${key} => '${encodeEscapeChars(value)}';`;
   }
 
   /**
@@ -133,10 +129,7 @@ ${leftPadding}String get ${key} => '${value
         return `/// No description provided for ${key}.
   ///
   /// In en, this message translates to:
-  /// **'${englishTranslations[key.slice(1)]
-    .replaceAll("'", "\\'")
-    .replaceAll("\r", "\\r")
-    .replaceAll("\n", "\\n")}'**
+  /// **'${encodeEscapeChars(englishTranslations[key.slice(1)])}'**
   String ${key.slice(1)}(${params
           .map((param) => `${placeholders[param].type} ${param}`)
           .join(", ")});`;
@@ -150,10 +143,7 @@ ${leftPadding}String get ${key} => '${value
         (key) => `/// No description provided for @${key}.
   ///
   /// In en, this message translates to:
-  /// **'${englishTranslations[key]
-    .replaceAll("'", "\\'")
-    .replaceAll("\r", "\\r")
-    .replaceAll("\n", "\\n")}'**
+  /// **'${encodeEscapeChars(englishTranslations[key])}'**
   String get ${key};`
       );
     content += `import 'dart:async';
@@ -295,6 +285,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     return content;
   }
 }
+
+appTranslationsDart();
 
 module.exports = {
   appTranslationsDart,
