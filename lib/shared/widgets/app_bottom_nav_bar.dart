@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_db_local_snapshot_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/pages/patient_services_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
+
 import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 
 class AppBottomNavBar extends HookConsumerWidget {
@@ -72,7 +73,7 @@ class AppBottomNavBar extends HookConsumerWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return const PatientNotificationPage();
+                  return const LocalDBCurrentState();
                 },
               ),
             ).then((value) => selectedIndex.value = 0);

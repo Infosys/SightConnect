@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_questionnaire_locally_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 var triageQuestionnaireProvider = ChangeNotifierProvider.autoDispose(
   (ref) => TriageQuestionnaireProvider(
     ref.watch(saveTriageQuestionnaireLocallyUseCaseProvider),
+    ref.watch(triageMemberProvider).testPatientId!,
   ),
 );
 
@@ -21,8 +23,10 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
   late final List<Map<int, bool>> _questionnaireResponse;
   final List<PostTriageQuestionModel> _questionResponseList = [];
   TextEditingController textEditingController = TextEditingController();
+  int _patientID;
 
-  TriageQuestionnaireProvider(this._saveTriageQuestionnaireLocallyUseCase)
+  TriageQuestionnaireProvider(
+      this._saveTriageQuestionnaireLocallyUseCase, this._patientID)
       : _questionnaireRemarks = '',
         _selectedOptions = {},
         _questionnaireSections = [],
@@ -121,6 +125,7 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     await _saveTriageQuestionnaireLocallyUseCase.call(
       SaveTriageQuestionnaireLocallyParam(
         triageQuestionnaireResponse: response,
+        patientID: _patientID.toString(),
       ),
     );
     notifyListeners();
