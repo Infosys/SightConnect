@@ -13,11 +13,13 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterPatientInfoCard extends StatelessWidget {
-  const RegisterPatientInfoCard({super.key, required this.data});
-  final List<VisionGuardianEventPatientResponseModel> data;
+  const RegisterPatientInfoCard({
+    super.key,
+    required this.data,
+  });
+  final VisionGuardianEventPatientResponseModel data;
   @override
   Widget build(BuildContext context) {
-    int index = 0;
     final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.kspadding),
@@ -26,20 +28,20 @@ class RegisterPatientInfoCard extends StatelessWidget {
         horizontal: AppSize.klpadding,
       ),
       decoration: BoxDecoration(
-          color: AppColor.white,
-          boxShadow: applyLightShadow(),
-          borderRadius: BorderRadius.circular(8)),
+        color: AppColor.white,
+        boxShadow: applyLightShadow(),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: ListTile(
-        leading: data[index].profilePhoto == null ||
-                data[index].profilePhoto == "string"
+        leading: data.profilePhoto == null || data.profilePhoto == "string"
             ? SizedBox(
                 child: AppNameAvatar(
-                  name: data[index].name ?? "",
+                  name: data.name ?? "",
                   color: AppColor.blue,
                   fontSize: 16,
                 ),
               )
-            : AppNetworkImage(imageUrl: data[index].profilePhoto ?? ""),
+            : AppNetworkImage(imageUrl: data.profilePhoto!),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -49,15 +51,17 @@ class RegisterPatientInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    data[index].name.capitalize(),
+                    data.name.capitalize(),
                     style: applyRobotoFont(
-                        fontSize: 14, fontWeight: FontWeight.w500),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: AppSize.ksheight / 2),
                   Row(
                     children: [
                       Text(
-                        "${data[index].phoneNumber}, ",
+                        "${data.phoneNumber}, ",
                         style: applyRobotoFont(
                           fontSize: 12,
                           color: AppColor.black.withOpacity(0.5),
@@ -65,9 +69,9 @@ class RegisterPatientInfoCard extends StatelessWidget {
                       ),
                       Text(
                         _formateAge(
-                          day: data[index].dayOfBirth,
-                          mon: data[index].monthOfBirth,
-                          year: data[index].yearOfBirth,
+                          day: data.dayOfBirth,
+                          mon: data.monthOfBirth,
+                          year: data.yearOfBirth,
                         ),
                         style: applyRobotoFont(
                           fontSize: 12,
@@ -80,16 +84,16 @@ class RegisterPatientInfoCard extends StatelessWidget {
                   Row(
                     children: [
                       Visibility(
-                        visible: data[index].patientId != null,
+                        visible: data.patientId != null,
                         child: Text(
-                          data[index].parentPatientId == null
+                          data.parentPatientId == null
                               ? loc.vtPrimary
                               : loc.vtDependent,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(
                             fontSize: 12,
-                            color: data[index].parentPatientId == null
+                            color: data.parentPatientId == null
                                 ? AppColor.green
                                 : AppColor.orange,
                             fontWeight: FontWeight.w500,
@@ -98,7 +102,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                       ),
                       const SizedBox(width: AppSize.kspadding),
                       Visibility(
-                        visible: data[index].parentPatientId == null,
+                        visible: data.parentPatientId == null,
                         child: InkWell(
                           onTap: () {
                             // This will add family member in the primary account
@@ -110,9 +114,8 @@ class RegisterPatientInfoCard extends StatelessWidget {
                                       PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.ADD_MEMBER,
                                     displayName: loc.vtAddMember,
-                                    parentPatientId:
-                                        data[index].patientId.toString(),
-                                    mobileNumber: data[index].phoneNumber,
+                                    parentPatientId: data.patientId.toString(),
+                                    mobileNumber: data.phoneNumber,
                                   ),
                                 ),
                               ).then(
@@ -154,7 +157,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: data[index].patientId == null,
+                        visible: data.patientId == null,
                         child: InkWell(
                           onTap: () async {
                             try {
@@ -165,7 +168,7 @@ class RegisterPatientInfoCard extends StatelessWidget {
                                       PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.REGISTER,
                                     displayName: loc.vtRegisterPatient,
-                                    mobileNumber: data[index].phoneNumber,
+                                    mobileNumber: data.phoneNumber,
                                   ),
                                 ),
                               )
@@ -213,41 +216,6 @@ class RegisterPatientInfoCard extends StatelessWidget {
                 ],
               ),
             ),
-            // Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     TextButton(
-            //       onPressed: data[index].patientId == null
-            //           ? null
-            //           : () {
-            //               // Navigator.push(
-            //               //   context,
-            //               //   MaterialPageRoute(
-            //               //     builder: (context) =>
-            //               //         VisionGuardianEyeAssessment(
-            //               //       patientName: data[index].name ?? "",
-            //               //       patientId:
-            //               //           data[index].patientId.toString(),
-            //               //       triageMode: triageMode,
-            //               //     ),
-            //               //   ),
-            //               // );
-            //             },
-            //       child: AutoSizeText(
-            //         "Start\nAssessment",
-            //         minFontSize: 10,
-            //         maxFontSize: 14,
-            //         textAlign: TextAlign.center,
-            //         style: applyRobotoFont(
-            //           fontWeight: FontWeight.w500,
-            //           color: data[index].patientId == null
-            //               ? AppColor.grey
-            //               : AppColor.primary,
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),

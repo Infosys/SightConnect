@@ -80,10 +80,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const VisionTechnicianRegisterPage(
-                      // actionType: MiniAppActionType.REGISTER,
-                      // displayName: "Register Patient",
-                      ),
+                  builder: (context) => const VisionTechnicianRegisterPage(),
                 ),
               );
               break;

@@ -118,6 +118,31 @@ class AppTheme extends StateNotifier<ThemeMode> {
           borderRadius: BorderRadius.circular(4),
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: AppColor.white,
+        filled: true,
+        isDense: true,
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.primary),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.primary),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.primary),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.primary),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.primary),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+        ),
+      ),
     );
   }
 

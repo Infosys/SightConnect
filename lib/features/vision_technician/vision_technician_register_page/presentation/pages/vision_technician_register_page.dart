@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_re
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_search_bar.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/regex/regex.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -24,38 +25,80 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
         centerTitle: false,
         title: Text(
           loc.vtRegisterPatient,
-          style: applyFiraSansFont(fontWeight: FontWeight.w500),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            RegisterSearchBar(
-              onSearched: (value) {
-                query.value = value;
-                logger.d("search by mobile ${query.value}");
-              },
-            ),
-            const SizedBox(height: AppSize.klheight),
-            ref.watch(vtRegisterProvider(query.value)).when(
-              data: (data) {
-                if (data.length == 0) return const RegisterPatientButton();
-
-                return RegisterPatientInfoCard(
-                  data: data,
-                );
-              },
-              error: (e, s) {
-                return const RegisterPatientButton();
-              },
-              loading: () {
-                return const CircularProgressIndicator.adaptive();
-              },
-            ),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          RegisterSearchBar(
+            regex: Regex.mobileRegExp,
+            onSearched: (value) {
+              query.value = value;
+            },
+          ),
+          const SizedBox(height: AppSize.klheight),
+          () {
+            if (query.value.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "You can search patient by mobile number",
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Expanded(
+                child: ref.watch(vtRegisterProvider(query.value)).when(
+                  data: (data) {
+                    if (data.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const RegisterPatientButton(),
+                            const SizedBox(height: AppSize.klheight),
+                            Text(
+                              loc.vtNoPatientFound,
+                              style: applyFiraSansFont(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return RegisterPatientInfoCard(data: data[index]);
+                        },
+                      );
+                    }
+                  },
+                  error: (e, s) {
+                    return const Center(
+                      child: RegisterPatientButton(),
+                    );
+                  },
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  },
+                ),
+              );
+            }
+          }(),
+        ],
       ),
     );
   }

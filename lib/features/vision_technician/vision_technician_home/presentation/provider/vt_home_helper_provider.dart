@@ -10,14 +10,6 @@ final vtHomeHelperProvider =
   return VTHomeHelperNotifier(ref: ref);
 });
 
-// var getAssessmentTableProvider = FutureProvider.autoDispose((ref) async {
-//   String category = ref.watch(vtHomeHelperProvider).category;
-//   int pageNumber = ref.watch(vtHomeHelperProvider).pageNumber;
-//   int pageSize = ref.read(vtHomeHelperProvider).pageSize;
-//   return await ref.watch(vtHomeRepository).getListOfPatients(
-//       TableParams(category: category, page: pageNumber, size: pageSize));
-// });
-
 class VTHomeHelperNotifier extends ChangeNotifier {
   Ref ref;
   VTHomeHelperNotifier({required this.ref}) {

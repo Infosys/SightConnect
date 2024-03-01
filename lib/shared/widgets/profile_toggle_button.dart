@@ -19,7 +19,7 @@ class ProfileToggleButton extends StatelessWidget {
               InitializationPage.routeName, (route) => false);
         },
         child: Container(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(4),
           margin: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
