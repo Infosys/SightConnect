@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum DrawerMenuItemId {
+  switchProfile,
   language,
   accessibilities,
   assessments,
@@ -25,6 +26,11 @@ class DrawerMenuItem {
 
 class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
+    DrawerMenuItem switchProfile = const DrawerMenuItem(
+      id: DrawerMenuItemId.switchProfile,
+      title: "Switch Profile",
+      icon: "assets/drawer_icons/accessibility.svg",
+    );
     DrawerMenuItem language = DrawerMenuItem(
       id: DrawerMenuItemId.language,
       title: loc.appDrawerLanguageSelection,
@@ -55,11 +61,7 @@ class DrawerMenuItems {
       title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
     );
-    // DrawerMenuItem help = DrawerMenuItem(
-    //   id: DrawerMenuItemId.help,
-    //   title: loc.appDrawerHelpAndSupport,
-    //   icon: AppIcon.drawerHelpAndSupport,
-    // );
+
     DrawerMenuItem chatbot = const DrawerMenuItem(
       id: DrawerMenuItemId.chatbot,
       title: "SightConnect Assistant",
@@ -67,13 +69,13 @@ class DrawerMenuItems {
     );
 
     return [
+      switchProfile,
       language,
       accessibilities,
       assessments,
       scanner,
       about,
       privacyPolicy,
-      // help,
       chatbot
     ];
   }

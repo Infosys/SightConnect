@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
-import 'package:eye_care_for_all/shared/widgets/profile_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,10 +36,6 @@ class PatientHomePageAppBar extends ConsumerWidget
         ],
       ),
       actions: [
-        Semantics(
-          hint: "Profile Toggle Button ( For Debugging )",
-          child: const ProfileToggleButton(),
-        ),
         Consumer(
           builder: (context, ref, child) {
             final model = ref.watch(patientDashboardProvider);

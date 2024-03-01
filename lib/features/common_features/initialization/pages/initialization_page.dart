@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
@@ -47,6 +48,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
             await PersistentAuthStateService.authState.setActiveRole(role);
+            // Set the active role in dio header
+            ref.read(dioProvider).options.headers["X-Active-Role"] = role;
             logger.d("Active Role: $role");
             _profileVerification(selectedProfile);
           } else {
@@ -72,7 +75,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       logger.e("checkUserAlreadyExist: $e");
       // In case of any other error, logout the user
-      // await _invalidateAndLogout("Server Error. Please login again.");
+      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 

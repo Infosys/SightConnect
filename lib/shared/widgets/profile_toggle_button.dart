@@ -11,23 +11,29 @@ class ProfileToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: kDebugMode,
-      child: ActionChip(
-        onPressed: () async {
+      child: InkWell(
+        onTap: () async {
           final navigator = Navigator.of(context);
           await PersistentAuthStateService.authState.setActiveRole(null);
           navigator.pushNamedAndRemoveUntil(
               InitializationPage.routeName, (route) => false);
         },
-        label: Text(
-          'Switch Profile',
-          style: applyRobotoFont(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
+        child: Container(
+          padding: const EdgeInsets.all(2),
+          margin: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
           ),
-        ),
-        avatar: const Icon(
-          Icons.person,
-          size: 16,
+          child: Center(
+            child: Text(
+              'Switch Profile',
+              style: applyRobotoFont(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -26,7 +26,6 @@ var chatbotDioProvider = Provider(
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.chatbotUrl,
-        connectTimeout: const Duration(seconds: 30),
       ),
     );
     // dio.interceptors.addAll(

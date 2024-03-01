@@ -4,8 +4,10 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
@@ -93,6 +95,14 @@ class AppDrawer extends HookWidget {
                             ),
                             onTap: () async {
                               switch (item.id) {
+                                case DrawerMenuItemId.switchProfile:
+                                  final navigator = Navigator.of(context);
+                                  await PersistentAuthStateService.authState
+                                      .setActiveRole(null);
+                                  navigator.pushNamedAndRemoveUntil(
+                                      InitializationPage.routeName,
+                                      (route) => false);
+                                  break;
                                 case DrawerMenuItemId.accessibilities:
                                   Navigator.of(context).pop();
                                   onAccessibilityChange?.call();

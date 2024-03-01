@@ -8,8 +8,8 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profil
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vgAuthenticationRepositoryProvider =
-    Provider<VgAuthenticationRepository>((ref) {
-  final dio = ref.read(dioProvider);
+    Provider.autoDispose<VgAuthenticationRepository>((ref) {
+  final dio = ref.watch(dioProvider);
   return VgAutheticationRepositoryImpl(dio);
 });
 
