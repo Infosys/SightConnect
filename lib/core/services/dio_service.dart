@@ -53,6 +53,7 @@ var dioProvider = Provider(
     dio.interceptors.addAll(
       [
         DioTokenInterceptor(ref, dio),
+        LogInterceptor()
         // DioCertificateInterceptor(dio),
       ],
     );

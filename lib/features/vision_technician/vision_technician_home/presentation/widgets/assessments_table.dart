@@ -33,7 +33,9 @@ class AssessmentTable extends HookConsumerWidget {
           const SizedBox(height: AppSize.kmheight),
           TextField(
             controller: textController,
-            onChanged: (data) {},
+            onChanged: (data) {
+              model.updateQuery(data);
+            },
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColor.white,

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -90,43 +89,67 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           'phoneNumber': mobile,
         },
       );
-
-      logger.d({
-        "response": response.data,
-      });
-
-      return response.data!['expires_in'];
+      if (response.statusCode != 200) {
+        throw ServerFailure(
+            errorMessage: "Sending OTP failed : ${response.statusCode}");
+      } else {
+        return response.data!['expires_in'];
+      }
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
-      try {
-        logger.d("Trying with Dev URl");
-        ApiConstant.switchBaseUrl();
-
-        final response = await _dio.get<Map<String, dynamic>>(
-          "/auth/realms/care/sms/authentication-code",
-          queryParameters: {
-            'phoneNumber': mobile,
-          },
-        );
-        logger.d({
-          "response": response.data,
-        });
-
-        return response.data!['expires_in'];
-      } on DioException catch (e) {
-        logger.e("Sending OTP failed : $e");
-
-        DioErrorHandler.handleDioError(e);
-        rethrow;
-      } catch (e) {
-        logger.e("Sending OTP failed : $e");
-        throw ServerFailure(errorMessage: "Sending OTP failed : $e");
-      }
+      rethrow;
     } catch (e) {
       logger.e("Sending OTP failed : $e");
       throw ServerFailure(errorMessage: "Sending OTP failed : $e");
     }
   }
+
+  // @override
+  // Future<int> sendOtp({required String mobile}) async {
+  //   try {
+  //     final response = await _dio.get<Map<String, dynamic>>(
+  //       "/auth/realms/care/sms/authentication-code",
+  //       queryParameters: {
+  //         'phoneNumber': mobile,
+  //       },
+  //     );
+
+  //     logger.d({
+  //       "response": response.data,
+  //     });
+
+  //     return response.data!['expires_in'];
+  //   } on DioException catch (e) {
+  //     DioErrorHandler.handleDioError(e);
+  //     try {
+  //       logger.d("Trying with Dev URl");
+  //       ApiConstant.switchBaseUrl();
+
+  //       final response = await _dio.get<Map<String, dynamic>>(
+  //         "/auth/realms/care/sms/authentication-code",
+  //         queryParameters: {
+  //           'phoneNumber': mobile,
+  //         },
+  //       );
+  //       logger.d({
+  //         "response": response.data,
+  //       });
+
+  //       return response.data!['expires_in'];
+  //     } on DioException catch (e) {
+  //       logger.e("Sending OTP failed : $e");
+
+  //       DioErrorHandler.handleDioError(e);
+  //       rethrow;
+  //     } catch (e) {
+  //       logger.e("Sending OTP failed : $e");
+  //       throw ServerFailure(errorMessage: "Sending OTP failed : $e");
+  //     }
+  //   } catch (e) {
+  //     logger.e("Sending OTP failed : $e");
+  //     throw ServerFailure(errorMessage: "Sending OTP failed : $e");
+  //   }
+  // }
 
   @override
   Future<void> signOut() async {

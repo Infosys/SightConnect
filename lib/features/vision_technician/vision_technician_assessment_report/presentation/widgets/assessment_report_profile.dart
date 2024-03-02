@@ -41,9 +41,10 @@ class AssessmentReportProfile extends ConsumerWidget {
                 Text(
                   patient?.name ?? "",
                   style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.white),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.white,
+                  ),
                 ),
                 Text(
                   "${loc.vtAssessmentIDEA} $assessmentId",

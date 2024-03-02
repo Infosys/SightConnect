@@ -37,7 +37,6 @@ class RegisterPatientInfoCard extends StatelessWidget {
             ? SizedBox(
                 child: AppNameAvatar(
                   name: data.name ?? "",
-                  color: AppColor.blue,
                   fontSize: 16,
                 ),
               )

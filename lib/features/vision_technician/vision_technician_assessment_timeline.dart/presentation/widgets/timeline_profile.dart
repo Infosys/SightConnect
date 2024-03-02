@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,38 +29,46 @@ class TimelineProfile extends ConsumerWidget {
           Radius.circular(AppSize.klradius),
         ),
       ),
-      child: SizedBox(
+      child: Container(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
         width: AppSize.width(context),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              const CircleAvatar(radius: AppSize.klradius),
-              const SizedBox(width: AppSize.kswidth),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(
-                  model.name ?? "",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AppNameAvatar(
+              name: model.name ?? "",
+              fontSize: 28,
+              radius: 40,
+            ),
+            const SizedBox(width: AppSize.klwidth),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    model.name ?? "",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyFiraSansFont(
                       fontSize: 24,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.white.withOpacity(0.8)),
-                ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(
-                  "PID: OP ${model.id ?? ""}",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: AppColor.white.withOpacity(0.8),
+                      color: AppColor.white,
+                    ),
                   ),
-                ),
-              ]),
-              SizedBox(width: AppSize.width(context) * 0.3),
-              Column(
+                  const SizedBox(height: AppSize.ksheight),
+                  Text(
+                    "PID: OP ${model.id ?? ""}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.white.withOpacity(0.8),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -76,22 +85,20 @@ class TimelineProfile extends ConsumerWidget {
                           size: 18,
                         ),
                       ),
-                      const SizedBox(
-                        width: AppSize.ksheight,
-                      ),
+                      const SizedBox(width: AppSize.klheight),
                       Text(
                         model.mobile ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
                           fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.white.withOpacity(0.8),
+                          color: AppColor.white,
                         ),
                       ),
                       const SizedBox(width: AppSize.klwidth * 3),
                     ],
                   ),
+                  const SizedBox(height: AppSize.ksheight),
                   Row(
                     children: [
                       Container(
@@ -101,30 +108,27 @@ class TimelineProfile extends ConsumerWidget {
                           color: Colors.white12,
                         ),
                         child: const Icon(
-                          Icons.email,
+                          Icons.cake_outlined,
                           color: Colors.white,
                           size: 18,
                         ),
                       ),
-                      const SizedBox(
-                        width: AppSize.kswidth,
-                      ),
+                      const SizedBox(width: AppSize.klwidth),
                       Text(
-                        "",
+                        "${model.dayOfBirth}/${model.monthOfBirth}/${model.yearOfBirth}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
                           fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColor.white.withOpacity(0.8),
+                          color: AppColor.white,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

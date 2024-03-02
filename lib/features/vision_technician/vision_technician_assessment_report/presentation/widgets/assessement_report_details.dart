@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,6 +16,7 @@ class AssessmentReportDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -31,8 +33,7 @@ class AssessmentReportDetails extends StatelessWidget {
           Text(
             loc.vtAssessment,
             style: applyFiraSansFont(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+              fontSize: 16,
             ),
           ),
           const SizedBox(height: AppSize.ksheight),
@@ -61,11 +62,10 @@ class AssessmentReportDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          responseModel.question,
+                          "${index + 1}. ${responseModel.question}",
                           style: applyRobotoFont(
                             fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black.withOpacity(0.8),
+                            color: const Color(0xff333333),
                           ),
                         ),
                         Padding(
@@ -83,9 +83,8 @@ class AssessmentReportDetails extends StatelessWidget {
                               Text(
                                 responseModel.response,
                                 style: applyRobotoFont(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],

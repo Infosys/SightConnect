@@ -22,12 +22,21 @@ class VTHomeHelperNotifier extends ChangeNotifier {
   bool _isLoading = false;
   bool hasMore = true;
   String _category = "ALL";
+  String _query = "";
   int pageSize = 5;
   int _pageNumber = 0;
   String get category => _category;
   bool get isLoading => _isLoading;
   int get pageNumber => _pageNumber;
   List<VTPatientDto> get listOfAssessments => _listOfAssessments;
+
+  void updateQuery(String value) {
+    _listOfAssessments.clear();
+    _tempListOfAssessments.clear();
+    _query = value;
+    _pageNumber = 0;
+    getAssessmentTable();
+  }
 
   void updateCategory(String value) {
     _listOfAssessments.clear();
@@ -67,7 +76,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
 
       logger.d("VTHomeHelperNotifier ${_listOfAssessments.length}");
     } catch (e) {
-      logger.d("VTHomeHelperNotifier $e");
+      logger.e("VTHomeHelperNotifier $e");
       _listOfAssessments.clear();
       _isLoading = false;
       notifyListeners();

@@ -20,3 +20,13 @@ List<BoxShadow> applyMediumShadow() {
     ),
   ];
 }
+
+List<BoxShadow> customColorShadow(Color color) {
+  return [
+    BoxShadow(
+      color: color.withOpacity(0.3),
+      blurRadius: 24,
+      offset: const Offset(0, 4),
+    ),
+  ];
+}

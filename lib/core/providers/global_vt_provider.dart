@@ -17,7 +17,7 @@ class GlobalVTProvider extends ChangeNotifier {
   void setUser(VtProfileModel parentUser) {
     _user = parentUser;
     notifyListeners();
-    logger.d(_user?.toJson());
+    // logger.d(_user?.toJson());
   }
 }
 

@@ -57,6 +57,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
   }
 
   Widget _content(BuildContext context, WidgetRef ref) {
+    final isMobile = Responsive.isMobile(context);
     final loc = context.loc!;
     return Scaffold(
       body: const VisionTechnicianHomePage(),
@@ -66,10 +67,10 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
         showUnselectedLabels: true,
         selectedItemColor: AppColor.primary,
         unselectedItemColor: AppColor.grey,
-        unselectedLabelStyle: Responsive.isMobile(context)
+        unselectedLabelStyle: isMobile
             ? applyRobotoFont(fontSize: 10)
             : applyRobotoFont(fontSize: 16),
-        selectedLabelStyle: Responsive.isMobile(context)
+        selectedLabelStyle: isMobile
             ? applyRobotoFont(fontSize: 10, fontWeight: FontWeight.w600)
             : applyRobotoFont(fontSize: 16, fontWeight: FontWeight.w600),
         onTap: (index) {
@@ -115,11 +116,13 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Padding(
-              padding: Responsive.isMobile(context)
+              padding: isMobile
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.vtHomeIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.primary,
                   BlendMode.srcIn,
@@ -130,11 +133,13 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: Responsive.isMobile(context)
+              padding: isMobile
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.vtRegisterIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -145,12 +150,13 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: Responsive.isMobile(context)
+              padding: isMobile
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 "assets/nav_icons/Assessmentdefault.svg",
-                height: Responsive.isMobile(context) ? 20 : 30,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -161,11 +167,13 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: Responsive.isMobile(context)
+              padding: isMobile
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.vtAvailabilityIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,
@@ -176,11 +184,13 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: Responsive.isMobile(context)
+              padding: isMobile
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 AppIcon.vtIVRCallIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
                   AppColor.grey,
                   BlendMode.srcIn,

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
@@ -55,9 +56,9 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
       rowsPerPage: model.pageSize,
       showCheckboxColumn: false,
       columnSpacing: isMobile ? 56 : AppSize.width(context) * 0.05,
-      headingRowHeight: AppSize.klheight * 2,
-      horizontalMargin: AppSize.klpadding,
-      dataRowMaxHeight: AppSize.klheight * 2.5,
+      headingRowHeight: AppSize.klheight * 3,
+      horizontalMargin: AppSize.width(context) * 0.05,
+      dataRowMaxHeight: AppSize.klheight * 3.5,
       dataRowMinHeight: AppSize.klheight * 2,
       columns: [
         DataColumn(
@@ -104,6 +105,17 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
             ),
           ),
         ),
+        DataColumn(
+          label: Text(
+            "Timline",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyFiraSansFont(
+              fontSize: 12,
+              color: AppColor.grey,
+            ),
+          ),
+        ),
       ],
       source: PatientAssessmentDataSource(
         data: data,
@@ -138,6 +150,7 @@ class PatientAssessmentDataSource extends DataTableSource {
           loadingDataCell(),
           loadingDataCell(),
           loadingDataCell(),
+          loadingDataCell(),
           loadingDataCell()
         ],
       );
@@ -151,7 +164,6 @@ class PatientAssessmentDataSource extends DataTableSource {
     if (index >= data.length) {
       return null; // No more rows to display
     }
-    final loc = context.loc!;
 
     return DataRow.byIndex(
       index: index,
@@ -178,8 +190,9 @@ class PatientAssessmentDataSource extends DataTableSource {
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(fontSize: 14),
               ),
+              const SizedBox(height: 4),
               Text(
-                data[index].id.toString(),
+                "OP ${data[index].id ?? ""}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
@@ -196,11 +209,12 @@ class PatientAssessmentDataSource extends DataTableSource {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                loc.vtAssessmentID.sentenceCase(),
+                "AT ${data[index].encounterId ?? ""}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(fontSize: 14),
               ),
+              const SizedBox(height: 4),
               Text(
                 data[index].encounterStartDate!.formatDateTimeMonthName,
                 maxLines: 1,
@@ -229,13 +243,21 @@ class PatientAssessmentDataSource extends DataTableSource {
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 14,
-              color: data[index]
-                      .category!
-                      .toString()
-                      .toLowerCase()
-                      .contains("early")
-                  ? AppColor.orange
-                  : AppColor.red,
+              color: categoryColor(data[index].category),
+            ),
+          ),
+        ),
+        DataCell(
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return VisionTechnicianAssessmentTimeline(
+                  patientDetails: data[index],
+                );
+              }));
+            },
+            icon: const Icon(
+              Icons.timeline,
             ),
           ),
         ),
@@ -248,6 +270,17 @@ class PatientAssessmentDataSource extends DataTableSource {
     String newCategory =
         "${category.toString().split('.').last.sentenceCase()} Consultation";
     return newCategory;
+  }
+
+  Color categoryColor(SeverityCategory? category) {
+    if (category == null) return AppColor.grey;
+    if (category.toString().toLowerCase().contains("early")) {
+      return AppColor.orange;
+    } else if (category.toString().toLowerCase().contains("routine")) {
+      return AppColor.green;
+    } else {
+      return AppColor.red;
+    }
   }
 
   @override

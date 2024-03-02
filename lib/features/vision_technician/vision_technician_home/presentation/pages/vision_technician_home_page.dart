@@ -28,8 +28,8 @@ class VisionTechnicianHomePage extends ConsumerWidget {
           children: [
             Image.asset(
               AppImages.logo,
-              height: 80,
-              width: 120,
+              height: Responsive.isMobile(context) ? 80 : 120,
+              width: Responsive.isMobile(context) ? 120 : 180,
               colorBlendMode: BlendMode.srcIn,
               color: AppColor.white,
             ),
