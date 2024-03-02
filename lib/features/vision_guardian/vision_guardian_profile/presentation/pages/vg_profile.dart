@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profil
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_organisation_details_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_personal_details_card.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
@@ -24,34 +25,9 @@ class VgProfile extends ConsumerWidget {
     return Scaffold(
       appBar: CustomAppbar(
         centerTitle: false,
-        title: Row(
-          children: [
-            Text(
-              loc.profileTitle,
-              textAlign: TextAlign.left,
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () {
-                final navigator = Navigator.of(context);
-                ref.read(initializationProvider).logout().then(
-                  (value) async {
-                    navigator.pushNamedAndRemoveUntil(
-                      LoginPage.routeName,
-                      (route) => false,
-                    );
-                    ref.invalidate(initializationProvider);
-                  },
-                ).catchError((e) {
-                  Fluttertoast.showToast(msg: loc.vgLogoutErrorMessage);
-                });
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: AppColor.black,
-              ),
-            )
-          ],
+        title: Text(
+          loc.profileTitle,
+          textAlign: TextAlign.left,
         ),
         actions: [
           IconButton(
@@ -75,34 +51,38 @@ class VgProfile extends ConsumerWidget {
             },
             icon: SvgPicture.asset(
               "assets/drawer_icons/language.svg",
+              height: 26,
+              width: 26,
               colorFilter: ColorFilter.mode(
                 Theme.of(context).iconTheme.color!,
                 BlendMode.srcIn,
               ),
             ),
           ),
-          IconButton(
+          TextButton.icon(
             onPressed: () {
               final navigator = Navigator.of(context);
-              ref.read(initializationProvider).logout().then(
-                (value) async {
-                  navigator.pushNamedAndRemoveUntil(
-                    LoginPage.routeName,
-                    (route) => false,
-                  );
-                  ref.invalidate(initializationProvider);
-                },
-              ).catchError((e) {
-                Fluttertoast.showToast(
-                    msg:
-                        "Apologies, we encountered a logout error in the mobile app.");
+              ref.read(initializationProvider).logout().then((value) async {
+                navigator.pushNamedAndRemoveUntil(
+                  LoginPage.routeName,
+                  (route) => false,
+                );
+                ref.invalidate(initializationProvider);
+              }).catchError((e) {
+                Fluttertoast.showToast(msg: loc.vtLogoutError);
               });
             },
             icon: const Icon(
               Icons.logout,
               color: AppColor.black,
             ),
-          )
+            label: Text(
+              "Logout",
+              style: applyRobotoFont(
+                color: AppColor.black,
+              ),
+            ),
+          ),
         ],
       ),
       body: ref.watch(getVGProfileProvider).when(

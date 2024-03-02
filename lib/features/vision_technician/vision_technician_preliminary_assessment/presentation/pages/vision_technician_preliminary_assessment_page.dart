@@ -171,7 +171,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: AppSize.klheight),
-                    SizedBox(height: AppSize.klheight),
                     EyeScanCard(),
                     SizedBox(height: AppSize.klheight),
                     PreliminaryAssessmentVisualAcuity(),

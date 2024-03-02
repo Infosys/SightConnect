@@ -122,25 +122,31 @@ class AppTheme extends StateNotifier<ThemeMode> {
         fillColor: AppColor.white,
         filled: true,
         isDense: true,
+        prefixIconColor: AppColor.primary,
+        suffixIconColor: AppColor.primary,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: AppSize.kmpadding,
+          horizontal: AppSize.klpadding,
+        ),
         border: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+          borderSide: const BorderSide(color: AppColor.grey),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+          borderSide: const BorderSide(color: AppColor.grey),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+          borderSide: const BorderSide(color: AppColor.red),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+          borderSide: const BorderSide(color: AppColor.red),
+          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
         ),
       ),
     );

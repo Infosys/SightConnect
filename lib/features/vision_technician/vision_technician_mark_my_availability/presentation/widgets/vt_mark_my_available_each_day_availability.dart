@@ -40,12 +40,13 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                   child: Text(
                     dayAvailabilityState.day,
                     style: applyRobotoFont(
-                        // color: dayAvailabilityState.checked == true
-                        //     ? AppColor.black
-                        //     : AppColor.grey,
-                        color: AppColor.grey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
+                      // color: dayAvailabilityState.checked == true
+                      //     ? AppColor.black
+                      //     : AppColor.grey,
+                      color: AppColor.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 )
               ],
@@ -75,9 +76,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: AppSize.ksheight,
-                  ),
+                  const SizedBox(height: AppSize.ksheight),
                   IconButton(
                     icon: Icon(Icons.add_circle_outline,
                         color: dayAvailabilityState.checked == false

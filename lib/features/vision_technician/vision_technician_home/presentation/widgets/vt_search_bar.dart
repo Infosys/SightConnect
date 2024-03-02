@@ -29,7 +29,7 @@ class VTSearchBar extends HookConsumerWidget {
               vertical: AppSize.kmpadding,
             )
           : EdgeInsets.symmetric(
-              horizontal: AppSize.width(context) * 0.05,
+              horizontal: AppSize.width(context) * 0.1,
               vertical: AppSize.kmpadding,
             ),
       child: TextField(

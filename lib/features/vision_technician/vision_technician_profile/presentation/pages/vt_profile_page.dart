@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
@@ -7,6 +8,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_organisation_details_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_personal_details_card.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
@@ -49,13 +51,15 @@ class VTProfilePage extends ConsumerWidget {
             },
             icon: SvgPicture.asset(
               "assets/drawer_icons/language.svg",
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).iconTheme.color!,
+              height: 26,
+              width: 26,
+              colorFilter: const ColorFilter.mode(
+                Colors.black,
                 BlendMode.srcIn,
               ),
             ),
           ),
-          IconButton(
+          TextButton.icon(
             onPressed: () {
               final navigator = Navigator.of(context);
               ref.read(initializationProvider).logout().then((value) async {
@@ -69,8 +73,18 @@ class VTProfilePage extends ConsumerWidget {
               });
             },
             icon: const Icon(
-              Icons.logout_rounded,
+              Icons.logout,
+              color: AppColor.black,
             ),
+            label: Text(
+              "Logout",
+              style: applyRobotoFont(
+                color: AppColor.black,
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: AppSize.kmpadding,
           ),
         ],
       ),

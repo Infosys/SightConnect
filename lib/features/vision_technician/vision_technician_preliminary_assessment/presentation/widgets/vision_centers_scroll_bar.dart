@@ -114,35 +114,63 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
               padding: const EdgeInsets.all(AppSize.kspadding),
               child: InkWell(
                 onTap: () {
-                  logger.d("selected vision center ${data[index]}");
-
                   ref
                       .read(preliminaryAssessmentHelperProvider)
                       .setSelectedVisionCenter(data[index]);
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: isSelected ? AppColor.green : AppColor.blue,
-                      width: 2,
-                    ),
+                    border: isSelected
+                        ? Border.all(
+                            color: AppColor.green,
+                            width: 2,
+                          )
+                        : Border.all(
+                            color: AppColor.lightGrey,
+                            width: 1,
+                          ),
                     borderRadius: BorderRadius.circular(AppSize.ksradius),
                   ),
                   padding: const EdgeInsets.all(AppSize.kspadding + 3),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        data[index].facilityInformation?.facilityName ?? "",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data[index].facilityInformation?.facilityName ?? "",
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            data[index]
+                                    .facilityInformation
+                                    ?.facilityAddressDetails
+                                    ?.addressLine1 ??
+                                "",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: applyRobotoFont(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
                       ),
-                      Icon(
-                        Icons.check_circle,
-                        size: 20,
-                        color: isSelected ? AppColor.green : AppColor.grey,
+                      Visibility(
+                        visible: isSelected,
+                        child: const Icon(
+                          Icons.check_circle,
+                          size: 20,
+                          color: AppColor.green,
+                        ),
                       )
                     ],
                   ),

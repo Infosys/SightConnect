@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,20 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
     ];
     final selectedOption = useState<String?>('');
     final loc = context.loc!;
-    return Card(
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSize.kmpadding),
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        boxShadow: const [
+          BoxShadow(
+            color: AppColor.lightGrey,
+            blurRadius: AppSize.ksradius / 2,
+            spreadRadius: AppSize.ksradius / 8,
+          )
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(

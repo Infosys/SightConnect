@@ -15,14 +15,11 @@ class EyeScanCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String leftEyeImagePath =
-        ref.watch(vtCloseAssessmentHelperProvider).leftEyeImage.path;
-    String rightEyeImagePath =
-        ref.watch(vtCloseAssessmentHelperProvider).rightEyeImage.path;
-    String bothEyeImagePath =
-        ref.watch(vtCloseAssessmentHelperProvider).bothEyeImage.path;
-    bool allImagesCaptured =
-        ref.watch(vtCloseAssessmentHelperProvider).allImagesCaptured;
+    final model = ref.watch(vtCloseAssessmentHelperProvider);
+    String leftEyeImagePath = model.leftEyeImage.path;
+    String rightEyeImagePath = model.rightEyeImage.path;
+    String bothEyeImagePath = model.bothEyeImage.path;
+    bool allImagesCaptured = model.allImagesCaptured;
     final loc = context.loc!;
     return Container(
       width: AppSize.width(context),

@@ -25,45 +25,41 @@ class VTRegisterInput extends HookConsumerWidget {
       hasFocus.value = _focusNode.hasFocus;
     });
     final loc = context.loc!;
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      decoration: BoxDecoration(
-        color: AppColor.lightGrey.withOpacity(0.2),
-      ),
-      child: Center(
-        child: TextFormField(
-          controller: controller,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return loc.vtEnterSomeText;
-            }
-            return null;
-          },
-          maxLines: keyboardType == TextInputType.multiline ? 2 : 1,
-          keyboardType: keyboardType,
-          focusNode: _focusNode,
-          autofocus: false,
-          decoration: InputDecoration(
-            labelText: title,
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(
-                width: 3,
-                color: AppColor.primary,
-              ),
-            ),
-            labelStyle: applyRobotoFont(
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-              color: hasFocus.value ? AppColor.primary : AppColor.black,
-            ),
-            floatingLabelStyle: applyRobotoFont(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: hasFocus.value ? AppColor.primary : AppColor.black,
+    return SizedBox(
+      width: AppSize.width(context) * 0.8,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Remarks",
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
             ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: TextFormField(
+                controller: controller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return loc.vtEnterSomeText;
+                  }
+                  return null;
+                },
+                keyboardType: keyboardType,
+                focusNode: _focusNode,
+                autofocus: false,
+                maxLines: 2,
+                decoration: const InputDecoration(
+                  hintText: "Add Remarks",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

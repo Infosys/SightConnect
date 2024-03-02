@@ -45,9 +45,10 @@ class InitializationProvider extends ChangeNotifier {
     try {
       //keycloak logout
       await _ref.read(keycloakRepositoryProvider).signOut();
-    } catch (e) {
+    } catch (e, s) {
       logger.e(
-          "Apologies, we encountered a logout error in the mobile app. from keycloak: $e");
+        "Logout Error: $e $s",
+      );
       rethrow;
     }
     // Triage Database logout
