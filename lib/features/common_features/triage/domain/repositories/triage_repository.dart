@@ -14,10 +14,11 @@ abstract class TriageRepository {
     required DiagnosticReportTemplateFHIRModel assessment,
   });
   Future<Either<Failure, void>> deleteAssessment();
-  Future<Either<Failure, int>> getTriageCurrentStep();
+  Future<Either<Failure, int>> getTriageCurrentStep(String patientID);
 
   Future<Either<Failure, TriagePostModel>> saveTriageResponse({
     required TriagePostModel triageResponse,
+    required String patientID,
   });
 
   Future<Either<Failure, TriagePostModel>> getTriageResponse();
@@ -28,12 +29,15 @@ abstract class TriageRepository {
 
   Future<Either<Failure, void>> saveTriageQuestionnaireLocally({
     required List<PostTriageQuestionModel> triageQuestionnaireResponse,
+    required String patientID,
   });
   Future<Either<Failure, void>> saveTriageVisualAcuityLocally({
     required List<PostTriageObservationsModel> triageVisualAcuity,
+    required String patientID,
   });
   Future<Either<Failure, void>> saveTriageEyeScanLocally({
     required List<PostTriageImagingSelectionModel> triageEyeScan,
+    required String patientID,
   });
   Future<Either<Failure, List<PostTriageQuestionModel>>>
       getQuestionaireResponseLocally();

@@ -23,6 +23,7 @@ class SaveTriageUseCase implements UseCase<TriagePostModel, SaveTriageParam> {
     logger.d({"Triage Param": params.triagePostModel});
     final response = await _repository.saveTriageResponse(
       triageResponse: params.triagePostModel,
+      patientID: params.patientID,
     );
     return response;
   }
@@ -30,5 +31,6 @@ class SaveTriageUseCase implements UseCase<TriagePostModel, SaveTriageParam> {
 
 class SaveTriageParam {
   final TriagePostModel triagePostModel;
-  SaveTriageParam({required this.triagePostModel});
+  final String patientID;
+  SaveTriageParam({required this.triagePostModel, required this.patientID});
 }

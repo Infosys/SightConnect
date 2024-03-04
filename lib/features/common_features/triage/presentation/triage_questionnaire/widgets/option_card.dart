@@ -1,7 +1,9 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -60,10 +62,13 @@ class OptionCard extends StatelessWidget {
                         ),
                       ),
                     )
-                  : AppNetworkImage(
-                      shapeCircle: false,
-                      imageUrl: question!.relatedImage!.first.url!,
-                      borderRadius: 0.0,
+                  : Image.memory(
+                      Uint8List.fromList(
+                        base64Decode(
+                          question?.relatedImage?.first.url ?? '',
+                        ),
+                      ),
+                      fit: BoxFit.cover,
                     ),
               Positioned(
                 top: 10,

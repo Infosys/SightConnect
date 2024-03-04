@@ -149,7 +149,10 @@ class TriageProvider extends ChangeNotifier {
 
     try {
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
-        SaveTriageParam(triagePostModel: triagePostModel),
+        SaveTriageParam(
+          triagePostModel: triagePostModel,
+          patientID: _patientId.toString(),
+        ),
       );
       logger.d({"triage model saved": response});
       _triageLocalSource.resetTriage();
@@ -339,6 +342,17 @@ class TriageProvider extends ChangeNotifier {
     } else {
       return Source.PATIENT_APP;
     }
+  }
+
+  void resetTriage() {
+    _triageLocalSource.resetTriage();
+    notifyListeners();
+  }
+
+  ///CAUTION: Discards every thing from the local db
+  Future<void> discardLocalTriageEntries() async {
+    await _triageLocalSource.discardLocalTriageEntries();
+    notifyListeners();
   }
 }
 

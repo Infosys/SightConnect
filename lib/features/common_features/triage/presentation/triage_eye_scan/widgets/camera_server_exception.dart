@@ -1,4 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/pages/triage_offline_result_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +11,11 @@ class CameraServerExceptionDialog extends ConsumerWidget {
   const CameraServerExceptionDialog({
     required this.onRetry,
     super.key,
+    required this.response,
   });
 
   final VoidCallback onRetry;
+  final TriagePostModel response;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,7 +32,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Server Error",
+            "No Internet!",
             style: applyRobotoFont(
               color: AppColor.black,
               fontSize: 16,
@@ -36,7 +41,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            "Your result has been saved locally. Please try again later.",
+            "Your response has been saved locally and will be synced once internet is back.",
             style: applyRobotoFont(
               color: AppColor.black,
               fontSize: 14,
@@ -49,6 +54,15 @@ class CameraServerExceptionDialog extends ConsumerWidget {
               TextButton(
                 onPressed: () {
                   onRetry();
+                  Navigator.of(context).pop();
+                  logger.d("Offline Response: $response");
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => TriageOfflineResultPage(
+                        triageResult: response,
+                      ),
+                    ),
+                  );
                 },
                 child: Text(
                   loc.okButton,

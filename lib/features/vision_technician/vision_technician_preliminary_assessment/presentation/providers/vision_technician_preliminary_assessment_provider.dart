@@ -144,7 +144,10 @@ class VtTriageProvider extends ChangeNotifier {
     _preliminaryAssessmentHelperProvider.setLoading(true);
 
     Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
-      SaveTriageParam(triagePostModel: triagePostModel),
+      SaveTriageParam(
+        triagePostModel: triagePostModel,
+        patientID: '${patientDetails.id}',
+      ),
     );
 
     TriagePostModel? triageResponse = response.fold((error) {

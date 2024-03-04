@@ -118,7 +118,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                 groupValue: selectedValue,
                 onChanged: (value) {
                   memberProvider.setCurrentIndex(value!);
-                  memberProvider.setTestPersonId(person.patientId!);
+                  memberProvider.setTestPersonId(
+                      person.patientId!, person.name ?? '');
                 },
               ),
             ),
@@ -190,7 +191,8 @@ class ChangeMemberTiles extends HookConsumerWidget {
                 groupValue: selectedValue,
                 onChanged: (value) {
                   memberProvider.setCurrentIndex(value!);
-                  memberProvider.setTestPersonId(person.patientId!);
+                  memberProvider.setTestPersonId(
+                      person.patientId!, person.name!);
                 },
               ),
             ),
