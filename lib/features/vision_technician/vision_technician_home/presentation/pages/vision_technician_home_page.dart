@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-import 'package:eye_care_for_all/shared/widgets/profile_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -34,10 +33,6 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               color: AppColor.white,
             ),
             isMobile ? const Spacer() : const SizedBox(width: AppSize.kmwidth),
-            Semantics(
-              hint: "Profile Toggle Button ( For Debugging )",
-              child: const ProfileToggleButton(),
-            ),
           ],
         ),
         centerTitle: false,

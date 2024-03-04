@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/p
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/profile_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../core/constants/app_color.dart';
@@ -33,12 +32,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
           colorBlendMode: BlendMode.srcIn,
           color: AppColor.white,
         ),
-        actions: [
-          Semantics(
-            hint: "Profile Toggle Button ( For Debugging )",
-            child: const ProfileToggleButton(),
-          ),
-        ],
+        actions: const [],
       ),
       body: SingleChildScrollView(
         child: Column(

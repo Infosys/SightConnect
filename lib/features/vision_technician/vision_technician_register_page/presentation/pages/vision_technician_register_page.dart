@@ -76,6 +76,7 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
                       );
                     } else {
                       return ListView.builder(
+                        padding: EdgeInsets.zero,
                         itemCount: data.length,
                         itemBuilder: (context, index) {
                           return RegisterPatientInfoCard(data: data[index]);

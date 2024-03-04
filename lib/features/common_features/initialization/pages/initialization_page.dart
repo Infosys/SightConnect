@@ -294,7 +294,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
                 child: Image.asset(
                   "assets/logo/splash_icon_transparant.png",
                   width: Responsive.isMobile(context)
-                      ? AppSize.width(context) * 0.4
+                      ? AppSize.width(context) * 0.3
                       : AppSize.width(context) * 0.2,
                 ),
               ),
