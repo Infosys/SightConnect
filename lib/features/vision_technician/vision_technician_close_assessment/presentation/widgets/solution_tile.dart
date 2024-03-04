@@ -26,7 +26,7 @@ class SolutionTile extends HookConsumerWidget {
       margin: const EdgeInsets.all(AppSize.kspadding),
       decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: applyLightShadow(),
+        boxShadow: applycustomShadow(),
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
       child: Column(
