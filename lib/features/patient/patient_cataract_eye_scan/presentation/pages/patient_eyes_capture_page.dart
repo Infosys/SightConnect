@@ -57,6 +57,10 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
   );
   TriageEyeType _currentEye = TriageEyeType.RIGHT;
 
+  bool showFocusCircle = false;
+  double x = 0;
+  double y = 0;
+
   @override
   void initState() {
     super.initState();
@@ -230,7 +234,6 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     ref.watch(patientEyeScanProvider).selectedEye == Eye.RIGHT_EYE
         ? _currentEye = TriageEyeType.RIGHT
         : _currentEye = TriageEyeType.LEFT;
-    final loc = context.loc!;
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
@@ -244,7 +247,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
       },
       child: Scaffold(
         appBar: CustomAppbar(
-          title: Text("${loc.patientEyeScanner} - $eye"),
+          title: Text("Eye Scanner - $eye"),
           leadingIcon: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -264,66 +267,71 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
               )
             : Consumer(
                 builder: (context, ref, child) => Center(
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      if (ref.watch(patientEyeScanProvider).rightEyeImage ==
-                              null ||
-                          ref.watch(patientEyeScanProvider).leftEyeImage ==
-                              null)
-                        CameraPreview(
-                          cameraController!,
-                          child: _customPaint ?? Container(),
-                        ),
-                      Padding(
-                        padding: const EdgeInsets.all(AppSize.klpadding),
-                        child: FloatingActionButton(
-                          backgroundColor: AppColor.grey,
-                          onPressed: () {
-                            if (!_isEyeValid) {
-                              return;
-                            }
-                            _takePicture(context);
-                          },
-                          child: const Icon(Icons.camera),
-                        ),
-                      ),
-                      if (isProcessing)
-                        Positioned.fill(
-                          child: Container(
-                            color: Colors.black.withOpacity(0.5),
-                            child: const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            ),
+                  child: GestureDetector(
+                    onTapDown: (details) {
+                      _onTap(details);
+                    },
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        if (ref.watch(patientEyeScanProvider).rightEyeImage ==
+                                null ||
+                            ref.watch(patientEyeScanProvider).leftEyeImage ==
+                                null)
+                          CameraPreview(
+                            cameraController!,
+                            child: _customPaint ?? Container(),
+                          ),
+                        Padding(
+                          padding: const EdgeInsets.all(AppSize.klpadding),
+                          child: FloatingActionButton(
+                            backgroundColor: AppColor.grey,
+                            onPressed: () {
+                              if (!_isEyeValid) {
+                                return;
+                              }
+                              _takePicture();
+                            },
+                            child: const Icon(Icons.camera),
                           ),
                         ),
-                      Visibility(
-                        visible: !_isEyeValid,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 88.0,
-                          ),
-                          child: Container(
-                            width: AppSize.width(context) * 0.8,
-                            decoration: BoxDecoration(
-                              color: AppColor.black.withOpacity(0.8),
-                              borderRadius: BorderRadius.circular(10),
+                        if (isProcessing)
+                          Positioned.fill(
+                            child: Container(
+                              color: Colors.black.withOpacity(0.5),
+                              child: const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              ),
                             ),
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              loc.eyeBoxText,
-                              textAlign: TextAlign.center,
-                              style: applyRobotoFont(
-                                fontSize: 16,
-                                color: AppColor.white,
-                                fontWeight: FontWeight.w500,
+                          ),
+                        Visibility(
+                          visible: !_isEyeValid,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                              vertical: 88.0,
+                            ),
+                            child: Container(
+                              width: AppSize.width(context) * 0.8,
+                              decoration: BoxDecoration(
+                                color: AppColor.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                context.loc!.eyeBoxText,
+                                textAlign: TextAlign.center,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  color: AppColor.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -331,10 +339,38 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
     );
   }
 
-  _takePicture(BuildContext context) {
-    final loc = context.loc!;
+  Future<void> _onTap(TapDownDetails details) async {
+    if (cameraController!.value.isInitialized) {
+      setState(() {
+        showFocusCircle = true;
+        x = details.localPosition.dx;
+        y = details.localPosition.dy;
+      });
+
+      double fullWidth = MediaQuery.of(context).size.width;
+      double cameraHeight = fullWidth * cameraController!.value.aspectRatio;
+
+      double xp = x / fullWidth;
+      double yp = y / cameraHeight;
+
+      Offset point = Offset(xp, yp);
+      logger.d("the point is : $point");
+
+      await cameraController!.setFocusPoint(point);
+
+      setState(() {
+        Future.delayed(const Duration(seconds: 2)).whenComplete(() {
+          setState(() {
+            showFocusCircle = false;
+          });
+        });
+      });
+    }
+  }
+
+  _takePicture() {
     if (!cameraController!.value.isInitialized) {
-      Fluttertoast.showToast(msg: loc.patientErrorSelectCamera);
+      Fluttertoast.showToast(msg: "Error: select a camera first.");
 
       return null;
     }

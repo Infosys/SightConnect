@@ -21,18 +21,13 @@ var keycloakDioProvider = Provider(
   },
 );
 
-var chatbotDioProvider = Provider(
+var appointmentDioProvider = Provider(
   (ref) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstant.chatbotUrl,
+        baseUrl: ApiConstant.baseDevUrl,
       ),
     );
-    // dio.interceptors.addAll(
-    //   [
-    //     DioCertificateInterceptor(dio),
-    //   ],
-    // );
     return dio;
   },
 );
