@@ -21,17 +21,6 @@ var keycloakDioProvider = Provider(
   },
 );
 
-var appointmentDioProvider = Provider(
-  (ref) {
-    final dio = Dio(
-      BaseOptions(
-        baseUrl: ApiConstant.baseDevUrl,
-      ),
-    );
-    return dio;
-  },
-);
-
 var dioProvider = Provider(
   (ref) {
     final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;
@@ -51,6 +40,28 @@ var dioProvider = Provider(
         LogInterceptor()
         // DioCertificateInterceptor(dio),
       ],
+    );
+    return dio;
+  },
+);
+
+var appointmentDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstant.baseDevUrl,
+      ),
+    );
+    return dio;
+  },
+);
+
+var chatbotDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstant.chatbotUrl,
+      ),
     );
     return dio;
   },

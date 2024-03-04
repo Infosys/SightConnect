@@ -1,10 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/data/models/uhi_search_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/presentation/providers/book_appointment_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../../core/services/failure.dart';
 import '../../domain/repository/patient_appointment_repository_impl.dart';
 
 var appointmentViewModelProvider =
