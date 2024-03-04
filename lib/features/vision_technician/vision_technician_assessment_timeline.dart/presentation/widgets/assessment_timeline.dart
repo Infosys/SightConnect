@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
@@ -29,7 +30,7 @@ class AssessmentTimeline extends ConsumerWidget {
         ref.watch(assessmentTimelineProvider).currentEncounter;
     int? encounterId = encounter?.id;
     String? encounterDate =
-        encounter?.period!.start!.formatDateTimeMonthName.toString();
+        encounter?.period?.start?.formatDateTimeMonthName.toString();
     if (encounterId == null) {
       return Center(
         child: Text(
@@ -61,10 +62,11 @@ class AssessmentTimeline extends ConsumerWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            width: AppSize.width(context) / 5,
-                            child: Text(
+                          Expanded(
+                            child: AutoSizeText(
                               "${loc.vtTimelineEA} $encounterId",
+                              maxFontSize: 18,
+                              minFontSize: 12,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: applyFiraSansFont(
@@ -85,8 +87,14 @@ class AssessmentTimeline extends ConsumerWidget {
                               color: const Color(0xffFBD5D5),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Text(
-                              data.first.title ?? "",
+                            child: AutoSizeText(
+                              data.first.title
+                                      ?.replaceAll("_", " ")
+                                      .toLowerCase()
+                                      .capitalizeFirstOfEach() ??
+                                  "",
+                              maxFontSize: 18,
+                              minFontSize: 12,
                               style: applyRobotoFont(
                                 color: AppColor.black,
                                 fontWeight: FontWeight.w400,
@@ -96,18 +104,17 @@ class AssessmentTimeline extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: AppSize.width(context) / 5,
-                        child: Text(
-                          "${loc.vtStartDate}: ${encounterDate ?? ""}",
-                          style: applyRobotoFont(
-                            color: AppColor.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                      AutoSizeText(
+                        "${loc.vtStartDate}: ${encounterDate ?? ""}",
+                        maxFontSize: 16,
+                        minFontSize: 14,
+                        style: applyRobotoFont(
+                          color: AppColor.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                       const SizedBox(height: AppSize.klheight),
                       const Divider(thickness: 1, color: AppColor.grey),

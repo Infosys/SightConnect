@@ -164,10 +164,7 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
           borderRadius: BorderRadius.circular(AppSize.klradius),
           child: Stack(
             children: [
-              AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: CameraPreview(_controller),
-              ),
+              Center(child: CameraPreview(_controller)),
               Positioned(
                 top: AppSize.klpadding,
                 right: AppSize.klpadding,

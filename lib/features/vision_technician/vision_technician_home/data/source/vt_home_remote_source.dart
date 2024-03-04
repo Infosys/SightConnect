@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/table_params.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -27,24 +28,23 @@ class VTHomeRemoteSourceImpl implements VTHomeRemoteSource {
   Future<List<VTPatientDto>> getListOfPatients(TableParams tableParams) async {
     String endPoint =
         '/services/orchestration/api/patients/triage-reports/practitioners/$_vtId?';
-
     if (tableParams.category != "ALL") {
       endPoint += "category=${tableParams.category}&";
     }
-
     endPoint += "page=${tableParams.page}&size=${tableParams.size}";
 
     try {
-      final response = await _dio.get<List>(endPoint);
+      final response = await _dio.get<List<dynamic>>(endPoint);
       logger.d("this is the response ${response.data.toString()}");
-      final List<VTPatientDto> listOfPatients = response.data!
-          .map((e) => VTPatientDto.fromJson(e))
-          .toList()
-          .cast<VTPatientDto>();
+      final listOfPatients =
+          response.data!.map((e) => VTPatientDto.fromJson(e)).toList();
 
       return listOfPatients;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
     } catch (e) {
-      logger.d("Unknown error: ${e.toString()}");
+      logger.e(e.toString());
       rethrow;
     }
   }

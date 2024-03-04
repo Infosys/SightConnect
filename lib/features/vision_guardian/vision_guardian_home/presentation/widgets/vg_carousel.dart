@@ -60,8 +60,6 @@ class VGCarousel extends HookConsumerWidget {
                     color: AppColor.white,
                     width: 1.8,
                   ),
-                  // boxShadow:
-                  //     current.value == entry.key ? applyMediumShadow() : [],
                   color: current.value == entry.key
                       ? AppColor.primary
                       : AppColor.primary.withOpacity(0.5),

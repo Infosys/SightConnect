@@ -62,11 +62,11 @@ class DrawerMenuItems {
       icon: "assets/drawer_icons/dpo.svg",
     );
 
-    DrawerMenuItem chatbot = const DrawerMenuItem(
-      id: DrawerMenuItemId.chatbot,
-      title: "SightConnect Assistant",
-      icon: AppIcon.drawerHelpAndSupport,
-    );
+    // DrawerMenuItem chatbot = const DrawerMenuItem(
+    //   id: DrawerMenuItemId.chatbot,
+    //   title: "SightConnect Assistant",
+    //   icon: AppIcon.drawerHelpAndSupport,
+    // );
 
     return [
       switchProfile,
@@ -76,7 +76,7 @@ class DrawerMenuItems {
       scanner,
       about,
       privacyPolicy,
-      chatbot
+      // chatbot
     ];
   }
 }

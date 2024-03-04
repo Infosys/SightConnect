@@ -11,7 +11,6 @@ import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
@@ -53,7 +52,7 @@ class MyApp extends ConsumerWidget {
                             .watch(globalTextScaleFactorProvider)
                             .textScaleFactor,
                       )
-                    : const TextScaler.linear(1.2),
+                    : const TextScaler.linear(1.3),
               ),
               child: MaterialApp(
                 title: AppText.appName,

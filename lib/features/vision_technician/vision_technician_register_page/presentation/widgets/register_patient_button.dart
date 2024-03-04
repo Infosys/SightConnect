@@ -11,8 +11,9 @@ class RegisterPatientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-    return InkWell(
-      onTap: () {
+
+    return OutlinedButton.icon(
+      onPressed: () {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -23,11 +24,12 @@ class RegisterPatientButton extends StatelessWidget {
           ),
         );
       },
-      child: Text(
+      icon: const Icon(Icons.add),
+      label: Text(
         loc.vtRegisterPatient,
         style: applyRobotoFont(
           color: AppColor.primary,
-          fontWeight: FontWeight.w500,
+          fontSize: 16,
         ),
       ),
     );

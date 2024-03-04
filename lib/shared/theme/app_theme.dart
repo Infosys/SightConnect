@@ -118,6 +118,46 @@ class AppTheme extends StateNotifier<ThemeMode> {
           borderRadius: BorderRadius.circular(4),
         ),
       ),
+      dropdownMenuTheme: const DropdownMenuThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.lightGrey),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.kmradius)),
+          ),
+          contentPadding: EdgeInsets.zero,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: AppColor.white,
+        filled: true,
+        isDense: true,
+        prefixIconColor: AppColor.primary,
+        suffixIconColor: AppColor.primary,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: AppSize.kmpadding,
+          horizontal: AppSize.klpadding,
+        ),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.lightGrey),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.lightGrey),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.red),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.primary),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: AppColor.red),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
+        ),
+      ),
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/data/models/vg_service_items.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,8 +55,9 @@ class VisionGuardianServicesCard extends ConsumerWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSize.ksradius),
+              borderRadius: BorderRadius.circular(AppSize.kmradius),
               color: service.color,
+              boxShadow: applycustomShadow(),
             ),
             padding: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
             child: Column(

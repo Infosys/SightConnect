@@ -10,15 +10,12 @@ var vtHomeRepository = Provider(
   ),
 );
 
-class VTHomeRepositoryImpl
-    extends VTHomeRepository {
-      
-      VTHomeRemoteSource remoteDataSource;
-      VTHomeRepositoryImpl(this.remoteDataSource);
+class VTHomeRepositoryImpl extends VTHomeRepository {
+  VTHomeRemoteSource remoteDataSource;
+  VTHomeRepositoryImpl(this.remoteDataSource);
 
-      @override
-      Future<List<VTPatientDto>> getListOfPatients(TableParams tableParams) async{
-        return await remoteDataSource.getListOfPatients(tableParams);
-      }
-
+  @override
+  Future<List<VTPatientDto>> getListOfPatients(TableParams tableParams) async {
+    return await remoteDataSource.getListOfPatients(tableParams);
+  }
 }
