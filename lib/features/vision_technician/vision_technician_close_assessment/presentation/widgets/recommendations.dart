@@ -30,6 +30,9 @@ class Recommendations extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          const SizedBox(
+            height: AppSize.kmpadding,
+          ),
           TextField(
             controller: ref
                 .watch(vtCloseAssessmentHelperProvider)

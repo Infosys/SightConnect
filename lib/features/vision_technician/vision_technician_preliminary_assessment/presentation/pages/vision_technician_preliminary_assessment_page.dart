@@ -106,8 +106,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     VisionTechnicianCloseAssessmentPage(
-                                  patientDetails: patientDetails,
-                                ),
+                                        patientDetails: patientDetails),
                               ),
                             );
 

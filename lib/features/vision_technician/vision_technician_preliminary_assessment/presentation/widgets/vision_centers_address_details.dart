@@ -20,9 +20,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
     return SizedBox(
       height: Responsive.isMobile(context)
           ? AppSize.height(context) / 5
-          : Responsive.isTablet(context)
-              ? AppSize.height(context) / 4
-              : AppSize.height(context) / 2.5,
+          : AppSize.height(context) / 4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -41,32 +41,19 @@ class _VisionTechnicianEyeCaptureState
           style: applyFiraSansFont(fontWeight: FontWeight.w500),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: AppSize.klheight),
-              const VTEyeScanStepper(),
-              const SizedBox(height: AppSize.klheight * 2),
-              if (!isImageCaptured) const CameraPreviewCard(),
-              // if (loading)
-              //   Container(
-              //     // margin: EdgeInsets.only(top: AppSize.width(context) * 0.2),
-              //     width: 536,
-              //     height: 714,
-              //     padding:
-              //         const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-              //     decoration: BoxDecoration(
-              //       color: AppColor.white,
-              //       boxShadow: applyMediumShadow(),
-              //     ),
-              //     alignment: Alignment.center,
-              //     child: constCircularProgressIndicator.adaptive(),
-              //   ),
-              if (isImageCaptured) const ImagePreview(),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSize.kmpadding,
+          vertical: AppSize.kmpadding,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const VTEyeScanStepper(),
+            const SizedBox(height: AppSize.klheight),
+            if (!isImageCaptured) const Expanded(child: CameraPreviewCard()),
+            if (isImageCaptured) const Expanded(child: ImagePreview()),
+          ],
         ),
       ),
     );
