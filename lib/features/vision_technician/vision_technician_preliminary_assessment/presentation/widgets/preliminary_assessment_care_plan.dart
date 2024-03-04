@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,13 +29,7 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(AppSize.kmradius),
-        boxShadow: const [
-          BoxShadow(
-            color: AppColor.lightGrey,
-            blurRadius: AppSize.ksradius / 2,
-            spreadRadius: AppSize.ksradius / 8,
-          )
-        ],
+        boxShadow: applycustomShadow(),
       ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -55,6 +50,9 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: options.map((option) {
                 return RadioListTile(
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  visualDensity: VisualDensity.compact,
                   title: Text(option),
                   value: option,
                   groupValue: selectedOption.value,

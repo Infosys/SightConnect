@@ -55,11 +55,21 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
     return PaginatedDataTable(
       rowsPerPage: model.pageSize,
       showCheckboxColumn: false,
-      columnSpacing: isMobile ? 56 : AppSize.width(context) * 0.05,
-      headingRowHeight: AppSize.klheight * 3,
-      horizontalMargin: AppSize.width(context) * 0.05,
-      dataRowMaxHeight: AppSize.klheight * 3.5,
-      dataRowMinHeight: AppSize.klheight * 2,
+      columnSpacing: isMobile
+          ? AppSize.width(context) * 0.06
+          : AppSize.width(context) * 0.05,
+      headingRowHeight: Responsive.isMobile(context)
+          ? AppSize.klheight * 2
+          : AppSize.klheight * 3,
+      horizontalMargin: Responsive.isMobile(context)
+          ? AppSize.width(context) * 0.05
+          : AppSize.width(context) * 0.05,
+      dataRowMaxHeight: Responsive.isMobile(context)
+          ? AppSize.klheight * 3
+          : AppSize.klheight * 3.5,
+      dataRowMinHeight: Responsive.isMobile(context)
+          ? AppSize.klheight * 1
+          : AppSize.klheight * 2,
       columns: [
         DataColumn(
           label: Text(
@@ -237,13 +247,20 @@ class PatientAssessmentDataSource extends DataTableSource {
           ),
         ),
         DataCell(
-          Text(
-            categoryMapper(data[index].category),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
               color: categoryColor(data[index].category),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Text(
+              categoryMapper(data[index].category),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.white,
+              ),
             ),
           ),
         ),
@@ -275,11 +292,13 @@ class PatientAssessmentDataSource extends DataTableSource {
   Color categoryColor(SeverityCategory? category) {
     if (category == null) return AppColor.grey;
     if (category.toString().toLowerCase().contains("early")) {
-      return AppColor.orange;
+      return AppColor.mediumOrange;
     } else if (category.toString().toLowerCase().contains("routine")) {
-      return AppColor.green;
-    } else {
+      return AppColor.altGreen;
+    } else if (category.toString().toLowerCase().contains("urgent")) {
       return AppColor.red;
+    } else {
+      return AppColor.grey;
     }
   }
 

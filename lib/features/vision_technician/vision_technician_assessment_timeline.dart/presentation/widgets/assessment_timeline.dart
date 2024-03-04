@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import '../../domain/repositories/assessment_timeline_repository_impl.dart';
@@ -62,15 +63,17 @@ class AssessmentTimeline extends ConsumerWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          AutoSizeText(
-                            "${loc.vtTimelineEA} $encounterId",
-                            maxFontSize: 18,
-                            minFontSize: 16,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                          Expanded(
+                            child: AutoSizeText(
+                              "${loc.vtTimelineEA} $encounterId",
+                              maxFontSize: 18,
+                              minFontSize: 12,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: applyFiraSansFont(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                           Container(
@@ -85,12 +88,14 @@ class AssessmentTimeline extends ConsumerWidget {
                               color: const Color(0xffFBD5D5),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Text(
+                            child: AutoSizeText(
                               data.first.title
                                       ?.replaceAll("_", " ")
                                       .toLowerCase()
                                       .capitalizeFirstOfEach() ??
                                   "",
+                              maxFontSize: 18,
+                              minFontSize: 12,
                               style: applyRobotoFont(
                                 color: AppColor.black,
                                 fontWeight: FontWeight.w400,
@@ -126,7 +131,7 @@ class AssessmentTimeline extends ConsumerWidget {
             child: CircularProgressIndicator.adaptive(),
           ),
           error: (error, stack) {
-            logger.f("timeline error $error");
+            logger.d("timeline error $error");
             return Center(
               child: Text(
                 loc.vtError,

@@ -46,7 +46,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
           children: [
             Container(
               height: Responsive.isMobile(context)
-                  ? AppSize.height(context) * 0.25
+                  ? AppSize.height(context) * 0.2
                   : AppSize.height(context) * 0.35,
               decoration: const BoxDecoration(
                 color: AppColor.primary,
@@ -61,40 +61,28 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     padding: const EdgeInsets.only(
                       left: AppSize.kmpadding,
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          loc.vgWelcome,
-                          style: applyFiraSansFont(
-                            color: AppColor.scaffold,
-                            fontSize: 24,
-                          ),
-                        ),
-                        const SizedBox(height: AppSize.ksheight - 5),
-                        Text(
-                          ref.watch(globalVGProvider).name,
-                          style: applyFiraSansFont(
-                            fontSize: 24,
-                            color: AppColor.white,
-                          ),
-                        )
-                      ],
+                    child: Text(
+                      "${loc.vgWelcome}  ${ref.watch(globalVGProvider).name}",
+                      style: applyFiraSansFont(
+                        color: AppColor.scaffold,
+                        fontSize: 24,
+                      ),
                     ),
                   ),
                   Transform.translate(
-                    offset: Offset(0, AppSize.height(context) * 0.12),
+                    offset: Offset(0, AppSize.height(context) * 0.07),
                     child: SizedBox(
                       child: ref.watch(getAnalyticsProvider).when(
                         data: (data) {
                           return VGCarousel(data: data);
                         },
                         error: (error, stackTrace) {
-                          return Container();
+                          return const Center(
+                            child: Text("Failed to load data"),
+                          );
                         },
                         loading: () {
-                          return null;
+                          return Container();
                         },
                       ),
                     ),

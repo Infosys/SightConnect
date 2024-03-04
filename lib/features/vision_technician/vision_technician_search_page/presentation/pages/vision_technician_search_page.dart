@@ -1,13 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/widgets/empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -94,21 +94,34 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.all(AppSize.klpadding),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSize.kmpadding),
                                   child: DataTable(
-                                    columnSpacing:
-                                        AppSize.width(context) * 0.09,
-                                    horizontalMargin: AppSize.klpadding,
-                                    dataRowMaxHeight: AppSize.klheight * 3,
-                                    dataRowMinHeight: AppSize.klheight * 2,
+                                    dataTextStyle: applyRobotoFont(
+                                      fontSize: 14,
+                                    ),
+                                    columnSpacing: Responsive.isMobile(context)
+                                        ? AppSize.width(context) * 0.05
+                                        : AppSize.width(context) * 0.09,
+                                    horizontalMargin:
+                                        Responsive.isMobile(context)
+                                            ? AppSize.kmpadding
+                                            : AppSize.klpadding,
+                                    dataRowMaxHeight:
+                                        Responsive.isMobile(context)
+                                            ? AppSize.klheight * 2.5
+                                            : AppSize.klheight * 3,
+                                    dataRowMinHeight:
+                                        Responsive.isMobile(context)
+                                            ? AppSize.klheight * 1.2
+                                            : AppSize.klheight * 2,
                                     showCheckboxColumn: false,
                                     decoration: BoxDecoration(
                                       color: AppColor.white,
                                       borderRadius: BorderRadius.circular(
                                         AppSize.ksradius,
                                       ),
-                                      boxShadow: applyLightShadow(),
+                                      // boxShadow: applyLightShadow(),
                                     ),
                                     columns: [
                                       DataColumn(
@@ -157,7 +170,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                       ),
                                       DataColumn(
                                         label: Text(
-                                          loc.vtTimeline,
+                                          loc.vtCategory,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: applyFiraSansFont(
@@ -168,7 +181,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                       ),
                                       DataColumn(
                                         label: Text(
-                                          loc.vtCategory,
+                                          loc.vtTimeline,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: applyFiraSansFont(
@@ -242,8 +255,8 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
               "${data.name?.capitalizeFirstOfEach()}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(fontSize: 14),
             ),
+            const SizedBox(height: 4),
             Text(
               data.id.toString(),
               maxLines: 1,
@@ -275,6 +288,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(fontSize: 14),
             ),
+            const SizedBox(height: 4),
             Text(
               data.encounterStartDate?.formatDateTimeMonthName ?? "",
               maxLines: 1,
@@ -297,6 +311,24 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
         ),
       ),
       DataCell(
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: categoryColor(data.category),
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Text(
+            categoryMapper(data.category),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.white,
+            ),
+          ),
+        ),
+      ),
+      DataCell(
         IconButton(
           onPressed: () {
             watchRef.setPatientDetails(data);
@@ -309,23 +341,27 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           icon: const Icon(Icons.timeline_outlined),
         ),
       ),
-      DataCell(
-        Chip(
-          backgroundColor:
-              data.category!.toString().toLowerCase().contains("early")
-                  ? AppColor.orange
-                  : AppColor.red,
-          label: Text(
-            data.category.toString().split(".").last,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.white,
-            ),
-          ),
-        ),
-      ),
     ];
+  }
+
+  String categoryMapper(SeverityCategory? category) {
+    if (category == null) return "";
+
+    String newCategory =
+        "${category.toString().split('.').last.sentenceCase()} Consultation";
+    return newCategory;
+  }
+
+  Color categoryColor(SeverityCategory? category) {
+    if (category == null) return AppColor.grey;
+    if (category.toString().toLowerCase().contains("early")) {
+      return AppColor.mediumOrange;
+    } else if (category.toString().toLowerCase().contains("routine")) {
+      return AppColor.altGreen;
+    } else if (category.toString().toLowerCase().contains("urgent")) {
+      return AppColor.red;
+    } else {
+      return AppColor.grey;
+    }
   }
 }

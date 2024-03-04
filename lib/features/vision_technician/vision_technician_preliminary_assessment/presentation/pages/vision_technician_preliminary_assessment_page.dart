@@ -9,6 +9,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -151,7 +153,9 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
               PreliminaryAssessmentCard(
                 patient: patientDetails,
               ),
-              const SizedBox(height: AppSize.klheight),
+              Responsive.isMobile(context)
+                  ? const SizedBox(height: AppSize.kmheight)
+                  : const SizedBox(height: AppSize.klheight),
               PreliminaryAssessmentIvrCall(
                 onSelectedOptionChanged: (value) {
                   if (value == loc.yesButton) {
@@ -163,24 +167,36 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                 },
                 intialValue: selectedOption.value,
               ),
-              const SizedBox(height: AppSize.klheight),
+              Responsive.isMobile(context)
+                  ? const SizedBox(height: AppSize.kmheight)
+                  : const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentQuestions(),
               if (selectedOption.value == loc.noButton)
-                const Column(
+                Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(height: AppSize.klheight),
-                    EyeScanCard(),
-                    SizedBox(height: AppSize.klheight),
-                    PreliminaryAssessmentVisualAcuity(),
+                    Responsive.isMobile(context)
+                        ? const SizedBox(height: AppSize.kmheight)
+                        : const SizedBox(height: AppSize.klheight),
+                    const EyeScanCard(),
+                    Responsive.isMobile(context)
+                        ? const SizedBox(height: AppSize.kmheight)
+                        : const SizedBox(height: AppSize.klheight),
+                    const PreliminaryAssessmentVisualAcuity(),
                   ],
                 ),
-              const SizedBox(height: AppSize.klheight),
+              Responsive.isMobile(context)
+                  ? const SizedBox(height: AppSize.kmheight)
+                  : const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentCarePlan(),
-              const SizedBox(height: AppSize.klheight),
+              Responsive.isMobile(context)
+                  ? const SizedBox(height: AppSize.kmheight)
+                  : const SizedBox(height: AppSize.klheight),
               const PreliminaryAssessmentVisionCenter(),
-              const SizedBox(height: AppSize.klheight * 3),
+              Responsive.isMobile(context)
+                  ? const SizedBox(height: AppSize.kmheight * 3)
+                  : const SizedBox(height: AppSize.klheight * 3),
             ],
           ),
         ),
@@ -203,16 +219,10 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
     }
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.lightGrey,
-            blurRadius: AppSize.ksradius / 2,
-            spreadRadius: AppSize.ksradius / 8,
-          )
-        ],
-        borderRadius: BorderRadius.all(
+        boxShadow: applycustomShadow(),
+        borderRadius: const BorderRadius.all(
           Radius.circular(AppSize.kmradius - 5),
         ),
       ),

@@ -30,6 +30,8 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             visionCenter.facilityInformation?.facilityName
                     .capitalizeFirstOfEach() ??
                 "",
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -51,6 +53,8 @@ class VisionCenterAddressDetails extends ConsumerWidget {
                 width: AppSize.klwidth * 10,
                 child: Text(
                   "${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""}, ${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}, ${visionCenter.facilityInformation?.facilityAddressDetails?.pincode ?? ""}",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,

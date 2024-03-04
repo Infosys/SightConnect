@@ -21,12 +21,15 @@ List<BoxShadow> applyMediumShadow() {
   ];
 }
 
-List<BoxShadow> customColorShadow(Color color) {
+List<BoxShadow> applycustomShadow([
+  Color color = AppColor.lightGrey,
+  double opacity = 0.1,
+]) {
   return [
     BoxShadow(
-      color: color.withOpacity(0.3),
+      color: color.withOpacity(opacity),
       blurRadius: 24,
       offset: const Offset(0, 4),
-    ),
+    )
   ];
 }

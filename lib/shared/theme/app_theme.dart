@@ -118,6 +118,15 @@ class AppTheme extends StateNotifier<ThemeMode> {
           borderRadius: BorderRadius.circular(4),
         ),
       ),
+      dropdownMenuTheme: const DropdownMenuThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.lightGrey),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.kmradius)),
+          ),
+          contentPadding: EdgeInsets.zero,
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColor.white,
         filled: true,
@@ -129,24 +138,24 @@ class AppTheme extends StateNotifier<ThemeMode> {
           horizontal: AppSize.klpadding,
         ),
         border: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColor.grey),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
+          borderSide: const BorderSide(color: AppColor.lightGrey),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: AppColor.grey),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
+          borderSide: const BorderSide(color: AppColor.lightGrey),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.red),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.red),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 2),
+          borderRadius: BorderRadius.circular(AppSize.kmradius),
         ),
       ),
     );

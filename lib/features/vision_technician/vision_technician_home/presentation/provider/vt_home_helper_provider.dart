@@ -29,6 +29,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
   bool get isLoading => _isLoading;
   int get pageNumber => _pageNumber;
   List<VTPatientDto> get listOfAssessments => _listOfAssessments;
+  String get query => _query;
 
   void updateQuery(String value) {
     _listOfAssessments.clear();

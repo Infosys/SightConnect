@@ -50,6 +50,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       DioErrorHandler.handleDioError(e);
       rethrow;
     } catch (e) {
+      logger.e("Error signing in : $e");
       throw ServerFailure(errorMessage: "Error signing in : $e ");
     }
   }
@@ -76,6 +77,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       DioErrorHandler.handleDioError(e);
       rethrow;
     } catch (e) {
+      logger.e("Refresh token failed : $e");
       throw ServerFailure(errorMessage: "Refresh token expired : $e");
     }
   }
@@ -167,6 +169,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       DioErrorHandler.handleDioError(e);
       rethrow;
     } catch (e) {
+      logger.e("Error signing out : $e");
       throw ServerFailure(errorMessage: "Error signing out : $e");
     }
   }

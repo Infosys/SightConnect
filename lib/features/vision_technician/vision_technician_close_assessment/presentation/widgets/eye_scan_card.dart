@@ -26,7 +26,7 @@ class EyeScanCard extends ConsumerWidget {
       padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: applyLightShadow(),
+        boxShadow: applycustomShadow(),
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
       child: Column(

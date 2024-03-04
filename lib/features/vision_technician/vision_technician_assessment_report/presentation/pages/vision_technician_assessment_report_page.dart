@@ -51,8 +51,11 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: AppColor.white,
-                  boxShadow: customColorShadow(_recommendationColor(
-                      assessmentDetailsReport.cumulativeSeverity)),
+                  boxShadow: applycustomShadow(
+                    _recommendationColor(
+                        assessmentDetailsReport.cumulativeSeverity),
+                    0.1,
+                  ),
                   border: Border.all(
                     color: _recommendationColor(
                         assessmentDetailsReport.cumulativeSeverity),

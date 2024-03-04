@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class GeneralInformation extends ConsumerWidget {
   const GeneralInformation({
@@ -22,6 +22,7 @@ class GeneralInformation extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    final isMobile = Responsive.isMobile(context);
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: const BoxDecoration(
@@ -31,7 +32,7 @@ class GeneralInformation extends ConsumerWidget {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             loc.vtGeneralInformation,
@@ -39,11 +40,13 @@ class GeneralInformation extends ConsumerWidget {
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          SizedBox(height: isMobile ? AppSize.kmheight : AppSize.klheight),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
+                flex: 3,
                 child: Column(
                   children: [
                     _InfoChip(
@@ -63,7 +66,9 @@ class GeneralInformation extends ConsumerWidget {
                   ],
                 ),
               ),
+              const Spacer(flex: 1),
               Expanded(
+                flex: 3,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -125,14 +130,20 @@ class _InfoChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          title,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: applyRobotoFont(
-            fontSize: 14,
-            color: AppColor.grey,
+        Expanded(
+          child: AutoSizeText(
+            title,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            maxFontSize: 14,
+            minFontSize: 12,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.grey,
+            ),
           ),
         ),
         SizedBox(

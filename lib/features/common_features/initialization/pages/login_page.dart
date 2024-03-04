@@ -203,6 +203,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             borderSide:
                                 BorderSide(color: AppColor.blue, width: 2.0),
                           ),
+                          errorBorder: const UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColor.red, width: 2.0),
+                          ),
+                          focusedErrorBorder: const UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColor.red, width: 2.0),
+                          ),
+                          disabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppColor.lightGrey, width: 2.0),
+                          ),
                         ),
                       ),
                     ),

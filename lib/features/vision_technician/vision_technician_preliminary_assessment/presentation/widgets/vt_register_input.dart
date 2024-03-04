@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -54,7 +53,6 @@ class VTRegisterInput extends HookConsumerWidget {
                 maxLines: 2,
                 decoration: const InputDecoration(
                   hintText: "Add Remarks",
-                  border: OutlineInputBorder(),
                 ),
               ),
             ),

@@ -68,7 +68,7 @@ class InitializationProvider extends ChangeNotifier {
           .refreshTokens(refreshToken: refreshToken);
       return response;
     } catch (e) {
-      return null;
+      rethrow;
     }
   }
 

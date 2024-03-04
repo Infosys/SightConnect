@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,18 @@ Future<void> showErrorDialogue(BuildContext context) {
     builder: (BuildContext context) {
       final loc = context.loc!;
       return BlurDialogBox(
-        contentPadding: const EdgeInsets.all(AppSize.klpadding * 2),
+        contentPadding: Responsive.isMobile(context)
+            ? const EdgeInsets.all(AppSize.kmpadding)
+            : const EdgeInsets.all(AppSize.klpadding),
         content: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               loc.vtNotRegistered,
-              style: applyRobotoFont(),
+              style: applyRobotoFont(
+                fontSize: 14,
+              ),
             ),
             const SizedBox(height: AppSize.kmheight),
             InkWell(
