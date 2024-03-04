@@ -12,6 +12,7 @@ var triageMemberProvider = ChangeNotifierProvider<TriageMemberProvider>((ref) {
 
 class TriageMemberProvider extends ChangeNotifier {
   int? testPatientId;
+  String? testPatientName;
   int currentIndex = 0;
   Ref ref;
   final List<RelatedPartyModel> connectionsList = [];
@@ -26,8 +27,9 @@ class TriageMemberProvider extends ChangeNotifier {
     }
   }
 
-  void setTestPersonId(int patientId) {
+  void setTestPersonId(int patientId, String patientName) {
     testPatientId = patientId;
+    testPatientName = patientName;
     notifyListeners();
     logger.d('TriageMemberProvider: setTestPersonId: $testPatientId');
   }
@@ -46,7 +48,7 @@ class TriageMemberProvider extends ChangeNotifier {
     logger.d('TriageMemberProvider: initilizeMembers: $connectionsList');
 
     if (currentProfile != null) {
-      setTestPersonId(currentProfile!.patientId!);
+      setTestPersonId(currentProfile!.patientId!, currentProfile!.name!);
     }
   }
 
@@ -57,7 +59,7 @@ class TriageMemberProvider extends ChangeNotifier {
     notifyListeners();
     logger.d('TriageMemberProvider: initilizeMembers: $connectionsList');
     if (currentProfile != null) {
-      setTestPersonId(currentProfile!.patientId!);
+      setTestPersonId(currentProfile!.patientId!, currentProfile!.name!);
     }
   }
 }

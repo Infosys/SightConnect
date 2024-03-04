@@ -100,7 +100,6 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
       DioErrorHandler.handleDioError(e);
       try {
         logger.d("Trying with Dev URl");
-        ApiConstant.switchBaseUrl();
 
         final response = await _dio.get<Map<String, dynamic>>(
           "/auth/realms/care/sms/authentication-code",

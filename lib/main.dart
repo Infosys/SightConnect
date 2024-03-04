@@ -43,13 +43,15 @@ Future<void> main() async {
   // await IOSDeviceInfoService.init();
   await MatomoLogger.init();
 
-  Workmanager().initialize(callbackDispatcher, isInDebugMode: kDebugMode);
+  Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: kDebugMode,
+  );
 
   Workmanager().registerPeriodicTask(
-    BackgroundServices.postTriage,
-    BackgroundServices.postTriage,
-    frequency: const Duration(minutes: 15),
-  );
+      BackgroundServices.postTriage, BackgroundServices.postTriage,
+      frequency: const Duration(minutes: 15),
+      constraints: Constraints(networkType: NetworkType.connected));
   FlutterNativeSplash.remove();
 
   runApp(
