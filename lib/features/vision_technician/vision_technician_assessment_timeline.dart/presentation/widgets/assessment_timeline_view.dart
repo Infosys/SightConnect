@@ -5,12 +5,12 @@ import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provide
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 import '../../domain/models/assessment_timeline_view_model.dart';
 
@@ -38,7 +38,12 @@ class AssessmentTimelineView extends HookConsumerWidget {
                   SizedBox(
                     width: AppSize.width(context) / 5,
                     child: Text(
-                      timeLineList[index].title ?? "",
+                      timeLineList[index]
+                              .title
+                              ?.replaceAll("_", " ")
+                              .toLowerCase()
+                              .capitalizeFirstOfEach() ??
+                          "",
                       style: applyRobotoFont(
                         fontSize: 14,
                         color: AppColor.black,
@@ -46,10 +51,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
                     ),
                   ),
                   Text(
-                    timeLineList[index].date == null
-                        ? ""
-                        : DateFormat("dd MMM yyyy, hh:mm a")
-                            .format(timeLineList[index].date!),
+                    timeLineList[index].date.formateDateWithTime,
                     style: applyRobotoFont(
                       fontSize: 12,
                       color: AppColor.grey,
@@ -193,13 +195,15 @@ Widget TimeWidgetRender(
                   logger.d("report response ${response.toJson()}");
                   isLoading.value = false;
                   if (context.mounted) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return VisionTechnicianAssessmentReportPage(
-                          assessmentDetailsReport: response,
-                        );
-                      },
-                    ));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return VisionTechnicianAssessmentReportPage(
+                            assessmentDetailsReport: response,
+                          );
+                        },
+                      ),
+                    );
                   }
                 } catch (e) {
                   isLoading.value = false;
@@ -214,7 +218,7 @@ Widget TimeWidgetRender(
                 }
               },
               child: Text(
-                timeLine.assessmentId.toString(),
+                "${timeLine.assessmentId ?? ""}",
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: applyRobotoFont(

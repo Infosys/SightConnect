@@ -21,10 +21,6 @@ class DioTokenInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    //BYPASSING AUTH FOR EXOTEL
-    // if (options.uri.path.contains("/services/exotel")) {
-    //   return super.onRequest(options, handler);
-    // }
     options.headers.addAll({
       'Authorization':
           'Bearer ${PersistentAuthStateService.authState.accessToken}'

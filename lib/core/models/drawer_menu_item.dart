@@ -76,7 +76,7 @@ class DrawerMenuItems {
       scanner,
       about,
       privacyPolicy,
-      chatbot
+      // chatbot
     ];
   }
 }

@@ -13,6 +13,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashbo
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
 import 'package:flutter/material.dart';
@@ -293,7 +294,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
               child: Center(
                 child: Image.asset(
                   "assets/logo/splash_icon_transparant.png",
-                  width: AppSize.width(context) * 0.4,
+                  width: Responsive.isMobile(context)
+                      ? AppSize.width(context) * 0.3
+                      : AppSize.width(context) * 0.2,
                 ),
               ),
             ),

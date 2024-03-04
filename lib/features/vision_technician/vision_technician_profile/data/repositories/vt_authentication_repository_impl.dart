@@ -21,8 +21,8 @@ class VtAutheticationRepositoryImpl implements VtAuthenticationRepository {
   @override
   Future<Either<Failure, List<VtProfileModel>>> getVtProfile(
       String mobile) async {
-    logger.f("Fetching VT Profile : $mobile");
-    logger.f(_dio.options.headers.toString());
+    logger.d("Fetching VT Profile : $mobile");
+    logger.d(_dio.options.headers.toString());
     if (mobile.startsWith("+91")) {
       mobile = mobile.substring(3);
     }

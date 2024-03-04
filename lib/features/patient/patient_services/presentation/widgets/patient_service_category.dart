@@ -17,7 +17,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../main.dart';
-import '../../../patient_appointments/presentation/pages/patient_appointment_page.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/matomo_logger.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
@@ -202,6 +203,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             borderSide:
                                 BorderSide(color: AppColor.blue, width: 2.0),
                           ),
+                          errorBorder: const UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColor.red, width: 2.0),
+                          ),
+                          focusedErrorBorder: const UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColor.red, width: 2.0),
+                          ),
+                          disabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppColor.lightGrey, width: 2.0),
+                          ),
                         ),
                       ),
                     ),
@@ -224,7 +237,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                                   isLoading.value = false;
                                   showOtp.value = true;
-                                } catch (e) {
+                                } catch (e, s) {
+                                  logger.e("Error sending OTP: $e, $s");
                                   isLoading.value = false;
                                   Fluttertoast.showToast(
                                       msg: loc.loginUnableToSendOTP);

@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -21,13 +22,7 @@ class PreliminaryAssessmentIvrCall extends HookWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(AppSize.kmradius),
-        boxShadow: const [
-          BoxShadow(
-            color: AppColor.lightGrey,
-            blurRadius: AppSize.ksradius / 2,
-            spreadRadius: AppSize.ksradius / 8,
-          )
-        ],
+        boxShadow: applycustomShadow(),
       ),
       padding: const EdgeInsets.all(AppSize.klpadding),
       child: Column(

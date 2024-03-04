@@ -28,4 +28,19 @@ class DioErrorHandler {
       logger.e('Connection error: ${e.message}');
     }
   }
+
+  static String? getErrorMessage(Object e) {
+    // check all type of error
+    if (e is DioException) {
+      if (e.error is Exception) {
+        return e.error.toString();
+      } else if (e.response != null) {
+        return e.response!.data["message"];
+      } else {
+        return e.message;
+      }
+    } else {
+      return e.toString();
+    }
+  }
 }

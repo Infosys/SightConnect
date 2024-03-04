@@ -53,7 +53,7 @@ class MyApp extends ConsumerWidget {
                             .watch(globalTextScaleFactorProvider)
                             .textScaleFactor,
                       )
-                    : const TextScaler.linear(1.2),
+                    : const TextScaler.linear(1.3),
               ),
               child: MaterialApp(
                 title: AppText.appName,
