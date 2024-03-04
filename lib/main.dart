@@ -60,42 +60,6 @@ Future<void> main() async {
     ),
   );
 }
-// Future<void> main() async {
-//   runZonedGuarded(() async {
-//     await SentryFlutter.init(
-//       (options) {
-//         options.dsn =
-//             'https://b8086dae95c2213ff2c9df66a91e35f4@o4506081562918912.ingest.sentry.io/4506743549788160';
-//         options.tracesSampleRate = 1.0;
-//       },
-//     );
-
-//     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-//     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-//     if (kDebugMode) {
-//       HttpOverrides.global = MyHttpOverrides();
-//     }
-//     await PersistentAuthStateService.intializeAuth();
-//     await SharedPreferenceService.init();
-//     // await IOSDeviceInfoService.init();
-//     await MatomoLogger.init();
-
-//     FlutterNativeSplash.remove();
-
-//     runApp(
-//       ProviderScope(
-//         child: DefaultAssetBundle(
-//           bundle: SentryAssetBundle(),
-//           child: const MyApp(),
-//         ),
-//       ),
-//     );
-//   }, (exception, stackTrace) async {
-//     logger.e('runZonedGuarded: $exception');
-//     await Sentry.captureException(exception, stackTrace: stackTrace);
-//   });
-// }
 
 class MyHttpOverrides extends HttpOverrides {
   @override

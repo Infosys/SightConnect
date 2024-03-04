@@ -2,14 +2,11 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-import 'package:eye_care_for_all/shared/widgets/profile_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -30,34 +27,12 @@ class VisionTechnicianHomePage extends ConsumerWidget {
           children: [
             Image.asset(
               AppImages.logo,
-              height: 80,
-              width: 120,
+              height: Responsive.isMobile(context) ? 80 : 120,
+              width: Responsive.isMobile(context) ? 120 : 180,
               colorBlendMode: BlendMode.srcIn,
               color: AppColor.white,
             ),
             isMobile ? const Spacer() : const SizedBox(width: AppSize.kmwidth),
-            Semantics(
-              hint: "Profile Toggle Button ( For Debugging )",
-              child: const ProfileToggleButton(),
-            ),
-            isMobile
-                ? IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const VisionTechnicianSearchPage(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.search, color: AppColor.white),
-                  )
-                : const Expanded(
-                    child: VTSearchBar(
-                      readOnly: true,
-                    ),
-                  ),
           ],
         ),
         centerTitle: false,
@@ -87,7 +62,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               child: Stack(
                 children: [
                   Container(
-                    height: AppSize.klheight * 8,
+                    height: AppSize.klheight * 6,
                     decoration: const BoxDecoration(
                       color: AppColor.primary,
                       borderRadius: BorderRadius.only(
@@ -97,12 +72,13 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                     ),
                   ),
                   Transform.translate(
-                    offset: const Offset(0, AppSize.klheight * 1.5),
+                    offset: const Offset(0, AppSize.ksheight),
                     child: const VTHeader(),
                   )
                 ],
               ),
             ),
+            //TODO: Logic for showing the assessment table
             const AssessmentTable(),
           ],
         ),

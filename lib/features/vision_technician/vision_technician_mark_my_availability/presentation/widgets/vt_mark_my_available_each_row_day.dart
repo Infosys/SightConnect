@@ -31,15 +31,14 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
               dropDownNo: 0,
               disable: daydata.checked,
             ),
-            const SizedBox(
-              width: AppSize.kmwidth,
-            ),
+            const SizedBox(width: AppSize.kmwidth),
             VtMarkMyAvailableEachRowTimePicker(
               dayAvailabilityindex: dayAvailabilityindex,
               index: index,
               dropDownNo: 1,
               disable: daydata.checked,
             ),
+            const SizedBox(width: AppSize.kmwidth),
             Text(
               "${daydata.time[index][2]} hrs",
               style: applyFiraSansFont(
@@ -48,6 +47,7 @@ class VtMarkMyAvailableEachRow extends ConsumerWidget {
                 fontWeight: FontWeight.w400,
               ),
             ),
+            const SizedBox(width: AppSize.kmwidth),
             IconButton(
               icon: Icon(Icons.remove_circle_outline,
                   color: daydata.checked == false

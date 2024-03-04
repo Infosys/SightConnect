@@ -1,20 +1,23 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CustomChip extends ConsumerWidget {
-  const CustomChip({super.key, required this.title});
+class CustomChip extends StatelessWidget {
+  const CustomChip({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.isSelected,
+  });
   final String title;
+  final Function(String type) onTap;
+  final bool isSelected;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var watchRef = ref.watch(vtHomeHelperProvider);
-
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        watchRef.updateCategory(title);
+        onTap(title);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(
@@ -26,11 +29,9 @@ class CustomChip extends ConsumerWidget {
           vertical: AppSize.kspadding,
         ),
         decoration: BoxDecoration(
-          color:
-              title == watchRef.category ? AppColor.lightBlue : AppColor.white,
+          color: isSelected ? AppColor.lightBlue : AppColor.white,
           border: Border.all(
-            color:
-                title == watchRef.category ? AppColor.primary : AppColor.grey,
+            color: isSelected ? AppColor.primary : AppColor.grey,
           ),
           borderRadius: BorderRadius.circular(AppSize.klradius / 2),
         ),

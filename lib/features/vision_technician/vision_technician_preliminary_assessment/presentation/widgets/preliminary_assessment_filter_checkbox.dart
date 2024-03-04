@@ -40,7 +40,7 @@ class _PreliminaryAssessmentFilterCheckBoxState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.question.text!.toString(),
+                    widget.question.text ?? "",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 5,
                     style: applyFiraSansFont(
@@ -54,9 +54,12 @@ class _PreliminaryAssessmentFilterCheckBoxState
             : widget.questionnaire[widget.index].type ==
                     QuestionnaireType.String
                 ? Padding(
-                    padding: const EdgeInsets.only(left: AppSize.klpadding),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSize.kswidth * 2,
+                      vertical: AppSize.klheight,
+                    ),
                     child: SizedBox(
-                      width: AppSize.width(context) * 0.2,
+                      width: AppSize.width(context) * 0.3,
                       child: TextField(
                         onChanged: (value) {
                           ref
@@ -64,7 +67,7 @@ class _PreliminaryAssessmentFilterCheckBoxState
                               .addQuestionnaireAnswer(
                                   widget.question.id, value);
                         },
-                        decoration: const InputDecoration(labelText: "Others"),
+                        decoration: const InputDecoration(hintText: "Others"),
                       ),
                     ),
                   )
@@ -95,27 +98,30 @@ class QuestionTile extends HookConsumerWidget {
               .removeQuestionnaireAnswer(question?.id);
         }
       },
-      child: Row(
-        children: [
-          Checkbox(
-            value: checkBoxState.value,
-            onChanged: null,
-            fillColor: MaterialStateProperty.all(
-                checkBoxState.value ? AppColor.primary : AppColor.white),
-          ),
-          Flexible(
-            child: Text(
-              question?.text?.toString() ?? "",
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: applyFiraSansFont(
-                fontSize: 18,
-                color: AppColor.black,
-                fontWeight: FontWeight.w400,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Row(
+          children: [
+            Checkbox(
+              value: checkBoxState.value,
+              onChanged: null,
+              fillColor: MaterialStateProperty.all(
+                  checkBoxState.value ? AppColor.primary : AppColor.white),
+            ),
+            Flexible(
+              child: Text(
+                question?.text?.toString() ?? "",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: applyFiraSansFont(
+                  fontSize: 18,
+                  color: AppColor.black,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

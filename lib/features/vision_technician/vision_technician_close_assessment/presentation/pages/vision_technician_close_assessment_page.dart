@@ -44,10 +44,14 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
             onTap: () {
               ref.invalidate(vtCloseAssessmentHelperProvider);
               Navigator.popUntil(context, (route) => route.isFirst);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (builder) {
-                return const VisionTechnicianDashboardPage();
-              }));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (builder) {
+                    return const VisionTechnicianDashboardPage();
+                  },
+                ),
+              );
             },
             child: const Icon(Icons.chevron_left)),
         title: Text(
@@ -61,20 +65,11 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
         children: [
           SizedBox(width: AppSize.width(context) * 0.05),
           Expanded(
-            child: TextButton(
+            child: OutlinedButton(
               onPressed: () {
                 ref.invalidate(vtCloseAssessmentHelperProvider);
                 Navigator.popUntil(context, (route) => route.isFirst);
               },
-              style: ButtonStyle(
-                // backgroundColor: MaterialStateProperty.all(AppColor.primary),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    side: const BorderSide(color: AppColor.primary),
-                    borderRadius: BorderRadius.circular(AppSize.klradius),
-                  ),
-                ),
-              ),
               child: Text(
                 loc.vtBack,
                 style: applyRobotoFont(
@@ -121,17 +116,6 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                       }
                     }
                   : null,
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    canSubmit ? AppColor.primary : AppColor.lightGrey),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    side: BorderSide(
-                        color: canSubmit ? AppColor.primary : AppColor.grey),
-                    borderRadius: BorderRadius.circular(AppSize.klradius),
-                  ),
-                ),
-              ),
               child: Text(
                 loc.vtSubmit,
                 style: applyRobotoFont(

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_filter_checkbox.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -83,13 +84,7 @@ class AssessmentQuestionCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColor.white,
             borderRadius: BorderRadius.circular(AppSize.kmradius),
-            boxShadow: const [
-              BoxShadow(
-                color: AppColor.lightGrey,
-                blurRadius: AppSize.ksradius / 2,
-                spreadRadius: AppSize.ksradius / 8,
-              )
-            ],
+            boxShadow: applycustomShadow(),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

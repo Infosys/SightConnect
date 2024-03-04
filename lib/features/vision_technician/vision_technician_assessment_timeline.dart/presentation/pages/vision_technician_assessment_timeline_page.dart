@@ -68,10 +68,10 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
           child: Column(
             children: [
               TimelineProfile(model: patientDetails!),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.klheight),
               GeneralInformation(model: patientDetails!),
               const SizedBox(height: AppSize.ksheight),
-              const AssessmentTimelineCard(),
+              AssessmentTimelineCard(model: patientDetails!),
               const SizedBox(height: AppSize.ksheight),
             ],
           ),

@@ -16,14 +16,19 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (visionCenterId == null) {
-      return Container();
-    }
     final loc = context.loc!;
+    if (visionCenterId == null) {
+      logger.d("visionCenterId is null");
+      return Container(
+        padding: const EdgeInsets.all(AppSize.kmpadding),
+        child: const Center(
+          child: Text("No Vision Center Found"),
+        ),
+      );
+    }
+
     return ref.watch(visionTechnicianReportPageProvider(visionCenterId!)).when(
         data: (data) {
-      logger.d(
-          "visionCenter data: ${data.facilityInformation?.timingsOfFacility}");
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -120,7 +125,6 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                               width: AppSize.width(context) / 4,
                               child: Text(
                                 "${data.facilityInformation?.timingsOfFacility?.first.workingDays ?? ""} - ${data.facilityInformation?.timingsOfFacility?.last.workingDays ?? ""}, ${data.facilityInformation?.timingsOfFacility?.first.openingHours ?? ""}",
-                                // softWrap: true,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: applyRobotoFont(

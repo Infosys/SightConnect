@@ -12,6 +12,7 @@ class AppInfoService {
   static Future<void> init() async {
     try {
       _packageInfo = await PackageInfo.fromPlatform();
+      logger.d("version code is : ${_packageInfo?.buildNumber}, and version name is : ${_packageInfo?.version}");
     } catch (e) {
       logger.e(e);
     }

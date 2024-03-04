@@ -21,6 +21,7 @@ linter:
     constant_identifier_names: false
     avoid_print: true 
     non_constant_identifier_names: false
+    unnecessary_brace_in_string_interps: false
  
       
 

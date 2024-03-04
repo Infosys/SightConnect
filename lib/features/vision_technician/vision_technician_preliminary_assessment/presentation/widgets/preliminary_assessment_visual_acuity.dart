@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,13 +27,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(AppSize.kmradius),
-        boxShadow: const [
-          BoxShadow(
-            color: AppColor.lightGrey,
-            blurRadius: AppSize.ksradius / 2,
-            spreadRadius: AppSize.ksradius / 8,
-          )
-        ],
+        boxShadow: applycustomShadow(),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,10 +42,11 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           Wrap(
+            runSpacing: AppSize.ksheight,
             children: [
               SizedBox(
                 width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.4
+                    ? AppSize.width(context)
                     : AppSize.width(context) * 0.2,
                 child: TextField(
                   onChanged: (value) {
@@ -76,12 +72,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppSize.kmradius,
-                      ),
-                    ),
-                    labelText: loc.vtRightEye,
+                    hintText: loc.vtRightEye,
                     error: refWatch.visualAcuityRightEyeValueEntered
                         ? null
                         : errorText(loc.vtInvalidValue),
@@ -91,7 +82,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
               const SizedBox(width: AppSize.klwidth),
               SizedBox(
                 width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.4
+                    ? AppSize.width(context)
                     : AppSize.width(context) * 0.2,
                 child: TextField(
                   onChanged: (value) {
@@ -117,12 +108,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppSize.kmradius,
-                      ),
-                    ),
-                    labelText: loc.vtLeftEye,
+                    hintText: loc.vtLeftEye,
                     error: refWatch.visualAcuityLeftEyeValueEntered
                         ? null
                         : errorText(loc.vtInvalidValue),
@@ -132,7 +118,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
               const SizedBox(width: AppSize.klwidth),
               SizedBox(
                 width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.4
+                    ? AppSize.width(context)
                     : AppSize.width(context) * 0.2,
                 child: TextField(
                   onChanged: (value) {
@@ -158,12 +144,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppSize.kmradius,
-                      ),
-                    ),
-                    labelText: loc.vtBothEyes,
+                    hintText: loc.vtBothEyes,
                     error: refWatch.visualAcuityBothEyeValueEntered
                         ? null
                         : errorText(loc.vtInvalidValue),
