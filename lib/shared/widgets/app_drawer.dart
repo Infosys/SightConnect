@@ -98,8 +98,9 @@ class AppDrawer extends HookWidget {
                               switch (item.id) {
                                 case DrawerMenuItemId.switchProfile:
                                   final navigator = Navigator.of(context);
-                                  await PersistentAuthStateService.authState
-                                      .setActiveRole(null);
+                                  await ref
+                                      .read(initializationProvider)
+                                      .resetProfile();
                                   navigator.pushNamedAndRemoveUntil(
                                       InitializationPage.routeName,
                                       (route) => false);

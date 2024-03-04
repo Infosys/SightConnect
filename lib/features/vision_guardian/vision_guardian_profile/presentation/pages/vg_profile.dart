@@ -102,8 +102,7 @@ class VgProfile extends ConsumerWidget {
                     child: ListTile(
                       onTap: () async {
                         final navigator = Navigator.of(context);
-                        await PersistentAuthStateService.authState
-                            .setActiveRole(null);
+                        await ref.read(initializationProvider).resetProfile();
                         navigator.pushNamedAndRemoveUntil(
                             InitializationPage.routeName, (route) => false);
                       },

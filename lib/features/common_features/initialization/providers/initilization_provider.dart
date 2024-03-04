@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
+import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
@@ -54,6 +55,14 @@ class InitializationProvider extends ChangeNotifier {
     await SharedPreferenceService.clearAll();
     // Flutter Secure Storage logout
     await PersistentAuthStateService.authState.logout();
+  }
+
+  Future<void> resetProfile() async {
+    await PersistentAuthStateService.authState.setActiveRole(null);
+    // Triage Database logout
+    await TriageDBHelper().deleteFullDatabase();
+    // Shared Preference logout
+    await SharedPreferenceService.clearAll();
   }
 
   Future<KeycloakResponse?> refreshTokens({

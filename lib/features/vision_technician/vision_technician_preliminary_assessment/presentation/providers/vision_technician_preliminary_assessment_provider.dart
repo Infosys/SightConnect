@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
@@ -69,48 +71,45 @@ class VtTriageProvider extends ChangeNotifier {
       VTPatientDto patientDetails) async {
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {
       logger.d("on ivr called");
-
       final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
         agentMobile: _vtProfile?.officialMobile,
         callerId: patientDetails.id.toString(),
         callerName: patientDetails.name,
         callerNumber: patientDetails.mobile,
       );
-      String ivrResponse =
-          await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
-      logger.d("ivr response $ivrResponse");
-      if (ivrResponse == "error") {
-        return Left(ServerFailure(errorMessage: "Not on IVR Call Please"));
-      }
-    }
 
-    logger.d("save triage called");
+      await _callerDetailsRemoteSource
+          .saveCallerDetails(callerDetails)
+          .catchError((e) {
+        throw Left(ServerFailure(errorMessage: "Not on IVR Call Please"));
+      });
+    }
 
     List<PostTriageImagingSelectionModel> imageSelection =
         await _visionTechnicianTriageProvider.getTriageEyeScanResponse();
-    logger.d("image selection called $imageSelection");
+    logger.d("image selection called");
     List<PostTriageObservationsModel> observations =
         _visionTechnicianTriageProvider.getVisionAcuityTumblingResponse();
-    logger.d("observation called $observations");
+    logger.d("observation called");
     List<PostTriageQuestionModel> questionResponse =
         _visionTechnicianTriageProvider.getQuestionaireResponse();
-    logger.d("question response called $questionResponse");
+    logger.d("question response called");
     final questionnaireUrgency =
         _triageUrgencyRepository.questionnaireUrgency(questionResponse);
-    logger.d("questionnaireUrgency called $questionnaireUrgency");
+    logger.d("questionnaireUrgency called");
     final visualAcuityUrgency =
         _triageUrgencyRepository.visualAcuityUrgency(observations);
-    logger.d("visualAcuityUrgency called $visualAcuityUrgency");
+    logger.d("visualAcuityUrgency called");
     final eyeScanUrgency =
         _triageUrgencyRepository.eyeScanUrgency(imageSelection);
-    logger.d("eyeScanUrgency called $eyeScanUrgency");
+    logger.d("eyeScanUrgency called ");
     final triageUrgency = _triageUrgencyRepository.totalTriageUrgency(
       questionnaireUrgency,
       visualAcuityUrgency,
       eyeScanUrgency,
     );
-    logger.d("triageUrgency called $triageUrgency");
-    //inject assessment
+    logger.d("triageUrgency called");
+
     DiagnosticReportTemplateFHIRModel assessment =
         _visionTechnicianTriageProvider.assessment;
 
@@ -132,8 +131,9 @@ class VtTriageProvider extends ChangeNotifier {
         {"OBSERVATION": visualAcuityUrgency},
         {"IMAGE": eyeScanUrgency}
       ],
-      userStartDate: DateTime.now(),
-      issued: DateTime.now(),
+      userStartDate:
+          DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
+      issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
       source: Source.VT_APP,
       sourceVersion: AppText.appVersion,
       incompleteSection: [],
@@ -143,9 +143,6 @@ class VtTriageProvider extends ChangeNotifier {
           _preliminaryAssessmentHelperProvider.onIvrCall ? [] : observations,
       questionResponse: questionResponse,
     );
-
-    logger.d({"triage model to be saved ": triagePostModel.toJson()});
-
     _preliminaryAssessmentHelperProvider.setLoading(true);
 
     Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
@@ -153,13 +150,12 @@ class VtTriageProvider extends ChangeNotifier {
     );
 
     TriagePostModel? triageResponse = response.fold((error) {
-      logger.d({"triage post error": error});
-      return;
+      throw error;
     }, (result) {
+      logger.d("triage response $result");
       return result;
     });
 
-    logger.d({"triage response new": triageResponse});
     _preliminaryAssessmentHelperProvider.setTriageResponse(triageResponse);
 
     int? reportId = triageResponse?.id;
@@ -170,17 +166,14 @@ class VtTriageProvider extends ChangeNotifier {
     if (organizationCode != null && reportId != null && encounterId != null) {
       carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
           organizationCode, reportId, encounterId);
-      logger.d("lets see the care plan response $carePlanResponse");
 
       carePlanResponse.fold((error) {
-        return;
+        throw error;
       }, (result) {
         _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
       });
     }
-
     _preliminaryAssessmentHelperProvider.setLoading(false);
-
     return response;
   }
 }

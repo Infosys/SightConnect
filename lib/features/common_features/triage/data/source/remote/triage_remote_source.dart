@@ -104,6 +104,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }) async {
     const endpoint = "/services/triage/api/triage-report";
     try {
+      logger.f(dio.options.headers);
       logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(
         endpoint,

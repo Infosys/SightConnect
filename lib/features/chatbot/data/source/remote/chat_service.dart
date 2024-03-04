@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var chatbotProvider = Provider((ref) {
-  return ChatService(ref.read(chatbotDioProvider));
+  return ChatService(ref.watch(chatbotDioProvider));
 });
 
 class ChatService {
