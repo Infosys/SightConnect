@@ -39,7 +39,7 @@ class AssessmentReportProfile extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  patient?.name ?? "",
+                  patient?.name ?? "-",
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -68,7 +68,9 @@ class AssessmentReportProfile extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  "${patient?.encounterStartDate?.formatDateTimeMonthNameWithTime}",
+                  patient?.encounterStartDate
+                          ?.formatDateTimeMonthNameWithTime ??
+                      "-",
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
