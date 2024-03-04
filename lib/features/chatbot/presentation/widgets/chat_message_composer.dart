@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -47,7 +48,7 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
         }
       },
     ).then((value) {
-      debugPrint("Listener Available: $value");
+      logger.d("Listener Available: $value");
       setState(() {
         _isListenerAvailable = value;
       });
@@ -132,7 +133,7 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
     setState(() {
       _isListening = true;
     });
-    debugPrint('Listening...');
+    logger.d('Listening...');
     _speechToText.listen(
       onResult: (result) async {
         setState(() {
@@ -149,6 +150,6 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
       _isListening = false;
     });
     _speechToText.stop();
-    debugPrint('Stopped Listening!');
+    logger.d('Stopped Listening!');
   }
 }

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/chatbot/data/enum/standard_action.dart';
 import 'package:eye_care_for_all/features/chatbot/data/models/chat_query_resolver.dart';
@@ -8,6 +9,7 @@ import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_mess
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_query_suggestions.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/loading_indicator.dart';
 import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +77,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     // Load chat history if any
 
     final chatHistory = await _loadChatHistory();
-    debugPrint("Chat History: Loaded: $chatHistory");
+    logger.d("Chat History: Loaded: $chatHistory");
 
     List<String> querySuggestions = widget.defaultQuerySuggestions;
 
@@ -124,7 +126,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("SightConnect"),
+            Text(AppText.appName),
           ],
         ),
       ),
@@ -170,7 +172,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
               selectedLanguage: widget.selectedLanguageCode,
               enabled: !_isLoading,
               onTextChange: (newText) {
-                // debugPrint("Changed text: $newText");
+                // logger.d("Changed text: $newText");
               },
               onSubmit: _onChatMessageSubmit,
             )
@@ -299,7 +301,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
         );
       }
     } catch (e) {
-      debugPrint("ChatBotPage: _askChatBot: Error: $e");
+      logger.d("ChatBotPage: _askChatBot: Error: $e");
       Fluttertoast.showToast(msg: loc.chatChatbotNotAvailable);
       setState(() {
         _isLoading = false;

@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
@@ -12,6 +10,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/l
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -167,7 +166,7 @@ class AppDrawer extends HookWidget {
                                         languageProvider.currentLanguage;
                                     var currentLanguageCode = languageProvider
                                         .currentLocale!.languageCode;
-                                    debugPrint("language: $currentLanguage");
+                                    logger.d("language: $currentLanguage");
                                     return ChatBotPage(
                                       selectedLanguage: currentLanguage,
                                       selectedLanguageCode: currentLanguageCode,

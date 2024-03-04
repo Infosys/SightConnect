@@ -1,11 +1,8 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
-import 'package:flutter/material.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var chatbotProvider = Provider((ref) {
@@ -28,7 +25,7 @@ class ChatService {
       "language": language,
     });
 
-    debugPrint("ChatService: body: $body");
+    logger.d("ChatService: body: $body");
     final response = await dio.post(
       url,
       options: Options(contentType: "application/json"),
@@ -44,16 +41,16 @@ class ChatService {
           //     )
           response.data.split("|");
 
-      debugPrint('ChatService: unfiltered querySuggestions: $suggestions');
+      logger.d('ChatService: unfiltered querySuggestions: $suggestions');
 
       suggestions = suggestions
           .where((s) => s.length < 75)
           .toList(); // Filters the list of suggestions based on the length of each suggestion. Only suggestions with a length less than 75 characters are included in the filtered list.
-      debugPrint('ChatService: filtered querySuggestions: $suggestions');
+      logger.d('ChatService: filtered querySuggestions: $suggestions');
       return suggestions;
     } else {
       // Request unsuccessful, handle the error
-      debugPrint('Error: ${response.statusCode}');
+      logger.d('Error: ${response.statusCode}');
       return [];
     }
   }
@@ -70,7 +67,7 @@ class ChatService {
 
     _addUserMessageToContext(query);
 
-    debugPrint("ChatService: body: $body");
+    logger.d("ChatService: body: $body");
     final response = await dio.post(
       chatResponseUrl,
       options: Options(contentType: "application/json"),
@@ -79,18 +76,18 @@ class ChatService {
 
     if (response.statusCode == 200) {
       // Request successful, handle the response
-      debugPrint("Response text: ${response.data}");
+      logger.d("Response text: ${response.data}");
       // final responseText = utf8.decode(
       //   response.data.runes.toList(),
       // );
       final responseText = response.data;
-      debugPrint('Response body: ${response.data}');
-      debugPrint('Response decoded body: $responseText');
+      logger.d('Response body: ${response.data}');
+      logger.d('Response decoded body: $responseText');
       _addChatBotMessageToContext(responseText);
       return responseText;
     } else {
       // Request unsuccessful, handle the error
-      debugPrint('Error: ${response.statusCode}');
+      logger.d('Error: ${response.statusCode}');
       return null;
     }
   }
@@ -112,23 +109,23 @@ class ChatService {
   }
 
   void clearContext() {
-    debugPrint("ChatService: clearContext: begin");
+    logger.d("ChatService: clearContext: begin");
     _previousConversation = [];
-    debugPrint("ChatService: clearContext: complete");
+    logger.d("ChatService: clearContext: complete");
   }
 
   void setContext(List<ChatMessage> chatHistory) {
-    debugPrint("ChatService: setContext: begin");
+    logger.d("ChatService: setContext: begin");
     clearContext();
     List<ChatMessage> messages = [];
     if (chatHistory.length <= CONTEXT_LIMIT) {
       // _previousConversation = chatHistory;
-      debugPrint(
+      logger.d(
           "ChatService: setContext: chat history {${chatHistory.length}} <= CONTEXT_LIMIT {$CONTEXT_LIMIT}");
 
       messages = chatHistory;
     } else {
-      debugPrint(
+      logger.d(
           "ChatService: setContext: chat history {${chatHistory.length}} > CONTEXT_LIMIT {$CONTEXT_LIMIT}");
       // Get the last CONTEXT_LIMIT messages
       messages = chatHistory.sublist(chatHistory.length - CONTEXT_LIMIT);
@@ -141,7 +138,7 @@ class ChatService {
         _addChatBotMessageToContext(message.message);
       }
     }
-    debugPrint("ChatService: setContext: complete");
+    logger.d("ChatService: setContext: complete");
   }
 
   bool isConversationEnded() => _previousConversation.isEmpty;
