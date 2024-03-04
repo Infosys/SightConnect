@@ -13,18 +13,21 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTProfilePage extends ConsumerWidget {
+class VTProfilePage extends HookConsumerWidget {
   const VTProfilePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    var isLoading = useState(false);
     return Scaffold(
       appBar: CustomAppbar(
         centerTitle: false,
@@ -37,121 +40,127 @@ class VTProfilePage extends ConsumerWidget {
       body: ref.watch(getVTProfileProvider).when(
         data: (data) {
           return SingleChildScrollView(
-            child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  VTProfileNameCard(
-                    profileData: data,
-                  ),
-                  const SizedBox(height: AppSize.kmheight),
-                  VTProfilePersonalDetailsCard(profileData: data),
-                  const SizedBox(height: AppSize.kmheight),
-                  // //VgProfileWorkLocationCard(profileData: data),
-                  // const SizedBox(
-                  //   height: AppSize.kmheight,
-                  // ),
-                  VTProfileOrganisationDetailsCard(profileData: data),
-                  // const SizedBox(
-                  //   height: AppSize.kmheight,
-                  // ),
-                  //VgProfileTrainingCertificateCard(profileData: data),
-                  const SizedBox(height: AppSize.kmheight),
-                  AppCard(
-                    child: ListTile(
-                      onTap: () {
-                        final currentLocaleCode =
-                            ref.read(globalLanguageProvider).currentLocale;
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          enableDrag: false,
-                          isDismissible: false,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) => Container(
-                            height: MediaQuery.of(context).size.height,
-                            color: Colors.white,
-                            child: TranslationPopUp(
-                              locale: currentLocaleCode,
+            child: LoadingOverlay(
+              isLoading: isLoading.value,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    VTProfileNameCard(
+                      profileData: data,
+                    ),
+                    const SizedBox(height: AppSize.kmheight),
+                    VTProfilePersonalDetailsCard(profileData: data),
+                    const SizedBox(height: AppSize.kmheight),
+                    // //VgProfileWorkLocationCard(profileData: data),
+                    // const SizedBox(
+                    //   height: AppSize.kmheight,
+                    // ),
+                    VTProfileOrganisationDetailsCard(profileData: data),
+                    // const SizedBox(
+                    //   height: AppSize.kmheight,
+                    // ),
+                    //VgProfileTrainingCertificateCard(profileData: data),
+                    const SizedBox(height: AppSize.kmheight),
+                    AppCard(
+                      child: ListTile(
+                        onTap: () {
+                          final currentLocaleCode =
+                              ref.read(globalLanguageProvider).currentLocale;
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            enableDrag: false,
+                            isDismissible: false,
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (context) => Container(
+                              height: MediaQuery.of(context).size.height,
+                              color: Colors.white,
+                              child: TranslationPopUp(
+                                locale: currentLocaleCode,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      leading: SvgPicture.asset(
-                        "assets/drawer_icons/language.svg",
-                        height: 26,
-                        width: 26,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.black,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                      title: Text(
-                        "Change Language",
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: AppSize.kmheight),
-                  AppCard(
-                    child: ListTile(
-                      onTap: () async {
-                        final navigator = Navigator.of(context);
-                        await PersistentAuthStateService.authState
-                            .setActiveRole(null);
-                        navigator.pushNamedAndRemoveUntil(
-                            InitializationPage.routeName, (route) => false);
-                      },
-                      leading: const Icon(
-                        Icons.person,
-                        color: AppColor.black,
-                      ),
-                      title: Text(
-                        "Switch Profile",
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: AppSize.kmheight),
-                  AppCard(
-                    child: ListTile(
-                      onTap: () {
-                        final navigator = Navigator.of(context);
-                        ref
-                            .read(initializationProvider)
-                            .logout()
-                            .then((value) async {
-                          navigator.pushNamedAndRemoveUntil(
-                            LoginPage.routeName,
-                            (route) => false,
                           );
-                          ref.invalidate(initializationProvider);
-                        }).catchError((e) {
-                          Fluttertoast.showToast(msg: loc.vtLogoutError);
-                        });
-                      },
-                      leading: const Icon(
-                        Icons.logout,
-                        color: AppColor.black,
-                      ),
-                      title: Text(
-                        "Logout",
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.w500,
+                        },
+                        leading: SvgPicture.asset(
+                          "assets/drawer_icons/language.svg",
+                          height: 26,
+                          width: 26,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        title: Text(
+                          "Change Language",
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: AppSize.klheight * 2),
-                ],
+
+                    const SizedBox(height: AppSize.kmheight),
+                    AppCard(
+                      child: ListTile(
+                        onTap: () async {
+                          final navigator = Navigator.of(context);
+                          await PersistentAuthStateService.authState
+                              .setActiveRole(null);
+                          navigator.pushNamedAndRemoveUntil(
+                              InitializationPage.routeName, (route) => false);
+                        },
+                        leading: const Icon(
+                          Icons.person,
+                          color: AppColor.black,
+                        ),
+                        title: Text(
+                          "Switch Profile",
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: AppSize.kmheight),
+                    AppCard(
+                      child: ListTile(
+                        onTap: () {
+                          final navigator = Navigator.of(context);
+                          isLoading.value = true;
+                          ref
+                              .read(initializationProvider)
+                              .logout()
+                              .then((value) async {
+                            navigator.pushNamedAndRemoveUntil(
+                              LoginPage.routeName,
+                              (route) => false,
+                            );
+                            ref.invalidate(initializationProvider);
+                          }).catchError((e) {
+                            Fluttertoast.showToast(msg: loc.vtLogoutError);
+                          }).whenComplete(() {
+                            isLoading.value = false;
+                          });
+                        },
+                        leading: const Icon(
+                          Icons.logout,
+                          color: AppColor.black,
+                        ),
+                        title: Text(
+                          "Logout",
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.klheight * 2),
+                  ],
+                ),
               ),
             ),
           );

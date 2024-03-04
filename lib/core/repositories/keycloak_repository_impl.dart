@@ -168,9 +168,9 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       rethrow;
-    } catch (e) {
+    } catch (e, s) {
       logger.e("Error signing out : $e");
-      throw ServerFailure(errorMessage: "Error signing out : $e");
+      throw ServerFailure(errorMessage: "Error signing out : $e $s");
     }
   }
 }
