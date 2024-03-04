@@ -4,6 +4,5 @@ import 'package:eye_care_for_all/features/patient/patient_appointments/data/mode
 import 'package:eye_care_for_all/features/patient/patient_appointments/data/models/uhi_search_model.dart';
 
 abstract class PatientAppointmentRepository {
-  Future<Either<Failure,List<EuaOnSearchModel>>> getDoctorsList();
-  Future<void> sendAppointmentDetails(UhiSearchModel uhiSearchModel);
+  Future<bool> sendAppointmentDetails(UhiSearchModel uhiSearchModel);
 }

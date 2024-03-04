@@ -28,13 +28,6 @@ var appointmentDioProvider = Provider(
         baseUrl: ApiConstant.baseDevUrl,
       ),
     );
-
-    dio.interceptors.addAll(
-      [
-        DioTokenInterceptor(ref, dio),
-        // DioCertificateInterceptor(dio),
-      ],
-    );
     return dio;
   },
 );

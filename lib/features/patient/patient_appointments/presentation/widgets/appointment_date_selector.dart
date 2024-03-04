@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../main.dart';
+import '../providers/appointment_view_model_provider.dart';
 import '../providers/book_appointment_provider.dart';
 
 class AppointmentDateSelector extends HookConsumerWidget {
@@ -69,6 +70,7 @@ class AppointmentDateSelector extends HookConsumerWidget {
                     onTap: () {
                       isSelectedDate.value = index;
                       model.setSelectedDate(dates[index]);
+                      ref.read(appointmentViewModelProvider).sendAppointmentDetails();
                     },
                     child: DateWidget(
                       dates[index],
@@ -159,7 +161,7 @@ class AppointmentDateSelector extends HookConsumerWidget {
   }
 
   String firstTwoLetters(String day) {
-    logger.d(" is the day $day");
+  
     switch (day) {
       case "1":
         return "Mo";

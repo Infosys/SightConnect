@@ -16,6 +16,7 @@ import '../../../../../shared/theme/text_theme.dart';
 import '../../../../../shared/widgets/app_name_avatar.dart';
 import '../../../../../shared/widgets/app_network_image.dart';
 import '../../../../common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import '../providers/appointment_view_model_provider.dart';
 
 class AppointmentPatientSelector extends HookConsumerWidget {
   const AppointmentPatientSelector(
@@ -110,6 +111,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                       model.setSelectedPatientDetails(
                           patient.profile!.patient!.name!,
                           patient.profile!.patient!.patientId.toString());
+                      ref.read(appointmentViewModelProvider).sendAppointmentDetails();
                     },
                     child: Container(
                       height: AppSize.height(context) * 0.06,
@@ -194,6 +196,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                             model.setSelectedPatientDetails(
                                 relations[index].name!,
                                 relations[index].patientId.toString());
+                            ref.read(appointmentViewModelProvider).sendAppointmentDetails();
                           },
                           child: Container(
                             height: AppSize.height(context) * 0.06,

@@ -3,13 +3,18 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SelectTime extends HookWidget {
+import '../providers/appointment_view_model_provider.dart';
+import '../providers/book_appointment_provider.dart';
+
+class SelectTime extends HookConsumerWidget {
   const SelectTime({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var selectedTime = useState<int>(0);
+    var model = ref.watch(bookAppointmentProvider);
 
     List<String> timeSlots = [
       "10:00 am - 10:30 am",
@@ -44,6 +49,8 @@ class SelectTime extends HookWidget {
                   return;
                 }
                 selectedTime.value = index;
+                model.setTimeSlot(timeSlots[index]);
+                ref.read(appointmentViewModelProvider).sendAppointmentDetails();
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(

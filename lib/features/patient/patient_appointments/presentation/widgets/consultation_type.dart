@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../providers/appointment_view_model_provider.dart';
+
 class ConsultationType extends HookConsumerWidget {
   const ConsultationType({super.key});
 
@@ -39,6 +41,7 @@ class ConsultationType extends HookConsumerWidget {
                     model.setConsultationType("In Clinic Consultation");
                   }
                 }
+                ref.read(appointmentViewModelProvider).sendAppointmentDetails();
               },
               child: Container(
                 // height: AppSize.height(context) * 0.06,
