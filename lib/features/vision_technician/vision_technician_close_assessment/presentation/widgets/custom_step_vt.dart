@@ -47,7 +47,6 @@ EasyStep vtCustomStep(
           child: Image.asset(
             "assets/images/vt_${eye}_eye.png",
             height: AppSize.kmheight * 2,
-            // width: 12,
           ),
         ),
       ],
