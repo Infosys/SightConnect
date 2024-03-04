@@ -34,6 +34,10 @@ jobs:
       #     git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
       #     git push origin --tags
       #     git push  
+      - name: tagcreation
+        run: |
+            git tag 1.${{ github.run_number }}.0
+            git push origin 1.${{ github.run_number }}.0   
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
