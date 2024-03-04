@@ -135,6 +135,7 @@ Widget _content(
           patient: patient,
           relations:
               patient.profile?.patient?.relatedParty?.reversed.toList() ?? [],
+          enableAllButton: true,
         ),
         const SizedBox(height: AppSize.kmheight),
         Divider(

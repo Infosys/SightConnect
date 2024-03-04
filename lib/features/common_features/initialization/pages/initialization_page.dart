@@ -124,8 +124,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         return true;
       } else if (role == Role.ROLE_PATIENT) {
         // 18+ declaration and consent check for patient
-        bool is18PlusDeclarationAccepted =
-            await model.getEighteenPlusDeclarationStatus();
+        // bool is18PlusDeclarationAccepted =
+        //     await model.getEighteenPlusDeclarationStatus();
+        bool is18PlusDeclarationAccepted = await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
 
         if (is18PlusDeclarationAccepted && isConsentAccepted) {

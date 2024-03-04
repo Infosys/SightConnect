@@ -42,6 +42,7 @@ class AppDrawer extends HookWidget {
     final loc = context.loc!;
     var items = DrawerMenuItems.getAll(loc);
     var isLoading = useState(false);
+
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: Padding(
