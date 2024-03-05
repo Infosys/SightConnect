@@ -1,68 +1,69 @@
 {
-    "id": 1351,
-    "name": "string",
-    "organizationCode": 2001,
-    "category": "EYE",
-    "bodySite": "LEFT_EYE",
-    "code": "EYE_TEST",
-    "version": "1.0",
-    "study": {
-      "id": 1951,
+  "id": 1351,
+  "name": "Vision Test Form 1",
+  "tenantCode": 1901,
+  "organizationCode": 1901,
+  "category": "EYE",
+  "bodySite": "BOTH_EYES",
+  "code": "EYE_TEST",
+  "version": "1.0",
+  "study": {
+      "id": 1451,
       "description": "Optical coherence tomography",
       "imagingSelectionTemplate": [
-        {
-          "id": 2001,
-          "name": "LEFT_EYE",
-          "description": "1851",
-          "type": "PHOTO",
-          "maxSize": 20,
-          "fileType": "JPEG",
-          "relatedImage": [
-            {
-              "id": 2101,
-              "imageTitle": "Left Eye retina",
-              "url": "http://infy.com/leftEyeRetina",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2151,
-          "name": "RIGHT_EYE",
-          "description": "1851",
-          "type": "PHOTO",
-          "maxSize": 20,
-          "fileType": "JPEG",
-          "relatedImage": [
-            {
-              "id": 2201,
-              "imageTitle": "Right Eye retina",
-              "url": "http://infy.com/leftEyeRetina",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2152,
-          "name": "BOTH_EYES",
-          "description": "1851",
-          "type": "PHOTO",
-          "maxSize": 20,
-          "fileType": "JPEG",
-          "relatedImage": [
-            {
-              "id": 2202,
-              "imageTitle": "Both_Eyes Eye retina",
-              "url": "http://infy.com/bothEyeRetina",
-              "fileType": "JPEG"
-            }
-          ]
-        }
+          {
+              "id": 1501,
+              "name": "LEFT_EYE",
+              "description": "1851",
+              "type": "PHOTO",
+              "maxSize": 20,
+              "fileType": "JPEG",
+              "relatedImage": [
+                  {
+                      "id": 1421,
+                      "imageTitle": "Left Eye retina",
+                      "url": "http://infy.com/leftEyeRetina",
+                      "fileType": "JPEG"
+                  }
+              ]
+          },
+          {
+              "id": 1502,
+              "name": "RIGHT_EYE",
+              "description": "1851",
+              "type": "PHOTO",
+              "maxSize": 20,
+              "fileType": "JPEG",
+              "relatedImage": [
+                  {
+                      "id": 1422,
+                      "imageTitle": "Right Eye retina",
+                      "url": "http://infy.com/leftEyeRetina",
+                      "fileType": "JPEG"
+                  }
+              ]
+          },
+          {
+              "id": 1503,
+              "name": "BOTH_EYES",
+              "description": "1851",
+              "type": "PHOTO",
+              "maxSize": 20,
+              "fileType": "JPEG",
+              "relatedImage": [
+                  {
+                      "id": 1423,
+                      "imageTitle": "Both_Eyes Eye retina",
+                      "url": "http://infy.com/bothEyeRetina",
+                      "fileType": "JPEG"
+                  }
+              ]
+          }
       ],
       "languageBasedText": null
-    },
-    "observations": {
-      "id": 1751,
+  },
+  "observations": {
+      "id": 1753,
       "name": "Eye Observation",
       "description": "1801",
       "category": "Exam",
@@ -71,236 +72,186 @@
       "method": "Eye",
       "jurisdiction": "ALL",
       "observationDefinition": [
-        {
-          "id": 1752,
-          "name": "Eye Observation",
-          "description": "1801",
-          "category": "Exam",
-          "code": "Eye",
-          "bodySite": "LEFT_EYE",
-          "method": "Eye",
-          "jurisdiction": "ALL",
-          "observationDefinition": [],
-          "observationDefinations": null,
-          "dataComponent": [
-            {
-              "id": 1802,
-              "permittedDataType": "Range",
-              "permittedUnit": "Number",
-              "qualifiedValue": [
-                {
-                  "id": 1904,
-                  "isRange": true,
-                  "value": "3.0",
-                  "rangeCategory": "Absolute",
-                  "gender": "Male",
-                  "range": {
-                    "id": 1853,
-                    "low": 1.1,
-                    "high": null
-                  },
-                  "observationDefinition": {
-                    "id": 1752,
-                    "name": null,
-                    "description": null,
-                    "category": null,
-                    "code": null,
-                    "bodySite": null,
-                    "method": null,
-                    "jurisdiction": null,
-                    "observationDefinition": null
-                  },
-                  "dataComponent": {
-                    "id": 1802,
-                    "permittedDataType": null,
-                    "permittedUnit": null,
-                    "observationDefinition": null
+          {
+              "id": 1751,
+              "name": "Eye Observation",
+              "description": "1801",
+              "category": "Exam",
+              "code": "Eye",
+              "bodySite": "LEFT_EYE",
+              "method": "Eye",
+              "jurisdiction": "ALL",
+              "observationDefinition": [],
+              "observationDefinations": null,
+              "dataComponent": [
+                  {
+                      "id": 1602,
+                      "permittedDataType": "Range",
+                      "permittedUnit": "Number",
+                      "qualifiedValue": [
+                          {
+                              "id": 1703,
+                              "isRange": true,
+                              "value": "3.0",
+                              "rangeCategory": "Absolute",
+                              "gender": "Male",
+                              "range": {
+                                  "id": 1653,
+                                  "low": 1.1,
+                                  "high": null
+                              },
+                              "observationDefinition": null,
+                              "dataComponent": {
+                                  "id": 1602,
+                                  "permittedDataType": null,
+                                  "permittedUnit": null,
+                                  "observationDefinition": null
+                              }
+                          }
+                      ]
                   }
-                }
-              ]
-            }
-          ],
-          "relatedImage": [
-            {
-              "id": 2204,
-              "imageTitle": "LEFT EYE LogMAR",
-              "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
-              "fileType": "JPEG"
-            }
-          ],
-          "qualifiedValue": [],
-          "languageBasedText": []
-        },
-        {
-          "id": 1753,
-          "name": "Eye Observation",
-          "description": "1801",
-          "category": "Exam",
-          "code": "Eye",
-          "bodySite": "RIGHT_EYE",
-          "method": "Eye",
-          "jurisdiction": "ALL",
-          "observationDefinition": [],
-          "observationDefinations": null,
-          "dataComponent": [
-            {
-              "id": 1803,
-              "permittedDataType": "Range",
-              "permittedUnit": "Number",
-              "qualifiedValue": [
-                {
-                  "id": 1905,
-                  "isRange": true,
-                  "value": "3.0",
-                  "rangeCategory": "Absolute",
-                  "gender": "Male",
-                  "range": {
-                    "id": 1854,
-                    "low": 1.1,
-                    "high": null
-                  },
-                  "observationDefinition": {
-                    "id": 1753,
-                    "name": null,
-                    "description": null,
-                    "category": null,
-                    "code": null,
-                    "bodySite": null,
-                    "method": null,
-                    "jurisdiction": null,
-                    "observationDefinition": null
-                  },
-                  "dataComponent": {
-                    "id": 1803,
-                    "permittedDataType": null,
-                    "permittedUnit": null,
-                    "observationDefinition": null
+              ],
+              "relatedImage": [
+                  {
+                      "id": 1425,
+                      "imageTitle": "LEFT EYE LogMAR",
+                      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
+                      "fileType": "JPEG"
                   }
-                },
-                {
-                  "id": 1906,
-                  "isRange": true,
-                  "value": "2.0",
-                  "rangeCategory": "Absolute",
-                  "gender": "Male",
-                  "range": {
-                    "id": 1855,
-                    "low": 0.5,
-                    "high": 1
-                  },
-                  "observationDefinition": {
-                    "id": 1753,
-                    "name": null,
-                    "description": null,
-                    "category": null,
-                    "code": null,
-                    "bodySite": null,
-                    "method": null,
-                    "jurisdiction": null,
-                    "observationDefinition": null
-                  },
-                  "dataComponent": {
-                    "id": 1803,
-                    "permittedDataType": null,
-                    "permittedUnit": null,
-                    "observationDefinition": null
+              ],
+              "qualifiedValue": [],
+              "languageBasedText": []
+          },
+          {
+              "id": 1752,
+              "name": "Eye Observation",
+              "description": "1801",
+              "category": "Exam",
+              "code": "Eye",
+              "bodySite": "RIGHT_EYE",
+              "method": "Eye",
+              "jurisdiction": "ALL",
+              "observationDefinition": [],
+              "observationDefinations": null,
+              "dataComponent": [
+                  {
+                      "id": 1801,
+                      "permittedDataType": "Range",
+                      "permittedUnit": "Number",
+                      "qualifiedValue": [
+                          {
+                              "id": 1901,
+                              "isRange": true,
+                              "value": "3.0",
+                              "rangeCategory": "Absolute",
+                              "gender": "Male",
+                              "range": {
+                                  "id": 1851,
+                                  "low": 1.1,
+                                  "high": null
+                              },
+                              "observationDefinition": null,
+                              "dataComponent": {
+                                  "id": 1801,
+                                  "permittedDataType": null,
+                                  "permittedUnit": null,
+                                  "observationDefinition": null
+                              }
+                          },
+                          {
+                              "id": 1902,
+                              "isRange": true,
+                              "value": "2.0",
+                              "rangeCategory": "Absolute",
+                              "gender": "Male",
+                              "range": {
+                                  "id": 1852,
+                                  "low": 0.5,
+                                  "high": 1
+                              },
+                              "observationDefinition": null,
+                              "dataComponent": {
+                                  "id": 1801,
+                                  "permittedDataType": null,
+                                  "permittedUnit": null,
+                                  "observationDefinition": null
+                              }
+                          }
+                      ]
                   }
-                }
-              ]
-            }
-          ],
-          "relatedImage": [
-            {
-              "id": 2205,
-              "imageTitle": "RIGHT EYE LogMAR",
-              "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
-              "fileType": "JPEG"
-            }
-          ],
-          "qualifiedValue": [],
-          "languageBasedText": []
-        }
+              ],
+              "relatedImage": [
+                  {
+                      "id": 1951,
+                      "imageTitle": "RIGHT EYE LogMAR",
+                      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
+                      "fileType": "JPEG"
+                  }
+              ],
+              "qualifiedValue": [],
+              "languageBasedText": []
+          }
       ],
       "observationDefinations": null,
       "dataComponent": [
-        {
-          "id": 1801,
-          "permittedDataType": "Range",
-          "permittedUnit": "Number",
-          "qualifiedValue": [
-            {
-              "id": 1901,
-              "isRange": true,
-              "value": "3.0",
-              "rangeCategory": "Absolute",
-              "gender": "Male",
-              "range": {
-                "id": 1851,
-                "low": 1.1,
-                "high": null
-              },
-              "observationDefinition": {
-                "id": 1751,
-                "name": null,
-                "description": null,
-                "category": null,
-                "code": null,
-                "bodySite": null,
-                "method": null,
-                "jurisdiction": null,
-                "observationDefinition": null
-              },
-              "dataComponent": {
-                "id": 1801,
-                "permittedDataType": null,
-                "permittedUnit": null,
-                "observationDefinition": null
-              }
-            },
-            {
-              "id": 1902,
-              "isRange": true,
-              "value": "2.0",
-              "rangeCategory": "Absolute",
-              "gender": "Male",
-              "range": {
-                "id": 1852,
-                "low": 0.5,
-                "high": 1
-              },
-              "observationDefinition": {
-                "id": 1751,
-                "name": null,
-                "description": null,
-                "category": null,
-                "code": null,
-                "bodySite": null,
-                "method": null,
-                "jurisdiction": null,
-                "observationDefinition": null
-              },
-              "dataComponent": {
-                "id": 1801,
-                "permittedDataType": null,
-                "permittedUnit": null,
-                "observationDefinition": null
-              }
-            }
-          ]
-        }
+          {
+              "id": 1601,
+              "permittedDataType": "Range",
+              "permittedUnit": "Number",
+              "qualifiedValue": [
+                  {
+                      "id": 1701,
+                      "isRange": true,
+                      "value": "3.0",
+                      "rangeCategory": "Absolute",
+                      "gender": "Male",
+                      "range": {
+                          "id": 1651,
+                          "low": 1.1,
+                          "high": null
+                      },
+                      "observationDefinition": null,
+                      "dataComponent": {
+                          "id": 1601,
+                          "permittedDataType": null,
+                          "permittedUnit": null,
+                          "observationDefinition": null
+                      }
+                  },
+                  {
+                      "id": 1702,
+                      "isRange": true,
+                      "value": "2.0",
+                      "rangeCategory": "Absolute",
+                      "gender": "Male",
+                      "range": {
+                          "id": 1652,
+                          "low": 0.5,
+                          "high": 1
+                      },
+                      "observationDefinition": null,
+                      "dataComponent": {
+                          "id": 1601,
+                          "permittedDataType": null,
+                          "permittedUnit": null,
+                          "observationDefinition": null
+                      }
+                  }
+              ]
+          }
       ],
       "relatedImage": [
-        {
-          "id": 2203,
-          "imageTitle": "Both Eyes LogMAR",
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9b5a6l0g0Vuixg4cJfjINhtz1ec49Nnif0g&usqp=CAU",
-          "fileType": "JPEG"
-        }
+          {
+              "id": 1423,
+              "imageTitle": "Both_Eyes Eye retina",
+              "url": "http://infy.com/bothEyeRetina",
+              "fileType": "JPEG"
+          }
       ],
       "qualifiedValue": [],
       "languageBasedText": []
-    },
-    "questionnaire": {
+  },
+  "questionnaire": {
       "id": 1001,
       "name": "Eye-1",
       "title": "Eye questionnaire",
@@ -321,2144 +272,2144 @@
       "publisherType": "Experimental",
       "questionnaire": null,
       "questionnaireItem": [
-        {
-          "id": 1101,
-          "order": 1,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Please respond depending on whether you experience the symptoms mentioned. The illustrations accompanying the questions are only to explain the symptoms, do not base your answers on what you see in the illustration alone.",
-          "type": "Group",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [
-            {
-              "id": 1401,
-              "operator": "EQUALS",
-              "actionType": "EXIT_QUESTIONNAIRE",
-              "answer": {
-                "id": 1201,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": null,
-                "answerItemWeight": {
-                  "id": 1251,
-                  "value": 0,
-                  "answerId": 1201,
-                  "questionResponseWeight": {
-                    "id": 1151,
-                    "quesId": 1101,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1051,
+              "order": 1,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Please respond depending on whether you experience the symptoms mentioned. The illustrations accompanying the questions are only to explain the symptoms, do not base your answers on what you see in the illustration alone.",
+              "type": "Group",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [
+                  {
+                      "id": 1351,
+                      "operator": "EQUALS",
+                      "actionType": "EXIT_QUESTIONNAIRE",
+                      "answer": {
+                          "id": 1102,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": null,
+                          "answerItemWeight": {
+                              "id": 1201,
+                              "value": 0,
+                              "answerId": 1102,
+                              "questionResponseWeight": {
+                                  "id": 1151,
+                                  "quesId": 1051,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            }
-          ],
-          "answerOption": [
-            {
-              "id": 1301,
-              "intialSelected": false,
-              "answer": {
-                "id": 1201,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 1251,
-                  "value": 0,
-                  "answerId": 1201,
-                  "questionResponseWeight": {
-                    "id": 1151,
-                    "quesId": 1101,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "answerOption": [
+                  {
+                      "id": 1251,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1102,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1201,
+                              "value": 0,
+                              "answerId": 1102,
+                              "questionResponseWeight": {
+                                  "id": 1151,
+                                  "quesId": 1051,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1252,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1101,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "I have understood and am ready to proceed",
+                          "answerItemWeight": {
+                              "id": 1202,
+                              "value": 0,
+                              "answerId": 1101,
+                              "questionResponseWeight": {
+                                  "id": 1151,
+                                  "quesId": 1051,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 1302,
-              "intialSelected": false,
-              "answer": {
-                "id": 1202,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "I have understood and am ready to proceed",
-                "answerItemWeight": {
-                  "id": 1252,
-                  "value": 0,
-                  "answerId": 1202,
-                  "questionResponseWeight": {
-                    "id": 1151,
-                    "quesId": 1101,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
-                  }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 1151,
-            "quesId": 1101,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1151,
+                  "quesId": 1051,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": []
           },
-          "relatedImage": []
-        },
-        {
-          "id": 1451,
-          "order": 2,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "When you look at a light source like bulb/lamp/vehicle headlight, etc. , do you see halos or colored rings around them?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 1651,
-              "intialSelected": false,
-              "answer": {
-                "id": 1551,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 1601,
-                  "value": 0,
-                  "answerId": 1551,
-                  "questionResponseWeight": {
-                    "id": 1501,
-                    "quesId": 1451,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1052,
+              "order": 2,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "When you look at a light source like bulb/lamp/vehicle headlight, etc. , do you see halos or colored rings around them?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1253,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1103,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1203,
+                              "value": 0,
+                              "answerId": 1103,
+                              "questionResponseWeight": {
+                                  "id": 1152,
+                                  "quesId": 1052,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1254,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1104,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I see halos/rings around lights",
+                          "answerItemWeight": {
+                              "id": 1204,
+                              "value": 3,
+                              "answerId": 1104,
+                              "questionResponseWeight": {
+                                  "id": 1152,
+                                  "quesId": 1052,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 1652,
-              "intialSelected": false,
-              "answer": {
-                "id": 1552,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I see halos/rings around lights",
-                "answerItemWeight": {
-                  "id": 1602,
-                  "value": 3,
-                  "answerId": 1552,
-                  "questionResponseWeight": {
-                    "id": 1501,
-                    "quesId": 1451,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1152,
+                  "quesId": 1052,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1401,
+                      "imageTitle": "Colored halos would look something like this when you look at a light. It can look different than this too.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707135335982-5d3edc17-2a73-4c3f-8439-23a973bc7b61",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 1501,
-            "quesId": 1451,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2252,
-              "imageTitle": "Colored halos would look something like this when you look at a light. It can look different than this too.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703152033034-a6da81e3-19e2-4223-9462-a427d5f9db9c",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 1452,
-          "order": 3,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Is your vision blocked partly or completely with dark shapes?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2451,
-              "intialSelected": false,
-              "answer": {
-                "id": 2351,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2401,
-                  "value": 0,
-                  "answerId": 2351,
-                  "questionResponseWeight": {
-                    "id": 2301,
-                    "quesId": 1452,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1053,
+              "order": 3,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Is your vision blocked partly or completely with dark shapes?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1255,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1106,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1205,
+                              "value": 0,
+                              "answerId": 1106,
+                              "questionResponseWeight": {
+                                  "id": 1153,
+                                  "quesId": 1053,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1256,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1105,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have dark shapes blocking my vision",
+                          "answerItemWeight": {
+                              "id": 1206,
+                              "value": 2,
+                              "answerId": 1105,
+                              "questionResponseWeight": {
+                                  "id": 1153,
+                                  "quesId": 1053,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2452,
-              "intialSelected": false,
-              "answer": {
-                "id": 2352,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have dark shapes blocking my vision",
-                "answerItemWeight": {
-                  "id": 2402,
-                  "value": 2,
-                  "answerId": 2352,
-                  "questionResponseWeight": {
-                    "id": 2301,
-                    "quesId": 1452,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1153,
+                  "quesId": 1053,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1402,
+                      "imageTitle": "The shapes may appear like this or slightly different.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707136505067-bc5dd78f-0ba4-406f-89be-39775b87e634",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2301,
-            "quesId": 1452,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2251,
-              "imageTitle": "The shapes may appear like this or slightly different.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703153729958-0515d046-423c-44f9-ad50-29c6da44f52d",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2501,
-          "order": 4,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "When you look at people or objects, do you see two images of them?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2453,
-              "intialSelected": false,
-              "answer": {
-                "id": 2354,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have double vision",
-                "answerItemWeight": {
-                  "id": 2404,
-                  "value": 2,
-                  "answerId": 2354,
-                  "questionResponseWeight": {
-                    "id": 2302,
-                    "quesId": 2501,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1054,
+              "order": 4,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "When you look at people or objects, do you see two images of them?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1257,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1107,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1208,
+                              "value": 0,
+                              "answerId": 1107,
+                              "questionResponseWeight": {
+                                  "id": 1154,
+                                  "quesId": 1054,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1258,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1108,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have double vision",
+                          "answerItemWeight": {
+                              "id": 1209,
+                              "value": 2,
+                              "answerId": 1108,
+                              "questionResponseWeight": {
+                                  "id": 1154,
+                                  "quesId": 1054,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2454,
-              "intialSelected": false,
-              "answer": {
-                "id": 2353,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2403,
-                  "value": 0,
-                  "answerId": 2353,
-                  "questionResponseWeight": {
-                    "id": 2302,
-                    "quesId": 2501,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1154,
+                  "quesId": 1054,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1403,
+                      "imageTitle": "The double image may look like this.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707136722211-84a46692-d243-45ae-8245-d9833c445c38",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2302,
-            "quesId": 2501,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2253,
-              "imageTitle": "The double image may look like this.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703154824148-504bbd96-db7f-4168-b365-a8d06882c4c8",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2502,
-          "order": 5,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you have pain or discomfort when viewing bright light?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2551,
-              "intialSelected": false,
-              "answer": {
-                "id": 2356,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have pain/discomfort when I look at light.",
-                "answerItemWeight": {
-                  "id": 2406,
-                  "value": 2,
-                  "answerId": 2356,
-                  "questionResponseWeight": {
-                    "id": 2303,
-                    "quesId": 2502,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1055,
+              "order": 5,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you have pain or discomfort when viewing bright light?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1259,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1109,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1210,
+                              "value": 0,
+                              "answerId": 1109,
+                              "questionResponseWeight": {
+                                  "id": 1155,
+                                  "quesId": 1055,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1260,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1110,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have pain/discomfort when I look at light.",
+                          "answerItemWeight": {
+                              "id": 1211,
+                              "value": 2,
+                              "answerId": 1110,
+                              "questionResponseWeight": {
+                                  "id": 1155,
+                                  "quesId": 1055,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2552,
-              "intialSelected": false,
-              "answer": {
-                "id": 2355,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2405,
-                  "value": 0,
-                  "answerId": 2355,
-                  "questionResponseWeight": {
-                    "id": 2303,
-                    "quesId": 2502,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1155,
+                  "quesId": 1055,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1404,
+                      "imageTitle": "0",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707136899242-e36a64de-4cac-4726-aee9-e75fd8874843",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2303,
-            "quesId": 2502,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2601,
-              "imageTitle": "0",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703155274969-99d6b9af-0461-4d70-b8dd-250365a68c5b",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2651,
-          "order": 6,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do straight lines or objects appear wavy, bent, or have irregular shapes?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2851,
-              "intialSelected": false,
-              "answer": {
-                "id": 2702,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I see wavy lines/irregular shapes",
-                "answerItemWeight": {
-                  "id": 2802,
-                  "value": 2,
-                  "answerId": 2702,
-                  "questionResponseWeight": {
-                    "id": 2751,
-                    "quesId": 2651,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1056,
+              "order": 6,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do straight lines or objects appear wavy, bent, or have irregular shapes?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1261,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1111,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1212,
+                              "value": 0,
+                              "answerId": 1111,
+                              "questionResponseWeight": {
+                                  "id": 1156,
+                                  "quesId": 1056,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1262,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1112,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I see wavy lines/irregular shapes",
+                          "answerItemWeight": {
+                              "id": 1213,
+                              "value": 2,
+                              "answerId": 1112,
+                              "questionResponseWeight": {
+                                  "id": 1156,
+                                  "quesId": 1056,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2852,
-              "intialSelected": false,
-              "answer": {
-                "id": 2701,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2801,
-                  "value": 0,
-                  "answerId": 2701,
-                  "questionResponseWeight": {
-                    "id": 2751,
-                    "quesId": 2651,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1156,
+                  "quesId": 1056,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1405,
+                      "imageTitle": "The lines and shapes may look somewhat like this but can be different too.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707137379052-168db234-2afb-44f8-96b0-f913b29d8693",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2751,
-            "quesId": 2651,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2901,
-              "imageTitle": "The lines and shapes may look somewhat like this but can be different too.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703155492831-a028ecd6-094b-41b3-93bf-8ccd0fc5540d",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2652,
-          "order": 7,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you see flashes and flickers when viewing objects?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2853,
-              "intialSelected": false,
-              "answer": {
-                "id": 2704,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I see flashes and flickers",
-                "answerItemWeight": {
-                  "id": 2804,
-                  "value": 2,
-                  "answerId": 2704,
-                  "questionResponseWeight": {
-                    "id": 2752,
-                    "quesId": 2652,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1057,
+              "order": 7,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you see flashes and flickers when viewing objects?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1263,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1113,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1214,
+                              "value": 0,
+                              "answerId": 1113,
+                              "questionResponseWeight": {
+                                  "id": 1157,
+                                  "quesId": 1057,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1264,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1114,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I see flashes and flickers",
+                          "answerItemWeight": {
+                              "id": 1215,
+                              "value": 2,
+                              "answerId": 1114,
+                              "questionResponseWeight": {
+                                  "id": 1157,
+                                  "quesId": 1057,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2854,
-              "intialSelected": false,
-              "answer": {
-                "id": 2703,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2803,
-                  "value": 0,
-                  "answerId": 2703,
-                  "questionResponseWeight": {
-                    "id": 2752,
-                    "quesId": 2652,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1157,
+                  "quesId": 1057,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1406,
+                      "imageTitle": "The flashes and flickers can be different for different people.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707137875931-9268f486-3600-4c78-8ff4-54e498d9cf3f",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2752,
-            "quesId": 2652,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2902,
-              "imageTitle": "The flashes and flickers can be different for different people.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703155672429-6ca849e4-cd0f-43f3-b589-bd3b7a14f167",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2653,
-          "order": 8,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you see dark spots or hazy thread-like shapes floating/moving across your vision?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2855,
-              "intialSelected": false,
-              "answer": {
-                "id": 2706,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I see floaters/dark spots",
-                "answerItemWeight": {
-                  "id": 2806,
-                  "value": 2,
-                  "answerId": 2706,
-                  "questionResponseWeight": {
-                    "id": 2753,
-                    "quesId": 2653,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1058,
+              "order": 8,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you see dark spots or hazy thread-like shapes floating/moving across your vision?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1265,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1115,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1216,
+                              "value": 0,
+                              "answerId": 1115,
+                              "questionResponseWeight": {
+                                  "id": 1158,
+                                  "quesId": 1058,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1266,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1116,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I see floaters/dark spots",
+                          "answerItemWeight": {
+                              "id": 1217,
+                              "value": 2,
+                              "answerId": 1116,
+                              "questionResponseWeight": {
+                                  "id": 1158,
+                                  "quesId": 1058,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2856,
-              "intialSelected": false,
-              "answer": {
-                "id": 2705,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2805,
-                  "value": 0,
-                  "answerId": 2705,
-                  "questionResponseWeight": {
-                    "id": 2753,
-                    "quesId": 2653,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1158,
+                  "quesId": 1058,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1407,
+                      "imageTitle": "The floaters can appear like this, but they can be other shapes and fewer or more in number too.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707138255579-52be3b81-d7dd-4316-a084-a2105868855a",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2753,
-            "quesId": 2653,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2903,
-              "imageTitle": "The floaters can appear like this, but they can be other shapes and fewer or more in number too.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703156181614-1ead1da7-6f24-4856-ba9d-8de928625bc3",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2654,
-          "order": 9,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you have blocked side vision that prevents you from viewing or reading properly?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2857,
-              "intialSelected": false,
-              "answer": {
-                "id": 2708,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have blocked side vision",
-                "answerItemWeight": {
-                  "id": 2808,
-                  "value": 3,
-                  "answerId": 2708,
-                  "questionResponseWeight": {
-                    "id": 2754,
-                    "quesId": 2654,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1059,
+              "order": 9,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you have blocked side vision that prevents you from viewing or reading properly?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1267,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1117,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1218,
+                              "value": 0,
+                              "answerId": 1117,
+                              "questionResponseWeight": {
+                                  "id": 1159,
+                                  "quesId": 1059,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1268,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1118,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have blocked side vision",
+                          "answerItemWeight": {
+                              "id": 1219,
+                              "value": 3,
+                              "answerId": 1118,
+                              "questionResponseWeight": {
+                                  "id": 1159,
+                                  "quesId": 1059,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2858,
-              "intialSelected": false,
-              "answer": {
-                "id": 2707,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2807,
-                  "value": 0,
-                  "answerId": 2707,
-                  "questionResponseWeight": {
-                    "id": 2754,
-                    "quesId": 2654,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1159,
+                  "quesId": 1059,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1412,
+                      "imageTitle": "Blocked vision appears somewhat like this, but can look different in your specific case.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707143166354-3c5cfd66-164e-43e7-9e36-8e16e2e1a167",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2754,
-            "quesId": 2654,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2904,
-              "imageTitle": "Blocked vision appears somewhat like this, but can look different in your specific case.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703156341211-7bbc9269-7c54-4a3f-aa16-33ed9e0bddff",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 9001,
-          "order": 10,
-          "linkId": "1.0",
-          "prefix": "String",
-          "text": "Do you have any other symptoms?",
-          "type": "Group",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [
-            {
-              "id": 9251,
-              "operator": "EQUALS",
-              "actionType": "EXIT_QUESTIONNAIRE",
-              "answer": {
-                "id": 9051,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": null,
-                "answerItemWeight": {
-                  "id": 9151,
-                  "value": 0,
-                  "answerId": 9051,
-                  "questionResponseWeight": {
-                    "id": 9101,
-                    "quesId": 9001,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1060,
+              "order": 10,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you have any other symptoms?",
+              "type": "Group",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [
+                  {
+                      "id": 1352,
+                      "operator": "EQUALS",
+                      "actionType": "EXIT_QUESTIONNAIRE",
+                      "answer": {
+                          "id": 1120,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": null,
+                          "answerItemWeight": {
+                              "id": 1220,
+                              "value": 0,
+                              "answerId": 1120,
+                              "questionResponseWeight": {
+                                  "id": 1160,
+                                  "quesId": 1060,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            }
-          ],
-          "answerOption": [
-            {
-              "id": 9201,
-              "intialSelected": false,
-              "answer": {
-                "id": 9051,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 9151,
-                  "value": 0,
-                  "answerId": 9051,
-                  "questionResponseWeight": {
-                    "id": 9101,
-                    "quesId": 9001,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "answerOption": [
+                  {
+                      "id": 1269,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1120,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1220,
+                              "value": 0,
+                              "answerId": 1120,
+                              "questionResponseWeight": {
+                                  "id": 1160,
+                                  "quesId": 1060,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1270,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1119,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes",
+                          "answerItemWeight": {
+                              "id": 1221,
+                              "value": 0,
+                              "answerId": 1119,
+                              "questionResponseWeight": {
+                                  "id": 1160,
+                                  "quesId": 1060,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 9202,
-              "intialSelected": false,
-              "answer": {
-                "id": 9052,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes",
-                "answerItemWeight": {
-                  "id": 9152,
-                  "value": 0,
-                  "answerId": 9052,
-                  "questionResponseWeight": {
-                    "id": 9101,
-                    "quesId": 9001,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
-                  }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 9101,
-            "quesId": 9001,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1160,
+                  "quesId": 1060,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": []
           },
-          "relatedImage": []
-        },
-        {
-          "id": 2655,
-          "order": 11,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Does tears flow out of your eyes often?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2859,
-              "intialSelected": false,
-              "answer": {
-                "id": 2710,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, Tears flows out of my eyes",
-                "answerItemWeight": {
-                  "id": 2810,
-                  "value": 3,
-                  "answerId": 2710,
-                  "questionResponseWeight": {
-                    "id": 2755,
-                    "quesId": 2655,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1061,
+              "order": 11,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Does tears flow out of your eyes often?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1271,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1121,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1222,
+                              "value": 0,
+                              "answerId": 1121,
+                              "questionResponseWeight": {
+                                  "id": 1161,
+                                  "quesId": 1061,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1272,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1122,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, Tears flows out of my eyes",
+                          "answerItemWeight": {
+                              "id": 1223,
+                              "value": 3,
+                              "answerId": 1122,
+                              "questionResponseWeight": {
+                                  "id": 1161,
+                                  "quesId": 1061,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2860,
-              "intialSelected": false,
-              "answer": {
-                "id": 2709,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2809,
-                  "value": 0,
-                  "answerId": 2709,
-                  "questionResponseWeight": {
-                    "id": 2755,
-                    "quesId": 2655,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1161,
+                  "quesId": 1061,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1411,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707142920324-a8bfb041-8b48-4fa5-815d-44aec13ae90f",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2755,
-            "quesId": 2655,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2905,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703156878819-05d4cb1a-4405-4880-88f0-0c26a4e46809",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2656,
-          "order": 12,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Does the white part of your eye look red with pain itching or swelling in eyes?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2861,
-              "intialSelected": false,
-              "answer": {
-                "id": 2712,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have pain/itching/swelling",
-                "answerItemWeight": {
-                  "id": 2812,
-                  "value": 3,
-                  "answerId": 2712,
-                  "questionResponseWeight": {
-                    "id": 2756,
-                    "quesId": 2656,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1062,
+              "order": 12,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Does the white part of your eye look red with pain itching or swelling in eyes?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1273,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1124,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1224,
+                              "value": 0,
+                              "answerId": 1124,
+                              "questionResponseWeight": {
+                                  "id": 1162,
+                                  "quesId": 1062,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1274,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1123,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have pain/itching/swelling",
+                          "answerItemWeight": {
+                              "id": 1225,
+                              "value": 3,
+                              "answerId": 1123,
+                              "questionResponseWeight": {
+                                  "id": 1162,
+                                  "quesId": 1062,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2862,
-              "intialSelected": false,
-              "answer": {
-                "id": 2711,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2811,
-                  "value": 0,
-                  "answerId": 2711,
-                  "questionResponseWeight": {
-                    "id": 2756,
-                    "quesId": 2656,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1162,
+                  "quesId": 1062,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1410,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707142579254-8c79177c-cafa-483c-9d32-0850274a5833",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2756,
-            "quesId": 2656,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2906,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157001859-b207ded2-7994-4fba-a32d-98f59e4e2d28",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 2657,
-          "order": 13,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do your eyes stick when you wake up?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 2863,
-              "intialSelected": false,
-              "answer": {
-                "id": 2714,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have sticky eyes when I wake up",
-                "answerItemWeight": {
-                  "id": 2814,
-                  "value": 3,
-                  "answerId": 2714,
-                  "questionResponseWeight": {
-                    "id": 2760,
-                    "quesId": 2657,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1063,
+              "order": 13,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do your eyes stick when you wake up?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1275,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1125,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1226,
+                              "value": 0,
+                              "answerId": 1125,
+                              "questionResponseWeight": {
+                                  "id": 1163,
+                                  "quesId": 1063,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1276,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1126,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have sticky eyes when I wake up",
+                          "answerItemWeight": {
+                              "id": 1227,
+                              "value": 3,
+                              "answerId": 1126,
+                              "questionResponseWeight": {
+                                  "id": 1163,
+                                  "quesId": 1063,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 2864,
-              "intialSelected": false,
-              "answer": {
-                "id": 2713,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 2813,
-                  "value": 0,
-                  "answerId": 2713,
-                  "questionResponseWeight": {
-                    "id": 2760,
-                    "quesId": 2657,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1163,
+                  "quesId": 1063,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1409,
+                      "imageTitle": "Do your eyes stick when you wake up?",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707142347922-bf0d909e-2be7-40bd-9095-884b77cbfe3a",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 2760,
-            "quesId": 2657,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 2907,
-              "imageTitle": "Do your eyes stick when you wake up?",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157115710-f3b38ae8-e597-4222-b0c7-09ee88577d83",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8401,
-          "order": 14,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you have white spots on the black part of your eye?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8601,
-              "intialSelected": false,
-              "answer": {
-                "id": 8451,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8551,
-                  "value": 0,
-                  "answerId": 8451,
-                  "questionResponseWeight": {
-                    "id": 8501,
-                    "quesId": 8401,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1064,
+              "order": 14,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you have white spots on the black part of your eye?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1277,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1128,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1228,
+                              "value": 0,
+                              "answerId": 1128,
+                              "questionResponseWeight": {
+                                  "id": 1164,
+                                  "quesId": 1064,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1278,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1127,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have white spots on the pupils",
+                          "answerItemWeight": {
+                              "id": 1229,
+                              "value": 3,
+                              "answerId": 1127,
+                              "questionResponseWeight": {
+                                  "id": 1164,
+                                  "quesId": 1064,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8602,
-              "intialSelected": false,
-              "answer": {
-                "id": 8452,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have white spots on the pupils",
-                "answerItemWeight": {
-                  "id": 8552,
-                  "value": 3,
-                  "answerId": 8452,
-                  "questionResponseWeight": {
-                    "id": 8501,
-                    "quesId": 8401,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1164,
+                  "quesId": 1064,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1408,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707142171251-ea6a248c-8317-4b5d-9b1f-f56372866e3e",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8501,
-            "quesId": 8401,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8651,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157287129-571e062d-b593-4b90-a3b4-0636f45e9530",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8402,
-          "order": 15,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you have irritation in eyes with itching burning or pain?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8603,
-              "intialSelected": false,
-              "answer": {
-                "id": 8454,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8553,
-                  "value": 0,
-                  "answerId": 8454,
-                  "questionResponseWeight": {
-                    "id": 8502,
-                    "quesId": 8402,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1065,
+              "order": 15,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you have irritation in eyes with itching burning or pain?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1279,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1129,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1230,
+                              "value": 0,
+                              "answerId": 1129,
+                              "questionResponseWeight": {
+                                  "id": 1165,
+                                  "quesId": 1065,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1280,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1130,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, I have irritation in eyes",
+                          "answerItemWeight": {
+                              "id": 1231,
+                              "value": 3,
+                              "answerId": 1130,
+                              "questionResponseWeight": {
+                                  "id": 1165,
+                                  "quesId": 1065,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8604,
-              "intialSelected": false,
-              "answer": {
-                "id": 8453,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, I have irritation in eyes",
-                "answerItemWeight": {
-                  "id": 8554,
-                  "value": 3,
-                  "answerId": 8453,
-                  "questionResponseWeight": {
-                    "id": 8502,
-                    "quesId": 8402,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1165,
+                  "quesId": 1065,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1413,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707143357447-bd437f2b-92cd-4b56-8b6e-7dc40f5d33ec",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8502,
-            "quesId": 8402,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8652,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157389777-b85c2007-eadd-4ed3-bcd9-ce7954e5459a",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8403,
-          "order": 16,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Did particles of dust, wood, glass, metal or an insect get into your eye?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8605,
-              "intialSelected": false,
-              "answer": {
-                "id": 8455,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8555,
-                  "value": 0,
-                  "answerId": 8455,
-                  "questionResponseWeight": {
-                    "id": 8503,
-                    "quesId": 8403,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1066,
+              "order": 16,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Did particles of dust, wood, glass, metal or an insect get into your eye?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1281,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1131,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1232,
+                              "value": 0,
+                              "answerId": 1131,
+                              "questionResponseWeight": {
+                                  "id": 1166,
+                                  "quesId": 1066,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1282,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1132,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, something got into my eye",
+                          "answerItemWeight": {
+                              "id": 1233,
+                              "value": 3,
+                              "answerId": 1132,
+                              "questionResponseWeight": {
+                                  "id": 1166,
+                                  "quesId": 1066,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8606,
-              "intialSelected": false,
-              "answer": {
-                "id": 8457,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, something got into my eye",
-                "answerItemWeight": {
-                  "id": 8556,
-                  "value": 3,
-                  "answerId": 8457,
-                  "questionResponseWeight": {
-                    "id": 8503,
-                    "quesId": 8403,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1166,
+                  "quesId": 1066,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1414,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707143920437-23d684c8-a542-4553-8d10-69b18546a174",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8503,
-            "quesId": 8403,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8653,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157495765-30bef977-b585-40d8-ac7e-2ad44180afaa",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8404,
-          "order": 17,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do your eyelids twitch uncontrollably with jerky contractions?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8607,
-              "intialSelected": false,
-              "answer": {
-                "id": 8456,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8557,
-                  "value": 0,
-                  "answerId": 8456,
-                  "questionResponseWeight": {
-                    "id": 8504,
-                    "quesId": 8404,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1067,
+              "order": 17,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do your eyelids twitch uncontrollably with jerky contractions?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1283,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1133,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1234,
+                              "value": 0,
+                              "answerId": 1133,
+                              "questionResponseWeight": {
+                                  "id": 1167,
+                                  "quesId": 1067,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1284,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1134,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, my eyelids twitch",
+                          "answerItemWeight": {
+                              "id": 1235,
+                              "value": 2,
+                              "answerId": 1134,
+                              "questionResponseWeight": {
+                                  "id": 1167,
+                                  "quesId": 1067,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8608,
-              "intialSelected": false,
-              "answer": {
-                "id": 8458,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, my eyelids twitch",
-                "answerItemWeight": {
-                  "id": 8558,
-                  "value": 2,
-                  "answerId": 8458,
-                  "questionResponseWeight": {
-                    "id": 8504,
-                    "quesId": 8404,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1167,
+                  "quesId": 1067,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1415,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707144119269-c4f4e6ea-71bb-4574-9f6f-f1f354a3e4f1",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8504,
-            "quesId": 8404,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8654,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157672547-07db4292-57da-4ab3-a6aa-188f44d933f7",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8405,
-          "order": 18,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do your eyes close and open uncontrollably and rapidly?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8609,
-              "intialSelected": false,
-              "answer": {
-                "id": 8461,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8559,
-                  "value": 0,
-                  "answerId": 8461,
-                  "questionResponseWeight": {
-                    "id": 8505,
-                    "quesId": 8405,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1068,
+              "order": 18,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do your eyes close and open uncontrollably and rapidly?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1285,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1135,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1236,
+                              "value": 0,
+                              "answerId": 1135,
+                              "questionResponseWeight": {
+                                  "id": 1168,
+                                  "quesId": 1068,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1286,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1136,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, my eyes close and open rapidly",
+                          "answerItemWeight": {
+                              "id": 1237,
+                              "value": 2,
+                              "answerId": 1136,
+                              "questionResponseWeight": {
+                                  "id": 1168,
+                                  "quesId": 1068,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8610,
-              "intialSelected": false,
-              "answer": {
-                "id": 8459,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, my eyes close and open rapidly",
-                "answerItemWeight": {
-                  "id": 8560,
-                  "value": 2,
-                  "answerId": 8459,
-                  "questionResponseWeight": {
-                    "id": 8505,
-                    "quesId": 8405,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1168,
+                  "quesId": 1068,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1416,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707144243876-882d86d9-1381-4d5c-beff-1c0a700797fb",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8505,
-            "quesId": 8405,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8655,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157823859-aa71866f-29e8-42d6-89ec-d9736ce07987",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8701,
-          "order": 19,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do your eyes turn and point in different directions?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8851,
-              "intialSelected": false,
-              "answer": {
-                "id": 8462,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8801,
-                  "value": 0,
-                  "answerId": 8462,
-                  "questionResponseWeight": {
-                    "id": 8751,
-                    "quesId": 8701,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1069,
+              "order": 19,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do your eyes turn and point in different directions?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1287,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1137,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1238,
+                              "value": 0,
+                              "answerId": 1137,
+                              "questionResponseWeight": {
+                                  "id": 1169,
+                                  "quesId": 1069,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1288,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1138,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, my eyes move independently",
+                          "answerItemWeight": {
+                              "id": 1239,
+                              "value": 2,
+                              "answerId": 1138,
+                              "questionResponseWeight": {
+                                  "id": 1169,
+                                  "quesId": 1069,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8852,
-              "intialSelected": false,
-              "answer": {
-                "id": 8460,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, my eyes move independently",
-                "answerItemWeight": {
-                  "id": 8802,
-                  "value": 2,
-                  "answerId": 8460,
-                  "questionResponseWeight": {
-                    "id": 8751,
-                    "quesId": 8701,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1169,
+                  "quesId": 1069,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1417,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707144374402-353354c4-99e6-4fa3-9f97-e0df3bab4897",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8751,
-            "quesId": 8701,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8901,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703157928120-49a48330-3e1f-4388-8589-0adec1d216ab",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8702,
-          "order": 20,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do your eyes appear wide open and bulged out?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8853,
-              "intialSelected": false,
-              "answer": {
-                "id": 8951,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8803,
-                  "value": 0,
-                  "answerId": 8951,
-                  "questionResponseWeight": {
-                    "id": 8752,
-                    "quesId": 8702,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1070,
+              "order": 20,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do your eyes appear wide open and bulged out?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1289,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1139,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1240,
+                              "value": 0,
+                              "answerId": 1139,
+                              "questionResponseWeight": {
+                                  "id": 1170,
+                                  "quesId": 1070,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1290,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1140,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, my eyes appear wide and bulging",
+                          "answerItemWeight": {
+                              "id": 1241,
+                              "value": 2,
+                              "answerId": 1140,
+                              "questionResponseWeight": {
+                                  "id": 1170,
+                                  "quesId": 1070,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8854,
-              "intialSelected": false,
-              "answer": {
-                "id": 8953,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, my eyes appear wide and bulging",
-                "answerItemWeight": {
-                  "id": 8804,
-                  "value": 2,
-                  "answerId": 8953,
-                  "questionResponseWeight": {
-                    "id": 8752,
-                    "quesId": 8702,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1170,
+                  "quesId": 1070,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1418,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707144500467-51e7dd6c-3a55-47c7-9ad0-249c2ad2a19a",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8752,
-            "quesId": 8702,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8902,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703158054372-70404748-d7fa-4a8e-bb8e-4d06c11d2f5e",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8703,
-          "order": 21,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do your eyelids involuntarily hang or droop at a lower level?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8855,
-              "intialSelected": false,
-              "answer": {
-                "id": 8952,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8805,
-                  "value": 0,
-                  "answerId": 8952,
-                  "questionResponseWeight": {
-                    "id": 8753,
-                    "quesId": 8703,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1071,
+              "order": 21,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do your eyelids involuntarily hang or droop at a lower level?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1291,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1141,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1242,
+                              "value": 0,
+                              "answerId": 1141,
+                              "questionResponseWeight": {
+                                  "id": 1171,
+                                  "quesId": 1071,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1292,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1142,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, my eyelid/s droop",
+                          "answerItemWeight": {
+                              "id": 1243,
+                              "value": 2,
+                              "answerId": 1142,
+                              "questionResponseWeight": {
+                                  "id": 1171,
+                                  "quesId": 1071,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8856,
-              "intialSelected": false,
-              "answer": {
-                "id": 8954,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, my eyelid/s droop",
-                "answerItemWeight": {
-                  "id": 8806,
-                  "value": 2,
-                  "answerId": 8954,
-                  "questionResponseWeight": {
-                    "id": 8753,
-                    "quesId": 8703,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1171,
+                  "quesId": 1071,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1419,
+                      "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707144587147-9f434fa2-4b23-46ba-bd7a-17431f501b5d",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8753,
-            "quesId": 8703,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8903,
-              "imageTitle": "This image is representative. Individual cases may appear differently than the example shown.",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703158170769-97a40c17-96e7-4a93-bb7b-bc990e5aba13",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8704,
-          "order": 22,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Are your eyes of different sizes?",
-          "type": "Choice",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOnly",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [
-            {
-              "id": 8857,
-              "intialSelected": false,
-              "answer": {
-                "id": 8956,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "No",
-                "answerDisplayString": "No",
-                "answerItemWeight": {
-                  "id": 8807,
-                  "value": 0,
-                  "answerId": 8956,
-                  "questionResponseWeight": {
-                    "id": 8754,
-                    "quesId": 8704,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+          {
+              "id": 1072,
+              "order": 22,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Are your eyes of different sizes?",
+              "type": "Choice",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOnly",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [
+                  {
+                      "id": 1293,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1143,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "No",
+                          "answerDisplayString": "No",
+                          "answerItemWeight": {
+                              "id": 1244,
+                              "value": 0,
+                              "answerId": 1143,
+                              "questionResponseWeight": {
+                                  "id": 1172,
+                                  "quesId": 1072,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "id": 1294,
+                      "intialSelected": false,
+                      "answer": {
+                          "id": 1144,
+                          "answerBoolean": null,
+                          "answerDecimal": null,
+                          "answerInteger": null,
+                          "answerDate": null,
+                          "answerDateTime": null,
+                          "answerTime": null,
+                          "answerString": "Yes",
+                          "answerDisplayString": "Yes, my eyes are of different sizes",
+                          "answerItemWeight": {
+                              "id": 1245,
+                              "value": 2,
+                              "answerId": 1144,
+                              "questionResponseWeight": {
+                                  "id": 1172,
+                                  "quesId": 1072,
+                                  "isRange": false,
+                                  "isCompare": false,
+                                  "isAbsolute": true
+                              }
+                          }
+                      }
                   }
-                }
-              }
-            },
-            {
-              "id": 8858,
-              "intialSelected": false,
-              "answer": {
-                "id": 8955,
-                "answerBoolean": null,
-                "answerDecimal": null,
-                "answerInteger": null,
-                "answerDate": null,
-                "answerDateTime": null,
-                "answerTime": null,
-                "answerString": "Yes",
-                "answerDisplayString": "Yes, my eyes are of different sizes",
-                "answerItemWeight": {
-                  "id": 8808,
-                  "value": 2,
-                  "answerId": 8955,
-                  "questionResponseWeight": {
-                    "id": 8754,
-                    "quesId": 8704,
-                    "isRange": false,
-                    "isCompare": false,
-                    "isAbsolute": true
+              ],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": {
+                  "id": 1172,
+                  "quesId": 1072,
+                  "answerRangeWeight": [],
+                  "answerComparisonWeight": [],
+                  "compare": null,
+                  "absolute": null,
+                  "range": null
+              },
+              "relatedImage": [
+                  {
+                      "id": 1420,
+                      "imageTitle": "Are your eyes of different sizes?",
+                      "url": "https://healthconnecttech.org/services/filems/api/file/download/1707144654915-3b8b2cd9-f25c-4d41-a826-7e7e7baf556e",
+                      "fileType": "JPEG"
                   }
-                }
-              }
-            }
-          ],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": {
-            "id": 8754,
-            "quesId": 8704,
-            "answerRangeWeight": [],
-            "answerComparisonWeight": [],
-            "compare": null,
-            "absolute": null,
-            "range": null
+              ]
           },
-          "relatedImage": [
-            {
-              "id": 8904,
-              "imageTitle": "Are your eyes of different sizes?",
-              "url": "https://eyecare4all-dev.infosysapps.com/services/filems/api/file/download/1703158266935-a23448e4-5575-413e-88b2-221116389c89",
-              "fileType": "JPEG"
-            }
-          ]
-        },
-        {
-          "id": 8705,
-          "order": 23,
-          "linkId": "1.0",
-          "prefix": "string",
-          "text": "Do you have have any other symptoms?",
-          "type": "String",
-          "enableBehavior": "ANY",
-          "required": true,
-          "repeats": false,
-          "readOnly": false,
-          "maxlength": 100000,
-          "disabledDisplay": "PROTECTED",
-          "answerConstraint": "OptionsOrString",
-          "answerValueSet": null,
-          "initial": null,
-          "questionnaireItem": null,
-          "actionOn": [],
-          "answerOption": [],
-          "enableWhen": [],
-          "answerItemWeight": null,
-          "questionResponseWeight": null,
-          "relatedImage": []
-        }
+          {
+              "id": 1073,
+              "order": 23,
+              "linkId": "1.0",
+              "prefix": "string",
+              "text": "Do you have have any other symptoms?",
+              "type": "String",
+              "enableBehavior": "ANY",
+              "required": true,
+              "repeats": false,
+              "readOnly": false,
+              "maxlength": 100000,
+              "disabledDisplay": "PROTECTED",
+              "answerConstraint": "OptionsOrString",
+              "answerValueSet": null,
+              "initial": null,
+              "questionnaireItem": null,
+              "actionOn": [],
+              "answerOption": [],
+              "enableWhen": [],
+              "answerItemWeight": null,
+              "questionResponseWeight": null,
+              "relatedImage": []
+          }
       ],
       "languageBasedText": []
-    },
-    "observationValueWeight": []
-  }
+  },
+  "observationValueWeight": []
+}

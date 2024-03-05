@@ -37,13 +37,20 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
       StreamController<EuaOnSearchModel>.broadcast();
 
   Stream get doctorStream => _streamController.stream;
+  String? clientId;
 
   Future<void> initializeStompClient() async {
+    final completer = Completer<void>();
     logger.d("inside initializeStompClient");
     _client = StompClient(
       config: StompConfig(
-        url: ApiConstant.webSocketEua,
-        onConnect: onConnectCallback,
+        url: 'ws://eyecare4all-dev.infosysapps.com/services/eua-service/api/v1/euaService/ws-client',
+        webSocketConnectHeaders: {'x-client-id': clientId!},
+        stompConnectHeaders:  {'x-client-id': clientId!},
+        onConnect: (connectFrame) {
+        onConnectCallback(connectFrame);
+        completer.complete();
+      },
         onWebSocketError: (dynamic error) =>
             logger.e("onWebSocketError : $error"),
         onStompError: (StompFrame frame) => logger.e("onStompError : $frame"),
@@ -51,9 +58,11 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
       ),
     );
     _client.activate();
-    if (_client.isActive) {
+     if (_client.isActive) {
       logger.f("client is active");
     }
+    await completer.future;
+   
   }
 
   onConnectCallback(StompFrame connectFrame) {
@@ -71,11 +80,16 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
   }
 
   void getDoctorsList() async {
+    final completer = Completer<void>();
     logger.d('Connected to the broker');
     _client.subscribe(
-      destination: '/topic/return',
-      callback: getDoctorosData,
+      destination: '/user/topic/return',
+      callback: (frame) {
+      getDoctorosData(frame);
+      completer.complete();
+    },
     );
+    await completer.future;
     notifyListeners();
     // logger.e('Received data from Eua: ${doctorsList.toString()}');
   }
@@ -96,8 +110,12 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     try {
       var response = await dio.post(endpoint, data: jsonEncode(uhiSearchModel));
       if (response.statusCode == 200) {
+        
         logger.d("sent data successfully");
         var jsonResponse = response.data;
+        clientId = response.headers.value('x-client-id').toString();
+        logger.f("response data is : ${clientId}");
+        logger.d("response data is : ${response.headers}");
         var status = jsonResponse['message']['ack']['status'];
         if (status == 'ACK') {
           logger.f('Response has status ACK');

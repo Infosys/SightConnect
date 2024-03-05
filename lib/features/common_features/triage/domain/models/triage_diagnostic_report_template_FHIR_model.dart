@@ -33,6 +33,7 @@ class DiagnosticReportTemplateFHIRModel
           {int? id,
           String? name,
           int? organizationCode,
+          int? tenantCode,
           Category? category,
           BodySite? bodySite,
           TestCode? code,

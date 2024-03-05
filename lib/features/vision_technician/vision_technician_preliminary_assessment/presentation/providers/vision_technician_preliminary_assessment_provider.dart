@@ -117,7 +117,7 @@ class VtTriageProvider extends ChangeNotifier {
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: patientDetails.id,
       serviceType: ServiceType.OPTOMETRY,
-      organizationCode: assessment.organizationCode,
+      organizationCode: assessment.tenantCode,
       performer: [
         Performer(
           role: PerformerRole.VISION_TECHNICIAN,
@@ -167,7 +167,7 @@ class VtTriageProvider extends ChangeNotifier {
 
     int? reportId = triageResponse?.id;
     int? encounterId = triageResponse?.encounter?.id;
-    int? organizationCode = assessment.organizationCode;
+    int? organizationCode = assessment.tenantCode;
     Either<Failure, CarePlanPostModel>? carePlanResponse;
 
     if (organizationCode != null && reportId != null && encounterId != null) {

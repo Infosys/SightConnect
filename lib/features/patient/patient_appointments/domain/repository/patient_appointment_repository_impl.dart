@@ -22,10 +22,11 @@ class PatientAppointmentRepositoryImpl extends PatientAppointmentRepository {
     try {
       log("sendAppointmentDetails called from IMPL and the data is : $uhiSearchModel");
   
-        await remoteDataSource.initializeStompClient();
+       
      
       final data =
           await remoteDataSource.sendAppointmentDetails(uhiSearchModel);
+       await remoteDataSource.initializeStompClient();
       if (data) {
         Fluttertoast.showToast(msg: "Data Posted Successfully");
         return true;

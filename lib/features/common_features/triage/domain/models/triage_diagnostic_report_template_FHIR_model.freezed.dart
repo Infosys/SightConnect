@@ -24,6 +24,7 @@ mixin _$DiagnosticReportTemplateFHIRModel {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
   BodySite? get bodySite => throw _privateConstructorUsedError;
   TestCode? get code => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $DiagnosticReportTemplateFHIRModelCopyWith<$Res> {
       {int? id,
       String? name,
       int? organizationCode,
+      int? tenantCode,
       Category? category,
       BodySite? bodySite,
       TestCode? code,
@@ -85,6 +87,7 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
     Object? id = freezed,
     Object? name = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? category = freezed,
     Object? bodySite = freezed,
     Object? code = freezed,
@@ -106,6 +109,10 @@ class _$DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       category: freezed == category
           ? _value.category
@@ -194,6 +201,7 @@ abstract class _$$_DiagnosticReportTemplateFHIRModelCopyWith<$Res>
       {int? id,
       String? name,
       int? organizationCode,
+      int? tenantCode,
       Category? category,
       BodySite? bodySite,
       TestCode? code,
@@ -227,6 +235,7 @@ class __$$_DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? category = freezed,
     Object? bodySite = freezed,
     Object? code = freezed,
@@ -248,6 +257,10 @@ class __$$_DiagnosticReportTemplateFHIRModelCopyWithImpl<$Res>
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       category: freezed == category
           ? _value.category
@@ -293,6 +306,7 @@ class _$_DiagnosticReportTemplateFHIRModel
       {this.id,
       this.name,
       this.organizationCode,
+      this.tenantCode,
       this.category,
       this.bodySite,
       this.code,
@@ -313,6 +327,8 @@ class _$_DiagnosticReportTemplateFHIRModel
   final String? name;
   @override
   final int? organizationCode;
+  @override
+  final int? tenantCode;
   @override
   final Category? category;
   @override
@@ -340,7 +356,7 @@ class _$_DiagnosticReportTemplateFHIRModel
 
   @override
   String toString() {
-    return 'DiagnosticReportTemplateFHIRModel(id: $id, name: $name, organizationCode: $organizationCode, category: $category, bodySite: $bodySite, code: $code, version: $version, study: $study, observations: $observations, questionnaire: $questionnaire, observationValueWeight: $observationValueWeight)';
+    return 'DiagnosticReportTemplateFHIRModel(id: $id, name: $name, organizationCode: $organizationCode, tenantCode: $tenantCode, category: $category, bodySite: $bodySite, code: $code, version: $version, study: $study, observations: $observations, questionnaire: $questionnaire, observationValueWeight: $observationValueWeight)';
   }
 
   @override
@@ -352,6 +368,8 @@ class _$_DiagnosticReportTemplateFHIRModel
             (identical(other.name, name) || other.name == name) &&
             (identical(other.organizationCode, organizationCode) ||
                 other.organizationCode == organizationCode) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.bodySite, bodySite) ||
@@ -374,6 +392,7 @@ class _$_DiagnosticReportTemplateFHIRModel
       id,
       name,
       organizationCode,
+      tenantCode,
       category,
       bodySite,
       code,
@@ -405,6 +424,7 @@ abstract class _DiagnosticReportTemplateFHIRModel
           {final int? id,
           final String? name,
           final int? organizationCode,
+          final int? tenantCode,
           final Category? category,
           final BodySite? bodySite,
           final TestCode? code,
@@ -425,6 +445,8 @@ abstract class _DiagnosticReportTemplateFHIRModel
   String? get name;
   @override
   int? get organizationCode;
+  @override
+  int? get tenantCode;
   @override
   Category? get category;
   @override

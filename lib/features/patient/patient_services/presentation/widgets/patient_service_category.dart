@@ -113,16 +113,16 @@ class PatientServiceCategory extends ConsumerWidget {
                         //     builder: (context) => WebSocket(),
                         //   ),
                         // );
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) =>
-                        //         const PatientAppointmentPage(),
-                        //   ),
-                        // );
-                        Fluttertoast.cancel();
-                        Fluttertoast.showToast(
-                          msg: "This feature is coming soon",
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PatientAppointmentPage(),
+                          ),
                         );
+                        // Fluttertoast.cancel();
+                        // Fluttertoast.showToast(
+                        //   msg: "This feature is coming soon",
+                        // );
                       }
                     },
                     child: SizedBox(
