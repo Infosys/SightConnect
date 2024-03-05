@@ -197,25 +197,31 @@ class TriageOfflineResultPage extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: AppSize.kmheight),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: AppColor.grey.withOpacity(0.2),
-                  ),
-                  child: Text(
-                    'Please call us immediately, we will guide you to the nearest eye centre.',
-                    textAlign: TextAlign.left,
-                    softWrap: true,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: AppSize.kmheight),
+                _calculateSeverity(triageResult) == Severity.ABNORMAL
+                    ? Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: AppSize.kmpadding),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: AppColor.grey.withOpacity(0.2),
+                            ),
+                            child: Text(
+                              'Please call us immediately, we will guide you to the nearest eye centre.',
+                              textAlign: TextAlign.left,
+                              softWrap: true,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.kmheight),
+                        ],
+                      )
+                    : Container(),
                 const HelplineCard(helpLine: AppText.tollFreeNumber),
                 const SizedBox(height: AppSize.kmheight),
                 Padding(
