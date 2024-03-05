@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> showErrorDialogue(BuildContext context) {
-  String url = "tel:02249360005";
+  String url = "tel:${AppText.activateExotelNumber}";
 
   return showDialog<void>(
     context: context,
@@ -38,7 +39,7 @@ Future<void> showErrorDialogue(BuildContext context) {
                 }
               },
               child: Text(
-                "02249360005",
+                AppText.activateExotelNumber,
                 style: applyRobotoFont(
                   decoration: TextDecoration.underline,
                   color: AppColor.primary,

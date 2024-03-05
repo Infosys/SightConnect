@@ -42,7 +42,7 @@ class IvrCallHistorySearchHelperNotifier extends ChangeNotifier {
     {"type": "All", "checked": false},
     {"type": "Completed", "checked": true},
     {"type": "Failed", "checked": false},
-    {"type": "No Answer", "checked": false},
+    {"type": "No_Answer", "checked": false},
     {"type": "Incoming", "checked": false},
     {"type": "Outgoing", "checked": false}
   ];
