@@ -18,8 +18,6 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
     int totalScore = 0;
     for (var questions in questionnaireResponse) {
       for (var answer in questions.answers!) {
-        //TODO: logic changeded
-        // questionnaireScore = max(questionnaireScore, answer.score!);
         totalScore += answer.score!.toInt();
       }
     }
@@ -83,7 +81,7 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
   @override
   double totalTriageUrgency(double quessionnaireUrgency,
       double visualAcuityUrgency, double eyeScanUrgency) {
-    return quessionnaireUrgency + visualAcuityUrgency + eyeScanUrgency;
+    return max(quessionnaireUrgency, max(visualAcuityUrgency, eyeScanUrgency));
   }
 
   @override

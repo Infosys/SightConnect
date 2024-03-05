@@ -239,6 +239,7 @@ _$_PostTriageImagingSelectionModel _$$_PostTriageImagingSelectionModelFromJson(
       baseUrl: json['baseUrl'] as String?,
       score: (json['score'] as num?)?.toDouble(),
       fileId: json['fileId'] as String?,
+      bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
     );
 
 Map<String, dynamic> _$$_PostTriageImagingSelectionModelToJson(
@@ -250,4 +251,11 @@ Map<String, dynamic> _$$_PostTriageImagingSelectionModelToJson(
       'baseUrl': instance.baseUrl,
       'score': instance.score,
       'fileId': instance.fileId,
+      'bodySite': _$BodySiteEnumMap[instance.bodySite],
     };
+
+const _$BodySiteEnumMap = {
+  BodySite.LEFT_EYE: 'LEFT_EYE',
+  BodySite.RIGHT_EYE: 'RIGHT_EYE',
+  BodySite.BOTH_EYES: 'BOTH_EYES',
+};
