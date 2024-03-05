@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/widgets/app_web_view.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -37,7 +38,7 @@ class AppConsentFormPage extends HookConsumerWidget {
             automaticallyImplyLeading: false,
             centerTitle: false,
           ),
-          body: const _AppWebView(
+          body: const AppWebView(
             url: "https://surveys.infosysapps.com/dam/6353",
           ),
         ),
@@ -78,7 +79,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Expanded(
-                        child: _AppWebView(
+                        child: AppWebView(
                           url: "https://surveys.infosysapps.com/dam/6353",
                         ),
                       ),
@@ -153,46 +154,5 @@ class AppConsentFormPage extends HookConsumerWidget {
         ),
       );
     }
-  }
-}
-
-class _AppWebView extends HookWidget {
-  const _AppWebView({
-    super.key,
-    required this.url,
-  });
-  final String url;
-
-  @override
-  Widget build(BuildContext context) {
-    var isLoading = useState<bool>(false);
-    var progress = useState<double>(0.0);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Stack(
-        children: [
-          InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: WebUri(url),
-            ),
-            initialSettings: InAppWebViewSettings(
-              preferredContentMode: UserPreferredContentMode.MOBILE,
-              textZoom: 300,
-            ),
-            onProgressChanged: (controller, p) {
-              progress.value = p / 100;
-              if (progress.value == 100) {
-                isLoading.value = false;
-              } else {
-                isLoading.value = true;
-              }
-            },
-          ),
-          progress.value < 1.0
-              ? LinearProgressIndicator(value: progress.value)
-              : Container(),
-        ],
-      ),
-    );
   }
 }
