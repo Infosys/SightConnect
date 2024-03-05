@@ -52,7 +52,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     );
     _client.activate();
     if (_client.isActive) {
-      logger.f("client is active");
+      logger.d("client is active");
     }
   }
 
@@ -100,7 +100,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
         var jsonResponse = response.data;
         var status = jsonResponse['message']['ack']['status'];
         if (status == 'ACK') {
-          logger.f('Response has status ACK');
+          logger.d('Response has status ACK');
           return true;
         } else {
           logger.e('Response has status NACK');
@@ -108,7 +108,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
         }
       }
     } on DioException catch (e) {
-      logger.f(e);
+      logger.d(e);
     }
 
     return false;
@@ -172,7 +172,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
 //         );
 //       }
 //     } on DioException catch (e) {
-//       logger.f(e);
+//       logger.d(e);
 //     }
 //     bool isDataAck = await isAck();
 //     return isDataAck;

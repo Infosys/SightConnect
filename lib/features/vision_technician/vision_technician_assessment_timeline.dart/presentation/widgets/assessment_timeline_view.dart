@@ -27,6 +27,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
       children: [
         if (isLoading.value) const CircularProgressIndicator.adaptive(),
         ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {

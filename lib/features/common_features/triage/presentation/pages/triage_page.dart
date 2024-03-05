@@ -99,7 +99,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: Text(errorMessage ?? "Something went wrong"),
+                  child: Text(errorMessage),
                 ),
                 const SizedBox(
                   height: AppSize.klheight,

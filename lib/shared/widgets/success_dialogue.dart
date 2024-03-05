@@ -8,6 +8,7 @@ Future<void> successDialogue(BuildContext context, String message) {
     builder: (BuildContext context) {
       return BlurDialogBox(
         content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               message,

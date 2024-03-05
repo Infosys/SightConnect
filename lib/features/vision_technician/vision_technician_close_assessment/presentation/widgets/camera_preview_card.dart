@@ -126,14 +126,18 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
       return;
     }
 
-    isLoading = true;
+    setState(() {
+      isLoading = true;
+    });
 
     if (_controller.value.flashMode == FlashMode.off) {
       await _controller.setFlashMode(FlashMode.torch);
     } else {
       await _controller.setFlashMode(FlashMode.off);
     }
-    isLoading = false;
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -141,6 +145,11 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     var refRead = ref.read(vtCloseAssessmentHelperProvider);
 
     if (_cameras.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
+    if (isLoading) {
       return const Center(
         child: CircularProgressIndicator.adaptive(),
       );
@@ -153,18 +162,25 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     } else {
       return Container(
         decoration: BoxDecoration(
-          color: AppColor.black.withOpacity(0.5),
           borderRadius: BorderRadius.circular(AppSize.klradius),
-          border: Border.all(
-            color: Colors.white,
-            width: 2,
-          ),
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppSize.klradius),
+        child: Container(
+          margin: const EdgeInsets.all(AppSize.klpadding),
+          decoration: BoxDecoration(
+            color: AppColor.black,
+            borderRadius: BorderRadius.circular(AppSize.klradius),
+          ),
           child: Stack(
+            clipBehavior: Clip.none,
             children: [
-              Center(child: CameraPreview(_controller)),
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  child: CameraPreview(
+                    _controller,
+                  ),
+                ),
+              ),
               Positioned(
                 top: AppSize.klpadding,
                 right: AppSize.klpadding,
@@ -190,35 +206,33 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
                 ),
               ),
               Positioned(
-                bottom: AppSize.klpadding,
-                left: AppSize.width(context) / 4,
-                right: AppSize.width(context) / 4,
+                bottom: AppSize.width(context) * 0.05,
+                left: AppSize.width(context) * 0.1,
+                right: AppSize.width(context) * 0.1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    const SizedBox(
                       width: AppSize.klwidth * 2,
                       height: AppSize.klheight * 2,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColor.white.withOpacity(0.5),
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(CupertinoIcons.photo),
-                      ),
                     ),
                     InkWell(
                       onTap: () async {
                         logger.d("camera button clicked");
                         try {
+                          setState(() {
+                            isLoading = true;
+                          });
                           // refRead.setLoading(true);
                           final XFile image = await _controller.takePicture();
                           // refRead.setLoading(false);
                           refRead.saveImage(image);
                         } catch (e) {
                           logger.d("camera error $e");
+                        } finally {
+                          setState(() {
+                            isLoading = false;
+                          });
                         }
                       },
                       child: Container(

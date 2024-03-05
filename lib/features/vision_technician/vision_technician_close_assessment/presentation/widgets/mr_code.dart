@@ -30,6 +30,9 @@ class MRCode extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          const SizedBox(
+            height: AppSize.kmpadding,
+          ),
           TextField(
             onChanged: (value) {
               ref.read(vtCloseAssessmentHelperProvider).setMrCode(value);

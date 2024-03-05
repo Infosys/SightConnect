@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -28,17 +27,16 @@ class ImagePreview extends ConsumerWidget {
         .sentenceCase();
     final loc = context.loc!;
     return Container(
-      width: 536,
-      height: 714,
       padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
       decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: applyMediumShadow(),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "$currentEye Eye",
@@ -49,28 +47,20 @@ class ImagePreview extends ConsumerWidget {
               ),
             ],
           ),
-          SizedBox(
-            width: 472,
-            height: 300,
-            child: Image.file(
-              File(imagePath),
+          Flexible(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: SizedBox(
+                width: AppSize.width(context) * 0.8,
+                height: AppSize.height(context) * 0.4,
+                child: Image.file(
+                  File(imagePath),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
-          TextButton(
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(
-                  horizontal: AppSize.klpadding,
-                  vertical: AppSize.kmpadding,
-                ),
-              ),
-              side: MaterialStateProperty.all(
-                const BorderSide(
-                  width: 1,
-                  color: AppColor.primary,
-                ),
-              ),
-            ),
+          OutlinedButton(
             onPressed: () {
               ref.watch(vtCloseAssessmentHelperProvider).retakePicture();
             },
@@ -119,32 +109,31 @@ class ImagePreview extends ConsumerWidget {
               const SizedBox(width: AppSize.klwidth),
               //submit
               Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    XFile left =
-                        ref.read(vtCloseAssessmentHelperProvider).leftEyeImage;
-                    XFile right =
-                        ref.read(vtCloseAssessmentHelperProvider).rightEyeImage;
+                child: ElevatedButton(
+                  onPressed: currentStep != 2
+                      ? null
+                      : () {
+                          XFile left = ref
+                              .read(vtCloseAssessmentHelperProvider)
+                              .leftEyeImage;
+                          XFile right = ref
+                              .read(vtCloseAssessmentHelperProvider)
+                              .rightEyeImage;
 
-                    ref
-                        .read(visionTechnicianTriageProvider)
-                        .setEyeImage(left, right);
+                          ref
+                              .read(visionTechnicianTriageProvider)
+                              .setEyeImage(left, right);
 
-                    currentStep != 2
-                        ? null
-                        : ref
-                            .read(vtCloseAssessmentHelperProvider)
-                            .markAllImagesCaptured();
-                    ref
-                        .read(preliminaryAssessmentHelperProvider)
-                        .setImagesSubmitted();
-                    Navigator.pop(context);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: currentStep != 2
-                        ? MaterialStateProperty.all<Color>(AppColor.lightGrey)
-                        : MaterialStateProperty.all<Color>(AppColor.primary),
-                  ),
+                          currentStep != 2
+                              ? null
+                              : ref
+                                  .read(vtCloseAssessmentHelperProvider)
+                                  .markAllImagesCaptured();
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setImagesSubmitted();
+                          Navigator.pop(context);
+                        },
                   child: Text(
                     loc.vtSubmit,
                     style: applyRobotoFont(

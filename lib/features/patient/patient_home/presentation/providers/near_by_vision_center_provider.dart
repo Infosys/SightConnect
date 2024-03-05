@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart';
@@ -91,9 +92,10 @@ class NearByVisionCenterProvider
         errorMessage: null,
       );
     } catch (e) {
+      final msg = DioErrorHandler.getErrorMessage(e);
       state = state.copyWith(
         isLoading: false,
-        errorMessage: "Failed to get vision centers: $e",
+        errorMessage: msg,
       );
     }
   }
