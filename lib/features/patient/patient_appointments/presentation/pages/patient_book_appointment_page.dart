@@ -19,7 +19,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/constants/app_icon.dart';
 import '../../../../../core/constants/app_images.dart';
 import '../../../../../shared/theme/text_theme.dart';
-import '../../data/models/uhi_search_model.dart';
 import '../../data/source/patient_appointment_remote_source.dart';
 import '../providers/book_appointment_provider.dart';
 

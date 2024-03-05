@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,7 +37,10 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
               //     "${DateFormat('dd MMM').format(pickedDateRange!.start)} - ${DateFormat('dd MMM yyyy').format(pickedDateRange.end)}";
               // controller.text = result;
             },
-            icon: const Icon(CupertinoIcons.calendar),
+            icon: const Icon(
+              CupertinoIcons.calendar,
+              color: AppColor.lightGrey,
+            ),
           ),
         ),
       ),

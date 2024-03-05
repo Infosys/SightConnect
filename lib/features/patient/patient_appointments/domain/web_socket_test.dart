@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,9 +23,10 @@ class WebSocketProvider extends ChangeNotifier {
       config: StompConfig(
         url: ApiConstant.webSocketEua,
         onConnect: onConnectCallback,
-        onWebSocketError: (dynamic error) => logger.e("onWebSocketError : $error"),
+        onWebSocketError: (dynamic error) =>
+            logger.e("onWebSocketError : $error"),
         onStompError: (StompFrame frame) => logger.e("onStompError : $frame"),
-        onDisconnect: (StompFrame frame) => logger.e("onDisconnect called"),       
+        onDisconnect: (StompFrame frame) => logger.e("onDisconnect called"),
       ),
     );
     _client.activate();
@@ -38,8 +37,6 @@ class WebSocketProvider extends ChangeNotifier {
     _isConnected = true;
     notifyListeners();
   }
-
-  
 
   void subscribe(String destination, Function callback) {
     logger.d('Connected to the broker');

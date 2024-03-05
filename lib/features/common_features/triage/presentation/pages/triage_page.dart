@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_db_helper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
@@ -89,6 +90,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         }
       },
       error: (error, stackTrace) {
+        final errorMessage = DioErrorHandler.getErrorMessage(error);
         return Scaffold(
           body: Center(
             child: Column(
@@ -97,7 +99,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
-                  child: Text(error.toString()),
+                  child: Text(errorMessage ?? "Something went wrong"),
                 ),
                 const SizedBox(
                   height: AppSize.klheight,

@@ -25,77 +25,21 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   GetTriageModelNotifier getTriageModelNotifier;
   TriageRemoteSourceImpl(this.dio, this.getTriageModelNotifier);
 
-  // @override
-  // Future<TriageResponseDto> saveTriageVT(TriageResponseModel triage) async {
-  //   const endPoint = "/services/triage/api/triage-report";
-
-  //   try {
-  //     var response = await dio.post(endPoint, data: triage.toJson());
-  //     logger.d("this is the response ${response.data.toString()}");
-  //     return TriageResponseDto.fromJson(response.data);
-  //   } on DioError catch (e) {
-  //     logger.d("this is the error ${e.message}");
-  //     if (e.response != null) {
-  //       logger.d("Error response: ${e.response.toString()}");
-  //     }
-  //   } catch (e) {
-  //     logger.d("Unknown error: ${e.toString()}");
-  //   }
-
-  // return TriageResponseDto();
-  // logger.d("This is triage \n ${triage.toJson()}");
-  // try {
-  //   var response = await dio.post(
-  //     endpoint,
-  //     data: triage.toJson(),
-  //   );
-
-  //   logger.d({
-  //     "API saveTriage": endpoint,
-  //     "response": response.data,
-  //   });
-  //   if (response.statusCode != null) {
-  //     if (response.statusCode! >= 200 && response.statusCode! < 210) {
-  //       return TriageResponseDto.fromJson(response.data);
-  //     } else {
-  //       throw ServerException();
-  //     }
-  //   } else {
-  //     throw ServerException();
-  //   }
-  // } catch (e) {
-  //   throw UnknownException();
-  // }
-  // }
-
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
     var endpoint =
         "/services/assessments/api/diagnostic-report-templates/assessment/1351";
-    logger.d({
-      "API getTriageQuestionnaire": endpoint,
-    });
-    // Map<String, dynamic> bodyData = {
-    //   "name": "LVPEI EyeCare Triage",
-    //   "organizationCode": "LVPEI",
-    //   "condition": "VISION",
-    //   "assessmentType": "TRIAGE",
-    //   "organ": "EYE"
-    // };
-
-    var response = await dio.get(endpoint);
-    //var response = await rootBundle.loadString("assets/triage_assessment.json");
-    if (response.statusCode! >= 200 && response.statusCode! < 210) {
+    logger.d({"API getTriageQuestionnaire": endpoint});
+    try {
+      var response = await dio.get(endpoint);
       return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
-    } else {
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
       throw ServerException();
+    } catch (e) {
+      logger.e("this is the error ${e.toString()}");
+      throw UnknownException();
     }
-    // if (response.isNotEmpty) {
-    //   var data = jsonDecode(response);
-    //   return DiagnosticReportTemplateFHIRModel.fromJson(data);
-    // } else {
-    //   throw ServerException();
-    // }
   }
 
   @override
@@ -105,29 +49,15 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     const endpoint = "/services/triage/api/triage-report";
     try {
       logger.d({"triage model to be saved in remote source": triage.toJson()});
-      var response = await dio.post(
-        endpoint,
-        data: triage.toJson(),
-      );
-
-      logger.d({
-        "API saveTriage": endpoint,
-        "response": response.data,
-      });
-      if (response.statusCode != null) {
-        if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          getTriageModelNotifier.triagePostModel =
-              TriagePostModel.fromJson(response.data);
-
-          return getTriageModelNotifier._triagePostModel;
-        } else {
-          throw ServerException();
-        }
-      } else {
-        throw ServerException();
-      }
+      var response = await dio.post(endpoint, data: triage.toJson());
+      getTriageModelNotifier.triagePostModel =
+          TriagePostModel.fromJson(response.data);
+      return getTriageModelNotifier._triagePostModel;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      throw ServerException();
     } catch (e) {
-      logger.d("this is the error ${e.toString()}");
+      logger.e("this is the error ${e.toString()}");
       throw UnknownException();
     }
   }
@@ -137,32 +67,16 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     required TriageUpdateModel triage,
   }) async {
     final id = triage.diagnosticReportId;
-
-    // var response =
-    //     await rootBundle.loadString("assets/triage_update_response.json");
-    // if (response.isNotEmpty) {
-    //   Map<String, dynamic> data = jsonDecode(response);
-    //   return TriageUpdateMapper.toResponseModel(data);
-    // } else {
-    //   throw ServerException();
-    // }
     try {
       var endpoint = "/services/triage/api/triage-report/$id";
-
       logger.d({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(endpoint, data: triage.toJson());
-
-      if (response.statusCode != null) {
-        if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          return TriagePostModel.fromJson(response.data);
-        } else {
-          throw ServerException();
-        }
-      } else {
-        throw ServerException();
-      }
+      return TriagePostModel.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      throw ServerException();
     } catch (e) {
-      logger.d("this is the error ${e.toString()}");
+      logger.e("this is the error ${e.toString()}");
       throw UnknownException();
     }
   }
@@ -182,25 +96,15 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
           "event-id": int.parse(eventId),
         },
       );
+      getTriageModelNotifier.triagePostModel =
+          TriagePostModel.fromJson(response.data);
 
-      logger.d({
-        "API saveTriage": endpoint,
-        "response": response.data,
-      });
-      if (response.statusCode != null) {
-        if (response.statusCode! >= 200 && response.statusCode! < 210) {
-          getTriageModelNotifier.triagePostModel =
-              TriagePostModel.fromJson(response.data);
-
-          return getTriageModelNotifier._triagePostModel;
-        } else {
-          throw ServerException();
-        }
-      } else {
-        throw ServerException();
-      }
+      return getTriageModelNotifier._triagePostModel;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      throw ServerException();
     } catch (e) {
-      logger.d("this is the error ${e.toString()}");
+      logger.e("this is the error ${e.toString()}");
       throw UnknownException();
     }
   }
@@ -208,7 +112,9 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
 var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
-      ref.watch(dioProvider), ref.watch(getTriageModelProvider)),
+    ref.watch(dioProvider),
+    ref.watch(getTriageModelProvider),
+  ),
 );
 
 var getTriageModelProvider = ChangeNotifierProvider<GetTriageModelNotifier>(

@@ -34,6 +34,10 @@ jobs:
       #     git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
       #     git push origin --tags
       #     git push  
+      - name: tagcreation
+        run: |
+            git tag 1.${{ github.run_number }}.0
+            git push origin 1.${{ github.run_number }}.0   
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -55,9 +59,9 @@ jobs:
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
 
       - name: Build APPBUNDLE
-        run: flutter build appbundle --release --build-number ${{ github.run_number }}
+        run: flutter build appbundle --release --build-name 1.${{ github.run_number }}.0 --build-number ${{ github.run_number }}
       - name: Build Android APK
-        run: flutter build apk --release --build-number ${{ github.run_number }} --verbose
+        run: flutter build apk --release --build-name 1.${{ github.run_number }}.0 --build-number ${{ github.run_number }} --verbose
       
       - name: Copy the file
         run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-${{ github.run_number }}.apk

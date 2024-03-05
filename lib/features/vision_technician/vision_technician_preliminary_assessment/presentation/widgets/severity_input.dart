@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
@@ -22,6 +23,7 @@ class _SeverityInputState extends ConsumerState<SeverityInput> {
     final loc = context.loc!;
     return SizedBox(
       height: AppSize.klheight * 5,
+      width: AppSize.width(context) * 0.4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -35,25 +37,40 @@ class _SeverityInputState extends ConsumerState<SeverityInput> {
           ),
           Padding(
             padding: const EdgeInsets.all(AppSize.kspadding),
-            child: DropdownButton<String>(
-              value: severity,
-              items: <String>[
-                "ROUTINE",
-                "URGENT",
-                "ASAP",
-                "STAT",
-              ].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  severity = value!;
-                });
-                setSeverity(value!, ref);
-              },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(
+                  color: AppColor.lightGrey,
+                  style: BorderStyle.solid,
+                  width: 0.80,
+                ),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  hint: const Text("Select Severity"),
+                  value: severity,
+                  isExpanded: true,
+                  items: <String>[
+                    "ROUTINE",
+                    "URGENT",
+                    "ASAP",
+                    "STAT",
+                  ].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      severity = value!;
+                    });
+                    setSeverity(value!, ref);
+                  },
+                ),
+              ),
             ),
           ),
         ],

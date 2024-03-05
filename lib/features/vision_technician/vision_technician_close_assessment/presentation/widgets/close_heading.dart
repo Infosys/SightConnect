@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class CloseHeading extends StatelessWidget {
   const CloseHeading({
@@ -16,13 +17,15 @@ class CloseHeading extends StatelessWidget {
         Text(
           "${loc.vtClose}: ",
           style: applyFiraSansFont(
-            fontSize: 24,
+            fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
         ),
-        Text(
-          "${loc.vtAssessmentEA} $encountedId",
-          style: applyFiraSansFont(fontSize: 24),
+        Flexible(
+          child: Text(
+            "${loc.vtAssessmentEA} $encountedId",
+            style: applyFiraSansFont(fontSize: 18),
+          ),
         ),
       ],
     );

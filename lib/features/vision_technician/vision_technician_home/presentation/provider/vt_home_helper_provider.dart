@@ -10,14 +10,6 @@ final vtHomeHelperProvider =
   return VTHomeHelperNotifier(ref: ref);
 });
 
-// var getAssessmentTableProvider = FutureProvider.autoDispose((ref) async {
-//   String category = ref.watch(vtHomeHelperProvider).category;
-//   int pageNumber = ref.watch(vtHomeHelperProvider).pageNumber;
-//   int pageSize = ref.read(vtHomeHelperProvider).pageSize;
-//   return await ref.watch(vtHomeRepository).getListOfPatients(
-//       TableParams(category: category, page: pageNumber, size: pageSize));
-// });
-
 class VTHomeHelperNotifier extends ChangeNotifier {
   Ref ref;
   VTHomeHelperNotifier({required this.ref}) {
@@ -30,12 +22,22 @@ class VTHomeHelperNotifier extends ChangeNotifier {
   bool _isLoading = false;
   bool hasMore = true;
   String _category = "ALL";
+  String _query = "";
   int pageSize = 5;
   int _pageNumber = 0;
   String get category => _category;
   bool get isLoading => _isLoading;
   int get pageNumber => _pageNumber;
   List<VTPatientDto> get listOfAssessments => _listOfAssessments;
+  String get query => _query;
+
+  void updateQuery(String value) {
+    _listOfAssessments.clear();
+    _tempListOfAssessments.clear();
+    _query = value;
+    _pageNumber = 0;
+    getAssessmentTable();
+  }
 
   void updateCategory(String value) {
     _listOfAssessments.clear();
@@ -75,7 +77,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
 
       logger.d("VTHomeHelperNotifier ${_listOfAssessments.length}");
     } catch (e) {
-      logger.d("VTHomeHelperNotifier $e");
+      logger.e("VTHomeHelperNotifier $e");
       _listOfAssessments.clear();
       _isLoading = false;
       notifyListeners();

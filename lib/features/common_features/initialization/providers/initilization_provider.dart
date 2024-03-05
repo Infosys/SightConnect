@@ -48,8 +48,6 @@ class InitializationProvider extends ChangeNotifier {
       await _ref.read(triageProvider).discardLocalTriageEntries();
       await _ref.read(keycloakRepositoryProvider).signOut();
     } catch (e) {
-      logger.e(
-          "Apologies, we encountered a logout error in the mobile app. from keycloak: $e");
       rethrow;
     }
     // Triage Database logout
@@ -58,6 +56,14 @@ class InitializationProvider extends ChangeNotifier {
     await SharedPreferenceService.clearAll();
     // Flutter Secure Storage logout
     await PersistentAuthStateService.authState.logout();
+  }
+
+  Future<void> resetProfile() async {
+    await PersistentAuthStateService.authState.setActiveRole(null);
+    // Triage Database logout
+    await TriageDBHelper().deleteFullDatabase();
+    // Shared Preference logout
+    await SharedPreferenceService.clearAll();
   }
 
   Future<KeycloakResponse?> refreshTokens({
@@ -69,7 +75,7 @@ class InitializationProvider extends ChangeNotifier {
           .refreshTokens(refreshToken: refreshToken);
       return response;
     } catch (e) {
-      return null;
+      rethrow;
     }
   }
 

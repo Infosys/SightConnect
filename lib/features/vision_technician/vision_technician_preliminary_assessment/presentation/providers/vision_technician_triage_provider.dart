@@ -12,17 +12,20 @@ import 'package:uuid/uuid.dart';
 import '../../../../../main.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 
-var visionTechnicianTriageProvider =
-    ChangeNotifierProvider((ref) => VisionTechnicianTriageProvider(
-          fileMsService: ref.watch(fileMsServiceProvider),
-          vtSearchProvider: ref.watch(visionTechnicianSearchProvider),
-        ));
+var visionTechnicianTriageProvider = ChangeNotifierProvider(
+  (ref) => VisionTechnicianTriageProvider(
+    fileMsService: ref.watch(fileMsServiceProvider),
+    vtSearchProvider: ref.watch(visionTechnicianSearchProvider),
+  ),
+);
 
 class VisionTechnicianTriageProvider extends ChangeNotifier {
   FileMsService fileMsService;
   VisionTechnicianSearchProvider vtSearchProvider;
-  VisionTechnicianTriageProvider(
-      {required this.fileMsService, required this.vtSearchProvider}) {
+  VisionTechnicianTriageProvider({
+    required this.fileMsService,
+    required this.vtSearchProvider,
+  }) {
     // _selectedOptions = {};
   }
   //patient id is static data right now

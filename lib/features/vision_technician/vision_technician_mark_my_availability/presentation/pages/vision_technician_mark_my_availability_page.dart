@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_each_day_availability.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -20,11 +19,6 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
     var watchRef = ref.watch(markMyAvailabilityHelperProvider);
     bool? available = ref.watch(markMyAvailabilityHelperProvider).available;
     bool loading = ref.watch(markMyAvailabilityHelperProvider).isLoading;
-
-    // bool? availableForTeleconsultation =
-    //     ref.watch(globalVTProvider).user?.availableForTeleconsultation;
-
-    logger.d("available : $available");
 
     return Scaffold(
       bottomNavigationBar: !loading
@@ -52,12 +46,6 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.check,
-                      size: 20,
-                      color: available ? AppColor.primary : AppColor.white,
-                    ),
-                    const SizedBox(width: AppSize.kswidth),
                     Text(
                       available ? loc.vtMarked : loc.vtMarkMyAvailability,
                       style: applyRobotoFont(
@@ -71,18 +59,11 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
             )
           : const Center(child: CircularProgressIndicator.adaptive()),
       appBar: CustomAppbar(
-        titleSpacing: 0,
-        preferredSizeHeight: 70,
         centerTitle: false,
         title: Text(
           loc.vtMarkMyAvailability,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: applyFiraSansFont(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: AppColor.black,
-          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -108,8 +89,8 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                           child: Container(
                             height: AppSize.klheight * 2,
                             decoration: BoxDecoration(
-                              border: Border.all(color: AppColor.blue),
-                              color: AppColor.lightBlue,
+                              border: Border.all(color: AppColor.lightGrey),
+                              color: AppColor.lightGrey,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: const VtMarkMyAvailableDateRangePicker(),
@@ -117,9 +98,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: AppSize.klheight,
-                    ),
+                    const SizedBox(height: AppSize.klheight),
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -129,16 +108,8 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const Column(
-                          children: [
-                            SizedBox(
-                              height: AppSize.klheight,
-                            ),
-                            Divider(
-                              thickness: 1,
-                              color: AppColor.grey,
-                            )
-                          ],
+                        return const Divider(
+                          color: AppColor.grey,
                         );
                       },
                       itemCount: watchRef.markMyAvailabilityList.length,

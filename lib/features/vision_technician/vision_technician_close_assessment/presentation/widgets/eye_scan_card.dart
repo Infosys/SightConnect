@@ -15,21 +15,18 @@ class EyeScanCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String leftEyeImagePath =
-        ref.watch(vtCloseAssessmentHelperProvider).leftEyeImage.path;
-    String rightEyeImagePath =
-        ref.watch(vtCloseAssessmentHelperProvider).rightEyeImage.path;
-    String bothEyeImagePath =
-        ref.watch(vtCloseAssessmentHelperProvider).bothEyeImage.path;
-    bool allImagesCaptured =
-        ref.watch(vtCloseAssessmentHelperProvider).allImagesCaptured;
+    final model = ref.watch(vtCloseAssessmentHelperProvider);
+    String leftEyeImagePath = model.leftEyeImage.path;
+    String rightEyeImagePath = model.rightEyeImage.path;
+    String bothEyeImagePath = model.bothEyeImage.path;
+    bool allImagesCaptured = model.allImagesCaptured;
     final loc = context.loc!;
     return Container(
       width: AppSize.width(context),
       padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: applyLightShadow(),
+        boxShadow: applycustomShadow(),
         borderRadius: BorderRadius.circular(AppSize.kmradius),
       ),
       child: Column(
@@ -45,47 +42,26 @@ class EyeScanCard extends ConsumerWidget {
           ),
           const SizedBox(height: AppSize.kmheight),
           if (!allImagesCaptured)
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const VisionTechnicianEyeCapture(),
-                  ),
-                );
-              },
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmpadding,
-                    vertical: AppSize.kspadding,
-                  ),
+            OutlinedButton.icon(
+                icon: const Icon(
+                  CupertinoIcons.camera_viewfinder,
+                  color: AppColor.primary,
                 ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSize.klradius * 2),
-                    side: const BorderSide(color: AppColor.primary),
-                  ),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    CupertinoIcons.camera_viewfinder,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const VisionTechnicianEyeCapture(),
+                    ),
+                  );
+                },
+                label: Text(
+                  loc.vtTakePicture,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: AppColor.primary,
                   ),
-                  const SizedBox(width: AppSize.kswidth),
-                  Text(
-                    loc.vtTakePicture,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.primary,
-                    ),
-                  )
-                ],
-              ),
-            ),
+                )),
           const SizedBox(height: AppSize.ksheight),
           if (allImagesCaptured)
             Wrap(
@@ -122,9 +98,7 @@ class EyeScanCard extends ConsumerWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppSize.kmradius),
                     child: Image.file(
-                      File(
-                        bothEyeImagePath,
-                      ),
+                      File(bothEyeImagePath),
                       fit: BoxFit.cover,
                     ),
                   ),

@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/domain/repositories/assessment_timeline_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -16,27 +15,25 @@ var vtListOfEncountersChipProvider =
 });
 
 class ListOfEncountersChip extends HookConsumerWidget {
-  const ListOfEncountersChip({super.key});
+  const ListOfEncountersChip({super.key, required this.patientId});
+  final int? patientId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int? patientId =
-        ref.watch(visionTechnicianSearchProvider).patientDetails?.id;
-
     Encounter? encounter =
         ref.watch(assessmentTimelineProvider).currentEncounter;
     int? encounterId = encounter?.id;
 
     if (patientId == null) {
-      return Container();
+      return const SizedBox();
     }
 
-    return ref.watch(vtListOfEncountersChipProvider(patientId)).when(
+    return ref.watch(vtListOfEncountersChipProvider(patientId!)).when(
           data: (data) {
             data = data.reversed.toList();
 
             return SizedBox(
-              height: AppSize.klheight * 1.5,
+              height: AppSize.height(context) * 0.05,
               child: ListView.builder(
                 itemCount: data.length,
                 scrollDirection: Axis.horizontal,
@@ -46,20 +43,12 @@ class ListOfEncountersChip extends HookConsumerWidget {
                       ref
                           .read(assessmentTimelineProvider.notifier)
                           .setEncounter(data[index]);
-
-                      // logger.d("Tapped on ${data[index]}");
-                      // ref
-                      //     .read(visionTechnicianSearchProvider.notifier)
-                      //     .setEncounterId(data[index].id!);
                     },
                     child: Container(
-                      // width: 100,
                       margin: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kspadding),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kmpadding,
+                        horizontal: AppSize.kspadding,
                       ),
-                      // height: AppSize.klheight,
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: encounterId == data[index].id
                             ? AppColor.lightBlue
@@ -76,7 +65,7 @@ class ListOfEncountersChip extends HookConsumerWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "${data[index].id.toString()} - ${data[index].period!.start!.formatDateTimeMonthName}",
+                            "${data[index].id ?? ""} - ${data[index].period?.start?.formatDateTimeMonthName}",
                             softWrap: true,
                             style: applyRobotoFont(fontSize: 14),
                           ),
@@ -89,10 +78,10 @@ class ListOfEncountersChip extends HookConsumerWidget {
             );
           },
           error: (error, stack) {
-            logger.d("encounters error $error");
+            logger.e("encounters error $error");
             return Center(
               child: Text(
-                "Error",
+                "Failed to load encounters",
                 style: applyRobotoFont(),
               ),
             );

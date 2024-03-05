@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/vt_register_input.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,16 +21,9 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(AppSize.kmpadding - 2),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.lightGrey),
         color: AppColor.white,
         borderRadius: BorderRadius.circular(AppSize.ksradius),
-        boxShadow: const [
-          BoxShadow(
-            color: AppColor.lightGrey, //New
-            blurRadius: AppSize.ksradius / 2,
-            spreadRadius: AppSize.ksradius / 8,
-          )
-        ],
+        boxShadow: applycustomShadow(),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
