@@ -7,8 +7,12 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_profile.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/pages/app_photo_page.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_card.dart';
+import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,36 +40,87 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               AssessmentReportProfile(
-                  assessmentId: assessmentDetailsReport.assessmentID),
+                assessmentId: assessmentDetailsReport.assessmentID,
+              ),
+              const SizedBox(height: AppSize.klheight),
+              AppCard(
+                padding: 16,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Eye Images",
+                      style: applyFiraSansFont(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.kmheight),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      itemCount:
+                          assessmentDetailsReport.imageBriefEntity?.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 3,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: Responsive.isMobile(context) ? 1 : 2,
+                      ),
+                      itemBuilder: (context, index) {
+                        final e =
+                            assessmentDetailsReport.imageBriefEntity?[index];
+
+                        if (e == null) {
+                          return const SizedBox();
+                        }
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AppPhotoPage(
+                                  image: e.imageUrl,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.white,
+                              boxShadow: applyLightShadow(),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(AppSize.kmradius - 5),
+                              ),
+                            ),
+                            child: AppNetworkImage(
+                              shapeCircle: false,
+                              imageUrl: e.imageUrl,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: AppSize.klheight),
               AssessmentReportDetails(
                 questionResponseBreifModel:
                     assessmentDetailsReport.questionResponseBriefEntity,
               ),
               const SizedBox(height: AppSize.klheight),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  boxShadow: applycustomShadow(
-                    _recommendationColor(
-                        assessmentDetailsReport.cumulativeSeverity),
-                    0.1,
-                  ),
-                  border: Border.all(
-                    color: _recommendationColor(
-                        assessmentDetailsReport.cumulativeSeverity),
-                    width: 0.5,
-                  ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(AppSize.kmradius - 5),
-                  ),
+              AppCard(
+                padding: 16,
+                enableBorder: true,
+                color: _recommendationColor(
+                  assessmentDetailsReport.cumulativeSeverity,
                 ),
-                padding: const EdgeInsets.all(AppSize.klpadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
