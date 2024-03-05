@@ -31,13 +31,13 @@ jobs:
       #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       #     git add .
       #     git commit -m "Increment build number [skip ci]"
-      #     git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
+      #     git tag -a v${{ 1 }} -m "Version ${{ 1 }}"
       #     git push origin --tags
       #     git push  
       - name: tagcreation
         run: |
-            git tag 1.${{ github.run_number }}.0
-            git push origin 1.${{ github.run_number }}.0   
+            git tag 1.${{ 1 }}.0
+            git push origin 1.${{ 1 }}.0   
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -59,12 +59,12 @@ jobs:
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
 
       - name: Build APPBUNDLE
-        run: flutter build appbundle --release --build-name 1.${{ github.run_number }}.0 --build-number ${{ 1 }}
+        run: flutter build appbundle --release --build-name 1.${{ 1 }}.0 --build-number ${{ 1 }}
       - name: Build Android APK
-        run: flutter build apk --release --build-name 1.${{ github.run_number }}.0 --build-number ${{ 1 }} --verbose
+        run: flutter build apk --release --build-name 1.${{ 1 }}.0 --build-number ${{ 1 }} --verbose
       
       - name: Copy the file
-        run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-${{ github.run_number }}.apk
+        run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-${{ 1 }}.apk
 
       - name: upload artifact to App Center
         uses: wzieba/AppCenter-Github-Action@v1
@@ -72,7 +72,7 @@ jobs:
           appName: stg-radar-mobility/eyecare4all
           token: ${{secrets.APP_CENTER_TOKEN}}
           group: Collaborators
-          file: ./build/app/outputs/flutter-apk/app-release-${{ github.run_number }}.apk
+          file: ./build/app/outputs/flutter-apk/app-release-${{ 1 }}.apk
           notifyTesters: true
           debug: false
 
