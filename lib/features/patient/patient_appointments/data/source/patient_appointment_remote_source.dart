@@ -10,7 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
-import '../../../../../core/constants/api_constant.dart';
 import '../../../../../main.dart';
 import '../models/uhi_search_model.dart';
 
@@ -44,13 +43,14 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     logger.d("inside initializeStompClient");
     _client = StompClient(
       config: StompConfig(
-        url: 'ws://eyecare4all-dev.infosysapps.com/services/eua-service/api/v1/euaService/ws-client',
+        url:
+            'ws://eyecare4all-dev.infosysapps.com/services/eua-service/api/v1/euaService/ws-client',
         webSocketConnectHeaders: {'x-client-id': clientId!},
-        stompConnectHeaders:  {'x-client-id': clientId!},
+        stompConnectHeaders: {'x-client-id': clientId!},
         onConnect: (connectFrame) {
-        onConnectCallback(connectFrame);
-        completer.complete();
-      },
+          onConnectCallback(connectFrame);
+          completer.complete();
+        },
         onWebSocketError: (dynamic error) =>
             logger.e("onWebSocketError : $error"),
         onStompError: (StompFrame frame) => logger.e("onStompError : $frame"),
@@ -58,11 +58,10 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
       ),
     );
     _client.activate();
-     if (_client.isActive) {
+    if (_client.isActive) {
       logger.f("client is active");
     }
     await completer.future;
-   
   }
 
   onConnectCallback(StompFrame connectFrame) {
@@ -85,9 +84,9 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     _client.subscribe(
       destination: '/user/topic/return',
       callback: (frame) {
-      getDoctorosData(frame);
-      completer.complete();
-    },
+        getDoctorosData(frame);
+        completer.complete();
+      },
     );
     await completer.future;
     notifyListeners();
@@ -110,7 +109,6 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     try {
       var response = await dio.post(endpoint, data: jsonEncode(uhiSearchModel));
       if (response.statusCode == 200) {
-        
         logger.d("sent data successfully");
         var jsonResponse = response.data;
         clientId = response.headers.value('x-client-id').toString();
