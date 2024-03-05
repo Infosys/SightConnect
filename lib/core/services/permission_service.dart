@@ -29,8 +29,8 @@ class CameraPermissionService {
           borderRadius: BorderRadius.circular(8.0),
         ),
         title: const Text('Permissions required'),
-        content: const Text(
-            'Please enable camera and microphone permissions in the app settings.'),
+        content:
+            const Text('Please enable camera permissions in the app settings.'),
         actions: <Widget>[
           TextButton(
             child: const Text('OK'),
