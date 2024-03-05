@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionGuardianAddEventCard extends ConsumerWidget {
-  const VisionGuardianAddEventCard({super.key});
+class VisionGuardianAddEventPhoto extends ConsumerWidget {
+  const VisionGuardianAddEventPhoto({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,28 +41,45 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 40, left: 20, bottom: 40.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: AppSize.kmpadding,
+              horizontal: AppSize.kmpadding,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 data.image == null
-                    ? InkWell(
-                        onTap: () async {},
-                        child: const Icon(
-                          Icons.add_a_photo_outlined,
-                          color: AppColor.grey,
-                          size: 45,
-                        ),
-                      )
-                    : Image.file(
-                        File(data.image!.path),
-                        fit: BoxFit.cover,
+                    ? Container(
                         height: 110,
                         width: 110,
+                        decoration: BoxDecoration(
+                          color: AppColor.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: AppColor.lightGrey,
+                            width: 1,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.add_a_photo_outlined,
+                            color: AppColor.grey,
+                            size: 45,
+                          ),
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.file(
+                          File(data.image!.path),
+                          fit: BoxFit.cover,
+                          height: 110,
+                          width: 110,
+                        ),
                       ),
                 Column(
                   children: [
-                    TextButton(
+                    OutlinedButton.icon(
                       onPressed: () async {
                         try {
                           final ImagePicker picker = ImagePicker();
@@ -72,36 +89,21 @@ class VisionGuardianAddEventCard extends ConsumerWidget {
                           Fluttertoast.showToast(msg: e.toString());
                         }
                       },
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            side: const BorderSide(color: AppColor.primary),
-                            borderRadius:
-                                BorderRadius.circular(AppSize.klradius),
-                          ),
+                      icon: const Icon(
+                        Icons.file_upload_outlined,
+                        color: AppColor.primary,
+                        size: 20,
+                      ),
+                      label: Text(
+                        loc.vgUploadImage,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.primary,
                         ),
                       ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.file_upload_outlined,
-                            color: AppColor.primary,
-                            size: 20,
-                          ),
-                          const SizedBox(width: AppSize.kswidth),
-                          Text(
-                            loc.vgUploadImage,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.primary,
-                            ),
-                          ),
-                          const SizedBox(width: AppSize.kswidth),
-                        ],
-                      ),
                     ),
+                    const SizedBox(height: AppSize.kmheight),
                     Text(
                       loc.vgAddPhotoInstruction,
                       style: applyRobotoFont(

@@ -57,6 +57,7 @@ class VgEventDataCards extends StatelessWidget {
               bottomLeft: Radius.circular(AppSize.kmradius - 5),
             ),
             child: AppNetworkImage(
+              borderRadius: 0,
               imageUrl: _getImageUrl(data.images!.first),
               shapeCircle: false,
               width: Responsive.isMobile(context)
