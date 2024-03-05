@@ -39,7 +39,7 @@ class VisionGuardianEyeAssessment extends ConsumerWidget {
                 onPressed: () {
                   ref
                       .watch(triageMemberProvider)
-                      .setTestPersonId(int.parse(patientId));
+                      .setTestPersonId(int.parse(patientId), patientName);
                   ref.read(triageProvider).setTriageMode(triageMode);
                   Navigator.push(
                     context,

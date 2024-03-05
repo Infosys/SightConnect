@@ -29,15 +29,15 @@ class DioErrorHandler {
     }
   }
 
-  static String? getErrorMessage(Object e) {
+  static String getErrorMessage(Object e) {
     // check all type of error
     if (e is DioException) {
       if (e.error is Exception) {
         return e.error.toString();
       } else if (e.response != null) {
-        return e.response!.data["message"];
+        return e.response!.data["message"].toString();
       } else {
-        return e.message;
+        return e.message ?? "Something went wrong";
       }
     } else {
       return e.toString();

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
@@ -88,17 +89,24 @@ class TriageEyeScanProvider with ChangeNotifier {
     DiagnosticReportTemplateFHIRModel? assessment = _assessment;
     Map<String, int> imageIdentifier = getTriageImageIdentifier(assessment!);
 
-    mediaCaptureList.add(PostTriageImagingSelectionModel(
+    mediaCaptureList.add(
+      PostTriageImagingSelectionModel(
         identifier: imageIdentifier["LEFT_EYE"],
         fileId: leftEyeImage.name,
         endpoint: base64Encode(File(leftEyeImage.path).readAsBytesSync()),
-        score: 0));
-    mediaCaptureList.add(PostTriageImagingSelectionModel(
-      identifier: imageIdentifier["RIGHT_EYE"],
-      fileId: rightEyeImage.name,
-      endpoint: base64Encode(File(rightEyeImage.path).readAsBytesSync()),
-      score: 0,
-    ));
+        score: 0,
+        bodySite: BodySite.LEFT_EYE,
+      ),
+    );
+    mediaCaptureList.add(
+      PostTriageImagingSelectionModel(
+        identifier: imageIdentifier["RIGHT_EYE"],
+        fileId: rightEyeImage.name,
+        endpoint: base64Encode(File(rightEyeImage.path).readAsBytesSync()),
+        score: 0,
+        bodySite: BodySite.RIGHT_EYE,
+      ),
+    );
     logger.d({"getTriageEyeScanResponse": mediaCaptureList});
     return mediaCaptureList;
   }

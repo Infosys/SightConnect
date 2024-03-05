@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
@@ -11,46 +10,63 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ageDeclarationProvider = FutureProvider((ref) {
+final appConsentFormProvider = FutureProvider((ref) {
   final consentRepository = ref.watch(consentRepositoryProvider);
-  return consentRepository.getConsent(type: "AGE_DECLARATION");
+  return consentRepository.getConsent(type: "PRIVACY_POLICY");
 });
 
-class EighteenPlusDeclaration extends HookConsumerWidget {
-  const EighteenPlusDeclaration({super.key});
+class AppConsentFormPage extends HookConsumerWidget {
+  const AppConsentFormPage({super.key, this.isPreview = false});
+  final bool isPreview;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var selectedValue = useState<bool>(false);
-    var isAPILoading = useState<bool>(false);
+    var isApiLoading = useState<bool>(false);
     final loc = context.loc!;
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: const CustomAppbar(
-          title: Text("18+ Declaration"),
-          automaticallyImplyLeading: false,
-          centerTitle: false,
-        ),
-        body: Container(
-          height: AppSize.height(context),
-          width: AppSize.width(context),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                AppImages.scaffoldBg,
-              ),
-              fit: BoxFit.cover,
-            ),
+
+    if (isPreview) {
+      return SafeArea(
+        child: Scaffold(
+          appBar: CustomAppbar(
+            title: Text(loc.privacyPolicyTitle),
+            automaticallyImplyLeading: false,
+            centerTitle: false,
           ),
-          child: ref.watch(ageDeclarationProvider).when(
-            data: (data) {
-              return SafeArea(
-                child: Container(
+          body: const AppWebView(
+            url: "https://surveys.infosysapps.com/dam/6353",
+          ),
+        ),
+      );
+    } else {
+      return PopScope(
+        canPop: false,
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: CustomAppbar(
+            title: Text(loc.privacyPolicyTitle),
+            automaticallyImplyLeading: false,
+            centerTitle: false,
+          ),
+          body: Container(
+            height: AppSize.height(context),
+            width: AppSize.width(context),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  AppImages.scaffoldBg,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: ref.watch(appConsentFormProvider).when(
+              data: (data) {
+                return Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: AppColor.white,
@@ -83,7 +99,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                                 selectedValue.value = value ?? false;
                               },
                             ),
-                            isAPILoading.value
+                            isApiLoading.value
                                 ? const Center(
                                     child: CircularProgressIndicator.adaptive(),
                                   )
@@ -96,9 +112,9 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                                             final model = ref
                                                 .read(initializationProvider);
                                             try {
-                                              isAPILoading.value = true;
+                                              isApiLoading.value = true;
                                               if (await model
-                                                  .getEighteenPlusDeclarationStatus()) {
+                                                  .getConsentStatus()) {
                                                 navigator.pop(true);
                                               } else {
                                                 await model.sumbitConsent(
@@ -110,7 +126,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                                               Fluttertoast.showToast(
                                                   msg: loc.somethingWentWrong);
                                             } finally {
-                                              isAPILoading.value = false;
+                                              isApiLoading.value = false;
                                             }
                                           },
                                     child: Text(loc.agreeButton),
@@ -120,23 +136,23 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                ),
-              );
-            },
-            error: (e, s) {
-              final msg = DioErrorHandler.getErrorMessage(e);
-              return Center(
-                child: Text(msg),
-              );
-            },
-            loading: () {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
-            },
+                );
+              },
+              error: (e, s) {
+                final msg = DioErrorHandler.getErrorMessage(e);
+                return Center(
+                  child: Text(msg),
+                );
+              },
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              },
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

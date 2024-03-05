@@ -13,7 +13,7 @@ class AppUpdateService extends ChangeNotifier {
     InAppUpdate.checkForUpdate().then((info) {
       if (info.updateAvailability == UpdateAvailability.updateAvailable) {
         logger.d('update available');
-        logger.f("app version is : ${info.availableVersionCode}");
+        logger.d("app version is : ${info.availableVersionCode}");
         update(info);
       } else {
         logger.d("update not available");

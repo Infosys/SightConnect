@@ -1907,6 +1907,7 @@ mixin _$PostTriageImagingSelectionModel {
   String? get baseUrl => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
   String? get fileId => throw _privateConstructorUsedError;
+  BodySite? get bodySite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1928,7 +1929,8 @@ abstract class $PostTriageImagingSelectionModelCopyWith<$Res> {
       String? endpoint,
       String? baseUrl,
       double? score,
-      String? fileId});
+      String? fileId,
+      BodySite? bodySite});
 }
 
 /// @nodoc
@@ -1951,6 +1953,7 @@ class _$PostTriageImagingSelectionModelCopyWithImpl<$Res,
     Object? baseUrl = freezed,
     Object? score = freezed,
     Object? fileId = freezed,
+    Object? bodySite = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -1977,6 +1980,10 @@ class _$PostTriageImagingSelectionModelCopyWithImpl<$Res,
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
               as String?,
+      bodySite: freezed == bodySite
+          ? _value.bodySite
+          : bodySite // ignore: cast_nullable_to_non_nullable
+              as BodySite?,
     ) as $Val);
   }
 }
@@ -1996,7 +2003,8 @@ abstract class _$$_PostTriageImagingSelectionModelCopyWith<$Res>
       String? endpoint,
       String? baseUrl,
       double? score,
-      String? fileId});
+      String? fileId,
+      BodySite? bodySite});
 }
 
 /// @nodoc
@@ -2018,6 +2026,7 @@ class __$$_PostTriageImagingSelectionModelCopyWithImpl<$Res>
     Object? baseUrl = freezed,
     Object? score = freezed,
     Object? fileId = freezed,
+    Object? bodySite = freezed,
   }) {
     return _then(_$_PostTriageImagingSelectionModel(
       id: freezed == id
@@ -2044,6 +2053,10 @@ class __$$_PostTriageImagingSelectionModelCopyWithImpl<$Res>
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
               as String?,
+      bodySite: freezed == bodySite
+          ? _value.bodySite
+          : bodySite // ignore: cast_nullable_to_non_nullable
+              as BodySite?,
     ));
   }
 }
@@ -2058,7 +2071,8 @@ class _$_PostTriageImagingSelectionModel
       this.endpoint,
       this.baseUrl,
       this.score,
-      this.fileId});
+      this.fileId,
+      this.bodySite});
 
   factory _$_PostTriageImagingSelectionModel.fromJson(
           Map<String, dynamic> json) =>
@@ -2076,10 +2090,12 @@ class _$_PostTriageImagingSelectionModel
   final double? score;
   @override
   final String? fileId;
+  @override
+  final BodySite? bodySite;
 
   @override
   String toString() {
-    return 'PostTriageImagingSelectionModel(id: $id, identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId)';
+    return 'PostTriageImagingSelectionModel(id: $id, identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId, bodySite: $bodySite)';
   }
 
   @override
@@ -2094,13 +2110,15 @@ class _$_PostTriageImagingSelectionModel
                 other.endpoint == endpoint) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
             (identical(other.score, score) || other.score == score) &&
-            (identical(other.fileId, fileId) || other.fileId == fileId));
+            (identical(other.fileId, fileId) || other.fileId == fileId) &&
+            (identical(other.bodySite, bodySite) ||
+                other.bodySite == bodySite));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, identifier, endpoint, baseUrl, score, fileId);
+      runtimeType, id, identifier, endpoint, baseUrl, score, fileId, bodySite);
 
   @JsonKey(ignore: true)
   @override
@@ -2126,7 +2144,8 @@ abstract class _PostTriageImagingSelectionModel
       final String? endpoint,
       final String? baseUrl,
       final double? score,
-      final String? fileId}) = _$_PostTriageImagingSelectionModel;
+      final String? fileId,
+      final BodySite? bodySite}) = _$_PostTriageImagingSelectionModel;
 
   factory _PostTriageImagingSelectionModel.fromJson(Map<String, dynamic> json) =
       _$_PostTriageImagingSelectionModel.fromJson;
@@ -2143,6 +2162,8 @@ abstract class _PostTriageImagingSelectionModel
   double? get score;
   @override
   String? get fileId;
+  @override
+  BodySite? get bodySite;
   @override
   @JsonKey(ignore: true)
   _$$_PostTriageImagingSelectionModelCopyWith<
