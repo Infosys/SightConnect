@@ -2,10 +2,9 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_consent_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/app_consent_form.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/vt_consent_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
@@ -127,7 +126,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         // 18+ declaration and consent check for patient
         // bool is18PlusDeclarationAccepted =
         //     await model.getEighteenPlusDeclarationStatus();
-        bool is18PlusDeclarationAccepted = await model.getEighteenPlusDeclarationStatus();
+        bool is18PlusDeclarationAccepted =
+            await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
 
         if (is18PlusDeclarationAccepted && isConsentAccepted) {
@@ -135,7 +135,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         } else {
           if (!is18PlusDeclarationAccepted) {
             is18PlusDeclarationAccepted =
-                await _show18PlusDeclaration() ?? false;
+                await _show18PlusDeclaration(navigator, role) ?? false;
           }
           if (!isConsentAccepted) {
             isConsentAccepted =
@@ -156,28 +156,23 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     }
   }
 
-  Future<bool?> _show18PlusDeclaration() async {
-    return showDialog<bool?>(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return const EighteenPlusDeclaration();
-      },
+  Future<bool?> _show18PlusDeclaration(
+      NavigatorState navigator, Role role) async {
+    bool? consentGiven = await navigator.push<bool?>(
+      MaterialPageRoute(
+        builder: (context) {
+          return const EighteenPlusDeclaration();
+        },
+      ),
     );
+    return consentGiven;
   }
 
   Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
     bool? consentGiven = await navigator.push<bool?>(
       MaterialPageRoute(
         builder: (context) {
-          if (role == Role.ROLE_PATIENT) {
-            return const PatientConsentFormPage();
-          } else if (role == Role.ROLE_VISION_TECHNICIAN) {
-            return const VTConsentFormPage();
-          } else {
-            // This is for vision guardian
-            return const VTConsentFormPage();
-          }
+          return const AppConsentFormPage();
         },
       ),
     );

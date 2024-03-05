@@ -184,22 +184,9 @@ class InitializationProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> sumbitEighteenPlusDeclaration() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
-    await consentRepository.setConsent(
-      ConsentModel(
-        templateId: consent.templateId,
-        consentVersion: consent.consentVersion,
-        consentStatus: ConsentStatus.ACKNOWLEDGED,
-        acknowledgeDate: DateTime.now().toUtc().toIso8601String(),
-      ),
-    );
-  }
-
   Future<bool> getConsentStatus() async {
     final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent();
+    final consent = await consentRepository.getConsent(type: "PRIVACY_POLICY");
     if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
       return true;
     } else {
@@ -207,9 +194,8 @@ class InitializationProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> sumbitConsent() async {
+  Future<void> sumbitConsent({required ConsentModel consent}) async {
     final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent();
     await consentRepository.setConsent(
       ConsentModel(
         templateId: consent.templateId,
