@@ -39,22 +39,22 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text(
-            loc.vtClose,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.white,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(AppSize.kmpadding),
+      //   child: ElevatedButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     child: Text(
+      //       loc.vtClose,
+      //       style: applyRobotoFont(
+      //         fontSize: 14,
+      //         color: AppColor.white,
+      //         fontWeight: FontWeight.w500,
+      //       ),
+      //     ),
+      //   ),
+      // ),
       appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
