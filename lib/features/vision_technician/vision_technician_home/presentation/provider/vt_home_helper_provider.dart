@@ -44,7 +44,6 @@ class VTHomeHelperNotifier extends ChangeNotifier {
   }
 
   Future<void> getAssessmentTable() async {
-    _listOfAssessments.clear();
     try {
       hasMore = true;
       _isLoading = true;

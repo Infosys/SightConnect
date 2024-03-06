@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,23 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         ),
         centerTitle: false,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VisionTechnicianSearchPage(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.search,
+              color: AppColor.white,
+            ),
+          ),
+          isMobile
+              ? const SizedBox(width: AppSize.kswidth)
+              : const SizedBox(width: AppSize.klwidth),
           InkWell(
             onTap: () {
               Navigator.push(

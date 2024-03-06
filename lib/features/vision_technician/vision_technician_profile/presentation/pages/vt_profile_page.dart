@@ -27,20 +27,20 @@ class VTProfilePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     var isLoading = useState(false);
-    return LoadingOverlay(
-      isLoading: isLoading.value,
-      child: Scaffold(
-        appBar: CustomAppbar(
-          centerTitle: false,
-          title: Text(
-            loc.vtProfile,
-            textAlign: TextAlign.left,
-          ),
-          actions: const [],
+    return Scaffold(
+      appBar: CustomAppbar(
+        centerTitle: false,
+        title: Text(
+          loc.vtProfile,
+          textAlign: TextAlign.left,
         ),
-        body: ref.watch(getVTProfileProvider).when(
-          data: (data) {
-            return SingleChildScrollView(
+        actions: const [],
+      ),
+      body: ref.watch(getVTProfileProvider).when(
+        data: (data) {
+          return LoadingOverlay(
+            isLoading: isLoading.value,
+            child: SingleChildScrollView(
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
@@ -160,19 +160,19 @@ class VTProfilePage extends HookConsumerWidget {
                   ],
                 ),
               ),
-            );
-          },
-          error: (e, s) {
-            return Center(
-              child: Text("Error $e"),
-            );
-          },
-          loading: () {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          },
-        ),
+            ),
+          );
+        },
+        error: (e, s) {
+          return Center(
+            child: Text("Error $e"),
+          );
+        },
+        loading: () {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        },
       ),
     );
   }

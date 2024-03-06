@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/pages/vision_technician_register_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -87,7 +88,7 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             //   Navigator.push(
             //     context,
             //     MaterialPageRoute(
-            //       builder: (context) => const VisionTechnicianSearchPage(),
+            //       builder: (context) => const VisionTechnicianRegisterPage(),
             //     ),
             //   );
 
@@ -130,30 +131,13 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
             ),
             label: loc.vtDashboard,
           ),
-          // BottomNavigationBarItem(
-          //   icon: Padding(
-          //     padding: isMobile
-          //         ? const EdgeInsets.all(4.0)
-          //         : const EdgeInsets.all(8.0),
-          //     child: SvgPicture.asset(
-          //       AppIcon.vtRegisterIcon,
-          //       height: isMobile ? 20 : 30,
-          //       width: isMobile ? 20 : 30,
-          //       colorFilter: const ColorFilter.mode(
-          //         AppColor.grey,
-          //         BlendMode.srcIn,
-          //       ),
-          //     ),
-          //   ),
-          //   label: loc.vtRegisterPatient,
-          // ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: isMobile
                   ? const EdgeInsets.all(4.0)
                   : const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
-                "assets/nav_icons/Assessmentdefault.svg",
+                AppIcon.vtRegisterIcon,
                 height: isMobile ? 20 : 30,
                 width: isMobile ? 20 : 30,
                 colorFilter: const ColorFilter.mode(
@@ -162,8 +146,25 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
                 ),
               ),
             ),
-            label: loc.vtTriage,
+            label: loc.vtRegisterPatient,
           ),
+          // BottomNavigationBarItem(
+          //   icon: Padding(
+          //     padding: isMobile
+          //         ? const EdgeInsets.all(4.0)
+          //         : const EdgeInsets.all(8.0),
+          //     child: SvgPicture.asset(
+          //       "assets/nav_icons/Assessmentdefault.svg",
+          //       height: isMobile ? 20 : 30,
+          //       width: isMobile ? 20 : 30,
+          //       colorFilter: const ColorFilter.mode(
+          //         AppColor.grey,
+          //         BlendMode.srcIn,
+          //       ),
+          //     ),
+          //   ),
+          //   label: loc.vtTriage,
+          // ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: isMobile

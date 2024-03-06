@@ -29,36 +29,36 @@ class AssessmentTable extends HookConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VisionTechnicianSearchPage(),
-                ),
-              );
-            },
-            child: TextField(
-              readOnly: true,
-              enabled: false,
-              controller: textController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColor.white,
-                isDense: true,
-                prefixIcon: const Icon(
-                  CupertinoIcons.search,
-                  color: AppColor.grey,
-                ),
-                hintText: loc.vtSearchText,
-                hintStyle: applyRobotoFont(
-                  color: AppColor.grey,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ),
+          // const SizedBox(height: AppSize.kmheight),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => const VisionTechnicianSearchPage(),
+          //       ),
+          //     );
+          //   },
+          //   child: TextField(
+          //     readOnly: true,
+          //     enabled: false,
+          //     controller: textController,
+          //     decoration: InputDecoration(
+          //       filled: true,
+          //       fillColor: AppColor.white,
+          //       isDense: true,
+          //       prefixIcon: const Icon(
+          //         CupertinoIcons.search,
+          //         color: AppColor.grey,
+          //       ),
+          //       hintText: loc.vtSearchText,
+          //       hintStyle: applyRobotoFont(
+          //         color: AppColor.grey,
+          //         fontSize: 14,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           const SizedBox(height: AppSize.kmheight),
           const ListOfFilterChips(),
           const SizedBox(height: AppSize.kmheight),
