@@ -161,23 +161,29 @@ class AppDrawer extends HookWidget {
 
                                 case DrawerMenuItemId.chatbot:
                                   Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
-                                    var languageProvider =
-                                        ref.watch(globalLanguageProvider);
-                                    var currentLanguage =
-                                        languageProvider.currentLanguage;
-                                    var currentLanguageCode = languageProvider
-                                        .currentLocale!.languageCode;
-                                    logger.d("language: $currentLanguage");
-                                    return ChatBotPage(
-                                      selectedLanguage: currentLanguage,
-                                      selectedLanguageCode: currentLanguageCode,
-                                      welcomeMessage: loc.chatBotWelcomeMessage,
-                                      defaultQuerySuggestions: loc
-                                          .chatBotDefaultQuerySuggestions
-                                          .split("|"),
-                                    );
-                                  }));
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        var languageProvider =
+                                            ref.watch(globalLanguageProvider);
+                                        var currentLanguage =
+                                            languageProvider.currentLanguage;
+                                        var currentLanguageCode =
+                                            languageProvider
+                                                .currentLocale!.languageCode;
+                                        logger.d("language: $currentLanguage");
+                                        return ChatBotPage(
+                                          selectedLanguage: currentLanguage,
+                                          selectedLanguageCode:
+                                              currentLanguageCode,
+                                          welcomeMessage:
+                                              loc.chatBotWelcomeMessage,
+                                          defaultQuerySuggestions: loc
+                                              .chatBotDefaultQuerySuggestions
+                                              .split("|"),
+                                        );
+                                      },
+                                    ),
+                                  );
 
                                 default:
                               }

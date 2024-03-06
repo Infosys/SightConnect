@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/providers/vision_technician_register_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/patient_info_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/vision_technician_patient_list.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_patient_button.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_register_page/presentation/widgets/register_search_bar.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -35,7 +35,6 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
               query.value = value;
             },
           ),
-          const SizedBox(height: AppSize.klheight),
           () {
             if (query.value.isEmpty) {
               return Center(
@@ -57,7 +56,9 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
               return Expanded(
                 child: ref.watch(vtRegisterProvider(query.value)).when(
                   data: (data) {
-                    if (data.isEmpty) {
+                    if (query.value.isEmpty) {
+                      return const SizedBox();
+                    } else if (data.isEmpty) {
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,13 +76,7 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
                         ),
                       );
                     } else {
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return RegisterPatientInfoCard(data: data[index]);
-                        },
-                      );
+                      return VisionTechnicianPatientListWidget(response: data);
                     }
                   },
                   error: (e, s) {

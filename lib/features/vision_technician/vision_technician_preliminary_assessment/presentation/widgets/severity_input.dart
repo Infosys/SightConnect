@@ -7,19 +7,12 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SeverityInput extends ConsumerStatefulWidget {
+class SeverityInput extends ConsumerWidget {
   const SeverityInput({super.key});
 
   @override
-  ConsumerState<SeverityInput> createState() => _SeverityInputState();
-}
-
-class _SeverityInputState extends ConsumerState<SeverityInput> {
-  String severity = "ROUTINE";
-
-  @override
-  Widget build(BuildContext context) {
-    // var readRef = ref.read(preliminaryAssessmentHelperProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(preliminaryAssessmentHelperProvider);
     final loc = context.loc!;
     return SizedBox(
       height: AppSize.klheight * 5,
@@ -49,8 +42,7 @@ class _SeverityInputState extends ConsumerState<SeverityInput> {
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  hint: const Text("Select Severity"),
-                  value: severity,
+                  value: model.selectedSeverity?.name,
                   isExpanded: true,
                   items: <String>[
                     "ROUTINE",
@@ -64,10 +56,8 @@ class _SeverityInputState extends ConsumerState<SeverityInput> {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    setState(() {
-                      severity = value!;
-                    });
-                    setSeverity(value!, ref);
+                    final severity = severityMapper(value);
+                    model.setSeverity(severity);
                   },
                 ),
               ),
@@ -78,23 +68,17 @@ class _SeverityInputState extends ConsumerState<SeverityInput> {
     );
   }
 
-  void setSeverity(String value, WidgetRef ref) {
-    if (value == "ROUTINE") {
-      ref
-          .read(preliminaryAssessmentHelperProvider)
-          .setSeverity(TriagePriority.ROUTINE);
-    } else if (value == "URGENT") {
-      ref
-          .read(preliminaryAssessmentHelperProvider)
-          .setSeverity(TriagePriority.URGENT);
-    } else if (value == "ASAP") {
-      ref
-          .read(preliminaryAssessmentHelperProvider)
-          .setSeverity(TriagePriority.ASAP);
-    } else if (value == "STAT") {
-      ref
-          .read(preliminaryAssessmentHelperProvider)
-          .setSeverity(TriagePriority.STAT);
+  TriagePriority severityMapper(String? priority) {
+    if (priority == "ROUTINE") {
+      return TriagePriority.ROUTINE;
+    } else if (priority == "URGENT") {
+      return TriagePriority.URGENT;
+    } else if (priority == "ASAP") {
+      return TriagePriority.ASAP;
+    } else if (priority == "STAT") {
+      return TriagePriority.STAT;
+    } else {
+      return TriagePriority.ROUTINE;
     }
   }
 }

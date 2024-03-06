@@ -53,6 +53,9 @@ class VtTriageProvider extends ChangeNotifier {
   final PreliminaryAssessmentHelperNotifier
       _preliminaryAssessmentHelperProvider;
   final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
+  final bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
 
   VtTriageProvider(
     this._saveTriageUseCase,
@@ -67,6 +70,7 @@ class VtTriageProvider extends ChangeNotifier {
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
       VTPatientDto patientDetails) async {
+    _preliminaryAssessmentHelperProvider.setLoading(true);
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {
       logger.d("on ivr called");
       final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
@@ -76,11 +80,11 @@ class VtTriageProvider extends ChangeNotifier {
         callerNumber: patientDetails.mobile,
       );
 
-      await _callerDetailsRemoteSource
-          .saveCallerDetails(callerDetails)
-          .catchError((e) {
-        throw Left(ServerFailure(errorMessage: "Not on IVR Call Please"));
-      });
+      try {
+        await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
+      } catch (e) {
+        return Left(ServerFailure(errorMessage: "Not on IVR Call"));
+      }
     }
 
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -143,36 +147,45 @@ class VtTriageProvider extends ChangeNotifier {
     );
     _preliminaryAssessmentHelperProvider.setLoading(true);
 
-    Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
-      SaveTriageParam(triagePostModel: triagePostModel),
-    );
+    try {
+      Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
+        SaveTriageParam(triagePostModel: triagePostModel),
+      );
 
-    TriagePostModel? triageResponse = response.fold((error) {
-      throw error;
-    }, (result) {
-      logger.d("triage response $result");
-      return result;
-    });
-
-    _preliminaryAssessmentHelperProvider.setTriageResponse(triageResponse);
-
-    int? reportId = triageResponse?.id;
-    int? encounterId = triageResponse?.encounter?.id;
-    int? organizationCode = assessment.organizationCode;
-    Either<Failure, CarePlanPostModel>? carePlanResponse;
-
-    if (organizationCode != null && reportId != null && encounterId != null) {
-      carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
-          organizationCode, reportId, encounterId);
-
-      carePlanResponse.fold((error) {
+      final triageResponse = response.fold((error) {
         throw error;
       }, (result) {
-        _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
+        logger.d("triage response $result");
+        return result;
       });
+
+      _preliminaryAssessmentHelperProvider.setTriageResponse(triageResponse);
+
+      int? reportId = triageResponse.id;
+      int? encounterId = triageResponse.encounter?.id;
+      int? organizationCode = assessment.organizationCode;
+      Either<Failure, CarePlanPostModel>? carePlanResponse;
+
+      if (organizationCode != null) {
+        carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
+          organizationCode,
+          reportId!,
+          encounterId!,
+        );
+
+        carePlanResponse.fold((error) {
+          throw error;
+        }, (result) {
+          _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
+        });
+      }
+      _preliminaryAssessmentHelperProvider.setLoading(false);
+      return response;
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: e.toString()));
+    } finally {
+      _preliminaryAssessmentHelperProvider.setLoading(false);
     }
-    _preliminaryAssessmentHelperProvider.setLoading(false);
-    return response;
   }
 }
 

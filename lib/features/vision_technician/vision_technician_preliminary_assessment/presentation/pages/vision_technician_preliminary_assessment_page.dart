@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -16,6 +17,7 @@ import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 import '../../../vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
@@ -39,12 +41,12 @@ class VisionTechnicianTriageResult extends ChangeNotifier {
 }
 
 class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
-  const VisionTechnicianPreliminaryAssessmentPage({
+  VTPatientDto? patientDetails;
+
+  VisionTechnicianPreliminaryAssessmentPage({
     super.key,
     this.patientDetails,
   });
-
-  final VTPatientDto? patientDetails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,7 +81,10 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
     var isLoading = refWatch.isLoading;
 
     return Scaffold(
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: AppColor.white,
+        ),
         padding: const EdgeInsets.all(AppSize.kmpadding),
         child: isLoading
             ? const Center(child: CircularProgressIndicator.adaptive())
@@ -95,18 +100,20 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
 
                         response.fold(
                           (failure) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(failure.errorMessage),
-                              ),
-                            );
+                            Fluttertoast.showToast(msg: failure.errorMessage);
                           },
                           (triageResponseModel) {
+                            logger.f(
+                                "Triage Response Model: ${triageResponseModel.encounterId}");
+                            patientDetails = patientDetails?.copyWith(
+                              encounterId: triageResponseModel.encounterId,
+                            );
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
                                     VisionTechnicianCloseAssessmentPage(
-                                        patientDetails: patientDetails),
+                                  patientDetails: patientDetails,
+                                ),
                               ),
                             );
 
@@ -117,11 +124,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         );
                       }
                     : null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    canSubmit ? AppColor.primary : AppColor.lightGrey,
-                  ),
-                ),
                 child: Text(
                   loc.vtSubmit,
                   style: applyRobotoFont(

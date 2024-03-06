@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/list_of_filter_chips.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_patient_list.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
@@ -16,7 +15,6 @@ class AssessmentTable extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(vtHomeHelperProvider);
     var textController = useTextEditingController();
     final loc = context.loc!;
     return Padding(
@@ -64,7 +62,7 @@ class AssessmentTable extends HookConsumerWidget {
           const SizedBox(height: AppSize.kmheight),
           const ListOfFilterChips(),
           const SizedBox(height: AppSize.kmheight),
-          PatientAssessmentPaginatedTable(data: model.listOfAssessments),
+          const PatientAssessmentPaginatedTable(),
         ],
       ),
     );

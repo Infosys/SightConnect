@@ -15,13 +15,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PatientAssessmentPaginatedTable extends HookConsumerWidget {
-  final List<VTPatientDto> data;
-  const PatientAssessmentPaginatedTable({super.key, required this.data});
+  const PatientAssessmentPaginatedTable({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(vtHomeHelperProvider);
-
     bool isMobile = Responsive.isMobile(context);
     final loc = context.loc!;
     if (model.listOfAssessments.isEmpty && !model.isLoading) {
@@ -53,23 +51,22 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
     }
 
     return PaginatedDataTable(
+      onRowsPerPageChanged: (value) {
+        model.changePageSize(value);
+      },
+      availableRowsPerPage: const [10, 20, 30],
       rowsPerPage: model.pageSize,
       showCheckboxColumn: false,
       columnSpacing: isMobile
           ? AppSize.width(context) * 0.06
           : AppSize.width(context) * 0.05,
-      headingRowHeight: Responsive.isMobile(context)
-          ? AppSize.klheight * 2
-          : AppSize.klheight * 3,
-      horizontalMargin: Responsive.isMobile(context)
+      headingRowHeight: isMobile ? AppSize.klheight * 2 : AppSize.klheight * 3,
+      horizontalMargin: isMobile
           ? AppSize.width(context) * 0.05
           : AppSize.width(context) * 0.05,
-      dataRowMaxHeight: Responsive.isMobile(context)
-          ? AppSize.klheight * 3
-          : AppSize.klheight * 3.5,
-      dataRowMinHeight: Responsive.isMobile(context)
-          ? AppSize.klheight * 1
-          : AppSize.klheight * 2,
+      dataRowMaxHeight:
+          isMobile ? AppSize.klheight * 3 : AppSize.klheight * 3.5,
+      dataRowMinHeight: isMobile ? AppSize.klheight * 1 : AppSize.klheight * 2,
       columns: [
         DataColumn(
           label: Text(
@@ -128,7 +125,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ),
       ],
       source: PatientAssessmentDataSource(
-        data: data,
+        data: model.listOfAssessments,
         context: context,
         vtSearchProvider: ref.watch(visionTechnicianSearchProvider),
         model: model,

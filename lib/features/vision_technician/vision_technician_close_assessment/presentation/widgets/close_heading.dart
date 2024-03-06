@@ -23,7 +23,7 @@ class CloseHeading extends StatelessWidget {
         ),
         Flexible(
           child: Text(
-            "${loc.vtAssessmentEA} $encountedId",
+            "${loc.vtAssessmentEA} ${encountedId ?? "-"}",
             style: applyFiraSansFont(fontSize: 18),
           ),
         ),

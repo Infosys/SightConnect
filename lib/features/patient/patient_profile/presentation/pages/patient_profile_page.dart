@@ -130,59 +130,53 @@ class PatientProfilePage extends ConsumerWidget {
                                   context.loc!.profilePageHealthCardTitle,
                                   style: applyFiraSansFont(fontSize: 18),
                                 ),
-                                Visibility(
-                                  visible: patient
-                                          .profile?.patient?.parentPatientId ==
-                                      null,
-                                  child: InkWell(
-                                    customBorder: const CircleBorder(),
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .push<bool?>(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PatientRegistrationMiniappPage(
-                                            actionType:
-                                                MiniAppActionType.UPDATE,
-                                            displayName:
-                                                loc.patientUpdateProfile,
-                                          ),
+                                InkWell(
+                                  customBorder: const CircleBorder(),
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push<bool?>(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PatientRegistrationMiniappPage(
+                                          actionType: MiniAppActionType.UPDATE,
+                                          displayName: loc.patientUpdateProfile,
+                                          parentPatientId:
+                                              selectedPatientId.toString(),
                                         ),
-                                      )
-                                          .then((value) {
-                                        logger.d({
-                                          "Profile Page Update Miniapp": value
-                                        });
-                                        if (value == null || value == false) {
-                                          Fluttertoast.showToast(
-                                              msg:
-                                                  loc.patientProfileNotUpdated);
-                                        } else if (value) {
-                                          Fluttertoast.showToast(
-                                              msg: loc.patientProfileUpdated);
-                                          ref.invalidate(
-                                              getPatientProfileProvider);
-                                          ref.invalidate(
-                                              getPatientProfileByIdProvider(
-                                                  selectedPatientId));
-                                        }
+                                      ),
+                                    )
+                                        .then((value) {
+                                      logger.d({
+                                        "Profile Page Update Miniapp": value
                                       });
-                                    },
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.edit,
-                                          size: 16,
+                                      if (value == null || value == false) {
+                                        Fluttertoast.showToast(
+                                            msg: loc.patientProfileNotUpdated);
+                                      } else if (value) {
+                                        Fluttertoast.showToast(
+                                            msg: loc.patientProfileUpdated);
+                                        ref.invalidate(
+                                            getPatientProfileProvider);
+                                        ref.invalidate(
+                                            getPatientProfileByIdProvider(
+                                                selectedPatientId));
+                                      }
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.edit,
+                                        size: 16,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        loc.patientEdit,
+                                        style: applyFiraSansFont(
+                                          fontSize: 14,
                                         ),
-                                        const SizedBox(width: 4),
-                                        Text(
-                                          loc.patientEdit,
-                                          style: applyFiraSansFont(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 )
                               ],

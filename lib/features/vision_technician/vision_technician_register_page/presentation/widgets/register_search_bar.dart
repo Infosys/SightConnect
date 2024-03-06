@@ -35,6 +35,7 @@ class RegisterSearchBar extends HookWidget {
             ),
       child: TextField(
         controller: textController,
+        keyboardType: TextInputType.number,
         onChanged: (data) {
           if (regex != null) {
             if (data.isNotEmpty && !RegExp(regex!).hasMatch(data)) {
@@ -55,6 +56,7 @@ class RegisterSearchBar extends HookWidget {
           suffixIcon: InkWell(
             onTap: () {
               textController.clear();
+              onSearched?.call("");
             },
             child: const Icon(
               Icons.close,

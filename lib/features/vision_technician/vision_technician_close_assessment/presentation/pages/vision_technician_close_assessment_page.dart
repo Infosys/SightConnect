@@ -25,6 +25,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
     this.patientDetails,
   });
   final VTPatientDto? patientDetails;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;

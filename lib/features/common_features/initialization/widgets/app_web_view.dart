@@ -14,7 +14,7 @@ class AppWebView extends HookWidget {
     var isLoading = useState<bool>(false);
     var progress = useState<double>(0.0);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Stack(
         children: [
           InAppWebView(
