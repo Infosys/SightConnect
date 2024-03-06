@@ -29,7 +29,7 @@ class DrawerMenuItems {
     DrawerMenuItem switchProfile = const DrawerMenuItem(
       id: DrawerMenuItemId.switchProfile,
       title: "Switch Profile",
-      icon: "assets/drawer_icons/accessibility.svg",
+      icon: "assets/drawer_icons/switch.svg",
     );
     DrawerMenuItem language = DrawerMenuItem(
       id: DrawerMenuItemId.language,
