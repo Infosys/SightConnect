@@ -295,16 +295,12 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     if (!_controller.value.isInitialized) {
       return;
     }
-    _addLoading();
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _cameraLensDirection = CameraLensDirection.back;
     } else {
       _cameraLensDirection = CameraLensDirection.front;
     }
-    await _stopLiveFeed();
-    if (mounted) {
-      await _checkPermissions(context);
-    }
+    _checkPermissions(context);
   }
 
   Future<void> _toggleFlash() async {
