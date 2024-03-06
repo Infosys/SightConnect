@@ -23,35 +23,42 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     with WidgetsBindingObserver {
   List<CameraDescription> _cameras = [];
   late CameraController _controller;
-  ResolutionPreset defaultResolution = ResolutionPreset.max;
   CameraLensDirection _cameraLensDirection = CameraLensDirection.back;
-  bool isPermissionGranted = false;
+  final ResolutionPreset _defaultResolution = ResolutionPreset.max;
+  String _progressMessage = "Loading...";
   bool _isLoading = false;
+  bool _isPermissionGranted = false;
 
   @override
   void initState() {
+    logger.d("CameraPage: Init State Called");
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _checkPermissions(context);
   }
 
   Future<void> _checkPermissions(BuildContext context) async {
+    logger.d("CameraPage: Check Permissions Called");
     final NavigatorState navigator = Navigator.of(context);
-    setState(() {
-      isPermissionGranted = false;
-    });
+    if (mounted) {
+      setState(() {
+        _isPermissionGranted = false;
+        _isLoading = false;
+      });
+    }
+    logger.d("CameraPage: Checking Permissions");
     final bool isGranted =
         await CameraPermissionService.checkPermissions(context);
-    logger.d("AppCameraPage: isGranted: $isGranted");
+    logger.d("CameraPage: isGranted: $isGranted");
     if (isGranted) {
       if (mounted) {
         setState(() {
-          isPermissionGranted = true;
+          _isPermissionGranted = true;
         });
       }
       await _initializeCamera();
     } else {
-      logger.d("AppCameraPage: Permission not granted");
+      logger.d("CameraPage: Permission not granted");
       navigator.pop();
       if (context.mounted) {
         Fluttertoast.showToast(msg: context.loc!.permissionNotGranted);
@@ -60,7 +67,7 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
   }
 
   Future<void> _initializeCamera() async {
-    logger.d("AppCameraPage: Initialize Camera Called");
+    logger.d("CameraPage: Initialize Camera Called");
     final NavigatorState navigator = Navigator.of(context);
     final loc = context.loc!;
     try {
@@ -69,19 +76,19 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
       }
       await _startLiveFeed();
     } catch (e) {
-      logger.e("AppCameraPage: Error Initializing Camera: $e");
+      logger.e("CameraPage: Error Initializing Camera: $e");
       navigator.pop();
       Fluttertoast.showToast(msg: loc.appCameraNotFound);
     }
   }
 
   Future<void> _startLiveFeed() async {
-    logger.d('EyeDetectorView _startLiveFeed');
+    logger.d("CameraPage: Start Live Feed Called");
     _controller = CameraController(
       _cameras.firstWhere(
         (element) => element.lensDirection == _cameraLensDirection,
       ),
-      defaultResolution,
+      _defaultResolution,
       enableAudio: false,
       imageFormatGroup: Platform.isAndroid
           ? ImageFormatGroup.nv21
@@ -101,10 +108,67 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     }
   }
 
-  void _addLoading() {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    logger.d({
+      "CameraPage: AppLifecycleState": "$state",
+      "CameraPage: isPermissionGranted": "$_isPermissionGranted",
+      "CameraPage: isLoading": "$_isLoading",
+    });
+    if (!_isPermissionGranted) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      logger.d("CameraPage: AppLifecycleState.inactive");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.resumed) {
+      logger.d("CameraPage: AppLifecycleState.resumed");
+      if (mounted) {
+        _checkPermissions(context);
+      }
+    } else if (state == AppLifecycleState.paused) {
+      logger.d("CameraPage: AppLifecycleState.paused");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.detached) {
+      logger.d("CameraPage: AppLifecycleState.detached");
+      _addLoading();
+      _stopLiveFeed();
+    } else if (state == AppLifecycleState.hidden) {
+      logger.d("CameraPage: AppLifecycleState.hidden");
+      _addLoading();
+      _stopLiveFeed();
+    }
+  }
+
+  @override
+  void dispose() {
+    logger.d("CameraPage: Dispose Called");
+    WidgetsBinding.instance.removeObserver(this);
+    if (mounted) {
+      _stopLiveFeed();
+    }
+    super.dispose();
+  }
+
+  Future<void> _stopLiveFeed() async {
+    logger.d("CameraPage: Stop Live Feed Called");
+    try {
+      if (_controller.value.isInitialized) {
+        await _controller.dispose();
+      }
+    } catch (e) {
+      logger.d("CameraPage: Error stopping live feed: $e");
+    }
+  }
+
+  void _addLoading([String message = "Loading..."]) {
     if (mounted) {
       setState(() {
         _isLoading = true;
+        _progressMessage = message;
       });
     }
   }
@@ -118,53 +182,128 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (!isPermissionGranted) {
+  Widget build(BuildContext context) {
+    var refRead = ref.read(vtCloseAssessmentHelperProvider);
+    if (!_isPermissionGranted || _cameras.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator.adaptive(),
+        ),
+      );
+    }
+    if (!_controller.value.isInitialized) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator.adaptive(),
+        ),
+      );
+    } else {
+      return LoadingOverlay(
+        isLoading: _isLoading,
+        progressMessage: _progressMessage,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppColor.black,
+            borderRadius: BorderRadius.circular(AppSize.klradius),
+          ),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  child: CameraPreview(
+                    _controller,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: AppSize.klpadding,
+                right: AppSize.klpadding,
+                child: Container(
+                  width: AppSize.klwidth * 2,
+                  height: AppSize.klheight * 2,
+                  margin: const EdgeInsets.only(right: AppSize.klpadding),
+                  decoration: BoxDecoration(
+                    color: AppColor.white.withOpacity(0.5),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: () async {
+                      await _toggleFlash();
+                    },
+                    icon: Icon(
+                      _controller.value.flashMode == FlashMode.off
+                          ? Icons.flash_off
+                          : Icons.flash_on,
+                      color: AppColor.white,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: AppSize.width(context) * 0.05,
+                left: AppSize.width(context) * 0.1,
+                right: AppSize.width(context) * 0.1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      width: AppSize.klwidth * 2,
+                      height: AppSize.klheight * 2,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await _takePicture(context, refRead);
+                      },
+                      child: Container(
+                        width: AppSize.klwidth * 2,
+                        height: AppSize.klheight * 2,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          color: AppColor.white,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await _toggleCamera();
+                      },
+                      child: Container(
+                        width: AppSize.klwidth * 2,
+                        height: AppSize.klheight * 2,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColor.white.withOpacity(0.5),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(CupertinoIcons.camera_rotate),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> _toggleCamera() async {
+    if (!_controller.value.isInitialized) {
       return;
     }
-
-    if (state == AppLifecycleState.inactive) {
-      logger.d("AppCameraPage: AppLifecycleState.inactive");
-      _addLoading();
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.resumed) {
-      logger.d("AppCameraPage: AppLifecycleState.resumed");
-      if (mounted) {
-        _checkPermissions(context);
-      }
-    } else if (state == AppLifecycleState.paused) {
-      logger.d("AppCameraPage: AppLifecycleState.paused");
-      _addLoading();
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.detached) {
-      logger.d("AppCameraPage: AppLifecycleState.detached");
-      _addLoading();
-      _stopLiveFeed();
-    } else if (state == AppLifecycleState.hidden) {
-      logger.d("AppCameraPage: AppLifecycleState.hidden");
-      _addLoading();
-      _stopLiveFeed();
+    _addLoading();
+    if (_controller.description.lensDirection == CameraLensDirection.front) {
+      _cameraLensDirection = CameraLensDirection.back;
+    } else {
+      _cameraLensDirection = CameraLensDirection.front;
     }
-  }
-
-  @override
-  void dispose() {
-    logger.d("AppCameraPage: Dispose Called");
-    WidgetsBinding.instance.removeObserver(this);
+    await _stopLiveFeed();
     if (mounted) {
-      _stopLiveFeed();
-    }
-    super.dispose();
-  }
-
-  Future<void> _stopLiveFeed() async {
-    logger.d('EyeDetectorView _stopLiveFeed');
-    try {
-      if (_controller.value.isInitialized) {
-        await _controller.dispose();
-      }
-    } catch (e) {
-      logger.d('Error stopping live feed: $e');
+      await _checkPermissions(context);
     }
   }
 
@@ -182,130 +321,35 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     _removeLoading();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    var refRead = ref.read(vtCloseAssessmentHelperProvider);
-    if (!isPermissionGranted || _cameras.isEmpty) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
-      );
+  Future<void> _takePicture(
+    BuildContext context,
+    VTCloseAssessmentHelperNotifier refRead,
+  ) async {
+    final loc = context.loc!;
+    _addLoading("Hold the camera steady...");
+
+    try {
+      final XFile? image = await _capturePicture(context);
+      if (image == null) {
+        return;
+      }
+      refRead.saveImage(image);
+      _removeLoading();
+    } on CameraException {
+      Fluttertoast.showToast(msg: loc.appCameraNotFound);
+      return;
+    } catch (e) {
+      logger.e("Camera exception: $e");
+      Fluttertoast.showToast(msg: loc.appCameraException);
+      return;
     }
+  }
+
+  Future<XFile?> _capturePicture(BuildContext context) async {
     if (!_controller.value.isInitialized) {
-      return const Center(
-        child: CircularProgressIndicator.adaptive(),
-      );
-    } else {
-      return Container(
-        decoration: BoxDecoration(
-          color: AppColor.black,
-          borderRadius: BorderRadius.circular(AppSize.klradius),
-        ),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppSize.klradius),
-                child: CameraPreview(
-                  _controller,
-                ),
-              ),
-            ),
-            Positioned(
-              top: AppSize.klpadding,
-              right: AppSize.klpadding,
-              child: Container(
-                width: AppSize.klwidth * 2,
-                height: AppSize.klheight * 2,
-                margin: const EdgeInsets.only(right: AppSize.klpadding),
-                decoration: BoxDecoration(
-                  color: AppColor.white.withOpacity(0.5),
-                  shape: BoxShape.circle,
-                ),
-                child: IconButton(
-                  onPressed: () async {
-                    await _toggleFlash();
-                  },
-                  icon: Icon(
-                    _controller.value.flashMode == FlashMode.off
-                        ? Icons.flash_off
-                        : Icons.flash_on,
-                    color: AppColor.white,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: AppSize.width(context) * 0.05,
-              left: AppSize.width(context) * 0.1,
-              right: AppSize.width(context) * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
-                    width: AppSize.klwidth * 2,
-                    height: AppSize.klheight * 2,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      logger.d("camera button clicked");
-                      try {
-                        _addLoading();
-                        // refRead.setLoading(true);
-                        final XFile image = await _controller.takePicture();
-                        // refRead.setLoading(false);
-                        refRead.saveImage(image);
-                      } catch (e) {
-                        logger.d("camera error $e");
-                      } finally {
-                        _removeLoading();
-                      }
-                    },
-                    child: Container(
-                      width: AppSize.klwidth * 2,
-                      height: AppSize.klheight * 2,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        color: AppColor.white,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      logger.d("camera switch button clicked");
-                      if (!_controller.value.isInitialized) {
-                        return;
-                      } else {
-                        if (_controller.description.lensDirection ==
-                            CameraLensDirection.front) {
-                          _cameraLensDirection = CameraLensDirection.back;
-                        } else {
-                          _cameraLensDirection = CameraLensDirection.front;
-                        }
-                        await _stopLiveFeed();
-                        _initializeCamera();
-                      }
-                    },
-                    child: Container(
-                      width: AppSize.klwidth * 2,
-                      height: AppSize.klheight * 2,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColor.white.withOpacity(0.5),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(CupertinoIcons.camera_rotate),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+      return null;
     }
+    final XFile image = await _controller.takePicture();
+    return image;
   }
 }
