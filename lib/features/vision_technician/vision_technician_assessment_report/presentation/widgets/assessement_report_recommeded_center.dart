@@ -4,8 +4,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,17 +39,9 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
-          Container(
-            width: AppSize.width(context),
-            decoration: BoxDecoration(
-              color: AppColor.white,
-              boxShadow: applyLightShadow(),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(AppSize.kmradius - 5),
-              ),
-            ),
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+          const SizedBox(height: AppSize.kmheight),
+          AppCard(
+            padding: AppSize.kmpadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,10 +56,12 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.location_on_outlined,
-                            color: AppColor.grey),
-                        SizedBox(
-                          width: AppSize.width(context) / 2,
+                        const Icon(
+                          Icons.location_on_outlined,
+                          color: AppColor.grey,
+                        ),
+                        const SizedBox(width: 4),
+                        Flexible(
                           child: Text(
                             "${data.facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""}, ${data.facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}, ${data.facilityInformation?.facilityAddressDetails?.pincode ?? ""}",
                             overflow: TextOverflow.ellipsis,
@@ -92,18 +86,18 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                               color: AppColor.grey,
                               size: AppSize.klheight,
                             ),
-                            const SizedBox(width: AppSize.kswidth),
-                            Text(
-                              data
-                                      .facilityInformation
-                                      ?.facilityContactInformation
-                                      ?.facilityContactNumber ??
-                                  "",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: Text(
+                                data
+                                        .facilityInformation
+                                        ?.facilityContactInformation
+                                        ?.facilityContactNumber ??
+                                    "",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                           ],
@@ -120,9 +114,8 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                                 size: AppSize.klheight,
                               ),
                             ),
-                            const SizedBox(width: AppSize.kswidth),
-                            SizedBox(
-                              width: AppSize.width(context) / 4,
+                            const SizedBox(width: 4),
+                            Flexible(
                               child: Text(
                                 "${data.facilityInformation?.timingsOfFacility?.first.workingDays ?? ""} - ${data.facilityInformation?.timingsOfFacility?.last.workingDays ?? ""}, ${data.facilityInformation?.timingsOfFacility?.first.openingHours ?? ""}",
                                 maxLines: 3,
