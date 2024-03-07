@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_details.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_recommeded_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_profile.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_photo_page.dart';
@@ -18,9 +19,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
+  final VTPatientDto patientDetails;
   const VisionTechnicianAssessmentReportPage({
     required this.assessmentDetailsReport,
     super.key,
+    required this.patientDetails,
   });
   final AssessmentAndTriageReportDetailedEntity assessmentDetailsReport;
 
@@ -46,6 +49,8 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
             children: [
               AssessmentReportProfile(
                 assessmentId: assessmentDetailsReport.assessmentID,
+                patientDetails: patientDetails,
+                assessmentDate: assessmentDetailsReport.reportDate,
               ),
               const SizedBox(height: AppSize.klheight),
               AppCard(

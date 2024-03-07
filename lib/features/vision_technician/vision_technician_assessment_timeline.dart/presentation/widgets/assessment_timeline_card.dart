@@ -27,7 +27,9 @@ class AssessmentTimelineCard extends StatelessWidget {
           patientId: model.id,
         ),
         const SizedBox(height: AppSize.kmheight),
-        const AssessmentTimeline(),
+        AssessmentTimeline(
+          patientDetail: model,
+        ),
       ],
     );
   }

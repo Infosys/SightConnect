@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/assessment_timeline_view.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,11 @@ var vtAssessmentTimelineProvider =
 });
 
 class AssessmentTimeline extends ConsumerWidget {
+  final VTPatientDto? patientDetail;
+
   const AssessmentTimeline({
     super.key,
+    this.patientDetail,
   });
 
   @override
@@ -119,7 +123,7 @@ class AssessmentTimeline extends ConsumerWidget {
                       const SizedBox(height: AppSize.klheight),
                       const Divider(thickness: 1, color: AppColor.grey),
                       const SizedBox(height: AppSize.klheight),
-                      AssessmentTimelineView(data),
+                      AssessmentTimelineView(data, patientDetail!),
                     ],
                   ),
                 ),
