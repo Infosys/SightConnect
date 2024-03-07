@@ -31,6 +31,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
   List<VTPatientDto> get listOfAssessments => _listOfAssessments;
 
   void updateCategory(String value) {
+    if (isLoading) return;
     _listOfAssessments.clear();
     _tempListOfAssessments.clear();
     _pageNumber = 0;
