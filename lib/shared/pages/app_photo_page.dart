@@ -8,9 +8,11 @@ class AppPhotoPage extends StatelessWidget {
   const AppPhotoPage({
     super.key,
     required this.image,
+    required this.title,
   });
 
   final String image;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class AppPhotoPage extends StatelessWidget {
       appBar: CustomAppbar(
         iconTheme: const IconThemeData(color: AppColor.white),
         title: Text(
-          'Eye Image',
+          title,
           style: applyRobotoFont(color: AppColor.white),
         ),
       ),

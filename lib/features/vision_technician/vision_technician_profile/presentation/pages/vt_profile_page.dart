@@ -53,7 +53,7 @@ class VTProfilePage extends HookConsumerWidget {
                     const SizedBox(height: AppSize.kmheight),
                     VTProfilePersonalDetailsCard(profileData: data),
                     const SizedBox(height: AppSize.kmheight),
-                    // //VgProfileWorkLocationCard(profileData: data),
+                    // VgProfileWorkLocationCard(profileData: data),
                     // const SizedBox(
                     //   height: AppSize.kmheight,
                     // ),

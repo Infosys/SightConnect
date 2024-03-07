@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assesment_eye_image_card.dart';
@@ -11,7 +9,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_remark_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessmnet_acuity_score_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -31,19 +28,20 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
     final loc = context.loc!;
     final appBarTitle =
         "${loc.vtAssessmentReport} ${assessmentDetailsReport.assessmentID}";
-    logger.d(assessmentDetailsReport.toJson());
+
     return Scaffold(
       appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
         title: Text(appBarTitle),
+        actions: const [],
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSize.kmpadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               AssessmentReportProfile(

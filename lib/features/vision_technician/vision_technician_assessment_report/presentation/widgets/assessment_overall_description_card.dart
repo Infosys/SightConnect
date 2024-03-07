@@ -30,6 +30,7 @@ class AssessmentOverallDescriptionCard extends StatelessWidget {
         AppCard(
           padding: AppSize.klpadding,
           enableBorder: true,
+          borderThickness: 2,
           color: _recommendationColor(cumulativeSeverity),
           child: Text(
             triageResultDescription ?? "",

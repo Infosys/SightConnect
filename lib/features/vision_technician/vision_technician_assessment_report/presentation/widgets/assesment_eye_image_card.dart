@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AssessmentEyeImageCard extends StatelessWidget {
@@ -42,59 +41,60 @@ class AssessmentEyeImageCard extends StatelessWidget {
               ),
             );
           }
-          return AppCard(
-            padding: 16,
-            child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: imageBriefEntity!.length,
-              physics: const NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: Responsive.isMobile(context) ? 2 : 3,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                final e = imageBriefEntity?[index];
+          return GridView.builder(
+            shrinkWrap: true,
+            itemCount: imageBriefEntity!.length,
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: Responsive.isMobile(context) ? 2 : 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemBuilder: (context, index) {
+              final e = imageBriefEntity?[index];
 
-                if (e == null) {
-                  return const SizedBox();
-                }
-                return InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AppPhotoPage(
-                          image: e.imageUrl,
-                        ),
+              if (e == null) {
+                return const SizedBox();
+              }
+
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AppPhotoPage(
+                        image: e.imageUrl,
+                        title: e.bodySite
+                            .replaceAll("_", " ")
+                            .capitalizeFirstOfEach(),
                       ),
-                    );
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        e.bodySite.replaceAll("_", " ").capitalizeFirstOfEach(),
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                  );
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      e.bodySite.replaceAll("_", " ").capitalizeFirstOfEach(),
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
                       ),
-                      const SizedBox(height: 8),
-                      Flexible(
+                    ),
+                    const SizedBox(height: AppSize.kmheight),
+                    Expanded(
+                      child: AppCard(
                         child: AppNetworkImage(
                           shapeCircle: false,
                           imageUrl: e.imageUrl,
-                          height: 150,
-                          width: 150,
                         ),
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    ),
+                  ],
+                ),
+              );
+            },
           );
         }()
       ],

@@ -248,7 +248,7 @@ class PatientAssessmentDataSource extends DataTableSource {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: categoryColor(data[index].category),
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Text(
               categoryMapper(data[index].category),

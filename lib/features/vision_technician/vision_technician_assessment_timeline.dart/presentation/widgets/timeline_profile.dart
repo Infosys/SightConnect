@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TimelineProfile extends ConsumerWidget {
   const TimelineProfile({
@@ -81,18 +82,27 @@ class TimelineProfile extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        padding: isMobile
-                            ? const EdgeInsets.all(AppSize.kspadding / 2)
-                            : const EdgeInsets.all(AppSize.kspadding),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white12,
-                        ),
-                        child: Icon(
-                          Icons.call_outlined,
-                          color: Colors.white,
-                          size: isMobile ? 14 : 18,
+                      InkWell(
+                        onTap: () async {
+                          if (model.mobile?.isEmpty ?? true) {
+                            return;
+                          }
+                          Uri phoneno = Uri.parse("tel:${model.mobile}");
+                          await launchUrl(phoneno);
+                        },
+                        child: Container(
+                          padding: isMobile
+                              ? const EdgeInsets.all(AppSize.kspadding / 2)
+                              : const EdgeInsets.all(AppSize.kspadding),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white12,
+                          ),
+                          child: Icon(
+                            Icons.call_outlined,
+                            color: Colors.white,
+                            size: isMobile ? 14 : 18,
+                          ),
                         ),
                       ),
                       SizedBox(

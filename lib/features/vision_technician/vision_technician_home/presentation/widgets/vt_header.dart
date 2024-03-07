@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_cases_analytics.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_age_analytics.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_symptoms_ananlytics.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -22,7 +21,7 @@ class VTHeader extends HookWidget {
     final List<Widget> slides = [
       const PatientCasesAnalytics(),
       const PatientAgeAnalytics(),
-      const PatientSymptomsAnalytics(),
+      // const PatientSymptomsAnalytics(),
     ];
     final loc = context.loc!;
     return Column(

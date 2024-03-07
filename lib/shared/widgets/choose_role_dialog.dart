@@ -40,13 +40,13 @@ class ChooseRoleDialog extends HookWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 2),
-            Text(
-              loc.roleNote,
-              style: applyFiraSansFont(
-                fontSize: 10,
-              ),
-            ),
+            // const SizedBox(height: 2),
+            // Text(
+            //   loc.roleNote,
+            //   style: applyFiraSansFont(
+            //     fontSize: 10,
+            //   ),
+            // ),
             const Divider(
               color: AppColor.primary,
               thickness: 1.4,

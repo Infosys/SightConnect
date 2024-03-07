@@ -43,7 +43,7 @@ class AssessmentReportProfile extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  patientDetails.name ?? "-",
+                  patientDetails.name.capitalizeFirstOfEach(),
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -183,12 +184,15 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
               return SizedBox(
                 child: AppNameAvatar(
                   name: data.name ?? "",
-                  color: AppColor.blue,
-                  fontSize: 16,
+                  fontSize: Responsive.isMobile(context) ? 16 : 20,
+                  radius: Responsive.isMobile(context) ? 18 : 30,
                 ),
               );
             } else {
-              return AppNetworkImage(imageUrl: data.profilePhoto ?? "");
+              return AppNetworkImage(
+                imageUrl: data.profilePhoto ?? "",
+                radius: Responsive.isMobile(context) ? 20 : 30,
+              );
             }
           }(),
           const SizedBox(width: AppSize.kmpadding),
@@ -248,7 +252,9 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSize.ksheight / 2),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: Responsive.isMobile(context)
+                      ? MainAxisAlignment.spaceBetween
+                      : MainAxisAlignment.start,
                   children: [
                     InkWell(
                       onTap: data.patientId == null ? null : onStartAssessment,
@@ -263,6 +269,11 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                               : AppColor.primary,
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.kspadding
+                          : AppSize.kmpadding,
                     ),
                     Visibility(
                       visible: data.parentPatientId == null,

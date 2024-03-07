@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:flutter/material.dart';
@@ -101,11 +102,15 @@ class _AssessmentReportDetailsState extends State<AssessmentReportDetails> {
                               thickness: 1.5,
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 10)
                         ],
                       );
                     },
                   ),
+                ),
+                Visibility(
+                  visible: !Responsive.isMobile(context),
+                  child: const SizedBox(height: 10),
                 ),
                 if (!showAll && widget.questionResponseBreifModel!.length > 10)
                   TextButton(

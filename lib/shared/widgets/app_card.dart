@@ -9,12 +9,14 @@ class AppCard extends StatelessWidget {
     this.padding = AppSize.kspadding,
     this.enableBorder = false,
     this.color = AppColor.lightGrey,
+    this.borderThickness = 1,
     super.key,
   });
   final Widget child;
   final double padding;
   final bool enableBorder;
   final Color color;
+  final double borderThickness;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,11 @@ class AppCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
-        boxShadow: applyLightShadow(),
+        boxShadow: applycustomShadow(),
         border: enableBorder
             ? Border.all(
                 color: color,
-                width: 1,
+                width: borderThickness,
               )
             : null,
         borderRadius: const BorderRadius.all(

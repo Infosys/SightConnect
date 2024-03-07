@@ -44,4 +44,10 @@ extension StringExtension on String? {
     if (str.isEmpty) return '';
     return str.split(" ").map((str) => str.capitalize()).join(" ");
   }
+
+  String formatTitle() {
+    final String str = this ?? '';
+    if (str.isEmpty) return '';
+    return str.replaceAll("_", " ").toLowerCase().sentenceCase();
+  }
 }

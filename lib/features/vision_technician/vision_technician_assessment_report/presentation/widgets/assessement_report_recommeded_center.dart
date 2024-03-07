@@ -43,94 +43,28 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
           AppCard(
             padding: AppSize.kmpadding,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
                   data.facilityInformation?.facilityName ?? "",
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: AppSize.kmheight),
-                RecommendationPhoneNumber(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.location_on_outlined,
-                          color: AppColor.grey,
-                        ),
-                        const SizedBox(width: 4),
-                        Flexible(
-                          child: Text(
-                            "${data.facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""}, ${data.facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}, ${data.facilityInformation?.facilityAddressDetails?.pincode ?? ""}",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 4,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Icons.phone_outlined,
-                              color: AppColor.grey,
-                              size: AppSize.klheight,
-                            ),
-                            const SizedBox(width: 4),
-                            Flexible(
-                              child: Text(
-                                data
-                                        .facilityInformation
-                                        ?.facilityContactInformation
-                                        ?.facilityContactNumber ??
-                                    "",
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: AppSize.ksheight),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Flexible(
-                              child: Icon(
-                                Icons.access_time_rounded,
-                                color: AppColor.grey,
-                                size: AppSize.klheight,
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            Flexible(
-                              child: Text(
-                                "${data.facilityInformation?.timingsOfFacility?.first.workingDays ?? ""} - ${data.facilityInformation?.timingsOfFacility?.last.workingDays ?? ""}, ${data.facilityInformation?.timingsOfFacility?.first.openingHours ?? ""}",
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                _AddressTile(
+                  icon: Icons.location_on_outlined,
+                  value:
+                      "${data.facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""}, ${data.facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}, ${data.facilityInformation?.facilityAddressDetails?.pincode ?? ""}",
+                ),
+                _AddressTile(
+                  icon: Icons.phone_outlined,
+                  value: data.facilityInformation?.facilityContactInformation
+                          ?.facilityContactNumber ??
+                      "",
+                ),
+                _AddressTile(
+                  icon: Icons.access_time_rounded,
+                  value:
+                      "${data.facilityInformation?.timingsOfFacility?.first.workingDays ?? ""} - ${data.facilityInformation?.timingsOfFacility?.last.workingDays ?? ""}, ${data.facilityInformation?.timingsOfFacility?.first.openingHours ?? ""}",
                 ),
               ],
             ),
@@ -148,18 +82,44 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
   }
 }
 
-class RecommendationPhoneNumber extends ConsumerWidget {
-  const RecommendationPhoneNumber({super.key, required this.children});
+class _AddressTile extends StatelessWidget {
+  const _AddressTile({
+    required this.icon,
+    required this.value,
+    super.key,
+  });
+  final IconData icon;
+  final String value;
 
-  final List<Widget> children;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Responsive.isMobile(context)
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start, children: children)
-        : Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: children,
-          );
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: Responsive.isMobile(context)
+          ? const EdgeInsets.symmetric(vertical: AppSize.kspadding)
+          : const EdgeInsets.symmetric(vertical: AppSize.kspadding),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: AppColor.grey,
+            size: 24,
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              value,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 4,
+              style: applyRobotoFont(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

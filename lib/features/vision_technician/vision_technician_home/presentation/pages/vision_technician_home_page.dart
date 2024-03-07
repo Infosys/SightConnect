@@ -62,7 +62,8 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const VTProfilePage()),
+                    builder: (context) => const VTProfilePage(),
+                  ),
                 );
               },
               child: AppNameAvatar(

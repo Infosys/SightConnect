@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
@@ -29,129 +30,128 @@ class AppConsentFormPage extends HookConsumerWidget {
     var isApiLoading = useState<bool>(false);
     final loc = context.loc!;
 
-    if (isPreview) {
-      return SafeArea(
-        child: Scaffold(
-          appBar: CustomAppbar(
-            title: Text(loc.privacyPolicyTitle),
-            automaticallyImplyLeading: false,
-            centerTitle: false,
-          ),
-          body: const AppWebView(
-            url: "https://surveys.infosysapps.com/dam/6353",
-          ),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: CustomAppbar(
+          title: Text(loc.privacyPolicyTitle),
+          automaticallyImplyLeading: false,
+          centerTitle: false,
         ),
-      );
-    } else {
-      return PopScope(
-        canPop: false,
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: CustomAppbar(
-            title: Text(loc.privacyPolicyTitle),
-            automaticallyImplyLeading: false,
-            centerTitle: false,
-          ),
-          body: Container(
-            height: AppSize.height(context),
-            width: AppSize.width(context),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  AppImages.scaffoldBg,
-                ),
-                fit: BoxFit.cover,
+        body: Container(
+          height: AppSize.height(context),
+          width: AppSize.width(context),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                AppImages.scaffoldBg,
               ),
+              fit: BoxFit.cover,
             ),
-            child: ref.watch(appConsentFormProvider).when(
-              data: (data) {
-                return Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: AppColor.white,
-                    boxShadow: applyLightShadow(),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(AppSize.kmradius - 5),
+          ),
+          child: ref.watch(appConsentFormProvider).when(
+            data: (data) {
+              if (isPreview) {
+                return SafeArea(
+                  child: Scaffold(
+                    appBar: CustomAppbar(
+                      title: Text(loc.privacyPolicyTitle),
+                      automaticallyImplyLeading: false,
+                      centerTitle: false,
+                    ),
+                    body: AppWebView(
+                      url: "${ApiConstant.baseUrl}/dam/${data.templateId}",
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Expanded(
-                        child: AppWebView(
-                          url: "https://surveys.infosysapps.com/dam/6353",
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kmpadding,
-                          vertical: AppSize.kmpadding / 2,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CheckboxListTile.adaptive(
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: Text(loc.consentPageCheckbox),
-                              value: selectedValue.value,
-                              onChanged: (value) {
-                                selectedValue.value = value ?? false;
-                              },
-                            ),
-                            isApiLoading.value
-                                ? const Center(
-                                    child: CircularProgressIndicator.adaptive(),
-                                  )
-                                : ElevatedButton(
-                                    onPressed: !selectedValue.value
-                                        ? null
-                                        : () async {
-                                            final navigator =
-                                                Navigator.of(context);
-                                            final model = ref
-                                                .read(initializationProvider);
-                                            try {
-                                              isApiLoading.value = true;
-                                              if (await model
-                                                  .getConsentStatus()) {
-                                                navigator.pop(true);
-                                              } else {
-                                                await model.sumbitConsent(
-                                                    consent: data);
-                                                navigator.pop(true);
-                                              }
-                                            } catch (e) {
-                                              logger.e(e);
-                                              Fluttertoast.showToast(
-                                                  msg: loc.somethingWentWrong);
-                                            } finally {
-                                              isApiLoading.value = false;
-                                            }
-                                          },
-                                    child: Text(loc.agreeButton),
-                                  )
-                          ],
-                        ),
-                      ),
-                    ],
+                );
+              }
+              return Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  boxShadow: applyLightShadow(),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSize.kmradius - 5),
                   ),
-                );
-              },
-              error: (e, s) {
-                final msg = DioErrorHandler.getErrorMessage(e);
-                return Center(
-                  child: Text(msg),
-                );
-              },
-              loading: () {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                );
-              },
-            ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: AppWebView(
+                        url: "${ApiConstant.baseUrl}/dam/${data.templateId}",
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSize.kmpadding,
+                        vertical: AppSize.kmpadding / 2,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          CheckboxListTile.adaptive(
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: Text(loc.consentPageCheckbox),
+                            value: selectedValue.value,
+                            onChanged: (value) {
+                              selectedValue.value = value ?? false;
+                            },
+                          ),
+                          isApiLoading.value
+                              ? const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              : ElevatedButton(
+                                  onPressed: !selectedValue.value
+                                      ? null
+                                      : () async {
+                                          final navigator =
+                                              Navigator.of(context);
+                                          final model =
+                                              ref.read(initializationProvider);
+                                          try {
+                                            isApiLoading.value = true;
+                                            if (await model
+                                                .getConsentStatus()) {
+                                              navigator.pop(true);
+                                            } else {
+                                              await model.sumbitConsent(
+                                                  consent: data);
+                                              navigator.pop(true);
+                                            }
+                                          } catch (e) {
+                                            logger.e(e);
+                                            Fluttertoast.showToast(
+                                                msg: loc.somethingWentWrong);
+                                          } finally {
+                                            isApiLoading.value = false;
+                                          }
+                                        },
+                                  child: Text(loc.agreeButton),
+                                )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            error: (e, s) {
+              final msg = DioErrorHandler.getErrorMessage(e);
+              return Center(
+                child: Text(msg),
+              );
+            },
+            loading: () {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
+            },
           ),
         ),
-      );
-    }
+      ),
+    );
   }
 }
