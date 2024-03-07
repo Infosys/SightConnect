@@ -128,6 +128,10 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
       endpoint += "&$filter";
     }
 
+    if (status == DiagnosticReportStatus.FINAL) {
+      endpoint += "&status=${status.name}";
+    }
+
     final response = await dio.get(endpoint);
 
     if (response.statusCode! >= 200 && response.statusCode! < 210) {

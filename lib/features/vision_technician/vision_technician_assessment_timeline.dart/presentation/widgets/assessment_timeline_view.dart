@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entit
 import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -15,7 +16,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/models/assessment_timeline_view_model.dart';
 
 class AssessmentTimelineView extends HookConsumerWidget {
-  const AssessmentTimelineView(this.timeLineList, {super.key});
+  final VTPatientDto patientDetail;
+
+  const AssessmentTimelineView(this.timeLineList, this.patientDetail,
+      {super.key});
 
   final List<AssessmentTimelineViewModel> timeLineList;
 
@@ -81,6 +85,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
                               index,
                               ref,
                               isLoading,
+                              patientDetail,
                             ),
                           ],
                         )
@@ -101,6 +106,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
                               index,
                               ref,
                               isLoading,
+                              patientDetail,
                             ),
                           ],
                         ),
@@ -149,6 +155,7 @@ Widget TimeWidgetRender(
   int index,
   WidgetRef ref,
   ValueNotifier<bool> isLoading,
+  VTPatientDto patientDetails,
 ) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.end,
@@ -201,6 +208,7 @@ Widget TimeWidgetRender(
                         builder: (context) {
                           return VisionTechnicianAssessmentReportPage(
                             assessmentDetailsReport: response,
+                            patientDetails: patientDetails,
                           );
                         },
                       ),
@@ -219,7 +227,7 @@ Widget TimeWidgetRender(
                 }
               },
               child: Text(
-                "${timeLine.assessmentId ?? ""}",
+                'View Report',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: applyRobotoFont(
