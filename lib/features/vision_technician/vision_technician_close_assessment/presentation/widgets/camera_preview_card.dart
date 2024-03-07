@@ -121,7 +121,6 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
 
     if (state == AppLifecycleState.inactive) {
       logger.d("CameraPage: AppLifecycleState.inactive");
-      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       logger.d("CameraPage: AppLifecycleState.resumed");
@@ -130,15 +129,12 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
       }
     } else if (state == AppLifecycleState.paused) {
       logger.d("CameraPage: AppLifecycleState.paused");
-      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
       logger.d("CameraPage: AppLifecycleState.detached");
-      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.hidden) {
       logger.d("CameraPage: AppLifecycleState.hidden");
-      _addLoading();
       _stopLiveFeed();
     }
   }
@@ -185,17 +181,13 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
   Widget build(BuildContext context) {
     var refRead = ref.read(vtCloseAssessmentHelperProvider);
     if (!_isPermissionGranted || _cameras.isEmpty) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
       );
     }
     if (!_controller.value.isInitialized) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
       );
     } else {
       return LoadingOverlay(
@@ -203,7 +195,6 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
         progressMessage: _progressMessage,
         child: Container(
           decoration: BoxDecoration(
-            color: AppColor.black,
             borderRadius: BorderRadius.circular(AppSize.klradius),
           ),
           child: Stack(
@@ -300,7 +291,10 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
     } else {
       _cameraLensDirection = CameraLensDirection.front;
     }
-    _checkPermissions(context);
+    await _stopLiveFeed();
+    if (mounted) {
+      _checkPermissions(context);
+    }
   }
 
   Future<void> _toggleFlash() async {
@@ -323,7 +317,6 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
   ) async {
     final loc = context.loc!;
     _addLoading("Hold the camera steady...");
-
     try {
       final XFile? image = await _capturePicture(context);
       if (image == null) {
