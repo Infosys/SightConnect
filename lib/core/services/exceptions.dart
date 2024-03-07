@@ -12,10 +12,14 @@ class DioErrorHandler {
     if (e.error is Exception) {
       // Handle general exceptions
       logger.e('Exception: ${e.error}');
+      logger.e('StackTrace: ${e.stackTrace}');
     } else if (e.response != null) {
       // Handle HTTP errors
 
+      //logger.e(e.response?.data.toString());
       logger.e({
+        "stackTrace": e.stackTrace,
+        "baseUrl": e.requestOptions.baseUrl,
         "url": e.response!.data["path"],
         "title": e.response!.data["title"],
         "statusCode": e.response!.data["status"],
@@ -26,6 +30,7 @@ class DioErrorHandler {
     } else {
       // Handle connection errors
       logger.e('Connection error: ${e.message}');
+      logger.e('StackTrace: ${e.stackTrace}');
     }
   }
 
