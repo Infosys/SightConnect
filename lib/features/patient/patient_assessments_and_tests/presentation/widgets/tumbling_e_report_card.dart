@@ -117,7 +117,10 @@ class TumblingEReportCard extends StatelessWidget {
   }
 }
 
-Color getColorBasedOnObservationValue(double value) {
+Color getColorBasedOnObservationValue(double? value) {
+  if (value == null) {
+    return AppColor.grey;
+  }
   if (value >= 1) {
     return AppColor.red;
   } else if (value >= 0.5) {

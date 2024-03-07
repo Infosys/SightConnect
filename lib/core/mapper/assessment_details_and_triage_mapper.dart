@@ -38,6 +38,7 @@ class AssessmentDetailedAndTriageReportMapper {
         triageAssessment,
         triageDetailedReport,
       ),
+      carePlans: triageDetailedReport.carePlans,
       cumulativeSeverity: triageDetailedReport.cumulativeSeverity,
       icompleteTests: triageDetailedReport.incompleteTests,
       observationSeverity: triageDetailedReport.observationSeverity,

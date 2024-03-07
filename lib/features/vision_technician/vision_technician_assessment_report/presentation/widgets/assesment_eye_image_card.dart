@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_photo_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AssessmentEyeImageCard extends StatelessWidget {
@@ -51,7 +53,6 @@ class AssessmentEyeImageCard extends StatelessWidget {
                 crossAxisCount: Responsive.isMobile(context) ? 2 : 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                childAspectRatio: Responsive.isMobile(context) ? 1 : 1,
               ),
               itemBuilder: (context, index) {
                 final e = imageBriefEntity?[index];
@@ -69,9 +70,27 @@ class AssessmentEyeImageCard extends StatelessWidget {
                       ),
                     );
                   },
-                  child: AppNetworkImage(
-                    shapeCircle: false,
-                    imageUrl: e.imageUrl,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        e.bodySite.replaceAll("_", " ").capitalizeFirstOfEach(),
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Flexible(
+                        child: AppNetworkImage(
+                          shapeCircle: false,
+                          imageUrl: e.imageUrl,
+                          height: 150,
+                          width: 150,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },

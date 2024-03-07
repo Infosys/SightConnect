@@ -3785,7 +3785,7 @@ mixin _$Goal {
   GoalLifecycleStatus? get lifecycleStatus =>
       throw _privateConstructorUsedError;
   GoalCategory? get category => throw _privateConstructorUsedError;
-  List<GoalOutcomeModel>? get outcome => throw _privateConstructorUsedError;
+  List<GoalOutcomeModel>? get outcomes => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get startDate => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -3809,7 +3809,7 @@ abstract class $GoalCopyWith<$Res> {
       GoalAchievement? achievementStatus,
       GoalLifecycleStatus? lifecycleStatus,
       GoalCategory? category,
-      List<GoalOutcomeModel>? outcome,
+      List<GoalOutcomeModel>? outcomes,
       @TimestampConverter() DateTime? startDate,
       @TimestampConverter() DateTime? dueDate,
       List<Target>? targets});
@@ -3834,7 +3834,7 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
     Object? achievementStatus = freezed,
     Object? lifecycleStatus = freezed,
     Object? category = freezed,
-    Object? outcome = freezed,
+    Object? outcomes = freezed,
     Object? startDate = freezed,
     Object? dueDate = freezed,
     Object? targets = freezed,
@@ -3864,9 +3864,9 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as GoalCategory?,
-      outcome: freezed == outcome
-          ? _value.outcome
-          : outcome // ignore: cast_nullable_to_non_nullable
+      outcomes: freezed == outcomes
+          ? _value.outcomes
+          : outcomes // ignore: cast_nullable_to_non_nullable
               as List<GoalOutcomeModel>?,
       startDate: freezed == startDate
           ? _value.startDate
@@ -3897,7 +3897,7 @@ abstract class _$$_GoalCopyWith<$Res> implements $GoalCopyWith<$Res> {
       GoalAchievement? achievementStatus,
       GoalLifecycleStatus? lifecycleStatus,
       GoalCategory? category,
-      List<GoalOutcomeModel>? outcome,
+      List<GoalOutcomeModel>? outcomes,
       @TimestampConverter() DateTime? startDate,
       @TimestampConverter() DateTime? dueDate,
       List<Target>? targets});
@@ -3918,7 +3918,7 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
     Object? achievementStatus = freezed,
     Object? lifecycleStatus = freezed,
     Object? category = freezed,
-    Object? outcome = freezed,
+    Object? outcomes = freezed,
     Object? startDate = freezed,
     Object? dueDate = freezed,
     Object? targets = freezed,
@@ -3948,9 +3948,9 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as GoalCategory?,
-      outcome: freezed == outcome
-          ? _value._outcome
-          : outcome // ignore: cast_nullable_to_non_nullable
+      outcomes: freezed == outcomes
+          ? _value._outcomes
+          : outcomes // ignore: cast_nullable_to_non_nullable
               as List<GoalOutcomeModel>?,
       startDate: freezed == startDate
           ? _value.startDate
@@ -3978,11 +3978,11 @@ class _$_Goal implements _Goal {
       this.achievementStatus,
       this.lifecycleStatus,
       this.category,
-      final List<GoalOutcomeModel>? outcome,
+      final List<GoalOutcomeModel>? outcomes,
       @TimestampConverter() this.startDate,
       @TimestampConverter() this.dueDate,
       final List<Target>? targets})
-      : _outcome = outcome,
+      : _outcomes = outcomes,
         _targets = targets;
 
   factory _$_Goal.fromJson(Map<String, dynamic> json) => _$$_GoalFromJson(json);
@@ -4000,12 +4000,12 @@ class _$_Goal implements _Goal {
   final GoalLifecycleStatus? lifecycleStatus;
   @override
   final GoalCategory? category;
-  final List<GoalOutcomeModel>? _outcome;
+  final List<GoalOutcomeModel>? _outcomes;
   @override
-  List<GoalOutcomeModel>? get outcome {
-    final value = _outcome;
+  List<GoalOutcomeModel>? get outcomes {
+    final value = _outcomes;
     if (value == null) return null;
-    if (_outcome is EqualUnmodifiableListView) return _outcome;
+    if (_outcomes is EqualUnmodifiableListView) return _outcomes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -4028,7 +4028,7 @@ class _$_Goal implements _Goal {
 
   @override
   String toString() {
-    return 'Goal(id: $id, statusDate: $statusDate, statusReason: $statusReason, achievementStatus: $achievementStatus, lifecycleStatus: $lifecycleStatus, category: $category, outcome: $outcome, startDate: $startDate, dueDate: $dueDate, targets: $targets)';
+    return 'Goal(id: $id, statusDate: $statusDate, statusReason: $statusReason, achievementStatus: $achievementStatus, lifecycleStatus: $lifecycleStatus, category: $category, outcomes: $outcomes, startDate: $startDate, dueDate: $dueDate, targets: $targets)';
   }
 
   @override
@@ -4047,7 +4047,7 @@ class _$_Goal implements _Goal {
                 other.lifecycleStatus == lifecycleStatus) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            const DeepCollectionEquality().equals(other._outcome, _outcome) &&
+            const DeepCollectionEquality().equals(other._outcomes, _outcomes) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
@@ -4064,7 +4064,7 @@ class _$_Goal implements _Goal {
       achievementStatus,
       lifecycleStatus,
       category,
-      const DeepCollectionEquality().hash(_outcome),
+      const DeepCollectionEquality().hash(_outcomes),
       startDate,
       dueDate,
       const DeepCollectionEquality().hash(_targets));
@@ -4091,7 +4091,7 @@ abstract class _Goal implements Goal {
       final GoalAchievement? achievementStatus,
       final GoalLifecycleStatus? lifecycleStatus,
       final GoalCategory? category,
-      final List<GoalOutcomeModel>? outcome,
+      final List<GoalOutcomeModel>? outcomes,
       @TimestampConverter() final DateTime? startDate,
       @TimestampConverter() final DateTime? dueDate,
       final List<Target>? targets}) = _$_Goal;
@@ -4112,7 +4112,7 @@ abstract class _Goal implements Goal {
   @override
   GoalCategory? get category;
   @override
-  List<GoalOutcomeModel>? get outcome;
+  List<GoalOutcomeModel>? get outcomes;
   @override
   @TimestampConverter()
   DateTime? get startDate;

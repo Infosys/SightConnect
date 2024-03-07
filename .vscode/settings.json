@@ -71,10 +71,11 @@
     "usecases",
     "VTIVR"
   ]
-} //  {
-//        "files.exclude": {
-//         "**/user_details_model.dart": true,
-//             "**/*.freezed.dart": true,
-//             "**/*.g.dart": true
-//         },
-//     }
+,
+  "files.exclude": {
+    "**/user_details_model.dart": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true
+    },
+} 
+

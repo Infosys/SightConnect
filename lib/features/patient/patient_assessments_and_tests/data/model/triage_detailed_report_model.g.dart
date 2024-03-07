@@ -445,7 +445,7 @@ _$_Goal _$$_GoalFromJson(Map<String, dynamic> json) => _$_Goal(
       lifecycleStatus: $enumDecodeNullable(
           _$GoalLifecycleStatusEnumMap, json['lifecycleStatus']),
       category: $enumDecodeNullable(_$GoalCategoryEnumMap, json['category']),
-      outcome: (json['outcome'] as List<dynamic>?)
+      outcomes: (json['outcomes'] as List<dynamic>?)
           ?.map((e) => GoalOutcomeModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       startDate:
@@ -463,7 +463,7 @@ Map<String, dynamic> _$$_GoalToJson(_$_Goal instance) => <String, dynamic>{
       'achievementStatus': _$GoalAchievementEnumMap[instance.achievementStatus],
       'lifecycleStatus': _$GoalLifecycleStatusEnumMap[instance.lifecycleStatus],
       'category': _$GoalCategoryEnumMap[instance.category],
-      'outcome': instance.outcome?.map((e) => e.toJson()).toList(),
+      'outcomes': instance.outcomes?.map((e) => e.toJson()).toList(),
       'startDate': const TimestampConverter().toJson(instance.startDate),
       'dueDate': const TimestampConverter().toJson(instance.dueDate),
       'targets': instance.targets?.map((e) => e.toJson()).toList(),

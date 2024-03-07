@@ -150,13 +150,15 @@ class _InfoChip extends StatelessWidget {
           width:
               Responsive.isMobile(context) ? AppSize.kswidth : AppSize.klwidth,
         ),
-        Text(
-          value,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: applyRobotoFont(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
+        Flexible(
+          child: Text(
+            value,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
+            style: applyRobotoFont(
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+            ),
           ),
         ),
       ],

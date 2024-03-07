@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final vtAssessmentAndTestProvider = ChangeNotifierProvider(
-  (ref) => VtAssessmentAndTestProvider(ref.watch(getAssessmentUseCase),
-      ref.watch(triageReportRepositoryProvider)),
+  (ref) => VtAssessmentAndTestProvider(
+    ref.watch(getAssessmentUseCase),
+    ref.watch(triageReportRepositoryProvider),
+  ),
 );
 
 class VtAssessmentAndTestProvider extends ChangeNotifier {

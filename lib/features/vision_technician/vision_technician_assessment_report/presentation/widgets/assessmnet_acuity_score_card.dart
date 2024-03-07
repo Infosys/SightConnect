@@ -1,5 +1,7 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,7 @@ class AssessmentAcuityScoreCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Colors.grey,
+                      color: AppColor.lightGrey,
                     ),
                   ),
                   child: Column(
@@ -64,6 +66,7 @@ class AssessmentAcuityScoreCard extends StatelessWidget {
                           style: applyFiraSansFont(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
+                            color: getColorBasedOnObservationValue(eyeSite),
                           ),
                         ),
                       ),

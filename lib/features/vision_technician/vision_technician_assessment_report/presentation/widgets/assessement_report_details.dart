@@ -64,7 +64,7 @@ class _AssessmentReportDetailsState extends State<AssessmentReportDetails> {
                     itemBuilder: (BuildContext context, int index) {
                       var responseModel = itemsToShow[index];
                       return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "${index + 1}. ${responseModel.question}",
