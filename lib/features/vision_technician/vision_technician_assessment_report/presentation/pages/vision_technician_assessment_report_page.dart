@@ -71,7 +71,7 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 3,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
-                        childAspectRatio: Responsive.isMobile(context) ? 1 : 2,
+                        childAspectRatio: Responsive.isMobile(context) ? 1 : 1,
                       ),
                       itemBuilder: (context, index) {
                         final e =

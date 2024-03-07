@@ -172,13 +172,14 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
     final loc = context.loc!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.kmpadding),
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applycustomShadow(),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           () {
@@ -200,18 +201,29 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  data.name.capitalizeFirstOfEach(),
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      data.name.capitalizeFirstOfEach(),
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      " PID ${data.patientId ?? ""}, ",
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: AppSize.ksheight / 2),
                 Row(
                   children: [
                     Text(
-                      "${data.phoneNumber}, ",
+                      "${data.gender.capitalizeFirstOfEach()}, ",
                       style: applyRobotoFont(
                         fontSize: 12,
                         color: AppColor.black.withOpacity(0.5),
@@ -229,37 +241,40 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                         color: AppColor.black.withOpacity(0.5),
                       ),
                     ),
+                    Text(
+                      ", ${data.phoneNumber}",
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.black.withOpacity(0.5),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: AppSize.ksheight / 2),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Visibility(
-                      visible: data.patientId != null,
+                    InkWell(
+                      onTap: data.patientId == null ? null : onStartAssessment,
                       child: Text(
-                        data.parentPatientId == null
-                            ? loc.vgPrimary
-                            : loc.vgDependent,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        loc.vgStartAssessment,
+                        textAlign: TextAlign.center,
                         style: applyRobotoFont(
-                          fontSize: 12,
-                          color: data.parentPatientId == null
-                              ? AppColor.green
-                              : AppColor.orange,
+                          fontSize: 14,
                           fontWeight: FontWeight.w500,
+                          color: data.patientId == null
+                              ? AppColor.grey
+                              : AppColor.primary,
                         ),
                       ),
                     ),
-                    const SizedBox(width: AppSize.kspadding),
                     Visibility(
                       visible: data.parentPatientId == null,
                       child: InkWell(
-                        onTap: () {
-                          onAddMember();
-                        },
+                        onTap: onAddMember,
                         child: Row(
                           children: [
+                            const SizedBox(width: AppSize.kspadding / 2),
                             const Icon(
                               Icons.add,
                               size: 14,
@@ -269,7 +284,7 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                             Text(
                               loc.vgAddMember,
                               style: applyRobotoFont(
-                                fontSize: 12,
+                                fontSize: 14,
                                 color: AppColor.primary,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -281,9 +296,7 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                     Visibility(
                       visible: data.patientId == null,
                       child: InkWell(
-                        onTap: () async {
-                          onCompleteProfile();
-                        },
+                        onTap: onCompleteProfile,
                         child: Row(
                           children: [
                             const Icon(
@@ -306,32 +319,25 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: data.patientId == null ? null : onStartAssessment,
-                  child: AutoSizeText(
-                    loc.vgStartAssessment,
-                    minFontSize: 10,
-                    maxFontSize: 14,
-                    textAlign: TextAlign.center,
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w500,
-                      color: data.patientId == null
-                          ? AppColor.grey
-                          : AppColor.primary,
-                    ),
-                  ),
                 ),
               ],
             ),
-          )
+          ),
+          Visibility(
+            visible: data.patientId != null,
+            child: Text(
+              data.parentPatientId == null ? loc.vgPrimary : loc.vgDependent,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: data.parentPatientId == null
+                    ? AppColor.green
+                    : AppColor.orange,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -22,54 +22,59 @@ class VisionTechnicianHomePage extends ConsumerWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: AppColor.primary,
-        title: Row(
-          children: [
+      appBar: PreferredSize(
+        preferredSize: Responsive.isMobile(context)
+            ? const Size.fromHeight(60)
+            : const Size.fromHeight(60),
+        child: AppBar(
+          backgroundColor: AppColor.primary,
+          centerTitle: false,
+          actions: [
+            isMobile
+                ? const SizedBox(width: AppSize.kswidth)
+                : const SizedBox(width: AppSize.klwidth),
             Image.asset(
               AppImages.logo,
-              height: Responsive.isMobile(context) ? 80 : 120,
-              width: Responsive.isMobile(context) ? 120 : 180,
+              width: Responsive.isMobile(context) ? 150 : 250,
               colorBlendMode: BlendMode.srcIn,
               color: AppColor.white,
             ),
-            isMobile ? const Spacer() : const SizedBox(width: AppSize.kmwidth),
+            const Spacer(),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VisionTechnicianSearchPage(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.search,
+                color: AppColor.white,
+              ),
+            ),
+            isMobile
+                ? const SizedBox(width: AppSize.kswidth)
+                : const SizedBox(width: AppSize.klwidth),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const VTProfilePage()),
+                );
+              },
+              child: AppNameAvatar(
+                name: ref.watch(globalVTProvider).name,
+                radius: 20,
+              ),
+            ),
+            isMobile
+                ? const SizedBox(width: AppSize.kswidth)
+                : const SizedBox(width: AppSize.klwidth),
           ],
         ),
-        centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VisionTechnicianSearchPage(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.search,
-              color: AppColor.white,
-            ),
-          ),
-          isMobile
-              ? const SizedBox(width: AppSize.kswidth)
-              : const SizedBox(width: AppSize.klwidth),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const VTProfilePage()),
-              );
-            },
-            child: AppNameAvatar(
-              name: ref.watch(globalVTProvider).name,
-            ),
-          ),
-          isMobile
-              ? const SizedBox(width: AppSize.kswidth)
-              : const SizedBox(width: AppSize.klwidth),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
