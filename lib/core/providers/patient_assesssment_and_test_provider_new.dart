@@ -350,7 +350,11 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
 
     final response = await _triageReportRepository.getTriageReportByEncounterId(
       encounterId,
-      DiagnosticReportStatus.FINAL,
+      [
+        DiagnosticReportStatus.FINAL,
+        DiagnosticReportStatus.AMENDED,
+        DiagnosticReportStatus.CANCELLED,
+      ],
       isPatient ? _selfTestReportPage : _clinicalReportPage,
       pageSize,
       isPatient

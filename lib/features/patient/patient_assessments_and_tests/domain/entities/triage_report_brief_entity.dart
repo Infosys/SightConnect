@@ -104,4 +104,9 @@ class TriageReportBriefEntity {
     this.triageResultDescription,
     this.isUpdateEnabled,
   });
+
+  @override
+  String toString() {
+    return 'TriageReportBriefEntity(triageResultID: $triageResultID, overallSeverity: $overallSeverity, reportTag: $reportTag, triageResultType: $triageResultType, triageResultSource: $triageResultSource, assessmentID: $assessmentID, triageResultStartDate: $triageResultStartDate, triageResultDescription: $triageResultDescription, isUpdateEnabled: $isUpdateEnabled, encounterId: $encounterId, encounterStatus: $encounterStatus, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, performerRole: $performerRole)';
+  }
 }

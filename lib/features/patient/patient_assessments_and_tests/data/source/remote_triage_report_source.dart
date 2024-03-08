@@ -25,7 +25,7 @@ abstract class RemoteTriageReportSource {
   );
   Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
-    DiagnosticReportStatus status,
+    List<DiagnosticReportStatus> status,
     int? page,
     int? size,
     String? filter,
@@ -110,7 +110,7 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
   @override
   Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
-    DiagnosticReportStatus status,
+    List<DiagnosticReportStatus> status,
     int? page,
     int? size,
     String? filter,
@@ -128,11 +128,15 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
       endpoint += "&$filter";
     }
 
-    if (status == DiagnosticReportStatus.FINAL) {
-      endpoint += "&status=${status.name}";
+    if (status.isNotEmpty) {
+      endpoint += "&status=${status.map((e) => e.name).join(",")}";
     }
 
-    final response = await dio.get(endpoint);
+    ///ABCD
+
+    final response = await dio.get(
+      endpoint,
+    );
 
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       List<TriageDetailedReportModel> triageReports = [];

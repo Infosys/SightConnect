@@ -72,6 +72,7 @@ class _PatientSelfTestReportsState
         itemBuilder: (BuildContext context, int index) {
           if (index < model.selfTestReportList.length) {
             final currentData = model.selfTestReportList[index];
+            logger.f(currentData.toString());
 
             return Container(
               margin: const EdgeInsets.only(bottom: 16),
