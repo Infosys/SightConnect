@@ -157,6 +157,7 @@ class _AssessmentsAndTestsPageState
                             }
                           },
                           onViewHistory: (report) {
+                            model.resetVariables();
                             Navigator.push(
                               context,
                               MaterialPageRoute(

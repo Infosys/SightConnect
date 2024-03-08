@@ -297,6 +297,16 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     getTriageReportByPatientIdAndStatus();
   }
 
+  resetVariables() {
+    _clinicalReportList.clear();
+    _selfTestReportList.clear();
+    _clinicalReportPage = 0;
+    _hasClinicalReportMore = true;
+    _selfTestReportPage = 0;
+    _hasSelfTestReportMore = true;
+    notifyListeners();
+  }
+
   Future<void> getTriageReportByPatientIdAndStatus() async {
     if (_isFinalReportLoading) {
       return;
