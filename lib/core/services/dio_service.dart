@@ -15,11 +15,7 @@ var keycloakDioProvider = Provider(
         baseUrl: Env.baseUrl,
       ),
     );
-    dio.interceptors.addAll(
-      [
-        // DioCertificateInterceptor(dio),
-      ],
-    );
+    dio.interceptors.addAll([]);
     return dio;
   },
 );
@@ -33,19 +29,13 @@ var dioProvider = Provider(
         headers: {
           "X-Accept-Language": lang,
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
-          "X-App-Version":  AppInfoService.version,
+          "X-App-Version": AppInfoService.version,
         },
       ),
     );
 
     dio.interceptors.addAll(
-      [
-        DioTokenInterceptor(ref, dio),
-        LogInterceptor(
-          requestHeader: false,
-        )
-        // DioCertificateInterceptor(dio),
-      ],
+      [DioTokenInterceptor(ref, dio), LogInterceptor(requestHeader: false)],
     );
     return dio;
   },
@@ -54,9 +44,7 @@ var dioProvider = Provider(
 var appointmentDioProvider = Provider(
   (ref) {
     final dio = Dio(
-      BaseOptions(
-        baseUrl: Env.baseDevUrl,
-      ),
+      BaseOptions(baseUrl: Env.baseDevUrl),
     );
     return dio;
   },

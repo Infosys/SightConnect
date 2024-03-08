@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
@@ -130,26 +131,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
         ),
         body: UpgradeAlert(
-           dialogStyle: UpgradeDialogStyle.cupertino,
-        showIgnore: false,
-        showLater: false,
-        shouldPopScope: () => false,
-        canDismissDialog: false,
-        onUpdate: () {
-          return true;
-        },
-        upgrader: Upgrader(
-          durationUntilAlertAgain: const Duration(milliseconds: 800),
-          willDisplayUpgrade: (
-              {appStoreVersion,
+          dialogStyle: Platform.isIOS
+              ? UpgradeDialogStyle.cupertino
+              : UpgradeDialogStyle.material,
+          showIgnore: false,
+          showLater: false,
+          shouldPopScope: () => false,
+          canDismissDialog: false,
+          onUpdate: () {
+            return true;
+          },
+          upgrader: Upgrader(
+            durationUntilAlertAgain: const Duration(milliseconds: 800),
+            willDisplayUpgrade: ({
+              appStoreVersion,
               required display,
               installedVersion,
-              minAppVersion}) {
-            logger.f("display : $display");
-            logger.f("appStoreVersion : $appStoreVersion");
-            logger.f("installedVersion : $installedVersion");
-          },
-        ),
+              minAppVersion,
+            }) {
+              logger.d({
+                "display : $display",
+                "appStoreVersion : $appStoreVersion",
+                "installedVersion : $installedVersion",
+              });
+            },
+          ),
           child: Container(
             height: AppSize.height(context),
             width: AppSize.width(context),
@@ -235,7 +241,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ),
                             disabledBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
-                                  color: AppColor.lightGrey, width: 2.0),
+                                color: AppColor.lightGrey,
+                                width: 2.0,
+                              ),
                             ),
                           ),
                         ),
@@ -243,7 +251,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       const SizedBox(height: AppSize.klheight * 4),
                       isLoading.value
                           ? const Center(
-                              child: CircularProgressIndicator.adaptive())
+                              child: CircularProgressIndicator.adaptive(),
+                            )
                           : ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 minimumSize:
@@ -256,7 +265,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     otpExpiry.value = await ref
                                         .read(initializationProvider)
                                         .sendOtp(mobile: mobileController.text);
-          
+
                                     isLoading.value = false;
                                     showOtp.value = true;
                                   } catch (e, s) {
@@ -313,25 +322,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
                       onCompleted: (pin) async {
                         final navigator = Navigator.of(context);
-          
+
                         if (otp.value.isNotEmpty) {
                           try {
                             isLoading.value = true;
                             otpError.value = '';
-          
+
                             await ref.read(initializationProvider).signIn(
                                 mobile: mobileController.text, otp: otp.value);
-          
+
                             // Set visitor user id for matomo analytics
                             _addMatomoAnalytics();
-          
+
                             navigator.pushNamedAndRemoveUntil(
                                 InitializationPage.routeName, (route) => false);
                           } on DioException catch (e) {
                             otpError.value =
                                 e.response?.data["error_description"] ??
                                     loc.loginInvalidOTP;
-          
+
                             Fluttertoast.showToast(msg: otpError.value);
                           } catch (e) {
                             Fluttertoast.showToast(msg: loc.loginInvalidOTP);
@@ -383,8 +392,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     otpExpiry.value = await ref
                                         .read(initializationProvider)
                                         .sendOtp(mobile: mobileController.text);
-          
-                                    Fluttertoast.showToast(msg: loc.loginOTPSent);
+
+                                    Fluttertoast.showToast(
+                                        msg: loc.loginOTPSent);
                                   } catch (e) {
                                     Fluttertoast.showToast(
                                         msg: loc.loginUnableToSendOTP);
@@ -429,26 +439,26 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     //   ),
                     //   onPressed: () async {
                     //     final navigator = Navigator.of(context);
-          
+
                     //     if (otp.value.isNotEmpty) {
                     //       try {
                     //         otpError.value = '';
                     //         logger.d("otp value is : ${otp.value}");
                     //         await ref.read(initializationProvider).signIn(
                     //             mobile: mobileController.text, otp: otp.value);
-          
+
                     //         // Set visitor user id for matomo analytics
                     //         var uuid = const Uuid();
                     //         String userId = uuid.v1();
                     //         MatomoLogger.setVisitorUserId(userId);
                     //         /////////////////////////////////
-          
+
                     //         navigator.pushNamedAndRemoveUntil(
                     //             InitializationPage.routeName, (route) => false);
                     //       } catch (e) {
                     //         logger.e(e);
                     //         Fluttertoast.showToast(msg: loc.loginInvalidOTP);
-          
+
                     //         otpError.value = loc.loginInvalidOTP;
                     //         pinController.clear();
                     //         Future.delayed(const Duration(seconds: 2), () {

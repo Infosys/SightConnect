@@ -48,7 +48,7 @@ class PatientHomePage extends ConsumerWidget {
       ),
       appBar: const PatientHomePageAppBar(),
       body: UpgradeAlert(
-          dialogStyle: UpgradeDialogStyle.cupertino,
+        dialogStyle: UpgradeDialogStyle.cupertino,
         showIgnore: false,
         showLater: false,
         shouldPopScope: () => false,
@@ -63,9 +63,9 @@ class PatientHomePage extends ConsumerWidget {
               required display,
               installedVersion,
               minAppVersion}) {
-            logger.f("display : $display");
-            logger.f("appStoreVersion : $appStoreVersion");
-            logger.f("installedVersion : $installedVersion");
+            logger.d("display : $display");
+            logger.d("appStoreVersion : $appStoreVersion");
+            logger.d("installedVersion : $installedVersion");
           },
         ),
         child: Container(
@@ -95,12 +95,12 @@ class PatientHomePage extends ConsumerWidget {
                 const SizedBox(height: AppSize.kmheight),
                 const HelplineCard(helpLine: AppText.tollFreeNumber),
                 const SizedBox(height: AppSize.kmheight),
-        
+
                 // const RecentServicesCardList(),
-        
+
                 const NearbyVisionCentersList(),
                 const SizedBox(height: AppSize.kmheight),
-        
+
                 InviteCard(
                   onPressed: () {
                     Share.share(
