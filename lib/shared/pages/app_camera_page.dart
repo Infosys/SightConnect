@@ -389,10 +389,11 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<void> _toggleCamera() async {
+    logger.d("AppCameraPage: Switching Camera");
     if (!_controller.value.isInitialized) {
       return;
     }
-    _addLoading();
+    _addLoading("Switching Camera Lens");
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _cameraLensDirection = CameraLensDirection.back;
     } else {
