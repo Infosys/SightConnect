@@ -184,6 +184,7 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
       ),
       builder: (context) {
         return CameraServerExceptionDialog(
+          message: failure.errorMessage,
           onRetry: () {
             ref.read(resetProvider).reset();
             ref.read(accessibilityProvider).resetBrightness();

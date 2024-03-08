@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -73,14 +75,35 @@ class TriageRepositoryImpl implements TriageRepository {
 
         return Right(remoteResponse);
       } on ServerException {
-        final localResponse = await localDataSource.saveTriageResponse(
-            triageResponse: triageResponse);
-
+        await localDataSource.deleteTriageResponse();
         await localDataSource.resetTriage();
-        return Left(TriageFailure(
-          errorMessage: 'This is a server exception',
-          triageResponse: localResponse,
-        ));
+        return Left(ServerFailure(
+            errorMessage:
+                'We apologize for the inconvenience. Our server is currently experiencing issues. Please try again later.'));
+
+        // final localResponse = await localDataSource.saveTriageResponse(
+        //     triageResponse: triageResponse);
+
+        // await localDataSource.resetTriage();
+        // return Left(TriageFailure(
+        //   errorMessage: 'This is a server exception',
+        //   triageResponse: localResponse,
+        // ));
+      } on SocketException {
+        await localDataSource.deleteTriageResponse();
+        await localDataSource.resetTriage();
+        return Left(ServerFailure(
+            errorMessage:
+                "Oops! It seems you're offline. Please connect to the internet to continue."));
+
+        // final localResponse = await localDataSource.saveTriageResponse(
+        //     triageResponse: triageResponse);
+
+        // await localDataSource.resetTriage();
+        // return Left(TriageFailure(
+        //   errorMessage: 'This is a server exception',
+        //   triageResponse: localResponse,
+        // ));
       } on UnknownException {
         final localResponse = await localDataSource.saveTriageResponse(
             triageResponse: triageResponse);
@@ -93,15 +116,21 @@ class TriageRepositoryImpl implements TriageRepository {
       }
     } else {
       try {
-        logger.d("Internet is not connected Saving triage to local");
-
-        final localResponse = await localDataSource.saveTriageResponse(
-            triageResponse: triageResponse);
         await localDataSource.resetTriage();
-        return Left(TriageFailure(
-          errorMessage: 'This is a unknown exception',
-          triageResponse: localResponse,
-        ));
+        await localDataSource.deleteTriageResponse();
+        return Left(ServerFailure(
+            errorMessage:
+                "Oops! It seems you're offline. Please connect to the internet to continue."));
+
+        // logger.d("Internet is not connected Saving triage to local");
+
+        // final localResponse = await localDataSource.saveTriageResponse(
+        //     triageResponse: triageResponse);
+        // await localDataSource.resetTriage();
+        // return Left(TriageFailure(
+        //   errorMessage: 'This is a unknown exception',
+        //   triageResponse: localResponse,
+        // ));
       } on CacheException {
         return Left(CacheFailure(errorMessage: 'No local data found'));
       } on UnknownException {

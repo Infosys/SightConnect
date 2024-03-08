@@ -7,10 +7,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class CameraServerExceptionDialog extends ConsumerWidget {
   const CameraServerExceptionDialog({
     required this.onRetry,
+    required this.message,
     super.key,
   });
 
   final VoidCallback onRetry;
+  final String message;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +38,7 @@ class CameraServerExceptionDialog extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            "Your result has been saved locally. Please try again later.",
+            message,
             style: applyRobotoFont(
               color: AppColor.black,
               fontSize: 14,
