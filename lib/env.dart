@@ -15,4 +15,10 @@ final class Env {
 
   @EnviedField(varName: 'GRANT_TYPE_REFRESH', obfuscate: true)
   static final String grantTypeRefresh = _Env.grantTypeRefresh;
+
+  @EnviedField(varName: 'BASE_URL', obfuscate: true)
+  static final String baseUrl = _Env.baseUrl;
+
+  @EnviedField(varName: 'BASE_DEV_URL', obfuscate: true)
+  static final String baseDevUrl = _Env.baseDevUrl;
 }

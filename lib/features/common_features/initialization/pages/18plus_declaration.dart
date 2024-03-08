@@ -1,9 +1,9 @@
-import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/widgets/app_web_view.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -14,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/providers/global_language_provider.dart';
 
 final ageDeclarationProvider = FutureProvider((ref) {
   final consentRepository = ref.watch(consentRepositoryProvider);
@@ -50,6 +53,8 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
           ),
           child: ref.watch(ageDeclarationProvider).when(
             data: (data) {
+              final lang =
+                  ref.watch(globalLanguageProvider).currentLocale?.languageCode;
               return SafeArea(
                 child: Container(
                   width: double.infinity,
@@ -65,7 +70,8 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                     children: [
                       Expanded(
                         child: AppWebView(
-                          url: "${ApiConstant.baseUrl}/dam/${data.templateId}",
+                          url:
+                              "${Env.baseUrl}/dam/${data.templateId}?langId=${lang}",
                         ),
                       ),
                       Padding(

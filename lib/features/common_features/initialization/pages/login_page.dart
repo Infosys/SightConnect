@@ -16,6 +16,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pinput/pinput.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:uuid/uuid.dart';
 
 class LoginPage extends StatefulHookConsumerWidget {
@@ -128,28 +129,157 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ],
           ),
         ),
-        body: Container(
-          height: AppSize.height(context),
-          width: AppSize.width(context),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                AppImages.scaffoldBg,
+        body: UpgradeAlert(
+           dialogStyle: UpgradeDialogStyle.cupertino,
+        showIgnore: false,
+        showLater: false,
+        shouldPopScope: () => false,
+        canDismissDialog: false,
+        onUpdate: () {
+          return true;
+        },
+        upgrader: Upgrader(
+          durationUntilAlertAgain: const Duration(milliseconds: 800),
+          willDisplayUpgrade: (
+              {appStoreVersion,
+              required display,
+              installedVersion,
+              minAppVersion}) {
+            logger.f("display : $display");
+            logger.f("appStoreVersion : $appStoreVersion");
+            logger.f("installedVersion : $installedVersion");
+          },
+        ),
+          child: Container(
+            height: AppSize.height(context),
+            width: AppSize.width(context),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  AppImages.scaffoldBg,
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: AnimatedCrossFade(
-              duration: const Duration(milliseconds: 300),
-              crossFadeState: showOtp.value
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              firstChild: Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                key: formKey.value,
-                child: Column(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: AnimatedCrossFade(
+                duration: const Duration(milliseconds: 300),
+                crossFadeState: showOtp.value
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                firstChild: Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  key: formKey.value,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: AppSize.klheight * 3.5),
+                      Text(
+                        loc.loginVerifyMobileNumber,
+                        style: applyFiraSansFont(
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: AppSize.kmheight),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: TextFormField(
+                          focusNode: focusNode,
+                          controller: mobileController,
+                          onChanged: (value) {
+                            if (value.length == 10) {
+                              focusNode.unfocus();
+                            }
+                          },
+                          onSaved: (value) {
+                            mobileController.text = value!;
+                          },
+                          validator: (value) {
+                            const pattern = r'(^(?:[+0]9)?[0-9]{10}$)';
+                            final regExp = RegExp(pattern);
+                            if (value!.isEmpty) {
+                              return loc.loginEnterMobileNumber;
+                            } else if (!regExp.hasMatch(value)) {
+                              return loc.loginEnterValidMobileNumber;
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.all(16),
+                            border: const UnderlineInputBorder(),
+                            labelText: loc.mobileNumber,
+                            labelStyle: const TextStyle(
+                              fontSize: 14,
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.blue, width: 2.0),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.blue, width: 2.0),
+                            ),
+                            errorBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.red, width: 2.0),
+                            ),
+                            focusedErrorBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColor.red, width: 2.0),
+                            ),
+                            disabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppColor.lightGrey, width: 2.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: AppSize.klheight * 4),
+                      isLoading.value
+                          ? const Center(
+                              child: CircularProgressIndicator.adaptive())
+                          : ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize:
+                                    Size(AppSize.width(context) * 0.9, 40),
+                              ),
+                              onPressed: () async {
+                                if (formKey.value.currentState!.validate()) {
+                                  try {
+                                    isLoading.value = true;
+                                    otpExpiry.value = await ref
+                                        .read(initializationProvider)
+                                        .sendOtp(mobile: mobileController.text);
+          
+                                    isLoading.value = false;
+                                    showOtp.value = true;
+                                  } catch (e, s) {
+                                    logger.e("Error sending OTP: $e, $s");
+                                    isLoading.value = false;
+                                    Fluttertoast.showToast(
+                                        msg: loc.loginUnableToSendOTP);
+                                  }
+                                }
+                              },
+                              child: Text(
+                                loc.loginGetOTP,
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+                secondChild: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -161,290 +291,183 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: AppSize.kmheight),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(6),
+                    Text(
+                      loc.loginEnterOTP(_formatMobile(mobileController.text)),
+                      style: applyRobotoFont(
+                        fontSize: 14,
                       ),
-                      child: TextFormField(
-                        focusNode: focusNode,
-                        controller: mobileController,
-                        onChanged: (value) {
-                          if (value.length == 10) {
-                            focusNode.unfocus();
+                    ),
+                    const SizedBox(height: AppSize.klheight),
+                    Pinput(
+                      controller: pinController,
+                      length: 6,
+                      focusNode: otpFocusNode,
+                      androidSmsAutofillMethod:
+                          AndroidSmsAutofillMethod.smsUserConsentApi,
+                      listenForMultipleSmsOnAndroid: true,
+                      separatorBuilder: (index) => const SizedBox(width: 8),
+                      enabled: true,
+                      showCursor: true,
+                      defaultPinTheme: defaultPinTheme,
+                      keyboardType: const TextInputType.numberWithOptions(),
+                      hapticFeedbackType: HapticFeedbackType.lightImpact,
+                      onCompleted: (pin) async {
+                        final navigator = Navigator.of(context);
+          
+                        if (otp.value.isNotEmpty) {
+                          try {
+                            isLoading.value = true;
+                            otpError.value = '';
+          
+                            await ref.read(initializationProvider).signIn(
+                                mobile: mobileController.text, otp: otp.value);
+          
+                            // Set visitor user id for matomo analytics
+                            _addMatomoAnalytics();
+          
+                            navigator.pushNamedAndRemoveUntil(
+                                InitializationPage.routeName, (route) => false);
+                          } on DioException catch (e) {
+                            otpError.value =
+                                e.response?.data["error_description"] ??
+                                    loc.loginInvalidOTP;
+          
+                            Fluttertoast.showToast(msg: otpError.value);
+                          } catch (e) {
+                            Fluttertoast.showToast(msg: loc.loginInvalidOTP);
+                            otpError.value = loc.loginInvalidOTP;
+                          } finally {
+                            Future.delayed(const Duration(seconds: 2), () {
+                              otpError.value = "";
+                            });
+                            pinController.clear();
+                            isLoading.value = false;
                           }
-                        },
-                        onSaved: (value) {
-                          mobileController.text = value!;
-                        },
-                        validator: (value) {
-                          const pattern = r'(^(?:[+0]9)?[0-9]{10}$)';
-                          final regExp = RegExp(pattern);
-                          if (value!.isEmpty) {
-                            return loc.loginEnterMobileNumber;
-                          } else if (!regExp.hasMatch(value)) {
-                            return loc.loginEnterValidMobileNumber;
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(16),
-                          border: const UnderlineInputBorder(),
-                          labelText: loc.mobileNumber,
-                          labelStyle: const TextStyle(
-                            fontSize: 14,
+                        }
+                      },
+                      onChanged: (value) {
+                        otp.value = value;
+                      },
+                      closeKeyboardWhenCompleted: true,
+                      cursor: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 9),
+                            width: 22,
+                            height: 1,
                           ),
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColor.blue, width: 2.0),
-                          ),
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColor.blue, width: 2.0),
-                          ),
-                          errorBorder: const UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColor.red, width: 2.0),
-                          ),
-                          focusedErrorBorder: const UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColor.red, width: 2.0),
-                          ),
-                          disabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColor.lightGrey, width: 2.0),
+                        ],
+                      ),
+                      errorPinTheme: defaultPinTheme.copyBorderWith(
+                        border: Border.all(color: Colors.redAccent),
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.klheight),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          loc.loginDidntReceiveOTP,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
                           ),
                         ),
-                      ),
+                        const SizedBox(width: 6),
+                        otpExpiry.value != 0
+                            ? OTPTimer(expireInsec: otpExpiry.value)
+                            : InkWell(
+                                onTap: () async {
+                                  try {
+                                    otpExpiry.value = await ref
+                                        .read(initializationProvider)
+                                        .sendOtp(mobile: mobileController.text);
+          
+                                    Fluttertoast.showToast(msg: loc.loginOTPSent);
+                                  } catch (e) {
+                                    Fluttertoast.showToast(
+                                        msg: loc.loginUnableToSendOTP);
+                                  }
+                                },
+                                child: Text(
+                                  loc.resend,
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.blue,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              )
+                      ],
                     ),
-                    const SizedBox(height: AppSize.klheight * 4),
-                    isLoading.value
-                        ? const Center(
-                            child: CircularProgressIndicator.adaptive())
-                        : ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              minimumSize:
-                                  Size(AppSize.width(context) * 0.9, 40),
-                            ),
-                            onPressed: () async {
-                              if (formKey.value.currentState!.validate()) {
-                                try {
-                                  isLoading.value = true;
-                                  otpExpiry.value = await ref
-                                      .read(initializationProvider)
-                                      .sendOtp(mobile: mobileController.text);
-
-                                  isLoading.value = false;
-                                  showOtp.value = true;
-                                } catch (e, s) {
-                                  logger.e("Error sending OTP: $e, $s");
-                                  isLoading.value = false;
-                                  Fluttertoast.showToast(
-                                      msg: loc.loginUnableToSendOTP);
-                                }
-                              }
-                            },
-                            child: Text(
-                              loc.loginGetOTP,
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.white,
-                              ),
-                            ),
-                          ),
-                  ],
-                ),
-              ),
-              secondChild: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: AppSize.klheight * 3.5),
-                  Text(
-                    loc.loginVerifyMobileNumber,
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.kmheight),
-                  Text(
-                    loc.loginEnterOTP(_formatMobile(mobileController.text)),
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.klheight),
-                  Pinput(
-                    controller: pinController,
-                    length: 6,
-                    focusNode: otpFocusNode,
-                    androidSmsAutofillMethod:
-                        AndroidSmsAutofillMethod.smsUserConsentApi,
-                    listenForMultipleSmsOnAndroid: true,
-                    separatorBuilder: (index) => const SizedBox(width: 8),
-                    enabled: true,
-                    showCursor: true,
-                    defaultPinTheme: defaultPinTheme,
-                    keyboardType: const TextInputType.numberWithOptions(),
-                    hapticFeedbackType: HapticFeedbackType.lightImpact,
-                    onCompleted: (pin) async {
-                      final navigator = Navigator.of(context);
-
-                      if (otp.value.isNotEmpty) {
-                        try {
-                          isLoading.value = true;
-                          otpError.value = '';
-
-                          await ref.read(initializationProvider).signIn(
-                              mobile: mobileController.text, otp: otp.value);
-
-                          // Set visitor user id for matomo analytics
-                          _addMatomoAnalytics();
-
-                          navigator.pushNamedAndRemoveUntil(
-                              InitializationPage.routeName, (route) => false);
-                        } on DioException catch (e) {
-                          otpError.value =
-                              e.response?.data["error_description"] ??
-                                  loc.loginInvalidOTP;
-
-                          Fluttertoast.showToast(msg: otpError.value);
-                        } catch (e) {
-                          Fluttertoast.showToast(msg: loc.loginInvalidOTP);
-                          otpError.value = loc.loginInvalidOTP;
-                        } finally {
-                          Future.delayed(const Duration(seconds: 2), () {
-                            otpError.value = "";
-                          });
-                          pinController.clear();
-                          isLoading.value = false;
-                        }
-                      }
-                    },
-                    onChanged: (value) {
-                      otp.value = value;
-                    },
-                    closeKeyboardWhenCompleted: true,
-                    cursor: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    const SizedBox(height: AppSize.klheight),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 9),
-                          width: 22,
-                          height: 1,
+                        Text(
+                          otpError.value,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.red,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
-                    errorPinTheme: defaultPinTheme.copyBorderWith(
-                      border: Border.all(color: Colors.redAccent),
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.klheight),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        loc.loginDidntReceiveOTP,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.grey,
-                        ),
+                    // const SizedBox(height: AppSize.klheight),
+                    Visibility(
+                      visible: isLoading.value,
+                      child: const Center(
+                        child: CircularProgressIndicator.adaptive(),
                       ),
-                      const SizedBox(width: 6),
-                      otpExpiry.value != 0
-                          ? OTPTimer(expireInsec: otpExpiry.value)
-                          : InkWell(
-                              onTap: () async {
-                                try {
-                                  otpExpiry.value = await ref
-                                      .read(initializationProvider)
-                                      .sendOtp(mobile: mobileController.text);
-
-                                  Fluttertoast.showToast(msg: loc.loginOTPSent);
-                                } catch (e) {
-                                  Fluttertoast.showToast(
-                                      msg: loc.loginUnableToSendOTP);
-                                }
-                              },
-                              child: Text(
-                                loc.resend,
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.blue,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            )
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.klheight),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        otpError.value,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.red,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  // const SizedBox(height: AppSize.klheight),
-                  Visibility(
-                    visible: isLoading.value,
-                    child: const Center(
-                      child: CircularProgressIndicator.adaptive(),
                     ),
-                  ),
-                  // ElevatedButton(
-                  //   style: ElevatedButton.styleFrom(
-                  //     minimumSize: Size(AppSize.width(context) * 0.9, 40),
-                  //   ),
-                  //   onPressed: () async {
-                  //     final navigator = Navigator.of(context);
-
-                  //     if (otp.value.isNotEmpty) {
-                  //       try {
-                  //         otpError.value = '';
-                  //         logger.d("otp value is : ${otp.value}");
-                  //         await ref.read(initializationProvider).signIn(
-                  //             mobile: mobileController.text, otp: otp.value);
-
-                  //         // Set visitor user id for matomo analytics
-                  //         var uuid = const Uuid();
-                  //         String userId = uuid.v1();
-                  //         MatomoLogger.setVisitorUserId(userId);
-                  //         /////////////////////////////////
-
-                  //         navigator.pushNamedAndRemoveUntil(
-                  //             InitializationPage.routeName, (route) => false);
-                  //       } catch (e) {
-                  //         logger.e(e);
-                  //         Fluttertoast.showToast(msg: loc.loginInvalidOTP);
-
-                  //         otpError.value = loc.loginInvalidOTP;
-                  //         pinController.clear();
-                  //         Future.delayed(const Duration(seconds: 2), () {
-                  //           otpError.value = "";
-                  //         });
-                  //       }
-                  //     }
-                  //   },
-                  //   child: Text(
-                  //     'Verify and Proceed',
-                  //     style: applyRobotoFont(
-                  //       fontSize: 14,
-                  //       fontWeight: FontWeight.w500,
-                  //       color: AppColor.white,
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     minimumSize: Size(AppSize.width(context) * 0.9, 40),
+                    //   ),
+                    //   onPressed: () async {
+                    //     final navigator = Navigator.of(context);
+          
+                    //     if (otp.value.isNotEmpty) {
+                    //       try {
+                    //         otpError.value = '';
+                    //         logger.d("otp value is : ${otp.value}");
+                    //         await ref.read(initializationProvider).signIn(
+                    //             mobile: mobileController.text, otp: otp.value);
+          
+                    //         // Set visitor user id for matomo analytics
+                    //         var uuid = const Uuid();
+                    //         String userId = uuid.v1();
+                    //         MatomoLogger.setVisitorUserId(userId);
+                    //         /////////////////////////////////
+          
+                    //         navigator.pushNamedAndRemoveUntil(
+                    //             InitializationPage.routeName, (route) => false);
+                    //       } catch (e) {
+                    //         logger.e(e);
+                    //         Fluttertoast.showToast(msg: loc.loginInvalidOTP);
+          
+                    //         otpError.value = loc.loginInvalidOTP;
+                    //         pinController.clear();
+                    //         Future.delayed(const Duration(seconds: 2), () {
+                    //           otpError.value = "";
+                    //         });
+                    //       }
+                    //     }
+                    //   },
+                    //   child: Text(
+                    //     'Verify and Proceed',
+                    //     style: applyRobotoFont(
+                    //       fontSize: 14,
+                    //       fontWeight: FontWeight.w500,
+                    //       color: AppColor.white,
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
             ),
           ),

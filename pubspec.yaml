@@ -84,6 +84,7 @@ dependencies:
   date_picker_timeline: ^1.2.5
   stomp_dart_client: ^1.0.3
   in_app_update: ^4.2.2
+  upgrader: ^9.0.0
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
