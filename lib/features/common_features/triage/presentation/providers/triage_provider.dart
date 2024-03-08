@@ -110,7 +110,7 @@ class TriageProvider extends ChangeNotifier {
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
-      organizationCode: assessment.organizationCode,
+      tenantCode: assessment.tenantCode,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
@@ -214,7 +214,7 @@ class TriageProvider extends ChangeNotifier {
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
-      organizationCode: assessment.organizationCode,
+      tenantCode: assessment.tenantCode,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS

@@ -24,7 +24,7 @@ mixin _$TriagePostModel {
   int? get patientId => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
   ServiceType? get serviceType => throw _privateConstructorUsedError;
-  int? get organizationCode => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   List<Performer>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
@@ -73,7 +73,7 @@ abstract class $TriagePostModelCopyWith<$Res> {
       int? patientId,
       int? encounterId,
       ServiceType? serviceType,
-      int? organizationCode,
+      int? tenantCode,
       List<Performer>? performer,
       int? assessmentCode,
       String? assessmentVersion,
@@ -118,7 +118,7 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
     Object? patientId = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
-    Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? performer = freezed,
     Object? assessmentCode = freezed,
     Object? assessmentVersion = freezed,
@@ -160,9 +160,9 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
           ? _value.serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
               as ServiceType?,
-      organizationCode: freezed == organizationCode
-          ? _value.organizationCode
-          : organizationCode // ignore: cast_nullable_to_non_nullable
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       performer: freezed == performer
           ? _value.performer
@@ -285,7 +285,7 @@ abstract class _$$_TriagePostModelCopyWith<$Res>
       int? patientId,
       int? encounterId,
       ServiceType? serviceType,
-      int? organizationCode,
+      int? tenantCode,
       List<Performer>? performer,
       int? assessmentCode,
       String? assessmentVersion,
@@ -329,7 +329,7 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
     Object? patientId = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
-    Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? performer = freezed,
     Object? assessmentCode = freezed,
     Object? assessmentVersion = freezed,
@@ -371,9 +371,9 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
           ? _value.serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
               as ServiceType?,
-      organizationCode: freezed == organizationCode
-          ? _value.organizationCode
-          : organizationCode // ignore: cast_nullable_to_non_nullable
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       performer: freezed == performer
           ? _value._performer
@@ -479,7 +479,7 @@ class _$_TriagePostModel implements _TriagePostModel {
       this.patientId,
       this.encounterId,
       this.serviceType,
-      this.organizationCode,
+      this.tenantCode,
       final List<Performer>? performer,
       this.assessmentCode,
       this.assessmentVersion,
@@ -522,7 +522,7 @@ class _$_TriagePostModel implements _TriagePostModel {
   @override
   final ServiceType? serviceType;
   @override
-  final int? organizationCode;
+  final int? tenantCode;
   final List<Performer>? _performer;
   @override
   List<Performer>? get performer {
@@ -625,7 +625,7 @@ class _$_TriagePostModel implements _TriagePostModel {
 
   @override
   String toString() {
-    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, encounter: $encounter)';
+    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, tenantCode: $tenantCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, encounter: $encounter)';
   }
 
   @override
@@ -640,8 +640,8 @@ class _$_TriagePostModel implements _TriagePostModel {
                 other.encounterId == encounterId) &&
             (identical(other.serviceType, serviceType) ||
                 other.serviceType == serviceType) &&
-            (identical(other.organizationCode, organizationCode) ||
-                other.organizationCode == organizationCode) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             const DeepCollectionEquality()
                 .equals(other._performer, _performer) &&
             (identical(other.assessmentCode, assessmentCode) ||
@@ -700,7 +700,7 @@ class _$_TriagePostModel implements _TriagePostModel {
         patientId,
         encounterId,
         serviceType,
-        organizationCode,
+        tenantCode,
         const DeepCollectionEquality().hash(_performer),
         assessmentCode,
         assessmentVersion,
@@ -746,7 +746,7 @@ abstract class _TriagePostModel implements TriagePostModel {
       final int? patientId,
       final int? encounterId,
       final ServiceType? serviceType,
-      final int? organizationCode,
+      final int? tenantCode,
       final List<Performer>? performer,
       final int? assessmentCode,
       final String? assessmentVersion,
@@ -783,7 +783,7 @@ abstract class _TriagePostModel implements TriagePostModel {
   @override
   ServiceType? get serviceType;
   @override
-  int? get organizationCode;
+  int? get tenantCode;
   @override
   List<Performer>? get performer;
   @override
