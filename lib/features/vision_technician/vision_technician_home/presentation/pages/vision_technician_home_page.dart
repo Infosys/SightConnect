@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -10,6 +12,9 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:upgrader/upgrader.dart';
+
+import '../../../../../main.dart';
 
 class VisionTechnicianHomePage extends ConsumerWidget {
   const VisionTechnicianHomePage({super.key});
@@ -77,34 +82,61 @@ class VisionTechnicianHomePage extends ConsumerWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              child: Stack(
-                children: [
-                  Container(
-                    height: AppSize.klheight * 6,
-                    decoration: const BoxDecoration(
-                      color: AppColor.primary,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(AppSize.klradius),
-                        bottomRight: Radius.circular(AppSize.klradius),
+      body: UpgradeAlert(
+          dialogStyle: Platform.isIOS
+              ? UpgradeDialogStyle.cupertino
+              : UpgradeDialogStyle.material,
+          showIgnore: false,
+          showLater: false,
+          shouldPopScope: () => false,
+          canDismissDialog: false,
+          onUpdate: () {
+            return true;
+          },
+          upgrader: Upgrader(
+            durationUntilAlertAgain: const Duration(milliseconds: 800),
+            willDisplayUpgrade: ({
+              appStoreVersion,
+              required display,
+              installedVersion,
+              minAppVersion,
+            }) {
+              logger.d({
+                "display : $display",
+                "appStoreVersion : $appStoreVersion",
+                "installedVersion : $installedVersion",
+              });
+            },
+          ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                child: Stack(
+                  children: [
+                    Container(
+                      height: AppSize.klheight * 6,
+                      decoration: const BoxDecoration(
+                        color: AppColor.primary,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(AppSize.klradius),
+                          bottomRight: Radius.circular(AppSize.klradius),
+                        ),
                       ),
                     ),
-                  ),
-                  Transform.translate(
-                    offset: const Offset(0, AppSize.ksheight),
-                    child: const VTHeader(),
-                  )
-                ],
+                    Transform.translate(
+                      offset: const Offset(0, AppSize.ksheight),
+                      child: const VTHeader(),
+                    )
+                  ],
+                ),
               ),
-            ),
-            //TODO: Logic for showing the assessment table
-            const AssessmentTable(),
-          ],
+              //TODO: Logic for showing the assessment table
+              const AssessmentTable(),
+            ],
+          ),
         ),
       ),
     );

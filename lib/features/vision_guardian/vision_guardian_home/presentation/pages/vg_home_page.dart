@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
@@ -9,8 +11,10 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:upgrader/upgrader.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
+import '../../../../../main.dart';
 import '../widgets/vg_services_cards_list.dart';
 
 class VisionGuardianHomePage extends ConsumerWidget {
@@ -34,114 +38,141 @@ class VisionGuardianHomePage extends ConsumerWidget {
         ),
         actions: const [],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: Responsive.isMobile(context)
-                  ? AppSize.height(context) * 0.2
-                  : AppSize.height(context) * 0.35,
-              decoration: const BoxDecoration(
-                color: AppColor.primary,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(AppSize.kmradius),
-                  bottomRight: Radius.circular(AppSize.kmradius),
+      body: UpgradeAlert(
+          dialogStyle: Platform.isIOS
+              ? UpgradeDialogStyle.cupertino
+              : UpgradeDialogStyle.material,
+          showIgnore: false,
+          showLater: false,
+          shouldPopScope: () => false,
+          canDismissDialog: false,
+          onUpdate: () {
+            return true;
+          },
+          upgrader: Upgrader(
+            durationUntilAlertAgain: const Duration(milliseconds: 800),
+            willDisplayUpgrade: ({
+              appStoreVersion,
+              required display,
+              installedVersion,
+              minAppVersion,
+            }) {
+              logger.d({
+                "display : $display",
+                "appStoreVersion : $appStoreVersion",
+                "installedVersion : $installedVersion",
+              });
+            },
+          ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                height: Responsive.isMobile(context)
+                    ? AppSize.height(context) * 0.2
+                    : AppSize.height(context) * 0.35,
+                decoration: const BoxDecoration(
+                  color: AppColor.primary,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(AppSize.kmradius),
+                    bottomRight: Radius.circular(AppSize.kmradius),
+                  ),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppSize.kmpadding,
-                    ),
-                    child: Text(
-                      "${loc.vgWelcome}  ${ref.watch(globalVGProvider).name}",
-                      style: applyFiraSansFont(
-                        color: AppColor.scaffold,
-                        fontSize: 24,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: AppSize.kmpadding,
                       ),
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: Offset(0, AppSize.height(context) * 0.07),
-                    child: SizedBox(
-                      child: ref.watch(getAnalyticsProvider).when(
-                        data: (data) {
-                          return VGCarousel(data: data);
-                        },
-                        error: (error, stackTrace) {
-                          return const Center(
-                            child: Text("Failed to load data"),
-                          );
-                        },
-                        loading: () {
-                          return Container();
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: AppSize.height(context) * 0.06),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    loc.vgServices,
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                    ),
-                  ),
-                  const VisionGuardianServicesCardList(),
-                  const SizedBox(height: AppSize.kmheight),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        loc.vgEvents,
+                      child: Text(
+                        "${loc.vgWelcome}  ${ref.watch(globalVGProvider).name}",
                         style: applyFiraSansFont(
-                          fontSize: 18,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w400,
+                          color: AppColor.scaffold,
+                          fontSize: 24,
                         ),
                       ),
-                      Consumer(
-                        builder: (context, ref, child) {
-                          return TextButton(
-                            child: Text(
-                              loc.vgViewAll,
-                              style: applyFiraSansFont(
-                                fontSize: 14,
-                                color: AppColor.primary,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            onPressed: () async {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const VisionGuardianEventPage(),
-                                ),
-                              );
-                            },
-                          );
-                        },
+                    ),
+                    Transform.translate(
+                      offset: Offset(0, AppSize.height(context) * 0.07),
+                      child: SizedBox(
+                        child: ref.watch(getAnalyticsProvider).when(
+                          data: (data) {
+                            return VGCarousel(data: data);
+                          },
+                          error: (error, stackTrace) {
+                            return const Center(
+                              child: Text("Failed to load data"),
+                            );
+                          },
+                          loading: () {
+                            return Container();
+                          },
+                        ),
                       ),
-                    ],
-                  ),
-                  const VisionEventListDetails(
-                    eventType: "default",
-                  ),
-                  const SizedBox(height: AppSize.klheight * 4)
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: AppSize.height(context) * 0.06),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      loc.vgServices,
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const VisionGuardianServicesCardList(),
+                    const SizedBox(height: AppSize.kmheight),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          loc.vgEvents,
+                          style: applyFiraSansFont(
+                            fontSize: 18,
+                            color: AppColor.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return TextButton(
+                              child: Text(
+                                loc.vgViewAll,
+                                style: applyFiraSansFont(
+                                  fontSize: 14,
+                                  color: AppColor.primary,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              onPressed: () async {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisionGuardianEventPage(),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    const VisionEventListDetails(
+                      eventType: "default",
+                    ),
+                    const SizedBox(height: AppSize.klheight * 4)
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
