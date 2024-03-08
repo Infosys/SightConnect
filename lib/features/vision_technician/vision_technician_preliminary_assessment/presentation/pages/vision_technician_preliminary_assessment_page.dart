@@ -103,7 +103,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                             Fluttertoast.showToast(msg: failure.errorMessage);
                           },
                           (triageResponseModel) {
-                            logger.f(
+                            logger.d(
                                 "Triage Response Model: ${triageResponseModel.encounterId}");
                             patientDetails = patientDetails?.copyWith(
                               encounterId: triageResponseModel.encounterId,

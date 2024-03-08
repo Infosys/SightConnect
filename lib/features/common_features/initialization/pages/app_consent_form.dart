@@ -15,7 +15,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/constants/api_constant.dart';
 import '../../../../core/providers/global_language_provider.dart';
 
 final appConsentFormProvider = FutureProvider((ref) {
@@ -58,18 +57,8 @@ class AppConsentFormPage extends HookConsumerWidget {
               final lang =
                   ref.watch(globalLanguageProvider).currentLocale?.languageCode;
               if (isPreview) {
-                return SafeArea(
-                  child: Scaffold(
-                    appBar: CustomAppbar(
-                      title: Text(loc.privacyPolicyTitle),
-                      automaticallyImplyLeading: false,
-                      centerTitle: false,
-                    ),
-                    body: AppWebView(
-                      url:
-                          "${Env.baseUrl}/dam/${data.templateId}?langId=${lang}",
-                    ),
-                  ),
+                return AppWebView(
+                  url: "${Env.baseUrl}/dam/${data.templateId}?langId=${lang}",
                 );
               }
 

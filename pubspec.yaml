@@ -144,7 +144,6 @@ flutter:
     - assets/logo/
     - assets/drawer_icons/
     - assets/nav_icons/
-    - assets/server.pem
     - assets/images/animation_up.gif
 
   #   - images/a_dot_ham.jpeg

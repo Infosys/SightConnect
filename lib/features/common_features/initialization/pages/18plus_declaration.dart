@@ -15,7 +15,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/constants/api_constant.dart';
 import '../../../../core/providers/global_language_provider.dart';
 
 final ageDeclarationProvider = FutureProvider((ref) {
