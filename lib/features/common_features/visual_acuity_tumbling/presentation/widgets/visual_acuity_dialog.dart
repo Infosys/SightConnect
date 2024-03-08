@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
@@ -158,6 +159,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
   const VisualAcuitySuccessDialog({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final global = ref.read(globalProvider);
     var isLoading = useState<bool>(false);
     return BlurDialogBox(
       insetPadding: EdgeInsets.zero,
@@ -181,7 +183,10 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                     height: AppSize.kmheight,
                   ),
                   Text(
-                    AppLocalizations.of(context)!.visualAcuityCompletionDialog,
+                    global.isTriageMode() || global.isStandaloneMode()
+                        ? AppLocalizations.of(context)!
+                            .visualAcuityCompletionDialog
+                        : "Your data has been saved successfully",
                     style: applyRobotoFont(
                       fontSize: 14,
                     ),
@@ -198,7 +203,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                           final isAcuityDialog = ref.read(
                               visualAcuityTumblingTestDialogProvider.notifier);
                           final stepper = ref.read(triageStepperProvider);
-                          final global = ref.read(globalProvider);
+
                           return TextButton(
                             onPressed: () async {
                               var navigator = Navigator.of(context);
@@ -271,12 +276,16 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
         Fluttertoast.showToast(msg: "Observation Updated");
       },
     );
-    ref.invalidate(tumblingTestProvider);
+
     navigator
       ..pop()
       ..pop()
       ..pop()
       ..pop()
       ..pop();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.invalidate(tumblingTestProvider);
+    });
   }
 }

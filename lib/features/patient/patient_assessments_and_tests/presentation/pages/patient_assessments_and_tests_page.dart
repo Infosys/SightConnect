@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/encounter_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
@@ -36,6 +37,7 @@ class _AssessmentsAndTestsPageState
       ref
           .read(patientAssessmentAndTestProvider)
           .getTriageReportByPatientIdAndStatus();
+      ref.invalidate(tumblingTestProvider);
 
       _loadData();
     });
