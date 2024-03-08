@@ -83,6 +83,7 @@ class VtTriageProvider extends ChangeNotifier {
       try {
         await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
       } catch (e) {
+        _preliminaryAssessmentHelperProvider.setLoading(false);
         return Left(ServerFailure(errorMessage: "Not on IVR Call"));
       }
     }
@@ -145,7 +146,6 @@ class VtTriageProvider extends ChangeNotifier {
           _preliminaryAssessmentHelperProvider.onIvrCall ? [] : observations,
       questionResponse: questionResponse,
     );
-    _preliminaryAssessmentHelperProvider.setLoading(true);
 
     try {
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
