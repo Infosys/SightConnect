@@ -283,7 +283,6 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
     if (state == AppLifecycleState.inactive) {
       logger.d("AppCameraPage: AppLifecycleState.inactive");
-      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
       logger.d("AppCameraPage: AppLifecycleState.resumed");
@@ -292,15 +291,12 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
       }
     } else if (state == AppLifecycleState.paused) {
       logger.d("AppCameraPage: AppLifecycleState.paused");
-      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
       logger.d("AppCameraPage: AppLifecycleState.detached");
-      _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.hidden) {
       logger.d("AppCameraPage: AppLifecycleState.hidden");
-      _addLoading();
       _stopLiveFeed();
     }
   }
@@ -393,10 +389,11 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   }
 
   Future<void> _toggleCamera() async {
+    logger.d("AppCameraPage: Switching Camera");
     if (!_controller.value.isInitialized) {
       return;
     }
-    _addLoading();
+    _addLoading("Switching Camera Lens");
     if (_controller.description.lensDirection == CameraLensDirection.front) {
       _cameraLensDirection = CameraLensDirection.back;
     } else {

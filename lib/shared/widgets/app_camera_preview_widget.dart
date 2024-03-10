@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -201,11 +200,7 @@ class AppCameraPreviewWidget extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: InkWell(
                                   onTap: () {
-                                    logger
-                                        .f('Triage Eye Scan: Camera Switching');
                                     onCameraSwitch();
-                                    logger
-                                        .f('Triage Eye Scan: Camera Switched');
                                   },
                                   child: const Padding(
                                     padding: EdgeInsets.symmetric(
