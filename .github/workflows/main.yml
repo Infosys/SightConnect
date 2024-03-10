@@ -3,7 +3,7 @@ name: Build AAB
 on:
   push:
     branches:
-      - development
+      - main
     # paths-ignore:
     #   - 'pubspec.yaml'  #The paths-ignore will prevent the workflow from being triggered when only the pubspec.yaml file is changed.
 
