@@ -2,7 +2,9 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'app_network_image.dart';
 
@@ -33,32 +35,27 @@ class EyeScanTabView extends StatelessWidget {
           ),
         ),
         children: [
-          Visibility(
-            visible: getLeftEyeImageUrl(eyeScanData) != null ||
-                getRightEyeImageUrl(eyeScanData) != null,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              height: 200,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: _EyeScanImage(
-                      image: getLeftEyeImageUrl(eyeScanData),
-                      name: loc.leftEyeString,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: _EyeScanImage(
-                      image: getRightEyeImageUrl(eyeScanData),
-                      name: loc.rightEyeString,
-                    ),
-                  ),
-                ],
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            children: [
+              Visibility(
+                visible: getLeftEyeImageUrl(eyeScanData) != null,
+                child: _EyeScanImage(
+                  image: getLeftEyeImageUrl(eyeScanData),
+                  name: loc.leftEyeString,
+                ),
               ),
-            ),
-          )
+              Visibility(
+                visible: getRightEyeImageUrl(eyeScanData) != null,
+                child: _EyeScanImage(
+                  image: getRightEyeImageUrl(eyeScanData),
+                  name: loc.rightEyeString,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -104,32 +101,33 @@ class _EyeScanImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          name,
-          style: applyRobotoFont(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            name,
+            style: applyRobotoFont(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        const SizedBox(height: AppSize.kmheight),
-        image == null
-            ? const Center(child: Text("No Image"))
-            : Flexible(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.ksradius),
-                  child: AppNetworkImage(
-                    imageUrl: image!,
-                    shapeCircle: false,
-                    height: 100,
-                    width: 100,
+          const SizedBox(height: AppSize.ksheight),
+          image == null
+              ? const Center(child: Text("No Image"))
+              : Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppSize.ksradius),
+                    child: AppNetworkImage(
+                      imageUrl: image!,
+                      shapeCircle: false,
+                    ),
                   ),
                 ),
-              ),
-      ],
+        ],
+      ),
     );
   }
 }

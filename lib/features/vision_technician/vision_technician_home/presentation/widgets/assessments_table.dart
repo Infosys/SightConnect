@@ -13,53 +13,28 @@ class AssessmentTable extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    return Padding(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: AppSize.kmheight),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          child: Text(
             loc.vtAssessments,
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
           ),
-
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => const VisionTechnicianSearchPage(),
-          //       ),
-          //     );
-          //   },
-          //   child: TextField(
-          //     readOnly: true,
-          //     enabled: false,
-          //     controller: textController,
-          //     decoration: InputDecoration(
-          //       filled: true,
-          //       fillColor: AppColor.white,
-          //       isDense: true,
-          //       prefixIcon: const Icon(
-          //         CupertinoIcons.search,
-          //         color: AppColor.grey,
-          //       ),
-          //       hintText: loc.vtSearchText,
-          //       hintStyle: applyRobotoFont(
-          //         color: AppColor.grey,
-          //         fontSize: 14,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          const SizedBox(height: AppSize.kmheight),
-          const ListOfFilterChips(),
-          const SizedBox(height: AppSize.kmheight),
-          const PatientAssessmentPaginatedTable(),
-        ],
-      ),
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          child: ListOfFilterChips(),
+        ),
+        const SizedBox(height: AppSize.kmheight),
+        const PatientAssessmentPaginatedTable(),
+      ],
     );
   }
 }
