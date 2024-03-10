@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/app_consent_form.dart';
@@ -39,8 +40,15 @@ class AppDrawer extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
+
     var items = DrawerMenuItems.getAll(loc);
     var isLoading = useState(false);
+    final currentRole = PersistentAuthStateService.authState.roles;
+    if (currentRole != null && currentRole.length == 1) {
+      items = items.where((element) {
+        return element.id != DrawerMenuItemId.switchProfile;
+      }).toList();
+    }
 
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),

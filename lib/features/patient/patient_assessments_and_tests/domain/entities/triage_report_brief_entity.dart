@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/encounter_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
@@ -81,7 +82,7 @@ class TriageReportBriefEntity {
   bool? isUpdateEnabled;
   int encounterId;
   EncounterStatus? encounterStatus;
-
+  DiagnosticReportStatus? status;
   String? questionResultDescription;
   String? observationResultDescription;
   String? mediaResultDescription;
@@ -103,5 +104,11 @@ class TriageReportBriefEntity {
     this.triageResultStartDate,
     this.triageResultDescription,
     this.isUpdateEnabled,
+    this.status,
   });
+
+  @override
+  String toString() {
+    return 'TriageReportBriefEntity(triageResultID: $triageResultID, overallSeverity: $overallSeverity, reportTag: $reportTag, triageResultType: $triageResultType, triageResultSource: $triageResultSource, assessmentID: $assessmentID, triageResultStartDate: $triageResultStartDate, triageResultDescription: $triageResultDescription, isUpdateEnabled: $isUpdateEnabled, encounterId: $encounterId, encounterStatus: $encounterStatus, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, performerRole: $performerRole, status: $status)';
+  }
 }

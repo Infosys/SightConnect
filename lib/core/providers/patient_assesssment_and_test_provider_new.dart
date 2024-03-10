@@ -297,6 +297,16 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
     getTriageReportByPatientIdAndStatus();
   }
 
+  resetVariables() {
+    _clinicalReportList.clear();
+    _selfTestReportList.clear();
+    _clinicalReportPage = 0;
+    _hasClinicalReportMore = true;
+    _selfTestReportPage = 0;
+    _hasSelfTestReportMore = true;
+    notifyListeners();
+  }
+
   Future<void> getTriageReportByPatientIdAndStatus() async {
     if (_isFinalReportLoading) {
       return;
@@ -350,7 +360,11 @@ class PatientAssessmentAndTestProviderNew extends ChangeNotifier {
 
     final response = await _triageReportRepository.getTriageReportByEncounterId(
       encounterId,
-      DiagnosticReportStatus.FINAL,
+      [
+        DiagnosticReportStatus.FINAL,
+        DiagnosticReportStatus.AMENDED,
+        DiagnosticReportStatus.CANCELLED,
+      ],
       isPatient ? _selfTestReportPage : _clinicalReportPage,
       pageSize,
       isPatient

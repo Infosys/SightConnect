@@ -13,32 +13,29 @@ class AppWebView extends HookWidget {
   Widget build(BuildContext context) {
     var isLoading = useState<bool>(false);
     var progress = useState<double>(0.0);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Stack(
-        children: [
-          InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: WebUri(url),
-            ),
-            initialSettings: InAppWebViewSettings(
-              preferredContentMode: UserPreferredContentMode.MOBILE,
-              textZoom: 300,
-            ),
-            onProgressChanged: (controller, p) {
-              progress.value = p / 100;
-              if (progress.value == 100) {
-                isLoading.value = false;
-              } else {
-                isLoading.value = true;
-              }
-            },
+    return Stack(
+      children: [
+        InAppWebView(
+          initialUrlRequest: URLRequest(
+            url: WebUri(url),
           ),
-          progress.value < 1.0
-              ? LinearProgressIndicator(value: progress.value)
-              : Container(),
-        ],
-      ),
+          initialSettings: InAppWebViewSettings(
+            preferredContentMode: UserPreferredContentMode.MOBILE,
+            textZoom: 150,
+          ),
+          onProgressChanged: (controller, p) {
+            progress.value = p / 100;
+            if (progress.value == 100) {
+              isLoading.value = false;
+            } else {
+              isLoading.value = true;
+            }
+          },
+        ),
+        progress.value < 1.0
+            ? LinearProgressIndicator(value: progress.value)
+            : Container(),
+      ],
     );
   }
 }

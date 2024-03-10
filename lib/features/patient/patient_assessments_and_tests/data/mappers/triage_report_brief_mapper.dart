@@ -22,6 +22,7 @@ class AssessmentReportMapper {
       isUpdateEnabled: model.updateEndTime!.isAfter(DateTime.now()) &&
           model.status != DiagnosticReportStatus.CANCELLED &&
           model.performerRole == PerformerRole.PATIENT,
+      status: model.status,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
@@ -72,6 +73,7 @@ class _PatientSelfTestReportsState
         itemBuilder: (BuildContext context, int index) {
           if (index < model.selfTestReportList.length) {
             final currentData = model.selfTestReportList[index];
+            logger.f(currentData.toString());
 
             return Container(
               margin: const EdgeInsets.only(bottom: 16),
@@ -91,14 +93,31 @@ class _PatientSelfTestReportsState
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AutoSizeText(
-                              '${loc.patientRID}: ${currentData.triageResultID}',
-                              minFontSize: 12,
-                              maxLines: 1,
-                              style: applyFiraSansFont(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            Row(
+                              children: [
+                                AutoSizeText(
+                                  '${loc.patientRID}: ${currentData.triageResultID}',
+                                  minFontSize: 12,
+                                  maxLines: 1,
+                                  style: applyFiraSansFont(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                AutoSizeText(
+                                  currentData.status?.name ?? "",
+                                  minFontSize: 10,
+                                  maxLines: 1,
+                                  style: applyFiraSansFont(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: _getChipColor(currentData.status!),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 2),
                             Text(
@@ -113,7 +132,6 @@ class _PatientSelfTestReportsState
                           ],
                         ),
                       ),
-                      const Spacer(),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -348,5 +366,18 @@ class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+_getChipColor(DiagnosticReportStatus status) {
+  switch (status) {
+    case DiagnosticReportStatus.CANCELLED:
+      return AppColor.red;
+    case DiagnosticReportStatus.AMENDED:
+      return AppColor.darkOrange;
+    case DiagnosticReportStatus.FINAL:
+      return AppColor.green;
+    default:
+      return AppColor.grey;
   }
 }

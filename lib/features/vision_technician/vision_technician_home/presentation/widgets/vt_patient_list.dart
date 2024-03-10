@@ -27,7 +27,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+            // padding: const EdgeInsets.all(AppSize.kmpadding),
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(8),
