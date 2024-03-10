@@ -128,9 +128,9 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
       endpoint += "&$filter";
     }
 
-    if (status.isNotEmpty) {
-      endpoint += "&status=${status.map((e) => e.name).join(",")}";
-    }
+    // if (status.isNotEmpty) {
+    //   endpoint += "&status=${status.map((e) => e.name).join(",")}";
+    // }
 
     ///ABCD
 
