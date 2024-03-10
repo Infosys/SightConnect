@@ -69,8 +69,6 @@ class _TriagePageState extends ConsumerState<TriagePage> {
   Widget build(BuildContext context) {
     var currentStep = ref.watch(triageStepperProvider).currentStep;
     final loc = context.loc!;
-  
-    ref.read(resetProvider).reset();
 
     return ref.watch(getTriageProvider).when(
       data: (data) {
