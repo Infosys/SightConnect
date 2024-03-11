@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../core/providers/global_language_provider.dart';
 
 final ageDeclarationProvider = FutureProvider((ref) {
@@ -37,7 +36,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
         appBar: const CustomAppbar(
           title: Text("18+ Declaration"),
           automaticallyImplyLeading: false,
-          centerTitle: false,
+          leadingIcon: SizedBox(),
         ),
         body: Container(
           height: AppSize.height(context),
