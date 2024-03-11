@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
@@ -15,6 +16,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -102,22 +104,29 @@ class VTProfilePage extends HookConsumerWidget {
                     ),
 
                     const SizedBox(height: AppSize.kmheight),
-                    AppCard(
-                      child: ListTile(
-                        onTap: () async {
-                          final navigator = Navigator.of(context);
-                          await ref.read(initializationProvider).resetProfile();
-                          navigator.pushNamedAndRemoveUntil(
-                              InitializationPage.routeName, (route) => false);
-                        },
-                        leading: const Icon(
-                          Icons.person,
-                          color: AppColor.black,
-                        ),
-                        title: Text(
-                          "Switch Profile",
-                          style: applyRobotoFont(
-                            fontWeight: FontWeight.w500,
+                    Visibility(
+                      visible:
+                          PersistentAuthStateService.authState.roles?.length !=
+                              1,
+                      child: AppCard(
+                        child: ListTile(
+                          onTap: () async {
+                            final navigator = Navigator.of(context);
+                            await ref
+                                .read(initializationProvider)
+                                .resetProfile();
+                            navigator.pushNamedAndRemoveUntil(
+                                InitializationPage.routeName, (route) => false);
+                          },
+                          leading: const Icon(
+                            Icons.person,
+                            color: AppColor.black,
+                          ),
+                          title: Text(
+                            "Switch Profile",
+                            style: applyRobotoFont(
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),

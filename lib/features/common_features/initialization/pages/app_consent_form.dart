@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -7,12 +6,9 @@ import 'package:eye_care_for_all/features/common_features/initialization/provide
 import 'package:eye_care_for_all/features/common_features/initialization/widgets/app_web_view.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

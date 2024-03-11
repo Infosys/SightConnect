@@ -43,8 +43,8 @@ class AppDrawer extends HookWidget {
 
     var items = DrawerMenuItems.getAll(loc);
     var isLoading = useState(false);
-    final currentRole = PersistentAuthStateService.authState.roles;
-    if (currentRole != null && currentRole.length == 1) {
+    final allRoles = PersistentAuthStateService.authState.roles;
+    if (allRoles != null && allRoles.length == 1) {
       items = items.where((element) {
         return element.id != DrawerMenuItemId.switchProfile;
       }).toList();

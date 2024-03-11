@@ -42,7 +42,6 @@ class VisionTechnicianTriageResult extends ChangeNotifier {
 
 class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
   VTPatientDto? patientDetails;
-
   VisionTechnicianPreliminaryAssessmentPage({
     super.key,
     this.patientDetails,
