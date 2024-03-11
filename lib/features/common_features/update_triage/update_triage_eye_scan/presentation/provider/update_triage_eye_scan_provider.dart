@@ -207,7 +207,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
       patientId: triageReport.subject,
       diagnosticReportId: triageReport.diagnosticReportId,
-      organizationCode: triageReport.organizationCode,
+      tenantCode: triageReport.tenantCode,
       performer: [
         update_model.Performer(
           role: PerformerRole.PATIENT,

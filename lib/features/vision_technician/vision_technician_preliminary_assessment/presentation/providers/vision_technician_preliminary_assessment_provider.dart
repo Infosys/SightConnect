@@ -164,6 +164,7 @@ class VtTriageProvider extends ChangeNotifier {
       int? reportId = triageResponse.id;
       int? encounterId = triageResponse.encounter?.id;
       int? organizationCode = assessment.organizationCode;
+      int ? tenantCode= assessment.tenantCode;
       Either<Failure, CarePlanPostModel>? carePlanResponse;
 
       if (organizationCode != null) {
@@ -171,6 +172,7 @@ class VtTriageProvider extends ChangeNotifier {
           organizationCode,
           reportId!,
           encounterId!,
+          tenantCode!
         );
 
         carePlanResponse.fold((error) {

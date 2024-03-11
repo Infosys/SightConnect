@@ -24,6 +24,7 @@ mixin _$CarePlanPostModel {
   List<ReportModel>? get reports => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   List<PerformerModel>? get performer => throw _privateConstructorUsedError;
   List<ConditionModel>? get conditions => throw _privateConstructorUsedError;
   List<ServiceRequestModel>? get serviceRequest =>
@@ -50,6 +51,7 @@ abstract class $CarePlanPostModelCopyWith<$Res> {
       List<ReportModel>? reports,
       int? encounterId,
       int? organizationCode,
+      int? tenantCode,
       List<PerformerModel>? performer,
       List<ConditionModel>? conditions,
       List<ServiceRequestModel>? serviceRequest,
@@ -75,6 +77,7 @@ class _$CarePlanPostModelCopyWithImpl<$Res, $Val extends CarePlanPostModel>
     Object? reports = freezed,
     Object? encounterId = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? performer = freezed,
     Object? conditions = freezed,
     Object? serviceRequest = freezed,
@@ -98,6 +101,10 @@ class _$CarePlanPostModelCopyWithImpl<$Res, $Val extends CarePlanPostModel>
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       performer: freezed == performer
           ? _value.performer
@@ -140,6 +147,7 @@ abstract class _$$_CarePlanPostModelCopyWith<$Res>
       List<ReportModel>? reports,
       int? encounterId,
       int? organizationCode,
+      int? tenantCode,
       List<PerformerModel>? performer,
       List<ConditionModel>? conditions,
       List<ServiceRequestModel>? serviceRequest,
@@ -163,6 +171,7 @@ class __$$_CarePlanPostModelCopyWithImpl<$Res>
     Object? reports = freezed,
     Object? encounterId = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? performer = freezed,
     Object? conditions = freezed,
     Object? serviceRequest = freezed,
@@ -186,6 +195,10 @@ class __$$_CarePlanPostModelCopyWithImpl<$Res>
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       performer: freezed == performer
           ? _value._performer
@@ -223,6 +236,7 @@ class _$_CarePlanPostModel implements _CarePlanPostModel {
       final List<ReportModel>? reports,
       this.encounterId,
       this.organizationCode,
+      this.tenantCode,
       final List<PerformerModel>? performer,
       final List<ConditionModel>? conditions,
       final List<ServiceRequestModel>? serviceRequest,
@@ -254,6 +268,8 @@ class _$_CarePlanPostModel implements _CarePlanPostModel {
   final int? encounterId;
   @override
   final int? organizationCode;
+  @override
+  final int? tenantCode;
   final List<PerformerModel>? _performer;
   @override
   List<PerformerModel>? get performer {
@@ -301,7 +317,7 @@ class _$_CarePlanPostModel implements _CarePlanPostModel {
 
   @override
   String toString() {
-    return 'CarePlanPostModel(id: $id, reports: $reports, encounterId: $encounterId, organizationCode: $organizationCode, performer: $performer, conditions: $conditions, serviceRequest: $serviceRequest, note: $note, startDate: $startDate, goal: $goal)';
+    return 'CarePlanPostModel(id: $id, reports: $reports, encounterId: $encounterId, organizationCode: $organizationCode, tenantCode: $tenantCode, performer: $performer, conditions: $conditions, serviceRequest: $serviceRequest, note: $note, startDate: $startDate, goal: $goal)';
   }
 
   @override
@@ -315,6 +331,8 @@ class _$_CarePlanPostModel implements _CarePlanPostModel {
                 other.encounterId == encounterId) &&
             (identical(other.organizationCode, organizationCode) ||
                 other.organizationCode == organizationCode) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             const DeepCollectionEquality()
                 .equals(other._performer, _performer) &&
             const DeepCollectionEquality()
@@ -335,6 +353,7 @@ class _$_CarePlanPostModel implements _CarePlanPostModel {
       const DeepCollectionEquality().hash(_reports),
       encounterId,
       organizationCode,
+      tenantCode,
       const DeepCollectionEquality().hash(_performer),
       const DeepCollectionEquality().hash(_conditions),
       const DeepCollectionEquality().hash(_serviceRequest),
@@ -363,6 +382,7 @@ abstract class _CarePlanPostModel implements CarePlanPostModel {
       final List<ReportModel>? reports,
       final int? encounterId,
       final int? organizationCode,
+      final int? tenantCode,
       final List<PerformerModel>? performer,
       final List<ConditionModel>? conditions,
       final List<ServiceRequestModel>? serviceRequest,
@@ -381,6 +401,8 @@ abstract class _CarePlanPostModel implements CarePlanPostModel {
   int? get encounterId;
   @override
   int? get organizationCode;
+  @override
+  int? get tenantCode;
   @override
   List<PerformerModel>? get performer;
   @override

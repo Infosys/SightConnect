@@ -8,7 +8,7 @@ class TriageAssessment with _$TriageAssessment {
   const factory TriageAssessment({
     int? code,
     String? name,
-    String? organizationCode,
+    String? organizationCode,//used in optometrist persona
     String? condition,
     String? organ,
     List<QuestionnaireSection>? questionnaireSections,
