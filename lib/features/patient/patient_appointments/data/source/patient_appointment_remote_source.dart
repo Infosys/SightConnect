@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -86,7 +85,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     _streamController.add(doctorsList!);
     // doctorsList =
     //     (data as List).map((e) => EuaOnSearchModel.fromJson(e)).toList();
-    log('Received data from Eua: ${doctorsList.toString()}');
+
     notifyListeners();
   }
 
