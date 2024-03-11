@@ -14,6 +14,7 @@ _$_CarePlanPostModel _$$_CarePlanPostModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       encounterId: json['encounterId'] as int?,
       organizationCode: json['organizationCode'] as int?,
+      tenantCode: json['tenantCode'] as int?,
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -38,6 +39,7 @@ Map<String, dynamic> _$$_CarePlanPostModelToJson(
       'reports': instance.reports?.map((e) => e.toJson()).toList(),
       'encounterId': instance.encounterId,
       'organizationCode': instance.organizationCode,
+      'tenantCode': instance.tenantCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'conditions': instance.conditions?.map((e) => e.toJson()).toList(),
       'serviceRequest':

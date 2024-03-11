@@ -10,6 +10,7 @@ _$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
     _$_TriageUpdateModel(
       patientId: json['patientId'] as int?,
       diagnosticReportId: json['diagnosticReportId'] as int?,
+      tenantCode: json['tenantCode'] as int?,
       organizationCode: json['organizationCode'] as int?,
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => Performer.fromJson(e as Map<String, dynamic>))
@@ -45,6 +46,7 @@ Map<String, dynamic> _$$_TriageUpdateModelToJson(
     <String, dynamic>{
       'patientId': instance.patientId,
       'diagnosticReportId': instance.diagnosticReportId,
+      'tenantCode': instance.tenantCode,
       'organizationCode': instance.organizationCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,

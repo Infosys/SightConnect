@@ -14,6 +14,7 @@ class TriageUpdateMapper {
       issued: map['issued'],
       observations: map['observations'],
       organizationCode: map['organizationCode'],
+       tenantCode: map['tenantCode'],
       patientId: map['patientId'],
       performer: map['performer'],
       questionResponse: map['questionResponse'],

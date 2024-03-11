@@ -11,6 +11,7 @@ _$_TriageDetailedReportModel _$$_TriageDetailedReportModelFromJson(
     _$_TriageDetailedReportModel(
       encounterId: json['encounterId'] as int?,
       organizationCode: json['organizationCode'] as int?,
+      tenantCode: json['tenantCode'] as int?,
       serviceType:
           $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
       encounterStatus: $enumDecodeNullable(
@@ -72,6 +73,7 @@ Map<String, dynamic> _$$_TriageDetailedReportModelToJson(
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'organizationCode': instance.organizationCode,
+      'tenantCode': instance.tenantCode,
       'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
       'encounterStatus': _$EncounterStatusEnumMap[instance.encounterStatus],
       'remarks': instance.remarks,

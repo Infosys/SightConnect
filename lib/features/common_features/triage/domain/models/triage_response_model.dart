@@ -14,6 +14,7 @@ class TriageResponseModel with _$TriageResponseModel {
     int? encounterId,
     ServiceType? serviceType,
     int? organizationCode,
+    int? tenantCode,
     List<PerformerModel>? performer,
     int? assessmentCode,
     String? assessmentVersion,

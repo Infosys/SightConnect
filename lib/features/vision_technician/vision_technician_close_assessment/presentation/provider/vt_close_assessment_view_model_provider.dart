@@ -61,6 +61,7 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
       diagnosticReportId: triageResponse?.id, //from care plan response
       organizationCode:
           carePlanResponse?.organizationCode, //from care plan response
+          tenantCode: carePlanResponse?.tenantCode, //from care plan response
       performer: [
         PerformerDto(
           role: Role.VISION_TECHNICIAN,

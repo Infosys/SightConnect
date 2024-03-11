@@ -12,6 +12,7 @@ _$_CloseAssessmentDto _$$_CloseAssessmentDtoFromJson(
       encounterId: json['encounterId'] as int?,
       diagnosticReportId: json['diagnosticReportId'] as int?,
       organizationCode: json['organizationCode'] as int?,
+      tenantCode: json['tenantCode'] as int?,
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerDto.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$_CloseAssessmentDtoToJson(
       'encounterId': instance.encounterId,
       'diagnosticReportId': instance.diagnosticReportId,
       'organizationCode': instance.organizationCode,
+      'tenantCode': instance.tenantCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'carePlanId': instance.carePlanId,
       'goalId': instance.goalId,
