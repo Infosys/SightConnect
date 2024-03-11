@@ -54,9 +54,9 @@ jobs:
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
 
       - name: Build APPBUNDLE
-        run: flutter build appbundle --release --build-name $GITHUB_REF_NAME --build-number $GITHUB_REF_NAME
+        run: flutter build appbundle --release --build-name $GITHUB_REF_NAME --build-number ${{ github.run_number }}
       - name: Build Android APK
-        run: flutter build apk --release --build-name $GITHUB_REF_NAME --build-number $GITHUB_REF_NAME --verbose
+        run: flutter build apk --release --build-name $GITHUB_REF_NAME --build-number ${{ github.run_number }} --verbose
       
       - name: Copy the file
         run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-$GITHUB_REF_NAME.apk
