@@ -11,6 +11,7 @@ class CloseAssessmentDto with _$CloseAssessmentDto {
     int? encounterId,
     int? diagnosticReportId,
     int? organizationCode,
+    int? tenantCode,
     List<PerformerDto>? performer,
     int? carePlanId,
     int? goalId,

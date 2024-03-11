@@ -11,7 +11,8 @@ class TriageUpdateModel with _$TriageUpdateModel {
   const factory TriageUpdateModel({
     int? patientId,
     int? diagnosticReportId,
-    int? organizationCode,
+    int? tenantCode,
+    int ?organizationCode,
     List<Performer>? performer,
     int? assessmentCode,
     String? assessmentVersion,

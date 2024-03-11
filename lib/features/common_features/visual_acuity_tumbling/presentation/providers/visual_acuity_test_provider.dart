@@ -386,6 +386,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
         patientId: reportModel.subject,
         diagnosticReportId: reportModel.diagnosticReportId,
         organizationCode: reportModel.organizationCode,
+        tenantCode: reportModel.tenantCode,
         performer: [
           Performer(
             role: PerformerRole.PATIENT,

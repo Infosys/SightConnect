@@ -23,6 +23,7 @@ TriageDetailedReportModel _$TriageDetailedReportModelFromJson(
 mixin _$TriageDetailedReportModel {
   int? get encounterId => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   ServiceType? get serviceType => throw _privateConstructorUsedError;
   EncounterStatus? get encounterStatus => throw _privateConstructorUsedError;
   String? get remarks => throw _privateConstructorUsedError;
@@ -73,6 +74,7 @@ abstract class $TriageDetailedReportModelCopyWith<$Res> {
   $Res call(
       {int? encounterId,
       int? organizationCode,
+      int? tenantCode,
       ServiceType? serviceType,
       EncounterStatus? encounterStatus,
       String? remarks,
@@ -122,6 +124,7 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
   $Res call({
     Object? encounterId = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? serviceType = freezed,
     Object? encounterStatus = freezed,
     Object? remarks = freezed,
@@ -160,6 +163,10 @@ class _$TriageDetailedReportModelCopyWithImpl<$Res,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       serviceType: freezed == serviceType
           ? _value.serviceType
@@ -305,6 +312,7 @@ abstract class _$$_TriageDetailedReportModelCopyWith<$Res>
   $Res call(
       {int? encounterId,
       int? organizationCode,
+      int? tenantCode,
       ServiceType? serviceType,
       EncounterStatus? encounterStatus,
       String? remarks,
@@ -354,6 +362,7 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
   $Res call({
     Object? encounterId = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? serviceType = freezed,
     Object? encounterStatus = freezed,
     Object? remarks = freezed,
@@ -392,6 +401,10 @@ class __$$_TriageDetailedReportModelCopyWithImpl<$Res>
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       serviceType: freezed == serviceType
           ? _value.serviceType
@@ -519,6 +532,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   const _$_TriageDetailedReportModel(
       {this.encounterId,
       this.organizationCode,
+      this.tenantCode,
       this.serviceType,
       this.encounterStatus,
       this.remarks,
@@ -561,6 +575,8 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
   final int? encounterId;
   @override
   final int? organizationCode;
+  @override
+  final int? tenantCode;
   @override
   final ServiceType? serviceType;
   @override
@@ -664,7 +680,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
 
   @override
   String toString() {
-    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, subject: $subject, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, cumulativeSeverity: $cumulativeSeverity, observationSeverity: $observationSeverity, mediaSeverity: $mediaSeverity, questionResponseSeverity: $questionResponseSeverity, carePlans: $carePlans)';
+    return 'TriageDetailedReportModel(encounterId: $encounterId, organizationCode: $organizationCode, tenantCode: $tenantCode, serviceType: $serviceType, encounterStatus: $encounterStatus, remarks: $remarks, encounterPeriod: $encounterPeriod, diagnosticReportId: $diagnosticReportId, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, status: $status, sourceVersion: $sourceVersion, performerId: $performerId, subject: $subject, performerRole: $performerRole, incompleteTests: $incompleteTests, responses: $responses, observations: $observations, media: $media, updateEndTime: $updateEndTime, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, cumulativeSeverity: $cumulativeSeverity, observationSeverity: $observationSeverity, mediaSeverity: $mediaSeverity, questionResponseSeverity: $questionResponseSeverity, carePlans: $carePlans)';
   }
 
   @override
@@ -676,6 +692,8 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                 other.encounterId == encounterId) &&
             (identical(other.organizationCode, organizationCode) ||
                 other.organizationCode == organizationCode) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             (identical(other.serviceType, serviceType) ||
                 other.serviceType == serviceType) &&
             (identical(other.encounterStatus, encounterStatus) ||
@@ -731,8 +749,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
                 other.mediaSeverity == mediaSeverity) &&
             (identical(other.questionResponseSeverity, questionResponseSeverity) ||
                 other.questionResponseSeverity == questionResponseSeverity) &&
-            const DeepCollectionEquality()
-                .equals(other._carePlans, _carePlans));
+            const DeepCollectionEquality().equals(other._carePlans, _carePlans));
   }
 
   @JsonKey(ignore: true)
@@ -741,6 +758,7 @@ class _$_TriageDetailedReportModel implements _TriageDetailedReportModel {
         runtimeType,
         encounterId,
         organizationCode,
+        tenantCode,
         serviceType,
         encounterStatus,
         remarks,
@@ -791,6 +809,7 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   const factory _TriageDetailedReportModel(
       {final int? encounterId,
       final int? organizationCode,
+      final int? tenantCode,
       final ServiceType? serviceType,
       final EncounterStatus? encounterStatus,
       final String? remarks,
@@ -828,6 +847,8 @@ abstract class _TriageDetailedReportModel implements TriageDetailedReportModel {
   int? get encounterId;
   @override
   int? get organizationCode;
+  @override
+  int? get tenantCode;
   @override
   ServiceType? get serviceType;
   @override

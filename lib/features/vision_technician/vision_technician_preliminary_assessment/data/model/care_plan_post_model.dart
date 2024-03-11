@@ -18,6 +18,7 @@ class CarePlanPostModel with _$CarePlanPostModel {
     List<ReportModel>? reports,
     int? encounterId,
     int? organizationCode,
+    int? tenantCode,
     List<PerformerModel>? performer,
     List<ConditionModel>? conditions,
     List<ServiceRequestModel>? serviceRequest,

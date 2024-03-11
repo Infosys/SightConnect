@@ -26,6 +26,7 @@ class TriageDetailedReportModel with _$TriageDetailedReportModel {
   const factory TriageDetailedReportModel({
     int? encounterId,
     int? organizationCode,
+    int? tenantCode,
     ServiceType? serviceType,
     EncounterStatus? encounterStatus,
     String? remarks,

@@ -149,6 +149,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       patientId: reportModel.subject,
       diagnosticReportId: reportModel.diagnosticReportId,
       organizationCode: reportModel.organizationCode,
+      tenantCode: reportModel.tenantCode,
       performer: [
         update_model.Performer(
           role: PerformerRole.PATIENT,

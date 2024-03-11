@@ -14,6 +14,7 @@ _$_TriageResponseModel _$$_TriageResponseModelFromJson(
       serviceType:
           $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
       organizationCode: json['organizationCode'] as int?,
+      tenantCode: json['tenantCode'] as int?,
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -54,6 +55,7 @@ Map<String, dynamic> _$$_TriageResponseModelToJson(
       'encounterId': instance.encounterId,
       'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
       'organizationCode': instance.organizationCode,
+      'tenantCode': instance.tenantCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,
       'assessmentVersion': instance.assessmentVersion,

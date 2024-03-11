@@ -22,6 +22,7 @@ TriageUpdateModel _$TriageUpdateModelFromJson(Map<String, dynamic> json) {
 mixin _$TriageUpdateModel {
   int? get patientId => throw _privateConstructorUsedError;
   int? get diagnosticReportId => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
   List<Performer>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $TriageUpdateModelCopyWith<$Res> {
   $Res call(
       {int? patientId,
       int? diagnosticReportId,
+      int? tenantCode,
       int? organizationCode,
       List<Performer>? performer,
       int? assessmentCode,
@@ -86,6 +88,7 @@ class _$TriageUpdateModelCopyWithImpl<$Res, $Val extends TriageUpdateModel>
   $Res call({
     Object? patientId = freezed,
     Object? diagnosticReportId = freezed,
+    Object? tenantCode = freezed,
     Object? organizationCode = freezed,
     Object? performer = freezed,
     Object? assessmentCode = freezed,
@@ -108,6 +111,10 @@ class _$TriageUpdateModelCopyWithImpl<$Res, $Val extends TriageUpdateModel>
       diagnosticReportId: freezed == diagnosticReportId
           ? _value.diagnosticReportId
           : diagnosticReportId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
@@ -176,6 +183,7 @@ abstract class _$$_TriageUpdateModelCopyWith<$Res>
   $Res call(
       {int? patientId,
       int? diagnosticReportId,
+      int? tenantCode,
       int? organizationCode,
       List<Performer>? performer,
       int? assessmentCode,
@@ -204,6 +212,7 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
   $Res call({
     Object? patientId = freezed,
     Object? diagnosticReportId = freezed,
+    Object? tenantCode = freezed,
     Object? organizationCode = freezed,
     Object? performer = freezed,
     Object? assessmentCode = freezed,
@@ -226,6 +235,10 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
       diagnosticReportId: freezed == diagnosticReportId
           ? _value.diagnosticReportId
           : diagnosticReportId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
@@ -289,6 +302,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
   const _$_TriageUpdateModel(
       {this.patientId,
       this.diagnosticReportId,
+      this.tenantCode,
       this.organizationCode,
       final List<Performer>? performer,
       this.assessmentCode,
@@ -316,6 +330,8 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
   final int? patientId;
   @override
   final int? diagnosticReportId;
+  @override
+  final int? tenantCode;
   @override
   final int? organizationCode;
   final List<Performer>? _performer;
@@ -396,7 +412,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
 
   @override
   String toString() {
-    return 'TriageUpdateModel(patientId: $patientId, diagnosticReportId: $diagnosticReportId, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
+    return 'TriageUpdateModel(patientId: $patientId, diagnosticReportId: $diagnosticReportId, tenantCode: $tenantCode, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse)';
   }
 
   @override
@@ -408,6 +424,8 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
                 other.patientId == patientId) &&
             (identical(other.diagnosticReportId, diagnosticReportId) ||
                 other.diagnosticReportId == diagnosticReportId) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             (identical(other.organizationCode, organizationCode) ||
                 other.organizationCode == organizationCode) &&
             const DeepCollectionEquality()
@@ -439,6 +457,7 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
       runtimeType,
       patientId,
       diagnosticReportId,
+      tenantCode,
       organizationCode,
       const DeepCollectionEquality().hash(_performer),
       assessmentCode,
@@ -472,6 +491,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
   const factory _TriageUpdateModel(
           {final int? patientId,
           final int? diagnosticReportId,
+          final int? tenantCode,
           final int? organizationCode,
           final List<Performer>? performer,
           final int? assessmentCode,
@@ -494,6 +514,8 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
   int? get patientId;
   @override
   int? get diagnosticReportId;
+  @override
+  int? get tenantCode;
   @override
   int? get organizationCode;
   @override

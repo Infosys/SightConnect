@@ -23,6 +23,7 @@ mixin _$CloseAssessmentDto {
   int? get encounterId => throw _privateConstructorUsedError;
   int? get diagnosticReportId => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   List<PerformerDto>? get performer => throw _privateConstructorUsedError;
   int? get carePlanId => throw _privateConstructorUsedError;
   int? get goalId => throw _privateConstructorUsedError;
@@ -52,6 +53,7 @@ abstract class $CloseAssessmentDtoCopyWith<$Res> {
       {int? encounterId,
       int? diagnosticReportId,
       int? organizationCode,
+      int? tenantCode,
       List<PerformerDto>? performer,
       int? carePlanId,
       int? goalId,
@@ -80,6 +82,7 @@ class _$CloseAssessmentDtoCopyWithImpl<$Res, $Val extends CloseAssessmentDto>
     Object? encounterId = freezed,
     Object? diagnosticReportId = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? performer = freezed,
     Object? carePlanId = freezed,
     Object? goalId = freezed,
@@ -103,6 +106,10 @@ class _$CloseAssessmentDtoCopyWithImpl<$Res, $Val extends CloseAssessmentDto>
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       performer: freezed == performer
           ? _value.performer
@@ -160,6 +167,7 @@ abstract class _$$_CloseAssessmentDtoCopyWith<$Res>
       {int? encounterId,
       int? diagnosticReportId,
       int? organizationCode,
+      int? tenantCode,
       List<PerformerDto>? performer,
       int? carePlanId,
       int? goalId,
@@ -186,6 +194,7 @@ class __$$_CloseAssessmentDtoCopyWithImpl<$Res>
     Object? encounterId = freezed,
     Object? diagnosticReportId = freezed,
     Object? organizationCode = freezed,
+    Object? tenantCode = freezed,
     Object? performer = freezed,
     Object? carePlanId = freezed,
     Object? goalId = freezed,
@@ -209,6 +218,10 @@ class __$$_CloseAssessmentDtoCopyWithImpl<$Res>
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
               as int?,
       performer: freezed == performer
           ? _value._performer
@@ -261,6 +274,7 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
       {this.encounterId,
       this.diagnosticReportId,
       this.organizationCode,
+      this.tenantCode,
       final List<PerformerDto>? performer,
       this.carePlanId,
       this.goalId,
@@ -283,6 +297,8 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
   final int? diagnosticReportId;
   @override
   final int? organizationCode;
+  @override
+  final int? tenantCode;
   final List<PerformerDto>? _performer;
   @override
   List<PerformerDto>? get performer {
@@ -323,7 +339,7 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
 
   @override
   String toString() {
-    return 'CloseAssessmentDto(encounterId: $encounterId, diagnosticReportId: $diagnosticReportId, organizationCode: $organizationCode, performer: $performer, carePlanId: $carePlanId, goalId: $goalId, goalAction: $goalAction, statusReason: $statusReason, achievementStatus: $achievementStatus, statusDate: $statusDate, outcomes: $outcomes, note: $note, mrn: $mrn)';
+    return 'CloseAssessmentDto(encounterId: $encounterId, diagnosticReportId: $diagnosticReportId, organizationCode: $organizationCode, tenantCode: $tenantCode, performer: $performer, carePlanId: $carePlanId, goalId: $goalId, goalAction: $goalAction, statusReason: $statusReason, achievementStatus: $achievementStatus, statusDate: $statusDate, outcomes: $outcomes, note: $note, mrn: $mrn)';
   }
 
   @override
@@ -337,6 +353,8 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
                 other.diagnosticReportId == diagnosticReportId) &&
             (identical(other.organizationCode, organizationCode) ||
                 other.organizationCode == organizationCode) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             const DeepCollectionEquality()
                 .equals(other._performer, _performer) &&
             (identical(other.carePlanId, carePlanId) ||
@@ -362,6 +380,7 @@ class _$_CloseAssessmentDto implements _CloseAssessmentDto {
       encounterId,
       diagnosticReportId,
       organizationCode,
+      tenantCode,
       const DeepCollectionEquality().hash(_performer),
       carePlanId,
       goalId,
@@ -393,6 +412,7 @@ abstract class _CloseAssessmentDto implements CloseAssessmentDto {
       {final int? encounterId,
       final int? diagnosticReportId,
       final int? organizationCode,
+      final int? tenantCode,
       final List<PerformerDto>? performer,
       final int? carePlanId,
       final int? goalId,
@@ -413,6 +433,8 @@ abstract class _CloseAssessmentDto implements CloseAssessmentDto {
   int? get diagnosticReportId;
   @override
   int? get organizationCode;
+  @override
+  int? get tenantCode;
   @override
   List<PerformerDto>? get performer;
   @override

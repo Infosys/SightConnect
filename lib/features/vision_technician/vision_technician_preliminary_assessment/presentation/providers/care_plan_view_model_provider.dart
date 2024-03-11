@@ -39,7 +39,7 @@ class CarePlanViewModel extends ChangeNotifier {
   );
 
   Future<Either<Failure, CarePlanPostModel>> saveCarePlan(
-      int organizationCode, int reportId, int encounterId) async {
+      int organizationCode,int tenantCode,int reportId, int encounterId) async {
     final PatientInstruction patientInstruction =
         _carePlanProvider.patientInstruction;
 
@@ -53,6 +53,7 @@ class CarePlanViewModel extends ChangeNotifier {
       ],
       encounterId: encounterId,
       organizationCode: organizationCode,
+      tenantCode: tenantCode,
       note: _preliminaryAssessmentHelperProvider.remarksController.text,
       performer: [
         PerformerModel(
