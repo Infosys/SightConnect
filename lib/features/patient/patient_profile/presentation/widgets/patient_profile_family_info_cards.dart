@@ -105,7 +105,7 @@ class PatientFamilyDetails extends HookConsumerWidget {
           height: 40,
           child: VerticalDivider(
             thickness: 2,
-            width: AppSize.klelevation,
+            width: AppSize.kl,
             color: AppColor.lightGrey,
           ),
         ),
@@ -188,8 +188,8 @@ class _FamilyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 65,
-      margin: const EdgeInsets.only(right: AppSize.kspadding / 2),
-      padding: const EdgeInsets.only(right: AppSize.kmpadding),
+      margin: const EdgeInsets.only(right: AppSize.ks / 2),
+      padding: const EdgeInsets.only(right: AppSize.km),
       // decoration: const BoxDecoration(color: Colors.amber),
       child: Center(
         child: Column(

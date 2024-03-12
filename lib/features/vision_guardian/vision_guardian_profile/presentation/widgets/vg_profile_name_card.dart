@@ -16,17 +16,17 @@ class VgProfileNameCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: AppSize.kmpadding),
+        padding: const EdgeInsets.only(left: AppSize.km),
         child: Row(
           children: [
             SizedBox(
@@ -57,7 +57,7 @@ class VgProfileNameCard extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   Text(
                     "${profileData.id ?? ""}",
                     style: applyRobotoFont(
@@ -65,7 +65,7 @@ class VgProfileNameCard extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   Row(
                     children: [
                       Column(
@@ -77,7 +77,7 @@ class VgProfileNameCard extends StatelessWidget {
                                 fontSize: 10, color: AppColor.darkGrey),
                           ),
                           const SizedBox(
-                            height: AppSize.ksheight / 2,
+                            height: AppSize.ks / 2,
                           ),
                           Text(
                             "-",
@@ -86,7 +86,7 @@ class VgProfileNameCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        width: AppSize.kmwidth,
+                        width: AppSize.km,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +97,7 @@ class VgProfileNameCard extends StatelessWidget {
                                 fontSize: 10, color: AppColor.darkGrey),
                           ),
                           const SizedBox(
-                            height: AppSize.ksheight / 2,
+                            height: AppSize.ks / 2,
                           ),
                           Text(
                             profileData.officialMobile ?? "",

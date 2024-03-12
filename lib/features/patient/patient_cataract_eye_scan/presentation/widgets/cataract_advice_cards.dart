@@ -14,7 +14,7 @@ class AdviceCards extends ConsumerWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
           child: Card(
             elevation: 2,
             clipBehavior: Clip.hardEdge,
@@ -23,7 +23,7 @@ class AdviceCards extends ConsumerWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding, vertical: AppSize.kmpadding),
+                  horizontal: AppSize.km, vertical: AppSize.km),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -35,7 +35,7 @@ class AdviceCards extends ConsumerWidget {
                         fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
-                    height: AppSize.kspadding,
+                    height: AppSize.ks,
                   ),
                   ...model.generalAdvice.asMap().entries.map(
                         (entry) => Text(
@@ -53,13 +53,13 @@ class AdviceCards extends ConsumerWidget {
         ),
 
         const SizedBox(
-          height: AppSize.kspadding + 2,
+          height: AppSize.ks + 2,
         ),
 
         //Watch what you eat
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
           child: Card(
             elevation: 2,
             clipBehavior: Clip.hardEdge,
@@ -68,7 +68,7 @@ class AdviceCards extends ConsumerWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding, vertical: AppSize.kmpadding),
+                  horizontal: AppSize.km, vertical: AppSize.km),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -80,7 +80,7 @@ class AdviceCards extends ConsumerWidget {
                         fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
-                    height: AppSize.kspadding,
+                    height: AppSize.ks,
                   ),
                   ...model.watchWhatYouEat.map(
                     (e) => Text(

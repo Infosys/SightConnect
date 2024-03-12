@@ -25,7 +25,7 @@ class UpdateOptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -34,11 +34,11 @@ class UpdateOptionCard extends StatelessWidget {
             question?.text ?? '',
             style: applyFiraSansFont(fontSize: 22),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.kmradius),
+                borderRadius: BorderRadius.circular(AppSize.km),
               ),
               child: Stack(
                 fit: StackFit.expand,
@@ -101,7 +101,7 @@ class UpdateOptionCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           Text(
             context.loc!.eyeAssessmentNote,
             style: applyRobotoFont(
@@ -109,7 +109,7 @@ class UpdateOptionCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -117,7 +117,7 @@ class UpdateOptionCard extends StatelessWidget {
                 customBorder: const CircleBorder(),
                 onTap: onNoButtonPressed,
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     color: Color(0xffDD0000),
                     shape: BoxShape.circle,
@@ -139,7 +139,7 @@ class UpdateOptionCard extends StatelessWidget {
                 customBorder: const CircleBorder(),
                 onTap: onYesButtonPressed,
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     color: AppColor.green,
                     shape: BoxShape.circle,
@@ -158,7 +158,7 @@ class UpdateOptionCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
         ],
       ),
     );

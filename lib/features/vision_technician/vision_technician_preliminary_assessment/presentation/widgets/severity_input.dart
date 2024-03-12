@@ -15,7 +15,7 @@ class SeverityInput extends ConsumerWidget {
     final model = ref.watch(preliminaryAssessmentHelperProvider);
     final loc = context.loc!;
     return SizedBox(
-      height: AppSize.klheight * 5,
+      height: AppSize.kl * 5,
       width: AppSize.width(context) * 0.4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class SeverityInput extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(AppSize.kspadding),
+            padding: const EdgeInsets.all(AppSize.ks),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               decoration: BoxDecoration(

@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class AppCard extends StatelessWidget {
   const AppCard({
     required this.child,
-    this.padding = AppSize.kspadding,
+    this.padding = AppSize.ks,
     this.enableBorder = false,
     this.color = AppColor.lightGrey,
     this.borderThickness = 1,
@@ -33,7 +33,7 @@ class AppCard extends StatelessWidget {
               )
             : null,
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: child,

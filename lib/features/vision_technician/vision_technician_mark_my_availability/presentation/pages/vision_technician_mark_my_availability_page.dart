@@ -23,7 +23,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
     return Scaffold(
       bottomNavigationBar: !loading
           ? Padding(
-              padding: const EdgeInsets.all(AppSize.kmpadding),
+              padding: const EdgeInsets.all(AppSize.km),
               child: ElevatedButton(
                 style: ButtonStyle(
                   elevation: MaterialStateProperty.all(0),
@@ -68,7 +68,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             children: [
               Container(
@@ -76,10 +76,10 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 decoration: const BoxDecoration(
                   color: AppColor.white,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(AppSize.kmradius - 5),
+                    Radius.circular(AppSize.km - 5),
                   ),
                 ),
-                padding: const EdgeInsets.all(AppSize.klpadding),
+                padding: const EdgeInsets.all(AppSize.kl),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -87,7 +87,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                       children: [
                         Flexible(
                           child: Container(
-                            height: AppSize.klheight * 2,
+                            height: AppSize.kl * 2,
                             decoration: BoxDecoration(
                               border: Border.all(color: AppColor.lightGrey),
                               color: AppColor.lightGrey,
@@ -98,7 +98,7 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSize.klheight),
+                    const SizedBox(height: AppSize.kl),
                     ListView.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),

@@ -22,11 +22,11 @@ class AssessmentTimelineCard extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         ListOfEncountersChip(
           patientId: model.id,
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         AssessmentTimeline(
           patientDetail: model,
         ),

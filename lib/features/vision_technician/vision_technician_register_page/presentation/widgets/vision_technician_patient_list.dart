@@ -55,7 +55,7 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
       itemBuilder: (context, index) {
         if (index == data.length) {
           return const Padding(
-            padding: EdgeInsets.all(AppSize.klpadding),
+            padding: EdgeInsets.all(AppSize.kl),
             child: CircularProgressIndicator.adaptive(),
           );
         }
@@ -136,7 +136,7 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
         );
       },
       separatorBuilder: (context, index) {
-        return const SizedBox(height: AppSize.kmheight);
+        return const SizedBox(height: AppSize.km);
       },
       itemCount: response.length,
     );
@@ -168,8 +168,8 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applycustomShadow(),
@@ -195,7 +195,7 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
               );
             }
           }(),
-          const SizedBox(width: AppSize.kmpadding),
+          const SizedBox(width: AppSize.km),
           Expanded(
             flex: 2,
             child: Column(
@@ -219,7 +219,7 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.ksheight / 2),
+                const SizedBox(height: AppSize.ks / 2),
                 Row(
                   children: [
                     Text(
@@ -250,7 +250,7 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.ksheight / 2),
+                const SizedBox(height: AppSize.ks / 2),
                 Row(
                   mainAxisAlignment: Responsive.isMobile(context)
                       ? MainAxisAlignment.spaceBetween
@@ -272,8 +272,8 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                     ),
                     SizedBox(
                       width: Responsive.isMobile(context)
-                          ? AppSize.kspadding
-                          : AppSize.kmpadding,
+                          ? AppSize.ks
+                          : AppSize.km,
                     ),
                     Visibility(
                       visible: data.parentPatientId == null,
@@ -281,13 +281,13 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                         onTap: onAddMember,
                         child: Row(
                           children: [
-                            const SizedBox(width: AppSize.kspadding / 2),
+                            const SizedBox(width: AppSize.ks / 2),
                             const Icon(
                               Icons.add,
                               size: 14,
                               color: AppColor.primary,
                             ),
-                            const SizedBox(width: AppSize.kspadding / 2),
+                            const SizedBox(width: AppSize.ks / 2),
                             Text(
                               loc.vgAddMember,
                               style: applyRobotoFont(
@@ -311,7 +311,7 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                               size: 14,
                               color: AppColor.primary,
                             ),
-                            const SizedBox(width: AppSize.kspadding / 2),
+                            const SizedBox(width: AppSize.ks / 2),
                             Text(
                               loc.vgCompleteProfile,
                               textAlign: TextAlign.center,

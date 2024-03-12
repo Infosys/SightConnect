@@ -36,13 +36,13 @@ void showAccessibilitySettings(BuildContext context, WidgetRef ref) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const _AutoFontSizeWidget(),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     const _AutoBrightnessWidget(),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     const _AutoContrastWidget(),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     // const _BlurThreshold(),
-                    // const SizedBox(height: AppSize.kmheight),
+                    // const SizedBox(height: AppSize.km),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -89,11 +89,11 @@ class _AutoBrightnessWidget extends HookConsumerWidget {
           "Auto-Brightness",
           style: applyFiraSansFont(),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Container(
           decoration: BoxDecoration(
             color: AppColor.lightGrey.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
           ),
           child: Row(
             children: [
@@ -141,11 +141,11 @@ class _BlurThreshold extends HookConsumerWidget {
           "Blur-Threshold",
           style: applyFiraSansFont(),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Container(
           decoration: BoxDecoration(
             color: AppColor.lightGrey.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
           ),
           child: Row(
             children: [
@@ -197,11 +197,11 @@ class _AutoFontSizeWidget extends HookWidget {
           "Font Size",
           style: applyFiraSansFont(),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Container(
           decoration: BoxDecoration(
             color: AppColor.lightGrey.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
@@ -240,7 +240,7 @@ class _AutoFontSizeWidget extends HookWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Text(
           "Turning off auto-brightness or auto-contrast may affect test performance and accuracy. These parameters have been preset for optimal levels. However, you may change these parameters to suit your visual comfort levels.",
           textScaler: TextScaler.linear(scaleFactor.value),
@@ -266,11 +266,11 @@ class _AutoContrastWidget extends HookWidget {
           "Auto-Contrast",
           style: applyFiraSansFont(),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Container(
           decoration: BoxDecoration(
             color: AppColor.lightGrey.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
           ),
           child: Row(
             children: [

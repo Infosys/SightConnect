@@ -37,15 +37,14 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               carouselController: carouselController.value,
             ),
           ),
-          const SizedBox(height: AppSize.klheight * 2),
+          const SizedBox(height: AppSize.kl * 2),
           SizedBox(
             width: AppSize.width(context) * 0.9,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSize.kl),
                   child: AnimatedSmoothIndicator(
                     onDotClicked: (index) {},
                     activeIndex: activeIndex.value,
@@ -79,7 +78,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
           TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size(AppSize.width(context) * 0.8, 50),
@@ -103,7 +102,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
         ],
       ),
     );

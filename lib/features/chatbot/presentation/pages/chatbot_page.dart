@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/features/chatbot/data/enum/standard_action.dart';
 import 'package:eye_care_for_all/features/chatbot/data/models/chat_query_resolver.dart';
@@ -123,10 +123,10 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(AppText.appName),
+            Text(AppInfoService.appName),
           ],
         ),
       ),

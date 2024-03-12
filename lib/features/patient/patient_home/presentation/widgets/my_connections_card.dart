@@ -24,7 +24,7 @@ class MyConnectionsCard extends HookWidget {
     return Container(
       width: 80,
       // color: index.isEven ? Colors.red : Colors.blue,
-      padding: const EdgeInsets.only(left: AppSize.kmpadding),
+      padding: const EdgeInsets.only(left: AppSize.km),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -43,7 +43,7 @@ class MyConnectionsCard extends HookWidget {
                     radius: 24,
                   ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           Text(
             name.capitalize(),
             maxLines: 1,

@@ -15,7 +15,7 @@ class ConsultationType extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(0);
     var model = ref.watch(bookAppointmentProvider);
- 
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 16),
@@ -46,8 +46,7 @@ class ConsultationType extends HookConsumerWidget {
               child: Container(
                 // height: AppSize.height(context) * 0.06,
                 padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kspadding,
-                    vertical: AppSize.kspadding - 2),
+                    horizontal: AppSize.ks, vertical: AppSize.ks - 2),
                 decoration: BoxDecoration(
                   color: AppColor.white,
                   borderRadius: BorderRadius.circular(8),
@@ -76,7 +75,7 @@ class ConsultationType extends HookConsumerWidget {
                         size: 12,
                       ),
                     ),
-                    const SizedBox(width: AppSize.kspadding - 2),
+                    const SizedBox(width: AppSize.ks - 2),
                     Flexible(
                       child: Text(
                         index == 0

@@ -15,7 +15,7 @@ class RecentServicesCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppSize.kmheight),
+      padding: const EdgeInsets.only(left: AppSize.km),
       child: SizedBox(
         width: 100,
         child: InkWell(
@@ -37,16 +37,16 @@ class RecentServicesCard extends ConsumerWidget {
               );
             }
           },
-          borderRadius: BorderRadius.circular(AppSize.ksradius),
+          borderRadius: BorderRadius.circular(AppSize.ks),
           child: Card(
             margin: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSize.ksradius),
+              borderRadius: BorderRadius.circular(AppSize.ks),
             ),
             color: data["color"],
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: AppSize.kmpadding,
+                vertical: AppSize.km,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -54,15 +54,15 @@ class RecentServicesCard extends ConsumerWidget {
                 children: [
                   SvgPicture.asset(
                     data["icon"],
-                    height: AppSize.klpadding,
-                    width: AppSize.klpadding,
+                    height: AppSize.kl,
+                    width: AppSize.kl,
                     colorFilter: const ColorFilter.mode(
                       AppColor.black,
                       BlendMode.srcATop,
                     ),
                   ),
                   const SizedBox(
-                    height: AppSize.ksheight,
+                    height: AppSize.ks,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),

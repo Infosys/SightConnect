@@ -23,11 +23,11 @@ class EyeScanCard extends ConsumerWidget {
     final loc = context.loc!;
     return Container(
       width: AppSize.width(context),
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applycustomShadow(),
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class EyeScanCard extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           if (!allImagesCaptured)
             OutlinedButton.icon(
                 icon: const Icon(
@@ -62,41 +62,41 @@ class EyeScanCard extends ConsumerWidget {
                     color: AppColor.primary,
                   ),
                 )),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           if (allImagesCaptured)
             Wrap(
-              runSpacing: AppSize.klheight,
-              spacing: AppSize.klwidth,
+              runSpacing: AppSize.kl,
+              spacing: AppSize.kl,
               children: [
                 SizedBox(
                   width: 150,
                   height: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    borderRadius: BorderRadius.circular(AppSize.km),
                     child: Image.file(
                       File(leftEyeImagePath),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSize.kswidth),
+                const SizedBox(width: AppSize.ks),
                 SizedBox(
                   width: 150,
                   height: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    borderRadius: BorderRadius.circular(AppSize.km),
                     child: Image.file(
                       File(rightEyeImagePath),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSize.kswidth),
+                const SizedBox(width: AppSize.ks),
                 SizedBox(
                   width: 150,
                   height: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    borderRadius: BorderRadius.circular(AppSize.km),
                     child: Image.file(
                       File(bothEyeImagePath),
                       fit: BoxFit.cover,

@@ -91,10 +91,10 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
           : Responsive.isTablet(context)
               ? AppSize.height(context) / 4
               : AppSize.height(context) / 2.5,
-      padding: const EdgeInsets.all(AppSize.kspadding + 2),
+      padding: const EdgeInsets.all(AppSize.ks + 2),
       decoration: BoxDecoration(
         border: Border.all(color: AppColor.lightGrey),
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
       ),
       child: Scrollbar(
         thumbVisibility: true,
@@ -110,7 +110,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
                 .isSelectVisionCenter(data[index]);
 
             return Padding(
-              padding: const EdgeInsets.all(AppSize.kspadding),
+              padding: const EdgeInsets.all(AppSize.ks),
               child: InkWell(
                 onTap: () {
                   ref
@@ -128,9 +128,9 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
                             color: AppColor.lightGrey,
                             width: 1,
                           ),
-                    borderRadius: BorderRadius.circular(AppSize.ksradius),
+                    borderRadius: BorderRadius.circular(AppSize.ks),
                   ),
-                  padding: const EdgeInsets.all(AppSize.kspadding + 3),
+                  padding: const EdgeInsets.all(AppSize.ks + 3),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -206,7 +206,7 @@ class VisionCenterError extends StatelessWidget {
           height: 32,
           width: 32,
         ),
-        const SizedBox(height: AppSize.ksheight),
+        const SizedBox(height: AppSize.ks),
         AutoSizeText(
           viewState.errorMessage.toString().replaceAll("Exception: ", ""),
           textAlign: TextAlign.center,

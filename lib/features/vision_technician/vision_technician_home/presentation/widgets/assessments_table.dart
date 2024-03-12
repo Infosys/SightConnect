@@ -16,9 +16,9 @@ class AssessmentTable extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
           child: Text(
             loc.vtAssessments,
             style: applyFiraSansFont(
@@ -27,12 +27,12 @@ class AssessmentTable extends HookConsumerWidget {
             ),
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+          padding: EdgeInsets.symmetric(horizontal: AppSize.km),
           child: ListOfFilterChips(),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         const PatientAssessmentPaginatedTable(),
       ],
     );

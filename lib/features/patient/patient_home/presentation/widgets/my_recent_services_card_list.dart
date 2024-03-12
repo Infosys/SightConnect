@@ -27,8 +27,7 @@ class RecentServicesCardList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+                padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Text(
                   loc.recentServicesTitle,
                   maxLines: 1,
@@ -63,7 +62,7 @@ class RecentServicesCardList extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

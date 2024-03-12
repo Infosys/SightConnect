@@ -27,7 +27,7 @@ class VTHeader extends HookWidget {
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+          margin: const EdgeInsets.symmetric(horizontal: AppSize.kl),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,7 +42,7 @@ class VTHeader extends HookWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
         CarouselSlider(
           items: slides,
           carouselController: controller,
@@ -61,8 +61,8 @@ class VTHeader extends HookWidget {
             return GestureDetector(
               onTap: () {},
               child: Container(
-                width: AppSize.kmradius - 2,
-                height: AppSize.kmradius - 2,
+                width: AppSize.km - 2,
+                height: AppSize.km - 2,
                 margin:
                     const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
                 decoration: BoxDecoration(

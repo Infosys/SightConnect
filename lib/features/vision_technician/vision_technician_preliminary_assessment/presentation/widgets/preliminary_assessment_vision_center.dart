@@ -19,10 +19,10 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding - 2),
+      padding: const EdgeInsets.all(AppSize.km - 2),
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        borderRadius: BorderRadius.circular(AppSize.ks),
         boxShadow: applycustomShadow(),
       ),
       child: Column(
@@ -37,7 +37,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.kl,
           ),
           Responsive.isMobile(context)
               ? const Column(
@@ -46,7 +46,7 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                   children: [
                     VisionCentersScrollBar(),
                     SizedBox(
-                      height: AppSize.kmheight,
+                      height: AppSize.km,
                     ),
                     VisionCenterAddressDetails(),
                   ],
@@ -55,12 +55,12 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
                   children: [
                     VisionCentersScrollBar(),
                     SizedBox(
-                      width: AppSize.klwidth,
+                      width: AppSize.kl,
                     ),
                     VisionCenterAddressDetails(),
                   ],
                 ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
           const SeverityInput(),
           VTRegisterInput(
             title: loc.vtRemarks,

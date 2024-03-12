@@ -111,7 +111,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
                           ],
                         ),
                   const SizedBox(
-                    height: AppSize.kmheight,
+                    height: AppSize.km,
                   ),
                   const Divider(
                     color: Colors.grey,
@@ -125,7 +125,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
           separatorBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.kspadding + 2,
+                horizontal: AppSize.ks + 2,
               ),
               child: Row(
                 children: [
@@ -168,7 +168,7 @@ Widget TimeWidgetRender(
               size: 20,
             ),
             const SizedBox(
-              width: AppSize.kswidth,
+              width: AppSize.ks,
             ),
             Text(
               timeLine.call ?? "",
@@ -187,10 +187,10 @@ Widget TimeWidgetRender(
               size: 20,
             ),
             const SizedBox(
-              width: AppSize.kswidth,
+              width: AppSize.ks,
             ),
             const SizedBox(
-              width: AppSize.kswidth,
+              width: AppSize.ks,
             ),
             InkWell(
               onTap: () async {

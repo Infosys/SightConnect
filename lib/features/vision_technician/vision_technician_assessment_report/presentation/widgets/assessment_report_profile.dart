@@ -22,7 +22,7 @@ class AssessmentReportProfile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),
         image: const DecorationImage(
@@ -30,11 +30,11 @@ class AssessmentReportProfile extends ConsumerWidget {
           image: AssetImage(AppImages.profileBg),
         ),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius),
+          Radius.circular(AppSize.km),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Wrap(
           direction: Axis.horizontal,
           children: [

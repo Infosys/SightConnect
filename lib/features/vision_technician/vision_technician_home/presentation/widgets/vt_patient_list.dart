@@ -27,14 +27,14 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            // padding: const EdgeInsets.all(AppSize.kmpadding),
+            // padding: const EdgeInsets.all(AppSize.km),
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
               children: [
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 Text(
                   loc.vtNoAssessmentsFound,
                   style: applyFiraSansFont(
@@ -42,7 +42,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
               ],
             ),
           ),
@@ -60,13 +60,12 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
       columnSpacing: isMobile
           ? AppSize.width(context) * 0.06
           : AppSize.width(context) * 0.05,
-      headingRowHeight: isMobile ? AppSize.klheight * 2 : AppSize.klheight * 3,
+      headingRowHeight: isMobile ? AppSize.kl * 2 : AppSize.kl * 3,
       horizontalMargin: isMobile
           ? AppSize.width(context) * 0.05
           : AppSize.width(context) * 0.05,
-      dataRowMaxHeight:
-          isMobile ? AppSize.klheight * 3 : AppSize.klheight * 3.5,
-      dataRowMinHeight: isMobile ? AppSize.klheight * 1 : AppSize.klheight * 2,
+      dataRowMaxHeight: isMobile ? AppSize.kl * 3 : AppSize.kl * 3.5,
+      dataRowMinHeight: isMobile ? AppSize.kl * 1 : AppSize.kl * 2,
       columns: [
         DataColumn(
           label: Text(
@@ -318,10 +317,10 @@ DataCell loadingDataCell() {
       baseColor: AppColor.white,
       highlightColor: AppColor.lightGrey.withOpacity(0.1),
       child: Container(
-        width: AppSize.klwidth * 5,
-        height: AppSize.klheight * 1.5,
+        width: AppSize.kl * 5,
+        height: AppSize.kl * 1.5,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.ksradius),
+          borderRadius: BorderRadius.circular(AppSize.ks),
           color: AppColor.white,
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
           ),
           title: Text(loc.tollFreeNumber),
           subtitle: const Text(
-            AppText.tollFreeNumber,
+            AppInfoService.tollFreeNumber,
             style: TextStyle(
               color: AppColor.black,
               fontWeight: FontWeight.bold,
@@ -37,7 +38,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
           ),
         ),
         const SizedBox(
-          height: AppSize.kmheight,
+          height: AppSize.km,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -54,7 +55,7 @@ class TumblingResultPageBottomCards extends ConsumerWidget {
                 ),
               ),
               const SizedBox(
-                width: AppSize.kmheight,
+                width: AppSize.km,
               ),
               Expanded(
                 child: OutlinedButton(

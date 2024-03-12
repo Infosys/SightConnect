@@ -26,12 +26,12 @@ class RegisterSearchBar extends HookWidget {
     return Container(
       margin: isMobile
           ? const EdgeInsets.symmetric(
-              horizontal: AppSize.kmpadding,
-              vertical: AppSize.kmpadding,
+              horizontal: AppSize.km,
+              vertical: AppSize.km,
             )
           : EdgeInsets.symmetric(
               horizontal: AppSize.width(context) * 0.1,
-              vertical: AppSize.kmpadding,
+              vertical: AppSize.km,
             ),
       child: TextField(
         controller: textController,

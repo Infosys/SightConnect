@@ -51,7 +51,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      height: AppSize.ks,
                     ),
                     Row(
                       children: [
@@ -81,7 +81,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      height: AppSize.ks,
                     ),
                   ],
                 ),
@@ -97,7 +97,7 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(
-                height: AppSize.ksheight,
+                height: AppSize.ks,
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),

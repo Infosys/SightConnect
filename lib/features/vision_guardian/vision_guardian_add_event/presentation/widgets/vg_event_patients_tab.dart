@@ -88,7 +88,7 @@ Widget vgPatientTabs(
     itemBuilder: (context, index) {
       if (index == response.length) {
         return const Padding(
-          padding: EdgeInsets.all(AppSize.klpadding),
+          padding: EdgeInsets.all(AppSize.kl),
           child: CircularProgressIndicator.adaptive(),
         );
       }
@@ -126,19 +126,19 @@ Widget vgPatientTabs(
           readModel.loadingToggle();
         },
         child: Container(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColor.white,
             boxShadow: applyLightShadow(),
             borderRadius: const BorderRadius.all(
-              Radius.circular(AppSize.kmradius - 5),
+              Radius.circular(AppSize.km - 5),
             ),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(AppSize.ksradius),
+            borderRadius: BorderRadius.circular(AppSize.ks),
             child: Container(
-              // padding: const EdgeInsets.all(AppSize.kspadding),
+              // padding: const EdgeInsets.all(AppSize.ks),
               width: Responsive.isMobile(context)
                   ? AppSize.width(context) * 0.9
                   : AppSize.width(context) * 0.6,
@@ -153,7 +153,7 @@ Widget vgPatientTabs(
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(width: AppSize.kswidth),
+                  const SizedBox(width: AppSize.ks),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +193,7 @@ Widget vgPatientTabs(
                           ],
                         ),
                       ),
-                      const SizedBox(height: AppSize.ksheight),
+                      const SizedBox(height: AppSize.ks),
                       SizedBox(
                         width: Responsive.isMobile(context)
                             ? AppSize.width(context) * 0.74
@@ -230,11 +230,11 @@ Widget vgPatientTabs(
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            const SizedBox(height: AppSize.ksheight / 3), */
+                            const SizedBox(height: AppSize.ks / 3), */
                           ],
                         ),
                       ),
-                      const SizedBox(height: AppSize.ksheight),
+                      const SizedBox(height: AppSize.ks),
                       SizedBox(
                         width: Responsive.isMobile(context)
                             ? AppSize.width(context) * 0.74
@@ -267,7 +267,7 @@ Widget vgPatientTabs(
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ), */
-                            const SizedBox(height: AppSize.ksheight / 3),
+                            const SizedBox(height: AppSize.ks / 3),
                           ],
                         ),
                       ),
@@ -282,7 +282,7 @@ Widget vgPatientTabs(
     },
     separatorBuilder: (BuildContext context, int index) {
       return const SizedBox(
-        height: AppSize.ksheight,
+        height: AppSize.ks,
       );
     },
   );

@@ -18,7 +18,7 @@ class ArrowButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(AppSize.kspadding),
+        padding: const EdgeInsets.all(AppSize.ks),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(

@@ -16,7 +16,7 @@ class VGSymptonChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: AppSize.kmheight * 2,
+      // height: AppSize.km* 2,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +31,7 @@ class VGSymptonChip extends StatelessWidget {
               color: color,
             ),
           ),
-          const SizedBox(width: AppSize.kswidth),
+          const SizedBox(width: AppSize.ks),
           Text(
             symptom,
             style: applyRobotoFont(

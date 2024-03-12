@@ -9,13 +9,13 @@ class WhiteFieldBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.kmpadding,
-        vertical: AppSize.kmpadding / 3,
+        horizontal: AppSize.km,
+        vertical: AppSize.km / 3,
       ),
       decoration: const BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.all(
-          Radius.circular(AppSize.ksradius),
+          Radius.circular(AppSize.ks),
         ),
       ),
       child: child,

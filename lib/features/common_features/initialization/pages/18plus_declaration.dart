@@ -60,7 +60,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                     color: AppColor.white,
                     boxShadow: applyLightShadow(),
                     borderRadius: const BorderRadius.all(
-                      Radius.circular(AppSize.kmradius - 5),
+                      Radius.circular(AppSize.km - 5),
                     ),
                   ),
                   child: Column(
@@ -74,8 +74,8 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kmpadding,
-                          vertical: AppSize.kmpadding / 2,
+                          horizontal: AppSize.km,
+                          vertical: AppSize.km / 2,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
@@ -19,6 +19,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:upgrader/upgrader.dart';
 
+import '../../../../../core/services/app_info_service.dart';
 import '../../../../../core/services/app_update_service.dart';
 import '../../../../../main.dart';
 
@@ -84,22 +85,22 @@ class PatientHomePage extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: AppSize.klheight * 4),
+                const SizedBox(height: AppSize.kl * 4),
                 const PatientHeader(),
-                // const SizedBox(height: AppSize.kmheight),
+                // const SizedBox(height: AppSize.km),
                 // PriorityNotificationList(),
-                // const SizedBox(height: AppSize.kmheight),
+                // const SizedBox(height: AppSize.km),
                 // const MyConnectionsList(),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 const TriageTestCard(),
-                const SizedBox(height: AppSize.kmheight),
-                const HelplineCard(helpLine: AppText.tollFreeNumber),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
+                const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+                const SizedBox(height: AppSize.km),
 
                 // const RecentServicesCardList(),
 
                 const NearbyVisionCentersList(),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
 
                 InviteCard(
                   onPressed: () {
@@ -110,12 +111,12 @@ class PatientHomePage extends ConsumerWidget {
                   },
                 ),
                 // const EyeCampsCardList(),
-                // const SizedBox(height: AppSize.kmheight),
+                // const SizedBox(height: AppSize.km),
                 // const GoodToKnowCardList(),
-                // const SizedBox(height: AppSize.kmheight),
+                // const SizedBox(height: AppSize.km),
                 // const CampaginsList(),
                 const PartnerCard(),
-                const SizedBox(height: AppSize.klheight * 3),
+                const SizedBox(height: AppSize.kl * 3),
               ],
             ),
           ),

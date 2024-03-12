@@ -58,8 +58,8 @@ class AppConsentFormPage extends HookConsumerWidget {
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppSize.kmpadding,
-                        vertical: AppSize.kmpadding / 2,
+                        horizontal: AppSize.km,
+                        vertical: AppSize.km / 2,
                       ),
                       child: ElevatedButton(
                         onPressed: null,
@@ -82,8 +82,8 @@ class AppConsentFormPage extends HookConsumerWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.kmpadding,
-                      vertical: AppSize.kmpadding / 2,
+                      horizontal: AppSize.km,
+                      vertical: AppSize.km / 2,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,

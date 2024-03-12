@@ -18,13 +18,13 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
     var data = ref.watch(addEventDetailsProvider);
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Column(
@@ -39,7 +39,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           customTextFieldIcon(
             context,
             data.venueName,
@@ -55,7 +55,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
             },
             const SizedBox(),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           customTextFieldIcon(
             context,
             data.pincode,
@@ -71,7 +71,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
             },
             const SizedBox(),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           customTextFieldIcon(
             context,
             data.city,
@@ -87,7 +87,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
             },
             const SizedBox(),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
         ],
       ),
     );

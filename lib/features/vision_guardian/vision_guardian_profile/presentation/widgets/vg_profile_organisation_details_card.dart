@@ -14,17 +14,17 @@ class VgProfileOrganisationDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.ks),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Container(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class VgProfileOrganisationDetailsCard extends StatelessWidget {
                   applyFiraSansFont(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             /*  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
@@ -49,7 +49,7 @@ class VgProfileOrganisationDetailsCard extends StatelessWidget {
               ),
             ]), */
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Wrap(
               spacing: AppSize.width(context) / 7,

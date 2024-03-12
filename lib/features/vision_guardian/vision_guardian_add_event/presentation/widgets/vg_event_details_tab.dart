@@ -32,7 +32,7 @@ class EventDetailsTab extends ConsumerWidget {
     final loc = context.loc!;
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.kspadding),
+        padding: const EdgeInsets.all(AppSize.ks),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
@@ -46,11 +46,11 @@ class EventDetailsTab extends ConsumerWidget {
                             NetworkImage(_getImageUrl(eventDetails.images![0])),
                         fit: BoxFit.cover,
                       ),
-                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                      borderRadius: BorderRadius.circular(AppSize.km),
                     )
                   : BoxDecoration(
                       color: AppColor.grey.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(AppSize.kmradius),
+                      borderRadius: BorderRadius.circular(AppSize.km),
                     ),
               child: Column(
                 children: [
@@ -60,8 +60,8 @@ class EventDetailsTab extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: AppColor.black.withOpacity(0.3),
                       borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(AppSize.kmradius),
-                        bottomRight: Radius.circular(AppSize.kmradius),
+                        bottomLeft: Radius.circular(AppSize.km),
+                        bottomRight: Radius.circular(AppSize.km),
                       ),
                     ),
                     child: Column(
@@ -75,7 +75,7 @@ class EventDetailsTab extends ConsumerWidget {
                               color: AppColor.white,
                             ),
                             const SizedBox(
-                              width: AppSize.kswidth - 5,
+                              width: AppSize.ks - 5,
                             ),
                             Text(
                               "$startDateformattedDate - $endDateformattedDate",
@@ -97,7 +97,7 @@ class EventDetailsTab extends ConsumerWidget {
                                   color: AppColor.white,
                                 ),
                                 const SizedBox(
-                                  width: AppSize.kswidth - 5,
+                                  width: AppSize.ks - 5,
                                 ),
                                 Text(
                                   "$startformattedTime - $endTimeformattedTime",
@@ -111,12 +111,12 @@ class EventDetailsTab extends ConsumerWidget {
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(
-                                  AppSize.klradius,
+                                  AppSize.kl,
                                 ),
                                 color: AppColor.orange,
                               ),
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSize.kmpadding, vertical: 3),
+                                  horizontal: AppSize.km, vertical: 3),
                               child: Text(
                                 eventDetails.eventStatus ?? "",
                                 style: applyRobotoFont(
@@ -135,15 +135,15 @@ class EventDetailsTab extends ConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             aboutDetails(eventDetails.description ?? "", context),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             locationDetails(eventDetails.addresses![0], context),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Row(
               children: [
@@ -156,7 +156,7 @@ class EventDetailsTab extends ConsumerWidget {
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                          AppSize.klradius,
+                          AppSize.kl,
                         ),
                       ),
                     ),
@@ -171,7 +171,7 @@ class EventDetailsTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: AppSize.kmwidth,
+                  width: AppSize.km,
                 ),
                 Expanded(
                   child: ElevatedButton(
@@ -200,7 +200,7 @@ class EventDetailsTab extends ConsumerWidget {
                       backgroundColor: AppColor.red,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
-                          AppSize.klradius,
+                          AppSize.kl,
                         ),
                       ),
                     ),
@@ -228,10 +228,10 @@ Widget locationDetails(
   final loc = context.loc!;
   return Card(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(AppSize.ksradius),
+      borderRadius: BorderRadius.circular(AppSize.ks),
     ),
     child: Padding(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -251,7 +251,7 @@ Widget locationDetails(
             )
           ]),
           const SizedBox(
-            height: AppSize.kmheight,
+            height: AppSize.km,
           ),
           Text(
             loc.vgAddressAndDoorNumber,
@@ -261,7 +261,7 @@ Widget locationDetails(
             ),
           ),
           const SizedBox(
-            height: AppSize.ksheight - 5,
+            height: AppSize.ks - 5,
           ),
           Text(
             addressDetails.addressLine1 ?? "",
@@ -271,7 +271,7 @@ Widget locationDetails(
             ),
           ),
           const SizedBox(
-            height: AppSize.kmheight,
+            height: AppSize.km,
           ),
           Row(
             children: [
@@ -287,7 +287,7 @@ Widget locationDetails(
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight - 5,
+                      height: AppSize.ks - 5,
                     ),
                     Text(
                       addressDetails.pinCode ?? "",
@@ -297,7 +297,7 @@ Widget locationDetails(
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      height: AppSize.ks,
                     ),
                     Text(
                       loc.vgSubDistrictName,
@@ -307,7 +307,7 @@ Widget locationDetails(
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight - 5,
+                      height: AppSize.ks - 5,
                     ),
                     Text(
                       addressDetails.subDistrict ?? "",
@@ -331,7 +331,7 @@ Widget locationDetails(
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight - 5,
+                      height: AppSize.ks - 5,
                     ),
                     Text(
                       addressDetails.city ?? "",
@@ -341,7 +341,7 @@ Widget locationDetails(
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      height: AppSize.ks,
                     ),
                     Text(
                       loc.vgDistrictName,
@@ -351,7 +351,7 @@ Widget locationDetails(
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight - 5,
+                      height: AppSize.ks - 5,
                     ),
                     Text(
                       addressDetails.district ?? "",
@@ -375,10 +375,10 @@ Widget aboutDetails(String description, BuildContext context) {
   final loc = context.loc!;
   return Card(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(AppSize.ksradius),
+      borderRadius: BorderRadius.circular(AppSize.ks),
     ),
     child: Padding(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -389,7 +389,7 @@ Widget aboutDetails(String description, BuildContext context) {
                 fontWeight: FontWeight.w500,
               )),
           const SizedBox(
-            height: AppSize.kmheight,
+            height: AppSize.km,
           ),
           Text(
             description,
@@ -400,7 +400,7 @@ Widget aboutDetails(String description, BuildContext context) {
             softWrap: true,
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

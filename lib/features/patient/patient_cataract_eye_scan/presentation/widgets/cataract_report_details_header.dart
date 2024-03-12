@@ -14,12 +14,12 @@ class PatientDetailHeader extends ConsumerWidget {
     var gender = (patientDetails.asData?.value.profile?.patient?.gender) ?? "";
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Container(
         padding: const EdgeInsets.symmetric(
-            horizontal: AppSize.kspadding + 2, vertical: AppSize.kspadding),
+            horizontal: AppSize.ks + 2, vertical: AppSize.ks),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.kspadding),
+          borderRadius: BorderRadius.circular(AppSize.ks),
           color: AppColor.lightBlue,
         ),
         child: Row(
@@ -28,7 +28,7 @@ class PatientDetailHeader extends ConsumerWidget {
               backgroundColor: AppColor.grey,
             ),
             const SizedBox(
-              width: AppSize.kspadding,
+              width: AppSize.ks,
             ),
             Text(
               patientDetails.asData?.value.profile?.patient?.firstName ?? "",

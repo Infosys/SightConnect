@@ -36,13 +36,13 @@ class PatientServicesPage extends ConsumerWidget {
 
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(AppSize.klradius),
-        topRight: Radius.circular(AppSize.klradius),
+        topLeft: Radius.circular(AppSize.kl),
+        topRight: Radius.circular(AppSize.kl),
       ),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.9,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.klradius),
+          borderRadius: BorderRadius.circular(AppSize.kl),
         ),
         child: DefaultTabController(
           length: 5,
@@ -76,8 +76,8 @@ class PatientServicesPage extends ConsumerWidget {
                       ),
                       TabBar(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kmpadding,
-                          vertical: AppSize.kmpadding,
+                          horizontal: AppSize.km,
+                          vertical: AppSize.km,
                         ),
                         indicatorSize: TabBarIndicatorSize.label,
                         enableFeedback: true,
@@ -217,7 +217,7 @@ class PatientServicesPage extends ConsumerWidget {
                       const SizedBox(),
                       SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.all(AppSize.kmpadding),
+                          padding: const EdgeInsets.all(AppSize.km),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: services.keys

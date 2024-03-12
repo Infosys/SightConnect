@@ -23,10 +23,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
     final loc = context.loc!;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
         boxShadow: applycustomShadow(),
       ),
       child: Column(
@@ -40,9 +40,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           Wrap(
-            runSpacing: AppSize.ksheight,
+            runSpacing: AppSize.ks,
             children: [
               SizedBox(
                 width: Responsive.isMobile(context)
@@ -79,7 +79,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               SizedBox(
                 width: Responsive.isMobile(context)
                     ? AppSize.width(context)
@@ -115,7 +115,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               SizedBox(
                 width: Responsive.isMobile(context)
                     ? AppSize.width(context)

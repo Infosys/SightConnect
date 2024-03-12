@@ -30,7 +30,7 @@ class PatientCasesAnalytics extends StatelessWidget {
                 ? AppSize.width(context) * 0.3
                 : AppSize.width(context) * 0.45,
           ),
-          const SizedBox(width: AppSize.kswidth),
+          const SizedBox(width: AppSize.ks),
           AnalyticsCard(
             title: loc.vtCasesClosed,
             firstValue: "-",
@@ -41,7 +41,7 @@ class PatientCasesAnalytics extends StatelessWidget {
                 ? AppSize.width(context) * 0.3
                 : AppSize.width(context) * 0.25,
           ),
-          const SizedBox(width: AppSize.kswidth),
+          const SizedBox(width: AppSize.ks),
           AnalyticsCard(
             title: loc.vtAvgClosureTime,
             firstValue: "-",
@@ -129,10 +129,10 @@ class AnalyticsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
         boxShadow: applyLightShadow(),
       ),
       child: Column(
@@ -147,7 +147,7 @@ class AnalyticsCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           Flexible(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

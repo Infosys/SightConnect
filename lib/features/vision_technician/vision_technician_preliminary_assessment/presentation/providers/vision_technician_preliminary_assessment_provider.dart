@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
@@ -138,7 +139,7 @@ class VtTriageProvider extends ChangeNotifier {
           DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
       issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
       source: Source.VT_APP,
-      sourceVersion: AppText.appVersion,
+      sourceVersion: AppInfoService.version,
       incompleteSection: [],
       imagingSelection:
           _preliminaryAssessmentHelperProvider.onIvrCall ? [] : imageSelection,
@@ -164,16 +165,12 @@ class VtTriageProvider extends ChangeNotifier {
       int? reportId = triageResponse.id;
       int? encounterId = triageResponse.encounter?.id;
       int? organizationCode = assessment.organizationCode;
-      int ? tenantCode= assessment.tenantCode;
+      int? tenantCode = assessment.tenantCode;
       Either<Failure, CarePlanPostModel>? carePlanResponse;
 
       if (organizationCode != null) {
         carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
-          organizationCode,
-          reportId!,
-          encounterId!,
-          tenantCode!
-        );
+            organizationCode, reportId!, encounterId!, tenantCode!);
 
         carePlanResponse.fold((error) {
           throw error;

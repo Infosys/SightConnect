@@ -19,7 +19,7 @@ class CheckContainer extends StatelessWidget {
     return Container(
       height: AppSize.height(context) * 0.06,
       padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kspadding, vertical: AppSize.kspadding - 2),
+          horizontal: AppSize.ks, vertical: AppSize.ks - 2),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(8),
@@ -44,7 +44,7 @@ class CheckContainer extends StatelessWidget {
               size: 12,
             ),
           ),
-          const SizedBox(width: AppSize.kspadding - 2),
+          const SizedBox(width: AppSize.ks - 2),
           patient.profile?.patient?.profilePhoto != null
               ? Container(
                   decoration: BoxDecoration(
@@ -63,7 +63,7 @@ class CheckContainer extends StatelessWidget {
                   radius: 16,
                   fontSize: 12,
                 ),
-          const SizedBox(width: AppSize.kswidth - 2),
+          const SizedBox(width: AppSize.ks - 2),
           Text(
             patient.profile!.patient!.firstName!,
             maxLines: 1,

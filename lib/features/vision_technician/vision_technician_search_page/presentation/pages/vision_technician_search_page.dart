@@ -45,7 +45,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                 child: Padding(
                   padding: Responsive.isMobile(context)
                       ? const EdgeInsets.all(16)
-                      : const EdgeInsets.all(AppSize.klpadding * 2),
+                      : const EdgeInsets.all(AppSize.kl * 2),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +95,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                 scrollDirection: Axis.horizontal,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: AppSize.kmpadding),
+                                      horizontal: AppSize.km),
                                   child: DataTable(
                                     dataTextStyle: applyRobotoFont(
                                       fontSize: 14,
@@ -105,21 +105,21 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                         : AppSize.width(context) * 0.09,
                                     horizontalMargin:
                                         Responsive.isMobile(context)
-                                            ? AppSize.kmpadding
-                                            : AppSize.klpadding,
+                                            ? AppSize.km
+                                            : AppSize.kl,
                                     dataRowMaxHeight:
                                         Responsive.isMobile(context)
-                                            ? AppSize.klheight * 2.5
-                                            : AppSize.klheight * 3,
+                                            ? AppSize.kl * 2.5
+                                            : AppSize.kl * 3,
                                     dataRowMinHeight:
                                         Responsive.isMobile(context)
-                                            ? AppSize.klheight * 1.2
-                                            : AppSize.klheight * 2,
+                                            ? AppSize.kl * 1.2
+                                            : AppSize.kl * 2,
                                     showCheckboxColumn: false,
                                     decoration: BoxDecoration(
                                       color: AppColor.white,
                                       borderRadius: BorderRadius.circular(
-                                        AppSize.ksradius,
+                                        AppSize.ks,
                                       ),
                                       // boxShadow: applyLightShadow(),
                                     ),

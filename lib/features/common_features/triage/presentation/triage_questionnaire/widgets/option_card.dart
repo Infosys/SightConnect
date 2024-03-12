@@ -38,7 +38,7 @@ class OptionCard extends StatelessWidget {
             maxLines: 3,
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
         Expanded(
           child: Stack(
             fit: StackFit.expand,
@@ -70,8 +70,8 @@ class OptionCard extends StatelessWidget {
                 right: 10,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmpadding,
-                    vertical: AppSize.kspadding,
+                    horizontal: AppSize.km,
+                    vertical: AppSize.ks,
                   ),
                   decoration: BoxDecoration(
                     color: AppColor.white.withOpacity(0.4),
@@ -173,7 +173,7 @@ class OptionCard extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Row(
@@ -188,7 +188,7 @@ class OptionCard extends StatelessWidget {
                   child: Container(
                     height: AppSize.height(context) * 0.13,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.klpadding - 5, vertical: 0),
+                        horizontal: AppSize.kl - 5, vertical: 0),
                     decoration: const BoxDecoration(
                       color: AppColor.white,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -227,7 +227,7 @@ class OptionCard extends StatelessWidget {
                   child: Container(
                     height: AppSize.height(context) * 0.13,
                     padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.klpadding - 5,
+                      horizontal: AppSize.kl - 5,
                       vertical: 0,
                     ),
                     decoration: const BoxDecoration(
@@ -263,7 +263,7 @@ class OptionCard extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
       ],
     );
   }

@@ -15,7 +15,7 @@ class EyeResultImageCard extends ConsumerWidget {
     VisionAcuityMode scanType = ref.watch(globalProvider).vaMode;
     bool isCataraact = scanType == VisionAcuityMode.CATARACT;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding + 4),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.ks + 4),
       child: Card(
         clipBehavior: Clip.hardEdge,
         shape: RoundedRectangleBorder(
@@ -23,7 +23,7 @@ class EyeResultImageCard extends ConsumerWidget {
         ),
         elevation: 2,
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -40,14 +40,14 @@ class EyeResultImageCard extends ConsumerWidget {
                           ? const CircleAvatar()
                           : ClipRRect(
                               borderRadius:
-                                  BorderRadius.circular(AppSize.klradius * 10),
+                                  BorderRadius.circular(AppSize.kl * 10),
                               child: Image.file(
                                 ref.read(patientEyeScanProvider).rightEyeImage!,
                                 fit: BoxFit.cover,
                               ),
                             ),
                     ),
-                    const SizedBox(width: AppSize.kmpadding),
+                    const SizedBox(width: AppSize.km),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +97,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: AppSize.kspadding / 2),
+                          const SizedBox(height: AppSize.ks / 2),
                           Text(
                             textMapper(model.rightEyeStatus ?? ""),
                             style: applyRobotoFont(
@@ -111,7 +111,7 @@ class EyeResultImageCard extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               ListTile(
                 contentPadding: const EdgeInsets.all(0),
                 title: Row(
@@ -131,7 +131,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               ),
                             ),
                     ),
-                    const SizedBox(width: AppSize.kmpadding),
+                    const SizedBox(width: AppSize.km),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,7 +178,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: AppSize.kspadding / 2),
+                          const SizedBox(height: AppSize.ks / 2),
                           Text(
                             textMapper(model.leftEyeStatus ?? ""),
                             style: applyRobotoFont(

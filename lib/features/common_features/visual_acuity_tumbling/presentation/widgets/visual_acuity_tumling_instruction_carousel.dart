@@ -66,8 +66,8 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
-                  vertical: AppSize.kmpadding,
+                  horizontal: AppSize.km,
+                  vertical: AppSize.km,
                 ),
                 child: Image.asset(
                   slideShowData[index]["image"]!,
@@ -83,7 +83,7 @@ class VisualAcuityTumblingInstructionCarousel extends HookWidget {
                     borderRadius: BorderRadius.circular(16),
                     color: Colors.black.withOpacity(0.7),
                   ),
-                  padding: const EdgeInsets.all(AppSize.kmpadding),
+                  padding: const EdgeInsets.all(AppSize.km),
                   child: AutoSizeText(
                     slideShowData[index]["text"]!,
                     textAlign: TextAlign.left,

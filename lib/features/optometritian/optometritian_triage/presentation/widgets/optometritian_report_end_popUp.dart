@@ -29,8 +29,7 @@ void showReportPopUp(BuildContext context) {
             clipBehavior: Clip.none,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.klpadding + 5),
+                padding: const EdgeInsets.symmetric(horizontal: AppSize.kl + 5),
                 transform: Matrix4.translationValues(
                     0, AppSize.height(context) * 0.09, 0),
                 height: AppSize.height(context) * 0.3,
@@ -46,7 +45,7 @@ void showReportPopUp(BuildContext context) {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight,
+                      height: AppSize.km,
                     ),
                     Text(
                         "You have successfully completed your in-app Assessment.",
@@ -55,7 +54,7 @@ void showReportPopUp(BuildContext context) {
                           fontWeight: FontWeight.w400,
                         )),
                     const SizedBox(
-                      height: AppSize.kmheight,
+                      height: AppSize.km,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -83,7 +82,7 @@ void showReportPopUp(BuildContext context) {
                 left: 0,
                 right: 0,
                 child: Container(
-                  margin: const EdgeInsets.only(bottom: AppSize.klheight),
+                  margin: const EdgeInsets.only(bottom: AppSize.kl),
                   child: ConstrainedBox(
                     constraints:
                         const BoxConstraints(maxHeight: 140, maxWidth: 140),

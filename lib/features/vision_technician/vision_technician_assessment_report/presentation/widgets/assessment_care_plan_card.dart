@@ -36,7 +36,7 @@ class AssessementCarePlanCard extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         SizedBox(
           child: Wrap(
             runSpacing: 8,
@@ -59,8 +59,8 @@ class AssessementCarePlanCard extends StatelessWidget {
                           children: [
                             Container(
                               padding: isMobile
-                                  ? const EdgeInsets.all(AppSize.kspadding / 2)
-                                  : const EdgeInsets.all(AppSize.kspadding - 2),
+                                  ? const EdgeInsets.all(AppSize.ks / 2)
+                                  : const EdgeInsets.all(AppSize.ks - 2),
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColor.green,
@@ -72,8 +72,8 @@ class AssessementCarePlanCard extends StatelessWidget {
                               ),
                             ),
                             isMobile
-                                ? const SizedBox(width: AppSize.ksheight)
-                                : const SizedBox(width: AppSize.kmpadding),
+                                ? const SizedBox(width: AppSize.ks)
+                                : const SizedBox(width: AppSize.km),
                             Flexible(
                               child: Text(
                                 e.goalOutcome?.name
@@ -96,7 +96,7 @@ class AssessementCarePlanCard extends StatelessWidget {
                 return [
                   ...data2.map(
                     (e) => AppCard(
-                      padding: AppSize.kmpadding,
+                      padding: AppSize.km,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

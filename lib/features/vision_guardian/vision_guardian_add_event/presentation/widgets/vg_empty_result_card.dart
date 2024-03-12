@@ -23,7 +23,7 @@ class VisionGuardianEmptyResultCard extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: AppSize.kmheight,
+          height: AppSize.km,
         ),
         Center(
           child: ConstrainedBox(

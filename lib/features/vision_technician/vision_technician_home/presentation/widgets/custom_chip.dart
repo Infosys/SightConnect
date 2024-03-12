@@ -21,19 +21,19 @@ class CustomChip extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.symmetric(
-          horizontal: AppSize.kspadding / 2,
-          vertical: AppSize.kspadding / 2,
+          horizontal: AppSize.ks / 2,
+          vertical: AppSize.ks / 2,
         ),
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding,
-          vertical: AppSize.kspadding,
+          horizontal: AppSize.km,
+          vertical: AppSize.ks,
         ),
         decoration: BoxDecoration(
           color: isSelected ? AppColor.lightBlue : AppColor.white,
           border: Border.all(
             color: isSelected ? AppColor.primary : AppColor.grey,
           ),
-          borderRadius: BorderRadius.circular(AppSize.klradius / 2),
+          borderRadius: BorderRadius.circular(AppSize.kl / 2),
         ),
         child: Text(
           title,

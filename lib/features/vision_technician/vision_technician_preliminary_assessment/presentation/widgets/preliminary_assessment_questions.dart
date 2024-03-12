@@ -44,7 +44,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
                 child: Text(loc.vtSomethingWentWrong),
               ),
               const SizedBox(
-                height: AppSize.klheight,
+                height: AppSize.kl,
               ),
               TextButton.icon(
                 onPressed: () {
@@ -80,10 +80,10 @@ class AssessmentQuestionCard extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           decoration: BoxDecoration(
             color: AppColor.white,
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
             boxShadow: applycustomShadow(),
           ),
           child: Column(
@@ -97,7 +97,7 @@ class AssessmentQuestionCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
               ...questionnaire.mapIndexed(
                 (index, element) {
                   return PreliminaryAssessmentFilterCheckBox(
@@ -108,7 +108,7 @@ class AssessmentQuestionCard extends StatelessWidget {
                 },
               ).toList(),
               // Wrap(
-              //   runSpacing: AppSize.klheight,
+              //   runSpacing: AppSize.kl,
               //   children: [
               //     PreliminaryAssessmentFilterCheckBox(
               //       heading: eyeSightProblems.text,
@@ -125,7 +125,7 @@ class AssessmentQuestionCard extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
       ],
     );
   }

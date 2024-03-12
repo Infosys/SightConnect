@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
@@ -160,7 +161,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       assessmentVersion: reportModel.assessmentVersion,
       issued: reportModel.issued,
       source: Source.PATIENT_APP,
-      sourceVersion: AppText.appVersion,
+      sourceVersion: AppInfoService.version,
       incompleteSection: getIncompleteTestList(reportModel.incompleteTests),
       score: getScore(),
       cummulativeScore: getCummulativeScore(),
@@ -260,7 +261,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
     return qscore.toInt();
   }
 
-    int totalGroupQuestion() {
+  int totalGroupQuestion() {
     int total = 0;
     for (var element in _questionnaireSections) {
       if (element.type == QuestionnaireType.Group) {

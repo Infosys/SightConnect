@@ -20,7 +20,7 @@ class Bottom extends ConsumerWidget {
         children: [
           if (index == 0)
             SizedBox(
-              width: AppSize.klwidth * 3,
+              width: AppSize.kl * 3,
               child: TextButton(
                 onPressed: () {
                   ref.read(vgdetailsstepperprovider.notifier).next();
@@ -46,7 +46,7 @@ class Bottom extends ConsumerWidget {
             ),
           if (index == 1)
             SizedBox(
-              width: AppSize.klwidth * 3,
+              width: AppSize.kl * 3,
               child: TextButton(
                 onPressed: () {
                   ref.read(vgdetailsstepperprovider.notifier).prev();

@@ -42,8 +42,8 @@ class PatientServiceCategory extends ConsumerWidget {
           }).toList();
     return Container(
       margin: Responsive.isMobile(context)
-          ? const EdgeInsets.only(bottom: AppSize.klpadding)
-          : const EdgeInsets.only(bottom: AppSize.klpadding * 2),
+          ? const EdgeInsets.only(bottom: AppSize.kl)
+          : const EdgeInsets.only(bottom: AppSize.kl * 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -59,8 +59,8 @@ class PatientServiceCategory extends ConsumerWidget {
             ],
           ),
           Responsive.isMobile(context)
-              ? const SizedBox(height: AppSize.kmheight)
-              : const SizedBox(height: AppSize.klheight),
+              ? const SizedBox(height: AppSize.km)
+              : const SizedBox(height: AppSize.kl),
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
@@ -141,7 +141,7 @@ class PatientServiceCategory extends ConsumerWidget {
                                 )
                               : const CircleAvatar(),
                           const SizedBox(
-                            height: AppSize.ksheight,
+                            height: AppSize.ks,
                           ),
                           AutoSizeText(
                             _getMiniAppText(miniapp, loc),

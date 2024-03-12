@@ -26,7 +26,7 @@ class AssessmentAcuityScoreCard extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Column(
           children: [
             GridView.builder(
@@ -55,7 +55,7 @@ class AssessmentAcuityScoreCard extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: AppSize.ksheight),
+                        const SizedBox(height: AppSize.ks),
                         Flexible(
                           child: Text(
                             "$eyeSite",

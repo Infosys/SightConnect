@@ -14,12 +14,12 @@ class MRCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      margin: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.km),
+      margin: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class MRCode extends ConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.kmpadding,
+            height: AppSize.km,
           ),
           TextField(
             onChanged: (value) {

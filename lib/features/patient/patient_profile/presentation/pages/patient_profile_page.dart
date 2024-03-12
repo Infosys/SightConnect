@@ -90,7 +90,7 @@ class PatientProfilePage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const SizedBox(height: AppSize.klheight * 4.2),
+        const SizedBox(height: AppSize.kl * 4.2),
         Padding(
           padding: const EdgeInsets.only(
             left: 16,
@@ -206,19 +206,19 @@ class PatientProfilePage extends ConsumerWidget {
                                         patient.profile?.patient?.abhaNumber ??
                                             "-",
                                   ),
-                                  const SizedBox(height: AppSize.ksheight),
-                                  const SizedBox(height: AppSize.ksheight),
+                                  const SizedBox(height: AppSize.ks),
+                                  const SizedBox(height: AppSize.ks),
                                   PatientInfoCard(
                                     keyText: loc.myProfileEmail,
                                     valueText:
                                         patient.profile?.patient?.email ?? "",
                                   ),
-                                  const SizedBox(height: AppSize.ksheight),
+                                  const SizedBox(height: AppSize.ks),
                                   Divider(
                                     thickness: 1,
                                     color: AppColor.black.withOpacity(0.2),
                                   ),
-                                  const SizedBox(height: AppSize.ksheight),
+                                  const SizedBox(height: AppSize.ks),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -229,28 +229,28 @@ class PatientProfilePage extends ConsumerWidget {
                                           patient.profile?.patient?.address,
                                         ),
                                       ),
-                                      const SizedBox(height: AppSize.ksheight),
+                                      const SizedBox(height: AppSize.ks),
                                       PatientInfoCard(
                                         keyText: loc.myProfileCity,
                                         valueText: PatientHelper.city(
                                           patient.profile?.patient?.address,
                                         ),
                                       ),
-                                      const SizedBox(height: AppSize.ksheight),
+                                      const SizedBox(height: AppSize.ks),
                                       PatientInfoCard(
                                         keyText: loc.myProfileDistrict,
                                         valueText: PatientHelper.district(
                                           patient.profile?.patient?.address,
                                         ),
                                       ),
-                                      const SizedBox(height: AppSize.ksheight),
+                                      const SizedBox(height: AppSize.ks),
                                       PatientInfoCard(
                                         keyText: loc.myProfileState,
                                         valueText: PatientHelper.state(
                                           patient.profile?.patient?.address,
                                         ),
                                       ),
-                                      const SizedBox(height: AppSize.ksheight),
+                                      const SizedBox(height: AppSize.ks),
                                       PatientInfoCard(
                                         keyText: loc.myProfilePinCode,
                                         valueText: PatientHelper.pincode(
@@ -259,14 +259,14 @@ class PatientProfilePage extends ConsumerWidget {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: AppSize.ksheight),
+                                  const SizedBox(height: AppSize.ks),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 16),
                             Container(
-                              margin: const EdgeInsets.only(
-                                  bottom: AppSize.klelevation * 3),
+                              margin:
+                                  const EdgeInsets.only(bottom: AppSize.kl * 3),
                               decoration: BoxDecoration(
                                 color: AppColor.primary,
                                 borderRadius: BorderRadius.circular(8),

@@ -56,15 +56,15 @@ class NearbyVisionCentersCard extends StatelessWidget {
             ? AppSize.width(context) * 0.87
             : AppSize.width(context) * 0.35,
         height: AppSize.height(context) * 0.2,
-        margin: const EdgeInsets.only(right: AppSize.kspadding),
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        margin: const EdgeInsets.only(right: AppSize.ks),
+        padding: const EdgeInsets.all(AppSize.km),
         decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.7),
           border: Border.all(
             color: AppColor.lightGrey,
             width: 0.5,
           ),
-          borderRadius: BorderRadius.circular(AppSize.ksradius),
+          borderRadius: BorderRadius.circular(AppSize.ks),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -132,7 +132,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -163,7 +163,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Flexible(
               child: Row(
                 mainAxisSize: MainAxisSize.min,

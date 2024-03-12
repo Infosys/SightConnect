@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/tumbling_e_report_card.dart';
@@ -39,9 +40,9 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -59,9 +60,9 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -80,15 +81,15 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             const NearbyVisionCentersList(),
-            const SizedBox(height: AppSize.kmheight),
-            const HelplineCard(helpLine: AppText.tollFreeNumber),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
+            const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+            const SizedBox(height: AppSize.km),
             EyeScanTabView(
               eyeScanData: assessmentDetailsReport.imageBriefEntity,
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             TextButton(
               onPressed: () async {
                 showReport.value = !showReport.value;
@@ -119,7 +120,7 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                       fontSize: 14,
                     ),
                   ),
-                  const SizedBox(width: AppSize.kmpadding),
+                  const SizedBox(width: AppSize.km),
                   Icon(
                     showReport.value
                         ? Icons.keyboard_arrow_up
@@ -138,14 +139,14 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
                     questionResponseBreifModel:
                         assessmentDetailsReport.questionResponseBriefEntity,
                   ),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   TumblingEReportCard(
                     tumblingEData:
                         assessmentDetailsReport.visualAcuityBreifEntity,
                     observationDescription:
                         assessmentDetailsReport.observationResultDescription,
                   ),
-                  const SizedBox(height: AppSize.klheight * 3),
+                  const SizedBox(height: AppSize.kl * 3),
                 ],
               ),
               secondChild: const SizedBox(),

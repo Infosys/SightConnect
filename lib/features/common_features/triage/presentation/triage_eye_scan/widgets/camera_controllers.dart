@@ -28,10 +28,10 @@ class EyeScanCameraControllers extends HookConsumerWidget {
         Visibility(
           visible: !isClosed.value,
           child: Container(
-            margin: const EdgeInsets.only(bottom: AppSize.kmpadding),
+            margin: const EdgeInsets.only(bottom: AppSize.km),
             decoration: BoxDecoration(
               color: AppColor.blackOpacity,
-              borderRadius: BorderRadius.circular(AppSize.klpadding),
+              borderRadius: BorderRadius.circular(AppSize.kl),
             ),
             height: AppSize.height(context) * 0.05,
             width: AppSize.width(context) * 0.5,
@@ -64,7 +64,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           decoration: const BoxDecoration(
             color: AppColor.black,
           ),
@@ -74,7 +74,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
               InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     color: AppColor.darkGrey,
                     shape: BoxShape.circle,
@@ -91,7 +91,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
               InkWell(
                 onTap: onCapture,
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
@@ -107,7 +107,7 @@ class EyeScanCameraControllers extends HookConsumerWidget {
               InkWell(
                 onTap: onSwitchCamera,
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     color: AppColor.darkGrey,
                     shape: BoxShape.circle,

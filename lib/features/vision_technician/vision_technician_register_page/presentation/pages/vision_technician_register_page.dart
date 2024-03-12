@@ -64,7 +64,7 @@ class VisionTechnicianRegisterPage extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const RegisterPatientButton(),
-                            const SizedBox(height: AppSize.klheight),
+                            const SizedBox(height: AppSize.kl),
                             Text(
                               loc.vtNoPatientFound,
                               style: applyFiraSansFont(

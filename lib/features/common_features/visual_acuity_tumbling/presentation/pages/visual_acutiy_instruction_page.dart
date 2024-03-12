@@ -40,18 +40,18 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.klheight,
+              height: AppSize.kl,
             ),
             Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.klpadding,
+                horizontal: AppSize.kl,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.klpadding,
+                      horizontal: AppSize.kl,
                     ),
                     child: AnimatedSmoothIndicator(
                       onDotClicked: (index) {},
@@ -87,12 +87,12 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.ksheight,
+              height: AppSize.ks,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.klpadding + 6,
-                vertical: AppSize.kspadding + 2,
+                horizontal: AppSize.kl + 6,
+                vertical: AppSize.ks + 2,
               ),
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -120,7 +120,7 @@ class VisualAcuityInstructionPage extends HookConsumerWidget {
               ),
             ),
             // const SizedBox(
-            //   height: AppSize.klheight * 2,
+            //   height: AppSize.kl * 2,
             // )
           ],
         ),

@@ -28,7 +28,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
       backgroundColor: AppColor.scaffold,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -53,7 +53,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                       decoration: BoxDecoration(
                         color: AppColor.white,
                         borderRadius: BorderRadius.circular(
-                          AppSize.klradius,
+                          AppSize.kl,
                         ),
                       ),
                       child: TextField(
@@ -70,7 +70,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                 color: AppColor.primary,
                               ),
                               borderRadius: BorderRadius.all(
-                                Radius.circular(AppSize.klradius),
+                                Radius.circular(AppSize.kl),
                               ),
                             ),
                           ),
@@ -83,7 +83,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSize.kmheight + 5),
+              const SizedBox(height: AppSize.km + 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -107,8 +107,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                             }
                           },
                           child: Container(
-                            margin:
-                                const EdgeInsets.only(right: AppSize.kspadding),
+                            margin: const EdgeInsets.only(right: AppSize.ks),
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 5,
@@ -123,7 +122,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                   ? const Color(0xFFC9DAFD)
                                   : AppColor.white,
                               borderRadius: BorderRadius.circular(
-                                AppSize.ksradius,
+                                AppSize.ks,
                               ),
                             ),
                             child: Center(
@@ -174,7 +173,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                 ],
               ),
               const SizedBox(
-                height: AppSize.klheight,
+                height: AppSize.kl,
               ),
               Text(
                 loc.optoRecentAssessments,
@@ -182,7 +181,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                     applyRobotoFont(fontSize: 12, fontWeight: FontWeight.w400),
               ),
               const SizedBox(
-                height: AppSize.klheight,
+                height: AppSize.kl,
               ),
               model.isLoading
                   ? const Center(child: CircularProgressIndicator.adaptive())
@@ -200,7 +199,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: AppSize.klheight,
+                                  height: AppSize.kl,
                                 ),
                                 Text(
                                   loc.optoDataNotFound,
@@ -228,15 +227,15 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(
-                                        AppSize.kspadding,
+                                        AppSize.ks,
                                       ),
                                       margin: const EdgeInsets.only(
-                                        bottom: AppSize.kspadding + 5,
+                                        bottom: AppSize.ks + 5,
                                       ),
                                       decoration: BoxDecoration(
                                         color: AppColor.white,
                                         borderRadius: BorderRadius.circular(
-                                          AppSize.ksradius,
+                                          AppSize.ks,
                                         ),
                                       ),
                                       child: Column(
@@ -283,7 +282,7 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                                                 ),
                                               ),
                                               const SizedBox(
-                                                width: AppSize.kswidth,
+                                                width: AppSize.ks,
                                               ),
                                               Flexible(
                                                 child: Text(

@@ -46,7 +46,7 @@ class VgOnboardingDetails extends ConsumerWidget {
       //   physics: BouncingScrollPhysics(),
       // ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           children: [
             AnotherStepper(
@@ -61,15 +61,15 @@ class VgOnboardingDetails extends ConsumerWidget {
                 ),
               ],
               stepperDirection: Axis.horizontal,
-              iconWidth: AppSize.ksheight * 2,
-              iconHeight: AppSize.kswidth * 2,
+              iconWidth: AppSize.ks * 2,
+              iconHeight: AppSize.ks * 2,
               activeBarColor: AppColor.primary,
-              verticalGap: AppSize.klheight,
+              verticalGap: AppSize.kl,
               activeIndex: currentstep,
               barThickness: 1,
               inverted: true,
             ),
-            const SizedBox(height: AppSize.klheight),
+            const SizedBox(height: AppSize.kl),
             if (currentstep == 0) const VgOnboardingPersonal(),
             if (currentstep == 1) const VgOnboardingOrganisation(),
             const Bottom(),

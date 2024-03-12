@@ -27,7 +27,7 @@ class AssessmentEyeImageCard extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         () {
           if (imageBriefEntity?.isEmpty ?? true) {
             return const Center(
@@ -82,7 +82,7 @@ class AssessmentEyeImageCard extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     Expanded(
                       child: AppCard(
                         child: AppNetworkImage(

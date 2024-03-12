@@ -55,12 +55,12 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
                 width: AppSize.width(context) * 0.9,
                 child: Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSize.kmradius),
+                    borderRadius: BorderRadius.circular(AppSize.km),
                   ),
                   child: Padding(
                     padding: Responsive.isMobile(context)
-                        ? const EdgeInsets.all(AppSize.kmpadding)
-                        : const EdgeInsets.all(AppSize.klpadding),
+                        ? const EdgeInsets.all(AppSize.km)
+                        : const EdgeInsets.all(AppSize.kl),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,7 +71,7 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
-                          height: AppSize.ksheight,
+                          height: AppSize.ks,
                         ),
                         Text(
                           loc.overlayDescription,
@@ -81,7 +81,7 @@ class _TumblingOverlayState extends ConsumerState<VisualAcuityTumblingOverlay> {
                             color: const Color(0xFF888888),
                           ),
                         ),
-                        const SizedBox(height: AppSize.kmheight),
+                        const SizedBox(height: AppSize.km),
                         const _TumblingCarousel(),
                       ],
                     ),
@@ -142,8 +142,7 @@ class _TumblingCarousel extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
               child: IconButton(
                 highlightColor: const Color(0xFFECF2FE),
                 onPressed: currentIndex.value > 0
@@ -177,7 +176,7 @@ class _TumblingCarousel extends HookConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.kspadding,
+                horizontal: AppSize.ks,
               ),
               child: IconButton(
                 highlightColor: const Color(0xFFECF2FE),
@@ -204,8 +203,7 @@ class _TumblingCarousel extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
               child: Row(
                 children: [
                   Checkbox(
@@ -359,7 +357,7 @@ class _TumblingDirectionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Row(
         children: [
           Text(

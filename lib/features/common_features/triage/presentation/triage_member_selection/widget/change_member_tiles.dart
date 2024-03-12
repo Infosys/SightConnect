@@ -55,7 +55,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
           final person = currentProfile;
           return Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: AppSize.ksheight - 2,
+              vertical: AppSize.ks - 2,
             ),
             child: Container(
               decoration: BoxDecoration(
@@ -127,7 +127,7 @@ class ChangeMemberTiles extends HookConsumerWidget {
           final person = connectionsList[index - 1];
           return Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: AppSize.ksheight - 2,
+              vertical: AppSize.ks - 2,
             ),
             child: Container(
               decoration: BoxDecoration(

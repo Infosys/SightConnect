@@ -44,27 +44,26 @@ class VTProfilePage extends HookConsumerWidget {
             isLoading: isLoading.value,
             child: SingleChildScrollView(
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     VTProfileNameCard(
                       profileData: data,
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     VTProfilePersonalDetailsCard(profileData: data),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     // VgProfileWorkLocationCard(profileData: data),
                     // const SizedBox(
-                    //   height: AppSize.kmheight,
+                    //   height: AppSize.km,
                     // ),
                     VTProfileOrganisationDetailsCard(profileData: data),
                     // const SizedBox(
-                    //   height: AppSize.kmheight,
+                    //   height: AppSize.km,
                     // ),
                     //VgProfileTrainingCertificateCard(profileData: data),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     AppCard(
                       child: ListTile(
                         onTap: () {
@@ -103,7 +102,7 @@ class VTProfilePage extends HookConsumerWidget {
                       ),
                     ),
 
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     Visibility(
                       visible:
                           PersistentAuthStateService.authState.roles?.length !=
@@ -132,7 +131,7 @@ class VTProfilePage extends HookConsumerWidget {
                       ),
                     ),
 
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     AppCard(
                       child: ListTile(
                         onTap: () {
@@ -165,7 +164,7 @@ class VTProfilePage extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppSize.klheight * 2),
+                    const SizedBox(height: AppSize.kl * 2),
                   ],
                 ),
               ),

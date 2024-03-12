@@ -76,7 +76,7 @@ class VisionEventListDetails extends ConsumerWidget {
             ),
           if (model.newEventList.length == 10 && eventType != "default")
             const Padding(
-              padding: EdgeInsets.all(AppSize.klpadding),
+              padding: EdgeInsets.all(AppSize.kl),
               child: CircularProgressIndicator.adaptive(),
             ),
         ],

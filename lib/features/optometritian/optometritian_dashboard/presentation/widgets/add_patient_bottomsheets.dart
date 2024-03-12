@@ -53,7 +53,7 @@
 //           builder:
 //               (BuildContext context, void Function(void Function()) setState) {
 //             return ClipRRect(
-//               borderRadius: BorderRadius.circular(AppSize.klradius),
+//               borderRadius: BorderRadius.circular(AppSize.kl),
 //               child: Container(
 //                 padding: const EdgeInsets.all(18),
 //                 decoration: BoxDecoration(
@@ -112,7 +112,7 @@
 //           builder:
 //               (BuildContext context, void Function(void Function()) setState) {
 //             return ClipRRect(
-//               borderRadius: BorderRadius.circular(AppSize.klradius),
+//               borderRadius: BorderRadius.circular(AppSize.kl),
 //               child: Container(
 //                 padding: const EdgeInsets.all(18),
 //                 decoration: BoxDecoration(
@@ -184,7 +184,7 @@
 //                   style: applyRobotoFont(
 //                       fontSize: 16, fontWeight: FontWeight.w500),
 //                 ),
-//                 const SizedBox(height: AppSize.kmpadding),
+//                 const SizedBox(height: AppSize.km),
 //                 SizedBox(
 //                   height: AppSize.height(context) * 0.4,
 //                   child: ListView.builder(
@@ -263,7 +263,7 @@
 //                   style: applyRobotoFont(
 //                       fontSize: 16, fontWeight: FontWeight.w500),
 //                 ),
-//                 const SizedBox(height: AppSize.kmpadding),
+//                 const SizedBox(height: AppSize.km),
 //                 SizedBox(
 //                   height: AppSize.height(context) * 0.4,
 //                   child: ListView.builder(

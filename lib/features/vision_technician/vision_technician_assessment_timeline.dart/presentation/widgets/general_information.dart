@@ -24,11 +24,11 @@ class GeneralInformation extends ConsumerWidget {
     final loc = context.loc!;
     final isMobile = Responsive.isMobile(context);
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: const BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Column(
@@ -40,7 +40,7 @@ class GeneralInformation extends ConsumerWidget {
               fontSize: 16,
             ),
           ),
-          SizedBox(height: isMobile ? AppSize.kmheight : AppSize.klheight),
+          SizedBox(height: isMobile ? AppSize.km : AppSize.kl),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +54,7 @@ class GeneralInformation extends ConsumerWidget {
                       value:
                           "${model.dayOfBirth}/${model.monthOfBirth}/${model.yearOfBirth}",
                     ),
-                    const SizedBox(height: AppSize.ksheight),
+                    const SizedBox(height: AppSize.ks),
                     _InfoChip(
                       title: loc.vtAddress,
                       value: _formateAddress(
@@ -78,13 +78,13 @@ class GeneralInformation extends ConsumerWidget {
                           ? model.gender!.name.toLowerCase().capitalize()
                           : "",
                     ),
-                    const SizedBox(height: AppSize.ksheight),
+                    const SizedBox(height: AppSize.ks),
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
         ],
       ),
     );
@@ -147,8 +147,7 @@ class _InfoChip extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width:
-              Responsive.isMobile(context) ? AppSize.kswidth : AppSize.klwidth,
+          width: Responsive.isMobile(context) ? AppSize.ks : AppSize.kl,
         ),
         Flexible(
           child: Text(

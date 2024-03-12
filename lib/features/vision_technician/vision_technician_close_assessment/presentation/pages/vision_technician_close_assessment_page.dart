@@ -40,7 +40,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: AppSize.klheight * 3,
+        toolbarHeight: AppSize.kl * 3,
         leading: InkWell(
             onTap: () {
               ref.invalidate(vtCloseAssessmentHelperProvider);
@@ -135,15 +135,15 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           children: [
             CloseHeading(encountedId: patientDetails?.encounterId),
-            const SizedBox(height: AppSize.klheight),
+            const SizedBox(height: AppSize.kl),
             const MRCode(),
-            const SizedBox(height: AppSize.klheight),
+            const SizedBox(height: AppSize.kl),
             const SolutionCard(),
-            const SizedBox(height: AppSize.klheight),
+            const SizedBox(height: AppSize.kl),
             const Recommendations(),
           ],
         ),

@@ -44,12 +44,12 @@ class VoiceAssistCard extends HookConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: AppSize.kmpadding,
+        vertical: AppSize.km,
       ),
       child: DottedBorder(
         borderType: BorderType.RRect,
-        radius: const Radius.circular(AppSize.klradius),
-        padding: const EdgeInsets.all(AppSize.kspadding),
+        radius: const Radius.circular(AppSize.kl),
+        padding: const EdgeInsets.all(AppSize.ks),
         color: AppColor.grey,
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -58,7 +58,7 @@ class VoiceAssistCard extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(AppSize.kmpadding),
+                  padding: const EdgeInsets.all(AppSize.km),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     border: Border.all(
@@ -119,7 +119,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight),
+                const SizedBox(height: AppSize.kl),
                 Text(
                   text.value,
                   style: applyRobotoFont(
@@ -151,7 +151,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                   color: AppColor.green,
                 ),
               ),
-              const SizedBox(height: AppSize.kmpadding),
+              const SizedBox(height: AppSize.km),
               Text(
                 "Done! Visual acuity test is completed for the right eye.",
                 style: applyRobotoFont(
@@ -224,7 +224,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                             softWrap: true,
                           ),
                           const SizedBox(
-                            height: AppSize.kmheight,
+                            height: AppSize.km,
                           ),
                           Text(
                             context.loc!.visualAcuityLeftEyeInstructions,
@@ -235,7 +235,7 @@ class VoiceAssistCard extends HookConsumerWidget {
                             softWrap: true,
                           ),
                           const SizedBox(
-                            height: AppSize.kmheight + 2,
+                            height: AppSize.km + 2,
                           ),
                           Center(
                             child: Container(

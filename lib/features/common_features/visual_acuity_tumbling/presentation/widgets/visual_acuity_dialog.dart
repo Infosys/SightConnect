@@ -60,7 +60,7 @@ class VisualAcuityDialog {
                       softWrap: true,
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight,
+                      height: AppSize.km,
                     ),
                     Text(
                       _mapEyeInstruction(context, eye),
@@ -71,7 +71,7 @@ class VisualAcuityDialog {
                       softWrap: true,
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight + 2,
+                      height: AppSize.km + 2,
                     ),
                     Center(
                       child: Container(
@@ -179,7 +179,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                     color: AppColor.green,
                   ),
                   const SizedBox(
-                    height: AppSize.kmheight,
+                    height: AppSize.km,
                   ),
                   Text(
                     global.isTriageMode() || global.isStandaloneMode()

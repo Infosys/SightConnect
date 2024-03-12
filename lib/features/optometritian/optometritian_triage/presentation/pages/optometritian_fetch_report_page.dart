@@ -62,7 +62,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.circular(
-                  AppSize.ksradius,
+                  AppSize.ks,
                 ),
               ),
               child: Stack(
@@ -72,7 +72,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                     fit: BoxFit.fitWidth,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
+                    padding: const EdgeInsets.all(AppSize.ks),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +90,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                           ],
                         ),
                         const SizedBox(
-                          height: AppSize.ksheight,
+                          height: AppSize.ks,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                               ),
                             ),
                             const SizedBox(
-                              width: AppSize.kmwidth,
+                              width: AppSize.km,
                             ),
                             Expanded(
                               child: Text(
@@ -127,7 +127,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.klheight,
+              height: AppSize.kl,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -145,7 +145,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: AppSize.ksheight,
+                    height: AppSize.ks,
                   ),
                   Container(
                     padding:
@@ -173,7 +173,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             OptometritianReportQuestionnaireCard(report: report),
             OptometritianTumblingReportCard(
               report: report,

@@ -35,7 +35,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                 softWrap: true,
               ),
               const SizedBox(
-                height: AppSize.kmheight,
+                height: AppSize.km,
               ),
               Text(
                 AppLocalizations.of(context)!.visualAcuityRightEyeInstructions,
@@ -46,7 +46,7 @@ class VisualAcuityTumblingLeftEyeInstruction extends StatelessWidget {
                 softWrap: true,
               ),
               const SizedBox(
-                height: AppSize.kmheight + 2,
+                height: AppSize.km + 2,
               ),
               Center(
                 child: Container(

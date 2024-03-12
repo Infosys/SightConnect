@@ -19,7 +19,7 @@ class ArrowButton extends StatelessWidget {
       onTap: onTap,
       customBorder: const CircleBorder(),
       child: Container(
-        padding: const EdgeInsets.all(AppSize.kspadding),
+        padding: const EdgeInsets.all(AppSize.ks),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
