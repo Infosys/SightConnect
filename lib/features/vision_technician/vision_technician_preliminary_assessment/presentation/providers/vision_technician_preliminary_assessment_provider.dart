@@ -70,7 +70,8 @@ class VtTriageProvider extends ChangeNotifier {
   );
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
-      VTPatientDto patientDetails) async {
+    VTPatientDto patientDetails,
+  ) async {
     _preliminaryAssessmentHelperProvider.setLoading(true);
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {
       logger.d("on ivr called");
@@ -127,8 +128,8 @@ class VtTriageProvider extends ChangeNotifier {
           identifier: _vtProfile?.id,
         )
       ],
-      assessmentCode: assessment.id, //from questionnaire MS
-      assessmentVersion: assessment.version, //questionnaire MS
+      assessmentCode: assessment.id,
+      assessmentVersion: assessment.version,
       cummulativeScore: triageUrgency.toInt(),
       score: [
         {"QUESTIONNAIRE": questionnaireUrgency},

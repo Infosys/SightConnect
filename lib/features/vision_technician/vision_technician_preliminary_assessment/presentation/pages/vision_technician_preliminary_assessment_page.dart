@@ -9,8 +9,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
-import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -19,26 +17,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../common_features/triage/domain/models/triage_post_model.dart';
+import '../../../../../shared/responsive/responsive.dart';
 import '../../../vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import '../widgets/preliminary_assessment_care_plan.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-
-var visionTechnicianResultProvider = ChangeNotifierProvider.autoDispose(
-  (ref) {
-    return VisionTechnicianTriageResult();
-  },
-);
-
-class VisionTechnicianTriageResult extends ChangeNotifier {
-  TriagePostModel? _triageResponseModel;
-  TriagePostModel? get triageResponseModel => _triageResponseModel;
-
-  void setTriageResponseModel(TriagePostModel triageResponseModel) {
-    _triageResponseModel = triageResponseModel;
-    notifyListeners();
-  }
-}
 
 class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
   VTPatientDto? patientDetails;
@@ -69,14 +51,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
     }
 
     var refWatch = ref.watch(preliminaryAssessmentHelperProvider);
-    var refRead = ref.read(preliminaryAssessmentHelperProvider);
-    var canSubmit = refWatch.recommendationSelected &&
-        refWatch.visionCenterSelected &&
-        (refWatch.onIvrCall ||
-            (refWatch.visualAcuityRightEyeValueEntered &&
-                refWatch.visualAcuityLeftEyeValueEntered &&
-                refWatch.visualAcuityBothEyeValueEntered &&
-                refWatch.imagesSubmitted));
+    var canSubmit = refWatch.canSubmit();
     var isLoading = refWatch.isLoading;
 
     return Scaffold(
@@ -118,10 +93,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                                 ),
                               ),
                             );
-
-                            ref
-                                .read(visionTechnicianResultProvider)
-                                .setTriageResponseModel(triageResponseModel);
                           },
                         );
                       }
@@ -162,9 +133,9 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
               PreliminaryAssessmentIvrCall(
                 onSelectedOptionChanged: (value) {
                   if (value == loc.yesButton) {
-                    refRead.toggleIvrCall(true);
+                    refWatch.toggleIvrCall(true);
                   } else {
-                    refRead.toggleIvrCall(false);
+                    refWatch.toggleIvrCall(false);
                   }
                   selectedOption.value = value;
                 },

@@ -15,13 +15,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/model/care_plan_post_model.dart';
 
-var carePlanViewModelProvider =
-    ChangeNotifierProvider((ref) => CarePlanViewModel(
-          ref.read(carePlanProvider),
-          ref.watch(preliminaryAssessmentHelperProvider),
-          ref.watch(globalVTProvider).userId,
-          ref.watch(vtCarePlanRemoteSourceProvider),
-        ));
+var carePlanViewModelProvider = ChangeNotifierProvider(
+  (ref) => CarePlanViewModel(
+    ref.read(carePlanProvider),
+    ref.watch(preliminaryAssessmentHelperProvider),
+    ref.watch(globalVTProvider).userId,
+    ref.watch(vtCarePlanRemoteSourceProvider),
+  ),
+);
 
 class CarePlanViewModel extends ChangeNotifier {
   final VTCarePlanRemoteSource _vtCarePlanRemoteSource;
