@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/repositories/triage_urgency_repository.dart';
 
-var vtTriageProvider = ChangeNotifierProvider.autoDispose(
+var vtTriageSaveProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
     return VtTriageProvider(
       ref.watch(saveTriageUseCase),

@@ -92,9 +92,9 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                         String response = await ref
                             .read(vtCloseAssessmentViewModelProvider)
                             .submitCloseAssessmentInfo();
-                        ref.invalidate(vtTriageProvider);
+                        ref.invalidate(vtTriageSaveProvider);
                         ref.invalidate(vtCloseAssessmentHelperProvider);
-                        ref.invalidate(vtTriageProvider);
+                        ref.invalidate(vtTriageSaveProvider);
                         ref.invalidate(preliminaryAssessmentHelperProvider);
 
                         if (context.mounted) {
