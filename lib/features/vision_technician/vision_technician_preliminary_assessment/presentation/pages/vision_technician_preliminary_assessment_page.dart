@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -126,58 +127,58 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
           color: AppColor.white,
         ),
         padding: const EdgeInsets.all(AppSize.km),
-        child: Consumer(
-          builder: (context, ref, child) {
-            final triageProvider = ref.watch(visionTechnicianTriageProvider);
-            final saveProvider = ref.watch(vtTriageSaveProvider);
-            if (isLoading) {
-              return const Center(
+        child: isLoading
+            ? const Center(
                 child: CircularProgressIndicator.adaptive(),
-              );
-            }
-            return ElevatedButton(
-              onPressed: canSubmit
-                  ? () async {
-                      triageProvider.saveQuestionaireResponse();
-                      var response =
-                          await saveProvider.saveTriage(patientDetails!);
-                      response.fold(
-                        (failure) {
-                          Fluttertoast.showToast(msg: failure.errorMessage);
-                        },
-                        (triageResponseModel) {
-                          if (triageResponseModel.encounterId == null) {
-                            Fluttertoast.showToast(
-                                msg: loc.vtSomethingWentWrong);
-                            return;
-                          }
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return VisionTechnicianCloseAssessmentPage(
-                                  patientId:
-                                      patientDetails?.id.toString() ?? "",
-                                  encounterId: triageResponseModel.encounterId!,
-                                  patientName: patientDetails?.name ?? "",
+              )
+            : Consumer(
+                builder: (context, ref, child) {
+                  final navigator = Navigator.of(context);
+                  final triageProvider =
+                      ref.watch(visionTechnicianTriageProvider);
+                  final saveProvider = ref.watch(vtTriageSaveProvider);
+
+                  return ElevatedButton(
+                    onPressed: canSubmit
+                        ? () async {
+                            triageProvider.saveQuestionaireResponse();
+                            final response =
+                                await saveProvider.saveTriage(patientDetails!);
+                            response.fold(
+                              (failure) {
+                                logger.e(failure.errorMessage);
+                                Fluttertoast.showToast(
+                                    msg: failure.errorMessage);
+                              },
+                              (triageResponseModel) {
+                                navigator.push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return VisionTechnicianCloseAssessmentPage(
+                                        patientId:
+                                            patientDetails?.id.toString() ?? "",
+                                        encounterId:
+                                            triageResponseModel.encounterId,
+                                        patientName: patientDetails?.name ?? "",
+                                      );
+                                    },
+                                  ),
                                 );
                               },
-                            ),
-                          );
-                        },
-                      );
-                    }
-                  : null,
-              child: Text(
-                loc.vtSubmit,
-                style: applyRobotoFont(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: canSubmit ? AppColor.white : AppColor.grey,
-                ),
+                            );
+                          }
+                        : null,
+                    child: Text(
+                      loc.vtSubmit,
+                      style: applyRobotoFont(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: canSubmit ? AppColor.white : AppColor.grey,
+                      ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
     );
   }

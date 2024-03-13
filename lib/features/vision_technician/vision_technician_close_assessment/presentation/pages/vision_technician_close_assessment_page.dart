@@ -26,7 +26,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
   });
   final String patientName;
   final String patientId;
-  final int encounterId;
+  final int? encounterId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

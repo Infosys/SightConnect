@@ -39,8 +39,8 @@ var dioProvider = Provider(
         DioTokenInterceptor(ref, dio),
         LogInterceptor(
           requestHeader: false,
-          requestBody: false,
-          request: false,
+          requestBody: true,
+          request: true,
           responseBody: false,
           responseHeader: false,
         )
