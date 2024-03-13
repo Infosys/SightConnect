@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -33,7 +34,6 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
     final loc = context.loc!;
 
     final model = ref.watch(vtCloseAssessmentHelperProvider);
-    final canSubmit = model.mrCodeController.text.length > 3;
 
     return Scaffold(
       appBar: CustomAppbar(
@@ -95,39 +95,30 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
             SizedBox(
               width: AppSize.width(context) * 0.4,
               child: ElevatedButton(
-                onPressed: canSubmit
+                onPressed: model.canSubmit()
                     ? () async {
                         String response = await ref
                             .read(vtCloseAssessmentViewModelProvider)
                             .submitCloseAssessmentInfo();
+                        ref.invalidate(vtTriageSaveProvider);
+                        ref.invalidate(vtCloseAssessmentHelperProvider);
+                        ref.invalidate(vtTriageSaveProvider);
+                        ref.invalidate(preliminaryAssessmentHelperProvider);
                         if (!context.mounted) {
                           return;
                         }
                         if (response == "success") {
                           await successDialogue(
-                                  context, loc.vtAssessmentClosedSuccessfully)
-                              .then(
-                            (value) {
-                              ref.invalidate(vtTriageSaveProvider);
-                              ref.invalidate(vtCloseAssessmentHelperProvider);
-                              ref.invalidate(vtTriageSaveProvider);
-                              ref.invalidate(
-                                  preliminaryAssessmentHelperProvider);
-                              Navigator.of(context).popUntil((route) => false);
-                            },
-                          );
+                              context, loc.vtAssessmentClosedSuccessfully);
                         } else {
                           Fluttertoast.showToast(msg: loc.vtSomethingWentWrong);
                         }
+                        if (context.mounted) {
+                          Navigator.of(context).popUntil((route) => false);
+                        }
                       }
                     : null,
-                child: Text(
-                  loc.vtSubmit,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                child: Text(loc.vtSubmit),
               ),
             ),
           ],

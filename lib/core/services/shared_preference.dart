@@ -42,7 +42,7 @@ class SharedPreferenceService {
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 
   static Future<void> clearAll() async {
-    await _sharedPreferences.remove("language");
+    // await _sharedPreferences.remove("language");
     await _sharedPreferences.remove("fontScale");
     await _sharedPreferences.remove("dontShowVisualAcuityStatus");
     await _sharedPreferences.remove("tumblingOverInfo");

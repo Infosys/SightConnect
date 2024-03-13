@@ -146,7 +146,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                                 await saveProvider.saveTriage(patientDetails!);
                             response.fold(
                               (failure) {
-                                logger.e(failure.errorMessage);
                                 Fluttertoast.showToast(
                                     msg: failure.errorMessage);
                               },
@@ -170,11 +169,6 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                         : null,
                     child: Text(
                       loc.vtSubmit,
-                      style: applyRobotoFont(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: canSubmit ? AppColor.white : AppColor.grey,
-                      ),
                     ),
                   );
                 },

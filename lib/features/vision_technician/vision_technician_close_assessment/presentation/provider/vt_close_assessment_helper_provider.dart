@@ -55,8 +55,6 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   void goToNextStep() {
     _currentStep = _currentStep + 1;
     if (_currentEye == Eye.left) {
@@ -114,10 +112,15 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     }
 
     logger.d(_selectedGoalOutComeList);
+    notifyListeners();
   }
 
   void setLoading(bool value) {
     _loading = value;
     notifyListeners();
+  }
+
+  bool canSubmit() {
+    return _selectedGoalOutComeList.isNotEmpty;
   }
 }
