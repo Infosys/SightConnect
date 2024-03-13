@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
@@ -127,7 +128,7 @@ class TriageProvider extends ChangeNotifier {
       /* "${starttime.toIso8601String()}Z" */
 
       source: getSource(),
-      sourceVersion: AppText.appVersion,
+      sourceVersion: AppInfoService.version,
       incompleteSection: _getInclompleteSection(currentStep),
       imagingSelection: _removeInvalidImagingSelection(imageSelection),
       observations: observations,
@@ -230,7 +231,7 @@ class TriageProvider extends ChangeNotifier {
       issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
 
       source: getSource(),
-      sourceVersion: AppText.appVersion,
+      sourceVersion: AppInfoService.version,
       incompleteSection: _getInclompleteSection(currentStep),
       imagingSelection: _removeInvalidImagingSelection(imageSelection),
       observations: observations,

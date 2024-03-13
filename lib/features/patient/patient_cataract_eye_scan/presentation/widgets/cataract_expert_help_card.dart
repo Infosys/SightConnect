@@ -9,7 +9,7 @@ class ExperthelpCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kspadding + 2),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.ks + 2),
       child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -22,8 +22,7 @@ class ExperthelpCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: AppSize.kspadding + 2,
-                    horizontal: AppSize.kmpadding),
+                    vertical: AppSize.ks + 2, horizontal: AppSize.km),
                 child: Text(
                   "Get an Expert's Help",
                   style: applyFiraSansFont(
@@ -32,7 +31,7 @@ class ExperthelpCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: AppSize.kspadding, horizontal: AppSize.kmpadding),
+                    vertical: AppSize.ks, horizontal: AppSize.km),
                 child: Text(
                   "Consult with the best Eye Specialist in your area for the\nbest diagnosis",
                   style: applyFiraSansFont(
@@ -43,7 +42,7 @@ class ExperthelpCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: AppSize.kspadding, horizontal: AppSize.kmpadding),
+                    vertical: AppSize.ks, horizontal: AppSize.km),
                 child: Row(
                   children: [
                     Expanded(

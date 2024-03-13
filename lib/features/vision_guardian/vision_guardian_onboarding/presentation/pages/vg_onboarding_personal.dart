@@ -12,10 +12,10 @@ class VgOnboardingPersonal extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const SizedBox(
-          height: AppSize.kmheight,
+          height: AppSize.km,
         ),
         const VgOnboardingPersonalNameCard(),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
         Text(
           "Address",
           style: applyFiraSansFont(fontWeight: FontWeight.w500),

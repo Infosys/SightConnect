@@ -41,18 +41,18 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
       onCameraCreated: (controller, paint, distance, isLoading) {
         return Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppSize.klradius),
+            borderRadius: BorderRadius.circular(AppSize.kl),
             color: AppColor.white,
           ),
           child: Container(
             height: 200,
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.kmpadding - 3,
-              vertical: AppSize.kmpadding,
+              horizontal: AppSize.km - 3,
+              vertical: AppSize.km,
             ),
             // add innershadow
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSize.klradius),
+              borderRadius: BorderRadius.circular(AppSize.kl),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,8 +83,7 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
                 Align(
                   alignment: Alignment.center,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kmpadding),
+                    padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -132,12 +131,12 @@ class _TopReadingCardViewState extends ConsumerState<TopReadingCard> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: AppSize.kmheight),
+                        const SizedBox(height: AppSize.km),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
               ],
             ),
           ),

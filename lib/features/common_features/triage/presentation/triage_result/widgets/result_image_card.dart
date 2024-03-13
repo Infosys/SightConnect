@@ -70,7 +70,7 @@ class ResultImageCard extends ConsumerWidget {
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(height: AppSize.kmheight),
+              const SizedBox(height: AppSize.km),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -117,7 +117,7 @@ class ResultImageCard extends ConsumerWidget {
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(height: AppSize.kmheight),
+              const SizedBox(height: AppSize.km),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -211,12 +211,12 @@ class _EyeScanImage extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         image == null
             ? Center(child: Text(loc.imageNotCapturedToastMessage))
             : Flexible(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  borderRadius: BorderRadius.circular(AppSize.ks),
                   child: AppNetworkImage(
                     imageUrl: image!,
                     shapeCircle: false,

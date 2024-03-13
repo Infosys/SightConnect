@@ -29,16 +29,16 @@ class TeammatesDataCards extends HookConsumerWidget {
     var isEdit = useState<bool>(true);
     final loc = context.loc!;
     return Padding(
-      padding: const EdgeInsets.all(AppSize.kspadding / 4),
+      padding: const EdgeInsets.all(AppSize.ks / 4),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.ksradius),
+          borderRadius: BorderRadius.circular(AppSize.ks),
           color: AppColor.white,
           border: Border.all(
             color: AppColor.grey.withOpacity(0.5),
           ),
         ),
-        padding: const EdgeInsets.all(AppSize.kspadding),
+        padding: const EdgeInsets.all(AppSize.ks),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +60,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                         : AppNetworkImage(imageUrl: data["profilePhoto"]),
                   ),
                   const SizedBox(
-                    width: AppSize.kswidth,
+                    width: AppSize.ks,
                   ),
                   Transform.translate(
                     offset: const Offset(0, -5),
@@ -131,7 +131,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: AppSize.ksheight,
+                          height: AppSize.ks,
                         ),
                         Text(
                           mobileController.value.text == ''
@@ -170,7 +170,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.klheight,
+                      height: AppSize.kl,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -190,7 +190,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.klheight,
+                      height: AppSize.kl,
                     ),
                   ],
                 ),

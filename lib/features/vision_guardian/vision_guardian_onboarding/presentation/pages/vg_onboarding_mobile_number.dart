@@ -14,14 +14,14 @@ class VgOnboardingMobileNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(AppSize.klpadding),
+        padding: const EdgeInsets.all(AppSize.kl),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Row(
                   children: [
                     Container(
@@ -37,7 +37,7 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: AppSize.kmwidth,
+                      width: AppSize.km,
                     ),
                     Text(
                       'Eye Care For All',
@@ -49,7 +49,7 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Text(
                   'Verify Phone Number',
                   style: applyFiraSansFont(
@@ -58,12 +58,12 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                     fontSize: 19,
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 TextField(
                     decoration: const InputDecoration(
                       labelText: 'Mobile Number',
-                      contentPadding: EdgeInsets.only(
-                          top: AppSize.kmpadding, bottom: AppSize.kmpadding),
+                      contentPadding:
+                          EdgeInsets.only(top: AppSize.km, bottom: AppSize.km),
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly]),
@@ -74,7 +74,7 @@ class VgOnboardingMobileNumber extends StatelessWidget {
               children: [
                 SizedBox(
                   width: AppSize.width(context),
-                  height: AppSize.klheight * 1.8,
+                  height: AppSize.kl * 1.8,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(
@@ -91,7 +91,7 @@ class VgOnboardingMobileNumber extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight,
+                  height: AppSize.km,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

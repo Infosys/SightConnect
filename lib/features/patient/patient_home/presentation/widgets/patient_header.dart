@@ -23,7 +23,7 @@ class PatientHeader extends HookWidget {
     var initialPage = useState<int>(0);
     final displayData = getCarouselData(context.loc!);
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+      margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -50,7 +50,7 @@ class PatientHeader extends HookWidget {
                     fit: StackFit.expand,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(AppSize.kmradius),
+                        borderRadius: BorderRadius.circular(AppSize.km),
                         child: Image.asset(
                           data["image"],
                           fit: BoxFit.cover,
@@ -58,8 +58,8 @@ class PatientHeader extends HookWidget {
                       ),
                       Container(
                         padding: EdgeInsets.only(
-                          left: AppSize.kmpadding,
-                          top: AppSize.kmpadding,
+                          left: AppSize.km,
+                          top: AppSize.km,
                           right: AppSize.width(context) * 0.3,
                         ),
                         child: Column(
@@ -76,7 +76,7 @@ class PatientHeader extends HookWidget {
                                 color: AppColor.white,
                               ),
                             ),
-                            const SizedBox(height: AppSize.ksheight),
+                            const SizedBox(height: AppSize.ks),
                             AutoSizeText(
                               data["description"],
                               maxLines: 3,
@@ -87,7 +87,7 @@ class PatientHeader extends HookWidget {
                                 color: AppColor.white,
                               ),
                             ),
-                            const SizedBox(height: AppSize.ksheight),
+                            const SizedBox(height: AppSize.ks),
                             OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 visualDensity:

@@ -30,7 +30,7 @@ Widget vgEventHeaderChips(ValueNotifier<int> isSelected, BuildContext context,
                 }
               },
               child: Container(
-                margin: const EdgeInsets.only(right: AppSize.kspadding),
+                margin: const EdgeInsets.only(right: AppSize.ks),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
                   vertical: 5,
@@ -45,7 +45,7 @@ Widget vgEventHeaderChips(ValueNotifier<int> isSelected, BuildContext context,
                       ? const Color(0xFFC9DAFD)
                       : AppColor.white,
                   borderRadius: BorderRadius.circular(
-                    AppSize.ksradius,
+                    AppSize.ks,
                   ),
                 ),
                 child: Center(

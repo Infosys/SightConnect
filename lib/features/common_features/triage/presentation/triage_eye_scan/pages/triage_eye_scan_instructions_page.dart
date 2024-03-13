@@ -76,7 +76,7 @@ class TriageEyeScanInstructions extends ConsumerWidget {
             ],
           ),
           body: Padding(
-            padding: const EdgeInsets.all(AppSize.kspadding),
+            padding: const EdgeInsets.all(AppSize.ks),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -87,13 +87,13 @@ class TriageEyeScanInstructions extends ConsumerWidget {
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(
                   loc.eyeScanHowToPerform,
                   style: applyRobotoFont(
                       fontSize: 18, fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 Expanded(
                   child: TriageEyeScanCarouselPage(
                     onPressed: () async {

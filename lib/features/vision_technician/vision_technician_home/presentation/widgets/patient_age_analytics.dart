@@ -37,11 +37,10 @@ class PatientAgeAnalytics extends ConsumerWidget {
         children: [
           Container(
             width: AppSize.width(context) * 0.45,
-            padding: EdgeInsets.all(
-                isMobile ? AppSize.kspadding : AppSize.kmpadding),
+            padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
             decoration: BoxDecoration(
               color: AppColor.white,
-              borderRadius: BorderRadius.circular(AppSize.kmradius),
+              borderRadius: BorderRadius.circular(AppSize.km),
               boxShadow: applyLightShadow(),
             ),
             child: Column(
@@ -62,9 +61,8 @@ class PatientAgeAnalytics extends ConsumerWidget {
                         child: PieChart(
                           dataMap: dataMapAge,
                           animationDuration: const Duration(milliseconds: 800),
-                          chartRadius: isMobile
-                              ? AppSize.ksradius * 5
-                              : AppSize.ksradius * 10,
+                          chartRadius:
+                              isMobile ? AppSize.ks * 5 : AppSize.ks * 10,
                           colorList: colorsAge,
                           initialAngleInDegree: 270,
                           chartType: ChartType.ring,
@@ -103,11 +101,10 @@ class PatientAgeAnalytics extends ConsumerWidget {
           ),
           Container(
             width: AppSize.width(context) * 0.45,
-            padding: EdgeInsets.all(
-                isMobile ? AppSize.kspadding : AppSize.kmpadding),
+            padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
             decoration: BoxDecoration(
               color: AppColor.white,
-              borderRadius: BorderRadius.circular(AppSize.kmradius),
+              borderRadius: BorderRadius.circular(AppSize.km),
               boxShadow: applyLightShadow(),
             ),
             child: Column(
@@ -122,7 +119,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
                 ),
                 // Spacer(),
                 const SizedBox(
-                  height: AppSize.ksheight,
+                  height: AppSize.ks,
                 ),
                 Flexible(
                   child: Row(

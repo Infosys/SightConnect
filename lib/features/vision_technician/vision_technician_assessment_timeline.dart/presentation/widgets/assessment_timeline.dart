@@ -51,13 +51,13 @@ class AssessmentTimeline extends ConsumerWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 Container(
-                  padding: const EdgeInsets.all(AppSize.kmpadding),
+                  padding: const EdgeInsets.all(AppSize.km),
                   decoration: const BoxDecoration(
                     color: AppColor.white,
                     borderRadius: BorderRadius.all(
-                      Radius.circular(AppSize.kmradius - 5),
+                      Radius.circular(AppSize.km - 5),
                     ),
                   ),
                   child: Column(
@@ -120,9 +120,9 @@ class AssessmentTimeline extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
-                      const SizedBox(height: AppSize.klheight),
+                      const SizedBox(height: AppSize.kl),
                       const Divider(thickness: 1, color: AppColor.grey),
-                      const SizedBox(height: AppSize.klheight),
+                      const SizedBox(height: AppSize.kl),
                       AssessmentTimelineView(data, patientDetail!),
                     ],
                   ),

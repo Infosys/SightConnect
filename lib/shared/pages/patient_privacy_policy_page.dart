@@ -44,7 +44,7 @@ class PatientPrivacyPolicyPage extends HookWidget {
           child: Container(
             decoration: BoxDecoration(
               color: AppColor.white,
-              borderRadius: BorderRadius.circular(AppSize.kmradius),
+              borderRadius: BorderRadius.circular(AppSize.km),
             ),
             padding: const EdgeInsets.all(14),
             child: Column(

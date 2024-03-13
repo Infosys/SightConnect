@@ -35,7 +35,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(
-          AppSize.klpadding,
+          AppSize.kl,
         ),
         child: Column(
           children: [
@@ -45,8 +45,8 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSize.klpadding,
-                      horizontal: AppSize.kmpadding,
+                      vertical: AppSize.kl,
+                      horizontal: AppSize.km,
                     ),
                     child: Text(
                       loc.triageOtherSymptomsQuestion,
@@ -57,11 +57,11 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(
-                      AppSize.klpadding,
+                      AppSize.kl,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        AppSize.ksradius,
+                        AppSize.ks,
                       ),
                       border: Border.all(
                         color: AppColor.grey.withOpacity(
@@ -93,12 +93,12 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                   const Spacer(),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSize.kspadding,
-                      horizontal: AppSize.kspadding,
+                      vertical: AppSize.ks,
+                      horizontal: AppSize.ks,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        AppSize.klradius * 10,
+                        AppSize.kl * 10,
                       ),
                       border: Border.all(
                         color: AppColor.grey.withOpacity(
@@ -144,7 +144,7 @@ class TriageQuestionnaireOtherSymptomPage extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(
-                    width: AppSize.kmpadding,
+                    width: AppSize.km,
                   ),
                   Expanded(
                     child: OutlinedButton(

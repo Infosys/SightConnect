@@ -27,11 +27,10 @@ class PatientSymptomsAnalytics extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
         width: AppSize.width(context) * 0.9,
-        padding:
-            EdgeInsets.all(isMobile ? AppSize.kspadding : AppSize.kmpadding),
+        padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
         decoration: BoxDecoration(
           color: AppColor.white,
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
           boxShadow: applyLightShadow(),
         ),
         child: Column(
@@ -53,9 +52,7 @@ class PatientSymptomsAnalytics extends ConsumerWidget {
                     child: PieChart(
                       dataMap: dataMapSymptom,
                       animationDuration: const Duration(milliseconds: 800),
-                      chartRadius: isMobile
-                          ? AppSize.ksradius * 6
-                          : AppSize.ksradius * 11,
+                      chartRadius: isMobile ? AppSize.ks * 6 : AppSize.ks * 11,
                       colorList: colorsSymptom,
                       initialAngleInDegree: 270,
                       chartType: ChartType.ring,
@@ -77,12 +74,11 @@ class PatientSymptomsAnalytics extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSize.kswidth),
+                  const SizedBox(width: AppSize.ks),
                   Expanded(
                     child: Wrap(
-                      runSpacing:
-                          isMobile ? AppSize.ksheight : AppSize.kmheight,
-                      spacing: AppSize.kmwidth,
+                      runSpacing: isMobile ? AppSize.ks : AppSize.km,
+                      spacing: AppSize.km,
                       children: [
                         SymptomsCard(
                           color: colorsSymptom[0],

@@ -22,8 +22,7 @@ class GoodToKnowCardList extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Text(
                   "Knowledge Center",
                   style: applyFiraSansFont(

@@ -34,14 +34,14 @@ class VGSlide1 extends ConsumerWidget {
 
     return Container(
       margin: const EdgeInsets.symmetric(
-        vertical: AppSize.kspadding,
+        vertical: AppSize.ks,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             width: AppSize.width(context) * 0.45,
-            padding: const EdgeInsets.all(AppSize.kspadding),
+            padding: const EdgeInsets.all(AppSize.ks),
             decoration: boxDecoration,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +125,7 @@ class VGSlide1 extends ConsumerWidget {
           ),
           Container(
             width: AppSize.width(context) * 0.45,
-            padding: const EdgeInsets.all(AppSize.kspadding),
+            padding: const EdgeInsets.all(AppSize.ks),
             decoration: boxDecoration,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +169,6 @@ class VGSlide1 extends ConsumerWidget {
 
 final boxDecoration = BoxDecoration(
   color: AppColor.white,
-  borderRadius: BorderRadius.circular(AppSize.kmradius),
+  borderRadius: BorderRadius.circular(AppSize.km),
   boxShadow: applyLightShadow(),
 );

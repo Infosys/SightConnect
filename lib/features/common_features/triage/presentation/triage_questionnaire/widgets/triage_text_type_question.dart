@@ -22,7 +22,7 @@ class TriageTextTypeQuestion extends ConsumerWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(
-          AppSize.klpadding,
+          AppSize.kl,
         ),
         child: Column(
           children: [
@@ -32,8 +32,8 @@ class TriageTextTypeQuestion extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      vertical: AppSize.klpadding,
-                      horizontal: AppSize.kmpadding,
+                      vertical: AppSize.kl,
+                      horizontal: AppSize.km,
                     ),
                     child: Text(
                       question.text ?? '',
@@ -44,11 +44,11 @@ class TriageTextTypeQuestion extends ConsumerWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(
-                      AppSize.klpadding,
+                      AppSize.kl,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        AppSize.ksradius,
+                        AppSize.ks,
                       ),
                       border: Border.all(
                         color: AppColor.grey.withOpacity(

@@ -30,7 +30,7 @@ class TriageStepsIntroPage extends ConsumerWidget {
           builder: (context) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSize.klradius),
+                borderRadius: BorderRadius.circular(AppSize.kl),
               ),
               title: Text(loc.areYouSure),
               content: Text(loc.triageExitConfirmation),

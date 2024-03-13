@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
@@ -161,7 +161,7 @@ class AppDrawer extends HookWidget {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           const HelpAndSupportPage(
-                                        helpLine: AppText.tollFreeNumber,
+                                        helpLine: AppInfoService.tollFreeNumber,
                                       ),
                                     ),
                                   );
@@ -269,12 +269,12 @@ class AppDrawer extends HookWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSize.klheight * 2),
+                  const SizedBox(height: AppSize.kl * 2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Version: ${AppInfoService.version}",
+                        "Version: ${AppInfoService.appVersion}",
                         style: applyRobotoFont(
                           fontWeight: FontWeight.normal,
                           color: AppColor.grey,
@@ -283,7 +283,7 @@ class AppDrawer extends HookWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSize.klheight * 2)
+                  const SizedBox(height: AppSize.kl * 2)
                 ],
               ),
             ),

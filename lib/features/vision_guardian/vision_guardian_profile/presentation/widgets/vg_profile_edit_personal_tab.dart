@@ -24,7 +24,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
 
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,7 +40,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                     width: AppSize.width(context) * 0.3,
                     height: 120,
                     child: Container(
-                      padding: const EdgeInsets.all(AppSize.kmpadding),
+                      padding: const EdgeInsets.all(AppSize.km),
                       decoration: BoxDecoration(
                         border: Border.all(width: 1, color: AppColor.darkGrey),
                         borderRadius: const BorderRadius.all(
@@ -55,7 +55,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(AppSize.kmpadding),
+                    padding: const EdgeInsets.all(AppSize.km),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,19 +74,19 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.kmheight * 1.5,
+              height: AppSize.km * 1.5,
             ),
             Text(
               "Personal Details",
               style: applyFiraSansFont(fontSize: 18),
             ),
             const SizedBox(
-              height: AppSize.kmheight * 1.5,
+              height: AppSize.km * 1.5,
             ),
             Card(
               elevation: 1,
               child: Container(
-                padding: const EdgeInsets.all(AppSize.klpadding),
+                padding: const EdgeInsets.all(AppSize.kl),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -108,7 +108,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.middleName.value.text,
@@ -129,7 +129,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.lastName.value.text,
@@ -150,7 +150,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -224,7 +224,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.abhaid.text,
@@ -245,7 +245,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.mobileNumber.text,
@@ -266,7 +266,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.abhaid.text,
@@ -287,7 +287,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.name.text,
@@ -312,7 +312,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Text(
               "Address",
@@ -321,7 +321,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
             Card(
               elevation: 1,
               child: Container(
-                padding: const EdgeInsets.all(AppSize.klpadding),
+                padding: const EdgeInsets.all(AppSize.kl),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -343,7 +343,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.subDistrict.value.text,
@@ -364,7 +364,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.district.value.text,
@@ -385,7 +385,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.city.text,
@@ -406,7 +406,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.state.text,
@@ -427,7 +427,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.pincode.text,
@@ -452,7 +452,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Text(
               "Work Location",
@@ -461,7 +461,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
             Card(
               elevation: 1,
               child: Container(
-                padding: const EdgeInsets.all(AppSize.klpadding),
+                padding: const EdgeInsets.all(AppSize.kl),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -483,7 +483,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.name.value.text,
@@ -504,7 +504,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.name.value.text,
@@ -525,7 +525,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.abhaid.text,
@@ -546,7 +546,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.abhaid.text,
@@ -567,7 +567,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.abhaid.text,
@@ -588,7 +588,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.kmheight * 1.5,
+                      height: AppSize.km * 1.5,
                     ),
                     TextFormField(
                       initialValue: data.abhaid.text,
@@ -613,7 +613,7 @@ class VgProfileEditPersonalTab extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Row(
               children: [

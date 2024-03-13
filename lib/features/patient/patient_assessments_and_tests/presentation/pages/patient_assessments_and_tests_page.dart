@@ -94,7 +94,7 @@ class _AssessmentsAndTestsPageState
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: AppSize.klheight * 3.5),
+                    const SizedBox(height: AppSize.kl * 3.5),
                     const Row(
                       children: [
                         PatientDropDownWidget(),

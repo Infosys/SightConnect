@@ -17,12 +17,12 @@ class PriorityNotificationCard extends StatelessWidget {
       ),
       color: AppColor.primary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        borderRadius: BorderRadius.circular(AppSize.ks),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        borderRadius: BorderRadius.circular(AppSize.ks),
         child: Container(
-          padding: const EdgeInsets.all(AppSize.kspadding),
+          padding: const EdgeInsets.all(AppSize.ks),
           width: Responsive.isMobile(context)
               ? AppSize.width(context) * 0.8
               : AppSize.width(context) * 0.4,
@@ -50,7 +50,7 @@ class PriorityNotificationCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSize.kmwidth),
+                  const SizedBox(width: AppSize.km),
                   Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -64,7 +64,7 @@ class PriorityNotificationCard extends StatelessWidget {
                             color: AppColor.white,
                           ),
                         ),
-                        const SizedBox(height: AppSize.ksheight / 3),
+                        const SizedBox(height: AppSize.ks / 3),
                         Text(
                           data["profession"],
                           style: applyRobotoFont(
@@ -84,13 +84,13 @@ class PriorityNotificationCard extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
               Container(
-                padding: const EdgeInsets.all(AppSize.kspadding),
+                padding: const EdgeInsets.all(AppSize.ks),
                 decoration: BoxDecoration(
                   color: AppColor.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(
-                    AppSize.ksradius / 2,
+                    AppSize.ks / 2,
                   ),
                 ),
                 child: Text(

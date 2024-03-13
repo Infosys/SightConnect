@@ -21,14 +21,14 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(AppSize.klpadding),
+        padding: const EdgeInsets.all(AppSize.kl),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Row(
                   children: [
                     Container(
@@ -44,7 +44,7 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
                       ),
                     ),
                     const SizedBox(
-                      width: AppSize.kmwidth,
+                      width: AppSize.km,
                     ),
                     Text(
                       'Eye Care For All',
@@ -56,7 +56,7 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Text(
                   'Verify Phone Number',
                   style: applyFiraSansFont(
@@ -65,7 +65,7 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
                     fontSize: 19,
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Text(
                   'Please enter the OTP we have sent to ********90',
                   style: applyRobotoFont(
@@ -74,7 +74,7 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Center(
                   child: VerificationCode(
                     padding: const EdgeInsets.all(8),
@@ -97,7 +97,7 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
                     },
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight * 1.2),
+                const SizedBox(height: AppSize.kl * 1.2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -114,7 +114,7 @@ class _VGOnboardingOtpState extends State<VGOnboardingOtp> {
             ),
             SizedBox(
               width: AppSize.width(context),
-              height: AppSize.klheight * 1.8,
+              height: AppSize.kl * 1.8,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(

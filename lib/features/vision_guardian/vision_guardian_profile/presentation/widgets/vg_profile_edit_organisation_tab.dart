@@ -16,7 +16,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
         Card(
           elevation: 1,
           child: Container(
-            padding: const EdgeInsets.all(AppSize.klpadding),
+            padding: const EdgeInsets.all(AppSize.kl),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,7 +40,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.orgID.text,
@@ -60,7 +60,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.visionCenterCode.text,
@@ -81,7 +81,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.doorNo.text,
@@ -102,7 +102,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.street.text,
@@ -123,7 +123,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.subDistrict.text,
@@ -144,7 +144,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.district.text,
@@ -165,7 +165,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.city.text,
@@ -186,7 +186,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.state.text,
@@ -207,7 +207,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.kmheight * 1.5,
+                  height: AppSize.km * 1.5,
                 ),
                 TextFormField(
                   initialValue: data.pincode.text,
@@ -232,7 +232,7 @@ class VgProfileEditOrganisationTab extends ConsumerWidget {
           ),
         ),
         const SizedBox(
-          height: AppSize.kmheight,
+          height: AppSize.km,
         ),
         Row(
           children: [

@@ -39,31 +39,31 @@ class VisionGuardianHomePage extends ConsumerWidget {
         actions: const [],
       ),
       body: UpgradeAlert(
-          dialogStyle: Platform.isIOS
-              ? UpgradeDialogStyle.cupertino
-              : UpgradeDialogStyle.material,
-          showIgnore: false,
-          showLater: false,
-          shouldPopScope: () => false,
-          canDismissDialog: false,
-          onUpdate: () {
-            return true;
+        dialogStyle: Platform.isIOS
+            ? UpgradeDialogStyle.cupertino
+            : UpgradeDialogStyle.material,
+        showIgnore: false,
+        showLater: false,
+        shouldPopScope: () => false,
+        canDismissDialog: false,
+        onUpdate: () {
+          return true;
+        },
+        upgrader: Upgrader(
+          durationUntilAlertAgain: const Duration(milliseconds: 800),
+          willDisplayUpgrade: ({
+            appStoreVersion,
+            required display,
+            installedVersion,
+            minAppVersion,
+          }) {
+            logger.d({
+              "display : $display",
+              "appStoreVersion : $appStoreVersion",
+              "installedVersion : $installedVersion",
+            });
           },
-          upgrader: Upgrader(
-            durationUntilAlertAgain: const Duration(milliseconds: 800),
-            willDisplayUpgrade: ({
-              appStoreVersion,
-              required display,
-              installedVersion,
-              minAppVersion,
-            }) {
-              logger.d({
-                "display : $display",
-                "appStoreVersion : $appStoreVersion",
-                "installedVersion : $installedVersion",
-              });
-            },
-          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,15 +75,15 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 decoration: const BoxDecoration(
                   color: AppColor.primary,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(AppSize.kmradius),
-                    bottomRight: Radius.circular(AppSize.kmradius),
+                    bottomLeft: Radius.circular(AppSize.km),
+                    bottomRight: Radius.circular(AppSize.km),
                   ),
                 ),
                 child: Stack(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: AppSize.kmpadding,
+                        left: AppSize.km,
                       ),
                       child: Text(
                         "${loc.vgWelcome}  ${ref.watch(globalVGProvider).name}",
@@ -116,8 +116,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
               ),
               SizedBox(height: AppSize.height(context) * 0.06),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -128,7 +127,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                       ),
                     ),
                     const VisionGuardianServicesCardList(),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -167,7 +166,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                     const VisionEventListDetails(
                       eventType: "default",
                     ),
-                    const SizedBox(height: AppSize.klheight * 4)
+                    const SizedBox(height: AppSize.kl * 4)
                   ],
                 ),
               ),

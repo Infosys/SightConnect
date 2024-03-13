@@ -122,7 +122,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -131,7 +131,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +145,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(
-                height: AppSize.ksheight,
+                height: AppSize.ks,
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -183,7 +183,7 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
         ],
       ),
     );

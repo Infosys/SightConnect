@@ -48,15 +48,15 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             children: [
               TimelineProfile(model: patientDetails!),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               GeneralInformation(model: patientDetails!),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
               AssessmentTimelineCard(model: patientDetails!),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
             ],
           ),
         ),

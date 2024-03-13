@@ -30,15 +30,14 @@ class VisionGuardianPatientSearchBar extends ConsumerWidget {
         suffixIcon: Container(
           decoration: BoxDecoration(
             color: AppColor.primary.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(AppSize.klradius),
+            borderRadius: BorderRadius.circular(AppSize.kl),
           ),
           child: const Icon(
             CupertinoIcons.mic,
             color: AppColor.grey,
           ),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
+        contentPadding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
         filled: true,
         fillColor: AppColor.white,
         hintText: 'Search by patient ID, Name',
@@ -48,7 +47,7 @@ class VisionGuardianPatientSearchBar extends ConsumerWidget {
         ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.klradius * 3),
+          borderRadius: BorderRadius.circular(AppSize.kl * 3),
         ),
       ),
     );

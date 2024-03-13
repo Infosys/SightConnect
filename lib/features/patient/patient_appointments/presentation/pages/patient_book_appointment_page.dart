@@ -46,8 +46,8 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.only(
-            left: AppSize.kmpadding,
-            right: AppSize.kmpadding,
+            left: AppSize.km,
+            right: AppSize.km,
             top: AppSize.height(context) * 0.12,
           ),
           child: Column(
@@ -58,7 +58,7 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
                 style: applyFiraSansFont(fontSize: 18),
               ),
               const SizedBox(
-                height: AppSize.klelevation,
+                height: AppSize.kl,
               ),
               ref.watch(getPatientProfileProvider).when(data: (patient) {
                 return AppointmentPatientSelector(
@@ -74,25 +74,25 @@ class PatientBookAppointmentPage extends HookConsumerWidget {
               }, loading: () {
                 return Container();
               }),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               const EyeProblemType(),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               Text(
                 "Consultation Type",
                 style: applyFiraSansFont(fontSize: 18),
               ),
               const ConsultationType(),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               Visibility(
                 visible:
                     model.selectedConsultationType == "In Clinic Consultation",
                 child: const NearbyEyeClinic(),
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               const AppointmentDateSelector(),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               const SelectTime(),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               StreamBuilder(
                 stream: ref.read(appointmentRemoteSourceProvider).doctorStream,
                 builder: (context, snapshot) {

@@ -340,7 +340,7 @@ class UpdateTriageAlertBoxListOptoion extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: AppSize.kmwidth,
+            width: AppSize.km,
           ),
           Container(
             padding: const EdgeInsets.all(4),

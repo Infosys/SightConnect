@@ -89,8 +89,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
                   horizontal: 20,
                 )
               : const EdgeInsets.symmetric(
-                  horizontal: AppSize.klpadding,
-                  vertical: AppSize.kmpadding,
+                  horizontal: AppSize.kl,
+                  vertical: AppSize.km,
                 ),
         ),
       ),
@@ -108,8 +108,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
                   horizontal: 20,
                 )
               : const EdgeInsets.symmetric(
-                  horizontal: AppSize.klpadding,
-                  vertical: AppSize.kmpadding,
+                  horizontal: AppSize.kl,
+                  vertical: AppSize.km,
                 ),
         ),
       ),
@@ -122,7 +122,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor.lightGrey),
-            borderRadius: BorderRadius.all(Radius.circular(AppSize.kmradius)),
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.km)),
           ),
           contentPadding: EdgeInsets.zero,
         ),
@@ -134,28 +134,28 @@ class AppTheme extends StateNotifier<ThemeMode> {
         prefixIconColor: AppColor.primary,
         suffixIconColor: AppColor.primary,
         contentPadding: const EdgeInsets.symmetric(
-          vertical: AppSize.kmpadding,
-          horizontal: AppSize.klpadding,
+          vertical: AppSize.km,
+          horizontal: AppSize.kl,
         ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.lightGrey),
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.lightGrey),
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.red),
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.primary),
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColor.red),
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
         ),
       ),
     );

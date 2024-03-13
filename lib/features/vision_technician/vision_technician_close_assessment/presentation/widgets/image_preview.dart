@@ -27,7 +27,7 @@ class ImagePreview extends ConsumerWidget {
         .sentenceCase();
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(16),
@@ -89,11 +89,11 @@ class ImagePreview extends ConsumerWidget {
                   children: [
                     Icon(
                       Icons.arrow_back,
-                      size: AppSize.klheight,
+                      size: AppSize.kl,
                       color:
                           currentStep == 0 ? AppColor.grey : AppColor.primary,
                     ),
-                    const SizedBox(width: AppSize.kswidth / 2),
+                    const SizedBox(width: AppSize.ks / 2),
                     Text(
                       loc.vtBack,
                       style: applyRobotoFont(
@@ -106,7 +106,7 @@ class ImagePreview extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               //submit
               Expanded(
                 child: ElevatedButton(
@@ -144,7 +144,7 @@ class ImagePreview extends ConsumerWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               //Next
               TextButton(
                 onPressed: () {
@@ -166,10 +166,10 @@ class ImagePreview extends ConsumerWidget {
                             currentStep == 2 ? AppColor.grey : AppColor.primary,
                       ),
                     ),
-                    const SizedBox(width: AppSize.kswidth / 2),
+                    const SizedBox(width: AppSize.ks / 2),
                     Icon(
                       Icons.arrow_forward,
-                      size: AppSize.klheight,
+                      size: AppSize.kl,
                       color:
                           currentStep == 2 ? AppColor.grey : AppColor.primary,
                     ),

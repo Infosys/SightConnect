@@ -26,9 +26,9 @@ class AssessmentOverallDescriptionCard extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         AppCard(
-          padding: AppSize.klpadding,
+          padding: AppSize.kl,
           enableBorder: true,
           borderThickness: 2,
           color: _recommendationColor(cumulativeSeverity),

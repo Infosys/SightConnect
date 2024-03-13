@@ -91,18 +91,17 @@ class _OptometritianDashboardPageState
             Container(
               height: 300,
               width: double.infinity,
-              padding: const EdgeInsets.all(AppSize.kmpadding),
+              padding: const EdgeInsets.all(AppSize.km),
               decoration: const BoxDecoration(
                 color: AppColor.primary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(AppSize.klradius),
-                  bottomRight: Radius.circular(AppSize.klradius),
+                  bottomLeft: Radius.circular(AppSize.kl),
+                  bottomRight: Radius.circular(AppSize.kl),
                 ),
               ),
             ),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -184,7 +183,7 @@ class _OptometritianDashboardPageState
             Positioned(
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmpadding,
+                  horizontal: AppSize.km,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,7 +207,7 @@ class _OptometritianDashboardPageState
                         loc.today,
                       ),
                     ),
-                    const SizedBox(height: AppSize.klheight * 4),
+                    const SizedBox(height: AppSize.kl * 4),
                     Text(
                       loc.services,
                       style: applyFiraSansFont(
@@ -216,7 +215,7 @@ class _OptometritianDashboardPageState
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: AppSize.klheight),
+                    const SizedBox(height: AppSize.kl),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -302,7 +301,7 @@ class _OptometritianDashboardPageState
                       ],
                     ),
                     const Spacer(),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                   ],
                 ),
               ),
@@ -346,11 +345,11 @@ class InfoCardOptometric extends StatelessWidget {
     final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding, vertical: AppSize.kselevation + 2),
+          horizontal: AppSize.km, vertical: AppSize.ks + 2),
       decoration: BoxDecoration(
           color: AppColor.white.withOpacity(0.9),
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppSize.kmradius + 2),
+            Radius.circular(AppSize.km + 2),
           ),
           boxShadow: [
             BoxShadow(

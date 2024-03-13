@@ -40,8 +40,8 @@ class PatientAppointmentPage extends ConsumerWidget {
         child: Container(
           width: AppSize.width(context) * 0.43,
           height: AppSize.height(context) * 0.06,
-          padding: const EdgeInsets.only(bottom: AppSize.ksheight - 1),
-          margin: const EdgeInsets.only(bottom: AppSize.klheight),
+          padding: const EdgeInsets.only(bottom: AppSize.ks - 1),
+          margin: const EdgeInsets.only(bottom: AppSize.kl),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: AppColor.yellow,
@@ -118,7 +118,7 @@ Widget _content(
       patient.profile?.patient?.relatedParty?.reversed.toList().isEmpty ?? true;
 
   return Container(
-    padding: const EdgeInsets.all(AppSize.kmpadding),
+    padding: const EdgeInsets.all(AppSize.km),
     decoration: const BoxDecoration(
       image: DecorationImage(
         image: AssetImage(AppImages.scaffoldBg),
@@ -130,20 +130,20 @@ Widget _content(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: AppSize.klelevation * 3.5),
+        const SizedBox(height: AppSize.kl * 3.5),
         AppointmentPatientSelector(
           patient: patient,
           relations:
               patient.profile?.patient?.relatedParty?.reversed.toList() ?? [],
           enableAllButton: true,
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Divider(
           color: AppColor.grey.withOpacity(0.4),
           thickness: 1,
           height: 2,
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         Text(
           loc.appointmentSubtitle,
           style: applyFiraSansFont(
@@ -151,7 +151,7 @@ Widget _content(
             fontSize: 18,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         isEmpty
             ? const Center(
                 child: SizedBox(),
@@ -169,7 +169,7 @@ Widget _content(
                     final patient = e.value;
                     return Container(
                       padding: const EdgeInsets.all(16),
-                      margin: const EdgeInsets.only(bottom: AppSize.kmheight),
+                      margin: const EdgeInsets.only(bottom: AppSize.km),
                       decoration: BoxDecoration(
                         color: AppColor.white,
                         borderRadius: BorderRadius.circular(8.0),
@@ -259,7 +259,7 @@ Widget _content(
                             ),
                           ),
                           const SizedBox(
-                            height: AppSize.ksheight,
+                            height: AppSize.ks,
                           ),
                           Text(
                             "${loc.patientAddress} -",

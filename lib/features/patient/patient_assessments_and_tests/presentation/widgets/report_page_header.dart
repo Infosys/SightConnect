@@ -79,7 +79,7 @@ class ReportPageHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: AppSize.kselevation,
+          height: AppSize.ks,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),

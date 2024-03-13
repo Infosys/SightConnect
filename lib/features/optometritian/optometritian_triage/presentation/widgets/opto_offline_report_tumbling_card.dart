@@ -92,7 +92,7 @@
 //             ),
 //           ),
 //           const SizedBox(
-//             height: AppSize.ksheight,
+//             height: AppSize.ks,
 //           ),
 //           const Padding(
 //             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -101,7 +101,7 @@
 //             ),
 //           ),
 //           const SizedBox(
-//             height: AppSize.ksheight,
+//             height: AppSize.ks,
 //           ),
 //           Column(
 //             crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +115,7 @@
 //                 ),
 //               ),
 //               const SizedBox(
-//                 height: AppSize.ksheight,
+//                 height: AppSize.ks,
 //               ),
 //               Container(
 //                 padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
@@ -140,7 +140,7 @@
 //               ),
 //             ],
 //           ),
-//           const SizedBox(height: AppSize.ksheight),
+//           const SizedBox(height: AppSize.ks),
 //         ],
 //       ),
 //     );

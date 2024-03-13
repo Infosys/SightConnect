@@ -107,8 +107,7 @@ class AppCameraPreviewWidget extends StatelessWidget {
                   onFlashToggle();
                 },
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                   child: Icon(
                     controller.value.flashMode == FlashMode.off
                         ? Icons.flash_off
@@ -204,7 +203,7 @@ class AppCameraPreviewWidget extends StatelessWidget {
                                   },
                                   child: const Padding(
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: AppSize.kmpadding,
+                                      horizontal: AppSize.km,
                                     ),
                                     child: Icon(
                                       Icons.flip_camera_ios,
@@ -243,7 +242,7 @@ class AppCameraPreviewWidget extends StatelessWidget {
                                 message: context.loc!.eyeAssessmentToolTip,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSize.kmpadding,
+                                    horizontal: AppSize.km,
                                   ),
                                   child: Container(
                                     decoration: const BoxDecoration(

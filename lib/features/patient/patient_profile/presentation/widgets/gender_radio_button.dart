@@ -25,7 +25,7 @@ class GenderRadioButton extends StatelessWidget {
           groupValue: groupValue,
           onChanged: onChanged,
         ),
-        const SizedBox(width: AppSize.kswidth),
+        const SizedBox(width: AppSize.ks),
         Text(
           label,
           style: applyRobotoFont(

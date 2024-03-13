@@ -15,8 +15,8 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
     final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.kmpadding,
-        vertical: AppSize.kmpadding,
+        horizontal: AppSize.km,
+        vertical: AppSize.km,
       ),
       decoration: const BoxDecoration(
         color: AppColor.white,

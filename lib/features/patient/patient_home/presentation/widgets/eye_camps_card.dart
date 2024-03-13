@@ -15,7 +15,7 @@ class EyeCampCard extends StatelessWidget {
       width: AppSize.width(context) * 0.8,
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
       ),
       margin: const EdgeInsets.only(
         left: 16,
@@ -23,7 +23,7 @@ class EyeCampCard extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
             child: SvgPicture.asset(
               AppImages.eyeCampBg,
               fit: BoxFit.fitHeight,
@@ -40,8 +40,7 @@ class EyeCampCard extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              padding: const EdgeInsets.only(
-                  left: AppSize.kmpadding, top: AppSize.kmpadding),
+              padding: const EdgeInsets.only(left: AppSize.km, top: AppSize.km),
               width: AppSize.width(context) * 0.48,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -57,7 +56,7 @@ class EyeCampCard extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  // const SizedBox(height: AppSize.ksheight),
+                  // const SizedBox(height: AppSize.ks),
                   Text(
                     data['date'],
                     style: applyRobotoFont(

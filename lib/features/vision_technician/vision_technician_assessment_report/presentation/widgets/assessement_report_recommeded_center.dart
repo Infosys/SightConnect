@@ -20,7 +20,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
     if (visionCenterId == null) {
       logger.d("visionCenterId is null");
       return Container(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: const Center(
           child: Text("No Vision Center Found"),
         ),
@@ -39,9 +39,9 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           AppCard(
-            padding: AppSize.kmpadding,
+            padding: AppSize.km,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -49,7 +49,7 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
                   data.facilityInformation?.facilityName ?? "",
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 _AddressTile(
                   icon: Icons.location_on_outlined,
                   value:
@@ -95,8 +95,8 @@ class _AddressTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: Responsive.isMobile(context)
-          ? const EdgeInsets.symmetric(vertical: AppSize.kspadding)
-          : const EdgeInsets.symmetric(vertical: AppSize.kspadding),
+          ? const EdgeInsets.symmetric(vertical: AppSize.ks)
+          : const EdgeInsets.symmetric(vertical: AppSize.ks),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

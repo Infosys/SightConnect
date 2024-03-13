@@ -39,8 +39,7 @@ class VgProfile extends ConsumerWidget {
         data: (data) {
           return SingleChildScrollView(
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -48,18 +47,18 @@ class VgProfile extends ConsumerWidget {
                     profileData: data,
                   ),
                   const SizedBox(
-                    height: AppSize.kmheight,
+                    height: AppSize.km,
                   ),
                   VgProfilePersonalDetailsCard(profileData: data),
                   const SizedBox(
-                    height: AppSize.kmheight,
+                    height: AppSize.km,
                   ),
                   //VgProfileWorkLocationCard(profileData: data),
                   const SizedBox(
-                    height: AppSize.kmheight,
+                    height: AppSize.km,
                   ),
                   VgProfileOrganisationDetailsCard(profileData: data),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   //VgProfileTrainingCertificateCard(profileData: data),
                   AppCard(
                     child: ListTile(
@@ -98,7 +97,7 @@ class VgProfile extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   Visibility(
                     visible:
                         PersistentAuthStateService.authState.roles?.length != 1,
@@ -124,7 +123,7 @@ class VgProfile extends ConsumerWidget {
                     ),
                   ),
 
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   AppCard(
                     child: ListTile(
                       onTap: () {
@@ -154,7 +153,7 @@ class VgProfile extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: AppSize.klheight * 2),
+                  const SizedBox(height: AppSize.kl * 2),
                 ],
               ),
             ),

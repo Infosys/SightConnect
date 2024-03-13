@@ -7,17 +7,16 @@ class ColorDot extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-
     bool isMobile = Responsive.isMobile(context);
 
     return Container(
-      height: isMobile ? AppSize.kmheight/2 : AppSize.kmheight,
-      width: isMobile ? AppSize.kmwidth/2 : AppSize.kmwidth,
-      margin: const EdgeInsets.all(AppSize.kspadding),
+      height: isMobile ? AppSize.km / 2 : AppSize.km,
+      width: isMobile ? AppSize.km / 2 : AppSize.km,
+      margin: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(
-          AppSize.ksradius / 2,
+          AppSize.ks / 2,
         ),
       ),
     );

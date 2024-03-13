@@ -59,7 +59,7 @@ class VisionGuardianEyeAssessment extends ConsumerWidget {
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.asset("assets/images/Eye Assessment.svg"),
           Container(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+            padding: const EdgeInsets.all(AppSize.km),
             child: Text(
               loc.vgEyeAssessmentDescription,
               style: applyRobotoFont(fontSize: 14, color: AppColor.grey),

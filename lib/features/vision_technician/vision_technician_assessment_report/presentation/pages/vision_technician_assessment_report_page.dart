@@ -38,7 +38,7 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,42 +49,42 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
                 patientDetails: patientDetails,
                 assessmentDate: assessmentDetailsReport.reportDate,
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessmentOverallDescriptionCard(
                 triageResultDescription:
                     assessmentDetailsReport.triageResultDescription,
                 cumulativeSeverity: assessmentDetailsReport.cumulativeSeverity,
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessmentEyeImageCard(
                 imageBriefEntity: assessmentDetailsReport.imageBriefEntity,
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessmentAcuityScoreCard(
                 visualAcuityBreifEntity:
                     assessmentDetailsReport.visualAcuityBreifEntity,
               ),
-              const SizedBox(height: AppSize.kmheight),
+              const SizedBox(height: AppSize.km),
               AssessmentReportDetails(
                 questionResponseBreifModel:
                     assessmentDetailsReport.questionResponseBriefEntity,
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessementCarePlanCard(
                 carePlan: assessmentDetailsReport.carePlans,
                 title: "Care Plan",
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessementCarePlanCard(
                 showCarePlan: false,
                 carePlan: assessmentDetailsReport.carePlans,
                 title: "Recommended Center Type",
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessmentReportRecommendedCenter(
                 visionCenterId: assessmentDetailsReport.visionCenterId,
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               AssessmentReportRemarkCard(
                 remark: assessmentDetailsReport.remarks,
               ),

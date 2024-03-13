@@ -24,7 +24,7 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           decoration: const BoxDecoration(
               // color: AppColor.black,
               ),
@@ -34,7 +34,7 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
               InkWell(
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
@@ -50,7 +50,7 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
               InkWell(
                 onTap: onCapture,
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
@@ -66,7 +66,7 @@ class UpdateEyeScanCameraControllers extends HookConsumerWidget {
               InkWell(
                 onTap: onSwitchCamera,
                 child: Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),

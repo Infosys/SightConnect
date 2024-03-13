@@ -20,12 +20,12 @@ class TumblingEyeCentreDetailsCards extends StatelessWidget {
             .map(
               (e) => Container(
                 padding: const EdgeInsets.all(
-                  AppSize.kmpadding,
+                  AppSize.km,
                 ),
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColor.white,
-                  borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  borderRadius: BorderRadius.circular(AppSize.ks),
                   boxShadow: [
                     BoxShadow(
                       color: AppColor.primary.withOpacity(0.1),
@@ -45,7 +45,7 @@ class TumblingEyeCentreDetailsCards extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.klheight,
+                      height: AppSize.kl,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -70,7 +70,7 @@ class TumblingEyeCentreDetailsCards extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      height: AppSize.ks,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -92,7 +92,7 @@ class TumblingEyeCentreDetailsCards extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: AppSize.ksheight,
+                      height: AppSize.ks,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,

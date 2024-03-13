@@ -71,7 +71,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         color: AppColor.grey,
                       ),
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     AssistanceRatingBar(
                       title: loc.assessments,
                       onChanged: (rating) {
@@ -85,7 +85,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         feedback.assessmentAssistance = value;
                       },
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     AssistanceRatingBar(
                       title: loc.optoVisualAcuity,
                       onChanged: (rating) {
@@ -106,7 +106,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         feedback.visualAcuityAided = value;
                       },
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     AssistanceRatingBar(
                       title: loc.optoEyeScan,
                       onChanged: (rating) {
@@ -120,7 +120,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         feedback.eyeScanAssistance = value;
                       },
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     Text(
                       loc.optoLeaveFeedback,
                       style: applyRobotoFont(
@@ -129,17 +129,17 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         color: AppColor.grey,
                       ),
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     TextField(
                       controller: feedback.feedBackController,
                       maxLines: 5,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(AppSize.kmradius),
+                          borderRadius: BorderRadius.circular(AppSize.km),
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(

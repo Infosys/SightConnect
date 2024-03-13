@@ -26,7 +26,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const IvrCallHistorySearchBarChips(),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
         ref.watch(getIvrCallHistoryDetailsProvider).when(
               data: (data) {
                 List<IvrCallHistoryModel> reversedData = data.reversed.toList();
@@ -46,11 +46,11 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                         AppColor.scaffold,
                       ),
                       columnSpacing: AppSize.width(context) / 15,
-                      horizontalMargin: AppSize.klpadding,
-                      dataRowMaxHeight: AppSize.klheight * 2.5,
-                      dataRowMinHeight: AppSize.klheight * 2,
+                      horizontalMargin: AppSize.kl,
+                      dataRowMaxHeight: AppSize.kl * 2.5,
+                      dataRowMinHeight: AppSize.kl * 2,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppSize.ksradius),
+                        borderRadius: BorderRadius.circular(AppSize.ks),
                         color: AppColor.white,
                         boxShadow: applyLightShadow(),
                       ),
@@ -139,7 +139,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
               Icons.phone_callback_rounded,
               color: data.direction == "in" ? AppColor.green : AppColor.red,
             ),
-            const SizedBox(width: AppSize.kspadding),
+            const SizedBox(width: AppSize.ks),
             Text(
               "${data.duration ?? 0 / 60} min",
               maxLines: 1,
@@ -170,11 +170,11 @@ class IvrCallHistoryTableView extends ConsumerWidget {
           decoration: BoxDecoration(
             color: _colorCodeStatus(data.status).withOpacity(0.2),
             borderRadius: const BorderRadius.all(
-              Radius.circular(AppSize.kspadding),
+              Radius.circular(AppSize.ks),
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(AppSize.kspadding),
+            padding: const EdgeInsets.all(AppSize.ks),
             child: Text(
               data.status,
               maxLines: 1,

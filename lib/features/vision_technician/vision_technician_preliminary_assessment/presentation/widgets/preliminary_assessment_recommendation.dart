@@ -24,10 +24,10 @@ class _PreliminaryAssessmentRecommendationState
       decoration: const BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
-      padding: const EdgeInsets.all(AppSize.klpadding),
+      padding: const EdgeInsets.all(AppSize.kl),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +39,7 @@ class _PreliminaryAssessmentRecommendationState
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           ListTile(
             title: Text(loc.vtVisitPrimaryCenter),
             leading: Radio(

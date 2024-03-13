@@ -84,10 +84,10 @@ class ProfileHeader extends ConsumerWidget {
               ),
               Container(
                 padding: const EdgeInsets.only(
-                  left: AppSize.kmpadding,
-                  right: AppSize.kmpadding,
-                  top: AppSize.kmpadding,
-                  bottom: AppSize.kspadding,
+                  left: AppSize.km,
+                  right: AppSize.km,
+                  top: AppSize.km,
+                  bottom: AppSize.ks,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

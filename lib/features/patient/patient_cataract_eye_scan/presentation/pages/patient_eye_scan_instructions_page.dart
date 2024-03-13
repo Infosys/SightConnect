@@ -47,13 +47,12 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.kl),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSize.kl),
                   child: AnimatedSmoothIndicator(
                     onDotClicked: (index) {},
                     activeIndex: activeIndex.value,
@@ -88,12 +87,12 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.kl,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding + 6,
-              vertical: AppSize.kspadding + 2,
+              horizontal: AppSize.kl + 6,
+              vertical: AppSize.ks + 2,
             ),
             child: TextButton(
               style: TextButton.styleFrom(
@@ -126,7 +125,7 @@ class PatientEyeScanInstructionsPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight * 2,
+            height: AppSize.kl * 2,
           )
         ],
       ),

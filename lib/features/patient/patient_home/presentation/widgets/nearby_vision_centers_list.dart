@@ -63,7 +63,7 @@ class _NearbyVisionCentersListState
         ref.watch(nearByVisionCenterProvider);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -83,7 +83,7 @@ class _NearbyVisionCentersListState
             ],
           ),
           const SizedBox(
-            height: AppSize.kmheight,
+            height: AppSize.km,
           ),
           Builder(
             builder: (context) {
@@ -108,14 +108,14 @@ class _NearbyVisionCentersListState
                         height: 62,
                         width: 50,
                       ),
-                      const SizedBox(height: AppSize.ksheight),
+                      const SizedBox(height: AppSize.ks),
                       Text(
                         viewState.errorMessage ?? '',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                       ),
-                      const SizedBox(height: AppSize.ksheight),
+                      const SizedBox(height: AppSize.ks),
                       TextButton(
                         onPressed: () async {
                           final status = viewState.permissionStatus;

@@ -102,7 +102,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
                   child: Text(errorMessage),
                 ),
                 const SizedBox(
-                  height: AppSize.klheight,
+                  height: AppSize.kl,
                 ),
                 TextButton.icon(
                   onPressed: () async {

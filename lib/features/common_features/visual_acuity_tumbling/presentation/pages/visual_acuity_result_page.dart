@@ -54,7 +54,7 @@ class TumblingResultReportPage extends ConsumerWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(AppSize.kmpadding),
+            padding: const EdgeInsets.all(AppSize.km),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                         .calculateEyeSight(Eye.both);
                     return Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppSize.klradius),
+                        borderRadius: BorderRadius.circular(AppSize.kl),
                       ),
                       color: const Color(0xff333333),
                       child: Row(
@@ -87,15 +87,15 @@ class TumblingResultReportPage extends ConsumerWidget {
                               children: [
                                 Container(
                                   padding: const EdgeInsets.fromLTRB(
-                                    AppSize.kmpadding,
-                                    AppSize.kmpadding,
-                                    AppSize.kmpadding,
+                                    AppSize.km,
+                                    AppSize.km,
+                                    AppSize.km,
                                     0,
                                   ),
                                   decoration: BoxDecoration(
                                     color: AppColor.white,
                                     borderRadius:
-                                        BorderRadius.circular(AppSize.klradius),
+                                        BorderRadius.circular(AppSize.kl),
                                   ),
                                   width: AppSize.width(context) * 0.65,
                                   height: AppSize.height(context) * 0.22,
@@ -140,7 +140,7 @@ class TumblingResultReportPage extends ConsumerWidget {
                   },
                 ),
 
-                const SizedBox(height: AppSize.klheight),
+                const SizedBox(height: AppSize.kl),
                 Text(
                   loc.assessmentResultPageMoreDetailsText,
                   textAlign: TextAlign.left,
@@ -150,10 +150,10 @@ class TumblingResultReportPage extends ConsumerWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const SizedBox(height: AppSize.klheight),
+                const SizedBox(height: AppSize.kl),
                 const NearbyVisionCentersList(),
 
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 const TumblingResultPageBottomCards(),
               ],
             ),

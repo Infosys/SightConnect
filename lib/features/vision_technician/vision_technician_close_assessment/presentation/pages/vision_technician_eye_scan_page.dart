@@ -43,14 +43,14 @@ class _VisionTechnicianEyeCaptureState
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding,
-          vertical: AppSize.kmpadding,
+          horizontal: AppSize.km,
+          vertical: AppSize.km,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const VTEyeScanStepper(),
-            const SizedBox(height: AppSize.klheight),
+            const SizedBox(height: AppSize.kl),
             if (!isImageCaptured) const Expanded(child: CameraPreviewCard()),
             if (isImageCaptured) const Expanded(child: ImagePreview()),
           ],

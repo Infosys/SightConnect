@@ -39,7 +39,7 @@ class _AssessmentReportDetailsState extends State<AssessmentReportDetails> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         () {
           if (widget.questionResponseBreifModel?.isEmpty ?? true) {
             return Center(
@@ -57,7 +57,7 @@ class _AssessmentReportDetailsState extends State<AssessmentReportDetails> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AppCard(
-                  padding: AppSize.kmpadding,
+                  padding: AppSize.km,
                   child: ListView.builder(
                     itemCount: itemsToShow!.length,
                     shrinkWrap: true,

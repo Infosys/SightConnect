@@ -115,7 +115,7 @@ class _EyeProblemTypeState extends ConsumerState<EyeProblemType> {
         if (_currentInput.isNotEmpty)
           Container(
               width: double.infinity,
-              height: min(_filteredSuggestions.length * AppSize.klheight * 2,
+              height: min(_filteredSuggestions.length * AppSize.kl * 2,
                   AppSize.height(context) * 0.5),
               decoration: BoxDecoration(
                 color: Colors.white,

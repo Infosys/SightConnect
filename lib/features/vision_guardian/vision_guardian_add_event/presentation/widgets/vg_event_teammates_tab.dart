@@ -59,7 +59,7 @@ class EventTeammatesTab extends HookConsumerWidget {
               ),
             ),
             const SizedBox(
-              height: AppSize.klheight,
+              height: AppSize.kl,
             ),
             Flexible(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -72,13 +72,13 @@ class EventTeammatesTab extends HookConsumerWidget {
               ]),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Visibility(
               visible: addMember.value,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  borderRadius: BorderRadius.circular(AppSize.ks),
                   color: AppColor.white,
                   border: Border.all(
                     color: AppColor.grey.withOpacity(0.5),
@@ -152,7 +152,7 @@ class EventTeammatesTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.klheight,
+                      height: AppSize.kl,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -172,14 +172,14 @@ class EventTeammatesTab extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: AppSize.klheight,
+                      height: AppSize.kl,
                     ),
                   ],
                 ),
               ),
             ),
             const SizedBox(
-              height: AppSize.ksheight,
+              height: AppSize.ks,
             ),
             InkWell(
               onTap: () {

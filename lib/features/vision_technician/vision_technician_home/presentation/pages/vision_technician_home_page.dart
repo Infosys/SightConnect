@@ -36,8 +36,8 @@ class VisionTechnicianHomePage extends ConsumerWidget {
           centerTitle: false,
           actions: [
             isMobile
-                ? const SizedBox(width: AppSize.kswidth)
-                : const SizedBox(width: AppSize.klwidth),
+                ? const SizedBox(width: AppSize.ks)
+                : const SizedBox(width: AppSize.kl),
             Image.asset(
               AppImages.logo,
               width: Responsive.isMobile(context) ? 150 : 250,
@@ -60,8 +60,8 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               ),
             ),
             isMobile
-                ? const SizedBox(width: AppSize.kswidth)
-                : const SizedBox(width: AppSize.klwidth),
+                ? const SizedBox(width: AppSize.ks)
+                : const SizedBox(width: AppSize.kl),
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -77,37 +77,37 @@ class VisionTechnicianHomePage extends ConsumerWidget {
               ),
             ),
             isMobile
-                ? const SizedBox(width: AppSize.kswidth)
-                : const SizedBox(width: AppSize.klwidth),
+                ? const SizedBox(width: AppSize.ks)
+                : const SizedBox(width: AppSize.kl),
           ],
         ),
       ),
       body: UpgradeAlert(
-          dialogStyle: Platform.isIOS
-              ? UpgradeDialogStyle.cupertino
-              : UpgradeDialogStyle.material,
-          showIgnore: false,
-          showLater: false,
-          shouldPopScope: () => false,
-          canDismissDialog: false,
-          onUpdate: () {
-            return true;
+        dialogStyle: Platform.isIOS
+            ? UpgradeDialogStyle.cupertino
+            : UpgradeDialogStyle.material,
+        showIgnore: false,
+        showLater: false,
+        shouldPopScope: () => false,
+        canDismissDialog: false,
+        onUpdate: () {
+          return true;
+        },
+        upgrader: Upgrader(
+          durationUntilAlertAgain: const Duration(milliseconds: 800),
+          willDisplayUpgrade: ({
+            appStoreVersion,
+            required display,
+            installedVersion,
+            minAppVersion,
+          }) {
+            logger.d({
+              "display : $display",
+              "appStoreVersion : $appStoreVersion",
+              "installedVersion : $installedVersion",
+            });
           },
-          upgrader: Upgrader(
-            durationUntilAlertAgain: const Duration(milliseconds: 800),
-            willDisplayUpgrade: ({
-              appStoreVersion,
-              required display,
-              installedVersion,
-              minAppVersion,
-            }) {
-              logger.d({
-                "display : $display",
-                "appStoreVersion : $appStoreVersion",
-                "installedVersion : $installedVersion",
-              });
-            },
-          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -117,17 +117,17 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                 child: Stack(
                   children: [
                     Container(
-                      height: AppSize.klheight * 6,
+                      height: AppSize.kl * 6,
                       decoration: const BoxDecoration(
                         color: AppColor.primary,
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(AppSize.klradius),
-                          bottomRight: Radius.circular(AppSize.klradius),
+                          bottomLeft: Radius.circular(AppSize.kl),
+                          bottomRight: Radius.circular(AppSize.kl),
                         ),
                       ),
                     ),
                     Transform.translate(
-                      offset: const Offset(0, AppSize.ksheight),
+                      offset: const Offset(0, AppSize.ks),
                       child: const VTHeader(),
                     )
                   ],

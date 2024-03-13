@@ -19,13 +19,13 @@ class VisionGuardianAddEventPhoto extends ConsumerWidget {
     var data = ref.watch(addEventDetailsProvider);
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Column(
@@ -42,8 +42,8 @@ class VisionGuardianAddEventPhoto extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: AppSize.kmpadding,
-              horizontal: AppSize.kmpadding,
+              vertical: AppSize.km,
+              horizontal: AppSize.km,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,7 +103,7 @@ class VisionGuardianAddEventPhoto extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppSize.kmheight),
+                    const SizedBox(height: AppSize.km),
                     Text(
                       loc.vgAddPhotoInstruction,
                       style: applyRobotoFont(

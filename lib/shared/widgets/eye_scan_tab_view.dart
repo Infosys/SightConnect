@@ -114,12 +114,12 @@ class _EyeScanImage extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           image == null
               ? const Center(child: Text("No Image"))
               : Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppSize.ksradius),
+                    borderRadius: BorderRadius.circular(AppSize.ks),
                     child: AppNetworkImage(
                       imageUrl: image!,
                       shapeCircle: false,

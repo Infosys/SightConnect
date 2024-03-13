@@ -45,7 +45,7 @@ class NearbyEyeClinic extends HookConsumerWidget {
           "Nearby Eye Clinics",
           style: applyFiraSansFont(fontSize: 18),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         ListView.builder(
           padding: const EdgeInsets.all(0),
           itemCount: viewState.visionCenters!.length,
@@ -64,15 +64,15 @@ class NearbyEyeClinic extends HookConsumerWidget {
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  vertical: AppSize.kspadding,
-                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.ks,
+                  horizontal: AppSize.km,
                 ),
                 margin: const EdgeInsets.symmetric(
-                  vertical: AppSize.kspadding / 2,
+                  vertical: AppSize.ks / 2,
                 ),
                 decoration: BoxDecoration(
                   color: AppColor.white,
-                  borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  borderRadius: BorderRadius.circular(AppSize.ks),
                   border: Border.all(
                     color: selectedVisionCenterIndex.value == index
                         ? AppColor.primary
@@ -97,7 +97,7 @@ class NearbyEyeClinic extends HookConsumerWidget {
                         size: 12,
                       ),
                     ),
-                    const SizedBox(width: AppSize.kmwidth),
+                    const SizedBox(width: AppSize.km),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

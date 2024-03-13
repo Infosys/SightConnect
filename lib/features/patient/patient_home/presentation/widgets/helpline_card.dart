@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +19,17 @@ class HelplineCard extends StatelessWidget {
     final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.kmpadding,
+        horizontal: AppSize.km,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSize.kmpadding,
-          vertical: AppSize.kspadding + 2,
+          horizontal: AppSize.km,
+          vertical: AppSize.ks + 2,
         ),
         decoration: const BoxDecoration(
           color: AppColor.primary,
           borderRadius: BorderRadius.all(
-            Radius.circular(AppSize.kmradius * 3),
+            Radius.circular(AppSize.km * 3),
           ),
         ),
         child: Row(
@@ -36,7 +37,7 @@ class HelplineCard extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "${loc.homeHelplineCardDescrition} ${AppText.tollFreeNumber}",
+                "${loc.homeHelplineCardDescrition} ${AppInfoService.tollFreeNumber}",
                 style: applyRobotoFont(
                   fontSize: 12,
                   color: AppColor.white,

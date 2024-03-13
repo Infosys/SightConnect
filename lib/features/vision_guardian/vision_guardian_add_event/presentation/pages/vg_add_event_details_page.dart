@@ -43,15 +43,15 @@ class VGAddEventDetailsPage extends ConsumerWidget {
               child: Column(
                 children: [
                   const VisionGuardianAddEventPhoto(),
-                  const SizedBox(height: AppSize.klheight),
+                  const SizedBox(height: AppSize.kl),
                   Container(
-                    padding: const EdgeInsets.all(AppSize.kmpadding),
+                    padding: const EdgeInsets.all(AppSize.km),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: AppColor.white,
                       boxShadow: applyLightShadow(),
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(AppSize.kmradius - 5),
+                        Radius.circular(AppSize.km - 5),
                       ),
                     ),
                     child: Column(
@@ -72,7 +72,7 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(height: AppSize.kmheight),
+                        const SizedBox(height: AppSize.km),
                         customTextField(context, data.eventDescription,
                             loc.vgEventDescription,
                             validationFunction: (value) {
@@ -87,11 +87,11 @@ class VGAddEventDetailsPage extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   const VisionGuardianEventDateTimeCard(),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                   const VisionGuardianEventAddressCard(),
-                  const SizedBox(height: AppSize.kmheight),
+                  const SizedBox(height: AppSize.km),
                 ],
               ),
             ),

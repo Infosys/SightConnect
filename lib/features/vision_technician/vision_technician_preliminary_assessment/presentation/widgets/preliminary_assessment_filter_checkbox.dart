@@ -49,15 +49,15 @@ class _PreliminaryAssessmentFilterCheckBoxState
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                 ],
               )
             : widget.questionnaire[widget.index].type ==
                     QuestionnaireType.String
                 ? Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.kswidth * 2,
-                      vertical: AppSize.klheight,
+                      horizontal: AppSize.ks * 2,
+                      vertical: AppSize.kl,
                     ),
                     child: SizedBox(
                       width: Responsive.isMobile(context)

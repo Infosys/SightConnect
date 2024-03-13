@@ -14,7 +14,7 @@ class InviteCard extends StatelessWidget {
     final loc = context.loc!;
     return Container(
       margin: const EdgeInsets.symmetric(
-        horizontal: AppSize.kmpadding,
+        horizontal: AppSize.km,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class InviteCard extends StatelessWidget {
               fontSize: 18,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           SizedBox(
             height: AppSize.height(context) * 0.2,
             child: Stack(

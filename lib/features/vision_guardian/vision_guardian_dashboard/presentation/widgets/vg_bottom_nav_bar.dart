@@ -32,7 +32,7 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
           // vertical: height * 0.02,
           ),
       child: Card(
-        elevation: AppSize.klelevation,
+        elevation: AppSize.kl,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(0),
@@ -41,8 +41,8 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
           width: AppSize.width(context),
           child: Padding(
             padding: isMobile
-                ? const EdgeInsets.all(AppSize.kspadding + 4)
-                : const EdgeInsets.all(AppSize.kmpadding),
+                ? const EdgeInsets.all(AppSize.ks + 4)
+                : const EdgeInsets.all(AppSize.km),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(
@@ -75,8 +75,8 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
                           Container(
                             width: AppSize.width(context) * 0.2,
                             padding: isMobile
-                                ? const EdgeInsets.all(AppSize.kspadding)
-                                : const EdgeInsets.all(AppSize.kmpadding - 4),
+                                ? const EdgeInsets.all(AppSize.ks)
+                                : const EdgeInsets.all(AppSize.km - 4),
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(20),
@@ -92,7 +92,7 @@ class VisionGuardianBottomNavBar extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: AppSize.ksheight - 2,
+                            height: AppSize.ks - 2,
                           ),
                           Text(
                             items[index].name,

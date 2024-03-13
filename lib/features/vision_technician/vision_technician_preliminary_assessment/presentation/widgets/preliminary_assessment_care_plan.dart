@@ -25,10 +25,10 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
     final loc = context.loc!;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
         boxShadow: applycustomShadow(),
       ),
       child: Padding(

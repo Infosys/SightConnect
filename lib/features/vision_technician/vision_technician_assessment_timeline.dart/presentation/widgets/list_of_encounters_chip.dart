@@ -46,14 +46,14 @@ class ListOfEncountersChip extends HookConsumerWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kspadding,
+                        horizontal: AppSize.ks,
                       ),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: encounterId == data[index].id
                             ? AppColor.lightBlue
                             : AppColor.white,
-                        borderRadius: BorderRadius.circular(AppSize.ksradius),
+                        borderRadius: BorderRadius.circular(AppSize.ks),
                         border: Border.all(
                           color: encounterId == data[index].id
                               ? AppColor.primary

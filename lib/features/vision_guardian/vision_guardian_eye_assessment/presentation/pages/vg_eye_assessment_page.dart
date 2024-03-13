@@ -59,7 +59,7 @@ class VisionGuardianEyeAssessmentPage extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             vgEyeAssessmentHeaderChips(isSelected, context, eventStatus),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             const Expanded(
               child: VisionGuardianEyeAssessmentPatientsCard(
                 type: "default",

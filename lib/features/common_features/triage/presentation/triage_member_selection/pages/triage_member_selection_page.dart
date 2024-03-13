@@ -31,14 +31,14 @@ class TriageMemberSelectionPage extends StatelessWidget {
                 backgroundColor: Colors.white,
                 bottomNavigationBar: BottomAppBar(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: AppSize.kmpadding,
+                    horizontal: AppSize.km,
                   ),
                   child: Consumer(
                     builder: (context, ref, child) {
                       final model = ref.watch(triageMemberProvider);
                       return Container(
                         padding: const EdgeInsets.symmetric(
-                          vertical: AppSize.kmpadding,
+                          vertical: AppSize.km,
                         ),
                         width: AppSize.width(context) * 0.8,
                         child: ElevatedButton(
@@ -61,8 +61,8 @@ class TriageMemberSelectionPage extends StatelessWidget {
                   controller: controller,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.kmpadding,
-                      vertical: AppSize.kmpadding,
+                      horizontal: AppSize.km,
+                      vertical: AppSize.km,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -195,26 +195,26 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
         progressMessage: _progressMessage,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppSize.klradius),
+            borderRadius: BorderRadius.circular(AppSize.kl),
           ),
           child: Stack(
             clipBehavior: Clip.none,
             children: [
               Positioned.fill(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  borderRadius: BorderRadius.circular(AppSize.kl),
                   child: CameraPreview(
                     _controller,
                   ),
                 ),
               ),
               Positioned(
-                top: AppSize.klpadding,
-                right: AppSize.klpadding,
+                top: AppSize.kl,
+                right: AppSize.kl,
                 child: Container(
-                  width: AppSize.klwidth * 2,
-                  height: AppSize.klheight * 2,
-                  margin: const EdgeInsets.only(right: AppSize.klpadding),
+                  width: AppSize.kl * 2,
+                  height: AppSize.kl * 2,
+                  margin: const EdgeInsets.only(right: AppSize.kl),
                   decoration: BoxDecoration(
                     color: AppColor.white.withOpacity(0.5),
                     shape: BoxShape.circle,
@@ -240,16 +240,16 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const SizedBox(
-                      width: AppSize.klwidth * 2,
-                      height: AppSize.klheight * 2,
+                      width: AppSize.kl * 2,
+                      height: AppSize.kl * 2,
                     ),
                     InkWell(
                       onTap: () async {
                         await _takePicture(context, refRead);
                       },
                       child: Container(
-                        width: AppSize.klwidth * 2,
-                        height: AppSize.klheight * 2,
+                        width: AppSize.kl * 2,
+                        height: AppSize.kl * 2,
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(
                           color: AppColor.white,
@@ -262,8 +262,8 @@ class _CameraPreviewCardState extends ConsumerState<CameraPreviewCard>
                         await _toggleCamera();
                       },
                       child: Container(
-                        width: AppSize.klwidth * 2,
-                        height: AppSize.klheight * 2,
+                        width: AppSize.kl * 2,
+                        height: AppSize.kl * 2,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: AppColor.white.withOpacity(0.5),

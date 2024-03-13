@@ -25,7 +25,7 @@ class AcuityDistanceTile extends StatelessWidget {
                 color: AppColor.grey,
               ),
             ),
-            const SizedBox(width: AppSize.kswidth),
+            const SizedBox(width: AppSize.ks),
             Text(
               "$distanceInCms cm",
               style: applyFiraSansFont(

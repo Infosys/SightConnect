@@ -51,7 +51,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: AppSize.kmheight,
+                height: AppSize.km,
               ),
               SizedBox(
                 height: AppSize.height(context) * 0.2,

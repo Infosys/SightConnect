@@ -26,7 +26,7 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -37,12 +37,12 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Text(
               AppLocalizations.of(context)!.eyeScanHowToPerform,
               style: applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Expanded(
               child: UpdateTriageEyeScanCarouselPage(
                 diagnosticReportId: diagnosticReportId,

@@ -42,26 +42,26 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
       decoration: const BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
-      padding: const EdgeInsets.all(AppSize.klpadding),
+      padding: const EdgeInsets.all(AppSize.kl),
       child: Wrap(
-        runSpacing: AppSize.ksheight,
+        runSpacing: AppSize.ks,
         direction: Axis.horizontal,
         children: [
           Wrap(
             direction: Axis.horizontal,
             children: [
               CircleAvatar(
-                radius: AppSize.klradius,
+                radius: AppSize.kl,
                 // child: Imag,
                 child: Image.network(
                   profileImage,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(width: AppSize.kswidth),
+              const SizedBox(width: AppSize.ks),
               Wrap(
                 direction: Axis.vertical,
                 children: [
@@ -69,7 +69,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                     "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     "",
                     style: applyRobotoFont(
@@ -82,9 +82,9 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(width: AppSize.kswidth * 3),
-          Wrap(direction: Axis.vertical, spacing: AppSize.ksheight, children: [
-            Wrap(spacing: AppSize.kmwidth * 5, children: [
+          const SizedBox(width: AppSize.ks * 3),
+          Wrap(direction: Axis.vertical, spacing: AppSize.ks, children: [
+            Wrap(spacing: AppSize.km * 5, children: [
               Wrap(
                 direction: Axis.vertical,
                 children: [
@@ -92,7 +92,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                     loc.vtAge,
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     "",
                     style: applyRobotoFont(
@@ -110,7 +110,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                     loc.vtGender,
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     genderString,
                     style: applyRobotoFont(
@@ -129,7 +129,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   loc.vtAddress,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(
                   address,
                   style: applyRobotoFont(

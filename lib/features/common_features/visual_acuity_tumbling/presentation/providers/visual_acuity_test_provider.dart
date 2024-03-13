@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
@@ -397,7 +398,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
         assessmentVersion: reportModel.assessmentVersion,
         issued: reportModel.issued,
         source: Source.PATIENT_APP,
-        sourceVersion: AppText.appVersion,
+        sourceVersion: AppInfoService.version,
         incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
         score: _getScore(visionAcuityTumblingResponse),
         cummulativeScore: _getCummulativeScore(visionAcuityTumblingResponse),

@@ -21,10 +21,10 @@ class PreliminaryAssessmentIvrCall extends HookWidget {
       width: AppSize.width(context),
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
         boxShadow: applycustomShadow(),
       ),
-      padding: const EdgeInsets.all(AppSize.klpadding),
+      padding: const EdgeInsets.all(AppSize.kl),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class PreliminaryAssessmentIvrCall extends HookWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [

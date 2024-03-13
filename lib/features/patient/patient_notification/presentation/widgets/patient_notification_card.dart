@@ -44,7 +44,7 @@ class PatientNotificationCard extends StatelessWidget {
       ),
       subtitle: Column(
         children: [
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           Text(
             data["description"],
             maxLines: 3,
@@ -54,7 +54,7 @@ class PatientNotificationCard extends StatelessWidget {
               fontSize: 14,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
         ],
       ),
     );

@@ -84,7 +84,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
         decoration: const BoxDecoration(
           color: AppColor.white,
         ),
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: isLoading
             ? const Center(child: CircularProgressIndicator.adaptive())
             : ElevatedButton(
@@ -147,15 +147,15 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             children: [
               PreliminaryAssessmentCard(
                 patient: patientDetails,
               ),
               Responsive.isMobile(context)
-                  ? const SizedBox(height: AppSize.kmheight)
-                  : const SizedBox(height: AppSize.klheight),
+                  ? const SizedBox(height: AppSize.km)
+                  : const SizedBox(height: AppSize.kl),
               PreliminaryAssessmentIvrCall(
                 onSelectedOptionChanged: (value) {
                   if (value == loc.yesButton) {
@@ -168,8 +168,8 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                 intialValue: selectedOption.value,
               ),
               Responsive.isMobile(context)
-                  ? const SizedBox(height: AppSize.kmheight)
-                  : const SizedBox(height: AppSize.klheight),
+                  ? const SizedBox(height: AppSize.km)
+                  : const SizedBox(height: AppSize.kl),
               const PreliminaryAssessmentQuestions(),
               if (selectedOption.value == loc.noButton)
                 Column(
@@ -177,26 +177,26 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Responsive.isMobile(context)
-                        ? const SizedBox(height: AppSize.kmheight)
-                        : const SizedBox(height: AppSize.klheight),
+                        ? const SizedBox(height: AppSize.km)
+                        : const SizedBox(height: AppSize.kl),
                     const EyeScanCard(),
                     Responsive.isMobile(context)
-                        ? const SizedBox(height: AppSize.kmheight)
-                        : const SizedBox(height: AppSize.klheight),
+                        ? const SizedBox(height: AppSize.km)
+                        : const SizedBox(height: AppSize.kl),
                     const PreliminaryAssessmentVisualAcuity(),
                   ],
                 ),
               Responsive.isMobile(context)
-                  ? const SizedBox(height: AppSize.kmheight)
-                  : const SizedBox(height: AppSize.klheight),
+                  ? const SizedBox(height: AppSize.km)
+                  : const SizedBox(height: AppSize.kl),
               const PreliminaryAssessmentCarePlan(),
               Responsive.isMobile(context)
-                  ? const SizedBox(height: AppSize.kmheight)
-                  : const SizedBox(height: AppSize.klheight),
+                  ? const SizedBox(height: AppSize.km)
+                  : const SizedBox(height: AppSize.kl),
               const PreliminaryAssessmentVisionCenter(),
               Responsive.isMobile(context)
-                  ? const SizedBox(height: AppSize.kmheight * 3)
-                  : const SizedBox(height: AppSize.klheight * 3),
+                  ? const SizedBox(height: AppSize.km * 3)
+                  : const SizedBox(height: AppSize.kl * 3),
             ],
           ),
         ),
@@ -223,10 +223,10 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
         color: AppColor.white,
         boxShadow: applycustomShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
-      padding: const EdgeInsets.all(AppSize.klpadding),
+      padding: const EdgeInsets.all(AppSize.kl),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -234,7 +234,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
           Row(
             children: [
               AppNameAvatar(name: patient?.name),
-              const SizedBox(width: AppSize.kswidth),
+              const SizedBox(width: AppSize.ks),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,7 +243,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                     patient?.name?.capitalizeFirstOfEach() ?? "",
                     style: applyFiraSansFont(fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     patient == null ? "" : "OP ${patient?.id.toString()}",
                     style: applyRobotoFont(
@@ -265,7 +265,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 loc.vtAge,
                 style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
               Text(
                 calculateAge(patient?.yearOfBirth),
                 style: applyRobotoFont(
@@ -284,7 +284,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                 loc.vtGender,
                 style: applyFiraSansFont(fontWeight: FontWeight.w500),
               ),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
               Text(
                 patient?.gender.toString().split('.').last ?? "",
                 style: applyRobotoFont(
@@ -306,7 +306,7 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                   maxLines: 1,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(
                   formatAddress(patient),
                   overflow: TextOverflow.ellipsis,

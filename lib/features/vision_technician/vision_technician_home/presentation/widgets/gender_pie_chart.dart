@@ -23,7 +23,7 @@ class GenderPieChart extends StatelessWidget {
         PieChart(
           dataMap: data,
           animationDuration: const Duration(milliseconds: 800),
-          chartRadius: isMobile ? AppSize.kmradius * 2 : AppSize.klradius * 3,
+          chartRadius: isMobile ? AppSize.km * 2 : AppSize.kl * 3,
           colorList: color,
           initialAngleInDegree: 270,
           chartType: ChartType.ring,

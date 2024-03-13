@@ -17,13 +17,13 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
     var data = ref.watch(addEventDetailsProvider);
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Column(
@@ -38,7 +38,7 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           Row(
             children: [
               customTextFieldDatePicker(
@@ -50,7 +50,7 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
                   data.setStartDate(value);
                 },
               ),
-              const SizedBox(width: AppSize.kswidth),
+              const SizedBox(width: AppSize.ks),
               customTextFieldTimePicker(
                 context,
                 data.startTime,
@@ -59,7 +59,7 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           Row(
             children: [
               customTextFieldDatePicker(
@@ -73,7 +73,7 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
                   data.setEndDate(value);
                 },
               ),
-              const SizedBox(width: AppSize.kswidth),
+              const SizedBox(width: AppSize.ks),
               customTextFieldTimePicker(context, data.endTime, loc.vtEndTime,
                   (value) {
                 if (value == null || value.isEmpty) {

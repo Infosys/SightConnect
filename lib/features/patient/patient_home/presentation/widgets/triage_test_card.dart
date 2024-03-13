@@ -13,7 +13,7 @@ class TriageTestCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+      margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(

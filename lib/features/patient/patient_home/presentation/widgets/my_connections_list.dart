@@ -50,7 +50,7 @@ class MyConnectionsList extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSize.kmwidth),
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
               child: Text(
                 loc.myConnectionsTitle,
                 style: applyFiraSansFont(
@@ -81,11 +81,11 @@ class MyConnectionsList extends ConsumerWidget {
             )
           ],
         ),
-        const SizedBox(height: AppSize.ksheight),
+        const SizedBox(height: AppSize.ks),
         (connectionsList == null || connectionsList.isEmpty)
             ? Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.kmwidth + 10,
+                  horizontal: AppSize.km + 10,
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -172,7 +172,7 @@ class MyConnectionsList extends ConsumerWidget {
                       ]),
                     ),
                   ),
-                  const SizedBox(width: AppSize.kswidth + 2),
+                  const SizedBox(width: AppSize.ks + 2),
                   Container(
                     padding: const EdgeInsets.only(right: 10.0),
                     child: Column(
@@ -223,7 +223,7 @@ class MyConnectionsList extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: AppSize.ksheight),
+                        const SizedBox(height: AppSize.ks),
                         Text(
                           loc.myConnectionsAdd,
                           style: applyFiraSansFont(fontSize: 14),

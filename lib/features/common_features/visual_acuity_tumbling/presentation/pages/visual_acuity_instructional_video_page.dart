@@ -110,8 +110,8 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
               ),
         body: Padding(
           padding: Responsive.isMobile(context)
-              ? const EdgeInsets.all(AppSize.kmpadding)
-              : const EdgeInsets.all(AppSize.kmpadding),
+              ? const EdgeInsets.all(AppSize.km)
+              : const EdgeInsets.all(AppSize.km),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -122,7 +122,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   fontSize: 14,
                 ),
               ),
-              const SizedBox(height: AppSize.kmheight),
+              const SizedBox(height: AppSize.km),
               Expanded(child: VisualAcuityInstructionPage(
                 onPressed: () {
                   Navigator.of(context).push(
