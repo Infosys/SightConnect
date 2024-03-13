@@ -11,8 +11,10 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
@@ -30,36 +32,42 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
 
-    final canSubmit = ref
-            .watch(vtCloseAssessmentHelperProvider)
-            .mrCodeController
-            .text
-            .length >
-        3;
+    final model = ref.watch(vtCloseAssessmentHelperProvider);
+    final canSubmit = model.mrCodeController.text.length > 3;
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: AppSize.kl * 3,
-        leading: InkWell(
-          onTap: () {
-            ref.invalidate(vtCloseAssessmentHelperProvider);
-            Navigator.popUntil(context, (route) => route.isFirst);
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (builder) {
-                  return const VisionTechnicianDashboardPage();
-                },
-              ),
-            );
-          },
-          child: const Icon(Icons.chevron_left),
-        ),
+      appBar: CustomAppbar(
+        onBackPress: () {
+          ref.invalidate(vtCloseAssessmentHelperProvider);
+          Navigator.popUntil(context, (route) => route.isFirst);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (builder) {
+                return const VisionTechnicianDashboardPage();
+              },
+            ),
+          );
+        },
         title: Text(
           '${patientName} - OP ${patientId}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(),
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSize.km),
+        child: Column(
+          children: [
+            CloseHeading(encountedId: encounterId),
+            const SizedBox(height: AppSize.kl),
+            const MRCode(),
+            const SizedBox(height: AppSize.kl),
+            const SolutionCard(),
+            const SizedBox(height: AppSize.kl),
+            const Recommendations(),
+          ],
         ),
       ),
       bottomNavigationBar: Padding(
@@ -92,32 +100,24 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                         String response = await ref
                             .read(vtCloseAssessmentViewModelProvider)
                             .submitCloseAssessmentInfo();
-                        ref.invalidate(vtTriageSaveProvider);
-                        ref.invalidate(vtCloseAssessmentHelperProvider);
-                        ref.invalidate(vtTriageSaveProvider);
-                        ref.invalidate(preliminaryAssessmentHelperProvider);
-
-                        if (context.mounted) {
-                          if (response == "success") {
-                            await successDialogue(
-                                context, loc.vtAssessmentClosedSuccessfully);
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   const SnackBar(
-                            //     content: Text("Assessment Closed Successfully"),
-                            //   ),
-                            // );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(loc.vtSomethingWentWrong),
-                              ),
-                            );
-                          }
-
-                          if (context.mounted) {
-                            Navigator.popUntil(
-                                context, (route) => route.isFirst);
-                          }
+                        if (!context.mounted) {
+                          return;
+                        }
+                        if (response == "success") {
+                          await successDialogue(
+                                  context, loc.vtAssessmentClosedSuccessfully)
+                              .then(
+                            (value) {
+                              ref.invalidate(vtTriageSaveProvider);
+                              ref.invalidate(vtCloseAssessmentHelperProvider);
+                              ref.invalidate(vtTriageSaveProvider);
+                              ref.invalidate(
+                                  preliminaryAssessmentHelperProvider);
+                              Navigator.of(context).popUntil((route) => false);
+                            },
+                          );
+                        } else {
+                          Fluttertoast.showToast(msg: loc.vtSomethingWentWrong);
                         }
                       }
                     : null,
@@ -126,25 +126,10 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: canSubmit ? AppColor.white : AppColor.grey,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSize.km),
-        child: Column(
-          children: [
-            CloseHeading(encountedId: encounterId),
-            const SizedBox(height: AppSize.kl),
-            const MRCode(),
-            const SizedBox(height: AppSize.kl),
-            const SolutionCard(),
-            const SizedBox(height: AppSize.kl),
-            const Recommendations(),
           ],
         ),
       ),
