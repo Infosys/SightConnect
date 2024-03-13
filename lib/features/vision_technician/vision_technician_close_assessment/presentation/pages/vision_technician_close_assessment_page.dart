@@ -114,7 +114,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                           Fluttertoast.showToast(msg: loc.vtSomethingWentWrong);
                         }
                         if (context.mounted) {
-                          Navigator.of(context).popUntil((route) => false);
+                          Navigator.popUntil(context, (route) => route.isFirst);
                         }
                       }
                     : null,

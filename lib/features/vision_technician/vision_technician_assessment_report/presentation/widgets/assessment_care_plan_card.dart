@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -21,11 +22,9 @@ class AssessementCarePlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    final data = carePlan?.first.goals?.first.outcomes ?? [];
-    final data2 = carePlan?.first.activities ?? [];
-    if (data.isEmpty || data2.isEmpty) {
-      return const SizedBox();
-    }
+    final outcomes = carePlan?.first.goals?.first.outcomes ?? [];
+    final activites = carePlan?.first.activities ?? [];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,14 +36,25 @@ class AssessementCarePlanCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSize.km),
-        SizedBox(
-          child: Wrap(
-            runSpacing: 8,
-            children: () {
-              if (showCarePlan) {
-                return [
-                  ...data.map(
-                    (e) => Container(
+        () {
+          if (showCarePlan) {
+            logger.d("Outcomes: $outcomes");
+            if (outcomes.isEmpty) {
+              return Text(
+                "No care plan available",
+                style: applyFiraSansFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            }
+
+            return Wrap(
+              runSpacing: 8,
+              children: [
+                ...outcomes.map(
+                  (e) {
+                    return Container(
                       width: isMobile
                           ? AppSize.width(context) * 0.4
                           : AppSize.width(context) * 0.3,
@@ -89,38 +99,51 @@ class AssessementCarePlanCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  )
-                ];
-              } else {
-                return [
-                  ...data2.map(
-                    (e) => AppCard(
-                      padding: AppSize.km,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.local_hospital_outlined),
-                          const SizedBox(width: 8),
-                          Text(
-                            e.plannedActivityReference?.serviceRequest
-                                    ?.patientInstruction
-                                    .formatTitle() ??
-                                "",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                    );
+                  },
+                )
+              ],
+            );
+          } else {
+            logger.d("Activities: $activites");
+            if (activites.isEmpty) {
+              return Text(
+                "No care plan available",
+                style: applyFiraSansFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              );
+            }
+            return Wrap(
+              runSpacing: 8,
+              children: [
+                ...activites.map(
+                  (e) => AppCard(
+                    padding: AppSize.km,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.local_hospital_outlined),
+                        const SizedBox(width: 8),
+                        Text(
+                          e.plannedActivityReference?.serviceRequest
+                                  ?.patientInstruction
+                                  .formatTitle() ??
+                              "",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  )
-                ];
-              }
-            }(),
-          ),
-        ),
+                  ),
+                )
+              ],
+            );
+          }
+        }(),
       ],
     );
   }

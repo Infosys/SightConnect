@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_as
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_remark_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessmnet_acuity_score_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
     final loc = context.loc!;
     final appBarTitle =
         "${loc.vtAssessmentReport} ${assessmentDetailsReport.assessmentID}";
+    logger.f(assessmentDetailsReport.carePlans?.first.toJson());
 
     return Scaffold(
       appBar: CustomAppbar(

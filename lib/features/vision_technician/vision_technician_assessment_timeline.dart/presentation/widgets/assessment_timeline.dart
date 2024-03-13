@@ -13,12 +13,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import '../../domain/repositories/assessment_timeline_repository_impl.dart';
 
-var vtAssessmentTimelineProvider =
-    FutureProvider.autoDispose.family((ref, int encounterId) async {
-  return await ref
-      .watch(assessmentTimeLineRepository)
-      .getAssessmentTimeline(encounterId);
-});
+var vtAssessmentTimelineProvider = FutureProvider.autoDispose.family(
+  (ref, int encounterId) async {
+    return await ref
+        .watch(assessmentTimeLineRepository)
+        .getAssessmentTimeline(encounterId);
+  },
+);
 
 class AssessmentTimeline extends ConsumerWidget {
   final VTPatientDto? patientDetail;
@@ -134,15 +135,20 @@ class AssessmentTimeline extends ConsumerWidget {
                         width: AppSize.width(context),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return VisionTechnicianCloseAssessmentPage(
-                                patientId: patientDetail?.id.toString() ?? "",
-                                patientName:
-                                    patientDetail?.name.toString() ?? "",
-                                encounterId: encounterId,
-                              );
-                            }));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return VisionTechnicianCloseAssessmentPage(
+                                    patientId:
+                                        patientDetail?.id.toString() ?? "",
+                                    patientName:
+                                        patientDetail?.name.toString() ?? "",
+                                    encounterId: encounterId,
+                                  );
+                                },
+                              ),
+                            );
                           },
                           child: Text(loc.vtClose),
                         ),

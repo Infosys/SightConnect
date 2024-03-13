@@ -121,6 +121,9 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
   }
 
   bool canSubmit() {
+    // check mr and selected goal outcome
+    // return _mrCodeController.text.isNotEmpty &&
+    //     _selectedGoalOutComeList.isNotEmpty;
     return _selectedGoalOutComeList.isNotEmpty;
   }
 }
