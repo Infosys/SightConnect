@@ -35,7 +35,7 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
     required this.globalVTProvider,
   });
 
-  Future<String> submitCloseAssessmentInfo(VTPatientDto patientDetails) async {
+  Future<String> submitCloseAssessmentInfo() async {
     List<Outcome> listOfOutcomes = [];
 
     Set<GoalOutCome> selectedGoalOutComeList =
@@ -61,7 +61,7 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
       diagnosticReportId: triageResponse?.id, //from care plan response
       organizationCode:
           carePlanResponse?.organizationCode, //from care plan response
-          tenantCode: carePlanResponse?.tenantCode, //from care plan response
+      tenantCode: carePlanResponse?.tenantCode, //from care plan response
       performer: [
         PerformerDto(
           role: Role.VISION_TECHNICIAN,

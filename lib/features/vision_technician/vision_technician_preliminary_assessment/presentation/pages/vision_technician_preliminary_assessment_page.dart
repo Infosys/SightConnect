@@ -102,16 +102,19 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                             Fluttertoast.showToast(msg: failure.errorMessage);
                           },
                           (triageResponseModel) {
-                            logger.d(
-                                "Triage Response Model: ${triageResponseModel.encounterId}");
-                            patientDetails = patientDetails?.copyWith(
-                              encounterId: triageResponseModel.encounterId,
-                            );
+                            if (triageResponseModel.encounterId == null) {
+                              Fluttertoast.showToast(
+                                  msg: loc.vtSomethingWentWrong);
+                              return;
+                            }
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
                                     VisionTechnicianCloseAssessmentPage(
-                                  patientDetails: patientDetails,
+                                  patientId:
+                                      patientDetails?.id.toString() ?? "",
+                                  encounterId: triageResponseModel.encounterId!,
+                                  patientName: patientDetails?.name ?? "",
                                 ),
                               ),
                             );
