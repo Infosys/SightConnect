@@ -22,8 +22,6 @@ class AssessementCarePlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    final outcomes = carePlan?.first.goals?.first.outcomes ?? [];
-    final activites = carePlan?.first.activities ?? [];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,16 +36,17 @@ class AssessementCarePlanCard extends StatelessWidget {
         const SizedBox(height: AppSize.km),
         () {
           if (showCarePlan) {
-            logger.d("Outcomes: $outcomes");
-            if (outcomes.isEmpty) {
-              return Text(
+            if (carePlan == null ||
+                carePlan!.isEmpty ||
+                carePlan!.first.goals == null ||
+                carePlan!.first.goals!.isEmpty ||
+                carePlan!.first.goals!.first.outcomes == null ||
+                carePlan!.first.goals!.first.outcomes!.isEmpty) {
+              return const Text(
                 "No care plan available",
-                style: applyFiraSansFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
               );
             }
+            final outcomes = carePlan!.first.goals!.first.outcomes!;
 
             return Wrap(
               runSpacing: 8,
@@ -105,16 +104,15 @@ class AssessementCarePlanCard extends StatelessWidget {
               ],
             );
           } else {
-            logger.d("Activities: $activites");
-            if (activites.isEmpty) {
-              return Text(
-                "No care plan available",
-                style: applyFiraSansFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+            if (carePlan == null ||
+                carePlan!.isEmpty ||
+                carePlan!.first.activities == null ||
+                carePlan!.first.activities!.isEmpty) {
+              return const Text(
+                "No Recommended Center Type available",
               );
             }
+            final activites = carePlan!.first.activities!;
             return Wrap(
               runSpacing: 8,
               children: [

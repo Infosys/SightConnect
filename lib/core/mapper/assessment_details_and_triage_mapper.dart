@@ -44,9 +44,13 @@ class AssessmentDetailedAndTriageReportMapper {
       observationSeverity: triageDetailedReport.observationSeverity,
       mediaSeverity: triageDetailedReport.mediaSeverity,
       questionResponseSeverity: triageDetailedReport.questionResponseSeverity,
-      visionCenterId: triageDetailedReport.carePlans?.first.activities?.first
-          .plannedActivityReference?.serviceRequest?.identifier,
-      remarks: triageDetailedReport.carePlans?.first.note,
+      visionCenterId: triageDetailedReport.carePlans?.isNotEmpty ?? false
+          ? triageDetailedReport.carePlans!.first.activities?.first
+              .plannedActivityReference?.serviceRequest?.identifier
+          : null,
+      remarks: triageDetailedReport.carePlans?.isNotEmpty ?? false
+          ? triageDetailedReport.carePlans!.first.note
+          : null,
     );
   }
 
@@ -174,9 +178,10 @@ class AssessmentDetailedAndTriageReportMapper {
         if (questionResponseMap.containsKey(response.linkId)) {
           questionResponseBriefEntity.add(
             QuestionResponseBriefEntity(
-              question: questionResponseMap[response.linkId]!,
-              response: response.answers!.first.value,
-            ),
+                question: questionResponseMap[response.linkId]!,
+                response: response.answers?.isNotEmpty ?? false
+                    ? response.answers!.first.value
+                    : ""),
           );
         }
       }

@@ -29,7 +29,7 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
     final loc = context.loc!;
     final appBarTitle =
         "${loc.vtAssessmentReport} ${assessmentDetailsReport.assessmentID}";
-    logger.f(assessmentDetailsReport.carePlans?.first.toJson());
+    // logger.f(assessmentDetailsReport.carePlans?.first.toJson());
 
     return Scaffold(
       appBar: CustomAppbar(

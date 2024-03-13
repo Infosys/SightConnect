@@ -19,11 +19,19 @@ class AssessmentReportRecommendedCenter extends ConsumerWidget {
     final loc = context.loc!;
     if (visionCenterId == null) {
       logger.d("visionCenterId is null");
-      return Container(
-        padding: const EdgeInsets.all(AppSize.km),
-        child: const Center(
-          child: Text("No Vision Center Found"),
-        ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            loc.vtRecommendedCenter,
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: AppSize.km),
+          const Text("No Vision Center Found"),
+        ],
       );
     }
 
