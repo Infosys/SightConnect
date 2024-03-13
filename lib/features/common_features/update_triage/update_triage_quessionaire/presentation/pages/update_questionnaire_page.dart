@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -165,28 +166,42 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                                   }
                                                 }
                                               },
-                                              child: Text(
-                                                loc.noButton,
+                                              child: AutoSizeText(
+                                                question
+                                                        .answerOption
+                                                        ?.first
+                                                        .answer
+                                                        ?.answerDisplayString ??
+                                                    "",
                                                 style: applyRobotoFont(
                                                   fontSize: 14,
                                                   color: AppColor.primary,
                                                 ),
                                               ),
                                             ),
-                                            TextButton(
-                                              onPressed: () {
-                                                pageController.animateToPage(
-                                                  index + 1,
-                                                  duration: const Duration(
-                                                      milliseconds: 80),
-                                                  curve: Curves.easeIn,
-                                                );
-                                              },
-                                              child: Text(
-                                                loc.yesButton,
-                                                style: applyRobotoFont(
+                                            Flexible(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  pageController.animateToPage(
+                                                    index + 1,
+                                                    duration: const Duration(
+                                                        milliseconds: 80),
+                                                    curve: Curves.easeIn,
+                                                  );
+                                                },
+                                                child: AutoSizeText(
+                                                  question
+                                                          .answerOption
+                                                          ?.last
+                                                          .answer
+                                                          ?.answerDisplayString ??
+                                                      "",
+                                                  textAlign: TextAlign.center,
+                                                  style: applyRobotoFont(
                                                     fontSize: 14,
-                                                    color: AppColor.primary),
+                                                    color: AppColor.primary,
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -205,27 +220,69 @@ class UpdateTriageQuestionnairePage extends HookConsumerWidget {
                                     updatequestionnaireIndexProvider.notifier)
                                 .state,
                             question: question,
-                            onNoButtonPressed: () {
-                              ref
-                                  .read(
-                                      updatequestionnaireIndexProvider.notifier)
-                                  .state++;
+                            onNoButtonPressed:
+                                (bool isNav, bool isForward) async {
+                              if (isNav == false) {
+                                ref
+                                    .read(updatequestionnaireIndexProvider
+                                        .notifier)
+                                    .state++;
 
-                              model.addQuestionnaireAnswer(
-                                question.id!,
-                                "No",
-                                _getAnswerWeightage(finalValueMap, "No")
-                                    .toInt(),
-                                _getAnswerCode(finalValueMap, "No"),
-                              );
-                              if (isLastQuestion) {
-                                model.saveQuestionaireResponse();
-                              } else {
-                                pageController.animateToPage(
-                                  index + 1,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeIn,
+                                model.addQuestionnaireAnswer(
+                                  question.id!,
+                                  "No",
+                                  _getAnswerWeightage(finalValueMap, "No")
+                                      .toInt(),
+                                  _getAnswerCode(finalValueMap, "No"),
                                 );
+                                if (isLastQuestion) {
+                                  model.saveQuestionaireResponse();
+                                } else {
+                                  pageController.animateToPage(
+                                    index + 1,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeIn,
+                                  );
+                                }
+                              } else {
+                                if (isForward == true) {
+                                  ref
+                                      .read(updatequestionnaireIndexProvider
+                                          .notifier)
+                                      .state++;
+                                } else {
+                                  ref
+                                      .read(updatequestionnaireIndexProvider
+                                          .notifier)
+                                      .state--;
+                                }
+
+                                model.addQuestionnaireAnswer(
+                                  question.id!,
+                                  "No",
+                                  _getAnswerWeightage(finalValueMap, "No")
+                                      .toInt(),
+                                  _getAnswerCode(finalValueMap, "No"),
+                                );
+                                if (isLastQuestion) {
+                                  model.saveQuestionaireResponse();
+                                } else {
+                                  if (isForward == true) {
+                                    pageController.animateToPage(
+                                      index + 1,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeIn,
+                                    );
+                                  } else {
+                                    pageController.animateToPage(
+                                      index - 1,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeIn,
+                                    );
+                                  }
+                                }
                               }
                             },
                             onYesButtonPressed: () async {
