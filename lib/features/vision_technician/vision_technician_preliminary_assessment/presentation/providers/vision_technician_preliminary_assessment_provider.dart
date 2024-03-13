@@ -170,7 +170,11 @@ class VtTriageProvider extends ChangeNotifier {
 
       if (organizationCode != null) {
         carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
-            organizationCode, reportId!, encounterId!, tenantCode!);
+          organizationCode: organizationCode,
+          tenantCode: tenantCode!,
+          reportId: reportId!,
+          encounterId: encounterId!,
+        );
 
         carePlanResponse.fold((error) {
           throw error;

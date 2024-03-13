@@ -38,8 +38,12 @@ class CarePlanViewModel extends ChangeNotifier {
     this._vtCarePlanRemoteSource,
   );
 
-  Future<Either<Failure, CarePlanPostModel>> saveCarePlan(
-      int organizationCode,int tenantCode,int reportId, int encounterId) async {
+  Future<Either<Failure, CarePlanPostModel>> saveCarePlan({
+    required int organizationCode,
+    required int tenantCode,
+    required int reportId,
+    required int encounterId,
+  }) async {
     final PatientInstruction patientInstruction =
         _carePlanProvider.patientInstruction;
 
@@ -82,7 +86,7 @@ class CarePlanViewModel extends ChangeNotifier {
       ],
     );
 
-    logger.d({"care plan to be saved":carePlan.toJson()});
+    logger.d({"care plan to be saved": carePlan.toJson()});
 
     var response = await _vtCarePlanRemoteSource.saveCarePlan(
       carePlan: carePlan,
