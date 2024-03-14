@@ -36,6 +36,7 @@ class AssessmentTimelineView extends HookConsumerWidget {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
+            logger.f(timeLineList[index].toJson());
             return ListTile(
               contentPadding: const EdgeInsets.all(0),
               title: Row(

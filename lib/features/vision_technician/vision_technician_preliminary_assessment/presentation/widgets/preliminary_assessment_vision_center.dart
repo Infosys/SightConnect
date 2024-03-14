@@ -30,7 +30,8 @@ class PreliminaryAssessmentVisionCenter extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            loc.vtVisionCenter,
+            // loc.vtVisionCenter,
+            "Vision Center Suggested",
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
