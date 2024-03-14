@@ -153,7 +153,6 @@ class PatientAssessmentDataSource extends DataTableSource {
   });
   @override
   DataRow? getRow(int index) {
-    logger.f(data[index].toJson());
     if (isLoading) {
       return DataRow(
         cells: [
