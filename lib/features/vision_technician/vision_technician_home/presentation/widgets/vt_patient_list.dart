@@ -103,8 +103,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ),
         DataColumn(
           label: Text(
-            // loc.vtCategory,
-            "Urgency",
+            loc.vtCategory,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,

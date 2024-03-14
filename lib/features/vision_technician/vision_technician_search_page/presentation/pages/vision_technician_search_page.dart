@@ -95,7 +95,8 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                 scrollDirection: Axis.horizontal,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: AppSize.km),
+                                    horizontal: AppSize.km,
+                                  ),
                                   child: DataTable(
                                     dataTextStyle: applyRobotoFont(
                                       fontSize: 14,
@@ -148,7 +149,8 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                       ),
                                       DataColumn(
                                         label: Text(
-                                          loc.vtAssessmentID,
+                                          // loc.vtAssessmentID,
+                                          "Encounter ID",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: applyFiraSansFont(
