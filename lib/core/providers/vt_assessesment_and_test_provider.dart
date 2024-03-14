@@ -31,7 +31,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isUpdateLoading => _isUpdateLoading;
 
-  Future<List<TriageDetailedReportModel>> _getTriageReportByEncounterId(
+  Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
     DiagnosticReportStatus status,
   ) async {
@@ -147,7 +147,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
 
       List<TriageDetailedReportModel> triageReport = [];
       try {
-        triageReport = await _getTriageReportByEncounterId(encounterId, status);
+        triageReport = await getTriageReportByEncounterId(encounterId, status);
         if (triageReport.isEmpty) {
           throw ServerFailure(errorMessage: "No report found");
         } else {

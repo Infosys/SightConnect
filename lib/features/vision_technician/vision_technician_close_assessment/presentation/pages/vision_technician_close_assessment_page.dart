@@ -1,14 +1,19 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_view_model_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/close_heading.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/mr_code.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -92,6 +97,40 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: model.canSubmit()
                     ? () async {
+                        List<TriageDetailedReportModel> finalReportList =
+                            await ref
+                                .read(vtAssessmentAndTestProvider)
+                                .getTriageReportByEncounterId(
+                                    encounterId!, DiagnosticReportStatus.FINAL);
+
+                        CarePlanPostModel carePlanPostModel = CarePlanPostModel(
+                          id: finalReportList.first.carePlans?.first.carePlanId,
+                          organizationCode:
+                              finalReportList.first.organizationCode,
+                          tenantCode: finalReportList.first.tenantCode,
+                          goal: [
+                            GoalModel(
+                              id: finalReportList
+                                  .first.carePlans?.first.goals?.first.id,
+                            )
+                          ],
+                        );
+
+                        final TriagePostModel finalPostModel = TriagePostModel(
+                          id: finalReportList.first.diagnosticReportId,
+                          encounter: EncounterModel(
+                              id: finalReportList.first.encounterId),
+                        );
+                        ref
+                            .read(preliminaryAssessmentHelperProvider)
+                            .setCarePlanResponse(carePlanPostModel);
+                        ref
+                            .read(preliminaryAssessmentHelperProvider)
+                            .setTriageResponse(finalPostModel);
+
+                        logger.t(finalReportList.first.toJson());
+                        logger.f(finalPostModel.toJson());
+
                         String response = await ref
                             .read(vtCloseAssessmentViewModelProvider)
                             .submitCloseAssessmentInfo();
