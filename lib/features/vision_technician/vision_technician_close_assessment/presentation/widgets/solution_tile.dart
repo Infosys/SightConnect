@@ -20,7 +20,6 @@ class SolutionTile extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var switchState = useState<bool>(false);
 
-    var refRead = ref.read(vtCloseAssessmentHelperProvider);
     return Container(
       padding: const EdgeInsets.all(AppSize.km),
       margin: const EdgeInsets.all(AppSize.ks),
@@ -39,8 +38,9 @@ class SolutionTile extends HookConsumerWidget {
                 onChanged: (bool value) {
                   switchState.value = value;
 
-                  refRead.setSolution(goalOutCome);
-                  // model.addSolutions(title);
+                  ref
+                      .read(vtCloseAssessmentHelperProvider)
+                      .setSolution(goalOutCome);
                 },
               ),
               const SizedBox(width: AppSize.ks),

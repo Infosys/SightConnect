@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/assessment_timeline_view.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -12,12 +13,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import '../../domain/repositories/assessment_timeline_repository_impl.dart';
 
-var vtAssessmentTimelineProvider =
-    FutureProvider.autoDispose.family((ref, int encounterId) async {
-  return await ref
-      .watch(assessmentTimeLineRepository)
-      .getAssessmentTimeline(encounterId);
-});
+var vtAssessmentTimelineProvider = FutureProvider.autoDispose.family(
+  (ref, int encounterId) async {
+    return await ref
+        .watch(assessmentTimeLineRepository)
+        .getAssessmentTimeline(encounterId);
+  },
+);
 
 class AssessmentTimeline extends ConsumerWidget {
   final VTPatientDto? patientDetail;
@@ -46,7 +48,11 @@ class AssessmentTimeline extends ConsumerWidget {
 
     return ref.watch(vtAssessmentTimelineProvider(encounterId)).when(
           data: (data) {
-            logger.d("timeline data $data");
+            String encounterStatus = data.first.title
+                    ?.replaceAll("_", " ")
+                    .toLowerCase()
+                    .capitalizeFirstOfEach() ??
+                "";
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,11 +98,7 @@ class AssessmentTimeline extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: AutoSizeText(
-                              data.first.title
-                                      ?.replaceAll("_", " ")
-                                      .toLowerCase()
-                                      .capitalizeFirstOfEach() ??
-                                  "",
+                              encounterStatus,
                               maxFontSize: 18,
                               minFontSize: 12,
                               style: applyRobotoFont(
@@ -127,6 +129,30 @@ class AssessmentTimeline extends ConsumerWidget {
                     ],
                   ),
                 ),
+                encounterStatus == 'Closure'
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                        width: AppSize.width(context),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return VisionTechnicianCloseAssessmentPage(
+                                    patientId:
+                                        patientDetail?.id.toString() ?? "",
+                                    patientName:
+                                        patientDetail?.name.toString() ?? "",
+                                    encounterId: encounterId,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: Text(loc.vtClose),
+                        ),
+                      )
               ],
             );
           },

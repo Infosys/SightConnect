@@ -10,13 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class SolutionCard extends ConsumerWidget {
   const SolutionCard({super.key});
 
-  static List<String> solutions = [
-    "Spectacles",
-    "Cataract Surgery",
-    "Eye Drops",
-    "Oral Medication",
-  ];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<GoalOutCome> goalOutcomes =

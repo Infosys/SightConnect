@@ -35,7 +35,16 @@ var dioProvider = Provider(
     );
 
     dio.interceptors.addAll(
-      [DioTokenInterceptor(ref, dio), LogInterceptor(requestHeader: false)],
+      [
+        DioTokenInterceptor(ref, dio),
+        LogInterceptor(
+          requestHeader: false,
+          requestBody: true,
+          request: true,
+          responseBody: false,
+          responseHeader: false,
+        )
+      ],
     );
     return dio;
   },

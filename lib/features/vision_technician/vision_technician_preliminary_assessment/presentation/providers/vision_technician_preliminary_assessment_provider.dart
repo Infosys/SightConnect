@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:dartz/dartz.dart';
 
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
@@ -14,6 +16,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
@@ -28,7 +31,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common_features/triage/domain/repositories/triage_urgency_repository.dart';
 
-var vtTriageProvider = ChangeNotifierProvider.autoDispose(
+var vtTriageSaveProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
     return VtTriageProvider(
       ref.watch(saveTriageUseCase),
@@ -70,7 +73,8 @@ class VtTriageProvider extends ChangeNotifier {
   );
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
-      VTPatientDto patientDetails) async {
+    VTPatientDto patientDetails,
+  ) async {
     _preliminaryAssessmentHelperProvider.setLoading(true);
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {
       logger.d("on ivr called");
@@ -127,8 +131,8 @@ class VtTriageProvider extends ChangeNotifier {
           identifier: _vtProfile?.id,
         )
       ],
-      assessmentCode: assessment.id, //from questionnaire MS
-      assessmentVersion: assessment.version, //questionnaire MS
+      assessmentCode: assessment.id,
+      assessmentVersion: assessment.version,
       cummulativeScore: triageUrgency.toInt(),
       score: [
         {"QUESTIONNAIRE": questionnaireUrgency},
@@ -170,7 +174,11 @@ class VtTriageProvider extends ChangeNotifier {
 
       if (organizationCode != null) {
         carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
-            organizationCode, tenantCode!, reportId!, encounterId!);
+          organizationCode: organizationCode,
+          tenantCode: tenantCode!,
+          reportId: reportId!,
+          encounterId: encounterId!,
+        );
 
         carePlanResponse.fold((error) {
           throw error;

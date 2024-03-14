@@ -35,7 +35,7 @@ class AppConsentFormPage extends HookConsumerWidget {
         appBar: CustomAppbar(
           title: Text(loc.privacyPolicyTitle),
           automaticallyImplyLeading: false,
-          leadingIcon: const SizedBox(),
+          leadingIcon: isPreview ? null : const SizedBox(),
         ),
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8),

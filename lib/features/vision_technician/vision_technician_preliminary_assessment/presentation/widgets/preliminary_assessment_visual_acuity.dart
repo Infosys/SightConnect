@@ -51,12 +51,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                 child: TextField(
                   onChanged: (value) {
                     bool isNumeric =
-                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
+                        RegExp(r'^[0-1](\.[0-9]{1,3})?$').hasMatch(value);
                     double? numericValue =
                         isNumeric ? double.tryParse(value) : null;
-
-                    if (!isNumeric ||
-                        (numericValue != null && numericValue > 99.999)) {
+                    if (!isNumeric || numericValue == null) {
                       ref
                           .read(preliminaryAssessmentHelperProvider)
                           .setVisualAcuityRightEyeValueEntered(false);
@@ -87,12 +85,10 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                 child: TextField(
                   onChanged: (value) {
                     bool isNumeric =
-                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
+                        RegExp(r'^[0-1](\.[0-9]{1,3})?$').hasMatch(value);
                     double? numericValue =
                         isNumeric ? double.tryParse(value) : null;
-
-                    if (!isNumeric ||
-                        (numericValue != null && numericValue > 99.999)) {
+                    if (!isNumeric || numericValue == null) {
                       ref
                           .read(preliminaryAssessmentHelperProvider)
                           .setVisualAcuityLeftEyeValueEntered(false);

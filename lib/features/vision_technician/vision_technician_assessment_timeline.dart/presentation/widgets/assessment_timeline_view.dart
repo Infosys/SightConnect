@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
@@ -183,7 +184,7 @@ Widget TimeWidgetRender(
         Row(
           children: [
             const Icon(
-              Icons.file_open,
+              Icons.file_copy_outlined,
               size: 20,
             ),
             const SizedBox(
@@ -217,7 +218,8 @@ Widget TimeWidgetRender(
                       ),
                     );
                   }
-                } catch (e) {
+                } on ServerFailure catch (e) {
+                  logger.e("error ${e.errorMessage}");
                   isLoading.value = false;
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -226,7 +228,6 @@ Widget TimeWidgetRender(
                       ),
                     );
                   }
-                  logger.d("error $e");
                 }
               },
               child: Text(

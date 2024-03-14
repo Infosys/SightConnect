@@ -24,11 +24,25 @@ class MRCode extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            loc.vtMrCode,
-            style: applyFiraSansFont(
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            children: [
+              Text(
+                loc.vtMrCode,
+                style: applyFiraSansFont(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: AppSize.ks),
+              Text(
+                "Optional",
+                textHeightBehavior:
+                    const TextHeightBehavior(applyHeightToFirstAscent: false),
+                style: applyFiraSansFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: AppSize.km,
@@ -40,20 +54,20 @@ class MRCode extends ConsumerWidget {
             decoration: InputDecoration(
               hintText: loc.vtEnterMrCode,
               hintStyle: applyRobotoFont(fontSize: 14),
-              error: ref
-                          .watch(vtCloseAssessmentHelperProvider)
-                          .mrCodeController
-                          .text
-                          .length <
-                      4
-                  ? Text(
-                      loc.vtPleaseEnterMrCode,
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.red,
-                      ),
-                    )
-                  : null,
+              // error: ref
+              //             .watch(vtCloseAssessmentHelperProvider)
+              //             .mrCodeController
+              //             .text
+              //             .length <
+              //         4
+              //     ? Text(
+              //         loc.vtPleaseEnterMrCode,
+              //         style: applyRobotoFont(
+              //           fontSize: 12,
+              //           color: AppColor.red,
+              //         ),
+              //       )
+              //     : null,
             ),
           )
         ],

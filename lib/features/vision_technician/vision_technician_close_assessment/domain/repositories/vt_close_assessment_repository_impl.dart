@@ -3,17 +3,15 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/source/vt_close_assessment_remote_source.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var vtCloseAssessmentRepository =
-    Provider((ref) => VTCloseAssessmentRepositoryImpl(
-      ref.watch(vtCloseAssessmentRemoteSource)
-    ));
+var vtCloseAssessmentRepository = Provider((ref) =>
+    VTCloseAssessmentRepositoryImpl(ref.watch(vtCloseAssessmentRemoteSource)));
 
 class VTCloseAssessmentRepositoryImpl extends VTCloseAssessmentRepository {
   VTCloseAssessmentRemoteSource remoteDataSource;
   VTCloseAssessmentRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<String> submitCloseAssessmentInfo(CloseAssessmentDto patientDetails) {
+  Future<void> submitCloseAssessmentInfo(CloseAssessmentDto patientDetails) {
     return remoteDataSource.submitCloseAssessmentInfo(patientDetails);
   }
 }

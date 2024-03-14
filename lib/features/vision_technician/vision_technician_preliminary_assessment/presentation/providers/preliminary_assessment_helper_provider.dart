@@ -5,18 +5,18 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var preliminaryAssessmentHelperProvider =
+final preliminaryAssessmentHelperProvider =
     ChangeNotifierProvider<PreliminaryAssessmentHelperNotifier>(
   (ref) => PreliminaryAssessmentHelperNotifier(ref),
 );
 
 class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   Ref ref;
-  var recommendationController = TextEditingController();
-  var eyeRelatedProblemotherController = TextEditingController();
-  var eyeSightProblemotherController = TextEditingController();
-  var remarksController = TextEditingController();
-  var otherQuestionsController = TextEditingController();
+  final recommendationController = TextEditingController();
+  final eyeRelatedProblemotherController = TextEditingController();
+  final eyeSightProblemotherController = TextEditingController();
+  final remarksController = TextEditingController();
+  final otherQuestionsController = TextEditingController();
   bool onIvrCall = true;
   bool recommendationSelected = false;
   bool visionCenterSelected = false;
@@ -110,4 +110,14 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool canSubmit() {
+    var canSubmit = recommendationSelected &&
+        visionCenterSelected &&
+        (onIvrCall ||
+            (visualAcuityRightEyeValueEntered &&
+                visualAcuityLeftEyeValueEntered &&
+                visualAcuityBothEyeValueEntered &&
+                imagesSubmitted));
+    return canSubmit;
+  }
 }
