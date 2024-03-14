@@ -31,8 +31,8 @@ class ListOfEncountersChip extends HookConsumerWidget {
 
     return ref.watch(vtListOfEncountersChipProvider(patientId!)).when(
           data: (data) {
-            data = data.reversed.toList();
-
+            // sort data on the basis of date
+            data.sort((a, b) => b.period!.start!.compareTo(a.period!.start!));
             return SizedBox(
               height: AppSize.height(context) * 0.05,
               child: ListView.builder(

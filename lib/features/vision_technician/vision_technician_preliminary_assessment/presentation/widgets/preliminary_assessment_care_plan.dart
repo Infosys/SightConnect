@@ -16,10 +16,10 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(carePlanProvider);
     final options = [
-      "Visit Primary Center",
-      "Visit Secondary Center",
-      "Visit Tertiary Center",
-      "Visit Center of Excellence"
+      "Primary Center",
+      "Secondary Center",
+      "Tertiary Center",
+      "Center of Excellence"
     ];
     final selectedOption = useState<String?>('');
     final loc = context.loc!;
@@ -36,9 +36,10 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              loc.vtRecommendation,
-              style: const TextStyle(
+            const Text(
+              // loc.vtRecommendation,
+              "Vision Center Type",
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

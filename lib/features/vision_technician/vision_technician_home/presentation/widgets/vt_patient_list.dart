@@ -80,7 +80,8 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ),
         DataColumn(
           label: Text(
-            loc.vtAssessmentID,
+            // loc.vtAssessmentID,
+            "Encounter ID",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
@@ -105,6 +106,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
             loc.vtCategory,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
             style: applyFiraSansFont(
               fontSize: 12,
               color: AppColor.grey,
@@ -215,7 +217,7 @@ class PatientAssessmentDataSource extends DataTableSource {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "AT ${data[index].encounterId ?? ""}",
+                "${data[index].encounterId ?? ""}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(fontSize: 14),
