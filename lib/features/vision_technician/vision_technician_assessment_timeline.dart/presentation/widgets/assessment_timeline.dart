@@ -36,7 +36,7 @@ class AssessmentTimeline extends ConsumerWidget {
         ref.watch(assessmentTimelineProvider).currentEncounter;
     int? encounterId = encounter?.id;
     String? encounterDate =
-        encounter?.period?.start?.formatDateTimeMonthName.toString();
+        encounter?.period?.start?.formatDateTimeMonthNameWithTime;
     if (encounterId == null) {
       return Center(
         child: Text(
@@ -48,11 +48,12 @@ class AssessmentTimeline extends ConsumerWidget {
 
     return ref.watch(vtAssessmentTimelineProvider(encounterId)).when(
           data: (data) {
-            String encounterStatus = data.first.title
+            final encounterStatus = data.first.title
                     ?.replaceAll("_", " ")
                     .toLowerCase()
                     .capitalizeFirstOfEach() ??
                 "";
+            final isCaseClosed = encounterStatus.toLowerCase() == 'closure';
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,14 +92,13 @@ class AssessmentTimeline extends ConsumerWidget {
                               vertical: 7,
                             ),
                             decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColor.grey,
-                              ),
-                              color: const Color(0xffFBD5D5),
+                              color: isCaseClosed
+                                  ? AppColor.lightGreen
+                                  : AppColor.lightBlue,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: AutoSizeText(
-                              encounterStatus,
+                              isCaseClosed ? "Case Closed" : "Open",
                               maxFontSize: 18,
                               minFontSize: 12,
                               style: applyRobotoFont(
@@ -117,7 +117,6 @@ class AssessmentTimeline extends ConsumerWidget {
                         style: applyRobotoFont(
                           color: AppColor.grey,
                           fontSize: 16,
-                          fontWeight: FontWeight.w400,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
