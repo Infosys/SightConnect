@@ -156,7 +156,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                                         patientId:
                                             patientDetails?.id.toString() ?? "",
                                         encounterId:
-                                            triageResponseModel.encounterId,
+                                            triageResponseModel.encounter?.id,
                                         patientName: patientDetails?.name ?? "",
                                       );
                                     },

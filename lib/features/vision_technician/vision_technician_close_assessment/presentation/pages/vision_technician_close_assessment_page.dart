@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
@@ -97,58 +98,64 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: model.canSubmit()
                     ? () async {
-                        List<TriageDetailedReportModel> finalReportList =
-                            await ref
-                                .read(vtAssessmentAndTestProvider)
-                                .getTriageReportByEncounterId(
-                                    encounterId!, DiagnosticReportStatus.FINAL);
+                        try {
+                          final navigator = Navigator.of(context);
+                          List<TriageDetailedReportModel> triagReports =
+                              await ref
+                                  .read(vtAssessmentAndTestProvider)
+                                  .getTriageReportByEncounterId(encounterId!,
+                                      DiagnosticReportStatus.FINAL);
 
-                        CarePlanPostModel carePlanPostModel = CarePlanPostModel(
-                          id: finalReportList.first.carePlans?.first.carePlanId,
-                          organizationCode:
-                              finalReportList.first.organizationCode,
-                          tenantCode: finalReportList.first.tenantCode,
-                          goal: [
-                            GoalModel(
-                              id: finalReportList
-                                  .first.carePlans?.first.goals?.first.id,
-                            )
-                          ],
-                        );
+                          if (triagReports.isEmpty) {
+                            throw ServerFailure(
+                                errorMessage: "No report found");
+                          }
+                          final finalReport = triagReports.first;
 
-                        final TriagePostModel finalPostModel = TriagePostModel(
-                          id: finalReportList.first.diagnosticReportId,
-                          encounter: EncounterModel(
-                              id: finalReportList.first.encounterId),
-                        );
-                        ref
-                            .read(preliminaryAssessmentHelperProvider)
-                            .setCarePlanResponse(carePlanPostModel);
-                        ref
-                            .read(preliminaryAssessmentHelperProvider)
-                            .setTriageResponse(finalPostModel);
+                          CarePlanPostModel carePlanPostModel =
+                              CarePlanPostModel(
+                            id: finalReport.carePlans?.first.carePlanId,
+                            organizationCode: finalReport.organizationCode,
+                            tenantCode: finalReport.tenantCode,
+                            goal: [
+                              GoalModel(
+                                id: finalReport
+                                    .carePlans?.first.goals?.first.id,
+                              )
+                            ],
+                          );
 
-                        logger.t(finalReportList.first.toJson());
-                        logger.f(finalPostModel.toJson());
+                          final TriagePostModel triagePostModel =
+                              TriagePostModel(
+                            id: finalReport.diagnosticReportId,
+                            encounter:
+                                EncounterModel(id: finalReport.encounterId),
+                          );
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setCarePlanResponse(carePlanPostModel);
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setTriageResponse(triagePostModel);
 
-                        String response = await ref
-                            .read(vtCloseAssessmentViewModelProvider)
-                            .submitCloseAssessmentInfo();
-                        ref.invalidate(vtTriageSaveProvider);
-                        ref.invalidate(vtCloseAssessmentHelperProvider);
-                        ref.invalidate(vtTriageSaveProvider);
-                        ref.invalidate(preliminaryAssessmentHelperProvider);
-                        if (!context.mounted) {
-                          return;
-                        }
-                        if (response == "success") {
+                          await ref
+                              .read(vtCloseAssessmentViewModelProvider)
+                              .submitCloseAssessmentInfo();
+                          ref.invalidate(vtTriageSaveProvider);
+                          ref.invalidate(vtCloseAssessmentHelperProvider);
+                          ref.invalidate(vtTriageSaveProvider);
+                          ref.invalidate(preliminaryAssessmentHelperProvider);
+
                           await successDialogue(
-                              context, loc.vtAssessmentClosedSuccessfully);
-                        } else {
+                            context,
+                            loc.vtAssessmentClosedSuccessfully,
+                          );
+                          navigator.popUntil((route) => route.isFirst);
+                        } on ServerFailure catch (e) {
+                          Fluttertoast.showToast(msg: e.errorMessage);
+                        } catch (e) {
+                          logger.e(e);
                           Fluttertoast.showToast(msg: loc.vtSomethingWentWrong);
-                        }
-                        if (context.mounted) {
-                          Navigator.popUntil(context, (route) => route.isFirst);
                         }
                       }
                     : null,
