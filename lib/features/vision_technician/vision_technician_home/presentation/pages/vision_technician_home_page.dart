@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
@@ -86,10 +87,10 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         dialogStyle: Platform.isIOS
             ? UpgradeDialogStyle.cupertino
             : UpgradeDialogStyle.material,
-        showIgnore: false,
-        showLater: false,
-        shouldPopScope: () => false,
-        canDismissDialog: false,
+        showIgnore: kDebugMode ? true : false,
+        showLater: kDebugMode ? true : false,
+        shouldPopScope: () => kDebugMode ? true : false,
+        canDismissDialog: kDebugMode ? true : false,
         onUpdate: () {
           return true;
         },

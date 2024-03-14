@@ -106,7 +106,12 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
       try {
         final remoteResponse =
             await triageReportSource.getTriageReportByEncounterId(
-                encounterId, status, page, size, filter);
+          encounterId,
+          status,
+          page,
+          size,
+          filter,
+        );
 
         return Right(remoteResponse);
       } on ServerException catch (e) {
