@@ -13,6 +13,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,18 +37,13 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppbar(
-        onBackPress: () {
-          ref.invalidate(vtCloseAssessmentHelperProvider);
-          Navigator.popUntil(context, (route) => route.isFirst);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (builder) {
-                return const VisionTechnicianDashboardPage();
-              },
-            ),
-          );
-        },
+        leadingIcon: IconButton(
+          icon: const Icon(CupertinoIcons.back),
+          onPressed: () {
+            ref.invalidate(vtCloseAssessmentHelperProvider);
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },
+        ),
         title: Text(
           '${patientName} - OP ${patientId}',
           maxLines: 1,
