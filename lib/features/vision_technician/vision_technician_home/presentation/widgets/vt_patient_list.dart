@@ -72,7 +72,7 @@ class _PatientAssessmentPaginatedTableState
       showCheckboxColumn: false,
       columnSpacing: isMobile
           ? AppSize.width(context) * 0.06
-          : AppSize.width(context) * 0.05,
+          : AppSize.width(context) * 0.08,
       headingRowHeight: isMobile ? AppSize.kl * 2 : AppSize.kl * 3,
       horizontalMargin: isMobile
           ? AppSize.width(context) * 0.05
@@ -141,8 +141,27 @@ class _PatientAssessmentPaginatedTableState
       source: PatientAssessmentDataSource(
         data: model.listOfAssessments,
         context: context,
-        vtSearchProvider: ref.watch(visionTechnicianSearchProvider),
         model: model,
+        onSelectChanged: (record) {
+          ref.read(visionTechnicianSearchProvider).setPatientDetails(record);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
+                patientDetails: record,
+              ),
+            ),
+          );
+        },
+        onTimelinePressed: (record) {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return VisionTechnicianAssessmentTimeline(
+                patientDetails: record,
+              );
+            },
+          ));
+        },
       ),
     );
   }
@@ -151,13 +170,15 @@ class _PatientAssessmentPaginatedTableState
 class PatientAssessmentDataSource extends DataTableSource {
   final List<VTPatientDto> data;
   final BuildContext context;
-  final VisionTechnicianSearchProvider vtSearchProvider;
   final VTHomeHelperNotifier model;
+  Function(VTPatientDto)? onSelectChanged;
+  Function(VTPatientDto)? onTimelinePressed;
 
   PatientAssessmentDataSource({
     required this.data,
     required this.context,
-    required this.vtSearchProvider,
+    required this.onSelectChanged,
+    required this.onTimelinePressed,
     required this.model,
   });
   @override
@@ -176,17 +197,7 @@ class PatientAssessmentDataSource extends DataTableSource {
 
     return DataRow.byIndex(
       index: index,
-      onSelectChanged: (value) {
-        vtSearchProvider.setPatientDetails(data[index]);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
-              patientDetails: data[index],
-            ),
-          ),
-        );
-      },
+      onSelectChanged: (value) => onSelectChanged!(data[index]),
       cells: [
         DataCell(
           Column(
@@ -225,7 +236,7 @@ class PatientAssessmentDataSource extends DataTableSource {
               ),
               const SizedBox(height: 4),
               Text(
-                data[index].encounterStartDate!.formatDateTimeMonthName,
+                data[index].encounterStartDate.formatDateTimeMonthName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
@@ -275,13 +286,7 @@ class PatientAssessmentDataSource extends DataTableSource {
         ),
         DataCell(
           IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return VisionTechnicianAssessmentTimeline(
-                  patientDetails: data[index],
-                );
-              }));
-            },
+            onPressed: () => onTimelinePressed!(data[index]),
             icon: const Icon(
               Icons.timeline,
             ),

@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,134 +19,134 @@ import '../../domain/models/assessment_timeline_view_model.dart';
 
 class AssessmentTimelineView extends HookConsumerWidget {
   final VTPatientDto patientDetail;
-
-  const AssessmentTimelineView(this.timeLineList, this.patientDetail,
-      {super.key});
-
   final List<AssessmentTimelineViewModel> timeLineList;
+
+  const AssessmentTimelineView({
+    super.key,
+    required this.patientDetail,
+    required this.timeLineList,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ValueNotifier<bool> isLoading = useState<bool>(false);
 
-    return Column(
-      children: [
-        if (isLoading.value) const CircularProgressIndicator.adaptive(),
-        ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
-          itemBuilder: (context, index) {
-            return ListTile(
-              contentPadding: const EdgeInsets.all(0),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: AppSize.width(context) / 5,
-                    child: Text(
-                      timeLineList[index]
-                              .title
-                              ?.replaceAll("_", " ")
-                              .toLowerCase()
-                              .capitalizeFirstOfEach() ??
-                          "",
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.black,
+    return LoadingOverlay(
+      child: Column(
+        children: [
+          if (isLoading.value) const CircularProgressIndicator.adaptive(),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              return ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: AppSize.width(context) / 5,
+                      child: Text(
+                        timeLineList[index].title.formatTitle(),
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          color: AppColor.black,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    timeLineList[index].date.formateDateWithTime,
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.grey,
+                    Text(
+                      timeLineList[index].date.formateDateWithTime,
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Responsive.isMobile(context)
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              timeLineList[index].subtitle ?? "",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
+                  ],
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Responsive.isMobile(context)
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                timeLineList[index].subtitle ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
                               ),
-                            ),
-                            TimeWidgetRender(
-                              context,
-                              timeLineList[index],
-                              index,
-                              ref,
-                              isLoading,
-                              patientDetail,
-                            ),
-                          ],
-                        )
-                      : Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              timeLineList[index].subtitle ?? "",
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
+                              TimeWidgetRender(
+                                context,
+                                timeLineList[index],
+                                index,
+                                ref,
+                                isLoading,
+                                patientDetail,
                               ),
-                            ),
-                            TimeWidgetRender(
-                              context,
-                              timeLineList[index],
-                              index,
-                              ref,
-                              isLoading,
-                              patientDetail,
-                            ),
-                          ],
-                        ),
-                  const SizedBox(
-                    height: AppSize.km,
-                  ),
-                  const Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                  ),
-                ],
-              ),
-            );
-          },
-          itemCount: timeLineList.length,
-          separatorBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.ks + 2,
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    height: 50,
-                    width: 4,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color:
-                          index.isEven ? AppColor.altGreen : AppColor.lightGrey,
+                            ],
+                          )
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                timeLineList[index].subtitle ?? "",
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                              TimeWidgetRender(
+                                context,
+                                timeLineList[index],
+                                index,
+                                ref,
+                                isLoading,
+                                patientDetail,
+                              ),
+                            ],
+                          ),
+                    const SizedBox(
+                      height: AppSize.km,
                     ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            );
-          },
-        ),
-      ],
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                    ),
+                  ],
+                ),
+              );
+            },
+            itemCount: timeLineList.length,
+            separatorBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSize.ks + 2,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: index.isEven
+                            ? AppColor.altGreen
+                            : AppColor.lightGrey,
+                      ),
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

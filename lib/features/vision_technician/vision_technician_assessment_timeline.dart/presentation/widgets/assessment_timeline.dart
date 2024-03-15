@@ -124,7 +124,10 @@ class AssessmentTimeline extends ConsumerWidget {
                       const SizedBox(height: AppSize.kl),
                       const Divider(thickness: 1, color: AppColor.grey),
                       const SizedBox(height: AppSize.kl),
-                      AssessmentTimelineView(data, patientDetail!),
+                      AssessmentTimelineView(
+                        timeLineList: data,
+                        patientDetail: patientDetail!,
+                      ),
                     ],
                   ),
                 ),
