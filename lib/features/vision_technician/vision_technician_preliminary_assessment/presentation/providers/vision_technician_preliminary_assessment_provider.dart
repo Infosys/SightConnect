@@ -42,7 +42,6 @@ var vtTriageSaveProvider = ChangeNotifierProvider.autoDispose(
       ref.watch(carePlanViewModelProvider),
       ref.watch(preliminaryAssessmentHelperProvider),
       ref.watch(vtIVRCallerDetailsRemoteSourceProvider),
-      
     );
   },
 );
@@ -72,24 +71,22 @@ class VtTriageProvider extends ChangeNotifier {
     this._preliminaryAssessmentHelperProvider,
     this._callerDetailsRemoteSource,
   );
-   
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
     VTPatientDto patientDetails,
   ) async {
     _preliminaryAssessmentHelperProvider.setLoading(true);
     if (_preliminaryAssessmentHelperProvider.onIvrCall) {
-      logger.d("on ivr called");
       final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
         agentMobile: _vtProfile?.officialMobile,
         callerId: patientDetails.id.toString(),
         callerName: patientDetails.name,
         callerNumber: patientDetails.mobile,
       );
-
       try {
         await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
       } catch (e) {
+        logger.e("Error saving caller details: $e");
         _preliminaryAssessmentHelperProvider.setLoading(false);
         return Left(ServerFailure(errorMessage: "Not on IVR Call"));
       }
@@ -120,47 +117,47 @@ class VtTriageProvider extends ChangeNotifier {
     );
     logger.d("triageUrgency called");
 
-    DiagnosticReportTemplateFHIRModel assessment =
-        _visionTechnicianTriageProvider.assessment;
-
-    TriagePostModel triagePostModel = TriagePostModel(
-      patientId: patientDetails.id,
-      serviceType: ServiceType.OPTOMETRY,
-      tenantCode: assessment.tenantCode,
-      performer: [
-        Performer(
-          role: PerformerRole.VISION_TECHNICIAN,
-          identifier: _vtProfile?.id,
-        )
-      ],
-      assessmentCode: assessment.id,
-      assessmentVersion: assessment.version,
-      cummulativeScore: triageUrgency.toInt(),
-      score: [
-        {"QUESTIONNAIRE": questionnaireUrgency},
-        {"OBSERVATION": visualAcuityUrgency},
-        {"IMAGE": eyeScanUrgency}
-      ],
-      userStartDate:
-          DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
-      issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
-      source: Source.VT_APP,
-      sourceVersion: AppInfoService.version,
-      incompleteSection: [],
-      imagingSelection:
-          _preliminaryAssessmentHelperProvider.onIvrCall ? [] : imageSelection,
-      observations:
-          _preliminaryAssessmentHelperProvider.onIvrCall ? [] : observations,
-      questionResponse: questionResponse,
-    );
-
     try {
+      DiagnosticReportTemplateFHIRModel assessment =
+          _visionTechnicianTriageProvider.assessment;
+
+      TriagePostModel triagePostModel = TriagePostModel(
+        patientId: patientDetails.id,
+        serviceType: ServiceType.OPTOMETRY,
+        tenantCode: assessment.tenantCode,
+        performer: [
+          Performer(
+            role: PerformerRole.VISION_TECHNICIAN,
+            identifier: _vtProfile?.id,
+          )
+        ],
+        assessmentCode: assessment.id,
+        assessmentVersion: assessment.version,
+        cummulativeScore: triageUrgency.toInt(),
+        score: [
+          {"QUESTIONNAIRE": questionnaireUrgency},
+          {"OBSERVATION": visualAcuityUrgency},
+          {"IMAGE": eyeScanUrgency}
+        ],
+        userStartDate:
+            DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
+        issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
+        source: Source.VT_APP,
+        sourceVersion: AppInfoService.version,
+        incompleteSection: [],
+        imagingSelection: _preliminaryAssessmentHelperProvider.onIvrCall
+            ? []
+            : imageSelection,
+        observations:
+            _preliminaryAssessmentHelperProvider.onIvrCall ? [] : observations,
+        questionResponse: questionResponse,
+      );
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
         SaveTriageParam(triagePostModel: triagePostModel),
       );
 
       final triageResponse = response.fold((error) {
-        throw error;
+        throw ServerFailure(errorMessage: error.errorMessage);
       }, (result) {
         logger.d("triage response $result");
         return result;
@@ -174,24 +171,28 @@ class VtTriageProvider extends ChangeNotifier {
       int? tenantCode = assessment.tenantCode;
       Either<Failure, CarePlanPostModel>? carePlanResponse;
 
-      if (organizationCode != null) {
-        carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
-          organizationCode: organizationCode,
-          tenantCode: tenantCode!,
-          reportId: reportId!,
-          encounterId: encounterId!,
-        );
+      carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(
+        organizationCode: organizationCode!,
+        tenantCode: tenantCode!,
+        reportId: reportId!,
+        encounterId: encounterId!,
+      );
 
-        carePlanResponse.fold((error) {
-          throw error;
-        }, (result) {
-          _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
-        });
-      }
-      _preliminaryAssessmentHelperProvider.setLoading(false);
+      carePlanResponse.fold((error) {
+        throw ServerFailure(errorMessage: error.errorMessage);
+      }, (result) {
+        _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
+      });
+
       return response;
+    } on ServerFailure catch (e) {
+      logger.e("Error saving triage server failure: $e");
+      return Left(
+          ServerFailure(errorMessage: "An error occurred while saving triage"));
     } catch (e) {
-      return Left(ServerFailure(errorMessage: e.toString()));
+      logger.e("Error saving triage: $e");
+      return Left(
+          ServerFailure(errorMessage: "An error occurred while saving triage"));
     } finally {
       _preliminaryAssessmentHelperProvider.setLoading(false);
     }

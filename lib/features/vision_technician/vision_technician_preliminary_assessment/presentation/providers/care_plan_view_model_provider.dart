@@ -45,7 +45,7 @@ class CarePlanViewModel extends ChangeNotifier {
     required int reportId,
     required int encounterId,
   }) async {
-    final PatientInstruction patientInstruction =
+    final PatientInstruction? patientInstruction =
         _carePlanProvider.patientInstruction;
 
     int? visionCenterId =

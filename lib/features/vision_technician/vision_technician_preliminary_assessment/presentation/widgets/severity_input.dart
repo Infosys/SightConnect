@@ -46,7 +46,7 @@ class SeverityInput extends ConsumerWidget {
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  value: model.selectedSeverity?.name,
+                  value: model.selectedSeverity.name,
                   isExpanded: true,
                   items: <String>[
                     "ROUTINE",
