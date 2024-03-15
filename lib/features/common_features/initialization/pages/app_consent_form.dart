@@ -124,7 +124,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                                           isApiLoading.value = false;
                                         }
                                       },
-                                child: Text(loc.agreeButton),
+                                child: Text(loc.proceedButton),
                               )
                       ],
                     ),
