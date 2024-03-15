@@ -93,8 +93,8 @@ class AssessmentTimeline extends ConsumerWidget {
                             ),
                             decoration: BoxDecoration(
                               color: isCaseClosed
-                                  ? AppColor.lightGreen
-                                  : AppColor.lightBlue,
+                                  ? AppColor.altGreen
+                                  : AppColor.mediumOrange,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: AutoSizeText(
@@ -102,7 +102,7 @@ class AssessmentTimeline extends ConsumerWidget {
                               maxFontSize: 18,
                               minFontSize: 12,
                               style: applyRobotoFont(
-                                color: AppColor.black,
+                                color: AppColor.white,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
                               ),

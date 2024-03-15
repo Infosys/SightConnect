@@ -100,37 +100,43 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
                     ? () async {
                         try {
                           final navigator = Navigator.of(context);
-                          List<TriageDetailedReportModel> triagReports =
-                              await ref
-                                  .read(vtAssessmentAndTestProvider)
-                                  .getTriageReportByEncounterId(encounterId!,
-                                      DiagnosticReportStatus.FINAL);
+                          final triagReports = await ref
+                              .read(vtAssessmentAndTestProvider)
+                              .getTriageReportByEncounterId(
+                                  encounterId!, DiagnosticReportStatus.FINAL);
 
                           if (triagReports.isEmpty) {
                             throw ServerFailure(
                                 errorMessage: "No report found");
                           }
-                          final finalReport = triagReports.first;
 
-                          CarePlanPostModel carePlanPostModel =
-                              CarePlanPostModel(
-                            id: finalReport.carePlans?.first.carePlanId,
+                          final finalReport = triagReports.first;
+                          final carePlans = finalReport.carePlans;
+
+                          if (carePlans == null || carePlans.isEmpty) {
+                            throw ServerFailure(
+                                errorMessage: "No care plan found");
+                          }
+
+                          final goals = carePlans.first.goals;
+
+                          if (goals == null || goals.isEmpty) {
+                            throw ServerFailure(errorMessage: "No goals found");
+                          }
+
+                          final carePlanPostModel = CarePlanPostModel(
+                            id: carePlans.first.carePlanId,
                             organizationCode: finalReport.organizationCode,
                             tenantCode: finalReport.tenantCode,
-                            goal: [
-                              GoalModel(
-                                id: finalReport
-                                    .carePlans?.first.goals?.first.id,
-                              )
-                            ],
+                            goal: [GoalModel(id: goals.first.id)],
                           );
 
-                          final TriagePostModel triagePostModel =
-                              TriagePostModel(
+                          final triagePostModel = TriagePostModel(
                             id: finalReport.diagnosticReportId,
                             encounter:
                                 EncounterModel(id: finalReport.encounterId),
                           );
+
                           ref
                               .read(preliminaryAssessmentHelperProvider)
                               .setCarePlanResponse(carePlanPostModel);

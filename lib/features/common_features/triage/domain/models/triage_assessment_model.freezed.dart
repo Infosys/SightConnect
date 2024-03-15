@@ -22,7 +22,8 @@ TriageAssessment _$TriageAssessmentFromJson(Map<String, dynamic> json) {
 mixin _$TriageAssessment {
   int? get code => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get organizationCode => throw _privateConstructorUsedError;
+  String? get organizationCode =>
+      throw _privateConstructorUsedError; //used in optometrist persona
   String? get condition => throw _privateConstructorUsedError;
   String? get organ => throw _privateConstructorUsedError;
   List<QuestionnaireSection>? get questionnaireSections =>
@@ -215,6 +216,7 @@ class _$_TriageAssessment implements _TriageAssessment {
   final String? name;
   @override
   final String? organizationCode;
+//used in optometrist persona
   @override
   final String? condition;
   @override
@@ -324,7 +326,7 @@ abstract class _TriageAssessment implements TriageAssessment {
   String? get name;
   @override
   String? get organizationCode;
-  @override
+  @override //used in optometrist persona
   String? get condition;
   @override
   String? get organ;
