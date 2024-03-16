@@ -1,9 +1,8 @@
 name: Build AAB
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [created]
     # paths-ignore:
     #   - 'pubspec.yaml'  #The paths-ignore will prevent the workflow from being triggered when only the pubspec.yaml file is changed.
 
@@ -35,12 +34,11 @@ jobs:
       #     git push origin --tags
       #     git push  
       - name: env create
-        run: echo "VERSION_NUMBER=1.${{ github.run_number }}.0" >> $GITHUB_ENV
-      - name: tagcreation
-        run: |
-            git tag ${{ env.VERSION_NUMBER}}
-            git push origin ${{ env.VERSION_NUMBER}}
-
+        run: echo "VERSION_NUMBER=$GITHUB_REF_NAME" >> $GITHUB_ENV
+      # - name: tagcreation
+      #   run: |
+      #       git tag ${{ env.VERSION_NUMBER}}
+      #       git push origin ${{ env.VERSION_NUMBER}}
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -86,5 +84,3 @@ jobs:
           name: app-release-${{ env.VERSION_NUMBER}}
           path: ./build/app/outputs/bundle/release/app-release-${{ env.VERSION_NUMBER}}.aab
           retention-days: 10
-
-          
