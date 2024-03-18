@@ -42,7 +42,7 @@ class AssessementCarePlanCard extends StatelessWidget {
                 carePlan!.first.goals!.first.outcomes == null ||
                 carePlan!.first.goals!.first.outcomes!.isEmpty) {
               return const Text(
-                "No care plan available",
+                "No Prescription available",
               );
             }
             final outcomes = carePlan!.first.goals!.first.outcomes!;
@@ -126,7 +126,8 @@ class AssessementCarePlanCard extends StatelessWidget {
                         Text(
                           e.plannedActivityReference?.serviceRequest
                                   ?.patientInstruction
-                                  .formatTitle() ??
+                                  .formatTitle()
+                                  .capitalizeFirstOfEach() ??
                               "",
                           style: applyRobotoFont(
                             fontSize: 14,

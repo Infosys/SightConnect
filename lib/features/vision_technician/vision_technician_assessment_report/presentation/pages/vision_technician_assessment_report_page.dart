@@ -75,7 +75,7 @@ class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
               const SizedBox(height: AppSize.kl),
               AssessementCarePlanCard(
                 carePlan: assessmentDetailsReport.carePlans,
-                title: "Care Plan",
+                title: "Prescribed Solutions",
               ),
               const SizedBox(height: AppSize.kl),
               AssessementCarePlanCard(
