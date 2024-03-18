@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_view_model_provider.dart';
@@ -51,7 +50,7 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
           },
         ),
         title: Text(
-          '${patientName} - OP ${patientId}',
+          '${patientName.capitalizeFirstOfEach()} - OP ${patientId}',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(),
@@ -154,10 +153,10 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
 
                           await successDialogue(
                             context,
-                            loc.vtAssessmentClosedSuccessfully,
+                            "Assessment has been closed successfully",
                           );
                           navigator.popUntil((route) => route.isFirst);
-                        } on ServerFailure catch (e) {
+                        } on Failure catch (e) {
                           Fluttertoast.showToast(msg: e.errorMessage);
                         } catch (e) {
                           logger.e(e);

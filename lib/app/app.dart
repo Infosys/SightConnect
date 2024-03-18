@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -15,7 +16,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {

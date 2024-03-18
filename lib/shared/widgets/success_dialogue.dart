@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Future<void> successDialogue(BuildContext context, String message) {
@@ -9,7 +10,14 @@ Future<void> successDialogue(BuildContext context, String message) {
       return BlurDialogBox(
         content: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Icon(
+              CupertinoIcons.check_mark_circled,
+              color: Colors.green,
+              size: 40,
+            ),
+            const SizedBox(height: 8),
             Text(
               message,
               style: applyRobotoFont(),
@@ -22,7 +30,7 @@ Future<void> successDialogue(BuildContext context, String message) {
                   style: TextButton.styleFrom(
                     textStyle: Theme.of(context).textTheme.labelLarge,
                   ),
-                  child: const Text('Ok'),
+                  child: const Text('ok'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

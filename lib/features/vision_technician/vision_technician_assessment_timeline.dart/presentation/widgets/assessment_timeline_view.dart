@@ -3,16 +3,16 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/core/providers/vt_assessesment_and_test_provider.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/timeline_assessmnet_tile.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/models/assessment_timeline_view_model.dart';
@@ -29,225 +29,108 @@ class AssessmentTimelineView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ValueNotifier<bool> isLoading = useState<bool>(false);
+    final isMobile = Responsive.isMobile(context);
 
-    return LoadingOverlay(
-      child: Column(
-        children: [
-          if (isLoading.value) const CircularProgressIndicator.adaptive(),
-          ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return ListTile(
-                contentPadding: const EdgeInsets.all(0),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return ListView.separated(
+      itemCount: timeLineList.length,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      itemBuilder: (context, index) {
+        return ListTile(
+          contentPadding: const EdgeInsets.all(0),
+          subtitle: Row(
+            children: [
+              Container(
+                height: isMobile ? 40 : 60,
+                width: isMobile ? 4 : 6,
+                margin: const EdgeInsets.only(right: AppSize.ks),
+                decoration: BoxDecoration(
+                  color: index.isEven ? AppColor.blue : AppColor.green,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SizedBox(
-                      width: AppSize.width(context) / 5,
-                      child: Text(
-                        timeLineList[index].title.formatTitle(),
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.black,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          timeLineList[index]
+                              .title
+                              .formatTitle()
+                              .capitalizeFirstOfEach(),
+                          style: applyFiraSansFont(fontSize: 16),
                         ),
-                      ),
+                        Text(
+                          timeLineList[index]
+                              .date
+                              .formatDateTimeWithFullMonthName,
+                          style: applyFiraSansFont(
+                            fontSize: 14,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
-                      timeLineList[index].date.formateDateWithTime,
-                      style: applyRobotoFont(
-                        fontSize: 12,
+                      timeLineList[index].status.capitalizeFirstOfEach(),
+                      style: applyFiraSansFont(
+                        fontSize: 14,
                         color: AppColor.grey,
                       ),
                     ),
-                  ],
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Responsive.isMobile(context)
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                timeLineList[index].subtitle ?? "",
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  color: AppColor.grey,
-                                ),
-                              ),
-                              TimeWidgetRender(
-                                context,
-                                timeLineList[index],
-                                index,
-                                ref,
-                                isLoading,
-                                patientDetail,
-                              ),
-                            ],
-                          )
-                        : Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                timeLineList[index].subtitle ?? "",
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  color: AppColor.grey,
-                                ),
-                              ),
-                              TimeWidgetRender(
-                                context,
-                                timeLineList[index],
-                                index,
-                                ref,
-                                isLoading,
-                                patientDetail,
-                              ),
-                            ],
-                          ),
-                    const SizedBox(
-                      height: AppSize.km,
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      thickness: 1,
+                    TimelineAssessmentTile(
+                      source: timeLineList[index].source,
+                      description: timeLineList[index].description ?? "",
+                      context: context,
+                      assessmentId: timeLineList[index].assessmentId,
+                      onTap: () async {
+                        try {
+                          final navigator = Navigator.of(context);
+                          AssessmentAndTriageReportDetailedEntity response =
+                              await ref
+                                  .watch(vtAssessmentAndTestProvider)
+                                  .getTriageDetailedReportByReportId(
+                                    context,
+                                    timeLineList[index].assessmentId!,
+                                  );
+
+                          navigator.push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return VisionTechnicianAssessmentReportPage(
+                                  assessmentDetailsReport: response,
+                                  patientDetails: patientDetail,
+                                );
+                              },
+                            ),
+                          );
+                        } on Failure catch (e) {
+                          logger.e("error ${e.errorMessage}");
+                          Fluttertoast.showToast(msg: e.errorMessage);
+                        } catch (e) {
+                          logger.e("error $e");
+                          Fluttertoast.showToast(
+                              msg: "Something went wrong! Please try again.");
+                        }
+                      },
                     ),
                   ],
                 ),
-              );
-            },
-            itemCount: timeLineList.length,
-            separatorBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.ks + 2,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 4,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: index.isEven
-                            ? AppColor.altGreen
-                            : AppColor.lightGrey,
-                      ),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-              );
-            },
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
+      separatorBuilder: (context, index) {
+        return const Divider(
+          color: AppColor.lightGrey,
+          thickness: 1,
+          height: 40,
+        );
+      },
     );
   }
-}
-
-Widget TimeWidgetRender(
-  BuildContext context,
-  AssessmentTimelineViewModel timeLine,
-  int index,
-  WidgetRef ref,
-  ValueNotifier<bool> isLoading,
-  VTPatientDto patientDetails,
-) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.end,
-    children: [
-      if (timeLine.call != null)
-        Row(
-          children: [
-            const Icon(
-              Icons.add_call,
-              size: 20,
-            ),
-            const SizedBox(
-              width: AppSize.ks,
-            ),
-            Text(
-              timeLine.call ?? "",
-              style: applyRobotoFont(
-                fontSize: 12,
-                color: AppColor.grey,
-              ),
-            ),
-          ],
-        ),
-      if (timeLine.assessmentId != null)
-        Row(
-          children: [
-            const Icon(
-              Icons.file_copy_outlined,
-              size: 20,
-            ),
-            const SizedBox(
-              width: AppSize.ks,
-            ),
-            const SizedBox(
-              width: AppSize.ks,
-            ),
-            InkWell(
-              onTap: () async {
-                try {
-                  isLoading.value = true;
-                  AssessmentAndTriageReportDetailedEntity response = await ref
-                      .watch(vtAssessmentAndTestProvider)
-                      .getTriageDetailedReportByEncounterId(
-                        context,
-                        timeLine.encounterId!,
-                        DiagnosticReportStatus.FINAL,
-                      );
-
-                  isLoading.value = false;
-                  if (context.mounted) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return VisionTechnicianAssessmentReportPage(
-                            assessmentDetailsReport: response,
-                            patientDetails: patientDetails,
-                          );
-                        },
-                      ),
-                    );
-                  }
-                } on ServerFailure catch (e) {
-                  logger.e("error ${e.errorMessage}");
-                  isLoading.value = false;
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Some Error Occurred"),
-                      ),
-                    );
-                  }
-                }
-              },
-              child: Text(
-                'View Report',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: applyRobotoFont(
-                  fontSize: 12,
-                  color: AppColor.blue,
-                  decoration: TextDecoration.combine(
-                    [
-                      TextDecoration.underline,
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-    ],
-  );
 }

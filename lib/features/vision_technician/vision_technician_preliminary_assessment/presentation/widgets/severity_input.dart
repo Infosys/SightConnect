@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+// import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class SeverityInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(preliminaryAssessmentHelperProvider);
-    final loc = context.loc!;
+    // final loc = context.loc!;
     return SizedBox(
       height: AppSize.kl * 5,
       width: Responsive.isMobile(context)

@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/care_plan_provider.dart';

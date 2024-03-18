@@ -31,7 +31,9 @@ class VTCloseAssessmentRemoteSourceImpl
     logger.d(closeAssessmentDto.toJson());
 
     try {
-      await _dio.patch(endPoint, data: closeAssessmentDto.toJson());
+      final response =
+          await _dio.patch(endPoint, data: closeAssessmentDto.toJson());
+      logger.d(response.data);
     } on DioException catch (e) {
       DioErrorHandler.getErrorMessage(e);
       throw ServerFailure(errorMessage: "Failed to close assessment");

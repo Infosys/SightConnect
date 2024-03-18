@@ -1,9 +1,9 @@
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/widgets/app_web_view.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -69,7 +69,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                       Expanded(
                         child: AppWebView(
                           url:
-                              "${Env.baseUrl}/dam/${data.templateId}?langId=${lang}",
+                              "${ApiConstant.baseUrl}/dam/${data.templateId}?langId=${lang}",
                         ),
                       ),
                       Padding(

@@ -31,7 +31,6 @@ class ListOfEncountersChip extends HookConsumerWidget {
 
     return ref.watch(vtListOfEncountersChipProvider(patientId!)).when(
           data: (data) {
-            // sort data on the basis of date
             data.sort((a, b) => b.period!.start!.compareTo(a.period!.start!));
             return SizedBox(
               height: AppSize.height(context) * 0.05,
@@ -40,6 +39,8 @@ class ListOfEncountersChip extends HookConsumerWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   final isDisabled = data[index].status == Status.COMPLETED;
+
+                  final isSelected = encounterId == data[index].id;
                   return InkWell(
                     onTap: () {
                       ref
@@ -54,16 +55,13 @@ class ListOfEncountersChip extends HookConsumerWidget {
                       decoration: BoxDecoration(
                         color: isDisabled
                             ? AppColor.lightGrey
-                            : (encounterId == data[index].id
+                            : (isSelected
                                 ? AppColor.lightBlue
                                 : AppColor.white),
                         borderRadius: BorderRadius.circular(AppSize.ks),
                         border: Border.all(
-                          color: isDisabled
-                              ? AppColor.lightGrey
-                              : (encounterId == data[index].id
-                                  ? AppColor.lightBlue
-                                  : AppColor.white),
+                          color:
+                              isSelected ? AppColor.blue : AppColor.lightGrey,
                         ),
                       ),
                       alignment: Alignment.center,
