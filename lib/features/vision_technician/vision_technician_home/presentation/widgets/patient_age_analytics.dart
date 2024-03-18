@@ -30,66 +30,125 @@ class PatientAgeAnalytics extends ConsumerWidget {
     List<double> totalValuesGender = model.totalValuesGender;
 
     final loc = context.loc!;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            width: AppSize.width(context) * 0.45,
-            padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
-            decoration: BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.circular(AppSize.km),
-              boxShadow: applyLightShadow(),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return model.isLoading
+        ? const Center(
+            child: CupertinoActivityIndicator(),
+          )
+        : Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  loc.vtByAge,
-                  style: applyFiraSansFont(
-                    fontWeight: FontWeight.w500,
+                Container(
+                  width: AppSize.width(context) * 0.45,
+                  padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(AppSize.km),
+                    boxShadow: applyLightShadow(),
                   ),
-                ),
-                Flexible(
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        child: PieChart(
-                          dataMap: dataMapAge,
-                          animationDuration: const Duration(milliseconds: 800),
-                          chartRadius:
-                              isMobile ? AppSize.ks * 5 : AppSize.ks * 10,
-                          colorList: colorsAge,
-                          initialAngleInDegree: 270,
-                          chartType: ChartType.ring,
-                          ringStrokeWidth: isMobile ? 5 : 10,
-                          centerWidget: Text(
-                            "-",
-                            style: applyFiraSansFont(
-                              fontSize: isMobile ? 16 : 32,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.orange,
-                            ),
-                          ),
-                          legendOptions: const LegendOptions(
-                            showLegends: false,
-                          ),
-                          chartValuesOptions: const ChartValuesOptions(
-                            showChartValues: false,
-                          ),
+                      Text(
+                        loc.vtByAge,
+                        style: applyFiraSansFont(
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Expanded(
-                        child: Wrap(
+                      Flexible(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            AgeCard(colorsAge[0], dataMapAge.keys.elementAt(0)),
-                            AgeCard(colorsAge[1], dataMapAge.keys.elementAt(1)),
-                            AgeCard(colorsAge[2], dataMapAge.keys.elementAt(2)),
-                            AgeCard(colorsAge[3], dataMapAge.keys.elementAt(3)),
+                            SizedBox(
+                              child: PieChart(
+                                dataMap: dataMapAge,
+                                animationDuration:
+                                    const Duration(milliseconds: 800),
+                                chartRadius:
+                                    isMobile ? AppSize.ks * 5 : AppSize.ks * 10,
+                                colorList: colorsAge,
+                                initialAngleInDegree: 270,
+                                chartType: ChartType.ring,
+                                ringStrokeWidth: isMobile ? 5 : 10,
+                                centerWidget: Text(
+                                  "-",
+                                  style: applyFiraSansFont(
+                                    fontSize: isMobile ? 16 : 32,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.orange,
+                                  ),
+                                ),
+                                legendOptions: const LegendOptions(
+                                  showLegends: false,
+                                ),
+                                chartValuesOptions: const ChartValuesOptions(
+                                  showChartValues: false,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Wrap(
+                                children: [
+                                  AgeCard(colorsAge[0],
+                                      dataMapAge.keys.elementAt(0)),
+                                  AgeCard(colorsAge[1],
+                                      dataMapAge.keys.elementAt(1)),
+                                  AgeCard(colorsAge[2],
+                                      dataMapAge.keys.elementAt(2)),
+                                  AgeCard(colorsAge[3],
+                                      dataMapAge.keys.elementAt(3)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: AppSize.width(context) * 0.45,
+                  padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(AppSize.km),
+                    boxShadow: applyLightShadow(),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        loc.vtByGender,
+                        style: applyFiraSansFont(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      // Spacer(),
+                      const SizedBox(
+                        height: AppSize.ks,
+                      ),
+                      Flexible(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            GenderPieChart(
+                              data: dataMale,
+                              color: colorsGender[0],
+                              total: totalValuesGender[0],
+                            ),
+                            GenderPieChart(
+                              data: dataFemale,
+                              color: colorsGender[1],
+                              total: totalValuesGender[1],
+                            ),
+                            GenderPieChart(
+                              data: dataOthers,
+                              color: colorsGender[2],
+                              total: totalValuesGender[2],
+                            ),
                           ],
                         ),
                       ),
@@ -98,56 +157,6 @@ class PatientAgeAnalytics extends ConsumerWidget {
                 ),
               ],
             ),
-          ),
-          Container(
-            width: AppSize.width(context) * 0.45,
-            padding: EdgeInsets.all(isMobile ? AppSize.ks : AppSize.km),
-            decoration: BoxDecoration(
-              color: AppColor.white,
-              borderRadius: BorderRadius.circular(AppSize.km),
-              boxShadow: applyLightShadow(),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  loc.vtByGender,
-                  style: applyFiraSansFont(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                // Spacer(),
-                const SizedBox(
-                  height: AppSize.ks,
-                ),
-                Flexible(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GenderPieChart(
-                        data: dataMale,
-                        color: colorsGender[0],
-                        total: totalValuesGender[0],
-                      ),
-                      GenderPieChart(
-                        data: dataFemale,
-                        color: colorsGender[1],
-                        total: totalValuesGender[1],
-                      ),
-                      GenderPieChart(
-                        data: dataOthers,
-                        color: colorsGender[2],
-                        total: totalValuesGender[2],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+          );
   }
 }

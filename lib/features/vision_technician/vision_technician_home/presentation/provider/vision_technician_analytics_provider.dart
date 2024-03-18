@@ -46,7 +46,7 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
           if (payload.title == "FEMALE") {
             _dataFemale = {"Female": payload.value};
           }
-          if (payload.title == "OTHERS") {
+          if (payload.title == "OTHER") {
             _dataOthers = {"Others": payload.value};
           }
         }
