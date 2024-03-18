@@ -87,8 +87,8 @@ class CarePlanViewModel extends ChangeNotifier {
         ),
       ],
     );
-
-    logger.d({"care plan to be saved": carePlan.toJson()});
+    logger.d("CarePlanPostModel");
+    logger.d(carePlan.toJson());
 
     var response = await _vtCarePlanRemoteSource.saveCarePlan(
       carePlan: carePlan,

@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -56,13 +56,11 @@ class PatientCasesAnalytics extends ConsumerWidget {
                   child: AnalyticsTriageStats(
                     title: '% Completed',
                     earlyValue:
-                        model.triageCompleted['EARLY'].toString().split(".")[0],
-                    urgentValue: model.triageCompleted['URGENT']
-                        .toString()
-                        .split(".")[0],
-                    routineValue: model.triageCompleted['ROUTINE']
-                        .toString()
-                        .split(".")[0],
+                        "${model.triageCompleted['EARLY'].toString().split(".")[0]}%",
+                    urgentValue:
+                        "${model.triageCompleted['URGENT'].toString().split(".")[0]}%",
+                    routineValue:
+                        "${model.triageCompleted['ROUTINE'].toString().split(".")[0]}%",
                   ),
                 ),
               ],
@@ -94,7 +92,7 @@ class AnalyticsCardData extends StatelessWidget {
           maxLines: 1,
           style: applyFiraSansFont(
             fontWeight: FontWeight.w500,
-            fontSize: isMobile ? 20 : 32,
+            fontSize: isMobile ? 16 : 32,
             color: color,
           ),
         ),
@@ -155,26 +153,24 @@ class AnalyticsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.ks),
-          Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: AnalyticsCardData(
-                    value: firstValue,
-                    description: firstAnalyticsDescription,
-                    color: firstValueColor,
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: AnalyticsCardData(
+                  value: firstValue,
+                  description: firstAnalyticsDescription,
+                  color: firstValueColor,
                 ),
-                Expanded(
-                  child: AnalyticsCardData(
-                    value: secondValue,
-                    description: secondAnalyticsDescription,
-                    color: secondValueColor,
-                  ),
+              ),
+              Expanded(
+                child: AnalyticsCardData(
+                  value: secondValue,
+                  description: secondAnalyticsDescription,
+                  color: secondValueColor,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           if (pieChart) const SizedBox()
         ],
@@ -219,28 +215,24 @@ class AnalyticsTriageStats extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.ks),
           Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Wrap(
+              runSpacing: AppSize.ks,
+              spacing: AppSize.ks,
               children: [
-                Expanded(
-                    child: AnalyticsCardData(
+                AnalyticsCardData(
                   value: routineValue,
                   description: "Routine",
                   color: AppColor.green,
-                )),
-                Expanded(
-                  child: AnalyticsCardData(
-                    value: earlyValue,
-                    description: "Early",
-                    color: AppColor.orange,
-                  ),
                 ),
-                Expanded(
-                  child: AnalyticsCardData(
-                    value: urgentValue,
-                    description: "Urgent",
-                    color: AppColor.red,
-                  ),
+                AnalyticsCardData(
+                  value: earlyValue,
+                  description: "Early",
+                  color: AppColor.orange,
+                ),
+                AnalyticsCardData(
+                  value: urgentValue,
+                  description: "Urgent",
+                  color: AppColor.red,
                 ),
               ],
             ),

@@ -17,13 +17,15 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
+class VisionTechnicianCloseAssessmentPage extends HookConsumerWidget {
   const VisionTechnicianCloseAssessmentPage({
     super.key,
     required this.patientName,
@@ -37,137 +39,147 @@ class VisionTechnicianCloseAssessmentPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-
     final model = ref.watch(vtCloseAssessmentHelperProvider);
+    final isLoading = useState(false);
 
-    return Scaffold(
-      appBar: CustomAppbar(
-        leadingIcon: IconButton(
-          icon: const Icon(CupertinoIcons.back),
-          onPressed: () {
-            ref.invalidate(vtCloseAssessmentHelperProvider);
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
+    return LoadingOverlay(
+      isLoading: isLoading.value,
+      child: Scaffold(
+        appBar: CustomAppbar(
+          leadingIcon: IconButton(
+            icon: const Icon(CupertinoIcons.back),
+            onPressed: () {
+              ref.invalidate(vtCloseAssessmentHelperProvider);
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+          ),
+          title: Text(
+            '${patientName.capitalizeFirstOfEach()} - OP ${patientId}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyFiraSansFont(),
+          ),
         ),
-        title: Text(
-          '${patientName.capitalizeFirstOfEach()} - OP ${patientId}',
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyFiraSansFont(),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSize.km),
+          child: Column(
+            children: [
+              CloseHeading(encountedId: encounterId),
+              const SizedBox(height: AppSize.kl),
+              const MRCode(),
+              const SizedBox(height: AppSize.kl),
+              const SolutionCard(),
+              const SizedBox(height: AppSize.kl),
+              const Recommendations(),
+            ],
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSize.km),
-        child: Column(
-          children: [
-            CloseHeading(encountedId: encounterId),
-            const SizedBox(height: AppSize.kl),
-            const MRCode(),
-            const SizedBox(height: AppSize.kl),
-            const SolutionCard(),
-            const SizedBox(height: AppSize.kl),
-            const Recommendations(),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              width: AppSize.width(context) * 0.4,
-              child: OutlinedButton(
-                onPressed: () {
-                  ref.invalidate(vtCloseAssessmentHelperProvider);
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                },
-                child: Text(
-                  loc.vtBack,
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColor.primary,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                width: AppSize.width(context) * 0.4,
+                child: OutlinedButton(
+                  onPressed: () {
+                    ref.invalidate(vtCloseAssessmentHelperProvider);
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  },
+                  child: Text(
+                    loc.vtBack,
+                    style: applyRobotoFont(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.primary,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: AppSize.width(context) * 0.4,
-              child: ElevatedButton(
-                onPressed: model.canSubmit()
-                    ? () async {
-                        try {
-                          final navigator = Navigator.of(context);
-                          final triagReports = await ref
-                              .read(vtAssessmentAndTestProvider)
-                              .getTriageReportByEncounterId(
-                                  encounterId!, DiagnosticReportStatus.FINAL);
+              SizedBox(
+                width: AppSize.width(context) * 0.4,
+                child: ElevatedButton(
+                  onPressed: model.canSubmit()
+                      ? () async {
+                          try {
+                            isLoading.value = true;
+                            final navigator = Navigator.of(context);
+                            final triagReports = await ref
+                                .read(vtAssessmentAndTestProvider)
+                                .getTriageReportByEncounterId(
+                                  encounterId!,
+                                  DiagnosticReportStatus.FINAL,
+                                );
 
-                          if (triagReports.isEmpty) {
-                            throw ServerFailure(
-                                errorMessage: "No report found");
+                            if (triagReports.isEmpty) {
+                              throw ServerFailure(
+                                  errorMessage: "No report found");
+                            }
+
+                            final finalReport = triagReports.first;
+                            final carePlans = finalReport.carePlans;
+
+                            if (carePlans == null || carePlans.isEmpty) {
+                              throw ServerFailure(
+                                  errorMessage: "No care plan found");
+                            }
+
+                            final goals = carePlans.first.goals;
+
+                            if (goals == null || goals.isEmpty) {
+                              throw ServerFailure(
+                                  errorMessage: "No goals found");
+                            }
+
+                            final carePlanPostModel = CarePlanPostModel(
+                              id: carePlans.first.carePlanId,
+                              organizationCode: finalReport.organizationCode,
+                              tenantCode: finalReport.tenantCode,
+                              goal: [GoalModel(id: goals.first.id)],
+                            );
+
+                            final triagePostModel = TriagePostModel(
+                              id: finalReport.diagnosticReportId,
+                              encounter:
+                                  EncounterModel(id: finalReport.encounterId),
+                            );
+
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setCarePlanResponse(carePlanPostModel);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setTriageResponse(triagePostModel);
+
+                            await ref
+                                .read(vtCloseAssessmentViewModelProvider)
+                                .submitCloseAssessmentInfo();
+                            ref.invalidate(vtTriageSaveProvider);
+                            ref.invalidate(vtCloseAssessmentHelperProvider);
+                            ref.invalidate(vtTriageSaveProvider);
+                            ref.invalidate(preliminaryAssessmentHelperProvider);
+
+                            await successDialogue(
+                              context,
+                              "Assessment has been closed successfully",
+                            );
+                            navigator.popUntil((route) => route.isFirst);
+                          } on Failure catch (e) {
+                            Fluttertoast.showToast(msg: e.errorMessage);
+                          } catch (e) {
+                            logger.e(e);
+                            Fluttertoast.showToast(
+                                msg: loc.vtSomethingWentWrong);
+                          } finally {
+                            isLoading.value = false;
                           }
-
-                          final finalReport = triagReports.first;
-                          final carePlans = finalReport.carePlans;
-
-                          if (carePlans == null || carePlans.isEmpty) {
-                            throw ServerFailure(
-                                errorMessage: "No care plan found");
-                          }
-
-                          final goals = carePlans.first.goals;
-
-                          if (goals == null || goals.isEmpty) {
-                            throw ServerFailure(errorMessage: "No goals found");
-                          }
-
-                          final carePlanPostModel = CarePlanPostModel(
-                            id: carePlans.first.carePlanId,
-                            organizationCode: finalReport.organizationCode,
-                            tenantCode: finalReport.tenantCode,
-                            goal: [GoalModel(id: goals.first.id)],
-                          );
-
-                          final triagePostModel = TriagePostModel(
-                            id: finalReport.diagnosticReportId,
-                            encounter:
-                                EncounterModel(id: finalReport.encounterId),
-                          );
-
-                          ref
-                              .read(preliminaryAssessmentHelperProvider)
-                              .setCarePlanResponse(carePlanPostModel);
-                          ref
-                              .read(preliminaryAssessmentHelperProvider)
-                              .setTriageResponse(triagePostModel);
-
-                          await ref
-                              .read(vtCloseAssessmentViewModelProvider)
-                              .submitCloseAssessmentInfo();
-                          ref.invalidate(vtTriageSaveProvider);
-                          ref.invalidate(vtCloseAssessmentHelperProvider);
-                          ref.invalidate(vtTriageSaveProvider);
-                          ref.invalidate(preliminaryAssessmentHelperProvider);
-
-                          await successDialogue(
-                            context,
-                            "Assessment has been closed successfully",
-                          );
-                          navigator.popUntil((route) => route.isFirst);
-                        } on Failure catch (e) {
-                          Fluttertoast.showToast(msg: e.errorMessage);
-                        } catch (e) {
-                          logger.e(e);
-                          Fluttertoast.showToast(msg: loc.vtSomethingWentWrong);
                         }
-                      }
-                    : null,
-                child: Text(loc.vtSubmit),
+                      : null,
+                  child: Text(loc.vtSubmit),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -48,9 +48,11 @@ class AssessmentDetailedAndTriageReportMapper {
           ? triageDetailedReport.carePlans!.first.activities?.first
               .plannedActivityReference?.serviceRequest?.identifier
           : null,
-      remarks: triageDetailedReport.carePlans?.isNotEmpty ?? false
-          ? triageDetailedReport.carePlans!.first.note
-          : null,
+
+      // remarks: triageDetailedReport.carePlans?.isNotEmpty ?? false
+      //     ? triageDetailedReport.carePlans!.first.note
+      //     : null,
+      remarks: getRemark(triageDetailedReport.carePlans),
     );
   }
 
@@ -144,6 +146,23 @@ class AssessmentDetailedAndTriageReportMapper {
       });
       return [];
     }
+  }
+
+  static String getRemark(List<CarePlan>? carePlan) {
+    if (carePlan != null && carePlan.isNotEmpty) {
+      final activities = carePlan.first.activities;
+      if (activities != null && activities.isNotEmpty) {
+        final plannedActivityReference =
+            activities.first.plannedActivityReference;
+        if (plannedActivityReference != null) {
+          final serviceRequest = plannedActivityReference.serviceRequest;
+          if (serviceRequest != null && serviceRequest.note != null) {
+            return serviceRequest.note!;
+          }
+        }
+      }
+    }
+    return "";
   }
 
   static String getBodySiteText(

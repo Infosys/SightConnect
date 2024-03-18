@@ -5,10 +5,11 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final vtHomeHelperProvider =
-    ChangeNotifierProvider<VTHomeHelperNotifier>((ref) {
-  return VTHomeHelperNotifier(ref: ref);
-});
+final vtHomeHelperProvider = ChangeNotifierProvider<VTHomeHelperNotifier>(
+  (ref) {
+    return VTHomeHelperNotifier(ref: ref);
+  },
+);
 
 class VTHomeHelperNotifier extends ChangeNotifier {
   Ref ref;
@@ -55,7 +56,7 @@ class VTHomeHelperNotifier extends ChangeNotifier {
       hasMore = true;
       _isLoading = true;
       notifyListeners();
-      final response = await ref.read(vtHomeRepository).getListOfPatients(
+      final response = await ref.watch(vtHomeRepository).getListOfPatients(
             TableParams(
               category: _category,
               page: pageNumber,

@@ -30,6 +30,19 @@ class PatientAgeAnalytics extends ConsumerWidget {
     List<List<Color>> colorsGender = model.colorsGender;
     double totalValuesGender = model.totalGenderValue;
 
+    if (dataMapAge.isEmpty) {
+      // adding default values if data is empty
+      dataMapAge = {
+        '0-10 Yrs': 0,
+        '11-20 Yrs': 0,
+        '21-30 Yrs': 0,
+        '31-40 Yrs': 0,
+      };
+      dataOthers = {'Others': 0};
+      dataFemale = {"Female": 0};
+      dataMale = {"Male": 0};
+    }
+
     final loc = context.loc!;
     return model.isLoading
         ? const Center(
@@ -38,7 +51,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
         : Container(
             margin: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: AppSize.width(context) * 0.45,
@@ -109,6 +122,9 @@ class PatientAgeAnalytics extends ConsumerWidget {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  width: isMobile ? AppSize.ks : AppSize.km,
                 ),
                 Container(
                   width: AppSize.width(context) * 0.45,

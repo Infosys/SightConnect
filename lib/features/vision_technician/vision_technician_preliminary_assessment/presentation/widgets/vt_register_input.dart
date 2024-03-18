@@ -47,6 +47,9 @@ class VTRegisterInput extends HookConsumerWidget {
                   }
                   return null;
                 },
+                onChanged: (value) {
+                  controller.text = value;
+                },
                 keyboardType: keyboardType,
                 focusNode: _focusNode,
                 autofocus: false,
