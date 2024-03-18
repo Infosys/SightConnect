@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/table_params.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/domain/repositories/vt_home_repository_impl.dart';
@@ -7,100 +5,87 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final vtHomeHelperProvider = ChangeNotifierProvider<VTHomeHelperNotifier>(
-  (ref) {
-    return VTHomeHelperNotifier(ref);
-  },
-);
+final vtHomeHelperProvider =
+    ChangeNotifierProvider<VTHomeHelperNotifier>((ref) {
+  return VTHomeHelperNotifier(ref: ref);
+});
 
 class VTHomeHelperNotifier extends ChangeNotifier {
-  List<String> availableCategories = ["ALL", "URGENT", "EARLY", "ROUTINE"];
-  String _category = "URGENT";
-  final List<VTPatientDto> _listOfAssessments = [];
-  List<VTPatientDto> _searchResults = [];
-  bool _isLoading = false;
-
-  int pageSize = 10;
-  int originalPageSize = 10;
-  int _pageNumber = 0;
-
   Ref ref;
-
-  VTHomeHelperNotifier(this.ref) {
-    getAssessmentRecords();
+  VTHomeHelperNotifier({required this.ref}) {
+    updateCategory(_category);
   }
 
+  final List<VTPatientDto> _listOfAssessments = [];
+  final List<VTPatientDto> _tempListOfAssessments = [];
+  final List<String> availableCategories = [
+    "ALL",
+    "URGENT",
+    "EARLY",
+    "ROUTINE"
+  ];
+
+  bool _isLoading = false;
+  bool hasMore = true;
+  String _category = "URGENT";
+
+  int pageSize = 10;
+  int _pageNumber = 0;
   String get category => _category;
   bool get isLoading => _isLoading;
   int get pageNumber => _pageNumber;
-  List<VTPatientDto> get listOfAssessments => _searchResults;
+  List<VTPatientDto> get listOfAssessments => _listOfAssessments;
 
   void updateCategory(String value) {
-    _category = value;
-    _pageNumber = 0;
+    if (isLoading) return;
     _listOfAssessments.clear();
-    notifyListeners();
-    getAssessmentRecords();
+    _tempListOfAssessments.clear();
+    _pageNumber = 0;
+    _category = value;
+    getAssessmentTable();
   }
 
-  void updatePageSize(int? page) {
-    originalPageSize = page ?? 10;
-    notifyListeners();
-    getAssessmentRecords();
+  void updatePageNumber() {
+    _pageNumber = _pageNumber + 1;
+    getAssessmentTable();
   }
 
-  void updatePageNumber(int page) {
-    _pageNumber = page;
-    notifyListeners();
-    getAssessmentRecords();
-  }
-
-  void searchBasedOnNameAndEncounterId(String value) {
-    if (value.isEmpty) {
-      _searchResults = List.from(_listOfAssessments);
-    } else {
-      _searchResults = _listOfAssessments.where((element) {
-        final lowerCaseName = element.name!.toLowerCase();
-        final lowerCaseEncounterId =
-            element.encounterId!.toString().toLowerCase();
-        final lowerCaseSearchValue = value.toLowerCase();
-        return lowerCaseName.contains(lowerCaseSearchValue) ||
-            lowerCaseEncounterId.contains(lowerCaseSearchValue);
-      }).toList();
-    }
-    logger.f(_searchResults);
-    notifyListeners();
-  }
-
-  Future<void> getAssessmentRecords() async {
+  Future<void> getAssessmentTable() async {
     try {
+      hasMore = true;
       _isLoading = true;
       notifyListeners();
       final response = await ref.read(vtHomeRepository).getListOfPatients(
             TableParams(
               category: _category,
-              page: _pageNumber,
-              size: originalPageSize,
+              page: pageNumber,
+              size: pageSize,
             ),
           );
-
-      if (response.isNotEmpty) {
-        pageSize = max(1, response.length - 1);
-        _listOfAssessments.addAll(response);
-        _searchResults = List.from(_listOfAssessments);
-        logger.f({
-          "Total Records": response.length,
-          "Page Size": pageSize,
-          "Page Number": _pageNumber,
-        });
+      _tempListOfAssessments.addAll(response);
+      if (_tempListOfAssessments.isEmpty) {
+        hasMore = false;
+        _isLoading = false;
+        notifyListeners();
       } else {
-        logger.f("Skipping page $_pageNumber with total record zero");
+        _listOfAssessments.addAll(_tempListOfAssessments);
+        _tempListOfAssessments.clear();
+        _isLoading = false;
+        notifyListeners();
       }
     } catch (e) {
       logger.e("VTHomeHelperNotifier $e");
-    } finally {
+      _listOfAssessments.clear();
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void changePageSize(int? value) {
+    pageSize = value ?? 10;
+    _listOfAssessments.clear();
+    _tempListOfAssessments.clear();
+    _pageNumber = 0;
+    getAssessmentTable();
   }
 }

@@ -14,65 +14,52 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
-class PatientAssessmentPaginatedTable extends ConsumerStatefulWidget {
+class PatientAssessmentPaginatedTable extends HookConsumerWidget {
   const PatientAssessmentPaginatedTable({super.key});
 
   @override
-  ConsumerState<PatientAssessmentPaginatedTable> createState() =>
-      _PatientAssessmentPaginatedTableState();
-}
-
-class _PatientAssessmentPaginatedTableState
-    extends ConsumerState<PatientAssessmentPaginatedTable> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(vtHomeHelperProvider);
     bool isMobile = Responsive.isMobile(context);
     final loc = context.loc!;
-
-    return PaginatedDataTable(
-      header: Container(
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: AppColor.white,
-        ),
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: "Search by Patient Name or Encounter ID",
-            hintStyle: applyFiraSansFont(
-              fontSize: 14,
-              color: AppColor.grey,
+    if (model.listOfAssessments.isEmpty && !model.isLoading) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            // padding: const EdgeInsets.all(AppSize.km),
+            decoration: BoxDecoration(
+              color: AppColor.white,
+              borderRadius: BorderRadius.circular(8),
             ),
-            prefixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+            child: Column(
+              children: [
+                const SizedBox(height: AppSize.km),
+                Text(
+                  loc.vtNoAssessmentsFound,
+                  style: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: AppSize.km),
+              ],
             ),
           ),
-          onChanged: (value) {
-            model.searchBasedOnNameAndEncounterId(value);
-          },
-        ),
-      ),
-      // onRowsPerPageChanged: (value) {
-      //   logger.d("onRowsPerPageChanged $value");
-      //   model.updatePageSize(value);
-      // },
-      onPageChanged: (value) {
-        logger.d("onPageChanged $value");
-        model.updatePageNumber(value);
+        ],
+      );
+    }
+
+    return PaginatedDataTable(
+      onRowsPerPageChanged: (value) {
+        model.changePageSize(value);
       },
-      // availableRowsPerPage: [
-      //   model.pageSize,
-      //   model.pageSize * 2,
-      //   model.pageSize * 3
-      // ],
-      availableRowsPerPage: const [10],
+      availableRowsPerPage: const [10, 20, 30],
       rowsPerPage: model.pageSize,
       showCheckboxColumn: false,
       columnSpacing: isMobile
           ? AppSize.width(context) * 0.06
-          : AppSize.width(context) * 0.08,
+          : AppSize.width(context) * 0.05,
       headingRowHeight: isMobile ? AppSize.kl * 2 : AppSize.kl * 3,
       horizontalMargin: isMobile
           ? AppSize.width(context) * 0.05
@@ -141,27 +128,9 @@ class _PatientAssessmentPaginatedTableState
       source: PatientAssessmentDataSource(
         data: model.listOfAssessments,
         context: context,
+        vtSearchProvider: ref.watch(visionTechnicianSearchProvider),
         model: model,
-        onSelectChanged: (record) {
-          ref.read(visionTechnicianSearchProvider).setPatientDetails(record);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
-                patientDetails: record,
-              ),
-            ),
-          );
-        },
-        onTimelinePressed: (record) {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) {
-              return VisionTechnicianAssessmentTimeline(
-                patientDetails: record,
-              );
-            },
-          ));
-        },
+        isLoading: model.isLoading,
       ),
     );
   }
@@ -170,20 +139,20 @@ class _PatientAssessmentPaginatedTableState
 class PatientAssessmentDataSource extends DataTableSource {
   final List<VTPatientDto> data;
   final BuildContext context;
+  final VisionTechnicianSearchProvider vtSearchProvider;
   final VTHomeHelperNotifier model;
-  Function(VTPatientDto)? onSelectChanged;
-  Function(VTPatientDto)? onTimelinePressed;
+  final bool isLoading;
 
   PatientAssessmentDataSource({
     required this.data,
     required this.context,
-    required this.onSelectChanged,
-    required this.onTimelinePressed,
+    required this.vtSearchProvider,
     required this.model,
+    required this.isLoading,
   });
   @override
   DataRow? getRow(int index) {
-    if (model.isLoading) {
+    if (isLoading) {
       return DataRow(
         cells: [
           loadingDataCell(),
@@ -194,10 +163,29 @@ class PatientAssessmentDataSource extends DataTableSource {
         ],
       );
     }
+    if (index >= data.length - 1 && !isLoading && model.hasMore) {
+      logger.d("index $index data ${data.length}");
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        model.updatePageNumber();
+      });
+    }
+    if (index >= data.length) {
+      return null; // No more rows to display
+    }
 
     return DataRow.byIndex(
       index: index,
-      onSelectChanged: (value) => onSelectChanged!(data[index]),
+      onSelectChanged: (value) {
+        vtSearchProvider.setPatientDetails(data[index]);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
+              patientDetails: data[index],
+            ),
+          ),
+        );
+      },
       cells: [
         DataCell(
           Column(
@@ -212,7 +200,7 @@ class PatientAssessmentDataSource extends DataTableSource {
               ),
               const SizedBox(height: 4),
               Text(
-                "${data[index].id ?? ""}",
+                "OP ${data[index].id ?? ""}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
@@ -236,7 +224,7 @@ class PatientAssessmentDataSource extends DataTableSource {
               ),
               const SizedBox(height: 4),
               Text(
-                data[index].encounterStartDate.formatDateTimeMonthName,
+                data[index].encounterStartDate!.formatDateTimeMonthName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
@@ -249,21 +237,11 @@ class PatientAssessmentDataSource extends DataTableSource {
           ),
         ),
         DataCell(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Text(
-              encounterStatusMapper(data[index].encounterStatus).toUpperCase(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: encounterStatusColor(data[index].encounterStatus),
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+          Text(
+            encounterStatusMapper(data[index].encounterStatus),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(fontSize: 14),
           ),
         ),
         DataCell(
@@ -286,7 +264,18 @@ class PatientAssessmentDataSource extends DataTableSource {
         ),
         DataCell(
           IconButton(
-            onPressed: () => onTimelinePressed!(data[index]),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return VisionTechnicianAssessmentTimeline(
+                      patientDetails: data[index],
+                    );
+                  },
+                ),
+              );
+            },
             icon: const Icon(
               Icons.timeline,
             ),
@@ -305,19 +294,11 @@ class PatientAssessmentDataSource extends DataTableSource {
 
   String encounterStatusMapper(EncounterStatus? status) {
     if (status == null) return "";
-    return switch (status) {
-      EncounterStatus.IN_PROGRESS => "Open",
-      EncounterStatus.COMPLETED => "Closed",
-      EncounterStatus.CANCELLED => "Cancelled",
-    };
-  }
 
-  Color encounterStatusColor(EncounterStatus? status) {
-    if (status == null) return AppColor.grey;
     return switch (status) {
-      EncounterStatus.IN_PROGRESS => AppColor.mediumOrange,
-      EncounterStatus.COMPLETED => AppColor.altGreen,
-      EncounterStatus.CANCELLED => AppColor.red,
+      EncounterStatus.COMPLETED => "CLOSED",
+      EncounterStatus.IN_PROGRESS => "IN PROGRESS",
+      EncounterStatus.CANCELLED => "CANCELLED",
     };
   }
 

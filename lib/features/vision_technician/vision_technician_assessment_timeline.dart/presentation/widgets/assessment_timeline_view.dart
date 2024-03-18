@@ -46,7 +46,9 @@ class AssessmentTimelineView extends HookConsumerWidget {
                 width: isMobile ? 4 : 6,
                 margin: const EdgeInsets.only(right: AppSize.ks),
                 decoration: BoxDecoration(
-                  color: index.isEven ? AppColor.blue : AppColor.green,
+                  color: timeLineList[index].source == null
+                      ? AppColor.primary
+                      : AppColor.green,
                 ),
               ),
               Expanded(
