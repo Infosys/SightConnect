@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/color_dot.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,7 +16,8 @@ class AgeCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ColorDot(color: color),
-        Text(
+        AutoSizeText(
+          maxLines: 1,
           data,
           style: applyRobotoFont(
             fontSize: isMobile ? 12 : 16,

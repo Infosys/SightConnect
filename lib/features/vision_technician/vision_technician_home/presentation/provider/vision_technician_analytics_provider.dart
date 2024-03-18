@@ -4,8 +4,11 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var visionTechnicianAnalyticsProvider = ChangeNotifierProvider(
-    (ref) => VisionTechnicianAnalyticsNotifier(ref.read(vtHomeRepository)));
+var visionTechnicianAnalyticsProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => VisionTechnicianAnalyticsNotifier(
+    ref.watch(vtHomeRepository),
+  ),
+);
 
 class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
   final VTHomeRepositoryImpl _vtHomeRepositoryImpl;
@@ -14,11 +17,16 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
   }
 
   final Map<String, double> _dataMapAge = {};
-  double _totalAge = 0;
   bool _isLoading = false;
   Map<String, double> _dataMale = {};
   Map<String, double> _dataFemale = {};
   Map<String, double> _dataOthers = {};
+  double _totalAge = 0;
+  double _totalGenderValue = 0;
+  double _ivrCalls = 0;
+  double _totalVisit = 0;
+  Map closedCases = {};
+  Map triageCompleted = {};
 
   bool get isLoading => _isLoading;
 
@@ -27,7 +35,7 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  getVtAnalyticsStats() async {
+  void getVtAnalyticsStats() async {
     isLoading = true;
 
     var response = await _vtHomeRepositoryImpl.getVtAnalyticsStats();
@@ -49,15 +57,33 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
           if (payload.title == "OTHER") {
             _dataOthers = {"Others": payload.value};
           }
+          _totalGenderValue += payload.value;
         }
-
-        isLoading = false;
       }
+      if (element.statisticType == VtAnalyticsType.IVR_CALL_COUNT) {
+        _ivrCalls = element.statisticPayload[0].value;
+      }
+      if (element.statisticType == VtAnalyticsType.TOTAL_TRIAGES) {
+        _totalVisit = element.statisticPayload[0].value;
+      }
+      if (element.statisticType == VtAnalyticsType.TRIAGE_COMPLETED_COUNT) {
+        for (var element in element.statisticPayload) {
+          closedCases[element.title] = element.value;
+        }
+      }
+      if (element.statisticType ==
+          VtAnalyticsType.TRIAGE_COMPLETED_PERCENTAGE) {
+        for (var element in element.statisticPayload) {
+          triageCompleted[element.title] = element.value;
+        }
+      }
+
+      isLoading = false;
+
       notifyListeners();
     }
   }
 
-  final List<double> _totalValuesGender = [32, 51, 36];
   final List<List<Color>> _colorsGender = [
     [AppColor.primary],
     [AppColor.darkPink],
@@ -76,9 +102,11 @@ class VisionTechnicianAnalyticsNotifier extends ChangeNotifier {
   Map<String, double> get dataMale => _dataMale;
   Map<String, double> get dataFemale => _dataFemale;
   Map<String, double> get dataOthers => _dataOthers;
-  List<double> get totalValuesGender => _totalValuesGender;
+  double get totalGenderValue => _totalGenderValue;
   List<List<Color>> get colorsGender => _colorsGender;
   List<Color> get colorsAge => _colorsAge;
+  double get ivrCalls => _ivrCalls;
+  double get totalVisit => _totalVisit;
 
   ///Logic for symptoms analytics
 

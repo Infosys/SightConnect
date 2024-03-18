@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_analytics_provider.dart';
@@ -19,7 +20,7 @@ class PatientAgeAnalytics extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     bool isMobile = Responsive.isMobile(context);
 
-    var model = ref.watch(visionTechnicianAnalyticsProvider.notifier);
+    var model = ref.watch(visionTechnicianAnalyticsProvider);
 
     Map<String, double> dataMapAge = model.dataMapAge;
     Map<String, double> dataMale = model.dataMale;
@@ -27,12 +28,12 @@ class PatientAgeAnalytics extends ConsumerWidget {
     Map<String, double> dataOthers = model.dataOthers;
     List<Color> colorsAge = model.colorsAge;
     List<List<Color>> colorsGender = model.colorsGender;
-    List<double> totalValuesGender = model.totalValuesGender;
+    double totalValuesGender = model.totalGenderValue;
 
     final loc = context.loc!;
     return model.isLoading
         ? const Center(
-            child: CupertinoActivityIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           )
         : Container(
             margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -51,7 +52,8 @@ class PatientAgeAnalytics extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      AutoSizeText(
+                        maxLines: 1,
                         loc.vtByAge,
                         style: applyFiraSansFont(
                           fontWeight: FontWeight.w500,
@@ -72,12 +74,12 @@ class PatientAgeAnalytics extends ConsumerWidget {
                                 initialAngleInDegree: 270,
                                 chartType: ChartType.ring,
                                 ringStrokeWidth: isMobile ? 5 : 10,
-                                centerWidget: Text(
-                                  "-",
+                                centerWidget: AutoSizeText(
+                                  maxLines: 1,
+                                  model.totalAge.toInt().toString(),
                                   style: applyFiraSansFont(
                                     fontSize: isMobile ? 16 : 32,
                                     fontWeight: FontWeight.w500,
-                                    color: AppColor.orange,
                                   ),
                                 ),
                                 legendOptions: const LegendOptions(
@@ -120,7 +122,8 @@ class PatientAgeAnalytics extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      AutoSizeText(
+                        maxLines: 1,
                         loc.vtByGender,
                         style: applyFiraSansFont(
                           fontWeight: FontWeight.w500,
@@ -137,17 +140,17 @@ class PatientAgeAnalytics extends ConsumerWidget {
                             GenderPieChart(
                               data: dataMale,
                               color: colorsGender[0],
-                              total: totalValuesGender[0],
+                              total: totalValuesGender,
                             ),
                             GenderPieChart(
                               data: dataFemale,
                               color: colorsGender[1],
-                              total: totalValuesGender[1],
+                              total: totalValuesGender,
                             ),
                             GenderPieChart(
                               data: dataOthers,
                               color: colorsGender[2],
-                              total: totalValuesGender[2],
+                              total: totalValuesGender,
                             ),
                           ],
                         ),
