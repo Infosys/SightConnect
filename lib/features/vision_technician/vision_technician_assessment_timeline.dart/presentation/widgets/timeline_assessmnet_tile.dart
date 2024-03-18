@@ -46,7 +46,7 @@ class TimelineAssessmentTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  source?.name.formatTitle().capitalizeFirstOfEach() ?? "",
+                  source?.name.formatTitle().toUpperCase() ?? "",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: applyFiraSansFont(

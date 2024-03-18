@@ -68,6 +68,7 @@ class CarePlanViewModel extends ChangeNotifier {
       ],
       serviceRequest: [
         ServiceRequestModel(
+          note: _preliminaryAssessmentHelperProvider.remarksController.text,
           patientInstruction: patientInstruction,
           bodySite: BodySite.BOTH_EYES,
           identifier: visionCenterId, //vision center id
