@@ -6,6 +6,8 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_training_certificate_card.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_work_location_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_name_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_organisation_details_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_personal_details_card.dart';
@@ -54,15 +56,15 @@ class VTProfilePage extends HookConsumerWidget {
                     const SizedBox(height: AppSize.km),
                     VTProfilePersonalDetailsCard(profileData: data),
                     const SizedBox(height: AppSize.km),
-                    // VgProfileWorkLocationCard(profileData: data),
-                    // const SizedBox(
-                    //   height: AppSize.km,
-                    // ),
+                    VgProfileWorkLocationCard(profileData: data),
+                    const SizedBox(
+                      height: AppSize.km,
+                    ),
                     VTProfileOrganisationDetailsCard(profileData: data),
-                    // const SizedBox(
-                    //   height: AppSize.km,
-                    // ),
-                    //VgProfileTrainingCertificateCard(profileData: data),
+                    const SizedBox(
+                      height: AppSize.km,
+                    ),
+                    // VgProfileTrainingCertificateCard(profileData: data),
                     const SizedBox(height: AppSize.km),
                     AppCard(
                       child: ListTile(

@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class VgProfileWorkLocationCard extends StatelessWidget {
   const VgProfileWorkLocationCard({super.key, required this.profileData});
@@ -27,10 +28,29 @@ class VgProfileWorkLocationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Row(),
-            Text(
-              "Work Location",
-              style:
-                  applyFiraSansFont(fontSize: 16, fontWeight: FontWeight.w500),
+            Row(
+              children: [
+                Text(
+                  "Work Location",
+                  style: applyFiraSansFont(
+                      fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
+                  margin: const EdgeInsets.only(left: AppSize.ks),
+                  decoration: BoxDecoration(
+                    color: AppColor.lightGrey,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Text(
+                    profileData.currentWorkDetails?.chooseWorkStatus ?? "",
+                    style: applyRobotoFont(
+                      fontSize: 16,
+                      color: AppColor.darkGrey,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: AppSize.km,
@@ -40,7 +60,7 @@ class VgProfileWorkLocationCard extends StatelessWidget {
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Village Code",
+                    "Facility Name",
                     style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                   ),
                   Text(
@@ -51,7 +71,7 @@ class VgProfileWorkLocationCard extends StatelessWidget {
                 ]),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "Village",
+                    "Facility Code",
                     style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                   ),
                   Text(
