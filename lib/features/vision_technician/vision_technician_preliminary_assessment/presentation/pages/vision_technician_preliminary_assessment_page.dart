@@ -163,7 +163,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                                     msg: failure.errorMessage);
                               },
                               (triageResponseModel) {
-                                navigator.push(
+                                navigator.pushReplacement(
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return VisionTechnicianCloseAssessmentPage(

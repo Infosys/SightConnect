@@ -10,7 +10,10 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_cl
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/mr_code.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/recommendations.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/solution_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_analytics_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vt_home_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -19,7 +22,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/success_dialogue.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -46,13 +49,9 @@ class VisionTechnicianCloseAssessmentPage extends HookConsumerWidget {
       isLoading: isLoading.value,
       child: Scaffold(
         appBar: CustomAppbar(
-          leadingIcon: IconButton(
-            icon: const Icon(CupertinoIcons.back),
-            onPressed: () {
-              ref.invalidate(vtCloseAssessmentHelperProvider);
-              Navigator.popUntil(context, (route) => route.isFirst);
-            },
-          ),
+          onBackPress: () {
+            reset(ref);
+          },
           title: Text(
             '${patientName.capitalizeFirstOfEach()} - OP ${patientId}',
             maxLines: 1,
@@ -83,8 +82,7 @@ class VisionTechnicianCloseAssessmentPage extends HookConsumerWidget {
                 width: AppSize.width(context) * 0.4,
                 child: OutlinedButton(
                   onPressed: () {
-                    ref.invalidate(vtCloseAssessmentHelperProvider);
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    reset(ref).then((value) => Navigator.of(context).pop());
                   },
                   child: Text(
                     loc.vtBack,
@@ -183,5 +181,16 @@ class VisionTechnicianCloseAssessmentPage extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> reset(WidgetRef ref) async {
+    ref.invalidate(vtCloseAssessmentHelperProvider);
+    ref.invalidate(preliminaryAssessmentHelperProvider);
+    ref.invalidate(carePlanProvider);
+    logger.d("invalidated VT triage provider");
+
+    ref.invalidate(visionTechnicianAnalyticsProvider);
+    ref.invalidate(vtHomeHelperProvider);
+    logger.d("Refreshing VT Dashboard data");
   }
 }

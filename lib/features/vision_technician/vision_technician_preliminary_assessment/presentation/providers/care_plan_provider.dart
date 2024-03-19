@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var carePlanProvider = ChangeNotifierProvider((ref) => CarePlanProvider());
+final  carePlanProvider = ChangeNotifierProvider((ref) => CarePlanProvider());
 
 class CarePlanProvider extends ChangeNotifier {
   PatientInstruction? _patientInstruction;

@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -35,18 +36,22 @@ class VgProfileWorkLocationCard extends StatelessWidget {
                   style: applyFiraSansFont(
                       fontSize: 16, fontWeight: FontWeight.w500),
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
-                  margin: const EdgeInsets.only(left: AppSize.ks),
-                  decoration: BoxDecoration(
-                    color: AppColor.lightGrey,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Text(
-                    profileData.currentWorkDetails?.chooseWorkStatus ?? "",
-                    style: applyRobotoFont(
-                      fontSize: 16,
-                      color: AppColor.darkGrey,
+                Visibility(
+                  visible:
+                      profileData.currentWorkDetails?.chooseWorkStatus != null,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
+                    margin: const EdgeInsets.only(left: AppSize.ks),
+                    decoration: BoxDecoration(
+                      color: AppColor.lightGrey,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      profileData.currentWorkDetails?.chooseWorkStatus ?? "",
+                      style: applyRobotoFont(
+                        fontSize: 16,
+                        color: AppColor.darkGrey,
+                      ),
                     ),
                   ),
                 ),
