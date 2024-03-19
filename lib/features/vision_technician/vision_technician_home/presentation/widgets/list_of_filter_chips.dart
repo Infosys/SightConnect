@@ -16,34 +16,15 @@ class ListOfFilterChips extends ConsumerWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          CustomChip(
-            title: "ALL",
-            isSelected: model.category == "ALL",
-            onTap: (type) {
-              model.updateCategory(type);
-            },
-          ),
-          CustomChip(
-            title: "URGENT",
-            isSelected: model.category == "URGENT",
-            onTap: (type) {
-              model.updateCategory(type);
-            },
-          ),
-          CustomChip(
-            title: "EARLY",
-            isSelected: model.category == "EARLY",
-            onTap: (type) {
-              model.updateCategory(type);
-            },
-          ),
-          CustomChip(
-            title: "ROUTINE",
-            isSelected: model.category == "ROUTINE",
-            onTap: (type) {
-              model.updateCategory(type);
-            },
-          ),
+          ...model.availableCategories.map((e) {
+            return CustomChip(
+              title: e,
+              isSelected: model.category == e,
+              onTap: (type) {
+                model.updateCategory(type);
+              },
+            );
+          }).toList(),
         ],
       ),
     );

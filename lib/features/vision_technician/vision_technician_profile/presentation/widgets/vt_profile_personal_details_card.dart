@@ -36,24 +36,26 @@ class VTProfilePersonalDetailsCard extends StatelessWidget {
               height: AppSize.km,
             ),
             Text(
-              loc.vtHprId,
+              "Registration Number",
               style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
             ),
             Text(
-              "-",
+              profileData.registrationAcademic?.registrationData?[0]
+                      .registrationNumber ??
+                  "",
               style: applyRobotoFont(color: AppColor.darkGrey),
             ),
             const SizedBox(
               height: AppSize.ks,
             ),
-            Text(
-              loc.vtEmailId,
-              style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
-            ),
-            Text(
-              profileData.officialEmail ?? "-",
-              style: applyRobotoFont(color: AppColor.darkGrey),
-            ),
+            // Text(
+            //   loc.vtEmailId,
+            //   style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
+            // ),
+            // Text(
+            //   profileData.officialEmail ?? "-",
+            //   style: applyRobotoFont(color: AppColor.darkGrey),
+            // ),
             const SizedBox(
               height: AppSize.ks,
             ),

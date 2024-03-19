@@ -15,13 +15,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/model/care_plan_post_model.dart';
 
-var carePlanViewModelProvider =
-    ChangeNotifierProvider((ref) => CarePlanViewModel(
-          ref.read(carePlanProvider),
-          ref.watch(preliminaryAssessmentHelperProvider),
-          ref.watch(globalVTProvider).userId,
-          ref.watch(vtCarePlanRemoteSourceProvider),
-        ));
+var carePlanViewModelProvider = ChangeNotifierProvider(
+  (ref) => CarePlanViewModel(
+    ref.read(carePlanProvider),
+    ref.watch(preliminaryAssessmentHelperProvider),
+    ref.watch(globalVTProvider).userId,
+    ref.watch(vtCarePlanRemoteSourceProvider),
+  ),
+);
 
 class CarePlanViewModel extends ChangeNotifier {
   final VTCarePlanRemoteSource _vtCarePlanRemoteSource;
@@ -38,9 +39,13 @@ class CarePlanViewModel extends ChangeNotifier {
     this._vtCarePlanRemoteSource,
   );
 
-  Future<Either<Failure, CarePlanPostModel>> saveCarePlan(
-      int organizationCode,int tenantCode,int reportId, int encounterId) async {
-    final PatientInstruction patientInstruction =
+  Future<Either<Failure, CarePlanPostModel>> saveCarePlan({
+    required int organizationCode,
+    required int tenantCode,
+    required int reportId,
+    required int encounterId,
+  }) async {
+    final PatientInstruction? patientInstruction =
         _carePlanProvider.patientInstruction;
 
     int? visionCenterId =
@@ -63,6 +68,7 @@ class CarePlanViewModel extends ChangeNotifier {
       ],
       serviceRequest: [
         ServiceRequestModel(
+          note: _preliminaryAssessmentHelperProvider.remarksController.text,
           patientInstruction: patientInstruction,
           bodySite: BodySite.BOTH_EYES,
           identifier: visionCenterId, //vision center id
@@ -81,8 +87,8 @@ class CarePlanViewModel extends ChangeNotifier {
         ),
       ],
     );
-
-    logger.d({"care plan to be saved":carePlan.toJson()});
+    logger.d("CarePlanPostModel");
+    logger.d(carePlan.toJson());
 
     var response = await _vtCarePlanRemoteSource.saveCarePlan(
       carePlan: carePlan,

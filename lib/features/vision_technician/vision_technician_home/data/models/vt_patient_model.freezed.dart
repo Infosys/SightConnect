@@ -34,6 +34,7 @@ mixin _$VTPatientDto {
   @TimestampConverter()
   DateTime? get encounterStartDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  EncounterStatus? get encounterStatus => throw _privateConstructorUsedError;
   SeverityCategory? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,6 +63,7 @@ abstract class $VTPatientDtoCopyWith<$Res> {
       int? encounterId,
       @TimestampConverter() DateTime? encounterStartDate,
       String? status,
+      EncounterStatus? encounterStatus,
       SeverityCategory? category});
 }
 
@@ -91,6 +93,7 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
     Object? encounterId = freezed,
     Object? encounterStartDate = freezed,
     Object? status = freezed,
+    Object? encounterStatus = freezed,
     Object? category = freezed,
   }) {
     return _then(_value.copyWith(
@@ -146,6 +149,10 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      encounterStatus: freezed == encounterStatus
+          ? _value.encounterStatus
+          : encounterStatus // ignore: cast_nullable_to_non_nullable
+              as EncounterStatus?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -176,6 +183,7 @@ abstract class _$$_VTPatientDtoCopyWith<$Res>
       int? encounterId,
       @TimestampConverter() DateTime? encounterStartDate,
       String? status,
+      EncounterStatus? encounterStatus,
       SeverityCategory? category});
 }
 
@@ -203,6 +211,7 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
     Object? encounterId = freezed,
     Object? encounterStartDate = freezed,
     Object? status = freezed,
+    Object? encounterStatus = freezed,
     Object? category = freezed,
   }) {
     return _then(_$_VTPatientDto(
@@ -258,6 +267,10 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      encounterStatus: freezed == encounterStatus
+          ? _value.encounterStatus
+          : encounterStatus // ignore: cast_nullable_to_non_nullable
+              as EncounterStatus?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -283,6 +296,7 @@ class _$_VTPatientDto implements _VTPatientDto {
       this.encounterId,
       @TimestampConverter() this.encounterStartDate,
       this.status,
+      this.encounterStatus,
       this.category});
 
   factory _$_VTPatientDto.fromJson(Map<String, dynamic> json) =>
@@ -316,11 +330,13 @@ class _$_VTPatientDto implements _VTPatientDto {
   @override
   final String? status;
   @override
+  final EncounterStatus? encounterStatus;
+  @override
   final SeverityCategory? category;
 
   @override
   String toString() {
-    return 'VTPatientDto(id: $id, name: $name, mobile: $mobile, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, gender: $gender, districtName: $districtName, townName: $townName, pincode: $pincode, encounterId: $encounterId, encounterStartDate: $encounterStartDate, status: $status, category: $category)';
+    return 'VTPatientDto(id: $id, name: $name, mobile: $mobile, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, gender: $gender, districtName: $districtName, townName: $townName, pincode: $pincode, encounterId: $encounterId, encounterStartDate: $encounterStartDate, status: $status, encounterStatus: $encounterStatus, category: $category)';
   }
 
   @override
@@ -348,6 +364,8 @@ class _$_VTPatientDto implements _VTPatientDto {
             (identical(other.encounterStartDate, encounterStartDate) ||
                 other.encounterStartDate == encounterStartDate) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.encounterStatus, encounterStatus) ||
+                other.encounterStatus == encounterStatus) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
@@ -369,6 +387,7 @@ class _$_VTPatientDto implements _VTPatientDto {
       encounterId,
       encounterStartDate,
       status,
+      encounterStatus,
       category);
 
   @JsonKey(ignore: true)
@@ -400,6 +419,7 @@ abstract class _VTPatientDto implements VTPatientDto {
       final int? encounterId,
       @TimestampConverter() final DateTime? encounterStartDate,
       final String? status,
+      final EncounterStatus? encounterStatus,
       final SeverityCategory? category}) = _$_VTPatientDto;
 
   factory _VTPatientDto.fromJson(Map<String, dynamic> json) =
@@ -432,6 +452,8 @@ abstract class _VTPatientDto implements VTPatientDto {
   DateTime? get encounterStartDate;
   @override
   String? get status;
+  @override
+  EncounterStatus? get encounterStatus;
   @override
   SeverityCategory? get category;
   @override

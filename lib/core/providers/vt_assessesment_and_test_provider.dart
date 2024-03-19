@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/core/mapper/assessment_details_and_triage_mapper.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
@@ -30,7 +31,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isUpdateLoading => _isUpdateLoading;
 
-  Future<List<TriageDetailedReportModel>> _getTriageReportByEncounterId(
+  Future<List<TriageDetailedReportModel>> getTriageReportByEncounterId(
     int encounterId,
     DiagnosticReportStatus status,
   ) async {
@@ -46,7 +47,7 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
 
     return response.fold(
       (failure) {
-        logger.d({"_getTriageReport ": failure});
+        logger.e({"_getTriageReport ": failure});
         _isUpdateLoading = false;
         notifyListeners();
 
@@ -137,36 +138,39 @@ class VtAssessmentAndTestProvider extends ChangeNotifier {
           await _getTriageUseCase.call(GetTriageParam());
       final triageAssessment = triageAssessmentResponse.fold(
         (failure) {
-          logger.d({"getEyeTriageDetailedReport ": failure});
-          throw failure;
+          throw ServerFailure(errorMessage: failure.toString());
         },
         (triageAssessment) {
           return triageAssessment;
         },
       );
 
-      logger.d(
-          {"getTriageDetailedReportByEncounterId": triageAssessment.toJson()});
+      List<TriageDetailedReportModel> triageReport = [];
+      try {
+        triageReport = await getTriageReportByEncounterId(encounterId, status);
+        if (triageReport.isEmpty) {
+          throw ServerFailure(errorMessage: "No report found");
+        } else {
+          return AssessmentDetailedAndTriageReportMapper.toEntity(
+            context,
+            triageReport.first,
+            triageAssessment,
+          );
+        }
+      } on ServerFailure catch (e) {
+        logger.e({
+          "getTriageDetailedReport": e.errorMessage,
+          "provider": "PatientAssessmentAndTestProviderNew",
+        });
 
-      final triageReport =
-          await _getTriageReportByEncounterId(encounterId, status);
-      if (triageReport.isEmpty) {
-        throw Exception("No data found");
+        throw ServerFailure(errorMessage: e.toString());
+      } catch (e) {
+        logger.e(e.toString());
+        throw ServerFailure(errorMessage: e.toString());
       }
-
+    } finally {
       _isLoading = false;
       notifyListeners();
-
-      return AssessmentDetailedAndTriageReportMapper.toEntity(
-          context, triageReport.first, triageAssessment);
-    } catch (e) {
-      logger.e({
-        "getTriageDetailedReport": e.toString(),
-        "provider": "PatientAssessmentAndTestProviderNew",
-      });
-      _isLoading = false;
-      notifyListeners();
-      rethrow;
     }
   }
 

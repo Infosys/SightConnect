@@ -128,7 +128,7 @@ class TriageProvider extends ChangeNotifier {
       /* "${starttime.toIso8601String()}Z" */
 
       source: getSource(),
-      sourceVersion: AppInfoService.version,
+      sourceVersion: AppInfoService.appVersion,
       incompleteSection: _getInclompleteSection(currentStep),
       imagingSelection: _removeInvalidImagingSelection(imageSelection),
       observations: observations,
@@ -231,7 +231,7 @@ class TriageProvider extends ChangeNotifier {
       issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
 
       source: getSource(),
-      sourceVersion: AppInfoService.version,
+      sourceVersion: AppInfoService.appVersion,
       incompleteSection: _getInclompleteSection(currentStep),
       imagingSelection: _removeInvalidImagingSelection(imageSelection),
       observations: observations,

@@ -23,6 +23,9 @@ extension DateExtension on DateTime? {
       this == null ? "" : DateFormat('dd/MM/yyyy hh:mm a').format(this!);
   String get formatDateTimeMonthNameWithTime =>
       this == null ? "" : DateFormat("dd MMM yyyy, hh:mm a").format(this!);
+
+  String get formatDateTimeWithFullMonthName =>
+      this == null ? "" : DateFormat("dd MMM yyyy, hh:mm a").format(this!);
 }
 
 extension StringExtension on String? {

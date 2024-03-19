@@ -44,9 +44,15 @@ class AssessmentDetailedAndTriageReportMapper {
       observationSeverity: triageDetailedReport.observationSeverity,
       mediaSeverity: triageDetailedReport.mediaSeverity,
       questionResponseSeverity: triageDetailedReport.questionResponseSeverity,
-      visionCenterId: triageDetailedReport.carePlans?.first.activities?.first
-          .plannedActivityReference?.serviceRequest?.identifier,
-      remarks: triageDetailedReport.carePlans?.first.note,
+      visionCenterId: triageDetailedReport.carePlans?.isNotEmpty ?? false
+          ? triageDetailedReport.carePlans!.first.activities?.first
+              .plannedActivityReference?.serviceRequest?.identifier
+          : null,
+
+      // remarks: triageDetailedReport.carePlans?.isNotEmpty ?? false
+      //     ? triageDetailedReport.carePlans!.first.note
+      //     : null,
+      remarks: getRemark(triageDetailedReport.carePlans),
     );
   }
 
@@ -142,6 +148,23 @@ class AssessmentDetailedAndTriageReportMapper {
     }
   }
 
+  static String getRemark(List<CarePlan>? carePlan) {
+    if (carePlan != null && carePlan.isNotEmpty) {
+      final activities = carePlan.first.activities;
+      if (activities != null && activities.isNotEmpty) {
+        final plannedActivityReference =
+            activities.first.plannedActivityReference;
+        if (plannedActivityReference != null) {
+          final serviceRequest = plannedActivityReference.serviceRequest;
+          if (serviceRequest != null && serviceRequest.note != null) {
+            return serviceRequest.note!;
+          }
+        }
+      }
+    }
+    return "";
+  }
+
   static String getBodySiteText(
     BuildContext context,
     BodySite bodySite,
@@ -174,9 +197,10 @@ class AssessmentDetailedAndTriageReportMapper {
         if (questionResponseMap.containsKey(response.linkId)) {
           questionResponseBriefEntity.add(
             QuestionResponseBriefEntity(
-              question: questionResponseMap[response.linkId]!,
-              response: response.answers!.first.value,
-            ),
+                question: questionResponseMap[response.linkId]!,
+                response: response.answers?.isNotEmpty ?? false
+                    ? response.answers!.first.value
+                    : ""),
           );
         }
       }

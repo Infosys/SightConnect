@@ -22,9 +22,16 @@ class VTPatientDto with _$VTPatientDto {
     int? encounterId,
     @TimestampConverter() DateTime? encounterStartDate,
     String? status,
+    EncounterStatus? encounterStatus,
     SeverityCategory? category,
   }) = _VTPatientDto;
 
   factory VTPatientDto.fromJson(Map<String, dynamic> json) =>
       _$VTPatientDtoFromJson(json);
+}
+
+enum EncounterStatus {
+  IN_PROGRESS,
+  COMPLETED,
+  CANCELLED,
 }

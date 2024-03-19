@@ -21,35 +21,37 @@ class LoadingOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return IgnorePointer(
       ignoring: isLoading,
-      child: Stack(
-        children: [
-          child,
-          Visibility(
-            visible: isLoading,
-            child: Align(
-              alignment: Alignment.center,
-              child: Container(
-                color: ignoreOverlayColor
-                    ? null
-                    : overlayColor.withOpacity(overlayOpacity),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      progressMessage,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ],
+      child: Scaffold(
+        body: Stack(
+          children: [
+            child,
+            Visibility(
+              visible: isLoading,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  color: ignoreOverlayColor
+                      ? null
+                      : overlayColor.withOpacity(overlayOpacity),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        progressMessage,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

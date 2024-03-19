@@ -7,7 +7,7 @@ class AppInfoService {
   static const String tollFreeNumber = "1800 1211 00411";
   static const String activateExotelNumber = "02249360005";
   static const String lvpeiEmail = "communications@lvpei.org";
-  static String version = "1.0";
+  // static String version = "1.0";
   // App Text Constants
 
   static PackageInfo? _packageInfo;

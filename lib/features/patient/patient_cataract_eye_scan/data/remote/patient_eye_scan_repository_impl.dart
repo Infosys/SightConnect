@@ -1,11 +1,7 @@
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../../../core/services/dio_service.dart';
-import '../../../../../env.dart';
 import '../../../../../main.dart';
 import '../contract/patient_eye_scan_repository.dart';
 
@@ -42,7 +38,7 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
     //   ],
     // });
 
-    String url = "${Env.baseUrl}/services/ai/api/detect/";
+    String url = "/services/ai/api/detect/";
 
     logger.d("model post call initiated");
     logger.d(url);

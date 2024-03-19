@@ -22,6 +22,8 @@ _$_VTPatientDto _$$_VTPatientDtoFromJson(Map<String, dynamic> json) =>
       encounterStartDate: const TimestampConverter()
           .fromJson(json['encounterStartDate'] as String?),
       status: json['status'] as String?,
+      encounterStatus: $enumDecodeNullable(
+          _$EncounterStatusEnumMap, json['encounterStatus']),
       category:
           $enumDecodeNullable(_$SeverityCategoryEnumMap, json['category']),
     );
@@ -42,6 +44,7 @@ Map<String, dynamic> _$$_VTPatientDtoToJson(_$_VTPatientDto instance) =>
       'encounterStartDate':
           const TimestampConverter().toJson(instance.encounterStartDate),
       'status': instance.status,
+      'encounterStatus': _$EncounterStatusEnumMap[instance.encounterStatus],
       'category': _$SeverityCategoryEnumMap[instance.category],
     };
 
@@ -49,6 +52,12 @@ const _$GenderEnumMap = {
   Gender.MALE: 'MALE',
   Gender.FEMALE: 'FEMALE',
   Gender.OTHERS: 'OTHERS',
+};
+
+const _$EncounterStatusEnumMap = {
+  EncounterStatus.IN_PROGRESS: 'IN_PROGRESS',
+  EncounterStatus.COMPLETED: 'COMPLETED',
+  EncounterStatus.CANCELLED: 'CANCELLED',
 };
 
 const _$SeverityCategoryEnumMap = {

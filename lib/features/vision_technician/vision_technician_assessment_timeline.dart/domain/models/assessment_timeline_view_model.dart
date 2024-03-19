@@ -7,15 +7,18 @@ part 'assessment_timeline_view_model.g.dart';
 @freezed
 class AssessmentTimelineViewModel with _$AssessmentTimelineViewModel {
   const factory AssessmentTimelineViewModel({
-    String? type,
+    int? encounterId,
     String? title,
-    @JsonKey(name: "description") String? subtitle,
+    String? description,
     @TimestampConverter() DateTime? date,
-   String? call,
-     int? assessmentId,
-     int? encounterId,
+    int? assessmentId,
+    String? status,
+    TimelineSource? source,
+    String? type,
   }) = _AssessmentTimelineViewModel;
 
   factory AssessmentTimelineViewModel.fromJson(Map<String, dynamic> json) =>
       _$AssessmentTimelineViewModelFromJson(json);
 }
+
+enum TimelineSource { PATIENT_APP, VT_APP, VG_APP, IVR, IN_PERSION, OTHERS }

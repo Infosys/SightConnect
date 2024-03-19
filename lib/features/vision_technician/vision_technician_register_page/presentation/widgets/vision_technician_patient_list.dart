@@ -17,6 +17,8 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../providers/vision_technician_register_provider.dart';
+
 class VisionTechnicianPatientListWidget extends ConsumerWidget {
   const VisionTechnicianPatientListWidget({
     super.key,
@@ -102,6 +104,7 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
                   } else if (value) {
                     Fluttertoast.showToast(msg: loc.vtDependentAdded);
                   }
+                  ref.invalidate(vtRegisterProvider);
                 },
               );
             } catch (e) {
@@ -127,6 +130,7 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
                   } else if (value) {
                     Fluttertoast.showToast(msg: loc.vtPatientRegistered);
                   }
+                  ref.invalidate(vtRegisterProvider);
                 },
               );
             } catch (e) {

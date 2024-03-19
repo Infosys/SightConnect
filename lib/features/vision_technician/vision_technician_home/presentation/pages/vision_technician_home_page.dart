@@ -4,17 +4,20 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../../../../main.dart';
+import '../provider/vt_home_helper_provider.dart';
 
 class VisionTechnicianHomePage extends ConsumerWidget {
   const VisionTechnicianHomePage({super.key});
@@ -86,10 +89,10 @@ class VisionTechnicianHomePage extends ConsumerWidget {
         dialogStyle: Platform.isIOS
             ? UpgradeDialogStyle.cupertino
             : UpgradeDialogStyle.material,
-        showIgnore: false,
-        showLater: false,
-        shouldPopScope: () => false,
-        canDismissDialog: false,
+        showIgnore: kDebugMode ? true : false,
+        showLater: kDebugMode ? true : false,
+        shouldPopScope: () => kDebugMode ? true : false,
+        canDismissDialog: kDebugMode ? true : false,
         onUpdate: () {
           return true;
         },
@@ -108,34 +111,40 @@ class VisionTechnicianHomePage extends ConsumerWidget {
             });
           },
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                child: Stack(
-                  children: [
-                    Container(
-                      height: AppSize.kl * 6,
-                      decoration: const BoxDecoration(
-                        color: AppColor.primary,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(AppSize.kl),
-                          bottomRight: Radius.circular(AppSize.kl),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(visionTechnicianAnalyticsProvider);
+            ref.invalidate(vtHomeHelperProvider);
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: AppSize.kl * 6,
+                        decoration: const BoxDecoration(
+                          color: AppColor.primary,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(AppSize.kl),
+                            bottomRight: Radius.circular(AppSize.kl),
+                          ),
                         ),
                       ),
-                    ),
-                    Transform.translate(
-                      offset: const Offset(0, AppSize.ks),
-                      child: const VTHeader(),
-                    )
-                  ],
+                      Transform.translate(
+                        offset: const Offset(0, AppSize.ks),
+                        child: const VTHeader(),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              //TODO: Logic for showing the assessment table
-              const AssessmentTable(),
-            ],
+                //TODO: Logic for showing the assessment table
+                const AssessmentTable(),
+              ],
+            ),
           ),
         ),
       ),

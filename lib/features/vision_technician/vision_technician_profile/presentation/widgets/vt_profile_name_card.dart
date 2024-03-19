@@ -70,7 +70,7 @@ class VTProfileNameCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            loc.vtGender,
+                            "Email",
                             style: applyRobotoFont(
                               fontSize: 14,
                               color: AppColor.darkGrey,
@@ -80,7 +80,7 @@ class VTProfileNameCard extends StatelessWidget {
                             height: AppSize.ks / 2,
                           ),
                           Text(
-                            "-",
+                            profileData.officialEmail ?? "",
                             style: applyRobotoFont(fontSize: 14),
                           )
                         ],

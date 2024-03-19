@@ -1,10 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+
+// import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../providers/care_plan_provider.dart';
@@ -14,15 +15,10 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var data = ref.watch(carePlanProvider);
-    final options = [
-      "Visit Primary Center",
-      "Visit Secondary Center",
-      "Visit Tertiary Center",
-      "Visit Center of Excellence"
-    ];
-    final selectedOption = useState<String?>('');
-    final loc = context.loc!;
+    var model = ref.watch(carePlanProvider);
+
+    // final loc = context.loc!;
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSize.km),
@@ -36,9 +32,10 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              loc.vtRecommendation,
-              style: const TextStyle(
+            const Text(
+              // loc.vtRecommendation,
+              "Vision Center Type",
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -48,22 +45,20 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: options.map((option) {
-                return RadioListTile(
+              children: model.availableInstruction.map((option) {
+                return RadioListTile<PatientInstruction>(
                   contentPadding: EdgeInsets.zero,
                   dense: true,
                   visualDensity: VisualDensity.compact,
-                  title: Text(option),
+                  title: Text(visionCenterMappers(option)),
                   value: option,
-                  groupValue: selectedOption.value,
+                  groupValue: model.patientInstruction,
                   onChanged: (value) {
                     ref
                         .read(preliminaryAssessmentHelperProvider)
                         .setRecommendationSelected();
-                    selectedOption.value = value;
-                    data.setPatientInstruction(selectedOption.value!);
 
-                    // ref.read(carePlanViewModelProvider).saveCarePlan();
+                    model.setPatientInstruction(value!);
                   },
                 );
               }).toList(),
@@ -72,5 +67,14 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  visionCenterMappers(PatientInstruction option) {
+    return switch (option) {
+      PatientInstruction.VISIT_PRIMARY_CLINIC => "Primary Center",
+      PatientInstruction.VISIT_SECONDARY_CLINIC => "Secondary Center",
+      PatientInstruction.VISIT_TERTIARY_CLINIC => "Tertiary Center",
+      PatientInstruction.VISIT_COE => "Center of Excellence",
+    };
   }
 }

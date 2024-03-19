@@ -21,15 +21,15 @@ AssessmentTimelineViewModel _$AssessmentTimelineViewModelFromJson(
 
 /// @nodoc
 mixin _$AssessmentTimelineViewModel {
-  String? get type => throw _privateConstructorUsedError;
+  int? get encounterId => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
-  @JsonKey(name: "description")
-  String? get subtitle => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get date => throw _privateConstructorUsedError;
-  String? get call => throw _privateConstructorUsedError;
   int? get assessmentId => throw _privateConstructorUsedError;
-  int? get encounterId => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  TimelineSource? get source => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,13 +46,14 @@ abstract class $AssessmentTimelineViewModelCopyWith<$Res> {
           AssessmentTimelineViewModel>;
   @useResult
   $Res call(
-      {String? type,
+      {int? encounterId,
       String? title,
-      @JsonKey(name: "description") String? subtitle,
+      String? description,
       @TimestampConverter() DateTime? date,
-      String? call,
       int? assessmentId,
-      int? encounterId});
+      String? status,
+      TimelineSource? source,
+      String? type});
 }
 
 /// @nodoc
@@ -69,43 +70,48 @@ class _$AssessmentTimelineViewModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? title = freezed,
-    Object? subtitle = freezed,
-    Object? date = freezed,
-    Object? call = freezed,
-    Object? assessmentId = freezed,
     Object? encounterId = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? date = freezed,
+    Object? assessmentId = freezed,
+    Object? status = freezed,
+    Object? source = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+      encounterId: freezed == encounterId
+          ? _value.encounterId
+          : encounterId // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      subtitle: freezed == subtitle
-          ? _value.subtitle
-          : subtitle // ignore: cast_nullable_to_non_nullable
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      call: freezed == call
-          ? _value.call
-          : call // ignore: cast_nullable_to_non_nullable
-              as String?,
       assessmentId: freezed == assessmentId
           ? _value.assessmentId
           : assessmentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      encounterId: freezed == encounterId
-          ? _value.encounterId
-          : encounterId // ignore: cast_nullable_to_non_nullable
-              as int?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as TimelineSource?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -120,13 +126,14 @@ abstract class _$$_AssessmentTimelineViewModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? type,
+      {int? encounterId,
       String? title,
-      @JsonKey(name: "description") String? subtitle,
+      String? description,
       @TimestampConverter() DateTime? date,
-      String? call,
       int? assessmentId,
-      int? encounterId});
+      String? status,
+      TimelineSource? source,
+      String? type});
 }
 
 /// @nodoc
@@ -142,43 +149,48 @@ class __$$_AssessmentTimelineViewModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? title = freezed,
-    Object? subtitle = freezed,
-    Object? date = freezed,
-    Object? call = freezed,
-    Object? assessmentId = freezed,
     Object? encounterId = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? date = freezed,
+    Object? assessmentId = freezed,
+    Object? status = freezed,
+    Object? source = freezed,
+    Object? type = freezed,
   }) {
     return _then(_$_AssessmentTimelineViewModel(
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String?,
+      encounterId: freezed == encounterId
+          ? _value.encounterId
+          : encounterId // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      subtitle: freezed == subtitle
-          ? _value.subtitle
-          : subtitle // ignore: cast_nullable_to_non_nullable
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      call: freezed == call
-          ? _value.call
-          : call // ignore: cast_nullable_to_non_nullable
-              as String?,
       assessmentId: freezed == assessmentId
           ? _value.assessmentId
           : assessmentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      encounterId: freezed == encounterId
-          ? _value.encounterId
-          : encounterId // ignore: cast_nullable_to_non_nullable
-              as int?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as TimelineSource?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -187,37 +199,39 @@ class __$$_AssessmentTimelineViewModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
   const _$_AssessmentTimelineViewModel(
-      {this.type,
+      {this.encounterId,
       this.title,
-      @JsonKey(name: "description") this.subtitle,
+      this.description,
       @TimestampConverter() this.date,
-      this.call,
       this.assessmentId,
-      this.encounterId});
+      this.status,
+      this.source,
+      this.type});
 
   factory _$_AssessmentTimelineViewModel.fromJson(Map<String, dynamic> json) =>
       _$$_AssessmentTimelineViewModelFromJson(json);
 
   @override
-  final String? type;
+  final int? encounterId;
   @override
   final String? title;
   @override
-  @JsonKey(name: "description")
-  final String? subtitle;
+  final String? description;
   @override
   @TimestampConverter()
   final DateTime? date;
   @override
-  final String? call;
-  @override
   final int? assessmentId;
   @override
-  final int? encounterId;
+  final String? status;
+  @override
+  final TimelineSource? source;
+  @override
+  final String? type;
 
   @override
   String toString() {
-    return 'AssessmentTimelineViewModel(type: $type, title: $title, subtitle: $subtitle, date: $date, call: $call, assessmentId: $assessmentId, encounterId: $encounterId)';
+    return 'AssessmentTimelineViewModel(encounterId: $encounterId, title: $title, description: $description, date: $date, assessmentId: $assessmentId, status: $status, source: $source, type: $type)';
   }
 
   @override
@@ -225,22 +239,23 @@ class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AssessmentTimelineViewModel &&
-            (identical(other.type, type) || other.type == type) &&
+            (identical(other.encounterId, encounterId) ||
+                other.encounterId == encounterId) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.subtitle, subtitle) ||
-                other.subtitle == subtitle) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.call, call) || other.call == call) &&
             (identical(other.assessmentId, assessmentId) ||
                 other.assessmentId == assessmentId) &&
-            (identical(other.encounterId, encounterId) ||
-                other.encounterId == encounterId));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, type, title, subtitle, date,
-      call, assessmentId, encounterId);
+  int get hashCode => Object.hash(runtimeType, encounterId, title, description,
+      date, assessmentId, status, source, type);
 
   @JsonKey(ignore: true)
   @override
@@ -260,33 +275,35 @@ class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
 abstract class _AssessmentTimelineViewModel
     implements AssessmentTimelineViewModel {
   const factory _AssessmentTimelineViewModel(
-      {final String? type,
+      {final int? encounterId,
       final String? title,
-      @JsonKey(name: "description") final String? subtitle,
+      final String? description,
       @TimestampConverter() final DateTime? date,
-      final String? call,
       final int? assessmentId,
-      final int? encounterId}) = _$_AssessmentTimelineViewModel;
+      final String? status,
+      final TimelineSource? source,
+      final String? type}) = _$_AssessmentTimelineViewModel;
 
   factory _AssessmentTimelineViewModel.fromJson(Map<String, dynamic> json) =
       _$_AssessmentTimelineViewModel.fromJson;
 
   @override
-  String? get type;
+  int? get encounterId;
   @override
   String? get title;
   @override
-  @JsonKey(name: "description")
-  String? get subtitle;
+  String? get description;
   @override
   @TimestampConverter()
   DateTime? get date;
   @override
-  String? get call;
-  @override
   int? get assessmentId;
   @override
-  int? get encounterId;
+  String? get status;
+  @override
+  TimelineSource? get source;
+  @override
+  String? get type;
   @override
   @JsonKey(ignore: true)
   _$$_AssessmentTimelineViewModelCopyWith<_$_AssessmentTimelineViewModel>

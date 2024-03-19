@@ -21,11 +21,7 @@ class AssessementCarePlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    final data = carePlan?.first.goals?.first.outcomes ?? [];
-    final data2 = carePlan?.first.activities ?? [];
-    if (data.isEmpty || data2.isEmpty) {
-      return const SizedBox();
-    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,14 +33,26 @@ class AssessementCarePlanCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSize.km),
-        SizedBox(
-          child: Wrap(
-            runSpacing: 8,
-            children: () {
-              if (showCarePlan) {
-                return [
-                  ...data.map(
-                    (e) => Container(
+        () {
+          if (showCarePlan) {
+            if (carePlan == null ||
+                carePlan!.isEmpty ||
+                carePlan!.first.goals == null ||
+                carePlan!.first.goals!.isEmpty ||
+                carePlan!.first.goals!.first.outcomes == null ||
+                carePlan!.first.goals!.first.outcomes!.isEmpty) {
+              return const Text(
+                "No Prescription available",
+              );
+            }
+            final outcomes = carePlan!.first.goals!.first.outcomes!;
+
+            return Wrap(
+              runSpacing: 8,
+              children: [
+                ...outcomes.map(
+                  (e) {
+                    return Container(
                       width: isMobile
                           ? AppSize.width(context) * 0.4
                           : AppSize.width(context) * 0.3,
@@ -89,38 +97,51 @@ class AssessementCarePlanCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  )
-                ];
-              } else {
-                return [
-                  ...data2.map(
-                    (e) => AppCard(
-                      padding: AppSize.km,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.local_hospital_outlined),
-                          const SizedBox(width: 8),
-                          Text(
-                            e.plannedActivityReference?.serviceRequest
-                                    ?.patientInstruction
-                                    .formatTitle() ??
-                                "",
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                    );
+                  },
+                )
+              ],
+            );
+          } else {
+            if (carePlan == null ||
+                carePlan!.isEmpty ||
+                carePlan!.first.activities == null ||
+                carePlan!.first.activities!.isEmpty) {
+              return const Text(
+                "No Recommended Center Type available",
+              );
+            }
+            final activites = carePlan!.first.activities!;
+            return Wrap(
+              runSpacing: 8,
+              children: [
+                ...activites.map(
+                  (e) => AppCard(
+                    padding: AppSize.km,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.local_hospital_outlined),
+                        const SizedBox(width: 8),
+                        Text(
+                          e.plannedActivityReference?.serviceRequest
+                                  ?.patientInstruction
+                                  .formatTitle()
+                                  .capitalizeFirstOfEach() ??
+                              "",
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  )
-                ];
-              }
-            }(),
-          ),
-        ),
+                  ),
+                )
+              ],
+            );
+          }
+        }(),
       ],
     );
   }

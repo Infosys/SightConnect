@@ -25,7 +25,7 @@ class AssessmentReportRemarkCard extends StatelessWidget {
         AppCard(
           padding: AppSize.kl,
           child: Text(
-            remark ?? "No Remarks",
+            (remark == null || remark!.isEmpty) ? "No Remarks" : remark!,
             style: applyRobotoFont(
               fontSize: 16,
             ),

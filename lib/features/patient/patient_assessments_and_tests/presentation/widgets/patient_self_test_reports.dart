@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -107,14 +108,18 @@ class _PatientSelfTestReportsState
                                 const SizedBox(
                                   width: 8,
                                 ),
-                                AutoSizeText(
-                                  currentData.status?.name ?? "",
-                                  minFontSize: 10,
-                                  maxLines: 1,
-                                  style: applyFiraSansFont(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
-                                    color: _getChipColor(currentData.status!),
+                                Visibility(
+                                  visible: currentData.status ==
+                                      DiagnosticReportStatus.FINAL,
+                                  child: AutoSizeText(
+                                    currentData.status?.name ?? "",
+                                    minFontSize: 10,
+                                    maxLines: 1,
+                                    style: applyFiraSansFont(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500,
+                                      color: _getChipColor(currentData.status!),
+                                    ),
                                   ),
                                 ),
                               ],

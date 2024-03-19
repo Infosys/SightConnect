@@ -161,7 +161,7 @@ class UpdateTriageQuestionnaireProvider extends ChangeNotifier {
       assessmentVersion: reportModel.assessmentVersion,
       issued: reportModel.issued,
       source: Source.PATIENT_APP,
-      sourceVersion: AppInfoService.version,
+      sourceVersion: AppInfoService.appVersion,
       incompleteSection: getIncompleteTestList(reportModel.incompleteTests),
       score: getScore(),
       cummulativeScore: getCummulativeScore(),

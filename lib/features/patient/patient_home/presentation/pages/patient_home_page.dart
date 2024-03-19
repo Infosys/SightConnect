@@ -14,6 +14,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
@@ -50,10 +51,10 @@ class PatientHomePage extends ConsumerWidget {
       appBar: const PatientHomePageAppBar(),
       body: UpgradeAlert(
         dialogStyle: UpgradeDialogStyle.cupertino,
-        showIgnore: false,
-        showLater: false,
-        shouldPopScope: () => false,
-        canDismissDialog: false,
+        showIgnore: kDebugMode ? true : false,
+        showLater: kDebugMode ? true : false,
+        shouldPopScope: () => kDebugMode ? true : false,
+        canDismissDialog: kDebugMode ? true : false,
         onUpdate: () {
           return true;
         },

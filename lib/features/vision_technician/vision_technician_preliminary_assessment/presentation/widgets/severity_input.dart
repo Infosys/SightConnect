@@ -2,7 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+// import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,16 +14,19 @@ class SeverityInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(preliminaryAssessmentHelperProvider);
-    final loc = context.loc!;
+    // final loc = context.loc!;
     return SizedBox(
       height: AppSize.kl * 5,
-      width: AppSize.width(context) * 0.4,
+      width: Responsive.isMobile(context)
+          ? double.infinity
+          : AppSize.width(context) * 0.4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            loc.vtSeverity,
+            // loc.vtSeverity,
+            "Consultation Suggested",
             style: applyFiraSansFont(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -42,7 +46,7 @@ class SeverityInput extends ConsumerWidget {
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  value: model.selectedSeverity?.name,
+                  value: model.selectedSeverity.name,
                   isExpanded: true,
                   items: <String>[
                     "ROUTINE",
