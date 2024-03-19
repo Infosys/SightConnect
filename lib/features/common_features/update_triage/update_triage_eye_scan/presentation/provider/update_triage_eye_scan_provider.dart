@@ -219,7 +219,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       assessmentVersion: triageReport.assessmentVersion,
       issued: triageReport.issued,
       source: Source.PATIENT_APP,
-      sourceVersion: AppInfoService.version,
+      sourceVersion: AppInfoService.appVersion,
       incompleteSection: _getIncompleteTestList(triageReport.incompleteTests),
       score: _getScore(),
       cummulativeScore: _getCummulativeScore(),

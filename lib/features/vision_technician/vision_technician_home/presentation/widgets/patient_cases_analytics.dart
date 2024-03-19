@@ -57,6 +57,7 @@ class PatientCasesAnalytics extends ConsumerWidget {
             ),
             const SizedBox(width: AppSize.ks),
             Expanded(
+              flex: 2,
               child: AnalyticsTriageStats(
                 title: loc.vtCasesClosed,
                 earlyValue: model.closedCases['EARLY'].toString().split(".")[0],
@@ -68,6 +69,7 @@ class PatientCasesAnalytics extends ConsumerWidget {
             ),
             const SizedBox(width: AppSize.ks),
             Expanded(
+              flex: 2,
               child: AnalyticsTriageStats(
                 title: '% Completed',
                 earlyValue: model.triageCompleted.isEmpty
@@ -172,22 +174,20 @@ class AnalyticsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.ks),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            runSpacing: AppSize.ks,
+            spacing: AppSize.ks,
             children: [
-              Expanded(
-                child: AnalyticsCardData(
-                  value: firstValue,
-                  description: firstAnalyticsDescription,
-                  color: firstValueColor,
-                ),
+              AnalyticsCardData(
+                value: firstValue,
+                description: firstAnalyticsDescription,
+                color: firstValueColor,
               ),
-              Expanded(
-                child: AnalyticsCardData(
-                  value: secondValue,
-                  description: secondAnalyticsDescription,
-                  color: secondValueColor,
-                ),
+              AnalyticsCardData(
+                value: secondValue,
+                description: secondAnalyticsDescription,
+                color: secondValueColor,
               ),
             ],
           ),

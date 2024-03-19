@@ -28,7 +28,7 @@ final dioProvider = Provider(
         headers: {
           "X-Accept-Language": lang,
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
-          "X-App-Version": AppInfoService.version,
+          "X-App-Version": AppInfoService.appVersion,
         },
       ),
     );

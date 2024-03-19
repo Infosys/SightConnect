@@ -161,7 +161,8 @@ class VisionTechnicianCloseAssessmentPage extends HookConsumerWidget {
                               context,
                               "Assessment has been closed successfully",
                             );
-                            navigator.popUntil((route) => route.isFirst);
+                            reset(ref).then((value) =>
+                                navigator.popUntil((route) => route.isFirst));
                           } on Failure catch (e) {
                             Fluttertoast.showToast(msg: e.errorMessage);
                           } catch (e) {

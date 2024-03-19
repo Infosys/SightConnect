@@ -57,7 +57,7 @@ class VtTriageProvider extends ChangeNotifier {
   final PreliminaryAssessmentHelperNotifier
       _preliminaryAssessmentHelperProvider;
   final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   bool get isLoading => _isLoading;
   VtTriageProvider(
@@ -142,7 +142,7 @@ class VtTriageProvider extends ChangeNotifier {
             DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
         issued: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
         source: Source.VT_APP,
-        sourceVersion: AppInfoService.version,
+        sourceVersion: AppInfoService.appVersion,
         incompleteSection: [],
         imagingSelection: _preliminaryAssessmentHelperProvider.onIvrCall
             ? []
@@ -151,6 +151,7 @@ class VtTriageProvider extends ChangeNotifier {
             _preliminaryAssessmentHelperProvider.onIvrCall ? [] : observations,
         questionResponse: questionResponse,
       );
+      logger.d(triagePostModel.toJson());
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
         SaveTriageParam(triagePostModel: triagePostModel),
       );

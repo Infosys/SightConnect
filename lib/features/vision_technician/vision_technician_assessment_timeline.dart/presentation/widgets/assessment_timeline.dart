@@ -65,7 +65,7 @@ class AssessmentTimeline extends ConsumerWidget {
                 isVGSource = false;
               }
             }
-            logger.f("isVGSource $isVGSource");
+            logger.d("isVGSource $isVGSource");
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,

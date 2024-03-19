@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/env.dart';
 class ApiConstant {
   ApiConstant._();
 
-  static String baseUrl = Env.baseDevUrl;
+  static String baseUrl = Env.baseUrl;
   static String baseDevUrl = Env.baseDevUrl;
 
   static String patientRegistrationMiniappUrl =

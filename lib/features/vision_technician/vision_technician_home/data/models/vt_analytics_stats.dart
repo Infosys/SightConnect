@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
-import 'package:eye_care_for_all/main.dart';
 
 class VtAnalyticsStats {
   final VtAnalyticsType statisticType;

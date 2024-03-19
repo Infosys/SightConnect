@@ -158,13 +158,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<bool?> _show18PlusDeclaration(
       NavigatorState navigator, Role role) async {
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
+    bool? consentGiven = await showDialog(
+        context: context,
         builder: (context) {
           return const EighteenPlusDeclaration();
-        },
-      ),
-    );
+        });
     return consentGiven;
   }
 
@@ -209,6 +207,12 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           title: const Text("Registration Required"),
           content: const Text("Please register to continue"),
           actions: [
+            TextButton(
+              onPressed: () async {
+                await _invalidateAndLogout();
+              },
+              child: const Text("Try with another account"),
+            ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
