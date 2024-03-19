@@ -69,7 +69,7 @@ class PulsarState extends State<Pulsar> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (widget.disable) {
-      return SizedBox.fromSize();
+      return widget.child;
     }
     return AnimatedBuilder(
       animation: _controller,
