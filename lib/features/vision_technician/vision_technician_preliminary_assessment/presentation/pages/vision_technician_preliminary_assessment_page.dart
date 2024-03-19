@@ -32,7 +32,7 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     final isMobile = Responsive.isMobile(context);
-    var selectedOption = useState<String>(loc.yesButton);
+    var selectedOption = useState<String>(loc.noButton);
 
     if (patientDetails == null) {
       return Scaffold(
@@ -77,13 +77,27 @@ class VisionTechnicianPreliminaryAssessmentPage extends HookConsumerWidget {
                   ? const SizedBox(height: AppSize.km)
                   : const SizedBox(height: AppSize.kl),
               PreliminaryAssessmentIvrCall(
-                onSelectedOptionChanged: (value) {
+                onSelectedOptionChanged: (value) async {
                   if (value == loc.yesButton) {
-                    refWatch.toggleIvrCall(true);
+                    await ref
+                        .read(vtTriageSaveProvider)
+                        .isIVRCallActive(patientDetails!)
+                        .then((response) => {
+                              response.fold(
+                                (failure) {
+                                  Fluttertoast.showToast(
+                                      msg: failure.errorMessage);
+                                },
+                                (isCallActive) {
+                                  refWatch.toggleIvrCall(true);
+                                  selectedOption.value = value;
+                                },
+                              )
+                            });
                   } else {
                     refWatch.toggleIvrCall(false);
+                    selectedOption.value = value;
                   }
-                  selectedOption.value = value;
                 },
                 intialValue: selectedOption.value,
               ),
