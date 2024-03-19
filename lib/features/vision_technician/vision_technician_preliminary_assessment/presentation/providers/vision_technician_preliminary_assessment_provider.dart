@@ -57,10 +57,9 @@ class VtTriageProvider extends ChangeNotifier {
   final PreliminaryAssessmentHelperNotifier
       _preliminaryAssessmentHelperProvider;
   final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
-  final bool _isLoading = false;
+  bool _isLoading = false;
 
   bool get isLoading => _isLoading;
-
   VtTriageProvider(
     this._saveTriageUseCase,
     this._vtProfile,
@@ -195,6 +194,25 @@ class VtTriageProvider extends ChangeNotifier {
           ServerFailure(errorMessage: "An error occurred while saving triage"));
     } finally {
       _preliminaryAssessmentHelperProvider.setLoading(false);
+    }
+  }
+
+  Future<Either<Failure, bool>> isIVRCallActive(
+    VTPatientDto patientDetails,
+  ) async {
+    try {
+      final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
+        agentMobile: _vtProfile?.officialMobile,
+        callerId: patientDetails.id.toString(),
+        callerName: patientDetails.name,
+        callerNumber: patientDetails.mobile,
+      );
+      await _callerDetailsRemoteSource.saveCallerDetails(callerDetails);
+      return const Right(true);
+    } catch (e) {
+      logger.e("Error saving caller details: $e");
+      _preliminaryAssessmentHelperProvider.setLoading(false);
+      return Left(ServerFailure(errorMessage: "Not on IVR Call"));
     }
   }
 }

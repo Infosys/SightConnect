@@ -17,7 +17,7 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   final eyeSightProblemotherController = TextEditingController();
   final remarksController = TextEditingController();
   final otherQuestionsController = TextEditingController();
-  bool onIvrCall = true;
+  bool onIvrCall = false;
   bool recommendationSelected = false;
   bool visionCenterSelected = false;
   bool imagesSubmitted = false;

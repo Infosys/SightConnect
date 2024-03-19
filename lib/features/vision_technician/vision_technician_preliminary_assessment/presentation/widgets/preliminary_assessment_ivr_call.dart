@@ -3,10 +3,12 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class PreliminaryAssessmentIvrCall extends HookWidget {
-  final Function(String) onSelectedOptionChanged;
+  final Future Function(String) onSelectedOptionChanged;
   final String intialValue;
 
   const PreliminaryAssessmentIvrCall({
@@ -17,6 +19,7 @@ class PreliminaryAssessmentIvrCall extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = useState(false);
     return Container(
       width: AppSize.width(context),
       decoration: BoxDecoration(
@@ -43,11 +46,21 @@ class PreliminaryAssessmentIvrCall extends HookWidget {
               Radio(
                 value: "Yes",
                 groupValue: intialValue,
-                onChanged: (value) {
-                  onSelectedOptionChanged("Yes");
+                onChanged: (value) async {
+                  if (isLoading.value) return;
+                  isLoading.value = true;
+                  await onSelectedOptionChanged("Yes");
+                  isLoading.value = false;
                 },
               ),
               const Text('Yes'),
+              if (isLoading.value)
+                const Padding(
+                    padding: EdgeInsets.only(left: AppSize.ks),
+                    child: SizedBox(
+                        height: 18,
+                        width: 18,
+                        child: CircularProgressIndicator.adaptive())),
             ],
           ),
           Row(
