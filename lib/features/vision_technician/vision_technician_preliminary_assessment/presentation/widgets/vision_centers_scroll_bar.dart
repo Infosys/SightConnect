@@ -133,7 +133,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
                 ? AppSize.width(context)
                 : AppSize.width(context) / 2,
             height: Responsive.isMobile(context)
-                ? AppSize.height(context) / 5
+                ? AppSize.height(context) / 2
                 : Responsive.isTablet(context)
                     ? AppSize.height(context) / 4
                     : AppSize.height(context) / 2.5,
