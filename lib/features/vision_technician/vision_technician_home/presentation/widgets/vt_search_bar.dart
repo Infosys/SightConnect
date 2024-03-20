@@ -49,7 +49,7 @@ class VTSearchBar extends HookConsumerWidget {
               color: AppColor.primary,
             ),
           ),
-          hintText: loc.vtSearchText,
+          hintText: "Start typing to search",
           hintStyle: applyRobotoFont(
             color: AppColor.grey,
             fontSize: 14,
