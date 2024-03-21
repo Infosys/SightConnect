@@ -100,6 +100,7 @@ class AnalyticsCardData extends StatelessWidget {
   final String value;
   final String description;
   final Color color;
+
   @override
   Widget build(BuildContext context) {
     bool isMobile = Responsive.isMobile(context);
@@ -107,15 +108,36 @@ class AnalyticsCardData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AutoSizeText(
-          value,
-          maxLines: 1,
-          style: applyFiraSansFont(
-            fontWeight: FontWeight.w500,
-            fontSize: isMobile ? 16 : 32,
-            color: color,
-          ),
-        ),
+        value.contains("%")
+            ? Text.rich(
+                TextSpan(
+                  text: value.replaceAll("%", ""),
+                  style: applyFiraSansFont(
+                    fontWeight: FontWeight.w500,
+                    fontSize: isMobile ? 16 : 28,
+                    color: color,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: " %",
+                      style: applyRobotoFont(
+                        fontWeight: FontWeight.w400,
+                        fontSize: isMobile ? 12 : 14,
+                        color: color,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : AutoSizeText(
+                value,
+                maxLines: 1,
+                style: applyFiraSansFont(
+                  fontWeight: FontWeight.w500,
+                  fontSize: isMobile ? 16 : 32,
+                  color: color,
+                ),
+              ),
         AutoSizeText(
           description,
           maxLines: 1,
@@ -220,7 +242,7 @@ class AnalyticsTriageStats extends StatelessWidget {
         boxShadow: applycustomShadow(),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AutoSizeText(
