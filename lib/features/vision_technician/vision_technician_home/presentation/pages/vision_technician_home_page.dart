@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_triaging_bar.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/foundation.dart';
@@ -80,6 +81,14 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                           vertical: AppSize.km,
                         ),
                         child: VTSearchTriagingBar(
+                          onProfile: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const VTProfilePage(),
+                              ),
+                            );
+                          },
                           onPressed: () {
                             Navigator.push(
                               context,

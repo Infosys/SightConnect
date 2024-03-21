@@ -9,9 +9,9 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart' as location;
 import 'package:permission_handler/permission_handler.dart' as handler;
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class VisionCentersScrollBar extends ConsumerStatefulWidget {
@@ -76,7 +76,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
           );
         } else if (viewState.errorMessage != null) {
           return Container(
-            width: double.infinity,
+            width: AppSize.width(context) / 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
@@ -85,6 +85,7 @@ class _VisionCentersScrollBarState extends ConsumerState<VisionCentersScrollBar>
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 SvgPicture.asset(
                   "assets/icons/location_empty_state.svg",

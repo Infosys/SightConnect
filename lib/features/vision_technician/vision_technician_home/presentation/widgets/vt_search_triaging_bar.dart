@@ -2,21 +2,20 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VTSearchTriagingBar extends ConsumerWidget {
   const VTSearchTriagingBar({
     super.key,
     required this.onPressed,
+    required this.onProfile,
   });
   final VoidCallback onPressed;
+  final VoidCallback onProfile;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +39,7 @@ class VTSearchTriagingBar extends ConsumerWidget {
             ),
           ),
           InkWell(
-            onTap: onPressed,
+            onTap: onProfile,
             child: AppNameAvatar(
               name: ref.watch(globalVTProvider).name,
               radius: 20,
@@ -97,15 +96,8 @@ class VTSearchTriagingBar extends ConsumerWidget {
           ),
         ),
         InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const VTProfilePage(),
-              ),
-            );
-          },
-          child: AppNameAvatar(
+          onTap: onProfile,
+         child: AppNameAvatar(
             name: ref.watch(globalVTProvider).name,
             radius: 20,
           ),
