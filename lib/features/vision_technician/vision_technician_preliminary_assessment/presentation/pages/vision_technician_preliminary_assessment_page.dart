@@ -83,15 +83,23 @@ class _MyWidgetState
     var selectedOption = useState<String>(loc.noButton);
 
     if (widget.patientDetails == null) {
-      return Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: Text(
-            loc.vtNoPatientFound,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.grey,
-              fontWeight: FontWeight.w500,
+      return PopScope(
+        onPopInvoked: (value) {
+          if (value) {
+            return;
+          }
+          vtAvailabilityReset();
+        },
+        child: Scaffold(
+          appBar: AppBar(),
+          body: Center(
+            child: Text(
+              loc.vtNoPatientFound,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.grey,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
@@ -219,6 +227,7 @@ class _MyWidgetState
                                       msg: failure.errorMessage);
                                 },
                                 (triageResponseModel) {
+                                  // reset the availability of VT
                                   vtAvailabilityReset();
                                   navigator.pushReplacement(
                                     MaterialPageRoute(

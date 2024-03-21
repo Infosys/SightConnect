@@ -19,5 +19,6 @@ class GlobalVTAvailabilityProvider extends ChangeNotifier {
   }
 }
 
-var globalVTAvailabilityProvider =
-    ChangeNotifierProvider.autoDispose((ref) => GlobalVTAvailabilityProvider());
+final globalVTAvailabilityProvider = ChangeNotifierProvider(
+  (ref) => GlobalVTAvailabilityProvider(),
+);

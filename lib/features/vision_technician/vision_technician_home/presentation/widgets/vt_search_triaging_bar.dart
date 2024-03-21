@@ -104,26 +104,28 @@ class VTSearchTriagingBar extends ConsumerWidget {
               ),
             );
           },
-          child: Consumer(builder: (_, ref, __) {
-            final model = ref.watch(globalVTAvailabilityProvider);
-            return Badge(
-              offset: const Offset(-4, 0),
-              backgroundColor: Colors.transparent,
-              label: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: model.isAvailable ? AppColor.green : AppColor.grey,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColor.black, width: 0.5),
+          child: Consumer(
+            builder: (_, ref, __) {
+              final model = ref.watch(globalVTAvailabilityProvider);
+              return Badge(
+                offset: const Offset(-4, 0),
+                backgroundColor: Colors.transparent,
+                label: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: model.isAvailable ? AppColor.green : AppColor.grey,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColor.black, width: 0.5),
+                  ),
                 ),
-              ),
-              child: AppNameAvatar(
-                name: ref.read(globalVTProvider).name,
-                radius: 24,
-                fontSize: 20,
-              ),
-            );
-          }),
+                child: AppNameAvatar(
+                  name: ref.read(globalVTProvider).name,
+                  radius: 24,
+                  fontSize: 20,
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
