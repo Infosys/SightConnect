@@ -11,9 +11,16 @@ class MiniAppInjectionModel with _$MiniAppInjectionModel {
     String? mobileNumber,
     String? token,
     MiniAppInjectionModelRole? role,
+    required MiniAppEnv  miniAppEvn,
   }) = _MiniAppInjectionModel;
   factory MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =>
       _$MiniAppInjectionModelFromJson(json);
+}
+enum MiniAppEnv{
+  DEV,
+  PROD,
+  STAGING,
+  TESTING
 }
 
 enum MiniAppInjectionModelRole {
