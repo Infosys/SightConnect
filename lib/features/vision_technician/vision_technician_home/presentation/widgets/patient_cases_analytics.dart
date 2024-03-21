@@ -18,6 +18,7 @@ class PatientCasesAnalytics extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(visionTechnicianAnalyticsProvider);
     final loc = context.loc!;
+
     if (model.isLoading || model.closedCases.isEmpty) {
       model.closedCases = {
         'EARLY': 0,
@@ -57,7 +58,6 @@ class PatientCasesAnalytics extends ConsumerWidget {
             ),
             const SizedBox(width: AppSize.ks),
             Expanded(
-              flex: 2,
               child: AnalyticsTriageStats(
                 title: loc.vtCasesClosed,
                 earlyValue: model.closedCases['EARLY'].toString().split(".")[0],
@@ -69,7 +69,6 @@ class PatientCasesAnalytics extends ConsumerWidget {
             ),
             const SizedBox(width: AppSize.ks),
             Expanded(
-              flex: 2,
               child: AnalyticsTriageStats(
                 title: '% Completed',
                 earlyValue: model.triageCompleted.isEmpty
@@ -160,7 +159,7 @@ class AnalyticsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(AppSize.km),
-        boxShadow: applyLightShadow(),
+        boxShadow: applycustomShadow(),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +217,7 @@ class AnalyticsTriageStats extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(AppSize.km),
-        boxShadow: applyLightShadow(),
+        boxShadow: applycustomShadow(),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

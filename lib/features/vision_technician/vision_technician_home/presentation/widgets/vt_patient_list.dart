@@ -24,7 +24,7 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(AppSize.ks),
+            padding: const EdgeInsets.all(AppSize.km),
             decoration: BoxDecoration(
               color: AppColor.white,
               borderRadius: BorderRadius.circular(8),
@@ -47,98 +47,87 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
       );
     }
 
-    return PaginatedDataTable(
-      rowsPerPage: model.pageSize,
-      source: PatientAssessmentDataSource(
-        data: model.listOfAssessments,
-        context: context,
-        model: model,
-        isLoading: model.isLoading,
-        onSelectChanged: (value) {
-          ref.read(visionTechnicianSearchProvider).setPatientDetails(value);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
-                patientDetails: value,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
+      child: PaginatedDataTable(
+        rowsPerPage: model.pageSize,
+        source: PatientAssessmentDataSource(
+          data: model.listOfAssessments,
+          context: context,
+          model: model,
+          isLoading: model.isLoading,
+          onSelectChanged: (value) {
+            ref.read(visionTechnicianSearchProvider).setPatientDetails(value);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
+                  patientDetails: value,
+                ),
+              ),
+            );
+          },
+        ),
+        onRowsPerPageChanged: (value) {
+          model.changePageSize(value);
+        },
+        availableRowsPerPage: const [10, 20, 30],
+        showCheckboxColumn: false,
+        columnSpacing: isMobile
+            ? AppSize.width(context) * 0.04
+            : AppSize.width(context) * 0.1,
+        headingRowHeight: isMobile ? AppSize.kl * 2 : AppSize.kl * 3,
+        dataRowMaxHeight: isMobile ? AppSize.kl * 3 : AppSize.kl * 3.5,
+        dataRowMinHeight: isMobile ? AppSize.kl * 1 : AppSize.kl * 2,
+        columns: [
+          DataColumn(
+            label: Text(
+              loc.vtPatient.capitalizeFirstOfEach(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
               ),
             ),
-          );
-        },
+          ),
+          DataColumn(
+            label: Text(
+              // loc.vtAssessmentID,
+              "Encounter ID",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              loc.vtStatus,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+            ),
+          ),
+          DataColumn(
+            label: Text(
+              loc.vtCategory,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+            ),
+          ),
+        ],
       ),
-      onRowsPerPageChanged: (value) {
-        model.changePageSize(value);
-      },
-      availableRowsPerPage: const [10, 20, 30],
-      showCheckboxColumn: false,
-      columnSpacing: isMobile
-          ? AppSize.width(context) * 0.06
-          : AppSize.width(context) * 0.05,
-      headingRowHeight: isMobile ? AppSize.kl * 2 : AppSize.kl * 3,
-      horizontalMargin: isMobile
-          ? AppSize.width(context) * 0.05
-          : AppSize.width(context) * 0.05,
-      dataRowMaxHeight: isMobile ? AppSize.kl * 3 : AppSize.kl * 3.5,
-      dataRowMinHeight: isMobile ? AppSize.kl * 1 : AppSize.kl * 2,
-      columns: [
-        DataColumn(
-          label: Text(
-            loc.vtPatient.capitalizeFirstOfEach(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            // loc.vtAssessmentID,
-            "Encounter ID",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            loc.vtStatus,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            loc.vtCategory,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            "Timline",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

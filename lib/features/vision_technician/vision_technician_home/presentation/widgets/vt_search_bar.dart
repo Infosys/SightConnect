@@ -19,6 +19,7 @@ class VTSearchBar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    final focusNode = useFocusNode();
     final isMobile = Responsive.isMobile(context);
     var textController = useTextEditingController();
 
@@ -33,6 +34,7 @@ class VTSearchBar extends HookConsumerWidget {
               vertical: AppSize.km,
             ),
       child: TextField(
+        focusNode: focusNode,
         controller: textController,
         onChanged: (data) {
           onSearched?.call(data);
@@ -49,7 +51,7 @@ class VTSearchBar extends HookConsumerWidget {
               color: AppColor.primary,
             ),
           ),
-          hintText: "Start typing to search",
+          hintText: "Search by name, mobile number, or assessment ID",
           hintStyle: applyRobotoFont(
             color: AppColor.grey,
             fontSize: 14,

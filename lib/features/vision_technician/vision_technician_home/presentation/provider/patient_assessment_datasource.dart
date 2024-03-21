@@ -35,7 +35,6 @@ class PatientAssessmentDataSource extends DataTableSource {
           loadingDataCell(),
           loadingDataCell(),
           loadingDataCell(),
-          loadingDataCell()
         ],
       );
     }
@@ -51,9 +50,20 @@ class PatientAssessmentDataSource extends DataTableSource {
 
     return DataRow.byIndex(
       index: index,
-      onSelectChanged: (value) => onSelectChanged!(data[index]),
       cells: [
         DataCell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return VisionTechnicianAssessmentTimeline(
+                    patientDetails: data[index],
+                  );
+                },
+              ),
+            );
+          },
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -71,13 +81,15 @@ class PatientAssessmentDataSource extends DataTableSource {
                 overflow: TextOverflow.ellipsis,
                 style: applyRobotoFont(
                   fontSize: 12,
-                  color: AppColor.grey,
+                  color: AppColor.blue,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ],
           ),
         ),
         DataCell(
+          onTap: () => onSelectChanged!(data[index]),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -86,7 +98,11 @@ class PatientAssessmentDataSource extends DataTableSource {
                 "${data[index].encounterId ?? ""}",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: applyRobotoFont(fontSize: 14),
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.blue,
+                  decoration: TextDecoration.underline,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
@@ -111,39 +127,13 @@ class PatientAssessmentDataSource extends DataTableSource {
           ),
         ),
         DataCell(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
+          Text(
+            categoryMapper(data[index].category),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
               color: categoryColor(data[index].category),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Text(
-              categoryMapper(data[index].category),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.white,
-              ),
-            ),
-          ),
-        ),
-        DataCell(
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return VisionTechnicianAssessmentTimeline(
-                      patientDetails: data[index],
-                    );
-                  },
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.timeline,
             ),
           ),
         ),
@@ -162,9 +152,9 @@ class PatientAssessmentDataSource extends DataTableSource {
     if (status == null) return "";
 
     return switch (status) {
-      EncounterStatus.COMPLETED => "CLOSED",
-      EncounterStatus.IN_PROGRESS => "IN PROGRESS",
-      EncounterStatus.CANCELLED => "CANCELLED",
+      EncounterStatus.COMPLETED => "Closed",
+      EncounterStatus.IN_PROGRESS => "In Progress",
+      EncounterStatus.CANCELLED => "Cancelled",
     };
   }
 
