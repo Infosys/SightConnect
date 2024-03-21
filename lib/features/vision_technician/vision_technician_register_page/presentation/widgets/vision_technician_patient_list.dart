@@ -17,6 +17,7 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../main.dart';
 import '../providers/vision_technician_register_provider.dart';
 
 class VisionTechnicianPatientListWidget extends ConsumerWidget {
@@ -209,54 +210,78 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        data.name.capitalizeFirstOfEach(),
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data.name.capitalizeFirstOfEach(),
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.ks / 2),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${data.gender.capitalizeFirstOfEach()}, ",
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.black.withOpacity(0.5),
+                                ),
+                              ),
+                              Text(
+                                _formateAge(
+                                  context,
+                                  day: data.dayOfBirth,
+                                  mon: data.monthOfBirth,
+                                  year: data.yearOfBirth,
+                                ),
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.black.withOpacity(0.5),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Text(
-                        " PID ${data.patientId ?? ""}, ",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
+                      SizedBox(
+                        width: AppSize.width(context) * 0.05,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: AppSize.height(context) * 0.003,
+                          ),
+                          Text(
+                            " PID ${data.patientId ?? ""}, ",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.ks / 2),
+                          Text(
+                            "${data.phoneNumber}",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSize.ks / 2),
-                  Row(
-                    children: [
-                      Text(
-                        "${data.gender.capitalizeFirstOfEach()}, ",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                      Text(
-                        _formateAge(
-                          context,
-                          day: data.dayOfBirth,
-                          mon: data.monthOfBirth,
-                          year: data.yearOfBirth,
-                        ),
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                      Text(
-                        ", ${data.phoneNumber}",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                  ),
+
+                  //////////////////
                   const SizedBox(height: AppSize.ks / 2),
                   Row(
                     mainAxisAlignment: Responsive.isMobile(context)
@@ -366,173 +391,190 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            () {
-              if (data.profilePhoto == null) {
-                return SizedBox(
-                  child: AppNameAvatar(
-                    name: data.name ?? "",
-                    fontSize: Responsive.isMobile(context) ? 16 : 20,
-                    radius: Responsive.isMobile(context) ? 18 : 30,
-                  ),
-                );
-              } else {
-                return AppNetworkImage(
-                  imageUrl: data.profilePhoto ?? "",
-                  radius: Responsive.isMobile(context) ? 20 : 30,
-                );
-              }
-            }(),
-            const SizedBox(width: AppSize.km),
-            Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(
+              width: AppSize.width(context) * 0.27,
+              child: Row(
                 children: [
-                  Row(
+                  () {
+                    if (data.profilePhoto == null) {
+                      return SizedBox(
+                        child: AppNameAvatar(
+                          name: data.name ?? "",
+                          fontSize: Responsive.isMobile(context) ? 16 : 20,
+                          radius: Responsive.isMobile(context) ? 18 : 30,
+                        ),
+                      );
+                    } else {
+                      return AppNetworkImage(
+                        imageUrl: data.profilePhoto ?? "",
+                        radius: Responsive.isMobile(context) ? 20 : 30,
+                      );
+                    }
+                  }(),
+                  SizedBox(
+                    width: AppSize.width(context) * 0.015,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         data.name.capitalizeFirstOfEach(),
+                        softWrap: true,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
-                        " PID ${data.patientId ?? ""}, ",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.ks / 2),
-                  Row(
-                    children: [
-                      Text(
-                        "${data.gender.capitalizeFirstOfEach()}, ",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                      Text(
-                        _formateAge(
-                          context,
-                          day: data.dayOfBirth,
-                          mon: data.monthOfBirth,
-                          year: data.yearOfBirth,
-                        ),
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                      Text(
-                        ", ${data.phoneNumber}",
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.black.withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.ks / 2),
-                  Row(
-                    mainAxisAlignment: Responsive.isMobile(context)
-                        ? MainAxisAlignment.spaceBetween
-                        : MainAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap:
-                            data.patientId == null ? null : onStartAssessment,
-                        child: Text(
-                          loc.vgStartAssessment,
-                          textAlign: TextAlign.center,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: data.patientId == null
-                                ? AppColor.grey
-                                : AppColor.primary,
-                          ),
-                        ),
-                      ),
                       SizedBox(
-                        width: Responsive.isMobile(context)
-                            ? AppSize.ks
-                            : AppSize.km,
+                        height: AppSize.height(context) * 0.005,
                       ),
-                      Visibility(
-                        visible: data.parentPatientId == null,
-                        child: InkWell(
-                          onTap: onAddMember,
-                          child: Row(
-                            children: [
-                              const SizedBox(width: AppSize.ks / 2),
-                              const Icon(
-                                Icons.add,
-                                size: 14,
-                                color: AppColor.primary,
-                              ),
-                              const SizedBox(width: AppSize.ks / 2),
-                              Text(
-                                loc.vgAddMember,
-                                style: applyRobotoFont(
-                                  fontSize: 14,
-                                  color: AppColor.primary,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "${data.gender.capitalizeFirstOfEach()}, ",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
                           ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: data.patientId == null,
-                        child: InkWell(
-                          onTap: onCompleteProfile,
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.edit,
-                                size: 14,
-                                color: AppColor.primary,
-                              ),
-                              const SizedBox(width: AppSize.ks / 2),
-                              Text(
-                                loc.vgCompleteProfile,
-                                textAlign: TextAlign.center,
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  color: AppColor.primary,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            _formateAge(
+                              context,
+                              day: data.dayOfBirth,
+                              mon: data.monthOfBirth,
+                              year: data.yearOfBirth,
+                            ),
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
                 ],
               ),
             ),
+            Text(
+              "${data.phoneNumber}",
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: AppColor.black.withOpacity(0.5),
+              ),
+            ),
+            SizedBox(
+              width: AppSize.width(context) * 0.1,
+              child: Visibility(
+                visible: data.patientId != null,
+                child: Text(
+                  data.parentPatientId == null
+                      ? loc.vgPrimary
+                      : loc.vgDependent,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(
+                    fontSize: 12,
+                    color: data.parentPatientId == null
+                        ? AppColor.green
+                        : AppColor.orange,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: AppSize.width(context) * 0.36,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: data.patientId == null ? null : onStartAssessment,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColor.primary,
+                        border: Border.all(color: AppColor.primary, width: 2),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Text(
+                        loc.vgStartAssessment,
+                        textAlign: TextAlign.center,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: data.parentPatientId == null,
+                    child: InkWell(
+                      onTap: onAddMember,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 10),
+                        decoration: BoxDecoration(
+                            border:
+                                Border.all(color: AppColor.primary, width: 2),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Row(
+                          children: [
+                            const SizedBox(width: AppSize.ks / 2),
+                            const Icon(
+                              Icons.add,
+                              size: 14,
+                              color: AppColor.primary,
+                            ),
+                            const SizedBox(width: AppSize.ks / 2),
+                            Text(
+                              loc.vgAddMember,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Visibility(
-              visible: data.patientId != null,
-              child: Text(
-                data.parentPatientId == null ? loc.vgPrimary : loc.vgDependent,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: applyRobotoFont(
-                  fontSize: 12,
-                  color: data.parentPatientId == null
-                      ? AppColor.green
-                      : AppColor.orange,
-                  fontWeight: FontWeight.w500,
+              visible: data.patientId == null,
+              child: InkWell(
+                onTap: onCompleteProfile,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.edit,
+                      size: 14,
+                      color: AppColor.primary,
+                    ),
+                    const SizedBox(width: AppSize.ks / 2),
+                    Text(
+                      loc.vgCompleteProfile,
+                      textAlign: TextAlign.center,
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
