@@ -6,6 +6,7 @@ class ApiConstant {
   static AppEnvironment appEnvironment = AppEnvironment.development;
 
   static void setupEnv(AppEnvironment env) {
+    appEnvironment = env;
     switch (env) {
       case AppEnvironment.development:
         baseUrl = Env.baseDevUrl;

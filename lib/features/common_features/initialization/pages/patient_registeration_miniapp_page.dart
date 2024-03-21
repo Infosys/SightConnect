@@ -38,6 +38,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           parentPatientId: parentPatientId ?? _getPateintId(),
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
+          miniAppEvn:getMiniAppEnv( ApiConstant.appEnvironment),
         ),
         miniapp: MiniApp(
           id: "1",
@@ -48,6 +49,19 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
         ),
       ),
     );
+  }
+  MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv){
+    switch(activeEnv)
+    {
+      case AppEnvironment.production:
+        return MiniAppEnv.PROD;
+      case AppEnvironment.staging:
+        return MiniAppEnv.STAGING;
+      case AppEnvironment.development:
+        return MiniAppEnv.DEV;
+      default:
+        return MiniAppEnv.DEV;
+    }
   }
 
   MiniAppInjectionModelRole? _getCurrentActiveRole() {
