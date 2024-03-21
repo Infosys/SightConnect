@@ -1,7 +1,6 @@
 // ignore_for_file: unused_import
 
 import 'package:dartz/dartz.dart';
-
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
@@ -12,13 +11,15 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/models/e
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/save_triage_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/repositories/availability_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/ivr_caller_details_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/source/vt_ivr_caller_details_remote_source.dart';
@@ -29,20 +30,21 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../../common_features/triage/domain/repositories/triage_urgency_repository.dart';
 
 var vtTriageSaveProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
     return VtTriageProvider(
-      ref.watch(saveTriageUseCase),
-      ref.watch(getVTProfileProvider).asData?.value,
-      ref.watch(triageUrgencyRepositoryProvider),
-      ref.watch(triageLocalSourceProvider),
-      ref.watch(visionTechnicianTriageProvider),
-      ref.watch(carePlanViewModelProvider),
-      ref.watch(preliminaryAssessmentHelperProvider),
-      ref.watch(vtIVRCallerDetailsRemoteSourceProvider),
-    );
+        ref.watch(saveTriageUseCase),
+        ref.watch(getVTProfileProvider).asData?.value,
+        ref.watch(triageUrgencyRepositoryProvider),
+        ref.watch(triageLocalSourceProvider),
+        ref.watch(visionTechnicianTriageProvider),
+        ref.watch(carePlanViewModelProvider),
+        ref.watch(preliminaryAssessmentHelperProvider),
+        ref.watch(vtIVRCallerDetailsRemoteSourceProvider),
+        ref.watch(availabilityRepository));
   },
 );
 
@@ -58,6 +60,7 @@ class VtTriageProvider extends ChangeNotifier {
       _preliminaryAssessmentHelperProvider;
   final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
   final bool _isLoading = false;
+  final AvailabilityRepository _availabilityRepository;
 
   bool get isLoading => _isLoading;
   VtTriageProvider(
@@ -69,6 +72,7 @@ class VtTriageProvider extends ChangeNotifier {
     this._carePlanViewModelProvider,
     this._preliminaryAssessmentHelperProvider,
     this._callerDetailsRemoteSource,
+    this._availabilityRepository,
   );
 
   Future<Either<Failure, TriagePostModel>> saveTriage(
@@ -215,6 +219,16 @@ class VtTriageProvider extends ChangeNotifier {
       _preliminaryAssessmentHelperProvider.setLoading(false);
       return Left(ServerFailure(errorMessage: "Not on IVR Call"));
     }
+  }
+
+  Future<bool> markVtStatus({
+    required bool isAvailable,
+  }) async {
+    return _availabilityRepository.postMarkMyAvailability(
+      isAvailable,
+      _vtProfile?.id,
+      _vtProfile?.officialMobile,
+    );
   }
 }
 

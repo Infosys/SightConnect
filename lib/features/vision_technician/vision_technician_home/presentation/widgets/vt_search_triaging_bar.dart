@@ -1,15 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_availibility_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VTSearchTriagingBar extends ConsumerWidget {
@@ -106,10 +104,26 @@ class VTSearchTriagingBar extends ConsumerWidget {
               ),
             );
           },
-          child: AppNameAvatar(
-            name: ref.watch(globalVTProvider).name,
-            radius: 20,
-          ),
+          child: Consumer(builder: (_, ref, __) {
+            final model = ref.watch(globalVTAvailabilityProvider);
+            return Badge(
+              offset: const Offset(-4, 0),
+              backgroundColor: Colors.transparent,
+              label: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: model.isAvailable ? AppColor.green : AppColor.grey,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColor.black, width: 0.5),
+                ),
+              ),
+              child: AppNameAvatar(
+                name: ref.read(globalVTProvider).name,
+                radius: 24,
+                fontSize: 20,
+              ),
+            );
+          }),
         ),
       ],
     );

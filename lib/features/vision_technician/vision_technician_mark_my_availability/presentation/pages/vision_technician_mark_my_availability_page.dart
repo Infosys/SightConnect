@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_vt_availibility_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/widgets/error_dialogue_box.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/providers/mark_my_availability_helper_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/presentation/widgets/vt_mark_my_available_date_range_picker.dart';
@@ -37,6 +38,9 @@ class VisionTechnicianMarkMyAvailabilityPage extends ConsumerWidget {
                 onPressed: () async {
                   try {
                     await watchRef.updateAvailability();
+                    ref.watch(globalVTAvailabilityProvider).setAvailability(
+                          watchRef.available!,
+                        );
                   } catch (e) {
                     if (context.mounted) {
                       showErrorDialogue(context);
