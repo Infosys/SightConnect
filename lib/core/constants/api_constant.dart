@@ -21,7 +21,7 @@ class ApiConstant {
         break;
       case AppEnvironment.development:
         patientRegistrationMiniappUrl =
-            '${Env.baseDevUrl}/patient-registration-dev/';
+            '${Env.baseDevUrl}/patient-registration/';
         baseUrl = Env.baseDevUrl;
         break;
     }
