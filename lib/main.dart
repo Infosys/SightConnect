@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:eye_care_for_all/app/app.dart';
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 
@@ -21,6 +22,7 @@ Future<void> main() async {
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
+  ApiConstant.setupEnv(AppEnvironment.production);
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
   await AppInfoService.init();

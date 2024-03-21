@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 
 // import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -16,6 +17,7 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(carePlanProvider);
+    final isMobile = Responsive.isMobile(context);
 
     // final loc = context.loc!;
 
@@ -41,25 +43,31 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Wrap(
+              // mainAxisSize: MainAxisSize.min,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              runSpacing: 10,
               children: model.availableInstruction.map((option) {
-                return RadioListTile<PatientInstruction>(
-                  contentPadding: EdgeInsets.zero,
-                  dense: true,
-                  visualDensity: VisualDensity.compact,
-                  title: Text(visionCenterMappers(option)),
-                  value: option,
-                  groupValue: model.patientInstruction,
-                  onChanged: (value) {
-                    ref
-                        .read(preliminaryAssessmentHelperProvider)
-                        .setRecommendationSelected();
+                return SizedBox(
+                  width: isMobile
+                      ? AppSize.width(context) * 0.3
+                      : AppSize.width(context) * 0.3,
+                  child: RadioListTile<PatientInstruction>(
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    visualDensity: VisualDensity.compact,
+                    title: Text(visionCenterMappers(option)),
+                    value: option,
+                    groupValue: model.patientInstruction,
+                    onChanged: (value) {
+                      ref
+                          .read(preliminaryAssessmentHelperProvider)
+                          .setRecommendationSelected();
 
-                    model.setPatientInstruction(value!);
-                  },
+                      model.setPatientInstruction(value!);
+                    },
+                  ),
                 );
               }).toList(),
             ),

@@ -52,7 +52,7 @@ final dioProvider = Provider(
 final appointmentDioProvider = Provider(
   (ref) {
     final dio = Dio(
-      BaseOptions(baseUrl: ApiConstant.baseDevUrl),
+      BaseOptions(baseUrl: ApiConstant.baseUrl),
     );
     return dio;
   },
