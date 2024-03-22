@@ -59,8 +59,9 @@ class VtTriageProvider extends ChangeNotifier {
   final PreliminaryAssessmentHelperNotifier
       _preliminaryAssessmentHelperProvider;
   final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
-  final bool _isLoading = false;
+
   final AvailabilityRepository _availabilityRepository;
+  bool _isLoading = false;
 
   bool get isLoading => _isLoading;
   VtTriageProvider(
@@ -206,6 +207,8 @@ class VtTriageProvider extends ChangeNotifier {
     VTPatientDto patientDetails,
   ) async {
     try {
+      _isLoading = true;
+      notifyListeners();
       final IVRCallerDetailsModel callerDetails = IVRCallerDetailsModel(
         agentMobile: _vtProfile?.officialMobile,
         callerId: patientDetails.id.toString(),
@@ -218,6 +221,8 @@ class VtTriageProvider extends ChangeNotifier {
       logger.e("Error saving caller details: $e");
       _preliminaryAssessmentHelperProvider.setLoading(false);
       return Left(ServerFailure(errorMessage: "Not on IVR Call"));
+    } finally {
+      _isLoading = false;
     }
   }
 

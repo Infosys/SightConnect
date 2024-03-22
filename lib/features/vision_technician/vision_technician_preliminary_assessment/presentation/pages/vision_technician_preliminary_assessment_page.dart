@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_preliminary_assessment_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_ivr_call.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_questions.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_vision_center.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_visual_acuity.dart';
@@ -43,22 +42,38 @@ class _MyWidgetState
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      final provider = ref.read(globalVTAvailabilityProvider);
-      final saveProvider = ref.read(vtTriageSaveProvider);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) async {
+        final provider = ref.read(globalVTAvailabilityProvider);
+        final saveProvider = ref.read(vtTriageSaveProvider);
+        final refWatch = ref.read(preliminaryAssessmentHelperProvider);
+        await saveProvider.isIVRCallActive(widget.patientDetails!).then(
+              (response) => {
+                response.fold(
+                  (failure) {
+                    refWatch.toggleIvrCall(false);
+                    logger.i(failure.errorMessage);
+                  },
+                  (isCallActive) {
+                    refWatch.toggleIvrCall(true);
+                  },
+                )
+              },
+            );
 
-      try {
-        if (provider.isAvailable) {
-          provider.setTemporarilyAvailable(true);
-          final value = await saveProvider.markVtStatus(isAvailable: false);
-          provider.setAvailability(value);
+        try {
+          if (provider.isAvailable) {
+            provider.setTemporarilyAvailable(true);
+            final value = await saveProvider.markVtStatus(isAvailable: false);
+            provider.setAvailability(value);
 
-          logger.i("Setting VT avalibility to Unavailable");
+            logger.i("Setting VT avalibility to Unavailable");
+          }
+        } catch (e) {
+          logger.e("Error in setting VT availability to Unavailable");
         }
-      } catch (e) {
-        logger.e("Error in setting VT availability to Unavailable");
-      }
-    });
+      },
+    );
   }
 
   Future<void> vtAvailabilityReset() async {
@@ -130,74 +145,91 @@ class _MyWidgetState
             loc.vtPreliminaryAssessment,
             style: applyFiraSansFont(fontWeight: FontWeight.w500),
           ),
+          actions: ref.watch(vtTriageSaveProvider).isLoading
+              ? []
+              : [
+                  Chip(
+                    backgroundColor: AppColor.lightGrey,
+                    label: Text(
+                      refWatch.onIvrCall ? "IVR Call" : "In Person",
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 4,
+                  )
+                ],
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSize.km),
-            child: Column(
-              children: [
-                PreliminaryAssessmentCard(patient: widget.patientDetails),
-                isMobile
-                    ? const SizedBox(height: AppSize.km)
-                    : const SizedBox(height: AppSize.kl),
-                PreliminaryAssessmentIvrCall(
-                  onSelectedOptionChanged: (value) async {
-                    if (value == loc.yesButton) {
-                      await ref
-                          .read(vtTriageSaveProvider)
-                          .isIVRCallActive(widget.patientDetails!)
-                          .then((response) => {
-                                response.fold(
-                                  (failure) {
-                                    Fluttertoast.showToast(
-                                        msg: failure.errorMessage);
-                                  },
-                                  (isCallActive) {
-                                    refWatch.toggleIvrCall(true);
-                                    selectedOption.value = value;
-                                  },
-                                )
-                              });
-                    } else {
-                      refWatch.toggleIvrCall(false);
-                      selectedOption.value = value;
-                    }
-                  },
-                  intialValue: selectedOption.value,
-                ),
-                isMobile
-                    ? const SizedBox(height: AppSize.km)
-                    : const SizedBox(height: AppSize.kl),
-                const PreliminaryAssessmentQuestions(),
-                if (selectedOption.value == loc.noButton)
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ref.watch(vtTriageSaveProvider).isLoading
+              ? const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(AppSize.km),
+                  child: Column(
                     children: [
+                      PreliminaryAssessmentCard(patient: widget.patientDetails),
+                      // isMobile
+                      //     ? const SizedBox(height: AppSize.km)
+                      //     : const SizedBox(height: AppSize.kl),
+                      // PreliminaryAssessmentIvrCall(
+                      //   onSelectedOptionChanged: (value) async {
+                      //     if (value == loc.yesButton) {
+                      //       await ref
+                      //           .read(vtTriageSaveProvider)
+                      //           .isIVRCallActive(widget.patientDetails!)
+                      //           .then((response) => {
+                      //                 response.fold(
+                      //                   (failure) {
+                      //                     Fluttertoast.showToast(
+                      //                         msg: failure.errorMessage);
+                      //                   },
+                      //                   (isCallActive) {
+                      //                     refWatch.toggleIvrCall(true);
+                      //                     selectedOption.value = value;
+                      //                   },
+                      //                 )
+                      //               });
+                      //     } else {
+                      //       refWatch.toggleIvrCall(false);
+                      //       selectedOption.value = value;
+                      //     }
+                      //   },
+                      //   intialValue: selectedOption.value,
+                      // ),
                       isMobile
                           ? const SizedBox(height: AppSize.km)
                           : const SizedBox(height: AppSize.kl),
-                      const EyeScanCard(),
+                      const PreliminaryAssessmentQuestions(),
+                      if (selectedOption.value == loc.noButton)
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            isMobile
+                                ? const SizedBox(height: AppSize.km)
+                                : const SizedBox(height: AppSize.kl),
+                            const EyeScanCard(),
+                            isMobile
+                                ? const SizedBox(height: AppSize.km)
+                                : const SizedBox(height: AppSize.kl),
+                            const PreliminaryAssessmentVisualAcuity(),
+                          ],
+                        ),
                       isMobile
                           ? const SizedBox(height: AppSize.km)
                           : const SizedBox(height: AppSize.kl),
-                      const PreliminaryAssessmentVisualAcuity(),
+                      const PreliminaryAssessmentCarePlan(),
+                      isMobile
+                          ? const SizedBox(height: AppSize.km)
+                          : const SizedBox(height: AppSize.kl),
+                      const PreliminaryAssessmentVisionCenter(),
+                      isMobile
+                          ? const SizedBox(height: AppSize.km * 3)
+                          : const SizedBox(height: AppSize.kl * 3),
                     ],
                   ),
-                isMobile
-                    ? const SizedBox(height: AppSize.km)
-                    : const SizedBox(height: AppSize.kl),
-                const PreliminaryAssessmentCarePlan(),
-                isMobile
-                    ? const SizedBox(height: AppSize.km)
-                    : const SizedBox(height: AppSize.kl),
-                const PreliminaryAssessmentVisionCenter(),
-                isMobile
-                    ? const SizedBox(height: AppSize.km * 3)
-                    : const SizedBox(height: AppSize.kl * 3),
-              ],
-            ),
-          ),
+                ),
         ),
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(
