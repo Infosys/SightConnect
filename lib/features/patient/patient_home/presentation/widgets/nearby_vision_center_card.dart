@@ -15,6 +15,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logger.f(data.toJson());
     final email =
         data.facilityInformation?.facilityContactInformation?.facilityEmailId ??
             "";
@@ -54,7 +55,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
       child: Container(
         width: Responsive.isMobile(context)
             ? AppSize.width(context) * 0.87
-            : AppSize.width(context) * 0.35,
+            : AppSize.width(context) * 0.5,
         height: AppSize.height(context) * 0.2,
         margin: const EdgeInsets.only(right: AppSize.ks),
         padding: const EdgeInsets.all(AppSize.km),

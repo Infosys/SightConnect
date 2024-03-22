@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,20 +12,25 @@ final nearByVisionCenterProvider =
     StateNotifierProvider<NearByVisionCenterProvider, NearByVisionCenterState>(
   (ref) {
     final visionCenterRepository = ref.watch(visionCenterRepositoryProvider);
-    return NearByVisionCenterProvider(visionCenterRepository);
+    final globalTenant = ref.watch(globalTenantProvider);
+    return NearByVisionCenterProvider(visionCenterRepository, globalTenant);
   },
 );
 
 class NearByVisionCenterProvider
     extends StateNotifier<NearByVisionCenterState> {
   final VisionCenterRepository _visionCenterRepository;
+  final GlobalTenantProvider _globalTenantProvider;
 
   LocationData? data;
   Location location = Location();
   bool _isInitializing = false;
 
-  NearByVisionCenterProvider(VisionCenterRepository visionCenterRepository)
-      : _visionCenterRepository = visionCenterRepository,
+  NearByVisionCenterProvider(
+    VisionCenterRepository visionCenterRepository,
+    GlobalTenantProvider globalTenantProvider,
+  )   : _visionCenterRepository = visionCenterRepository,
+        _globalTenantProvider = globalTenantProvider,
         super(NearByVisionCenterState.initial());
 
   Future<void> init() async {
@@ -85,6 +91,9 @@ class NearByVisionCenterProvider
         latitude: data?.latitude,
         longitude: data?.longitude,
       );
+      // Set the tenantId and organizationId to the first vision center's tenant id
+      _globalTenantProvider.setTenantId(visionCenters.first.tenant?.id);
+      _globalTenantProvider.setOrganizationId(visionCenters.first.tenant?.id);
 
       state = state.copyWith(
         isLoading: false,

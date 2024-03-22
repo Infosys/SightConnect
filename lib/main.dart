@@ -21,7 +21,7 @@ Future<void> main() async {
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
-  ApiConstant.setupEnv(AppEnvironment.development);
+  ApiConstant.setupEnv(AppEnvironment.production);
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
   await AppInfoService.init();
