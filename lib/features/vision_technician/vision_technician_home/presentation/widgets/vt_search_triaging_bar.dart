@@ -42,9 +42,28 @@ class VTSearchTriagingBar extends ConsumerWidget {
           ),
           InkWell(
             onTap: onProfile,
-            child: AppNameAvatar(
-              name: ref.watch(globalVTProvider).name,
-              radius: 20,
+            child: Consumer(
+              builder: (_, ref, __) {
+                final model = ref.watch(globalVTAvailabilityProvider);
+                return Badge(
+                  offset: const Offset(-6, 0),
+                  backgroundColor: Colors.transparent,
+                  smallSize: 12,
+                  largeSize: 12,
+                  label: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: model.isAvailable ? AppColor.green : AppColor.grey,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: AppColor.black, width: 0.5),
+                    ),
+                  ),
+                  child: AppNameAvatar(
+                      name: ref.read(globalVTProvider).name,
+                      radius: 18,
+                      fontSize: 16),
+                );
+              },
             ),
           ),
         ],
