@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -36,20 +38,22 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     //     "/services/assessments/api/diagnostic-report-templates/assessment/1351";
     final tenantCode = globalTenantProvider.tenantId;
     final organizationCode = globalTenantProvider.organizationId;
-    String endpoint = "/2services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
+    String endpoint =
+        "/2services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
 
     if (tenantCode != null) {
-        endpoint += "?tenant-code=$tenantCode";
-        if (organizationCode != null) {
-            endpoint += "&organisation-code=$organizationCode";
-        }
+      endpoint += "?tenant-code=$tenantCode";
+      if (organizationCode != null) {
+        endpoint += "&organisation-code=$organizationCode";
+      }
     } else if (organizationCode != null) {
-        endpoint += "?organisation-code=$organizationCode";
+      endpoint += "?organisation-code=$organizationCode";
     }
 
     try {
       var response = await dio.get(endpoint);
-      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
+      log("assessment response : ${response.data}");
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data.first);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       throw ServerException();
