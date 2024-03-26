@@ -11,6 +11,7 @@ enum DrawerMenuItemId {
   privacyPolicy,
   help,
   chatbot,
+  tenant,
 }
 
 class DrawerMenuItem {
@@ -28,7 +29,7 @@ class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
     DrawerMenuItem switchProfile = const DrawerMenuItem(
       id: DrawerMenuItemId.switchProfile,
-      title: "Switch Profile",
+      title: "Change Role",
       icon: "assets/drawer_icons/switch.svg",
     );
     DrawerMenuItem language = DrawerMenuItem(
@@ -61,6 +62,11 @@ class DrawerMenuItems {
       title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
     );
+    DrawerMenuItem tenant = const DrawerMenuItem(
+      id: DrawerMenuItemId.tenant,
+      title: "Change Tenant",
+      icon: "assets/drawer_icons/accessibility.svg",
+    );
 
     // DrawerMenuItem chatbot = const DrawerMenuItem(
     //   id: DrawerMenuItemId.chatbot,
@@ -69,6 +75,7 @@ class DrawerMenuItems {
     // );
 
     return [
+      tenant,
       switchProfile,
       language,
       accessibilities,

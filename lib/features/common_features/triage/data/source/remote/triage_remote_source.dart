@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
@@ -23,16 +26,34 @@ abstract class TriageRemoteSource {
 class TriageRemoteSourceImpl implements TriageRemoteSource {
   Dio dio;
   GetTriageModelNotifier getTriageModelNotifier;
-  TriageRemoteSourceImpl(this.dio, this.getTriageModelNotifier);
+  GlobalTenantProvider globalTenantProvider;
+  TriageRemoteSourceImpl(
+      this.dio, this.getTriageModelNotifier, this.globalTenantProvider);
 
   @override
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
-    var endpoint =
-        "/services/assessments/api/diagnostic-report-templates/assessment/1351";
-    logger.d({"API getTriageQuestionnaire": endpoint});
+    // change the endpoint to the correct one and add tenant id and organization id
+    //from the global tenant provider
+    // const endpoint =
+    //     "/services/assessments/api/diagnostic-report-templates/assessment/1351";
+    final tenantCode = globalTenantProvider.tenantId;
+    final organizationCode = globalTenantProvider.organizationId;
+    String endpoint =
+        "/2services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
+
+    if (tenantCode != null) {
+      endpoint += "?tenant-code=$tenantCode";
+      if (organizationCode != null) {
+        endpoint += "&organisation-code=$organizationCode";
+      }
+    } else if (organizationCode != null) {
+      endpoint += "?organisation-code=$organizationCode";
+    }
+
     try {
       var response = await dio.get(endpoint);
-      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
+      log("assessment response : ${response.data}");
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data.first);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       throw ServerException();
@@ -114,6 +135,7 @@ var triageRemoteSource = Provider<TriageRemoteSource>(
   (ref) => TriageRemoteSourceImpl(
     ref.watch(dioProvider),
     ref.watch(getTriageModelProvider),
+    ref.watch(globalTenantProvider),
   ),
 );
 
