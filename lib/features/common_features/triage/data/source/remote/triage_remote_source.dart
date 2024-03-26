@@ -32,8 +32,20 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   Future<DiagnosticReportTemplateFHIRModel> getTriage() async {
     // change the endpoint to the correct one and add tenant id and organization id
     //from the global tenant provider
-    const endpoint =
-        "/services/assessments/api/diagnostic-report-templates/assessment/1351";
+    // const endpoint =
+    //     "/services/assessments/api/diagnostic-report-templates/assessment/1351";
+    final tenantCode = globalTenantProvider.tenantId;
+    final organizationCode = globalTenantProvider.organizationId;
+    String endpoint = "/2services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
+
+    if (tenantCode != null) {
+        endpoint += "?tenant-code=$tenantCode";
+        if (organizationCode != null) {
+            endpoint += "&organisation-code=$organizationCode";
+        }
+    } else if (organizationCode != null) {
+        endpoint += "?organisation-code=$organizationCode";
+    }
 
     try {
       var response = await dio.get(endpoint);
