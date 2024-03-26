@@ -553,6 +553,7 @@ _$_QuestionnaireItemFHIRModel _$$_QuestionnaireItemFHIRModelFromJson(
       repeats: json['repeats'] as bool?,
       readOnly: json['readOnly'] as bool?,
       maxlength: json['maxlength'] as int?,
+      shortText: json['shortText'] as String?,
       disabledDisplay: $enumDecodeNullable(
           _$DisabledDisplayEnumMap, json['disabledDisplay']),
       answerConstraint: $enumDecodeNullable(
@@ -604,6 +605,7 @@ Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
       'repeats': instance.repeats,
       'readOnly': instance.readOnly,
       'maxlength': instance.maxlength,
+      'shortText': instance.shortText,
       'disabledDisplay': _$DisabledDisplayEnumMap[instance.disabledDisplay],
       'answerConstraint': _$AnswerConstraintEnumMap[instance.answerConstraint],
       'ansewrValueSet': instance.ansewrValueSet?.toJson(),

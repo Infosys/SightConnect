@@ -285,6 +285,7 @@ class QuestionnaireItemFHIRModel with _$QuestionnaireItemFHIRModel {
     bool? repeats,
     bool? readOnly,
     int? maxlength,
+    String? shortText,
     DisabledDisplay? disabledDisplay,
     AnswerConstraint? answerConstraint,
     AnswerValueSetModel? ansewrValueSet,

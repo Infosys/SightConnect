@@ -4019,6 +4019,7 @@ mixin _$QuestionnaireItemFHIRModel {
   bool? get repeats => throw _privateConstructorUsedError;
   bool? get readOnly => throw _privateConstructorUsedError;
   int? get maxlength => throw _privateConstructorUsedError;
+  String? get shortText => throw _privateConstructorUsedError;
   DisabledDisplay? get disabledDisplay => throw _privateConstructorUsedError;
   AnswerConstraint? get answerConstraint => throw _privateConstructorUsedError;
   AnswerValueSetModel? get ansewrValueSet => throw _privateConstructorUsedError;
@@ -4059,6 +4060,7 @@ abstract class $QuestionnaireItemFHIRModelCopyWith<$Res> {
       bool? repeats,
       bool? readOnly,
       int? maxlength,
+      String? shortText,
       DisabledDisplay? disabledDisplay,
       AnswerConstraint? answerConstraint,
       AnswerValueSetModel? ansewrValueSet,
@@ -4101,6 +4103,7 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
     Object? repeats = freezed,
     Object? readOnly = freezed,
     Object? maxlength = freezed,
+    Object? shortText = freezed,
     Object? disabledDisplay = freezed,
     Object? answerConstraint = freezed,
     Object? ansewrValueSet = freezed,
@@ -4154,6 +4157,10 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
           ? _value.maxlength
           : maxlength // ignore: cast_nullable_to_non_nullable
               as int?,
+      shortText: freezed == shortText
+          ? _value.shortText
+          : shortText // ignore: cast_nullable_to_non_nullable
+              as String?,
       disabledDisplay: freezed == disabledDisplay
           ? _value.disabledDisplay
           : disabledDisplay // ignore: cast_nullable_to_non_nullable
@@ -4271,6 +4278,7 @@ abstract class _$$_QuestionnaireItemFHIRModelCopyWith<$Res>
       bool? repeats,
       bool? readOnly,
       int? maxlength,
+      String? shortText,
       DisabledDisplay? disabledDisplay,
       AnswerConstraint? answerConstraint,
       AnswerValueSetModel? ansewrValueSet,
@@ -4316,6 +4324,7 @@ class __$$_QuestionnaireItemFHIRModelCopyWithImpl<$Res>
     Object? repeats = freezed,
     Object? readOnly = freezed,
     Object? maxlength = freezed,
+    Object? shortText = freezed,
     Object? disabledDisplay = freezed,
     Object? answerConstraint = freezed,
     Object? ansewrValueSet = freezed,
@@ -4369,6 +4378,10 @@ class __$$_QuestionnaireItemFHIRModelCopyWithImpl<$Res>
           ? _value.maxlength
           : maxlength // ignore: cast_nullable_to_non_nullable
               as int?,
+      shortText: freezed == shortText
+          ? _value.shortText
+          : shortText // ignore: cast_nullable_to_non_nullable
+              as String?,
       disabledDisplay: freezed == disabledDisplay
           ? _value.disabledDisplay
           : disabledDisplay // ignore: cast_nullable_to_non_nullable
@@ -4431,6 +4444,7 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
       this.repeats,
       this.readOnly,
       this.maxlength,
+      this.shortText,
       this.disabledDisplay,
       this.answerConstraint,
       this.ansewrValueSet,
@@ -4471,6 +4485,8 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
   final bool? readOnly;
   @override
   final int? maxlength;
+  @override
+  final String? shortText;
   @override
   final DisabledDisplay? disabledDisplay;
   @override
@@ -4536,7 +4552,7 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
 
   @override
   String toString() {
-    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight, relatedImage: $relatedImage)';
+    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, shortText: $shortText, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight, relatedImage: $relatedImage)';
   }
 
   @override
@@ -4558,6 +4574,8 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
                 other.readOnly == readOnly) &&
             (identical(other.maxlength, maxlength) ||
                 other.maxlength == maxlength) &&
+            (identical(other.shortText, shortText) ||
+                other.shortText == shortText) &&
             (identical(other.disabledDisplay, disabledDisplay) ||
                 other.disabledDisplay == disabledDisplay) &&
             (identical(other.answerConstraint, answerConstraint) ||
@@ -4594,6 +4612,7 @@ class _$_QuestionnaireItemFHIRModel implements _QuestionnaireItemFHIRModel {
         repeats,
         readOnly,
         maxlength,
+        shortText,
         disabledDisplay,
         answerConstraint,
         ansewrValueSet,
@@ -4635,6 +4654,7 @@ abstract class _QuestionnaireItemFHIRModel
           final bool? repeats,
           final bool? readOnly,
           final int? maxlength,
+          final String? shortText,
           final DisabledDisplay? disabledDisplay,
           final AnswerConstraint? answerConstraint,
           final AnswerValueSetModel? ansewrValueSet,
@@ -4671,6 +4691,8 @@ abstract class _QuestionnaireItemFHIRModel
   bool? get readOnly;
   @override
   int? get maxlength;
+  @override
+  String? get shortText;
   @override
   DisabledDisplay? get disabledDisplay;
   @override
