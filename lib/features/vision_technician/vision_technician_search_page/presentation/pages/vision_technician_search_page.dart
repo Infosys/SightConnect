@@ -15,6 +15,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 
 class VisionTechnicianSearchPage extends HookConsumerWidget {
   const VisionTechnicianSearchPage({super.key});
@@ -82,6 +84,26 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                         ),
                       );
                     } else {
+                      List<VTPatientDto> filterAndTransform(
+                          List<VTPatientDto> data) {
+             
+                        var groupedData =
+                            groupBy(data, (VTPatientDto d) => d.id);
+
+                        var uniqueData = groupedData.values.map((group) {
+                          return group.reduce((value, element) {
+                            return value.encounterStartDate!
+                                    .isAfter(element.encounterStartDate!)
+                                ? value
+                                : element;
+                          });
+                        }).toList();
+
+                        return uniqueData;
+                      }
+
+                      var data = filterAndTransform(list);
+
                       return Padding(
                         padding:
                             const EdgeInsets.symmetric(horizontal: AppSize.ks),
@@ -182,10 +204,10 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                                         ),
                                       ],
                                       rows: List<DataRow>.generate(
-                                        list.length,
+                                        data.length,
                                         (index) => DataRow(
                                           cells: generateListTileSearchResults(
-                                            list[index],
+                                            data[index],
                                             context,
                                             watchRef,
                                           ),
