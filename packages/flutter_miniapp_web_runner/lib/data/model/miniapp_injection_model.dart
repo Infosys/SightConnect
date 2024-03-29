@@ -11,7 +11,7 @@ class MiniAppInjectionModel with _$MiniAppInjectionModel {
     String? mobileNumber,
     String? token,
     MiniAppInjectionModelRole? role,
-    required MiniAppEnv  miniAppEvn,
+    required MiniAppEnv  miniAppEnv,
   }) = _MiniAppInjectionModel;
   factory MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =>
       _$MiniAppInjectionModelFromJson(json);

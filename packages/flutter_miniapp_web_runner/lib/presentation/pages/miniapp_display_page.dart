@@ -139,6 +139,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 },
                 onReceivedError: (controller, request, error) {
                   pullToRefreshController?.endRefreshing();
+                  logger.e(error);
                 },
                 onProgressChanged: (controller, progress) {
                   if (progress == 100) {
