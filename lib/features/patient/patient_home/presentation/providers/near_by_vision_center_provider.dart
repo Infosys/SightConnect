@@ -14,7 +14,7 @@ final nearByVisionCenterProvider =
     StateNotifierProvider<NearByVisionCenterProvider, NearByVisionCenterState>(
   (ref) {
     final visionCenterRepository = ref.watch(visionCenterRepositoryProvider);
-    final globalTenant = ref.watch(globalTenantProvider);
+    final globalTenant = ref.read(globalTenantProvider);
     return NearByVisionCenterProvider(visionCenterRepository, globalTenant);
   },
 );
