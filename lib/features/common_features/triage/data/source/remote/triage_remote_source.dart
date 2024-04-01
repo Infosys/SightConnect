@@ -50,7 +50,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       endpoint += "?organisation-code=$organizationCode";
     }
 
-    logger.f(
+    logger.d(
         "tenant code in global tenant provider before api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
 
     try {
@@ -63,7 +63,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
         globalTenantProvider
             .setOrganizationId(response.data.first['organizationCode']);
       }
-      logger.f(
+      logger.d(
           "tenant code in global tenant provider after api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
       return DiagnosticReportTemplateFHIRModel.fromJson(response.data.first);
     } on DioException catch (e) {

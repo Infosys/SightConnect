@@ -15,7 +15,7 @@ class NearbyVisionCentersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.f(data.toJson());
+    logger.d(data.toJson());
     final email =
         data.facilityInformation?.facilityContactInformation?.facilityEmailId ??
             "";

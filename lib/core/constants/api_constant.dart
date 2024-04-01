@@ -16,13 +16,13 @@ class ApiConstant {
         patientRegistrationMiniappUrl = '${baseUrl}/patient-registration/';
         break;
       case AppEnvironment.staging:
-        patientRegistrationMiniappUrl = '${baseUrl}/patient-registration/';
         baseUrl = Env.baseUrl;
+        patientRegistrationMiniappUrl = '${baseUrl}/patient-registration/';
+
         break;
       case AppEnvironment.development:
-        patientRegistrationMiniappUrl =
-            '${Env.baseDevUrl}/patient-registration/';
         baseUrl = Env.baseDevUrl;
+        patientRegistrationMiniappUrl = '${baseUrl}/patient-registration/';
         break;
     }
   }
