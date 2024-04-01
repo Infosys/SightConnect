@@ -10,8 +10,8 @@ import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VTSearchTriagingBar extends ConsumerWidget {
-  const VTSearchTriagingBar({
+class VTHomeSearchBar extends ConsumerWidget {
+  const VTHomeSearchBar({
     super.key,
     required this.onPressed,
     required this.onProfile,

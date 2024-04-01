@@ -80,7 +80,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
                           horizontal: AppSize.km,
                           vertical: AppSize.km,
                         ),
-                        child: VTSearchTriagingBar(
+                        child: VTHomeSearchBar(
                           onProfile: () {
                             Navigator.push(
                               context,

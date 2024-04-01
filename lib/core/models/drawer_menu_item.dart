@@ -29,7 +29,7 @@ class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
     DrawerMenuItem switchProfile = const DrawerMenuItem(
       id: DrawerMenuItemId.switchProfile,
-      title: "Change Role",
+      title: "Switch Role",
       icon: "assets/drawer_icons/switch.svg",
     );
     DrawerMenuItem language = DrawerMenuItem(
@@ -64,7 +64,7 @@ class DrawerMenuItems {
     );
     DrawerMenuItem tenant = const DrawerMenuItem(
       id: DrawerMenuItemId.tenant,
-      title: "Change Tenant",
+      title: "Switch Tenant",
       icon: "assets/drawer_icons/accessibility.svg",
     );
 

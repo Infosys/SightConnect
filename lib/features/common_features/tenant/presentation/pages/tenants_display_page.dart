@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -94,100 +94,130 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
             const SizedBox(
               height: AppSize.km,
             ),
-            Builder(builder: (context) {
-              if (viewState.isLoading) {
-                return SizedBox(
-                  height: AppSize.height(context) * 0.6,
-                  child: const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                );
-              } else if (viewState.errorMessage != null) {
-                return Container(
-                  height: AppSize.height(context) * 0.6,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColor.lightGrey,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/location_empty_state.svg",
-                        height: 62,
-                        width: 50,
-                      ),
-                      const SizedBox(height: AppSize.ks),
-                      Text(
-                        viewState.errorMessage ?? '',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                      ),
-                      const SizedBox(height: AppSize.ks),
-                      TextButton(
-                        onPressed: () async {
-                          final status = viewState.permissionStatus;
-                          final model =
-                              ref.read(nearByVisionCenterProvider.notifier);
-                          if (status ==
-                              location.PermissionStatus.deniedForever) {
-                            if (await handler.openAppSettings()) {
-                              model.init();
-                            }
-                          } else {
-                            model.init();
-                          }
-                        },
-                        child: const Text("Request Location Permission"),
-                      ),
-                    ],
-                  ),
-                );
-              } else if (viewState.visionCenters != null) {
-                if (viewState.visionCenters?.isEmpty == true) {
+            Builder(
+              builder: (context) {
+                if (viewState.isLoading) {
                   return SizedBox(
                     height: AppSize.height(context) * 0.6,
-                    child: Center(
-                      child: Text(
-                        loc.nearbyVisionCentersNotFound,
-                        style: applyFiraSansFont(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                    child: const Center(
+                      child: CircularProgressIndicator.adaptive(),
                     ),
                   );
-                }
+                } else if (viewState.errorMessage != null) {
+                  return Container(
+                    height: AppSize.height(context) * 0.6,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: AppColor.lightGrey,
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          "assets/icons/location_empty_state.svg",
+                          height: 62,
+                          width: 50,
+                        ),
+                        const SizedBox(height: AppSize.ks),
+                        Text(
+                          viewState.errorMessage ?? '',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
+                        const SizedBox(height: AppSize.ks),
+                        TextButton(
+                          onPressed: () async {
+                            final status = viewState.permissionStatus;
+                            final model =
+                                ref.read(nearByVisionCenterProvider.notifier);
+                            if (status ==
+                                location.PermissionStatus.deniedForever) {
+                              if (await handler.openAppSettings()) {
+                                model.init();
+                              }
+                            } else {
+                              model.init();
+                            }
+                          },
+                          child: const Text("Request Location Permission"),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (viewState.visionCenters != null) {
+                  if (viewState.visionCenters?.isEmpty == true) {
+                    return SizedBox(
+                      height: AppSize.height(context) * 0.6,
+                      child: Center(
+                        child: Text(
+                          loc.nearbyVisionCentersNotFound,
+                          style: applyFiraSansFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
 
-                return Expanded(
-                  child: ListView.builder(
+                  return Expanded(
+                    child: ListView.builder(
                       shrinkWrap: true,
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(0),
                       itemCount: viewState.visionCenters?.length,
                       itemBuilder: (context, index) {
-                        return Column(
+                        final isSelectedVc = selectedTenants.value == index;
+                        final vcName = viewState.visionCenters![index]
+                                .facilityInformation?.facilityName ??
+                            "";
+                        final vcAddress = viewState
+                                .visionCenters![index]
+                                .facilityInformation
+                                ?.facilityAddressDetails
+                                ?.addressLine1 ??
+                            "";
+                        final vcContact = viewState
+                                .visionCenters![index]
+                                .facilityInformation
+                                ?.facilityContactInformation
+                                ?.facilityContactNumber ??
+                            "";
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: AppSize.km),
+                          padding: const EdgeInsets.all(AppSize.km),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColor.white,
+                            boxShadow: applycustomShadow(),
+                          ),
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SizedBox(
-                                height: AppSize.km,
+                              Flexible(
+                                child: Text(
+                                  vcName,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyFiraSansFont(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
-                              Text(viewState.visionCenters![index]
-                                      .facilityInformation?.facilityName ??
-                                  ""),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const SizedBox(height: AppSize.km),
-                                  InkWell(
+                                  _VCCheckBox(
+                                    isSelectedVc: isSelectedVc,
                                     onTap: () {
-                                      if (selectedTenants.value != index) {
+                                      if (!isSelectedVc) {
                                         selectedTenants.value = index;
                                         ref
                                             .read(globalTenantProvider)
@@ -203,65 +233,75 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
                                         selectedTenants.value = -1;
                                       }
                                     },
-                                    child: Container(
-                                      height: 20,
-                                      width: 20,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          color: index == selectedTenants.value
-                                              ? AppColor.primary
-                                              : AppColor.white,
-                                          border: Border.all(
-                                              color:
-                                                  index == selectedTenants.value
-                                                      ? AppColor.primary
-                                                      : AppColor.grey,
-                                              width: 2)),
-                                      child: Center(
-                                        child: selectedTenants.value == index
-                                            ? const Icon(
-                                                Icons.check,
-                                                color: AppColor.white,
-                                                size: 16,
-                                                weight: 10,
-                                              )
-                                            : const SizedBox(),
-                                      ),
-                                    ),
                                   ),
                                 ],
                               ),
-                              Text('Tenant ${index + 1}'),
-                              const SizedBox(
-                                height: AppSize.km,
+                              Flexible(
+                                child: Text(
+                                  "Contact: $vcContact",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(fontSize: 14),
+                                ),
                               ),
-                              const Divider(
-                                thickness: 2,
-                              )
-                            ]);
-                      }),
-                );
-                //   return const SingleChildScrollView(
-                //     scrollDirection: Axis.horizontal,
-                //     // child: Row(
-                //     //   children: [
-                //     //     ...viewState.visionCenters!
-                //     //         .map(
-                //     //           (e) => NearbyVisionCentersCard(data: e),
-                //     //         )
-                //     //         .toList()
-                //     //   ],
-                //     // ),
-                //   );
-                // } else {
-                //   return const SizedBox();
-                // }
-              } else {
-                return const SizedBox();
-              }
-            })
+                              Flexible(
+                                child: Text(
+                                  vcAddress,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _VCCheckBox extends StatelessWidget {
+  const _VCCheckBox({
+    required this.isSelectedVc,
+    this.onTap,
+  });
+  final bool isSelectedVc;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 20,
+        width: 20,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: isSelectedVc ? AppColor.primary : AppColor.white,
+          border: Border.all(
+            color: isSelectedVc ? AppColor.primary : AppColor.grey,
+            width: 2,
+          ),
+        ),
+        child: Center(
+          child: isSelectedVc
+              ? const Icon(
+                  Icons.check,
+                  color: AppColor.white,
+                  size: 16,
+                  weight: 10,
+                )
+              : const SizedBox(),
         ),
       ),
     );
