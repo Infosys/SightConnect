@@ -29,7 +29,7 @@ class PatientHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(appUpdateServiceProvider).checkForUpdate();
+    // ref.watch(appUpdateServiceProvider).checkForUpdate();
     return Scaffold(
       extendBodyBehindAppBar: true,
       endDrawer: AppDrawer(
