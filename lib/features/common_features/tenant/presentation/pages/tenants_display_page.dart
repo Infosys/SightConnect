@@ -199,20 +199,7 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Flexible(
-                                child: Text(
-                                  vcName,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: applyFiraSansFont(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   _VCCheckBox(
                                     isSelectedVc: isSelectedVc,
@@ -234,23 +221,58 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
                                       }
                                     },
                                   ),
+                                  SizedBox(
+                                    width: AppSize.width(context) * 0.05,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      vcName,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: applyFiraSansFont(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
-                              Flexible(
-                                child: Text(
-                                  "Contact: $vcContact",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: applyRobotoFont(fontSize: 14),
-                                ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.start,
+                              //   crossAxisAlignment: CrossAxisAlignment.center,
+                              //   children: [
+
+                              //   ],
+                              // ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: AppSize.width(context) * 0.1,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      "Contact: $vcContact",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: applyRobotoFont(fontSize: 14),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Flexible(
-                                child: Text(
-                                  vcAddress,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: applyRobotoFont(fontSize: 14),
-                                ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: AppSize.width(context) * 0.1,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      vcAddress,
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: applyRobotoFont(fontSize: 14),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -286,7 +308,7 @@ class _VCCheckBox extends StatelessWidget {
         height: 20,
         width: 20,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(10),
           color: isSelectedVc ? AppColor.primary : AppColor.white,
           border: Border.all(
             color: isSelectedVc ? AppColor.primary : AppColor.grey,
