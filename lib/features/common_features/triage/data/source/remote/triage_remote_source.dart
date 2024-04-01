@@ -50,9 +50,21 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       endpoint += "?organisation-code=$organizationCode";
     }
 
+    logger.f(
+        "tenant code in global tenant provider before api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
+
     try {
       var response = await dio.get(endpoint);
       log("assessment response : ${response.data}");
+      if (tenantCode == null) {
+        globalTenantProvider.setTenantId(response.data.first['tenantCode']);
+      }
+      if (organizationCode == null) {
+        globalTenantProvider
+            .setOrganizationId(response.data.first['organizationCode']);
+      }
+      logger.f(
+          "tenant code in global tenant provider after api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
       return DiagnosticReportTemplateFHIRModel.fromJson(response.data.first);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);

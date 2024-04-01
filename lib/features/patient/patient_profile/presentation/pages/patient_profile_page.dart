@@ -118,7 +118,7 @@ class PatientProfilePage extends ConsumerWidget {
                       .watch(getPatientProfileByIdProvider(selectedPatientId))
                       .when(
                     data: (data) {
-                      final patient = data;
+                      final patient = data;            
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
