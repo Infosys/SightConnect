@@ -38,7 +38,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           parentPatientId: parentPatientId ?? _getPateintId(),
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
-          miniAppEvn:getMiniAppEnv( ApiConstant.appEnvironment),
+          miniAppEnv:getMiniAppEnv( ApiConstant.appEnvironment),
         ),
         miniapp: MiniApp(
           id: "1",
@@ -59,8 +59,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
         return MiniAppEnv.STAGING;
       case AppEnvironment.development:
         return MiniAppEnv.DEV;
-      default:
-        return MiniAppEnv.DEV;
+      
     }
   }
 
