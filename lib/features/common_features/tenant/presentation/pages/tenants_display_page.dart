@@ -65,227 +65,251 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
     final loc = context.loc!;
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
+    var model = ref.read(globalTenantProvider);
 
-    return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text('Tenants'),
-        centerTitle: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: Text(
-                    "Select a Vision Center from the list",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyFiraSansFont(
-                      fontSize: 18,
+    return PopScope(
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          if (selectedTenants.value != -1) {
+            ref.read(globalTenantProvider).setIsTenantSelection(false);
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: CustomAppbar(
+          title: const Text('Tenants'),
+          onBackPress: () {
+            ref.read(globalTenantProvider).setIsTenantSelection(false);
+          },
+          centerTitle: false,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Select a Vision Center from the list",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: AppSize.km,
-            ),
-            Builder(
-              builder: (context) {
-                if (viewState.isLoading) {
-                  return SizedBox(
-                    height: AppSize.height(context) * 0.6,
-                    child: const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
-                  );
-                } else if (viewState.errorMessage != null) {
-                  return Container(
-                    height: AppSize.height(context) * 0.6,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: AppColor.lightGrey,
-                      ),
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        SvgPicture.asset(
-                          "assets/icons/location_empty_state.svg",
-                          height: 62,
-                          width: 50,
-                        ),
-                        const SizedBox(height: AppSize.ks),
-                        Text(
-                          viewState.errorMessage ?? '',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                        ),
-                        const SizedBox(height: AppSize.ks),
-                        TextButton(
-                          onPressed: () async {
-                            final status = viewState.permissionStatus;
-                            final model =
-                                ref.read(nearByVisionCenterProvider.notifier);
-                            if (status ==
-                                location.PermissionStatus.deniedForever) {
-                              if (await handler.openAppSettings()) {
-                                model.init();
-                              }
-                            } else {
-                              model.init();
-                            }
-                          },
-                          child: const Text("Request Location Permission"),
-                        ),
-                      ],
-                    ),
-                  );
-                } else if (viewState.visionCenters != null) {
-                  if (viewState.visionCenters?.isEmpty == true) {
+                ],
+              ),
+              const SizedBox(
+                height: AppSize.km,
+              ),
+              Builder(
+                builder: (context) {
+                  if (viewState.isLoading) {
                     return SizedBox(
                       height: AppSize.height(context) * 0.6,
-                      child: Center(
-                        child: Text(
-                          loc.nearbyVisionCentersNotFound,
-                          style: applyFiraSansFont(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                      child: const Center(
+                        child: CircularProgressIndicator.adaptive(),
                       ),
                     );
-                  }
-
-                  return Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(0),
-                      itemCount: viewState.visionCenters?.length,
-                      itemBuilder: (context, index) {
-                        final isSelectedVc = selectedTenants.value == index;
-                        final vcName = viewState.visionCenters![index]
-                                .facilityInformation?.facilityName ??
-                            "";
-                        final vcAddress = viewState
-                                .visionCenters![index]
-                                .facilityInformation
-                                ?.facilityAddressDetails
-                                ?.addressLine1 ??
-                            "";
-                        final vcContact = viewState
-                                .visionCenters![index]
-                                .facilityInformation
-                                ?.facilityContactInformation
-                                ?.facilityContactNumber ??
-                            "";
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: AppSize.km),
-                          padding: const EdgeInsets.all(AppSize.km),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColor.white,
-                            boxShadow: applycustomShadow(),
+                  } else if (viewState.errorMessage != null) {
+                    return Container(
+                      height: AppSize.height(context) * 0.6,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: AppColor.lightGrey,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/location_empty_state.svg",
+                            height: 62,
+                            width: 50,
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                children: [
-                                  _VCCheckBox(
-                                    isSelectedVc: isSelectedVc,
-                                    onTap: () {
-                                      if (!isSelectedVc) {
-                                        selectedTenants.value = index;
-                                        ref
-                                            .read(globalTenantProvider)
-                                            .setOrganizationId(viewState
-                                                .visionCenters![index].id!);
-                                        ref
-                                            .read(globalTenantProvider)
-                                            .setTenantId(viewState
-                                                .visionCenters![index]
-                                                .tenant
-                                                ?.id);
-                                      } else {
-                                        selectedTenants.value = -1;
-                                      }
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: AppSize.width(context) * 0.05,
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      vcName,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: applyFiraSansFont(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
+                          const SizedBox(height: AppSize.ks),
+                          Text(
+                            viewState.errorMessage ?? '',
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                          ),
+                          const SizedBox(height: AppSize.ks),
+                          TextButton(
+                            onPressed: () async {
+                              final status = viewState.permissionStatus;
+                              final model =
+                                  ref.read(nearByVisionCenterProvider.notifier);
+                              if (status ==
+                                  location.PermissionStatus.deniedForever) {
+                                if (await handler.openAppSettings()) {
+                                  model.init();
+                                }
+                              } else {
+                                model.init();
+                              }
+                            },
+                            child: const Text("Request Location Permission"),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (viewState.visionCenters != null) {
+                    if (viewState.visionCenters?.isEmpty == true) {
+                      return SizedBox(
+                        height: AppSize.height(context) * 0.6,
+                        child: Center(
+                          child: Text(
+                            loc.nearbyVisionCentersNotFound,
+                            style: applyFiraSansFont(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+
+                    return Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(0),
+                        itemCount: viewState.visionCenters?.length,
+                        itemBuilder: (context, index) {
+                          var isSelectedVc = selectedTenants.value == index;
+                          if (model.organizationId != null &&
+                              model.tenantId != null) {
+                            if (model.organizationId ==
+                                    viewState.visionCenters![index].id &&
+                                model.tenantId ==
+                                    viewState
+                                        .visionCenters![index].tenant?.id) {
+                              isSelectedVc = true;
+                            }
+                          }
+
+                          final vcName = viewState.visionCenters![index]
+                                  .facilityInformation?.facilityName ??
+                              "";
+                          final vcAddress = viewState
+                                  .visionCenters![index]
+                                  .facilityInformation
+                                  ?.facilityAddressDetails
+                                  ?.addressLine1 ??
+                              "";
+                          final vcContact = viewState
+                                  .visionCenters![index]
+                                  .facilityInformation
+                                  ?.facilityContactInformation
+                                  ?.facilityContactNumber ??
+                              "";
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: AppSize.km),
+                            padding: const EdgeInsets.all(AppSize.km),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColor.white,
+                              boxShadow: applycustomShadow(),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    _VCCheckBox(
+                                      isSelectedVc: isSelectedVc,
+                                      onTap: () {
+                                        if (!isSelectedVc) {
+                                          selectedTenants.value = index;
+                                          ref
+                                              .read(globalTenantProvider)
+                                              .setOrganizationId(viewState
+                                                  .visionCenters![index].id!);
+                                          ref
+                                              .read(globalTenantProvider)
+                                              .setTenantId(viewState
+                                                  .visionCenters![index]
+                                                  .tenant
+                                                  ?.id);
+                                        } else {
+                                          selectedTenants.value = -1;
+                                        }
+                                      },
+                                    ),
+                                    SizedBox(
+                                      width: AppSize.width(context) * 0.05,
+                                    ),
+                                    Flexible(
+                                      child: Text(
+                                        vcName,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: applyFiraSansFont(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.start,
-                              //   crossAxisAlignment: CrossAxisAlignment.center,
-                              //   children: [
+                                  ],
+                                ),
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.start,
+                                //   crossAxisAlignment: CrossAxisAlignment.center,
+                                //   children: [
 
-                              //   ],
-                              // ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: AppSize.width(context) * 0.1,
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      "Contact: $vcContact",
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: applyRobotoFont(fontSize: 14),
+                                //   ],
+                                // ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: AppSize.width(context) * 0.1,
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: AppSize.width(context) * 0.1,
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      vcAddress,
-                                      maxLines: 3,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: applyRobotoFont(fontSize: 14),
+                                    Flexible(
+                                      child: Text(
+                                        "Contact: $vcContact",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: applyRobotoFont(fontSize: 14),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            )
-          ],
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: AppSize.width(context) * 0.1,
+                                    ),
+                                    Flexible(
+                                      child: Text(
+                                        vcAddress,
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: applyRobotoFont(fontSize: 14),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

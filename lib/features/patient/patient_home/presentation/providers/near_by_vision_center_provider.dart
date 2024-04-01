@@ -95,9 +95,11 @@ class NearByVisionCenterProvider
       );
 
       // Set the tenantId and organizationId to the first vision center's tenant id
-      log("visionCenters tenant id is : ${visionCenters.first.tenant?.id}, and the organization id is : ${visionCenters.first.id}");
-      _globalTenantProvider.setTenantId(visionCenters.first.tenant?.id);
-      _globalTenantProvider.setOrganizationId(visionCenters.first.id);
+      if (_globalTenantProvider.isTenantSelection == false) {
+        log("visionCenters tenant id is : ${visionCenters.first.tenant?.id}, and the organization id is : ${visionCenters.first.id}");
+        _globalTenantProvider.setTenantId(visionCenters.first.tenant?.id);
+        _globalTenantProvider.setOrganizationId(visionCenters.first.id);
+      }
 
       state = state.copyWith(
         isLoading: false,
