@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
@@ -12,6 +10,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
+
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../main.dart';
@@ -39,9 +38,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
         actions: const [],
       ),
       body: UpgradeAlert(
-        dialogStyle: Platform.isIOS
-            ? UpgradeDialogStyle.cupertino
-            : UpgradeDialogStyle.material,
+     
         showIgnore: false,
         showLater: false,
         shouldPopScope: () => false,

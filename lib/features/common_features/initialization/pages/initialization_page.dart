@@ -20,6 +20,7 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+
 import '../../../../core/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {

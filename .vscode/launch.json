@@ -26,6 +26,17 @@
             "type": "dart",
             "request": "launch",
             "program": "lib\\main.dart"
+        },
+        {
+            "name": "Flutter (disable web security)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
         }
     ]
 }

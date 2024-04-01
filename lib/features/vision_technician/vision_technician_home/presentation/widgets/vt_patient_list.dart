@@ -81,48 +81,60 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         dataRowMinHeight: isMobile ? AppSize.kl * 1 : AppSize.kl * 2,
         columns: [
           DataColumn(
-            label: Text(
-              loc.vtPatient.capitalizeFirstOfEach(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyFiraSansFont(
-                fontSize: 12,
-                color: AppColor.grey,
+            label: SizedBox(
+              width: AppSize.width(context) * 0.1,
+              child: Text(
+                loc.vtPatient.capitalizeFirstOfEach(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: applyFiraSansFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
               ),
             ),
           ),
           DataColumn(
-            label: Text(
-              // loc.vtAssessmentID,
-              "Encounter ID",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyFiraSansFont(
-                fontSize: 12,
-                color: AppColor.grey,
+            label: SizedBox(
+              width: AppSize.width(context) * 0.1,
+              child: Text(
+                // loc.vtAssessmentID,
+                "Encounter ID",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: applyFiraSansFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
               ),
             ),
           ),
           DataColumn(
-            label: Text(
-              loc.vtStatus,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyFiraSansFont(
-                fontSize: 12,
-                color: AppColor.grey,
+            label: SizedBox(
+              width: AppSize.width(context) * 0.1,
+              child: Text(
+                loc.vtStatus,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: applyFiraSansFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
               ),
             ),
           ),
           DataColumn(
-            label: Text(
-              loc.vtCategory,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: applyFiraSansFont(
-                fontSize: 12,
-                color: AppColor.grey,
+            label: SizedBox(
+              width: AppSize.width(context) * 0.1,
+              child: Text(
+                loc.vtCategory,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: applyFiraSansFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
               ),
             ),
           ),
