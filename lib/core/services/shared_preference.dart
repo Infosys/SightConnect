@@ -8,7 +8,7 @@ class SharedPreferenceService {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
     } catch (e) {
-      logger.d({
+      logger.e({
         "error": "SharedPrefService.init",
       });
     }
@@ -39,11 +39,11 @@ class SharedPreferenceService {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////
-  
 
   static int? get getTenantId => _sharedPreferences.getInt("tenantId");
 
-  static int? get getOrganizationId => _sharedPreferences.getInt("organizationId");
+  static int? get getOrganizationId =>
+      _sharedPreferences.getInt("organizationId");
 
   static String? get getLanguage => _sharedPreferences.getString("language");
 
