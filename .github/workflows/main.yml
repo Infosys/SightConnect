@@ -33,6 +33,12 @@ jobs:
       #     git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
       #     git push origin --tags
       #     git push  
+      - name: env create
+        run: echo "VERSION_NUMBER=$GITHUB_REF_NAME" >> $GITHUB_ENV
+      # - name: tagcreation
+      #   run: |
+      #       git tag ${{ env.VERSION_NUMBER}}
+      #       git push origin ${{ env.VERSION_NUMBER}}
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -53,14 +59,14 @@ jobs:
         run: echo "${{ secrets.KEY_PROPERTIES_PROD }}" | base64 --decode > android/key.properties
 
       - name: Build APPBUNDLE
-        run: flutter build appbundle --release --build-name $GITHUB_REF_NAME --build-number ${{ github.run_number }}
+        run: flutter build appbundle --release --build-name ${{ env.VERSION_NUMBER}} --build-number ${{ github.run_number }}
       - name: Build Android APK
-        run: flutter build apk --release --build-name $GITHUB_REF_NAME --build-number ${{ github.run_number }} --verbose
+        run: flutter build apk --release --build-name ${{ env.VERSION_NUMBER}} --build-number ${{ github.run_number }} --verbose
       
       - name: Copy the file
-        run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-$GITHUB_REF_NAME.apk
+        run: cp ./build/app/outputs/flutter-apk/app-release.apk ./build/app/outputs/flutter-apk/app-release-${{ env.VERSION_NUMBER}}.apk
       - name: Copy the file
-        run: cp ./build/app/outputs/bundle/release/app-release.aab ./build/app/outputs/bundle/release/app-release-$GITHUB_REF_NAME.aab
+        run: cp ./build/app/outputs/bundle/release/app-release.aab ./build/app/outputs/bundle/release/app-release-${{ env.VERSION_NUMBER}}.aab
 
       - name: upload artifact to App Center
         uses: wzieba/AppCenter-Github-Action@v1
@@ -68,15 +74,13 @@ jobs:
           appName: stg-radar-mobility/eyecare4all
           token: ${{secrets.APP_CENTER_TOKEN}}
           group: Collaborators
-          file: ./build/app/outputs/flutter-apk/app-release-$GITHUB_REF_NAME.apk
+          file: ./build/app/outputs/flutter-apk/app-release-${{ env.VERSION_NUMBER}}.apk
           notifyTesters: true
           debug: false
 
       - name: Upload AAB
         uses: actions/upload-artifact@v2
         with:
-          name: app-release-$GITHUB_REF_NAME
-          path: ./build/app/outputs/bundle/release/app-release-$GITHUB_REF_NAME.aab
+          name: app-release-${{ env.VERSION_NUMBER}}
+          path: ./build/app/outputs/bundle/release/app-release-${{ env.VERSION_NUMBER}}.aab
           retention-days: 10
-
-          
