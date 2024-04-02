@@ -30,6 +30,21 @@ class SharedPreferenceService {
     _sharedPreferences.setBool("tumblingOverInfo", value);
   }
 
+  static set storeTenantId(int value) {
+    _sharedPreferences.setInt("tenantId", value);
+  }
+
+  static set storeOrganizationId(int value) {
+    _sharedPreferences.setInt("organizationId", value);
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////
+  
+
+  static int? get getTenantId => _sharedPreferences.getInt("tenantId");
+
+  static int? get getOrganizationId => _sharedPreferences.getInt("organizationId");
+
   static String? get getLanguage => _sharedPreferences.getString("language");
 
   static double get getFontScale =>
@@ -43,6 +58,8 @@ class SharedPreferenceService {
 
   static Future<void> clearAll() async {
     // await _sharedPreferences.remove("language");
+    await _sharedPreferences.remove("tenantId");
+    await _sharedPreferences.remove("organizationId");
     await _sharedPreferences.remove("fontScale");
     await _sharedPreferences.remove("dontShowVisualAcuityStatus");
     await _sharedPreferences.remove("tumblingOverInfo");

@@ -106,9 +106,7 @@ class AppDrawer extends HookWidget {
                               switch (item.id) {
                                 case DrawerMenuItemId.tenant:
                                   final navigator = Navigator.of(context);
-                                  ref
-                                      .read(globalTenantProvider)
-                                      .setIsTenantSelection(true);
+                                 
                                   navigator.push(
                                     MaterialPageRoute(
                                       builder: (context) =>
