@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -283,9 +281,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
-      dialogStyle: Platform.isIOS
-          ? UpgradeDialogStyle.cupertino
-          : UpgradeDialogStyle.material,
       showIgnore: kDebugMode ? true : false,
       showLater: kDebugMode ? true : false,
       shouldPopScope: () => kDebugMode ? true : false,
