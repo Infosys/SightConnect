@@ -12,7 +12,7 @@ part of 'optometrician_dashboard_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OptometricianDashboardModel _$OptometricianDashboardModelFromJson(
     Map<String, dynamic> json) {
@@ -92,12 +92,12 @@ class _$OptometricianDashboardModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OptometricianDashboardModelCopyWith<$Res>
+abstract class _$$OptometricianDashboardModelImplCopyWith<$Res>
     implements $OptometricianDashboardModelCopyWith<$Res> {
-  factory _$$_OptometricianDashboardModelCopyWith(
-          _$_OptometricianDashboardModel value,
-          $Res Function(_$_OptometricianDashboardModel) then) =
-      __$$_OptometricianDashboardModelCopyWithImpl<$Res>;
+  factory _$$OptometricianDashboardModelImplCopyWith(
+          _$OptometricianDashboardModelImpl value,
+          $Res Function(_$OptometricianDashboardModelImpl) then) =
+      __$$OptometricianDashboardModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,13 +108,13 @@ abstract class _$$_OptometricianDashboardModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OptometricianDashboardModelCopyWithImpl<$Res>
+class __$$OptometricianDashboardModelImplCopyWithImpl<$Res>
     extends _$OptometricianDashboardModelCopyWithImpl<$Res,
-        _$_OptometricianDashboardModel>
-    implements _$$_OptometricianDashboardModelCopyWith<$Res> {
-  __$$_OptometricianDashboardModelCopyWithImpl(
-      _$_OptometricianDashboardModel _value,
-      $Res Function(_$_OptometricianDashboardModel) _then)
+        _$OptometricianDashboardModelImpl>
+    implements _$$OptometricianDashboardModelImplCopyWith<$Res> {
+  __$$OptometricianDashboardModelImplCopyWithImpl(
+      _$OptometricianDashboardModelImpl _value,
+      $Res Function(_$OptometricianDashboardModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -125,7 +125,7 @@ class __$$_OptometricianDashboardModelCopyWithImpl<$Res>
     Object? totalAssessmentsThisMonthByOptometrist = freezed,
     Object? totalAssessmentsTodayByOptometrist = freezed,
   }) {
-    return _then(_$_OptometricianDashboardModel(
+    return _then(_$OptometricianDashboardModelImpl(
       totalAssessmentsThisMonth: freezed == totalAssessmentsThisMonth
           ? _value.totalAssessmentsThisMonth
           : totalAssessmentsThisMonth // ignore: cast_nullable_to_non_nullable
@@ -150,15 +150,17 @@ class __$$_OptometricianDashboardModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OptometricianDashboardModel implements _OptometricianDashboardModel {
-  const _$_OptometricianDashboardModel(
+class _$OptometricianDashboardModelImpl
+    implements _OptometricianDashboardModel {
+  const _$OptometricianDashboardModelImpl(
       {this.totalAssessmentsThisMonth,
       this.totalAssessmentsToday,
       this.totalAssessmentsThisMonthByOptometrist,
       this.totalAssessmentsTodayByOptometrist});
 
-  factory _$_OptometricianDashboardModel.fromJson(Map<String, dynamic> json) =>
-      _$$_OptometricianDashboardModelFromJson(json);
+  factory _$OptometricianDashboardModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$OptometricianDashboardModelImplFromJson(json);
 
   @override
   final int? totalAssessmentsThisMonth;
@@ -175,10 +177,10 @@ class _$_OptometricianDashboardModel implements _OptometricianDashboardModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OptometricianDashboardModel &&
+            other is _$OptometricianDashboardModelImpl &&
             (identical(other.totalAssessmentsThisMonth,
                     totalAssessmentsThisMonth) ||
                 other.totalAssessmentsThisMonth == totalAssessmentsThisMonth) &&
@@ -206,13 +208,13 @@ class _$_OptometricianDashboardModel implements _OptometricianDashboardModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OptometricianDashboardModelCopyWith<_$_OptometricianDashboardModel>
-      get copyWith => __$$_OptometricianDashboardModelCopyWithImpl<
-          _$_OptometricianDashboardModel>(this, _$identity);
+  _$$OptometricianDashboardModelImplCopyWith<_$OptometricianDashboardModelImpl>
+      get copyWith => __$$OptometricianDashboardModelImplCopyWithImpl<
+          _$OptometricianDashboardModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OptometricianDashboardModelToJson(
+    return _$$OptometricianDashboardModelImplToJson(
       this,
     );
   }
@@ -225,10 +227,10 @@ abstract class _OptometricianDashboardModel
           final int? totalAssessmentsToday,
           final int? totalAssessmentsThisMonthByOptometrist,
           final int? totalAssessmentsTodayByOptometrist}) =
-      _$_OptometricianDashboardModel;
+      _$OptometricianDashboardModelImpl;
 
   factory _OptometricianDashboardModel.fromJson(Map<String, dynamic> json) =
-      _$_OptometricianDashboardModel.fromJson;
+      _$OptometricianDashboardModelImpl.fromJson;
 
   @override
   int? get totalAssessmentsThisMonth;
@@ -240,6 +242,6 @@ abstract class _OptometricianDashboardModel
   int? get totalAssessmentsTodayByOptometrist;
   @override
   @JsonKey(ignore: true)
-  _$$_OptometricianDashboardModelCopyWith<_$_OptometricianDashboardModel>
+  _$$OptometricianDashboardModelImplCopyWith<_$OptometricianDashboardModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

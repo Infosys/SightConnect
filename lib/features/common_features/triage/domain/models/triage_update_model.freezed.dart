@@ -12,7 +12,7 @@ part of 'triage_update_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TriageUpdateModel _$TriageUpdateModelFromJson(Map<String, dynamic> json) {
   return _TriageUpdateModel.fromJson(json);
@@ -173,11 +173,11 @@ class _$TriageUpdateModelCopyWithImpl<$Res, $Val extends TriageUpdateModel>
 }
 
 /// @nodoc
-abstract class _$$_TriageUpdateModelCopyWith<$Res>
+abstract class _$$TriageUpdateModelImplCopyWith<$Res>
     implements $TriageUpdateModelCopyWith<$Res> {
-  factory _$$_TriageUpdateModelCopyWith(_$_TriageUpdateModel value,
-          $Res Function(_$_TriageUpdateModel) then) =
-      __$$_TriageUpdateModelCopyWithImpl<$Res>;
+  factory _$$TriageUpdateModelImplCopyWith(_$TriageUpdateModelImpl value,
+          $Res Function(_$TriageUpdateModelImpl) then) =
+      __$$TriageUpdateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -200,11 +200,11 @@ abstract class _$$_TriageUpdateModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TriageUpdateModelCopyWithImpl<$Res>
-    extends _$TriageUpdateModelCopyWithImpl<$Res, _$_TriageUpdateModel>
-    implements _$$_TriageUpdateModelCopyWith<$Res> {
-  __$$_TriageUpdateModelCopyWithImpl(
-      _$_TriageUpdateModel _value, $Res Function(_$_TriageUpdateModel) _then)
+class __$$TriageUpdateModelImplCopyWithImpl<$Res>
+    extends _$TriageUpdateModelCopyWithImpl<$Res, _$TriageUpdateModelImpl>
+    implements _$$TriageUpdateModelImplCopyWith<$Res> {
+  __$$TriageUpdateModelImplCopyWithImpl(_$TriageUpdateModelImpl _value,
+      $Res Function(_$TriageUpdateModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -227,7 +227,7 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
     Object? observations = freezed,
     Object? questionResponse = freezed,
   }) {
-    return _then(_$_TriageUpdateModel(
+    return _then(_$TriageUpdateModelImpl(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
@@ -298,8 +298,8 @@ class __$$_TriageUpdateModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TriageUpdateModel implements _TriageUpdateModel {
-  const _$_TriageUpdateModel(
+class _$TriageUpdateModelImpl implements _TriageUpdateModel {
+  const _$TriageUpdateModelImpl(
       {this.patientId,
       this.diagnosticReportId,
       this.tenantCode,
@@ -323,8 +323,8 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
         _observations = observations,
         _questionResponse = questionResponse;
 
-  factory _$_TriageUpdateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TriageUpdateModelFromJson(json);
+  factory _$TriageUpdateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TriageUpdateModelImplFromJson(json);
 
   @override
   final int? patientId;
@@ -416,10 +416,10 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TriageUpdateModel &&
+            other is _$TriageUpdateModelImpl &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.diagnosticReportId, diagnosticReportId) ||
@@ -475,13 +475,13 @@ class _$_TriageUpdateModel implements _TriageUpdateModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TriageUpdateModelCopyWith<_$_TriageUpdateModel> get copyWith =>
-      __$$_TriageUpdateModelCopyWithImpl<_$_TriageUpdateModel>(
+  _$$TriageUpdateModelImplCopyWith<_$TriageUpdateModelImpl> get copyWith =>
+      __$$TriageUpdateModelImplCopyWithImpl<_$TriageUpdateModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TriageUpdateModelToJson(
+    return _$$TriageUpdateModelImplToJson(
       this,
     );
   }
@@ -505,10 +505,10 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
           final List<PatchImagingSelectionModel>? imagingSelection,
           final List<PatchObservationsModel>? observations,
           final List<PatchQuestionResponseModel>? questionResponse}) =
-      _$_TriageUpdateModel;
+      _$TriageUpdateModelImpl;
 
   factory _TriageUpdateModel.fromJson(Map<String, dynamic> json) =
-      _$_TriageUpdateModel.fromJson;
+      _$TriageUpdateModelImpl.fromJson;
 
   @override
   int? get patientId;
@@ -545,7 +545,7 @@ abstract class _TriageUpdateModel implements TriageUpdateModel {
   List<PatchQuestionResponseModel>? get questionResponse;
   @override
   @JsonKey(ignore: true)
-  _$$_TriageUpdateModelCopyWith<_$_TriageUpdateModel> get copyWith =>
+  _$$TriageUpdateModelImplCopyWith<_$TriageUpdateModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -629,12 +629,12 @@ class _$PatchQuestionResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PatchQuestionResponseModelCopyWith<$Res>
+abstract class _$$PatchQuestionResponseModelImplCopyWith<$Res>
     implements $PatchQuestionResponseModelCopyWith<$Res> {
-  factory _$$_PatchQuestionResponseModelCopyWith(
-          _$_PatchQuestionResponseModel value,
-          $Res Function(_$_PatchQuestionResponseModel) then) =
-      __$$_PatchQuestionResponseModelCopyWithImpl<$Res>;
+  factory _$$PatchQuestionResponseModelImplCopyWith(
+          _$PatchQuestionResponseModelImpl value,
+          $Res Function(_$PatchQuestionResponseModelImpl) then) =
+      __$$PatchQuestionResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -646,13 +646,13 @@ abstract class _$$_PatchQuestionResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PatchQuestionResponseModelCopyWithImpl<$Res>
+class __$$PatchQuestionResponseModelImplCopyWithImpl<$Res>
     extends _$PatchQuestionResponseModelCopyWithImpl<$Res,
-        _$_PatchQuestionResponseModel>
-    implements _$$_PatchQuestionResponseModelCopyWith<$Res> {
-  __$$_PatchQuestionResponseModelCopyWithImpl(
-      _$_PatchQuestionResponseModel _value,
-      $Res Function(_$_PatchQuestionResponseModel) _then)
+        _$PatchQuestionResponseModelImpl>
+    implements _$$PatchQuestionResponseModelImplCopyWith<$Res> {
+  __$$PatchQuestionResponseModelImplCopyWithImpl(
+      _$PatchQuestionResponseModelImpl _value,
+      $Res Function(_$PatchQuestionResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -664,7 +664,7 @@ class __$$_PatchQuestionResponseModelCopyWithImpl<$Res>
     Object? score = freezed,
     Object? answers = freezed,
   }) {
-    return _then(_$_PatchQuestionResponseModel(
+    return _then(_$PatchQuestionResponseModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -691,8 +691,8 @@ class __$$_PatchQuestionResponseModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatchQuestionResponseModel implements _PatchQuestionResponseModel {
-  const _$_PatchQuestionResponseModel(
+class _$PatchQuestionResponseModelImpl implements _PatchQuestionResponseModel {
+  const _$PatchQuestionResponseModelImpl(
       {this.id,
       this.action,
       this.linkId,
@@ -700,8 +700,9 @@ class _$_PatchQuestionResponseModel implements _PatchQuestionResponseModel {
       final List<PatchAnswerModel>? answers})
       : _answers = answers;
 
-  factory _$_PatchQuestionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PatchQuestionResponseModelFromJson(json);
+  factory _$PatchQuestionResponseModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$PatchQuestionResponseModelImplFromJson(json);
 
   @override
   final int? id;
@@ -727,10 +728,10 @@ class _$_PatchQuestionResponseModel implements _PatchQuestionResponseModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatchQuestionResponseModel &&
+            other is _$PatchQuestionResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.linkId, linkId) || other.linkId == linkId) &&
@@ -746,13 +747,13 @@ class _$_PatchQuestionResponseModel implements _PatchQuestionResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatchQuestionResponseModelCopyWith<_$_PatchQuestionResponseModel>
-      get copyWith => __$$_PatchQuestionResponseModelCopyWithImpl<
-          _$_PatchQuestionResponseModel>(this, _$identity);
+  _$$PatchQuestionResponseModelImplCopyWith<_$PatchQuestionResponseModelImpl>
+      get copyWith => __$$PatchQuestionResponseModelImplCopyWithImpl<
+          _$PatchQuestionResponseModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatchQuestionResponseModelToJson(
+    return _$$PatchQuestionResponseModelImplToJson(
       this,
     );
   }
@@ -761,14 +762,15 @@ class _$_PatchQuestionResponseModel implements _PatchQuestionResponseModel {
 abstract class _PatchQuestionResponseModel
     implements PatchQuestionResponseModel {
   const factory _PatchQuestionResponseModel(
-      {final int? id,
-      final Action? action,
-      final int? linkId,
-      final double? score,
-      final List<PatchAnswerModel>? answers}) = _$_PatchQuestionResponseModel;
+          {final int? id,
+          final Action? action,
+          final int? linkId,
+          final double? score,
+          final List<PatchAnswerModel>? answers}) =
+      _$PatchQuestionResponseModelImpl;
 
   factory _PatchQuestionResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_PatchQuestionResponseModel.fromJson;
+      _$PatchQuestionResponseModelImpl.fromJson;
 
   @override
   int? get id;
@@ -782,7 +784,7 @@ abstract class _PatchQuestionResponseModel
   List<PatchAnswerModel>? get answers;
   @override
   @JsonKey(ignore: true)
-  _$$_PatchQuestionResponseModelCopyWith<_$_PatchQuestionResponseModel>
+  _$$PatchQuestionResponseModelImplCopyWith<_$PatchQuestionResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -859,11 +861,11 @@ class _$PatchAnswerModelCopyWithImpl<$Res, $Val extends PatchAnswerModel>
 }
 
 /// @nodoc
-abstract class _$$_PatchAnswerModelCopyWith<$Res>
+abstract class _$$PatchAnswerModelImplCopyWith<$Res>
     implements $PatchAnswerModelCopyWith<$Res> {
-  factory _$$_PatchAnswerModelCopyWith(
-          _$_PatchAnswerModel value, $Res Function(_$_PatchAnswerModel) then) =
-      __$$_PatchAnswerModelCopyWithImpl<$Res>;
+  factory _$$PatchAnswerModelImplCopyWith(_$PatchAnswerModelImpl value,
+          $Res Function(_$PatchAnswerModelImpl) then) =
+      __$$PatchAnswerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -871,11 +873,11 @@ abstract class _$$_PatchAnswerModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PatchAnswerModelCopyWithImpl<$Res>
-    extends _$PatchAnswerModelCopyWithImpl<$Res, _$_PatchAnswerModel>
-    implements _$$_PatchAnswerModelCopyWith<$Res> {
-  __$$_PatchAnswerModelCopyWithImpl(
-      _$_PatchAnswerModel _value, $Res Function(_$_PatchAnswerModel) _then)
+class __$$PatchAnswerModelImplCopyWithImpl<$Res>
+    extends _$PatchAnswerModelCopyWithImpl<$Res, _$PatchAnswerModelImpl>
+    implements _$$PatchAnswerModelImplCopyWith<$Res> {
+  __$$PatchAnswerModelImplCopyWithImpl(_$PatchAnswerModelImpl _value,
+      $Res Function(_$PatchAnswerModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -887,7 +889,7 @@ class __$$_PatchAnswerModelCopyWithImpl<$Res>
     Object? answerCode = freezed,
     Object? score = freezed,
   }) {
-    return _then(_$_PatchAnswerModel(
+    return _then(_$PatchAnswerModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -914,12 +916,12 @@ class __$$_PatchAnswerModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatchAnswerModel implements _PatchAnswerModel {
-  const _$_PatchAnswerModel(
+class _$PatchAnswerModelImpl implements _PatchAnswerModel {
+  const _$PatchAnswerModelImpl(
       {this.id, this.action, this.value, this.answerCode, this.score});
 
-  factory _$_PatchAnswerModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PatchAnswerModelFromJson(json);
+  factory _$PatchAnswerModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PatchAnswerModelImplFromJson(json);
 
   @override
   final int? id;
@@ -938,10 +940,10 @@ class _$_PatchAnswerModel implements _PatchAnswerModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatchAnswerModel &&
+            other is _$PatchAnswerModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.value, value) || other.value == value) &&
@@ -958,12 +960,13 @@ class _$_PatchAnswerModel implements _PatchAnswerModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatchAnswerModelCopyWith<_$_PatchAnswerModel> get copyWith =>
-      __$$_PatchAnswerModelCopyWithImpl<_$_PatchAnswerModel>(this, _$identity);
+  _$$PatchAnswerModelImplCopyWith<_$PatchAnswerModelImpl> get copyWith =>
+      __$$PatchAnswerModelImplCopyWithImpl<_$PatchAnswerModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatchAnswerModelToJson(
+    return _$$PatchAnswerModelImplToJson(
       this,
     );
   }
@@ -975,10 +978,10 @@ abstract class _PatchAnswerModel implements PatchAnswerModel {
       final Action? action,
       final String? value,
       final int? answerCode,
-      final double? score}) = _$_PatchAnswerModel;
+      final double? score}) = _$PatchAnswerModelImpl;
 
   factory _PatchAnswerModel.fromJson(Map<String, dynamic> json) =
-      _$_PatchAnswerModel.fromJson;
+      _$PatchAnswerModelImpl.fromJson;
 
   @override
   int? get id;
@@ -992,7 +995,7 @@ abstract class _PatchAnswerModel implements PatchAnswerModel {
   double? get score;
   @override
   @JsonKey(ignore: true)
-  _$$_PatchAnswerModelCopyWith<_$_PatchAnswerModel> get copyWith =>
+  _$$PatchAnswerModelImplCopyWith<_$PatchAnswerModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1049,21 +1052,22 @@ class _$PerformerCopyWithImpl<$Res, $Val extends Performer>
 }
 
 /// @nodoc
-abstract class _$$_PerformerCopyWith<$Res> implements $PerformerCopyWith<$Res> {
-  factory _$$_PerformerCopyWith(
-          _$_Performer value, $Res Function(_$_Performer) then) =
-      __$$_PerformerCopyWithImpl<$Res>;
+abstract class _$$PerformerImplCopyWith<$Res>
+    implements $PerformerCopyWith<$Res> {
+  factory _$$PerformerImplCopyWith(
+          _$PerformerImpl value, $Res Function(_$PerformerImpl) then) =
+      __$$PerformerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PerformerRole? role, int? identifier});
 }
 
 /// @nodoc
-class __$$_PerformerCopyWithImpl<$Res>
-    extends _$PerformerCopyWithImpl<$Res, _$_Performer>
-    implements _$$_PerformerCopyWith<$Res> {
-  __$$_PerformerCopyWithImpl(
-      _$_Performer _value, $Res Function(_$_Performer) _then)
+class __$$PerformerImplCopyWithImpl<$Res>
+    extends _$PerformerCopyWithImpl<$Res, _$PerformerImpl>
+    implements _$$PerformerImplCopyWith<$Res> {
+  __$$PerformerImplCopyWithImpl(
+      _$PerformerImpl _value, $Res Function(_$PerformerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1072,7 +1076,7 @@ class __$$_PerformerCopyWithImpl<$Res>
     Object? role = freezed,
     Object? identifier = freezed,
   }) {
-    return _then(_$_Performer(
+    return _then(_$PerformerImpl(
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
@@ -1087,11 +1091,11 @@ class __$$_PerformerCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Performer implements _Performer {
-  const _$_Performer({this.role, this.identifier});
+class _$PerformerImpl implements _Performer {
+  const _$PerformerImpl({this.role, this.identifier});
 
-  factory _$_Performer.fromJson(Map<String, dynamic> json) =>
-      _$$_PerformerFromJson(json);
+  factory _$PerformerImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PerformerImplFromJson(json);
 
   @override
   final PerformerRole? role;
@@ -1104,10 +1108,10 @@ class _$_Performer implements _Performer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Performer &&
+            other is _$PerformerImpl &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier));
@@ -1120,12 +1124,12 @@ class _$_Performer implements _Performer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PerformerCopyWith<_$_Performer> get copyWith =>
-      __$$_PerformerCopyWithImpl<_$_Performer>(this, _$identity);
+  _$$PerformerImplCopyWith<_$PerformerImpl> get copyWith =>
+      __$$PerformerImplCopyWithImpl<_$PerformerImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PerformerToJson(
+    return _$$PerformerImplToJson(
       this,
     );
   }
@@ -1133,10 +1137,10 @@ class _$_Performer implements _Performer {
 
 abstract class _Performer implements Performer {
   const factory _Performer({final PerformerRole? role, final int? identifier}) =
-      _$_Performer;
+      _$PerformerImpl;
 
   factory _Performer.fromJson(Map<String, dynamic> json) =
-      _$_Performer.fromJson;
+      _$PerformerImpl.fromJson;
 
   @override
   PerformerRole? get role;
@@ -1144,7 +1148,7 @@ abstract class _Performer implements Performer {
   int? get identifier;
   @override
   @JsonKey(ignore: true)
-  _$$_PerformerCopyWith<_$_Performer> get copyWith =>
+  _$$PerformerImplCopyWith<_$PerformerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1196,22 +1200,22 @@ class _$IncompleteTestModelCopyWithImpl<$Res, $Val extends IncompleteTestModel>
 }
 
 /// @nodoc
-abstract class _$$_IncompleteTestModelCopyWith<$Res>
+abstract class _$$IncompleteTestModelImplCopyWith<$Res>
     implements $IncompleteTestModelCopyWith<$Res> {
-  factory _$$_IncompleteTestModelCopyWith(_$_IncompleteTestModel value,
-          $Res Function(_$_IncompleteTestModel) then) =
-      __$$_IncompleteTestModelCopyWithImpl<$Res>;
+  factory _$$IncompleteTestModelImplCopyWith(_$IncompleteTestModelImpl value,
+          $Res Function(_$IncompleteTestModelImpl) then) =
+      __$$IncompleteTestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TestType? testName});
 }
 
 /// @nodoc
-class __$$_IncompleteTestModelCopyWithImpl<$Res>
-    extends _$IncompleteTestModelCopyWithImpl<$Res, _$_IncompleteTestModel>
-    implements _$$_IncompleteTestModelCopyWith<$Res> {
-  __$$_IncompleteTestModelCopyWithImpl(_$_IncompleteTestModel _value,
-      $Res Function(_$_IncompleteTestModel) _then)
+class __$$IncompleteTestModelImplCopyWithImpl<$Res>
+    extends _$IncompleteTestModelCopyWithImpl<$Res, _$IncompleteTestModelImpl>
+    implements _$$IncompleteTestModelImplCopyWith<$Res> {
+  __$$IncompleteTestModelImplCopyWithImpl(_$IncompleteTestModelImpl _value,
+      $Res Function(_$IncompleteTestModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1219,7 +1223,7 @@ class __$$_IncompleteTestModelCopyWithImpl<$Res>
   $Res call({
     Object? testName = freezed,
   }) {
-    return _then(_$_IncompleteTestModel(
+    return _then(_$IncompleteTestModelImpl(
       testName: freezed == testName
           ? _value.testName
           : testName // ignore: cast_nullable_to_non_nullable
@@ -1230,11 +1234,11 @@ class __$$_IncompleteTestModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IncompleteTestModel implements _IncompleteTestModel {
-  const _$_IncompleteTestModel({this.testName});
+class _$IncompleteTestModelImpl implements _IncompleteTestModel {
+  const _$IncompleteTestModelImpl({this.testName});
 
-  factory _$_IncompleteTestModel.fromJson(Map<String, dynamic> json) =>
-      _$$_IncompleteTestModelFromJson(json);
+  factory _$IncompleteTestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IncompleteTestModelImplFromJson(json);
 
   @override
   final TestType? testName;
@@ -1245,10 +1249,10 @@ class _$_IncompleteTestModel implements _IncompleteTestModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IncompleteTestModel &&
+            other is _$IncompleteTestModelImpl &&
             (identical(other.testName, testName) ||
                 other.testName == testName));
   }
@@ -1260,13 +1264,13 @@ class _$_IncompleteTestModel implements _IncompleteTestModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IncompleteTestModelCopyWith<_$_IncompleteTestModel> get copyWith =>
-      __$$_IncompleteTestModelCopyWithImpl<_$_IncompleteTestModel>(
+  _$$IncompleteTestModelImplCopyWith<_$IncompleteTestModelImpl> get copyWith =>
+      __$$IncompleteTestModelImplCopyWithImpl<_$IncompleteTestModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IncompleteTestModelToJson(
+    return _$$IncompleteTestModelImplToJson(
       this,
     );
   }
@@ -1274,16 +1278,16 @@ class _$_IncompleteTestModel implements _IncompleteTestModel {
 
 abstract class _IncompleteTestModel implements IncompleteTestModel {
   const factory _IncompleteTestModel({final TestType? testName}) =
-      _$_IncompleteTestModel;
+      _$IncompleteTestModelImpl;
 
   factory _IncompleteTestModel.fromJson(Map<String, dynamic> json) =
-      _$_IncompleteTestModel.fromJson;
+      _$IncompleteTestModelImpl.fromJson;
 
   @override
   TestType? get testName;
   @override
   @JsonKey(ignore: true)
-  _$$_IncompleteTestModelCopyWith<_$_IncompleteTestModel> get copyWith =>
+  _$$IncompleteTestModelImplCopyWith<_$IncompleteTestModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1362,11 +1366,12 @@ class _$PatchObservationsModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PatchObservationsModelCopyWith<$Res>
+abstract class _$$PatchObservationsModelImplCopyWith<$Res>
     implements $PatchObservationsModelCopyWith<$Res> {
-  factory _$$_PatchObservationsModelCopyWith(_$_PatchObservationsModel value,
-          $Res Function(_$_PatchObservationsModel) then) =
-      __$$_PatchObservationsModelCopyWithImpl<$Res>;
+  factory _$$PatchObservationsModelImplCopyWith(
+          _$PatchObservationsModelImpl value,
+          $Res Function(_$PatchObservationsModelImpl) then) =
+      __$$PatchObservationsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1374,12 +1379,13 @@ abstract class _$$_PatchObservationsModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PatchObservationsModelCopyWithImpl<$Res>
+class __$$PatchObservationsModelImplCopyWithImpl<$Res>
     extends _$PatchObservationsModelCopyWithImpl<$Res,
-        _$_PatchObservationsModel>
-    implements _$$_PatchObservationsModelCopyWith<$Res> {
-  __$$_PatchObservationsModelCopyWithImpl(_$_PatchObservationsModel _value,
-      $Res Function(_$_PatchObservationsModel) _then)
+        _$PatchObservationsModelImpl>
+    implements _$$PatchObservationsModelImplCopyWith<$Res> {
+  __$$PatchObservationsModelImplCopyWithImpl(
+      _$PatchObservationsModelImpl _value,
+      $Res Function(_$PatchObservationsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1391,7 +1397,7 @@ class __$$_PatchObservationsModelCopyWithImpl<$Res>
     Object? value = freezed,
     Object? score = freezed,
   }) {
-    return _then(_$_PatchObservationsModel(
+    return _then(_$PatchObservationsModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1418,12 +1424,12 @@ class __$$_PatchObservationsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatchObservationsModel implements _PatchObservationsModel {
-  const _$_PatchObservationsModel(
+class _$PatchObservationsModelImpl implements _PatchObservationsModel {
+  const _$PatchObservationsModelImpl(
       {this.id, this.identifier, this.action, this.value, this.score});
 
-  factory _$_PatchObservationsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PatchObservationsModelFromJson(json);
+  factory _$PatchObservationsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PatchObservationsModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1442,10 +1448,10 @@ class _$_PatchObservationsModel implements _PatchObservationsModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatchObservationsModel &&
+            other is _$PatchObservationsModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
@@ -1462,13 +1468,13 @@ class _$_PatchObservationsModel implements _PatchObservationsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatchObservationsModelCopyWith<_$_PatchObservationsModel> get copyWith =>
-      __$$_PatchObservationsModelCopyWithImpl<_$_PatchObservationsModel>(
-          this, _$identity);
+  _$$PatchObservationsModelImplCopyWith<_$PatchObservationsModelImpl>
+      get copyWith => __$$PatchObservationsModelImplCopyWithImpl<
+          _$PatchObservationsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatchObservationsModelToJson(
+    return _$$PatchObservationsModelImplToJson(
       this,
     );
   }
@@ -1480,10 +1486,10 @@ abstract class _PatchObservationsModel implements PatchObservationsModel {
       final int? identifier,
       final Action? action,
       final String? value,
-      final double? score}) = _$_PatchObservationsModel;
+      final double? score}) = _$PatchObservationsModelImpl;
 
   factory _PatchObservationsModel.fromJson(Map<String, dynamic> json) =
-      _$_PatchObservationsModel.fromJson;
+      _$PatchObservationsModelImpl.fromJson;
 
   @override
   int? get id;
@@ -1497,8 +1503,8 @@ abstract class _PatchObservationsModel implements PatchObservationsModel {
   double? get score;
   @override
   @JsonKey(ignore: true)
-  _$$_PatchObservationsModelCopyWith<_$_PatchObservationsModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PatchObservationsModelImplCopyWith<_$PatchObservationsModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PatchImagingSelectionModel _$PatchImagingSelectionModelFromJson(
@@ -1595,12 +1601,12 @@ class _$PatchImagingSelectionModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PatchImagingSelectionModelCopyWith<$Res>
+abstract class _$$PatchImagingSelectionModelImplCopyWith<$Res>
     implements $PatchImagingSelectionModelCopyWith<$Res> {
-  factory _$$_PatchImagingSelectionModelCopyWith(
-          _$_PatchImagingSelectionModel value,
-          $Res Function(_$_PatchImagingSelectionModel) then) =
-      __$$_PatchImagingSelectionModelCopyWithImpl<$Res>;
+  factory _$$PatchImagingSelectionModelImplCopyWith(
+          _$PatchImagingSelectionModelImpl value,
+          $Res Function(_$PatchImagingSelectionModelImpl) then) =
+      __$$PatchImagingSelectionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1614,13 +1620,13 @@ abstract class _$$_PatchImagingSelectionModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PatchImagingSelectionModelCopyWithImpl<$Res>
+class __$$PatchImagingSelectionModelImplCopyWithImpl<$Res>
     extends _$PatchImagingSelectionModelCopyWithImpl<$Res,
-        _$_PatchImagingSelectionModel>
-    implements _$$_PatchImagingSelectionModelCopyWith<$Res> {
-  __$$_PatchImagingSelectionModelCopyWithImpl(
-      _$_PatchImagingSelectionModel _value,
-      $Res Function(_$_PatchImagingSelectionModel) _then)
+        _$PatchImagingSelectionModelImpl>
+    implements _$$PatchImagingSelectionModelImplCopyWith<$Res> {
+  __$$PatchImagingSelectionModelImplCopyWithImpl(
+      _$PatchImagingSelectionModelImpl _value,
+      $Res Function(_$PatchImagingSelectionModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1634,7 +1640,7 @@ class __$$_PatchImagingSelectionModelCopyWithImpl<$Res>
     Object? score = freezed,
     Object? fileId = freezed,
   }) {
-    return _then(_$_PatchImagingSelectionModel(
+    return _then(_$PatchImagingSelectionModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1669,8 +1675,8 @@ class __$$_PatchImagingSelectionModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
-  const _$_PatchImagingSelectionModel(
+class _$PatchImagingSelectionModelImpl implements _PatchImagingSelectionModel {
+  const _$PatchImagingSelectionModelImpl(
       {this.id,
       this.identifier,
       this.action,
@@ -1679,8 +1685,9 @@ class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
       this.score,
       this.fileId});
 
-  factory _$_PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PatchImagingSelectionModelFromJson(json);
+  factory _$PatchImagingSelectionModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$PatchImagingSelectionModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1703,10 +1710,10 @@ class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatchImagingSelectionModel &&
+            other is _$PatchImagingSelectionModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
@@ -1726,13 +1733,13 @@ class _$_PatchImagingSelectionModel implements _PatchImagingSelectionModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatchImagingSelectionModelCopyWith<_$_PatchImagingSelectionModel>
-      get copyWith => __$$_PatchImagingSelectionModelCopyWithImpl<
-          _$_PatchImagingSelectionModel>(this, _$identity);
+  _$$PatchImagingSelectionModelImplCopyWith<_$PatchImagingSelectionModelImpl>
+      get copyWith => __$$PatchImagingSelectionModelImplCopyWithImpl<
+          _$PatchImagingSelectionModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatchImagingSelectionModelToJson(
+    return _$$PatchImagingSelectionModelImplToJson(
       this,
     );
   }
@@ -1747,10 +1754,10 @@ abstract class _PatchImagingSelectionModel
       final String? endpoint,
       final String? baseUrl,
       final double? score,
-      final String? fileId}) = _$_PatchImagingSelectionModel;
+      final String? fileId}) = _$PatchImagingSelectionModelImpl;
 
   factory _PatchImagingSelectionModel.fromJson(Map<String, dynamic> json) =
-      _$_PatchImagingSelectionModel.fromJson;
+      _$PatchImagingSelectionModelImpl.fromJson;
 
   @override
   int? get id;
@@ -1768,6 +1775,6 @@ abstract class _PatchImagingSelectionModel
   String? get fileId;
   @override
   @JsonKey(ignore: true)
-  _$$_PatchImagingSelectionModelCopyWith<_$_PatchImagingSelectionModel>
+  _$$PatchImagingSelectionModelImplCopyWith<_$PatchImagingSelectionModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

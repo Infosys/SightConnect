@@ -6,8 +6,9 @@ part of 'eua_on_search_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_EuaOnSearchModel _$$_EuaOnSearchModelFromJson(Map<String, dynamic> json) =>
-    _$_EuaOnSearchModel(
+_$EuaOnSearchModelImpl _$$EuaOnSearchModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$EuaOnSearchModelImpl(
       context: json['context'] == null
           ? null
           : Context.fromJson(json['context'] as Map<String, dynamic>),
@@ -19,14 +20,16 @@ _$_EuaOnSearchModel _$$_EuaOnSearchModelFromJson(Map<String, dynamic> json) =>
           : Error.fromJson(json['error'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_EuaOnSearchModelToJson(_$_EuaOnSearchModel instance) =>
+Map<String, dynamic> _$$EuaOnSearchModelImplToJson(
+        _$EuaOnSearchModelImpl instance) =>
     <String, dynamic>{
       'context': instance.context?.toJson(),
       'message': instance.message?.toJson(),
       'error': instance.error?.toJson(),
     };
 
-_$_Context _$$_ContextFromJson(Map<String, dynamic> json) => _$_Context(
+_$ContextImpl _$$ContextImplFromJson(Map<String, dynamic> json) =>
+    _$ContextImpl(
       domain: json['domain'] as String?,
       country: json['country'] as String?,
       city: json['city'] as String?,
@@ -43,7 +46,7 @@ _$_Context _$$_ContextFromJson(Map<String, dynamic> json) => _$_Context(
       ttl: json['ttl'] as String?,
     );
 
-Map<String, dynamic> _$$_ContextToJson(_$_Context instance) =>
+Map<String, dynamic> _$$ContextImplToJson(_$ContextImpl instance) =>
     <String, dynamic>{
       'domain': instance.domain,
       'country': instance.country,
@@ -61,32 +64,35 @@ Map<String, dynamic> _$$_ContextToJson(_$_Context instance) =>
       'ttl': instance.ttl,
     };
 
-_$_Error _$$_ErrorFromJson(Map<String, dynamic> json) => _$_Error(
+_$ErrorImpl _$$ErrorImplFromJson(Map<String, dynamic> json) => _$ErrorImpl(
       type: json['type'] as String?,
       code: json['code'] as String?,
       path: json['path'] as String?,
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$$_ErrorToJson(_$_Error instance) => <String, dynamic>{
+Map<String, dynamic> _$$ErrorImplToJson(_$ErrorImpl instance) =>
+    <String, dynamic>{
       'type': instance.type,
       'code': instance.code,
       'path': instance.path,
       'message': instance.message,
     };
 
-_$_Message _$$_MessageFromJson(Map<String, dynamic> json) => _$_Message(
+_$MessageImpl _$$MessageImplFromJson(Map<String, dynamic> json) =>
+    _$MessageImpl(
       catalog: json['catalog'] == null
           ? null
           : Catalog.fromJson(json['catalog'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_MessageToJson(_$_Message instance) =>
+Map<String, dynamic> _$$MessageImplToJson(_$MessageImpl instance) =>
     <String, dynamic>{
       'catalog': instance.catalog?.toJson(),
     };
 
-_$_Catalog _$$_CatalogFromJson(Map<String, dynamic> json) => _$_Catalog(
+_$CatalogImpl _$$CatalogImplFromJson(Map<String, dynamic> json) =>
+    _$CatalogImpl(
       descriptor: json['descriptor'] == null
           ? null
           : InstructionsClass.fromJson(
@@ -106,7 +112,7 @@ _$_Catalog _$$_CatalogFromJson(Map<String, dynamic> json) => _$_Catalog(
       exp: json['exp'] == null ? null : DateTime.parse(json['exp'] as String),
     );
 
-Map<String, dynamic> _$$_CatalogToJson(_$_Catalog instance) =>
+Map<String, dynamic> _$$CatalogImplToJson(_$CatalogImpl instance) =>
     <String, dynamic>{
       'descriptor': instance.descriptor?.toJson(),
       'providers': instance.providers?.map((e) => e.toJson()).toList(),
@@ -116,7 +122,8 @@ Map<String, dynamic> _$$_CatalogToJson(_$_Catalog instance) =>
       'exp': instance.exp?.toIso8601String(),
     };
 
-_$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
+_$CategoryImpl _$$CategoryImplFromJson(Map<String, dynamic> json) =>
+    _$CategoryImpl(
       id: json['id'] as String?,
       parentCategoryId: json['parentCategoryId'] == null
           ? null
@@ -131,7 +138,7 @@ _$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
           : Time.fromJson(json['time'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_CategoryToJson(_$_Category instance) =>
+Map<String, dynamic> _$$CategoryImplToJson(_$CategoryImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'parentCategoryId': instance.parentCategoryId?.toJson(),
@@ -139,8 +146,9 @@ Map<String, dynamic> _$$_CategoryToJson(_$_Category instance) =>
       'time': instance.time?.toJson(),
     };
 
-_$_InstructionsClass _$$_InstructionsClassFromJson(Map<String, dynamic> json) =>
-    _$_InstructionsClass(
+_$InstructionsClassImpl _$$InstructionsClassImplFromJson(
+        Map<String, dynamic> json) =>
+    _$InstructionsClassImpl(
       name: json['name'] as String?,
       code: json['code'] as String?,
       symbol: json['symbol'] as String?,
@@ -152,8 +160,8 @@ _$_InstructionsClass _$$_InstructionsClassFromJson(Map<String, dynamic> json) =>
       the3DRender: json['the3DRender'] as String?,
     );
 
-Map<String, dynamic> _$$_InstructionsClassToJson(
-        _$_InstructionsClass instance) =>
+Map<String, dynamic> _$$InstructionsClassImplToJson(
+        _$InstructionsClassImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'code': instance.code,
@@ -165,13 +173,15 @@ Map<String, dynamic> _$$_InstructionsClassToJson(
       'the3DRender': instance.the3DRender,
     };
 
-_$_ParentCategoryId _$$_ParentCategoryIdFromJson(Map<String, dynamic> json) =>
-    _$_ParentCategoryId();
+_$ParentCategoryIdImpl _$$ParentCategoryIdImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ParentCategoryIdImpl();
 
-Map<String, dynamic> _$$_ParentCategoryIdToJson(_$_ParentCategoryId instance) =>
+Map<String, dynamic> _$$ParentCategoryIdImplToJson(
+        _$ParentCategoryIdImpl instance) =>
     <String, dynamic>{};
 
-_$_Time _$$_TimeFromJson(Map<String, dynamic> json) => _$_Time(
+_$TimeImpl _$$TimeImplFromJson(Map<String, dynamic> json) => _$TimeImpl(
       label: json['label'] as String?,
       timestamp: json['timestamp'] as String?,
       duration: json['duration'] as String?,
@@ -184,7 +194,8 @@ _$_Time _$$_TimeFromJson(Map<String, dynamic> json) => _$_Time(
           : Schedule.fromJson(json['schedule'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_TimeToJson(_$_Time instance) => <String, dynamic>{
+Map<String, dynamic> _$$TimeImplToJson(_$TimeImpl instance) =>
+    <String, dynamic>{
       'label': instance.label,
       'timestamp': instance.timestamp,
       'duration': instance.duration,
@@ -193,17 +204,19 @@ Map<String, dynamic> _$$_TimeToJson(_$_Time instance) => <String, dynamic>{
       'schedule': instance.schedule?.toJson(),
     };
 
-_$_Range _$$_RangeFromJson(Map<String, dynamic> json) => _$_Range(
+_$RangeImpl _$$RangeImplFromJson(Map<String, dynamic> json) => _$RangeImpl(
       start: json['start'] as String?,
       end: json['end'] as String?,
     );
 
-Map<String, dynamic> _$$_RangeToJson(_$_Range instance) => <String, dynamic>{
+Map<String, dynamic> _$$RangeImplToJson(_$RangeImpl instance) =>
+    <String, dynamic>{
       'start': instance.start,
       'end': instance.end,
     };
 
-_$_Schedule _$$_ScheduleFromJson(Map<String, dynamic> json) => _$_Schedule(
+_$ScheduleImpl _$$ScheduleImplFromJson(Map<String, dynamic> json) =>
+    _$ScheduleImpl(
       frequency: json['frequency'] as String?,
       holidays: (json['holidays'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -212,15 +225,15 @@ _$_Schedule _$$_ScheduleFromJson(Map<String, dynamic> json) => _$_Schedule(
           (json['times'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$_ScheduleToJson(_$_Schedule instance) =>
+Map<String, dynamic> _$$ScheduleImplToJson(_$ScheduleImpl instance) =>
     <String, dynamic>{
       'frequency': instance.frequency,
       'holidays': instance.holidays,
       'times': instance.times,
     };
 
-_$_Fulfillment _$$_FulfillmentFromJson(Map<String, dynamic> json) =>
-    _$_Fulfillment(
+_$FulfillmentImpl _$$FulfillmentImplFromJson(Map<String, dynamic> json) =>
+    _$FulfillmentImpl(
       id: json['id'] as String?,
       type: json['type'] as String?,
       providerId: json['providerId'] as String?,
@@ -251,7 +264,7 @@ _$_Fulfillment _$$_FulfillmentFromJson(Map<String, dynamic> json) =>
           : ParentCategoryId.fromJson(json['tags'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_FulfillmentToJson(_$_Fulfillment instance) =>
+Map<String, dynamic> _$$FulfillmentImplToJson(_$FulfillmentImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': instance.type,
@@ -267,7 +280,7 @@ Map<String, dynamic> _$$_FulfillmentToJson(_$_Fulfillment instance) =>
       'tags': instance.tags?.toJson(),
     };
 
-_$_Agent _$$_AgentFromJson(Map<String, dynamic> json) => _$_Agent(
+_$AgentImpl _$$AgentImplFromJson(Map<String, dynamic> json) => _$AgentImpl(
       id: json['id'] as String?,
       name: json['name'] as String?,
       image: json['image'] as String?,
@@ -281,7 +294,8 @@ _$_Agent _$$_AgentFromJson(Map<String, dynamic> json) => _$_Agent(
           : ParentCategoryId.fromJson(json['tags'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AgentToJson(_$_Agent instance) => <String, dynamic>{
+Map<String, dynamic> _$$AgentImplToJson(_$AgentImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'image': instance.image,
@@ -293,7 +307,8 @@ Map<String, dynamic> _$$_AgentToJson(_$_Agent instance) => <String, dynamic>{
       'tags': instance.tags?.toJson(),
     };
 
-_$_Contact _$$_ContactFromJson(Map<String, dynamic> json) => _$_Contact(
+_$ContactImpl _$$ContactImplFromJson(Map<String, dynamic> json) =>
+    _$ContactImpl(
       phone: json['phone'] as String?,
       email: json['email'] as String?,
       tags: json['tags'] == null
@@ -301,14 +316,15 @@ _$_Contact _$$_ContactFromJson(Map<String, dynamic> json) => _$_Contact(
           : ParentCategoryId.fromJson(json['tags'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ContactToJson(_$_Contact instance) =>
+Map<String, dynamic> _$$ContactImplToJson(_$ContactImpl instance) =>
     <String, dynamic>{
       'phone': instance.phone,
       'email': instance.email,
       'tags': instance.tags?.toJson(),
     };
 
-_$_Customer _$$_CustomerFromJson(Map<String, dynamic> json) => _$_Customer(
+_$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
+    _$CustomerImpl(
       person: json['person'] == null
           ? null
           : Person.fromJson(json['person'] as Map<String, dynamic>),
@@ -317,13 +333,13 @@ _$_Customer _$$_CustomerFromJson(Map<String, dynamic> json) => _$_Customer(
           : ParentCategoryId.fromJson(json['tags'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_CustomerToJson(_$_Customer instance) =>
+Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
     <String, dynamic>{
       'person': instance.person?.toJson(),
       'tags': instance.tags?.toJson(),
     };
 
-_$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
+_$PersonImpl _$$PersonImplFromJson(Map<String, dynamic> json) => _$PersonImpl(
       id: json['id'] as String?,
       name: json['name'] as String?,
       image: json['image'] as String?,
@@ -332,7 +348,8 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       cred: json['cred'] as String?,
     );
 
-Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
+Map<String, dynamic> _$$PersonImplToJson(_$PersonImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'image': instance.image,
@@ -341,7 +358,7 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'cred': instance.cred,
     };
 
-_$_End _$$_EndFromJson(Map<String, dynamic> json) => _$_End(
+_$EndImpl _$$EndImplFromJson(Map<String, dynamic> json) => _$EndImpl(
       time: json['time'] == null
           ? null
           : Time.fromJson(json['time'] as Map<String, dynamic>),
@@ -357,14 +374,14 @@ _$_End _$$_EndFromJson(Map<String, dynamic> json) => _$_End(
           : Agent.fromJson(json['person'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_EndToJson(_$_End instance) => <String, dynamic>{
+Map<String, dynamic> _$$EndImplToJson(_$EndImpl instance) => <String, dynamic>{
       'time': instance.time?.toJson(),
       'instructions': instance.instructions?.toJson(),
       'contact': instance.contact?.toJson(),
       'person': instance.person?.toJson(),
     };
 
-_$_State _$$_StateFromJson(Map<String, dynamic> json) => _$_State(
+_$StateImpl _$$StateImplFromJson(Map<String, dynamic> json) => _$StateImpl(
       descriptor: json['descriptor'] == null
           ? null
           : InstructionsClass.fromJson(
@@ -373,13 +390,15 @@ _$_State _$$_StateFromJson(Map<String, dynamic> json) => _$_State(
       updatedBy: json['updatedBy'] as String?,
     );
 
-Map<String, dynamic> _$$_StateToJson(_$_State instance) => <String, dynamic>{
+Map<String, dynamic> _$$StateImplToJson(_$StateImpl instance) =>
+    <String, dynamic>{
       'descriptor': instance.descriptor?.toJson(),
       'updatedAt': instance.updatedAt,
       'updatedBy': instance.updatedBy,
     };
 
-_$_Payment _$$_PaymentFromJson(Map<String, dynamic> json) => _$_Payment(
+_$PaymentImpl _$$PaymentImplFromJson(Map<String, dynamic> json) =>
+    _$PaymentImpl(
       type: json['type'] as String?,
       status: json['status'] as String?,
       time: json['time'] == null
@@ -387,14 +406,15 @@ _$_Payment _$$_PaymentFromJson(Map<String, dynamic> json) => _$_Payment(
           : Time.fromJson(json['time'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PaymentToJson(_$_Payment instance) =>
+Map<String, dynamic> _$$PaymentImplToJson(_$PaymentImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'status': instance.status,
       'time': instance.time?.toJson(),
     };
 
-_$_Provider _$$_ProviderFromJson(Map<String, dynamic> json) => _$_Provider(
+_$ProviderImpl _$$ProviderImplFromJson(Map<String, dynamic> json) =>
+    _$ProviderImpl(
       id: json['id'] as String?,
       descriptor: json['descriptor'] == null
           ? null
@@ -425,7 +445,7 @@ _$_Provider _$$_ProviderFromJson(Map<String, dynamic> json) => _$_Provider(
           : Tags.fromJson(json['tags'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ProviderToJson(_$_Provider instance) =>
+Map<String, dynamic> _$$ProviderImplToJson(_$ProviderImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'descriptor': instance.descriptor?.toJson(),
@@ -440,7 +460,7 @@ Map<String, dynamic> _$$_ProviderToJson(_$_Provider instance) =>
       'tags': instance.tags?.toJson(),
     };
 
-_$_Item _$$_ItemFromJson(Map<String, dynamic> json) => _$_Item(
+_$ItemImpl _$$ItemImplFromJson(Map<String, dynamic> json) => _$ItemImpl(
       id: json['id'] as String?,
       descriptor: json['descriptor'] == null
           ? null
@@ -462,7 +482,8 @@ _$_Item _$$_ItemFromJson(Map<String, dynamic> json) => _$_Item(
           : Tags.fromJson(json['tags'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ItemToJson(_$_Item instance) => <String, dynamic>{
+Map<String, dynamic> _$$ItemImplToJson(_$ItemImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'descriptor': instance.descriptor?.toJson(),
       'price': instance.price?.toJson(),
@@ -475,7 +496,7 @@ Map<String, dynamic> _$$_ItemToJson(_$_Item instance) => <String, dynamic>{
       'tags': instance.tags?.toJson(),
     };
 
-_$_Price _$$_PriceFromJson(Map<String, dynamic> json) => _$_Price(
+_$PriceImpl _$$PriceImplFromJson(Map<String, dynamic> json) => _$PriceImpl(
       currency: json['currency'] as String?,
       value: json['value'] as String?,
       estimatedValue: json['estimatedValue'] as String?,
@@ -486,7 +507,8 @@ _$_Price _$$_PriceFromJson(Map<String, dynamic> json) => _$_Price(
       maximumValue: json['maximumValue'] as String?,
     );
 
-Map<String, dynamic> _$$_PriceToJson(_$_Price instance) => <String, dynamic>{
+Map<String, dynamic> _$$PriceImplToJson(_$PriceImpl instance) =>
+    <String, dynamic>{
       'currency': instance.currency,
       'value': instance.value,
       'estimatedValue': instance.estimatedValue,
@@ -497,17 +519,19 @@ Map<String, dynamic> _$$_PriceToJson(_$_Price instance) => <String, dynamic>{
       'maximumValue': instance.maximumValue,
     };
 
-_$_Tags _$$_TagsFromJson(Map<String, dynamic> json) => _$_Tags(
+_$TagsImpl _$$TagsImplFromJson(Map<String, dynamic> json) => _$TagsImpl(
       tag1: json['tag1'] as String?,
       tag2: json['tag2'] as String?,
     );
 
-Map<String, dynamic> _$$_TagsToJson(_$_Tags instance) => <String, dynamic>{
+Map<String, dynamic> _$$TagsImplToJson(_$TagsImpl instance) =>
+    <String, dynamic>{
       'tag1': instance.tag1,
       'tag2': instance.tag2,
     };
 
-_$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
+_$LocationImpl _$$LocationImplFromJson(Map<String, dynamic> json) =>
+    _$LocationImpl(
       id: json['id'] as String?,
       descriptor: json['descriptor'] == null
           ? null
@@ -523,7 +547,7 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
       address: json['address'] as String?,
     );
 
-Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
+Map<String, dynamic> _$$LocationImplToJson(_$LocationImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'descriptor': instance.descriptor?.toJson(),
@@ -533,24 +557,25 @@ Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
       'address': instance.address,
     };
 
-_$_City _$$_CityFromJson(Map<String, dynamic> json) => _$_City(
+_$CityImpl _$$CityImplFromJson(Map<String, dynamic> json) => _$CityImpl(
       name: json['name'] as String?,
       code: json['code'] as String?,
     );
 
-Map<String, dynamic> _$$_CityToJson(_$_City instance) => <String, dynamic>{
+Map<String, dynamic> _$$CityImplToJson(_$CityImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'code': instance.code,
     };
 
-_$_LocationDescriptor _$$_LocationDescriptorFromJson(
+_$LocationDescriptorImpl _$$LocationDescriptorImplFromJson(
         Map<String, dynamic> json) =>
-    _$_LocationDescriptor(
+    _$LocationDescriptorImpl(
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$$_LocationDescriptorToJson(
-        _$_LocationDescriptor instance) =>
+Map<String, dynamic> _$$LocationDescriptorImplToJson(
+        _$LocationDescriptorImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
     };

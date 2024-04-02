@@ -6,8 +6,8 @@ part of 'consent_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ConsentModel _$$_ConsentModelFromJson(Map<String, dynamic> json) =>
-    _$_ConsentModel(
+_$ConsentModelImpl _$$ConsentModelImplFromJson(Map<String, dynamic> json) =>
+    _$ConsentModelImpl(
       templateId: json['templateId'] as int?,
       consentVersion: json['consentVersion'] as String?,
       consentStatus:
@@ -16,7 +16,7 @@ _$_ConsentModel _$$_ConsentModelFromJson(Map<String, dynamic> json) =>
       acknowledgeDate: json['acknowledgeDate'] as String?,
     );
 
-Map<String, dynamic> _$$_ConsentModelToJson(_$_ConsentModel instance) =>
+Map<String, dynamic> _$$ConsentModelImplToJson(_$ConsentModelImpl instance) =>
     <String, dynamic>{
       'templateId': instance.templateId,
       'consentVersion': instance.consentVersion,

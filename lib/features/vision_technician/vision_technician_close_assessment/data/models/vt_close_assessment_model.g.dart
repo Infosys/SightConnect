@@ -6,9 +6,9 @@ part of 'vt_close_assessment_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CloseAssessmentDto _$$_CloseAssessmentDtoFromJson(
+_$CloseAssessmentDtoImpl _$$CloseAssessmentDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CloseAssessmentDto(
+    _$CloseAssessmentDtoImpl(
       encounterId: json['encounterId'] as int?,
       diagnosticReportId: json['diagnosticReportId'] as int?,
       organizationCode: json['organizationCode'] as int?,
@@ -31,8 +31,8 @@ _$_CloseAssessmentDto _$$_CloseAssessmentDtoFromJson(
       mrn: json['mrn'] as String?,
     );
 
-Map<String, dynamic> _$$_CloseAssessmentDtoToJson(
-        _$_CloseAssessmentDto instance) =>
+Map<String, dynamic> _$$CloseAssessmentDtoImplToJson(
+        _$CloseAssessmentDtoImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'diagnosticReportId': instance.diagnosticReportId,
@@ -59,13 +59,13 @@ const _$AchievementStatusEnumMap = {
   AchievementStatus.ACHIEVED: 'ACHIEVED',
 };
 
-_$_PerformerDto _$$_PerformerDtoFromJson(Map<String, dynamic> json) =>
-    _$_PerformerDto(
+_$PerformerDtoImpl _$$PerformerDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PerformerDtoImpl(
       role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
       identifier: json['identifier'] as int?,
     );
 
-Map<String, dynamic> _$$_PerformerDtoToJson(_$_PerformerDto instance) =>
+Map<String, dynamic> _$$PerformerDtoImplToJson(_$PerformerDtoImpl instance) =>
     <String, dynamic>{
       'role': _$RoleEnumMap[instance.role],
       'identifier': instance.identifier,
@@ -75,13 +75,14 @@ const _$RoleEnumMap = {
   Role.VISION_TECHNICIAN: 'VISION_TECHNICIAN',
 };
 
-_$_Outcome _$$_OutcomeFromJson(Map<String, dynamic> json) => _$_Outcome(
+_$OutcomeImpl _$$OutcomeImplFromJson(Map<String, dynamic> json) =>
+    _$OutcomeImpl(
       action: $enumDecodeNullable(_$ActionOutcomeEnumMap, json['action']),
       goalOutcome:
           $enumDecodeNullable(_$GoalOutComeEnumMap, json['goalOutcome']),
     );
 
-Map<String, dynamic> _$$_OutcomeToJson(_$_Outcome instance) =>
+Map<String, dynamic> _$$OutcomeImplToJson(_$OutcomeImpl instance) =>
     <String, dynamic>{
       'action': _$ActionOutcomeEnumMap[instance.action],
       'goalOutcome': _$GoalOutComeEnumMap[instance.goalOutcome],

@@ -6,9 +6,9 @@ part of 'vg_event_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VisionGuardianEventModel _$$_VisionGuardianEventModelFromJson(
+_$VisionGuardianEventModelImpl _$$VisionGuardianEventModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_VisionGuardianEventModel(
+    _$VisionGuardianEventModelImpl(
       id: json['id'] as int?,
       title: json['title'] as String?,
       description: json['description'] as String?,
@@ -30,8 +30,8 @@ _$_VisionGuardianEventModel _$$_VisionGuardianEventModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_VisionGuardianEventModelToJson(
-        _$_VisionGuardianEventModel instance) =>
+Map<String, dynamic> _$$VisionGuardianEventModelImplToJson(
+        _$VisionGuardianEventModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -48,9 +48,9 @@ Map<String, dynamic> _$$_VisionGuardianEventModelToJson(
       'addresses': instance.addresses?.map((e) => e.toJson()).toList(),
     };
 
-_$_VisionGuardianEventImage _$$_VisionGuardianEventImageFromJson(
+_$VisionGuardianEventImageImpl _$$VisionGuardianEventImageImplFromJson(
         Map<String, dynamic> json) =>
-    _$_VisionGuardianEventImage(
+    _$VisionGuardianEventImageImpl(
       id: json['id'] as int?,
       baseUrl: json['baseUrl'] as String?,
       endpoint: json['endpoint'] as String?,
@@ -60,8 +60,8 @@ _$_VisionGuardianEventImage _$$_VisionGuardianEventImageFromJson(
       isDeleted: json['isDeleted'] as bool?,
     );
 
-Map<String, dynamic> _$$_VisionGuardianEventImageToJson(
-        _$_VisionGuardianEventImage instance) =>
+Map<String, dynamic> _$$VisionGuardianEventImageImplToJson(
+        _$VisionGuardianEventImageImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'baseUrl': instance.baseUrl,
@@ -72,9 +72,9 @@ Map<String, dynamic> _$$_VisionGuardianEventImageToJson(
       'isDeleted': instance.isDeleted,
     };
 
-_$_VisionGuardianEventAddress _$$_VisionGuardianEventAddressFromJson(
+_$VisionGuardianEventAddressImpl _$$VisionGuardianEventAddressImplFromJson(
         Map<String, dynamic> json) =>
-    _$_VisionGuardianEventAddress(
+    _$VisionGuardianEventAddressImpl(
       id: json['id'] as int?,
       venueName: json['venueName'] as String?,
       addressLine1: json['addressLine1'] as String?,
@@ -94,8 +94,8 @@ _$_VisionGuardianEventAddress _$$_VisionGuardianEventAddressFromJson(
       isDeleted: json['isDeleted'] as bool?,
     );
 
-Map<String, dynamic> _$$_VisionGuardianEventAddressToJson(
-        _$_VisionGuardianEventAddress instance) =>
+Map<String, dynamic> _$$VisionGuardianEventAddressImplToJson(
+        _$VisionGuardianEventAddressImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'venueName': instance.venueName,

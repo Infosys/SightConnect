@@ -6,8 +6,8 @@ part of 'vt_patient_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VTPatientDto _$$_VTPatientDtoFromJson(Map<String, dynamic> json) =>
-    _$_VTPatientDto(
+_$VTPatientDtoImpl _$$VTPatientDtoImplFromJson(Map<String, dynamic> json) =>
+    _$VTPatientDtoImpl(
       id: json['id'] as int?,
       name: json['name'] as String?,
       mobile: json['mobile'] as String?,
@@ -28,7 +28,7 @@ _$_VTPatientDto _$$_VTPatientDtoFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$SeverityCategoryEnumMap, json['category']),
     );
 
-Map<String, dynamic> _$$_VTPatientDtoToJson(_$_VTPatientDto instance) =>
+Map<String, dynamic> _$$VTPatientDtoImplToJson(_$VTPatientDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

@@ -129,6 +129,7 @@ class VtTriageProvider extends ChangeNotifier {
         patientId: patientDetails.id,
         serviceType: ServiceType.OPTOMETRY,
         tenantCode: assessment.tenantCode,
+        organizationCode: assessment.organizationCode,
         performer: [
           Performer(
             role: PerformerRole.VISION_TECHNICIAN,

@@ -6,9 +6,9 @@ part of 'optometrician_dashboard_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OptometricianDashboardModel _$$_OptometricianDashboardModelFromJson(
+_$OptometricianDashboardModelImpl _$$OptometricianDashboardModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OptometricianDashboardModel(
+    _$OptometricianDashboardModelImpl(
       totalAssessmentsThisMonth: json['totalAssessmentsThisMonth'] as int?,
       totalAssessmentsToday: json['totalAssessmentsToday'] as int?,
       totalAssessmentsThisMonthByOptometrist:
@@ -17,8 +17,8 @@ _$_OptometricianDashboardModel _$$_OptometricianDashboardModelFromJson(
           json['totalAssessmentsTodayByOptometrist'] as int?,
     );
 
-Map<String, dynamic> _$$_OptometricianDashboardModelToJson(
-        _$_OptometricianDashboardModel instance) =>
+Map<String, dynamic> _$$OptometricianDashboardModelImplToJson(
+        _$OptometricianDashboardModelImpl instance) =>
     <String, dynamic>{
       'totalAssessmentsThisMonth': instance.totalAssessmentsThisMonth,
       'totalAssessmentsToday': instance.totalAssessmentsToday,

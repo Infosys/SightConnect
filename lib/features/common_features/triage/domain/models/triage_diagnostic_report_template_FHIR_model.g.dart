@@ -6,9 +6,10 @@ part of 'triage_diagnostic_report_template_FHIR_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DiagnosticReportTemplateFHIRModel
-    _$$_DiagnosticReportTemplateFHIRModelFromJson(Map<String, dynamic> json) =>
-        _$_DiagnosticReportTemplateFHIRModel(
+_$DiagnosticReportTemplateFHIRModelImpl
+    _$$DiagnosticReportTemplateFHIRModelImplFromJson(
+            Map<String, dynamic> json) =>
+        _$DiagnosticReportTemplateFHIRModelImpl(
           id: json['id'] as int?,
           name: json['name'] as String?,
           organizationCode: json['organizationCode'] as int?,
@@ -36,8 +37,8 @@ _$_DiagnosticReportTemplateFHIRModel
                   .toList(),
         );
 
-Map<String, dynamic> _$$_DiagnosticReportTemplateFHIRModelToJson(
-        _$_DiagnosticReportTemplateFHIRModel instance) =>
+Map<String, dynamic> _$$DiagnosticReportTemplateFHIRModelImplToJson(
+        _$DiagnosticReportTemplateFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -70,9 +71,9 @@ const _$TestCodeEnumMap = {
   TestCode.EYE_TEST: 'EYE_TEST',
 };
 
-_$_ImagingStudyFHIRModel _$$_ImagingStudyFHIRModelFromJson(
+_$ImagingStudyFHIRModelImpl _$$ImagingStudyFHIRModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ImagingStudyFHIRModel(
+    _$ImagingStudyFHIRModelImpl(
       id: json['id'] as int?,
       description: json['description'] as String?,
       imagingSelectionTemplate:
@@ -86,8 +87,8 @@ _$_ImagingStudyFHIRModel _$$_ImagingStudyFHIRModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_ImagingStudyFHIRModelToJson(
-        _$_ImagingStudyFHIRModel instance) =>
+Map<String, dynamic> _$$ImagingStudyFHIRModelImplToJson(
+        _$ImagingStudyFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'description': instance.description,
@@ -97,9 +98,10 @@ Map<String, dynamic> _$$_ImagingStudyFHIRModelToJson(
           instance.languageBasedText?.map((e) => e.toJson()).toList(),
     };
 
-_$_ImagingSelectionTemplateFHIRModel
-    _$$_ImagingSelectionTemplateFHIRModelFromJson(Map<String, dynamic> json) =>
-        _$_ImagingSelectionTemplateFHIRModel(
+_$ImagingSelectionTemplateFHIRModelImpl
+    _$$ImagingSelectionTemplateFHIRModelImplFromJson(
+            Map<String, dynamic> json) =>
+        _$ImagingSelectionTemplateFHIRModelImpl(
           id: json['id'] as int?,
           name: json['name'] as String?,
           description: json['description'] as String?,
@@ -112,8 +114,8 @@ _$_ImagingSelectionTemplateFHIRModel
               .toList(),
         );
 
-Map<String, dynamic> _$$_ImagingSelectionTemplateFHIRModelToJson(
-        _$_ImagingSelectionTemplateFHIRModel instance) =>
+Map<String, dynamic> _$$ImagingSelectionTemplateFHIRModelImplToJson(
+        _$ImagingSelectionTemplateFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -143,17 +145,17 @@ const _$FileTypeEnumMap = {
   FileType.JPG: 'JPG',
 };
 
-_$_RelatedImageFHIRModel _$$_RelatedImageFHIRModelFromJson(
+_$RelatedImageFHIRModelImpl _$$RelatedImageFHIRModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_RelatedImageFHIRModel(
+    _$RelatedImageFHIRModelImpl(
       id: json['id'] as int?,
       imageTitle: json['imageTitle'] as String?,
       url: json['url'] as String?,
       filetype: $enumDecodeNullable(_$FileTypeEnumMap, json['filetype']),
     );
 
-Map<String, dynamic> _$$_RelatedImageFHIRModelToJson(
-        _$_RelatedImageFHIRModel instance) =>
+Map<String, dynamic> _$$RelatedImageFHIRModelImplToJson(
+        _$RelatedImageFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'imageTitle': instance.imageTitle,
@@ -161,41 +163,44 @@ Map<String, dynamic> _$$_RelatedImageFHIRModelToJson(
       'filetype': _$FileTypeEnumMap[instance.filetype],
     };
 
-_$_ObservationDefinitionFHIRModel _$$_ObservationDefinitionFHIRModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_ObservationDefinitionFHIRModel(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      category:
-          $enumDecodeNullable(_$ObservationCategoryEnumMap, json['category']),
-      bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
-      code: $enumDecodeNullable(_$ObservationCodeEnumMap, json['code']),
-      method: $enumDecodeNullable(_$ObservationMethodEnumMap, json['method']),
-      jurisdiction:
-          $enumDecodeNullable(_$JurisdictionEnumMap, json['jurisdiction']),
-      observationDefinition: (json['observationDefinition'] as List<dynamic>?)
-          ?.map((e) =>
-              ObservationDefinitionModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      dataComponent: (json['dataComponent'] as List<dynamic>?)
-          ?.map(
-              (e) => DataComponentFHIRModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      relatedImage: (json['relatedImage'] as List<dynamic>?)
-          ?.map(
-              (e) => RelatedImageFHIRModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      qualifiedValue: (json['qualifiedValue'] as List<dynamic>?)
-          ?.map((e) => QualifiedValueModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      languageBasedText: (json['languageBasedText'] as List<dynamic>?)
-          ?.map(
-              (e) => LanguageBasedTextModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+_$ObservationDefinitionFHIRModelImpl
+    _$$ObservationDefinitionFHIRModelImplFromJson(Map<String, dynamic> json) =>
+        _$ObservationDefinitionFHIRModelImpl(
+          id: json['id'] as int?,
+          name: json['name'] as String?,
+          category: $enumDecodeNullable(
+              _$ObservationCategoryEnumMap, json['category']),
+          bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
+          code: $enumDecodeNullable(_$ObservationCodeEnumMap, json['code']),
+          method:
+              $enumDecodeNullable(_$ObservationMethodEnumMap, json['method']),
+          jurisdiction:
+              $enumDecodeNullable(_$JurisdictionEnumMap, json['jurisdiction']),
+          observationDefinition:
+              (json['observationDefinition'] as List<dynamic>?)
+                  ?.map((e) => ObservationDefinitionModel.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList(),
+          dataComponent: (json['dataComponent'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataComponentFHIRModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+          relatedImage: (json['relatedImage'] as List<dynamic>?)
+              ?.map((e) =>
+                  RelatedImageFHIRModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+          qualifiedValue: (json['qualifiedValue'] as List<dynamic>?)
+              ?.map((e) =>
+                  QualifiedValueModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+          languageBasedText: (json['languageBasedText'] as List<dynamic>?)
+              ?.map((e) =>
+                  LanguageBasedTextModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
 
-Map<String, dynamic> _$$_ObservationDefinitionFHIRModelToJson(
-        _$_ObservationDefinitionFHIRModel instance) =>
+Map<String, dynamic> _$$ObservationDefinitionFHIRModelImplToJson(
+        _$ObservationDefinitionFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -245,9 +250,9 @@ const _$JurisdictionEnumMap = {
   Jurisdiction.INDIA: 'INDIA',
 };
 
-_$_ObservationDefinitionModel _$$_ObservationDefinitionModelFromJson(
+_$ObservationDefinitionModelImpl _$$ObservationDefinitionModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ObservationDefinitionModel(
+    _$ObservationDefinitionModelImpl(
       id: json['id'] as int?,
       name: json['name'] as String?,
       description: json['description'] as String?,
@@ -260,8 +265,8 @@ _$_ObservationDefinitionModel _$$_ObservationDefinitionModelFromJson(
           $enumDecodeNullable(_$JurisdictionEnumMap, json['jurisdiction']),
     );
 
-Map<String, dynamic> _$$_ObservationDefinitionModelToJson(
-        _$_ObservationDefinitionModel instance) =>
+Map<String, dynamic> _$$ObservationDefinitionModelImplToJson(
+        _$ObservationDefinitionModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -273,9 +278,9 @@ Map<String, dynamic> _$$_ObservationDefinitionModelToJson(
       'jurisdiction': _$JurisdictionEnumMap[instance.jurisdiction],
     };
 
-_$_DataComponentFHIRModel _$$_DataComponentFHIRModelFromJson(
+_$DataComponentFHIRModelImpl _$$DataComponentFHIRModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DataComponentFHIRModel(
+    _$DataComponentFHIRModelImpl(
       id: json['id'] as int?,
       permittedDataType: $enumDecodeNullable(
           _$PermittedDataTypeEnumMap, json['permittedDataType']),
@@ -286,8 +291,8 @@ _$_DataComponentFHIRModel _$$_DataComponentFHIRModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_DataComponentFHIRModelToJson(
-        _$_DataComponentFHIRModel instance) =>
+Map<String, dynamic> _$$DataComponentFHIRModelImplToJson(
+        _$DataComponentFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'permittedDataType':
@@ -314,9 +319,9 @@ const _$PermittedUnitEnumMap = {
   PermittedUnit.Number: 'Number',
 };
 
-_$_QualifiedValueModel _$$_QualifiedValueModelFromJson(
+_$QualifiedValueModelImpl _$$QualifiedValueModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QualifiedValueModel(
+    _$QualifiedValueModelImpl(
       id: json['id'] as int?,
       isRange: json['isRange'] as bool?,
       value: json['value'] as String?,
@@ -336,8 +341,8 @@ _$_QualifiedValueModel _$$_QualifiedValueModelFromJson(
               json['dataComponent'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_QualifiedValueModelToJson(
-        _$_QualifiedValueModel instance) =>
+Map<String, dynamic> _$$QualifiedValueModelImplToJson(
+        _$QualifiedValueModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'isRange': instance.isRange,
@@ -366,23 +371,23 @@ const _$GenderEnumMap = {
   Gender.OTHER: 'OTHER',
 };
 
-_$_RangeModel _$$_RangeModelFromJson(Map<String, dynamic> json) =>
-    _$_RangeModel(
+_$RangeModelImpl _$$RangeModelImplFromJson(Map<String, dynamic> json) =>
+    _$RangeModelImpl(
       id: json['id'] as int?,
       low: (json['low'] as num?)?.toDouble(),
       high: (json['high'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_RangeModelToJson(_$_RangeModel instance) =>
+Map<String, dynamic> _$$RangeModelImplToJson(_$RangeModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'low': instance.low,
       'high': instance.high,
     };
 
-_$_DataComponentModel _$$_DataComponentModelFromJson(
+_$DataComponentModelImpl _$$DataComponentModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DataComponentModel(
+    _$DataComponentModelImpl(
       id: json['id'] as int?,
       permittedDataType: $enumDecodeNullable(
           _$PermittedDataTypeEnumMap, json['permittedDataType']),
@@ -394,8 +399,8 @@ _$_DataComponentModel _$$_DataComponentModelFromJson(
               json['observationDefinition'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_DataComponentModelToJson(
-        _$_DataComponentModel instance) =>
+Map<String, dynamic> _$$DataComponentModelImplToJson(
+        _$DataComponentModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'permittedDataType':
@@ -404,9 +409,9 @@ Map<String, dynamic> _$$_DataComponentModelToJson(
       'observationDefinition': instance.observationDefinition?.toJson(),
     };
 
-_$_QuestionnaireFHIRModel _$$_QuestionnaireFHIRModelFromJson(
+_$QuestionnaireFHIRModelImpl _$$QuestionnaireFHIRModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QuestionnaireFHIRModel(
+    _$QuestionnaireFHIRModelImpl(
       id: json['id'] as int?,
       name: json['name'] as String?,
       title: json['title'] as String?,
@@ -441,8 +446,8 @@ _$_QuestionnaireFHIRModel _$$_QuestionnaireFHIRModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_QuestionnaireFHIRModelToJson(
-        _$_QuestionnaireFHIRModel instance) =>
+Map<String, dynamic> _$$QuestionnaireFHIRModelImplToJson(
+        _$QuestionnaireFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -484,9 +489,9 @@ const _$QuestionnaireCodeEnumMap = {
       'History_of_Eyes_disorders_Narrative',
 };
 
-_$_QuestionnaireModel _$$_QuestionnaireModelFromJson(
+_$QuestionnaireModelImpl _$$QuestionnaireModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QuestionnaireModel(
+    _$QuestionnaireModelImpl(
       id: json['id'] as int?,
       name: json['name'] as String?,
       title: json['title'] as String?,
@@ -513,8 +518,8 @@ _$_QuestionnaireModel _$$_QuestionnaireModelFromJson(
       publisherType: json['publisherType'] as String?,
     );
 
-Map<String, dynamic> _$$_QuestionnaireModelToJson(
-        _$_QuestionnaireModel instance) =>
+Map<String, dynamic> _$$QuestionnaireModelImplToJson(
+        _$QuestionnaireModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -539,9 +544,9 @@ Map<String, dynamic> _$$_QuestionnaireModelToJson(
       'publisherType': instance.publisherType,
     };
 
-_$_QuestionnaireItemFHIRModel _$$_QuestionnaireItemFHIRModelFromJson(
+_$QuestionnaireItemFHIRModelImpl _$$QuestionnaireItemFHIRModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QuestionnaireItemFHIRModel(
+    _$QuestionnaireItemFHIRModelImpl(
       id: json['id'] as int?,
       linkId: json['linkId'] as String?,
       prefix: json['prefix'] as String?,
@@ -592,8 +597,8 @@ _$_QuestionnaireItemFHIRModel _$$_QuestionnaireItemFHIRModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_QuestionnaireItemFHIRModelToJson(
-        _$_QuestionnaireItemFHIRModel instance) =>
+Map<String, dynamic> _$$QuestionnaireItemFHIRModelImplToJson(
+        _$QuestionnaireItemFHIRModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'linkId': instance.linkId,
@@ -649,8 +654,9 @@ const _$AnswerConstraintEnumMap = {
   AnswerConstraint.OptionsOrString: 'OptionsOrString',
 };
 
-_$_AnswerOptionModel _$$_AnswerOptionModelFromJson(Map<String, dynamic> json) =>
-    _$_AnswerOptionModel(
+_$AnswerOptionModelImpl _$$AnswerOptionModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AnswerOptionModelImpl(
       id: json['id'] as int?,
       initialSelected: json['initialSelected'] as bool?,
       answer: json['answer'] == null
@@ -662,8 +668,8 @@ _$_AnswerOptionModel _$$_AnswerOptionModelFromJson(Map<String, dynamic> json) =>
               json['questionnaireItem'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AnswerOptionModelToJson(
-        _$_AnswerOptionModel instance) =>
+Map<String, dynamic> _$$AnswerOptionModelImplToJson(
+        _$AnswerOptionModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'initialSelected': instance.initialSelected,
@@ -671,24 +677,24 @@ Map<String, dynamic> _$$_AnswerOptionModelToJson(
       'questionnaireItem': instance.questionnaireItem?.toJson(),
     };
 
-_$_AnswerValueSetModel _$$_AnswerValueSetModelFromJson(
+_$AnswerValueSetModelImpl _$$AnswerValueSetModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnswerValueSetModel(
+    _$AnswerValueSetModelImpl(
       id: json['id'] as int?,
       valueId: json['valueId'] as int?,
       value: json['value'] as String?,
     );
 
-Map<String, dynamic> _$$_AnswerValueSetModelToJson(
-        _$_AnswerValueSetModel instance) =>
+Map<String, dynamic> _$$AnswerValueSetModelImplToJson(
+        _$AnswerValueSetModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'valueId': instance.valueId,
       'value': instance.value,
     };
 
-_$_AnswerModel _$$_AnswerModelFromJson(Map<String, dynamic> json) =>
-    _$_AnswerModel(
+_$AnswerModelImpl _$$AnswerModelImplFromJson(Map<String, dynamic> json) =>
+    _$AnswerModelImpl(
       id: json['id'] as int?,
       answerBoolean: json['answerBoolean'] as bool?,
       answerDecimal: (json['answerDecimal'] as num?)?.toDouble(),
@@ -705,7 +711,7 @@ _$_AnswerModel _$$_AnswerModelFromJson(Map<String, dynamic> json) =>
               json['answerItemWeight'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AnswerModelToJson(_$_AnswerModel instance) =>
+Map<String, dynamic> _$$AnswerModelImplToJson(_$AnswerModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'answerBoolean': instance.answerBoolean,
@@ -719,9 +725,9 @@ Map<String, dynamic> _$$_AnswerModelToJson(_$_AnswerModel instance) =>
       'answerItemWeight': instance.answerItemWeight?.toJson(),
     };
 
-_$_AnswerItemWeightModel _$$_AnswerItemWeightModelFromJson(
+_$AnswerItemWeightModelImpl _$$AnswerItemWeightModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnswerItemWeightModel(
+    _$AnswerItemWeightModelImpl(
       id: json['id'] as int?,
       value: (json['value'] as num?)?.toDouble(),
       answerId: json['answerId'] as int?,
@@ -731,8 +737,8 @@ _$_AnswerItemWeightModel _$$_AnswerItemWeightModelFromJson(
               json['questionResponseWeight'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AnswerItemWeightModelToJson(
-        _$_AnswerItemWeightModel instance) =>
+Map<String, dynamic> _$$AnswerItemWeightModelImplToJson(
+        _$AnswerItemWeightModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'value': instance.value,
@@ -740,9 +746,9 @@ Map<String, dynamic> _$$_AnswerItemWeightModelToJson(
       'questionResponseWeight': instance.questionResponseWeight?.toJson(),
     };
 
-_$_QuestionResponseWeightModel _$$_QuestionResponseWeightModelFromJson(
+_$QuestionResponseWeightModelImpl _$$QuestionResponseWeightModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QuestionResponseWeightModel(
+    _$QuestionResponseWeightModelImpl(
       id: json['id'] as int?,
       quesId: json['quesId'] as int?,
       isRange: json['isRange'] as bool?,
@@ -750,8 +756,8 @@ _$_QuestionResponseWeightModel _$$_QuestionResponseWeightModelFromJson(
       isAbsolute: json['isAbsolute'] as bool?,
     );
 
-Map<String, dynamic> _$$_QuestionResponseWeightModelToJson(
-        _$_QuestionResponseWeightModel instance) =>
+Map<String, dynamic> _$$QuestionResponseWeightModelImplToJson(
+        _$QuestionResponseWeightModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'quesId': instance.quesId,
@@ -760,9 +766,9 @@ Map<String, dynamic> _$$_QuestionResponseWeightModelToJson(
       'isAbsolute': instance.isAbsolute,
     };
 
-_$_QuestionnaireItemModel _$$_QuestionnaireItemModelFromJson(
+_$QuestionnaireItemModelImpl _$$QuestionnaireItemModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QuestionnaireItemModel(
+    _$QuestionnaireItemModelImpl(
       id: json['id'] as int?,
       linkId: json['linkId'] as String?,
       prefix: json['prefix'] as String?,
@@ -791,8 +797,8 @@ _$_QuestionnaireItemModel _$$_QuestionnaireItemModelFromJson(
               json['questionnaire'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_QuestionnaireItemModelToJson(
-        _$_QuestionnaireItemModel instance) =>
+Map<String, dynamic> _$$QuestionnaireItemModelImplToJson(
+        _$QuestionnaireItemModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'linkId': instance.linkId,
@@ -811,8 +817,8 @@ Map<String, dynamic> _$$_QuestionnaireItemModelToJson(
       'questionnaire': instance.questionnaire?.toJson(),
     };
 
-_$_ActionOnModel _$$_ActionOnModelFromJson(Map<String, dynamic> json) =>
-    _$_ActionOnModel(
+_$ActionOnModelImpl _$$ActionOnModelImplFromJson(Map<String, dynamic> json) =>
+    _$ActionOnModelImpl(
       id: json['id'] as int?,
       operator: $enumDecodeNullable(_$OperatorEnumMap, json['operator']),
       actionType: $enumDecodeNullable(_$ActionTypeEnumMap, json['actionType']),
@@ -825,7 +831,7 @@ _$_ActionOnModel _$$_ActionOnModelFromJson(Map<String, dynamic> json) =>
               json['questionnaireItem'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ActionOnModelToJson(_$_ActionOnModel instance) =>
+Map<String, dynamic> _$$ActionOnModelImplToJson(_$ActionOnModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'operator': _$OperatorEnumMap[instance.operator],
@@ -850,8 +856,9 @@ const _$ActionTypeEnumMap = {
   ActionType.EXIT_ASSESSMENT: 'EXIT_ASSESSMENT',
 };
 
-_$_EnableWhenModel _$$_EnableWhenModelFromJson(Map<String, dynamic> json) =>
-    _$_EnableWhenModel(
+_$EnableWhenModelImpl _$$EnableWhenModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$EnableWhenModelImpl(
       id: json['id'] as int?,
       question: json['question'] as String?,
       operator: $enumDecodeNullable(_$OperatorEnumMap, json['operator']),
@@ -864,7 +871,8 @@ _$_EnableWhenModel _$$_EnableWhenModelFromJson(Map<String, dynamic> json) =>
               json['questionnaireItem'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_EnableWhenModelToJson(_$_EnableWhenModel instance) =>
+Map<String, dynamic> _$$EnableWhenModelImplToJson(
+        _$EnableWhenModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'question': instance.question,
@@ -873,9 +881,9 @@ Map<String, dynamic> _$$_EnableWhenModelToJson(_$_EnableWhenModel instance) =>
       'questionnaireItem': instance.questionnaireItem?.toJson(),
     };
 
-_$_LanguageBasedTextModel _$$_LanguageBasedTextModelFromJson(
+_$LanguageBasedTextModelImpl _$$LanguageBasedTextModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_LanguageBasedTextModel(
+    _$LanguageBasedTextModelImpl(
       id: json['id'] as int?,
       textId: json['textId'] as String?,
       langId: json['langId'] as int?,
@@ -883,8 +891,8 @@ _$_LanguageBasedTextModel _$$_LanguageBasedTextModelFromJson(
       isDefault: json['isDefault'] as bool?,
     );
 
-Map<String, dynamic> _$$_LanguageBasedTextModelToJson(
-        _$_LanguageBasedTextModel instance) =>
+Map<String, dynamic> _$$LanguageBasedTextModelImplToJson(
+        _$LanguageBasedTextModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'textId': instance.textId,
@@ -893,17 +901,17 @@ Map<String, dynamic> _$$_LanguageBasedTextModelToJson(
       'isDefault': instance.isDefault,
     };
 
-_$_ObservationValueWeightModel _$$_ObservationValueWeightModelFromJson(
+_$ObservationValueWeightModelImpl _$$ObservationValueWeightModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ObservationValueWeightModel(
+    _$ObservationValueWeightModelImpl(
       id: json['id'] as int?,
       observationId: json['observationId'] as int?,
       organizationId: json['organizationId'] as int?,
       value: (json['value'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_ObservationValueWeightModelToJson(
-        _$_ObservationValueWeightModel instance) =>
+Map<String, dynamic> _$$ObservationValueWeightModelImplToJson(
+        _$ObservationValueWeightModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'observationId': instance.observationId,

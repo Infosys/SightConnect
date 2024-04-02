@@ -6,8 +6,9 @@ part of 'triage_assessment_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TriageAssessment _$$_TriageAssessmentFromJson(Map<String, dynamic> json) =>
-    _$_TriageAssessment(
+_$TriageAssessmentImpl _$$TriageAssessmentImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TriageAssessmentImpl(
       code: json['code'] as int?,
       name: json['name'] as String?,
       organizationCode: json['organizationCode'] as String?,
@@ -24,7 +25,8 @@ _$_TriageAssessment _$$_TriageAssessmentFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_TriageAssessmentToJson(_$_TriageAssessment instance) =>
+Map<String, dynamic> _$$TriageAssessmentImplToJson(
+        _$TriageAssessmentImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'name': instance.name,
@@ -39,35 +41,36 @@ Map<String, dynamic> _$$_TriageAssessmentToJson(_$_TriageAssessment instance) =>
           instance.mediaListSections?.map((e) => e.toJson()).toList(),
     };
 
-_$_QuestionnaireSection _$$_QuestionnaireSectionFromJson(
+_$QuestionnaireSectionImpl _$$QuestionnaireSectionImplFromJson(
         Map<String, dynamic> json) =>
-    _$_QuestionnaireSection(
+    _$QuestionnaireSectionImpl(
       questionnaire: (json['questionnaire'] as List<dynamic>?)
           ?.map((e) => Questionnaire.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_QuestionnaireSectionToJson(
-        _$_QuestionnaireSection instance) =>
+Map<String, dynamic> _$$QuestionnaireSectionImplToJson(
+        _$QuestionnaireSectionImpl instance) =>
     <String, dynamic>{
       'questionnaire': instance.questionnaire?.map((e) => e.toJson()).toList(),
     };
 
-_$_Questionnaire _$$_QuestionnaireFromJson(Map<String, dynamic> json) =>
-    _$_Questionnaire(
+_$QuestionnaireImpl _$$QuestionnaireImplFromJson(Map<String, dynamic> json) =>
+    _$QuestionnaireImpl(
       description: json['description'] as String?,
       questions: (json['questions'] as List<dynamic>?)
           ?.map((e) => Question.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_QuestionnaireToJson(_$_Questionnaire instance) =>
+Map<String, dynamic> _$$QuestionnaireImplToJson(_$QuestionnaireImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
       'questions': instance.questions?.map((e) => e.toJson()).toList(),
     };
 
-_$_Question _$$_QuestionFromJson(Map<String, dynamic> json) => _$_Question(
+_$QuestionImpl _$$QuestionImplFromJson(Map<String, dynamic> json) =>
+    _$QuestionImpl(
       id: json['id'] as int?,
       code: json['code'] as int?,
       statement: json['statement'] as String?,
@@ -80,7 +83,7 @@ _$_Question _$$_QuestionFromJson(Map<String, dynamic> json) => _$_Question(
       weight: json['weight'] as int?,
     );
 
-Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
+Map<String, dynamic> _$$QuestionImplToJson(_$QuestionImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'code': instance.code,
@@ -92,53 +95,56 @@ Map<String, dynamic> _$$_QuestionToJson(_$_Question instance) =>
       'weight': instance.weight,
     };
 
-_$_ActionOn _$$_ActionOnFromJson(Map<String, dynamic> json) => _$_ActionOn(
+_$ActionOnImpl _$$ActionOnImplFromJson(Map<String, dynamic> json) =>
+    _$ActionOnImpl(
       operator: json['operator'] as String?,
       actionType: json['actionType'] as String?,
       answer: json['answer'] as String?,
     );
 
-Map<String, dynamic> _$$_ActionOnToJson(_$_ActionOn instance) =>
+Map<String, dynamic> _$$ActionOnImplToJson(_$ActionOnImpl instance) =>
     <String, dynamic>{
       'operator': instance.operator,
       'actionType': instance.actionType,
       'answer': instance.answer,
     };
 
-_$_ObservationsSection _$$_ObservationsSectionFromJson(
+_$ObservationsSectionImpl _$$ObservationsSectionImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ObservationsSection(
+    _$ObservationsSectionImpl(
       description: json['description'] as String?,
       individualMeasure: (json['individualMeasure'] as List<dynamic>?)
           ?.map((e) => IndividualMeasure.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_ObservationsSectionToJson(
-        _$_ObservationsSection instance) =>
+Map<String, dynamic> _$$ObservationsSectionImplToJson(
+        _$ObservationsSectionImpl instance) =>
     <String, dynamic>{
       'description': instance.description,
       'individualMeasure':
           instance.individualMeasure?.map((e) => e.toJson()).toList(),
     };
 
-_$_IndividualMeasure _$$_IndividualMeasureFromJson(Map<String, dynamic> json) =>
-    _$_IndividualMeasure(
+_$IndividualMeasureImpl _$$IndividualMeasureImplFromJson(
+        Map<String, dynamic> json) =>
+    _$IndividualMeasureImpl(
       observationCode: json['observationCode'] as int?,
       statement: json['statement'] as String?,
       valueType: json['valueType'] as String?,
     );
 
-Map<String, dynamic> _$$_IndividualMeasureToJson(
-        _$_IndividualMeasure instance) =>
+Map<String, dynamic> _$$IndividualMeasureImplToJson(
+        _$IndividualMeasureImpl instance) =>
     <String, dynamic>{
       'observationCode': instance.observationCode,
       'statement': instance.statement,
       'valueType': instance.valueType,
     };
 
-_$_MediaListSection _$$_MediaListSectionFromJson(Map<String, dynamic> json) =>
-    _$_MediaListSection(
+_$MediaListSectionImpl _$$MediaListSectionImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MediaListSectionImpl(
       mediaCode: json['mediaCode'] as int?,
       description: json['description'] as String?,
       type: json['type'] as String?,
@@ -146,7 +152,8 @@ _$_MediaListSection _$$_MediaListSectionFromJson(Map<String, dynamic> json) =>
       fileTpe: json['fileTpe'] as String?,
     );
 
-Map<String, dynamic> _$$_MediaListSectionToJson(_$_MediaListSection instance) =>
+Map<String, dynamic> _$$MediaListSectionImplToJson(
+        _$MediaListSectionImpl instance) =>
     <String, dynamic>{
       'mediaCode': instance.mediaCode,
       'description': instance.description,

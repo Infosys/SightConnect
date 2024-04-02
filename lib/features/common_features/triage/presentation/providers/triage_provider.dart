@@ -112,6 +112,7 @@ class TriageProvider extends ChangeNotifier {
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
       tenantCode: assessment.tenantCode,
+      organizationCode : assessment.organizationCode,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
@@ -216,6 +217,7 @@ class TriageProvider extends ChangeNotifier {
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
       tenantCode: assessment.tenantCode,
+      organizationCode : assessment.organizationCode,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
