@@ -12,7 +12,7 @@ part of 'ivr_caller_details_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 IVRCallerDetailsModel _$IVRCallerDetailsModelFromJson(
     Map<String, dynamic> json) {
@@ -86,11 +86,12 @@ class _$IVRCallerDetailsModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_IVRCallerDetailsModelCopyWith<$Res>
+abstract class _$$IVRCallerDetailsModelImplCopyWith<$Res>
     implements $IVRCallerDetailsModelCopyWith<$Res> {
-  factory _$$_IVRCallerDetailsModelCopyWith(_$_IVRCallerDetailsModel value,
-          $Res Function(_$_IVRCallerDetailsModel) then) =
-      __$$_IVRCallerDetailsModelCopyWithImpl<$Res>;
+  factory _$$IVRCallerDetailsModelImplCopyWith(
+          _$IVRCallerDetailsModelImpl value,
+          $Res Function(_$IVRCallerDetailsModelImpl) then) =
+      __$$IVRCallerDetailsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,11 +102,12 @@ abstract class _$$_IVRCallerDetailsModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_IVRCallerDetailsModelCopyWithImpl<$Res>
-    extends _$IVRCallerDetailsModelCopyWithImpl<$Res, _$_IVRCallerDetailsModel>
-    implements _$$_IVRCallerDetailsModelCopyWith<$Res> {
-  __$$_IVRCallerDetailsModelCopyWithImpl(_$_IVRCallerDetailsModel _value,
-      $Res Function(_$_IVRCallerDetailsModel) _then)
+class __$$IVRCallerDetailsModelImplCopyWithImpl<$Res>
+    extends _$IVRCallerDetailsModelCopyWithImpl<$Res,
+        _$IVRCallerDetailsModelImpl>
+    implements _$$IVRCallerDetailsModelImplCopyWith<$Res> {
+  __$$IVRCallerDetailsModelImplCopyWithImpl(_$IVRCallerDetailsModelImpl _value,
+      $Res Function(_$IVRCallerDetailsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +118,7 @@ class __$$_IVRCallerDetailsModelCopyWithImpl<$Res>
     Object? callerName = freezed,
     Object? callerNumber = freezed,
   }) {
-    return _then(_$_IVRCallerDetailsModel(
+    return _then(_$IVRCallerDetailsModelImpl(
       agentMobile: freezed == agentMobile
           ? _value.agentMobile
           : agentMobile // ignore: cast_nullable_to_non_nullable
@@ -139,12 +141,12 @@ class __$$_IVRCallerDetailsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IVRCallerDetailsModel implements _IVRCallerDetailsModel {
-  const _$_IVRCallerDetailsModel(
+class _$IVRCallerDetailsModelImpl implements _IVRCallerDetailsModel {
+  const _$IVRCallerDetailsModelImpl(
       {this.agentMobile, this.callerId, this.callerName, this.callerNumber});
 
-  factory _$_IVRCallerDetailsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_IVRCallerDetailsModelFromJson(json);
+  factory _$IVRCallerDetailsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IVRCallerDetailsModelImplFromJson(json);
 
   @override
   final String? agentMobile;
@@ -161,10 +163,10 @@ class _$_IVRCallerDetailsModel implements _IVRCallerDetailsModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IVRCallerDetailsModel &&
+            other is _$IVRCallerDetailsModelImpl &&
             (identical(other.agentMobile, agentMobile) ||
                 other.agentMobile == agentMobile) &&
             (identical(other.callerId, callerId) ||
@@ -183,13 +185,13 @@ class _$_IVRCallerDetailsModel implements _IVRCallerDetailsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IVRCallerDetailsModelCopyWith<_$_IVRCallerDetailsModel> get copyWith =>
-      __$$_IVRCallerDetailsModelCopyWithImpl<_$_IVRCallerDetailsModel>(
-          this, _$identity);
+  _$$IVRCallerDetailsModelImplCopyWith<_$IVRCallerDetailsModelImpl>
+      get copyWith => __$$IVRCallerDetailsModelImplCopyWithImpl<
+          _$IVRCallerDetailsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IVRCallerDetailsModelToJson(
+    return _$$IVRCallerDetailsModelImplToJson(
       this,
     );
   }
@@ -200,10 +202,10 @@ abstract class _IVRCallerDetailsModel implements IVRCallerDetailsModel {
       {final String? agentMobile,
       final String? callerId,
       final String? callerName,
-      final String? callerNumber}) = _$_IVRCallerDetailsModel;
+      final String? callerNumber}) = _$IVRCallerDetailsModelImpl;
 
   factory _IVRCallerDetailsModel.fromJson(Map<String, dynamic> json) =
-      _$_IVRCallerDetailsModel.fromJson;
+      _$IVRCallerDetailsModelImpl.fromJson;
 
   @override
   String? get agentMobile;
@@ -215,6 +217,6 @@ abstract class _IVRCallerDetailsModel implements IVRCallerDetailsModel {
   String? get callerNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_IVRCallerDetailsModelCopyWith<_$_IVRCallerDetailsModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$IVRCallerDetailsModelImplCopyWith<_$IVRCallerDetailsModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

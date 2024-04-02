@@ -12,7 +12,7 @@ part of 'vg_event_patient_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VisionGuardianEventPatientResponseModel
     _$VisionGuardianEventPatientResponseModelFromJson(
@@ -199,12 +199,12 @@ class _$VisionGuardianEventPatientResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_VisionGuardianEventPatientResponseModelCopyWith<$Res>
+abstract class _$$VisionGuardianEventPatientResponseModelImplCopyWith<$Res>
     implements $VisionGuardianEventPatientResponseModelCopyWith<$Res> {
-  factory _$$_VisionGuardianEventPatientResponseModelCopyWith(
-          _$_VisionGuardianEventPatientResponseModel value,
-          $Res Function(_$_VisionGuardianEventPatientResponseModel) then) =
-      __$$_VisionGuardianEventPatientResponseModelCopyWithImpl<$Res>;
+  factory _$$VisionGuardianEventPatientResponseModelImplCopyWith(
+          _$VisionGuardianEventPatientResponseModelImpl value,
+          $Res Function(_$VisionGuardianEventPatientResponseModelImpl) then) =
+      __$$VisionGuardianEventPatientResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -228,13 +228,13 @@ abstract class _$$_VisionGuardianEventPatientResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VisionGuardianEventPatientResponseModelCopyWithImpl<$Res>
+class __$$VisionGuardianEventPatientResponseModelImplCopyWithImpl<$Res>
     extends _$VisionGuardianEventPatientResponseModelCopyWithImpl<$Res,
-        _$_VisionGuardianEventPatientResponseModel>
-    implements _$$_VisionGuardianEventPatientResponseModelCopyWith<$Res> {
-  __$$_VisionGuardianEventPatientResponseModelCopyWithImpl(
-      _$_VisionGuardianEventPatientResponseModel _value,
-      $Res Function(_$_VisionGuardianEventPatientResponseModel) _then)
+        _$VisionGuardianEventPatientResponseModelImpl>
+    implements _$$VisionGuardianEventPatientResponseModelImplCopyWith<$Res> {
+  __$$VisionGuardianEventPatientResponseModelImplCopyWithImpl(
+      _$VisionGuardianEventPatientResponseModelImpl _value,
+      $Res Function(_$VisionGuardianEventPatientResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -258,7 +258,7 @@ class __$$_VisionGuardianEventPatientResponseModelCopyWithImpl<$Res>
     Object? address = freezed,
     Object? dobSource = freezed,
   }) {
-    return _then(_$_VisionGuardianEventPatientResponseModel(
+    return _then(_$VisionGuardianEventPatientResponseModelImpl(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
@@ -333,9 +333,9 @@ class __$$_VisionGuardianEventPatientResponseModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VisionGuardianEventPatientResponseModel
+class _$VisionGuardianEventPatientResponseModelImpl
     implements _VisionGuardianEventPatientResponseModel {
-  _$_VisionGuardianEventPatientResponseModel(
+  _$VisionGuardianEventPatientResponseModelImpl(
       {@JsonKey(name: 'patientId') this.patientId,
       @JsonKey(name: 'registryRef') this.registryRef,
       @JsonKey(name: 'name') this.name,
@@ -355,9 +355,9 @@ class _$_VisionGuardianEventPatientResponseModel
       @JsonKey(name: 'dobSource') this.dobSource})
       : _address = address;
 
-  factory _$_VisionGuardianEventPatientResponseModel.fromJson(
+  factory _$VisionGuardianEventPatientResponseModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_VisionGuardianEventPatientResponseModelFromJson(json);
+      _$$VisionGuardianEventPatientResponseModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'patientId')
@@ -425,10 +425,10 @@ class _$_VisionGuardianEventPatientResponseModel
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VisionGuardianEventPatientResponseModel &&
+            other is _$VisionGuardianEventPatientResponseModelImpl &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.registryRef, registryRef) ||
@@ -486,14 +486,15 @@ class _$_VisionGuardianEventPatientResponseModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VisionGuardianEventPatientResponseModelCopyWith<
-          _$_VisionGuardianEventPatientResponseModel>
-      get copyWith => __$$_VisionGuardianEventPatientResponseModelCopyWithImpl<
-          _$_VisionGuardianEventPatientResponseModel>(this, _$identity);
+  _$$VisionGuardianEventPatientResponseModelImplCopyWith<
+          _$VisionGuardianEventPatientResponseModelImpl>
+      get copyWith =>
+          __$$VisionGuardianEventPatientResponseModelImplCopyWithImpl<
+              _$VisionGuardianEventPatientResponseModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisionGuardianEventPatientResponseModelToJson(
+    return _$$VisionGuardianEventPatientResponseModelImplToJson(
       this,
     );
   }
@@ -519,11 +520,11 @@ abstract class _VisionGuardianEventPatientResponseModel
           @JsonKey(name: 'parentPatientId') final int? parentPatientId,
           @JsonKey(name: 'address') final List<AddressModel>? address,
           @JsonKey(name: 'dobSource') final String? dobSource}) =
-      _$_VisionGuardianEventPatientResponseModel;
+      _$VisionGuardianEventPatientResponseModelImpl;
 
   factory _VisionGuardianEventPatientResponseModel.fromJson(
           Map<String, dynamic> json) =
-      _$_VisionGuardianEventPatientResponseModel.fromJson;
+      _$VisionGuardianEventPatientResponseModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'patientId')
@@ -578,8 +579,8 @@ abstract class _VisionGuardianEventPatientResponseModel
   String? get dobSource;
   @override
   @JsonKey(ignore: true)
-  _$$_VisionGuardianEventPatientResponseModelCopyWith<
-          _$_VisionGuardianEventPatientResponseModel>
+  _$$VisionGuardianEventPatientResponseModelImplCopyWith<
+          _$VisionGuardianEventPatientResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -729,11 +730,11 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
 }
 
 /// @nodoc
-abstract class _$$_AddressModelCopyWith<$Res>
+abstract class _$$AddressModelImplCopyWith<$Res>
     implements $AddressModelCopyWith<$Res> {
-  factory _$$_AddressModelCopyWith(
-          _$_AddressModel value, $Res Function(_$_AddressModel) then) =
-      __$$_AddressModelCopyWithImpl<$Res>;
+  factory _$$AddressModelImplCopyWith(
+          _$AddressModelImpl value, $Res Function(_$AddressModelImpl) then) =
+      __$$AddressModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -753,11 +754,11 @@ abstract class _$$_AddressModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddressModelCopyWithImpl<$Res>
-    extends _$AddressModelCopyWithImpl<$Res, _$_AddressModel>
-    implements _$$_AddressModelCopyWith<$Res> {
-  __$$_AddressModelCopyWithImpl(
-      _$_AddressModel _value, $Res Function(_$_AddressModel) _then)
+class __$$AddressModelImplCopyWithImpl<$Res>
+    extends _$AddressModelCopyWithImpl<$Res, _$AddressModelImpl>
+    implements _$$AddressModelImplCopyWith<$Res> {
+  __$$AddressModelImplCopyWithImpl(
+      _$AddressModelImpl _value, $Res Function(_$AddressModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -777,7 +778,7 @@ class __$$_AddressModelCopyWithImpl<$Res>
     Object? village = freezed,
     Object? subDistrict = freezed,
   }) {
-    return _then(_$_AddressModel(
+    return _then(_$AddressModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -836,8 +837,8 @@ class __$$_AddressModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddressModel implements _AddressModel {
-  _$_AddressModel(
+class _$AddressModelImpl implements _AddressModel {
+  _$AddressModelImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'line') this.line,
       @JsonKey(name: 'district') this.district,
@@ -852,8 +853,8 @@ class _$_AddressModel implements _AddressModel {
       @JsonKey(name: 'village') this.village,
       @JsonKey(name: 'subDistrict') this.subDistrict});
 
-  factory _$_AddressModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AddressModelFromJson(json);
+  factory _$AddressModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddressModelImplFromJson(json);
 
   @override
   @JsonKey(name: 'id')
@@ -901,10 +902,10 @@ class _$_AddressModel implements _AddressModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddressModel &&
+            other is _$AddressModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.line, line) || other.line == line) &&
             (identical(other.district, district) ||
@@ -945,12 +946,12 @@ class _$_AddressModel implements _AddressModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddressModelCopyWith<_$_AddressModel> get copyWith =>
-      __$$_AddressModelCopyWithImpl<_$_AddressModel>(this, _$identity);
+  _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>
+      __$$AddressModelImplCopyWithImpl<_$AddressModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddressModelToJson(
+    return _$$AddressModelImplToJson(
       this,
     );
   }
@@ -971,10 +972,10 @@ abstract class _AddressModel implements AddressModel {
           @JsonKey(name: 'town') final String? town,
           @JsonKey(name: 'village') final String? village,
           @JsonKey(name: 'subDistrict') final String? subDistrict}) =
-      _$_AddressModel;
+      _$AddressModelImpl;
 
   factory _AddressModel.fromJson(Map<String, dynamic> json) =
-      _$_AddressModel.fromJson;
+      _$AddressModelImpl.fromJson;
 
   @override
   @JsonKey(name: 'id')
@@ -1017,6 +1018,6 @@ abstract class _AddressModel implements AddressModel {
   String? get subDistrict;
   @override
   @JsonKey(ignore: true)
-  _$$_AddressModelCopyWith<_$_AddressModel> get copyWith =>
+  _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

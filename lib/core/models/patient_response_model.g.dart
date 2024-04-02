@@ -6,9 +6,9 @@ part of 'patient_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PatientResponseModel _$$_PatientResponseModelFromJson(
+_$PatientResponseModelImpl _$$PatientResponseModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PatientResponseModel(
+    _$PatientResponseModelImpl(
       intent: json['intent'] as String?,
       metaData: json['metaData'] == null
           ? null
@@ -18,15 +18,16 @@ _$_PatientResponseModel _$$_PatientResponseModelFromJson(
           : ProfileModel.fromJson(json['profile'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PatientResponseModelToJson(
-        _$_PatientResponseModel instance) =>
+Map<String, dynamic> _$$PatientResponseModelImplToJson(
+        _$PatientResponseModelImpl instance) =>
     <String, dynamic>{
       'intent': instance.intent,
       'metaData': instance.metaData?.toJson(),
       'profile': instance.profile?.toJson(),
     };
 
-_$_MetaData _$$_MetaDataFromJson(Map<String, dynamic> json) => _$_MetaData(
+_$MetaDataImpl _$$MetaDataImplFromJson(Map<String, dynamic> json) =>
+    _$MetaDataImpl(
       hipId: json['hipId'] as String?,
       counterId: json['counterId'] as String?,
       hprId: json['hprId'] as String?,
@@ -34,7 +35,7 @@ _$_MetaData _$$_MetaDataFromJson(Map<String, dynamic> json) => _$_MetaData(
       longitude: json['longitude'] as String?,
     );
 
-Map<String, dynamic> _$$_MetaDataToJson(_$_MetaData instance) =>
+Map<String, dynamic> _$$MetaDataImplToJson(_$MetaDataImpl instance) =>
     <String, dynamic>{
       'hipId': instance.hipId,
       'counterId': instance.counterId,
@@ -43,20 +44,20 @@ Map<String, dynamic> _$$_MetaDataToJson(_$_MetaData instance) =>
       'longitude': instance.longitude,
     };
 
-_$_ProfileModel _$$_ProfileModelFromJson(Map<String, dynamic> json) =>
-    _$_ProfileModel(
+_$ProfileModelImpl _$$ProfileModelImplFromJson(Map<String, dynamic> json) =>
+    _$ProfileModelImpl(
       patient: json['patient'] == null
           ? null
           : PatientModel.fromJson(json['patient'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
+Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) =>
     <String, dynamic>{
       'patient': instance.patient?.toJson(),
     };
 
-_$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
-    _$_PatientModel(
+_$PatientModelImpl _$$PatientModelImplFromJson(Map<String, dynamic> json) =>
+    _$PatientModelImpl(
       patientId: json['patientId'] as int?,
       registryRef: json['registryRef'] as String?,
       abhaNumber: json['abhaNumber'] as String?,
@@ -93,7 +94,7 @@ _$_PatientModel _$$_PatientModelFromJson(Map<String, dynamic> json) =>
       privacyPolicyTimestamp: json['privacyPolicyTimestamp'] as String?,
     );
 
-Map<String, dynamic> _$$_PatientModelToJson(_$_PatientModel instance) =>
+Map<String, dynamic> _$$PatientModelImplToJson(_$PatientModelImpl instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
       'registryRef': instance.registryRef,
@@ -144,8 +145,8 @@ const _$DOBSourceEnumMap = {
   DOBSource.USER_PROVIDED: 'USER_PROVIDED',
 };
 
-_$_AddressModel _$$_AddressModelFromJson(Map<String, dynamic> json) =>
-    _$_AddressModel(
+_$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
+    _$AddressModelImpl(
       id: json['id'] as int?,
       line: json['line'] as String?,
       district: json['district'] as String?,
@@ -161,7 +162,7 @@ _$_AddressModel _$$_AddressModelFromJson(Map<String, dynamic> json) =>
       subDistrict: json['subDistrict'] as String?,
     );
 
-Map<String, dynamic> _$$_AddressModelToJson(_$_AddressModel instance) =>
+Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'line': instance.line,
@@ -183,14 +184,16 @@ const _$AddressStatusEnumMap = {
   AddressStatus.INACTIVE: 'INACTIVE',
 };
 
-_$_IdentifierModel _$$_IdentifierModelFromJson(Map<String, dynamic> json) =>
-    _$_IdentifierModel(
+_$IdentifierModelImpl _$$IdentifierModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$IdentifierModelImpl(
       id: json['id'] as int?,
       type: $enumDecodeNullable(_$IdentifierTypeEnumMap, json['type']),
       value: json['value'] as String?,
     );
 
-Map<String, dynamic> _$$_IdentifierModelToJson(_$_IdentifierModel instance) =>
+Map<String, dynamic> _$$IdentifierModelImplToJson(
+        _$IdentifierModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': _$IdentifierTypeEnumMap[instance.type],
@@ -205,17 +208,17 @@ const _$IdentifierTypeEnumMap = {
   IdentifierType.MR_CODE: 'MR_CODE',
 };
 
-_$_MedicalRecordModel _$$_MedicalRecordModelFromJson(
+_$MedicalRecordModelImpl _$$MedicalRecordModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MedicalRecordModel(
+    _$MedicalRecordModelImpl(
       id: json['id'] as int?,
       registrationDate: const TimestampConverter()
           .fromJson(json['registrationDate'] as String?),
       organisationId: json['organisationId'] as String?,
     );
 
-Map<String, dynamic> _$$_MedicalRecordModelToJson(
-        _$_MedicalRecordModel instance) =>
+Map<String, dynamic> _$$MedicalRecordModelImplToJson(
+        _$MedicalRecordModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'registrationDate':
@@ -223,8 +226,9 @@ Map<String, dynamic> _$$_MedicalRecordModelToJson(
       'organisationId': instance.organisationId,
     };
 
-_$_RelatedPartyModel _$$_RelatedPartyModelFromJson(Map<String, dynamic> json) =>
-    _$_RelatedPartyModel(
+_$RelatedPartyModelImpl _$$RelatedPartyModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RelatedPartyModelImpl(
       patientId: json['patientId'] as int?,
       relation:
           $enumDecodeNullable(_$FamilyRelationShipEnumMap, json['relation']),
@@ -236,8 +240,8 @@ _$_RelatedPartyModel _$$_RelatedPartyModelFromJson(Map<String, dynamic> json) =>
       regRef: json['regRef'] as String?,
     );
 
-Map<String, dynamic> _$$_RelatedPartyModelToJson(
-        _$_RelatedPartyModel instance) =>
+Map<String, dynamic> _$$RelatedPartyModelImplToJson(
+        _$RelatedPartyModelImpl instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
       'relation': _$FamilyRelationShipEnumMap[instance.relation],

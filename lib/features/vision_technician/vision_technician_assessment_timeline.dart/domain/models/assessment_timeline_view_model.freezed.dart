@@ -12,7 +12,7 @@ part of 'assessment_timeline_view_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AssessmentTimelineViewModel _$AssessmentTimelineViewModelFromJson(
     Map<String, dynamic> json) {
@@ -117,12 +117,12 @@ class _$AssessmentTimelineViewModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AssessmentTimelineViewModelCopyWith<$Res>
+abstract class _$$AssessmentTimelineViewModelImplCopyWith<$Res>
     implements $AssessmentTimelineViewModelCopyWith<$Res> {
-  factory _$$_AssessmentTimelineViewModelCopyWith(
-          _$_AssessmentTimelineViewModel value,
-          $Res Function(_$_AssessmentTimelineViewModel) then) =
-      __$$_AssessmentTimelineViewModelCopyWithImpl<$Res>;
+  factory _$$AssessmentTimelineViewModelImplCopyWith(
+          _$AssessmentTimelineViewModelImpl value,
+          $Res Function(_$AssessmentTimelineViewModelImpl) then) =
+      __$$AssessmentTimelineViewModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -137,13 +137,13 @@ abstract class _$$_AssessmentTimelineViewModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AssessmentTimelineViewModelCopyWithImpl<$Res>
+class __$$AssessmentTimelineViewModelImplCopyWithImpl<$Res>
     extends _$AssessmentTimelineViewModelCopyWithImpl<$Res,
-        _$_AssessmentTimelineViewModel>
-    implements _$$_AssessmentTimelineViewModelCopyWith<$Res> {
-  __$$_AssessmentTimelineViewModelCopyWithImpl(
-      _$_AssessmentTimelineViewModel _value,
-      $Res Function(_$_AssessmentTimelineViewModel) _then)
+        _$AssessmentTimelineViewModelImpl>
+    implements _$$AssessmentTimelineViewModelImplCopyWith<$Res> {
+  __$$AssessmentTimelineViewModelImplCopyWithImpl(
+      _$AssessmentTimelineViewModelImpl _value,
+      $Res Function(_$AssessmentTimelineViewModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -158,7 +158,7 @@ class __$$_AssessmentTimelineViewModelCopyWithImpl<$Res>
     Object? source = freezed,
     Object? type = freezed,
   }) {
-    return _then(_$_AssessmentTimelineViewModel(
+    return _then(_$AssessmentTimelineViewModelImpl(
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,9 @@ class __$$_AssessmentTimelineViewModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
-  const _$_AssessmentTimelineViewModel(
+class _$AssessmentTimelineViewModelImpl
+    implements _AssessmentTimelineViewModel {
+  const _$AssessmentTimelineViewModelImpl(
       {this.encounterId,
       this.title,
       this.description,
@@ -208,8 +209,9 @@ class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
       this.source,
       this.type});
 
-  factory _$_AssessmentTimelineViewModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AssessmentTimelineViewModelFromJson(json);
+  factory _$AssessmentTimelineViewModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AssessmentTimelineViewModelImplFromJson(json);
 
   @override
   final int? encounterId;
@@ -235,10 +237,10 @@ class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AssessmentTimelineViewModel &&
+            other is _$AssessmentTimelineViewModelImpl &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
             (identical(other.title, title) || other.title == title) &&
@@ -260,13 +262,13 @@ class _$_AssessmentTimelineViewModel implements _AssessmentTimelineViewModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AssessmentTimelineViewModelCopyWith<_$_AssessmentTimelineViewModel>
-      get copyWith => __$$_AssessmentTimelineViewModelCopyWithImpl<
-          _$_AssessmentTimelineViewModel>(this, _$identity);
+  _$$AssessmentTimelineViewModelImplCopyWith<_$AssessmentTimelineViewModelImpl>
+      get copyWith => __$$AssessmentTimelineViewModelImplCopyWithImpl<
+          _$AssessmentTimelineViewModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssessmentTimelineViewModelToJson(
+    return _$$AssessmentTimelineViewModelImplToJson(
       this,
     );
   }
@@ -282,10 +284,10 @@ abstract class _AssessmentTimelineViewModel
       final int? assessmentId,
       final String? status,
       final TimelineSource? source,
-      final String? type}) = _$_AssessmentTimelineViewModel;
+      final String? type}) = _$AssessmentTimelineViewModelImpl;
 
   factory _AssessmentTimelineViewModel.fromJson(Map<String, dynamic> json) =
-      _$_AssessmentTimelineViewModel.fromJson;
+      _$AssessmentTimelineViewModelImpl.fromJson;
 
   @override
   int? get encounterId;
@@ -306,6 +308,6 @@ abstract class _AssessmentTimelineViewModel
   String? get type;
   @override
   @JsonKey(ignore: true)
-  _$$_AssessmentTimelineViewModelCopyWith<_$_AssessmentTimelineViewModel>
+  _$$AssessmentTimelineViewModelImplCopyWith<_$AssessmentTimelineViewModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

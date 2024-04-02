@@ -6,9 +6,10 @@ part of 'vg_patient_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VisionGuardianPatientResponseModel
-    _$$_VisionGuardianPatientResponseModelFromJson(Map<String, dynamic> json) =>
-        _$_VisionGuardianPatientResponseModel(
+_$VisionGuardianPatientResponseModelImpl
+    _$$VisionGuardianPatientResponseModelImplFromJson(
+            Map<String, dynamic> json) =>
+        _$VisionGuardianPatientResponseModelImpl(
           id: json['id'] as int?,
           name: json['name'] as String?,
           mobile: json['mobile'] as String?,
@@ -26,8 +27,8 @@ _$_VisionGuardianPatientResponseModel
           category: json['category'] as String?,
         );
 
-Map<String, dynamic> _$$_VisionGuardianPatientResponseModelToJson(
-        _$_VisionGuardianPatientResponseModel instance) =>
+Map<String, dynamic> _$$VisionGuardianPatientResponseModelImplToJson(
+        _$VisionGuardianPatientResponseModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

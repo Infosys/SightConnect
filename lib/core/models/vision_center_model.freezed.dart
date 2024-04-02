@@ -12,7 +12,7 @@ part of 'vision_center_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrganizationResponseModel _$OrganizationResponseModelFromJson(
     Map<String, dynamic> json) {
@@ -161,12 +161,12 @@ class _$OrganizationResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrganizationResponseModelCopyWith<$Res>
+abstract class _$$OrganizationResponseModelImplCopyWith<$Res>
     implements $OrganizationResponseModelCopyWith<$Res> {
-  factory _$$_OrganizationResponseModelCopyWith(
-          _$_OrganizationResponseModel value,
-          $Res Function(_$_OrganizationResponseModel) then) =
-      __$$_OrganizationResponseModelCopyWithImpl<$Res>;
+  factory _$$OrganizationResponseModelImplCopyWith(
+          _$OrganizationResponseModelImpl value,
+          $Res Function(_$OrganizationResponseModelImpl) then) =
+      __$$OrganizationResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -189,13 +189,13 @@ abstract class _$$_OrganizationResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrganizationResponseModelCopyWithImpl<$Res>
+class __$$OrganizationResponseModelImplCopyWithImpl<$Res>
     extends _$OrganizationResponseModelCopyWithImpl<$Res,
-        _$_OrganizationResponseModel>
-    implements _$$_OrganizationResponseModelCopyWith<$Res> {
-  __$$_OrganizationResponseModelCopyWithImpl(
-      _$_OrganizationResponseModel _value,
-      $Res Function(_$_OrganizationResponseModel) _then)
+        _$OrganizationResponseModelImpl>
+    implements _$$OrganizationResponseModelImplCopyWith<$Res> {
+  __$$OrganizationResponseModelImplCopyWithImpl(
+      _$OrganizationResponseModelImpl _value,
+      $Res Function(_$OrganizationResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -210,7 +210,7 @@ class __$$_OrganizationResponseModelCopyWithImpl<$Res>
     Object? facilityAdditionalInformation = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_OrganizationResponseModel(
+    return _then(_$OrganizationResponseModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -249,8 +249,8 @@ class __$$_OrganizationResponseModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrganizationResponseModel implements _OrganizationResponseModel {
-  const _$_OrganizationResponseModel(
+class _$OrganizationResponseModelImpl implements _OrganizationResponseModel {
+  const _$OrganizationResponseModelImpl(
       {this.id,
       this.trackingId,
       this.facilityid,
@@ -260,8 +260,8 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
       this.facilityAdditionalInformation,
       this.osid});
 
-  factory _$_OrganizationResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_OrganizationResponseModelFromJson(json);
+  factory _$OrganizationResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrganizationResponseModelImplFromJson(json);
 
   @override
   final int? id;
@@ -287,10 +287,10 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrganizationResponseModel &&
+            other is _$OrganizationResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.trackingId, trackingId) ||
                 other.trackingId == trackingId) &&
@@ -324,13 +324,13 @@ class _$_OrganizationResponseModel implements _OrganizationResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrganizationResponseModelCopyWith<_$_OrganizationResponseModel>
-      get copyWith => __$$_OrganizationResponseModelCopyWithImpl<
-          _$_OrganizationResponseModel>(this, _$identity);
+  _$$OrganizationResponseModelImplCopyWith<_$OrganizationResponseModelImpl>
+      get copyWith => __$$OrganizationResponseModelImplCopyWithImpl<
+          _$OrganizationResponseModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrganizationResponseModelToJson(
+    return _$$OrganizationResponseModelImplToJson(
       this,
     );
   }
@@ -345,10 +345,10 @@ abstract class _OrganizationResponseModel implements OrganizationResponseModel {
       final TenantCustomModel? tenant,
       final FacilityInformationModel? facilityInformation,
       final FacilityAdditionalInformationModel? facilityAdditionalInformation,
-      final String? osid}) = _$_OrganizationResponseModel;
+      final String? osid}) = _$OrganizationResponseModelImpl;
 
   factory _OrganizationResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_OrganizationResponseModel.fromJson;
+      _$OrganizationResponseModelImpl.fromJson;
 
   @override
   int? get id;
@@ -368,7 +368,7 @@ abstract class _OrganizationResponseModel implements OrganizationResponseModel {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_OrganizationResponseModelCopyWith<_$_OrganizationResponseModel>
+  _$$OrganizationResponseModelImplCopyWith<_$OrganizationResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -426,22 +426,22 @@ class _$TenantCustomModelCopyWithImpl<$Res, $Val extends TenantCustomModel>
 }
 
 /// @nodoc
-abstract class _$$_TenantCustomModelCopyWith<$Res>
+abstract class _$$TenantCustomModelImplCopyWith<$Res>
     implements $TenantCustomModelCopyWith<$Res> {
-  factory _$$_TenantCustomModelCopyWith(_$_TenantCustomModel value,
-          $Res Function(_$_TenantCustomModel) then) =
-      __$$_TenantCustomModelCopyWithImpl<$Res>;
+  factory _$$TenantCustomModelImplCopyWith(_$TenantCustomModelImpl value,
+          $Res Function(_$TenantCustomModelImpl) then) =
+      __$$TenantCustomModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, String? name});
 }
 
 /// @nodoc
-class __$$_TenantCustomModelCopyWithImpl<$Res>
-    extends _$TenantCustomModelCopyWithImpl<$Res, _$_TenantCustomModel>
-    implements _$$_TenantCustomModelCopyWith<$Res> {
-  __$$_TenantCustomModelCopyWithImpl(
-      _$_TenantCustomModel _value, $Res Function(_$_TenantCustomModel) _then)
+class __$$TenantCustomModelImplCopyWithImpl<$Res>
+    extends _$TenantCustomModelCopyWithImpl<$Res, _$TenantCustomModelImpl>
+    implements _$$TenantCustomModelImplCopyWith<$Res> {
+  __$$TenantCustomModelImplCopyWithImpl(_$TenantCustomModelImpl _value,
+      $Res Function(_$TenantCustomModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -450,7 +450,7 @@ class __$$_TenantCustomModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
   }) {
-    return _then(_$_TenantCustomModel(
+    return _then(_$TenantCustomModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -465,11 +465,11 @@ class __$$_TenantCustomModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TenantCustomModel implements _TenantCustomModel {
-  const _$_TenantCustomModel({this.id, this.name});
+class _$TenantCustomModelImpl implements _TenantCustomModel {
+  const _$TenantCustomModelImpl({this.id, this.name});
 
-  factory _$_TenantCustomModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TenantCustomModelFromJson(json);
+  factory _$TenantCustomModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TenantCustomModelImplFromJson(json);
 
   @override
   final int? id;
@@ -482,10 +482,10 @@ class _$_TenantCustomModel implements _TenantCustomModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TenantCustomModel &&
+            other is _$TenantCustomModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -497,13 +497,13 @@ class _$_TenantCustomModel implements _TenantCustomModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TenantCustomModelCopyWith<_$_TenantCustomModel> get copyWith =>
-      __$$_TenantCustomModelCopyWithImpl<_$_TenantCustomModel>(
+  _$$TenantCustomModelImplCopyWith<_$TenantCustomModelImpl> get copyWith =>
+      __$$TenantCustomModelImplCopyWithImpl<_$TenantCustomModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TenantCustomModelToJson(
+    return _$$TenantCustomModelImplToJson(
       this,
     );
   }
@@ -511,10 +511,10 @@ class _$_TenantCustomModel implements _TenantCustomModel {
 
 abstract class _TenantCustomModel implements TenantCustomModel {
   const factory _TenantCustomModel({final int? id, final String? name}) =
-      _$_TenantCustomModel;
+      _$TenantCustomModelImpl;
 
   factory _TenantCustomModel.fromJson(Map<String, dynamic> json) =
-      _$_TenantCustomModel.fromJson;
+      _$TenantCustomModelImpl.fromJson;
 
   @override
   int? get id;
@@ -522,7 +522,7 @@ abstract class _TenantCustomModel implements TenantCustomModel {
   String? get name;
   @override
   @JsonKey(ignore: true)
-  _$$_TenantCustomModelCopyWith<_$_TenantCustomModel> get copyWith =>
+  _$$TenantCustomModelImplCopyWith<_$TenantCustomModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -732,12 +732,12 @@ class _$FacilityInformationModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FacilityInformationModelCopyWith<$Res>
+abstract class _$$FacilityInformationModelImplCopyWith<$Res>
     implements $FacilityInformationModelCopyWith<$Res> {
-  factory _$$_FacilityInformationModelCopyWith(
-          _$_FacilityInformationModel value,
-          $Res Function(_$_FacilityInformationModel) then) =
-      __$$_FacilityInformationModelCopyWithImpl<$Res>;
+  factory _$$FacilityInformationModelImplCopyWith(
+          _$FacilityInformationModelImpl value,
+          $Res Function(_$FacilityInformationModelImpl) then) =
+      __$$FacilityInformationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -768,12 +768,13 @@ abstract class _$$_FacilityInformationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FacilityInformationModelCopyWithImpl<$Res>
+class __$$FacilityInformationModelImplCopyWithImpl<$Res>
     extends _$FacilityInformationModelCopyWithImpl<$Res,
-        _$_FacilityInformationModel>
-    implements _$$_FacilityInformationModelCopyWith<$Res> {
-  __$$_FacilityInformationModelCopyWithImpl(_$_FacilityInformationModel _value,
-      $Res Function(_$_FacilityInformationModel) _then)
+        _$FacilityInformationModelImpl>
+    implements _$$FacilityInformationModelImplCopyWith<$Res> {
+  __$$FacilityInformationModelImplCopyWithImpl(
+      _$FacilityInformationModelImpl _value,
+      $Res Function(_$FacilityInformationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -796,7 +797,7 @@ class __$$_FacilityInformationModelCopyWithImpl<$Res>
     Object? timingsOfFacility = freezed,
     Object? abdmCompliantSoftware = freezed,
   }) {
-    return _then(_$_FacilityInformationModel(
+    return _then(_$FacilityInformationModelImpl(
       facilityName: freezed == facilityName
           ? _value.facilityName
           : facilityName // ignore: cast_nullable_to_non_nullable
@@ -867,8 +868,8 @@ class __$$_FacilityInformationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityInformationModel implements _FacilityInformationModel {
-  const _$_FacilityInformationModel(
+class _$FacilityInformationModelImpl implements _FacilityInformationModel {
+  const _$FacilityInformationModelImpl(
       {this.facilityName,
       this.ownershipCode,
       this.ownershipSubTypeCode,
@@ -889,8 +890,8 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
         _timingsOfFacility = timingsOfFacility,
         _abdmCompliantSoftware = abdmCompliantSoftware;
 
-  factory _$_FacilityInformationModel.fromJson(Map<String, dynamic> json) =>
-      _$$_FacilityInformationModelFromJson(json);
+  factory _$FacilityInformationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FacilityInformationModelImplFromJson(json);
 
   @override
   final String? facilityName;
@@ -957,10 +958,10 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityInformationModel &&
+            other is _$FacilityInformationModelImpl &&
             (identical(other.facilityName, facilityName) ||
                 other.facilityName == facilityName) &&
             (identical(other.ownershipCode, ownershipCode) ||
@@ -1022,13 +1023,13 @@ class _$_FacilityInformationModel implements _FacilityInformationModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityInformationModelCopyWith<_$_FacilityInformationModel>
-      get copyWith => __$$_FacilityInformationModelCopyWithImpl<
-          _$_FacilityInformationModel>(this, _$identity);
+  _$$FacilityInformationModelImplCopyWith<_$FacilityInformationModelImpl>
+      get copyWith => __$$FacilityInformationModelImplCopyWithImpl<
+          _$FacilityInformationModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityInformationModelToJson(
+    return _$$FacilityInformationModelImplToJson(
       this,
     );
   }
@@ -1052,10 +1053,10 @@ abstract class _FacilityInformationModel implements FacilityInformationModel {
           final List<FacilityAddressProofModel>? facilityAddressProof,
           final List<FacilityTimingModel>? timingsOfFacility,
           final List<AbdmCompliantSoftwareModel>? abdmCompliantSoftware}) =
-      _$_FacilityInformationModel;
+      _$FacilityInformationModelImpl;
 
   factory _FacilityInformationModel.fromJson(Map<String, dynamic> json) =
-      _$_FacilityInformationModel.fromJson;
+      _$FacilityInformationModelImpl.fromJson;
 
   @override
   String? get facilityName;
@@ -1091,7 +1092,7 @@ abstract class _FacilityInformationModel implements FacilityInformationModel {
   List<AbdmCompliantSoftwareModel>? get abdmCompliantSoftware;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityInformationModelCopyWith<_$_FacilityInformationModel>
+  _$$FacilityInformationModelImplCopyWith<_$FacilityInformationModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1222,11 +1223,11 @@ class _$FacilityAddressModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FacilityAddressModelCopyWith<$Res>
+abstract class _$$FacilityAddressModelImplCopyWith<$Res>
     implements $FacilityAddressModelCopyWith<$Res> {
-  factory _$$_FacilityAddressModelCopyWith(_$_FacilityAddressModel value,
-          $Res Function(_$_FacilityAddressModel) then) =
-      __$$_FacilityAddressModelCopyWithImpl<$Res>;
+  factory _$$FacilityAddressModelImplCopyWith(_$FacilityAddressModelImpl value,
+          $Res Function(_$FacilityAddressModelImpl) then) =
+      __$$FacilityAddressModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1245,11 +1246,11 @@ abstract class _$$_FacilityAddressModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FacilityAddressModelCopyWithImpl<$Res>
-    extends _$FacilityAddressModelCopyWithImpl<$Res, _$_FacilityAddressModel>
-    implements _$$_FacilityAddressModelCopyWith<$Res> {
-  __$$_FacilityAddressModelCopyWithImpl(_$_FacilityAddressModel _value,
-      $Res Function(_$_FacilityAddressModel) _then)
+class __$$FacilityAddressModelImplCopyWithImpl<$Res>
+    extends _$FacilityAddressModelCopyWithImpl<$Res, _$FacilityAddressModelImpl>
+    implements _$$FacilityAddressModelImplCopyWith<$Res> {
+  __$$FacilityAddressModelImplCopyWithImpl(_$FacilityAddressModelImpl _value,
+      $Res Function(_$FacilityAddressModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1268,7 +1269,7 @@ class __$$_FacilityAddressModelCopyWithImpl<$Res>
     Object? osid = freezed,
     Object? pincode = freezed,
   }) {
-    return _then(_$_FacilityAddressModel(
+    return _then(_$FacilityAddressModelImpl(
       country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -1323,8 +1324,8 @@ class __$$_FacilityAddressModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityAddressModel implements _FacilityAddressModel {
-  const _$_FacilityAddressModel(
+class _$FacilityAddressModelImpl implements _FacilityAddressModel {
+  const _$FacilityAddressModelImpl(
       {this.country,
       this.stateLGDCode,
       this.districtLGDCode,
@@ -1338,8 +1339,8 @@ class _$_FacilityAddressModel implements _FacilityAddressModel {
       this.osid,
       this.pincode});
 
-  factory _$_FacilityAddressModel.fromJson(Map<String, dynamic> json) =>
-      _$$_FacilityAddressModelFromJson(json);
+  factory _$FacilityAddressModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FacilityAddressModelImplFromJson(json);
 
   @override
   final String? country;
@@ -1372,10 +1373,10 @@ class _$_FacilityAddressModel implements _FacilityAddressModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityAddressModel &&
+            other is _$FacilityAddressModelImpl &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.stateLGDCode, stateLGDCode) ||
                 other.stateLGDCode == stateLGDCode) &&
@@ -1419,13 +1420,14 @@ class _$_FacilityAddressModel implements _FacilityAddressModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityAddressModelCopyWith<_$_FacilityAddressModel> get copyWith =>
-      __$$_FacilityAddressModelCopyWithImpl<_$_FacilityAddressModel>(
-          this, _$identity);
+  _$$FacilityAddressModelImplCopyWith<_$FacilityAddressModelImpl>
+      get copyWith =>
+          __$$FacilityAddressModelImplCopyWithImpl<_$FacilityAddressModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityAddressModelToJson(
+    return _$$FacilityAddressModelImplToJson(
       this,
     );
   }
@@ -1444,10 +1446,10 @@ abstract class _FacilityAddressModel implements FacilityAddressModel {
       final String? latitude,
       final String? longitude,
       final String? osid,
-      final String? pincode}) = _$_FacilityAddressModel;
+      final String? pincode}) = _$FacilityAddressModelImpl;
 
   factory _FacilityAddressModel.fromJson(Map<String, dynamic> json) =
-      _$_FacilityAddressModel.fromJson;
+      _$FacilityAddressModelImpl.fromJson;
 
   @override
   String? get country;
@@ -1475,8 +1477,8 @@ abstract class _FacilityAddressModel implements FacilityAddressModel {
   String? get pincode;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityAddressModelCopyWith<_$_FacilityAddressModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FacilityAddressModelImplCopyWith<_$FacilityAddressModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 FacilityContactInformationModel _$FacilityContactInformationModelFromJson(
@@ -1567,12 +1569,12 @@ class _$FacilityContactInformationModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FacilityContactInformationModelCopyWith<$Res>
+abstract class _$$FacilityContactInformationModelImplCopyWith<$Res>
     implements $FacilityContactInformationModelCopyWith<$Res> {
-  factory _$$_FacilityContactInformationModelCopyWith(
-          _$_FacilityContactInformationModel value,
-          $Res Function(_$_FacilityContactInformationModel) then) =
-      __$$_FacilityContactInformationModelCopyWithImpl<$Res>;
+  factory _$$FacilityContactInformationModelImplCopyWith(
+          _$FacilityContactInformationModelImpl value,
+          $Res Function(_$FacilityContactInformationModelImpl) then) =
+      __$$FacilityContactInformationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1585,13 +1587,13 @@ abstract class _$$_FacilityContactInformationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FacilityContactInformationModelCopyWithImpl<$Res>
+class __$$FacilityContactInformationModelImplCopyWithImpl<$Res>
     extends _$FacilityContactInformationModelCopyWithImpl<$Res,
-        _$_FacilityContactInformationModel>
-    implements _$$_FacilityContactInformationModelCopyWith<$Res> {
-  __$$_FacilityContactInformationModelCopyWithImpl(
-      _$_FacilityContactInformationModel _value,
-      $Res Function(_$_FacilityContactInformationModel) _then)
+        _$FacilityContactInformationModelImpl>
+    implements _$$FacilityContactInformationModelImplCopyWith<$Res> {
+  __$$FacilityContactInformationModelImplCopyWithImpl(
+      _$FacilityContactInformationModelImpl _value,
+      $Res Function(_$FacilityContactInformationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1604,7 +1606,7 @@ class __$$_FacilityContactInformationModelCopyWithImpl<$Res>
     Object? websiteLink = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_FacilityContactInformationModel(
+    return _then(_$FacilityContactInformationModelImpl(
       facilityContactNumber: freezed == facilityContactNumber
           ? _value.facilityContactNumber
           : facilityContactNumber // ignore: cast_nullable_to_non_nullable
@@ -1635,9 +1637,9 @@ class __$$_FacilityContactInformationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityContactInformationModel
+class _$FacilityContactInformationModelImpl
     implements _FacilityContactInformationModel {
-  const _$_FacilityContactInformationModel(
+  const _$FacilityContactInformationModelImpl(
       {this.facilityContactNumber,
       this.facilityEmailId,
       this.facilityLandlineNumber,
@@ -1645,9 +1647,9 @@ class _$_FacilityContactInformationModel
       this.websiteLink,
       this.osid});
 
-  factory _$_FacilityContactInformationModel.fromJson(
+  factory _$FacilityContactInformationModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_FacilityContactInformationModelFromJson(json);
+      _$$FacilityContactInformationModelImplFromJson(json);
 
   @override
   final String? facilityContactNumber;
@@ -1668,10 +1670,10 @@ class _$_FacilityContactInformationModel
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityContactInformationModel &&
+            other is _$FacilityContactInformationModelImpl &&
             (identical(other.facilityContactNumber, facilityContactNumber) ||
                 other.facilityContactNumber == facilityContactNumber) &&
             (identical(other.facilityEmailId, facilityEmailId) ||
@@ -1699,14 +1701,14 @@ class _$_FacilityContactInformationModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityContactInformationModelCopyWith<
-          _$_FacilityContactInformationModel>
-      get copyWith => __$$_FacilityContactInformationModelCopyWithImpl<
-          _$_FacilityContactInformationModel>(this, _$identity);
+  _$$FacilityContactInformationModelImplCopyWith<
+          _$FacilityContactInformationModelImpl>
+      get copyWith => __$$FacilityContactInformationModelImplCopyWithImpl<
+          _$FacilityContactInformationModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityContactInformationModelToJson(
+    return _$$FacilityContactInformationModelImplToJson(
       this,
     );
   }
@@ -1720,10 +1722,10 @@ abstract class _FacilityContactInformationModel
       final String? facilityLandlineNumber,
       final String? facilityStdCode,
       final String? websiteLink,
-      final String? osid}) = _$_FacilityContactInformationModel;
+      final String? osid}) = _$FacilityContactInformationModelImpl;
 
   factory _FacilityContactInformationModel.fromJson(Map<String, dynamic> json) =
-      _$_FacilityContactInformationModel.fromJson;
+      _$FacilityContactInformationModelImpl.fromJson;
 
   @override
   String? get facilityContactNumber;
@@ -1739,8 +1741,8 @@ abstract class _FacilityContactInformationModel
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityContactInformationModelCopyWith<
-          _$_FacilityContactInformationModel>
+  _$$FacilityContactInformationModelImplCopyWith<
+          _$FacilityContactInformationModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1835,11 +1837,11 @@ class _$FacilityUploadModelCopyWithImpl<$Res, $Val extends FacilityUploadModel>
 }
 
 /// @nodoc
-abstract class _$$_FacilityUploadModelCopyWith<$Res>
+abstract class _$$FacilityUploadModelImplCopyWith<$Res>
     implements $FacilityUploadModelCopyWith<$Res> {
-  factory _$$_FacilityUploadModelCopyWith(_$_FacilityUploadModel value,
-          $Res Function(_$_FacilityUploadModel) then) =
-      __$$_FacilityUploadModelCopyWithImpl<$Res>;
+  factory _$$FacilityUploadModelImplCopyWith(_$FacilityUploadModelImpl value,
+          $Res Function(_$FacilityUploadModelImpl) then) =
+      __$$FacilityUploadModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1854,11 +1856,11 @@ abstract class _$$_FacilityUploadModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FacilityUploadModelCopyWithImpl<$Res>
-    extends _$FacilityUploadModelCopyWithImpl<$Res, _$_FacilityUploadModel>
-    implements _$$_FacilityUploadModelCopyWith<$Res> {
-  __$$_FacilityUploadModelCopyWithImpl(_$_FacilityUploadModel _value,
-      $Res Function(_$_FacilityUploadModel) _then)
+class __$$FacilityUploadModelImplCopyWithImpl<$Res>
+    extends _$FacilityUploadModelCopyWithImpl<$Res, _$FacilityUploadModelImpl>
+    implements _$$FacilityUploadModelImplCopyWith<$Res> {
+  __$$FacilityUploadModelImplCopyWithImpl(_$FacilityUploadModelImpl _value,
+      $Res Function(_$FacilityUploadModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1868,7 +1870,7 @@ class __$$_FacilityUploadModelCopyWithImpl<$Res>
     Object? facilityBuildingPhoto = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_FacilityUploadModel(
+    return _then(_$FacilityUploadModelImpl(
       facilityBoardPhoto: freezed == facilityBoardPhoto
           ? _value.facilityBoardPhoto
           : facilityBoardPhoto // ignore: cast_nullable_to_non_nullable
@@ -1887,12 +1889,12 @@ class __$$_FacilityUploadModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityUploadModel implements _FacilityUploadModel {
-  const _$_FacilityUploadModel(
+class _$FacilityUploadModelImpl implements _FacilityUploadModel {
+  const _$FacilityUploadModelImpl(
       {this.facilityBoardPhoto, this.facilityBuildingPhoto, this.osid});
 
-  factory _$_FacilityUploadModel.fromJson(Map<String, dynamic> json) =>
-      _$$_FacilityUploadModelFromJson(json);
+  factory _$FacilityUploadModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FacilityUploadModelImplFromJson(json);
 
   @override
   final DocumentModel? facilityBoardPhoto;
@@ -1907,10 +1909,10 @@ class _$_FacilityUploadModel implements _FacilityUploadModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityUploadModel &&
+            other is _$FacilityUploadModelImpl &&
             (identical(other.facilityBoardPhoto, facilityBoardPhoto) ||
                 other.facilityBoardPhoto == facilityBoardPhoto) &&
             (identical(other.facilityBuildingPhoto, facilityBuildingPhoto) ||
@@ -1926,13 +1928,13 @@ class _$_FacilityUploadModel implements _FacilityUploadModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityUploadModelCopyWith<_$_FacilityUploadModel> get copyWith =>
-      __$$_FacilityUploadModelCopyWithImpl<_$_FacilityUploadModel>(
+  _$$FacilityUploadModelImplCopyWith<_$FacilityUploadModelImpl> get copyWith =>
+      __$$FacilityUploadModelImplCopyWithImpl<_$FacilityUploadModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityUploadModelToJson(
+    return _$$FacilityUploadModelImplToJson(
       this,
     );
   }
@@ -1942,10 +1944,10 @@ abstract class _FacilityUploadModel implements FacilityUploadModel {
   const factory _FacilityUploadModel(
       {final DocumentModel? facilityBoardPhoto,
       final DocumentModel? facilityBuildingPhoto,
-      final String? osid}) = _$_FacilityUploadModel;
+      final String? osid}) = _$FacilityUploadModelImpl;
 
   factory _FacilityUploadModel.fromJson(Map<String, dynamic> json) =
-      _$_FacilityUploadModel.fromJson;
+      _$FacilityUploadModelImpl.fromJson;
 
   @override
   DocumentModel? get facilityBoardPhoto;
@@ -1955,7 +1957,7 @@ abstract class _FacilityUploadModel implements FacilityUploadModel {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityUploadModelCopyWith<_$_FacilityUploadModel> get copyWith =>
+  _$$FacilityUploadModelImplCopyWith<_$FacilityUploadModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2040,12 +2042,12 @@ class _$FacilityAddressProofModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FacilityAddressProofModelCopyWith<$Res>
+abstract class _$$FacilityAddressProofModelImplCopyWith<$Res>
     implements $FacilityAddressProofModelCopyWith<$Res> {
-  factory _$$_FacilityAddressProofModelCopyWith(
-          _$_FacilityAddressProofModel value,
-          $Res Function(_$_FacilityAddressProofModel) then) =
-      __$$_FacilityAddressProofModelCopyWithImpl<$Res>;
+  factory _$$FacilityAddressProofModelImplCopyWith(
+          _$FacilityAddressProofModelImpl value,
+          $Res Function(_$FacilityAddressProofModelImpl) then) =
+      __$$FacilityAddressProofModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2058,13 +2060,13 @@ abstract class _$$_FacilityAddressProofModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FacilityAddressProofModelCopyWithImpl<$Res>
+class __$$FacilityAddressProofModelImplCopyWithImpl<$Res>
     extends _$FacilityAddressProofModelCopyWithImpl<$Res,
-        _$_FacilityAddressProofModel>
-    implements _$$_FacilityAddressProofModelCopyWith<$Res> {
-  __$$_FacilityAddressProofModelCopyWithImpl(
-      _$_FacilityAddressProofModel _value,
-      $Res Function(_$_FacilityAddressProofModel) _then)
+        _$FacilityAddressProofModelImpl>
+    implements _$$FacilityAddressProofModelImplCopyWith<$Res> {
+  __$$FacilityAddressProofModelImplCopyWithImpl(
+      _$FacilityAddressProofModelImpl _value,
+      $Res Function(_$FacilityAddressProofModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2074,7 +2076,7 @@ class __$$_FacilityAddressProofModelCopyWithImpl<$Res>
     Object? addressProofAttachment = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_FacilityAddressProofModel(
+    return _then(_$FacilityAddressProofModelImpl(
       addressProofType: freezed == addressProofType
           ? _value.addressProofType
           : addressProofType // ignore: cast_nullable_to_non_nullable
@@ -2093,12 +2095,12 @@ class __$$_FacilityAddressProofModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityAddressProofModel implements _FacilityAddressProofModel {
-  const _$_FacilityAddressProofModel(
+class _$FacilityAddressProofModelImpl implements _FacilityAddressProofModel {
+  const _$FacilityAddressProofModelImpl(
       {this.addressProofType, this.addressProofAttachment, this.osid});
 
-  factory _$_FacilityAddressProofModel.fromJson(Map<String, dynamic> json) =>
-      _$$_FacilityAddressProofModelFromJson(json);
+  factory _$FacilityAddressProofModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FacilityAddressProofModelImplFromJson(json);
 
   @override
   final String? addressProofType;
@@ -2113,10 +2115,10 @@ class _$_FacilityAddressProofModel implements _FacilityAddressProofModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityAddressProofModel &&
+            other is _$FacilityAddressProofModelImpl &&
             (identical(other.addressProofType, addressProofType) ||
                 other.addressProofType == addressProofType) &&
             (identical(other.addressProofAttachment, addressProofAttachment) ||
@@ -2132,13 +2134,13 @@ class _$_FacilityAddressProofModel implements _FacilityAddressProofModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityAddressProofModelCopyWith<_$_FacilityAddressProofModel>
-      get copyWith => __$$_FacilityAddressProofModelCopyWithImpl<
-          _$_FacilityAddressProofModel>(this, _$identity);
+  _$$FacilityAddressProofModelImplCopyWith<_$FacilityAddressProofModelImpl>
+      get copyWith => __$$FacilityAddressProofModelImplCopyWithImpl<
+          _$FacilityAddressProofModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityAddressProofModelToJson(
+    return _$$FacilityAddressProofModelImplToJson(
       this,
     );
   }
@@ -2148,10 +2150,10 @@ abstract class _FacilityAddressProofModel implements FacilityAddressProofModel {
   const factory _FacilityAddressProofModel(
       {final String? addressProofType,
       final DocumentModel? addressProofAttachment,
-      final String? osid}) = _$_FacilityAddressProofModel;
+      final String? osid}) = _$FacilityAddressProofModelImpl;
 
   factory _FacilityAddressProofModel.fromJson(Map<String, dynamic> json) =
-      _$_FacilityAddressProofModel.fromJson;
+      _$FacilityAddressProofModelImpl.fromJson;
 
   @override
   String? get addressProofType;
@@ -2161,7 +2163,7 @@ abstract class _FacilityAddressProofModel implements FacilityAddressProofModel {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityAddressProofModelCopyWith<_$_FacilityAddressProofModel>
+  _$$FacilityAddressProofModelImplCopyWith<_$FacilityAddressProofModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2225,22 +2227,22 @@ class _$FacilityTimingModelCopyWithImpl<$Res, $Val extends FacilityTimingModel>
 }
 
 /// @nodoc
-abstract class _$$_FacilityTimingModelCopyWith<$Res>
+abstract class _$$FacilityTimingModelImplCopyWith<$Res>
     implements $FacilityTimingModelCopyWith<$Res> {
-  factory _$$_FacilityTimingModelCopyWith(_$_FacilityTimingModel value,
-          $Res Function(_$_FacilityTimingModel) then) =
-      __$$_FacilityTimingModelCopyWithImpl<$Res>;
+  factory _$$FacilityTimingModelImplCopyWith(_$FacilityTimingModelImpl value,
+          $Res Function(_$FacilityTimingModelImpl) then) =
+      __$$FacilityTimingModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? workingDays, String? openingHours, String? osid});
 }
 
 /// @nodoc
-class __$$_FacilityTimingModelCopyWithImpl<$Res>
-    extends _$FacilityTimingModelCopyWithImpl<$Res, _$_FacilityTimingModel>
-    implements _$$_FacilityTimingModelCopyWith<$Res> {
-  __$$_FacilityTimingModelCopyWithImpl(_$_FacilityTimingModel _value,
-      $Res Function(_$_FacilityTimingModel) _then)
+class __$$FacilityTimingModelImplCopyWithImpl<$Res>
+    extends _$FacilityTimingModelCopyWithImpl<$Res, _$FacilityTimingModelImpl>
+    implements _$$FacilityTimingModelImplCopyWith<$Res> {
+  __$$FacilityTimingModelImplCopyWithImpl(_$FacilityTimingModelImpl _value,
+      $Res Function(_$FacilityTimingModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2250,7 +2252,7 @@ class __$$_FacilityTimingModelCopyWithImpl<$Res>
     Object? openingHours = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_FacilityTimingModel(
+    return _then(_$FacilityTimingModelImpl(
       workingDays: freezed == workingDays
           ? _value.workingDays
           : workingDays // ignore: cast_nullable_to_non_nullable
@@ -2269,12 +2271,12 @@ class __$$_FacilityTimingModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityTimingModel implements _FacilityTimingModel {
-  const _$_FacilityTimingModel(
+class _$FacilityTimingModelImpl implements _FacilityTimingModel {
+  const _$FacilityTimingModelImpl(
       {this.workingDays, this.openingHours, this.osid});
 
-  factory _$_FacilityTimingModel.fromJson(Map<String, dynamic> json) =>
-      _$$_FacilityTimingModelFromJson(json);
+  factory _$FacilityTimingModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FacilityTimingModelImplFromJson(json);
 
   @override
   final String? workingDays;
@@ -2289,10 +2291,10 @@ class _$_FacilityTimingModel implements _FacilityTimingModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityTimingModel &&
+            other is _$FacilityTimingModelImpl &&
             (identical(other.workingDays, workingDays) ||
                 other.workingDays == workingDays) &&
             (identical(other.openingHours, openingHours) ||
@@ -2307,13 +2309,13 @@ class _$_FacilityTimingModel implements _FacilityTimingModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityTimingModelCopyWith<_$_FacilityTimingModel> get copyWith =>
-      __$$_FacilityTimingModelCopyWithImpl<_$_FacilityTimingModel>(
+  _$$FacilityTimingModelImplCopyWith<_$FacilityTimingModelImpl> get copyWith =>
+      __$$FacilityTimingModelImplCopyWithImpl<_$FacilityTimingModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityTimingModelToJson(
+    return _$$FacilityTimingModelImplToJson(
       this,
     );
   }
@@ -2323,10 +2325,10 @@ abstract class _FacilityTimingModel implements FacilityTimingModel {
   const factory _FacilityTimingModel(
       {final String? workingDays,
       final String? openingHours,
-      final String? osid}) = _$_FacilityTimingModel;
+      final String? osid}) = _$FacilityTimingModelImpl;
 
   factory _FacilityTimingModel.fromJson(Map<String, dynamic> json) =
-      _$_FacilityTimingModel.fromJson;
+      _$FacilityTimingModelImpl.fromJson;
 
   @override
   String? get workingDays;
@@ -2336,7 +2338,7 @@ abstract class _FacilityTimingModel implements FacilityTimingModel {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityTimingModelCopyWith<_$_FacilityTimingModel> get copyWith =>
+  _$$FacilityTimingModelImplCopyWith<_$FacilityTimingModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2403,25 +2405,25 @@ class _$AbdmCompliantSoftwareModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AbdmCompliantSoftwareModelCopyWith<$Res>
+abstract class _$$AbdmCompliantSoftwareModelImplCopyWith<$Res>
     implements $AbdmCompliantSoftwareModelCopyWith<$Res> {
-  factory _$$_AbdmCompliantSoftwareModelCopyWith(
-          _$_AbdmCompliantSoftwareModel value,
-          $Res Function(_$_AbdmCompliantSoftwareModel) then) =
-      __$$_AbdmCompliantSoftwareModelCopyWithImpl<$Res>;
+  factory _$$AbdmCompliantSoftwareModelImplCopyWith(
+          _$AbdmCompliantSoftwareModelImpl value,
+          $Res Function(_$AbdmCompliantSoftwareModelImpl) then) =
+      __$$AbdmCompliantSoftwareModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String>? existingSoftwares, String? anyother, String? osid});
 }
 
 /// @nodoc
-class __$$_AbdmCompliantSoftwareModelCopyWithImpl<$Res>
+class __$$AbdmCompliantSoftwareModelImplCopyWithImpl<$Res>
     extends _$AbdmCompliantSoftwareModelCopyWithImpl<$Res,
-        _$_AbdmCompliantSoftwareModel>
-    implements _$$_AbdmCompliantSoftwareModelCopyWith<$Res> {
-  __$$_AbdmCompliantSoftwareModelCopyWithImpl(
-      _$_AbdmCompliantSoftwareModel _value,
-      $Res Function(_$_AbdmCompliantSoftwareModel) _then)
+        _$AbdmCompliantSoftwareModelImpl>
+    implements _$$AbdmCompliantSoftwareModelImplCopyWith<$Res> {
+  __$$AbdmCompliantSoftwareModelImplCopyWithImpl(
+      _$AbdmCompliantSoftwareModelImpl _value,
+      $Res Function(_$AbdmCompliantSoftwareModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2431,7 +2433,7 @@ class __$$_AbdmCompliantSoftwareModelCopyWithImpl<$Res>
     Object? anyother = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_AbdmCompliantSoftwareModel(
+    return _then(_$AbdmCompliantSoftwareModelImpl(
       existingSoftwares: freezed == existingSoftwares
           ? _value._existingSoftwares
           : existingSoftwares // ignore: cast_nullable_to_non_nullable
@@ -2450,13 +2452,14 @@ class __$$_AbdmCompliantSoftwareModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AbdmCompliantSoftwareModel implements _AbdmCompliantSoftwareModel {
-  const _$_AbdmCompliantSoftwareModel(
+class _$AbdmCompliantSoftwareModelImpl implements _AbdmCompliantSoftwareModel {
+  const _$AbdmCompliantSoftwareModelImpl(
       {final List<String>? existingSoftwares, this.anyother, this.osid})
       : _existingSoftwares = existingSoftwares;
 
-  factory _$_AbdmCompliantSoftwareModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AbdmCompliantSoftwareModelFromJson(json);
+  factory _$AbdmCompliantSoftwareModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AbdmCompliantSoftwareModelImplFromJson(json);
 
   final List<String>? _existingSoftwares;
   @override
@@ -2480,10 +2483,10 @@ class _$_AbdmCompliantSoftwareModel implements _AbdmCompliantSoftwareModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AbdmCompliantSoftwareModel &&
+            other is _$AbdmCompliantSoftwareModelImpl &&
             const DeepCollectionEquality()
                 .equals(other._existingSoftwares, _existingSoftwares) &&
             (identical(other.anyother, anyother) ||
@@ -2499,13 +2502,13 @@ class _$_AbdmCompliantSoftwareModel implements _AbdmCompliantSoftwareModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AbdmCompliantSoftwareModelCopyWith<_$_AbdmCompliantSoftwareModel>
-      get copyWith => __$$_AbdmCompliantSoftwareModelCopyWithImpl<
-          _$_AbdmCompliantSoftwareModel>(this, _$identity);
+  _$$AbdmCompliantSoftwareModelImplCopyWith<_$AbdmCompliantSoftwareModelImpl>
+      get copyWith => __$$AbdmCompliantSoftwareModelImplCopyWithImpl<
+          _$AbdmCompliantSoftwareModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AbdmCompliantSoftwareModelToJson(
+    return _$$AbdmCompliantSoftwareModelImplToJson(
       this,
     );
   }
@@ -2516,10 +2519,10 @@ abstract class _AbdmCompliantSoftwareModel
   const factory _AbdmCompliantSoftwareModel(
       {final List<String>? existingSoftwares,
       final String? anyother,
-      final String? osid}) = _$_AbdmCompliantSoftwareModel;
+      final String? osid}) = _$AbdmCompliantSoftwareModelImpl;
 
   factory _AbdmCompliantSoftwareModel.fromJson(Map<String, dynamic> json) =
-      _$_AbdmCompliantSoftwareModel.fromJson;
+      _$AbdmCompliantSoftwareModelImpl.fromJson;
 
   @override
   List<String>? get existingSoftwares;
@@ -2529,7 +2532,7 @@ abstract class _AbdmCompliantSoftwareModel
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_AbdmCompliantSoftwareModelCopyWith<_$_AbdmCompliantSoftwareModel>
+  _$$AbdmCompliantSoftwareModelImplCopyWith<_$AbdmCompliantSoftwareModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2608,12 +2611,12 @@ class _$FacilityAdditionalInformationModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FacilityAdditionalInformationModelCopyWith<$Res>
+abstract class _$$FacilityAdditionalInformationModelImplCopyWith<$Res>
     implements $FacilityAdditionalInformationModelCopyWith<$Res> {
-  factory _$$_FacilityAdditionalInformationModelCopyWith(
-          _$_FacilityAdditionalInformationModel value,
-          $Res Function(_$_FacilityAdditionalInformationModel) then) =
-      __$$_FacilityAdditionalInformationModelCopyWithImpl<$Res>;
+  factory _$$FacilityAdditionalInformationModelImplCopyWith(
+          _$FacilityAdditionalInformationModelImpl value,
+          $Res Function(_$FacilityAdditionalInformationModelImpl) then) =
+      __$$FacilityAdditionalInformationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? trackingId, GeneralInformationModel? generalInformation});
@@ -2623,13 +2626,13 @@ abstract class _$$_FacilityAdditionalInformationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FacilityAdditionalInformationModelCopyWithImpl<$Res>
+class __$$FacilityAdditionalInformationModelImplCopyWithImpl<$Res>
     extends _$FacilityAdditionalInformationModelCopyWithImpl<$Res,
-        _$_FacilityAdditionalInformationModel>
-    implements _$$_FacilityAdditionalInformationModelCopyWith<$Res> {
-  __$$_FacilityAdditionalInformationModelCopyWithImpl(
-      _$_FacilityAdditionalInformationModel _value,
-      $Res Function(_$_FacilityAdditionalInformationModel) _then)
+        _$FacilityAdditionalInformationModelImpl>
+    implements _$$FacilityAdditionalInformationModelImplCopyWith<$Res> {
+  __$$FacilityAdditionalInformationModelImplCopyWithImpl(
+      _$FacilityAdditionalInformationModelImpl _value,
+      $Res Function(_$FacilityAdditionalInformationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2638,7 +2641,7 @@ class __$$_FacilityAdditionalInformationModelCopyWithImpl<$Res>
     Object? trackingId = freezed,
     Object? generalInformation = freezed,
   }) {
-    return _then(_$_FacilityAdditionalInformationModel(
+    return _then(_$FacilityAdditionalInformationModelImpl(
       trackingId: freezed == trackingId
           ? _value.trackingId
           : trackingId // ignore: cast_nullable_to_non_nullable
@@ -2653,14 +2656,14 @@ class __$$_FacilityAdditionalInformationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FacilityAdditionalInformationModel
+class _$FacilityAdditionalInformationModelImpl
     implements _FacilityAdditionalInformationModel {
-  const _$_FacilityAdditionalInformationModel(
+  const _$FacilityAdditionalInformationModelImpl(
       {this.trackingId, this.generalInformation});
 
-  factory _$_FacilityAdditionalInformationModel.fromJson(
+  factory _$FacilityAdditionalInformationModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_FacilityAdditionalInformationModelFromJson(json);
+      _$$FacilityAdditionalInformationModelImplFromJson(json);
 
   @override
   final String? trackingId;
@@ -2673,10 +2676,10 @@ class _$_FacilityAdditionalInformationModel
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FacilityAdditionalInformationModel &&
+            other is _$FacilityAdditionalInformationModelImpl &&
             (identical(other.trackingId, trackingId) ||
                 other.trackingId == trackingId) &&
             (identical(other.generalInformation, generalInformation) ||
@@ -2690,14 +2693,14 @@ class _$_FacilityAdditionalInformationModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FacilityAdditionalInformationModelCopyWith<
-          _$_FacilityAdditionalInformationModel>
-      get copyWith => __$$_FacilityAdditionalInformationModelCopyWithImpl<
-          _$_FacilityAdditionalInformationModel>(this, _$identity);
+  _$$FacilityAdditionalInformationModelImplCopyWith<
+          _$FacilityAdditionalInformationModelImpl>
+      get copyWith => __$$FacilityAdditionalInformationModelImplCopyWithImpl<
+          _$FacilityAdditionalInformationModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FacilityAdditionalInformationModelToJson(
+    return _$$FacilityAdditionalInformationModelImplToJson(
       this,
     );
   }
@@ -2708,11 +2711,11 @@ abstract class _FacilityAdditionalInformationModel
   const factory _FacilityAdditionalInformationModel(
           {final String? trackingId,
           final GeneralInformationModel? generalInformation}) =
-      _$_FacilityAdditionalInformationModel;
+      _$FacilityAdditionalInformationModelImpl;
 
   factory _FacilityAdditionalInformationModel.fromJson(
           Map<String, dynamic> json) =
-      _$_FacilityAdditionalInformationModel.fromJson;
+      _$FacilityAdditionalInformationModelImpl.fromJson;
 
   @override
   String? get trackingId;
@@ -2720,8 +2723,8 @@ abstract class _FacilityAdditionalInformationModel
   GeneralInformationModel? get generalInformation;
   @override
   @JsonKey(ignore: true)
-  _$$_FacilityAdditionalInformationModelCopyWith<
-          _$_FacilityAdditionalInformationModel>
+  _$$FacilityAdditionalInformationModelImplCopyWith<
+          _$FacilityAdditionalInformationModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2811,11 +2814,12 @@ class _$GeneralInformationModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GeneralInformationModelCopyWith<$Res>
+abstract class _$$GeneralInformationModelImplCopyWith<$Res>
     implements $GeneralInformationModelCopyWith<$Res> {
-  factory _$$_GeneralInformationModelCopyWith(_$_GeneralInformationModel value,
-          $Res Function(_$_GeneralInformationModel) then) =
-      __$$_GeneralInformationModelCopyWithImpl<$Res>;
+  factory _$$GeneralInformationModelImplCopyWith(
+          _$GeneralInformationModelImpl value,
+          $Res Function(_$GeneralInformationModelImpl) then) =
+      __$$GeneralInformationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2828,12 +2832,13 @@ abstract class _$$_GeneralInformationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GeneralInformationModelCopyWithImpl<$Res>
+class __$$GeneralInformationModelImplCopyWithImpl<$Res>
     extends _$GeneralInformationModelCopyWithImpl<$Res,
-        _$_GeneralInformationModel>
-    implements _$$_GeneralInformationModelCopyWith<$Res> {
-  __$$_GeneralInformationModelCopyWithImpl(_$_GeneralInformationModel _value,
-      $Res Function(_$_GeneralInformationModel) _then)
+        _$GeneralInformationModelImpl>
+    implements _$$GeneralInformationModelImplCopyWith<$Res> {
+  __$$GeneralInformationModelImplCopyWithImpl(
+      _$GeneralInformationModelImpl _value,
+      $Res Function(_$GeneralInformationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2846,7 +2851,7 @@ class __$$_GeneralInformationModelCopyWithImpl<$Res>
     Object? hasDiagnosticLab = freezed,
     Object? hasImagingCenter = freezed,
   }) {
-    return _then(_$_GeneralInformationModel(
+    return _then(_$GeneralInformationModelImpl(
       hasDialysisCenter: freezed == hasDialysisCenter
           ? _value.hasDialysisCenter
           : hasDialysisCenter // ignore: cast_nullable_to_non_nullable
@@ -2877,8 +2882,8 @@ class __$$_GeneralInformationModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GeneralInformationModel implements _GeneralInformationModel {
-  const _$_GeneralInformationModel(
+class _$GeneralInformationModelImpl implements _GeneralInformationModel {
+  const _$GeneralInformationModelImpl(
       {this.hasDialysisCenter,
       this.hasPharmacy,
       this.hasBloodBank,
@@ -2886,8 +2891,8 @@ class _$_GeneralInformationModel implements _GeneralInformationModel {
       this.hasDiagnosticLab,
       this.hasImagingCenter});
 
-  factory _$_GeneralInformationModel.fromJson(Map<String, dynamic> json) =>
-      _$$_GeneralInformationModelFromJson(json);
+  factory _$GeneralInformationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GeneralInformationModelImplFromJson(json);
 
   @override
   final String? hasDialysisCenter;
@@ -2908,10 +2913,10 @@ class _$_GeneralInformationModel implements _GeneralInformationModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GeneralInformationModel &&
+            other is _$GeneralInformationModelImpl &&
             (identical(other.hasDialysisCenter, hasDialysisCenter) ||
                 other.hasDialysisCenter == hasDialysisCenter) &&
             (identical(other.hasPharmacy, hasPharmacy) ||
@@ -2934,14 +2939,13 @@ class _$_GeneralInformationModel implements _GeneralInformationModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeneralInformationModelCopyWith<_$_GeneralInformationModel>
-      get copyWith =>
-          __$$_GeneralInformationModelCopyWithImpl<_$_GeneralInformationModel>(
-              this, _$identity);
+  _$$GeneralInformationModelImplCopyWith<_$GeneralInformationModelImpl>
+      get copyWith => __$$GeneralInformationModelImplCopyWithImpl<
+          _$GeneralInformationModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GeneralInformationModelToJson(
+    return _$$GeneralInformationModelImplToJson(
       this,
     );
   }
@@ -2954,10 +2958,10 @@ abstract class _GeneralInformationModel implements GeneralInformationModel {
       final String? hasBloodBank,
       final String? hasCathLab,
       final String? hasDiagnosticLab,
-      final String? hasImagingCenter}) = _$_GeneralInformationModel;
+      final String? hasImagingCenter}) = _$GeneralInformationModelImpl;
 
   factory _GeneralInformationModel.fromJson(Map<String, dynamic> json) =
-      _$_GeneralInformationModel.fromJson;
+      _$GeneralInformationModelImpl.fromJson;
 
   @override
   String? get hasDialysisCenter;
@@ -2973,7 +2977,7 @@ abstract class _GeneralInformationModel implements GeneralInformationModel {
   String? get hasImagingCenter;
   @override
   @JsonKey(ignore: true)
-  _$$_GeneralInformationModelCopyWith<_$_GeneralInformationModel>
+  _$$GeneralInformationModelImplCopyWith<_$GeneralInformationModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -3037,22 +3041,22 @@ class _$DocumentModelCopyWithImpl<$Res, $Val extends DocumentModel>
 }
 
 /// @nodoc
-abstract class _$$_DocumentModelCopyWith<$Res>
+abstract class _$$DocumentModelImplCopyWith<$Res>
     implements $DocumentModelCopyWith<$Res> {
-  factory _$$_DocumentModelCopyWith(
-          _$_DocumentModel value, $Res Function(_$_DocumentModel) then) =
-      __$$_DocumentModelCopyWithImpl<$Res>;
+  factory _$$DocumentModelImplCopyWith(
+          _$DocumentModelImpl value, $Res Function(_$DocumentModelImpl) then) =
+      __$$DocumentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? name, String? value, String? osid});
 }
 
 /// @nodoc
-class __$$_DocumentModelCopyWithImpl<$Res>
-    extends _$DocumentModelCopyWithImpl<$Res, _$_DocumentModel>
-    implements _$$_DocumentModelCopyWith<$Res> {
-  __$$_DocumentModelCopyWithImpl(
-      _$_DocumentModel _value, $Res Function(_$_DocumentModel) _then)
+class __$$DocumentModelImplCopyWithImpl<$Res>
+    extends _$DocumentModelCopyWithImpl<$Res, _$DocumentModelImpl>
+    implements _$$DocumentModelImplCopyWith<$Res> {
+  __$$DocumentModelImplCopyWithImpl(
+      _$DocumentModelImpl _value, $Res Function(_$DocumentModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3062,7 +3066,7 @@ class __$$_DocumentModelCopyWithImpl<$Res>
     Object? value = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_DocumentModel(
+    return _then(_$DocumentModelImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -3081,11 +3085,11 @@ class __$$_DocumentModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DocumentModel implements _DocumentModel {
-  const _$_DocumentModel({this.name, this.value, this.osid});
+class _$DocumentModelImpl implements _DocumentModel {
+  const _$DocumentModelImpl({this.name, this.value, this.osid});
 
-  factory _$_DocumentModel.fromJson(Map<String, dynamic> json) =>
-      _$$_DocumentModelFromJson(json);
+  factory _$DocumentModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DocumentModelImplFromJson(json);
 
   @override
   final String? name;
@@ -3100,10 +3104,10 @@ class _$_DocumentModel implements _DocumentModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DocumentModel &&
+            other is _$DocumentModelImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.osid, osid) || other.osid == osid));
@@ -3116,12 +3120,12 @@ class _$_DocumentModel implements _DocumentModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DocumentModelCopyWith<_$_DocumentModel> get copyWith =>
-      __$$_DocumentModelCopyWithImpl<_$_DocumentModel>(this, _$identity);
+  _$$DocumentModelImplCopyWith<_$DocumentModelImpl> get copyWith =>
+      __$$DocumentModelImplCopyWithImpl<_$DocumentModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DocumentModelToJson(
+    return _$$DocumentModelImplToJson(
       this,
     );
   }
@@ -3131,10 +3135,10 @@ abstract class _DocumentModel implements DocumentModel {
   const factory _DocumentModel(
       {final String? name,
       final String? value,
-      final String? osid}) = _$_DocumentModel;
+      final String? osid}) = _$DocumentModelImpl;
 
   factory _DocumentModel.fromJson(Map<String, dynamic> json) =
-      _$_DocumentModel.fromJson;
+      _$DocumentModelImpl.fromJson;
 
   @override
   String? get name;
@@ -3144,6 +3148,6 @@ abstract class _DocumentModel implements DocumentModel {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_DocumentModelCopyWith<_$_DocumentModel> get copyWith =>
+  _$$DocumentModelImplCopyWith<_$DocumentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

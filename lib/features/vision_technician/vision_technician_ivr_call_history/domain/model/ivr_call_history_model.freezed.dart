@@ -12,7 +12,7 @@ part of 'ivr_call_history_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 IvrCallHistoryModel _$IvrCallHistoryModelFromJson(Map<String, dynamic> json) {
   return _IvrCallHistoryModel.fromJson(json);
@@ -108,11 +108,11 @@ class _$IvrCallHistoryModelCopyWithImpl<$Res, $Val extends IvrCallHistoryModel>
 }
 
 /// @nodoc
-abstract class _$$_IvrCallHistoryModelCopyWith<$Res>
+abstract class _$$IvrCallHistoryModelImplCopyWith<$Res>
     implements $IvrCallHistoryModelCopyWith<$Res> {
-  factory _$$_IvrCallHistoryModelCopyWith(_$_IvrCallHistoryModel value,
-          $Res Function(_$_IvrCallHistoryModel) then) =
-      __$$_IvrCallHistoryModelCopyWithImpl<$Res>;
+  factory _$$IvrCallHistoryModelImplCopyWith(_$IvrCallHistoryModelImpl value,
+          $Res Function(_$IvrCallHistoryModelImpl) then) =
+      __$$IvrCallHistoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,11 +126,11 @@ abstract class _$$_IvrCallHistoryModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
-    extends _$IvrCallHistoryModelCopyWithImpl<$Res, _$_IvrCallHistoryModel>
-    implements _$$_IvrCallHistoryModelCopyWith<$Res> {
-  __$$_IvrCallHistoryModelCopyWithImpl(_$_IvrCallHistoryModel _value,
-      $Res Function(_$_IvrCallHistoryModel) _then)
+class __$$IvrCallHistoryModelImplCopyWithImpl<$Res>
+    extends _$IvrCallHistoryModelCopyWithImpl<$Res, _$IvrCallHistoryModelImpl>
+    implements _$$IvrCallHistoryModelImplCopyWith<$Res> {
+  __$$IvrCallHistoryModelImplCopyWithImpl(_$IvrCallHistoryModelImpl _value,
+      $Res Function(_$IvrCallHistoryModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,7 +144,7 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
     Object? status = null,
     Object? direction = null,
   }) {
-    return _then(_$_IvrCallHistoryModel(
+    return _then(_$IvrCallHistoryModelImpl(
       patientId: null == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
@@ -179,8 +179,8 @@ class __$$_IvrCallHistoryModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
-  const _$_IvrCallHistoryModel(
+class _$IvrCallHistoryModelImpl implements _IvrCallHistoryModel {
+  const _$IvrCallHistoryModelImpl(
       {@JsonKey(name: "callerIdentifier") required this.patientId,
       @JsonKey(name: "callerName") required this.name,
       @JsonKey(name: "callerNumber") this.mobile,
@@ -189,8 +189,8 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
       required this.status,
       required this.direction});
 
-  factory _$_IvrCallHistoryModel.fromJson(Map<String, dynamic> json) =>
-      _$$_IvrCallHistoryModelFromJson(json);
+  factory _$IvrCallHistoryModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IvrCallHistoryModelImplFromJson(json);
 
   @override
   @JsonKey(name: "callerIdentifier")
@@ -216,10 +216,10 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IvrCallHistoryModel &&
+            other is _$IvrCallHistoryModelImpl &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.name, name) || other.name == name) &&
@@ -240,13 +240,13 @@ class _$_IvrCallHistoryModel implements _IvrCallHistoryModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IvrCallHistoryModelCopyWith<_$_IvrCallHistoryModel> get copyWith =>
-      __$$_IvrCallHistoryModelCopyWithImpl<_$_IvrCallHistoryModel>(
+  _$$IvrCallHistoryModelImplCopyWith<_$IvrCallHistoryModelImpl> get copyWith =>
+      __$$IvrCallHistoryModelImplCopyWithImpl<_$IvrCallHistoryModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IvrCallHistoryModelToJson(
+    return _$$IvrCallHistoryModelImplToJson(
       this,
     );
   }
@@ -260,10 +260,10 @@ abstract class _IvrCallHistoryModel implements IvrCallHistoryModel {
       final int? duration,
       required final DateTime logDate,
       required final String status,
-      required final String direction}) = _$_IvrCallHistoryModel;
+      required final String direction}) = _$IvrCallHistoryModelImpl;
 
   factory _IvrCallHistoryModel.fromJson(Map<String, dynamic> json) =
-      _$_IvrCallHistoryModel.fromJson;
+      _$IvrCallHistoryModelImpl.fromJson;
 
   @override
   @JsonKey(name: "callerIdentifier")
@@ -284,6 +284,6 @@ abstract class _IvrCallHistoryModel implements IvrCallHistoryModel {
   String get direction;
   @override
   @JsonKey(ignore: true)
-  _$$_IvrCallHistoryModelCopyWith<_$_IvrCallHistoryModel> get copyWith =>
+  _$$IvrCallHistoryModelImplCopyWith<_$IvrCallHistoryModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

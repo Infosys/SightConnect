@@ -12,7 +12,7 @@ part of 'vg_event_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VisionGuardianEventModel _$VisionGuardianEventModelFromJson(
     Map<String, dynamic> json) {
@@ -151,12 +151,12 @@ class _$VisionGuardianEventModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_VisionGuardianEventModelCopyWith<$Res>
+abstract class _$$VisionGuardianEventModelImplCopyWith<$Res>
     implements $VisionGuardianEventModelCopyWith<$Res> {
-  factory _$$_VisionGuardianEventModelCopyWith(
-          _$_VisionGuardianEventModel value,
-          $Res Function(_$_VisionGuardianEventModel) then) =
-      __$$_VisionGuardianEventModelCopyWithImpl<$Res>;
+  factory _$$VisionGuardianEventModelImplCopyWith(
+          _$VisionGuardianEventModelImpl value,
+          $Res Function(_$VisionGuardianEventModelImpl) then) =
+      __$$VisionGuardianEventModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -176,12 +176,13 @@ abstract class _$$_VisionGuardianEventModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VisionGuardianEventModelCopyWithImpl<$Res>
+class __$$VisionGuardianEventModelImplCopyWithImpl<$Res>
     extends _$VisionGuardianEventModelCopyWithImpl<$Res,
-        _$_VisionGuardianEventModel>
-    implements _$$_VisionGuardianEventModelCopyWith<$Res> {
-  __$$_VisionGuardianEventModelCopyWithImpl(_$_VisionGuardianEventModel _value,
-      $Res Function(_$_VisionGuardianEventModel) _then)
+        _$VisionGuardianEventModelImpl>
+    implements _$$VisionGuardianEventModelImplCopyWith<$Res> {
+  __$$VisionGuardianEventModelImplCopyWithImpl(
+      _$VisionGuardianEventModelImpl _value,
+      $Res Function(_$VisionGuardianEventModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -201,7 +202,7 @@ class __$$_VisionGuardianEventModelCopyWithImpl<$Res>
     Object? images = freezed,
     Object? addresses = freezed,
   }) {
-    return _then(_$_VisionGuardianEventModel(
+    return _then(_$VisionGuardianEventModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -260,8 +261,8 @@ class __$$_VisionGuardianEventModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VisionGuardianEventModel implements _VisionGuardianEventModel {
-  _$_VisionGuardianEventModel(
+class _$VisionGuardianEventModelImpl implements _VisionGuardianEventModel {
+  _$VisionGuardianEventModelImpl(
       {this.id,
       this.title,
       this.description,
@@ -278,8 +279,8 @@ class _$_VisionGuardianEventModel implements _VisionGuardianEventModel {
       : _images = images,
         _addresses = addresses;
 
-  factory _$_VisionGuardianEventModel.fromJson(Map<String, dynamic> json) =>
-      _$$_VisionGuardianEventModelFromJson(json);
+  factory _$VisionGuardianEventModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VisionGuardianEventModelImplFromJson(json);
 
   @override
   final int? id;
@@ -329,10 +330,10 @@ class _$_VisionGuardianEventModel implements _VisionGuardianEventModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VisionGuardianEventModel &&
+            other is _$VisionGuardianEventModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
@@ -377,13 +378,13 @@ class _$_VisionGuardianEventModel implements _VisionGuardianEventModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VisionGuardianEventModelCopyWith<_$_VisionGuardianEventModel>
-      get copyWith => __$$_VisionGuardianEventModelCopyWithImpl<
-          _$_VisionGuardianEventModel>(this, _$identity);
+  _$$VisionGuardianEventModelImplCopyWith<_$VisionGuardianEventModelImpl>
+      get copyWith => __$$VisionGuardianEventModelImplCopyWithImpl<
+          _$VisionGuardianEventModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisionGuardianEventModelToJson(
+    return _$$VisionGuardianEventModelImplToJson(
       this,
     );
   }
@@ -404,10 +405,10 @@ abstract class _VisionGuardianEventModel implements VisionGuardianEventModel {
           final String? eventStatus,
           final List<VisionGuardianEventImage>? images,
           final List<VisionGuardianEventAddress>? addresses}) =
-      _$_VisionGuardianEventModel;
+      _$VisionGuardianEventModelImpl;
 
   factory _VisionGuardianEventModel.fromJson(Map<String, dynamic> json) =
-      _$_VisionGuardianEventModel.fromJson;
+      _$VisionGuardianEventModelImpl.fromJson;
 
   @override
   int? get id;
@@ -437,7 +438,7 @@ abstract class _VisionGuardianEventModel implements VisionGuardianEventModel {
   List<VisionGuardianEventAddress>? get addresses;
   @override
   @JsonKey(ignore: true)
-  _$$_VisionGuardianEventModelCopyWith<_$_VisionGuardianEventModel>
+  _$$VisionGuardianEventModelImplCopyWith<_$VisionGuardianEventModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -534,12 +535,12 @@ class _$VisionGuardianEventImageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_VisionGuardianEventImageCopyWith<$Res>
+abstract class _$$VisionGuardianEventImageImplCopyWith<$Res>
     implements $VisionGuardianEventImageCopyWith<$Res> {
-  factory _$$_VisionGuardianEventImageCopyWith(
-          _$_VisionGuardianEventImage value,
-          $Res Function(_$_VisionGuardianEventImage) then) =
-      __$$_VisionGuardianEventImageCopyWithImpl<$Res>;
+  factory _$$VisionGuardianEventImageImplCopyWith(
+          _$VisionGuardianEventImageImpl value,
+          $Res Function(_$VisionGuardianEventImageImpl) then) =
+      __$$VisionGuardianEventImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -553,12 +554,13 @@ abstract class _$$_VisionGuardianEventImageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VisionGuardianEventImageCopyWithImpl<$Res>
+class __$$VisionGuardianEventImageImplCopyWithImpl<$Res>
     extends _$VisionGuardianEventImageCopyWithImpl<$Res,
-        _$_VisionGuardianEventImage>
-    implements _$$_VisionGuardianEventImageCopyWith<$Res> {
-  __$$_VisionGuardianEventImageCopyWithImpl(_$_VisionGuardianEventImage _value,
-      $Res Function(_$_VisionGuardianEventImage) _then)
+        _$VisionGuardianEventImageImpl>
+    implements _$$VisionGuardianEventImageImplCopyWith<$Res> {
+  __$$VisionGuardianEventImageImplCopyWithImpl(
+      _$VisionGuardianEventImageImpl _value,
+      $Res Function(_$VisionGuardianEventImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -572,7 +574,7 @@ class __$$_VisionGuardianEventImageCopyWithImpl<$Res>
     Object? status = freezed,
     Object? isDeleted = freezed,
   }) {
-    return _then(_$_VisionGuardianEventImage(
+    return _then(_$VisionGuardianEventImageImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -607,8 +609,8 @@ class __$$_VisionGuardianEventImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VisionGuardianEventImage implements _VisionGuardianEventImage {
-  _$_VisionGuardianEventImage(
+class _$VisionGuardianEventImageImpl implements _VisionGuardianEventImage {
+  _$VisionGuardianEventImageImpl(
       {this.id,
       this.baseUrl,
       this.endpoint,
@@ -617,8 +619,8 @@ class _$_VisionGuardianEventImage implements _VisionGuardianEventImage {
       this.status,
       this.isDeleted});
 
-  factory _$_VisionGuardianEventImage.fromJson(Map<String, dynamic> json) =>
-      _$$_VisionGuardianEventImageFromJson(json);
+  factory _$VisionGuardianEventImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VisionGuardianEventImageImplFromJson(json);
 
   @override
   final int? id;
@@ -641,10 +643,10 @@ class _$_VisionGuardianEventImage implements _VisionGuardianEventImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VisionGuardianEventImage &&
+            other is _$VisionGuardianEventImageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
             (identical(other.endpoint, endpoint) ||
@@ -665,13 +667,13 @@ class _$_VisionGuardianEventImage implements _VisionGuardianEventImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VisionGuardianEventImageCopyWith<_$_VisionGuardianEventImage>
-      get copyWith => __$$_VisionGuardianEventImageCopyWithImpl<
-          _$_VisionGuardianEventImage>(this, _$identity);
+  _$$VisionGuardianEventImageImplCopyWith<_$VisionGuardianEventImageImpl>
+      get copyWith => __$$VisionGuardianEventImageImplCopyWithImpl<
+          _$VisionGuardianEventImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisionGuardianEventImageToJson(
+    return _$$VisionGuardianEventImageImplToJson(
       this,
     );
   }
@@ -685,10 +687,10 @@ abstract class _VisionGuardianEventImage implements VisionGuardianEventImage {
       final String? fileId,
       final bool? thumbnail,
       final String? status,
-      final bool? isDeleted}) = _$_VisionGuardianEventImage;
+      final bool? isDeleted}) = _$VisionGuardianEventImageImpl;
 
   factory _VisionGuardianEventImage.fromJson(Map<String, dynamic> json) =
-      _$_VisionGuardianEventImage.fromJson;
+      _$VisionGuardianEventImageImpl.fromJson;
 
   @override
   int? get id;
@@ -706,7 +708,7 @@ abstract class _VisionGuardianEventImage implements VisionGuardianEventImage {
   bool? get isDeleted;
   @override
   @JsonKey(ignore: true)
-  _$$_VisionGuardianEventImageCopyWith<_$_VisionGuardianEventImage>
+  _$$VisionGuardianEventImageImplCopyWith<_$VisionGuardianEventImageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -874,12 +876,12 @@ class _$VisionGuardianEventAddressCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_VisionGuardianEventAddressCopyWith<$Res>
+abstract class _$$VisionGuardianEventAddressImplCopyWith<$Res>
     implements $VisionGuardianEventAddressCopyWith<$Res> {
-  factory _$$_VisionGuardianEventAddressCopyWith(
-          _$_VisionGuardianEventAddress value,
-          $Res Function(_$_VisionGuardianEventAddress) then) =
-      __$$_VisionGuardianEventAddressCopyWithImpl<$Res>;
+  factory _$$VisionGuardianEventAddressImplCopyWith(
+          _$VisionGuardianEventAddressImpl value,
+          $Res Function(_$VisionGuardianEventAddressImpl) then) =
+      __$$VisionGuardianEventAddressImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -903,13 +905,13 @@ abstract class _$$_VisionGuardianEventAddressCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VisionGuardianEventAddressCopyWithImpl<$Res>
+class __$$VisionGuardianEventAddressImplCopyWithImpl<$Res>
     extends _$VisionGuardianEventAddressCopyWithImpl<$Res,
-        _$_VisionGuardianEventAddress>
-    implements _$$_VisionGuardianEventAddressCopyWith<$Res> {
-  __$$_VisionGuardianEventAddressCopyWithImpl(
-      _$_VisionGuardianEventAddress _value,
-      $Res Function(_$_VisionGuardianEventAddress) _then)
+        _$VisionGuardianEventAddressImpl>
+    implements _$$VisionGuardianEventAddressImplCopyWith<$Res> {
+  __$$VisionGuardianEventAddressImplCopyWithImpl(
+      _$VisionGuardianEventAddressImpl _value,
+      $Res Function(_$VisionGuardianEventAddressImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -933,7 +935,7 @@ class __$$_VisionGuardianEventAddressCopyWithImpl<$Res>
     Object? addressType = freezed,
     Object? isDeleted = freezed,
   }) {
-    return _then(_$_VisionGuardianEventAddress(
+    return _then(_$VisionGuardianEventAddressImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1008,8 +1010,8 @@ class __$$_VisionGuardianEventAddressCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VisionGuardianEventAddress implements _VisionGuardianEventAddress {
-  _$_VisionGuardianEventAddress(
+class _$VisionGuardianEventAddressImpl implements _VisionGuardianEventAddress {
+  _$VisionGuardianEventAddressImpl(
       {this.id,
       this.venueName,
       this.addressLine1,
@@ -1028,8 +1030,9 @@ class _$_VisionGuardianEventAddress implements _VisionGuardianEventAddress {
       this.addressType,
       this.isDeleted});
 
-  factory _$_VisionGuardianEventAddress.fromJson(Map<String, dynamic> json) =>
-      _$$_VisionGuardianEventAddressFromJson(json);
+  factory _$VisionGuardianEventAddressImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$VisionGuardianEventAddressImplFromJson(json);
 
   @override
   final int? id;
@@ -1072,10 +1075,10 @@ class _$_VisionGuardianEventAddress implements _VisionGuardianEventAddress {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VisionGuardianEventAddress &&
+            other is _$VisionGuardianEventAddressImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.venueName, venueName) ||
                 other.venueName == venueName) &&
@@ -1131,13 +1134,13 @@ class _$_VisionGuardianEventAddress implements _VisionGuardianEventAddress {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VisionGuardianEventAddressCopyWith<_$_VisionGuardianEventAddress>
-      get copyWith => __$$_VisionGuardianEventAddressCopyWithImpl<
-          _$_VisionGuardianEventAddress>(this, _$identity);
+  _$$VisionGuardianEventAddressImplCopyWith<_$VisionGuardianEventAddressImpl>
+      get copyWith => __$$VisionGuardianEventAddressImplCopyWithImpl<
+          _$VisionGuardianEventAddressImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisionGuardianEventAddressToJson(
+    return _$$VisionGuardianEventAddressImplToJson(
       this,
     );
   }
@@ -1162,10 +1165,10 @@ abstract class _VisionGuardianEventAddress
       final double? longitude,
       final bool? isPrimary,
       final String? addressType,
-      final bool? isDeleted}) = _$_VisionGuardianEventAddress;
+      final bool? isDeleted}) = _$VisionGuardianEventAddressImpl;
 
   factory _VisionGuardianEventAddress.fromJson(Map<String, dynamic> json) =
-      _$_VisionGuardianEventAddress.fromJson;
+      _$VisionGuardianEventAddressImpl.fromJson;
 
   @override
   int? get id;
@@ -1203,6 +1206,6 @@ abstract class _VisionGuardianEventAddress
   bool? get isDeleted;
   @override
   @JsonKey(ignore: true)
-  _$$_VisionGuardianEventAddressCopyWith<_$_VisionGuardianEventAddress>
+  _$$VisionGuardianEventAddressImplCopyWith<_$VisionGuardianEventAddressImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

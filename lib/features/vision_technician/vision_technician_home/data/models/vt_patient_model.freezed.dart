@@ -12,7 +12,7 @@ part of 'vt_patient_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VTPatientDto _$VTPatientDtoFromJson(Map<String, dynamic> json) {
   return _VTPatientDto.fromJson(json);
@@ -162,11 +162,11 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
 }
 
 /// @nodoc
-abstract class _$$_VTPatientDtoCopyWith<$Res>
+abstract class _$$VTPatientDtoImplCopyWith<$Res>
     implements $VTPatientDtoCopyWith<$Res> {
-  factory _$$_VTPatientDtoCopyWith(
-          _$_VTPatientDto value, $Res Function(_$_VTPatientDto) then) =
-      __$$_VTPatientDtoCopyWithImpl<$Res>;
+  factory _$$VTPatientDtoImplCopyWith(
+          _$VTPatientDtoImpl value, $Res Function(_$VTPatientDtoImpl) then) =
+      __$$VTPatientDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -188,11 +188,11 @@ abstract class _$$_VTPatientDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VTPatientDtoCopyWithImpl<$Res>
-    extends _$VTPatientDtoCopyWithImpl<$Res, _$_VTPatientDto>
-    implements _$$_VTPatientDtoCopyWith<$Res> {
-  __$$_VTPatientDtoCopyWithImpl(
-      _$_VTPatientDto _value, $Res Function(_$_VTPatientDto) _then)
+class __$$VTPatientDtoImplCopyWithImpl<$Res>
+    extends _$VTPatientDtoCopyWithImpl<$Res, _$VTPatientDtoImpl>
+    implements _$$VTPatientDtoImplCopyWith<$Res> {
+  __$$VTPatientDtoImplCopyWithImpl(
+      _$VTPatientDtoImpl _value, $Res Function(_$VTPatientDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -214,7 +214,7 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
     Object? encounterStatus = freezed,
     Object? category = freezed,
   }) {
-    return _then(_$_VTPatientDto(
+    return _then(_$VTPatientDtoImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -281,8 +281,8 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VTPatientDto implements _VTPatientDto {
-  const _$_VTPatientDto(
+class _$VTPatientDtoImpl implements _VTPatientDto {
+  const _$VTPatientDtoImpl(
       {this.id,
       this.name,
       this.mobile,
@@ -299,8 +299,8 @@ class _$_VTPatientDto implements _VTPatientDto {
       this.encounterStatus,
       this.category});
 
-  factory _$_VTPatientDto.fromJson(Map<String, dynamic> json) =>
-      _$$_VTPatientDtoFromJson(json);
+  factory _$VTPatientDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VTPatientDtoImplFromJson(json);
 
   @override
   final int? id;
@@ -340,10 +340,10 @@ class _$_VTPatientDto implements _VTPatientDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VTPatientDto &&
+            other is _$VTPatientDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.mobile, mobile) || other.mobile == mobile) &&
@@ -393,12 +393,12 @@ class _$_VTPatientDto implements _VTPatientDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VTPatientDtoCopyWith<_$_VTPatientDto> get copyWith =>
-      __$$_VTPatientDtoCopyWithImpl<_$_VTPatientDto>(this, _$identity);
+  _$$VTPatientDtoImplCopyWith<_$VTPatientDtoImpl> get copyWith =>
+      __$$VTPatientDtoImplCopyWithImpl<_$VTPatientDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VTPatientDtoToJson(
+    return _$$VTPatientDtoImplToJson(
       this,
     );
   }
@@ -420,10 +420,10 @@ abstract class _VTPatientDto implements VTPatientDto {
       @TimestampConverter() final DateTime? encounterStartDate,
       final String? status,
       final EncounterStatus? encounterStatus,
-      final SeverityCategory? category}) = _$_VTPatientDto;
+      final SeverityCategory? category}) = _$VTPatientDtoImpl;
 
   factory _VTPatientDto.fromJson(Map<String, dynamic> json) =
-      _$_VTPatientDto.fromJson;
+      _$VTPatientDtoImpl.fromJson;
 
   @override
   int? get id;
@@ -458,6 +458,6 @@ abstract class _VTPatientDto implements VTPatientDto {
   SeverityCategory? get category;
   @override
   @JsonKey(ignore: true)
-  _$$_VTPatientDtoCopyWith<_$_VTPatientDto> get copyWith =>
+  _$$VTPatientDtoImplCopyWith<_$VTPatientDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

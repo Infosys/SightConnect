@@ -12,7 +12,7 @@ part of 'User_details_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserDetails _$UserDetailsFromJson(Map<String, dynamic> json) {
   return _UserDetails.fromJson(json);
@@ -161,11 +161,11 @@ class _$UserDetailsCopyWithImpl<$Res, $Val extends UserDetails>
 }
 
 /// @nodoc
-abstract class _$$_UserDetailsCopyWith<$Res>
+abstract class _$$UserDetailsImplCopyWith<$Res>
     implements $UserDetailsCopyWith<$Res> {
-  factory _$$_UserDetailsCopyWith(
-          _$_UserDetails value, $Res Function(_$_UserDetails) then) =
-      __$$_UserDetailsCopyWithImpl<$Res>;
+  factory _$$UserDetailsImplCopyWith(
+          _$UserDetailsImpl value, $Res Function(_$UserDetailsImpl) then) =
+      __$$UserDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -187,11 +187,11 @@ abstract class _$$_UserDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserDetailsCopyWithImpl<$Res>
-    extends _$UserDetailsCopyWithImpl<$Res, _$_UserDetails>
-    implements _$$_UserDetailsCopyWith<$Res> {
-  __$$_UserDetailsCopyWithImpl(
-      _$_UserDetails _value, $Res Function(_$_UserDetails) _then)
+class __$$UserDetailsImplCopyWithImpl<$Res>
+    extends _$UserDetailsCopyWithImpl<$Res, _$UserDetailsImpl>
+    implements _$$UserDetailsImplCopyWith<$Res> {
+  __$$UserDetailsImplCopyWithImpl(
+      _$UserDetailsImpl _value, $Res Function(_$UserDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -213,7 +213,7 @@ class __$$_UserDetailsCopyWithImpl<$Res>
     Object? diagnosis = freezed,
     Object? status = freezed,
   }) {
-    return _then(_$_UserDetails(
+    return _then(_$UserDetailsImpl(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
@@ -280,8 +280,8 @@ class __$$_UserDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserDetails implements _UserDetails {
-  _$_UserDetails(
+class _$UserDetailsImpl implements _UserDetails {
+  _$UserDetailsImpl(
       {this.patientId,
       this.patientName,
       this.patientAge,
@@ -298,8 +298,8 @@ class _$_UserDetails implements _UserDetails {
       this.diagnosis,
       this.status});
 
-  factory _$_UserDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_UserDetailsFromJson(json);
+  factory _$UserDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserDetailsImplFromJson(json);
 
   @override
   final String? patientId;
@@ -338,10 +338,10 @@ class _$_UserDetails implements _UserDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserDetails &&
+            other is _$UserDetailsImpl &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.patientName, patientName) ||
@@ -392,12 +392,12 @@ class _$_UserDetails implements _UserDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserDetailsCopyWith<_$_UserDetails> get copyWith =>
-      __$$_UserDetailsCopyWithImpl<_$_UserDetails>(this, _$identity);
+  _$$UserDetailsImplCopyWith<_$UserDetailsImpl> get copyWith =>
+      __$$UserDetailsImplCopyWithImpl<_$UserDetailsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserDetailsToJson(
+    return _$$UserDetailsImplToJson(
       this,
     );
   }
@@ -419,10 +419,10 @@ abstract class _UserDetails implements UserDetails {
       final bool? isTestTaken,
       final String? treatment,
       final String? diagnosis,
-      final String? status}) = _$_UserDetails;
+      final String? status}) = _$UserDetailsImpl;
 
   factory _UserDetails.fromJson(Map<String, dynamic> json) =
-      _$_UserDetails.fromJson;
+      _$UserDetailsImpl.fromJson;
 
   @override
   String? get patientId;
@@ -456,6 +456,6 @@ abstract class _UserDetails implements UserDetails {
   String? get status;
   @override
   @JsonKey(ignore: true)
-  _$$_UserDetailsCopyWith<_$_UserDetails> get copyWith =>
+  _$$UserDetailsImplCopyWith<_$UserDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'vg_patient_response_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VisionGuardianPatientResponseModel _$VisionGuardianPatientResponseModelFromJson(
     Map<String, dynamic> json) {
@@ -166,12 +166,12 @@ class _$VisionGuardianPatientResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_VisionGuardianPatientResponseModelCopyWith<$Res>
+abstract class _$$VisionGuardianPatientResponseModelImplCopyWith<$Res>
     implements $VisionGuardianPatientResponseModelCopyWith<$Res> {
-  factory _$$_VisionGuardianPatientResponseModelCopyWith(
-          _$_VisionGuardianPatientResponseModel value,
-          $Res Function(_$_VisionGuardianPatientResponseModel) then) =
-      __$$_VisionGuardianPatientResponseModelCopyWithImpl<$Res>;
+  factory _$$VisionGuardianPatientResponseModelImplCopyWith(
+          _$VisionGuardianPatientResponseModelImpl value,
+          $Res Function(_$VisionGuardianPatientResponseModelImpl) then) =
+      __$$VisionGuardianPatientResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -193,13 +193,13 @@ abstract class _$$_VisionGuardianPatientResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VisionGuardianPatientResponseModelCopyWithImpl<$Res>
+class __$$VisionGuardianPatientResponseModelImplCopyWithImpl<$Res>
     extends _$VisionGuardianPatientResponseModelCopyWithImpl<$Res,
-        _$_VisionGuardianPatientResponseModel>
-    implements _$$_VisionGuardianPatientResponseModelCopyWith<$Res> {
-  __$$_VisionGuardianPatientResponseModelCopyWithImpl(
-      _$_VisionGuardianPatientResponseModel _value,
-      $Res Function(_$_VisionGuardianPatientResponseModel) _then)
+        _$VisionGuardianPatientResponseModelImpl>
+    implements _$$VisionGuardianPatientResponseModelImplCopyWith<$Res> {
+  __$$VisionGuardianPatientResponseModelImplCopyWithImpl(
+      _$VisionGuardianPatientResponseModelImpl _value,
+      $Res Function(_$VisionGuardianPatientResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -221,7 +221,7 @@ class __$$_VisionGuardianPatientResponseModelCopyWithImpl<$Res>
     Object? status = freezed,
     Object? category = freezed,
   }) {
-    return _then(_$_VisionGuardianPatientResponseModel(
+    return _then(_$VisionGuardianPatientResponseModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -288,9 +288,9 @@ class __$$_VisionGuardianPatientResponseModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VisionGuardianPatientResponseModel
+class _$VisionGuardianPatientResponseModelImpl
     implements _VisionGuardianPatientResponseModel {
-  _$_VisionGuardianPatientResponseModel(
+  _$VisionGuardianPatientResponseModelImpl(
       {this.id,
       this.name,
       this.mobile,
@@ -307,9 +307,9 @@ class _$_VisionGuardianPatientResponseModel
       this.status,
       this.category});
 
-  factory _$_VisionGuardianPatientResponseModel.fromJson(
+  factory _$VisionGuardianPatientResponseModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_VisionGuardianPatientResponseModelFromJson(json);
+      _$$VisionGuardianPatientResponseModelImplFromJson(json);
 
   @override
   final int? id;
@@ -348,10 +348,10 @@ class _$_VisionGuardianPatientResponseModel
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VisionGuardianPatientResponseModel &&
+            other is _$VisionGuardianPatientResponseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.mobile, mobile) || other.mobile == mobile) &&
@@ -401,14 +401,14 @@ class _$_VisionGuardianPatientResponseModel
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VisionGuardianPatientResponseModelCopyWith<
-          _$_VisionGuardianPatientResponseModel>
-      get copyWith => __$$_VisionGuardianPatientResponseModelCopyWithImpl<
-          _$_VisionGuardianPatientResponseModel>(this, _$identity);
+  _$$VisionGuardianPatientResponseModelImplCopyWith<
+          _$VisionGuardianPatientResponseModelImpl>
+      get copyWith => __$$VisionGuardianPatientResponseModelImplCopyWithImpl<
+          _$VisionGuardianPatientResponseModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisionGuardianPatientResponseModelToJson(
+    return _$$VisionGuardianPatientResponseModelImplToJson(
       this,
     );
   }
@@ -431,11 +431,11 @@ abstract class _VisionGuardianPatientResponseModel
       final int? diagnosticReportId,
       final String? encounterStartDate,
       final String? status,
-      final String? category}) = _$_VisionGuardianPatientResponseModel;
+      final String? category}) = _$VisionGuardianPatientResponseModelImpl;
 
   factory _VisionGuardianPatientResponseModel.fromJson(
           Map<String, dynamic> json) =
-      _$_VisionGuardianPatientResponseModel.fromJson;
+      _$VisionGuardianPatientResponseModelImpl.fromJson;
 
   @override
   int? get id;
@@ -469,7 +469,7 @@ abstract class _VisionGuardianPatientResponseModel
   String? get category;
   @override
   @JsonKey(ignore: true)
-  _$$_VisionGuardianPatientResponseModelCopyWith<
-          _$_VisionGuardianPatientResponseModel>
+  _$$VisionGuardianPatientResponseModelImplCopyWith<
+          _$VisionGuardianPatientResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

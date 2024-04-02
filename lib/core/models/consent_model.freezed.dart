@@ -12,7 +12,7 @@ part of 'consent_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ConsentModel _$ConsentModelFromJson(Map<String, dynamic> json) {
   return _ConsentModel.fromJson(json);
@@ -84,11 +84,11 @@ class _$ConsentModelCopyWithImpl<$Res, $Val extends ConsentModel>
 }
 
 /// @nodoc
-abstract class _$$_ConsentModelCopyWith<$Res>
+abstract class _$$ConsentModelImplCopyWith<$Res>
     implements $ConsentModelCopyWith<$Res> {
-  factory _$$_ConsentModelCopyWith(
-          _$_ConsentModel value, $Res Function(_$_ConsentModel) then) =
-      __$$_ConsentModelCopyWithImpl<$Res>;
+  factory _$$ConsentModelImplCopyWith(
+          _$ConsentModelImpl value, $Res Function(_$ConsentModelImpl) then) =
+      __$$ConsentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,11 +99,11 @@ abstract class _$$_ConsentModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ConsentModelCopyWithImpl<$Res>
-    extends _$ConsentModelCopyWithImpl<$Res, _$_ConsentModel>
-    implements _$$_ConsentModelCopyWith<$Res> {
-  __$$_ConsentModelCopyWithImpl(
-      _$_ConsentModel _value, $Res Function(_$_ConsentModel) _then)
+class __$$ConsentModelImplCopyWithImpl<$Res>
+    extends _$ConsentModelCopyWithImpl<$Res, _$ConsentModelImpl>
+    implements _$$ConsentModelImplCopyWith<$Res> {
+  __$$ConsentModelImplCopyWithImpl(
+      _$ConsentModelImpl _value, $Res Function(_$ConsentModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_ConsentModelCopyWithImpl<$Res>
     Object? consentStatus = null,
     Object? acknowledgeDate = freezed,
   }) {
-    return _then(_$_ConsentModel(
+    return _then(_$ConsentModelImpl(
       templateId: freezed == templateId
           ? _value.templateId
           : templateId // ignore: cast_nullable_to_non_nullable
@@ -137,15 +137,15 @@ class __$$_ConsentModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ConsentModel implements _ConsentModel {
-  const _$_ConsentModel(
+class _$ConsentModelImpl implements _ConsentModel {
+  const _$ConsentModelImpl(
       {this.templateId,
       this.consentVersion,
       this.consentStatus = ConsentStatus.PENDING,
       this.acknowledgeDate});
 
-  factory _$_ConsentModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ConsentModelFromJson(json);
+  factory _$ConsentModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConsentModelImplFromJson(json);
 
   @override
   final int? templateId;
@@ -163,10 +163,10 @@ class _$_ConsentModel implements _ConsentModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ConsentModel &&
+            other is _$ConsentModelImpl &&
             (identical(other.templateId, templateId) ||
                 other.templateId == templateId) &&
             (identical(other.consentVersion, consentVersion) ||
@@ -185,12 +185,12 @@ class _$_ConsentModel implements _ConsentModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ConsentModelCopyWith<_$_ConsentModel> get copyWith =>
-      __$$_ConsentModelCopyWithImpl<_$_ConsentModel>(this, _$identity);
+  _$$ConsentModelImplCopyWith<_$ConsentModelImpl> get copyWith =>
+      __$$ConsentModelImplCopyWithImpl<_$ConsentModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ConsentModelToJson(
+    return _$$ConsentModelImplToJson(
       this,
     );
   }
@@ -201,10 +201,10 @@ abstract class _ConsentModel implements ConsentModel {
       {final int? templateId,
       final String? consentVersion,
       final ConsentStatus consentStatus,
-      final String? acknowledgeDate}) = _$_ConsentModel;
+      final String? acknowledgeDate}) = _$ConsentModelImpl;
 
   factory _ConsentModel.fromJson(Map<String, dynamic> json) =
-      _$_ConsentModel.fromJson;
+      _$ConsentModelImpl.fromJson;
 
   @override
   int? get templateId;
@@ -216,6 +216,6 @@ abstract class _ConsentModel implements ConsentModel {
   String? get acknowledgeDate;
   @override
   @JsonKey(ignore: true)
-  _$$_ConsentModelCopyWith<_$_ConsentModel> get copyWith =>
+  _$$ConsentModelImplCopyWith<_$ConsentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

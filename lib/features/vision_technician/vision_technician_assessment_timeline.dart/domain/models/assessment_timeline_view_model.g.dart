@@ -6,9 +6,9 @@ part of 'assessment_timeline_view_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AssessmentTimelineViewModel _$$_AssessmentTimelineViewModelFromJson(
+_$AssessmentTimelineViewModelImpl _$$AssessmentTimelineViewModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AssessmentTimelineViewModel(
+    _$AssessmentTimelineViewModelImpl(
       encounterId: json['encounterId'] as int?,
       title: json['title'] as String?,
       description: json['description'] as String?,
@@ -19,8 +19,8 @@ _$_AssessmentTimelineViewModel _$$_AssessmentTimelineViewModelFromJson(
       type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$_AssessmentTimelineViewModelToJson(
-        _$_AssessmentTimelineViewModel instance) =>
+Map<String, dynamic> _$$AssessmentTimelineViewModelImplToJson(
+        _$AssessmentTimelineViewModelImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'title': instance.title,
