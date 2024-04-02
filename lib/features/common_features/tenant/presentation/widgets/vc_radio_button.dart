@@ -13,31 +13,28 @@ class VCRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BounceInDown(
-      key: ValueKey(isSelected),
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          height: 20,
-          width: 20,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: isSelected ? AppColor.green : AppColor.white,
-            border: Border.all(
-              color: isSelected ? AppColor.green : AppColor.grey,
-              width: 2,
-            ),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 20,
+        width: 20,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: isSelected ? AppColor.green : AppColor.white,
+          border: Border.all(
+            color: isSelected ? AppColor.green : AppColor.grey,
+            width: 2,
           ),
-          child: Center(
-            child: isSelected
-                ? const Icon(
-                    Icons.check,
-                    color: AppColor.white,
-                    size: 16,
-                    weight: 10,
-                  )
-                : const SizedBox(),
-          ),
+        ),
+        child: Center(
+          child: isSelected
+              ? const Icon(
+                  Icons.check,
+                  color: AppColor.white,
+                  size: 16,
+                  weight: 10,
+                )
+              : const SizedBox(),
         ),
       ),
     );
