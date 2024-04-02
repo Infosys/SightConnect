@@ -24,6 +24,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:upgrader/upgrader.dart';
+
 import '../../../../core/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
@@ -282,31 +283,31 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
-       dialogStyle: Platform.isIOS
-              ? UpgradeDialogStyle.cupertino
-              : UpgradeDialogStyle.material,
-          showIgnore: kDebugMode ? true : false,
-          showLater: kDebugMode ? true : false,
-          shouldPopScope: () => kDebugMode ? true : false,
-          canDismissDialog: kDebugMode ? true : false,
-          onUpdate: () {
-            return true;
-          },
-          upgrader: Upgrader(
-            durationUntilAlertAgain: const Duration(milliseconds: 800),
-            willDisplayUpgrade: ({
-              appStoreVersion,
-              required display,
-              installedVersion,
-              minAppVersion,
-            }) {
-              logger.d({
-                "display : $display",
-                "appStoreVersion : $appStoreVersion",
-                "installedVersion : $installedVersion",
-              });
-            },
-          ),
+      dialogStyle: Platform.isIOS
+          ? UpgradeDialogStyle.cupertino
+          : UpgradeDialogStyle.material,
+      showIgnore: kDebugMode ? true : false,
+      showLater: kDebugMode ? true : false,
+      shouldPopScope: () => kDebugMode ? true : false,
+      canDismissDialog: kDebugMode ? true : false,
+      onUpdate: () {
+        return true;
+      },
+      upgrader: Upgrader(
+        durationUntilAlertAgain: const Duration(milliseconds: 800),
+        willDisplayUpgrade: ({
+          appStoreVersion,
+          required display,
+          installedVersion,
+          minAppVersion,
+        }) {
+          logger.d({
+            "display : $display",
+            "appStoreVersion : $appStoreVersion",
+            "installedVersion : $installedVersion",
+          });
+        },
+      ),
       child: TraceableWidget(
         actionName: "InitializationPage",
         path: InitializationPage.routeName,

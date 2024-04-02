@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -28,9 +28,6 @@ class VisionTechnicianHomePage extends ConsumerWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: UpgradeAlert(
-          dialogStyle: Platform.isIOS
-              ? UpgradeDialogStyle.cupertino
-              : UpgradeDialogStyle.material,
           showIgnore: kDebugMode ? true : false,
           showLater: kDebugMode ? true : false,
           shouldPopScope: () => kDebugMode ? true : false,
