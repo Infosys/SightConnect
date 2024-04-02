@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
+import 'package:eye_care_for_all/features/common_features/tenant/presentation/widgets/vc_list_tile.dart';
+import 'package:eye_care_for_all/features/common_features/tenant/presentation/widgets/vc_radio_button.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -65,6 +67,9 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
     final loc = context.loc!;
     final NearByVisionCenterState viewState =
         ref.watch(nearByVisionCenterProvider);
+    final model = ref.watch(globalTenantProvider);
+    final tenantId = model.tenantId;
+    final organizationId = model.organizationId;
 
     return Scaffold(
       appBar: const CustomAppbar(
@@ -171,85 +176,102 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
                       itemCount: viewState.visionCenters?.length,
                       itemBuilder: (context, index) {
                         final isSelectedVc = selectedTenants.value == index;
-                        final vcName = viewState.visionCenters![index]
+                        final vcName = viewState.visionCenters?[index]
                                 .facilityInformation?.facilityName ??
                             "";
                         final vcAddress = viewState
-                                .visionCenters![index]
+                                .visionCenters?[index]
                                 .facilityInformation
                                 ?.facilityAddressDetails
                                 ?.addressLine1 ??
-                            "";
+                            "-";
                         final vcContact = viewState
-                                .visionCenters![index]
+                                .visionCenters?[index]
                                 .facilityInformation
                                 ?.facilityContactInformation
                                 ?.facilityContactNumber ??
-                            "";
+                            "-";
+                        final vcEmail = viewState
+                                .visionCenters?[index]
+                                .facilityInformation
+                                ?.facilityContactInformation
+                                ?.facilityEmailId ??
+                            "-";
                         return Container(
                           margin: const EdgeInsets.only(bottom: AppSize.km),
-                          padding: const EdgeInsets.all(AppSize.km),
+                          padding: const EdgeInsets.all(AppSize.ks),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: AppColor.white,
                             boxShadow: applycustomShadow(),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
+                          child: Row(
                             children: [
-                              Flexible(
-                                child: Text(
-                                  vcName,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: applyFiraSansFont(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: VCRadioButton(
+                                  isSelected: isSelectedVc,
+                                  onTap: () {
+                                    if (!isSelectedVc) {
+                                      selectedTenants.value = index;
+                                      ref
+                                          .read(globalTenantProvider)
+                                          .setOrganizationId(viewState
+                                              .visionCenters![index].id!);
+                                      ref
+                                          .read(globalTenantProvider)
+                                          .setTenantId(viewState
+                                              .visionCenters![index]
+                                              .tenant
+                                              ?.id);
+                                    } else {
+                                      selectedTenants.value = -1;
+                                    }
+                                  },
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  _VCCheckBox(
-                                    isSelectedVc: isSelectedVc,
-                                    onTap: () {
-                                      if (!isSelectedVc) {
-                                        selectedTenants.value = index;
-                                        ref
-                                            .read(globalTenantProvider)
-                                            .setOrganizationId(viewState
-                                                .visionCenters![index].id!);
-                                        ref
-                                            .read(globalTenantProvider)
-                                            .setTenantId(viewState
-                                                .visionCenters![index]
-                                                .tenant
-                                                ?.id);
-                                      } else {
-                                        selectedTenants.value = -1;
-                                      }
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Flexible(
-                                child: Text(
-                                  "Contact: $vcContact",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: applyRobotoFont(fontSize: 14),
-                                ),
-                              ),
-                              Flexible(
-                                child: Text(
-                                  vcAddress,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: applyRobotoFont(fontSize: 14),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    VCListTile(
+                                      title: vcName,
+                                      style: applyFiraSansFont(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    VCListTile(
+                                      title: vcAddress,
+                                      icon: Icons.location_on_outlined,
+                                      style: applyFiraSansFont(
+                                        fontSize: 12,
+                                        color: AppColor.darkGrey,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    VCListTile(
+                                      title: vcContact,
+                                      icon: Icons.call_outlined,
+                                      style: applyFiraSansFont(
+                                        fontSize: 12,
+                                        color: AppColor.darkGrey,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    VCListTile(
+                                      title: vcEmail,
+                                      icon: Icons.email_outlined,
+                                      style: applyFiraSansFont(
+                                        fontSize: 12,
+                                        color: AppColor.darkGrey,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -264,44 +286,6 @@ class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
               },
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _VCCheckBox extends StatelessWidget {
-  const _VCCheckBox({
-    required this.isSelectedVc,
-    this.onTap,
-  });
-  final bool isSelectedVc;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        height: 20,
-        width: 20,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          color: isSelectedVc ? AppColor.primary : AppColor.white,
-          border: Border.all(
-            color: isSelectedVc ? AppColor.primary : AppColor.grey,
-            width: 2,
-          ),
-        ),
-        child: Center(
-          child: isSelectedVc
-              ? const Icon(
-                  Icons.check,
-                  color: AppColor.white,
-                  size: 16,
-                  weight: 10,
-                )
-              : const SizedBox(),
         ),
       ),
     );
