@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,57 +32,52 @@ class PatientCasesAnalytics extends ConsumerWidget {
       };
     }
 
-    return Pulsar(
-      disable: model.isLoading ? false : true,
-      animationCurve: Curves.easeOut,
-      highOpacity: 0.8,
-      lowOpacity: 0.5,
-      child: Container(
-        width: AppSize.width(context) * 0.95,
-        margin: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: AnalyticsCard(
-                title: loc.vtTotalCases,
-                firstValue: model.ivrCalls.toString().split(".")[0],
-                secondValue:
-                    '${model.totalVisit - model.ivrCalls}'.split(".")[0],
-                firstAnalyticsDescription: loc.vtIvrCalls,
-                secondAnalyticsDescription: loc.vtClinicVisits,
-                firstValueColor: AppColor.black,
-                secondValueColor: AppColor.black,
-              ),
+    return Container(
+      width: AppSize.width(context) * 0.95,
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: AnalyticsCard(
+              title: loc.vtTotalCases,
+              firstValue: model.ivrCalls.toString().split(".")[0],
+              secondValue: '${model.totalVisit - model.ivrCalls}'.split(".")[0],
+              firstAnalyticsDescription: loc.vtIvrCalls,
+              secondAnalyticsDescription: loc.vtClinicVisits,
+              firstValueColor: AppColor.black,
+              secondValueColor: AppColor.black,
+              isLoading: model.isLoading,
             ),
-            const SizedBox(width: AppSize.ks),
-            Expanded(
-              child: AnalyticsTriageStats(
-                title: loc.vtCasesClosed,
-                earlyValue: model.closedCases['EARLY'].toString().split(".")[0],
-                urgentValue:
-                    model.closedCases['URGENT'].toString().split(".")[0],
-                routineValue:
-                    model.closedCases['ROUTINE'].toString().split(".")[0],
-              ),
+          ),
+          const SizedBox(width: AppSize.ks),
+          Expanded(
+            child: AnalyticsTriageStats(
+              isLoading: model.isLoading,
+              title: loc.vtCasesClosed,
+              earlyValue: model.closedCases['EARLY'].toString().split(".")[0],
+              urgentValue: model.closedCases['URGENT'].toString().split(".")[0],
+              routineValue:
+                  model.closedCases['ROUTINE'].toString().split(".")[0],
             ),
-            const SizedBox(width: AppSize.ks),
-            Expanded(
-              child: AnalyticsTriageStats(
-                title: '% Completed',
-                earlyValue: model.triageCompleted.isEmpty
-                    ? "0%"
-                    : "${model.triageCompleted['EARLY'].toString().split(".")[0]}%",
-                urgentValue: model.triageCompleted.isEmpty
-                    ? "0%"
-                    : "${model.triageCompleted['URGENT'].toString().split(".")[0]}%",
-                routineValue: model.triageCompleted.isEmpty
-                    ? "0%"
-                    : "${model.triageCompleted['ROUTINE'].toString().split(".")[0]}%",
-              ),
+          ),
+          const SizedBox(width: AppSize.ks),
+          Expanded(
+            child: AnalyticsTriageStats(
+              title: '% Completed',
+              isLoading: model.isLoading,
+              earlyValue: model.triageCompleted.isEmpty
+                  ? "0%"
+                  : "${model.triageCompleted['EARLY'].toString().split(".")[0]}%",
+              urgentValue: model.triageCompleted.isEmpty
+                  ? "0%"
+                  : "${model.triageCompleted['URGENT'].toString().split(".")[0]}%",
+              routineValue: model.triageCompleted.isEmpty
+                  ? "0%"
+                  : "${model.triageCompleted['ROUTINE'].toString().split(".")[0]}%",
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -95,11 +89,13 @@ class AnalyticsCardData extends StatelessWidget {
     required this.value,
     required this.description,
     required this.color,
+    this.isLoading = false,
   });
 
   final String value;
   final String description;
   final Color color;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -109,33 +105,45 @@ class AnalyticsCardData extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         value.contains("%")
-            ? Text.rich(
-                TextSpan(
-                  text: value.replaceAll("%", ""),
-                  style: applyFiraSansFont(
-                    fontWeight: FontWeight.w500,
-                    fontSize: isMobile ? 16 : 28,
-                    color: color,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: " %",
-                      style: applyRobotoFont(
-                        fontWeight: FontWeight.w400,
-                        fontSize: isMobile ? 12 : 14,
-                        color: color,
-                      ),
+            ? Pulsar(
+                disable: isLoading ? false : true,
+                animationCurve: Curves.easeOut,
+                highOpacity: 0.8,
+                lowOpacity: 0.1,
+                child: Text.rich(
+                  TextSpan(
+                    text: value.replaceAll("%", ""),
+                    style: applyFiraSansFont(
+                      fontWeight: FontWeight.w500,
+                      fontSize: isMobile ? 16 : 28,
+                      color: color,
                     ),
-                  ],
+                    children: [
+                      TextSpan(
+                        text: " %",
+                        style: applyRobotoFont(
+                          fontWeight: FontWeight.w400,
+                          fontSize: isMobile ? 12 : 14,
+                          color: color,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
-            : AutoSizeText(
-                value,
-                maxLines: 1,
-                style: applyFiraSansFont(
-                  fontWeight: FontWeight.w500,
-                  fontSize: isMobile ? 16 : 32,
-                  color: color,
+            : Pulsar(
+                disable: isLoading ? false : true,
+                animationCurve: Curves.easeOut,
+                highOpacity: 0.8,
+                lowOpacity: 0.1,
+                child: AutoSizeText(
+                  value,
+                  maxLines: 1,
+                  style: applyFiraSansFont(
+                    fontWeight: FontWeight.w500,
+                    fontSize: isMobile ? 16 : 32,
+                    color: color,
+                  ),
                 ),
               ),
         AutoSizeText(
@@ -164,6 +172,7 @@ class AnalyticsCard extends StatelessWidget {
     this.pieChart = false,
     this.firstValueColor = AppColor.red,
     this.secondValueColor = AppColor.green,
+    this.isLoading = false,
   });
   final String title;
   final String firstValue;
@@ -173,6 +182,7 @@ class AnalyticsCard extends StatelessWidget {
   final bool pieChart;
   final Color firstValueColor;
   final Color secondValueColor;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -204,11 +214,13 @@ class AnalyticsCard extends StatelessWidget {
                 value: firstValue,
                 description: firstAnalyticsDescription,
                 color: firstValueColor,
+                isLoading: isLoading,
               ),
               AnalyticsCardData(
                 value: secondValue,
                 description: secondAnalyticsDescription,
                 color: secondValueColor,
+                isLoading: isLoading,
               ),
             ],
           ),
@@ -226,11 +238,13 @@ class AnalyticsTriageStats extends StatelessWidget {
     required this.earlyValue,
     required this.urgentValue,
     required this.routineValue,
+    this.isLoading = false,
   });
   final String title;
   final String earlyValue;
   final String urgentValue;
   final String routineValue;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -264,16 +278,19 @@ class AnalyticsTriageStats extends StatelessWidget {
                   value: routineValue,
                   description: "Routine",
                   color: AppColor.green,
+                  isLoading: isLoading,
                 ),
                 AnalyticsCardData(
                   value: earlyValue,
                   description: "Early",
                   color: AppColor.orange,
+                  isLoading: isLoading,
                 ),
                 AnalyticsCardData(
                   value: urgentValue,
                   description: "Urgent",
                   color: AppColor.red,
+                  isLoading: isLoading,
                 ),
               ],
             ),

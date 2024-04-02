@@ -48,7 +48,9 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
+      padding: isMobile
+          ? EdgeInsets.zero
+          : const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: PaginatedDataTable(
         rowsPerPage: model.pageSize,
         source: PatientAssessmentDataSource(
@@ -73,68 +75,53 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         },
         availableRowsPerPage: const [10, 20, 30],
         showCheckboxColumn: false,
-        columnSpacing: isMobile
-            ? AppSize.width(context) * 0.04
-            : AppSize.width(context) * 0.1,
+        columnSpacing: AppSize.width(context) * 0.1,
         headingRowHeight: isMobile ? AppSize.kl * 2 : AppSize.kl * 3,
         dataRowMaxHeight: isMobile ? AppSize.kl * 3 : AppSize.kl * 3.5,
         dataRowMinHeight: isMobile ? AppSize.kl * 1 : AppSize.kl * 2,
         columns: [
           DataColumn(
-            label: SizedBox(
-              width: AppSize.width(context) * 0.1,
-              child: Text(
-                loc.vtPatient.capitalizeFirstOfEach(),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: applyFiraSansFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                ),
+            label: Text(
+              loc.vtPatient.capitalizeFirstOfEach(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
               ),
             ),
           ),
           DataColumn(
-            label: SizedBox(
-              width: AppSize.width(context) * 0.1,
-              child: Text(
-                // loc.vtAssessmentID,
-                "Encounter ID",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: applyFiraSansFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                ),
+            label: Text(
+              "Encounter ID",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
               ),
             ),
           ),
           DataColumn(
-            label: SizedBox(
-              width: AppSize.width(context) * 0.1,
-              child: Text(
-                loc.vtStatus,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: applyFiraSansFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                ),
+            label: Text(
+              loc.vtStatus,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
               ),
             ),
           ),
           DataColumn(
-            label: SizedBox(
-              width: AppSize.width(context) * 0.1,
-              child: Text(
-                loc.vtCategory,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
-                style: applyFiraSansFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                ),
+            label: Text(
+              loc.vtCategory,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: applyFiraSansFont(
+                fontSize: 12,
+                color: AppColor.grey,
               ),
             ),
           ),

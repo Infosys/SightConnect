@@ -100,6 +100,7 @@ class QuestionTile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var checkBoxState = useState(false);
+    final isMobile = Responsive.isMobile(context);
 
     return CheckboxListTile(
       onChanged: (value) {
@@ -116,7 +117,7 @@ class QuestionTile extends HookConsumerWidget {
         overflow: TextOverflow.ellipsis,
         maxLines: 2,
         style: applyFiraSansFont(
-          fontSize: 18,
+          fontSize: isMobile ? 14 : 18,
           color: AppColor.black,
           fontWeight: FontWeight.w400,
         ),
@@ -126,7 +127,10 @@ class QuestionTile extends HookConsumerWidget {
       activeColor: AppColor.primary,
       checkColor: AppColor.white,
       secondary: IconButton(
-        icon: const Icon(Icons.info_outline),
+        icon: Icon(
+          Icons.info_outline,
+          size: isMobile ? 16 : 24,
+        ),
         onPressed: () {
           showDialog(
             context: context,
@@ -137,45 +141,48 @@ class QuestionTile extends HookConsumerWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            visualDensity: VisualDensity.compact,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: const Icon(
+                              Icons.close,
+                              size: 24,
+                            ),
+                          ),
+                        ],
+                      ),
                       Flexible(
                         child: Text(
                           question?.text ?? "",
                           style: applyFiraSansFont(
-                            fontSize: 24,
+                            fontSize: isMobile ? 14 : 16,
                             color: AppColor.black,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                      const SizedBox(width: AppSize.km),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.black45,
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: const Icon(Icons.close),
-                        ),
-                      ),
-                    ],
-                  ),
-                  content: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+                      const SizedBox(height: AppSize.km),
                       Visibility(
                         visible:
                             (question?.relatedImage?.first.url?.isNotEmpty ??
                                 false),
                         child: AppNetworkImage(
-                          height: AppSize.height(context) * 0.6,
-                          width: AppSize.height(context) * 0.6,
+                          height: isMobile
+                              ? AppSize.height(context) * 0.4
+                              : AppSize.height(context) * 0.6,
+                          width: isMobile
+                              ? AppSize.height(context) * 0.4
+                              : AppSize.height(context) * 0.6,
                           shapeCircle: false,
                           imageUrl: question!.relatedImage!.first.url!,
                         ),
