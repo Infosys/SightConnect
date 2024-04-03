@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
@@ -21,7 +20,6 @@ import 'package:share_plus/share_plus.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../../../../core/services/app_info_service.dart';
-import '../../../../../core/services/app_update_service.dart';
 import '../../../../../main.dart';
 
 class PatientHomePage extends ConsumerWidget {

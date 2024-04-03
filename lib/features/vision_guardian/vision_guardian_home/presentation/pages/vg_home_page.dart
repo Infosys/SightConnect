@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -14,7 +15,6 @@ import 'package:upgrader/upgrader.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../main.dart';
-import '../widgets/vg_services_cards_list.dart';
 
 class VisionGuardianHomePage extends ConsumerWidget {
   const VisionGuardianHomePage({super.key});
@@ -38,7 +38,6 @@ class VisionGuardianHomePage extends ConsumerWidget {
         actions: const [],
       ),
       body: UpgradeAlert(
-     
         showIgnore: false,
         showLater: false,
         shouldPopScope: () => false,

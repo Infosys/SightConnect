@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
