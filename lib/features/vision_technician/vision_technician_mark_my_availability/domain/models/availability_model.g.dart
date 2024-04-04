@@ -6,16 +6,17 @@ part of 'availability_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AvailabilityModel _$$_AvailabilityModelFromJson(Map<String, dynamic> json) =>
-    _$_AvailabilityModel(
+_$AvailabilityModelImpl _$$AvailabilityModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AvailabilityModelImpl(
       userId: json['userId'] as int,
       userType: json['userType'] as String?,
       mobile: json['mobile'] as String?,
       available: json['available'] as bool?,
     );
 
-Map<String, dynamic> _$$_AvailabilityModelToJson(
-        _$_AvailabilityModel instance) =>
+Map<String, dynamic> _$$AvailabilityModelImplToJson(
+        _$AvailabilityModelImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
       'userType': instance.userType,

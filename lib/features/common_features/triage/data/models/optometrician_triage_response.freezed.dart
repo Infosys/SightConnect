@@ -12,7 +12,7 @@ part of 'optometrician_triage_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OptometristTriageResponse _$OptometristTriageResponseFromJson(
     Map<String, dynamic> json) {
@@ -358,12 +358,12 @@ class _$OptometristTriageResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OptometristTriageResponseCopyWith<$Res>
+abstract class _$$OptometristTriageResponseImplCopyWith<$Res>
     implements $OptometristTriageResponseCopyWith<$Res> {
-  factory _$$_OptometristTriageResponseCopyWith(
-          _$_OptometristTriageResponse value,
-          $Res Function(_$_OptometristTriageResponse) then) =
-      __$$_OptometristTriageResponseCopyWithImpl<$Res>;
+  factory _$$OptometristTriageResponseImplCopyWith(
+          _$OptometristTriageResponseImpl value,
+          $Res Function(_$OptometristTriageResponseImpl) then) =
+      __$$OptometristTriageResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -412,13 +412,13 @@ abstract class _$$_OptometristTriageResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OptometristTriageResponseCopyWithImpl<$Res>
+class __$$OptometristTriageResponseImplCopyWithImpl<$Res>
     extends _$OptometristTriageResponseCopyWithImpl<$Res,
-        _$_OptometristTriageResponse>
-    implements _$$_OptometristTriageResponseCopyWith<$Res> {
-  __$$_OptometristTriageResponseCopyWithImpl(
-      _$_OptometristTriageResponse _value,
-      $Res Function(_$_OptometristTriageResponse) _then)
+        _$OptometristTriageResponseImpl>
+    implements _$$OptometristTriageResponseImplCopyWith<$Res> {
+  __$$OptometristTriageResponseImplCopyWithImpl(
+      _$OptometristTriageResponseImpl _value,
+      $Res Function(_$OptometristTriageResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -467,7 +467,7 @@ class __$$_OptometristTriageResponseCopyWithImpl<$Res>
     Object? visualAcuityAided = freezed,
     Object? eyeScanAssistance = freezed,
   }) {
-    return _then(_$_OptometristTriageResponse(
+    return _then(_$OptometristTriageResponseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -643,8 +643,8 @@ class __$$_OptometristTriageResponseCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$_OptometristTriageResponse implements _OptometristTriageResponse {
-  const _$_OptometristTriageResponse(
+class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
+  const _$OptometristTriageResponseImpl(
       {this.id,
       this.uuid,
       this.patientId,
@@ -691,8 +691,8 @@ class _$_OptometristTriageResponse implements _OptometristTriageResponse {
         _observations = observations,
         _mediaCapture = mediaCapture;
 
-  factory _$_OptometristTriageResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_OptometristTriageResponseFromJson(json);
+  factory _$OptometristTriageResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OptometristTriageResponseImplFromJson(json);
 
   @override
   final int? id;
@@ -814,10 +814,10 @@ class _$_OptometristTriageResponse implements _OptometristTriageResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OptometristTriageResponse &&
+            other is _$OptometristTriageResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.patientId, patientId) ||
@@ -945,13 +945,13 @@ class _$_OptometristTriageResponse implements _OptometristTriageResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OptometristTriageResponseCopyWith<_$_OptometristTriageResponse>
-      get copyWith => __$$_OptometristTriageResponseCopyWithImpl<
-          _$_OptometristTriageResponse>(this, _$identity);
+  _$$OptometristTriageResponseImplCopyWith<_$OptometristTriageResponseImpl>
+      get copyWith => __$$OptometristTriageResponseImplCopyWithImpl<
+          _$OptometristTriageResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OptometristTriageResponseToJson(
+    return _$$OptometristTriageResponseImplToJson(
       this,
     );
   }
@@ -1000,10 +1000,10 @@ abstract class _OptometristTriageResponse implements OptometristTriageResponse {
       final bool? assessmentAssistance,
       final bool? visualAcuityAssistance,
       final bool? visualAcuityAided,
-      final bool? eyeScanAssistance}) = _$_OptometristTriageResponse;
+      final bool? eyeScanAssistance}) = _$OptometristTriageResponseImpl;
 
   factory _OptometristTriageResponse.fromJson(Map<String, dynamic> json) =
-      _$_OptometristTriageResponse.fromJson;
+      _$OptometristTriageResponseImpl.fromJson;
 
   @override
   int? get id;
@@ -1095,7 +1095,7 @@ abstract class _OptometristTriageResponse implements OptometristTriageResponse {
   bool? get eyeScanAssistance;
   @override
   @JsonKey(ignore: true)
-  _$$_OptometristTriageResponseCopyWith<_$_OptometristTriageResponse>
+  _$$OptometristTriageResponseImplCopyWith<_$OptometristTriageResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1153,22 +1153,22 @@ class _$QuestionResponseCopyWithImpl<$Res, $Val extends QuestionResponse>
 }
 
 /// @nodoc
-abstract class _$$_QuestionResponseCopyWith<$Res>
+abstract class _$$QuestionResponseImplCopyWith<$Res>
     implements $QuestionResponseCopyWith<$Res> {
-  factory _$$_QuestionResponseCopyWith(
-          _$_QuestionResponse value, $Res Function(_$_QuestionResponse) then) =
-      __$$_QuestionResponseCopyWithImpl<$Res>;
+  factory _$$QuestionResponseImplCopyWith(_$QuestionResponseImpl value,
+          $Res Function(_$QuestionResponseImpl) then) =
+      __$$QuestionResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? questionCode, bool? response});
 }
 
 /// @nodoc
-class __$$_QuestionResponseCopyWithImpl<$Res>
-    extends _$QuestionResponseCopyWithImpl<$Res, _$_QuestionResponse>
-    implements _$$_QuestionResponseCopyWith<$Res> {
-  __$$_QuestionResponseCopyWithImpl(
-      _$_QuestionResponse _value, $Res Function(_$_QuestionResponse) _then)
+class __$$QuestionResponseImplCopyWithImpl<$Res>
+    extends _$QuestionResponseCopyWithImpl<$Res, _$QuestionResponseImpl>
+    implements _$$QuestionResponseImplCopyWith<$Res> {
+  __$$QuestionResponseImplCopyWithImpl(_$QuestionResponseImpl _value,
+      $Res Function(_$QuestionResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1177,7 +1177,7 @@ class __$$_QuestionResponseCopyWithImpl<$Res>
     Object? questionCode = freezed,
     Object? response = freezed,
   }) {
-    return _then(_$_QuestionResponse(
+    return _then(_$QuestionResponseImpl(
       questionCode: freezed == questionCode
           ? _value.questionCode
           : questionCode // ignore: cast_nullable_to_non_nullable
@@ -1192,11 +1192,11 @@ class __$$_QuestionResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_QuestionResponse implements _QuestionResponse {
-  const _$_QuestionResponse({this.questionCode, this.response});
+class _$QuestionResponseImpl implements _QuestionResponse {
+  const _$QuestionResponseImpl({this.questionCode, this.response});
 
-  factory _$_QuestionResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_QuestionResponseFromJson(json);
+  factory _$QuestionResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$QuestionResponseImplFromJson(json);
 
   @override
   final int? questionCode;
@@ -1209,10 +1209,10 @@ class _$_QuestionResponse implements _QuestionResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QuestionResponse &&
+            other is _$QuestionResponseImpl &&
             (identical(other.questionCode, questionCode) ||
                 other.questionCode == questionCode) &&
             (identical(other.response, response) ||
@@ -1226,12 +1226,13 @@ class _$_QuestionResponse implements _QuestionResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QuestionResponseCopyWith<_$_QuestionResponse> get copyWith =>
-      __$$_QuestionResponseCopyWithImpl<_$_QuestionResponse>(this, _$identity);
+  _$$QuestionResponseImplCopyWith<_$QuestionResponseImpl> get copyWith =>
+      __$$QuestionResponseImplCopyWithImpl<_$QuestionResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QuestionResponseToJson(
+    return _$$QuestionResponseImplToJson(
       this,
     );
   }
@@ -1239,10 +1240,10 @@ class _$_QuestionResponse implements _QuestionResponse {
 
 abstract class _QuestionResponse implements QuestionResponse {
   const factory _QuestionResponse(
-      {final int? questionCode, final bool? response}) = _$_QuestionResponse;
+      {final int? questionCode, final bool? response}) = _$QuestionResponseImpl;
 
   factory _QuestionResponse.fromJson(Map<String, dynamic> json) =
-      _$_QuestionResponse.fromJson;
+      _$QuestionResponseImpl.fromJson;
 
   @override
   int? get questionCode;
@@ -1250,7 +1251,7 @@ abstract class _QuestionResponse implements QuestionResponse {
   bool? get response;
   @override
   @JsonKey(ignore: true)
-  _$$_QuestionResponseCopyWith<_$_QuestionResponse> get copyWith =>
+  _$$QuestionResponseImplCopyWith<_$QuestionResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1308,22 +1309,22 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
 }
 
 /// @nodoc
-abstract class _$$_ObservationCopyWith<$Res>
+abstract class _$$ObservationImplCopyWith<$Res>
     implements $ObservationCopyWith<$Res> {
-  factory _$$_ObservationCopyWith(
-          _$_Observation value, $Res Function(_$_Observation) then) =
-      __$$_ObservationCopyWithImpl<$Res>;
+  factory _$$ObservationImplCopyWith(
+          _$ObservationImpl value, $Res Function(_$ObservationImpl) then) =
+      __$$ObservationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? observationCode, double? response});
 }
 
 /// @nodoc
-class __$$_ObservationCopyWithImpl<$Res>
-    extends _$ObservationCopyWithImpl<$Res, _$_Observation>
-    implements _$$_ObservationCopyWith<$Res> {
-  __$$_ObservationCopyWithImpl(
-      _$_Observation _value, $Res Function(_$_Observation) _then)
+class __$$ObservationImplCopyWithImpl<$Res>
+    extends _$ObservationCopyWithImpl<$Res, _$ObservationImpl>
+    implements _$$ObservationImplCopyWith<$Res> {
+  __$$ObservationImplCopyWithImpl(
+      _$ObservationImpl _value, $Res Function(_$ObservationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1332,7 +1333,7 @@ class __$$_ObservationCopyWithImpl<$Res>
     Object? observationCode = freezed,
     Object? response = freezed,
   }) {
-    return _then(_$_Observation(
+    return _then(_$ObservationImpl(
       observationCode: freezed == observationCode
           ? _value.observationCode
           : observationCode // ignore: cast_nullable_to_non_nullable
@@ -1347,11 +1348,11 @@ class __$$_ObservationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Observation implements _Observation {
-  const _$_Observation({this.observationCode, this.response});
+class _$ObservationImpl implements _Observation {
+  const _$ObservationImpl({this.observationCode, this.response});
 
-  factory _$_Observation.fromJson(Map<String, dynamic> json) =>
-      _$$_ObservationFromJson(json);
+  factory _$ObservationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ObservationImplFromJson(json);
 
   @override
   final int? observationCode;
@@ -1364,10 +1365,10 @@ class _$_Observation implements _Observation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Observation &&
+            other is _$ObservationImpl &&
             (identical(other.observationCode, observationCode) ||
                 other.observationCode == observationCode) &&
             (identical(other.response, response) ||
@@ -1381,12 +1382,12 @@ class _$_Observation implements _Observation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ObservationCopyWith<_$_Observation> get copyWith =>
-      __$$_ObservationCopyWithImpl<_$_Observation>(this, _$identity);
+  _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>
+      __$$ObservationImplCopyWithImpl<_$ObservationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ObservationToJson(
+    return _$$ObservationImplToJson(
       this,
     );
   }
@@ -1394,10 +1395,10 @@ class _$_Observation implements _Observation {
 
 abstract class _Observation implements Observation {
   const factory _Observation(
-      {final int? observationCode, final double? response}) = _$_Observation;
+      {final int? observationCode, final double? response}) = _$ObservationImpl;
 
   factory _Observation.fromJson(Map<String, dynamic> json) =
-      _$_Observation.fromJson;
+      _$ObservationImpl.fromJson;
 
   @override
   int? get observationCode;
@@ -1405,7 +1406,7 @@ abstract class _Observation implements Observation {
   double? get response;
   @override
   @JsonKey(ignore: true)
-  _$$_ObservationCopyWith<_$_Observation> get copyWith =>
+  _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1479,11 +1480,11 @@ class _$MediaCaptureCopyWithImpl<$Res, $Val extends MediaCapture>
 }
 
 /// @nodoc
-abstract class _$$_MediaCaptureCopyWith<$Res>
+abstract class _$$MediaCaptureImplCopyWith<$Res>
     implements $MediaCaptureCopyWith<$Res> {
-  factory _$$_MediaCaptureCopyWith(
-          _$_MediaCapture value, $Res Function(_$_MediaCapture) then) =
-      __$$_MediaCaptureCopyWithImpl<$Res>;
+  factory _$$MediaCaptureImplCopyWith(
+          _$MediaCaptureImpl value, $Res Function(_$MediaCaptureImpl) then) =
+      __$$MediaCaptureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1494,11 +1495,11 @@ abstract class _$$_MediaCaptureCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MediaCaptureCopyWithImpl<$Res>
-    extends _$MediaCaptureCopyWithImpl<$Res, _$_MediaCapture>
-    implements _$$_MediaCaptureCopyWith<$Res> {
-  __$$_MediaCaptureCopyWithImpl(
-      _$_MediaCapture _value, $Res Function(_$_MediaCapture) _then)
+class __$$MediaCaptureImplCopyWithImpl<$Res>
+    extends _$MediaCaptureCopyWithImpl<$Res, _$MediaCaptureImpl>
+    implements _$$MediaCaptureImplCopyWith<$Res> {
+  __$$MediaCaptureImplCopyWithImpl(
+      _$MediaCaptureImpl _value, $Res Function(_$MediaCaptureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1509,7 +1510,7 @@ class __$$_MediaCaptureCopyWithImpl<$Res>
     Object? fileType = freezed,
     Object? encodingType = freezed,
   }) {
-    return _then(_$_MediaCapture(
+    return _then(_$MediaCaptureImpl(
       mediaCode: freezed == mediaCode
           ? _value.mediaCode
           : mediaCode // ignore: cast_nullable_to_non_nullable
@@ -1532,12 +1533,12 @@ class __$$_MediaCaptureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MediaCapture implements _MediaCapture {
-  const _$_MediaCapture(
+class _$MediaCaptureImpl implements _MediaCapture {
+  const _$MediaCaptureImpl(
       {this.mediaCode, this.fileName, this.fileType, this.encodingType});
 
-  factory _$_MediaCapture.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaCaptureFromJson(json);
+  factory _$MediaCaptureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaCaptureImplFromJson(json);
 
   @override
   final int? mediaCode;
@@ -1554,10 +1555,10 @@ class _$_MediaCapture implements _MediaCapture {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaCapture &&
+            other is _$MediaCaptureImpl &&
             (identical(other.mediaCode, mediaCode) ||
                 other.mediaCode == mediaCode) &&
             (identical(other.fileName, fileName) ||
@@ -1576,12 +1577,12 @@ class _$_MediaCapture implements _MediaCapture {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaCaptureCopyWith<_$_MediaCapture> get copyWith =>
-      __$$_MediaCaptureCopyWithImpl<_$_MediaCapture>(this, _$identity);
+  _$$MediaCaptureImplCopyWith<_$MediaCaptureImpl> get copyWith =>
+      __$$MediaCaptureImplCopyWithImpl<_$MediaCaptureImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MediaCaptureToJson(
+    return _$$MediaCaptureImplToJson(
       this,
     );
   }
@@ -1592,10 +1593,10 @@ abstract class _MediaCapture implements MediaCapture {
       {final int? mediaCode,
       final String? fileName,
       final String? fileType,
-      final String? encodingType}) = _$_MediaCapture;
+      final String? encodingType}) = _$MediaCaptureImpl;
 
   factory _MediaCapture.fromJson(Map<String, dynamic> json) =
-      _$_MediaCapture.fromJson;
+      _$MediaCaptureImpl.fromJson;
 
   @override
   int? get mediaCode;
@@ -1607,6 +1608,6 @@ abstract class _MediaCapture implements MediaCapture {
   String? get encodingType;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaCaptureCopyWith<_$_MediaCapture> get copyWith =>
+  _$$MediaCaptureImplCopyWith<_$MediaCaptureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

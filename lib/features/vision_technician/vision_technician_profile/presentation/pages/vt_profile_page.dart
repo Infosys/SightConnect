@@ -2,10 +2,12 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_work_location_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_name_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_organisation_details_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_personal_details_card.dart';
@@ -16,7 +18,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -29,20 +31,20 @@ class VTProfilePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     var isLoading = useState(false);
-    return Scaffold(
-      appBar: CustomAppbar(
-        centerTitle: false,
-        title: Text(
-          loc.vtProfile,
-          textAlign: TextAlign.left,
+    return LoadingOverlay(
+      isLoading: isLoading.value,
+      child: Scaffold(
+        appBar: CustomAppbar(
+          centerTitle: false,
+          title: Text(
+            loc.vtProfile,
+            textAlign: TextAlign.left,
+          ),
+          actions: const [],
         ),
-        actions: const [],
-      ),
-      body: ref.watch(getVTProfileProvider).when(
-        data: (data) {
-          return LoadingOverlay(
-            isLoading: isLoading.value,
-            child: SingleChildScrollView(
+        body: ref.watch(getVTProfileProvider).when(
+          data: (data) {
+            return SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Column(
@@ -54,15 +56,15 @@ class VTProfilePage extends HookConsumerWidget {
                     const SizedBox(height: AppSize.km),
                     VTProfilePersonalDetailsCard(profileData: data),
                     const SizedBox(height: AppSize.km),
-                    // VgProfileWorkLocationCard(profileData: data),
-                    // const SizedBox(
-                    //   height: AppSize.km,
-                    // ),
+                    VgProfileWorkLocationCard(profileData: data),
+                    const SizedBox(
+                      height: AppSize.km,
+                    ),
                     VTProfileOrganisationDetailsCard(profileData: data),
-                    // const SizedBox(
-                    //   height: AppSize.km,
-                    // ),
-                    //VgProfileTrainingCertificateCard(profileData: data),
+                    const SizedBox(
+                      height: AppSize.km,
+                    ),
+                    // VgProfileTrainingCertificateCard(profileData: data),
                     const SizedBox(height: AppSize.km),
                     AppCard(
                       child: ListTile(
@@ -164,23 +166,38 @@ class VTProfilePage extends HookConsumerWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: AppSize.km),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Version: ${AppInfoService.appVersion}",
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.normal,
+                            color: AppColor.grey,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+
                     const SizedBox(height: AppSize.kl * 2),
                   ],
                 ),
               ),
-            ),
-          );
-        },
-        error: (e, s) {
-          return Center(
-            child: Text("Error $e"),
-          );
-        },
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        },
+            );
+          },
+          error: (e, s) {
+            return Center(
+              child: Text("Error $e"),
+            );
+          },
+          loading: () {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          },
+        ),
       ),
     );
   }

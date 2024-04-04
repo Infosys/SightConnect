@@ -45,7 +45,7 @@ class CarePlanViewModel extends ChangeNotifier {
     required int reportId,
     required int encounterId,
   }) async {
-    final PatientInstruction patientInstruction =
+    final PatientInstruction? patientInstruction =
         _carePlanProvider.patientInstruction;
 
     int? visionCenterId =
@@ -68,6 +68,7 @@ class CarePlanViewModel extends ChangeNotifier {
       ],
       serviceRequest: [
         ServiceRequestModel(
+          note: _preliminaryAssessmentHelperProvider.remarksController.text,
           patientInstruction: patientInstruction,
           bodySite: BodySite.BOTH_EYES,
           identifier: visionCenterId, //vision center id
@@ -86,8 +87,8 @@ class CarePlanViewModel extends ChangeNotifier {
         ),
       ],
     );
-
-    logger.d({"care plan to be saved": carePlan.toJson()});
+    logger.d("CarePlanPostModel");
+    logger.d(carePlan.toJson());
 
     var response = await _vtCarePlanRemoteSource.saveCarePlan(
       carePlan: carePlan,

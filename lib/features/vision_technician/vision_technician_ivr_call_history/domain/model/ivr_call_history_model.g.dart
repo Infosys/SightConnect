@@ -6,9 +6,9 @@ part of 'ivr_call_history_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_IvrCallHistoryModel _$$_IvrCallHistoryModelFromJson(
+_$IvrCallHistoryModelImpl _$$IvrCallHistoryModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_IvrCallHistoryModel(
+    _$IvrCallHistoryModelImpl(
       patientId: json['callerIdentifier'] as String,
       name: json['callerName'] as String,
       mobile: json['callerNumber'] as String?,
@@ -18,8 +18,8 @@ _$_IvrCallHistoryModel _$$_IvrCallHistoryModelFromJson(
       direction: json['direction'] as String,
     );
 
-Map<String, dynamic> _$$_IvrCallHistoryModelToJson(
-        _$_IvrCallHistoryModel instance) =>
+Map<String, dynamic> _$$IvrCallHistoryModelImplToJson(
+        _$IvrCallHistoryModelImpl instance) =>
     <String, dynamic>{
       'callerIdentifier': instance.patientId,
       'callerName': instance.name,

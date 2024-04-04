@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:eye_care_for_all/app/app.dart';
+import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -21,6 +21,8 @@ Future<void> main() async {
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
+  ApiConstant.setupEnv(AppEnvironment.production);
+  logger.i('App Environment: ${ApiConstant.appEnvironment}');
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
   await AppInfoService.init();

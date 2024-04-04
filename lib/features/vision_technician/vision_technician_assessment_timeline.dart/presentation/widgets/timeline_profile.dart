@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -52,7 +53,7 @@ class TimelineProfile extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    model.name ?? "",
+                    model.name?.capitalizeFirstOfEach() ?? "",
                     maxLines: 1,
                     maxFontSize: 24,
                     minFontSize: 18,
@@ -62,7 +63,7 @@ class TimelineProfile extends ConsumerWidget {
                       color: AppColor.white,
                     ),
                   ),
-                  const SizedBox(height: AppSize.ks),
+                  SizedBox(height: isMobile ? AppSize.ks : AppSize.km),
                   Text(
                     "PID: OP ${model.id ?? ""}",
                     maxLines: 1,
@@ -121,7 +122,7 @@ class TimelineProfile extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSize.ks),
+                  SizedBox(height: isMobile ? AppSize.ks : AppSize.km),
                   Row(
                     children: [
                       Container(

@@ -12,22 +12,20 @@ var markMyAvailabilityHelperProvider =
   (ref) => MarkMyAvailabilityHelperNotifier(
     availabilityRepository: ref.watch(availabilityRepository),
     globalVTProvider: ref.watch(globalVTProvider),
-    available: ref.watch(globalVTProvider).user?.availableForTeleconsultation!,
   ),
 );
 
 class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
-  MarkMyAvailabilityHelperNotifier(
-      {required this.availabilityRepository,
-      required this.globalVTProvider,
-      required this.available});
+  MarkMyAvailabilityHelperNotifier({
+    required this.availabilityRepository,
+    required this.globalVTProvider,
+  });
 
   AvailabilityRepository availabilityRepository;
   GlobalVTProvider globalVTProvider;
-  bool? available;
 
   String markMyAvailabilityDataRange = "12 Nov - 30 Nov 2023";
-  var markMyAvailabilityList = [
+  final markMyAvailabilityList = [
     MarkMyAvailabilityModel(
       day: "Monday",
       time: [
@@ -82,28 +80,23 @@ class MarkMyAvailabilityHelperNotifier extends ChangeNotifier {
   bool markAvailability = false;
   bool isLoading = false;
 
-  Future<void> updateAvailability() async {
+  Future<bool> updateAvailability({
+    required bool available,
+  }) async {
     try {
       isLoading = true;
       notifyListeners();
-
-      if (available == null) return;
-
-      available = await availabilityRepository.postMarkMyAvailability(
-        !available!,
+      return await availabilityRepository.postMarkMyAvailability(
+        available,
         globalVTProvider.userId,
         globalVTProvider.user?.officialMobile,
       );
-
-      logger.d("markAvailability response : $markAvailability");
-
-      isLoading = false;
-      notifyListeners();
     } catch (e) {
       logger.d("updateAvailability error: $e");
+      rethrow;
+    } finally {
       isLoading = false;
       notifyListeners();
-      rethrow;
     }
   }
 

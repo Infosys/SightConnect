@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
@@ -48,9 +49,11 @@ class AssessmentDetailedAndTriageReportMapper {
           ? triageDetailedReport.carePlans!.first.activities?.first
               .plannedActivityReference?.serviceRequest?.identifier
           : null,
-      remarks: triageDetailedReport.carePlans?.isNotEmpty ?? false
-          ? triageDetailedReport.carePlans!.first.note
-          : null,
+
+      // remarks: triageDetailedReport.carePlans?.isNotEmpty ?? false
+      //     ? triageDetailedReport.carePlans!.first.note
+      //     : null,
+      remarks: getRemark(triageDetailedReport.carePlans),
     );
   }
 
@@ -146,6 +149,23 @@ class AssessmentDetailedAndTriageReportMapper {
     }
   }
 
+  static String getRemark(List<CarePlan>? carePlan) {
+    if (carePlan != null && carePlan.isNotEmpty) {
+      final activities = carePlan.first.activities;
+      if (activities != null && activities.isNotEmpty) {
+        final plannedActivityReference =
+            activities.first.plannedActivityReference;
+        if (plannedActivityReference != null) {
+          final serviceRequest = plannedActivityReference.serviceRequest;
+          if (serviceRequest != null && serviceRequest.note != null) {
+            return serviceRequest.note!;
+          }
+        }
+      }
+    }
+    return "";
+  }
+
   static String getBodySiteText(
     BuildContext context,
     BodySite bodySite,
@@ -171,17 +191,22 @@ class AssessmentDetailedAndTriageReportMapper {
       final List<QuestionResponseBriefEntity> questionResponseBriefEntity = [];
       Map<int, String> questionResponseMap = {};
       for (var question in triageAssessment.questionnaire!.questionnaireItem!) {
-        questionResponseMap[question.id!] = question.text!;
+        questionResponseMap[question.id!] = PersistentAuthStateService
+                .authState.activeRole!
+                .contains("VISION_TECHNICIAN")
+            ? question.shortText ?? ""
+            : question.text ?? "";
       }
 
       for (var response in triageDetailedReport.responses!) {
         if (questionResponseMap.containsKey(response.linkId)) {
           questionResponseBriefEntity.add(
             QuestionResponseBriefEntity(
-                question: questionResponseMap[response.linkId]!,
-                response: response.answers?.isNotEmpty ?? false
-                    ? response.answers!.first.value
-                    : ""),
+              question: questionResponseMap[response.linkId]!,
+              response: response.answers?.isNotEmpty ?? false
+                  ? response.answers!.first.value
+                  : "",
+            ),
           );
         }
       }

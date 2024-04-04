@@ -72,13 +72,13 @@ class VTCloseAssessmentViewModel extends ChangeNotifier {
         goalId: carePlanResponse?.goal?[0].id, //from care plan
         goalAction: GoalAction.UPDATE,
         achievementStatus: AchievementStatus.ACHIEVED,
-        statusDate: DateTime.now().subtract(const Duration(minutes: 1)),
+        statusDate: DateTime.now().subtract(const Duration(seconds: 2)).toUtc(),
         outcomes: listOfOutcomes,
         note: vtCloseAssessmentHelperNotifier.recommendationsController.text,
         mrn: vtCloseAssessmentHelperNotifier.mrCodeController.text,
       );
 
-      logger.d("Close Assessment Dto: ${patientDetails.toJson()}");
+      logger.d(patientDetails.toJson());
 
       await vtCloseAssessmentRepository
           .submitCloseAssessmentInfo(patientDetails);

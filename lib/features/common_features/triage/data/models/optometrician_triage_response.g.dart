@@ -6,9 +6,9 @@ part of 'optometrician_triage_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OptometristTriageResponse _$$_OptometristTriageResponseFromJson(
+_$OptometristTriageResponseImpl _$$OptometristTriageResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OptometristTriageResponse(
+    _$OptometristTriageResponseImpl(
       id: json['id'] as int?,
       uuid: json['uuid'] as String?,
       patientId: json['patientId'] as String?,
@@ -67,8 +67,8 @@ _$_OptometristTriageResponse _$$_OptometristTriageResponseFromJson(
       eyeScanAssistance: json['eyeScanAssistance'] as bool?,
     );
 
-Map<String, dynamic> _$$_OptometristTriageResponseToJson(
-        _$_OptometristTriageResponse instance) =>
+Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
+        _$OptometristTriageResponseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'uuid': instance.uuid,
@@ -137,39 +137,41 @@ const _$UrgencyEnumMap = {
   Urgency.GREEN: 'GREEN',
 };
 
-_$_QuestionResponse _$$_QuestionResponseFromJson(Map<String, dynamic> json) =>
-    _$_QuestionResponse(
+_$QuestionResponseImpl _$$QuestionResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$QuestionResponseImpl(
       questionCode: json['questionCode'] as int?,
       response: json['response'] as bool?,
     );
 
-Map<String, dynamic> _$$_QuestionResponseToJson(_$_QuestionResponse instance) =>
+Map<String, dynamic> _$$QuestionResponseImplToJson(
+        _$QuestionResponseImpl instance) =>
     <String, dynamic>{
       'questionCode': instance.questionCode,
       'response': instance.response,
     };
 
-_$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
-    _$_Observation(
+_$ObservationImpl _$$ObservationImplFromJson(Map<String, dynamic> json) =>
+    _$ObservationImpl(
       observationCode: json['observationCode'] as int?,
       response: (json['response'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_ObservationToJson(_$_Observation instance) =>
+Map<String, dynamic> _$$ObservationImplToJson(_$ObservationImpl instance) =>
     <String, dynamic>{
       'observationCode': instance.observationCode,
       'response': instance.response,
     };
 
-_$_MediaCapture _$$_MediaCaptureFromJson(Map<String, dynamic> json) =>
-    _$_MediaCapture(
+_$MediaCaptureImpl _$$MediaCaptureImplFromJson(Map<String, dynamic> json) =>
+    _$MediaCaptureImpl(
       mediaCode: json['mediaCode'] as int?,
       fileName: json['fileName'] as String?,
       fileType: json['fileType'] as String?,
       encodingType: json['encodingType'] as String?,
     );
 
-Map<String, dynamic> _$$_MediaCaptureToJson(_$_MediaCapture instance) =>
+Map<String, dynamic> _$$MediaCaptureImplToJson(_$MediaCaptureImpl instance) =>
     <String, dynamic>{
       'mediaCode': instance.mediaCode,
       'fileName': instance.fileName,

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,19 +28,25 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
   @override
   Future<List<AssessmentTimelineViewModel>> getAssessmentTimeLine(
       int encounterId) async {
-    String url = "/services/triage/api/triage/encounters/$encounterId/timeline";
-    return await _dio.get(url).then((value) {
-      return value.data
-          .map<AssessmentTimelineViewModel>(
-              (e) => AssessmentTimelineViewModel.fromJson(e))
+    try {
+      String url =
+          "/services/triage/api/triage/encounters/$encounterId/timeline";
+      final response = await _dio.get<List<dynamic>>(url);
+      for (var element in response.data!) {
+        logger.d(element);
+      }
+      final output = response.data!
+          .map((e) => AssessmentTimelineViewModel.fromJson(e))
           .toList();
 
-      // List<AssessmentTimelineViewModel> list = [];
-      // value.data.forEach((element) {
-      //   list.add(AssessmentTimelineViewModel.fromJson(element));
-      // });
-      // return list;
-    });
+      return output;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      logger.e("Error getting assessment timeline: $e");
+      rethrow;
+    }
   }
 
   @override

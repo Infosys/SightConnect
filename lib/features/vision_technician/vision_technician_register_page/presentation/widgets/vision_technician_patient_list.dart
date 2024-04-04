@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
@@ -16,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../providers/vision_technician_register_provider.dart';
 
 class VisionTechnicianPatientListWidget extends ConsumerWidget {
   const VisionTechnicianPatientListWidget({
@@ -51,12 +54,13 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
     });
     return ListView.separated(
       shrinkWrap: true,
+      itemCount: response.length,
       padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
         if (index == data.length) {
           return const Padding(
             padding: EdgeInsets.all(AppSize.kl),
-            child: CircularProgressIndicator.adaptive(),
+            child: Center(child: CircularProgressIndicator.adaptive()),
           );
         }
         return _RegisterPatientDisplayCard(
@@ -102,6 +106,7 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
                   } else if (value) {
                     Fluttertoast.showToast(msg: loc.vtDependentAdded);
                   }
+                  ref.invalidate(vtRegisterProvider);
                 },
               );
             } catch (e) {
@@ -127,6 +132,7 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
                   } else if (value) {
                     Fluttertoast.showToast(msg: loc.vtPatientRegistered);
                   }
+                  ref.invalidate(vtRegisterProvider);
                 },
               );
             } catch (e) {
@@ -138,7 +144,6 @@ class VisionTechnicianPatientListWidget extends ConsumerWidget {
       separatorBuilder: (context, index) {
         return const SizedBox(height: AppSize.km);
       },
-      itemCount: response.length,
     );
   }
 
@@ -167,118 +172,366 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loc = context.loc!;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
-      padding: const EdgeInsets.all(AppSize.km),
-      decoration: BoxDecoration(
-        color: AppColor.white,
-        boxShadow: applycustomShadow(),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          () {
-            if (data.profilePhoto == null) {
-              return SizedBox(
-                child: AppNameAvatar(
-                  name: data.name ?? "",
-                  fontSize: Responsive.isMobile(context) ? 16 : 20,
-                  radius: Responsive.isMobile(context) ? 18 : 30,
+    final isMobile = Responsive.isMobile(context);
+
+    if (isMobile) {
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
+        padding: const EdgeInsets.all(AppSize.km),
+        decoration: BoxDecoration(
+          color: AppColor.white,
+          boxShadow: applycustomShadow(),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            () {
+              if (data.profilePhoto == null) {
+                return SizedBox(
+                  child: AppNameAvatar(
+                    name: data.name ?? "",
+                    fontSize: Responsive.isMobile(context) ? 16 : 20,
+                    radius: Responsive.isMobile(context) ? 18 : 30,
+                  ),
+                );
+              } else {
+                return AppNetworkImage(
+                  imageUrl: data.profilePhoto ?? "",
+                  radius: Responsive.isMobile(context) ? 20 : 30,
+                );
+              }
+            }(),
+            const SizedBox(width: AppSize.km),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: AppSize.width(context) * 0.3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText(
+                              data.name.capitalizeFirstOfEach(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: AppSize.ks / 3),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${data.gender.capitalizeFirstOfEach()}, ${_formateAge(
+                                    context,
+                                    day: data.dayOfBirth,
+                                    mon: data.monthOfBirth,
+                                    year: data.yearOfBirth,
+                                  )}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    color: AppColor.black.withOpacity(0.5),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: AppSize.km),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          AutoSizeText(
+                            "PID ${data.patientId ?? ""}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.ks / 2),
+                          AutoSizeText(
+                            "${data.phoneNumber}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Visibility(
+                        visible: data.patientId != null,
+                        child: AutoSizeText(
+                          data.parentPatientId == null
+                              ? loc.vgPrimary
+                              : loc.vgDependent,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: data.parentPatientId == null
+                                ? AppColor.green
+                                : AppColor.orange,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.ks),
+                  Row(
+                    mainAxisAlignment: Responsive.isMobile(context)
+                        ? MainAxisAlignment.spaceBetween
+                        : MainAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap:
+                            data.patientId == null ? null : onStartAssessment,
+                        child: Text(
+                          loc.vgStartAssessment,
+                          textAlign: TextAlign.center,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: data.patientId == null
+                                ? AppColor.grey
+                                : AppColor.primary,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: Responsive.isMobile(context)
+                            ? AppSize.ks
+                            : AppSize.km,
+                      ),
+                      Visibility(
+                        visible: data.parentPatientId == null,
+                        child: InkWell(
+                          onTap: onAddMember,
+                          child: Row(
+                            children: [
+                              const SizedBox(width: AppSize.ks / 2),
+                              const Icon(
+                                Icons.add,
+                                size: 14,
+                                color: AppColor.primary,
+                              ),
+                              const SizedBox(width: AppSize.ks / 2),
+                              Text(
+                                loc.vgAddMember,
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  color: AppColor.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Visibility(
+                          visible: data.patientId == null,
+                          child: InkWell(
+                            onTap: onCompleteProfile,
+                            child: Row(
+                              children: [
+                                const SizedBox(width: AppSize.ks / 2),
+                                const Icon(
+                                  Icons.edit,
+                                  size: 14,
+                                  color: AppColor.primary,
+                                ),
+                                const SizedBox(width: AppSize.ks / 2),
+                                Text(
+                                  loc.vgCompleteProfile,
+                                  textAlign: TextAlign.center,
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    color: AppColor.primary,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
+        padding: const EdgeInsets.all(AppSize.km),
+        decoration: BoxDecoration(
+          color: AppColor.white,
+          boxShadow: applycustomShadow(),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: AppSize.width(context) * 0.27,
+              child: Row(
+                children: [
+                  () {
+                    if (data.profilePhoto == null) {
+                      return SizedBox(
+                        child: AppNameAvatar(
+                          name: data.name ?? "",
+                          fontSize: Responsive.isMobile(context) ? 16 : 20,
+                          radius: Responsive.isMobile(context) ? 18 : 30,
+                        ),
+                      );
+                    } else {
+                      return AppNetworkImage(
+                        imageUrl: data.profilePhoto ?? "",
+                        radius: Responsive.isMobile(context) ? 20 : 30,
+                      );
+                    }
+                  }(),
+                  SizedBox(
+                    width: AppSize.width(context) * 0.015,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        data.name.capitalizeFirstOfEach(),
+                        softWrap: true,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: applyRobotoFont(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppSize.height(context) * 0.005,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "${data.gender.capitalizeFirstOfEach()}, ",
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
+                          ),
+                          Text(
+                            _formateAge(
+                              context,
+                              day: data.dayOfBirth,
+                              mon: data.monthOfBirth,
+                              year: data.yearOfBirth,
+                            ),
+                            style: applyRobotoFont(
+                              fontSize: 12,
+                              color: AppColor.black.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              "${data.phoneNumber}",
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: AppColor.black.withOpacity(0.5),
+              ),
+            ),
+            SizedBox(
+              width: AppSize.width(context) * 0.1,
+              child: Visibility(
+                visible: data.patientId != null,
+                child: Text(
+                  data.parentPatientId == null
+                      ? loc.vgPrimary
+                      : loc.vgDependent,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyRobotoFont(
+                    fontSize: 12,
+                    color: data.parentPatientId == null
+                        ? AppColor.green
+                        : AppColor.orange,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              );
-            } else {
-              return AppNetworkImage(
-                imageUrl: data.profilePhoto ?? "",
-                radius: Responsive.isMobile(context) ? 20 : 30,
-              );
-            }
-          }(),
-          const SizedBox(width: AppSize.km),
-          Expanded(
-            flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      data.name.capitalizeFirstOfEach(),
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(
+              width: AppSize.width(context) * 0.4,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: data.patientId == null ? null : onStartAssessment,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColor.primary,
+                        border: Border.all(color: AppColor.primary, width: 2),
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                    ),
-                    Text(
-                      " PID ${data.patientId ?? ""}, ",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.black.withOpacity(0.5),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSize.ks / 2),
-                Row(
-                  children: [
-                    Text(
-                      "${data.gender.capitalizeFirstOfEach()}, ",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.black.withOpacity(0.5),
-                      ),
-                    ),
-                    Text(
-                      _formateAge(
-                        context,
-                        day: data.dayOfBirth,
-                        mon: data.monthOfBirth,
-                        year: data.yearOfBirth,
-                      ),
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.black.withOpacity(0.5),
-                      ),
-                    ),
-                    Text(
-                      ", ${data.phoneNumber}",
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.black.withOpacity(0.5),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppSize.ks / 2),
-                Row(
-                  mainAxisAlignment: Responsive.isMobile(context)
-                      ? MainAxisAlignment.spaceBetween
-                      : MainAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: data.patientId == null ? null : onStartAssessment,
                       child: Text(
                         loc.vgStartAssessment,
                         textAlign: TextAlign.center,
                         style: applyRobotoFont(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: data.patientId == null
-                              ? AppColor.grey
-                              : AppColor.primary,
+                          color: AppColor.white,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: Responsive.isMobile(context)
-                          ? AppSize.ks
-                          : AppSize.km,
-                    ),
-                    Visibility(
-                      visible: data.parentPatientId == null,
-                      child: InkWell(
-                        onTap: onAddMember,
+                  ),
+                  Visibility(
+                    visible: data.parentPatientId == null,
+                    child: InkWell(
+                      onTap: onAddMember,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColor.primary, width: 2),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                         child: Row(
                           children: [
                             const SizedBox(width: AppSize.ks / 2),
@@ -300,23 +553,33 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Visibility(
-                      visible: data.patientId == null,
-                      child: InkWell(
-                        onTap: onCompleteProfile,
+                  ),
+                  Visibility(
+                    visible: data.patientId == null,
+                    child: InkWell(
+                      onTap: onCompleteProfile,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColor.primary, width: 2),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                         child: Row(
                           children: [
+                            const SizedBox(width: AppSize.ks / 2),
                             const Icon(
-                              Icons.edit,
+                              Icons.add,
                               size: 14,
                               color: AppColor.primary,
                             ),
                             const SizedBox(width: AppSize.ks / 2),
                             Text(
                               loc.vgCompleteProfile,
-                              textAlign: TextAlign.center,
                               style: applyRobotoFont(
-                                fontSize: 12,
+                                fontSize: 14,
                                 color: AppColor.primary,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -325,29 +588,14 @@ class _RegisterPatientDisplayCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Visibility(
-            visible: data.patientId != null,
-            child: Text(
-              data.parentPatientId == null ? loc.vgPrimary : loc.vgDependent,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 12,
-                color: data.parentPatientId == null
-                    ? AppColor.green
-                    : AppColor.orange,
-                fontWeight: FontWeight.w500,
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }
   }
 
   String _formateAge(

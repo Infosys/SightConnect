@@ -1,17 +1,17 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/core/models/consent_model.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_db_helper.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/repositories/vg_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
@@ -63,7 +63,9 @@ class InitializationProvider extends ChangeNotifier {
   Future<void> resetProfile() async {
     await PersistentAuthStateService.authState.setActiveRole(null);
     // Triage Database logout
-    await TriageDBHelper().deleteFullDatabase();
+    if (!kIsWeb) {
+      await TriageDBHelper().deleteFullDatabase();
+    }
     // Shared Preference logout
     await SharedPreferenceService.clearAll();
   }

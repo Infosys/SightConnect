@@ -6,8 +6,8 @@ part of 'vt_profile_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VtProfileModel _$$_VtProfileModelFromJson(Map<String, dynamic> json) =>
-    _$_VtProfileModel(
+_$VtProfileModelImpl _$$VtProfileModelImplFromJson(Map<String, dynamic> json) =>
+    _$VtProfileModelImpl(
       id: json['id'] as int?,
       profilePhoto: json['profilePhoto'] as String?,
       healthProfessionalType: json['healthProfessionalType'] as String?,
@@ -44,7 +44,8 @@ _$_VtProfileModel _$$_VtProfileModelFromJson(Map<String, dynamic> json) =>
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_VtProfileModelToJson(_$_VtProfileModel instance) =>
+Map<String, dynamic> _$$VtProfileModelImplToJson(
+        _$VtProfileModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'profilePhoto': instance.profilePhoto,
@@ -65,9 +66,9 @@ Map<String, dynamic> _$$_VtProfileModelToJson(_$_VtProfileModel instance) =>
       'osid': instance.osid,
     };
 
-_$_CommunicationAddress _$$_CommunicationAddressFromJson(
+_$CommunicationAddressImpl _$$CommunicationAddressImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CommunicationAddress(
+    _$CommunicationAddressImpl(
       isCommunicationAddressAsPerKyc:
           json['isCommunicationAddressAsPerKYC'] as String?,
       address: json['address'] as String?,
@@ -79,8 +80,8 @@ _$_CommunicationAddress _$$_CommunicationAddressFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_CommunicationAddressToJson(
-        _$_CommunicationAddress instance) =>
+Map<String, dynamic> _$$CommunicationAddressImplToJson(
+        _$CommunicationAddressImpl instance) =>
     <String, dynamic>{
       'isCommunicationAddressAsPerKYC': instance.isCommunicationAddressAsPerKyc,
       'address': instance.address,
@@ -92,9 +93,9 @@ Map<String, dynamic> _$$_CommunicationAddressToJson(
       'osid': instance.osid,
     };
 
-_$_ContactInformation _$$_ContactInformationFromJson(
+_$ContactInformationImpl _$$ContactInformationImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ContactInformation(
+    _$ContactInformationImpl(
       publicMobileNumber: json['publicMobileNumber'] as String?,
       publicMobileNumberCode: json['publicMobileNumberCode'] as String?,
       publicMobileNumberStatus: json['publicMobileNumberStatus'] as String?,
@@ -105,8 +106,8 @@ _$_ContactInformation _$$_ContactInformationFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_ContactInformationToJson(
-        _$_ContactInformation instance) =>
+Map<String, dynamic> _$$ContactInformationImplToJson(
+        _$ContactInformationImpl instance) =>
     <String, dynamic>{
       'publicMobileNumber': instance.publicMobileNumber,
       'publicMobileNumberCode': instance.publicMobileNumberCode,
@@ -118,9 +119,9 @@ Map<String, dynamic> _$$_ContactInformationToJson(
       'osid': instance.osid,
     };
 
-_$_CurrentWorkDetails _$$_CurrentWorkDetailsFromJson(
+_$CurrentWorkDetailsImpl _$$CurrentWorkDetailsImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CurrentWorkDetails(
+    _$CurrentWorkDetailsImpl(
       currentlyWorking: json['currentlyWorking'] as String?,
       purposeOfWork: json['purposeOfWork'] as String?,
       chooseWorkStatus: json['chooseWorkStatus'] as String?,
@@ -129,8 +130,8 @@ _$_CurrentWorkDetails _$$_CurrentWorkDetailsFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_CurrentWorkDetailsToJson(
-        _$_CurrentWorkDetails instance) =>
+Map<String, dynamic> _$$CurrentWorkDetailsImplToJson(
+        _$CurrentWorkDetailsImpl instance) =>
     <String, dynamic>{
       'currentlyWorking': instance.currentlyWorking,
       'purposeOfWork': instance.purposeOfWork,
@@ -140,9 +141,9 @@ Map<String, dynamic> _$$_CurrentWorkDetailsToJson(
       'osid': instance.osid,
     };
 
-_$_PersonalInformation _$$_PersonalInformationFromJson(
+_$PersonalInformationImpl _$$PersonalInformationImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PersonalInformation(
+    _$PersonalInformationImpl(
       salutation: json['salutation'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
@@ -154,8 +155,8 @@ _$_PersonalInformation _$$_PersonalInformationFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_PersonalInformationToJson(
-        _$_PersonalInformation instance) =>
+Map<String, dynamic> _$$PersonalInformationImplToJson(
+        _$PersonalInformationImpl instance) =>
     <String, dynamic>{
       'salutation': instance.salutation,
       'firstName': instance.firstName,
@@ -168,8 +169,8 @@ Map<String, dynamic> _$$_PersonalInformationToJson(
       'osid': instance.osid,
     };
 
-_$_PracticeGrant _$$_PracticeGrantFromJson(Map<String, dynamic> json) =>
-    _$_PracticeGrant(
+_$PracticeGrantImpl _$$PracticeGrantImplFromJson(Map<String, dynamic> json) =>
+    _$PracticeGrantImpl(
       registrationDate: const TimestampConverter()
           .fromJson(json['registrationDate'] as String?),
       id: json['id'] as int?,
@@ -181,7 +182,7 @@ _$_PracticeGrant _$$_PracticeGrantFromJson(Map<String, dynamic> json) =>
           : Organization.fromJson(json['organization'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PracticeGrantToJson(_$_PracticeGrant instance) =>
+Map<String, dynamic> _$$PracticeGrantImplToJson(_$PracticeGrantImpl instance) =>
     <String, dynamic>{
       'registrationDate':
           const TimestampConverter().toJson(instance.registrationDate),
@@ -192,8 +193,8 @@ Map<String, dynamic> _$$_PracticeGrantToJson(_$_PracticeGrant instance) =>
       'organization': instance.organization?.toJson(),
     };
 
-_$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
-    _$_Organization(
+_$OrganizationImpl _$$OrganizationImplFromJson(Map<String, dynamic> json) =>
+    _$OrganizationImpl(
       id: json['id'] as int?,
       regRef: json['regRef'] as String?,
       facilityType: json['facilityType'] as String?,
@@ -204,7 +205,7 @@ _$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
       governingOrganization: json['governingOrganization'],
     );
 
-Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
+Map<String, dynamic> _$$OrganizationImplToJson(_$OrganizationImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'regRef': instance.regRef,
@@ -214,19 +215,20 @@ Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
       'governingOrganization': instance.governingOrganization,
     };
 
-_$_Tenant _$$_TenantFromJson(Map<String, dynamic> json) => _$_Tenant(
+_$TenantImpl _$$TenantImplFromJson(Map<String, dynamic> json) => _$TenantImpl(
       id: json['id'] as int?,
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$$_TenantToJson(_$_Tenant instance) => <String, dynamic>{
+Map<String, dynamic> _$$TenantImplToJson(_$TenantImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };
 
-_$_RegistrationAcademic _$$_RegistrationAcademicFromJson(
+_$RegistrationAcademicImpl _$$RegistrationAcademicImplFromJson(
         Map<String, dynamic> json) =>
-    _$_RegistrationAcademic(
+    _$RegistrationAcademicImpl(
       category: json['category'] as String?,
       registrationData: (json['registrationData'] as List<dynamic>?)
           ?.map((e) => RegistrationDatum.fromJson(e as Map<String, dynamic>))
@@ -234,8 +236,8 @@ _$_RegistrationAcademic _$$_RegistrationAcademicFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_RegistrationAcademicToJson(
-        _$_RegistrationAcademic instance) =>
+Map<String, dynamic> _$$RegistrationAcademicImplToJson(
+        _$RegistrationAcademicImpl instance) =>
     <String, dynamic>{
       'category': instance.category,
       'registrationData':
@@ -243,8 +245,9 @@ Map<String, dynamic> _$$_RegistrationAcademicToJson(
       'osid': instance.osid,
     };
 
-_$_RegistrationDatum _$$_RegistrationDatumFromJson(Map<String, dynamic> json) =>
-    _$_RegistrationDatum(
+_$RegistrationDatumImpl _$$RegistrationDatumImplFromJson(
+        Map<String, dynamic> json) =>
+    _$RegistrationDatumImpl(
       registeredWithCouncil: json['registeredWithCouncil'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       registrationCertificate: json['registrationCertificate'] as String?,
@@ -259,8 +262,8 @@ _$_RegistrationDatum _$$_RegistrationDatumFromJson(Map<String, dynamic> json) =>
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_RegistrationDatumToJson(
-        _$_RegistrationDatum instance) =>
+Map<String, dynamic> _$$RegistrationDatumImplToJson(
+        _$RegistrationDatumImpl instance) =>
     <String, dynamic>{
       'registeredWithCouncil': instance.registeredWithCouncil,
       'registrationNumber': instance.registrationNumber,
@@ -273,8 +276,8 @@ Map<String, dynamic> _$$_RegistrationDatumToJson(
       'osid': instance.osid,
     };
 
-_$_Qualification _$$_QualificationFromJson(Map<String, dynamic> json) =>
-    _$_Qualification(
+_$QualificationImpl _$$QualificationImplFromJson(Map<String, dynamic> json) =>
+    _$QualificationImpl(
       nameOfDegreeOrDiplomaObtained:
           json['nameOfDegreeOrDiplomaObtained'] as String?,
       country: json['country'] as String?,
@@ -293,7 +296,7 @@ _$_Qualification _$$_QualificationFromJson(Map<String, dynamic> json) =>
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_QualificationToJson(_$_Qualification instance) =>
+Map<String, dynamic> _$$QualificationImplToJson(_$QualificationImpl instance) =>
     <String, dynamic>{
       'nameOfDegreeOrDiplomaObtained': instance.nameOfDegreeOrDiplomaObtained,
       'country': instance.country,

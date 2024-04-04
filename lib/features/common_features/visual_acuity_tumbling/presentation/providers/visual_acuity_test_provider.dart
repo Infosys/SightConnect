@@ -398,7 +398,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
         assessmentVersion: reportModel.assessmentVersion,
         issued: reportModel.issued,
         source: Source.PATIENT_APP,
-        sourceVersion: AppInfoService.version,
+        sourceVersion: AppInfoService.appVersion,
         incompleteSection: _getIncompleteTestList(reportModel.incompleteTests),
         score: _getScore(visionAcuityTumblingResponse),
         cummulativeScore: _getCummulativeScore(visionAcuityTumblingResponse),

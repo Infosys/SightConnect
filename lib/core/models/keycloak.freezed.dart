@@ -12,7 +12,7 @@ part of 'keycloak.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 KeycloakResponse _$KeycloakResponseFromJson(Map<String, dynamic> json) {
   return _KeycloakResponse.fromJson(json);
@@ -96,11 +96,11 @@ class _$KeycloakResponseCopyWithImpl<$Res, $Val extends KeycloakResponse>
 }
 
 /// @nodoc
-abstract class _$$_KeycloakResponseCopyWith<$Res>
+abstract class _$$KeycloakResponseImplCopyWith<$Res>
     implements $KeycloakResponseCopyWith<$Res> {
-  factory _$$_KeycloakResponseCopyWith(
-          _$_KeycloakResponse value, $Res Function(_$_KeycloakResponse) then) =
-      __$$_KeycloakResponseCopyWithImpl<$Res>;
+  factory _$$KeycloakResponseImplCopyWith(_$KeycloakResponseImpl value,
+          $Res Function(_$KeycloakResponseImpl) then) =
+      __$$KeycloakResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,11 +112,11 @@ abstract class _$$_KeycloakResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_KeycloakResponseCopyWithImpl<$Res>
-    extends _$KeycloakResponseCopyWithImpl<$Res, _$_KeycloakResponse>
-    implements _$$_KeycloakResponseCopyWith<$Res> {
-  __$$_KeycloakResponseCopyWithImpl(
-      _$_KeycloakResponse _value, $Res Function(_$_KeycloakResponse) _then)
+class __$$KeycloakResponseImplCopyWithImpl<$Res>
+    extends _$KeycloakResponseCopyWithImpl<$Res, _$KeycloakResponseImpl>
+    implements _$$KeycloakResponseImplCopyWith<$Res> {
+  __$$KeycloakResponseImplCopyWithImpl(_$KeycloakResponseImpl _value,
+      $Res Function(_$KeycloakResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +128,7 @@ class __$$_KeycloakResponseCopyWithImpl<$Res>
     Object? expiresIn = null,
     Object? refreshExpiresIn = null,
   }) {
-    return _then(_$_KeycloakResponse(
+    return _then(_$KeycloakResponseImpl(
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
@@ -155,16 +155,16 @@ class __$$_KeycloakResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_KeycloakResponse implements _KeycloakResponse {
-  _$_KeycloakResponse(
+class _$KeycloakResponseImpl implements _KeycloakResponse {
+  _$KeycloakResponseImpl(
       {@JsonKey(name: "access_token") required this.accessToken,
       @JsonKey(name: "id_token") required this.idToken,
       @JsonKey(name: "refresh_token") required this.refreshToken,
       @JsonKey(name: "expires_in") required this.expiresIn,
       @JsonKey(name: "refresh_expires_in") required this.refreshExpiresIn});
 
-  factory _$_KeycloakResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_KeycloakResponseFromJson(json);
+  factory _$KeycloakResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$KeycloakResponseImplFromJson(json);
 
   @override
   @JsonKey(name: "access_token")
@@ -188,10 +188,10 @@ class _$_KeycloakResponse implements _KeycloakResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_KeycloakResponse &&
+            other is _$KeycloakResponseImpl &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
             (identical(other.idToken, idToken) || other.idToken == idToken) &&
@@ -211,12 +211,13 @@ class _$_KeycloakResponse implements _KeycloakResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_KeycloakResponseCopyWith<_$_KeycloakResponse> get copyWith =>
-      __$$_KeycloakResponseCopyWithImpl<_$_KeycloakResponse>(this, _$identity);
+  _$$KeycloakResponseImplCopyWith<_$KeycloakResponseImpl> get copyWith =>
+      __$$KeycloakResponseImplCopyWithImpl<_$KeycloakResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_KeycloakResponseToJson(
+    return _$$KeycloakResponseImplToJson(
       this,
     );
   }
@@ -229,10 +230,10 @@ abstract class _KeycloakResponse implements KeycloakResponse {
       @JsonKey(name: "refresh_token") required final String refreshToken,
       @JsonKey(name: "expires_in") required final int expiresIn,
       @JsonKey(name: "refresh_expires_in")
-      required final int refreshExpiresIn}) = _$_KeycloakResponse;
+      required final int refreshExpiresIn}) = _$KeycloakResponseImpl;
 
   factory _KeycloakResponse.fromJson(Map<String, dynamic> json) =
-      _$_KeycloakResponse.fromJson;
+      _$KeycloakResponseImpl.fromJson;
 
   @override
   @JsonKey(name: "access_token")
@@ -251,6 +252,6 @@ abstract class _KeycloakResponse implements KeycloakResponse {
   int get refreshExpiresIn;
   @override
   @JsonKey(ignore: true)
-  _$$_KeycloakResponseCopyWith<_$_KeycloakResponse> get copyWith =>
+  _$$KeycloakResponseImplCopyWith<_$KeycloakResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

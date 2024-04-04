@@ -15,6 +15,7 @@ _$MiniAppInjectionModelImpl _$$MiniAppInjectionModelImplFromJson(
       token: json['token'] as String?,
       role:
           $enumDecodeNullable(_$MiniAppInjectionModelRoleEnumMap, json['role']),
+      miniAppEnv: $enumDecode(_$MiniAppEnvEnumMap, json['miniAppEnv']),
     );
 
 Map<String, dynamic> _$$MiniAppInjectionModelImplToJson(
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$MiniAppInjectionModelImplToJson(
       'mobileNumber': instance.mobileNumber,
       'token': instance.token,
       'role': _$MiniAppInjectionModelRoleEnumMap[instance.role],
+      'miniAppEnv': _$MiniAppEnvEnumMap[instance.miniAppEnv]!,
     };
 
 const _$MiniAppActionTypeEnumMap = {
@@ -39,4 +41,11 @@ const _$MiniAppInjectionModelRoleEnumMap = {
   MiniAppInjectionModelRole.OPTOMETRITIAN: 'OPTOMETRITIAN',
   MiniAppInjectionModelRole.VISION_GUARDIAN: 'VISION_GUARDIAN',
   MiniAppInjectionModelRole.OTHER: 'OTHER',
+};
+
+const _$MiniAppEnvEnumMap = {
+  MiniAppEnv.DEV: 'DEV',
+  MiniAppEnv.PROD: 'PROD',
+  MiniAppEnv.STAGING: 'STAGING',
+  MiniAppEnv.TESTING: 'TESTING',
 };

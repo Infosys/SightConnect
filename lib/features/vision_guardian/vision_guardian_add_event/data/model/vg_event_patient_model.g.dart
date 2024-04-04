@@ -6,10 +6,10 @@ part of 'vg_event_patient_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VisionGuardianEventPatientResponseModel
-    _$$_VisionGuardianEventPatientResponseModelFromJson(
+_$VisionGuardianEventPatientResponseModelImpl
+    _$$VisionGuardianEventPatientResponseModelImplFromJson(
             Map<String, dynamic> json) =>
-        _$_VisionGuardianEventPatientResponseModel(
+        _$VisionGuardianEventPatientResponseModelImpl(
           patientId: json['patientId'] as int?,
           registryRef: json['registryRef'] as String?,
           name: json['name'] as String?,
@@ -31,8 +31,8 @@ _$_VisionGuardianEventPatientResponseModel
           dobSource: json['dobSource'] as String?,
         );
 
-Map<String, dynamic> _$$_VisionGuardianEventPatientResponseModelToJson(
-        _$_VisionGuardianEventPatientResponseModel instance) =>
+Map<String, dynamic> _$$VisionGuardianEventPatientResponseModelImplToJson(
+        _$VisionGuardianEventPatientResponseModelImpl instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
       'registryRef': instance.registryRef,
@@ -53,8 +53,8 @@ Map<String, dynamic> _$$_VisionGuardianEventPatientResponseModelToJson(
       'dobSource': instance.dobSource,
     };
 
-_$_AddressModel _$$_AddressModelFromJson(Map<String, dynamic> json) =>
-    _$_AddressModel(
+_$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
+    _$AddressModelImpl(
       id: json['id'] as int?,
       line: json['line'] as String?,
       district: json['district'] as String?,
@@ -70,7 +70,7 @@ _$_AddressModel _$$_AddressModelFromJson(Map<String, dynamic> json) =>
       subDistrict: json['subDistrict'] as String?,
     );
 
-Map<String, dynamic> _$$_AddressModelToJson(_$_AddressModel instance) =>
+Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'line': instance.line,

@@ -47,8 +47,8 @@ class VTHeader extends HookWidget {
           items: slides,
           carouselController: controller,
           options: CarouselOptions(
-            height: Responsive.isMobile(context) ? 130 : 180,
             viewportFraction: 1,
+            height: Responsive.isMobile(context) ? 180 : 220,
             onPageChanged: (index, reason) {
               current.value = index;
             },

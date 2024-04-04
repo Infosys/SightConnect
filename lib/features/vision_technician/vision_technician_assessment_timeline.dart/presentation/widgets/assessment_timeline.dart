@@ -2,13 +2,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/domain/models/assessment_timeline_view_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/assessment_timeline_view.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/presentation/pages/vision_technician_close_assessment_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import '../../domain/repositories/assessment_timeline_repository_impl.dart';
@@ -48,12 +51,21 @@ class AssessmentTimeline extends ConsumerWidget {
 
     return ref.watch(vtAssessmentTimelineProvider(encounterId)).when(
           data: (data) {
-            final encounterStatus = data.first.title
-                    ?.replaceAll("_", " ")
-                    .toLowerCase()
-                    .capitalizeFirstOfEach() ??
-                "";
-            final isCaseClosed = encounterStatus.toLowerCase() == 'closure';
+            final encounterStatus = data.first.title;
+
+            final isCaseClosed = (encounterStatus!.contains("Closure"));
+            bool isVGSource = false;
+
+            for (var element in data) {
+              if (element.source == TimelineSource.VG_APP &&
+                  element.status?.toLowerCase() == "final") {
+                isVGSource = true;
+                break;
+              } else {
+                isVGSource = false;
+              }
+            }
+            logger.d("isVGSource $isVGSource");
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +80,7 @@ class AssessmentTimeline extends ConsumerWidget {
                     ),
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,13 +100,13 @@ class AssessmentTimeline extends ConsumerWidget {
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 7,
+                              horizontal: 8,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: isCaseClosed
-                                  ? AppColor.lightGreen
-                                  : AppColor.lightBlue,
+                                  ? AppColor.altGreen
+                                  : AppColor.mediumOrange,
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: AutoSizeText(
@@ -102,9 +114,8 @@ class AssessmentTimeline extends ConsumerWidget {
                               maxFontSize: 18,
                               minFontSize: 12,
                               style: applyRobotoFont(
-                                color: AppColor.black,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
+                                color: AppColor.white,
+                                fontSize: 10,
                               ),
                             ),
                           ),
@@ -116,42 +127,61 @@ class AssessmentTimeline extends ConsumerWidget {
                         minFontSize: 14,
                         style: applyRobotoFont(
                           color: AppColor.grey,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
-                      const SizedBox(height: AppSize.kl),
-                      const Divider(thickness: 1, color: AppColor.grey),
-                      const SizedBox(height: AppSize.kl),
-                      AssessmentTimelineView(data, patientDetail!),
+                      const SizedBox(height: AppSize.ks),
+                      const Divider(thickness: 1, color: AppColor.lightGrey),
+                      const SizedBox(height: AppSize.ks),
+                      AssessmentTimelineView(
+                        timeLineList: data,
+                        patientDetail: patientDetail!,
+                      ),
                     ],
                   ),
                 ),
-                encounterStatus == 'Closure'
-                    ? const SizedBox.shrink()
-                    : SizedBox(
-                        width: AppSize.width(context),
+                Responsive.isMobile(context)
+                    ? const SizedBox(height: AppSize.kl)
+                    : const SizedBox(height: AppSize.kl * 2),
+                Visibility(
+                  visible: !isCaseClosed,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: AppSize.width(context) * 0.8,
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return VisionTechnicianCloseAssessmentPage(
-                                    patientId:
-                                        patientDetail?.id.toString() ?? "",
-                                    patientName:
-                                        patientDetail?.name.toString() ?? "",
-                                    encounterId: encounterId,
+                          onPressed: isVGSource
+                              ? null
+                              : () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return VisionTechnicianCloseAssessmentPage(
+                                          patientId:
+                                              patientDetail?.id.toString() ??
+                                                  "",
+                                          patientName:
+                                              patientDetail?.name.toString() ??
+                                                  "",
+                                          encounterId: encounterId,
+                                        );
+                                      },
+                                    ),
                                   );
                                 },
-                              ),
-                            );
-                          },
-                          child: Text(loc.vtClose),
+                          child: isVGSource
+                              ? const Text("Not Authorized")
+                              : Text(loc.vtClose),
                         ),
-                      )
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: AppSize.kl),
               ],
             );
           },

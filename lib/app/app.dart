@@ -9,16 +9,20 @@ import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
+  if (kIsWeb) {
+    return false;
+  }
   return await FlutterJailbreakDetection.jailbroken;
 });
 
@@ -71,8 +75,10 @@ class MyApp extends ConsumerWidget {
                     ? AppTheme.getLightTheme(context)
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
+
                 initialRoute: initialRoute,
                 navigatorKey: AppRouter.navigatorKey,
+                onUnknownRoute: AppRouter.onUnknownRoute,
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
                 //         data: (value) {

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
@@ -70,7 +71,7 @@ class TriageEyeScanProvider with ChangeNotifier {
             getTriageEyeScanResponse(leftImageUrl, rightImageUrl),
       ),
     );
-
+// https://healthconnecttech.org/services/filems/api/file/download/1711440771063-135bce6c-ad33-4ed6-a780-5b07d9481de5
     response.fold(
       (failure) async {
         logger.d({
@@ -101,6 +102,8 @@ class TriageEyeScanProvider with ChangeNotifier {
 
     Map<String, String> leftEyeData = parseUrl(leftEyeImageUrl);
     Map<String, String> rightEyeData = parseUrl(rightEyeImageUrl);
+    log("parsed left eye url is : $leftEyeData");
+    log("parsed right eye url is : $rightEyeData");
 
     mediaCaptureList.add(PostTriageImagingSelectionModel(
         identifier: imageIdentifier["LEFT_EYE"],
@@ -178,19 +181,26 @@ class TriageEyeScanProvider with ChangeNotifier {
       }
       if (slashcount < 3) {
         baseUrl += url[i];
+      } else if (slashcount >= 3 && slashcount <= 8) {
+        if (slashcount <=7) {
+          endpoint += url[i];
+        }
+       else if (slashcount == 8) {
+          slashcount++;
+        }
       } else {
-        endpoint += url[i];
+        fileId += url[i];
       }
     }
 
-    for (int i = endpoint.length - 1; i >= 0; i--) {
-      if (endpoint[i] == '/') {
-        break;
-      }
+    // for (int i = endpoint.length - 1; i >= 0; i--) {
+    //   if (endpoint[i] == '/') {
+    //     break;
+    //   }
 
-      fileId += endpoint[i];
-    }
-    fileId = reverseFileId(fileId);
+    //   fileId += endpoint[i];
+    // }
+    // fileId = reverseFileId(fileId);
 
     mp["baseUrl"] = baseUrl;
     mp["endPoint"] = endpoint;
@@ -199,13 +209,13 @@ class TriageEyeScanProvider with ChangeNotifier {
     return mp;
   }
 
-  String reverseFileId(String input) {
-    String reversed = '';
-    for (int i = input.length - 1; i >= 0; i--) {
-      reversed += input[i];
-    }
-    return reversed;
-  }
+  // String reverseFileId(String input) {
+  //   String reversed = '';
+  //   for (int i = input.length - 1; i >= 0; i--) {
+  //     reversed += input[i];
+  //   }
+  //   return reversed;
+  // }
 }
 
 var triageEyeScanProvider = ChangeNotifierProvider(

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -152,6 +153,20 @@ class VgProfile extends ConsumerWidget {
                         ),
                       ),
                     ),
+                  ),
+                  const SizedBox(height: AppSize.km),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Version: ${AppInfoService.appVersion}",
+                        style: applyRobotoFont(
+                          fontWeight: FontWeight.normal,
+                          color: AppColor.grey,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: AppSize.kl * 2),
                 ],

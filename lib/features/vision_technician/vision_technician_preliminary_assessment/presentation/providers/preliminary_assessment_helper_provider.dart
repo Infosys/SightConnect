@@ -17,7 +17,7 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   final eyeSightProblemotherController = TextEditingController();
   final remarksController = TextEditingController();
   final otherQuestionsController = TextEditingController();
-  bool onIvrCall = true;
+  bool onIvrCall = false;
   bool recommendationSelected = false;
   bool visionCenterSelected = false;
   bool imagesSubmitted = false;
@@ -29,7 +29,7 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   bool isLoading = false;
   CarePlanPostModel? carePlanResponse;
   TriagePostModel? triageResponse;
-  TriagePriority? selectedSeverity = TriagePriority.ROUTINE;
+  TriagePriority selectedSeverity = TriagePriority.ROUTINE;
   OrganizationResponseModel? _selectedVisionCenter;
   PreliminaryAssessmentHelperNotifier(this.ref);
 
@@ -38,7 +38,7 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSeverity(TriagePriority? value) {
+  void setSeverity(TriagePriority value) {
     selectedSeverity = value;
     notifyListeners();
   }

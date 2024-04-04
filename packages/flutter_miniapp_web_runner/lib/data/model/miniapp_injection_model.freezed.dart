@@ -26,6 +26,7 @@ mixin _$MiniAppInjectionModel {
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   MiniAppInjectionModelRole? get role => throw _privateConstructorUsedError;
+  MiniAppEnv get miniAppEnv => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,8 @@ abstract class $MiniAppInjectionModelCopyWith<$Res> {
       String? parentPatientId,
       String? mobileNumber,
       String? token,
-      MiniAppInjectionModelRole? role});
+      MiniAppInjectionModelRole? role,
+      MiniAppEnv miniAppEnv});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
     Object? mobileNumber = freezed,
     Object? token = freezed,
     Object? role = freezed,
+    Object? miniAppEnv = null,
   }) {
     return _then(_value.copyWith(
       action: freezed == action
@@ -88,6 +91,10 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as MiniAppInjectionModelRole?,
+      miniAppEnv: null == miniAppEnv
+          ? _value.miniAppEnv
+          : miniAppEnv // ignore: cast_nullable_to_non_nullable
+              as MiniAppEnv,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$MiniAppInjectionModelImplCopyWith<$Res>
       String? parentPatientId,
       String? mobileNumber,
       String? token,
-      MiniAppInjectionModelRole? role});
+      MiniAppInjectionModelRole? role,
+      MiniAppEnv miniAppEnv});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
     Object? mobileNumber = freezed,
     Object? token = freezed,
     Object? role = freezed,
+    Object? miniAppEnv = null,
   }) {
     return _then(_$MiniAppInjectionModelImpl(
       action: freezed == action
@@ -148,6 +157,10 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as MiniAppInjectionModelRole?,
+      miniAppEnv: null == miniAppEnv
+          ? _value.miniAppEnv
+          : miniAppEnv // ignore: cast_nullable_to_non_nullable
+              as MiniAppEnv,
     ));
   }
 }
@@ -160,7 +173,8 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
       this.parentPatientId,
       this.mobileNumber,
       this.token,
-      this.role});
+      this.role,
+      required this.miniAppEnv});
 
   factory _$MiniAppInjectionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MiniAppInjectionModelImplFromJson(json);
@@ -175,14 +189,16 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
   final String? token;
   @override
   final MiniAppInjectionModelRole? role;
+  @override
+  final MiniAppEnv miniAppEnv;
 
   @override
   String toString() {
-    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, role: $role)';
+    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, role: $role, miniAppEnv: $miniAppEnv)';
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MiniAppInjectionModelImpl &&
@@ -192,13 +208,15 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.miniAppEnv, miniAppEnv) ||
+                other.miniAppEnv == miniAppEnv));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, action, parentPatientId, mobileNumber, token, role);
+  int get hashCode => Object.hash(runtimeType, action, parentPatientId,
+      mobileNumber, token, role, miniAppEnv);
 
   @JsonKey(ignore: true)
   @override
@@ -221,7 +239,8 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
       final String? parentPatientId,
       final String? mobileNumber,
       final String? token,
-      final MiniAppInjectionModelRole? role}) = _$MiniAppInjectionModelImpl;
+      final MiniAppInjectionModelRole? role,
+      required final MiniAppEnv miniAppEnv}) = _$MiniAppInjectionModelImpl;
 
   factory _MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =
       _$MiniAppInjectionModelImpl.fromJson;
@@ -236,6 +255,8 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
   String? get token;
   @override
   MiniAppInjectionModelRole? get role;
+  @override
+  MiniAppEnv get miniAppEnv;
   @override
   @JsonKey(ignore: true)
   _$$MiniAppInjectionModelImplCopyWith<_$MiniAppInjectionModelImpl>
