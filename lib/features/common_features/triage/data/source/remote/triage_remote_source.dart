@@ -39,7 +39,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     final tenantCode = globalTenantProvider.tenantId;
     final organizationCode = globalTenantProvider.organizationId;
     String endpoint =
-        "/services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
+        "/services/assessments/api/diagnostic-report-templates/assessment/Vision Test Form 1/tenant/organisation";
 
     if (tenantCode != null) {
       endpoint += "?tenant-code=$tenantCode";
