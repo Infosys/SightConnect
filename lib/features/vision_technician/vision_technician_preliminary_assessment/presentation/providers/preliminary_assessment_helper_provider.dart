@@ -12,11 +12,13 @@ final preliminaryAssessmentHelperProvider =
 
 class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   Ref ref;
-  final recommendationController = TextEditingController();
-  final eyeRelatedProblemotherController = TextEditingController();
-  final eyeSightProblemotherController = TextEditingController();
-  final remarksController = TextEditingController();
-  final otherQuestionsController = TextEditingController();
+  final TextEditingController recommendationController = TextEditingController();
+  final TextEditingController eyeRelatedProblemotherController = TextEditingController();
+  final TextEditingController eyeSightProblemotherController = TextEditingController();
+  final TextEditingController remarksController = TextEditingController();
+  final TextEditingController otherQuestionsController = TextEditingController();
+   final TextEditingController _equipmentController =
+      TextEditingController();
   bool onIvrCall = false;
   bool recommendationSelected = false;
   bool visionCenterSelected = false;
@@ -31,7 +33,16 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   TriagePostModel? triageResponse;
   TriagePriority selectedSeverity = TriagePriority.ROUTINE;
   OrganizationResponseModel? _selectedVisionCenter;
+
   PreliminaryAssessmentHelperNotifier(this.ref);
+
+
+
+
+  void setEquipment(String value) {
+    _equipmentController.text = value;
+    notifyListeners();
+  }
 
   void setOtherQuestions(String value) {
     otherQuestionsController.text = value;

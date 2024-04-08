@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/vision_technician_triage_provider.dart';
+import 'preliminary_assessment_equipment_selection.dart';
 
 class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
   const PreliminaryAssessmentVisualAcuity({super.key});
@@ -24,108 +25,127 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
         borderRadius: BorderRadius.circular(AppSize.km),
         boxShadow: applycustomShadow(),
       ),
-      child: Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              loc.vtVisualAcuity,
-              style: applyFiraSansFont(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            loc.vtVisualAcuity,
+            style: applyFiraSansFont(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
             ),
-            const SizedBox(height: AppSize.km),
-            Wrap(
-              runSpacing: AppSize.ks,
+          ),
+          const SizedBox(height: AppSize.ks),
+          const PreliminaryAssessmentEquipmentSelection(),
+          const SizedBox(height: AppSize.km),
+          Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  width: Responsive.isMobile(context)
-                      ? AppSize.width(context)
-                      : AppSize.width(context) * 0.2,
-                  child: TextFormField(
-                    validator: validateEyeSight,
-                    onChanged: (value) {
-                      double? eyeSight = double.tryParse(value);
-                      if (eyeSight != null) {
-                        ref
-                            .read(visionTechnicianTriageProvider)
-                            .setRightEyeSight(eyeSight);
-                        ref
-                            .read(preliminaryAssessmentHelperProvider)
-                            .setVisualAcuityRightEyeValueEntered(true);
-                        return;
-                      }
-                      ref
-                          .read(preliminaryAssessmentHelperProvider)
-                          .setVisualAcuityRightEyeValueEntered(false);
-                    },
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(hintText: loc.vtRightEye),
-                  ),
-                ),
-                const SizedBox(width: AppSize.kl),
-                SizedBox(
-                  width: Responsive.isMobile(context)
-                      ? AppSize.width(context)
-                      : AppSize.width(context) * 0.2,
-                  child: TextFormField(
-                    validator: validateEyeSight,
-                    onChanged: (value) {
-                      double? eyeSight = double.tryParse(value);
-                      if (eyeSight != null) {
-                        ref
-                            .read(visionTechnicianTriageProvider)
-                            .setLeftEyeSight(eyeSight);
-                        ref
-                            .read(preliminaryAssessmentHelperProvider)
-                            .setVisualAcuityLeftEyeValueEntered(true);
-                        return;
-                      }
-                      ref
-                          .read(preliminaryAssessmentHelperProvider)
-                          .setVisualAcuityLeftEyeValueEntered(false);
-                    },
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: loc.vtLeftEye,
+                Wrap(
+                  runSpacing: AppSize.ks,
+                  children: [
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.2,
+                      child: TextFormField(
+                        validator: validateEyeSight,
+                        onChanged: (value) {
+                          double? eyeSight = double.tryParse(value);
+                          if (eyeSight != null) {
+                            ref
+                                .read(visionTechnicianTriageProvider)
+                                .setRightEyeSight(eyeSight);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setVisualAcuityRightEyeValueEntered(true);
+                            return;
+                          }
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setVisualAcuityRightEyeValueEntered(false);
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: loc.vtRightEye,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(width: AppSize.kl),
-                SizedBox(
-                  width: Responsive.isMobile(context)
-                      ? AppSize.width(context)
-                      : AppSize.width(context) * 0.2,
-                  child: TextFormField(
-                    validator: validateEyeSight,
-                    onChanged: (value) {
-                      double? eyeSight = double.tryParse(value);
-                      if (eyeSight != null) {
-                        ref
-                            .read(visionTechnicianTriageProvider)
-                            .setBothEyeSight(eyeSight);
-                        ref
-                            .read(preliminaryAssessmentHelperProvider)
-                            .setVisualAcuityBothEyeValueEntered(true);
-                        return;
-                      }
-                      ref
-                          .read(preliminaryAssessmentHelperProvider)
-                          .setVisualAcuityBothEyeValueEntered(false);
-                    },
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: loc.vtBothEyes,
+                    const SizedBox(width: AppSize.kl),
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.2,
+                      child: TextFormField(
+                        validator: validateEyeSight,
+                        onChanged: (value) {
+                          double? eyeSight = double.tryParse(value);
+                          if (eyeSight != null) {
+                            ref
+                                .read(visionTechnicianTriageProvider)
+                                .setLeftEyeSight(eyeSight);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setVisualAcuityLeftEyeValueEntered(true);
+                            return;
+                          }
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setVisualAcuityLeftEyeValueEntered(false);
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: loc.vtLeftEye,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: AppSize.kl),
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.2,
+                      child: TextFormField(
+                        validator: validateEyeSight,
+                        onChanged: (value) {
+                          double? eyeSight = double.tryParse(value);
+                          if (eyeSight != null) {
+                            ref
+                                .read(visionTechnicianTriageProvider)
+                                .setBothEyeSight(eyeSight);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setVisualAcuityBothEyeValueEntered(true);
+                            return;
+                          }
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setVisualAcuityBothEyeValueEntered(false);
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: loc.vtBothEyes,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
