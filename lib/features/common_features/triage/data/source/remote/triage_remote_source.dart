@@ -39,7 +39,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     final tenantCode = globalTenantProvider.tenantId;
     final organizationCode = globalTenantProvider.organizationId;
     String endpoint =
-        "/2services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
+        "/services/assessments/api/diagnostic-report-templates/assessment/Vision Test Form 1/tenant/organisation";
 
     if (tenantCode != null) {
       endpoint += "?tenant-code=$tenantCode";
@@ -65,7 +65,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       }
       logger.d(
           "tenant code in global tenant provider after api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
-      return DiagnosticReportTemplateFHIRModel.fromJson(response.data.first);
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       throw ServerException();
