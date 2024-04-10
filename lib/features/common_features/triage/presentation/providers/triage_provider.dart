@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -111,8 +112,8 @@ class TriageProvider extends ChangeNotifier {
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
-      tenantCode: assessment.tenantCode,
-      organizationCode : assessment.organizationCode,
+      tenantCode: SharedPreferenceService.getTenantId,
+      organizationCode : SharedPreferenceService.getOrganizationId,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
@@ -216,8 +217,8 @@ class TriageProvider extends ChangeNotifier {
     TriagePostModel triagePostModel = TriagePostModel(
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
-      tenantCode: assessment.tenantCode,
-      organizationCode : assessment.organizationCode,
+      tenantCode: SharedPreferenceService.getTenantId,
+      organizationCode : SharedPreferenceService.getOrganizationId,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS

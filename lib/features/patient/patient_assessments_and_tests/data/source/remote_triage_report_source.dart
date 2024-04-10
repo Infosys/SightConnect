@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
@@ -71,7 +73,7 @@ class RemoteTriageReportSourceImpl implements RemoteTriageReportSource {
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       TriageDetailedReportModel triageReport =
           TriageDetailedReportModel.fromJson(response.data);
-
+      log("Triage Report: $triageReport");
       return triageReport;
     } else {
       throw ServerException();

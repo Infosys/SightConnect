@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/interceptors.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app_info_service.dart';
@@ -29,6 +30,8 @@ final dioProvider = Provider(
           "X-Accept-Language": lang,
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
           "X-App-Version": AppInfoService.appVersion,
+          "X-Tenant-Code": SharedPreferenceService.getTenantId,
+          "X-Organization-Code": SharedPreferenceService.getOrganizationId,
         },
       ),
     );

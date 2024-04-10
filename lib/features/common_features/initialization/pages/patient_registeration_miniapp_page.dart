@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
+import 'package:eye_care_for_all/core/services/geocoding_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
@@ -11,6 +12,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   final String displayName;
   final String? mobileNumber;
   final String? parentPatientId;
+  final String? pincode;
 
   const PatientRegistrationMiniappPage({
     super.key,
@@ -18,6 +20,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.displayName,
     this.mobileNumber,
     this.parentPatientId,
+    this.pincode,
   });
 
   @override
@@ -38,7 +41,8 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           parentPatientId: parentPatientId ?? _getPateintId(),
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
-          miniAppEnv:getMiniAppEnv( ApiConstant.appEnvironment),
+          miniAppEnv: getMiniAppEnv(ApiConstant.appEnvironment),
+          // pincode: pincode??""
         ),
         miniapp: MiniApp(
           id: "1",
@@ -50,16 +54,15 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
       ),
     );
   }
-  MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv){
-    switch(activeEnv)
-    {
+
+  MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv) {
+    switch (activeEnv) {
       case AppEnvironment.production:
         return MiniAppEnv.PROD;
       case AppEnvironment.staging:
         return MiniAppEnv.STAGING;
       case AppEnvironment.development:
         return MiniAppEnv.DEV;
-      
     }
   }
 
@@ -78,8 +81,8 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   }
 
   String validateMobile() {
-
-    if(PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") return "";
+    if (PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT")
+      return "";
 
     final mobile = PersistentAuthStateService.authState.username;
     if (mobile == null) return "";

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -128,8 +129,8 @@ class VtTriageProvider extends ChangeNotifier {
       TriagePostModel triagePostModel = TriagePostModel(
         patientId: patientDetails.id,
         serviceType: ServiceType.OPTOMETRY,
-        tenantCode: assessment.tenantCode,
-        organizationCode: assessment.organizationCode,
+        tenantCode: SharedPreferenceService.getTenantId,
+        organizationCode: SharedPreferenceService.getOrganizationId,
         performer: [
           Performer(
             role: PerformerRole.VISION_TECHNICIAN,
@@ -173,8 +174,8 @@ class VtTriageProvider extends ChangeNotifier {
 
       int? reportId = triageResponse.id;
       int? encounterId = triageResponse.encounter?.id;
-      int? organizationCode = assessment.organizationCode;
-      int? tenantCode = assessment.tenantCode;
+      int? organizationCode = SharedPreferenceService.getOrganizationId;
+      int? tenantCode = SharedPreferenceService.getTenantId;
       Either<Failure, CarePlanPostModel>? carePlanResponse;
 
       carePlanResponse = await _carePlanViewModelProvider.saveCarePlan(

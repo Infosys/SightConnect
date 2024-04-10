@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/providers/global_vt_availibility_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,8 @@ var getVTProfileProvider = FutureProvider.autoDispose(
       },
       (result) {
         final profile = result.first;
+        SharedPreferenceService.storeOrganizationId= profile.practiceGrants!.first.organization!.id!;
+        SharedPreferenceService.storeTenantId = profile.practiceGrants!.first.organization!.tenant!.id!;
         ref.read(globalVTProvider).setUser(profile);
         ref
             .read(globalVTAvailabilityProvider)
