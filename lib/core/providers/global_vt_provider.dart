@@ -6,6 +6,8 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../main.dart';
+
 var globalVTProvider = ChangeNotifierProvider((ref) => GlobalVTProvider());
 
 class GlobalVTProvider extends ChangeNotifier {
@@ -40,6 +42,7 @@ var getVTProfileProvider = FutureProvider.autoDispose(
         final profile = result.first;
         SharedPreferenceService.storeOrganizationId= profile.practiceGrants!.first.organization!.id!;
         SharedPreferenceService.storeTenantId = profile.practiceGrants!.first.organization!.tenant!.id!;
+        logger.f("values after setting - ${SharedPreferenceService.getOrganizationId} - ${SharedPreferenceService.getTenantId}");
         ref.read(globalVTProvider).setUser(profile);
         ref
             .read(globalVTAvailabilityProvider)
