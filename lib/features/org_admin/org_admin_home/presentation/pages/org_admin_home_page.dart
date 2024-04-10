@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_dashboard/presentation/pages/org_admin_dashboard_page.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/pages/org_admin_analytics_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/analytics_cards.dart';
@@ -66,7 +66,7 @@ class OrgAdminHomePage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const OrgAdminDashBoardPage(),
+                                      const OrgAdminAnalyticsDashBoardPage(),
                                 ),
                               );
                             },
@@ -90,19 +90,72 @@ class OrgAdminHomePage extends StatelessWidget {
                 )
               ],
             ),
+            const SizedBox(height: AppSize.ks),
             Padding(
-              padding: const EdgeInsets.all(AppSize.km),
-              child: AppPaginatedTable(
-                  pageSize: 10,
-                  dataSource: OrgAdminHomeDataSource(),
-                  onRowsPerPageChanged: (value) {},
-                  columnNames: const [
-                    'Patient',
-                    'Assessment ID',
-                    'Status',
-                    'Category',
-                  ]),
-            ),
+                padding: const EdgeInsets.all(AppSize.km),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Assessments',
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        color: AppColor.black,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    Row(
+                      children: [
+                        Row(
+                          children: ['All', 'Critical', 'IVR Assessments']
+                              .map((e) => Container(
+                                  padding: const EdgeInsets.all(AppSize.ks),
+                                  margin:
+                                      const EdgeInsets.only(right: AppSize.ks),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white,
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.ks),
+                                    border: Border.all(
+                                      color: AppColor.grey,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    e,
+                                    style: applyRobotoFont(fontSize: 14),
+                                  )))
+                              .toList(),
+                        ),
+                        const Spacer(),
+                        const Text(
+                          '|',
+                          style: TextStyle(
+                            color: AppColor.lightGrey,
+                            fontSize: 36,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.filter_list_outlined,
+                              color: AppColor.grey,
+                            ))
+                      ],
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    AppPaginatedTable(
+                      pageSize: 10,
+                      dataSource: OrgAdminHomeDataSource(),
+                      onRowsPerPageChanged: (value) {},
+                      columnNames: const [
+                        'Patient',
+                        'Assessment ID',
+                        'Status',
+                        'Category',
+                      ],
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
@@ -178,7 +231,7 @@ class OrgAdminHomeDataSource extends DataTableSource {
       DataCell(Text('Avendra ')),
       DataCell(Text('123456')),
       DataCell(Text('Closed')),
-      DataCell(Text('Urgent Category')),
+      DataCell(Text('Urgent Category', style: TextStyle(color: Colors.red))),
     ]);
   }
 

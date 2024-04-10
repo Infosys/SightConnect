@@ -1,142 +1,134 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_home/presentation/pages/org_admin_home_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class OrgAdminDashBoardPage extends StatelessWidget {
   const OrgAdminDashBoardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+    final loc = context.loc!;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Vision Centre Analytics'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSize.ks),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                DropdownMenu<String>(
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context)
-                        : AppSize.width(context) / 2.8,
-                    leadingIcon: const Icon(
-                      Icons.calendar_today,
-                    ),
-                    label: const Text('19 Jan 23 - 23 Jan 23'),
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(
-                        value: '19 Jan 23 - 23 Jan 23',
-                        label: '19 Jan 23 - 23 Jan 23',
-                      ),
-                      DropdownMenuEntry(
-                        value: '19 Jan 23 - 23 Jan 23',
-                        label: '19 Jan 23 - 23 Jan 23',
-                      ),
-                    ]),
-                const SizedBox(width: AppSize.ks),
-                DropdownMenu<String>(
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context)
-                        : AppSize.width(context) / 2.7,
-                    leadingIcon: const Icon(
-                      Icons.location_on,
-                    ),
-                    label: const Text('Gachibowli, Hyderabad'),
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(
-                        value: 'Gachibowli, Hyderabad',
-                        label: 'Gachibowli, Hyderabad',
-                      ),
-                      DropdownMenuEntry(
-                        value: 'Gachibowli, Hyderabad',
-                        label: 'Gachibowli, Hyderabad',
-                      ),
-                    ]),
-              ],
+      body: const OrgAdminHomePage(),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColor.white,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: AppColor.primary,
+        unselectedItemColor: AppColor.grey,
+        unselectedLabelStyle: isMobile
+            ? applyRobotoFont(fontSize: 10)
+            : applyRobotoFont(fontSize: 16),
+        selectedLabelStyle: isMobile
+            ? applyRobotoFont(fontSize: 10, fontWeight: FontWeight.w600)
+            : applyRobotoFont(fontSize: 16, fontWeight: FontWeight.w600),
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              break;
+            case 1:
+              break;
+            case 2:
+              break;
+            case 3:
+              break;
+          }
+        },
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: isMobile
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                AppIcon.vtHomeIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.primary,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
-            const SizedBox(height: AppSize.km),
-            const Row(
-              children: [
-                StatisticsCard(),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class StatisticsCard extends StatelessWidget {
-  const StatisticsCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSize.kl),
-      width: AppSize.width(context) - AppSize.ks * 2,
-      decoration: BoxDecoration(
-        color: AppColor.pureBlue,
-        borderRadius: BorderRadius.circular(AppSize.ks),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Overview',
-            style: applyFiraSansFont(
-              fontSize: 16,
-            ),
+            label: loc.vtDashboard,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildColumn('1,58,790', null, 'Patients Attended'),
-              _buildColumn('25', null, 'Ongoing cases'),
-              _buildColumn('25,000', 'Conjuctivitis', 'Top issue'),
-              _buildColumn('1,45,000', 'Spectacles', 'Top solution'),
-            ],
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: isMobile
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                AppIcon.vtRegisterIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            label: 'My Team',
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: isMobile
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                AppIcon.patientAppointmentBookingCalander,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            label: 'Appointments',
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: isMobile
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                AppIcon.vtIVRCallIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            label: loc.vtIVRCallHistory,
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: isMobile
+                  ? const EdgeInsets.all(4.0)
+                  : const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                AppIcon.vtRegisterIcon,
+                height: isMobile ? 20 : 30,
+                width: isMobile ? 20 : 30,
+                colorFilter: const ColorFilter.mode(
+                  AppColor.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            label: loc.vtRegisterPatient,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildColumn(String number, String? text, String? subText) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          number,
-          style: applyFiraSansFont(
-            fontSize: 32,
-            color: AppColor.primary,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        if (text != null)
-          Text(
-            text,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.grey,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        if (subText != null)
-          Text(
-            subText,
-            style: applyRobotoFont(
-              fontSize: 12,
-              color: AppColor.grey,
-            ),
-          ),
-      ],
     );
   }
 }
