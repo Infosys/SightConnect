@@ -7,12 +7,13 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
+import '../../../../main.dart';
+
 class PatientRegistrationMiniappPage extends StatelessWidget {
   final MiniAppActionType actionType;
   final String displayName;
   final String? mobileNumber;
   final String? parentPatientId;
-  final String? pincode;
 
   const PatientRegistrationMiniappPage({
     super.key,
@@ -20,9 +21,9 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.displayName,
     this.mobileNumber,
     this.parentPatientId,
-    this.pincode,
   });
 
+  // String pincode = "";
   @override
   Widget build(BuildContext context) {
     // if true returned then api call was successful
@@ -81,8 +82,9 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   }
 
   String validateMobile() {
-    if (PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT")
+    if (PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") {
       return "";
+    }
 
     final mobile = PersistentAuthStateService.authState.username;
     if (mobile == null) return "";

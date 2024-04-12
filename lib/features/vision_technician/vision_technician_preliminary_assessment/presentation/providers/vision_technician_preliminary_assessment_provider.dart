@@ -129,8 +129,8 @@ class VtTriageProvider extends ChangeNotifier {
       TriagePostModel triagePostModel = TriagePostModel(
         patientId: patientDetails.id,
         serviceType: ServiceType.OPTOMETRY,
-        tenantCode: SharedPreferenceService.getTenantId,
-        organizationCode: SharedPreferenceService.getOrganizationId,
+        tenantCode: SharedPreferenceService.getTenantIdVt,
+        organizationCode: SharedPreferenceService.getOrganizationIdVt,
         performer: [
           Performer(
             role: PerformerRole.VISION_TECHNICIAN,

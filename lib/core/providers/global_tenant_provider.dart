@@ -12,10 +12,16 @@ class GlobalTenantProvider extends ChangeNotifier {
   int? _organizationId = SharedPreferenceService.getOrganizationId;
   // bool _isTenantSelection = false;
 
+  int? _tenantIdVt = SharedPreferenceService.getTenantIdVt;
+  int? _organizationIdVt = SharedPreferenceService.getOrganizationIdVt;
+
   GlobalTenantProvider();
 
   int? get tenantId => _tenantId;
   int? get organizationId => _organizationId;
+
+  int? get tenantIdVt => _tenantIdVt;
+  int? get organizationIdVt => _organizationIdVt;
   // bool get isTenantSelection => _isTenantSelection;
 
   // void setIsTenantSelection(bool isTenantSelection) {
@@ -23,6 +29,20 @@ class GlobalTenantProvider extends ChangeNotifier {
   //   logger.d('Is Tenant Selection: $_isTenantSelection');
   //   notifyListeners();
   // }
+
+  void setTenantIdVt(int? tenantIdVt) {
+    _tenantIdVt = tenantIdVt;
+    SharedPreferenceService.storeTenantIdVt = tenantIdVt!;
+    logger.d('Tenant ID VT: $_tenantIdVt');
+    notifyListeners();
+  }
+
+  void setOrganizationIdVt(int? organizationIdVt) {
+    _organizationIdVt = organizationIdVt;
+    SharedPreferenceService.storeOrganizationIdVt = organizationIdVt!;
+    logger.d('Organization ID VT: $_organizationIdVt');
+    notifyListeners();
+  }
 
   void setTenantId(int? tenantId) {
     _tenantId = tenantId;

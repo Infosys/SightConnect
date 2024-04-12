@@ -36,8 +36,8 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ks),
-          const PreliminaryAssessmentEquipmentSelection(),
+          // const SizedBox(height: AppSize.ks),
+          // const PreliminaryAssessmentEquipmentSelection(),
           const SizedBox(height: AppSize.km),
           Form(
             autovalidateMode: AutovalidateMode.onUserInteraction,

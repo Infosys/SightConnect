@@ -11,18 +11,20 @@ class LocationService {
 
     if (hasPermission == PermissionStatus.granted ||
         hasPermission == PermissionStatus.grantedLimited) {
+      logger.f("inisde if permission granted");
       if (context.mounted) {
         enableLocation(context);
       }
       return true;
     } else if (hasPermission == PermissionStatus.denied) {
+      logger.f("inside if permission denied");
       if (context.mounted) {
         await showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Location Access'),
-              content: const Text('Please grant location access to continue.'),
+              title: const Text('Permission Needed'),
+              content: const Text('Please give permission'),
               actions: [
                 TextButton(
                   onPressed: () async {
@@ -35,7 +37,7 @@ class LocationService {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text('Location Access'),
+                              title: const Text('Permission Denied'),
                               content: const Text('Location access denied.'),
                               actions: [
                                 TextButton(
@@ -66,9 +68,9 @@ class LocationService {
       }
     }
 
-    if (hasPermission == PermissionStatus.granted ||
-        hasPermission == PermissionStatus.grantedLimited &&
-            serviceEnabled == true) {
+    if ((hasPermission == PermissionStatus.granted ||
+            hasPermission == PermissionStatus.grantedLimited) &&
+        serviceEnabled == true) {
       return true;
     }
 
@@ -80,8 +82,10 @@ class LocationService {
     final serviceEnabled = await location.serviceEnabled();
     logger.f('Location permission status: $serviceEnabled');
     if (serviceEnabled) {
+      logger.f("inisde if service enabled");
       return true;
     } else if (!serviceEnabled) {
+      logger.f("inside if service disabled");
       if (context.mounted) {
         await showDialog(
           context: context,
@@ -92,10 +96,12 @@ class LocationService {
               actions: [
                 TextButton(
                   onPressed: () async {
-                     Navigator.of(context).pop();
+                    logger.f("pressed ok for location access");
+                    Navigator.of(context).pop();
                     final result = await location.requestService();
 
                     if (result == false) {
+                      logger.f("location denied from android");
                       if (context.mounted) {
                         // Navigator.of(context).pop();
                         showDialog(
@@ -116,7 +122,7 @@ class LocationService {
                           },
                         );
                       }
-                    } 
+                    }
                   },
                   child: const Text('OK'),
                 ),
@@ -129,8 +135,7 @@ class LocationService {
   }
 
   static Future<LocationData> getCoordinates() async {
-    final location = Location();  
+    final location = Location();
     return await location.getLocation();
   }
-
 }

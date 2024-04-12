@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vt_availibility_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
@@ -40,9 +41,11 @@ var getVTProfileProvider = FutureProvider.autoDispose(
       },
       (result) {
         final profile = result.first;
-        SharedPreferenceService.storeOrganizationId= profile.practiceGrants!.first.organization!.id!;
-        SharedPreferenceService.storeTenantId = profile.practiceGrants!.first.organization!.tenant!.id!;
-        logger.f("values after setting - ${SharedPreferenceService.getOrganizationId} - ${SharedPreferenceService.getTenantId}");
+        ref.read(globalTenantProvider).setOrganizationIdVt(profile.practiceGrants!.first.organization!.id!);
+        ref.read(globalTenantProvider).setTenantIdVt(profile.practiceGrants!.first.organization!.tenant!.id!);
+        // SharedPreferenceService.storeOrganizationIdVt= profile.practiceGrants!.first.organization!.id!;
+        // SharedPreferenceService.storeTenantIdVt = profile.practiceGrants!.first.organization!.tenant!.id!;
+        logger.f("values after setting - ${SharedPreferenceService.getOrganizationIdVt} - ${SharedPreferenceService.getTenantIdVt}");
         ref.read(globalVTProvider).setUser(profile);
         ref
             .read(globalVTAvailabilityProvider)

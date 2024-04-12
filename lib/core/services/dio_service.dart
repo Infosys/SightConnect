@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/interceptors.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../main.dart';
 import 'app_info_service.dart';
 
 final keycloakDioProvider = Provider(
@@ -23,6 +26,31 @@ final keycloakDioProvider = Provider(
 final dioProvider = Provider(
   (ref) {
     final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;
+
+    int? getTenantId() {
+      if (PersistentAuthStateService.authState.activeRole ==
+          "ROLE_VISION_TECHNICIAN") {
+        logger.f("changing tenant based on Role = VT");
+        return ref.watch(globalTenantProvider).tenantIdVt;
+      } else if (PersistentAuthStateService.authState.activeRole ==
+          "ROLE_PATIENT") {
+        logger.f("changing tenant based on Role = Patient");
+        return ref.watch(globalTenantProvider).tenantId;
+      }
+      return null;
+    }
+
+    int? getOrganizationId() {
+      if (PersistentAuthStateService.authState.activeRole ==
+          "ROLE_VISION_TECHNICIAN") {
+        return ref.watch(globalTenantProvider).organizationIdVt;
+      } else if (PersistentAuthStateService.authState.activeRole ==
+          "ROLE_PATIENT") {
+        return ref.watch(globalTenantProvider).organizationId;
+      }
+      return null;
+    }
+   
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
@@ -30,8 +58,8 @@ final dioProvider = Provider(
           "X-Accept-Language": lang,
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
           "X-App-Version": AppInfoService.appVersion,
-          "X-Tenant-Code": SharedPreferenceService.getTenantId,
-          "X-Organization-Code": SharedPreferenceService.getOrganizationId,
+          "X-Tenant-Code": getTenantId(),
+          "X-Organization-Code": getOrganizationId(),
         },
       ),
     );
@@ -40,7 +68,7 @@ final dioProvider = Provider(
       [
         DioTokenInterceptor(ref, dio),
         LogInterceptor(
-          requestHeader: false,
+          requestHeader: true,
           requestBody: true,
           request: true,
           responseBody: false,
