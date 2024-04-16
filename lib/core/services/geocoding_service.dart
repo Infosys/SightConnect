@@ -7,32 +7,23 @@ import '../../main.dart';
 
 class GeocodingService {
   static Future<String> getPincodeFromLocation(BuildContext context) async {
-    final isLocationEnabled =
-        await LocationService.checkLocationPermission(context);
-    if (isLocationEnabled) {
-      final LocationData locationData = await LocationService.getCoordinates();
-      final placemarks = await placemarkFromCoordinates(
-          locationData.latitude!, locationData.longitude!);
-      logger.f("placemarks : $placemarks");
+    final LocationData locationData = await LocationService.getCoordinates();
+    final placemarks = await placemarkFromCoordinates(
+        locationData.latitude!, locationData.longitude!);
+    logger.f("placemarks : $placemarks");
 
-      return placemarks.first.postalCode ?? "";
-    } else {
-      return "";
-    }
+    return placemarks.first.postalCode ?? "";
   }
 
-  static Future<Map<String, String>> getCoordinatesFromPincode(String pincode){
+  static Future<Map<String, String>> getCoordinatesFromPincode(String pincode) {
     return locationFromAddress(pincode).then((value) {
-      if(value.isNotEmpty){
+      if (value.isNotEmpty) {
         return {
           "latitude": value.first.latitude.toString(),
           "longitude": value.first.longitude.toString()
         };
       }
-      return {
-        "latitude": "",
-        "longitude": ""
-      };
+      return {"latitude": "", "longitude": ""};
     });
   }
 }
