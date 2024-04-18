@@ -17,14 +17,15 @@ import '../../../../../shared/theme/text_theme.dart';
 import '../../../../patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
 import '../../../../patient/patient_home/presentation/providers/near_by_vision_center_provider.dart';
 
-class TenantsDisplayPage extends StatefulHookConsumerWidget {
-  const TenantsDisplayPage({super.key});
+class PatientTenantsDisplayPage extends StatefulHookConsumerWidget {
+  const PatientTenantsDisplayPage({super.key});
 
   @override
-  ConsumerState<TenantsDisplayPage> createState() => _TenantDisplayPageState();
+  ConsumerState<PatientTenantsDisplayPage> createState() =>
+      _TenantDisplayPageState();
 }
 
-class _TenantDisplayPageState extends ConsumerState<TenantsDisplayPage>
+class _TenantDisplayPageState extends ConsumerState<PatientTenantsDisplayPage>
     with WidgetsBindingObserver {
   @override
   void initState() {

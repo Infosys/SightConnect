@@ -10,7 +10,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/a
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/features/common_features/tenant/presentation/pages/tenants_display_page.dart';
+import 'package:eye_care_for_all/features/common_features/tenant/presentation/pages/patient_tenants_display_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -109,7 +109,7 @@ class AppDrawer extends HookWidget {
                                   navigator.push(
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const TenantsDisplayPage(),
+                                          const PatientTenantsDisplayPage(),
                                     ),
                                   );
                                   break;

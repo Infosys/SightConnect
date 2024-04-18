@@ -6,7 +6,7 @@ import 'package:location/location.dart';
 import '../../main.dart';
 
 class GeocodingService {
-  static Future<String> getPincodeFromLocation(BuildContext context) async {
+  static Future<String> getPincodeFromLocation() async {
     final LocationData locationData = await LocationService.getCoordinates();
     final placemarks = await placemarkFromCoordinates(
         locationData.latitude!, locationData.longitude!);

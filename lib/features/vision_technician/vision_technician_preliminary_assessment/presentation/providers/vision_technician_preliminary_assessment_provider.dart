@@ -159,6 +159,7 @@ class VtTriageProvider extends ChangeNotifier {
         questionResponse: questionResponse,
       );
       logger.d(triagePostModel.toJson());
+      logger.f(" ${DateTime.now().subtract(const Duration(seconds: 2)).toString()} ------ ${DateTime.now().subtract(const Duration(seconds: 2)).toUtc()}");
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
         SaveTriageParam(triagePostModel: triagePostModel),
       );

@@ -25,6 +25,7 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../../../core/models/keycloak.dart';
+import '../../../../core/services/location_service.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
   static const String routeName = '/initialization';
@@ -68,8 +69,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> _profileVerification(Role role) async {
     final navigator = Navigator.of(context);
     try {
-      final userExist =
-          await ref.read(initializationProvider).checkUserAlreadyExist(role);
+      final userExist = 
+      await ref.read(initializationProvider).checkUserAlreadyExist(role);
       logger.d("User Exist: $userExist");
       if (userExist) {
         _handleExistingUser(navigator, role);
@@ -184,6 +185,24 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
     // String pincode = await GeocodingService.getPincodeFromLocation(context);
     // logger.f("pincode is  $pincode");
+    bool hasPermission = await LocationService.checkLocationPermission(context);
+    if (hasPermission && context.mounted) {
+      bool isLocationEnabled = await LocationService.enableLocation(context);
+      if (isLocationEnabled) {
+        String pincode = await GeocodingService.getPincodeFromLocation();
+        logger.f("pincode is  $pincode");
+      }
+    } else if (!hasPermission && context.mounted) {
+      hasPermission = await LocationService.requestLocationPermission(context);
+
+      if (hasPermission && context.mounted) {
+        bool isLocationEnabled = await LocationService.enableLocation(context);
+        if (isLocationEnabled) {
+          String pincode = await GeocodingService.getPincodeFromLocation();
+          logger.f("pincode is  $pincode");
+        }
+      }
+    }
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
         builder: (context) => const PatientRegistrationMiniappPage(
