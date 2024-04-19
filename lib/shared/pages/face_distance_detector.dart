@@ -15,6 +15,9 @@ import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../core/providers/global_visual_acuity_provider.dart';
+import '../../features/common_features/distance_visual_acuity_tumbling/presentation/providers/distance_acuity_notifier_provider.dart';
+
 class FaceDistanceDetector extends ConsumerStatefulWidget {
   const FaceDistanceDetector({
     super.key,
@@ -258,7 +261,14 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
-            ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+            if (ref.read(globalVisualAcuityProvider).isShortDistanceTest ==
+                true) {
+              ref.read(distanceNotifierProvider).distance =
+                  _distanceToFace ?? 0;
+            } else {
+              ref.read(distanceAcuityNotifierProvider).distance =
+                  _distanceToFace ?? 0;
+            }
           } else {
             _distanceToFace = null;
           }
@@ -315,7 +325,14 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
-            ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+            if (ref.read(globalVisualAcuityProvider).isShortDistanceTest ==
+                true) {
+              ref.read(distanceNotifierProvider).distance =
+                  _distanceToFace ?? 0;
+            } else {
+              ref.read(distanceAcuityNotifierProvider).distance =
+                  _distanceToFace ?? 0;
+            }
           } else {
             _distanceToFace = null;
           }

@@ -2,11 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
-import 'package:eye_care_for_all/features/common_features/distance_visual_acuity_tumbling/presentation/pages/distance_visual_acuity_tumbling_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -19,10 +15,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../triage/presentation/providers/triage_stepper_provider.dart';
-import 'visual_acuity_tumbling_overlay.dart';
+import '../../domain/models/enums/distance_tumbling_enums.dart';
+import '../pages/distance_visual_acuity_result_page.dart';
+import '../providers/distance_visual_acuity_test_provider.dart';
+import 'distance_visual_acuity_tumbling_overlay.dart';
 
-class VisualAcuityDialog {
-  VisualAcuityDialog._();
+class DistanceVisualAcuityDialog {
+  DistanceVisualAcuityDialog._();
 
   static SizedBox showEyeInstructionDialog(BuildContext context, Eye eye) {
     return SizedBox(
@@ -156,8 +155,8 @@ class VisualAcuityDialog {
   }
 }
 
-class VisualAcuitySuccessDialog extends HookConsumerWidget {
-  const VisualAcuitySuccessDialog({super.key});
+class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
+  const DistanceVisualAcuitySuccessDialog({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final global = ref.read(globalProvider);
@@ -202,8 +201,9 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                           Widget? child,
                         ) {
                           final isAcuityDialog = ref.read(
-                              visualAcuityTumblingTestDialogProvider.notifier);
-                          // final stepper = ref.read(triageStepperProvider);
+                              distancevisualAcuityTumblingTestDialogProvider
+                                  .notifier);
+                          final stepper = ref.read(triageStepperProvider);
 
                           return TextButton(
                             onPressed: () async {
@@ -211,10 +211,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                               try {
                                 isLoading.value = true;
                                 isAcuityDialog.state = true;
-                                // stepper.goToNextStep();
-                                ref
-                                    .read(globalVisualAcuityProvider)
-                                    .setDistanceTest(false);
+                                stepper.goToNextStep();
 
                                 if (global.isTriageMode()) {
                                   logger.d("Triage Mode");
@@ -250,23 +247,30 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
   }
 
   Future<void> _saveTriageMode(WidgetRef ref, NavigatorState navigator) async {
-    await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
-    navigator.push(MaterialPageRoute(builder: (context) {
-      return const DistanceVisualAcuityTumblingPage();
-    }));
+    // await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
+    navigator
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop();
   }
 
   void _saveStandAloneMode(NavigatorState navigator) {
     navigator.pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const TumblingResultReportPage(),
+        builder: (context) => const DistanceTumblingResultReportPage(),
       ),
     );
   }
 
   Future<void> _saveUpdateMode(WidgetRef ref, NavigatorState navigator) async {
     final result = await ref
-        .read(tumblingTestProvider)
+        .read(distanceTumblingTestProvider)
         .updateVisualAcuityTumblingResponse();
 
     result.fold(
@@ -287,7 +291,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       ..pop();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.invalidate(tumblingTestProvider);
+      ref.invalidate(distanceTumblingTestProvider);
     });
   }
 }
