@@ -22,6 +22,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../../core/providers/global_visual_acuity_provider.dart';
 import '../../../triage/domain/models/enums/performer_role.dart';
 import '../../domain/models/enums/distance_tumbling_enums.dart';
 import '../../domain/models/distance_tumbling_models.dart';
@@ -38,6 +39,7 @@ var distanceTumblingTestProvider = ChangeNotifierProvider(
   (ref) => DistanceVisualAcuityTestProvider(
     ref.watch(distancetumblingLocalSource),
     ref.read(triageLocalSourceProvider),
+    ref.watch(globalVisualAcuityProvider),
     ref.watch(triageRepositoryProvider),
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
@@ -47,12 +49,14 @@ var distanceTumblingTestProvider = ChangeNotifierProvider(
 class DistanceVisualAcuityTestProvider with ChangeNotifier {
   final DistanceTumblingLocalSource _dataSource;
   TriageLocalSource triageLocalSourceProvider;
+  GlobalVisualAcuityProvider globalVisualAcuityProvider;
   TriageRepository triageRepositoryProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
   DistanceVisualAcuityTestProvider(
       this._dataSource,
       this.triageLocalSourceProvider,
+      this.globalVisualAcuityProvider,
       this.triageRepositoryProvider,
       this._triageReportRepository,
       this._triageUrgencyRepository) {
@@ -297,6 +301,10 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     double leftEyeScore = _calculateScore(leftEyeSight);
     double rightEyeScore = _calculateScore(rightEyeSight);
     double bothEyeScore = _calculateScore(bothEyeSight);
+
+    globalVisualAcuityProvider.setDistanceLeftEyeValue(leftEyeSight.toStringAsFixed(3));
+    globalVisualAcuityProvider.setDistanceRightEyeValue(rightEyeSight.toStringAsFixed(3));
+    globalVisualAcuityProvider.setDistanceBothEyeValue(bothEyeSight.toStringAsFixed(3));
 
     int? rightEyeIndentifier;
     int? leftEyeIndentifier;

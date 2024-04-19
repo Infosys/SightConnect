@@ -15,6 +15,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'distance_visual_acuity_demo_page.dart';
+import 'distance_visual_acuity_face_distance_page.dart';
 import 'distance_visual_acutiy_instruction_page.dart';
 
 class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
@@ -130,7 +131,7 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
-                          const DistanceVisualAcuityDemoPage(),
+                          const DistanceVisualAcuityFaceDistancePage(),
                     ),
                   );
                 },

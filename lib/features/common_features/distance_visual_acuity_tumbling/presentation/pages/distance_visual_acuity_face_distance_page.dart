@@ -38,7 +38,7 @@ class DistanceVisualAcuityFaceDistancePage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  loc.vaDistanceToFaceInstruction,
+                  "Please ensure that the camera is 200 cm or 2 meters away from your face.",
                   textAlign: TextAlign.center,
                   style: applyRobotoFont(
                     fontSize: 16,

@@ -1,8 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
 
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/features/common_features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_image_card.dart';
@@ -27,7 +29,7 @@ class TriageResultPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(triageResultProvider(triageResult));
     final loc = context.loc!;
-
+    final observationData = ref.read(globalVisualAcuityProvider);
     return PopScope(
       canPop: false,
       onPopInvoked: (value) async {
@@ -105,6 +107,12 @@ class TriageResultPage extends ConsumerWidget {
                 ResultImageCard(
                   reportId: triageResult.id,
                 ),
+                const SizedBox(height: AppSize.km * 2),
+                Text("Distance Left Eye Value is : ${observationData.distanceLeftEyeValue}"),
+                const SizedBox(height: AppSize.km * 2),
+                Text("Distance Right Eye Value is : ${observationData.distanceRightEyeValue}"),
+                const SizedBox(height: AppSize.km * 2),
+                Text("Distance Both Eye Value is : ${observationData.distanceBothEyeValue}"),
                 const SizedBox(height: AppSize.kl * 3),
               ],
             ),

@@ -32,9 +32,9 @@ class DistanceAcuityNotifier extends ChangeNotifier {
   }
 
   String getDistanceText(BuildContext context) {
-    if (_currentDistance < 35) {
+    if (_currentDistance < _minDistance) {
       return context.loc?.visualAcuityTestDistanceInstructionTooClose ?? "";
-    } else if (_currentDistance > 45) {
+    } else if (_currentDistance > _maxDistance) {
       return context.loc?.visualAcuityTestDistanceInstructionTooFar ?? "";
     }
     return "";

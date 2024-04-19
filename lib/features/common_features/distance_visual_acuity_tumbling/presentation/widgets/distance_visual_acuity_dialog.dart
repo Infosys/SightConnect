@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
 
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -204,7 +205,9 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                               distancevisualAcuityTumblingTestDialogProvider
                                   .notifier);
                           final stepper = ref.read(triageStepperProvider);
-
+                          ref
+                              .read(globalVisualAcuityProvider)
+                              .setShortDistanceTest(true);
                           return TextButton(
                             onPressed: () async {
                               var navigator = Navigator.of(context);
@@ -247,9 +250,8 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
   }
 
   Future<void> _saveTriageMode(WidgetRef ref, NavigatorState navigator) async {
-    // await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
+    await ref.read(distanceTumblingTestProvider).getVisionAcuityTumblingResponse();
     navigator
-      ..pop()
       ..pop()
       ..pop()
       ..pop()
