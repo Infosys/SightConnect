@@ -361,7 +361,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     try {
       var res = await getVisionAcuityTumblingResponse();
       logger.d({"saveVisionAcuityResponseToDB ": res});
-      await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
+      await triageLocalSourceProvider.saveTriageDistanceVisualAcuityLocally(
         triageVisualAcuity: res,
       );
     } catch (e) {

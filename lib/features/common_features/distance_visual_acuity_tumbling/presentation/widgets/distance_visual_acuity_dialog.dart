@@ -250,9 +250,10 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
   }
 
   Future<void> _saveTriageMode(WidgetRef ref, NavigatorState navigator) async {
-    await ref
-        .read(distanceTumblingTestProvider)
-        .getVisionAcuityTumblingResponse();
+    // await ref
+    //     .read(distanceTumblingTestProvider)
+    //     .getVisionAcuityTumblingResponse();
+    await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
     navigator
       ..pop()
       ..pop()
