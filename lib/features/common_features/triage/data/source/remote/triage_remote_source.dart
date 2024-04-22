@@ -57,11 +57,11 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
       var response = await dio.get(endpoint);
       log("assessment response : ${response.data}");
       if (tenantCode == null) {
-        globalTenantProvider.setTenantId(response.data.first['tenantCode']);
+        globalTenantProvider.setTenantId(response.data['tenantCode']);
       }
       if (organizationCode == null) {
         globalTenantProvider
-            .setOrganizationId(response.data.first['organizationCode']);
+            .setOrganizationId(response.data['organizationCode']);
       }
       logger.d(
           "tenant code in global tenant provider after api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
