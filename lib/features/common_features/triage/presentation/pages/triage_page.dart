@@ -15,6 +15,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
+import '../../../distance_visual_acuity_tumbling/presentation/pages/distance_visual_acuity_tumbling_page.dart';
 import '../../../visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 
 class TriagePage extends ConsumerStatefulWidget {
@@ -81,6 +82,9 @@ class _TriagePageState extends ConsumerState<TriagePage> {
             ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
             return const VisualAcuityTumblingPage();
           case 2:
+            ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+            return const DistanceVisualAcuityTumblingPage();
+          case 3:
             return const TriageEyeScanPage();
           default:
             return TriageQuestionnairePage(

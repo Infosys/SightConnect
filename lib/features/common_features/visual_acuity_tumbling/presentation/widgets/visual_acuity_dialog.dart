@@ -203,7 +203,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                         ) {
                           final isAcuityDialog = ref.read(
                               visualAcuityTumblingTestDialogProvider.notifier);
-                          // final stepper = ref.read(triageStepperProvider);
+                          final stepper = ref.read(triageStepperProvider);
 
                           return TextButton(
                             onPressed: () async {
@@ -211,7 +211,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                               try {
                                 isLoading.value = true;
                                 isAcuityDialog.state = true;
-                                // stepper.goToNextStep();
+                                stepper.goToNextStep();
                                 ref
                                     .read(globalVisualAcuityProvider)
                                     .setShortDistanceTest(false);
@@ -251,9 +251,14 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
 
   Future<void> _saveTriageMode(WidgetRef ref, NavigatorState navigator) async {
     await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
-    navigator.push(MaterialPageRoute(builder: (context) {
-      return const DistanceVisualAcuityTumblingPage();
-    }));
+    //   navigator.push(MaterialPageRoute(builder: (context) {
+    //     return const DistanceVisualAcuityTumblingPage();
+    //   }));
+    navigator
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop();
   }
 
   void _saveStandAloneMode(NavigatorState navigator) {

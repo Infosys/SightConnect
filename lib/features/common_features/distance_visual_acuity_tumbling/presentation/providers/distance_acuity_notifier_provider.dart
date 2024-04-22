@@ -7,9 +7,9 @@ var distanceAcuityNotifierProvider =
 
 class DistanceAcuityNotifier extends ChangeNotifier {
   int _currentDistance = 0;
-  final int _maxDistance = 205;
-  final int _minDistance = 195;
-  final int _doctorRecommendedDistance = 200;
+  final int _maxDistance = 45;
+  final int _minDistance = 35;
+  final int _doctorRecommendedDistance = 40;
   bool _toastShown = true;
   int get doctorRecommendedDistance => _doctorRecommendedDistance;
   bool get toastShown => _toastShown;
