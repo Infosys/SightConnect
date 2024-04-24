@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
@@ -105,24 +108,31 @@ class AssessmentDetailedReportMapper {
     }
   }
 
-  static List<ObservationBriefEntity> _getObservationBriefEntity(
+   static List<ObservationBriefEntity> _getObservationBriefEntity(
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
     try {
       final List<ObservationBriefEntity> observationBriefEntity = [];
-      Map<int, String> observationMap = {};
-      if (triageAssessment.observations?.id != null) {
-        int id = triageAssessment.observations?.id ?? 0;
-        BodySite bodySite =
-            triageAssessment.observations?.bodySite ?? BodySite.BOTH_EYES;
-        observationMap[id] = getBodySiteText(bodySite);
-      }
+      Map<int, Map<String, String>> observationMap = {};
+      // if (triageAssessment.observations?.id != null) {
+      //   int id = triageAssessment.observations?.id ?? 0;
+      //   BodySite bodySite =
+      //       triageAssessment.observations?.bodySite ?? BodySite.BOTH_EYES;
+      //   observationMap[id] = {
+      //     "bodySite": getBodySiteText(bodySite),
+      //     "code": getCode(triageAssessment.observations!.code!),
+      //   };
+      // }
+      
       for (ObservationDefinitionModel observation
           in triageAssessment.observations!.observationDefinition!) {
         int id = observation.id ?? 0;
         BodySite bodySite = observation.bodySite!;
-        observationMap[id] = getBodySiteText(bodySite);
+        observationMap[id] = {
+          "bodySite": getBodySiteText(bodySite),
+          "code": getCode(observation.code!),
+        };
       }
       for (Observation observation in triageDetailedReport.observations!) {
         if (observationMap.containsKey(observation.identifier)) {
@@ -131,12 +141,14 @@ class AssessmentDetailedReportMapper {
               observationValue: double.parse(observation.value!),
               observationId: observation.id,
               observationValueIdentifier: observation.identifier ?? 0,
-              bodySite: observationMap[observation.identifier].toString(),
+              bodySite: observationMap[observation.identifier]?["bodySite"].toString()??"",
+              code: observationMap[observation.identifier]?["code"]??"",
             ),
           );
         }
       }
 
+        log( "Observation Brief Entity: ${observationBriefEntity.toString()}");
       return observationBriefEntity;
     } catch (e) {
       logger.d({
@@ -145,6 +157,19 @@ class AssessmentDetailedReportMapper {
       return [];
     }
   }
+
+  static String getCode(ObservationCode code) {
+    switch (code) {
+      case ObservationCode.LOGMAR_DISTANT:
+        return "Distance";
+      case ObservationCode.LOGMAR_NEAR:
+        return "Near";
+      default:
+        return "";
+    }
+  }
+
+
 
   static String getBodySiteText(BodySite bodySite) {
     switch (bodySite) {

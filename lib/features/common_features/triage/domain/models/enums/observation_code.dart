@@ -1,3 +1,4 @@
 enum ObservationCode{
-  Eye, Sight, Testing
+  Eye, Sight, Testing, LOGMAR_NEAR,
+LOGMAR_DISTANT,
 }

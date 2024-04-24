@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart'
     hide Performer;
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
@@ -302,9 +303,12 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     double rightEyeScore = _calculateScore(rightEyeSight);
     double bothEyeScore = _calculateScore(bothEyeSight);
 
-    globalVisualAcuityProvider.setDistanceLeftEyeValue(leftEyeSight.toStringAsFixed(3));
-    globalVisualAcuityProvider.setDistanceRightEyeValue(rightEyeSight.toStringAsFixed(3));
-    globalVisualAcuityProvider.setDistanceBothEyeValue(bothEyeSight.toStringAsFixed(3));
+    globalVisualAcuityProvider
+        .setDistanceLeftEyeValue(leftEyeSight.toStringAsFixed(3));
+    globalVisualAcuityProvider
+        .setDistanceRightEyeValue(rightEyeSight.toStringAsFixed(3));
+    globalVisualAcuityProvider
+        .setDistanceBothEyeValue(bothEyeSight.toStringAsFixed(3));
 
     int? rightEyeIndentifier;
     int? leftEyeIndentifier;
@@ -314,15 +318,22 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     final assessment = response.fold((l) {
       throw ServerFailure(errorMessage: "Failed to get assessment");
     }, (r) => r);
-    if (assessment.observations?.bodySite == BodySite.BOTH_EYES) {
-      bothEyeIndentifier = assessment.observations?.id;
-    }
+
+    // if (assessment.observations?.bodySite == BodySite.BOTH_EYES) {
+    //   bothEyeIndentifier = assessment.observations?.id;
+    // }
+
     assessment.observations?.observationDefinition?.forEach((element) {
-      if (element.bodySite == BodySite.LEFT_EYE) {
-        leftEyeIndentifier = element.id;
-      }
-      if (element.bodySite == BodySite.RIGHT_EYE) {
-        rightEyeIndentifier = element.id;
+      if (element.code == ObservationCode.LOGMAR_DISTANT) {
+        if (element.bodySite == BodySite.LEFT_EYE) {
+          leftEyeIndentifier = element.id;
+        }
+        if (element.bodySite == BodySite.RIGHT_EYE) {
+          rightEyeIndentifier = element.id;
+        }
+        if (element.bodySite == BodySite.BOTH_EYES) {
+          bothEyeIndentifier = element.id;
+        }
       }
     });
 

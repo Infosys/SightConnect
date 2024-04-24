@@ -237,6 +237,8 @@ const _$ObservationCodeEnumMap = {
   ObservationCode.Eye: 'Eye',
   ObservationCode.Sight: 'Sight',
   ObservationCode.Testing: 'Testing',
+  ObservationCode.LOGMAR_NEAR: 'LOGMAR_NEAR',
+  ObservationCode.LOGMAR_DISTANT: 'LOGMAR_DISTANT',
 };
 
 const _$ObservationMethodEnumMap = {

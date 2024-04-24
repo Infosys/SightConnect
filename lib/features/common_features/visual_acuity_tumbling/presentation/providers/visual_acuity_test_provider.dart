@@ -22,6 +22,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../triage/domain/models/enums/observation_code.dart';
 import '../../../triage/domain/models/enums/performer_role.dart';
 import '../../domain/models/enums/tumbling_enums.dart';
 import '../../domain/models/tumbling_models.dart';
@@ -306,15 +307,18 @@ class VisualAcuityTestProvider with ChangeNotifier {
     final assessment = response.fold((l) {
       throw ServerFailure(errorMessage: "Failed to get assessment");
     }, (r) => r);
-    if (assessment.observations?.bodySite == BodySite.BOTH_EYES) {
-      bothEyeIndentifier = assessment.observations?.id;
-    }
+
     assessment.observations?.observationDefinition?.forEach((element) {
-      if (element.bodySite == BodySite.LEFT_EYE) {
-        leftEyeIndentifier = element.id;
-      }
-      if (element.bodySite == BodySite.RIGHT_EYE) {
-        rightEyeIndentifier = element.id;
+      if (element.code == ObservationCode.LOGMAR_NEAR) {
+        if (element.bodySite == BodySite.LEFT_EYE) {
+          leftEyeIndentifier = element.id;
+        }
+        if (element.bodySite == BodySite.RIGHT_EYE) {
+          rightEyeIndentifier = element.id;
+        }
+        if (element.bodySite == BodySite.BOTH_EYES) {
+          bothEyeIndentifier = element.id;
+        }
       }
     });
 

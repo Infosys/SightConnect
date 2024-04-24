@@ -1,0 +1,208 @@
+{
+      "triage model to be saved in remote source": {
+        "id": null,
+        "patientId": 1301,
+        "encounterId": null,
+        "serviceType": "OPTOMETRY",
+        "tenantCode": 1901,
+        "organizationCode": 1901,
+        "performer": [
+          {
+            "id": null,
+            "role": "PATIENT",
+            "identifier": 1301
+          }
+        ],
+        "assessmentCode": 1351,
+        "assessmentVersion": "1.0",
+        "issued": "2024-04-24T06:16:53.866001Z",
+        "userStartDate": "2024-04-24T06:16:53.865961Z",
+        "source": "PATIENT_APP",
+        "sourceVersion": "1.0.0+1001",
+        "incompleteSection": [],
+        "cummulativeScore": 5,
+        "score": [
+          {
+            "QUESTIONNAIRE": 1.0
+          },
+          {
+            "OBSERVATION": 3.0
+          },
+          {
+            "IMAGE": 1.0
+          }
+        ],
+        "imagingSelection": [
+          {
+            "id": null,
+            "identifier": 1501,
+            "endpoint": "/services/filems/api/file/download",
+            "baseUrl": "https://healthconnect.infosysapps.com",
+            "score": 0.0,
+            "fileId": "1713939413598-2d99137f-ae13-4863-b8aa-8c8d06391b2d"
+          },
+          {
+            "id": null,
+            "identifier": 1502,
+            "endpoint": "/services/filems/api/file/download",
+            "baseUrl": "https://healthconnect.infosysapps.com",
+            "score": 0.0,
+            "fileId": "1713939403621-071c0478-e71a-46fb-b1a6-786e70a6d02a"
+          }
+        ],
+        "observations": [
+          {
+            "id": null,
+            "identifier": 1751,
+            "value": "0.602",
+            "score": 3.0
+          },
+          {
+            "id": null,
+            "identifier": 1752,
+            "value": "0.699",
+            "score": 3.0
+          },
+          {
+            "id": null,
+            "identifier": 1753,
+            "value": "0.495",
+            "score": 0.0
+          },
+          {
+            "id": null,
+            "identifier": 1754,
+            "value": "0.301",
+            "score": 0.0
+          },
+          {
+            "id": null,
+            "identifier": 1755,
+            "value": "0.398",
+            "score": 0.0
+          },
+          {
+            "id": null,
+            "identifier": 1756,
+            "value": "0.000",
+            "score": 0.0
+          }
+        ],
+        "questionResponse": [
+          {
+            "id": null,
+            "linkId": 1052,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1103,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1053,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1106,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1054,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1107,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1055,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1109,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1056,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1111,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1057,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1113,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1058,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1115,
+                "score": 0.0
+              }
+            ]
+          },
+          {
+            "id": null,
+            "linkId": 1059,
+            "score": 0.0,
+            "answers": [
+              {
+                "value": "No",
+                "id": null,
+                "answerCode": 1117,
+                "score": 0.0
+              }
+            ]
+          }
+        ],
+        "subject": null,
+        "observationSeverity": null,
+        "questionResponseSeverity": null,
+        "mediaSeverity": null,
+        "cumulativeSeverity": null,
+        "diagnosticReportDescription": null,
+        "questionResultDescription": null,
+        "observationResultDescription": null,
+        "mediaResultDescription": null,
+        "encounter": null
+      }
+    }
