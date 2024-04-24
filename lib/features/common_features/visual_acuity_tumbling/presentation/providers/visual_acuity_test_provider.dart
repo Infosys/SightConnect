@@ -360,6 +360,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
       await triageLocalSourceProvider.saveTriageVisualAcuityLocally(
         triageVisualAcuity: res,
       );
+      reset();
     } catch (e) {
       logger.e("$e");
       throw ServerFailure(
@@ -410,9 +411,11 @@ class VisualAcuityTestProvider with ChangeNotifier {
             reportModel.observations ?? [], visionAcuityTumblingResponse),
       );
 
+reset();
       return triageRepositoryProvider.updateTriageResponse(
         triageResponse: triage,
       );
+      
     } catch (e) {
       rethrow;
     }

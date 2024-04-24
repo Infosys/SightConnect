@@ -26,6 +26,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
 import '../../domain/usecases/get_distance_visual_acuity_response_locally_usecase.dart';
 
@@ -373,6 +374,7 @@ class TriageReset extends ChangeNotifier {
     logger.d("TriageReset called");
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
+    ref.invalidate(distanceTumblingTestProvider);
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
     notifyListeners();

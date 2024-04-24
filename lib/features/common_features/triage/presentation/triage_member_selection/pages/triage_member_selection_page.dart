@@ -1,11 +1,14 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
+import '../../providers/triage_provider.dart';
 import '../providers/triage_member_provider.dart';
 import '../widget/change_member_tiles.dart';
 
@@ -46,6 +49,9 @@ class TriageMemberSelectionPage extends StatelessWidget {
                         onPressed: model.testPatientId == null
                             ? null
                             : () {
+                                ref.read(resetProvider).reset();
+                            
+                                
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => const TriagePage(),

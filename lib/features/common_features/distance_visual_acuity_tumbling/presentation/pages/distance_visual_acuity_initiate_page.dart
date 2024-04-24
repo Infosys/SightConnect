@@ -27,7 +27,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
-    ref.read(distanceTumblingTestProvider).reset();
+   
     return PopScope(
       canPop: false,
       onPopInvoked: (value) async {

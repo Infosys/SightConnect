@@ -125,7 +125,7 @@ class _TopReadingCardViewState extends ConsumerState<DistanceTopReadingCard> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: (distance != null &&
-                                            (distance >= 35 && distance <= 45))
+                                            (distance >= 195 && distance <= 205))
                                         ? AppColor.green
                                         : AppColor.red,
                                   ),

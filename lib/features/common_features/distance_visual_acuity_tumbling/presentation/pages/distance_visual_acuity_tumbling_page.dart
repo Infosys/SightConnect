@@ -5,12 +5,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'distance_visual_acuity_instructional_video_page.dart';
 
-class DistanceVisualAcuityTumblingPage extends ConsumerWidget {
+class DistanceVisualAcuityTumblingPage extends StatelessWidget {
   const DistanceVisualAcuityTumblingPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(globalVisualAcuityProvider).setShortDistanceTest(false);
+  Widget build(BuildContext context) {
     return const DistanceVisualAcuityInstructionalVideoPage();
   }
 }

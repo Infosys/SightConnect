@@ -40,7 +40,6 @@ var distanceTumblingTestProvider = ChangeNotifierProvider(
   (ref) => DistanceVisualAcuityTestProvider(
     ref.watch(distancetumblingLocalSource),
     ref.read(triageLocalSourceProvider),
-    ref.watch(globalVisualAcuityProvider),
     ref.watch(triageRepositoryProvider),
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
@@ -50,14 +49,13 @@ var distanceTumblingTestProvider = ChangeNotifierProvider(
 class DistanceVisualAcuityTestProvider with ChangeNotifier {
   final DistanceTumblingLocalSource _dataSource;
   TriageLocalSource triageLocalSourceProvider;
-  GlobalVisualAcuityProvider globalVisualAcuityProvider;
+
   TriageRepository triageRepositoryProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
   DistanceVisualAcuityTestProvider(
       this._dataSource,
       this.triageLocalSourceProvider,
-      this.globalVisualAcuityProvider,
       this.triageRepositoryProvider,
       this._triageReportRepository,
       this._triageUrgencyRepository) {
@@ -303,12 +301,12 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     double rightEyeScore = _calculateScore(rightEyeSight);
     double bothEyeScore = _calculateScore(bothEyeSight);
 
-    globalVisualAcuityProvider
-        .setDistanceLeftEyeValue(leftEyeSight.toStringAsFixed(3));
-    globalVisualAcuityProvider
-        .setDistanceRightEyeValue(rightEyeSight.toStringAsFixed(3));
-    globalVisualAcuityProvider
-        .setDistanceBothEyeValue(bothEyeSight.toStringAsFixed(3));
+    // globalVisualAcuityProvider
+    //     .setDistanceLeftEyeValue(leftEyeSight.toStringAsFixed(3));
+    // globalVisualAcuityProvider
+    //     .setDistanceRightEyeValue(rightEyeSight.toStringAsFixed(3));
+    // globalVisualAcuityProvider
+    //     .setDistanceBothEyeValue(bothEyeSight.toStringAsFixed(3));
 
     int? rightEyeIndentifier;
     int? leftEyeIndentifier;
@@ -375,6 +373,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
       await triageLocalSourceProvider.saveTriageDistanceVisualAcuityLocally(
         triageVisualAcuity: res,
       );
+      reset();
     } catch (e) {
       logger.e("$e");
       throw ServerFailure(
@@ -424,7 +423,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
         observations: _getObservationsToBeUpdated(
             reportModel.observations ?? [], visionAcuityTumblingResponse),
       );
-
+      reset();
       return triageRepositoryProvider.updateTriageResponse(
         triageResponse: triage,
       );

@@ -205,26 +205,29 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                               distancevisualAcuityTumblingTestDialogProvider
                                   .notifier);
                           final stepper = ref.read(triageStepperProvider);
-                          ref
-                              .read(globalVisualAcuityProvider)
-                              .setShortDistanceTest(true);
+
                           return TextButton(
                             onPressed: () async {
                               var navigator = Navigator.of(context);
                               try {
                                 isLoading.value = true;
                                 isAcuityDialog.state = true;
-                                stepper.goToNextStep();
-
+                                
+                                ref
+                                    .read(globalVisualAcuityProvider)
+                                    .setShortDistanceTest(true);
                                 if (global.isTriageMode()) {
                                   logger.d("Triage Mode");
+                                  stepper.goToNextStep();
                                   await _saveTriageMode(ref, navigator);
+                                  
                                 } else if (global.isStandaloneMode()) {
                                   logger.d("Standalone Mode");
                                   _saveStandAloneMode(navigator);
                                 } else {
                                   logger.d("Update Mode");
                                   await _saveUpdateMode(ref, navigator);
+                                   ref.invalidate(distanceTumblingTestProvider);
                                 }
                                 isLoading.value = false;
                               } catch (e) {
@@ -290,8 +293,5 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       ..pop()
       ..pop();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.invalidate(distanceTumblingTestProvider);
-    });
   }
 }

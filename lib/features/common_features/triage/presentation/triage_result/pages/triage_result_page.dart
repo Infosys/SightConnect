@@ -107,12 +107,6 @@ class TriageResultPage extends ConsumerWidget {
                 ResultImageCard(
                   reportId: triageResult.id,
                 ),
-                const SizedBox(height: AppSize.km * 2),
-                Text("Distance Left Eye Value is : ${observationData.distanceLeftEyeValue}"),
-                const SizedBox(height: AppSize.km * 2),
-                Text("Distance Right Eye Value is : ${observationData.distanceRightEyeValue}"),
-                const SizedBox(height: AppSize.km * 2),
-                Text("Distance Both Eye Value is : ${observationData.distanceBothEyeValue}"),
                 const SizedBox(height: AppSize.kl * 3),
               ],
             ),

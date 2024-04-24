@@ -211,20 +211,23 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                               try {
                                 isLoading.value = true;
                                 isAcuityDialog.state = true;
-                                stepper.goToNextStep();
+                                
                                 ref
                                     .read(globalVisualAcuityProvider)
                                     .setShortDistanceTest(false);
 
                                 if (global.isTriageMode()) {
+                                  stepper.goToNextStep();
                                   logger.d("Triage Mode");
                                   await _saveTriageMode(ref, navigator);
+                                   
                                 } else if (global.isStandaloneMode()) {
                                   logger.d("Standalone Mode");
                                   _saveStandAloneMode(navigator);
                                 } else {
                                   logger.d("Update Mode");
                                   await _saveUpdateMode(ref, navigator);
+                                  
                                 }
                                 isLoading.value = false;
                               } catch (e) {
@@ -290,9 +293,5 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       ..pop()
       ..pop()
       ..pop();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.invalidate(tumblingTestProvider);
-    });
   }
 }
