@@ -69,8 +69,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> _profileVerification(Role role) async {
     final navigator = Navigator.of(context);
     try {
-      final userExist = 
-      await ref.read(initializationProvider).checkUserAlreadyExist(role);
+      final userExist =
+          await ref.read(initializationProvider).checkUserAlreadyExist(role);
       logger.d("User Exist: $userExist");
       if (userExist) {
         _handleExistingUser(navigator, role);
@@ -183,32 +183,31 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
-    // String pincode = await GeocodingService.getPincodeFromLocation(context);
-    // logger.f("pincode is  $pincode");
-    bool hasPermission = await LocationService.checkLocationPermission(context);
-    if (hasPermission && context.mounted) {
+    String? pincode;
+    bool hasPermission = await LocationService.checkLocationPermission();
+    if (hasPermission && mounted) {
       bool isLocationEnabled = await LocationService.enableLocation(context);
       if (isLocationEnabled) {
         String pincode = await GeocodingService.getPincodeFromLocation();
         logger.f("pincode is  $pincode");
       }
-    } else if (!hasPermission && context.mounted) {
+    } else if (!hasPermission && mounted) {
       hasPermission = await LocationService.requestLocationPermission(context);
 
-      if (hasPermission && context.mounted) {
+      if (hasPermission && mounted) {
         bool isLocationEnabled = await LocationService.enableLocation(context);
         if (isLocationEnabled) {
-          String pincode = await GeocodingService.getPincodeFromLocation();
+           pincode = await GeocodingService.getPincodeFromLocation();
           logger.f("pincode is  $pincode");
         }
       }
     }
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
-        builder: (context) => const PatientRegistrationMiniappPage(
+        builder: (context) => PatientRegistrationMiniappPage(
           actionType: MiniAppActionType.REGISTER,
           displayName: "Register Patient",
-          // pincode: pincode,
+          pincode: pincode,
         ),
       ),
     );

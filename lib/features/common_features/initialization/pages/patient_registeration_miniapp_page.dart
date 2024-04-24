@@ -14,6 +14,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   final String displayName;
   final String? mobileNumber;
   final String? parentPatientId;
+  final String? pincode;
 
   const PatientRegistrationMiniappPage({
     super.key,
@@ -21,6 +22,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.displayName,
     this.mobileNumber,
     this.parentPatientId,
+    this.pincode,
   });
 
   // String pincode = "";
@@ -43,7 +45,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
           miniAppEnv: getMiniAppEnv(ApiConstant.appEnvironment),
-          // pincode: pincode??""
+          pincode: pincode,
         ),
         miniapp: MiniApp(
           id: "1",

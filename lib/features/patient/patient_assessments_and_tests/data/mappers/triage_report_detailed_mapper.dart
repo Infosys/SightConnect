@@ -66,9 +66,9 @@ class AssessmentDetailedReportMapper {
       }
       for (Media imagingStudyModel in triageDetailedReport.media!) {
         if (imageMap.containsKey(imagingStudyModel.identifier)) {
-          imageBriefEntity.add(
-         imagingStudyModel.endpoint!=null && imagingStudyModel.endpoint!
-                  .contains(imagingStudyModel.fileId ?? "")
+          imageBriefEntity.add(imagingStudyModel.endpoint != null &&
+                  imagingStudyModel.endpoint!
+                      .contains(imagingStudyModel.fileId ?? "")
               ? ImageBriefEntity(
                   imageId: imagingStudyModel.id,
                   imageIdentifier: imagingStudyModel.identifier ?? 0,
@@ -108,7 +108,7 @@ class AssessmentDetailedReportMapper {
     }
   }
 
-   static List<ObservationBriefEntity> _getObservationBriefEntity(
+  static List<ObservationBriefEntity> _getObservationBriefEntity(
     DiagnosticReportTemplateFHIRModel triageAssessment,
     TriageDetailedReportModel triageDetailedReport,
   ) {
@@ -124,7 +124,7 @@ class AssessmentDetailedReportMapper {
       //     "code": getCode(triageAssessment.observations!.code!),
       //   };
       // }
-      
+
       for (ObservationDefinitionModel observation
           in triageAssessment.observations!.observationDefinition!) {
         int id = observation.id ?? 0;
@@ -134,6 +134,7 @@ class AssessmentDetailedReportMapper {
           "code": getCode(observation.code!),
         };
       }
+      logger.f("this is observation Map: $observationMap");
       for (Observation observation in triageDetailedReport.observations!) {
         if (observationMap.containsKey(observation.identifier)) {
           observationBriefEntity.add(
@@ -141,14 +142,16 @@ class AssessmentDetailedReportMapper {
               observationValue: double.parse(observation.value!),
               observationId: observation.id,
               observationValueIdentifier: observation.identifier ?? 0,
-              bodySite: observationMap[observation.identifier]?["bodySite"].toString()??"",
-              code: observationMap[observation.identifier]?["code"]??"",
+              bodySite: observationMap[observation.identifier]?["bodySite"]
+                      .toString() ??
+                  "",
+              code: observationMap[observation.identifier]?["code"] ?? "",
             ),
           );
         }
       }
 
-        log( "Observation Brief Entity: ${observationBriefEntity.toString()}");
+      log("Observation Brief Entity: ${observationBriefEntity.toString()}");
       return observationBriefEntity;
     } catch (e) {
       logger.d({
@@ -168,8 +171,6 @@ class AssessmentDetailedReportMapper {
         return "";
     }
   }
-
-
 
   static String getBodySiteText(BodySite bodySite) {
     switch (bodySite) {
