@@ -25,7 +25,7 @@ mixin _$MiniAppInjectionModel {
   String? get parentPatientId => throw _privateConstructorUsedError;
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
-  String? get pincode => throw _privateConstructorUsedError;
+  String? get pinCode => throw _privateConstructorUsedError;
   MiniAppInjectionModelRole? get role => throw _privateConstructorUsedError;
   MiniAppEnv get miniAppEnv => throw _privateConstructorUsedError;
 
@@ -46,7 +46,7 @@ abstract class $MiniAppInjectionModelCopyWith<$Res> {
       String? parentPatientId,
       String? mobileNumber,
       String? token,
-      String? pincode,
+      String? pinCode,
       MiniAppInjectionModelRole? role,
       MiniAppEnv miniAppEnv});
 }
@@ -69,7 +69,7 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
     Object? parentPatientId = freezed,
     Object? mobileNumber = freezed,
     Object? token = freezed,
-    Object? pincode = freezed,
+    Object? pinCode = freezed,
     Object? role = freezed,
     Object? miniAppEnv = null,
   }) {
@@ -90,9 +90,9 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      pincode: freezed == pincode
-          ? _value.pincode
-          : pincode // ignore: cast_nullable_to_non_nullable
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -120,7 +120,7 @@ abstract class _$$MiniAppInjectionModelImplCopyWith<$Res>
       String? parentPatientId,
       String? mobileNumber,
       String? token,
-      String? pincode,
+      String? pinCode,
       MiniAppInjectionModelRole? role,
       MiniAppEnv miniAppEnv});
 }
@@ -141,7 +141,7 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
     Object? parentPatientId = freezed,
     Object? mobileNumber = freezed,
     Object? token = freezed,
-    Object? pincode = freezed,
+    Object? pinCode = freezed,
     Object? role = freezed,
     Object? miniAppEnv = null,
   }) {
@@ -162,9 +162,9 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      pincode: freezed == pincode
-          ? _value.pincode
-          : pincode // ignore: cast_nullable_to_non_nullable
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -186,7 +186,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
       this.parentPatientId,
       this.mobileNumber,
       this.token,
-      this.pincode,
+      this.pinCode,
       this.role,
       required this.miniAppEnv});
 
@@ -202,7 +202,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
   @override
   final String? token;
   @override
-  final String? pincode;
+  final String? pinCode;
   @override
   final MiniAppInjectionModelRole? role;
   @override
@@ -210,7 +210,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
 
   @override
   String toString() {
-    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, pincode: $pincode, role: $role, miniAppEnv: $miniAppEnv)';
+    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, pinCode: $pinCode, role: $role, miniAppEnv: $miniAppEnv)';
   }
 
   @override
@@ -224,7 +224,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.pincode, pincode) || other.pincode == pincode) &&
+            (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.miniAppEnv, miniAppEnv) ||
                 other.miniAppEnv == miniAppEnv));
@@ -233,7 +233,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, action, parentPatientId,
-      mobileNumber, token, pincode, role, miniAppEnv);
+      mobileNumber, token, pinCode, role, miniAppEnv);
 
   @JsonKey(ignore: true)
   @override
@@ -256,7 +256,7 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
       final String? parentPatientId,
       final String? mobileNumber,
       final String? token,
-      final String? pincode,
+      final String? pinCode,
       final MiniAppInjectionModelRole? role,
       required final MiniAppEnv miniAppEnv}) = _$MiniAppInjectionModelImpl;
 
@@ -272,7 +272,7 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
   @override
   String? get token;
   @override
-  String? get pincode;
+  String? get pinCode;
   @override
   MiniAppInjectionModelRole? get role;
   @override

@@ -47,10 +47,11 @@ class _TopReadingCardViewState extends ConsumerState<DistanceTopReadingCard> {
             color: AppColor.white,
           ),
           child: Container(
-            height: 200,
+            // height: AppSize.height(context) * 0.4, //height for 2m distance
+            height: AppSize.height(context) * 0.46,
             padding: const EdgeInsets.symmetric(
               horizontal: AppSize.km - 3,
-              vertical: AppSize.km,
+              vertical: AppSize.ks,
             ),
             // add innershadow
             decoration: BoxDecoration(
@@ -125,7 +126,8 @@ class _TopReadingCardViewState extends ConsumerState<DistanceTopReadingCard> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: (distance != null &&
-                                            (distance >= 195 && distance <= 205))
+                                            (distance >= 195 &&
+                                                distance <= 205))
                                         ? AppColor.green
                                         : AppColor.red,
                                   ),
@@ -139,7 +141,6 @@ class _TopReadingCardViewState extends ConsumerState<DistanceTopReadingCard> {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSize.ks),
               ],
             ),
           ),

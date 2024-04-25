@@ -169,21 +169,23 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
     _totalWrongLevelResponse = _totalWrongLevelResponse! + 1;
 
-    if (_gameMode == GameMode.regular) {
-      if (_currentLevel! == 0) {
-        _endGame();
-      } else {
-        _transitionToIsFiveMode();
-      }
-    } else if (_gameMode == GameMode.isFive) {
-      if (_totalWrongLevelResponse == 3) {
-        _endGame();
-      } else if (_currentIndex! + 1 == _level!.totalQuestions) {
-        _moveToNextLevel();
-      } else {
-        _moveToNextQuestion();
-      }
-    }
+    _endGame();
+
+    // if (_gameMode == GameMode.regular) {
+    //   if (_currentLevel! == 0) {
+    //     _endGame();
+    //   } else {
+    //     _transitionToIsFiveMode();
+    //   }
+    // } else if (_gameMode == GameMode.isFive) {
+    //   if (_totalWrongLevelResponse == 3) {
+    //     _endGame();
+    //   } else if (_currentIndex! + 1 == _level!.totalQuestions) {
+    //     _moveToNextLevel();
+    //   } else {
+    //     _moveToNextQuestion();
+    //   }
+    // }
   }
 
   void _moveToNextQuestion() {

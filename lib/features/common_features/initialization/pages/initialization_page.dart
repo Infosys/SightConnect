@@ -134,7 +134,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         bool is18PlusDeclarationAccepted =
             await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
-
         if (is18PlusDeclarationAccepted && isConsentAccepted) {
           return true;
         } else {
@@ -183,13 +182,13 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
-    String? pincode;
+    String? pinCode;
     bool hasPermission = await LocationService.checkLocationPermission();
     if (hasPermission && mounted) {
       bool isLocationEnabled = await LocationService.enableLocation(context);
       if (isLocationEnabled) {
-        String pincode = await GeocodingService.getPincodeFromLocation();
-        logger.f("pincode is  $pincode");
+         pinCode = await GeocodingService.getPincodeFromLocation();
+        logger.f("pinCode is  $pinCode");
       }
     } else if (!hasPermission && mounted) {
       hasPermission = await LocationService.requestLocationPermission(context);
@@ -197,8 +196,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       if (hasPermission && mounted) {
         bool isLocationEnabled = await LocationService.enableLocation(context);
         if (isLocationEnabled) {
-           pincode = await GeocodingService.getPincodeFromLocation();
-          logger.f("pincode is  $pincode");
+           pinCode = await GeocodingService.getPincodeFromLocation();
+          logger.f("pinCode is  $pinCode");
         }
       }
     }
@@ -207,7 +206,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         builder: (context) => PatientRegistrationMiniappPage(
           actionType: MiniAppActionType.REGISTER,
           displayName: "Register Patient",
-          pincode: pincode,
+          pinCode: pinCode,
         ),
       ),
     );

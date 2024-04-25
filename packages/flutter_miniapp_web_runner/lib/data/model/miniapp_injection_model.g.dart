@@ -13,7 +13,7 @@ _$MiniAppInjectionModelImpl _$$MiniAppInjectionModelImplFromJson(
       parentPatientId: json['parentPatientId'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
       token: json['token'] as String?,
-      pincode: json['pincode'] as String?,
+      pinCode: json['pinCode'] as String?,
       role:
           $enumDecodeNullable(_$MiniAppInjectionModelRoleEnumMap, json['role']),
       miniAppEnv: $enumDecode(_$MiniAppEnvEnumMap, json['miniAppEnv']),
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$MiniAppInjectionModelImplToJson(
       'parentPatientId': instance.parentPatientId,
       'mobileNumber': instance.mobileNumber,
       'token': instance.token,
-      'pincode': instance.pincode,
+      'pinCode': instance.pinCode,
       'role': _$MiniAppInjectionModelRoleEnumMap[instance.role],
       'miniAppEnv': _$MiniAppEnvEnumMap[instance.miniAppEnv]!,
     };

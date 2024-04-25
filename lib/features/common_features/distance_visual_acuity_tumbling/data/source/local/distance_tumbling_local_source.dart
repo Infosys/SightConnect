@@ -22,7 +22,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
   final List<Level> _levels = [
     Level(
       levelNumber: 0,
-      size: 2.908766667,
+      size: 4.3633,
       logMar: 0.1,
       snellerFraction: "20/200",
       mode: GameMode.regular,
@@ -37,7 +37,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 1,
-      size: 1.46,
+      size: 2.18,
       logMar: 0.2,
       snellerFraction: "20/100",
       mode: GameMode.regular,
@@ -52,7 +52,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 2,
-      size: 1.163766667,
+      size: 1.7453,
       logMar: 0.25,
       snellerFraction: "20/80",
       mode: GameMode.regular,
@@ -67,7 +67,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 3,
-      size: 0.9168,
+      size: 1.3744,
       logMar: 0.32,
       snellerFraction: "20/62.5",
       mode: GameMode.regular,
@@ -82,7 +82,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 4,
-      size: 0.727266667,
+      size: 1.0908,
       logMar: 0.4,
       snellerFraction: "20/50",
       mode: GameMode.regular,
@@ -97,7 +97,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 5,
-      size: 0.5812,
+      size: 0.8726,
       logMar: 0.5,
       snellerFraction: "20/40",
       mode: GameMode.regular,
@@ -112,7 +112,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 6,
-      size: 0.4647,
+      size: 0.6981,
       logMar: 0.63,
       snellerFraction: "20/31.77",
       mode: GameMode.regular,
@@ -127,7 +127,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 7,
-      size: 0.3636,
+      size: 0.5454,
       logMar: 0.8,
       snellerFraction: "20/25",
       mode: GameMode.regular,
@@ -142,7 +142,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 8,
-      size: 0.291066667,
+      size: 0.4363,
       logMar: 1.0,
       snellerFraction: "20/20",
       mode: GameMode.regular,
@@ -159,7 +159,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
 
     Level(
       levelNumber: 0,
-      size: 2.908766667,
+      size: 4.3633,
       logMar: 0.1,
       snellerFraction: "20/200",
       mode: GameMode.isFive,
@@ -190,7 +190,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 1,
-      size: 1.46,
+      size: 2.18,
       logMar: 0.2,
       snellerFraction: "20/100",
       mode: GameMode.isFive,
@@ -221,7 +221,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 2,
-      size: 1.163766667,
+      size: 1.7453,
       logMar: 0.25,
       snellerFraction: "20/80",
       mode: GameMode.isFive,
@@ -252,7 +252,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 3,
-      size: 0.9168,
+      size: 1.3744,
       logMar: 0.32,
       snellerFraction: "20/62.5",
       mode: GameMode.isFive,
@@ -283,7 +283,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 4,
-      size: 0.727266667,
+      size: 1.0908,
       logMar: 0.4,
       snellerFraction: "20/50",
       mode: GameMode.isFive,
@@ -315,7 +315,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
 
     Level(
       levelNumber: 5,
-      size: 0.5812,
+      size: 0.8726,
       logMar: 0.5,
       snellerFraction: "20/40",
       mode: GameMode.isFive,
@@ -346,7 +346,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 6,
-      size: 0.4647,
+      size: 0.6981,
       logMar: 0.63,
       snellerFraction: "20/31.77",
       mode: GameMode.isFive,
@@ -377,7 +377,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 7,
-      size: 0.3636,
+      size: 0.5454,
       logMar: 0.8,
       snellerFraction: "20/25",
       mode: GameMode.isFive,
@@ -408,7 +408,7 @@ class DistanceTumblingLocalSourceImpl implements DistanceTumblingLocalSource {
     ),
     Level(
       levelNumber: 8,
-      size: 0.291066667,
+      size: 0.4363,
       logMar: 1.0,
       snellerFraction: "20/20",
       mode: GameMode.isFive,

@@ -10,7 +10,7 @@ class MiniAppInjectionModel with _$MiniAppInjectionModel {
     String? parentPatientId,
     String? mobileNumber,
     String? token,
-    String? pincode,
+    String? pinCode,
     MiniAppInjectionModelRole? role,
     required MiniAppEnv  miniAppEnv,
   }) = _MiniAppInjectionModel;
