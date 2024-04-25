@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +27,11 @@ class AnalyticsCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.km),
       ),
-      child: SizedBox(
-        width: width,
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth:
+              Responsive.isMobile(context) ? AppSize.width(context) : width,
+        ),
         height: height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

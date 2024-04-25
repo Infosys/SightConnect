@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -17,8 +18,9 @@ class StatisticsTopCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          AutoSizeText(
             'Cases Attended',
             style: applyFiraSansFont(
               fontSize: 16,
@@ -42,33 +44,39 @@ class StatisticsTopCard extends StatelessWidget {
 
   Widget _buildColumn(String number, String? text, BuildContext context,
       {bool isSelected = false}) {
-    return Container(
-      width: AppSize.width(context) / 4.5,
-      padding: const EdgeInsets.all(AppSize.km),
-      decoration: BoxDecoration(
-          color: isSelected ? AppColor.primary : AppColor.pureBlue,
-          borderRadius: BorderRadius.circular(AppSize.ks)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (text != null)
-            Text(
-              text,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: isSelected ? AppColor.white : AppColor.grey,
+    return Flexible(
+      child: Container(
+        padding: const EdgeInsets.all(AppSize.km),
+        decoration: BoxDecoration(
+            color: isSelected ? AppColor.primary : AppColor.pureBlue,
+            borderRadius: BorderRadius.circular(AppSize.ks)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (text != null)
+              AutoSizeText(
+                text,
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: isSelected ? AppColor.white : AppColor.grey,
+                  fontWeight: FontWeight.w500,
+                ),
+                minFontSize: 10,
+                maxFontSize: 14,
+              ),
+            AutoSizeText(
+              number,
+              style: applyFiraSansFont(
+                fontSize: 28,
+                color: isSelected ? AppColor.white : AppColor.primary,
                 fontWeight: FontWeight.w500,
               ),
+              minFontSize: 20,
+              maxFontSize: 28,
+              maxLines: 1,
             ),
-          Text(
-            number,
-            style: applyFiraSansFont(
-              fontSize: 28,
-              color: isSelected ? AppColor.white : AppColor.primary,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
