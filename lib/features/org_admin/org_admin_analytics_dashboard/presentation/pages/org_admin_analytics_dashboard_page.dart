@@ -1,11 +1,52 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/analytics_card.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/appointments_analytics.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/cases_closed_analytics.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/gender_analytics.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/ivr_calls_analytics.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/statidtics_top_card.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/top_suggestions_prescriptions_analytics.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/triage_cases_analytics.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class OrgAdminAnalyticsDashBoardPage extends StatelessWidget {
+import '../widgets/consultation_type_analytics.dart';
+
+class OrgAdminAnalyticsDashBoardPage extends StatefulWidget {
   const OrgAdminAnalyticsDashBoardPage({super.key});
+
+  @override
+  State<OrgAdminAnalyticsDashBoardPage> createState() =>
+      _OrgAdminAnalyticsDashBoardPageState();
+}
+
+class _OrgAdminAnalyticsDashBoardPageState
+    extends State<OrgAdminAnalyticsDashBoardPage> {
+  late int showingTooltip;
+
+  @override
+  void initState() {
+    showingTooltip = -1;
+    super.initState();
+  }
+
+  BarChartGroupData generateGroupData(int x, int y, Color color) {
+    return BarChartGroupData(
+      x: x,
+      showingTooltipIndicators: showingTooltip == x ? [0] : [],
+      barRods: [
+        BarChartRodData(
+          toY: y.toDouble(),
+          color: color,
+          width: 20,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(0),
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,32 +54,33 @@ class OrgAdminAnalyticsDashBoardPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Vision Centre Analytics'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSize.ks),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                DropdownMenu<String>(
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context)
-                        : AppSize.width(context) / 2.8,
-                    leadingIcon: const Icon(
-                      Icons.calendar_today,
-                    ),
-                    label: const Text('19 Jan 23 - 23 Jan 23'),
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(
-                        value: '19 Jan 23 - 23 Jan 23',
-                        label: '19 Jan 23 - 23 Jan 23',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.ks),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  DropdownMenu<String>(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) / 2.8,
+                      leadingIcon: const Icon(
+                        Icons.calendar_today,
                       ),
-                      DropdownMenuEntry(
-                        value: '19 Jan 23 - 23 Jan 23',
-                        label: '19 Jan 23 - 23 Jan 23',
-                      ),
-                    ]),
-                const SizedBox(width: AppSize.ks),
-                DropdownMenu<String>(
+                      label: const Text('19 Jan 23 - 23 Jan 23'),
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry(
+                          value: '19 Jan 23 - 23 Jan 23',
+                          label: '19 Jan 23 - 23 Jan 23',
+                        ),
+                        DropdownMenuEntry(
+                          value: '19 Jan 23 - 23 Jan 23',
+                          label: '19 Jan 23 - 23 Jan 23',
+                        ),
+                      ]),
+                  const SizedBox(width: AppSize.ks),
+                  DropdownMenu<String>(
                     width: Responsive.isMobile(context)
                         ? AppSize.width(context)
                         : AppSize.width(context) / 2.7,
@@ -55,88 +97,83 @@ class OrgAdminAnalyticsDashBoardPage extends StatelessWidget {
                         value: 'Gachibowli, Hyderabad',
                         label: 'Gachibowli, Hyderabad',
                       ),
-                    ]),
-              ],
-            ),
-            const SizedBox(height: AppSize.km),
-            const Row(
-              children: [
-                StatisticsCard(),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class StatisticsCard extends StatelessWidget {
-  const StatisticsCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSize.kl),
-      width: AppSize.width(context) - AppSize.ks * 2,
-      decoration: BoxDecoration(
-        color: AppColor.pureBlue,
-        borderRadius: BorderRadius.circular(AppSize.ks),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Cases Attended',
-            style: applyFiraSansFont(
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: AppSize.km),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildColumn('1,58,790', 'OverAll', context, isSelected: true),
-              _buildColumn('80/200', 'Today', context),
-              _buildColumn('1400', 'Today', context),
-              _buildColumn('6200', 'Today', context),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSize.km),
+              const StatisticsTopCard(),
+              const SizedBox(height: AppSize.km),
+              Row(
+                children: [
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Triage Cases',
+                    body: const TriageCasesAnalytics(),
+                  ),
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Cases Closed',
+                    body: const CasesClosedAnalytics(),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Consultation Type',
+                    body: const ConsultationTypeAnalytics(),
+                    height: 270,
+                  ),
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Appointments',
+                    body: const AppointmentsAnalytics(),
+                    titleTrailing: '13.4K',
+                    showDivider: true,
+                    height: 270,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'IVR Calls',
+                    body: const IVRCallsAnalytics(),
+                    titleTrailing: "12.67K ",
+                    showDivider: true,
+                  ),
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Top Suggestions & Prescriptions',
+                    body: const TopSuggestionsPrescriptionsAnalytics(),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Gender',
+                    body: const GenderAnalytics(),
+                  ),
+                  AnalyticsCard(
+                    width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+                    title: 'Age Group',
+                    body: Container(),
+                  ),
+                ],
+              ),
+              AnalyticsCard(
+                width: AppSize.width(context) - 2 * AppSize.ks,
+                title: 'Language',
+                body: Container(),
+              ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildColumn(String number, String? text, BuildContext context,
-      {bool isSelected = false}) {
-    return Container(
-      width: AppSize.width(context) / 4.5,
-      padding: const EdgeInsets.all(AppSize.km),
-      decoration: BoxDecoration(
-          color: isSelected ? AppColor.primary : AppColor.pureBlue,
-          borderRadius: BorderRadius.circular(AppSize.ks)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (text != null)
-            Text(
-              text,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: isSelected ? AppColor.white : AppColor.grey,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          Text(
-            number,
-            style: applyFiraSansFont(
-              fontSize: 28,
-              color: isSelected ? AppColor.white : AppColor.primary,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

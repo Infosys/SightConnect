@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_home/presentation/pages/org_admin_home_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -74,9 +75,10 @@ class MyApp extends ConsumerWidget {
                 theme: ref.watch(themeProvider) == ThemeMode.light
                     ? AppTheme.getLightTheme(context)
                     : AppTheme.getDarkTheme(context),
-                routes: AppRouter.routes,
+                home: const OrgAdminHomePage(),
+                // routes: AppRouter.routes,
 
-                initialRoute: initialRoute,
+                // initialRoute: initialRoute,
                 navigatorKey: AppRouter.navigatorKey,
                 onUnknownRoute: AppRouter.onUnknownRoute,
                 // builder: (context, child) {

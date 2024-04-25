@@ -86,6 +86,7 @@ dependencies:
   stomp_dart_client: ^1.0.3
   in_app_update: ^4.2.2
   upgrader: ^9.0.0
+  fl_chart: ^0.67.0
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
