@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../data/source/vt_device_data_remote_source.dart';
 import '../providers/vision_technician_triage_provider.dart';
 import 'preliminary_assessment_equipment_selection.dart';
 
@@ -36,8 +37,29 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          // const SizedBox(height: AppSize.ks),
-          // const PreliminaryAssessmentEquipmentSelection(),
+          const SizedBox(height: AppSize.ks),
+          ref.watch(vtDeviceDataProvider).when(
+                data: (equipmentsData) {
+                  return PreliminaryAssessmentEquipmentSelection(
+                    equipmentsData: equipmentsData,
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stackTrace) => Column(
+                  children: [
+                    Text(
+                      'Cannot show equipment selection due to server error. You can only enter data for visual acuity in LOGMAR values below',
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    const Divider(
+                      thickness: 2,
+                    ),
+                  ],
+                ),
+              ),
           const SizedBox(height: AppSize.km),
           Form(
             autovalidateMode: AutovalidateMode.onUserInteraction,

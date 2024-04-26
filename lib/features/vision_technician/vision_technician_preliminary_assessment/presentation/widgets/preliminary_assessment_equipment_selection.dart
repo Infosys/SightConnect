@@ -2,16 +2,19 @@ import 'dart:math';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/model/device_model.dart';
 import '../providers/preliminary_assessment_helper_provider.dart';
 
 class PreliminaryAssessmentEquipmentSelection extends ConsumerStatefulWidget {
-  const PreliminaryAssessmentEquipmentSelection({super.key});
+  const PreliminaryAssessmentEquipmentSelection(
+      {super.key, required this.equipmentsData});
+
+  final List<DeviceDTO> equipmentsData;
 
   @override
   ConsumerState<PreliminaryAssessmentEquipmentSelection> createState() =>
@@ -22,19 +25,7 @@ class _PreliminaryAssessmentEquipmentSelectionState
     extends ConsumerState<PreliminaryAssessmentEquipmentSelection> {
   String _currentInput = '';
 
-  final equipmentsList = [
-    "Primary Education",
-    "Secondary Education",
-    "Higher Secondary Education",
-    "Vocational Training / Diploma",
-    "Undergraduate Education",
-    "Postgraduate Education",
-    "Doctoral Education",
-    "Post-Doctoral Edcuation",
-    "Professional Degree",
-    "Specialized Certification",
-    "Not Applicable",
-  ];
+  List<String> equipmentsList = [];
 
   List<String> _filteredSuggestions = [];
   final _controller = TextEditingController();
@@ -42,6 +33,7 @@ class _PreliminaryAssessmentEquipmentSelectionState
   @override
   void initState() {
     super.initState();
+    equipmentsList = widget.equipmentsData.map((e) => e.displayName!).toList();
     _controller.addListener(() {
       setState(() {
         _currentInput = _controller.text;

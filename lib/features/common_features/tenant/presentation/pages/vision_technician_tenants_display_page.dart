@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/data/models/vg_profile_model.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -169,4 +168,3 @@ class VisionTechnicianTenantsDisplayPage extends HookConsumerWidget {
     );
   }
 }
- 

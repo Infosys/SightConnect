@@ -23,7 +23,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../core/providers/global_visual_acuity_provider.dart';
 import '../../../triage/domain/models/enums/performer_role.dart';
 import '../../domain/models/enums/distance_tumbling_enums.dart';
 import '../../domain/models/distance_tumbling_models.dart';
