@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/features/org_admin/org_admin_home/presentation/pages/org_admin_home_page.dart';
+import 'package:eye_care_for_all/features/org_admin/org_admin_my_teams/presentation/pages/org_admin_my_teams_homepage.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -33,6 +34,13 @@ class OrgAdminDashBoardPage extends StatelessWidget {
             case 0:
               break;
             case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OrgAdminMyTeamsHomePage(),
+                ),
+              );
+
               break;
             case 2:
               break;
