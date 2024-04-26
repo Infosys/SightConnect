@@ -79,7 +79,7 @@ class _OrgAdminAnalyticsDashBoardPageState
                       label: '19 Jan 23 - 23 Jan 23',
                     ),
                   ]),
-              const SizedBox(width: AppSize.ks),
+              const SizedBox(height: AppSize.ks),
               DropdownMenu<String>(
                 width: Responsive.isMobile(context)
                     ? AppSize.width(context)
@@ -149,7 +149,7 @@ class _OrgAdminAnalyticsDashBoardPageState
                 body: const AgeGroupAnalytics(),
               ),
               AnalyticsCard(
-                height: 180,
+                height: Responsive.isMobile(context) ? 220 : 180,
                 width: AppSize.width(context) - 2 * AppSize.ks,
                 title: 'Language',
                 body: const LanguageAnalytics(),

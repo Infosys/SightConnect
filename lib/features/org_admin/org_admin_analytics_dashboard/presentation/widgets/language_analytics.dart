@@ -1,4 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +35,8 @@ class LanguageAnalytics extends StatelessWidget {
           icon: Icons.language,
         ),
         SizedBox(
-          width: 140,
+          width:
+              Responsive.isMobile(context) ? 140 : AppSize.width(context) / 6,
           child: ListTile(
             minLeadingWidth: 10,
             contentPadding: const EdgeInsets.only(
@@ -48,18 +52,22 @@ class LanguageAnalytics extends StatelessWidget {
                 color: AppColor.green,
               ),
             ),
-            title: Text(
+            title: AutoSizeText(
               '12k',
+              maxLines: 1,
               style: applyFiraSansFont(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
               ),
             ),
-            subtitle: Text('Others',
-                style: applyRobotoFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                )),
+            subtitle: AutoSizeText(
+              'Others',
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+              maxLines: 1,
+            ),
           ),
         ),
       ],
@@ -85,7 +93,8 @@ class LanguageAnalyticsTile extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: 140,
+          width:
+              Responsive.isMobile(context) ? 140 : AppSize.width(context) / 6,
           child: ListTile(
             minLeadingWidth: 10,
             contentPadding: const EdgeInsets.only(
@@ -101,22 +110,26 @@ class LanguageAnalyticsTile extends StatelessWidget {
                 color: AppColor.green,
               ),
             ),
-            title: Text(
+            title: AutoSizeText(
               subtitle,
+              maxLines: 1,
               style: applyFiraSansFont(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
               ),
             ),
-            subtitle: Text(title,
-                style: applyRobotoFont(
-                  fontSize: 12,
-                  color: AppColor.grey,
-                )),
+            subtitle: AutoSizeText(
+              title,
+              maxLines: 1,
+              style: applyRobotoFont(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+            ),
           ),
         ),
         Container(
-          height: 80,
+          height: 40,
           width: 0.5,
           color: AppColor.grey,
         )
