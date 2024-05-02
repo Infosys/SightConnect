@@ -1,9 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +14,7 @@ class HelplineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSize.km,
@@ -24,10 +22,10 @@ class HelplineCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSize.km,
-          vertical: AppSize.ks + 2,
+          vertical: AppSize.ks / 2,
         ),
         decoration: const BoxDecoration(
-          color: AppColor.primary,
+          color: AppColor.lightRed,
           borderRadius: BorderRadius.all(
             Radius.circular(AppSize.km * 3),
           ),
@@ -37,10 +35,9 @@ class HelplineCard extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                "${loc.homeHelplineCardDescrition} ${AppInfoService.tollFreeNumber}",
+                "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
                 style: applyRobotoFont(
                   fontSize: 12,
-                  color: AppColor.white,
                 ),
               ),
             ),
@@ -53,15 +50,15 @@ class HelplineCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: AppColor.white,
+                  color: AppColor.pureRed,
                   shape: BoxShape.circle,
                 ),
                 child: SvgPicture.asset(
                   AppIcon.call,
-                  height: 20,
-                  width: 20,
+                  height: 16,
+                  width: 16,
                   colorFilter: const ColorFilter.mode(
-                    AppColor.primary,
+                    AppColor.white,
                     BlendMode.srcIn,
                   ),
                 ),
