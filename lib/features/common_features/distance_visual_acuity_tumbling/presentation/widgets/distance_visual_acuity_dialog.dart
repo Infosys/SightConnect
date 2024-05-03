@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
+import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -212,7 +213,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                               try {
                                 isLoading.value = true;
                                 isAcuityDialog.state = true;
-                                
+
                                 ref
                                     .read(globalVisualAcuityProvider)
                                     .setShortDistanceTest(true);
@@ -220,14 +221,12 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                                   logger.d("Triage Mode");
                                   stepper.goToNextStep();
                                   await _saveTriageMode(ref, navigator);
-                                  
                                 } else if (global.isStandaloneMode()) {
                                   logger.d("Standalone Mode");
                                   _saveStandAloneMode(navigator);
                                 } else {
                                   logger.d("Update Mode");
                                   await _saveUpdateMode(ref, navigator);
-                                   ref.invalidate(distanceTumblingTestProvider);
                                 }
                                 isLoading.value = false;
                               } catch (e) {
@@ -260,6 +259,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
     navigator
       ..pop()
       ..pop()
+      ..pop()
       ..pop();
   }
 
@@ -280,6 +280,17 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       (failure) {
         Fluttertoast.showToast(
             msg: "Failed to update observation at this moment");
+        ref.read(resetProvider).reset();
+        navigator
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop();
       },
       (result) {
         Fluttertoast.showToast(msg: "Observation Updated");
@@ -291,7 +302,10 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       ..pop()
       ..pop()
       ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
+      ..pop()
       ..pop();
-
   }
 }

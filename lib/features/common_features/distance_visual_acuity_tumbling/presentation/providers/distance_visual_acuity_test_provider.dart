@@ -393,8 +393,15 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
     try {
-      final visionAcuityTumblingResponse =
+      final distanceVisionAcuityTumblingResponse =
           await getVisionAcuityTumblingResponse();
+      final shortDistanceTumblingResponse =
+          await triageLocalSourceProvider.getVisionAcuityTumblingResponse();
+
+      final visionAcuityTumblingResponse = [
+        ...distanceVisionAcuityTumblingResponse,
+        ...shortDistanceTumblingResponse,
+      ];
       final reportModel = await getTriageReportByReportId(diagnosticReportId!);
 
       if (reportModel == null) {

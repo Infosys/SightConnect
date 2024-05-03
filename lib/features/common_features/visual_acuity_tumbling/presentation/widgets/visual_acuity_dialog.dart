@@ -226,6 +226,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                                   _saveStandAloneMode(navigator);
                                 } else {
                                   logger.d("Update Mode");
+                                   stepper.goToNextStep();
                                   await _saveUpdateMode(ref, navigator);
                                   
                                 }
@@ -273,25 +274,25 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
   }
 
   Future<void> _saveUpdateMode(WidgetRef ref, NavigatorState navigator) async {
-    final result = await ref
-        .read(tumblingTestProvider)
-        .updateVisualAcuityTumblingResponse();
+    // final result = await ref
+    //     .read(tumblingTestProvider)
+    //     .updateVisualAcuityTumblingResponse();
 
-    result.fold(
-      (failure) {
-        Fluttertoast.showToast(
-            msg: "Failed to update observation at this moment");
-      },
-      (result) {
-        Fluttertoast.showToast(msg: "Observation Updated");
-      },
+    // result.fold(
+    //   (failure) {
+    //     Fluttertoast.showToast(
+    //         msg: "Failed to update observation at this moment");
+    //   },
+    //   (result) {
+    //     Fluttertoast.showToast(msg: "Observation Updated");
+    //   },
+    // );
+    await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
+
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => const DistanceVisualAcuityTumblingPage(),
+      ),
     );
-
-    navigator
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop();
   }
 }

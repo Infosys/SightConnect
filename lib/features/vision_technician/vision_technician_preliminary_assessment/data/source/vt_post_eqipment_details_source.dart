@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../main.dart';

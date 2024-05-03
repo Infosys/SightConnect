@@ -1,6 +1,7 @@
 import 'dart:isolate';
 
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,6 +36,6 @@ var vtDeviceDataProvider = FutureProvider((ref) {
     }
   }
 
-  return getDeviceData("VISION_TECHNICIAN", "1001", "4639000000000001");
+  return getDeviceData("VISION_TECHNICIAN", SharedPreferenceService.getTenantIdVt.toString(), SharedPreferenceService.getOrganizationIdVt.toString());
 });
 

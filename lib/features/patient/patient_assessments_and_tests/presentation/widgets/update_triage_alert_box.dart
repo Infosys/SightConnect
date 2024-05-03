@@ -11,6 +11,8 @@ import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../common_features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
+
 class UpdateTriageAlertBox extends HookConsumerWidget {
   const UpdateTriageAlertBox({
     required this.result,
@@ -79,7 +81,7 @@ class UpdateTriageAlertBox extends HookConsumerWidget {
                     case TestType.OBSERVATION:
                       ref.read(globalProvider).setVAMode =
                           VisionAcuityMode.UPDATE;
-                      ref.read(tumblingTestProvider).setDiagnosticReportId =
+                      ref.read(distanceTumblingTestProvider).setDiagnosticReportId =
                           diagnosticReportID;
                       navigator.pushReplacement(
                         MaterialPageRoute(
