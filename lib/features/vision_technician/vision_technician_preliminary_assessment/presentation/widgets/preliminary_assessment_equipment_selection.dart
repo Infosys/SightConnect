@@ -14,7 +14,7 @@ class PreliminaryAssessmentEquipmentSelection extends ConsumerStatefulWidget {
   const PreliminaryAssessmentEquipmentSelection(
       {super.key, required this.equipmentsData});
 
-  final List<DeviceDTO> equipmentsData;
+  final List<DeviceModel> equipmentsData;
 
   @override
   ConsumerState<PreliminaryAssessmentEquipmentSelection> createState() =>
@@ -28,12 +28,17 @@ class _PreliminaryAssessmentEquipmentSelectionState
   List<String> equipmentsList = [];
 
   List<String> _filteredSuggestions = [];
+
+  String selectedEquipment = '';
   final _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   @override
   void initState() {
     super.initState();
     equipmentsList = widget.equipmentsData.map((e) => e.displayName!).toList();
+    Future.delayed(Duration.zero, () {
+      ref.read(preliminaryAssessmentHelperProvider).setEquipmentsData(widget.equipmentsData);
+    });
     _controller.addListener(() {
       setState(() {
         _currentInput = _controller.text;
@@ -41,6 +46,14 @@ class _PreliminaryAssessmentEquipmentSelectionState
             .where((suggestion) =>
                 suggestion.toLowerCase().contains(_currentInput.toLowerCase()))
             .toList();
+
+        final String match = _filteredSuggestions.firstWhere(
+            (element) => element.toLowerCase() == _currentInput.toLowerCase(),
+            orElse: () => '');
+
+        if (match.isNotEmpty) {
+          ref.watch(preliminaryAssessmentHelperProvider).setReadingUnit(match);
+        }
       });
     });
   }

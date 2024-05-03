@@ -17,3 +17,7 @@ enum SpecimenType {
   RIGHT_EYE,
   BOTH_EYE,
 }
+
+enum Severity {
+  ABNORMAL, HIGH, LOW
+}

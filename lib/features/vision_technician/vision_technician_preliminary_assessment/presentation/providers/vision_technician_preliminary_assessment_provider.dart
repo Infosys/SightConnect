@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
@@ -22,6 +23,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/data/contracts/availability_repository.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_mark_my_availability/domain/repositories/availability_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/ivr_caller_details_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/source/vt_ivr_caller_details_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/care_plan_view_model_provider.dart';
@@ -32,7 +34,11 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../common_features/triage/domain/models/enums/observation_code.dart';
 import '../../../../common_features/triage/domain/repositories/triage_urgency_repository.dart';
+import '../../data/enums/post_equipments_enum.dart';
+import '../../data/model/post_equipment_observation_dto.dart';
+import '../../data/source/vt_post_eqipment_details_source.dart';
 
 var vtTriageSaveProvider = ChangeNotifierProvider.autoDispose(
   (ref) {
@@ -45,6 +51,7 @@ var vtTriageSaveProvider = ChangeNotifierProvider.autoDispose(
         ref.watch(carePlanViewModelProvider),
         ref.watch(preliminaryAssessmentHelperProvider),
         ref.watch(vtIVRCallerDetailsRemoteSourceProvider),
+        ref.watch(postEquipmentDetailsProvider),
         ref.watch(availabilityRepository));
   },
 );
@@ -60,7 +67,7 @@ class VtTriageProvider extends ChangeNotifier {
   final PreliminaryAssessmentHelperNotifier
       _preliminaryAssessmentHelperProvider;
   final VTIVRCallerDetailsRemoteSource _callerDetailsRemoteSource;
-
+  final PostEquipmentDetailsSource _postEquipmentDetailsSource;
   final AvailabilityRepository _availabilityRepository;
   bool _isLoading = false;
 
@@ -74,6 +81,7 @@ class VtTriageProvider extends ChangeNotifier {
     this._carePlanViewModelProvider,
     this._preliminaryAssessmentHelperProvider,
     this._callerDetailsRemoteSource,
+    this._postEquipmentDetailsSource,
     this._availabilityRepository,
   );
 
@@ -159,7 +167,8 @@ class VtTriageProvider extends ChangeNotifier {
         questionResponse: questionResponse,
       );
       logger.d(triagePostModel.toJson());
-      logger.f(" ${DateTime.now().subtract(const Duration(seconds: 2)).toString()} ------ ${DateTime.now().subtract(const Duration(seconds: 2)).toUtc()}");
+      logger.f(
+          " ${DateTime.now().subtract(const Duration(seconds: 2)).toString()} ------ ${DateTime.now().subtract(const Duration(seconds: 2)).toUtc()}");
       Either<Failure, TriagePostModel> response = await _saveTriageUseCase.call(
         SaveTriageParam(triagePostModel: triagePostModel),
       );
@@ -192,6 +201,93 @@ class VtTriageProvider extends ChangeNotifier {
         _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
       });
 
+      try {
+        int? leftEyeIndentifier;
+        int? rightEyeIndentifier;
+        int? bothEyeIndentifier;
+
+        for (var element in assessment.observations!.observationDefinition!) {
+          if (element.code == ObservationCode.LOGMAR_NEAR) {
+            if (element.bodySite == BodySite.LEFT_EYE) {
+              leftEyeIndentifier = element.id;
+            }
+            if (element.bodySite == BodySite.RIGHT_EYE) {
+              rightEyeIndentifier = element.id;
+            }
+            if (element.bodySite == BodySite.BOTH_EYES) {
+              bothEyeIndentifier = element.id;
+            }
+          }
+        }
+
+        String? leftEyeValue;
+        String? rightEyeValue;
+        String? bothEyeValue;
+        for (var observation in observations) {
+          logger.f("observation is : $observation");
+          if (observation.identifier == leftEyeIndentifier) {
+            leftEyeValue = observation.value;
+          }
+          if (observation.identifier == rightEyeIndentifier) {
+            rightEyeValue = observation.value;
+          }
+          if (observation.identifier == bothEyeIndentifier) {
+            bothEyeValue = observation.value;
+          }
+        }
+
+        logger.f(
+            "left eye value: $leftEyeValue, right eye value: $rightEyeValue, both eye value: $bothEyeValue, left eye identifier: $leftEyeIndentifier, right eye identifier: $rightEyeIndentifier, both eye identifier: $bothEyeIndentifier");
+
+        DeviceModel? selectedEquipment =
+            _preliminaryAssessmentHelperProvider.selectedEquipment;
+
+        logger.f("selected equipment: $selectedEquipment");
+
+        List<EquipmentObservationValue> equipmentObservationValues = [
+          EquipmentObservationValue(
+            identifier: selectedEquipment.identifier.toString(),
+            observationCategory: ObservationCategory.DEVICE,
+            name: selectedEquipment.displayName,
+            readings: [leftEyeValue!],
+            readingType: ReadingType.UNIT,
+            specimenType: SpecimenType.LEFT_EYE,
+            performer: _vtProfile?.id,
+          ),
+          EquipmentObservationValue(
+            identifier: selectedEquipment.identifier.toString(),
+            observationCategory: ObservationCategory.DEVICE,
+            name: selectedEquipment.displayName,
+            readings: [rightEyeValue!],
+            readingType: ReadingType.UNIT,
+            specimenType: SpecimenType.RIGHT_EYE,
+            performer: _vtProfile?.id,
+          ),
+          EquipmentObservationValue(
+            identifier: selectedEquipment.identifier.toString(),
+            observationCategory: ObservationCategory.DEVICE,
+            name: selectedEquipment.displayName,
+            readings: [bothEyeValue!],
+            readingType: ReadingType.UNIT,
+            specimenType: SpecimenType.BOTH_EYE,
+            performer: _vtProfile?.id,
+          ),
+        ];
+
+        logger.f("equipment observation values: $equipmentObservationValues");
+
+        PostEquipmentObservationDto postEquipmentObservationDto =
+            PostEquipmentObservationDto(
+                drId: reportId,
+                encounterId: encounterId,
+                equipmentObservationValues: equipmentObservationValues);
+
+        await _postEquipmentDetailsSource
+            .postEquipmentDetails(postEquipmentObservationDto);
+      } on Error catch (e) {
+        logger.e("Error saving equipment details: $e");
+      }
+
       return response;
     } on ServerFailure catch (e) {
       logger.e("Error saving triage server failure: $e");
@@ -199,8 +295,7 @@ class VtTriageProvider extends ChangeNotifier {
           ServerFailure(errorMessage: "An error occurred while saving triage"));
     } catch (e) {
       logger.e("Error saving triage: $e");
-      return Left(
-          ServerFailure(errorMessage: "An error occurred while saving triage"));
+      return Left(ServerFailure(errorMessage: "An error occurred while sae"));
     } finally {
       _preliminaryAssessmentHelperProvider.setLoading(false);
     }

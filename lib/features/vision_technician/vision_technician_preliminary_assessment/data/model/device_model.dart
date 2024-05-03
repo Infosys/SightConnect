@@ -5,27 +5,41 @@ import '../enums/device_enums.dart';
 part 'device_model.freezed.dart';
 part 'device_model.g.dart';
 
+@freezed
+class DeviceModel with _$DeviceModel {
+    const factory DeviceModel({
+        int? id,
+        String? identifier,
+        String? displayName,
+        String? definition,
+        Status? status,
+        TestCategory? testCategory,
+        int? priority,
+        AvailabilityStatus? availabilityStatus,
+        String? manufacturer,
+        DateTime? manufactureDate,
+        DateTime? expirationDate,
+        String? serialNumber,
+        String? modelNumber,
+        String? version,
+        String? note,
+        bool? isDeleted,
+        DeviceObservation? deviceObservation,
+    }) = _DeviceModel;
+
+    factory DeviceModel.fromJson(Map<String, dynamic> json) => _$DeviceModelFromJson(json);
+}
 
 @freezed
-abstract class DeviceDTO with _$DeviceDTO {
-  factory DeviceDTO({
-    int? id,
-    String? identifier,
-    String? displayName,
-    String? definition,
-    Status? status,
-    TestCategory? testCategory,
-    int? priority,
-    AvailabilityStatus? availabilityStatus,
-    String? manufacturer,
-    String? manufactureDate,
-    String? expirationDate,
-    String? serialNumber,
-    String? modelNumber,
-    String? version,
-    String? note,
-    bool? isDeleted,
-  }) = _DeviceDTO;
+class DeviceObservation with _$DeviceObservation {
+    const factory DeviceObservation({
+        int? id,
+        UnitType? unitType,
+        InputType? inputType,
+        String? rangeMin,
+        String? rangeMax,
+        String? values,
+    }) = _DeviceObservation;
 
-  factory DeviceDTO.fromJson(Map<String, dynamic> json) => _$DeviceDTOFromJson(json);
+    factory DeviceObservation.fromJson(Map<String, dynamic> json) => _$DeviceObservationFromJson(json);
 }

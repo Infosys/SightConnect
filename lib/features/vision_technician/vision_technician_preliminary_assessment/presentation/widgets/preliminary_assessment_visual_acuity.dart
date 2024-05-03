@@ -1,11 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/source/vt_device_data_remote_source.dart';
 import '../providers/vision_technician_triage_provider.dart';
@@ -17,7 +19,8 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-
+    DeviceModel selectedEquipment =
+        ref.watch(preliminaryAssessmentHelperProvider).selectedEquipment;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSize.km),
@@ -75,7 +78,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                           ? AppSize.width(context)
                           : AppSize.width(context) * 0.2,
                       child: TextFormField(
-                        validator: validateEyeSight,
+                        validator: (value) {
+                          return validateEyeSight(value, selectedEquipment);
+                        },
                         onChanged: (value) {
                           double? eyeSight = double.tryParse(value);
                           if (eyeSight != null) {
@@ -106,7 +111,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                           ? AppSize.width(context)
                           : AppSize.width(context) * 0.2,
                       child: TextFormField(
-                        validator: validateEyeSight,
+                        validator: (value) {
+                          return validateEyeSight(value, selectedEquipment);
+                        },
                         onChanged: (value) {
                           double? eyeSight = double.tryParse(value);
                           if (eyeSight != null) {
@@ -137,7 +144,9 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
                           ? AppSize.width(context)
                           : AppSize.width(context) * 0.2,
                       child: TextFormField(
-                        validator: validateEyeSight,
+                        validator: (value) {
+                          return validateEyeSight(value, selectedEquipment);
+                        },
                         onChanged: (value) {
                           double? eyeSight = double.tryParse(value);
                           if (eyeSight != null) {
@@ -172,13 +181,25 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
     );
   }
 
-  String? validateEyeSight(String? value) {
-    final regex = RegExp(r'^(0(\.[0-9]{1,3})?|1(\.0{1,3})?|\.[0-9]{1,3})$');
+  String? validateEyeSight(String? value, DeviceModel selectedEquipment) {
+    double minimumValue =
+        double.parse(selectedEquipment.deviceObservation!.rangeMin!);
+    double maximumValue =
+        double.parse(selectedEquipment.deviceObservation!.rangeMax!);
     if (value == null || value.isEmpty) {
-      return 'Please enter a valid value. ex (0 - 1.0)';
-    } else if (!regex.hasMatch(value)) {
-      return 'Please enter a valid value. ex (0 - 1.0)';
+      return 'Please enter a valid value. ex (-20 to 20)';
+    } else if (value.isNotEmpty &&
+        RegExp(r'^\d+(\.\d+)?$').hasMatch(value) == false) {
+      return "Only numerical/decimal values are allowed";
+    } else if (value.isNotEmpty && RegExp(r'^\d+(\.\d+)?$').hasMatch(value)) {
+      double eyeSight = double.parse(value);
+      if (eyeSight < minimumValue || eyeSight > maximumValue) {
+        return 'Please enter a value between $minimumValue and $maximumValue';
+      } else {
+        return null;
+      }
+    } else {
+      return 'Please enter a valid value. ex (-20 to 20)';
     }
-    return null;
   }
 }

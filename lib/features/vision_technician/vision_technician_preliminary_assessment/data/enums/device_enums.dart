@@ -14,3 +14,11 @@ enum AvailabilityStatus {
   DESTROYED,
   AVAILABLE,
 }
+
+enum UnitType{
+  DIOPTER, LOGMAR, DECIMAL, SNELLEN
+}
+
+enum InputType{
+  RANGE, TEXT, NUMBER, DISCRETE
+}

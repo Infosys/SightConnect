@@ -6,8 +6,8 @@ part of 'device_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeviceDTOImpl _$$DeviceDTOImplFromJson(Map<String, dynamic> json) =>
-    _$DeviceDTOImpl(
+_$DeviceModelImpl _$$DeviceModelImplFromJson(Map<String, dynamic> json) =>
+    _$DeviceModelImpl(
       id: json['id'] as int?,
       identifier: json['identifier'] as String?,
       displayName: json['displayName'] as String?,
@@ -19,16 +19,24 @@ _$DeviceDTOImpl _$$DeviceDTOImplFromJson(Map<String, dynamic> json) =>
       availabilityStatus: $enumDecodeNullable(
           _$AvailabilityStatusEnumMap, json['availabilityStatus']),
       manufacturer: json['manufacturer'] as String?,
-      manufactureDate: json['manufactureDate'] as String?,
-      expirationDate: json['expirationDate'] as String?,
+      manufactureDate: json['manufactureDate'] == null
+          ? null
+          : DateTime.parse(json['manufactureDate'] as String),
+      expirationDate: json['expirationDate'] == null
+          ? null
+          : DateTime.parse(json['expirationDate'] as String),
       serialNumber: json['serialNumber'] as String?,
       modelNumber: json['modelNumber'] as String?,
       version: json['version'] as String?,
       note: json['note'] as String?,
       isDeleted: json['isDeleted'] as bool?,
+      deviceObservation: json['deviceObservation'] == null
+          ? null
+          : DeviceObservation.fromJson(
+              json['deviceObservation'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DeviceDTOImplToJson(_$DeviceDTOImpl instance) =>
+Map<String, dynamic> _$$DeviceModelImplToJson(_$DeviceModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'identifier': instance.identifier,
@@ -40,13 +48,14 @@ Map<String, dynamic> _$$DeviceDTOImplToJson(_$DeviceDTOImpl instance) =>
       'availabilityStatus':
           _$AvailabilityStatusEnumMap[instance.availabilityStatus],
       'manufacturer': instance.manufacturer,
-      'manufactureDate': instance.manufactureDate,
-      'expirationDate': instance.expirationDate,
+      'manufactureDate': instance.manufactureDate?.toIso8601String(),
+      'expirationDate': instance.expirationDate?.toIso8601String(),
       'serialNumber': instance.serialNumber,
       'modelNumber': instance.modelNumber,
       'version': instance.version,
       'note': instance.note,
       'isDeleted': instance.isDeleted,
+      'deviceObservation': instance.deviceObservation?.toJson(),
     };
 
 const _$StatusEnumMap = {
@@ -64,4 +73,40 @@ const _$AvailabilityStatusEnumMap = {
   AvailabilityStatus.DAMAGED: 'DAMAGED',
   AvailabilityStatus.DESTROYED: 'DESTROYED',
   AvailabilityStatus.AVAILABLE: 'AVAILABLE',
+};
+
+_$DeviceObservationImpl _$$DeviceObservationImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DeviceObservationImpl(
+      id: json['id'] as int?,
+      unitType: $enumDecodeNullable(_$UnitTypeEnumMap, json['unitType']),
+      inputType: $enumDecodeNullable(_$InputTypeEnumMap, json['inputType']),
+      rangeMin: json['rangeMin'] as String?,
+      rangeMax: json['rangeMax'] as String?,
+      values: json['values'] as String?,
+    );
+
+Map<String, dynamic> _$$DeviceObservationImplToJson(
+        _$DeviceObservationImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'unitType': _$UnitTypeEnumMap[instance.unitType],
+      'inputType': _$InputTypeEnumMap[instance.inputType],
+      'rangeMin': instance.rangeMin,
+      'rangeMax': instance.rangeMax,
+      'values': instance.values,
+    };
+
+const _$UnitTypeEnumMap = {
+  UnitType.DIOPTER: 'DIOPTER',
+  UnitType.LOGMAR: 'LOGMAR',
+  UnitType.DECIMAL: 'DECIMAL',
+  UnitType.SNELLEN: 'SNELLEN',
+};
+
+const _$InputTypeEnumMap = {
+  InputType.RANGE: 'RANGE',
+  InputType.TEXT: 'TEXT',
+  InputType.NUMBER: 'NUMBER',
+  InputType.DISCRETE: 'DISCRETE',
 };

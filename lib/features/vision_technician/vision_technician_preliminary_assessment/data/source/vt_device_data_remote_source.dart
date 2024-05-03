@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/services/dio_service.dart';
 import '../../../../../core/services/exceptions.dart';
-import '../../../../../core/services/shared_preference.dart';
 import '../../../../../main.dart';
 
 // TO DO : When Tenant and org data is updated on url, change the hardcoded data with dynamic data from sharedPreference
@@ -14,7 +13,7 @@ import '../../../../../main.dart';
 var vtDeviceDataProvider = FutureProvider((ref) {
   final Dio dio = ref.read(dioProvider);
 
-   Future<List<DeviceDTO>> getDeviceData(
+   Future<List<DeviceModel>> getDeviceData(
       String role, String tenantId, String organizationId) async {
     String endpoint =
         '/services/assessments/api/device?userRole=$role&testCategory=TRIAGE&tenantId=$tenantId&organizationId=$organizationId';
@@ -22,11 +21,10 @@ var vtDeviceDataProvider = FutureProvider((ref) {
     try {
       final response = await dio.get(endpoint);
       logger.f("device response is : ${response.data}");
-      final deviceList = await Isolate.run<List<DeviceDTO>>(() {
-        return (response.data as List)
-            .map((device) => DeviceDTO.fromJson(device))
+      final deviceList =  (response.data as List)
+            .map((device) => DeviceModel.fromJson(device))
             .toList();
-      });
+     
       return deviceList;
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
@@ -37,6 +35,6 @@ var vtDeviceDataProvider = FutureProvider((ref) {
     }
   }
 
-  return getDeviceData("VISION_TECHNICIAN", "1901", "1901");
+  return getDeviceData("VISION_TECHNICIAN", "1001", "4639000000000001");
 });
 
