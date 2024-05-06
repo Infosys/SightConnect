@@ -260,6 +260,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       ..pop()
       ..pop()
       ..pop()
+      ..pop()
       ..pop();
   }
 

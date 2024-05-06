@@ -388,15 +388,19 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
 
   set setDiagnosticReportId(int value) {
     _diagnosticReportId = value;
+    logger.f("report id set to : $value");
   }
 
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
     try {
+      logger.f("inside updateVisualAcuityTumblingResponse");
       final distanceVisionAcuityTumblingResponse =
           await getVisionAcuityTumblingResponse();
+          logger.f("distanceVisionAcuityTumblingResponse: $distanceVisionAcuityTumblingResponse");
       final shortDistanceTumblingResponse =
           await triageLocalSourceProvider.getVisionAcuityTumblingResponse();
+        logger.f("shortDistanceTumblingResponse: $shortDistanceTumblingResponse");
 
       final visionAcuityTumblingResponse = [
         ...distanceVisionAcuityTumblingResponse,

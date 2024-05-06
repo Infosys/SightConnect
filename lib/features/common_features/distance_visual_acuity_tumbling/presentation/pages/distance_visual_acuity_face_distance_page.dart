@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:superapp_scanner/constants/app_color.dart';
 
 import '../widgets/distance_visual_acuity_tumbling_test_left_eye_instruction.dart';
+import 'distance_visual_acuity_distance_selection_page.dart';
 
 class DistanceVisualAcuityFaceDistancePage extends StatelessWidget {
   const DistanceVisualAcuityFaceDistancePage({super.key});
@@ -101,7 +102,7 @@ class DistanceVisualAcuityFaceDistancePage extends StatelessWidget {
                                   Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const DistanceVisualAcuityTumblingLeftEyeInstruction(),
+                                          const DistanceVisualAcuityDistanceSelectionPage(),
                                     ),
                                   );
                                 }

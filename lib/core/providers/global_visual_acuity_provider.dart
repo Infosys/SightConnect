@@ -10,6 +10,7 @@ var globalVisualAcuityProvider = ChangeNotifierProvider((ref) {
 class GlobalVisualAcuityProvider extends ChangeNotifier {
   bool _isShortDistanceTest = true;
   bool get isShortDistanceTest => _isShortDistanceTest;
+  bool _isThreeMeter = true;
 
   String _distanceLeftEyeValue = "";
   String _distanceRightEyeValue = "";
@@ -18,6 +19,13 @@ class GlobalVisualAcuityProvider extends ChangeNotifier {
   String get distanceLeftEyeValue => _distanceLeftEyeValue;
   String get distanceRightEyeValue => _distanceRightEyeValue;
   String get distanceBothEyeValue => _distanceBothEyeValue;
+
+  bool get isThreeMeter => _isThreeMeter;
+
+  void setThreeMeter(bool value) {
+    _isThreeMeter = value;
+    notifyListeners();
+  }
 
   void setDistanceLeftEyeValue(String value) {
     _distanceLeftEyeValue = value;

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../main.dart';
 import '../../../domain/models/enums/tumbling_enums.dart';
 import '../../../domain/models/tumbling_models.dart';
 
@@ -502,6 +503,7 @@ class TumblingLocalSourceImpl implements TumblingLocalSource {
   }
 
   void mapLevelsToLevelNumber() {
+    logger.f("Mapping levels to level number");
     for (var level in _levels) {
       level = getRandomQuestionDirectionFromLevel(level);
       GameMode mode = level.mode;
