@@ -235,6 +235,8 @@ const _$ObservationCategoryEnumMap = {
 
 const _$ObservationCodeEnumMap = {
   ObservationCode.Eye: 'Eye',
+  ObservationCode.LOGMAR_NEAR: 'LOGMAR_NEAR',
+  ObservationCode.LOGMAR_DISTANT: 'LOGMAR_DISTANT',
   ObservationCode.Sight: 'Sight',
   ObservationCode.Testing: 'Testing',
 };
@@ -570,6 +572,7 @@ _$QuestionnaireItemFHIRModelImpl _$$QuestionnaireItemFHIRModelImplFromJson(
       initial: json['initial'] == null
           ? null
           : AnswerModel.fromJson(json['initial'] as Map<String, dynamic>),
+      quesExplanationText: json['quesExplanationText'] as String?,
       questionnaire: json['questionnaire'] == null
           ? null
           : QuestionnaireModel.fromJson(
@@ -615,6 +618,7 @@ Map<String, dynamic> _$$QuestionnaireItemFHIRModelImplToJson(
       'answerConstraint': _$AnswerConstraintEnumMap[instance.answerConstraint],
       'ansewrValueSet': instance.ansewrValueSet?.toJson(),
       'initial': instance.initial?.toJson(),
+      'quesExplanationText': instance.quesExplanationText,
       'questionnaire': instance.questionnaire?.toJson(),
       'questionnaireItem': instance.questionnaireItem?.toJson(),
       'actionOn': instance.actionOn?.map((e) => e.toJson()).toList(),

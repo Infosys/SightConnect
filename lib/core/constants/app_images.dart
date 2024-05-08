@@ -91,4 +91,7 @@ class AppImages {
   static const String lvpeiLogo = "assets/images/LVPEI_full_logo.svg";
   static const String whatYouWouldBeDoing =
       "assets/images/what_you_would_be_doing.svg";
+  static const String cursor = "assets/images/cursor.svg";
+  static const String eyes = "assets/images/eyes.svg";
+  static const String handClose = "assets/images/hand close.svg";
 }

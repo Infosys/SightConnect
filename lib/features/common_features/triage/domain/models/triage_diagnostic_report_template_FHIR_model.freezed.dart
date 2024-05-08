@@ -4037,6 +4037,7 @@ mixin _$QuestionnaireItemFHIRModel {
   AnswerConstraint? get answerConstraint => throw _privateConstructorUsedError;
   AnswerValueSetModel? get ansewrValueSet => throw _privateConstructorUsedError;
   AnswerModel? get initial => throw _privateConstructorUsedError;
+  String? get quesExplanationText => throw _privateConstructorUsedError;
   QuestionnaireModel? get questionnaire => throw _privateConstructorUsedError;
   QuestionnaireItemModel? get questionnaireItem =>
       throw _privateConstructorUsedError;
@@ -4078,6 +4079,7 @@ abstract class $QuestionnaireItemFHIRModelCopyWith<$Res> {
       AnswerConstraint? answerConstraint,
       AnswerValueSetModel? ansewrValueSet,
       AnswerModel? initial,
+      String? quesExplanationText,
       QuestionnaireModel? questionnaire,
       QuestionnaireItemModel? questionnaireItem,
       List<ActionOnModel>? actionOn,
@@ -4121,6 +4123,7 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
     Object? answerConstraint = freezed,
     Object? ansewrValueSet = freezed,
     Object? initial = freezed,
+    Object? quesExplanationText = freezed,
     Object? questionnaire = freezed,
     Object? questionnaireItem = freezed,
     Object? actionOn = freezed,
@@ -4190,6 +4193,10 @@ class _$QuestionnaireItemFHIRModelCopyWithImpl<$Res,
           ? _value.initial
           : initial // ignore: cast_nullable_to_non_nullable
               as AnswerModel?,
+      quesExplanationText: freezed == quesExplanationText
+          ? _value.quesExplanationText
+          : quesExplanationText // ignore: cast_nullable_to_non_nullable
+              as String?,
       questionnaire: freezed == questionnaire
           ? _value.questionnaire
           : questionnaire // ignore: cast_nullable_to_non_nullable
@@ -4296,6 +4303,7 @@ abstract class _$$QuestionnaireItemFHIRModelImplCopyWith<$Res>
       AnswerConstraint? answerConstraint,
       AnswerValueSetModel? ansewrValueSet,
       AnswerModel? initial,
+      String? quesExplanationText,
       QuestionnaireModel? questionnaire,
       QuestionnaireItemModel? questionnaireItem,
       List<ActionOnModel>? actionOn,
@@ -4342,6 +4350,7 @@ class __$$QuestionnaireItemFHIRModelImplCopyWithImpl<$Res>
     Object? answerConstraint = freezed,
     Object? ansewrValueSet = freezed,
     Object? initial = freezed,
+    Object? quesExplanationText = freezed,
     Object? questionnaire = freezed,
     Object? questionnaireItem = freezed,
     Object? actionOn = freezed,
@@ -4411,6 +4420,10 @@ class __$$QuestionnaireItemFHIRModelImplCopyWithImpl<$Res>
           ? _value.initial
           : initial // ignore: cast_nullable_to_non_nullable
               as AnswerModel?,
+      quesExplanationText: freezed == quesExplanationText
+          ? _value.quesExplanationText
+          : quesExplanationText // ignore: cast_nullable_to_non_nullable
+              as String?,
       questionnaire: freezed == questionnaire
           ? _value.questionnaire
           : questionnaire // ignore: cast_nullable_to_non_nullable
@@ -4462,6 +4475,7 @@ class _$QuestionnaireItemFHIRModelImpl implements _QuestionnaireItemFHIRModel {
       this.answerConstraint,
       this.ansewrValueSet,
       this.initial,
+      this.quesExplanationText,
       this.questionnaire,
       this.questionnaireItem,
       final List<ActionOnModel>? actionOn,
@@ -4509,6 +4523,8 @@ class _$QuestionnaireItemFHIRModelImpl implements _QuestionnaireItemFHIRModel {
   final AnswerValueSetModel? ansewrValueSet;
   @override
   final AnswerModel? initial;
+  @override
+  final String? quesExplanationText;
   @override
   final QuestionnaireModel? questionnaire;
   @override
@@ -4566,7 +4582,7 @@ class _$QuestionnaireItemFHIRModelImpl implements _QuestionnaireItemFHIRModel {
 
   @override
   String toString() {
-    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, shortText: $shortText, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight, relatedImage: $relatedImage)';
+    return 'QuestionnaireItemFHIRModel(id: $id, linkId: $linkId, prefix: $prefix, text: $text, type: $type, enableBehaviour: $enableBehaviour, required: $required, repeats: $repeats, readOnly: $readOnly, maxlength: $maxlength, shortText: $shortText, disabledDisplay: $disabledDisplay, answerConstraint: $answerConstraint, ansewrValueSet: $ansewrValueSet, initial: $initial, quesExplanationText: $quesExplanationText, questionnaire: $questionnaire, questionnaireItem: $questionnaireItem, actionOn: $actionOn, answerOption: $answerOption, enableWhen: $enableWhen, answerItemWeight: $answerItemWeight, relatedImage: $relatedImage)';
   }
 
   @override
@@ -4597,6 +4613,8 @@ class _$QuestionnaireItemFHIRModelImpl implements _QuestionnaireItemFHIRModel {
             (identical(other.ansewrValueSet, ansewrValueSet) ||
                 other.ansewrValueSet == ansewrValueSet) &&
             (identical(other.initial, initial) || other.initial == initial) &&
+            (identical(other.quesExplanationText, quesExplanationText) ||
+                other.quesExplanationText == quesExplanationText) &&
             (identical(other.questionnaire, questionnaire) ||
                 other.questionnaire == questionnaire) &&
             (identical(other.questionnaireItem, questionnaireItem) ||
@@ -4631,6 +4649,7 @@ class _$QuestionnaireItemFHIRModelImpl implements _QuestionnaireItemFHIRModel {
         answerConstraint,
         ansewrValueSet,
         initial,
+        quesExplanationText,
         questionnaire,
         questionnaireItem,
         const DeepCollectionEquality().hash(_actionOn),
@@ -4673,6 +4692,7 @@ abstract class _QuestionnaireItemFHIRModel
           final AnswerConstraint? answerConstraint,
           final AnswerValueSetModel? ansewrValueSet,
           final AnswerModel? initial,
+          final String? quesExplanationText,
           final QuestionnaireModel? questionnaire,
           final QuestionnaireItemModel? questionnaireItem,
           final List<ActionOnModel>? actionOn,
@@ -4715,6 +4735,8 @@ abstract class _QuestionnaireItemFHIRModel
   AnswerValueSetModel? get ansewrValueSet;
   @override
   AnswerModel? get initial;
+  @override
+  String? get quesExplanationText;
   @override
   QuestionnaireModel? get questionnaire;
   @override

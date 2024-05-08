@@ -85,69 +85,47 @@ class MyConnectionsList extends ConsumerWidget {
         (connectionsList == null || connectionsList.isEmpty)
             ? Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.km + 10,
+                  horizontal: AppSize.km,
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(0, 10),
-                          child: InkWell(
-                            customBorder: const CircleBorder(),
-                            onTap: () {
-                              try {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PatientRegistrationMiniappPage(
-                                      actionType: MiniAppActionType.ADD_MEMBER,
-                                      displayName: loc.myConnectionsAddMember,
-                                    ),
-                                  ),
-                                ).then((value) {
-                                  ref.invalidate(getPatientProfileProvider);
-                                });
-                              } catch (e) {
-                                logger.d({"error": e});
-                                Fluttertoast.showToast(
-                                  msg: loc.myConnectionsServiceNotAvailable,
-                                );
-                              }
-                            },
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                border: Border.all(
-                                  color: AppColor.lightBlue,
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.add,
-                                  color: AppColor.blue,
-                                ),
-                              ),
-                            ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: AppSize.km),
+                        child: MyConnectionsCard(
+                          image: ref
+                              .read(globalPatientProvider)
+                              .activeUser!
+                              .profile!
+                              .patient!
+                              .profilePhoto,
+                          name: ref
+                              .read(globalPatientProvider)
+                              .activeUser!
+                              .profile!
+                              .patient!
+                              .name!
+                              .split(" ")[0],
+                          index: 0,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: AppSize.km,
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Positioned(
+                        child: Text(
+                          'Click the Add Members button to add your family and friends.',
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
                           ),
                         ),
-                        SizedBox(height: AppSize.height(context) * 0.029),
-                        Text(
-                          loc.myConnectionsAdd,
-                          style: applyFiraSansFont(fontSize: 14),
-                        ),
-                      ],
-                    ),
+                      ),
+                    )
                   ],
                 ),
               )

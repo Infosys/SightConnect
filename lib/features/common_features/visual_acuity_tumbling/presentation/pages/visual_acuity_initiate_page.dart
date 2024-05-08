@@ -3,30 +3,49 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/swipe_gesture_card.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/widgets/touch_gesture_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 
+import '../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import '../widgets/top_reading_card.dart';
 
-class VisualAcuityInitiatePage extends ConsumerWidget {
-  static const String routeName = "/tumbling-test-initiate";
+class VisualAcuityInitiatePage extends ConsumerStatefulWidget {
   const VisualAcuityInitiatePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<VisualAcuityInitiatePage> createState() =>
+      _VisualAcuityInitiatePageState();
+}
+
+class _VisualAcuityInitiatePageState
+    extends ConsumerState<VisualAcuityInitiatePage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      visionInstructionShowBottomUpSheet(
+          context: context, isRightEyeCovered: true);
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
     ref.read(tumblingTestProvider).reset();
+
     return PopScope(
       canPop: false,
       onPopInvoked: (value) async {
@@ -40,13 +59,14 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
             builder: (context) => TriageExitAlertBox(
               content: AppLocalizations.of(context)!.visualAcuityExitDialog,
             ),
-          );
+          ).then(
+              (value) => visionInstructionShowBottomUpSheet(context: context));
         } else {
           Navigator.of(context).pop();
         }
       },
       child: TraceableWidget(
-        actionName: 'VisualAcuity Test',
+        actionName: 'Eye Test',
         child: PopScope(
           canPop: false,
           child: Scaffold(
@@ -115,12 +135,15 @@ class VisualAcuityInitiatePage extends ConsumerWidget {
                       ),
                     ),
                   ),
-            body: const Column(
+            body: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TopReadingCard(),
+                const Expanded(child: TopReadingCard()),
                 Expanded(
-                  child: SwipeGestureCard(),
+                  flex: 3,
+                  child: visionAcuityIsSwipeMode
+                      ? const SwipeGestureCard()
+                      : const TouchGestureCard(),
                 ),
               ],
             ),
