@@ -36,4 +36,5 @@ enum MiniAppActionType {
   REGISTER,
   UPDATE,
   ADD_MEMBER,
+  iPLEDGE,
 }
