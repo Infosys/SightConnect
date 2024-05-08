@@ -9,15 +9,16 @@ part of 'vg_event_model.dart';
 _$VisionGuardianEventModelImpl _$$VisionGuardianEventModelImplFromJson(
         Map<String, dynamic> json) =>
     _$VisionGuardianEventModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
-      serviceProvider: json['serviceProvider'] as int?,
+      serviceProvider: (json['serviceProvider'] as num?)?.toInt(),
       startDate: json['startDate'] as String?,
       endDate: json['endDate'] as String?,
       startTime: json['startTime'] as String?,
       endTime: json['endTime'] as String?,
-      maximumAttendeeCapacity: json['maximumAttendeeCapacity'] as int?,
+      maximumAttendeeCapacity:
+          (json['maximumAttendeeCapacity'] as num?)?.toInt(),
       sponsor: json['sponsor'] as String?,
       eventStatus: json['eventStatus'] as String?,
       images: (json['images'] as List<dynamic>?)
@@ -51,7 +52,7 @@ Map<String, dynamic> _$$VisionGuardianEventModelImplToJson(
 _$VisionGuardianEventImageImpl _$$VisionGuardianEventImageImplFromJson(
         Map<String, dynamic> json) =>
     _$VisionGuardianEventImageImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       baseUrl: json['baseUrl'] as String?,
       endpoint: json['endpoint'] as String?,
       fileId: json['fileId'] as String?,
@@ -75,7 +76,7 @@ Map<String, dynamic> _$$VisionGuardianEventImageImplToJson(
 _$VisionGuardianEventAddressImpl _$$VisionGuardianEventAddressImplFromJson(
         Map<String, dynamic> json) =>
     _$VisionGuardianEventAddressImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       venueName: json['venueName'] as String?,
       addressLine1: json['addressLine1'] as String?,
       addressLine2: json['addressLine2'] as String?,

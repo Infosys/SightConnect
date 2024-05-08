@@ -8,7 +8,7 @@ part of 'vt_patient_model.dart';
 
 _$VTPatientDtoImpl _$$VTPatientDtoImplFromJson(Map<String, dynamic> json) =>
     _$VTPatientDtoImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       mobile: json['mobile'] as String?,
       yearOfBirth: json['yearOfBirth'] as String?,
@@ -18,7 +18,7 @@ _$VTPatientDtoImpl _$$VTPatientDtoImplFromJson(Map<String, dynamic> json) =>
       districtName: json['districtName'] as String?,
       townName: json['townName'] as String?,
       pincode: json['pincode'] as String?,
-      encounterId: json['encounterId'] as int?,
+      encounterId: (json['encounterId'] as num?)?.toInt(),
       encounterStartDate: const TimestampConverter()
           .fromJson(json['encounterStartDate'] as String?),
       status: json['status'] as String?,

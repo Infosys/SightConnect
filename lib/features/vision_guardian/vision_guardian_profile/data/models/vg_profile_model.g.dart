@@ -8,7 +8,7 @@ part of 'vg_profile_model.dart';
 
 _$VgProfileModelImpl _$$VgProfileModelImplFromJson(Map<String, dynamic> json) =>
     _$VgProfileModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       profilePhoto: json['profilePhoto'] as String?,
       healthProfessionalType: json['healthProfessionalType'] as String?,
       practitionerType: json['practitionerType'] as String?,
@@ -173,7 +173,7 @@ _$PracticeGrantImpl _$$PracticeGrantImplFromJson(Map<String, dynamic> json) =>
     _$PracticeGrantImpl(
       registrationDate: const TimestampConverter()
           .fromJson(json['registrationDate'] as String?),
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       grantType: json['grantType'] as String?,
       grantRole: json['grantRole'] as String?,
       department: json['department'] as String?,
@@ -195,7 +195,7 @@ Map<String, dynamic> _$$PracticeGrantImplToJson(_$PracticeGrantImpl instance) =>
 
 _$OrganizationImpl _$$OrganizationImplFromJson(Map<String, dynamic> json) =>
     _$OrganizationImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       regRef: json['regRef'] as String?,
       facilityType: json['facilityType'] as String?,
       tenant: json['tenant'] == null
@@ -216,7 +216,7 @@ Map<String, dynamic> _$$OrganizationImplToJson(_$OrganizationImpl instance) =>
     };
 
 _$TenantImpl _$$TenantImplFromJson(Map<String, dynamic> json) => _$TenantImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 

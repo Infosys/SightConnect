@@ -9,14 +9,14 @@ part of 'triage_update_model.dart';
 _$TriageUpdateModelImpl _$$TriageUpdateModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TriageUpdateModelImpl(
-      patientId: json['patientId'] as int?,
-      diagnosticReportId: json['diagnosticReportId'] as int?,
-      tenantCode: json['tenantCode'] as int?,
-      organizationCode: json['organizationCode'] as int?,
+      patientId: (json['patientId'] as num?)?.toInt(),
+      diagnosticReportId: (json['diagnosticReportId'] as num?)?.toInt(),
+      tenantCode: (json['tenantCode'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => Performer.fromJson(e as Map<String, dynamic>))
           .toList(),
-      assessmentCode: json['assessmentCode'] as int?,
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentVersion: json['assessmentVersion'] as String?,
       issued: const TimestampConverter().fromJson(json['issued'] as String?),
       source: $enumDecodeNullable(_$SourceEnumMap, json['source']),
@@ -24,7 +24,7 @@ _$TriageUpdateModelImpl _$$TriageUpdateModelImplFromJson(
       incompleteSection: (json['incompleteSection'] as List<dynamic>?)
           ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      cummulativeScore: json['cummulativeScore'] as int?,
+      cummulativeScore: (json['cummulativeScore'] as num?)?.toInt(),
       score: (json['score'] as List<dynamic>?)
           ?.map((e) => Map<String, int>.from(e as Map))
           .toList(),
@@ -78,9 +78,9 @@ const _$SourceEnumMap = {
 _$PatchQuestionResponseModelImpl _$$PatchQuestionResponseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PatchQuestionResponseModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
-      linkId: json['linkId'] as int?,
+      linkId: (json['linkId'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
       answers: (json['answers'] as List<dynamic>?)
           ?.map((e) => PatchAnswerModel.fromJson(e as Map<String, dynamic>))
@@ -106,10 +106,10 @@ const _$ActionEnumMap = {
 _$PatchAnswerModelImpl _$$PatchAnswerModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PatchAnswerModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       value: json['value'] as String?,
-      answerCode: json['answerCode'] as int?,
+      answerCode: (json['answerCode'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
     );
 
@@ -126,7 +126,7 @@ Map<String, dynamic> _$$PatchAnswerModelImplToJson(
 _$PerformerImpl _$$PerformerImplFromJson(Map<String, dynamic> json) =>
     _$PerformerImpl(
       role: $enumDecodeNullable(_$PerformerRoleEnumMap, json['role']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PerformerImplToJson(_$PerformerImpl instance) =>
@@ -166,8 +166,8 @@ const _$TestTypeEnumMap = {
 _$PatchObservationsModelImpl _$$PatchObservationsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PatchObservationsModelImpl(
-      id: json['id'] as int?,
-      identifier: json['identifier'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      identifier: (json['identifier'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
@@ -186,8 +186,8 @@ Map<String, dynamic> _$$PatchObservationsModelImplToJson(
 _$PatchImagingSelectionModelImpl _$$PatchImagingSelectionModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PatchImagingSelectionModelImpl(
-      id: json['id'] as int?,
-      identifier: json['identifier'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      identifier: (json['identifier'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       endpoint: json['endpoint'] as String?,
       baseUrl: json['baseUrl'] as String?,

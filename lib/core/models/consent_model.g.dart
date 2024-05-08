@@ -8,7 +8,7 @@ part of 'consent_model.dart';
 
 _$ConsentModelImpl _$$ConsentModelImplFromJson(Map<String, dynamic> json) =>
     _$ConsentModelImpl(
-      templateId: json['templateId'] as int?,
+      templateId: (json['templateId'] as num?)?.toInt(),
       consentVersion: json['consentVersion'] as String?,
       consentStatus:
           $enumDecodeNullable(_$ConsentStatusEnumMap, json['consentStatus']) ??

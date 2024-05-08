@@ -9,15 +9,15 @@ part of 'vt_close_assessment_model.dart';
 _$CloseAssessmentDtoImpl _$$CloseAssessmentDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$CloseAssessmentDtoImpl(
-      encounterId: json['encounterId'] as int?,
-      diagnosticReportId: json['diagnosticReportId'] as int?,
-      organizationCode: json['organizationCode'] as int?,
-      tenantCode: json['tenantCode'] as int?,
+      encounterId: (json['encounterId'] as num?)?.toInt(),
+      diagnosticReportId: (json['diagnosticReportId'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
+      tenantCode: (json['tenantCode'] as num?)?.toInt(),
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      carePlanId: json['carePlanId'] as int?,
-      goalId: json['goalId'] as int?,
+      carePlanId: (json['carePlanId'] as num?)?.toInt(),
+      goalId: (json['goalId'] as num?)?.toInt(),
       goalAction: $enumDecodeNullable(_$GoalActionEnumMap, json['goalAction']),
       statusReason: json['statusReason'] as String?,
       achievementStatus: $enumDecodeNullable(
@@ -62,7 +62,7 @@ const _$AchievementStatusEnumMap = {
 _$PerformerDtoImpl _$$PerformerDtoImplFromJson(Map<String, dynamic> json) =>
     _$PerformerDtoImpl(
       role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PerformerDtoImplToJson(_$PerformerDtoImpl instance) =>
