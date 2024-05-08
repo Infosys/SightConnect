@@ -5,23 +5,22 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_services/presentation/widgets/i_pledge_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
-import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/constants/api_constant.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../main.dart';
 import '../../domain/enum/mini_app.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart' as miniappModel;
 
 class PatientServiceCategory extends ConsumerWidget {
   const PatientServiceCategory({
@@ -44,6 +43,7 @@ class PatientServiceCategory extends ConsumerWidget {
             return element != MiniApp.CATARACT_EYE_TEST &&
                 element != MiniApp.RED_EYE_TEST;
           }).toList();
+
     return Container(
       margin: Responsive.isMobile(context)
           ? const EdgeInsets.only(bottom: AppSize.kl)
@@ -95,33 +95,7 @@ class PatientServiceCategory extends ConsumerWidget {
                       } else if (miniapp == MiniApp.IPLEDGE) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => MiniAppDisplayPage(
-                              onBack: () {
-                                Navigator.of(context).pop(null);
-                              },
-                              token: PersistentAuthStateService
-                                      .authState.accessToken ??
-                                  "",
-                              injectionModel: MiniAppInjectionModel(
-                                action: MiniAppActionType.iPLEDGE,
-                                mobileNumber: validateMobile(),
-                                parentPatientId: _getPateintId(),
-                                role: _getCurrentActiveRole(),
-                                token: PersistentAuthStateService
-                                    .authState.accessToken,
-                                miniAppEnv:
-                                    getMiniAppEnv(ApiConstant.appEnvironment),
-                                // pincode: pincode??""
-                              ),
-                              miniapp: miniappModel.MiniApp(
-                                id: "1",
-                                version: "1",
-                                name: "iPledge",
-                                displayName: "iPledge",
-                                sourceurl:
-                                    "https://healthconnect.infosysapps.com/ipledge/",
-                              ),
-                            ),
+                            builder: (context) => const IPledgeService(),
                           ),
                         );
                       } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
@@ -225,20 +199,6 @@ MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv) {
   }
 }
 
-MiniAppInjectionModelRole? _getCurrentActiveRole() {
-  final role = PersistentAuthStateService.authState.activeRole;
-  if (role == "ROLE_PATIENT") {
-    return MiniAppInjectionModelRole.PATIENT;
-  } else if (role == "ROLE_OPTOMETRITIAN") {
-    return MiniAppInjectionModelRole.OPTOMETRITIAN;
-  } else if (role == "ROLE_VISION_TECHNICIAN") {
-    return MiniAppInjectionModelRole.VISION_TECHNICIAN;
-  } else if (role == "ROLE_VISION_GUARDIAN") {
-    return MiniAppInjectionModelRole.VISION_GUARDIAN;
-  }
-  return null;
-}
-
 String validateMobile() {
   if (PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") {
     return "";
@@ -249,11 +209,4 @@ String validateMobile() {
   final mobileNumber = mobile.substring(3);
 
   return mobileNumber;
-}
-
-_getPateintId() {
-  final role = PersistentAuthStateService.authState.activeRole;
-  return role == "ROLE_PATIENT"
-      ? PersistentAuthStateService.authState.userId
-      : null;
 }
