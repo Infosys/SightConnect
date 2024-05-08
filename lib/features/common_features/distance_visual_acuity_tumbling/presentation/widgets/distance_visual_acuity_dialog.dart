@@ -258,8 +258,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
     await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
     navigator
       ..pop()
-      ..pop()
-      ..pop()
+    
       ..pop()
       ..pop();
   }
@@ -281,7 +280,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       (failure) {
         Fluttertoast.showToast(
             msg: "Failed to update observation at this moment");
-        ref.read(resetProvider).reset();
+       
         navigator
           ..pop()
           ..pop()
@@ -295,18 +294,29 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       },
       (result) {
         Fluttertoast.showToast(msg: "Observation Updated");
+         
+        navigator
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop();
       },
     );
 
-    navigator
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop()
-      ..pop();
+    // navigator
+    //   ..pop()
+    //   ..pop()
+    //   ..pop()
+    //   ..pop()
+    //   ..pop()
+    //   ..pop()
+    //   ..pop()
+    //   ..pop()
+    //   ..pop();
   }
 }

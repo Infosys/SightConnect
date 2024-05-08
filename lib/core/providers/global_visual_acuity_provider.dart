@@ -16,11 +16,19 @@ class GlobalVisualAcuityProvider extends ChangeNotifier {
   String _distanceRightEyeValue = "";
   String _distanceBothEyeValue = "";
 
+  int? _dignosticReportID;
+
   String get distanceLeftEyeValue => _distanceLeftEyeValue;
   String get distanceRightEyeValue => _distanceRightEyeValue;
   String get distanceBothEyeValue => _distanceBothEyeValue;
+  int get dignosticReportID => _dignosticReportID!;
 
   bool get isThreeMeter => _isThreeMeter;
+
+  void setDiagnosticReportID(int value) {
+    _dignosticReportID = value;
+    notifyListeners();
+  }
 
   void setThreeMeter(bool value) {
     _isThreeMeter = value;

@@ -25,7 +25,7 @@ class DistanceVisualAcuityFaceDistancePage extends StatelessWidget {
             distance != null && distance >= 35 && distance <= 45;
         return Scaffold(
           appBar: CustomAppbar(
-            title: Text(loc.vaDistanceToFace),
+            title: Text("Distance to face - Long Distance"),
             leadingIcon: IconButton(
               splashRadius: 20,
               onPressed: () {

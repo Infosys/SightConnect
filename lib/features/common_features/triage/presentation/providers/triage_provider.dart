@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'package:eye_care_for_all/features/common_features/distance_visual_acuity_tumbling/data/source/local/distance_tumbling_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -375,6 +376,7 @@ class TriageReset extends ChangeNotifier {
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
     ref.invalidate(distanceTumblingTestProvider);
+    ref.invalidate(distancetumblingLocalSource);
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
     notifyListeners();

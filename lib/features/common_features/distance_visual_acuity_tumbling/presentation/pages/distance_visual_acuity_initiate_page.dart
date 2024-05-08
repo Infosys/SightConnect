@@ -20,14 +20,14 @@ import '../widgets/distance_swipe_gesture_card.dart';
 import '../widgets/distance_top_reading_card.dart';
 
 class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
-  static const String routeName = "/tumbling-test-initiate";
+  static const String routeName = "/distance-tumbling-test-initiate";
   const DistanceVisualAcuityInitiatePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
-   
+
     return PopScope(
       canPop: false,
       onPopInvoked: (value) async {
@@ -47,7 +47,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
         }
       },
       child: TraceableWidget(
-        actionName: 'VisualAcuity Test',
+        actionName: 'Distance VisualAcuity Test',
         child: PopScope(
           canPop: false,
           child: Scaffold(
@@ -76,7 +76,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                     titleSpacing: 0,
                     actions: const [],
                     centerTitle: false,
-                    title: Text(context.loc!.visualAcuityTitle),
+                    title: const Text("Visual Acuity Test - Long Distance"),
                   )
                 : CustomAppbar(
                     leadingWidth: 60,
@@ -109,7 +109,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                       ),
                     ),
                     title: Text(
-                      context.loc!.visualAcuityTitle,
+                      "Visual Acuity Test - Long Distance",
                       style: applyFiraSansFont(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

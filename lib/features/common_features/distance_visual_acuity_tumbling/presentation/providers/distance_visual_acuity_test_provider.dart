@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
 
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
@@ -42,6 +43,7 @@ var distanceTumblingTestProvider = ChangeNotifierProvider(
     ref.watch(triageRepositoryProvider),
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
+    ref,
   ),
 );
 
@@ -52,12 +54,14 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   TriageRepository triageRepositoryProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
+  final Ref _ref;
   DistanceVisualAcuityTestProvider(
       this._dataSource,
       this.triageLocalSourceProvider,
       this.triageRepositoryProvider,
       this._triageReportRepository,
-      this._triageUrgencyRepository) {
+      this._triageUrgencyRepository,
+      this._ref) {
     startGame(Eye.right);
   }
   late Level? _level;
@@ -96,12 +100,16 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
 
     if (eye == Eye.left) {
       _currentMaxLevelLeftEye = 0;
+      logger.d("maxLevelLeftEye ansm casmsannasm : $_currentMaxLevelLeftEye");
     }
     if (eye == Eye.right) {
       _currentMaxLevelRightEye = 0;
+      logger.d(
+          "maxLevelRightEye isd asdmnsa dmn asdnm sand : $_currentMaxLevelRightEye");
     }
     if (eye == Eye.both) {
       _currentMaxLevelBothEye = 0;
+      logger.d("maxLevelBothEye sadkjasnn cans na : $_currentMaxLevelBothEye");
     }
 
     _singleEyeReport = {};
@@ -194,7 +202,11 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
 
   void _moveToNextLevel() {
     if (currentEye == Eye.left) {
+      logger.f(
+          " move to next level : currentMaxLevelLeftEye: $_currentMaxLevelLeftEye");
       _currentMaxLevelLeftEye = _currentMaxLevelLeftEye! + 1;
+      logger.f(
+          "after +1 operation : _currentMaxLevelLeftEye: $_currentMaxLevelLeftEye");
     } else if (currentEye == Eye.right) {
       _currentMaxLevelRightEye = _currentMaxLevelRightEye! + 1;
     } else if (currentEye == Eye.both) {
@@ -251,7 +263,10 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   }
 
   double calculateEyeSight(Eye eye) {
+    logger.f(
+        "maxLevelLeftEye: $_currentMaxLevelLeftEye, maxLevelRightEye: $_currentMaxLevelRightEye, maxLevelBothEye: $_currentMaxLevelBothEye");
     if (eye == Eye.left) {
+      logger.f("inside calculateEyeSight Left");
       var maxLevelNew = math.max(_currentMaxLevelLeftEye! - 1, 0);
       logger.d("maxLevelNew Left: $maxLevelNew");
 
@@ -294,6 +309,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   /// set patient vision acuity tumbling based on the TriageAssessment model
   Future<List<PostTriageObservationsModel>>
       getVisionAcuityTumblingResponse() async {
+    logger.f("inside getVisionAcuityTumblingResponse");
     double leftEyeSight = calculateEyeSight(Eye.left);
     double rightEyeSight = calculateEyeSight(Eye.right);
     double bothEyeSight = calculateEyeSight(Eye.both);
@@ -394,23 +410,25 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
     try {
+     final int drId = _ref.read(globalVisualAcuityProvider).dignosticReportID;
       logger.f("inside updateVisualAcuityTumblingResponse");
       final distanceVisionAcuityTumblingResponse =
           await getVisionAcuityTumblingResponse();
-          logger.f("distanceVisionAcuityTumblingResponse: $distanceVisionAcuityTumblingResponse");
+      logger.f(
+          "distanceVisionAcuityTumblingResponse: $distanceVisionAcuityTumblingResponse");
       final shortDistanceTumblingResponse =
           await triageLocalSourceProvider.getVisionAcuityTumblingResponse();
-        logger.f("shortDistanceTumblingResponse: $shortDistanceTumblingResponse");
+      logger.f("shortDistanceTumblingResponse: $shortDistanceTumblingResponse");
 
       final visionAcuityTumblingResponse = [
         ...distanceVisionAcuityTumblingResponse,
         ...shortDistanceTumblingResponse,
       ];
-      final reportModel = await getTriageReportByReportId(diagnosticReportId!);
+      final reportModel = await getTriageReportByReportId(drId);
 
       if (reportModel == null) {
         throw ServerFailure(
-            errorMessage: "Could not fetch report of id $diagnosticReportId");
+            errorMessage: "Could not fetch report of id $drId");
       }
 
       TriageUpdateModel triage = TriageUpdateModel(
