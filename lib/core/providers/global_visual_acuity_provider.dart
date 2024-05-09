@@ -9,21 +9,17 @@ var globalVisualAcuityProvider = ChangeNotifierProvider((ref) {
 
 class GlobalVisualAcuityProvider extends ChangeNotifier {
   bool _isShortDistanceTest = true;
-  bool get isShortDistanceTest => _isShortDistanceTest;
   bool _isThreeMeter = true;
-
-  String _distanceLeftEyeValue = "";
-  String _distanceRightEyeValue = "";
-  String _distanceBothEyeValue = "";
-
   int? _dignosticReportID;
 
-  String get distanceLeftEyeValue => _distanceLeftEyeValue;
-  String get distanceRightEyeValue => _distanceRightEyeValue;
-  String get distanceBothEyeValue => _distanceBothEyeValue;
-  int get dignosticReportID => _dignosticReportID!;
+  //////////////////////////////////////////////////////////
 
+  bool get isShortDistanceTest => _isShortDistanceTest;
+  int get dignosticReportID => _dignosticReportID!;
   bool get isThreeMeter => _isThreeMeter;
+
+
+  /////////////////////////////////////////////////////////
 
   void setDiagnosticReportID(int value) {
     _dignosticReportID = value;
@@ -32,21 +28,6 @@ class GlobalVisualAcuityProvider extends ChangeNotifier {
 
   void setThreeMeter(bool value) {
     _isThreeMeter = value;
-    notifyListeners();
-  }
-
-  void setDistanceLeftEyeValue(String value) {
-    _distanceLeftEyeValue = value;
-    notifyListeners();
-  }
-
-  void setDistanceRightEyeValue(String value) {
-    _distanceRightEyeValue = value;
-    notifyListeners();
-  }
-
-  void setDistanceBothEyeValue(String value) {
-    _distanceBothEyeValue = value;
     notifyListeners();
   }
 

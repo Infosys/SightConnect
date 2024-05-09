@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
-import 'package:eye_care_for_all/features/common_features/distance_visual_acuity_tumbling/data/source/local/distance_tumbling_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/data/local/tumbling_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -21,13 +21,13 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
+import '../../../visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
 import '../../domain/usecases/get_distance_visual_acuity_response_locally_usecase.dart';
 
@@ -376,7 +376,7 @@ class TriageReset extends ChangeNotifier {
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
     ref.invalidate(distanceTumblingTestProvider);
-    ref.invalidate(distancetumblingLocalSource);
+    ref.invalidate(tumblingLocalSource);
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
     notifyListeners();

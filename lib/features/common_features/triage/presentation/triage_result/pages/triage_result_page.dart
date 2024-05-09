@@ -4,12 +4,12 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
 
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
-import 'package:eye_care_for_all/features/common_features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_image_card.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
