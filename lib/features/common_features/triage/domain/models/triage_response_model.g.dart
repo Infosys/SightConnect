@@ -9,16 +9,16 @@ part of 'triage_response_model.dart';
 _$TriageResponseModelImpl _$$TriageResponseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TriageResponseModelImpl(
-      patientId: json['patientId'] as int?,
-      encounterId: json['encounterId'] as int?,
+      patientId: (json['patientId'] as num?)?.toInt(),
+      encounterId: (json['encounterId'] as num?)?.toInt(),
       serviceType:
           $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
-      organizationCode: json['organizationCode'] as int?,
-      tenantCode: json['tenantCode'] as int?,
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
+      tenantCode: (json['tenantCode'] as num?)?.toInt(),
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      assessmentCode: json['assessmentCode'] as int?,
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentVersion: json['assessmentVersion'] as String?,
       issued: json['issued'] == null
           ? null
@@ -91,7 +91,7 @@ const _$SourceEnumMap = {
 _$PostQuestionResponseModelImpl _$$PostQuestionResponseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PostQuestionResponseModelImpl(
-      linkId: json['linkId'] as int?,
+      linkId: (json['linkId'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
       answers: (json['answers'] as List<dynamic>?)
           ?.map((e) => PostAnswerModel.fromJson(e as Map<String, dynamic>))
@@ -111,7 +111,7 @@ _$PostAnswerModelImpl _$$PostAnswerModelImplFromJson(
     _$PostAnswerModelImpl(
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
-      answerCode: json['answerCode'] as int?,
+      answerCode: (json['answerCode'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PostAnswerModelImplToJson(
@@ -125,7 +125,7 @@ Map<String, dynamic> _$$PostAnswerModelImplToJson(
 _$PerformerModelImpl _$$PerformerModelImplFromJson(Map<String, dynamic> json) =>
     _$PerformerModelImpl(
       role: $enumDecodeNullable(_$PerformerRoleEnumMap, json['role']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PerformerModelImplToJson(
@@ -148,7 +148,7 @@ const _$PerformerRoleEnumMap = {
 _$IncompleteTestModelImpl _$$IncompleteTestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$IncompleteTestModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       testName: $enumDecodeNullable(_$TestNameEnumMap, json['testName']),
     );
 
@@ -168,7 +168,7 @@ const _$TestNameEnumMap = {
 _$PostImagingSelectionModelImpl _$$PostImagingSelectionModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PostImagingSelectionModelImpl(
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
       endpoint: json['endpoint'] as String?,
       baseUrl: json['baseUrl'] as String?,
       score: (json['score'] as num?)?.toDouble(),
@@ -196,7 +196,7 @@ const _$BodySiteEnumMap = {
 _$PostObservationsModelImpl _$$PostObservationsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PostObservationsModelImpl(
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
     );

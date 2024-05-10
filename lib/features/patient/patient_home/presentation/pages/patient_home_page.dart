@@ -81,7 +81,7 @@ class PatientHomePage extends ConsumerWidget {
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: AppSize.kl * 4),
+                SizedBox(height: AppSize.kl * 5),
 
                 // const SizedBox(height: AppSize.km),
                 // PriorityNotificationList(),
@@ -89,7 +89,7 @@ class PatientHomePage extends ConsumerWidget {
 
                 SizedBox(height: AppSize.km),
                 TriageTestCard(),
-                SizedBox(height: AppSize.km),
+                SizedBox(height: AppSize.kl),
                 HelplineCard(helpLine: AppInfoService.tollFreeNumber),
                 SizedBox(height: AppSize.km),
 

@@ -43,24 +43,22 @@ class MyConnectionsList extends ConsumerWidget {
     WidgetRef ref,
   ) {
     final loc = context.loc!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
-              child: Text(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
                 loc.myConnectionsTitle,
                 style: applyFiraSansFont(
                   fontSize: 18,
                 ),
               ),
-            ),
-            Flexible(
-              child: TextButton(
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -77,59 +75,50 @@ class MyConnectionsList extends ConsumerWidget {
                     color: AppColor.blue,
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
-        const SizedBox(height: AppSize.ks),
-        (connectionsList == null || connectionsList.isEmpty)
-            ? Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.km,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: AppSize.km),
-                        child: MyConnectionsCard(
-                          image: ref
-                              .read(globalPatientProvider)
-                              .activeUser!
-                              .profile!
-                              .patient!
-                              .profilePhoto,
-                          name: ref
-                              .read(globalPatientProvider)
-                              .activeUser!
-                              .profile!
-                              .patient!
-                              .name!
-                              .split(" ")[0],
-                          index: 0,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: AppSize.km,
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Positioned(
-                        child: Text(
-                          'Click the Add Members button to add your family and friends.',
-                          style: applyRobotoFont(
-                            fontSize: 12,
-                            color: AppColor.grey,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
               )
-            : Row(
+            ],
+          ),
+          const SizedBox(height: AppSize.km),
+          () {
+            if (connectionsList == null || connectionsList.isEmpty) {
+              /// if user has no family members
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: MyConnectionsCard(
+                      image: ref
+                          .read(globalPatientProvider)
+                          .activeUser!
+                          .profile!
+                          .patient!
+                          .profilePhoto,
+                      name: ref
+                          .read(globalPatientProvider)
+                          .activeUser!
+                          .profile!
+                          .patient!
+                          .name!
+                          .split(" ")[0],
+                      index: 0,
+                    ),
+                  ),
+                  const SizedBox(width: AppSize.km),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      'Click the Add Members button to add your family and friends.',
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              /// if user has family members
+              return Row(
                 children: [
                   Flexible(
                     child: SingleChildScrollView(
@@ -210,8 +199,11 @@ class MyConnectionsList extends ConsumerWidget {
                     ),
                   ),
                 ],
-              ),
-      ],
+              );
+            }
+          }(),
+        ],
+      ),
     );
   }
 }

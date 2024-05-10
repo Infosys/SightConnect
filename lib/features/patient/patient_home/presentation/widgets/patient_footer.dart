@@ -57,10 +57,9 @@ class PatientFooter extends HookWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(
-                          left: AppSize.km,
-                          top: AppSize.km,
-                          right: AppSize.width(context) * 0.3,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSize.km,
+                          vertical: AppSize.km,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

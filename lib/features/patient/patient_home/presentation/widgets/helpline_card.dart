@@ -16,9 +16,7 @@ class HelplineCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // final loc = context.loc!;
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.km,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSize.km,
@@ -55,8 +53,8 @@ class HelplineCard extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   AppIcon.call,
-                  height: 16,
-                  width: 16,
+                  height: 12,
+                  width: 12,
                   colorFilter: const ColorFilter.mode(
                     AppColor.white,
                     BlendMode.srcIn,

@@ -9,8 +9,8 @@ part of 'triage_response_dto.dart';
 _$TriageResponseDtoImpl _$$TriageResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$TriageResponseDtoImpl(
-      id: json['id'] as int?,
-      assessmentCode: json['assessmentCode'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentVersion: json['assessmentVersion'] as String?,
       category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
       code: $enumDecodeNullable(_$TestCodeEnumMap, json['code']),
@@ -19,7 +19,7 @@ _$TriageResponseDtoImpl _$$TriageResponseDtoImplFromJson(
           const TimestampConverter().fromJson(json['userStartDate'] as String?),
       source: $enumDecodeNullable(_$SourceEnumMap, json['source']),
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
-      subject: json['subject'] as int?,
+      subject: (json['subject'] as num?)?.toInt(),
       observationSeverity:
           $enumDecodeNullable(_$SeverityEnumMap, json['observationSeverity']),
       questionResponseSeverity: $enumDecodeNullable(
@@ -30,7 +30,7 @@ _$TriageResponseDtoImpl _$$TriageResponseDtoImplFromJson(
           $enumDecodeNullable(_$SeverityEnumMap, json['cumulativeSeverity']),
       sourceVersion: json['sourceVersion'] as String?,
       isDeleted: json['isDeleted'] as bool?,
-      performerId: json['performerId'] as int?,
+      performerId: (json['performerId'] as num?)?.toInt(),
       performerRole:
           $enumDecodeNullable(_$PerformerRoleEnumMap, json['performerRole']),
       incompleteTests: (json['incompleteTests'] as List<dynamic>?)
@@ -140,7 +140,7 @@ const _$PerformerRoleEnumMap = {
 
 _$IncompleteTestImpl _$$IncompleteTestImplFromJson(Map<String, dynamic> json) =>
     _$IncompleteTestImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       testName: $enumDecodeNullable(_$TestTypeEnumMap, json['testName']),
     );
 
@@ -159,11 +159,11 @@ const _$TestTypeEnumMap = {
 
 _$ResponseImpl _$$ResponseImplFromJson(Map<String, dynamic> json) =>
     _$ResponseImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       authored:
           const TimestampConverter().fromJson(json['authored'] as String?),
-      linkId: json['linkId'] as int?,
-      score: json['score'] as int?,
+      linkId: (json['linkId'] as num?)?.toInt(),
+      score: (json['score'] as num?)?.toInt(),
       author: json['author'] == null
           ? null
           : Author.fromJson(json['author'] as Map<String, dynamic>),
@@ -183,9 +183,9 @@ Map<String, dynamic> _$$ResponseImplToJson(_$ResponseImpl instance) =>
     };
 
 _$AuthorImpl _$$AuthorImplFromJson(Map<String, dynamic> json) => _$AuthorImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       type: $enumDecodeNullable(_$AuthorTypeEnumMap, json['type']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$AuthorImplToJson(_$AuthorImpl instance) =>
@@ -200,9 +200,9 @@ const _$AuthorTypeEnumMap = {
 };
 
 _$AnswerImpl _$$AnswerImplFromJson(Map<String, dynamic> json) => _$AnswerImpl(
-      id: json['id'] as int?,
-      score: json['score'] as int?,
-      answerCode: json['answerCode'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      score: (json['score'] as num?)?.toInt(),
+      answerCode: (json['answerCode'] as num?)?.toInt(),
       value: json['value'] as String?,
     );
 
@@ -216,14 +216,14 @@ Map<String, dynamic> _$$AnswerImplToJson(_$AnswerImpl instance) =>
 
 _$ObservationImpl _$$ObservationImplFromJson(Map<String, dynamic> json) =>
     _$ObservationImpl(
-      id: json['id'] as int?,
-      performer: json['performer'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      performer: (json['performer'] as num?)?.toInt(),
       issued: json['issued'] as String?,
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
       interpretation:
           $enumDecodeNullable(_$SeverityEnumMap, json['interpretation']),
       value: json['value'] as String?,
-      score: json['score'] as int?,
+      score: (json['score'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$ObservationImplToJson(_$ObservationImpl instance) =>
@@ -238,14 +238,14 @@ Map<String, dynamic> _$$ObservationImplToJson(_$ObservationImpl instance) =>
     };
 
 _$MediaImpl _$$MediaImplFromJson(Map<String, dynamic> json) => _$MediaImpl(
-      id: json['id'] as int?,
-      performer: json['performer'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      performer: (json['performer'] as num?)?.toInt(),
       issued: const TimestampConverter().fromJson(json['issued'] as String?),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
       baseUrl: json['baseUrl'] as String?,
       endpoint: json['endpoint'] as String?,
       bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
-      score: json['score'] as int?,
+      score: (json['score'] as num?)?.toInt(),
       fileId: json['fileId'] as String?,
     );
 
@@ -270,16 +270,16 @@ const _$BodySiteEnumMap = {
 
 _$EncounterImpl _$$EncounterImplFromJson(Map<String, dynamic> json) =>
     _$EncounterImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       uuid: json['uuid'] as String?,
-      serviceProvider: json['serviceProvider'] as int?,
-      subject: json['subject'] as int?,
+      serviceProvider: (json['serviceProvider'] as num?)?.toInt(),
+      subject: (json['subject'] as num?)?.toInt(),
       serviceType:
           $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
       isDeleted: json['isDeleted'] as bool?,
       remarks: json['remarks'] as String?,
-      performerReference: json['performerReference'] as int?,
+      performerReference: (json['performerReference'] as num?)?.toInt(),
       period: json['period'] == null
           ? null
           : Period.fromJson(json['period'] as Map<String, dynamic>),
@@ -308,7 +308,7 @@ const _$ServiceTypeEnumMap = {
 };
 
 _$PeriodImpl _$$PeriodImplFromJson(Map<String, dynamic> json) => _$PeriodImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       start: const TimestampConverter().fromJson(json['start'] as String?),
       end: const TimestampConverter().fromJson(json['end'] as String?),
     );

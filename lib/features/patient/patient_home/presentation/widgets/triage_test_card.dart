@@ -85,7 +85,7 @@ class TriageTestCard extends HookConsumerWidget {
                 //         imagePath: "assets/icons/eye_scan.svg", name: ""),
                 //   ],
                 // ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 Flexible(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
