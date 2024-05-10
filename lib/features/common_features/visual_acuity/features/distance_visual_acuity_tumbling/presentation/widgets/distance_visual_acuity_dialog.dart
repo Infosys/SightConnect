@@ -3,8 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -15,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../../triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../pages/distance_visual_acuity_result_page.dart';
@@ -257,7 +256,6 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
     await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
     navigator
       ..pop()
-    
       ..pop()
       ..pop();
   }
@@ -279,7 +277,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       (failure) {
         Fluttertoast.showToast(
             msg: "Failed to update observation at this moment");
-       
+
         navigator
           ..pop()
           ..pop()
@@ -293,7 +291,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
       },
       (result) {
         Fluttertoast.showToast(msg: "Observation Updated");
-         
+
         navigator
           ..pop()
           ..pop()

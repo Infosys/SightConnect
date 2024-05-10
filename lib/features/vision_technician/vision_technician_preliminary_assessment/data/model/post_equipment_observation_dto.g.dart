@@ -9,8 +9,8 @@ part of 'post_equipment_observation_dto.dart';
 _$PostEquipmentObservationDtoImpl _$$PostEquipmentObservationDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$PostEquipmentObservationDtoImpl(
-      drId: json['drId'] as int?,
-      encounterId: json['encounterId'] as int?,
+      drId: (json['drId'] as num?)?.toInt(),
+      encounterId: (json['encounterId'] as num?)?.toInt(),
       serviceProvider: json['serviceProvider'] as String?,
       equipmentObservationValues:
           (json['equipmentObservationValues'] as List<dynamic>?)
@@ -32,7 +32,7 @@ Map<String, dynamic> _$$PostEquipmentObservationDtoImplToJson(
 _$EquipmentObservationValueImpl _$$EquipmentObservationValueImplFromJson(
         Map<String, dynamic> json) =>
     _$EquipmentObservationValueImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       identifier: json['identifier'] as String?,
       observationCategory: $enumDecodeNullable(
           _$ObservationCategoryEnumMap, json['observationCategory']),
@@ -46,8 +46,8 @@ _$EquipmentObservationValueImpl _$$EquipmentObservationValueImplFromJson(
       specimenType:
           $enumDecodeNullable(_$SpecimenTypeEnumMap, json['specimenType']),
       severity: $enumDecodeNullable(_$SeverityEnumMap, json['severity']),
-      score: json['score'] as int?,
-      performer: json['performer'] as int?,
+      score: (json['score'] as num?)?.toInt(),
+      performer: (json['performer'] as num?)?.toInt(),
       serviceProviderUnit: json['serviceProviderUnit'] as String?,
       additionalInfo: json['additionalInfo'] as String?,
     );

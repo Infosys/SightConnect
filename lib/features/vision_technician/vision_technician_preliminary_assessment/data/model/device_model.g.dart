@@ -8,14 +8,14 @@ part of 'device_model.dart';
 
 _$DeviceModelImpl _$$DeviceModelImplFromJson(Map<String, dynamic> json) =>
     _$DeviceModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       identifier: json['identifier'] as String?,
       displayName: json['displayName'] as String?,
       definition: json['definition'] as String?,
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
       testCategory:
           $enumDecodeNullable(_$TestCategoryEnumMap, json['testCategory']),
-      priority: json['priority'] as int?,
+      priority: (json['priority'] as num?)?.toInt(),
       availabilityStatus: $enumDecodeNullable(
           _$AvailabilityStatusEnumMap, json['availabilityStatus']),
       manufacturer: json['manufacturer'] as String?,
@@ -78,7 +78,7 @@ const _$AvailabilityStatusEnumMap = {
 _$DeviceObservationImpl _$$DeviceObservationImplFromJson(
         Map<String, dynamic> json) =>
     _$DeviceObservationImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       unitType: $enumDecodeNullable(_$UnitTypeEnumMap, json['unitType']),
       inputType: $enumDecodeNullable(_$InputTypeEnumMap, json['inputType']),
       rangeMin: json['rangeMin'] as String?,

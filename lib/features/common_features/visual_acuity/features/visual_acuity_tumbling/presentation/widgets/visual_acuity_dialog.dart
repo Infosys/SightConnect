@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import '../../../../../triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
 import 'visual_acuity_tumbling_overlay.dart';
@@ -211,7 +211,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                               try {
                                 isLoading.value = true;
                                 isAcuityDialog.state = true;
-                                
+
                                 ref
                                     .read(globalVisualAcuityProvider)
                                     .setShortDistanceTest(false);
@@ -220,15 +220,13 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                                   stepper.goToNextStep();
                                   logger.d("Triage Mode");
                                   await _saveTriageMode(ref, navigator);
-                                   
                                 } else if (global.isStandaloneMode()) {
                                   logger.d("Standalone Mode");
                                   _saveStandAloneMode(navigator);
                                 } else {
                                   logger.d("Update Mode");
-                                   stepper.goToNextStep();
+                                  stepper.goToNextStep();
                                   await _saveUpdateMode(ref, navigator);
-                                  
                                 }
                                 isLoading.value = false;
                               } catch (e) {

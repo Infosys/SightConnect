@@ -235,8 +235,6 @@ const _$ObservationCategoryEnumMap = {
 
 const _$ObservationCodeEnumMap = {
   ObservationCode.Eye: 'Eye',
-  ObservationCode.LOGMAR_NEAR: 'LOGMAR_NEAR',
-  ObservationCode.LOGMAR_DISTANT: 'LOGMAR_DISTANT',
   ObservationCode.Sight: 'Sight',
   ObservationCode.Testing: 'Testing',
   ObservationCode.LOGMAR_NEAR: 'LOGMAR_NEAR',

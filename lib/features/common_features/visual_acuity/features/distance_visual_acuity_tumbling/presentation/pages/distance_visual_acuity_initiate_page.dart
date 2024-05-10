@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/wi
 import 'package:eye_care_for_all/features/common_features/visual_acuity/widgets/swipe_gesture_card.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/widgets/top_reading_card.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';

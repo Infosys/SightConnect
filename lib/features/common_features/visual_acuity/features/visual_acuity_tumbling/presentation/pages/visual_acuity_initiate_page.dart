@@ -10,7 +10,7 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
@@ -141,7 +141,6 @@ class _VisualAcuityInitiatePageState
                   ),
             body: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
-
                 ref.listen(tumblingTestProvider, (previous, next) async {
                   if (next.currentEye == Eye.right && next.isGameOver!) {
                     logger.d("Game Over for right eye");
@@ -225,9 +224,7 @@ class _VisualAcuityInitiatePageState
                               distanceText:
                                   distanceData.getDistanceText(context),
                             )
-                          : const TouchGestureCard(
-                          
-                          ),
+                          : const TouchGestureCard(),
                     ),
                   ],
                 );
