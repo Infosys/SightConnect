@@ -13,7 +13,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'distance_visual_acuity_face_distance_page.dart';
+import '../../../../widgets/distance_visual_acuity_face_distance_page.dart';
+import 'distance_visual_acuity_distance_selection_page.dart';
 import 'distance_visual_acutiy_instruction_page.dart';
 
 class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
@@ -91,7 +92,7 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                 ),
                 title: Text(
-                   "Visual Acuity Test - Long Distance",
+                  "Visual Acuity Test - Long Distance",
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -128,8 +129,18 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const DistanceVisualAcuityFaceDistancePage(),
+                      builder: (context) =>  VisualAcuityFaceDistancePage(
+                        minDistance: 35,
+                        maxDistance: 45,
+                        onProceed: (){
+                               Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DistanceVisualAcuityDistanceSelectionPage(),
+                                    ),
+                                  );
+                        }
+                      ),
                     ),
                   );
                 },

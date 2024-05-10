@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_face_distance_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,9 @@ import '../../../../../../../core/constants/app_size.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../../../../../shared/widgets/app_toast.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
+import '../../../../widgets/distance_visual_acuity_face_distance_page.dart';
 import '../widgets/visual_acuity_tumbling_overlay.dart';
+import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
 class VisualAcuityDemoPage extends HookConsumerWidget {
   const VisualAcuityDemoPage({super.key});
@@ -137,11 +138,19 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                       }
                     } else if (countValue.value == 3) {
                       if (dragDirection.value == QuestionDirection.right) {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const VisualAcuityFaceDistancePage(),
+                            builder: (context) => VisualAcuityFaceDistancePage(
+                                minDistance: 35,
+                                maxDistance: 45,
+                                onProceed: () {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VisualAcuityTumblingLeftEyeInstruction(),
+                                    ),
+                                  );
+                                }),
                           ),
                         );
                       }
@@ -225,11 +234,21 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                   offset: const Offset(20, -40),
                                   child: OutlinedButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                        context,
+                                      Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const VisualAcuityFaceDistancePage(),
+                                              VisualAcuityFaceDistancePage(
+                                                  minDistance: 35,
+                                                  maxDistance: 45,
+                                                  onProceed: () {
+                                                    Navigator.of(context)
+                                                        .pushReplacement(
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const VisualAcuityTumblingLeftEyeInstruction(),
+                                                      ),
+                                                    );
+                                                  }),
                                         ),
                                       );
                                     },

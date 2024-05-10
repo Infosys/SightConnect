@@ -20,7 +20,6 @@ import '../../../../../triage/presentation/providers/triage_stepper_provider.dar
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../pages/distance_visual_acuity_result_page.dart';
 import '../providers/distance_visual_acuity_test_provider.dart';
-import 'distance_visual_acuity_tumbling_overlay.dart';
 
 class DistanceVisualAcuityDialog {
   DistanceVisualAcuityDialog._();
@@ -202,9 +201,9 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                           WidgetRef ref,
                           Widget? child,
                         ) {
-                          final isAcuityDialog = ref.read(
-                              distancevisualAcuityTumblingTestDialogProvider
-                                  .notifier);
+                          // final isAcuityDialog = ref.read(
+                          //     distancevisualAcuityTumblingTestDialogProvider
+                          //         .notifier);
                           final stepper = ref.read(triageStepperProvider);
 
                           return TextButton(
@@ -212,7 +211,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                               var navigator = Navigator.of(context);
                               try {
                                 isLoading.value = true;
-                                isAcuityDialog.state = true;
+                                // isAcuityDialog.state = true;
 
                                 ref
                                     .read(globalVisualAcuityProvider)

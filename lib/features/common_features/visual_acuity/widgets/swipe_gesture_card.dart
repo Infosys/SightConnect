@@ -11,11 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:path/path.dart';
+
 
 import '../domain/enums/tumbling_enums.dart';
-import '../providers/distance_notifier_provider.dart';
-import '../features/distance_visual_acuity_tumbling/presentation/widgets/distance_visual_acuity_dialog.dart';
+
 
 class SharedSwipeGestureCard extends HookConsumerWidget {
   const SharedSwipeGestureCard(
