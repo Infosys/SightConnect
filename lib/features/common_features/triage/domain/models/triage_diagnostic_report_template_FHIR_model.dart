@@ -290,6 +290,7 @@ class QuestionnaireItemFHIRModel with _$QuestionnaireItemFHIRModel {
     AnswerConstraint? answerConstraint,
     AnswerValueSetModel? ansewrValueSet,
     AnswerModel? initial,
+    String? quesExplanationText,
     QuestionnaireModel? questionnaire,
     QuestionnaireItemModel? questionnaireItem,
     List<ActionOnModel>? actionOn,

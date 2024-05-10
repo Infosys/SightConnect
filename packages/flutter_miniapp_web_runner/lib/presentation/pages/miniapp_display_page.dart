@@ -110,8 +110,7 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 onReceivedServerTrustAuthRequest:
                     (controller, challenge) async {
                   return ServerTrustAuthResponse(
-                    action: ServerTrustAuthResponseAction.PROCEED,
-                  );
+                      action: ServerTrustAuthResponseAction.PROCEED);
                 },
                 initialSettings: settings,
                 pullToRefreshController: pullToRefreshController,

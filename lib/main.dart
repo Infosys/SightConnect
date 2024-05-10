@@ -15,6 +15,7 @@ import 'core/services/matomo_logger.dart';
 import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
+bool visionAcuityIsSwipeMode = false;
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
