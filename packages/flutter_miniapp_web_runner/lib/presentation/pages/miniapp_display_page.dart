@@ -1,4 +1,5 @@
 import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_miniapp_web_runner/presentation/server/user_script.dart';
-
 import 'package:logger/logger.dart';
 
 class MiniAppDisplayPage extends StatefulWidget {
@@ -107,6 +107,12 @@ class _MiniAppDisplayPageState extends State<MiniAppDisplayPage> {
                 initialUrlRequest: URLRequest(
                   url: WebUri(widget.miniapp.sourceurl),
                 ),
+                onReceivedServerTrustAuthRequest:
+                    (controller, challenge) async {
+                  return ServerTrustAuthResponse(
+                    action: ServerTrustAuthResponseAction.PROCEED,
+                  );
+                },
                 initialSettings: settings,
                 pullToRefreshController: pullToRefreshController,
                 onWebViewCreated: (controller) {
