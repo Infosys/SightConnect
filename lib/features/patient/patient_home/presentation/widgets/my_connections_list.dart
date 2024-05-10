@@ -3,8 +3,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_card.dart';
+import 'package:eye_care_for_all/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -43,24 +43,22 @@ class MyConnectionsList extends ConsumerWidget {
     WidgetRef ref,
   ) {
     final loc = context.loc!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
-              child: Text(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
                 loc.myConnectionsTitle,
                 style: applyFiraSansFont(
                   fontSize: 18,
                 ),
               ),
-            ),
-            Flexible(
-              child: TextButton(
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -69,7 +67,7 @@ class MyConnectionsList extends ConsumerWidget {
                   );
                 },
                 child: Text(
-                  loc.seeAllButton,
+                  'Add Members',
                   maxLines: 1,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -77,81 +75,50 @@ class MyConnectionsList extends ConsumerWidget {
                     color: AppColor.blue,
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
-        const SizedBox(height: AppSize.ks),
-        (connectionsList == null || connectionsList.isEmpty)
-            ? Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.km + 10,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Transform.translate(
-                          offset: const Offset(0, 10),
-                          child: InkWell(
-                            customBorder: const CircleBorder(),
-                            onTap: () {
-                              try {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PatientRegistrationMiniappPage(
-                                      actionType: MiniAppActionType.ADD_MEMBER,
-                                      displayName: loc.myConnectionsAddMember,
-                                    ),
-                                  ),
-                                ).then((value) {
-                                  ref.invalidate(getPatientProfileProvider);
-                                });
-                              } catch (e) {
-                                logger.d({"error": e});
-                                Fluttertoast.showToast(
-                                  msg: loc.myConnectionsServiceNotAvailable,
-                                );
-                              }
-                            },
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                border: Border.all(
-                                  color: AppColor.lightBlue,
-                                  width: 1.0,
-                                ),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.add,
-                                  color: AppColor.blue,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: AppSize.height(context) * 0.029),
-                        Text(
-                          loc.myConnectionsAdd,
-                          style: applyFiraSansFont(fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
               )
-            : Row(
+            ],
+          ),
+          const SizedBox(height: AppSize.km),
+          () {
+            if (connectionsList == null || connectionsList.isEmpty) {
+              /// if user has no family members
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: MyConnectionsCard(
+                      image: ref
+                          .read(globalPatientProvider)
+                          .activeUser!
+                          .profile!
+                          .patient!
+                          .profilePhoto,
+                      name: ref
+                          .read(globalPatientProvider)
+                          .activeUser!
+                          .profile!
+                          .patient!
+                          .name!
+                          .split(" ")[0],
+                      index: 0,
+                    ),
+                  ),
+                  const SizedBox(width: AppSize.km),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      'Click the Add Members button to add your family and friends.',
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              /// if user has family members
+              return Row(
                 children: [
                   Flexible(
                     child: SingleChildScrollView(
@@ -232,8 +199,11 @@ class MyConnectionsList extends ConsumerWidget {
                     ),
                   ),
                 ],
-              ),
-      ],
+              );
+            }
+          }(),
+        ],
+      ),
     );
   }
 }

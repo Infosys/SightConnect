@@ -9,11 +9,11 @@ part of 'assessment_timeline_view_model.dart';
 _$AssessmentTimelineViewModelImpl _$$AssessmentTimelineViewModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AssessmentTimelineViewModelImpl(
-      encounterId: json['encounterId'] as int?,
+      encounterId: (json['encounterId'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
       date: const TimestampConverter().fromJson(json['date'] as String?),
-      assessmentId: json['assessmentId'] as int?,
+      assessmentId: (json['assessmentId'] as num?)?.toInt(),
       status: json['status'] as String?,
       source: $enumDecodeNullable(_$TimelineSourceEnumMap, json['source']),
       type: json['type'] as String?,

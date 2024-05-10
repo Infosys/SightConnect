@@ -27,6 +27,7 @@ class PatientServicesPage extends ConsumerWidget {
         // loc.recentServicesEyeAssessment,
         MiniApp.APPOINTMENT,
         MiniApp.VISUAL_ACUITY_TEST,
+        MiniApp.IPLEDGE,
         // MiniApp.EYE_ASSESSMENT,
         MiniApp.CATARACT_EYE_TEST,
         MiniApp.RED_EYE_TEST,

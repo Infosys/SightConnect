@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
-import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/modals/NearByVisionCenterState.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -96,7 +95,8 @@ class NearByVisionCenterProvider
       );
 
       // Set the tenantId and organizationId to the first vision center's tenant id
-      if (SharedPreferenceService.getTenantId == null || SharedPreferenceService.getOrganizationId == null) {
+      if (SharedPreferenceService.getTenantId == null ||
+          SharedPreferenceService.getOrganizationId == null) {
         log("visionCenters tenant id is : ${visionCenters.first.tenant?.id}, and the organization id is : ${visionCenters.first.id}");
         _globalTenantProvider.setTenantId(visionCenters.first.tenant?.id);
         _globalTenantProvider.setOrganizationId(visionCenters.first.id);
@@ -109,10 +109,10 @@ class NearByVisionCenterProvider
       );
     } catch (e) {
       logger.e(e.toString());
-      final msg = DioErrorHandler.getErrorMessage(e);
+
       state = state.copyWith(
         isLoading: false,
-        errorMessage: msg,
+        errorMessage: "We are unable to fetch the nearby vision centers.",
       );
     }
   }

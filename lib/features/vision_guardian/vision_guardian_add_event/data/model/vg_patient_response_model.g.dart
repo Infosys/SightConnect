@@ -10,7 +10,7 @@ _$VisionGuardianPatientResponseModelImpl
     _$$VisionGuardianPatientResponseModelImplFromJson(
             Map<String, dynamic> json) =>
         _$VisionGuardianPatientResponseModelImpl(
-          id: json['id'] as int?,
+          id: (json['id'] as num?)?.toInt(),
           name: json['name'] as String?,
           mobile: json['mobile'] as String?,
           yearOfBirth: json['yearOfBirth'] as String?,
@@ -20,8 +20,8 @@ _$VisionGuardianPatientResponseModelImpl
           districtName: json['districtName'] as String?,
           townName: json['townName'] as String?,
           pincode: json['pincode'] as String?,
-          encounterId: json['encounterId'] as int?,
-          diagnosticReportId: json['diagnosticReportId'] as int?,
+          encounterId: (json['encounterId'] as num?)?.toInt(),
+          diagnosticReportId: (json['diagnosticReportId'] as num?)?.toInt(),
           encounterStartDate: json['encounterStartDate'] as String?,
           status: json['status'] as String?,
           category: json['category'] as String?,

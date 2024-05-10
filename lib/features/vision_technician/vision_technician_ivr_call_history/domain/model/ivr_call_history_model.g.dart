@@ -12,7 +12,7 @@ _$IvrCallHistoryModelImpl _$$IvrCallHistoryModelImplFromJson(
       patientId: json['callerIdentifier'] as String,
       name: json['callerName'] as String,
       mobile: json['callerNumber'] as String?,
-      duration: json['duration'] as int?,
+      duration: (json['duration'] as num?)?.toInt(),
       logDate: DateTime.parse(json['logDate'] as String),
       status: json['status'] as String,
       direction: json['direction'] as String,

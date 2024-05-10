@@ -58,7 +58,7 @@ Map<String, dynamic> _$$ProfileModelImplToJson(_$ProfileModelImpl instance) =>
 
 _$PatientModelImpl _$$PatientModelImplFromJson(Map<String, dynamic> json) =>
     _$PatientModelImpl(
-      patientId: json['patientId'] as int?,
+      patientId: (json['patientId'] as num?)?.toInt(),
       registryRef: json['registryRef'] as String?,
       abhaNumber: json['abhaNumber'] as String?,
       abhaAddress: json['abhaAddress'] as String?,
@@ -74,9 +74,9 @@ _$PatientModelImpl _$$PatientModelImplFromJson(Map<String, dynamic> json) =>
       dayOfBirth: json['dayOfBirth'] as String?,
       monthOfBirth: json['monthOfBirth'] as String?,
       yearOfBirth: json['yearOfBirth'] as String?,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       phoneNumber: json['phoneNumber'] as String?,
-      parentPatientId: json['parentPatientId'] as int?,
+      parentPatientId: (json['parentPatientId'] as num?)?.toInt(),
       address: (json['address'] as List<dynamic>?)
           ?.map((e) => AddressModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -147,7 +147,7 @@ const _$DOBSourceEnumMap = {
 
 _$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
     _$AddressModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       line: json['line'] as String?,
       district: json['district'] as String?,
       state: json['state'] as String?,
@@ -187,7 +187,7 @@ const _$AddressStatusEnumMap = {
 _$IdentifierModelImpl _$$IdentifierModelImplFromJson(
         Map<String, dynamic> json) =>
     _$IdentifierModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       type: $enumDecodeNullable(_$IdentifierTypeEnumMap, json['type']),
       value: json['value'] as String?,
     );
@@ -206,12 +206,13 @@ const _$IdentifierTypeEnumMap = {
   IdentifierType.HPR_ID: 'HPR_ID',
   IdentifierType.COUNTER_ID: 'COUNTER_ID',
   IdentifierType.MR_CODE: 'MR_CODE',
+  IdentifierType.ABHA_MOBILE: 'ABHA_MOBILE',
 };
 
 _$MedicalRecordModelImpl _$$MedicalRecordModelImplFromJson(
         Map<String, dynamic> json) =>
     _$MedicalRecordModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       registrationDate: const TimestampConverter()
           .fromJson(json['registrationDate'] as String?),
       organisationId: json['organisationId'] as String?,
@@ -229,14 +230,14 @@ Map<String, dynamic> _$$MedicalRecordModelImplToJson(
 _$RelatedPartyModelImpl _$$RelatedPartyModelImplFromJson(
         Map<String, dynamic> json) =>
     _$RelatedPartyModelImpl(
-      patientId: json['patientId'] as int?,
+      patientId: (json['patientId'] as num?)?.toInt(),
       relation:
           $enumDecodeNullable(_$FamilyRelationShipEnumMap, json['relation']),
-      parentPatientId: json['parentPatientId'] as int?,
+      parentPatientId: (json['parentPatientId'] as num?)?.toInt(),
       status: $enumDecodeNullable(_$RelatedPartyStatusEnumMap, json['status']),
       name: json['name'] as String?,
       profilePicture: json['profilePicture'] as String?,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       regRef: json['regRef'] as String?,
     );
 

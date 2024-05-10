@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
@@ -44,7 +45,7 @@ class MyConnectionsCard extends HookWidget {
                   ),
           ),
           const SizedBox(height: AppSize.ks),
-          Text(
+          AutoSizeText(
             name.capitalize(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

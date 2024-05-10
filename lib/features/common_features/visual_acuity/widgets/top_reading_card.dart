@@ -8,9 +8,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/pages/face_distance_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import 'package:millimeters/millimeters.dart';
-import '../../../../../../../core/providers/global_visual_acuity_provider.dart';
+
 import '../../../../main.dart';
 import '../domain/models/tumbling_models.dart';
 import '../domain/enums/tumbling_enums.dart';

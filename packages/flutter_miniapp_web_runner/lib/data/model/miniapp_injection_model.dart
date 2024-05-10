@@ -12,17 +12,14 @@ class MiniAppInjectionModel with _$MiniAppInjectionModel {
     String? token,
     String? pinCode,
     MiniAppInjectionModelRole? role,
-    required MiniAppEnv  miniAppEnv,
+    Map<String, dynamic>? additionalData,
+    required MiniAppEnv miniAppEnv,
   }) = _MiniAppInjectionModel;
   factory MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =>
       _$MiniAppInjectionModelFromJson(json);
 }
-enum MiniAppEnv{
-  DEV,
-  PROD,
-  STAGING,
-  TESTING
-}
+
+enum MiniAppEnv { DEV, PROD, STAGING, TESTING }
 
 enum MiniAppInjectionModelRole {
   VISION_TECHNICIAN,
@@ -37,4 +34,5 @@ enum MiniAppActionType {
   REGISTER,
   UPDATE,
   ADD_MEMBER,
+  iPLEDGE,
 }

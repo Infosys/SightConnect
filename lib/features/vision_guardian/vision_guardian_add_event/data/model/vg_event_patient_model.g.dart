@@ -10,7 +10,7 @@ _$VisionGuardianEventPatientResponseModelImpl
     _$$VisionGuardianEventPatientResponseModelImplFromJson(
             Map<String, dynamic> json) =>
         _$VisionGuardianEventPatientResponseModelImpl(
-          patientId: json['patientId'] as int?,
+          patientId: (json['patientId'] as num?)?.toInt(),
           registryRef: json['registryRef'] as String?,
           name: json['name'] as String?,
           firstName: json['firstName'] as String?,
@@ -24,7 +24,7 @@ _$VisionGuardianEventPatientResponseModelImpl
           monthOfBirth: json['monthOfBirth'] as String?,
           yearOfBirth: json['yearOfBirth'] as String?,
           phoneNumber: json['phoneNumber'] as String?,
-          parentPatientId: json['parentPatientId'] as int?,
+          parentPatientId: (json['parentPatientId'] as num?)?.toInt(),
           address: (json['address'] as List<dynamic>?)
               ?.map((e) => AddressModel.fromJson(e as Map<String, dynamic>))
               .toList(),
@@ -55,7 +55,7 @@ Map<String, dynamic> _$$VisionGuardianEventPatientResponseModelImplToJson(
 
 _$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
     _$AddressModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       line: json['line'] as String?,
       district: json['district'] as String?,
       state: json['state'] as String?,
