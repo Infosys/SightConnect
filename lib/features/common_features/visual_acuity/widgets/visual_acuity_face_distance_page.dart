@@ -14,12 +14,15 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
   const VisualAcuityFaceDistancePage({super.key, 
     required this.minDistance, 
     required this.maxDistance, 
-    required this.onProceed
+    required this.onProceed,
+    required this.title
+
   });
 
   final int minDistance;
   final int maxDistance;
   final Function onProceed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
             distance != null && distance >= minDistance && maxDistance <= 45;
         return Scaffold(
           appBar: CustomAppbar(
-            title: const Text("Distance to face - Long Distance"),
+            title:  Text(title),
             leadingIcon: IconButton(
               splashRadius: 20,
               onPressed: () {
@@ -44,7 +47,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Please ensure that the camera is 200 cm or 2 meters away from your face.",
+                  "Please ensure that the camera is ${minDistance+5} cm away from your face.",
                   textAlign: TextAlign.center,
                   style: applyRobotoFont(
                     fontSize: 16,

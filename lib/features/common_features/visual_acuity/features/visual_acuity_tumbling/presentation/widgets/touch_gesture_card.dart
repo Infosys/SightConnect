@@ -9,20 +9,33 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../../../../domain/models/tumbling_models.dart';
-import '../../../../providers/distance_notifier_provider.dart';
 import '../providers/visual_acuity_test_provider.dart';
 import 'helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import 'tumbling_e_click_pad.dart';
 import 'visual_acuity_dialog.dart';
 
 class TouchGestureCard extends HookConsumerWidget {
-  const TouchGestureCard({super.key});
+  const TouchGestureCard({
+    super.key,
+    required this.isDistanceValid,
+    required this.handleUserResponse,
+    required this.handleGameOver,
+    required this.distanceText,
+    required this.eye,
+  });
+
+  final bool isDistanceValid;
+  final Function(QuestionDirection swipeDirection, bool isUserResponseCorrect)
+      handleUserResponse;
+  final Function(BuildContext context) handleGameOver;
+  final String distanceText;
+  final Eye eye;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var model = ref.watch(tumblingTestProvider);
+    // var model = ref.watch(tumblingTestProvider);
 
-    final distance = ref.watch(distanceNotifierProvider);
+    // final distance = ref.watch(distanceNotifierProvider);
 
     return Container(
       decoration: BoxDecoration(
@@ -62,7 +75,7 @@ class TouchGestureCard extends HookConsumerWidget {
               fit: BoxFit.fill,
             ),
             Positioned(
-              child: distance.isDistanceValid()
+              child: isDistanceValid
                   ? Column(
                       children: [
                         Padding(
@@ -71,9 +84,9 @@ class TouchGestureCard extends HookConsumerWidget {
                             horizontal: AppSize.km,
                           ),
                           child: Text(
-                            model.currentEye == Eye.left
+                            eye == Eye.left
                                 ? 'Cover your right eye and tap on the E matching the image on top'
-                                : model.currentEye == Eye.right
+                                : eye == Eye.right
                                     ? 'Cover your left eye and tap on the E matching the image on top'
                                     : 'View with both eyes and tap on the E matching the image on top.',
                             style: applyRobotoFont(
@@ -85,52 +98,68 @@ class TouchGestureCard extends HookConsumerWidget {
                         ),
                         TumblingEClickPad(
                           onBottomClicked: () {
-                            model.handUserResponse(
-                              UserResponse(
-                                levelNumber: model.currentLevel!,
-                                swipeDirection: QuestionDirection.down,
-                                mode: model.gameMode!,
-                                questionIndex: model.currentIndex!,
-                                isUserResponseCorrect: false,
-                              ),
+                            handleUserResponse(
+                              QuestionDirection.down,
+                              false,
                             );
-                            _handleGameOver(context, model);
+                            // model.handUserResponse(
+                            //   UserResponse(
+                            //     levelNumber: model.currentLevel!,
+                            //     swipeDirection: QuestionDirection.down,
+                            //     mode: model.gameMode!,
+                            //     questionIndex: model.currentIndex!,
+                            //     isUserResponseCorrect: false,
+                            //   ),
+                            // );
+                            handleGameOver(context);
                           },
                           onLeftClicked: () {
-                            model.handUserResponse(
-                              UserResponse(
-                                levelNumber: model.currentLevel!,
-                                swipeDirection: QuestionDirection.left,
-                                mode: model.gameMode!,
-                                questionIndex: model.currentIndex!,
-                                isUserResponseCorrect: false,
-                              ),
+                            // model.handUserResponse(
+                            //   UserResponse(
+                            //     levelNumber: model.currentLevel!,
+                            //     swipeDirection: QuestionDirection.left,
+                            //     mode: model.gameMode!,
+                            //     questionIndex: model.currentIndex!,
+                            //     isUserResponseCorrect: false,
+                            //   ),
+                            // );
+                            handleUserResponse(
+                              QuestionDirection.left,
+                              false,
                             );
-                            _handleGameOver(context, model);
+                            handleGameOver(context);
                           },
                           onRightClicked: () {
-                            model.handUserResponse(
-                              UserResponse(
-                                levelNumber: model.currentLevel!,
-                                swipeDirection: QuestionDirection.right,
-                                mode: model.gameMode!,
-                                questionIndex: model.currentIndex!,
-                                isUserResponseCorrect: false,
-                              ),
+                            // model.handUserResponse(
+                            //   UserResponse(
+                            //     levelNumber: model.currentLevel!,
+                            //     swipeDirection: QuestionDirection.right,
+                            //     mode: model.gameMode!,
+                            //     questionIndex: model.currentIndex!,
+                            //     isUserResponseCorrect: false,
+                            //   ),
+                            // );
+                            handleUserResponse(
+                              QuestionDirection.right,
+                              false,
                             );
-                            _handleGameOver(context, model);
+                            handleGameOver(context);
                           },
                           onTopClicked: () {
-                            model.handUserResponse(
-                              UserResponse(
-                                levelNumber: model.currentLevel!,
-                                swipeDirection: QuestionDirection.up,
-                                mode: model.gameMode!,
-                                questionIndex: model.currentIndex!,
-                                isUserResponseCorrect: false,
-                              ),
+                            // model.handUserResponse(
+                            //   UserResponse(
+                            //     levelNumber: model.currentLevel!,
+                            //     swipeDirection: QuestionDirection.up,
+                            //     mode: model.gameMode!,
+                            //     questionIndex: model.currentIndex!,
+                            //     isUserResponseCorrect: false,
+                            //   ),
+                            // );
+                            handleUserResponse(
+                              QuestionDirection.up,
+                              false,
                             );
-                            _handleGameOver(context, model);
+                            handleGameOver(context);
                           },
                         ),
                         Row(
@@ -155,7 +184,7 @@ class TouchGestureCard extends HookConsumerWidget {
                           ),
                           padding: const EdgeInsets.all(8),
                           child: Text(
-                            distance.getDistanceText(context),
+                            distanceText,
                             textAlign: TextAlign.center,
                             style: applyRobotoFont(
                               fontSize: 16,
@@ -172,35 +201,36 @@ class TouchGestureCard extends HookConsumerWidget {
       ),
     );
   }
-
-  Future<void> _handleGameOver(
-    BuildContext context,
-    VisualAcuityTestProvider model,
-  ) async {
-    if (!model.isGameOver!) {
-      return;
-    }
-    if (model.currentEye == Eye.left) {
-      logger.d("Game Over for left eye");
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return VisualAcuityDialog.showEyeInstructionDialog(
-              context, model.currentEye!);
-        },
-      ).then((value) => visionInstructionShowBottomUpSheet(context: context));
-
-      model.startGame(Eye.both);
-    } else if (model.currentEye == Eye.both) {
-      logger.d("Game Over for both eyes");
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return const VisualAcuitySuccessDialog();
-        },
-      );
-    }
-  }
 }
+
+//   Future<void> _handleGameOver(
+//     BuildContext context,
+//     VisualAcuityTestProvider model,
+//   ) async {
+//     if (!model.isGameOver!) {
+//       return;
+//     }
+//     if (model.currentEye == Eye.left) {
+//       logger.d("Game Over for left eye");
+//       showDialog(
+//         barrierDismissible: false,
+//         context: context,
+//         builder: (context) {
+//           return VisualAcuityDialog.showEyeInstructionDialog(
+//               context, model.currentEye!);
+//         },
+//       ).then((value) => visionInstructionShowBottomUpSheet(context: context));
+
+//       model.startGame(Eye.both);
+//     } else if (model.currentEye == Eye.both) {
+//       logger.d("Game Over for both eyes");
+//       showDialog(
+//         barrierDismissible: false,
+//         context: context,
+//         builder: (context) {
+//           return const VisualAcuitySuccessDialog();
+//         },
+//       );
+//     }
+//   }
+// }

@@ -8,7 +8,7 @@ import '../../../../../../../core/constants/app_color.dart';
 import '../../../../../../../core/constants/app_images.dart';
 import '../../../../../../../core/constants/app_size.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
-import '../../../../widgets/distance_visual_acuity_face_distance_page.dart';
+import '../../../../widgets/visual_acuity_face_distance_page.dart';
 import '../widgets/tumbling_e_click_pad.dart';
 import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
@@ -130,22 +130,13 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                             VisualAcuityFaceDistancePage(
                                           minDistance: 35,
                                           maxDistance: 45,
+                                          title: "Distance to Face",
                                           onProceed: () {
-                                            Navigator.of(context).push(
+                                            Navigator.of(context)
+                                                .pushReplacement(
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    VisualAcuityFaceDistancePage(
-                                                        minDistance: 35,
-                                                        maxDistance: 45,
-                                                        onProceed: () {
-                                                          Navigator.of(context)
-                                                              .pushReplacement(
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  const VisualAcuityTumblingLeftEyeInstruction(),
-                                                            ),
-                                                          );
-                                                        }),
+                                                    const VisualAcuityTumblingLeftEyeInstruction(),
                                               ),
                                             );
                                           },
@@ -175,22 +166,12 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                           VisualAcuityFaceDistancePage(
                                         minDistance: 35,
                                         maxDistance: 45,
+                                        title: "Distance to Face",
                                         onProceed: () {
-                                          Navigator.of(context).push(
+                                          Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  VisualAcuityFaceDistancePage(
-                                                      minDistance: 35,
-                                                      maxDistance: 45,
-                                                      onProceed: () {
-                                                        Navigator.of(context)
-                                                            .pushReplacement(
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const VisualAcuityTumblingLeftEyeInstruction(),
-                                                          ),
-                                                        );
-                                                      }),
+                                                  const VisualAcuityTumblingLeftEyeInstruction(),
                                             ),
                                           );
                                         },

@@ -3,18 +3,17 @@ import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 // import 'package:eye_care_for_all/core/services/ios_device_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/pages/face_distance_detector.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../main.dart';
-import '../domain/models/tumbling_models.dart';
 import '../domain/enums/tumbling_enums.dart';
+import '../domain/models/tumbling_models.dart';
 
-class SharedTopReadingCard extends StatelessWidget {
-  const SharedTopReadingCard({
+class TopReadingCard extends StatelessWidget {
+  const TopReadingCard({
     required this.currentLevel,
     required this.isThreeMeters,
     required this.currentEye,
@@ -51,8 +50,7 @@ class SharedTopReadingCard extends StatelessWidget {
       } else {
         optoTypeSize = currentLevel.sizeTwoMeters! * 10 * 160 * 0.03937;
       }
-    } else
-    {
+    } else {
       optoTypeSize = currentLevel.size * 10 * 160 * 0.03937;
     }
     return FaceDistanceDetector(

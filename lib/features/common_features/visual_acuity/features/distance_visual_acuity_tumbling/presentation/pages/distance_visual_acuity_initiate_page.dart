@@ -4,9 +4,7 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/widgets/swipe_gesture_card.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/widgets/top_reading_card.dart';
-
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
@@ -15,15 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+
 import '../../../../../../../core/providers/global_visual_acuity_provider.dart';
 import '../../../../../../../main.dart';
 import '../../../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
-
-import '../../../../domain/models/tumbling_models.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
+import '../../../../domain/models/tumbling_models.dart';
 import '../../../../providers/distance_notifier_provider.dart';
+import '../../../visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
+import '../../../visual_acuity_tumbling/presentation/widgets/touch_gesture_card.dart';
 import '../providers/distance_visual_acuity_test_provider.dart';
-
 import '../widgets/distance_visual_acuity_dialog.dart';
 
 class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
@@ -148,7 +147,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SharedTopReadingCard(
+                    TopReadingCard(
                       currentLevel: model.level!,
                       isThreeMeters: isThreeMeters,
                       currentEye: model.currentEye!,
@@ -158,49 +157,104 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                           .isShortDistanceTest,
                     ),
                     Expanded(
-                      child: SharedSwipeGestureCard(
-                        isDistanceValid: distanceData.isLongDistanceValid(),
-                        handleUserResponse: (QuestionDirection swipeDirection,
-                            bool isUserResponseCorrect) {
-                          model.handUserResponse(
-                            UserResponse(
-                              levelNumber: model.currentLevel!,
-                              swipeDirection: swipeDirection,
-                              mode: model.gameMode!,
-                              questionIndex: model.currentIndex!,
-                              isUserResponseCorrect: isUserResponseCorrect,
+                      child: visionAcuityIsSwipeMode
+                          ? SwipeGestureCard(
+                              isDistanceValid:
+                                  distanceData.isLongDistanceValid(),
+                              handleUserResponse:
+                                  (QuestionDirection swipeDirection,
+                                      bool isUserResponseCorrect) {
+                                model.handUserResponse(
+                                  UserResponse(
+                                    levelNumber: model.currentLevel!,
+                                    swipeDirection: swipeDirection,
+                                    mode: model.gameMode!,
+                                    questionIndex: model.currentIndex!,
+                                    isUserResponseCorrect:
+                                        isUserResponseCorrect,
+                                  ),
+                                );
+                              },
+                              handleGameOver: (BuildContext context) {
+                                if (!model.isGameOver!) {
+                                  return;
+                                }
+                                if (model.currentEye == Eye.left) {
+                                  logger.d("Game Over for left eye");
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return DistanceVisualAcuityDialog
+                                          .showEyeInstructionDialog(
+                                              context, model.currentEye!);
+                                    },
+                                  );
+                                  model.startGame(Eye.both);
+                                } else if (model.currentEye == Eye.both) {
+                                  logger.d("Game Over for both eyes");
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return const DistanceVisualAcuitySuccessDialog();
+                                    },
+                                  );
+                                }
+                              },
+                              distanceText:
+                                  distanceData.getLongDistanceText(context),
+                            )
+                          : TouchGestureCard(
+                              isDistanceValid:
+                                  distanceData.isLongDistanceValid(),
+                              handleUserResponse:
+                                  (QuestionDirection swipeDirection,
+                                      bool isUserResponseCorrect) {
+                                model.handUserResponse(
+                                  UserResponse(
+                                    levelNumber: model.currentLevel!,
+                                    swipeDirection: swipeDirection,
+                                    mode: model.gameMode!,
+                                    questionIndex: model.currentIndex!,
+                                    isUserResponseCorrect:
+                                        isUserResponseCorrect,
+                                  ),
+                                );
+                              },
+                              handleGameOver: (BuildContext context) async {
+                                if (!model.isGameOver!) {
+                                  return;
+                                }
+                                if (model.currentEye == Eye.left) {
+                                  logger.d("Game Over for left eye");
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return DistanceVisualAcuityDialog
+                                          .showEyeInstructionDialog(
+                                              context, model.currentEye!);
+                                    },
+                                  ).then((value) =>
+                                      visionInstructionShowBottomUpSheet(
+                                          context: context));
+                                  model.startGame(Eye.both);
+                                } else if (model.currentEye == Eye.both) {
+                                  logger.d("Game Over for both eyes");
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return const DistanceVisualAcuitySuccessDialog();
+                                    },
+                                  );
+                                }
+                              },
+                              distanceText:
+                                  distanceData.getLongDistanceText(context),
+                              eye: model.currentEye!,
                             ),
-                          );
-                        },
-                        handleGameOver: (BuildContext context) {
-                          if (!model.isGameOver!) {
-                            return;
-                          }
-                          if (model.currentEye == Eye.left) {
-                            logger.d("Game Over for left eye");
-                            showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) {
-                                return DistanceVisualAcuityDialog
-                                    .showEyeInstructionDialog(
-                                        context, model.currentEye!);
-                              },
-                            );
-                            model.startGame(Eye.both);
-                          } else if (model.currentEye == Eye.both) {
-                            logger.d("Game Over for both eyes");
-                            showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) {
-                                return const DistanceVisualAcuitySuccessDialog();
-                              },
-                            );
-                          }
-                        },
-                        distanceText: distanceData.getLongDistanceText(context),
-                      ),
                     ),
                   ],
                 );
