@@ -23,7 +23,7 @@ import '../../../../providers/distance_notifier_provider.dart';
 import '../../../../widgets/swipe_gesture_card.dart';
 import '../../../../widgets/top_reading_card.dart';
 import '../widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
-import '../widgets/touch_gesture_card.dart';
+import '../../../../widgets/touch_gesture_card.dart';
 import '../widgets/visual_acuity_dialog.dart';
 
 class VisualAcuityInitiatePage extends ConsumerStatefulWidget {

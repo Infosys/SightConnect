@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../domain/enums/tumbling_enums.dart';
-import '../../../../domain/models/tumbling_models.dart';
-import '../providers/visual_acuity_test_provider.dart';
-import 'helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
+import '../domain/enums/tumbling_enums.dart';
+import '../domain/models/tumbling_models.dart';
+import '../features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import '../features/visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import 'tumbling_e_click_pad.dart';
-import 'visual_acuity_dialog.dart';
+import '../features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 
 class TouchGestureCard extends HookConsumerWidget {
   const TouchGestureCard({

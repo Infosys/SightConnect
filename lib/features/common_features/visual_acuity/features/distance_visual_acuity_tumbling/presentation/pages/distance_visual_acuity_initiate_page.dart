@@ -21,7 +21,7 @@ import '../../../../domain/enums/tumbling_enums.dart';
 import '../../../../domain/models/tumbling_models.dart';
 import '../../../../providers/distance_notifier_provider.dart';
 import '../../../visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
-import '../../../visual_acuity_tumbling/presentation/widgets/touch_gesture_card.dart';
+import '../../../../widgets/touch_gesture_card.dart';
 import '../providers/distance_visual_acuity_test_provider.dart';
 import '../widgets/distance_visual_acuity_dialog.dart';
 
