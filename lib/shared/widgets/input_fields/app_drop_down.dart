@@ -26,6 +26,7 @@ class AppDropDown<T> extends HookWidget {
       width: isMobile ? AppSize.width(context) * 0.4 : 300,
       child: items.isNotEmpty
           ? DropdownButtonFormField<T>(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               onChanged: (value) {
                 selectedValue.value = value as T;
                 onChanged?.call(value);

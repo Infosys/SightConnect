@@ -107,6 +107,7 @@ class AppTextField extends StatelessWidget {
         maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
       ),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         maxLines: maxLine,
         controller: controller,
         initialValue: initialValue,
