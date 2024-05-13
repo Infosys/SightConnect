@@ -15,6 +15,8 @@ class AppTextField extends StatelessWidget {
     this.maxLine = 1,
     this.decoration = const InputDecoration(),
     this.regex,
+    this.minWidth,
+    this.maxWidth,
   }) : super(key: key);
 
   AppTextField.date({
@@ -29,6 +31,8 @@ class AppTextField extends StatelessWidget {
     this.maxLine = 1,
     InputDecoration? decoration,
     this.regex,
+    this.minWidth,
+    this.maxWidth,
   })  : decoration = decoration?.copyWith(
           suffixIcon: IconButton(
             onPressed: () async {
@@ -48,6 +52,7 @@ class AppTextField extends StatelessWidget {
           ),
         ),
         super(key: key);
+
   AppTextField.time({
     Key? key,
     this.controller,
@@ -60,6 +65,8 @@ class AppTextField extends StatelessWidget {
     InputDecoration? decoration,
     required BuildContext context,
     this.regex,
+    this.minWidth,
+    this.maxWidth,
   })  : decoration = decoration?.copyWith(
           suffixIcon: IconButton(
             onPressed: () async {
@@ -87,6 +94,8 @@ class AppTextField extends StatelessWidget {
   final String? regex;
 
   final int maxLine;
+  final double? minWidth;
+  final double? maxWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +103,11 @@ class AppTextField extends StatelessWidget {
     return Container(
       // color: Colors.blue,
       constraints: BoxConstraints(
-        minWidth: isMobile ? AppSize.width(context) * 0.4 : 300,
-        maxWidth: isMobile ? AppSize.width(context) * 0.4 : 300,
+        minWidth: minWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
+        maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
       ),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         maxLines: maxLine,
         controller: controller,
         initialValue: initialValue,

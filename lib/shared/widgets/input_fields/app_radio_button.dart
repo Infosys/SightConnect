@@ -7,12 +7,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class AppRadioButton<T> extends HookWidget {
   AppRadioButton({
+    super.key,
     required this.items,
     required this.displayItems,
     this.initialValue,
     this.title,
     this.onChanged,
-    super.key,
+    this.direction = "HORIZONTAL",
   })  : assert(items.isNotEmpty, "Items cannot be empty"),
         assert(displayItems.isNotEmpty, "Display Items cannot be empty"),
         assert(items.length == displayItems.length,
@@ -23,6 +24,7 @@ class AppRadioButton<T> extends HookWidget {
   final List<T> displayItems;
   final List<T> items;
   final Function(T)? onChanged;
+  final String direction;
 
   @override
   Widget build(BuildContext context) {
@@ -50,32 +52,64 @@ class AppRadioButton<T> extends HookWidget {
               ),
             ),
           if (title != null) const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: items
-                .map(
-                  (item) => Row(
-                    children: [
-                      Radio(
-                        value: item,
-                        groupValue: selectedValue.value,
-                        onChanged: (value) {
-                          selectedValue.value = value as T;
-                          onChanged?.call(value);
-                        },
+          if (direction == "VERTICAL")
+            Column(
+              children: items
+                  .map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Row(
+                        children: [
+                          Radio(
+                            value: item,
+                            groupValue: selectedValue.value,
+                            onChanged: (value) {
+                              selectedValue.value = value as T;
+                              onChanged?.call(value);
+                            },
+                          ),
+                          Text(
+                            displayItems[items.indexOf(item)].toString(),
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        displayItems[items.indexOf(item)].toString(),
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.grey,
-                        ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          if (direction == "HORIZONTAL")
+            Row(
+              children: items
+                  .map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Row(
+                        children: [
+                          Radio(
+                            value: item,
+                            groupValue: selectedValue.value,
+                            onChanged: (value) {
+                              selectedValue.value = value as T;
+                              onChanged?.call(value);
+                            },
+                          ),
+                          Text(
+                            displayItems[items.indexOf(item)].toString(),
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              color: AppColor.grey,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )
-                .toList(),
-          ),
+                    ),
+                  )
+                  .toList(),
+            ),
         ],
       ),
     );
