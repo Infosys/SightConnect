@@ -18,7 +18,7 @@ class TechnicianFakeDataSource {
     "Today",
     "This Week",
     "This Month",
-    "This Year"
+    "This Year",
     "Pending",
     "Completed",
   ];
