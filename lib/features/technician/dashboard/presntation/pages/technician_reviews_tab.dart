@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TechnicianReviewsTab
- extends StatelessWidget {
-  const TechnicianReviewsTab
-  ({super.key});
+class TechnicianReviewsTab extends StatelessWidget {
+  const TechnicianReviewsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
