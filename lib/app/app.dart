@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/consultant/death/presentation/pages/death_notification_page.dart';
+import 'package:eye_care_for_all/features/consultant/death/presentation/pages/screening_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -78,7 +78,7 @@ class MyApp extends ConsumerWidget {
                 // initialRoute: initialRoute,
                 // navigatorKey: AppRouter.navigatorKey,
                 // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: const DeathNotificationPage(),
+                home: const ScreeningPage(),
 
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
