@@ -1,6 +1,6 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -24,22 +24,63 @@ class AppDropDown<T> extends HookWidget {
     return SizedBox(
       width: isMobile ? AppSize.width(context) * 0.4 : 300,
       child: items.isNotEmpty
-          ? DropdownButton<T>(
-              isDense: true,
-              icon: const Icon(Icons.arrow_drop_down),
-              elevation: 0,
-              value: selectedValue.value,
+          ? DropdownButtonFormField<T>(
               onChanged: (value) {
                 selectedValue.value = value as T;
                 onChanged?.call(value);
               },
+              icon: const Icon(Icons.arrow_drop_down),
+              elevation: 0,
+              value: selectedValue.value,
+              validator: (value) {
+                if (value == null) {
+                  return 'Please select a value';
+                }
+                return null;
+              },
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 21,
+                  horizontal: 8,
+                ),
+                hintStyle: TextStyle(
+                  fontSize: 14,
+                ),
+                labelStyle: TextStyle(
+                  fontSize: 14,
+                ),
+                floatingLabelStyle: TextStyle(
+                  fontSize: 14,
+                ),
+                errorStyle: TextStyle(
+                  fontSize: 12,
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.lightGrey),
+                ),
+                errorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.red),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.blue),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.lightGrey),
+                ),
+                disabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.lightGrey),
+                ),
+                focusedErrorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColor.red),
+                ),
+              ),
               items: items
                   .map(
                     (item) => DropdownMenuItem<T>(
                       value: item,
                       child: Text(
                         item.toString(),
-                        style: applyRobotoFont(
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                       ),
