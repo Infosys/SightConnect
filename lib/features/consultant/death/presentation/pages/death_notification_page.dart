@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_drop_down.dart';
@@ -13,7 +14,7 @@ class DeathNotificationPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());
-
+    final isMobile = Responsive.isMobile(context);
     return Scaffold(
       appBar: const CustomAppbar(
         title: Text("Death Notification"),
@@ -22,11 +23,14 @@ class DeathNotificationPage extends HookWidget {
         key: formKey.value,
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppCard(
                 child: Wrap(
-                  runSpacing: 16,
-                  spacing: 16,
+                  alignment: WrapAlignment.start,
+                  runAlignment: WrapAlignment.start,
+                  runSpacing: isMobile ? 16 : 32,
+                  spacing: isMobile ? 16 : 32,
                   children: [
                     AppDropDown<String>(
                       intialValue: "Referral Method",
@@ -95,8 +99,10 @@ class DeathNotificationPage extends HookWidget {
               AppCard(
                 title: 'Donar Information',
                 child: Wrap(
-                  runSpacing: 16,
-                  spacing: 16,
+                  runSpacing: isMobile ? 16 : 32,
+                  spacing: isMobile ? 16 : 32,
+                  alignment: WrapAlignment.start,
+                  runAlignment: WrapAlignment.start,
                   children: [
                     AppTextField(
                       onChanged: (value) {},
@@ -160,6 +166,17 @@ class DeathNotificationPage extends HookWidget {
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            if (formKey.value.currentState!.validate()) {
+              logger.d("Form is valid");
+            }
+          },
+          child: const Text("Submit"),
         ),
       ),
     );

@@ -26,9 +26,10 @@ class AppRadioButton<T> extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedValue = useState<T>(initialValue ?? items.first);
+    final selectedValue = useState<T?>(initialValue);
     final isMobile = Responsive.isMobile(context);
     return Container(
+      // color: Colors.pink,
       constraints: BoxConstraints(
         minWidth: isMobile ? AppSize.width(context) * 0.8 : 300,
         maxWidth: isMobile ? AppSize.width(context) * 0.8 : 300,

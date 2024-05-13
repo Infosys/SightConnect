@@ -48,7 +48,8 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    return ConstrainedBox(
+    return Container(
+      // color: Colors.blue,
       constraints: BoxConstraints(
         minWidth: isMobile ? AppSize.width(context) * 0.4 : 300,
         maxWidth: isMobile ? AppSize.width(context) * 0.4 : 300,
@@ -61,6 +62,7 @@ class AppTextField extends StatelessWidget {
         keyboardType: keyboardType,
         onChanged: onChanged,
         decoration: decoration?.copyWith(
+          errorMaxLines: 2,
           isDense: true,
           contentPadding:
               const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
