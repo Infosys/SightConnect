@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/chatbot/data/enum/standard_action.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/data/enum/standard_action.dart';
 
 class ChatQueryResolver {
   static StandardAction? getStandardAction(String query, String languageCode) {

@@ -1,20 +1,20 @@
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
-import 'package:eye_care_for_all/features/chatbot/data/enum/standard_action.dart';
-import 'package:eye_care_for_all/features/chatbot/data/models/chat_query_resolver.dart';
-import 'package:eye_care_for_all/features/chatbot/data/source/remote/chat_service.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_intent_view.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_composer.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_message_tile.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/chat_query_suggestions.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/widgets/loading_indicator.dart';
-import 'package:eye_care_for_all/features/chatbot/text_to_speech.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/data/enum/standard_action.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/data/models/chat_query_resolver.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/data/source/remote/chat_service.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/presentation/widgets/chat_intent_view.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/presentation/widgets/chat_message_composer.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/presentation/widgets/chat_message_tile.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/presentation/widgets/chat_query_suggestions.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/presentation/widgets/loading_indicator.dart';
+import 'package:eye_care_for_all/features/common_features/chatbot/text_to_speech.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatBotPage extends ConsumerStatefulWidget {
   const ChatBotPage({

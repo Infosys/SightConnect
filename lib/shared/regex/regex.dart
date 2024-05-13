@@ -19,5 +19,8 @@ class Regex {
     return RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value);
   }
 
+  /// --------
+
   static String get mobileRegExp => r"^(?:[+0]9)?[0-9]{10}$";
+  static String get titleRegExp => r'^[a-zA-Z0-9 _\-&]*$';
 }
