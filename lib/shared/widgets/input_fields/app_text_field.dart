@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
@@ -16,21 +17,63 @@ class AppTextField extends StatelessWidget {
     this.regex,
   }) : super(key: key);
 
-  AppTextField.dob({
+  AppTextField.date({
     Key? key,
     this.controller,
     this.initialValue,
     this.focusNode,
     this.keyboardType,
     this.onChanged,
-    VoidCallback? onDateSelected,
+    Function(DateTime?)? onDateSelected,
+    required BuildContext context,
     this.maxLine = 1,
     InputDecoration? decoration,
     this.regex,
   })  : decoration = decoration?.copyWith(
           suffixIcon: IconButton(
-            onPressed: onDateSelected,
+            onPressed: () async {
+              try {
+                final date = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                );
+                onDateSelected?.call(date);
+              } catch (e) {
+                logger.e(e);
+              }
+            },
             icon: const Icon(Icons.calendar_today, color: AppColor.grey),
+          ),
+        ),
+        super(key: key);
+  AppTextField.time({
+    Key? key,
+    this.controller,
+    this.initialValue,
+    this.focusNode,
+    this.keyboardType,
+    this.onChanged,
+    Function(TimeOfDay?)? onTimeSelected,
+    this.maxLine = 1,
+    InputDecoration? decoration,
+    required BuildContext context,
+    this.regex,
+  })  : decoration = decoration?.copyWith(
+          suffixIcon: IconButton(
+            onPressed: () async {
+              try {
+                final time = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                );
+                onTimeSelected?.call(time);
+              } catch (e) {
+                logger.e(e);
+              }
+            },
+            icon: const Icon(Icons.access_time, color: AppColor.grey),
           ),
         ),
         super(key: key);

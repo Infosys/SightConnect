@@ -111,8 +111,11 @@ class DeathNotificationPage extends HookWidget {
                         hintText: 'Enter Name',
                       ),
                     ),
-                    AppTextField.dob(
-                      onDateSelected: () {},
+                    AppTextField.date(
+                      context: context,
+                      onDateSelected: (date) {
+                        logger.d(date);
+                      },
                       onChanged: (value) {},
                       decoration: const InputDecoration(
                         labelText: 'Date of Birth',
@@ -153,12 +156,26 @@ class DeathNotificationPage extends HookWidget {
                         hintText: 'Enter Cause of Death',
                       ),
                     ),
-                    AppTextField.dob(
-                      onDateSelected: () {},
+                    AppTextField.date(
+                      context: context,
+                      onDateSelected: (date) {
+                        logger.d(date);
+                      },
                       onChanged: (value) {},
                       decoration: const InputDecoration(
                         labelText: 'Admission Date',
                         hintText: "DD-MM-YYYY",
+                      ),
+                    ),
+                    AppTextField.time(
+                      context: context,
+                      onTimeSelected: (time) {
+                        logger.d(time);
+                      },
+                      onChanged: (value) {},
+                      decoration: const InputDecoration(
+                        labelText: 'Admission Time',
+                        hintText: "HH:MM",
                       ),
                     ),
                   ],
