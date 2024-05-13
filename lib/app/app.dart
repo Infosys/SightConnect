@@ -4,10 +4,10 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/consultant/death/presentation/pages/death_notification_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +56,7 @@ class MyApp extends ConsumerWidget {
                             .watch(globalTextScaleFactorProvider)
                             .textScaleFactor,
                       )
-                    : const TextScaler.linear(1.3),
+                    : const TextScaler.linear(1.2),
               ),
               child: MaterialApp(
                 title: AppInfoService.appName,
@@ -74,11 +74,12 @@ class MyApp extends ConsumerWidget {
                 theme: ref.watch(themeProvider) == ThemeMode.light
                     ? AppTheme.getLightTheme(context)
                     : AppTheme.getDarkTheme(context),
-                routes: AppRouter.routes,
+                // routes: AppRouter.routes,
+                // initialRoute: initialRoute,
+                // navigatorKey: AppRouter.navigatorKey,
+                // onUnknownRoute: AppRouter.onUnknownRoute,
+                home: const DeathNotificationPage(),
 
-                initialRoute: initialRoute,
-                navigatorKey: AppRouter.navigatorKey,
-                onUnknownRoute: AppRouter.onUnknownRoute,
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
                 //         data: (value) {
