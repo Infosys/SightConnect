@@ -60,7 +60,11 @@ class AppCard extends StatelessWidget {
       );
     }
     return Container(
-      padding: EdgeInsets.all(padding),
+      margin: const EdgeInsets.symmetric(
+        vertical: AppSize.ks,
+        horizontal: AppSize.km,
+      ),
+      padding: EdgeInsets.all(padding * 2),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,

@@ -11,7 +11,6 @@ class AppTextField extends StatelessWidget {
     this.focusNode,
     this.keyboardType,
     this.onChanged,
-    this.onDateSelected,
     this.maxLine = 1,
     this.decoration = const InputDecoration(),
     this.regex,
@@ -24,7 +23,7 @@ class AppTextField extends StatelessWidget {
     this.focusNode,
     this.keyboardType,
     this.onChanged,
-    this.onDateSelected,
+    VoidCallback? onDateSelected,
     this.maxLine = 1,
     InputDecoration? decoration,
     this.regex,
@@ -42,8 +41,8 @@ class AppTextField extends StatelessWidget {
   final InputDecoration? decoration;
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
-  final VoidCallback? onDateSelected;
   final String? regex;
+
   final int maxLine;
 
   @override
