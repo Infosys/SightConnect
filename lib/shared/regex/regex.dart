@@ -23,4 +23,7 @@ class Regex {
 
   static String get mobileRegExp => r"^(?:[+0]9)?[0-9]{10}$";
   static String get titleRegExp => r'^[a-zA-Z0-9 _\-&]*$';
+  // Mandatory: Matches a date in the format DD-MM-YYYY
+  static String get dob =>
+      r'^(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[0-2])-(19|20)\d\d$';
 }
