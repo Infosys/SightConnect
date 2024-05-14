@@ -37,6 +37,7 @@ class MyApp extends ConsumerWidget {
       DeviceOrientation.portraitDown,
     ]);
     final mediaQueryData = MediaQuery.of(context);
+    final isMobile = Responsive.isMobile(context);
 
     final initialRoute = PersistentAuthStateService.authState.isLoggedIn
         ? InitializationPage.routeName
@@ -50,15 +51,15 @@ class MyApp extends ConsumerWidget {
         } else {
           return Millimeters.fromView(
             child: MediaQuery(
-              data: mediaQueryData.copyWith(
-                textScaler: Responsive.isMobile(context)
-                    ? TextScaler.linear(
-                        ref
-                            .watch(globalTextScaleFactorProvider)
-                            .textScaleFactor,
-                      )
-                    : const TextScaler.linear(1.2),
-              ),
+              data: kIsWeb
+                  ? mediaQueryData
+                  : mediaQueryData.copyWith(
+                      textScaler: isMobile
+                          ? TextScaler.linear(ref
+                              .watch(globalTextScaleFactorProvider)
+                              .textScaleFactor)
+                          : const TextScaler.linear(1.3),
+                    ),
               child: MaterialApp(
                 title: AppInfoService.appName,
                 locale: ref.watch(globalLanguageProvider).currentLocale,
