@@ -11,6 +11,11 @@ class AppCard extends StatelessWidget {
     this.color = AppColor.lightGrey,
     this.borderThickness = 1,
     this.title,
+    this.titleBottomSize = AppSize.ks,
+    this.margin = const EdgeInsets.symmetric(
+      vertical: AppSize.ks,
+      horizontal: AppSize.km,
+    ),
     super.key,
   });
   final Widget child;
@@ -19,15 +24,14 @@ class AppCard extends StatelessWidget {
   final Color color;
   final double borderThickness;
   final String? title;
+  final double titleBottomSize;
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
     if (title != null) {
       return Container(
-        margin: const EdgeInsets.symmetric(
-          vertical: AppSize.ks,
-          horizontal: AppSize.km,
-        ),
+        margin: margin,
         padding: EdgeInsets.all(padding * 2),
         width: double.infinity,
         decoration: BoxDecoration(
@@ -54,7 +58,7 @@ class AppCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: AppSize.ks),
+            SizedBox(height: titleBottomSize),
             child,
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'techncian_harvests_tab.dart';
@@ -21,54 +21,59 @@ class TechnicianHomePage extends StatelessWidget {
             backgroundColor: AppColor.white,
             shadowColor: AppColor.blackOpacity,
             elevation: 3,
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            leadingWidth: 220,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 8),
               child: Image.asset(
                 AppImages.logo,
-                height: AppSize.height(context) * 0.04,
-                width: AppSize.width(context) * 0.3,
+                height: 40,
               ),
             ),
             automaticallyImplyLeading: false,
           ),
-          body: const SizedBox(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TabBar(
-                    indicatorColor: AppColor.primary,
-                    indicatorWeight: 2,
-                    dividerColor: AppColor.blue,
-                    unselectedLabelStyle: TextStyle(color: AppColor.grey),
-                    labelColor: AppColor.black,
-                    tabs: [
-                      Tab(
-                        child: Text('Home'),
-                      ),
-                      Tab(
-                        child: Text('Referrals'),
-                      ),
-                      Tab(
-                        child: Text('Harvests'),
-                      ),
-                      Tab(
-                        child: Text('Reviews'),
-                      ),
+          body: SizedBox(
+            child: Column(
+              children: [
+                TabBar(
+                  indicatorColor: AppColor.primary,
+                  indicatorWeight: 2,
+                  dividerColor: AppColor.blue,
+                  unselectedLabelStyle: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColor.grey,
+                  ),
+                  labelStyle: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  tabs: const [
+                    Tab(
+                      child: Text('Home'),
+                    ),
+                    Tab(
+                      child: Text('Referrals'),
+                    ),
+                    Tab(
+                      child: Text('Harvests'),
+                    ),
+                    Tab(
+                      child: Text('Reviews'),
+                    ),
+                  ],
+                ),
+                const Expanded(
+                  child: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      TechnicianHomeTab(),
+                      TechnicianReferralsTab(),
+                      TechnicianHarvestsTab(),
+                      TechnicianReviewsTab(),
                     ],
                   ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        TechnicianHomeTab(),
-                        TechnicianReferralsTab(),
-                        TechnicianHarvestsTab(),
-                        TechnicianReviewsTab(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           )),
     );
