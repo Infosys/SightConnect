@@ -1,17 +1,18 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/oh_stepper.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/features/technician/organ_harvest/providers/organ_harvest_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OHSideStages extends StatelessWidget {
+class OHSideStages extends ConsumerWidget {
   const OHSideStages({
     super.key,
     required this.width,
   });
   final double width;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 24,
@@ -36,8 +37,9 @@ class OHSideStages extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             OHStepper(
+              initialIndex: ref.watch(organHarvestProvider).currentStep,
               onStepTapped: (index) {
-                logger.d(index);
+                ref.read(organHarvestProvider).setStep(index);
               },
             ),
           ],

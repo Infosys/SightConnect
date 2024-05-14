@@ -7,11 +7,13 @@ class OHStepper extends HookWidget {
   const OHStepper({
     Key? key,
     required this.onStepTapped,
+    required this.initialIndex,
   }) : super(key: key);
   final Function(int) onStepTapped;
+  final int initialIndex;
   @override
   Widget build(BuildContext context) {
-    final selectedIndex = useState(0);
+    final selectedIndex = useState(initialIndex);
     final stages = [
       "Screening",
       "Hemodilution",
