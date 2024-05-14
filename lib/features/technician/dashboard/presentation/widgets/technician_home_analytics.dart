@@ -10,9 +10,13 @@ class TechnicianHomeAnalytics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var currentScreenWidth = MediaQuery.of(context).size.width;
-    return SizedBox(
-      width: currentScreenWidth > 1220 ? 230 : 170,
+    return Container(
+      width: 300,
       height: 700,
+      padding: const EdgeInsets.symmetric(
+        vertical: 24,
+        horizontal: 16,
+      ),
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [

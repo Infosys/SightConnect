@@ -15,7 +15,6 @@ class TechnicianDashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      initialIndex: 1,
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColor.white,
@@ -23,16 +22,19 @@ class TechnicianDashboardPage extends StatelessWidget {
             elevation: 3,
             leadingWidth: 220,
             leading: Padding(
-              padding: const EdgeInsets.only(left: 8),
+              padding: const EdgeInsets.only(left: 16),
               child: Image.asset(
                 AppImages.logo,
-                height: 40,
+                height: 35,
               ),
             ),
             automaticallyImplyLeading: false,
           ),
-          body: SizedBox(
+          body: Container(
+            padding: const EdgeInsets.all(16),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TabBar(
                   indicatorColor: AppColor.primary,

@@ -17,65 +17,51 @@ class TechnicianHomeFilterTabs extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (Responsive.isTablet(context))
-          SizedBox(
-            width: AppSize.width(context) * 0.02,
-          )
-        else if (Responsive.isMobile(context))
-          SizedBox(
-            width: AppSize.width(context) * 0.05,
-          ),
-        SizedBox(
-          height: 30,
-          width: Responsive.isDesktop(context)
-              ? AppSize.width(context) * 0.45
-              : Responsive.isTablet(context)
-                  ? AppSize.width(context) * 0.55
-                  : AppSize.width(context) * 0.8,
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: TechnicianFakeDataSource.filterType.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                onTap: () {
-                  isSelected.value = index;
-                },
-                child: Container(
-                  height: 30,
-                  margin: const EdgeInsets.only(right: 10),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                  decoration: BoxDecoration(
-                    color: isSelected.value == index
-                        ? AppColor.lightBlue
-                        : AppColor.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
+        Expanded(
+          child: SizedBox(
+            height: 40,
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: TechnicianFakeDataSource.filterType.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  onTap: () {
+                    isSelected.value = index;
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
                       color: isSelected.value == index
-                          ? AppColor.primary
-                          : AppColor.grey,
+                          ? AppColor.lightBlue
+                          : AppColor.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: isSelected.value == index
+                            ? AppColor.primary
+                            : AppColor.grey,
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      TechnicianFakeDataSource.filterType[index],
-                      textAlign: TextAlign.center,
-                      style: applyRobotoFont(
-                        color: AppColor.black,
-                        fontSize: 14,
+                    child: Center(
+                      child: Text(
+                        TechnicianFakeDataSource.filterType[index],
+                        textAlign: TextAlign.center,
+                        style: applyRobotoFont(
+                          color: AppColor.black,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
-        const Spacer(),
-        if (Responsive.isDesktop(context) || Responsive.isTablet(context))
+        if (!Responsive.isMobile(context))
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -88,31 +74,31 @@ class TechnicianHomeFilterTabs extends HookConsumerWidget {
                   thickness: 0.7,
                 ),
               ),
-              const SizedBox(
-                width: AppSize.km,
+              const SizedBox(width: AppSize.km),
+              Flexible(
+                child: SizedBox(
+                    width: AppSize.width(context) * 0.17,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        hintStyle:
+                            applyRobotoFont(color: AppColor.grey, fontSize: 14),
+                        contentPadding: const EdgeInsets.all(10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: AppColor.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: AppColor.grey),
+                        ),
+                        suffixIcon: const Icon(
+                          Icons.search,
+                          color: AppColor.grey,
+                        ),
+                      ),
+                    )),
               ),
-              SizedBox(
-                  width: AppSize.width(context) * 0.17,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle:
-                          applyRobotoFont(color: AppColor.grey, fontSize: 14),
-                      contentPadding: const EdgeInsets.all(10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: AppColor.grey),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: AppColor.grey),
-                      ),
-                      suffixIcon: const Icon(
-                        Icons.search,
-                        color: AppColor.grey,
-                      ),
-                    ),
-                  )),
               const Center(
                 child: Icon(
                   Icons.filter_list,
