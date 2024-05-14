@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/technician/dashboard/data/fake_data_source.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,9 +17,21 @@ class TechnicianHomeFilterTabs extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        if (Responsive.isTablet(context))
+          SizedBox(
+            width: AppSize.width(context) * 0.02,
+          )
+        else if (Responsive.isMobile(context))
+          SizedBox(
+            width: AppSize.width(context) * 0.05,
+          ),
         SizedBox(
           height: 30,
-          width: AppSize.width(context) * 0.45,
+          width: Responsive.isDesktop(context)
+              ? AppSize.width(context) * 0.45
+              : Responsive.isTablet(context)
+                  ? AppSize.width(context) * 0.55
+                  : AppSize.width(context) * 0.8,
           child: ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
@@ -62,45 +75,53 @@ class TechnicianHomeFilterTabs extends HookConsumerWidget {
           ),
         ),
         const Spacer(),
-        SizedBox(
-          height: AppSize.height(context) * 0.05,
-          child: const VerticalDivider(
-            color: AppColor.grey,
-            width: 4,
-            thickness: 0.7,
-          ),
-        ),
-        const SizedBox(
-          width: AppSize.km,
-        ),
-        SizedBox(
-            width: AppSize.width(context) * 0.17,
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: applyRobotoFont(color: AppColor.grey, fontSize: 14),
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppColor.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: AppColor.grey),
-                ),
-                suffixIcon: const Icon(
-                  Icons.search,
+        if (Responsive.isDesktop(context) || Responsive.isTablet(context))
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: AppSize.height(context) * 0.05,
+                child: const VerticalDivider(
                   color: AppColor.grey,
+                  width: 4,
+                  thickness: 0.7,
                 ),
               ),
-            )),
-        const Center(
-          child: Icon(
-            Icons.filter_list,
-            color: AppColor.grey,
-            size: 25,
-          ),
-        )
+              const SizedBox(
+                width: AppSize.km,
+              ),
+              SizedBox(
+                  width: AppSize.width(context) * 0.17,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle:
+                          applyRobotoFont(color: AppColor.grey, fontSize: 14),
+                      contentPadding: const EdgeInsets.all(10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: AppColor.grey),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: AppColor.grey),
+                      ),
+                      suffixIcon: const Icon(
+                        Icons.search,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  )),
+              const Center(
+                child: Icon(
+                  Icons.filter_list,
+                  color: AppColor.grey,
+                  size: 25,
+                ),
+              ),
+            ],
+          )
       ],
     );
   }
