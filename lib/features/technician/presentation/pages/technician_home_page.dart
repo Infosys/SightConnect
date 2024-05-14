@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/techncian_harvests_tab.dart';
@@ -24,15 +23,14 @@ class TechnicianHomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Image.asset(
                 AppImages.logo,
-                height: AppSize.height(context) * 0.04,
-                width: AppSize.width(context) * 0.3,
+                height: 35,
               ),
             ),
             automaticallyImplyLeading: false,
           ),
           body: const SizedBox(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(left: 16.0, right: 16, top: 16),
               child: Column(
                 children: [
                   TabBar(
