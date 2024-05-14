@@ -18,7 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 
-import '../features/technician/presentation/pages/technician_home_page.dart';
+import '../features/technician/dashboard/presentation/pages/technician_home_page.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
   if (kIsWeb) {

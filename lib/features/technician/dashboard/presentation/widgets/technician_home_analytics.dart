@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/technician/data/fake_data_source.dart';
+import 'package:eye_care_for_all/features/technician/dashboard/data/fake_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,8 +9,9 @@ class TechnicianHomeAnalytics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var currentScreenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: 230,
+      width: currentScreenWidth > 1220 ? 230 : 170,
       height: 700,
       child: ListView(
         scrollDirection: Axis.vertical,
@@ -26,6 +27,4 @@ class TechnicianHomeAnalytics extends StatelessWidget {
       ),
     );
   }
-
-  
 }

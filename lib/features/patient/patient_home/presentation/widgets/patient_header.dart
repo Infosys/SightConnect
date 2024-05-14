@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../technician/presentation/pages/technician_home_page.dart';
+import '../../../../technician/dashboard/presentation/pages/technician_home_page.dart';
 
 class PatientHeader extends HookWidget {
   const PatientHeader({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_color.dart';
-import '../../../../core/constants/app_size.dart';
-import '../../../../shared/theme/text_theme.dart';
+import '../../../../../core/constants/app_color.dart';
+import '../../../../../core/constants/app_size.dart';
+import '../../../../../shared/theme/text_theme.dart';
 
 class AnalyticsCard extends StatelessWidget {
   const AnalyticsCard(
@@ -15,6 +15,7 @@ class AnalyticsCard extends StatelessWidget {
   final String ongoing;
   @override
   Widget build(BuildContext context) {
+    var currentScreenWidth = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(
@@ -56,7 +57,9 @@ class AnalyticsCard extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: AppSize.width(context) * 0.05,
+                width: currentScreenWidth > 1220
+                    ? AppSize.width(context) * 0.05
+                    : AppSize.width(context) * 0.03,
               ),
               Column(
                 children: [
