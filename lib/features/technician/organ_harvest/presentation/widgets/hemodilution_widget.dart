@@ -3,8 +3,8 @@ import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_segment_button.dart';
 import 'package:flutter/material.dart';
 
-class OrganScreenWidget extends StatelessWidget {
-  const OrganScreenWidget({super.key});
+class HemodilutionWidget extends StatelessWidget {
+  const HemodilutionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,9 @@ class OrganScreenWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const OHMainHeader(),
+          const OHMainHeader(
+            title: "Hemodilution Test",
+          ),
           const SizedBox(height: 16),
           AppCard(
             title:

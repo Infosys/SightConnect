@@ -18,7 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 
-import '../features/technician/dashboard/presntation/pages/technician_home_page.dart';
+import '../features/technician/dashboard/presntation/pages/technician_dashboard_page.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
   if (kIsWeb) {
@@ -80,7 +80,7 @@ class MyApp extends ConsumerWidget {
                 // initialRoute: initialRoute,
                 // navigatorKey: AppRouter.navigatorKey,
                 // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: const TechnicianHomePage(),
+                home: const TechnicianDashboardPage(),
 
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(

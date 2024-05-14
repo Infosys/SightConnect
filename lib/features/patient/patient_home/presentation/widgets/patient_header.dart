@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../technician/dashboard/presntation/pages/technician_home_page.dart';
+import '../../../../technician/dashboard/presntation/pages/technician_dashboard_page.dart';
 
 class PatientHeader extends HookWidget {
   const PatientHeader({super.key});
@@ -18,9 +18,11 @@ class PatientHeader extends HookWidget {
           InkWell(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TechnicianHomePage()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TechnicianDashboardPage(),
+                ),
+              );
             },
             child: Text(
               'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.',

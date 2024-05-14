@@ -4,8 +4,11 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class OHMainHeader extends StatelessWidget {
-  const OHMainHeader({super.key});
-
+  const OHMainHeader({
+    super.key,
+    required this.title,
+  });
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +18,7 @@ class OHMainHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Hemodilution Test",
+              title,
               style: applyFiraSansFont(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,

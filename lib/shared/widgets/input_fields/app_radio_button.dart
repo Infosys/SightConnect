@@ -11,6 +11,7 @@ class AppRadioButton<T> extends HookWidget {
     required this.items,
     required this.displayItems,
     this.initialValue,
+    this.titleStyle,
     this.title,
     this.onChanged,
     this.direction = "HORIZONTAL",
@@ -21,6 +22,7 @@ class AppRadioButton<T> extends HookWidget {
 
   final T? initialValue;
   final String? title;
+  final TextStyle? titleStyle;
   final List<T> displayItems;
   final List<T> items;
   final Function(T)? onChanged;
@@ -45,10 +47,11 @@ class AppRadioButton<T> extends HookWidget {
               padding: const EdgeInsets.only(left: 8, top: 8),
               child: Text(
                 title!,
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.darkGrey,
-                ),
+                style: titleStyle ??
+                    applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.darkGrey,
+                    ),
               ),
             ),
           if (title != null) const SizedBox(height: 8),
@@ -82,11 +85,15 @@ class AppRadioButton<T> extends HookWidget {
                   .toList(),
             ),
           if (direction == "HORIZONTAL")
-            Row(
+            Wrap(
               children: items
                   .map(
-                    (item) => Padding(
+                    (item) => Container(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
+                      constraints: const BoxConstraints(
+                        minWidth: 100,
+                        maxWidth: 150,
+                      ),
                       child: Row(
                         children: [
                           Radio(
@@ -97,11 +104,13 @@ class AppRadioButton<T> extends HookWidget {
                               onChanged?.call(value);
                             },
                           ),
-                          Text(
-                            displayItems[items.indexOf(item)].toString(),
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.grey,
+                          Flexible(
+                            child: Text(
+                              displayItems[items.indexOf(item)].toString(),
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.grey,
+                              ),
                             ),
                           ),
                         ],
