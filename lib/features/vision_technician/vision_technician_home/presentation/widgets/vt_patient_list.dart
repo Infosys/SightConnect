@@ -128,5 +128,6 @@ class PatientAssessmentPaginatedTable extends HookConsumerWidget {
         ],
       ),
     );
+  
   }
 }
