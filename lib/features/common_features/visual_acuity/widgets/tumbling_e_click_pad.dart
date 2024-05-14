@@ -106,7 +106,8 @@ class ETile extends StatelessWidget {
           shape: BoxShape.circle,
           color: isSelected ? AppColor.blue.withOpacity(0.7) : null,
         ),
-        child: SizedBox(
+        child: Container(
+          padding: const EdgeInsets.all(4),
           child: RotatedBox(
               quarterTurns: quater,
               child: SvgPicture.asset(AppImages.tumblingE)),
