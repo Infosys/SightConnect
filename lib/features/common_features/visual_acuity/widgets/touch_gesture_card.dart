@@ -1,18 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../domain/enums/tumbling_enums.dart';
-import '../domain/models/tumbling_models.dart';
-import '../features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
-import '../features/visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import 'tumbling_e_click_pad.dart';
-import '../features/visual_acuity_tumbling/presentation/widgets/visual_acuity_dialog.dart';
 
 class TouchGestureCard extends HookConsumerWidget {
   const TouchGestureCard({
@@ -77,6 +71,7 @@ class TouchGestureCard extends HookConsumerWidget {
             Positioned(
               child: isDistanceValid
                   ? Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -96,80 +91,87 @@ class TouchGestureCard extends HookConsumerWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        TumblingEClickPad(
-                          onBottomClicked: () {
-                            handleUserResponse(
-                              QuestionDirection.down,
-                              false,
-                            );
-                            // model.handUserResponse(
-                            //   UserResponse(
-                            //     levelNumber: model.currentLevel!,
-                            //     swipeDirection: QuestionDirection.down,
-                            //     mode: model.gameMode!,
-                            //     questionIndex: model.currentIndex!,
-                            //     isUserResponseCorrect: false,
-                            //   ),
-                            // );
-                            handleGameOver(context);
-                          },
-                          onLeftClicked: () {
-                            // model.handUserResponse(
-                            //   UserResponse(
-                            //     levelNumber: model.currentLevel!,
-                            //     swipeDirection: QuestionDirection.left,
-                            //     mode: model.gameMode!,
-                            //     questionIndex: model.currentIndex!,
-                            //     isUserResponseCorrect: false,
-                            //   ),
-                            // );
-                            handleUserResponse(
-                              QuestionDirection.left,
-                              false,
-                            );
-                            handleGameOver(context);
-                          },
-                          onRightClicked: () {
-                            // model.handUserResponse(
-                            //   UserResponse(
-                            //     levelNumber: model.currentLevel!,
-                            //     swipeDirection: QuestionDirection.right,
-                            //     mode: model.gameMode!,
-                            //     questionIndex: model.currentIndex!,
-                            //     isUserResponseCorrect: false,
-                            //   ),
-                            // );
-                            handleUserResponse(
-                              QuestionDirection.right,
-                              false,
-                            );
-                            handleGameOver(context);
-                          },
-                          onTopClicked: () {
-                            // model.handUserResponse(
-                            //   UserResponse(
-                            //     levelNumber: model.currentLevel!,
-                            //     swipeDirection: QuestionDirection.up,
-                            //     mode: model.gameMode!,
-                            //     questionIndex: model.currentIndex!,
-                            //     isUserResponseCorrect: false,
-                            //   ),
-                            // );
-                            handleUserResponse(
-                              QuestionDirection.up,
-                              false,
-                            );
-                            handleGameOver(context);
-                          },
+                        Expanded(
+                          child: Center(
+                            child: TumblingEClickPad(
+                              onBottomClicked: () {
+                                handleUserResponse(
+                                  QuestionDirection.down,
+                                  false,
+                                );
+                                // model.handUserResponse(
+                                //   UserResponse(
+                                //     levelNumber: model.currentLevel!,
+                                //     swipeDirection: QuestionDirection.down,
+                                //     mode: model.gameMode!,
+                                //     questionIndex: model.currentIndex!,
+                                //     isUserResponseCorrect: false,
+                                //   ),
+                                // );
+                                handleGameOver(context);
+                              },
+                              onLeftClicked: () {
+                                // model.handUserResponse(
+                                //   UserResponse(
+                                //     levelNumber: model.currentLevel!,
+                                //     swipeDirection: QuestionDirection.left,
+                                //     mode: model.gameMode!,
+                                //     questionIndex: model.currentIndex!,
+                                //     isUserResponseCorrect: false,
+                                //   ),
+                                // );
+                                handleUserResponse(
+                                  QuestionDirection.left,
+                                  false,
+                                );
+                                handleGameOver(context);
+                              },
+                              onRightClicked: () {
+                                // model.handUserResponse(
+                                //   UserResponse(
+                                //     levelNumber: model.currentLevel!,
+                                //     swipeDirection: QuestionDirection.right,
+                                //     mode: model.gameMode!,
+                                //     questionIndex: model.currentIndex!,
+                                //     isUserResponseCorrect: false,
+                                //   ),
+                                // );
+                                handleUserResponse(
+                                  QuestionDirection.right,
+                                  false,
+                                );
+                                handleGameOver(context);
+                              },
+                              onTopClicked: () {
+                                // model.handUserResponse(
+                                //   UserResponse(
+                                //     levelNumber: model.currentLevel!,
+                                //     swipeDirection: QuestionDirection.up,
+                                //     mode: model.gameMode!,
+                                //     questionIndex: model.currentIndex!,
+                                //     isUserResponseCorrect: false,
+                                //   ),
+                                // );
+                                handleUserResponse(
+                                  QuestionDirection.up,
+                                  false,
+                                );
+                                handleGameOver(context);
+                              },
+                            ),
+                          ),
                         ),
-                        Row(
-                          children: [
-                            const SizedBox.shrink(),
-                            const Spacer(),
-                            OutlinedButton(
-                                onPressed: () {},
-                                child: const Text('I Can’t see'))
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Row(
+                            children: [
+                              const SizedBox.shrink(),
+                              const Spacer(),
+                              OutlinedButton(
+                                  onPressed: () {},
+                                  child: const Text('I Can’t see'))
+                            ],
+                          ),
                         )
                       ],
                     )

@@ -28,12 +28,13 @@ class TumblingEClickPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: AppSize.height(context) * 0.45,
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ETile(
                 quater: 3,
@@ -42,7 +43,9 @@ class TumblingEClickPad extends StatelessWidget {
               ),
             ],
           ),
-          Row(
+        ),
+        Expanded(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ETile(
@@ -57,8 +60,11 @@ class TumblingEClickPad extends StatelessWidget {
               ),
             ],
           ),
-          Row(
+        ),
+        Expanded(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ETile(
                 quater: 1,
@@ -66,9 +72,9 @@ class TumblingEClickPad extends StatelessWidget {
                 onTap: onBottomClicked,
               ),
             ],
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -90,15 +96,17 @@ class ETile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: AppSize.height(context) * 0.13,
-        width: AppSize.width(context) * 0.30,
+        constraints: BoxConstraints(
+          maxHeight: AppSize.height(context) * 0.1,
+          maxWidth: AppSize.height(context) * 0.1,
+        ),
+        height: double.infinity,
+        width: AppSize.width(context) / 4,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: isSelected ? AppColor.blue.withOpacity(0.7) : null,
         ),
-        child: Container(
-          padding: const EdgeInsets.all(AppSize.kl),
-          height: 80,
+        child: SizedBox(
           child: RotatedBox(
               quarterTurns: quater,
               child: SvgPicture.asset(AppImages.tumblingE)),

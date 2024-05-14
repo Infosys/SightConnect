@@ -8,8 +8,8 @@ import '../../../../../../../core/constants/app_color.dart';
 import '../../../../../../../core/constants/app_images.dart';
 import '../../../../../../../core/constants/app_size.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
-import '../../../../widgets/visual_acuity_face_distance_page.dart';
 import '../../../../widgets/tumbling_e_click_pad.dart';
+import '../../../../widgets/visual_acuity_face_distance_page.dart';
 import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
 
 class VisualAcuityDemoPage extends HookConsumerWidget {
@@ -25,6 +25,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
             height: AppSize.km,
@@ -120,34 +121,37 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                             Stack(
                               alignment: Alignment.center,
                               children: [
-                                TumblingEClickPad(
-                                  isRightSelected: true,
-                                  onRightClicked: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            VisualAcuityFaceDistancePage(
-                                          minDistance: 35,
-                                          maxDistance: 45,
-                                          title: "Distance to Face",
-                                          onProceed: () {
-                                            Navigator.of(context)
-                                                .pushReplacement(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const VisualAcuityTumblingLeftEyeInstruction(),
-                                              ),
-                                            );
-                                          },
+                                SizedBox(
+                                  height: AppSize.height(context) * 0.5,
+                                  child: TumblingEClickPad(
+                                    isRightSelected: true,
+                                    onRightClicked: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              VisualAcuityFaceDistancePage(
+                                            minDistance: 35,
+                                            maxDistance: 45,
+                                            title: "Distance to Face",
+                                            onProceed: () {
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const VisualAcuityTumblingLeftEyeInstruction(),
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
                                 Positioned(
-                                  bottom: 80,
-                                  right: 40,
+                                  bottom: 100,
+                                  right: 60,
                                   child: SvgPicture.asset(
                                     AppImages.cursor,
                                     height: 100,

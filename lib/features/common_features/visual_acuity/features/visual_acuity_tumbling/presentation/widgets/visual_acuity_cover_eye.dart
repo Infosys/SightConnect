@@ -38,12 +38,9 @@ class VisualAcuityCoverEye extends StatelessWidget {
             ? Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(math.pi),
-                child: Positioned(
-                  left: 20,
-                  child: SvgPicture.asset(
-                    height: height,
-                    AppImages.handClose,
-                  ),
+                child: SvgPicture.asset(
+                  height: height,
+                  AppImages.handClose,
                 ),
               )
             : const SizedBox(),

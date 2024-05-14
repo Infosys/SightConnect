@@ -63,7 +63,9 @@ class TopReadingCard extends StatelessWidget {
           ),
           child: Container(
             // height: AppSize.height(context) * 0.4, //height for 2m distance
-            height: AppSize.height(context) * 0.46,
+            height: isShortDistance
+                ? AppSize.height(context) * 0.3
+                : AppSize.height(context) * 0.46,
             padding: const EdgeInsets.symmetric(
               horizontal: AppSize.km - 3,
               vertical: AppSize.ks,
