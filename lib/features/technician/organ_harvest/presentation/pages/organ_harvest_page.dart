@@ -22,7 +22,7 @@ class OrganHarvestPage extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 final widgets = [
-                  const PreCutWidget(),
+                  const SizedBox(),
                   const HemodilutionWidget(),
                   const SerologyWidget(),
                   const OrganHarvestWidget(),
