@@ -630,7 +630,7 @@
   "vgDependent": "Dependent",
   "vgAddMember": "Add Member",
   "vgCompleteProfile": "Complete Profile",
-  "vgStartAssessment": "Start Assessment",
+  "vgStartAssessment": "Start\r\nAssessment",
   "vgSearchPatientByPhoneNumber": "Search Patient by Phone Number",
   "vgInvalidPhoneNumber": "Please enter a valid phone number",
   "vgServerError": "Server Error",

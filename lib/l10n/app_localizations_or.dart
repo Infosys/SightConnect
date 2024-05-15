@@ -1766,7 +1766,7 @@ class AppLocalizationsOr extends AppLocalizations {
   String get vgCompleteProfile => 'Complete Profile';
 
   @override
-  String get vgStartAssessment => 'Start Assessment';
+  String get vgStartAssessment => 'Start\r\nAssessment';
 
   @override
   String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
