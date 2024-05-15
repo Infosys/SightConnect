@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/hemodilution_widget.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/oh_side_stages.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/organ_harvest_widget.dart';
+import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/pre_cut_widget.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/serology_widget.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/providers/organ_harvest_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -21,12 +22,12 @@ class OrganHarvestPage extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 final widgets = [
-                  const SizedBox(),
+                  const PreCutWidget(),
                   const HemodilutionWidget(),
                   const SerologyWidget(),
                   const OrganHarvestWidget(),
                   const SizedBox(),
-                  const SizedBox(),
+                  const PreCutWidget(),
                   const SizedBox(),
                   const SizedBox(),
                 ];
