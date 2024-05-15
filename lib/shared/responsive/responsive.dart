@@ -12,6 +12,9 @@ class Responsive extends StatelessWidget {
   final Widget? tabletBody;
   final Widget? desktopBody;
 
+  static bool isSemiDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1400;
+
   static bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.width < 768;
 

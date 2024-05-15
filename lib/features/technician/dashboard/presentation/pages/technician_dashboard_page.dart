@@ -68,8 +68,8 @@ class TechnicianDashboardPage extends StatelessWidget {
                   child: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      TechnicianHomeTab(),
                       TechnicianReferralsTab(),
+                      TechnicianHomeTab(),
                       TechnicianHarvestsTab(),
                       TechnicianReviewsTab(),
                     ],
