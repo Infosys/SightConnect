@@ -1,18 +1,15 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class AppRadioButton<T> extends HookWidget {
-  AppRadioButton({
-    super.key,
-    this.minWidth,
-    this.maxWidth,
+class AppCheckboxList<T> extends HookWidget {
+  AppCheckboxList({
+    Key? key,
     required this.items,
     required this.displayItems,
-    this.initialValue,
+    this.initialValues,
     this.titleStyle,
     this.title,
     this.onChanged,
@@ -20,29 +17,22 @@ class AppRadioButton<T> extends HookWidget {
   })  : assert(items.isNotEmpty, "Items cannot be empty"),
         assert(displayItems.isNotEmpty, "Display Items cannot be empty"),
         assert(items.length == displayItems.length,
-            "Items and Display Items must have the same length");
+            "Items and Display Items must have the same length"),
+        super(key: key);
 
-  final T? initialValue;
+  final List<T>? initialValues;
   final String? title;
   final TextStyle? titleStyle;
   final List<T> displayItems;
   final List<T> items;
-  final Function(T)? onChanged;
+  final Function(List<T>)? onChanged;
   final String direction;
-  final double? minWidth;
-  final double? maxWidth;
 
   @override
   Widget build(BuildContext context) {
-    final selectedValue = useState<T?>(initialValue);
-    final isMobile = Responsive.isMobile(context);
+    final selectedValues = useState<List<T>>(initialValues ?? []);
 
     return Container(
-      // color: Colors.pink,
-      constraints: BoxConstraints(
-        minWidth: minWidth ?? (isMobile ? AppSize.width(context) * 0.8 : 300),
-        maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.8 : 300),
-      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,20 +58,26 @@ class AppRadioButton<T> extends HookWidget {
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Row(
                         children: [
-                          Radio(
-                            value: item,
-                            groupValue: selectedValue.value,
+                          Checkbox(
+                            value: selectedValues.value.contains(item),
                             onChanged: (value) {
-                              selectedValue.value = value as T;
-                              onChanged?.call(value);
+                              if (value == true) {
+                                selectedValues.value = [
+                                  ...selectedValues.value,
+                                  item
+                                ];
+                              } else {
+                                selectedValues.value = selectedValues.value
+                                    .where((i) => i != item)
+                                    .toList();
+                              }
+                              onChanged?.call(selectedValues.value);
                             },
                           ),
                           Text(
                             displayItems[items.indexOf(item)].toString(),
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              color: AppColor.grey,
-                            ),
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.grey),
                           ),
                         ],
                       ),
@@ -95,29 +91,33 @@ class AppRadioButton<T> extends HookWidget {
                   .map(
                     (item) => Container(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
-                      constraints: const BoxConstraints(
-                        minWidth: 100,
-                        maxWidth: 150,
-                      ),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Radio(
-                            value: item,
-                            groupValue: selectedValue.value,
+                          Checkbox(
+                            value: selectedValues.value.contains(item),
                             onChanged: (value) {
-                              selectedValue.value = value as T;
-                              onChanged?.call(value);
+                              if (value == true) {
+                                selectedValues.value = [
+                                  ...selectedValues.value,
+                                  item
+                                ];
+                              } else {
+                                selectedValues.value = selectedValues.value
+                                    .where((i) => i != item)
+                                    .toList();
+                              }
+                              onChanged?.call(selectedValues.value);
                             },
                           ),
                           Flexible(
                             child: Text(
                               displayItems[items.indexOf(item)].toString(),
-                              style: applyRobotoFont(
-                                fontSize: 14,
-                                color: AppColor.grey,
-                              ),
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.grey),
                             ),
                           ),
+                          const SizedBox(width: AppSize.kl)
                         ],
                       ),
                     ),
