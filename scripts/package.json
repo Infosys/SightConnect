@@ -11,7 +11,8 @@
     "app-translations:dart:watch": "nodemon -i ./outputs ./appTranslationsDart.js",
     "arb-to-excel": "node ./arbToExcel.js",
     "update-arbs": "ts-node ./updateArbs.ts",
-    "update-arbs:watch": "nodemon -i ./outputs ./updateArbs.ts"
+    "update-arbs:watch": "nodemon -i ./outputs ./updateArbs.ts",
+    "app-excel-diff": "node ./appExcelDiff.js"
   },
   "keywords": [],
   "author": "Nandan Reddy",
