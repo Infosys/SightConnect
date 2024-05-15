@@ -7,9 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TechnicianHomeFilterTabs extends HookConsumerWidget {
-  const TechnicianHomeFilterTabs({super.key});
-
+class AppSearchFilterTabs extends HookConsumerWidget {
+  const AppSearchFilterTabs({
+    this.searchController,
+    this.onSearch,
+    super.key,
+  });
+  final TextEditingController? searchController;
+  final void Function(String)? onSearch;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var isSelected = useState<int>(-1);
@@ -55,14 +60,24 @@ class TechnicianHomeFilterTabs extends HookConsumerWidget {
             ),
           ),
         ),
-        if (!Responsive.isMobile(context)) const _SearchAndFilter()
+        if (!Responsive.isMobile(context))
+          _SearchAndFilter(
+            onSearch: onSearch,
+            searchController: searchController,
+          )
       ],
     );
   }
 }
 
 class _SearchAndFilter extends StatelessWidget {
-  const _SearchAndFilter({super.key});
+  const _SearchAndFilter({
+    super.key,
+    this.searchController,
+    this.onSearch,
+  });
+  final TextEditingController? searchController;
+  final void Function(String)? onSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +97,8 @@ class _SearchAndFilter extends StatelessWidget {
           SizedBox(
             width: AppSize.width(context) * 0.2,
             child: TextFormField(
+              controller: searchController,
+              onChanged: onSearch,
               decoration: InputDecoration(
                 hintText: 'Search',
                 hintStyle: applyRobotoFont(color: AppColor.grey, fontSize: 14),

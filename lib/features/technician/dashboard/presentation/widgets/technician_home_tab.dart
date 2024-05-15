@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 import 'technician_home_analytics.dart';
-import 'technician_home_filtertabs.dart';
 import 'technician_home_table.dart';
 
 class TechnicianHomeTab extends StatelessWidget {
@@ -27,8 +26,6 @@ class TechnicianHomeTab extends StatelessWidget {
                 children: [
                   if (Responsive.isTablet(context))
                     const TechnicianHomeAnalytics(orientation: Axis.horizontal),
-                  const TechnicianHomeFilterTabs(),
-                  const SizedBox(height: AppSize.kl),
                   const TechnicianHomeTable(),
                 ],
               ),
