@@ -29,7 +29,7 @@ class AppSegmentButton<T> extends HookWidget {
         maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
       ),
       child: SegmentedButton(
-        style: SegmentedButton.styleFrom(
+        style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
           backgroundColor: Colors.white,
           side: const BorderSide(
