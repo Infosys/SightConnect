@@ -3778,6 +3778,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Maximum text size reached'**
   String get maximumTextSizeReached;
+
+  /// No description provided for @chatClearChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Chat'**
+  String get chatClearChat;
+
+  /// No description provided for @chatEyeAssessmentRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye assessment is recommended for you.'**
+  String get chatEyeAssessmentRecommended;
+
+  /// No description provided for @chatDoYouWantToTakeTheTriageEyeAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to take the triage eye assessment?'**
+  String get chatDoYouWantToTakeTheTriageEyeAssessment;
+
+  /// No description provided for @chatChatbotNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Chatbot is not available at the moment. Please try again later.'**
+  String get chatChatbotNotAvailable;
+
+  /// No description provided for @chatTypeHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type here...'**
+  String get chatTypeHere;
+
+  /// No description provided for @switchProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Profile'**
+  String get switchProfile;
+
+  /// No description provided for @switchRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Role'**
+  String get switchRole;
+
+  /// No description provided for @switchTenant.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Tenant'**
+  String get switchTenant;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
