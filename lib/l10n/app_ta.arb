@@ -658,7 +658,7 @@
   "reset": "மீட்டமை",
   "minimumTextSizeReached": "குறைந்தபட்ச உரை அளவு அடைந்துவிட்டது",
   "maximumTextSizeReached": "அதிகபட்ச உரை அளவு அடைந்துவிட்டது",
-  "switchProfile": "",
-  "switchRole": "",
-  "switchTenant": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

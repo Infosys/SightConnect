@@ -115,7 +115,7 @@ class VgProfile extends ConsumerWidget {
                           color: AppColor.black,
                         ),
                         title: Text(
-                          "Switch Profile",
+                          loc.switchProfile,
                           style: applyRobotoFont(
                             fontWeight: FontWeight.w500,
                           ),

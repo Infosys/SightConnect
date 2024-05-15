@@ -124,7 +124,7 @@ class VTProfilePage extends HookConsumerWidget {
                             color: AppColor.black,
                           ),
                           title: Text(
-                            "Switch Profile",
+                            loc.switchProfile,
                             style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                             ),

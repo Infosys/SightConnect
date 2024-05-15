@@ -658,7 +658,7 @@
   "reset": "ପୁନଃସେଟ କରନ୍ତୁ",
   "minimumTextSizeReached": "ନୂନ୍ୟତମ ପାଠ ଆକାର ପହଞ୍ଚିଛି",
   "maximumTextSizeReached": "ସର୍ବାଧିକ ପାଠ ଆକାର ପହଞ୍ଚିଛି",
-  "switchProfile": "",
-  "switchRole": "",
-  "switchTenant": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

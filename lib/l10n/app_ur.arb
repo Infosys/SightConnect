@@ -658,7 +658,7 @@
   "reset": "ری سیٹ کریں",
   "minimumTextSizeReached": "کم سے کم متن کا سائز پہنچ گیا",
   "maximumTextSizeReached": "زیادہ سے زیادہ متن کا سائز پہنچ گیا",
-  "switchProfile": "",
-  "switchRole": "",
-  "switchTenant": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }
