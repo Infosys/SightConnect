@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 
 import '../../dashboard/presentation/widgets/technician_home_tab.dart';
 
-
-
 class TechnicianHomePage extends StatelessWidget {
   const TechnicianHomePage({super.key});
 
@@ -59,8 +57,8 @@ class TechnicianHomePage extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        TechnicianHomeTab(),
                         TechnicianReferralsTab(),
+                        TechnicianHomeTab(),
                         TechnicianHarvestsTab(),
                         TechnicianReviewsTab(),
                       ],
