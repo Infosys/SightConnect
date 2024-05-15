@@ -658,5 +658,7 @@
   "reset": "পুনৰ সেট কৰক",
   "minimumTextSizeReached": "ন্যূনতম পাঠ আকাৰ পৌঁছাইছে",
   "maximumTextSizeReached": "সৰ্বাধিক পাঠ আকাৰ পৌঁছাইছে",
-  "switchProfile": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

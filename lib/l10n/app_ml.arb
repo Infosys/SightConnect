@@ -658,5 +658,7 @@
   "reset": "പുനഃസജ്ജീകരിക്കുക",
   "minimumTextSizeReached": "ഏറ്റവും കുറഞ്ഞ വാചക വലിപ്പം എത്തി",
   "maximumTextSizeReached": "ഏറ്റവും കൂടിയ വാചക വലിപ്പം എത്തി",
-  "switchProfile": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

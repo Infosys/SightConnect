@@ -1866,4 +1866,10 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get switchProfile => 'Switch Profile';
+
+  @override
+  String get switchRole => 'Switch Role';
+
+  @override
+  String get switchTenant => 'Switch Tenant';
 }

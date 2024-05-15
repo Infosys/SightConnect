@@ -658,5 +658,7 @@
   "reset": "रीसेट करा",
   "minimumTextSizeReached": "किमान मजकूर आकार पोहोचलेले आहे",
   "maximumTextSizeReached": "कमाल मजकूर आकार पोहोचलेले आहे",
-  "switchProfile": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

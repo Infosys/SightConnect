@@ -658,5 +658,7 @@
   "reset": "ફરીથી સેટ કરો",
   "minimumTextSizeReached": "ન્યૂનતમ ટેક્સ્ટ કદ પહોંચ્યો છે",
   "maximumTextSizeReached": "મહત્તમ ટેક્સ્ટ કદ પહોંચ્યો છે",
-  "switchProfile": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

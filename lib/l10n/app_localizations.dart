@@ -3814,6 +3814,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch Profile'**
   String get switchProfile;
+
+  /// No description provided for @switchRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Role'**
+  String get switchRole;
+
+  /// No description provided for @switchTenant.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Tenant'**
+  String get switchTenant;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

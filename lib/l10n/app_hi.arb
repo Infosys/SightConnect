@@ -658,5 +658,7 @@
   "reset": "रीसेट",
   "minimumTextSizeReached": "न्यूनतम पाठ आकार पहुंच गया",
   "maximumTextSizeReached": "अधिकतम पाठ आकार पहुंच गया",
-  "switchProfile": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }

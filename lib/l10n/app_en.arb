@@ -663,5 +663,7 @@
   "chatDoYouWantToTakeTheTriageEyeAssessment": "Do you want to take the triage eye assessment?",
   "chatChatbotNotAvailable": "Chatbot is not available at the moment. Please try again later.",
   "chatTypeHere": "Type here...",
-  "switchProfile": "Switch Profile"
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant"
 }
