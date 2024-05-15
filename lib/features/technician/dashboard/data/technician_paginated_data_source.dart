@@ -50,32 +50,35 @@ class TechnicianPaginatedDataSource extends DataTableSource {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleAvatar(),
+              const CircleAvatar(maxRadius: 18),
               const SizedBox(width: AppSize.ks),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${data[index]["Donor"]}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.black,
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${data[index]["Donor"]}",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: AppSize.ks),
-                  Text(
-                    "ID 234532",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
+                    const SizedBox(height: AppSize.ks),
+                    Text(
+                      "ID 234532",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.grey,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

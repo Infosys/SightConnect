@@ -12,26 +12,29 @@ class TechnicianHomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (Responsive.isDesktop(context)) const TechnicianHomeAnalytics(),
-          SizedBox(width: AppSize.width(context) * 0.015),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(AppSize.km),
-              child: const Column(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (Responsive.isDesktop(context)) const TechnicianHomeAnalytics(),
+            if (Responsive.isDesktop(context))
+              const SizedBox(width: AppSize.kl),
+            Expanded(
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TechnicianHomeFilterTabs(),
-                  SizedBox(height: AppSize.kl),
-                  TechnicianHomeTable(),
+                  if (Responsive.isTablet(context))
+                    const TechnicianHomeAnalytics(orientation: Axis.horizontal),
+                  const TechnicianHomeFilterTabs(),
+                  const SizedBox(height: AppSize.kl),
+                  const TechnicianHomeTable(),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

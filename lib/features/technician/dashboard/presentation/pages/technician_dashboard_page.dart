@@ -16,68 +16,69 @@ class TechnicianDashboardPage extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: AppColor.white,
-            shadowColor: AppColor.blackOpacity,
-            elevation: 3,
-            leadingWidth: 220,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: Image.asset(
-                AppImages.logo,
-                height: 35,
-              ),
+        appBar: AppBar(
+          backgroundColor: AppColor.white,
+          shadowColor: AppColor.blackOpacity,
+          elevation: 3,
+          leadingWidth: 220,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Image.asset(
+              AppImages.logo,
+              height: 35,
             ),
-            automaticallyImplyLeading: false,
           ),
-          body: Container(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TabBar(
-                  indicatorColor: AppColor.primary,
-                  indicatorWeight: 2,
-                  dividerColor: AppColor.blue,
-                  unselectedLabelStyle: applyFiraSansFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.grey,
+          automaticallyImplyLeading: false,
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TabBar(
+                indicatorColor: AppColor.primary,
+                indicatorWeight: 2,
+                dividerColor: AppColor.blue,
+                unselectedLabelStyle: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppColor.grey,
+                ),
+                labelStyle: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+                tabs: const [
+                  Tab(
+                    child: Text('Home'),
                   ),
-                  labelStyle: applyFiraSansFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                  Tab(
+                    child: Text('Referrals'),
                   ),
-                  tabs: const [
-                    Tab(
-                      child: Text('Home'),
-                    ),
-                    Tab(
-                      child: Text('Referrals'),
-                    ),
-                    Tab(
-                      child: Text('Harvests'),
-                    ),
-                    Tab(
-                      child: Text('Reviews'),
-                    ),
+                  Tab(
+                    child: Text('Harvests'),
+                  ),
+                  Tab(
+                    child: Text('Reviews'),
+                  ),
+                ],
+              ),
+              const Expanded(
+                child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    TechnicianHomeTab(),
+                    TechnicianReferralsTab(),
+                    TechnicianHarvestsTab(),
+                    TechnicianReviewsTab(),
                   ],
                 ),
-                const Expanded(
-                  child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      TechnicianHomeTab(),
-                      TechnicianReferralsTab(),
-                      TechnicianHarvestsTab(),
-                      TechnicianReviewsTab(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
