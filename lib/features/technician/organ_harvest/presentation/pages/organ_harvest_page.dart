@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/oh_side_stages.dart';
+import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/order_Delivery.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/organ_screening_widget.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/serology_widget.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/providers/organ_harvest_provider.dart';
@@ -20,14 +21,18 @@ class OrganHarvestPage extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) {
                 final widgets = [
+                  const OrderDelivery(),
                   const OrganScreenWidget(),
+
+                  const SerologyWidget(
+                    
+                  ),
                   const SerologyWidget(),
                   const SerologyWidget(),
                   const SerologyWidget(),
                   const SerologyWidget(),
                   const SerologyWidget(),
-                  const SerologyWidget(),
-                  const SerologyWidget(),
+                  
                 ];
                 final index = ref.watch(organHarvestProvider).currentStep;
                 return Expanded(
