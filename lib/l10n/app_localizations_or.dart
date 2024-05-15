@@ -11,27 +11,27 @@ class AppLocalizationsOr extends AppLocalizations {
 
   @override
   String loginEnterOTP(String mobileNumber) {
-    return 'ଦଯ଼ାକରି ପଠାଯାଇଥିବା ଓଟିପି ପ୍ରବେଶ କରାନ୍ତୁ ${mobileNumber}';
+    return 'Please enter the OTP sent to ${mobileNumber}';
   }
 
   @override
   String loginResendOTPIn(String time) {
-    return 'ପୁନର୍ବାର ପଠାନ୍ତୁ ${time}';
+    return 'Resend in ${time}';
   }
 
   @override
   String patientHasAnAppointment(String patient) {
-    return '${patient} ରୋଗୀର ଏକ ଆପଏଣ୍ଟମେଣ୍ଟ ଅଛି';
+    return '${patient} has an appointment';
   }
 
   @override
   String vgEmptyResults(String type) {
-    return 'ବର୍ତ୍ତମାନ କୌଣସି ପ୍ରକାର ନାହିଁ। \'ଯୋଗ କରନ୍ତୁ ${type}\' ଉପରେ ଟିପନ୍ତୁ।';
+    return 'There are no ${type}s at present. Tap on "Add ${type}"';
   }
 
   @override
   String vgSearchByIdName(String searchType) {
-    return '${searchType} ପରିଚଯ଼, ନାମ ଦ୍ୱାରା ଖୋଜନ୍ତୁ';
+    return 'Search by ${searchType} ID, Name';
   }
 
   @override
@@ -728,1108 +728,1108 @@ class AppLocalizationsOr extends AppLocalizations {
   String get inviteNowText => 'ବର୍ତ୍ତମାନ ନିମନ୍ତ୍ରଣ କରନ୍ତୁ';
 
   @override
-  String get resend => 'ପୁନର୍ବାର ପଠାନ୍ତୁ';
+  String get resend => 'Resend';
 
   @override
-  String get mobileNumber => 'ମୋବାଇଲ ନମ୍ବର';
+  String get mobileNumber => 'Mobile Number';
 
   @override
-  String get loginVerifyMobileNumber => 'ଆପଣଙ୍କ ମୋବାଇଲ ନମ୍ବର ଯାଞ୍ଚ କରନ୍ତୁ';
+  String get loginVerifyMobileNumber => 'Verify your mobile number';
 
   @override
-  String get loginEnterMobileNumber => 'ଦଯ଼ାକରି ମୋବାଇଲ ନମ୍ବର ଭରଣ କରନ୍ତୁ';
+  String get loginEnterMobileNumber => 'Please enter mobile number';
 
   @override
-  String get loginEnterValidMobileNumber => 'ଦଯ଼ାକରି ବୈଧ ମୋବାଇଲ ନମ୍ବର ଭରଣ କରନ୍ତୁ';
+  String get loginEnterValidMobileNumber => 'Please enter valid mobile number';
 
   @override
-  String get loginUnableToSendOTP => 'ଏହି ନମ୍ବରକୁ ଓଟିପି ପଠାଇବାରେ ଅସମର୍ଥ';
+  String get loginUnableToSendOTP => 'Unable to send OTP to this number';
 
   @override
-  String get loginGetOTP => 'ଓଟିପି ପ୍ରାପ୍ତ କରନ୍ତୁ';
+  String get loginGetOTP => 'Get OTP';
 
   @override
-  String get loginInvalidOTP => 'ଅବୈଧ ଓଟିପି';
+  String get loginInvalidOTP => 'Invalid OTP';
 
   @override
-  String get loginDidntReceiveOTP => 'ଓଟିପି ପାଇନାହାନ୍ତି କି?';
+  String get loginDidntReceiveOTP => 'Didn\'t receive the OTP?';
 
   @override
-  String get loginOTPSent => 'ଓଟିପି ସଫଳତାର ସହ ପଠାଯାଇଛି';
+  String get loginOTPSent => 'OTP sent successfully';
 
   @override
-  String get areYouSure => 'ଆପଣ ନିଶ୍ଚିତ କି?';
+  String get areYouSure => 'Are you sure?';
 
   @override
-  String get triageExitConfirmation => 'ଆପଣ ଟେଷ୍ଟରୁ ବାହାରି ଯିବାକୁ ଚାହୁଁଛନ୍ତି କି?';
+  String get triageExitConfirmation => 'Do you want to exit the Test?';
 
   @override
-  String get triageReportEyeProblems => 'ଚକ୍ଷୁ ସମସ୍ଯ଼ା ବିଷଯ଼ରେ ଜଣାନ୍ତୁ';
+  String get triageReportEyeProblems => 'Report Eye Problems';
 
   @override
-  String get triageHowToReport => 'ଆଖି ସମସ୍ଯ଼ା କିପରି ରିପୋର୍ଟ କରିବେ?';
+  String get triageHowToReport => 'How to report eye problems?';
 
   @override
-  String get triageReportInstructions => 'ଯଦି ଆପଣଙ୍କର ଆଖି ସମ୍ବନ୍ଧୀଯ଼ ସମସ୍ଯ଼ା ରହିଛି, ତେବେ ଉପଯୁକ୍ତ ମାର୍ଗଦର୍ଶନ ପାଇବା ପାଇଁ ଆପଣ ଏଠାରେ ନିଜ ସମସ୍ଯ଼ା ବିଷଯ଼ରେ ସ୍ୱଯ଼ଂ ଘୋଷଣା କରିପାରିବେ ଏବଂ ଉଲ୍ଲେଖ କରିପାରିବେ। ଆପଣ ଏଠାରେ ଆପଣଙ୍କ ବନ୍ଧୁ କିମ୍ବା ପରିବାର ସଦସ୍ଯ଼ଙ୍କ ଆଖି ସମସ୍ଯ଼ା ବିଷଯ଼ରେ ମଧ୍ଯ଼ ଉଲ୍ଲେଖ କରିପାରିବେ ଏବଂ ଉପଯୁକ୍ତ ମାର୍ଗଦର୍ଶନ ପାଇପାରିବେ। ଆଖି ସମସ୍ଯ଼ାର ପ୍ରକୃତି ଏବଂ ଗମ୍ଭୀରତାକୁ ବୁଝିବା ପାଇଁ ଆପଣଙ୍କୁ ନିମ୍ନଲିଖିତ ବିଭାଗରେ କିଛି ପ୍ରଶ୍ନ ପଚରାଯିବ। ସମସ୍ତ ପ୍ରଶ୍ନର ଉତ୍ତର ଦେବା ପରେ ଆପଣଙ୍କୁ କେଉଁ ପରୀକ୍ଷା ଏବଂ ଅନୁସରଣ କରିବାକୁ ହେବ ସେ ବିଷଯ଼ରେ ଆପଣଙ୍କୁ ପରାମର୍ଶ ଏବଂ ମାର୍ଗଦର୍ଶନ ଦିଆଯିବ।';
+  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
 
   @override
-  String get assessment => 'ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get assessment => 'Assessment';
 
   @override
-  String get triageOtherSymptomsQuestion => 'ଆପଣଙ୍କର ଅନ୍ଯ଼ କୌଣସି ଲକ୍ଷଣ ଅଛି କି?';
+  String get triageOtherSymptomsQuestion => 'Do you have any other symptoms?';
 
   @override
-  String get triageEnterSymptoms => 'ଏଠାରେ ଆପଣଙ୍କ ଲକ୍ଷଣଗୁଡ଼ିକୁ ପ୍ରବେଶ କରାନ୍ତୁ।';
+  String get triageEnterSymptoms => 'Enter your symptoms here';
 
   @override
-  String get triageEyeAssessmentResults => 'ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ ଫଳାଫଳ';
+  String get triageEyeAssessmentResults => 'Eye Assessment Results';
 
   @override
-  String get triageTestId => 'ପରୀକ୍ଷା ଆଇ. ଡି.';
+  String get triageTestId => 'Test ID';
 
   @override
-  String get triageEyeScanUpdatedSuccessfully => 'ଚକ୍ଷୁ ସ୍କାନ ସଫଳତାର ସହ ଅପଡେଟ୍ ହୋଇଛି';
+  String get triageEyeScanUpdatedSuccessfully => 'Eye scan updated successfully';
 
   @override
-  String get triageErrorEyeScanNotUpdated => 'ଚକ୍ଷୁ ସ୍କାନ ଅପଡେଟ୍ ହୋଇନାହିଁ!';
+  String get triageErrorEyeScanNotUpdated => 'Eye scan not updated!';
 
   @override
-  String get triageLeftEyeString => 'ବାମ ଆଖି';
+  String get triageLeftEyeString => 'Left Eye';
 
   @override
-  String get triageRightEyeString => 'ଡାହାଣ ଆଖି';
+  String get triageRightEyeString => 'Right Eye';
 
   @override
-  String get vaEyeTest => 'ଚକ୍ଷୁ ପରୀକ୍ଷା';
+  String get vaEyeTest => 'Eye Test';
 
   @override
-  String get instructions => 'ନିର୍ଦ୍ଦେଶାବଳୀ';
+  String get instructions => 'Instructions';
 
   @override
-  String get vaSwipeUp => 'ଉପରକୁ ଘୁଞ୍ଚାନ୍ତୁ';
+  String get vaSwipeUp => 'Swipe Up';
 
   @override
-  String get vaSwipeDown => 'ତଳକୁ ଘୁଞ୍ଚାନ୍ତୁ';
+  String get vaSwipeDown => 'Swipe Down';
 
   @override
-  String get vaSwipeLeft => 'ବାମକୁ ଘୁଞ୍ଚାନ୍ତୁ';
+  String get vaSwipeLeft => 'Swipe Left';
 
   @override
-  String get vaSwipeRight => 'ଡାହାଣକୁ ଘୁଞ୍ଚାନ୍ତୁ';
+  String get vaSwipeRight => 'Swipe Right';
 
   @override
-  String get vaSwipeGestureError => 'ଅବୈଧ ସ୍ୱାଇପ୍ ଅଙ୍ଗଭଙ୍ଗୀ। ଦଯ଼ାକରି ପୁଣିଥରେ ଚେଷ୍ଟା କରନ୍ତୁ।';
+  String get vaSwipeGestureError => 'Invalid swipe gesture. Please try again.';
 
   @override
-  String get permissionNotGranted => 'ଅନୁମତି ମିଳିନାହିଁ।';
+  String get permissionNotGranted => 'Permission not granted';
 
   @override
-  String get serviceNotAvailable => 'ସେବା ଉପଲବ୍ଧ ନାହିଁ';
+  String get serviceNotAvailable => 'Service not available';
 
   @override
-  String get vaDistanceToFace => 'ସାମ୍ନାସାମ୍ନି ଦୂରତା';
+  String get vaDistanceToFace => 'Distance to face';
 
   @override
-  String get vaDistanceToFaceInstruction => 'ଦଯ଼ାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ କ୍ଯ଼ାମେରାଟି ଆପଣଙ୍କ ମୁହଁଠାରୁ 40 ସେ. ମି. ଦୂରରେ ରହିଛି।';
+  String get vaDistanceToFaceInstruction => 'Please ensure that the camera is 40cm away from your face';
 
   @override
-  String get vaBringFaceInsideBox => 'ବାକ୍ସ ଭିତରକୁ ନିଜ ମୁହଁକୁ ଆଣନ୍ତୁ।';
+  String get vaBringFaceInsideBox => 'Bring your face inside the box';
 
   @override
-  String get startAssessment => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ';
+  String get startAssessment => 'Start Assessment';
 
   @override
-  String get optoAddPatientInfo => 'ରୋଗୀ ସୂଚନା ଯୋଗ କରନ୍ତୁ';
+  String get optoAddPatientInfo => 'Add Patient Information';
 
   @override
-  String get loggedOutMessage => 'ଆପଣ ଲଗ୍ ଆଉଟ୍ ହୋଇଛନ୍ତି।';
+  String get loggedOutMessage => 'You have been logged out';
 
   @override
-  String get optoLogoutError => 'କ୍ଷମା କରିବେ, ଆମେ ମୋବାଇଲ୍ ଆପରେ ଏକ ଲଗଆଉଟ୍ ତ୍ରୁଟିର ସମ୍ମୁଖୀନ ହୋଇଛୁ।';
+  String get optoLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
-  String get optoLoggingOut => 'ଲଗ ଆଉଟ...';
+  String get optoLoggingOut => 'Logging out...';
 
   @override
-  String get hello => 'ନମସ୍କାର।';
+  String get hello => 'Hello';
 
   @override
-  String get optoGetStarted => 'ଚାଲନ୍ତୁ ଆରମ୍ଭ କରିବା';
+  String get optoGetStarted => 'Let\'s get started';
 
   @override
-  String get optoCompletedTests => 'ସମ୍ପୂର୍ଣ୍ଣ ହୋଇଥିବା ପରୀକ୍ଷା';
+  String get optoCompletedTests => 'Completed tests';
 
   @override
-  String get optoThisMonth => 'ଏହି ମାସରେ...';
+  String get optoThisMonth => 'This month';
 
   @override
-  String get today => 'ଆଜି';
+  String get today => 'Today';
 
   @override
-  String get services => 'ସେବାଗୁଡ଼ିକ';
+  String get services => 'Services';
 
   @override
-  String get optoAssessmentHistory => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଇତିହାସ';
+  String get optoAssessmentHistory => 'Assessment History';
 
   @override
-  String get optoEyeAssessments => 'ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get optoEyeAssessments => 'Eye Assessments';
 
   @override
-  String get feedback => 'ଫିଡ୍ବ୍ଯ଼ାକ୍';
+  String get feedback => 'FeedBack';
 
   @override
-  String get optoImproveApp => 'ଆମେ ଚାହୁଁ ଯେ ଆପଣଙ୍କ ମତାମତ ଆମ ଆପ୍ଲିକେସନରେ ଉନ୍ନତି ଆଣିବ।';
+  String get optoImproveApp => 'We would like your feedback to improve our application';
 
   @override
-  String get assessments => 'ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get assessments => 'Assessments';
 
   @override
-  String get optoPatientAssistance => 'ରୋଗୀକୁ ସାହାଯ୍ଯ଼ର ଆବଶ୍ଯ଼କତା ଥିଲା କି?';
+  String get optoPatientAssistance => 'Did the patient need assistance?';
 
   @override
-  String get optoVisualAcuity => 'ଦୃଶ୍ଯ଼ମାନ ତୀକ୍ଷ୍ଣତା';
+  String get optoVisualAcuity => 'Visual Acuity';
 
   @override
-  String get optoPatientAided => 'ରୋଗୀକୁ ସାହାଯ୍ଯ଼ କରାଯାଇଥିଲା କି?';
+  String get optoPatientAided => 'Was the patient Aided?';
 
   @override
-  String get optoEyeScan => 'ଚକ୍ଷୁ ସ୍କାନ୍';
+  String get optoEyeScan => 'Eye Scan';
 
   @override
-  String get optoLeaveFeedback => 'ଦଯ଼ାକରି ନିମ୍ନରେ ଆପଣଙ୍କ ମତାମତ ଦିଅନ୍ତୁ।';
+  String get optoLeaveFeedback => 'Please leave your feedback below';
 
   @override
-  String get optoNoInternet => 'କୌଣସି ଇଣ୍ଟରନେଟ ସଂଯୋଗ ନାହିଁ';
+  String get optoNoInternet => 'No Internet Connection';
 
   @override
-  String get optoCheckInternet => 'ଦଯ଼ାକରି ଆପଣଙ୍କର ଇଣ୍ଟରନେଟ ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ ଏବଂ ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ।';
+  String get optoCheckInternet => 'Please check your internet connection and try again';
 
   @override
-  String get optoSearchPatientId => 'ରୋଗୀ ଆଇ. ଡି. କୁ ଖୋଜନ୍ତୁ';
+  String get optoSearchPatientId => 'Search Patient ID';
 
   @override
-  String get optoRecentAssessments => 'ସାମ୍ପ୍ରତିକ ଆକଳନ';
+  String get optoRecentAssessments => 'Recent Assessments';
 
   @override
-  String get optoSelectDateRange => 'ଦଯ଼ାକରି ଏକ ତାରିଖ ପରିସର ବାଛନ୍ତୁ';
+  String get optoSelectDateRange => 'Please select a date range';
 
   @override
-  String get optoDataNotFound => 'ଏହି ସନ୍ଧାନ ପାଇଁ ତଥ୍ଯ଼ ମିଳୁନାହିଁ';
+  String get optoDataNotFound => 'Data not found for this search';
 
   @override
-  String get optoAssessmentReport => 'ମୂଲ୍ଯ଼ାଙ୍କନ ରିପୋର୍ଟ';
+  String get optoAssessmentReport => 'Assessment Report';
 
   @override
-  String get optoPID => 'ପି. ଆଇ. ଡି.';
+  String get optoPID => 'PID';
 
   @override
-  String get category => 'ବର୍ଗ';
+  String get category => 'Category';
 
   @override
-  String get patientAssessmentAndTest => 'ରୋଗୀ ମୂଲ୍ଯ଼ାଙ୍କନ ଏବଂ ପରୀକ୍ଷା';
+  String get patientAssessmentAndTest => 'Patient Assessment and Test';
 
   @override
-  String get patientSelfTestReport => 'ସ୍ୱଯ଼ଂ-ପରୀକ୍ଷଣ ରିପୋର୍ଟ';
+  String get patientSelfTestReport => 'Self Test Report';
 
   @override
-  String get patientClinicalReport => 'କ୍ଲିନିକାଲ୍ ରିପୋର୍ଟ';
+  String get patientClinicalReport => 'Clinical Report';
 
   @override
-  String get patientAppointmentTitle => 'ନିଯୁକ୍ତି';
+  String get patientAppointmentTitle => 'Appointment';
 
   @override
-  String get patientBookAppointment => 'ପୁସ୍ତକ ନିଯୁକ୍ତି';
+  String get patientBookAppointment => 'Book Appointment';
 
   @override
-  String get patientAppointmentSubtitle => 'ଆପଣଙ୍କ ନିଯୁକ୍ତି';
+  String get patientAppointmentSubtitle => 'Your Appointments';
 
   @override
-  String get patientTelephoneConsultation => 'ଟେଲିଫୋନ୍ ପରାମର୍ଶ';
+  String get patientTelephoneConsultation => 'Telephone Consultation';
 
   @override
-  String get patientAddress => 'ଠିକଣା';
+  String get patientAddress => 'Address';
 
   @override
-  String get patientReschedule => 'ପୁନଃନିର୍ଦ୍ଧାରଣ କରନ୍ତୁ';
+  String get patientReschedule => 'Reschedule';
 
   @override
-  String get patientCancel => 'ବାତିଲ କରନ୍ତୁ';
+  String get patientCancel => 'Cancel';
 
   @override
-  String get patientPID => 'ପି. ଆଇ. ଡି.';
+  String get patientPID => 'PID';
 
   @override
-  String get patientReportID => 'ଆଇ. ଡି. ରିପୋର୍ଟ କରନ୍ତୁ';
+  String get patientReportID => 'Report ID';
 
   @override
-  String get patientHideDetailedReport => 'ବିସ୍ତୃତ ବିବରଣୀ ଲୁଚାଇ ରଖନ୍ତୁ';
+  String get patientHideDetailedReport => 'Hide Detailed Report';
 
   @override
-  String get patientShowDetailedReport => 'ବିସ୍ତୃତ ବିବରଣୀ ଦର୍ଶାନ୍ତୁ';
+  String get patientShowDetailedReport => 'Show Detailed Report';
 
   @override
-  String get patientEID => 'ଇ. ଆଇ. ଡି.';
+  String get patientEID => 'EID';
 
   @override
-  String get patientViewHistoryButton => 'ଇତିହାସ ଦେଖନ୍ତୁ';
+  String get patientViewHistoryButton => 'View History';
 
   @override
-  String get patientViewReportButton => 'ରିପୋର୍ଟ ଦେଖନ୍ତୁ';
+  String get patientViewReportButton => 'View Report';
 
   @override
-  String get patientNoMoreData => 'ଆଉ କୌଣସି ତଥ୍ଯ଼ ନାହିଁ';
+  String get patientNoMoreData => 'No more data';
 
   @override
-  String get patientErrorFetchingReport => 'ରିପୋର୍ଟ ଆଣିବାରେ ତ୍ରୁଟି';
+  String get patientErrorFetchingReport => 'Error in fetching report';
 
   @override
-  String get patientTimeline => 'ସମଯ଼ରେଖା';
+  String get patientTimeline => 'Timeline';
 
   @override
-  String get patientRoutineCheckup => 'ନିଯ଼ମିତ ଯାଞ୍ଚ';
+  String get patientRoutineCheckup => 'Routine Checkup';
 
   @override
-  String get patientAssessmentID => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଆଇ. ଡି.';
+  String get patientAssessmentID => 'Assessment ID';
 
   @override
-  String get patientStartDate => 'ଆରମ୍ଭ ତାରିଖ';
+  String get patientStartDate => 'Start Date';
 
   @override
-  String get patientIVRAssessment => 'ଆଇ. ଭି. ଆର୍. ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get patientIVRAssessment => 'IVR Assessment';
 
   @override
-  String get patientEarlyConsultationRecommended => 'ପ୍ରାରମ୍ଭିକ ପରାମର୍ଶ ସୁପାରିସ କରାଯାଇଛି';
+  String get patientEarlyConsultationRecommended => 'Early Consultation Recommended';
 
   @override
-  String get patientCataractEyeReport => 'ମୋତିଆବିନ୍ଦୁ ଚକ୍ଷୁ ରିପୋର୍ଟ';
+  String get patientCataractEyeReport => 'Cataract Eye Report';
 
   @override
-  String get patientRedEyeReport => 'ଲାଲ ଆଖି ରିପୋର୍ଟ';
+  String get patientRedEyeReport => 'Red Eye Report';
 
   @override
-  String get patientScanAgain => 'ପୁଣିଥରେ ସ୍କାନ କରନ୍ତୁ';
+  String get patientScanAgain => 'Scan Again';
 
   @override
-  String get patientStepsToScan => 'ରେଟିନାଲ ସ୍କାନିଂ କରିବା ପାଇଁ ପଦକ୍ଷେପ';
+  String get patientStepsToScan => 'Steps to do the retinal scanning';
 
   @override
-  String get patientProceedToScan => 'ସ୍କାନକୁ ଯାଆନ୍ତୁ';
+  String get patientProceedToScan => 'Proceed to Scan';
 
   @override
-  String get patientSkipAndProceedToScan => 'ସ୍କିପ କରନ୍ତୁ ଏବଂ ସ୍କାନକୁ ଯାଆନ୍ତୁ';
+  String get patientSkipAndProceedToScan => 'Skip & Proceed to Scan';
 
   @override
-  String get patientEyeScanner => 'ଚକ୍ଷୁ ସ୍କାନର';
+  String get patientEyeScanner => 'Eye Scanner';
 
   @override
-  String get patientErrorSelectCamera => 'ପ୍ରଥମେ ଏକ କ୍ଯ଼ାମେରା ବାଛନ୍ତୁ!';
+  String get patientErrorSelectCamera => 'Select a camera first!';
 
   @override
-  String get patientEyeBoxText => 'ଚକ୍ଷୁ ବାକ୍ସ ପାଠ୍ଯ଼';
+  String get patientEyeBoxText => 'Eye Box Text';
 
   @override
-  String get patientLoggedOut => 'ଆପଣ ଲଗ୍ ଆଉଟ୍ ହୋଇଛନ୍ତି।';
+  String get patientLoggedOut => 'You have been logged out';
 
   @override
-  String get patientLogoutError => 'କ୍ଷମା କରିବେ, ଆମେ ମୋବାଇଲ୍ ଆପରେ ଏକ ଲଗଆଉଟ୍ ତ୍ରୁଟିର ସମ୍ମୁଖୀନ ହୋଇଛୁ।';
+  String get patientLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
-  String get patientUpdateProfile => 'ପ୍ରୋଫାଇଲକୁ ଅଦ୍ଯ଼ତନ କରନ୍ତୁ';
+  String get patientUpdateProfile => 'Update Profile';
 
   @override
-  String get patientEdit => 'ସମ୍ପାଦନା କରନ୍ତୁ';
+  String get patientEdit => 'edit';
 
   @override
-  String get patientProfileNotUpdated => 'ପ୍ରୋଫାଇଲ୍ ଅଦ୍ଯ଼ତନ ହୋଇନାହିଁ';
+  String get patientProfileNotUpdated => 'Profile not updated';
 
   @override
-  String get patientProfileUpdated => 'ପ୍ରୋଫାଇଲକୁ ଅଦ୍ଯ଼ତନ କରାଯାଇଛି';
+  String get patientProfileUpdated => 'Profile updated';
 
   @override
-  String get patientReportUnavailable => 'ରିପୋର୍ଟ ଉପଲବ୍ଧ ନାହିଁ';
+  String get patientReportUnavailable => 'Report not available';
 
   @override
-  String get patientClinicalReportNotFound => 'କ୍ଲିନିକାଲ୍ ରିପୋର୍ଟ ମିଳୁନାହିଁ';
+  String get patientClinicalReportNotFound => 'Clinical Report not found';
 
   @override
-  String get patientRID => 'ଆର୍. ଆଇ. ଡି.';
+  String get patientRID => 'RID';
 
   @override
-  String get patientUpdateUnavailable => 'ଏହି ସମଯ଼ରେ ଅଦ୍ଯ଼ତନ ଉପଲବ୍ଧ ନାହିଁ';
+  String get patientUpdateUnavailable => 'Update not available at this moment';
 
   @override
-  String get vgAddEvent => 'କାର୍ଯ୍ଯ଼କ୍ରମ ଯୋଗ କରନ୍ତୁ';
+  String get vgAddEvent => 'Add Event';
 
   @override
-  String get vgUploadingImageAddingEvent => 'ପ୍ରତିଛବି ଅପଲୋଡ କରିବା ଏବଂ ଇଭେଣ୍ଟ ଯୋଗ କରିବା';
+  String get vgUploadingImageAddingEvent => 'Uploading Image and adding event';
 
   @override
-  String get vgEventTitle => 'କାର୍ଯ୍ଯ଼କ୍ରମ ଶୀର୍ଷକ';
+  String get vgEventTitle => 'Event Title';
 
   @override
-  String get vgPleaseEnterEndTime => 'ଦଯ଼ାକରି ଶେଷ ସମଯ଼ ଭରଣ କରନ୍ତୁ';
+  String get vgPleaseEnterEndTime => 'Please Enter End time';
 
   @override
-  String get vgShouldNotContainSpecialCharacter => 'ଏଥିରେ କୌଣସି ବିଶେଷ ଅକ୍ଷର ରହିବା ଉଚିତ ନୁହେଁ।';
+  String get vgShouldNotContainSpecialCharacter => 'Should not contain any special character';
 
   @override
-  String get vgEventDescription => 'ଘଟଣା ବର୍ଣ୍ଣନା';
+  String get vgEventDescription => 'Event Description';
 
   @override
-  String get vgAddPatient => 'ରୋଗୀ ଯୋଗ କରନ୍ତୁ';
+  String get vgAddPatient => 'Add Patient';
 
   @override
-  String get vgPatients => 'ରୋଗୀମାନେ';
+  String get vgPatients => 'Patients';
 
   @override
-  String get vgDetails => 'ସବିଶେଷ ବିବରଣୀ';
+  String get vgDetails => 'Details';
 
   @override
-  String get vgTeammates => 'ସାଥୀ ଖେଳାଳିମାନେ';
+  String get vgTeammates => 'Teammates';
 
   @override
-  String get vgEyeAssessment => 'ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get vgEyeAssessment => 'Eye Assessment';
 
   @override
-  String get vgStart => 'ଆରମ୍ଭ କରନ୍ତୁ';
+  String get vgStart => 'Start';
 
   @override
-  String get vgEyeAssessmentDescription => 'ଆପଣ, ଆପଣଙ୍କ ବନ୍ଧୁ ଏବଂ ପରିବାର ସଦସ୍ଯ଼ଙ୍କ ଚକ୍ଷୁ ସମ୍ବନ୍ଧୀଯ଼ ସମସ୍ଯ଼ାଗୁଡ଼ିକର ଆକଳନ କିଛିଟା ପର୍ଯ୍ଯ଼ାଯ଼ରେ କରନ୍ତୁ। ଆପଣଙ୍କ ଚକ୍ଷୁ ସମ୍ବନ୍ଧୀଯ଼ ସମସ୍ଯ଼ା ସମ୍ବନ୍ଧୀଯ଼ ଲକ୍ଷଣଗୁଡ଼ିକୁ ବୁଝିବା ପାଇଁ ଆପଣଙ୍କୁ ଅନେକ ପ୍ରଶ୍ନ ପଚରାଯିବ ଏବଂ ତା ପରେ ଦୃଷ୍ଟି ପରୀକ୍ଷା କରାଯିବ।';
+  String get vgEyeAssessmentDescription => 'Get the eye problems of you, your friends, and family members assessed in few steps. You will be asked a set of questions to understand symptoms related to your eye problems followed by visual tests.';
 
   @override
-  String get vgLogoutMessage => 'ଆପଣ ଲଗ୍ ଆଉଟ୍ ହୋଇଛନ୍ତି।';
+  String get vgLogoutMessage => 'You have been logged out';
 
   @override
-  String get vgLogoutErrorMessage => 'କ୍ଷମା କରିବେ, ଆମେ ମୋବାଇଲ୍ ଆପରେ ଏକ ଲଗଆଉଟ୍ ତ୍ରୁଟିର ସମ୍ମୁଖୀନ ହୋଇଛୁ।';
+  String get vgLogoutErrorMessage => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
-  String get vgWelcome => 'ସ୍ୱାଗତ।';
+  String get vgWelcome => 'Welcome';
 
   @override
-  String get vgServices => 'ସେବାଗୁଡ଼ିକ';
+  String get vgServices => 'Services';
 
   @override
-  String get vgEvents => 'ଘଟଣାଗୁଡ଼ିକ';
+  String get vgEvents => 'Events';
 
   @override
-  String get vgViewAll => 'ସମସ୍ତ ଦେଖନ୍ତୁ';
+  String get vgViewAll => 'View All';
 
   @override
-  String get vtAssessmentReport => 'ମୂଲ୍ଯ଼ାଙ୍କନ ରିପୋର୍ଟ-ଇ. ଏ.';
+  String get vtAssessmentReport => 'Assessment Report - EA';
 
   @override
-  String get vtRemarks => 'ମନ୍ତବ୍ଯ଼ଗୁଡ଼ିକ';
+  String get vtRemarks => 'Remarks';
 
   @override
-  String get vtNoPatientFound => 'କୌଣସି ରୋଗୀ ମିଳିନାହିଁ';
+  String get vtNoPatientFound => 'No patient found';
 
   @override
-  String get vtClose => 'ବନ୍ଦ କରନ୍ତୁ';
+  String get vtClose => 'Close';
 
   @override
-  String get vtBack => 'ପଛକୁ।';
+  String get vtBack => 'Back';
 
   @override
-  String get vtSubmit => 'ଦାଖଲ କରନ୍ତୁ';
+  String get vtSubmit => 'Submit';
 
   @override
-  String get vtSomethingWentWrong => 'କିଛି ଭୁଲ ହୋଇଗଲା।';
+  String get vtSomethingWentWrong => 'Something went wrong';
 
   @override
-  String get vtAssessmentClosedSuccessfully => 'ମୂଲ୍ଯ଼ାଙ୍କନ ସଫଳତାର ସହ ବନ୍ଦ ହେଲା';
+  String get vtAssessmentClosedSuccessfully => 'Assessment Closed Successfully';
 
   @override
-  String get vtEyeScan => 'ଚକ୍ଷୁ ସ୍କାନ୍';
+  String get vtEyeScan => 'Eye Scan';
 
   @override
-  String get vtDashboard => 'ଡ୍ଯ଼ାସବୋର୍ଡ';
+  String get vtDashboard => 'Dashboard';
 
   @override
-  String get vtRegisterPatient => 'ରୋଗୀ ପଞ୍ଜିକରଣ କରନ୍ତୁ';
+  String get vtRegisterPatient => 'Register Patient';
 
   @override
-  String get vtTriage => 'ତ୍ରଯ଼ୋଦଶ।';
+  String get vtTriage => 'Triage';
 
   @override
-  String get vtMarkMyAvailability => 'ମୋ ଉପଲବ୍ଧତାକୁ ଚିହ୍ନିତ କରନ୍ତୁ';
+  String get vtMarkMyAvailability => 'Mark My Availability';
 
   @override
-  String get vtIVRCallHistory => 'ଆଇ. ଭି. ଆର୍. କଲ୍ ଇତିହାସ';
+  String get vtIVRCallHistory => 'IVR Call History';
 
   @override
-  String get vtMarked => 'ଚିହ୍ନିତ';
+  String get vtMarked => 'Marked';
 
   @override
-  String get vtPreliminaryAssessment => 'ପ୍ରାରମ୍ଭିକ ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get vtPreliminaryAssessment => 'Preliminary Assessment';
 
   @override
-  String get vtAge => 'ବଯ଼ସ.';
+  String get vtAge => 'Age';
 
   @override
-  String get vtGender => 'ଲିଙ୍ଗ';
+  String get vtGender => 'Gender';
 
   @override
-  String get vtAddress => 'ଠିକଣା';
+  String get vtAddress => 'Address';
 
   @override
-  String get vtProfile => 'ପ୍ରୋଫାଇଲ';
+  String get vtProfile => 'Profile';
 
   @override
-  String get vtLogoutMessage => 'ଆପଣ ଲଗ୍ ଆଉଟ୍ ହୋଇଛନ୍ତି।';
+  String get vtLogoutMessage => 'You have been logged out';
 
   @override
-  String get vtLogoutError => 'କ୍ଷମା କରିବେ, ଆମେ ମୋବାଇଲ୍ ଆପରେ ଏକ ଲଗଆଉଟ୍ ତ୍ରୁଟିର ସମ୍ମୁଖୀନ ହୋଇଛୁ।';
+  String get vtLogoutError => 'Apologies, we encountered a logout error in the mobile app.';
 
   @override
-  String get vtError => 'ତ୍ରୁଟି';
+  String get vtError => 'Error';
 
   @override
-  String get vtPatient => 'ରୋଗୀ।';
+  String get vtPatient => 'Patient';
 
   @override
-  String get vtMobile => 'ମୋବାଇଲ';
+  String get vtMobile => 'Mobile';
 
   @override
-  String get vtAssessmentID => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଆଇ. ଡି.';
+  String get vtAssessmentID => 'Assessment ID';
 
   @override
-  String get vtStatus => 'ସ୍ଥିତି';
+  String get vtStatus => 'Status';
 
   @override
-  String get vtTimeline => 'ସମଯ଼ରେଖା';
+  String get vtTimeline => 'Timeline';
 
   @override
-  String get vtCategory => 'ବର୍ଗ';
+  String get vtCategory => 'Category';
 
   @override
-  String get vtNoDataFound => 'କୌଣସି ତଥ୍ଯ଼ ମିଳୁନାହିଁ';
+  String get vtNoDataFound => 'No Data Found';
 
   @override
-  String get appCameraCapture => 'ଧରିନିଅନ୍ତୁ';
+  String get appCameraCapture => 'Capture';
 
   @override
-  String get appCameraRetake => 'ପୁନର୍ବାର ନିଅନ୍ତୁ';
+  String get appCameraRetake => 'Retake';
 
   @override
-  String get appCameraUsePhoto => 'ଫଟୋ ବ୍ଯ଼ବହାର କରନ୍ତୁ';
+  String get appCameraUsePhoto => 'Use Photo';
 
   @override
-  String get appCameraCancel => 'ବାତିଲ କରନ୍ତୁ';
+  String get appCameraCancel => 'Cancel';
 
   @override
-  String get appCameraNotFound => 'କ୍ଯ଼ାମେରା ମିଳିଲା ନାହିଁ';
+  String get appCameraNotFound => 'Camera not found';
 
   @override
-  String get appCameraException => 'କ୍ଯ଼ାମେରା ବ୍ଯ଼ତିକ୍ରମ';
+  String get appCameraException => 'Camera Exception';
 
   @override
-  String get appCameraProgressMessage => 'ଲୋଡ କରାଯାଉଛି...';
+  String get appCameraProgressMessage => 'Loading...';
 
   @override
-  String get internetLostNoConnection => 'କୌଣସି ଇଣ୍ଟରନେଟ ସଂଯୋଗ ନାହିଁ';
+  String get internetLostNoConnection => 'No Internet Connection';
 
   @override
-  String get internetLostRetry => 'ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ';
+  String get internetLostRetry => 'Retry';
 
   @override
-  String get secureJailbreak => 'ଏପରି ଲାଗୁଛି ଯେ ଆପଣଙ୍କ ଉପକରଣଟି ଜେଲ୍ବ୍ରୋକନ ହୋଇଛି।';
+  String get secureJailbreak => 'It seems your device is jailbroken';
 
   @override
-  String get secureRestrictedAccess => 'ସୁରକ୍ଷା କାରଣରୁ, ଜେଲ୍ବ୍ରୋକନ ଡିଭାଇସରେ ଏହି ଆପ୍ ବ୍ଯ଼ବହାର ଉପରେ ପ୍ରତିବନ୍ଧକ ଲଗାଯାଇଛି।';
+  String get secureRestrictedAccess => 'For security reasons, access to this app is restricted on jailbroken devices.';
 
   @override
-  String get secureExitApp => 'ପ୍ରସ୍ଥାନ ଆପ୍';
+  String get secureExitApp => 'Exit App';
 
   @override
-  String get sharedErrorPageIssues => 'ଆମେ କେତେକ ସମସ୍ଯ଼ାର ସମ୍ମୁଖୀନ ହେଉଛୁ। ଦଯ଼ାକରି ପରେ ପୁଣିଥରେ ଚେଷ୍ଟା କରନ୍ତୁ।';
+  String get sharedErrorPageIssues => 'We are facing some issues. Please try again later.';
 
   @override
-  String get appointmentBookingTitle => 'ନିଯୁକ୍ତି ବୁକିଂ';
+  String get appointmentBookingTitle => 'Appointment Booking';
 
   @override
-  String get comingSoon => 'ଖୁବ୍ଶୀଘ୍ର...';
+  String get comingSoon => 'Coming Soon...';
 
   @override
-  String get miniappService => 'ସେବା';
+  String get miniappService => 'Service';
 
   @override
-  String get miniappConsole => 'କନସୋଲ';
+  String get miniappConsole => 'Console';
 
   @override
-  String get roleChooseYourRole => 'ଆପଣଙ୍କ ଭୂମିକା ବାଛନ୍ତୁ';
+  String get roleChooseYourRole => 'Choose Your Role';
 
   @override
-  String get roleNote => 'ଟିପ୍ପଣୀଃ ଆପଣ ଆପ୍ ଭିତରେ ନିଜର ଭୂମିକା ବଦଳାଇ ପାରିବେ ନାହିଁ।';
+  String get roleNote => 'Note: You cannot change your role inside the app.';
 
   @override
-  String get roleConfirm => 'ନିଶ୍ଚିତ କରନ୍ତୁ';
+  String get roleConfirm => 'Confirm';
 
   @override
-  String get roleEyeCareProfessional => 'ଆଇ କେଯ଼ାର୍ ପ୍ରଫେସନାଲ୍';
+  String get roleEyeCareProfessional => 'EYE CARE PROFESSIONAL';
 
   @override
-  String get roleVisionTechnician => 'ଭିଜନ ଟେକ୍ନୋଲୋଜି';
+  String get roleVisionTechnician => 'VISION TECHNICIAN';
 
   @override
-  String get rolePatient => 'ରୋଗୀ';
+  String get rolePatient => 'PATIENT';
 
   @override
-  String get roleVisionGuardian => 'ଭିଜନ ଗାର୍ଡିଆନ';
+  String get roleVisionGuardian => 'VISION GUARDIAN';
 
   @override
-  String get vtSearchText => 'ରୋଗୀ ଆଇଡି, ମୋବାଇଲ୍ ନମ୍ବର କିମ୍ବା ନାମ ଦ୍ୱାରା ଖୋଜନ୍ତୁ';
+  String get vtSearchText => 'Search by Patient ID, Mobile No or Name';
 
   @override
-  String get emptyPatientsInfo => 'ରୋଗୀମାନଙ୍କୁ ସେମାନଙ୍କର ବିବରଣୀ ଦେଖିବା ପାଇଁ ଖୋଜିବା ଆରମ୍ଭ କରନ୍ତୁ।';
+  String get emptyPatientsInfo => 'Start searching for patients to view their details .. ';
 
   @override
-  String get vtPersonalDetails => 'ବ୍ଯ଼କ୍ତିଗତ ବିବରଣୀ';
+  String get vtPersonalDetails => 'Personal Details';
 
   @override
-  String get vtHprId => 'ଏଚପିଆର ଆଇଡି';
+  String get vtHprId => 'HPR ID';
 
   @override
-  String get vtEmailId => 'ଇମେଲ ଆଇଡି';
+  String get vtEmailId => 'Email ID';
 
   @override
-  String get vtEducationalQualification => 'ଶିକ୍ଷାଗତ ଯୋଗ୍ଯ଼ତା';
+  String get vtEducationalQualification => 'Educational Qualification';
 
   @override
-  String get vtAddressAndDoorNumber => 'ଠିକଣା ଏବଂ ଦ୍ୱାର ସଂଖ୍ଯ଼ା';
+  String get vtAddressAndDoorNumber => 'Address and Door Number';
 
   @override
-  String get vtCity => 'ସହର।';
+  String get vtCity => 'City';
 
   @override
-  String get vtState => 'ରାଜ୍ଯ଼';
+  String get vtState => 'State';
 
   @override
-  String get vtPincode => 'ପିନ୍କୋଡ୍';
+  String get vtPincode => 'Pincode';
 
   @override
-  String get vtOrganisationDetails => 'ସଙ୍ଗଠନ ବିବରଣୀ';
+  String get vtOrganisationDetails => 'Organisation Details';
 
   @override
-  String get vtOrgId => 'ଅର୍ଗ ଆଇ. ଡି.';
+  String get vtOrgId => 'Org ID';
 
   @override
-  String get vtFacilityType => 'ସୁବିଧା ପ୍ରକାର';
+  String get vtFacilityType => 'Facility Type';
 
   @override
-  String get vtAssessments => 'ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get vtAssessments => 'Assessments';
 
   @override
-  String get vtNoAssessmentsFound => 'କୌଣସି ମୂଲ୍ଯ଼ାଙ୍କନ ମିଳିନାହିଁ';
+  String get vtNoAssessmentsFound => 'No Assessments Found';
 
   @override
-  String get vtAnalytics => 'ବିଶ୍ଳେଷଣ';
+  String get vtAnalytics => 'Analytics';
 
   @override
-  String get vtTotalCases => 'ମୋଟ ମାମଲା';
+  String get vtTotalCases => 'Total Cases';
 
   @override
-  String get vtIvrCalls => 'ଆଇ. ଭି. ଆର୍. କଲ୍';
+  String get vtIvrCalls => 'IVR Calls';
 
   @override
-  String get vtClinicVisits => 'କ୍ଲିନିକ୍ ପରିଦର୍ଶନ';
+  String get vtClinicVisits => 'Clinic Visits';
 
   @override
-  String get vtCasesClosed => 'ବନ୍ଦ ହେଲା ମାମଲା';
+  String get vtCasesClosed => 'Cases Closed';
 
   @override
-  String get vtCritical => 'ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ';
+  String get vtCritical => 'Critical';
 
   @override
-  String get vtRegular => 'ନିଯ଼ମିତ';
+  String get vtRegular => 'Regular';
 
   @override
-  String get vtAvgClosureTime => 'ଏ. ଭି. ଜି. ବନ୍ଦ ସମଯ଼';
+  String get vtAvgClosureTime => 'Avg. Closure Time';
 
   @override
-  String get vtByAge => 'ବଯ଼ସ ଅନୁସାରେ';
+  String get vtByAge => 'By Age';
 
   @override
-  String get vtByGender => 'ଲିଙ୍ଗ ଅନୁସାରେ';
+  String get vtByGender => 'By Gender';
 
   @override
-  String get vtSymptoms => 'ଲକ୍ଷଣଗୁଡ଼ିକ';
+  String get vtSymptoms => 'Symptoms';
 
   @override
-  String get vtSearchByMobileNo => 'ମୋବାଇଲ୍ ନମ୍ବର ଦ୍ୱାରା ଖୋଜନ୍ତୁ।';
+  String get vtSearchByMobileNo => 'Search by Mobile No.';
 
   @override
-  String get vtInvalidMobileNo => 'ଅବୈଧ ମୋବାଇଲ୍ ନଂ.';
+  String get vtInvalidMobileNo => 'Invalid Mobile No.';
 
   @override
-  String get vtCallLogEmpty => 'କଲ୍ ଲଗ୍ ଖାଲି ଅଛି... ଏପର୍ଯ୍ଯ଼ନ୍ତ କୌଣସି କଲ୍ କରାଯାଇ ନାହିଁ!';
+  String get vtCallLogEmpty => 'Call Log is Empty.. No Calls made yet!!';
 
   @override
-  String get vtNoDataAvailable => 'କୌଣସି ତଥ୍ଯ଼ ଉପଲବ୍ଧ ନାହିଁ';
+  String get vtNoDataAvailable => 'No Data available';
 
   @override
-  String get vtToday => 'ଆଜି';
+  String get vtToday => 'TODAY';
 
   @override
-  String get vtYesterday => 'ଗତକାଲି';
+  String get vtYesterday => 'YESTERDAY';
 
   @override
-  String get vtIvrCallNotAvailable => 'ଆଇ. ଭି. ଆର୍. କଲ୍ ଉପଲବ୍ଧ ନାହିଁ.. ପୁଣିଥରେ ଚେଷ୍ଟା କରନ୍ତୁ!';
+  String get vtIvrCallNotAvailable => 'IVR call not available.. Try Again!!';
 
   @override
-  String get vtMarkUnavailable => 'ଅନୁପଲବ୍ଧ ଭାବରେ ଚିହ୍ନିତ କରନ୍ତୁ';
+  String get vtMarkUnavailable => 'Mark as Unavailable';
 
   @override
-  String get vtStartDate => 'ଆରମ୍ଭ ତାରିଖ';
+  String get vtStartDate => 'Start Date';
 
   @override
-  String get vtEndDate => 'ଶେଷ ତାରିଖ';
+  String get vtEndDate => 'End Date';
 
   @override
-  String get vtStartTime => 'ଆରମ୍ଭ ସମଯ଼';
+  String get vtStartTime => 'Start Time';
 
   @override
-  String get vtEndTime => 'ଶେଷ ସମଯ଼';
+  String get vtEndTime => 'End Time';
 
   @override
-  String get vtAddRemarksOptional => 'ମନ୍ତବ୍ଯ଼ ଯୋଗ କରନ୍ତୁ (ଇଚ୍ଛାଧୀନ)';
+  String get vtAddRemarksOptional => 'Add Remarks (Optional)';
 
   @override
-  String get vtSave => 'ସଞ୍ଚଯ଼ କରନ୍ତୁ';
+  String get vtSave => 'Save';
 
   @override
-  String get vtCancel => 'ବାତିଲ କରନ୍ତୁ';
+  String get vtCancel => 'Cancel';
 
   @override
-  String get vtPleaseEnterRemark => 'ଦଯ଼ାକରି ଟିପ୍ପଣୀ ଭରଣ କରନ୍ତୁ';
+  String get vtPleaseEnterRemark => 'Please enter Remark';
 
   @override
-  String get vtAssessment => 'ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get vtAssessment => 'Assessment';
 
   @override
-  String get vtIvrSelections => 'ଆଇ. ଭି. ଆର୍. ଚଯ଼ନ';
+  String get vtIvrSelections => 'IVR Selections';
 
   @override
-  String get vtLanguageSelection => 'ଭାଷା ଚଯ଼ନ';
+  String get vtLanguageSelection => 'Language Selection';
 
   @override
-  String get vtEnglish => 'ଇଂରାଜୀ';
+  String get vtEnglish => 'English';
 
   @override
-  String get vtPatientType => 'ରୋଗୀ ପ୍ରକାର';
+  String get vtPatientType => 'Patient Type';
 
   @override
-  String get vtProblem => 'ସମସ୍ଯ଼ା';
+  String get vtProblem => 'Problem';
 
   @override
-  String get vtEyeSight => 'ଚକ୍ଷୁ ଦୃଷ୍ଟି';
+  String get vtEyeSight => 'Eye Sight';
 
   @override
-  String get vtVisionTechnician => 'ଭିଜନ ଟେକ୍ନିସିଆନ୍';
+  String get vtVisionTechnician => 'Vision Technician';
 
   @override
-  String get vtRecommendedCenter => 'ସୁପାରିସ କରାଯାଇଥିବା କେନ୍ଦ୍ର';
+  String get vtRecommendedCenter => 'Recommended Center';
 
   @override
-  String get vtAssessmentIDEA => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଆଇ. ଡି.: ଇ. ଏ.';
+  String get vtAssessmentIDEA => 'Assessment ID: EA';
 
   @override
-  String get vtPid => 'ପି. ଆଇ. ଡି.: ଓ. ପି.';
+  String get vtPid => 'PID: OP';
 
   @override
-  String get vtAssessmentTimeline => 'ମୂଲ୍ଯ଼ାଙ୍କନ ସମଯ଼ସୀମା';
+  String get vtAssessmentTimeline => 'Assessment Timeline';
 
   @override
-  String get vtPleaseSelectEncounter => 'ଦଯ଼ାକରି ଏକ ସାକ୍ଷାତ ଚଯ଼ନ କରନ୍ତୁ';
+  String get vtPleaseSelectEncounter => 'Please select an encounter';
 
   @override
-  String get vtTimelineEA => 'ସମଯ଼ସୀମାଃ ଇ. ଏ.';
+  String get vtTimelineEA => 'Timeline: EA';
 
   @override
-  String get vtGeneralInformation => 'ସାଧାରଣ ସୂଚନା';
+  String get vtGeneralInformation => 'General Information';
 
   @override
-  String get vtDateOfBirth => 'ଜନ୍ମ ତାରିଖ';
+  String get vtDateOfBirth => 'Date of Birth';
 
   @override
-  String get vtAssessmentEA => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଇ. ଏ.';
+  String get vtAssessmentEA => 'Assessment EA';
 
   @override
-  String get vtNotRegistered => 'ଆପଣ ଏହି ବ୍ଯ଼ବସ୍ଥାରେ ପଞ୍ଜୀକୃତ ହୋଇନାହାନ୍ତି। ଦଯ଼ାକରି ଏଠାକୁ ଏକ ମିସ୍ଡ କଲ କରନ୍ତୁ।';
+  String get vtNotRegistered => 'You are not registered in the system. Please give a missed call to';
 
   @override
-  String get vtOkay => 'ଠିକ୍ ଅଛି।';
+  String get vtOkay => 'Okay';
 
   @override
-  String get vtTakePicture => 'ଫଟୋ ଉଠାନ୍ତୁ';
+  String get vtTakePicture => 'Take Picture';
 
   @override
-  String get vtEye => 'ଆଖି।';
+  String get vtEye => 'Eye';
 
   @override
-  String get vtRetakePicture => 'ପ୍ରତିଛବିକୁ ପୁନର୍ବାର ନିଅନ୍ତୁ';
+  String get vtRetakePicture => 'Retake Picture';
 
   @override
-  String get vtNext => 'ପରବର୍ତ୍ତୀ';
+  String get vtNext => 'Next';
 
   @override
-  String get vtMrCode => 'ଏମ୍. ଆର୍. କୋଡ୍';
+  String get vtMrCode => 'MR Code';
 
   @override
-  String get vtEnterMrCode => 'ଏଠାରେ ଏମ୍. ଆର୍. କୋଡ୍ ଭରଣ କରନ୍ତୁ';
+  String get vtEnterMrCode => 'Enter MR Code Here';
 
   @override
-  String get vtPleaseEnterMrCode => 'ଦଯ଼ାକରି ଏମ୍. ଆର୍. କୋଡ୍ ଭରଣ କରନ୍ତୁ';
+  String get vtPleaseEnterMrCode => 'Please enter MR Code';
 
   @override
-  String get vtNote => 'ଟିପ୍ପଣୀ';
+  String get vtNote => 'Note';
 
   @override
-  String get vtEnterRecommendations => 'ଏଠାରେ ସୁପାରିଶଗୁଡ଼ିକୁ ଭରଣ କରନ୍ତୁ';
+  String get vtEnterRecommendations => 'Enter Recommendations Here';
 
   @override
-  String get vtSolutions => 'ସମାଧାନ (ଗୁଡ଼ିକ)';
+  String get vtSolutions => 'Solutions(s)';
 
   @override
-  String get vtLeftEye => 'ବାମ ଆଖି';
+  String get vtLeftEye => 'Left Eye';
 
   @override
-  String get vtRightEye => 'ଡାହାଣ ଆଖି';
+  String get vtRightEye => 'Right Eye';
 
   @override
-  String get vtBothEyes => 'ଉଭଯ଼ ଆଖି';
+  String get vtBothEyes => 'Both Eyes';
 
   @override
-  String get vtFilterBy => 'ଦ୍ବାରା ଫିଲ୍ଟର୍ କରନ୍ତୁ';
+  String get vtFilterBy => 'Filter by';
 
   @override
-  String get vtLocation => 'ଅବସ୍ଥିତି';
+  String get vtLocation => 'Location';
 
   @override
-  String get vtEnterTime => 'ଦଯ଼ାକରି ସମଯ଼ ଭରଣ କରନ୍ତୁ';
+  String get vtEnterTime => 'Please enter Time';
 
   @override
-  String get vtEnterDate => 'ଦଯ଼ାକରି ତାରିଖ ଭରଣ କରନ୍ତୁ';
+  String get vtEnterDate => 'Please enter Date';
 
   @override
-  String get vtRecommendation => 'ସୁପାରିଶ';
+  String get vtRecommendation => 'Recommendation';
 
   @override
-  String get vtVisitPrimaryCenter => 'ପ୍ରାଥମିକ କେନ୍ଦ୍ରକୁ ଯାଆନ୍ତୁ';
+  String get vtVisitPrimaryCenter => 'Visit Primary Center';
 
   @override
-  String get vtVisitSecondaryCenter => 'ମାଧ୍ଯ଼ମିକ କେନ୍ଦ୍ର ପରିଦର୍ଶନ କରନ୍ତୁ';
+  String get vtVisitSecondaryCenter => 'Visit Secondary Center';
 
   @override
-  String get vtVisitTertiaryCenter => 'ତୃତୀଯ଼କ କେନ୍ଦ୍ର ପରିଦର୍ଶନ କରନ୍ତୁ';
+  String get vtVisitTertiaryCenter => 'Visit Tertiary Center';
 
   @override
-  String get vtVisitCenterOfExcellence => 'ଉତ୍କର୍ଷ କେନ୍ଦ୍ର ପରିଦର୍ଶନ କରନ୍ତୁ';
+  String get vtVisitCenterOfExcellence => 'Visit Center of Excellence';
 
   @override
-  String get vtIvrCallQuestion => 'ଆପଣ ଆଇ. ଭି. ଆର୍. କଲ୍ରେ ଅଛନ୍ତି କି?';
+  String get vtIvrCallQuestion => 'Are you on IVR Call?';
 
   @override
-  String get vtYes => 'ହଁ।';
+  String get vtYes => 'Yes';
 
   @override
-  String get vtNo => 'ନା।';
+  String get vtNo => 'No';
 
   @override
-  String get vtRetry => 'ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ';
+  String get vtRetry => 'Retry';
 
   @override
-  String get vtAssessmentQuestions => 'ମୂଲ୍ଯ଼ାଙ୍କନ ପ୍ରଶ୍ନ';
+  String get vtAssessmentQuestions => 'Assessment Questions';
 
   @override
-  String get vtVisionCenter => 'ଦୃଷ୍ଟି କେନ୍ଦ୍ର';
+  String get vtVisionCenter => 'Vision Center';
 
   @override
-  String get vtVisualAcuity => 'ଦୃଶ୍ଯ଼ମାନ ତୀକ୍ଷ୍ଣତା';
+  String get vtVisualAcuity => 'Visual Acuity';
 
   @override
-  String get vtInvalidValue => 'ଅବୈଧ ମୂଲ୍ଯ଼';
+  String get vtInvalidValue => 'Invalid value';
 
   @override
-  String get vtSeverity => 'ତୀବ୍ରତା';
+  String get vtSeverity => 'Severity';
 
   @override
-  String get vtNoVisionCentersFound => 'କୌଣସି ଦୃଷ୍ଟି କେନ୍ଦ୍ର ମିଳିନାହିଁ';
+  String get vtNoVisionCentersFound => 'No Vision Centers Found';
 
   @override
-  String get vtRequestLocationPermission => 'ଅବସ୍ଥାନ ଅନୁମତି ପାଇଁ ଅନୁରୋଧ କରନ୍ତୁ';
+  String get vtRequestLocationPermission => 'Request Location Permission';
 
   @override
-  String get vtAppSettings => 'ଆପ୍ଲିକେସନ୍ ସେଟିଂ';
+  String get vtAppSettings => 'App Settings';
 
   @override
-  String get vtEnterSomeText => 'ଦଯ଼ାକରି କିଛି ଲେଖା ଭରଣ କରନ୍ତୁ';
+  String get vtEnterSomeText => 'Please enter some text';
 
   @override
-  String get vtPrimary => 'ପ୍ରାଥମିକ';
+  String get vtPrimary => 'Primary';
 
   @override
-  String get vtDependent => 'ନିର୍ଭରଶୀଳ';
+  String get vtDependent => 'Dependent';
 
   @override
-  String get vtAddMember => 'ସଦସ୍ଯ଼ ଯୋଗ କରନ୍ତୁ';
+  String get vtAddMember => 'Add Member';
 
   @override
-  String get vtCompleteProfile => 'ସମ୍ପୂର୍ଣ୍ଣ ପ୍ରୋଫାଇଲ';
+  String get vtCompleteProfile => 'Complete Profile';
 
   @override
-  String get vtPatientNotRegistered => 'ପଞ୍ଜୀକୃତ ହୋଇନଥିବା ରୋଗୀ';
+  String get vtPatientNotRegistered => 'Patient not registered';
 
   @override
-  String get vtPatientRegistered => 'ରୋଗୀ ପଞ୍ଜିକୃତ';
+  String get vtPatientRegistered => 'Patient registered';
 
   @override
-  String get vtDependentNotAdded => 'ନିର୍ଭରଶୀଳ ଯୋଡ଼ାଯାଇନାହିଁ';
+  String get vtDependentNotAdded => 'Dependent not added';
 
   @override
-  String get vtDependentAdded => 'ନିର୍ଭରଶୀଳ ଯୋଡ଼ିଲା';
+  String get vtDependentAdded => 'Dependent added';
 
   @override
-  String get vtServiceNotAvailable => 'ସେବା ଉପଲବ୍ଧ ନାହିଁ';
+  String get vtServiceNotAvailable => 'Service Not Available';
 
   @override
-  String get vgEyeAssessments => 'ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get vgEyeAssessments => 'Eye Assessments';
 
   @override
-  String get vgTotal => 'ମୋଟ';
+  String get vgTotal => 'Total';
 
   @override
-  String get vgCamps => 'ଶିବିର';
+  String get vgCamps => 'Camps';
 
   @override
-  String get vgDoorToDoor => 'ଦ୍ୱାରକୁ ଦ୍ୱାର';
+  String get vgDoorToDoor => 'Door to Door';
 
   @override
-  String get vgByGender => 'ଲିଙ୍ଗ ଅନୁସାରେ';
+  String get vgByGender => 'By Gender';
 
   @override
-  String get vgMale => 'ପୁରୁଷ।';
+  String get vgMale => 'Male';
 
   @override
-  String get vgFemale => 'ମହିଳା';
+  String get vgFemale => 'Female';
 
   @override
-  String get vgOthers => 'ଅନ୍ଯ଼ମାନେ';
+  String get vgOthers => 'Others';
 
   @override
-  String get vgByAge => 'ବଯ଼ସ ଅନୁସାରେ';
+  String get vgByAge => 'By Age';
 
   @override
-  String get vgSlideAge => 'ବର୍ଷ ବର୍ଷ';
+  String get vgSlideAge => 'Yrs';
 
   @override
-  String get vgSymptoms => 'ଲକ୍ଷଣଗୁଡ଼ିକ';
+  String get vgSymptoms => 'Symptoms';
 
   @override
-  String get vgRefractive => 'ପ୍ରତିସରଣକାରୀ';
+  String get vgRefractive => 'Refractive';
 
   @override
-  String get vgCataract => 'ମୋତିଆବିନ୍ଦୁ';
+  String get vgCataract => 'Cataract';
 
   @override
-  String get vgGlaucoma => 'ଗ୍ଲୁକୋମା';
+  String get vgGlaucoma => 'Glaucoma';
 
   @override
-  String get vgKeratitis => 'କେରାଟାଇଟିସ୍';
+  String get vgKeratitis => 'Keratitis';
 
   @override
-  String get vgBlepharitis => 'ବ୍ଲେଫାରାଇଟିସ୍';
+  String get vgBlepharitis => 'Blepharitis';
 
   @override
-  String get vgConjunctivitis => 'ନେତ୍ରାବରଣ ପ୍ରଦାହ';
+  String get vgConjunctivitis => 'Conjunctivitis';
 
   @override
-  String get vgServicesCreateEvent => 'କାର୍ଯ୍ଯ଼କ୍ରମ ସୃଷ୍ଟି କରନ୍ତୁ';
+  String get vgServicesCreateEvent => 'Create\r\nEvent';
 
   @override
-  String get vgServicesEyeAssessment => 'ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ';
+  String get vgServicesEyeAssessment => 'Eye\r\nAssessment';
 
   @override
-  String get vgServicesRegisterPatient => 'ନୂଆ ରୋଗୀ ପଞ୍ଜିକରଣ କରନ୍ତୁ';
+  String get vgServicesRegisterPatient => 'Register\r\nNew Patient';
 
   @override
-  String get vgAddPatients => 'ରୋଗୀ ଯୋଗ କରନ୍ତୁ';
+  String get vgAddPatients => 'Add Patients';
 
   @override
-  String get vgEvent => 'ଘଟଣା';
+  String get vgEvent => 'Event';
 
   @override
-  String get vgAddEventPhoto => 'କାର୍ଯ୍ଯ଼କ୍ରମ ଫଟୋ ଯୋଗ କରନ୍ତୁ';
+  String get vgAddEventPhoto => 'Add Event Photo';
 
   @override
-  String get vgUploadImage => 'ପ୍ରତିଛବିକୁ ଅପଲୋଡ କରନ୍ତୁ';
+  String get vgUploadImage => 'Upload Image';
 
   @override
-  String get vgAddPhotoInstruction => 'କାର୍ଯ୍ଯ଼କ୍ରମର ଏକ ଫଟୋ ଯୋଡ଼ନ୍ତୁ ଯାହା ଲଘୁଚିତ୍ର ଭାବେ ପ୍ରଦର୍ଶିତ ହେବ।';
+  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\nwill be shown as thumbnail';
 
   @override
-  String get vgAddressDetails => 'ଠିକଣା ବିବରଣୀ';
+  String get vgAddressDetails => 'Address Details';
 
   @override
-  String get vgVenueName => 'ସ୍ଥାନର ନାମ';
+  String get vgVenueName => 'Venue Name';
 
   @override
-  String get vgVenueNameError => 'ଦଯ଼ାକରି ସ୍ଥାନର ନାମ ଭରଣ କରନ୍ତୁ';
+  String get vgVenueNameError => 'Please enter Venue name';
 
   @override
-  String get vgVenueNameSpecialCharError => 'ଏଥିରେ କୌଣସି ବିଶେଷ ଅକ୍ଷର ରହିବା ଉଚିତ ନୁହେଁ।';
+  String get vgVenueNameSpecialCharError => 'Should not contain any special character';
 
   @override
-  String get vgPincode => 'ପିନ୍କୋଡ୍';
+  String get vgPincode => 'Pincode';
 
   @override
-  String get vgPincodeError => 'କେବଳ 6 ଅଙ୍କ ବିଶିଷ୍ଟ ପିଙ୍କୋଡକୁ ଅନୁମତି ଦିଆଯାଇଛି।';
+  String get vgPincodeError => 'Only 6 digit pincode allowed';
 
   @override
-  String get vgCityTownVillage => 'ସହର/ସହର/ଗ୍ରାମ';
+  String get vgCityTownVillage => 'City/Town/Village';
 
   @override
-  String get vgCityTownVillageError => 'ଦଯ଼ାକରି ସହର/ସହର/ଗ୍ରାମ ନାମ ଭରଣ କରନ୍ତୁ';
+  String get vgCityTownVillageError => 'Please enter City/Town/Village name';
 
   @override
-  String get vgCityTownVillageSpecialCharError => 'ଏଥିରେ କୌଣସି ବିଶେଷ ଅକ୍ଷର ରହିବା ଉଚିତ ନୁହେଁ।';
+  String get vgCityTownVillageSpecialCharError => 'Should not contain any special character';
 
   @override
-  String get vgCancel => 'ବାତିଲ କରନ୍ତୁ';
+  String get vgCancel => 'Cancel';
 
   @override
-  String get vgSave => 'ସଞ୍ଚଯ଼ କରନ୍ତୁ';
+  String get vgSave => 'Save';
 
   @override
-  String get vgAddEventImage => 'କାର୍ଯ୍ଯ଼କ୍ରମ ପ୍ରତିଛବି ଯୋଗ କରନ୍ତୁ';
+  String get vgAddEventImage => 'Add Event Image';
 
   @override
-  String get vgEventAdded => 'କାର୍ଯ୍ଯ଼କ୍ରମ ଯୋଡ଼ାଗଲା';
+  String get vgEventAdded => 'Event added';
 
   @override
-  String get vgEventNotAdded => 'କାର୍ଯ୍ଯ଼କ୍ରମ ଯୋଡ଼ାଯାଇନାହିଁ';
+  String get vgEventNotAdded => 'Event not added';
 
   @override
-  String get vgDateTime => 'ତାରିଖ ଏବଂ ସମଯ଼';
+  String get vgDateTime => 'Date & Time';
 
   @override
-  String get vgStartDate => 'ଆରମ୍ଭ ତାରିଖ';
+  String get vgStartDate => 'Start Date';
 
   @override
-  String get vgStartTime => 'ଆରମ୍ଭ ସମଯ଼';
+  String get vgStartTime => 'Start Time';
 
   @override
-  String get vgLocation => 'ଅବସ୍ଥିତି';
+  String get vgLocation => 'Location';
 
   @override
-  String get vgViewOnMap => 'ମାନଚିତ୍ରରେ ଦେଖନ୍ତୁ';
+  String get vgViewOnMap => 'View On Map';
 
   @override
-  String get vgAddressAndDoorNumber => 'ଠିକଣା ଏବଂ ଦ୍ୱାର ସଂଖ୍ଯ଼ା';
+  String get vgAddressAndDoorNumber => 'Address and Door Number';
 
   @override
-  String get vgSubDistrictName => 'ଉପ-ଜିଲ୍ଲାର ନାମ';
+  String get vgSubDistrictName => 'Sub District Name';
 
   @override
-  String get vgVillageName => 'ଗାଁର ନାମ';
+  String get vgVillageName => 'Village Name';
 
   @override
-  String get vgDistrictName => 'ଜିଲ୍ଲାର ନାମ';
+  String get vgDistrictName => 'District Name';
 
   @override
-  String get vgAbout => 'ବିଷଯ଼ରେ';
+  String get vgAbout => 'About';
 
   @override
-  String get vgEditEvent => 'ଇଭେଣ୍ଟକୁ ସମ୍ପାଦନ କରନ୍ତୁ';
+  String get vgEditEvent => 'Edit Event';
 
   @override
-  String get vgDeleteEvent => 'ଇଭେଣ୍ଟକୁ ଅପସାରଣ କରନ୍ତୁ';
+  String get vgDeleteEvent => 'Delete Event';
 
   @override
-  String get vgErrorFetchingEventDetails => 'କାର୍ଯ୍ଯ଼କ୍ରମ ବିବରଣୀ ଆଣିବାରେ ତ୍ରୁଟି';
+  String get vgErrorFetchingEventDetails => 'Error fetching event details';
 
   @override
-  String get vgNoPatientRegistered => 'ନାମ ଥିବା କୌଣସି ରୋଗୀ ପଞ୍ଜୀକୃତ ହୋଇନାହିଁ। ରେଜିଷ୍ଟର ରୋଗୀ ଉପରେ କ୍ଲିକ କରନ୍ତୁ।';
+  String get vgNoPatientRegistered => 'No Patient with Name is registered. Click on the  Register Patient.';
 
   @override
-  String get vgRegisterPatient => 'ରୋଗୀ ପଞ୍ଜିକରଣ କରନ୍ତୁ';
+  String get vgRegisterPatient => 'Register Patient';
 
   @override
-  String get vgPrimary => 'ପ୍ରାଥମିକ';
+  String get vgPrimary => 'Primary';
 
   @override
-  String get vgDependent => 'ନିର୍ଭରଶୀଳ';
+  String get vgDependent => 'Dependent';
 
   @override
-  String get vgAddMember => 'ସଦସ୍ଯ଼ ଯୋଗ କରନ୍ତୁ';
+  String get vgAddMember => 'Add Member';
 
   @override
-  String get vgCompleteProfile => 'ସମ୍ପୂର୍ଣ୍ଣ ପ୍ରୋଫାଇଲ';
+  String get vgCompleteProfile => 'Complete Profile';
 
   @override
-  String get vgStartAssessment => 'ମୂଲ୍ଯ଼ାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ';
+  String get vgStartAssessment => 'Start\r\nAssessment';
 
   @override
-  String get vgSearchPatientByPhoneNumber => 'ଫୋନ୍ ନମ୍ବର ଦ୍ୱାରା ରୋଗୀକୁ ଖୋଜନ୍ତୁ';
+  String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
 
   @override
-  String get vgInvalidPhoneNumber => 'ଦଯ଼ାକରି ଏକ ବୈଧ ଫୋନ ନମ୍ବର ଦିଅନ୍ତୁ।';
+  String get vgInvalidPhoneNumber => 'Please enter a valid phone number';
 
   @override
-  String get vgServerError => 'ସର୍ଭର ତ୍ରୁଟି';
+  String get vgServerError => 'Server Error';
 
   @override
-  String get vgPatient => 'ରୋଗୀ।';
+  String get vgPatient => 'Patient';
 
   @override
-  String get vgReportId => 'ଆଇ. ଡି. ରିପୋର୍ଟ କରନ୍ତୁ';
+  String get vgReportId => 'Report ID';
 
   @override
-  String get vgNoEventFound => 'କୌଣସି କାର୍ଯ୍ଯ଼କ୍ରମ ମିଳିଲା ନାହିଁ';
+  String get vgNoEventFound => 'No Event Found';
 
   @override
-  String get vgTeamMateDeletedSuccessfully => 'ଟିମ୍ମେଟ୍ ସଫଳତାର ସହ ଅପସାରିତ ହେଲା';
+  String get vgTeamMateDeletedSuccessfully => 'TeamMate Deleted Successfully';
 
   @override
-  String get vgSomethingWentWrong => 'କିଛି ଭୁଲ ହୋଇଗଲା।';
+  String get vgSomethingWentWrong => 'Something went wrong';
 
   @override
-  String get vgName => 'ନାମ';
+  String get vgName => 'Name';
 
   @override
-  String get vgPhoneNumber => 'ଫୋନ ନମ୍ବର';
+  String get vgPhoneNumber => 'Phone Number';
 
   @override
-  String get vgErrorFetchingTeammatesDetails => 'ସାଥୀ ଖେଳାଳିଙ୍କ ବିବରଣୀ ଆଣିବାରେ ତ୍ରୁଟି';
+  String get vgErrorFetchingTeammatesDetails => 'Error fetching teammates details';
 
   @override
-  String get vgTeamMateAddedSuccessfully => 'ଟିମ୍ମେଟ୍ ସଫଳତାର ସହ ଯୋଡ଼ି ହେଲା';
+  String get vgTeamMateAddedSuccessfully => 'TeamMate Added Successfully';
 
   @override
-  String get vgAddTeammate => 'ଟିମ୍ମେଟ୍ ଯୋଗ କରନ୍ତୁ';
+  String get vgAddTeammate => 'Add Teammate';
 
   @override
-  String get vgPleaseEnter => 'ଦଯ଼ାକରି ପ୍ରବେଶ କରନ୍ତୁ';
+  String get vgPleaseEnter => 'Please enter';
 
   @override
-  String get vgPleaseEnterField => 'ଦଯ଼ାକରି କ୍ଷେତ୍ର ପ୍ରବେଶ କରନ୍ତୁ';
+  String get vgPleaseEnterField => 'Please enter field';
 
   @override
-  String get vgOr => 'କିମ୍ବା';
+  String get vgOr => 'Or';
 
   @override
-  String get vgSearch => 'ଖୋଜନ୍ତୁ';
+  String get vgSearch => 'Search';
 
   @override
-  String get vgEventDeletedSuccessfully => 'ଇଭେଣ୍ଟ ସଫଳତାର ସହ ଅପସାରିତ ହେଲା';
+  String get vgEventDeletedSuccessfully => 'Event Deleted Successfully';
 
   @override
-  String get vgEventDeletionFailed => 'କାର୍ଯ୍ଯ଼କ୍ରମ ଅପସାରଣ ବିଫଳ ହେଲା';
+  String get vgEventDeletionFailed => 'Event Deletion Failed';
 
   @override
-  String get vgEndTimeGreaterThanStartTime => 'ଶେଷ ସମଯ଼ ଆରମ୍ଭ ସମଯ଼ ଠାରୁ ଅଧିକ ହେବା ଉଚିତ।';
+  String get vgEndTimeGreaterThanStartTime => 'End time should be greater than start time';
 
   @override
-  String get vgNoPatientsPresent => 'ବର୍ତ୍ତମାନ କୌଣସି ରୋଗୀ ନାହାନ୍ତି। "ରୋଗୀ ଯୋଗ କରନ୍ତୁ" ଉପରେ ଟିପନ୍ତୁ।';
+  String get vgNoPatientsPresent => 'There are no patients at present. Tap on "Add Patient"';
 
   @override
   String get textSize => 'ପାଠ୍ୟର ଆକାର';
@@ -1848,4 +1848,22 @@ class AppLocalizationsOr extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'ସର୍ବାଧିକ ପାଠ ଆକାର ପହଞ୍ଚିଛି';
+
+  @override
+  String get chatClearChat => 'Clear Chat';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+
+  @override
+  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+
+  @override
+  String get chatTypeHere => 'Type here...';
+
+  @override
+  String get switchProfile => 'Switch Profile';
 }

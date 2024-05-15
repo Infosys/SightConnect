@@ -11,27 +11,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String loginEnterOTP(String mobileNumber) {
-    return 'कृपया जिस पर भेजा गया ओ. टी. पी. दर्ज करें ${mobileNumber}';
+    return 'Please enter the OTP sent to ${mobileNumber}';
   }
 
   @override
   String loginResendOTPIn(String time) {
-    return 'फिर से भेजें ${time}';
+    return 'Resend in ${time}';
   }
 
   @override
   String patientHasAnAppointment(String patient) {
-    return '${patient} रोगी के पास एक नियुक्ति है';
+    return '${patient} has an appointment';
   }
 
   @override
   String vgEmptyResults(String type) {
-    return 'वर्तमान में कोई प्रकार नहीं है। जोड़ें ${type} पर टैप करें';
+    return 'There are no ${type}s at present. Tap on "Add ${type}"';
   }
 
   @override
   String vgSearchByIdName(String searchType) {
-    return '${searchType} आई. डी., नाम से खोजें';
+    return 'Search by ${searchType} ID, Name';
   }
 
   @override
@@ -1592,244 +1592,244 @@ class AppLocalizationsHi extends AppLocalizations {
   String get vtServiceNotAvailable => 'सेवा उपलब्ध नहीं है';
 
   @override
-  String get vgEyeAssessments => 'नेत्र मूल्यांकन';
+  String get vgEyeAssessments => 'Eye Assessments';
 
   @override
-  String get vgTotal => 'कुल';
+  String get vgTotal => 'Total';
 
   @override
-  String get vgCamps => 'शिविरों';
+  String get vgCamps => 'Camps';
 
   @override
-  String get vgDoorToDoor => 'दरवाजे तक';
+  String get vgDoorToDoor => 'Door to Door';
 
   @override
-  String get vgByGender => 'लिंग के आधार पर';
+  String get vgByGender => 'By Gender';
 
   @override
-  String get vgMale => 'पुरुष।';
+  String get vgMale => 'Male';
 
   @override
-  String get vgFemale => 'महिला';
+  String get vgFemale => 'Female';
 
   @override
-  String get vgOthers => 'अन्य';
+  String get vgOthers => 'Others';
 
   @override
-  String get vgByAge => 'उम्र के हिसाब से';
+  String get vgByAge => 'By Age';
 
   @override
-  String get vgSlideAge => 'बरसों';
+  String get vgSlideAge => 'Yrs';
 
   @override
-  String get vgSymptoms => 'लक्षण';
+  String get vgSymptoms => 'Symptoms';
 
   @override
-  String get vgRefractive => 'अपवर्तक';
+  String get vgRefractive => 'Refractive';
 
   @override
-  String get vgCataract => 'मोतियाबिंद';
+  String get vgCataract => 'Cataract';
 
   @override
-  String get vgGlaucoma => 'ग्लूकोमा';
+  String get vgGlaucoma => 'Glaucoma';
 
   @override
-  String get vgKeratitis => 'केराटाइटिस';
+  String get vgKeratitis => 'Keratitis';
 
   @override
-  String get vgBlepharitis => 'ब्लेफेराइटिस';
+  String get vgBlepharitis => 'Blepharitis';
 
   @override
-  String get vgConjunctivitis => 'नेत्रश्लेष्मलाशोथ';
+  String get vgConjunctivitis => 'Conjunctivitis';
 
   @override
-  String get vgServicesCreateEvent => 'कार्यक्रम बनाएँ';
+  String get vgServicesCreateEvent => 'Create\r\nEvent';
 
   @override
-  String get vgServicesEyeAssessment => 'नेत्र मूल्यांकन';
+  String get vgServicesEyeAssessment => 'Eye\r\nAssessment';
 
   @override
-  String get vgServicesRegisterPatient => 'नए रोगी को पंजीकृत करें';
+  String get vgServicesRegisterPatient => 'Register\r\nNew Patient';
 
   @override
-  String get vgAddPatients => 'रोगियों को जोड़ें';
+  String get vgAddPatients => 'Add Patients';
 
   @override
-  String get vgEvent => 'आयोजन';
+  String get vgEvent => 'Event';
 
   @override
-  String get vgAddEventPhoto => 'इवेंट फोटो जोड़ें';
+  String get vgAddEventPhoto => 'Add Event Photo';
 
   @override
-  String get vgUploadImage => 'छवि अपलोड करें';
+  String get vgUploadImage => 'Upload Image';
 
   @override
-  String get vgAddPhotoInstruction => 'कार्यक्रम की एक तस्वीर जोड़ें जिसे लघुचित्र के रूप में दिखाया जाएगा';
+  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\nwill be shown as thumbnail';
 
   @override
-  String get vgAddressDetails => 'पता विवरण';
+  String get vgAddressDetails => 'Address Details';
 
   @override
-  String get vgVenueName => 'स्थल का नाम';
+  String get vgVenueName => 'Venue Name';
 
   @override
-  String get vgVenueNameError => 'कृपया स्थान का नाम दर्ज करें';
+  String get vgVenueNameError => 'Please enter Venue name';
 
   @override
-  String get vgVenueNameSpecialCharError => 'इसमें कोई विशेष वर्ण नहीं होना चाहिए।';
+  String get vgVenueNameSpecialCharError => 'Should not contain any special character';
 
   @override
-  String get vgPincode => 'पिनकोड';
+  String get vgPincode => 'Pincode';
 
   @override
-  String get vgPincodeError => 'केवल 6 अंकों के पिनकोड की अनुमति है।';
+  String get vgPincodeError => 'Only 6 digit pincode allowed';
 
   @override
-  String get vgCityTownVillage => 'शहर/कस्बा/गाँव';
+  String get vgCityTownVillage => 'City/Town/Village';
 
   @override
-  String get vgCityTownVillageError => 'कृपया शहर/कस्बा/गाँव का नाम दर्ज करें';
+  String get vgCityTownVillageError => 'Please enter City/Town/Village name';
 
   @override
-  String get vgCityTownVillageSpecialCharError => 'इसमें कोई विशेष वर्ण नहीं होना चाहिए।';
+  String get vgCityTownVillageSpecialCharError => 'Should not contain any special character';
 
   @override
-  String get vgCancel => 'रद्द करें';
+  String get vgCancel => 'Cancel';
 
   @override
-  String get vgSave => 'सहेजें';
+  String get vgSave => 'Save';
 
   @override
-  String get vgAddEventImage => 'घटना छवि जोड़ें';
+  String get vgAddEventImage => 'Add Event Image';
 
   @override
-  String get vgEventAdded => 'घटना जोड़ी गई';
+  String get vgEventAdded => 'Event added';
 
   @override
-  String get vgEventNotAdded => 'घटना नहीं जोड़ी गई';
+  String get vgEventNotAdded => 'Event not added';
 
   @override
-  String get vgDateTime => 'तिथि और समय';
+  String get vgDateTime => 'Date & Time';
 
   @override
-  String get vgStartDate => 'प्रारंभ तिथि';
+  String get vgStartDate => 'Start Date';
 
   @override
-  String get vgStartTime => 'शुरू करने का समय';
+  String get vgStartTime => 'Start Time';
 
   @override
-  String get vgLocation => 'स्थान';
+  String get vgLocation => 'Location';
 
   @override
-  String get vgViewOnMap => 'नक्शे पर देखें';
+  String get vgViewOnMap => 'View On Map';
 
   @override
-  String get vgAddressAndDoorNumber => 'पता और डोर नंबर';
+  String get vgAddressAndDoorNumber => 'Address and Door Number';
 
   @override
-  String get vgSubDistrictName => 'उप-जिले का नाम';
+  String get vgSubDistrictName => 'Sub District Name';
 
   @override
-  String get vgVillageName => 'गाँव का नाम';
+  String get vgVillageName => 'Village Name';
 
   @override
-  String get vgDistrictName => 'ज़िले का नाम';
+  String get vgDistrictName => 'District Name';
 
   @override
-  String get vgAbout => 'के बारे में';
+  String get vgAbout => 'About';
 
   @override
-  String get vgEditEvent => 'कार्यक्रम संपादित करें';
+  String get vgEditEvent => 'Edit Event';
 
   @override
-  String get vgDeleteEvent => 'कार्यक्रम हटाएँ';
+  String get vgDeleteEvent => 'Delete Event';
 
   @override
-  String get vgErrorFetchingEventDetails => 'घटना विवरण प्राप्त करने में त्रुटि';
+  String get vgErrorFetchingEventDetails => 'Error fetching event details';
 
   @override
-  String get vgNoPatientRegistered => 'नाम के साथ कोई रोगी पंजीकृत नहीं है। पंजीकृत रोगी पर क्लिक करें।';
+  String get vgNoPatientRegistered => 'No Patient with Name is registered. Click on the  Register Patient.';
 
   @override
-  String get vgRegisterPatient => 'रोगी को पंजीकृत करें';
+  String get vgRegisterPatient => 'Register Patient';
 
   @override
-  String get vgPrimary => 'प्राथमिक';
+  String get vgPrimary => 'Primary';
 
   @override
-  String get vgDependent => 'आश्रित';
+  String get vgDependent => 'Dependent';
 
   @override
-  String get vgAddMember => 'सदस्य जोड़ें';
+  String get vgAddMember => 'Add Member';
 
   @override
-  String get vgCompleteProfile => 'पूर्ण प्रोफ़ाइल';
+  String get vgCompleteProfile => 'Complete Profile';
 
   @override
-  String get vgStartAssessment => 'मूल्यांकन शुरू करें';
+  String get vgStartAssessment => 'Start\r\nAssessment';
 
   @override
-  String get vgSearchPatientByPhoneNumber => 'फोन नंबर से रोगी को खोजें';
+  String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
 
   @override
-  String get vgInvalidPhoneNumber => 'कृपया एक वैध फोन नंबर दर्ज करें';
+  String get vgInvalidPhoneNumber => 'Please enter a valid phone number';
 
   @override
-  String get vgServerError => 'सर्वर त्रुटि';
+  String get vgServerError => 'Server Error';
 
   @override
-  String get vgPatient => 'रोगी।';
+  String get vgPatient => 'Patient';
 
   @override
-  String get vgReportId => 'आई. डी. दर्ज करें';
+  String get vgReportId => 'Report ID';
 
   @override
-  String get vgNoEventFound => 'कोई घटना नहीं मिली';
+  String get vgNoEventFound => 'No Event Found';
 
   @override
-  String get vgTeamMateDeletedSuccessfully => 'टीममेट सफलतापूर्वक हटा दिया गया';
+  String get vgTeamMateDeletedSuccessfully => 'TeamMate Deleted Successfully';
 
   @override
-  String get vgSomethingWentWrong => 'कुछ गड़बड़ हो गई।';
+  String get vgSomethingWentWrong => 'Something went wrong';
 
   @override
-  String get vgName => 'नाम';
+  String get vgName => 'Name';
 
   @override
-  String get vgPhoneNumber => 'फोन नंबर';
+  String get vgPhoneNumber => 'Phone Number';
 
   @override
-  String get vgErrorFetchingTeammatesDetails => 'टीम के साथियों का विवरण लाने में त्रुटि';
+  String get vgErrorFetchingTeammatesDetails => 'Error fetching teammates details';
 
   @override
-  String get vgTeamMateAddedSuccessfully => 'टीममेट सफलतापूर्वक जोड़ा गया';
+  String get vgTeamMateAddedSuccessfully => 'TeamMate Added Successfully';
 
   @override
-  String get vgAddTeammate => 'टीममेट जोड़ें';
+  String get vgAddTeammate => 'Add Teammate';
 
   @override
-  String get vgPleaseEnter => 'कृपया प्रविष्ट करें';
+  String get vgPleaseEnter => 'Please enter';
 
   @override
-  String get vgPleaseEnterField => 'कृपया क्षेत्र दर्ज करें';
+  String get vgPleaseEnterField => 'Please enter field';
 
   @override
-  String get vgOr => 'या';
+  String get vgOr => 'Or';
 
   @override
-  String get vgSearch => 'खोजें।';
+  String get vgSearch => 'Search';
 
   @override
-  String get vgEventDeletedSuccessfully => 'कार्यक्रम सफलतापूर्वक हटा दिया गया';
+  String get vgEventDeletedSuccessfully => 'Event Deleted Successfully';
 
   @override
-  String get vgEventDeletionFailed => 'घटना मिटाने में विफल';
+  String get vgEventDeletionFailed => 'Event Deletion Failed';
 
   @override
-  String get vgEndTimeGreaterThanStartTime => 'समाप्ति समय प्रारंभ समय से अधिक होना चाहिए।';
+  String get vgEndTimeGreaterThanStartTime => 'End time should be greater than start time';
 
   @override
-  String get vgNoPatientsPresent => 'वर्तमान में कोई मरीज नहीं है। "रोगी जोड़ें" पर टैप करें।';
+  String get vgNoPatientsPresent => 'There are no patients at present. Tap on "Add Patient"';
 
   @override
   String get textSize => 'पाठ का आकार';
@@ -1848,4 +1848,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'अधिकतम पाठ आकार पहुंच गया';
+
+  @override
+  String get chatClearChat => 'Clear Chat';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+
+  @override
+  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+
+  @override
+  String get chatTypeHere => 'Type here...';
+
+  @override
+  String get switchProfile => 'Switch Profile';
 }

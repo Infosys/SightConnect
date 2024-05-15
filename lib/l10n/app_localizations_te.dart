@@ -1848,4 +1848,22 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'గరిష్ఠ పాఠ్య పరిమాణం చేరింది';
+
+  @override
+  String get chatClearChat => 'చాట్ క్లియర్ చేయండి';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'మీకు కళ్ళ అంచనా సిఫారసు చేస్తున్నాము.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'మీరు ట్రియాజ్ కళ్ళ అంచనాను తీసుకుంటారా?';
+
+  @override
+  String get chatChatbotNotAvailable => 'చాట్బాట్ ప్రస్తుతం అందుబాటులో లేదు. దయచేసి తరువాత ప్రయత్నించండి.';
+
+  @override
+  String get chatTypeHere => 'ఇక్కడ టైప్ చేయండి';
+
+  @override
+  String get switchProfile => 'Switch Profile';
 }

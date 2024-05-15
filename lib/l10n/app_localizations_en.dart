@@ -1848,4 +1848,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'Maximum text size reached';
+
+  @override
+  String get chatClearChat => 'Clear Chat';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+
+  @override
+  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+
+  @override
+  String get chatTypeHere => 'Type here...';
+
+  @override
+  String get switchProfile => 'Switch Profile';
 }
