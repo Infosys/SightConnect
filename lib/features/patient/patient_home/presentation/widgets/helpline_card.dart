@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -20,7 +21,7 @@ class HelplineCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSize.km,
-          vertical: AppSize.ks / 2,
+          vertical: AppSize.km * 0.5,
         ),
         decoration: const BoxDecoration(
           color: AppColor.lightRed,
@@ -31,15 +32,12 @@ class HelplineCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              child: Text(
-                "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
-                style: applyRobotoFont(
-                  fontSize: 12,
-                ),
+            AutoSizeText(
+              "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
+              style: applyRobotoFont(
+                fontSize: 12,
               ),
             ),
-            const SizedBox(width: 8),
             InkWell(
               onTap: () async {
                 Uri phoneno = Uri.parse("tel:$helpLine");
@@ -47,6 +45,7 @@ class HelplineCard extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.only(left: AppSize.ks),
                 decoration: const BoxDecoration(
                   color: AppColor.pureRed,
                   shape: BoxShape.circle,

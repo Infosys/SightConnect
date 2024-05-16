@@ -25,98 +25,100 @@ class PatientHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ref.watch(appUpdateServiceProvider).checkForUpdate();
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      endDrawer: AppDrawer(
-        onAccessibilityChange: () {
-          TextScalePopupMenu.show(context, ref);
-        },
-        onLanguageChange: () {
-          final currentLocaleCode =
-              ref.read(globalLanguageProvider).currentLocale;
-          showBottomSheet(
-            enableDrag: false,
-            context: context,
-            builder: (context) => TranslationPopUp(
-              locale: currentLocaleCode,
-            ),
-          );
-        },
-      ),
-      appBar: const PatientHomePageAppBar(),
-      body: UpgradeAlert(
-        dialogStyle: UpgradeDialogStyle.cupertino,
-        showIgnore: kDebugMode ? true : false,
-        showLater: kDebugMode ? true : false,
-        shouldPopScope: () => kDebugMode ? true : false,
-        canDismissDialog: kDebugMode ? true : false,
-        onUpdate: () {
-          return true;
-        },
-        upgrader: Upgrader(
-          durationUntilAlertAgain: const Duration(milliseconds: 800),
-          willDisplayUpgrade: (
-              {appStoreVersion,
-              required display,
-              installedVersion,
-              minAppVersion}) {
-            logger.d("display : $display");
-            logger.d("appStoreVersion : $appStoreVersion");
-            logger.d("installedVersion : $installedVersion");
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        endDrawer: AppDrawer(
+          onAccessibilityChange: () {
+            TextScalePopupMenu.show(context, ref);
+          },
+          onLanguageChange: () {
+            final currentLocaleCode =
+                ref.read(globalLanguageProvider).currentLocale;
+            showBottomSheet(
+              enableDrag: false,
+              context: context,
+              builder: (context) => TranslationPopUp(
+                locale: currentLocaleCode,
+              ),
+            );
           },
         ),
-        child: Container(
-          height: AppSize.height(context),
-          width: AppSize.width(context),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                AppImages.scaffoldBg,
-              ),
-              fit: BoxFit.cover,
-            ),
+        appBar: const PatientHomePageAppBar(),
+        body: UpgradeAlert(
+          dialogStyle: UpgradeDialogStyle.cupertino,
+          showIgnore: kDebugMode ? true : false,
+          showLater: kDebugMode ? true : false,
+          shouldPopScope: () => kDebugMode ? true : false,
+          canDismissDialog: kDebugMode ? true : false,
+          onUpdate: () {
+            return true;
+          },
+          upgrader: Upgrader(
+            durationUntilAlertAgain: const Duration(milliseconds: 800),
+            willDisplayUpgrade: (
+                {appStoreVersion,
+                required display,
+                installedVersion,
+                minAppVersion}) {
+              logger.d("display : $display");
+              logger.d("appStoreVersion : $appStoreVersion");
+              logger.d("installedVersion : $installedVersion");
+            },
           ),
-          child: SingleChildScrollView(
-            controller: ref.read(patientDashboardProvider).scrollController,
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(height: AppSize.kl * 5),
+          child: Container(
+            height: AppSize.height(context),
+            width: AppSize.width(context),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  AppImages.scaffoldBg,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: SingleChildScrollView(
+              controller: ref.read(patientDashboardProvider).scrollController,
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: AppSize.kl * 3),
 
-                // const SizedBox(height: AppSize.km),
-                // PriorityNotificationList(),
-                PatientHeader(),
+                  // const SizedBox(height: AppSize.km),
+                  // PriorityNotificationList(),
+                  PatientHeader(),
 
-                SizedBox(height: AppSize.km),
-                TriageTestCard(),
-                SizedBox(height: AppSize.kl),
-                HelplineCard(helpLine: AppInfoService.tollFreeNumber),
-                SizedBox(height: AppSize.km),
+                  SizedBox(height: AppSize.km),
+                  TriageTestCard(),
+                  SizedBox(height: AppSize.kl),
+                  HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+                  SizedBox(height: AppSize.km),
 
-                MyConnectionsList(),
+                  MyConnectionsList(),
 
-                // const RecentServicesCardList(),
-                SizedBox(height: AppSize.km),
-                PatientFooter(),
-                // const NearbyVisionCentersList(),
-                // const SizedBox(height: AppSize.km),
+                  // const RecentServicesCardList(),
+                  SizedBox(height: AppSize.km),
+                  PatientFooter(),
+                  // const NearbyVisionCentersList(),
+                  // const SizedBox(height: AppSize.km),
 
-                // InviteCard(
-                //   onPressed: () {
-                //     Share.share(
-                //       context.loc?.smsContent ?? "",
-                //       subject: context.loc?.emailSubject ?? "",
-                //     );
-                //   },
-                // ),
-                // const EyeCampsCardList(),
-                // const SizedBox(height: AppSize.km),
-                // const GoodToKnowCardList(),
-                // const SizedBox(height: AppSize.km),
-                // const CampaginsList(),
-                // const PartnerCard(),
-                SizedBox(height: AppSize.kl * 3),
-              ],
+                  // InviteCard(
+                  //   onPressed: () {
+                  //     Share.share(
+                  //       context.loc?.smsContent ?? "",
+                  //       subject: context.loc?.emailSubject ?? "",
+                  //     );
+                  //   },
+                  // ),
+                  // const EyeCampsCardList(),
+                  // const SizedBox(height: AppSize.km),
+                  // const GoodToKnowCardList(),
+                  // const SizedBox(height: AppSize.km),
+                  // const CampaginsList(),
+                  // const PartnerCard(),
+                  SizedBox(height: AppSize.kl * 3),
+                ],
+              ),
             ),
           ),
         ),
