@@ -256,8 +256,7 @@ class AppDrawer extends HookWidget {
                         }).catchError((e) {
                           isLoading.value = false;
                           Fluttertoast.showToast(
-                              msg:
-                                  "Apologies, we encountered a logout error in the mobile app.");
+                              msg: loc.appDrawerToastMessageText);
                         });
                       },
                       leading: Container(

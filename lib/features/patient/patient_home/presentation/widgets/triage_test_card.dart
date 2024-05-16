@@ -42,30 +42,30 @@ class TriageTestCard extends HookConsumerWidget {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      'Your eye test is free…',
+                      loc.triageTestCardHeader,
                       style: applyFiraSansFont(
                         fontSize: 20,
                       ),
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(AppSize.ks),
+                Padding(
+                  padding: const EdgeInsets.all(AppSize.ks),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       PatientHomeCardInfoTile(
-                        title: 'Quickly analyse your eye symptoms',
+                        title: loc.triageTestCardBody1,
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       PatientHomeCardInfoTile(
-                        title: 'Identify if you may have an eye problem',
+                        title: loc.triageTestCardBody2,
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       PatientHomeCardInfoTile(
-                        title: 'Know when to visit your doctor',
+                        title: loc.triageTestCardBody3,
                       ),
                     ],
                   ),
@@ -102,7 +102,7 @@ class TriageTestCard extends HookConsumerWidget {
                       showTriageHowToProceedBottomSheet(context: context);
                     },
                     child: Text(
-                      'Start Free Eye Test',
+                      loc.triageTestCardButton,
                       style: applyRobotoFont(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

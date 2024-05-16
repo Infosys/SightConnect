@@ -3832,6 +3832,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.'**
   String get patientHeaderWelcomeText;
+
+  /// No description provided for @triageTestCardHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your eye test is free…'**
+  String get triageTestCardHeader;
+
+  /// No description provided for @triageTestCardBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'Quickly analyse your eye symptoms'**
+  String get triageTestCardBody1;
+
+  /// No description provided for @triageTestCardBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'Identify if you may have an eye problem'**
+  String get triageTestCardBody2;
+
+  /// No description provided for @triageTestCardBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'Know when to visit your doctor'**
+  String get triageTestCardBody3;
+
+  /// No description provided for @triageTestCardButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Free Eye Test'**
+  String get triageTestCardButton;
+
+  /// No description provided for @myConnectionListAddMembersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Click the Add Members button to add your family and friends.'**
+  String get myConnectionListAddMembersDescription;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'How do you want to proceed?'**
+  String get showTriageHowToProceedBottomSheetHeader;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'I have a problem and want to validate'**
+  String get showTriageHowToProceedBottomSheetBody1;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'I am not sure if I have a problem'**
+  String get showTriageHowToProceedBottomSheetBody2;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'I have no eye issues – just want to check'**
+  String get showTriageHowToProceedBottomSheetBody3;
+
+  /// No description provided for @appDrawerToastMessageText.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we encountered a logout error in the mobile app.'**
+  String get appDrawerToastMessageText;
+
+  /// No description provided for @myConnectionListAddMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Member'**
+  String get myConnectionListAddMembers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

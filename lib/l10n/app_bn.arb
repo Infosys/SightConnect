@@ -666,5 +666,17 @@
   "chatDoYouWantToTakeTheTriageEyeAssessment": "Do you want to take the triage eye assessment?",
   "chatChatbotNotAvailable": "Chatbot is not available at the moment. Please try again later.",
   "chatTypeHere": "Type here...",
-  "patientHeaderWelcomeText": "Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way."
+  "patientHeaderWelcomeText": "Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.",
+  "triageTestCardHeader": "Your eye test is free…",
+  "triageTestCardBody1": "Quickly analyse your eye symptoms",
+  "triageTestCardBody2": "Identify if you may have an eye problem",
+  "triageTestCardBody3": "Know when to visit your doctor",
+  "triageTestCardButton": "Start Free Eye Test",
+  "myConnectionListAddMembersDescription": "Click the Add Members button to add your family and friends.",
+  "showTriageHowToProceedBottomSheetHeader": "How do you want to proceed?",
+  "showTriageHowToProceedBottomSheetBody1": "I have a problem and want to validate",
+  "showTriageHowToProceedBottomSheetBody2": "I am not sure if I have a problem",
+  "showTriageHowToProceedBottomSheetBody3": "I have no eye issues – just want to check",
+  "appDrawerToastMessageText": "Apologies, we encountered a logout error in the mobile app.",
+  "myConnectionListAddMembers": "সদস্য যোগ করুন"
 }
