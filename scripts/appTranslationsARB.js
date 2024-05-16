@@ -3,43 +3,52 @@ const fs = require("fs");
 const path = require("path");
 
 function appTranslationsARB() {
+  console.log("Starting appTranslationsARB...");
+
   console.log("Reading the Excel file...");
-  // If the file is not found, show an error message and stop the process.
   const xlsxFilePath = path.join(__dirname, "App_Translations.xlsx");
   if (!fs.existsSync(xlsxFilePath)) {
     console.error("The file 'App_Translations.xlsx' was not found.");
     return;
   }
+
+  console.log("Reading workbook from file...");
   const workbook = xlsx.readFile(xlsxFilePath);
   const sheet_name_list = workbook.SheetNames;
-  const translations = xlsx.utils.sheet_to_json(
-    workbook.Sheets[sheet_name_list[0]]
-  );
-  const languages = Object.keys(translations[0]).slice(1);
+  console.log("Sheet names in workbook:", sheet_name_list);
 
-  // console.log("Creating the app_translations folder...");
+  console.log("Converting first sheet to JSON...");
+  const translations = xlsx.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+  console.log("Translations:", translations);
+
+  console.log("Extracting languages from translations...");
+  const languages = Object.keys(translations[0]).slice(1);
+  console.log("Languages:", languages);
+
+  console.log("Checking for 'lib/l10n' folder...");
   const arbFilesFolderPath = path.join(__dirname, "../lib/l10n");
-  // if arbFilesFolderPath does not exist, show an error message and stop the process.
   if (!fs.existsSync(arbFilesFolderPath)) {
     console.error("The folder 'lib/l10n' was not found.");
     return;
   }
 
-  // if app.en.arb does not exist, log an error
+  console.log("Checking for 'app_en.arb' file...");
   if (!fs.existsSync(path.join(arbFilesFolderPath, "app_en.arb"))) {
     console.error("The file 'app_en.arb' was not found.");
     return;
   }
 
-  const englishTranslations = JSON.parse(
-    fs.readFileSync(path.join(arbFilesFolderPath, "app_en.arb"), "utf8")
-  );
+  console.log("Reading 'app_en.arb' file...");
+  const englishTranslations = JSON.parse(fs.readFileSync(path.join(arbFilesFolderPath, "app_en.arb"), "utf8"));
+  console.log("English translations:", englishTranslations);
 
   console.log("Generating the arb files...");
   languages.forEach((language) => {
+    console.log(`Processing language: ${language}...`);
     const translationsObj = {};
 
     const definitions = {};
+    console.log("Processing English translations...");
     Object.keys(englishTranslations).forEach((key) => {
       if (key.startsWith("@") && !key.startsWith("@@")) {
         definitions[key] = englishTranslations[key];
@@ -47,9 +56,10 @@ function appTranslationsARB() {
       }
     });
 
+    console.log("Processing translations...");
     translations.forEach((translation) => {
-      translationsObj[translation.id] =
-        translation[language] || englishTranslations[translation.id] || "";
+      console.log('Current translation:', translation);
+      translationsObj[translation.Key] = translation[language] || englishTranslations[translation.key] || "";
     });
 
     const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);
@@ -61,7 +71,9 @@ function appTranslationsARB() {
       ...definitions,
     };
 
+    console.log(`Checking if 'app_${language}.arb' exists...`);
     if (fs.existsSync(arbFile)) {
+      console.log(`'app_${language}.arb' exists. Updating...`);
       const existingTranslations = JSON.parse(fs.readFileSync(arbFile, "utf8"));
       finalTranslations = {
         ...finalTranslations,
@@ -69,14 +81,15 @@ function appTranslationsARB() {
         ...translationsObj,
       };
       fs.writeFileSync(arbFile, JSON.stringify(finalTranslations, null, 2));
-      console.log(`Updated app_${language}.arb`);
+      console.log(`Updated 'app_${language}.arb'`);
     } else {
+      console.log(`'app_${language}.arb' does not exist. Generating...`);
       finalTranslations = {
         ...finalTranslations,
         ...translationsObj,
       };
       fs.writeFileSync(arbFile, JSON.stringify(finalTranslations, null, 2));
-      console.log(`Generated app_${language}.arb`);
+      console.log(`Generated 'app_${language}.arb'`);
     }
   });
 
