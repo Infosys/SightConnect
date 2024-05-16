@@ -1875,4 +1875,40 @@ class AppLocalizationsOr extends AppLocalizations {
 
   @override
   String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+
+  @override
+  String get triageTestCardHeader => 'Your eye test is free…';
+
+  @override
+  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+
+  @override
+  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+
+  @override
+  String get triageTestCardBody3 => 'Know when to visit your doctor';
+
+  @override
+  String get triageTestCardButton => 'Start Free Eye Test';
+
+  @override
+  String get myConnectionListAddMembers => 'Add Members';
+
+  @override
+  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+
+  @override
+  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+
+  @override
+  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
 }
