@@ -59,7 +59,8 @@ function appTranslationsARB() {
     console.log("Processing translations...");
     translations.forEach((translation) => {
       console.log('Current translation:', translation);
-      translationsObj[translation.Key] = translation[language] || englishTranslations[translation.key] || "";
+      translationsObj[translation.id] =
+        translation[language] || englishTranslations[translation.id] || "";
     });
 
     const arbFile = path.join(arbFilesFolderPath, `app_${language}.arb`);

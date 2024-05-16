@@ -658,12 +658,12 @@
   "reset": "রিসেট",
   "minimumTextSizeReached": "ন্যূনতম পাঠের আকার পৌঁছে গেছে",
   "maximumTextSizeReached": "সর্বাধিক পাঠের আকার পৌঁছে গেছে",
-  "switchProfile": "",
-  "switchRole": "",
-  "switchTenant": "",
-  "chatClearChat": "",
-  "chatEyeAssessmentRecommended": "",
-  "chatDoYouWantToTakeTheTriageEyeAssessment": "",
-  "chatChatbotNotAvailable": "",
-  "chatTypeHere": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant",
+  "chatClearChat": "Clear Chat",
+  "chatEyeAssessmentRecommended": "Eye assessment is recommended for you.",
+  "chatDoYouWantToTakeTheTriageEyeAssessment": "Do you want to take the triage eye assessment?",
+  "chatChatbotNotAvailable": "Chatbot is not available at the moment. Please try again later.",
+  "chatTypeHere": "Type here..."
 }

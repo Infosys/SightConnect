@@ -658,12 +658,12 @@
   "reset": "പുനഃസജ്ജീകരിക്കുക",
   "minimumTextSizeReached": "ഏറ്റവും കുറഞ്ഞ വാചക വലിപ്പം എത്തി",
   "maximumTextSizeReached": "ഏറ്റവും കൂടിയ വാചക വലിപ്പം എത്തി",
-  "switchProfile": "",
-  "switchRole": "",
-  "switchTenant": "",
-  "chatClearChat": "",
-  "chatEyeAssessmentRecommended": "",
-  "chatDoYouWantToTakeTheTriageEyeAssessment": "",
-  "chatChatbotNotAvailable": "",
-  "chatTypeHere": ""
+  "switchProfile": "Switch Profile",
+  "switchRole": "Switch Role",
+  "switchTenant": "Switch Tenant",
+  "chatClearChat": "Clear Chat",
+  "chatEyeAssessmentRecommended": "Eye assessment is recommended for you.",
+  "chatDoYouWantToTakeTheTriageEyeAssessment": "Do you want to take the triage eye assessment?",
+  "chatChatbotNotAvailable": "Chatbot is not available at the moment. Please try again later.",
+  "chatTypeHere": "Type here..."
 }
