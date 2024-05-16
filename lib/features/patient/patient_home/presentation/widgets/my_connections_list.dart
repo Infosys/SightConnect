@@ -67,7 +67,7 @@ class MyConnectionsList extends ConsumerWidget {
                   );
                 },
                 child: Text(
-                  'Add Members',
+                  loc.myConnectionListAddMembers,
                   maxLines: 1,
                   style: applyRobotoFont(
                     fontSize: 14,
@@ -107,7 +107,7 @@ class MyConnectionsList extends ConsumerWidget {
                   Expanded(
                     flex: 4,
                     child: Text(
-                      'Click the Add Members button to add your family and friends.',
+                      loc.myConnectionListAddMembersDescription,
                       style: applyRobotoFont(
                         fontSize: 12,
                         color: AppColor.grey,

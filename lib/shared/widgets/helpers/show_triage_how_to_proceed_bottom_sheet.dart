@@ -1,11 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_instruction_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 Future<T?> showTriageHowToProceedBottomSheet<T>(
     {required BuildContext context}) {
+      final loc = context.loc!;
   return showModalBottomSheet(
     context: context,
     isDismissible: false,
@@ -40,7 +42,7 @@ Future<T?> showTriageHowToProceedBottomSheet<T>(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'How do you want to proceed?',
+                      loc.showTriageHowToProceedBottomSheetHeader,
                       style: applyFiraSansFont(
                         fontSize: 24,
                       ),
@@ -63,7 +65,7 @@ Future<T?> showTriageHowToProceedBottomSheet<T>(
                           );
                         },
                         child: Text(
-                          'I have a problem and want to validate',
+                          loc.showTriageHowToProceedBottomSheetBody1,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
@@ -87,7 +89,7 @@ Future<T?> showTriageHowToProceedBottomSheet<T>(
                           );
                         },
                         child: Text(
-                          'I am not sure if I have a problem',
+                          loc.showTriageHowToProceedBottomSheetBody2,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
@@ -111,7 +113,7 @@ Future<T?> showTriageHowToProceedBottomSheet<T>(
                           );
                         },
                         child: Text(
-                          'I have no eye issues – just want to check',
+                          loc.showTriageHowToProceedBottomSheetBody3,
                           style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
