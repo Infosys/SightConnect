@@ -1,7 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +48,7 @@ class TriageMemberSelectionPage extends StatelessWidget {
                             ? null
                             : () {
                                 ref.read(resetProvider).reset();
-                            
-                                
+
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => const TriagePage(),

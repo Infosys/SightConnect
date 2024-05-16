@@ -1,7 +1,4 @@
-import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'distance_visual_acuity_instructional_video_page.dart';
 

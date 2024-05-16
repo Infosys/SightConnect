@@ -8,7 +8,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../core/constants/app_images.dart';
 import '../../../../../../../shared/widgets/custom_app_bar.dart';
-import '../../../../data/local/tumbling_local_source.dart';
 import '../providers/distance_visual_acuity_test_provider.dart';
 import '../widgets/distance_visual_acuity_tumbling_test_left_eye_instruction.dart';
 
@@ -155,7 +154,9 @@ class DistanceVisualAcuityDistanceSelectionPage extends HookConsumerWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      ref.read(globalVisualAcuityProvider).setThreeMeter(isThreeMeters.value);
+                      ref
+                          .read(globalVisualAcuityProvider)
+                          .setThreeMeter(isThreeMeters.value);
                       // ref
                       //     .read(distancetumblingLocalSource)
                       //     .setIsThreeMeter(isThreeMeters.value);

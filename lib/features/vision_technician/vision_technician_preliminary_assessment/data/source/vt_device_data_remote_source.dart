@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
@@ -14,7 +12,7 @@ import '../../../../../main.dart';
 var vtDeviceDataProvider = FutureProvider((ref) {
   final Dio dio = ref.read(dioProvider);
 
-   Future<List<DeviceModel>> getDeviceData(
+  Future<List<DeviceModel>> getDeviceData(
       String role, String tenantId, String organizationId) async {
     String endpoint =
         '/services/assessments/api/device?userRole=$role&testCategory=TRIAGE&tenantId=$tenantId&organizationId=$organizationId';
@@ -22,10 +20,10 @@ var vtDeviceDataProvider = FutureProvider((ref) {
     try {
       final response = await dio.get(endpoint);
       logger.f("device response is : ${response.data}");
-      final deviceList =  (response.data as List)
-            .map((device) => DeviceModel.fromJson(device))
-            .toList();
-     
+      final deviceList = (response.data as List)
+          .map((device) => DeviceModel.fromJson(device))
+          .toList();
+
       return deviceList;
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
@@ -36,6 +34,8 @@ var vtDeviceDataProvider = FutureProvider((ref) {
     }
   }
 
-  return getDeviceData("VISION_TECHNICIAN", SharedPreferenceService.getTenantIdVt.toString(), SharedPreferenceService.getOrganizationIdVt.toString());
+  return getDeviceData(
+      "VISION_TECHNICIAN",
+      SharedPreferenceService.getTenantIdVt.toString(),
+      SharedPreferenceService.getOrganizationIdVt.toString());
 });
-

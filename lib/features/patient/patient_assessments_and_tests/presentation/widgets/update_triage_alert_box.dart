@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_quessionaire/presentation/pages/update_questionnaire_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/patient_self_test_reports.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/providers/global_visual_acuity_provider.dart';
-import '../../../../common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import '../../../../common_features/triage/presentation/providers/triage_provider.dart';
 
 class UpdateTriageAlertBox extends HookConsumerWidget {
@@ -83,7 +81,7 @@ class UpdateTriageAlertBox extends HookConsumerWidget {
                     case TestType.OBSERVATION:
                       ref.read(globalProvider).setVAMode =
                           VisionAcuityMode.UPDATE;
-                       ref.read(resetProvider).reset();
+                      ref.read(resetProvider).reset();
                       ref
                           .read(globalVisualAcuityProvider)
                           .setDiagnosticReportID(diagnosticReportID);
