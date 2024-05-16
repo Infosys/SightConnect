@@ -1,3 +1,3 @@
 enum FacilityType {
-  PRIMARY
+  PRIMARY, SECONDARY, TERTIARY, OTHER
 }
