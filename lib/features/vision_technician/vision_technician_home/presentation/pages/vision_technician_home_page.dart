@@ -28,6 +28,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: UpgradeAlert(
+          dialogStyle: UpgradeDialogStyle.cupertino,
           showIgnore: kDebugMode ? true : false,
           showLater: kDebugMode ? true : false,
           shouldPopScope: () => kDebugMode ? true : false,

@@ -302,6 +302,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
+      dialogStyle: UpgradeDialogStyle.cupertino,
       showIgnore: kDebugMode ? true : false,
       showLater: kDebugMode ? true : false,
       shouldPopScope: () => kDebugMode ? true : false,
