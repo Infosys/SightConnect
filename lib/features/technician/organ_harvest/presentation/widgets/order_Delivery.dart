@@ -49,6 +49,7 @@ class OrderDelivery extends StatelessWidget {
                           ),
                           onChanged: (value) {},
                         ),
+                        Divider( ),
                         AppTextField(
                           decoration: const InputDecoration(
                             labelText: "Address",
@@ -226,11 +227,15 @@ class OrderDelivery extends StatelessWidget {
                           ),
                           onChanged: (value) {},
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Ship From",
+                          const Divider(),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.99,
+                          child: AppTextField(
+                            decoration: const InputDecoration(
+                              labelText: "Ship From",
+                            ),
+                            onChanged: (value) {},
                           ),
-                          onChanged: (value) {},
                         ),
                         AppTextField(
                           decoration: const InputDecoration(
@@ -238,11 +243,14 @@ class OrderDelivery extends StatelessWidget {
                           ),
                           onChanged: (value) {},
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Comments",
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.99,
+                          child: AppTextField(
+                            decoration: const InputDecoration(
+                              labelText: "Comments",
+                            ),
+                            onChanged: (value) {},
                           ),
-                          onChanged: (value) {},
                         ),
                         AppTextField(
                           decoration: const InputDecoration(
