@@ -21,10 +21,7 @@ class VisualAcuityCoverEye extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SvgPicture.asset(
-          height: height,
-          AppImages.eyes,
-        ),
+        SvgPicture.asset(AppImages.eyes),
         isLeftEyeCovered
             ? Align(
                 alignment: Alignment.topRight,

@@ -22,8 +22,8 @@ import '../../../../domain/models/tumbling_models.dart';
 import '../../../../providers/distance_notifier_provider.dart';
 import '../../../../widgets/swipe_gesture_card.dart';
 import '../../../../widgets/top_reading_card.dart';
-import '../widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import '../../../../widgets/touch_gesture_card.dart';
+import '../widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import '../widgets/visual_acuity_dialog.dart';
 
 class VisualAcuityInitiatePage extends ConsumerStatefulWidget {
@@ -40,7 +40,9 @@ class _VisualAcuityInitiatePageState
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       visionInstructionShowBottomUpSheet(
-          context: context, isRightEyeCovered: true);
+        context: context,
+        isRightEyeCovered: true,
+      );
     });
     super.initState();
   }

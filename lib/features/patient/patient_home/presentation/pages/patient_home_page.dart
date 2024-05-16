@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
-
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_list.dart';
@@ -14,7 +13,6 @@ import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:upgrader/upgrader.dart';
 

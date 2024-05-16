@@ -12,6 +12,7 @@ Future<T?> visionInstructionShowBottomUpSheet<T>({
   return showModalBottomSheet(
     context: context,
     isDismissible: false,
+    enableDrag: false,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     shape: const RoundedRectangleBorder(
@@ -22,9 +23,9 @@ Future<T?> visionInstructionShowBottomUpSheet<T>({
     ),
     builder: (context) {
       return DraggableScrollableSheet(
-        initialChildSize: 0.4,
-        minChildSize: 0.4,
-        maxChildSize: 0.9,
+        initialChildSize: 0.55,
+        minChildSize: 0.5,
+        maxChildSize: 0.8,
         builder: (context, controller) {
           return ClipRRect(
             borderRadius: const BorderRadius.only(
@@ -34,48 +35,55 @@ Future<T?> visionInstructionShowBottomUpSheet<T>({
             child: Scaffold(
               backgroundColor: Colors.white,
               body: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.km,
-                  vertical: AppSize.km,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      isLeftEyeCovered
-                          ? 'Cover your right eye and tap on the E matching the image on top'
-                          : isRightEyeCovered
-                              ? 'Cover your left eye and tap on the E matching the image on top'
-                              : 'View with both eyes and tap on the E matching the image on top.',
-                      textAlign: TextAlign.center,
-                      style: applyFiraSansFont(
-                        fontSize: 24,
+                padding: const EdgeInsets.all(16),
+                child: SingleChildScrollView(
+                  controller: controller,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: 5,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    VisualAcuityCoverEye(
-                      height: 180,
-                      isRightEyeCovered: isRightEyeCovered,
-                      isLeftEyeCovered: isLeftEyeCovered,
-                    ),
-                    const Spacer(),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
+                      const SizedBox(height: AppSize.km),
+                      Text(
+                        isLeftEyeCovered
+                            ? 'Cover your right eye and tap on the E matching the image on top'
+                            : isRightEyeCovered
+                                ? 'Cover your left eye and tap on the E matching the image on top'
+                                : 'View with both eyes and tap on the E matching the image on top.',
+                        textAlign: TextAlign.center,
+                        style: applyFiraSansFont(
+                          fontSize: 24,
+                        ),
+                      ),
+                      const SizedBox(height: AppSize.km),
+                      VisualAcuityCoverEye(
+                        height: 130,
+                        isRightEyeCovered: isRightEyeCovered,
+                        isLeftEyeCovered: isLeftEyeCovered,
+                      ),
+                      const SizedBox(height: AppSize.km),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('Proceed')),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: AppSize.ks,
-                    )
-                  ],
+                              child: const Text('Proceed'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSize.km)
+                    ],
+                  ),
                 ),
               ),
             ),
