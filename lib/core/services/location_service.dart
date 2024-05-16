@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 class LocationService {
-  static Future<bool> checkLocationPermission(BuildContext context) async {
+  static Future<bool> checkLocationPermission() async {
     final location = Location();
     final hasPermission = await location.hasPermission();
     logger.d('Location permission status: $hasPermission');

@@ -11,6 +11,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   final String displayName;
   final String? mobileNumber;
   final String? parentPatientId;
+  final String? pinCode;
 
   const PatientRegistrationMiniappPage({
     super.key,
@@ -18,9 +19,10 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.displayName,
     this.mobileNumber,
     this.parentPatientId,
+    this.pinCode,
   });
 
-  // String pincode = "";
+  // String pinCode = "";
   @override
   Widget build(BuildContext context) {
     // if true returned then api call was successful
@@ -40,7 +42,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
           miniAppEnv: getMiniAppEnv(ApiConstant.appEnvironment),
-          // pincode: pincode??""
+          pinCode: pinCode,
         ),
         miniapp: MiniApp(
           id: "1",

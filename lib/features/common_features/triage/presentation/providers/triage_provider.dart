@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/data/local/tumbling_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
@@ -20,13 +21,15 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/tr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/providers/triage_member_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
+import '../../domain/usecases/get_distance_visual_acuity_response_locally_usecase.dart';
 
 var getTriageProvider = FutureProvider<DiagnosticReportTemplateFHIRModel>(
   (ref) async {
@@ -46,6 +49,7 @@ var triageProvider = ChangeNotifierProvider(
       ref.watch(getTriageEyeScanResponseLocallyUseCase),
       ref.watch(getQuestionnaireResponseLocallyUseCase),
       ref.watch(getVisionAcuityTumblingResponseLocallyUseCase),
+      ref.watch(getDistanceVisualAcuityResponseLocallyUseCase),
       ref.watch(triageMemberProvider).testPatientId!,
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
@@ -64,6 +68,8 @@ class TriageProvider extends ChangeNotifier {
       _getQuestionnaireResponseLocallyUseCase;
   final GetVisionAcuityTumblingResponseLocallyUseCase
       _getVisionAcuityTumblingResponseLocallyUseCase;
+  final GetDistanceVisualAcuityResponseLocallyUseCase
+      _getDistanceVisualAcuityResponseLocallyUseCase;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final int _patientId;
   final TriageLocalSource _triageLocalSource;
@@ -74,6 +80,7 @@ class TriageProvider extends ChangeNotifier {
       this._getTriageEyeScanResponseLocallyUseCase,
       this._getQuestionnaireResponseLocallyUseCase,
       this._getVisionAcuityTumblingResponseLocallyUseCase,
+      this._getDistanceVisualAcuityResponseLocallyUseCase,
       this._patientId,
       this._triageUrgencyRepository,
       this._triageLocalSource,
@@ -85,10 +92,20 @@ class TriageProvider extends ChangeNotifier {
             .call(GetTriageEyeScanResponseLocallyParam())
             .then((value) => value.fold((l) => [], (r) => r));
 
-    List<PostTriageObservationsModel> observations =
+    List<PostTriageObservationsModel> shortDistanceVisualAcuity =
         await _getVisionAcuityTumblingResponseLocallyUseCase
             .call(GetVisionAcuityTumblingResponseLocallyParam())
             .then((value) => value.fold((l) => [], (r) => r));
+
+    List<PostTriageObservationsModel> distanceVisualAcuity =
+        await _getDistanceVisualAcuityResponseLocallyUseCase
+            .call(GetDistanceVisualAcuityResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
+
+    List<PostTriageObservationsModel> observations = [
+      ...shortDistanceVisualAcuity,
+      ...distanceVisualAcuity
+    ];
 
     List<PostTriageQuestionModel> questionResponse =
         await _getQuestionnaireResponseLocallyUseCase
@@ -113,7 +130,7 @@ class TriageProvider extends ChangeNotifier {
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
       tenantCode: SharedPreferenceService.getTenantId,
-      organizationCode : SharedPreferenceService.getOrganizationId,
+      organizationCode: SharedPreferenceService.getOrganizationId,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
@@ -218,7 +235,7 @@ class TriageProvider extends ChangeNotifier {
       patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
       tenantCode: SharedPreferenceService.getTenantId,
-      organizationCode : SharedPreferenceService.getOrganizationId,
+      organizationCode: SharedPreferenceService.getOrganizationId,
       performer: getPerformer(),
       assessmentCode: assessment.id, //from questionnaire MS
       assessmentVersion: assessment.version, //questionnaire MS
@@ -358,6 +375,8 @@ class TriageReset extends ChangeNotifier {
     logger.d("TriageReset called");
     ref.invalidate(triageQuestionnaireProvider);
     ref.invalidate(triageEyeScanProvider);
+    ref.invalidate(distanceTumblingTestProvider);
+    ref.invalidate(tumblingLocalSource);
     ref.read(tumblingTestProvider).reset();
     ref.read(triageStepperProvider).reset();
     notifyListeners();

@@ -24,6 +24,7 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../../../core/models/keycloak.dart';
+import '../../../../core/services/location_service.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
   static const String routeName = '/initialization';
@@ -132,7 +133,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         bool is18PlusDeclarationAccepted =
             await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
-
         if (is18PlusDeclarationAccepted && isConsentAccepted) {
           return true;
         } else {
@@ -181,14 +181,31 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
-    // String pincode = await GeocodingService.getPincodeFromLocation(context);
-    // logger.d("pincode is  $pincode");
+    String? pinCode;
+    bool hasPermission = await LocationService.checkLocationPermission();
+    if (hasPermission && mounted) {
+      bool isLocationEnabled = await LocationService.enableLocation(context);
+      if (isLocationEnabled) {
+        pinCode = await GeocodingService.getPincodeFromLocation();
+        logger.f("pinCode is  $pinCode");
+      }
+    } else if (!hasPermission && mounted) {
+      hasPermission = await LocationService.requestLocationPermission(context);
+
+      if (hasPermission && mounted) {
+        bool isLocationEnabled = await LocationService.enableLocation(context);
+        if (isLocationEnabled) {
+          pinCode = await GeocodingService.getPincodeFromLocation();
+          logger.f("pinCode is  $pinCode");
+        }
+      }
+    }
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
-        builder: (context) => const PatientRegistrationMiniappPage(
+        builder: (context) => PatientRegistrationMiniappPage(
           actionType: MiniAppActionType.REGISTER,
           displayName: "Register Patient",
-          // pincode: pincode,
+          pinCode: pinCode,
         ),
       ),
     );

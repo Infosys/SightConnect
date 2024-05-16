@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../../main.dart';
+import '../../../../common_features/triage/domain/models/enums/observation_code.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
 
 var visionTechnicianTriageProvider = ChangeNotifierProvider(
@@ -291,17 +292,22 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
 
     int? leftIdentifier;
     int? rightIdentifier;
+    int? bothEyeIdentifier;
 
     // logger.d("assessment from observations functions $assessment");
 
     Map<BodySite, int> identifierMap = {};
     _assessment.observations?.observationDefinition?.forEach((element) {
-      identifierMap[element.bodySite!] = element.id!;
+      if (element.code == ObservationCode.LOGMAR_NEAR) {
+        identifierMap[element.bodySite!] = element.id!;
+      }
+      logger.f(
+          "element id is : ${element.id} and element code is : ${element.code} and element body site is : ${element.bodySite}");
     });
+
     leftIdentifier = identifierMap[BodySite.LEFT_EYE];
     rightIdentifier = identifierMap[BodySite.RIGHT_EYE];
-
-    int bothEyeIdentifier = _assessment.observations?.id ?? 0;
+    bothEyeIdentifier = identifierMap[BodySite.BOTH_EYES];
 
     List<PostTriageObservationsModel> observationList = [
       PostTriageObservationsModel(

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/common_features/tenant/presentation/pages/vision_technician_tenants_display_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_work_location_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_name_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/widgets/vt_profile_organisation_details_card.dart';
@@ -128,6 +129,29 @@ class VTProfilePage extends HookConsumerWidget {
                             style: applyRobotoFont(
                               fontWeight: FontWeight.w500,
                             ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: AppSize.km),
+
+                    AppCard(
+                      child: ListTile(
+                        onTap: () async {
+                          final navigator = Navigator.of(context);
+                          navigator.push(MaterialPageRoute(
+                              builder: (context) =>
+                                  const VisionTechnicianTenantsDisplayPage()));
+                        },
+                        leading: const Icon(
+                          Icons.accessibility_new,
+                          color: AppColor.black,
+                        ),
+                        title: Text(
+                          "Switch Tenant",
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),

@@ -218,7 +218,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
           ),
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
           margin: const EdgeInsets.only(bottom: 8),
-          child: Text(loc.chatClearChat),
+          child: Text("clear chat"),
         ),
       ),
     );
@@ -267,9 +267,9 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       case StandardAction.startTriageEyeAssessment:
         setState(() {
           _chatMessage(ChatMessage(
-              message: loc.chatEyeAssessmentRecommended, isMe: false));
+              message: "loc.chatEyeAssessmentRecommended", isMe: false));
           _currentIntent = ChatIntent(
-            question: loc.chatDoYouWantToTakeTheTriageEyeAssessment,
+            question: "loc.chatDoYouWantToTakeTheTriageEyeAssessment",
             yesHandler: () {
               showTriageBottomSheet(context: context);
               setState(() {
@@ -302,7 +302,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       }
     } catch (e) {
       logger.d("ChatBotPage: _askChatBot: Error: $e");
-      Fluttertoast.showToast(msg: loc.chatChatbotNotAvailable);
+      Fluttertoast.showToast(msg: "loc.chatChatbotNotAvailable");
       setState(() {
         _isLoading = false;
       });

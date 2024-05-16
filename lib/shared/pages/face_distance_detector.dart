@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/distance_notifier_provider.dart';
 import 'package:eye_care_for_all/shared/services/face_distance_detector_service_android.dart';
 import 'package:eye_care_for_all/shared/services/face_distance_detector_service_ios.dart';
 import 'package:eye_care_for_all/shared/widgets/face_distance_painter.dart';
@@ -14,6 +13,9 @@ import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
     as ios;
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../core/providers/global_visual_acuity_provider.dart';
+import '../../features/common_features/visual_acuity/providers/distance_notifier_provider.dart';
 
 class FaceDistanceDetector extends ConsumerStatefulWidget {
   const FaceDistanceDetector({
@@ -258,7 +260,14 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
-            ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+            if (ref.read(globalVisualAcuityProvider).isShortDistanceTest ==
+                true) {
+              ref.read(distanceNotifierProvider).distance =
+                  _distanceToFace ?? 0;
+            } else {
+              ref.read(distanceNotifierProvider).longDistance =
+                  _distanceToFace ?? 0;
+            }
           } else {
             _distanceToFace = null;
           }
@@ -315,7 +324,14 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
-            ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+            if (ref.read(globalVisualAcuityProvider).isShortDistanceTest ==
+                true) {
+              ref.read(distanceNotifierProvider).distance =
+                  _distanceToFace ?? 0;
+            } else {
+              ref.read(distanceNotifierProvider).longDistance =
+                  _distanceToFace ?? 0;
+            }
           } else {
             _distanceToFace = null;
           }

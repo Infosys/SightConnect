@@ -89,7 +89,7 @@ class _ChatMessageComposerState extends State<ChatMessageComposer> {
               },
               onSubmitted: (_) => _submitHandler(),
               decoration: InputDecoration(
-                hintText: loc.chatTypeHere,
+                hintText: "loc.chatTypeHere",
                 border: InputBorder.none,
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,

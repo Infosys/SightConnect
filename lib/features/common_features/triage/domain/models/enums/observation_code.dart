@@ -1,1 +1,4 @@
-enum ObservationCode { Eye, LOGMAR_NEAR, LOGMAR_DISTANT, Sight, Testing }
+enum ObservationCode{
+  Eye, Sight, Testing, LOGMAR_NEAR,
+LOGMAR_DISTANT,
+}

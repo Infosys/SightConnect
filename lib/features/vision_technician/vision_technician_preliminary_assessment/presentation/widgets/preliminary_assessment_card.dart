@@ -123,14 +123,18 @@ class PreliminaryAssessmentCard extends ConsumerWidget {
                                 applyFiraSansFont(fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(height: AppSize.ks),
-                          Text(
-                            formatAddress(patient),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: applyRobotoFont(
-                              fontWeight: FontWeight.w400,
-                              color: AppColor.grey,
-                              fontSize: 14,
+                          SizedBox(
+                            width: AppSize.width(context) * 0.25,
+                            child: Text(
+                              formatAddress(patient),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              softWrap: true,
+                              style: applyRobotoFont(
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.grey,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ],

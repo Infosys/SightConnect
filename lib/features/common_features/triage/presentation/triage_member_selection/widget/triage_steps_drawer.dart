@@ -154,6 +154,23 @@ class TriageStepsDrawer extends ConsumerWidget {
                               weight: 10,
                             ),
                           ),
+                          EasyStep(
+                            icon: Icon(
+                              Icons.more_horiz,
+                              size: 25,
+                              weight: 10,
+                            ),
+                            activeIcon: Icon(
+                              Icons.more_horiz,
+                              size: 25,
+                              weight: 10,
+                            ),
+                            finishIcon: Icon(
+                              Icons.check,
+                              size: 25,
+                              weight: 10,
+                            ),
+                          ),
                         ],
                         onStepReached: (index) => model.goToNextStep()),
                   ),
@@ -205,7 +222,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                             height: AppSize.kl * 3.5,
                           ),
                           Text(
-                            loc.eyeAssessmentStepThree,
+                            "Step -3 Visual Acuity Test (Long Distance)",
                             style: applyRobotoFont(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
@@ -213,6 +230,25 @@ class TriageStepsDrawer extends ConsumerWidget {
                             model.currentStep == 2
                                 ? loc.eyeAssessmentOngoing
                                 : model.currentStep > 2
+                                    ? loc.eyeAssessmentCompleted
+                                    : loc.eyeAssessmentPending,
+                            style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.altGrey,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            height: AppSize.kl * 3.4,
+                          ),
+                          Text(
+                            loc.eyeAssessmentStepThree,
+                            style: applyRobotoFont(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            model.currentStep == 3
+                                ? loc.eyeAssessmentOngoing
+                                : model.currentStep > 3
                                     ? loc.eyeAssessmentCompleted
                                     : loc.eyeAssessmentPending,
                             style: applyRobotoFont(

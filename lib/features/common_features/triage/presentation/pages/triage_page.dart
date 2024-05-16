@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_eye_scan/pages/triage_eye_scan_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/pages/triage_questionnaire_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../../../visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import '../../../visual_acuity/features/distance_visual_acuity_tumbling/presentation/pages/distance_visual_acuity_tumbling_page.dart';
+import '../../../visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 
 class TriagePage extends ConsumerStatefulWidget {
   const TriagePage({super.key});
@@ -81,6 +82,9 @@ class _TriagePageState extends ConsumerState<TriagePage> {
             ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
             return const VisualAcuityTumblingPage();
           case 2:
+            ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+            return const DistanceVisualAcuityTumblingPage();
+          case 3:
             return const TriageEyeScanPage();
           default:
             return TriageQuestionnairePage(

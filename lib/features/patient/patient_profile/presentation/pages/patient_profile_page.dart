@@ -161,7 +161,8 @@ class PatientProfilePage extends ConsumerWidget {
                                             getPatientProfileByIdProvider(
                                                 selectedPatientId));
                                       }
-                                    });
+                                    }
+                                    );
                                   },
                                   child: Row(
                                     children: [
