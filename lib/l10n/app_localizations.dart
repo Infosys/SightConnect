@@ -3826,6 +3826,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch Tenant'**
   String get switchTenant;
+
+  /// No description provided for @patientHeaderWelcomeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.'**
+  String get patientHeaderWelcomeText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

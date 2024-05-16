@@ -665,5 +665,6 @@
   "chatTypeHere": "ఇక్కడ టైప్ చేయండి",
   "switchProfile": "Switch Profile",
   "switchRole": "Switch Role",
-  "switchTenant": "Switch Tenant"
+  "switchTenant": "Switch Tenant",
+  "patientHeaderWelcomeText": "Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way."
 }

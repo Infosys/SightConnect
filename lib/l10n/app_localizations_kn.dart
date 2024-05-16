@@ -1872,4 +1872,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get switchTenant => 'Switch Tenant';
+
+  @override
+  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
 }
