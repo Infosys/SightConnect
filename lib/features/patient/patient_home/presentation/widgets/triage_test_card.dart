@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_how_to_proceed_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ class TriageTestCard extends HookConsumerWidget {
   const TriageTestCard({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
       decoration: BoxDecoration(

@@ -7,8 +7,8 @@ import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../providers/vision_technician_triage_provider.dart';
-import 'preliminary_assessment_equipment_selection.dart';
 
 class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
   const PreliminaryAssessmentVisualAcuity({super.key});

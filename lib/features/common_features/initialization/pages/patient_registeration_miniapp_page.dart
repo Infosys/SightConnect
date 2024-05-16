@@ -1,13 +1,10 @@
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
-import 'package:eye_care_for_all/core/services/geocoding_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-
-import '../../../../main.dart';
 
 class PatientRegistrationMiniappPage extends StatelessWidget {
   final MiniAppActionType actionType;
