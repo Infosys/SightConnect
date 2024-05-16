@@ -3898,6 +3898,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Apologies, we encountered a logout error in the mobile app.'**
   String get appDrawerToastMessageText;
+
+  /// No description provided for @myConnectionListAddMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Member'**
+  String get myConnectionListAddMembers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

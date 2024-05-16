@@ -1908,4 +1908,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+
+  @override
+  String get myConnectionListAddMembers => 'உறுப்பினர் சேர்க்கவும்';
 }

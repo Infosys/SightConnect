@@ -677,5 +677,6 @@
   "showTriageHowToProceedBottomSheetBody1": "I have a problem and want to validate",
   "showTriageHowToProceedBottomSheetBody2": "I am not sure if I have a problem",
   "showTriageHowToProceedBottomSheetBody3": "I have no eye issues – just want to check",
-  "appDrawerToastMessageText": "Apologies, we encountered a logout error in the mobile app."
+  "appDrawerToastMessageText": "Apologies, we encountered a logout error in the mobile app.",
+  "myConnectionListAddMembers": "सदस्य जोड़ें"
 }
