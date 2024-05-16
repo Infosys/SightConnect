@@ -11,27 +11,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String loginEnterOTP(String mobileNumber) {
-    return 'Please enter the OTP sent to ${mobileNumber}';
+    return 'कृपया जिस पर भेजा गया ओ. टी. पी. दर्ज करें ${mobileNumber}';
   }
 
   @override
   String loginResendOTPIn(String time) {
-    return 'Resend in ${time}';
+    return 'फिर से भेजें ${time}';
   }
 
   @override
   String patientHasAnAppointment(String patient) {
-    return '${patient} has an appointment';
+    return '${patient} रोगी के पास एक नियुक्ति है';
   }
 
   @override
   String vgEmptyResults(String type) {
-    return 'There are no ${type}s at present. Tap on "Add ${type}"';
+    return 'वर्तमान में कोई प्रकार नहीं है। जोड़ें ${type} पर टैप करें';
   }
 
   @override
   String vgSearchByIdName(String searchType) {
-    return 'Search by ${searchType} ID, Name';
+    return '${searchType} आई. डी., नाम से खोजें';
   }
 
   @override
@@ -62,7 +62,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get swipeGestureTab => 'स्वाइप जेस्चर';
 
   @override
-  String get voiceAssistTab => 'आवाज सहायक\r\n';
+  String get voiceAssistTab => 'आवाज सहायक\r\r\n';
 
   @override
   String get distanceString => 'दूरी';
@@ -197,13 +197,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeCarousal2Title => '7 आँख समस्याएँ जिन्हें आप नजरअंदाज नहीं कर सकते!';
 
   @override
-  String get homeCarousal2Description => '\r\n7 आँख समस्याएँ जिनका परीक्षण करवाना आवश्यक है: \r\n \r\n• आँख का लाल होना\r\n• आँखों में पानी आना\r\n• आँखों पर सफेद दाग';
+  String get homeCarousal2Description => '\r\r\n7 आँख समस्याएँ जिनका परीक्षण करवाना आवश्यक है: \r\r\n \r\r\n• आँख का लाल होना\r\r\n• आँखों में पानी आना\r\r\n• आँखों पर सफेद दाग';
 
   @override
   String get homeCarousal3Title => 'आँखों की समस्याएँ। ऐसी कई हैं जो आप नहीं देख सकते';
 
   @override
-  String get homeCarousal3Description => 'लेकिन दृष्टि विशेषज्ञ देख सकते हैं।\r\nआँखों की समस्याओं को पहचानें\r\nऔर बाद में समस्याओं से बचने के लिए समय पर उपचार करें';
+  String get homeCarousal3Description => 'लेकिन दृष्टि विशेषज्ञ देख सकते हैं।\r\r\nआँखों की समस्याओं को पहचानें\r\r\nऔर बाद में समस्याओं से बचने के लिए समय पर उपचार करें';
 
   @override
   String get myConnectionsTitle => 'मेरे सदस्य';
@@ -269,13 +269,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get appDrawerSignOut => 'साइन आउट';
 
   @override
-  String get aboutUsDescription => 'साइटकनेक्ट एक उपयोग में सरल नेत्र सेवा ऐप है जो स्व-आँकलन और कॉल के माध्यम से परामर्श में मदद करता है।\r\n\r\nहमारे मिशन के केंद्र में सभी के लिए नेत्र देखभाल को सुलभ बनाने की प्रतिबद्धता है। ऐप को इस प्रकार डिज़ाइन किया गया है कि उम्र, तकनीकी पृष्ठभूमि और सामाजिक या आर्थिक पृष्ठभूमि के बावजूद सभी वर्ग के लोगों को पहुंची जा सके। ऐप को अंग्रेजी और अन्य स्थानीय भाषाओं में उपलब्ध किया गया है। यह उपयोगकर्ताओं को अपनी आँखों का स्व-आँकलन करने में मदद करता है और समय पर उपचार सलाह प्राप्त करने में मदद करता है। ऐप अपने उपयोगकर्ताओं को व्यक्तिगत नेत्र देखभाल के समाधान प्रदान करने के लिए नवीनतम तकनीक और उपकरणों का उपयोग करता है। यह उनके जीवन को आसान बनाने के लिए विभिन्न सुविधाओं से परिपूर्ण  है।';
+  String get aboutUsDescription => 'साइटकनेक्ट एक उपयोग में सरल नेत्र सेवा ऐप है जो स्व-आँकलन और कॉल के माध्यम से परामर्श में मदद करता है।\r\r\n\r\r\nहमारे मिशन के केंद्र में सभी के लिए नेत्र देखभाल को सुलभ बनाने की प्रतिबद्धता है। ऐप को इस प्रकार डिज़ाइन किया गया है कि उम्र, तकनीकी पृष्ठभूमि और सामाजिक या आर्थिक पृष्ठभूमि के बावजूद सभी वर्ग के लोगों को पहुंची जा सके। ऐप को अंग्रेजी और अन्य स्थानीय भाषाओं में उपलब्ध किया गया है। यह उपयोगकर्ताओं को अपनी आँखों का स्व-आँकलन करने में मदद करता है और समय पर उपचार सलाह प्राप्त करने में मदद करता है। ऐप अपने उपयोगकर्ताओं को व्यक्तिगत नेत्र देखभाल के समाधान प्रदान करने के लिए नवीनतम तकनीक और उपकरणों का उपयोग करता है। यह उनके जीवन को आसान बनाने के लिए विभिन्न सुविधाओं से परिपूर्ण  है।';
 
   @override
   String get aboutUsFeaturesTitle => 'विशेषताएँ';
 
   @override
-  String get aboutUsFeaturesDescription => 'इन-ऐप आँखों की जाँच: यह ऐप यूजर्स को कुछ सवालों के जवाब देकर अपनी आँखों का आकलन करने और अगले चरणों तथा उपयुक्त डॉक्टर के बारे में सलाह लेने की सुविधा देता है। इससे यूजर्स के दोस्त और परिवार भी लाभान्वित हो सकते हैं।\r\n\r\nअपॉइंटमेंट बुकिंग: यूजर्स डॉक्टरों के साथ ऑनलाइन टेलीकंसल्टेशन और इन-क्लिनिक विज़िट बुक कर सकते हैं ताकि उनकी आँखों का निदान किया जा सके।\r\n\r\nआईवीआर कॉल सेवाएँ: हमारी आईवीआर कॉल सेवाएँ अंग्रेज़ी और स्थानीय भाषाओं में उपलब्ध हैं और बेसिक फ़ीचर वाले फ़ोन का उपयोग करने वाले यूजर्स को भी पूरा करती हैं। यूजर्स किसी आपात स्थिति में या किसी भी आँख से संबंधित समस्या के लिए तत्काल सहायता लेने के लिए हमारे नेत्र देखभाल पेशेवरों को कॉल कर सकते हैं। वे अपॉइंटमेंट बुक करने या कोई और स्पष्टीकरण लेने के लिए भी कॉल कर सकते हैं।\r\n\r\nनिकटवर्ती क्लीनिक: यूजर्स अपने आस-पास की नेत्र देखभाल क्लीनिकों का पता लगा सकते हैं।\r\n\r\nप्रेस्क्रिप्शन और रिपोर्ट्स: यूजर्स किसी भी परेशानी के बिना एक ही जगह से अपने सभी प्रिस्क्रिप्शन और रिपोर्ट्स देख सकते हैं।\r\n\r\nआँखों के कैंप: यूजर्स अपने दोस्तों और परिवार के सदस्यों की आँखों की जाँच मुफ्त में करवाने के लिए नज़दीकी आँखों के कैंपों के बारे में जानकारी प्राप्त कर सकते हैं।\r\n\r\nरिमाइंडर और अलर्ट: यूजर्स को आगामी अपॉइंटमेंट, दवाइयाँ, रिपोर्ट आदि से संबंधित समय पर अलर्ट और रिमाइंडर मिल सकते हैं।\r\n\r\nशेयरिंग: यूजर्स इस ऐप और ऐप के भीतर दी गई अन्य उपयोगी जानकारी को अपने दोस्तों और परिवार के सदस्यों के साथ शेयर कर सकते हैं।';
+  String get aboutUsFeaturesDescription => 'इन-ऐप आँखों की जाँच: यह ऐप यूजर्स को कुछ सवालों के जवाब देकर अपनी आँखों का आकलन करने और अगले चरणों तथा उपयुक्त डॉक्टर के बारे में सलाह लेने की सुविधा देता है। इससे यूजर्स के दोस्त और परिवार भी लाभान्वित हो सकते हैं।\r\r\n\r\r\nअपॉइंटमेंट बुकिंग: यूजर्स डॉक्टरों के साथ ऑनलाइन टेलीकंसल्टेशन और इन-क्लिनिक विज़िट बुक कर सकते हैं ताकि उनकी आँखों का निदान किया जा सके।\r\r\n\r\r\nआईवीआर कॉल सेवाएँ: हमारी आईवीआर कॉल सेवाएँ अंग्रेज़ी और स्थानीय भाषाओं में उपलब्ध हैं और बेसिक फ़ीचर वाले फ़ोन का उपयोग करने वाले यूजर्स को भी पूरा करती हैं। यूजर्स किसी आपात स्थिति में या किसी भी आँख से संबंधित समस्या के लिए तत्काल सहायता लेने के लिए हमारे नेत्र देखभाल पेशेवरों को कॉल कर सकते हैं। वे अपॉइंटमेंट बुक करने या कोई और स्पष्टीकरण लेने के लिए भी कॉल कर सकते हैं।\r\r\n\r\r\nनिकटवर्ती क्लीनिक: यूजर्स अपने आस-पास की नेत्र देखभाल क्लीनिकों का पता लगा सकते हैं।\r\r\n\r\r\nप्रेस्क्रिप्शन और रिपोर्ट्स: यूजर्स किसी भी परेशानी के बिना एक ही जगह से अपने सभी प्रिस्क्रिप्शन और रिपोर्ट्स देख सकते हैं।\r\r\n\r\r\nआँखों के कैंप: यूजर्स अपने दोस्तों और परिवार के सदस्यों की आँखों की जाँच मुफ्त में करवाने के लिए नज़दीकी आँखों के कैंपों के बारे में जानकारी प्राप्त कर सकते हैं।\r\r\n\r\r\nरिमाइंडर और अलर्ट: यूजर्स को आगामी अपॉइंटमेंट, दवाइयाँ, रिपोर्ट आदि से संबंधित समय पर अलर्ट और रिमाइंडर मिल सकते हैं।\r\r\n\r\r\nशेयरिंग: यूजर्स इस ऐप और ऐप के भीतर दी गई अन्य उपयोगी जानकारी को अपने दोस्तों और परिवार के सदस्यों के साथ शेयर कर सकते हैं।';
 
   @override
   String get aboutUsConclusion => 'ऐप को उपयोगकर्ता समुदाय को बेहतर सेवा प्रदान करने के लिए महत्वपूर्ण नेत्र देखभाल पेशेवरों की मदद से विकसित किया गया है। हमारे साथ एक बेहतर, स्वस्थ दुनिया बनाने के हमारे मिशन में शामिल हों। साइटकनेक्ट ऐप को आज ही डाउनलोड करें और साझा करें!';
@@ -557,13 +557,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get swipeGestureCardText => 'चिन्ह की दिशा में स्वाइप करें';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'मूल्यांकन\r\nप्रश्न';
+  String get assessmentResultCardAssessmentQuestions => 'मूल्यांकन\r\r\nप्रश्न';
 
   @override
-  String get assessmentResultCardAcuityTest => 'दृष्टिपथ\r\nपरीक्षण';
+  String get assessmentResultCardAcuityTest => 'दृष्टिपथ\r\r\nपरीक्षण';
 
   @override
-  String get assessmentResultCardEyeScan => 'नेत्र\r\nस्कैन';
+  String get assessmentResultCardEyeScan => 'नेत्र\r\r\nस्कैन';
 
   @override
   String get viewReportButton => 'रिपोर्ट देखें';
@@ -644,10 +644,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get visualAcuityTestDistanceInstruction => 'कैमरे को आंख से 40 सेमी दूर रखें।';
 
   @override
-  String get somethingWentWrong => 'कुछ गलत हो गया।\r\n';
+  String get somethingWentWrong => 'कुछ गलत हो गया।\r\r\n';
 
   @override
-  String get triageUpdatedSuccessfully => 'ट्राइएज सफलतापूर्वक अपडेट किया गया.\r\n';
+  String get triageUpdatedSuccessfully => 'ट्राइएज सफलतापूर्वक अपडेट किया गया.\r\r\n';
 
   @override
   String get noPreviewAvailable => 'कोई पूर्वावलोकन उपलब्ध नहीं';
@@ -671,10 +671,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get myProfileEmail => 'ईमेल';
 
   @override
-  String get viewHistoryButton => 'इतिहास देखें\r\n';
+  String get viewHistoryButton => 'इतिहास देखें\r\r\n';
 
   @override
-  String get profilePagePersonalDetails => 'व्यक्तिगत विवरण\r\n';
+  String get profilePagePersonalDetails => 'व्यक्तिगत विवरण\r\r\n';
 
   @override
   String get profilePageDateOfBirth => 'जन्म तिथि';
@@ -686,7 +686,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get profilePageMobile => 'मोबाइल';
 
   @override
-  String get profilePageHealthCardTitle => 'स्वास्थ्य पत्र\r\n';
+  String get profilePageHealthCardTitle => 'स्वास्थ्य पत्र\r\r\n';
 
   @override
   String get appointmentTitle => 'अपॉइंटमेंट';
@@ -713,7 +713,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get recentServicesRedEyeTest => 'लाल नेत्र परीक्षण';
 
   @override
-  String get chatBotDefaultQuerySuggestions => 'शुरू करें नेत्र मूल्यांकन। आम नेत्र समस्याएं। बेहतर दृष्टि के लिए सुझाव';
+  String get chatBotDefaultQuerySuggestions => 'शुरू करें नेत्र मूल्यांकन | आम नेत्र समस्याएं | बेहतर दृष्टि के लिए सुझाव';
 
   @override
   String get chatBotWelcomeMessage => 'नमस्ते, आज मैं आपकी कैसे मदद कर सकता हूँ?';
@@ -1592,244 +1592,244 @@ class AppLocalizationsHi extends AppLocalizations {
   String get vtServiceNotAvailable => 'सेवा उपलब्ध नहीं है';
 
   @override
-  String get vgEyeAssessments => 'Eye Assessments';
+  String get vgEyeAssessments => 'नेत्र मूल्यांकन';
 
   @override
-  String get vgTotal => 'Total';
+  String get vgTotal => 'कुल';
 
   @override
-  String get vgCamps => 'Camps';
+  String get vgCamps => 'शिविरों';
 
   @override
-  String get vgDoorToDoor => 'Door to Door';
+  String get vgDoorToDoor => 'दरवाजे तक';
 
   @override
-  String get vgByGender => 'By Gender';
+  String get vgByGender => 'लिंग के आधार पर';
 
   @override
-  String get vgMale => 'Male';
+  String get vgMale => 'पुरुष।';
 
   @override
-  String get vgFemale => 'Female';
+  String get vgFemale => 'महिला';
 
   @override
-  String get vgOthers => 'Others';
+  String get vgOthers => 'अन्य';
 
   @override
-  String get vgByAge => 'By Age';
+  String get vgByAge => 'उम्र के हिसाब से';
 
   @override
-  String get vgSlideAge => 'Yrs';
+  String get vgSlideAge => 'बरसों';
 
   @override
-  String get vgSymptoms => 'Symptoms';
+  String get vgSymptoms => 'लक्षण';
 
   @override
-  String get vgRefractive => 'Refractive';
+  String get vgRefractive => 'अपवर्तक';
 
   @override
-  String get vgCataract => 'Cataract';
+  String get vgCataract => 'मोतियाबिंद';
 
   @override
-  String get vgGlaucoma => 'Glaucoma';
+  String get vgGlaucoma => 'ग्लूकोमा';
 
   @override
-  String get vgKeratitis => 'Keratitis';
+  String get vgKeratitis => 'केराटाइटिस';
 
   @override
-  String get vgBlepharitis => 'Blepharitis';
+  String get vgBlepharitis => 'ब्लेफेराइटिस';
 
   @override
-  String get vgConjunctivitis => 'Conjunctivitis';
+  String get vgConjunctivitis => 'नेत्रश्लेष्मलाशोथ';
 
   @override
-  String get vgServicesCreateEvent => 'Create\r\nEvent';
+  String get vgServicesCreateEvent => 'कार्यक्रम बनाएँ';
 
   @override
-  String get vgServicesEyeAssessment => 'Eye\r\nAssessment';
+  String get vgServicesEyeAssessment => 'नेत्र मूल्यांकन';
 
   @override
-  String get vgServicesRegisterPatient => 'Register\r\nNew Patient';
+  String get vgServicesRegisterPatient => 'नए रोगी को पंजीकृत करें';
 
   @override
-  String get vgAddPatients => 'Add Patients';
+  String get vgAddPatients => 'रोगियों को जोड़ें';
 
   @override
-  String get vgEvent => 'Event';
+  String get vgEvent => 'आयोजन';
 
   @override
-  String get vgAddEventPhoto => 'Add Event Photo';
+  String get vgAddEventPhoto => 'इवेंट फोटो जोड़ें';
 
   @override
-  String get vgUploadImage => 'Upload Image';
+  String get vgUploadImage => 'छवि अपलोड करें';
 
   @override
-  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\nwill be shown as thumbnail';
+  String get vgAddPhotoInstruction => 'कार्यक्रम की एक तस्वीर जोड़ें जिसे लघुचित्र के रूप में दिखाया जाएगा';
 
   @override
-  String get vgAddressDetails => 'Address Details';
+  String get vgAddressDetails => 'पता विवरण';
 
   @override
-  String get vgVenueName => 'Venue Name';
+  String get vgVenueName => 'स्थल का नाम';
 
   @override
-  String get vgVenueNameError => 'Please enter Venue name';
+  String get vgVenueNameError => 'कृपया स्थान का नाम दर्ज करें';
 
   @override
-  String get vgVenueNameSpecialCharError => 'Should not contain any special character';
+  String get vgVenueNameSpecialCharError => 'इसमें कोई विशेष वर्ण नहीं होना चाहिए।';
 
   @override
-  String get vgPincode => 'Pincode';
+  String get vgPincode => 'पिनकोड';
 
   @override
-  String get vgPincodeError => 'Only 6 digit pincode allowed';
+  String get vgPincodeError => 'केवल 6 अंकों के पिनकोड की अनुमति है।';
 
   @override
-  String get vgCityTownVillage => 'City/Town/Village';
+  String get vgCityTownVillage => 'शहर/कस्बा/गाँव';
 
   @override
-  String get vgCityTownVillageError => 'Please enter City/Town/Village name';
+  String get vgCityTownVillageError => 'कृपया शहर/कस्बा/गाँव का नाम दर्ज करें';
 
   @override
-  String get vgCityTownVillageSpecialCharError => 'Should not contain any special character';
+  String get vgCityTownVillageSpecialCharError => 'इसमें कोई विशेष वर्ण नहीं होना चाहिए।';
 
   @override
-  String get vgCancel => 'Cancel';
+  String get vgCancel => 'रद्द करें';
 
   @override
-  String get vgSave => 'Save';
+  String get vgSave => 'सहेजें';
 
   @override
-  String get vgAddEventImage => 'Add Event Image';
+  String get vgAddEventImage => 'घटना छवि जोड़ें';
 
   @override
-  String get vgEventAdded => 'Event added';
+  String get vgEventAdded => 'घटना जोड़ी गई';
 
   @override
-  String get vgEventNotAdded => 'Event not added';
+  String get vgEventNotAdded => 'घटना नहीं जोड़ी गई';
 
   @override
-  String get vgDateTime => 'Date & Time';
+  String get vgDateTime => 'तिथि और समय';
 
   @override
-  String get vgStartDate => 'Start Date';
+  String get vgStartDate => 'प्रारंभ तिथि';
 
   @override
-  String get vgStartTime => 'Start Time';
+  String get vgStartTime => 'शुरू करने का समय';
 
   @override
-  String get vgLocation => 'Location';
+  String get vgLocation => 'स्थान';
 
   @override
-  String get vgViewOnMap => 'View On Map';
+  String get vgViewOnMap => 'नक्शे पर देखें';
 
   @override
-  String get vgAddressAndDoorNumber => 'Address and Door Number';
+  String get vgAddressAndDoorNumber => 'पता और डोर नंबर';
 
   @override
-  String get vgSubDistrictName => 'Sub District Name';
+  String get vgSubDistrictName => 'उप-जिले का नाम';
 
   @override
-  String get vgVillageName => 'Village Name';
+  String get vgVillageName => 'गाँव का नाम';
 
   @override
-  String get vgDistrictName => 'District Name';
+  String get vgDistrictName => 'ज़िले का नाम';
 
   @override
-  String get vgAbout => 'About';
+  String get vgAbout => 'के बारे में';
 
   @override
-  String get vgEditEvent => 'Edit Event';
+  String get vgEditEvent => 'कार्यक्रम संपादित करें';
 
   @override
-  String get vgDeleteEvent => 'Delete Event';
+  String get vgDeleteEvent => 'कार्यक्रम हटाएँ';
 
   @override
-  String get vgErrorFetchingEventDetails => 'Error fetching event details';
+  String get vgErrorFetchingEventDetails => 'घटना विवरण प्राप्त करने में त्रुटि';
 
   @override
-  String get vgNoPatientRegistered => 'No Patient with Name is registered. Click on the  Register Patient.';
+  String get vgNoPatientRegistered => 'नाम के साथ कोई रोगी पंजीकृत नहीं है। पंजीकृत रोगी पर क्लिक करें।';
 
   @override
-  String get vgRegisterPatient => 'Register Patient';
+  String get vgRegisterPatient => 'रोगी को पंजीकृत करें';
 
   @override
-  String get vgPrimary => 'Primary';
+  String get vgPrimary => 'प्राथमिक';
 
   @override
-  String get vgDependent => 'Dependent';
+  String get vgDependent => 'आश्रित';
 
   @override
-  String get vgAddMember => 'Add Member';
+  String get vgAddMember => 'सदस्य जोड़ें';
 
   @override
-  String get vgCompleteProfile => 'Complete Profile';
+  String get vgCompleteProfile => 'पूर्ण प्रोफ़ाइल';
 
   @override
-  String get vgStartAssessment => 'Start\r\nAssessment';
+  String get vgStartAssessment => 'मूल्यांकन शुरू करें';
 
   @override
-  String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
+  String get vgSearchPatientByPhoneNumber => 'फोन नंबर से रोगी को खोजें';
 
   @override
-  String get vgInvalidPhoneNumber => 'Please enter a valid phone number';
+  String get vgInvalidPhoneNumber => 'कृपया एक वैध फोन नंबर दर्ज करें';
 
   @override
-  String get vgServerError => 'Server Error';
+  String get vgServerError => 'सर्वर त्रुटि';
 
   @override
-  String get vgPatient => 'Patient';
+  String get vgPatient => 'रोगी।';
 
   @override
-  String get vgReportId => 'Report ID';
+  String get vgReportId => 'आई. डी. दर्ज करें';
 
   @override
-  String get vgNoEventFound => 'No Event Found';
+  String get vgNoEventFound => 'कोई घटना नहीं मिली';
 
   @override
-  String get vgTeamMateDeletedSuccessfully => 'TeamMate Deleted Successfully';
+  String get vgTeamMateDeletedSuccessfully => 'टीममेट सफलतापूर्वक हटा दिया गया';
 
   @override
-  String get vgSomethingWentWrong => 'Something went wrong';
+  String get vgSomethingWentWrong => 'कुछ गड़बड़ हो गई।';
 
   @override
-  String get vgName => 'Name';
+  String get vgName => 'नाम';
 
   @override
-  String get vgPhoneNumber => 'Phone Number';
+  String get vgPhoneNumber => 'फोन नंबर';
 
   @override
-  String get vgErrorFetchingTeammatesDetails => 'Error fetching teammates details';
+  String get vgErrorFetchingTeammatesDetails => 'टीम के साथियों का विवरण लाने में त्रुटि';
 
   @override
-  String get vgTeamMateAddedSuccessfully => 'TeamMate Added Successfully';
+  String get vgTeamMateAddedSuccessfully => 'टीममेट सफलतापूर्वक जोड़ा गया';
 
   @override
-  String get vgAddTeammate => 'Add Teammate';
+  String get vgAddTeammate => 'टीममेट जोड़ें';
 
   @override
-  String get vgPleaseEnter => 'Please enter';
+  String get vgPleaseEnter => 'कृपया प्रविष्ट करें';
 
   @override
-  String get vgPleaseEnterField => 'Please enter field';
+  String get vgPleaseEnterField => 'कृपया क्षेत्र दर्ज करें';
 
   @override
-  String get vgOr => 'Or';
+  String get vgOr => 'या';
 
   @override
-  String get vgSearch => 'Search';
+  String get vgSearch => 'खोजें।';
 
   @override
-  String get vgEventDeletedSuccessfully => 'Event Deleted Successfully';
+  String get vgEventDeletedSuccessfully => 'कार्यक्रम सफलतापूर्वक हटा दिया गया';
 
   @override
-  String get vgEventDeletionFailed => 'Event Deletion Failed';
+  String get vgEventDeletionFailed => 'घटना मिटाने में विफल';
 
   @override
-  String get vgEndTimeGreaterThanStartTime => 'End time should be greater than start time';
+  String get vgEndTimeGreaterThanStartTime => 'समाप्ति समय प्रारंभ समय से अधिक होना चाहिए।';
 
   @override
-  String get vgNoPatientsPresent => 'There are no patients at present. Tap on "Add Patient"';
+  String get vgNoPatientsPresent => 'वर्तमान में कोई मरीज नहीं है। "रोगी जोड़ें" पर टैप करें।';
 
   @override
   String get textSize => 'पाठ का आकार';

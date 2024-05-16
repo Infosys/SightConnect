@@ -476,7 +476,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeCarousal2Description.
   ///
   /// In en, this message translates to:
-  /// **'\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes'**
+  /// **'\r\r\n7 eye problems to get tested for: \r\r\n \r\r\n• Redness of eye\r\r\n• Watering of eyes\r\r\n• White spots on eyes'**
   String get homeCarousal2Description;
 
   /// No description provided for @homeCarousal3Title.
@@ -488,7 +488,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeCarousal3Description.
   ///
   /// In en, this message translates to:
-  /// **'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later'**
+  /// **'But a vision care expert can.\r\r\nGet eye problems identified\r\r\nand treated in time to avoid\r\r\ncomplications later'**
   String get homeCarousal3Description;
 
   /// No description provided for @myConnectionsTitle.
@@ -620,7 +620,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutUsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. '**
+  /// **'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\r\n\r\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. '**
   String get aboutUsDescription;
 
   /// No description provided for @aboutUsFeaturesTitle.
@@ -890,13 +890,13 @@ abstract class AppLocalizations {
   /// No description provided for @eyeAssessmentStepTwo.
   ///
   /// In en, this message translates to:
-  /// **'Step 2 - Eye Assessment Questions'**
+  /// **'Step 2 - Visual Acuity Test'**
   String get eyeAssessmentStepTwo;
 
   /// No description provided for @eyeAssessmentStepThree.
   ///
   /// In en, this message translates to:
-  /// **'Step 3 - Eye Assessment Questions'**
+  /// **'Step 3 - Eye Scan'**
   String get eyeAssessmentStepThree;
 
   /// No description provided for @eyeAssessmentOngoing.
@@ -992,7 +992,7 @@ abstract class AppLocalizations {
   /// No description provided for @consentPageCheckbox.
   ///
   /// In en, this message translates to:
-  /// **'I agree to the terms and conditions'**
+  /// **'I agree'**
   String get consentPageCheckbox;
 
   /// No description provided for @confirmButton.
@@ -1196,19 +1196,19 @@ abstract class AppLocalizations {
   /// No description provided for @assessmentResultCardAssessmentQuestions.
   ///
   /// In en, this message translates to:
-  /// **'Assessment\r\nQuestions'**
+  /// **'Assessment\r\r\nQuestions'**
   String get assessmentResultCardAssessmentQuestions;
 
   /// No description provided for @assessmentResultCardAcuityTest.
   ///
   /// In en, this message translates to:
-  /// **'Acuity\r\nTest'**
+  /// **'Acuity\r\r\nTest'**
   String get assessmentResultCardAcuityTest;
 
   /// No description provided for @assessmentResultCardEyeScan.
   ///
   /// In en, this message translates to:
-  /// **'Eye\r\nScan'**
+  /// **'Eye\r\r\nScan'**
   String get assessmentResultCardEyeScan;
 
   /// No description provided for @viewReportButton.
@@ -1388,7 +1388,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyPolicyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Privacy & Data Protection'**
+  /// **'Privacy & Data Protection Statement'**
   String get privacyPolicyTitle;
 
   /// No description provided for @privacyPolicyPurposeOfProcessingSubTitle.
@@ -1622,7 +1622,7 @@ abstract class AppLocalizations {
   /// No description provided for @triageReportInstructions.
   ///
   /// In en, this message translates to:
-  /// **'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.'**
+  /// **'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\r\n\r\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.'**
   String get triageReportInstructions;
 
   /// No description provided for @assessment.
@@ -3368,19 +3368,19 @@ abstract class AppLocalizations {
   /// No description provided for @vgServicesCreateEvent.
   ///
   /// In en, this message translates to:
-  /// **'Create\r\nEvent'**
+  /// **'Create\r\r\nEvent'**
   String get vgServicesCreateEvent;
 
   /// No description provided for @vgServicesEyeAssessment.
   ///
   /// In en, this message translates to:
-  /// **'Eye\r\nAssessment'**
+  /// **'Eye\r\r\nAssessment'**
   String get vgServicesEyeAssessment;
 
   /// No description provided for @vgServicesRegisterPatient.
   ///
   /// In en, this message translates to:
-  /// **'Register\r\nNew Patient'**
+  /// **'Register\r\r\nNew Patient'**
   String get vgServicesRegisterPatient;
 
   /// No description provided for @vgAddPatients.
@@ -3410,7 +3410,7 @@ abstract class AppLocalizations {
   /// No description provided for @vgAddPhotoInstruction.
   ///
   /// In en, this message translates to:
-  /// **'Add a photo of the Event which\r\nwill be shown as thumbnail'**
+  /// **'Add a photo of the Event which\r\r\nwill be shown as thumbnail'**
   String get vgAddPhotoInstruction;
 
   /// No description provided for @vgAddressDetails.
@@ -3614,7 +3614,7 @@ abstract class AppLocalizations {
   /// No description provided for @vgStartAssessment.
   ///
   /// In en, this message translates to:
-  /// **'Start\r\nAssessment'**
+  /// **'Start Assessment'**
   String get vgStartAssessment;
 
   /// No description provided for @vgSearchPatientByPhoneNumber.
