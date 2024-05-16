@@ -1892,9 +1892,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get triageTestCardButton => 'Start Free Eye Test';
 
   @override
-  String get myConnectionListAddMembers => 'Add Members';
-
-  @override
   String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
 
   @override

@@ -3863,12 +3863,6 @@ abstract class AppLocalizations {
   /// **'Start Free Eye Test'**
   String get triageTestCardButton;
 
-  /// No description provided for @myConnectionListAddMembers.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Members'**
-  String get myConnectionListAddMembers;
-
   /// No description provided for @myConnectionListAddMembersDescription.
   ///
   /// In en, this message translates to:
