@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
-import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/interceptors.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../main.dart';
@@ -30,11 +28,11 @@ final dioProvider = Provider(
     int? getTenantId() {
       if (PersistentAuthStateService.authState.activeRole ==
           "ROLE_VISION_TECHNICIAN") {
-        logger.f("changing tenant based on Role = VT");
+        logger.d("changing tenant based on Role = VT");
         return ref.watch(globalTenantProvider).tenantIdVt;
       } else if (PersistentAuthStateService.authState.activeRole ==
           "ROLE_PATIENT") {
-        logger.f("changing tenant based on Role = Patient");
+        logger.d("changing tenant based on Role = Patient");
         return ref.watch(globalTenantProvider).tenantId;
       }
       return null;
@@ -50,7 +48,7 @@ final dioProvider = Provider(
       }
       return null;
     }
-   
+
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,

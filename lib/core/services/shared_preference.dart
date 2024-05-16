@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,22 +49,24 @@ class SharedPreferenceService {
   /////////////////////////////////////////////////////////////////////////////////////
 
   static int? get getTenantIdVt {
-    log("getTenantIdVt: ${_sharedPreferences.getInt("tenantIdVt")}");
+    logger.d("getTenantIdVt: ${_sharedPreferences.getInt("tenantIdVt")}");
     return _sharedPreferences.getInt("tenantIdVt");
   }
 
   static int? get getOrganizationIdVt {
-    log("getOrganizationIdVt: ${_sharedPreferences.getInt("organizationIdVt")}");
+    logger.d(
+        "getOrganizationIdVt: ${_sharedPreferences.getInt("organizationIdVt")}");
     return _sharedPreferences.getInt("organizationIdVt");
   }
 
   static int? get getTenantId {
-    log("getTenantId: ${_sharedPreferences.getInt("tenantId")}");
+    logger.d("getTenantId: ${_sharedPreferences.getInt("tenantId")}");
     return _sharedPreferences.getInt("tenantId");
   }
 
   static int? get getOrganizationId {
-    log("getOrganizationId: ${_sharedPreferences.getInt("organizationId")}");
+    logger
+        .d("getOrganizationId: ${_sharedPreferences.getInt("organizationId")}");
     return _sharedPreferences.getInt("organizationId");
   }
 

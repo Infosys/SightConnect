@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -55,7 +53,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
     try {
       var response = await dio.get(endpoint);
-      log("assessment response : ${response.data}");
+      logger.d("assessment response : ${response.data}");
       if (tenantCode == null) {
         globalTenantProvider.setTenantId(response.data['tenantCode']);
       }

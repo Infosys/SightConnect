@@ -10,7 +10,7 @@ class GeocodingService {
     final LocationData locationData = await LocationService.getCoordinates();
     final placemarks = await placemarkFromCoordinates(
         locationData.latitude!, locationData.longitude!);
-    logger.f("placemarks : $placemarks");
+    logger.d("placemarks : $placemarks");
 
     return placemarks.first.postalCode ?? "";
   }

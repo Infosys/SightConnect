@@ -8,7 +8,7 @@ class LocationService {
   static Future<bool> checkLocationPermission(BuildContext context) async {
     final location = Location();
     final hasPermission = await location.hasPermission();
-    logger.f('Location permission status: $hasPermission');
+    logger.d('Location permission status: $hasPermission');
     if (hasPermission == PermissionStatus.granted ||
         hasPermission == PermissionStatus.grantedLimited) {
       return true;
@@ -59,7 +59,7 @@ class LocationService {
                       Navigator.of(context).pop();
                     }
 
-                    logger.f("location service requested");
+                    logger.d("location service requested");
                   },
                   child: Text(
                     'Enable Location',
@@ -76,9 +76,9 @@ class LocationService {
   static Future<bool> enableLocation(BuildContext context) async {
     final location = Location();
     bool serviceEnabled = await location.serviceEnabled();
-    logger.f('Location permission status: $serviceEnabled');
+    logger.d('Location permission status: $serviceEnabled');
     if (!serviceEnabled) {
-      logger.f("inside if service disabled");
+      logger.d("inside if service disabled");
       if (context.mounted) {
         await showDialog(
             context: context,
@@ -114,7 +114,7 @@ class LocationService {
                         Navigator.of(context).pop();
                       }
 
-                      logger.f("location service requested");
+                      logger.d("location service requested");
                     },
                     child: Text(
                       'Enable Location',
@@ -137,17 +137,17 @@ class LocationService {
 
 
 //  final serviceEnabled = await location.serviceEnabled();
-//     logger.f('Location permission status: $hasPermission');
+//     logger.d('Location permission status: $hasPermission');
 
 //     if (hasPermission == PermissionStatus.granted ||
 //         hasPermission == PermissionStatus.grantedLimited) {
-//       logger.f("inisde if permission granted");
+//       logger.d("inisde if permission granted");
 //       if (context.mounted) {
 //         enableLocation(context);
 //       }
 //       return true;
 //     } else if (hasPermission == PermissionStatus.denied) {
-//       logger.f("inside if permission denied");
+//       logger.d("inside if permission denied");
 //       if (context.mounted) {
 //         await showDialog(
 //           context: context,
