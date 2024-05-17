@@ -77,7 +77,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   Future<TriagePostModel> saveTriage({
     required TriagePostModel triage,
   }) async {
-    const endpoint = "/services/triage/api/triage-report";
+    const endpoint = "/services/triage/api/v2/triage-report";
     try {
       logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(endpoint, data: triage.toJson());
@@ -99,7 +99,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }) async {
     final id = triage.diagnosticReportId;
     try {
-      var endpoint = "/services/triage/api/triage-report/$id";
+      var endpoint = "/services/triage/api/v2/triage-report/$id";
       logger.d({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(endpoint, data: triage.toJson());
       return TriagePostModel.fromJson(response.data);
@@ -117,7 +117,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     required TriagePostModel triage,
     required String eventId,
   }) async {
-    const endpoint = "/services/triage/api/campaign-events/triage-report";
+    const endpoint = "/services/triage/api/v2/campaign-events/triage-report";
     try {
       logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(

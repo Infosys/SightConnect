@@ -16,7 +16,7 @@ class ConsentRepositoryImpl implements ConsentRepository {
 
   @override
   Future<ConsentModel> getConsent({String type = "PRIVACY_POLICY"}) async {
-    final endPoint = "/services/orchestration/api/consent?type=$type";
+    final endPoint = "/services/orchestration/api/v2/consent?type=$type";
     try {
       final response = await _dio.get(endPoint);
       return ConsentModel.fromJson(response.data);
@@ -31,7 +31,7 @@ class ConsentRepositoryImpl implements ConsentRepository {
 
   @override
   Future<void> setConsent(ConsentModel consent) async {
-    const endPoint = "/services/orchestration/api/consent";
+    const endPoint = "/services/orchestration/api/v2/consent";
     try {
       logger.d(consent.toJson());
       final response = await _dio.post(endPoint, data: consent.toJson());
