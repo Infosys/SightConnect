@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../widgets/patient_profile_family_info_cards.dart';
 import '../widgets/patient_profile_header.dart';
 import '../widgets/patient_profile_patient_info.dart';
@@ -118,7 +119,7 @@ class PatientProfilePage extends ConsumerWidget {
                       .watch(getPatientProfileByIdProvider(selectedPatientId))
                       .when(
                     data: (data) {
-                      final patient = data;            
+                      final patient = data;
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
@@ -161,8 +162,7 @@ class PatientProfilePage extends ConsumerWidget {
                                             getPatientProfileByIdProvider(
                                                 selectedPatientId));
                                       }
-                                    }
-                                    );
+                                    });
                                   },
                                   child: Row(
                                     children: [
