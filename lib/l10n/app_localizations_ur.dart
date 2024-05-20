@@ -35,6 +35,11 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'In case of emergency, please call ${tollFreeNumber}';
+  }
+
+  @override
   String get questionnaireTitle => 'آنکھوں کی تشخیص کے سوالات';
 
   @override
@@ -1850,64 +1855,64 @@ class AppLocalizationsUr extends AppLocalizations {
   String get maximumTextSizeReached => 'زیادہ سے زیادہ متن کا سائز پہنچ گیا';
 
   @override
-  String get chatClearChat => 'Clear Chat';
+  String get chatClearChat => 'چیٹ صاف کریں';
 
   @override
-  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+  String get chatEyeAssessmentRecommended => 'آپ کے لیے آنکھوں کی تشخیص کی سفارش کی جاتی ہے۔';
 
   @override
-  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'کیا آپ ٹرائیج آئی اسسمنٹ لینا چاہتے ہیں؟';
 
   @override
-  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+  String get chatChatbotNotAvailable => 'چیٹ بوٹ فی الحال دستیاب نہیں ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔';
 
   @override
-  String get chatTypeHere => 'Type here...';
+  String get chatTypeHere => 'یہاں ٹائپ کریں...';
 
   @override
-  String get switchProfile => 'Switch Profile';
+  String get switchProfile => 'پروفائل تبدیل کریں';
 
   @override
-  String get switchRole => 'Switch Role';
+  String get switchRole => 'کردار تبدیل کریں';
 
   @override
-  String get switchTenant => 'Switch Tenant';
+  String get switchTenant => 'کرایہ دار کو تبدیل کریں';
 
   @override
-  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+  String get patientHeaderWelcomeText => 'سائٹ کنیکٹ میں خوش آمدید! اپنی بینائی کا خیال رکھنا ضروری ہے، اور ہم آپ کے لیے ہر قدم پر موجود ہیں۔';
 
   @override
-  String get triageTestCardHeader => 'Your eye test is free…';
+  String get triageTestCardHeader => 'آپ کی آنکھوں کا ٹیسٹ مفت ہے...';
 
   @override
-  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+  String get triageTestCardBody1 => 'اپنی آنکھوں کی علامات کا فوری تجزیہ کریں';
 
   @override
-  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+  String get triageTestCardBody2 => 'شناخت کریں کہ آیا آپ کو آنکھ کا مسئلہ ہو سکتا ہے';
 
   @override
-  String get triageTestCardBody3 => 'Know when to visit your doctor';
+  String get triageTestCardBody3 => 'جانیں کہ اپنے ڈاکٹر کے پاس کب جانا ہے';
 
   @override
-  String get triageTestCardButton => 'Start Free Eye Test';
+  String get triageTestCardButton => 'مفت آنکھ کا ٹیسٹ شروع کریں';
 
   @override
-  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+  String get myConnectionListAddMembersDescription => 'اپنے خاندان اور دوستوں کو شامل کرنے کے لیے ایڈ ممبرز بٹن پر کلک کریں۔';
 
   @override
-  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+  String get showTriageHowToProceedBottomSheetHeader => 'آپ کیسے آگے بڑھنا چاہتے ہیں؟';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+  String get showTriageHowToProceedBottomSheetBody1 => 'مجھے ایک مسئلہ ہے اور میں تصدیق کرنا چاہتا ہوں';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+  String get showTriageHowToProceedBottomSheetBody2 => 'مجھے یقین نہیں ہے کہ مجھے کوئی مسئلہ ہے یا نہیں';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+  String get showTriageHowToProceedBottomSheetBody3 => 'مجھے آنکھوں کا کوئی مسئلہ نہیں ہے-بس چیک کرنا چاہتا ہوں';
 
   @override
-  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+  String get appDrawerToastMessageText => 'معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔';
 
   @override
   String get myConnectionListAddMembers => 'رکن شامل کریں';

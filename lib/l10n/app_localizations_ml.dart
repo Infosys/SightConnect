@@ -35,19 +35,24 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'In case of emergency, please call ${tollFreeNumber}';
+  }
+
+  @override
   String get questionnaireTitle => 'നേത്ര അസ്സെസ്സ്മെന്റ് ചോദ്യങ്ങൾ';
 
   @override
   String get questionnaireExitDialog => 'ഈ ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകുന്നത് നിങ്ങളുടെ കണ്ണിന്റെ പ്രശ്നങ്ങൾ തിരിച്ചറിയാൻ സഹായിക്കും. അസ്സെസ്സ്മെന്റ് ഉപേക്ഷിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെന്ന് ഉറപ്പാണോ?';
 
   @override
-  String get visualAcuityTitle => '\r\r\nകാഴ്ച പ്രവർത്തന പരിശോധന';
+  String get visualAcuityTitle => '\r\n\r\nകാഴ്ച പ്രവർത്തന പരിശോധന';
 
   @override
   String get visualAcuityDescription => 'ഒരു പ്രത്യേക അകലത്തിൽ നിന്ന് ഒരു അക്ഷരത്തിൻ്റെയോ ചിഹ്നത്തിൻ്റെയോ വിശദാംശങ്ങൾ നിങ്ങൾ എത്ര നന്നായി കാണുന്നുവെന്ന് പരിശോധിക്കുന്ന ഒരു നേത്രപരിശോധനയാണിത് . ഈ പരിശോധന ഇപ്പോൾ ചെയ്യുക!';
 
   @override
-  String get visualAcuityHowToPerform => '\r\r\nകാഴ്ച പരിശോധന എങ്ങനെ നടത്താം?';
+  String get visualAcuityHowToPerform => '\r\n\r\nകാഴ്ച പരിശോധന എങ്ങനെ നടത്താം?';
 
   @override
   String get visualAcuityViewStepsToPerform => 'കാഴ്ച പരിശോധന നടത്തുന്നതിനുള്ള ഘട്ടങ്ങൾ';
@@ -197,13 +202,13 @@ class AppLocalizationsMl extends AppLocalizations {
   String get homeCarousal2Title => 'ശ്രദ്ധിക്കേണ്ട 7 നേത്ര പ്രശ്നങ്ങൾ';
 
   @override
-  String get homeCarousal2Description => '\r\r\n പരിശോധിക്കേണ്ട 7 നേത്ര പ്രശ്നങ്ങൾ:\r\r\n \r\r\n• കണ്ണ് പ്രശ്നങ്ങൾഃ കണ്ണ് ചുവപ്പ്; \r\r\n• ഈറൻ കണ്ണുകൾ; \r\r\n• കണ്ണുകളിൽ വെളുത്ത പാടുകൾ';
+  String get homeCarousal2Description => '\r\n\r\n പരിശോധിക്കേണ്ട 7 നേത്ര പ്രശ്നങ്ങൾ:\r\n\r\n \r\n\r\n• കണ്ണ് പ്രശ്നങ്ങൾഃ കണ്ണ് ചുവപ്പ്;\r\n\r\n• ഈറൻ കണ്ണുകൾ;\r\n\r\n• കണ്ണുകളിൽ വെളുത്ത പാടുകൾ';
 
   @override
   String get homeCarousal3Title => 'നേത്ര പ്രശ്നങ്ങൾ. നിങ്ങൾക്ക് കാണാൻ കഴിയാത്ത നിരവധി കാര്യങ്ങളുണ്ട്.';
 
   @override
-  String get homeCarousal3Description => 'എന്നാൽ ഒരു നേത്ര പരിശോധന വിദഗ്ധന് കഴിയും. \r\r\n സങ്കീർണതകൾ ഒഴിവാക്കാൻ കണ്ണിലെ പ്രശ്നങ്ങൾ തിരിച്ചറിയുകയും കൃത്യസമയത്ത് \r\r\n ചികിത്സിക്കുകയും ചെയ്യുക.';
+  String get homeCarousal3Description => 'എന്നാൽ ഒരു നേത്ര പരിശോധന വിദഗ്ധന് കഴിയും.\r\n\r\n സങ്കീർണതകൾ ഒഴിവാക്കാൻ കണ്ണിലെ പ്രശ്നങ്ങൾ തിരിച്ചറിയുകയും കൃത്യസമയത്ത്\r\n\r\n ചികിത്സിക്കുകയും ചെയ്യുക.';
 
   @override
   String get myConnectionsTitle => 'അംഗങ്ങൾ';
@@ -563,7 +568,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get assessmentResultCardAcuityTest => 'അക്യൂട്ടി ടെസ്റ്റ് ';
 
   @override
-  String get assessmentResultCardEyeScan => 'നേത്ര\r\r\nസ്കാൻ';
+  String get assessmentResultCardEyeScan => 'നേത്ര\r\n\r\nസ്കാൻ';
 
   @override
   String get viewReportButton => 'റിപ്പോർട്ട്';
@@ -1850,64 +1855,64 @@ class AppLocalizationsMl extends AppLocalizations {
   String get maximumTextSizeReached => 'ഏറ്റവും കൂടിയ വാചക വലിപ്പം എത്തി';
 
   @override
-  String get chatClearChat => 'Clear Chat';
+  String get chatClearChat => 'ചാറ്റ് മായ്ച്ചു കളയുക';
 
   @override
-  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+  String get chatEyeAssessmentRecommended => 'നിങ്ങൾക്കായി കണ്ണ് വിലയിരുത്തൽ ശുപാർശ ചെയ്യുന്നു.';
 
   @override
-  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'നിങ്ങൾക്ക് ട്രൈഏജ് ഐ വിലയിരുത്തൽ നടത്തണോ?';
 
   @override
-  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+  String get chatChatbotNotAvailable => 'ചാറ്റ്ബോട്ട് ഇപ്പോൾ ലഭ്യമല്ല. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക.';
 
   @override
-  String get chatTypeHere => 'Type here...';
+  String get chatTypeHere => 'ഇവിടെ ടൈപ്പ് ചെയ്യുക...';
 
   @override
-  String get switchProfile => 'Switch Profile';
+  String get switchProfile => 'പ്രൊഫൈൽ മാറ്റുക';
 
   @override
-  String get switchRole => 'Switch Role';
+  String get switchRole => 'റോൾ മാറ്റുക';
 
   @override
-  String get switchTenant => 'Switch Tenant';
+  String get switchTenant => 'വാടകക്കാരനെ മാറ്റുക';
 
   @override
-  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+  String get patientHeaderWelcomeText => 'സൈറ്റ്കണക്ടിലേക്ക് സ്വാഗതം! നിങ്ങളുടെ കാഴ്ച ശ്രദ്ധിക്കേണ്ടത് പ്രധാനമാണ്, ഓരോ ഘട്ടത്തിലും ഞങ്ങൾ നിങ്ങൾക്കായി ഇവിടെയുണ്ട്.';
 
   @override
-  String get triageTestCardHeader => 'Your eye test is free…';
+  String get triageTestCardHeader => 'നിങ്ങളുടെ കണ്ണ് പരിശോധന സൌജന്യമാണ്...';
 
   @override
-  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+  String get triageTestCardBody1 => 'നിങ്ങളുടെ കണ്ണിന്റെ ലക്ഷണങ്ങൾ വേഗത്തിൽ വിശകലനം ചെയ്യുക.';
 
   @override
-  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+  String get triageTestCardBody2 => 'നിങ്ങൾക്ക് കണ്ണിന് പ്രശ്നമുണ്ടോ എന്ന് തിരിച്ചറിയുക.';
 
   @override
-  String get triageTestCardBody3 => 'Know when to visit your doctor';
+  String get triageTestCardBody3 => 'എപ്പോഴാണ് ഡോക്ടറെ സന്ദർശിക്കേണ്ടതെന്ന് അറിയുക';
 
   @override
-  String get triageTestCardButton => 'Start Free Eye Test';
+  String get triageTestCardButton => 'സൌജന്യ നേത്രപരിശോധന ആരംഭിക്കുക';
 
   @override
-  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+  String get myConnectionListAddMembersDescription => 'നിങ്ങളുടെ കുടുംബത്തെയും സുഹൃത്തുക്കളെയും ചേർക്കാൻ ആഡ് മെമ്പേഴ്സ് ബട്ടൺ ക്ലിക്കുചെയ്യുക.';
 
   @override
-  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+  String get showTriageHowToProceedBottomSheetHeader => 'നിങ്ങൾ എങ്ങനെ മുന്നോട്ട് പോകാൻ ആഗ്രഹിക്കുന്നു?';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+  String get showTriageHowToProceedBottomSheetBody1 => 'എനിക്ക് ഒരു പ്രശ്നമുണ്ട്, അത് സാധൂകരിക്കാൻ ഞാൻ ആഗ്രഹിക്കുന്നു.';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+  String get showTriageHowToProceedBottomSheetBody2 => 'എനിക്ക് എന്തെങ്കിലും പ്രശ്നമുണ്ടോ എന്ന് എനിക്ക് ഉറപ്പില്ല';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+  String get showTriageHowToProceedBottomSheetBody3 => 'എനിക്ക് കണ്ണിന് പ്രശ്നങ്ങളൊന്നുമില്ല-പരിശോധിക്കാൻ മാത്രമാണ് ഞാൻ ആഗ്രഹിക്കുന്നത്.';
 
   @override
-  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+  String get appDrawerToastMessageText => 'ക്ഷമിക്കണം, മൊബൈൽ ആപ്ലിക്കേഷനിൽ ഒരു ലോഗൌട്ട് പിശക് ഞങ്ങൾ നേരിട്ടു.';
 
   @override
   String get myConnectionListAddMembers => 'അംഗങ്ങളെ ചേർക്കുക';
