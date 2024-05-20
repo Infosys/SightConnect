@@ -197,13 +197,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCarousal2Title => '7 eye problems not to miss out!';
 
   @override
-  String get homeCarousal2Description => '\r\r\n7 eye problems to get tested for: \r\r\n \r\r\n• Redness of eye\r\r\n• Watering of eyes\r\r\n• White spots on eyes';
+  String get homeCarousal2Description => '\r\n\r\n7 eye problems to get tested for:\r\n\r\n \r\n\r\n• Redness of eye\r\n\r\n• Watering of eyes\r\n\r\n• White spots on eyes';
 
   @override
   String get homeCarousal3Title => 'Eye problems. There are many that you can\'t see';
 
   @override
-  String get homeCarousal3Description => 'But a vision care expert can.\r\r\nGet eye problems identified\r\r\nand treated in time to avoid\r\r\ncomplications later';
+  String get homeCarousal3Description => 'But a vision care expert can.\r\n\r\nGet eye problems identified\r\n\r\nand treated in time to avoid\r\n\r\ncomplications later';
 
   @override
   String get myConnectionsTitle => 'My Members';
@@ -269,7 +269,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDrawerSignOut => 'Sign Out';
 
   @override
-  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\r\n\r\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
+  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\n\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
 
   @override
   String get aboutUsFeaturesTitle => 'Features';
@@ -557,13 +557,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get swipeGestureCardText => 'Swipe in the direction of the symbol';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'Assessment\r\r\nQuestions';
+  String get assessmentResultCardAssessmentQuestions => 'Assessment\r\n\r\nQuestions';
 
   @override
-  String get assessmentResultCardAcuityTest => 'Acuity\r\r\nTest';
+  String get assessmentResultCardAcuityTest => 'Acuity\r\n\r\nTest';
 
   @override
-  String get assessmentResultCardEyeScan => 'Eye\r\r\nScan';
+  String get assessmentResultCardEyeScan => 'Eye\r\n\r\nScan';
 
   @override
   String get viewReportButton => 'View Report';
@@ -770,7 +770,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get triageHowToReport => 'How to report eye problems?';
 
   @override
-  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\r\n\r\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
+  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\n\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
 
   @override
   String get assessment => 'Assessment';
@@ -1643,13 +1643,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgConjunctivitis => 'Conjunctivitis';
 
   @override
-  String get vgServicesCreateEvent => 'Create\r\r\nEvent';
+  String get vgServicesCreateEvent => 'Create\r\n\r\nEvent';
 
   @override
-  String get vgServicesEyeAssessment => 'Eye\r\r\nAssessment';
+  String get vgServicesEyeAssessment => 'Eye\r\n\r\nAssessment';
 
   @override
-  String get vgServicesRegisterPatient => 'Register\r\r\nNew Patient';
+  String get vgServicesRegisterPatient => 'Register\r\n\r\nNew Patient';
 
   @override
   String get vgAddPatients => 'Add Patients';
@@ -1664,7 +1664,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgUploadImage => 'Upload Image';
 
   @override
-  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\r\nwill be shown as thumbnail';
+  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\n\r\nwill be shown as thumbnail';
 
   @override
   String get vgAddressDetails => 'Address Details';
