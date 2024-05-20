@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 Future<T?> showTriageHowToProceedBottomSheet<T>(
     {required BuildContext context}) {
-      final loc = context.loc!;
+  final loc = context.loc!;
   return showModalBottomSheet(
     context: context,
     isDismissible: false,
@@ -21,8 +21,8 @@ Future<T?> showTriageHowToProceedBottomSheet<T>(
     ),
     builder: (context) {
       return DraggableScrollableSheet(
-        initialChildSize: 0.4,
-        minChildSize: 0.4,
+        initialChildSize: 0.5,
+        minChildSize: 0.5,
         maxChildSize: 0.9,
         builder: (context, controller) {
           return ClipRRect(
@@ -37,92 +37,95 @@ Future<T?> showTriageHowToProceedBottomSheet<T>(
                   horizontal: AppSize.km,
                   vertical: AppSize.km,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      loc.showTriageHowToProceedBottomSheetHeader,
-                      style: applyFiraSansFont(
-                        fontSize: 24,
+                child: SingleChildScrollView(
+                  controller: controller,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        loc.showTriageHowToProceedBottomSheetHeader,
+                        style: applyFiraSansFont(
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: AppSize.kl,
-                    ),
-                    OutlinedButton(
-                        style: ButtonStyle(
-                            side: MaterialStateProperty.all(
-                                const BorderSide(color: AppColor.primary))),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              fullscreenDialog: true,
-                              builder: (context) =>
-                                  const TriageInstructionPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          loc.showTriageHowToProceedBottomSheetBody1,
-                          style: applyRobotoFont(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: AppColor.primary),
-                        )),
-                    const SizedBox(
-                      height: AppSize.km,
-                    ),
-                    OutlinedButton(
-                        style: ButtonStyle(
-                            side: MaterialStateProperty.all(
-                                const BorderSide(color: AppColor.primary))),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              fullscreenDialog: true,
-                              builder: (context) =>
-                                  const TriageInstructionPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          loc.showTriageHowToProceedBottomSheetBody2,
-                          style: applyRobotoFont(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: AppColor.primary),
-                        )),
-                    const SizedBox(
-                      height: AppSize.km,
-                    ),
-                    OutlinedButton(
-                        style: ButtonStyle(
-                            side: MaterialStateProperty.all(
-                                const BorderSide(color: AppColor.primary))),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              fullscreenDialog: true,
-                              builder: (context) =>
-                                  const TriageInstructionPage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          loc.showTriageHowToProceedBottomSheetBody3,
-                          style: applyRobotoFont(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: AppColor.primary),
-                        )),
-                    const SizedBox(
-                      height: AppSize.km,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: AppSize.kl,
+                      ),
+                      OutlinedButton(
+                          style: ButtonStyle(
+                              side: WidgetStateProperty.all(
+                                  const BorderSide(color: AppColor.primary))),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                fullscreenDialog: true,
+                                builder: (context) =>
+                                    const TriageInstructionPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            loc.showTriageHowToProceedBottomSheetBody1,
+                            style: applyRobotoFont(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: AppColor.primary),
+                          )),
+                      const SizedBox(
+                        height: AppSize.km,
+                      ),
+                      OutlinedButton(
+                          style: ButtonStyle(
+                              side: WidgetStateProperty.all(
+                                  const BorderSide(color: AppColor.primary))),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                fullscreenDialog: true,
+                                builder: (context) =>
+                                    const TriageInstructionPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            loc.showTriageHowToProceedBottomSheetBody2,
+                            style: applyRobotoFont(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: AppColor.primary),
+                          )),
+                      const SizedBox(
+                        height: AppSize.km,
+                      ),
+                      OutlinedButton(
+                          style: ButtonStyle(
+                              side: WidgetStateProperty.all(
+                                  const BorderSide(color: AppColor.primary))),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                fullscreenDialog: true,
+                                builder: (context) =>
+                                    const TriageInstructionPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            loc.showTriageHowToProceedBottomSheetBody3,
+                            style: applyRobotoFont(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: AppColor.primary),
+                          )),
+                      const SizedBox(
+                        height: AppSize.km,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

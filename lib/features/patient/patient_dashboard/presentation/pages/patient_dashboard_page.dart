@@ -1,4 +1,3 @@
-
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';

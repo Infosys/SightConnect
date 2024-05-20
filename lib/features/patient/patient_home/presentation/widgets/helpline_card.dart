@@ -32,10 +32,12 @@ class HelplineCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AutoSizeText(
-              "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
-              style: applyRobotoFont(
-                fontSize: 12,
+            Flexible(
+              child: AutoSizeText(
+                "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
+                style: applyRobotoFont(
+                  fontSize: 12,
+                ),
               ),
             ),
             InkWell(
