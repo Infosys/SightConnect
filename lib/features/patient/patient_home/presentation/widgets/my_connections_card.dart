@@ -31,22 +31,25 @@ class MyConnectionsCard extends HookWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          InkWell(
-            customBorder: const CircleBorder(),
-            onTap: onTap,
-            child: CircleAvatar(
-              radius: 26,
-              backgroundColor:
-                  isPrimary ? AppColor.primary : AppColor.lightGrey,
-              child: image != null
-                  ? AppNetworkImage(
-                      imageUrl: image!,
-                      radius: 24,
-                    )
-                  : AppNameAvatar(
-                      name: name,
-                      radius: 24,
-                    ),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              customBorder: const CircleBorder(),
+              onTap: onTap,
+              child: CircleAvatar(
+                radius: 26,
+                backgroundColor:
+                    isPrimary ? AppColor.primary : AppColor.lightGrey,
+                child: image != null
+                    ? AppNetworkImage(
+                        imageUrl: image!,
+                        radius: 24,
+                      )
+                    : AppNameAvatar(
+                        name: name,
+                        radius: 24,
+                      ),
+              ),
             ),
           ),
           const SizedBox(height: AppSize.ks),
