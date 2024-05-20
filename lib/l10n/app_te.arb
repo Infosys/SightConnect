@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "అత్యవసర పరిస్థితుల్లో, దయచేసి {tollFreeNumber} కు కాల్ చేయండి.",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",

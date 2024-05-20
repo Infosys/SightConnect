@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "അടിയന്തിര സാഹചര്യങ്ങളിൽ, ദയവായി {tollFreeNumber} എന്ന നമ്പറിൽ വിളിക്കുക.",
   "questionnaireTitle": "നേത്ര അസ്സെസ്സ്മെന്റ് ചോദ്യങ്ങൾ",
   "questionnaireExitDialog": "ഈ ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകുന്നത് നിങ്ങളുടെ കണ്ണിന്റെ പ്രശ്നങ്ങൾ തിരിച്ചറിയാൻ സഹായിക്കും. അസ്സെസ്സ്മെന്റ് ഉപേക്ഷിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെന്ന് ഉറപ്പാണോ?",
   "visualAcuityTitle": "\r\n\r\nകാഴ്ച പ്രവർത്തന പരിശോധന",

@@ -36,7 +36,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String emergencyTollFreeNumberText(String tollFreeNumber) {
-    return 'In case of emergency, please call ${tollFreeNumber}';
+    return 'அவசரநிலை ஏற்பட்டால், தயவுசெய்து ${tollFreeNumber} ஐ அழைக்கவும்.';
   }
 
   @override

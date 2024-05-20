@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "ہنگامی صورت حال میں، براہ کرم {tollFreeNumber} پر کال کریں",
   "questionnaireTitle": "آنکھوں کی تشخیص کے سوالات",
   "questionnaireExitDialog": "ان سوالوں کے جواب دینے سے آپ کی آنکھوں کے مسائل کی نشاندہی کرنے میں مدد ملے گی۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟",
   "visualAcuityTitle": "بصری ایکویٹی ٹیسٹ",

@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "அவசரநிலை ஏற்பட்டால், தயவுசெய்து {tollFreeNumber} ஐ அழைக்கவும்.",
   "questionnaireTitle": "கண் பரிசோதனை கேள்விகள்",
   "questionnaireExitDialog": "இந்த கேள்விகளுக்கு பதில் அளிப்பது உங்கள் கண் பிரச்சினைகளை கண்டறிய உதவும். நீங்கள் உண்மையில் வெளியேற விரும்புகிறீர்களா?",
   "visualAcuityTitle": "பார்வைக் கூர்மை சோதனை",
