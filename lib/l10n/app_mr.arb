@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "आपत्कालीन परिस्थितीत, कृपया {tollFreeNumber} वर संपर्क साधा",
   "questionnaireTitle": "डोळ्यांच्या तपासणीचे प्रश्न",
   "questionnaireExitDialog": "या प्रश्नांची उत्तरं देण्याने तुमच्या डोळ्यांच्या समस्या ओळखण्यास मदत होईल. तुम्ही तरीही बाहेर पडू इच्छिता का?",
   "visualAcuityTitle": "दृष्टी अचूकता चाचणी",

@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "કટોકટીના કિસ્સામાં, કૃપા કરીને {tollFreeNumber} પર ફોન કરો",
   "questionnaireTitle": "આંખના મૂલ્યાંકનના પ્રશ્નો",
   "questionnaireExitDialog": "આ પ્રશ્નોના જવાબ આપવાથી તમારી આંખની સમસ્યાઓને ઓળખવામાં મદદ મળશે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?",
   "visualAcuityTitle": "દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ",

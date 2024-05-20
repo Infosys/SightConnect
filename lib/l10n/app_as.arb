@@ -60,7 +60,7 @@
       }
     }
   },
-  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "emergencyTollFreeNumberText": "জৰুৰীকালীন অৱস্থাত অনুগ্ৰহ কৰি {tollFreeNumber} নম্বৰত ফোন কৰক।",
   "questionnaireTitle": "চকুৰ মূল্যায়নৰ প্ৰশ্নসমূহ",
   "questionnaireExitDialog": "এই প্ৰশ্নবোৰৰ উত্তৰে আপোনাৰ চকুৰ সমস্যাবোৰ চিনাক্ত কৰাত সহায় কৰিব। আপুনি সঁচাকৈয়ে বাহিৰ হোৱাটো বিচাৰে নেকি?",
   "visualAcuityTitle": "চাক্ষুষ তীক্ষ্ণতা পৰীক্ষা",

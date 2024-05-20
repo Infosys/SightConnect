@@ -36,7 +36,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String emergencyTollFreeNumberText(String tollFreeNumber) {
-    return 'In case of emergency, please call ${tollFreeNumber}';
+    return 'ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ, ದಯವಿಟ್ಟು ${tollFreeNumber} ಗೆ ಕರೆ ಮಾಡಿ.';
   }
 
   @override
