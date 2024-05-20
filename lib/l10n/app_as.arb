@@ -53,6 +53,14 @@
     }
   },
   "vgSearchByIdName": "{searchType} আইডি, নামৰ দ্বাৰা সন্ধান কৰক",
+  "@emergencyTollFreeNumberText": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
   "questionnaireTitle": "চকুৰ মূল্যায়নৰ প্ৰশ্নসমূহ",
   "questionnaireExitDialog": "এই প্ৰশ্নবোৰৰ উত্তৰে আপোনাৰ চকুৰ সমস্যাবোৰ চিনাক্ত কৰাত সহায় কৰিব। আপুনি সঁচাকৈয়ে বাহিৰ হোৱাটো বিচাৰে নেকি?",
   "visualAcuityTitle": "চাক্ষুষ তীক্ষ্ণতা পৰীক্ষা",

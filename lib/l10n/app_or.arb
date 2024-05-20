@@ -53,6 +53,14 @@
     }
   },
   "vgSearchByIdName": "{searchType} ପରିଚଯ଼, ନାମ ଦ୍ୱାରା ଖୋଜନ୍ତୁ",
+  "@emergencyTollFreeNumberText": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
   "questionnaireTitle": "ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ ପ୍ରଶ୍ନ",
   "questionnaireExitDialog": "ଏହି ପ୍ରଶ୍ନଗୁଡ଼ିକର ଉତ୍ତର ଦେବା ଦ୍ୱାରା ଆପଣଙ୍କ ଚକ୍ଷୁ ସମ୍ବନ୍ଧୀଯ଼ ସମସ୍ଯ଼ା ଚିହ୍ନଟ କରିବାରେ ସାହାଯ୍ଯ଼ ମିଳିବ। ଆପଣ ପ୍ରକୃତରେ ଏଥିରୁ ବାହାରି ଯିବାକୁ ଚାହୁଁଛନ୍ତି କି?",
   "visualAcuityTitle": "ଭିଜୁଆଲ୍ ଆକ୍ଯ଼ୁଇଟି ଟେଷ୍ଟ",

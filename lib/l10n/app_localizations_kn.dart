@@ -35,6 +35,11 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'In case of emergency, please call ${tollFreeNumber}';
+  }
+
+  @override
   String get questionnaireTitle => 'ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನ ಪ್ರಶ್ನೆಗಳು';
 
   @override

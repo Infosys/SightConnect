@@ -35,6 +35,11 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'In case of emergency, please call ${tollFreeNumber}';
+  }
+
+  @override
   String get questionnaireTitle => 'آنکھوں کی تشخیص کے سوالات';
 
   @override

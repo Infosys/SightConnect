@@ -53,6 +53,14 @@
     }
   },
   "vgSearchByIdName": "{searchType} ஐடி, பெயர் மூலம் தேடுங்கள்",
+  "@emergencyTollFreeNumberText": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
   "questionnaireTitle": "கண் பரிசோதனை கேள்விகள்",
   "questionnaireExitDialog": "இந்த கேள்விகளுக்கு பதில் அளிப்பது உங்கள் கண் பிரச்சினைகளை கண்டறிய உதவும். நீங்கள் உண்மையில் வெளியேற விரும்புகிறீர்களா?",
   "visualAcuityTitle": "பார்வைக் கூர்மை சோதனை",

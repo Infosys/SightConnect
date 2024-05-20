@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,7 +16,7 @@ class HelplineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final loc = context.loc!;
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Container(
@@ -32,12 +33,10 @@ class HelplineCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              child: AutoSizeText(
-                "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
-                style: applyRobotoFont(
-                  fontSize: 12,
-                ),
+            AutoSizeText(
+              loc.emergencyTollFreeNumberText(AppInfoService.tollFreeNumber),
+              style: applyRobotoFont(
+                fontSize: 12,
               ),
             ),
             InkWell(

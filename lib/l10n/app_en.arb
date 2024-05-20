@@ -53,6 +53,14 @@
     }
   },
   "vgSearchByIdName": "Search by {searchType} ID, Name",
+  "@emergencyTollFreeNumberText": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",

@@ -53,6 +53,14 @@
     }
   },
   "vgSearchByIdName": "{searchType} ఐడి, పేరు ద్వారా శోధించండి",
+  "@emergencyTollFreeNumberText": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",

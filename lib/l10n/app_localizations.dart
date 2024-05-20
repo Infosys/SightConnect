@@ -149,6 +149,12 @@ abstract class AppLocalizations {
   /// **'Search by {searchType} ID, Name'**
   String vgSearchByIdName(String searchType);
 
+  /// No description provided for @emergencyTollFreeNumberText.
+  ///
+  /// In en, this message translates to:
+  /// **'In case of emergency, please call {tollFreeNumber}'**
+  String emergencyTollFreeNumberText(String tollFreeNumber);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
