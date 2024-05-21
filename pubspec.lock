@@ -749,6 +749,14 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "4.0.0"
+  gauge_indicator:
+    dependency: "direct main"
+    description:
+      name: gauge_indicator
+      sha256: "483abfae360ddffdf7b89fbd25192f83d1a6513d5da18f2388131566ab0793fd"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.4.3"
   geocoding:
     dependency: "direct main"
     description:
@@ -1745,22 +1753,6 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      sha256: "9e8bac2367d03bd902844f59e866c0e7b1e10b0b8fa5a6a926c0d8ae8c344533"
-      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
-    source: hosted
-    version: "25.2.4"
-  syncfusion_flutter_gauges:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_gauges
-      sha256: "24b9666cc7ee2a6e69c907c3abd179a5f5a311bec6efce97920cde0cc370f391"
-      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
-    source: hosted
-    version: "25.2.4"
   synchronized:
     dependency: transitive
     description:

@@ -47,7 +47,6 @@ dependencies:
   dotted_border: ^2.0.0+3
   carousel_slider: ^4.2.1
   camera: ^0.10.5+9
-  syncfusion_flutter_gauges: any
   url_launcher: ^6.1.12
   jwt_decoder: ^2.0.1
   screen_brightness: ^0.2.2+1
@@ -84,6 +83,7 @@ dependencies:
   web_socket_channel: ^2.4.0
   date_picker_timeline: ^1.2.5
   stomp_dart_client: ^1.0.3
+  gauge_indicator: ^0.4.3
   # in_app_update: ^4.2.2
   upgrader: ^9.0.0
   geocoding: ^3.0.0
