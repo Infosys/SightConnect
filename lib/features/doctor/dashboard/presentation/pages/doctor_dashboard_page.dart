@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/doctor/surgery/presentation/pages/doctor_surgery_details_page.dart';
+import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/pages/doctor_tissue_detail_form.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_request/presentation/pages/doctor_tissue_request_form.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,7 @@ class DoctorDashBoardPage extends StatelessWidget {
         ],
       ),
       body: const DefaultTabController(
-        length: 2,
+        length: 3,
         child: Column(
           children: [
             TabBar(
@@ -38,6 +39,9 @@ class DoctorDashBoardPage extends StatelessWidget {
               unselectedLabelColor: AppColor.grey,
               indicatorColor: AppColor.primary,
               tabs: [
+                Tab(
+                  text: 'Tissue Detail Form',
+                ),
                 Tab(
                   text: 'Surgery Details',
                 ),
@@ -49,6 +53,7 @@ class DoctorDashBoardPage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
+                  DoctorTissueDetailForm(),
                   DoctorSurgeryDetailsPage(),
                   DoctorTissueRequestForm(),
                 ],
