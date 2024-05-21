@@ -47,7 +47,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   carousel_slider: ^4.2.1
   camera: ^0.10.5+9
-  syncfusion_flutter_gauges: ^25.2.4
+  syncfusion_flutter_gauges: any
   url_launcher: ^6.1.12
   jwt_decoder: ^2.0.1
   screen_brightness: ^0.2.2+1
