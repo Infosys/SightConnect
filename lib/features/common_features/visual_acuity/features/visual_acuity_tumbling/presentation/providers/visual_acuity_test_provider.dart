@@ -1,17 +1,21 @@
 import 'dart:math' as math;
-import 'package:dartz/dartz.dart';
 
+import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart'
     hide Performer;
-import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
+    as update_model;
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
+    as triage_detailed_model;
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
@@ -22,14 +26,10 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../../../../core/providers/global_visual_acuity_provider.dart';
 import '../../../../../triage/domain/models/enums/observation_code.dart';
 import '../../../../../triage/domain/models/enums/performer_role.dart';
-
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
-    as update_model;
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
-    as triage_detailed_model;
-
 import '../../../../data/local/tumbling_local_source.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../../../../domain/models/tumbling_models.dart';
@@ -44,6 +44,7 @@ var tumblingTestProvider = ChangeNotifierProvider(
     ref.watch(triageRepositoryProvider),
     ref.watch(triageReportRepositoryProvider),
     ref.watch(triageUrgencyRepositoryProvider),
+    ref,
   ),
 );
 
@@ -53,12 +54,14 @@ class VisualAcuityTestProvider with ChangeNotifier {
   TriageRepository triageRepositoryProvider;
   final TriageUrgencyRepository _triageUrgencyRepository;
   final TriageReportRepository _triageReportRepository;
+  final Ref _ref;
   VisualAcuityTestProvider(
       this._dataSource,
       this.triageLocalSourceProvider,
       this.triageRepositoryProvider,
       this._triageReportRepository,
-      this._triageUrgencyRepository) {
+      this._triageUrgencyRepository,
+      this._ref) {
     startGame(Eye.right);
   }
   late Level? _level;
@@ -363,6 +366,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
         triageVisualAcuity: res,
       );
       reset();
+      _ref.read(globalVisualAcuityProvider).setShortDistanceTest(false);
     } catch (e) {
       logger.e("$e");
       throw ServerFailure(
@@ -413,11 +417,10 @@ class VisualAcuityTestProvider with ChangeNotifier {
             reportModel.observations ?? [], visionAcuityTumblingResponse),
       );
 
-reset();
+      reset();
       return triageRepositoryProvider.updateTriageResponse(
         triageResponse: triage,
       );
-      
     } catch (e) {
       rethrow;
     }
