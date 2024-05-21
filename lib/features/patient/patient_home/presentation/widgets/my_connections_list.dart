@@ -51,10 +51,12 @@ class MyConnectionsList extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                loc.myConnectionsTitle,
-                style: applyFiraSansFont(
-                  fontSize: 18,
+              Flexible(
+                child: Text(
+                  loc.myConnectionsTitle,
+                  style: applyFiraSansFont(
+                    fontSize: 18,
+                  ),
                 ),
               ),
               InkWell(
@@ -65,7 +67,7 @@ class MyConnectionsList extends ConsumerWidget {
                       MaterialPageRoute(
                         builder: (context) => PatientRegistrationMiniappPage(
                           actionType: MiniAppActionType.ADD_MEMBER,
-                          displayName: loc.myConnectionsAddMember,
+                          displayName: loc.myConnectionListAddMembers,
                         ),
                       ),
                     ).then(
