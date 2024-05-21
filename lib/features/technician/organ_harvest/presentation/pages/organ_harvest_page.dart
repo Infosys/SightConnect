@@ -28,7 +28,7 @@ class OrganHarvestPage extends StatelessWidget {
                   const OrganHarvestWidget(),
                   const SizedBox(),
                   const PreCutWidget(),
-                  const SizedBox(),
+                  const OrderDelivery(),
                   const SizedBox(),
                 ];
                 final index = ref.watch(organHarvestProvider).currentStep;
