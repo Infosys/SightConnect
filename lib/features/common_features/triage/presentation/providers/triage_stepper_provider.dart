@@ -10,7 +10,7 @@ var triageStepperProvider = ChangeNotifierProvider(
 );
 
 class TriageStepperProvider extends ChangeNotifier {
-  int maxSteps = 4;
+  int maxSteps = 3;
   int _currentStep = 0;
   final GetTriageCurrentStepUseCase _useCase;
   TriageStepperProvider(this._useCase) {

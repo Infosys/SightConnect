@@ -385,9 +385,10 @@ class VisualAcuityTestProvider with ChangeNotifier {
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
     try {
+      final int drId = _ref.read(globalVisualAcuityProvider).dignosticReportID;
       final visionAcuityTumblingResponse =
           await getVisionAcuityTumblingResponse();
-      final reportModel = await getTriageReportByReportId(diagnosticReportId!);
+      final reportModel = await getTriageReportByReportId(drId);
 
       if (reportModel == null) {
         throw ServerFailure(
