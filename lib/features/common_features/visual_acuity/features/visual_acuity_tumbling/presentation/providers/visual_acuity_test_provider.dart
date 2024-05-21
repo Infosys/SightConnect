@@ -366,7 +366,7 @@ class VisualAcuityTestProvider with ChangeNotifier {
         triageVisualAcuity: res,
       );
       reset();
-      _ref.read(globalVisualAcuityProvider).setShortDistanceTest(false);
+      // _ref.read(globalVisualAcuityProvider).setShortDistanceTest(false);
     } catch (e) {
       logger.e("$e");
       throw ServerFailure(

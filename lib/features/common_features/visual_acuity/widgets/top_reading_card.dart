@@ -43,6 +43,8 @@ class TopReadingCard extends StatelessWidget {
     // TODO: THIS IS FOR TESTING, Need to remove
 
     double optoTypeSize;
+    int lowerLimit = isShortDistance ? 35 : 195;
+    int upperLimit = isShortDistance ? 45 : 205;
 
     if (isShortDistance == false) {
       if (isThreeMeters == true) {
@@ -137,8 +139,8 @@ class TopReadingCard extends StatelessWidget {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: (distance != null &&
-                                            (distance >= 195 &&
-                                                distance <= 205))
+                                            (distance >= lowerLimit &&
+                                                distance <= upperLimit))
                                         ? AppColor.green
                                         : AppColor.red,
                                   ),
