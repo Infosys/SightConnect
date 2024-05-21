@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/features/doctor/surgery/presentation/pages/doctor_surgery_details_page.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_request/presentation/pages/doctor_tissue_request_form.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,34 @@ class DoctorDashBoardPage extends StatelessWidget {
           IconButton(onPressed: null, icon: Icon(Icons.person))
         ],
       ),
-      body: const DoctorTissueRequestForm(),
+      body: const DefaultTabController(
+        length: 2,
+        child: Column(
+          children: [
+            TabBar(
+              labelColor: AppColor.primary,
+              unselectedLabelColor: AppColor.grey,
+              indicatorColor: AppColor.primary,
+              tabs: [
+                Tab(
+                  text: 'Surgery Details',
+                ),
+                Tab(
+                  text: 'Tissue Request',
+                ),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  DoctorSurgeryDetailsPage(),
+                  DoctorTissueRequestForm(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
