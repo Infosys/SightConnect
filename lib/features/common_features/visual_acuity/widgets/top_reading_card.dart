@@ -30,8 +30,7 @@ class TopReadingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.f(
-        "currentLevel: $currentLevel, isThreeMeters: $isThreeMeters, currentEye: $currentEye, currentIndex: $currentIndex, isShortDistance: $isShortDistance");
+
     // var model = ref.watch(distanceTumblingTestProvider);
     // var optoTypeData = ref.watch(globalVisualAcuityProvider);
     // var currentLevel = model.level;

@@ -62,13 +62,13 @@ class TumblingResultReportPage extends ConsumerWidget {
                 Consumer(
                   builder: (context, ref, _) {
                     double leftEyeSight = ref
-                        .watch(tumblingTestProvider)
+                        .read(tumblingTestProvider)
                         .calculateEyeSight(Eye.left);
                     double rightEyeSight = ref
-                        .watch(tumblingTestProvider)
+                        .read(tumblingTestProvider)
                         .calculateEyeSight(Eye.right);
                     double bothEyeSight = ref
-                        .watch(tumblingTestProvider)
+                        .read(tumblingTestProvider)
                         .calculateEyeSight(Eye.both);
                     return Card(
                       shape: RoundedRectangleBorder(
