@@ -54,7 +54,7 @@ class AppDrawer extends HookWidget {
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: Padding(
         padding: EdgeInsets.only(
-          top: AppSize.height(context) * 0.07,
+          top: AppSize.height(context) * 0.03,
           left: AppSize.width(context) * 0.2,
         ),
         child: ClipRRect(
@@ -106,7 +106,7 @@ class AppDrawer extends HookWidget {
                                 switch (item.id) {
                                   case DrawerMenuItemId.tenant:
                                     final navigator = Navigator.of(context);
-                
+
                                     navigator.push(
                                       MaterialPageRoute(
                                         builder: (context) =>
@@ -127,12 +127,12 @@ class AppDrawer extends HookWidget {
                                     Navigator.of(context).pop();
                                     onAccessibilityChange?.call();
                                     break;
-                
+
                                   case DrawerMenuItemId.language:
                                     Navigator.of(context).pop();
                                     onLanguageChange?.call();
                                     break;
-                
+
                                   case DrawerMenuItemId.assessments:
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -152,11 +152,12 @@ class AppDrawer extends HookWidget {
                                   case DrawerMenuItemId.about:
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => const AboutUsPage(),
+                                        builder: (context) =>
+                                            const AboutUsPage(),
                                       ),
                                     );
                                     break;
-                
+
                                   case DrawerMenuItemId.privacyPolicy:
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -172,12 +173,13 @@ class AppDrawer extends HookWidget {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             const HelpAndSupportPage(
-                                          helpLine: AppInfoService.tollFreeNumber,
+                                          helpLine:
+                                              AppInfoService.tollFreeNumber,
                                         ),
                                       ),
                                     );
                                     break;
-                
+
                                   case DrawerMenuItemId.chatbot:
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -189,7 +191,8 @@ class AppDrawer extends HookWidget {
                                           var currentLanguageCode =
                                               languageProvider
                                                   .currentLocale!.languageCode;
-                                          logger.d("language: $currentLanguage");
+                                          logger
+                                              .d("language: $currentLanguage");
                                           return ChatBotPage(
                                             selectedLanguage: currentLanguage,
                                             selectedLanguageCode:
@@ -203,11 +206,12 @@ class AppDrawer extends HookWidget {
                                         },
                                       ),
                                     );
-                
+
                                   default:
                                 }
                               },
-                              visualDensity: const VisualDensity(horizontal: -4),
+                              visualDensity:
+                                  const VisualDensity(horizontal: -4),
                               leading: Container(
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
@@ -266,8 +270,8 @@ class AppDrawer extends HookWidget {
                             shape: BoxShape.circle,
                             color: AppColor.primary.withOpacity(0.2),
                           ),
-                          child:
-                              SvgPicture.asset("assets/drawer_icons/signout.svg"),
+                          child: SvgPicture.asset(
+                              "assets/drawer_icons/signout.svg"),
                         ),
                         title: Text(
                           loc.appDrawerSignOut,
@@ -284,7 +288,7 @@ class AppDrawer extends HookWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Version: ${AppInfoService.appVersion}",
+                          "App Version: ${AppInfoService.appVersion}",
                           style: applyRobotoFont(
                             fontWeight: FontWeight.normal,
                             color: AppColor.grey,
