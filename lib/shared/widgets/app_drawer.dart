@@ -66,234 +66,236 @@ class AppDrawer extends HookWidget {
             body: LoadingOverlay(
               isLoading: isLoading.value,
               progressMessage: loc.optoLoggingOut,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Consumer(
-                    builder: (context, ref, child) {
-                      final model = ref.watch(patientDashboardProvider);
-                      return ListTile(
-                        onTap: () {
-                          model.setVisibility(true);
-                          Navigator.pop(context);
-                        },
-                        trailing: const Icon(
-                          Icons.close,
-                        ),
-                        title: Row(
-                          children: [
-                            Text(
-                              loc.appDrawerTitle,
-                              style: applyFiraSansFont(
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  ...items.map(
-                    (item) {
-                      return Consumer(
-                        builder: (context, ref, child) {
-                          return ListTile(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            onTap: () async {
-                              switch (item.id) {
-                                case DrawerMenuItemId.tenant:
-                                  final navigator = Navigator.of(context);
-
-                                  navigator.push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PatientTenantsDisplayPage(),
-                                    ),
-                                  );
-                                  break;
-                                case DrawerMenuItemId.switchProfile:
-                                  final navigator = Navigator.of(context);
-                                  await ref
-                                      .read(initializationProvider)
-                                      .resetProfile();
-                                  navigator.pushNamedAndRemoveUntil(
-                                      InitializationPage.routeName,
-                                      (route) => false);
-                                  break;
-                                case DrawerMenuItemId.accessibilities:
-                                  Navigator.of(context).pop();
-                                  onAccessibilityChange?.call();
-                                  break;
-
-                                case DrawerMenuItemId.language:
-                                  Navigator.of(context).pop();
-                                  onLanguageChange?.call();
-                                  break;
-
-                                case DrawerMenuItemId.assessments:
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AssessmentsAndTestsPage(),
-                                    ),
-                                  );
-                                  break;
-                                case DrawerMenuItemId.scanner:
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SuperAppScannerPage(),
-                                    ),
-                                  );
-                                  break;
-                                case DrawerMenuItemId.about:
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => const AboutUsPage(),
-                                    ),
-                                  );
-                                  break;
-
-                                case DrawerMenuItemId.privacyPolicy:
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AppConsentFormPage(
-                                        isPreview: true,
-                                      ),
-                                    ),
-                                  );
-                                  break;
-                                case DrawerMenuItemId.help:
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const HelpAndSupportPage(
-                                        helpLine: AppInfoService.tollFreeNumber,
-                                      ),
-                                    ),
-                                  );
-                                  break;
-
-                                case DrawerMenuItemId.chatbot:
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        var languageProvider =
-                                            ref.watch(globalLanguageProvider);
-                                        var currentLanguage =
-                                            languageProvider.currentLanguage;
-                                        var currentLanguageCode =
-                                            languageProvider
-                                                .currentLocale!.languageCode;
-                                        logger.d("language: $currentLanguage");
-                                        return ChatBotPage(
-                                          selectedLanguage: currentLanguage,
-                                          selectedLanguageCode:
-                                              currentLanguageCode,
-                                          welcomeMessage:
-                                              loc.chatBotWelcomeMessage,
-                                          defaultQuerySuggestions: loc
-                                              .chatBotDefaultQuerySuggestions
-                                              .split("|"),
-                                        );
-                                      },
-                                    ),
-                                  );
-
-                                default:
-                              }
-                            },
-                            visualDensity: const VisualDensity(horizontal: -4),
-                            leading: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColor.primary.withOpacity(0.2),
-                              ),
-                              child: SvgPicture.asset(
-                                item.icon,
-                                height: 18,
-                                width: 18,
-                                colorFilter: const ColorFilter.mode(
-                                  AppColor.primary,
-                                  BlendMode.srcIn,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final model = ref.watch(patientDashboardProvider);
+                        return ListTile(
+                          onTap: () {
+                            model.setVisibility(true);
+                            Navigator.pop(context);
+                          },
+                          trailing: const Icon(
+                            Icons.close,
+                          ),
+                          title: Row(
+                            children: [
+                              Text(
+                                loc.appDrawerTitle,
+                                style: applyFiraSansFont(
+                                  fontSize: 18,
                                 ),
                               ),
-                            ),
-                            title: Text(
-                              item.title,
-                              style: applyRobotoFont(
-                                fontWeight: FontWeight.normal,
-                                color: AppColor.grey,
-                                fontSize: 14,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  const Spacer(),
-                  const Divider(),
-                  Consumer(
-                    builder: (context, ref, _) => ListTile(
-                      onTap: () async {
-                        isLoading.value = true;
-                        final navigator = Navigator.of(context);
-                        ref
-                            .read(initializationProvider)
-                            .logout()
-                            .then((value) async {
-                          isLoading.value = false;
-                          navigator.pushNamedAndRemoveUntil(
-                            LoginPage.routeName,
-                            (route) => false,
-                          );
-                          ref.invalidate(initializationProvider);
-                        }).catchError((e) {
-                          isLoading.value = false;
-                          Fluttertoast.showToast(
-                              msg: loc.appDrawerToastMessageText);
-                        });
+                            ],
+                          ),
+                        );
                       },
-                      leading: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColor.primary.withOpacity(0.2),
+                    ),
+                    ...items.map(
+                      (item) {
+                        return Consumer(
+                          builder: (context, ref, child) {
+                            return ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              onTap: () async {
+                                switch (item.id) {
+                                  case DrawerMenuItemId.tenant:
+                                    final navigator = Navigator.of(context);
+                
+                                    navigator.push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PatientTenantsDisplayPage(),
+                                      ),
+                                    );
+                                    break;
+                                  case DrawerMenuItemId.switchProfile:
+                                    final navigator = Navigator.of(context);
+                                    await ref
+                                        .read(initializationProvider)
+                                        .resetProfile();
+                                    navigator.pushNamedAndRemoveUntil(
+                                        InitializationPage.routeName,
+                                        (route) => false);
+                                    break;
+                                  case DrawerMenuItemId.accessibilities:
+                                    Navigator.of(context).pop();
+                                    onAccessibilityChange?.call();
+                                    break;
+                
+                                  case DrawerMenuItemId.language:
+                                    Navigator.of(context).pop();
+                                    onLanguageChange?.call();
+                                    break;
+                
+                                  case DrawerMenuItemId.assessments:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AssessmentsAndTestsPage(),
+                                      ),
+                                    );
+                                    break;
+                                  case DrawerMenuItemId.scanner:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SuperAppScannerPage(),
+                                      ),
+                                    );
+                                    break;
+                                  case DrawerMenuItemId.about:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => const AboutUsPage(),
+                                      ),
+                                    );
+                                    break;
+                
+                                  case DrawerMenuItemId.privacyPolicy:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AppConsentFormPage(
+                                          isPreview: true,
+                                        ),
+                                      ),
+                                    );
+                                    break;
+                                  case DrawerMenuItemId.help:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HelpAndSupportPage(
+                                          helpLine: AppInfoService.tollFreeNumber,
+                                        ),
+                                      ),
+                                    );
+                                    break;
+                
+                                  case DrawerMenuItemId.chatbot:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          var languageProvider =
+                                              ref.watch(globalLanguageProvider);
+                                          var currentLanguage =
+                                              languageProvider.currentLanguage;
+                                          var currentLanguageCode =
+                                              languageProvider
+                                                  .currentLocale!.languageCode;
+                                          logger.d("language: $currentLanguage");
+                                          return ChatBotPage(
+                                            selectedLanguage: currentLanguage,
+                                            selectedLanguageCode:
+                                                currentLanguageCode,
+                                            welcomeMessage:
+                                                loc.chatBotWelcomeMessage,
+                                            defaultQuerySuggestions: loc
+                                                .chatBotDefaultQuerySuggestions
+                                                .split("|"),
+                                          );
+                                        },
+                                      ),
+                                    );
+                
+                                  default:
+                                }
+                              },
+                              visualDensity: const VisualDensity(horizontal: -4),
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.primary.withOpacity(0.2),
+                                ),
+                                child: SvgPicture.asset(
+                                  item.icon,
+                                  height: 18,
+                                  width: 18,
+                                  colorFilter: const ColorFilter.mode(
+                                    AppColor.primary,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                              ),
+                              title: Text(
+                                item.title,
+                                style: applyRobotoFont(
+                                  fontWeight: FontWeight.normal,
+                                  color: AppColor.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    // const Spacer(),
+                    const Divider(),
+                    Consumer(
+                      builder: (context, ref, _) => ListTile(
+                        onTap: () async {
+                          isLoading.value = true;
+                          final navigator = Navigator.of(context);
+                          ref
+                              .read(initializationProvider)
+                              .logout()
+                              .then((value) async {
+                            isLoading.value = false;
+                            navigator.pushNamedAndRemoveUntil(
+                              LoginPage.routeName,
+                              (route) => false,
+                            );
+                            ref.invalidate(initializationProvider);
+                          }).catchError((e) {
+                            isLoading.value = false;
+                            Fluttertoast.showToast(
+                                msg: loc.appDrawerToastMessageText);
+                          });
+                        },
+                        leading: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColor.primary.withOpacity(0.2),
+                          ),
+                          child:
+                              SvgPicture.asset("assets/drawer_icons/signout.svg"),
                         ),
-                        child:
-                            SvgPicture.asset("assets/drawer_icons/signout.svg"),
-                      ),
-                      title: Text(
-                        loc.appDrawerSignOut,
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.normal,
-                          color: AppColor.grey,
-                          fontSize: 14,
+                        title: Text(
+                          loc.appDrawerSignOut,
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.normal,
+                            color: AppColor.grey,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: AppSize.kl * 2),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Version: ${AppInfoService.appVersion}",
-                        style: applyRobotoFont(
-                          fontWeight: FontWeight.normal,
-                          color: AppColor.grey,
-                          fontSize: 10,
+                    const SizedBox(height: AppSize.kl),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Version: ${AppInfoService.appVersion}",
+                          style: applyRobotoFont(
+                            fontWeight: FontWeight.normal,
+                            color: AppColor.grey,
+                            fontSize: 10,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.kl * 2)
-                ],
+                      ],
+                    ),
+                    const SizedBox(height: AppSize.kl)
+                  ],
+                ),
               ),
             ),
           ),

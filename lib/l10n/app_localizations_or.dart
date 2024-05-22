@@ -35,6 +35,11 @@ class AppLocalizationsOr extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'ଜରୁରୀକାଳୀନ ପରିସ୍ଥିତିରେ, ଦଯ଼ାକରି ${tollFreeNumber} କୁ କଲ୍ କରନ୍ତୁ।';
+  }
+
+  @override
   String get questionnaireTitle => 'ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ ପ୍ରଶ୍ନ';
 
   @override
@@ -197,7 +202,7 @@ class AppLocalizationsOr extends AppLocalizations {
   String get homeCarousal2Title => 'ଆଖି ସମ୍ବନ୍ଧୀଯ଼ 7ଟି ସମସ୍ଯ଼ାକୁ ଏଡ଼ାଇ ହେବ ନାହିଁ!';
 
   @override
-  String get homeCarousal2Description => '• ଆଖି ଲାଲ ହେବା\r\r\n• ଆଖିରୁ ପାଣି ବାହାରିବା \r\r\n• ଆଖିରେ ଧଳା ଦାଗ';
+  String get homeCarousal2Description => '• ଆଖି ଲାଲ ହେବା\r\n\r\n• ଆଖିରୁ ପାଣି ବାହାରିବା\r\n\r\n• ଆଖିରେ ଧଳା ଦାଗ';
 
   @override
   String get homeCarousal3Title => 'ଆଖି ସମସ୍ଯ଼ା। ଏମିତି ଅନେକ ଅଛି ଯାହାକୁ ଆପଣ ଦେଖିପାରିବେ ନାହିଁ।';
@@ -557,13 +562,13 @@ class AppLocalizationsOr extends AppLocalizations {
   String get swipeGestureCardText => 'ସଂକେତର ଦିଗକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'ମୂଲ୍ୟାଙ୍କନ\r\r\nପ୍ରଶ୍ନଗୁଡିକ';
+  String get assessmentResultCardAssessmentQuestions => 'ମୂଲ୍ୟାଙ୍କନ\r\n\r\nପ୍ରଶ୍ନଗୁଡିକ';
 
   @override
   String get assessmentResultCardAcuityTest => 'ଆକ୍ୟୁଟି ପରୀକ୍ଷା';
 
   @override
-  String get assessmentResultCardEyeScan => 'ଚକ୍ଷୁ\r\r\nସ୍କାନ୍';
+  String get assessmentResultCardEyeScan => 'ଚକ୍ଷୁ\r\n\r\nସ୍କାନ୍';
 
   @override
   String get viewReportButton => 'ରିପୋର୍ଟ ଦେଖନ୍ତୁ';
@@ -1850,64 +1855,64 @@ class AppLocalizationsOr extends AppLocalizations {
   String get maximumTextSizeReached => 'ସର୍ବାଧିକ ପାଠ ଆକାର ପହଞ୍ଚିଛି';
 
   @override
-  String get chatClearChat => 'Clear Chat';
+  String get chatClearChat => 'ଚାଟ୍କୁ ସଫା କରନ୍ତୁ';
 
   @override
-  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+  String get chatEyeAssessmentRecommended => 'ଆପଣଙ୍କ ପାଇଁ ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ ସୁପାରିଶ କରାଯାଏ।';
 
   @override
-  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'ଆପଣ ଟ୍ରାଇଏଜ୍ ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ କରିବାକୁ ଚାହୁଁଛନ୍ତି କି?';
 
   @override
-  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+  String get chatChatbotNotAvailable => 'ଚାଟବଟ୍ ବର୍ତ୍ତମାନ ଉପଲବ୍ଧ ନାହିଁ। ଦଯ଼ାକରି ପରେ ପୁଣିଥରେ ଚେଷ୍ଟା କରନ୍ତୁ।';
 
   @override
-  String get chatTypeHere => 'Type here...';
+  String get chatTypeHere => 'ଏଠାରେ ଟାଇପ୍ କରନ୍ତୁ...';
 
   @override
-  String get switchProfile => 'Switch Profile';
+  String get switchProfile => 'ପ୍ରୋଫାଇଲ ବଦଳାନ୍ତୁ';
 
   @override
-  String get switchRole => 'Switch Role';
+  String get switchRole => 'ଭୂମିକା ବଦଳାନ୍ତୁ';
 
   @override
-  String get switchTenant => 'Switch Tenant';
+  String get switchTenant => 'ଭଡ଼ାଟିଆ ବଦଳାନ୍ତୁ';
 
   @override
-  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+  String get patientHeaderWelcomeText => 'ସାଇଟ୍କନେକ୍ଟକୁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ! ନିଜର ଦୃଷ୍ଟିଶକ୍ତିର ଯତ୍ନ ନେବା ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ, ଏବଂ ଆମେ ପ୍ରତ୍ଯ଼େକ ପଦକ୍ଷେପରେ ଆପଣଙ୍କ ପାଇଁ ଏଠାରେ ଅଛୁ।';
 
   @override
-  String get triageTestCardHeader => 'Your eye test is free…';
+  String get triageTestCardHeader => 'ଆପଣଙ୍କର ଚକ୍ଷୁ ପରୀକ୍ଷା ମାଗଣା...';
 
   @override
-  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+  String get triageTestCardBody1 => 'ଆପଣଙ୍କ ଆଖିର ଲକ୍ଷଣଗୁଡ଼ିକୁ ଶୀଘ୍ର ବିଶ୍ଳେଷଣ କରନ୍ତୁ।';
 
   @override
-  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+  String get triageTestCardBody2 => 'ଆପଣଙ୍କର ଆଖି ସମସ୍ଯ଼ା ଥାଇପାରେ କି ନାହିଁ ତାହା ଚିହ୍ନଟ କରନ୍ତୁ।';
 
   @override
-  String get triageTestCardBody3 => 'Know when to visit your doctor';
+  String get triageTestCardBody3 => 'ଜାଣନ୍ତୁ କେତେବେଳେ ଡାକ୍ତରଙ୍କ ପାଖକୁ ଯିବାକୁ ହେବ।';
 
   @override
-  String get triageTestCardButton => 'Start Free Eye Test';
+  String get triageTestCardButton => 'ମୁକ୍ତ ଚକ୍ଷୁ ପରୀକ୍ଷା ଆରମ୍ଭ କରନ୍ତୁ';
 
   @override
-  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+  String get myConnectionListAddMembersDescription => 'ଆପଣଙ୍କ ପରିବାର ଏବଂ ବନ୍ଧୁମାନଙ୍କୁ ଯୋଡ଼ିବାକୁ \'ସଦସ୍ଯ଼ମାନଙ୍କୁ ଯୋଡ଼ନ୍ତୁ "ବଟନ୍କୁ ଟିପନ୍ତୁ।';
 
   @override
-  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+  String get showTriageHowToProceedBottomSheetHeader => 'ଆପଣ କିପରି ଆଗକୁ ବଢ଼ିବାକୁ ଚାହୁଁଛନ୍ତି?';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+  String get showTriageHowToProceedBottomSheetBody1 => 'ମୋର ଏକ ସମସ୍ଯ଼ା ରହିଛି ଏବଂ ମୁଁ ଏହାକୁ ବୈଧ କରିବାକୁ ଚାହୁଁଛି।';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+  String get showTriageHowToProceedBottomSheetBody2 => 'ମୋର କୌଣସି ସମସ୍ଯ଼ା ଅଛି କି ନାହିଁ ମୁଁ ନିଶ୍ଚିତ ନୁହେଁ।';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+  String get showTriageHowToProceedBottomSheetBody3 => 'ମୋର କୌଣସି ଆଖି ସମସ୍ଯ଼ା ନାହିଁ-କେବଳ ଯାଞ୍ଚ କରିବାକୁ ଚାହୁଁଛି।';
 
   @override
-  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+  String get appDrawerToastMessageText => 'କ୍ଷମା କରିବେ, ଆମେ ମୋବାଇଲ୍ ଆପରେ ଏକ ଲଗଆଉଟ୍ ତ୍ରୁଟିର ସମ୍ମୁଖୀନ ହୋଇଛୁ।';
 
   @override
   String get myConnectionListAddMembers => 'ସଦସ୍ଯ଼ ଯୋଗ କରନ୍ତୁ';

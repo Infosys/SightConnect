@@ -1,9 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/patient_response_model.dart';
@@ -11,30 +6,34 @@ import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PatientFamilyDetails extends HookConsumerWidget {
+class PatientFamilyDetails extends ConsumerWidget {
   const PatientFamilyDetails({
     super.key,
     required this.relations,
     required this.patient,
+    required this.id,
+    required this.onPatientSelect,
   });
   final List<RelatedPartyModel> relations;
   final PatientResponseModel patient;
 
+  final int? id;
+  final Function(int?) onPatientSelect;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    final model =
-        ref.watch(patientProfileProvider(patient.profile?.patient?.patientId));
-    final model2 = ref.watch(patientAssessmentAndTestProvider);
-    final isActive =
-        model.selectPatientId == patient.profile?.patient?.patientId;
+    final model = ref.watch(patientAssessmentAndTestProvider);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,21 +112,20 @@ class PatientFamilyDetails extends HookConsumerWidget {
           customBorder: const CircleBorder(),
           onTap: () {
             final id = patient.profile?.patient?.patientId;
-
             if (id != null) {
-              model2.setPatient(
+              model.setPatient(
                 TriageReportUserEntity(
                   id: id,
                   image: patient.profile?.patient?.profilePhoto ?? "",
                   name: patient.profile?.patient?.name ?? "",
                 ),
               );
-              model.setPatientId(id);
             }
+            onPatientSelect.call(id);
           },
           child: _FamilyCard(
+            isActive: id == patient.profile?.patient?.patientId,
             name: patient.profile?.patient?.name ?? "",
-            isActive: isActive,
             imageUrl: patient.profile?.patient?.profilePhoto,
           ),
         ),
@@ -138,26 +136,24 @@ class PatientFamilyDetails extends HookConsumerWidget {
               children: [
                 ...relations.map(
                   (data) {
-                    final isRelativeActive =
-                        model.selectPatientId == data.patientId;
                     return InkWell(
                       customBorder: const CircleBorder(),
                       onTap: () {
-                        model2.setPatient(
-                          TriageReportUserEntity(
-                            // id: id,
-                            // image: patient.profile?.patient?.profilePhoto ?? "",
-                            // name: patient.profile?.patient?.name ?? "",
-                            id: data.patientId ?? 0,
-                            name: data.name ?? "",
-                            image: data.profilePicture ?? "",
-                          ),
-                        );
-                        model.setPatientId(data.patientId!);
+                        final id = data.patientId;
+                        if (id != null) {
+                          model.setPatient(
+                            TriageReportUserEntity(
+                              id: id,
+                              image: data.profilePicture ?? "",
+                              name: data.name ?? "",
+                            ),
+                          );
+                        }
+                        onPatientSelect.call(id);
                       },
                       child: _FamilyCard(
+                        isActive: id == data.patientId,
                         name: data.name ?? "",
-                        isActive: isRelativeActive,
                         imageUrl: data.profilePicture,
                       ),
                     );
@@ -180,7 +176,7 @@ class _FamilyCard extends StatelessWidget {
   const _FamilyCard({
     Key? key,
     required this.name,
-    required this.isActive,
+    this.isActive = false,
     this.imageUrl,
   }) : super(key: key);
 

@@ -35,6 +35,11 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ, ದಯವಿಟ್ಟು ${tollFreeNumber} ಗೆ ಕರೆ ಮಾಡಿ.';
+  }
+
+  @override
   String get questionnaireTitle => 'ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನ ಪ್ರಶ್ನೆಗಳು';
 
   @override
@@ -191,19 +196,19 @@ class AppLocalizationsKn extends AppLocalizations {
   String get homeCarousal1Title => '40 ವರ್ಷ ಮತ್ತು ಮೇಲ್ಪಟ್ಟ ವಯಸ್ಕರಲ್ಲಿ ಕಣ್ಣಿನ ಪೊರೆ ಹರಡುವಿಕೆ ಮತ್ತು ಅದರ ಸಂಬಂಧಿತ ಅಂಶಗಳು';
 
   @override
-  String get homeCarousal1Description => '\r\r\nಕಣ್ಣಿನ ಪೊರೆ ಮತ್ತು ಸಂಬಂಧಿತ ಅಂಶಗಳ ಹರಡುವಿಕೆಯ ಮೇಲೆ ಮಾದರಿ ವಿಧಾನದ ಕ್ರಮಬಧ್ಧವಾದ ಪ್ರದರ್ಶನ​';
+  String get homeCarousal1Description => '\r\n\r\nಕಣ್ಣಿನ ಪೊರೆ ಮತ್ತು ಸಂಬಂಧಿತ ಅಂಶಗಳ ಹರಡುವಿಕೆಯ ಮೇಲೆ ಮಾದರಿ ವಿಧಾನದ ಕ್ರಮಬಧ್ಧವಾದ ಪ್ರದರ್ಶನ​';
 
   @override
   String get homeCarousal2Title => 'ಗಮನಿಸಬೇಕಾದ​ 7 ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳು!';
 
   @override
-  String get homeCarousal2Description => '\r\r\nಪರೀಕ್ಷಿಸಲು 7 ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳು:\r\r\n \r\r\n• ಕಣ್ಣಿನ ಕೆಂಪು\r\r\n• ಕಣ್ಣುಗಳಲ್ಲಿ ನೀರು ಬರುವುದು\r\r\n• ಕಣ್ಣುಗಳ ಮೇಲೆ ಬಿಳಿ ಕಲೆಗಳು';
+  String get homeCarousal2Description => '\r\n\r\nಪರೀಕ್ಷಿಸಲು 7 ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳು:\r\n\r\n \r\n\r\n• ಕಣ್ಣಿನ ಕೆಂಪು\r\n\r\n• ಕಣ್ಣುಗಳಲ್ಲಿ ನೀರು ಬರುವುದು\r\n\r\n• ಕಣ್ಣುಗಳ ಮೇಲೆ ಬಿಳಿ ಕಲೆಗಳು';
 
   @override
   String get homeCarousal3Title => 'ನೀವು ನೋಡದ ಅನೇಕ ಕಣ್ಣಿನ ತೊಂದರೆಗಳು ಇವೆ';
 
   @override
-  String get homeCarousal3Description => 'ಆದರೆ ದೃಷ್ಟಿ ಆರೈಕೆ ತಜ್ಞರು ಮಾಡಬಹುದು.\r\r\nಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳನ್ನು ಗುರುತಿಸಿ ಮತ್ತು ತಪ್ಪಿಸಲು ಸಮಯಕ್ಕೆ ಚಿಕಿತ್ಸೆ ನೀಡಲಾಗುತ್ತದೆ';
+  String get homeCarousal3Description => 'ಆದರೆ ದೃಷ್ಟಿ ಆರೈಕೆ ತಜ್ಞರು ಮಾಡಬಹುದು.\r\n\r\nಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳನ್ನು ಗುರುತಿಸಿ ಮತ್ತು ತಪ್ಪಿಸಲು ಸಮಯಕ್ಕೆ ಚಿಕಿತ್ಸೆ ನೀಡಲಾಗುತ್ತದೆ';
 
   @override
   String get myConnectionsTitle => 'ನನ್ನ ಸದಸ್ಯರು';
@@ -269,7 +274,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get appDrawerSignOut => 'ಲಾಗ್ ಔಟ್';
 
   @override
-  String get aboutUsDescription => 'ಸೈಟ್‌ಕನೆಕ್ಟ್ ಒಂದು ಬಳಕೆದಾರ ಸ್ನೇಹಿ ಕಣ್ಣಿನ ಆರೈಕೆ ಅಪ್ಲಿಕೇಶನ್ ಆಗಿದ್ದು ಅದು ದೂರವಾಣಿ ಕರೆಯ ಮೂಲಕ ಸ್ವಯಂ ಮೌಲ್ಯಮಾಪನ ಮತ್ತು ಸಮಾಲೋಚನೆಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ.\r\r\n\r\r\nನಮ್ಮ ಮಿಷನ್‌ನ ಹೃದಯಭಾಗವು ಕಣ್ಣಿನ ಆರೈಕೆಯನ್ನು ಎಲ್ಲರಿಗೂ ಪ್ರವೇಶಿಸುವಂತೆ ಮಾಡುವ ಬದ್ಧತೆಯಾಗಿದೆ. ಅವರ ವಯಸ್ಸು, ತಾಂತ್ರಿಕ ಹಿನ್ನೆಲೆ ಮತ್ತು ಸಾಮಾಜಿಕ ಅಥವಾ ಆರ್ಥಿಕ ಹಿನ್ನೆಲೆಯನ್ನು ಲೆಕ್ಕಿಸದೆಯೇ ಎಲ್ಲಾ ಹಂತದ ಜೀವನದ ಬಳಕೆದಾರರಿಂದ ಒಳಗೊಳ್ಳಲು ಮತ್ತು ಪ್ರವೇಶಿಸಲು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ. ಅಪ್ಲಿಕೇಶನ್ ಮತ್ತು ಅದರ ವಿಷಯವನ್ನು ಇಂಗ್ಲಿಷ್ ಮತ್ತು ಇತರ ಸ್ಥಳೀಯ ಭಾಷೆಗಳಲ್ಲಿ ಲಭ್ಯವಾಗುವಂತೆ ಮಾಡಲಾಗಿದೆ. ಇದು ಬಳಕೆದಾರರಿಗೆ ತಮ್ಮ ಕಣ್ಣುಗಳನ್ನು ಸ್ವಯಂ-ಮೌಲ್ಯಮಾಪನ ಮಾಡಲು ಮತ್ತು ಸಕಾಲಿಕ ಚಿಕಿತ್ಸೆಯ ಸಲಹೆಯನ್ನು ಪಡೆಯಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ನಮ್ಮ ಬಳಕೆದಾರರಿಗೆ ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಕಣ್ಣಿನ ಆರೈಕೆ ಪರಿಹಾರಗಳನ್ನು ಒದಗಿಸಲು ಅಪ್ಲಿಕೇಶನ್ ಇತ್ತೀಚಿನ ತಂತ್ರಜ್ಞಾನಗಳು ಮತ್ತು ಸಾಧನಗಳನ್ನು ಬಳಸುತ್ತದೆ. ಇದು ಅವರ ಜೀವನವನ್ನು ಸುಲಭಗೊಳಿಸಲು ವಿವಿಧ ವೈಶಿಷ್ಟ್ಯಗಳೊಂದಿಗೆ ಬರುತ್ತದೆ.';
+  String get aboutUsDescription => 'ಸೈಟ್‌ಕನೆಕ್ಟ್ ಒಂದು ಬಳಕೆದಾರ ಸ್ನೇಹಿ ಕಣ್ಣಿನ ಆರೈಕೆ ಅಪ್ಲಿಕೇಶನ್ ಆಗಿದ್ದು ಅದು ದೂರವಾಣಿ ಕರೆಯ ಮೂಲಕ ಸ್ವಯಂ ಮೌಲ್ಯಮಾಪನ ಮತ್ತು ಸಮಾಲೋಚನೆಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ.\r\n\r\n\r\n\r\nನಮ್ಮ ಮಿಷನ್‌ನ ಹೃದಯಭಾಗವು ಕಣ್ಣಿನ ಆರೈಕೆಯನ್ನು ಎಲ್ಲರಿಗೂ ಪ್ರವೇಶಿಸುವಂತೆ ಮಾಡುವ ಬದ್ಧತೆಯಾಗಿದೆ. ಅವರ ವಯಸ್ಸು, ತಾಂತ್ರಿಕ ಹಿನ್ನೆಲೆ ಮತ್ತು ಸಾಮಾಜಿಕ ಅಥವಾ ಆರ್ಥಿಕ ಹಿನ್ನೆಲೆಯನ್ನು ಲೆಕ್ಕಿಸದೆಯೇ ಎಲ್ಲಾ ಹಂತದ ಜೀವನದ ಬಳಕೆದಾರರಿಂದ ಒಳಗೊಳ್ಳಲು ಮತ್ತು ಪ್ರವೇಶಿಸಲು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ. ಅಪ್ಲಿಕೇಶನ್ ಮತ್ತು ಅದರ ವಿಷಯವನ್ನು ಇಂಗ್ಲಿಷ್ ಮತ್ತು ಇತರ ಸ್ಥಳೀಯ ಭಾಷೆಗಳಲ್ಲಿ ಲಭ್ಯವಾಗುವಂತೆ ಮಾಡಲಾಗಿದೆ. ಇದು ಬಳಕೆದಾರರಿಗೆ ತಮ್ಮ ಕಣ್ಣುಗಳನ್ನು ಸ್ವಯಂ-ಮೌಲ್ಯಮಾಪನ ಮಾಡಲು ಮತ್ತು ಸಕಾಲಿಕ ಚಿಕಿತ್ಸೆಯ ಸಲಹೆಯನ್ನು ಪಡೆಯಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ನಮ್ಮ ಬಳಕೆದಾರರಿಗೆ ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಕಣ್ಣಿನ ಆರೈಕೆ ಪರಿಹಾರಗಳನ್ನು ಒದಗಿಸಲು ಅಪ್ಲಿಕೇಶನ್ ಇತ್ತೀಚಿನ ತಂತ್ರಜ್ಞಾನಗಳು ಮತ್ತು ಸಾಧನಗಳನ್ನು ಬಳಸುತ್ತದೆ. ಇದು ಅವರ ಜೀವನವನ್ನು ಸುಲಭಗೊಳಿಸಲು ವಿವಿಧ ವೈಶಿಷ್ಟ್ಯಗಳೊಂದಿಗೆ ಬರುತ್ತದೆ.';
 
   @override
   String get aboutUsFeaturesTitle => 'ವೈಶಿಷ್ಟ್ಯಗಳು';
@@ -350,7 +355,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get eyeAssessmentTitle => 'ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನ';
 
   @override
-  String get eyeAssessmentSubtitle => '\r\r\nನಿಮ್ಮ, ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳನ್ನು ಕೆಲವು ಹಂತಗಳಲ್ಲಿ ನಿರ್ಣಯಿಸಿ. ದೃಷ್ಟಿ ಪರೀಕ್ಷೆಗಳ ನಂತರ ನಿಮ್ಮ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ರೋಗಲಕ್ಷಣಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ನಿಮಗೆ ಪ್ರಶ್ನೆಗಳ ಗುಂಪನ್ನು ಕೇಳಲಾಗುತ್ತದೆ.';
+  String get eyeAssessmentSubtitle => '\r\n\r\nನಿಮ್ಮ, ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಮತ್ತು ಕುಟುಂಬದ ಸದಸ್ಯರ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳನ್ನು ಕೆಲವು ಹಂತಗಳಲ್ಲಿ ನಿರ್ಣಯಿಸಿ. ದೃಷ್ಟಿ ಪರೀಕ್ಷೆಗಳ ನಂತರ ನಿಮ್ಮ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ರೋಗಲಕ್ಷಣಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ನಿಮಗೆ ಪ್ರಶ್ನೆಗಳ ಗುಂಪನ್ನು ಕೇಳಲಾಗುತ್ತದೆ.';
 
   @override
   String get eyeAssessmentGetMemberLabel => 'ಸದಸ್ಯ ಬದಲಿಸು';
@@ -359,7 +364,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get eyeAssessmentProceedButton => 'ಮುಂದುವರಿಸು';
 
   @override
-  String get eyeAssessmentBrightnessLabel => '\r\r\nಹೊಳಪನ್ನು 80% ಗೆ ಹೊಂದಿಸಲಾಗಿದೆ';
+  String get eyeAssessmentBrightnessLabel => '\r\n\r\nಹೊಳಪನ್ನು 80% ಗೆ ಹೊಂದಿಸಲಾಗಿದೆ';
 
   @override
   String get eyeAssessmentBrightnessError => 'ದಯವಿಟ್ಟು ಹೊಳಪನ್ನು ಹಸ್ತಚಾಲಿತವಾಗಿ 80% ಗೆ ಹೊಂದಿಸಿ';
@@ -383,7 +388,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get visualAcuityTestInstructionOne => 'ಉತ್ತಮ ಬೆಳಕಿನ ಸ್ಥಳದಲ್ಲಿ ಆರಾಮವಾಗಿ ಕುಳಿತುಕೊಳ್ಳಿ. ನೀವು ಹೊಳಪಿನಲ್ಲಿ ಹಠಾತ್ ಬದಲಾವಣೆಯನ್ನು ಗಮನಿಸಬಹುದು, ಚಿಂತಿಸಬೇಡಿ ಅತ್ಯುತ್ತಮ ಫಲಿತಾಂಶವನ್ನು ಒದಗಿಸಲು ಸ್ಕ್ರೀನ್ ನ್ನು ಸ್ವಯಂ-ಪ್ರಕಾಶಮಾನಕ್ಕೆ ಹೊಂದಿಸಲಾಗಿದೆ';
 
   @override
-  String get visualAcuityTestInstructionTwo => '\r\r\nನೀವು ಸಾಧನವನ್ನು ಕಣ್ಣಿನ ಮಟ್ಟದಲ್ಲಿ ಹಿಡಿದಿರುವಿರಿ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ. ನೀವು ಕನ್ನಡಕ ಅಥವಾ ಕಾಂಟ್ಯಾಕ್ಟ್ ಲೆನ್ಸ್‌ಗಳನ್ನು ಧರಿಸಿದರೆ, ಅವುಗಳನ್ನು ಇರಿಸಿಕೊಳ್ಳಿ';
+  String get visualAcuityTestInstructionTwo => '\r\n\r\nನೀವು ಸಾಧನವನ್ನು ಕಣ್ಣಿನ ಮಟ್ಟದಲ್ಲಿ ಹಿಡಿದಿರುವಿರಿ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ. ನೀವು ಕನ್ನಡಕ ಅಥವಾ ಕಾಂಟ್ಯಾಕ್ಟ್ ಲೆನ್ಸ್‌ಗಳನ್ನು ಧರಿಸಿದರೆ, ಅವುಗಳನ್ನು ಇರಿಸಿಕೊಳ್ಳಿ';
 
   @override
   String get visualAcuityTestInstructionThree => 'ನೀವು ಪರೀಕ್ಷಿಸುವ ಸ್ಕ್ರೀನ್ ನಿಂದ 40 ಸೆಂ.ಮೀ. ದೂರದಲ್ಲಿ ಇರಬೇಕು. ಪರೀಕ್ಷಾ ಸ್ಕ್ರೀನ್ನಲ್ಲಿ ದೂರವನ್ನು ತೋರಿಸಲಾಗುತ್ತದೆ.';
@@ -1850,64 +1855,64 @@ class AppLocalizationsKn extends AppLocalizations {
   String get maximumTextSizeReached => 'ಗರಿಷ್ಠ ಪಠ್ಯ ಗಾತ್ರ ತಲುಪಿದೆ';
 
   @override
-  String get chatClearChat => 'Clear Chat';
+  String get chatClearChat => 'ಚಾಟ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಿ';
 
   @override
-  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+  String get chatEyeAssessmentRecommended => 'ನಿಮಗಾಗಿ ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ.';
 
   @override
-  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'ನೀವು ಟ್ರೈಜ್ ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ಬಯಸುತ್ತೀರಾ?';
 
   @override
-  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+  String get chatChatbotNotAvailable => 'ಚಾಟ್ಬಾಟ್ ಈ ಸಮಯದಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
-  String get chatTypeHere => 'Type here...';
+  String get chatTypeHere => 'ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ...';
 
   @override
-  String get switchProfile => 'Switch Profile';
+  String get switchProfile => 'ಪ್ರೊಫೈಲ್ ಅನ್ನು ಬದಲಾಯಿಸಿ';
 
   @override
-  String get switchRole => 'Switch Role';
+  String get switchRole => 'ಪಾತ್ರವನ್ನು ಬದಲಾಯಿಸಿ';
 
   @override
-  String get switchTenant => 'Switch Tenant';
+  String get switchTenant => 'ಹಿಡುವಳಿದಾರನನ್ನು ಬದಲಾಯಿಸಿ';
 
   @override
-  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+  String get patientHeaderWelcomeText => 'ಸೈಟ್ಕನೆಕ್ಟ್ಗೆ ಸ್ವಾಗತ! ನಿಮ್ಮ ದೃಷ್ಟಿಯನ್ನು ನೋಡಿಕೊಳ್ಳುವುದು ಮುಖ್ಯವಾಗಿದೆ, ಮತ್ತು ನಾವು ನಿಮಗಾಗಿ ಪ್ರತಿ ಹಂತದಲ್ಲೂ ಇದ್ದೇವೆ.';
 
   @override
-  String get triageTestCardHeader => 'Your eye test is free…';
+  String get triageTestCardHeader => 'ನಿಮ್ಮ ಕಣ್ಣಿನ ಪರೀಕ್ಷೆಯು ಉಚಿತವಾಗಿದೆ...';
 
   @override
-  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+  String get triageTestCardBody1 => 'ನಿಮ್ಮ ಕಣ್ಣಿನ ರೋಗಲಕ್ಷಣಗಳನ್ನು ತ್ವರಿತವಾಗಿ ವಿಶ್ಲೇಷಿಸಿ';
 
   @override
-  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+  String get triageTestCardBody2 => 'ನಿಮಗೆ ಕಣ್ಣಿನ ಸಮಸ್ಯೆ ಇದೆಯೇ ಎಂದು ಗುರುತಿಸಿ.';
 
   @override
-  String get triageTestCardBody3 => 'Know when to visit your doctor';
+  String get triageTestCardBody3 => 'ನಿಮ್ಮ ವೈದ್ಯರನ್ನು ಯಾವಾಗ ಭೇಟಿ ಮಾಡಬೇಕು ಎಂಬುದನ್ನು ತಿಳಿದುಕೊಳ್ಳಿ';
 
   @override
-  String get triageTestCardButton => 'Start Free Eye Test';
+  String get triageTestCardButton => 'ಉಚಿತ ಕಣ್ಣಿನ ಪರೀಕ್ಷೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ';
 
   @override
-  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+  String get myConnectionListAddMembersDescription => 'ನಿಮ್ಮ ಕುಟುಂಬ ಮತ್ತು ಸ್ನೇಹಿತರನ್ನು ಸೇರಿಸಲು ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ ಗುಂಡಿಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ.';
 
   @override
-  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+  String get showTriageHowToProceedBottomSheetHeader => 'ನೀವು ಹೇಗೆ ಮುಂದುವರಿಯಲು ಬಯಸುತ್ತೀರಿ?';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+  String get showTriageHowToProceedBottomSheetBody1 => 'ನನಗೆ ಒಂದು ಸಮಸ್ಯೆ ಇದೆ ಮತ್ತು ಅದನ್ನು ದೃಢೀಕರಿಸಲು ನಾನು ಬಯಸುತ್ತೇನೆ.';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+  String get showTriageHowToProceedBottomSheetBody2 => 'ನನಗೆ ಸಮಸ್ಯೆ ಇದೆಯೇ ಎಂದು ನನಗೆ ಖಚಿತವಿಲ್ಲ';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+  String get showTriageHowToProceedBottomSheetBody3 => 'ನನಗೆ ಯಾವುದೇ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳಿಲ್ಲ-ಕೇವಲ ಪರಿಶೀಲಿಸಲು ಬಯಸುತ್ತೇನೆ.';
 
   @override
-  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+  String get appDrawerToastMessageText => 'ಕ್ಷಮಿಸಿ, ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ನಲ್ಲಿ ನಾವು ಲಾಗ್ ಔಟ್ ದೋಷವನ್ನು ಎದುರಿಸಿದೆವು.';
 
   @override
   String get myConnectionListAddMembers => 'ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ';

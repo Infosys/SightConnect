@@ -35,6 +35,11 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'জৰুৰীকালীন অৱস্থাত অনুগ্ৰহ কৰি ${tollFreeNumber} নম্বৰত ফোন কৰক।';
+  }
+
+  @override
   String get questionnaireTitle => 'চকুৰ মূল্যায়নৰ প্ৰশ্নসমূহ';
 
   @override
@@ -197,13 +202,13 @@ class AppLocalizationsAs extends AppLocalizations {
   String get homeCarousal2Title => 'চকুৰ 7টা সমস্যা হেৰুৱাব নোৱাৰিব!';
 
   @override
-  String get homeCarousal2Description => '\r\r\nচকুৰ 7টা সমস্যাৰ বাবে পৰীক্ষা কৰা হ \'বঃ \r\r\n \r\r\n• চকু ৰঙা হোৱা, \r\r\n• চকুৰ পৰা পানী ওলোৱা, \r\r\n• চকুত বগা দাগ পৰীক্ষা কৰা হ\' ব।';
+  String get homeCarousal2Description => '\r\n\r\nচকুৰ 7টা সমস্যাৰ বাবে পৰীক্ষা কৰা হ \'বঃ\r\n\r\n \r\n\r\n• চকু ৰঙা হোৱা,\r\n\r\n• চকুৰ পৰা পানী ওলোৱা,\r\n\r\n• চকুত বগা দাগ পৰীক্ষা কৰা হ\' ব।';
 
   @override
   String get homeCarousal3Title => 'চকুৰ সমস্যা। এনে বহুতো আছে যিবোৰ আপুনি চাব নোৱাৰে।';
 
   @override
-  String get homeCarousal3Description => 'কিন্তু এজন দৃষ্টিশক্তিৰ যত্ন লোৱা বিশেষজ্ঞই কৰিব পাৰে। \r\r\nপৰৱৰ্তী সময়ত জটিলতাৰ পৰা হাত \r\r\nসাৰিবলৈ সময়মতে চকুৰ সমস্যা চিনাক্ত \r\r\nআৰু চিকিৎসা কৰাব পাৰে।';
+  String get homeCarousal3Description => 'কিন্তু এজন দৃষ্টিশক্তিৰ যত্ন লোৱা বিশেষজ্ঞই কৰিব পাৰে।\r\n\r\nপৰৱৰ্তী সময়ত জটিলতাৰ পৰা হাত\r\n\r\nসাৰিবলৈ সময়মতে চকুৰ সমস্যা চিনাক্ত\r\n\r\nআৰু চিকিৎসা কৰাব পাৰে।';
 
   @override
   String get myConnectionsTitle => 'মোৰ সদস্যসকল';
@@ -269,7 +274,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get appDrawerSignOut => 'ছাইন আউট কৰক';
 
   @override
-  String get aboutUsDescription => 'Sightconnect হৈছে এক ব্যৱহাৰকাৰী-অনুকূল চকুৰ যত্নৰ এপ যিয়ে কলৰ জৰিয়তে আত্ম-মূল্যায়ন আৰু পৰামৰ্শ প্ৰদান কৰাত সহায় কৰে। \r\r\n\r\r\nআমাৰ লক্ষ্যৰ কেন্দ্ৰবিন্দু হৈছে চকুৰ যত্ন সকলোৰে বাবে সুলভ কৰাৰ প্ৰতিশ্ৰুতি। এই এপটো জীৱনৰ সকলো ক্ষেত্ৰৰ ব্যৱহাৰকাৰীৰ বাবে অন্তৰ্ভুক্তিমূলক আৰু সুগম হোৱাকৈ ডিজাইন কৰা হৈছে, তেওঁলোকৰ বয়স, কাৰিকৰী পটভূমি, আৰু সামাজিক বা অৰ্থনৈতিক পটভূমি নিৰ্বিশেষে। এপটো আৰু ইয়াৰ সমলবোৰ ইংৰাজী আৰু অন্যান্য স্থানীয় ভাষাত উপলব্ধ কৰা হৈছে। ই ব্যৱহাৰকাৰীসকলক নিজৰ চকুৰ মূল্যায়ন কৰাত আৰু সময়মতে চিকিৎসাৰ পৰামৰ্শ লাভ কৰাত সহায় কৰে। এপটোৱে আমাৰ ব্যৱহাৰকাৰীসকলক ব্যক্তিগত চকুৰ যত্নৰ সমাধান প্ৰদান কৰিবলৈ শেহতীয়া প্ৰযুক্তি আৰু সঁজুলি ব্যৱহাৰ কৰে। তেওঁলোকৰ জীৱনটো সহজ কৰি তুলিবলৈ ইয়াত বিভিন্ন ধৰণৰ বৈশিষ্ট্য আছে।';
+  String get aboutUsDescription => 'Sightconnect হৈছে এক ব্যৱহাৰকাৰী-অনুকূল চকুৰ যত্নৰ এপ যিয়ে কলৰ জৰিয়তে আত্ম-মূল্যায়ন আৰু পৰামৰ্শ প্ৰদান কৰাত সহায় কৰে।\r\n\r\n\r\n\r\nআমাৰ লক্ষ্যৰ কেন্দ্ৰবিন্দু হৈছে চকুৰ যত্ন সকলোৰে বাবে সুলভ কৰাৰ প্ৰতিশ্ৰুতি। এই এপটো জীৱনৰ সকলো ক্ষেত্ৰৰ ব্যৱহাৰকাৰীৰ বাবে অন্তৰ্ভুক্তিমূলক আৰু সুগম হোৱাকৈ ডিজাইন কৰা হৈছে, তেওঁলোকৰ বয়স, কাৰিকৰী পটভূমি, আৰু সামাজিক বা অৰ্থনৈতিক পটভূমি নিৰ্বিশেষে। এপটো আৰু ইয়াৰ সমলবোৰ ইংৰাজী আৰু অন্যান্য স্থানীয় ভাষাত উপলব্ধ কৰা হৈছে। ই ব্যৱহাৰকাৰীসকলক নিজৰ চকুৰ মূল্যায়ন কৰাত আৰু সময়মতে চিকিৎসাৰ পৰামৰ্শ লাভ কৰাত সহায় কৰে। এপটোৱে আমাৰ ব্যৱহাৰকাৰীসকলক ব্যক্তিগত চকুৰ যত্নৰ সমাধান প্ৰদান কৰিবলৈ শেহতীয়া প্ৰযুক্তি আৰু সঁজুলি ব্যৱহাৰ কৰে। তেওঁলোকৰ জীৱনটো সহজ কৰি তুলিবলৈ ইয়াত বিভিন্ন ধৰণৰ বৈশিষ্ট্য আছে।';
 
   @override
   String get aboutUsFeaturesTitle => 'বৈশিষ্ট্যসমূহ';
@@ -557,13 +562,13 @@ class AppLocalizationsAs extends AppLocalizations {
   String get swipeGestureCardText => 'চিহ্নৰ দিশত চুইপ কৰক';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'মূল্যায়ন\r\r\nপ্ৰশ্ন';
+  String get assessmentResultCardAssessmentQuestions => 'মূল্যায়ন\r\n\r\nপ্ৰশ্ন';
 
   @override
-  String get assessmentResultCardAcuityTest => 'তীক্ষ্ণতা\r\r\nপৰীক্ষা';
+  String get assessmentResultCardAcuityTest => 'তীক্ষ্ণতা\r\n\r\nপৰীক্ষা';
 
   @override
-  String get assessmentResultCardEyeScan => 'চকু\r\r\nস্কেন কৰক';
+  String get assessmentResultCardEyeScan => 'চকু\r\n\r\nস্কেন কৰক';
 
   @override
   String get viewReportButton => 'প্ৰতিবেদন চাওক';
@@ -1850,64 +1855,64 @@ class AppLocalizationsAs extends AppLocalizations {
   String get maximumTextSizeReached => 'সৰ্বাধিক পাঠ আকাৰ পৌঁছাইছে';
 
   @override
-  String get chatClearChat => 'Clear Chat';
+  String get chatClearChat => 'চ্যাট পৰিষ্কাৰ কৰক';
 
   @override
-  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+  String get chatEyeAssessmentRecommended => 'আপোনাৰ বাবে চকুৰ মূল্যায়নৰ পৰামৰ্শ দিয়া হয়।';
 
   @override
-  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'আপুনি ট্ৰাইজেজ চকুৰ মূল্যায়ন কৰিব বিচাৰে নেকি?';
 
   @override
-  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+  String get chatChatbotNotAvailable => 'এই মুহূৰ্তত চেটবট উপলব্ধ নহয়। অনুগ্ৰহ কৰি পিছত পুনৰ চেষ্টা কৰক।';
 
   @override
-  String get chatTypeHere => 'Type here...';
+  String get chatTypeHere => 'ইয়াত টাইপ কৰক...';
 
   @override
-  String get switchProfile => 'Switch Profile';
+  String get switchProfile => 'প্ৰফাইল সলনি কৰক';
 
   @override
-  String get switchRole => 'Switch Role';
+  String get switchRole => 'ভূমিকা সলনি কৰক';
 
   @override
-  String get switchTenant => 'Switch Tenant';
+  String get switchTenant => 'ভাড়াটিয়া সলনি কৰক';
 
   @override
-  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+  String get patientHeaderWelcomeText => 'ছাইটকনেক্টলৈ স্বাগতম! আপোনাৰ দৃষ্টিশক্তিৰ যত্ন লোৱাটো গুৰুত্বপূৰ্ণ, আৰু আমি আপোনাৰ বাবে প্ৰতিটো পদক্ষেপেৰে ইয়াত আছো।';
 
   @override
-  String get triageTestCardHeader => 'Your eye test is free…';
+  String get triageTestCardHeader => 'আপোনাৰ চকুৰ পৰীক্ষা বিনামূলীয়া...';
 
   @override
-  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+  String get triageTestCardBody1 => 'আপোনাৰ চকুৰ লক্ষণবোৰ দ্ৰুতভাৱে বিশ্লেষণ কৰক';
 
   @override
-  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+  String get triageTestCardBody2 => 'আপোনাৰ চকুৰ সমস্যা হ "ব পাৰে নেকি চিনাক্ত কৰক';
 
   @override
-  String get triageTestCardBody3 => 'Know when to visit your doctor';
+  String get triageTestCardBody3 => 'আপোনাৰ চিকিৎসকৰ ওচৰলৈ কেতিয়া যাব লাগে জানক';
 
   @override
-  String get triageTestCardButton => 'Start Free Eye Test';
+  String get triageTestCardButton => 'মুক্ত চকু পৰীক্ষা আৰম্ভ কৰক';
 
   @override
-  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+  String get myConnectionListAddMembersDescription => 'আপোনাৰ পৰিয়াল আৰু বন্ধুবৰ্গক যোগ কৰিবলৈ সদস্য যোগ কৰক বুটামত ক্লিক কৰক।';
 
   @override
-  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+  String get showTriageHowToProceedBottomSheetHeader => 'আপুনি কেনেকৈ আগবাঢ়িব বিচাৰে?';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+  String get showTriageHowToProceedBottomSheetBody1 => 'মোৰ এটা সমস্যা আছে আৰু মই ইয়াৰ বৈধকৰণ কৰিব বিচাৰো।';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+  String get showTriageHowToProceedBottomSheetBody2 => 'মোৰ কোনো সমস্যা আছে নে নাই মই নিশ্চিত নহয়।';
 
   @override
-  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+  String get showTriageHowToProceedBottomSheetBody3 => 'মোৰ চকুৰ কোনো সমস্যা নাই-কেৱল পৰীক্ষা কৰিব বিচাৰোঁ';
 
   @override
-  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+  String get appDrawerToastMessageText => 'ক্ষমা কৰিব, আমি মোবাইল এপত এটা লগআউট ত্ৰুটিৰ সন্মুখীন হৈছিলো।';
 
   @override
   String get myConnectionListAddMembers => 'সদস্য যোগ কৰক';
