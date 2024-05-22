@@ -4,27 +4,27 @@ class AdminFakeDataSource {
       {
         "title": "Requests",
         "total": "60",
-        "incoming": "72",
+        "ongoing": "72",
       },
       {
         "title": "Inventory",
         "total": "14",
-        "incoming": "8",
+        "ongoing": "8",
       },
       {
         "title": "Distribution",
         "total": "12",
-        "incoming": "15",
+        "ongoing": "15",
       },
       {
         "title": "Return Request",
         "total": "12",
-        "incoming": "15",
+        "ongoing": "15",
       },
       {
         "title": "Users",
         "total": "12",
-        "incoming": "15",
+        "ongoing": "15",
       },
     ];
   }

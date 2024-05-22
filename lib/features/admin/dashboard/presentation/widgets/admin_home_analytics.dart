@@ -1,8 +1,6 @@
 import 'package:eye_care_for_all/features/admin/data/admin_fake_data_source.dart';
-import 'package:eye_care_for_all/features/technician/dashboard/data/fake_data_source.dart';
 import 'package:eye_care_for_all/features/technician/dashboard/presentation/widgets/analytics_card.dart';
 import 'package:flutter/material.dart';
-
 
 class AdminHomeAnalytics extends StatelessWidget {
   const AdminHomeAnalytics({
@@ -24,9 +22,9 @@ class AdminHomeAnalytics extends StatelessWidget {
           if (orientation == Axis.vertical)
             ...AdminFakeDataSource.getAnalyticsData().map((e) {
               return AnalyticsCard(
-                title: e["title"]!,
-                total: e["total"]!,
-                ongoing: e["ongoing"]!,
+                title: e["title"] ?? "--",
+                total: e["total"] ?? "--",
+                ongoing: e["ongoing"] ?? "--",
               );
             }).toList(),
           if (orientation == Axis.horizontal)
@@ -36,9 +34,9 @@ class AdminHomeAnalytics extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16),
                     child: AnalyticsCard(
-                      title: e["title"]!,
-                      total: e["total"]!,
-                      ongoing: e["ongoing"]!,
+                      title: e["title"] ?? "--",
+                      total: e["total"] ?? "--",
+                      ongoing: e["ongoing"] ?? "--",
                     ),
                   ),
                 );
