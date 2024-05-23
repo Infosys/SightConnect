@@ -1,4 +1,5 @@
-import 'package:eye_care_for_all/features/admin/data/admin_fake_data_source.dart';
+
+import 'package:eye_care_for_all/features/admin/dashboard/data/admin_fake_data_source.dart';
 import 'package:eye_care_for_all/features/technician/dashboard/presentation/widgets/analytics_card.dart';
 import 'package:flutter/material.dart';
 
