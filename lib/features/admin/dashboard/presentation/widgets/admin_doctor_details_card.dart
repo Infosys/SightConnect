@@ -15,8 +15,8 @@ class AdminDoctorDetailsCard extends StatelessWidget {
           ? Column(
               children: [
                 _doctorInfo(),
-                const Column(
-                  children: [],
+                Column(
+                  children: _requestInfo(),
                 )
               ],
             )
