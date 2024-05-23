@@ -1,12 +1,13 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_page.dart';
 import 'package:flutter/material.dart';
 
 class AdminDashboardPages extends StatelessWidget {
   const AdminDashboardPages({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -16,7 +17,6 @@ class AdminDashboardPages extends StatelessWidget {
           AppImages.logo,
           height: 30,
         ),
-        
         actions: const [
           IconButton(
             icon: Icon(Icons.search),
@@ -29,14 +29,14 @@ class AdminDashboardPages extends StatelessWidget {
           IconButton(onPressed: null, icon: Icon(Icons.person))
         ],
       ),
-      body:  DefaultTabController(
+      body: DefaultTabController(
         length: 4,
         child: Container(
-            padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               const TabBar(
-                 physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 labelColor: AppColor.primary,
                 unselectedLabelColor: AppColor.grey,
                 indicatorColor: AppColor.primary,
@@ -50,7 +50,7 @@ class AdminDashboardPages extends StatelessWidget {
                   Tab(
                     text: 'Distribution',
                   ),
-                   Tab(
+                  Tab(
                     text: 'Return Request',
                   ),
                 ],
@@ -58,16 +58,10 @@ class AdminDashboardPages extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                const AdminRequestPage(),
-                      Container(
-           
-                    ),
-                      Container(
-           
-                    ),
-                      Container(
-           
-                    )
+                    const AdminRequestDetailPage(),
+                    const AdminRequestPage(),
+                    Container(),
+                    Container()
                   ],
                 ),
               ),
@@ -78,4 +72,3 @@ class AdminDashboardPages extends StatelessWidget {
     );
   }
 }
- 
