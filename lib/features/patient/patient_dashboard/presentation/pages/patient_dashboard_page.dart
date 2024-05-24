@@ -55,7 +55,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
     return ref.watch(getPatientProfileProvider).when(
           data: (data) {
             final address = data.profile?.patient?.address??[];
-            if ( address.isNotEmpty && (address.first.pincode??"").isNotEmpty) {
+            if ( address.isNotEmpty && (address.first.pincode??"").isEmpty) {
               return PincodeDialogPage(data: data);
             } else {
               return Scaffold(
