@@ -87,14 +87,16 @@ class _AppPaginatedTableState<T> extends State<AppPaginatedTable<T>> {
               .map(
                 (columnName) => DataColumn(
                   tooltip: columnName,
-                  label: Text(
-                    columnName,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: applyFiraSansFont(
-                      fontSize: 12,
-                      color: AppColor.grey,
+                  label: Flexible(
+                    child: Text(
+                      columnName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: applyFiraSansFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
+                      ),
                     ),
                   ),
                   onSort: widget.onSort,

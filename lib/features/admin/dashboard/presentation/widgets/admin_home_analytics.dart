@@ -1,9 +1,10 @@
-import 'package:eye_care_for_all/features/technician/dashboard/data/fake_data_source.dart';
-import 'package:flutter/material.dart';
-import 'analytics_card.dart';
 
-class TechnicianHomeAnalytics extends StatelessWidget {
-  const TechnicianHomeAnalytics({
+import 'package:eye_care_for_all/features/admin/dashboard/data/admin_fake_data_source.dart';
+import 'package:eye_care_for_all/features/technician/dashboard/presentation/widgets/analytics_card.dart';
+import 'package:flutter/material.dart';
+
+class AdminHomeAnalytics extends StatelessWidget {
+  const AdminHomeAnalytics({
     super.key,
     this.width = 300,
     this.orientation = Axis.vertical,
@@ -20,23 +21,23 @@ class TechnicianHomeAnalytics extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (orientation == Axis.vertical)
-            ...TechnicianFakeDataSource.getAnalyticsData().map((e) {
+            ...AdminFakeDataSource.getAnalyticsData().map((e) {
               return AnalyticsCard(
-                title: e["title"]!,
-                total: e["total"]!,
-                ongoing: e["ongoing"]!,
+                title: e["title"] ?? "--",
+                total: e["total"] ?? "--",
+                ongoing: e["ongoing"] ?? "--",
               );
             }).toList(),
           if (orientation == Axis.horizontal)
             Row(
-              children: TechnicianFakeDataSource.getAnalyticsData().map((e) {
+              children: AdminFakeDataSource.getAnalyticsData().map((e) {
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16),
                     child: AnalyticsCard(
-                      title: e["title"]!,
-                      total: e["total"]!,
-                      ongoing: e["ongoing"]!,
+                      title: e["title"] ?? "--",
+                      total: e["total"] ?? "--",
+                      ongoing: e["ongoing"] ?? "--",
                     ),
                   ),
                 );
