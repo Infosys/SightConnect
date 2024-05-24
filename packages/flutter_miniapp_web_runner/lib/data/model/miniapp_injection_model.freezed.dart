@@ -12,7 +12,7 @@ part of 'miniapp_injection_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MiniAppInjectionModel _$MiniAppInjectionModelFromJson(
     Map<String, dynamic> json) {
@@ -25,7 +25,11 @@ mixin _$MiniAppInjectionModel {
   String? get parentPatientId => throw _privateConstructorUsedError;
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
+  String? get pinCode => throw _privateConstructorUsedError;
   MiniAppInjectionModelRole? get role => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get additionalData =>
+      throw _privateConstructorUsedError;
+  MiniAppEnv get miniAppEnv => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +48,10 @@ abstract class $MiniAppInjectionModelCopyWith<$Res> {
       String? parentPatientId,
       String? mobileNumber,
       String? token,
-      MiniAppInjectionModelRole? role});
+      String? pinCode,
+      MiniAppInjectionModelRole? role,
+      Map<String, dynamic>? additionalData,
+      MiniAppEnv miniAppEnv});
 }
 
 /// @nodoc
@@ -65,7 +72,10 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
     Object? parentPatientId = freezed,
     Object? mobileNumber = freezed,
     Object? token = freezed,
+    Object? pinCode = freezed,
     Object? role = freezed,
+    Object? additionalData = freezed,
+    Object? miniAppEnv = null,
   }) {
     return _then(_value.copyWith(
       action: freezed == action
@@ -84,10 +94,22 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as MiniAppInjectionModelRole?,
+      additionalData: freezed == additionalData
+          ? _value.additionalData
+          : additionalData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      miniAppEnv: null == miniAppEnv
+          ? _value.miniAppEnv
+          : miniAppEnv // ignore: cast_nullable_to_non_nullable
+              as MiniAppEnv,
     ) as $Val);
   }
 }
@@ -106,7 +128,10 @@ abstract class _$$MiniAppInjectionModelImplCopyWith<$Res>
       String? parentPatientId,
       String? mobileNumber,
       String? token,
-      MiniAppInjectionModelRole? role});
+      String? pinCode,
+      MiniAppInjectionModelRole? role,
+      Map<String, dynamic>? additionalData,
+      MiniAppEnv miniAppEnv});
 }
 
 /// @nodoc
@@ -125,7 +150,10 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
     Object? parentPatientId = freezed,
     Object? mobileNumber = freezed,
     Object? token = freezed,
+    Object? pinCode = freezed,
     Object? role = freezed,
+    Object? additionalData = freezed,
+    Object? miniAppEnv = null,
   }) {
     return _then(_$MiniAppInjectionModelImpl(
       action: freezed == action
@@ -144,10 +172,22 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as MiniAppInjectionModelRole?,
+      additionalData: freezed == additionalData
+          ? _value._additionalData
+          : additionalData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      miniAppEnv: null == miniAppEnv
+          ? _value.miniAppEnv
+          : miniAppEnv // ignore: cast_nullable_to_non_nullable
+              as MiniAppEnv,
     ));
   }
 }
@@ -160,7 +200,11 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
       this.parentPatientId,
       this.mobileNumber,
       this.token,
-      this.role});
+      this.pinCode,
+      this.role,
+      final Map<String, dynamic>? additionalData,
+      required this.miniAppEnv})
+      : _additionalData = additionalData;
 
   factory _$MiniAppInjectionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$MiniAppInjectionModelImplFromJson(json);
@@ -174,11 +218,25 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
   @override
   final String? token;
   @override
+  final String? pinCode;
+  @override
   final MiniAppInjectionModelRole? role;
+  final Map<String, dynamic>? _additionalData;
+  @override
+  Map<String, dynamic>? get additionalData {
+    final value = _additionalData;
+    if (value == null) return null;
+    if (_additionalData is EqualUnmodifiableMapView) return _additionalData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
+  final MiniAppEnv miniAppEnv;
 
   @override
   String toString() {
-    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, role: $role)';
+    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, pinCode: $pinCode, role: $role, additionalData: $additionalData, miniAppEnv: $miniAppEnv)';
   }
 
   @override
@@ -192,13 +250,26 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
+            (identical(other.role, role) || other.role == role) &&
+            const DeepCollectionEquality()
+                .equals(other._additionalData, _additionalData) &&
+            (identical(other.miniAppEnv, miniAppEnv) ||
+                other.miniAppEnv == miniAppEnv));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, action, parentPatientId, mobileNumber, token, role);
+      runtimeType,
+      action,
+      parentPatientId,
+      mobileNumber,
+      token,
+      pinCode,
+      role,
+      const DeepCollectionEquality().hash(_additionalData),
+      miniAppEnv);
 
   @JsonKey(ignore: true)
   @override
@@ -221,7 +292,10 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
       final String? parentPatientId,
       final String? mobileNumber,
       final String? token,
-      final MiniAppInjectionModelRole? role}) = _$MiniAppInjectionModelImpl;
+      final String? pinCode,
+      final MiniAppInjectionModelRole? role,
+      final Map<String, dynamic>? additionalData,
+      required final MiniAppEnv miniAppEnv}) = _$MiniAppInjectionModelImpl;
 
   factory _MiniAppInjectionModel.fromJson(Map<String, dynamic> json) =
       _$MiniAppInjectionModelImpl.fromJson;
@@ -235,7 +309,13 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
   @override
   String? get token;
   @override
+  String? get pinCode;
+  @override
   MiniAppInjectionModelRole? get role;
+  @override
+  Map<String, dynamic>? get additionalData;
+  @override
+  MiniAppEnv get miniAppEnv;
   @override
   @JsonKey(ignore: true)
   _$$MiniAppInjectionModelImplCopyWith<_$MiniAppInjectionModelImpl>

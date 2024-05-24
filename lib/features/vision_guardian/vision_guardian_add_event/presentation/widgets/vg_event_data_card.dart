@@ -42,7 +42,7 @@ class VgEventDataCards extends StatelessWidget {
       height: Responsive.isMobile(context)
           ? AppSize.height(context) * 0.16
           : AppSize.height(context) * 0.24,
-      margin: const EdgeInsets.symmetric(vertical: AppSize.ksheight),
+      margin: const EdgeInsets.symmetric(vertical: AppSize.ks),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(8),
@@ -53,10 +53,11 @@ class VgEventDataCards extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(AppSize.kmradius - 5),
-              bottomLeft: Radius.circular(AppSize.kmradius - 5),
+              topLeft: Radius.circular(AppSize.km - 5),
+              bottomLeft: Radius.circular(AppSize.km - 5),
             ),
             child: AppNetworkImage(
+              borderRadius: 0,
               imageUrl: _getImageUrl(data.images!.first),
               shapeCircle: false,
               width: Responsive.isMobile(context)
@@ -92,12 +93,12 @@ class VgEventDataCards extends StatelessWidget {
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: AppSize.kmpadding,
-                            vertical: AppSize.kspadding / 2,
+                            horizontal: AppSize.km,
+                            vertical: AppSize.ks / 2,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                              AppSize.klradius,
+                              AppSize.kl,
                             ),
                             color: (data.eventStatus ?? "") != "Completed"
                                 ? AppColor.orange
@@ -118,7 +119,7 @@ class VgEventDataCards extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     "${data.id ?? ""}",
                     softWrap: true,
@@ -130,7 +131,7 @@ class VgEventDataCards extends StatelessWidget {
                       color: AppColor.grey,
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   SizedBox(
                     width: Responsive.isMobile(context)
                         ? AppSize.width(context) * 0.60
@@ -145,7 +146,7 @@ class VgEventDataCards extends StatelessWidget {
                               color: AppColor.grey,
                               size: 14,
                             ),
-                            const SizedBox(width: AppSize.kswidth / 2),
+                            const SizedBox(width: AppSize.ks / 2),
                             AutoSizeText(
                               '$startDateString-$endDateString',
                               softWrap: true,
@@ -158,7 +159,7 @@ class VgEventDataCards extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(width: AppSize.kswidth),
+                        const SizedBox(width: AppSize.ks),
                         Row(
                           children: [
                             const Icon(
@@ -166,7 +167,7 @@ class VgEventDataCards extends StatelessWidget {
                               color: AppColor.grey,
                               size: 14,
                             ),
-                            const SizedBox(width: AppSize.kswidth / 2),
+                            const SizedBox(width: AppSize.ks / 2),
                             AutoSizeText(
                               '$startTimeString-$endTimeString',
                               softWrap: true,
@@ -182,7 +183,7 @@ class VgEventDataCards extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Row(
                     children: [
                       const Icon(
@@ -190,7 +191,7 @@ class VgEventDataCards extends StatelessWidget {
                         color: AppColor.grey,
                         size: 14,
                       ),
-                      const SizedBox(width: AppSize.kswidth / 2),
+                      const SizedBox(width: AppSize.ks / 2),
                       Flexible(
                         child: AutoSizeText(
                           "${data.addresses?[0].addressLine1},${data.addresses?[0].city},${data.addresses?[0].state},${data.addresses?[0].pinCode}",

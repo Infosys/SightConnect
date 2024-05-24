@@ -32,12 +32,18 @@ abstract class TriageLocalSource {
     required List<PostTriageObservationsModel> triageVisualAcuity,
     required String patientID,
   });
+
+  Future<void> saveTriageDistanceVisualAcuityLocally({
+    required List<PostTriageObservationsModel> triageVisualAcuity,
+  });
+
   Future<void> saveTriageEyeScanLocally({
     required List<PostTriageImagingSelectionModel> triageEyeScan,
     required String patientID,
   });
   Future<List<PostTriageQuestionModel>> getQuestionaireResponse();
   Future<List<PostTriageObservationsModel>> getVisionAcuityTumblingResponse();
+  Future<List<PostTriageObservationsModel>> getTriageDistanceVisualAcuityResponse();
   Future<List<PostTriageImagingSelectionModel>> getTriageEyeScanResponse();
 
   Future<void> resetTriage();
@@ -146,6 +152,19 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
+  Future<void> saveTriageDistanceVisualAcuityLocally({
+    required List<PostTriageObservationsModel> triageVisualAcuity,
+  }) async {
+    logger.d({
+      "saveTriageDistanceVisualAcuityLocally": json.encode(triageVisualAcuity),
+    });
+
+    await triageDBHelper.insertTriageDistanceVisualAcuity(
+      triageVisualAcuity: triageVisualAcuity,
+    );
+  }
+
+  @override
   Future<void> saveTriageEyeScanLocally({
     required List<PostTriageImagingSelectionModel> triageEyeScan,
     required String patientID,
@@ -178,6 +197,13 @@ class TriageLocalSourceImpl implements TriageLocalSource {
       getVisionAcuityTumblingResponse() async {
     List<PostTriageObservationsModel> response =
         await triageDBHelper.getTriageVisualAcuity();
+    return response;
+  }
+
+  @override
+  Future<List<PostTriageObservationsModel>> getTriageDistanceVisualAcuityResponse() async {
+    List<PostTriageObservationsModel> response =
+        await triageDBHelper.getTriageDistanceVisualAcuity();
     return response;
   }
 

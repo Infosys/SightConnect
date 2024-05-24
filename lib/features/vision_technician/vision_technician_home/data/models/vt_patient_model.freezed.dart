@@ -12,7 +12,7 @@ part of 'vt_patient_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VTPatientDto _$VTPatientDtoFromJson(Map<String, dynamic> json) {
   return _VTPatientDto.fromJson(json);
@@ -34,6 +34,7 @@ mixin _$VTPatientDto {
   @TimestampConverter()
   DateTime? get encounterStartDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  EncounterStatus? get encounterStatus => throw _privateConstructorUsedError;
   SeverityCategory? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,6 +63,7 @@ abstract class $VTPatientDtoCopyWith<$Res> {
       int? encounterId,
       @TimestampConverter() DateTime? encounterStartDate,
       String? status,
+      EncounterStatus? encounterStatus,
       SeverityCategory? category});
 }
 
@@ -91,6 +93,7 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
     Object? encounterId = freezed,
     Object? encounterStartDate = freezed,
     Object? status = freezed,
+    Object? encounterStatus = freezed,
     Object? category = freezed,
   }) {
     return _then(_value.copyWith(
@@ -146,6 +149,10 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      encounterStatus: freezed == encounterStatus
+          ? _value.encounterStatus
+          : encounterStatus // ignore: cast_nullable_to_non_nullable
+              as EncounterStatus?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -155,11 +162,11 @@ class _$VTPatientDtoCopyWithImpl<$Res, $Val extends VTPatientDto>
 }
 
 /// @nodoc
-abstract class _$$_VTPatientDtoCopyWith<$Res>
+abstract class _$$VTPatientDtoImplCopyWith<$Res>
     implements $VTPatientDtoCopyWith<$Res> {
-  factory _$$_VTPatientDtoCopyWith(
-          _$_VTPatientDto value, $Res Function(_$_VTPatientDto) then) =
-      __$$_VTPatientDtoCopyWithImpl<$Res>;
+  factory _$$VTPatientDtoImplCopyWith(
+          _$VTPatientDtoImpl value, $Res Function(_$VTPatientDtoImpl) then) =
+      __$$VTPatientDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -176,15 +183,16 @@ abstract class _$$_VTPatientDtoCopyWith<$Res>
       int? encounterId,
       @TimestampConverter() DateTime? encounterStartDate,
       String? status,
+      EncounterStatus? encounterStatus,
       SeverityCategory? category});
 }
 
 /// @nodoc
-class __$$_VTPatientDtoCopyWithImpl<$Res>
-    extends _$VTPatientDtoCopyWithImpl<$Res, _$_VTPatientDto>
-    implements _$$_VTPatientDtoCopyWith<$Res> {
-  __$$_VTPatientDtoCopyWithImpl(
-      _$_VTPatientDto _value, $Res Function(_$_VTPatientDto) _then)
+class __$$VTPatientDtoImplCopyWithImpl<$Res>
+    extends _$VTPatientDtoCopyWithImpl<$Res, _$VTPatientDtoImpl>
+    implements _$$VTPatientDtoImplCopyWith<$Res> {
+  __$$VTPatientDtoImplCopyWithImpl(
+      _$VTPatientDtoImpl _value, $Res Function(_$VTPatientDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -203,9 +211,10 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
     Object? encounterId = freezed,
     Object? encounterStartDate = freezed,
     Object? status = freezed,
+    Object? encounterStatus = freezed,
     Object? category = freezed,
   }) {
-    return _then(_$_VTPatientDto(
+    return _then(_$VTPatientDtoImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -258,6 +267,10 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      encounterStatus: freezed == encounterStatus
+          ? _value.encounterStatus
+          : encounterStatus // ignore: cast_nullable_to_non_nullable
+              as EncounterStatus?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -268,8 +281,8 @@ class __$$_VTPatientDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VTPatientDto implements _VTPatientDto {
-  const _$_VTPatientDto(
+class _$VTPatientDtoImpl implements _VTPatientDto {
+  const _$VTPatientDtoImpl(
       {this.id,
       this.name,
       this.mobile,
@@ -283,10 +296,11 @@ class _$_VTPatientDto implements _VTPatientDto {
       this.encounterId,
       @TimestampConverter() this.encounterStartDate,
       this.status,
+      this.encounterStatus,
       this.category});
 
-  factory _$_VTPatientDto.fromJson(Map<String, dynamic> json) =>
-      _$$_VTPatientDtoFromJson(json);
+  factory _$VTPatientDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VTPatientDtoImplFromJson(json);
 
   @override
   final int? id;
@@ -316,18 +330,20 @@ class _$_VTPatientDto implements _VTPatientDto {
   @override
   final String? status;
   @override
+  final EncounterStatus? encounterStatus;
+  @override
   final SeverityCategory? category;
 
   @override
   String toString() {
-    return 'VTPatientDto(id: $id, name: $name, mobile: $mobile, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, gender: $gender, districtName: $districtName, townName: $townName, pincode: $pincode, encounterId: $encounterId, encounterStartDate: $encounterStartDate, status: $status, category: $category)';
+    return 'VTPatientDto(id: $id, name: $name, mobile: $mobile, yearOfBirth: $yearOfBirth, monthOfBirth: $monthOfBirth, dayOfBirth: $dayOfBirth, gender: $gender, districtName: $districtName, townName: $townName, pincode: $pincode, encounterId: $encounterId, encounterStartDate: $encounterStartDate, status: $status, encounterStatus: $encounterStatus, category: $category)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VTPatientDto &&
+            other is _$VTPatientDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.mobile, mobile) || other.mobile == mobile) &&
@@ -348,6 +364,8 @@ class _$_VTPatientDto implements _VTPatientDto {
             (identical(other.encounterStartDate, encounterStartDate) ||
                 other.encounterStartDate == encounterStartDate) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.encounterStatus, encounterStatus) ||
+                other.encounterStatus == encounterStatus) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
@@ -369,17 +387,18 @@ class _$_VTPatientDto implements _VTPatientDto {
       encounterId,
       encounterStartDate,
       status,
+      encounterStatus,
       category);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VTPatientDtoCopyWith<_$_VTPatientDto> get copyWith =>
-      __$$_VTPatientDtoCopyWithImpl<_$_VTPatientDto>(this, _$identity);
+  _$$VTPatientDtoImplCopyWith<_$VTPatientDtoImpl> get copyWith =>
+      __$$VTPatientDtoImplCopyWithImpl<_$VTPatientDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VTPatientDtoToJson(
+    return _$$VTPatientDtoImplToJson(
       this,
     );
   }
@@ -400,10 +419,11 @@ abstract class _VTPatientDto implements VTPatientDto {
       final int? encounterId,
       @TimestampConverter() final DateTime? encounterStartDate,
       final String? status,
-      final SeverityCategory? category}) = _$_VTPatientDto;
+      final EncounterStatus? encounterStatus,
+      final SeverityCategory? category}) = _$VTPatientDtoImpl;
 
   factory _VTPatientDto.fromJson(Map<String, dynamic> json) =
-      _$_VTPatientDto.fromJson;
+      _$VTPatientDtoImpl.fromJson;
 
   @override
   int? get id;
@@ -433,9 +453,11 @@ abstract class _VTPatientDto implements VTPatientDto {
   @override
   String? get status;
   @override
+  EncounterStatus? get encounterStatus;
+  @override
   SeverityCategory? get category;
   @override
   @JsonKey(ignore: true)
-  _$$_VTPatientDtoCopyWith<_$_VTPatientDto> get copyWith =>
+  _$$VTPatientDtoImplCopyWith<_$VTPatientDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

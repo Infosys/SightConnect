@@ -5,9 +5,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_card.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,47 +38,46 @@ class VisionEventListDetails extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            VisionGuardianEmptyResultCard(
-              type: loc.vgEvent,
-            ),
+            VisionGuardianEmptyResultCard(type: loc.vgEvent),
           ],
         ),
       );
+    } else if (loading) {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
     }
-    return LoadingOverlay(
-      isLoading: loading,
-      ignoreOverlayColor: true,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int index = 0; index < response.length; index++)
-            InkWell(
-              onTap: () {
-                ref
-                    .read(addEventDetailsProvider)
-                    .setEventId(response[index].id.toString());
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return VisionGuardianEventDetailsPage(
-                        eventDetails: response[index],
-                      );
-                    },
-                  ),
-                );
-              },
-              child: VgEventDataCards(
-                data: response[index],
-              ),
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (int index = 0; index < response.length; index++)
+          InkWell(
+            onTap: () {
+              ref
+                  .read(addEventDetailsProvider)
+                  .setEventId(response[index].id.toString());
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return VisionGuardianEventDetailsPage(
+                      eventDetails: response[index],
+                    );
+                  },
+                ),
+              );
+            },
+            child: VgEventDataCards(
+              data: response[index],
             ),
-          if (model.newEventList.length == 10 && eventType != "default")
-            const Padding(
-              padding: EdgeInsets.all(AppSize.klpadding),
-              child: CircularProgressIndicator.adaptive(),
-            ),
-        ],
-      ),
+          ),
+        if (model.newEventList.length == 10 && eventType != "default")
+          const Padding(
+            padding: EdgeInsets.all(AppSize.kl),
+            child: CircularProgressIndicator.adaptive(),
+          ),
+      ],
     );
   }
 }

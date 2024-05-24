@@ -53,7 +53,7 @@ class IvrRemoteSourceImpl implements IvrRemoteSource {
 
   @override
   Future makeIvrCall({required String patientMobile}) async {
-    String url = "/services/exotel/api/call/outbound?platformId=1051";
+    String url = "/services/exotel/api/call/outbound";
     try {
       return await _dio.post(
         url,

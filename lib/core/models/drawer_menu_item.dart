@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../l10n/app_localizations.dart';
 
 enum DrawerMenuItemId {
   switchProfile,
@@ -11,6 +12,7 @@ enum DrawerMenuItemId {
   privacyPolicy,
   help,
   chatbot,
+  tenant,
 }
 
 class DrawerMenuItem {
@@ -26,10 +28,10 @@ class DrawerMenuItem {
 
 class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
-    DrawerMenuItem switchProfile = const DrawerMenuItem(
+    DrawerMenuItem switchProfile = DrawerMenuItem(
       id: DrawerMenuItemId.switchProfile,
-      title: "Switch Profile",
-      icon: "assets/drawer_icons/accessibility.svg",
+      title: loc.switchRole,
+      icon: "assets/drawer_icons/switch.svg",
     );
     DrawerMenuItem language = DrawerMenuItem(
       id: DrawerMenuItemId.language,
@@ -61,6 +63,11 @@ class DrawerMenuItems {
       title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
     );
+    DrawerMenuItem tenant = DrawerMenuItem(
+      id: DrawerMenuItemId.tenant,
+      title: loc.switchTenant,
+      icon: "assets/drawer_icons/accessibility.svg",
+    );
 
     // DrawerMenuItem chatbot = const DrawerMenuItem(
     //   id: DrawerMenuItemId.chatbot,
@@ -69,6 +76,7 @@ class DrawerMenuItems {
     // );
 
     return [
+      tenant,
       switchProfile,
       language,
       accessibilities,

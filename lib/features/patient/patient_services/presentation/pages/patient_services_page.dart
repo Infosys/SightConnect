@@ -8,11 +8,11 @@ import 'package:eye_care_for_all/features/patient/patient_profile/presentation/p
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/widgets/patient_service_category.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+
 import "../../domain/enum/mini_app.dart";
 
 class PatientServicesPage extends ConsumerWidget {
@@ -27,6 +27,7 @@ class PatientServicesPage extends ConsumerWidget {
         // loc.recentServicesEyeAssessment,
         MiniApp.APPOINTMENT,
         MiniApp.VISUAL_ACUITY_TEST,
+        // MiniApp.IPLEDGE,
         // MiniApp.EYE_ASSESSMENT,
         MiniApp.CATARACT_EYE_TEST,
         MiniApp.RED_EYE_TEST,
@@ -36,13 +37,13 @@ class PatientServicesPage extends ConsumerWidget {
 
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(AppSize.klradius),
-        topRight: Radius.circular(AppSize.klradius),
+        topLeft: Radius.circular(AppSize.kl),
+        topRight: Radius.circular(AppSize.kl),
       ),
       child: Container(
         height: MediaQuery.of(context).size.height * 0.9,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.klradius),
+          borderRadius: BorderRadius.circular(AppSize.kl),
         ),
         child: DefaultTabController(
           length: 5,
@@ -76,8 +77,8 @@ class PatientServicesPage extends ConsumerWidget {
                       ),
                       TabBar(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kmpadding,
-                          vertical: AppSize.kmpadding,
+                          horizontal: AppSize.km,
+                          vertical: AppSize.km,
                         ),
                         indicatorSize: TabBarIndicatorSize.label,
                         enableFeedback: true,
@@ -217,7 +218,7 @@ class PatientServicesPage extends ConsumerWidget {
                       const SizedBox(),
                       SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.all(AppSize.kmpadding),
+                          padding: const EdgeInsets.all(AppSize.km),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: services.keys

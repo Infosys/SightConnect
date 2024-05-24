@@ -12,7 +12,7 @@ part of 'triage_post_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TriagePostModel _$TriagePostModelFromJson(Map<String, dynamic> json) {
   return _TriagePostModel.fromJson(json);
@@ -24,6 +24,7 @@ mixin _$TriagePostModel {
   int? get patientId => throw _privateConstructorUsedError;
   int? get encounterId => throw _privateConstructorUsedError;
   ServiceType? get serviceType => throw _privateConstructorUsedError;
+  int? get tenantCode => throw _privateConstructorUsedError;
   int? get organizationCode => throw _privateConstructorUsedError;
   List<Performer>? get performer => throw _privateConstructorUsedError;
   int? get assessmentCode => throw _privateConstructorUsedError;
@@ -73,6 +74,7 @@ abstract class $TriagePostModelCopyWith<$Res> {
       int? patientId,
       int? encounterId,
       ServiceType? serviceType,
+      int? tenantCode,
       int? organizationCode,
       List<Performer>? performer,
       int? assessmentCode,
@@ -118,6 +120,7 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
     Object? patientId = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
+    Object? tenantCode = freezed,
     Object? organizationCode = freezed,
     Object? performer = freezed,
     Object? assessmentCode = freezed,
@@ -160,6 +163,10 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
           ? _value.serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
               as ServiceType?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
+              as int?,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
@@ -273,11 +280,11 @@ class _$TriagePostModelCopyWithImpl<$Res, $Val extends TriagePostModel>
 }
 
 /// @nodoc
-abstract class _$$_TriagePostModelCopyWith<$Res>
+abstract class _$$TriagePostModelImplCopyWith<$Res>
     implements $TriagePostModelCopyWith<$Res> {
-  factory _$$_TriagePostModelCopyWith(
-          _$_TriagePostModel value, $Res Function(_$_TriagePostModel) then) =
-      __$$_TriagePostModelCopyWithImpl<$Res>;
+  factory _$$TriagePostModelImplCopyWith(_$TriagePostModelImpl value,
+          $Res Function(_$TriagePostModelImpl) then) =
+      __$$TriagePostModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -285,6 +292,7 @@ abstract class _$$_TriagePostModelCopyWith<$Res>
       int? patientId,
       int? encounterId,
       ServiceType? serviceType,
+      int? tenantCode,
       int? organizationCode,
       List<Performer>? performer,
       int? assessmentCode,
@@ -315,11 +323,11 @@ abstract class _$$_TriagePostModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TriagePostModelCopyWithImpl<$Res>
-    extends _$TriagePostModelCopyWithImpl<$Res, _$_TriagePostModel>
-    implements _$$_TriagePostModelCopyWith<$Res> {
-  __$$_TriagePostModelCopyWithImpl(
-      _$_TriagePostModel _value, $Res Function(_$_TriagePostModel) _then)
+class __$$TriagePostModelImplCopyWithImpl<$Res>
+    extends _$TriagePostModelCopyWithImpl<$Res, _$TriagePostModelImpl>
+    implements _$$TriagePostModelImplCopyWith<$Res> {
+  __$$TriagePostModelImplCopyWithImpl(
+      _$TriagePostModelImpl _value, $Res Function(_$TriagePostModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -329,6 +337,7 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
     Object? patientId = freezed,
     Object? encounterId = freezed,
     Object? serviceType = freezed,
+    Object? tenantCode = freezed,
     Object? organizationCode = freezed,
     Object? performer = freezed,
     Object? assessmentCode = freezed,
@@ -354,7 +363,7 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
     Object? mediaResultDescription = freezed,
     Object? encounter = freezed,
   }) {
-    return _then(_$_TriagePostModel(
+    return _then(_$TriagePostModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -371,6 +380,10 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
           ? _value.serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
               as ServiceType?,
+      tenantCode: freezed == tenantCode
+          ? _value.tenantCode
+          : tenantCode // ignore: cast_nullable_to_non_nullable
+              as int?,
       organizationCode: freezed == organizationCode
           ? _value.organizationCode
           : organizationCode // ignore: cast_nullable_to_non_nullable
@@ -473,12 +486,13 @@ class __$$_TriagePostModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TriagePostModel implements _TriagePostModel {
-  const _$_TriagePostModel(
+class _$TriagePostModelImpl implements _TriagePostModel {
+  const _$TriagePostModelImpl(
       {this.id,
       this.patientId,
       this.encounterId,
       this.serviceType,
+      this.tenantCode,
       this.organizationCode,
       final List<Performer>? performer,
       this.assessmentCode,
@@ -510,8 +524,8 @@ class _$_TriagePostModel implements _TriagePostModel {
         _observations = observations,
         _questionResponse = questionResponse;
 
-  factory _$_TriagePostModel.fromJson(Map<String, dynamic> json) =>
-      _$$_TriagePostModelFromJson(json);
+  factory _$TriagePostModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TriagePostModelImplFromJson(json);
 
   @override
   final int? id;
@@ -521,6 +535,8 @@ class _$_TriagePostModel implements _TriagePostModel {
   final int? encounterId;
   @override
   final ServiceType? serviceType;
+  @override
+  final int? tenantCode;
   @override
   final int? organizationCode;
   final List<Performer>? _performer;
@@ -625,14 +641,14 @@ class _$_TriagePostModel implements _TriagePostModel {
 
   @override
   String toString() {
-    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, encounter: $encounter)';
+    return 'TriagePostModel(id: $id, patientId: $patientId, encounterId: $encounterId, serviceType: $serviceType, tenantCode: $tenantCode, organizationCode: $organizationCode, performer: $performer, assessmentCode: $assessmentCode, assessmentVersion: $assessmentVersion, issued: $issued, userStartDate: $userStartDate, source: $source, sourceVersion: $sourceVersion, incompleteSection: $incompleteSection, cummulativeScore: $cummulativeScore, score: $score, imagingSelection: $imagingSelection, observations: $observations, questionResponse: $questionResponse, subject: $subject, observationSeverity: $observationSeverity, questionResponseSeverity: $questionResponseSeverity, mediaSeverity: $mediaSeverity, cumulativeSeverity: $cumulativeSeverity, diagnosticReportDescription: $diagnosticReportDescription, questionResultDescription: $questionResultDescription, observationResultDescription: $observationResultDescription, mediaResultDescription: $mediaResultDescription, encounter: $encounter)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TriagePostModel &&
+            other is _$TriagePostModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
@@ -640,6 +656,8 @@ class _$_TriagePostModel implements _TriagePostModel {
                 other.encounterId == encounterId) &&
             (identical(other.serviceType, serviceType) ||
                 other.serviceType == serviceType) &&
+            (identical(other.tenantCode, tenantCode) ||
+                other.tenantCode == tenantCode) &&
             (identical(other.organizationCode, organizationCode) ||
                 other.organizationCode == organizationCode) &&
             const DeepCollectionEquality()
@@ -700,6 +718,7 @@ class _$_TriagePostModel implements _TriagePostModel {
         patientId,
         encounterId,
         serviceType,
+        tenantCode,
         organizationCode,
         const DeepCollectionEquality().hash(_performer),
         assessmentCode,
@@ -729,12 +748,13 @@ class _$_TriagePostModel implements _TriagePostModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TriagePostModelCopyWith<_$_TriagePostModel> get copyWith =>
-      __$$_TriagePostModelCopyWithImpl<_$_TriagePostModel>(this, _$identity);
+  _$$TriagePostModelImplCopyWith<_$TriagePostModelImpl> get copyWith =>
+      __$$TriagePostModelImplCopyWithImpl<_$TriagePostModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TriagePostModelToJson(
+    return _$$TriagePostModelImplToJson(
       this,
     );
   }
@@ -746,6 +766,7 @@ abstract class _TriagePostModel implements TriagePostModel {
       final int? patientId,
       final int? encounterId,
       final ServiceType? serviceType,
+      final int? tenantCode,
       final int? organizationCode,
       final List<Performer>? performer,
       final int? assessmentCode,
@@ -769,10 +790,10 @@ abstract class _TriagePostModel implements TriagePostModel {
       final String? questionResultDescription,
       final String? observationResultDescription,
       final String? mediaResultDescription,
-      final EncounterModel? encounter}) = _$_TriagePostModel;
+      final EncounterModel? encounter}) = _$TriagePostModelImpl;
 
   factory _TriagePostModel.fromJson(Map<String, dynamic> json) =
-      _$_TriagePostModel.fromJson;
+      _$TriagePostModelImpl.fromJson;
 
   @override
   int? get id;
@@ -782,6 +803,8 @@ abstract class _TriagePostModel implements TriagePostModel {
   int? get encounterId;
   @override
   ServiceType? get serviceType;
+  @override
+  int? get tenantCode;
   @override
   int? get organizationCode;
   @override
@@ -834,7 +857,7 @@ abstract class _TriagePostModel implements TriagePostModel {
   EncounterModel? get encounter;
   @override
   @JsonKey(ignore: true)
-  _$$_TriagePostModelCopyWith<_$_TriagePostModel> get copyWith =>
+  _$$TriagePostModelImplCopyWith<_$TriagePostModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -886,22 +909,22 @@ class _$EncounterModelCopyWithImpl<$Res, $Val extends EncounterModel>
 }
 
 /// @nodoc
-abstract class _$$_EncounterModelCopyWith<$Res>
+abstract class _$$EncounterModelImplCopyWith<$Res>
     implements $EncounterModelCopyWith<$Res> {
-  factory _$$_EncounterModelCopyWith(
-          _$_EncounterModel value, $Res Function(_$_EncounterModel) then) =
-      __$$_EncounterModelCopyWithImpl<$Res>;
+  factory _$$EncounterModelImplCopyWith(_$EncounterModelImpl value,
+          $Res Function(_$EncounterModelImpl) then) =
+      __$$EncounterModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id});
 }
 
 /// @nodoc
-class __$$_EncounterModelCopyWithImpl<$Res>
-    extends _$EncounterModelCopyWithImpl<$Res, _$_EncounterModel>
-    implements _$$_EncounterModelCopyWith<$Res> {
-  __$$_EncounterModelCopyWithImpl(
-      _$_EncounterModel _value, $Res Function(_$_EncounterModel) _then)
+class __$$EncounterModelImplCopyWithImpl<$Res>
+    extends _$EncounterModelCopyWithImpl<$Res, _$EncounterModelImpl>
+    implements _$$EncounterModelImplCopyWith<$Res> {
+  __$$EncounterModelImplCopyWithImpl(
+      _$EncounterModelImpl _value, $Res Function(_$EncounterModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -909,7 +932,7 @@ class __$$_EncounterModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_$_EncounterModel(
+    return _then(_$EncounterModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -920,11 +943,11 @@ class __$$_EncounterModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_EncounterModel implements _EncounterModel {
-  const _$_EncounterModel({this.id});
+class _$EncounterModelImpl implements _EncounterModel {
+  const _$EncounterModelImpl({this.id});
 
-  factory _$_EncounterModel.fromJson(Map<String, dynamic> json) =>
-      _$$_EncounterModelFromJson(json);
+  factory _$EncounterModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EncounterModelImplFromJson(json);
 
   @override
   final int? id;
@@ -935,10 +958,10 @@ class _$_EncounterModel implements _EncounterModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EncounterModel &&
+            other is _$EncounterModelImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -949,28 +972,29 @@ class _$_EncounterModel implements _EncounterModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EncounterModelCopyWith<_$_EncounterModel> get copyWith =>
-      __$$_EncounterModelCopyWithImpl<_$_EncounterModel>(this, _$identity);
+  _$$EncounterModelImplCopyWith<_$EncounterModelImpl> get copyWith =>
+      __$$EncounterModelImplCopyWithImpl<_$EncounterModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EncounterModelToJson(
+    return _$$EncounterModelImplToJson(
       this,
     );
   }
 }
 
 abstract class _EncounterModel implements EncounterModel {
-  const factory _EncounterModel({final int? id}) = _$_EncounterModel;
+  const factory _EncounterModel({final int? id}) = _$EncounterModelImpl;
 
   factory _EncounterModel.fromJson(Map<String, dynamic> json) =
-      _$_EncounterModel.fromJson;
+      _$EncounterModelImpl.fromJson;
 
   @override
   int? get id;
   @override
   @JsonKey(ignore: true)
-  _$$_EncounterModelCopyWith<_$_EncounterModel> get copyWith =>
+  _$$EncounterModelImplCopyWith<_$EncounterModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1047,11 +1071,12 @@ class _$PostTriageQuestionModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PostTriageQuestionModelCopyWith<$Res>
+abstract class _$$PostTriageQuestionModelImplCopyWith<$Res>
     implements $PostTriageQuestionModelCopyWith<$Res> {
-  factory _$$_PostTriageQuestionModelCopyWith(_$_PostTriageQuestionModel value,
-          $Res Function(_$_PostTriageQuestionModel) then) =
-      __$$_PostTriageQuestionModelCopyWithImpl<$Res>;
+  factory _$$PostTriageQuestionModelImplCopyWith(
+          _$PostTriageQuestionModelImpl value,
+          $Res Function(_$PostTriageQuestionModelImpl) then) =
+      __$$PostTriageQuestionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1062,12 +1087,13 @@ abstract class _$$_PostTriageQuestionModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PostTriageQuestionModelCopyWithImpl<$Res>
+class __$$PostTriageQuestionModelImplCopyWithImpl<$Res>
     extends _$PostTriageQuestionModelCopyWithImpl<$Res,
-        _$_PostTriageQuestionModel>
-    implements _$$_PostTriageQuestionModelCopyWith<$Res> {
-  __$$_PostTriageQuestionModelCopyWithImpl(_$_PostTriageQuestionModel _value,
-      $Res Function(_$_PostTriageQuestionModel) _then)
+        _$PostTriageQuestionModelImpl>
+    implements _$$PostTriageQuestionModelImplCopyWith<$Res> {
+  __$$PostTriageQuestionModelImplCopyWithImpl(
+      _$PostTriageQuestionModelImpl _value,
+      $Res Function(_$PostTriageQuestionModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1078,7 +1104,7 @@ class __$$_PostTriageQuestionModelCopyWithImpl<$Res>
     Object? score = freezed,
     Object? answers = freezed,
   }) {
-    return _then(_$_PostTriageQuestionModel(
+    return _then(_$PostTriageQuestionModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1101,16 +1127,16 @@ class __$$_PostTriageQuestionModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostTriageQuestionModel implements _PostTriageQuestionModel {
-  const _$_PostTriageQuestionModel(
+class _$PostTriageQuestionModelImpl implements _PostTriageQuestionModel {
+  const _$PostTriageQuestionModelImpl(
       {this.id,
       this.linkId,
       this.score,
       final List<PostTriageAnswerModel>? answers})
       : _answers = answers;
 
-  factory _$_PostTriageQuestionModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PostTriageQuestionModelFromJson(json);
+  factory _$PostTriageQuestionModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostTriageQuestionModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1134,10 +1160,10 @@ class _$_PostTriageQuestionModel implements _PostTriageQuestionModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostTriageQuestionModel &&
+            other is _$PostTriageQuestionModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.linkId, linkId) || other.linkId == linkId) &&
             (identical(other.score, score) || other.score == score) &&
@@ -1152,14 +1178,13 @@ class _$_PostTriageQuestionModel implements _PostTriageQuestionModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostTriageQuestionModelCopyWith<_$_PostTriageQuestionModel>
-      get copyWith =>
-          __$$_PostTriageQuestionModelCopyWithImpl<_$_PostTriageQuestionModel>(
-              this, _$identity);
+  _$$PostTriageQuestionModelImplCopyWith<_$PostTriageQuestionModelImpl>
+      get copyWith => __$$PostTriageQuestionModelImplCopyWithImpl<
+          _$PostTriageQuestionModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostTriageQuestionModelToJson(
+    return _$$PostTriageQuestionModelImplToJson(
       this,
     );
   }
@@ -1167,13 +1192,14 @@ class _$_PostTriageQuestionModel implements _PostTriageQuestionModel {
 
 abstract class _PostTriageQuestionModel implements PostTriageQuestionModel {
   const factory _PostTriageQuestionModel(
-      {final int? id,
-      final int? linkId,
-      final double? score,
-      final List<PostTriageAnswerModel>? answers}) = _$_PostTriageQuestionModel;
+          {final int? id,
+          final int? linkId,
+          final double? score,
+          final List<PostTriageAnswerModel>? answers}) =
+      _$PostTriageQuestionModelImpl;
 
   factory _PostTriageQuestionModel.fromJson(Map<String, dynamic> json) =
-      _$_PostTriageQuestionModel.fromJson;
+      _$PostTriageQuestionModelImpl.fromJson;
 
   @override
   int? get id;
@@ -1185,7 +1211,7 @@ abstract class _PostTriageQuestionModel implements PostTriageQuestionModel {
   List<PostTriageAnswerModel>? get answers;
   @override
   @JsonKey(ignore: true)
-  _$$_PostTriageQuestionModelCopyWith<_$_PostTriageQuestionModel>
+  _$$PostTriageQuestionModelImplCopyWith<_$PostTriageQuestionModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1257,22 +1283,24 @@ class _$PostTriageAnswerModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PostTriageAnswerModelCopyWith<$Res>
+abstract class _$$PostTriageAnswerModelImplCopyWith<$Res>
     implements $PostTriageAnswerModelCopyWith<$Res> {
-  factory _$$_PostTriageAnswerModelCopyWith(_$_PostTriageAnswerModel value,
-          $Res Function(_$_PostTriageAnswerModel) then) =
-      __$$_PostTriageAnswerModelCopyWithImpl<$Res>;
+  factory _$$PostTriageAnswerModelImplCopyWith(
+          _$PostTriageAnswerModelImpl value,
+          $Res Function(_$PostTriageAnswerModelImpl) then) =
+      __$$PostTriageAnswerModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? value, int? id, int? answerCode, double? score});
 }
 
 /// @nodoc
-class __$$_PostTriageAnswerModelCopyWithImpl<$Res>
-    extends _$PostTriageAnswerModelCopyWithImpl<$Res, _$_PostTriageAnswerModel>
-    implements _$$_PostTriageAnswerModelCopyWith<$Res> {
-  __$$_PostTriageAnswerModelCopyWithImpl(_$_PostTriageAnswerModel _value,
-      $Res Function(_$_PostTriageAnswerModel) _then)
+class __$$PostTriageAnswerModelImplCopyWithImpl<$Res>
+    extends _$PostTriageAnswerModelCopyWithImpl<$Res,
+        _$PostTriageAnswerModelImpl>
+    implements _$$PostTriageAnswerModelImplCopyWith<$Res> {
+  __$$PostTriageAnswerModelImplCopyWithImpl(_$PostTriageAnswerModelImpl _value,
+      $Res Function(_$PostTriageAnswerModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1283,7 +1311,7 @@ class __$$_PostTriageAnswerModelCopyWithImpl<$Res>
     Object? answerCode = freezed,
     Object? score = freezed,
   }) {
-    return _then(_$_PostTriageAnswerModel(
+    return _then(_$PostTriageAnswerModelImpl(
       value: freezed == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -1306,12 +1334,12 @@ class __$$_PostTriageAnswerModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostTriageAnswerModel implements _PostTriageAnswerModel {
-  const _$_PostTriageAnswerModel(
+class _$PostTriageAnswerModelImpl implements _PostTriageAnswerModel {
+  const _$PostTriageAnswerModelImpl(
       {this.value, this.id, this.answerCode, this.score});
 
-  factory _$_PostTriageAnswerModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PostTriageAnswerModelFromJson(json);
+  factory _$PostTriageAnswerModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostTriageAnswerModelImplFromJson(json);
 
   @override
   final String? value;
@@ -1328,10 +1356,10 @@ class _$_PostTriageAnswerModel implements _PostTriageAnswerModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostTriageAnswerModel &&
+            other is _$PostTriageAnswerModelImpl &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.answerCode, answerCode) ||
@@ -1346,13 +1374,13 @@ class _$_PostTriageAnswerModel implements _PostTriageAnswerModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostTriageAnswerModelCopyWith<_$_PostTriageAnswerModel> get copyWith =>
-      __$$_PostTriageAnswerModelCopyWithImpl<_$_PostTriageAnswerModel>(
-          this, _$identity);
+  _$$PostTriageAnswerModelImplCopyWith<_$PostTriageAnswerModelImpl>
+      get copyWith => __$$PostTriageAnswerModelImplCopyWithImpl<
+          _$PostTriageAnswerModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostTriageAnswerModelToJson(
+    return _$$PostTriageAnswerModelImplToJson(
       this,
     );
   }
@@ -1363,10 +1391,10 @@ abstract class _PostTriageAnswerModel implements PostTriageAnswerModel {
       {final String? value,
       final int? id,
       final int? answerCode,
-      final double? score}) = _$_PostTriageAnswerModel;
+      final double? score}) = _$PostTriageAnswerModelImpl;
 
   factory _PostTriageAnswerModel.fromJson(Map<String, dynamic> json) =
-      _$_PostTriageAnswerModel.fromJson;
+      _$PostTriageAnswerModelImpl.fromJson;
 
   @override
   String? get value;
@@ -1378,8 +1406,8 @@ abstract class _PostTriageAnswerModel implements PostTriageAnswerModel {
   double? get score;
   @override
   @JsonKey(ignore: true)
-  _$$_PostTriageAnswerModelCopyWith<_$_PostTriageAnswerModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PostTriageAnswerModelImplCopyWith<_$PostTriageAnswerModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 Performer _$PerformerFromJson(Map<String, dynamic> json) {
@@ -1441,21 +1469,22 @@ class _$PerformerCopyWithImpl<$Res, $Val extends Performer>
 }
 
 /// @nodoc
-abstract class _$$_PerformerCopyWith<$Res> implements $PerformerCopyWith<$Res> {
-  factory _$$_PerformerCopyWith(
-          _$_Performer value, $Res Function(_$_Performer) then) =
-      __$$_PerformerCopyWithImpl<$Res>;
+abstract class _$$PerformerImplCopyWith<$Res>
+    implements $PerformerCopyWith<$Res> {
+  factory _$$PerformerImplCopyWith(
+          _$PerformerImpl value, $Res Function(_$PerformerImpl) then) =
+      __$$PerformerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, PerformerRole? role, int? identifier});
 }
 
 /// @nodoc
-class __$$_PerformerCopyWithImpl<$Res>
-    extends _$PerformerCopyWithImpl<$Res, _$_Performer>
-    implements _$$_PerformerCopyWith<$Res> {
-  __$$_PerformerCopyWithImpl(
-      _$_Performer _value, $Res Function(_$_Performer) _then)
+class __$$PerformerImplCopyWithImpl<$Res>
+    extends _$PerformerCopyWithImpl<$Res, _$PerformerImpl>
+    implements _$$PerformerImplCopyWith<$Res> {
+  __$$PerformerImplCopyWithImpl(
+      _$PerformerImpl _value, $Res Function(_$PerformerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1465,7 +1494,7 @@ class __$$_PerformerCopyWithImpl<$Res>
     Object? role = freezed,
     Object? identifier = freezed,
   }) {
-    return _then(_$_Performer(
+    return _then(_$PerformerImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1484,11 +1513,11 @@ class __$$_PerformerCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Performer implements _Performer {
-  const _$_Performer({this.id, this.role, this.identifier});
+class _$PerformerImpl implements _Performer {
+  const _$PerformerImpl({this.id, this.role, this.identifier});
 
-  factory _$_Performer.fromJson(Map<String, dynamic> json) =>
-      _$$_PerformerFromJson(json);
+  factory _$PerformerImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PerformerImplFromJson(json);
 
   @override
   final int? id;
@@ -1503,10 +1532,10 @@ class _$_Performer implements _Performer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Performer &&
+            other is _$PerformerImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.identifier, identifier) ||
@@ -1520,12 +1549,12 @@ class _$_Performer implements _Performer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PerformerCopyWith<_$_Performer> get copyWith =>
-      __$$_PerformerCopyWithImpl<_$_Performer>(this, _$identity);
+  _$$PerformerImplCopyWith<_$PerformerImpl> get copyWith =>
+      __$$PerformerImplCopyWithImpl<_$PerformerImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PerformerToJson(
+    return _$$PerformerImplToJson(
       this,
     );
   }
@@ -1535,10 +1564,10 @@ abstract class _Performer implements Performer {
   const factory _Performer(
       {final int? id,
       final PerformerRole? role,
-      final int? identifier}) = _$_Performer;
+      final int? identifier}) = _$PerformerImpl;
 
   factory _Performer.fromJson(Map<String, dynamic> json) =
-      _$_Performer.fromJson;
+      _$PerformerImpl.fromJson;
 
   @override
   int? get id;
@@ -1548,7 +1577,7 @@ abstract class _Performer implements Performer {
   int? get identifier;
   @override
   @JsonKey(ignore: true)
-  _$$_PerformerCopyWith<_$_Performer> get copyWith =>
+  _$$PerformerImplCopyWith<_$PerformerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1602,23 +1631,25 @@ class _$PostIncompleteTestModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PostIncompleteTestModelCopyWith<$Res>
+abstract class _$$PostIncompleteTestModelImplCopyWith<$Res>
     implements $PostIncompleteTestModelCopyWith<$Res> {
-  factory _$$_PostIncompleteTestModelCopyWith(_$_PostIncompleteTestModel value,
-          $Res Function(_$_PostIncompleteTestModel) then) =
-      __$$_PostIncompleteTestModelCopyWithImpl<$Res>;
+  factory _$$PostIncompleteTestModelImplCopyWith(
+          _$PostIncompleteTestModelImpl value,
+          $Res Function(_$PostIncompleteTestModelImpl) then) =
+      __$$PostIncompleteTestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TestType? testName});
 }
 
 /// @nodoc
-class __$$_PostIncompleteTestModelCopyWithImpl<$Res>
+class __$$PostIncompleteTestModelImplCopyWithImpl<$Res>
     extends _$PostIncompleteTestModelCopyWithImpl<$Res,
-        _$_PostIncompleteTestModel>
-    implements _$$_PostIncompleteTestModelCopyWith<$Res> {
-  __$$_PostIncompleteTestModelCopyWithImpl(_$_PostIncompleteTestModel _value,
-      $Res Function(_$_PostIncompleteTestModel) _then)
+        _$PostIncompleteTestModelImpl>
+    implements _$$PostIncompleteTestModelImplCopyWith<$Res> {
+  __$$PostIncompleteTestModelImplCopyWithImpl(
+      _$PostIncompleteTestModelImpl _value,
+      $Res Function(_$PostIncompleteTestModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1626,7 +1657,7 @@ class __$$_PostIncompleteTestModelCopyWithImpl<$Res>
   $Res call({
     Object? testName = freezed,
   }) {
-    return _then(_$_PostIncompleteTestModel(
+    return _then(_$PostIncompleteTestModelImpl(
       testName: freezed == testName
           ? _value.testName
           : testName // ignore: cast_nullable_to_non_nullable
@@ -1637,11 +1668,11 @@ class __$$_PostIncompleteTestModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostIncompleteTestModel implements _PostIncompleteTestModel {
-  const _$_PostIncompleteTestModel({this.testName});
+class _$PostIncompleteTestModelImpl implements _PostIncompleteTestModel {
+  const _$PostIncompleteTestModelImpl({this.testName});
 
-  factory _$_PostIncompleteTestModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PostIncompleteTestModelFromJson(json);
+  factory _$PostIncompleteTestModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostIncompleteTestModelImplFromJson(json);
 
   @override
   final TestType? testName;
@@ -1652,10 +1683,10 @@ class _$_PostIncompleteTestModel implements _PostIncompleteTestModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostIncompleteTestModel &&
+            other is _$PostIncompleteTestModelImpl &&
             (identical(other.testName, testName) ||
                 other.testName == testName));
   }
@@ -1667,14 +1698,13 @@ class _$_PostIncompleteTestModel implements _PostIncompleteTestModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostIncompleteTestModelCopyWith<_$_PostIncompleteTestModel>
-      get copyWith =>
-          __$$_PostIncompleteTestModelCopyWithImpl<_$_PostIncompleteTestModel>(
-              this, _$identity);
+  _$$PostIncompleteTestModelImplCopyWith<_$PostIncompleteTestModelImpl>
+      get copyWith => __$$PostIncompleteTestModelImplCopyWithImpl<
+          _$PostIncompleteTestModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostIncompleteTestModelToJson(
+    return _$$PostIncompleteTestModelImplToJson(
       this,
     );
   }
@@ -1682,16 +1712,16 @@ class _$_PostIncompleteTestModel implements _PostIncompleteTestModel {
 
 abstract class _PostIncompleteTestModel implements PostIncompleteTestModel {
   const factory _PostIncompleteTestModel({final TestType? testName}) =
-      _$_PostIncompleteTestModel;
+      _$PostIncompleteTestModelImpl;
 
   factory _PostIncompleteTestModel.fromJson(Map<String, dynamic> json) =
-      _$_PostIncompleteTestModel.fromJson;
+      _$PostIncompleteTestModelImpl.fromJson;
 
   @override
   TestType? get testName;
   @override
   @JsonKey(ignore: true)
-  _$$_PostIncompleteTestModelCopyWith<_$_PostIncompleteTestModel>
+  _$$PostIncompleteTestModelImplCopyWith<_$PostIncompleteTestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1765,25 +1795,25 @@ class _$PostTriageObservationsModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PostTriageObservationsModelCopyWith<$Res>
+abstract class _$$PostTriageObservationsModelImplCopyWith<$Res>
     implements $PostTriageObservationsModelCopyWith<$Res> {
-  factory _$$_PostTriageObservationsModelCopyWith(
-          _$_PostTriageObservationsModel value,
-          $Res Function(_$_PostTriageObservationsModel) then) =
-      __$$_PostTriageObservationsModelCopyWithImpl<$Res>;
+  factory _$$PostTriageObservationsModelImplCopyWith(
+          _$PostTriageObservationsModelImpl value,
+          $Res Function(_$PostTriageObservationsModelImpl) then) =
+      __$$PostTriageObservationsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, int? identifier, String? value, double? score});
 }
 
 /// @nodoc
-class __$$_PostTriageObservationsModelCopyWithImpl<$Res>
+class __$$PostTriageObservationsModelImplCopyWithImpl<$Res>
     extends _$PostTriageObservationsModelCopyWithImpl<$Res,
-        _$_PostTriageObservationsModel>
-    implements _$$_PostTriageObservationsModelCopyWith<$Res> {
-  __$$_PostTriageObservationsModelCopyWithImpl(
-      _$_PostTriageObservationsModel _value,
-      $Res Function(_$_PostTriageObservationsModel) _then)
+        _$PostTriageObservationsModelImpl>
+    implements _$$PostTriageObservationsModelImplCopyWith<$Res> {
+  __$$PostTriageObservationsModelImplCopyWithImpl(
+      _$PostTriageObservationsModelImpl _value,
+      $Res Function(_$PostTriageObservationsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1794,7 +1824,7 @@ class __$$_PostTriageObservationsModelCopyWithImpl<$Res>
     Object? value = freezed,
     Object? score = freezed,
   }) {
-    return _then(_$_PostTriageObservationsModel(
+    return _then(_$PostTriageObservationsModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1817,12 +1847,14 @@ class __$$_PostTriageObservationsModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostTriageObservationsModel implements _PostTriageObservationsModel {
-  const _$_PostTriageObservationsModel(
+class _$PostTriageObservationsModelImpl
+    implements _PostTriageObservationsModel {
+  const _$PostTriageObservationsModelImpl(
       {this.id, this.identifier, this.value, this.score});
 
-  factory _$_PostTriageObservationsModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PostTriageObservationsModelFromJson(json);
+  factory _$PostTriageObservationsModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$PostTriageObservationsModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1839,10 +1871,10 @@ class _$_PostTriageObservationsModel implements _PostTriageObservationsModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostTriageObservationsModel &&
+            other is _$PostTriageObservationsModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
@@ -1857,13 +1889,13 @@ class _$_PostTriageObservationsModel implements _PostTriageObservationsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostTriageObservationsModelCopyWith<_$_PostTriageObservationsModel>
-      get copyWith => __$$_PostTriageObservationsModelCopyWithImpl<
-          _$_PostTriageObservationsModel>(this, _$identity);
+  _$$PostTriageObservationsModelImplCopyWith<_$PostTriageObservationsModelImpl>
+      get copyWith => __$$PostTriageObservationsModelImplCopyWithImpl<
+          _$PostTriageObservationsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostTriageObservationsModelToJson(
+    return _$$PostTriageObservationsModelImplToJson(
       this,
     );
   }
@@ -1875,10 +1907,10 @@ abstract class _PostTriageObservationsModel
       {final int? id,
       final int? identifier,
       final String? value,
-      final double? score}) = _$_PostTriageObservationsModel;
+      final double? score}) = _$PostTriageObservationsModelImpl;
 
   factory _PostTriageObservationsModel.fromJson(Map<String, dynamic> json) =
-      _$_PostTriageObservationsModel.fromJson;
+      _$PostTriageObservationsModelImpl.fromJson;
 
   @override
   int? get id;
@@ -1890,7 +1922,7 @@ abstract class _PostTriageObservationsModel
   double? get score;
   @override
   @JsonKey(ignore: true)
-  _$$_PostTriageObservationsModelCopyWith<_$_PostTriageObservationsModel>
+  _$$PostTriageObservationsModelImplCopyWith<_$PostTriageObservationsModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1907,7 +1939,6 @@ mixin _$PostTriageImagingSelectionModel {
   String? get baseUrl => throw _privateConstructorUsedError;
   double? get score => throw _privateConstructorUsedError;
   String? get fileId => throw _privateConstructorUsedError;
-  BodySite? get bodySite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1929,8 +1960,7 @@ abstract class $PostTriageImagingSelectionModelCopyWith<$Res> {
       String? endpoint,
       String? baseUrl,
       double? score,
-      String? fileId,
-      BodySite? bodySite});
+      String? fileId});
 }
 
 /// @nodoc
@@ -1953,7 +1983,6 @@ class _$PostTriageImagingSelectionModelCopyWithImpl<$Res,
     Object? baseUrl = freezed,
     Object? score = freezed,
     Object? fileId = freezed,
-    Object? bodySite = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -1980,21 +2009,17 @@ class _$PostTriageImagingSelectionModelCopyWithImpl<$Res,
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
               as String?,
-      bodySite: freezed == bodySite
-          ? _value.bodySite
-          : bodySite // ignore: cast_nullable_to_non_nullable
-              as BodySite?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PostTriageImagingSelectionModelCopyWith<$Res>
+abstract class _$$PostTriageImagingSelectionModelImplCopyWith<$Res>
     implements $PostTriageImagingSelectionModelCopyWith<$Res> {
-  factory _$$_PostTriageImagingSelectionModelCopyWith(
-          _$_PostTriageImagingSelectionModel value,
-          $Res Function(_$_PostTriageImagingSelectionModel) then) =
-      __$$_PostTriageImagingSelectionModelCopyWithImpl<$Res>;
+  factory _$$PostTriageImagingSelectionModelImplCopyWith(
+          _$PostTriageImagingSelectionModelImpl value,
+          $Res Function(_$PostTriageImagingSelectionModelImpl) then) =
+      __$$PostTriageImagingSelectionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2003,18 +2028,17 @@ abstract class _$$_PostTriageImagingSelectionModelCopyWith<$Res>
       String? endpoint,
       String? baseUrl,
       double? score,
-      String? fileId,
-      BodySite? bodySite});
+      String? fileId});
 }
 
 /// @nodoc
-class __$$_PostTriageImagingSelectionModelCopyWithImpl<$Res>
+class __$$PostTriageImagingSelectionModelImplCopyWithImpl<$Res>
     extends _$PostTriageImagingSelectionModelCopyWithImpl<$Res,
-        _$_PostTriageImagingSelectionModel>
-    implements _$$_PostTriageImagingSelectionModelCopyWith<$Res> {
-  __$$_PostTriageImagingSelectionModelCopyWithImpl(
-      _$_PostTriageImagingSelectionModel _value,
-      $Res Function(_$_PostTriageImagingSelectionModel) _then)
+        _$PostTriageImagingSelectionModelImpl>
+    implements _$$PostTriageImagingSelectionModelImplCopyWith<$Res> {
+  __$$PostTriageImagingSelectionModelImplCopyWithImpl(
+      _$PostTriageImagingSelectionModelImpl _value,
+      $Res Function(_$PostTriageImagingSelectionModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2026,9 +2050,8 @@ class __$$_PostTriageImagingSelectionModelCopyWithImpl<$Res>
     Object? baseUrl = freezed,
     Object? score = freezed,
     Object? fileId = freezed,
-    Object? bodySite = freezed,
   }) {
-    return _then(_$_PostTriageImagingSelectionModel(
+    return _then(_$PostTriageImagingSelectionModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2053,30 +2076,25 @@ class __$$_PostTriageImagingSelectionModelCopyWithImpl<$Res>
           ? _value.fileId
           : fileId // ignore: cast_nullable_to_non_nullable
               as String?,
-      bodySite: freezed == bodySite
-          ? _value.bodySite
-          : bodySite // ignore: cast_nullable_to_non_nullable
-              as BodySite?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostTriageImagingSelectionModel
+class _$PostTriageImagingSelectionModelImpl
     implements _PostTriageImagingSelectionModel {
-  const _$_PostTriageImagingSelectionModel(
+  const _$PostTriageImagingSelectionModelImpl(
       {this.id,
       this.identifier,
       this.endpoint,
       this.baseUrl,
       this.score,
-      this.fileId,
-      this.bodySite});
+      this.fileId});
 
-  factory _$_PostTriageImagingSelectionModel.fromJson(
+  factory _$PostTriageImagingSelectionModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_PostTriageImagingSelectionModelFromJson(json);
+      _$$PostTriageImagingSelectionModelImplFromJson(json);
 
   @override
   final int? id;
@@ -2090,19 +2108,17 @@ class _$_PostTriageImagingSelectionModel
   final double? score;
   @override
   final String? fileId;
-  @override
-  final BodySite? bodySite;
 
   @override
   String toString() {
-    return 'PostTriageImagingSelectionModel(id: $id, identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId, bodySite: $bodySite)';
+    return 'PostTriageImagingSelectionModel(id: $id, identifier: $identifier, endpoint: $endpoint, baseUrl: $baseUrl, score: $score, fileId: $fileId)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostTriageImagingSelectionModel &&
+            other is _$PostTriageImagingSelectionModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
@@ -2110,27 +2126,25 @@ class _$_PostTriageImagingSelectionModel
                 other.endpoint == endpoint) &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
             (identical(other.score, score) || other.score == score) &&
-            (identical(other.fileId, fileId) || other.fileId == fileId) &&
-            (identical(other.bodySite, bodySite) ||
-                other.bodySite == bodySite));
+            (identical(other.fileId, fileId) || other.fileId == fileId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, identifier, endpoint, baseUrl, score, fileId, bodySite);
+      runtimeType, id, identifier, endpoint, baseUrl, score, fileId);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostTriageImagingSelectionModelCopyWith<
-          _$_PostTriageImagingSelectionModel>
-      get copyWith => __$$_PostTriageImagingSelectionModelCopyWithImpl<
-          _$_PostTriageImagingSelectionModel>(this, _$identity);
+  _$$PostTriageImagingSelectionModelImplCopyWith<
+          _$PostTriageImagingSelectionModelImpl>
+      get copyWith => __$$PostTriageImagingSelectionModelImplCopyWithImpl<
+          _$PostTriageImagingSelectionModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostTriageImagingSelectionModelToJson(
+    return _$$PostTriageImagingSelectionModelImplToJson(
       this,
     );
   }
@@ -2144,11 +2158,10 @@ abstract class _PostTriageImagingSelectionModel
       final String? endpoint,
       final String? baseUrl,
       final double? score,
-      final String? fileId,
-      final BodySite? bodySite}) = _$_PostTriageImagingSelectionModel;
+      final String? fileId}) = _$PostTriageImagingSelectionModelImpl;
 
   factory _PostTriageImagingSelectionModel.fromJson(Map<String, dynamic> json) =
-      _$_PostTriageImagingSelectionModel.fromJson;
+      _$PostTriageImagingSelectionModelImpl.fromJson;
 
   @override
   int? get id;
@@ -2163,10 +2176,8 @@ abstract class _PostTriageImagingSelectionModel
   @override
   String? get fileId;
   @override
-  BodySite? get bodySite;
-  @override
   @JsonKey(ignore: true)
-  _$$_PostTriageImagingSelectionModelCopyWith<
-          _$_PostTriageImagingSelectionModel>
+  _$$PostTriageImagingSelectionModelImplCopyWith<
+          _$PostTriageImagingSelectionModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

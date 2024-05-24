@@ -20,7 +20,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
     final loc = context.loc!;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: AppSize.klheight * 3,
+          toolbarHeight: AppSize.kl * 3,
           title: const VisionGuardianEventSearchBar(
               readOnly: false, searchType: "event"),
           actions: const [],
@@ -37,7 +37,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
                       .watch(addEventDetailsProvider)
                       .searchEventListController,
                   child: Padding(
-                    padding: const EdgeInsets.all(AppSize.kspadding),
+                    padding: const EdgeInsets.all(AppSize.ks),
                     child: Column(
                       children: [
                         for (int index = 0; index < response.length; index++)
@@ -67,7 +67,7 @@ class VisionGuardianSearchEvent extends ConsumerWidget {
                                 .length ==
                             10)
                           const Padding(
-                            padding: EdgeInsets.all(AppSize.klpadding),
+                            padding: EdgeInsets.all(AppSize.kl),
                             child: CircularProgressIndicator.adaptive(),
                           ),
                       ],

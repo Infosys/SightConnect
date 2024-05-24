@@ -23,14 +23,14 @@ class VGSlide2 extends StatelessWidget {
     final loc = context.loc!;
     return Container(
       margin: const EdgeInsets.symmetric(
-        vertical: AppSize.kspadding,
+        vertical: AppSize.ks,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
             width: AppSize.width(context) * 0.9,
-            padding: const EdgeInsets.all(AppSize.kspadding),
+            padding: const EdgeInsets.all(AppSize.ks),
             decoration: boxDecoration,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

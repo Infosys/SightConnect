@@ -1,141 +1,100 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/enitity/assessment_and_triage_report_entity.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assesment_eye_image_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_details.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_recommeded_center.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_care_plan_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_overall_description_card.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_profile.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_remark_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessmnet_acuity_score_card.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/main.dart';
+
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionTechnicianAssessmentReportPage extends ConsumerWidget {
+  final VTPatientDto patientDetails;
   const VisionTechnicianAssessmentReportPage({
     required this.assessmentDetailsReport,
     super.key,
+    required this.patientDetails,
   });
   final AssessmentAndTriageReportDetailedEntity assessmentDetailsReport;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    logger.d("assessmentDetailsReport:${assessmentDetailsReport.toJson()}");
     final loc = context.loc!;
+    final appBarTitle =
+        "${loc.vtAssessmentReport} ${assessmentDetailsReport.assessmentID}";
+    logger.d(assessmentDetailsReport.toJson());
+
     return Scaffold(
-      backgroundColor: AppColor.scaffold,
       appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
-        title: Text(
-            '${loc.vtAssessmentReport} ${assessmentDetailsReport.assessmentID}'),
+        title: Text(appBarTitle),
+        actions: const [],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               AssessmentReportProfile(
-                  assessmentId: assessmentDetailsReport.assessmentID),
-              const SizedBox(height: AppSize.klheight),
+                assessmentId: assessmentDetailsReport.assessmentID,
+                patientDetails: patientDetails,
+                assessmentDate: assessmentDetailsReport.reportDate,
+              ),
+              const SizedBox(height: AppSize.kl),
+              AssessmentOverallDescriptionCard(
+                triageResultDescription:
+                    assessmentDetailsReport.triageResultDescription,
+                cumulativeSeverity: assessmentDetailsReport.cumulativeSeverity,
+              ),
+              const SizedBox(height: AppSize.kl),
+              AssessmentEyeImageCard(
+                imageBriefEntity: assessmentDetailsReport.imageBriefEntity,
+              ),
+              const SizedBox(height: AppSize.kl),
+              AssessmentAcuityScoreCard(
+                visualAcuityBreifEntity:
+                    assessmentDetailsReport.visualAcuityBreifEntity,
+              ),
+              const SizedBox(height: AppSize.km),
               AssessmentReportDetails(
                 questionResponseBreifModel:
                     assessmentDetailsReport.questionResponseBriefEntity,
               ),
-              const SizedBox(height: AppSize.klheight),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  boxShadow: applycustomShadow(
-                    _recommendationColor(
-                        assessmentDetailsReport.cumulativeSeverity),
-                    0.1,
-                  ),
-                  border: Border.all(
-                    color: _recommendationColor(
-                        assessmentDetailsReport.cumulativeSeverity),
-                    width: 0.5,
-                  ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(AppSize.kmradius - 5),
-                  ),
-                ),
-                padding: const EdgeInsets.all(AppSize.klpadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Recommendation",
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.kmheight),
-                    Text(
-                      assessmentDetailsReport.triageResultDescription ?? "",
-                      style: applyRobotoFont(
-                        fontSize: 16,
-                      ),
-                    )
-                  ],
-                ),
+              const SizedBox(height: AppSize.kl),
+              AssessementCarePlanCard(
+                carePlan: assessmentDetailsReport.carePlans,
+                title: "Prescribed Solutions",
               ),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
+              AssessementCarePlanCard(
+                showCarePlan: false,
+                carePlan: assessmentDetailsReport.carePlans,
+                title: "Recommended Center Type",
+              ),
+              const SizedBox(height: AppSize.kl),
               AssessmentReportRecommendedCenter(
                 visionCenterId: assessmentDetailsReport.visionCenterId,
               ),
-              const SizedBox(height: AppSize.klheight),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  boxShadow: applyLightShadow(),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(AppSize.kmradius - 5),
-                  ),
-                ),
-                padding: const EdgeInsets.all(AppSize.klpadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      loc.vtRemarks,
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.kmheight),
-                    Text(
-                      assessmentDetailsReport.remarks ?? "No Remarks",
-                      style: applyRobotoFont(
-                        fontSize: 16,
-                      ),
-                    )
-                  ],
-                ),
+              const SizedBox(height: AppSize.kl),
+              AssessmentReportRemarkCard(
+                remark: assessmentDetailsReport.remarks,
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  _recommendationColor(Severity? severity) {
-    switch (severity) {
-      case Severity.ABNORMAL:
-        return AppColor.red;
-      case Severity.LOW:
-        return AppColor.green;
-      case Severity.HIGH:
-        return AppColor.orange;
-      default:
-        return AppColor.grey;
-    }
   }
 }

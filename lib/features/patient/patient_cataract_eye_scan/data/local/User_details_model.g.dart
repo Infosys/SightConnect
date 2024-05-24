@@ -6,8 +6,8 @@ part of 'User_details_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserDetails _$$_UserDetailsFromJson(Map<String, dynamic> json) =>
-    _$_UserDetails(
+_$UserDetailsImpl _$$UserDetailsImplFromJson(Map<String, dynamic> json) =>
+    _$UserDetailsImpl(
       patientId: json['patientId'] as String?,
       patientName: json['patientName'] as String?,
       patientAge: json['patientAge'] as String?,
@@ -25,7 +25,7 @@ _$_UserDetails _$$_UserDetailsFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$$_UserDetailsToJson(_$_UserDetails instance) =>
+Map<String, dynamic> _$$UserDetailsImplToJson(_$UserDetailsImpl instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
       'patientName': instance.patientName,

@@ -13,17 +13,17 @@ class VTProfilePersonalDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.ks),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Container(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,29 +33,31 @@ class VTProfilePersonalDetailsCard extends StatelessWidget {
               style: applyFiraSansFont(),
             ),
             const SizedBox(
-              height: AppSize.kmheight,
+              height: AppSize.km,
             ),
             Text(
-              loc.vtHprId,
+              "Registration Number",
               style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
             ),
             Text(
-              "-",
+              profileData.registrationAcademic?.registrationData?[0]
+                      .registrationNumber ??
+                  "",
               style: applyRobotoFont(color: AppColor.darkGrey),
             ),
             const SizedBox(
-              height: AppSize.ksheight,
+              height: AppSize.ks,
             ),
-            Text(
-              loc.vtEmailId,
-              style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
-            ),
-            Text(
-              profileData.officialEmail ?? "-",
-              style: applyRobotoFont(color: AppColor.darkGrey),
-            ),
+            // Text(
+            //   loc.vtEmailId,
+            //   style: applyRobotoFont(fontSize: 14, color: AppColor.grey),
+            // ),
+            // Text(
+            //   profileData.officialEmail ?? "-",
+            //   style: applyRobotoFont(color: AppColor.darkGrey),
+            // ),
             const SizedBox(
-              height: AppSize.ksheight,
+              height: AppSize.ks,
             ),
             Text(
               loc.vtEducationalQualification,
@@ -77,7 +79,7 @@ class VTProfilePersonalDetailsCard extends StatelessWidget {
               style: applyRobotoFont(color: AppColor.darkGrey),
             ),
             const SizedBox(
-              height: AppSize.ksheight,
+              height: AppSize.ks,
             ),
             Wrap(
               spacing: AppSize.width(context) / 4,

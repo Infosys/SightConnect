@@ -97,7 +97,7 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
   Future<Either<Failure, List<TriageDetailedReportModel>>>
       getTriageReportByEncounterId(
     int encounterId,
-    DiagnosticReportStatus status,
+    List<DiagnosticReportStatus> status,
     int? page,
     int? size,
     String? filter,
@@ -106,7 +106,12 @@ class TriageReportRepositoryImpl implements TriageReportRepository {
       try {
         final remoteResponse =
             await triageReportSource.getTriageReportByEncounterId(
-                encounterId, status, page, size, filter);
+          encounterId,
+          status,
+          page,
+          size,
+          filter,
+        );
 
         return Right(remoteResponse);
       } on ServerException catch (e) {

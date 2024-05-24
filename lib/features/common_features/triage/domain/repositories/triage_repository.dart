@@ -35,6 +35,11 @@ abstract class TriageRepository {
     required List<PostTriageObservationsModel> triageVisualAcuity,
     required String patientID,
   });
+
+  Future<Either<Failure, void>> saveTriageDistanceVisualAcuityLocally({
+    required List<PostTriageObservationsModel> triageVisualAcuity,
+  });
+
   Future<Either<Failure, void>> saveTriageEyeScanLocally({
     required List<PostTriageImagingSelectionModel> triageEyeScan,
     required String patientID,
@@ -43,6 +48,10 @@ abstract class TriageRepository {
       getQuestionaireResponseLocally();
   Future<Either<Failure, List<PostTriageObservationsModel>>>
       getVisionAcuityTumblingResponseLocally();
+  
+  Future<Either<Failure, List<PostTriageObservationsModel>>>
+      getTriageDistanceVisualAcuityResponseLocally();
+
   Future<Either<Failure, List<PostTriageImagingSelectionModel>>>
       getTriageEyeScanResponseLocally();
   Future<Either<Failure, void>> resetTriage();

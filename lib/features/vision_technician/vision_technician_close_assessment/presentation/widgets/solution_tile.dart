@@ -20,14 +20,13 @@ class SolutionTile extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var switchState = useState<bool>(false);
 
-    var refRead = ref.read(vtCloseAssessmentHelperProvider);
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      margin: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.km),
+      margin: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applycustomShadow(),
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
       ),
       child: Column(
         children: [
@@ -39,11 +38,12 @@ class SolutionTile extends HookConsumerWidget {
                 onChanged: (bool value) {
                   switchState.value = value;
 
-                  refRead.setSolution(goalOutCome);
-                  // model.addSolutions(title);
+                  ref
+                      .read(vtCloseAssessmentHelperProvider)
+                      .setSolution(goalOutCome);
                 },
               ),
-              const SizedBox(width: AppSize.kswidth),
+              const SizedBox(width: AppSize.ks),
               Text(
                 _enumToString(goalOutCome),
                 style: applyRobotoFont(

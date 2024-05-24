@@ -36,7 +36,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                   },
                 ),
                 SizedBox(
-                  width: AppSize.klwidth * 3,
+                  width: AppSize.kl * 3,
                   child: Text(
                     dayAvailabilityState.day,
                     style: applyRobotoFont(
@@ -69,14 +69,14 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
                         },
                         separatorBuilder: (context, index) {
                           return const SizedBox(
-                            height: AppSize.kmheight,
+                            height: AppSize.km,
                           );
                         },
                         itemCount: (dayAvailabilityState.time).length,
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   IconButton(
                     icon: Icon(Icons.add_circle_outline,
                         color: dayAvailabilityState.checked == false
@@ -97,7 +97,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
           ],
         ),
         const SizedBox(
-          height: AppSize.klheight,
+          height: AppSize.kl,
         ),
       ],
     );

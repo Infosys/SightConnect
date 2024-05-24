@@ -35,18 +35,18 @@ EasyStep vtCustomStep(
         ),
         const SizedBox(height: 50),
         Container(
-          width: AppSize.klwidth * 3,
-          height: AppSize.ksheight * 7,
+          width: AppSize.kl * 3,
+          height: AppSize.ks * 7,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: activeStep == currentStep
                 ? AppColor.lightBlue
                 : AppColor.lightGrey.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(AppSize.ksradius),
+            borderRadius: BorderRadius.circular(AppSize.ks),
           ),
           child: Image.asset(
             "assets/images/vt_${eye}_eye.png",
-            height: AppSize.kmheight * 2,
+            height: AppSize.km * 2,
           ),
         ),
       ],

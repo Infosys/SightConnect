@@ -13,10 +13,10 @@ class VtMarkMyAvailableDateRangePicker extends ConsumerWidget {
     TextEditingController controller =
         TextEditingController(text: DateTime.now().toString().substring(0, 10));
     return Container(
-      width: AppSize.klwidth * 10,
+      width: AppSize.kl * 10,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSize.kspadding,
+        horizontal: AppSize.ks,
       ),
       child: TextField(
         readOnly: true,

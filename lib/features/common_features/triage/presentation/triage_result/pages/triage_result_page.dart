@@ -1,12 +1,12 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_image_card.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_page_top_card.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
@@ -26,7 +26,7 @@ class TriageResultPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(triageResultProvider(triageResult));
     final loc = context.loc!;
-
+    // final observationData = ref.read(globalVisualAcuityProvider);
     return PopScope(
       canPop: false,
       onPopInvoked: (value) async {
@@ -72,10 +72,9 @@ class TriageResultPage extends ConsumerWidget {
                   testDate: triageResult.userStartDate?.formateDate,
                   testId: "${loc.triageTestId} ${triageResult.id}",
                 ),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+                  margin: const EdgeInsets.symmetric(horizontal: AppSize.km),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
@@ -97,15 +96,15 @@ class TriageResultPage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
                 const NearbyVisionCentersList(),
-                const SizedBox(height: AppSize.kmheight),
-                const HelplineCard(helpLine: AppText.tollFreeNumber),
-                const SizedBox(height: AppSize.kmheight),
+                const SizedBox(height: AppSize.km),
+                const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+                const SizedBox(height: AppSize.km),
                 ResultImageCard(
                   reportId: triageResult.id,
                 ),
-                const SizedBox(height: AppSize.klheight * 3),
+                const SizedBox(height: AppSize.kl * 3),
               ],
             ),
           ),

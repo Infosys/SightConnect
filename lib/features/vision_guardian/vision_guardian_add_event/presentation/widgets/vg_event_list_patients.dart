@@ -33,13 +33,13 @@ class VisionGuardianPatientList extends HookConsumerWidget {
     var data = ref.watch(addPatientEventProvider).patientList;
     final loc = context.loc!;
     return Padding(
-      padding: const EdgeInsets.all(AppSize.kspadding + 2),
+      padding: const EdgeInsets.all(AppSize.ks + 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const VisionGuardianEventPatientSearch(),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           ref.watch(addPatientEventProvider).isLoading
               ? const Center(child: CircularProgressIndicator.adaptive())
@@ -135,13 +135,13 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
           itemBuilder: (context, index) {
             if (index == data.length) {
               return const Padding(
-                padding: EdgeInsets.all(AppSize.klpadding),
+                padding: EdgeInsets.all(AppSize.kl),
                 child: CircularProgressIndicator.adaptive(),
               );
             }
 
             return Container(
-              padding: const EdgeInsets.all(AppSize.kspadding),
+              padding: const EdgeInsets.all(AppSize.ks),
               decoration: BoxDecoration(
                   color: AppColor.white,
                   boxShadow: applyLightShadow(),
@@ -170,7 +170,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                             style: applyRobotoFont(
                                 fontSize: 14, fontWeight: FontWeight.w500),
                           ),
-                          const SizedBox(height: AppSize.ksheight / 2),
+                          const SizedBox(height: AppSize.ks / 2),
                           Row(
                             children: [
                               Text(
@@ -194,7 +194,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: AppSize.ksheight / 2),
+                          const SizedBox(height: AppSize.ks / 2),
                           Row(
                             children: [
                               Visibility(
@@ -214,7 +214,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: AppSize.kspadding),
+                              const SizedBox(width: AppSize.ks),
                               Visibility(
                                 visible: data[index].parentPatientId == null,
                                 child: InkWell(
@@ -263,8 +263,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                         size: 14,
                                         color: AppColor.primary,
                                       ),
-                                      const SizedBox(
-                                          width: AppSize.kspadding / 2),
+                                      const SizedBox(width: AppSize.ks / 2),
                                       Text(
                                         loc.vgAddMember,
                                         style: applyRobotoFont(
@@ -324,8 +323,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
                                         size: 14,
                                         color: AppColor.primary,
                                       ),
-                                      const SizedBox(
-                                          width: AppSize.kspadding / 2),
+                                      const SizedBox(width: AppSize.ks / 2),
                                       Text(
                                         loc.vgCompleteProfile,
                                         textAlign: TextAlign.center,
@@ -385,7 +383,7 @@ class VisionGuardianPatientListWidget extends ConsumerWidget {
             );
           },
           separatorBuilder: (context, index) {
-            return const SizedBox(height: AppSize.kmheight);
+            return const SizedBox(height: AppSize.km);
           },
           itemCount:
               ref.watch(addPatientEventProvider).newpatientList.length == 10

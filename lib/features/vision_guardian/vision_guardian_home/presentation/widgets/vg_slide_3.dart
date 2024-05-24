@@ -43,11 +43,11 @@ class VGSlide3 extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.symmetric(
-        vertical: AppSize.kspadding,
+        vertical: AppSize.ks,
       ),
       child: Container(
         width: AppSize.width(context) * 0.9,
-        padding: const EdgeInsets.all(AppSize.kspadding),
+        padding: const EdgeInsets.all(AppSize.ks),
         decoration: boxDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,11 +88,11 @@ class VGSlide3 extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSize.klwidth),
+                const SizedBox(width: AppSize.kl),
                 Expanded(
                   child: Wrap(
-                    runSpacing: AppSize.kswidth / 4,
-                    spacing: AppSize.kswidth,
+                    runSpacing: AppSize.ks / 4,
+                    spacing: AppSize.ks,
                     children: [
                       VGSymptonChip(
                         color: colorList[0],

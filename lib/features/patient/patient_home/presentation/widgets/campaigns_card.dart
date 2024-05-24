@@ -23,7 +23,7 @@ class CampaginsCard extends StatelessWidget {
                 )
               : const SizedBox(),
           const SizedBox(
-            width: AppSize.kswidth,
+            width: AppSize.ks,
           ),
           Expanded(
             child: Column(
@@ -38,7 +38,7 @@ class CampaginsCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.ksheight / 2,
+                  height: AppSize.ks / 2,
                 ),
                 Text(
                   data["description"] ?? "",

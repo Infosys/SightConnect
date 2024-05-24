@@ -13,25 +13,24 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    return Padding(
-      padding: const EdgeInsets.all(14.0),
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSize.km,
+        vertical: AppSize.km,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColor.white,
+      ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: AppSize.width(context) * 0.05),
-          Expanded(
-            child: TextButton(
+          SizedBox(
+            width: AppSize.width(context) * 0.4,
+            child: OutlinedButton(
               onPressed: () {
                 ref.watch(addEventDetailsProvider).resetFields();
                 Navigator.pop(context);
               },
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    side: const BorderSide(color: AppColor.primary),
-                    borderRadius: BorderRadius.circular(AppSize.klradius),
-                  ),
-                ),
-              ),
               child: Text(
                 loc.vgCancel,
                 style: applyRobotoFont(
@@ -42,9 +41,9 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(width: AppSize.width(context) * 0.05),
-          Expanded(
-            child: TextButton(
+          SizedBox(
+            width: AppSize.width(context) * 0.4,
+            child: ElevatedButton(
               onPressed: () async {
                 final navigator = Navigator.of(context);
                 if ((ref.read(addEventDetailsProvider).formKey)
@@ -63,15 +62,6 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                   }
                 }
               },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(AppColor.primary),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    side: const BorderSide(color: AppColor.primary),
-                    borderRadius: BorderRadius.circular(AppSize.klradius),
-                  ),
-                ),
-              ),
               child: Text(
                 loc.vgSave,
                 style: applyRobotoFont(
@@ -82,7 +72,6 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
               ),
             ),
           ),
-          SizedBox(width: AppSize.width(context) * 0.05),
         ],
       ),
     );

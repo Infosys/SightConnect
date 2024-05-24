@@ -1,7 +1,7 @@
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/pages/triage_page.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,8 @@ class ResultPageBottomCards extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const HelplineCard(helpLine: AppText.tollFreeNumber),
-        const SizedBox(height: AppSize.kmheight),
+        const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+        const SizedBox(height: AppSize.km),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
@@ -39,7 +39,7 @@ class ResultPageBottomCards extends ConsumerWidget {
                 ),
               ),
               const SizedBox(
-                width: AppSize.kmheight,
+                width: AppSize.km,
               ),
               Expanded(
                 child: OutlinedButton(

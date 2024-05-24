@@ -6,10 +6,11 @@ part of 'vg_patient_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VisionGuardianPatientResponseModel
-    _$$_VisionGuardianPatientResponseModelFromJson(Map<String, dynamic> json) =>
-        _$_VisionGuardianPatientResponseModel(
-          id: json['id'] as int?,
+_$VisionGuardianPatientResponseModelImpl
+    _$$VisionGuardianPatientResponseModelImplFromJson(
+            Map<String, dynamic> json) =>
+        _$VisionGuardianPatientResponseModelImpl(
+          id: (json['id'] as num?)?.toInt(),
           name: json['name'] as String?,
           mobile: json['mobile'] as String?,
           yearOfBirth: json['yearOfBirth'] as String?,
@@ -19,15 +20,15 @@ _$_VisionGuardianPatientResponseModel
           districtName: json['districtName'] as String?,
           townName: json['townName'] as String?,
           pincode: json['pincode'] as String?,
-          encounterId: json['encounterId'] as int?,
-          diagnosticReportId: json['diagnosticReportId'] as int?,
+          encounterId: (json['encounterId'] as num?)?.toInt(),
+          diagnosticReportId: (json['diagnosticReportId'] as num?)?.toInt(),
           encounterStartDate: json['encounterStartDate'] as String?,
           status: json['status'] as String?,
           category: json['category'] as String?,
         );
 
-Map<String, dynamic> _$$_VisionGuardianPatientResponseModelToJson(
-        _$_VisionGuardianPatientResponseModel instance) =>
+Map<String, dynamic> _$$VisionGuardianPatientResponseModelImplToJson(
+        _$VisionGuardianPatientResponseModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

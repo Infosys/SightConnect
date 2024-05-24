@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
-import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -57,8 +56,8 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                           child: Container(
                             height: AppSize.height(context) * 0.06,
                             padding: const EdgeInsets.symmetric(
-                                horizontal: AppSize.kspadding,
-                                vertical: AppSize.kspadding - 2),
+                                horizontal: AppSize.ks,
+                                vertical: AppSize.ks - 2),
                             decoration: BoxDecoration(
                               color: AppColor.white,
                               borderRadius: BorderRadius.circular(8),
@@ -87,7 +86,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                                     size: 12,
                                   ),
                                 ),
-                                const SizedBox(width: AppSize.kswidth - 2),
+                                const SizedBox(width: AppSize.ks - 2),
                                 Text(
                                   "All",
                                   maxLines: 1,
@@ -102,7 +101,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSize.kspadding),
+                        const SizedBox(width: AppSize.ks),
                       ],
                     ),
                   InkWell(
@@ -111,13 +110,14 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                       model.setSelectedPatientDetails(
                           patient.profile!.patient!.name!,
                           patient.profile!.patient!.patientId.toString());
-                      ref.read(appointmentViewModelProvider).sendAppointmentDetails();
+                      ref
+                          .read(appointmentViewModelProvider)
+                          .sendAppointmentDetails();
                     },
                     child: Container(
                       height: AppSize.height(context) * 0.06,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: AppSize.kspadding,
-                          vertical: AppSize.kspadding - 2),
+                          horizontal: AppSize.ks, vertical: AppSize.ks - 2),
                       decoration: BoxDecoration(
                           color: AppColor.white,
                           borderRadius: BorderRadius.circular(8),
@@ -147,7 +147,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                               size: 12,
                             ),
                           ),
-                          const SizedBox(width: AppSize.kspadding - 2),
+                          const SizedBox(width: AppSize.ks - 2),
                           patient.profile?.patient?.profilePhoto != null
                               ? Container(
                                   decoration: BoxDecoration(
@@ -167,7 +167,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                                   radius: 16,
                                   fontSize: 12,
                                 ),
-                          const SizedBox(width: AppSize.kswidth - 2),
+                          const SizedBox(width: AppSize.ks - 2),
                           Text(
                             _formateFirstName(patient.profile!.patient!.name!),
                             maxLines: 1,
@@ -182,7 +182,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: AppSize.kspadding),
+                  const SizedBox(width: AppSize.ks),
                   SizedBox(
                     height: AppSize.height(context) * 0.06,
                     child: ListView.builder(
@@ -196,15 +196,16 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                             model.setSelectedPatientDetails(
                                 relations[index].name!,
                                 relations[index].patientId.toString());
-                            ref.read(appointmentViewModelProvider).sendAppointmentDetails();
+                            ref
+                                .read(appointmentViewModelProvider)
+                                .sendAppointmentDetails();
                           },
                           child: Container(
                             height: AppSize.height(context) * 0.06,
-                            margin:
-                                const EdgeInsets.only(right: AppSize.kspadding),
+                            margin: const EdgeInsets.only(right: AppSize.ks),
                             padding: const EdgeInsets.symmetric(
-                              horizontal: AppSize.kspadding,
-                              vertical: AppSize.kspadding - 2,
+                              horizontal: AppSize.ks,
+                              vertical: AppSize.ks - 2,
                             ),
                             decoration: BoxDecoration(
                               color: AppColor.white,
@@ -236,7 +237,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                                     size: 12,
                                   ),
                                 ),
-                                const SizedBox(width: AppSize.kspadding - 2),
+                                const SizedBox(width: AppSize.ks - 2),
                                 relations[index].profilePicture != null
                                     ? Container(
                                         decoration: BoxDecoration(
@@ -256,7 +257,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                                         radius: 16,
                                         fontSize: 12,
                                       ),
-                                const SizedBox(width: AppSize.kswidth - 2),
+                                const SizedBox(width: AppSize.ks - 2),
                                 Text(
                                   _formateFirstName(relations[index].name!),
                                   maxLines: 1,
@@ -286,7 +287,7 @@ class AppointmentPatientSelector extends HookConsumerWidget {
                 height: 40,
                 child: VerticalDivider(
                   thickness: 2,
-                  width: AppSize.klelevation,
+                  width: AppSize.kl,
                   color: AppColor.lightGrey,
                 ),
               ),

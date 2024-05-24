@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final assessmentTimelineProvider =
-    ChangeNotifierProvider<AssessmentTimelineNotifier>((ref) {
+    ChangeNotifierProvider.autoDispose<AssessmentTimelineNotifier>((ref) {
   return AssessmentTimelineNotifier(ref.watch(visionTechnicianSearchProvider));
 });
 

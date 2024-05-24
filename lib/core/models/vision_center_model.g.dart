@@ -6,10 +6,10 @@ part of 'vision_center_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrganizationResponseModel _$$_OrganizationResponseModelFromJson(
+_$OrganizationResponseModelImpl _$$OrganizationResponseModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OrganizationResponseModel(
-      id: json['id'] as int?,
+    _$OrganizationResponseModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       trackingId: json['trackingId'] as String?,
       facilityid: json['facilityid'] as String?,
       facilityType:
@@ -29,8 +29,8 @@ _$_OrganizationResponseModel _$$_OrganizationResponseModelFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_OrganizationResponseModelToJson(
-        _$_OrganizationResponseModel instance) =>
+Map<String, dynamic> _$$OrganizationResponseModelImplToJson(
+        _$OrganizationResponseModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'trackingId': instance.trackingId,
@@ -45,24 +45,28 @@ Map<String, dynamic> _$$_OrganizationResponseModelToJson(
 
 const _$FacilityTypeEnumMap = {
   FacilityType.PRIMARY: 'PRIMARY',
+  FacilityType.SECONDARY: 'SECONDARY',
+  FacilityType.TERTIARY: 'TERTIARY',
+  FacilityType.OTHER: 'OTHER',
 };
 
-_$_TenantCustomModel _$$_TenantCustomModelFromJson(Map<String, dynamic> json) =>
-    _$_TenantCustomModel(
-      id: json['id'] as int?,
+_$TenantCustomModelImpl _$$TenantCustomModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TenantCustomModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$$_TenantCustomModelToJson(
-        _$_TenantCustomModel instance) =>
+Map<String, dynamic> _$$TenantCustomModelImplToJson(
+        _$TenantCustomModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
     };
 
-_$_FacilityInformationModel _$$_FacilityInformationModelFromJson(
+_$FacilityInformationModelImpl _$$FacilityInformationModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FacilityInformationModel(
+    _$FacilityInformationModelImpl(
       facilityName: json['facilityName'] as String?,
       ownershipCode: json['ownershipCode'] as String?,
       ownershipSubTypeCode: json['ownershipSubTypeCode'] as String?,
@@ -98,8 +102,8 @@ _$_FacilityInformationModel _$$_FacilityInformationModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_FacilityInformationModelToJson(
-        _$_FacilityInformationModel instance) =>
+Map<String, dynamic> _$$FacilityInformationModelImplToJson(
+        _$FacilityInformationModelImpl instance) =>
     <String, dynamic>{
       'facilityName': instance.facilityName,
       'ownershipCode': instance.ownershipCode,
@@ -123,9 +127,9 @@ Map<String, dynamic> _$$_FacilityInformationModelToJson(
           instance.abdmCompliantSoftware?.map((e) => e.toJson()).toList(),
     };
 
-_$_FacilityAddressModel _$$_FacilityAddressModelFromJson(
+_$FacilityAddressModelImpl _$$FacilityAddressModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FacilityAddressModel(
+    _$FacilityAddressModelImpl(
       country: json['country'] as String?,
       stateLGDCode: json['stateLGDCode'] as String?,
       districtLGDCode: json['districtLGDCode'] as String?,
@@ -140,8 +144,8 @@ _$_FacilityAddressModel _$$_FacilityAddressModelFromJson(
       pincode: json['pincode'] as String?,
     );
 
-Map<String, dynamic> _$$_FacilityAddressModelToJson(
-        _$_FacilityAddressModel instance) =>
+Map<String, dynamic> _$$FacilityAddressModelImplToJson(
+        _$FacilityAddressModelImpl instance) =>
     <String, dynamic>{
       'country': instance.country,
       'stateLGDCode': instance.stateLGDCode,
@@ -157,19 +161,19 @@ Map<String, dynamic> _$$_FacilityAddressModelToJson(
       'pincode': instance.pincode,
     };
 
-_$_FacilityContactInformationModel _$$_FacilityContactInformationModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_FacilityContactInformationModel(
-      facilityContactNumber: json['facilityContactNumber'] as String?,
-      facilityEmailId: json['facilityEmailId'] as String?,
-      facilityLandlineNumber: json['facilityLandlineNumber'] as String?,
-      facilityStdCode: json['facilityStdCode'] as String?,
-      websiteLink: json['websiteLink'] as String?,
-      osid: json['osid'] as String?,
-    );
+_$FacilityContactInformationModelImpl
+    _$$FacilityContactInformationModelImplFromJson(Map<String, dynamic> json) =>
+        _$FacilityContactInformationModelImpl(
+          facilityContactNumber: json['facilityContactNumber'] as String?,
+          facilityEmailId: json['facilityEmailId'] as String?,
+          facilityLandlineNumber: json['facilityLandlineNumber'] as String?,
+          facilityStdCode: json['facilityStdCode'] as String?,
+          websiteLink: json['websiteLink'] as String?,
+          osid: json['osid'] as String?,
+        );
 
-Map<String, dynamic> _$$_FacilityContactInformationModelToJson(
-        _$_FacilityContactInformationModel instance) =>
+Map<String, dynamic> _$$FacilityContactInformationModelImplToJson(
+        _$FacilityContactInformationModelImpl instance) =>
     <String, dynamic>{
       'facilityContactNumber': instance.facilityContactNumber,
       'facilityEmailId': instance.facilityEmailId,
@@ -179,9 +183,9 @@ Map<String, dynamic> _$$_FacilityContactInformationModelToJson(
       'osid': instance.osid,
     };
 
-_$_FacilityUploadModel _$$_FacilityUploadModelFromJson(
+_$FacilityUploadModelImpl _$$FacilityUploadModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FacilityUploadModel(
+    _$FacilityUploadModelImpl(
       facilityBoardPhoto: json['facilityBoardPhoto'] == null
           ? null
           : DocumentModel.fromJson(
@@ -193,17 +197,17 @@ _$_FacilityUploadModel _$$_FacilityUploadModelFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_FacilityUploadModelToJson(
-        _$_FacilityUploadModel instance) =>
+Map<String, dynamic> _$$FacilityUploadModelImplToJson(
+        _$FacilityUploadModelImpl instance) =>
     <String, dynamic>{
       'facilityBoardPhoto': instance.facilityBoardPhoto?.toJson(),
       'facilityBuildingPhoto': instance.facilityBuildingPhoto?.toJson(),
       'osid': instance.osid,
     };
 
-_$_FacilityAddressProofModel _$$_FacilityAddressProofModelFromJson(
+_$FacilityAddressProofModelImpl _$$FacilityAddressProofModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FacilityAddressProofModel(
+    _$FacilityAddressProofModelImpl(
       addressProofType: json['addressProofType'] as String?,
       addressProofAttachment: json['addressProofAttachment'] == null
           ? null
@@ -212,33 +216,33 @@ _$_FacilityAddressProofModel _$$_FacilityAddressProofModelFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_FacilityAddressProofModelToJson(
-        _$_FacilityAddressProofModel instance) =>
+Map<String, dynamic> _$$FacilityAddressProofModelImplToJson(
+        _$FacilityAddressProofModelImpl instance) =>
     <String, dynamic>{
       'addressProofType': instance.addressProofType,
       'addressProofAttachment': instance.addressProofAttachment?.toJson(),
       'osid': instance.osid,
     };
 
-_$_FacilityTimingModel _$$_FacilityTimingModelFromJson(
+_$FacilityTimingModelImpl _$$FacilityTimingModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FacilityTimingModel(
+    _$FacilityTimingModelImpl(
       workingDays: json['workingDays'] as String?,
       openingHours: json['openingHours'] as String?,
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_FacilityTimingModelToJson(
-        _$_FacilityTimingModel instance) =>
+Map<String, dynamic> _$$FacilityTimingModelImplToJson(
+        _$FacilityTimingModelImpl instance) =>
     <String, dynamic>{
       'workingDays': instance.workingDays,
       'openingHours': instance.openingHours,
       'osid': instance.osid,
     };
 
-_$_AbdmCompliantSoftwareModel _$$_AbdmCompliantSoftwareModelFromJson(
+_$AbdmCompliantSoftwareModelImpl _$$AbdmCompliantSoftwareModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AbdmCompliantSoftwareModel(
+    _$AbdmCompliantSoftwareModelImpl(
       existingSoftwares: (json['existingSoftwares'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -246,17 +250,18 @@ _$_AbdmCompliantSoftwareModel _$$_AbdmCompliantSoftwareModelFromJson(
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_AbdmCompliantSoftwareModelToJson(
-        _$_AbdmCompliantSoftwareModel instance) =>
+Map<String, dynamic> _$$AbdmCompliantSoftwareModelImplToJson(
+        _$AbdmCompliantSoftwareModelImpl instance) =>
     <String, dynamic>{
       'existingSoftwares': instance.existingSoftwares,
       'anyother': instance.anyother,
       'osid': instance.osid,
     };
 
-_$_FacilityAdditionalInformationModel
-    _$$_FacilityAdditionalInformationModelFromJson(Map<String, dynamic> json) =>
-        _$_FacilityAdditionalInformationModel(
+_$FacilityAdditionalInformationModelImpl
+    _$$FacilityAdditionalInformationModelImplFromJson(
+            Map<String, dynamic> json) =>
+        _$FacilityAdditionalInformationModelImpl(
           trackingId: json['trackingId'] as String?,
           generalInformation: json['generalInformation'] == null
               ? null
@@ -264,16 +269,16 @@ _$_FacilityAdditionalInformationModel
                   json['generalInformation'] as Map<String, dynamic>),
         );
 
-Map<String, dynamic> _$$_FacilityAdditionalInformationModelToJson(
-        _$_FacilityAdditionalInformationModel instance) =>
+Map<String, dynamic> _$$FacilityAdditionalInformationModelImplToJson(
+        _$FacilityAdditionalInformationModelImpl instance) =>
     <String, dynamic>{
       'trackingId': instance.trackingId,
       'generalInformation': instance.generalInformation?.toJson(),
     };
 
-_$_GeneralInformationModel _$$_GeneralInformationModelFromJson(
+_$GeneralInformationModelImpl _$$GeneralInformationModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_GeneralInformationModel(
+    _$GeneralInformationModelImpl(
       hasDialysisCenter: json['hasDialysisCenter'] as String?,
       hasPharmacy: json['hasPharmacy'] as String?,
       hasBloodBank: json['hasBloodBank'] as String?,
@@ -282,8 +287,8 @@ _$_GeneralInformationModel _$$_GeneralInformationModelFromJson(
       hasImagingCenter: json['hasImagingCenter'] as String?,
     );
 
-Map<String, dynamic> _$$_GeneralInformationModelToJson(
-        _$_GeneralInformationModel instance) =>
+Map<String, dynamic> _$$GeneralInformationModelImplToJson(
+        _$GeneralInformationModelImpl instance) =>
     <String, dynamic>{
       'hasDialysisCenter': instance.hasDialysisCenter,
       'hasPharmacy': instance.hasPharmacy,
@@ -293,14 +298,14 @@ Map<String, dynamic> _$$_GeneralInformationModelToJson(
       'hasImagingCenter': instance.hasImagingCenter,
     };
 
-_$_DocumentModel _$$_DocumentModelFromJson(Map<String, dynamic> json) =>
-    _$_DocumentModel(
+_$DocumentModelImpl _$$DocumentModelImplFromJson(Map<String, dynamic> json) =>
+    _$DocumentModelImpl(
       name: json['name'] as String?,
       value: json['value'] as String?,
       osid: json['osid'] as String?,
     );
 
-Map<String, dynamic> _$$_DocumentModelToJson(_$_DocumentModel instance) =>
+Map<String, dynamic> _$$DocumentModelImplToJson(_$DocumentModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'value': instance.value,

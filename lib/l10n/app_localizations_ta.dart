@@ -35,6 +35,11 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'அவசரநிலை ஏற்பட்டால், தயவுசெய்து ${tollFreeNumber} ஐ அழைக்கவும்.';
+  }
+
+  @override
   String get questionnaireTitle => 'கண் பரிசோதனை கேள்விகள்';
 
   @override
@@ -197,13 +202,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get homeCarousal2Title => 'கவனிக்க வேண்டிய 7 கண் பிரச்சனைகள்!';
 
   @override
-  String get homeCarousal2Description => '\r\nசோதிக்க வேண்டிய 7 கண் பிரச்சனைகள்: \r\n \r\n• கண்களின் சிவப்பு\r\n• கண்களில் நீர் கசிவு\r\n• கண்களில் வெள்ளை புள்ளிகள்';
+  String get homeCarousal2Description => '\r\n\r\nசோதிக்க வேண்டிய 7 கண் பிரச்சனைகள்:\r\n\r\n \r\n\r\n• கண்களின் சிவப்பு\r\n\r\n• கண்களில் நீர் கசிவு\r\n\r\n• கண்களில் வெள்ளை புள்ளிகள்';
 
   @override
   String get homeCarousal3Title => 'கண் பிரச்சனைகள். நீங்கள் பார்க்க முடியாத பலவுண்டு';
 
   @override
-  String get homeCarousal3Description => 'ஆனால் ஒரு பார்வை பராமரிப்பு நிபுணர் முடியும்.\r\nகண் பிரச்சனைகள் அடையாளம் காணப்பட்டு\r\nபின்னாளில் சிக்கல்களை தவிர்க்க\r\nசரியான நேரத்தில் சிகிச்சை பெறுங்கள்';
+  String get homeCarousal3Description => 'ஆனால் ஒரு பார்வை பராமரிப்பு நிபுணர் முடியும்.\r\n\r\nகண் பிரச்சனைகள் அடையாளம் காணப்பட்டு\r\n\r\nபின்னாளில் சிக்கல்களை தவிர்க்க\r\n\r\nசரியான நேரத்தில் சிகிச்சை பெறுங்கள்';
 
   @override
   String get myConnectionsTitle => 'என் உறுப்பினர்கள்';
@@ -269,7 +274,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get appDrawerSignOut => 'வெளியேறு';
 
   @override
-  String get aboutUsDescription => 'சைட்கனெக்ட் என்பது ஒரு பயனர்-நட்பு கண் பராமரிப்பு செயலி ஆகும், இது சுய-மதிப்பீடு மற்றும் அழைப்பு மூலம் ஆலோசனை பெறுவதில் உதவுகிறது.\r\n\r\nஎங்கள் பணியின் மையத்தில் உள்ளது கண் பராமரிப்பை அனைவருக்கும் அணுகக்கூடியதாக மாற்றுவதற்கான உறுதிப்பாடு. இந்த செயலி வயது, தொழில்நுட்ப பின்னணி, மற்றும் சமூக அல்லது பொருளாதார பின்னணியைப் பொருத்தமட்டும் இல்லாமல், வாழ்க்கையின் அனைத்து நடைபாதைகளிலிருந்தும் பயனர்களால் அணுகக்கூடியதாக வடிவமைக்கப்பட்டுள்ளது. இந்த செயலி மற்றும் அதன் உள்ளடக்கம் ஆங்கிலம் மற்றும் பிற உள்ளூர் மொழிகளில் கிடைக்கின்றன. இது பயனர்களுக்கு அவர்களது கண்களை சுய-மதிப்பிட மற்றும் சமயோசிதமான சிகிச்சை ஆலோசனை பெற உதவுகிறது. இந்த செயலி புதிய தொழில்நுட்பங்கள் மற்றும் கருவிகளை பயன்படுத்தி எங்கள் பயனர்களுக்கு தனிப்பயன் கண் பராமரிப்பு தீர்வுகளை வழங்குகிறது. அவர்களது வாழ்க்கையை எளிதாக்குவதற்கு பல்வேறு அம்சங்களுடன் கூடியது.';
+  String get aboutUsDescription => 'சைட்கனெக்ட் என்பது ஒரு பயனர்-நட்பு கண் பராமரிப்பு செயலி ஆகும், இது சுய-மதிப்பீடு மற்றும் அழைப்பு மூலம் ஆலோசனை பெறுவதில் உதவுகிறது.\r\n\r\n\r\n\r\nஎங்கள் பணியின் மையத்தில் உள்ளது கண் பராமரிப்பை அனைவருக்கும் அணுகக்கூடியதாக மாற்றுவதற்கான உறுதிப்பாடு. இந்த செயலி வயது, தொழில்நுட்ப பின்னணி, மற்றும் சமூக அல்லது பொருளாதார பின்னணியைப் பொருத்தமட்டும் இல்லாமல், வாழ்க்கையின் அனைத்து நடைபாதைகளிலிருந்தும் பயனர்களால் அணுகக்கூடியதாக வடிவமைக்கப்பட்டுள்ளது. இந்த செயலி மற்றும் அதன் உள்ளடக்கம் ஆங்கிலம் மற்றும் பிற உள்ளூர் மொழிகளில் கிடைக்கின்றன. இது பயனர்களுக்கு அவர்களது கண்களை சுய-மதிப்பிட மற்றும் சமயோசிதமான சிகிச்சை ஆலோசனை பெற உதவுகிறது. இந்த செயலி புதிய தொழில்நுட்பங்கள் மற்றும் கருவிகளை பயன்படுத்தி எங்கள் பயனர்களுக்கு தனிப்பயன் கண் பராமரிப்பு தீர்வுகளை வழங்குகிறது. அவர்களது வாழ்க்கையை எளிதாக்குவதற்கு பல்வேறு அம்சங்களுடன் கூடியது.';
 
   @override
   String get aboutUsFeaturesTitle => 'அம்சங்கள்';
@@ -557,13 +562,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get swipeGestureCardText => 'சின்னத்தின் திசையில் ஸ்வைப் செய்யவும்';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'மதிப்பாய்வு\r\nகேள்விகள்';
+  String get assessmentResultCardAssessmentQuestions => 'மதிப்பாய்வு\r\n\r\nகேள்விகள்';
 
   @override
-  String get assessmentResultCardAcuityTest => 'கண்\r\nசரிபார்க்கப்பட்டுள்ளது';
+  String get assessmentResultCardAcuityTest => 'கண்\r\n\r\nசரிபார்க்கப்பட்டுள்ளது';
 
   @override
-  String get assessmentResultCardEyeScan => 'கண்\r\nஸ்கேன்';
+  String get assessmentResultCardEyeScan => 'கண்\r\n\r\nஸ்கேன்';
 
   @override
   String get viewReportButton => 'அறிக்கையைப் பார்க்கவும்';
@@ -1848,4 +1853,67 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'அதிகபட்ச உரை அளவு அடைந்துவிட்டது';
+
+  @override
+  String get chatClearChat => 'அரட்டை அழிக்கவும்';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'கண் மதிப்பீடு உங்களுக்கு பரிந்துரைக்கப்படுகிறது.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'நீங்கள் முக்கோண கண் மதிப்பீட்டை எடுக்க விரும்புகிறீர்களா?';
+
+  @override
+  String get chatChatbotNotAvailable => 'சாட்போட் தற்போது இல்லை. தயவுசெய்து பின்னர் மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String get chatTypeHere => 'இங்கே தட்டச்சு செய்க...';
+
+  @override
+  String get switchProfile => 'சுயவிவரத்தை மாற்று';
+
+  @override
+  String get switchRole => 'பாத்திரத்தை மாற்றவும்';
+
+  @override
+  String get switchTenant => 'வாடகைதாரரை மாற்றவும்';
+
+  @override
+  String get patientHeaderWelcomeText => 'சைட் கனெக்டுக்கு வரவேற்கிறோம்! உங்கள் பார்வையை கவனித்துக்கொள்வது முக்கியம், ஒவ்வொரு அடியிலும் நாங்கள் உங்களுக்காக இங்கே இருக்கிறோம்.';
+
+  @override
+  String get triageTestCardHeader => 'உங்கள் கண் பரிசோதனை இலவசம்...';
+
+  @override
+  String get triageTestCardBody1 => 'உங்கள் கண் அறிகுறிகளை விரைவாக பகுப்பாய்வு செய்யுங்கள்.';
+
+  @override
+  String get triageTestCardBody2 => 'உங்களுக்கு கண் பிரச்சனை இருந்தால் அடையாளம் காணவும்';
+
+  @override
+  String get triageTestCardBody3 => 'உங்கள் மருத்துவரை எப்போது பார்க்க வேண்டும் என்பதை அறிந்து கொள்ளுங்கள்';
+
+  @override
+  String get triageTestCardButton => 'இலவச கண் பரிசோதனையைத் தொடங்குங்கள்';
+
+  @override
+  String get myConnectionListAddMembersDescription => 'உங்கள் குடும்பத்தையும் நண்பர்களையும் சேர்க்க உறுப்பினர்களைச் சேர்க்க பொத்தானைக் கிளிக் செய்க.';
+
+  @override
+  String get showTriageHowToProceedBottomSheetHeader => 'நீங்கள் எவ்வாறு தொடர விரும்புகிறீர்கள்?';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody1 => 'எனக்கு ஒரு சிக்கல் உள்ளது மற்றும் சரிபார்க்க விரும்புகிறேன்';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody2 => 'எனக்கு ஏதேனும் சிக்கல் இருக்கிறதா என்று எனக்குத் தெரியவில்லை';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody3 => 'எனக்கு கண் பிரச்சினைகள் எதுவும் இல்லை-சரிபார்க்க விரும்புகிறேன்';
+
+  @override
+  String get appDrawerToastMessageText => 'மன்னிக்கவும், மொபைல் பயன்பாட்டில் உள்நுழைவு பிழையை நாங்கள் சந்தித்தோம்.';
+
+  @override
+  String get myConnectionListAddMembers => 'உறுப்பினர் சேர்க்கவும்';
 }

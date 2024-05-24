@@ -39,7 +39,7 @@ void showMarksUnAvaialbility(BuildContext context) {
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: AlertDialog(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  borderRadius: BorderRadius.circular(AppSize.kl),
                 ),
                 title: SizedBox(
                   width: AppSize.width(context),
@@ -54,7 +54,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                         ),
                       ),
                       const SizedBox(
-                        width: AppSize.klwidth,
+                        width: AppSize.kl,
                       ),
                       IconButton(
                           onPressed: () {
@@ -73,7 +73,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.kl,
                         ),
                         Row(
                           children: [
@@ -95,7 +95,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                           ],
                         ),
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.kl,
                         ),
                         Row(
                           children: [
@@ -105,7 +105,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                               controller: startDateController,
                             )),
                             const SizedBox(
-                              width: AppSize.klwidth,
+                              width: AppSize.kl,
                             ),
                             Expanded(
                                 child: VTRegisterDateInput(
@@ -115,7 +115,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                           ],
                         ),
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.kl,
                         ),
                         Row(
                           children: [
@@ -125,7 +125,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                               controller: startTimeController,
                             )),
                             const SizedBox(
-                              width: AppSize.klwidth,
+                              width: AppSize.kl,
                             ),
                             Expanded(
                                 child: TimeInput(
@@ -135,7 +135,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                           ],
                         ),
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.kl,
                         ),
                         TextFormField(
                           controller: remarksController,
@@ -159,7 +159,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                           ),
                         ),
                         const SizedBox(
-                          height: AppSize.klheight,
+                          height: AppSize.kl,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -173,7 +173,7 @@ void showMarksUnAvaialbility(BuildContext context) {
                               child: Text(loc.vtSave),
                             ),
                             const SizedBox(
-                              width: AppSize.klwidth,
+                              width: AppSize.kl,
                             ),
                             OutlinedButton(
                               onPressed: () {

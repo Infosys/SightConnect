@@ -11,6 +11,7 @@ class AssessmentAndTriageReportDetailedEntity {
   String? observationResultDescription;
   String? mediaResultDescription;
   List<IncompleteTestModel>? icompleteTests;
+  List<CarePlan>? carePlans;
   List<QuestionResponseBriefEntity>? questionResponseBriefEntity;
   List<ObservationBriefEntity>? visualAcuityBreifEntity;
   List<ImageBriefEntity>? imageBriefEntity;
@@ -31,6 +32,7 @@ class AssessmentAndTriageReportDetailedEntity {
     this.observationResultDescription,
     this.mediaResultDescription,
     this.patientImage,
+    this.carePlans,
     required this.assessmentID,
     this.reportDate,
     this.icompleteTests,
@@ -46,6 +48,7 @@ class AssessmentAndTriageReportDetailedEntity {
       "assessmentID": assessmentID,
       "triageResultDescription": triageResultDescription,
       "questionResultDescription": questionResultDescription,
+      "carePlans": carePlans,
       "observationResultDescription": observationResultDescription,
       "mediaResultDescription": mediaResultDescription,
       "patientImage": patientImage,

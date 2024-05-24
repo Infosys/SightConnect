@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/triage_response_dto.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/status.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/domain/repositories/assessment_timeline_repository_impl.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/providers/assessment_timeline_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -30,14 +31,16 @@ class ListOfEncountersChip extends HookConsumerWidget {
 
     return ref.watch(vtListOfEncountersChipProvider(patientId!)).when(
           data: (data) {
-            data = data.reversed.toList();
-
+            data.sort((a, b) => b.period!.start!.compareTo(a.period!.start!));
             return SizedBox(
               height: AppSize.height(context) * 0.05,
               child: ListView.builder(
                 itemCount: data.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
+                  final isDisabled = data[index].status == Status.COMPLETED;
+
+                  final isSelected = encounterId == data[index].id;
                   return InkWell(
                     onTap: () {
                       ref
@@ -46,18 +49,19 @@ class ListOfEncountersChip extends HookConsumerWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kspadding,
+                        horizontal: AppSize.ks,
                       ),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: encounterId == data[index].id
-                            ? AppColor.lightBlue
-                            : AppColor.white,
-                        borderRadius: BorderRadius.circular(AppSize.ksradius),
+                        color: isDisabled
+                            ? AppColor.lightGrey
+                            : (isSelected
+                                ? AppColor.lightBlue
+                                : AppColor.white),
+                        borderRadius: BorderRadius.circular(AppSize.ks),
                         border: Border.all(
-                          color: encounterId == data[index].id
-                              ? AppColor.primary
-                              : AppColor.grey,
+                          color:
+                              isSelected ? AppColor.blue : AppColor.lightGrey,
                         ),
                       ),
                       alignment: Alignment.center,
@@ -67,7 +71,14 @@ class ListOfEncountersChip extends HookConsumerWidget {
                           Text(
                             "${data[index].id ?? ""} - ${data[index].period?.start?.formatDateTimeMonthName}",
                             softWrap: true,
-                            style: applyRobotoFont(fontSize: 14),
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              color: isDisabled
+                                  ? AppColor.grey
+                                  : (encounterId == data[index].id
+                                      ? AppColor.primary
+                                      : AppColor.black),
+                            ),
                           ),
                         ],
                       ),

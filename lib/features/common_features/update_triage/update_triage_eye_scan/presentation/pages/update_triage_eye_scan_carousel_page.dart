@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
+import 'package:eye_care_for_all/shared/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/cataract_eye_scan_carousel.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_capturing_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -44,17 +44,16 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.kl),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.klpadding),
+                    padding: const EdgeInsets.symmetric(horizontal: AppSize.kl),
                     child: AnimatedSmoothIndicator(
                       onDotClicked: (index) {},
                       activeIndex: activeIndex.value,
@@ -90,12 +89,12 @@ class UpdateTriageEyeScanCarouselPage extends HookConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.klpadding,
-              vertical: AppSize.kspadding,
+              horizontal: AppSize.kl,
+              vertical: AppSize.ks,
             ),
             child: TextButton(
               style: TextButton.styleFrom(

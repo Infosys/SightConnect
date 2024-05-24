@@ -24,7 +24,7 @@ class AvailabilityRemoteSourceImpl implements AvailabilityRemoteSource {
   Future<bool> markAvailability({
     required AvailabilityModel availability,
   }) async {
-    String url = "/services/orchestration/api/markAvailability";
+    String url = "/services/orchestration/api/v2/markAvailability";
     try {
       // logger.d("markAvailability response to be saved : $availability");
 

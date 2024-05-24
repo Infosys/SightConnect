@@ -6,6 +6,7 @@ class Pulsar extends StatefulWidget {
     this.animationCurve = Curves.easeInOut,
     this.lowOpacity = 0.7,
     this.highOpacity = 1,
+    this.disable = false,
     this.pulsePeriod = const Duration(milliseconds: 800),
     Key? key,
   })  : assert(lowOpacity <= highOpacity &&
@@ -20,6 +21,7 @@ class Pulsar extends StatefulWidget {
   final double highOpacity;
   final Duration pulsePeriod;
   final Curve animationCurve;
+  final bool disable;
 
   @override
   PulsarState createState() => PulsarState();
@@ -66,6 +68,9 @@ class PulsarState extends State<Pulsar> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.disable) {
+      return widget.child;
+    }
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) => Opacity(

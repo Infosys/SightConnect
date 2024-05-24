@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_cases_analytics.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_age_analytics.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/patient_symptoms_ananlytics.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -22,13 +21,13 @@ class VTHeader extends HookWidget {
     final List<Widget> slides = [
       const PatientCasesAnalytics(),
       const PatientAgeAnalytics(),
-      const PatientSymptomsAnalytics(),
+      // const PatientSymptomsAnalytics(),
     ];
     final loc = context.loc!;
     return Column(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+          margin: const EdgeInsets.symmetric(horizontal: AppSize.kl),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -43,13 +42,13 @@ class VTHeader extends HookWidget {
             ],
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
         CarouselSlider(
           items: slides,
           carouselController: controller,
           options: CarouselOptions(
-            height: Responsive.isMobile(context) ? 130 : 180,
             viewportFraction: 1,
+            height: Responsive.isMobile(context) ? 180 : 220,
             onPageChanged: (index, reason) {
               current.value = index;
             },
@@ -62,8 +61,8 @@ class VTHeader extends HookWidget {
             return GestureDetector(
               onTap: () {},
               child: Container(
-                width: AppSize.kmradius - 2,
-                height: AppSize.kmradius - 2,
+                width: AppSize.km - 2,
+                height: AppSize.km - 2,
                 margin:
                     const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
                 decoration: BoxDecoration(

@@ -36,7 +36,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             ),
           ),
           const SizedBox(
-            height: AppSize.klheight,
+            height: AppSize.kl,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,9 +46,9 @@ class VisionCenterAddressDetails extends ConsumerWidget {
                 color: AppColor.grey,
                 size: 24,
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               SizedBox(
-                width: AppSize.klwidth * 10,
+                width: AppSize.kl * 10,
                 child: Text(
                   "${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""}, ${visionCenter.facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}, ${visionCenter.facilityInformation?.facilityAddressDetails?.pincode ?? ""}",
                   maxLines: 2,
@@ -62,7 +62,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             ],
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +72,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
                 color: AppColor.grey,
                 size: 24,
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               Text(
                 visionCenter.facilityInformation?.facilityContactInformation
                         ?.facilityContactNumber ??
@@ -85,7 +85,7 @@ class VisionCenterAddressDetails extends ConsumerWidget {
             ],
           ),
           const SizedBox(
-            height: AppSize.ksheight,
+            height: AppSize.ks,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,9 +95,9 @@ class VisionCenterAddressDetails extends ConsumerWidget {
                 size: 24,
                 color: AppColor.grey,
               ),
-              const SizedBox(width: AppSize.klwidth),
+              const SizedBox(width: AppSize.kl),
               SizedBox(
-                width: AppSize.klwidth * 10,
+                width: AppSize.kl * 10,
                 child: Text(
                   "${visionCenter.facilityInformation?.timingsOfFacility?.first.workingDays ?? ""} - ${visionCenter.facilityInformation?.timingsOfFacility?.last.workingDays ?? ""}, ${visionCenter.facilityInformation?.timingsOfFacility?.first.openingHours ?? ""}",
                   style: applyRobotoFont(

@@ -12,7 +12,7 @@ part of 'availability_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AvailabilityModel _$AvailabilityModelFromJson(Map<String, dynamic> json) {
   return _AvailabilityModel.fromJson(json);
@@ -80,22 +80,22 @@ class _$AvailabilityModelCopyWithImpl<$Res, $Val extends AvailabilityModel>
 }
 
 /// @nodoc
-abstract class _$$_AvailabilityModelCopyWith<$Res>
+abstract class _$$AvailabilityModelImplCopyWith<$Res>
     implements $AvailabilityModelCopyWith<$Res> {
-  factory _$$_AvailabilityModelCopyWith(_$_AvailabilityModel value,
-          $Res Function(_$_AvailabilityModel) then) =
-      __$$_AvailabilityModelCopyWithImpl<$Res>;
+  factory _$$AvailabilityModelImplCopyWith(_$AvailabilityModelImpl value,
+          $Res Function(_$AvailabilityModelImpl) then) =
+      __$$AvailabilityModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int userId, String? userType, String? mobile, bool? available});
 }
 
 /// @nodoc
-class __$$_AvailabilityModelCopyWithImpl<$Res>
-    extends _$AvailabilityModelCopyWithImpl<$Res, _$_AvailabilityModel>
-    implements _$$_AvailabilityModelCopyWith<$Res> {
-  __$$_AvailabilityModelCopyWithImpl(
-      _$_AvailabilityModel _value, $Res Function(_$_AvailabilityModel) _then)
+class __$$AvailabilityModelImplCopyWithImpl<$Res>
+    extends _$AvailabilityModelCopyWithImpl<$Res, _$AvailabilityModelImpl>
+    implements _$$AvailabilityModelImplCopyWith<$Res> {
+  __$$AvailabilityModelImplCopyWithImpl(_$AvailabilityModelImpl _value,
+      $Res Function(_$AvailabilityModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_AvailabilityModelCopyWithImpl<$Res>
     Object? mobile = freezed,
     Object? available = freezed,
   }) {
-    return _then(_$_AvailabilityModel(
+    return _then(_$AvailabilityModelImpl(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -129,12 +129,12 @@ class __$$_AvailabilityModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AvailabilityModel implements _AvailabilityModel {
-  const _$_AvailabilityModel(
+class _$AvailabilityModelImpl implements _AvailabilityModel {
+  const _$AvailabilityModelImpl(
       {required this.userId, this.userType, this.mobile, this.available});
 
-  factory _$_AvailabilityModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AvailabilityModelFromJson(json);
+  factory _$AvailabilityModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AvailabilityModelImplFromJson(json);
 
   @override
   final int userId;
@@ -151,10 +151,10 @@ class _$_AvailabilityModel implements _AvailabilityModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AvailabilityModel &&
+            other is _$AvailabilityModelImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.userType, userType) ||
                 other.userType == userType) &&
@@ -171,13 +171,13 @@ class _$_AvailabilityModel implements _AvailabilityModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AvailabilityModelCopyWith<_$_AvailabilityModel> get copyWith =>
-      __$$_AvailabilityModelCopyWithImpl<_$_AvailabilityModel>(
+  _$$AvailabilityModelImplCopyWith<_$AvailabilityModelImpl> get copyWith =>
+      __$$AvailabilityModelImplCopyWithImpl<_$AvailabilityModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AvailabilityModelToJson(
+    return _$$AvailabilityModelImplToJson(
       this,
     );
   }
@@ -188,10 +188,10 @@ abstract class _AvailabilityModel implements AvailabilityModel {
       {required final int userId,
       final String? userType,
       final String? mobile,
-      final bool? available}) = _$_AvailabilityModel;
+      final bool? available}) = _$AvailabilityModelImpl;
 
   factory _AvailabilityModel.fromJson(Map<String, dynamic> json) =
-      _$_AvailabilityModel.fromJson;
+      _$AvailabilityModelImpl.fromJson;
 
   @override
   int get userId;
@@ -203,6 +203,6 @@ abstract class _AvailabilityModel implements AvailabilityModel {
   bool? get available;
   @override
   @JsonKey(ignore: true)
-  _$$_AvailabilityModelCopyWith<_$_AvailabilityModel> get copyWith =>
+  _$$AvailabilityModelImplCopyWith<_$AvailabilityModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

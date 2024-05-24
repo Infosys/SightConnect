@@ -1,10 +1,10 @@
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/domain/enums/tumbling_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../common_features/visual_acuity_tumbling/domain/models/enums/tumbling_enums.dart';
 
 var vtCloseAssessmentHelperProvider = ChangeNotifierProvider.autoDispose(
   (ref) => VTCloseAssessmentHelperNotifier(),
@@ -54,8 +54,6 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     _mrCodeController.text = value;
     notifyListeners();
   }
-
-
 
   void goToNextStep() {
     _currentStep = _currentStep + 1;
@@ -114,10 +112,18 @@ class VTCloseAssessmentHelperNotifier extends ChangeNotifier {
     }
 
     logger.d(_selectedGoalOutComeList);
+    notifyListeners();
   }
 
   void setLoading(bool value) {
     _loading = value;
     notifyListeners();
+  }
+
+  bool canSubmit() {
+    // check mr and selected goal outcome
+    // return _mrCodeController.text.isNotEmpty &&
+    //     _selectedGoalOutComeList.isNotEmpty;
+    return _selectedGoalOutComeList.isNotEmpty;
   }
 }

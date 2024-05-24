@@ -39,22 +39,6 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text(
-            loc.vtClose,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.white,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ),
       appBar: CustomAppbar(
         leadingWidth: 70,
         centerTitle: false,
@@ -64,15 +48,15 @@ class VisionTechnicianAssessmentTimeline extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           child: Column(
             children: [
               TimelineProfile(model: patientDetails!),
-              const SizedBox(height: AppSize.klheight),
+              const SizedBox(height: AppSize.kl),
               GeneralInformation(model: patientDetails!),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
               AssessmentTimelineCard(model: patientDetails!),
-              const SizedBox(height: AppSize.ksheight),
+              const SizedBox(height: AppSize.ks),
             ],
           ),
         ),

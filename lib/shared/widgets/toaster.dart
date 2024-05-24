@@ -9,7 +9,7 @@ void showToastMessage(String message, BuildContext context, int type) {
   fToast.init(context);
   fToast.showToast(
       child: Container(
-    padding: const EdgeInsets.all(AppSize.kmpadding),
+    padding: const EdgeInsets.all(AppSize.km),
     decoration: const BoxDecoration(
         color: AppColor.darkCharcoal,
         borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -19,16 +19,16 @@ void showToastMessage(String message, BuildContext context, int type) {
           const WidgetSpan(
             child: Icon(
               Icons.check_circle_outline,
-              size: AppSize.kmwidth,
+              size: AppSize.km,
               color: AppColor.green,
             ),
           ),
-          const WidgetSpan(child: SizedBox(width: AppSize.kswidth)),
+          const WidgetSpan(child: SizedBox(width: AppSize.ks)),
           TextSpan(
             text: message,
             style: applyRobotoFont(fontSize: 14, color: AppColor.white),
           ),
-          const WidgetSpan(child: SizedBox(width: AppSize.klwidth * 2)),
+          const WidgetSpan(child: SizedBox(width: AppSize.kl * 2)),
           WidgetSpan(
             child: InkWell(
               onTap: () {
@@ -37,7 +37,7 @@ void showToastMessage(String message, BuildContext context, int type) {
               child: type == 0
                   ? const Icon(
                       Icons.close,
-                      size: AppSize.kmwidth,
+                      size: AppSize.km,
                       color: AppColor.white,
                     )
                   : Text(

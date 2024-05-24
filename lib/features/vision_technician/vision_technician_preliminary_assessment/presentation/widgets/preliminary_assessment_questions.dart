@@ -1,11 +1,9 @@
-// ignore: depend_on_referenced_packages
-import 'package:collection/collection.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_filter_checkbox.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_question_grid.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -44,7 +42,7 @@ class PreliminaryAssessmentQuestions extends HookConsumerWidget {
                 child: Text(loc.vtSomethingWentWrong),
               ),
               const SizedBox(
-                height: AppSize.klheight,
+                height: AppSize.kl,
               ),
               TextButton.icon(
                 onPressed: () {
@@ -76,14 +74,15 @@ class AssessmentQuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(AppSize.kmpadding),
+          padding: const EdgeInsets.all(AppSize.km),
           decoration: BoxDecoration(
             color: AppColor.white,
-            borderRadius: BorderRadius.circular(AppSize.kmradius),
+            borderRadius: BorderRadius.circular(AppSize.km),
             boxShadow: applycustomShadow(),
           ),
           child: Column(
@@ -97,35 +96,12 @@ class AssessmentQuestionCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: AppSize.ksheight),
-              ...questionnaire.mapIndexed(
-                (index, element) {
-                  return PreliminaryAssessmentFilterCheckBox(
-                    question: element,
-                    index: index,
-                    questionnaire: questionnaire,
-                  );
-                },
-              ).toList(),
-              // Wrap(
-              //   runSpacing: AppSize.klheight,
-              //   children: [
-              //     PreliminaryAssessmentFilterCheckBox(
-              //       heading: eyeSightProblems.text,
-              //       includeInputBox: 1,
-              //       questions: eyeSightProblemsQuestion,
-              //     ),
-              //     PreliminaryAssessmentFilterCheckBox(
-              //       heading: eyeRelatedProblems.text,
-              //       includeInputBox: 1,
-              //       questions: eyeRelatedProblemsQuestion,
-              //     ),
-              //   ],
-              // ),
+              const SizedBox(height: AppSize.ks),
+              PreliminaryAssessmentQuestionGrid(questionnaire: questionnaire),
             ],
           ),
         ),
-        const SizedBox(height: AppSize.klheight),
+        const SizedBox(height: AppSize.kl),
       ],
     );
   }

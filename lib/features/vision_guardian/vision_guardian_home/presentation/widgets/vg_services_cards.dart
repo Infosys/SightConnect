@@ -20,7 +20,7 @@ class VisionGuardianServicesCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: const EdgeInsets.only(right: AppSize.kmheight),
+      padding: const EdgeInsets.only(right: AppSize.km),
       child: SizedBox(
         width:
             Responsive.isMobile(context) ? AppSize.width(context) / 3.7 : 100,
@@ -55,11 +55,11 @@ class VisionGuardianServicesCard extends ConsumerWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSize.kmradius),
+              borderRadius: BorderRadius.circular(AppSize.km),
               color: service.color,
               boxShadow: applycustomShadow(),
             ),
-            padding: const EdgeInsets.symmetric(vertical: AppSize.kmpadding),
+            padding: const EdgeInsets.symmetric(vertical: AppSize.km),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -67,15 +67,15 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                 service.id == VGServiceId.eye_assessment
                     ? SvgPicture.asset(
                         service.icon,
-                        height: AppSize.klpadding,
-                        width: AppSize.klpadding,
+                        height: AppSize.kl,
+                        width: AppSize.kl,
                         colorFilter: const ColorFilter.mode(
                           AppColor.black,
                           BlendMode.srcIn,
                         ),
                       )
                     : Icon(service.icon),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(
                   // '${data["textPrefix"]}\n${data["text"]}',
                   service.text,

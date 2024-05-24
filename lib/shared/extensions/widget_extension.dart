@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 extension ThemeExtension on BuildContext {
@@ -23,6 +23,9 @@ extension DateExtension on DateTime? {
       this == null ? "" : DateFormat('dd/MM/yyyy hh:mm a').format(this!);
   String get formatDateTimeMonthNameWithTime =>
       this == null ? "" : DateFormat("dd MMM yyyy, hh:mm a").format(this!);
+
+  String get formatDateTimeWithFullMonthName =>
+      this == null ? "" : DateFormat("dd MMM yyyy, hh:mm a").format(this!);
 }
 
 extension StringExtension on String? {
@@ -43,5 +46,11 @@ extension StringExtension on String? {
     str = str.toLowerCase();
     if (str.isEmpty) return '';
     return str.split(" ").map((str) => str.capitalize()).join(" ");
+  }
+
+  String formatTitle() {
+    final String str = this ?? '';
+    if (str.isEmpty) return '';
+    return str.replaceAll("_", " ").toLowerCase().sentenceCase();
   }
 }

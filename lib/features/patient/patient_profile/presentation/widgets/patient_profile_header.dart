@@ -84,10 +84,10 @@ class ProfileHeader extends ConsumerWidget {
               ),
               Container(
                 padding: const EdgeInsets.only(
-                  left: AppSize.kmpadding,
-                  right: AppSize.kmpadding,
-                  top: AppSize.kmpadding,
-                  bottom: AppSize.kspadding,
+                  left: AppSize.km,
+                  right: AppSize.km,
+                  top: AppSize.km,
+                  bottom: AppSize.ks,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -227,27 +227,35 @@ class ProfileHeader extends ConsumerWidget {
     String? value, {
     bool age = false,
   }) {
-    return Column(
-      children: [
-        AutoSizeText(
-          name ?? "",
-          style: applyRobotoFont(
-            fontSize: 10,
-            color: AppColor.darkGrey,
+    return Flexible(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AutoSizeText(
+            name ?? "",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 10,
+              color: AppColor.darkGrey,
+            ),
           ),
-        ),
-        const SizedBox(height: 2),
-        AutoSizeText(
-          age
-              ? (value == null ? "" : value.capitalize())
-              : value == null
-                  ? ""
-                  : value.toLowerCase().capitalize(),
-          style: applyRobotoFont(
-            fontSize: 14,
+          const SizedBox(height: 2),
+          AutoSizeText(
+            age
+                ? (value == null ? "" : value.capitalize())
+                : value == null
+                    ? ""
+                    : value.toLowerCase().capitalize(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

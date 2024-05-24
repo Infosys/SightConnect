@@ -1,19 +1,21 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 
 List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
       {
-        "title": loc.homeCarousal1Title,
-        "description": loc.homeCarousal1Description,
-        "image": AppImages.patientCover,
+        "title": 'Doctor says',
+        "description": 'Early detection can save your eyes',
+        "image": AppImages.patientCover4,
+        "doctor": 'Dr. Mohana R',
+        "designation": 'Eye Specialist, LVPEI',
       },
-      {
-        "title": loc.homeCarousal2Title,
-        "description": loc.homeCarousal2Description,
-        "image": AppImages.patientCover2,
-      },
+      // {
+      //   "title": loc.homeCarousal2Title,
+      //   "description": loc.homeCarousal2Description,
+      //   "image": AppImages.patientCover2,
+      // },
     ];
 
 List<Map<String, dynamic>> getRecentServices(AppLocalizations loc) => [

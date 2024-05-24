@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/arrow_button.dart';
+import 'package:eye_care_for_all/shared/widgets/arrow_button.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -37,15 +37,14 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               carouselController: carouselController.value,
             ),
           ),
-          const SizedBox(height: AppSize.klheight * 2),
+          const SizedBox(height: AppSize.kl * 2),
           SizedBox(
             width: AppSize.width(context) * 0.9,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: AppSize.klpadding),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSize.kl),
                   child: AnimatedSmoothIndicator(
                     onDotClicked: (index) {},
                     activeIndex: activeIndex.value,
@@ -79,7 +78,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
           TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size(AppSize.width(context) * 0.8, 50),
@@ -103,7 +102,7 @@ class TriageEyeScanCarouselPage extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppSize.klheight),
+          const SizedBox(height: AppSize.kl),
         ],
       ),
     );

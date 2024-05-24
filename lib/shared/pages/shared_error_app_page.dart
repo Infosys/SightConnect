@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class SharedErrorAppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return MaterialApp(
-      title: AppText.appName,
+      title: AppInfoService.appName,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(

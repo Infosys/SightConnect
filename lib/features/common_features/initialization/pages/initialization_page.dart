@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/geocoding_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/app_consent_form.dart';
@@ -15,12 +16,16 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+import 'package:upgrader/upgrader.dart';
+
 import '../../../../core/models/keycloak.dart';
+import '../../../../core/services/location_service.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
   static const String routeName = '/initialization';
@@ -48,8 +53,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
             await PersistentAuthStateService.authState.setActiveRole(role);
-            // Set the active role in dio header
-            ref.read(dioProvider).options.headers["X-Active-Role"] = role;
+
+            // Update the headers with the selected role
+            ref.read(dioProvider.notifier).updateHeaders(activeRole: role);
+
             logger.d("Active Role: $role");
             _profileVerification(selectedProfile);
           } else {
@@ -129,7 +136,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         bool is18PlusDeclarationAccepted =
             await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
-
         if (is18PlusDeclarationAccepted && isConsentAccepted) {
           return true;
         } else {
@@ -158,13 +164,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<bool?> _show18PlusDeclaration(
       NavigatorState navigator, Role role) async {
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
+    bool? consentGiven = await showDialog(
+        context: context,
         builder: (context) {
           return const EighteenPlusDeclaration();
-        },
-      ),
-    );
+        });
     return consentGiven;
   }
 
@@ -180,11 +184,31 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
+    String? pinCode;
+    bool hasPermission = await LocationService.checkLocationPermission();
+    if (hasPermission && mounted) {
+      bool isLocationEnabled = await LocationService.enableLocation(context);
+      if (isLocationEnabled) {
+        pinCode = await GeocodingService.getPincodeFromLocation();
+        logger.f("pinCode is  $pinCode");
+      }
+    } else if (!hasPermission && mounted) {
+      hasPermission = await LocationService.requestLocationPermission(context);
+
+      if (hasPermission && mounted) {
+        bool isLocationEnabled = await LocationService.enableLocation(context);
+        if (isLocationEnabled) {
+          pinCode = await GeocodingService.getPincodeFromLocation();
+          logger.f("pinCode is  $pinCode");
+        }
+      }
+    }
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
-        builder: (context) => const PatientRegistrationMiniappPage(
+        builder: (context) => PatientRegistrationMiniappPage(
           actionType: MiniAppActionType.REGISTER,
           displayName: "Register Patient",
+          pinCode: pinCode,
         ),
       ),
     );
@@ -209,6 +233,12 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           title: const Text("Registration Required"),
           content: const Text("Please register to continue"),
           actions: [
+            TextButton(
+              onPressed: () async {
+                await _invalidateAndLogout();
+              },
+              child: const Text("Try with another account"),
+            ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -273,29 +303,54 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return TraceableWidget(
-      actionName: "InitializationPage",
-      path: InitializationPage.routeName,
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: Image.asset(
-                'assets/logo/splash_bg.png',
-                fit: BoxFit.fill,
-              ),
-            ),
-            Pulsar(
-              child: Center(
+    return UpgradeAlert(
+      dialogStyle: UpgradeDialogStyle.cupertino,
+      showIgnore: kDebugMode ? true : false,
+      showLater: kDebugMode ? true : false,
+      shouldPopScope: () => kDebugMode ? true : false,
+      canDismissDialog: kDebugMode ? true : false,
+      onUpdate: () {
+        return true;
+      },
+      upgrader: Upgrader(
+        durationUntilAlertAgain: const Duration(milliseconds: 800),
+        willDisplayUpgrade: ({
+          appStoreVersion,
+          required display,
+          installedVersion,
+          minAppVersion,
+        }) {
+          logger.d({
+            "display : $display",
+            "appStoreVersion : $appStoreVersion",
+            "installedVersion : $installedVersion",
+          });
+        },
+      ),
+      child: TraceableWidget(
+        actionName: "InitializationPage",
+        path: InitializationPage.routeName,
+        child: Scaffold(
+          body: Stack(
+            children: <Widget>[
+              Positioned.fill(
                 child: Image.asset(
-                  "assets/logo/splash_icon_transparant.png",
-                  width: Responsive.isMobile(context)
-                      ? AppSize.width(context) * 0.3
-                      : AppSize.width(context) * 0.2,
+                  'assets/logo/splash_bg.png',
+                  fit: BoxFit.fill,
                 ),
               ),
-            ),
-          ],
+              Pulsar(
+                child: Center(
+                  child: Image.asset(
+                    "assets/logo/splash_icon_transparant.png",
+                    width: Responsive.isMobile(context)
+                        ? AppSize.width(context) * 0.3
+                        : AppSize.width(context) * 0.2,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

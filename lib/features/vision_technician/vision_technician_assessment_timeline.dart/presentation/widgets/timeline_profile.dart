@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TimelineProfile extends ConsumerWidget {
   const TimelineProfile({
@@ -21,7 +23,7 @@ class TimelineProfile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMobile = Responsive.isMobile(context);
     return Container(
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),
         image: const DecorationImage(
@@ -29,13 +31,13 @@ class TimelineProfile extends ConsumerWidget {
           image: AssetImage(AppImages.profileBg),
         ),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.klradius),
+          Radius.circular(AppSize.kl),
         ),
       ),
       child: Container(
         padding: isMobile
-            ? const EdgeInsets.all(AppSize.kspadding)
-            : const EdgeInsets.all(AppSize.kmpadding),
+            ? const EdgeInsets.all(AppSize.ks)
+            : const EdgeInsets.all(AppSize.km),
         width: AppSize.width(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,13 +47,13 @@ class TimelineProfile extends ConsumerWidget {
               fontSize: isMobile ? 20 : 28,
               radius: isMobile ? 26 : 40,
             ),
-            SizedBox(width: isMobile ? AppSize.kmwidth : AppSize.klwidth),
+            SizedBox(width: isMobile ? AppSize.km : AppSize.kl),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    model.name ?? "",
+                    model.name?.capitalizeFirstOfEach() ?? "",
                     maxLines: 1,
                     maxFontSize: 24,
                     minFontSize: 18,
@@ -61,7 +63,7 @@ class TimelineProfile extends ConsumerWidget {
                       color: AppColor.white,
                     ),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  SizedBox(height: isMobile ? AppSize.ks : AppSize.km),
                   Text(
                     "PID: OP ${model.id ?? ""}",
                     maxLines: 1,
@@ -74,29 +76,37 @@ class TimelineProfile extends ConsumerWidget {
                 ],
               ),
             ),
-            SizedBox(width: isMobile ? AppSize.kmwidth : AppSize.klwidth),
+            SizedBox(width: isMobile ? AppSize.km : AppSize.kl),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Container(
-                        padding: isMobile
-                            ? const EdgeInsets.all(AppSize.kspadding / 2)
-                            : const EdgeInsets.all(AppSize.kspadding),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white12,
-                        ),
-                        child: Icon(
-                          Icons.call_outlined,
-                          color: Colors.white,
-                          size: isMobile ? 14 : 18,
+                      InkWell(
+                        onTap: () async {
+                          if (model.mobile?.isEmpty ?? true) {
+                            return;
+                          }
+                          Uri phoneno = Uri.parse("tel:${model.mobile}");
+                          await launchUrl(phoneno);
+                        },
+                        child: Container(
+                          padding: isMobile
+                              ? const EdgeInsets.all(AppSize.ks / 2)
+                              : const EdgeInsets.all(AppSize.ks),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white12,
+                          ),
+                          child: Icon(
+                            Icons.call_outlined,
+                            color: Colors.white,
+                            size: isMobile ? 14 : 18,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                          width: isMobile ? AppSize.kswidth : AppSize.klwidth),
+                      SizedBox(width: isMobile ? AppSize.ks : AppSize.kl),
                       Text(
                         model.mobile ?? "",
                         maxLines: 1,
@@ -108,17 +118,17 @@ class TimelineProfile extends ConsumerWidget {
                       ),
                       Visibility(
                         visible: !isMobile,
-                        child: const SizedBox(width: AppSize.klwidth * 3),
+                        child: const SizedBox(width: AppSize.kl * 3),
                       ),
                     ],
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  SizedBox(height: isMobile ? AppSize.ks : AppSize.km),
                   Row(
                     children: [
                       Container(
                         padding: isMobile
-                            ? const EdgeInsets.all(AppSize.kspadding / 2)
-                            : const EdgeInsets.all(AppSize.kspadding),
+                            ? const EdgeInsets.all(AppSize.ks / 2)
+                            : const EdgeInsets.all(AppSize.ks),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white12,
@@ -129,8 +139,7 @@ class TimelineProfile extends ConsumerWidget {
                           size: isMobile ? 14 : 18,
                         ),
                       ),
-                      SizedBox(
-                          width: isMobile ? AppSize.kswidth : AppSize.klwidth),
+                      SizedBox(width: isMobile ? AppSize.ks : AppSize.kl),
                       Text(
                         "${model.dayOfBirth}/${model.monthOfBirth}/${model.yearOfBirth}",
                         maxLines: 1,

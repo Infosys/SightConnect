@@ -1,14 +1,21 @@
+// import 'dart:io';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_vt_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/provider/vision_technician_analytics_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/assessments_table.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_header.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_triaging_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:upgrader/upgrader.dart';
+
+import '../../../../../main.dart';
+import '../provider/vt_home_helper_provider.dart';
 
 class VisionTechnicianHomePage extends ConsumerWidget {
   const VisionTechnicianHomePage({super.key});
@@ -17,70 +24,88 @@ class VisionTechnicianHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool isMobile = Responsive.isMobile(context);
-
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: AppColor.primary,
-        title: Row(
-          children: [
-            Image.asset(
-              AppImages.logo,
-              height: Responsive.isMobile(context) ? 80 : 120,
-              width: Responsive.isMobile(context) ? 120 : 180,
-              colorBlendMode: BlendMode.srcIn,
-              color: AppColor.white,
-            ),
-            isMobile ? const Spacer() : const SizedBox(width: AppSize.kmwidth),
-          ],
-        ),
-        centerTitle: false,
-        actions: [
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const VTProfilePage()),
-              );
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: UpgradeAlert(
+          dialogStyle: UpgradeDialogStyle.cupertino,
+          showIgnore: kDebugMode ? true : false,
+          showLater: kDebugMode ? true : false,
+          shouldPopScope: () => kDebugMode ? true : false,
+          canDismissDialog: kDebugMode ? true : false,
+          onUpdate: () {
+            return true;
+          },
+          upgrader: Upgrader(
+            durationUntilAlertAgain: const Duration(milliseconds: 800),
+            willDisplayUpgrade: ({
+              appStoreVersion,
+              required display,
+              installedVersion,
+              minAppVersion,
+            }) {
+              logger.d({
+                "display : $display",
+                "appStoreVersion : $appStoreVersion",
+                "installedVersion : $installedVersion",
+              });
             },
-            child: AppNameAvatar(
-              name: ref.watch(globalVTProvider).name,
-            ),
           ),
-          isMobile
-              ? const SizedBox(width: AppSize.kswidth)
-              : const SizedBox(width: AppSize.klwidth),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(visionTechnicianAnalyticsProvider);
+              ref.invalidate(vtHomeHelperProvider);
+            },
+            child: SingleChildScrollView(
               child: Stack(
                 children: [
                   Container(
-                    height: AppSize.klheight * 6,
+                    height: Responsive.isMobile(context)
+                        ? AppSize.height(context) * 0.3
+                        : AppSize.height(context) * 0.25,
                     decoration: const BoxDecoration(
                       color: AppColor.primary,
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(AppSize.klradius),
-                        bottomRight: Radius.circular(AppSize.klradius),
+                        bottomLeft: Radius.circular(AppSize.kl),
+                        bottomRight: Radius.circular(AppSize.kl),
                       ),
                     ),
                   ),
-                  Transform.translate(
-                    offset: const Offset(0, AppSize.ksheight),
-                    child: const VTHeader(),
-                  )
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSize.km,
+                          vertical: AppSize.km,
+                        ),
+                        child: VTHomeSearchBar(
+                          onProfile: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const VTProfilePage(),
+                              ),
+                            );
+                          },
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const VisionTechnicianSearchPage(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const VTHeader(),
+                      const AssessmentTable(),
+                    ],
+                  ),
                 ],
               ),
             ),
-            //TODO: Logic for showing the assessment table
-            const AssessmentTable(),
-          ],
+          ),
         ),
       ),
     );

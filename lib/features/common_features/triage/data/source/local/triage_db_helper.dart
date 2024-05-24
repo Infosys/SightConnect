@@ -11,7 +11,6 @@ import 'package:sqflite_sqlcipher/sqflite.dart';
 var triageDBHelperProvider = Provider((ref) => TriageDBHelper());
 
 class TriageDBHelper {
-  
   static Database? _database;
   static const _databaseName = 'triage_db';
 
@@ -20,13 +19,14 @@ class TriageDBHelper {
   static const _triageResponseTableName = 'triage_response_table';
   static const _triageQuestionnaireTableName = 'triage_questionnaire_table';
   static const _triageVisualAcuityTableName = 'triage_visual_acuity_table';
+  static const _triageDistanceVisualAcuityName =
+      'triage_distance_visual_acuity';
   static const _triageEyeScanTableName = 'triage_eye_scan_table';
 
   /// Columns
   static const _responseColumnName = 'response_json';
   static const _timeStampColumnName = 'time_stamp';
-  static const _patientIDColumnName = 'patient_id';
-  static const _databaseVersion = 2;
+  static const _databaseVersion = 1;
 
   Future<Database> get database async {
     final pass =
@@ -75,7 +75,6 @@ class TriageDBHelper {
         db.execute('''
           CREATE TABLE $_triageResponseTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            $_patientIDColumnName TEXT NOT NULL,
             $_timeStampColumnName INT NOT NULL,
             $_responseColumnName TEXT NOT NULL
           );
@@ -86,7 +85,6 @@ class TriageDBHelper {
         db.execute('''
           CREATE TABLE $_triageQuestionnaireTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            $_patientIDColumnName TEXT NOT NULL,
            $_timeStampColumnName INT NOT NULL,
             $_responseColumnName TEXT NOT NULL
           );
@@ -97,7 +95,16 @@ class TriageDBHelper {
         db.execute('''
           CREATE TABLE $_triageVisualAcuityTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            $_patientIDColumnName TEXT NOT NULL,
+          $_timeStampColumnName INT NOT NULL,
+            $_responseColumnName TEXT NOT NULL
+          );
+
+        ''');
+
+        /// table to save triarge visual acuity
+        db.execute('''
+          CREATE TABLE $_triageDistanceVisualAcuityName(
+           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           $_timeStampColumnName INT NOT NULL,
             $_responseColumnName TEXT NOT NULL
           );
@@ -108,7 +115,6 @@ class TriageDBHelper {
         db.execute('''
           CREATE TABLE $_triageEyeScanTableName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            $_patientIDColumnName TEXT NOT NULL,
             $_timeStampColumnName INT NOT NULL,
             $_responseColumnName TEXT NOT NULL
           );
@@ -134,13 +140,13 @@ class TriageDBHelper {
     }
   }
 
-  Future<List<Map<String, Object?>>> getTriageAssessmentResponse() async {
+  Future<dynamic> getTriageAssessmentResponse() async {
     try {
       var dbClient = await database;
-      var response =
-          await dbClient.query(_triageResponseTableName, orderBy: "id DESC");
+      var response = await dbClient.query(_triageResponseTableName,
+          orderBy: "id DESC", limit: 1);
       if (response.isNotEmpty) {
-        return response;
+        return json.decode(response.first[_responseColumnName].toString());
       }
       return [];
     } catch (e) {
@@ -149,9 +155,8 @@ class TriageDBHelper {
     }
   }
 
-  Future<void> insertTriageAssessment({
-    required DiagnosticReportTemplateFHIRModel triageAssessment,
-  }) async {
+  Future<void> insertTriageAssessment(
+      {required DiagnosticReportTemplateFHIRModel triageAssessment}) async {
     try {
       var dbClient = await database;
       await dbClient.insert(_triageAssessmentTableName, {
@@ -166,46 +171,25 @@ class TriageDBHelper {
   }
 
   Future<void> insertTriageResponse(
-      {required String patientID,
-      required TriagePostModel triageResponse}) async {
+      {required TriagePostModel triageResponse}) async {
     try {
       var dbClient = await database;
-      var response = await dbClient.query(_triageResponseTableName,
-          where: '$_patientIDColumnName = ?', whereArgs: [patientID]);
-
-      if (response.isNotEmpty) {
-        await dbClient.update(
-          _triageResponseTableName,
-          {
-            _responseColumnName: json.encode(
-              triageResponse.toJson(),
-            ),
-            _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-          },
-          where: '$_patientIDColumnName = ?',
-          whereArgs: [patientID],
-        );
-      } else {
-        await dbClient.insert(_triageResponseTableName, {
-          _patientIDColumnName: patientID,
-          _responseColumnName: json.encode(
-            triageResponse.toJson(),
-          ),
-          _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
-        });
-      }
+      await dbClient.insert(_triageResponseTableName, {
+        _responseColumnName: json.encode(
+          triageResponse.toJson(),
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
     } catch (e) {
       logger.d('Error inserting triage response: $e');
     }
   }
 
   Future<void> insertTriageQuestionnaire(
-      {required String patientID,
-      required List<PostTriageQuestionModel> triageQuestionnaire}) async {
+      {required List<PostTriageQuestionModel> triageQuestionnaire}) async {
     try {
       var dbClient = await database;
       await dbClient.insert(_triageQuestionnaireTableName, {
-        _patientIDColumnName: patientID,
         _responseColumnName: json.encode(
           triageQuestionnaire,
         ),
@@ -216,14 +200,11 @@ class TriageDBHelper {
     }
   }
 
-  Future<void> insertTriageVisualAcuity({
-    required String patientID,
-    required List<PostTriageObservationsModel> triageVisualAcuity,
-  }) async {
+  Future<void> insertTriageVisualAcuity(
+      {required List<PostTriageObservationsModel> triageVisualAcuity}) async {
     try {
       var dbClient = await database;
       await dbClient.insert(_triageVisualAcuityTableName, {
-        _patientIDColumnName: patientID,
         _responseColumnName: json.encode(
           triageVisualAcuity,
         ),
@@ -234,14 +215,26 @@ class TriageDBHelper {
     }
   }
 
-  Future<void> insertTriageEyeScan({
-    required String patientID,
-    required List<PostTriageImagingSelectionModel> triageEyeScan,
-  }) async {
+  Future<void> insertTriageDistanceVisualAcuity(
+      {required List<PostTriageObservationsModel> triageVisualAcuity}) async {
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageDistanceVisualAcuityName, {
+        _responseColumnName: json.encode(
+          triageVisualAcuity,
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage visual acuity: $e');
+    }
+  }
+
+  Future<void> insertTriageEyeScan(
+      {required List<PostTriageImagingSelectionModel> triageEyeScan}) async {
     try {
       var dbClient = await database;
       await dbClient.insert(_triageEyeScanTableName, {
-        _patientIDColumnName: patientID,
         _responseColumnName: json.encode(
           triageEyeScan,
         ),
@@ -274,6 +267,25 @@ class TriageDBHelper {
     try {
       var dbClient = await database;
       var response = await dbClient.query(_triageVisualAcuityTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return (json.decode(response.first[_responseColumnName].toString())
+                as List)
+            .map((e) => PostTriageObservationsModel.fromJson(e))
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage visual acuity: $e');
+      return [];
+    }
+  }
+
+  Future<List<PostTriageObservationsModel>>
+      getTriageDistanceVisualAcuity() async {
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageDistanceVisualAcuityName,
           orderBy: "id DESC", limit: 1);
       if (response.isNotEmpty) {
         return (json.decode(response.first[_responseColumnName].toString())
@@ -326,6 +338,11 @@ class TriageDBHelper {
     await dbClient.delete(_triageVisualAcuityTableName);
   }
 
+  Future<void> deleteTriageDistanceVisualAcuity() async {
+    var dbClient = await database;
+    await dbClient.delete(_triageDistanceVisualAcuityName);
+  }
+
   Future<void> deleteTriageEyeScan() async {
     var dbClient = await database;
     await dbClient.delete(_triageEyeScanTableName);
@@ -360,29 +377,27 @@ class TriageDBHelper {
     );
   }
 
-  Future<int> getTriageCurrentStep(String patientId) async {
+  Future<int> getTriageCurrentStep() async {
     var dbClient = await database;
 
     var questionnaireRecords =
         await dbClient.rawQuery('SELECT * FROM $_triageQuestionnaireTableName');
     var visualAcuityRecords =
         await dbClient.rawQuery('SELECT * FROM $_triageVisualAcuityTableName');
+    var distanceVisualAcuityRecords = await dbClient
+        .rawQuery('SELECT * FROM $_triageDistanceVisualAcuityName');
     var eyeScanRecords =
         await dbClient.rawQuery('SELECT * FROM $_triageEyeScanTableName');
 
-    String triageQuestionnaireTableEntryPatientID =
-        questionnaireRecords[0][_patientIDColumnName].toString();
-
-    if (triageQuestionnaireTableEntryPatientID != patientId) {
-      deleteAllTriageSteps();
-      return 0;
-    }
     logger.d({
       'questionnaireRecords': questionnaireRecords,
       'visualAcuityRecords': visualAcuityRecords,
+      'distanceVisualAcuityRecords': distanceVisualAcuityRecords,
       'eyeScanRecords': eyeScanRecords,
     });
     if (eyeScanRecords.isNotEmpty) {
+      return 4;
+    } else if (distanceVisualAcuityRecords.isNotEmpty) {
       return 3;
     } else if (visualAcuityRecords.isNotEmpty) {
       return 2;
@@ -398,6 +413,7 @@ class TriageDBHelper {
     await Future.wait([
       deleteTriageQuestionnaire(),
       deleteTriageVisualAcuity(),
+      deleteTriageDistanceVisualAcuity(),
       deleteTriageEyeScan(),
     ]);
   }
@@ -409,6 +425,7 @@ class TriageDBHelper {
       deleteTriageResponse(),
       deleteTriageQuestionnaire(),
       deleteTriageVisualAcuity(),
+      deleteTriageDistanceVisualAcuity(),
       deleteTriageEyeScan(),
     ]);
   }
@@ -421,57 +438,5 @@ class TriageDBHelper {
     // SQFlite Password
     await PersistentAuthStateService.authState.deleteSQFlitePassword();
     _database = null;
-  }
-
-  ///These Functions are used to get the triage data for testing remove them in prod
-
-  Future<List<String>> getQuessionaireTableData() async {
-    var dbClient = await database;
-    var response =
-        await dbClient.query(_triageQuestionnaireTableName, orderBy: "id DESC");
-    if (response.isNotEmpty) {
-      return response.map((e) => e.toString()).toList();
-    }
-    return [];
-  }
-
-  Future<List<String>> getVisualAcuityTableData() async {
-    var dbClient = await database;
-    var response =
-        await dbClient.query(_triageVisualAcuityTableName, orderBy: "id DESC");
-    if (response.isNotEmpty) {
-      return response.map((e) => e.toString()).toList();
-    }
-    return [];
-  }
-
-  Future<List<String>> getEyeScanTableData() async {
-    var dbClient = await database;
-    var response =
-        await dbClient.query(_triageEyeScanTableName, orderBy: "id DESC");
-    if (response.isNotEmpty) {
-      return response.map((e) => e.toString()).toList();
-    }
-    return [];
-  }
-
-  Future<List<String>> getTriageAssessmentTableData() async {
-    var dbClient = await database;
-    var response =
-        await dbClient.query(_triageAssessmentTableName, orderBy: "id DESC");
-    if (response.isNotEmpty) {
-      return response.map((e) => e.toString()).toList();
-    }
-    return [];
-  }
-
-  Future<List<String>> getTriageResponseTableData() async {
-    var dbClient = await database;
-    var response =
-        await dbClient.query(_triageResponseTableName, orderBy: "id DESC");
-    if (response.isNotEmpty) {
-      return response.map((e) => e.toString()).toList();
-    }
-    return [];
   }
 }

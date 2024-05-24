@@ -348,9 +348,9 @@ class _PermissionRequestAlertDialog extends StatelessWidget {
       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
       child: AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.kmradius),
+          borderRadius: BorderRadius.circular(AppSize.km),
         ),
-        elevation: AppSize.kselevation,
+        elevation: AppSize.ks,
         backgroundColor: Colors.white,
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -361,7 +361,7 @@ class _PermissionRequestAlertDialog extends StatelessWidget {
               _title,
               style: const TextStyle(fontSize: 24),
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Text(
               _description,
               style: const TextStyle(fontSize: 14),

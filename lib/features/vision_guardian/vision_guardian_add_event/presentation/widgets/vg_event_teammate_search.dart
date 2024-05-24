@@ -21,7 +21,7 @@ class VisionGuardianSearchTeammate extends ConsumerWidget {
             Navigator.pop(context);
           },
         ),
-        toolbarHeight: AppSize.klheight * 3,
+        toolbarHeight: AppSize.kl * 3,
         title: const VisionGuardianEventSearchBar(
             readOnly: false, searchType: "teammate"),
         actions: const [],

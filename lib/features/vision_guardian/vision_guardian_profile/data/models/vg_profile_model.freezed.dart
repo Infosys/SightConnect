@@ -12,7 +12,7 @@ part of 'vg_profile_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 VgProfileModel _$VgProfileModelFromJson(Map<String, dynamic> json) {
   return _VgProfileModel.fromJson(json);
@@ -266,11 +266,11 @@ class _$VgProfileModelCopyWithImpl<$Res, $Val extends VgProfileModel>
 }
 
 /// @nodoc
-abstract class _$$_VgProfileModelCopyWith<$Res>
+abstract class _$$VgProfileModelImplCopyWith<$Res>
     implements $VgProfileModelCopyWith<$Res> {
-  factory _$$_VgProfileModelCopyWith(
-          _$_VgProfileModel value, $Res Function(_$_VgProfileModel) then) =
-      __$$_VgProfileModelCopyWithImpl<$Res>;
+  factory _$$VgProfileModelImplCopyWith(_$VgProfileModelImpl value,
+          $Res Function(_$VgProfileModelImpl) then) =
+      __$$VgProfileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -310,11 +310,11 @@ abstract class _$$_VgProfileModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_VgProfileModelCopyWithImpl<$Res>
-    extends _$VgProfileModelCopyWithImpl<$Res, _$_VgProfileModel>
-    implements _$$_VgProfileModelCopyWith<$Res> {
-  __$$_VgProfileModelCopyWithImpl(
-      _$_VgProfileModel _value, $Res Function(_$_VgProfileModel) _then)
+class __$$VgProfileModelImplCopyWithImpl<$Res>
+    extends _$VgProfileModelCopyWithImpl<$Res, _$VgProfileModelImpl>
+    implements _$$VgProfileModelImplCopyWith<$Res> {
+  __$$VgProfileModelImplCopyWithImpl(
+      _$VgProfileModelImpl _value, $Res Function(_$VgProfileModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -337,7 +337,7 @@ class __$$_VgProfileModelCopyWithImpl<$Res>
     Object? practiceGrants = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_VgProfileModel(
+    return _then(_$VgProfileModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -408,8 +408,8 @@ class __$$_VgProfileModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_VgProfileModel implements _VgProfileModel {
-  const _$_VgProfileModel(
+class _$VgProfileModelImpl implements _VgProfileModel {
+  const _$VgProfileModelImpl(
       {@JsonKey(name: "id") this.id,
       @JsonKey(name: "profilePhoto") this.profilePhoto,
       @JsonKey(name: "healthProfessionalType") this.healthProfessionalType,
@@ -430,8 +430,8 @@ class _$_VgProfileModel implements _VgProfileModel {
       @JsonKey(name: "osid") this.osid})
       : _practiceGrants = practiceGrants;
 
-  factory _$_VgProfileModel.fromJson(Map<String, dynamic> json) =>
-      _$$_VgProfileModelFromJson(json);
+  factory _$VgProfileModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VgProfileModelImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -496,10 +496,10 @@ class _$_VgProfileModel implements _VgProfileModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VgProfileModel &&
+            other is _$VgProfileModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.profilePhoto, profilePhoto) ||
                 other.profilePhoto == profilePhoto) &&
@@ -558,12 +558,13 @@ class _$_VgProfileModel implements _VgProfileModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VgProfileModelCopyWith<_$_VgProfileModel> get copyWith =>
-      __$$_VgProfileModelCopyWithImpl<_$_VgProfileModel>(this, _$identity);
+  _$$VgProfileModelImplCopyWith<_$VgProfileModelImpl> get copyWith =>
+      __$$VgProfileModelImplCopyWithImpl<_$VgProfileModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VgProfileModelToJson(
+    return _$$VgProfileModelImplToJson(
       this,
     );
   }
@@ -595,10 +596,10 @@ abstract class _VgProfileModel implements VgProfileModel {
       final bool? availableForTeleconsultation,
       @JsonKey(name: "practiceGrants")
       final List<PracticeGrant>? practiceGrants,
-      @JsonKey(name: "osid") final String? osid}) = _$_VgProfileModel;
+      @JsonKey(name: "osid") final String? osid}) = _$VgProfileModelImpl;
 
   factory _VgProfileModel.fromJson(Map<String, dynamic> json) =
-      _$_VgProfileModel.fromJson;
+      _$VgProfileModelImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -650,7 +651,7 @@ abstract class _VgProfileModel implements VgProfileModel {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_VgProfileModelCopyWith<_$_VgProfileModel> get copyWith =>
+  _$$VgProfileModelImplCopyWith<_$VgProfileModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -763,11 +764,11 @@ class _$CommunicationAddressCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CommunicationAddressCopyWith<$Res>
+abstract class _$$CommunicationAddressImplCopyWith<$Res>
     implements $CommunicationAddressCopyWith<$Res> {
-  factory _$$_CommunicationAddressCopyWith(_$_CommunicationAddress value,
-          $Res Function(_$_CommunicationAddress) then) =
-      __$$_CommunicationAddressCopyWithImpl<$Res>;
+  factory _$$CommunicationAddressImplCopyWith(_$CommunicationAddressImpl value,
+          $Res Function(_$CommunicationAddressImpl) then) =
+      __$$CommunicationAddressImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -783,11 +784,11 @@ abstract class _$$_CommunicationAddressCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CommunicationAddressCopyWithImpl<$Res>
-    extends _$CommunicationAddressCopyWithImpl<$Res, _$_CommunicationAddress>
-    implements _$$_CommunicationAddressCopyWith<$Res> {
-  __$$_CommunicationAddressCopyWithImpl(_$_CommunicationAddress _value,
-      $Res Function(_$_CommunicationAddress) _then)
+class __$$CommunicationAddressImplCopyWithImpl<$Res>
+    extends _$CommunicationAddressCopyWithImpl<$Res, _$CommunicationAddressImpl>
+    implements _$$CommunicationAddressImplCopyWith<$Res> {
+  __$$CommunicationAddressImplCopyWithImpl(_$CommunicationAddressImpl _value,
+      $Res Function(_$CommunicationAddressImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -802,7 +803,7 @@ class __$$_CommunicationAddressCopyWithImpl<$Res>
     Object? postalCode = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_CommunicationAddress(
+    return _then(_$CommunicationAddressImpl(
       isCommunicationAddressAsPerKyc: freezed == isCommunicationAddressAsPerKyc
           ? _value.isCommunicationAddressAsPerKyc
           : isCommunicationAddressAsPerKyc // ignore: cast_nullable_to_non_nullable
@@ -841,8 +842,8 @@ class __$$_CommunicationAddressCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CommunicationAddress implements _CommunicationAddress {
-  const _$_CommunicationAddress(
+class _$CommunicationAddressImpl implements _CommunicationAddress {
+  const _$CommunicationAddressImpl(
       {@JsonKey(name: "isCommunicationAddressAsPerKYC")
       this.isCommunicationAddressAsPerKyc,
       @JsonKey(name: "address") this.address,
@@ -853,8 +854,8 @@ class _$_CommunicationAddress implements _CommunicationAddress {
       @JsonKey(name: "postalCode") this.postalCode,
       @JsonKey(name: "osid") this.osid});
 
-  factory _$_CommunicationAddress.fromJson(Map<String, dynamic> json) =>
-      _$$_CommunicationAddressFromJson(json);
+  factory _$CommunicationAddressImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CommunicationAddressImplFromJson(json);
 
   @override
   @JsonKey(name: "isCommunicationAddressAsPerKYC")
@@ -887,10 +888,10 @@ class _$_CommunicationAddress implements _CommunicationAddress {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CommunicationAddress &&
+            other is _$CommunicationAddressImpl &&
             (identical(other.isCommunicationAddressAsPerKyc,
                     isCommunicationAddressAsPerKyc) ||
                 other.isCommunicationAddressAsPerKyc ==
@@ -913,13 +914,14 @@ class _$_CommunicationAddress implements _CommunicationAddress {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CommunicationAddressCopyWith<_$_CommunicationAddress> get copyWith =>
-      __$$_CommunicationAddressCopyWithImpl<_$_CommunicationAddress>(
-          this, _$identity);
+  _$$CommunicationAddressImplCopyWith<_$CommunicationAddressImpl>
+      get copyWith =>
+          __$$CommunicationAddressImplCopyWithImpl<_$CommunicationAddressImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CommunicationAddressToJson(
+    return _$$CommunicationAddressImplToJson(
       this,
     );
   }
@@ -935,10 +937,10 @@ abstract class _CommunicationAddress implements CommunicationAddress {
       @JsonKey(name: "state") final String? state,
       @JsonKey(name: "city") final String? city,
       @JsonKey(name: "postalCode") final String? postalCode,
-      @JsonKey(name: "osid") final String? osid}) = _$_CommunicationAddress;
+      @JsonKey(name: "osid") final String? osid}) = _$CommunicationAddressImpl;
 
   factory _CommunicationAddress.fromJson(Map<String, dynamic> json) =
-      _$_CommunicationAddress.fromJson;
+      _$CommunicationAddressImpl.fromJson;
 
   @override
   @JsonKey(name: "isCommunicationAddressAsPerKYC")
@@ -966,8 +968,8 @@ abstract class _CommunicationAddress implements CommunicationAddress {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_CommunicationAddressCopyWith<_$_CommunicationAddress> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CommunicationAddressImplCopyWith<_$CommunicationAddressImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ContactInformation _$ContactInformationFromJson(Map<String, dynamic> json) {
@@ -1077,11 +1079,11 @@ class _$ContactInformationCopyWithImpl<$Res, $Val extends ContactInformation>
 }
 
 /// @nodoc
-abstract class _$$_ContactInformationCopyWith<$Res>
+abstract class _$$ContactInformationImplCopyWith<$Res>
     implements $ContactInformationCopyWith<$Res> {
-  factory _$$_ContactInformationCopyWith(_$_ContactInformation value,
-          $Res Function(_$_ContactInformation) then) =
-      __$$_ContactInformationCopyWithImpl<$Res>;
+  factory _$$ContactInformationImplCopyWith(_$ContactInformationImpl value,
+          $Res Function(_$ContactInformationImpl) then) =
+      __$$ContactInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1097,11 +1099,11 @@ abstract class _$$_ContactInformationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ContactInformationCopyWithImpl<$Res>
-    extends _$ContactInformationCopyWithImpl<$Res, _$_ContactInformation>
-    implements _$$_ContactInformationCopyWith<$Res> {
-  __$$_ContactInformationCopyWithImpl(
-      _$_ContactInformation _value, $Res Function(_$_ContactInformation) _then)
+class __$$ContactInformationImplCopyWithImpl<$Res>
+    extends _$ContactInformationCopyWithImpl<$Res, _$ContactInformationImpl>
+    implements _$$ContactInformationImplCopyWith<$Res> {
+  __$$ContactInformationImplCopyWithImpl(_$ContactInformationImpl _value,
+      $Res Function(_$ContactInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1116,7 +1118,7 @@ class __$$_ContactInformationCopyWithImpl<$Res>
     Object? publicEmailStatus = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_ContactInformation(
+    return _then(_$ContactInformationImpl(
       publicMobileNumber: freezed == publicMobileNumber
           ? _value.publicMobileNumber
           : publicMobileNumber // ignore: cast_nullable_to_non_nullable
@@ -1155,8 +1157,8 @@ class __$$_ContactInformationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ContactInformation implements _ContactInformation {
-  const _$_ContactInformation(
+class _$ContactInformationImpl implements _ContactInformation {
+  const _$ContactInformationImpl(
       {@JsonKey(name: "publicMobileNumber") this.publicMobileNumber,
       @JsonKey(name: "publicMobileNumberCode") this.publicMobileNumberCode,
       @JsonKey(name: "publicMobileNumberStatus") this.publicMobileNumberStatus,
@@ -1166,8 +1168,8 @@ class _$_ContactInformation implements _ContactInformation {
       @JsonKey(name: "publicEmailStatus") this.publicEmailStatus,
       @JsonKey(name: "osid") this.osid});
 
-  factory _$_ContactInformation.fromJson(Map<String, dynamic> json) =>
-      _$$_ContactInformationFromJson(json);
+  factory _$ContactInformationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ContactInformationImplFromJson(json);
 
   @override
   @JsonKey(name: "publicMobileNumber")
@@ -1200,10 +1202,10 @@ class _$_ContactInformation implements _ContactInformation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactInformation &&
+            other is _$ContactInformationImpl &&
             (identical(other.publicMobileNumber, publicMobileNumber) ||
                 other.publicMobileNumber == publicMobileNumber) &&
             (identical(other.publicMobileNumberCode, publicMobileNumberCode) ||
@@ -1238,13 +1240,13 @@ class _$_ContactInformation implements _ContactInformation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactInformationCopyWith<_$_ContactInformation> get copyWith =>
-      __$$_ContactInformationCopyWithImpl<_$_ContactInformation>(
+  _$$ContactInformationImplCopyWith<_$ContactInformationImpl> get copyWith =>
+      __$$ContactInformationImplCopyWithImpl<_$ContactInformationImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ContactInformationToJson(
+    return _$$ContactInformationImplToJson(
       this,
     );
   }
@@ -1261,10 +1263,10 @@ abstract class _ContactInformation implements ContactInformation {
       @JsonKey(name: "landLineNumberCode") final String? landLineNumberCode,
       @JsonKey(name: "publicEmail") final String? publicEmail,
       @JsonKey(name: "publicEmailStatus") final String? publicEmailStatus,
-      @JsonKey(name: "osid") final String? osid}) = _$_ContactInformation;
+      @JsonKey(name: "osid") final String? osid}) = _$ContactInformationImpl;
 
   factory _ContactInformation.fromJson(Map<String, dynamic> json) =
-      _$_ContactInformation.fromJson;
+      _$ContactInformationImpl.fromJson;
 
   @override
   @JsonKey(name: "publicMobileNumber")
@@ -1292,7 +1294,7 @@ abstract class _ContactInformation implements ContactInformation {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_ContactInformationCopyWith<_$_ContactInformation> get copyWith =>
+  _$$ContactInformationImplCopyWith<_$ContactInformationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1386,11 +1388,11 @@ class _$CurrentWorkDetailsCopyWithImpl<$Res, $Val extends CurrentWorkDetails>
 }
 
 /// @nodoc
-abstract class _$$_CurrentWorkDetailsCopyWith<$Res>
+abstract class _$$CurrentWorkDetailsImplCopyWith<$Res>
     implements $CurrentWorkDetailsCopyWith<$Res> {
-  factory _$$_CurrentWorkDetailsCopyWith(_$_CurrentWorkDetails value,
-          $Res Function(_$_CurrentWorkDetails) then) =
-      __$$_CurrentWorkDetailsCopyWithImpl<$Res>;
+  factory _$$CurrentWorkDetailsImplCopyWith(_$CurrentWorkDetailsImpl value,
+          $Res Function(_$CurrentWorkDetailsImpl) then) =
+      __$$CurrentWorkDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1403,11 +1405,11 @@ abstract class _$$_CurrentWorkDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CurrentWorkDetailsCopyWithImpl<$Res>
-    extends _$CurrentWorkDetailsCopyWithImpl<$Res, _$_CurrentWorkDetails>
-    implements _$$_CurrentWorkDetailsCopyWith<$Res> {
-  __$$_CurrentWorkDetailsCopyWithImpl(
-      _$_CurrentWorkDetails _value, $Res Function(_$_CurrentWorkDetails) _then)
+class __$$CurrentWorkDetailsImplCopyWithImpl<$Res>
+    extends _$CurrentWorkDetailsCopyWithImpl<$Res, _$CurrentWorkDetailsImpl>
+    implements _$$CurrentWorkDetailsImplCopyWith<$Res> {
+  __$$CurrentWorkDetailsImplCopyWithImpl(_$CurrentWorkDetailsImpl _value,
+      $Res Function(_$CurrentWorkDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1420,7 +1422,7 @@ class __$$_CurrentWorkDetailsCopyWithImpl<$Res>
     Object? certificateAttachment = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_CurrentWorkDetails(
+    return _then(_$CurrentWorkDetailsImpl(
       currentlyWorking: freezed == currentlyWorking
           ? _value.currentlyWorking
           : currentlyWorking // ignore: cast_nullable_to_non_nullable
@@ -1451,8 +1453,8 @@ class __$$_CurrentWorkDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CurrentWorkDetails implements _CurrentWorkDetails {
-  const _$_CurrentWorkDetails(
+class _$CurrentWorkDetailsImpl implements _CurrentWorkDetails {
+  const _$CurrentWorkDetailsImpl(
       {@JsonKey(name: "currentlyWorking") this.currentlyWorking,
       @JsonKey(name: "purposeOfWork") this.purposeOfWork,
       @JsonKey(name: "chooseWorkStatus") this.chooseWorkStatus,
@@ -1460,8 +1462,8 @@ class _$_CurrentWorkDetails implements _CurrentWorkDetails {
       @JsonKey(name: "certificateAttachment") this.certificateAttachment,
       @JsonKey(name: "osid") this.osid});
 
-  factory _$_CurrentWorkDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_CurrentWorkDetailsFromJson(json);
+  factory _$CurrentWorkDetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CurrentWorkDetailsImplFromJson(json);
 
   @override
   @JsonKey(name: "currentlyWorking")
@@ -1488,10 +1490,10 @@ class _$_CurrentWorkDetails implements _CurrentWorkDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CurrentWorkDetails &&
+            other is _$CurrentWorkDetailsImpl &&
             (identical(other.currentlyWorking, currentlyWorking) ||
                 other.currentlyWorking == currentlyWorking) &&
             (identical(other.purposeOfWork, purposeOfWork) ||
@@ -1513,13 +1515,13 @@ class _$_CurrentWorkDetails implements _CurrentWorkDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CurrentWorkDetailsCopyWith<_$_CurrentWorkDetails> get copyWith =>
-      __$$_CurrentWorkDetailsCopyWithImpl<_$_CurrentWorkDetails>(
+  _$$CurrentWorkDetailsImplCopyWith<_$CurrentWorkDetailsImpl> get copyWith =>
+      __$$CurrentWorkDetailsImplCopyWithImpl<_$CurrentWorkDetailsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CurrentWorkDetailsToJson(
+    return _$$CurrentWorkDetailsImplToJson(
       this,
     );
   }
@@ -1533,10 +1535,10 @@ abstract class _CurrentWorkDetails implements CurrentWorkDetails {
       @JsonKey(name: "reasonForNotWorking") final String? reasonForNotWorking,
       @JsonKey(name: "certificateAttachment")
       final String? certificateAttachment,
-      @JsonKey(name: "osid") final String? osid}) = _$_CurrentWorkDetails;
+      @JsonKey(name: "osid") final String? osid}) = _$CurrentWorkDetailsImpl;
 
   factory _CurrentWorkDetails.fromJson(Map<String, dynamic> json) =
-      _$_CurrentWorkDetails.fromJson;
+      _$CurrentWorkDetailsImpl.fromJson;
 
   @override
   @JsonKey(name: "currentlyWorking")
@@ -1558,7 +1560,7 @@ abstract class _CurrentWorkDetails implements CurrentWorkDetails {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_CurrentWorkDetailsCopyWith<_$_CurrentWorkDetails> get copyWith =>
+  _$$CurrentWorkDetailsImplCopyWith<_$CurrentWorkDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1676,11 +1678,11 @@ class _$PersonalInformationCopyWithImpl<$Res, $Val extends PersonalInformation>
 }
 
 /// @nodoc
-abstract class _$$_PersonalInformationCopyWith<$Res>
+abstract class _$$PersonalInformationImplCopyWith<$Res>
     implements $PersonalInformationCopyWith<$Res> {
-  factory _$$_PersonalInformationCopyWith(_$_PersonalInformation value,
-          $Res Function(_$_PersonalInformation) then) =
-      __$$_PersonalInformationCopyWithImpl<$Res>;
+  factory _$$PersonalInformationImplCopyWith(_$PersonalInformationImpl value,
+          $Res Function(_$PersonalInformationImpl) then) =
+      __$$PersonalInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1696,11 +1698,11 @@ abstract class _$$_PersonalInformationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PersonalInformationCopyWithImpl<$Res>
-    extends _$PersonalInformationCopyWithImpl<$Res, _$_PersonalInformation>
-    implements _$$_PersonalInformationCopyWith<$Res> {
-  __$$_PersonalInformationCopyWithImpl(_$_PersonalInformation _value,
-      $Res Function(_$_PersonalInformation) _then)
+class __$$PersonalInformationImplCopyWithImpl<$Res>
+    extends _$PersonalInformationCopyWithImpl<$Res, _$PersonalInformationImpl>
+    implements _$$PersonalInformationImplCopyWith<$Res> {
+  __$$PersonalInformationImplCopyWithImpl(_$PersonalInformationImpl _value,
+      $Res Function(_$PersonalInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1716,7 +1718,7 @@ class __$$_PersonalInformationCopyWithImpl<$Res>
     Object? languagesSpoken = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_PersonalInformation(
+    return _then(_$PersonalInformationImpl(
       salutation: freezed == salutation
           ? _value.salutation
           : salutation // ignore: cast_nullable_to_non_nullable
@@ -1759,8 +1761,8 @@ class __$$_PersonalInformationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PersonalInformation implements _PersonalInformation {
-  const _$_PersonalInformation(
+class _$PersonalInformationImpl implements _PersonalInformation {
+  const _$PersonalInformationImpl(
       {@JsonKey(name: "salutation") this.salutation,
       @JsonKey(name: "firstName") this.firstName,
       @JsonKey(name: "lastName") this.lastName,
@@ -1771,8 +1773,8 @@ class _$_PersonalInformation implements _PersonalInformation {
       @JsonKey(name: "languagesSpoken") this.languagesSpoken,
       @JsonKey(name: "osid") this.osid});
 
-  factory _$_PersonalInformation.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonalInformationFromJson(json);
+  factory _$PersonalInformationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PersonalInformationImplFromJson(json);
 
   @override
   @JsonKey(name: "salutation")
@@ -1808,10 +1810,10 @@ class _$_PersonalInformation implements _PersonalInformation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PersonalInformation &&
+            other is _$PersonalInformationImpl &&
             (identical(other.salutation, salutation) ||
                 other.salutation == salutation) &&
             (identical(other.firstName, firstName) ||
@@ -1838,13 +1840,13 @@ class _$_PersonalInformation implements _PersonalInformation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PersonalInformationCopyWith<_$_PersonalInformation> get copyWith =>
-      __$$_PersonalInformationCopyWithImpl<_$_PersonalInformation>(
+  _$$PersonalInformationImplCopyWith<_$PersonalInformationImpl> get copyWith =>
+      __$$PersonalInformationImplCopyWithImpl<_$PersonalInformationImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonalInformationToJson(
+    return _$$PersonalInformationImplToJson(
       this,
     );
   }
@@ -1860,10 +1862,10 @@ abstract class _PersonalInformation implements PersonalInformation {
       @JsonKey(name: "district") final String? district,
       @JsonKey(name: "city") final String? city,
       @JsonKey(name: "languagesSpoken") final String? languagesSpoken,
-      @JsonKey(name: "osid") final String? osid}) = _$_PersonalInformation;
+      @JsonKey(name: "osid") final String? osid}) = _$PersonalInformationImpl;
 
   factory _PersonalInformation.fromJson(Map<String, dynamic> json) =
-      _$_PersonalInformation.fromJson;
+      _$PersonalInformationImpl.fromJson;
 
   @override
   @JsonKey(name: "salutation")
@@ -1894,7 +1896,7 @@ abstract class _PersonalInformation implements PersonalInformation {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_PersonalInformationCopyWith<_$_PersonalInformation> get copyWith =>
+  _$$PersonalInformationImplCopyWith<_$PersonalInformationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2002,11 +2004,11 @@ class _$PracticeGrantCopyWithImpl<$Res, $Val extends PracticeGrant>
 }
 
 /// @nodoc
-abstract class _$$_PracticeGrantCopyWith<$Res>
+abstract class _$$PracticeGrantImplCopyWith<$Res>
     implements $PracticeGrantCopyWith<$Res> {
-  factory _$$_PracticeGrantCopyWith(
-          _$_PracticeGrant value, $Res Function(_$_PracticeGrant) then) =
-      __$$_PracticeGrantCopyWithImpl<$Res>;
+  factory _$$PracticeGrantImplCopyWith(
+          _$PracticeGrantImpl value, $Res Function(_$PracticeGrantImpl) then) =
+      __$$PracticeGrantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2022,11 +2024,11 @@ abstract class _$$_PracticeGrantCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PracticeGrantCopyWithImpl<$Res>
-    extends _$PracticeGrantCopyWithImpl<$Res, _$_PracticeGrant>
-    implements _$$_PracticeGrantCopyWith<$Res> {
-  __$$_PracticeGrantCopyWithImpl(
-      _$_PracticeGrant _value, $Res Function(_$_PracticeGrant) _then)
+class __$$PracticeGrantImplCopyWithImpl<$Res>
+    extends _$PracticeGrantCopyWithImpl<$Res, _$PracticeGrantImpl>
+    implements _$$PracticeGrantImplCopyWith<$Res> {
+  __$$PracticeGrantImplCopyWithImpl(
+      _$PracticeGrantImpl _value, $Res Function(_$PracticeGrantImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2039,7 +2041,7 @@ class __$$_PracticeGrantCopyWithImpl<$Res>
     Object? department = freezed,
     Object? organization = freezed,
   }) {
-    return _then(_$_PracticeGrant(
+    return _then(_$PracticeGrantImpl(
       registrationDate: freezed == registrationDate
           ? _value.registrationDate
           : registrationDate // ignore: cast_nullable_to_non_nullable
@@ -2070,8 +2072,8 @@ class __$$_PracticeGrantCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PracticeGrant implements _PracticeGrant {
-  const _$_PracticeGrant(
+class _$PracticeGrantImpl implements _PracticeGrant {
+  const _$PracticeGrantImpl(
       {@TimestampConverter() this.registrationDate,
       @JsonKey(name: "id") this.id,
       @JsonKey(name: "grantType") this.grantType,
@@ -2079,8 +2081,8 @@ class _$_PracticeGrant implements _PracticeGrant {
       @JsonKey(name: "department") this.department,
       @JsonKey(name: "organization") this.organization});
 
-  factory _$_PracticeGrant.fromJson(Map<String, dynamic> json) =>
-      _$$_PracticeGrantFromJson(json);
+  factory _$PracticeGrantImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PracticeGrantImplFromJson(json);
 
   @override
   @TimestampConverter()
@@ -2107,10 +2109,10 @@ class _$_PracticeGrant implements _PracticeGrant {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PracticeGrant &&
+            other is _$PracticeGrantImpl &&
             (identical(other.registrationDate, registrationDate) ||
                 other.registrationDate == registrationDate) &&
             (identical(other.id, id) || other.id == id) &&
@@ -2132,12 +2134,12 @@ class _$_PracticeGrant implements _PracticeGrant {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PracticeGrantCopyWith<_$_PracticeGrant> get copyWith =>
-      __$$_PracticeGrantCopyWithImpl<_$_PracticeGrant>(this, _$identity);
+  _$$PracticeGrantImplCopyWith<_$PracticeGrantImpl> get copyWith =>
+      __$$PracticeGrantImplCopyWithImpl<_$PracticeGrantImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PracticeGrantToJson(
+    return _$$PracticeGrantImplToJson(
       this,
     );
   }
@@ -2151,10 +2153,10 @@ abstract class _PracticeGrant implements PracticeGrant {
           @JsonKey(name: "grantRole") final String? grantRole,
           @JsonKey(name: "department") final String? department,
           @JsonKey(name: "organization") final Organization? organization}) =
-      _$_PracticeGrant;
+      _$PracticeGrantImpl;
 
   factory _PracticeGrant.fromJson(Map<String, dynamic> json) =
-      _$_PracticeGrant.fromJson;
+      _$PracticeGrantImpl.fromJson;
 
   @override
   @TimestampConverter()
@@ -2176,7 +2178,7 @@ abstract class _PracticeGrant implements PracticeGrant {
   Organization? get organization;
   @override
   @JsonKey(ignore: true)
-  _$$_PracticeGrantCopyWith<_$_PracticeGrant> get copyWith =>
+  _$$PracticeGrantImplCopyWith<_$PracticeGrantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2284,11 +2286,11 @@ class _$OrganizationCopyWithImpl<$Res, $Val extends Organization>
 }
 
 /// @nodoc
-abstract class _$$_OrganizationCopyWith<$Res>
+abstract class _$$OrganizationImplCopyWith<$Res>
     implements $OrganizationCopyWith<$Res> {
-  factory _$$_OrganizationCopyWith(
-          _$_Organization value, $Res Function(_$_Organization) then) =
-      __$$_OrganizationCopyWithImpl<$Res>;
+  factory _$$OrganizationImplCopyWith(
+          _$OrganizationImpl value, $Res Function(_$OrganizationImpl) then) =
+      __$$OrganizationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2304,11 +2306,11 @@ abstract class _$$_OrganizationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrganizationCopyWithImpl<$Res>
-    extends _$OrganizationCopyWithImpl<$Res, _$_Organization>
-    implements _$$_OrganizationCopyWith<$Res> {
-  __$$_OrganizationCopyWithImpl(
-      _$_Organization _value, $Res Function(_$_Organization) _then)
+class __$$OrganizationImplCopyWithImpl<$Res>
+    extends _$OrganizationCopyWithImpl<$Res, _$OrganizationImpl>
+    implements _$$OrganizationImplCopyWith<$Res> {
+  __$$OrganizationImplCopyWithImpl(
+      _$OrganizationImpl _value, $Res Function(_$OrganizationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2321,7 +2323,7 @@ class __$$_OrganizationCopyWithImpl<$Res>
     Object? status = freezed,
     Object? governingOrganization = freezed,
   }) {
-    return _then(_$_Organization(
+    return _then(_$OrganizationImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2352,8 +2354,8 @@ class __$$_OrganizationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Organization implements _Organization {
-  const _$_Organization(
+class _$OrganizationImpl implements _Organization {
+  const _$OrganizationImpl(
       {@JsonKey(name: "id") this.id,
       @JsonKey(name: "regRef") this.regRef,
       @JsonKey(name: "facilityType") this.facilityType,
@@ -2361,8 +2363,8 @@ class _$_Organization implements _Organization {
       @JsonKey(name: "status") this.status,
       @JsonKey(name: "governingOrganization") this.governingOrganization});
 
-  factory _$_Organization.fromJson(Map<String, dynamic> json) =>
-      _$$_OrganizationFromJson(json);
+  factory _$OrganizationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrganizationImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -2389,10 +2391,10 @@ class _$_Organization implements _Organization {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Organization &&
+            other is _$OrganizationImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.regRef, regRef) || other.regRef == regRef) &&
             (identical(other.facilityType, facilityType) ||
@@ -2411,12 +2413,12 @@ class _$_Organization implements _Organization {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrganizationCopyWith<_$_Organization> get copyWith =>
-      __$$_OrganizationCopyWithImpl<_$_Organization>(this, _$identity);
+  _$$OrganizationImplCopyWith<_$OrganizationImpl> get copyWith =>
+      __$$OrganizationImplCopyWithImpl<_$OrganizationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrganizationToJson(
+    return _$$OrganizationImplToJson(
       this,
     );
   }
@@ -2430,10 +2432,10 @@ abstract class _Organization implements Organization {
       @JsonKey(name: "tenant") final Tenant? tenant,
       @JsonKey(name: "status") final String? status,
       @JsonKey(name: "governingOrganization")
-      final dynamic governingOrganization}) = _$_Organization;
+      final dynamic governingOrganization}) = _$OrganizationImpl;
 
   factory _Organization.fromJson(Map<String, dynamic> json) =
-      _$_Organization.fromJson;
+      _$OrganizationImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -2455,7 +2457,7 @@ abstract class _Organization implements Organization {
   dynamic get governingOrganization;
   @override
   @JsonKey(ignore: true)
-  _$$_OrganizationCopyWith<_$_Organization> get copyWith =>
+  _$$OrganizationImplCopyWith<_$OrganizationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2514,9 +2516,10 @@ class _$TenantCopyWithImpl<$Res, $Val extends Tenant>
 }
 
 /// @nodoc
-abstract class _$$_TenantCopyWith<$Res> implements $TenantCopyWith<$Res> {
-  factory _$$_TenantCopyWith(_$_Tenant value, $Res Function(_$_Tenant) then) =
-      __$$_TenantCopyWithImpl<$Res>;
+abstract class _$$TenantImplCopyWith<$Res> implements $TenantCopyWith<$Res> {
+  factory _$$TenantImplCopyWith(
+          _$TenantImpl value, $Res Function(_$TenantImpl) then) =
+      __$$TenantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2524,10 +2527,11 @@ abstract class _$$_TenantCopyWith<$Res> implements $TenantCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TenantCopyWithImpl<$Res>
-    extends _$TenantCopyWithImpl<$Res, _$_Tenant>
-    implements _$$_TenantCopyWith<$Res> {
-  __$$_TenantCopyWithImpl(_$_Tenant _value, $Res Function(_$_Tenant) _then)
+class __$$TenantImplCopyWithImpl<$Res>
+    extends _$TenantCopyWithImpl<$Res, _$TenantImpl>
+    implements _$$TenantImplCopyWith<$Res> {
+  __$$TenantImplCopyWithImpl(
+      _$TenantImpl _value, $Res Function(_$TenantImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2536,7 +2540,7 @@ class __$$_TenantCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
   }) {
-    return _then(_$_Tenant(
+    return _then(_$TenantImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2551,12 +2555,12 @@ class __$$_TenantCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Tenant implements _Tenant {
-  const _$_Tenant(
+class _$TenantImpl implements _Tenant {
+  const _$TenantImpl(
       {@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name});
 
-  factory _$_Tenant.fromJson(Map<String, dynamic> json) =>
-      _$$_TenantFromJson(json);
+  factory _$TenantImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TenantImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -2571,10 +2575,10 @@ class _$_Tenant implements _Tenant {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Tenant &&
+            other is _$TenantImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -2586,12 +2590,12 @@ class _$_Tenant implements _Tenant {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TenantCopyWith<_$_Tenant> get copyWith =>
-      __$$_TenantCopyWithImpl<_$_Tenant>(this, _$identity);
+  _$$TenantImplCopyWith<_$TenantImpl> get copyWith =>
+      __$$TenantImplCopyWithImpl<_$TenantImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TenantToJson(
+    return _$$TenantImplToJson(
       this,
     );
   }
@@ -2600,9 +2604,9 @@ class _$_Tenant implements _Tenant {
 abstract class _Tenant implements Tenant {
   const factory _Tenant(
       {@JsonKey(name: "id") final int? id,
-      @JsonKey(name: "name") final String? name}) = _$_Tenant;
+      @JsonKey(name: "name") final String? name}) = _$TenantImpl;
 
-  factory _Tenant.fromJson(Map<String, dynamic> json) = _$_Tenant.fromJson;
+  factory _Tenant.fromJson(Map<String, dynamic> json) = _$TenantImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -2612,7 +2616,7 @@ abstract class _Tenant implements Tenant {
   String? get name;
   @override
   @JsonKey(ignore: true)
-  _$$_TenantCopyWith<_$_Tenant> get copyWith =>
+  _$$TenantImplCopyWith<_$TenantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2685,11 +2689,11 @@ class _$RegistrationAcademicCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RegistrationAcademicCopyWith<$Res>
+abstract class _$$RegistrationAcademicImplCopyWith<$Res>
     implements $RegistrationAcademicCopyWith<$Res> {
-  factory _$$_RegistrationAcademicCopyWith(_$_RegistrationAcademic value,
-          $Res Function(_$_RegistrationAcademic) then) =
-      __$$_RegistrationAcademicCopyWithImpl<$Res>;
+  factory _$$RegistrationAcademicImplCopyWith(_$RegistrationAcademicImpl value,
+          $Res Function(_$RegistrationAcademicImpl) then) =
+      __$$RegistrationAcademicImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2700,11 +2704,11 @@ abstract class _$$_RegistrationAcademicCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RegistrationAcademicCopyWithImpl<$Res>
-    extends _$RegistrationAcademicCopyWithImpl<$Res, _$_RegistrationAcademic>
-    implements _$$_RegistrationAcademicCopyWith<$Res> {
-  __$$_RegistrationAcademicCopyWithImpl(_$_RegistrationAcademic _value,
-      $Res Function(_$_RegistrationAcademic) _then)
+class __$$RegistrationAcademicImplCopyWithImpl<$Res>
+    extends _$RegistrationAcademicCopyWithImpl<$Res, _$RegistrationAcademicImpl>
+    implements _$$RegistrationAcademicImplCopyWith<$Res> {
+  __$$RegistrationAcademicImplCopyWithImpl(_$RegistrationAcademicImpl _value,
+      $Res Function(_$RegistrationAcademicImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2714,7 +2718,7 @@ class __$$_RegistrationAcademicCopyWithImpl<$Res>
     Object? registrationData = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_RegistrationAcademic(
+    return _then(_$RegistrationAcademicImpl(
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -2733,16 +2737,16 @@ class __$$_RegistrationAcademicCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RegistrationAcademic implements _RegistrationAcademic {
-  const _$_RegistrationAcademic(
+class _$RegistrationAcademicImpl implements _RegistrationAcademic {
+  const _$RegistrationAcademicImpl(
       {@JsonKey(name: "category") this.category,
       @JsonKey(name: "registrationData")
       final List<RegistrationDatum>? registrationData,
       @JsonKey(name: "osid") this.osid})
       : _registrationData = registrationData;
 
-  factory _$_RegistrationAcademic.fromJson(Map<String, dynamic> json) =>
-      _$$_RegistrationAcademicFromJson(json);
+  factory _$RegistrationAcademicImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RegistrationAcademicImplFromJson(json);
 
   @override
   @JsonKey(name: "category")
@@ -2769,10 +2773,10 @@ class _$_RegistrationAcademic implements _RegistrationAcademic {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegistrationAcademic &&
+            other is _$RegistrationAcademicImpl &&
             (identical(other.category, category) ||
                 other.category == category) &&
             const DeepCollectionEquality()
@@ -2788,13 +2792,14 @@ class _$_RegistrationAcademic implements _RegistrationAcademic {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegistrationAcademicCopyWith<_$_RegistrationAcademic> get copyWith =>
-      __$$_RegistrationAcademicCopyWithImpl<_$_RegistrationAcademic>(
-          this, _$identity);
+  _$$RegistrationAcademicImplCopyWith<_$RegistrationAcademicImpl>
+      get copyWith =>
+          __$$RegistrationAcademicImplCopyWithImpl<_$RegistrationAcademicImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RegistrationAcademicToJson(
+    return _$$RegistrationAcademicImplToJson(
       this,
     );
   }
@@ -2805,10 +2810,10 @@ abstract class _RegistrationAcademic implements RegistrationAcademic {
       {@JsonKey(name: "category") final String? category,
       @JsonKey(name: "registrationData")
       final List<RegistrationDatum>? registrationData,
-      @JsonKey(name: "osid") final String? osid}) = _$_RegistrationAcademic;
+      @JsonKey(name: "osid") final String? osid}) = _$RegistrationAcademicImpl;
 
   factory _RegistrationAcademic.fromJson(Map<String, dynamic> json) =
-      _$_RegistrationAcademic.fromJson;
+      _$RegistrationAcademicImpl.fromJson;
 
   @override
   @JsonKey(name: "category")
@@ -2821,8 +2826,8 @@ abstract class _RegistrationAcademic implements RegistrationAcademic {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_RegistrationAcademicCopyWith<_$_RegistrationAcademic> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RegistrationAcademicImplCopyWith<_$RegistrationAcademicImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 RegistrationDatum _$RegistrationDatumFromJson(Map<String, dynamic> json) {
@@ -2935,11 +2940,11 @@ class _$RegistrationDatumCopyWithImpl<$Res, $Val extends RegistrationDatum>
 }
 
 /// @nodoc
-abstract class _$$_RegistrationDatumCopyWith<$Res>
+abstract class _$$RegistrationDatumImplCopyWith<$Res>
     implements $RegistrationDatumCopyWith<$Res> {
-  factory _$$_RegistrationDatumCopyWith(_$_RegistrationDatum value,
-          $Res Function(_$_RegistrationDatum) then) =
-      __$$_RegistrationDatumCopyWithImpl<$Res>;
+  factory _$$RegistrationDatumImplCopyWith(_$RegistrationDatumImpl value,
+          $Res Function(_$RegistrationDatumImpl) then) =
+      __$$RegistrationDatumImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2956,11 +2961,11 @@ abstract class _$$_RegistrationDatumCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RegistrationDatumCopyWithImpl<$Res>
-    extends _$RegistrationDatumCopyWithImpl<$Res, _$_RegistrationDatum>
-    implements _$$_RegistrationDatumCopyWith<$Res> {
-  __$$_RegistrationDatumCopyWithImpl(
-      _$_RegistrationDatum _value, $Res Function(_$_RegistrationDatum) _then)
+class __$$RegistrationDatumImplCopyWithImpl<$Res>
+    extends _$RegistrationDatumCopyWithImpl<$Res, _$RegistrationDatumImpl>
+    implements _$$RegistrationDatumImplCopyWith<$Res> {
+  __$$RegistrationDatumImplCopyWithImpl(_$RegistrationDatumImpl _value,
+      $Res Function(_$RegistrationDatumImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2975,7 +2980,7 @@ class __$$_RegistrationDatumCopyWithImpl<$Res>
     Object? qualifications = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_RegistrationDatum(
+    return _then(_$RegistrationDatumImpl(
       registeredWithCouncil: freezed == registeredWithCouncil
           ? _value.registeredWithCouncil
           : registeredWithCouncil // ignore: cast_nullable_to_non_nullable
@@ -3014,8 +3019,8 @@ class __$$_RegistrationDatumCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RegistrationDatum implements _RegistrationDatum {
-  const _$_RegistrationDatum(
+class _$RegistrationDatumImpl implements _RegistrationDatum {
+  const _$RegistrationDatumImpl(
       {@JsonKey(name: "registeredWithCouncil") this.registeredWithCouncil,
       @JsonKey(name: "registrationNumber") this.registrationNumber,
       @JsonKey(name: "registrationCertificate") this.registrationCertificate,
@@ -3029,8 +3034,8 @@ class _$_RegistrationDatum implements _RegistrationDatum {
       @JsonKey(name: "osid") this.osid})
       : _qualifications = qualifications;
 
-  factory _$_RegistrationDatum.fromJson(Map<String, dynamic> json) =>
-      _$$_RegistrationDatumFromJson(json);
+  factory _$RegistrationDatumImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RegistrationDatumImplFromJson(json);
 
   @override
   @JsonKey(name: "registeredWithCouncil")
@@ -3071,10 +3076,10 @@ class _$_RegistrationDatum implements _RegistrationDatum {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegistrationDatum &&
+            other is _$RegistrationDatumImpl &&
             (identical(other.registeredWithCouncil, registeredWithCouncil) ||
                 other.registeredWithCouncil == registeredWithCouncil) &&
             (identical(other.registrationNumber, registrationNumber) ||
@@ -3113,13 +3118,13 @@ class _$_RegistrationDatum implements _RegistrationDatum {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegistrationDatumCopyWith<_$_RegistrationDatum> get copyWith =>
-      __$$_RegistrationDatumCopyWithImpl<_$_RegistrationDatum>(
+  _$$RegistrationDatumImplCopyWith<_$RegistrationDatumImpl> get copyWith =>
+      __$$RegistrationDatumImplCopyWithImpl<_$RegistrationDatumImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RegistrationDatumToJson(
+    return _$$RegistrationDatumImplToJson(
       this,
     );
   }
@@ -3139,10 +3144,10 @@ abstract class _RegistrationDatum implements RegistrationDatum {
       @JsonKey(name: "categoryId") final String? categoryId,
       @JsonKey(name: "qualifications")
       final List<Qualification>? qualifications,
-      @JsonKey(name: "osid") final String? osid}) = _$_RegistrationDatum;
+      @JsonKey(name: "osid") final String? osid}) = _$RegistrationDatumImpl;
 
   factory _RegistrationDatum.fromJson(Map<String, dynamic> json) =
-      _$_RegistrationDatum.fromJson;
+      _$RegistrationDatumImpl.fromJson;
 
   @override
   @JsonKey(name: "registeredWithCouncil")
@@ -3170,7 +3175,7 @@ abstract class _RegistrationDatum implements RegistrationDatum {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_RegistrationDatumCopyWith<_$_RegistrationDatum> get copyWith =>
+  _$$RegistrationDatumImplCopyWith<_$RegistrationDatumImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3313,11 +3318,11 @@ class _$QualificationCopyWithImpl<$Res, $Val extends Qualification>
 }
 
 /// @nodoc
-abstract class _$$_QualificationCopyWith<$Res>
+abstract class _$$QualificationImplCopyWith<$Res>
     implements $QualificationCopyWith<$Res> {
-  factory _$$_QualificationCopyWith(
-          _$_Qualification value, $Res Function(_$_Qualification) then) =
-      __$$_QualificationCopyWithImpl<$Res>;
+  factory _$$QualificationImplCopyWith(
+          _$QualificationImpl value, $Res Function(_$QualificationImpl) then) =
+      __$$QualificationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3340,11 +3345,11 @@ abstract class _$$_QualificationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_QualificationCopyWithImpl<$Res>
-    extends _$QualificationCopyWithImpl<$Res, _$_Qualification>
-    implements _$$_QualificationCopyWith<$Res> {
-  __$$_QualificationCopyWithImpl(
-      _$_Qualification _value, $Res Function(_$_Qualification) _then)
+class __$$QualificationImplCopyWithImpl<$Res>
+    extends _$QualificationCopyWithImpl<$Res, _$QualificationImpl>
+    implements _$$QualificationImplCopyWith<$Res> {
+  __$$QualificationImplCopyWithImpl(
+      _$QualificationImpl _value, $Res Function(_$QualificationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3362,7 +3367,7 @@ class __$$_QualificationCopyWithImpl<$Res>
     Object? proofOfNameChangeCertificate = freezed,
     Object? osid = freezed,
   }) {
-    return _then(_$_Qualification(
+    return _then(_$QualificationImpl(
       nameOfDegreeOrDiplomaObtained: freezed == nameOfDegreeOrDiplomaObtained
           ? _value.nameOfDegreeOrDiplomaObtained
           : nameOfDegreeOrDiplomaObtained // ignore: cast_nullable_to_non_nullable
@@ -3413,8 +3418,8 @@ class __$$_QualificationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Qualification implements _Qualification {
-  const _$_Qualification(
+class _$QualificationImpl implements _Qualification {
+  const _$QualificationImpl(
       {@JsonKey(name: "nameOfDegreeOrDiplomaObtained")
       this.nameOfDegreeOrDiplomaObtained,
       @JsonKey(name: "country") this.country,
@@ -3432,8 +3437,8 @@ class _$_Qualification implements _Qualification {
       this.proofOfNameChangeCertificate,
       @JsonKey(name: "osid") this.osid});
 
-  factory _$_Qualification.fromJson(Map<String, dynamic> json) =>
-      _$$_QualificationFromJson(json);
+  factory _$QualificationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$QualificationImplFromJson(json);
 
   @override
   @JsonKey(name: "nameOfDegreeOrDiplomaObtained")
@@ -3475,10 +3480,10 @@ class _$_Qualification implements _Qualification {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Qualification &&
+            other is _$QualificationImpl &&
             (identical(other.nameOfDegreeOrDiplomaObtained,
                     nameOfDegreeOrDiplomaObtained) ||
                 other.nameOfDegreeOrDiplomaObtained ==
@@ -3528,12 +3533,12 @@ class _$_Qualification implements _Qualification {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QualificationCopyWith<_$_Qualification> get copyWith =>
-      __$$_QualificationCopyWithImpl<_$_Qualification>(this, _$identity);
+  _$$QualificationImplCopyWith<_$QualificationImpl> get copyWith =>
+      __$$QualificationImplCopyWithImpl<_$QualificationImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QualificationToJson(
+    return _$$QualificationImplToJson(
       this,
     );
   }
@@ -3556,10 +3561,10 @@ abstract class _Qualification implements Qualification {
       final String? isNameDifferentInCertificate,
       @JsonKey(name: "proofOfNameChangeCertificate")
       final String? proofOfNameChangeCertificate,
-      @JsonKey(name: "osid") final String? osid}) = _$_Qualification;
+      @JsonKey(name: "osid") final String? osid}) = _$QualificationImpl;
 
   factory _Qualification.fromJson(Map<String, dynamic> json) =
-      _$_Qualification.fromJson;
+      _$QualificationImpl.fromJson;
 
   @override
   @JsonKey(name: "nameOfDegreeOrDiplomaObtained")
@@ -3596,6 +3601,6 @@ abstract class _Qualification implements Qualification {
   String? get osid;
   @override
   @JsonKey(ignore: true)
-  _$$_QualificationCopyWith<_$_Qualification> get copyWith =>
+  _$$QualificationImplCopyWith<_$QualificationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

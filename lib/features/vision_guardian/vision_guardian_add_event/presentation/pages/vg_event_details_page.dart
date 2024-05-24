@@ -90,8 +90,8 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
               child: Container(
                 width: AppSize.width(context) * 0.35,
                 height: AppSize.height(context) * 0.06,
-                padding: const EdgeInsets.only(bottom: AppSize.ksheight - 1),
-                margin: const EdgeInsets.only(bottom: AppSize.klheight),
+                padding: const EdgeInsets.only(bottom: AppSize.ks - 1),
+                margin: const EdgeInsets.only(bottom: AppSize.kl),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: AppColor.yellow,

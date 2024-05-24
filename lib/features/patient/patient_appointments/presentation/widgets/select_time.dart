@@ -35,7 +35,7 @@ class SelectTime extends HookConsumerWidget {
           "Select Time",
           style: applyFiraSansFont(fontSize: 18),
         ),
-        const SizedBox(height: AppSize.kmheight),
+        const SizedBox(height: AppSize.km),
         ListView.builder(
           padding: const EdgeInsets.all(0),
           itemCount: timeSlots.length,
@@ -54,15 +54,15 @@ class SelectTime extends HookConsumerWidget {
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  vertical: AppSize.kspadding,
-                  horizontal: AppSize.kmpadding,
+                  vertical: AppSize.ks,
+                  horizontal: AppSize.km,
                 ),
                 margin: const EdgeInsets.symmetric(
-                  vertical: AppSize.kspadding / 2,
+                  vertical: AppSize.ks / 2,
                 ),
                 decoration: BoxDecoration(
                   color: AppColor.white,
-                  borderRadius: BorderRadius.circular(AppSize.ksradius),
+                  borderRadius: BorderRadius.circular(AppSize.ks),
                   border: Border.all(
                     color: selectedTime.value == index
                         ? AppColor.primary
@@ -86,7 +86,7 @@ class SelectTime extends HookConsumerWidget {
                         size: 12,
                       ),
                     ),
-                    const SizedBox(width: AppSize.kswidth),
+                    const SizedBox(width: AppSize.ks),
                     Text(
                       timeSlots[index],
                       style: applyRobotoFont(

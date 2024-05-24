@@ -7,4 +7,5 @@ final MINIAPP_LOGO_MAPPER = {
   MiniApp.CATARACT_EYE_TEST: AppIcon.eyeScanner,
   MiniApp.RED_EYE_TEST: AppIcon.eyeScanner,
   MiniApp.APPOINTMENT: AppIcon.drawerAppoinments,
+  MiniApp.IPLEDGE: AppIcon.cam_info,
 };

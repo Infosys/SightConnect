@@ -149,6 +149,12 @@ abstract class AppLocalizations {
   /// **'Search by {searchType} ID, Name'**
   String vgSearchByIdName(String searchType);
 
+  /// No description provided for @emergencyTollFreeNumberText.
+  ///
+  /// In en, this message translates to:
+  /// **'In case of emergency, please call {tollFreeNumber}'**
+  String emergencyTollFreeNumberText(String tollFreeNumber);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
@@ -476,7 +482,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeCarousal2Description.
   ///
   /// In en, this message translates to:
-  /// **'\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes'**
+  /// **'\r\n\r\n7 eye problems to get tested for:\r\n\r\n \r\n\r\n• Redness of eye\r\n\r\n• Watering of eyes\r\n\r\n• White spots on eyes'**
   String get homeCarousal2Description;
 
   /// No description provided for @homeCarousal3Title.
@@ -488,7 +494,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeCarousal3Description.
   ///
   /// In en, this message translates to:
-  /// **'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later'**
+  /// **'But a vision care expert can.\r\n\r\nGet eye problems identified\r\n\r\nand treated in time to avoid\r\n\r\ncomplications later'**
   String get homeCarousal3Description;
 
   /// No description provided for @myConnectionsTitle.
@@ -620,7 +626,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutUsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. '**
+  /// **'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\n\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. '**
   String get aboutUsDescription;
 
   /// No description provided for @aboutUsFeaturesTitle.
@@ -890,13 +896,13 @@ abstract class AppLocalizations {
   /// No description provided for @eyeAssessmentStepTwo.
   ///
   /// In en, this message translates to:
-  /// **'Step 2 - Eye Assessment Questions'**
+  /// **'Step 2 - Visual Acuity Test'**
   String get eyeAssessmentStepTwo;
 
   /// No description provided for @eyeAssessmentStepThree.
   ///
   /// In en, this message translates to:
-  /// **'Step 3 - Eye Assessment Questions'**
+  /// **'Step 3 - Eye Scan'**
   String get eyeAssessmentStepThree;
 
   /// No description provided for @eyeAssessmentOngoing.
@@ -992,7 +998,7 @@ abstract class AppLocalizations {
   /// No description provided for @consentPageCheckbox.
   ///
   /// In en, this message translates to:
-  /// **'I agree to the terms and conditions'**
+  /// **'I agree'**
   String get consentPageCheckbox;
 
   /// No description provided for @confirmButton.
@@ -1196,19 +1202,19 @@ abstract class AppLocalizations {
   /// No description provided for @assessmentResultCardAssessmentQuestions.
   ///
   /// In en, this message translates to:
-  /// **'Assessment\r\nQuestions'**
+  /// **'Assessment\r\n\r\nQuestions'**
   String get assessmentResultCardAssessmentQuestions;
 
   /// No description provided for @assessmentResultCardAcuityTest.
   ///
   /// In en, this message translates to:
-  /// **'Acuity\r\nTest'**
+  /// **'Acuity\r\n\r\nTest'**
   String get assessmentResultCardAcuityTest;
 
   /// No description provided for @assessmentResultCardEyeScan.
   ///
   /// In en, this message translates to:
-  /// **'Eye\r\nScan'**
+  /// **'Eye\r\n\r\nScan'**
   String get assessmentResultCardEyeScan;
 
   /// No description provided for @viewReportButton.
@@ -1388,7 +1394,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyPolicyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Privacy & Data Protection'**
+  /// **'Privacy & Data Protection Statement'**
   String get privacyPolicyTitle;
 
   /// No description provided for @privacyPolicyPurposeOfProcessingSubTitle.
@@ -1622,7 +1628,7 @@ abstract class AppLocalizations {
   /// No description provided for @triageReportInstructions.
   ///
   /// In en, this message translates to:
-  /// **'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.'**
+  /// **'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\n\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.'**
   String get triageReportInstructions;
 
   /// No description provided for @assessment.
@@ -3368,19 +3374,19 @@ abstract class AppLocalizations {
   /// No description provided for @vgServicesCreateEvent.
   ///
   /// In en, this message translates to:
-  /// **'Create\r\nEvent'**
+  /// **'Create\r\n\r\nEvent'**
   String get vgServicesCreateEvent;
 
   /// No description provided for @vgServicesEyeAssessment.
   ///
   /// In en, this message translates to:
-  /// **'Eye\r\nAssessment'**
+  /// **'Eye\r\n\r\nAssessment'**
   String get vgServicesEyeAssessment;
 
   /// No description provided for @vgServicesRegisterPatient.
   ///
   /// In en, this message translates to:
-  /// **'Register\r\nNew Patient'**
+  /// **'Register\r\n\r\nNew Patient'**
   String get vgServicesRegisterPatient;
 
   /// No description provided for @vgAddPatients.
@@ -3410,7 +3416,7 @@ abstract class AppLocalizations {
   /// No description provided for @vgAddPhotoInstruction.
   ///
   /// In en, this message translates to:
-  /// **'Add a photo of the Event which\r\nwill be shown as thumbnail'**
+  /// **'Add a photo of the Event which\r\n\r\nwill be shown as thumbnail'**
   String get vgAddPhotoInstruction;
 
   /// No description provided for @vgAddressDetails.
@@ -3614,7 +3620,7 @@ abstract class AppLocalizations {
   /// No description provided for @vgStartAssessment.
   ///
   /// In en, this message translates to:
-  /// **'Start\r\nAssessment'**
+  /// **'Start Assessment'**
   String get vgStartAssessment;
 
   /// No description provided for @vgSearchPatientByPhoneNumber.
@@ -3778,6 +3784,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Maximum text size reached'**
   String get maximumTextSizeReached;
+
+  /// No description provided for @chatClearChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Chat'**
+  String get chatClearChat;
+
+  /// No description provided for @chatEyeAssessmentRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye assessment is recommended for you.'**
+  String get chatEyeAssessmentRecommended;
+
+  /// No description provided for @chatDoYouWantToTakeTheTriageEyeAssessment.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to take the triage eye assessment?'**
+  String get chatDoYouWantToTakeTheTriageEyeAssessment;
+
+  /// No description provided for @chatChatbotNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Chatbot is not available at the moment. Please try again later.'**
+  String get chatChatbotNotAvailable;
+
+  /// No description provided for @chatTypeHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Type here...'**
+  String get chatTypeHere;
+
+  /// No description provided for @switchProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Profile'**
+  String get switchProfile;
+
+  /// No description provided for @switchRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Role'**
+  String get switchRole;
+
+  /// No description provided for @switchTenant.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Tenant'**
+  String get switchTenant;
+
+  /// No description provided for @patientHeaderWelcomeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.'**
+  String get patientHeaderWelcomeText;
+
+  /// No description provided for @triageTestCardHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your eye test is free…'**
+  String get triageTestCardHeader;
+
+  /// No description provided for @triageTestCardBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'Quickly analyse your eye symptoms'**
+  String get triageTestCardBody1;
+
+  /// No description provided for @triageTestCardBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'Identify if you may have an eye problem'**
+  String get triageTestCardBody2;
+
+  /// No description provided for @triageTestCardBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'Know when to visit your doctor'**
+  String get triageTestCardBody3;
+
+  /// No description provided for @triageTestCardButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Free Eye Test'**
+  String get triageTestCardButton;
+
+  /// No description provided for @myConnectionListAddMembersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Click the Add Members button to add your family and friends.'**
+  String get myConnectionListAddMembersDescription;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'How do you want to proceed?'**
+  String get showTriageHowToProceedBottomSheetHeader;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'I have a problem and want to validate'**
+  String get showTriageHowToProceedBottomSheetBody1;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'I am not sure if I have a problem'**
+  String get showTriageHowToProceedBottomSheetBody2;
+
+  /// No description provided for @showTriageHowToProceedBottomSheetBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'I have no eye issues – just want to check'**
+  String get showTriageHowToProceedBottomSheetBody3;
+
+  /// No description provided for @appDrawerToastMessageText.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we encountered a logout error in the mobile app.'**
+  String get appDrawerToastMessageText;
+
+  /// No description provided for @myConnectionListAddMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Member'**
+  String get myConnectionListAddMembers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -8,7 +8,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/pr
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_questionnaire/widgets/triage_text_type_question.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -117,15 +117,14 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       return Center(
                         child: Card(
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(AppSize.kmradius),
+                            borderRadius: BorderRadius.circular(AppSize.km),
                           ),
-                          elevation: AppSize.kselevation,
+                          elevation: AppSize.ks,
                           color: Colors.white,
                           child: SizedBox(
                             width: AppSize.width(context) * 0.8,
                             child: Padding(
-                              padding: const EdgeInsets.all(AppSize.kmpadding),
+                              padding: const EdgeInsets.all(AppSize.km),
                               child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -145,14 +144,14 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                       ],
                                     ),
                                     const SizedBox(
-                                      height: AppSize.ksheight,
+                                      height: AppSize.ks,
                                     ),
                                     Text(
                                       question.text ?? '',
                                       style: applyRobotoFont(fontSize: 14),
                                     ),
                                     const SizedBox(
-                                      height: AppSize.ksheight,
+                                      height: AppSize.ks,
                                     ),
                                     Row(
                                       mainAxisAlignment:

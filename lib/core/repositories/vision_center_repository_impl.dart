@@ -21,7 +21,7 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
       throw Exception("Latitude and longitude cannot be null");
     }
     final endpoint =
-        "/services/orchestration/api/organizations/search?latitude=$latitude&longitude=$longitude";
+        "/services/orchestration/api/v2/organizations/search?latitude=$latitude&longitude=$longitude";
 
     try {
       final response = await dio.get<List<dynamic>>(endpoint);
@@ -44,7 +44,7 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
       throw Exception("OrganizationProfileId cannot be null");
     }
     final endpoint =
-        "/services/orchestration/api/organizations?organizationId=$organizationProfileId";
+        "/services/orchestration/api/v2/organizations?organizationId=$organizationProfileId";
 
     try {
       final response = await dio.get<Map<String, dynamic>>(endpoint);

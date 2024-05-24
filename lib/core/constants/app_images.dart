@@ -15,6 +15,7 @@ class AppImages {
   static const String patientCover = 'assets/images/banner_one.png';
   static const String patientCover2 = 'assets/images/caurosel2.png';
   static const String patientCover3 = 'assets/images/patient_cover_3.png';
+  static const String patientCover4 = 'assets/images/patient_cover_4.png';
 
   static const String swipeDown = 'assets/images/swipe_down.svg';
   static const String swipeUp = 'assets/images/swipe_up.svg';
@@ -88,4 +89,9 @@ class AppImages {
   static const String searchEmpty = "assets/images/search_empty.png";
 
   static const String lvpeiLogo = "assets/images/LVPEI_full_logo.svg";
+  static const String whatYouWouldBeDoing =
+      "assets/images/what_you_would_be_doing.svg";
+  static const String cursor = "assets/images/cursor.svg";
+  static const String eyes = "assets/images/eyes.svg";
+  static const String handClose = "assets/images/hand close.svg";
 }

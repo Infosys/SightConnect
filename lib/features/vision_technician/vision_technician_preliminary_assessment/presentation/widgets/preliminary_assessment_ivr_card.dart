@@ -16,17 +16,17 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
         decoration: const BoxDecoration(
             color: AppColor.white,
             borderRadius: BorderRadius.all(
-              Radius.circular(AppSize.kmradius - 5),
+              Radius.circular(AppSize.km - 5),
             )),
-        padding: const EdgeInsets.all(AppSize.klpadding),
+        padding: const EdgeInsets.all(AppSize.kl),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(loc.vtIvrSelections,
               style: applyFiraSansFont(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               )),
-          const SizedBox(height: AppSize.ksheight),
-          Wrap(spacing: AppSize.kmwidth * 5, children: [
+          const SizedBox(height: AppSize.ks),
+          Wrap(spacing: AppSize.km * 5, children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -34,7 +34,7 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
                   loc.vtLanguageSelection,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(loc.vtEnglish,
                     style: applyRobotoFont(
                       fontWeight: FontWeight.w400,
@@ -50,7 +50,7 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
                   loc.vtPatientType,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(
                   loc.vtEnglish,
                   style: applyRobotoFont(
@@ -68,7 +68,7 @@ class PreliminaryAssessmentIvrCard extends StatelessWidget {
                   loc.vtProblem,
                   style: applyFiraSansFont(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Text(
                   loc.vtEyeSight,
                   style: applyRobotoFont(

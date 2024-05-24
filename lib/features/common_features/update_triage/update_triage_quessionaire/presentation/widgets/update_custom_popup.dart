@@ -26,15 +26,15 @@ class UpdateCustomPopUp extends ConsumerWidget {
         children: [
           Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSize.kmradius),
+              borderRadius: BorderRadius.circular(AppSize.km),
             ),
-            elevation: AppSize.kselevation,
+            elevation: AppSize.ks,
             color: Colors.white,
             child: SizedBox(
               height: 152,
               width: AppSize.width(context) * 0.8,
               child: Padding(
-                padding: const EdgeInsets.all(AppSize.kmpadding),
+                padding: const EdgeInsets.all(AppSize.km),
                 child: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,14 +50,14 @@ class UpdateCustomPopUp extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: AppSize.ksheight,
+                    height: AppSize.ks,
                   ),
                   Text(
                     loc.eyeAssessmentPopUpBody,
                     style: applyRobotoFont(fontSize: 14),
                   ),
                   const SizedBox(
-                    height: AppSize.ksheight,
+                    height: AppSize.ks,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

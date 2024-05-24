@@ -22,7 +22,7 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
                   applyFiraSansFont(fontWeight: FontWeight.w500, fontSize: 16),
             ),
             const SizedBox(
-              width: AppSize.klwidth,
+              width: AppSize.kl,
             ),
             // const IvrCallHistorySearchBarVT(readOnly: false),
           ],
@@ -30,7 +30,7 @@ class VisionTechnicianIvrCallHistory extends ConsumerWidget {
       ),
       body: const SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(AppSize.kmpadding),
+          padding: EdgeInsets.all(AppSize.km),
           child: IvrCallHistoryTableView(),
         ),
       ),

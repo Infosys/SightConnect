@@ -13,7 +13,7 @@ class PartnerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
     return Padding(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,

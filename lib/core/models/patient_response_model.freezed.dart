@@ -12,7 +12,7 @@ part of 'patient_response_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PatientResponseModel _$PatientResponseModelFromJson(Map<String, dynamic> json) {
   return _PatientResponseModel.fromJson(json);
@@ -102,11 +102,11 @@ class _$PatientResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PatientResponseModelCopyWith<$Res>
+abstract class _$$PatientResponseModelImplCopyWith<$Res>
     implements $PatientResponseModelCopyWith<$Res> {
-  factory _$$_PatientResponseModelCopyWith(_$_PatientResponseModel value,
-          $Res Function(_$_PatientResponseModel) then) =
-      __$$_PatientResponseModelCopyWithImpl<$Res>;
+  factory _$$PatientResponseModelImplCopyWith(_$PatientResponseModelImpl value,
+          $Res Function(_$PatientResponseModelImpl) then) =
+      __$$PatientResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? intent, MetaData? metaData, ProfileModel? profile});
@@ -118,11 +118,11 @@ abstract class _$$_PatientResponseModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PatientResponseModelCopyWithImpl<$Res>
-    extends _$PatientResponseModelCopyWithImpl<$Res, _$_PatientResponseModel>
-    implements _$$_PatientResponseModelCopyWith<$Res> {
-  __$$_PatientResponseModelCopyWithImpl(_$_PatientResponseModel _value,
-      $Res Function(_$_PatientResponseModel) _then)
+class __$$PatientResponseModelImplCopyWithImpl<$Res>
+    extends _$PatientResponseModelCopyWithImpl<$Res, _$PatientResponseModelImpl>
+    implements _$$PatientResponseModelImplCopyWith<$Res> {
+  __$$PatientResponseModelImplCopyWithImpl(_$PatientResponseModelImpl _value,
+      $Res Function(_$PatientResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_PatientResponseModelCopyWithImpl<$Res>
     Object? metaData = freezed,
     Object? profile = freezed,
   }) {
-    return _then(_$_PatientResponseModel(
+    return _then(_$PatientResponseModelImpl(
       intent: freezed == intent
           ? _value.intent
           : intent // ignore: cast_nullable_to_non_nullable
@@ -151,11 +151,11 @@ class __$$_PatientResponseModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatientResponseModel implements _PatientResponseModel {
-  const _$_PatientResponseModel({this.intent, this.metaData, this.profile});
+class _$PatientResponseModelImpl implements _PatientResponseModel {
+  const _$PatientResponseModelImpl({this.intent, this.metaData, this.profile});
 
-  factory _$_PatientResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PatientResponseModelFromJson(json);
+  factory _$PatientResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PatientResponseModelImplFromJson(json);
 
   @override
   final String? intent;
@@ -170,10 +170,10 @@ class _$_PatientResponseModel implements _PatientResponseModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatientResponseModel &&
+            other is _$PatientResponseModelImpl &&
             (identical(other.intent, intent) || other.intent == intent) &&
             (identical(other.metaData, metaData) ||
                 other.metaData == metaData) &&
@@ -187,13 +187,14 @@ class _$_PatientResponseModel implements _PatientResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatientResponseModelCopyWith<_$_PatientResponseModel> get copyWith =>
-      __$$_PatientResponseModelCopyWithImpl<_$_PatientResponseModel>(
-          this, _$identity);
+  _$$PatientResponseModelImplCopyWith<_$PatientResponseModelImpl>
+      get copyWith =>
+          __$$PatientResponseModelImplCopyWithImpl<_$PatientResponseModelImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatientResponseModelToJson(
+    return _$$PatientResponseModelImplToJson(
       this,
     );
   }
@@ -203,10 +204,10 @@ abstract class _PatientResponseModel implements PatientResponseModel {
   const factory _PatientResponseModel(
       {final String? intent,
       final MetaData? metaData,
-      final ProfileModel? profile}) = _$_PatientResponseModel;
+      final ProfileModel? profile}) = _$PatientResponseModelImpl;
 
   factory _PatientResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_PatientResponseModel.fromJson;
+      _$PatientResponseModelImpl.fromJson;
 
   @override
   String? get intent;
@@ -216,8 +217,8 @@ abstract class _PatientResponseModel implements PatientResponseModel {
   ProfileModel? get profile;
   @override
   @JsonKey(ignore: true)
-  _$$_PatientResponseModelCopyWith<_$_PatientResponseModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PatientResponseModelImplCopyWith<_$PatientResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 MetaData _$MetaDataFromJson(Map<String, dynamic> json) {
@@ -296,10 +297,11 @@ class _$MetaDataCopyWithImpl<$Res, $Val extends MetaData>
 }
 
 /// @nodoc
-abstract class _$$_MetaDataCopyWith<$Res> implements $MetaDataCopyWith<$Res> {
-  factory _$$_MetaDataCopyWith(
-          _$_MetaData value, $Res Function(_$_MetaData) then) =
-      __$$_MetaDataCopyWithImpl<$Res>;
+abstract class _$$MetaDataImplCopyWith<$Res>
+    implements $MetaDataCopyWith<$Res> {
+  factory _$$MetaDataImplCopyWith(
+          _$MetaDataImpl value, $Res Function(_$MetaDataImpl) then) =
+      __$$MetaDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -311,11 +313,11 @@ abstract class _$$_MetaDataCopyWith<$Res> implements $MetaDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MetaDataCopyWithImpl<$Res>
-    extends _$MetaDataCopyWithImpl<$Res, _$_MetaData>
-    implements _$$_MetaDataCopyWith<$Res> {
-  __$$_MetaDataCopyWithImpl(
-      _$_MetaData _value, $Res Function(_$_MetaData) _then)
+class __$$MetaDataImplCopyWithImpl<$Res>
+    extends _$MetaDataCopyWithImpl<$Res, _$MetaDataImpl>
+    implements _$$MetaDataImplCopyWith<$Res> {
+  __$$MetaDataImplCopyWithImpl(
+      _$MetaDataImpl _value, $Res Function(_$MetaDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -327,7 +329,7 @@ class __$$_MetaDataCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
   }) {
-    return _then(_$_MetaData(
+    return _then(_$MetaDataImpl(
       hipId: freezed == hipId
           ? _value.hipId
           : hipId // ignore: cast_nullable_to_non_nullable
@@ -354,12 +356,12 @@ class __$$_MetaDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MetaData implements _MetaData {
-  const _$_MetaData(
+class _$MetaDataImpl implements _MetaData {
+  const _$MetaDataImpl(
       {this.hipId, this.counterId, this.hprId, this.latitude, this.longitude});
 
-  factory _$_MetaData.fromJson(Map<String, dynamic> json) =>
-      _$$_MetaDataFromJson(json);
+  factory _$MetaDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MetaDataImplFromJson(json);
 
   @override
   final String? hipId;
@@ -378,10 +380,10 @@ class _$_MetaData implements _MetaData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MetaData &&
+            other is _$MetaDataImpl &&
             (identical(other.hipId, hipId) || other.hipId == hipId) &&
             (identical(other.counterId, counterId) ||
                 other.counterId == counterId) &&
@@ -400,12 +402,12 @@ class _$_MetaData implements _MetaData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MetaDataCopyWith<_$_MetaData> get copyWith =>
-      __$$_MetaDataCopyWithImpl<_$_MetaData>(this, _$identity);
+  _$$MetaDataImplCopyWith<_$MetaDataImpl> get copyWith =>
+      __$$MetaDataImplCopyWithImpl<_$MetaDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MetaDataToJson(
+    return _$$MetaDataImplToJson(
       this,
     );
   }
@@ -417,9 +419,10 @@ abstract class _MetaData implements MetaData {
       final String? counterId,
       final String? hprId,
       final String? latitude,
-      final String? longitude}) = _$_MetaData;
+      final String? longitude}) = _$MetaDataImpl;
 
-  factory _MetaData.fromJson(Map<String, dynamic> json) = _$_MetaData.fromJson;
+  factory _MetaData.fromJson(Map<String, dynamic> json) =
+      _$MetaDataImpl.fromJson;
 
   @override
   String? get hipId;
@@ -433,7 +436,7 @@ abstract class _MetaData implements MetaData {
   String? get longitude;
   @override
   @JsonKey(ignore: true)
-  _$$_MetaDataCopyWith<_$_MetaData> get copyWith =>
+  _$$MetaDataImplCopyWith<_$MetaDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -499,11 +502,11 @@ class _$ProfileModelCopyWithImpl<$Res, $Val extends ProfileModel>
 }
 
 /// @nodoc
-abstract class _$$_ProfileModelCopyWith<$Res>
+abstract class _$$ProfileModelImplCopyWith<$Res>
     implements $ProfileModelCopyWith<$Res> {
-  factory _$$_ProfileModelCopyWith(
-          _$_ProfileModel value, $Res Function(_$_ProfileModel) then) =
-      __$$_ProfileModelCopyWithImpl<$Res>;
+  factory _$$ProfileModelImplCopyWith(
+          _$ProfileModelImpl value, $Res Function(_$ProfileModelImpl) then) =
+      __$$ProfileModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PatientModel? patient});
@@ -513,11 +516,11 @@ abstract class _$$_ProfileModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProfileModelCopyWithImpl<$Res>
-    extends _$ProfileModelCopyWithImpl<$Res, _$_ProfileModel>
-    implements _$$_ProfileModelCopyWith<$Res> {
-  __$$_ProfileModelCopyWithImpl(
-      _$_ProfileModel _value, $Res Function(_$_ProfileModel) _then)
+class __$$ProfileModelImplCopyWithImpl<$Res>
+    extends _$ProfileModelCopyWithImpl<$Res, _$ProfileModelImpl>
+    implements _$$ProfileModelImplCopyWith<$Res> {
+  __$$ProfileModelImplCopyWithImpl(
+      _$ProfileModelImpl _value, $Res Function(_$ProfileModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -525,7 +528,7 @@ class __$$_ProfileModelCopyWithImpl<$Res>
   $Res call({
     Object? patient = freezed,
   }) {
-    return _then(_$_ProfileModel(
+    return _then(_$ProfileModelImpl(
       patient: freezed == patient
           ? _value.patient
           : patient // ignore: cast_nullable_to_non_nullable
@@ -536,11 +539,11 @@ class __$$_ProfileModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProfileModel implements _ProfileModel {
-  const _$_ProfileModel({this.patient});
+class _$ProfileModelImpl implements _ProfileModel {
+  const _$ProfileModelImpl({this.patient});
 
-  factory _$_ProfileModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ProfileModelFromJson(json);
+  factory _$ProfileModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProfileModelImplFromJson(json);
 
   @override
   final PatientModel? patient;
@@ -551,10 +554,10 @@ class _$_ProfileModel implements _ProfileModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProfileModel &&
+            other is _$ProfileModelImpl &&
             (identical(other.patient, patient) || other.patient == patient));
   }
 
@@ -565,28 +568,29 @@ class _$_ProfileModel implements _ProfileModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProfileModelCopyWith<_$_ProfileModel> get copyWith =>
-      __$$_ProfileModelCopyWithImpl<_$_ProfileModel>(this, _$identity);
+  _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>
+      __$$ProfileModelImplCopyWithImpl<_$ProfileModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProfileModelToJson(
+    return _$$ProfileModelImplToJson(
       this,
     );
   }
 }
 
 abstract class _ProfileModel implements ProfileModel {
-  const factory _ProfileModel({final PatientModel? patient}) = _$_ProfileModel;
+  const factory _ProfileModel({final PatientModel? patient}) =
+      _$ProfileModelImpl;
 
   factory _ProfileModel.fromJson(Map<String, dynamic> json) =
-      _$_ProfileModel.fromJson;
+      _$ProfileModelImpl.fromJson;
 
   @override
   PatientModel? get patient;
   @override
   @JsonKey(ignore: true)
-  _$$_ProfileModelCopyWith<_$_ProfileModel> get copyWith =>
+  _$$ProfileModelImplCopyWith<_$ProfileModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -809,11 +813,11 @@ class _$PatientModelCopyWithImpl<$Res, $Val extends PatientModel>
 }
 
 /// @nodoc
-abstract class _$$_PatientModelCopyWith<$Res>
+abstract class _$$PatientModelImplCopyWith<$Res>
     implements $PatientModelCopyWith<$Res> {
-  factory _$$_PatientModelCopyWith(
-          _$_PatientModel value, $Res Function(_$_PatientModel) then) =
-      __$$_PatientModelCopyWithImpl<$Res>;
+  factory _$$PatientModelImplCopyWith(
+          _$PatientModelImpl value, $Res Function(_$PatientModelImpl) then) =
+      __$$PatientModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -845,11 +849,11 @@ abstract class _$$_PatientModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PatientModelCopyWithImpl<$Res>
-    extends _$PatientModelCopyWithImpl<$Res, _$_PatientModel>
-    implements _$$_PatientModelCopyWith<$Res> {
-  __$$_PatientModelCopyWithImpl(
-      _$_PatientModel _value, $Res Function(_$_PatientModel) _then)
+class __$$PatientModelImplCopyWithImpl<$Res>
+    extends _$PatientModelCopyWithImpl<$Res, _$PatientModelImpl>
+    implements _$$PatientModelImplCopyWith<$Res> {
+  __$$PatientModelImplCopyWithImpl(
+      _$PatientModelImpl _value, $Res Function(_$PatientModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -881,7 +885,7 @@ class __$$_PatientModelCopyWithImpl<$Res>
     Object? privacyPolicyAccepted = freezed,
     Object? privacyPolicyTimestamp = freezed,
   }) {
-    return _then(_$_PatientModel(
+    return _then(_$PatientModelImpl(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
@@ -988,8 +992,8 @@ class __$$_PatientModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PatientModel implements _PatientModel {
-  const _$_PatientModel(
+class _$PatientModelImpl implements _PatientModel {
+  const _$PatientModelImpl(
       {this.patientId,
       this.registryRef,
       this.abhaNumber,
@@ -1020,8 +1024,8 @@ class _$_PatientModel implements _PatientModel {
         _identifiers = identifiers,
         _medicalRecords = medicalRecords;
 
-  factory _$_PatientModel.fromJson(Map<String, dynamic> json) =>
-      _$$_PatientModelFromJson(json);
+  factory _$PatientModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PatientModelImplFromJson(json);
 
   @override
   final int? patientId;
@@ -1112,10 +1116,10 @@ class _$_PatientModel implements _PatientModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PatientModel &&
+            other is _$PatientModelImpl &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.registryRef, registryRef) ||
@@ -1197,12 +1201,12 @@ class _$_PatientModel implements _PatientModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PatientModelCopyWith<_$_PatientModel> get copyWith =>
-      __$$_PatientModelCopyWithImpl<_$_PatientModel>(this, _$identity);
+  _$$PatientModelImplCopyWith<_$PatientModelImpl> get copyWith =>
+      __$$PatientModelImplCopyWithImpl<_$PatientModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PatientModelToJson(
+    return _$$PatientModelImplToJson(
       this,
     );
   }
@@ -1234,10 +1238,10 @@ abstract class _PatientModel implements PatientModel {
       final List<MedicalRecordModel>? medicalRecords,
       final DOBSource? dobSource,
       final bool? privacyPolicyAccepted,
-      final String? privacyPolicyTimestamp}) = _$_PatientModel;
+      final String? privacyPolicyTimestamp}) = _$PatientModelImpl;
 
   factory _PatientModel.fromJson(Map<String, dynamic> json) =
-      _$_PatientModel.fromJson;
+      _$PatientModelImpl.fromJson;
 
   @override
   int? get patientId;
@@ -1291,7 +1295,7 @@ abstract class _PatientModel implements PatientModel {
   String? get privacyPolicyTimestamp;
   @override
   @JsonKey(ignore: true)
-  _$$_PatientModelCopyWith<_$_PatientModel> get copyWith =>
+  _$$PatientModelImplCopyWith<_$PatientModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1428,11 +1432,11 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
 }
 
 /// @nodoc
-abstract class _$$_AddressModelCopyWith<$Res>
+abstract class _$$AddressModelImplCopyWith<$Res>
     implements $AddressModelCopyWith<$Res> {
-  factory _$$_AddressModelCopyWith(
-          _$_AddressModel value, $Res Function(_$_AddressModel) then) =
-      __$$_AddressModelCopyWithImpl<$Res>;
+  factory _$$AddressModelImplCopyWith(
+          _$AddressModelImpl value, $Res Function(_$AddressModelImpl) then) =
+      __$$AddressModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1452,11 +1456,11 @@ abstract class _$$_AddressModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddressModelCopyWithImpl<$Res>
-    extends _$AddressModelCopyWithImpl<$Res, _$_AddressModel>
-    implements _$$_AddressModelCopyWith<$Res> {
-  __$$_AddressModelCopyWithImpl(
-      _$_AddressModel _value, $Res Function(_$_AddressModel) _then)
+class __$$AddressModelImplCopyWithImpl<$Res>
+    extends _$AddressModelCopyWithImpl<$Res, _$AddressModelImpl>
+    implements _$$AddressModelImplCopyWith<$Res> {
+  __$$AddressModelImplCopyWithImpl(
+      _$AddressModelImpl _value, $Res Function(_$AddressModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1476,7 +1480,7 @@ class __$$_AddressModelCopyWithImpl<$Res>
     Object? village = freezed,
     Object? subDistrict = freezed,
   }) {
-    return _then(_$_AddressModel(
+    return _then(_$AddressModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1535,8 +1539,8 @@ class __$$_AddressModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddressModel implements _AddressModel {
-  const _$_AddressModel(
+class _$AddressModelImpl implements _AddressModel {
+  const _$AddressModelImpl(
       {this.id,
       this.line,
       this.district,
@@ -1551,8 +1555,8 @@ class _$_AddressModel implements _AddressModel {
       this.village,
       this.subDistrict});
 
-  factory _$_AddressModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AddressModelFromJson(json);
+  factory _$AddressModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddressModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1587,10 +1591,10 @@ class _$_AddressModel implements _AddressModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddressModel &&
+            other is _$AddressModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.line, line) || other.line == line) &&
             (identical(other.district, district) ||
@@ -1631,12 +1635,12 @@ class _$_AddressModel implements _AddressModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddressModelCopyWith<_$_AddressModel> get copyWith =>
-      __$$_AddressModelCopyWithImpl<_$_AddressModel>(this, _$identity);
+  _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>
+      __$$AddressModelImplCopyWithImpl<_$AddressModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddressModelToJson(
+    return _$$AddressModelImplToJson(
       this,
     );
   }
@@ -1656,10 +1660,10 @@ abstract class _AddressModel implements AddressModel {
       final String? ward,
       final String? town,
       final String? village,
-      final String? subDistrict}) = _$_AddressModel;
+      final String? subDistrict}) = _$AddressModelImpl;
 
   factory _AddressModel.fromJson(Map<String, dynamic> json) =
-      _$_AddressModel.fromJson;
+      _$AddressModelImpl.fromJson;
 
   @override
   int? get id;
@@ -1689,7 +1693,7 @@ abstract class _AddressModel implements AddressModel {
   String? get subDistrict;
   @override
   @JsonKey(ignore: true)
-  _$$_AddressModelCopyWith<_$_AddressModel> get copyWith =>
+  _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1753,22 +1757,22 @@ class _$IdentifierModelCopyWithImpl<$Res, $Val extends IdentifierModel>
 }
 
 /// @nodoc
-abstract class _$$_IdentifierModelCopyWith<$Res>
+abstract class _$$IdentifierModelImplCopyWith<$Res>
     implements $IdentifierModelCopyWith<$Res> {
-  factory _$$_IdentifierModelCopyWith(
-          _$_IdentifierModel value, $Res Function(_$_IdentifierModel) then) =
-      __$$_IdentifierModelCopyWithImpl<$Res>;
+  factory _$$IdentifierModelImplCopyWith(_$IdentifierModelImpl value,
+          $Res Function(_$IdentifierModelImpl) then) =
+      __$$IdentifierModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? id, IdentifierType? type, String? value});
 }
 
 /// @nodoc
-class __$$_IdentifierModelCopyWithImpl<$Res>
-    extends _$IdentifierModelCopyWithImpl<$Res, _$_IdentifierModel>
-    implements _$$_IdentifierModelCopyWith<$Res> {
-  __$$_IdentifierModelCopyWithImpl(
-      _$_IdentifierModel _value, $Res Function(_$_IdentifierModel) _then)
+class __$$IdentifierModelImplCopyWithImpl<$Res>
+    extends _$IdentifierModelCopyWithImpl<$Res, _$IdentifierModelImpl>
+    implements _$$IdentifierModelImplCopyWith<$Res> {
+  __$$IdentifierModelImplCopyWithImpl(
+      _$IdentifierModelImpl _value, $Res Function(_$IdentifierModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1778,7 +1782,7 @@ class __$$_IdentifierModelCopyWithImpl<$Res>
     Object? type = freezed,
     Object? value = freezed,
   }) {
-    return _then(_$_IdentifierModel(
+    return _then(_$IdentifierModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1797,11 +1801,11 @@ class __$$_IdentifierModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IdentifierModel implements _IdentifierModel {
-  const _$_IdentifierModel({this.id, this.type, this.value});
+class _$IdentifierModelImpl implements _IdentifierModel {
+  const _$IdentifierModelImpl({this.id, this.type, this.value});
 
-  factory _$_IdentifierModel.fromJson(Map<String, dynamic> json) =>
-      _$$_IdentifierModelFromJson(json);
+  factory _$IdentifierModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IdentifierModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1816,10 +1820,10 @@ class _$_IdentifierModel implements _IdentifierModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IdentifierModel &&
+            other is _$IdentifierModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.value, value) || other.value == value));
@@ -1832,12 +1836,13 @@ class _$_IdentifierModel implements _IdentifierModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IdentifierModelCopyWith<_$_IdentifierModel> get copyWith =>
-      __$$_IdentifierModelCopyWithImpl<_$_IdentifierModel>(this, _$identity);
+  _$$IdentifierModelImplCopyWith<_$IdentifierModelImpl> get copyWith =>
+      __$$IdentifierModelImplCopyWithImpl<_$IdentifierModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IdentifierModelToJson(
+    return _$$IdentifierModelImplToJson(
       this,
     );
   }
@@ -1847,10 +1852,10 @@ abstract class _IdentifierModel implements IdentifierModel {
   const factory _IdentifierModel(
       {final int? id,
       final IdentifierType? type,
-      final String? value}) = _$_IdentifierModel;
+      final String? value}) = _$IdentifierModelImpl;
 
   factory _IdentifierModel.fromJson(Map<String, dynamic> json) =
-      _$_IdentifierModel.fromJson;
+      _$IdentifierModelImpl.fromJson;
 
   @override
   int? get id;
@@ -1860,7 +1865,7 @@ abstract class _IdentifierModel implements IdentifierModel {
   String? get value;
   @override
   @JsonKey(ignore: true)
-  _$$_IdentifierModelCopyWith<_$_IdentifierModel> get copyWith =>
+  _$$IdentifierModelImplCopyWith<_$IdentifierModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1928,11 +1933,11 @@ class _$MedicalRecordModelCopyWithImpl<$Res, $Val extends MedicalRecordModel>
 }
 
 /// @nodoc
-abstract class _$$_MedicalRecordModelCopyWith<$Res>
+abstract class _$$MedicalRecordModelImplCopyWith<$Res>
     implements $MedicalRecordModelCopyWith<$Res> {
-  factory _$$_MedicalRecordModelCopyWith(_$_MedicalRecordModel value,
-          $Res Function(_$_MedicalRecordModel) then) =
-      __$$_MedicalRecordModelCopyWithImpl<$Res>;
+  factory _$$MedicalRecordModelImplCopyWith(_$MedicalRecordModelImpl value,
+          $Res Function(_$MedicalRecordModelImpl) then) =
+      __$$MedicalRecordModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1942,11 +1947,11 @@ abstract class _$$_MedicalRecordModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MedicalRecordModelCopyWithImpl<$Res>
-    extends _$MedicalRecordModelCopyWithImpl<$Res, _$_MedicalRecordModel>
-    implements _$$_MedicalRecordModelCopyWith<$Res> {
-  __$$_MedicalRecordModelCopyWithImpl(
-      _$_MedicalRecordModel _value, $Res Function(_$_MedicalRecordModel) _then)
+class __$$MedicalRecordModelImplCopyWithImpl<$Res>
+    extends _$MedicalRecordModelCopyWithImpl<$Res, _$MedicalRecordModelImpl>
+    implements _$$MedicalRecordModelImplCopyWith<$Res> {
+  __$$MedicalRecordModelImplCopyWithImpl(_$MedicalRecordModelImpl _value,
+      $Res Function(_$MedicalRecordModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1956,7 +1961,7 @@ class __$$_MedicalRecordModelCopyWithImpl<$Res>
     Object? registrationDate = freezed,
     Object? organisationId = freezed,
   }) {
-    return _then(_$_MedicalRecordModel(
+    return _then(_$MedicalRecordModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1975,14 +1980,14 @@ class __$$_MedicalRecordModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MedicalRecordModel implements _MedicalRecordModel {
-  const _$_MedicalRecordModel(
+class _$MedicalRecordModelImpl implements _MedicalRecordModel {
+  const _$MedicalRecordModelImpl(
       {this.id,
       @TimestampConverter() this.registrationDate,
       this.organisationId});
 
-  factory _$_MedicalRecordModel.fromJson(Map<String, dynamic> json) =>
-      _$$_MedicalRecordModelFromJson(json);
+  factory _$MedicalRecordModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MedicalRecordModelImplFromJson(json);
 
   @override
   final int? id;
@@ -1998,10 +2003,10 @@ class _$_MedicalRecordModel implements _MedicalRecordModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MedicalRecordModel &&
+            other is _$MedicalRecordModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.registrationDate, registrationDate) ||
                 other.registrationDate == registrationDate) &&
@@ -2017,13 +2022,13 @@ class _$_MedicalRecordModel implements _MedicalRecordModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MedicalRecordModelCopyWith<_$_MedicalRecordModel> get copyWith =>
-      __$$_MedicalRecordModelCopyWithImpl<_$_MedicalRecordModel>(
+  _$$MedicalRecordModelImplCopyWith<_$MedicalRecordModelImpl> get copyWith =>
+      __$$MedicalRecordModelImplCopyWithImpl<_$MedicalRecordModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MedicalRecordModelToJson(
+    return _$$MedicalRecordModelImplToJson(
       this,
     );
   }
@@ -2033,10 +2038,10 @@ abstract class _MedicalRecordModel implements MedicalRecordModel {
   const factory _MedicalRecordModel(
       {final int? id,
       @TimestampConverter() final DateTime? registrationDate,
-      final String? organisationId}) = _$_MedicalRecordModel;
+      final String? organisationId}) = _$MedicalRecordModelImpl;
 
   factory _MedicalRecordModel.fromJson(Map<String, dynamic> json) =
-      _$_MedicalRecordModel.fromJson;
+      _$MedicalRecordModelImpl.fromJson;
 
   @override
   int? get id;
@@ -2047,7 +2052,7 @@ abstract class _MedicalRecordModel implements MedicalRecordModel {
   String? get organisationId;
   @override
   @JsonKey(ignore: true)
-  _$$_MedicalRecordModelCopyWith<_$_MedicalRecordModel> get copyWith =>
+  _$$MedicalRecordModelImplCopyWith<_$MedicalRecordModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2149,11 +2154,11 @@ class _$RelatedPartyModelCopyWithImpl<$Res, $Val extends RelatedPartyModel>
 }
 
 /// @nodoc
-abstract class _$$_RelatedPartyModelCopyWith<$Res>
+abstract class _$$RelatedPartyModelImplCopyWith<$Res>
     implements $RelatedPartyModelCopyWith<$Res> {
-  factory _$$_RelatedPartyModelCopyWith(_$_RelatedPartyModel value,
-          $Res Function(_$_RelatedPartyModel) then) =
-      __$$_RelatedPartyModelCopyWithImpl<$Res>;
+  factory _$$RelatedPartyModelImplCopyWith(_$RelatedPartyModelImpl value,
+          $Res Function(_$RelatedPartyModelImpl) then) =
+      __$$RelatedPartyModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2168,11 +2173,11 @@ abstract class _$$_RelatedPartyModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RelatedPartyModelCopyWithImpl<$Res>
-    extends _$RelatedPartyModelCopyWithImpl<$Res, _$_RelatedPartyModel>
-    implements _$$_RelatedPartyModelCopyWith<$Res> {
-  __$$_RelatedPartyModelCopyWithImpl(
-      _$_RelatedPartyModel _value, $Res Function(_$_RelatedPartyModel) _then)
+class __$$RelatedPartyModelImplCopyWithImpl<$Res>
+    extends _$RelatedPartyModelCopyWithImpl<$Res, _$RelatedPartyModelImpl>
+    implements _$$RelatedPartyModelImplCopyWith<$Res> {
+  __$$RelatedPartyModelImplCopyWithImpl(_$RelatedPartyModelImpl _value,
+      $Res Function(_$RelatedPartyModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2187,7 +2192,7 @@ class __$$_RelatedPartyModelCopyWithImpl<$Res>
     Object? age = freezed,
     Object? regRef = freezed,
   }) {
-    return _then(_$_RelatedPartyModel(
+    return _then(_$RelatedPartyModelImpl(
       patientId: freezed == patientId
           ? _value.patientId
           : patientId // ignore: cast_nullable_to_non_nullable
@@ -2226,8 +2231,8 @@ class __$$_RelatedPartyModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RelatedPartyModel implements _RelatedPartyModel {
-  const _$_RelatedPartyModel(
+class _$RelatedPartyModelImpl implements _RelatedPartyModel {
+  const _$RelatedPartyModelImpl(
       {this.patientId,
       this.relation,
       this.parentPatientId,
@@ -2237,8 +2242,8 @@ class _$_RelatedPartyModel implements _RelatedPartyModel {
       this.age,
       this.regRef});
 
-  factory _$_RelatedPartyModel.fromJson(Map<String, dynamic> json) =>
-      _$$_RelatedPartyModelFromJson(json);
+  factory _$RelatedPartyModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RelatedPartyModelImplFromJson(json);
 
   @override
   final int? patientId;
@@ -2263,10 +2268,10 @@ class _$_RelatedPartyModel implements _RelatedPartyModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RelatedPartyModel &&
+            other is _$RelatedPartyModelImpl &&
             (identical(other.patientId, patientId) ||
                 other.patientId == patientId) &&
             (identical(other.relation, relation) ||
@@ -2289,13 +2294,13 @@ class _$_RelatedPartyModel implements _RelatedPartyModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RelatedPartyModelCopyWith<_$_RelatedPartyModel> get copyWith =>
-      __$$_RelatedPartyModelCopyWithImpl<_$_RelatedPartyModel>(
+  _$$RelatedPartyModelImplCopyWith<_$RelatedPartyModelImpl> get copyWith =>
+      __$$RelatedPartyModelImplCopyWithImpl<_$RelatedPartyModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RelatedPartyModelToJson(
+    return _$$RelatedPartyModelImplToJson(
       this,
     );
   }
@@ -2310,10 +2315,10 @@ abstract class _RelatedPartyModel implements RelatedPartyModel {
       final String? name,
       final String? profilePicture,
       final int? age,
-      final String? regRef}) = _$_RelatedPartyModel;
+      final String? regRef}) = _$RelatedPartyModelImpl;
 
   factory _RelatedPartyModel.fromJson(Map<String, dynamic> json) =
-      _$_RelatedPartyModel.fromJson;
+      _$RelatedPartyModelImpl.fromJson;
 
   @override
   int? get patientId;
@@ -2333,6 +2338,6 @@ abstract class _RelatedPartyModel implements RelatedPartyModel {
   String? get regRef;
   @override
   @JsonKey(ignore: true)
-  _$$_RelatedPartyModelCopyWith<_$_RelatedPartyModel> get copyWith =>
+  _$$RelatedPartyModelImplCopyWith<_$RelatedPartyModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

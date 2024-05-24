@@ -12,7 +12,8 @@ var triageMemberProvider = ChangeNotifierProvider<TriageMemberProvider>((ref) {
 
 class TriageMemberProvider extends ChangeNotifier {
   int? testPatientId;
-  String? testPatientName;
+  int? patientAge;
+  String? patientGender;
   int currentIndex = 0;
   Ref ref;
   final List<RelatedPartyModel> connectionsList = [];
@@ -27,11 +28,20 @@ class TriageMemberProvider extends ChangeNotifier {
     }
   }
 
-  void setTestPersonId(int patientId, String patientName) {
+  void setTestPersonId(int patientId) {
     testPatientId = patientId;
-    testPatientName = patientName;
     notifyListeners();
     logger.d('TriageMemberProvider: setTestPersonId: $testPatientId');
+  }
+
+  void setPatientAgeAndGender({int? age, String? gender}) {
+    patientAge = age;
+    patientGender = gender;
+    notifyListeners();
+    logger.d({
+      'TriageMemberProvider: setPatient: age': patientAge,
+      'TriageMemberProvider: setPatient Gender': patientGender
+    });
   }
 
   void setCurrentIndex(int index) {
@@ -48,7 +58,7 @@ class TriageMemberProvider extends ChangeNotifier {
     logger.d('TriageMemberProvider: initilizeMembers: $connectionsList');
 
     if (currentProfile != null) {
-      setTestPersonId(currentProfile!.patientId!, currentProfile!.name!);
+      setTestPersonId(currentProfile!.patientId!);
     }
   }
 
@@ -59,7 +69,7 @@ class TriageMemberProvider extends ChangeNotifier {
     notifyListeners();
     logger.d('TriageMemberProvider: initilizeMembers: $connectionsList');
     if (currentProfile != null) {
-      setTestPersonId(currentProfile!.patientId!, currentProfile!.name!);
+      setTestPersonId(currentProfile!.patientId!);
     }
   }
 }

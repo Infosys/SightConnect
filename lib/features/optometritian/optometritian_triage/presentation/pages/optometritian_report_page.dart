@@ -72,7 +72,7 @@
 //               decoration: BoxDecoration(
 //                 color: AppColor.primary,
 //                 borderRadius: BorderRadius.circular(
-//                   AppSize.ksradius,
+//                   AppSize.ks,
 //                 ),
 //               ),
 //               child: Stack(
@@ -82,7 +82,7 @@
 //                     fit: BoxFit.fitWidth,
 //                   ),
 //                   Padding(
-//                     padding: const EdgeInsets.all(AppSize.kspadding),
+//                     padding: const EdgeInsets.all(AppSize.ks),
 //                     child: Column(
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       mainAxisAlignment: MainAxisAlignment.start,
@@ -100,7 +100,7 @@
 //                           ],
 //                         ),
 //                         const SizedBox(
-//                           height: AppSize.ksheight,
+//                           height: AppSize.ks,
 //                         ),
 //                         Row(
 //                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +116,7 @@
 //                               ),
 //                             ),
 //                             const SizedBox(
-//                               width: AppSize.kmwidth,
+//                               width: AppSize.km,
 //                             ),
 //                             Expanded(
 //                               child: Text(
@@ -137,7 +137,7 @@
 //               ),
 //             ),
 //             const SizedBox(
-//               height: AppSize.klheight,
+//               height: AppSize.kl,
 //             ),
 //             Padding(
 //               padding: const EdgeInsets.symmetric(
@@ -155,7 +155,7 @@
 //                     ),
 //                   ),
 //                   const SizedBox(
-//                     height: AppSize.ksheight,
+//                     height: AppSize.ks,
 //                   ),
 //                   Container(
 //                     padding:
@@ -183,7 +183,7 @@
 //                 ],
 //               ),
 //             ),
-//             const SizedBox(height: AppSize.ksheight),
+//             const SizedBox(height: AppSize.ks),
 //             const OptometritianOfflineReportQuestionnaireCard(),
 //             const OptometritianOfflineTumblingReportCard(),
 //             const EyeScanOfflineTabView(),
@@ -209,7 +209,7 @@
 //                 child: const Text("Start New Assessment"),
 //               ),
 //               const SizedBox(
-//                 width: AppSize.kmheight,
+//                 width: AppSize.km,
 //               ),
 //               Expanded(
 //                 child: OutlinedButton(

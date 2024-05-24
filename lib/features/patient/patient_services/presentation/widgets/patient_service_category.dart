@@ -2,20 +2,24 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_services/data/data/local_source.dart';
+import 'package:eye_care_for_all/features/patient/patient_services/presentation/widgets/i_pledge_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
+import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../core/constants/api_constant.dart';
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../main.dart';
-import '../../../patient_appointments/presentation/pages/patient_appointment_page.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {
@@ -39,10 +43,11 @@ class PatientServiceCategory extends ConsumerWidget {
             return element != MiniApp.CATARACT_EYE_TEST &&
                 element != MiniApp.RED_EYE_TEST;
           }).toList();
+
     return Container(
       margin: Responsive.isMobile(context)
-          ? const EdgeInsets.only(bottom: AppSize.klpadding)
-          : const EdgeInsets.only(bottom: AppSize.klpadding * 2),
+          ? const EdgeInsets.only(bottom: AppSize.kl)
+          : const EdgeInsets.only(bottom: AppSize.kl * 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -58,8 +63,8 @@ class PatientServiceCategory extends ConsumerWidget {
             ],
           ),
           Responsive.isMobile(context)
-              ? const SizedBox(height: AppSize.kmheight)
-              : const SizedBox(height: AppSize.klheight),
+              ? const SizedBox(height: AppSize.km)
+              : const SizedBox(height: AppSize.kl),
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
@@ -87,6 +92,12 @@ class PatientServiceCategory extends ConsumerWidget {
                                 const TriageMemberSelectionPage(),
                           ),
                         );
+                      } else if (miniapp == MiniApp.IPLEDGE) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const IPledgeService(),
+                          ),
+                        );
                       } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
                           isUserBeta) {
                         ref.read(globalProvider).setVAMode =
@@ -111,16 +122,16 @@ class PatientServiceCategory extends ConsumerWidget {
                         //     builder: (context) => WebSocket(),
                         //   ),
                         // );
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const PatientAppointmentPage(),
-                          ),
-                        );
-                        // Fluttertoast.cancel();
-                        // Fluttertoast.showToast(
-                        //   msg: "This feature is coming soon",
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         const PatientAppointmentPage(),
+                        //   ),
                         // );
+                        Fluttertoast.cancel();
+                        Fluttertoast.showToast(
+                          msg: "This feature is coming soon",
+                        );
                       }
                     },
                     child: SizedBox(
@@ -140,7 +151,7 @@ class PatientServiceCategory extends ConsumerWidget {
                                 )
                               : const CircleAvatar(),
                           const SizedBox(
-                            height: AppSize.ksheight,
+                            height: AppSize.ks,
                           ),
                           AutoSizeText(
                             _getMiniAppText(miniapp, loc),
@@ -170,8 +181,32 @@ String _getMiniAppText(
     {
       MiniApp.EYE_ASSESSMENT: loc.recentServicesEyeAssessment,
       MiniApp.VISUAL_ACUITY_TEST: loc.recentServicesVisualAcuityTest,
+      MiniApp.IPLEDGE: "iPledge",
       MiniApp.CATARACT_EYE_TEST: loc.recentServicesCataractEyeTest,
       MiniApp.RED_EYE_TEST: loc.recentServicesRedEyeTest,
       MiniApp.APPOINTMENT: loc.bottomNavItemAppointment,
     }[miniApp] ??
     "App";
+
+MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv) {
+  switch (activeEnv) {
+    case AppEnvironment.production:
+      return MiniAppEnv.PROD;
+    case AppEnvironment.staging:
+      return MiniAppEnv.STAGING;
+    case AppEnvironment.development:
+      return MiniAppEnv.DEV;
+  }
+}
+
+String validateMobile() {
+  if (PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") {
+    return "";
+  }
+
+  final mobile = PersistentAuthStateService.authState.username;
+  if (mobile == null) return "";
+  final mobileNumber = mobile.substring(3);
+
+  return mobileNumber;
+}

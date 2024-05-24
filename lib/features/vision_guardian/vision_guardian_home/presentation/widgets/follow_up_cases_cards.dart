@@ -15,18 +15,17 @@ class FollowUpCasesCard extends StatelessWidget {
       ),
       color: AppColor.primary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        borderRadius: BorderRadius.circular(AppSize.ks),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppSize.ksradius),
+        borderRadius: BorderRadius.circular(AppSize.ks),
         child: Container(
-          padding: const EdgeInsets.all(AppSize.kspadding),
+          padding: const EdgeInsets.all(AppSize.ks),
           width: Responsive.isMobile(context)
               ? AppSize.width(context) * 0.9
               : AppSize.width(context) * 0.5,
           color: AppColor.white,
-          child: 
-          Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -38,107 +37,95 @@ class FollowUpCasesCard extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              const SizedBox(width: AppSize.kswidth),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.74
-                    : AppSize.width(context) * 0.38,
-                child: 
-              
-              Row(
-               
+              const SizedBox(width: AppSize.ks),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
-                  Text(
-                    data["name"],
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.black,
+                  SizedBox(
+                    width: Responsive.isMobile(context)
+                        ? AppSize.width(context) * 0.74
+                        : AppSize.width(context) * 0.38,
+                    child: Row(
+                      children: [
+                        Text(
+                          data["name"],
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.black,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          data["urgency"],
+                          style: applyRobotoFont(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.yellow,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-               
-               const Spacer(),
-              
-                  Text(
-                    data["urgency"],
-                    style: applyRobotoFont(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.yellow,
+                  const SizedBox(height: AppSize.ks),
+                  SizedBox(
+                    width: Responsive.isMobile(context)
+                        ? AppSize.width(context) * 0.74
+                        : AppSize.width(context) * 0.38,
+                    child: Row(
+                      children: [
+                        Text(
+                          data["gender"] + ', ' + data["age"],
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          data["reportDate"],
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.ks / 3),
+                      ],
                     ),
                   ),
-             
-                  
+                  const SizedBox(height: AppSize.ks),
+                  SizedBox(
+                    width: Responsive.isMobile(context)
+                        ? AppSize.width(context) * 0.74
+                        : AppSize.width(context) * 0.38,
+                    child: Row(
+                      children: [
+                        Text(
+                          data["assessmentId"],
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          data["reportTime"],
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: AppSize.ks / 3),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              ),
-              const SizedBox(height: AppSize.ksheight),
-              SizedBox(
-                 width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.74
-                    : AppSize.width(context) * 0.38,
-                
-                child:
-              Row(
-                children: [
-                  Text(
-                    data["gender"] + ', ' + data["age"],
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    data["reportDate"],
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      color: AppColor.grey,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.ksheight / 3),
-                ],
-              ),
-              ),
-              const SizedBox(height: AppSize.ksheight),
-              
-              SizedBox(
-                 width: Responsive.isMobile(context)
-                    ? AppSize.width(context) * 0.74
-                    : AppSize.width(context) * 0.38,
-                child: 
-               Row(
-                  children: [
-                    Text(
-                      data["assessmentId"],
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.grey,
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      data["reportTime"],
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.grey,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.ksheight / 3),
-                  ],
-                ),
-              ),
-            ],
-          ),
             ],
           ),
         ),

@@ -18,10 +18,10 @@ class AssessmentReportIvrCard extends StatelessWidget {
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
-      padding: const EdgeInsets.all(AppSize.klpadding),
+      padding: const EdgeInsets.all(AppSize.kl),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,9 +32,9 @@ class AssessmentReportIvrCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           Wrap(
-            spacing: AppSize.kmwidth * 5,
+            spacing: AppSize.km * 5,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +44,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
                     style: applyFiraSansFont(
                         color: AppColor.grey, fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     loc.vtEnglish,
                     style: applyRobotoFont(
@@ -62,7 +62,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
                     style: applyFiraSansFont(
                         color: AppColor.grey, fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     loc.vtEnglish,
                     style: applyRobotoFont(
@@ -80,7 +80,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
                     style: applyFiraSansFont(
                         color: AppColor.grey, fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     loc.vtEyeSight,
                     style: applyRobotoFont(
@@ -98,7 +98,7 @@ class AssessmentReportIvrCard extends StatelessWidget {
                     style: applyFiraSansFont(
                         color: AppColor.grey, fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(height: AppSize.ksheight),
+                  const SizedBox(height: AppSize.ks),
                   Text(
                     "Geetha R (ID314232)",
                     style: applyRobotoFont(

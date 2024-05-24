@@ -66,7 +66,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future<List<VisionGuardianEventModel>> getVGEvents({
     required Map<String, dynamic> queryData,
   }) async {
-    const endpoint = "/services/triage/api/campaign-events";
+    const endpoint = "/services/triage/api/v2/campaign-events";
     Map<String, dynamic> queryParameters = {
       "actor-id": queryData["actorIdentifier"],
       "filter": queryData["eventStatusFilter"],
@@ -97,7 +97,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future postVGEvents(
       {required VisionGuardianEventModel vgEventModel,
       required Map<String, dynamic> actor}) async {
-    const endpoint = "/services/triage/api/campaign-events";
+    const endpoint = "/services/triage/api/v2/campaign-events";
     var vgeventjson = vgEventModel.toJson();
 
     vgeventjson["addresses"] = [vgEventModel.addresses![0].toJson()];
@@ -108,7 +108,6 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     logger.d("inside add event data is : ${vgeventjson.toString()}");
 
     try {
-
       final response = await _dio.post(endpoint, data: vgeventjson);
       if (response.statusCode! >= 200 && response.statusCode! < 210) {
         return response.data;
@@ -122,7 +121,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
   @override
   Future deleteVGEvents({required String eventId}) async {
-    final endpoint = "/services/triage/api/campaign-events/$eventId";
+    final endpoint = "/services/triage/api/v2/campaign-events/$eventId";
 
     Map<String, dynamic> queryParameters = {
       "login-actor-id": globalVGProvider.user!.id!,
@@ -147,7 +146,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       required String actorIdentifier,
       required int officialMobile}) async {
     var endpoint =
-        '/services/orchestration/api/practitioners/filter?officialMobile=$officialMobile}';
+        '/services/orchestration/api/v2/practitioners/filter?officialMobile=$officialMobile}';
 
     return await _dio.get(endpoint).then((patientresponse) async {
       if (patientresponse.data == null || patientresponse.data.length == 0) {
@@ -163,7 +162,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         "isOwner": false
       };
 
-      const endpoint = "/services/triage/api/campaign-events/teammates";
+      const endpoint = "/services/triage/api/v2/campaign-events/teammates";
       Map<String, dynamic> queryParameters = {
         "event-id": eventId,
         "login-actor-id": actorIdentifier.toString()
@@ -184,7 +183,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future<List<dynamic>> getTeammates(
       {required String eventId, required String actorIdentifier}) async {
-    const endpoint = "/services/triage/api/campaign-events/teammates";
+    const endpoint = "/services/triage/api/v2/campaign-events/teammates";
     Map<String, dynamic> queryParameters = {
       "event-id": eventId,
       "login-actor-id": actorIdentifier.toString()
@@ -200,7 +199,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           "practitioner-id": int.parse(responseTeamMates[i]["identifier"]),
         };
 
-        var endpoint = "/services/orchestration/api/practitioners/custom";
+        var endpoint = "/services/orchestration/api/v2/practitioners/custom";
         await _dio.get(endpoint, queryParameters: queryParameters).then(
           (value) {
             listofTeamMates.add(value.data);
@@ -223,7 +222,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       {required String eventId,
       required String loginActorIdentifier,
       required String actorIdentifier}) async {
-    const endpoint = "/services/triage/api/campaign-events/teammates";
+    const endpoint = "/services/triage/api/v2/campaign-events/teammates";
     Map<String, dynamic> queryParameters = {
       "event-id": eventId,
       "login-actor-id": loginActorIdentifier,
@@ -250,7 +249,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   }) async {
     try {
       const endpoint =
-          "/services/orchestration/api/patients/triage-reports/campaign-events";
+          "/services/orchestration/api/v2/patients/triage-reports/campaign-events";
       Map<String, dynamic> queryParameters = {
         "campaignEventId": queryData["campaignEventId"],
         "performer-id": queryData["performerId"],
@@ -273,7 +272,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future getEventPatientList(
       {required Map<String, dynamic> patientQueryData}) async {
-    const endpoint = "/services/orchestration/api/patients/filter";
+    const endpoint = "/services/orchestration/api/v2/patients/filter";
     var queryParams = {
       "offset": patientQueryData["offset"],
       "limit": patientQueryData["limit"],
@@ -305,7 +304,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
 
   @override
   Future getSearchEvent({required eventId}) async {
-    var endpoint = "/services/triage/api/campaign-events/$eventId";
+    var endpoint = "/services/triage/api/v2/campaign-events/$eventId";
 
     try {
       var response = await _dio.get(

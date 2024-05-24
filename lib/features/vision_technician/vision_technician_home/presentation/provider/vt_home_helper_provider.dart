@@ -5,10 +5,11 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final vtHomeHelperProvider =
-    ChangeNotifierProvider<VTHomeHelperNotifier>((ref) {
-  return VTHomeHelperNotifier(ref: ref);
-});
+final vtHomeHelperProvider = ChangeNotifierProvider<VTHomeHelperNotifier>(
+  (ref) {
+    return VTHomeHelperNotifier(ref: ref);
+  },
+);
 
 class VTHomeHelperNotifier extends ChangeNotifier {
   Ref ref;
@@ -18,28 +19,26 @@ class VTHomeHelperNotifier extends ChangeNotifier {
 
   final List<VTPatientDto> _listOfAssessments = [];
   final List<VTPatientDto> _tempListOfAssessments = [];
+  final List<String> availableCategories = [
+    "ALL",
+    "URGENT",
+    "EARLY",
+    "ROUTINE"
+  ];
 
   bool _isLoading = false;
   bool hasMore = true;
-  String _category = "ALL";
-  String _query = "";
-  int pageSize = 5;
+  String _category = "URGENT";
+
+  int pageSize = 10;
   int _pageNumber = 0;
   String get category => _category;
   bool get isLoading => _isLoading;
   int get pageNumber => _pageNumber;
   List<VTPatientDto> get listOfAssessments => _listOfAssessments;
-  String get query => _query;
-
-  void updateQuery(String value) {
-    _listOfAssessments.clear();
-    _tempListOfAssessments.clear();
-    _query = value;
-    _pageNumber = 0;
-    getAssessmentTable();
-  }
 
   void updateCategory(String value) {
+    if (isLoading) return;
     _listOfAssessments.clear();
     _tempListOfAssessments.clear();
     _pageNumber = 0;
@@ -57,12 +56,13 @@ class VTHomeHelperNotifier extends ChangeNotifier {
       hasMore = true;
       _isLoading = true;
       notifyListeners();
-      final response =
-          await ref.watch(vtHomeRepository).getListOfPatients(TableParams(
-                category: category,
-                page: pageNumber,
-                size: pageSize,
-              ));
+      final response = await ref.watch(vtHomeRepository).getListOfPatients(
+            TableParams(
+              category: _category,
+              page: pageNumber,
+              size: pageSize,
+            ),
+          );
       _tempListOfAssessments.addAll(response);
       if (_tempListOfAssessments.isEmpty) {
         hasMore = false;
@@ -74,13 +74,19 @@ class VTHomeHelperNotifier extends ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
-
-      logger.d("VTHomeHelperNotifier ${_listOfAssessments.length}");
     } catch (e) {
       logger.e("VTHomeHelperNotifier $e");
       _listOfAssessments.clear();
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void changePageSize(int? value) {
+    pageSize = value ?? 10;
+    _listOfAssessments.clear();
+    _tempListOfAssessments.clear();
+    _pageNumber = 0;
+    getAssessmentTable();
   }
 }

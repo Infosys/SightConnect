@@ -6,18 +6,19 @@ part of 'vg_event_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_VisionGuardianEventModel _$$_VisionGuardianEventModelFromJson(
+_$VisionGuardianEventModelImpl _$$VisionGuardianEventModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_VisionGuardianEventModel(
-      id: json['id'] as int?,
+    _$VisionGuardianEventModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
-      serviceProvider: json['serviceProvider'] as int?,
+      serviceProvider: (json['serviceProvider'] as num?)?.toInt(),
       startDate: json['startDate'] as String?,
       endDate: json['endDate'] as String?,
       startTime: json['startTime'] as String?,
       endTime: json['endTime'] as String?,
-      maximumAttendeeCapacity: json['maximumAttendeeCapacity'] as int?,
+      maximumAttendeeCapacity:
+          (json['maximumAttendeeCapacity'] as num?)?.toInt(),
       sponsor: json['sponsor'] as String?,
       eventStatus: json['eventStatus'] as String?,
       images: (json['images'] as List<dynamic>?)
@@ -30,8 +31,8 @@ _$_VisionGuardianEventModel _$$_VisionGuardianEventModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_VisionGuardianEventModelToJson(
-        _$_VisionGuardianEventModel instance) =>
+Map<String, dynamic> _$$VisionGuardianEventModelImplToJson(
+        _$VisionGuardianEventModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -48,10 +49,10 @@ Map<String, dynamic> _$$_VisionGuardianEventModelToJson(
       'addresses': instance.addresses?.map((e) => e.toJson()).toList(),
     };
 
-_$_VisionGuardianEventImage _$$_VisionGuardianEventImageFromJson(
+_$VisionGuardianEventImageImpl _$$VisionGuardianEventImageImplFromJson(
         Map<String, dynamic> json) =>
-    _$_VisionGuardianEventImage(
-      id: json['id'] as int?,
+    _$VisionGuardianEventImageImpl(
+      id: (json['id'] as num?)?.toInt(),
       baseUrl: json['baseUrl'] as String?,
       endpoint: json['endpoint'] as String?,
       fileId: json['fileId'] as String?,
@@ -60,8 +61,8 @@ _$_VisionGuardianEventImage _$$_VisionGuardianEventImageFromJson(
       isDeleted: json['isDeleted'] as bool?,
     );
 
-Map<String, dynamic> _$$_VisionGuardianEventImageToJson(
-        _$_VisionGuardianEventImage instance) =>
+Map<String, dynamic> _$$VisionGuardianEventImageImplToJson(
+        _$VisionGuardianEventImageImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'baseUrl': instance.baseUrl,
@@ -72,10 +73,10 @@ Map<String, dynamic> _$$_VisionGuardianEventImageToJson(
       'isDeleted': instance.isDeleted,
     };
 
-_$_VisionGuardianEventAddress _$$_VisionGuardianEventAddressFromJson(
+_$VisionGuardianEventAddressImpl _$$VisionGuardianEventAddressImplFromJson(
         Map<String, dynamic> json) =>
-    _$_VisionGuardianEventAddress(
-      id: json['id'] as int?,
+    _$VisionGuardianEventAddressImpl(
+      id: (json['id'] as num?)?.toInt(),
       venueName: json['venueName'] as String?,
       addressLine1: json['addressLine1'] as String?,
       addressLine2: json['addressLine2'] as String?,
@@ -94,8 +95,8 @@ _$_VisionGuardianEventAddress _$$_VisionGuardianEventAddressFromJson(
       isDeleted: json['isDeleted'] as bool?,
     );
 
-Map<String, dynamic> _$$_VisionGuardianEventAddressToJson(
-        _$_VisionGuardianEventAddress instance) =>
+Map<String, dynamic> _$$VisionGuardianEventAddressImplToJson(
+        _$VisionGuardianEventAddressImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'venueName': instance.venueName,

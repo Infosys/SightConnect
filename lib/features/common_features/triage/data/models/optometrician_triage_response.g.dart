@@ -6,22 +6,22 @@ part of 'optometrician_triage_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OptometristTriageResponse _$$_OptometristTriageResponseFromJson(
+_$OptometristTriageResponseImpl _$$OptometristTriageResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OptometristTriageResponse(
-      id: json['id'] as int?,
+    _$OptometristTriageResponseImpl(
+      id: (json['id'] as num?)?.toInt(),
       uuid: json['uuid'] as String?,
       patientId: json['patientId'] as String?,
-      patientAge: json['patientAge'] as int?,
+      patientAge: (json['patientAge'] as num?)?.toInt(),
       patientGender:
           $enumDecodeNullable(_$GenderEnumMap, json['patientGender']),
       patientEducation: json['patientEducation'] as String?,
       patientProfession: json['patientProfession'] as String?,
       source: json['source'] as String?,
-      reportId: json['reportId'] as int?,
-      enounterId: json['enounterId'] as int?,
-      organizationCode: json['organizationCode'] as int?,
-      assessmentCode: json['assessmentCode'] as int?,
+      reportId: (json['reportId'] as num?)?.toInt(),
+      enounterId: (json['enounterId'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentStartTime: const TimestampConverter()
           .fromJson(json['assessmentStartTime'] as String?),
       assessmentEndTime: const TimestampConverter()
@@ -67,8 +67,8 @@ _$_OptometristTriageResponse _$$_OptometristTriageResponseFromJson(
       eyeScanAssistance: json['eyeScanAssistance'] as bool?,
     );
 
-Map<String, dynamic> _$$_OptometristTriageResponseToJson(
-        _$_OptometristTriageResponse instance) =>
+Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
+        _$OptometristTriageResponseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'uuid': instance.uuid,
@@ -137,39 +137,41 @@ const _$UrgencyEnumMap = {
   Urgency.GREEN: 'GREEN',
 };
 
-_$_QuestionResponse _$$_QuestionResponseFromJson(Map<String, dynamic> json) =>
-    _$_QuestionResponse(
-      questionCode: json['questionCode'] as int?,
+_$QuestionResponseImpl _$$QuestionResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$QuestionResponseImpl(
+      questionCode: (json['questionCode'] as num?)?.toInt(),
       response: json['response'] as bool?,
     );
 
-Map<String, dynamic> _$$_QuestionResponseToJson(_$_QuestionResponse instance) =>
+Map<String, dynamic> _$$QuestionResponseImplToJson(
+        _$QuestionResponseImpl instance) =>
     <String, dynamic>{
       'questionCode': instance.questionCode,
       'response': instance.response,
     };
 
-_$_Observation _$$_ObservationFromJson(Map<String, dynamic> json) =>
-    _$_Observation(
-      observationCode: json['observationCode'] as int?,
+_$ObservationImpl _$$ObservationImplFromJson(Map<String, dynamic> json) =>
+    _$ObservationImpl(
+      observationCode: (json['observationCode'] as num?)?.toInt(),
       response: (json['response'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_ObservationToJson(_$_Observation instance) =>
+Map<String, dynamic> _$$ObservationImplToJson(_$ObservationImpl instance) =>
     <String, dynamic>{
       'observationCode': instance.observationCode,
       'response': instance.response,
     };
 
-_$_MediaCapture _$$_MediaCaptureFromJson(Map<String, dynamic> json) =>
-    _$_MediaCapture(
-      mediaCode: json['mediaCode'] as int?,
+_$MediaCaptureImpl _$$MediaCaptureImplFromJson(Map<String, dynamic> json) =>
+    _$MediaCaptureImpl(
+      mediaCode: (json['mediaCode'] as num?)?.toInt(),
       fileName: json['fileName'] as String?,
       fileType: json['fileType'] as String?,
       encodingType: json['encodingType'] as String?,
     );
 
-Map<String, dynamic> _$$_MediaCaptureToJson(_$_MediaCapture instance) =>
+Map<String, dynamic> _$$MediaCaptureImplToJson(_$MediaCaptureImpl instance) =>
     <String, dynamic>{
       'mediaCode': instance.mediaCode,
       'fileName': instance.fileName,

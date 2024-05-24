@@ -34,7 +34,7 @@ class SymptomsCard extends StatelessWidget {
               color: color,
             ),
           ),
-          const SizedBox(width: AppSize.kswidth),
+          const SizedBox(width: AppSize.ks),
           Text(
             symptom,
             maxLines: 1,

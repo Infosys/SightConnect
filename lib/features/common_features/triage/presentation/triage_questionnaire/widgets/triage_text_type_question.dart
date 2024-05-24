@@ -19,91 +19,76 @@ class TriageTextTypeQuestion extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(updateTriageQuestionnaireProvider);
     final loc = context.loc!;
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(
-          AppSize.klpadding,
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppSize.klpadding,
-                      horizontal: AppSize.kmpadding,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSize.km,
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppSize.kl,
+                    horizontal: AppSize.km,
+                  ),
+                  child: Text(
+                    question.text ?? '',
+                    style: applyFiraSansFont(
+                      fontSize: 18,
                     ),
+                  ),
+                ),
+                TextFormField(
+                  controller: model.textEditingController,
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 10,
+                    ),
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 1.0,
+                        color: AppColor.primary,
+                      ),
+                    ),
+                    counterText: 'Optional',
+                    labelText: loc.eyeAssessmentEnterLabel,
+                    labelStyle: applyRobotoFont(
+                      fontSize: 14,
+                      color: AppColor.grey,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      onSubmitted(model.textEditingController.text);
+                    },
                     child: Text(
-                      question.text ?? '',
-                      style: applyFiraSansFont(
-                        fontSize: 18,
+                      loc.submitButton,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(
-                      AppSize.klpadding,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        AppSize.ksradius,
-                      ),
-                      border: Border.all(
-                        color: AppColor.grey.withOpacity(
-                          0.2,
-                        ),
-                      ),
-                    ),
-                    child: TextFormField(
-                      controller: model.textEditingController,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
-                        ),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1.0,
-                            color: AppColor.primary,
-                          ),
-                        ),
-                        labelText: loc.eyeAssessmentEnterLabel,
-                        labelStyle: applyRobotoFont(
-                          fontSize: 14,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
+                ),
+              ],
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        onSubmitted(model.textEditingController.text);
-                      },
-                      child: Text(
-                        loc.submitButton,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -76,7 +77,7 @@ class HelpAndSupportPage extends StatelessWidget {
                       ),
                     ),
                     title: Text(
-                      AppText.tollFreeNumber,
+                      AppInfoService.tollFreeNumber,
                       style: applyFiraSansFont(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,

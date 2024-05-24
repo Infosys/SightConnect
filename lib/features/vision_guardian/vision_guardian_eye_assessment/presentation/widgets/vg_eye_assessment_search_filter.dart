@@ -19,7 +19,7 @@ void showVtSearchFilter(BuildContext context) {
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: AlertDialog(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.klradius),
+                  borderRadius: BorderRadius.circular(AppSize.kl),
                 ),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +53,7 @@ void showVtSearchFilter(BuildContext context) {
                         .currentRangeValues;
 
                     return Wrap(
-                      runSpacing: AppSize.klheight,
+                      runSpacing: AppSize.kl,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +66,7 @@ void showVtSearchFilter(BuildContext context) {
                               ),
                             ),
                             SizedBox(
-                              width: AppSize.klwidth * 40,
+                              width: AppSize.kl * 40,
                               child: RangeSlider(
                                 values: currentRangeValues,
                                 max: 100,
@@ -104,7 +104,7 @@ void showVtSearchFilter(BuildContext context) {
                               child: const Text('Save'),
                             ),
                             const SizedBox(
-                              width: AppSize.klwidth,
+                              width: AppSize.kl,
                             ),
                             OutlinedButton(
                               onPressed: () {

@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/presentation/widgets/preliminary_assessment_equipment_selection.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
@@ -8,6 +10,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/source/vt_device_data_remote_source.dart';
 import '../providers/vision_technician_triage_provider.dart';
 
 class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
@@ -15,18 +18,15 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var rightEyeController = useTextEditingController();
-    // var leftEyeController = useTextEditingController();
-    // var bothEyeController = useTextEditingController();
-
-    var refWatch = ref.watch(preliminaryAssessmentHelperProvider);
     final loc = context.loc!;
+    DeviceModel selectedEquipment =
+        ref.watch(preliminaryAssessmentHelperProvider).selectedEquipment;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       decoration: BoxDecoration(
         color: AppColor.white,
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
         boxShadow: applycustomShadow(),
       ),
       child: Column(
@@ -40,131 +40,166 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
-          Wrap(
-            runSpacing: AppSize.ksheight,
-            children: [
-              SizedBox(
-                width: Responsive.isMobile(context)
-                    ? AppSize.width(context)
-                    : AppSize.width(context) * 0.2,
-                child: TextField(
-                  onChanged: (value) {
-                    bool isNumeric =
-                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
-                    double? numericValue =
-                        isNumeric ? double.tryParse(value) : null;
-
-                    if (!isNumeric ||
-                        (numericValue != null && numericValue > 99.999)) {
-                      ref
-                          .read(preliminaryAssessmentHelperProvider)
-                          .setVisualAcuityRightEyeValueEntered(false);
-                      return;
-                    }
-
-                    ref
-                        .read(preliminaryAssessmentHelperProvider)
-                        .setVisualAcuityRightEyeValueEntered(value.isNotEmpty);
-                    ref
-                        .read(visionTechnicianTriageProvider)
-                        .setRightEyeSight(double.parse(value));
-                  },
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: loc.vtRightEye,
-                    error: refWatch.visualAcuityRightEyeValueEntered
-                        ? null
-                        : errorText(loc.vtInvalidValue),
-                  ),
+          const SizedBox(height: AppSize.ks),
+          ref.watch(vtDeviceDataProvider).when(
+                data: (equipmentsData) {
+                  return PreliminaryAssessmentEquipmentSelection(
+                    equipmentsData: equipmentsData,
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stackTrace) => Column(
+                  children: [
+                    Text(
+                      'Cannot show equipment selection due to server error. You can only enter data for visual acuity in LOGMAR values below',
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    const Divider(
+                      thickness: 2,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(width: AppSize.klwidth),
-              SizedBox(
-                width: Responsive.isMobile(context)
-                    ? AppSize.width(context)
-                    : AppSize.width(context) * 0.2,
-                child: TextField(
-                  onChanged: (value) {
-                    bool isNumeric =
-                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
-                    double? numericValue =
-                        isNumeric ? double.tryParse(value) : null;
-
-                    if (!isNumeric ||
-                        (numericValue != null && numericValue > 99.999)) {
-                      ref
-                          .read(preliminaryAssessmentHelperProvider)
-                          .setVisualAcuityLeftEyeValueEntered(false);
-                      return;
-                    }
-
-                    ref
-                        .read(preliminaryAssessmentHelperProvider)
-                        .setVisualAcuityLeftEyeValueEntered(value.isNotEmpty);
-                    ref
-                        .read(visionTechnicianTriageProvider)
-                        .setLeftEyeSight(double.parse(value));
-                  },
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: loc.vtLeftEye,
-                    error: refWatch.visualAcuityLeftEyeValueEntered
-                        ? null
-                        : errorText(loc.vtInvalidValue),
-                  ),
+          const SizedBox(height: AppSize.km),
+          Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Wrap(
+                  runSpacing: AppSize.ks,
+                  children: [
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.2,
+                      child: TextFormField(
+                        validator: (value) {
+                          return validateEyeSight(value, selectedEquipment);
+                        },
+                        onChanged: (value) {
+                          double? eyeSight = double.tryParse(value);
+                          if (eyeSight != null) {
+                            ref
+                                .read(visionTechnicianTriageProvider)
+                                .setRightEyeSight(eyeSight);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setVisualAcuityRightEyeValueEntered(true);
+                            return;
+                          }
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setVisualAcuityRightEyeValueEntered(false);
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: loc.vtRightEye,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppSize.kl),
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.2,
+                      child: TextFormField(
+                        validator: (value) {
+                          return validateEyeSight(value, selectedEquipment);
+                        },
+                        onChanged: (value) {
+                          double? eyeSight = double.tryParse(value);
+                          if (eyeSight != null) {
+                            ref
+                                .read(visionTechnicianTriageProvider)
+                                .setLeftEyeSight(eyeSight);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setVisualAcuityLeftEyeValueEntered(true);
+                            return;
+                          }
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setVisualAcuityLeftEyeValueEntered(false);
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: loc.vtLeftEye,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppSize.kl),
+                    SizedBox(
+                      width: Responsive.isMobile(context)
+                          ? AppSize.width(context)
+                          : AppSize.width(context) * 0.2,
+                      child: TextFormField(
+                        validator: (value) {
+                          return validateEyeSight(value, selectedEquipment);
+                        },
+                        onChanged: (value) {
+                          double? eyeSight = double.tryParse(value);
+                          if (eyeSight != null) {
+                            ref
+                                .read(visionTechnicianTriageProvider)
+                                .setBothEyeSight(eyeSight);
+                            ref
+                                .read(preliminaryAssessmentHelperProvider)
+                                .setVisualAcuityBothEyeValueEntered(true);
+                            return;
+                          }
+                          ref
+                              .read(preliminaryAssessmentHelperProvider)
+                              .setVisualAcuityBothEyeValueEntered(false);
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: loc.vtBothEyes,
+                          hintStyle: applyRobotoFont(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(width: AppSize.klwidth),
-              SizedBox(
-                width: Responsive.isMobile(context)
-                    ? AppSize.width(context)
-                    : AppSize.width(context) * 0.2,
-                child: TextField(
-                  onChanged: (value) {
-                    bool isNumeric =
-                        RegExp(r'^[0-9]{1,2}\.?[0-9]{0,3}$').hasMatch(value);
-                    double? numericValue =
-                        isNumeric ? double.tryParse(value) : null;
-
-                    if (!isNumeric ||
-                        (numericValue != null && numericValue > 99.999)) {
-                      ref
-                          .read(preliminaryAssessmentHelperProvider)
-                          .setVisualAcuityBothEyeValueEntered(false);
-                      return;
-                    }
-
-                    ref
-                        .read(preliminaryAssessmentHelperProvider)
-                        .setVisualAcuityBothEyeValueEntered(value.isNotEmpty);
-                    ref
-                        .read(visionTechnicianTriageProvider)
-                        .setBothEyeSight(double.parse(value));
-                  },
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: loc.vtBothEyes,
-                    error: refWatch.visualAcuityBothEyeValueEntered
-                        ? null
-                        : errorText(loc.vtInvalidValue),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
     );
   }
-}
 
-Widget errorText(String text) {
-  return Text(
-    text,
-    style: applyRobotoFont(
-      color: AppColor.red,
-      fontSize: 14,
-    ),
-  );
+  String? validateEyeSight(String? value, DeviceModel selectedEquipment) {
+    double minimumValue =
+        double.parse(selectedEquipment.deviceObservation!.rangeMin!);
+    double maximumValue =
+        double.parse(selectedEquipment.deviceObservation!.rangeMax!);
+    if (value == null || value.isEmpty) {
+      return 'Please enter a valid value';
+    } else if (value.isNotEmpty &&
+        RegExp(r'^\d+(\.\d+)?$').hasMatch(value) == false) {
+      return "Only numerical/decimal values are allowed";
+    } else if (value.isNotEmpty && RegExp(r'^\d+(\.\d+)?$').hasMatch(value)) {
+      double eyeSight = double.parse(value);
+      if (eyeSight < minimumValue || eyeSight > maximumValue) {
+        return 'Please enter a value between $minimumValue and $maximumValue';
+      } else {
+        return null;
+      }
+    } else {
+      return 'Please enter a valid value. ex (-20 to 20)';
+    }
+  }
 }

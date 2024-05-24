@@ -10,13 +10,13 @@ class GoodToKnowCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: AppSize.kmwidth),
+      margin: const EdgeInsets.only(left: AppSize.km),
       width: AppSize.width(context) * 0.85,
       child: Stack(
         children: [
           data["image"] != null
               ? ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSize.kmradius),
+                  borderRadius: BorderRadius.circular(AppSize.km),
                   child: Image.asset(
                     data["image"]!,
                     fit: BoxFit.cover,
@@ -27,7 +27,7 @@ class GoodToKnowCards extends StatelessWidget {
                 )
               : const SizedBox(),
           Padding(
-            padding: const EdgeInsets.all(AppSize.klpadding),
+            padding: const EdgeInsets.all(AppSize.kl),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,9 +43,9 @@ class GoodToKnowCards extends StatelessWidget {
                     color: AppColor.white,
                   ),
                 ),
-                const SizedBox(height: AppSize.ksheight),
+                const SizedBox(height: AppSize.ks),
                 Container(
-                  padding: const EdgeInsets.all(AppSize.kspadding),
+                  padding: const EdgeInsets.all(AppSize.ks),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(

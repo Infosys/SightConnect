@@ -283,7 +283,7 @@ class _PatientEyeCapturePageState extends ConsumerState<PatientEyeCapturePage> {
                             child: _customPaint ?? Container(),
                           ),
                         Padding(
-                          padding: const EdgeInsets.all(AppSize.klpadding),
+                          padding: const EdgeInsets.all(AppSize.kl),
                           child: FloatingActionButton(
                             backgroundColor: AppColor.grey,
                             onPressed: () {

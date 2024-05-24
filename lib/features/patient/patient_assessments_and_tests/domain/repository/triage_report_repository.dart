@@ -19,7 +19,7 @@ abstract class TriageReportRepository {
   Future<Either<Failure, List<TriageDetailedReportModel>>>
       getTriageReportByEncounterId(
     int encounterId,
-    DiagnosticReportStatus status,
+    List<DiagnosticReportStatus> status,
     int? page,
     int? size,
     String? filter,

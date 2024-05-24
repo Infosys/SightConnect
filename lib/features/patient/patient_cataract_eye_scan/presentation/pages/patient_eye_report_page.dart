@@ -36,13 +36,13 @@ class PatientEyesReportPage extends ConsumerWidget {
             const PatientDetailHeader(),
 
             const SizedBox(
-              height: AppSize.kspadding,
+              height: AppSize.ks,
             ),
 
             const EyeResultImageCard(),
 
             const SizedBox(
-              height: AppSize.kspadding,
+              height: AppSize.ks,
             ),
 
             const ExperthelpCard(),
@@ -51,7 +51,7 @@ class PatientEyesReportPage extends ConsumerWidget {
 
             Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppSize.klpadding, vertical: AppSize.kmpadding),
+                  horizontal: AppSize.kl, vertical: AppSize.km),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -114,7 +114,7 @@ class PatientEyesReportPage extends ConsumerWidget {
             //scan now buttons end
 
             const SizedBox(
-              height: AppSize.kspadding,
+              height: AppSize.ks,
             ),
 
             const AdviceCards(),

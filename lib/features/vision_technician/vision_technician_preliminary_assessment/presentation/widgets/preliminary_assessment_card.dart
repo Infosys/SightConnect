@@ -1,148 +1,299 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../shared/responsive/responsive.dart';
+
 class PreliminaryAssessmentCard extends ConsumerWidget {
   const PreliminaryAssessmentCard({
+    required this.patient,
     super.key,
   });
-
+  final VTPatientDto? patient;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // VTPatientModel patient =
-    //     ref.read(registerNewPatientHelperProvider).patientDetails!;
-    // var model = ref.watch(globalVTProvider).user;
-    // var dateYear = DateTime.now().year;
-
-    // int giveAge() {
-    //   var age = int.parse(model?.patient?.yearOfBirth ?? "");
-    //   return (dateYear - age).toInt();
-    // }
-
-    // String genderString =
-    //     model?.patient?.gender.toString().split('.').last ?? "";
-    // final address = _formateAddress(
-    //   line: model?.patient?.address?.first.line ?? "",
-    //   ward: model?.patient?.address?.first.ward ?? "",
-    //   district: model?.patient?.address?.first.district ?? "",
-    //   state: model?.patient?.address?.first.state ?? "",
-    // );
-
-    // String profileImage = model?.patient?.profilePhoto ?? "";
-    String genderString = "MALE";
-    const address = "";
-
-    String profileImage = "";
     final loc = context.loc!;
-    return Container(
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: AppColor.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
-        ),
-      ),
-      padding: const EdgeInsets.all(AppSize.klpadding),
-      child: Wrap(
-        runSpacing: AppSize.ksheight,
-        direction: Axis.horizontal,
-        children: [
-          Wrap(
-            direction: Axis.horizontal,
-            children: [
-              CircleAvatar(
-                radius: AppSize.klradius,
-                // child: Imag,
-                child: Image.network(
-                  profileImage,
-                  fit: BoxFit.cover,
-                ),
+    if (patient == null) {
+      return Container();
+    }
+    return Responsive.isMobile(context)
+        ? Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColor.white,
+              boxShadow: applycustomShadow(),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppSize.km - 5),
               ),
-              const SizedBox(width: AppSize.kswidth),
-              Wrap(
-                direction: Axis.vertical,
+            ),
+            padding: const EdgeInsets.all(AppSize.kl),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "",
-                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                  Row(
+                    children: [
+                      AppNameAvatar(name: patient?.name),
+                      const SizedBox(width: AppSize.ks),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(right: 5),
+                          width: AppSize.width(context) * 0.35,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                patient?.name?.capitalizeFirstOfEach() ?? "",
+                                style: applyFiraSansFont(
+                                    fontWeight: FontWeight.w500),
+                                softWrap: true,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: AppSize.ks),
+                              Text(
+                                patient == null
+                                    ? ""
+                                    : "OP ${patient?.id.toString()}",
+                                style: applyRobotoFont(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColor.primary,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              loc.vtAge,
+                              style: applyFiraSansFont(
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(height: AppSize.ks),
+                            Text(
+                              calculateAge(patient?.yearOfBirth),
+                              style: applyRobotoFont(
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    "",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
+                  const SizedBox(height: AppSize.ks),
+                  Row(
+                    children: [
+                      SizedBox(width: AppSize.width(context) * 0.11),
+                      Expanded(
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                loc.vtGender,
+                                style: applyFiraSansFont(
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(height: AppSize.ks),
+                              Text(
+                                patient?.gender.toString().split('.').last ??
+                                    "",
+                                style: applyRobotoFont(
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColor.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ]),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            loc.vtAddress,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style:
+                                applyFiraSansFont(fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(height: AppSize.ks),
+                          SizedBox(
+                            width: AppSize.width(context) * 0.35,
+                            child: Text(
+                              formatAddress(patient),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              softWrap: true,
+                              style: applyRobotoFont(
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ]))
+        : Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColor.white,
+              boxShadow: applycustomShadow(),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppSize.km - 5),
               ),
-            ],
-          ),
-          const SizedBox(width: AppSize.kswidth * 3),
-          Wrap(direction: Axis.vertical, spacing: AppSize.ksheight, children: [
-            Wrap(spacing: AppSize.kmwidth * 5, children: [
-              Wrap(
-                direction: Axis.vertical,
-                children: [
-                  Text(
-                    loc.vtAge,
-                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    "",
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-              Wrap(
-                direction: Axis.vertical,
-                children: [
-                  Text(
-                    loc.vtGender,
-                    style: applyFiraSansFont(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(height: AppSize.ksheight),
-                  Text(
-                    genderString,
-                    style: applyRobotoFont(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ]),
-            Wrap(
-              direction: Axis.vertical,
+            ),
+            padding: const EdgeInsets.all(AppSize.kl),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  loc.vtAddress,
-                  style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                Row(
+                  children: [
+                    AppNameAvatar(name: patient?.name),
+                    const SizedBox(width: AppSize.ks),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          patient?.name?.capitalizeFirstOfEach() ?? "",
+                          style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(height: AppSize.ks),
+                        Text(
+                          patient == null ? "" : "OP ${patient?.id.toString()}",
+                          style: applyRobotoFont(
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.primary,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                const SizedBox(height: AppSize.ksheight),
-                Text(
-                  address,
-                  style: applyRobotoFont(
-                    fontWeight: FontWeight.w400,
-                    color: AppColor.grey,
-                    fontSize: 14,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      loc.vtAge,
+                      style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: AppSize.ks),
+                    Text(
+                      calculateAge(patient?.yearOfBirth),
+                      style: applyRobotoFont(
+                        fontWeight: FontWeight.w400,
+                        color: AppColor.grey,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      loc.vtGender,
+                      style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: AppSize.ks),
+                    Text(
+                      patient?.gender.toString().split('.').last ?? "",
+                      style: applyRobotoFont(
+                        fontWeight: FontWeight.w400,
+                        color: AppColor.grey,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        loc.vtAddress,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: applyFiraSansFont(fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: AppSize.ks),
+                      Text(
+                        formatAddress(patient),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: applyRobotoFont(
+                          fontWeight: FontWeight.w400,
+                          color: AppColor.grey,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(),
               ],
             ),
-          ]),
-        ],
-      ),
-    );
+          );
+  }
+
+  String formatAddress(VTPatientDto? patient) {
+    String address = "";
+
+    if (patient == null) return "";
+
+    if (patient.townName != null) {
+      address += patient.townName!;
+    }
+
+    if (address.isNotEmpty) {
+      address += ", ";
+    }
+
+    if (patient.districtName != null) {
+      address += patient.districtName!;
+    }
+
+    if (address.isNotEmpty) {
+      address += ", ";
+    }
+
+    if (patient.pincode != null) {
+      address += patient.pincode!;
+    }
+
+    return address;
+  }
+
+  String calculateAge(String? yearOfBirth) {
+    if (yearOfBirth == null || yearOfBirth.isEmpty) return "";
+
+    return (DateTime.now().year - int.parse(yearOfBirth)).toString();
   }
 }

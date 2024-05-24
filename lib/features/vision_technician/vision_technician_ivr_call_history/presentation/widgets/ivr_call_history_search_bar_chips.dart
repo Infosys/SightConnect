@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_ivr_call_history/presentation/providers/ivr_call_history_search_helper_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,26 +30,29 @@ class IvrCallHistorySearchBarChips extends ConsumerWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kspadding / 2,
-                        vertical: AppSize.kspadding / 2,
+                        horizontal: AppSize.ks / 2,
+                        vertical: AppSize.ks / 2,
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.kmpadding,
-                        vertical: AppSize.kspadding,
+                        horizontal: AppSize.km,
+                        vertical: AppSize.ks,
                       ),
                       decoration: BoxDecoration(
                         color: tableFilter[index]["checked"] as bool
                             ? AppColor.primary.withOpacity(0.2)
                             : AppColor.white,
                         border: Border.all(
-                            color: tableFilter[index]["checked"] as bool
-                                ? AppColor.primary
-                                : AppColor.grey),
-                        borderRadius:
-                            BorderRadius.circular(AppSize.klradius / 2),
+                          color: tableFilter[index]["checked"] as bool
+                              ? AppColor.primary
+                              : AppColor.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(AppSize.kl / 2),
                       ),
                       child: Text(
-                        tableFilter[index]["type"].toString(),
+                        tableFilter[index]["type"]
+                            .toString()
+                            .replaceAll("_", " ")
+                            .capitalizeFirstOfEach(),
                         style: applyRobotoFont(fontSize: 14),
                       ),
                     ),

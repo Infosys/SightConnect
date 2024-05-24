@@ -17,6 +17,7 @@ class TriagePostModel with _$TriagePostModel {
     int? patientId,
     int? encounterId,
     ServiceType? serviceType,
+    int? tenantCode,
     int? organizationCode,
     List<Performer>? performer,
     int? assessmentCode,

@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/core/constants/app_text.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
@@ -9,16 +9,21 @@ import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
+
+import '../l10n/app_localizations.dart';
 
 final isJailBrokenProvider = FutureProvider<bool>((ref) async {
+  if (kIsWeb) {
+    return false;
+  }
   return await FlutterJailbreakDetection.jailbroken;
 });
 
@@ -55,7 +60,7 @@ class MyApp extends ConsumerWidget {
                     : const TextScaler.linear(1.3),
               ),
               child: MaterialApp(
-                title: AppText.appName,
+                title: AppInfoService.appName,
                 locale: ref.watch(globalLanguageProvider).currentLocale,
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
@@ -71,9 +76,10 @@ class MyApp extends ConsumerWidget {
                     ? AppTheme.getLightTheme(context)
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
-                initialRoute: initialRoute,
 
+                initialRoute: initialRoute,
                 navigatorKey: AppRouter.navigatorKey,
+                onUnknownRoute: AppRouter.onUnknownRoute,
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
                 //         data: (value) {

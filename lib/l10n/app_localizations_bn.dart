@@ -35,6 +35,11 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'জরুরী পরিস্থিতিতে, দয়া করে ${tollFreeNumber}-এ কল করুন।';
+  }
+
+  @override
   String get questionnaireTitle => 'চোখের মূল্যায়ন প্রশ্ন';
 
   @override
@@ -713,7 +718,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get recentServicesRedEyeTest => 'লাল চোখের পরীক্ষা';
 
   @override
-  String get chatBotDefaultQuerySuggestions => 'চোখের মূল্যায়ন শুরু করুন। সাধারণ চোখের সমস্যা। আরও ভাল দৃষ্টিশক্তির জন্য টিপস';
+  String get chatBotDefaultQuerySuggestions => 'চোখের মূল্যায়ন শুরু করুন | সাধারণ চোখের সমস্যা | আরও ভাল দৃষ্টিশক্তির জন্য টিপস';
 
   @override
   String get chatBotWelcomeMessage => 'হাই, আজ আমি কিভাবে আপনাকে সাহায্য করতে পারি?';
@@ -1848,4 +1853,67 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'সর্বাধিক পাঠের আকার পৌঁছে গেছে';
+
+  @override
+  String get chatClearChat => 'চ্যাট সাফ করুন';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'আপনার জন্য চোখের মূল্যায়ন করার পরামর্শ দেওয়া হয়।';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'আপনি কি ট্রাইএজ চোখের মূল্যায়ন করতে চান?';
+
+  @override
+  String get chatChatbotNotAvailable => 'এই মুহূর্তে চ্যাটবট পাওয়া যাচ্ছে না। অনুগ্রহ করে পরে আবার চেষ্টা করুন।';
+
+  @override
+  String get chatTypeHere => 'এখানে টাইপ করুন...';
+
+  @override
+  String get switchProfile => 'প্রোফাইল পরিবর্তন করুন';
+
+  @override
+  String get switchRole => 'ভূমিকা পরিবর্তন করুন';
+
+  @override
+  String get switchTenant => 'ভাড়াটিয়া পরিবর্তন করুন';
+
+  @override
+  String get patientHeaderWelcomeText => 'সাইট কানেক্টে স্বাগতম! আপনার দৃষ্টিশক্তির যত্ন নেওয়া গুরুত্বপূর্ণ, এবং আমরা প্রতিটি পদক্ষেপে আপনার জন্য এখানে আছি।';
+
+  @override
+  String get triageTestCardHeader => 'আপনার চোখের পরীক্ষা বিনামূল্যে...';
+
+  @override
+  String get triageTestCardBody1 => 'আপনার চোখের লক্ষণগুলি দ্রুত বিশ্লেষণ করুন।';
+
+  @override
+  String get triageTestCardBody2 => 'আপনার চোখের সমস্যা হতে পারে কিনা তা শনাক্ত করুন।';
+
+  @override
+  String get triageTestCardBody3 => 'কখন আপনার ডাক্তারের কাছে যেতে হবে তা জানুন';
+
+  @override
+  String get triageTestCardButton => 'বিনামূল্যে চোখের পরীক্ষা শুরু করুন';
+
+  @override
+  String get myConnectionListAddMembersDescription => 'আপনার পরিবার এবং বন্ধুদের যোগ করতে সদস্য যোগ করুন বোতামে ক্লিক করুন।';
+
+  @override
+  String get showTriageHowToProceedBottomSheetHeader => 'আপনি কিভাবে এগিয়ে যেতে চান?';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody1 => 'আমার একটি সমস্যা আছে এবং আমি তা যাচাই করতে চাই।';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody2 => 'আমি নিশ্চিত নই যে আমার কোনও সমস্যা আছে কিনা।';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody3 => 'আমার চোখের কোনও সমস্যা নেই-শুধু পরীক্ষা করতে চাই।';
+
+  @override
+  String get appDrawerToastMessageText => 'দুঃখিত, আমরা মোবাইল অ্যাপে একটি লগআউট ত্রুটির সম্মুখীন হয়েছি।';
+
+  @override
+  String get myConnectionListAddMembers => 'সদস্য যোগ করুন';
 }

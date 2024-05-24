@@ -19,7 +19,7 @@ class CriticalCasesCardList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSize.kmpadding),
+            padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
             child: Row(
               children: [
                 Text(
@@ -41,7 +41,7 @@ class CriticalCasesCardList extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSize.ksheight),
+          const SizedBox(height: AppSize.ks),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

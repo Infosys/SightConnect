@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/pages/pincode_dialog_page.dart';
 import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -53,9 +54,14 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
     });
     return ref.watch(getPatientProfileProvider).when(
           data: (data) {
-            return Scaffold(
-              body: _buildPage(ref, context),
-            );
+            final address = data.profile?.patient?.address??[];
+            if ( address.isNotEmpty && (address.first.pincode??"").isNotEmpty) {
+              return PincodeDialogPage(data: data);
+            } else {
+              return Scaffold(
+                body: _buildPage(ref, context),
+              );
+            }
           },
           loading: () => const Scaffold(
             body: Center(

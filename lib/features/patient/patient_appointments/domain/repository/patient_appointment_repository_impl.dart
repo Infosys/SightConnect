@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../../core/services/failure.dart';
 import '../../data/models/uhi_search_model.dart';
@@ -9,9 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 
 var patientAppointmentRepositoryProvider =
     riverpod.Provider<PatientAppointmentRepository>(
-        (ref) => PatientAppointmentRepositoryImpl(
-              ref.watch(appointmentRemoteSourceProvider),
-            ));
+  (ref) => PatientAppointmentRepositoryImpl(
+    ref.watch(appointmentRemoteSourceProvider),
+  ),
+);
 
 class PatientAppointmentRepositoryImpl extends PatientAppointmentRepository {
   PatientAppointmentRemoteSource remoteDataSource;
@@ -20,13 +20,10 @@ class PatientAppointmentRepositoryImpl extends PatientAppointmentRepository {
   @override
   Future<bool> sendAppointmentDetails(UhiSearchModel uhiSearchModel) async {
     try {
-      log("sendAppointmentDetails called from IMPL and the data is : $uhiSearchModel");
-  
-       
-     
+      await remoteDataSource.initializeStompClient();
+
       final data =
           await remoteDataSource.sendAppointmentDetails(uhiSearchModel);
-       await remoteDataSource.initializeStompClient();
       if (data) {
         Fluttertoast.showToast(msg: "Data Posted Successfully");
         return true;

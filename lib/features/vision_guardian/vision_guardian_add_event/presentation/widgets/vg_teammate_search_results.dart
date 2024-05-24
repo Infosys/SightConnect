@@ -24,7 +24,7 @@ class VgEventTeammateSearchResult extends ConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         ...teammates.map((e) {
           return TeammatesDataCards(data: e[0], type: "Search");

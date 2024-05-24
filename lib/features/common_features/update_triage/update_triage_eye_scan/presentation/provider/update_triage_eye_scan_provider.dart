@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/core/constants/app_text.dart';
+
 import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
@@ -207,7 +208,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
     update_model.TriageUpdateModel triage = update_model.TriageUpdateModel(
       patientId: triageReport.subject,
       diagnosticReportId: triageReport.diagnosticReportId,
-      organizationCode: triageReport.organizationCode,
+      tenantCode: triageReport.tenantCode,
       performer: [
         update_model.Performer(
           role: PerformerRole.PATIENT,
@@ -218,7 +219,7 @@ class UpdateTriageEyeScanProvider with ChangeNotifier {
       assessmentVersion: triageReport.assessmentVersion,
       issued: triageReport.issued,
       source: Source.PATIENT_APP,
-      sourceVersion: AppText.appVersion,
+      sourceVersion: AppInfoService.appVersion,
       incompleteSection: _getIncompleteTestList(triageReport.incompleteTests),
       score: _getScore(),
       cummulativeScore: _getCummulativeScore(),

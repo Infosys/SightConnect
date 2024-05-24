@@ -14,24 +14,38 @@ class MRCode extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
-      margin: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.km),
+      margin: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
-        borderRadius: BorderRadius.circular(AppSize.kmradius),
+        borderRadius: BorderRadius.circular(AppSize.km),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            loc.vtMrCode,
-            style: applyFiraSansFont(
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            children: [
+              Text(
+                loc.vtMrCode,
+                style: applyFiraSansFont(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: AppSize.ks),
+              Text(
+                "Optional",
+                textHeightBehavior:
+                    const TextHeightBehavior(applyHeightToFirstAscent: false),
+                style: applyFiraSansFont(
+                  fontSize: 12,
+                  color: AppColor.grey,
+                ),
+              ),
+            ],
           ),
           const SizedBox(
-            height: AppSize.kmpadding,
+            height: AppSize.km,
           ),
           TextField(
             onChanged: (value) {
@@ -40,20 +54,20 @@ class MRCode extends ConsumerWidget {
             decoration: InputDecoration(
               hintText: loc.vtEnterMrCode,
               hintStyle: applyRobotoFont(fontSize: 14),
-              error: ref
-                          .watch(vtCloseAssessmentHelperProvider)
-                          .mrCodeController
-                          .text
-                          .length <
-                      4
-                  ? Text(
-                      loc.vtPleaseEnterMrCode,
-                      style: applyRobotoFont(
-                        fontSize: 12,
-                        color: AppColor.red,
-                      ),
-                    )
-                  : null,
+              // error: ref
+              //             .watch(vtCloseAssessmentHelperProvider)
+              //             .mrCodeController
+              //             .text
+              //             .length <
+              //         4
+              //     ? Text(
+              //         loc.vtPleaseEnterMrCode,
+              //         style: applyRobotoFont(
+              //           fontSize: 12,
+              //           color: AppColor.red,
+              //         ),
+              //       )
+              //     : null,
             ),
           )
         ],

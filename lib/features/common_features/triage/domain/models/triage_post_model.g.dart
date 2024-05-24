@@ -6,18 +6,20 @@ part of 'triage_post_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TriagePostModel _$$_TriagePostModelFromJson(Map<String, dynamic> json) =>
-    _$_TriagePostModel(
-      id: json['id'] as int?,
-      patientId: json['patientId'] as int?,
-      encounterId: json['encounterId'] as int?,
+_$TriagePostModelImpl _$$TriagePostModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TriagePostModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      patientId: (json['patientId'] as num?)?.toInt(),
+      encounterId: (json['encounterId'] as num?)?.toInt(),
       serviceType:
           $enumDecodeNullable(_$ServiceTypeEnumMap, json['serviceType']),
-      organizationCode: json['organizationCode'] as int?,
+      tenantCode: (json['tenantCode'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => Performer.fromJson(e as Map<String, dynamic>))
           .toList(),
-      assessmentCode: json['assessmentCode'] as int?,
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentVersion: json['assessmentVersion'] as String?,
       issued: const TimestampConverter().fromJson(json['issued'] as String?),
       userStartDate:
@@ -28,7 +30,7 @@ _$_TriagePostModel _$$_TriagePostModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               PostIncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      cummulativeScore: json['cummulativeScore'] as int?,
+      cummulativeScore: (json['cummulativeScore'] as num?)?.toInt(),
       score: (json['score'] as List<dynamic>?)
           ?.map((e) => (e as Map<String, dynamic>).map(
                 (k, e) => MapEntry(k, (e as num).toDouble()),
@@ -46,7 +48,7 @@ _$_TriagePostModel _$$_TriagePostModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               PostTriageQuestionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      subject: json['subject'] as int?,
+      subject: (json['subject'] as num?)?.toInt(),
       observationSeverity:
           $enumDecodeNullable(_$SeverityEnumMap, json['observationSeverity']),
       questionResponseSeverity: $enumDecodeNullable(
@@ -66,12 +68,14 @@ _$_TriagePostModel _$$_TriagePostModelFromJson(Map<String, dynamic> json) =>
           : EncounterModel.fromJson(json['encounter'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_TriagePostModelToJson(_$_TriagePostModel instance) =>
+Map<String, dynamic> _$$TriagePostModelImplToJson(
+        _$TriagePostModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'patientId': instance.patientId,
       'encounterId': instance.encounterId,
       'serviceType': _$ServiceTypeEnumMap[instance.serviceType],
+      'tenantCode': instance.tenantCode,
       'organizationCode': instance.organizationCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,
@@ -122,21 +126,22 @@ const _$SeverityEnumMap = {
   Severity.LOW: 'LOW',
 };
 
-_$_EncounterModel _$$_EncounterModelFromJson(Map<String, dynamic> json) =>
-    _$_EncounterModel(
-      id: json['id'] as int?,
+_$EncounterModelImpl _$$EncounterModelImplFromJson(Map<String, dynamic> json) =>
+    _$EncounterModelImpl(
+      id: (json['id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_EncounterModelToJson(_$_EncounterModel instance) =>
+Map<String, dynamic> _$$EncounterModelImplToJson(
+        _$EncounterModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
     };
 
-_$_PostTriageQuestionModel _$$_PostTriageQuestionModelFromJson(
+_$PostTriageQuestionModelImpl _$$PostTriageQuestionModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PostTriageQuestionModel(
-      id: json['id'] as int?,
-      linkId: json['linkId'] as int?,
+    _$PostTriageQuestionModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      linkId: (json['linkId'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
       answers: (json['answers'] as List<dynamic>?)
           ?.map(
@@ -144,8 +149,8 @@ _$_PostTriageQuestionModel _$$_PostTriageQuestionModelFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_PostTriageQuestionModelToJson(
-        _$_PostTriageQuestionModel instance) =>
+Map<String, dynamic> _$$PostTriageQuestionModelImplToJson(
+        _$PostTriageQuestionModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'linkId': instance.linkId,
@@ -153,17 +158,17 @@ Map<String, dynamic> _$$_PostTriageQuestionModelToJson(
       'answers': instance.answers?.map((e) => e.toJson()).toList(),
     };
 
-_$_PostTriageAnswerModel _$$_PostTriageAnswerModelFromJson(
+_$PostTriageAnswerModelImpl _$$PostTriageAnswerModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PostTriageAnswerModel(
+    _$PostTriageAnswerModelImpl(
       value: json['value'] as String?,
-      id: json['id'] as int?,
-      answerCode: json['answerCode'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      answerCode: (json['answerCode'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_PostTriageAnswerModelToJson(
-        _$_PostTriageAnswerModel instance) =>
+Map<String, dynamic> _$$PostTriageAnswerModelImplToJson(
+        _$PostTriageAnswerModelImpl instance) =>
     <String, dynamic>{
       'value': instance.value,
       'id': instance.id,
@@ -171,13 +176,14 @@ Map<String, dynamic> _$$_PostTriageAnswerModelToJson(
       'score': instance.score,
     };
 
-_$_Performer _$$_PerformerFromJson(Map<String, dynamic> json) => _$_Performer(
-      id: json['id'] as int?,
+_$PerformerImpl _$$PerformerImplFromJson(Map<String, dynamic> json) =>
+    _$PerformerImpl(
+      id: (json['id'] as num?)?.toInt(),
       role: $enumDecodeNullable(_$PerformerRoleEnumMap, json['role']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_PerformerToJson(_$_Performer instance) =>
+Map<String, dynamic> _$$PerformerImplToJson(_$PerformerImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'role': _$PerformerRoleEnumMap[instance.role],
@@ -194,14 +200,14 @@ const _$PerformerRoleEnumMap = {
   PerformerRole.PATIENT: 'PATIENT',
 };
 
-_$_PostIncompleteTestModel _$$_PostIncompleteTestModelFromJson(
+_$PostIncompleteTestModelImpl _$$PostIncompleteTestModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PostIncompleteTestModel(
+    _$PostIncompleteTestModelImpl(
       testName: $enumDecodeNullable(_$TestTypeEnumMap, json['testName']),
     );
 
-Map<String, dynamic> _$$_PostIncompleteTestModelToJson(
-        _$_PostIncompleteTestModel instance) =>
+Map<String, dynamic> _$$PostIncompleteTestModelImplToJson(
+        _$PostIncompleteTestModelImpl instance) =>
     <String, dynamic>{
       'testName': _$TestTypeEnumMap[instance.testName],
     };
@@ -212,17 +218,17 @@ const _$TestTypeEnumMap = {
   TestType.IMAGE: 'IMAGE',
 };
 
-_$_PostTriageObservationsModel _$$_PostTriageObservationsModelFromJson(
+_$PostTriageObservationsModelImpl _$$PostTriageObservationsModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PostTriageObservationsModel(
-      id: json['id'] as int?,
-      identifier: json['identifier'] as int?,
+    _$PostTriageObservationsModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      identifier: (json['identifier'] as num?)?.toInt(),
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_PostTriageObservationsModelToJson(
-        _$_PostTriageObservationsModel instance) =>
+Map<String, dynamic> _$$PostTriageObservationsModelImplToJson(
+        _$PostTriageObservationsModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'identifier': instance.identifier,
@@ -230,20 +236,19 @@ Map<String, dynamic> _$$_PostTriageObservationsModelToJson(
       'score': instance.score,
     };
 
-_$_PostTriageImagingSelectionModel _$$_PostTriageImagingSelectionModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_PostTriageImagingSelectionModel(
-      id: json['id'] as int?,
-      identifier: json['identifier'] as int?,
-      endpoint: json['endpoint'] as String?,
-      baseUrl: json['baseUrl'] as String?,
-      score: (json['score'] as num?)?.toDouble(),
-      fileId: json['fileId'] as String?,
-      bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
-    );
+_$PostTriageImagingSelectionModelImpl
+    _$$PostTriageImagingSelectionModelImplFromJson(Map<String, dynamic> json) =>
+        _$PostTriageImagingSelectionModelImpl(
+          id: (json['id'] as num?)?.toInt(),
+          identifier: (json['identifier'] as num?)?.toInt(),
+          endpoint: json['endpoint'] as String?,
+          baseUrl: json['baseUrl'] as String?,
+          score: (json['score'] as num?)?.toDouble(),
+          fileId: json['fileId'] as String?,
+        );
 
-Map<String, dynamic> _$$_PostTriageImagingSelectionModelToJson(
-        _$_PostTriageImagingSelectionModel instance) =>
+Map<String, dynamic> _$$PostTriageImagingSelectionModelImplToJson(
+        _$PostTriageImagingSelectionModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'identifier': instance.identifier,
@@ -251,11 +256,4 @@ Map<String, dynamic> _$$_PostTriageImagingSelectionModelToJson(
       'baseUrl': instance.baseUrl,
       'score': instance.score,
       'fileId': instance.fileId,
-      'bodySite': _$BodySiteEnumMap[instance.bodySite],
     };
-
-const _$BodySiteEnumMap = {
-  BodySite.LEFT_EYE: 'LEFT_EYE',
-  BodySite.RIGHT_EYE: 'RIGHT_EYE',
-  BodySite.BOTH_EYES: 'BOTH_EYES',
-};

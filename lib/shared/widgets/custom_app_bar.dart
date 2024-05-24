@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,15 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = Responsive.isMobile(context);
+
+    double appBarHeight = preferredSizeHeight;
+    if (isMobile) {
+      appBarHeight = 56.0;
+    } else {
+      appBarHeight = 80.0;
+    }
+
     return AppBar(
       titleSpacing: titleSpacing,
       leadingWidth: leadingWidth,
@@ -58,6 +68,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           ),
       title: title,
       actions: actions,
+      toolbarHeight: appBarHeight,
     );
   }
 

@@ -35,8 +35,7 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
               CupertinoIcons.search,
               color: AppColor.primary,
             ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: AppSize.kspadding),
+            contentPadding: const EdgeInsets.symmetric(horizontal: AppSize.ks),
             filled: true,
             fillColor: AppColor.white,
             hintText: loc.vgSearchPatientByPhoneNumber,
@@ -46,11 +45,11 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
             ),
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: AppColor.primary),
-              borderRadius: BorderRadius.circular(AppSize.klradius),
+              borderRadius: BorderRadius.circular(AppSize.kl),
             ),
           ),
         ),
-        const SizedBox(height: AppSize.kspadding),
+        const SizedBox(height: AppSize.ks),
         Visibility(
           visible: !isValid.value,
           child: Text(loc.vgInvalidPhoneNumber,

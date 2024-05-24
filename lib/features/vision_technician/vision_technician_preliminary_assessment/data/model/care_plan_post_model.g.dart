@@ -6,14 +6,16 @@ part of 'care_plan_post_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CarePlanPostModel _$$_CarePlanPostModelFromJson(Map<String, dynamic> json) =>
-    _$_CarePlanPostModel(
-      id: json['id'] as int?,
+_$CarePlanPostModelImpl _$$CarePlanPostModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CarePlanPostModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       reports: (json['reports'] as List<dynamic>?)
           ?.map((e) => ReportModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      encounterId: json['encounterId'] as int?,
-      organizationCode: json['organizationCode'] as int?,
+      encounterId: (json['encounterId'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
+      tenantCode: (json['tenantCode'] as num?)?.toInt(),
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => PerformerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -31,13 +33,14 @@ _$_CarePlanPostModel _$$_CarePlanPostModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_CarePlanPostModelToJson(
-        _$_CarePlanPostModel instance) =>
+Map<String, dynamic> _$$CarePlanPostModelImplToJson(
+        _$CarePlanPostModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'reports': instance.reports?.map((e) => e.toJson()).toList(),
       'encounterId': instance.encounterId,
       'organizationCode': instance.organizationCode,
+      'tenantCode': instance.tenantCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'conditions': instance.conditions?.map((e) => e.toJson()).toList(),
       'serviceRequest':
@@ -47,23 +50,24 @@ Map<String, dynamic> _$$_CarePlanPostModelToJson(
       'goal': instance.goal?.map((e) => e.toJson()).toList(),
     };
 
-_$_ReportModel _$$_ReportModelFromJson(Map<String, dynamic> json) =>
-    _$_ReportModel(
-      id: json['id'] as int?,
+_$ReportModelImpl _$$ReportModelImplFromJson(Map<String, dynamic> json) =>
+    _$ReportModelImpl(
+      id: (json['id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_ReportModelToJson(_$_ReportModel instance) =>
+Map<String, dynamic> _$$ReportModelImplToJson(_$ReportModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
     };
 
-_$_PerformerModel _$$_PerformerModelFromJson(Map<String, dynamic> json) =>
-    _$_PerformerModel(
+_$PerformerModelImpl _$$PerformerModelImplFromJson(Map<String, dynamic> json) =>
+    _$PerformerModelImpl(
       role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_PerformerModelToJson(_$_PerformerModel instance) =>
+Map<String, dynamic> _$$PerformerModelImplToJson(
+        _$PerformerModelImpl instance) =>
     <String, dynamic>{
       'role': _$RoleEnumMap[instance.role],
       'identifier': instance.identifier,
@@ -73,9 +77,9 @@ const _$RoleEnumMap = {
   Role.VISION_TECHNICIAN: 'VISION_TECHNICIAN',
 };
 
-_$_ConditionModel _$$_ConditionModelFromJson(Map<String, dynamic> json) =>
-    _$_ConditionModel(
-      id: json['id'] as int?,
+_$ConditionModelImpl _$$ConditionModelImplFromJson(Map<String, dynamic> json) =>
+    _$ConditionModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       recordedDate:
           const TimestampConverter().fromJson(json['recordedDate'] as String?),
       bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
@@ -83,7 +87,8 @@ _$_ConditionModel _$$_ConditionModelFromJson(Map<String, dynamic> json) =>
       note: json['note'] as String?,
     );
 
-Map<String, dynamic> _$$_ConditionModelToJson(_$_ConditionModel instance) =>
+Map<String, dynamic> _$$ConditionModelImplToJson(
+        _$ConditionModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'recordedDate': const TimestampConverter().toJson(instance.recordedDate),
@@ -102,20 +107,20 @@ const _$CodeEnumMap = {
   Code.EYE_TRIAGE: 'EYE_TRIAGE',
 };
 
-_$_ServiceRequestModel _$$_ServiceRequestModelFromJson(
+_$ServiceRequestModelImpl _$$ServiceRequestModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ServiceRequestModel(
-      id: json['id'] as int?,
+    _$ServiceRequestModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       note: json['note'] as String?,
       patientInstruction: $enumDecodeNullable(
           _$PatientInstructionEnumMap, json['patientInstruction']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
       bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
       priority: $enumDecodeNullable(_$TriagePriorityEnumMap, json['priority']),
     );
 
-Map<String, dynamic> _$$_ServiceRequestModelToJson(
-        _$_ServiceRequestModel instance) =>
+Map<String, dynamic> _$$ServiceRequestModelImplToJson(
+        _$ServiceRequestModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'note': instance.note,
@@ -140,8 +145,9 @@ const _$TriagePriorityEnumMap = {
   TriagePriority.STAT: 'STAT',
 };
 
-_$_GoalModel _$$_GoalModelFromJson(Map<String, dynamic> json) => _$_GoalModel(
-      id: json['id'] as int?,
+_$GoalModelImpl _$$GoalModelImplFromJson(Map<String, dynamic> json) =>
+    _$GoalModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       statusReason: json['statusReason'] as String?,
       achievementStatus:
           $enumDecodeNullable(_$StatusEnumMap, json['achievementStatus']),
@@ -157,7 +163,7 @@ _$_GoalModel _$$_GoalModelFromJson(Map<String, dynamic> json) => _$_GoalModel(
       category: $enumDecodeNullable(_$CategoryEnumMap, json['category']),
     );
 
-Map<String, dynamic> _$$_GoalModelToJson(_$_GoalModel instance) =>
+Map<String, dynamic> _$$GoalModelImplToJson(_$GoalModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'statusReason': instance.statusReason,
@@ -179,14 +185,16 @@ const _$CategoryEnumMap = {
   Category.TREATMENT: 'TREATMENT',
 };
 
-_$_GoalOutcomeModel _$$_GoalOutcomeModelFromJson(Map<String, dynamic> json) =>
-    _$_GoalOutcomeModel(
-      id: json['id'] as int?,
+_$GoalOutcomeModelImpl _$$GoalOutcomeModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GoalOutcomeModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       goalOutcome:
           $enumDecodeNullable(_$GoalOutComeEnumMap, json['goalOutcome']),
     );
 
-Map<String, dynamic> _$$_GoalOutcomeModelToJson(_$_GoalOutcomeModel instance) =>
+Map<String, dynamic> _$$GoalOutcomeModelImplToJson(
+        _$GoalOutcomeModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'goalOutcome': _$GoalOutComeEnumMap[instance.goalOutcome],
@@ -212,13 +220,13 @@ const _$GoalOutComeEnumMap = {
   GoalOutCome.EDUCATION_AND_COUNSELING: 'EDUCATION_AND_COUNSELING',
 };
 
-_$_TargetModel _$$_TargetModelFromJson(Map<String, dynamic> json) =>
-    _$_TargetModel(
-      id: json['id'] as int?,
+_$TargetModelImpl _$$TargetModelImplFromJson(Map<String, dynamic> json) =>
+    _$TargetModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       detailString: json['detailString'] as String?,
     );
 
-Map<String, dynamic> _$$_TargetModelToJson(_$_TargetModel instance) =>
+Map<String, dynamic> _$$TargetModelImplToJson(_$TargetModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'detailString': instance.detailString,

@@ -12,7 +12,7 @@ part of 'NearByVisionCenterState.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NearByVisionCenterState {
@@ -88,11 +88,12 @@ class _$NearByVisionCenterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_NearByVisionCenterStateCopyWith<$Res>
+abstract class _$$NearByVisionCenterStateImplCopyWith<$Res>
     implements $NearByVisionCenterStateCopyWith<$Res> {
-  factory _$$_NearByVisionCenterStateCopyWith(_$_NearByVisionCenterState value,
-          $Res Function(_$_NearByVisionCenterState) then) =
-      __$$_NearByVisionCenterStateCopyWithImpl<$Res>;
+  factory _$$NearByVisionCenterStateImplCopyWith(
+          _$NearByVisionCenterStateImpl value,
+          $Res Function(_$NearByVisionCenterStateImpl) then) =
+      __$$NearByVisionCenterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -104,12 +105,13 @@ abstract class _$$_NearByVisionCenterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NearByVisionCenterStateCopyWithImpl<$Res>
+class __$$NearByVisionCenterStateImplCopyWithImpl<$Res>
     extends _$NearByVisionCenterStateCopyWithImpl<$Res,
-        _$_NearByVisionCenterState>
-    implements _$$_NearByVisionCenterStateCopyWith<$Res> {
-  __$$_NearByVisionCenterStateCopyWithImpl(_$_NearByVisionCenterState _value,
-      $Res Function(_$_NearByVisionCenterState) _then)
+        _$NearByVisionCenterStateImpl>
+    implements _$$NearByVisionCenterStateImplCopyWith<$Res> {
+  __$$NearByVisionCenterStateImplCopyWithImpl(
+      _$NearByVisionCenterStateImpl _value,
+      $Res Function(_$NearByVisionCenterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +123,7 @@ class __$$_NearByVisionCenterStateCopyWithImpl<$Res>
     Object? permissionStatus = freezed,
     Object? shouldForceReload = null,
   }) {
-    return _then(_$_NearByVisionCenterState(
+    return _then(_$NearByVisionCenterStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -148,10 +150,10 @@ class __$$_NearByVisionCenterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NearByVisionCenterState
+class _$NearByVisionCenterStateImpl
     with DiagnosticableTreeMixin
     implements _NearByVisionCenterState {
-  const _$_NearByVisionCenterState(
+  const _$NearByVisionCenterStateImpl(
       {required this.isLoading,
       required final List<OrganizationResponseModel>? visionCenters,
       this.errorMessage,
@@ -197,10 +199,10 @@ class _$_NearByVisionCenterState
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NearByVisionCenterState &&
+            other is _$NearByVisionCenterStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             const DeepCollectionEquality()
@@ -225,10 +227,9 @@ class _$_NearByVisionCenterState
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NearByVisionCenterStateCopyWith<_$_NearByVisionCenterState>
-      get copyWith =>
-          __$$_NearByVisionCenterStateCopyWithImpl<_$_NearByVisionCenterState>(
-              this, _$identity);
+  _$$NearByVisionCenterStateImplCopyWith<_$NearByVisionCenterStateImpl>
+      get copyWith => __$$NearByVisionCenterStateImplCopyWithImpl<
+          _$NearByVisionCenterStateImpl>(this, _$identity);
 }
 
 abstract class _NearByVisionCenterState implements NearByVisionCenterState {
@@ -237,7 +238,7 @@ abstract class _NearByVisionCenterState implements NearByVisionCenterState {
       required final List<OrganizationResponseModel>? visionCenters,
       final String? errorMessage,
       final PermissionStatus? permissionStatus,
-      final bool shouldForceReload}) = _$_NearByVisionCenterState;
+      final bool shouldForceReload}) = _$NearByVisionCenterStateImpl;
 
   @override
   bool get isLoading;
@@ -251,6 +252,6 @@ abstract class _NearByVisionCenterState implements NearByVisionCenterState {
   bool get shouldForceReload;
   @override
   @JsonKey(ignore: true)
-  _$$_NearByVisionCenterStateCopyWith<_$_NearByVisionCenterState>
+  _$$NearByVisionCenterStateImplCopyWith<_$NearByVisionCenterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

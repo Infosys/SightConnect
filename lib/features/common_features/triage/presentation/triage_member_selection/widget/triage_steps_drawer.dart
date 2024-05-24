@@ -30,7 +30,7 @@ class TriageStepsDrawer extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: AppSize.klheight),
+            const SizedBox(height: AppSize.kl),
             Row(
               children: [
                 IconButton(
@@ -52,7 +52,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                 // fit: StackFit.loose,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: AppSize.klheight + 2),
+                    padding: const EdgeInsets.only(top: AppSize.kl + 2),
                     child: EasyStepper(
                         disableScroll: true,
                         fitWidth: true,
@@ -120,6 +120,23 @@ class TriageStepsDrawer extends ConsumerWidget {
                               weight: 10,
                             ),
                           ),
+                          // EasyStep(
+                          //   icon: Icon(
+                          //     Icons.more_horiz,
+                          //     size: 25,
+                          //     weight: 10,
+                          //   ),
+                          //   activeIcon: Icon(
+                          //     Icons.more_horiz,
+                          //     size: 25,
+                          //     weight: 10,
+                          //   ),
+                          //   finishIcon: Icon(
+                          //     Icons.check,
+                          //     size: 25,
+                          //     weight: 10,
+                          //   ),
+                          // ),
                           EasyStep(
                             icon: Icon(
                               Icons.more_horiz,
@@ -181,7 +198,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            height: AppSize.klheight * 3.5,
+                            height: AppSize.kl * 3.5,
                           ),
                           Text(
                             loc.eyeAssessmentStepTwo,
@@ -202,8 +219,27 @@ class TriageStepsDrawer extends ConsumerWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            height: AppSize.klheight * 3.5,
+                            height: AppSize.kl * 3.5,
                           ),
+                          // Text(
+                          //   "Step -3 Visual Acuity Test (Long Distance)",
+                          //   style: applyRobotoFont(
+                          //       fontSize: 14, fontWeight: FontWeight.w500),
+                          // ),
+                          // Text(
+                          //   model.currentStep == 2
+                          //       ? loc.eyeAssessmentOngoing
+                          //       : model.currentStep > 2
+                          //           ? loc.eyeAssessmentCompleted
+                          //           : loc.eyeAssessmentPending,
+                          //   style: applyRobotoFont(
+                          //       fontSize: 12,
+                          //       color: AppColor.altGrey,
+                          //       fontWeight: FontWeight.w500),
+                          // ),
+                          // const SizedBox(
+                          //   height: AppSize.kl * 3.4,
+                          // ),
                           Text(
                             loc.eyeAssessmentStepThree,
                             style: applyRobotoFont(
@@ -221,7 +257,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           const SizedBox(
-                            height: AppSize.klheight * 3.4,
+                            height: AppSize.kl * 3.4,
                           ),
                           Text(
                             loc.eyeAssessmentResults,
@@ -238,11 +274,11 @@ class TriageStepsDrawer extends ConsumerWidget {
                         ]),
                   ),
                 ]),
-            const SizedBox(height: AppSize.klheight + 10),
+            const SizedBox(height: AppSize.kl + 10),
             Row(
               children: [
                 const SizedBox(
-                  width: AppSize.kmwidth,
+                  width: AppSize.km,
                 ),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(

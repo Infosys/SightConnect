@@ -69,7 +69,7 @@ class VisionGuardianEyeAssessmentPatientsCard extends ConsumerWidget {
             itemBuilder: (context, index) {
               if (index == response.length) {
                 return const Padding(
-                  padding: EdgeInsets.all(AppSize.klpadding),
+                  padding: EdgeInsets.all(AppSize.kl),
                   child: CircularProgressIndicator.adaptive(),
                 );
               }
@@ -123,11 +123,11 @@ Widget vgPatientDataCards(BuildContext context,
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +141,7 @@ Widget vgPatientDataCards(BuildContext context,
                     color: const Color(0xffD4C1FF),
                   ),
                 ),
-                const SizedBox(width: AppSize.kswidth),
+                const SizedBox(width: AppSize.ks),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

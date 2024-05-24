@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +9,20 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 
 class AssessmentReportProfile extends ConsumerWidget {
-  const AssessmentReportProfile({super.key, required this.assessmentId});
+  const AssessmentReportProfile({
+    super.key,
+    required this.assessmentId,
+    required this.patientDetails,
+    this.assessmentDate,
+  });
   final int assessmentId;
+  final VTPatientDto patientDetails;
+  final DateTime? assessmentDate;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    VTPatientDto? patient =
-        ref.read(visionTechnicianSearchProvider).patientDetails;
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kspadding),
+      padding: const EdgeInsets.all(AppSize.ks),
       decoration: BoxDecoration(
         boxShadow: applyLightShadow(),
         image: const DecorationImage(
@@ -26,11 +30,11 @@ class AssessmentReportProfile extends ConsumerWidget {
           image: AssetImage(AppImages.profileBg),
         ),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.klradius),
+          Radius.circular(AppSize.km),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Wrap(
           direction: Axis.horizontal,
           children: [
@@ -39,7 +43,7 @@ class AssessmentReportProfile extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  patient?.name ?? "-",
+                  patientDetails.name.capitalizeFirstOfEach(),
                   style: applyRobotoFont(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -60,7 +64,7 @@ class AssessmentReportProfile extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${loc.vtPid} ${patient?.id ?? ""}",
+                  "${loc.vtPid} ${patientDetails.id ?? ""}",
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
@@ -68,9 +72,7 @@ class AssessmentReportProfile extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  patient?.encounterStartDate
-                          ?.formatDateTimeMonthNameWithTime ??
-                      "-",
+                  assessmentDate?.formatDateTimeMonthNameWithTime ?? "-",
                   style: applyRobotoFont(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,

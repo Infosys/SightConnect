@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_form_helper_widgets.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/regex/regex.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,13 +18,13 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
     var data = ref.watch(addEventDetailsProvider);
     final loc = context.loc!;
     return Container(
-      padding: const EdgeInsets.all(AppSize.kmpadding),
+      padding: const EdgeInsets.all(AppSize.km),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColor.white,
         boxShadow: applyLightShadow(),
         borderRadius: const BorderRadius.all(
-          Radius.circular(AppSize.kmradius - 5),
+          Radius.circular(AppSize.km - 5),
         ),
       ),
       child: Column(
@@ -38,53 +39,55 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           customTextFieldIcon(
             context,
             data.venueName,
             loc.vgVenueName,
             validationFunction: (value) {
-              if (value == "" || value == null) {
-                return loc.vgVenueNameError;
+              if (value?.trim().isEmpty ?? true) {
+                return loc.vtEnterSomeText;
               }
-              if (!RegExp(r'^[a-zA-Z0-9]+[ ]{0,1}[a-zA-Z0-9]*$')
-                  .hasMatch(value)) {
+              if (!Regex.isValidTitle(value!)) {
                 return loc.vgVenueNameSpecialCharError;
               }
               return null;
             },
-            const Icon(CupertinoIcons.search),
+            const SizedBox(),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           customTextFieldIcon(
             context,
             data.pincode,
             loc.vgPincode,
             validationFunction: (value) {
-              if (!RegExp(r'^[1-9][0-9]{5}$').hasMatch(value!)) {
+              if (value?.trim().isEmpty ?? true) {
+                return loc.vtEnterSomeText;
+              }
+              if (!Regex.isValidPincode(value!)) {
                 return loc.vgPincodeError;
               }
               return null;
             },
-            const Icon(CupertinoIcons.search),
+            const SizedBox(),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
           customTextFieldIcon(
             context,
             data.city,
             loc.vgCityTownVillage,
             validationFunction: (value) {
-              if (value == "" || value == null) {
+              if (value?.trim().isEmpty ?? true) {
                 return loc.vgCityTownVillageError;
               }
-              if (!RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value)) {
+              if (!Regex.isValidCityTownVillageName(value!)) {
                 return loc.vgCityTownVillageSpecialCharError;
               }
               return null;
             },
-            const Icon(CupertinoIcons.search),
+            const SizedBox(),
           ),
-          const SizedBox(height: AppSize.kmheight),
+          const SizedBox(height: AppSize.km),
         ],
       ),
     );

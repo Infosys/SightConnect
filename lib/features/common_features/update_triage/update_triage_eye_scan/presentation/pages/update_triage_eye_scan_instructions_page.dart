@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/update_triage/update_triage_eye_scan/presentation/pages/update_triage_eye_scan_carousel_page.dart';
+import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateTriageEyeScanInstructions extends ConsumerWidget {
   final int diagnosticReportId;
@@ -26,7 +26,7 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(AppSize.kmpadding),
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -37,12 +37,12 @@ class UpdateTriageEyeScanInstructions extends ConsumerWidget {
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Text(
               AppLocalizations.of(context)!.eyeScanHowToPerform,
               style: applyRobotoFont(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-            const SizedBox(height: AppSize.ksheight),
+            const SizedBox(height: AppSize.ks),
             Expanded(
               child: UpdateTriageEyeScanCarouselPage(
                 diagnosticReportId: diagnosticReportId,

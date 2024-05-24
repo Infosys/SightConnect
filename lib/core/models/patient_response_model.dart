@@ -146,7 +146,14 @@ enum FamilyRelationShip {
   OTHER
 }
 
-enum IdentifierType { ABHA_NUMBER, ABHA_ADDRESS, HPR_ID, COUNTER_ID, MR_CODE }
+enum IdentifierType {
+  ABHA_NUMBER,
+  ABHA_ADDRESS,
+  HPR_ID,
+  COUNTER_ID,
+  MR_CODE,
+  ABHA_MOBILE
+}
 
 enum RelatedPartyStatus {
   ACTIVE,

@@ -40,7 +40,7 @@
 //           "Select Patient",
 //           style: applyFiraSansFont(fontSize: 18),
 //         ),
-//         const SizedBox(height: AppSize.kmheight),
+//         const SizedBox(height: AppSize.km),
 //         Row(
 //           crossAxisAlignment: CrossAxisAlignment.start,
 //           children: [
@@ -76,7 +76,7 @@
 //                         ),
 //                         // Container(
 //                         //   width: 60,
-//                         //   padding: const EdgeInsets.only(right: AppSize.kmpadding),
+//                         //   padding: const EdgeInsets.only(right: AppSize.km),
 //                         //   child: Column(
 //                         //     mainAxisSize: MainAxisSize.min,
 //                         //     children: [
@@ -133,7 +133,7 @@
 //               height: 40,
 //               child: VerticalDivider(
 //                 thickness: 2,
-//                 width: AppSize.klelevation,
+//                 width: AppSize.kl,
 //                 color: AppColor.lightGrey,
 //               ),
 //             ),

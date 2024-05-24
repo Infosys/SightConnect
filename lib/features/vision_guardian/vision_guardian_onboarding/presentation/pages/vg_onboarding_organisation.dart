@@ -10,7 +10,7 @@ class VgOnboardingOrganisation extends StatelessWidget {
     return const SingleChildScrollView(
       child: Column(children: [
         SizedBox(
-          height: AppSize.kmheight,
+          height: AppSize.km,
         ),
         VgOnboardingOrganisationDetailsCard(),
       ]),

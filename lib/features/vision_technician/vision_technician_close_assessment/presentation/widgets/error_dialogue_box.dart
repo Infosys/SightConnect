@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+
+import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -8,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> showErrorDialogue(BuildContext context) {
-  String url = "tel:02249360005";
+  String url = "tel:${AppInfoService.activateExotelNumber}";
 
   return showDialog<void>(
     context: context,
@@ -16,8 +18,8 @@ Future<void> showErrorDialogue(BuildContext context) {
       final loc = context.loc!;
       return BlurDialogBox(
         contentPadding: Responsive.isMobile(context)
-            ? const EdgeInsets.all(AppSize.kmpadding)
-            : const EdgeInsets.all(AppSize.klpadding),
+            ? const EdgeInsets.all(AppSize.km)
+            : const EdgeInsets.all(AppSize.kl),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -28,7 +30,7 @@ Future<void> showErrorDialogue(BuildContext context) {
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             InkWell(
               onTap: () async {
                 if (await canLaunch(url)) {
@@ -38,14 +40,14 @@ Future<void> showErrorDialogue(BuildContext context) {
                 }
               },
               child: Text(
-                "02249360005",
+                AppInfoService.activateExotelNumber,
                 style: applyRobotoFont(
                   decoration: TextDecoration.underline,
                   color: AppColor.primary,
                 ),
               ),
             ),
-            const SizedBox(height: AppSize.kmheight),
+            const SizedBox(height: AppSize.km),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

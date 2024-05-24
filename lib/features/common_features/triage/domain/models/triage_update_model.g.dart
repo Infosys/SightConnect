@@ -6,15 +6,17 @@ part of 'triage_update_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
-    _$_TriageUpdateModel(
-      patientId: json['patientId'] as int?,
-      diagnosticReportId: json['diagnosticReportId'] as int?,
-      organizationCode: json['organizationCode'] as int?,
+_$TriageUpdateModelImpl _$$TriageUpdateModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TriageUpdateModelImpl(
+      patientId: (json['patientId'] as num?)?.toInt(),
+      diagnosticReportId: (json['diagnosticReportId'] as num?)?.toInt(),
+      tenantCode: (json['tenantCode'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
       performer: (json['performer'] as List<dynamic>?)
           ?.map((e) => Performer.fromJson(e as Map<String, dynamic>))
           .toList(),
-      assessmentCode: json['assessmentCode'] as int?,
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentVersion: json['assessmentVersion'] as String?,
       issued: const TimestampConverter().fromJson(json['issued'] as String?),
       source: $enumDecodeNullable(_$SourceEnumMap, json['source']),
@@ -22,7 +24,7 @@ _$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
       incompleteSection: (json['incompleteSection'] as List<dynamic>?)
           ?.map((e) => IncompleteTestModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      cummulativeScore: json['cummulativeScore'] as int?,
+      cummulativeScore: (json['cummulativeScore'] as num?)?.toInt(),
       score: (json['score'] as List<dynamic>?)
           ?.map((e) => Map<String, int>.from(e as Map))
           .toList(),
@@ -40,11 +42,12 @@ _$_TriageUpdateModel _$$_TriageUpdateModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_TriageUpdateModelToJson(
-        _$_TriageUpdateModel instance) =>
+Map<String, dynamic> _$$TriageUpdateModelImplToJson(
+        _$TriageUpdateModelImpl instance) =>
     <String, dynamic>{
       'patientId': instance.patientId,
       'diagnosticReportId': instance.diagnosticReportId,
+      'tenantCode': instance.tenantCode,
       'organizationCode': instance.organizationCode,
       'performer': instance.performer?.map((e) => e.toJson()).toList(),
       'assessmentCode': instance.assessmentCode,
@@ -72,20 +75,20 @@ const _$SourceEnumMap = {
   Source.OTHERS: 'OTHERS',
 };
 
-_$_PatchQuestionResponseModel _$$_PatchQuestionResponseModelFromJson(
+_$PatchQuestionResponseModelImpl _$$PatchQuestionResponseModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PatchQuestionResponseModel(
-      id: json['id'] as int?,
+    _$PatchQuestionResponseModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
-      linkId: json['linkId'] as int?,
+      linkId: (json['linkId'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
       answers: (json['answers'] as List<dynamic>?)
           ?.map((e) => PatchAnswerModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_PatchQuestionResponseModelToJson(
-        _$_PatchQuestionResponseModel instance) =>
+Map<String, dynamic> _$$PatchQuestionResponseModelImplToJson(
+        _$PatchQuestionResponseModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'action': _$ActionEnumMap[instance.action],
@@ -100,16 +103,18 @@ const _$ActionEnumMap = {
   Action.UPDATE: 'UPDATE',
 };
 
-_$_PatchAnswerModel _$$_PatchAnswerModelFromJson(Map<String, dynamic> json) =>
-    _$_PatchAnswerModel(
-      id: json['id'] as int?,
+_$PatchAnswerModelImpl _$$PatchAnswerModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PatchAnswerModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       value: json['value'] as String?,
-      answerCode: json['answerCode'] as int?,
+      answerCode: (json['answerCode'] as num?)?.toInt(),
       score: (json['score'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_PatchAnswerModelToJson(_$_PatchAnswerModel instance) =>
+Map<String, dynamic> _$$PatchAnswerModelImplToJson(
+        _$PatchAnswerModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'action': _$ActionEnumMap[instance.action],
@@ -118,12 +123,13 @@ Map<String, dynamic> _$$_PatchAnswerModelToJson(_$_PatchAnswerModel instance) =>
       'score': instance.score,
     };
 
-_$_Performer _$$_PerformerFromJson(Map<String, dynamic> json) => _$_Performer(
+_$PerformerImpl _$$PerformerImplFromJson(Map<String, dynamic> json) =>
+    _$PerformerImpl(
       role: $enumDecodeNullable(_$PerformerRoleEnumMap, json['role']),
-      identifier: json['identifier'] as int?,
+      identifier: (json['identifier'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$_PerformerToJson(_$_Performer instance) =>
+Map<String, dynamic> _$$PerformerImplToJson(_$PerformerImpl instance) =>
     <String, dynamic>{
       'role': _$PerformerRoleEnumMap[instance.role],
       'identifier': instance.identifier,
@@ -139,14 +145,14 @@ const _$PerformerRoleEnumMap = {
   PerformerRole.PATIENT: 'PATIENT',
 };
 
-_$_IncompleteTestModel _$$_IncompleteTestModelFromJson(
+_$IncompleteTestModelImpl _$$IncompleteTestModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_IncompleteTestModel(
+    _$IncompleteTestModelImpl(
       testName: $enumDecodeNullable(_$TestTypeEnumMap, json['testName']),
     );
 
-Map<String, dynamic> _$$_IncompleteTestModelToJson(
-        _$_IncompleteTestModel instance) =>
+Map<String, dynamic> _$$IncompleteTestModelImplToJson(
+        _$IncompleteTestModelImpl instance) =>
     <String, dynamic>{
       'testName': _$TestTypeEnumMap[instance.testName],
     };
@@ -157,18 +163,18 @@ const _$TestTypeEnumMap = {
   TestType.IMAGE: 'IMAGE',
 };
 
-_$_PatchObservationsModel _$$_PatchObservationsModelFromJson(
+_$PatchObservationsModelImpl _$$PatchObservationsModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PatchObservationsModel(
-      id: json['id'] as int?,
-      identifier: json['identifier'] as int?,
+    _$PatchObservationsModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      identifier: (json['identifier'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       value: json['value'] as String?,
       score: (json['score'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_PatchObservationsModelToJson(
-        _$_PatchObservationsModel instance) =>
+Map<String, dynamic> _$$PatchObservationsModelImplToJson(
+        _$PatchObservationsModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'identifier': instance.identifier,
@@ -177,11 +183,11 @@ Map<String, dynamic> _$$_PatchObservationsModelToJson(
       'score': instance.score,
     };
 
-_$_PatchImagingSelectionModel _$$_PatchImagingSelectionModelFromJson(
+_$PatchImagingSelectionModelImpl _$$PatchImagingSelectionModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PatchImagingSelectionModel(
-      id: json['id'] as int?,
-      identifier: json['identifier'] as int?,
+    _$PatchImagingSelectionModelImpl(
+      id: (json['id'] as num?)?.toInt(),
+      identifier: (json['identifier'] as num?)?.toInt(),
       action: $enumDecodeNullable(_$ActionEnumMap, json['action']),
       endpoint: json['endpoint'] as String?,
       baseUrl: json['baseUrl'] as String?,
@@ -189,8 +195,8 @@ _$_PatchImagingSelectionModel _$$_PatchImagingSelectionModelFromJson(
       fileId: json['fileId'] as String?,
     );
 
-Map<String, dynamic> _$$_PatchImagingSelectionModelToJson(
-        _$_PatchImagingSelectionModel instance) =>
+Map<String, dynamic> _$$PatchImagingSelectionModelImplToJson(
+        _$PatchImagingSelectionModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'identifier': instance.identifier,

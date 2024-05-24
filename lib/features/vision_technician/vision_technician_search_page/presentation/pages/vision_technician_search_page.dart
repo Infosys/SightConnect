@@ -15,6 +15,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 
 class VisionTechnicianSearchPage extends HookConsumerWidget {
   const VisionTechnicianSearchPage({super.key});
@@ -25,7 +27,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     var query = useState<String>("");
 
     var watchRef = ref.watch(visionTechnicianSearchProvider);
-
+    final isMobile = Responsive.isMobile(context);
     return Scaffold(
       appBar: const CustomAppbar(
         centerTitle: false,
@@ -45,13 +47,13 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                 child: Padding(
                   padding: Responsive.isMobile(context)
                       ? const EdgeInsets.all(16)
-                      : const EdgeInsets.all(AppSize.klpadding * 2),
+                      : const EdgeInsets.all(AppSize.kl * 2),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "You can search for a patient by their name, mobile number, or assessment ID",
+                        "Search by name, mobile number, or assessment ID",
                         textAlign: TextAlign.center,
                         style: applyRobotoFont(
                           fontSize: 14,
@@ -82,144 +84,140 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                         ),
                       );
                     } else {
-                      return Align(
-                        alignment: Alignment.topCenter,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: list.isEmpty
-                                ? MainAxisAlignment.center
-                                : MainAxisAlignment.start,
-                            children: [
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: AppSize.kmpadding),
-                                  child: DataTable(
-                                    dataTextStyle: applyRobotoFont(
-                                      fontSize: 14,
+                      List<VTPatientDto> filterAndTransform(
+                          List<VTPatientDto> data) {
+             
+                        var groupedData =
+                            groupBy(data, (VTPatientDto d) => d.id);
+
+                        var uniqueData = groupedData.values.map((group) {
+                          return group.reduce((value, element) {
+                            return value.encounterStartDate!
+                                    .isAfter(element.encounterStartDate!)
+                                ? value
+                                : element;
+                          });
+                        }).toList();
+
+                        return uniqueData;
+                      }
+
+                      var data = filterAndTransform(list);
+
+                      return Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: AppSize.ks),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: list.isEmpty
+                                  ? MainAxisAlignment.center
+                                  : MainAxisAlignment.start,
+                              children: [
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppSize.km,
                                     ),
-                                    columnSpacing: Responsive.isMobile(context)
-                                        ? AppSize.width(context) * 0.05
-                                        : AppSize.width(context) * 0.09,
-                                    horizontalMargin:
-                                        Responsive.isMobile(context)
-                                            ? AppSize.kmpadding
-                                            : AppSize.klpadding,
-                                    dataRowMaxHeight:
-                                        Responsive.isMobile(context)
-                                            ? AppSize.klheight * 2.5
-                                            : AppSize.klheight * 3,
-                                    dataRowMinHeight:
-                                        Responsive.isMobile(context)
-                                            ? AppSize.klheight * 1.2
-                                            : AppSize.klheight * 2,
-                                    showCheckboxColumn: false,
-                                    decoration: BoxDecoration(
-                                      color: AppColor.white,
-                                      borderRadius: BorderRadius.circular(
-                                        AppSize.ksradius,
+                                    child: DataTable(
+                                      dataTextStyle: applyRobotoFont(
+                                        fontSize: 14,
                                       ),
-                                      // boxShadow: applyLightShadow(),
-                                    ),
-                                    columns: [
-                                      DataColumn(
-                                        label: Text(
-                                          loc.vtPatient,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: applyFiraSansFont(
-                                            fontSize: 12,
-                                            color: AppColor.grey,
-                                          ),
+                                      columnSpacing: isMobile
+                                          ? AppSize.width(context) * 0.06
+                                          : AppSize.width(context) * 0.1,
+                                      headingRowHeight: isMobile
+                                          ? AppSize.kl * 2
+                                          : AppSize.kl * 3,
+                                      dataRowMaxHeight: isMobile
+                                          ? AppSize.kl * 3
+                                          : AppSize.kl * 3.5,
+                                      dataRowMinHeight: isMobile
+                                          ? AppSize.kl * 1
+                                          : AppSize.kl * 2,
+                                      showCheckboxColumn: false,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.white,
+                                        borderRadius: BorderRadius.circular(
+                                          AppSize.ks,
                                         ),
                                       ),
-                                      DataColumn(
-                                        label: Text(
-                                          loc.vtMobile,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: applyFiraSansFont(
-                                            fontSize: 12,
-                                            color: AppColor.grey,
+                                      columns: [
+                                        DataColumn(
+                                          label: Text(
+                                            loc.vtPatient,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: applyFiraSansFont(
+                                              fontSize: 12,
+                                              color: AppColor.grey,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          loc.vtAssessmentID,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: applyFiraSansFont(
-                                            fontSize: 12,
-                                            color: AppColor.grey,
+                                        DataColumn(
+                                          label: Text(
+                                            loc.vtMobile,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: applyFiraSansFont(
+                                              fontSize: 12,
+                                              color: AppColor.grey,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          loc.vtStatus,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: applyFiraSansFont(
-                                            fontSize: 12,
-                                            color: AppColor.grey,
+                                        DataColumn(
+                                          label: Text(
+                                            // loc.vtAssessmentID,
+                                            "Encounter ID",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: applyFiraSansFont(
+                                              fontSize: 12,
+                                              color: AppColor.grey,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          loc.vtCategory,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: applyFiraSansFont(
-                                            fontSize: 12,
-                                            color: AppColor.grey,
+                                        DataColumn(
+                                          label: Text(
+                                            loc.vtStatus,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: applyFiraSansFont(
+                                              fontSize: 12,
+                                              color: AppColor.grey,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      DataColumn(
-                                        label: Text(
-                                          loc.vtTimeline,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: applyFiraSansFont(
-                                            fontSize: 12,
-                                            color: AppColor.grey,
+                                        DataColumn(
+                                          label: Text(
+                                            loc.vtCategory,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: applyFiraSansFont(
+                                              fontSize: 12,
+                                              color: AppColor.grey,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      list.length,
-                                      (index) => DataRow(
-                                        onSelectChanged: (value) {
-                                          watchRef
-                                              .setPatientDetails(list[index]);
-                                          VTPatientDto patientDetails =
-                                              list[index];
-                                          if (context.mounted) {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    VisionTechnicianPreliminaryAssessmentPage(
-                                                  patientDetails:
-                                                      patientDetails,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                        cells: generateListTileSearchResults(
-                                            list[index], context, watchRef),
+                                      ],
+                                      rows: List<DataRow>.generate(
+                                        data.length,
+                                        (index) => DataRow(
+                                          cells: generateListTileSearchResults(
+                                            data[index],
+                                            context,
+                                            watchRef,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -243,10 +241,21 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     );
   }
 
-  List<DataCell> generateListTileSearchResults(VTPatientDto data,
-      BuildContext context, VisionTechnicianSearchProvider watchRef) {
+  List<DataCell> generateListTileSearchResults(
+    VTPatientDto data,
+    BuildContext context,
+    VisionTechnicianSearchProvider watchRef,
+  ) {
     return [
       DataCell(
+        onTap: () {
+          watchRef.setPatientDetails(data);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return VisionTechnicianAssessmentTimeline(
+              patientDetails: data,
+            );
+          }));
+        },
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -263,7 +272,8 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
               overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(
                 fontSize: 12,
-                color: AppColor.grey,
+                color: AppColor.blue,
+                decoration: TextDecoration.underline,
               ),
             ),
           ],
@@ -278,6 +288,20 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
         ),
       ),
       DataCell(
+        onTap: () {
+          watchRef.setPatientDetails(data);
+          VTPatientDto patientDetails = data;
+          if (context.mounted) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VisionTechnicianPreliminaryAssessmentPage(
+                  patientDetails: patientDetails,
+                ),
+              ),
+            );
+          }
+        },
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -286,7 +310,11 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
               "${data.encounterId ?? ""}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(fontSize: 14),
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.blue,
+                decoration: TextDecoration.underline,
+              ),
             ),
             const SizedBox(height: 4),
             Text(
@@ -304,41 +332,21 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
       ),
       DataCell(
         Text(
-          data.status ?? "",
+          encounterStatusMapper(data.encounterStatus),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(fontSize: 14),
         ),
       ),
       DataCell(
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
+        Text(
+          categoryMapper(data.category),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: applyRobotoFont(
+            fontSize: 14,
             color: categoryColor(data.category),
-            borderRadius: BorderRadius.circular(14),
           ),
-          child: Text(
-            categoryMapper(data.category),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.white,
-            ),
-          ),
-        ),
-      ),
-      DataCell(
-        IconButton(
-          onPressed: () {
-            watchRef.setPatientDetails(data);
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return VisionTechnicianAssessmentTimeline(
-                patientDetails: data,
-              );
-            }));
-          },
-          icon: const Icon(Icons.timeline_outlined),
         ),
       ),
     ];
@@ -350,6 +358,16 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     String newCategory =
         "${category.toString().split('.').last.sentenceCase()} Consultation";
     return newCategory;
+  }
+
+  String encounterStatusMapper(EncounterStatus? status) {
+    if (status == null) return "";
+
+    return switch (status) {
+      EncounterStatus.COMPLETED => "Closed",
+      EncounterStatus.IN_PROGRESS => "In Progress",
+      EncounterStatus.CANCELLED => "Cancelled",
+    };
   }
 
   Color categoryColor(SeverityCategory? category) {

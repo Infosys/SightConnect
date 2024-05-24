@@ -8,7 +8,7 @@ class SharedPreferenceService {
     try {
       _sharedPreferences = await SharedPreferences.getInstance();
     } catch (e) {
-      logger.d({
+      logger.e({
         "error": "SharedPrefService.init",
       });
     }
@@ -26,8 +26,48 @@ class SharedPreferenceService {
     await _sharedPreferences.setDouble("fontScale", value);
   }
 
-  static set storeTumblingOverInfo(bool value) {
-    _sharedPreferences.setBool("tumblingOverInfo", value);
+  static Future<void> storeTumblingOverInfo(bool value) async {
+    await _sharedPreferences.setBool("tumblingOverInfo", value);
+  }
+
+  static Future<void> storeTenantId(int value) async {
+    await _sharedPreferences.setInt("tenantId", value);
+  }
+
+  static Future<void> storeOrganizationId(int value) async {
+    await _sharedPreferences.setInt("organizationId", value);
+  }
+
+  static Future<void> storeTenantIdVt(int value) async {
+    await _sharedPreferences.setInt("tenantIdVt", value);
+  }
+
+  static Future<void> storeOrganizationIdVt(int value) async {
+    await _sharedPreferences.setInt("organizationIdVt", value);
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////
+
+  static int? get getTenantIdVt {
+    logger.d("getTenantIdVt: ${_sharedPreferences.getInt("tenantIdVt")}");
+    return _sharedPreferences.getInt("tenantIdVt");
+  }
+
+  static int? get getOrganizationIdVt {
+    logger.d(
+        "getOrganizationIdVt: ${_sharedPreferences.getInt("organizationIdVt")}");
+    return _sharedPreferences.getInt("organizationIdVt");
+  }
+
+  static int? get getTenantId {
+    logger.d("getTenantId: ${_sharedPreferences.getInt("tenantId")}");
+    return _sharedPreferences.getInt("tenantId");
+  }
+
+  static int? get getOrganizationId {
+    logger
+        .d("getOrganizationId: ${_sharedPreferences.getInt("organizationId")}");
+    return _sharedPreferences.getInt("organizationId");
   }
 
   static String? get getLanguage => _sharedPreferences.getString("language");
@@ -41,10 +81,18 @@ class SharedPreferenceService {
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 
-  static Future<void> clearAll() async {
-    await _sharedPreferences.remove("language");
-    await _sharedPreferences.remove("fontScale");
-    await _sharedPreferences.remove("dontShowVisualAcuityStatus");
-    await _sharedPreferences.remove("tumblingOverInfo");
+  static Future<void> clearAll([bool persistId = false]) async {
+    // await _sharedPreferences.remove("language");
+    if (persistId) {
+      await _sharedPreferences.remove("fontScale");
+      await _sharedPreferences.remove("dontShowVisualAcuityStatus");
+      await _sharedPreferences.remove("tumblingOverInfo");
+    } else {
+      await _sharedPreferences.remove("tenantId");
+      await _sharedPreferences.remove("organizationId");
+      await _sharedPreferences.remove("fontScale");
+      await _sharedPreferences.remove("dontShowVisualAcuityStatus");
+      await _sharedPreferences.remove("tumblingOverInfo");
+    }
   }
 }
