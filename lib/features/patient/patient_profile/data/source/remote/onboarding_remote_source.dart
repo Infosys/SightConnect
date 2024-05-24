@@ -30,7 +30,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
 
   @override
   Future<PatientModel> onboardPatient(PatientModel patientDTO) async {
-    const endpoint = "/services/orchestration/api/patients/onboard";
+    const endpoint = "/services/orchestration/api/v2/patients/onboard";
     try {
       var response = await _dio.post(endpoint, data: patientDTO.toJson());
       return PatientModel.fromJson(response.data);
@@ -43,7 +43,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
   @override
   Future<PatientResponseModel> getPatientProfile(int patientId,
       [IdentifierType? identifierType, String? value]) async {
-    const endpoint = '/services/orchestration/api/patients/extended';
+    const endpoint = '/services/orchestration/api/v2/patients/extended';
 
     Map<String, dynamic>? queryParameters = {
       "patientId": "$patientId",
@@ -72,7 +72,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
     PatientModel patientDTO,
   ) async {
     final endpoint =
-        "/services/orchestration/api/patients/${patientDTO.patientId}";
+        "/services/orchestration/api/v2/patients/${patientDTO.patientId}";
     try {
       var response = await _dio.put(endpoint, data: patientDTO.toJson());
       return PatientResponseModel.fromJson(response.data);
@@ -91,7 +91,7 @@ class PatientAuthRemoteSourceImpl implements PatientAuthRemoteSource {
     }
 
     final endpoint =
-        "/services/orchestration/api/patients/extended/mobile/$phoneNumber?patientType=${PatientType.PRIMARY.name}";
+        "/services/orchestration/api/v2/patients/extended/mobile/$phoneNumber?patientType=${PatientType.PRIMARY.name}";
 
     try {
       final response = await _dio.get<List<dynamic>>(endpoint);

@@ -29,7 +29,7 @@ class VTHomeRemoteSourceImpl implements VTHomeRemoteSource {
   @override
   Future<List<VTPatientDto>> getListOfPatients(TableParams tableParams) async {
     String endPoint =
-        '/services/orchestration/api/patients/triage-reports/practitioners/$_vtId?';
+        '/services/orchestration/api/v2/patients/triage-reports/practitioners/$_vtId?';
     if (tableParams.category != "ALL") {
       endPoint += "category=${tableParams.category}&";
     }
@@ -54,7 +54,7 @@ class VTHomeRemoteSourceImpl implements VTHomeRemoteSource {
   @override
   Future<List<VtAnalyticsStats>> getVtAnalyticsStats() {
     String endPoint =
-        '/services/orchestration/api/analytics/performers/statistics?performer-id=$_vtId';
+        '/services/orchestration/api/analytics/v2/performers/statistics?performer-id=$_vtId';
     try {
       final response = _dio.get(endPoint);
       return response.then((value) => value.data

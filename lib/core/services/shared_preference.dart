@@ -26,24 +26,24 @@ class SharedPreferenceService {
     await _sharedPreferences.setDouble("fontScale", value);
   }
 
-  static set storeTumblingOverInfo(bool value) {
-    _sharedPreferences.setBool("tumblingOverInfo", value);
+  static Future<void> storeTumblingOverInfo(bool value) async {
+    await _sharedPreferences.setBool("tumblingOverInfo", value);
   }
 
-  static set storeTenantId(int value) {
-    _sharedPreferences.setInt("tenantId", value);
+  static Future<void> storeTenantId(int value) async {
+    await _sharedPreferences.setInt("tenantId", value);
   }
 
-  static set storeOrganizationId(int value) {
-    _sharedPreferences.setInt("organizationId", value);
+  static Future<void> storeOrganizationId(int value) async {
+    await _sharedPreferences.setInt("organizationId", value);
   }
 
-  static set storeTenantIdVt(int value) {
-    _sharedPreferences.setInt("tenantIdVt", value);
+  static Future<void> storeTenantIdVt(int value) async {
+    await _sharedPreferences.setInt("tenantIdVt", value);
   }
 
-  static set storeOrganizationIdVt(int value) {
-    _sharedPreferences.setInt("organizationIdVt", value);
+  static Future<void> storeOrganizationIdVt(int value) async {
+    await _sharedPreferences.setInt("organizationIdVt", value);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////

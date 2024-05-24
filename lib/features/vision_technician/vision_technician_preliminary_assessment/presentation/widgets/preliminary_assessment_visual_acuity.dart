@@ -187,7 +187,7 @@ class PreliminaryAssessmentVisualAcuity extends HookConsumerWidget {
     double maximumValue =
         double.parse(selectedEquipment.deviceObservation!.rangeMax!);
     if (value == null || value.isEmpty) {
-      return 'Please enter a valid value. ex (-20 to 20)';
+      return 'Please enter a valid value';
     } else if (value.isNotEmpty &&
         RegExp(r'^\d+(\.\d+)?$').hasMatch(value) == false) {
       return "Only numerical/decimal values are allowed";

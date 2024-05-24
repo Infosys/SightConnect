@@ -8,14 +8,17 @@ final globalTenantProvider =
     ChangeNotifierProvider((ref) => GlobalTenantProvider());
 
 class GlobalTenantProvider extends ChangeNotifier {
-  int? _tenantId = SharedPreferenceService.getTenantId;
-  int? _organizationId = SharedPreferenceService.getOrganizationId;
-  // bool _isTenantSelection = false;
+  int? _tenantId;
+  int? _organizationId;
+  int? _tenantIdVt;
+  int? _organizationIdVt;
 
-  int? _tenantIdVt = SharedPreferenceService.getTenantIdVt;
-  int? _organizationIdVt = SharedPreferenceService.getOrganizationIdVt;
-
-  GlobalTenantProvider();
+  GlobalTenantProvider() {
+    _tenantId = SharedPreferenceService.getTenantId;
+    _organizationId = SharedPreferenceService.getOrganizationId;
+    _tenantIdVt = SharedPreferenceService.getTenantIdVt;
+    _organizationIdVt = SharedPreferenceService.getOrganizationIdVt;
+  }
 
   int? get tenantId => _tenantId;
   int? get organizationId => _organizationId;
@@ -32,29 +35,55 @@ class GlobalTenantProvider extends ChangeNotifier {
 
   void setTenantIdVt(int? tenantIdVt) {
     _tenantIdVt = tenantIdVt;
-    SharedPreferenceService.storeTenantIdVt = tenantIdVt!;
+    SharedPreferenceService.storeTenantIdVt(tenantIdVt!);
     logger.d('Tenant ID VT: $_tenantIdVt');
     notifyListeners();
   }
 
   void setOrganizationIdVt(int? organizationIdVt) {
     _organizationIdVt = organizationIdVt;
-    SharedPreferenceService.storeOrganizationIdVt = organizationIdVt!;
+    SharedPreferenceService.storeOrganizationIdVt(organizationIdVt!);
     logger.d('Organization ID VT: $_organizationIdVt');
     notifyListeners();
   }
 
   void setTenantId(int? tenantId) {
     _tenantId = tenantId;
-    SharedPreferenceService.storeTenantId = tenantId!;
+    SharedPreferenceService.storeTenantId(tenantId!);
     logger.d('Tenant ID: $_tenantId');
     notifyListeners();
   }
 
   void setOrganizationId(int? organizationId) {
     _organizationId = organizationId;
-    SharedPreferenceService.storeOrganizationId = organizationId!;
+    SharedPreferenceService.storeOrganizationId(organizationId!);
     logger.d('Organization ID: $_organizationId');
     notifyListeners();
+  }
+
+  int? getTenantId(String? activeRole) {
+    if (activeRole == null || activeRole.isEmpty) {
+      return null;
+    }
+    if (activeRole == "ROLE_VISION_TECHNICIAN") {
+      logger.d("changing tenant based on Role = VT");
+      return SharedPreferenceService.getTenantIdVt;
+    } else if (activeRole == "ROLE_PATIENT") {
+      logger.d("changing tenant based on Role = Patient");
+      return SharedPreferenceService.getTenantId;
+    }
+    return null;
+  }
+
+  int? getOrganizationId(String? activeRole) {
+    if (activeRole == null || activeRole.isEmpty) {
+      return null;
+    }
+    if (activeRole == "ROLE_VISION_TECHNICIAN") {
+      return SharedPreferenceService.getOrganizationIdVt;
+    } else if (activeRole == "ROLE_PATIENT") {
+      return SharedPreferenceService.getOrganizationId;
+    }
+    return null;
   }
 }

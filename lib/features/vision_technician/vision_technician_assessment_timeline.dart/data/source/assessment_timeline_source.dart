@@ -30,7 +30,7 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
       int encounterId) async {
     try {
       String url =
-          "/services/triage/api/triage/encounters/$encounterId/timeline";
+          "/services/triage/api/v2/triage-report/encounters/$encounterId/timeline";
       final response = await _dio.get<List<dynamic>>(url);
       for (var element in response.data!) {
         logger.d(element);
@@ -51,7 +51,8 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
 
   @override
   Future<List<Encounter>> getEncounters(int patientId) async {
-    String url = "/services/triage/api/triage/encounters?patient-id=$patientId";
+    String url =
+        "/services/triage/api/v2/triage-report/encounters?patient-id=$patientId";
     List<Encounter> list = [];
 
     list = await _dio.get(url).then((value) {
@@ -65,7 +66,7 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
   // @override
   // Future<TriageReportDetailedEntity> getTriageDetailedReport(
   //     int reportId) async {
-  //   final endpoint = "/services/triage/api/triage-report/$reportId/details";
+  //   final endpoint = "/services/triage/api/v2/triage-report/$reportId/details";
 
   //   // return TriageReportDetailedEntity();
   // }

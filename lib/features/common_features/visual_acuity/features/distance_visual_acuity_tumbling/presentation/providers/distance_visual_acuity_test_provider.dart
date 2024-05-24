@@ -1,19 +1,23 @@
 import 'dart:math' as math;
+
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
-
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart'
     hide Performer;
-import 'package:eye_care_for_all/features/common_features/triage/data/source/local/triage_local_source.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
+    as update_model;
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_repository.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/repositories/triage_urgency_repository.dart';
+import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
+    as triage_detailed_model;
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
@@ -24,14 +28,11 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../../../triage/domain/models/enums/performer_role.dart';
+import '../../../../data/local/tumbling_local_source.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../../../../domain/models/tumbling_models.dart';
-import '../../../../data/local/tumbling_local_source.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_update_model.dart'
-    as update_model;
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
-    as triage_detailed_model;
 
 typedef FinalEyesReport = Map<Eye, Map<int, List<UserResponse>>>;
 typedef SingleEyeReport = Map<int, List<UserResponse>>;
@@ -391,6 +392,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
         triageVisualAcuity: res,
       );
       reset();
+      _ref.read(globalVisualAcuityProvider).setShortDistanceTest(true);
     } catch (e) {
       logger.e("$e");
       throw ServerFailure(
@@ -410,7 +412,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
     try {
-     final int drId = _ref.read(globalVisualAcuityProvider).dignosticReportID;
+      final int drId = _ref.read(globalVisualAcuityProvider).dignosticReportID;
       logger.f("inside updateVisualAcuityTumblingResponse");
       final distanceVisionAcuityTumblingResponse =
           await getVisionAcuityTumblingResponse();
@@ -427,8 +429,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
       final reportModel = await getTriageReportByReportId(drId);
 
       if (reportModel == null) {
-        throw ServerFailure(
-            errorMessage: "Could not fetch report of id $drId");
+        throw ServerFailure(errorMessage: "Could not fetch report of id $drId");
       }
 
       TriageUpdateModel triage = TriageUpdateModel(

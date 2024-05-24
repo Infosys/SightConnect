@@ -26,13 +26,13 @@ class PostEquipmentDetailsSourceImpl implements PostEquipmentDetailsSource {
   Future<Either<Failure, PostEquipmentObservationDto>> postEquipmentDetails(
       PostEquipmentObservationDto request) async {
     logger.d("equipment data before posting : ${request.toJson()}");
-    var endpoint = '/services/triage/api/observations';
+    var endpoint = '/services/triage/api/observations/v2/observations';
 
     try {
       final data = jsonEncode(request.toJson());
       final response = await _dio.post(endpoint, data: data);
       final device = PostEquipmentObservationDto.fromJson(response.data);
-      logger.d( "equipment data after posting : ${device.toJson()}");
+      logger.d("equipment data after posting : ${device.toJson()}");
       return Right(device);
     } on DioException catch (e) {
       return Left(ServerFailure(errorMessage: e.error.toString()));

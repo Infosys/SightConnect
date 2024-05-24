@@ -16,7 +16,7 @@ class VTSaveTriageRemoteSourceImpl implements VTSaveTriageRemoteSource {
   @override
   Future<TriagePostModel> saveTriage(TriagePostModel triagePostModel) async {
     try {
-      String endPoint = "/services/triage/api/triage-report";
+      String endPoint = "/services/triage/api/v2/triage-report";
       var response = await dio.post(endPoint, data: triagePostModel.toJson());
 
       return TriagePostModel.fromJson(response.data);

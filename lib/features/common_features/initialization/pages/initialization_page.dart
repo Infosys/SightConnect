@@ -53,8 +53,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
             await PersistentAuthStateService.authState.setActiveRole(role);
-            // Set the active role in dio header
-            ref.read(dioProvider).options.headers["X-Active-Role"] = role;
+
+            // Update the headers with the selected role
+            ref.read(dioProvider.notifier).updateHeaders(activeRole: role);
+
             logger.d("Active Role: $role");
             _profileVerification(selectedProfile);
           } else {

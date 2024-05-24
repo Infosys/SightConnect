@@ -20,7 +20,7 @@ class VTSearchRemoteSourceImpl implements VTSearchRemoteSource {
     if (query.length < 3) throw "List is empty";
 
     var endPoint =
-        '/services/orchestration/api/patients/triage-reports?queryText=$query';
+        '/services/orchestration/api/v2/patients/triage-reports?queryText=$query';
 
     logger.d("endpoint for search $endPoint");
 

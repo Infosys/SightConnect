@@ -212,9 +212,9 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
                                 isLoading.value = true;
                                 // isAcuityDialog.state = true;
 
-                                ref
-                                    .read(globalVisualAcuityProvider)
-                                    .setShortDistanceTest(true);
+                                // ref
+                                //     .read(globalVisualAcuityProvider)
+                                //     .setShortDistanceTest(true);
                                 if (global.isTriageMode()) {
                                   logger.d("Triage Mode");
                                   stepper.goToNextStep();
