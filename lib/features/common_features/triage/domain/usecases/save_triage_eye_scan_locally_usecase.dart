@@ -22,7 +22,6 @@ class SaveTriageEyeScanLocallyUseCase
   ) async {
     final response = await _repository.saveTriageEyeScanLocally(
       triageEyeScan: params.postImagingSelectionModel,
-      patientID: params.patientID,
     );
     return response;
   }
@@ -30,9 +29,7 @@ class SaveTriageEyeScanLocallyUseCase
 
 class SaveTriageEyeScanLocallyParam {
   final List<PostTriageImagingSelectionModel> postImagingSelectionModel;
-  final String patientID;
   SaveTriageEyeScanLocallyParam({
     required this.postImagingSelectionModel,
-    required this.patientID,
   });
 }

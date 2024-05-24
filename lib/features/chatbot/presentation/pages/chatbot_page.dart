@@ -57,7 +57,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   // Init methods
   @override
   void initState() {
-    _chatService = ChatService(ref.read(dioProvider), CONTEXT_LIMIT: 8);
+    _chatService = ChatService(ref.read(chatbotDioProvider), CONTEXT_LIMIT: 8);
 
     _loadChatHistory = widget.loadChatHistory != null
         ? widget.loadChatHistory!

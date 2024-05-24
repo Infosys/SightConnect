@@ -18,7 +18,6 @@ abstract class TriageLocalSource {
 
   Future<TriagePostModel> saveTriageResponse({
     required TriagePostModel triageResponse,
-    required String patientID,
   });
   Future<TriagePostModel> getTriageResponse();
 
@@ -26,11 +25,9 @@ abstract class TriageLocalSource {
 
   Future<void> saveTriageQuestionnaireLocally({
     required List<PostTriageQuestionModel> triageQuestionnaireResponse,
-    required String patientID,
   });
   Future<void> saveTriageVisualAcuityLocally({
     required List<PostTriageObservationsModel> triageVisualAcuity,
-    required String patientID,
   });
 
   Future<void> saveTriageDistanceVisualAcuityLocally({
@@ -39,7 +36,6 @@ abstract class TriageLocalSource {
 
   Future<void> saveTriageEyeScanLocally({
     required List<PostTriageImagingSelectionModel> triageEyeScan,
-    required String patientID,
   });
   Future<List<PostTriageQuestionModel>> getQuestionaireResponse();
   Future<List<PostTriageObservationsModel>> getVisionAcuityTumblingResponse();
@@ -47,8 +43,7 @@ abstract class TriageLocalSource {
   Future<List<PostTriageImagingSelectionModel>> getTriageEyeScanResponse();
 
   Future<void> resetTriage();
-  Future<int> getTriageCurrentStep(String patientID);
-  Future<void> discardLocalTriageEntries();
+  Future<int> getTriageCurrentStep();
 }
 
 class TriageLocalSourceImpl implements TriageLocalSource {
@@ -98,7 +93,7 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   Future<TriagePostModel> getTriageResponse() async {
     final response = await triageDBHelper.getTriageAssessmentResponse();
     if (response.isNotEmpty) {
-      final triageAssessment = TriagePostModel.fromJson(response[0]);
+      final triageAssessment = TriagePostModel.fromJson(response);
       return triageAssessment;
     } else {
       throw Exception("No Triage Assessment Found");
@@ -106,16 +101,12 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<TriagePostModel> saveTriageResponse({
-    required TriagePostModel triageResponse,
-    required String patientID,
-  }) async {
+  Future<TriagePostModel> saveTriageResponse(
+      {required TriagePostModel triageResponse}) async {
     logger.d({
       "saveTriageResponse": json.encode(triageResponse),
     });
-
-    await triageDBHelper.insertTriageResponse(
-        triageResponse: triageResponse, patientID: patientID);
+    await triageDBHelper.insertTriageResponse(triageResponse: triageResponse);
     await triageDBHelper.deleteAllTriageSteps();
     return triageResponse;
   }
@@ -123,7 +114,6 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   @override
   Future<void> saveTriageQuestionnaireLocally({
     required List<PostTriageQuestionModel> triageQuestionnaireResponse,
-    required String patientID,
   }) async {
     logger.d({
       "saveTriageQuestionnaireLocally":
@@ -132,14 +122,12 @@ class TriageLocalSourceImpl implements TriageLocalSource {
 
     await triageDBHelper.insertTriageQuestionnaire(
       triageQuestionnaire: triageQuestionnaireResponse,
-      patientID: patientID,
     );
   }
 
   @override
   Future<void> saveTriageVisualAcuityLocally({
     required List<PostTriageObservationsModel> triageVisualAcuity,
-    required String patientID,
   }) async {
     logger.d({
       "saveTriageVisualAcuityLocally": json.encode(triageVisualAcuity),
@@ -147,7 +135,6 @@ class TriageLocalSourceImpl implements TriageLocalSource {
 
     await triageDBHelper.insertTriageVisualAcuity(
       triageVisualAcuity: triageVisualAcuity,
-      patientID: patientID,
     );
   }
 
@@ -167,14 +154,12 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   @override
   Future<void> saveTriageEyeScanLocally({
     required List<PostTriageImagingSelectionModel> triageEyeScan,
-    required String patientID,
   }) async {
     logger.d({
       "saveTriageEyeScanLocally": json.encode(triageEyeScan),
     });
 
-    triageDBHelper.insertTriageEyeScan(
-        triageEyeScan: triageEyeScan, patientID: patientID);
+    triageDBHelper.insertTriageEyeScan(triageEyeScan: triageEyeScan);
   }
 
   @override
@@ -213,18 +198,13 @@ class TriageLocalSourceImpl implements TriageLocalSource {
   }
 
   @override
-  Future<int> getTriageCurrentStep(String patientID) async {
-    return await triageDBHelper.getTriageCurrentStep(patientID.toString());
+  Future<int> getTriageCurrentStep() async {
+    return await triageDBHelper.getTriageCurrentStep();
   }
 
   @override
   Future<void> deleteTriageResponse() {
     return triageDBHelper.deleteTriageResponse();
-  }
-
-  @override
-  Future<void> discardLocalTriageEntries() {
-    return triageDBHelper.discardLocalTriageEntries();
   }
 }
 

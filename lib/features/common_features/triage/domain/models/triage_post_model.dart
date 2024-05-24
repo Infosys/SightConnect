@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/source.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
@@ -127,7 +126,6 @@ class PostTriageImagingSelectionModel with _$PostTriageImagingSelectionModel {
     String? baseUrl,
     double? score,
     String? fileId,
-    BodySite? bodySite,
   }) = _PostTriageImagingSelectionModel;
 
   factory PostTriageImagingSelectionModel.fromJson(Map<String, dynamic> json) =>

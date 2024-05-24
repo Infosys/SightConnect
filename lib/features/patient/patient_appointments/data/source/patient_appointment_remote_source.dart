@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
+import '../../../../../core/constants/api_constant.dart';
 import '../../../../../main.dart';
 import '../models/uhi_search_model.dart';
 
@@ -35,21 +36,13 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
       StreamController<EuaOnSearchModel>.broadcast();
 
   Stream get doctorStream => _streamController.stream;
-  String? clientId;
 
   Future<void> initializeStompClient() async {
-    final completer = Completer<void>();
     logger.d("inside initializeStompClient");
     _client = StompClient(
       config: StompConfig(
-        url:
-            'ws://eyecare4all-dev.infosysapps.com/services/eua-service/api/v1/euaService/ws-client',
-        webSocketConnectHeaders: {'x-client-id': clientId!},
-        stompConnectHeaders: {'x-client-id': clientId!},
-        onConnect: (connectFrame) {
-          onConnectCallback(connectFrame);
-          completer.complete();
-        },
+        url: ApiConstant.webSocketEua,
+        onConnect: onConnectCallback,
         onWebSocketError: (dynamic error) =>
             logger.e("onWebSocketError : $error"),
         onStompError: (StompFrame frame) => logger.e("onStompError : $frame"),
@@ -58,9 +51,8 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     );
     _client.activate();
     if (_client.isActive) {
-      logger.f("client is active");
+      logger.d("client is active");
     }
-    await completer.future;
   }
 
   onConnectCallback(StompFrame connectFrame) {
@@ -78,16 +70,11 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
   }
 
   void getDoctorsList() async {
-    final completer = Completer<void>();
     logger.d('Connected to the broker');
     _client.subscribe(
-      destination: '/user/topic/return',
-      callback: (frame) {
-        getDoctorosData(frame);
-        completer.complete();
-      },
+      destination: '/topic/return',
+      callback: getDoctorosData,
     );
-    await completer.future;
     notifyListeners();
     // logger.e('Received data from Eua: ${doctorsList.toString()}');
   }
@@ -110,12 +97,9 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
       if (response.statusCode == 200) {
         logger.d("sent data successfully");
         var jsonResponse = response.data;
-        clientId = response.headers.value('x-client-id').toString();
-        logger.f("response data is : ${clientId}");
-        logger.d("response data is : ${response.headers}");
         var status = jsonResponse['message']['ack']['status'];
         if (status == 'ACK') {
-          logger.f('Response has status ACK');
+          logger.d('Response has status ACK');
           return true;
         } else {
           logger.e('Response has status NACK');
@@ -123,7 +107,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
         }
       }
     } on DioException catch (e) {
-      logger.f(e);
+      logger.d(e);
     }
 
     return false;
@@ -187,7 +171,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
 //         );
 //       }
 //     } on DioException catch (e) {
-//       logger.f(e);
+//       logger.d(e);
 //     }
 //     bool isDataAck = await isAck();
 //     return isDataAck;

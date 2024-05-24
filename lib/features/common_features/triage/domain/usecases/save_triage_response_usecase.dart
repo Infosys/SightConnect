@@ -21,14 +21,12 @@ class SaveTriageResponseUseCase
     SaveTriageResponseParam params,
   ) async {
     final response = await _repository.saveTriageResponse(
-        triageResponse: params.triageResponse, patientID: params.patientID);
+        triageResponse: params.triageResponse);
     return response;
   }
 }
 
 class SaveTriageResponseParam {
   final TriagePostModel triageResponse;
-  final String patientID;
-  SaveTriageResponseParam(
-      {required this.triageResponse, required this.patientID});
+  SaveTriageResponseParam({required this.triageResponse});
 }

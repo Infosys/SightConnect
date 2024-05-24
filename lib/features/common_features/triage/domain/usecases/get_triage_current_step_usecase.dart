@@ -17,14 +17,9 @@ class GetTriageCurrentStepUseCase
   GetTriageCurrentStepUseCase(this._repository);
   @override
   Future<Either<Failure, int>> call(GetTriageCurrentStepParam params) async {
-    final response = await _repository.getTriageCurrentStep(
-      params.patientID,
-    );
+    final response = await _repository.getTriageCurrentStep();
     return response;
   }
 }
 
-class GetTriageCurrentStepParam {
-  final String patientID;
-  GetTriageCurrentStepParam(this.patientID);
-}
+class GetTriageCurrentStepParam {}

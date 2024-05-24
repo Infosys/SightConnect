@@ -22,7 +22,6 @@ class SaveTriageVisualAcuityLocallyUseCase
   ) async {
     final response = await _repository.saveTriageVisualAcuityLocally(
       triageVisualAcuity: params.observations,
-      patientID: params.patientID,
     );
     return response;
   }
@@ -30,9 +29,7 @@ class SaveTriageVisualAcuityLocallyUseCase
 
 class SaveTriageVisualAcuityLocallyParam {
   final List<PostTriageObservationsModel> observations;
-  final String patientID;
   SaveTriageVisualAcuityLocallyParam({
     required this.observations,
-    required this.patientID,
   });
 }
