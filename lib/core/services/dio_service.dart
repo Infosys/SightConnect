@@ -33,6 +33,15 @@ final appointmentDioProvider = Provider(
   },
 );
 
+final validationDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(baseUrl: ApiConstant.baseUrl),
+    );
+    return dio;
+  },
+);
+
 final chatbotDioProvider = Provider(
   (ref) {
     final dio = Dio(

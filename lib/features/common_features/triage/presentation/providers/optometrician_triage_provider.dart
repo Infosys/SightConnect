@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/features/common_features/triage/data/mapper/opt
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_long_distance_visual_acuity_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_questionnaire_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_eye_scan_response_locally_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_vision_acuity_tumbling_response_locally_usecase.dart';
@@ -45,6 +46,11 @@ class OptometristTriageProvider extends ChangeNotifier {
         .call(GetVisionAcuityTumblingResponseLocallyParam())
         .then((value) => value.fold((l) => [], (r) => r));
 
+    List<PostTriageObservationsModel> distanceObservation = await ref
+        .read(getLongDistanceVisualAcuityResponseLocallyUseCase)
+        .call(GetLongDistanceVisualAcuityResponseLocallyParam())
+        .then((value) => value.fold((l) => [], (r) => r));
+
     List<PostTriageQuestionModel> questionResponse = await ref
         .read(getQuestionnaireResponseLocallyUseCase)
         .call(GetQuestionnaireResponseLocallyParam())
@@ -67,6 +73,7 @@ class OptometristTriageProvider extends ChangeNotifier {
       ref: ref,
       imagingSelection: imageSelection,
       observations: observations,
+      distanceObservation: distanceObservation,
       questionResponse: questionResponse,
       patientId:
           ref.read(optometritianAddPatientProvider).patientIdController.text,

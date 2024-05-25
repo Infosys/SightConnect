@@ -81,10 +81,10 @@ class _TriagePageState extends ConsumerState<TriagePage> {
           case 1:
             ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
             return const VisualAcuityTumblingPage();
-          // case 2:
-          //   ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-          //   return const DistanceVisualAcuityTumblingPage();
           case 2:
+            ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+            return const DistanceVisualAcuityTumblingPage();
+          case 3:
             return const TriageEyeScanPage();
           default:
             return TriageQuestionnairePage(

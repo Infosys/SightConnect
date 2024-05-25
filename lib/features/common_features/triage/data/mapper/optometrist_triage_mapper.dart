@@ -45,6 +45,7 @@ class OptometristTriageMapper {
   static OptometristTriageResponse convertToTriage({
     required List<PostTriageImagingSelectionModel> imagingSelection,
     required List<PostTriageObservationsModel> observations,
+    required List<PostTriageObservationsModel> distanceObservation,
     required List<PostTriageQuestionModel> questionResponse,
     required Ref ref,
     required String patientId,

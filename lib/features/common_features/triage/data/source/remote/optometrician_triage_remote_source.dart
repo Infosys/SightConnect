@@ -124,6 +124,6 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
 
 var optometristRemoteSource = Provider<OptometristRemoteSource>(
   (ref) => OptometristRemoteSourceImpl(
-    ref.read(dioProvider),
+    ref.read(validationDioProvider),
   ),
 );
