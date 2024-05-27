@@ -206,6 +206,16 @@ class AppDrawer extends HookWidget {
                                         },
                                       ),
                                     );
+                                    break;
+
+                                  case DrawerMenuItemId.refferal:
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Container();
+                                      },
+                                    );
+                                    break;
 
                                   default:
                                 }

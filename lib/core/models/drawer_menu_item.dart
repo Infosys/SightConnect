@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../main.dart';
 
 enum DrawerMenuItemId {
   switchProfile,
@@ -13,6 +15,7 @@ enum DrawerMenuItemId {
   help,
   chatbot,
   tenant,
+  refferal,
 }
 
 class DrawerMenuItem {
@@ -28,6 +31,9 @@ class DrawerMenuItem {
 
 class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
+    bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+    logger.f("isuserbeta : $isUserBeta");
+
     DrawerMenuItem switchProfile = DrawerMenuItem(
       id: DrawerMenuItemId.switchProfile,
       title: loc.switchRole,
@@ -75,6 +81,12 @@ class DrawerMenuItems {
     //   icon: AppIcon.drawerHelpAndSupport,
     // );
 
+    DrawerMenuItem refferal = const DrawerMenuItem(
+      id: DrawerMenuItemId.refferal,
+      title: "Refferal Code",
+      icon: "assets/drawer_icons/accessibility.svg",
+    );
+
     return [
       tenant,
       switchProfile,
@@ -84,6 +96,8 @@ class DrawerMenuItems {
       scanner,
       about,
       privacyPolicy,
+      // if (isUserBeta) refferal,
+      refferal,
       // chatbot
     ];
   }
