@@ -20,11 +20,24 @@ import 'package:upgrader/upgrader.dart';
 import '../../../../../core/services/app_info_service.dart';
 import '../../../../../main.dart';
 
-class PatientHomePage extends ConsumerWidget {
+class PatientHomePage extends ConsumerStatefulWidget {
   const PatientHomePage({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // ref.watch(appUpdateServiceProvider).checkForUpdate();
+  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
+}
+
+class _PatientHomePageState extends ConsumerState<PatientHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await showReferralCollectSheet(context);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -79,30 +92,26 @@ class PatientHomePage extends ConsumerWidget {
             ),
             child: SingleChildScrollView(
               controller: ref.read(patientDashboardProvider).scrollController,
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: AppSize.kl * 3),
+                  SizedBox(height: AppSize.kl * 3),
 
                   // const SizedBox(height: AppSize.km),
                   // PriorityNotificationList(),
-                  InkWell(
-                      onTap: () {
-                        showReferralCollectSheet(context);
-                      },
-                      child: const PatientHeader()),
+                  PatientHeader(),
 
-                  const SizedBox(height: AppSize.km),
-                  const TriageTestCard(),
-                  const SizedBox(height: AppSize.kl),
-                  const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
-                  const SizedBox(height: AppSize.km),
+                  SizedBox(height: AppSize.km),
+                  TriageTestCard(),
+                  SizedBox(height: AppSize.kl),
+                  HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+                  SizedBox(height: AppSize.km),
 
-                  const MyConnectionsList(),
+                  MyConnectionsList(),
 
                   // const RecentServicesCardList(),
-                  const SizedBox(height: AppSize.km),
-                  const PatientFooter(),
+                  SizedBox(height: AppSize.km),
+                  PatientFooter(),
                   // const NearbyVisionCentersList(),
                   // const SizedBox(height: AppSize.km),
 
@@ -120,7 +129,7 @@ class PatientHomePage extends ConsumerWidget {
                   // const SizedBox(height: AppSize.km),
                   // const CampaginsList(),
                   // const PartnerCard(),
-                  const SizedBox(height: AppSize.kl * 3),
+                  SizedBox(height: AppSize.kl * 3),
                 ],
               ),
             ),
