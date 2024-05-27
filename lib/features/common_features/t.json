@@ -1,0 +1,132 @@
+{
+        "id": null,
+        "uuid": "WA2d11e1",
+        "patientId": "yu",
+        "patientAge": null,
+        "patientGender": null,
+        "patientEducation": "",
+        "patientProfession": "",
+        "source": "VALIDATION_APP",
+        "reportId": null,
+        "enounterId": null,
+        "organizationCode": 7,
+        "assessmentCode": 1716803245133739224,
+        "assessmentStartTime": "2024-05-27T09:46:01.516114Z",
+        "assessmentEndTime": "2024-05-27T09:47:25.134212Z",
+        "physicalAssessmentStartTime": "2024-05-27T09:46:01.516114Z",
+        "physicalAssessmentEndTime": "2024-05-27T09:47:25.134213Z",
+        "capturedBy": "+918770386119",
+        "overallUrgency": "RED",
+        "questionnaireRemarks": "",
+        "questionResponse": [
+          {
+            "questionCode": 1052,
+            "response": false
+          },
+          {
+            "questionCode": 1053,
+            "response": false
+          },
+          {
+            "questionCode": 1054,
+            "response": false
+          },
+          {
+            "questionCode": 1055,
+            "response": false
+          },
+          {
+            "questionCode": 1056,
+            "response": false
+          },
+          {
+            "questionCode": 1057,
+            "response": false
+          },
+          {
+            "questionCode": 1058,
+            "response": false
+          },
+          {
+            "questionCode": 1059,
+            "response": false
+          }
+        ],
+        "questionnaireUrgency": "GREEN",
+        "questionnaireReview": "1.1",
+        "observations": [
+          {
+            "observationCode": 1751,
+            "response": 1.0,
+            "observationIdentifier": "BodySite.LEFT_EYE",
+            "observationType": "LOGMAR_NEAR"
+          },
+          {
+            "observationCode": 1752,
+            "response": 1.0,
+            "observationIdentifier": "BodySite.RIGHT_EYE",
+            "observationType": "LOGMAR_NEAR"
+          },
+          {
+            "observationCode": 1753,
+            "response": 1.0,
+            "observationIdentifier": "BodySite.BOTH_EYES",
+            "observationType": "LOGMAR_NEAR"
+          },
+          {
+            "observationCode": 1754,
+            "response": 1.0,
+            "observationIdentifier": "BodySite.LEFT_EYE",
+            "observationType": "LOGMAR_DISTANT"
+          },
+          {
+            "observationCode": 1755,
+            "response": 1.0,
+            "observationIdentifier": "BodySite.RIGHT_EYE",
+            "observationType": "LOGMAR_DISTANT"
+          },
+          {
+            "observationCode": 1756,
+            "response": 1.0,
+            "observationIdentifier": "BodySite.BOTH_EYES",
+            "observationType": "LOGMAR_DISTANT"
+          }
+        ],
+        "observationsRemarks": null,
+        "observationsUrgency": "RED",
+        "observationReview": "1.1",
+        "mediaCapture": [
+          {
+            "mediaCode": null,
+            "fileName": "https://healthconnect.infosysapps.com/services/filems/api/file/download",
+            "fileType": "JPG",
+            "encodingType": "base64-RIGHT"
+          },
+          {
+            "mediaCode": null,
+            "fileName": "https://healthconnect.infosysapps.com/services/filems/api/file/download",
+            "fileType": "JPG",
+            "encodingType": "base64-LEFT"
+          }
+        ],
+        "eyeScanReview": "1.1",
+        "assessmentCompleted": true,
+        "acuityTestcompleted": true,
+        "eyeScanCompleted": true,
+        "mobileAssessmentCompleted": true,
+        "physicalAssessmentCompleted": true,
+        "overallReview": "",
+        "questionnaireScore": "1.0",
+        "observationScore": "3.0",
+        "eyeScanScore": "1",
+        "overallScore": null,
+        "assessmentAssistance": false,
+        "visualAcuityAssistance": false,
+        "visualAcuityAided": false,
+        "eyeScanAssistance": false,
+        "redEye": false,
+        "cataract": false,
+        "languageUsed": "eng",
+        "longDistanceUsed": "2 meters"
+      }
+    

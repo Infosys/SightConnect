@@ -205,6 +205,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
       }
     }).catchError((e) {
       logger.d("error is : $e");
+      ref.read(resetProvider).reset();
       feedback.isLoading = false;
     }).whenComplete(() {
       ref.read(triageStepperProvider).goToNextStep();

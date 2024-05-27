@@ -69,6 +69,10 @@ mixin _$OptometristTriageResponse {
   bool? get visualAcuityAssistance => throw _privateConstructorUsedError;
   bool? get visualAcuityAided => throw _privateConstructorUsedError;
   bool? get eyeScanAssistance => throw _privateConstructorUsedError;
+  bool? get redEye => throw _privateConstructorUsedError;
+  bool? get cataract => throw _privateConstructorUsedError;
+  String? get languageUsed => throw _privateConstructorUsedError;
+  String? get longDistanceUsed => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -124,7 +128,11 @@ abstract class $OptometristTriageResponseCopyWith<$Res> {
       bool? assessmentAssistance,
       bool? visualAcuityAssistance,
       bool? visualAcuityAided,
-      bool? eyeScanAssistance});
+      bool? eyeScanAssistance,
+      bool? redEye,
+      bool? cataract,
+      String? languageUsed,
+      String? longDistanceUsed});
 }
 
 /// @nodoc
@@ -183,6 +191,10 @@ class _$OptometristTriageResponseCopyWithImpl<$Res,
     Object? visualAcuityAssistance = freezed,
     Object? visualAcuityAided = freezed,
     Object? eyeScanAssistance = freezed,
+    Object? redEye = freezed,
+    Object? cataract = freezed,
+    Object? languageUsed = freezed,
+    Object? longDistanceUsed = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -353,6 +365,22 @@ class _$OptometristTriageResponseCopyWithImpl<$Res,
           ? _value.eyeScanAssistance
           : eyeScanAssistance // ignore: cast_nullable_to_non_nullable
               as bool?,
+      redEye: freezed == redEye
+          ? _value.redEye
+          : redEye // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cataract: freezed == cataract
+          ? _value.cataract
+          : cataract // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      languageUsed: freezed == languageUsed
+          ? _value.languageUsed
+          : languageUsed // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longDistanceUsed: freezed == longDistanceUsed
+          ? _value.longDistanceUsed
+          : longDistanceUsed // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -408,7 +436,11 @@ abstract class _$$OptometristTriageResponseImplCopyWith<$Res>
       bool? assessmentAssistance,
       bool? visualAcuityAssistance,
       bool? visualAcuityAided,
-      bool? eyeScanAssistance});
+      bool? eyeScanAssistance,
+      bool? redEye,
+      bool? cataract,
+      String? languageUsed,
+      String? longDistanceUsed});
 }
 
 /// @nodoc
@@ -466,6 +498,10 @@ class __$$OptometristTriageResponseImplCopyWithImpl<$Res>
     Object? visualAcuityAssistance = freezed,
     Object? visualAcuityAided = freezed,
     Object? eyeScanAssistance = freezed,
+    Object? redEye = freezed,
+    Object? cataract = freezed,
+    Object? languageUsed = freezed,
+    Object? longDistanceUsed = freezed,
   }) {
     return _then(_$OptometristTriageResponseImpl(
       id: freezed == id
@@ -636,6 +672,22 @@ class __$$OptometristTriageResponseImplCopyWithImpl<$Res>
           ? _value.eyeScanAssistance
           : eyeScanAssistance // ignore: cast_nullable_to_non_nullable
               as bool?,
+      redEye: freezed == redEye
+          ? _value.redEye
+          : redEye // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cataract: freezed == cataract
+          ? _value.cataract
+          : cataract // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      languageUsed: freezed == languageUsed
+          ? _value.languageUsed
+          : languageUsed // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longDistanceUsed: freezed == longDistanceUsed
+          ? _value.longDistanceUsed
+          : longDistanceUsed // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -686,7 +738,11 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
       this.assessmentAssistance,
       this.visualAcuityAssistance,
       this.visualAcuityAided,
-      this.eyeScanAssistance})
+      this.eyeScanAssistance,
+      this.redEye,
+      this.cataract,
+      this.languageUsed,
+      this.longDistanceUsed})
       : _questionResponse = questionResponse,
         _observations = observations,
         _mediaCapture = mediaCapture;
@@ -807,10 +863,18 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
   final bool? visualAcuityAided;
   @override
   final bool? eyeScanAssistance;
+  @override
+  final bool? redEye;
+  @override
+  final bool? cataract;
+  @override
+  final String? languageUsed;
+  @override
+  final String? longDistanceUsed;
 
   @override
   String toString() {
-    return 'OptometristTriageResponse(id: $id, uuid: $uuid, patientId: $patientId, patientAge: $patientAge, patientGender: $patientGender, patientEducation: $patientEducation, patientProfession: $patientProfession, source: $source, reportId: $reportId, enounterId: $enounterId, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, physicalAssessmentStartTime: $physicalAssessmentStartTime, physicalAssessmentEndTime: $physicalAssessmentEndTime, capturedBy: $capturedBy, overallUrgency: $overallUrgency, questionnaireRemarks: $questionnaireRemarks, questionResponse: $questionResponse, questionnaireUrgency: $questionnaireUrgency, questionnaireReview: $questionnaireReview, observations: $observations, observationsRemarks: $observationsRemarks, observationsUrgency: $observationsUrgency, observationReview: $observationReview, mediaCapture: $mediaCapture, eyeScanReview: $eyeScanReview, assessmentCompleted: $assessmentCompleted, acuityTestcompleted: $acuityTestcompleted, eyeScanCompleted: $eyeScanCompleted, mobileAssessmentCompleted: $mobileAssessmentCompleted, physicalAssessmentCompleted: $physicalAssessmentCompleted, overallReview: $overallReview, questionnaireScore: $questionnaireScore, observationScore: $observationScore, eyeScanScore: $eyeScanScore, overallScore: $overallScore, assessmentAssistance: $assessmentAssistance, visualAcuityAssistance: $visualAcuityAssistance, visualAcuityAided: $visualAcuityAided, eyeScanAssistance: $eyeScanAssistance)';
+    return 'OptometristTriageResponse(id: $id, uuid: $uuid, patientId: $patientId, patientAge: $patientAge, patientGender: $patientGender, patientEducation: $patientEducation, patientProfession: $patientProfession, source: $source, reportId: $reportId, enounterId: $enounterId, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, physicalAssessmentStartTime: $physicalAssessmentStartTime, physicalAssessmentEndTime: $physicalAssessmentEndTime, capturedBy: $capturedBy, overallUrgency: $overallUrgency, questionnaireRemarks: $questionnaireRemarks, questionResponse: $questionResponse, questionnaireUrgency: $questionnaireUrgency, questionnaireReview: $questionnaireReview, observations: $observations, observationsRemarks: $observationsRemarks, observationsUrgency: $observationsUrgency, observationReview: $observationReview, mediaCapture: $mediaCapture, eyeScanReview: $eyeScanReview, assessmentCompleted: $assessmentCompleted, acuityTestcompleted: $acuityTestcompleted, eyeScanCompleted: $eyeScanCompleted, mobileAssessmentCompleted: $mobileAssessmentCompleted, physicalAssessmentCompleted: $physicalAssessmentCompleted, overallReview: $overallReview, questionnaireScore: $questionnaireScore, observationScore: $observationScore, eyeScanScore: $eyeScanScore, overallScore: $overallScore, assessmentAssistance: $assessmentAssistance, visualAcuityAssistance: $visualAcuityAssistance, visualAcuityAided: $visualAcuityAided, eyeScanAssistance: $eyeScanAssistance, redEye: $redEye, cataract: $cataract, languageUsed: $languageUsed, longDistanceUsed: $longDistanceUsed)';
   }
 
   @override
@@ -891,7 +955,11 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
             (identical(other.assessmentAssistance, assessmentAssistance) || other.assessmentAssistance == assessmentAssistance) &&
             (identical(other.visualAcuityAssistance, visualAcuityAssistance) || other.visualAcuityAssistance == visualAcuityAssistance) &&
             (identical(other.visualAcuityAided, visualAcuityAided) || other.visualAcuityAided == visualAcuityAided) &&
-            (identical(other.eyeScanAssistance, eyeScanAssistance) || other.eyeScanAssistance == eyeScanAssistance));
+            (identical(other.eyeScanAssistance, eyeScanAssistance) || other.eyeScanAssistance == eyeScanAssistance) &&
+            (identical(other.redEye, redEye) || other.redEye == redEye) &&
+            (identical(other.cataract, cataract) || other.cataract == cataract) &&
+            (identical(other.languageUsed, languageUsed) || other.languageUsed == languageUsed) &&
+            (identical(other.longDistanceUsed, longDistanceUsed) || other.longDistanceUsed == longDistanceUsed));
   }
 
   @JsonKey(ignore: true)
@@ -939,7 +1007,11 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
         assessmentAssistance,
         visualAcuityAssistance,
         visualAcuityAided,
-        eyeScanAssistance
+        eyeScanAssistance,
+        redEye,
+        cataract,
+        languageUsed,
+        longDistanceUsed
       ]);
 
   @JsonKey(ignore: true)
@@ -1000,7 +1072,11 @@ abstract class _OptometristTriageResponse implements OptometristTriageResponse {
       final bool? assessmentAssistance,
       final bool? visualAcuityAssistance,
       final bool? visualAcuityAided,
-      final bool? eyeScanAssistance}) = _$OptometristTriageResponseImpl;
+      final bool? eyeScanAssistance,
+      final bool? redEye,
+      final bool? cataract,
+      final String? languageUsed,
+      final String? longDistanceUsed}) = _$OptometristTriageResponseImpl;
 
   factory _OptometristTriageResponse.fromJson(Map<String, dynamic> json) =
       _$OptometristTriageResponseImpl.fromJson;
@@ -1093,6 +1169,14 @@ abstract class _OptometristTriageResponse implements OptometristTriageResponse {
   bool? get visualAcuityAided;
   @override
   bool? get eyeScanAssistance;
+  @override
+  bool? get redEye;
+  @override
+  bool? get cataract;
+  @override
+  String? get languageUsed;
+  @override
+  String? get longDistanceUsed;
   @override
   @JsonKey(ignore: true)
   _$$OptometristTriageResponseImplCopyWith<_$OptometristTriageResponseImpl>
@@ -1263,6 +1347,8 @@ Observation _$ObservationFromJson(Map<String, dynamic> json) {
 mixin _$Observation {
   int? get observationCode => throw _privateConstructorUsedError;
   double? get response => throw _privateConstructorUsedError;
+  String? get observationIdentifier => throw _privateConstructorUsedError;
+  ObservationCode? get observationType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1276,7 +1362,11 @@ abstract class $ObservationCopyWith<$Res> {
           Observation value, $Res Function(Observation) then) =
       _$ObservationCopyWithImpl<$Res, Observation>;
   @useResult
-  $Res call({int? observationCode, double? response});
+  $Res call(
+      {int? observationCode,
+      double? response,
+      String? observationIdentifier,
+      ObservationCode? observationType});
 }
 
 /// @nodoc
@@ -1294,6 +1384,8 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
   $Res call({
     Object? observationCode = freezed,
     Object? response = freezed,
+    Object? observationIdentifier = freezed,
+    Object? observationType = freezed,
   }) {
     return _then(_value.copyWith(
       observationCode: freezed == observationCode
@@ -1304,6 +1396,14 @@ class _$ObservationCopyWithImpl<$Res, $Val extends Observation>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as double?,
+      observationIdentifier: freezed == observationIdentifier
+          ? _value.observationIdentifier
+          : observationIdentifier // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationType: freezed == observationType
+          ? _value.observationType
+          : observationType // ignore: cast_nullable_to_non_nullable
+              as ObservationCode?,
     ) as $Val);
   }
 }
@@ -1316,7 +1416,11 @@ abstract class _$$ObservationImplCopyWith<$Res>
       __$$ObservationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? observationCode, double? response});
+  $Res call(
+      {int? observationCode,
+      double? response,
+      String? observationIdentifier,
+      ObservationCode? observationType});
 }
 
 /// @nodoc
@@ -1332,6 +1436,8 @@ class __$$ObservationImplCopyWithImpl<$Res>
   $Res call({
     Object? observationCode = freezed,
     Object? response = freezed,
+    Object? observationIdentifier = freezed,
+    Object? observationType = freezed,
   }) {
     return _then(_$ObservationImpl(
       observationCode: freezed == observationCode
@@ -1342,6 +1448,14 @@ class __$$ObservationImplCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as double?,
+      observationIdentifier: freezed == observationIdentifier
+          ? _value.observationIdentifier
+          : observationIdentifier // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observationType: freezed == observationType
+          ? _value.observationType
+          : observationType // ignore: cast_nullable_to_non_nullable
+              as ObservationCode?,
     ));
   }
 }
@@ -1349,7 +1463,11 @@ class __$$ObservationImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ObservationImpl implements _Observation {
-  const _$ObservationImpl({this.observationCode, this.response});
+  const _$ObservationImpl(
+      {this.observationCode,
+      this.response,
+      this.observationIdentifier,
+      this.observationType});
 
   factory _$ObservationImpl.fromJson(Map<String, dynamic> json) =>
       _$$ObservationImplFromJson(json);
@@ -1358,10 +1476,14 @@ class _$ObservationImpl implements _Observation {
   final int? observationCode;
   @override
   final double? response;
+  @override
+  final String? observationIdentifier;
+  @override
+  final ObservationCode? observationType;
 
   @override
   String toString() {
-    return 'Observation(observationCode: $observationCode, response: $response)';
+    return 'Observation(observationCode: $observationCode, response: $response, observationIdentifier: $observationIdentifier, observationType: $observationType)';
   }
 
   @override
@@ -1372,12 +1494,17 @@ class _$ObservationImpl implements _Observation {
             (identical(other.observationCode, observationCode) ||
                 other.observationCode == observationCode) &&
             (identical(other.response, response) ||
-                other.response == response));
+                other.response == response) &&
+            (identical(other.observationIdentifier, observationIdentifier) ||
+                other.observationIdentifier == observationIdentifier) &&
+            (identical(other.observationType, observationType) ||
+                other.observationType == observationType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, observationCode, response);
+  int get hashCode => Object.hash(runtimeType, observationCode, response,
+      observationIdentifier, observationType);
 
   @JsonKey(ignore: true)
   @override
@@ -1395,7 +1522,10 @@ class _$ObservationImpl implements _Observation {
 
 abstract class _Observation implements Observation {
   const factory _Observation(
-      {final int? observationCode, final double? response}) = _$ObservationImpl;
+      {final int? observationCode,
+      final double? response,
+      final String? observationIdentifier,
+      final ObservationCode? observationType}) = _$ObservationImpl;
 
   factory _Observation.fromJson(Map<String, dynamic> json) =
       _$ObservationImpl.fromJson;
@@ -1404,6 +1534,10 @@ abstract class _Observation implements Observation {
   int? get observationCode;
   @override
   double? get response;
+  @override
+  String? get observationIdentifier;
+  @override
+  ObservationCode? get observationType;
   @override
   @JsonKey(ignore: true)
   _$$ObservationImplCopyWith<_$ObservationImpl> get copyWith =>

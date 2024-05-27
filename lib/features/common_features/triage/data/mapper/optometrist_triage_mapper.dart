@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
@@ -47,6 +48,7 @@ class OptometristTriageMapper {
     required List<PostTriageObservationsModel> observations,
     required List<PostTriageObservationsModel> distanceObservation,
     required List<PostTriageQuestionModel> questionResponse,
+    required List<ObservationDefinitionModel> observationDefinition,
     required Ref ref,
     required String patientId,
     required String educationalQualification,
@@ -82,7 +84,7 @@ class OptometristTriageMapper {
       questionResponse: getQuestionnaireResponse(questionResponse),
       questionnaireUrgency: _questionnaireurgencyMapper(questionnaireUrgency),
       questionnaireReview: _review("questionnaire", ref),
-      observations: getObservations(observations),
+      observations: getObservations(observations+distanceObservation, observationDefinition),
       observationsRemarks: null,
       observationsUrgency: _visualAcuityurgencyMapper(observationUrgency),
       observationReview: _review("observation", ref),
@@ -101,6 +103,10 @@ class OptometristTriageMapper {
       visualAcuityAssistance: ref.read(feedBackProvider).visualAcuityAssistance,
       visualAcuityAided: ref.read(feedBackProvider).visualAcuityAided,
       eyeScanAssistance: ref.read(feedBackProvider).eyeScanAssistance,
+      redEye: false,
+      cataract: false,
+      languageUsed: "eng",
+      longDistanceUsed: "2 meters",
     );
   }
 
@@ -131,13 +137,15 @@ class OptometristTriageMapper {
   }
 
   static List<Observation>? getObservations(
-      List<PostTriageObservationsModel> observations) {
+      List<PostTriageObservationsModel> observations, List<ObservationDefinitionModel> observationDefinition) {
     List<Observation> output = [];
     for (var observation in observations) {
       output.add(
         Observation(
-          observationCode: observation.id,
-          response: double.parse(observation.value?? "404") ,
+          observationCode: observation.identifier,
+          response: double.parse(observation.value?? "404"),
+          observationIdentifier: getObservationIdentifier(observation.identifier!, observationDefinition),
+          observationType: getObservationType(observation.identifier!, observationDefinition)
         ),
       );
     }
@@ -165,6 +173,16 @@ class OptometristTriageMapper {
     ]);
 
     return output;
+  }
+
+  static String getObservationIdentifier(int id, List<ObservationDefinitionModel> observationDefinition){
+     String bodySite = observationDefinition.firstWhere((element) => element.id == id).bodySite.toString();
+      return bodySite;
+  }
+
+  static ObservationCode getObservationType(int id, List<ObservationDefinitionModel> observationDefinition){
+     ObservationCode code = observationDefinition.firstWhere((element) => element.id == id).code!;
+      return code;
   }
 
   static int _generateUniqueNumber() {

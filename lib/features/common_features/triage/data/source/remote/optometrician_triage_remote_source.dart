@@ -32,7 +32,7 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   Future<Either<Failure, OptometristTriageResponse>> saveTriage(
       {required OptometristTriageResponse triage}) async {
     var endpoint = "/services/validation/api/patient-responses";
-    logger.d({
+    logger.f({
       "API saveTriage": triage.toJson(),
     });
 
@@ -44,7 +44,8 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
     if (response.statusCode! >= 200 && response.statusCode! < 210) {
       try {
         return Right(OptometristTriageResponse.fromJson(response.data));
-      } on Exception catch (e) {
+      } on DioException catch (e) {
+         DioErrorHandler.handleDioError(e);
         return Left(ServerFailure(
             errorMessage: 'This is a server exception - ${e.toString()}'));
       }

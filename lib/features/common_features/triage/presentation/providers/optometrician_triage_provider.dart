@@ -1,5 +1,7 @@
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/mapper/optometrist_triage_mapper.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/repositories/triage_urgency_impl.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_assessment_usecase.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_long_distance_visual_acuity_response_locally_usecase.dart';
@@ -12,6 +14,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../data/models/optometrician_triage_response.dart';
 import '../../data/source/remote/optometrician_triage_remote_source.dart';
 
@@ -51,6 +54,20 @@ class OptometristTriageProvider extends ChangeNotifier {
         .call(GetLongDistanceVisualAcuityResponseLocallyParam())
         .then((value) => value.fold((l) => [], (r) => r));
 
+    logger.f("shortObservation : $observations");
+    logger.f("longObservation : $distanceObservation");
+
+    List<ObservationDefinitionModel> observationDefinition = await ref
+        .read(getAssessmentUseCase)
+        .call(GetTriageParam())
+        .then((value) => value.fold(
+            (l) => [], (r) {
+              logger.f("ObservationDefinitionModel : ${r.observations!}");
+              return r.observations!.observationDefinition!;
+            }
+        )
+    );
+
     List<PostTriageQuestionModel> questionResponse = await ref
         .read(getQuestionnaireResponseLocallyUseCase)
         .call(GetQuestionnaireResponseLocallyParam())
@@ -74,6 +91,7 @@ class OptometristTriageProvider extends ChangeNotifier {
       imagingSelection: imageSelection,
       observations: observations,
       distanceObservation: distanceObservation,
+      observationDefinition: observationDefinition,
       questionResponse: questionResponse,
       patientId:
           ref.read(optometritianAddPatientProvider).patientIdController.text,
@@ -88,26 +106,36 @@ class OptometristTriageProvider extends ChangeNotifier {
       totalUrgency: totalUrgency,
       assessmentStartTime:
           ref.read(optometritianAddPatientProvider).assessmentStartTime,
-      questionnaireRemark: ref.read(triageQuestionnaireProvider).questionnaireRemarks,
+      questionnaireRemark:
+          ref.read(triageQuestionnaireProvider).questionnaireRemarks,
     );
 
-    var response =
-        await ref.read(optometristRemoteSource).saveTriage(triage: triage);
+    logger.f("opto data before sending : $triage");
 
-    return response.fold(
-      (failure) {
-        logger.d(" Optometrist saveTriage $failure");
-        Fluttertoast.showToast(
-          msg: "Unable to save the Triage! Please try again.",
-          toastLength: Toast.LENGTH_LONG,
-        );
-        throw failure;
-      },
-      (triageResponse) {
-        logger.d("Optometrist Final Triage Response:  $triageResponse");
-        return triageResponse;
-      },
-    );
+    try {
+      var response =
+          await ref.read(optometristRemoteSource).saveTriage(triage: triage);
+
+      return response.fold(
+        (failure) {
+          logger.f(" Optometrist saveTriage $failure");
+          Fluttertoast.showToast(
+            msg: "Unable to save the Triage! Please try again.",
+            toastLength: Toast.LENGTH_LONG,
+          );
+          throw failure;
+        },
+        (triageResponse) {
+          logger.f("Optometrist Final Triage Response:  $triageResponse");
+          return triageResponse;
+        },
+      );
+    } on Exception catch (e) {
+      DioErrorHandler.handleDioError(e);
+      logger.f("error in save triage from provider : $e");
+    }
+
+    return const OptometristTriageResponse();
   }
 }
 

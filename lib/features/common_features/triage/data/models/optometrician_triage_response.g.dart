@@ -65,6 +65,10 @@ _$OptometristTriageResponseImpl _$$OptometristTriageResponseImplFromJson(
       visualAcuityAssistance: json['visualAcuityAssistance'] as bool?,
       visualAcuityAided: json['visualAcuityAided'] as bool?,
       eyeScanAssistance: json['eyeScanAssistance'] as bool?,
+      redEye: json['redEye'] as bool?,
+      cataract: json['cataract'] as bool?,
+      languageUsed: json['languageUsed'] as String?,
+      longDistanceUsed: json['longDistanceUsed'] as String?,
     );
 
 Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
@@ -117,6 +121,10 @@ Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
       'visualAcuityAssistance': instance.visualAcuityAssistance,
       'visualAcuityAided': instance.visualAcuityAided,
       'eyeScanAssistance': instance.eyeScanAssistance,
+      'redEye': instance.redEye,
+      'cataract': instance.cataract,
+      'languageUsed': instance.languageUsed,
+      'longDistanceUsed': instance.longDistanceUsed,
     };
 
 const _$GenderEnumMap = {
@@ -155,13 +163,26 @@ _$ObservationImpl _$$ObservationImplFromJson(Map<String, dynamic> json) =>
     _$ObservationImpl(
       observationCode: (json['observationCode'] as num?)?.toInt(),
       response: (json['response'] as num?)?.toDouble(),
+      observationIdentifier: json['observationIdentifier'] as String?,
+      observationType: $enumDecodeNullable(
+          _$ObservationCodeEnumMap, json['observationType']),
     );
 
 Map<String, dynamic> _$$ObservationImplToJson(_$ObservationImpl instance) =>
     <String, dynamic>{
       'observationCode': instance.observationCode,
       'response': instance.response,
+      'observationIdentifier': instance.observationIdentifier,
+      'observationType': _$ObservationCodeEnumMap[instance.observationType],
     };
+
+const _$ObservationCodeEnumMap = {
+  ObservationCode.Eye: 'Eye',
+  ObservationCode.Sight: 'Sight',
+  ObservationCode.Testing: 'Testing',
+  ObservationCode.LOGMAR_NEAR: 'LOGMAR_NEAR',
+  ObservationCode.LOGMAR_DISTANT: 'LOGMAR_DISTANT',
+};
 
 _$MediaCaptureImpl _$$MediaCaptureImplFromJson(Map<String, dynamic> json) =>
     _$MediaCaptureImpl(
