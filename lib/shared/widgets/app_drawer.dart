@@ -22,6 +22,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 
 import '../../core/models/drawer_menu_item.dart';
@@ -47,6 +48,13 @@ class AppDrawer extends HookWidget {
     if (allRoles != null && allRoles.length == 1) {
       items = items.where((element) {
         return element.id != DrawerMenuItemId.switchProfile;
+      }).toList();
+    }
+
+    bool isBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+    if (!isBeta) {
+      items = items.where((element) {
+        return element.id != DrawerMenuItemId.referral;
       }).toList();
     }
 
@@ -131,6 +139,25 @@ class AppDrawer extends HookWidget {
                                   case DrawerMenuItemId.language:
                                     Navigator.of(context).pop();
                                     onLanguageChange?.call();
+                                    break;
+
+                                  case DrawerMenuItemId.referral:
+                                    // call api to generate referral code if not already generated
+
+                                    final appName = AppInfoService.appName;
+                                    const referralCode = "LVPHTGSRGJPIYTS";
+                                    final referralMsg =
+                                        "Use my referral code $referralCode on $appName to avail benefits.";
+
+                                    await Share.share(
+                                      referralMsg,
+                                      subject: "Referral Code",
+                                      sharePositionOrigin: Rect.fromCenter(
+                                        center: Offset.zero,
+                                        width: 0,
+                                        height: 0,
+                                      ),
+                                    );
                                     break;
 
                                   case DrawerMenuItemId.assessments:

@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/a
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_collect_sheet.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
@@ -271,6 +272,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _navigateBasedOnRole(NavigatorState navigator, Role role) async {
+    //  REFERRAL CODE
+    await showReferralCollectSheet(context);
     final rolePages = {
       Role.ROLE_PATIENT: const PatientDashboardPage(),
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),

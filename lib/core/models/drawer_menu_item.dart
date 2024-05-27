@@ -13,6 +13,7 @@ enum DrawerMenuItemId {
   help,
   chatbot,
   tenant,
+  referral,
 }
 
 class DrawerMenuItem {
@@ -68,6 +69,11 @@ class DrawerMenuItems {
       title: loc.switchTenant,
       icon: "assets/drawer_icons/accessibility.svg",
     );
+    DrawerMenuItem refferal = const DrawerMenuItem(
+      id: DrawerMenuItemId.referral,
+      title: "Referral",
+      icon: "assets/drawer_icons/referral.svg",
+    );
 
     // DrawerMenuItem chatbot = const DrawerMenuItem(
     //   id: DrawerMenuItemId.chatbot,
@@ -84,6 +90,8 @@ class DrawerMenuItems {
       scanner,
       about,
       privacyPolicy,
+      refferal,
+
       // chatbot
     ];
   }

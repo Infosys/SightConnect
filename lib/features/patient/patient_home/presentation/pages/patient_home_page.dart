@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_collect_sheet.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/my_connections_list.dart';
@@ -78,26 +79,30 @@ class PatientHomePage extends ConsumerWidget {
             ),
             child: SingleChildScrollView(
               controller: ref.read(patientDashboardProvider).scrollController,
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: AppSize.kl * 3),
+                  const SizedBox(height: AppSize.kl * 3),
 
                   // const SizedBox(height: AppSize.km),
                   // PriorityNotificationList(),
-                  PatientHeader(),
+                  InkWell(
+                      onTap: () {
+                        showReferralCollectSheet(context);
+                      },
+                      child: const PatientHeader()),
 
-                  SizedBox(height: AppSize.km),
-                  TriageTestCard(),
-                  SizedBox(height: AppSize.kl),
-                  HelplineCard(helpLine: AppInfoService.tollFreeNumber),
-                  SizedBox(height: AppSize.km),
+                  const SizedBox(height: AppSize.km),
+                  const TriageTestCard(),
+                  const SizedBox(height: AppSize.kl),
+                  const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+                  const SizedBox(height: AppSize.km),
 
-                  MyConnectionsList(),
+                  const MyConnectionsList(),
 
                   // const RecentServicesCardList(),
-                  SizedBox(height: AppSize.km),
-                  PatientFooter(),
+                  const SizedBox(height: AppSize.km),
+                  const PatientFooter(),
                   // const NearbyVisionCentersList(),
                   // const SizedBox(height: AppSize.km),
 
@@ -115,7 +120,7 @@ class PatientHomePage extends ConsumerWidget {
                   // const SizedBox(height: AppSize.km),
                   // const CampaginsList(),
                   // const PartnerCard(),
-                  SizedBox(height: AppSize.kl * 3),
+                  const SizedBox(height: AppSize.kl * 3),
                 ],
               ),
             ),
