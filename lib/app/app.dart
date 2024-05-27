@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
@@ -5,6 +6,7 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/pages/date_time_incorrect_page.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 
@@ -24,7 +27,48 @@ final isJailBrokenProvider = FutureProvider<bool>((ref) async {
   if (kIsWeb) {
     return false;
   }
+
   return await FlutterJailbreakDetection.jailbroken;
+});
+
+final isDateTimeCorrectProvider = FutureProvider<bool>((ref) async {
+  logger.f({
+    'message': 'Checking date time',
+  });
+  if (kIsWeb) {
+    return true;
+  }
+  try {
+    var dio = Dio();
+    var response = await dio.get('https://time.google.com');
+    String? date = response.headers.value('date');
+    DateFormat format = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", 'en_US');
+    if (date == null) {
+      return false;
+    }
+    String serverDateTime = format.parse(date).toIso8601String();
+
+    String currentDateTime = DateTime.now().toUtc().toIso8601String();
+
+    final difference = DateTime.parse('${serverDateTime}Z')
+        .difference(DateTime.parse(currentDateTime))
+        .inMinutes;
+
+    logger.d({
+      'serverDate': serverDateTime,
+      'currentDate': currentDateTime,
+      'difference': difference,
+    });
+
+    if (difference.abs() > 5) {
+      return false;
+    } else {
+      return true;
+    }
+  } catch (e) {
+    logger.e(e);
+    return false;
+  }
 });
 
 class MyApp extends ConsumerWidget {
@@ -48,53 +92,63 @@ class MyApp extends ConsumerWidget {
         if (data) {
           return const SecurePage();
         } else {
-          return Millimeters.fromView(
-            child: MediaQuery(
-              data: mediaQueryData.copyWith(
-                textScaler: Responsive.isMobile(context)
-                    ? TextScaler.linear(
-                        ref
-                            .watch(globalTextScaleFactorProvider)
-                            .textScaleFactor,
-                      )
-                    : const TextScaler.linear(1.3),
-              ),
-              child: MaterialApp(
-                title: AppInfoService.appName,
-                locale: ref.watch(globalLanguageProvider).currentLocale,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                navigatorObservers: [matomoObserver],
-                supportedLocales: appLocales.map((e) => Locale(e.locale)),
-                debugShowCheckedModeBanner: false,
-                themeMode: ref.watch(themeProvider),
-                theme: ref.watch(themeProvider) == ThemeMode.light
-                    ? AppTheme.getLightTheme(context)
-                    : AppTheme.getDarkTheme(context),
-                routes: AppRouter.routes,
+          return ref.watch(isDateTimeCorrectProvider).maybeWhen(data: (data) {
+            if (data) {
+              return Millimeters.fromView(
+                child: MediaQuery(
+                  data: mediaQueryData.copyWith(
+                    textScaler: Responsive.isMobile(context)
+                        ? TextScaler.linear(
+                            ref
+                                .watch(globalTextScaleFactorProvider)
+                                .textScaleFactor,
+                          )
+                        : const TextScaler.linear(1.3),
+                  ),
+                  child: MaterialApp(
+                    title: AppInfoService.appName,
+                    locale: ref.watch(globalLanguageProvider).currentLocale,
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    navigatorObservers: [matomoObserver],
+                    supportedLocales: appLocales.map((e) => Locale(e.locale)),
+                    debugShowCheckedModeBanner: false,
+                    themeMode: ref.watch(themeProvider),
+                    theme: ref.watch(themeProvider) == ThemeMode.light
+                        ? AppTheme.getLightTheme(context)
+                        : AppTheme.getDarkTheme(context),
+                    routes: AppRouter.routes,
 
-                initialRoute: initialRoute,
-                navigatorKey: AppRouter.navigatorKey,
-                onUnknownRoute: AppRouter.onUnknownRoute,
-                // builder: (context, child) {
-                //   return ref.watch(internetProvider).maybeWhen(
-                //         data: (value) {
-                //           if (!value) {
-                //             return const InternetLostPage();
-                //           } else {
-                //             return child!;
-                //           }
-                //         },
-                //         orElse: () => const InternetLostPage(),
-                //       );
-                // },
-              ),
-            ),
-          );
+                    initialRoute: initialRoute,
+                    navigatorKey: AppRouter.navigatorKey,
+                    onUnknownRoute: AppRouter.onUnknownRoute,
+                    // builder: (context, child) {
+                    //   return ref.watch(internetProvider).maybeWhen(
+                    //         data: (value) {
+                    //           if (!value) {
+                    //             return const InternetLostPage();
+                    //           } else {
+                    //             return child!;
+                    //           }
+                    //         },
+                    //         orElse: () => const InternetLostPage(),
+                    //       );
+                    // },
+                  ),
+                ),
+              );
+            } else {
+              return DateTimeIncorrectPage(onRetry: () {
+                // ref.refresh(isDateTimeCorrectProvider);
+              });
+            }
+          }, orElse: () {
+            return const SecurePage();
+          });
         }
       },
       orElse: () {
