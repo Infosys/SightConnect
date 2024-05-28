@@ -125,4 +125,10 @@ class TriageQuestionnaireProvider extends ChangeNotifier {
     );
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 }

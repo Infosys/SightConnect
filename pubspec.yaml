@@ -87,6 +87,7 @@ dependencies:
   # in_app_update: ^4.2.2
   upgrader: ^9.0.0
   geocoding: ^3.0.0
+  app_settings: ^5.1.1
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
