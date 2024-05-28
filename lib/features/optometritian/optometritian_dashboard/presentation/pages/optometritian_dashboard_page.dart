@@ -31,7 +31,6 @@ class _OptometritianDashboardPageState
     extends ConsumerState<OptometritianDashboardPage> {
   @override
   Widget build(BuildContext context) {
-    ref.read(resetProvider).reset();
     var isLoading = useState(false);
     final loc = context.loc!;
     ref.listen(getOptometricianProfileProvider, (previous, next) {

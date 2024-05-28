@@ -28,6 +28,7 @@ class GlobalVisualAcuityProvider extends ChangeNotifier {
 
   void setThreeMeter(bool value) {
     _isThreeMeter = value;
+    
     notifyListeners();
   }
 

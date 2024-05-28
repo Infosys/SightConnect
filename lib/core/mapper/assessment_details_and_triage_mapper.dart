@@ -77,15 +77,23 @@ class AssessmentDetailedAndTriageReportMapper {
       }
       for (Media imagingStudyModel in triageDetailedReport.media!) {
         if (imageMap.containsKey(imagingStudyModel.identifier)) {
-          imageBriefEntity.add(
-            ImageBriefEntity(
-              imageId: imagingStudyModel.id,
-              imageIdentifier: imagingStudyModel.identifier ?? 0,
-              imageUrl:
-                  "${imagingStudyModel.baseUrl}${imagingStudyModel.endpoint}",
-              bodySite: imageMap[imagingStudyModel.identifier].toString(),
-            ),
-          );
+          imageBriefEntity.add(imagingStudyModel.endpoint != null &&
+                  imagingStudyModel.endpoint!
+                      .contains(imagingStudyModel.fileId ?? "")
+              ? ImageBriefEntity(
+                  imageId: imagingStudyModel.id,
+                  imageIdentifier: imagingStudyModel.identifier ?? 0,
+                  imageUrl:
+                      "${imagingStudyModel.baseUrl}${imagingStudyModel.endpoint}",
+                  bodySite: imageMap[imagingStudyModel.identifier].toString(),
+                )
+              : ImageBriefEntity(
+                  imageId: imagingStudyModel.id,
+                  imageIdentifier: imagingStudyModel.identifier ?? 0,
+                  imageUrl:
+                      "${imagingStudyModel.baseUrl}${imagingStudyModel.endpoint}/${imagingStudyModel.fileId}",
+                  bodySite: imageMap[imagingStudyModel.identifier].toString(),
+                ));
         }
       }
 

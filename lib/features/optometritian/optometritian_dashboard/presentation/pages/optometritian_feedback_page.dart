@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
@@ -7,14 +8,15 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../core/models/keycloak.dart';
 import '../../../../../core/services/persistent_auth_service.dart';
 import '../../../../../shared/theme/text_theme.dart';
 import '../../../../common_features/triage/data/source/local/triage_db_helper.dart';
-import '../../../../common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../common_features/triage/presentation/providers/optometrician_triage_provider.dart';
+import '../../../../common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import '../provider/optometritian_add_patient_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
 
@@ -120,7 +122,21 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         feedback.eyeScanAssistance = value;
                       },
                     ),
-                    const SizedBox(height: AppSize.km),
+                    const SizedBox(height: AppSize.ks),
+                    AssistanceCheckBox(
+                        question: "Does patient have Cataract?",
+                        value: feedback.isCataract,
+                        onChanged: (value) {
+                          feedback.isCataract = value;
+                        }),
+                    const SizedBox(height: AppSize.ks),
+                    AssistanceCheckBox(
+                        question: "Does patient have Red Eye?",
+                        value: feedback.isRedEye,
+                        onChanged: (value) {
+                          feedback.isRedEye = value;
+                        }),
+                    const SizedBox(height: AppSize.ks),
                     Text(
                       loc.optoLeaveFeedback,
                       style: applyRobotoFont(

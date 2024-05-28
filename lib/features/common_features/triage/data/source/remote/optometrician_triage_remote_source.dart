@@ -45,7 +45,7 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
       try {
         return Right(OptometristTriageResponse.fromJson(response.data));
       } on DioException catch (e) {
-         DioErrorHandler.handleDioError(e);
+        DioErrorHandler.handleDioError(e);
         return Left(ServerFailure(
             errorMessage: 'This is a server exception - ${e.toString()}'));
       }
@@ -82,6 +82,7 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   @override
   Future<List<OptometristTriageResponse>> getOptometristTriageResponseByFilters(
       DateTime startTime, DateTime entTime, String capturedBy) async {
+    logger.f("get Optometrist Triage Response By Filters");
     var endpoint =
         "/services/validation/api/patient-responses/date/$capturedBy";
 

@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_data.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
@@ -10,6 +12,7 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../core/providers/global_language_provider.dart';
 import '../../../../../main.dart';
 
 class OptometristTriageMapper {
@@ -18,17 +21,17 @@ class OptometristTriageMapper {
     DiagnosticReportTemplateFHIRModel triageResponse,
     List<QuestionResponse> questionnaire,
   ) {
-    logger.d("questionnaire in mapper is : $questionnaire");
+    // logger.d("questionnaire in mapper is : $questionnaire");
     List<QuestionnaireItemFHIRModel> questionnaireItem =
         triageResponse.questionnaire!.questionnaireItem!;
     List<Map<String, dynamic>> output = [];
 
     for (var question in questionnaire) {
       for (var item in questionnaireItem) {
-        logger.d({
-          "question.questionCode": question.questionCode,
-          "item.id": item.id,
-        });
+        // logger.d({
+        //   "question.questionCode": question.questionCode,
+        //   "item.id": item.id,
+        // });
         if ((question.questionCode != null && item.id != null) &&
             (question.questionCode == item.id && question.response == true)) {
           output.add({
@@ -103,10 +106,10 @@ class OptometristTriageMapper {
       visualAcuityAssistance: ref.read(feedBackProvider).visualAcuityAssistance,
       visualAcuityAided: ref.read(feedBackProvider).visualAcuityAided,
       eyeScanAssistance: ref.read(feedBackProvider).eyeScanAssistance,
-      redEye: false,
-      cataract: false,
-      languageUsed: "eng",
-      longDistanceUsed: "2 meters",
+      redEye: ref.read(feedBackProvider).isRedEye,
+      cataract: ref.read(feedBackProvider).isCataract,
+      languageUsed: ref.read(globalLanguageProvider).currentLocale?.languageCode,
+      longDistanceUsed: ref.read(feedBackProvider).isThreeMeters == true ? "3 meters" : "2 meters",
     );
   }
 
@@ -152,22 +155,31 @@ class OptometristTriageMapper {
     return output;
   }
 
+    static List<PostTriageImagingSelectionModel> _removeInvalidImagingSelection(
+    List<PostTriageImagingSelectionModel> imageSelection,
+  ) {
+    imageSelection.removeWhere((element) => element.fileId == null);
+    return imageSelection;
+  }
+
   static List<MediaCapture>? getImagingSelection(
       List<PostTriageImagingSelectionModel> imagingSelection) {
+        logger.f( "imagingSelection : $imagingSelection");
     List<MediaCapture> output = [];
+    imagingSelection = _removeInvalidImagingSelection(imagingSelection);
     output.addAll([
       MediaCapture(
         mediaCode: imagingSelection.first.id,
         encodingType: "base64-RIGHT",
         fileName:
-            "${imagingSelection.first.baseUrl}${imagingSelection.first.endpoint}",
+            "${imagingSelection.first.baseUrl}${imagingSelection.first.endpoint}/${imagingSelection.first.fileId}",
         fileType: "JPG",
       ),
       MediaCapture(
         mediaCode: imagingSelection.last.id,
         encodingType: "base64-LEFT",
         fileName:
-            "${imagingSelection.last.baseUrl}${imagingSelection.last.endpoint}",
+            "${imagingSelection.last.baseUrl}${imagingSelection.last.endpoint}/${imagingSelection.last.fileId}",
         fileType: "JPG",
       ),
     ]);
