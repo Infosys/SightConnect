@@ -224,7 +224,7 @@ class TriageFeedbackDialog extends HookConsumerWidget {
       ref.read(resetProvider).reset();
       feedback.isLoading = false;
     }).whenComplete(() {
-      ref.read(triageStepperProvider).goToNextStep();
+      // ref.read(triageStepperProvider).goToNextStep();
       ref.read(resetProvider).reset();
       Navigator.popUntil(context, (route) => route.isFirst);
     });

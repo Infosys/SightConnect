@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_data.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
@@ -87,7 +86,8 @@ class OptometristTriageMapper {
       questionResponse: getQuestionnaireResponse(questionResponse),
       questionnaireUrgency: _questionnaireurgencyMapper(questionnaireUrgency),
       questionnaireReview: _review("questionnaire", ref),
-      observations: getObservations(observations+distanceObservation, observationDefinition),
+      observations: getObservations(
+          observations + distanceObservation, observationDefinition),
       observationsRemarks: null,
       observationsUrgency: _visualAcuityurgencyMapper(observationUrgency),
       observationReview: _review("observation", ref),
@@ -108,8 +108,11 @@ class OptometristTriageMapper {
       eyeScanAssistance: ref.read(feedBackProvider).eyeScanAssistance,
       redEye: ref.read(feedBackProvider).isRedEye,
       cataract: ref.read(feedBackProvider).isCataract,
-      languageUsed: ref.read(globalLanguageProvider).currentLocale?.languageCode,
-      longDistanceUsed: ref.read(feedBackProvider).isThreeMeters == true ? "3 meters" : "2 meters",
+      languageUsed:
+          ref.read(globalLanguageProvider).currentLocale?.languageCode,
+      longDistanceUsed: ref.read(globalVisualAcuityProvider).optoIsThreeMeters == true
+          ? "3 meters"
+          : "2 meters",
     );
   }
 
@@ -140,22 +143,24 @@ class OptometristTriageMapper {
   }
 
   static List<Observation>? getObservations(
-      List<PostTriageObservationsModel> observations, List<ObservationDefinitionModel> observationDefinition) {
+      List<PostTriageObservationsModel> observations,
+      List<ObservationDefinitionModel> observationDefinition) {
     List<Observation> output = [];
     for (var observation in observations) {
       output.add(
         Observation(
-          observationCode: observation.identifier,
-          response: double.parse(observation.value?? "404"),
-          observationIdentifier: getObservationIdentifier(observation.identifier!, observationDefinition),
-          observationType: getObservationType(observation.identifier!, observationDefinition)
-        ),
+            observationCode: observation.identifier,
+            response: double.parse(observation.value ?? "404"),
+            observationIdentifier: getObservationIdentifier(
+                observation.identifier!, observationDefinition),
+            observationType: getObservationType(
+                observation.identifier!, observationDefinition)),
       );
     }
     return output;
   }
 
-    static List<PostTriageImagingSelectionModel> _removeInvalidImagingSelection(
+  static List<PostTriageImagingSelectionModel> _removeInvalidImagingSelection(
     List<PostTriageImagingSelectionModel> imageSelection,
   ) {
     imageSelection.removeWhere((element) => element.fileId == null);
@@ -164,7 +169,7 @@ class OptometristTriageMapper {
 
   static List<MediaCapture>? getImagingSelection(
       List<PostTriageImagingSelectionModel> imagingSelection) {
-        logger.f( "imagingSelection : $imagingSelection");
+    logger.f("imagingSelection : $imagingSelection");
     List<MediaCapture> output = [];
     imagingSelection = _removeInvalidImagingSelection(imagingSelection);
     output.addAll([
@@ -187,14 +192,20 @@ class OptometristTriageMapper {
     return output;
   }
 
-  static String getObservationIdentifier(int id, List<ObservationDefinitionModel> observationDefinition){
-     String bodySite = observationDefinition.firstWhere((element) => element.id == id).bodySite.toString();
-      return bodySite;
+  static String getObservationIdentifier(
+      int id, List<ObservationDefinitionModel> observationDefinition) {
+    String bodySite = observationDefinition
+        .firstWhere((element) => element.id == id)
+        .bodySite
+        .toString();
+    return bodySite;
   }
 
-  static ObservationCode getObservationType(int id, List<ObservationDefinitionModel> observationDefinition){
-     ObservationCode code = observationDefinition.firstWhere((element) => element.id == id).code!;
-      return code;
+  static ObservationCode getObservationType(
+      int id, List<ObservationDefinitionModel> observationDefinition) {
+    ObservationCode code =
+        observationDefinition.firstWhere((element) => element.id == id).code!;
+    return code;
   }
 
   static int _generateUniqueNumber() {

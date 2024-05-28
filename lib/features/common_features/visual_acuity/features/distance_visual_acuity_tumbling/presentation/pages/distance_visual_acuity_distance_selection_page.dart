@@ -55,7 +55,7 @@ class DistanceVisualAcuityDistanceSelectionPage extends HookConsumerWidget {
                   child: InkWell(
                     onTap: () {
                       isThreeMeters.value = false;
-                      ref.read(feedBackProvider).isThreeMeters = false;
+                      ref.read(globalVisualAcuityProvider).setOptoIsThreeMeters(false);
                       if (!isThreeMeters.value) {
                         currentOptoType.value = 2.908766667;
                       } else {
@@ -101,7 +101,7 @@ class DistanceVisualAcuityDistanceSelectionPage extends HookConsumerWidget {
                   child: InkWell(
                     onTap: () {
                       isThreeMeters.value = true;
-                      ref.read(feedBackProvider).isThreeMeters = true;
+                         ref.read(globalVisualAcuityProvider).setOptoIsThreeMeters(true);
                       if (isThreeMeters.value) {
                         currentOptoType.value = 4.3633;
                       } else {
