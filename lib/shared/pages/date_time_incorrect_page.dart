@@ -120,13 +120,13 @@ final isDateTimeCorrectProvider = FutureProvider<bool>((ref) async {
     if (date == null) {
       return false;
     }
-    String serverDateTime = format.parse(date).toIso8601String();
 
     String currentDateTime = DateTime.now().toUtc().toIso8601String();
+    String serverDateTime = format.parse(date).toIso8601String();
 
-    final difference = DateTime.parse('${serverDateTime}Z')
-        .difference(DateTime.parse(currentDateTime))
-        .inMinutes;
+    final difference = DateTime.parse(currentDateTime)
+        .difference(DateTime.parse('${serverDateTime}Z'))
+        .inSeconds;
 
     logger.d({
       'serverDate': serverDateTime,
@@ -134,7 +134,7 @@ final isDateTimeCorrectProvider = FutureProvider<bool>((ref) async {
       'difference': difference,
     });
 
-    if (difference.abs() > 5) {
+    if (difference > 0 || difference < -60) {
       return false;
     } else {
       return true;
