@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
@@ -17,7 +16,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:millimeters/millimeters.dart';
 
@@ -29,46 +27,6 @@ final isJailBrokenProvider = FutureProvider<bool>((ref) async {
   }
 
   return await FlutterJailbreakDetection.jailbroken;
-});
-
-final isDateTimeCorrectProvider = FutureProvider<bool>((ref) async {
-  logger.f({
-    'message': 'Checking date time',
-  });
-  if (kIsWeb) {
-    return true;
-  }
-  try {
-    var dio = Dio();
-    var response = await dio.get('https://time.google.com');
-    String? date = response.headers.value('date');
-    DateFormat format = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", 'en_US');
-    if (date == null) {
-      return false;
-    }
-    String serverDateTime = format.parse(date).toIso8601String();
-
-    String currentDateTime = DateTime.now().toUtc().toIso8601String();
-
-    final difference = DateTime.parse('${serverDateTime}Z')
-        .difference(DateTime.parse(currentDateTime))
-        .inMinutes;
-
-    logger.d({
-      'serverDate': serverDateTime,
-      'currentDate': currentDateTime,
-      'difference': difference,
-    });
-
-    if (difference.abs() > 5) {
-      return false;
-    } else {
-      return true;
-    }
-  } catch (e) {
-    logger.e(e);
-    return false;
-  }
 });
 
 class MyApp extends ConsumerWidget {
@@ -143,7 +101,7 @@ class MyApp extends ConsumerWidget {
               );
             } else {
               return DateTimeIncorrectPage(onRetry: () {
-                // ref.refresh(isDateTimeCorrectProvider);
+                ref.invalidate(isDateTimeCorrectProvider);
               });
             }
           }, orElse: () {

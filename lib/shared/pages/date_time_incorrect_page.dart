@@ -1,5 +1,10 @@
 import 'package:app_settings/app_settings.dart';
+import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class DateTimeIncorrectPage extends StatelessWidget {
   final VoidCallback onRetry;
@@ -11,6 +16,15 @@ class DateTimeIncorrectPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: onRetry,
+                icon: const Icon(
+                  Icons.refresh,
+                )),
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
@@ -22,7 +36,7 @@ class DateTimeIncorrectPage extends StatelessWidget {
                   size: 50,
                   color: Colors.red,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
                 const Text(
                   'Attention!',
                   style: TextStyle(
@@ -40,25 +54,26 @@ class DateTimeIncorrectPage extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 const Text(
                   'Go to Settings > Date & Time > Enable Automatic date & time',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     color: Colors.black,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 ElevatedButton.icon(
-                    onPressed: () {
-                      AppSettings.openAppSettings(type: AppSettingsType.date)
-                          .then(
-                        (value) => onRetry,
-                      );
-                    },
-                    icon: const Icon(Icons.settings),
-                    label: const Text('Go to Settings'))
+                  onPressed: () async {
+                    await AppSettings.openAppSettings(
+                        type: AppSettingsType.date);
+                  },
+                  icon: const Icon(Icons.settings),
+                  label: const Text(
+                    'Go to Settings',
+                  ),
+                )
               ],
             ),
           ),
@@ -67,3 +82,40 @@ class DateTimeIncorrectPage extends StatelessWidget {
     );
   }
 }
+
+final isDateTimeCorrectProvider = FutureProvider<bool>((ref) async {
+  if (kIsWeb) {
+    return true;
+  }
+  try {
+    var dio = Dio();
+    var response = await dio.get('https://time.google.com');
+    String? date = response.headers.value('date');
+    DateFormat format = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", 'en_US');
+    if (date == null) {
+      return false;
+    }
+    String serverDateTime = format.parse(date).toIso8601String();
+
+    String currentDateTime = DateTime.now().toUtc().toIso8601String();
+
+    final difference = DateTime.parse('${serverDateTime}Z')
+        .difference(DateTime.parse(currentDateTime))
+        .inMinutes;
+
+    logger.d({
+      'serverDate': serverDateTime,
+      'currentDate': currentDateTime,
+      'difference': difference,
+    });
+
+    if (difference.abs() > 5) {
+      return false;
+    } else {
+      return true;
+    }
+  } catch (e) {
+    logger.e(e);
+    return false;
+  }
+});
