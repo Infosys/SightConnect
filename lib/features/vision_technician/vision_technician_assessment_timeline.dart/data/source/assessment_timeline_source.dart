@@ -33,7 +33,7 @@ class AssessmentTimeLineSourceImpl extends AssessmentTimeLineSource {
           "/services/triage/api/v2/triage-report/encounters/$encounterId/timeline";
       final response = await _dio.get<List<dynamic>>(url);
       for (var element in response.data!) {
-        logger.d(element);
+        logger.f("timeline values are : $element");
       }
       final output = response.data!
           .map((e) => AssessmentTimelineViewModel.fromJson(e))

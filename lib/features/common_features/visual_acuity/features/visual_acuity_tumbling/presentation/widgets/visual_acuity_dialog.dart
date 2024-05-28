@@ -272,46 +272,50 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
   }
 
   Future<void> _saveUpdateMode(WidgetRef ref, NavigatorState navigator) async {
-    await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
+    // await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
 
-    navigator.push(
-      MaterialPageRoute(
-        builder: (context) => const DistanceVisualAcuityTumblingPage(),
-      ),
-    );
-    // final result = await ref
-    //     .read(tumblingTestProvider)
-    //     .updateVisualAcuityTumblingResponse();
-
-    // result.fold(
-    //   (failure) {
-    //     Fluttertoast.showToast(
-    //         msg: "Failed to update observation at this moment");
-
-    //          navigator
-    //       // ..pop()
-    //       // ..pop()
-    //       // ..pop()
-    //       // ..pop()
-    //       ..pop()
-    //       ..pop()
-    //       ..pop()
-    //       ..pop()
-    //       ..pop();
-    //   },
-    //   (result) {
-    //     Fluttertoast.showToast(msg: "Observation Updated");
-    //      navigator
-    //       // ..pop()
-    //       // ..pop()
-    //       // ..pop()
-    //       // ..pop()
-    //       ..pop()
-    //       ..pop()
-    //       ..pop()
-    //       ..pop()
-    //       ..pop();
-    //   },
+    // navigator.push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const DistanceVisualAcuityTumblingPage(),
+    //   ),
     // );
+
+    /////////////////////////////////////////////////////////////////////////
+  
+
+    final result = await ref
+        .read(tumblingTestProvider)
+        .updateVisualAcuityTumblingResponse();
+
+    result.fold(
+      (failure) {
+        Fluttertoast.showToast(
+            msg: "Failed to update observation at this moment");
+
+             navigator
+          // ..pop()
+          // ..pop()
+          // ..pop()
+          // ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop();
+      },
+      (result) {
+        Fluttertoast.showToast(msg: "Observation Updated");
+         navigator
+          // ..pop()
+          // ..pop()
+          // ..pop()
+          // ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop()
+          ..pop();
+      },
+    );
   }
 }
