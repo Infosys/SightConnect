@@ -17,13 +17,11 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-import 'package:upgrader/upgrader.dart';
 
 import '../../../../core/models/keycloak.dart';
 import '../../../../core/services/location_service.dart';
@@ -91,8 +89,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     try {
       if (role == Role.ROLE_PATIENT) {
         final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
-        if (isAccepted != null && isAccepted) {
-          await _registerUser(navigator, role);
+        if (isAccepted != null && isAccepted && mounted) {
+          await _handleReferral(navigator, role);
         } else {
           // User stay on the same page
         }
@@ -106,6 +104,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       logger.e("_handleNewUser: $e");
       await _invalidateAndLogout("Server Error. Please login again.");
+    }
+  }
+
+  Future<void> _handleReferral(NavigatorState navigator, Role role) async {
+    bool? referralResult = await showReferralCollectSheet(navigator.context);
+    if (referralResult == true) {
+      await _registerUser(navigator, role);
+    } else {
+      await _registerUser(navigator, role);
     }
   }
 
@@ -272,8 +279,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _navigateBasedOnRole(NavigatorState navigator, Role role) async {
-    //  REFERRAL CODE
-    await showReferralCollectSheet(context);
     final rolePages = {
       Role.ROLE_PATIENT: const PatientDashboardPage(),
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
@@ -306,54 +311,29 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return UpgradeAlert(
-      dialogStyle: UpgradeDialogStyle.cupertino,
-      showIgnore: kDebugMode ? true : false,
-      showLater: kDebugMode ? true : false,
-      shouldPopScope: () => kDebugMode ? true : false,
-      canDismissDialog: kDebugMode ? true : false,
-      onUpdate: () {
-        return true;
-      },
-      upgrader: Upgrader(
-        durationUntilAlertAgain: const Duration(milliseconds: 800),
-        willDisplayUpgrade: ({
-          appStoreVersion,
-          required display,
-          installedVersion,
-          minAppVersion,
-        }) {
-          logger.d({
-            "display : $display",
-            "appStoreVersion : $appStoreVersion",
-            "installedVersion : $installedVersion",
-          });
-        },
-      ),
-      child: TraceableWidget(
-        actionName: "InitializationPage",
-        path: InitializationPage.routeName,
-        child: Scaffold(
-          body: Stack(
-            children: <Widget>[
-              Positioned.fill(
+    return TraceableWidget(
+      actionName: "InitializationPage",
+      path: InitializationPage.routeName,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Image.asset(
+                'assets/logo/splash_bg.png',
+                fit: BoxFit.fill,
+              ),
+            ),
+            Pulsar(
+              child: Center(
                 child: Image.asset(
-                  'assets/logo/splash_bg.png',
-                  fit: BoxFit.fill,
+                  "assets/logo/splash_icon_transparant.png",
+                  width: Responsive.isMobile(context)
+                      ? AppSize.width(context) * 0.3
+                      : AppSize.width(context) * 0.2,
                 ),
               ),
-              Pulsar(
-                child: Center(
-                  child: Image.asset(
-                    "assets/logo/splash_icon_transparant.png",
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context) * 0.3
-                        : AppSize.width(context) * 0.2,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

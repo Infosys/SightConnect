@@ -324,6 +324,7 @@ class AppDrawer extends HookWidget {
   void showReferralCodeBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) => const ReferralCodeBottomSheet(),
     );
   }

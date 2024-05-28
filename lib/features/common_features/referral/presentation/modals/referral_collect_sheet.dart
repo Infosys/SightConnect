@@ -9,8 +9,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-showReferralCollectSheet(BuildContext context) async {
-  showModalBottomSheet(
+Future<bool?> showReferralCollectSheet(BuildContext context) async {
+  return showModalBottomSheet<bool>(
     context: context,
     isScrollControlled: true,
     isDismissible: false,
@@ -136,7 +136,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
       isLoading.value = true;
       logger.f("Referral code: ${code.value}");
       await ref.read(referralRepositoryImplProvider).submitReferral(code.value);
-      navigator.pop();
+      navigator.pop(true);
     } on Failure catch (e) {
       Fluttertoast.showToast(msg: e.errorMessage);
     } catch (e) {

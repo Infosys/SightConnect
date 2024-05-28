@@ -119,6 +119,12 @@ abstract class AppLocalizations {
   /// **'{current} of {total}'**
   String stepNumber(String current, String total);
 
+  /// No description provided for @referralSmsContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install'**
+  String referralSmsContent(String referral);
+
   /// No description provided for @loginEnterOTP.
   ///
   /// In en, this message translates to:

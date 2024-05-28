@@ -10,6 +10,11 @@ class AppLocalizationsOr extends AppLocalizations {
   }
 
   @override
+  String referralSmsContent(String referral) {
+    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+  }
+
+  @override
   String loginEnterOTP(String mobileNumber) {
     return 'ଦଯ଼ାକରି ପଠାଯାଇଥିବା ଓଟିପି ପ୍ରବେଶ କରାନ୍ତୁ ${mobileNumber}';
   }
