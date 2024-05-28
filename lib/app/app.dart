@@ -25,7 +25,6 @@ final isJailBrokenProvider = FutureProvider<bool>((ref) async {
   if (kIsWeb) {
     return false;
   }
-
   return await FlutterJailbreakDetection.jailbroken;
 });
 
