@@ -19,11 +19,24 @@ import 'package:upgrader/upgrader.dart';
 import '../../../../../core/services/app_info_service.dart';
 import '../../../../../main.dart';
 
-class PatientHomePage extends ConsumerWidget {
+class PatientHomePage extends ConsumerStatefulWidget {
   const PatientHomePage({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // ref.watch(appUpdateServiceProvider).checkForUpdate();
+  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
+}
+
+class _PatientHomePageState extends ConsumerState<PatientHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //   await showReferralCollectSheet(context);
+    // });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
