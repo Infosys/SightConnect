@@ -80,14 +80,14 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         return TriageQuestionnairePage(
           questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
         );
-      case 1:
+      case 1: //short distance VA
         ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-        return const VisualAcuityTumblingPage();
-      case 2:
+        return const VisualAcuityTumblingPage();  
+      case 2: //Long Distance VA in case of role Optometrist
         if (role == "ROLE_OPTOMETRIST") {
           ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
           return const DistanceVisualAcuityTumblingPage();
-        } else {
+        } else { 
           return const TriageEyeScanPage();
         }
       case 3:
