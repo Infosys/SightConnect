@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/referral/data/models/referral_response_model.dart';
+import 'package:eye_care_for_all/features/common_features/referral/data/repository/referral_repository_impl.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +13,15 @@ import 'package:share_plus/share_plus.dart';
 
 final referralCodeProvider =
     FutureProvider.autoDispose<ReferralCodeModel>((ref) async {
-  // return ref.watch(referralRepositoryImplProvider).getReferral();
+  return ref.watch(referralRepositoryImplProvider).getReferral();
   // throw ServerFailure(errorMessage: "Failed to fetch referral code");
-  await Future.delayed(const Duration(seconds: 2));
-  return const ReferralCodeModel(
-    code: 'ABCD1234',
-    statistics: {
-      "redeemed": 0,
-      "pending": 0,
-    },
-  );
+  // await Future.delayed(const Duration(seconds: 2));
+  // return const ReferralCodeModel(
+  //   code: 'ABCD1234',
+  //   statistics: {
+  //     "total": 0,
+  //   },
+  // );
 });
 
 class ReferralCodeBottomSheet extends HookConsumerWidget {
@@ -90,15 +90,9 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                         runSpacing: 16,
                         children: [
                           _ReferralStatsCard(
-                            title: 'Redeemed',
+                            title: 'Total',
                             value:
-                                referral.statistics?['redeemed'].toString() ??
-                                    "",
-                          ),
-                          _ReferralStatsCard(
-                            title: 'Pending',
-                            value: referral.statistics?['pending'].toString() ??
-                                "",
+                                referral.statistics?['total'].toString() ?? "",
                           ),
                         ],
                       ),

@@ -109,7 +109,11 @@ class ReferralCollectSheet extends HookConsumerWidget {
                             ? null
                             : () async {
                                 await submitReferral(
-                                    context, ref, isLoading, code);
+                                  context,
+                                  ref,
+                                  isLoading,
+                                  code,
+                                );
                               },
                         child: const Text('Collect'),
                       ),

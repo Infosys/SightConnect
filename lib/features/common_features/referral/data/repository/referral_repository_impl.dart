@@ -14,13 +14,13 @@ final referralRepositoryImplProvider = Provider((ref) {
 
 class ReferralRepositoryImpl implements ReferralRepository {
   Dio dio;
-  String url = "/services/orchestration/api/v2/";
+
   ReferralRepositoryImpl(this.dio);
 
   @override
   Future<ReferralCodeModel> getReferral() async {
     try {
-      const String url = "referrals/referral-code";
+      const String url = "/services/orchestration/api/referrals/referral-code";
       final response = await dio.get(url);
       return ReferralCodeModel.fromJson(response.data);
     } on DioException catch (e) {
@@ -35,7 +35,7 @@ class ReferralRepositoryImpl implements ReferralRepository {
   @override
   Future<ReferralRequestModel> submitReferral(String code) async {
     try {
-      const String url = "referrals";
+      const String url = "/services/orchestration/api/referrals";
       final response = await dio.post(
         url,
         queryParameters: {
