@@ -17,11 +17,13 @@ import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+import 'package:upgrader/upgrader.dart';
 
 import '../../../../core/models/keycloak.dart';
 import '../../../../core/services/location_service.dart';
@@ -311,29 +313,51 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return TraceableWidget(
-      actionName: "InitializationPage",
-      path: InitializationPage.routeName,
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: Image.asset(
-                'assets/logo/splash_bg.png',
-                fit: BoxFit.fill,
-              ),
-            ),
-            Pulsar(
-              child: Center(
+    return UpgradeAlert(
+      dialogStyle: UpgradeDialogStyle.cupertino,
+      showIgnore: kDebugMode ? true : false,
+      showLater: kDebugMode ? true : false,
+      shouldPopScope: () => kDebugMode ? true : false,
+      canDismissDialog: kDebugMode ? true : false,
+      onUpdate: () {
+        return true;
+      },
+      upgrader: Upgrader(
+        durationUntilAlertAgain: const Duration(milliseconds: 800),
+        willDisplayUpgrade: (
+            {appStoreVersion,
+            required display,
+            installedVersion,
+            minAppVersion}) {
+          logger.d("display : $display");
+          logger.d("appStoreVersion : $appStoreVersion");
+          logger.d("installedVersion : $installedVersion");
+        },
+      ),
+      child: TraceableWidget(
+        actionName: "InitializationPage",
+        path: InitializationPage.routeName,
+        child: Scaffold(
+          body: Stack(
+            children: <Widget>[
+              Positioned.fill(
                 child: Image.asset(
-                  "assets/logo/splash_icon_transparant.png",
-                  width: Responsive.isMobile(context)
-                      ? AppSize.width(context) * 0.3
-                      : AppSize.width(context) * 0.2,
+                  'assets/logo/splash_bg.png',
+                  fit: BoxFit.fill,
                 ),
               ),
-            ),
-          ],
+              Pulsar(
+                child: Center(
+                  child: Image.asset(
+                    "assets/logo/splash_icon_transparant.png",
+                    width: Responsive.isMobile(context)
+                        ? AppSize.width(context) * 0.3
+                        : AppSize.width(context) * 0.2,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
