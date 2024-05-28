@@ -1,4 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/failure.dart';
+import 'package:eye_care_for_all/features/common_features/referral/data/repository/referral_repository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -105,20 +108,8 @@ class ReferralCollectSheet extends HookConsumerWidget {
                         onPressed: code.value.isEmpty
                             ? null
                             : () async {
-                                final navigator = Navigator.of(context);
-                                try {
-                                  isLoading.value = true;
-                                  await Future.delayed(
-                                    const Duration(seconds: 2),
-                                  );
-                                  isLoading.value = false;
-                                  navigator.pop();
-                                } catch (e) {
-                                  const msg =
-                                      "Sorry, something went wrong. Please try again.";
-                                  Fluttertoast.showToast(msg: msg);
-                                  isLoading.value = false;
-                                }
+                                await submitReferral(
+                                    context, ref, isLoading, code);
                               },
                         child: const Text('Collect'),
                       ),
@@ -132,5 +123,27 @@ class ReferralCollectSheet extends HookConsumerWidget {
         );
       },
     );
+  }
+
+  Future<void> submitReferral(
+    BuildContext context,
+    WidgetRef ref,
+    ValueNotifier<bool> isLoading,
+    ValueNotifier<String> code,
+  ) async {
+    final navigator = Navigator.of(context);
+    try {
+      isLoading.value = true;
+      logger.f("Referral code: ${code.value}");
+      await ref.read(referralRepositoryImplProvider).submitReferral(code.value);
+      navigator.pop();
+    } on Failure catch (e) {
+      Fluttertoast.showToast(msg: e.errorMessage);
+    } catch (e) {
+      const msg = "Sorry, something went wrong. Please try again.";
+      Fluttertoast.showToast(msg: msg);
+    } finally {
+      isLoading.value = false;
+    }
   }
 }
