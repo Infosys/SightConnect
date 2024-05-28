@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/referral/data/models/referral_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/referral/data/repository/referral_repository_impl.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
 
     return referralCodeAsyncValue.when(
       data: (referral) {
+        logger.d(referral.toJson());
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -65,17 +67,21 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                     fontSize: 12,
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        checkReferralStatus.value = !checkReferralStatus.value;
-                      },
-                      child: const Text('Statistics Overview'),
-                    ),
-                  ],
+                Visibility(
+                  visible: referral.statistics != null,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          checkReferralStatus.value =
+                              !checkReferralStatus.value;
+                        },
+                        child: const Text('Statistics Overview'),
+                      ),
+                    ],
+                  ),
                 ),
                 const Divider(),
                 Visibility(
