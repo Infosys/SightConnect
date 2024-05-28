@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -17,6 +18,7 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 
 import '../../../visual_acuity/features/distance_visual_acuity_tumbling/presentation/pages/distance_visual_acuity_tumbling_page.dart';
 import '../../../visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
+import '../../domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 
 class TriagePage extends ConsumerStatefulWidget {
   const TriagePage({super.key});
@@ -72,26 +74,30 @@ class _TriagePageState extends ConsumerState<TriagePage> {
 
     return ref.watch(getTriageProvider).when(
       data: (data) {
-        switch (currentStep) {
-          case 0:
-            return TriageQuestionnairePage(
-              questionnaireSections:
-                  data.questionnaire?.questionnaireItem ?? [],
-            );
-          case 1:
-            ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-            return const VisualAcuityTumblingPage();
-          // case 2:
-          //   ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-          //   return const DistanceVisualAcuityTumblingPage();
-          case 2:
-            return const TriageEyeScanPage();
-          default:
-            return TriageQuestionnairePage(
-              questionnaireSections:
-                  data.questionnaire?.questionnaireItem ?? [],
-            );
+        final role = PersistentAuthStateService.authState.activeRole;
+         switch (currentStep) {
+      case 0:
+        return TriageQuestionnairePage(
+          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+        );
+      case 1: //short distance VA
+        ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+        return const VisualAcuityTumblingPage();  
+      case 2: //Long Distance VA in case of role Optometrist
+        if (role == "ROLE_OPTOMETRIST") {
+          ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+          return const DistanceVisualAcuityTumblingPage();
+        } else { 
+          return const TriageEyeScanPage();
         }
+      case 3:
+          return const TriageEyeScanPage();
+        
+      default:
+        return TriageQuestionnairePage(
+          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+        );
+    }
       },
       error: (error, stackTrace) {
         final errorMessage = DioErrorHandler.getErrorMessage(error);
@@ -129,5 +135,36 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         );
       },
     );
+  }
+
+ dynamic triagePageActionBasedOnRole(int currentStep, BuildContext context,
+      String role, DiagnosticReportTemplateFHIRModel data) {
+    switch (currentStep) {
+      case 0:
+        return TriageQuestionnairePage(
+          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+        );
+      case 1:
+        ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+        return const VisualAcuityTumblingPage();
+      case 2:
+        if (role == "ROLE_OPTOMETRIST") {
+          ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+          return const DistanceVisualAcuityTumblingPage();
+        } else {
+          return const TriageEyeScanPage();
+        }
+      case 3:
+        if (role == "ROLE_OPTOMETRIST") {
+          return const TriageEyeScanPage();
+        } else {
+          return null;
+        }
+
+      default:
+        return TriageQuestionnairePage(
+          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+        );
+    }
   }
 }

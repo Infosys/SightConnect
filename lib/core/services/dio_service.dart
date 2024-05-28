@@ -33,6 +33,21 @@ final appointmentDioProvider = Provider(
   },
 );
 
+final validationDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstant.baseUrl, 
+         headers: {
+          "X-Active-Role": PersistentAuthStateService.authState.activeRole,
+          "X-App-Version": AppInfoService.appVersion,
+        },
+      ),
+    );
+    return dio;
+  },
+);
+
 final chatbotDioProvider = Provider(
   (ref) {
     final dio = Dio(

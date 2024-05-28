@@ -218,7 +218,8 @@ class AppDrawer extends HookWidget {
                                         },
                                       ),
                                     );
-
+                                    break;
+                                    
                                   default:
                                 }
                               },

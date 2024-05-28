@@ -97,14 +97,14 @@ class TriageProvider extends ChangeNotifier {
             .call(GetVisionAcuityTumblingResponseLocallyParam())
             .then((value) => value.fold((l) => [], (r) => r));
 
-    // List<PostTriageObservationsModel> distanceVisualAcuity =
-    //     await _getDistanceVisualAcuityResponseLocallyUseCase
-    //         .call(GetDistanceVisualAcuityResponseLocallyParam())
-    //         .then((value) => value.fold((l) => [], (r) => r));
+    List<PostTriageObservationsModel> distanceVisualAcuity =
+        await _getDistanceVisualAcuityResponseLocallyUseCase
+            .call(GetDistanceVisualAcuityResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
 
     List<PostTriageObservationsModel> observations = [
       ...shortDistanceVisualAcuity,
-      // ...distanceVisualAcuity
+      ...distanceVisualAcuity
     ];
 
     List<PostTriageQuestionModel> questionResponse =

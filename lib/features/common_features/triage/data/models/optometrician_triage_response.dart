@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../../core/models/timestamp_converter.dart';
 
@@ -50,6 +51,10 @@ class OptometristTriageResponse with _$OptometristTriageResponse {
     bool? visualAcuityAssistance,
     bool? visualAcuityAided,
     bool? eyeScanAssistance,
+    bool? redEye,
+    bool? cataract,
+    String? languageUsed,
+    String? longDistanceUsed,
   }) = _OptometristTriageResponse;
 
   factory OptometristTriageResponse.fromJson(Map<String, Object?> json) =>
@@ -72,6 +77,8 @@ class Observation with _$Observation {
   const factory Observation({
     int? observationCode,
     double? response,
+    String? observationIdentifier,
+    ObservationCode? observationType,
   }) = _Observation;
 
   factory Observation.fromJson(Map<String, Object?> json) =>
@@ -94,3 +101,4 @@ class MediaCapture with _$MediaCapture {
 enum Urgency { RED, YELLOW, GREEN }
 
 enum Gender { MALE, FEMALE, OTHERS, Male, Female, Others, M, F, O }
+

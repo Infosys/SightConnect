@@ -11,15 +11,21 @@ class GlobalVisualAcuityProvider extends ChangeNotifier {
   bool _isShortDistanceTest = true;
   bool _isThreeMeter = true;
   int? _dignosticReportID;
+  bool _optoIsThreeMeters = true;
 
   //////////////////////////////////////////////////////////
 
   bool get isShortDistanceTest => _isShortDistanceTest;
   int get dignosticReportID => _dignosticReportID!;
   bool get isThreeMeter => _isThreeMeter;
-
+  bool get optoIsThreeMeters => _optoIsThreeMeters;
 
   /////////////////////////////////////////////////////////
+
+  void setOptoIsThreeMeters(bool value) {
+    _optoIsThreeMeters = value;
+    notifyListeners();
+  }
 
   void setDiagnosticReportID(int value) {
     _dignosticReportID = value;

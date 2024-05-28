@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/usecases/get_triage_current_step_usecase.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,9 @@ class TriageStepperProvider extends ChangeNotifier {
   int _currentStep = 0;
   final GetTriageCurrentStepUseCase _useCase;
   TriageStepperProvider(this._useCase) {
+    if(PersistentAuthStateService.authState.activeRole == "ROLE_OPTOMETRIST"){
+      maxSteps = 4;
+    }
     getTriageCurrentStep();
   }
 
