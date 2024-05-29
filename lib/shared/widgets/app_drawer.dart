@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/a
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_generate_sheet.dart';
 import 'package:eye_care_for_all/features/common_features/tenant/presentation/pages/patient_tenants_display_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
@@ -49,6 +50,13 @@ class AppDrawer extends HookWidget {
         return element.id != DrawerMenuItemId.switchProfile;
       }).toList();
     }
+
+    // bool isBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+    // if (!isBeta) {
+    //   items = items.where((element) {
+    //     return element.id != DrawerMenuItemId.referral;
+    //   }).toList();
+    // }
 
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -133,6 +141,10 @@ class AppDrawer extends HookWidget {
                                     onLanguageChange?.call();
                                     break;
 
+                                  case DrawerMenuItemId.referral:
+                                    showReferralCodeBottomSheet(context);
+                                    break;
+
                                   case DrawerMenuItemId.assessments:
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -206,6 +218,7 @@ class AppDrawer extends HookWidget {
                                         },
                                       ),
                                     );
+                                    break;
 
                                   default:
                                 }
@@ -271,7 +284,8 @@ class AppDrawer extends HookWidget {
                             color: AppColor.primary.withOpacity(0.2),
                           ),
                           child: SvgPicture.asset(
-                              "assets/drawer_icons/signout.svg"),
+                            "assets/drawer_icons/signout.svg",
+                          ),
                         ),
                         title: Text(
                           loc.appDrawerSignOut,
@@ -305,6 +319,14 @@ class AppDrawer extends HookWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void showReferralCodeBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => const ReferralCodeBottomSheet(),
     );
   }
 }

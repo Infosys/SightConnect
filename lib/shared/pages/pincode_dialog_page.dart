@@ -53,19 +53,12 @@ class PincodeDialogPage extends HookConsumerWidget {
                                 data.profile!.patient!.patientId!;
 
                             String? pinCode;
-                            if (await LocationService
-                                    .checkLocationPermission() ==
-                                true) {
-                              if (context.mounted &&
-                                  await LocationService.enableLocation(
-                                          context) ==
-                                      true) {
-                                pinCode = await GeocodingService
-                                    .getPincodeFromLocation();
-                              }
-                            }
 
-                            logger.f("pincode is : $pinCode");
+                            await LocationService.getLocationWithPermissions();
+
+                            pinCode =
+                                await GeocodingService.getPincodeFromLocation();
+                            logger.f("pinCode is  $pinCode");
 
                             if (context.mounted) {
                               await Navigator.of(context)
@@ -84,6 +77,8 @@ class PincodeDialogPage extends HookConsumerWidget {
                                   .then((value) {
                                 logger
                                     .d({"Profile Page Update Miniapp": value});
+
+                                isLoading.value = false;
 
                                 if (value == null || value == false) {
                                   Fluttertoast.showToast(
@@ -101,75 +96,57 @@ class PincodeDialogPage extends HookConsumerWidget {
                             }
                           },
                           child: const Text("Proceed")),
-                      TextButton(
-                          onPressed: () async {
-                            isLoading.value = true;
-                            int selectedPatientId =
-                                data.profile!.patient!.patientId!;
 
-                            String? pinCode;
-                            bool hasPermission =
-                                await LocationService.checkLocationPermission();
-                            if (hasPermission && context.mounted) {
-                              bool isLocationEnabled =
-                                  await LocationService.enableLocation(context);
-                              if (isLocationEnabled) {
-                                pinCode = await GeocodingService
-                                    .getPincodeFromLocation();
-                                logger.f("pinCode is  $pinCode");
-                              }
-                            } else if (!hasPermission && context.mounted) {
-                              hasPermission = await LocationService
-                                  .requestLocationPermission(context);
+                      // TextButton(
+                      //     onPressed: () async {
+                      //       isLoading.value = true;
+                      //       int selectedPatientId =
+                      //           data.profile!.patient!.patientId!;
 
-                              if (hasPermission && context.mounted) {
-                                bool isLocationEnabled =
-                                    await LocationService.enableLocation(
-                                        context);
-                                if (isLocationEnabled) {
-                                  pinCode = await GeocodingService
-                                      .getPincodeFromLocation();
-                                  logger.f("pinCode is  $pinCode");
-                                }
-                              }
-                            }
+                      //       String? pinCode;
+                      //       var locationData = await LocationService
+                      //           .getLocationWithPermissions();
 
-                            logger.f("pincode is : $pinCode");
+                      //       pinCode =
+                      //           await GeocodingService.getPincodeFromLocation();
+                      //       logger.f("pinCode is  $pinCode");
 
-                            if (context.mounted) {
-                              await Navigator.of(context)
-                                  .push<bool?>(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PatientRegistrationMiniappPage(
-                                    actionType: MiniAppActionType.UPDATE,
-                                    displayName: loc.patientUpdateProfile,
-                                    parentPatientId:
-                                        selectedPatientId.toString(),
-                                    pinCode: pinCode,
-                                  ),
-                                ),
-                              )
-                                  .then((value) {
-                                logger
-                                    .d({"Profile Page Update Miniapp": value});
+                      //       logger.f("pincode is : $pinCode");
 
-                                if (value == null || value == false) {
-                                  Fluttertoast.showToast(
-                                      msg: loc.patientProfileNotUpdated);
-                                } else if (value) {
-                                  Fluttertoast.showToast(
-                                      msg: loc.patientProfileUpdated);
+                      //       if (context.mounted) {
+                      //         await Navigator.of(context)
+                      //             .push<bool?>(
+                      //           MaterialPageRoute(
+                      //             builder: (context) =>
+                      //                 PatientRegistrationMiniappPage(
+                      //               actionType: MiniAppActionType.UPDATE,
+                      //               displayName: loc.patientUpdateProfile,
+                      //               parentPatientId:
+                      //                   selectedPatientId.toString(),
+                      //               pinCode: pinCode,
+                      //             ),
+                      //           ),
+                      //         )
+                      //             .then((value) {
+                      //           logger
+                      //               .d({"Profile Page Update Miniapp": value});
 
-                                  ref.invalidate(getPatientProfileProvider);
+                      //           if (value == null || value == false) {
+                      //             Fluttertoast.showToast(
+                      //                 msg: loc.patientProfileNotUpdated);
+                      //           } else if (value) {
+                      //             Fluttertoast.showToast(
+                      //                 msg: loc.patientProfileUpdated);
 
-                                  ref.invalidate(getPatientProfileByIdProvider(
-                                      selectedPatientId));
-                                }
-                              });
-                            }
-                          },
-                          child: const Text("Enable Location and Proceed")),
+                      //             ref.invalidate(getPatientProfileProvider);
+
+                      //             ref.invalidate(getPatientProfileByIdProvider(
+                      //                 selectedPatientId));
+                      //           }
+                      //         });
+                      //       }
+                      //     },
+                      //     child: const Text("Enable Location and Proceed")),
                     ]),
               ),
             ),

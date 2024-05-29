@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
@@ -120,6 +121,22 @@ class _OptometritianDashboardPageState
                         onPressed: () async {
                           isLoading.value = true;
                           final navigator = Navigator.of(context);
+                          await ref.read(initializationProvider).resetProfile();
+                          navigator.pushNamedAndRemoveUntil(
+                              InitializationPage.routeName, (route) => false);
+                          ref.invalidate(initializationProvider);
+                          isLoading.value = false;
+                        },
+                        icon: const Icon(Icons.person),
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: AppSize.ks,
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          isLoading.value = true;
+                          final navigator = Navigator.of(context);
                           ref
                               .read(initializationProvider)
                               .logout()
@@ -141,7 +158,7 @@ class _OptometritianDashboardPageState
                           Icons.logout,
                           color: AppColor.white,
                         ),
-                      )
+                      ),
                     ],
                   ),
                   SizedBox(height: AppSize.height(context) * 0.04),

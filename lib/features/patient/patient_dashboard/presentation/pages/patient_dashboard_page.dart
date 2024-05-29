@@ -54,8 +54,8 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
     });
     return ref.watch(getPatientProfileProvider).when(
           data: (data) {
-            if (data.profile!.patient!.address!.first.pincode == null ||
-                data.profile!.patient!.address!.first.pincode!.isEmpty) {
+            final address = data.profile?.patient?.address ?? [];
+            if (address.isNotEmpty && (address.first.pincode ?? "").isEmpty) {
               return PincodeDialogPage(data: data);
             } else {
               return Scaffold(

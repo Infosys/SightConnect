@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/models/optometrician_triage_response.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class OptometristRemoteSource {
@@ -32,31 +31,23 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   Future<Either<Failure, OptometristTriageResponse>> saveTriage(
       {required OptometristTriageResponse triage}) async {
     var endpoint = "/services/validation/api/patient-responses";
-    logger.d({
+    logger.f({
       "API saveTriage": triage.toJson(),
     });
 
-    var response = await dio.post(
-      endpoint,
-      data: triage.toJson(),
-    );
-
-    if (response.statusCode! >= 200 && response.statusCode! < 210) {
-      try {
-        return Right(OptometristTriageResponse.fromJson(response.data));
-      } on Exception catch (e) {
-        return Left(ServerFailure(
-            errorMessage: 'This is a server exception - ${e.toString()}'));
-      }
-
-      // return OptometristTriageResponse.fromJson(response.data);
-    } else {
-      Fluttertoast.showToast(
-        msg: "Unable to save the Triage! Please try again.",
-        toastLength: Toast.LENGTH_LONG,
+    try {
+      var response = await dio.post(
+        endpoint,
+        data: triage.toJson(),
       );
-      throw ServerException();
+      return Right(OptometristTriageResponse.fromJson(response.data));
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      return Left(ServerFailure(
+          errorMessage: 'This is a server exception - ${e.toString()}'));
     }
+
+    // return OptometristTriageResponse.fromJson(response.data);
   }
 
   @override
@@ -81,6 +72,7 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   @override
   Future<List<OptometristTriageResponse>> getOptometristTriageResponseByFilters(
       DateTime startTime, DateTime entTime, String capturedBy) async {
+    logger.f("get Optometrist Triage Response By Filters");
     var endpoint =
         "/services/validation/api/patient-responses/date/$capturedBy";
 
@@ -124,6 +116,6 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
 
 var optometristRemoteSource = Provider<OptometristRemoteSource>(
   (ref) => OptometristRemoteSourceImpl(
-    ref.read(dioProvider),
+    ref.read(validationDioProvider),
   ),
 );

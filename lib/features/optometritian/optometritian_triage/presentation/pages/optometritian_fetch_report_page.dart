@@ -22,7 +22,7 @@ class OptometritianFetchReportPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    logger.d("report is ${report.observations}");
+    logger.d("report is ${report.toJson()}");
 
     var model = ref.watch(optometritianReportProvider);
     // TriageUrgency urgency = model.calculateTriageUrgency();

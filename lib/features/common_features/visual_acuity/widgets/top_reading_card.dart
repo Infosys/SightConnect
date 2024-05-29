@@ -39,11 +39,10 @@ class TopReadingCard extends StatelessWidget {
     // final mm = physicalities.mm;
     // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
     // final optoTypeSize = mm(currentLevel!.size * 10 * scaleFactor);
-    // TODO: THIS IS FOR TESTING, Need to remove
 
     double optoTypeSize;
-    int lowerLimit = isShortDistance ? 35 : 195;
-    int upperLimit = isShortDistance ? 45 : 205;
+    int lowerLimit = isShortDistance ? 35 : 0;
+    int upperLimit = isShortDistance ? 45 : 1000;
 
     if (isShortDistance == false) {
       if (isThreeMeters == true) {

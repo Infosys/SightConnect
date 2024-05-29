@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/widgets/distance_dummy_nav_widget.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -13,8 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../widgets/visual_acuity_face_distance_page.dart';
-import 'distance_visual_acuity_distance_selection_page.dart';
 import 'distance_visual_acutiy_instruction_page.dart';
 
 class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
@@ -129,20 +128,25 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => VisualAcuityFaceDistancePage(
-                          minDistance: 35,
-                          maxDistance: 45,
-                          title: "Distance to Face - Long Distance",
-                          onProceed: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const DistanceVisualAcuityDistanceSelectionPage(),
-                              ),
-                            );
-                          }),
-                    ),
+                        builder: (context) => const DistanceDummyNavWidget()),
                   );
+
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => VisualAcuityFaceDistancePage(
+                  //         minDistance: 35,
+                  //         maxDistance: 45,
+                  //         title: "Distance to Face - Long Distance",
+                  //         onProceed: () {
+                  //           Navigator.of(context).pushReplacement(
+                  //             MaterialPageRoute(
+                  //               builder: (context) =>
+                  //                   const DistanceVisualAcuityDistanceSelectionPage(),
+                  //             ),
+                  //           );
+                  //         }),
+                  //   ),
+                  // );
                 },
               ))
             ],

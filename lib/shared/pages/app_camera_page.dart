@@ -71,7 +71,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         final activeRole = PersistentAuthStateService.authState.activeRole;
         final role = roleMapper(activeRole);
         if (role == Role.ROLE_OPTOMETRIST) {
-          _cameraLensDirection = CameraLensDirection.back;
+          _cameraLensDirection = CameraLensDirection.front;
         }
         _checkPermissions(context);
       } else {

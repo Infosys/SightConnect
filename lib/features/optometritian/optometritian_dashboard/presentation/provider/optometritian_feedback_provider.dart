@@ -19,6 +19,8 @@ class FeedBackNotifier extends ChangeNotifier {
   bool _visualAcuityAssistance = false;
   bool _visualAcuityAided = false;
   bool _eyeScanAssistance = false;
+  bool _isCataract = false;
+  bool _isRedEye = false;
 
   String get questionarie => _questionarie;
   String get observation => _observation;
@@ -30,6 +32,18 @@ class FeedBackNotifier extends ChangeNotifier {
   bool get visualAcuityAssistance => _visualAcuityAssistance;
   bool get visualAcuityAided => _visualAcuityAided;
   bool get eyeScanAssistance => _eyeScanAssistance;
+  bool get isCataract => _isCataract;
+  bool get isRedEye => _isRedEye;
+
+  set isRedEye(bool value) {
+    _isRedEye = value;
+    notifyListeners();
+  }
+
+  set isCataract(bool value) {
+    _isCataract = value;
+    notifyListeners();
+  }
 
   set visualAcuityAssistance(bool value) {
     _visualAcuityAssistance = value;
