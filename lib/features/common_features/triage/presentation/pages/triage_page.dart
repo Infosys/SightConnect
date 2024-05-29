@@ -127,9 +127,6 @@ class _TriagePageState extends ConsumerState<TriagePage> {
 
   dynamic optometristTriage(int currentStep, BuildContext context,
       DiagnosticReportTemplateFHIRModel data) {
-    Future.delayed(const Duration(milliseconds: 0), () {
-      ref.read(triageStepperProvider).setMaxSteps(4);
-    });
     switch (currentStep) {
       case 0:
         return TriageQuestionnairePage(
@@ -153,9 +150,6 @@ class _TriagePageState extends ConsumerState<TriagePage> {
 
   dynamic patientTriage(int currentStep, BuildContext context,
       DiagnosticReportTemplateFHIRModel data) {
-    Future.delayed(const Duration(milliseconds: 0), () {
-      ref.read(triageStepperProvider).setMaxSteps(3);
-    });
     switch (currentStep) {
       case 0:
         return TriageQuestionnairePage(
