@@ -41,6 +41,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
       data: (data) {
         if (data != null) {
           final msg = "You have been referred by ${data.referredBy}";
+
           return Container(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -209,7 +210,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
     } on Failure catch (e) {
       Fluttertoast.showToast(msg: e.errorMessage);
     } catch (e) {
-      const msg = "Sorry, something went wrong. Please try again.";
+      const msg = "The referral code you entered is invalid. Please try again.";
       Fluttertoast.showToast(msg: msg);
     } finally {
       isLoading.value = false;

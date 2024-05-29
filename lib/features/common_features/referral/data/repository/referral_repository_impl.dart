@@ -49,7 +49,9 @@ class ReferralRepositoryImpl implements ReferralRepository {
       rethrow;
     } catch (e) {
       logger.e(e);
-      throw ServerFailure(errorMessage: "Failed to submit the code");
+      throw ServerFailure(
+          errorMessage:
+              "The referral code you entered is invalid. Please try again.");
     }
   }
 
@@ -85,8 +87,10 @@ class ReferralRepositoryImpl implements ReferralRepository {
           "statistics": statistics,
         },
       );
-      logger.d(response.data);
-      if (response.data != null && response.data!.isEmpty) {
+      logger.d({
+        "getMyReferral": response.data,
+      });
+      if (response.data == null || response.data!.isEmpty) {
         return null;
       }
 

@@ -55,7 +55,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ActionChip(
-                      backgroundColor: AppColor.purple,
+                      backgroundColor: AppColor.darkCharcoal,
                       onPressed: () {
                         final navigator = Navigator.of(context);
                         navigator.pop();

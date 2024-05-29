@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/referral/data/models/referral_response_model.dart';
@@ -24,73 +25,61 @@ class ReferralStatisticsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final referralStatsAsyncValue = ref.watch(referralStatsProvider);
     return Scaffold(
-      appBar: const CustomAppbar(title: Text('Referral Statistics')),
+      appBar: const CustomAppbar(title: Text('Your Referral Statistics')),
       body: referralStatsAsyncValue.when(
         data: (referralStats) {
-          if (referralStats == null) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    "No referral statistics available. Start referring now!",
-                    textAlign: TextAlign.center,
-                    style: applyFiraSansFont(fontSize: 22),
-                  ),
-                ],
-              ),
-            );
-          }
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  () {
-                    if (referralStats.statistics == true) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            'Your Referral Statistics',
-                            style: applyFiraSansFont(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+              child: FadeInDown(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Image.asset(
+                      "assets/images/referral_statistics.png",
+                      height: 120,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(height: 16),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            _ReferralStatsCard(
+                              title: 'Total Referred',
+                              colorCode: '0xffCFD8DC',
+                              value:
+                                  referralStats?.referrals?.length.toString() ??
+                                      '0',
                             ),
-                          ),
-                          const SizedBox(height: 16),
-                          Wrap(
-                            runSpacing: 16,
-                            spacing: 16,
-                            children: [
-                              _ReferralStatsCard(
-                                title: 'Total Referred',
-                                value: referralStats.referrals?.length
-                                        .toString() ??
-                                    '0',
-                              ),
-                              _ReferralStatsCard(
-                                title: 'Successful Referred',
-                                value: referralStats.referralsTriageStatistics
-                                        ?.totalReferredCounts
-                                        .toString() ??
-                                    '0',
-                              ),
-                              _ReferralStatsCard(
-                                title: 'Total Triage',
-                                value: referralStats.referralsTriageStatistics
-                                        ?.totalTriagedCounts
-                                        .toString() ??
-                                    '0',
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Container(
+                            _ReferralStatsCard(
+                              title: 'Successful Referred',
+                              colorCode: '0xffA5D6A7',
+                              value: referralStats?.referralsTriageStatistics
+                                      ?.totalReferredCounts
+                                      .toString() ??
+                                  '0',
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            _ReferralStatsCard(
+                              title: 'Total Triage',
+                              colorCode: '0xffD1C4E9',
+                              value: referralStats?.referralsTriageStatistics
+                                      ?.totalTriagedCounts
+                                      .toString() ??
+                                  '0',
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        SlideInDown(
+                          child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
@@ -188,13 +177,11 @@ class ReferralStatisticsPage extends ConsumerWidget {
                               ],
                             ),
                           ),
-                        ],
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  }(),
-                ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           );
@@ -206,7 +193,8 @@ class ReferralStatisticsPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Something went wrong! Please try again.",
+                  "Apologies, we're unable to fetch your referral statistics at the moment.",
+                  textAlign: TextAlign.center,
                   style: applyFiraSansFont(fontSize: 16),
                 ),
                 const SizedBox(height: 16),
@@ -237,44 +225,63 @@ class _ReferralStatsCard extends StatelessWidget {
   const _ReferralStatsCard({
     required this.title,
     required this.value,
+    this.colorCode = '0xffFFD700',
   });
   final String title;
   final String value;
+  final String colorCode;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: AppSize.width(context),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+    return Expanded(
+      child: Container(
+        height: 80,
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Color(int.parse(colorCode)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: SvgPicture.asset(
+                "assets/images/triage_card_bg.svg",
+                width: AppSize.width(context),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Text(
-            value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: applyFiraSansFont(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  value,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: applyFiraSansFont(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  title,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: applyFiraSansFont(
+                    fontSize: 14,
+                    color: AppColor.darkGrey,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
