@@ -11,17 +11,20 @@ var triageStepperProvider = ChangeNotifierProvider(
 );
 
 class TriageStepperProvider extends ChangeNotifier {
-  int maxSteps = 3;
+  int _maxSteps = 3;
   int _currentStep = 0;
   final GetTriageCurrentStepUseCase _useCase;
   TriageStepperProvider(this._useCase) {
-    if(PersistentAuthStateService.authState.activeRole == "ROLE_OPTOMETRIST"){
-      maxSteps = 4;
-    }
     getTriageCurrentStep();
   }
 
   int get currentStep => _currentStep;
+  int get maxSteps => _maxSteps;
+
+  void setMaxSteps(int maxSteps) {
+    _maxSteps = maxSteps;
+    notifyListeners();
+  }
 
   Future<void> getTriageCurrentStep() async {
     final response = await _useCase.call(GetTriageCurrentStepParam());
@@ -36,7 +39,7 @@ class TriageStepperProvider extends ChangeNotifier {
   }
 
   void goToNextStep() {
-    if (_currentStep < maxSteps) {
+    if (_currentStep < _maxSteps) {
       _currentStep++;
       notifyListeners();
     }

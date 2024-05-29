@@ -74,30 +74,18 @@ class _TriagePageState extends ConsumerState<TriagePage> {
 
     return ref.watch(getTriageProvider).when(
       data: (data) {
-        final role = PersistentAuthStateService.authState.activeRole;
-         switch (currentStep) {
-      case 0:
-        return TriageQuestionnairePage(
-          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
-        );
-      case 1: //short distance VA
-        ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-        return const VisualAcuityTumblingPage();  
-      case 2: //Long Distance VA in case of role Optometrist
-        if (role == "ROLE_OPTOMETRIST") {
-          ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-          return const DistanceVisualAcuityTumblingPage();
-        } else { 
-          return const TriageEyeScanPage();
-        }
-      case 3:
-          return const TriageEyeScanPage();
-        
-      default:
-        return TriageQuestionnairePage(
-          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
-        );
-    }
+        final role =
+            roleMapper(PersistentAuthStateService.authState.activeRole);
+        return switch (role) {
+          Role.ROLE_OPTOMETRIST =>
+            optometristTriage(currentStep, context, data),
+          Role.ROLE_PATIENT => patientTriage(currentStep, context, data),
+          Role.ROLE_VISION_GUARDIAN =>
+            patientTriage(currentStep, context, data),
+          Role.ROLE_VISION_TECHNICIAN =>
+            patientTriage(currentStep, context, data),
+          _ => const SizedBox()
+        };
       },
       error: (error, stackTrace) {
         final errorMessage = DioErrorHandler.getErrorMessage(error);
@@ -137,8 +125,9 @@ class _TriagePageState extends ConsumerState<TriagePage> {
     );
   }
 
- dynamic triagePageActionBasedOnRole(int currentStep, BuildContext context,
-      String role, DiagnosticReportTemplateFHIRModel data) {
+  dynamic optometristTriage(int currentStep, BuildContext context,
+      DiagnosticReportTemplateFHIRModel data) {
+    ref.watch(triageStepperProvider).setMaxSteps(4);
     switch (currentStep) {
       case 0:
         return TriageQuestionnairePage(
@@ -148,18 +137,31 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
         return const VisualAcuityTumblingPage();
       case 2:
-        if (role == "ROLE_OPTOMETRIST") {
-          ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-          return const DistanceVisualAcuityTumblingPage();
-        } else {
-          return const TriageEyeScanPage();
-        }
+        ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+        return const DistanceVisualAcuityTumblingPage();
       case 3:
-        if (role == "ROLE_OPTOMETRIST") {
-          return const TriageEyeScanPage();
-        } else {
-          return null;
-        }
+        return const TriageEyeScanPage();
+
+      default:
+        return TriageQuestionnairePage(
+          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+        );
+    }
+  }
+
+  dynamic patientTriage(int currentStep, BuildContext context,
+      DiagnosticReportTemplateFHIRModel data) {
+    ref.read(triageStepperProvider).setMaxSteps(3);
+    switch (currentStep) {
+      case 0:
+        return TriageQuestionnairePage(
+          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+        );
+      case 1:
+        ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+        return const VisualAcuityTumblingPage();
+      case 2:
+        return const TriageEyeScanPage();
 
       default:
         return TriageQuestionnairePage(
