@@ -26,8 +26,6 @@ class AppNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.f("inside AppNetwork Image");
-    logger.f("image url is $imageUrl");
     return CachedNetworkImage(
       imageUrl: imageUrl,
       httpHeaders: {

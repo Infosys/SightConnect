@@ -1,8 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../main.dart';
 
 enum DrawerMenuItemId {
   switchProfile,
@@ -31,9 +29,6 @@ class DrawerMenuItem {
 
 class DrawerMenuItems {
   static List<DrawerMenuItem> getAll(AppLocalizations loc) {
-    bool isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
-    logger.f("isuserbeta : $isUserBeta");
-
     DrawerMenuItem switchProfile = DrawerMenuItem(
       id: DrawerMenuItemId.switchProfile,
       title: loc.switchRole,
