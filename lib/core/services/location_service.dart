@@ -1,132 +1,35 @@
-import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
-import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 class LocationService {
-  static Future<bool> checkLocationPermission() async {
-    final location = Location();
-    final hasPermission = await location.hasPermission();
-    logger.d('Location permission status: $hasPermission');
-    if (hasPermission == PermissionStatus.granted ||
-        hasPermission == PermissionStatus.grantedLimited) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  Location location = Location();
 
-  static Future<bool> requestLocationPermission(BuildContext context) async {
-    final location = Location();
-    bool result = false;
-    if (context.mounted) {
-      await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return BlurDialogBox(
-              title: Center(
-                child: Text(
-                  'We Need your Permission to Access Location',
-                  style: applyFiraSansFont(
-                      fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-              ),
-              content: Text(
-                'Location access is required to get information about your current location to prefill your address data, which will help us in recommending the closest vision center to you. Please enable location access in your device settings.',
-                style:
-                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    result = false;
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'Deny',
-                    style: applyRobotoFont(),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    var permissionGiven = await location.requestPermission();
-                    permissionGiven == PermissionStatus.granted ||
-                            permissionGiven == PermissionStatus.grantedLimited
-                        ? result = true
-                        : result = false;
-                    if (context.mounted) {
-                      Navigator.of(context).pop();
-                    }
+  static Future<LocationData?> getLocationWithPermissions() async {
+    Location location = Location();
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+    LocationData locationData;
 
-                    logger.d("location service requested");
-                  },
-                  child: Text(
-                    'Enable Location',
-                    style: applyRobotoFont(),
-                  ),
-                ),
-              ],
-            );
-          });
-    }
-    return result;
-  }
-
-  static Future<bool> enableLocation(BuildContext context) async {
-    final location = Location();
-    bool serviceEnabled = await location.serviceEnabled();
-    logger.d('Location permission status: $serviceEnabled');
+    // Check if location services are enabled
+    serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
-      logger.d("inside if service disabled");
-      if (context.mounted) {
-        await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return BlurDialogBox(
-                title: Center(
-                  child: Text(
-                    'Please turn on GPS location',
-                    style: applyFiraSansFont(
-                        fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                ),
-                content: Text(
-                  'Click on the "Enable Location" button to turn on GPS location.',
-                  style: applyRobotoFont(
-                      fontSize: 14, fontWeight: FontWeight.w400),
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      serviceEnabled = false;
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      'Deny',
-                      style: applyRobotoFont(),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      serviceEnabled = await location.requestService();
-                      if (context.mounted) {
-                        Navigator.of(context).pop();
-                      }
-
-                      logger.d("location service requested");
-                    },
-                    child: Text(
-                      'Enable Location',
-                      style: applyRobotoFont(),
-                    ),
-                  ),
-                ],
-              );
-            });
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return null; // Or handle the case where service cannot be enabled
       }
     }
-    return serviceEnabled;
+
+    // Request location permission
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return null; // Or handle the case where permission is not granted
+      }
+    }
+
+    // Get the location data
+    locationData = await location.getLocation();
+    return locationData;
   }
 
   static Future<LocationData> getCoordinates() async {

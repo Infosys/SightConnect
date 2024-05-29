@@ -195,24 +195,12 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
     String? pinCode;
-    bool hasPermission = await LocationService.checkLocationPermission();
-    if (hasPermission && mounted) {
-      bool isLocationEnabled = await LocationService.enableLocation(context);
-      if (isLocationEnabled) {
-        pinCode = await GeocodingService.getPincodeFromLocation();
-        logger.f("pinCode is  $pinCode");
-      }
-    } else if (!hasPermission && mounted) {
-      hasPermission = await LocationService.requestLocationPermission(context);
+    
+    await LocationService.getLocationWithPermissions();
 
-      if (hasPermission && mounted) {
-        bool isLocationEnabled = await LocationService.enableLocation(context);
-        if (isLocationEnabled) {
-          pinCode = await GeocodingService.getPincodeFromLocation();
-          logger.f("pinCode is  $pinCode");
-        }
-      }
-    }
+    pinCode = await GeocodingService.getPincodeFromLocation();
+    logger.f("pinCode is  $pinCode");
+
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
         builder: (context) => PatientRegistrationMiniappPage(
