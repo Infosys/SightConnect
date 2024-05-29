@@ -20,7 +20,8 @@ class ReferralRepositoryImpl implements ReferralRepository {
   @override
   Future<ReferralCodeModel> getReferral() async {
     try {
-      const String url = "/services/orchestration/api/referrals/referral-code";
+      const String url =
+          "/services/orchestration/api/v2/referrals/referral-code";
       final response = await dio.get(url);
       return ReferralCodeModel.fromJson(response.data);
     } on DioException catch (e) {
@@ -35,7 +36,7 @@ class ReferralRepositoryImpl implements ReferralRepository {
   @override
   Future<ReferralRequestModel> submitReferral(String code) async {
     try {
-      const String url = "/services/orchestration/api/referrals";
+      const String url = "/services/orchestration/api/v2/referrals";
       final response = await dio.post(
         url,
         queryParameters: {
@@ -55,15 +56,41 @@ class ReferralRepositoryImpl implements ReferralRepository {
   @override
   Future<ReferralRequestModel?> getMyReferrer() async {
     try {
-      const String url = "/services/orchestration/api/referrals/my-referrer";
+      const String url = "/services/orchestration/api/v2/referrals/my-referrer";
       final response = await dio.get(url);
       logger.d({
-        "response": response.data,
+        "getMyReferrer": response.data,
       });
       if (response.data != null && response.data.isEmpty) {
         return null;
       }
       return ReferralRequestModel.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      logger.e(e);
+      throw ServerFailure(errorMessage: "Failed to get the referrer");
+    }
+  }
+
+  @override
+  Future<MyReferralModel?> getMyReferral({bool statistics = false}) async {
+    try {
+      const String url =
+          "/services/orchestration/api/v2/referrals/my-referrals";
+      final response = await dio.get<Map<String, dynamic>>(
+        url,
+        queryParameters: {
+          "statistics": statistics,
+        },
+      );
+      logger.d(response.data);
+      if (response.data != null && response.data!.isEmpty) {
+        return null;
+      }
+
+      return MyReferralModel.fromJson(response.data!);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       rethrow;
