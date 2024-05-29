@@ -9,9 +9,9 @@ var globalVisualAcuityProvider = ChangeNotifierProvider((ref) {
 
 class GlobalVisualAcuityProvider extends ChangeNotifier {
   bool _isShortDistanceTest = true;
-  bool _isThreeMeter = true;
+  bool _isThreeMeter = false;
   int? _dignosticReportID;
-  bool _optoIsThreeMeters = true;
+  bool _optoIsThreeMeters = false;
 
   //////////////////////////////////////////////////////////
 

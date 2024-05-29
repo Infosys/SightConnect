@@ -10,10 +10,10 @@ class DistanceNotifier extends ChangeNotifier {
   int _currentLongDistance = 0;
   final int _maxDistance = 45;
   final int _minDistance = 35;
-  final int _maxLongDistance = 45;
-  final int _minLongDistance = 35;
+  final int _maxLongDistance = 1000;
+  final int _minLongDistance = 0;
   final int _doctorRecommendedDistance = 40;
-  final int _doctorRecommendedLongDistance = 40;
+  final int _doctorRecommendedLongDistance = 200;
   bool _toastShown = true;
   int get doctorRecommendedDistance => _doctorRecommendedDistance;
   int get doctorRecommendedLongDistance => _doctorRecommendedLongDistance;
