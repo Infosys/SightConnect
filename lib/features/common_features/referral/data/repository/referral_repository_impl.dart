@@ -51,4 +51,25 @@ class ReferralRepositoryImpl implements ReferralRepository {
       throw ServerFailure(errorMessage: "Failed to submit the code");
     }
   }
+
+  @override
+  Future<ReferralRequestModel?> getMyReferrer() async {
+    try {
+      const String url = "/services/orchestration/api/referrals/my-referrer";
+      final response = await dio.get(url);
+      logger.d({
+        "response": response.data,
+      });
+      if (response.data != null && response.data.isEmpty) {
+        return null;
+      }
+      return ReferralRequestModel.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      logger.e(e);
+      throw ServerFailure(errorMessage: "Failed to get the referrer");
+    }
+  }
 }

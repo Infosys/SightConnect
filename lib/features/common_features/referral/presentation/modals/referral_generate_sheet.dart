@@ -1,7 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/referral/data/models/referral_response_model.dart';
 import 'package:eye_care_for_all/features/common_features/referral/data/repository/referral_repository_impl.dart';
+import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_collect_sheet.dart';
+import 'package:eye_care_for_all/features/common_features/referral/presentation/widgets/referral_code_error.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,15 +16,13 @@ import 'package:share_plus/share_plus.dart';
 final referralCodeProvider =
     FutureProvider.autoDispose<ReferralCodeModel>((ref) async {
   return ref.watch(referralRepositoryImplProvider).getReferral();
-  // throw ServerFailure(errorMessage: "Failed to fetch referral code");
-  // await Future.delayed(const Duration(seconds: 2));
-  // return const ReferralCodeModel(
-  //   code: 'ABCD1234',
-  //   statistics: {
-  //     "total": 0,
-  //   },
-  // );
 });
+
+// final referralStatsProvider =
+//     FutureProvider.autoDispose<List<ReferralCodeModel>>((ref) async {
+//   await Future.delayed(const Duration(seconds: 2));
+//   return [];
+// });
 
 class ReferralCodeBottomSheet extends HookConsumerWidget {
   const ReferralCodeBottomSheet({super.key});
@@ -45,7 +44,6 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Row(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       'Your Referral Code',
@@ -54,9 +52,40 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 8),
                     SvgPicture.asset(
                       "assets/drawer_icons/referral.svg",
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ActionChip(
+                      backgroundColor: AppColor.purple,
+                      onPressed: () {
+                        final navigator = Navigator.of(context);
+                        navigator.pop();
+                        showReferralCollectSheet(context);
+                      },
+                      label: Text(
+                        "Have a Code? Tap Here",
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: referral.statistics != null,
+                      child: TextButton(
+                        onPressed: () {
+                          checkReferralStatus.value =
+                              !checkReferralStatus.value;
+                        },
+                        child: const Text('Statistics Overview'),
+                      ),
                     )
                   ],
                 ),
@@ -67,22 +96,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                     fontSize: 12,
                   ),
                 ),
-                Visibility(
-                  visible: referral.statistics != null,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          checkReferralStatus.value =
-                              !checkReferralStatus.value;
-                        },
-                        child: const Text('Statistics Overview'),
-                      ),
-                    ],
-                  ),
-                ),
+                const SizedBox(height: 8),
                 const Divider(),
                 Visibility(
                   visible: checkReferralStatus.value,
@@ -130,7 +144,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
           child: CircularProgressIndicator(),
         ),
       ),
-      error: (err, _) => const _ReferralErrorCard(
+      error: (err, _) => const ReferralErrorCard(
         errorMessage:
             "Apologies, we're unable to generate a referral code at the moment.",
       ),
@@ -228,60 +242,6 @@ class _RefferalCodeCard extends StatelessWidget {
                 color: AppColor.blue,
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ReferralErrorCard extends StatelessWidget {
-  const _ReferralErrorCard({super.key, required this.errorMessage});
-  final String errorMessage;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      height: AppSize.height(context) * 0.3,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Your Referral Code',
-                style: applyFiraSansFont(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(width: 8),
-              SvgPicture.asset(
-                "assets/drawer_icons/referral.svg",
-              )
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            errorMessage,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: applyFiraSansFont(
-              fontSize: 16,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Close'),
           ),
         ],
       ),

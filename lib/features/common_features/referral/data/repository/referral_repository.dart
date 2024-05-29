@@ -2,5 +2,6 @@ import 'package:eye_care_for_all/features/common_features/referral/data/models/r
 
 abstract class ReferralRepository {
   Future<ReferralCodeModel> getReferral();
+  Future<ReferralRequestModel?> getMyReferrer();
   Future<ReferralRequestModel> submitReferral(String code);
 }
