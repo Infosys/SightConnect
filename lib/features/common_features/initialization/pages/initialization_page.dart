@@ -312,14 +312,18 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       },
       upgrader: Upgrader(
         durationUntilAlertAgain: const Duration(milliseconds: 800),
-        willDisplayUpgrade: (
-            {appStoreVersion,
-            required display,
-            installedVersion,
-            minAppVersion}) {
-          logger.d("display : $display");
-          logger.d("appStoreVersion : $appStoreVersion");
-          logger.d("installedVersion : $installedVersion");
+        willDisplayUpgrade: ({
+          appStoreVersion,
+          required display,
+          installedVersion,
+          minAppVersion,
+        }) {
+          logger.d({
+            "appStoreVersion": appStoreVersion,
+            "display": display,
+            "installedVersion": installedVersion,
+            "minAppVersion": minAppVersion,
+          });
         },
       ),
       child: TraceableWidget(
