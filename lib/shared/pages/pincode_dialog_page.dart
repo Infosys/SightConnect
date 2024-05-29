@@ -54,8 +54,7 @@ class PincodeDialogPage extends HookConsumerWidget {
 
                             String? pinCode;
 
-                            await LocationService
-                                .getLocationWithPermissions();
+                            await LocationService.getLocationWithPermissions();
 
                             pinCode =
                                 await GeocodingService.getPincodeFromLocation();
@@ -79,6 +78,8 @@ class PincodeDialogPage extends HookConsumerWidget {
                                 logger
                                     .d({"Profile Page Update Miniapp": value});
 
+                                isLoading.value = false;
+
                                 if (value == null || value == false) {
                                   Fluttertoast.showToast(
                                       msg: loc.patientProfileNotUpdated);
@@ -95,7 +96,7 @@ class PincodeDialogPage extends HookConsumerWidget {
                             }
                           },
                           child: const Text("Proceed")),
-                     
+
                       // TextButton(
                       //     onPressed: () async {
                       //       isLoading.value = true;
@@ -146,7 +147,6 @@ class PincodeDialogPage extends HookConsumerWidget {
                       //       }
                       //     },
                       //     child: const Text("Enable Location and Proceed")),
-                    
                     ]),
               ),
             ),
