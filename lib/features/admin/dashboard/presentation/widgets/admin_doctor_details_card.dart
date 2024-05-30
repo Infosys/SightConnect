@@ -9,81 +9,77 @@ class AdminDoctorDetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-     
-      color: AppColor.blue.withOpacity(0.5),
+      color: AppColor.lightBlueOpacity,
       child: Responsive.isMobile(context)
           ? Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _doctorInfo(),
-               
                 Column(
                   children: _requestInfo(),
                 )
               ],
             )
           : Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(child: _doctorInfo()),
-                 VerticalDivider(
+                const VerticalDivider(
                   color: AppColor.black,
                   thickness: 2,
                 ),
-                Expanded(
-                
+                const Expanded(
                   child: Wrap(
                     children: [
-                       ListTile(
-        title: Text('Request ID'),
-        subtitle: Text('REQ-RIEB2024-0035'),
-      ),
-      ListTile(
-        title: Text('Transplantation Technique'),
-        subtitle: Text('PKP, EK, ALK'),
-      ),
+                      ListTile(
+                        title: Text('Request ID'),
+                        subtitle: Text('REQ-RIEB2024-0035'),
+                      ),
+                      ListTile(
+                        title: Text('Transplantation Technique'),
+                        subtitle: Text('PKP, EK, ALK'),
+                      ),
                     ],
                   ),
                 ),
-                 Expanded(
-                 
+                const Expanded(
                   child: Wrap(
-                    children: [  ListTile(
-        title: Text('Date - Time of Request'),
-        subtitle: Text('03/01/2024, 07:00 AM'),
-      ),
-      ListTile(
-        title: Text('Tissue'),
-        subtitle: Text('  Cornea'),
-      ),],
+                    children: [
+                      ListTile(
+                        title: Text('Date - Time of Request'),
+                        subtitle: Text('03/01/2024, 07:00 AM'),
+                      ),
+                      ListTile(
+                        title: Text('Tissue'),
+                        subtitle: Text('  Cornea'),
+                      ),
+                    ],
                   ),
-                  
                 ),
-                Expanded(
-                 
+                const Expanded(
                   child: Wrap(
                     children: [
-                        ListTile(
-        title: Text('Surgery Date - Time'),
-        subtitle: Text('03/01/2024, 02:30 PM'),
-      ),
-      ListTile(
-        title: Text('Eyes'),
-        subtitle: Text('Right Eye'),
-      ),
+                      ListTile(
+                        title: Text('Surgery Date - Time'),
+                        subtitle: Text('03/01/2024, 02:30 PM'),
+                      ),
+                      ListTile(
+                        title: Text('Eyes'),
+                        subtitle: Text('Right Eye'),
+                      ),
                     ],
-                  ),),
-                   Expanded(
-                 
+                  ),
+                ),
+                const Expanded(
                   child: Wrap(
                     children: [
-                        ListTile(
-        title: Text('Surgery Location'),
-        subtitle: Text('LVP Eye Institute - KAR'),
-      ),
-   
+                      ListTile(
+                        title: Text('Surgery Location'),
+                        subtitle: Text('LVP Eye Institute - KAR'),
+                      ),
                     ],
-                  ),)
+                  ),
+                )
               ],
             ),
     );
@@ -106,32 +102,30 @@ class AdminDoctorDetailsCard extends StatelessWidget {
         title: Text('Request ID'),
         subtitle: Text('REQ-RIEB2024-0035'),
       ),
-     
-       const ListTile(
+      const ListTile(
         title: Text('Expiry Date'),
         subtitle: Text('12/12/2024'),
       ),
-       ListTile(
+      const ListTile(
         title: Text('Date - Time of Request'),
         subtitle: Text('03/01/2024, 07:00 AM'),
       ),
-      ListTile(
+      const ListTile(
         title: Text('Tissue'),
         subtitle: Text('  Cornea'),
       ),
-      ListTile(
+      const ListTile(
         title: Text('Surgery Date - Time'),
         subtitle: Text('03/01/2024, 02:30 PM'),
       ),
-      ListTile(
+      const ListTile(
         title: Text('Eyes'),
         subtitle: Text('Right Eye'),
       ),
-            ListTile(
+      const ListTile(
         title: Text('Surgery Location'),
         subtitle: Text('LVP Eye Institute - KAR'),
       ),
-    
     ];
   }
 }

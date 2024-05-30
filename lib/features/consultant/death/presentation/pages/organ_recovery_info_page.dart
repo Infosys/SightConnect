@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_action_chip.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_drop_down.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_segment_button.dart';
@@ -18,8 +17,8 @@ class OrganRecoveryInfoPage extends HookWidget {
     final formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());
     final isMobile = Responsive.isMobile(context);
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Organ Recovery Information"),
+      appBar: AppBar(
+        title: const Text("Organ Recovery Information"),
       ),
       body: Form(
         key: formKey.value,

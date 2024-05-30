@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_drop_down.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_radio_button.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_switch_field.dart';
@@ -19,8 +18,8 @@ class ScreeningPage extends HookWidget {
     final formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());
     final isMobile = Responsive.isMobile(context);
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Screening"),
+      appBar: AppBar(
+        title: const Text("Screening"),
       ),
       body: Form(
         key: formKey.value,
@@ -145,7 +144,7 @@ class ScreeningPage extends HookWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
           onPressed: () {

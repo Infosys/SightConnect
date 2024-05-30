@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/wid
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/medical_summary_section.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/pathology_details_section.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/serology_section.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
 
 class DoctorTissueDetailForm extends StatelessWidget {
@@ -55,12 +56,16 @@ class DoctorTissueDetailForm extends StatelessWidget {
               child: const Text('Accept'),
             ),
           ),
+          const SizedBox(width: 16),
           Expanded(
             child: OutlinedButton(
               onPressed: () {},
               child: const Text('Reject'),
             ),
           ),
+          Expanded(
+              flex: Responsive.isMobile(context) ? 0 : 4,
+              child: const SizedBox.shrink())
         ],
       ),
     );

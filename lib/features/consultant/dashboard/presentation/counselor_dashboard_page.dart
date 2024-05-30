@@ -1,11 +1,11 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/doctor/surgery/presentation/pages/doctor_surgery_details_page.dart';
-import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/pages/doctor_tissue_detail_form.dart';
-import 'package:eye_care_for_all/features/doctor/tissue_request/presentation/pages/doctor_tissue_request_form.dart';
+import 'package:eye_care_for_all/features/consultant/death/presentation/pages/death_notification_page.dart';
+import 'package:eye_care_for_all/features/consultant/death/presentation/pages/organ_recovery_info_page.dart';
+import 'package:eye_care_for_all/features/consultant/death/presentation/pages/screening_page.dart';
 import 'package:flutter/material.dart';
 
-class DoctorDashBoardPage extends StatelessWidget {
-  const DoctorDashBoardPage({super.key});
+class CounselorDashboardPage extends StatelessWidget {
+  const CounselorDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +20,22 @@ class DoctorDashBoardPage extends StatelessWidget {
               indicatorColor: AppColor.primary,
               tabs: [
                 Tab(
-                  text: 'Tissue Detail Form',
+                  text: 'Death Notification',
                 ),
                 Tab(
-                  text: 'Surgery Details',
+                  text: 'Organ Recovery ',
                 ),
                 Tab(
-                  text: 'Tissue Request',
+                  text: 'Screening Page ',
                 ),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: [
-                  DoctorTissueDetailForm(),
-                  DoctorSurgeryDetailsPage(),
-                  DoctorTissueRequestForm(),
+                  DeathNotificationPage(),
+                  OrganRecoveryInfoPage(),
+                  ScreeningPage(),
                 ],
               ),
             ),

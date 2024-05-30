@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,20 +15,20 @@ class TechnicianDashboardPage extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColor.white,
-          shadowColor: AppColor.blackOpacity,
-          elevation: 3,
-          leadingWidth: 220,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Image.asset(
-              AppImages.logo,
-              height: 35,
-            ),
-          ),
-          automaticallyImplyLeading: false,
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: AppColor.white,
+        //   shadowColor: AppColor.blackOpacity,
+        //   elevation: 3,
+        //   leadingWidth: 220,
+        //   leading: Padding(
+        //     padding: const EdgeInsets.only(left: 16),
+        //     child: Image.asset(
+        //       AppImages.logo,
+        //       height: 35,
+        //     ),
+        //   ),
+        //   automaticallyImplyLeading: false,
+        // ),
         body: Container(
           padding: const EdgeInsets.all(16),
           child: Column(

@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
-import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_drop_down.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_radio_button.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
@@ -16,8 +15,8 @@ class DeathNotificationPage extends HookWidget {
     final formKey = useState<GlobalKey<FormState>>(GlobalKey<FormState>());
     final isMobile = Responsive.isMobile(context);
     return Scaffold(
-      appBar: const CustomAppbar(
-        title: Text("Death Notification"),
+      appBar: AppBar(
+        title: const Text("Death Notification"),
       ),
       body: Form(
         key: formKey.value,
