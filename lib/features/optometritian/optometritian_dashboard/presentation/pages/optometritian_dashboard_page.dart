@@ -78,7 +78,8 @@ class _OptometritianDashboardPageState
     ValueNotifier<bool> isLoading,
   ) {
     final model = ref.watch(optometricianDashboardProvider);
-
+    var logoutLoading = useState(false);
+    var switchProfileLoading = useState(false);
     final loc = context.loc!;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
@@ -86,7 +87,11 @@ class _OptometritianDashboardPageState
       extendBody: true,
       body: LoadingOverlay(
         isLoading: isLoading.value,
-        progressMessage: loc.optoLoggingOut,
+        progressMessage: logoutLoading.value == true
+            ? loc.optoLoggingOut
+            : switchProfileLoading.value == true
+                ? "Switching Profile"
+                : "",
         child: Stack(
           children: [
             Container(
@@ -120,6 +125,7 @@ class _OptometritianDashboardPageState
                       IconButton(
                         onPressed: () async {
                           isLoading.value = true;
+                          switchProfileLoading.value = true;
                           final navigator = Navigator.of(context);
                           await ref.read(initializationProvider).resetProfile();
                           navigator.pushNamedAndRemoveUntil(
@@ -136,6 +142,7 @@ class _OptometritianDashboardPageState
                       IconButton(
                         onPressed: () async {
                           isLoading.value = true;
+                          logoutLoading.value = true;
                           final navigator = Navigator.of(context);
                           ref
                               .read(initializationProvider)
