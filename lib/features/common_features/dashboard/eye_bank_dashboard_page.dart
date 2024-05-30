@@ -82,20 +82,25 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
 
       // create a switch case based on role
 
-      body: () {
-        switch (role) {
-          case EyeBankRoles.DOCTOR:
-            return const DoctorDashBoardPage();
-          case EyeBankRoles.ADMIN:
-            return const AdminDashboardPages();
-          case EyeBankRoles.TECHNICIAN:
-            return const TechnicianDashboardPage();
-          case EyeBankRoles.COUNSELOR:
-            return const CounselorDashboardPage();
-          default:
-            return Container();
-        }
-      }(),
+      body: AnimatedSwitcher(
+        switchInCurve: Curves.easeIn,
+        switchOutCurve: Curves.easeOut,
+        duration: const Duration(milliseconds: 600),
+        child: () {
+          switch (role) {
+            case EyeBankRoles.DOCTOR:
+              return const DoctorDashBoardPage();
+            case EyeBankRoles.ADMIN:
+              return const AdminDashboardPages();
+            case EyeBankRoles.TECHNICIAN:
+              return const TechnicianDashboardPage();
+            case EyeBankRoles.COUNSELOR:
+              return const CounselorDashboardPage();
+            default:
+              return Container();
+          }
+        }(),
+      ),
     );
   }
 }
