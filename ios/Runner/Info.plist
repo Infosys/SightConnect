@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>org.healthconnect.sightconnect</string>
+	<string>com.healthconnect.sightconnect</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -24,14 +24,24 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Play using while you are hiking</string>
 	<key>NSCameraUsageDescription</key>
 	<string>your usage description here</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Program requires GPS to track cars and job orders</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This we want to use to give information about the nearest vision care centers</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>your usage description here</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>recognize speech</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
