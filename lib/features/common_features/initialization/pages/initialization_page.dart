@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/geocoding_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/app_consent_form.dart';
@@ -194,7 +195,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
     String? pinCode;
-    
+
     await LocationService.getLocationWithPermissions();
 
     pinCode = await GeocodingService.getPincodeFromLocation();

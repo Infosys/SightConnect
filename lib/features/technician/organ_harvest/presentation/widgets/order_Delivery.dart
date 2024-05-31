@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +48,7 @@ class OrderDelivery extends StatelessWidget {
                           ),
                           onChanged: (value) {},
                         ),
-                        Divider( ),
+                        const Divider(),
                         AppTextField(
                           decoration: const InputDecoration(
                             labelText: "Address",
@@ -227,7 +226,7 @@ class OrderDelivery extends StatelessWidget {
                           ),
                           onChanged: (value) {},
                         ),
-                          const Divider(),
+                        const Divider(),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.99,
                           child: AppTextField(
