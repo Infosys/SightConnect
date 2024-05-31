@@ -30,7 +30,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
     return FaceDistanceDetector(
       onCameraCreated: (controller, paint, distance, isLoading) {
         final isValidDistance =
-            distance != null && distance >= minDistance && maxDistance <= 45;
+            distance != null && distance >= minDistance &&  distance <= maxDistance;
         return Scaffold(
           appBar: CustomAppbar(
             title:  Text(title),
