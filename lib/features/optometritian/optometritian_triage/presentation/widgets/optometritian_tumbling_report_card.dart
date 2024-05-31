@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/observation_code.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -26,6 +27,22 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
 
     // List<Observation> observations = report.observations!;
     logger.d("image urgency : ${report.observations}");
+
+    List<Observation> shortDistanceObservation = report.observations!
+        .where(
+            (element) => element.observationType == ObservationCode.LOGMAR_NEAR)
+        .toList();
+
+    List<Observation> longDistanceObservation = report.observations!
+        .where(
+          (element) =>
+              element.observationType == ObservationCode.LOGMAR_DISTANT,
+        )
+        .toList();
+
+    // shortDistanceObservation.sort((a, b) => a.observationCode!.compareTo(b.observationCode!));
+    // longDistanceObservation.sort((a, b) => a.observationCode!.compareTo(b.observationCode!));
+
     final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
@@ -50,13 +67,22 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 10),
+          Text(
+            "Short Distance Visual Acuity",
+            style: applyRobotoFont(
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 5),
             child: GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
-              itemCount: report.observations!.length,
+              itemCount: shortDistanceObservation.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 1.4,
@@ -80,11 +106,10 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          index == 0
-                              ? loc.rightEyeString
-                              : index == 1
-                                  ? loc.leftEyeString
-                                  : loc.bothEyesString,
+                          getTextFromBodySite(
+                              shortDistanceObservation[index]
+                                  .observationIdentifier!,
+                              loc),
                           style: applyRobotoFont(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -92,25 +117,84 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          index == 0
-                              ? lookUpSnellenTablefromLogMarValue(
-                                  report.observations![1].response!)
-                              : index == 1
-                                  ? lookUpSnellenTablefromLogMarValue(
-                                      report.observations![0].response!)
-                                  : lookUpSnellenTablefromLogMarValue(
-                                      report.observations![2].response!),
+                          lookUpSnellenTablefromLogMarValue(
+                              shortDistanceObservation[index].response!),
                           style: applyRobotoFont(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: index == 0
-                                ? getColorOnUrgency(
-                                    report.observations![1].response!)
-                                : index == 1
-                                    ? getColorOnUrgency(
-                                        report.observations![0].response!)
-                                    : getColorOnUrgency(
-                                        report.observations![2].response!),
+                            color: getColorOnUrgency(
+                                shortDistanceObservation[index].response!),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(
+            height: AppSize.ks,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            "Long Distance Visual Acuity",
+            style: applyRobotoFont(
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 5),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: longDistanceObservation.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.4,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 0,
+              ),
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.only(
+                    left: AppSize.width(context) * 0.03,
+                    top: AppSize.height(context) * 0.01,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColor.black.withOpacity(0.1),
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          getTextFromBodySite(
+                              longDistanceObservation[index]
+                                  .observationIdentifier!,
+                              loc),
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          lookUpSnellenTablefromLogMarValue(
+                              longDistanceObservation[index].response!),
+                          style: applyRobotoFont(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: getColorOnUrgency(
+                                longDistanceObservation[index].response!),
                           ),
                           textAlign: TextAlign.left,
                         ),
@@ -187,6 +271,19 @@ class OptometritianTumblingReportCard extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  String getTextFromBodySite(String bodySite, loc) {
+    switch (bodySite) {
+      case "BodySite.RIGHT_EYE":
+        return loc.rightEyeString;
+      case "BodySite.LEFT_EYE":
+        return loc.leftEyeString;
+      case "BodySite.BOTH_EYES":
+        return loc.bothEyesString;
+      default:
+        return "Error : No Data";
+    }
   }
 
   Color getColorOnUrgency(double value) {

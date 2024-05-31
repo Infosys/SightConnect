@@ -25,7 +25,7 @@ class VTRegisterRemoteSourceImpl implements VTRegisterRemoteSource {
   Future<List<VisionGuardianEventPatientResponseModel>> getPatientByNumber(
       String mobileNo) async {
     if (mobileNo.length != 10) throw "Invalid mobile number";
-    var endPoint = '/services/orchestration/api/patients/filter';
+    var endPoint = '/services/orchestration/api/v2/patients/filter';
     endPoint += '?queryText=$mobileNo';
     try {
       var response = await _dio.get<List<dynamic>>(endPoint);

@@ -202,8 +202,9 @@ class OptionCard extends StatelessWidget {
                                 context: context,
                                 question: question,
                                 isNoFirst: isNoFirst,
-                                onNoButtonPressed: (isNoFirst, isYes) =>
-                                    onNoButtonPressed,
+                                onNoButtonPressed: (isNoFirst, isYes) {
+                                  onNoButtonPressed(isNoFirst, isYes);
+                                },
                                 onYesButtonPressed: onYesButtonPressed,
                               );
                             },

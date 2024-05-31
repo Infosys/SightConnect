@@ -121,6 +121,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
         ),
         body: UpgradeAlert(
+          dialogStyle: UpgradeDialogStyle.cupertino,
           showIgnore: kDebugMode ? true : false,
           showLater: kDebugMode ? true : false,
           shouldPopScope: () => kDebugMode ? true : false,
@@ -168,7 +169,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: AppSize.kl * 3.5),
+                      const SizedBox(height: AppSize.kl * 3.3),
                       Text(
                         loc.loginVerifyMobileNumber,
                         style: applyFiraSansFont(
@@ -191,7 +192,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           mobileController.text = value!;
                         },
                       ),
-                      const SizedBox(height: AppSize.kl * 4),
+                      const SizedBox(height: AppSize.kl * 3),
                       () {
                         if (isLoading.value) {
                           return const Center(

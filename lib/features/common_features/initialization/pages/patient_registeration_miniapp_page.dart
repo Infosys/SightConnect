@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
-import 'package:eye_care_for_all/core/services/geocoding_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
@@ -7,13 +6,12 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../../../../main.dart';
-
 class PatientRegistrationMiniappPage extends StatelessWidget {
   final MiniAppActionType actionType;
   final String displayName;
   final String? mobileNumber;
   final String? parentPatientId;
+  final String? pinCode;
 
   const PatientRegistrationMiniappPage({
     super.key,
@@ -21,9 +19,10 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.displayName,
     this.mobileNumber,
     this.parentPatientId,
+    this.pinCode,
   });
 
-  // String pincode = "";
+  // String pinCode = "";
   @override
   Widget build(BuildContext context) {
     // if true returned then api call was successful
@@ -43,7 +42,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
           miniAppEnv: getMiniAppEnv(ApiConstant.appEnvironment),
-          // pincode: pincode??""
+          pinCode: pinCode,
         ),
         miniapp: MiniApp(
           id: "1",

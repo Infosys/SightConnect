@@ -26,7 +26,7 @@ class VTCloseAssessmentRemoteSourceImpl
     CloseAssessmentDto closeAssessmentDto,
   ) async {
     String endPoint =
-        '/services/triage/api/triage/${closeAssessmentDto.encounterId}/close';
+        '/services/triage/api/v2/triage-report/${closeAssessmentDto.encounterId}/close';
 
     logger.d(closeAssessmentDto.toJson());
 

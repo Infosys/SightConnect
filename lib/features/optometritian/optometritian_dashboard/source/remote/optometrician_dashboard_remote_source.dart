@@ -36,4 +36,4 @@ class OptometricianDashboardRemoteSourceImpl
 
 var optometricianDashboardRemoteSource =
     Provider<OptometricianDashboardRemoteSource>(
-        (ref) => OptometricianDashboardRemoteSourceImpl(ref.read(dioProvider)));
+        (ref) => OptometricianDashboardRemoteSourceImpl(ref.read(validationDioProvider)));

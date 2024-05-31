@@ -22,12 +22,11 @@ class VgDashboardAnalyticsRemoteSourceImpl
   VgDashboardAnalyticsRemoteSourceImpl(this._dio);
   @override
   Future<Map<String, dynamic>> getAnalytics({required int id}) async {
-    var endpoint = "/services/orchestration/api/practitioners/$id/analytics";
+    var endpoint = "/services/orchestration/api/v2/practitioners/$id/analytics";
 
     try {
       var response = await _dio.get(endpoint);
       Map<String, dynamic> analytics = json.decode(response.data);
-      
 
       return analytics;
     } catch (e) {

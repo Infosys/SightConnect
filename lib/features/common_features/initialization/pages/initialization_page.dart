@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/a
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_collect_sheet.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
@@ -24,6 +25,7 @@ import 'package:matomo_tracker/matomo_tracker.dart';
 import 'package:upgrader/upgrader.dart';
 
 import '../../../../core/models/keycloak.dart';
+import '../../../../core/services/location_service.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
   static const String routeName = '/initialization';
@@ -51,8 +53,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
             await PersistentAuthStateService.authState.setActiveRole(role);
-            // Set the active role in dio header
-            ref.read(dioProvider).options.headers["X-Active-Role"] = role;
+
+            // Update the headers with the selected role
+            ref.read(dioProvider.notifier).updateHeaders(activeRole: role);
+
             logger.d("Active Role: $role");
             _profileVerification(selectedProfile);
           } else {
@@ -86,8 +90,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     try {
       if (role == Role.ROLE_PATIENT) {
         final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
-        if (isAccepted != null && isAccepted) {
-          await _registerUser(navigator, role);
+        if (isAccepted != null && isAccepted && mounted) {
+          await _handleReferral(navigator, role);
         } else {
           // User stay on the same page
         }
@@ -101,6 +105,15 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     } catch (e) {
       logger.e("_handleNewUser: $e");
       await _invalidateAndLogout("Server Error. Please login again.");
+    }
+  }
+
+  Future<void> _handleReferral(NavigatorState navigator, Role role) async {
+    bool? referralResult = await showReferralCollectSheet(navigator.context);
+    if (referralResult == true) {
+      await _registerUser(navigator, role);
+    } else {
+      await _registerUser(navigator, role);
     }
   }
 
@@ -132,7 +145,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         bool is18PlusDeclarationAccepted =
             await model.getEighteenPlusDeclarationStatus();
         bool isConsentAccepted = await model.getConsentStatus();
-
         if (is18PlusDeclarationAccepted && isConsentAccepted) {
           return true;
         } else {
@@ -181,14 +193,19 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   }
 
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
-    // String pincode = await GeocodingService.getPincodeFromLocation(context);
-    // logger.f("pincode is  $pincode");
+    String? pinCode;
+    
+    await LocationService.getLocationWithPermissions();
+
+    pinCode = await GeocodingService.getPincodeFromLocation();
+    logger.f("pinCode is  $pinCode");
+
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
-        builder: (context) => const PatientRegistrationMiniappPage(
+        builder: (context) => PatientRegistrationMiniappPage(
           actionType: MiniAppActionType.REGISTER,
           displayName: "Register Patient",
-          // pincode: pincode,
+          pinCode: pinCode,
         ),
       ),
     );
@@ -284,6 +301,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
+      dialogStyle: UpgradeDialogStyle.cupertino,
       showIgnore: kDebugMode ? true : false,
       showLater: kDebugMode ? true : false,
       shouldPopScope: () => kDebugMode ? true : false,
@@ -300,9 +318,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
           minAppVersion,
         }) {
           logger.d({
-            "display : $display",
-            "appStoreVersion : $appStoreVersion",
-            "installedVersion : $installedVersion",
+            "appStoreVersion": appStoreVersion,
+            "display": display,
+            "installedVersion": installedVersion,
+            "minAppVersion": minAppVersion,
           });
         },
       ),

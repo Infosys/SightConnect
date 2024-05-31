@@ -38,6 +38,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
         actions: const [],
       ),
       body: UpgradeAlert(
+        dialogStyle: UpgradeDialogStyle.cupertino,
         showIgnore: false,
         showLater: false,
         shouldPopScope: () => false,

@@ -2,8 +2,11 @@ import 'package:eye_care_for_all/core/models/vision_center_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../../main.dart';
 
 final preliminaryAssessmentHelperProvider =
     ChangeNotifierProvider<PreliminaryAssessmentHelperNotifier>(
@@ -12,13 +15,17 @@ final preliminaryAssessmentHelperProvider =
 
 class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   Ref ref;
-  final TextEditingController recommendationController = TextEditingController();
-  final TextEditingController eyeRelatedProblemotherController = TextEditingController();
-  final TextEditingController eyeSightProblemotherController = TextEditingController();
-  final TextEditingController remarksController = TextEditingController();
-  final TextEditingController otherQuestionsController = TextEditingController();
-   final TextEditingController _equipmentController =
+  final TextEditingController recommendationController =
       TextEditingController();
+  final TextEditingController eyeRelatedProblemotherController =
+      TextEditingController();
+  final TextEditingController eyeSightProblemotherController =
+      TextEditingController();
+  final TextEditingController remarksController = TextEditingController();
+  final TextEditingController otherQuestionsController =
+      TextEditingController();
+  final TextEditingController _equipmentController = TextEditingController();
+
   bool onIvrCall = false;
   bool recommendationSelected = false;
   bool visionCenterSelected = false;
@@ -33,11 +40,36 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   TriagePostModel? triageResponse;
   TriagePriority selectedSeverity = TriagePriority.ROUTINE;
   OrganizationResponseModel? _selectedVisionCenter;
-
+  String _readingUnit = 'LOGMAR';
+  DeviceModel _selectedEquipment = const DeviceModel(
+      displayName: 'LOGMAR',
+      deviceObservation:
+          DeviceObservation(rangeMin: "0.000", rangeMax: "1.000"));
+  List<DeviceModel>? _equipmentsData;
   PreliminaryAssessmentHelperNotifier(this.ref);
 
+  String get readingUnit => _readingUnit;
+  DeviceModel get selectedEquipment => _selectedEquipment;
+  List<DeviceModel>? get equipmentsData => _equipmentsData;
 
+  void setEquipmentsData(List<DeviceModel> equipmentsData) {
+    _equipmentsData = equipmentsData;
+    notifyListeners();
+  }
 
+  void setSelectedEquipment() {
+    _selectedEquipment = equipmentsData!
+        .firstWhere((element) => element.displayName == _readingUnit);
+    notifyListeners();
+  }
+
+  void setReadingUnit(String value) {
+    _readingUnit = value;
+    logger.d("Reading unit set to $_readingUnit");
+    notifyListeners();
+    setSelectedEquipment();
+    notifyListeners();
+  }
 
   void setEquipment(String value) {
     _equipmentController.text = value;

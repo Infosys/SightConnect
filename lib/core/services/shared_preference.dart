@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,45 +26,47 @@ class SharedPreferenceService {
     await _sharedPreferences.setDouble("fontScale", value);
   }
 
-  static set storeTumblingOverInfo(bool value) {
-    _sharedPreferences.setBool("tumblingOverInfo", value);
+  static Future<void> storeTumblingOverInfo(bool value) async {
+    await _sharedPreferences.setBool("tumblingOverInfo", value);
   }
 
-  static set storeTenantId(int value) {
-    _sharedPreferences.setInt("tenantId", value);
+  static Future<void> storeTenantId(int value) async {
+    await _sharedPreferences.setInt("tenantId", value);
   }
 
-  static set storeOrganizationId(int value) {
-    _sharedPreferences.setInt("organizationId", value);
+  static Future<void> storeOrganizationId(int value) async {
+    await _sharedPreferences.setInt("organizationId", value);
   }
 
-  static set storeTenantIdVt(int value) {
-    _sharedPreferences.setInt("tenantIdVt", value);
+  static Future<void> storeTenantIdVt(int value) async {
+    await _sharedPreferences.setInt("tenantIdVt", value);
   }
 
-  static set storeOrganizationIdVt(int value) {
-    _sharedPreferences.setInt("organizationIdVt", value);
+  static Future<void> storeOrganizationIdVt(int value) async {
+    await _sharedPreferences.setInt("organizationIdVt", value);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////
 
   static int? get getTenantIdVt {
-    log("getTenantIdVt: ${_sharedPreferences.getInt("tenantIdVt")}");
+    logger.d("getTenantIdVt: ${_sharedPreferences.getInt("tenantIdVt")}");
     return _sharedPreferences.getInt("tenantIdVt");
   }
 
   static int? get getOrganizationIdVt {
-    log("getOrganizationIdVt: ${_sharedPreferences.getInt("organizationIdVt")}");
+    logger.d(
+        "getOrganizationIdVt: ${_sharedPreferences.getInt("organizationIdVt")}");
     return _sharedPreferences.getInt("organizationIdVt");
   }
 
   static int? get getTenantId {
-    log("getTenantId: ${_sharedPreferences.getInt("tenantId")}");
+    logger.d("getTenantId: ${_sharedPreferences.getInt("tenantId")}");
     return _sharedPreferences.getInt("tenantId");
   }
 
   static int? get getOrganizationId {
-    log("getOrganizationId: ${_sharedPreferences.getInt("organizationId")}");
+    logger
+        .d("getOrganizationId: ${_sharedPreferences.getInt("organizationId")}");
     return _sharedPreferences.getInt("organizationId");
   }
 

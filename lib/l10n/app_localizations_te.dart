@@ -10,6 +10,11 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
+  String referralSmsContent(String referral) {
+    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+  }
+
+  @override
   String loginEnterOTP(String mobileNumber) {
     return 'దయచేసి ${mobileNumber}కి పంపిన OTPని నమోదు చేయండి';
   }
@@ -32,6 +37,11 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String vgSearchByIdName(String searchType) {
     return '${searchType} ఐడి, పేరు ద్వారా శోధించండి';
+  }
+
+  @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'అత్యవసర పరిస్థితుల్లో, దయచేసి ${tollFreeNumber} కు కాల్ చేయండి.';
   }
 
   @override
@@ -197,13 +207,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get homeCarousal2Title => 'గమనించవలసిన 7 కంటి సమస్యలు!';
 
   @override
-  String get homeCarousal2Description => 'పరీక్ష చేయించుకోవలసిన 7 కంటి సమస్యలుః \r\n \r\n• కన్ను ఎర్రబడటం, \r\n• కళ్ళలో నీరు రావడం, \r\n• కళ్ళపై తెల్లటి మచ్చలు';
+  String get homeCarousal2Description => 'పరీక్ష చేయించుకోవలసిన 7 కంటి సమస్యలుః\r\n\r\n \r\n\r\n• కన్ను ఎర్రబడటం,\r\n\r\n• కళ్ళలో నీరు రావడం,\r\n\r\n• కళ్ళపై తెల్లటి మచ్చలు';
 
   @override
   String get homeCarousal3Title => 'మీరు గమనించని కంటి సమస్యలు చాలా ఉన్నాయి';
 
   @override
-  String get homeCarousal3Description => 'కానీ ఒక కంటి నిపుణుడు చేయగలడు. \r\n తరువాత సమస్యలను నివారించడానికి సకాలంలో కంటి సమస్యలను గుర్తించి చికిత్స పొందండి.';
+  String get homeCarousal3Description => 'కానీ ఒక కంటి నిపుణుడు చేయగలడు.\r\n\r\n తరువాత సమస్యలను నివారించడానికి సకాలంలో కంటి సమస్యలను గుర్తించి చికిత్స పొందండి.';
 
   @override
   String get myConnectionsTitle => 'నా సభ్యులు';
@@ -269,7 +279,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get appDrawerSignOut => 'సైన్ అవుట్ చేయండి';
 
   @override
-  String get aboutUsDescription => 'Sightconnect అనేది వినియోగదారు-స్నేహపూర్వక కంటి సంరక్షణ అనువర్తనం, ఇది కాల్ ద్వారా స్వీయ-మూల్యాంకనం మరియు సంప్రదింపులకు సహాయపడుతుంది. \r\n\r\n కంటి సంరక్షణను అందరికీ అందుబాటులో ఉంచడం మా లక్ష్యం. ఈ అనువర్తనం వారి వయస్సు, సాంకేతిక నేపథ్యం మరియు సామాజిక లేదా ఆర్థిక నేపథ్యంతో సంబంధం లేకుండా అన్ని వర్గాల వినియోగదారులను కలుపుకొని, అందుబాటులో ఉండేలా రూపొందించబడింది. అనువర్తనం మరియు దాని కంటెంట్ ఆంగ్లం మరియు ఇతర స్థానిక భాషలలో అందుబాటులో ఉంచబడ్డాయి. ఇది వినియోగదారులకు వారి కళ్ళను స్వీయ-మూల్యాంకనంా వేయడానికి మరియు సకాలంలో చికిత్స సలహాలను పొందడానికి సహాయపడుతుంది. మా వినియోగదారులకు వ్యక్తిగతీకరించిన కంటి సంరక్షణ పరిష్కారాలను అందించడానికి అనువర్తనం సరికొత్త సాంకేతిక పరిజ్ఞానాన్ని మరియు సాధనాలను ఉపయోగిస్తుంది. ఇది వారి జీవితాన్ని సులభతరం చేయడానికి వివిధ రకాల లక్షణాలతో వస్తుంది.';
+  String get aboutUsDescription => 'Sightconnect అనేది వినియోగదారు-స్నేహపూర్వక కంటి సంరక్షణ అనువర్తనం, ఇది కాల్ ద్వారా స్వీయ-మూల్యాంకనం మరియు సంప్రదింపులకు సహాయపడుతుంది.\r\n\r\n\r\n\r\n కంటి సంరక్షణను అందరికీ అందుబాటులో ఉంచడం మా లక్ష్యం. ఈ అనువర్తనం వారి వయస్సు, సాంకేతిక నేపథ్యం మరియు సామాజిక లేదా ఆర్థిక నేపథ్యంతో సంబంధం లేకుండా అన్ని వర్గాల వినియోగదారులను కలుపుకొని, అందుబాటులో ఉండేలా రూపొందించబడింది. అనువర్తనం మరియు దాని కంటెంట్ ఆంగ్లం మరియు ఇతర స్థానిక భాషలలో అందుబాటులో ఉంచబడ్డాయి. ఇది వినియోగదారులకు వారి కళ్ళను స్వీయ-మూల్యాంకనంా వేయడానికి మరియు సకాలంలో చికిత్స సలహాలను పొందడానికి సహాయపడుతుంది. మా వినియోగదారులకు వ్యక్తిగతీకరించిన కంటి సంరక్షణ పరిష్కారాలను అందించడానికి అనువర్తనం సరికొత్త సాంకేతిక పరిజ్ఞానాన్ని మరియు సాధనాలను ఉపయోగిస్తుంది. ఇది వారి జీవితాన్ని సులభతరం చేయడానికి వివిధ రకాల లక్షణాలతో వస్తుంది.';
 
   @override
   String get aboutUsFeaturesTitle => 'లక్షణాలు';
@@ -1643,13 +1653,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get vgConjunctivitis => 'కంజంక్టైవైటిస్';
 
   @override
-  String get vgServicesCreateEvent => 'ఈవెంట్\r\nసృష్టించండి';
+  String get vgServicesCreateEvent => 'ఈవెంట్\r\n\r\nసృష్టించండి';
 
   @override
-  String get vgServicesEyeAssessment => 'కళ్లు\r\nమూల్యాంకన';
+  String get vgServicesEyeAssessment => 'కళ్లు\r\n\r\nమూల్యాంకన';
 
   @override
-  String get vgServicesRegisterPatient => 'కొత్త రోగిని\r\nనమోదు చేయండి';
+  String get vgServicesRegisterPatient => 'కొత్త రోగిని\r\n\r\nనమోదు చేయండి';
 
   @override
   String get vgAddPatients => 'రోగులను జోడించండి';
@@ -1848,4 +1858,67 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'గరిష్ఠ పాఠ్య పరిమాణం చేరింది';
+
+  @override
+  String get chatClearChat => 'చాట్ క్లియర్ చేయండి';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'కంటి అంచనా మీకు సిఫార్సు చేయబడింది.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'మీరు ట్రైఏజ్ కంటి అంచనా వేయాలనుకుంటున్నారా?';
+
+  @override
+  String get chatChatbotNotAvailable => 'చాట్బాట్ ప్రస్తుతానికి అందుబాటులో లేదు. దయచేసి తరువాత మళ్లీ ప్రయత్నించండి.';
+
+  @override
+  String get chatTypeHere => 'ఇక్కడ టైప్ చేయండి...';
+
+  @override
+  String get switchProfile => 'ప్రొఫైల్ మార్చండి';
+
+  @override
+  String get switchRole => 'పాత్రను మార్చండి';
+
+  @override
+  String get switchTenant => 'అద్దెదారుని మార్చండి';
+
+  @override
+  String get patientHeaderWelcomeText => 'సైట్కనెక్ట్కు స్వాగతం! మీ దృష్టిని జాగ్రత్తగా చూసుకోవడం ముఖ్యం, మరియు మేము మీ కోసం ప్రతి దశలో ఇక్కడ ఉన్నాము.';
+
+  @override
+  String get triageTestCardHeader => 'మీ కంటి పరీక్ష ఉచితం...';
+
+  @override
+  String get triageTestCardBody1 => 'మీ కంటి లక్షణాలను త్వరగా విశ్లేషించండి.';
+
+  @override
+  String get triageTestCardBody2 => 'మీకు కంటి సమస్య ఉందా అని గుర్తించండి';
+
+  @override
+  String get triageTestCardBody3 => 'మీ వైద్యుడిని ఎప్పుడు సంప్రదించాలో తెలుసుకోండి';
+
+  @override
+  String get triageTestCardButton => 'ఉచిత కంటి పరీక్షను ప్రారంభించండి';
+
+  @override
+  String get myConnectionListAddMembersDescription => 'మీ కుటుంబం మరియు స్నేహితులను జోడించడానికి సభ్యులను జోడించు బటన్ను నొక్కండి.';
+
+  @override
+  String get showTriageHowToProceedBottomSheetHeader => 'మీరు ఎలా ముందుకు వెళ్లాలనుకుంటున్నారు?';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody1 => 'నాకు ఒక సమస్య ఉంది మరియు ధృవీకరించాలనుకుంటున్నాను';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody2 => 'నాకు ఏదైనా సమస్య ఉందో లేదో నాకు తెలియదు';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody3 => 'నాకు కంటి సమస్యలు లేవు-కేవలం తనిఖీ చేయాలనుకుంటున్నాను';
+
+  @override
+  String get appDrawerToastMessageText => 'క్షమించండి, మేము మొబైల్ యాప్లో లాగ్అవుట్ లోపాన్ని ఎదుర్కొన్నాము.';
+
+  @override
+  String get myConnectionListAddMembers => 'సభ్యుడిని జోడించండి';
 }

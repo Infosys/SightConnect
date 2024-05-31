@@ -60,11 +60,13 @@ class ObservationBriefEntity {
   final int observationId;
   final int observationValueIdentifier;
   String? bodySite;
+  String? code;
   ObservationBriefEntity({
     required this.observationValue,
     required this.observationId,
     required this.observationValueIdentifier,
     this.bodySite,
+    this.code,
   });
 }
 

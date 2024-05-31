@@ -10,6 +10,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String referralSmsContent(String referral) {
+    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+  }
+
+  @override
   String loginEnterOTP(String mobileNumber) {
     return 'Please enter the OTP sent to ${mobileNumber}';
   }
@@ -32,6 +37,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String vgSearchByIdName(String searchType) {
     return 'Search by ${searchType} ID, Name';
+  }
+
+  @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'In case of emergency, please call ${tollFreeNumber}';
   }
 
   @override
@@ -197,13 +207,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeCarousal2Title => '7 eye problems not to miss out!';
 
   @override
-  String get homeCarousal2Description => '\r\n7 eye problems to get tested for: \r\n \r\n• Redness of eye\r\n• Watering of eyes\r\n• White spots on eyes';
+  String get homeCarousal2Description => '\r\n\r\n7 eye problems to get tested for:\r\n\r\n \r\n\r\n• Redness of eye\r\n\r\n• Watering of eyes\r\n\r\n• White spots on eyes';
 
   @override
   String get homeCarousal3Title => 'Eye problems. There are many that you can\'t see';
 
   @override
-  String get homeCarousal3Description => 'But a vision care expert can.\r\nGet eye problems identified\r\nand treated in time to avoid\r\ncomplications later';
+  String get homeCarousal3Description => 'But a vision care expert can.\r\n\r\nGet eye problems identified\r\n\r\nand treated in time to avoid\r\n\r\ncomplications later';
 
   @override
   String get myConnectionsTitle => 'My Members';
@@ -269,7 +279,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDrawerSignOut => 'Sign Out';
 
   @override
-  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
+  String get aboutUsDescription => 'Sightconnect is a user-friendly eye care app that helps with self-assessment and consultation over the call.\r\n\r\n\r\n\r\nAt the heart of our mission is a commitment to make eyecare accessible to all. The app is designed to be inclusive and accessible by users from all walks of life, regardless of their age, technical background, and social or economic background. The app and its content are made available in English and other local languages. It helps users to self-assess their eyes and get timely treatment advice. The app uses the latest technologies and tools to provide personalized eye care solutions to our users. It comes with a variety of features to make their life easier. ';
 
   @override
   String get aboutUsFeaturesTitle => 'Features';
@@ -404,10 +414,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get eyeAssessmentStepOne => 'Step 1 - Eye Assessment Questions';
 
   @override
-  String get eyeAssessmentStepTwo => 'Step 2 - Eye Assessment Questions';
+  String get eyeAssessmentStepTwo => 'Step 2 - Visual Acuity Test';
 
   @override
-  String get eyeAssessmentStepThree => 'Step 3 - Eye Assessment Questions';
+  String get eyeAssessmentStepThree => 'Step 3 - Eye Scan';
 
   @override
   String get eyeAssessmentOngoing => 'Ongoing';
@@ -455,7 +465,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get agreeButton => 'I Agree';
 
   @override
-  String get consentPageCheckbox => 'I agree to the terms and conditions';
+  String get consentPageCheckbox => 'I agree';
 
   @override
   String get confirmButton => 'Confirm';
@@ -557,13 +567,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get swipeGestureCardText => 'Swipe in the direction of the symbol';
 
   @override
-  String get assessmentResultCardAssessmentQuestions => 'Assessment\r\nQuestions';
+  String get assessmentResultCardAssessmentQuestions => 'Assessment\r\n\r\nQuestions';
 
   @override
-  String get assessmentResultCardAcuityTest => 'Acuity\r\nTest';
+  String get assessmentResultCardAcuityTest => 'Acuity\r\n\r\nTest';
 
   @override
-  String get assessmentResultCardEyeScan => 'Eye\r\nScan';
+  String get assessmentResultCardEyeScan => 'Eye\r\n\r\nScan';
 
   @override
   String get viewReportButton => 'View Report';
@@ -653,7 +663,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noPreviewAvailable => 'No Preview Available';
 
   @override
-  String get privacyPolicyTitle => 'Privacy & Data Protection';
+  String get privacyPolicyTitle => 'Privacy & Data Protection Statement';
 
   @override
   String get privacyPolicyPurposeOfProcessingSubTitle => 'We process the Personal Data provided by you for the below purposes such as:';
@@ -770,7 +780,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get triageHowToReport => 'How to report eye problems?';
 
   @override
-  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
+  String get triageReportInstructions => 'If you are an individual having eye related problems, you could self-declare and mention your problems here to get appropriate guidance. You could also mention the eye problems of your friends or family members here and get appropriate guidance.\r\n\r\n\r\n\r\nYou will be asked a set of questions in the following sections to understand the nature and severity of the eye problem. You will be recommended and guided with the tests to be performed and steps to follow after answering all the questions.';
 
   @override
   String get assessment => 'Assessment';
@@ -1643,13 +1653,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgConjunctivitis => 'Conjunctivitis';
 
   @override
-  String get vgServicesCreateEvent => 'Create\r\nEvent';
+  String get vgServicesCreateEvent => 'Create\r\n\r\nEvent';
 
   @override
-  String get vgServicesEyeAssessment => 'Eye\r\nAssessment';
+  String get vgServicesEyeAssessment => 'Eye\r\n\r\nAssessment';
 
   @override
-  String get vgServicesRegisterPatient => 'Register\r\nNew Patient';
+  String get vgServicesRegisterPatient => 'Register\r\n\r\nNew Patient';
 
   @override
   String get vgAddPatients => 'Add Patients';
@@ -1664,7 +1674,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgUploadImage => 'Upload Image';
 
   @override
-  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\nwill be shown as thumbnail';
+  String get vgAddPhotoInstruction => 'Add a photo of the Event which\r\n\r\nwill be shown as thumbnail';
 
   @override
   String get vgAddressDetails => 'Address Details';
@@ -1766,7 +1776,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vgCompleteProfile => 'Complete Profile';
 
   @override
-  String get vgStartAssessment => 'Start\r\nAssessment';
+  String get vgStartAssessment => 'Start Assessment';
 
   @override
   String get vgSearchPatientByPhoneNumber => 'Search Patient by Phone Number';
@@ -1848,4 +1858,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'Maximum text size reached';
+
+  @override
+  String get chatClearChat => 'Clear Chat';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'Eye assessment is recommended for you.';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'Do you want to take the triage eye assessment?';
+
+  @override
+  String get chatChatbotNotAvailable => 'Chatbot is not available at the moment. Please try again later.';
+
+  @override
+  String get chatTypeHere => 'Type here...';
+
+  @override
+  String get switchProfile => 'Switch Profile';
+
+  @override
+  String get switchRole => 'Switch Role';
+
+  @override
+  String get switchTenant => 'Switch Tenant';
+
+  @override
+  String get patientHeaderWelcomeText => 'Welcome to SightConnect! Taking care of your vision is important, and we are here for you every step of the way.';
+
+  @override
+  String get triageTestCardHeader => 'Your eye test is free…';
+
+  @override
+  String get triageTestCardBody1 => 'Quickly analyse your eye symptoms';
+
+  @override
+  String get triageTestCardBody2 => 'Identify if you may have an eye problem';
+
+  @override
+  String get triageTestCardBody3 => 'Know when to visit your doctor';
+
+  @override
+  String get triageTestCardButton => 'Start Free Eye Test';
+
+  @override
+  String get myConnectionListAddMembersDescription => 'Click the Add Members button to add your family and friends.';
+
+  @override
+  String get showTriageHowToProceedBottomSheetHeader => 'How do you want to proceed?';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody1 => 'I have a problem and want to validate';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody2 => 'I am not sure if I have a problem';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody3 => 'I have no eye issues – just want to check';
+
+  @override
+  String get appDrawerToastMessageText => 'Apologies, we encountered a logout error in the mobile app.';
+
+  @override
+  String get myConnectionListAddMembers => 'Add Member';
 }

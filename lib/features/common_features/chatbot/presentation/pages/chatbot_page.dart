@@ -10,7 +10,6 @@ import 'package:eye_care_for_all/features/common_features/chatbot/presentation/w
 import 'package:eye_care_for_all/features/common_features/chatbot/presentation/widgets/loading_indicator.dart';
 import 'package:eye_care_for_all/features/common_features/chatbot/text_to_speech.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -197,7 +196,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Widget _buildClearChatButton() {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     if (_chatMessages.length < 2 || _isLoading) {
       return Container();
     }
@@ -218,7 +217,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
           ),
           padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 16),
           margin: const EdgeInsets.only(bottom: 8),
-          child: Text(loc.chatClearChat),
+          child: const Text("clear chat"),
         ),
       ),
     );
@@ -262,14 +261,14 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _handleStandardAction(StandardAction action) async {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     switch (action) {
       case StandardAction.startTriageEyeAssessment:
         setState(() {
           _chatMessage(ChatMessage(
-              message: loc.chatEyeAssessmentRecommended, isMe: false));
+              message: "loc.chatEyeAssessmentRecommended", isMe: false));
           _currentIntent = ChatIntent(
-            question: loc.chatDoYouWantToTakeTheTriageEyeAssessment,
+            question: "loc.chatDoYouWantToTakeTheTriageEyeAssessment",
             yesHandler: () {
               showTriageBottomSheet(context: context);
               setState(() {
@@ -291,7 +290,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
   }
 
   Future _askChatBot(String message) async {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     try {
       final response = await _chatService.ask(message, widget.selectedLanguage);
 
@@ -302,7 +301,7 @@ class _ChatBotPageState extends ConsumerState<ChatBotPage> {
       }
     } catch (e) {
       logger.d("ChatBotPage: _askChatBot: Error: $e");
-      Fluttertoast.showToast(msg: loc.chatChatbotNotAvailable);
+      Fluttertoast.showToast(msg: "loc.chatChatbotNotAvailable");
       setState(() {
         _isLoading = false;
       });

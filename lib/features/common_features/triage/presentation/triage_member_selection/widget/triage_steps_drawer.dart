@@ -2,6 +2,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_stepper_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -15,6 +16,7 @@ class TriageStepsDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(triageStepperProvider);
+    final role = PersistentAuthStateService.authState.activeRole;
     final loc = context.loc!;
     return Drawer(
       width: AppSize.width(context),
@@ -85,8 +87,8 @@ class TriageStepsDrawer extends ConsumerWidget {
                         padding: const EdgeInsets.all(0),
                         stepRadius: 14,
                         showStepBorder: true,
-                        steps: const [
-                          EasyStep(
+                        steps: [
+                          const EasyStep(
                             icon: Icon(
                               Icons.more_horiz,
                               size: 25,
@@ -103,7 +105,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                               weight: 10,
                             ),
                           ),
-                          EasyStep(
+                          const EasyStep(
                             icon: Icon(
                               Icons.more_horiz,
                               size: 25,
@@ -120,7 +122,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                               weight: 10,
                             ),
                           ),
-                          EasyStep(
+                          const EasyStep(
                             icon: Icon(
                               Icons.more_horiz,
                               size: 25,
@@ -137,7 +139,25 @@ class TriageStepsDrawer extends ConsumerWidget {
                               weight: 10,
                             ),
                           ),
-                          EasyStep(
+                          if (role == "ROLE_OPTOMETRIST")
+                            const EasyStep(
+                              icon: Icon(
+                                Icons.more_horiz,
+                                size: 25,
+                                weight: 10,
+                              ),
+                              activeIcon: Icon(
+                                Icons.more_horiz,
+                                size: 25,
+                                weight: 10,
+                              ),
+                              finishIcon: Icon(
+                                Icons.check,
+                                size: 25,
+                                weight: 10,
+                              ),
+                            ),
+                          const EasyStep(
                             icon: Icon(
                               Icons.more_horiz,
                               size: 25,
@@ -204,22 +224,76 @@ class TriageStepsDrawer extends ConsumerWidget {
                           const SizedBox(
                             height: AppSize.kl * 3.5,
                           ),
-                          Text(
-                            loc.eyeAssessmentStepThree,
-                            style: applyRobotoFont(
-                                fontSize: 14, fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            model.currentStep == 2
-                                ? loc.eyeAssessmentOngoing
-                                : model.currentStep > 2
-                                    ? loc.eyeAssessmentCompleted
-                                    : loc.eyeAssessmentPending,
-                            style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.altGrey,
-                                fontWeight: FontWeight.w500),
-                          ),
+                          if (role == "ROLE_OPTOMETRIST")
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Step -3 Visual Acuity Test (Long Distance)",
+                                  style: applyRobotoFont(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  model.currentStep == 2
+                                      ? loc.eyeAssessmentOngoing
+                                      : model.currentStep > 2
+                                          ? loc.eyeAssessmentCompleted
+                                          : loc.eyeAssessmentPending,
+                                  style: applyRobotoFont(
+                                      fontSize: 12,
+                                      color: AppColor.altGrey,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: AppSize.kl * 3.4,
+                                ),
+                                Text(
+                                  'Step 4 - Eye Scan',
+                                  style: applyRobotoFont(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  model.currentStep == 3
+                                      ? loc.eyeAssessmentOngoing
+                                      : model.currentStep > 3
+                                          ? loc.eyeAssessmentCompleted
+                                          : loc.eyeAssessmentPending,
+                                  style: applyRobotoFont(
+                                      fontSize: 12,
+                                      color: AppColor.altGrey,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            )
+                          else
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Step 3 - Eye Scan',
+                                  style: applyRobotoFont(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  model.currentStep == 2
+                                      ? loc.eyeAssessmentOngoing
+                                      : model.currentStep > 2
+                                          ? loc.eyeAssessmentCompleted
+                                          : loc.eyeAssessmentPending,
+                                  style: applyRobotoFont(
+                                      fontSize: 12,
+                                      color: AppColor.altGrey,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
                           const SizedBox(
                             height: AppSize.kl * 3.4,
                           ),

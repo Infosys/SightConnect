@@ -45,6 +45,9 @@ Map<String, dynamic> _$$OrganizationResponseModelImplToJson(
 
 const _$FacilityTypeEnumMap = {
   FacilityType.PRIMARY: 'PRIMARY',
+  FacilityType.SECONDARY: 'SECONDARY',
+  FacilityType.TERTIARY: 'TERTIARY',
+  FacilityType.OTHER: 'OTHER',
 };
 
 _$TenantCustomModelImpl _$$TenantCustomModelImplFromJson(

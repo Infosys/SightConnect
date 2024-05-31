@@ -25,6 +25,7 @@ mixin _$MiniAppInjectionModel {
   String? get parentPatientId => throw _privateConstructorUsedError;
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
+  String? get pinCode => throw _privateConstructorUsedError;
   MiniAppInjectionModelRole? get role => throw _privateConstructorUsedError;
   Map<String, dynamic>? get additionalData =>
       throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $MiniAppInjectionModelCopyWith<$Res> {
       String? parentPatientId,
       String? mobileNumber,
       String? token,
+      String? pinCode,
       MiniAppInjectionModelRole? role,
       Map<String, dynamic>? additionalData,
       MiniAppEnv miniAppEnv});
@@ -70,6 +72,7 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
     Object? parentPatientId = freezed,
     Object? mobileNumber = freezed,
     Object? token = freezed,
+    Object? pinCode = freezed,
     Object? role = freezed,
     Object? additionalData = freezed,
     Object? miniAppEnv = null,
@@ -90,6 +93,10 @@ class _$MiniAppInjectionModelCopyWithImpl<$Res,
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -121,6 +128,7 @@ abstract class _$$MiniAppInjectionModelImplCopyWith<$Res>
       String? parentPatientId,
       String? mobileNumber,
       String? token,
+      String? pinCode,
       MiniAppInjectionModelRole? role,
       Map<String, dynamic>? additionalData,
       MiniAppEnv miniAppEnv});
@@ -142,6 +150,7 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
     Object? parentPatientId = freezed,
     Object? mobileNumber = freezed,
     Object? token = freezed,
+    Object? pinCode = freezed,
     Object? role = freezed,
     Object? additionalData = freezed,
     Object? miniAppEnv = null,
@@ -162,6 +171,10 @@ class __$$MiniAppInjectionModelImplCopyWithImpl<$Res>
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -187,6 +200,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
       this.parentPatientId,
       this.mobileNumber,
       this.token,
+      this.pinCode,
       this.role,
       final Map<String, dynamic>? additionalData,
       required this.miniAppEnv})
@@ -204,6 +218,8 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
   @override
   final String? token;
   @override
+  final String? pinCode;
+  @override
   final MiniAppInjectionModelRole? role;
   final Map<String, dynamic>? _additionalData;
   @override
@@ -220,7 +236,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
 
   @override
   String toString() {
-    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, role: $role, additionalData: $additionalData, miniAppEnv: $miniAppEnv)';
+    return 'MiniAppInjectionModel(action: $action, parentPatientId: $parentPatientId, mobileNumber: $mobileNumber, token: $token, pinCode: $pinCode, role: $role, additionalData: $additionalData, miniAppEnv: $miniAppEnv)';
   }
 
   @override
@@ -234,6 +250,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
             (identical(other.role, role) || other.role == role) &&
             const DeepCollectionEquality()
                 .equals(other._additionalData, _additionalData) &&
@@ -249,6 +266,7 @@ class _$MiniAppInjectionModelImpl implements _MiniAppInjectionModel {
       parentPatientId,
       mobileNumber,
       token,
+      pinCode,
       role,
       const DeepCollectionEquality().hash(_additionalData),
       miniAppEnv);
@@ -274,6 +292,7 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
       final String? parentPatientId,
       final String? mobileNumber,
       final String? token,
+      final String? pinCode,
       final MiniAppInjectionModelRole? role,
       final Map<String, dynamic>? additionalData,
       required final MiniAppEnv miniAppEnv}) = _$MiniAppInjectionModelImpl;
@@ -289,6 +308,8 @@ abstract class _MiniAppInjectionModel implements MiniAppInjectionModel {
   String? get mobileNumber;
   @override
   String? get token;
+  @override
+  String? get pinCode;
   @override
   MiniAppInjectionModelRole? get role;
   @override

@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,13 +16,13 @@ class HelplineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final loc = context.loc!;
+    final loc = context.loc!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSize.km,
-          vertical: AppSize.ks / 2,
+          vertical: AppSize.km * 0.5,
         ),
         decoration: const BoxDecoration(
           color: AppColor.lightRed,
@@ -32,14 +34,13 @@ class HelplineCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
-              child: Text(
-                "In case of emergency, please call ${AppInfoService.tollFreeNumber}",
+              child: AutoSizeText(
+                loc.emergencyTollFreeNumberText(AppInfoService.tollFreeNumber),
                 style: applyRobotoFont(
                   fontSize: 12,
                 ),
               ),
             ),
-            const SizedBox(width: 8),
             InkWell(
               onTap: () async {
                 Uri phoneno = Uri.parse("tel:$helpLine");
@@ -47,6 +48,7 @@ class HelplineCard extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.only(left: AppSize.ks),
                 decoration: const BoxDecoration(
                   color: AppColor.pureRed,
                   shape: BoxShape.circle,

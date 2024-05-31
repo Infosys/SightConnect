@@ -214,6 +214,20 @@ class TriageRepositoryImpl implements TriageRepository {
   }
 
   @override
+  Future<Either<Failure, List<PostTriageObservationsModel>>>
+      getTriageDistanceVisualAcuityResponseLocally() async {
+    logger.d({"message": "Getting triage distance visual acuity response from local"});
+
+    try {
+      final localResponse =
+          await localDataSource.getTriageDistanceVisualAcuityResponse();
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: 'No local data found'));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> resetTriage() async {
     logger.d({"message": "Resetting triage from local"});
 
@@ -264,6 +278,22 @@ class TriageRepositoryImpl implements TriageRepository {
     try {
       final localResponse = await localDataSource.saveTriageVisualAcuityLocally(
           triageVisualAcuity: triageVisualAcuity);
+      return Right(localResponse);
+    } catch (e) {
+      return Left(CacheFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> saveTriageDistanceVisualAcuityLocally({
+    required List<PostTriageObservationsModel> triageVisualAcuity,
+  }) async {
+    logger.d({"message": "Saving triage distance visual acuity to local"});
+
+    try {
+      final localResponse =
+          await localDataSource.saveTriageDistanceVisualAcuityLocally(
+              triageVisualAcuity: triageVisualAcuity);
       return Right(localResponse);
     } catch (e) {
       return Left(CacheFailure(errorMessage: e.toString()));
