@@ -23,7 +23,7 @@ class AppDropDown<T> extends HookWidget {
     final isMobile = Responsive.isMobile(context);
     return SizedBox(
       // color: Colors.yellow,
-      width: isMobile ? AppSize.width(context) * 0.4 : 300,
+      width: isMobile ? AppSize.width(context) * 0.8 : 300,
       child: items.isNotEmpty
           ? DropdownButtonFormField<T>(
               autovalidateMode: AutovalidateMode.onUserInteraction,

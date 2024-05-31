@@ -12,7 +12,7 @@ class TechnicianHomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(bottom: 16, top: 16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/techncian_harvests_tab.dart';
@@ -31,24 +30,15 @@ class TechnicianDashboardPage extends StatelessWidget {
         // ),
         body: Container(
           padding: const EdgeInsets.all(16),
-          child: Column(
+          child: const Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TabBar(
+                labelColor: AppColor.primary,
+                unselectedLabelColor: AppColor.grey,
                 indicatorColor: AppColor.primary,
-                indicatorWeight: 2,
-                dividerColor: AppColor.blue,
-                unselectedLabelStyle: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColor.grey,
-                ),
-                labelStyle: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-                tabs: const [
+                tabs: [
                   Tab(
                     child: Text('Home'),
                   ),
@@ -63,7 +53,7 @@ class TechnicianDashboardPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const Expanded(
+              Expanded(
                 child: TabBarView(
                   physics: NeverScrollableScrollPhysics(),
                   children: [

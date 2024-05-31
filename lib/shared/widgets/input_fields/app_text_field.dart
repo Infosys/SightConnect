@@ -103,8 +103,8 @@ class AppTextField extends StatelessWidget {
     return Container(
       // color: Colors.blue,
       constraints: BoxConstraints(
-        minWidth: minWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
-        maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
+        minWidth: minWidth ?? (isMobile ? AppSize.width(context) * 0.8 : 300),
+        maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.8 : 300),
       ),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
