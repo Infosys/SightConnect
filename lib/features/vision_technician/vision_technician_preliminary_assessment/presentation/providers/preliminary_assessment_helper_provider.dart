@@ -36,6 +36,9 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   bool visualAcuityLeftEyeValueEntered = false;
   bool visualAcuityBothEyeValueEntered = false;
   bool isLoading = false;
+  bool _triagePosted = false;
+  bool _carePlanPosted = false;
+  bool _isTest = true;
   CarePlanPostModel? carePlanResponse;
   TriagePostModel? triageResponse;
   TriagePriority selectedSeverity = TriagePriority.ROUTINE;
@@ -51,6 +54,29 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
   String get readingUnit => _readingUnit;
   DeviceModel get selectedEquipment => _selectedEquipment;
   List<DeviceModel>? get equipmentsData => _equipmentsData;
+  bool get triagePosted => _triagePosted;
+  bool get carePlanPosted => _carePlanPosted;
+  bool get isTest => _isTest;
+  TriagePostModel get triagePostModel => triageResponse!;
+  CarePlanPostModel get carePlanPostModel => carePlanResponse!;
+
+  void setTriagePosted(bool value) {
+    _triagePosted = value;
+    logger.f("triage posted value = $_triagePosted");
+    notifyListeners();
+  }
+
+  void setCarePlanPosted(bool value) {
+    _carePlanPosted = value;
+    logger.f("careplan posted value = $_carePlanPosted");
+    notifyListeners();
+  }
+
+  void setTest(bool value) {
+    _isTest = value;
+    logger.f("set test posted value = $_isTest");
+    notifyListeners();
+  }
 
   void setEquipmentsData(List<DeviceModel> equipmentsData) {
     _equipmentsData = equipmentsData;
