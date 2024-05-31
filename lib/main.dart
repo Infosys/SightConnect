@@ -30,7 +30,7 @@ Future<void> main() async {
   // await IOSDeviceInfoService.init();
   await MatomoLogger.init();
   FlutterNativeSplash.remove();
-
+  
   runApp(
     const ProviderScope(
       child: MyApp(),

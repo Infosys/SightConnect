@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,6 +20,7 @@ class FileMsService {
       logger.d(url);
       return url;
     } catch (e) {
+      DioErrorHandler.handleDioError(e);
       throw ServerFailure(errorMessage: "GetImage: $e");
     }
   }
@@ -51,6 +53,7 @@ class FileMsService {
             errorMessage: "UploadImage: ${response.statusMessage}");
       }
     } catch (e) {
+      DioErrorHandler.handleDioError(e);
       rethrow;
     }
   }
