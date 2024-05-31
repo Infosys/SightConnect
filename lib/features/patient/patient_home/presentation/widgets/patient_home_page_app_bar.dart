@@ -1,6 +1,9 @@
 import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,6 +39,15 @@ class PatientHomePageAppBar extends ConsumerWidget
         ],
       ),
       actions: [
+        IconButton(
+          onPressed: () {
+            BetterFeedback.of(context).show((feedback) {
+              logger.f(feedback.text);
+              logger.f(feedback.screenshot.length);
+            });
+          },
+          icon: const Icon(Icons.hail),
+        ),
         Consumer(
           builder: (context, ref, child) {
             final model = ref.watch(patientDashboardProvider);
