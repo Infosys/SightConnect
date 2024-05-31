@@ -13,16 +13,14 @@
     }
   },
   "stepNumber": "{current} ರಲ್ಲಿ {total}",
-   "@referralSmsContent": {
+  "@referralSmsContent": {
     "placeholders": {
       "referral": {
         "type": "String"
       }
-     
     }
   },
   "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
-
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -71,6 +69,14 @@
     }
   },
   "emergencyTollFreeNumberText": "ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ, ದಯವಿಟ್ಟು {tollFreeNumber} ಗೆ ಕರೆ ಮಾಡಿ.",
+  "@referralCollectSheetReferredBy": {
+    "placeholders": {
+      "referredBy": {
+        "type": "String"
+      }
+    }
+  },
+  "referralCollectSheetReferredBy": "You have been referred by {referredBy}",
   "questionnaireTitle": "ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನ ಪ್ರಶ್ನೆಗಳು",
   "questionnaireExitDialog": "ಈ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸುವುದರಿಂದ ನಿಮ್ಮ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳನ್ನು ಗುರುತಿಸುವಲ್ಲಿ ಸಹಾಯವಾಗುತ್ತದೆ. ನೀವು ನಿಜವಾಗಿಯೂ ನಿರ್ಗಮಿಸಲು ಬಯಸುವಿರಾ?",
   "visualAcuityTitle": "ದೃಷ್ಟಿ ತೀಕ್ಷ್ಣತೆ ಪರೀಕ್ಷೆ",
@@ -696,5 +702,38 @@
   "showTriageHowToProceedBottomSheetBody2": "ನನಗೆ ಸಮಸ್ಯೆ ಇದೆಯೇ ಎಂದು ನನಗೆ ಖಚಿತವಿಲ್ಲ",
   "showTriageHowToProceedBottomSheetBody3": "ನನಗೆ ಯಾವುದೇ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳಿಲ್ಲ-ಕೇವಲ ಪರಿಶೀಲಿಸಲು ಬಯಸುತ್ತೇನೆ.",
   "appDrawerToastMessageText": "ಕ್ಷಮಿಸಿ, ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ನಲ್ಲಿ ನಾವು ಲಾಗ್ ಔಟ್ ದೋಷವನ್ನು ಎದುರಿಸಿದೆವು.",
-  "myConnectionListAddMembers": "ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ"
+  "myConnectionListAddMembers": "ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ",
+  "appDrawerReferral": "Referral",
+  "patientTenantDisplayPageHeader": "Tenants",
+  "patientTenantDisplayPageBody": "Select a Vision Center from the list",
+  "patientTenantDisplayPageRequestLocationPermissionButton": "Request Location Permission",
+  "referralGenerateSheetHeader": "Your Referral Code",
+  "referralGenerateSheetTapHereButton": "Have a Code? Tap Here",
+  "referralGenerateSheetMyReferrals": "My Referrals",
+  "referralGenerateSheetShareCode": "Share your referral code with your friends and family to avail benefits.",
+  "referralGenerateSheetReferralGenerateError": "Apologies, we're unable to generate a referral code at the moment.",
+  "referralGenerateSheetShareButton": "Share",
+  "referralGenerateSheetCopy": "COPY",
+  "referralCollectSheetYourRefferalCode": "Your Referral Code",
+  "referralCollectSheetReferralCodeMessage": "Share your referral code with your friends and family to avail benefits.",
+  "referralCollectSheetHeader": "Collect Referral",
+  "referralCollectSheetBody": "Enter referral code to collect your reward",
+  "referralCollectSheetTextFieldHeader": "Referral Code",
+  "referralCollectSheetTextFieldBody": "Enter referral code",
+  "referralCollectSheetSkipButton": "Skip",
+  "referralCollectSheetCollectButton": "Collect",
+  "referralCollectSheetError": "Sorry, something went wrong. Please try again.",
+  "referralCollectSheetSuccessToast": "Referral code submitted successfully",
+  "referralCollectSheetErrorToast": "The referral code you entered is invalid. Please try again.",
+  "referralStatisticsPageHeader": "Your Referral Statistics",
+  "referralStatisticsPageTotalReferred": "Total Referred",
+  "referralStatisticsPageSucessfulReferred": "Successful Referred",
+  "referralStatisticsPageTotalTriage": "Total Triage",
+  "referralStatisticsPageReferFriendHeader": "How to refer a friend?",
+  "referralStatisticsPageReferFriendBody1": "Share your referral code with your friend.",
+  "referralStatisticsPageReferFriendBody2": "Your friend register using your referral code.",
+  "referralStatisticsPageReferFriendBody3": "Your friend completes at least one triage test.",
+  "referralStatisticsPageReferFriendButton": "Refer a Friend",
+  "referralStatisticsPageError": "Apologies, we're unable to fetch your referral statistics at the moment.",
+  "referralStatisticsPageRetryButton": "Retry"
 }

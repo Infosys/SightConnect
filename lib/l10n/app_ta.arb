@@ -13,16 +13,14 @@
     }
   },
   "stepNumber": "{current} இன் {total}",
-   "@referralSmsContent": {
+  "@referralSmsContent": {
     "placeholders": {
       "referral": {
         "type": "String"
       }
-     
     }
   },
   "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
-
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -71,6 +69,14 @@
     }
   },
   "emergencyTollFreeNumberText": "அவசரநிலை ஏற்பட்டால், தயவுசெய்து {tollFreeNumber} ஐ அழைக்கவும்.",
+  "@referralCollectSheetReferredBy": {
+    "placeholders": {
+      "referredBy": {
+        "type": "String"
+      }
+    }
+  },
+  "referralCollectSheetReferredBy": "You have been referred by {referredBy}",
   "questionnaireTitle": "கண் பரிசோதனை கேள்விகள்",
   "questionnaireExitDialog": "இந்த கேள்விகளுக்கு பதில் அளிப்பது உங்கள் கண் பிரச்சினைகளை கண்டறிய உதவும். நீங்கள் உண்மையில் வெளியேற விரும்புகிறீர்களா?",
   "visualAcuityTitle": "பார்வைக் கூர்மை சோதனை",
@@ -696,5 +702,38 @@
   "showTriageHowToProceedBottomSheetBody2": "எனக்கு ஏதேனும் சிக்கல் இருக்கிறதா என்று எனக்குத் தெரியவில்லை",
   "showTriageHowToProceedBottomSheetBody3": "எனக்கு கண் பிரச்சினைகள் எதுவும் இல்லை-சரிபார்க்க விரும்புகிறேன்",
   "appDrawerToastMessageText": "மன்னிக்கவும், மொபைல் பயன்பாட்டில் உள்நுழைவு பிழையை நாங்கள் சந்தித்தோம்.",
-  "myConnectionListAddMembers": "உறுப்பினர் சேர்க்கவும்"
+  "myConnectionListAddMembers": "உறுப்பினர் சேர்க்கவும்",
+  "appDrawerReferral": "Referral",
+  "patientTenantDisplayPageHeader": "Tenants",
+  "patientTenantDisplayPageBody": "Select a Vision Center from the list",
+  "patientTenantDisplayPageRequestLocationPermissionButton": "Request Location Permission",
+  "referralGenerateSheetHeader": "Your Referral Code",
+  "referralGenerateSheetTapHereButton": "Have a Code? Tap Here",
+  "referralGenerateSheetMyReferrals": "My Referrals",
+  "referralGenerateSheetShareCode": "Share your referral code with your friends and family to avail benefits.",
+  "referralGenerateSheetReferralGenerateError": "Apologies, we're unable to generate a referral code at the moment.",
+  "referralGenerateSheetShareButton": "Share",
+  "referralGenerateSheetCopy": "COPY",
+  "referralCollectSheetYourRefferalCode": "Your Referral Code",
+  "referralCollectSheetReferralCodeMessage": "Share your referral code with your friends and family to avail benefits.",
+  "referralCollectSheetHeader": "Collect Referral",
+  "referralCollectSheetBody": "Enter referral code to collect your reward",
+  "referralCollectSheetTextFieldHeader": "Referral Code",
+  "referralCollectSheetTextFieldBody": "Enter referral code",
+  "referralCollectSheetSkipButton": "Skip",
+  "referralCollectSheetCollectButton": "Collect",
+  "referralCollectSheetError": "Sorry, something went wrong. Please try again.",
+  "referralCollectSheetSuccessToast": "Referral code submitted successfully",
+  "referralCollectSheetErrorToast": "The referral code you entered is invalid. Please try again.",
+  "referralStatisticsPageHeader": "Your Referral Statistics",
+  "referralStatisticsPageTotalReferred": "Total Referred",
+  "referralStatisticsPageSucessfulReferred": "Successful Referred",
+  "referralStatisticsPageTotalTriage": "Total Triage",
+  "referralStatisticsPageReferFriendHeader": "How to refer a friend?",
+  "referralStatisticsPageReferFriendBody1": "Share your referral code with your friend.",
+  "referralStatisticsPageReferFriendBody2": "Your friend register using your referral code.",
+  "referralStatisticsPageReferFriendBody3": "Your friend completes at least one triage test.",
+  "referralStatisticsPageReferFriendButton": "Refer a Friend",
+  "referralStatisticsPageError": "Apologies, we're unable to fetch your referral statistics at the moment.",
+  "referralStatisticsPageRetryButton": "Retry"
 }

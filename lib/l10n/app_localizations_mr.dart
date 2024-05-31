@@ -45,6 +45,11 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
+  String referralCollectSheetReferredBy(String referredBy) {
+    return 'You have been referred by ${referredBy}';
+  }
+
+  @override
   String get questionnaireTitle => 'डोळ्यांच्या तपासणीचे प्रश्न';
 
   @override
@@ -1921,4 +1926,103 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get myConnectionListAddMembers => 'सदस्य जोडा';
+
+  @override
+  String get appDrawerReferral => 'Referral';
+
+  @override
+  String get patientTenantDisplayPageHeader => 'Tenants';
+
+  @override
+  String get patientTenantDisplayPageBody => 'Select a Vision Center from the list';
+
+  @override
+  String get patientTenantDisplayPageRequestLocationPermissionButton => 'Request Location Permission';
+
+  @override
+  String get referralGenerateSheetHeader => 'Your Referral Code';
+
+  @override
+  String get referralGenerateSheetTapHereButton => 'Have a Code? Tap Here';
+
+  @override
+  String get referralGenerateSheetMyReferrals => 'My Referrals';
+
+  @override
+  String get referralGenerateSheetShareCode => 'Share your referral code with your friends and family to avail benefits.';
+
+  @override
+  String get referralGenerateSheetReferralGenerateError => 'Apologies, we\'re unable to generate a referral code at the moment.';
+
+  @override
+  String get referralGenerateSheetShareButton => 'Share';
+
+  @override
+  String get referralGenerateSheetCopy => 'COPY';
+
+  @override
+  String get referralCollectSheetYourRefferalCode => 'Your Referral Code';
+
+  @override
+  String get referralCollectSheetReferralCodeMessage => 'Share your referral code with your friends and family to avail benefits.';
+
+  @override
+  String get referralCollectSheetHeader => 'Collect Referral';
+
+  @override
+  String get referralCollectSheetBody => 'Enter referral code to collect your reward';
+
+  @override
+  String get referralCollectSheetTextFieldHeader => 'Referral Code';
+
+  @override
+  String get referralCollectSheetTextFieldBody => 'Enter referral code';
+
+  @override
+  String get referralCollectSheetSkipButton => 'Skip';
+
+  @override
+  String get referralCollectSheetCollectButton => 'Collect';
+
+  @override
+  String get referralCollectSheetError => 'Sorry, something went wrong. Please try again.';
+
+  @override
+  String get referralCollectSheetSuccessToast => 'Referral code submitted successfully';
+
+  @override
+  String get referralCollectSheetErrorToast => 'The referral code you entered is invalid. Please try again.';
+
+  @override
+  String get referralStatisticsPageHeader => 'Your Referral Statistics';
+
+  @override
+  String get referralStatisticsPageTotalReferred => 'Total Referred';
+
+  @override
+  String get referralStatisticsPageSucessfulReferred => 'Successful Referred';
+
+  @override
+  String get referralStatisticsPageTotalTriage => 'Total Triage';
+
+  @override
+  String get referralStatisticsPageReferFriendHeader => 'How to refer a friend?';
+
+  @override
+  String get referralStatisticsPageReferFriendBody1 => 'Share your referral code with your friend.';
+
+  @override
+  String get referralStatisticsPageReferFriendBody2 => 'Your friend register using your referral code.';
+
+  @override
+  String get referralStatisticsPageReferFriendBody3 => 'Your friend completes at least one triage test.';
+
+  @override
+  String get referralStatisticsPageReferFriendButton => 'Refer a Friend';
+
+  @override
+  String get referralStatisticsPageError => 'Apologies, we\'re unable to fetch your referral statistics at the moment.';
+
+  @override
+  String get referralStatisticsPageRetryButton => 'Retry';
 }
