@@ -28,9 +28,6 @@ class ApiConstant {
   }
 
   // static String playStoreUrl = '${baseUrl}/install';
-  static String chatbotUrl = "http://4.240.71.156:8000/api/chat/";
-  static String webSocketEua =
-      "ws://eyecare4all-dev.infosysapps.com/services/eua-service/api/v1/euaService/ws-client";
 }
 
 enum AppEnvironment { development, staging, production }

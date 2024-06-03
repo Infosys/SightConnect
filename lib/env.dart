@@ -21,4 +21,10 @@ final class Env {
 
   @EnviedField(varName: 'BASE_DEV_URL', obfuscate: true)
   static final String baseDevUrl = _Env.baseDevUrl;
+
+  @EnviedField(varName: 'CHATBOT_URL', obfuscate: true)
+  static final String chatbotUrl = _Env.chatbotUrl;
+
+  @EnviedField(varName: 'WEBSOCKET_URL', obfuscate: true)
+  static final String websocketUrl = _Env.websocketUrl;
 }
