@@ -1157,14 +1157,6 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "1.12.0"
-  millimeters:
-    dependency: "direct main"
-    description:
-      name: millimeters
-      sha256: "57e405c386ee6d263a389294ba8deffe64951fc04eead7e7c0ed39e1e80e323c"
-      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
-    source: hosted
-    version: "0.2.0"
   mime:
     dependency: transitive
     description:

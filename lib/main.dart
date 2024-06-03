@@ -22,7 +22,7 @@ Future<void> main() async {
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
-  ApiConstant.setupEnv(AppEnvironment.development);
+  ApiConstant.setupEnv(AppEnvironment.production);
   logger.i('App Environment: ${ApiConstant.appEnvironment}');
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();
@@ -30,7 +30,7 @@ Future<void> main() async {
   // await IOSDeviceInfoService.init();
   await MatomoLogger.init();
   FlutterNativeSplash.remove();
-  
+
   runApp(
     const ProviderScope(
       child: MyApp(),

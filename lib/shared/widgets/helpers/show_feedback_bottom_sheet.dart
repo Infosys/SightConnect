@@ -18,10 +18,12 @@ Future<void> showFeedbackBottomSheet(BuildContext context) async {
     final fileName = '${Random.secure().nextInt(10000)}.png';
     final file = File('${tempDir.path}/$fileName');
     await file.writeAsBytes(feedback.screenshot);
+    final subject =
+        '${AppInfoService.appName} ${AppInfoService.appVersion} Feedback';
 
     final Email email = Email(
       body: feedback.text,
-      subject: '${AppInfoService.appName} Feedback',
+      subject: subject,
       recipients: [AppInfoService.appEmail],
       attachmentPaths: [file.path],
     );
