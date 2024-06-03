@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 Future<void> showFeedbackBottomSheet(BuildContext context) async {
   BetterFeedback.of(context).show((feedback) async {
     if (feedback.text.isEmpty) {
+      Fluttertoast.showToast(msg: 'Feedback text is required');
       return;
     }
 
