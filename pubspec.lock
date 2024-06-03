@@ -519,6 +519,14 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "3.3.1"
+  flutter_email_sender:
+    dependency: "direct main"
+    description:
+      name: flutter_email_sender
+      sha256: fb515d4e073d238d0daf1d765e5318487b6396d46b96e0ae9745dbc9a133f97a
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "6.0.3"
   flutter_hooks:
     dependency: "direct main"
     description:
