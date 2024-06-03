@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/shared/widgets/input_fields/app_radio_button.da
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_segment_button.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class OrganHarvestWidget extends StatelessWidget {
   const OrganHarvestWidget({super.key});
@@ -32,56 +33,66 @@ class OrganHarvestWidget extends StatelessWidget {
   }
 }
 
-class _EyesTypeTab extends StatelessWidget {
+class _EyesTypeTab extends HookWidget {
   const _EyesTypeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: AppSize.height(context) * 1.8,
-      child: DefaultTabController(
-        length: 2,
-        initialIndex: 0,
-        child: Scaffold(
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TabBar(
-                indicatorColor: AppColor.primary,
-                indicatorWeight: 2,
-                dividerColor: AppColor.blue,
-                unselectedLabelStyle: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColor.grey,
+    final selectedIndex = useState(0);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            InkWell(
+              onTap: () {
+                selectedIndex.value = 0;
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: selectedIndex.value == 0
+                      ? AppColor.darkYellow
+                      : AppColor.altGreen.withOpacity(0.2),
                 ),
-                labelStyle: applyFiraSansFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-                tabs: const [
-                  Tab(
-                    child: Text('Left Eye'),
+                child: const Text(
+                  "L",
+                  style: TextStyle(
+                    fontSize: 14,
                   ),
-                  Tab(
-                    child: Text('Right Eye'),
-                  ),
-                ],
-              ),
-              const Expanded(
-                child: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    _LeftEyeTab(),
-                    _RightEyeTab(),
-                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(width: 8),
+            InkWell(
+              onTap: () {
+                selectedIndex.value = 1;
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: selectedIndex.value == 1
+                      ? AppColor.darkYellow
+                      : AppColor.altGreen.withOpacity(0.2),
+                ),
+                child: const Text(
+                  "R",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
+        const SizedBox(height: 16),
+        selectedIndex.value == 0 ? const _LeftEyeTab() : const _RightEyeTab(),
+      ],
     );
   }
 }
@@ -94,6 +105,7 @@ class _LeftEyeTab extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppCard(
@@ -385,9 +397,11 @@ class _LeftEyeTab extends StatelessWidget {
               )),
           const SizedBox(height: 16),
           AppCard(
-              margin: null,
-              title: 'Suitable for only those checked:',
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
+            margin: null,
+            title: 'Suitable for only those checked:',
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 AppCheckboxList(
                   items: const [
                     'PK',
@@ -420,7 +434,9 @@ class _LeftEyeTab extends StatelessWidget {
                     'Endothelium',
                   ],
                 ),
-              ])),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -433,12 +449,14 @@ class _RightEyeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(top: 16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppCard(
             title: "From Penlight Exam:",
+            margin: null,
             child: Wrap(
               spacing: 16,
               runSpacing: 16,

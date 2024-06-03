@@ -21,6 +21,7 @@ class OHSideStages extends ConsumerWidget {
         margin: isMobile
             ? EdgeInsets.only(right: AppSize.width(context) * 0.1, top: 20)
             : null,
+        height: AppSize.height(context),
         padding: const EdgeInsets.symmetric(
           vertical: 24,
           horizontal: 16,
