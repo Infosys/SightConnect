@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:eye_care_for_all/core/constants/app_color.dart';
@@ -19,15 +17,13 @@ import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/helpers/show_feedback_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
-import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 
 import '../../core/models/drawer_menu_item.dart';
@@ -337,39 +333,5 @@ class AppDrawer extends HookWidget {
       isScrollControlled: true,
       builder: (context) => const ReferralCodeBottomSheet(),
     );
-  }
-
-  Future<void> showFeedbackBottomSheet(BuildContext context) async {
-    BetterFeedback.of(context).show((feedback) async {
-      if (feedback.text.isEmpty) {
-        return;
-      }
-
-      // Get temporary directory
-      final tempDir = await getTemporaryDirectory();
-
-      // Generate a random file name
-      final fileName = '${Random.secure().nextInt(10000)}.png';
-
-      // Create a file in the temporary directory
-      final file = File('${tempDir.path}/$fileName');
-
-      // Write the screenshot (Uint8List) to the file
-      await file.writeAsBytes(feedback.screenshot);
-
-      final Email email = Email(
-        body: feedback.text,
-        subject: 'Feedback',
-        recipients: ['example@example.com'],
-        attachmentPaths: [file.path],
-      );
-
-      try {
-        await FlutterEmailSender.send(email);
-      } catch (e) {
-        Fluttertoast.showToast(msg: 'Failed to send feedback email');
-        debugPrint('Failed to send feedback email: $e');
-      }
-    });
   }
 }
