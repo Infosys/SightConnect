@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/report_assessment_questions.dart';
@@ -84,7 +83,7 @@ class PatientAssessmentReportPage extends HookConsumerWidget {
             const SizedBox(height: AppSize.km),
             const NearbyVisionCentersList(),
             const SizedBox(height: AppSize.km),
-            const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+            HelplineCard(helpLine: AppInfoService.tollFreeNumber),
             const SizedBox(height: AppSize.km),
             EyeScanTabView(
               eyeScanData: assessmentDetailsReport.imageBriefEntity,

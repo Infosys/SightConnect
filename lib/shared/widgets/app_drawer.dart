@@ -189,7 +189,7 @@ class AppDrawer extends HookWidget {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const HelpAndSupportPage(
+                                            HelpAndSupportPage(
                                           helpLine:
                                               AppInfoService.tollFreeNumber,
                                         ),

@@ -5,6 +5,8 @@ class ApiConstant {
 
   static AppEnvironment appEnvironment = AppEnvironment.development;
   static String baseUrl = Env.baseUrl;
+  static String chatbotUrl = Env.chatbotUrl;
+  static String websocketUrl = Env.websocketUrl;
   static String patientRegistrationMiniappUrl =
       '${baseUrl}/patient-registration/';
 
@@ -26,8 +28,6 @@ class ApiConstant {
         break;
     }
   }
-
-  // static String playStoreUrl = '${baseUrl}/install';
 }
 
 enum AppEnvironment { development, staging, production }

@@ -95,26 +95,26 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
             ),
             child: SingleChildScrollView(
               controller: ref.read(patientDashboardProvider).scrollController,
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: AppSize.kl * 3),
+                  const SizedBox(height: AppSize.kl * 3),
 
                   // const SizedBox(height: AppSize.km),
                   // PriorityNotificationList(),
-                  PatientHeader(),
+                  const PatientHeader(),
 
-                  SizedBox(height: AppSize.km),
-                  TriageTestCard(),
-                  SizedBox(height: AppSize.kl),
+                  const SizedBox(height: AppSize.km),
+                  const TriageTestCard(),
+                  const SizedBox(height: AppSize.kl),
                   HelplineCard(helpLine: AppInfoService.tollFreeNumber),
-                  SizedBox(height: AppSize.km),
+                  const SizedBox(height: AppSize.km),
 
-                  MyConnectionsList(),
+                  const MyConnectionsList(),
 
                   // const RecentServicesCardList(),
-                  SizedBox(height: AppSize.km),
-                  PatientFooter(),
+                  const SizedBox(height: AppSize.km),
+                  const PatientFooter(),
                   // const NearbyVisionCentersList(),
                   // const SizedBox(height: AppSize.km),
 
@@ -132,7 +132,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
                   // const SizedBox(height: AppSize.km),
                   // const CampaginsList(),
                   // const PartnerCard(),
-                  SizedBox(height: AppSize.kl * 3),
+                  const SizedBox(height: AppSize.kl * 3),
                 ],
               ),
             ),

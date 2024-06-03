@@ -22,7 +22,7 @@ Future<void> showFeedbackBottomSheet(BuildContext context) async {
     final Email email = Email(
       body: feedback.text,
       subject: '${AppInfoService.appName} Feedback',
-      recipients: ['example@example.com'],
+      recipients: [AppInfoService.appEmail],
       attachmentPaths: [file.path],
     );
 

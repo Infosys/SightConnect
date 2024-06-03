@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_icon.dart';
-
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +28,9 @@ class DistanceTumblingResultPageBottomCards extends ConsumerWidget {
             AppIcon.call,
           ),
           title: Text(loc.tollFreeNumber),
-          subtitle: const Text(
+          subtitle: Text(
             AppInfoService.tollFreeNumber,
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColor.black,
               fontWeight: FontWeight.bold,
             ),
