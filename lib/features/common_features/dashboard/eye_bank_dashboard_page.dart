@@ -1,10 +1,21 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_dashboard_pages.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/consultant/dashboard/presentation/counselor_dashboard_page.dart';
 import 'package:eye_care_for_all/features/doctor/dashboard/presentation/pages/doctor_dashboard_page.dart';
 import 'package:eye_care_for_all/features/technician/dashboard/presentation/pages/technician_dashboard_page.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EyeBankDashboardPage extends StatefulWidget {
   const EyeBankDashboardPage({super.key});
@@ -19,22 +30,22 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const EyeBankDrawer(),
       appBar: AppBar(
         backgroundColor: AppColor.white,
         elevation: 2,
-        title: Image.asset(
-          AppImages.logo,
-          height: 30,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              AppImages.logo,
+              height: Responsive.isMobile(context) ? 20 : 30,
+            ),
+            const Spacer(),
+          ],
         ),
         actions: [
-          const IconButton(
-            icon: Icon(Icons.search),
-            onPressed: null,
-          ),
-          const IconButton(
-            onPressed: null,
-            icon: Icon(Icons.notifications),
-          ),
           PopupMenuButton<EyeBankRoles>(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -110,4 +121,102 @@ enum EyeBankRoles {
   ADMIN,
   TECHNICIAN,
   COUNSELOR,
+}
+
+class EyeBankDrawer extends HookWidget {
+  const EyeBankDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final isLoading = useState(false);
+    final loc = context.loc!;
+    return Drawer(
+      child: LoadingOverlay(
+        isLoading: isLoading.value,
+        child: Column(
+          children: [
+            SizedBox(
+              // Add SizedBox
+              height: 100,
+              child: DrawerHeader(
+                decoration: const BoxDecoration(),
+                child: Center(
+                  child: Image.asset(
+                    AppImages.logo,
+                    height: 50,
+                  ),
+                ),
+              ),
+            ),
+            Consumer(
+              builder: (context, ref, _) => ListTile(
+                onTap: () async {
+                  final navigator = Navigator.of(context);
+                  await ref.read(initializationProvider).resetProfile();
+                  navigator.pushNamedAndRemoveUntil(
+                      InitializationPage.routeName, (route) => false);
+                },
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.primary.withOpacity(0.4),
+                  ),
+                  child: SvgPicture.asset(
+                    "assets/drawer_icons/switch.svg",
+                  ),
+                ),
+                title: Text(
+                  loc.switchRole,
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.normal,
+                    color: AppColor.grey,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+            const Divider(),
+            Consumer(
+              builder: (context, ref, _) => ListTile(
+                onTap: () async {
+                  isLoading.value = true;
+                  final navigator = Navigator.of(context);
+                  ref.read(initializationProvider).logout().then((value) async {
+                    isLoading.value = false;
+                    navigator.pushNamedAndRemoveUntil(
+                      LoginPage.routeName,
+                      (route) => false,
+                    );
+                    ref.invalidate(initializationProvider);
+                  }).catchError((e) {
+                    isLoading.value = false;
+                    Fluttertoast.showToast(msg: loc.appDrawerToastMessageText);
+                  });
+                },
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.primary.withOpacity(0.2),
+                  ),
+                  child: SvgPicture.asset(
+                    "assets/drawer_icons/signout.svg",
+                  ),
+                ),
+                title: Text(
+                  loc.appDrawerSignOut,
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.normal,
+                    color: AppColor.grey,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

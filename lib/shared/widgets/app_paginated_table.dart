@@ -63,11 +63,11 @@ class _AppPaginatedTableState<T> extends State<AppPaginatedTable<T>> {
           source: widget.dataSource,
           availableRowsPerPage: const [5, 10, 20, 30],
           showCheckboxColumn: widget.showCheckboxColumn,
-          columnSpacing: isMobile
-              ? AppSize.width(context) * 0.01
-              : (isTablet
-                  ? AppSize.width(context) * 0.02
-                  : AppSize.width(context) * 0.03),
+          // columnSpacing: isMobile
+          //     ? AppSize.width(context) * 0.02
+          //     : (isTablet
+          //         ? AppSize.width(context) * 0.02
+          //         : AppSize.width(context) * 0.03),
           headingRowHeight: isMobile
               ? AppSize.kl * 2.5
               : (isTablet ? AppSize.kl * 2 : AppSize.kl * 2.5),

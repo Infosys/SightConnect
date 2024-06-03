@@ -19,7 +19,7 @@ class OHSideStages extends ConsumerWidget {
     return SafeArea(
       child: Container(
         margin: isMobile
-            ? EdgeInsets.only(right: AppSize.width(context) * 0.1, top: 20)
+            ? EdgeInsets.only(left: AppSize.width(context) * 0.1, top: 20)
             : null,
         height: AppSize.height(context),
         padding: const EdgeInsets.symmetric(
@@ -29,8 +29,8 @@ class OHSideStages extends ConsumerWidget {
         decoration: const BoxDecoration(
           color: AppColor.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            bottomRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
           ),
         ),
         width: isMobile ? null : width,
@@ -43,13 +43,13 @@ class OHSideStages extends ConsumerWidget {
                 visible: isMobile,
                 child: Row(
                   children: [
-                    const Spacer(),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
                       },
                       child: const Icon(Icons.close),
                     ),
+                    const Spacer(),
                   ],
                 ),
               ),

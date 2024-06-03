@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
@@ -98,7 +99,7 @@ class TranslationPopUp extends HookConsumerWidget {
                       padding: EdgeInsets.zero,
                       itemCount: appLocales.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: Responsive.isMobile(context) ? 2 : 3,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
                         childAspectRatio:
                             Responsive.isMobile(context) ? 1.5 : 1.7,
                         crossAxisSpacing: 10,

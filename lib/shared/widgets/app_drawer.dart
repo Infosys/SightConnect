@@ -297,6 +297,7 @@ class AppDrawer extends HookWidget {
                         ),
                       ),
                     ),
+
                     const SizedBox(height: AppSize.kl),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -48,25 +48,28 @@ class DoctorTissueDetailForm extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Row(
-        children: [
-          Expanded(
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Accept'),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('Accept'),
+              ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: OutlinedButton(
-              onPressed: () {},
-              child: const Text('Reject'),
+            const SizedBox(width: 16),
+            Expanded(
+              child: OutlinedButton(
+                onPressed: () {},
+                child: const Text('Reject'),
+              ),
             ),
-          ),
-          Expanded(
-              flex: Responsive.isMobile(context) ? 0 : 4,
-              child: const SizedBox.shrink())
-        ],
+            Expanded(
+                flex: Responsive.isMobile(context) ? 0 : 4,
+                child: const SizedBox.shrink())
+          ],
+        ),
       ),
     );
   }

@@ -72,6 +72,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _profileVerification(Role role) async {
     final navigator = Navigator.of(context);
+    // Testing purpose only
     if (role == Role.ROLE_EYE_BANK) {
       navigator.pushAndRemoveUntil(
         MaterialPageRoute(
@@ -79,21 +80,21 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         ),
         (route) => false,
       );
-      return;
-    }
-    try {
-      final userExist =
-          await ref.read(initializationProvider).checkUserAlreadyExist(role);
-      logger.d("User Exist: $userExist");
-      if (userExist) {
-        _handleExistingUser(navigator, role);
-      } else {
-        _handleNewUser(navigator, role);
+    } else {
+      try {
+        final userExist =
+            await ref.read(initializationProvider).checkUserAlreadyExist(role);
+        logger.d("User Exist: $userExist");
+        if (userExist) {
+          _handleExistingUser(navigator, role);
+        } else {
+          _handleNewUser(navigator, role);
+        }
+      } catch (e) {
+        logger.e("checkUserAlreadyExist: $e");
+        // In case of any other error, logout the user
+        await _invalidateAndLogout("Server Error. Please login again.");
       }
-    } catch (e) {
-      logger.e("checkUserAlreadyExist: $e");
-      // In case of any other error, logout the user
-      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 

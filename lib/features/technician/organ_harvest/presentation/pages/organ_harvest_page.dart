@@ -18,7 +18,7 @@ class OrganHarvestPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Organ Harvest'),
       ),
-      drawer: Responsive.isMobile(context)
+      endDrawer: Responsive.isMobile(context)
           ? const OHSideStages(
               isMobile: true,
             )

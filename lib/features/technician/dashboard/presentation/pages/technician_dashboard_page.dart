@@ -11,7 +11,7 @@ class TechnicianDashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
       length: 4,
       child: Scaffold(
         // appBar: AppBar(
@@ -28,44 +28,41 @@ class TechnicianDashboardPage extends StatelessWidget {
         //   ),
         //   automaticallyImplyLeading: false,
         // ),
-        body: Container(
-          padding: const EdgeInsets.all(16),
-          child: const Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TabBar(
-                labelColor: AppColor.primary,
-                unselectedLabelColor: AppColor.grey,
-                indicatorColor: AppColor.primary,
-                tabs: [
-                  Tab(
-                    child: Text('Home'),
-                  ),
-                  Tab(
-                    child: Text('Referrals'),
-                  ),
-                  Tab(
-                    child: Text('Harvests'),
-                  ),
-                  Tab(
-                    child: Text('Reviews'),
-                  ),
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TabBar(
+              labelColor: AppColor.primary,
+              unselectedLabelColor: AppColor.grey,
+              indicatorColor: AppColor.primary,
+              tabs: [
+                Tab(
+                  child: Text('Home'),
+                ),
+                Tab(
+                  child: Text('Referrals'),
+                ),
+                Tab(
+                  child: Text('Harvests'),
+                ),
+                Tab(
+                  child: Text('Reviews'),
+                ),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  TechnicianHomeTab(),
+                  TechnicianReferralsTab(),
+                  TechnicianHarvestsTab(),
+                  TechnicianReviewsTab(),
                 ],
               ),
-              Expanded(
-                child: TabBarView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    TechnicianHomeTab(),
-                    TechnicianReferralsTab(),
-                    TechnicianHarvestsTab(),
-                    TechnicianReviewsTab(),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

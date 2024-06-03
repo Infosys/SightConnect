@@ -18,15 +18,24 @@ class OrganHarvestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OHMainHeader(
+          const OHMainHeader(
             title: "Organ Grading",
           ),
-          SizedBox(height: 16),
-          _EyesTypeTab(),
+          const SizedBox(height: 16),
+          const _EyesTypeTab(),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text("Submit & Continue"),
+              )
+            ],
+          )
         ],
       ),
     );
