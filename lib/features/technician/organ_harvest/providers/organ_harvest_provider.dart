@@ -5,7 +5,7 @@ final organHarvestProvider =
     ChangeNotifierProvider((ref) => OrganHarvestProvider());
 
 class OrganHarvestProvider extends ChangeNotifier {
-  int currentStep = 0;
+  int currentStep = 1;
   bool isCompleted = false;
 
   void setStep(int index) {

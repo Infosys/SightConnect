@@ -75,6 +75,7 @@ class AppTextField extends StatelessWidget {
                   context: context,
                   initialTime: TimeOfDay.now(),
                 );
+
                 onTimeSelected?.call(time);
               } catch (e) {
                 logger.e(e);

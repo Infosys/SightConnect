@@ -22,7 +22,7 @@ class OrganHarvestWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           OHMainHeader(
-            title: "Organ Harvest",
+            title: "Organ Grading",
           ),
           SizedBox(height: 16),
           _EyesTypeTab(),

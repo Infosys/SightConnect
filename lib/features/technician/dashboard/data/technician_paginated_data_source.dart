@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/pages/organ_harvest_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_color.dart';
@@ -22,7 +23,11 @@ class TechnicianPaginatedDataSource extends DataTableSource {
       index: index,
       cells: [
         DataCell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return const OrganHarvestPage();
+            }));
+          },
           Text(
             "${data[index]['sampleId']}",
             maxLines: 1,
@@ -50,8 +55,11 @@ class TechnicianPaginatedDataSource extends DataTableSource {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CircleAvatar(maxRadius: 18),
-              const SizedBox(width: AppSize.ks),
+              CircleAvatar(
+                maxRadius: 18,
+                backgroundColor: AppColor.primary.withOpacity(0.2),
+              ),
+              const SizedBox(width: AppSize.km),
               Flexible(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

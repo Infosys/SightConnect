@@ -15,6 +15,14 @@ class OrganHarvestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Organ Harvest'),
+      ),
+      drawer: Responsive.isMobile(context)
+          ? const OHSideStages(
+              isMobile: true,
+            )
+          : null,
       body: SingleChildScrollView(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

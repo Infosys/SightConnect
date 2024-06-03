@@ -18,7 +18,7 @@ class OHStepper extends HookWidget {
       "Screening",
       "Hemodilution",
       "Serology",
-      "Organ Harvest",
+      "Organ Grading",
       "Organ Recommendation",
       "Organ Pre-Cut",
       "Order Delivery",

@@ -23,26 +23,37 @@ class AppSegmentButton<T> extends HookWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     final selectedValue = useState<T?>(initialValue);
-    return Container(
+    return ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: minWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
         maxWidth: maxWidth ?? (isMobile ? AppSize.width(context) * 0.4 : 300),
       ),
       child: SegmentedButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
-          backgroundColor: Colors.white,
-          side: const BorderSide(
-            color: Colors.grey,
-            width: 1,
+        style: ButtonStyle(
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+          side: WidgetStateProperty.all(
+            const BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
         segments: items
-            .map((item) =>
-                ButtonSegment(value: item, label: Text(item.toString())))
+            .map(
+              (item) => ButtonSegment(
+                value: item,
+                label: Text(
+                  item.toString(),
+                ),
+              ),
+            )
             .toList(),
         selected: {selectedValue.value},
         selectedIcon: const Icon(Icons.check),

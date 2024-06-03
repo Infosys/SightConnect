@@ -14,7 +14,7 @@ class EyeBankDashboardPage extends StatefulWidget {
 }
 
 class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
-  EyeBankRoles role = EyeBankRoles.DOCTOR;
+  EyeBankRoles role = EyeBankRoles.TECHNICIAN;
 
   @override
   Widget build(BuildContext context) {

@@ -38,6 +38,9 @@ class AppActionChip<T> extends HookWidget {
         children: items
             .map(
               (item) => ActionChip(
+                iconTheme: const IconThemeData(
+                  size: 16,
+                ),
                 avatar: selectedValue.value == item
                     ? const Icon(Icons.check)
                     : null,

@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/pages/organ_harvest_page.dart';
 import 'package:flutter/material.dart';
 
 class TechnicianReferralsTab extends StatelessWidget {
@@ -6,6 +5,6 @@ class TechnicianReferralsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const OrganHarvestPage();
+    return const Placeholder();
   }
 }
