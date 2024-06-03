@@ -18,6 +18,10 @@ class ChooseRoleDialog extends HookWidget {
     var selectedRole = useState<Role?>(
         roles.contains(Role.ROLE_PATIENT) ? Role.ROLE_PATIENT : roles.first);
 
+    if (!roles.contains(Role.ROLE_EYE_BANK)) {
+      roles.add(Role.ROLE_EYE_BANK);
+    }
+
     final loc = context.loc!;
 
     return PopScope(
@@ -156,6 +160,7 @@ class ChooseRoleDialog extends HookWidget {
       Role.ROLE_VISION_TECHNICIAN => loc.roleVisionTechnician,
       Role.ROLE_PATIENT => loc.rolePatient,
       Role.ROLE_VISION_GUARDIAN => loc.roleVisionGuardian,
+      Role.ROLE_EYE_BANK => "EYE BANK",
     };
   }
 }
