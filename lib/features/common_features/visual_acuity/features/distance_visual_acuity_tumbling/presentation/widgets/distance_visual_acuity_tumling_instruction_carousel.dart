@@ -30,10 +30,10 @@ class DistanceVisualAcuityTumblingInstructionCarousel extends HookWidget {
         "image": "assets/images/tumbling_step_two.png",
         "text": loc.visualAcuityTestInstructionTwo
       },
-      {
-        "image": "assets/images/tumbling_step_three.png",
-        "text": loc.visualAcuityTestInstructionThree
-      },
+      // {
+      //   "image": "assets/images/tumbling_step_three.png",
+      //   "text": loc.visualAcuityTestInstructionThree
+      // },
       {
         "image": "assets/images/tumbling_step_four.png",
         "text": loc.visualAcuityTestInstructionFour

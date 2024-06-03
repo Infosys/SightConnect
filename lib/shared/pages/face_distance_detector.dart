@@ -260,23 +260,19 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
-            if (ref.read(globalVisualAcuityProvider).isShortDistanceTest ==
-                true) {
-              ref.read(distanceNotifierProvider).distance =
-                  _distanceToFace ?? 0;
-            } else {
-              ref.read(distanceNotifierProvider).longDistance =
-                  _distanceToFace ?? 0;
-            }
+            setDistanceNotifierData();
           } else {
             _distanceToFace = null;
+            setDistanceNotifierData();
           }
         } else {
           _distanceToFace = null;
+          setDistanceNotifierData();
         }
       } else {
         _distanceToFace = null;
         _translatedEyeLandmarks = [];
+        setDistanceNotifierData();
       }
     } else {
       final List<ios.Face> faces = await _faceDetector.processImage(inputImage);
@@ -324,23 +320,19 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
               imageWidth: inputImage.metadata!.size.width.toInt(),
               imageHeight: inputImage.metadata!.size.height.toInt(),
             );
-            if (ref.read(globalVisualAcuityProvider).isShortDistanceTest ==
-                true) {
-              ref.read(distanceNotifierProvider).distance =
-                  _distanceToFace ?? 0;
-            } else {
-              ref.read(distanceNotifierProvider).longDistance =
-                  _distanceToFace ?? 0;
-            }
+            setDistanceNotifierData();
           } else {
             _distanceToFace = null;
+            setDistanceNotifierData();
           }
         } else {
           _distanceToFace = null;
+          setDistanceNotifierData();
         }
       } else {
         _distanceToFace = null;
         _translatedEyeLandmarks = [];
+        setDistanceNotifierData();
       }
     }
 
@@ -364,6 +356,14 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     _isBusy = false;
     if (mounted) {
       setState(() {});
+    }
+  }
+
+  void setDistanceNotifierData() {
+    if (ref.read(globalVisualAcuityProvider).isShortDistanceTest == true) {
+      ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
+    } else {
+      ref.read(distanceNotifierProvider).longDistance = _distanceToFace ?? 0;
     }
   }
 

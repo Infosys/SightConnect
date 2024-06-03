@@ -56,7 +56,7 @@ class DistanceVisualAcuityInstructionPage extends HookConsumerWidget {
                     child: AnimatedSmoothIndicator(
                       onDotClicked: (index) {},
                       activeIndex: activeIndex.value,
-                      count: 4,
+                      count: 3,
                       effect: const SlideEffect(
                         activeDotColor: AppColor.primary,
                         radius: 2,

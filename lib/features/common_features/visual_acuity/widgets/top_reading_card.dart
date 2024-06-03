@@ -8,7 +8,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../main.dart';
 import '../domain/enums/tumbling_enums.dart';
 import '../domain/models/tumbling_models.dart';
 
@@ -30,7 +29,6 @@ class TopReadingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // var model = ref.watch(distanceTumblingTestProvider);
     // var optoTypeData = ref.watch(globalVisualAcuityProvider);
     // var currentLevel = model.level;
@@ -131,18 +129,29 @@ class TopReadingCard extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text(
-                                  distance != null ? '$distance cm' : 'No Face',
-                                  style: applyRobotoFont(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: (distance != null &&
-                                            (distance >= lowerLimit &&
-                                                distance <= upperLimit))
-                                        ? AppColor.green
-                                        : AppColor.red,
-                                  ),
-                                ),
+                                !isShortDistance
+                                    ? Text(
+                                        "Position yourself\n2m from the screen",
+                                        style: applyRobotoFont(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        softWrap: true,
+                                      )
+                                    : Text(
+                                        distance != null
+                                            ? '$distance cm'
+                                            : 'No Face',
+                                        style: applyRobotoFont(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: (distance != null &&
+                                                  (distance >= lowerLimit &&
+                                                      distance <= upperLimit))
+                                              ? AppColor.green
+                                              : AppColor.red,
+                                        ),
+                                      ),
                               ],
                             ),
                           ],
