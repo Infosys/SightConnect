@@ -133,18 +133,32 @@ class TechnicianPaginatedDataSource extends DataTableSource {
         ),
         DataCell(
           onTap: () {},
-          Text(
-            "${data[index]["Status"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
+          Chip(
+            backgroundColor: _getStatusColor(data[index]["Status"]!),
+            label: Text(
+              "${data[index]["Status"]}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
             ),
           ),
         ),
       ],
     );
+  }
+
+  _getStatusColor(String status) {
+    final value = status.toLowerCase();
+    if (value == "completed") {
+      return AppColor.lightGreen;
+    } else if (value == "pending") {
+      return AppColor.yellow.withOpacity(0.3);
+    } else {
+      return AppColor.grey;
+    }
   }
 
   @override
