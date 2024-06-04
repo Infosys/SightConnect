@@ -14,7 +14,6 @@ import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EyeBankDashboardPage extends StatefulWidget {
@@ -180,19 +179,18 @@ class EyeBankDrawer extends HookWidget {
             Consumer(
               builder: (context, ref, _) => ListTile(
                 onTap: () async {
-                  isLoading.value = true;
                   final navigator = Navigator.of(context);
-                  ref.read(initializationProvider).logout().then((value) async {
-                    isLoading.value = false;
+                  await ref
+                      .read(initializationProvider)
+                      .logout()
+                      .catchError((e) {
                     navigator.pushNamedAndRemoveUntil(
-                      LoginPage.routeName,
-                      (route) => false,
-                    );
-                    ref.invalidate(initializationProvider);
-                  }).catchError((e) {
-                    isLoading.value = false;
-                    Fluttertoast.showToast(msg: loc.appDrawerToastMessageText);
+                        LoginPage.routeName, (route) => false);
                   });
+                  await navigator.pushNamedAndRemoveUntil(
+                      LoginPage.routeName, (route) => false);
+                  ref.invalidate(initializationProvider);
+                  //////////
                 },
                 leading: Container(
                   padding: const EdgeInsets.all(8),

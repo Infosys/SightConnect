@@ -299,7 +299,9 @@ class OrderDelivery extends StatelessWidget {
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   child: const Text("Start Shipment"),
                 ),
                 const SizedBox(
@@ -307,12 +309,15 @@ class OrderDelivery extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    // ignore: deprecated_member_use
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: WidgetStateProperty.all(Colors.white),
                   ),
-                  onPressed: () {},
-                  child: const Text("Reject",
-                      style: TextStyle(color: Colors.blue)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    "Reject",
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 )
               ],
             )

@@ -2,6 +2,9 @@ import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_segment_button.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../providers/organ_harvest_provider.dart';
 
 class HemodilutionWidget extends StatelessWidget {
   const HemodilutionWidget({super.key});
@@ -31,9 +34,17 @@ class HemodilutionWidget extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Submit"),
+              Consumer(
+                builder: (context, ref, child) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      final provider = ref.read(organHarvestProvider);
+                      provider.setStep(2);
+                      provider.setCompleted(true);
+                    },
+                    child: const Text("Submit"),
+                  );
+                },
               )
             ],
           )

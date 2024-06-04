@@ -43,8 +43,8 @@ class TechnicianHomePage extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    TechnicianReferralsTab(),
                     TechnicianHomeTab(),
+                    TechnicianReferralsTab(),
                     TechnicianHarvestsTab(),
                     TechnicianReviewsTab(),
                   ],

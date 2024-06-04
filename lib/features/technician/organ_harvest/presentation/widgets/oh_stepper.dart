@@ -13,7 +13,6 @@ class OHStepper extends HookWidget {
   final int initialIndex;
   @override
   Widget build(BuildContext context) {
-    final selectedIndex = useState(initialIndex);
     final stages = [
       "Screening",
       "Hemodilution",
@@ -24,13 +23,13 @@ class OHStepper extends HookWidget {
       "Order Delivery",
       "Tissue Return",
     ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (var i = 0; i < stages.length; i++)
           InkWell(
             onTap: () {
-              selectedIndex.value = i;
               onStepTapped(i);
             },
             child: Container(
@@ -42,7 +41,7 @@ class OHStepper extends HookWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: selectedIndex.value == i
+                      color: initialIndex == i
                           ? AppColor.darkYellow
                           : AppColor.altGreen.withOpacity(0.2),
                     ),
@@ -61,9 +60,7 @@ class OHStepper extends HookWidget {
                         horizontal: 28,
                       ),
                       decoration: BoxDecoration(
-                        color: selectedIndex.value == i
-                            ? AppColor.darkYellow
-                            : null,
+                        color: initialIndex == i ? AppColor.darkYellow : null,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Text(

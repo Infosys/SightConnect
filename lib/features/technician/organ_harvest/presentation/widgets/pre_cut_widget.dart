@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/technician/organ_harvest/providers/organ_harvest_provider.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
@@ -7,6 +8,7 @@ import 'package:eye_care_for_all/shared/widgets/input_fields/app_radio_button.da
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PreCutWidget extends HookWidget {
   const PreCutWidget({super.key});
@@ -132,18 +134,26 @@ class PreCutWidget extends HookWidget {
                     const SizedBox(height: 16),
                     const Divider(),
                     const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Save & Proceed"),
-                    ),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            final provider = ref.read(organHarvestProvider);
+                            provider.setStep(6);
+                            provider.setCompleted(true);
+                          },
+                          child: const Text("Submit"),
+                        );
+                      },
+                    )
                   ],
                 ),
               ),
               Visibility(
-                  visible:
-                      isCutExecuted.value && Responsive.isSemiDesktop(context),
-                  child: Expanded(
-                      child: AppCard(
+                visible:
+                    isCutExecuted.value && Responsive.isSemiDesktop(context),
+                child: Expanded(
+                  child: AppCard(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -169,20 +179,21 @@ class PreCutWidget extends HookWidget {
                           height: AppSize.kl,
                         ),
                         OutlinedButton(
-                            onPressed: () {},
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.refresh),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text('Re-upload'),
-                              ],
-                            ))
+                          onPressed: () {},
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.refresh),
+                              SizedBox(width: 8),
+                              Text('Re-upload'),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                  )))
+                  ),
+                ),
+              )
             ],
           ),
         ],

@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/oh_main_header.dart';
+import 'package:eye_care_for_all/features/technician/organ_harvest/providers/organ_harvest_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_radio_button.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_segment_button.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SerologyWidget extends StatelessWidget {
   const SerologyWidget({super.key});
@@ -173,9 +175,17 @@ class SerologyWidget extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Submit & Continue"),
+              Consumer(
+                builder: (context, ref, child) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      final provider = ref.read(organHarvestProvider);
+                      provider.setStep(3);
+                      provider.setCompleted(true);
+                    },
+                    child: const Text("Submit"),
+                  );
+                },
               )
             ],
           )
