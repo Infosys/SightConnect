@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_color.dart';
@@ -24,7 +23,7 @@ class AdminDonorDataSource extends DataTableSource {
         DataCell(
           onTap: () {},
           Text(
-            "${data[index]['DonorID']}",
+            "${data[index]['Sample ID']}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -47,40 +46,16 @@ class AdminDonorDataSource extends DataTableSource {
         ),
         DataCell(
           onTap: () {},
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const CircleAvatar(maxRadius: 18),
-              const SizedBox(width: AppSize.ks),
-              Flexible(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${data[index]["Delivery"]}",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.black,
-                      ),
-                    ),
-                    const SizedBox(height: AppSize.ks),
-                    Text(
-                      "ID 234532",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        color: AppColor.grey,
-                      ),
-                    ),
-                  ],
-                ),
+          Flexible(
+            child: Text(
+              "${data[index]["Delivery"]}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
               ),
-            ],
+            ),
           ),
         ),
         DataCell(
@@ -121,13 +96,20 @@ class AdminDonorDataSource extends DataTableSource {
         ),
         DataCell(
           onTap: () {},
-          Text(
-            "${data[index]["Priority"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: AppColor.primary,
+              borderRadius: BorderRadius.circular(28),
+            ),
+            child: Text(
+              "${data[index]["Priority"]}",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.white,
+              ),
             ),
           ),
         ),

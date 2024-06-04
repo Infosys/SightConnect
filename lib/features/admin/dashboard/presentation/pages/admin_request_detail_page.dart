@@ -12,19 +12,22 @@ class AdminRequestDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Requests - REQ-RIEB2024-0035'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Doctor/Requestor',
-              style: applyFiraSansFont(fontSize: 18),
-            ),
-            const SizedBox(height: 16),
-            const AdminDoctorDetailsCard(),
-            const SizedBox(height: 16),
-            const AdminDonorTable(),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Doctor/Requestor',
+                style: applyFiraSansFont(fontSize: 18),
+              ),
+              const SizedBox(height: 16),
+              const AdminDoctorDetailsCard(),
+              const SizedBox(height: 16),
+              const AdminDonorTable(),
+            ],
+          ),
         ),
       ),
     );

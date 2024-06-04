@@ -17,7 +17,7 @@ class AdminDonorTable extends HookWidget {
     return AppPaginatedTable(
       data: data,
       columnNames: const [
-        "Donor ID",
+        "Sample ID",
         "Tissue Expiry",
         "Delivery",
         "Tissue",

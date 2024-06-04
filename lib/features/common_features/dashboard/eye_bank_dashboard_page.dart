@@ -24,7 +24,7 @@ class EyeBankDashboardPage extends StatefulWidget {
 }
 
 class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
-  EyeBankRoles role = EyeBankRoles.RECOVERY_TECHNICIAN;
+  EyeBankRole role = EyeBankRole.transplantSurgeon;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
           ],
         ),
         actions: [
-          PopupMenuButton<EyeBankRoles>(
+          PopupMenuButton<EyeBankRole>(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -56,7 +56,7 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    role.name,
+                    role.displayValue,
                     style: const TextStyle(color: AppColor.grey),
                   ),
                 ],
@@ -68,22 +68,22 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
               });
             },
             itemBuilder: (BuildContext context) =>
-                <PopupMenuEntry<EyeBankRoles>>[
-              const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.TRANSPLANT_SURGEON,
-                child: Text('Transplant Surgeon'),
+                <PopupMenuEntry<EyeBankRole>>[
+              PopupMenuItem(
+                value: EyeBankRole.transplantSurgeon,
+                child: Text(EyeBankRole.transplantSurgeon.displayValue),
               ),
-              const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.EYE_BANK_MANAGER,
-                child: Text('Eye Bank Manager'),
+              PopupMenuItem(
+                value: EyeBankRole.eyeBankManager,
+                child: Text(EyeBankRole.eyeBankManager.displayValue),
               ),
-              const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.RECOVERY_TECHNICIAN,
-                child: Text('Recovery Technician'),
+              PopupMenuItem(
+                value: EyeBankRole.labTechnician,
+                child: Text(EyeBankRole.labTechnician.displayValue),
               ),
-              const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.LAB_TECHNICIAN,
-                child: Text('Lab Technician'),
+              PopupMenuItem(
+                value: EyeBankRole.recoveryTechnician,
+                child: Text(EyeBankRole.recoveryTechnician.displayValue),
               ),
             ],
           ),
@@ -98,13 +98,13 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
         duration: const Duration(milliseconds: 600),
         child: () {
           switch (role) {
-            case EyeBankRoles.TRANSPLANT_SURGEON:
+            case EyeBankRole.transplantSurgeon:
               return const DoctorDashBoardPage();
-            case EyeBankRoles.EYE_BANK_MANAGER:
+            case EyeBankRole.eyeBankManager:
               return const AdminDashboardPages();
-            case EyeBankRoles.LAB_TECHNICIAN:
+            case EyeBankRole.labTechnician:
               return const TechnicianDashboardPage();
-            case EyeBankRoles.RECOVERY_TECHNICIAN:
+            case EyeBankRole.recoveryTechnician:
               return const CounselorDashboardPage();
             default:
               return Container();
@@ -115,11 +115,31 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
   }
 }
 
-enum EyeBankRoles {
-  TRANSPLANT_SURGEON,
-  EYE_BANK_MANAGER,
-  RECOVERY_TECHNICIAN,
-  LAB_TECHNICIAN,
+enum EyeBankRole {
+  transplantSurgeon(
+    value: "TRANSPLANT_SURGEON",
+    displayValue: "Transplant Surgeon",
+  ),
+  eyeBankManager(
+    value: "EYE_BANK_MANAGER",
+    displayValue: "Eye Bank Manager",
+  ),
+  recoveryTechnician(
+    value: "RECOVERY_TECHNICIAN",
+    displayValue: "Recovery Technician",
+  ),
+  labTechnician(
+    value: "LAB_TECHNICIAN",
+    displayValue: "Lab Technician",
+  );
+
+  final String value;
+  final String displayValue;
+
+  const EyeBankRole({
+    required this.value,
+    required this.displayValue,
+  });
 }
 
 class EyeBankDrawer extends HookWidget {
