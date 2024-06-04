@@ -8,25 +8,6 @@ class AdminDashboardPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: AppColor.white,
-      //   elevation: 2,
-      //   title: Image.asset(
-      //     AppImages.logo,
-      //     height: 30,
-      //   ),
-      //   actions: const [
-      //     IconButton(
-      //       icon: Icon(Icons.search),
-      //       onPressed: null,
-      //     ),
-      //     IconButton(
-      //       onPressed: null,
-      //       icon: Icon(Icons.notifications),
-      //     ),
-      //     IconButton(onPressed: null, icon: Icon(Icons.person))
-      //   ],
-      // ),
       body: DefaultTabController(
         length: 4,
         child: Container(

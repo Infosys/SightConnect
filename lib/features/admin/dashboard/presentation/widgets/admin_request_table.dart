@@ -1,4 +1,3 @@
-
 import 'package:eye_care_for_all/features/admin/dashboard/data/admin_fake_data_source.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/data/admin_paginated_data_source.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +26,9 @@ class AdminRequestTable extends HookWidget {
         "Priority"
       ],
       dataSource: dataSource.value,
-      onSort: (columnIndex, ascending) {
-        // Implement your sorting logic here
-      },
+      onSort: (columnIndex, ascending) {},
       onSearch: (searchTerm) {
         var filteredData = data.where((item) {
-          // Implement your search logic here.
-          // This is a simple example that checks if the item's toString() contains the search term.
-          // You need to replace this with your actual search logic.
           return item["RequestID"].toString().contains(searchTerm);
         }).toList();
 
