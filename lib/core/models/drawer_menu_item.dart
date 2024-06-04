@@ -13,6 +13,7 @@ enum DrawerMenuItemId {
   help,
   chatbot,
   tenant,
+  feedback,
   referral,
 }
 
@@ -54,6 +55,12 @@ class DrawerMenuItems {
       title: loc.appDrawerScanner,
       icon: AppIcon.scanner,
     );
+    DrawerMenuItem feedback = const DrawerMenuItem(
+      id: DrawerMenuItemId.feedback,
+      title: "Add Review",
+      icon: "assets/drawer_icons/feedback.svg",
+    );
+
     DrawerMenuItem about = DrawerMenuItem(
       id: DrawerMenuItemId.about,
       title: loc.appDrawerAboutUs,
@@ -88,6 +95,7 @@ class DrawerMenuItems {
       accessibilities,
       assessments,
       scanner,
+      // feedback,
       about,
       privacyPolicy,
       refferal,

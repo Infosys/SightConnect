@@ -36,3 +36,16 @@ npm run app-translations
 ```
 
 This will create all the files needed for the app localization inside `lib/l10n/`
+
+
+Branches with their Description
+
+app_api_v1 : it has the ui till release 1.216.0, but the api's are v1
+equipment_selection(any branch with equipment in it) : it has the code for equipment selection
+iPleadge_dev : added code for iPleadge
+distance_acuity : old code for long distance acuity, not used anymore
+dev_backup : backup of development branch before the introduction of new design and long distance visual acuity.
+
+
+
+             

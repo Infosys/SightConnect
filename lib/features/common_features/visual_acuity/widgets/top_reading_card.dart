@@ -128,18 +128,29 @@ class TopReadingCard extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text(
-                                  distance != null ? '$distance cm' : 'No Face',
-                                  style: applyRobotoFont(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: (distance != null &&
-                                            (distance >= lowerLimit &&
-                                                distance <= upperLimit))
-                                        ? AppColor.green
-                                        : AppColor.red,
-                                  ),
-                                ),
+                                !isShortDistance
+                                    ? Text(
+                                        "Position yourself\n2m from the screen",
+                                        style: applyRobotoFont(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        softWrap: true,
+                                      )
+                                    : Text(
+                                        distance != null
+                                            ? '$distance cm'
+                                            : 'No Face',
+                                        style: applyRobotoFont(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: (distance != null &&
+                                                  (distance >= lowerLimit &&
+                                                      distance <= upperLimit))
+                                              ? AppColor.green
+                                              : AppColor.red,
+                                        ),
+                                      ),
                               ],
                             ),
                           ],

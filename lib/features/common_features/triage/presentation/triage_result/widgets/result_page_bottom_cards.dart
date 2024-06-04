@@ -18,7 +18,7 @@ class ResultPageBottomCards extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+        HelplineCard(helpLine: AppInfoService.tollFreeNumber),
         const SizedBox(height: AppSize.km),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

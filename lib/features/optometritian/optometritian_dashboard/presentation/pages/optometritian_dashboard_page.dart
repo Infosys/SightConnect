@@ -28,7 +28,17 @@ class OptometritianDashboardPage extends StatefulHookConsumerWidget {
 }
 
 class _OptometritianDashboardPageState
-    extends ConsumerState<OptometritianDashboardPage> {
+    extends ConsumerState<OptometritianDashboardPage>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_)async {
+     await ref.watch(optometricianDashboardProvider).getOptometricianDashboard(
+          ref.read(globalOptometricianProvider).preferredUsername!);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var isLoading = useState(false);

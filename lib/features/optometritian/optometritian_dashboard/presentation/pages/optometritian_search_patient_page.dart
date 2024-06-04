@@ -1,10 +1,10 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_search_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,12 @@ class OptometritianSearchPatientPage extends HookConsumerWidget {
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                       Future.delayed(const Duration(milliseconds: 300), () {
-                        Navigator.pop(context);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const OptometritianDashboardPage()),
+                            (route) => route.isFirst);
                       });
                     },
                     icon: Icon(

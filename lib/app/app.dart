@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_feedback_better.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,6 @@ import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
-import 'package:millimeters/millimeters.dart';
 
 import '../l10n/app_localizations.dart';
 
@@ -37,7 +37,6 @@ class MyApp extends ConsumerWidget {
       DeviceOrientation.portraitDown,
     ]);
     final mediaQueryData = MediaQuery.of(context);
-    final isMobile = Responsive.isMobile(context);
 
     final initialRoute = PersistentAuthStateService.authState.isLoggedIn
         ? InitializationPage.routeName
@@ -49,17 +48,15 @@ class MyApp extends ConsumerWidget {
         if (data) {
           return const SecurePage();
         } else {
-          return Millimeters.fromView(
-            child: MediaQuery(
-              data: kIsWeb
-                  ? mediaQueryData
-                  : mediaQueryData.copyWith(
-                      textScaler: isMobile
-                          ? TextScaler.linear(ref
-                              .watch(globalTextScaleFactorProvider)
-                              .textScaleFactor)
-                          : const TextScaler.linear(1.3),
-                    ),
+          return MediaQuery(
+            data: mediaQueryData.copyWith(
+              textScaler: Responsive.isMobile(context)
+                  ? TextScaler.linear(
+                      ref.watch(globalTextScaleFactorProvider).textScaleFactor,
+                    )
+                  : const TextScaler.linear(1.3),
+            ),
+            child: AppFeedbackBetter(
               child: MaterialApp(
                 title: AppInfoService.appName,
                 locale: ref.watch(globalLanguageProvider).currentLocale,
@@ -77,11 +74,10 @@ class MyApp extends ConsumerWidget {
                     ? AppTheme.getLightTheme(context)
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
+
                 initialRoute: initialRoute,
                 navigatorKey: AppRouter.navigatorKey,
                 onUnknownRoute: AppRouter.onUnknownRoute,
-                // home: const EyeBankDashboardPage(),
-
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
                 //         data: (value) {
@@ -106,8 +102,6 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-
 
 // import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 // import 'package:eye_care_for_all/core/providers/global_provider.dart';
