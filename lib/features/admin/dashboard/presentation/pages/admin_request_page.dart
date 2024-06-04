@@ -15,7 +15,11 @@ class AdminRequestPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context)) const AdminHomeAnalytics(),
-            const Expanded(child: AdminRequestTable()),
+            const Expanded(
+                child: Padding(
+              padding: EdgeInsets.all(12.0),
+              child: AdminRequestTable(),
+            )),
           ],
         ),
       ),
