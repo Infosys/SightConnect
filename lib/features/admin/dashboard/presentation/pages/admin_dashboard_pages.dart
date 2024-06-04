@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_page.dart';
 import 'package:flutter/material.dart';
 
@@ -57,8 +56,8 @@ class AdminDashboardPages extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    const AdminRequestDetailPage(),
                     const AdminRequestPage(),
+                    Container(),
                     Container(),
                     Container()
                   ],

@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_color.dart';
@@ -22,7 +23,12 @@ class AdminPaginatedDataSource extends DataTableSource {
       index: index,
       cells: [
         DataCell(
-          onTap: () {},
+          onTap: () {
+            final navigator = Navigator.of(context);
+            navigator.push(MaterialPageRoute(builder: (context) {
+              return const AdminRequestDetailPage();
+            }));
+          },
           Text(
             "${data[index]['RequestID']}",
             maxLines: 1,

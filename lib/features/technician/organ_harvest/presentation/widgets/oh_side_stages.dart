@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/technician/organ_harvest/presentation/widgets/oh_stepper.dart';
@@ -53,10 +54,39 @@ class OHSideStages extends ConsumerWidget {
                   ],
                 ),
               ),
-              ...List.generate(
-                6,
-                (index) => const _RowData(),
-              ),
+              ...[
+                const _RowData(
+                  title: "Donor ID",
+                  value: "RIEB17-3394 OD-C",
+                ),
+                const _RowData(
+                  title: "With",
+                  value: "Aparna Kishore",
+                ),
+                _RowData(
+                  title: "Last Acted",
+                  value: DateTime.now()
+                      .subtract(const Duration(days: 2))
+                      .toString()
+                      .split(" ")[0],
+                ),
+                const _RowData(
+                  title: "Tissue ID",
+                  value: "--",
+                ),
+                const _RowData(
+                  title: "Tissue Type",
+                  value: "--",
+                ),
+                const _RowData(
+                  title: "Storage Media",
+                  value: "--",
+                ),
+                const _RowData(
+                  title: "Expire On",
+                  value: "--",
+                ),
+              ],
               const Divider(
                 color: AppColor.grey,
                 thickness: 1,
@@ -77,7 +107,12 @@ class OHSideStages extends ConsumerWidget {
 }
 
 class _RowData extends StatelessWidget {
-  const _RowData({super.key});
+  const _RowData({
+    required this.title,
+    required this.value,
+  });
+  final String title;
+  final String value;
 
   @override
   Widget build(BuildContext context) {
@@ -91,17 +126,24 @@ class _RowData extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Donor ID",
+            title,
             style: applyRobotoFont(
               fontSize: 14,
               color: AppColor.grey,
             ),
           ),
-          Text(
-            "RIEB17-3394 OD-C",
-            style: applyRobotoFont(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+          const SizedBox(width: 8),
+          Flexible(
+            child: AutoSizeText(
+              value,
+              maxLines: 1,
+              maxFontSize: 14,
+              minFontSize: 10,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

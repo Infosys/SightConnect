@@ -24,12 +24,12 @@ class EyeBankDashboardPage extends StatefulWidget {
 }
 
 class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
-  EyeBankRoles role = EyeBankRoles.TECHNICIAN;
+  EyeBankRoles role = EyeBankRoles.RECOVERY_TECHNICIAN;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const EyeBankDrawer(),
+      // drawer: const EyeBankDrawer(),
       appBar: AppBar(
         backgroundColor: AppColor.white,
         elevation: 2,
@@ -70,20 +70,20 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
             itemBuilder: (BuildContext context) =>
                 <PopupMenuEntry<EyeBankRoles>>[
               const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.DOCTOR,
-                child: Text('Doctor'),
+                value: EyeBankRoles.TRANSPLANT_SURGEON,
+                child: Text('Transplant Surgeon'),
               ),
               const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.ADMIN,
-                child: Text('Admin'),
+                value: EyeBankRoles.EYE_BANK_MANAGER,
+                child: Text('Eye Bank Manager'),
               ),
               const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.TECHNICIAN,
-                child: Text('Technician'),
+                value: EyeBankRoles.RECOVERY_TECHNICIAN,
+                child: Text('Recovery Technician'),
               ),
               const PopupMenuItem<EyeBankRoles>(
-                value: EyeBankRoles.COUNSELOR,
-                child: Text('Counselor'),
+                value: EyeBankRoles.LAB_TECHNICIAN,
+                child: Text('Lab Technician'),
               ),
             ],
           ),
@@ -98,13 +98,13 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
         duration: const Duration(milliseconds: 600),
         child: () {
           switch (role) {
-            case EyeBankRoles.DOCTOR:
+            case EyeBankRoles.TRANSPLANT_SURGEON:
               return const DoctorDashBoardPage();
-            case EyeBankRoles.ADMIN:
+            case EyeBankRoles.EYE_BANK_MANAGER:
               return const AdminDashboardPages();
-            case EyeBankRoles.TECHNICIAN:
+            case EyeBankRoles.LAB_TECHNICIAN:
               return const TechnicianDashboardPage();
-            case EyeBankRoles.COUNSELOR:
+            case EyeBankRoles.RECOVERY_TECHNICIAN:
               return const CounselorDashboardPage();
             default:
               return Container();
@@ -116,10 +116,10 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
 }
 
 enum EyeBankRoles {
-  DOCTOR,
-  ADMIN,
-  TECHNICIAN,
-  COUNSELOR,
+  TRANSPLANT_SURGEON,
+  EYE_BANK_MANAGER,
+  RECOVERY_TECHNICIAN,
+  LAB_TECHNICIAN,
 }
 
 class EyeBankDrawer extends HookWidget {
