@@ -11,7 +11,6 @@ class AdminDashboardPages extends StatelessWidget {
       body: DefaultTabController(
         length: 4,
         child: Container(
-          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               const TabBar(

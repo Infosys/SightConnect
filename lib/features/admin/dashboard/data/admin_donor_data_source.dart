@@ -46,15 +46,13 @@ class AdminDonorDataSource extends DataTableSource {
         ),
         DataCell(
           onTap: () {},
-          Flexible(
-            child: Text(
-              "${data[index]["Delivery"]}",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.black,
-              ),
+          Text(
+            "${data[index]["Delivery"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
             ),
           ),
         ),
@@ -84,25 +82,25 @@ class AdminDonorDataSource extends DataTableSource {
         ),
         DataCell(
           onTap: () {},
-          Text(
-            "${data[index]["Match"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
+          Chip(
+            backgroundColor: _getPercentageColor(data[index]["Match"]!),
+            label: Text(
+              data[index]["Match"]!,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
             ),
           ),
         ),
         DataCell(
           onTap: () {},
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration: BoxDecoration(
-              color: AppColor.primary,
-              borderRadius: BorderRadius.circular(28),
-            ),
-            child: Text(
+          Chip(
+            labelPadding: const EdgeInsets.all(8),
+            backgroundColor: AppColor.primary,
+            label: Text(
               "${data[index]["Priority"]}",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -115,6 +113,18 @@ class AdminDonorDataSource extends DataTableSource {
         ),
       ],
     );
+  }
+
+  _getPercentageColor(String percentage) {
+    final value = percentage.replaceAll("%", "");
+    final doubleValue = double.parse(value);
+    if (doubleValue >= 90) {
+      return AppColor.lightGreen;
+    } else if (doubleValue >= 70) {
+      return AppColor.yellow.withOpacity(0.2);
+    } else {
+      return AppColor.lightRed;
+    }
   }
 
   @override

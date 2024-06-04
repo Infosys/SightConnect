@@ -1,6 +1,8 @@
+import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class OrderDelivery extends StatelessWidget {
   const OrderDelivery({super.key});
@@ -8,320 +10,330 @@ class OrderDelivery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppCard(
-                title: "Requestor Details",
-                titleBottomSize: 16,
-                margin: null,
-                child: Column(
-                  children: [
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: [
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Order ID",
-                          ),
-                          onChanged: (value) {},
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppCard(
+              title: "Requestor Details",
+              titleBottomSize: 16,
+              margin: null,
+              child: Column(
+                children: [
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Order ID",
                         ),
-                        AppTextField.date(
-                          context: context,
-                          decoration: const InputDecoration(
-                            labelText: "Date",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField.date(
+                        context: context,
+                        decoration: const InputDecoration(
+                          labelText: "Date",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Doctor Name",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Doctor Name",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Hospital",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Hospital",
                         ),
-                        const Divider(),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Address",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      const Divider(),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Address",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "City",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "City",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "State",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "State",
                         ),
-                      ],
-                    )
-                  ],
-                )),
-            const SizedBox(height: 16),
-            AppCard(
-                title: "Recipient Details",
-                titleBottomSize: 16,
-                margin: null,
-                child: Column(
-                  children: [
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: [
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Recipient Name",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  )
+                ],
+              )),
+          const SizedBox(height: 16),
+          AppCard(
+              title: "Recipient Details",
+              titleBottomSize: 16,
+              margin: null,
+              child: Column(
+                children: [
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Recipient Name",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Recipient ID",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Recipient ID",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Gender & Age",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Gender & Age",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Eye Involved",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Eye Involved",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Transplantation Procedure",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Transplantation Procedure",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Pre-Operative Diagnosis",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Pre-Operative Diagnosis",
                         ),
-                      ],
-                    )
-                  ],
-                )),
-            const SizedBox(height: 16),
-            AppCard(
-                title: "Organ Details",
-                titleBottomSize: 16,
-                margin: null,
-                child: Column(
-                  children: [
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: [
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Tissue ID",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  )
+                ],
+              )),
+          const SizedBox(height: 16),
+          AppCard(
+              title: "Organ Details",
+              titleBottomSize: 16,
+              margin: null,
+              child: Column(
+                children: [
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Tissue ID",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Tissue Type",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Tissue Type",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Cell Count",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Cell Count",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Ageing of Tissue",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Ageing of Tissue",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Approved Usages",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Approved Usages",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Tissue Expiry",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Tissue Expiry",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Storage Media",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Storage Media",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Death to Preservation",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Death to Preservation",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Primary COD",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Primary COD",
                         ),
-                      ],
-                    )
-                  ],
-                )),
-            const SizedBox(height: 16),
-            AppCard(
-                title: "Shipment Label",
-                titleBottomSize: 16,
-                margin: null,
-                child: Column(
-                  children: [
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: [
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Printed In",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  )
+                ],
+              )),
+          const SizedBox(height: 16),
+          AppCard(
+              title: "Shipment Label",
+              titleBottomSize: 16,
+              margin: null,
+              child: Column(
+                children: [
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Printed In",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Hand Carried by",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Hand Carried by",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Ship Via",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Ship Via",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Ageing of Tissue",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Ageing of Tissue",
                         ),
-                        const Divider(),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.99,
-                          child: AppTextField(
-                            decoration: const InputDecoration(
-                              labelText: "Ship From",
-                            ),
-                            onChanged: (value) {},
-                          ),
-                        ),
-                        AppTextField(
+                        onChanged: (value) {},
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.99,
+                        child: AppTextField(
                           decoration: const InputDecoration(
                             labelText: "Ship From",
                           ),
                           onChanged: (value) {},
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.99,
-                          child: AppTextField(
-                            decoration: const InputDecoration(
-                              labelText: "Comments",
-                            ),
-                            onChanged: (value) {},
-                          ),
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Ship From",
                         ),
-                        AppTextField(
+                        onChanged: (value) {},
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.99,
+                        child: AppTextField(
                           decoration: const InputDecoration(
-                            labelText: "Airline",
+                            labelText: "Comments",
                           ),
                           onChanged: (value) {},
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "Flight Number",
-                          ),
-                          onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Airline",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "From",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "Flight Number",
                         ),
-                        AppTextField(
-                          decoration: const InputDecoration(
-                            labelText: "To",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "From",
                         ),
-                        AppTextField.date(
-                          context: context,
-                          decoration: const InputDecoration(
-                            labelText: "ETD Date&Time",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField(
+                        decoration: const InputDecoration(
+                          labelText: "To",
                         ),
-                        AppTextField.date(
-                          context: context,
-                          decoration: const InputDecoration(
-                            labelText: "ETD Date&Time",
-                          ),
-                          onChanged: (value) {},
+                        onChanged: (value) {},
+                      ),
+                      AppTextField.date(
+                        context: context,
+                        decoration: const InputDecoration(
+                          labelText: "ETD Date&Time",
                         ),
-                      ],
-                    )
-                  ],
-                )),
-            const SizedBox(height: 16),
-            const Divider(),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Start Shipment"),
+                        onChanged: (value) {},
+                      ),
+                      AppTextField.date(
+                        context: context,
+                        decoration: const InputDecoration(
+                          labelText: "ETD Date&Time",
+                        ),
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  )
+                ],
+              )),
+          const SizedBox(height: 16),
+          const Divider(),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Fluttertoast.showToast(
+                    msg: "Shipment Started",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: AppColor.primary,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Start Shipment"),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
                 ),
-                const SizedBox(
-                  width: 16,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.blue),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    "Reject",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                )
-              ],
-            )
-          ],
-        ));
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

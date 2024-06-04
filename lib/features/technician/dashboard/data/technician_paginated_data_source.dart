@@ -55,11 +55,15 @@ class TechnicianPaginatedDataSource extends DataTableSource {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                maxRadius: 18,
-                backgroundColor: AppColor.primary.withOpacity(0.2),
-              ),
-              const SizedBox(width: AppSize.km),
+              const CircleAvatar(
+                  backgroundColor: AppColor.lightBlueOpacity,
+                  maxRadius: 18,
+                  child: Icon(
+                    Icons.person,
+                    color: AppColor.blue,
+                    size: 20,
+                  )),
+              const SizedBox(width: AppSize.ks),
               Flexible(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
