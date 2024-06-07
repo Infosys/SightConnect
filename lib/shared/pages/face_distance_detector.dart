@@ -138,42 +138,38 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
           : ImageFormatGroup.bgra8888,
     );
 
-    await _controller.initialize().then(
-      (value) {
-        if (!mounted) {
-          return;
-        }
-        int streamCount = 0;
-        void processCameraImage(CameraImage image) {
-          streamCount++;
-          if (streamCount % 3 == 0) {
-            final CameraDescription camera = _cameras.firstWhere(
-              (element) => element.lensDirection == _cameraLensDirection,
-            );
-            final DeviceOrientation orientation =
-                _controller.value.deviceOrientation;
-
-            final dynamic inputImage = Platform.isAndroid
-                ? FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
-                    image: image,
-                    camera: camera,
-                    deviceOrientation: orientation,
-                  )
-                : FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
-                    image: image,
-                    camera: camera,
-                    deviceOrientation: orientation,
-                  );
-            if (inputImage == null) return;
-            _processImage(inputImage);
-          }
-        }
-
-        _controller.startImageStream(processCameraImage);
-      },
-    );
+    await _controller.initialize();
+    if (!mounted) {
+      return;
+    }
+    _controller.startImageStream(processCameraImage);
     if (mounted) {
       setState(() {});
+    }
+  }
+
+  int streamCount = 0;
+  void processCameraImage(CameraImage image) {
+    streamCount++;
+    if (streamCount % 3 == 0) {
+      final CameraDescription camera = _cameras.firstWhere(
+        (element) => element.lensDirection == _cameraLensDirection,
+      );
+      final DeviceOrientation orientation = _controller.value.deviceOrientation;
+
+      final dynamic inputImage = Platform.isAndroid
+          ? FaceDistanceDetectorServiceAndroid.inputImageFromCameraImage(
+              image: image,
+              camera: camera,
+              deviceOrientation: orientation,
+            )
+          : FaceDistanceDetectorServiceIOS.inputImageFromCameraImage(
+              image: image,
+              camera: camera,
+              deviceOrientation: orientation,
+            );
+      if (inputImage == null) return;
+      _processImage(inputImage);
     }
   }
 
@@ -379,24 +375,19 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     }
 
     if (state == AppLifecycleState.inactive) {
-      debugPrint("VisualAcuityFaceDistancePage: AppLifecycleState.inactive");
       _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.resumed) {
-      debugPrint("VisualAcuityFaceDistancePage: AppLifecycleState.resumed");
       if (mounted) {
         _checkPermissions(context);
       }
     } else if (state == AppLifecycleState.paused) {
-      debugPrint("VisualAcuityFaceDistancePage: AppLifecycleState.paused");
       _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.detached) {
-      debugPrint("VisualAcuityFaceDistancePage: AppLifecycleState.detached");
       _addLoading();
       _stopLiveFeed();
     } else if (state == AppLifecycleState.hidden) {
-      debugPrint("VisualAcuityFaceDistancePage: AppLifecycleState.hidden");
       _addLoading();
       _stopLiveFeed();
     }
