@@ -75,21 +75,22 @@ class MyApp extends ConsumerWidget {
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
 
-              initialRoute: initialRoute,
-              navigatorKey: AppRouter.navigatorKey,
-              onUnknownRoute: AppRouter.onUnknownRoute,
-              // builder: (context, child) {
-              //   return ref.watch(internetProvider).maybeWhen(
-              //         data: (value) {
-              //           if (!value) {
-              //             return const InternetLostPage();
-              //           } else {
-              //             return child!;
-              //           }
-              //         },
-              //         orElse: () => const InternetLostPage(),
-              //       );
-              // },
+                initialRoute: initialRoute,
+                navigatorKey: AppRouter.navigatorKey,
+                onUnknownRoute: AppRouter.onUnknownRoute,
+                // builder: (context, child) {
+                //   return ref.watch(internetProvider).maybeWhen(
+                //         data: (value) {
+                //           if (!value) {
+                //             return const InternetLostPage();
+                //           } else {
+                //             return child!;
+                //           }
+                //         },
+                //         orElse: () => const InternetLostPage(),
+                //       );
+                // },
+              ),
             ),
           );
         }
