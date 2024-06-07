@@ -142,6 +142,11 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
     if (!mounted) {
       return;
     }
+    if (!_controller.value.isInitialized) {
+      debugPrint(
+          "VisualAcuityFaceDistancePage: CameraController not initialized");
+      return;
+    }
     _controller.startImageStream(processCameraImage);
     if (mounted) {
       setState(() {});
@@ -356,6 +361,7 @@ class _FaceDistanceDetectorState extends ConsumerState<FaceDistanceDetector>
   }
 
   void setDistanceNotifierData() {
+    if (!mounted) return;
     if (ref.read(globalVisualAcuityProvider).isShortDistanceTest == true) {
       ref.read(distanceNotifierProvider).distance = _distanceToFace ?? 0;
     } else {
