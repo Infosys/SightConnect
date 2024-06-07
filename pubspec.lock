@@ -188,12 +188,11 @@ packages:
   camera:
     dependency: "direct main"
     description:
-      path: "packages/camera/camera"
-      ref: e1a4dba770da9bc3cf9f858bac6837083f8b9059
-      resolved-ref: e1a4dba770da9bc3cf9f858bac6837083f8b9059
-      url: "https://github.com/bottlepay/plugins.git"
-    source: git
-    version: "0.10.0+1"
+      name: camera
+      sha256: dfa8fc5a1adaeb95e7a54d86a5bd56f4bb0e035515354c8ac6d262e35cec2ec8
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.10.6"
   camera_android:
     dependency: transitive
     description:
@@ -1445,14 +1444,6 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "4.1.0"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
-      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
-    source: hosted
-    version: "3.2.1"
   recase:
     dependency: transitive
     description:
