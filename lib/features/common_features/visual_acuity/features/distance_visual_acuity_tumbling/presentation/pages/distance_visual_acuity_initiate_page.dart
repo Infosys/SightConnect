@@ -20,17 +20,35 @@ import '../../../../../triage/presentation/triage_member_selection/widget/triage
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../../../../domain/models/tumbling_models.dart';
 import '../../../../providers/distance_notifier_provider.dart';
-import '../../../visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import '../../../../widgets/touch_gesture_card.dart';
+import '../../../visual_acuity_tumbling/presentation/widgets/helper/vision_acuity_show_instruction_bottom_up_sheet.dart';
 import '../providers/distance_visual_acuity_test_provider.dart';
 import '../widgets/distance_visual_acuity_dialog.dart';
 
-class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
+class DistanceVisualAcuityInitiatePage extends ConsumerStatefulWidget {
   static const String routeName = "/distance-tumbling-test-initiate";
   const DistanceVisualAcuityInitiatePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DistanceVisualAcuityInitiatePage> createState() =>
+      _DistanceVisualAcuityInitiatePageState();
+}
+
+class _DistanceVisualAcuityInitiatePageState
+    extends ConsumerState<DistanceVisualAcuityInitiatePage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      visionInstructionShowBottomUpSheet(
+        context: context,
+        isRightEyeCovered: true,
+      );
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
 
@@ -47,7 +65,8 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
             builder: (context) => TriageExitAlertBox(
               content: AppLocalizations.of(context)!.visualAcuityExitDialog,
             ),
-          );
+          ).then(
+              (value) => visionInstructionShowBottomUpSheet(context: context));
         } else {
           Navigator.of(context).pop();
         }
@@ -82,7 +101,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                     titleSpacing: 0,
                     actions: const [],
                     centerTitle: false,
-                    title: const Text("Visual Acuity Test - Long Distance"),
+                    title: const Text("Distance Vision Test"),
                   )
                 : CustomAppbar(
                     leadingWidth: 60,
@@ -115,7 +134,7 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                       ),
                     ),
                     title: Text(
-                      "Visual Acuity Test - Long Distance",
+                      "Distance Vision Test",
                       style: applyFiraSansFont(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -136,7 +155,10 @@ class DistanceVisualAcuityInitiatePage extends ConsumerWidget {
                             .showEyeInstructionDialog(
                                 context, next.currentEye!);
                       },
-                    );
+                    ).then((value) => {
+                          visionInstructionShowBottomUpSheet(
+                              context: context, isLeftEyeCovered: true)
+                        });
                     next.startGame(Eye.left);
                   }
                 });

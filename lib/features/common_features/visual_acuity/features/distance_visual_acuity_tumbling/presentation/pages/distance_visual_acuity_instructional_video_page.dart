@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/traige_exit_alert_box.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/widgets/distance_visual_acuity_tumbling_test_left_eye_instruction.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/widgets/distance_visual_acuity_tumbling_test_right_eye_instruction.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -68,7 +68,7 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 titleSpacing: 0,
                 centerTitle: false,
                 title: const Text(
-                  "Visual Acuity Test - Long Distance",
+                  "Distance Vision Test",
                 ),
               )
             : CustomAppbar(
@@ -91,7 +91,7 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                 ),
                 title: Text(
-                  "Visual Acuity Test - Long Distance",
+                  "Distance Vision Test",
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -128,7 +128,8 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => const DistanceVisualAcuityTumblingLeftEyeInstruction()),
+                        builder: (context) =>
+                            const DistanceVisualAcuityTumblingRightEyeInstruction()),
                   );
 
                   // Navigator.of(context).push(
