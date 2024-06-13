@@ -1,6 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/doctor/adverse_reaction_report/presentation/pages/adverse_reaction_report_page.dart';
 import 'package:eye_care_for_all/features/doctor/surgery/presentation/pages/doctor_surgery_details_page.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/pages/doctor_tissue_detail_form.dart';
+import 'package:eye_care_for_all/features/doctor/tissue_return/presentation/pages/doctor_tissue_return.dart';
 import 'package:flutter/material.dart';
 
 class DoctorDashBoardPage extends StatelessWidget {
@@ -10,7 +12,7 @@ class DoctorDashBoardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: DefaultTabController(
-        length: 2,
+        length: 4,
         child: Column(
           children: [
             TabBar(
@@ -19,21 +21,27 @@ class DoctorDashBoardPage extends StatelessWidget {
               indicatorColor: AppColor.primary,
               tabs: [
                 Tab(
+                  text: 'Tissue Request',
+                ),
+                Tab(
                   text: 'Tissue Details',
                 ),
                 Tab(
-                  text: 'Tissue Request',
+                  text: 'Tissue Return',
                 ),
-                // Tab(
-                //   text: 'Tissue Request',
-                // ),
+                Tab(
+                  text: 'Adverse Reaction Report',
+                ),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: [
-                  DoctorTissueDetailForm(),
                   DoctorSurgeryDetailsPage(),
+                  DoctorTissueDetailForm(),
+                  DoctorTissueReturn(),
+                  AdverseReactionReportPage()
+
                   // DoctorTissueRequestForm(),
                 ],
               ),

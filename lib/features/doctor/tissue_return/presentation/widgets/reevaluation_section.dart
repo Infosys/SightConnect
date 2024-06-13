@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/features/doctor/tissue_return/presentation/widgets/tissue_return_form_section.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
+import 'package:eye_care_for_all/shared/widgets/app_form_section.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ class ReevaluationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TissueReturnFormSection(
+    return AppFormSection(
       title: 'Re-Evaluation',
       children: [
         Column(
@@ -18,81 +18,76 @@ class ReevaluationSection extends StatelessWidget {
               title: 'Slit Lamp',
               child: Column(
                 children: [
-                 AppTextField(
-              decoration: const InputDecoration(
-                hintText: 'Test Done By',
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-             Row(
-              children: [
-                Expanded(
-                  child:  AppTextField.date(
+                  const AppTextField(
+                    maxWidth: double.infinity,
+                    minWidth: double.infinity,
+                    decoration: InputDecoration(
+                      hintText: 'Test Done By',
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextField.date(
                           context: context,
-                         
                           onChanged: (value) {},
                           decoration: const InputDecoration(
-                           
                             hintText: "Date",
                           ),
                         ),
-                ),
-                 SizedBox(width: 10),
-                Expanded(
-                  child: AppTextField.time(
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: AppTextField.time(
                           context: context,
-                         
                           onChanged: (value) {},
                           decoration: const InputDecoration(
-                            
                             hintText: "Time",
                           ),
                         ),
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
-
-             AppCard(
+            AppCard(
               padding: 0,
               title: 'Specular Microscopy',
               child: Column(
                 children: [
-                 AppTextField(
-              decoration: const InputDecoration(
-                hintText: 'Test Done By',
-                suffixIcon: Icon(Icons.search),
-              ),
-            ),
-             Row(
-              children: [
-                Expanded(
-                  child:  AppTextField.date(
+                  const AppTextField(
+                    maxWidth: double.infinity,
+                    minWidth: double.infinity,
+                    decoration: InputDecoration(
+                      hintText: 'Test Done By',
+                      suffixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextField.date(
                           context: context,
-                         
                           onChanged: (value) {},
                           decoration: const InputDecoration(
-                           
                             hintText: "Date",
                           ),
                         ),
-                ),
-                 SizedBox(width: 10),
-                Expanded(
-                  child: AppTextField.time(
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: AppTextField.time(
                           context: context,
-                         
                           onChanged: (value) {},
                           decoration: const InputDecoration(
-                           
                             hintText: "Time",
                           ),
                         ),
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

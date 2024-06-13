@@ -18,6 +18,8 @@ class AdverseReactionSection extends StatelessWidget {
           ),
         ),
         AppRadioButton(
+          minWidth: 500,
+          maxWidth: 500,
           title: 'Adverse Reaction :',
           direction: "VERTICAL",
           items: const [

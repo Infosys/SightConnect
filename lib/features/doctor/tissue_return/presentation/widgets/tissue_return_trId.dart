@@ -8,11 +8,11 @@ class TissueReturnDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-    margin: null,
+      margin: null,
       color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Wrap(
+        spacing: 20,
+        runSpacing: 20,
         children: [
           AppTextField(
             onChanged: (value) {},
@@ -20,7 +20,6 @@ class TissueReturnDashboard extends StatelessWidget {
               hintText: 'TR ID',
             ),
           ),
-         
           AppTextField(
             onChanged: (value) {},
             decoration: const InputDecoration(
