@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/pages/i
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/consultant/dashboard/presentation/counselor_dashboard_page.dart';
-import 'package:eye_care_for_all/features/doctor/dashboard/presentation/pages/doctor_dashboard_page.dart';
+import 'package:eye_care_for_all/features/doctor/adverse_reaction_report/presentation/pages/adverse_reaction_report_page.dart';
 import 'package:eye_care_for_all/features/technician/dashboard/presentation/pages/technician_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -24,7 +24,7 @@ class EyeBankDashboardPage extends StatefulWidget {
 }
 
 class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
-  EyeBankRole role = EyeBankRole.recoveryTechnician;
+  EyeBankRole role = EyeBankRole.transplantSurgeon;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class _EyeBankDashboardPageState extends State<EyeBankDashboardPage> {
         child: () {
           switch (role) {
             case EyeBankRole.transplantSurgeon:
-              return const DoctorDashBoardPage();
+              return const AdverseReactionReportPage();
             case EyeBankRole.eyeBankManager:
               return const AdminDashboardPages();
             case EyeBankRole.labTechnician:

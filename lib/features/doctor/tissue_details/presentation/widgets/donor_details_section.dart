@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/tissue_details_form_section.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/tissue_details_info_tile.dart';
+import 'package:eye_care_for_all/shared/widgets/app_form_section.dart';
 import 'package:flutter/material.dart';
 
 class DonorDetailsSection extends StatelessWidget {
@@ -7,7 +7,7 @@ class DonorDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TissueDetailsFormSection(title: 'Donor Details', children: [
+    return const AppFormSection(title: 'Donor Details', children: [
       TissueDetailsInfoTile(
         title: 'Donor ID',
         value: 'RIEB24-0003',

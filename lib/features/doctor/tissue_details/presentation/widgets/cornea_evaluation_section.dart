@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/tissue_details_form_section.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/tissue_details_info_tile.dart';
+import 'package:eye_care_for_all/shared/widgets/app_form_section.dart';
 import 'package:flutter/material.dart';
 
 class CorneaEvaluationSection extends StatelessWidget {
@@ -7,7 +7,7 @@ class CorneaEvaluationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TissueDetailsFormSection(
+    return const AppFormSection(
       title: 'Cornea Evaluation',
       children: [
         TissueDetailsInfoTile(title: 'Tissue Suitability', value: 'NSFT'),
