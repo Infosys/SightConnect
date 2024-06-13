@@ -38,8 +38,8 @@ final validationDioProvider = Provider(
   (ref) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstant.baseUrl, 
-         headers: {
+        baseUrl: ApiConstant.baseUrl,
+        headers: {
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
           "X-App-Version": AppInfoService.appVersion,
         },
@@ -67,6 +67,9 @@ class DioService extends StateNotifier<Dio> {
           Dio(
             BaseOptions(
               baseUrl: ApiConstant.baseUrl,
+              sendTimeout: const Duration(seconds: 120),
+              receiveTimeout: const Duration(seconds: 120),
+              connectTimeout: const Duration(seconds: 120),
             ),
           ),
         ) {

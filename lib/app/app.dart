@@ -49,31 +49,33 @@ class MyApp extends ConsumerWidget {
           return const SecurePage();
         } else {
           return MediaQuery(
-            data: mediaQueryData.copyWith(
-              textScaler: Responsive.isMobile(context)
-                  ? TextScaler.linear(
-                      ref.watch(globalTextScaleFactorProvider).textScaleFactor,
-                    )
-                  : const TextScaler.linear(1.3),
-            ),
-            child: AppFeedbackBetter(
-              child: MaterialApp(
-                title: AppInfoService.appName,
-                locale: ref.watch(globalLanguageProvider).currentLocale,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                navigatorObservers: [matomoObserver],
-                supportedLocales: appLocales.map((e) => Locale(e.locale)),
-                debugShowCheckedModeBanner: false,
-                themeMode: ref.watch(themeProvider),
-                theme: ref.watch(themeProvider) == ThemeMode.light
-                    ? AppTheme.getLightTheme(context)
-                    : AppTheme.getDarkTheme(context),
-                routes: AppRouter.routes,
+              data: mediaQueryData.copyWith(
+                textScaler: Responsive.isMobile(context)
+                    ? TextScaler.linear(
+                        ref
+                            .watch(globalTextScaleFactorProvider)
+                            .textScaleFactor,
+                      )
+                    : const TextScaler.linear(1.3),
+              ),
+              child: AppFeedbackBetter(
+                child: MaterialApp(
+                  title: AppInfoService.appName,
+                  locale: ref.watch(globalLanguageProvider).currentLocale,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  navigatorObservers: [matomoObserver],
+                  supportedLocales: appLocales.map((e) => Locale(e.locale)),
+                  debugShowCheckedModeBanner: false,
+                  themeMode: ref.watch(themeProvider),
+                  theme: ref.watch(themeProvider) == ThemeMode.light
+                      ? AppTheme.getLightTheme(context)
+                      : AppTheme.getDarkTheme(context),
+                  routes: AppRouter.routes,
 
                 initialRoute: initialRoute,
                 navigatorKey: AppRouter.navigatorKey,
