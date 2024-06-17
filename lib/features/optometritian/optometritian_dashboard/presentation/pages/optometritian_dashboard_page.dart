@@ -12,14 +12,13 @@ import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upgrader/upgrader.dart';
 
 class OptometritianDashboardPage extends StatefulHookConsumerWidget {
   const OptometritianDashboardPage({super.key});
@@ -93,31 +92,7 @@ class _OptometritianDashboardPageState
     var logoutLoading = useState(false);
     var switchProfileLoading = useState(false);
     final loc = context.loc!;
-    return UpgradeAlert(
-      dialogStyle: UpgradeDialogStyle.cupertino,
-      showIgnore: kDebugMode ? true : false,
-      showLater: kDebugMode ? true : false,
-      shouldPopScope: () => kDebugMode ? true : false,
-      canDismissDialog: kDebugMode ? true : false,
-      onUpdate: () {
-        return true;
-      },
-      upgrader: Upgrader(
-        durationUntilAlertAgain: const Duration(milliseconds: 800),
-        willDisplayUpgrade: ({
-          appStoreVersion,
-          required display,
-          installedVersion,
-          minAppVersion,
-        }) {
-          logger.d({
-            "appStoreVersion": appStoreVersion,
-            "display": display,
-            "installedVersion": installedVersion,
-            "minAppVersion": minAppVersion,
-          });
-        },
-      ),
+    return AppUpgrader(
       child: Scaffold(
         backgroundColor: AppColor.scaffold,
         resizeToAvoidBottomInset: false,
