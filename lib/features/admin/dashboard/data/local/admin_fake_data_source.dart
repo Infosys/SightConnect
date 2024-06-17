@@ -89,6 +89,57 @@ class AdminFakeDataSource {
     ];
   }
 
+  static List<Map<String, String>> getDistributionData() {
+    return [
+      {
+        "Sample ID": "ABC123",
+        "Tissue Expiry": "2025-12-31",
+        "Donor Name": "John Doe",
+        "Tissue": "Cornea",
+        "Approved Usages": "Transplantation",
+        "Eye": "Left",
+        "Status":"In Transit"
+      },
+      {
+        "Sample ID": "XYZ456",
+        "Tissue Expiry": "2024-06-30",
+        "Donor Name": "Jane Smith",
+        "Tissue": "Bone",
+        "Approved Usages": "Orthopedic Surgery",
+        "Eye": "Right",
+        "Status":"Delivered"
+      },
+      {
+        "Sample ID": "DEF789",
+        "Tissue Expiry": "2026-03-15",
+        "Donor Name": "Michael Johnson",
+        "Tissue": "Skin",
+        "Approved Usages": "Burn Treatment",
+        "Eye": "Left",
+        "Status":"Pending"
+      },
+      {
+        "Sample ID": "GHI012",
+        "Tissue Expiry": "2024-11-20",
+        "Donor Name": "Sarah Lee",
+        "Tissue": "Heart Valve",
+        "Approved Usages": "Cardiac Surgery",
+        "Eye": "Right",
+        "Status":"In Transit"
+      },
+      {
+        "Sample ID": "JKL345",
+        "Tissue Expiry": "2025-08-01",
+        "Donor Name": "David Kim",
+        "Tissue": "Tendon",
+        "Approved Usages": "Research",
+        "Eye": "Right",
+        "Status":"Delivered"
+      }
+    ];
+  }
+
+ 
   static List<Map<String, String>> getDonorData() {
     return [
       {
@@ -118,6 +169,102 @@ class AdminFakeDataSource {
         "Match": "55%",
         "Priority": "Recommend"
       },
+    ];
+  }
+
+
+  static List<Map<String, String>> getReturnRequestData() {
+    return [
+      {
+"TR ID": "TR001",
+"Tissue ID": "ABC123",
+"Return Reason": "Damaged during transport",
+"Tissue Sent To": "University Hospital",
+"Return Date": "2024-05-15",
+"Re-distribution Possible": "false"
+},
+{
+"TR ID": "TR002",
+"Tissue ID": "XYZ456",
+"Return Reason": "Expired before delivery",
+"Tissue Sent To": "Regional Medical Center",
+"Return Date": "2024-07-01",
+"Re-distribution Possible": "false"
+},
+{
+"TR ID": "TR003",
+"Tissue ID": "DEF789",
+"Return Reason": "Requested by recipient",
+"Tissue Sent To": "St. Mary's Hospital",
+"Return Date": "2024-09-20",
+"Re-distribution Possible": "true"
+},
+{
+"TR ID": "TR004",
+"Tissue ID": "GHI012",
+"Return Reason": "Incorrect tissue type",
+"Tissue Sent To": "City Trauma Center",
+"Return Date": "2024-11-10",
+"Re-distribution Possible": "false"
+},
+{
+"TR ID": "TR005",
+"Tissue ID": "JKL345",
+"Return Reason": "Tissue quality issue",
+"Tissue Sent To": "Regional Organ Bank",
+"Return Date": "2024-12-31",
+"Re-distribution Possible": "true"
+}
+    ];
+  }
+
+  static List<Map<String, String>> getInventoryData() {
+    return [
+      {
+        "Sample ID": "ABC123",
+        "Tissue Expiry": "2025-12-31",
+        "Donor Name": "John Doe",
+        "Tissue": "Cornea",
+        "Approved Usages": "Transplantation",
+        "Eye": "Left",
+       
+      },
+      {
+        "Sample ID": "XYZ456",
+        "Tissue Expiry": "2024-06-30",
+        "Donor Name": "Jane Smith",
+        "Tissue": "Bone",
+        "Approved Usages": "Orthopedic Surgery",
+        "Eye": "Right",
+        
+      },
+      {
+        "Sample ID": "DEF789",
+        "Tissue Expiry": "2026-03-15",
+        "Donor Name": "Michael Johnson",
+        "Tissue": "Skin",
+        "Approved Usages": "Burn Treatment",
+        "Eye": "Left",
+        
+      },
+      {
+        "Sample ID": "GHI012",
+        "Tissue Expiry": "2024-11-20",
+        "Donor Name": "Sarah Lee",
+        "Tissue": "Heart Valve",
+        "Approved Usages": "Cardiac Surgery",
+        "Eye": "Right",
+       
+      },
+      {
+        "Sample ID": "JKL345",
+        "Tissue Expiry": "2025-08-01",
+        "Donor Name": "David Kim",
+        "Tissue": "Tendon",
+        "Approved Usages": "Research",
+        "Eye": "Right",
+       
+      }
     ];
   }
 }

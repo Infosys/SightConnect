@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/features/admin/dashboard/data/local/admin_fake_data_source.dart';
-import 'package:eye_care_for_all/features/admin/dashboard/data/table_source/admin_inventory_data_soruce.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/data/table_source/admin_distribution_data_source.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/data/table_source/admin_inventory_data_source.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/data/table_source/admin_paginated_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -10,29 +12,29 @@ class AdminInventoryTable extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = AdminFakeDataSource.getSampleData();
+    final data = AdminFakeDataSource.getDistributionData();
     final dataSource =
-        useState(AdminInventoryDataSoruce(data: data, context: context));
+        useState(AdminInventoryDataSource(data: data, context: context));
 
     return AppPaginatedTable(
       data: data,
       columnNames: const [
-        "Sample ID",
+       "Sample ID",
         "Tissue Expiry",
-        "Delivery",
+        "Donor Name",
         "Tissue",
         "Approved Usages",
-        "Match",
-        "Priority"
+        "Eye",
+       
       ],
       dataSource: dataSource.value,
       onSort: (columnIndex, ascending) {},
       onSearch: (searchTerm) {
         var filteredData = data.where((item) {
-          return item["Sample ID"].toString().contains(searchTerm);
+          return item["RequestID"].toString().contains(searchTerm);
         }).toList();
 
-        dataSource.value = AdminInventoryDataSoruce(
+        dataSource.value = AdminInventoryDataSource(
           data: filteredData,
           context: context,
         );

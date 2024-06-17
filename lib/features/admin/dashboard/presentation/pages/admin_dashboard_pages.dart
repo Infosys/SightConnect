@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_distribution_page.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_inventory_page.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_page.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_return_request_page.dart';
 import 'package:flutter/material.dart';
 
 class AdminDashboardPages extends StatelessWidget {
@@ -41,7 +42,7 @@ class AdminDashboardPages extends StatelessWidget {
                     AdminRequestPage(),
                     AdminInventoryPage(),
                     AdminDistributionPage(),
-                    AdminRequestPage()
+                    AdminReturnRequestPage()
                   ],
                 ),
               ),

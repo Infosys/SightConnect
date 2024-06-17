@@ -1,12 +1,14 @@
+import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../shared/theme/text_theme.dart';
 
-class AdminInventoryDataSoruce extends DataTableSource {
+class AdminReturnRequestDataSource extends DataTableSource {
   final BuildContext context;
   final List<Map<String, String>> data;
-  AdminInventoryDataSoruce({
+  AdminReturnRequestDataSource({
     required this.context,
     required this.data,
   });
@@ -21,110 +23,86 @@ class AdminInventoryDataSoruce extends DataTableSource {
       index: index,
       cells: [
         DataCell(
-          onTap: () {},
+          onTap: () {
+            // final navigator = Navigator.of(context);
+            // navigator.push(MaterialPageRoute(builder: (context) {
+            //   return const AdminRequestDetailPage();
+            // }));
+          },
           Text(
-            "${data[index]['Sample ID']}",
+            "${data[index]['TR ID']}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.blue,
-            ),
-          ),
-        ),
-        DataCell(
-          onTap: () {},
-          Text(
-            "${data[index]["TissueExpiry"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
-            ),
-          ),
-        ),
-        DataCell(
-          onTap: () {},
-          Text(
-            "${data[index]["Delivery"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
-            ),
-          ),
-        ),
-        DataCell(
-          onTap: () {},
-          Text(
-            "${data[index]["Tissue"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
-            ),
-          ),
-        ),
-        DataCell(
-          onTap: () {},
-          Text(
-            "${data[index]["ApprovedUsages"]}",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 14,
-              color: AppColor.black,
-            ),
-          ),
-        ),
-        DataCell(
-          onTap: () {},
-          Chip(
-            backgroundColor: _getPercentageColor(data[index]["Match"]!),
-            label: Text(
-              data[index]["Match"]!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
                 fontSize: 14,
-                color: AppColor.black,
-              ),
+                color: AppColor.blue,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["Tissue ID"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+       
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["Return Reason"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
             ),
           ),
         ),
         DataCell(
           onTap: () {},
-          Chip(
-            labelPadding: const EdgeInsets.all(8),
-            backgroundColor: AppColor.primary,
-            label: Text(
-              "${data[index]["Priority"]}",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.white,
-              ),
+          Text(
+            "${data[index]["Tissue Sent To"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
             ),
           ),
         ),
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["Return Date"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+         DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["Re-distribution Possible"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+      
       ],
     );
-  }
-
-  _getPercentageColor(String percentage) {
-    final value = percentage.replaceAll("%", "");
-    final doubleValue = double.parse(value);
-    if (doubleValue >= 90) {
-      return AppColor.lightGreen;
-    } else if (doubleValue >= 70) {
-      return AppColor.yellow.withOpacity(0.2);
-    } else {
-      return AppColor.lightRed;
-    }
   }
 
   @override
@@ -138,4 +116,17 @@ class AdminInventoryDataSoruce extends DataTableSource {
   @override
   // TODO: implement selectedRowCount
   int get selectedRowCount => 0;
+}
+
+_getColor(String priority) {
+  switch (priority) {
+    case "Pending":
+      return AppColor.lightRed;
+    case "In Transit":
+      return AppColor.yellow.withOpacity(0.2);
+    case "Delivered":
+      return AppColor.lightGreen;
+    default:
+      return AppColor.grey;
+  }
 }
