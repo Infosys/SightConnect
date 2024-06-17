@@ -58,7 +58,9 @@ class AdverseReactionReportPage extends HookWidget {
                 const SizedBox(height: AppSize.km),
                 const SurgeryInformationSection(),
                 const SizedBox(height: AppSize.km),
-                const RecipientInformationSection(),
+                const RecipientInformationSection(
+                  onTap: null,
+                ),
                 const SizedBox(height: AppSize.km),
                 const DonorInformationSection(),
                 const SizedBox(height: AppSize.km),

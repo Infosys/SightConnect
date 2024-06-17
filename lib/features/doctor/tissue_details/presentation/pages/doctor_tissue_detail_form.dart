@@ -6,7 +6,9 @@ import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/wid
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/pathology_details_section.dart';
 import 'package:eye_care_for_all/features/doctor/tissue_details/presentation/widgets/serology_section.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DoctorTissueDetailForm extends StatelessWidget {
   const DoctorTissueDetailForm({super.key});
@@ -61,7 +63,74 @@ class DoctorTissueDetailForm extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // show popup to accept a reason for rejection
+
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        contentPadding: const EdgeInsets.all(16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        icon: const Icon(
+                          Icons.warning_rounded,
+                          color: AppColor.red,
+                          size: 40,
+                        ),
+                        title: Text(
+                          'Reason for Rejection',
+                          style: applyFiraSansFont(
+                            fontSize: 18,
+                          ),
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Please provide a reason for rejection : ',
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                color: AppColor.grey,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: 400,
+                              child: TextFormField(
+                                maxLines: 1,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Fluttertoast.showToast(
+                                msg: 'Tissue Rejected',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor: AppColor.red,
+                                textColor: AppColor.white,
+                                fontSize: 16.0,
+                              );
+                            },
+                            child: const Text('Submit'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: const Text('Reject'),
               ),
             ),

@@ -23,10 +23,10 @@ class CounselorDashboardPage extends StatelessWidget {
                   text: 'Death Notification',
                 ),
                 Tab(
-                  text: 'Organ Recovery ',
+                  text: 'Screening Page ',
                 ),
                 Tab(
-                  text: 'Screening Page ',
+                  text: 'Organ Recovery ',
                 ),
               ],
             ),
@@ -34,8 +34,8 @@ class CounselorDashboardPage extends StatelessWidget {
               child: TabBarView(
                 children: [
                   DeathNotificationPage(),
-                  OrganRecoveryInfoPage(),
                   ScreeningPage(),
+                  OrganRecoveryInfoPage(),
                 ],
               ),
             ),

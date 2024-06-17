@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
@@ -185,14 +186,13 @@ class DeathNotificationPage extends HookWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: Responsive.isMobile(context)
+            ? const EdgeInsets.all(AppSize.km)
+            : EdgeInsets.fromLTRB(AppSize.km, AppSize.km,
+                AppSize.width(context) / 1.1, AppSize.km),
         child: ElevatedButton(
-          onPressed: () {
-            if (formKey.value.currentState!.validate()) {
-              logger.d("Form is valid");
-            }
-          },
-          child: const Text("Submit"),
+          onPressed: () {},
+          child: const Text('Submit'),
         ),
       ),
     );

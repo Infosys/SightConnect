@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/doctor/tissue_return/presentation/pages/doctor_tissue_return.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/techncian_harvests_tab.dart';
 import '../widgets/technician_home_tab.dart';
-import '../widgets/technician_referrals_tab.dart';
 import '../widgets/technician_reviews_tab.dart';
 
 class TechnicianDashboardPage extends StatelessWidget {
@@ -41,7 +41,7 @@ class TechnicianDashboardPage extends StatelessWidget {
                   child: Text('Home'),
                 ),
                 Tab(
-                  child: Text('Referrals'),
+                  child: Text('Tissue Return'),
                 ),
                 Tab(
                   child: Text('Harvests'),
@@ -56,7 +56,7 @@ class TechnicianDashboardPage extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 children: [
                   TechnicianHomeTab(),
-                  TechnicianReferralsTab(),
+                  DoctorTissueReturn(),
                   TechnicianHarvestsTab(),
                   TechnicianReviewsTab(),
                 ],
