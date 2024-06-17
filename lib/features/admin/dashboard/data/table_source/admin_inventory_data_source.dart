@@ -2,13 +2,13 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_color.dart';
-import '../../../../shared/theme/text_theme.dart';
+import '../../../../../core/constants/app_color.dart';
+import '../../../../../shared/theme/text_theme.dart';
 
-class AdminPaginatedDataSource extends DataTableSource {
+class AdminInventoryDataSource extends DataTableSource {
   final BuildContext context;
   final List<Map<String, String>> data;
-  AdminPaginatedDataSource({
+  AdminInventoryDataSource({
     required this.context,
     required this.data,
   });
@@ -30,7 +30,7 @@ class AdminPaginatedDataSource extends DataTableSource {
             }));
           },
           Text(
-            "${data[index]['RequestID']}",
+            "${data[index]['Sample ID']}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -42,7 +42,7 @@ class AdminPaginatedDataSource extends DataTableSource {
         DataCell(
           onTap: () {},
           Text(
-            "${data[index]["ExpiryDate"]}",
+            "${data[index]["Tissue Expiry"]}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -72,7 +72,7 @@ class AdminPaginatedDataSource extends DataTableSource {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${data[index]["RequestedBy"]}",
+                      "${data[index]["Donor Name"]}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: applyRobotoFont(
@@ -98,7 +98,7 @@ class AdminPaginatedDataSource extends DataTableSource {
         DataCell(
           onTap: () {},
           Text(
-            "${data[index]["TransplantationTechnique"]}",
+            "${data[index]["Tissue"]}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -110,7 +110,7 @@ class AdminPaginatedDataSource extends DataTableSource {
         DataCell(
           onTap: () {},
           Text(
-            "${data[index]["Tissue"]}",
+            "${data[index]["Approved Usages"]}",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
@@ -131,24 +131,7 @@ class AdminPaginatedDataSource extends DataTableSource {
             ),
           ),
         ),
-        DataCell(
-          onTap: () {},
-          Chip(
-            backgroundColor: _getColor(data[index]["Priority"] ?? ''),
-            label: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "${data[index]["Priority"]}",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: applyRobotoFont(
-                  fontSize: 12,
-                  color: AppColor.black,
-                ),
-              ),
-            ),
-          ),
-        ),
+      
       ],
     );
   }
@@ -168,11 +151,11 @@ class AdminPaginatedDataSource extends DataTableSource {
 
 _getColor(String priority) {
   switch (priority) {
-    case "High":
+    case "Pending":
       return AppColor.lightRed;
-    case "Medium":
+    case "In Transit":
       return AppColor.yellow.withOpacity(0.2);
-    case "Low":
+    case "Delivered":
       return AppColor.lightGreen;
     default:
       return AppColor.grey;
