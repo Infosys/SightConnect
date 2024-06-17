@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_color.dart';
-import '../../../../shared/theme/text_theme.dart';
+import '../../../../../core/constants/app_color.dart';
+import '../../../../../shared/theme/text_theme.dart';
 
 class AdminPaginatedDataSource extends DataTableSource {
   final BuildContext context;

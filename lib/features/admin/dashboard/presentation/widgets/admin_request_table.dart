@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/features/admin/dashboard/data/admin_fake_data_source.dart';
-import 'package:eye_care_for_all/features/admin/dashboard/data/admin_paginated_data_source.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/data/local/admin_fake_data_source.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/data/table_source/admin_paginated_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 

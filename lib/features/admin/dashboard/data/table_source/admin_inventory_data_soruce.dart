@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/app_color.dart';
-import '../../../../shared/theme/text_theme.dart';
+import '../../../../../core/constants/app_color.dart';
+import '../../../../../shared/theme/text_theme.dart';
 
-class AdminDonorDataSource extends DataTableSource {
+class AdminInventoryDataSoruce extends DataTableSource {
   final BuildContext context;
   final List<Map<String, String>> data;
-  AdminDonorDataSource({
+  AdminInventoryDataSoruce({
     required this.context,
     required this.data,
   });

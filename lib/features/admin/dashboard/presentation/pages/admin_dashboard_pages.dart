@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_distribution_page.dart';
+import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_inventory_page.dart';
 import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +13,9 @@ class AdminDashboardPages extends StatelessWidget {
       body: DefaultTabController(
         length: 4,
         child: Container(
-          child: Column(
+          child: const Column(
             children: [
-              const TabBar(
+              TabBar(
                 physics: NeverScrollableScrollPhysics(),
                 labelColor: AppColor.primary,
                 unselectedLabelColor: AppColor.grey,
@@ -36,10 +38,10 @@ class AdminDashboardPages extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    const AdminRequestPage(),
-                    Container(),
-                    Container(),
-                    Container()
+                    AdminRequestPage(),
+                    AdminInventoryPage(),
+                    AdminDistributionPage(),
+                    AdminRequestPage()
                   ],
                 ),
               ),
