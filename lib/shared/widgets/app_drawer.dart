@@ -146,6 +146,7 @@ class AppDrawer extends HookWidget {
                                     showReferralCodeBottomSheet(context);
                                     break;
                                   case DrawerMenuItemId.feedback:
+                                    Navigator.of(context).pop();
                                     showFeedbackBottomSheet(context);
 
                                     break;

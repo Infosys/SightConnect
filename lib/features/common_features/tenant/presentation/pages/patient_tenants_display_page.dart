@@ -190,12 +190,8 @@ class _TenantDisplayPageState extends ConsumerState<PatientTenantsDisplayPage>
                         final vcName = viewState.visionCenters?[index]
                                 .facilityInformation?.facilityName ??
                             "";
-                        final vcAddress = viewState
-                                .visionCenters?[index]
-                                .facilityInformation
-                                ?.facilityAddressDetails
-                                ?.addressLine1 ??
-                            "-";
+                        final vcAddress =
+                            "${viewState.visionCenters?[index].facilityInformation?.facilityAddressDetails?.addressLine1 ?? ""},${viewState.visionCenters?[index].facilityInformation?.facilityAddressDetails?.addressLine2 ?? ""}";
                         final vcContact = viewState
                                 .visionCenters?[index]
                                 .facilityInformation

@@ -95,7 +95,7 @@ class DrawerMenuItems {
       accessibilities,
       assessments,
       scanner,
-      // feedback,
+      feedback,
       about,
       privacyPolicy,
       refferal,

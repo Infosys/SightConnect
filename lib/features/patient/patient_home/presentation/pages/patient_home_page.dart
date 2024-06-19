@@ -9,34 +9,20 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_home_page_app_bar.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/triage_test_card.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
+import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upgrader/upgrader.dart';
 
 import '../../../../../core/services/app_info_service.dart';
-import '../../../../../main.dart';
 
-class PatientHomePage extends ConsumerStatefulWidget {
+class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
 
   @override
-  ConsumerState<PatientHomePage> createState() => _PatientHomePageState();
-}
-
-class _PatientHomePageState extends ConsumerState<PatientHomePage> {
   @override
-  void initState() {
-    super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    //   await showReferralCollectSheet(context);
-    // });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -57,31 +43,7 @@ class _PatientHomePageState extends ConsumerState<PatientHomePage> {
           },
         ),
         appBar: const PatientHomePageAppBar(),
-        body: UpgradeAlert(
-          dialogStyle: UpgradeDialogStyle.cupertino,
-          showIgnore: kDebugMode ? true : false,
-          showLater: kDebugMode ? true : false,
-          shouldPopScope: () => kDebugMode ? true : false,
-          canDismissDialog: kDebugMode ? true : false,
-          onUpdate: () {
-            return true;
-          },
-          upgrader: Upgrader(
-            durationUntilAlertAgain: const Duration(milliseconds: 800),
-            willDisplayUpgrade: ({
-              appStoreVersion,
-              required display,
-              installedVersion,
-              minAppVersion,
-            }) {
-              logger.d({
-                "appStoreVersion": appStoreVersion,
-                "display": display,
-                "installedVersion": installedVersion,
-                "minAppVersion": minAppVersion,
-              });
-            },
-          ),
+        body: AppUpgrader(
           child: Container(
             height: AppSize.height(context),
             width: AppSize.width(context),

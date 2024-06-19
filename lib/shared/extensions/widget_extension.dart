@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 extension ThemeExtension on BuildContext {

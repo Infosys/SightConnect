@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../../core/constants/app_images.dart';
 import '../../../../../../../shared/widgets/custom_app_bar.dart';
 import '../providers/distance_visual_acuity_test_provider.dart';
-import '../widgets/distance_visual_acuity_tumbling_test_left_eye_instruction.dart';
+import '../widgets/distance_visual_acuity_tumbling_test_right_eye_instruction.dart';
 
 class DistanceVisualAcuityDistanceSelectionPage extends HookConsumerWidget {
   const DistanceVisualAcuityDistanceSelectionPage({super.key});
@@ -169,7 +169,7 @@ class DistanceVisualAcuityDistanceSelectionPage extends HookConsumerWidget {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) =>
-                              const DistanceVisualAcuityTumblingLeftEyeInstruction(),
+                              const DistanceVisualAcuityTumblingRightEyeInstruction(),
                         ),
                       );
                     },

@@ -1,10 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'app_network_image.dart';
 
@@ -101,6 +100,7 @@ class _EyeScanImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logger.d({"image": image});
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
