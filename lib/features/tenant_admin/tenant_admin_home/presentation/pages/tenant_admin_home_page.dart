@@ -16,7 +16,7 @@ class TenantAdminHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> slides = [
-      const PatientCasesAnalytics(),
+      const _PatientCasesAnalytics(),
     ];
     return Scaffold(
       body: SingleChildScrollView(
@@ -82,7 +82,9 @@ class TenantAdminHomePage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: AppSize.kl),
-                      StatisticsCardsCarouselSlider(slides: slides),
+                      StatisticsCardsCarouselSlider(
+                        slides: slides,
+                      ),
                     ],
                   ),
                 )
@@ -90,75 +92,70 @@ class TenantAdminHomePage extends StatelessWidget {
             ),
             const SizedBox(height: AppSize.ks),
             Padding(
-              padding: const EdgeInsets.all(AppSize.km),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Assessments',
-                    style: applyFiraSansFont(
-                      fontSize: 18,
-                      color: AppColor.black,
+                padding: const EdgeInsets.all(AppSize.km),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Assessments',
+                      style: applyFiraSansFont(
+                        fontSize: 18,
+                        color: AppColor.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: AppSize.km),
-                  Row(
-                    children: [
-                      Row(
-                        children: ['All', 'Critical', 'IVR Assessments']
-                            .map(
-                              (e) => Container(
-                                padding: const EdgeInsets.all(AppSize.ks),
-                                margin:
-                                    const EdgeInsets.only(right: AppSize.ks),
-                                decoration: BoxDecoration(
-                                  color: AppColor.white,
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.ks),
-                                  border: Border.all(
-                                    color: AppColor.grey,
+                    const SizedBox(height: AppSize.km),
+                    Row(
+                      children: [
+                        Row(
+                          children: ['All', 'Critical', 'IVR Assessments']
+                              .map((e) => Container(
+                                  padding: const EdgeInsets.all(AppSize.ks),
+                                  margin:
+                                      const EdgeInsets.only(right: AppSize.ks),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white,
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.ks),
+                                    border: Border.all(
+                                      color: AppColor.grey,
+                                    ),
                                   ),
-                                ),
-                                child: Text(
-                                  e,
-                                  style: applyRobotoFont(fontSize: 14),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                      const Spacer(),
-                      const Text(
-                        '|',
-                        style: TextStyle(
-                          color: AppColor.lightGrey,
-                          fontSize: 36,
+                                  child: Text(
+                                    e,
+                                    style: applyRobotoFont(fontSize: 14),
+                                  )))
+                              .toList(),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.filter_list_outlined,
-                          color: AppColor.grey,
+                        const Spacer(),
+                        const Text(
+                          '|',
+                          style: TextStyle(
+                            color: AppColor.lightGrey,
+                            fontSize: 36,
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.km),
-                  AppPaginatedTable(
-                    pageSize: 10,
-                    dataSource: OrgAdminHomeDataSource(),
-                    onRowsPerPageChanged: (value) {},
-                    columnNames: const [
-                      'Patient',
-                      'Assessment ID',
-                      'Status',
-                      'Category',
-                    ],
-                  ),
-                ],
-              ),
-            ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.filter_list_outlined,
+                              color: AppColor.grey,
+                            ))
+                      ],
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    AppPaginatedTable(
+                      pageSize: 10,
+                      dataSource: _TenantAdminHomeDataSource(),
+                      onRowsPerPageChanged: (value) {},
+                      columnNames: const [
+                        'Patient',
+                        'Assessment ID',
+                        'Status',
+                        'Category',
+                      ],
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
@@ -166,8 +163,8 @@ class TenantAdminHomePage extends StatelessWidget {
   }
 }
 
-class PatientCasesAnalytics extends ConsumerWidget {
-  const PatientCasesAnalytics({super.key});
+class _PatientCasesAnalytics extends ConsumerWidget {
+  const _PatientCasesAnalytics();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -227,17 +224,15 @@ class PatientCasesAnalytics extends ConsumerWidget {
   }
 }
 
-class OrgAdminHomeDataSource extends DataTableSource {
+class _TenantAdminHomeDataSource extends DataTableSource {
   @override
   DataRow getRow(int index) {
-    return const DataRow(
-      cells: [
-        DataCell(Text('Avendra ')),
-        DataCell(Text('123456')),
-        DataCell(Text('Closed')),
-        DataCell(Text('Urgent Category', style: TextStyle(color: Colors.red))),
-      ],
-    );
+    return const DataRow(cells: [
+      DataCell(Text('Avendra ')),
+      DataCell(Text('123456')),
+      DataCell(Text('Closed')),
+      DataCell(Text('Urgent Category', style: TextStyle(color: Colors.red))),
+    ]);
   }
 
   @override
