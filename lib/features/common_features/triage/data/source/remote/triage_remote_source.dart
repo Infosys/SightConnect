@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -39,7 +37,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     final tenantCode = globalTenantProvider.tenantId;
     final organizationCode = globalTenantProvider.organizationId;
     String endpoint =
-        "/2services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
+        "/services/assessments/api/diagnostic-report-templates/assessments/Vision Test Form 1/tenant/organisation";
 
     if (tenantCode != null) {
       endpoint += "?tenant-code=$tenantCode";
@@ -55,17 +53,17 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
 
     try {
       var response = await dio.get(endpoint);
-      log("assessment response : ${response.data}");
+      logger.d("assessment response : ${response.data}");
       if (tenantCode == null) {
-        globalTenantProvider.setTenantId(response.data.first['tenantCode']);
+        globalTenantProvider.setTenantId(response.data['tenantCode']);
       }
       if (organizationCode == null) {
         globalTenantProvider
-            .setOrganizationId(response.data.first['organizationCode']);
+            .setOrganizationId(response.data['organizationCode']);
       }
       logger.d(
           "tenant code in global tenant provider after api call : ${globalTenantProvider.tenantId ?? "Tenant Code is null"}, organization code : ${globalTenantProvider.organizationId ?? "Organization Code is null"}");
-      return DiagnosticReportTemplateFHIRModel.fromJson(response.data.first);
+      return DiagnosticReportTemplateFHIRModel.fromJson(response.data);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       throw ServerException();
@@ -79,7 +77,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   Future<TriagePostModel> saveTriage({
     required TriagePostModel triage,
   }) async {
-    const endpoint = "/services/triage/api/triage-report";
+    const endpoint = "/services/triage/api/v2/triage-report";
     try {
       logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(endpoint, data: triage.toJson());
@@ -101,7 +99,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
   }) async {
     final id = triage.diagnosticReportId;
     try {
-      var endpoint = "/services/triage/api/triage-report/$id";
+      var endpoint = "/services/triage/api/v2/triage-report/$id";
       logger.d({"API updateTriage": endpoint, "data": triage.toJson()});
       final response = await dio.patch(endpoint, data: triage.toJson());
       return TriagePostModel.fromJson(response.data);
@@ -119,7 +117,7 @@ class TriageRemoteSourceImpl implements TriageRemoteSource {
     required TriagePostModel triage,
     required String eventId,
   }) async {
-    const endpoint = "/services/triage/api/campaign-events/triage-report";
+    const endpoint = "/services/triage/api/v2/campaign-events/triage-report";
     try {
       logger.d({"triage model to be saved in remote source": triage.toJson()});
       var response = await dio.post(

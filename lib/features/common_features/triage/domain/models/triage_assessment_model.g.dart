@@ -9,7 +9,7 @@ part of 'triage_assessment_model.dart';
 _$TriageAssessmentImpl _$$TriageAssessmentImplFromJson(
         Map<String, dynamic> json) =>
     _$TriageAssessmentImpl(
-      code: json['code'] as int?,
+      code: (json['code'] as num?)?.toInt(),
       name: json['name'] as String?,
       organizationCode: json['organizationCode'] as String?,
       condition: json['condition'] as String?,
@@ -71,8 +71,8 @@ Map<String, dynamic> _$$QuestionnaireImplToJson(_$QuestionnaireImpl instance) =>
 
 _$QuestionImpl _$$QuestionImplFromJson(Map<String, dynamic> json) =>
     _$QuestionImpl(
-      id: json['id'] as int?,
-      code: json['code'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      code: (json['code'] as num?)?.toInt(),
       statement: json['statement'] as String?,
       constraint: json['constraint'] as String?,
       defaultValue: json['defaultValue'] as String?,
@@ -80,7 +80,7 @@ _$QuestionImpl _$$QuestionImplFromJson(Map<String, dynamic> json) =>
       actionOn: (json['actionOn'] as List<dynamic>?)
           ?.map((e) => ActionOn.fromJson(e as Map<String, dynamic>))
           .toList(),
-      weight: json['weight'] as int?,
+      weight: (json['weight'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$QuestionImplToJson(_$QuestionImpl instance) =>
@@ -129,7 +129,7 @@ Map<String, dynamic> _$$ObservationsSectionImplToJson(
 _$IndividualMeasureImpl _$$IndividualMeasureImplFromJson(
         Map<String, dynamic> json) =>
     _$IndividualMeasureImpl(
-      observationCode: json['observationCode'] as int?,
+      observationCode: (json['observationCode'] as num?)?.toInt(),
       statement: json['statement'] as String?,
       valueType: json['valueType'] as String?,
     );
@@ -145,7 +145,7 @@ Map<String, dynamic> _$$IndividualMeasureImplToJson(
 _$MediaListSectionImpl _$$MediaListSectionImplFromJson(
         Map<String, dynamic> json) =>
     _$MediaListSectionImpl(
-      mediaCode: json['mediaCode'] as int?,
+      mediaCode: (json['mediaCode'] as num?)?.toInt(),
       description: json['description'] as String?,
       type: json['type'] as String?,
       maxSize: json['maxSize'] as String?,

@@ -19,6 +19,8 @@ class TriageDBHelper {
   static const _triageResponseTableName = 'triage_response_table';
   static const _triageQuestionnaireTableName = 'triage_questionnaire_table';
   static const _triageVisualAcuityTableName = 'triage_visual_acuity_table';
+  static const _triageDistanceVisualAcuityName =
+      'triage_distance_visual_acuity';
   static const _triageEyeScanTableName = 'triage_eye_scan_table';
 
   /// Columns
@@ -92,6 +94,16 @@ class TriageDBHelper {
         /// table to save triarge visual acuity
         db.execute('''
           CREATE TABLE $_triageVisualAcuityTableName(
+           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+          $_timeStampColumnName INT NOT NULL,
+            $_responseColumnName TEXT NOT NULL
+          );
+
+        ''');
+
+        /// table to save triarge visual acuity
+        db.execute('''
+          CREATE TABLE $_triageDistanceVisualAcuityName(
            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           $_timeStampColumnName INT NOT NULL,
             $_responseColumnName TEXT NOT NULL
@@ -203,6 +215,21 @@ class TriageDBHelper {
     }
   }
 
+  Future<void> insertTriageDistanceVisualAcuity(
+      {required List<PostTriageObservationsModel> triageVisualAcuity}) async {
+    try {
+      var dbClient = await database;
+      await dbClient.insert(_triageDistanceVisualAcuityName, {
+        _responseColumnName: json.encode(
+          triageVisualAcuity,
+        ),
+        _timeStampColumnName: DateTime.now().toUtc().millisecondsSinceEpoch,
+      });
+    } catch (e) {
+      logger.d('Error inserting triage visual acuity: $e');
+    }
+  }
+
   Future<void> insertTriageEyeScan(
       {required List<PostTriageImagingSelectionModel> triageEyeScan}) async {
     try {
@@ -240,6 +267,25 @@ class TriageDBHelper {
     try {
       var dbClient = await database;
       var response = await dbClient.query(_triageVisualAcuityTableName,
+          orderBy: "id DESC", limit: 1);
+      if (response.isNotEmpty) {
+        return (json.decode(response.first[_responseColumnName].toString())
+                as List)
+            .map((e) => PostTriageObservationsModel.fromJson(e))
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      logger.d('Error getting triage visual acuity: $e');
+      return [];
+    }
+  }
+
+  Future<List<PostTriageObservationsModel>>
+      getTriageDistanceVisualAcuity() async {
+    try {
+      var dbClient = await database;
+      var response = await dbClient.query(_triageDistanceVisualAcuityName,
           orderBy: "id DESC", limit: 1);
       if (response.isNotEmpty) {
         return (json.decode(response.first[_responseColumnName].toString())
@@ -292,6 +338,11 @@ class TriageDBHelper {
     await dbClient.delete(_triageVisualAcuityTableName);
   }
 
+  Future<void> deleteTriageDistanceVisualAcuity() async {
+    var dbClient = await database;
+    await dbClient.delete(_triageDistanceVisualAcuityName);
+  }
+
   Future<void> deleteTriageEyeScan() async {
     var dbClient = await database;
     await dbClient.delete(_triageEyeScanTableName);
@@ -333,15 +384,20 @@ class TriageDBHelper {
         await dbClient.rawQuery('SELECT * FROM $_triageQuestionnaireTableName');
     var visualAcuityRecords =
         await dbClient.rawQuery('SELECT * FROM $_triageVisualAcuityTableName');
+    var distanceVisualAcuityRecords = await dbClient
+        .rawQuery('SELECT * FROM $_triageDistanceVisualAcuityName');
     var eyeScanRecords =
         await dbClient.rawQuery('SELECT * FROM $_triageEyeScanTableName');
 
     logger.d({
       'questionnaireRecords': questionnaireRecords,
       'visualAcuityRecords': visualAcuityRecords,
+      'distanceVisualAcuityRecords': distanceVisualAcuityRecords,
       'eyeScanRecords': eyeScanRecords,
     });
     if (eyeScanRecords.isNotEmpty) {
+      return 4;
+    } else if (distanceVisualAcuityRecords.isNotEmpty) {
       return 3;
     } else if (visualAcuityRecords.isNotEmpty) {
       return 2;
@@ -357,6 +413,7 @@ class TriageDBHelper {
     await Future.wait([
       deleteTriageQuestionnaire(),
       deleteTriageVisualAcuity(),
+      deleteTriageDistanceVisualAcuity(),
       deleteTriageEyeScan(),
     ]);
   }
@@ -368,6 +425,7 @@ class TriageDBHelper {
       deleteTriageResponse(),
       deleteTriageQuestionnaire(),
       deleteTriageVisualAcuity(),
+      deleteTriageDistanceVisualAcuity(),
       deleteTriageEyeScan(),
     ]);
   }

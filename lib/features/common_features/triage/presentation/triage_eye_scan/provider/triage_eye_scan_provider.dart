@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
@@ -11,6 +12,7 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TriageEyeScanProvider with ChangeNotifier {
@@ -41,13 +43,21 @@ class TriageEyeScanProvider with ChangeNotifier {
 
   Future<void> setLeftEyeImage(XFile image) async {
     _leftEyeImage = image;
-    await uploadImage(image, TriageEyeType.LEFT);
+    try {
+      await uploadImage(image, TriageEyeType.LEFT);
+    } on Exception catch (e) {
+      rethrow;
+    }
     notifyListeners();
   }
 
   Future<void> setRightEyeImage(XFile image) async {
     _rightEyeImage = image;
-    await uploadImage(image, TriageEyeType.RIGHT);
+    try {
+      await uploadImage(image, TriageEyeType.RIGHT);
+    } on Exception catch (e) {
+      rethrow;
+    }
     notifyListeners();
   }
 
@@ -162,6 +172,7 @@ class TriageEyeScanProvider with ChangeNotifier {
         notifyListeners();
       } catch (e) {
         logger.d({"uploadImage Error": e});
+        rethrow;
       }
     } else {
       logger.d({"upload Image": "No Internet"});
@@ -182,10 +193,9 @@ class TriageEyeScanProvider with ChangeNotifier {
       if (slashcount < 3) {
         baseUrl += url[i];
       } else if (slashcount >= 3 && slashcount <= 8) {
-        if (slashcount <=7) {
+        if (slashcount <= 7) {
           endpoint += url[i];
-        }
-       else if (slashcount == 8) {
+        } else if (slashcount == 8) {
           slashcount++;
         }
       } else {

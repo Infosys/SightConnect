@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:eye_care_for_all/app/app.dart';
 import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/core/services/matomo_logger.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
-import 'core/services/matomo_logger.dart';
 import 'core/services/shared_preference.dart';
 
 Logger logger = Logger();
+bool visionAcuityIsSwipeMode = false;
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -27,8 +28,8 @@ Future<void> main() async {
   await SharedPreferenceService.init();
   await AppInfoService.init();
   // await IOSDeviceInfoService.init();
-  await MatomoLogger.init();
   FlutterNativeSplash.remove();
+  MatomoLogger.init();
 
   runApp(
     const ProviderScope(

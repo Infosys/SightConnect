@@ -259,7 +259,7 @@ class _MyWidgetState
                                       msg: failure.errorMessage);
                                 },
                                 (triageResponseModel) {
-                                  // reset the availability of VT
+                                  // reset the availability of VT                            
                                   vtAvailabilityReset();
                                   navigator.pushReplacement(
                                     MaterialPageRoute(

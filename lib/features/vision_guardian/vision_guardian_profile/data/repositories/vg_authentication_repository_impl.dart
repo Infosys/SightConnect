@@ -24,7 +24,7 @@ class VgAutheticationRepositoryImpl implements VgAuthenticationRepository {
       mobile = mobile.substring(3);
     }
     final endpoint =
-        "/services/orchestration/api/practitioners/filter?officialMobile=$mobile";
+        "/services/orchestration/api/v2/practitioners/filter?officialMobile=$mobile";
     try {
       final response = await _dio.get<List>(endpoint);
 

@@ -3,11 +3,19 @@
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
   <!-- INAPPWEBVIEW PERMISSION-->
   <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <!-- <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
   <uses-permission android:name="android.permission.VIDEO_CAPTURE" />
   <uses-permission android:name="android.permission.AUDIO_CAPTURE" /> -->
-  <application
+  <queries>
+    <intent>
+        <action android:name="android.intent.action.SENDTO" />
+        <data android:scheme="mailto" />
+    </intent>
+</queries>
+
+<application
     android:label="SightConnect"
     android:name="${applicationName}"
     android:allowBackup="false"
@@ -62,6 +70,7 @@
       <action android:name="android.intent.action.VIEW" />
       <category android:name="android.intent.category.BROWSABLE" />
       <data android:scheme="https" />
+    
     </intent>
   </queries>
 </manifest>

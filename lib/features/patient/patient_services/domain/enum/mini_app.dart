@@ -5,4 +5,5 @@ enum MiniApp {
   CATARACT_EYE_TEST,
   RED_EYE_TEST,
   APPOINTMENT,
+  IPLEDGE,
 }

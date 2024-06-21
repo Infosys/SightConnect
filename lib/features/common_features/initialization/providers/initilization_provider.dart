@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
+import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
@@ -67,7 +68,7 @@ class InitializationProvider extends ChangeNotifier {
       await TriageDBHelper().deleteFullDatabase();
     }
     // Shared Preference logout
-    await SharedPreferenceService.clearAll();
+    await SharedPreferenceService.clearAll(true);
   }
 
   Future<KeycloakResponse?> refreshTokens({
@@ -241,5 +242,9 @@ class InitializationProvider extends ChangeNotifier {
         acknowledgeDate: DateTime.now().toUtc().toIso8601String(),
       ),
     );
+  }
+
+  Future<void> getPincodeStatus() async {
+    _ref.read(getPatientProfileProvider);
   }
 }

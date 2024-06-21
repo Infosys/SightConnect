@@ -8,7 +8,7 @@ part of 'vision_center_models.dart';
 
 _$FacilityModelImpl _$$FacilityModelImplFromJson(Map<String, dynamic> json) =>
     _$FacilityModelImpl(
-      organizationProfileId: json['organizationProfileId'] as int?,
+      organizationProfileId: (json['organizationProfileId'] as num?)?.toInt(),
       trackingId: json['trackingId'] as String?,
       facilityId: json['facilityId'] as String?,
       facilityType: json['facilityType'] as String?,
@@ -35,7 +35,7 @@ Map<String, dynamic> _$$FacilityModelImplToJson(_$FacilityModelImpl instance) =>
 
 _$TenantModelImpl _$$TenantModelImplFromJson(Map<String, dynamic> json) =>
     _$TenantModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 

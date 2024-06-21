@@ -10,6 +10,11 @@ class AppLocalizationsUr extends AppLocalizations {
   }
 
   @override
+  String referralSmsContent(String referral) {
+    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+  }
+
+  @override
   String loginEnterOTP(String mobileNumber) {
     return 'براہ کرم بھیجا گیا او ٹی پی درج کریں ${mobileNumber}';
   }
@@ -32,6 +37,11 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String vgSearchByIdName(String searchType) {
     return 'آئی ڈی، نام کے ذریعے تلاش کریں ${searchType}';
+  }
+
+  @override
+  String emergencyTollFreeNumberText(String tollFreeNumber) {
+    return 'ہنگامی صورت حال میں، براہ کرم ${tollFreeNumber} پر کال کریں';
   }
 
   @override
@@ -1848,4 +1858,67 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get maximumTextSizeReached => 'زیادہ سے زیادہ متن کا سائز پہنچ گیا';
+
+  @override
+  String get chatClearChat => 'چیٹ صاف کریں';
+
+  @override
+  String get chatEyeAssessmentRecommended => 'آپ کے لیے آنکھوں کی تشخیص کی سفارش کی جاتی ہے۔';
+
+  @override
+  String get chatDoYouWantToTakeTheTriageEyeAssessment => 'کیا آپ ٹرائیج آئی اسسمنٹ لینا چاہتے ہیں؟';
+
+  @override
+  String get chatChatbotNotAvailable => 'چیٹ بوٹ فی الحال دستیاب نہیں ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔';
+
+  @override
+  String get chatTypeHere => 'یہاں ٹائپ کریں...';
+
+  @override
+  String get switchProfile => 'پروفائل تبدیل کریں';
+
+  @override
+  String get switchRole => 'کردار تبدیل کریں';
+
+  @override
+  String get switchTenant => 'کرایہ دار کو تبدیل کریں';
+
+  @override
+  String get patientHeaderWelcomeText => 'سائٹ کنیکٹ میں خوش آمدید! اپنی بینائی کا خیال رکھنا ضروری ہے، اور ہم آپ کے لیے ہر قدم پر موجود ہیں۔';
+
+  @override
+  String get triageTestCardHeader => 'آپ کی آنکھوں کا ٹیسٹ مفت ہے...';
+
+  @override
+  String get triageTestCardBody1 => 'اپنی آنکھوں کی علامات کا فوری تجزیہ کریں';
+
+  @override
+  String get triageTestCardBody2 => 'شناخت کریں کہ آیا آپ کو آنکھ کا مسئلہ ہو سکتا ہے';
+
+  @override
+  String get triageTestCardBody3 => 'جانیں کہ اپنے ڈاکٹر کے پاس کب جانا ہے';
+
+  @override
+  String get triageTestCardButton => 'مفت آنکھ کا ٹیسٹ شروع کریں';
+
+  @override
+  String get myConnectionListAddMembersDescription => 'اپنے خاندان اور دوستوں کو شامل کرنے کے لیے ایڈ ممبرز بٹن پر کلک کریں۔';
+
+  @override
+  String get showTriageHowToProceedBottomSheetHeader => 'آپ کیسے آگے بڑھنا چاہتے ہیں؟';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody1 => 'مجھے ایک مسئلہ ہے اور میں تصدیق کرنا چاہتا ہوں';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody2 => 'مجھے یقین نہیں ہے کہ مجھے کوئی مسئلہ ہے یا نہیں';
+
+  @override
+  String get showTriageHowToProceedBottomSheetBody3 => 'مجھے آنکھوں کا کوئی مسئلہ نہیں ہے-بس چیک کرنا چاہتا ہوں';
+
+  @override
+  String get appDrawerToastMessageText => 'معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔';
+
+  @override
+  String get myConnectionListAddMembers => 'رکن شامل کریں';
 }

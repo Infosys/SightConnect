@@ -67,4 +67,6 @@ class AppIcon {
   static const vtRegisterIcon = "assets/icons/vt_register.svg";
   static const vtAvailabilityIcon = "assets/icons/vt_availability.svg";
   static const vtIVRCallIcon = "assets/icons/vt_ivr_call.svg";
+
+  static const String accessability = "assets/icons/accessability.svg";
 }

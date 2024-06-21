@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'dart:math';
+
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/coordinates_translator_ios.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 
@@ -23,7 +24,7 @@ class FaceDistanceDetectorServiceIOS {
           await platform.invokeMapMethod<String, double>('getCameraInfo');
       return cameraInfo;
     } catch (e) {
-      logger.e('Error getting camera info: $e');
+      debugPrint('Error getting camera info: $e');
       return {};
     }
   }

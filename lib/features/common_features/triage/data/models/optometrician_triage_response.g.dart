@@ -9,19 +9,19 @@ part of 'optometrician_triage_response.dart';
 _$OptometristTriageResponseImpl _$$OptometristTriageResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$OptometristTriageResponseImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       uuid: json['uuid'] as String?,
       patientId: json['patientId'] as String?,
-      patientAge: json['patientAge'] as int?,
+      patientAge: (json['patientAge'] as num?)?.toInt(),
       patientGender:
           $enumDecodeNullable(_$GenderEnumMap, json['patientGender']),
       patientEducation: json['patientEducation'] as String?,
       patientProfession: json['patientProfession'] as String?,
       source: json['source'] as String?,
-      reportId: json['reportId'] as int?,
-      enounterId: json['enounterId'] as int?,
-      organizationCode: json['organizationCode'] as int?,
-      assessmentCode: json['assessmentCode'] as int?,
+      reportId: (json['reportId'] as num?)?.toInt(),
+      enounterId: (json['enounterId'] as num?)?.toInt(),
+      organizationCode: (json['organizationCode'] as num?)?.toInt(),
+      assessmentCode: (json['assessmentCode'] as num?)?.toInt(),
       assessmentStartTime: const TimestampConverter()
           .fromJson(json['assessmentStartTime'] as String?),
       assessmentEndTime: const TimestampConverter()
@@ -65,6 +65,10 @@ _$OptometristTriageResponseImpl _$$OptometristTriageResponseImplFromJson(
       visualAcuityAssistance: json['visualAcuityAssistance'] as bool?,
       visualAcuityAided: json['visualAcuityAided'] as bool?,
       eyeScanAssistance: json['eyeScanAssistance'] as bool?,
+      redEye: json['redEye'] as bool?,
+      cataract: json['cataract'] as bool?,
+      languageUsed: json['languageUsed'] as String?,
+      longDistanceUsed: json['longDistanceUsed'] as String?,
     );
 
 Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
@@ -117,6 +121,10 @@ Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
       'visualAcuityAssistance': instance.visualAcuityAssistance,
       'visualAcuityAided': instance.visualAcuityAided,
       'eyeScanAssistance': instance.eyeScanAssistance,
+      'redEye': instance.redEye,
+      'cataract': instance.cataract,
+      'languageUsed': instance.languageUsed,
+      'longDistanceUsed': instance.longDistanceUsed,
     };
 
 const _$GenderEnumMap = {
@@ -140,7 +148,7 @@ const _$UrgencyEnumMap = {
 _$QuestionResponseImpl _$$QuestionResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$QuestionResponseImpl(
-      questionCode: json['questionCode'] as int?,
+      questionCode: (json['questionCode'] as num?)?.toInt(),
       response: json['response'] as bool?,
     );
 
@@ -153,19 +161,32 @@ Map<String, dynamic> _$$QuestionResponseImplToJson(
 
 _$ObservationImpl _$$ObservationImplFromJson(Map<String, dynamic> json) =>
     _$ObservationImpl(
-      observationCode: json['observationCode'] as int?,
+      observationCode: (json['observationCode'] as num?)?.toInt(),
       response: (json['response'] as num?)?.toDouble(),
+      observationIdentifier: json['observationIdentifier'] as String?,
+      observationType: $enumDecodeNullable(
+          _$ObservationCodeEnumMap, json['observationType']),
     );
 
 Map<String, dynamic> _$$ObservationImplToJson(_$ObservationImpl instance) =>
     <String, dynamic>{
       'observationCode': instance.observationCode,
       'response': instance.response,
+      'observationIdentifier': instance.observationIdentifier,
+      'observationType': _$ObservationCodeEnumMap[instance.observationType],
     };
+
+const _$ObservationCodeEnumMap = {
+  ObservationCode.Eye: 'Eye',
+  ObservationCode.Sight: 'Sight',
+  ObservationCode.Testing: 'Testing',
+  ObservationCode.LOGMAR_NEAR: 'LOGMAR_NEAR',
+  ObservationCode.LOGMAR_DISTANT: 'LOGMAR_DISTANT',
+};
 
 _$MediaCaptureImpl _$$MediaCaptureImplFromJson(Map<String, dynamic> json) =>
     _$MediaCaptureImpl(
-      mediaCode: json['mediaCode'] as int?,
+      mediaCode: (json['mediaCode'] as num?)?.toInt(),
       fileName: json['fileName'] as String?,
       fileType: json['fileType'] as String?,
       encodingType: json['encodingType'] as String?,

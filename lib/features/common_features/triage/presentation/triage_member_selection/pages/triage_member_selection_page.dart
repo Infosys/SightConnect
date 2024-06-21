@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
+import '../../providers/triage_provider.dart';
 import '../providers/triage_member_provider.dart';
 import '../widget/change_member_tiles.dart';
 
@@ -46,6 +47,8 @@ class TriageMemberSelectionPage extends StatelessWidget {
                         onPressed: model.testPatientId == null
                             ? null
                             : () {
+                                ref.read(resetProvider).reset();
+
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => const TriagePage(),

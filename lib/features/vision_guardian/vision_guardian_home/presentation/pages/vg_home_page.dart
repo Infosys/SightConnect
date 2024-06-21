@@ -8,13 +8,12 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/p
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upgrader/upgrader.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
-import '../../../../../main.dart';
 
 class VisionGuardianHomePage extends ConsumerWidget {
   const VisionGuardianHomePage({super.key});
@@ -37,29 +36,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
         ),
         actions: const [],
       ),
-      body: UpgradeAlert(
-        showIgnore: false,
-        showLater: false,
-        shouldPopScope: () => false,
-        canDismissDialog: false,
-        onUpdate: () {
-          return true;
-        },
-        upgrader: Upgrader(
-          durationUntilAlertAgain: const Duration(milliseconds: 800),
-          willDisplayUpgrade: ({
-            appStoreVersion,
-            required display,
-            installedVersion,
-            minAppVersion,
-          }) {
-            logger.d({
-              "display : $display",
-              "appStoreVersion : $appStoreVersion",
-              "installedVersion : $installedVersion",
-            });
-          },
-        ),
+      body: AppUpgrader(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -13,6 +13,16 @@
     }
   },
   "stepNumber": "{current} of {total}",
+   "@referralSmsContent": {
+    "placeholders": {
+      "referral": {
+        "type": "String"
+      }
+     
+    }
+  },
+  "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
+
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -53,6 +63,14 @@
     }
   },
   "vgSearchByIdName": "آئی ڈی، نام کے ذریعے تلاش کریں {searchType}",
+  "@emergencyTollFreeNumberText": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyTollFreeNumberText": "ہنگامی صورت حال میں، براہ کرم {tollFreeNumber} پر کال کریں",
   "questionnaireTitle": "آنکھوں کی تشخیص کے سوالات",
   "questionnaireExitDialog": "ان سوالوں کے جواب دینے سے آپ کی آنکھوں کے مسائل کی نشاندہی کرنے میں مدد ملے گی۔ کیا آپ واقعی باہر نکلنا چاہتے ہیں؟",
   "visualAcuityTitle": "بصری ایکویٹی ٹیسٹ",
@@ -657,5 +675,26 @@
   "decrease": "کم کریں",
   "reset": "ری سیٹ کریں",
   "minimumTextSizeReached": "کم سے کم متن کا سائز پہنچ گیا",
-  "maximumTextSizeReached": "زیادہ سے زیادہ متن کا سائز پہنچ گیا"
+  "maximumTextSizeReached": "زیادہ سے زیادہ متن کا سائز پہنچ گیا",
+  "switchProfile": "پروفائل تبدیل کریں",
+  "switchRole": "کردار تبدیل کریں",
+  "switchTenant": "کرایہ دار کو تبدیل کریں",
+  "chatClearChat": "چیٹ صاف کریں",
+  "chatEyeAssessmentRecommended": "آپ کے لیے آنکھوں کی تشخیص کی سفارش کی جاتی ہے۔",
+  "chatDoYouWantToTakeTheTriageEyeAssessment": "کیا آپ ٹرائیج آئی اسسمنٹ لینا چاہتے ہیں؟",
+  "chatChatbotNotAvailable": "چیٹ بوٹ فی الحال دستیاب نہیں ہے۔ براہ کرم بعد میں دوبارہ کوشش کریں۔",
+  "chatTypeHere": "یہاں ٹائپ کریں...",
+  "patientHeaderWelcomeText": "سائٹ کنیکٹ میں خوش آمدید! اپنی بینائی کا خیال رکھنا ضروری ہے، اور ہم آپ کے لیے ہر قدم پر موجود ہیں۔",
+  "triageTestCardHeader": "آپ کی آنکھوں کا ٹیسٹ مفت ہے...",
+  "triageTestCardBody1": "اپنی آنکھوں کی علامات کا فوری تجزیہ کریں",
+  "triageTestCardBody2": "شناخت کریں کہ آیا آپ کو آنکھ کا مسئلہ ہو سکتا ہے",
+  "triageTestCardBody3": "جانیں کہ اپنے ڈاکٹر کے پاس کب جانا ہے",
+  "triageTestCardButton": "مفت آنکھ کا ٹیسٹ شروع کریں",
+  "myConnectionListAddMembersDescription": "اپنے خاندان اور دوستوں کو شامل کرنے کے لیے ایڈ ممبرز بٹن پر کلک کریں۔",
+  "showTriageHowToProceedBottomSheetHeader": "آپ کیسے آگے بڑھنا چاہتے ہیں؟",
+  "showTriageHowToProceedBottomSheetBody1": "مجھے ایک مسئلہ ہے اور میں تصدیق کرنا چاہتا ہوں",
+  "showTriageHowToProceedBottomSheetBody2": "مجھے یقین نہیں ہے کہ مجھے کوئی مسئلہ ہے یا نہیں",
+  "showTriageHowToProceedBottomSheetBody3": "مجھے آنکھوں کا کوئی مسئلہ نہیں ہے-بس چیک کرنا چاہتا ہوں",
+  "appDrawerToastMessageText": "معذرت، ہمیں موبائل ایپ میں لاگ آؤٹ کی غلطی کا سامنا کرنا پڑا۔",
+  "myConnectionListAddMembers": "رکن شامل کریں"
 }

@@ -1,10 +1,10 @@
-import 'package:eye_care_for_all/core/constants/api_constant.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/env.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../main.dart';
 
@@ -21,7 +21,7 @@ class WebSocketProvider extends ChangeNotifier {
   void initializeStompClient() {
     _client = StompClient(
       config: StompConfig(
-        url: ApiConstant.webSocketEua,
+        url: Env.websocketUrl,
         onConnect: onConnectCallback,
         onWebSocketError: (dynamic error) =>
             logger.e("onWebSocketError : $error"),

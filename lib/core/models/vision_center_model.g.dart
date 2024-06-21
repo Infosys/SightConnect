@@ -9,7 +9,7 @@ part of 'vision_center_model.dart';
 _$OrganizationResponseModelImpl _$$OrganizationResponseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$OrganizationResponseModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       trackingId: json['trackingId'] as String?,
       facilityid: json['facilityid'] as String?,
       facilityType:
@@ -45,12 +45,15 @@ Map<String, dynamic> _$$OrganizationResponseModelImplToJson(
 
 const _$FacilityTypeEnumMap = {
   FacilityType.PRIMARY: 'PRIMARY',
+  FacilityType.SECONDARY: 'SECONDARY',
+  FacilityType.TERTIARY: 'TERTIARY',
+  FacilityType.OTHER: 'OTHER',
 };
 
 _$TenantCustomModelImpl _$$TenantCustomModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TenantCustomModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 

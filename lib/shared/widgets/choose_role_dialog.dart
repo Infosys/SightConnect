@@ -36,10 +36,12 @@ class ChooseRoleDialog extends HookWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                loc.roleChooseYourRole,
-                style: applyFiraSansFont(
-                  fontWeight: FontWeight.w500,
+              Flexible(
+                child: Text(
+                  loc.roleChooseYourRole,
+                  style: applyFiraSansFont(
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               // const SizedBox(height: 2),
@@ -88,17 +90,19 @@ class ChooseRoleDialog extends HookWidget {
                               selectedRole.value = role;
                             },
                             child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  _formateRoleName(role!, context),
-                                  textAlign: TextAlign.center,
-                                  style: applyRobotoFont(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: selectedRole.value == role
-                                        ? AppColor.white
-                                        : AppColor.black,
+                                Flexible(
+                                  child: Text(
+                                    _formateRoleName(role!, context),
+                                    style: applyRobotoFont(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: selectedRole.value == role
+                                          ? AppColor.white
+                                          : AppColor.black,
+                                    ),
                                   ),
                                 ),
                                 Visibility(

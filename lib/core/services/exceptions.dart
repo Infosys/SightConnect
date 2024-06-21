@@ -8,29 +8,22 @@ class CacheException implements Exception {}
 class UnknownException implements Exception {}
 
 class DioErrorHandler {
-  static void handleDioError(DioException e) {
-    if (e.error is Exception) {
-      // Handle general exceptions
-      logger.e('Exception: ${e.error}');
-      logger.e('StackTrace: ${e.stackTrace}');
-    } else if (e.response != null) {
-      // Handle HTTP errors
-
-      //logger.e(e.response?.data.toString());
+  static void handleDioError(Object e) {
+    if (e is DioException) {
+      logger.e(e.stackTrace);
+      if (e.response != null) {
+        logger.e(e.response!.data);
+      }
       logger.e({
-        "stackTrace": e.stackTrace,
-        "baseUrl": e.requestOptions.baseUrl,
-        "url": e.response!.data["path"],
-        "title": e.response!.data["title"],
-        "statusCode": e.response!.data["status"],
-        "statusMessage": e.response!.statusMessage,
-        "message": e.response!.data["message"],
-        "path": e.response!.data["params"],
+        "uri": e.requestOptions.uri.toString(),
+        "statusCode": e.response?.statusCode,
+        "statusMessage": e.response?.statusMessage,
+        "error": e.error,
       });
+    } else if (e is Exception) {
+      logger.e('Exception: ${e.toString()}');
     } else {
-      // Handle connection errors
-      logger.e('Connection error: ${e.message}');
-      logger.e('StackTrace: ${e.stackTrace}');
+      logger.e('error: ${e.toString()}');
     }
   }
 

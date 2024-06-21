@@ -3,13 +3,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
+import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/features/patient/patient_appointments/data/models/eua_on_search_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
-import '../../../../../core/constants/api_constant.dart';
+
 import '../../../../../main.dart';
 import '../models/uhi_search_model.dart';
 
@@ -41,7 +42,7 @@ class PatientAppointmentRemoteSource extends ChangeNotifier {
     logger.d("inside initializeStompClient");
     _client = StompClient(
       config: StompConfig(
-        url: ApiConstant.webSocketEua,
+        url: Env.websocketUrl,
         onConnect: onConnectCallback,
         onWebSocketError: (dynamic error) =>
             logger.e("onWebSocketError : $error"),

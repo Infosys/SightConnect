@@ -191,7 +191,8 @@ class _PatientSelfTestReportsState
                                         .read(patientAssessmentAndTestProvider)
                                         .updateTriage(
                                             currentData.triageResultID);
-
+                                    logger.f(
+                                        " update data is : ${(result).toString()}");
                                     if (result.isEmpty) {
                                       return;
                                     }

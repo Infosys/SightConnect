@@ -31,7 +31,7 @@ class AppNameAvatar extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            name != null ? getNameInitials(name) : "",
+            (name != null) ? getNameInitials(name) : "",
             style: applyRobotoFont(
               fontSize: fontSize,
               fontWeight: FontWeight.w500,
@@ -56,7 +56,7 @@ class AppNameAvatar extends StatelessWidget {
   }
 
   String getNameInitials(String? name) {
-    if (name == null) {
+    if (name == null || name.isEmpty) {
       return "";
     }
     final nameSplit = name.split(" ");

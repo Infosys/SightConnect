@@ -11,6 +11,7 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   final String displayName;
   final String? mobileNumber;
   final String? parentPatientId;
+  final String? pinCode;
 
   const PatientRegistrationMiniappPage({
     super.key,
@@ -18,8 +19,10 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     required this.displayName,
     this.mobileNumber,
     this.parentPatientId,
+    this.pinCode,
   });
 
+  // String pinCode = "";
   @override
   Widget build(BuildContext context) {
     // if true returned then api call was successful
@@ -38,7 +41,8 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
           parentPatientId: parentPatientId ?? _getPateintId(),
           role: _getCurrentActiveRole(),
           token: PersistentAuthStateService.authState.accessToken,
-          miniAppEnv:getMiniAppEnv( ApiConstant.appEnvironment),
+          miniAppEnv: getMiniAppEnv(ApiConstant.appEnvironment),
+          pinCode: pinCode,
         ),
         miniapp: MiniApp(
           id: "1",
@@ -50,16 +54,15 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
       ),
     );
   }
-  MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv){
-    switch(activeEnv)
-    {
+
+  MiniAppEnv getMiniAppEnv(AppEnvironment activeEnv) {
+    switch (activeEnv) {
       case AppEnvironment.production:
         return MiniAppEnv.PROD;
       case AppEnvironment.staging:
         return MiniAppEnv.STAGING;
       case AppEnvironment.development:
         return MiniAppEnv.DEV;
-      
     }
   }
 
@@ -78,8 +81,9 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
   }
 
   String validateMobile() {
-
-    if(PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") return "";
+    if (PersistentAuthStateService.authState.activeRole != "ROLE_PATIENT") {
+      return "";
+    }
 
     final mobile = PersistentAuthStateService.authState.username;
     if (mobile == null) return "";

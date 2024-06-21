@@ -8,11 +8,11 @@ import 'package:eye_care_for_all/features/patient/patient_profile/presentation/p
 import 'package:eye_care_for_all/features/patient/patient_services/presentation/widgets/patient_service_category.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
+
 import "../../domain/enum/mini_app.dart";
 
 class PatientServicesPage extends ConsumerWidget {
@@ -27,6 +27,7 @@ class PatientServicesPage extends ConsumerWidget {
         // loc.recentServicesEyeAssessment,
         MiniApp.APPOINTMENT,
         MiniApp.VISUAL_ACUITY_TEST,
+        // MiniApp.IPLEDGE,
         // MiniApp.EYE_ASSESSMENT,
         MiniApp.CATARACT_EYE_TEST,
         MiniApp.RED_EYE_TEST,

@@ -26,7 +26,7 @@ class VgEyeAssessmentRemoteSourceImpl implements VgEyeAssessmentRemoteSource {
       {required int practitionerId,
       required Map<String, dynamic> queryparams}) async {
     var endpoint =
-        "/services/orchestration/api/patients/triage-reports/practitioners/$practitionerId";
+        "/services/orchestration/api/v2/patients/triage-reports/practitioners/$practitionerId";
 
     try {
       logger.d(queryparams);

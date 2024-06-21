@@ -31,7 +31,7 @@ class VTCarePlanRemoteSourceImpl implements VTCarePlanRemoteSource {
 
     try {
       String endPoint =
-          "/services/triage/api/triage-report/$reportId/care-plan";
+          "/services/triage/api/v2/triage-report/$reportId/care-plan";
       var response = await dio.post(endPoint, data: carePlan.toJson());
 
       // logger.d("reached care plan remote source");
