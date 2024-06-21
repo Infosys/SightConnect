@@ -42,7 +42,7 @@ class IvrCallHistoryTableView extends ConsumerWidget {
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       clipBehavior: Clip.antiAlias,
-                      headingRowColor: MaterialStateProperty.all(
+                      headingRowColor: WidgetStateProperty.all(
                         AppColor.scaffold,
                       ),
                       columnSpacing: AppSize.width(context) / 15,

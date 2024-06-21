@@ -37,7 +37,7 @@ class ChatIntentView extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                  padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
                 ),
                 onPressed: () {
                   intent!.noHandler();
@@ -56,7 +56,7 @@ class ChatIntentView extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
+                  padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
                 ),
                 onPressed: () {
                   intent!.yesHandler();

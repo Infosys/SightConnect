@@ -127,7 +127,6 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
 
 class _RefferalCodeCard extends StatelessWidget {
   const _RefferalCodeCard({
-    super.key,
     required this.code,
   });
   final String? code;

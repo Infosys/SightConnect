@@ -87,7 +87,7 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
       await model.setRightEyeImage(image);
       isLoading.value = false;
       model.setCurrentEye(TriageEyeType.LEFT);
-    } on Exception catch (e) {
+    } on Exception {
       isLoading.value = false;
       model.setCurrentEye(TriageEyeType.RIGHT);
       if (context.mounted) {
@@ -137,7 +137,7 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
           await saveTriage(ref, isLoading, context);
         }
       }
-    } on Exception catch (e) {
+    } on Exception {
       isLoading.value = false;
       model.setCurrentEye(TriageEyeType.LEFT);
       if (context.mounted) {

@@ -71,7 +71,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 ),
                 titleSpacing: 0,
                 centerTitle: false,
-                title: Text(
+                title: const Text(
                   "Near Vision Test",
                 ),
               )

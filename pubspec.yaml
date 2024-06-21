@@ -111,6 +111,8 @@ dependencies:
 #       path: packages/camera/camera
 #       ref: e1a4dba770da9bc3cf9f858bac6837083f8b9059
 
+  flutter_riverpod: any
+  collection: any
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

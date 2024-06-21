@@ -12,7 +12,6 @@ import 'package:eye_care_for_all/features/common_features/triage/domain/usecases
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class TriageEyeScanProvider with ChangeNotifier {
@@ -45,7 +44,7 @@ class TriageEyeScanProvider with ChangeNotifier {
     _leftEyeImage = image;
     try {
       await uploadImage(image, TriageEyeType.LEFT);
-    } on Exception catch (e) {
+    } on Exception {
       rethrow;
     }
     notifyListeners();
@@ -55,7 +54,7 @@ class TriageEyeScanProvider with ChangeNotifier {
     _rightEyeImage = image;
     try {
       await uploadImage(image, TriageEyeType.RIGHT);
-    } on Exception catch (e) {
+    } on Exception {
       rethrow;
     }
     notifyListeners();

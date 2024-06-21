@@ -30,7 +30,7 @@ class VisionTechnicianDashboardProvider extends ChangeNotifier {
         sourceurl: "assets/miniapps/vt_register_patient.zip",
       ),
     ),
-    VisionTechnicianPreliminaryAssessmentPage(),
+    const VisionTechnicianPreliminaryAssessmentPage(),
     const VisionTechnicianMarkMyAvailabilityPage(),
     const VisionTechnicianIvrCallHistory(),
   ];

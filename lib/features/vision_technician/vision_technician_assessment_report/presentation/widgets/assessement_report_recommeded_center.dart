@@ -94,7 +94,6 @@ class _AddressTile extends StatelessWidget {
   const _AddressTile({
     required this.icon,
     required this.value,
-    super.key,
   });
   final IconData icon;
   final String value;
