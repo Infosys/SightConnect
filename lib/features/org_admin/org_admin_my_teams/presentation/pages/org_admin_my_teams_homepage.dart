@@ -37,46 +37,48 @@ class OrgAdminMyTeamsHomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppSize.ks),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: AppSize.km),
-            DropdownMenu<String>(
-              width: Responsive.isMobile(context)
-                  ? AppSize.width(context)
-                  : AppSize.width(context) / 2.7,
-              leadingIcon: const Icon(
-                Icons.location_on,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSize.ks),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: AppSize.km),
+              DropdownMenu<String>(
+                width: Responsive.isMobile(context)
+                    ? AppSize.width(context)
+                    : AppSize.width(context) / 2.7,
+                leadingIcon: const Icon(
+                  Icons.location_on,
+                ),
+                label: const Text('Gachibowli, Hyderabad'),
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(
+                    value: 'Gachibowli, Hyderabad',
+                    label: 'Gachibowli, Hyderabad',
+                  ),
+                  DropdownMenuEntry(
+                    value: 'Gachibowli, Hyderabad',
+                    label: 'Gachibowli, Hyderabad',
+                  ),
+                ],
               ),
-              label: const Text('Gachibowli, Hyderabad'),
-              dropdownMenuEntries: const [
-                DropdownMenuEntry(
-                  value: 'Gachibowli, Hyderabad',
-                  label: 'Gachibowli, Hyderabad',
-                ),
-                DropdownMenuEntry(
-                  value: 'Gachibowli, Hyderabad',
-                  label: 'Gachibowli, Hyderabad',
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSize.km),
-            AppPaginatedTable(
-              pageSize: 10,
-              dataSource: OrgAdminMyTeamDataSource(context: context),
-              onRowsPerPageChanged: (value) {},
-              columnNames: const [
-                'Name',
-                'Location',
-                'Patients attended',
-                'IVR Calls',
-                'Availability',
-                'Actions'
-              ],
-            ),
-          ],
+              const SizedBox(height: AppSize.km),
+              AppPaginatedTable(
+                pageSize: 10,
+                dataSource: OrgAdminMyTeamDataSource(context: context),
+                onRowsPerPageChanged: (value) {},
+                columnNames: const [
+                  'Name',
+                  'Location',
+                  'Patients attended',
+                  'IVR Calls',
+                  'Availability',
+                  'Actions'
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
