@@ -234,6 +234,25 @@ class VisualAcuityTestProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void gameOver() {
+     UserResponse userResponse = UserResponse(
+      levelNumber: _currentLevel!,
+      swipeDirection: QuestionDirection.right,
+      mode: gameMode!,
+      questionIndex: _currentIndex!,
+      isUserResponseCorrect: false,
+    );
+    
+    _level!.questions[_currentIndex!].questionStatus = QuestionStatus.wrong;
+   
+    _currentLevelUserResponses!.add(userResponse);
+    _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
+    _totalWrongLevelResponse = _totalWrongLevelResponse! + 1;
+    _isGameOver = true;
+    _eyesFinalReport[_currentEye!] = _singleEyeReport!;
+    notifyListeners();
+  }
+
   void _endGame() {
     _isGameOver = true;
     _eyesFinalReport[_currentEye!] = _singleEyeReport!;

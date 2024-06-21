@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/network_info.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/providers/triage_provider.dart';
+import 'package:eye_care_for_all/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -209,16 +210,19 @@ class TriageFeedbackDialog extends HookConsumerWidget {
   ) async {
     logger.d("in connection");
     try {
-     await ref.read(optometricianTriageProvider).saveTriage().then((value) async {
-       logger.d({
+      await ref
+          .read(optometricianTriageProvider)
+          .saveTriage()
+          .then((value) async {
+        logger.d({
           "Optometritian Triage : ${value.toJson()}",
         });
       });
     } on Exception catch (e) {
       DioErrorHandler.handleDioError(e);
       Fluttertoast.showToast(
-        msg: "Error occured while saving triage data. Please try again later."
-      );
+          msg:
+              "Error occured while saving triage data. Please try again later.");
     } finally {
       final role = PersistentAuthStateService.authState.activeRole;
       final activeRole = roleMapper(role);
@@ -228,7 +232,11 @@ class TriageFeedbackDialog extends HookConsumerWidget {
         ref.read(resetProvider).reset();
         feedback.isLoading = false;
         if (context.mounted) {
-          Navigator.popUntil(context, (route) => route.isFirst);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const OptometritianDashboardPage()),
+              (route) => route.isFirst);
         }
       }
     }

@@ -99,7 +99,7 @@ class TriageResultPage extends ConsumerWidget {
                 const SizedBox(height: AppSize.km),
                 const NearbyVisionCentersList(),
                 const SizedBox(height: AppSize.km),
-                const HelplineCard(helpLine: AppInfoService.tollFreeNumber),
+                HelplineCard(helpLine: AppInfoService.tollFreeNumber),
                 const SizedBox(height: AppSize.km),
                 ResultImageCard(
                   reportId: triageResult.id,

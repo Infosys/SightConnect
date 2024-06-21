@@ -35,10 +35,14 @@ class DistanceNotifier extends ChangeNotifier {
   }
 
   bool isDistanceValid() {
-    final value =
-        _currentDistance <= _maxDistance && _currentDistance >= _minDistance;
+    if (_currentDistance == 0) {
+      return false;
+    } else {
+      final value =
+          _currentDistance <= _maxDistance && _currentDistance >= _minDistance;
 
-    return value;
+      return value;
+    }
   }
 
   bool isLongDistanceValid() {
@@ -49,12 +53,16 @@ class DistanceNotifier extends ChangeNotifier {
   }
 
   String getDistanceText(BuildContext context) {
-    if (_currentDistance < _minDistance) {
-      return context.loc?.visualAcuityTestDistanceInstructionTooClose ?? "";
-    } else if (_currentDistance > _maxDistance) {
-      return context.loc?.visualAcuityTestDistanceInstructionTooFar ?? "";
+    if (_currentDistance == 0) {
+      return "No face Detected, Please face the camera 40cm from the screen.";
+    } else {
+      if (_currentDistance < _minDistance) {
+        return context.loc?.visualAcuityTestDistanceInstructionTooClose ?? "";
+      } else if (_currentDistance > _maxDistance) {
+        return context.loc?.visualAcuityTestDistanceInstructionTooFar ?? "";
+      }
+      return "";
     }
-    return "";
   }
 
   String getLongDistanceText(BuildContext context) {

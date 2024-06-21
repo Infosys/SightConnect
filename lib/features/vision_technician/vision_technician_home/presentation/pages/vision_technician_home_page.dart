@@ -9,12 +9,10 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_ho
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/pages/vision_technician_search_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:flutter/foundation.dart';
+import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:upgrader/upgrader.dart';
 
-import '../../../../../main.dart';
 import '../provider/vt_home_helper_provider.dart';
 
 class VisionTechnicianHomePage extends ConsumerWidget {
@@ -27,30 +25,7 @@ class VisionTechnicianHomePage extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: UpgradeAlert(
-          dialogStyle: UpgradeDialogStyle.cupertino,
-          showIgnore: kDebugMode ? true : false,
-          showLater: kDebugMode ? true : false,
-          shouldPopScope: () => kDebugMode ? true : false,
-          canDismissDialog: kDebugMode ? true : false,
-          onUpdate: () {
-            return true;
-          },
-          upgrader: Upgrader(
-            durationUntilAlertAgain: const Duration(milliseconds: 800),
-            willDisplayUpgrade: ({
-              appStoreVersion,
-              required display,
-              installedVersion,
-              minAppVersion,
-            }) {
-              logger.d({
-                "display : $display",
-                "appStoreVersion : $appStoreVersion",
-                "installedVersion : $installedVersion",
-              });
-            },
-          ),
+        body: AppUpgrader(
           child: RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(visionTechnicianAnalyticsProvider);

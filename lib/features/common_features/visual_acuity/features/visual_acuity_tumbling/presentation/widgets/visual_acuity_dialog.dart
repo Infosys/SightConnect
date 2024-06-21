@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_provider.dart';
-import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/pages/distance_visual_acuity_tumbling_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_result_page.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
@@ -281,7 +280,6 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
     // );
 
     /////////////////////////////////////////////////////////////////////////
-  
 
     final result = await ref
         .read(tumblingTestProvider)
@@ -292,7 +290,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
         Fluttertoast.showToast(
             msg: "Failed to update observation at this moment");
 
-             navigator
+        navigator
           // ..pop()
           // ..pop()
           // ..pop()
@@ -305,7 +303,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
       },
       (result) {
         Fluttertoast.showToast(msg: "Observation Updated");
-         navigator
+        navigator
           // ..pop()
           // ..pop()
           // ..pop()

@@ -1,29 +1,25 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_initiate_page.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../pages/distance_visual_acuity_initiate_page.dart';
-
-class DistanceVisualAcuityTumblingLeftEyeInstruction extends ConsumerWidget {
-  const DistanceVisualAcuityTumblingLeftEyeInstruction({super.key});
+class VisualAcuityTumblingRightEyeInstruction extends StatelessWidget {
+  const VisualAcuityTumblingRightEyeInstruction({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return TraceableWidget(
-      actionName:
-          'VisualAcuity Tumbling LeftEye Instruction Page - Long Distance',
+      actionName: 'VisualAcuity Tumbling LeftEye Instruction Page',
       child: Scaffold(
-        appBar: CustomAppbar(
+        appBar: const CustomAppbar(
           centerTitle: true,
-          title: Text(AppLocalizations.of(context)!.visualAcuityTitle),
+          title: Text("Near Vision Test"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -73,13 +69,10 @@ class DistanceVisualAcuityTumblingLeftEyeInstruction extends ConsumerWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        ref
-                            .read(globalVisualAcuityProvider)
-                            .setShortDistanceTest(false);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
-                                const DistanceVisualAcuityInitiatePage(),
+                                const VisualAcuityInitiatePage(),
                           ),
                         );
                       },

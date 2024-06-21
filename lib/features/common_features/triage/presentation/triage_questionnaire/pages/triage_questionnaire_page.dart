@@ -12,7 +12,9 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity/features
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/app_pop_up_menu.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/helpers/show_feedback_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -87,14 +89,15 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               ),
             ),
             actions: [
-              IconButton(
-                onPressed: () {
-                  TextScalePopupMenu.show(context, ref);
+              AppPopUpMenu(
+                items: const ["Text Size", "Add Review"],
+                onSelected: (selected) {
+                  if (selected == "Text Size") {
+                    TextScalePopupMenu.show(context, ref);
+                  } else if (selected == "Add Review") {
+                    showFeedbackBottomSheet(context);
+                  } else {}
                 },
-                icon: SvgPicture.asset(
-                  "assets/icons/accessability.svg",
-                  height: 32,
-                ),
               ),
             ],
           ),

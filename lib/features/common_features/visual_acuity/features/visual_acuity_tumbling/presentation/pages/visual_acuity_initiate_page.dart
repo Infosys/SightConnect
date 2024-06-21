@@ -101,7 +101,7 @@ class _VisualAcuityInitiatePageState
                     titleSpacing: 0,
                     actions: const [],
                     centerTitle: false,
-                    title: Text(context.loc!.visualAcuityTitle),
+                    title: const Text("Near Vision Test"),
                   )
                 : CustomAppbar(
                     leadingWidth: 60,
@@ -134,7 +134,7 @@ class _VisualAcuityInitiatePageState
                       ),
                     ),
                     title: Text(
-                      context.loc!.visualAcuityTitle,
+                      "Near Vision Test",
                       style: applyFiraSansFont(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

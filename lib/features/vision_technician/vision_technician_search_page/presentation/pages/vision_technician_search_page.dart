@@ -1,22 +1,23 @@
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/pages/vision_technician_assessment_timeline_page.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_search_page/presentation/widgets/empty_result_card.dart';
-import 'package:eye_care_for_all/features/vision_technician/vision_technician_home/presentation/widgets/vt_search_bar.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../vision_technician_preliminary_assessment/presentation/pages/vision_technician_preliminary_assessment_page.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-// ignore: depend_on_referenced_packages
-import 'package:collection/collection.dart';
 
 class VisionTechnicianSearchPage extends HookConsumerWidget {
   const VisionTechnicianSearchPage({super.key});
@@ -86,7 +87,6 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
                     } else {
                       List<VTPatientDto> filterAndTransform(
                           List<VTPatientDto> data) {
-             
                         var groupedData =
                             groupBy(data, (VTPatientDto d) => d.id);
 
@@ -246,6 +246,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
     BuildContext context,
     VisionTechnicianSearchProvider watchRef,
   ) {
+    logger.d(data.toJson());
     return [
       DataCell(
         onTap: () {
@@ -261,7 +262,7 @@ class VisionTechnicianSearchPage extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "${data.name?.capitalizeFirstOfEach()}",
+              data.name?.capitalizeFirstOfEach() ?? "-",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

@@ -1,5 +1,8 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -168,7 +171,18 @@ class TouchGestureCard extends HookConsumerWidget {
                               const SizedBox.shrink(),
                               const Spacer(),
                               OutlinedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    ref
+                                            .read(globalVisualAcuityProvider)
+                                            .isShortDistanceTest
+                                        ? ref
+                                            .read(tumblingTestProvider)
+                                            .gameOver()
+                                        : ref
+                                            .read(distanceTumblingTestProvider)
+                                            .gameOver();
+                                    handleGameOver(context);
+                                  },
                                   child: const Text('I Can’t see'))
                             ],
                           ),

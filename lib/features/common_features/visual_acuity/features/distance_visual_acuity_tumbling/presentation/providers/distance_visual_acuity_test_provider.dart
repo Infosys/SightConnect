@@ -245,6 +245,23 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void gameOver() {
+    _level!.questions[_currentIndex!].questionStatus = QuestionStatus.wrong;
+    UserResponse userResponse = UserResponse(
+      levelNumber: currentLevel!,
+      swipeDirection: QuestionDirection.right,
+      mode: gameMode!,
+      questionIndex: currentIndex!,
+      isUserResponseCorrect: false,
+    );
+    _currentLevelUserResponses!.add(userResponse);
+    _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
+    _totalWrongLevelResponse = _totalWrongLevelResponse! + 1;
+ _isGameOver = true;
+    _eyesFinalReport[_currentEye!] = _singleEyeReport!;
+    notifyListeners();
+  }
+
   void _endGame() {
     _isGameOver = true;
     _eyesFinalReport[_currentEye!] = _singleEyeReport!;

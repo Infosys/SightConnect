@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/services/interceptors.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/env.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app_info_service.dart';
@@ -37,8 +38,8 @@ final validationDioProvider = Provider(
   (ref) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstant.baseUrl, 
-         headers: {
+        baseUrl: ApiConstant.baseUrl,
+        headers: {
           "X-Active-Role": PersistentAuthStateService.authState.activeRole,
           "X-App-Version": AppInfoService.appVersion,
         },
@@ -52,7 +53,7 @@ final chatbotDioProvider = Provider(
   (ref) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstant.chatbotUrl,
+        baseUrl: Env.chatbotUrl,
       ),
     );
     return dio;
@@ -66,6 +67,9 @@ class DioService extends StateNotifier<Dio> {
           Dio(
             BaseOptions(
               baseUrl: ApiConstant.baseUrl,
+              sendTimeout: const Duration(seconds: 120),
+              receiveTimeout: const Duration(seconds: 120),
+              connectTimeout: const Duration(seconds: 120),
             ),
           ),
         ) {

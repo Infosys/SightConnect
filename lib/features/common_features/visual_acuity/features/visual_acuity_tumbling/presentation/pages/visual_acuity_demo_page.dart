@@ -10,7 +10,7 @@ import '../../../../../../../core/constants/app_size.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../../widgets/tumbling_e_click_pad.dart';
 import '../../../../widgets/visual_acuity_face_distance_page.dart';
-import '../widgets/visual_acuity_tumbling_test_left_eye_instruction.dart';
+import '../widgets/visual_acuity_tumbling_test_right_eye_instruction.dart';
 
 class VisualAcuityDemoPage extends HookConsumerWidget {
   const VisualAcuityDemoPage({super.key});
@@ -139,7 +139,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                                   .pushReplacement(
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const VisualAcuityTumblingLeftEyeInstruction(),
+                                                      const VisualAcuityTumblingRightEyeInstruction(),
                                                 ),
                                               );
                                             },
@@ -175,7 +175,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                           Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  const VisualAcuityTumblingLeftEyeInstruction(),
+                                                  const VisualAcuityTumblingRightEyeInstruction(),
                                             ),
                                           );
                                         },
