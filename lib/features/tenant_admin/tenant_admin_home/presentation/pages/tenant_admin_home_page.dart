@@ -82,9 +82,7 @@ class TenantAdminHomePage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: AppSize.kl),
-                      StatisticsCardsCarouselSlider(
-                        slides: slides,
-                      ),
+                      StatisticsCardsCarouselSlider(slides: slides),
                     ],
                   ),
                 )
@@ -92,70 +90,75 @@ class TenantAdminHomePage extends StatelessWidget {
             ),
             const SizedBox(height: AppSize.ks),
             Padding(
-                padding: const EdgeInsets.all(AppSize.km),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Assessments',
-                      style: applyFiraSansFont(
-                        fontSize: 18,
-                        color: AppColor.black,
-                      ),
+              padding: const EdgeInsets.all(AppSize.km),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Assessments',
+                    style: applyFiraSansFont(
+                      fontSize: 18,
+                      color: AppColor.black,
                     ),
-                    const SizedBox(height: AppSize.km),
-                    Row(
-                      children: [
-                        Row(
-                          children: ['All', 'Critical', 'IVR Assessments']
-                              .map((e) => Container(
-                                  padding: const EdgeInsets.all(AppSize.ks),
-                                  margin:
-                                      const EdgeInsets.only(right: AppSize.ks),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.white,
-                                    borderRadius:
-                                        BorderRadius.circular(AppSize.ks),
-                                    border: Border.all(
-                                      color: AppColor.grey,
-                                    ),
+                  ),
+                  const SizedBox(height: AppSize.km),
+                  Row(
+                    children: [
+                      Row(
+                        children: ['All', 'Critical', 'IVR Assessments']
+                            .map(
+                              (e) => Container(
+                                padding: const EdgeInsets.all(AppSize.ks),
+                                margin:
+                                    const EdgeInsets.only(right: AppSize.ks),
+                                decoration: BoxDecoration(
+                                  color: AppColor.white,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.ks),
+                                  border: Border.all(
+                                    color: AppColor.grey,
                                   ),
-                                  child: Text(
-                                    e,
-                                    style: applyRobotoFont(fontSize: 14),
-                                  )))
-                              .toList(),
+                                ),
+                                child: Text(
+                                  e,
+                                  style: applyRobotoFont(fontSize: 14),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      const Spacer(),
+                      const Text(
+                        '|',
+                        style: TextStyle(
+                          color: AppColor.lightGrey,
+                          fontSize: 36,
                         ),
-                        const Spacer(),
-                        const Text(
-                          '|',
-                          style: TextStyle(
-                            color: AppColor.lightGrey,
-                            fontSize: 36,
-                          ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.filter_list_outlined,
+                          color: AppColor.grey,
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.filter_list_outlined,
-                              color: AppColor.grey,
-                            ))
-                      ],
-                    ),
-                    const SizedBox(height: AppSize.km),
-                    AppPaginatedTable(
-                      pageSize: 10,
-                      dataSource: OrgAdminHomeDataSource(),
-                      onRowsPerPageChanged: (value) {},
-                      columnNames: const [
-                        'Patient',
-                        'Assessment ID',
-                        'Status',
-                        'Category',
-                      ],
-                    ),
-                  ],
-                )),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.km),
+                  AppPaginatedTable(
+                    pageSize: 10,
+                    dataSource: OrgAdminHomeDataSource(),
+                    onRowsPerPageChanged: (value) {},
+                    columnNames: const [
+                      'Patient',
+                      'Assessment ID',
+                      'Status',
+                      'Category',
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -227,12 +230,14 @@ class PatientCasesAnalytics extends ConsumerWidget {
 class OrgAdminHomeDataSource extends DataTableSource {
   @override
   DataRow getRow(int index) {
-    return const DataRow(cells: [
-      DataCell(Text('Avendra ')),
-      DataCell(Text('123456')),
-      DataCell(Text('Closed')),
-      DataCell(Text('Urgent Category', style: TextStyle(color: Colors.red))),
-    ]);
+    return const DataRow(
+      cells: [
+        DataCell(Text('Avendra ')),
+        DataCell(Text('123456')),
+        DataCell(Text('Closed')),
+        DataCell(Text('Urgent Category', style: TextStyle(color: Colors.red))),
+      ],
+    );
   }
 
   @override

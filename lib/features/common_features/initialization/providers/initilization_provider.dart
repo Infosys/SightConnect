@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:eye_care_for_all/core/models/consent_model.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';

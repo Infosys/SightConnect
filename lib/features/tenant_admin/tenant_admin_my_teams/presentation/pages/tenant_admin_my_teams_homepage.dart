@@ -17,23 +17,24 @@ class TenantAdminMyTeamsHomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(AppSize.ks),
             child: DropdownMenu<String>(
-                width: Responsive.isMobile(context)
-                    ? AppSize.width(context)
-                    : AppSize.width(context) / 4,
-                leadingIcon: const Icon(
-                  Icons.calendar_today,
+              width: Responsive.isMobile(context)
+                  ? AppSize.width(context)
+                  : AppSize.width(context) / 4,
+              leadingIcon: const Icon(
+                Icons.calendar_today,
+              ),
+              label: const Text('Today'),
+              dropdownMenuEntries: const [
+                DropdownMenuEntry(
+                  value: 'Weekely',
+                  label: 'Weekely',
                 ),
-                label: const Text('Today'),
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(
-                    value: 'Weekely',
-                    label: 'Weekely',
-                  ),
-                  DropdownMenuEntry(
-                    value: 'Monthly',
-                    label: 'Monthly',
-                  ),
-                ]),
+                DropdownMenuEntry(
+                  value: 'Monthly',
+                  label: 'Monthly',
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -91,29 +92,49 @@ class OrgAdminMyTeamDataSource extends DataTableSource {
   OrgAdminMyTeamDataSource({required this.context});
   @override
   DataRow getRow(int index) {
-    return DataRow(cells: [
-      DataCell(ListTile(
-          onTap: () {
-            Navigator.push(
+    return DataRow(
+      cells: [
+        DataCell(
+          ListTile(
+            onTap: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        const TenantAdminMyTeamMemberAnalytics()));
-          },
-          title: const Text('Avendra'),
-          subtitle: const Text('ID 5356785'))),
-      const DataCell(ListTile(
-          title: Text('LVPEI Institute'),
-          subtitle: Text('Gachibowli, Hyderabad'))),
-      const DataCell(Text('25')),
-      const DataCell(Text('15')),
-      const DataCell(
-          Text('Available', style: TextStyle(color: AppColor.altGreen))),
-      const DataCell(Icon(
-        Icons.phone,
-        color: AppColor.primary,
-      )),
-    ]);
+                  builder: (context) =>
+                      const TenantAdminMyTeamMemberAnalytics(),
+                ),
+              );
+            },
+            title: const Text('Avendra'),
+            subtitle: const Text('ID 5356785'),
+          ),
+        ),
+        const DataCell(
+          ListTile(
+            title: Text('LVPEI Institute'),
+            subtitle: Text('Gachibowli, Hyderabad'),
+          ),
+        ),
+        const DataCell(
+          Text('25'),
+        ),
+        const DataCell(
+          Text('15'),
+        ),
+        const DataCell(
+          Text(
+            'Available',
+            style: TextStyle(color: AppColor.altGreen),
+          ),
+        ),
+        const DataCell(
+          Icon(
+            Icons.phone,
+            color: AppColor.primary,
+          ),
+        ),
+      ],
+    );
   }
 
   @override
