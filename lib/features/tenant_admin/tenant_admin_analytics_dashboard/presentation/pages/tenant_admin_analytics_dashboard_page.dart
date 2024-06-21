@@ -1,30 +1,30 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/age_group_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/analytics_card.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/appointments_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/cases_closed_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/gender_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/ivr_calls_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/language_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/statidtics_top_card.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/top_suggestions_prescriptions_analytics.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/triage_cases_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/age_group_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/analytics_card.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/appointments_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/cases_closed_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/gender_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/ivr_calls_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/language_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/statidtics_top_card.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/top_suggestions_prescriptions_analytics.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/triage_cases_analytics.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/consultation_type_analytics.dart';
 
-class OrgAdminAnalyticsDashBoardPage extends StatefulWidget {
-  const OrgAdminAnalyticsDashBoardPage({super.key});
+class TenantAdminAnalyticsDashBoardPage extends StatefulWidget {
+  const TenantAdminAnalyticsDashBoardPage({super.key});
 
   @override
-  State<OrgAdminAnalyticsDashBoardPage> createState() =>
-      _OrgAdminAnalyticsDashBoardPageState();
+  State<TenantAdminAnalyticsDashBoardPage> createState() =>
+      _TenantAdminAnalyticsDashBoardPageState();
 }
 
-class _OrgAdminAnalyticsDashBoardPageState
-    extends State<OrgAdminAnalyticsDashBoardPage> {
+class _TenantAdminAnalyticsDashBoardPageState
+    extends State<TenantAdminAnalyticsDashBoardPage> {
   late int showingTooltip;
 
   @override

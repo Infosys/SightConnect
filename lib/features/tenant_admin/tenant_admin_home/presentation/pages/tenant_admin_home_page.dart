@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/pages/org_admin_analytics_dashboard_page.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/pages/tenant_admin_analytics_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/analytics_cards.dart';
@@ -10,8 +10,8 @@ import 'package:eye_care_for_all/shared/widgets/statistics_cards_carousel_slider
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OrgAdminHomePage extends StatelessWidget {
-  const OrgAdminHomePage({super.key});
+class TenantAdminHomePage extends StatelessWidget {
+  const TenantAdminHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class OrgAdminHomePage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const OrgAdminAnalyticsDashBoardPage(),
+                                      const TenantAdminAnalyticsDashBoardPage(),
                                 ),
                               );
                             },

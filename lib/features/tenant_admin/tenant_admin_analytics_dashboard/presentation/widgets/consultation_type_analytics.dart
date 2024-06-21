@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/org_admin/org_admin_analytics_dashboard/presentation/widgets/graph_scheme_indicator.dart';
+import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/graph_scheme_indicator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
