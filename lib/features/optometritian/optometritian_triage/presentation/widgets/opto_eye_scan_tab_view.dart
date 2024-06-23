@@ -12,8 +12,17 @@ class OptoEyeScanTabView extends StatelessWidget {
   const OptoEyeScanTabView({required this.report, super.key});
 
   final OptometristTriageResponse report;
+
   @override
   Widget build(BuildContext context) {
+    final leftEyeUrl = report.mediaCapture?.firstWhere((element) {
+      return element.encodingType == "base64-LEFT";
+    }).fileName;
+
+    final rightEyeUrl = report.mediaCapture?.firstWhere((element) {
+      return element.encodingType == "base64-RIGHT";
+    }).fileName;
+
     return DefaultTabController(
       length: 2,
       child: Padding(
@@ -41,8 +50,8 @@ class OptoEyeScanTabView extends StatelessWidget {
               ),
               labelColor: AppColor.black,
               tabs: const [
-                Tab(text: "Right Cornea"),
                 Tab(text: "Left Cornea"),
+                Tab(text: "Right Cornea"),
               ],
             ),
             const SizedBox(
@@ -55,13 +64,13 @@ class OptoEyeScanTabView extends StatelessWidget {
                     AppSize.height(context), AppSize.width(context), 1.05),
                 child: TabBarView(viewportFraction: 1, children: [
                   AppNetworkImage(
-                    imageUrl: report.mediaCapture?[0].fileName ?? "",
+                    imageUrl: leftEyeUrl ?? "",
                     shapeCircle: false,
                     height: 100,
                     width: 100,
                   ),
                   AppNetworkImage(
-                    imageUrl: report.mediaCapture?[1].fileName ?? "",
+                    imageUrl: rightEyeUrl ?? "",
                     shapeCircle: false,
                     height: 100,
                     width: 100,
