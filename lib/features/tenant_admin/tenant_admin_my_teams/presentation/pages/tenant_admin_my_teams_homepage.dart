@@ -66,9 +66,8 @@ class TenantAdminMyTeamsHomePage extends StatelessWidget {
               ),
               const SizedBox(height: AppSize.km),
               AppPaginatedTable(
-                pageSize: 10,
+                data: const [],
                 dataSource: OrgAdminMyTeamDataSource(context: context),
-                onRowsPerPageChanged: (value) {},
                 columnNames: const [
                   'Name',
                   'Location',

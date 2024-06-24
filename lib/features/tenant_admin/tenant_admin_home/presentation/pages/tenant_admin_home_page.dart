@@ -144,9 +144,8 @@ class TenantAdminHomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSize.km),
                     AppPaginatedTable(
-                      pageSize: 10,
+                      data: const [],
                       dataSource: _TenantAdminHomeDataSource(),
-                      onRowsPerPageChanged: (value) {},
                       columnNames: const [
                         'Patient',
                         'Assessment ID',

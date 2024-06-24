@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/dashboard/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/tenant_admin/tenant_admin_dashboard/presentation/pages/tenant_admin_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -80,7 +79,7 @@ class MyApp extends ConsumerWidget {
                 // initialRoute: initialRoute,
                 // navigatorKey: AppRouter.navigatorKey,
                 // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: const TenantAdminDashBoardPage(),
+                home: const EyeBankDashboardPage(),
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
                 //         data: (value) {
