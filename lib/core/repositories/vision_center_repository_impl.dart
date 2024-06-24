@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/models/vision_center_model.dart';
 import 'package:eye_care_for_all/core/repositories/vision_center_repository.dart';
@@ -31,9 +28,10 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
     try {
       final response = await dio.get<List<dynamic>>(endpoint);
       //log response.data.facilityInformation.facilityAddressDetail for each response object looped
-      response.data!.forEach((element) {
-        logger.f(element['facilityInformation']['facilityAddressDetails'].toString());
-      });
+      for (var element in response.data!) {
+        logger.f(element['facilityInformation']['facilityAddressDetails']
+            .toString());
+      }
       return response.data!
           .map((json) => OrganizationResponseModel.fromJson(json))
           .toList();
@@ -65,6 +63,3 @@ class VisionCenterRepositoryImpl extends VisionCenterRepository {
     }
   }
 }
-
-
-
