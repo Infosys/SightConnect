@@ -54,19 +54,16 @@ class OptometristTriageProvider extends ChangeNotifier {
         .call(GetLongDistanceVisualAcuityResponseLocallyParam())
         .then((value) => value.fold((l) => [], (r) => r));
 
-    logger.f("shortObservation : $observations");
-    logger.f("longObservation : $distanceObservation");
+    logger.d("shortObservation : $observations");
+    logger.d("longObservation : $distanceObservation");
 
     List<ObservationDefinitionModel> observationDefinition = await ref
         .read(getAssessmentUseCase)
         .call(GetTriageParam())
-        .then((value) => value.fold(
-            (l) => [], (r) {
-              logger.f("ObservationDefinitionModel : ${r.observations!}");
+        .then((value) => value.fold((l) => [], (r) {
+              logger.d("ObservationDefinitionModel : ${r.observations!}");
               return r.observations!.observationDefinition!;
-            }
-        )
-    );
+            }));
 
     List<PostTriageQuestionModel> questionResponse = await ref
         .read(getQuestionnaireResponseLocallyUseCase)
@@ -110,7 +107,7 @@ class OptometristTriageProvider extends ChangeNotifier {
           ref.read(triageQuestionnaireProvider).questionnaireRemarks,
     );
 
-    logger.f("opto data before sending : $triage");
+    logger.d("opto data before sending : $triage");
 
     try {
       var response =
@@ -118,7 +115,7 @@ class OptometristTriageProvider extends ChangeNotifier {
 
       return response.fold(
         (failure) {
-          logger.f(" Optometrist saveTriage $failure");
+          logger.d(" Optometrist saveTriage $failure");
           Fluttertoast.showToast(
             msg: "Unable to save the Triage! Please try again.",
             toastLength: Toast.LENGTH_LONG,
@@ -126,13 +123,13 @@ class OptometristTriageProvider extends ChangeNotifier {
           throw failure;
         },
         (triageResponse) {
-          logger.f("Optometrist Final Triage Response:  $triageResponse");
+          logger.d("Optometrist Final Triage Response:  $triageResponse");
           return triageResponse;
         },
       );
     } on Exception catch (e) {
       DioErrorHandler.handleDioError(e);
-      logger.f("error in save triage from provider : $e");
+      logger.d("error in save triage from provider : $e");
     }
 
     return const OptometristTriageResponse();

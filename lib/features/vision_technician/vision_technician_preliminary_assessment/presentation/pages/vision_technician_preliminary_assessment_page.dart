@@ -52,7 +52,7 @@ class _MyWidgetState
                 response.fold(
                   (failure) {
                     refWatch.toggleIvrCall(false);
-                    logger.i(failure.errorMessage);
+                    logger.d(failure.errorMessage);
                   },
                   (isCallActive) {
                     refWatch.toggleIvrCall(true);
@@ -67,7 +67,7 @@ class _MyWidgetState
             final value = await saveProvider.markVtStatus(isAvailable: false);
             provider.setAvailability(value);
 
-            logger.i("Setting VT avalibility to Unavailable");
+            logger.d("Setting VT avalibility to Unavailable");
           }
         } catch (e) {
           logger.e("Error in setting VT availability to Unavailable");
@@ -84,7 +84,7 @@ class _MyWidgetState
       if (provider.isTemporarilyAvailable) {
         final value = await saveProvider.markVtStatus(isAvailable: true);
         provider.setAvailability(value);
-        logger.i("Setting VT avalibility to Available");
+        logger.d("Setting VT avalibility to Available");
       }
     } catch (e) {
       logger.e("Error in setting VT availability to Available");
@@ -259,7 +259,7 @@ class _MyWidgetState
                                       msg: failure.errorMessage);
                                 },
                                 (triageResponseModel) {
-                                  // reset the availability of VT                            
+                                  // reset the availability of VT
                                   vtAvailabilityReset();
                                   navigator.pushReplacement(
                                     MaterialPageRoute(

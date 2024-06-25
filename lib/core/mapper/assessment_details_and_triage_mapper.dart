@@ -146,7 +146,7 @@ class AssessmentDetailedAndTriageReportMapper {
           "code": getCode(observation.code!),
         };
       }
-      logger.f("this is observation Map: $observationMap");
+      logger.d("this is observation Map: $observationMap");
       for (Observation observation in triageDetailedReport.observations!) {
         if (observationMap.containsKey(observation.identifier)) {
           observationBriefEntity.add(

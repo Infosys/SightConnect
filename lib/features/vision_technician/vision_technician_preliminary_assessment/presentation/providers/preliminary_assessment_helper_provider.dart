@@ -62,19 +62,19 @@ class PreliminaryAssessmentHelperNotifier extends ChangeNotifier {
 
   void setTriagePosted(bool value) {
     _triagePosted = value;
-    logger.f("triage posted value = $_triagePosted");
+    logger.d("triage posted value = $_triagePosted");
     notifyListeners();
   }
 
   void setCarePlanPosted(bool value) {
     _carePlanPosted = value;
-    logger.f("careplan posted value = $_carePlanPosted");
+    logger.d("careplan posted value = $_carePlanPosted");
     notifyListeners();
   }
 
   void setTest(bool value) {
     _isTest = value;
-    logger.f("set test posted value = $_isTest");
+    logger.d("set test posted value = $_isTest");
     notifyListeners();
   }
 

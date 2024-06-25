@@ -53,7 +53,7 @@ var getVTProfileProvider = FutureProvider.autoDispose(
         }
         // SharedPreferenceService.storeOrganizationIdVt= profile.practiceGrants!.first.organization!.id!;
         // SharedPreferenceService.storeTenantIdVt = profile.practiceGrants!.first.organization!.tenant!.id!;
-        logger.f(
+        logger.d(
             "values after setting - ${SharedPreferenceService.getOrganizationIdVt} - ${SharedPreferenceService.getTenantIdVt}");
         ref.read(globalVTProvider).setUser(profile);
         ref

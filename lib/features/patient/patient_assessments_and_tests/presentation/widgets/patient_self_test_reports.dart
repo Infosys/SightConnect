@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
-import 'package:eye_care_for_all/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/widgets/update_triage_alert_box.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -190,7 +190,7 @@ class _PatientSelfTestReportsState
                                         .read(patientAssessmentAndTestProvider)
                                         .updateTriage(
                                             currentData.triageResultID);
-                                    logger.f(
+                                    logger.d(
                                         " update data is : ${(result).toString()}");
                                     if (result.isEmpty) {
                                       return;

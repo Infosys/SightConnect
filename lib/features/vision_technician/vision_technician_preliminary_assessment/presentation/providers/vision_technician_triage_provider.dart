@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
@@ -7,6 +8,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_se
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
+
 import '../../../../../main.dart';
 import '../../../../common_features/triage/domain/models/enums/observation_code.dart';
 import '../../../../common_features/triage/domain/models/triage_post_model.dart';
@@ -301,7 +303,7 @@ class VisionTechnicianTriageProvider extends ChangeNotifier {
       if (element.code == ObservationCode.LOGMAR_NEAR) {
         identifierMap[element.bodySite!] = element.id!;
       }
-      logger.f(
+      logger.d(
           "element id is : ${element.id} and element code is : ${element.code} and element body site is : ${element.bodySite}");
     });
 

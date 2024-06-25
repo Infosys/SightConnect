@@ -58,7 +58,7 @@ class PincodeDialogPage extends HookConsumerWidget {
 
                             pinCode =
                                 await GeocodingService.getPincodeFromLocation();
-                            logger.f("pinCode is  $pinCode");
+                            logger.d("pinCode is  $pinCode");
 
                             if (context.mounted) {
                               await Navigator.of(context)
@@ -109,9 +109,9 @@ class PincodeDialogPage extends HookConsumerWidget {
 
                       //       pinCode =
                       //           await GeocodingService.getPincodeFromLocation();
-                      //       logger.f("pinCode is  $pinCode");
+                      //       logger.d("pinCode is  $pinCode");
 
-                      //       logger.f("pincode is : $pinCode");
+                      //       logger.d("pincode is : $pinCode");
 
                       //       if (context.mounted) {
                       //         await Navigator.of(context)

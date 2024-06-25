@@ -31,7 +31,7 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   Future<Either<Failure, OptometristTriageResponse>> saveTriage(
       {required OptometristTriageResponse triage}) async {
     var endpoint = "/services/validation/api/patient-responses";
-    logger.f({
+    logger.d({
       "API saveTriage": triage.toJson(),
     });
 
@@ -72,7 +72,7 @@ class OptometristRemoteSourceImpl implements OptometristRemoteSource {
   @override
   Future<List<OptometristTriageResponse>> getOptometristTriageResponseByFilters(
       DateTime startTime, DateTime entTime, String capturedBy) async {
-    logger.f("get Optometrist Triage Response By Filters");
+    logger.d("get Optometrist Triage Response By Filters");
     var endpoint =
         "/services/validation/api/patient-responses/date/$capturedBy";
 

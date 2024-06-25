@@ -40,10 +40,10 @@
 	<string>your usage description here</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Program requires GPS to track cars and job orders</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This we want to use to give information about the nearest vision care centers</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This we want to use to give information about the nearest vision care centers</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>This we want to use to give information about the nearest vision care centers</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>your usage description here</string>
 	<key>NSPhotoLibraryUsageDescription</key>

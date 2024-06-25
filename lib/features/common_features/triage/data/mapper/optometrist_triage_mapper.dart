@@ -171,7 +171,7 @@ class OptometristTriageMapper {
   static List<MediaCapture>? getImagingSelection(
       List<PostTriageImagingSelectionModel> imagingSelection) {
     for (var selection in imagingSelection) {
-      logger.f("imagingSelection: ${selection.toJson()}");
+      logger.d("imagingSelection: ${selection.toJson()}");
     }
     List<MediaCapture> output = [];
     imagingSelection = _removeInvalidImagingSelection(imagingSelection);

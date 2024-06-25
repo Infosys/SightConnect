@@ -203,7 +203,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
     final navigator = Navigator.of(context);
     try {
       isLoading.value = true;
-      logger.f("Referral code: ${code.value}");
+      logger.d("Referral code: ${code.value}");
       await ref.read(referralRepositoryImplProvider).submitReferral(code.value);
       Fluttertoast.showToast(msg: "Referral code submitted successfully");
       navigator.pop(true);
