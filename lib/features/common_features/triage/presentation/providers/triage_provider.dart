@@ -203,6 +203,8 @@ class TriageProvider extends ChangeNotifier {
     int currentStep,
     String eventId,
   ) async {
+
+    logger.f("event id in triage provider: $eventId, current step: $currentStep");
     List<PostTriageImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
             .call(GetTriageEyeScanResponseLocallyParam())

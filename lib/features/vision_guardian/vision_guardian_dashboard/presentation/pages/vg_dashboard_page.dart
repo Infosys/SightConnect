@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
@@ -22,7 +24,43 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    ref.listen(getVGProfileProvider, (previous, next) {
+
+    if(PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"){
+       ref.listen(getVolunteerProfileProvider, (previous, next) {
+      if (next.hasError) {
+        ref.read(initializationProvider).logout().then((value) {
+          Fluttertoast.showToast(msg: loc.vgLogoutMessage);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginPage.routeName,
+            (route) => false,
+          );
+        }).catchError((e) {
+          logger.e(
+              "Apologies, we encountered a logout error in the mobile app. from VisionGuardianDashboardPage : $e");
+          Fluttertoast.showToast(msg: loc.vgLogoutErrorMessage);
+        });
+      }
+    });
+    return ref.watch(getVolunteerProfileProvider).when(
+          data: (data) {
+            return _content(context, ref);
+          },
+          loading: () => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          ),
+          error: (error, stackTrace) {
+            return Scaffold(
+              body: Text("Error $error"),
+            );
+          },
+        );
+  
+     }
+    else{
+ ref.listen(getVGProfileProvider, (previous, next) {
       if (next.hasError) {
         ref.read(initializationProvider).logout().then((value) {
           Fluttertoast.showToast(msg: loc.vgLogoutMessage);
@@ -53,6 +91,11 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
             );
           },
         );
+  
+    }
+
+
+   
   }
 
   _content(BuildContext context, WidgetRef ref) {

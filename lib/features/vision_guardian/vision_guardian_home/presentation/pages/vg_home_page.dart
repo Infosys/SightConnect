@@ -1,5 +1,7 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
@@ -21,6 +23,9 @@ class VisionGuardianHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    var name = PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"
+        ? ref.watch(globalVolunteerProvider).name
+        : ref.watch(globalVGProvider).name;
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
@@ -59,7 +64,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                         left: AppSize.km,
                       ),
                       child: Text(
-                        "${loc.vgWelcome}  ${ref.watch(globalVGProvider).name}",
+                        "${loc.vgWelcome}  ${name}",
                         style: applyFiraSansFont(
                           color: AppColor.scaffold,
                           fontSize: 24,

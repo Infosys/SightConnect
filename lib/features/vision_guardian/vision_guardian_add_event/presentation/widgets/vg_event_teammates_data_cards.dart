@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_member_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -91,7 +93,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                                 offset: const Offset(0, 10),
                                 child: InkWell(
                                   onTap: () async {
-                                    var userId =
+                                    var userId = PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"? ref.read(globalVolunteerProvider).userId:
                                         ref.read(globalVGProvider).userId;
                                     var navigator = Navigator.of(context);
                                     var model =

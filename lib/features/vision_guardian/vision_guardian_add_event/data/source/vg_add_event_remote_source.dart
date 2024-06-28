@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_patient_model.dart';
@@ -14,6 +16,7 @@ var vgAddEventRemoteSource = Provider(
     ref.read(dioProvider),
     ref.read(getTriageModelProvider),
     ref.read(globalVGProvider),
+    ref.read(globalVolunteerProvider),
   ),
 );
 
@@ -59,8 +62,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   final Dio _dio;
   final GetTriageModelNotifier getTriageModelProvider;
   final GlobalVGProvider globalVGProvider;
-  VgAddEventRemoteSourceImpl(
-      this._dio, this.getTriageModelProvider, this.globalVGProvider);
+  final GlobalVolunteerProvider globalVolunteerProvider;
+  VgAddEventRemoteSourceImpl(this._dio, this.getTriageModelProvider,
+      this.globalVGProvider, this.globalVolunteerProvider);
 
   @override
   Future<List<VisionGuardianEventModel>> getVGEvents({
@@ -88,6 +92,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
     } catch (error) {
       rethrow;
     }
@@ -114,6 +121,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (error) {
       rethrow;
     }
@@ -122,10 +131,14 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future deleteVGEvents({required String eventId}) async {
     final endpoint = "/services/triage/api/v2/campaign-events/$eventId";
-
     Map<String, dynamic> queryParameters = {
       "login-actor-id": globalVGProvider.user!.id!,
     };
+    if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      queryParameters = {
+        "login-actor-id": globalVolunteerProvider.user!.id!,
+      };
+    }
 
     try {
       final response =
@@ -135,7 +148,12 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
-    } catch (error) {
+    } 
+    on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+    }
+    
+    catch (error) {
       rethrow;
     }
   }
@@ -173,9 +191,12 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           .then((value) {
         return value;
       }).catchError((error) {
+      DioErrorHandler.handleDioError(error);
+    
         return error;
       });
     }).catchError((error) {
+      DioErrorHandler.handleDioError(error);
       return error;
     });
   }
@@ -205,12 +226,14 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
             listofTeamMates.add(value.data);
           },
         ).catchError((onError) {
+          DioErrorHandler.handleDioError(onError);
           return onError;
         });
       }
 
       return listofTeamMates;
     }).catchError((onError) {
+      DioErrorHandler.handleDioError(onError);
       return onError;
     });
 
@@ -238,7 +261,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
-    } catch (error) {
+    } 
+       on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+    }
+    catch (error) {
       rethrow;
     }
   }
@@ -264,7 +291,11 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           .toList();
 
       return data;
-    } catch (error) {
+    } 
+       on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+    }
+    catch (error) {
       rethrow;
     }
   }
@@ -296,7 +327,13 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
-    } catch (error) {
+    } 
+
+       on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+    }
+    
+    catch (error) {
       logger.d(error);
       rethrow;
     }
@@ -311,7 +348,13 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         endpoint,
       );
       return VisionGuardianEventModel.fromJson(response.data);
-    } catch (e) {
+    } 
+    
+       on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+    }
+
+    catch (e) {
       rethrow;
     }
   }

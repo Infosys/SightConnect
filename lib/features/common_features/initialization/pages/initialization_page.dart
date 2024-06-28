@@ -273,6 +273,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
+      Role.ROLE_VOLUNTEER : const VisionGuardianDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {

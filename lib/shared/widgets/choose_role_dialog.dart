@@ -156,6 +156,7 @@ class ChooseRoleDialog extends HookWidget {
       Role.ROLE_VISION_TECHNICIAN => loc.roleVisionTechnician,
       Role.ROLE_PATIENT => loc.rolePatient,
       Role.ROLE_VISION_GUARDIAN => loc.roleVisionGuardian,
+      Role.ROLE_VOLUNTEER => "VOLUNTEER",
     };
   }
 }

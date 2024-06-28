@@ -486,6 +486,7 @@
   "roleVisionTechnician": "VISION TECHNICIAN",
   "rolePatient": "PATIENT",
   "roleVisionGuardian": "VISION GUARDIAN",
+  "roleVolunteer" : "VOLUNTEER",
   "vtSearchText": "Search by Patient ID, Mobile No or Name",
   "emptyPatientsInfo": "Start searching for patients to view their details .. ",
   "vtPersonalDetails": "Personal Details",
