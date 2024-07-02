@@ -26,6 +26,7 @@ mixin _$VolunteerPostModel {
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  PatientModel? get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,10 @@ abstract class $VolunteerPostModelCopyWith<$Res> {
       String? userType,
       DateTime? startDate,
       DateTime? endDate,
-      String? status});
+      String? status,
+      PatientModel? profile});
+
+  $PatientModelCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -67,6 +71,7 @@ class _$VolunteerPostModelCopyWithImpl<$Res, $Val extends VolunteerPostModel>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? status = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -93,7 +98,23 @@ class _$VolunteerPostModelCopyWithImpl<$Res, $Val extends VolunteerPostModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as PatientModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PatientModelCopyWith<$Res>? get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+
+    return $PatientModelCopyWith<$Res>(_value.profile!, (value) {
+      return _then(_value.copyWith(profile: value) as $Val);
+    });
   }
 }
 
@@ -111,7 +132,11 @@ abstract class _$$VolunteerPostModelImplCopyWith<$Res>
       String? userType,
       DateTime? startDate,
       DateTime? endDate,
-      String? status});
+      String? status,
+      PatientModel? profile});
+
+  @override
+  $PatientModelCopyWith<$Res>? get profile;
 }
 
 /// @nodoc
@@ -131,6 +156,7 @@ class __$$VolunteerPostModelImplCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? status = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_$VolunteerPostModelImpl(
       id: freezed == id
@@ -157,6 +183,10 @@ class __$$VolunteerPostModelImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as PatientModel?,
     ));
   }
 }
@@ -170,7 +200,8 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
       this.userType,
       this.startDate,
       this.endDate,
-      this.status});
+      this.status,
+      this.profile});
 
   factory _$VolunteerPostModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$VolunteerPostModelImplFromJson(json);
@@ -187,10 +218,12 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
   final DateTime? endDate;
   @override
   final String? status;
+  @override
+  final PatientModel? profile;
 
   @override
   String toString() {
-    return 'VolunteerPostModel(id: $id, userId: $userId, userType: $userType, startDate: $startDate, endDate: $endDate, status: $status)';
+    return 'VolunteerPostModel(id: $id, userId: $userId, userType: $userType, startDate: $startDate, endDate: $endDate, status: $status, profile: $profile)';
   }
 
   @override
@@ -205,13 +238,14 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, userId, userType, startDate, endDate, status);
+      runtimeType, id, userId, userType, startDate, endDate, status, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +269,8 @@ abstract class _VolunteerPostModel implements VolunteerPostModel {
       final String? userType,
       final DateTime? startDate,
       final DateTime? endDate,
-      final String? status}) = _$VolunteerPostModelImpl;
+      final String? status,
+      final PatientModel? profile}) = _$VolunteerPostModelImpl;
 
   factory _VolunteerPostModel.fromJson(Map<String, dynamic> json) =
       _$VolunteerPostModelImpl.fromJson;
@@ -252,6 +287,8 @@ abstract class _VolunteerPostModel implements VolunteerPostModel {
   DateTime? get endDate;
   @override
   String? get status;
+  @override
+  PatientModel? get profile;
   @override
   @JsonKey(ignore: true)
   _$$VolunteerPostModelImplCopyWith<_$VolunteerPostModelImpl> get copyWith =>

@@ -32,6 +32,7 @@ var getVolunteerProfileProvider = FutureProvider.autoDispose((ref) async {
         .read(performersProfileRepositoryProvider)
         .getPerformerProfile();
     ref.read(globalVolunteerProvider).setUser(response);
+    return response;
   } on Exception catch (e) {
     logger.d("Error in getVolunteerProfileProvider : $e");
     rethrow;

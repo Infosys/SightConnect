@@ -198,6 +198,7 @@ const _$PerformerRoleEnumMap = {
   PerformerRole.NURSE: 'NURSE',
   PerformerRole.SYSTEM: 'SYSTEM',
   PerformerRole.PATIENT: 'PATIENT',
+  PerformerRole.VOLUNTEER: 'VOLUNTEER',
 };
 
 _$PostIncompleteTestModelImpl _$$PostIncompleteTestModelImplFromJson(

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../core/constants/app_size.dart';
 
@@ -192,7 +193,8 @@ class EventDetailsTab extends ConsumerWidget {
                           Fluttertoast.showToast(
                               msg: loc.vgEventDeletionFailed);
                         }
-                      }).catchError((error) {
+                      }).catchError((error, stackTrace) {
+                        logger.e("${error}, ${stackTrace}");
                         Fluttertoast.showToast(msg: loc.vgEventDeletionFailed);
                       });
                     },

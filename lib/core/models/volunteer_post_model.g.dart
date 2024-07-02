@@ -19,6 +19,9 @@ _$VolunteerPostModelImpl _$$VolunteerPostModelImplFromJson(
           ? null
           : DateTime.parse(json['endDate'] as String),
       status: json['status'] as String?,
+      profile: json['profile'] == null
+          ? null
+          : PatientModel.fromJson(json['profile'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$VolunteerPostModelImplToJson(
@@ -30,4 +33,5 @@ Map<String, dynamic> _$$VolunteerPostModelImplToJson(
       'startDate': instance.startDate?.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
       'status': instance.status,
+      'profile': instance.profile?.toJson(),
     };

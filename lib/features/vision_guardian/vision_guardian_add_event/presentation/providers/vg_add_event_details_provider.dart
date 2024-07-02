@@ -255,7 +255,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       Map<String, String> fileMap = fileMsProvider.parseUrl(file);
       Map<String, dynamic> actors; 
       if(PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
-        actors = { "role": "MEDICAL_DOCTOR",
+        actors = { "role": "VOLUNTEER",
         "identifier": globalVolunteerProvider.userId.toString(),
         "isOwner": true};
       }

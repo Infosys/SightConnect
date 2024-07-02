@@ -2,6 +2,7 @@
 //
 //     final volunteerPostModel = volunteerPostModelFromJson(jsonString);
 
+import 'package:eye_care_for_all/core/models/patient_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
@@ -21,6 +22,7 @@ class VolunteerPostModel with _$VolunteerPostModel {
         DateTime? startDate,
         DateTime? endDate,
         String? status,
+        PatientModel? profile,
     }) = _VolunteerPostModel;
 
     factory VolunteerPostModel.fromJson(Map<String, dynamic> json) => _$VolunteerPostModelFromJson(json);

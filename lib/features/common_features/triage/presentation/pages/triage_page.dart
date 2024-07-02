@@ -62,7 +62,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
         ),
         dimensions: {
           'dimension1': '${PersistentAuthStateService.authState.activeRole}'
-        });
+        }); 
 
     super.dispose();
   }
@@ -83,6 +83,8 @@ class _TriagePageState extends ConsumerState<TriagePage> {
           Role.ROLE_VISION_GUARDIAN =>
             patientTriage(currentStep, context, data),
           Role.ROLE_VISION_TECHNICIAN =>
+            patientTriage(currentStep, context, data),
+          Role.ROLE_VOLUNTEER =>
             patientTriage(currentStep, context, data),
           _ => const SizedBox()
         };
