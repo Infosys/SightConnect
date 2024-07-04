@@ -220,6 +220,7 @@ class RegisterVolunteer extends HookConsumerWidget {
                                                       builder: (context) =>
                                                           const PatientDashboardPage()),
                                                   (route) => false);
+                                                  
                                             });
                                           } on Exception catch (e) {
                                             ScaffoldMessenger.of(context)

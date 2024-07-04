@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var checkVolunteerProvider = FutureProvider((ref) {
+var checkVolunteerProvider = FutureProvider.autoDispose((ref) {
   Dio dio = ref.read(dioProvider);
   Future<VolunteerPostModel> checkVolunteer(String id) async {
     final endPoint = "/services/orchestration/api/v2/volunteers/users/$id";
