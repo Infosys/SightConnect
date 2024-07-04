@@ -210,8 +210,6 @@ class TriageProvider extends ChangeNotifier {
     String eventId,
   ) async {
 
-    bool _isVolunteer = PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER";
-
     logger.f("event id in triage provider: $eventId, current step: $currentStep");
     List<PostTriageImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
@@ -243,7 +241,7 @@ class TriageProvider extends ChangeNotifier {
     DiagnosticReportTemplateFHIRModel assessment =
         await _triageLocalSource.getAssessment();
     TriagePostModel triagePostModel = TriagePostModel(
-      patientId:  _isVolunteer? _globalVolunteerProvider.userPatientId :  _patientId,
+      patientId: _patientId,
       serviceType: ServiceType.OPTOMETRY,
       tenantCode: SharedPreferenceService.getTenantId,
       organizationCode: SharedPreferenceService.getOrganizationId,
