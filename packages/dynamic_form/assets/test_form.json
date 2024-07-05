@@ -1,0 +1,20 @@
+{
+  "title": "Consent Form",
+  "description": "Medical Consent Form",
+  "type": "form",
+  "fields": [
+    {
+      "type": "text_field",
+      "required": true,
+      "readOnly": false,
+      "initialValue": null,
+      "keyBoardType": "default",
+      "label": "First Name",
+      "hint": "Enter your first name",
+      "validation": {
+        "pattern": "^[a-zA-Z]+$",
+        "errorMessage": "Please enter a valid first name."
+      }
+    }
+  ]
+}
