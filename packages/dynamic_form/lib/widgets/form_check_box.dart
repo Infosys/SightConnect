@@ -1,32 +1,41 @@
+import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class FormCheckBox extends StatelessWidget {
-  const FormCheckBox({super.key});
+class FormCheckbox extends StatelessWidget {
+  const FormCheckbox({
+    super.key,
+    required this.map,
+    this.onChanged,
+  });
+
+  final Map<String, dynamic> map;
+  final Function(List<dynamic>?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderCheckbox(
-      name: 'accept_terms',
-      initialValue: false,
-      onChanged: (value) {},
-      title: RichText(
-        text: const TextSpan(
-          children: [
-            TextSpan(
-              text: 'I have read and agree to the ',
-              style: TextStyle(color: Colors.black),
-            ),
-            TextSpan(
-              text: 'Terms and Conditions',
-              style: TextStyle(color: Colors.blue),
-            ),
-          ],
+    final String label = map['label'] as String;
+    final options = map['options'] as List;
+
+    return AppCard(
+      child: FormBuilderCheckboxGroup(
+        name: label, // Use label as the field name
+        decoration: InputDecoration(
+          labelText: label,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         ),
+
+        onChanged: onChanged,
+        options: options
+            .map((option) => FormBuilderFieldOption(
+                  value: option['value'],
+                  child: Text(option['label'] as String),
+                ))
+            .toList(),
+
+        initialValue: map['initialValue'] as List<dynamic>?,
       ),
-      validator: (value) {
-        return null;
-      },
     );
   }
 }

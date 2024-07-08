@@ -1,6 +1,6 @@
 {
-  "title": "Consent Form",
-  "description": "Medical Consent Form",
+  "title": "Doctor Consent Form",
+  "description": "Medical Consent Form for Doctor's Appointment",
   "type": "form",
   "fields": [
     {
@@ -8,13 +8,69 @@
       "required": true,
       "readOnly": false,
       "initialValue": null,
-      "keyBoardType": "default",
+      "keyBoardType": "text",
       "label": "First Name",
       "hint": "Enter your first name",
       "validation": {
         "pattern": "^[a-zA-Z]+$",
-        "errorMessage": "Please enter a valid first name."
+        "errorMessage": "Please enter a valid first name (letters only)."
       }
+    },
+    {
+      "type": "text_field",
+      "required": true,
+      "readOnly": false,
+      "initialValue": null,
+      "keyBoardType": "email",
+      "label": "Email",
+      "hint": "Enter your email address",
+      "validation": {
+        "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+        "errorMessage": "Please enter a valid email address."
+      }
+    },
+    {
+      "type": "dropdown",
+      "label": "Age Group",
+      "hint": "Select your age group",
+      "options": [
+        { "value": "18-24", "label": "18-24 Years" },
+        { "value": "25-34", "label": "25-34 Years" },
+        { "value": "35-64", "label": "35-64 Years" },
+        { "value": "65+", "label": "65 Years and Above" }
+      ],
+      "initialValue": null
+    },
+    {
+      "type": "image",
+      "label": "Upload Signature",
+      "hint": "Capture or upload your signature",
+      "onImagePicked": "handleImagePicked" 
+    },
+    {
+      "type": "date_time",
+      "label": "Date of Birth",
+      "initialValue": null,
+      "dateFormat": "yyyy-MM-dd"
+    },
+    {
+      "type": "radio",
+      "label": "Are you allergic to any medications?",
+      "options": [
+        { "value": "yes", "label": "Yes" },
+        { "value": "no", "label": "No" }
+      ],
+      "initialValue": null
+    },
+    {
+      "type": "check",
+      "label": "Conditions I agree to:",
+      "options": [
+        { "value": "condition1", "label": "Condition 1" },
+        { "value": "condition2", "label": "Condition 2" }
+      ],
+      "initialValue": []
     }
+   
   ]
 }
