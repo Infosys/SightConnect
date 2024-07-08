@@ -48,6 +48,7 @@ class SharedPreferenceService {
 
   static Future<void> storeEventId(String value) async {
     await _sharedPreferences.setString("eventId", value);
+    logger.d("storeEventId: $value");
   }
 
   /////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +87,10 @@ class SharedPreferenceService {
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 
   static String? get getEventId => _sharedPreferences.getString("eventId");
+
+  static Future<void> clearEventId() async {
+    await _sharedPreferences.remove("eventId");
+  }
 
   static Future<void> clearAll([bool persistId = false]) async {
     // await _sharedPreferences.remove("language");

@@ -12,6 +12,22 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(
+  (ref){
+    return ref.read(vgAddEventRemoteSource).getVGEvents(
+      queryData: {
+        "actorIdentifier": PersistentAuthStateService.authState.userId,
+        "eventStatusFilter": "ALL",
+        "pageable": {
+          "page": 0,
+          "size": 10,
+          "title-like": "",
+        },
+      },
+    );
+  },
+);
+
 var vgAddEventRemoteSource = Provider(
   (ref) => VgAddEventRemoteSourceImpl(
     ref.read(dioProvider),

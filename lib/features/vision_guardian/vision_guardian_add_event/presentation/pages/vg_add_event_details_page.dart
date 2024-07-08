@@ -27,7 +27,7 @@ class VGAddEventDetailsPage extends ConsumerStatefulWidget {
 
 class _VGAddEventDetailsPageState extends ConsumerState<VGAddEventDetailsPage>
     with WidgetsBindingObserver {
-   String? pincode;
+  String? pincode;
 
   @override
   void initState() {
@@ -42,7 +42,6 @@ class _VGAddEventDetailsPageState extends ConsumerState<VGAddEventDetailsPage>
         pincode = await GeocodingService.getPincodeFromLocation();
         logger.f("Pincode : $pincode");
       }
-      setState(() {});
     });
   }
 
@@ -118,7 +117,7 @@ class _VGAddEventDetailsPageState extends ConsumerState<VGAddEventDetailsPage>
                   const SizedBox(height: AppSize.km),
                   const VisionGuardianEventDateTimeCard(),
                   const SizedBox(height: AppSize.km),
-                  VisionGuardianEventAddressCard( pincode: pincode),
+                  VisionGuardianEventAddressCard(pincode: pincode),
                   const SizedBox(height: AppSize.km),
                 ],
               ),

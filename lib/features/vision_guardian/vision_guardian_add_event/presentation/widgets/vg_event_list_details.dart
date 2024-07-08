@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
@@ -57,6 +58,8 @@ class VisionEventListDetails extends ConsumerWidget {
               ref
                   .read(addEventDetailsProvider)
                   .setEventId(response[index].id.toString());
+              SharedPreferenceService.storeEventId(
+                  response[index].id.toString());
               Navigator.push(
                 context,
                 MaterialPageRoute(
