@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_form_builder: ^9.3.0
+  form_builder_validators: ^10.0.1
 
 dev_dependencies:
   flutter_test:

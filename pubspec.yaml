@@ -90,6 +90,8 @@ dependencies:
     path: packages/flutter_miniapp_web_runner/
   superapp_scanner:
     path: packages/superapp_scanner/
+  dynamic_form:
+    path : packages/dynamic_form/  
 
   pinput: ^4.0.0
   image_picker: ^1.0.7
