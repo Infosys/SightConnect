@@ -3,8 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_optometrician_provider.dart';
-import 'package:eye_care_for_all/core/services/interceptors.dart';
-import 'package:eye_care_for_all/core/services/token_refresh_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
@@ -141,18 +139,18 @@ class _OptometritianDashboardPageState
                             isLoading.value = true;
                             switchProfileLoading.value = true;
                             final navigator = Navigator.of(context);
-                            ref
-                                .read(dioRefreshTokenProvider)
-                                .whenData((value) async {
-                              await ref
-                                  .read(initializationProvider)
-                                  .resetProfile();
-                              navigator.pushNamedAndRemoveUntil(
-                                  InitializationPage.routeName,
-                                  (route) => false);
-                              ref.invalidate(initializationProvider);
-                              isLoading.value = false;
-                            });
+                            await ref
+                                .read(initializationProvider)
+                                .resetProfile();
+                            navigator.pushNamedAndRemoveUntil(
+                                InitializationPage.routeName, (route) => false);
+                            ref.invalidate(initializationProvider);
+                            isLoading.value = false;
+                            // ref
+                            //     .read(dioRefreshTokenProvider)
+                            //     .whenData((value) async {
+
+                            // });
                           },
                           icon: const Icon(Icons.person),
                           color: Colors.white,

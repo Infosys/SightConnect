@@ -66,31 +66,31 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                   );
                 }
                 logger.f("check volunteer response : ${value.toString()}");
-                return Center(
+                return const Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
                           children: [
-                            const Text(
+                            Text(
                               "You are already registered as a volunteer.",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  ref.read(dioRefreshTokenProvider);
+                            // ElevatedButton(
+                            //     onPressed: () {
+                            //       ref.read(dioRefreshTokenProvider);
 
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const InitializationPage()),
-                                      (route) => false);
-                                },
-                                child: const Text("Switch to Volunteer")),
+                            //       Navigator.pushAndRemoveUntil(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) =>
+                            //                   const InitializationPage()),
+                            //           (route) => false);
+                            //     },
+                            //     child: const Text("Switch to Volunteer")),
                           ],
                         ),
                       ],
