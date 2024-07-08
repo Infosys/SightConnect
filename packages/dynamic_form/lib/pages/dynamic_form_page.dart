@@ -84,17 +84,17 @@ class FormLayout extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
+                          vertical: 24.0,
                           horizontal: 32.0,
                         ),
                       ),
                       onPressed: () {
                         formKey.currentState?.save();
-                        // if (formKey.currentState!.validate()) {
-                        //   print(formKey.currentState!.value);
-                        // } else {
-                        //   print('Form validation failed');
-                        // }
+                        if (formKey.currentState!.validate()) {
+                          print(formKey.currentState!.value);
+                        } else {
+                          print('Form validation failed');
+                        }
                       },
                       child: const Text('Submit Form'),
                     ),

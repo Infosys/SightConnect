@@ -28,7 +28,7 @@ class FormDropDown extends StatelessWidget {
 
     return AppCard(
       child: FormBuilderDropdown<String>(
-        name: label, // Use label as the field name
+        name: label,
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
