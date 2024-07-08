@@ -18,7 +18,7 @@ _$VolunteerPostModelImpl _$$VolunteerPostModelImplFromJson(
       endDate: json['endDate'] == null
           ? null
           : DateTime.parse(json['endDate'] as String),
-      status: json['status'] as String?,
+      status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
       profile: json['profile'] == null
           ? null
           : PatientModel.fromJson(json['profile'] as Map<String, dynamic>),
@@ -32,6 +32,13 @@ Map<String, dynamic> _$$VolunteerPostModelImplToJson(
       'userType': instance.userType,
       'startDate': instance.startDate?.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
-      'status': instance.status,
+      'status': _$StatusEnumMap[instance.status],
       'profile': instance.profile?.toJson(),
     };
+
+const _$StatusEnumMap = {
+  Status.ACTIVE: 'ACTIVE',
+  Status.INACTIVE: 'INACTIVE',
+  Status.PENDING: 'PENDING',
+  Status.EXPIRED: 'EXPIRED',
+};

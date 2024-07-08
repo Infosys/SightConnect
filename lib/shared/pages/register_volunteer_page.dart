@@ -1,16 +1,19 @@
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/volunteer_post_model.dart';
 import 'package:eye_care_for_all/core/repositories/volunteer_repository_impl.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
+import 'package:eye_care_for_all/core/services/token_refresh_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RegisterVolunteer extends HookConsumerWidget {
-  const RegisterVolunteer({super.key});
+class RegisterVolunteerPage extends HookConsumerWidget {
+  const RegisterVolunteerPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,6 +21,7 @@ class RegisterVolunteer extends HookConsumerWidget {
     var endDate = useState<DateTime>(DateTime.now());
     var isChecked = useState<bool>(false);
     var isLoading = useState<bool>(false);
+    var volunteerId = useState<int?>(null);
 
     return Scaffold(
         appBar: const CustomAppbar(
@@ -26,17 +30,68 @@ class RegisterVolunteer extends HookConsumerWidget {
         ),
         body: !isLoading.value
             ? ref.watch(checkVolunteerProvider).when(data: (value) {
+                volunteerId.value = value.id;
+
+                if (value.status == Status.PENDING) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Your volunteer request is pending for approval.",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                } else if (value.status == Status.EXPIRED) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Your volunteer request has been expired.",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
                 logger.f("check volunteer response : ${value.toString()}");
-                return const Center(
+                return Center(
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "You are already registered as a volunteer.",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                        Column(
+                          children: [
+                            const Text(
+                              "You are already registered as a volunteer.",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  ref.read(dioRefreshTokenProvider);
+
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const InitializationPage()),
+                                      (route) => false);
+                                },
+                                child: const Text("Switch to Volunteer")),
+                          ],
                         ),
                       ],
                     ),
@@ -214,15 +269,17 @@ class RegisterVolunteer extends HookConsumerWidget {
                                                 ),
                                               );
 
+                                              ref.read(dioRefreshTokenProvider);
+
                                               Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          const PatientDashboardPage()),
+                                                          const InitializationPage()),
                                                   (route) => false);
-                                                  
                                             });
-                                          } on Exception catch (e) {
+                                          } on DioException catch (e) {
+                                            DioErrorHandler.handleDioError(e);
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               const SnackBar(

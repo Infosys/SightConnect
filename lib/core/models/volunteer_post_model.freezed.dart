@@ -25,7 +25,7 @@ mixin _$VolunteerPostModel {
   String? get userType => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
+  Status? get status => throw _privateConstructorUsedError;
   PatientModel? get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $VolunteerPostModelCopyWith<$Res> {
       String? userType,
       DateTime? startDate,
       DateTime? endDate,
-      String? status,
+      Status? status,
       PatientModel? profile});
 
   $PatientModelCopyWith<$Res>? get profile;
@@ -97,7 +97,7 @@ class _$VolunteerPostModelCopyWithImpl<$Res, $Val extends VolunteerPostModel>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Status?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -132,7 +132,7 @@ abstract class _$$VolunteerPostModelImplCopyWith<$Res>
       String? userType,
       DateTime? startDate,
       DateTime? endDate,
-      String? status,
+      Status? status,
       PatientModel? profile});
 
   @override
@@ -182,7 +182,7 @@ class __$$VolunteerPostModelImplCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Status?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -217,7 +217,7 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
   @override
   final DateTime? endDate;
   @override
-  final String? status;
+  final Status? status;
   @override
   final PatientModel? profile;
 
@@ -269,7 +269,7 @@ abstract class _VolunteerPostModel implements VolunteerPostModel {
       final String? userType,
       final DateTime? startDate,
       final DateTime? endDate,
-      final String? status,
+      final Status? status,
       final PatientModel? profile}) = _$VolunteerPostModelImpl;
 
   factory _VolunteerPostModel.fromJson(Map<String, dynamic> json) =
@@ -286,7 +286,7 @@ abstract class _VolunteerPostModel implements VolunteerPostModel {
   @override
   DateTime? get endDate;
   @override
-  String? get status;
+  Status? get status;
   @override
   PatientModel? get profile;
   @override
