@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:dynamic_form/responsive.dart';
+import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_image.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
+import 'package:dynamic_form/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -16,21 +18,19 @@ class DynamicFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
-        future: rootBundle
-            .loadString("packages/dynamic_form/assets/test_form.json"),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final fields = jsonDecode(snapshot.data!)["fields"] as List;
-            return FormLayout(fields: fields, title: "Dynamic Form");
-          } else if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+    return FutureBuilder(
+      future:
+          rootBundle.loadString("packages/dynamic_form/assets/test_form.json"),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final fields = jsonDecode(snapshot.data!)["fields"] as List;
+          return FormLayout(fields: fields, title: "Dynamic Form");
+        } else if (snapshot.hasError) {
+          return ErrorDisplayWidget(error: snapshot.error);
+        } else {
+          return const LoaderWidget();
+        }
+      },
     );
   }
 }
