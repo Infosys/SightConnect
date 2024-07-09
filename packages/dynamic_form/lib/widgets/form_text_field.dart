@@ -34,9 +34,9 @@ class FormTextField extends StatelessWidget {
         }
         return null;
       },
-      keyboardType: field.keyBoardType == "text"
-          ? TextInputType.text
-          : TextInputType.number,
+      keyboardType: field.keyBoardType == "number"
+          ? TextInputType.number
+          : TextInputType.text,
       onChanged: onChanged,
       readOnly: field.readOnly,
       initialValue: field.initialValue,

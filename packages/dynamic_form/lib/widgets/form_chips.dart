@@ -15,7 +15,7 @@ class FormChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final options = field.options;
-    return FormBuilderChoiceChip<OptionEntity>(
+    return FormBuilderChoiceChip<String>(
       name: field.label,
       decoration: InputDecoration(
         labelText: field.label,
@@ -25,8 +25,8 @@ class FormChip extends StatelessWidget {
       onChanged: onChanged,
       options: options
           .map((option) => FormBuilderChipOption(
-                value: option,
-                child: Text(option.toString()),
+                value: option.value,
+                child: Text(option.label),
               ))
           .toList(),
     );

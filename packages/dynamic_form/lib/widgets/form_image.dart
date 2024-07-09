@@ -28,25 +28,25 @@ class FormImage extends HookWidget {
         }
         return null;
       },
-      builder: (field) {
+      builder: (input) {
         return Container(
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
-            border: field.errorText != null
+            borderRadius: BorderRadius.circular(16.0),
+            border: input.errorText != null
                 ? Border.all(color: Colors.red)
-                : Border.all(color: Colors.grey),
+                : Border.all(color: Colors.grey.shade300),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
-                  'Image',
-                  style: TextStyle(
+                  field.label,
+                  style: const TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w500,
                   ),
