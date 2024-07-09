@@ -6,43 +6,43 @@ import '../data/entities/dynamic_form_json_entity.dart';
 class FormTextField extends StatelessWidget {
   const FormTextField({
     super.key,
-    required this.map,
+    required this.field,
     this.onChanged,
   });
 
-  final FieldEntity map;
+  final FieldEntity field;
   final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
-      name: map.label,
+      name: field.label,
       decoration: InputDecoration(
-        labelText: map.label,
-        hintText: map.hint,
+        labelText: field.label,
+        hintText: field.hint,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       validator: (value) {
         value = value ?? '';
-        if (map.isRequired && value.isEmpty) {
+        if (field.isRequired && value.isEmpty) {
           return 'This field is required';
         }
 
-        if (!RegExp(map.validation.pattern).hasMatch(value)) {
+        if (!RegExp(field.validation.pattern).hasMatch(value)) {
           return 'Invalid value';
         }
         return null;
       },
-      keyboardType: map.keyBoardType == "text"
+      keyboardType: field.keyBoardType == "text"
           ? TextInputType.text
           : TextInputType.number,
       onChanged: onChanged,
-      readOnly: map.readOnly,
-      initialValue: map.initialValue,
-      maxLength: map.maxLength,
-      maxLines: map.maxlines,
-      obscureText: map.obscure,
+      readOnly: field.readOnly,
+      initialValue: field.initialValue,
+      maxLength: field.maxLength,
+      maxLines: field.maxlines,
+      obscureText: field.obscure,
     );
   }
 }

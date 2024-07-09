@@ -6,18 +6,18 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 class FormDropDown extends StatelessWidget {
   const FormDropDown({
     super.key,
-    required this.map,
+    required this.field,
     this.onChanged,
   });
 
-  final FieldEntity map;
+  final FieldEntity field;
   final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final String label = map.label;
-    final String hint = map.hint;
-    final List<DropdownMenuItem<String>> options = map.options
+    final String label = field.label;
+    final String hint = field.hint;
+    final List<DropdownMenuItem<String>> options = field.options
         .cast<OptionEntity>()
         .map((option) => DropdownMenuItem<String>(
               value: option.value,
@@ -35,7 +35,7 @@ class FormDropDown extends StatelessWidget {
       ),
       items: options,
       onChanged: onChanged,
-      initialValue: map.initialValue,
+      initialValue: field.initialValue,
       validator:
           FormBuilderValidators.compose([FormBuilderValidators.required()]),
     );
