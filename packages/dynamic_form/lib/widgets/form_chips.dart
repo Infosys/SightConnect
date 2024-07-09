@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class FormChip extends StatelessWidget {
   const FormChip({
@@ -15,8 +14,7 @@ class FormChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String label = map['label'] as String;
-    final List<Map<String, dynamic>> options =
-        map['options'] as List<Map<String, dynamic>>;
+    final options = map['options'] as List;
 
     return FormBuilderChoiceChip<dynamic>(
       name: label,
@@ -26,8 +24,6 @@ class FormChip extends StatelessWidget {
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
-      validator:
-          FormBuilderValidators.compose([FormBuilderValidators.required()]),
       options: options
           .map(
             (option) => FormBuilderChipOption<dynamic>(

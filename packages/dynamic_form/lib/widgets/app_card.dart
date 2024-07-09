@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
 class AppCard extends StatelessWidget {
-  const AppCard({super.key, required this.child, this.title});
+  const AppCard({
+    super.key,
+    required this.child,
+    this.marginBottom,
+    this.title,
+  });
   final Widget child;
   final String? title;
+  final double? marginBottom;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: marginBottom ?? 0.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -15,7 +22,6 @@ class AppCard extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (title != null)
             Padding(

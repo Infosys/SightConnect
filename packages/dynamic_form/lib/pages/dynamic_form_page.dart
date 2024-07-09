@@ -5,6 +5,7 @@ import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
+import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_image.dart';
@@ -17,7 +18,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class DynamicFormPage extends StatelessWidget {
-  const DynamicFormPage({super.key});
+  const DynamicFormPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,63 +58,57 @@ class FormLayout extends StatelessWidget {
         title: Text(title),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FormBuilder(
-            key: formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (var section in sections)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: AppCard(
-                      title: section["sectionTitle"] as String,
-                      child: Wrap(
-                        runAlignment: WrapAlignment.start,
-                        alignment: WrapAlignment.start,
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          ..._buildFields(section["fields"], formKey).map(
-                            (widget) => SizedBox(
-                              width: Responsive.isMobile(context)
-                                  ? double.infinity
-                                  : 300,
-                              child: widget,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 24.0,
-                          horizontal: 32.0,
+        child: FormBuilder(
+          key: formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              for (var section in sections)
+                AppCard(
+                  title: section["sectionTitle"] as String,
+                  marginBottom: 16,
+                  child: Wrap(
+                    runAlignment: WrapAlignment.center,
+                    alignment: WrapAlignment.center,
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      ..._buildFields(section["fields"], formKey).map(
+                        (widget) => SizedBox(
+                          width: Responsive.isMobile(context)
+                              ? double.infinity
+                              : 300,
+                          child: widget,
                         ),
                       ),
-                      onPressed: () {
-                        formKey.currentState?.save();
-                        // formKey.currentState!
-                        //     .setInternalFieldValue("FILE", "file_hippo.png");
-                        if (formKey.currentState!.validate()) {
-                          log(formKey.currentState!.value.toString());
-                        } else {
-                          print('Form validation failed');
-                        }
-                      },
-                      child: const Text('Submit Form'),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24.0,
+                        horizontal: 32.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      formKey.currentState?.save();
+
+                      if (formKey.currentState!.validate()) {
+                        log(formKey.currentState!.value.toString());
+                      } else {
+                        print('Form validation failed');
+                      }
+                    },
+                    child: const Text('Submit Form'),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -162,12 +159,21 @@ class FormLayout extends StatelessWidget {
         case "image":
           return FormImage(
             onChanged: (value) {
+              key.currentState?.validate();
               key.currentState!.setInternalFieldValue('Image', value.path);
               debugPrint(value.toString());
             },
           );
         case "switch":
           return FormSwitch(
+            map: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
+
+        case "chips":
+          return FormChip(
             map: field,
             onChanged: (value) {
               debugPrint(value.toString());

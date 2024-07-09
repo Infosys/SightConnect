@@ -7,21 +7,21 @@
       "sectionTitle": "Personal Information",
       "fields": [
         {
-          "type": "text_field",  
-          "required": true,      
-          "readOnly": false,  
-          "obscure": false,  
-          "keyBoardType": "text", 
-          "initialValue": null,   
-          "label": "First Name",  
-          "hint": "Enter your first name", 
-          "validation": {        
-            "pattern": "^[a-zA-Z]+$",  
-            "errorMessage": "Please enter a valid first name (letters only)."  
+          "type": "text_field",
+          "required": true,
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "text",
+          "initialValue": null,
+          "label": "First Name",
+          "hint": "Enter your first name",
+          "validation": {
+            "pattern": "^[a-zA-Z]+$",
+            "errorMessage": "Please enter a valid first name (letters only)."
           },
-          "maxLength": 255,       
+          "maxLength": 255,
           "minLength": 1,
-          "maxlines": 1        
+          "maxlines": 1
         },
         {
           "type": "text_field",
@@ -66,34 +66,29 @@
             "errorMessage": "Please enter a valid email."
           }
         },
-        
-      
-    
         {
           "type": "dropdown",
           "label": "Age Group",
           "hint": "Select your age group",
           "options": [
-            { "value": "18-24", "label": "18-24 Years" },
-            { "value": "25-34", "label": "25-34 Years" },
-            { "value": "35-64", "label": "35-64 Years" },
-            { "value": "65+", "label": "65 Years and Above" }
+            {
+              "value": "18-24",
+              "label": "18-24 Years"
+            },
+            {
+              "value": "25-34",
+              "label": "25-34 Years"
+            },
+            {
+              "value": "35-64",
+              "label": "35-64 Years"
+            },
+            {
+              "value": "65+",
+              "label": "65 Years and Above"
+            }
           ],
           "initialValue": null
-        },
-        {
-          "type": "image",
-          "label": "Upload Signature",
-          "typeSupport":["PNG", "JPEG", "JPG"],
-          "hint": "Capture or upload your signature"
-        
-        },
-        {
-          "type": "file",
-          "label": "Health Insurance Card",
-          "typeSupport":["PDF", "DOCX", "DOC"],
-          "hint": "Upload your health insurance card"
-        
         },
         {
           "type": "date_time",
@@ -102,24 +97,28 @@
           "date": {
             "type": "date",
             "startDate": "1900-01-01",
-            "endDate": "2024-07-09",  
+            "endDate": "2024-07-09",
             "dateFormat": "yyyy-MM-dd"
           },
           "time": {
-            "type": "time",  
-            "format": "HH:mm:ss",  
-            "includeSeconds": false  
+            "type": "time",
+            "format": "HH:mm:ss",
+            "includeSeconds": false
           }
         },
-        
-        
         {
           "type": "radio",
           "direction": "vertical",
           "label": "Are you allergic to any medications?",
           "options": [
-            { "value": "yes", "label": "Yes" },
-            { "value": "no", "label": "No" }
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
           ],
           "initialValue": null
         },
@@ -128,8 +127,14 @@
           "direction": "vertical",
           "label": "Conditions I agree to:",
           "options": [
-            { "value": "condition1", "label": "Condition 1" },
-            { "value": "condition2", "label": "Condition 2" }
+            {
+              "value": "condition1",
+              "label": "Condition 1"
+            },
+            {
+              "value": "condition2",
+              "label": "Condition 2"
+            }
           ],
           "initialValue": []
         },
@@ -137,16 +142,43 @@
           "type": "switch",
           "label": "I agree to the terms and conditions",
           "initialValue": false,
-          "required": true    
-         
- }
-       
+          "required": true
+        },
+        {
+          "type": "chips",
+          "label": "Select your preferred language",
+          "options": [
+            {
+              "value": "condition1",
+              "label": "Condition 1"
+            },
+            {
+              "value": "condition2",
+              "label": "Condition 2"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "label": "Upload Signature",
+          "typeSupport": [
+            "PNG",
+            "JPEG",
+            "JPG"
+          ],
+          "hint": "Capture or upload your signature"
+        },
+        {
+          "type": "file",
+          "label": "Health Insurance Card",
+          "typeSupport": [
+            "PDF",
+            "DOCX",
+            "DOC"
+          ],
+          "hint": "Upload your health insurance card"
+        }
       ]
-
     }
-   
   ]
- 
-} 
-
-
+}
