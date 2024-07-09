@@ -1,4 +1,5 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 
 class DynamicFormJsonMapper {
@@ -35,7 +36,7 @@ class DynamicFormJsonMapper {
     }
     return fieldModel.map((field) {
       return FieldEntity(
-        type: field.type ?? '',
+        type: _mapToFormType(field.type),
         isRequired: field.isRequired ?? false,
         readOnly: field.readOnly ?? false,
         obscure: field.obscure ?? false,
@@ -74,5 +75,30 @@ class DynamicFormJsonMapper {
         label: option.label ?? '',
       );
     }).toList();
+  }
+
+  DynamicFormType _mapToFormType(String? value) {
+    switch (value) {
+      case 'text_field':
+        return DynamicFormType.TEXTFIELD;
+      case 'radio':
+        return DynamicFormType.RADIO;
+      case 'checkbox':
+        return DynamicFormType.CHECKBOX;
+      case 'dropdown':
+        return DynamicFormType.DROPDOWN;
+      case 'datetime':
+        return DynamicFormType.DATETIME;
+      case 'chips':
+        return DynamicFormType.CHIPS;
+      case 'slider':
+        return DynamicFormType.SLIDER;
+      case 'switch':
+        return DynamicFormType.SWITCH;
+      case 'file':
+        return DynamicFormType.FILE;
+      default:
+        return DynamicFormType.DEFAULT;
+    }
   }
 }

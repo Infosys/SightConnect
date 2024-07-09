@@ -1,3 +1,5 @@
+import 'package:dynamic_form/data/enums/enums.dart';
+
 class DynamicFormJsonEntity {
   final String title;
   final String description;
@@ -23,7 +25,7 @@ class SectionEntity {
 }
 
 class FieldEntity {
-  final String type;
+  final DynamicFormType type;
   final bool isRequired;
   final bool readOnly;
   final bool obscure;
