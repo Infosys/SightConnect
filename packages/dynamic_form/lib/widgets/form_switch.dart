@@ -16,7 +16,8 @@ class FormSwitch extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selected = useState(bool.tryParse(field.initialValue));
+    final initial = field.initialValue as bool? ?? false;
+    final selected = useState(initial);
     return FormBuilderSwitch(
       name: field.label,
       initialValue: selected.value,
@@ -27,7 +28,7 @@ class FormSwitch extends HookWidget {
           : null,
       title: Text(field.label),
       onChanged: (value) {
-        selected.value = value;
+        selected.value = value ?? false;
         onChanged(value ?? false);
       },
     );

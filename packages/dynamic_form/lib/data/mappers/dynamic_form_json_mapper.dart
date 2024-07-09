@@ -41,7 +41,7 @@ class DynamicFormJsonMapper {
         readOnly: field.readOnly ?? false,
         obscure: field.obscure ?? false,
         keyBoardType: field.keyBoardType ?? '',
-        initialValue: field.initialValue ?? '',
+        initialValue: field.initialValue,
         label: field.label ?? '',
         hint: field.hint ?? '',
         validation: ValidationEntity(

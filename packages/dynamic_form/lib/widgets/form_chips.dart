@@ -1,6 +1,7 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class FormChip extends StatelessWidget {
   const FormChip({
@@ -22,6 +23,11 @@ class FormChip extends StatelessWidget {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
+      validator: field.isRequired
+          ? FormBuilderValidators.compose([
+              FormBuilderValidators.required(),
+            ])
+          : null,
       onChanged: onChanged,
       options: options
           .map((option) => FormBuilderChipOption(

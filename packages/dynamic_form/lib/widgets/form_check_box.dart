@@ -14,7 +14,7 @@ class FormCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderCheckboxGroup(
+    return FormBuilderCheckboxGroup<String>(
       name: field.label,
       decoration: InputDecoration(
         labelText: field.label,
@@ -28,7 +28,7 @@ class FormCheckbox extends StatelessWidget {
                 child: Text(option.label),
               ))
           .toList(),
-      initialValue: [field.initialValue],
+      initialValue: field.initialValue as List<String>?,
     );
   }
 }

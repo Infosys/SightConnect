@@ -180,7 +180,7 @@ class FormLayout extends StatelessWidget {
             field: field,
             onChanged: (value) {
               key.currentState?.validate();
-              key.currentState!.setInternalFieldValue('Image', value.path);
+              key.currentState!.setInternalFieldValue(field.label, value.path);
               debugPrint(value.toString());
             },
           );

@@ -19,7 +19,7 @@ class FormRadio extends StatelessWidget {
 
     // final options = map['options'] as List;
 
-    return FormBuilderRadioGroup(
+    return FormBuilderRadioGroup<String>(
       name: field.label,
       decoration: InputDecoration(
         labelText: field.label,
@@ -37,6 +37,7 @@ class FormRadio extends StatelessWidget {
             ),
           )
           .toList(),
+      initialValue: field.initialValue,
     );
   }
 }

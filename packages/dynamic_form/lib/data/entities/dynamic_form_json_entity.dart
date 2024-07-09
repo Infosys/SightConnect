@@ -30,7 +30,7 @@ class FieldEntity {
   final bool readOnly;
   final bool obscure;
   final String keyBoardType;
-  final String initialValue;
+  final dynamic initialValue;
   final String label;
   final String hint;
   final ValidationEntity validation;

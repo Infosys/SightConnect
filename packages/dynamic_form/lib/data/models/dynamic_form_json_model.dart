@@ -41,7 +41,7 @@ class Field {
   bool? readOnly;
   bool? obscure;
   String? keyBoardType;
-  String? initialValue;
+  dynamic initialValue;
   String? label;
   String? hint;
   Validation? validation;
