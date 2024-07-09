@@ -1,4 +1,3 @@
-import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -21,25 +20,23 @@ class FormTextField extends StatelessWidget {
     final bool required =
         map['required'] ?? false; // Set default required to false
 
-    return AppCard(
-      child: FormBuilderTextField(
-        name: label,
-        decoration: InputDecoration(
-          labelText: label, // Use label directly
-          hintText: hint,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        ),
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(errorText: 'This field is required'),
-        ]),
-        keyboardType: map['keyboardType'] == "text"
-            ? TextInputType.text
-            : TextInputType.number,
-        onChanged: onChanged,
-        readOnly: map['readOnly'] ?? false, // Set default readOnly to false
-        initialValue: map['initialValue'],
+    return FormBuilderTextField(
+      name: label,
+      decoration: InputDecoration(
+        labelText: label, // Use label directly
+        hintText: hint,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
+      validator: FormBuilderValidators.compose([
+        FormBuilderValidators.required(errorText: 'This field is required'),
+      ]),
+      keyboardType: map['keyboardType'] == "text"
+          ? TextInputType.text
+          : TextInputType.number,
+      onChanged: onChanged,
+      readOnly: map['readOnly'] ?? false, // Set default readOnly to false
+      initialValue: map['initialValue'],
     );
   }
 }

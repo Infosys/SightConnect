@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dynamic_form/responsive.dart';
+import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
@@ -23,8 +24,8 @@ class DynamicFormPage extends StatelessWidget {
           rootBundle.loadString("packages/dynamic_form/assets/test_form.json"),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final fields = jsonDecode(snapshot.data!)["fields"] as List;
-          return FormLayout(fields: fields, title: "Dynamic Form");
+          final sections = jsonDecode(snapshot.data!)["sections"] as List;
+          return FormLayout(sections: sections, title: "Dynamic Form");
         } else if (snapshot.hasError) {
           return ErrorDisplayWidget(error: snapshot.error);
         } else {
@@ -38,11 +39,11 @@ class DynamicFormPage extends StatelessWidget {
 class FormLayout extends StatelessWidget {
   const FormLayout({
     super.key,
-    required this.fields,
+    required this.sections,
     required this.title,
   });
   final String title;
-  final List<dynamic> fields;
+  final List<dynamic> sections;
 
   @override
   Widget build(BuildContext context) {
@@ -59,25 +60,29 @@ class FormLayout extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Wrap(
-                  runAlignment: WrapAlignment.start,
-                  alignment: WrapAlignment.start,
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    ..._buildFields(fields).map(
-                      (widget) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: Responsive.isMobile(context)
-                              ? double.infinity
-                              : 300,
-                          child: widget,
-                        ),
+                for (var section in sections)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: AppCard(
+                      title: section["sectionTitle"] as String,
+                      child: Wrap(
+                        runAlignment: WrapAlignment.start,
+                        alignment: WrapAlignment.start,
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          ..._buildFields(section["fields"]).map(
+                            (widget) => SizedBox(
+                              width: Responsive.isMobile(context)
+                                  ? double.infinity
+                                  : 300,
+                              child: widget,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
                 const SizedBox(height: 20),
                 Row(
                   children: [

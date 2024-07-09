@@ -1,4 +1,3 @@
-import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -26,21 +25,19 @@ class FormDropDown extends StatelessWidget {
         .toList();
     final String? initialValue = map['initialValue'] as String?;
 
-    return AppCard(
-      child: FormBuilderDropdown<String>(
-        name: label,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: hint,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        ),
-        items: options,
-        onChanged: onChanged,
-        initialValue: initialValue,
-        validator:
-            FormBuilderValidators.compose([FormBuilderValidators.required()]),
+    return FormBuilderDropdown<String>(
+      name: label,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
+      items: options,
+      onChanged: onChanged,
+      initialValue: initialValue,
+      validator:
+          FormBuilderValidators.compose([FormBuilderValidators.required()]),
     );
   }
 }

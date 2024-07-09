@@ -1,4 +1,3 @@
-import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -19,26 +18,24 @@ class FormRadio extends StatelessWidget {
 
     final options = map['options'] as List;
 
-    return AppCard(
-      child: FormBuilderRadioGroup(
-        name: label, //
-        decoration: InputDecoration(
-          labelText: label,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        ),
-        onChanged: onChanged,
-        validator:
-            FormBuilderValidators.compose([FormBuilderValidators.required()]),
-        options: options
-            .map(
-              (option) => FormBuilderFieldOption(
-                value: option['value'],
-                child: Text(option['label'] as String),
-              ),
-            )
-            .toList(),
+    return FormBuilderRadioGroup(
+      name: label, //
+      decoration: InputDecoration(
+        labelText: label,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
+      onChanged: onChanged,
+      validator:
+          FormBuilderValidators.compose([FormBuilderValidators.required()]),
+      options: options
+          .map(
+            (option) => FormBuilderFieldOption(
+              value: option['value'],
+              child: Text(option['label'] as String),
+            ),
+          )
+          .toList(),
     );
   }
 }
