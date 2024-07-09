@@ -71,7 +71,7 @@ class FormLayout extends StatelessWidget {
                         spacing: 8,
                         runSpacing: 8,
                         children: [
-                          ..._buildFields(section["fields"]).map(
+                          ..._buildFields(section["fields"], formKey).map(
                             (widget) => SizedBox(
                               width: Responsive.isMobile(context)
                                   ? double.infinity
@@ -95,6 +95,8 @@ class FormLayout extends StatelessWidget {
                       ),
                       onPressed: () {
                         formKey.currentState?.save();
+                        // formKey.currentState!
+                        //     .setInternalFieldValue("FILE", "file_hippo.png");
                         if (formKey.currentState!.validate()) {
                           print(formKey.currentState!.value);
                         } else {
@@ -113,7 +115,8 @@ class FormLayout extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildFields(List<dynamic> fields) {
+  List<Widget> _buildFields(
+      List<dynamic> fields, GlobalKey<FormBuilderState> key) {
     return fields.map<Widget>((field) {
       switch (field["type"]) {
         case "text_field":
@@ -155,6 +158,7 @@ class FormLayout extends StatelessWidget {
           );
         case "image":
           return FormImage(
+            formKey: key,
             onChanged: (value) {
               debugPrint(value.toString());
             },
