@@ -15,10 +15,6 @@ class FormRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final String label = map['label'] as String;
-
-    // final options = map['options'] as List;
-
     return FormBuilderRadioGroup<String>(
       name: field.label,
       decoration: InputDecoration(
@@ -27,8 +23,9 @@ class FormRadio extends StatelessWidget {
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
-      validator:
-          FormBuilderValidators.compose([FormBuilderValidators.required()]),
+      validator: field.isRequired
+          ? FormBuilderValidators.compose([FormBuilderValidators.required()])
+          : null,
       options: field.options
           .map(
             (option) => FormBuilderFieldOption(

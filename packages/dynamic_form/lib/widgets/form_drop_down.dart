@@ -36,8 +36,9 @@ class FormDropDown extends StatelessWidget {
       items: options,
       onChanged: onChanged,
       initialValue: field.initialValue,
-      validator:
-          FormBuilderValidators.compose([FormBuilderValidators.required()]),
+      validator: field.isRequired
+          ? FormBuilderValidators.compose([FormBuilderValidators.required()])
+          : null,
     );
   }
 }

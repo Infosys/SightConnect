@@ -16,8 +16,7 @@ class FormSwitch extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initial = field.initialValue as bool? ?? false;
-    final selected = useState(initial);
+    final selected = useState<bool?>(null);
     return FormBuilderSwitch(
       name: field.label,
       initialValue: selected.value,

@@ -27,8 +27,8 @@ class DynamicFormPage extends StatelessWidget {
   });
   Future<DynamicFormJsonEntity>? _loadJson() async {
     await Future.delayed(const Duration(seconds: 2));
-    final json = await rootBundle
-        .loadString("packages/dynamic_form/assets/test_form.json");
+    final json =
+        await rootBundle.loadString("packages/dynamic_form/assets/test.json");
     try {
       return DynamicFormJsonMapper()
           .modeltoEntity(DynamicFormJsonModel.fromJson(jsonDecode(json)));
@@ -47,7 +47,9 @@ class DynamicFormPage extends StatelessWidget {
           final title = snapshot.data?.title ?? '';
           return FormLayout(sections: sections, title: title);
         } else if (snapshot.hasError) {
-          return ErrorDisplayWidget(error: snapshot.error);
+          return ErrorDisplayWidget(
+              error: snapshot.error,
+              stackTrace: snapshot.stackTrace.toString());
         } else {
           return const LoaderWidget();
         }
@@ -155,7 +157,7 @@ class FormLayout extends StatelessWidget {
 
         case DynamicFormType.DATETIME:
           return FormDataTimePicker(
-            name: field.label,
+            field: field,
             onChanged: (value) {
               debugPrint(value.toString());
             },

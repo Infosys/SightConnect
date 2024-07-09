@@ -79,23 +79,23 @@ class DynamicFormJsonMapper {
 
   DynamicFormType _mapToFormType(String? value) {
     switch (value) {
-      case 'text_field':
+      case 'TEXTFIELD':
         return DynamicFormType.TEXTFIELD;
-      case 'radio':
+      case 'RADIO':
         return DynamicFormType.RADIO;
-      case 'checkbox':
+      case 'CHECKBOX':
         return DynamicFormType.CHECKBOX;
-      case 'dropdown':
+      case 'DROPDOWN':
         return DynamicFormType.DROPDOWN;
-      case 'datetime':
+      case 'DATETIME':
         return DynamicFormType.DATETIME;
-      case 'chips':
+      case 'CHIPS':
         return DynamicFormType.CHIPS;
-      case 'slider':
+      case 'SLIDER':
         return DynamicFormType.SLIDER;
-      case 'switch':
+      case 'SWITCH':
         return DynamicFormType.SWITCH;
-      case 'file':
+      case 'FILE':
         return DynamicFormType.FILE;
       default:
         return DynamicFormType.DEFAULT;

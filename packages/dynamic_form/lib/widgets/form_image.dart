@@ -23,7 +23,7 @@ class FormImage extends HookWidget {
     return FormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (_) {
-        if (image.value == null) {
+        if (field.isRequired && image.value == null) {
           return 'Please choose an image';
         }
         return null;
