@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/services/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,9 @@ class FormImage extends HookWidget {
   const FormImage({
     super.key,
     required this.onChanged,
+    required this.field,
   });
-
+  final FieldEntity field;
   final Function(XFile) onChanged;
 
   @override

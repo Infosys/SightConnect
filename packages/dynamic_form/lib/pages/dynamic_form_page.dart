@@ -2,12 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
+import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
+import 'package:dynamic_form/widgets/form_image.dart';
+import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
 import 'package:dynamic_form/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -167,29 +171,30 @@ class FormLayout extends StatelessWidget {
         //       debugPrint(value.toString());
         //     },
         //   );
-        // case "image":
-        //   return FormImage(
-        //     onChanged: (value) {
-        //       key.currentState?.validate();
-        //       key.currentState!.setInternalFieldValue('Image', value.path);
-        //       debugPrint(value.toString());
-        //     },
-        //   );
-        // case "switch":
-        //   return FormSwitch(
-        //     map: field,
-        //     onChanged: (value) {
-        //       debugPrint(value.toString());
-        //     },
-        //   );
+        case DynamicFormType.FILE:
+          return FormImage(
+            field: field,
+            onChanged: (value) {
+              key.currentState?.validate();
+              key.currentState!.setInternalFieldValue('Image', value.path);
+              debugPrint(value.toString());
+            },
+          );
+        case DynamicFormType.SWITCH:
+          return FormSwitch(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
 
-        // case "chips":
-        //   return FormChip(
-        //     map: field,
-        //     onChanged: (value) {
-        //       debugPrint(value.toString());
-        //     },
-        //   );
+        case DynamicFormType.CHIPS:
+          return FormChip(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
         default:
           return Container();
       }
