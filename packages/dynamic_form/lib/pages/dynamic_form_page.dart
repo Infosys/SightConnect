@@ -8,10 +8,12 @@ import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
+import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_image.dart';
+import 'package:dynamic_form/widgets/form_radio.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
 import 'package:dynamic_form/widgets/loader_widget.dart';
@@ -158,20 +160,20 @@ class FormLayout extends StatelessWidget {
             },
           );
 
-        // case "radio":
-        //   return FormRadio(
-        //     map: field,
-        //     onChanged: (value) {
-        //       debugPrint(value.toString());
-        //     },
-        //   );
-        // case "check":
-        //   return FormCheckbox(
-        //     map: field,
-        //     onChanged: (value) {
-        //       debugPrint(value.toString());
-        //     },
-        //   );
+        case DynamicFormType.RADIO:
+          return FormRadio(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
+        case DynamicFormType.CHECKBOX:
+          return FormCheckbox(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
         case DynamicFormType.FILE:
           return FormImage(
             field: field,
