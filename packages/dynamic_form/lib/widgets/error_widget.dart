@@ -13,6 +13,7 @@ class ErrorDisplayWidget extends StatelessWidget {
       body: Center(
         child: Text(
           "An error occurred: $error",
+          textAlign: TextAlign.center,
           style: const TextStyle(color: Colors.red),
         ),
       ),

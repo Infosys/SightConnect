@@ -21,12 +21,15 @@ class DynamicFormPage extends StatelessWidget {
   const DynamicFormPage({
     super.key,
   });
+  Future<String> _loadJson() async {
+    await Future.delayed(const Duration(seconds: 2));
+    return rootBundle.loadString("packages/dynamic_form/assets/test_form.json");
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future:
-          rootBundle.loadString("packages/dynamic_form/assets/test_form.json"),
+      future: _loadJson(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final sections = jsonDecode(snapshot.data!)["sections"] as List;
