@@ -32,8 +32,8 @@ class FormRadio extends StatelessWidget {
       options: field.options
           .map(
             (option) => FormBuilderFieldOption(
-              value: field.options,
-              child: Text(option.toString()),
+              value: option.value,
+              child: Text(option.label),
             ),
           )
           .toList(),
