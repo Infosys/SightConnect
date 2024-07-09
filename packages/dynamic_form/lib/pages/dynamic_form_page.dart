@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
@@ -57,6 +58,7 @@ class FormLayout extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: FormBuilder(
             key: formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -98,7 +100,7 @@ class FormLayout extends StatelessWidget {
                         // formKey.currentState!
                         //     .setInternalFieldValue("FILE", "file_hippo.png");
                         if (formKey.currentState!.validate()) {
-                          print(formKey.currentState!.value);
+                          log(formKey.currentState!.value.toString());
                         } else {
                           print('Form validation failed');
                         }
@@ -158,8 +160,8 @@ class FormLayout extends StatelessWidget {
           );
         case "image":
           return FormImage(
-            formKey: key,
             onChanged: (value) {
+              key.currentState!.setInternalFieldValue('Image', value.path);
               debugPrint(value.toString());
             },
           );

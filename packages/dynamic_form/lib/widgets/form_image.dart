@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dynamic_form/services/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,16 +11,16 @@ class FormImage extends HookWidget {
   const FormImage({
     super.key,
     required this.onChanged,
-    required this.formKey,
   });
-  final GlobalKey<FormBuilderState> formKey;
+
   final Function(XFile) onChanged;
 
   @override
   Widget build(BuildContext context) {
     final image = useState<XFile?>(null);
     return FormField(
-      validator: (value) {
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (_) {
         if (image.value == null) {
           return 'Please choose an image';
         }
@@ -64,8 +63,6 @@ class FormImage extends HookWidget {
                   try {
                     final img = await ImagePickerService.pickImage();
                     if (img != null) {
-                      formKey.currentState!
-                          .setInternalFieldValue('Image', img.path);
                       image.value = img;
                       onChanged(img);
                     } else {

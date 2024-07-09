@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class FormTextField extends StatelessWidget {
   const FormTextField({
@@ -14,23 +13,28 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool required =
-        map['required'] ?? false; // Set default required to false
+    final bool required = map['required'] ?? false;
+    final String? regex = map["validation"]["pattern"];
+    print(regex);
 
     return FormBuilderTextField(
       name: map['label'],
       decoration: InputDecoration(
-        labelText: map['label'], // Use label directly
+        labelText: map['label'],
         hintText: map['hint'],
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
-      validator: required
-          ? FormBuilderValidators.compose([
-              FormBuilderValidators.required(
-                  errorText: 'This field is required'),
-            ])
-          : null,
+      validator: (value) {
+        value = value ?? '';
+        if (required && value.isEmpty) {
+          return 'This field is required';
+        }
+        if (regex != null && !RegExp(regex).hasMatch(value)) {
+          return 'Invalid value';
+        }
+        return null;
+      },
       keyboardType: map['keyboardType'] == "text"
           ? TextInputType.text
           : TextInputType.number,
