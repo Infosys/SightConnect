@@ -19,7 +19,6 @@
             "pattern": "^[a-zA-Z]+$",  
             "errorMessage": "Please enter a valid first name (letters only)."  
           },
-             
           "maxLength": 255,       
           "minLength": 1,
           "maxlines": 1        

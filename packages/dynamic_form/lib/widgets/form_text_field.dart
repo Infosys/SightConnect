@@ -14,30 +14,32 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String label =
-        map['label'] as String; // Ensure label is cast as String
-    final String hint = map['hint'] as String;
     final bool required =
         map['required'] ?? false; // Set default required to false
 
     return FormBuilderTextField(
-      name: label,
+      name: map['label'],
       decoration: InputDecoration(
-        labelText: label, // Use label directly
-        hintText: hint,
+        labelText: map['label'], // Use label directly
+        hintText: map['hint'],
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(errorText: 'This field is required'),
-      ]),
-
+      validator: required
+          ? FormBuilderValidators.compose([
+              FormBuilderValidators.required(
+                  errorText: 'This field is required'),
+            ])
+          : null,
       keyboardType: map['keyboardType'] == "text"
           ? TextInputType.text
           : TextInputType.number,
       onChanged: onChanged,
-      readOnly: map['readOnly'] ?? false, // Set default readOnly to false
+      readOnly: map['readOnly'] ?? false,
       initialValue: map['initialValue'],
+      maxLength: map['maxLength'],
+      maxLines: map['maxLines'],
+      obscureText: map['obscure'],
     );
   }
 }
