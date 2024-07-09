@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_card.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,8 @@ class VisionEventListDetails extends ConsumerWidget {
                   .setEventId(response[index].id.toString());
               SharedPreferenceService.storeEventId(
                   response[index].id.toString());
+              logger.f(
+                  "Event id in event list details page : ${SharedPreferenceService.getEventId!}");
               Navigator.push(
                 context,
                 MaterialPageRoute(

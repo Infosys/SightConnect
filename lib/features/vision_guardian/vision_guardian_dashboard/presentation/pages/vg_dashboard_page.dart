@@ -31,6 +31,7 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
     final loc = context.loc!;
 
     if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      // add this line
       ref.listen(getVolunteerProfileProvider, (previous, next) {
         if (next.hasError) {
           ref.read(initializationProvider).logout().then((value) {
@@ -57,12 +58,13 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
                         final VisionGuardianEventModel event;
 
                         event = data.firstWhere((element) {
-                          ref
-                              .read(addEventDetailsProvider)
-                              .setEventId(element.id.toString());
                           return element.id ==
                               int.parse(SharedPreferenceService.getEventId!);
                         });
+
+                        ref
+                            .read(addEventDetailsProvider)
+                            .setEventId(SharedPreferenceService.getEventId!);
 
                         return VisionGuardianEventDetailsPage(
                           eventDetails: event,
@@ -123,13 +125,13 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
                         final VisionGuardianEventModel event;
 
                         event = data.firstWhere((element) {
-                          ref
-                              .read(addEventDetailsProvider)
-                              .setEventId(element.id.toString());
                           return element.id ==
                               int.parse(SharedPreferenceService.getEventId!);
                         });
 
+                        ref
+                            .read(addEventDetailsProvider)
+                            .setEventId(SharedPreferenceService.getEventId!);
                         return VisionGuardianEventDetailsPage(
                           eventDetails: event,
                         );

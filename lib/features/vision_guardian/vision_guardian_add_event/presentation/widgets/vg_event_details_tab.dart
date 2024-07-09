@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patients_tab.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -249,7 +250,9 @@ class EventDetailsTab extends HookConsumerWidget {
                                 ref
                                     .read(addEventDetailsProvider)
                                     .filterListEvents(0, "");
-                                Navigator.pop(context);
+                                Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(
+                                  builder: (context) => const VisionGuardianDashboardPage(),
+                                ), (route) => false, );
                               } else {
                                 Fluttertoast.showToast(
                                     msg: loc.vgEventDeletionFailed);

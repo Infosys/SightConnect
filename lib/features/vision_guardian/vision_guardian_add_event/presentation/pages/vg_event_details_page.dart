@@ -29,6 +29,8 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
     var tabIndex = useState(0);
     var searchVisible = useState<bool>(true);
     final loc = context.loc!;
+    // ref.read(addEventDetailsProvider).setEventId(eventDetails.id.toString());
+    // ref.read(triageMemberProvider).setTestPersonId(eventDetails.id!);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

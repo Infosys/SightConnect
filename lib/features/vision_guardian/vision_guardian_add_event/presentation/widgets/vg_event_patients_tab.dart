@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/entities/triage_report_brief_entity.dart';
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessment_report_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
@@ -16,15 +17,33 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EventPatientsTab extends ConsumerWidget {
+class EventPatientsTab extends ConsumerStatefulWidget {
   final String patientsType;
 
   const EventPatientsTab({Key? key, required this.patientsType})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EventPatientsTab> createState() => _EventPatientsTabState();
+}
+
+class _EventPatientsTabState extends ConsumerState<EventPatientsTab>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final model = ref.watch(addEventDetailsProvider);
+      model.setEventId(SharedPreferenceService.getEventId!);
+      model.loadingToggle();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final model = ref.watch(addEventDetailsProvider);
+
     var response = model.listOfEventPatients;
     var loading = model.getisLoading;
     var error = model.error;
@@ -55,7 +74,7 @@ class EventPatientsTab extends ConsumerWidget {
       child: LoadingOverlay(
         ignoreOverlayColor: model.initialValue,
         isLoading: loading,
-        child: vgPatientTabs(context, response, ref, patientsType),
+        child: vgPatientTabs(context, response, ref, widget.patientsType),
       ),
     );
   }
