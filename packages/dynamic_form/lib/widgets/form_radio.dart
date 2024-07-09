@@ -16,9 +16,13 @@ class FormRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderRadioGroup<String>(
+      wrapDirection: Axis.vertical,
+      wrapAlignment: WrapAlignment.start,
+      wrapRunAlignment: WrapAlignment.start,
+      separator: const SizedBox(height: 10),
       name: field.label,
       decoration: InputDecoration(
-        labelText: field.label,
+        hintText: field.label,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),

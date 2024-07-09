@@ -16,6 +16,7 @@ class FormTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      autofocus: false,
       name: field.label,
       decoration: InputDecoration(
         labelText: field.label,

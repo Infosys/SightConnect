@@ -16,4 +16,17 @@ class ImagePickerService {
       return null;
     }
   }
+
+  static Future<List<XFile>> pickImages({
+    ImageSource source = ImageSource.gallery,
+  }) async {
+    try {
+      ImagePicker imagePicker = ImagePicker();
+      final pickedFiles = await imagePicker.pickMultiImage();
+      return pickedFiles;
+    } catch (e) {
+      debugPrint('Error picking images: $e');
+      return [];
+    }
+  }
 }

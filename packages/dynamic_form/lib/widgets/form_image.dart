@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/services/image_picker.dart';
@@ -15,66 +16,105 @@ class FormImage extends HookWidget {
     required this.field,
   });
   final FieldEntity field;
-  final Function(XFile) onChanged;
+  final Function(List<XFile>) onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final image = useState<XFile?>(null);
-    return FormField(
+    final images = useState<List<XFile>>([]);
+    final showAllImages = useState<bool>(false);
+    return FormField<List<XFile>>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (_) {
-        if (field.isRequired && image.value == null) {
-          return 'Please choose an image';
+      validator: (value) {
+        value = value ?? [];
+        if (field.isRequired && value.isEmpty) {
+          return 'Please choose at least one image';
         }
         return null;
       },
-      builder: (input) {
+      builder: (state) {
         return Container(
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16.0),
-            border: input.errorText != null
+            border: state.errorText != null
                 ? Border.all(color: Colors.red)
                 : Border.all(color: Colors.grey.shade300),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: Text(
-                  field.label,
-                  style: const TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+              Text(field.label),
               const SizedBox(height: 16.0),
-              ImageDisplay(
-                image: image.value,
-                borderRadius: 8.0,
-                height: 300,
-                width: 300,
+              Wrap(
+                spacing: 8.0,
+                runSpacing: 8.0,
+                children: [
+                  ...images.value
+                      .sublist(
+                          0,
+                          showAllImages.value
+                              ? images.value.length
+                              : math.min(2, images.value.length))
+                      .map((image) => Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              ImageDisplay(
+                                image: image,
+                                borderRadius: 8.0,
+                                height: 100,
+                                width: 100,
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.remove_circle),
+                                onPressed: () {
+                                  images.value = List.from(images.value)
+                                    ..remove(image);
+                                  onChanged(images.value);
+                                },
+                              ),
+                            ],
+                          )),
+                  if (images.value.length > 2)
+                    InkWell(
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            showAllImages.value
+                                ? 'Show less'
+                                : '${images.value.length - 2} more...',
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+                      onTap: () => showAllImages.value = !showAllImages.value,
+                    ),
+                ],
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
                   try {
-                    final img = await ImagePickerService.pickImage();
-                    if (img != null) {
-                      image.value = img;
-                      onChanged(img);
+                    final imgs = await ImagePickerService.pickImages();
+                    if (imgs.isNotEmpty) {
+                      images.value = List.from(images.value)..addAll(imgs);
+                      onChanged(images.value);
+                      state.didChange(images.value);
                     } else {
-                      debugPrint('No image selected.');
+                      debugPrint('No images selected.');
                     }
                   } catch (e) {
-                    debugPrint('Error picking image: $e');
+                    debugPrint('Error picking images: $e');
                   }
                 },
-                child: const Text('Choose Image'),
+                child: const Text('Choose Images'),
               ),
             ],
           ),

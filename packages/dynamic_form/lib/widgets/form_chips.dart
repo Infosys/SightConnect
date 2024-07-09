@@ -11,15 +11,18 @@ class FormChip extends StatelessWidget {
   });
 
   final FieldEntity field;
-  final Function(dynamic)? onChanged;
+  final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     final options = field.options;
     return FormBuilderChoiceChip<String>(
       name: field.label,
+      spacing: 10,
+      avatarBorder: const CircleBorder(),
       decoration: InputDecoration(
         labelText: field.label,
+        labelStyle: const TextStyle(color: Colors.black),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -32,7 +35,8 @@ class FormChip extends StatelessWidget {
       options: options
           .map((option) => FormBuilderChipOption(
                 value: option.value,
-                child: Text(option.label),
+                child: Text(option.label,
+                    style: const TextStyle(color: Colors.black)),
               ))
           .toList(),
     );

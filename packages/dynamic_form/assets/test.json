@@ -252,7 +252,12 @@
             "type": "SWITCH",
             "label": "I agree to the terms and conditions",
             "initialValue": false,
-            "isRequired": true
+            "isRequired": true,
+            "options": [
+              {"value": "condition1", "label": "Condition 1"},
+              {"value": "condition2", "label": "Condition 2"}
+            ]
+           
           },
           {
             "type": "CHIPS",
@@ -264,6 +269,7 @@
           },
           {
             "type": "FILE",
+            "isRequired": true,
             "label": "Health Insurance Card",
             "typeSupport": ["PDF", "DOCX", "DOC"],
             "hint": "Upload your health insurance card"
