@@ -9,6 +9,7 @@ import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
+import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_image.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
@@ -134,28 +135,28 @@ class FormLayout extends StatelessWidget {
     }
     return fields.map<Widget>((field) {
       switch (field.type) {
-        case "text_field":
+        case DynamicFormType.TEXTFIELD:
           return FormTextField(
-            map: field,
+            field: field,
             onChanged: (value) {
               debugPrint(value);
             },
           );
 
-        case "dropdown":
+        case DynamicFormType.DROPDOWN:
           return FormDropDown(
-              map: field,
+              field: field,
               onChanged: (value) {
                 debugPrint(value);
               });
 
-        // case "date_time":
-        //   return FormDataTimePicker(
-        //     name: field["label"] as String,
-        //     onChanged: (value) {
-        //       debugPrint(value.toString());
-        //     },
-        //   );
+        case DynamicFormType.DATETIME:
+          return FormDataTimePicker(
+            name: field.label,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
 
         // case "radio":
         //   return FormRadio(
