@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
+import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
-import 'package:dynamic_form/widgets/form_check_box.dart';
-import 'package:dynamic_form/widgets/form_chips.dart';
-import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
-import 'package:dynamic_form/widgets/form_image.dart';
-import 'package:dynamic_form/widgets/form_radio.dart';
-import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
 import 'package:dynamic_form/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +18,16 @@ class DynamicFormPage extends StatelessWidget {
   const DynamicFormPage({
     super.key,
   });
-  Future<String> _loadJson() async {
+  Future<DynamicFormJsonEntity>? _loadJson() async {
     await Future.delayed(const Duration(seconds: 2));
-    return rootBundle.loadString("packages/dynamic_form/assets/test_form.json");
+    final json = await rootBundle
+        .loadString("packages/dynamic_form/assets/test_form.json");
+    try {
+      return DynamicFormJsonMapper()
+          .modeltoEntity(DynamicFormJsonModel.fromJson(jsonDecode(json)));
+    } catch (e) {
+      throw Exception('Error loading form $e');
+    }
   }
 
   @override
@@ -32,8 +36,8 @@ class DynamicFormPage extends StatelessWidget {
       future: _loadJson(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final sections = jsonDecode(snapshot.data!)["sections"] as List;
-          return FormLayout(sections: sections, title: "Dynamic Form");
+          return FormLayout(
+              sections: snapshot.data?.sections, title: "Dynamic Form");
         } else if (snapshot.hasError) {
           return ErrorDisplayWidget(error: snapshot.error);
         } else {
@@ -51,7 +55,7 @@ class FormLayout extends StatelessWidget {
     required this.title,
   });
   final String title;
-  final List<dynamic> sections;
+  final List<SectionEntity>? sections;
 
   @override
   Widget build(BuildContext context) {
@@ -67,27 +71,28 @@ class FormLayout extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              for (var section in sections)
-                AppCard(
-                  title: section["sectionTitle"] as String,
-                  marginBottom: 16,
-                  child: Wrap(
-                    runAlignment: WrapAlignment.center,
-                    alignment: WrapAlignment.center,
-                    spacing: 16,
-                    runSpacing: 16,
-                    children: [
-                      ..._buildFields(section["fields"], formKey).map(
-                        (widget) => SizedBox(
-                          width: Responsive.isMobile(context)
-                              ? double.infinity
-                              : 300,
-                          child: widget,
+              if (sections != null)
+                for (var section in sections!)
+                  AppCard(
+                    title: section.sectionTitle,
+                    marginBottom: 16,
+                    child: Wrap(
+                      runAlignment: WrapAlignment.center,
+                      alignment: WrapAlignment.center,
+                      spacing: 16,
+                      runSpacing: 16,
+                      children: [
+                        ..._buildFields(section.fields, formKey).map(
+                          (widget) => SizedBox(
+                            width: Responsive.isMobile(context)
+                                ? double.infinity
+                                : 300,
+                            child: widget,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
               const SizedBox(height: 20),
               Row(
                 children: [
@@ -119,9 +124,12 @@ class FormLayout extends StatelessWidget {
   }
 
   List<Widget> _buildFields(
-      List<dynamic> fields, GlobalKey<FormBuilderState> key) {
+      List<FieldEntity>? fields, GlobalKey<FormBuilderState> key) {
+    if (fields == null) {
+      return [];
+    }
     return fields.map<Widget>((field) {
-      switch (field["type"]) {
+      switch (field.type) {
         case "text_field":
           return FormTextField(
             map: field,
@@ -137,51 +145,51 @@ class FormLayout extends StatelessWidget {
                 debugPrint(value);
               });
 
-        case "date_time":
-          return FormDataTimePicker(
-            name: field["label"] as String,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
+        // case "date_time":
+        //   return FormDataTimePicker(
+        //     name: field["label"] as String,
+        //     onChanged: (value) {
+        //       debugPrint(value.toString());
+        //     },
+        //   );
 
-        case "radio":
-          return FormRadio(
-            map: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-        case "check":
-          return FormCheckbox(
-            map: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-        case "image":
-          return FormImage(
-            onChanged: (value) {
-              key.currentState?.validate();
-              key.currentState!.setInternalFieldValue('Image', value.path);
-              debugPrint(value.toString());
-            },
-          );
-        case "switch":
-          return FormSwitch(
-            map: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
+        // case "radio":
+        //   return FormRadio(
+        //     map: field,
+        //     onChanged: (value) {
+        //       debugPrint(value.toString());
+        //     },
+        //   );
+        // case "check":
+        //   return FormCheckbox(
+        //     map: field,
+        //     onChanged: (value) {
+        //       debugPrint(value.toString());
+        //     },
+        //   );
+        // case "image":
+        //   return FormImage(
+        //     onChanged: (value) {
+        //       key.currentState?.validate();
+        //       key.currentState!.setInternalFieldValue('Image', value.path);
+        //       debugPrint(value.toString());
+        //     },
+        //   );
+        // case "switch":
+        //   return FormSwitch(
+        //     map: field,
+        //     onChanged: (value) {
+        //       debugPrint(value.toString());
+        //     },
+        //   );
 
-        case "chips":
-          return FormChip(
-            map: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
+        // case "chips":
+        //   return FormChip(
+        //     map: field,
+        //     onChanged: (value) {
+        //       debugPrint(value.toString());
+        //     },
+        //   );
         default:
           return Container();
       }

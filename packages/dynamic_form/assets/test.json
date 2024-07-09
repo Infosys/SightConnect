@@ -1,2 +1,47 @@
-
-  
+{
+    "type": "text_field",
+    "required": true,
+    "readOnly": false,
+    "obscure": false,
+    "direction": "vertical",
+    "keyBoardType": "text",
+    "label": "First Name",
+    "hint": "Enter your first name",
+    "defaultValue": "John",
+    "initialValueList": [
+        {
+            "value": "John",
+            "label": "John"
+        },
+        {
+            "value": "Jane",
+            "label": "Jane"
+        }
+    ],
+    "optionsList": [
+        {
+            "value": "18-24",
+            "label": "18-24 Years"
+        },
+        {
+            "value": "25-34",
+            "label": "25-34 Years"
+        }
+    ],
+    "typeSupport": [
+        "PNG",
+        "JPEG",
+        "JPG"
+    ],
+    "conditionalDisplay": {
+        "condition": "age",
+        "value": "18-24"
+    },
+    "validation": {
+        "pattern": "^[a-zA-Z]+$",
+        "errorMessage": "Please enter a valid first name (letters only).",
+        "minValue": 1,
+        "maxValue": 100,
+        "maxlines": 1
+    }
+}

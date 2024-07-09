@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+import '../data/entities/dynamic_form_json_entity.dart';
+
 class FormTextField extends StatelessWidget {
   const FormTextField({
     super.key,
@@ -8,41 +10,39 @@ class FormTextField extends StatelessWidget {
     this.onChanged,
   });
 
-  final Map<String, dynamic> map;
+  final FieldEntity map;
   final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final bool required = map['required'] ?? false;
-    final String? regex = map["validation"]["pattern"];
-
     return FormBuilderTextField(
-      name: map['label'],
+      name: map.label,
       decoration: InputDecoration(
-        labelText: map['label'],
-        hintText: map['hint'],
+        labelText: map.label,
+        hintText: map.hint,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       validator: (value) {
         value = value ?? '';
-        if (required && value.isEmpty) {
+        if (map.isRequired && value.isEmpty) {
           return 'This field is required';
         }
-        if (regex != null && !RegExp(regex).hasMatch(value)) {
+
+        if (!RegExp(map.validation.pattern).hasMatch(value)) {
           return 'Invalid value';
         }
         return null;
       },
-      keyboardType: map['keyboardType'] == "text"
+      keyboardType: map.keyBoardType == "text"
           ? TextInputType.text
           : TextInputType.number,
       onChanged: onChanged,
-      readOnly: map['readOnly'] ?? false,
-      initialValue: map['initialValue'],
-      maxLength: map['maxLength'],
-      maxLines: map['maxLines'],
-      obscureText: map['obscure'],
+      readOnly: map.readOnly,
+      initialValue: map.initialValue,
+      maxLength: map.maxLength,
+      maxLines: map.maxlines,
+      obscureText: map.obscure,
     );
   }
 }
