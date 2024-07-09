@@ -132,7 +132,14 @@
             { "value": "condition2", "label": "Condition 2" }
           ],
           "initialValue": []
-        }
+        },
+        {
+          "type": "switch",
+          "label": "I agree to the terms and conditions",
+          "initialValue": false,
+          "required": true    
+         
+ }
        
       ]
 

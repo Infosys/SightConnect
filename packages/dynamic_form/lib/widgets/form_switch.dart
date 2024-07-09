@@ -17,11 +17,11 @@ class FormSwitch extends HookWidget {
   Widget build(BuildContext context) {
     final selected = useState(map['initialValue']);
     return FormBuilderSwitch(
-      name: map['name'],
+      name: map['label'],
       initialValue: selected.value,
       validator:
           FormBuilderValidators.required(errorText: 'This field is required'),
-      title: Text(map['title']),
+      title: Text(map['label']),
       onChanged: (value) {
         selected.value = value;
         onChanged(value ?? false);

@@ -9,6 +9,7 @@ import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_image.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
+import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
 import 'package:dynamic_form/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -162,6 +163,13 @@ class FormLayout extends StatelessWidget {
           return FormImage(
             onChanged: (value) {
               key.currentState!.setInternalFieldValue('Image', value.path);
+              debugPrint(value.toString());
+            },
+          );
+        case "switch":
+          return FormSwitch(
+            map: field,
+            onChanged: (value) {
               debugPrint(value.toString());
             },
           );

@@ -15,7 +15,6 @@ class FormTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool required = map['required'] ?? false;
     final String? regex = map["validation"]["pattern"];
-    print(regex);
 
     return FormBuilderTextField(
       name: map['label'],
