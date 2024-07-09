@@ -85,119 +85,7 @@
         {
           "type": "image",
           "label": "Upload Signature",
-          "hint": "Capture or upload your signature",
-          "onImagePicked": "handleImagePicked" 
-        },
-        {
-          "type": "date_time",
-          "label": "Date of Birth",
-          "initialValue": null,
-          "dateFormat": "yyyy-MM-dd"
-        },
-        {
-          "type": "radio",
-          "label": "Are you allergic to any medications?",
-          "options": [
-            { "value": "yes", "label": "Yes" },
-            { "value": "no", "label": "No" }
-          ],
-          "initialValue": null
-        },
-        {
-          "type": "check",
-          "label": "Conditions I agree to:",
-          "options": [
-            { "value": "condition1", "label": "Condition 1" },
-            { "value": "condition2", "label": "Condition 2" }
-          ],
-          "initialValue": []
-        }
-       
-      ]
-
-    },
-    {
-      "sectionTitle": "Personal Information",
-      "fields": [
-        {
-          "type": "text_field",  
-          "required": true,      
-          "readOnly": false,  
-          "obscure": false,  
-          "keyBoardType": "text", 
-          "initialValue": null,   
-          "label": "First Name",  
-          "hint": "Enter your first name", 
-          "validation": {        
-            "pattern": "^[a-zA-Z]+$",  
-            "errorMessage": "Please enter a valid first name (letters only)."  
-          },
-             
-          "maxLength": 255,       
-          "minLength": 1,
-          "maxlines": 1        
-        },
-        {
-          "type": "text_field",
-          "required": true,
-          "readOnly": false,
-          "obscure": false,
-          "keyBoardType": "text",
-          "initialValue": null,
-          "label": "Last Name",
-          "hint": "Enter your last name",
-          "validation": {
-            "pattern": "^[a-zA-Z]+$",
-            "errorMessage": "Please enter a valid last name (letters only)."
-          },
-          "maxLength": 255,
-          "minLength": 1,
-          "maxlines": 1
-        },
-        {
-          "type": "text_field",
-          "required": true,
-          "readOnly": false,
-          "obscure": false,
-          "keyBoardType": "phone",
-          "label": "Phone Number",
-          "hint": "Enter your phone number",
-          "validation": {
-            "pattern": "^[0-9]{10}$",
-            "errorMessage": "Please enter a valid phone number."
-          }
-        },
-        {
-          "type": "text_field",
-          "required": true,
-          "readOnly": false,
-          "obscure": false,
-          "keyBoardType": "email",
-          "label": "Email",
-          "hint": "Enter your email",
-          "validation": {
-            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-            "errorMessage": "Please enter a valid email."
-          }
-        },
-        
-      
-    
-        {
-          "type": "dropdown",
-          "label": "Age Group",
-          "hint": "Select your age group",
-          "options": [
-            { "value": "18-24", "label": "18-24 Years" },
-            { "value": "25-34", "label": "25-34 Years" },
-            { "value": "35-64", "label": "35-64 Years" },
-            { "value": "65+", "label": "65 Years and Above" }
-          ],
-          "initialValue": null
-        },
-        {
-          "type": "image",
-          "label": "Upload Signature",
+          "typeSupport":["PNG", "JPEG", "JPG"],
           "hint": "Capture or upload your signature",
           "onImagePicked": "handleImagePicked" 
         },
@@ -229,6 +117,7 @@
       ]
 
     }
+   
   ]
  
 }

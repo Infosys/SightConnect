@@ -31,6 +31,7 @@ class FormTextField extends StatelessWidget {
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(errorText: 'This field is required'),
       ]),
+
       keyboardType: map['keyboardType'] == "text"
           ? TextInputType.text
           : TextInputType.number,
