@@ -28,7 +28,7 @@ class FormCheckbox extends StatelessWidget {
                 child: Text(option.label),
               ))
           .toList(),
-      initialValue: const [],
+      initialValue: [field.initialValue],
     );
   }
 }
