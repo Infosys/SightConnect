@@ -86,17 +86,37 @@
           "type": "image",
           "label": "Upload Signature",
           "typeSupport":["PNG", "JPEG", "JPG"],
-          "hint": "Capture or upload your signature",
-          "onImagePicked": "handleImagePicked" 
+          "hint": "Capture or upload your signature"
+        
+        },
+        {
+          "type": "file",
+          "label": "Health Insurance Card",
+          "typeSupport":["PDF", "DOCX", "DOC"],
+          "hint": "Upload your health insurance card"
+        
         },
         {
           "type": "date_time",
           "label": "Date of Birth",
           "initialValue": null,
-          "dateFormat": "yyyy-MM-dd"
+          "date": {
+            "type": "date",
+            "startDate": "1900-01-01",
+            "endDate": "2024-07-09",  
+            "dateFormat": "yyyy-MM-dd"
+          },
+          "time": {
+            "type": "time",  
+            "format": "HH:mm:ss",  
+            "includeSeconds": false  
+          }
         },
+        
+        
         {
           "type": "radio",
+          "direction": "vertical",
           "label": "Are you allergic to any medications?",
           "options": [
             { "value": "yes", "label": "Yes" },
@@ -106,6 +126,7 @@
         },
         {
           "type": "check",
+          "direction": "vertical",
           "label": "Conditions I agree to:",
           "options": [
             { "value": "condition1", "label": "Condition 1" },
