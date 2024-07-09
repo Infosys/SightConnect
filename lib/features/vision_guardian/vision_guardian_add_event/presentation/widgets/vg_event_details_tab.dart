@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_patients_tab.dart';
@@ -236,6 +237,7 @@ class EventDetailsTab extends HookConsumerWidget {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
+                            SharedPreferenceService.clearEventId();
                             ref
                                 .read(addEventDetailsProvider)
                                 .deleteEventDetails(

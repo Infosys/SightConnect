@@ -33,17 +33,39 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                 volunteerId.value = value.id;
 
                 if (value.status == Status.PENDING) {
-                  return const Center(
+                  return Center(
                     child: Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Your volunteer request is pending for approval.",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
+                          ElevatedButton(
+                              onPressed: () {
+                                ref.read(dioRefreshTokenProvider).when(
+                                    data: (value) {
+                                  logger.f("refresh token value : $value");
+                                  PersistentAuthStateService.authState
+                                      .setActiveRole(null);
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const InitializationPage()),
+                                      (route) => false);
+                                }, loading: () {
+                                  return const Center(
+                                      child:
+                                          CircularProgressIndicator.adaptive());
+                                }, error: (error, stackTrace) {
+                                  logger.f("error : $error");
+                                });
+                              },
+                              child: const Text("Switch to Volunteer")),
                         ],
                       ),
                     ),
@@ -66,31 +88,41 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                   );
                 }
                 logger.f("check volunteer response : ${value.toString()}");
-                return const Center(
+                return Center(
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
                           children: [
-                            Text(
+                            const Text(
                               "You are already registered as a volunteer.",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
-                            // ElevatedButton(
-                            //     onPressed: () {
-                            //       ref.read(dioRefreshTokenProvider);
-
-                            //       Navigator.pushAndRemoveUntil(
-                            //           context,
-                            //           MaterialPageRoute(
-                            //               builder: (context) =>
-                            //                   const InitializationPage()),
-                            //           (route) => false);
-                            //     },
-                            //     child: const Text("Switch to Volunteer")),
+                            ElevatedButton(
+                                onPressed: () {
+                                  ref.read(dioRefreshTokenProvider).when(
+                                      data: (value) {
+                                    logger.f("refresh token value : $value");
+                                       PersistentAuthStateService.authState
+                                      .setActiveRole(null);
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const InitializationPage()),
+                                        (route) => false);
+                                  }, loading: () {
+                                    return const Center(
+                                        child: CircularProgressIndicator
+                                            .adaptive());
+                                  }, error: (error, stackTrace) {
+                                    logger.f("error : $error");
+                                  });
+                                },
+                                child: const Text("Switch to Volunteer")),
                           ],
                         ),
                       ],
@@ -228,7 +260,7 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                 isChecked.value = value!;
                               },
                               title: const Text(
-                                  "I agree to server as a volunteer for the selected time-frame."),
+                                  "I agree to serve as a volunteer for the selected time-frame."),
                             ),
                             const SizedBox(
                               height: AppSize.km,

@@ -103,7 +103,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
             margin: const EdgeInsets.only(bottom: AppSize.kl),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: AppColor.primary,
+              color: AppColor.yellow,
               boxShadow: const <BoxShadow>[
                 BoxShadow(
                   color: AppColor.grey,
@@ -113,24 +113,12 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
               ],
             ),
             child: Center(
-              child: RichText(
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: '+ ',
-                        style: applyRobotoFont(
-                            fontSize: 24,
-                            color: AppColor.black,
-                            fontWeight: FontWeight.w400)),
-                    TextSpan(
-                      text: loc.vgAddPatient,
-                      style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.black,
-                      ),
-                    ),
-                  ],
+              child: Text(
+                loc.startAssessment,
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.black,
                 ),
               ),
             ),

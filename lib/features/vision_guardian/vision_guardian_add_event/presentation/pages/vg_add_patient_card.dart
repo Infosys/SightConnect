@@ -28,7 +28,7 @@ class VisionGuardianAddPatient extends HookConsumerWidget {
           icon: const Icon(Icons.close),
         ),
         title: Text(
-          loc.vgAddPatients,
+          "Select User",
           style: applyFiraSansFont(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         centerTitle: false,
