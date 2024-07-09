@@ -1,47 +1,330 @@
 {
-    "type": "text_field",
-    "required": true,
-    "readOnly": false,
-    "obscure": false,
-    "direction": "vertical",
-    "keyBoardType": "text",
-    "label": "First Name",
-    "hint": "Enter your first name",
-    "defaultValue": "John",
-    "initialValueList": [
+    "title": "Doctor Consent Form",
+    "description": "Medical Consent Form for Doctor's Appointment",
+    "type": "form",
+    "sections": [
         {
-            "value": "John",
-            "label": "John"
-        },
-        {
-            "value": "Jane",
-            "label": "Jane"
+            "sectionTitle": "Personal Eye Donation Refferal Information",
+            "fields": [
+                {
+                    "type": "date_time",
+                    "label": "Death Notification (Date and Time)",
+                    "initialValue": null,
+                    "date": {
+                        "type": "date",
+                        "startDate": "1900-01-01",
+                        "endDate": "2024-07-09",
+                        "dateFormat": "yyyy-MM-dd"
+                    },
+                    "time": {
+                        "type": "time",
+                        "format": "HH:mm:ss",
+                        "includeSeconds": false
+                    }
+                },
+                {
+                    "type": "date_time",
+                    "label": "If Eye Donation Center, Consignment Notification (Date and Time)",
+                    "initialValue": null,
+                    "date": {
+                        "type": "date",
+                        "startDate": "1900-01-01",
+                        "endDate": "2024-07-09",
+                        "dateFormat": "yyyy-MM-dd"
+                    },
+                    "time": {
+                        "type": "time",
+                        "format": "HH:mm:ss",
+                        "includeSeconds": false
+                    }
+                },
+                {
+                    "type": "radio",
+                    "direction": "horizontal",
+                    "label": "Refferal Method",
+                    "options": [
+                        {
+                            "value": "Voluntary - Family Initated",
+                            "label": "Voluntary - Family Initated"
+                        },
+                        {
+                            "value": "Voluntary - Volunteer Motivated",
+                            "label": "Voluntary - Volunteer Motivated"
+                        },
+                        {
+                            "value": "HCRP - Motivated",
+                            "label": "HCRP - Motivated"
+                        }
+                    ],
+                    "initialValue": null
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "Donation Counselor/Volunteer",
+                    "hint": "Enter Donation Counselor/Volunteer",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter Donation Counselor/Volunteer (letters only)."
+                    },
+                    "maxLength": 255,
+                    "maxlines": 1
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "2nd Counselor/Volunteer",
+                    "hint": "Enter 2nd Counselor/Volunteer",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter 2nd Counselor/Volunteer (letters only)."
+                    },
+                    "maxLength": 255,
+                    "maxlines": 1
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "Caller Full Name",
+                    "hint": "Enter Caller Full Name",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter Caller Full Name (letters only)."
+                    },
+                    "maxLength": 255,
+                    "maxlines": 1
+                },
+                {
+                    "type": "date_time",
+                    "label": "Date-Time of Call",
+                    "initialValue": null,
+                    "date": {
+                        "type": "date",
+                        "startDate": "1900-01-01",
+                        "endDate": "2024-07-09",
+                        "dateFormat": "yyyy-MM-dd"
+                    },
+                    "time": {
+                        "type": "time",
+                        "format": "HH:mm:ss",
+                        "includeSeconds": false
+                    }
+                },
+                {
+                    "type": "dropdown",
+                    "label": "Relationship",
+                    "hint": "Select",
+                    "options": [
+                        {
+                            "value": "Family",
+                            "label": "Family"
+                        },
+                        {
+                            "value": "Friends",
+                            "label": "Friends"
+                        },
+                        {
+                            "value": "Others",
+                            "label": "Others"
+                        }
+                    ],
+                    "initialValue": null
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "phone",
+                    "label": "Phone Number",
+                    "hint": "Enter your phone number",
+                    "validation": {
+                        "pattern": "^[0-9]{10}$",
+                        "errorMessage": "Please enter a valid phone number."
+                    }
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "Hospital / Eye Donation Center",
+                    "hint": "Enter Hospital / Eye Donation Center",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter Hospital / Eye Donation Center."
+                    },
+                    "maxLength": 255,
+                    "maxlines": 1
+                },
+                {
+                    "type": "dropdown",
+                    "label": "Unit",
+                    "hint": "Select",
+                    "options": [
+                        {
+                            "value": "ICU",
+                            "label": "ICU"
+                        },
+                        {
+                            "value": "HDU",
+                            "label": "HDU"
+                        },
+                        {
+                            "value": "Casuality",
+                            "label": "Casuality"
+                        },
+                        {
+                            "value": "Emergency",
+                            "label": "Emergency"
+                        },
+                        {
+                            "value": "Trauma Center",
+                            "label": "Trauma Center"
+                        },
+                        {
+                            "value": "Mortuary",
+                            "label": "Mortuary"
+                        },
+                        {
+                            "value": "Ward",
+                            "label": "Ward"
+                        }
+                    ],
+                    "initialValue": null
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "Unit Details",
+                    "hint": "Enter Unit Details",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter Unit Details"
+                    },
+                    "maxlines": 3
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "Body Location",
+                    "hint": "Enter Body Location",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter Body Location"
+                    },
+                    "maxlines": 1
+                },
+                {
+                    "type": "date_time",
+                    "label": "Body Available Until (Date and Time)",
+                    "initialValue": null,
+                    "date": {
+                        "type": "date",
+                        "startDate": "1900-01-01",
+                        "endDate": "2024-07-09",
+                        "dateFormat": "yyyy-MM-dd"
+                    },
+                    "time": {
+                        "type": "time",
+                        "format": "HH:mm:ss",
+                        "includeSeconds": false
+                    }
+                },
+                {
+                    "type": "text_field",
+                    "required": true,
+                    "readOnly": false,
+                    "obscure": false,
+                    "keyBoardType": "text",
+                    "initialValue": null,
+                    "label": "Recovery Address/ Directions",
+                    "hint": "Enter URecovery Address/ Directions",
+                    "validation": {
+                        "pattern": "^[a-zA-Z]+$",
+                        "errorMessage": "Please enter URecovery Address/ Directions"
+                    },
+                    "maxlines": 3
+                },
+                {
+                    "type": "check",
+                    "direction": "vertical",
+                    "label": "Conditions I agree to:",
+                    "options": [
+                        {
+                            "value": "condition1",
+                            "label": "Condition 1"
+                        },
+                        {
+                            "value": "condition2",
+                            "label": "Condition 2"
+                        }
+                    ],
+                    "initialValue": []
+                },
+                {
+                    "type": "switch",
+                    "label": "I agree to the terms and conditions",
+                    "initialValue": false,
+                    "required": true
+                },
+                {
+                    "type": "chips",
+                    "label": "Select your preferred language",
+                    "options": [
+                        {
+                            "value": "condition1",
+                            "label": "Condition 1"
+                        },
+                        {
+                            "value": "condition2",
+                            "label": "Condition 2"
+                        }
+                    ]
+                },
+                {
+                    "type": "image",
+                    "label": "Upload Signature",
+                    "typeSupport": [
+                        "PNG",
+                        "JPEG",
+                        "JPG"
+                    ],
+                    "hint": "Capture or upload your signature"
+                },
+                {
+                    "type": "file",
+                    "label": "Health Insurance Card",
+                    "typeSupport": [
+                        "PDF",
+                        "DOCX",
+                        "DOC"
+                    ],
+                    "hint": "Upload your health insurance card"
+                }
+            ]
         }
-    ],
-    "optionsList": [
-        {
-            "value": "18-24",
-            "label": "18-24 Years"
-        },
-        {
-            "value": "25-34",
-            "label": "25-34 Years"
-        }
-    ],
-    "typeSupport": [
-        "PNG",
-        "JPEG",
-        "JPG"
-    ],
-    "conditionalDisplay": {
-        "condition": "age",
-        "value": "18-24"
-    },
-    "validation": {
-        "pattern": "^[a-zA-Z]+$",
-        "errorMessage": "Please enter a valid first name (letters only).",
-        "minValue": 1,
-        "maxValue": 100,
-        "maxlines": 1
-    }
+    ]
 }
