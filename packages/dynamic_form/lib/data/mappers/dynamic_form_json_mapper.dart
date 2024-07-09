@@ -47,9 +47,9 @@ class DynamicFormJsonMapper {
           pattern: '',
           errorMessage: '',
         ),
-        maxLength: field.maxLength ?? 1,
-        minLength: field.minLength ?? 1,
-        maxlines: field.maxlines ?? 1,
+        maxLength: field.maxLength,
+        minLength: field.minLength,
+        maxlines: field.maxlines,
         options: _mapOptionModelToEntity(field.options),
         dateTime: CustomDateTimeEntity(
           format: field.dateTime?.format ?? '',

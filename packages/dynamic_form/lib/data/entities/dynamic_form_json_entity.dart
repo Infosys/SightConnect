@@ -32,9 +32,9 @@ class FieldEntity {
   final String label;
   final String hint;
   final ValidationEntity validation;
-  final int maxLength;
-  final int minLength;
-  final int maxlines;
+  final int? maxLength;
+  final int? minLength;
+  final int? maxlines;
   final List<OptionEntity> options;
   final CustomDateTimeEntity dateTime;
   final String direction;
