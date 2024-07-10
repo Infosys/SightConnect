@@ -5,16 +5,17 @@ import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
-import 'package:dynamic_form/responsive.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
+import 'package:dynamic_form/widgets/app_responsive_widget.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
-import 'package:dynamic_form/widgets/form_image.dart';
+import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
+import 'package:dynamic_form/widgets/form_text_area.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
 import 'package:dynamic_form/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -86,17 +87,14 @@ class FormLayout extends StatelessWidget {
                     title: section.sectionTitle,
                     marginBottom: 16,
                     child: Wrap(
-                      runAlignment: WrapAlignment.center,
-                      alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.start,
+                      alignment: WrapAlignment.start,
                       spacing: 16,
                       runSpacing: 16,
                       children: [
                         ..._buildFields(section.fields, formKey).map(
-                          (widget) => SizedBox(
-                            width: Responsive.isMobile(context)
-                                ? double.infinity
-                                : 300,
-                            child: widget,
+                          (widget) => AppResponsiveWidget(
+                            widget: widget,
                           ),
                         ),
                       ],
@@ -113,6 +111,7 @@ class FormLayout extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
+                      log(formKey.currentState!.value.toString());
                       if (formKey.currentState!.validate()) {
                         formKey.currentState?.save();
                         log(formKey.currentState!.value.toString());
@@ -176,7 +175,7 @@ class FormLayout extends StatelessWidget {
             },
           );
         case DynamicFormType.FILE:
-          return FormImage(
+          return FormFile(
             field: field,
             onChanged: (value) {
               key.currentState?.setInternalFieldValue(
@@ -199,6 +198,15 @@ class FormLayout extends StatelessWidget {
               debugPrint(value.toString());
             },
           );
+
+        case DynamicFormType.TEXTAREA:
+          return FormTextArea(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value);
+            },
+          );
+
         default:
           return Container();
       }
