@@ -181,9 +181,9 @@ class FormLayout extends StatelessWidget {
           return FormImage(
             field: field,
             onChanged: (value) {
-              // key.currentState?.validate();
-              // key.currentState?.setInternalFieldValue(field.label, value);
-              // debugPrint(value.toString());
+              key.currentState?.setInternalFieldValue(
+                  field.label, value.map((e) => e.path).toList());
+              debugPrint(value.toString());
             },
           );
         case DynamicFormType.SWITCH:
