@@ -18,6 +18,8 @@ class FormDataTimePicker extends HookWidget {
   Widget build(BuildContext context) {
     return FormBuilderDateTimePicker(
       initialEntryMode: DatePickerEntryMode.calendar,
+      autofocus: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       format: DateFormat.d().add_MMM().add_y().add_jm(),
       decoration: InputDecoration(
         labelText: field.label,

@@ -16,6 +16,7 @@ class FormRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderRadioGroup<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       wrapDirection: Axis.vertical,
       wrapAlignment: WrapAlignment.start,
       wrapRunAlignment: WrapAlignment.start,

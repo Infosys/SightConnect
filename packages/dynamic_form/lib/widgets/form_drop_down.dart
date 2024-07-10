@@ -27,6 +27,8 @@ class FormDropDown extends StatelessWidget {
 
     return FormBuilderDropdown<String>(
       name: label,
+      autofocus: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,

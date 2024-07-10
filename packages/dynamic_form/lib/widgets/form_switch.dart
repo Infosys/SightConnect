@@ -18,6 +18,8 @@ class FormSwitch extends HookWidget {
   Widget build(BuildContext context) {
     final selected = useState<bool?>(null);
     return FormBuilderSwitch(
+      autofocus: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.label,
       initialValue: selected.value,
       validator: field.isRequired

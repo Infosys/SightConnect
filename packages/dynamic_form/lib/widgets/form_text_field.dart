@@ -18,6 +18,7 @@ class FormTextField extends StatelessWidget {
     debugPrint("${field.validation.pattern}hahahah");
     return FormBuilderTextField(
       autofocus: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.label,
       decoration: InputDecoration(
         labelText: field.label,
