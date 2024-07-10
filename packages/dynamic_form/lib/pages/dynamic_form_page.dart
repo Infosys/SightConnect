@@ -13,6 +13,7 @@ import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_image.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
+import 'package:dynamic_form/widgets/form_slider.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
 import 'package:dynamic_form/widgets/loader_widget.dart';
@@ -198,6 +199,15 @@ class FormLayout extends StatelessWidget {
               debugPrint(value.toString());
             },
           );
+
+        case DynamicFormType.SLIDER:
+          return FormSlider(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
+
         default:
           return Container();
       }
