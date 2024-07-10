@@ -28,7 +28,7 @@ class FormSlider extends StatelessWidget {
           : null,
       min: field.minLength ?? 0.0,
       max: field.maxLength ?? 0.0,
-      divisions: 10,
+      divisions: field.divisions,
       initialValue: field.initialValue as double? ?? 0.0,
     );
   }

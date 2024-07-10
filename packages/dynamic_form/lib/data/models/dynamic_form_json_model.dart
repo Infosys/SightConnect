@@ -48,6 +48,7 @@ class Field {
   double? maxLength;
   double? minLength;
   double? maxlines;
+  int? divisions;
   List<Option>? options;
   CustomDateTime? dateTime;
   String? direction;
