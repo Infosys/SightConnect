@@ -114,9 +114,8 @@ class FormLayout extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      formKey.currentState?.save();
-
                       if (formKey.currentState!.validate()) {
+                        formKey.currentState?.save();
                         log(formKey.currentState!.value.toString());
                       } else {
                         print('Form validation failed');
