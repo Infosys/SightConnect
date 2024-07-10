@@ -3,8 +3,6 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 
 class DynamicFormJsonMapper {
-  // convert model to entity and convert entity to model
-
   DynamicFormJsonModel entitytoModel(DynamicFormJsonEntity dynamicFormEntity) {
     return DynamicFormJsonModel();
   }

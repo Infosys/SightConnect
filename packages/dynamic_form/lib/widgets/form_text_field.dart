@@ -15,7 +15,6 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("${field.validation.pattern}hahahah");
     return FormBuilderTextField(
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,

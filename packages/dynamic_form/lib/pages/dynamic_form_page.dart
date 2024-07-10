@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
@@ -115,9 +114,9 @@ class FormLayout extends StatelessWidget {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState?.save();
-                        log(formKey.currentState!.value.toString());
+                        debugPrint(jsonEncode(formKey.currentState!.value));
                       } else {
-                        print('Form validation failed');
+                        debugPrint('Form validation failed');
                       }
                     },
                     child: const Text('Submit Form'),
