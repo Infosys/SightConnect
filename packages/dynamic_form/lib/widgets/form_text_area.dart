@@ -3,8 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../data/entities/dynamic_form_json_entity.dart';
 
-class FormTextField extends StatelessWidget {
-  const FormTextField({
+class FormTextArea extends StatelessWidget {
+  const FormTextArea({
     super.key,
     required this.field,
     this.onChanged,
@@ -22,8 +22,11 @@ class FormTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: field.label,
         hintText: field.hint,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 20.0,
+        ),
+        alignLabelWithHint: true,
       ),
       validator: (value) {
         value = value ?? '';
@@ -42,6 +45,8 @@ class FormTextField extends StatelessWidget {
       onChanged: onChanged,
       readOnly: field.readOnly,
       initialValue: field.initialValue,
+      maxLength: field.maxLength,
+      maxLines: field.maxlines,
       obscureText: field.obscure,
     );
   }

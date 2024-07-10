@@ -7,10 +7,41 @@
       "sectionTitle": "Personal Eye Donation Refferal Information",
       "fields": [
         {
+          "type": "DATETIME",
+          "label": "Death Notification (Date and Time)",
+          "initialValue": null,
+          "date": {
+            "type": "date",
+            "startDate": "1900-01-01",
+            "endDate": "2024-07-09",
+            "dateFormat": "yyyy-MM-dd"
+          },
+          "time": {
+            "type": "time",
+            "format": "HH:mm:ss",
+            "includeSeconds": false
+          }
+        },
+        {
+          "type": "DATETIME",
+          "label": "If Eye Donation Center, Consignment Notification (Date and Time)",
+          "initialValue": null,
+          "date": {
+            "type": "date",
+            "startDate": "1900-01-01",
+            "endDate": "2024-07-09",
+            "dateFormat": "yyyy-MM-dd"
+          },
+          "time": {
+            "type": "time",
+            "format": "HH:mm:ss",
+            "includeSeconds": false
+          }
+        },
+        {
           "type": "RADIO",
           "direction": "horizontal",
           "label": "Refferal Method",
-          "isRequired": true,
           "options": [
             {
               "value": "Voluntary - Family Initated",
@@ -20,7 +51,10 @@
               "value": "Voluntary - Volunteer Motivated",
               "label": "Voluntary - Volunteer Motivated"
             },
-            {"value": "HCRP - Motivated", "label": "HCRP - Motivated"}
+            {
+              "value": "HCRP - Motivated",
+              "label": "HCRP - Motivated"
+            }
           ],
           "initialValue": null
         },
@@ -35,33 +69,47 @@
           "hint": "Enter Donation Counselor/Volunteer",
           "validation": {
             "pattern": "^[a-zA-Z]+$",
-            "errorMessage":
-                "Please enter Donation Counselor/Volunteer (letters only)."
+            "errorMessage": "Please enter Donation Counselor/Volunteer (letters only)."
           },
           "maxLength": 255,
           "maxlines": 1
         },
         {
-          "type": "DROPDOWN",
-          "label": "Unit",
-          "hint": "Select",
+          "type": "TEXTFIELD",
           "isRequired": true,
-          "options": [
-            {"value": "ICU", "label": "ICU"},
-            {"value": "HDU", "label": "HDU"},
-            {"value": "Casuality", "label": "Casuality"},
-            {"value": "Emergency", "label": "Emergency"},
-            {"value": "Trauma Center", "label": "Trauma Center"},
-            {"value": "Mortuary", "label": "Mortuary"},
-            {"value": "Ward", "label": "Ward"}
-          ],
-          "initialValue": null
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "text",
+          "initialValue": null,
+          "label": "2nd Counselor/Volunteer",
+          "hint": "Enter 2nd Counselor/Volunteer",
+          "validation": {
+            "pattern": "^[a-zA-Z]+$",
+            "errorMessage": "Please enter 2nd Counselor/Volunteer (letters only)."
+          },
+          "maxLength": 255,
+          "maxlines": 1
+        },
+        {
+          "type": "TEXTFIELD",
+          "isRequired": true,
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "text",
+          "initialValue": null,
+          "label": "Caller Full Name",
+          "hint": "Enter Caller Full Name",
+          "validation": {
+            "pattern": "^[a-zA-Z]+$",
+            "errorMessage": "Please enter Caller Full Name (letters only)."
+          },
+          "maxLength": 255,
+          "maxlines": 1
         },
         {
           "type": "DATETIME",
-          "label": "Body Available Until (Date and Time)",
+          "label": "Date-Time of Call",
           "initialValue": null,
-          "isRequired": true,
           "date": {
             "type": "date",
             "startDate": "1900-01-01",
@@ -75,7 +123,138 @@
           }
         },
         {
+          "type": "DROPDOWN",
+          "label": "Relationship",
+          "hint": "Select",
+          "options": [
+            {
+              "value": "Family",
+              "label": "Family"
+            },
+            {
+              "value": "Friends",
+              "label": "Friends"
+            },
+            {
+              "value": "Others",
+              "label": "Others"
+            }
+          ],
+          "initialValue": null
+        },
+        {
           "type": "TEXTFIELD",
+          "isRequired": true,
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "phone",
+          "label": "Phone Number",
+          "hint": "Enter your phone number",
+          "validation": {
+            "pattern": "^[0-9]{10}$",
+            "errorMessage": "Please enter a valid phone number."
+          }
+        },
+        {
+          "type": "TEXTFIELD",
+          "isRequired": true,
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "text",
+          "initialValue": null,
+          "label": "Hospital / Eye Donation Center",
+          "hint": "Enter Hospital / Eye Donation Center",
+          "validation": {
+            "pattern": "^[a-zA-Z]+$",
+            "errorMessage": "Please enter Hospital / Eye Donation Center."
+          },
+          "maxLength": 255,
+          "maxlines": 1
+        },
+        {
+          "type": "DROPDOWN",
+          "label": "Unit",
+          "hint": "Select",
+          "options": [
+            {
+              "value": "ICU",
+              "label": "ICU"
+            },
+            {
+              "value": "HDU",
+              "label": "HDU"
+            },
+            {
+              "value": "Casuality",
+              "label": "Casuality"
+            },
+            {
+              "value": "Emergency",
+              "label": "Emergency"
+            },
+            {
+              "value": "Trauma Center",
+              "label": "Trauma Center"
+            },
+            {
+              "value": "Mortuary",
+              "label": "Mortuary"
+            },
+            {
+              "value": "Ward",
+              "label": "Ward"
+            }
+          ],
+          "initialValue": null
+        },
+        {
+          "type": "TEXTAREA",
+          "isRequired": true,
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "text",
+          "initialValue": null,
+          "label": "Unit Details",
+          "hint": "Enter Unit Details",
+          "validation": {
+            "pattern": "^[a-zA-Z]+$",
+            "errorMessage": "Please enter Unit Details"
+          },
+          "maxlines": 3
+        },
+        {
+          "type": "TEXTFIELD",
+          "isRequired": true,
+          "readOnly": false,
+          "obscure": false,
+          "keyBoardType": "text",
+          "initialValue": null,
+          "label": "Body Location",
+          "hint": "Enter Body Location",
+          "validation": {
+            "pattern": "^[a-zA-Z]+$",
+            "errorMessage": "Please enter Body Location"
+          },
+          "maxlines": 1
+        },
+        {
+          "type": "DATETIME",
+          "label": "Body Available Until (Date and Time)",
+          "initialValue": null,
+          "date": {
+            "type": "date",
+            "startDate": "1900-01-01",
+            "endDate": "2024-07-09",
+            "dateFormat": "yyyy-MM-dd"
+          },
+          "time": {
+            "type": "time",
+            "format": "HH:mm:ss",
+            "includeSeconds": false
+          }
+        },
+        {
+          "type": "TEXTAREA",
           "isRequired": true,
           "readOnly": false,
           "obscure": false,
@@ -93,10 +272,15 @@
           "type": "CHECKBOX",
           "direction": "vertical",
           "label": "Conditions I agree to:",
-          "isRequired": true,
           "options": [
-            {"value": "condition1", "label": "Condition 1"},
-            {"value": "condition2", "label": "Condition 2"}
+            {
+              "value": "condition1",
+              "label": "Condition 1"
+            },
+            {
+              "value": "condition2",
+              "label": "Condition 2"
+            }
           ],
           "initialValue": null
         },
@@ -104,22 +288,41 @@
           "type": "SWITCH",
           "label": "I agree to the terms and conditions",
           "initialValue": false,
-          "isRequired": true
+          "isRequired": true,
+          "options": [
+            {
+              "value": "condition1",
+              "label": "Condition 1"
+            },
+            {
+              "value": "condition2",
+              "label": "Condition 2"
+            }
+          ]
         },
         {
           "type": "CHIPS",
           "label": "Select your preferred language",
-          "isRequired": true,
           "options": [
-            {"value": "condition1", "label": "Condition 1"},
-            {"value": "condition2", "label": "Condition 2"}
+            {
+              "value": "condition1",
+              "label": "Condition 1"
+            },
+            {
+              "value": "condition2",
+              "label": "Condition 2"
+            }
           ]
         },
         {
           "type": "FILE",
-          "label": "Health Insurance Card",
           "isRequired": true,
-          "typeSupport": ["PDF", "DOCX", "DOC"],
+          "label": "Health Insurance Card",
+          "typeSupport": [
+            "PDF",
+            "DOCX",
+            "DOC"
+          ],
           "hint": "Upload your health insurance card"
         }
       ]

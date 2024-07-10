@@ -95,6 +95,8 @@ class DynamicFormJsonMapper {
         return DynamicFormType.SWITCH;
       case 'FILE':
         return DynamicFormType.FILE;
+      case 'TEXTAREA':
+        return DynamicFormType.TEXTAREA;
       default:
         return DynamicFormType.DEFAULT;
     }
