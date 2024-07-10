@@ -15,6 +15,7 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("${field.validation.pattern}hahahah");
     return FormBuilderTextField(
       autofocus: false,
       name: field.label,
@@ -31,7 +32,7 @@ class FormTextField extends StatelessWidget {
         }
 
         if (!RegExp(field.validation.pattern).hasMatch(value)) {
-          return 'Invalid value';
+          return field.validation.errorMessage;
         }
         return null;
       },

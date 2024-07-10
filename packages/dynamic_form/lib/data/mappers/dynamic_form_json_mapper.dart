@@ -45,8 +45,8 @@ class DynamicFormJsonMapper {
         label: field.label ?? '',
         hint: field.hint ?? '',
         validation: ValidationEntity(
-          pattern: '',
-          errorMessage: '',
+          pattern: field.validation?.pattern ?? '',
+          errorMessage: field.validation?.errorMessage ?? '',
         ),
         maxLength: field.maxLength,
         minLength: field.minLength,
