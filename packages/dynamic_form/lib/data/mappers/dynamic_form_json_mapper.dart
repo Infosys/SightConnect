@@ -58,7 +58,6 @@ class DynamicFormJsonMapper {
         ),
         direction: field.direction ?? '',
         typeSupport: field.typeSupport ?? [],
-        initialValueBool: field.initialValueBool ?? false,
       );
     }).toList();
   }

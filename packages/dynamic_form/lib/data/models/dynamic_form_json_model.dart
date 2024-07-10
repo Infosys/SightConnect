@@ -45,33 +45,32 @@ class Field {
   String? label;
   String? hint;
   Validation? validation;
-  int? maxLength;
-  int? minLength;
-  int? maxlines;
+  double? maxLength;
+  double? minLength;
+  double? maxlines;
   List<Option>? options;
   CustomDateTime? dateTime;
   String? direction;
   List<String>? typeSupport;
-  bool? initialValueBool;
 
-  Field(
-      {this.type,
-      this.isRequired,
-      this.readOnly,
-      this.obscure,
-      this.keyBoardType,
-      this.initialValue,
-      this.label,
-      this.hint,
-      this.validation,
-      this.maxLength,
-      this.minLength,
-      this.maxlines,
-      this.options,
-      this.dateTime,
-      this.direction,
-      this.typeSupport,
-      this.initialValueBool});
+  Field({
+    this.type,
+    this.isRequired,
+    this.readOnly,
+    this.obscure,
+    this.keyBoardType,
+    this.initialValue,
+    this.label,
+    this.hint,
+    this.validation,
+    this.maxLength,
+    this.minLength,
+    this.maxlines,
+    this.options,
+    this.dateTime,
+    this.direction,
+    this.typeSupport,
+  });
 
   factory Field.fromJson(Map<String, dynamic> json) {
     return Field(
@@ -99,7 +98,6 @@ class Field {
       typeSupport: json['typeSupport'] != null
           ? List<String>.from(json['typeSupport'])
           : null,
-      initialValueBool: json['initialValue'],
     );
   }
 }

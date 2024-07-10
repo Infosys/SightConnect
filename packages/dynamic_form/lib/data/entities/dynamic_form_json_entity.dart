@@ -34,14 +34,13 @@ class FieldEntity {
   final String label;
   final String hint;
   final ValidationEntity validation;
-  final int? maxLength;
-  final int? minLength;
-  final int? maxlines;
+  final double? maxLength;
+  final double? minLength;
+  final double? maxlines;
   final List<OptionEntity> options;
   final CustomDateTimeEntity dateTime;
   final String direction;
   final List<String> typeSupport;
-  final bool initialValueBool;
 
   FieldEntity({
     required this.type,
@@ -60,7 +59,6 @@ class FieldEntity {
     required this.dateTime,
     required this.direction,
     required this.typeSupport,
-    required this.initialValueBool,
   });
 }
 

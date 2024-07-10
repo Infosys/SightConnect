@@ -45,8 +45,8 @@ class FormTextArea extends StatelessWidget {
       onChanged: onChanged,
       readOnly: field.readOnly,
       initialValue: field.initialValue,
-      maxLength: field.maxLength,
-      maxLines: field.maxlines,
+      maxLength: field.maxLength?.toInt(),
+      maxLines: field.maxlines?.toInt(),
       obscureText: field.obscure,
     );
   }
