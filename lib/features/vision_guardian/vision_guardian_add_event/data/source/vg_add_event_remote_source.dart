@@ -13,18 +13,27 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(
-  (ref){
-    return ref.read(vgAddEventRemoteSource).getVGEvents(
-      queryData: {
-        "actorIdentifier": PersistentAuthStateService.authState.userId,
-        "eventStatusFilter": "ALL",
-        "pageable": {
-          "page": 0,
-          "size": 10,
-          "title-like": "",
+  (ref) {
+    try {
+      final response = ref.watch(vgAddEventRemoteSource).getVGEvents(
+        queryData: {
+          "actorIdentifier": PersistentAuthStateService.authState.userId,
+          "eventStatusFilter": "ALL",
+          "pageable": {
+            "page": 0,
+            "size": 10,
+            "title-like": "",
+          },
         },
-      },
-    );
+      );
+      logger.d("response in getEventsDataProvider: $response");
+      return response;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (error) {
+      rethrow;
+    }
   },
 );
 

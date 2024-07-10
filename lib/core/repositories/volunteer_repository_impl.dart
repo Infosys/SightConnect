@@ -51,4 +51,23 @@ class VolunteerRepositoryImpl implements VolunteerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> extendVolunteer(
+      VolunteerPostModel volunteerPostModel, int volunteerId) async {
+    logger.d(" extend volunteer details : $volunteerPostModel");
+    final endPoint =
+        "/services/orchestration/api/v2/volunteers/extend/${volunteerId}";
+    try {
+      var response =
+          await _dio.put(endPoint, data: volunteerPostModel.toJson());
+
+      logger.d("extend volunteer response : ${response.toString()}");
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

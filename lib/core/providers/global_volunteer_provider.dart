@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/models/performer_model.dart';
 import 'package:eye_care_for_all/core/repositories/performers_profile_repository_impl.dart';
+import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,8 +35,9 @@ var getVolunteerProfileProvider = FutureProvider.autoDispose((ref) async {
         .getPerformerProfile();
     ref.read(globalVolunteerProvider).setUser(response);
     return response;
-  } on Exception catch (e) {
+  } on DioException catch (e) {
     logger.d("Error in getVolunteerProfileProvider : $e");
+    DioErrorHandler.handleDioError(e);
     rethrow;
   }
 });

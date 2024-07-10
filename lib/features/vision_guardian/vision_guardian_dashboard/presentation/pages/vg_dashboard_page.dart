@@ -32,6 +32,8 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
 
     if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
       // add this line
+      SharedPreferenceService.storeTenantId(1901);
+      SharedPreferenceService.storeOrganizationId(1901);
       ref.listen(getVolunteerProfileProvider, (previous, next) {
         if (next.hasError) {
           ref.read(initializationProvider).logout().then((value) {
@@ -53,22 +55,28 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
               return ref.watch(getEventsDataProvider).when(
                     data: (data) {
                       logger.f("Data: ${data.toString()}");
-                      if (SharedPreferenceService.getEventId != null &&
-                          SharedPreferenceService.getEventId!.isNotEmpty) {
-                        final VisionGuardianEventModel event;
+                      if ((SharedPreferenceService.getEventId != null &&
+                              SharedPreferenceService.getEventId!.isNotEmpty) &&
+                          data.isNotEmpty) {
+                        try {
+                          final event = data.firstWhere(
+                            (element) =>
+                                element.id ==
+                                int.parse(SharedPreferenceService.getEventId!),
+                            orElse: () => throw Exception('Event not found'),
+                          );
 
-                        event = data.firstWhere((element) {
-                          return element.id ==
-                              int.parse(SharedPreferenceService.getEventId!);
-                        });
+                          ref
+                              .read(addEventDetailsProvider)
+                              .setEventId(SharedPreferenceService.getEventId!);
 
-                        ref
-                            .read(addEventDetailsProvider)
-                            .setEventId(SharedPreferenceService.getEventId!);
-
-                        return VisionGuardianEventDetailsPage(
-                          eventDetails: event,
-                        );
+                          return VisionGuardianEventDetailsPage(
+                              eventDetails: event);
+                        } catch (e) {
+                          logger.e("Error finding event: $e");
+                          return _content(
+                              context, ref); // Fallback to default content
+                        }
                       } else {
                         return _content(context, ref);
                       }
@@ -79,6 +87,7 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
                       ),
                     ),
                     error: (error, stackTrace) {
+                      logger.e("Error: $error, StackTrace: $stackTrace");
                       return Scaffold(
                         body: Text("Error $error"),
                       );
@@ -93,6 +102,7 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
               ),
             ),
             error: (error, stackTrace) {
+              logger.e("Error: $error, StackTrace: $stackTrace");
               return Scaffold(
                 body: Text("Error $error"),
               );

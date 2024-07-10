@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/models/volunteer_post_model.dart';
 import 'package:eye_care_for_all/core/repositories/volunteer_repository_impl.dart';
@@ -7,9 +8,15 @@ import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/token_refresh_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
+import 'package:eye_care_for_all/shared/widgets/volunteer_approved.dart';
+import 'package:eye_care_for_all/shared/widgets/volunteer_expired.dart';
+import 'package:eye_care_for_all/shared/widgets/volunteer_pending.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RegisterVolunteerPage extends HookConsumerWidget {
@@ -23,434 +30,450 @@ class RegisterVolunteerPage extends HookConsumerWidget {
     var isLoading = useState<bool>(false);
     var volunteerId = useState<int?>(null);
 
-    return Scaffold(
-        appBar: const CustomAppbar(
-          title: Text("Register as a Volunteer"),
-          centerTitle: false,
-        ),
-        body: !isLoading.value
-            ? ref.watch(checkVolunteerProvider).when(data: (value) {
-                volunteerId.value = value.id;
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.scaffoldBg),
+            fit: BoxFit.cover,
+          ),
+          color: Colors.transparent),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: const CustomAppbar(
+            title: Text("Register as a Volunteer"),
+            centerTitle: false,
+            backgroundColor: Colors.transparent,
+          ),
+          body: !isLoading.value
+              ? ref.watch(checkVolunteerProvider).when(data: (value) {
+                  volunteerId.value = value.id;
 
-                if (value.status == Status.PENDING) {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Your volunteer request is pending for approval.",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                ref.read(dioRefreshTokenProvider).when(
-                                    data: (value) {
-                                  logger.f("refresh token value : $value");
-                                  PersistentAuthStateService.authState
-                                      .setActiveRole(null);
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const InitializationPage()),
-                                      (route) => false);
-                                }, loading: () {
-                                  return const Center(
-                                      child:
-                                          CircularProgressIndicator.adaptive());
-                                }, error: (error, stackTrace) {
-                                  logger.f("error : $error");
-                                });
-                              },
-                              child: const Text("Switch to Volunteer")),
-                        ],
-                      ),
-                    ),
-                  );
-                } else if (value.status == Status.EXPIRED) {
+                  //Status is Pending
+
+                  if (value.status == Status.PENDING) {
+                    const VolunteerPending();
+                  } else if (value.status == Status.EXPIRED) {
+                    return VolunteerExpired(
+                      volunteerId: volunteerId.value!,
+                    );
+                  }
+                  logger.f("check volunteer response : ${value.toString()}");
+
+                  return const VolunteerApproved();
+                  // return  VolunteerExpired(volunteerId: volunteerId.value!,);
+                  // return const VolunteerPending();
+                }, loading: () {
                   return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Your volunteer request has been expired.",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                logger.f("check volunteer response : ${value.toString()}");
-                return Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            const Text(
-                              "You are already registered as a volunteer.",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  ref.read(dioRefreshTokenProvider).when(
-                                      data: (value) {
-                                    logger.f("refresh token value : $value");
-                                       PersistentAuthStateService.authState
-                                      .setActiveRole(null);
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const InitializationPage()),
-                                        (route) => false);
-                                  }, loading: () {
-                                    return const Center(
-                                        child: CircularProgressIndicator
-                                            .adaptive());
-                                  }, error: (error, stackTrace) {
-                                    logger.f("error : $error");
-                                  });
-                                },
-                                child: const Text("Switch to Volunteer")),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }, loading: () {
-                return const Center(
-                    child: CircularProgressIndicator.adaptive());
-              }, error: (error, stackTrace) {
-                logger.f("error : $error");
-                if (error == "404") {
-                  return Center(
-                    child: Card(
-                      elevation: 4,
+                      child: CircularProgressIndicator.adaptive());
+                }, error: (error, stackTrace) {
+                  logger.f("error : $error");
+                  if (error == "404") {
+                    return SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12.0, vertical: 12),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Center(
-                              child: Text(
-                                "Register as a Volunteer",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
+                            Image.asset(
+                              "assets/images/register_volunteer.png",
+                              height: AppSize.height(context) * 0.3,
                             ),
-                            const SizedBox(
-                              height: AppSize.km,
-                            ),
-                            const Text(
-                              "You can become a part of our team by registering as a volunteer. You can help us in organizing events, spreading awareness, and many more. We will be happy to have you as a part of our team.\n \nPlease fill the details below for the timeframe you want to be registered for.",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
-                            ),
-                            const SizedBox(
-                              height: AppSize.km,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  onTap: () async {
-                                    DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: startDate.value,
-                                      firstDate: DateTime.now(),
-                                      lastDate: DateTime.now()
-                                          .add(const Duration(days: 365)),
-                                    );
-                                    if (pickedDate != null) {
-                                      /*  return "${picked.year}-${picked.month}-${picked.day}"; */
-                                      startDate.value = pickedDate;
-                                    }
-                                  },
-                                  child: const Card(
-                                    elevation: 4,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          Text("Select Start Date"),
-                                          SizedBox(
-                                            height: AppSize.ks,
-                                          ),
-                                          Icon(Icons.calendar_today,
-                                              size: 20, color: Colors.blue),
-                                        ],
-                                      ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      "Volunteer Registration",
+                                      style: applyFiraSansFont(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    DateTime? pickedDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: startDate.value,
-                                      firstDate: startDate.value,
-                                      lastDate: startDate.value
-                                          .add(const Duration(days: 14)),
-                                    );
-                                    if (pickedDate != null) {
-                                      /*  return "${picked.year}-${picked.month}-${picked.day}"; */
-                                      endDate.value = pickedDate;
-                                    }
-                                  },
-                                  child: const Card(
-                                    elevation: 4,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          Text("Select End Date"),
-                                          SizedBox(
-                                            height: AppSize.ks,
-                                          ),
-                                          Icon(Icons.calendar_today,
-                                              size: 20, color: Colors.blue),
-                                        ],
-                                      ),
-                                    ),
+                                  const SizedBox(
+                                    height: AppSize.km,
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: AppSize.km,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Selected Start Date: ${startDate.value.day}/${startDate.value.month}/${startDate.value.year}",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: AppSize.ks),
-                                Text(
-                                  "Selected End Date: ${endDate.value.day}/${endDate.value.month}/${endDate.value.year}",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: AppSize.km,
-                            ),
-                            CheckboxListTile(
-                              value: isChecked.value,
-                              onChanged: (value) {
-                                isChecked.value = value!;
-                              },
-                              title: const Text(
-                                  "I agree to serve as a volunteer for the selected time-frame."),
-                            ),
-                            const SizedBox(
-                              height: AppSize.km,
-                            ),
-                            Center(
-                              child: ElevatedButton(
-                                onPressed: isChecked.value
-                                    ? () async {
-                                        if (isChecked.value) {
-                                          VolunteerPostModel
-                                              volunteerPostModel =
-                                              VolunteerPostModel(
-                                                  id: null,
-                                                  userId: int.parse(
-                                                      PersistentAuthStateService
-                                                          .authState.userId!),
-                                                  userType: null,
-                                                  startDate:
-                                                      startDate.value.toUtc(),
-                                                  endDate:
-                                                      endDate.value.toUtc(),
-                                                  status: null);
-
-                                          try {
-                                            isLoading.value = true;
-                                            await ref
-                                                .read(
-                                                    volunteerRepositoryProvider)
-                                                .postVolunteer(
-                                                    volunteerPostModel)
-                                                .then((value) async {
-                                              isLoading.value = false;
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                const SnackBar(
-                                                  content: Text(
-                                                      "You have successfully registered as a volunteer."),
-                                                ),
-                                              );
-
-                                              ref.read(dioRefreshTokenProvider);
-
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const InitializationPage()),
-                                                  (route) => false);
-                                            });
-                                          } on DioException catch (e) {
-                                            DioErrorHandler.handleDioError(e);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text(
-                                                    "An error occured while registering as a volunteer. Please try again later."),
-                                              ),
-                                            );
-                                            return;
-                                          }
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                              content: Text(
-                                                  "Please agree to the terms and conditions to proceed."),
-                                            ),
+                                  Text(
+                                    "Become a valued member of our team by registering as a volunteer. Contribute to our events, raise awareness, and make a difference. We look forward to welcoming you aboard.",
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.km,
+                                  ),
+                                  Text("Please select your availability:",
+                                      style: applyFiraSansFont(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  const SizedBox(
+                                    height: AppSize.km,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          DateTime? pickedDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: startDate.value,
+                                            firstDate: DateTime.now(),
+                                            lastDate: DateTime.now().add(
+                                                const Duration(days: 365)),
                                           );
-                                        }
-                                      }
-                                    : null,
-                                child: const Text("Register as a Volunteer"),
+                                          if (pickedDate != null) {
+                                            /*  return "${picked.year}-${picked.month}-${picked.day}"; */
+                                            startDate.value = pickedDate;
+                                          }
+                                        },
+                                        child: Container(
+                                          width: AppSize.width(context) * 0.4,
+                                          decoration: BoxDecoration(
+                                            color: Color(int.parse(
+                                              '0xffCFD8DC',
+                                            )),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              Positioned(
+                                                bottom: 0,
+                                                left: 0,
+                                                right: 0,
+                                                child: SvgPicture.asset(
+                                                  "assets/images/triage_card_bg.svg",
+                                                  width:
+                                                      AppSize.width(context),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "Select Start Date",
+                                                      style:
+                                                          applyRobotoFont(),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: AppSize.ks,
+                                                    ),
+                                                    const Icon(
+                                                        Icons.calendar_today,
+                                                        size: 20,
+                                                        color: Colors.blue),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          DateTime? pickedDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: startDate.value,
+                                            firstDate: startDate.value,
+                                            lastDate: startDate.value.add(
+                                                const Duration(days: 14)),
+                                          );
+                                          if (pickedDate != null) {
+                                            /*  return "${picked.year}-${picked.month}-${picked.day}"; */
+                                            endDate.value = pickedDate;
+                                          }
+                                        },
+                                        child: Container(
+                                          width: AppSize.width(context) * 0.4,
+                                          decoration: BoxDecoration(
+                                            color: Color(int.parse(
+                                              '0xffCFD8DC',
+                                            )),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              Positioned(
+                                                bottom: 0,
+                                                left: 0,
+                                                right: 0,
+                                                child: SvgPicture.asset(
+                                                  "assets/images/triage_card_bg.svg",
+                                                  width:
+                                                      AppSize.width(context),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  children: [
+                                                    Text("Select End Date",
+                                                        style:
+                                                            applyRobotoFont()),
+                                                    const SizedBox(
+                                                      height: AppSize.ks,
+                                                    ),
+                                                    const Icon(
+                                                        Icons.calendar_today,
+                                                        size: 20,
+                                                        color: Colors.blue),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.km,
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Chosen Start Date: ${startDate.value.day}/${startDate.value.month}/${startDate.value.year}",
+                                        style: applyRobotoFont(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: AppSize.ks),
+                                      Text(
+                                        "Chosen End Date: ${endDate.value.day}/${endDate.value.month}/${endDate.value.year}",
+                                        style: applyRobotoFont(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.km,
+                                  ),
+                                  CheckboxListTile(
+                                    contentPadding: EdgeInsets.zero,
+                                    value: isChecked.value,
+                                    onChanged: (value) {
+                                      isChecked.value = value!;
+                                    },
+                                    title: Text(
+                                        "I agree to serve as a volunteer for the specified timeframe",
+                                        style: applyRobotoFont()),
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.km,
+                                  ),
+                                  Center(
+                                    child: ElevatedButton(
+                                      onPressed: isChecked.value
+                                          ? () async {
+                                              if (isChecked.value) {
+                                                VolunteerPostModel
+                                                    volunteerPostModel =
+                                                    VolunteerPostModel(
+                                                        id: null,
+                                                        userId: int.parse(
+                                                            PersistentAuthStateService
+                                                                .authState
+                                                                .userId!),
+                                                        userType: null,
+                                                        startDate: startDate
+                                                            .value
+                                                            .toUtc(),
+                                                        endDate: endDate.value
+                                                            .toUtc(),
+                                                        status: null);
+                            
+                                                try {
+                                                  isLoading.value = true;
+                                                  await ref
+                                                      .read(
+                                                          volunteerRepositoryProvider)
+                                                      .postVolunteer(
+                                                          volunteerPostModel)
+                                                      .then((value) async {
+                                                    isLoading.value = false;
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                            "You have successfully registered as a volunteer."),
+                                                      ),
+                                                    );
+                            
+                                                    ref.read(
+                                                        dioRefreshTokenProvider);
+                            
+                                                    Navigator.pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                const InitializationPage()),
+                                                        (route) => false);
+                                                  });
+                                                } on DioException catch (e) {
+                                                  DioErrorHandler
+                                                      .handleDioError(e);
+                                                  ScaffoldMessenger.of(
+                                                          context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          "An error occured while registering as a volunteer. Please try again later."),
+                                                    ),
+                                                  );
+                                                  return;
+                                                }
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    content: Text(
+                                                        "Please agree to the terms and conditions to proceed."),
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          : null,
+                                      child: const Text(
+                                          "Register as a Volunteer"),
+                                    ),
+                                  )
+                                ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: Card(
-                      elevation: 4,
-                      child: Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "There was some problem fetching your details, try again later.",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  );
-                }
-              })
-            : const Center(child: CircularProgressIndicator.adaptive()));
+                    );
+                  } else {
+                    return const Center(
+                      child: Card(
+                        elevation: 4,
+                        child: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "There was some problem fetching your details, try again later.",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                })
+              : const Center(child: CircularProgressIndicator.adaptive())),
+    );
   }
 }
 
-
-
-
 // Row(
-                  //   children: [
-                  //     SizedBox(
-                  //       width: AppSize.width(context) * 0.5,
-                  //       child: InputDatePickerFormField(
-                  //         fieldLabelText: "Start Date",
-                  //         firstDate: DateTime.now(),
-                  //         lastDate:
-                  //             DateTime.now().add(const Duration(days: 365)),
-                  //         initialDate: startDate.value,
-                  //         onDateSubmitted: (DateTime value) {
-                  //           startDate.value = value;
-                  //         },
-                  //       ),
-                  //     ),
-                  //     const SizedBox(
-                  //       width: AppSize.kl,
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () async {
-                  //         DateTime? pickedDate = await showDatePicker(
-                  //           context: context,
-                  //           initialDate: DateTime.now(),
-                  //           firstDate: DateTime.now(),
-                  //           lastDate:
-                  //               DateTime.now().add(const Duration(days: 365)),
-                  //         );
-                  //         if (pickedDate != null) {
-                  //           /*  return "${picked.year}-${picked.month}-${picked.day}"; */
-                  //           startDate.value = pickedDate;
-                  //         }
-                  //       },
-                  //       child: const Icon(Icons.calendar_today,
-                  //           size: 20, color: Colors.blue),
-                  //     )
-                  //   ],
-                  // ),
+//   children: [
+//     SizedBox(
+//       width: AppSize.width(context) * 0.5,
+//       child: InputDatePickerFormField(
+//         fieldLabelText: "Start Date",
+//         firstDate: DateTime.now(),
+//         lastDate:
+//             DateTime.now().add(const Duration(days: 365)),
+//         initialDate: startDate.value,
+//         onDateSubmitted: (DateTime value) {
+//           startDate.value = value;
+//         },
+//       ),
+//     ),
+//     const SizedBox(
+//       width: AppSize.kl,
+//     ),
+//     InkWell(
+//       onTap: () async {
+//         DateTime? pickedDate = await showDatePicker(
+//           context: context,
+//           initialDate: DateTime.now(),
+//           firstDate: DateTime.now(),
+//           lastDate:
+//               DateTime.now().add(const Duration(days: 365)),
+//         );
+//         if (pickedDate != null) {
+//           /*  return "${picked.year}-${picked.month}-${picked.day}"; */
+//           startDate.value = pickedDate;
+//         }
+//       },
+//       child: const Icon(Icons.calendar_today,
+//           size: 20, color: Colors.blue),
+//     )
+//   ],
+// ),
 
-                  // TextField(
-                  //   decoration: InputDecoration(
-                  //       labelText: "Start Date",
-                  //       hintText: "Enter the start date eg: 1/10/2024",
-                  //       suffixIcon: InkWell(
-                  //         onTap: () async {
-                  //           DateTime? pickedDate = await showDatePicker(
-                  //             context: context,
+// TextField(
+//   decoration: InputDecoration(
+//       labelText: "Start Date",
+//       hintText: "Enter the start date eg: 1/10/2024",
+//       suffixIcon: InkWell(
+//         onTap: () async {
+//           DateTime? pickedDate = await showDatePicker(
+//             context: context,
 
-                  //             initialDate: DateTime.now(),
-                  //             firstDate: DateTime.now(),
-                  //             lastDate:
-                  //                 DateTime.now().add(const Duration(days: 365)),
-                  //           );
-                  //           if (pickedDate != null) {
-                  //             /*  return "${picked.year}-${picked.month}-${picked.day}"; */
-                  //             startDate.value = pickedDate;
-                  //           }
-                  //         },
-                  //         child: const Icon(Icons.calendar_today,
-                  //             size: 20, color: Colors.blue),
-                  //       )),
-                  // ),
-                  // const SizedBox(
-                  //   height: AppSize.km,
-                  // ),
-                  // TextField(
-                  //   decoration: InputDecoration(
-                  //       labelText: "End Date",
-                  //       hintText: "Enter the end date, eg : 1/10/2024",
-                  //       suffixIcon: InkWell(
-                  //         onTap: () async {
-                  //           DateTime? pickedDate = await showDatePicker(
-                  //             context: context,
-                  //             initialDate: startDate.value,
-                  //             firstDate: startDate.value,
-                  //             lastDate:
-                  //                 startDate.value.add(const Duration(days: 14)),
-                  //           );
-                  //           if (pickedDate != null) {
-                  //             /*  return "${picked.year}-${picked.month}-${picked.day}"; */
-                  //             endDate.value = pickedDate;
-                  //           }
-                  //         },
-                  //         child: const Icon(Icons.calendar_today,
-                  //             size: 20, color: Colors.blue),
-                  //       )),
-                  // ),
+//             initialDate: DateTime.now(),
+//             firstDate: DateTime.now(),
+//             lastDate:
+//                 DateTime.now().add(const Duration(days: 365)),
+//           );
+//           if (pickedDate != null) {
+//             /*  return "${picked.year}-${picked.month}-${picked.day}"; */
+//             startDate.value = pickedDate;
+//           }
+//         },
+//         child: const Icon(Icons.calendar_today,
+//             size: 20, color: Colors.blue),
+//       )),
+// ),
+// const SizedBox(
+//   height: AppSize.km,
+// ),
+// TextField(
+//   decoration: InputDecoration(
+//       labelText: "End Date",
+//       hintText: "Enter the end date, eg : 1/10/2024",
+//       suffixIcon: InkWell(
+//         onTap: () async {
+//           DateTime? pickedDate = await showDatePicker(
+//             context: context,
+//             initialDate: startDate.value,
+//             firstDate: startDate.value,
+//             lastDate:
+//                 startDate.value.add(const Duration(days: 14)),
+//           );
+//           if (pickedDate != null) {
+//             /*  return "${picked.year}-${picked.month}-${picked.day}"; */
+//             endDate.value = pickedDate;
+//           }
+//         },
+//         child: const Icon(Icons.calendar_today,
+//             size: 20, color: Colors.blue),
+//       )),
+// ),
+
