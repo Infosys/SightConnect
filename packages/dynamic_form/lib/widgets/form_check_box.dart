@@ -16,6 +16,7 @@ class FormCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderCheckboxGroup<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.label,
       decoration: InputDecoration(
         labelText: field.label,

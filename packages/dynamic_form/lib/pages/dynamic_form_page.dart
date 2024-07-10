@@ -78,7 +78,6 @@ class FormLayout extends StatelessWidget {
       body: SingleChildScrollView(
         child: FormBuilder(
           key: formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

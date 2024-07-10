@@ -17,6 +17,7 @@ class FormChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final options = field.options;
     return FormBuilderChoiceChip<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.label,
       spacing: 10,
       avatarBorder: const CircleBorder(),
