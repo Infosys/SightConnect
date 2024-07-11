@@ -9,5 +9,6 @@ enum DynamicFormType {
   SWITCH,
   FILE,
   DEFAULT,
-  TEXTAREA
+  TEXTAREA,
+  CONDITIONAL,
 }

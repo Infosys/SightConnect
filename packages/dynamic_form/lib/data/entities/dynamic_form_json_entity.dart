@@ -26,6 +26,7 @@ class SectionEntity {
 
 class FieldEntity {
   final DynamicFormType type;
+  final DynamicFormType? subType;
   final bool isRequired;
   final bool readOnly;
   final bool obscure;
@@ -42,9 +43,12 @@ class FieldEntity {
   final CustomDateTimeEntity dateTime;
   final String direction;
   final List<String> typeSupport;
+  final bool initialValueBool;
+  List<Map<String, FieldEntity>>? optionType;
 
   FieldEntity({
     required this.type,
+    required this.subType,
     required this.isRequired,
     required this.readOnly,
     required this.obscure,
@@ -61,6 +65,9 @@ class FieldEntity {
     required this.dateTime,
     required this.direction,
     required this.typeSupport,
+    required this.initialValueBool,
+    required this.optionType,
+
   });
 }
 

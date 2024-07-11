@@ -37,6 +37,7 @@ class Section {
 
 class Field {
   String? type;
+  String? subType;
   bool? isRequired;
   bool? readOnly;
   bool? obscure;
@@ -53,29 +54,34 @@ class Field {
   CustomDateTime? dateTime;
   String? direction;
   List<String>? typeSupport;
+  bool? initialValueBool;
+  List<Map<String, Field>>? optionType;
 
-  Field({
-    this.type,
-    this.isRequired,
-    this.readOnly,
-    this.obscure,
-    this.keyBoardType,
-    this.initialValue,
-    this.label,
-    this.hint,
-    this.validation,
-    this.maxLength,
-    this.minLength,
-    this.maxlines,
-    this.options,
-    this.dateTime,
-    this.direction,
-    this.typeSupport,
-  });
+  Field(
+      {this.type,
+      this.subType,
+      this.isRequired,
+      this.readOnly,
+      this.obscure,
+      this.keyBoardType,
+      this.initialValue,
+      this.label,
+      this.hint,
+      this.validation,
+      this.maxLength,
+      this.minLength,
+      this.maxlines,
+      this.options,
+      this.dateTime,
+      this.direction,
+      this.typeSupport,
+      this.initialValueBool,
+      this.optionType});
 
   factory Field.fromJson(Map<String, dynamic> json) {
     return Field(
       type: json['type'],
+      subType: json['subType'],
       isRequired: json['isRequired'],
       readOnly: json['readOnly'],
       obscure: json['obscure'],
@@ -98,6 +104,12 @@ class Field {
       direction: json['direction'],
       typeSupport: json['typeSupport'] != null
           ? List<String>.from(json['typeSupport'])
+          : null,
+      initialValueBool: json['initialValueBool'],
+      optionType: json['optionType'] != null
+          ? (json['optionType'] as List)
+              .map((i) => Map<String, Field>.from(i))
+              .toList()
           : null,
     );
   }

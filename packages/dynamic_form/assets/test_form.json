@@ -7,7 +7,7 @@
       "sectionTitle": "Personal Information",
       "fields": [
         {
-          "type": "text_field",
+          "type": "TEXTFIELD",
           "isRequired": true,
           "readOnly": false,
           "obscure": false,
@@ -24,7 +24,7 @@
           "maxlines": 1
         },
         {
-          "type": "text_field",
+          "type": "TEXTFIELD",
           "isRequired": true,
           "readOnly": false,
           "obscure": false,
@@ -41,7 +41,7 @@
           "maxlines": 1
         },
         {
-          "type": "text_field",
+          "type": "TEXTFIELD",
           "isRequired": true,
           "readOnly": false,
           "obscure": false,
@@ -54,7 +54,7 @@
           }
         },
         {
-          "type": "text_field",
+          "type": "TEXTFIELD",
           "isRequired": true,
           "readOnly": false,
           "obscure": false,
@@ -67,7 +67,7 @@
           }
         },
         {
-          "type": "dropdown",
+          "type": "DROPDOWN",
           "label": "Age Group",
           "hint": "Select your age group",
           "options": [
@@ -91,7 +91,7 @@
           "initialValue": null
         },
         {
-          "type": "date_time",
+          "type": "DATETIME",
           "label": "Date of Birth",
           "initialValue": null,
           "date": {
@@ -107,7 +107,7 @@
           }
         },
         {
-          "type": "radio",
+          "type": "RADIO",
           "direction": "vertical",
           "label": "Are you allergic to any medications?",
           "options": [
@@ -123,7 +123,7 @@
           "initialValue": null
         },
         {
-          "type": "checkbox",
+          "type": "CHECKBOX",
           "direction": "vertical",
           "label": "Conditions I agree to:",
           "options": [
@@ -139,13 +139,13 @@
           "initialValue": null
         },
         {
-          "type": "switch",
+          "type": "SWITCH",
           "label": "I agree to the terms and conditions",
           "initialValue": null,
           "isRequired": true
         },
         {
-          "type": "chips",
+          "type": "CHIPS",
           "label": "Select your preferred language",
           "options": [
             {
@@ -159,17 +159,7 @@
           ]
         },
         {
-          "type": "image",
-          "label": "Upload Signature",
-          "typeSupport": [
-            "PNG",
-            "JPEG",
-            "JPG"
-          ],
-          "hint": "Capture or upload your signature"
-        },
-        {
-          "type": "file",
+          "type": "FILE",
           "label": "Health Insurance Card",
           "typeSupport": [
             "PDF",
@@ -177,6 +167,96 @@
             "DOC"
           ],
           "hint": "Upload your health insurance card"
+        },
+        {
+          "type": "CONDITIONAL",
+          "label": "Please provide your emergency contact details",
+          "options": [
+            {
+              "value": "1",
+              "label": "Office"
+            },
+            {
+              "value": "2",
+              "label": "Home"
+            },
+            {
+              "value": "3",
+              "label": "Emergency"
+            }
+          ],
+          "subtype": "RADIO",
+          "optionType": {
+            "0": {
+              "type": "TEXTFIELD",
+              "isRequired": true,
+              "readOnly": false,
+              "obscure": false,
+              "keyBoardType": "email",
+              "label": "Email",
+              "hint": "Enter your email",
+              "validation": {
+                "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email."
+              }
+            },
+            "1": {
+              "type": "TEXTFIELD",
+              "isRequired": true,
+              "readOnly": false,
+              "obscure": false,
+              "keyBoardType": "email",
+              "label": "Email",
+              "hint": "Enter your email",
+              "validation": {
+                "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email."
+              }
+            },
+            "2": {
+              "type": "CONDITIONAL",
+              "label": "Please provide your emergency contact details",
+              "options": [
+                {
+                  "value": "mother",
+                  "label": "Mother"
+                },
+                {
+                  "value": "father",
+                  "label": "Father"
+                }
+              ],
+              "subtype": "DROPDOWN",
+              "optionType": {
+                "0": {
+                  "type": "TEXTFIELD",
+                  "isRequired": true,
+                  "readOnly": false,
+                  "obscure": false,
+                  "keyBoardType": "phone",
+                  "label": "Phone Number",
+                  "hint": "Enter your phone number",
+                  "validation": {
+                    "pattern": "^[0-9]{10}$",
+                    "errorMessage": "Please enter a valid phone number."
+                  }
+                },
+                "1": {
+                  "type": "TEXTFIELD",
+                  "isRequired": true,
+                  "readOnly": false,
+                  "obscure": false,
+                  "keyBoardType": "phone",
+                  "label": "Phone Number",
+                  "hint": "Enter your phone number",
+                  "validation": {
+                    "pattern": "^[0-9]{10}$",
+                    "errorMessage": "Please enter a valid phone number."
+                  }
+                }
+              }
+            }
+          }
         }
       ]
     }
