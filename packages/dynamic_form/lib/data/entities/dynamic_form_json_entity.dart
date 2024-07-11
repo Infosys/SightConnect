@@ -35,9 +35,10 @@ class FieldEntity {
   final String label;
   final String hint;
   final ValidationEntity validation;
-  final int? maxLength;
-  final int? minLength;
-  final int? maxlines;
+  final double? maxLength;
+  final double? minLength;
+  final double? maxlines;
+  final int? divisions;
   final List<OptionEntity> options;
   final CustomDateTimeEntity dateTime;
   final String direction;
@@ -59,12 +60,14 @@ class FieldEntity {
     required this.maxLength,
     required this.minLength,
     required this.maxlines,
+    required this.divisions,
     required this.options,
     required this.dateTime,
     required this.direction,
     required this.typeSupport,
     required this.initialValueBool,
     required this.optionType,
+
   });
 }
 

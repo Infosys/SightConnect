@@ -14,6 +14,7 @@ import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
+import 'package:dynamic_form/widgets/form_slider.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_area.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
@@ -101,27 +102,33 @@ class FormLayout extends StatelessWidget {
                     ),
                   ),
               const SizedBox(height: 20),
-              Row(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 24.0,
-                        horizontal: 32.0,
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 16.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 24.0,
+                          horizontal: 32.0,
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      log(formKey.currentState!.value.toString());
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState?.save();
+                      onPressed: () {
                         log(formKey.currentState!.value.toString());
-                      } else {
-                        print('Form validation failed');
-                      }
-                    },
-                    child: const Text('Submit Form'),
-                  ),
-                ],
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState?.save();
+                          log(formKey.currentState!.value.toString());
+                        } else {
+                          print('Form validation failed');
+                        }
+                      },
+                      child: const Text('Submit Form'),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -213,6 +220,10 @@ class FormLayout extends StatelessWidget {
         //         // children: _buildFields(field.hint, key),
         //         ),
         //   );
+
+        case DynamicFormType.SLIDER:
+          return FormSlider(field: field);
+
         default:
           return Container();
       }

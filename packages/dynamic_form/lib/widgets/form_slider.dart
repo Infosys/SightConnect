@@ -18,7 +18,7 @@ class FormSlider extends StatelessWidget {
     return FormBuilderSlider(
       name: field.label,
       decoration: InputDecoration(
-        hintText: field.label,
+        labelText: field.label,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -26,9 +26,10 @@ class FormSlider extends StatelessWidget {
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      min: 0,
-      max: 100,
-      initialValue: 12,
+      min: field.minLength ?? 0.0,
+      max: field.maxLength ?? 0.0,
+      divisions: field.divisions,
+      initialValue: field.initialValue as double? ?? 0.0,
     );
   }
 }

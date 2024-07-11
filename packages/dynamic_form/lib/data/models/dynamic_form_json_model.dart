@@ -46,9 +46,10 @@ class Field {
   String? label;
   String? hint;
   Validation? validation;
-  int? maxLength;
-  int? minLength;
-  int? maxlines;
+  double? maxLength;
+  double? minLength;
+  double? maxlines;
+  int? divisions;
   List<Option>? options;
   CustomDateTime? dateTime;
   String? direction;

@@ -50,6 +50,7 @@ class DynamicFormJsonMapper {
         maxLength: field.maxLength,
         minLength: field.minLength,
         maxlines: field.maxlines,
+        divisions: field.divisions,
         options: _mapOptionModelToEntity(field.options),
         dateTime: CustomDateTimeEntity(
           format: field.dateTime?.format ?? '',
@@ -61,6 +62,7 @@ class DynamicFormJsonMapper {
         typeSupport: field.typeSupport ?? [],
         initialValueBool: field.initialValueBool ?? false,
         optionType: _mapOptionTypeToEntity(field.optionType),
+
       );
     }).toList();
   }

@@ -17,5 +17,6 @@ Your dynamic form supports a variety of field types to cater to different data i
 - **SLIDER**: Lets users select a value from a range by sliding a knob along a track.
 - **SWITCH**: Offers an on/off toggle control.
 - **FILE**: Enables users to upload files.
+- **TEXTAREA** Enable textArea
 
 Each field type is designed to facilitate different kinds of input, making your form versatile and user-friendly.

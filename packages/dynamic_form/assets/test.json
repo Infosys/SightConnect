@@ -324,7 +324,17 @@
             "DOC"
           ],
           "hint": "Upload your health insurance card"
-        }
+        },
+        {
+          "type": "SLIDER",
+          "isRequired": true,
+          "label": "Visualy Acuity",
+ 
+          "maxLength": 255.0,
+          "minLength": 0.0,
+          "initialValue": 0.0,
+          "divisions":1
+       }
       ]
     }
   ]
