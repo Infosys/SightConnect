@@ -10,6 +10,7 @@ import 'package:dynamic_form/widgets/app_responsive_widget.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
+import 'package:dynamic_form/widgets/form_conditional_radio.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
@@ -142,93 +143,110 @@ class FormLayout extends StatelessWidget {
     if (fields == null) {
       return [];
     }
-    return fields.map<Widget>((field) {
-      switch (field.type) {
-        case DynamicFormType.TEXTFIELD:
-          return FormTextField(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value);
-            },
-          );
 
-        case DynamicFormType.DROPDOWN:
-          return FormDropDown(
-              field: field,
-              onChanged: (value) {
-                debugPrint(value);
-              });
-
-        case DynamicFormType.DATETIME:
-          return FormDataTimePicker(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-
-        case DynamicFormType.RADIO:
-          return FormRadio(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-        case DynamicFormType.CHECKBOX:
-          return FormCheckbox(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-        case DynamicFormType.FILE:
-          return FormFile(
-            field: field,
-            onChanged: (value) {
-              key.currentState?.setInternalFieldValue(
-                  field.label, value.map((e) => e.path).toList());
-              debugPrint(value.toString());
-            },
-          );
-        case DynamicFormType.SWITCH:
-          return FormSwitch(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-
-        case DynamicFormType.CHIPS:
-          return FormChip(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-
-        case DynamicFormType.TEXTAREA:
-          return FormTextArea(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value);
-            },
-          );
-        case DynamicFormType.CONDITIONAL:
-          return const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Conditional Field'),
-              SizedBox(height: 16),
-            ],
-          );
-
-        case DynamicFormType.SLIDER:
-          return FormSlider(field: field);
-
-        default:
-          return Container();
-      }
+    return fields.map((field) {
+      return getField(field, key);
     }).toList();
+  }
+}
+
+Widget _getConditionalFields(FieldEntity field) {
+  switch (field.subType) {
+    case DynamicFormSubType.RADIO:
+      return FormConditionalRadio(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+    case DynamicFormSubType.DROPDOWN:
+      return Container();
+    default:
+      return Container();
+  }
+}
+
+Widget getField(FieldEntity? field, GlobalKey<FormBuilderState> key) {
+  if (field == null) {
+    return Container();
+  }
+  switch (field.type) {
+    case DynamicFormType.TEXTFIELD:
+      return FormTextField(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value);
+        },
+      );
+
+    case DynamicFormType.DROPDOWN:
+      return FormDropDown(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value);
+          });
+
+    case DynamicFormType.DATETIME:
+      return FormDataTimePicker(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+
+    case DynamicFormType.RADIO:
+      return FormRadio(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+    case DynamicFormType.CHECKBOX:
+      return FormCheckbox(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+    case DynamicFormType.FILE:
+      return FormFile(
+        field: field,
+        onChanged: (value) {
+          key.currentState?.setInternalFieldValue(
+              field.label, value.map((e) => e.path).toList());
+          debugPrint(value.toString());
+        },
+      );
+    case DynamicFormType.SWITCH:
+      return FormSwitch(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+
+    case DynamicFormType.CHIPS:
+      return FormChip(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+
+    case DynamicFormType.TEXTAREA:
+      return FormTextArea(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value);
+        },
+      );
+    case DynamicFormType.CONDITIONAL:
+      return _getConditionalFields(field);
+
+    case DynamicFormType.SLIDER:
+      return FormSlider(field: field);
+
+    default:
+      return Container();
   }
 }

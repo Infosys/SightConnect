@@ -12,3 +12,5 @@ enum DynamicFormType {
   TEXTAREA,
   CONDITIONAL,
 }
+
+enum DynamicFormSubType { RADIO, DROPDOWN }

@@ -336,75 +336,93 @@
         },
         {
           "type": "CONDITIONAL",
-          "label": "Please provide your emergency contact details",
+          "label": "Was Donor Infused or Transfused prior to sample collection?",
           "options": [
             {
+              "value": "0",
+              "label": "Yes"
+            },
+            {
               "value": "1",
-              "label": "Office"
-            },
-            {
-              "value": "2",
-              "label": "Home"
-            },
-            {
-              "value": "3",
-              "label": "Emergency"
+              "label": "No"
             }
           ],
-          "subtype": "RADIO",
+          "subType": "RADIO",
           "optionType": {
             "0": {
-              "type": "TEXTFIELD",
-              "isRequired": true,
-              "readOnly": false,
-              "obscure": false,
-              "keyBoardType": "email",
-              "label": "Email",
-              "hint": "Enter your email",
-              "validation": {
-                "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-                "errorMessage": "Please enter a valid email."
-              }
-            },
-            "1": {
-              "type": "TEXTFIELD",
-              "isRequired": true,
-              "readOnly": false,
-              "obscure": false,
-              "keyBoardType": "email",
-              "label": "Email",
-              "hint": "Enter your email",
-              "validation": {
-                "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-                "errorMessage": "Please enter a valid email."
-              }
-            },
-            "2": {
               "type": "CONDITIONAL",
-              "label": "Please provide your emergency contact details",
+              "label": "Is Donor >12 Years Of Age?",
               "options": [
                 {
-                  "value": "mother",
-                  "label": "Mother"
+                  "value": "0",
+                  "label": "Yes"
                 },
                 {
-                  "value": "father",
-                  "label": "Father"
+                  "value": "1",
+                  "label": "No"
                 }
               ],
-              "subtype": "DROPDOWN",
+              "subType": "RADIO",
               "optionType": {
                 "0": {
-                  "type": "TEXTFIELD",
-                  "isRequired": true,
-                  "readOnly": false,
-                  "obscure": false,
-                  "keyBoardType": "phone",
-                  "label": "Phone Number",
-                  "hint": "Enter your phone number",
-                  "validation": {
-                    "pattern": "^[0-9]{10}$",
-                    "errorMessage": "Please enter a valid phone number."
+                  "type": "CONDITIONAL",
+                  "label": "Was Donor Infused or Transfused prior to sample collection?",
+                  "options": [
+                    {
+                      "value": "0",
+                      "label": "Yes"
+                    },
+                    {
+                      "value": "1",
+                      "label": "No"
+                    }
+                  ],
+                  "subType": "RADIO",
+                  "optionType": {
+                    "0": {
+                      "type": "CONDITIONAL",
+                      "label": "Has Extra Blood loss occured?",
+                      "options": [
+                        {
+                          "value": "0",
+                          "label": "Yes"
+                        },
+                        {
+                          "value": "1",
+                          "label": "No"
+                        }
+                      ],
+                      "subType": "RADIO",
+                      "optionType": {
+                        "0": {
+                          "type": "TEXTFIELD",
+                          "isRequired": true,
+                          "readOnly": false,
+                          "obscure": false,
+                          "keyBoardType": "number",
+                          "label": "Record Volume of Blood product transfused",
+                          "hint": "Enter Test Sample"
+                        },
+                        "1": {
+                          "type": "TEXTFIELD",
+                          "isRequired": true,
+                          "readOnly": false,
+                          "obscure": false,
+                          "keyBoardType": "number",
+                          "label": "Test Sample",
+                          "hint": "Enter Test Sample"
+                        }
+                      }
+                    },
+                    "1": {
+                      "type": "TEXTFIELD",
+                      "isRequired": true,
+                      "readOnly": false,
+                      "obscure": false,
+                      "keyBoardType": "number",
+                      "label": "Test Sample",
+                      "hint": "Enter Test Sample"
+                    }
                   }
                 },
                 "1": {
@@ -421,6 +439,15 @@
                   }
                 }
               }
+            },
+            "1": {
+              "type": "TEXTFIELD",
+              "isRequired": true,
+              "readOnly": false,
+              "obscure": false,
+              "keyBoardType": "number",
+              "label": "Test Sample",
+              "hint": "Enter Test Sample"
             }
           }
         }

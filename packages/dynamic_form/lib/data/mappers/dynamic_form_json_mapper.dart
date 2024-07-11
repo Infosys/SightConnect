@@ -35,7 +35,7 @@ class DynamicFormJsonMapper {
     return fieldModel.map((field) {
       return FieldEntity(
         type: _mapToFormType(field.type),
-        subType: null,
+        subType: _mapToFormSubType(field.subType),
         isRequired: field.isRequired ?? false,
         readOnly: field.readOnly ?? false,
         obscure: field.obscure ?? false,
@@ -76,7 +76,7 @@ class DynamicFormJsonMapper {
         key,
         FieldEntity(
           type: _mapToFormType(value.type),
-          subType: _mapToFormType(value.subType),
+          subType: _mapToFormSubType(value.subType),
           isRequired: value.isRequired ?? false,
           readOnly: value.readOnly ?? false,
           obscure: value.obscure ?? false,
@@ -146,6 +146,17 @@ class DynamicFormJsonMapper {
         return DynamicFormType.CONDITIONAL;
       default:
         return DynamicFormType.DEFAULT;
+    }
+  }
+
+  DynamicFormSubType _mapToFormSubType(String? value) {
+    switch (value) {
+      case 'RADIO':
+        return DynamicFormSubType.RADIO;
+      case 'DROPDOWN':
+        return DynamicFormSubType.DROPDOWN;
+      default:
+        return DynamicFormSubType.RADIO;
     }
   }
 }

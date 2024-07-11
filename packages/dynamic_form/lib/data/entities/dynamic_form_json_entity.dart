@@ -26,7 +26,7 @@ class SectionEntity {
 
 class FieldEntity {
   final DynamicFormType type;
-  final DynamicFormType? subType;
+  final DynamicFormSubType? subType;
   final bool isRequired;
   final bool readOnly;
   final bool obscure;
