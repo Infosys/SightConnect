@@ -244,7 +244,7 @@ class VolunteerExpired extends HookConsumerWidget {
                                 if (isChecked.value) {
                                   VolunteerPostModel volunteerPostModel =
                                       VolunteerPostModel(
-                                          id: null,
+                                          id: volunteerId,
                                           userId: int.parse(
                                               PersistentAuthStateService
                                                   .authState.userId!),

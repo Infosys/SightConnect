@@ -42,6 +42,10 @@ class _VGAddEventDetailsPageState extends ConsumerState<VGAddEventDetailsPage>
         pincode = await GeocodingService.getPincodeFromLocation();
         logger.f("Pincode : $pincode");
       }
+      var data = ref.watch(addEventDetailsProvider);
+      if (pincode != null && pincode!.isNotEmpty) {
+        data.pincode.text = pincode!;
+      }
     });
   }
 

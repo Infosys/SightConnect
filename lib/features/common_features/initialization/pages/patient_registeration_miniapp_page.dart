@@ -77,6 +77,9 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
     } else if (role == "ROLE_VISION_GUARDIAN") {
       return MiniAppInjectionModelRole.VISION_GUARDIAN;
     }
+    else if(role=="ROLE_VOLUNTEER"){
+      return MiniAppInjectionModelRole.VOLUNTEER;
+    }
     return null;
   }
 

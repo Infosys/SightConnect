@@ -47,19 +47,39 @@ class RegisterVolunteerPage extends HookConsumerWidget {
           body: !isLoading.value
               ? ref.watch(checkVolunteerProvider).when(data: (value) {
                   volunteerId.value = value.id;
-
+                  logger.f("check volunteer response : ${value.toString()}");
                   //Status is Pending
 
                   if (value.status == Status.PENDING) {
-                    const VolunteerPending();
+                    return const VolunteerPending();
                   } else if (value.status == Status.EXPIRED) {
                     return VolunteerExpired(
                       volunteerId: volunteerId.value!,
                     );
+                  } else if (value.status == Status.ACTIVE) {
+                    return const VolunteerApproved();
+                  } else {
+                    return const Center(
+                      child: Card(
+                        elevation: 4,
+                        child: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "There was some problem fetching your details, try again later.",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
                   }
-                  logger.f("check volunteer response : ${value.toString()}");
 
-                  return const VolunteerApproved();
                   // return  VolunteerExpired(volunteerId: volunteerId.value!,);
                   // return const VolunteerPending();
                 }, loading: () {
@@ -123,8 +143,8 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                             context: context,
                                             initialDate: startDate.value,
                                             firstDate: DateTime.now(),
-                                            lastDate: DateTime.now().add(
-                                                const Duration(days: 365)),
+                                            lastDate: DateTime.now()
+                                                .add(const Duration(days: 365)),
                                           );
                                           if (pickedDate != null) {
                                             /*  return "${picked.year}-${picked.month}-${picked.day}"; */
@@ -149,8 +169,7 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                 right: 0,
                                                 child: SvgPicture.asset(
                                                   "assets/images/triage_card_bg.svg",
-                                                  width:
-                                                      AppSize.width(context),
+                                                  width: AppSize.width(context),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -161,8 +180,7 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                   children: [
                                                     Text(
                                                       "Select Start Date",
-                                                      style:
-                                                          applyRobotoFont(),
+                                                      style: applyRobotoFont(),
                                                     ),
                                                     const SizedBox(
                                                       height: AppSize.ks,
@@ -185,8 +203,8 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                             context: context,
                                             initialDate: startDate.value,
                                             firstDate: startDate.value,
-                                            lastDate: startDate.value.add(
-                                                const Duration(days: 14)),
+                                            lastDate: startDate.value
+                                                .add(const Duration(days: 14)),
                                           );
                                           if (pickedDate != null) {
                                             /*  return "${picked.year}-${picked.month}-${picked.day}"; */
@@ -211,8 +229,7 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                 right: 0,
                                                 child: SvgPicture.asset(
                                                   "assets/images/triage_card_bg.svg",
-                                                  width:
-                                                      AppSize.width(context),
+                                                  width: AppSize.width(context),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -299,7 +316,7 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                         endDate: endDate.value
                                                             .toUtc(),
                                                         status: null);
-                            
+
                                                 try {
                                                   isLoading.value = true;
                                                   await ref
@@ -317,10 +334,10 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                             "You have successfully registered as a volunteer."),
                                                       ),
                                                     );
-                            
+
                                                     ref.read(
                                                         dioRefreshTokenProvider);
-                            
+
                                                     Navigator.pushAndRemoveUntil(
                                                         context,
                                                         MaterialPageRoute(
@@ -331,8 +348,7 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                 } on DioException catch (e) {
                                                   DioErrorHandler
                                                       .handleDioError(e);
-                                                  ScaffoldMessenger.of(
-                                                          context)
+                                                  ScaffoldMessenger.of(context)
                                                       .showSnackBar(
                                                     const SnackBar(
                                                       content: Text(
@@ -352,8 +368,8 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                               }
                                             }
                                           : null,
-                                      child: const Text(
-                                          "Register as a Volunteer"),
+                                      child:
+                                          const Text("Register as a Volunteer"),
                                     ),
                                   )
                                 ],

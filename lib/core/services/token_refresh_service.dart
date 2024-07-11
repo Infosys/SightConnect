@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/features/common_features/initialization/provide
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-var dioRefreshTokenProvider = FutureProvider((ref) async {
+var dioRefreshTokenProvider = Provider((ref) async {
   Future<void> refreshToken() async {
     final refreshToken = PersistentAuthStateService.authState.refreshToken;
     final tokens = await ref

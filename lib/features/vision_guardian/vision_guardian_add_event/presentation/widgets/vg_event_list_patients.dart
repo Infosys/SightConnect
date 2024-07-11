@@ -69,6 +69,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
                                       PatientRegistrationMiniappPage(
                                     actionType: MiniAppActionType.REGISTER,
                                     displayName: loc.vgRegisterPatient,
+                                    mobileNumber: ref.read(addPatientEventProvider).patientQueryDataValue,
                                   ),
                                 ),
                               );

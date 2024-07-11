@@ -1,11 +1,16 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/core/services/token_refresh_service.dart';
+import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class VolunteerApproved extends StatelessWidget {
+class VolunteerApproved extends ConsumerWidget {
   const VolunteerApproved({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -93,6 +98,27 @@ class VolunteerApproved extends StatelessWidget {
                             'Begin triaging and contributing to our initiatives.',
                       ),
                       const SizedBox(height: 24),
+                      ElevatedButton(
+                          onPressed: () async {
+                            try {
+                              await ref.read(dioRefreshTokenProvider);
+                              // logger.f("refresh token value : $value");
+                              await PersistentAuthStateService.authState
+                                  .setActiveRole(null);
+                              if (context.mounted) {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const InitializationPage()),
+                                    (route) => false);
+                              }
+                            } on Exception catch (e) {
+                              logger.e("error : $e");
+                            }
+                          },
+                          child: const Text("Switch to Volunteer")),
+                      const SizedBox(height: 24),
                       Text(
                         'Questions? Need assistance?',
                         textAlign: TextAlign.center,
@@ -112,7 +138,7 @@ class VolunteerApproved extends StatelessWidget {
                         ],
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
