@@ -197,7 +197,8 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
     await LocationService.getLocationWithPermissions();
 
-    pinCode = await GeocodingService.getPincodeFromLocation();
+    List<String> addressData = await GeocodingService.getPincodeFromLocation();
+    pinCode = addressData[0];
     logger.f("pinCode is  $pinCode");
 
     final status = await navigator.push<bool?>(

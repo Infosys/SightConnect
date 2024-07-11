@@ -10,16 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionGuardianEventAddressCard extends ConsumerWidget {
-  const VisionGuardianEventAddressCard({super.key, this.pincode});
-
-  final String? pincode;
+  const VisionGuardianEventAddressCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(addEventDetailsProvider);
-    if (pincode != null && pincode!.isNotEmpty) {
-      data.pincode.text = pincode!;
-    }
+
     final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.km),
