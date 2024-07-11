@@ -35,6 +35,7 @@ class DynamicFormJsonMapper {
     return fieldModel.map((field) {
       return FieldEntity(
         type: _mapToFormType(field.type),
+        subType: _mapToFormType(field.subType),
         isRequired: field.isRequired ?? false,
         readOnly: field.readOnly ?? false,
         obscure: field.obscure ?? false,
@@ -59,7 +60,50 @@ class DynamicFormJsonMapper {
         direction: field.direction ?? '',
         typeSupport: field.typeSupport ?? [],
         initialValueBool: field.initialValueBool ?? false,
+        optionType: _mapOptionTypeToEntity(field.optionType),
       );
+    }).toList();
+  }
+
+  List<Map<String, FieldEntity>>? _mapOptionTypeToEntity(
+      List<Map<String, Field>>? optionType) {
+    if (optionType == null) {
+      return [];
+    }
+    return optionType.map((option) {
+      return option.map((key, value) {
+        return MapEntry(
+            key,
+            FieldEntity(
+              type: _mapToFormType(value.type),
+              subType: _mapToFormType(value.subType),
+              isRequired: value.isRequired ?? false,
+              readOnly: value.readOnly ?? false,
+              obscure: value.obscure ?? false,
+              keyBoardType: value.keyBoardType ?? '',
+              initialValue: value.initialValue,
+              label: value.label ?? '',
+              hint: value.hint ?? '',
+              validation: ValidationEntity(
+                pattern: value.validation?.pattern ?? '',
+                errorMessage: value.validation?.errorMessage ?? '',
+              ),
+              maxLength: value.maxLength,
+              minLength: value.minLength,
+              maxlines: value.maxlines,
+              options: _mapOptionModelToEntity(value.options),
+              dateTime: CustomDateTimeEntity(
+                format: value.dateTime?.format ?? '',
+                type: value.dateTime?.type ?? '',
+                start: value.dateTime?.start ?? '',
+                end: value.dateTime?.end ?? '',
+              ),
+              direction: value.direction ?? '',
+              typeSupport: value.typeSupport ?? [],
+              initialValueBool: value.initialValueBool ?? false,
+              optionType: _mapOptionTypeToEntity(value.optionType),
+            ));
+      });
     }).toList();
   }
 
@@ -97,6 +141,8 @@ class DynamicFormJsonMapper {
         return DynamicFormType.FILE;
       case 'TEXTAREA':
         return DynamicFormType.TEXTAREA;
+      case 'CONDITIONAL':
+        return DynamicFormType.CONDITIONAL;
       default:
         return DynamicFormType.DEFAULT;
     }

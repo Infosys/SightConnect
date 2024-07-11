@@ -37,6 +37,7 @@ class Section {
 
 class Field {
   String? type;
+  String? subType;
   bool? isRequired;
   bool? readOnly;
   bool? obscure;
@@ -53,9 +54,11 @@ class Field {
   String? direction;
   List<String>? typeSupport;
   bool? initialValueBool;
+  List<Map<String, Field>>? optionType;
 
   Field(
       {this.type,
+      this.subType,
       this.isRequired,
       this.readOnly,
       this.obscure,
@@ -71,11 +74,13 @@ class Field {
       this.dateTime,
       this.direction,
       this.typeSupport,
-      this.initialValueBool});
+      this.initialValueBool,
+      this.optionType});
 
   factory Field.fromJson(Map<String, dynamic> json) {
     return Field(
       type: json['type'],
+      subType: json['subType'],
       isRequired: json['isRequired'],
       readOnly: json['readOnly'],
       obscure: json['obscure'],
@@ -99,7 +104,12 @@ class Field {
       typeSupport: json['typeSupport'] != null
           ? List<String>.from(json['typeSupport'])
           : null,
-      initialValueBool: json['initialValue'],
+      initialValueBool: json['initialValueBool'],
+      optionType: json['optionType'] != null
+          ? (json['optionType'] as List)
+              .map((i) => Map<String, Field>.from(i))
+              .toList()
+          : null,
     );
   }
 }
