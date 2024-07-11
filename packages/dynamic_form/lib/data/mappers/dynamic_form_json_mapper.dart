@@ -62,7 +62,6 @@ class DynamicFormJsonMapper {
         typeSupport: field.typeSupport ?? [],
         initialValueBool: field.initialValueBool ?? false,
         optionType: _mapOptionTypeToEntity(field.optionType),
-
       );
     }).toList();
   }
@@ -104,6 +103,7 @@ class DynamicFormJsonMapper {
               typeSupport: value.typeSupport ?? [],
               initialValueBool: value.initialValueBool ?? false,
               optionType: _mapOptionTypeToEntity(value.optionType),
+              divisions: value.divisions,
             ));
       });
     }).toList();
