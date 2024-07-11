@@ -44,6 +44,7 @@ const _$MiniAppInjectionModelRoleEnumMap = {
   MiniAppInjectionModelRole.VISION_TECHNICIAN: 'VISION_TECHNICIAN',
   MiniAppInjectionModelRole.PATIENT: 'PATIENT',
   MiniAppInjectionModelRole.OPTOMETRITIAN: 'OPTOMETRITIAN',
+  MiniAppInjectionModelRole.VOLUNTEER: 'VOLUNTEER',
   MiniAppInjectionModelRole.VISION_GUARDIAN: 'VISION_GUARDIAN',
   MiniAppInjectionModelRole.OTHER: 'OTHER',
 };
