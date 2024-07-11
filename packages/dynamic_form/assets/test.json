@@ -329,12 +329,101 @@
           "type": "SLIDER",
           "isRequired": true,
           "label": "Visualy Acuity",
- 
           "maxLength": 255.0,
           "minLength": 0.0,
           "initialValue": 0.0,
-          "divisions":1
-       }
+          "divisions": 1
+        },
+        {
+          "type": "CONDITIONAL",
+          "label": "Please provide your emergency contact details",
+          "options": [
+            {
+              "value": "1",
+              "label": "Office"
+            },
+            {
+              "value": "2",
+              "label": "Home"
+            },
+            {
+              "value": "3",
+              "label": "Emergency"
+            }
+          ],
+          "subtype": "RADIO",
+          "optionType": {
+            "0": {
+              "type": "TEXTFIELD",
+              "isRequired": true,
+              "readOnly": false,
+              "obscure": false,
+              "keyBoardType": "email",
+              "label": "Email",
+              "hint": "Enter your email",
+              "validation": {
+                "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email."
+              }
+            },
+            "1": {
+              "type": "TEXTFIELD",
+              "isRequired": true,
+              "readOnly": false,
+              "obscure": false,
+              "keyBoardType": "email",
+              "label": "Email",
+              "hint": "Enter your email",
+              "validation": {
+                "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email."
+              }
+            },
+            "2": {
+              "type": "CONDITIONAL",
+              "label": "Please provide your emergency contact details",
+              "options": [
+                {
+                  "value": "mother",
+                  "label": "Mother"
+                },
+                {
+                  "value": "father",
+                  "label": "Father"
+                }
+              ],
+              "subtype": "DROPDOWN",
+              "optionType": {
+                "0": {
+                  "type": "TEXTFIELD",
+                  "isRequired": true,
+                  "readOnly": false,
+                  "obscure": false,
+                  "keyBoardType": "phone",
+                  "label": "Phone Number",
+                  "hint": "Enter your phone number",
+                  "validation": {
+                    "pattern": "^[0-9]{10}$",
+                    "errorMessage": "Please enter a valid phone number."
+                  }
+                },
+                "1": {
+                  "type": "TEXTFIELD",
+                  "isRequired": true,
+                  "readOnly": false,
+                  "obscure": false,
+                  "keyBoardType": "phone",
+                  "label": "Phone Number",
+                  "hint": "Enter your phone number",
+                  "validation": {
+                    "pattern": "^[0-9]{10}$",
+                    "errorMessage": "Please enter a valid phone number."
+                  }
+                }
+              }
+            }
+          }
+        }
       ]
     }
   ]

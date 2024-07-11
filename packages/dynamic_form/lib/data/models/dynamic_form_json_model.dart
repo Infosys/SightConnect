@@ -55,7 +55,7 @@ class Field {
   String? direction;
   List<String>? typeSupport;
   bool? initialValueBool;
-  List<Map<String, Field>>? optionType;
+  Map<String, Field>? optionType;
 
   Field(
       {this.type,
@@ -107,9 +107,9 @@ class Field {
           : null,
       initialValueBool: json['initialValueBool'],
       optionType: json['optionType'] != null
-          ? (json['optionType'] as List)
-              .map((i) => Map<String, Field>.from(i))
-              .toList()
+          ? (json['optionType'] as Map<String, dynamic>).map((key, value) {
+              return MapEntry(key, Field.fromJson(value));
+            })
           : null,
     );
   }

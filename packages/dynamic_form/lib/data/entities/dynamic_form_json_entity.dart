@@ -44,7 +44,7 @@ class FieldEntity {
   final String direction;
   final List<String> typeSupport;
   final bool initialValueBool;
-  List<Map<String, FieldEntity>>? optionType;
+  Map<String, FieldEntity>? optionType;
 
   FieldEntity({
     required this.type,
@@ -67,7 +67,6 @@ class FieldEntity {
     required this.typeSupport,
     required this.initialValueBool,
     required this.optionType,
-
   });
 }
 
