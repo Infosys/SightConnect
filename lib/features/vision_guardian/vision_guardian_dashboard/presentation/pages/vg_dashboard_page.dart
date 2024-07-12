@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -32,8 +33,11 @@ class VisionGuardianDashboardPage extends ConsumerWidget {
 
     if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
       // add this line
-      SharedPreferenceService.storeTenantId(1901);
-      SharedPreferenceService.storeOrganizationId(1901);
+      Future.delayed(Duration.zero, () {
+        ref.read(globalTenantProvider).setTenantId(1901);
+        ref.read(globalTenantProvider).setOrganizationId(1901);
+      });
+
       ref.listen(getVolunteerProfileProvider, (previous, next) {
         if (next.hasError) {
           ref.read(initializationProvider).logout().then((value) {

@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/core/models/volunteer_post_model.dart';
 import 'package:eye_care_for_all/core/repositories/volunteer_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/core/services/token_refresh_service.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/volunteer_approved.dart';
@@ -264,12 +263,13 @@ class VolunteerExpired extends HookConsumerWidget {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         const SnackBar(
+                                          duration: Duration(seconds: 3),
                                           content: Text(
-                                              "You have successfully registered as a volunteer."),
+                                              "Your request has been sent successfully"),
                                         ),
                                       );
 
-                                      ref.read(dioRefreshTokenProvider);
+                                      // ref.read(dioRefreshTokenProvider);
 
                                       Navigator.pushAndRemoveUntil(
                                           context,
