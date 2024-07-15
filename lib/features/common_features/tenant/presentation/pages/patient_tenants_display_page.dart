@@ -74,7 +74,7 @@ class _TenantDisplayPageState extends ConsumerState<PatientTenantsDisplayPage>
 
     return Scaffold(
       appBar: CustomAppbar(
-        title: const Text('Tenants'),
+        title: Text(loc.patientTenantDisplayPageHeader),
         onBackPress: () {},
         centerTitle: false,
       ),
@@ -88,7 +88,7 @@ class _TenantDisplayPageState extends ConsumerState<PatientTenantsDisplayPage>
               children: [
                 Flexible(
                   child: Text(
-                    "Select a Vision Center from the list",
+                    loc.patientTenantDisplayPageBody,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: applyFiraSansFont(
@@ -150,7 +150,7 @@ class _TenantDisplayPageState extends ConsumerState<PatientTenantsDisplayPage>
                               model.init();
                             }
                           },
-                          child: const Text("Request Location Permission"),
+                          child: Text(loc.patientTenantDisplayPageRequestLocationPermissionButton),
                         ),
                       ],
                     ),

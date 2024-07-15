@@ -76,9 +76,9 @@ class DrawerMenuItems {
       title: loc.switchTenant,
       icon: "assets/drawer_icons/accessibility.svg",
     );
-    DrawerMenuItem refferal = const DrawerMenuItem(
+    DrawerMenuItem refferal = DrawerMenuItem(
       id: DrawerMenuItemId.referral,
-      title: "Referral",
+      title: loc.appDrawerReferral,
       icon: "assets/drawer_icons/referral.svg",
     );
 

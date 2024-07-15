@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/referral/data/models/r
 import 'package:eye_care_for_all/features/common_features/referral/data/repository/referral_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/referral/presentation/widgets/referral_code_error.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -33,6 +34,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     final isLoading = useState(false);
     final code = useState("");
     final myReferralAsyncValue = ref.watch(myReferralProvider);
@@ -40,7 +42,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
     return myReferralAsyncValue.when(
       data: (data) {
         if (data != null) {
-          final msg = "You have been referred by ${data.referredBy}";
+          final msg = loc.referralCollectSheetReferredBy(data.referredBy!);
 
           return Container(
             padding: const EdgeInsets.all(16),
@@ -51,7 +53,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      'Your Referral Code',
+                      loc.referralCollectSheetYourRefferalCode,
                       style: applyFiraSansFont(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -71,7 +73,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Share your referral code with your friends and family to avail benefits.',
+                  loc.referralCollectSheetReferralCodeMessage,
                   style: applyRobotoFont(
                     fontSize: 12,
                   ),
@@ -116,7 +118,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      'Collect Referral',
+                      loc.referralCollectSheetHeader,
                       style: applyFiraSansFont(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -130,7 +132,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Enter referral code to collect your reward',
+                  loc.referralCollectSheetBody,
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
@@ -141,9 +143,9 @@ class ReferralCollectSheet extends HookConsumerWidget {
                   onChanged: (value) {
                     code.value = value;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'Referral Code',
-                    hintText: 'Enter referral code',
+                  decoration: InputDecoration(
+                    labelText: loc.referralCollectSheetTextFieldHeader,
+                    hintText: loc.referralCollectSheetTextFieldBody,
                   ),
                 ),
                 const SizedBox(height: AppSize.kl * 2),
@@ -155,7 +157,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Skip'),
+                        child: Text(loc.referralCollectSheetSkipButton),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -171,7 +173,7 @@ class ReferralCollectSheet extends HookConsumerWidget {
                                   code,
                                 );
                               },
-                        child: const Text('Collect'),
+                        child: Text(loc.referralCollectSheetCollectButton),
                       ),
                     ),
                   ],
@@ -188,8 +190,8 @@ class ReferralCollectSheet extends HookConsumerWidget {
           child: CircularProgressIndicator(),
         ),
       ),
-      error: (err, _) => const ReferralErrorCard(
-        errorMessage: "Sorry, something went wrong. Please try again.",
+      error: (err, _) => ReferralErrorCard(
+        errorMessage: loc.referralCollectSheetError,
       ),
     );
   }
@@ -201,17 +203,17 @@ class ReferralCollectSheet extends HookConsumerWidget {
     ValueNotifier<String> code,
   ) async {
     final navigator = Navigator.of(context);
+    final loc = context.loc!;
     try {
       isLoading.value = true;
       logger.f("Referral code: ${code.value}");
       await ref.read(referralRepositoryImplProvider).submitReferral(code.value);
-      Fluttertoast.showToast(msg: "Referral code submitted successfully");
+      Fluttertoast.showToast(msg: loc.referralCollectSheetSuccessToast);
       navigator.pop(true);
     } on Failure catch (e) {
       Fluttertoast.showToast(msg: e.errorMessage);
     } catch (e) {
-      const msg = "The referral code you entered is invalid. Please try again.";
-      Fluttertoast.showToast(msg: msg);
+      Fluttertoast.showToast(msg: loc.referralCollectSheetErrorToast);
     } finally {
       isLoading.value = false;
     }
