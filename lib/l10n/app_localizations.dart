@@ -170,8 +170,8 @@ abstract class AppLocalizations {
   /// No description provided for @vaDistanceToFaceInstruction.
   ///
   /// In en, this message translates to:
-  /// **'Please ensure that the camera is {minDistance+5} cm away from your face.'**
-  String vaDistanceToFaceInstruction(String tollFreeNumber);
+  /// **'Please ensure that the camera is {distance} cm away from your face.'**
+  String vaDistanceToFaceInstruction(int distance);
 
   /// No description provided for @questionnaireTitle.
   ///

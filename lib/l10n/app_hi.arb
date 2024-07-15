@@ -79,12 +79,12 @@
   "referralCollectSheetReferredBy": "आपको {referredBy} द्वारा संदर्भित किया गया है",
   "@vaDistanceToFaceInstruction": {
     "placeholders": {
-      "tollFreeNumber": {
-        "type": "String"
+      "distance": {
+        "type": "int"
       }
     }
   },
-  "vaDistanceToFaceInstruction": "कृपया सुनिश्चित करें कि कैमरा आपके चेहरे से {minDistance+5} सेमी दूर है।",
+  "vaDistanceToFaceInstruction": "कृपया सुनिश्चित करें कि कैमरा आपके चेहरे से {distance} सेमी दूर है।",
   "questionnaireTitle": "नेत्र आकलन प्रश्नावली",
   "questionnaireExitDialog": "इन प्रश्नों के उत्तर देने से आपकी आँखों की समस्याओं की पहचान में मदद मिलेगी। क्या आप वाकई बाहर निकलना चाहते हैं?",
   "visualAcuityTitle": "दृश्य तीक्ष्णता परीक्षण",

@@ -79,12 +79,12 @@
   "referralCollectSheetReferredBy": "You have been referred by {referredBy}",
   "@vaDistanceToFaceInstruction": {
     "placeholders": {
-      "tollFreeNumber": {
-        "type": "String"
+      "distance": {
+        "type": "int"
       }
     }
   },
-  "vaDistanceToFaceInstruction": "Please ensure that the camera is {minDistance+5} cm away from your face.",
+  "vaDistanceToFaceInstruction": "Please ensure that the camera is {distance} cm away from your face.",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",

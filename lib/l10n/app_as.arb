@@ -79,12 +79,12 @@
   "referralCollectSheetReferredBy": "আপোনাৰ বিষয়ে উল্লেখ কৰা হৈছে {referredBy}",
   "@vaDistanceToFaceInstruction": {
     "placeholders": {
-      "tollFreeNumber": {
-        "type": "String"
+      "distance": {
+        "type": "int"
       }
     }
   },
-  "vaDistanceToFaceInstruction": "অনুগ্ৰহ কৰি নিশ্চিত কৰক যে কেমেৰাটো আপোনাৰ মুখৰ পৰা {minDistance+5} ছে. মি. দূৰত আছে।",
+  "vaDistanceToFaceInstruction": "অনুগ্ৰহ কৰি নিশ্চিত কৰক যে কেমেৰাটো আপোনাৰ মুখৰ পৰা {distance} ছে. মি. দূৰত আছে।",
   "questionnaireTitle": "চকুৰ মূল্যায়নৰ প্ৰশ্নসমূহ",
   "questionnaireExitDialog": "এই প্ৰশ্নবোৰৰ উত্তৰে আপোনাৰ চকুৰ সমস্যাবোৰ চিনাক্ত কৰাত সহায় কৰিব। আপুনি সঁচাকৈয়ে বাহিৰ হোৱাটো বিচাৰে নেকি?",
   "visualAcuityTitle": "চাক্ষুষ তীক্ষ্ণতা পৰীক্ষা",

@@ -79,12 +79,12 @@
   "referralCollectSheetReferredBy": "మీరు {referredBy} ద్వారా సూచించబడ్డారు",
   "@vaDistanceToFaceInstruction": {
     "placeholders": {
-      "tollFreeNumber": {
-        "type": "String"
+      "distance": {
+        "type": "int"
       }
     }
   },
-  "vaDistanceToFaceInstruction": "కెమెరా మీ ముఖం నుండి {minDistance+5}cm దూరంగా ఉండాలని నిర్ధారించండి",
+  "vaDistanceToFaceInstruction": "కెమెరా మీ ముఖం నుండి {distance} cm దూరంగా ఉండాలని నిర్ధారించండి",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",

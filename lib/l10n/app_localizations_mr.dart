@@ -50,8 +50,8 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
-  String vaDistanceToFaceInstruction(String tollFreeNumber) {
-    return 'कृपया कॅमेरा तुमच्या चेहऱ्यापासून {minDistance+5} सें. मी. दूर असल्याची खात्री करा.';
+  String vaDistanceToFaceInstruction(int distance) {
+    return 'कृपया कॅमेरा तुमच्या चेहऱ्यापासून ${distance} सें. मी. दूर असल्याची खात्री करा.';
   }
 
   @override

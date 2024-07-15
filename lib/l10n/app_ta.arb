@@ -79,12 +79,12 @@
   "referralCollectSheetReferredBy": "நீங்கள் {referredBy} ஆல் குறிப்பிடப்பட்டிருக்கிறீர்கள்",
   "@vaDistanceToFaceInstruction": {
     "placeholders": {
-      "tollFreeNumber": {
-        "type": "String"
+      "distance": {
+        "type": "int"
       }
     }
   },
-  "vaDistanceToFaceInstruction": "கேமரா உங்கள் முகத்திலிருந்து {minDistance+5} சென்டிமீட்டர் தொலைவில் இருப்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.",
+  "vaDistanceToFaceInstruction": "கேமரா உங்கள் முகத்திலிருந்து {distance} சென்டிமீட்டர் தொலைவில் இருப்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.",
   "questionnaireTitle": "கண் பரிசோதனை கேள்விகள்",
   "questionnaireExitDialog": "இந்த கேள்விகளுக்கு பதில் அளிப்பது உங்கள் கண் பிரச்சினைகளை கண்டறிய உதவும். நீங்கள் உண்மையில் வெளியேற விரும்புகிறீர்களா?",
   "visualAcuityTitle": "பார்வைக் கூர்மை சோதனை",
