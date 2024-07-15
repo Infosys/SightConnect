@@ -11,7 +11,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String referralSmsContent(String referral) {
-    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+    return 'ಹೇ! ನನ್ನ ಕಣ್ಣುಗಳನ್ನು ನೋಡಿಕೊಳ್ಳಲು ನಾನು ಸೈಟ್ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಬಳಸುತ್ತಿದ್ದೇನೆ, ಮತ್ತು ನೀವೂ ಸಹ ಬಳಸಬೇಕು! ನಿಮ್ಮ ಕಣ್ಣುಗಳನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ ಮತ್ತು ಸೈಟ್ಕನೆಕ್ಟ್ ಅಪ್ಲಿಕೇಶನ್ನಿಂದ ಸಮಯೋಚಿತ ಚಿಕಿತ್ಸೆಯನ್ನು ಪಡೆಯಿರಿ. ಇದು ನಿಮ್ಮ ಕೈಗಳಿಗೆ ತಡೆಗಟ್ಟುವ ಕಣ್ಣಿನ ಆರೈಕೆಯನ್ನು ತರುವ ವಿಶಿಷ್ಟ ಅಪ್ಲಿಕೇಶನ್ ಆಗಿದೆ. ನೀವು ಸೈನ್ ಅಪ್ ಮಾಡುವಾಗ ನನ್ನ ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ಬಳಸಿ. ಈಗ ಅದನ್ನು ಪಡೆಯಿರಿಃ https://healthconnecttech.org/install';
   }
 
   @override
@@ -46,7 +46,7 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String referralCollectSheetReferredBy(String referredBy) {
-    return 'You have been referred by ${referredBy}';
+    return 'ನಿಮ್ಮನ್ನು ${referredBy} ನಿಂದ ಉಲ್ಲೇಖಿಸಲಾಗಿದೆ.';
   }
 
   @override
@@ -845,7 +845,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get vaDistanceToFace => 'ಮುಖಾಮುಖಿಯಾಗುವ ದೂರ';
 
   @override
-  String get vaDistanceToFaceInstruction => 'ಕ್ಯಾಮರಾ ನಿಮ್ಮ ಮುಖದಿಂದ 40 ಸೆಂಟಿಮೀಟರ್ ದೂರದಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.';
+  String get vaDistanceToFaceInstruction => 'ಕ್ಯಾಮರಾ ನಿಮ್ಮ ಮುಖದಿಂದ {minDistance+5} ಸೆಂಟಿಮೀಟರ್ ದೂರದಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.';
 
   @override
   String get vaBringFaceInsideBox => 'ನಿಮ್ಮ ಮುಖವನ್ನು ಪೆಟ್ಟಿಗೆಯೊಳಗೆ ತನ್ನಿ.';
@@ -1928,101 +1928,101 @@ class AppLocalizationsKn extends AppLocalizations {
   String get myConnectionListAddMembers => 'ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ';
 
   @override
-  String get appDrawerReferral => 'Referral';
+  String get appDrawerReferral => 'ರೆಫರಲ್';
 
   @override
-  String get patientTenantDisplayPageHeader => 'Tenants';
+  String get patientTenantDisplayPageHeader => 'ಬಾಡಿಗೆದಾರರು';
 
   @override
-  String get patientTenantDisplayPageBody => 'Select a Vision Center from the list';
+  String get patientTenantDisplayPageBody => 'ಪಟ್ಟಿಯಿಂದ ದೃಷ್ಟಿ ಕೇಂದ್ರವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ';
 
   @override
-  String get patientTenantDisplayPageRequestLocationPermissionButton => 'Request Location Permission';
+  String get patientTenantDisplayPageRequestLocationPermissionButton => 'ಸ್ಥಳ ಅನುಮತಿಗಾಗಿ ವಿನಂತಿಸಿ';
 
   @override
-  String get referralGenerateSheetHeader => 'Your Referral Code';
+  String get referralGenerateSheetHeader => 'ನಿಮ್ಮ ರೆಫರಲ್ ಕೋಡ್';
 
   @override
-  String get referralGenerateSheetTapHereButton => 'Have a Code? Tap Here';
+  String get referralGenerateSheetTapHereButton => 'ಕೋಡ್ ಇದೆಯೇ? ಇಲ್ಲಿ ಟ್ಯಾಪ್ ಮಾಡಿ';
 
   @override
-  String get referralGenerateSheetMyReferrals => 'My Referrals';
+  String get referralGenerateSheetMyReferrals => 'ನನ್ನ ಉಲ್ಲೇಖಗಳು';
 
   @override
-  String get referralGenerateSheetShareCode => 'Share your referral code with your friends and family to avail benefits.';
+  String get referralGenerateSheetShareCode => 'ಪ್ರಯೋಜನಗಳನ್ನು ಪಡೆಯಲು ನಿಮ್ಮ ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಮತ್ತು ಕುಟುಂಬದೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ.';
 
   @override
-  String get referralGenerateSheetReferralGenerateError => 'Apologies, we\'re unable to generate a referral code at the moment.';
+  String get referralGenerateSheetReferralGenerateError => 'ಕ್ಷಮಿಸಿ, ನಾವು ಈ ಸಮಯದಲ್ಲಿ ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.';
 
   @override
-  String get referralGenerateSheetShareButton => 'Share';
+  String get referralGenerateSheetShareButton => 'ಹಂಚಿಕೊಳ್ಳಿ.';
 
   @override
-  String get referralGenerateSheetCopy => 'COPY';
+  String get referralGenerateSheetCopy => 'ನಕಲು';
 
   @override
-  String get referralCollectSheetYourRefferalCode => 'Your Referral Code';
+  String get referralCollectSheetYourRefferalCode => 'ನಿಮ್ಮ ರೆಫರಲ್ ಕೋಡ್';
 
   @override
-  String get referralCollectSheetReferralCodeMessage => 'Share your referral code with your friends and family to avail benefits.';
+  String get referralCollectSheetReferralCodeMessage => 'ಪ್ರಯೋಜನಗಳನ್ನು ಪಡೆಯಲು ನಿಮ್ಮ ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಮತ್ತು ಕುಟುಂಬದೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ.';
 
   @override
-  String get referralCollectSheetHeader => 'Collect Referral';
+  String get referralCollectSheetHeader => 'ಉಲ್ಲೇಖವನ್ನು ಸಂಗ್ರಹಿಸಿ';
 
   @override
-  String get referralCollectSheetBody => 'Enter referral code to collect your reward';
+  String get referralCollectSheetBody => 'ನಿಮ್ಮ ಬಹುಮಾನವನ್ನು ಸಂಗ್ರಹಿಸಲು ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ';
 
   @override
-  String get referralCollectSheetTextFieldHeader => 'Referral Code';
+  String get referralCollectSheetTextFieldHeader => 'ರೆಫರಲ್ ಕೋಡ್';
 
   @override
-  String get referralCollectSheetTextFieldBody => 'Enter referral code';
+  String get referralCollectSheetTextFieldBody => 'ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ';
 
   @override
-  String get referralCollectSheetSkipButton => 'Skip';
+  String get referralCollectSheetSkipButton => 'ಬಿಟ್ಟುಬಿಡಿ.';
 
   @override
-  String get referralCollectSheetCollectButton => 'Collect';
+  String get referralCollectSheetCollectButton => 'ಸಂಗ್ರಹಿಸಿ.';
 
   @override
-  String get referralCollectSheetError => 'Sorry, something went wrong. Please try again.';
+  String get referralCollectSheetError => 'ಕ್ಷಮಿಸಿ, ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
-  String get referralCollectSheetSuccessToast => 'Referral code submitted successfully';
+  String get referralCollectSheetSuccessToast => 'ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ';
 
   @override
-  String get referralCollectSheetErrorToast => 'The referral code you entered is invalid. Please try again.';
+  String get referralCollectSheetErrorToast => 'ನೀವು ನಮೂದಿಸಿದ ರೆಫರಲ್ ಕೋಡ್ ಅಮಾನ್ಯವಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.';
 
   @override
-  String get referralStatisticsPageHeader => 'Your Referral Statistics';
+  String get referralStatisticsPageHeader => 'ನಿಮ್ಮ ಉಲ್ಲೇಖಿತ ಅಂಕಿಅಂಶಗಳು';
 
   @override
-  String get referralStatisticsPageTotalReferred => 'Total Referred';
+  String get referralStatisticsPageTotalReferred => 'ಒಟ್ಟು ಉಲ್ಲೇಖಿಸಲಾಗಿದೆ';
 
   @override
-  String get referralStatisticsPageSucessfulReferred => 'Successful Referred';
+  String get referralStatisticsPageSucessfulReferred => 'ಯಶಸ್ವಿ ಉಲ್ಲೇಖಿಸಲಾಗಿದೆ';
 
   @override
-  String get referralStatisticsPageTotalTriage => 'Total Triage';
+  String get referralStatisticsPageTotalTriage => 'ಒಟ್ಟು ಟ್ರೀಜ್';
 
   @override
-  String get referralStatisticsPageReferFriendHeader => 'How to refer a friend?';
+  String get referralStatisticsPageReferFriendHeader => 'ಸ್ನೇಹಿತನನ್ನು ಉಲ್ಲೇಖಿಸುವುದು ಹೇಗೆ?';
 
   @override
-  String get referralStatisticsPageReferFriendBody1 => 'Share your referral code with your friend.';
+  String get referralStatisticsPageReferFriendBody1 => 'ನಿಮ್ಮ ರೆಫರಲ್ ಕೋಡ್ ಅನ್ನು ನಿಮ್ಮ ಸ್ನೇಹಿತರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಿ.';
 
   @override
-  String get referralStatisticsPageReferFriendBody2 => 'Your friend register using your referral code.';
+  String get referralStatisticsPageReferFriendBody2 => 'ನಿಮ್ಮ ಸ್ನೇಹಿತ ನಿಮ್ಮ ರೆಫರಲ್ ಕೋಡ್ ಬಳಸಿ ನೋಂದಾಯಿಸಿಕೊಳ್ಳುತ್ತಾರೆ.';
 
   @override
-  String get referralStatisticsPageReferFriendBody3 => 'Your friend completes at least one triage test.';
+  String get referralStatisticsPageReferFriendBody3 => 'ನಿಮ್ಮ ಸ್ನೇಹಿತ ಕನಿಷ್ಠ ಒಂದು ಟ್ರೈಜ್ ಪರೀಕ್ಷೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸುತ್ತಾನೆ.';
 
   @override
-  String get referralStatisticsPageReferFriendButton => 'Refer a Friend';
+  String get referralStatisticsPageReferFriendButton => 'ಸ್ನೇಹಿತನನ್ನು ಉಲ್ಲೇಖಿಸಿ';
 
   @override
-  String get referralStatisticsPageError => 'Apologies, we\'re unable to fetch your referral statistics at the moment.';
+  String get referralStatisticsPageError => 'ಕ್ಷಮಿಸಿ, ಈ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ ಉಲ್ಲೇಖಿತ ಅಂಕಿಅಂಶಗಳನ್ನು ಪಡೆಯಲು ನಮಗೆ ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.';
 
   @override
-  String get referralStatisticsPageRetryButton => 'Retry';
+  String get referralStatisticsPageRetryButton => 'ಮರುಪ್ರಯತ್ನಿ ಮಾಡಿ.';
 }

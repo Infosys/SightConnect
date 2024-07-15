@@ -11,7 +11,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String referralSmsContent(String referral) {
-    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+    return 'ஏய்! நான் என் கண்களைக் கவனித்துக் கொள்ள சைட் கனெக்ட் பயன்பாட்டைப் பயன்படுத்துகிறேன், நீங்களும் பயன்படுத்த வேண்டும்! உங்கள் கண்களை மதிப்பீடு செய்து, சைட் கனெக்ட் பயன்பாட்டின் மூலம் சரியான நேரத்தில் சிகிச்சையைப் பெறுங்கள். இது உங்கள் கைகளில் தடுப்பு கண் பராமரிப்பைக் கொண்டுவரும் ஒரு தனித்துவமான பயன்பாடாகும். நீங்கள் பதிவுபெறும்போது எனது பரிந்துரை குறியீட்டைப் பயன்படுத்தவும். இப்போது அதைப் பெறுங்கள்ஃ https://healthconnecttech.org/install';
   }
 
   @override
@@ -46,7 +46,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String referralCollectSheetReferredBy(String referredBy) {
-    return 'You have been referred by ${referredBy}';
+    return 'நீங்கள் ${referredBy} ஆல் குறிப்பிடப்பட்டிருக்கிறீர்கள்';
   }
 
   @override
@@ -845,7 +845,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get vaDistanceToFace => 'எதிர்கொள்ளும் தூரம்';
 
   @override
-  String get vaDistanceToFaceInstruction => 'கேமரா உங்கள் முகத்திலிருந்து 40 சென்டிமீட்டர் தொலைவில் இருப்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.';
+  String get vaDistanceToFaceInstruction => 'கேமரா உங்கள் முகத்திலிருந்து {minDistance+5} சென்டிமீட்டர் தொலைவில் இருப்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.';
 
   @override
   String get vaBringFaceInsideBox => 'உங்கள் முகத்தை பெட்டிக்குள் கொண்டு வாருங்கள்.';
@@ -1928,101 +1928,101 @@ class AppLocalizationsTa extends AppLocalizations {
   String get myConnectionListAddMembers => 'உறுப்பினர் சேர்க்கவும்';
 
   @override
-  String get appDrawerReferral => 'Referral';
+  String get appDrawerReferral => 'பரிந்துரை';
 
   @override
-  String get patientTenantDisplayPageHeader => 'Tenants';
+  String get patientTenantDisplayPageHeader => 'வாடகைதாரர்கள்';
 
   @override
-  String get patientTenantDisplayPageBody => 'Select a Vision Center from the list';
+  String get patientTenantDisplayPageBody => 'பட்டியலில் இருந்து ஒரு தொலைநோக்கு மையத்தைத் தேர்ந்தெடுக்கவும்';
 
   @override
-  String get patientTenantDisplayPageRequestLocationPermissionButton => 'Request Location Permission';
+  String get patientTenantDisplayPageRequestLocationPermissionButton => 'இருப்பிட அனுமதி கோருதல்';
 
   @override
-  String get referralGenerateSheetHeader => 'Your Referral Code';
+  String get referralGenerateSheetHeader => 'உங்கள் பரிந்துரைக் குறியீடு';
 
   @override
-  String get referralGenerateSheetTapHereButton => 'Have a Code? Tap Here';
+  String get referralGenerateSheetTapHereButton => 'குறியீடு உள்ளதா? இங்கே தட்டவும்';
 
   @override
-  String get referralGenerateSheetMyReferrals => 'My Referrals';
+  String get referralGenerateSheetMyReferrals => 'எனது பரிந்துரைகள்';
 
   @override
-  String get referralGenerateSheetShareCode => 'Share your referral code with your friends and family to avail benefits.';
+  String get referralGenerateSheetShareCode => 'நன்மைகளைப் பெற உங்கள் பரிந்துரைக் குறியீட்டை உங்கள் நண்பர்கள் மற்றும் குடும்பத்தினருடன் பகிர்ந்து கொள்ளுங்கள்.';
 
   @override
-  String get referralGenerateSheetReferralGenerateError => 'Apologies, we\'re unable to generate a referral code at the moment.';
+  String get referralGenerateSheetReferralGenerateError => 'மன்னிக்கவும், இந்த நேரத்தில் ஒரு பரிந்துரை குறியீட்டை எங்களால் உருவாக்க முடியவில்லை.';
 
   @override
-  String get referralGenerateSheetShareButton => 'Share';
+  String get referralGenerateSheetShareButton => 'பகிர்ந்து கொள்ளுங்கள்.';
 
   @override
-  String get referralGenerateSheetCopy => 'COPY';
+  String get referralGenerateSheetCopy => 'நகல்';
 
   @override
-  String get referralCollectSheetYourRefferalCode => 'Your Referral Code';
+  String get referralCollectSheetYourRefferalCode => 'உங்கள் பரிந்துரைக் குறியீடு';
 
   @override
-  String get referralCollectSheetReferralCodeMessage => 'Share your referral code with your friends and family to avail benefits.';
+  String get referralCollectSheetReferralCodeMessage => 'நன்மைகளைப் பெற உங்கள் பரிந்துரைக் குறியீட்டை உங்கள் நண்பர்கள் மற்றும் குடும்பத்தினருடன் பகிர்ந்து கொள்ளுங்கள்.';
 
   @override
-  String get referralCollectSheetHeader => 'Collect Referral';
+  String get referralCollectSheetHeader => 'பரிந்துரை சேகரிக்கவும்';
 
   @override
-  String get referralCollectSheetBody => 'Enter referral code to collect your reward';
+  String get referralCollectSheetBody => 'உங்கள் வெகுமதியை சேகரிக்க பரிந்துரை குறியீட்டை உள்ளிடவும்';
 
   @override
-  String get referralCollectSheetTextFieldHeader => 'Referral Code';
+  String get referralCollectSheetTextFieldHeader => 'பரிந்துரை குறியீடு';
 
   @override
-  String get referralCollectSheetTextFieldBody => 'Enter referral code';
+  String get referralCollectSheetTextFieldBody => 'பரிந்துரை குறியீட்டை உள்ளிடவும்';
 
   @override
-  String get referralCollectSheetSkipButton => 'Skip';
+  String get referralCollectSheetSkipButton => 'விலகிச் செல்லுங்கள்.';
 
   @override
-  String get referralCollectSheetCollectButton => 'Collect';
+  String get referralCollectSheetCollectButton => 'சேகரிக்கவும்';
 
   @override
-  String get referralCollectSheetError => 'Sorry, something went wrong. Please try again.';
+  String get referralCollectSheetError => 'மன்னிக்கவும், ஏதோ தவறு நடந்தது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.';
 
   @override
-  String get referralCollectSheetSuccessToast => 'Referral code submitted successfully';
+  String get referralCollectSheetSuccessToast => 'பரிந்துரை குறியீடு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது';
 
   @override
-  String get referralCollectSheetErrorToast => 'The referral code you entered is invalid. Please try again.';
+  String get referralCollectSheetErrorToast => 'நீங்கள் உள்ளிட்ட பரிந்துரை குறியீடு செல்லாது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.';
 
   @override
-  String get referralStatisticsPageHeader => 'Your Referral Statistics';
+  String get referralStatisticsPageHeader => 'உங்கள் பரிந்துரை புள்ளிவிவரங்கள்';
 
   @override
-  String get referralStatisticsPageTotalReferred => 'Total Referred';
+  String get referralStatisticsPageTotalReferred => 'குறிப்பிடப்பட்ட மொத்த தொகை';
 
   @override
-  String get referralStatisticsPageSucessfulReferred => 'Successful Referred';
+  String get referralStatisticsPageSucessfulReferred => 'வெற்றிகரமான குறிப்பு';
 
   @override
-  String get referralStatisticsPageTotalTriage => 'Total Triage';
+  String get referralStatisticsPageTotalTriage => 'மொத்த முத்திரை';
 
   @override
-  String get referralStatisticsPageReferFriendHeader => 'How to refer a friend?';
+  String get referralStatisticsPageReferFriendHeader => 'ஒரு நண்பரை எவ்வாறு குறிப்பிடுவது?';
 
   @override
-  String get referralStatisticsPageReferFriendBody1 => 'Share your referral code with your friend.';
+  String get referralStatisticsPageReferFriendBody1 => 'உங்கள் பரிந்துரை குறியீட்டை உங்கள் நண்பருடன் பகிர்ந்து கொள்ளுங்கள்.';
 
   @override
-  String get referralStatisticsPageReferFriendBody2 => 'Your friend register using your referral code.';
+  String get referralStatisticsPageReferFriendBody2 => 'உங்கள் பரிந்துரை குறியீட்டைப் பயன்படுத்தி உங்கள் நண்பர் பதிவு செய்கிறார்.';
 
   @override
-  String get referralStatisticsPageReferFriendBody3 => 'Your friend completes at least one triage test.';
+  String get referralStatisticsPageReferFriendBody3 => 'உங்கள் நண்பர் குறைந்தபட்சம் ஒரு முக்கோண சோதனையை முடிக்கிறார்.';
 
   @override
-  String get referralStatisticsPageReferFriendButton => 'Refer a Friend';
+  String get referralStatisticsPageReferFriendButton => 'ஒரு நண்பரைப் பார்க்கவும்';
 
   @override
-  String get referralStatisticsPageError => 'Apologies, we\'re unable to fetch your referral statistics at the moment.';
+  String get referralStatisticsPageError => 'மன்னிக்கவும், இந்த நேரத்தில் உங்கள் பரிந்துரை புள்ளிவிவரங்களை எங்களால் பெற முடியவில்லை.';
 
   @override
-  String get referralStatisticsPageRetryButton => 'Retry';
+  String get referralStatisticsPageRetryButton => 'மீண்டும் முயற்சிக்கவும்';
 }

@@ -1754,13 +1754,13 @@ abstract class AppLocalizations {
   /// No description provided for @vaDistanceToFace.
   ///
   /// In en, this message translates to:
-  /// **'Distance to face'**
+  /// **'Distance to Face'**
   String get vaDistanceToFace;
 
   /// No description provided for @vaDistanceToFaceInstruction.
   ///
   /// In en, this message translates to:
-  /// **'Please ensure that the camera is 40cm away from your face'**
+  /// **'Please ensure that the camera is {minDistance+5} cm away from your face.'**
   String get vaDistanceToFaceInstruction;
 
   /// No description provided for @vaBringFaceInsideBox.

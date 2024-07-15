@@ -842,10 +842,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serviceNotAvailable => 'Service not available';
 
   @override
-  String get vaDistanceToFace => 'Distance to face';
+  String get vaDistanceToFace => 'Distance to Face';
 
   @override
-  String get vaDistanceToFaceInstruction => 'Please ensure that the camera is 40cm away from your face';
+  String get vaDistanceToFaceInstruction => 'Please ensure that the camera is {minDistance+5} cm away from your face.';
 
   @override
   String get vaBringFaceInsideBox => 'Bring your face inside the box';
