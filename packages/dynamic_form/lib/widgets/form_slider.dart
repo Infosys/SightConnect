@@ -10,15 +10,15 @@ class FormSlider extends StatelessWidget {
     this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(dynamic)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderSlider(
-      name: field.label,
+      name: field.name,
       decoration: InputDecoration(
-        labelText: field.label,
+        labelText: field.name,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -26,10 +26,9 @@ class FormSlider extends StatelessWidget {
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      min: field.minLength ?? 0.0,
-      max: field.maxLength ?? 0.0,
-      divisions: field.divisions,
-      initialValue: field.initialValue as double? ?? 0.0,
+      min: 0.0,
+      max: 0.0,
+      initialValue: 0.0,
     );
   }
 }

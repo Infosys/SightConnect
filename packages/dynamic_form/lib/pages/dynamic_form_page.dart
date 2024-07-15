@@ -6,11 +6,9 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
-import 'package:dynamic_form/widgets/app_responsive_widget.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
-import 'package:dynamic_form/widgets/form_conditional_radio.dart';
 import 'package:dynamic_form/widgets/form_data_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
@@ -30,8 +28,8 @@ class DynamicFormPage extends StatelessWidget {
   });
   Future<DynamicFormJsonEntity>? _loadJson() async {
     await Future.delayed(const Duration(seconds: 2));
-    final json =
-        await rootBundle.loadString("packages/dynamic_form/assets/test.json");
+    final json = await rootBundle
+        .loadString("packages/dynamic_form/assets/survey_js.json");
     try {
       return DynamicFormJsonMapper()
           .modeltoEntity(DynamicFormJsonModel.fromJson(jsonDecode(json)));
@@ -46,9 +44,9 @@ class DynamicFormPage extends StatelessWidget {
       future: _loadJson(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final sections = snapshot.data?.sections ?? [];
+          final pages = snapshot.data?.pages ?? [];
           final title = snapshot.data?.title ?? '';
-          return FormLayout(sections: sections, title: title);
+          return FormLayout(pages: pages, title: title);
         } else if (snapshot.hasError) {
           return ErrorDisplayWidget(
               error: snapshot.error,
@@ -64,11 +62,11 @@ class DynamicFormPage extends StatelessWidget {
 class FormLayout extends StatelessWidget {
   const FormLayout({
     super.key,
-    required this.sections,
+    required this.pages,
     required this.title,
   });
   final String title;
-  final List<SectionEntity>? sections;
+  final List<PageEntity> pages;
 
   @override
   Widget build(BuildContext context) {
@@ -83,25 +81,18 @@ class FormLayout extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (sections != null)
-                for (var section in sections!)
-                  AppCard(
-                    title: section.sectionTitle,
-                    marginBottom: 16,
-                    child: Wrap(
-                      runAlignment: WrapAlignment.start,
-                      alignment: WrapAlignment.start,
-                      spacing: 16,
-                      runSpacing: 16,
-                      children: [
-                        ..._buildFields(section.fields, formKey).map(
-                          (widget) => AppResponsiveWidget(
-                            widget: widget,
-                          ),
-                        ),
-                      ],
-                    ),
+              for (var section in pages)
+                AppCard(
+                  title: section.name,
+                  marginBottom: 16,
+                  child: Column(
+                    children: section.elements
+                        .map((element) =>
+                            _buildFields(element.elements, formKey))
+                        .expand((element) => element)
+                        .toList(),
                   ),
+                ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(
@@ -139,7 +130,7 @@ class FormLayout extends StatelessWidget {
   }
 
   List<Widget> _buildFields(
-      List<FieldEntity>? fields, GlobalKey<FormBuilderState> key) {
+      List<ElementEntity>? fields, GlobalKey<FormBuilderState> key) {
     if (fields == null) {
       return [];
     }
@@ -150,23 +141,7 @@ class FormLayout extends StatelessWidget {
   }
 }
 
-Widget _getConditionalFields(FieldEntity field) {
-  switch (field.subType) {
-    case DynamicFormSubType.RADIO:
-      return FormConditionalRadio(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
-      );
-    case DynamicFormSubType.DROPDOWN:
-      return Container();
-    default:
-      return Container();
-  }
-}
-
-Widget getField(FieldEntity? field, GlobalKey<FormBuilderState> key) {
+Widget getField(ElementEntity? field, GlobalKey<FormBuilderState> key) {
   if (field == null) {
     return Container();
   }
@@ -213,7 +188,7 @@ Widget getField(FieldEntity? field, GlobalKey<FormBuilderState> key) {
         field: field,
         onChanged: (value) {
           key.currentState?.setInternalFieldValue(
-              field.label, value.map((e) => e.path).toList());
+              field.name, value.map((e) => e.path).toList());
           debugPrint(value.toString());
         },
       );
@@ -240,8 +215,6 @@ Widget getField(FieldEntity? field, GlobalKey<FormBuilderState> key) {
           debugPrint(value);
         },
       );
-    case DynamicFormType.CONDITIONAL:
-      return _getConditionalFields(field);
 
     case DynamicFormType.SLIDER:
       return FormSlider(field: field);

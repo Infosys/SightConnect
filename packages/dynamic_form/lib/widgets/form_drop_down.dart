@@ -10,18 +10,18 @@ class FormDropDown extends StatelessWidget {
     this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final String label = field.label;
-    final String hint = field.hint;
-    final List<DropdownMenuItem<String>> options = field.options
-        .cast<OptionEntity>()
+    final String label = field.name;
+    final String hint = field.name;
+    final List<DropdownMenuItem<String>> options = field.choices
+        .cast<ChoiceEntity>()
         .map((option) => DropdownMenuItem<String>(
               value: option.value,
-              child: Text(option.label),
+              child: Text(option.text),
             ))
         .toList();
 
@@ -37,7 +37,6 @@ class FormDropDown extends StatelessWidget {
       ),
       items: options,
       onChanged: onChanged,
-      initialValue: field.initialValue,
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,

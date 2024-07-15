@@ -10,125 +10,80 @@ class DynamicFormJsonMapper {
   DynamicFormJsonEntity modeltoEntity(DynamicFormJsonModel dynamicFormModel) {
     return DynamicFormJsonEntity(
       title: dynamicFormModel.title ?? '',
-      description: dynamicFormModel.description ?? '',
-      type: dynamicFormModel.type ?? '',
-      sections: _mapSectionModelToEntity(dynamicFormModel.sections),
+      logoPosition: dynamicFormModel.logoPosition ?? '',
+      pages: _getPages(dynamicFormModel.pages),
     );
   }
 
-  List<SectionEntity> _mapSectionModelToEntity(List<Section>? sectionModel) {
-    if (sectionModel == null) {
-      return [];
+  List<PageEntity> _getPages(List<PageModel>? pages) {
+    final List<PageEntity> pageEntities = [];
+    if (pages != null) {
+      for (final page in pages) {
+        pageEntities.add(PageEntity(
+          name: page.name ?? '',
+          elements: _getPageElements(page.elements),
+        ));
+      }
     }
-    return sectionModel.map((section) {
-      return SectionEntity(
-        sectionTitle: section.sectionTitle ?? '',
-        fields: _mapFieldModelToEntity(section.fields),
-      );
-    }).toList();
+    return pageEntities;
   }
 
-  List<FieldEntity> _mapFieldModelToEntity(List<Field>? fieldModel) {
-    if (fieldModel == null) {
-      return [];
+  List<PageElementEntity> _getPageElements(List<PageElementModel>? elements) {
+    final List<PageElementEntity> pageElementEntities = [];
+    if (elements != null) {
+      for (final element in elements) {
+        pageElementEntities.add(PageElementEntity(
+          type: _mapToFormType(element.type).toString(),
+          name: element.name ?? '',
+          elements: _getElements(element.elements),
+        ));
+      }
     }
-    return fieldModel.map((field) {
-      return FieldEntity(
-        type: _mapToFormType(field.type),
-        subType: _mapToFormSubType(field.subType),
-        isRequired: field.isRequired ?? false,
-        readOnly: field.readOnly ?? false,
-        obscure: field.obscure ?? false,
-        keyBoardType: field.keyBoardType ?? '',
-        initialValue: field.initialValue,
-        label: field.label ?? '',
-        hint: field.hint ?? '',
-        validation: ValidationEntity(
-          pattern: field.validation?.pattern ?? '',
-          errorMessage: field.validation?.errorMessage ?? '',
-        ),
-        maxLength: field.maxLength,
-        minLength: field.minLength,
-        maxlines: field.maxlines,
-        divisions: field.divisions,
-        options: _mapOptionModelToEntity(field.options),
-        dateTime: CustomDateTimeEntity(
-          format: field.dateTime?.format ?? '',
-          type: field.dateTime?.type ?? '',
-          start: field.dateTime?.start ?? '',
-          end: field.dateTime?.end ?? '',
-        ),
-        direction: field.direction ?? '',
-        typeSupport: field.typeSupport ?? [],
-        initialValueBool: field.initialValueBool ?? false,
-        optionType: _mapOptionTypeToEntity(field.optionType),
-      );
-    }).toList();
+    return pageElementEntities;
   }
 
-  Map<String, FieldEntity>? _mapOptionTypeToEntity(
-      Map<String, Field>? optionType) {
-    if (optionType == null) {
-      return null;
+  List<ElementEntity> _getElements(List<ElementClassModel>? elements) {
+    final List<ElementEntity> elementEntities = [];
+    if (elements != null) {
+      for (final element in elements) {
+        elementEntities.add(ElementEntity(
+          type: _mapToFormType(element.type),
+          name: element.name ?? '',
+          title: element.title ?? '',
+          inputType: element.inputType ?? '',
+          choices: _getChoices(element.choices),
+          isRequired: element.isRequired ?? false,
+          requiredErrorText: element.requiredErrorText ?? '',
+          maxSize: element.maxSize ?? 0,
+          validators: [],
+        ));
+      }
     }
-    return optionType.map((key, value) {
-      return MapEntry(
-        key,
-        FieldEntity(
-          type: _mapToFormType(value.type),
-          subType: _mapToFormSubType(value.subType),
-          isRequired: value.isRequired ?? false,
-          readOnly: value.readOnly ?? false,
-          obscure: value.obscure ?? false,
-          keyBoardType: value.keyBoardType ?? '',
-          initialValue: value.initialValue,
-          label: value.label ?? '',
-          hint: value.hint ?? '',
-          validation: ValidationEntity(
-            pattern: value.validation?.pattern ?? '',
-            errorMessage: value.validation?.errorMessage ?? '',
-          ),
-          maxLength: value.maxLength,
-          minLength: value.minLength,
-          maxlines: value.maxlines,
-          divisions: value.divisions,
-          options: _mapOptionModelToEntity(value.options),
-          dateTime: CustomDateTimeEntity(
-            format: value.dateTime?.format ?? '',
-            type: value.dateTime?.type ?? '',
-            start: value.dateTime?.start ?? '',
-            end: value.dateTime?.end ?? '',
-          ),
-          direction: value.direction ?? '',
-          typeSupport: value.typeSupport ?? [],
-          initialValueBool: value.initialValueBool ?? false,
-          optionType: null,
-        ),
-      );
-    });
+    return elementEntities;
   }
 
-  List<OptionEntity> _mapOptionModelToEntity(List<Option>? optionModel) {
-    if (optionModel == null) {
-      return [];
+  List<ChoiceEntity> _getChoices(List<ChoiceModel>? choices) {
+    final List<ChoiceEntity> choiceEntities = [];
+    if (choices != null) {
+      for (final choice in choices) {
+        choiceEntities.add(ChoiceEntity(
+          text: choice.text ?? '',
+          value: choice.value ?? '',
+        ));
+      }
     }
-    return optionModel.map((option) {
-      return OptionEntity(
-        value: option.value ?? '',
-        label: option.label ?? '',
-      );
-    }).toList();
+    return choiceEntities;
   }
 
   DynamicFormType _mapToFormType(String? value) {
     switch (value) {
-      case 'TEXTFIELD':
+      case 'text':
         return DynamicFormType.TEXTFIELD;
-      case 'RADIO':
+      case 'radiogroup':
         return DynamicFormType.RADIO;
-      case 'CHECKBOX':
+      case 'checkbox':
         return DynamicFormType.CHECKBOX;
-      case 'DROPDOWN':
+      case 'dropdown':
         return DynamicFormType.DROPDOWN;
       case 'DATETIME':
         return DynamicFormType.DATETIME;
@@ -136,27 +91,15 @@ class DynamicFormJsonMapper {
         return DynamicFormType.CHIPS;
       case 'SLIDER':
         return DynamicFormType.SLIDER;
-      case 'SWITCH':
+      case 'boolean':
         return DynamicFormType.SWITCH;
-      case 'FILE':
+      case 'file':
         return DynamicFormType.FILE;
-      case 'TEXTAREA':
+      case 'comment':
         return DynamicFormType.TEXTAREA;
-      case 'CONDITIONAL':
-        return DynamicFormType.CONDITIONAL;
+
       default:
         return DynamicFormType.DEFAULT;
-    }
-  }
-
-  DynamicFormSubType _mapToFormSubType(String? value) {
-    switch (value) {
-      case 'RADIO':
-        return DynamicFormSubType.RADIO;
-      case 'DROPDOWN':
-        return DynamicFormSubType.DROPDOWN;
-      default:
-        return DynamicFormSubType.RADIO;
     }
   }
 }

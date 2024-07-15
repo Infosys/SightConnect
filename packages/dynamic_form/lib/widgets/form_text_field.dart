@@ -10,7 +10,7 @@ class FormTextField extends StatelessWidget {
     this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(String?)? onChanged;
 
   @override
@@ -18,10 +18,10 @@ class FormTextField extends StatelessWidget {
     return FormBuilderTextField(
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: field.label,
+      name: field.name,
       decoration: InputDecoration(
-        labelText: field.label,
-        hintText: field.hint,
+        labelText: field.name,
+        hintText: field.name,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -31,18 +31,13 @@ class FormTextField extends StatelessWidget {
           return 'This field is required';
         }
 
-        if (!RegExp(field.validation.pattern).hasMatch(value)) {
-          return field.validation.errorMessage;
+        if (!RegExp(field.validators.first.type).hasMatch(value)) {
+          return "";
         }
+
         return null;
       },
-      keyboardType: field.keyBoardType == "number"
-          ? TextInputType.number
-          : TextInputType.text,
       onChanged: onChanged,
-      readOnly: field.readOnly,
-      initialValue: field.initialValue,
-      obscureText: field.obscure,
     );
   }
 }

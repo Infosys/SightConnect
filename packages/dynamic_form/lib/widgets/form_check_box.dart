@@ -10,16 +10,16 @@ class FormCheckbox extends StatelessWidget {
     this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(List<dynamic>?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderCheckboxGroup<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: field.label,
+      name: field.name,
       decoration: InputDecoration(
-        labelText: field.label,
+        labelText: field.name,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -27,13 +27,12 @@ class FormCheckbox extends StatelessWidget {
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      options: field.options
+      options: field.choices
           .map((option) => FormBuilderFieldOption(
                 value: option.value,
-                child: Text(option.label),
+                child: Text(option.text),
               ))
           .toList(),
-      initialValue: field.initialValue as List<String>?,
     );
   }
 }

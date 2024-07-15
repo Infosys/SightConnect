@@ -10,7 +10,7 @@ class FormRadio extends StatelessWidget {
     this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(dynamic)? onChanged;
 
   @override
@@ -21,9 +21,9 @@ class FormRadio extends StatelessWidget {
       wrapAlignment: WrapAlignment.start,
       wrapRunAlignment: WrapAlignment.start,
       separator: const SizedBox(height: 10),
-      name: field.label,
+      name: field.name,
       decoration: InputDecoration(
-        hintText: field.label,
+        hintText: field.name,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -31,15 +31,14 @@ class FormRadio extends StatelessWidget {
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      options: field.options
+      options: field.choices
           .map(
             (option) => FormBuilderFieldOption(
               value: option.value,
-              child: Text(option.label),
+              child: Text(option.text),
             ),
           )
           .toList(),
-      initialValue: field.initialValue,
     );
   }
 }

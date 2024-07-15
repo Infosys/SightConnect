@@ -1,0 +1,167 @@
+{
+    "title": "Doctor Consent Form",
+    "logoPosition": "right",
+    "pages": [
+        {
+            "name": "page1",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Personal Eye Donation Referral Information",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "text",
+                            "name": "question1",
+                            "title": "If Eye Donation Center, Consignment Notification (Date and Time)",
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question3",
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Voluntary - Family Initated"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Voluntary - Volunteer Motivated"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "HCRP - Motivated"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question4",
+                            "title": "Donation Counselor/Volunteer",
+                            "isRequired": true,
+                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer"
+                        },
+                        {
+                            "type": "text",
+                            "name": "question5",
+                            "title": "2nd Counselor/Volunteer "
+                        },
+                        {
+                            "type": "text",
+                            "name": "question6",
+                            "title": "Caller Full Name"
+                        },
+                        {
+                            "type": "text",
+                            "name": "question7",
+                            "title": "Date Time of Call",
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "question8",
+                            "title": "Relationship",
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Family"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Friends"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Others"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question9",
+                            "title": "Phone Number",
+                            "inputType": "tel"
+                        },
+                        {
+                            "type": "text",
+                            "name": "question10",
+                            "title": "Hospital / Eye Donation Center"
+                        },
+                        {
+                            "type": "comment",
+                            "name": "question11",
+                            "title": "Unit Details"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "question12",
+                            "title": "Condition I Agree to:",
+                            "choices": [
+                                {
+                                    "value": "Item 1Condition",
+                                    "text": "Condition 1"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Condition 2"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Condition 3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "question13",
+                            "title": "Health Insurance Card",
+                            "maxSize": 5
+                        },
+                        {
+                            "type": "text",
+                            "name": "question14",
+                            "title": "Visual Acuity",
+                            "inputType": "range"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question15",
+                            "title": "Was Donor Infused or Transfused prior to sample collection?",
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Yes"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "No"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": [
+                                {
+                                    "type": "expression"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

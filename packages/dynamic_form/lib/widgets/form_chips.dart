@@ -11,22 +11,22 @@ class FormChip extends HookWidget {
     this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final options = field.options;
+    final options = field.choices;
     var selectedValue = useState<String>('');
 
     return FormBuilderChoiceChip<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: field.label,
+      name: field.name,
       spacing: 10,
       runSpacing: 10,
       avatarBorder: const CircleBorder(),
       decoration: InputDecoration(
-        labelText: field.label,
+        labelText: field.title,
         labelStyle: const TextStyle(color: Colors.black),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 20.0,
@@ -52,7 +52,7 @@ class FormChip extends HookWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    option.label,
+                    option.text,
                     style: TextStyle(
                       color: selectedValue.value == option.value
                           ? Colors.white

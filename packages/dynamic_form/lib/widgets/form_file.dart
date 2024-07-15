@@ -15,7 +15,7 @@ class FormFile extends HookWidget {
     required this.onChanged,
     required this.field,
   });
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(List<XFile>) onChanged;
 
   @override
@@ -49,7 +49,7 @@ class FormFile extends HookWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(field.label),
+                  Text(field.name),
                   const SizedBox(height: 16.0),
                   Wrap(
                     spacing: 8.0,

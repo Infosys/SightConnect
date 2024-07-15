@@ -11,7 +11,7 @@ class FormSwitch extends HookWidget {
     required this.onChanged,
   });
 
-  final FieldEntity field;
+  final ElementEntity field;
   final void Function(bool) onChanged;
 
   @override
@@ -20,14 +20,14 @@ class FormSwitch extends HookWidget {
     return FormBuilderSwitch(
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: field.label,
+      name: field.name,
       initialValue: selected.value,
       validator: field.isRequired
           ? FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ])
           : null,
-      title: Text(field.label),
+      title: Text(field.name),
       onChanged: (value) {
         selected.value = value ?? false;
         onChanged(value ?? false);

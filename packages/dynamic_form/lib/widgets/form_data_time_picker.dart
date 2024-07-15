@@ -11,7 +11,7 @@ class FormDataTimePicker extends HookWidget {
     required this.field,
     required this.onChanged,
   });
-  final FieldEntity field;
+  final ElementEntity field;
   final Function(DateTime?) onChanged;
 
   @override
@@ -22,12 +22,12 @@ class FormDataTimePicker extends HookWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       format: DateFormat.d().add_MMM().add_y().add_jm(),
       decoration: InputDecoration(
-        labelText: field.label,
+        labelText: field.name,
         suffixIcon: const Icon(Icons.calendar_today),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
-      name: field.label,
+      name: field.name,
       onChanged: onChanged,
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
