@@ -25,7 +25,7 @@ enum MiniAppInjectionModelRole {
   VISION_TECHNICIAN,
   PATIENT,
   OPTOMETRITIAN,
-
+  VOLUNTEER,
   VISION_GUARDIAN,
   OTHER
 }

@@ -40,7 +40,7 @@ final validationDioProvider = Provider(
       BaseOptions(
         baseUrl: ApiConstant.baseUrl,
         headers: {
-          "X-Active-Role": PersistentAuthStateService.authState.activeRole,
+          "X-Active-Role": PersistentAuthStateService.authState.activeRole, 
           "X-App-Version": AppInfoService.appVersion,
         },
       ),

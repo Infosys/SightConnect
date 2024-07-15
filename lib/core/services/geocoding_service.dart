@@ -5,13 +5,20 @@ import 'package:location/location.dart';
 import '../../main.dart';
 
 class GeocodingService {
-  static Future<String> getPincodeFromLocation() async {
+  static Future<List<String>> getPincodeFromLocation({requiresAddress = false}) async {
+    List<String> data = [];
     final LocationData locationData = await LocationService.getCoordinates();
     final placemarks = await placemarkFromCoordinates(
         locationData.latitude!, locationData.longitude!);
     logger.d("placemarks : $placemarks");
 
-    return placemarks.first.postalCode ?? "";
+      //add placemarks.first.postalCode ?? ""; at 0 index of data
+   if(!requiresAddress){ data.add(placemarks.first.postalCode ?? "");}
+   else{
+    data.add(placemarks.first.postalCode ?? "");
+    data.add(placemarks.first.subAdministrativeArea ?? "");
+   }
+    return data;
   }
 
   static Future<Map<String, String>> getCoordinatesFromPincode(String pincode) {

@@ -56,9 +56,10 @@ class PincodeDialogPage extends HookConsumerWidget {
 
                             await LocationService.getLocationWithPermissions();
 
-                            pinCode =
+                            List<String> addressData =
                                 await GeocodingService.getPincodeFromLocation();
-                            logger.d("pinCode is  $pinCode");
+                            pinCode = addressData[0];
+                            logger.f("pinCode is  $pinCode");
 
                             if (context.mounted) {
                               await Navigator.of(context)

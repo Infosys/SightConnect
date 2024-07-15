@@ -173,7 +173,10 @@ class TriageEyeCapturingPage extends HookConsumerWidget {
     BuildContext context,
   ) async {
     Either<Failure, TriagePostModel> response;
-    var triageModel = ref.read(triageProvider);
+    var triageModel = ref.watch(triageProvider);
+
+    logger.f(
+        "Triage mode in triage eye capturing page : ${triageModel.triageMode}");
 
     if (triageModel.triageMode == TriageMode.EVENT) {
       response = await triageModel.saveTriageForEvent(

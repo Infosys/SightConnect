@@ -15,6 +15,7 @@ class VisionGuardianEventAddressCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(addEventDetailsProvider);
+
     final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(AppSize.km),

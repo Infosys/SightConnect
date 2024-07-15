@@ -1,19 +1,28 @@
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/source/vg_add_event_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var visionGuadianAddMemberProvider = ChangeNotifierProvider.autoDispose((ref) =>
-    VisionGuardianAddMemberProvider(ref.read(vgAddEventRemoteSource),
-        ref.read(addEventDetailsProvider), ref.read(globalVGProvider)));
+    VisionGuardianAddMemberProvider(
+        ref.read(vgAddEventRemoteSource),
+        ref.read(addEventDetailsProvider),
+        ref.read(globalVGProvider),
+        ref.read(globalVolunteerProvider)));
 
 class VisionGuardianAddMemberProvider extends ChangeNotifier {
   VgAddEventRemoteSource remoteDataSource;
   AddEventDetailsNotifier addEventDetailsProvider;
   GlobalVGProvider globalVGProvider;
-  VisionGuardianAddMemberProvider(this.remoteDataSource,
-      this.addEventDetailsProvider, this.globalVGProvider) {
+  GlobalVolunteerProvider globalVolunteerProvider;
+  VisionGuardianAddMemberProvider(
+      this.remoteDataSource,
+      this.addEventDetailsProvider,
+      this.globalVGProvider,
+      this.globalVolunteerProvider) {
     getTeammatesList();
   }
 
@@ -42,10 +51,20 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
       notifyListeners();
       var eventId = addEventDetailsProvider.eventId;
 
-      List response = await remoteDataSource.getTeammates(
-          eventId: eventId,
-          actorIdentifier: globalVGProvider.userId.toString());
-      setTeammates(response);
+      List response;
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        response = await remoteDataSource.getTeammates(
+            eventId: eventId,
+            actorIdentifier: globalVolunteerProvider.userId.toString());
+
+        setTeammates(response);
+      } else {
+        response = await remoteDataSource.getTeammates(
+            eventId: eventId,
+            actorIdentifier: globalVGProvider.userId.toString());
+
+        setTeammates(response);
+      }
 
       loading = false;
       notifyListeners();
@@ -63,11 +82,19 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
-      await remoteDataSource.postAddTeammate(
-          eventId: eventId,
-          actorIdentifier: globalVGProvider.userId.toString(),
-          officialMobile: officialNumber);
-      getTeammatesList();
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        await remoteDataSource.postAddTeammate(
+            eventId: eventId,
+            actorIdentifier: globalVolunteerProvider.userId.toString(),
+            officialMobile: officialNumber);
+        getTeammatesList();
+      } else
+    {await remoteDataSource.postAddTeammate(
+        eventId: eventId,
+        actorIdentifier: globalVGProvider.userId.toString(),
+        officialMobile: officialNumber);
+    getTeammatesList();}
+   
     } catch (error) {
       loading = false;
       notifyListeners();
@@ -106,13 +133,23 @@ class VisionGuardianAddMemberProvider extends ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        await remoteDataSource.deleteTeamMate(
+            eventId: eventId,
+            loginActorIdentifier: globalVolunteerProvider.userId.toString(),
+            actorIdentifier: actorIdentifier);
+        if (actorIdentifier != globalVolunteerProvider.userId.toString()) {
+          getTeammatesList();
+        }
+      } 
+    else{
       await remoteDataSource.deleteTeamMate(
-          eventId: eventId,
-          loginActorIdentifier: globalVGProvider.userId.toString(),
-          actorIdentifier: actorIdentifier);
-      if (actorIdentifier != globalVGProvider.userId.toString()) {
-        getTeammatesList();
-      }
+        eventId: eventId,
+        loginActorIdentifier: globalVGProvider.userId.toString(),
+        actorIdentifier: actorIdentifier);
+    if (actorIdentifier != globalVGProvider.userId.toString()) {
+      getTeammatesList();
+    }}
     } catch (error) {
       loading = false;
       notifyListeners();

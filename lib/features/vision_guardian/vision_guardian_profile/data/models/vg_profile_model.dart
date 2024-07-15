@@ -7,7 +7,7 @@ part 'vg_profile_model.g.dart';
 @freezed
 class VgProfileModel with _$VgProfileModel {
   const factory VgProfileModel({
-    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "id") int? id, 
     @JsonKey(name: "profilePhoto") String? profilePhoto,
     @JsonKey(name: "healthProfessionalType") String? healthProfessionalType,
     @JsonKey(name: "practitionerType") String? practitionerType,

@@ -136,6 +136,7 @@ const _$PerformerRoleEnumMap = {
   PerformerRole.NURSE: 'NURSE',
   PerformerRole.SYSTEM: 'SYSTEM',
   PerformerRole.PATIENT: 'PATIENT',
+  PerformerRole.VOLUNTEER: 'VOLUNTEER',
 };
 
 _$IncompleteTestImpl _$$IncompleteTestImplFromJson(Map<String, dynamic> json) =>

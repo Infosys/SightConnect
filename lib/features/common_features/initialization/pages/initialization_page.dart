@@ -197,8 +197,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
     await LocationService.getLocationWithPermissions();
 
-    pinCode = await GeocodingService.getPincodeFromLocation();
-    logger.d("pinCode is  $pinCode");
+    List<String> addressData = await GeocodingService.getPincodeFromLocation();
+    pinCode = addressData[0];
+    logger.f("pinCode is  $pinCode");
 
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
@@ -273,6 +274,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
+      Role.ROLE_VOLUNTEER : const VisionGuardianDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {

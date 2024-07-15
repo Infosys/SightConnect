@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/core/models/volunteer_post_model.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/exceptions.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/data/source/remote/triage_remote_source.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_patient_model.dart';
@@ -9,11 +12,37 @@ import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_ev
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(
+  (ref) {
+    try {
+      final response = ref.watch(vgAddEventRemoteSource).getVGEvents(
+        queryData: {
+          "actorIdentifier": PersistentAuthStateService.authState.userId,
+          "eventStatusFilter": "ALL",
+          "pageable": {
+            "page": 0,
+            "size": 10,
+            "title-like": "",
+          },
+        },
+      );
+      logger.d("response in getEventsDataProvider: $response");
+      return response;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
+    } catch (error) {
+      rethrow;
+    }
+  },
+);
+
 var vgAddEventRemoteSource = Provider(
   (ref) => VgAddEventRemoteSourceImpl(
     ref.read(dioProvider),
     ref.read(getTriageModelProvider),
     ref.read(globalVGProvider),
+    ref.read(globalVolunteerProvider),
   ),
 );
 
@@ -59,8 +88,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   final Dio _dio;
   final GetTriageModelNotifier getTriageModelProvider;
   final GlobalVGProvider globalVGProvider;
-  VgAddEventRemoteSourceImpl(
-      this._dio, this.getTriageModelProvider, this.globalVGProvider);
+  final GlobalVolunteerProvider globalVolunteerProvider;
+  VgAddEventRemoteSourceImpl(this._dio, this.getTriageModelProvider,
+      this.globalVGProvider, this.globalVolunteerProvider);
 
   @override
   Future<List<VisionGuardianEventModel>> getVGEvents({
@@ -88,6 +118,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
+      rethrow;
     } catch (error) {
       rethrow;
     }
@@ -114,6 +147,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (error) {
       rethrow;
     }
@@ -122,10 +157,16 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future deleteVGEvents({required String eventId}) async {
     final endpoint = "/services/triage/api/v2/campaign-events/$eventId";
-
-    Map<String, dynamic> queryParameters = {
-      "login-actor-id": globalVGProvider.user!.id!,
-    };
+    Map<String, dynamic> queryParameters;
+    if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      queryParameters = {
+        "login-actor-id": globalVolunteerProvider.user!.id!,
+      };
+    } else {
+      queryParameters = {
+        "login-actor-id": globalVGProvider.user!.id!,
+      };
+    }
 
     try {
       final response =
@@ -135,6 +176,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (error) {
       rethrow;
     }
@@ -145,22 +188,39 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       {required String eventId,
       required String actorIdentifier,
       required int officialMobile}) async {
-    var endpoint =
-        '/services/orchestration/api/v2/practitioners/filter?officialMobile=$officialMobile}';
+    String endpoint;
+    if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      endpoint =
+          "/services/orchestration/api/v2/volunteers/mobile/$officialMobile";
+    } else {
+      endpoint =
+          '/services/orchestration/api/v2/practitioners/filter?officialMobile=$officialMobile}';
+    }
 
     return await _dio.get(endpoint).then((patientresponse) async {
       if (patientresponse.data == null || patientresponse.data.length == 0) {
         throw ServerException();
       }
-      var roleType = patientresponse.data[0]["practitionerType"];
-      if (roleType == "PROFESSIONAL") {
-        roleType = "MEDICAL_PRACTITIONER";
+      // var roleType = patientresponse.data[0]["practitionerType"];
+      // if (roleType == "PROFESSIONAL") {
+      //   roleType = "MEDICAL_PRACTITIONER";
+      // }
+      Map<String, Object> newResponse;
+
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        newResponse = {
+          "role": "VOLUNTEER",
+          "identifier": "${patientresponse.data["id"]}",
+          "isOwner": false
+        };
+        logger.f("newResponse: $newResponse");
+      } else {
+        newResponse = {
+          "role": "MEDICAL_PRACTITIONER",
+          "identifier": "${patientresponse.data[0]["id"]}",
+          "isOwner": false
+        };
       }
-      var newResponse = {
-        "role": "MEDICAL_PRACTITIONER",
-        "identifier": "${patientresponse.data[0]["id"]}",
-        "isOwner": false
-      };
 
       const endpoint = "/services/triage/api/v2/campaign-events/teammates";
       Map<String, dynamic> queryParameters = {
@@ -173,9 +233,12 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           .then((value) {
         return value;
       }).catchError((error) {
+        DioErrorHandler.handleDioError(error);
+
         return error;
       });
     }).catchError((error) {
+      DioErrorHandler.handleDioError(error);
       return error;
     });
   }
@@ -184,6 +247,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future<List<dynamic>> getTeammates(
       {required String eventId, required String actorIdentifier}) async {
     const endpoint = "/services/triage/api/v2/campaign-events/teammates";
+
     Map<String, dynamic> queryParameters = {
       "event-id": eventId,
       "login-actor-id": actorIdentifier.toString()
@@ -192,25 +256,60 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     final response = await _dio
         .get(endpoint, queryParameters: queryParameters)
         .then((value) async {
+      for (var i = 0; i < value.data.length; i++) {
+        logger.d(value.data[i]);
+      }
       var responseTeamMates = value.data;
       var listofTeamMates = [];
-      for (var i = 0; i < responseTeamMates.length; i++) {
-        Map<String, dynamic> queryParameters = {
-          "practitioner-id": int.parse(responseTeamMates[i]["identifier"]),
-        };
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        for (var i = 0; i < responseTeamMates.length; i++) {
+          int userId = int.parse(responseTeamMates[i]["identifier"]);
 
-        var endpoint = "/services/orchestration/api/v2/practitioners/custom";
-        await _dio.get(endpoint, queryParameters: queryParameters).then(
-          (value) {
-            listofTeamMates.add(value.data);
-          },
-        ).catchError((onError) {
-          return onError;
-        });
+          var endpoint = "/services/orchestration/api/v2/volunteers/$userId";
+          await _dio.get(endpoint).then(
+            (value) {
+              logger.f("value: $value");
+              VolunteerPostModel volunteerPostModel =
+                  VolunteerPostModel.fromJson(value.data);
+
+              var listofTeamMatesMapped = [
+                {
+                  "id": volunteerPostModel.id,
+                  "officialMobile": volunteerPostModel.profile!.phoneNumber,
+                  "profilePhoto": null,
+                  "firstName": volunteerPostModel.profile!.firstName,
+                  "lastName": volunteerPostModel.profile!.lastName,
+                }
+              ];
+
+              return listofTeamMates.add(listofTeamMatesMapped);
+            },
+          ).catchError((onError) {
+            DioErrorHandler.handleDioError(onError);
+            return onError;
+          });
+        }
+      } else {
+        for (var i = 0; i < responseTeamMates.length; i++) {
+          Map<String, dynamic> queryParameters = {
+            "practitioner-id": int.parse(responseTeamMates[i]["identifier"]),
+          };
+
+          var endpoint = "/services/orchestration/api/v2/practitioners/custom";
+          await _dio.get(endpoint, queryParameters: queryParameters).then(
+            (value) {
+              listofTeamMates.add(value.data);
+            },
+          ).catchError((onError) {
+            DioErrorHandler.handleDioError(onError);
+            return onError;
+          });
+        }
       }
-
+      logger.f("listofTeamMates: $listofTeamMates");
       return listofTeamMates;
     }).catchError((onError) {
+      DioErrorHandler.handleDioError(onError);
       return onError;
     });
 
@@ -238,6 +337,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (error) {
       rethrow;
     }
@@ -264,6 +365,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
           .toList();
 
       return data;
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (error) {
       rethrow;
     }
@@ -272,6 +375,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   @override
   Future getEventPatientList(
       {required Map<String, dynamic> patientQueryData}) async {
+    logger.f("queryData: $patientQueryData");
     const endpoint = "/services/orchestration/api/v2/patients/filter";
     var queryParams = {
       "offset": patientQueryData["offset"],
@@ -296,6 +400,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (error) {
       logger.d(error);
       rethrow;
@@ -311,6 +417,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         endpoint,
       );
       return VisionGuardianEventModel.fromJson(response.data);
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
     } catch (e) {
       rethrow;
     }

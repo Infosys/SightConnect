@@ -46,6 +46,11 @@ class SharedPreferenceService {
     await _sharedPreferences.setInt("organizationIdVt", value);
   }
 
+  static Future<void> storeEventId(String value) async {
+    await _sharedPreferences.setString("eventId", value);
+    logger.d("storeEventId: $value");
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////
 
   static int? get getTenantIdVt {
@@ -81,18 +86,26 @@ class SharedPreferenceService {
   static bool get getTumblingOverInfo =>
       _sharedPreferences.getBool("tumblingOverInfo") ?? false;
 
+  static String? get getEventId => _sharedPreferences.getString("eventId");
+
+  static Future<void> clearEventId() async {
+    await _sharedPreferences.remove("eventId");
+  }
+
   static Future<void> clearAll([bool persistId = false]) async {
     // await _sharedPreferences.remove("language");
     if (persistId) {
       await _sharedPreferences.remove("fontScale");
       await _sharedPreferences.remove("dontShowVisualAcuityStatus");
       await _sharedPreferences.remove("tumblingOverInfo");
+      await _sharedPreferences.remove("eventId");
     } else {
       await _sharedPreferences.remove("tenantId");
       await _sharedPreferences.remove("organizationId");
       await _sharedPreferences.remove("fontScale");
       await _sharedPreferences.remove("dontShowVisualAcuityStatus");
       await _sharedPreferences.remove("tumblingOverInfo");
+      await _sharedPreferences.remove("eventId");
     }
   }
 }

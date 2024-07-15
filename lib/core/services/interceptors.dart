@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -85,6 +86,8 @@ class DioTokenInterceptor extends Interceptor {
         .updateAccessToken(accessToken: tokens.accessToken);
     await PersistentAuthStateService.authState
         .updateRefreshToken(refreshToken: tokens.refreshToken);
+    await PersistentAuthStateService.authState.saveTokens(
+        accessToken: tokens.accessToken, refreshToken: tokens.refreshToken);
   }
 
   Future<void> _logout() async {

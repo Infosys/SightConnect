@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
@@ -55,6 +56,7 @@ var triageProvider = ChangeNotifierProvider(
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
       ref.watch(saveTriageUseCaseForEvent),
+      ref.watch(globalVolunteerProvider),
     );
   },
 );
@@ -62,6 +64,7 @@ var triageProvider = ChangeNotifierProvider(
 class TriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
   final SaveTriageUseCaseForEvent _saveTriageUseCaseForEvent;
+  final GlobalVolunteerProvider _globalVolunteerProvider;
 
   final GetTriageEyeScanResponseLocallyUseCase
       _getTriageEyeScanResponseLocallyUseCase;
@@ -85,7 +88,8 @@ class TriageProvider extends ChangeNotifier {
       this._patientId,
       this._triageUrgencyRepository,
       this._triageLocalSource,
-      this._saveTriageUseCaseForEvent);
+      this._saveTriageUseCaseForEvent, 
+      this._globalVolunteerProvider);
 
   Future<Either<Failure, TriagePostModel>> saveTriage(int currentStep) async {
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -199,10 +203,14 @@ class TriageProvider extends ChangeNotifier {
     return imageSelection;
   }
 
+  ///////////////////  SAVE TRIAGE FOR EVENT  //////////////////////
+
   Future<Either<Failure, TriagePostModel>> saveTriageForEvent(
     int currentStep,
     String eventId,
   ) async {
+
+    logger.f("event id in triage provider: $eventId, current step: $currentStep");
     List<PostTriageImagingSelectionModel> imageSelection =
         await _getTriageEyeScanResponseLocallyUseCase
             .call(GetTriageEyeScanResponseLocallyParam())
@@ -292,8 +300,8 @@ class TriageProvider extends ChangeNotifier {
   TriageMode get triageMode => _triageMode;
 
   setTriageMode(TriageMode triageMode) {
-    logger.d({
-      "triageMode": triageMode,
+    logger.f({
+      "triageMode for event in triage provider ": triageMode,
     });
     _triageMode = triageMode;
     notifyListeners();
@@ -344,7 +352,17 @@ class TriageProvider extends ChangeNotifier {
               int.tryParse(PersistentAuthStateService.authState.userId!),
         ),
       ];
-    } else {
+    } 
+    else if(PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"){
+       return [
+        Performer(
+          role: PerformerRole.VOLUNTEER,
+          identifier:
+              _globalVolunteerProvider.userId,
+        ),
+      ];
+    }
+    else {
       return [
         Performer(
           role: PerformerRole.PATIENT,

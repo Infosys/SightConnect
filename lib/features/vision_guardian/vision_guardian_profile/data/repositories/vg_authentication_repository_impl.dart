@@ -27,7 +27,6 @@ class VgAutheticationRepositoryImpl implements VgAuthenticationRepository {
         "/services/orchestration/api/v2/practitioners/filter?officialMobile=$mobile";
     try {
       final response = await _dio.get<List>(endpoint);
-
       return Right(
           response.data!.map((e) => VgProfileModel.fromJson(e)).toList());
     } on DioException catch (e) {

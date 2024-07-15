@@ -16,6 +16,7 @@ import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/
 import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
+import 'package:eye_care_for_all/shared/pages/register_volunteer_page.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/helpers/show_feedback_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -43,7 +44,18 @@ class AppDrawer extends HookWidget {
   Widget build(BuildContext context) {
     final loc = context.loc!;
 
-    var items = DrawerMenuItems.getAll(loc);
+    var allItems = DrawerMenuItems.getAll(loc);
+    var items = allItems.where((element) {
+      return element.isPrivacyOrAbout == false &&
+          element.isReferralOrVolunteer == false;
+    }).toList();
+    var privacyAndAboutItems = allItems.where((element) {
+      return element.isPrivacyOrAbout == true;
+    }).toList();
+    var referralandVolunteerItems = allItems.where((element) {
+      return element.isReferralOrVolunteer == true;
+    }).toList();
+
     var isLoading = useState(false);
     final allRoles = PersistentAuthStateService.authState.roles;
     if (allRoles != null && allRoles.length == 1) {
@@ -260,50 +272,169 @@ class AppDrawer extends HookWidget {
                         );
                       },
                     ),
-                    // const Spacer(),
-                    const Divider(),
-                    Consumer(
-                      builder: (context, ref, _) => ListTile(
-                        onTap: () async {
-                          isLoading.value = true;
-                          final navigator = Navigator.of(context);
-                          ref
-                              .read(initializationProvider)
-                              .logout()
-                              .then((value) async {
-                            isLoading.value = false;
-                            navigator.pushNamedAndRemoveUntil(
-                              LoginPage.routeName,
-                              (route) => false,
+                    const Divider(
+                      thickness: 2,
+                    ),
+                    ...referralandVolunteerItems.map(
+                      (item) {
+                        return Consumer(
+                          builder: (context, ref, child) {
+                            return ListTile(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              onTap: () async {
+                                switch (item.id) {
+                                  case DrawerMenuItemId.referral:
+                                    showReferralCodeBottomSheet(context);
+                                    break;
+                                  case DrawerMenuItemId.volunteer:
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const RegisterVolunteerPage(),
+                                      ),
+                                    );
+                                    break;
+                                  default:
+                                }
+                              },
+                              visualDensity:
+                                  const VisualDensity(horizontal: -4),
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.primary.withOpacity(0.2),
+                                ),
+                                child: SvgPicture.asset(
+                                  item.icon,
+                                  height: 18,
+                                  width: 18,
+                                  colorFilter: const ColorFilter.mode(
+                                    AppColor.primary,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                              ),
+                              title: Text(
+                                item.title,
+                                style: applyRobotoFont(
+                                  fontWeight: FontWeight.normal,
+                                  color: AppColor.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
                             );
-                            ref.invalidate(initializationProvider);
-                          }).catchError((e) {
-                            isLoading.value = false;
-                            Fluttertoast.showToast(
-                                msg: loc.appDrawerToastMessageText);
-                          });
-                        },
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.primary.withOpacity(0.2),
+                          },
+                        );
+                      },
+                    ),
+                    // const Spacer(),
+                    const Divider(
+                      thickness: 2,
+                    ),
+                    Consumer(
+                      builder: (context, ref, _) => Column(
+                        children: [
+                          ...privacyAndAboutItems.map(
+                            (item) {
+                              return ListTile(
+                                onTap: () async {
+                                  switch (item.id) {
+                                    case DrawerMenuItemId.about:
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AboutUsPage(),
+                                        ),
+                                      );
+                                      break;
+                                    case DrawerMenuItemId.privacyPolicy:
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AppConsentFormPage(
+                                            isPreview: true,
+                                          ),
+                                        ),
+                                      );
+                                      break;
+                                    default:
+                                  }
+                                },
+                                visualDensity:
+                                    const VisualDensity(horizontal: -4),
+                                leading: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColor.primary.withOpacity(0.2),
+                                  ),
+                                  child: SvgPicture.asset(
+                                    item.icon,
+                                    height: 18,
+                                    width: 18,
+                                    colorFilter: const ColorFilter.mode(
+                                      AppColor.primary,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                ),
+                                title: Text(
+                                  item.title,
+                                  style: applyRobotoFont(
+                                    fontWeight: FontWeight.normal,
+                                    color: AppColor.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                          child: SvgPicture.asset(
-                            "assets/drawer_icons/signout.svg",
+                          ListTile(
+                            onTap: () async {
+                              isLoading.value = true;
+                              final navigator = Navigator.of(context);
+                              ref
+                                  .read(initializationProvider)
+                                  .logout()
+                                  .then((value) async {
+                                isLoading.value = false;
+                                navigator.pushNamedAndRemoveUntil(
+                                  LoginPage.routeName,
+                                  (route) => false,
+                                );
+                                ref.invalidate(initializationProvider);
+                              }).catchError((e) {
+                                isLoading.value = false;
+                                Fluttertoast.showToast(
+                                    msg: loc.appDrawerToastMessageText);
+                              });
+                            },
+                            leading: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.primary.withOpacity(0.2),
+                              ),
+                              child: SvgPicture.asset(
+                                "assets/drawer_icons/signout.svg",
+                              ),
+                            ),
+                            title: Text(
+                              loc.appDrawerSignOut,
+                              style: applyRobotoFont(
+                                fontWeight: FontWeight.normal,
+                                color: AppColor.grey,
+                                fontSize: 14,
+                              ),
+                            ),
                           ),
-                        ),
-                        title: Text(
-                          loc.appDrawerSignOut,
-                          style: applyRobotoFont(
-                            fontWeight: FontWeight.normal,
-                            color: AppColor.grey,
-                            fontSize: 14,
-                          ),
-                        ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: AppSize.kl),
+                    const SizedBox(height: AppSize.km),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
