@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "तुम्हाला {referredBy} द्वारे संदर्भित केले गेले आहे",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "कृपया कॅमेरा तुमच्या चेहऱ्यापासून {minDistance+5} सें. मी. दूर असल्याची खात्री करा.",
   "questionnaireTitle": "डोळ्यांच्या तपासणीचे प्रश्न",
   "questionnaireExitDialog": "या प्रश्नांची उत्तरं देण्याने तुमच्या डोळ्यांच्या समस्या ओळखण्यास मदत होईल. तुम्ही तरीही बाहेर पडू इच्छिता का?",
   "visualAcuityTitle": "दृष्टी अचूकता चाचणी",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "परवानगी मिळाली नाही.",
   "serviceNotAvailable": "सेवा उपलब्ध नाही",
   "vaDistanceToFace": "समोरासमोरचे अंतर",
-  "vaDistanceToFaceInstruction": "कृपया कॅमेरा तुमच्या चेहऱ्यापासून {minDistance+5} सें. मी. दूर असल्याची खात्री करा.",
   "vaBringFaceInsideBox": "चौकटीच्या आत तुमचा चेहरा आणा.",
   "startAssessment": "मूल्यमापन सुरू करा",
   "optoAddPatientInfo": "रुग्णाची माहिती जोडा",

@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "તમને {referredBy} દ્વારા સંદર્ભિત કરવામાં આવ્યા છે",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "મહેરબાની કરીને ખાતરી કરો કે કેમેરા તમારા ચહેરાથી {minDistance+5} સે. મી. દૂર છે.",
   "questionnaireTitle": "આંખના મૂલ્યાંકનના પ્રશ્નો",
   "questionnaireExitDialog": "આ પ્રશ્નોના જવાબ આપવાથી તમારી આંખની સમસ્યાઓને ઓળખવામાં મદદ મળશે. શું તમે ખરેખર બહાર નીકળવા માંગો છો?",
   "visualAcuityTitle": "દ્રશ્ય તીક્ષ્ણતા પરીક્ષણ",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "મંજૂરી આપવામાં આવી નથી.",
   "serviceNotAvailable": "સેવા ઉપલબ્ધ નથી",
   "vaDistanceToFace": "સામનો કરવા માટેનું અંતર",
-  "vaDistanceToFaceInstruction": "મહેરબાની કરીને ખાતરી કરો કે કેમેરા તમારા ચહેરાથી {minDistance+5} સે. મી. દૂર છે.",
   "vaBringFaceInsideBox": "બૉક્સની અંદર તમારો ચહેરો લાવો.",
   "startAssessment": "મૂલ્યાંકન શરૂ કરો",
   "optoAddPatientInfo": "દર્દીની માહિતી ઉમેરો",

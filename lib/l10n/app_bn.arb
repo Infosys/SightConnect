@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "আপনাকে {referredBy} দ্বারা উল্লেখ করা হয়েছে।",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "দয়া করে নিশ্চিত করুন যে ক্যামেরাটি আপনার মুখ থেকে {minDistance+5} সেন্টিমিটার দূরে রয়েছে।",
   "questionnaireTitle": "চোখের মূল্যায়ন প্রশ্ন",
   "questionnaireExitDialog": "এই প্রশ্নগুলির উত্তর দেওয়া আপনার চোখের সমস্যাগুলি শনাক্ত করতে সাহায্য করবে। আপনি কি সত্যিই এই সমস্যা থেকে বেরিয়ে আসতে চান?",
   "visualAcuityTitle": "চাক্ষুষ তীক্ষ্ণতা পরীক্ষা",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "অনুমতি দেওয়া হয়নি।",
   "serviceNotAvailable": "পরিষেবা পাওয়া যাচ্ছে না।",
   "vaDistanceToFace": "মুখোমুখি দূরত্ব",
-  "vaDistanceToFaceInstruction": "দয়া করে নিশ্চিত করুন যে ক্যামেরাটি আপনার মুখ থেকে {minDistance+5} সেন্টিমিটার দূরে রয়েছে।",
   "vaBringFaceInsideBox": "বাক্সের ভিতরে আপনার মুখ আনুন।",
   "startAssessment": "মূল্যায়ন শুরু করুন",
   "optoAddPatientInfo": "রোগীর তথ্য যোগ করুন",

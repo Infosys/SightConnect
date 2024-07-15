@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "మీరు {referredBy} ద్వారా సూచించబడ్డారు",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "కెమెరా మీ ముఖం నుండి {minDistance+5}cm దూరంగా ఉండాలని నిర్ధారించండి",
   "questionnaireTitle": "కంటి మూల్యాంకన ప్రశ్నలు",
   "questionnaireExitDialog": "ఈ ప్రశ్నలకు సమాధానం ఇవ్వడం మీ కంటి సమస్యలను గుర్తించడంలో సహాయపడుతుంది. మీరు నిజంగా నిష్క్రమించాలనుకుంటున్నారా?",
   "visualAcuityTitle": "దృశ్య తీక్షణ పరీక్ష",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "అనుమతి ఇవ్వలేదు",
   "serviceNotAvailable": "సేవ అందుబాటులో లేదు",
   "vaDistanceToFace": "ముఖం దగ్గర దూరం",
-  "vaDistanceToFaceInstruction": "కెమెరా మీ ముఖం నుండి {minDistance+5}cm దూరంగా ఉండాలని నిర్ధారించండి",
   "vaBringFaceInsideBox": "మీ ముఖాన్ని పెట్టె లోపల తీసుకురాండి",
   "startAssessment": "మూల్యాంకనను ప్రారంభించండి",
   "optoAddPatientInfo": "రోగి సమాచారాన్ని జోడించండి",

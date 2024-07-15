@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "ನಿಮ್ಮನ್ನು {referredBy} ನಿಂದ ಉಲ್ಲೇಖಿಸಲಾಗಿದೆ.",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "ಕ್ಯಾಮರಾ ನಿಮ್ಮ ಮುಖದಿಂದ {minDistance+5} ಸೆಂಟಿಮೀಟರ್ ದೂರದಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
   "questionnaireTitle": "ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನ ಪ್ರಶ್ನೆಗಳು",
   "questionnaireExitDialog": "ಈ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸುವುದರಿಂದ ನಿಮ್ಮ ಕಣ್ಣಿನ ಸಮಸ್ಯೆಗಳನ್ನು ಗುರುತಿಸುವಲ್ಲಿ ಸಹಾಯವಾಗುತ್ತದೆ. ನೀವು ನಿಜವಾಗಿಯೂ ನಿರ್ಗಮಿಸಲು ಬಯಸುವಿರಾ?",
   "visualAcuityTitle": "ದೃಷ್ಟಿ ತೀಕ್ಷ್ಣತೆ ಪರೀಕ್ಷೆ",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "ಅನುಮತಿ ಸಿಕ್ಕಿಲ್ಲ.",
   "serviceNotAvailable": "ಸೇವೆ ಲಭ್ಯವಿಲ್ಲ",
   "vaDistanceToFace": "ಮುಖಾಮುಖಿಯಾಗುವ ದೂರ",
-  "vaDistanceToFaceInstruction": "ಕ್ಯಾಮರಾ ನಿಮ್ಮ ಮುಖದಿಂದ {minDistance+5} ಸೆಂಟಿಮೀಟರ್ ದೂರದಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
   "vaBringFaceInsideBox": "ನಿಮ್ಮ ಮುಖವನ್ನು ಪೆಟ್ಟಿಗೆಯೊಳಗೆ ತನ್ನಿ.",
   "startAssessment": "ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರಾರಂಭಿಸಿ",
   "optoAddPatientInfo": "ರೋಗಿಯ ಮಾಹಿತಿಯನ್ನು ಸೇರಿಸಿ",

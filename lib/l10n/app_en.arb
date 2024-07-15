@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "You have been referred by {referredBy}",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "Please ensure that the camera is {minDistance+5} cm away from your face.",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "Permission not granted",
   "serviceNotAvailable": "Service not available",
   "vaDistanceToFace": "Distance to Face",
-  "vaDistanceToFaceInstruction": "Please ensure that the camera is {minDistance+5} cm away from your face.",
   "vaBringFaceInsideBox": "Bring your face inside the box",
   "startAssessment": "Start Assessment",
   "optoAddPatientInfo": "Add Patient Information",

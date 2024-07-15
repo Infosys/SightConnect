@@ -50,6 +50,11 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
+  String vaDistanceToFaceInstruction(String tollFreeNumber) {
+    return 'ಕ್ಯಾಮರಾ ನಿಮ್ಮ ಮುಖದಿಂದ {minDistance+5} ಸೆಂಟಿಮೀಟರ್ ದೂರದಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.';
+  }
+
+  @override
   String get questionnaireTitle => 'ಕಣ್ಣಿನ ಮೌಲ್ಯಮಾಪನ ಪ್ರಶ್ನೆಗಳು';
 
   @override
@@ -843,9 +848,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get vaDistanceToFace => 'ಮುಖಾಮುಖಿಯಾಗುವ ದೂರ';
-
-  @override
-  String get vaDistanceToFaceInstruction => 'ಕ್ಯಾಮರಾ ನಿಮ್ಮ ಮುಖದಿಂದ {minDistance+5} ಸೆಂಟಿಮೀಟರ್ ದೂರದಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.';
 
   @override
   String get vaBringFaceInsideBox => 'ನಿಮ್ಮ ಮುಖವನ್ನು ಪೆಟ್ಟಿಗೆಯೊಳಗೆ ತನ್ನಿ.';

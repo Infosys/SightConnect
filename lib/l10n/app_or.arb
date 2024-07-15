@@ -77,6 +77,14 @@
     }
   },
   "referralCollectSheetReferredBy": "ଆପଣଙ୍କୁ {referredBy} ଦ୍ୱାରା ସୂଚିତ କରାଯାଇଛି।",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "tollFreeNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "ଦଯ଼ାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ କ୍ଯ଼ାମେରାଟି ଆପଣଙ୍କ ମୁହଁଠାରୁ {minDistance+5} ସେ. ମି. ଦୂରରେ ରହିଛି।",
   "questionnaireTitle": "ଚକ୍ଷୁ ମୂଲ୍ଯ଼ାଙ୍କନ ପ୍ରଶ୍ନ",
   "questionnaireExitDialog": "ଏହି ପ୍ରଶ୍ନଗୁଡ଼ିକର ଉତ୍ତର ଦେବା ଦ୍ୱାରା ଆପଣଙ୍କ ଚକ୍ଷୁ ସମ୍ବନ୍ଧୀଯ଼ ସମସ୍ଯ଼ା ଚିହ୍ନଟ କରିବାରେ ସାହାଯ୍ଯ଼ ମିଳିବ। ଆପଣ ପ୍ରକୃତରେ ଏଥିରୁ ବାହାରି ଯିବାକୁ ଚାହୁଁଛନ୍ତି କି?",
   "visualAcuityTitle": "ଭିଜୁଆଲ୍ ଆକ୍ଯ଼ୁଇଟି ଟେଷ୍ଟ",
@@ -342,7 +350,6 @@
   "permissionNotGranted": "ଅନୁମତି ମିଳିନାହିଁ।",
   "serviceNotAvailable": "ସେବା ଉପଲବ୍ଧ ନାହିଁ",
   "vaDistanceToFace": "ସାମ୍ନାସାମ୍ନି ଦୂରତା",
-  "vaDistanceToFaceInstruction": "ଦଯ଼ାକରି ନିଶ୍ଚିତ କରନ୍ତୁ ଯେ କ୍ଯ଼ାମେରାଟି ଆପଣଙ୍କ ମୁହଁଠାରୁ {minDistance+5} ସେ. ମି. ଦୂରରେ ରହିଛି।",
   "vaBringFaceInsideBox": "ବାକ୍ସ ଭିତରକୁ ନିଜ ମୁହଁକୁ ଆଣନ୍ତୁ।",
   "startAssessment": "ମୂଲ୍ଯ଼ାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ",
   "optoAddPatientInfo": "ରୋଗୀ ସୂଚନା ଯୋଗ କରନ୍ତୁ",

@@ -167,6 +167,12 @@ abstract class AppLocalizations {
   /// **'You have been referred by {referredBy}'**
   String referralCollectSheetReferredBy(String referredBy);
 
+  /// No description provided for @vaDistanceToFaceInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Please ensure that the camera is {minDistance+5} cm away from your face.'**
+  String vaDistanceToFaceInstruction(String tollFreeNumber);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
@@ -1756,12 +1762,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Distance to Face'**
   String get vaDistanceToFace;
-
-  /// No description provided for @vaDistanceToFaceInstruction.
-  ///
-  /// In en, this message translates to:
-  /// **'Please ensure that the camera is {minDistance+5} cm away from your face.'**
-  String get vaDistanceToFaceInstruction;
 
   /// No description provided for @vaBringFaceInsideBox.
   ///
