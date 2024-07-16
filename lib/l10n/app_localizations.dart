@@ -4268,8 +4268,20 @@ abstract class AppLocalizations {
   /// No description provided for @distanceNotifierProviderNoFaceDetectedError.
   ///
   /// In en, this message translates to:
-  /// **'No face detected. Please face the camera 40 cm from the screen '**
+  /// **'No face detected. Please face the camera 40 cm from the screen'**
   String get distanceNotifierProviderNoFaceDetectedError;
+
+  /// No description provided for @appCameraPageTakePictureLoadingOverlayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold the camera steady…'**
+  String get appCameraPageTakePictureLoadingOverlayMessage;
+
+  /// No description provided for @appCameraPageDefaultLoadingOverlayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading…'**
+  String get appCameraPageDefaultLoadingOverlayMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

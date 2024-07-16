@@ -52,7 +52,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
-  String _progressMessage = "";
+  String _progressMessage = "Loading...";
   bool _isEyeValid = false;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List<Point<double>> _translatedEyeContours = [];
@@ -421,7 +421,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
   Future<XFile?> _takePicture(BuildContext context) async {
     final loc = context.loc!;
-    _addLoading("Hold the camera steady...");
+    _addLoading(loc.appCameraPageTakePictureLoadingOverlayMessage);
 
     try {
       final XFile? image = await _capturePicture(context);

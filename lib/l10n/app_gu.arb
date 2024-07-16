@@ -767,5 +767,7 @@
   "distanceVaTopAppBarDistanceVisionTest": "Distance Vision Test",
   "fakeDataSourceGetCarouselDataDescription": "Early detection can save your eyes",
   "fakeDataSourceGetCarouselDataTitle": "Doctor says",
-  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen "
+  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
+  "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…"
 }

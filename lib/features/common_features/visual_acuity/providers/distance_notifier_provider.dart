@@ -54,7 +54,7 @@ class DistanceNotifier extends ChangeNotifier {
 
   String getDistanceText(BuildContext context) {
     if (_currentDistance == 0) {
-      return "No face Detected, Please face the camera 40cm from the screen.";
+      return context.loc?.distanceNotifierProviderNoFaceDetectedError ?? "";
     } else {
       if (_currentDistance < _minDistance) {
         return context.loc?.visualAcuityTestDistanceInstructionTooClose ?? "";

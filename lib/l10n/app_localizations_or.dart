@@ -2101,5 +2101,11 @@ class AppLocalizationsOr extends AppLocalizations {
   String get fakeDataSourceGetCarouselDataTitle => 'Doctor says';
 
   @override
-  String get distanceNotifierProviderNoFaceDetectedError => 'No face detected. Please face the camera 40 cm from the screen ';
+  String get distanceNotifierProviderNoFaceDetectedError => 'No face detected. Please face the camera 40 cm from the screen';
+
+  @override
+  String get appCameraPageTakePictureLoadingOverlayMessage => 'Hold the camera steady…';
+
+  @override
+  String get appCameraPageDefaultLoadingOverlayMessage => 'Loading…';
 }
