@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/providers/global_visual_acuity_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +34,7 @@ class TouchGestureCard extends HookConsumerWidget {
     // var model = ref.watch(tumblingTestProvider);
 
     // final distance = ref.watch(distanceNotifierProvider);
-
+    final loc = context.loc!;
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(35)),
@@ -83,10 +84,10 @@ class TouchGestureCard extends HookConsumerWidget {
                           ),
                           child: Text(
                             eye == Eye.left
-                                ? 'Cover your right eye and tap on the E matching the image on top'
+                                ? loc.touchGestureCardRightEyeInstruction
                                 : eye == Eye.right
-                                    ? 'Cover your left eye and tap on the E matching the image on top'
-                                    : 'View with both eyes and tap on the E matching the image on top.',
+                                    ? loc.touchGestureCardLeftEyeInstruction
+                                    : loc.touchGestureCardBothEyesInstruction,
                             style: applyRobotoFont(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -183,7 +184,7 @@ class TouchGestureCard extends HookConsumerWidget {
                                             .gameOver();
                                     handleGameOver(context);
                                   },
-                                  child: const Text('I Can’t see'))
+                                  child: Text(loc.touchGestureCardICantSeeOutlineButton))
                             ],
                           ),
                         )

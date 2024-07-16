@@ -4192,6 +4192,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Near Vision Test'**
   String get vaTopAppBarNearVisionTest;
+
+  /// No description provided for @vaDemoPageInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on the E matching the image shown on top'**
+  String get vaDemoPageInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetRightEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your right eye and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetRightEyeInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetLeftEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your left eye and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetLeftEyeInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetBothEyesInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'View with both eyes and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetBothEyesInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetProceedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed'**
+  String get vaShowInstructionBottomSheetProceedButton;
+
+  /// No description provided for @touchGestureCardRightEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your right eye and tap on the E matching the image on top'**
+  String get touchGestureCardRightEyeInstruction;
+
+  /// No description provided for @touchGestureCardLeftEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your left eye and tap on the E matching the image on top'**
+  String get touchGestureCardLeftEyeInstruction;
+
+  /// No description provided for @touchGestureCardBothEyesInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'View with both eyes and tap on the E matching the image on top'**
+  String get touchGestureCardBothEyesInstruction;
+
+  /// No description provided for @touchGestureCardICantSeeOutlineButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I Can’t see'**
+  String get touchGestureCardICantSeeOutlineButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

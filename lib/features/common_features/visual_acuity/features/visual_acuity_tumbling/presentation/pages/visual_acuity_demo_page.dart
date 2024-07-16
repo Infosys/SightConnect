@@ -108,7 +108,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                           children: [
                             Center(
                               child: Text(
-                                'Tap on the E matching the image shown on top.',
+                                loc.vaDemoPageInstruction,
                                 style: applyRobotoFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
