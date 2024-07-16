@@ -276,7 +276,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'Step 3 - Eye Scan',
+                                  loc.eyeAssessmentStepThree,
                                   style: applyRobotoFont(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500),
