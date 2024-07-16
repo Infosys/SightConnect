@@ -2068,7 +2068,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get vaDemoPageInstruction => 'Tap on the E matching the image shown on top';
 
   @override
-  String get vaShowInstructionBottomSheetRightEyeInstruction => 'ss';
+  String get vaShowInstructionBottomSheetRightEyeInstruction => 'Cover your right eye and tap on the E matching the image on top';
 
   @override
   String get vaShowInstructionBottomSheetLeftEyeInstruction => 'Cover your left eye and tap on the E matching the image on top';
@@ -2108,4 +2108,10 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get appCameraPageDefaultLoadingOverlayMessage => 'Loading…';
+
+  @override
+  String get topReadingCardFaceNotFoundError => 'No Face';
+
+  @override
+  String get topReadingCardLongDistanceTestMessage => 'Position yourself 2m from the screen';
 }

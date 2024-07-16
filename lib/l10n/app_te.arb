@@ -756,7 +756,7 @@
   "triageTextTypeQuestionCounterText": "Optional",
   "vaTopAppBarNearVisionTest": "Near Vision Test",
   "vaDemoPageInstruction": "Tap on the E matching the image shown on top",
-  "vaShowInstructionBottomSheetRightEyeInstruction": "ss",
+  "vaShowInstructionBottomSheetRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
   "vaShowInstructionBottomSheetLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
   "vaShowInstructionBottomSheetBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
   "vaShowInstructionBottomSheetProceedButton": "Proceed",
@@ -769,5 +769,7 @@
   "fakeDataSourceGetCarouselDataTitle": "Doctor says",
   "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
   "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
-  "appCameraPageDefaultLoadingOverlayMessage": "Loading…"
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
+  "topReadingCardFaceNotFoundError": "No Face",
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen"
 }

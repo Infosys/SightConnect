@@ -4282,6 +4282,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading…'**
   String get appCameraPageDefaultLoadingOverlayMessage;
+
+  /// No description provided for @topReadingCardFaceNotFoundError.
+  ///
+  /// In en, this message translates to:
+  /// **'No Face'**
+  String get topReadingCardFaceNotFoundError;
+
+  /// No description provided for @topReadingCardLongDistanceTestMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Position yourself 2m from the screen'**
+  String get topReadingCardLongDistanceTestMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

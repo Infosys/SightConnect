@@ -769,5 +769,7 @@
   "fakeDataSourceGetCarouselDataTitle": "Doctor says",
   "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
   "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
-  "appCameraPageDefaultLoadingOverlayMessage": "Loading…"
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
+  "topReadingCardFaceNotFoundError": "No Face",
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen"
 }
