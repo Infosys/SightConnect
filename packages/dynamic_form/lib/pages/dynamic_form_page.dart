@@ -81,12 +81,11 @@ class FormLayout extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              for (var section in pages)
+              for (var page in pages)
                 AppCard(
-                  title: section.name,
-                  marginBottom: 16,
+                  title: page.name,
                   child: Column(
-                    children: section.elements
+                    children: page.elements
                         .map((element) =>
                             _buildFields(element.elements, formKey))
                         .expand((element) => element)
