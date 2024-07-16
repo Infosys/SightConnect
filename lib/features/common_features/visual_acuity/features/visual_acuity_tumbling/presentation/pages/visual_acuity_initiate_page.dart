@@ -51,6 +51,7 @@ class _VisualAcuityInitiatePageState
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
+    final loc = context.loc!;
 
     return PopScope(
       canPop: false,
@@ -101,7 +102,7 @@ class _VisualAcuityInitiatePageState
                     titleSpacing: 0,
                     actions: const [],
                     centerTitle: false,
-                    title: const Text("Near Vision Test"),
+                    title: Text(loc.vaTopAppBarNearVisionTest),
                   )
                 : CustomAppbar(
                     leadingWidth: 60,
@@ -134,7 +135,7 @@ class _VisualAcuityInitiatePageState
                       ),
                     ),
                     title: Text(
-                      "Near Vision Test",
+                      loc.vaTopAppBarNearVisionTest,
                       style: applyFiraSansFont(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

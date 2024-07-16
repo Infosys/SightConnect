@@ -2054,4 +2054,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appDrawerAddReview => 'Add Review';
+
+  @override
+  String get optionCardNeedHelpTextButton => 'Need help to understand this ';
+
+  @override
+  String get triageTextTypeQuestionCounterText => 'Optional';
+
+  @override
+  String get vaTopAppBarNearVisionTest => 'Near Vision Test';
 }

@@ -751,5 +751,8 @@
   "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
   "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
   "triageInstructionPageIAmReadyButton": "I am ready",
-  "appDrawerAddReview": "Add Review"
+  "appDrawerAddReview": "Add Review",
+  "optionCardNeedHelpTextButton": "Need help to understand this ",
+  "triageTextTypeQuestionCounterText": "Optional",
+  "vaTopAppBarNearVisionTest": "Near Vision Test"
 }

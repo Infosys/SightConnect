@@ -4174,6 +4174,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Review'**
   String get appDrawerAddReview;
+
+  /// No description provided for @optionCardNeedHelpTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help to understand this '**
+  String get optionCardNeedHelpTextButton;
+
+  /// No description provided for @triageTextTypeQuestionCounterText.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get triageTextTypeQuestionCounterText;
+
+  /// No description provided for @vaTopAppBarNearVisionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Near Vision Test'**
+  String get vaTopAppBarNearVisionTest;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
