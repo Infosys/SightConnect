@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "உங்கள் நண்பர் குறைந்தபட்சம் ஒரு முக்கோண சோதனையை முடிக்கிறார்.",
   "referralStatisticsPageReferFriendButton": "ஒரு நண்பரைப் பார்க்கவும்",
   "referralStatisticsPageError": "மன்னிக்கவும், இந்த நேரத்தில் உங்கள் பரிந்துரை புள்ளிவிவரங்களை எங்களால் பெற முடியவில்லை.",
-  "referralStatisticsPageRetryButton": "மீண்டும் முயற்சிக்கவும்"
+  "referralStatisticsPageRetryButton": "மீண்டும் முயற்சிக்கவும்",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

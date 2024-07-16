@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "మీ స్నేహితుడు కనీసం ఒక ట్రైజ్ పరీక్షను పూర్తి చేస్తాడు.",
   "referralStatisticsPageReferFriendButton": "స్నేహితుడిని సంప్రదించండి",
   "referralStatisticsPageError": "క్షమించండి, మేము ప్రస్తుతానికి మీ రిఫెరల్ గణాంకాలను పొందలేకపోయాము.",
-  "referralStatisticsPageRetryButton": "తిరిగి ప్రయత్నించండి."
+  "referralStatisticsPageRetryButton": "తిరిగి ప్రయత్నించండి.",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

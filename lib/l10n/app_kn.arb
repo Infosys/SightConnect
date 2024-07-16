@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "ನಿಮ್ಮ ಸ್ನೇಹಿತ ಕನಿಷ್ಠ ಒಂದು ಟ್ರೈಜ್ ಪರೀಕ್ಷೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸುತ್ತಾನೆ.",
   "referralStatisticsPageReferFriendButton": "ಸ್ನೇಹಿತನನ್ನು ಉಲ್ಲೇಖಿಸಿ",
   "referralStatisticsPageError": "ಕ್ಷಮಿಸಿ, ಈ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮ ಉಲ್ಲೇಖಿತ ಅಂಕಿಅಂಶಗಳನ್ನು ಪಡೆಯಲು ನಮಗೆ ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.",
-  "referralStatisticsPageRetryButton": "ಮರುಪ್ರಯತ್ನಿ ಮಾಡಿ."
+  "referralStatisticsPageRetryButton": "ಮರುಪ್ರಯತ್ನಿ ಮಾಡಿ.",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

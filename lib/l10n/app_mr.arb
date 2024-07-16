@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "तुमचा मित्र किमान एक ट्रायएज चाचणी पूर्ण करतो.",
   "referralStatisticsPageReferFriendButton": "एका मित्राचा संदर्भ घ्या",
   "referralStatisticsPageError": "माफ करा, आम्ही सध्या तुमची संदर्भ आकडेवारी आणू शकत नाही.",
-  "referralStatisticsPageRetryButton": "पुन्हा प्रयत्न करा."
+  "referralStatisticsPageRetryButton": "पुन्हा प्रयत्न करा.",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

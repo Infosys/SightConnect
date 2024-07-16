@@ -2027,4 +2027,31 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get referralStatisticsPageRetryButton => 'पुनः प्रयास करें।';
+
+  @override
+  String get triageInstructionPageTopAppBarEyeTest => 'Eye Test';
+
+  @override
+  String get triageInstructionPageHeader => 'What you would be doing';
+
+  @override
+  String get triageInstructionPageBody1 => 'You will need to place your device at eye level.';
+
+  @override
+  String get triageInstructionPageBody2 => 'You will need to select responses to questions.';
+
+  @override
+  String get triageInstructionPageBody3 => 'You will need to take clear pictures of your eyes.';
+
+  @override
+  String get triageInstructionPageComfortableWithSelfTest => 'If you are comfortable with doing the test by yourself, you can proceed directly';
+
+  @override
+  String get triageInstructionPageTestAssistanceRequired => 'If you need assistance, please get someone who can help you and start.';
+
+  @override
+  String get triageInstructionPageIAmReadyButton => 'I am ready';
+
+  @override
+  String get appDrawerAddReview => 'Add Review';
 }

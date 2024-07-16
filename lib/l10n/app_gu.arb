@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "તમારો મિત્ર ઓછામાં ઓછો એક ટ્રાઇએજ ટેસ્ટ પૂર્ણ કરે છે.",
   "referralStatisticsPageReferFriendButton": "મિત્રનો સંદર્ભ લો",
   "referralStatisticsPageError": "માફ કરશો, અમે આ ક્ષણે તમારા રેફરલ આંકડા મેળવવામાં અસમર્થ છીએ.",
-  "referralStatisticsPageRetryButton": "ફરી પ્રયાસ કરો"
+  "referralStatisticsPageRetryButton": "ફરી પ્રયાસ કરો",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

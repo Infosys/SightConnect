@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "നിങ്ങളുടെ സുഹൃത്ത് കുറഞ്ഞത് ഒരു ട്രൈജ് ടെസ്റ്റെങ്കിലും പൂർത്തിയാക്കുന്നു.",
   "referralStatisticsPageReferFriendButton": "ഒരു സുഹൃത്തിനെ റഫർ ചെയ്യുക",
   "referralStatisticsPageError": "ക്ഷമിക്കണം, നിങ്ങളുടെ റഫറൽ സ്ഥിതിവിവരക്കണക്കുകൾ ഇപ്പോൾ കൊണ്ടുവരാൻ ഞങ്ങൾക്ക് കഴിയുന്നില്ല.",
-  "referralStatisticsPageRetryButton": "വീണ്ടും ശ്രമിക്കുക."
+  "referralStatisticsPageRetryButton": "വീണ്ടും ശ്രമിക്കുക.",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

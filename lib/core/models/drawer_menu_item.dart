@@ -55,9 +55,9 @@ class DrawerMenuItems {
       title: loc.appDrawerScanner,
       icon: AppIcon.scanner,
     );
-    DrawerMenuItem feedback = const DrawerMenuItem(
+    DrawerMenuItem feedback = DrawerMenuItem(
       id: DrawerMenuItemId.feedback,
-      title: "Add Review",
+      title: loc.appDrawerAddReview,
       icon: "assets/drawer_icons/feedback.svg",
     );
 

@@ -742,5 +742,14 @@
   "referralStatisticsPageReferFriendBody3": "আপনার বন্ধু অন্তত একটি ট্রাইএজ পরীক্ষা সম্পন্ন করে।",
   "referralStatisticsPageReferFriendButton": "একজন বন্ধুকে রেফার করুন",
   "referralStatisticsPageError": "দুঃখিত, আমরা এই মুহূর্তে আপনার রেফারেল পরিসংখ্যান আনতে পারছি না।",
-  "referralStatisticsPageRetryButton": "পুনরায় চেষ্টা করুন।"
+  "referralStatisticsPageRetryButton": "পুনরায় চেষ্টা করুন।",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review"
 }

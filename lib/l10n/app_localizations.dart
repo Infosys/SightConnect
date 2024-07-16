@@ -4120,6 +4120,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get referralStatisticsPageRetryButton;
+
+  /// No description provided for @triageInstructionPageTopAppBarEyeTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Test'**
+  String get triageInstructionPageTopAppBarEyeTest;
+
+  /// No description provided for @triageInstructionPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'What you would be doing'**
+  String get triageInstructionPageHeader;
+
+  /// No description provided for @triageInstructionPageBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to place your device at eye level.'**
+  String get triageInstructionPageBody1;
+
+  /// No description provided for @triageInstructionPageBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to select responses to questions.'**
+  String get triageInstructionPageBody2;
+
+  /// No description provided for @triageInstructionPageBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to take clear pictures of your eyes.'**
+  String get triageInstructionPageBody3;
+
+  /// No description provided for @triageInstructionPageComfortableWithSelfTest.
+  ///
+  /// In en, this message translates to:
+  /// **'If you are comfortable with doing the test by yourself, you can proceed directly'**
+  String get triageInstructionPageComfortableWithSelfTest;
+
+  /// No description provided for @triageInstructionPageTestAssistanceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'If you need assistance, please get someone who can help you and start.'**
+  String get triageInstructionPageTestAssistanceRequired;
+
+  /// No description provided for @triageInstructionPageIAmReadyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I am ready'**
+  String get triageInstructionPageIAmReadyButton;
+
+  /// No description provided for @appDrawerAddReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Review'**
+  String get appDrawerAddReview;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
