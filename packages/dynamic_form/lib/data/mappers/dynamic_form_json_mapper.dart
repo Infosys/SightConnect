@@ -1,18 +1,24 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
+import 'package:flutter/material.dart';
 
 class DynamicFormJsonMapper {
-  DynamicFormJsonModel entitytoModel(DynamicFormJsonEntity dynamicFormEntity) {
-    return DynamicFormJsonModel();
+  ResponseJsonModel entitytoModel(ResponseJsonEntity dynamicFormEntity) {
+    return ResponseJsonModel();
   }
 
-  DynamicFormJsonEntity modeltoEntity(DynamicFormJsonModel dynamicFormModel) {
-    return DynamicFormJsonEntity(
-      title: dynamicFormModel.title ?? '',
-      logoPosition: dynamicFormModel.logoPosition ?? '',
-      pages: _getPages(dynamicFormModel.pages),
-    );
+  ResponseJsonEntity modeltoEntity(ResponseJsonModel dynamicFormModel) {
+    try {
+      return ResponseJsonEntity(
+        title: dynamicFormModel.title ?? '',
+        logoPosition: dynamicFormModel.logoPosition ?? '',
+        pages: _getPages(dynamicFormModel.pages),
+      );
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper $e');
+      rethrow;
+    }
   }
 
   List<PageEntity> _getPages(List<PageModel>? pages) {
@@ -42,11 +48,12 @@ class DynamicFormJsonMapper {
     return pageElementEntities;
   }
 
-  List<ElementEntity> _getElements(List<ElementClassModel>? elements) {
-    final List<ElementEntity> elementEntities = [];
+  List<ElementElementClassEntity> _getElements(
+      List<ElementElementClassModel>? elements) {
+    final List<ElementElementClassEntity> elementEntities = [];
     if (elements != null) {
       for (final element in elements) {
-        elementEntities.add(ElementEntity(
+        elementEntities.add(ElementElementClassEntity(
           type: _mapToFormType(element.type),
           name: element.name ?? '',
           title: element.title ?? '',
@@ -55,18 +62,38 @@ class DynamicFormJsonMapper {
           isRequired: element.isRequired ?? false,
           requiredErrorText: element.requiredErrorText ?? '',
           maxSize: element.maxSize ?? 0,
-          validators: [],
+          validators: _getValidators(element.validators),
+          placeholder: element.placeholder ?? '',
+          description: element.description ?? '',
+          readOnly: element.readOnly ?? false,
+          min: element.min ?? 0,
+          max: element.max ?? 0,
+          step: element.step ?? 0,
         ));
       }
     }
     return elementEntities;
   }
 
-  List<ChoiceEntity> _getChoices(List<ChoiceModel>? choices) {
-    final List<ChoiceEntity> choiceEntities = [];
+  _getValidators(List<ValidatorModel>? validators) {
+    final List<ValidatorEntity> validatorEntities = [];
+    if (validators != null) {
+      for (final validator in validators) {
+        validatorEntities.add(ValidatorEntity(
+          type: validator.type ?? '',
+          text: validator.text ?? '',
+          regex: validator.regex ?? '',
+        ));
+      }
+    }
+    return validatorEntities;
+  }
+
+  List<ChoiceClassEntity> _getChoices(List<ChoiceClassModel>? choices) {
+    final List<ChoiceClassEntity> choiceEntities = [];
     if (choices != null) {
       for (final choice in choices) {
-        choiceEntities.add(ChoiceEntity(
+        choiceEntities.add(ChoiceClassEntity(
           text: choice.text ?? '',
           value: choice.value ?? '',
         ));

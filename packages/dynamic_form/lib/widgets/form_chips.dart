@@ -11,7 +11,7 @@ class FormChip extends HookWidget {
     this.onChanged,
   });
 
-  final ElementEntity field;
+  final ElementElementClassEntity field;
   final Function(String?)? onChanged;
 
   @override

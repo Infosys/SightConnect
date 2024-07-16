@@ -1,28 +1,24 @@
-// To parse this JSON data, do
-//
-//     final dynamicFormJsonModel = dynamicFormJsonModelFromJson(jsonString);
-
 import 'dart:convert';
 
-DynamicFormJsonModel dynamicFormJsonModelFromJson(String str) =>
-    DynamicFormJsonModel.fromJson(json.decode(str));
+ResponseJsonModel responseJsonModelFromJson(String str) =>
+    ResponseJsonModel.fromJson(json.decode(str));
 
-String dynamicFormJsonModelToJson(DynamicFormJsonModel data) =>
+String responseJsonModelToJson(ResponseJsonModel data) =>
     json.encode(data.toJson());
 
-class DynamicFormJsonModel {
-  final String? title;
-  final String? logoPosition;
-  final List<PageModel>? pages;
+class ResponseJsonModel {
+  String? title;
+  String? logoPosition;
+  List<PageModel>? pages;
 
-  DynamicFormJsonModel({
+  ResponseJsonModel({
     this.title,
     this.logoPosition,
     this.pages,
   });
 
-  factory DynamicFormJsonModel.fromJson(Map<String, dynamic> json) =>
-      DynamicFormJsonModel(
+  factory ResponseJsonModel.fromJson(Map<String, dynamic> json) =>
+      ResponseJsonModel(
         title: json["title"],
         logoPosition: json["logoPosition"],
         pages: json["pages"] == null
@@ -41,8 +37,8 @@ class DynamicFormJsonModel {
 }
 
 class PageModel {
-  final String? name;
-  final List<PageElementModel>? elements;
+  String? name;
+  List<PageElementModel>? elements;
 
   PageModel({
     this.name,
@@ -66,9 +62,9 @@ class PageModel {
 }
 
 class PageElementModel {
-  final String? type;
-  final String? name;
-  final List<ElementClassModel>? elements;
+  String? type;
+  String? name;
+  List<ElementElementClassModel>? elements;
 
   PageElementModel({
     this.type,
@@ -82,8 +78,8 @@ class PageElementModel {
         name: json["name"],
         elements: json["elements"] == null
             ? []
-            : List<ElementClassModel>.from(
-                json["elements"]!.map((x) => ElementClassModel.fromJson(x))),
+            : List<ElementElementClassModel>.from(json["elements"]!
+                .map((x) => ElementElementClassModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -95,75 +91,100 @@ class PageElementModel {
       };
 }
 
-class ElementClassModel {
-  final String? type;
-  final String? name;
-  final String? title;
-  final String? inputType;
-  final List<ChoiceModel>? choices;
-  final bool? isRequired;
-  final String? requiredErrorText;
-  final int? maxSize;
-  final List<ValidatorModel>? validators;
+class ElementElementClassModel {
+  String? type;
+  String? name;
+  String? title;
+  String? description;
+  bool? isRequired;
+  String? requiredErrorText;
+  bool? readOnly;
+  List<ValidatorModel>? validators;
+  String? inputType;
+  List<ChoiceClassModel>? choices;
+  String? placeholder;
+  int? maxSize;
+  int? min;
+  int? max;
+  int? step;
 
-  ElementClassModel({
+  ElementElementClassModel({
     this.type,
     this.name,
     this.title,
-    this.inputType,
-    this.choices,
+    this.description,
     this.isRequired,
     this.requiredErrorText,
-    this.maxSize,
+    this.readOnly,
     this.validators,
+    this.inputType,
+    this.choices,
+    this.placeholder,
+    this.maxSize,
+    this.min,
+    this.max,
+    this.step,
   });
 
-  factory ElementClassModel.fromJson(Map<String, dynamic> json) =>
-      ElementClassModel(
+  factory ElementElementClassModel.fromJson(Map<String, dynamic> json) =>
+      ElementElementClassModel(
         type: json["type"],
         name: json["name"],
         title: json["title"],
-        inputType: json["inputType"],
-        choices: json["choices"] == null
-            ? []
-            : List<ChoiceModel>.from(
-                json["choices"]!.map((x) => ChoiceModel.fromJson(x))),
+        description: json["description"],
         isRequired: json["isRequired"],
         requiredErrorText: json["requiredErrorText"],
-        maxSize: json["maxSize"],
+        readOnly: json["readOnly"],
         validators: json["validators"] == null
             ? []
             : List<ValidatorModel>.from(
                 json["validators"]!.map((x) => ValidatorModel.fromJson(x))),
+        inputType: json["inputType"],
+        choices: json["choices"] == null
+            ? []
+            : List<ChoiceClassModel>.from(
+                json["choices"]!.map((x) => ChoiceClassModel.fromJson(x))),
+        placeholder: json["placeholder"],
+        maxSize: json["maxSize"],
+        min: json["min"],
+        max: json["max"],
+        step: json["step"],
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
         "name": name,
         "title": title,
+        "description": description,
+        "isRequired": isRequired,
+        "requiredErrorText": requiredErrorText,
+        "readOnly": readOnly,
+        "validators": validators == null
+            ? []
+            : List<dynamic>.from(validators!.map((x) => x.toJson())),
         "inputType": inputType,
         "choices": choices == null
             ? []
             : List<dynamic>.from(choices!.map((x) => x.toJson())),
-        "isRequired": isRequired,
-        "requiredErrorText": requiredErrorText,
+        "placeholder": placeholder,
         "maxSize": maxSize,
-        "validators": validators == null
-            ? []
-            : List<dynamic>.from(validators!.map((x) => x.toJson())),
+        "min": min,
+        "max": max,
+        "step": step,
       };
 }
 
-class ChoiceModel {
-  final String? value;
-  final String? text;
+class ChoiceClassModel {
+  String? value;
+  String? text;
 
-  ChoiceModel({
+  ChoiceClassModel({
     this.value,
     this.text,
   });
 
-  factory ChoiceModel.fromJson(Map<String, dynamic> json) => ChoiceModel(
+  factory ChoiceClassModel.fromJson(Map<String, dynamic> json) =>
+      ChoiceClassModel(
         value: json["value"],
         text: json["text"],
       );
@@ -175,17 +196,25 @@ class ChoiceModel {
 }
 
 class ValidatorModel {
-  final String? type;
+  String? type;
+  String? text;
+  String? regex;
 
   ValidatorModel({
     this.type,
+    this.text,
+    this.regex,
   });
 
   factory ValidatorModel.fromJson(Map<String, dynamic> json) => ValidatorModel(
         type: json["type"],
+        text: json["text"],
+        regex: json["regex"],
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
+        "text": text,
+        "regex": regex,
       };
 }

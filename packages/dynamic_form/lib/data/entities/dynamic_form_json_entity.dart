@@ -2,25 +2,25 @@ import 'dart:convert';
 
 import 'package:dynamic_form/data/enums/enums.dart';
 
-DynamicFormJsonEntity dynamicFormJsonEntityFromJson(String str) =>
-    DynamicFormJsonEntity.fromJson(json.decode(str));
+ResponseJsonEntity responseJsonEntityFromJson(String str) =>
+    ResponseJsonEntity.fromJson(json.decode(str));
 
-String dynamicFormJsonEntityToJson(DynamicFormJsonEntity data) =>
+String responseJsonEntityToJson(ResponseJsonEntity data) =>
     json.encode(data.toJson());
 
-class DynamicFormJsonEntity {
+class ResponseJsonEntity {
   final String title;
   final String logoPosition;
   final List<PageEntity> pages;
 
-  DynamicFormJsonEntity({
+  ResponseJsonEntity({
     required this.title,
     required this.logoPosition,
     required this.pages,
   });
 
-  factory DynamicFormJsonEntity.fromJson(Map<String, dynamic> json) =>
-      DynamicFormJsonEntity(
+  factory ResponseJsonEntity.fromJson(Map<String, dynamic> json) =>
+      ResponseJsonEntity(
         title: json["title"],
         logoPosition: json["logoPosition"],
         pages: List<PageEntity>.from(
@@ -58,7 +58,7 @@ class PageEntity {
 class PageElementEntity {
   final String type;
   final String name;
-  final List<ElementEntity> elements;
+  final List<ElementElementClassEntity> elements;
 
   PageElementEntity({
     required this.type,
@@ -70,8 +70,8 @@ class PageElementEntity {
       PageElementEntity(
         type: json["type"],
         name: json["name"],
-        elements: List<ElementEntity>.from(
-            json["elements"].map((x) => ElementEntity.fromJson(x))),
+        elements: List<ElementElementClassEntity>.from(
+            json["elements"].map((x) => ElementElementClassEntity.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -81,66 +81,93 @@ class PageElementEntity {
       };
 }
 
-class ElementEntity {
+class ElementElementClassEntity {
   final DynamicFormType type;
   final String name;
   final String title;
-  final String inputType;
-  final List<ChoiceEntity> choices;
+  final String description;
   final bool isRequired;
   final String requiredErrorText;
-  final int maxSize;
+  final bool readOnly;
   final List<ValidatorEntity> validators;
+  final String inputType;
+  final List<ChoiceClassEntity> choices;
+  final String placeholder;
+  final int maxSize;
+  final int min;
+  final int max;
+  final int step;
 
-  ElementEntity({
+  ElementElementClassEntity({
     required this.type,
     required this.name,
     required this.title,
-    required this.inputType,
-    required this.choices,
+    required this.description,
     required this.isRequired,
     required this.requiredErrorText,
-    required this.maxSize,
+    required this.readOnly,
     required this.validators,
+    required this.inputType,
+    required this.choices,
+    required this.placeholder,
+    required this.maxSize,
+    required this.min,
+    required this.max,
+    required this.step,
   });
 
-  factory ElementEntity.fromJson(Map<String, dynamic> json) => ElementEntity(
+  factory ElementElementClassEntity.fromJson(Map<String, dynamic> json) =>
+      ElementElementClassEntity(
         type: json["type"],
         name: json["name"],
         title: json["title"],
-        inputType: json["inputType"],
-        choices: List<ChoiceEntity>.from(
-            json["choices"].map((x) => ChoiceEntity.fromJson(x))),
+        description: json["description"],
         isRequired: json["isRequired"],
         requiredErrorText: json["requiredErrorText"],
-        maxSize: json["maxSize"],
+        readOnly: json["readOnly"],
         validators: List<ValidatorEntity>.from(
             json["validators"].map((x) => ValidatorEntity.fromJson(x))),
+        inputType: json["inputType"],
+        choices: List<ChoiceClassEntity>.from(
+            json["choices"].map((x) => ChoiceClassEntity.fromJson(x))),
+        placeholder: json["placeholder"],
+        maxSize: json["maxSize"],
+        min: json["min"],
+        max: json["max"],
+        step: json["step"],
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
         "name": name,
         "title": title,
-        "inputType": inputType,
-        "choices": List<dynamic>.from(choices.map((x) => x.toJson())),
+        "description": description,
         "isRequired": isRequired,
         "requiredErrorText": requiredErrorText,
+        "readOnly": readOnly,
+        "validators":
+            List<ValidatorEntity>.from(validators.map((x) => x.toJson())),
+        "inputType": inputType,
+        "choices": List<ChoiceClassEntity>.from(choices.map((x) => x)),
+        "placeholder": placeholder,
         "maxSize": maxSize,
-        "validators": List<dynamic>.from(validators.map((x) => x.toJson())),
+        "min": min,
+        "max": max,
+        "step": step,
       };
 }
 
-class ChoiceEntity {
+class ChoiceClassEntity {
   final String value;
   final String text;
 
-  ChoiceEntity({
+  ChoiceClassEntity({
     required this.value,
     required this.text,
   });
 
-  factory ChoiceEntity.fromJson(Map<String, dynamic> json) => ChoiceEntity(
+  factory ChoiceClassEntity.fromJson(Map<String, dynamic> json) =>
+      ChoiceClassEntity(
         value: json["value"],
         text: json["text"],
       );
@@ -153,17 +180,25 @@ class ChoiceEntity {
 
 class ValidatorEntity {
   final String type;
+  final String text;
+  final String regex;
 
   ValidatorEntity({
     required this.type,
+    required this.text,
+    required this.regex,
   });
 
   factory ValidatorEntity.fromJson(Map<String, dynamic> json) =>
       ValidatorEntity(
         type: json["type"],
+        text: json["text"],
+        regex: json["regex"],
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
+        "text": text,
+        "regex": regex,
       };
 }

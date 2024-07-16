@@ -10,7 +10,7 @@ class FormSlider extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementEntity field;
+  final ElementElementClassEntity field;
   final Function(dynamic)? onChanged;
 
   @override

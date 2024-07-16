@@ -5,49 +5,81 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "eye_care_for_all",
+            "name": "EYE_CARE_FOR_ALL_INFOSYS",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "eye_care_for_all (profile mode)",
+            "name": "EYE_CARE_FOR_ALL_INFOSYS (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "eye_care_for_all (release mode)",
+            "name": "EYE_CARE_FOR_ALL_INFOSYS (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
-            "name": "Flutter (lib\\main.dart)",
-            "type": "dart",
+            "name": "dynamic_form",
+            "cwd": "packages\\dynamic_form",
             "request": "launch",
-            "program": "lib\\main.dart"
+            "type": "dart"
         },
         {
-            "name": "Flutter (Chrome, disable web security)",
+            "name": "dynamic_form (profile mode)",
+            "cwd": "packages\\dynamic_form",
             "request": "launch",
             "type": "dart",
-            "args": [
-                "-d",
-                "chrome",
-                "--web-browser-flag",
-                "--disable-web-security"
-            ]
+            "flutterMode": "profile"
         },
         {
-            "name": "Flutter (Edge, disable web security)",
+            "name": "dynamic_form (release mode)",
+            "cwd": "packages\\dynamic_form",
             "request": "launch",
             "type": "dart",
-            "args": [
-                "-d",
-                "edge",
-                "--web-browser-flag",
-                "--disable-web-security"
-            ]
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_miniapp_web_runner",
+            "cwd": "packages\\flutter_miniapp_web_runner",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_miniapp_web_runner (profile mode)",
+            "cwd": "packages\\flutter_miniapp_web_runner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_miniapp_web_runner (release mode)",
+            "cwd": "packages\\flutter_miniapp_web_runner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "superapp_scanner",
+            "cwd": "packages\\superapp_scanner",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "superapp_scanner (profile mode)",
+            "cwd": "packages\\superapp_scanner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "superapp_scanner (release mode)",
+            "cwd": "packages\\superapp_scanner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
         }
     ]
 }

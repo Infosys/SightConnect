@@ -15,7 +15,7 @@ class FormFile extends HookWidget {
     required this.onChanged,
     required this.field,
   });
-  final ElementEntity field;
+  final ElementElementClassEntity field;
   final Function(List<XFile>) onChanged;
 
   @override

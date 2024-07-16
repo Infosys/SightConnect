@@ -26,15 +26,16 @@ class DynamicFormPage extends StatelessWidget {
   const DynamicFormPage({
     super.key,
   });
-  Future<DynamicFormJsonEntity>? _loadJson() async {
+  Future<ResponseJsonEntity>? _loadJson() async {
     await Future.delayed(const Duration(seconds: 2));
     final json = await rootBundle
-        .loadString("packages/dynamic_form/assets/survey_js.json");
+        .loadString("packages/dynamic_form/assets/survey_js_final.json");
     try {
       return DynamicFormJsonMapper()
-          .modeltoEntity(DynamicFormJsonModel.fromJson(jsonDecode(json)));
+          .modeltoEntity(ResponseJsonModel.fromJson(jsonDecode(json)));
     } catch (e) {
-      throw Exception('Error loading form $e');
+      log('Error loading form $e');
+      rethrow;
     }
   }
 
@@ -128,8 +129,8 @@ class FormLayout extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildFields(
-      List<ElementEntity>? fields, GlobalKey<FormBuilderState> key) {
+  List<Widget> _buildFields(List<ElementElementClassEntity>? fields,
+      GlobalKey<FormBuilderState> key) {
     if (fields == null) {
       return [];
     }
@@ -140,7 +141,8 @@ class FormLayout extends StatelessWidget {
   }
 }
 
-Widget getField(ElementEntity? field, GlobalKey<FormBuilderState> key) {
+Widget getField(
+    ElementElementClassEntity? field, GlobalKey<FormBuilderState> key) {
   if (field == null) {
     return Container();
   }

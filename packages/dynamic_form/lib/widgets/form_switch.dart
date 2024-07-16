@@ -11,7 +11,7 @@ class FormSwitch extends HookWidget {
     required this.onChanged,
   });
 
-  final ElementEntity field;
+  final ElementElementClassEntity field;
   final void Function(bool) onChanged;
 
   @override

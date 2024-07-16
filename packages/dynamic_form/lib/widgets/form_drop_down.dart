@@ -10,7 +10,7 @@ class FormDropDown extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementEntity field;
+  final ElementElementClassEntity field;
   final Function(String?)? onChanged;
 
   @override
@@ -18,7 +18,7 @@ class FormDropDown extends StatelessWidget {
     final String label = field.name;
     final String hint = field.name;
     final List<DropdownMenuItem<String>> options = field.choices
-        .cast<ChoiceEntity>()
+        .cast<ChoiceClassEntity>()
         .map((option) => DropdownMenuItem<String>(
               value: option.value,
               child: Text(option.text),

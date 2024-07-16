@@ -10,7 +10,7 @@ class FormCheckbox extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementEntity field;
+  final ElementElementClassEntity field;
   final Function(List<dynamic>?)? onChanged;
 
   @override
