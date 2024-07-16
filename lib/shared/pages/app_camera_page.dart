@@ -52,7 +52,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
   final ResolutionPreset _defaultResolution = ResolutionPreset.high;
   bool _canProcess = false;
   bool _isBusy = false;
-  String _progressMessage = "Loading...";
+  String _progressMessage = "";
   bool _isEyeValid = false;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List<Point<double>> _translatedEyeContours = [];

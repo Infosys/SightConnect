@@ -2068,7 +2068,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get vaDemoPageInstruction => 'Tap on the E matching the image shown on top';
 
   @override
-  String get vaShowInstructionBottomSheetRightEyeInstruction => 'Cover your right eye and tap on the E matching the image on top';
+  String get vaShowInstructionBottomSheetRightEyeInstruction => 'ss';
 
   @override
   String get vaShowInstructionBottomSheetLeftEyeInstruction => 'Cover your left eye and tap on the E matching the image on top';
@@ -2090,4 +2090,16 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get touchGestureCardICantSeeOutlineButton => 'I Can’t see';
+
+  @override
+  String get distanceVaTopAppBarDistanceVisionTest => 'Distance Vision Test';
+
+  @override
+  String get fakeDataSourceGetCarouselDataDescription => 'Early detection can save your eyes';
+
+  @override
+  String get fakeDataSourceGetCarouselDataTitle => 'Doctor says';
+
+  @override
+  String get distanceNotifierProviderNoFaceDetectedError => 'No face detected. Please face the camera 40 cm from the screen ';
 }

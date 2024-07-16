@@ -17,13 +17,14 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return TraceableWidget(
       actionName:
           'VisualAcuity Tumbling LeftEye Instruction Page - Long Distance',
       child: Scaffold(
-        appBar: const CustomAppbar(
+        appBar: CustomAppbar(
           centerTitle: true,
-          title: Text("Distance Vision Test"),
+          title: Text(loc.distanceVaTopAppBarDistanceVisionTest),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -31,7 +32,7 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                context.loc!.visualAcuityRightEyeHeader,
+                loc.visualAcuityRightEyeHeader,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -83,7 +84,7 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
                           ),
                         );
                       },
-                      child: Text(context.loc!.continueButton),
+                      child: Text(loc.continueButton),
                     ),
                   ),
                 ],

@@ -4246,6 +4246,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I Can’t see'**
   String get touchGestureCardICantSeeOutlineButton;
+
+  /// No description provided for @distanceVaTopAppBarDistanceVisionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance Vision Test'**
+  String get distanceVaTopAppBarDistanceVisionTest;
+
+  /// No description provided for @fakeDataSourceGetCarouselDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Early detection can save your eyes'**
+  String get fakeDataSourceGetCarouselDataDescription;
+
+  /// No description provided for @fakeDataSourceGetCarouselDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor says'**
+  String get fakeDataSourceGetCarouselDataTitle;
+
+  /// No description provided for @distanceNotifierProviderNoFaceDetectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'No face detected. Please face the camera 40 cm from the screen '**
+  String get distanceNotifierProviderNoFaceDetectedError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

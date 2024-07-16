@@ -763,5 +763,9 @@
   "touchGestureCardRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
   "touchGestureCardLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
   "touchGestureCardBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
-  "touchGestureCardICantSeeOutlineButton": "I Can’t see"
+  "touchGestureCardICantSeeOutlineButton": "I Can’t see",
+  "distanceVaTopAppBarDistanceVisionTest": "Distance Vision Test",
+  "fakeDataSourceGetCarouselDataDescription": "Early detection can save your eyes",
+  "fakeDataSourceGetCarouselDataTitle": "Doctor says",
+  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen "
 }
