@@ -4294,6 +4294,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Position yourself 2m from the screen'**
   String get topReadingCardLongDistanceTestMessage;
+
+  /// No description provided for @roleVolunteer.
+  ///
+  /// In en, this message translates to:
+  /// **'VOLUNTEER'**
+  String get roleVolunteer;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardJoinUsNowButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Us Now'**
+  String get patientHomePageVolunteerInviteeCardJoinUsNowButton;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Become a SightConnect Volunteer!'**
+  String get patientHomePageVolunteerInviteeCardTitle;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardDescription1.
+  ///
+  /// In en, this message translates to:
+  /// **'Promote Preventive Eye Care'**
+  String get patientHomePageVolunteerInviteeCardDescription1;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardDescription2.
+  ///
+  /// In en, this message translates to:
+  /// **'Engage with Communities'**
+  String get patientHomePageVolunteerInviteeCardDescription2;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardDescription3.
+  ///
+  /// In en, this message translates to:
+  /// **'Support Health Initiatives'**
+  String get patientHomePageVolunteerInviteeCardDescription3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

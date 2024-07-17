@@ -10,6 +10,7 @@ import 'package:eye_care_for_all/features/patient/patient_home/presentation/widg
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/patient_home_page_app_bar.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/triage_test_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/volunteer_invitee_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/register_volunteer_page.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
@@ -24,8 +25,8 @@ class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
 
   @override
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -89,15 +90,16 @@ class PatientHomePage extends ConsumerWidget {
                         ),
                       );
                     },
-                    btnText: "Join Us Now",
+                    btnText:
+                        loc.patientHomePageVolunteerInviteeCardJoinUsNowButton,
                     color: AppColor.altGreen,
                     backgroundColor: AppColor.altGreen.withOpacity(0.1),
                     svgImagePath: "assets/images/triage_card_bg.svg",
-                    title: "Become a SightConnect Volunteer!",
-                    description: const [
-                      "Promote Preventive Eye Care",
-                      "Engage with Communities",
-                      "Support Health Initiatives",
+                    title: loc.patientHomePageVolunteerInviteeCardTitle,
+                    description: [
+                      loc.patientHomePageVolunteerInviteeCardDescription1,
+                      loc.patientHomePageVolunteerInviteeCardDescription2,
+                      loc.patientHomePageVolunteerInviteeCardDescription3,
                     ],
                   ),
 

@@ -771,5 +771,11 @@
   "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
   "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
   "topReadingCardFaceNotFoundError": "No Face",
-  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen"
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen",
+  "roleVolunteer": "VOLUNTEER",
+  "patientHomePageVolunteerInviteeCardJoinUsNowButton": "Join Us Now",
+  "patientHomePageVolunteerInviteeCardTitle": "Become a SightConnect Volunteer!",
+  "patientHomePageVolunteerInviteeCardDescription1": "Promote Preventive Eye Care",
+  "patientHomePageVolunteerInviteeCardDescription2": "Engage with Communities",
+  "patientHomePageVolunteerInviteeCardDescription3": "Support Health Initiatives"
 }
