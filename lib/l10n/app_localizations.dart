@@ -161,6 +161,18 @@ abstract class AppLocalizations {
   /// **'In case of emergency, please call {tollFreeNumber}'**
   String emergencyTollFreeNumberText(String tollFreeNumber);
 
+  /// No description provided for @referralCollectSheetReferredBy.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been referred by {referredBy}'**
+  String referralCollectSheetReferredBy(String referredBy);
+
+  /// No description provided for @vaDistanceToFaceInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Please ensure that the camera is {distance} cm away from your face.'**
+  String vaDistanceToFaceInstruction(int distance);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
@@ -1748,14 +1760,8 @@ abstract class AppLocalizations {
   /// No description provided for @vaDistanceToFace.
   ///
   /// In en, this message translates to:
-  /// **'Distance to face'**
+  /// **'Distance to Face'**
   String get vaDistanceToFace;
-
-  /// No description provided for @vaDistanceToFaceInstruction.
-  ///
-  /// In en, this message translates to:
-  /// **'Please ensure that the camera is 40cm away from your face'**
-  String get vaDistanceToFaceInstruction;
 
   /// No description provided for @vaBringFaceInsideBox.
   ///
@@ -3916,6 +3922,414 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Member'**
   String get myConnectionListAddMembers;
+
+  /// No description provided for @appDrawerReferral.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral'**
+  String get appDrawerReferral;
+
+  /// No description provided for @patientTenantDisplayPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenants'**
+  String get patientTenantDisplayPageHeader;
+
+  /// No description provided for @patientTenantDisplayPageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a Vision Center from the list'**
+  String get patientTenantDisplayPageBody;
+
+  /// No description provided for @patientTenantDisplayPageRequestLocationPermissionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Location Permission'**
+  String get patientTenantDisplayPageRequestLocationPermissionButton;
+
+  /// No description provided for @referralGenerateSheetHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Referral Code'**
+  String get referralGenerateSheetHeader;
+
+  /// No description provided for @referralGenerateSheetTapHereButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a Code? Tap Here'**
+  String get referralGenerateSheetTapHereButton;
+
+  /// No description provided for @referralGenerateSheetMyReferrals.
+  ///
+  /// In en, this message translates to:
+  /// **'My Referrals'**
+  String get referralGenerateSheetMyReferrals;
+
+  /// No description provided for @referralGenerateSheetShareCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your referral code with your friends and family to avail benefits.'**
+  String get referralGenerateSheetShareCode;
+
+  /// No description provided for @referralGenerateSheetReferralGenerateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we\'re unable to generate a referral code at the moment.'**
+  String get referralGenerateSheetReferralGenerateError;
+
+  /// No description provided for @referralGenerateSheetShareButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get referralGenerateSheetShareButton;
+
+  /// No description provided for @referralGenerateSheetCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'COPY'**
+  String get referralGenerateSheetCopy;
+
+  /// No description provided for @referralCollectSheetYourRefferalCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Referral Code'**
+  String get referralCollectSheetYourRefferalCode;
+
+  /// No description provided for @referralCollectSheetReferralCodeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your referral code with your friends and family to avail benefits.'**
+  String get referralCollectSheetReferralCodeMessage;
+
+  /// No description provided for @referralCollectSheetHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Collect Referral'**
+  String get referralCollectSheetHeader;
+
+  /// No description provided for @referralCollectSheetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter referral code to collect your reward'**
+  String get referralCollectSheetBody;
+
+  /// No description provided for @referralCollectSheetTextFieldHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral Code'**
+  String get referralCollectSheetTextFieldHeader;
+
+  /// No description provided for @referralCollectSheetTextFieldBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter referral code'**
+  String get referralCollectSheetTextFieldBody;
+
+  /// No description provided for @referralCollectSheetSkipButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get referralCollectSheetSkipButton;
+
+  /// No description provided for @referralCollectSheetCollectButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Collect'**
+  String get referralCollectSheetCollectButton;
+
+  /// No description provided for @referralCollectSheetError.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, something went wrong. Please try again.'**
+  String get referralCollectSheetError;
+
+  /// No description provided for @referralCollectSheetSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code submitted successfully'**
+  String get referralCollectSheetSuccessToast;
+
+  /// No description provided for @referralCollectSheetErrorToast.
+  ///
+  /// In en, this message translates to:
+  /// **'The referral code you entered is invalid. Please try again.'**
+  String get referralCollectSheetErrorToast;
+
+  /// No description provided for @referralStatisticsPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Referral Statistics'**
+  String get referralStatisticsPageHeader;
+
+  /// No description provided for @referralStatisticsPageTotalReferred.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Referred'**
+  String get referralStatisticsPageTotalReferred;
+
+  /// No description provided for @referralStatisticsPageSucessfulReferred.
+  ///
+  /// In en, this message translates to:
+  /// **'Successful Referred'**
+  String get referralStatisticsPageSucessfulReferred;
+
+  /// No description provided for @referralStatisticsPageTotalTriage.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Triage'**
+  String get referralStatisticsPageTotalTriage;
+
+  /// No description provided for @referralStatisticsPageReferFriendHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'How to refer a friend?'**
+  String get referralStatisticsPageReferFriendHeader;
+
+  /// No description provided for @referralStatisticsPageReferFriendBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your referral code with your friend.'**
+  String get referralStatisticsPageReferFriendBody1;
+
+  /// No description provided for @referralStatisticsPageReferFriendBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'Your friend register using your referral code.'**
+  String get referralStatisticsPageReferFriendBody2;
+
+  /// No description provided for @referralStatisticsPageReferFriendBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'Your friend completes at least one triage test.'**
+  String get referralStatisticsPageReferFriendBody3;
+
+  /// No description provided for @referralStatisticsPageReferFriendButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Refer a Friend'**
+  String get referralStatisticsPageReferFriendButton;
+
+  /// No description provided for @referralStatisticsPageError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we\'re unable to fetch your referral statistics at the moment.'**
+  String get referralStatisticsPageError;
+
+  /// No description provided for @referralStatisticsPageRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get referralStatisticsPageRetryButton;
+
+  /// No description provided for @triageInstructionPageTopAppBarEyeTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Test'**
+  String get triageInstructionPageTopAppBarEyeTest;
+
+  /// No description provided for @triageInstructionPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'What you would be doing'**
+  String get triageInstructionPageHeader;
+
+  /// No description provided for @triageInstructionPageBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to place your device at eye level.'**
+  String get triageInstructionPageBody1;
+
+  /// No description provided for @triageInstructionPageBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to select responses to questions.'**
+  String get triageInstructionPageBody2;
+
+  /// No description provided for @triageInstructionPageBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to take clear pictures of your eyes.'**
+  String get triageInstructionPageBody3;
+
+  /// No description provided for @triageInstructionPageComfortableWithSelfTest.
+  ///
+  /// In en, this message translates to:
+  /// **'If you are comfortable with doing the test by yourself, you can proceed directly'**
+  String get triageInstructionPageComfortableWithSelfTest;
+
+  /// No description provided for @triageInstructionPageTestAssistanceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'If you need assistance, please get someone who can help you and start.'**
+  String get triageInstructionPageTestAssistanceRequired;
+
+  /// No description provided for @triageInstructionPageIAmReadyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I am ready'**
+  String get triageInstructionPageIAmReadyButton;
+
+  /// No description provided for @appDrawerAddReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Review'**
+  String get appDrawerAddReview;
+
+  /// No description provided for @optionCardNeedHelpTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help to understand this '**
+  String get optionCardNeedHelpTextButton;
+
+  /// No description provided for @triageTextTypeQuestionCounterText.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get triageTextTypeQuestionCounterText;
+
+  /// No description provided for @vaTopAppBarNearVisionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Near Vision Test'**
+  String get vaTopAppBarNearVisionTest;
+
+  /// No description provided for @vaDemoPageInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on the E matching the image shown on top'**
+  String get vaDemoPageInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetRightEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your right eye and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetRightEyeInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetLeftEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your left eye and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetLeftEyeInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetBothEyesInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'View with both eyes and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetBothEyesInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetProceedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed'**
+  String get vaShowInstructionBottomSheetProceedButton;
+
+  /// No description provided for @touchGestureCardRightEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your right eye and tap on the E matching the image on top'**
+  String get touchGestureCardRightEyeInstruction;
+
+  /// No description provided for @touchGestureCardLeftEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your left eye and tap on the E matching the image on top'**
+  String get touchGestureCardLeftEyeInstruction;
+
+  /// No description provided for @touchGestureCardBothEyesInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'View with both eyes and tap on the E matching the image on top'**
+  String get touchGestureCardBothEyesInstruction;
+
+  /// No description provided for @touchGestureCardICantSeeOutlineButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I Can’t see'**
+  String get touchGestureCardICantSeeOutlineButton;
+
+  /// No description provided for @distanceVaTopAppBarDistanceVisionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance Vision Test'**
+  String get distanceVaTopAppBarDistanceVisionTest;
+
+  /// No description provided for @fakeDataSourceGetCarouselDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Early detection can save your eyes'**
+  String get fakeDataSourceGetCarouselDataDescription;
+
+  /// No description provided for @fakeDataSourceGetCarouselDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor says'**
+  String get fakeDataSourceGetCarouselDataTitle;
+
+  /// No description provided for @distanceNotifierProviderNoFaceDetectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'No face detected. Please face the camera 40 cm from the screen'**
+  String get distanceNotifierProviderNoFaceDetectedError;
+
+  /// No description provided for @appCameraPageTakePictureLoadingOverlayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold the camera steady…'**
+  String get appCameraPageTakePictureLoadingOverlayMessage;
+
+  /// No description provided for @appCameraPageDefaultLoadingOverlayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading…'**
+  String get appCameraPageDefaultLoadingOverlayMessage;
+
+  /// No description provided for @topReadingCardFaceNotFoundError.
+  ///
+  /// In en, this message translates to:
+  /// **'No Face'**
+  String get topReadingCardFaceNotFoundError;
+
+  /// No description provided for @topReadingCardLongDistanceTestMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Position yourself 2m from the screen'**
+  String get topReadingCardLongDistanceTestMessage;
+
+  /// No description provided for @roleVolunteer.
+  ///
+  /// In en, this message translates to:
+  /// **'VOLUNTEER'**
+  String get roleVolunteer;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardJoinUsNowButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Us Now'**
+  String get patientHomePageVolunteerInviteeCardJoinUsNowButton;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Become a SightConnect Volunteer!'**
+  String get patientHomePageVolunteerInviteeCardTitle;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardDescription1.
+  ///
+  /// In en, this message translates to:
+  /// **'Promote Preventive Eye Care'**
+  String get patientHomePageVolunteerInviteeCardDescription1;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardDescription2.
+  ///
+  /// In en, this message translates to:
+  /// **'Engage with Communities'**
+  String get patientHomePageVolunteerInviteeCardDescription2;
+
+  /// No description provided for @patientHomePageVolunteerInviteeCardDescription3.
+  ///
+  /// In en, this message translates to:
+  /// **'Support Health Initiatives'**
+  String get patientHomePageVolunteerInviteeCardDescription3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

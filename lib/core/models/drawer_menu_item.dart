@@ -62,7 +62,7 @@ class DrawerMenuItems {
     );
     DrawerMenuItem feedback = DrawerMenuItem(
       id: DrawerMenuItemId.feedback,
-      title: "Add Review",
+      title: loc.appDrawerAddReview,
       icon: "assets/drawer_icons/feedback.svg",
     );
 
@@ -85,7 +85,7 @@ class DrawerMenuItems {
     );
     DrawerMenuItem refferal = DrawerMenuItem(
       id: DrawerMenuItemId.referral,
-      title: "Referral",
+      title: loc.appDrawerReferral,
       icon: "assets/drawer_icons/referral.svg",
       isReferralOrVolunteer: true,
     );

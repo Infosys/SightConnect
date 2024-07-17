@@ -11,7 +11,7 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String referralSmsContent(String referral) {
-    return 'Hey! I\'m using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It\'s a unique app that brings preventive eyecare to your hands. Use my referral code ${referral} when you sign up. Get it now: https://healthconnecttech.org/install';
+    return 'અરે! હું મારી આંખોની સંભાળ રાખવા માટે સાઇટકનેક્ટ એપ્લિકેશનનો ઉપયોગ કરું છું, અને તમારે પણ કરવી જોઈએ! તમારી આંખોનું મૂલ્યાંકન કરો અને સાઇટકનેક્ટ એપ્લિકેશનથી સમયસર સારવાર મેળવો. તે એક અનોખી એપ્લિકેશન છે જે તમારા હાથમાં નિવારક આઈકેર લાવે છે. જ્યારે તમે સાઇન અપ કરો ત્યારે મારા રેફરલ કોડનો ઉપયોગ કરો. હવે તેને મેળવોઃ https://healthconnecttech.org/install';
   }
 
   @override
@@ -42,6 +42,16 @@ class AppLocalizationsGu extends AppLocalizations {
   @override
   String emergencyTollFreeNumberText(String tollFreeNumber) {
     return 'કટોકટીના કિસ્સામાં, કૃપા કરીને ${tollFreeNumber} પર ફોન કરો';
+  }
+
+  @override
+  String referralCollectSheetReferredBy(String referredBy) {
+    return 'તમને ${referredBy} દ્વારા સંદર્ભિત કરવામાં આવ્યા છે';
+  }
+
+  @override
+  String vaDistanceToFaceInstruction(int distance) {
+    return 'મહેરબાની કરીને ખાતરી કરો કે કેમેરા તમારા ચહેરાથી ${distance} સે. મી. દૂર છે.';
   }
 
   @override
@@ -838,9 +848,6 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get vaDistanceToFace => 'સામનો કરવા માટેનું અંતર';
-
-  @override
-  String get vaDistanceToFaceInstruction => 'મહેરબાની કરીને ખાતરી કરો કે કેમેરા તમારા ચહેરાથી 40 સે. મી. દૂર છે.';
 
   @override
   String get vaBringFaceInsideBox => 'બૉક્સની અંદર તમારો ચહેરો લાવો.';
@@ -1921,4 +1928,208 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get myConnectionListAddMembers => 'સભ્ય ઉમેરો';
+
+  @override
+  String get appDrawerReferral => 'રેફરલ';
+
+  @override
+  String get patientTenantDisplayPageHeader => 'ભાડૂતો';
+
+  @override
+  String get patientTenantDisplayPageBody => 'સૂચિમાંથી વિઝન સેન્ટર પસંદ કરો';
+
+  @override
+  String get patientTenantDisplayPageRequestLocationPermissionButton => 'સ્થાન પરવાનગીની વિનંતી કરો';
+
+  @override
+  String get referralGenerateSheetHeader => 'તમારો રેફરલ કોડ';
+
+  @override
+  String get referralGenerateSheetTapHereButton => 'કોડ છે? અહીં ટેપ કરો';
+
+  @override
+  String get referralGenerateSheetMyReferrals => 'મારા સંદર્ભો';
+
+  @override
+  String get referralGenerateSheetShareCode => 'લાભ મેળવવા માટે તમારા મિત્રો અને પરિવાર સાથે તમારો રેફરલ કોડ શેર કરો.';
+
+  @override
+  String get referralGenerateSheetReferralGenerateError => 'માફ કરશો, અમે આ ક્ષણે રેફરલ કોડ જનરેટ કરવામાં અસમર્થ છીએ.';
+
+  @override
+  String get referralGenerateSheetShareButton => 'શેર કરો';
+
+  @override
+  String get referralGenerateSheetCopy => 'નકલ કરો';
+
+  @override
+  String get referralCollectSheetYourRefferalCode => 'તમારો રેફરલ કોડ';
+
+  @override
+  String get referralCollectSheetReferralCodeMessage => 'લાભ મેળવવા માટે તમારા મિત્રો અને પરિવાર સાથે તમારો રેફરલ કોડ શેર કરો.';
+
+  @override
+  String get referralCollectSheetHeader => 'રેફરલ એકત્રિત કરો';
+
+  @override
+  String get referralCollectSheetBody => 'તમારું ઇનામ એકત્રિત કરવા માટે રેફરલ કોડ દાખલ કરો';
+
+  @override
+  String get referralCollectSheetTextFieldHeader => 'રેફરલ કોડ';
+
+  @override
+  String get referralCollectSheetTextFieldBody => 'રેફરલ કોડ દાખલ કરો';
+
+  @override
+  String get referralCollectSheetSkipButton => 'સ્કિપ કરો';
+
+  @override
+  String get referralCollectSheetCollectButton => 'એકત્રિત કરો';
+
+  @override
+  String get referralCollectSheetError => 'માફ કરશો, કંઈક ખોટું થયું છે. મહેરબાની કરીને ફરીથી પ્રયાસ કરો.';
+
+  @override
+  String get referralCollectSheetSuccessToast => 'રેફરલ કોડ સફળતાપૂર્વક સબમિટ કરવામાં આવ્યો';
+
+  @override
+  String get referralCollectSheetErrorToast => 'તમે દાખલ કરેલ રેફરલ કોડ અમાન્ય છે. મહેરબાની કરીને ફરીથી પ્રયાસ કરો.';
+
+  @override
+  String get referralStatisticsPageHeader => 'તમારા રેફરલ આંકડા';
+
+  @override
+  String get referralStatisticsPageTotalReferred => 'કુલ ઉલ્લેખિત';
+
+  @override
+  String get referralStatisticsPageSucessfulReferred => 'સફળ સંદર્ભ';
+
+  @override
+  String get referralStatisticsPageTotalTriage => 'ટોટલ ટ્રાઇએજ';
+
+  @override
+  String get referralStatisticsPageReferFriendHeader => 'મિત્રનો ઉલ્લેખ કેવી રીતે કરવો?';
+
+  @override
+  String get referralStatisticsPageReferFriendBody1 => 'તમારો રેફરલ કોડ તમારા મિત્ર સાથે શેર કરો.';
+
+  @override
+  String get referralStatisticsPageReferFriendBody2 => 'તમારો મિત્ર તમારા રેફરલ કોડનો ઉપયોગ કરીને નોંધણી કરાવે છે.';
+
+  @override
+  String get referralStatisticsPageReferFriendBody3 => 'તમારો મિત્ર ઓછામાં ઓછો એક ટ્રાઇએજ ટેસ્ટ પૂર્ણ કરે છે.';
+
+  @override
+  String get referralStatisticsPageReferFriendButton => 'મિત્રનો સંદર્ભ લો';
+
+  @override
+  String get referralStatisticsPageError => 'માફ કરશો, અમે આ ક્ષણે તમારા રેફરલ આંકડા મેળવવામાં અસમર્થ છીએ.';
+
+  @override
+  String get referralStatisticsPageRetryButton => 'ફરી પ્રયાસ કરો';
+
+  @override
+  String get triageInstructionPageTopAppBarEyeTest => 'Eye Test';
+
+  @override
+  String get triageInstructionPageHeader => 'What you would be doing';
+
+  @override
+  String get triageInstructionPageBody1 => 'You will need to place your device at eye level.';
+
+  @override
+  String get triageInstructionPageBody2 => 'You will need to select responses to questions.';
+
+  @override
+  String get triageInstructionPageBody3 => 'You will need to take clear pictures of your eyes.';
+
+  @override
+  String get triageInstructionPageComfortableWithSelfTest => 'If you are comfortable with doing the test by yourself, you can proceed directly';
+
+  @override
+  String get triageInstructionPageTestAssistanceRequired => 'If you need assistance, please get someone who can help you and start.';
+
+  @override
+  String get triageInstructionPageIAmReadyButton => 'I am ready';
+
+  @override
+  String get appDrawerAddReview => 'Add Review';
+
+  @override
+  String get optionCardNeedHelpTextButton => 'Need help to understand this ';
+
+  @override
+  String get triageTextTypeQuestionCounterText => 'Optional';
+
+  @override
+  String get vaTopAppBarNearVisionTest => 'Near Vision Test';
+
+  @override
+  String get vaDemoPageInstruction => 'Tap on the E matching the image shown on top';
+
+  @override
+  String get vaShowInstructionBottomSheetRightEyeInstruction => 'Cover your right eye and tap on the E matching the image on top';
+
+  @override
+  String get vaShowInstructionBottomSheetLeftEyeInstruction => 'Cover your left eye and tap on the E matching the image on top';
+
+  @override
+  String get vaShowInstructionBottomSheetBothEyesInstruction => 'View with both eyes and tap on the E matching the image on top';
+
+  @override
+  String get vaShowInstructionBottomSheetProceedButton => 'Proceed';
+
+  @override
+  String get touchGestureCardRightEyeInstruction => 'Cover your right eye and tap on the E matching the image on top';
+
+  @override
+  String get touchGestureCardLeftEyeInstruction => 'Cover your left eye and tap on the E matching the image on top';
+
+  @override
+  String get touchGestureCardBothEyesInstruction => 'View with both eyes and tap on the E matching the image on top';
+
+  @override
+  String get touchGestureCardICantSeeOutlineButton => 'I Can’t see';
+
+  @override
+  String get distanceVaTopAppBarDistanceVisionTest => 'Distance Vision Test';
+
+  @override
+  String get fakeDataSourceGetCarouselDataDescription => 'Early detection can save your eyes';
+
+  @override
+  String get fakeDataSourceGetCarouselDataTitle => 'Doctor says';
+
+  @override
+  String get distanceNotifierProviderNoFaceDetectedError => 'No face detected. Please face the camera 40 cm from the screen';
+
+  @override
+  String get appCameraPageTakePictureLoadingOverlayMessage => 'Hold the camera steady…';
+
+  @override
+  String get appCameraPageDefaultLoadingOverlayMessage => 'Loading…';
+
+  @override
+  String get topReadingCardFaceNotFoundError => 'No Face';
+
+  @override
+  String get topReadingCardLongDistanceTestMessage => 'Position yourself 2m from the screen';
+
+  @override
+  String get roleVolunteer => 'VOLUNTEER';
+
+  @override
+  String get patientHomePageVolunteerInviteeCardJoinUsNowButton => 'Join Us Now';
+
+  @override
+  String get patientHomePageVolunteerInviteeCardTitle => 'Become a SightConnect Volunteer!';
+
+  @override
+  String get patientHomePageVolunteerInviteeCardDescription1 => 'Promote Preventive Eye Care';
+
+  @override
+  String get patientHomePageVolunteerInviteeCardDescription2 => 'Engage with Communities';
+
+  @override
+  String get patientHomePageVolunteerInviteeCardDescription3 => 'Support Health Initiatives';
 }

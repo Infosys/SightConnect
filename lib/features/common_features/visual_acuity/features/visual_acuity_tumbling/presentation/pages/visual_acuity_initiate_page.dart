@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/wi
 import 'package:eye_care_for_all/features/common_features/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
@@ -50,6 +51,7 @@ class _VisualAcuityInitiatePageState
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
+    final loc = context.loc!;
 
     return PopScope(
       canPop: false,
@@ -100,7 +102,7 @@ class _VisualAcuityInitiatePageState
                     titleSpacing: 0,
                     actions: const [],
                     centerTitle: false,
-                    title: const Text("Near Vision Test"),
+                    title: Text(loc.vaTopAppBarNearVisionTest),
                   )
                 : CustomAppbar(
                     leadingWidth: 60,
@@ -133,7 +135,7 @@ class _VisualAcuityInitiatePageState
                       ),
                     ),
                     title: Text(
-                      "Near Vision Test",
+                      loc.vaTopAppBarNearVisionTest,
                       style: applyFiraSansFont(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

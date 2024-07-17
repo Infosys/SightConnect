@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/triage/presentation/wi
 import 'package:eye_care_for_all/features/common_features/visual_acuity/widgets/swipe_gesture_card.dart';
 import 'package:eye_care_for_all/features/common_features/visual_acuity/widgets/top_reading_card.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
@@ -51,6 +52,7 @@ class _DistanceVisualAcuityInitiatePageState
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTriageMode = ref.watch(globalProvider).isTriageMode();
+    final loc = context.loc!;
 
     return PopScope(
       canPop: false,
@@ -101,7 +103,7 @@ class _DistanceVisualAcuityInitiatePageState
                     titleSpacing: 0,
                     actions: const [],
                     centerTitle: false,
-                    title: const Text("Distance Vision Test"),
+                    title: Text(loc.distanceVaTopAppBarDistanceVisionTest),
                   )
                 : CustomAppbar(
                     leadingWidth: 60,
@@ -134,7 +136,7 @@ class _DistanceVisualAcuityInitiatePageState
                       ),
                     ),
                     title: Text(
-                      "Distance Vision Test",
+                      loc.distanceVaTopAppBarDistanceVisionTest,
                       style: applyFiraSansFont(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

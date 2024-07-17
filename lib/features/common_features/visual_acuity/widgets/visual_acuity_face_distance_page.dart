@@ -47,7 +47,7 @@ class VisualAcuityFaceDistancePage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Please ensure that the camera is ${minDistance+5} cm away from your face.",
+                  loc.vaDistanceToFaceInstruction(minDistance+5),
                   textAlign: TextAlign.center,
                   style: applyRobotoFont(
                     fontSize: 16,
