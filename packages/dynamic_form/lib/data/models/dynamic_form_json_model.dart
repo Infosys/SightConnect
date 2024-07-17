@@ -99,9 +99,9 @@ class ElementElementClassModel {
   bool? isRequired;
   String? requiredErrorText;
   bool? readOnly;
-  List<ValidatorModel>? validators;
+  List<Validator>? validators;
   String? inputType;
-  List<ChoiceClassModel>? choices;
+  List<dynamic>? choices;
   String? placeholder;
   int? maxSize;
   int? min;
@@ -137,13 +137,12 @@ class ElementElementClassModel {
         readOnly: json["readOnly"],
         validators: json["validators"] == null
             ? []
-            : List<ValidatorModel>.from(
-                json["validators"]!.map((x) => ValidatorModel.fromJson(x))),
+            : List<Validator>.from(
+                json["validators"]!.map((x) => Validator.fromJson(x))),
         inputType: json["inputType"],
         choices: json["choices"] == null
             ? []
-            : List<ChoiceClassModel>.from(
-                json["choices"]!.map((x) => ChoiceClassModel.fromJson(x))),
+            : List<dynamic>.from(json["choices"]!.map((x) => x)),
         placeholder: json["placeholder"],
         maxSize: json["maxSize"],
         min: json["min"],
@@ -163,9 +162,8 @@ class ElementElementClassModel {
             ? []
             : List<dynamic>.from(validators!.map((x) => x.toJson())),
         "inputType": inputType,
-        "choices": choices == null
-            ? []
-            : List<dynamic>.from(choices!.map((x) => x.toJson())),
+        "choices":
+            choices == null ? [] : List<dynamic>.from(choices!.map((x) => x)),
         "placeholder": placeholder,
         "maxSize": maxSize,
         "min": min,
@@ -174,39 +172,18 @@ class ElementElementClassModel {
       };
 }
 
-class ChoiceClassModel {
-  String? value;
-  String? text;
-
-  ChoiceClassModel({
-    this.value,
-    this.text,
-  });
-
-  factory ChoiceClassModel.fromJson(Map<String, dynamic> json) =>
-      ChoiceClassModel(
-        value: json["value"],
-        text: json["text"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "value": value,
-        "text": text,
-      };
-}
-
-class ValidatorModel {
+class Validator {
   String? type;
   String? text;
   String? regex;
 
-  ValidatorModel({
+  Validator({
     this.type,
     this.text,
     this.regex,
   });
 
-  factory ValidatorModel.fromJson(Map<String, dynamic> json) => ValidatorModel(
+  factory Validator.fromJson(Map<String, dynamic> json) => Validator(
         type: json["type"],
         text: json["text"],
         regex: json["regex"],

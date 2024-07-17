@@ -90,9 +90,11 @@ class ElementElementClassEntity {
   final String requiredErrorText;
   final bool readOnly;
   final List<ValidatorEntity> validators;
-  final String inputType;
-  final List<ChoiceClassEntity> choices;
+  final DynamicFormType inputType;
+  final List<RadioChoiceElementEntity>? mapValueChoices;
+  final List<String>? stringValueChoices;
   final String placeholder;
+  final List<dynamic> choices;
   final int maxSize;
   final int min;
   final int max;
@@ -108,8 +110,10 @@ class ElementElementClassEntity {
     required this.readOnly,
     required this.validators,
     required this.inputType,
-    required this.choices,
+    required this.mapValueChoices,
+    required this.stringValueChoices,
     required this.placeholder,
+    required this.choices,
     required this.maxSize,
     required this.min,
     required this.max,
@@ -128,9 +132,13 @@ class ElementElementClassEntity {
         validators: List<ValidatorEntity>.from(
             json["validators"].map((x) => ValidatorEntity.fromJson(x))),
         inputType: json["inputType"],
-        choices: List<ChoiceClassEntity>.from(
-            json["choices"].map((x) => ChoiceClassEntity.fromJson(x))),
+        mapValueChoices: List<RadioChoiceElementEntity>.from(
+            json["mapValueChoices"]
+                .map((x) => RadioChoiceElementEntity.fromJson(x))),
+        stringValueChoices:
+            List<String>.from(json["stringValueChoices"].map((x) => x)),
         placeholder: json["placeholder"],
+        choices: List<dynamic>.from(json["choices"].map((x) => x)),
         maxSize: json["maxSize"],
         min: json["min"],
         max: json["max"],
@@ -145,11 +153,14 @@ class ElementElementClassEntity {
         "isRequired": isRequired,
         "requiredErrorText": requiredErrorText,
         "readOnly": readOnly,
-        "validators":
-            List<ValidatorEntity>.from(validators.map((x) => x.toJson())),
+        "validators": List<dynamic>.from(validators.map((x) => x.toJson())),
         "inputType": inputType,
-        "choices": List<ChoiceClassEntity>.from(choices.map((x) => x)),
+        "mapValueChoices":
+            List<dynamic>.from(mapValueChoices!.map((x) => x.toJson())),
+        "stringValueChoices":
+            List<dynamic>.from(stringValueChoices!.map((x) => x)),
         "placeholder": placeholder,
+        "choices": List<dynamic>.from(choices.map((x) => x)),
         "maxSize": maxSize,
         "min": min,
         "max": max,
@@ -157,17 +168,17 @@ class ElementElementClassEntity {
       };
 }
 
-class ChoiceClassEntity {
+class RadioChoiceElementEntity {
   final String value;
   final String text;
 
-  ChoiceClassEntity({
+  RadioChoiceElementEntity({
     required this.value,
     required this.text,
   });
 
-  factory ChoiceClassEntity.fromJson(Map<String, dynamic> json) =>
-      ChoiceClassEntity(
+  factory RadioChoiceElementEntity.fromJson(Map<String, dynamic> json) =>
+      RadioChoiceElementEntity(
         value: json["value"],
         text: json["text"],
       );

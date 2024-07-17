@@ -57,25 +57,51 @@ class DynamicFormJsonMapper {
           type: _mapToFormType(element.type),
           name: element.name ?? '',
           title: element.title ?? '',
-          inputType: element.inputType ?? '',
-          choices: _getChoices(element.choices),
+          inputType: _mapToFormType(element.inputType),
           isRequired: element.isRequired ?? false,
           requiredErrorText: element.requiredErrorText ?? '',
           maxSize: element.maxSize ?? 0,
-          validators: _getValidators(element.validators),
           placeholder: element.placeholder ?? '',
           description: element.description ?? '',
           readOnly: element.readOnly ?? false,
           min: element.min ?? 0,
           max: element.max ?? 0,
           step: element.step ?? 0,
+          mapValueChoices:
+              _getChoices(_mapToFormType(element.type), element.choices, "map"),
+          stringValueChoices: _getChoices(
+              _mapToFormType(element.type), element.choices, "string"),
+          validators: _getValidators(element.validators),
+          choices: element.choices ?? [],
         ));
       }
     }
     return elementEntities;
   }
 
-  _getValidators(List<ValidatorModel>? validators) {
+  _getChoices(
+      DynamicFormType type, List<dynamic>? choices, String currentChoiceType) {
+    if (choices == null) {
+      return null;
+    }
+    if (type == DynamicFormType.RADIO || type == DynamicFormType.CHECKBOX) {
+      if (currentChoiceType == "map") {
+        return choices
+            .map((e) => RadioChoiceElementEntity.fromJson(e))
+            .toList();
+      } else {
+        return null;
+      }
+    } else if (type == DynamicFormType.DROPDOWN) {
+      if (currentChoiceType == "string") {
+        return choices.map((e) => e.toString()).toList();
+      } else {
+        return null;
+      }
+    }
+  }
+
+  List<ValidatorEntity> _getValidators(List<Validator>? validators) {
     final List<ValidatorEntity> validatorEntities = [];
     if (validators != null) {
       for (final validator in validators) {
@@ -87,19 +113,6 @@ class DynamicFormJsonMapper {
       }
     }
     return validatorEntities;
-  }
-
-  List<ChoiceClassEntity> _getChoices(List<ChoiceClassModel>? choices) {
-    final List<ChoiceClassEntity> choiceEntities = [];
-    if (choices != null) {
-      for (final choice in choices) {
-        choiceEntities.add(ChoiceClassEntity(
-          text: choice.text ?? '',
-          value: choice.value ?? '',
-        ));
-      }
-    }
-    return choiceEntities;
   }
 
   DynamicFormType _mapToFormType(String? value) {

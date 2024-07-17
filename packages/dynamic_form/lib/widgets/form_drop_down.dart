@@ -17,11 +17,10 @@ class FormDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     final String label = field.name;
     final String hint = field.name;
-    final List<DropdownMenuItem<String>> options = field.choices
-        .cast<ChoiceClassEntity>()
-        .map((option) => DropdownMenuItem<String>(
-              value: option.value,
-              child: Text(option.text),
+    final List<DropdownMenuItem<String>> options = field.stringValueChoices!
+        .map((element) => DropdownMenuItem<String>(
+              value: element,
+              child: Text(element),
             ))
         .toList();
 

@@ -16,7 +16,7 @@ class FormChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = field.choices;
+    final options = field.mapValueChoices!;
     var selectedValue = useState<String>('');
 
     return FormBuilderChoiceChip<String>(
