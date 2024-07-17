@@ -85,7 +85,7 @@ class FormLayout extends StatelessWidget {
             children: [
               for (var page in pages)
                 ExpansionTile(
-                  initiallyExpanded: true,
+                  initiallyExpanded: page.name == pages.first.name,
                   title: Text(
                     page.name,
                     style: const TextStyle(
