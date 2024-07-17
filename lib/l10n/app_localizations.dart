@@ -161,6 +161,12 @@ abstract class AppLocalizations {
   /// **'In case of emergency, please call {tollFreeNumber}'**
   String emergencyTollFreeNumberText(String tollFreeNumber);
 
+  /// No description provided for @referralCollectSheetReferredBy.
+  ///
+  /// In en, this message translates to:
+  /// **'You have been referred by {referredBy}'**
+  String referralCollectSheetReferredBy(String referredBy);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
@@ -3916,6 +3922,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Member'**
   String get myConnectionListAddMembers;
+
+  /// No description provided for @appDrawerReferral.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral'**
+  String get appDrawerReferral;
+
+  /// No description provided for @patientTenantDisplayPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Tenants'**
+  String get patientTenantDisplayPageHeader;
+
+  /// No description provided for @patientTenantDisplayPageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a Vision Center from the list'**
+  String get patientTenantDisplayPageBody;
+
+  /// No description provided for @patientTenantDisplayPageRequestLocationPermissionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Location Permission'**
+  String get patientTenantDisplayPageRequestLocationPermissionButton;
+
+  /// No description provided for @referralGenerateSheetHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Referral Code'**
+  String get referralGenerateSheetHeader;
+
+  /// No description provided for @referralGenerateSheetTapHereButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a Code? Tap Here'**
+  String get referralGenerateSheetTapHereButton;
+
+  /// No description provided for @referralGenerateSheetMyReferrals.
+  ///
+  /// In en, this message translates to:
+  /// **'My Referrals'**
+  String get referralGenerateSheetMyReferrals;
+
+  /// No description provided for @referralGenerateSheetShareCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your referral code with your friends and family to avail benefits.'**
+  String get referralGenerateSheetShareCode;
+
+  /// No description provided for @referralGenerateSheetReferralGenerateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we\'re unable to generate a referral code at the moment.'**
+  String get referralGenerateSheetReferralGenerateError;
+
+  /// No description provided for @referralGenerateSheetShareButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get referralGenerateSheetShareButton;
+
+  /// No description provided for @referralGenerateSheetCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'COPY'**
+  String get referralGenerateSheetCopy;
+
+  /// No description provided for @referralCollectSheetYourRefferalCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Referral Code'**
+  String get referralCollectSheetYourRefferalCode;
+
+  /// No description provided for @referralCollectSheetReferralCodeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your referral code with your friends and family to avail benefits.'**
+  String get referralCollectSheetReferralCodeMessage;
+
+  /// No description provided for @referralCollectSheetHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Collect Referral'**
+  String get referralCollectSheetHeader;
+
+  /// No description provided for @referralCollectSheetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter referral code to collect your reward'**
+  String get referralCollectSheetBody;
+
+  /// No description provided for @referralCollectSheetTextFieldHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral Code'**
+  String get referralCollectSheetTextFieldHeader;
+
+  /// No description provided for @referralCollectSheetTextFieldBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter referral code'**
+  String get referralCollectSheetTextFieldBody;
+
+  /// No description provided for @referralCollectSheetSkipButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get referralCollectSheetSkipButton;
+
+  /// No description provided for @referralCollectSheetCollectButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Collect'**
+  String get referralCollectSheetCollectButton;
+
+  /// No description provided for @referralCollectSheetError.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, something went wrong. Please try again.'**
+  String get referralCollectSheetError;
+
+  /// No description provided for @referralCollectSheetSuccessToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code submitted successfully'**
+  String get referralCollectSheetSuccessToast;
+
+  /// No description provided for @referralCollectSheetErrorToast.
+  ///
+  /// In en, this message translates to:
+  /// **'The referral code you entered is invalid. Please try again.'**
+  String get referralCollectSheetErrorToast;
+
+  /// No description provided for @referralStatisticsPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Referral Statistics'**
+  String get referralStatisticsPageHeader;
+
+  /// No description provided for @referralStatisticsPageTotalReferred.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Referred'**
+  String get referralStatisticsPageTotalReferred;
+
+  /// No description provided for @referralStatisticsPageSucessfulReferred.
+  ///
+  /// In en, this message translates to:
+  /// **'Successful Referred'**
+  String get referralStatisticsPageSucessfulReferred;
+
+  /// No description provided for @referralStatisticsPageTotalTriage.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Triage'**
+  String get referralStatisticsPageTotalTriage;
+
+  /// No description provided for @referralStatisticsPageReferFriendHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'How to refer a friend?'**
+  String get referralStatisticsPageReferFriendHeader;
+
+  /// No description provided for @referralStatisticsPageReferFriendBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your referral code with your friend.'**
+  String get referralStatisticsPageReferFriendBody1;
+
+  /// No description provided for @referralStatisticsPageReferFriendBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'Your friend register using your referral code.'**
+  String get referralStatisticsPageReferFriendBody2;
+
+  /// No description provided for @referralStatisticsPageReferFriendBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'Your friend completes at least one triage test.'**
+  String get referralStatisticsPageReferFriendBody3;
+
+  /// No description provided for @referralStatisticsPageReferFriendButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Refer a Friend'**
+  String get referralStatisticsPageReferFriendButton;
+
+  /// No description provided for @referralStatisticsPageError.
+  ///
+  /// In en, this message translates to:
+  /// **'Apologies, we\'re unable to fetch your referral statistics at the moment.'**
+  String get referralStatisticsPageError;
+
+  /// No description provided for @referralStatisticsPageRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get referralStatisticsPageRetryButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
