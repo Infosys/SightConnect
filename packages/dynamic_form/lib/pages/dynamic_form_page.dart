@@ -92,14 +92,17 @@ class FormLayout extends StatelessWidget {
                       fontSize: 16.0,
                     ),
                   ),
-                  children: page.elements.map((element) {
+                  children: page.elements.map((panel) {
+                    if (panel.elements.isEmpty) {
+                      return Container();
+                    }
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: AppCard(
-                        title: element.name,
+                        title: panel.name,
                         child: Wrap(
                           runSpacing: 16,
-                          children: _buildFields(element.elements, formKey),
+                          children: _buildFields(panel.elements, formKey),
                         ),
                       ),
                     );
@@ -160,25 +163,7 @@ Widget getField(
   }
   switch (field.type) {
     case DynamicFormType.TEXTFIELD:
-      switch (field.inputType) {
-        case DynamicFormType.DATETIME:
-          return FormDataTimePicker(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value.toString());
-            },
-          );
-        case DynamicFormType.SLIDER:
-          return FormSlider(field: field);
-
-        default:
-          return FormTextField(
-            field: field,
-            onChanged: (value) {
-              debugPrint(value);
-            },
-          );
-      }
+      return _getSubField(field);
 
     case DynamicFormType.DROPDOWN:
       return FormDropDown(
@@ -236,5 +221,27 @@ Widget getField(
 
     default:
       return Container();
+  }
+}
+
+_getSubField(field) {
+  switch (field.inputType) {
+    case DynamicFormType.DATETIME:
+      return FormDataTimePicker(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+    case DynamicFormType.SLIDER:
+      return FormSlider(field: field);
+
+    default:
+      return FormTextField(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value);
+        },
+      );
   }
 }

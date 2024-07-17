@@ -65,7 +65,7 @@ class DynamicFormJsonMapper {
           description: element.description ?? '',
           readOnly: element.readOnly ?? false,
           min: element.min ?? 0,
-          max: element.max ?? 0,
+          max: element.max ?? 3,
           step: element.step ?? 0,
           mapValueChoices:
               _getChoices(_mapToFormType(element.type), element.choices, "map"),
