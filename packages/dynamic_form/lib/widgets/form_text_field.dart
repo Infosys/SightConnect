@@ -20,15 +20,15 @@ class FormTextField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.name,
       decoration: InputDecoration(
-        labelText: field.name,
-        hintText: field.name,
+        labelText: field.title,
+        hintText: field.description,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       validator: (value) {
         value = value ?? '';
         if (field.isRequired && value.isEmpty) {
-          return 'This field is required';
+          return field.requiredErrorText;
         }
 
         if (field.validators.isNotEmpty) {
@@ -44,6 +44,7 @@ class FormTextField extends StatelessWidget {
         return null;
       },
       onChanged: onChanged,
+      readOnly: field.readOnly,
     );
   }
 }

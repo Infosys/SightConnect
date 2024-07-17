@@ -125,11 +125,11 @@ class DynamicFormJsonMapper {
         return DynamicFormType.CHECKBOX;
       case 'dropdown':
         return DynamicFormType.DROPDOWN;
-      case 'DATETIME':
+      case 'datetime-local':
         return DynamicFormType.DATETIME;
       case 'CHIPS':
         return DynamicFormType.CHIPS;
-      case 'SLIDER':
+      case 'range':
         return DynamicFormType.SLIDER;
       case 'boolean':
         return DynamicFormType.SWITCH;

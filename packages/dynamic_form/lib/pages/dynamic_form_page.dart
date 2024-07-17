@@ -6,6 +6,7 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/widgets/app_card.dart';
+import 'package:dynamic_form/widgets/app_responsive_widget.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
@@ -96,7 +97,8 @@ class FormLayout extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: AppCard(
                         title: element.name,
-                        child: Column(
+                        child: Wrap(
+                          runSpacing: 16,
                           children: _buildFields(element.elements, formKey),
                         ),
                       ),
@@ -146,7 +148,7 @@ class FormLayout extends StatelessWidget {
     }
 
     return fields.map((field) {
-      return getField(field, key);
+      return AppResponsiveWidget(widget: getField(field, key));
     }).toList();
   }
 }
@@ -158,12 +160,25 @@ Widget getField(
   }
   switch (field.type) {
     case DynamicFormType.TEXTFIELD:
-      return FormTextField(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value);
-        },
-      );
+      switch (field.inputType) {
+        case DynamicFormType.DATETIME:
+          return FormDataTimePicker(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value.toString());
+            },
+          );
+        case DynamicFormType.SLIDER:
+          return FormSlider(field: field);
+
+        default:
+          return FormTextField(
+            field: field,
+            onChanged: (value) {
+              debugPrint(value);
+            },
+          );
+      }
 
     case DynamicFormType.DROPDOWN:
       return FormDropDown(
@@ -171,14 +186,6 @@ Widget getField(
           onChanged: (value) {
             debugPrint(value);
           });
-
-    case DynamicFormType.DATETIME:
-      return FormDataTimePicker(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
-      );
 
     case DynamicFormType.RADIO:
       return FormRadio(
@@ -226,9 +233,6 @@ Widget getField(
           debugPrint(value);
         },
       );
-
-    case DynamicFormType.SLIDER:
-      return FormSlider(field: field);
 
     default:
       return Container();
