@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ Future<T?> visionInstructionShowBottomUpSheet<T>({
   bool isRightEyeCovered = false,
   bool isLeftEyeCovered = false,
 }) {
+  final loc = context.loc!;
   return showModalBottomSheet(
     context: context,
     isDismissible: false,
@@ -53,10 +55,10 @@ Future<T?> visionInstructionShowBottomUpSheet<T>({
                       const SizedBox(height: AppSize.km),
                       Text(
                         isLeftEyeCovered
-                            ? 'Cover your right eye and tap on the E matching the image on top'
+                            ? loc.vaShowInstructionBottomSheetRightEyeInstruction
                             : isRightEyeCovered
-                                ? 'Cover your left eye and tap on the E matching the image on top'
-                                : 'View with both eyes and tap on the E matching the image on top.',
+                                ? loc.vaShowInstructionBottomSheetLeftEyeInstruction
+                                : loc.vaShowInstructionBottomSheetBothEyesInstruction,
                         textAlign: TextAlign.center,
                         style: applyFiraSansFont(
                           fontSize: 24,
@@ -76,7 +78,7 @@ Future<T?> visionInstructionShowBottomUpSheet<T>({
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('Proceed'),
+                              child: Text(loc.vaShowInstructionBottomSheetProceedButton),
                             ),
                           ),
                         ],

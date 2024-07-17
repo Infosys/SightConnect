@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_icon.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/widgets/triage_test_counter_indicator.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class TriageInstructionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return PopScope(
       onPopInvoked: (value) {
         Future.delayed(Duration.zero, () {
@@ -20,11 +22,11 @@ class TriageInstructionPage extends StatelessWidget {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Row(
+            title: Row(
               children: [
-                Text('Eye Test'),
-                SizedBox(width: AppSize.kl * 2),
-                TriageTestCounterIndicator(currentStep: 1)
+                Text(loc.triageInstructionPageTopAppBarEyeTest),
+                const SizedBox(width: AppSize.kl * 2),
+                const TriageTestCounterIndicator(currentStep: 1)
               ],
             ),
             actions: [
@@ -42,31 +44,31 @@ class TriageInstructionPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'What you would be doing',
+                  loc.triageInstructionPageHeader,
                   style: applyFiraSansFont(
                     fontSize: 24,
                   ),
                 ),
                 const SizedBox(height: AppSize.km),
-                const IconListTile(
-                  title: 'You will need to place your device at eye level.',
+                IconListTile(
+                  title: loc.triageInstructionPageBody1,
                 ),
-                const IconListTile(
-                  title: 'You will need to select responses to questions.',
+                IconListTile(
+                  title: loc.triageInstructionPageBody2,
                 ),
-                const IconListTile(
-                  title: 'You will need to take clear pictures of your eyes.',
+                IconListTile(
+                  title: loc.triageInstructionPageBody3,
                 ),
                 const SizedBox(height: AppSize.km),
                 Text(
-                  'If you are comfortable with doing the test by yourself, you can proceed directly.',
+                  loc.triageInstructionPageComfortableWithSelfTest,
                   style: applyRobotoFont(
                     fontSize: 14,
                   ),
                 ),
                 const SizedBox(height: AppSize.km),
                 Text(
-                  'If you need assistance, please get someone who can help you and start.',
+                  loc.triageInstructionPageTestAssistanceRequired,
                   style: applyRobotoFont(
                     fontSize: 14,
                   ),
@@ -87,7 +89,7 @@ class TriageInstructionPage extends StatelessWidget {
               onPressed: () {
                 showTriageBottomSheet(context: context);
               },
-              child: const Text('I am ready'),
+              child: Text(loc.triageInstructionPageIAmReadyButton),
             ),
           )),
     );

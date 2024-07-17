@@ -50,6 +50,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String vaDistanceToFaceInstruction(int distance) {
+    return 'Please ensure that the camera is ${distance} cm away from your face.';
+  }
+
+  @override
   String get questionnaireTitle => 'Eye Assessment Questions';
 
   @override
@@ -842,10 +847,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serviceNotAvailable => 'Service not available';
 
   @override
-  String get vaDistanceToFace => 'Distance to face';
-
-  @override
-  String get vaDistanceToFaceInstruction => 'Please ensure that the camera is 40cm away from your face';
+  String get vaDistanceToFace => 'Distance to Face';
 
   @override
   String get vaBringFaceInsideBox => 'Bring your face inside the box';
@@ -2025,4 +2027,91 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get referralStatisticsPageRetryButton => 'Retry';
+
+  @override
+  String get triageInstructionPageTopAppBarEyeTest => 'Eye Test';
+
+  @override
+  String get triageInstructionPageHeader => 'What you would be doing';
+
+  @override
+  String get triageInstructionPageBody1 => 'You will need to place your device at eye level.';
+
+  @override
+  String get triageInstructionPageBody2 => 'You will need to select responses to questions.';
+
+  @override
+  String get triageInstructionPageBody3 => 'You will need to take clear pictures of your eyes.';
+
+  @override
+  String get triageInstructionPageComfortableWithSelfTest => 'If you are comfortable with doing the test by yourself, you can proceed directly';
+
+  @override
+  String get triageInstructionPageTestAssistanceRequired => 'If you need assistance, please get someone who can help you and start.';
+
+  @override
+  String get triageInstructionPageIAmReadyButton => 'I am ready';
+
+  @override
+  String get appDrawerAddReview => 'Add Review';
+
+  @override
+  String get optionCardNeedHelpTextButton => 'Need help to understand this ';
+
+  @override
+  String get triageTextTypeQuestionCounterText => 'Optional';
+
+  @override
+  String get vaTopAppBarNearVisionTest => 'Near Vision Test';
+
+  @override
+  String get vaDemoPageInstruction => 'Tap on the E matching the image shown on top';
+
+  @override
+  String get vaShowInstructionBottomSheetRightEyeInstruction => 'Cover your right eye and tap on the E matching the image on top';
+
+  @override
+  String get vaShowInstructionBottomSheetLeftEyeInstruction => 'Cover your left eye and tap on the E matching the image on top';
+
+  @override
+  String get vaShowInstructionBottomSheetBothEyesInstruction => 'View with both eyes and tap on the E matching the image on top';
+
+  @override
+  String get vaShowInstructionBottomSheetProceedButton => 'Proceed';
+
+  @override
+  String get touchGestureCardRightEyeInstruction => 'Cover your right eye and tap on the E matching the image on top';
+
+  @override
+  String get touchGestureCardLeftEyeInstruction => 'Cover your left eye and tap on the E matching the image on top';
+
+  @override
+  String get touchGestureCardBothEyesInstruction => 'View with both eyes and tap on the E matching the image on top';
+
+  @override
+  String get touchGestureCardICantSeeOutlineButton => 'I Can’t see';
+
+  @override
+  String get distanceVaTopAppBarDistanceVisionTest => 'Distance Vision Test';
+
+  @override
+  String get fakeDataSourceGetCarouselDataDescription => 'Early detection can save your eyes';
+
+  @override
+  String get fakeDataSourceGetCarouselDataTitle => 'Doctor says';
+
+  @override
+  String get distanceNotifierProviderNoFaceDetectedError => 'No face detected. Please face the camera 40 cm from the screen';
+
+  @override
+  String get appCameraPageTakePictureLoadingOverlayMessage => 'Hold the camera steady…';
+
+  @override
+  String get appCameraPageDefaultLoadingOverlayMessage => 'Loading…';
+
+  @override
+  String get topReadingCardFaceNotFoundError => 'No Face';
+
+  @override
+  String get topReadingCardLongDistanceTestMessage => 'Position yourself 2m from the screen';
 }

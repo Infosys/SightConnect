@@ -167,6 +167,12 @@ abstract class AppLocalizations {
   /// **'You have been referred by {referredBy}'**
   String referralCollectSheetReferredBy(String referredBy);
 
+  /// No description provided for @vaDistanceToFaceInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Please ensure that the camera is {distance} cm away from your face.'**
+  String vaDistanceToFaceInstruction(int distance);
+
   /// No description provided for @questionnaireTitle.
   ///
   /// In en, this message translates to:
@@ -1754,14 +1760,8 @@ abstract class AppLocalizations {
   /// No description provided for @vaDistanceToFace.
   ///
   /// In en, this message translates to:
-  /// **'Distance to face'**
+  /// **'Distance to Face'**
   String get vaDistanceToFace;
-
-  /// No description provided for @vaDistanceToFaceInstruction.
-  ///
-  /// In en, this message translates to:
-  /// **'Please ensure that the camera is 40cm away from your face'**
-  String get vaDistanceToFaceInstruction;
 
   /// No description provided for @vaBringFaceInsideBox.
   ///
@@ -4120,6 +4120,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get referralStatisticsPageRetryButton;
+
+  /// No description provided for @triageInstructionPageTopAppBarEyeTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Eye Test'**
+  String get triageInstructionPageTopAppBarEyeTest;
+
+  /// No description provided for @triageInstructionPageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'What you would be doing'**
+  String get triageInstructionPageHeader;
+
+  /// No description provided for @triageInstructionPageBody1.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to place your device at eye level.'**
+  String get triageInstructionPageBody1;
+
+  /// No description provided for @triageInstructionPageBody2.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to select responses to questions.'**
+  String get triageInstructionPageBody2;
+
+  /// No description provided for @triageInstructionPageBody3.
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to take clear pictures of your eyes.'**
+  String get triageInstructionPageBody3;
+
+  /// No description provided for @triageInstructionPageComfortableWithSelfTest.
+  ///
+  /// In en, this message translates to:
+  /// **'If you are comfortable with doing the test by yourself, you can proceed directly'**
+  String get triageInstructionPageComfortableWithSelfTest;
+
+  /// No description provided for @triageInstructionPageTestAssistanceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'If you need assistance, please get someone who can help you and start.'**
+  String get triageInstructionPageTestAssistanceRequired;
+
+  /// No description provided for @triageInstructionPageIAmReadyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I am ready'**
+  String get triageInstructionPageIAmReadyButton;
+
+  /// No description provided for @appDrawerAddReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Review'**
+  String get appDrawerAddReview;
+
+  /// No description provided for @optionCardNeedHelpTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help to understand this '**
+  String get optionCardNeedHelpTextButton;
+
+  /// No description provided for @triageTextTypeQuestionCounterText.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get triageTextTypeQuestionCounterText;
+
+  /// No description provided for @vaTopAppBarNearVisionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Near Vision Test'**
+  String get vaTopAppBarNearVisionTest;
+
+  /// No description provided for @vaDemoPageInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap on the E matching the image shown on top'**
+  String get vaDemoPageInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetRightEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your right eye and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetRightEyeInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetLeftEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your left eye and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetLeftEyeInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetBothEyesInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'View with both eyes and tap on the E matching the image on top'**
+  String get vaShowInstructionBottomSheetBothEyesInstruction;
+
+  /// No description provided for @vaShowInstructionBottomSheetProceedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed'**
+  String get vaShowInstructionBottomSheetProceedButton;
+
+  /// No description provided for @touchGestureCardRightEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your right eye and tap on the E matching the image on top'**
+  String get touchGestureCardRightEyeInstruction;
+
+  /// No description provided for @touchGestureCardLeftEyeInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover your left eye and tap on the E matching the image on top'**
+  String get touchGestureCardLeftEyeInstruction;
+
+  /// No description provided for @touchGestureCardBothEyesInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'View with both eyes and tap on the E matching the image on top'**
+  String get touchGestureCardBothEyesInstruction;
+
+  /// No description provided for @touchGestureCardICantSeeOutlineButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I Can’t see'**
+  String get touchGestureCardICantSeeOutlineButton;
+
+  /// No description provided for @distanceVaTopAppBarDistanceVisionTest.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance Vision Test'**
+  String get distanceVaTopAppBarDistanceVisionTest;
+
+  /// No description provided for @fakeDataSourceGetCarouselDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Early detection can save your eyes'**
+  String get fakeDataSourceGetCarouselDataDescription;
+
+  /// No description provided for @fakeDataSourceGetCarouselDataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor says'**
+  String get fakeDataSourceGetCarouselDataTitle;
+
+  /// No description provided for @distanceNotifierProviderNoFaceDetectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'No face detected. Please face the camera 40 cm from the screen'**
+  String get distanceNotifierProviderNoFaceDetectedError;
+
+  /// No description provided for @appCameraPageTakePictureLoadingOverlayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold the camera steady…'**
+  String get appCameraPageTakePictureLoadingOverlayMessage;
+
+  /// No description provided for @appCameraPageDefaultLoadingOverlayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading…'**
+  String get appCameraPageDefaultLoadingOverlayMessage;
+
+  /// No description provided for @topReadingCardFaceNotFoundError.
+  ///
+  /// In en, this message translates to:
+  /// **'No Face'**
+  String get topReadingCardFaceNotFoundError;
+
+  /// No description provided for @topReadingCardLongDistanceTestMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Position yourself 2m from the screen'**
+  String get topReadingCardLongDistanceTestMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

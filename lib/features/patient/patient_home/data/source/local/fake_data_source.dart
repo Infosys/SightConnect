@@ -5,8 +5,8 @@ import 'package:eye_care_for_all/l10n/app_localizations.dart';
 
 List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
       {
-        "title": 'Doctor says',
-        "description": 'Early detection can save your eyes',
+        "title": loc.fakeDataSourceGetCarouselDataTitle,
+        "description": loc.fakeDataSourceGetCarouselDataDescription,
         "image": AppImages.patientCover4,
         "designation": 'Eye Specialist, LVPEI',
       },

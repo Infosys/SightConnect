@@ -55,7 +55,7 @@ class TriageTextTypeQuestion extends ConsumerWidget {
                         color: AppColor.primary,
                       ),
                     ),
-                    counterText: 'Optional',
+                    counterText: loc.triageTextTypeQuestionCounterText,
                     labelText: loc.eyeAssessmentEnterLabel,
                     labelStyle: applyRobotoFont(
                       fontSize: 14,

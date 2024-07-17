@@ -67,8 +67,8 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 ),
                 titleSpacing: 0,
                 centerTitle: false,
-                title: const Text(
-                  "Distance Vision Test",
+                title: Text(
+                  loc.distanceVaTopAppBarDistanceVisionTest,
                 ),
               )
             : CustomAppbar(
@@ -91,7 +91,7 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                 ),
                 title: Text(
-                  "Distance Vision Test",
+                  loc.distanceVaTopAppBarDistanceVisionTest,
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

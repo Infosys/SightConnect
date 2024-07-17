@@ -71,8 +71,8 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                 ),
                 titleSpacing: 0,
                 centerTitle: false,
-                title: const Text(
-                  "Near Vision Test",
+                title: Text(
+                  loc.vaTopAppBarNearVisionTest,
                 ),
               )
             : CustomAppbar(
@@ -95,7 +95,7 @@ class VisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                 ),
                 title: Text(
-                  "Near Vision Test",
+                  loc.vaTopAppBarNearVisionTest,
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
