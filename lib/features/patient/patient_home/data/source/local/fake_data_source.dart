@@ -8,7 +8,6 @@ List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
         "title": 'Doctor says',
         "description": 'Early detection can save your eyes',
         "image": AppImages.patientCover4,
-        "doctor": 'Dr. Mohana R',
         "designation": 'Eye Specialist, LVPEI',
       },
       // {

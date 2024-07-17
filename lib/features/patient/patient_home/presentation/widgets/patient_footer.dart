@@ -86,16 +86,6 @@ class PatientFooter extends HookWidget {
                             ),
                             const SizedBox(height: AppSize.km),
                             AutoSizeText(
-                              data["doctor"],
-                              maxLines: 3,
-                              minFontSize: 12,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            AutoSizeText(
                               data["designation"],
                               maxLines: 3,
                               minFontSize: 12,
