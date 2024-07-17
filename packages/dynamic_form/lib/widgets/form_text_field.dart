@@ -31,8 +31,14 @@ class FormTextField extends StatelessWidget {
           return 'This field is required';
         }
 
-        if (!RegExp(field.validators.first.type).hasMatch(value)) {
-          return "";
+        if (field.validators.isNotEmpty) {
+          for (var validator in field.validators) {
+            if (validator.type == 'regex') {
+              if (!RegExp(validator.regex).hasMatch(value)) {
+                return validator.text;
+              }
+            }
+          }
         }
 
         return null;

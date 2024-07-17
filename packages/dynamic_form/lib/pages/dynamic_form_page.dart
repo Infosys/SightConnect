@@ -83,15 +83,25 @@ class FormLayout extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               for (var page in pages)
-                AppCard(
-                  title: page.name,
-                  child: Column(
-                    children: page.elements
-                        .map((element) =>
-                            _buildFields(element.elements, formKey))
-                        .expand((element) => element)
-                        .toList(),
+                ExpansionTile(
+                  initiallyExpanded: true,
+                  title: Text(
+                    page.name,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                    ),
                   ),
+                  children: page.elements.map((element) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AppCard(
+                        title: element.name,
+                        child: Column(
+                          children: _buildFields(element.elements, formKey),
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
               const SizedBox(height: 20),
               Padding(
