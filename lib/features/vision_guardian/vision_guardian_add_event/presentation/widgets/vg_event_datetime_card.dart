@@ -82,10 +82,8 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
                 if (data.startDate.text.isNotEmpty &&
                     data.startTime.text.isNotEmpty) {
                   if (data.startDate.text == data.endDate.text) {
-                    if (DateFormat('hh:mm a')
-                        .parse(data.startTime.text)
-                        .isAfter(
-                            DateFormat('hh:mm a').parse(data.endTime.text))) {
+                    if (DateFormat('HH:mm').parse(data.startTime.text).isAfter(
+                        DateFormat('HH:mm').parse(data.endTime.text))) {
                       return loc.vgEndTimeGreaterThanStartTime;
                     }
                   }

@@ -209,6 +209,7 @@ Widget customTextFieldTimePicker(
           child: InkWell(
             onTap: () async {
               var dateTime = await selectTime(context, timeController.text);
+              // remove am and pm from dateTime
               timeController.text = dateTime.toString();
             },
             child: const Icon(
@@ -340,7 +341,7 @@ Future<String?> selectTime(BuildContext context, previousValue) async {
         : TimeOfDay.fromDateTime(dateTime),
   );
   if (picked != null) {
-    return "${picked.hour}:${picked.minute < 10 ? '0${picked.minute}' : picked.minute} ${picked.period.name.toUpperCase()}";
+    return "${picked.hour < 10 ? '0${picked.hour}' : '${picked.hour}'}:${picked.minute < 10 ? '0${picked.minute}' : picked.minute}";
   } else {
     return previousValue;
   }

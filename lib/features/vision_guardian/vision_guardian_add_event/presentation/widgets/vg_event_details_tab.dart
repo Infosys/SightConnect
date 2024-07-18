@@ -29,14 +29,14 @@ class EventDetailsTab extends HookConsumerWidget {
     // var isEventDetails = useState<bool>(false);
     DateTime startDate = DateTime.parse(eventDetails.startDate!);
     DateTime endDate = DateTime.parse(eventDetails.endDate!);
-    String startDateformattedDate = DateFormat('dd MMM').format(startDate);
-    String endDateformattedDate = DateFormat('dd MMM yyyy').format(endDate);
+    String startDateformattedDate = DateFormat.yMMMMd().format(startDate);
+    String endDateformattedDate = DateFormat.yMMMMd().format(endDate);
 
     DateTime startTime = DateTime.parse(eventDetails.startTime!);
-    String startformattedTime = DateFormat('h a').format(startTime);
+    String startformattedTime = DateFormat.jm().format(startTime);
 
     DateTime endTime = DateTime.parse(eventDetails.endTime!);
-    String endTimeformattedTime = DateFormat('h a').format(endTime);
+    String endTimeformattedTime = DateFormat.jm().format(endTime);
 
     logger.d(eventDetails.images);
     final loc = context.loc!;
@@ -48,13 +48,13 @@ class EventDetailsTab extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: AppSize.height(context) * 0.25,
+              height: AppSize.height(context) * 0.23,
               decoration: eventDetails.images != null
                   ? BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
                               _getImageUrl(eventDetails.images![0])),
-                          fit: BoxFit.fill),
+                          fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(AppSize.km),
                     )
                   : BoxDecoration(
@@ -117,16 +117,8 @@ class EventDetailsTab extends HookConsumerWidget {
                                 ),
                               ],
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  AppSize.kl,
-                                ),
-                                color: AppColor.orange,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSize.km, vertical: 3),
-                              child: Text(
+                            Chip(
+                              label: Text(
                                 eventDetails.eventStatus ?? "",
                                 style: applyRobotoFont(
                                   fontSize: 14,
@@ -134,7 +126,32 @@ class EventDetailsTab extends HookConsumerWidget {
                                   color: AppColor.white,
                                 ),
                               ),
+                              backgroundColor: _getEvenStatusColor(
+                                eventDetails.eventStatus,
+                              ),
                             ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(
+                            //       AppSize.kl,
+                            //     ),
+                            //     color: _getEvenStatusColor(
+                            //       eventDetails.eventStatus,
+                            //     ),
+                            //   ),
+                            //   padding: const EdgeInsets.symmetric(
+                            //     horizontal: AppSize.km,
+                            //     vertical: 3,
+                            //   ),
+                            //   child: Text(
+                            //     eventDetails.eventStatus ?? "",
+                            //     style: applyRobotoFont(
+                            //       fontSize: 14,
+                            //       fontWeight: FontWeight.w500,
+                            //       color: AppColor.white,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         )
                       ],
@@ -209,32 +226,33 @@ class EventDetailsTab extends HookConsumerWidget {
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: null,
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: AppColor.primary,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                AppSize.kl,
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            loc.vgEditEvent,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.primary,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: AppSize.km,
-                      ),
+                      // Expanded(
+                      //   child: OutlinedButton(
+                      //     onPressed: null,
+                      //     style: OutlinedButton.styleFrom(
+                      //       side: const BorderSide(
+                      //         color: AppColor.primary,
+                      //       ),
+                      //       shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(
+                      //           AppSize.kl,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     child: Text(
+                      //       loc.vgEditEvent,
+                      //       style: applyRobotoFont(
+                      //         fontSize: 14,
+                      //         fontWeight: FontWeight.w500,
+                      //         color: AppColor.primary,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+
+                      // const SizedBox(
+                      //   width: AppSize.km,
+                      // ),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
@@ -250,9 +268,14 @@ class EventDetailsTab extends HookConsumerWidget {
                                 ref
                                     .read(addEventDetailsProvider)
                                     .filterListEvents(0, "");
-                                Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(
-                                  builder: (context) => const VisionGuardianDashboardPage(),
-                                ), (route) => false, );
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VisionGuardianDashboardPage(),
+                                  ),
+                                  (route) => false,
+                                );
                               } else {
                                 Fluttertoast.showToast(
                                     msg: loc.vgEventDeletionFailed);
@@ -541,6 +564,18 @@ class EventDetailsTab extends HookConsumerWidget {
         ),
       ),
     );
+  }
+
+  _getEvenStatusColor(String? value) {
+    return switch (value) {
+      "CANCELLED" => AppColor.red,
+      "MOVED_ONLINE" => AppColor.orange,
+      "RESCHEDULED" => AppColor.yellow,
+      "SCHEDULED" => AppColor.blue,
+      "CREATED" => AppColor.primary,
+      "ACTIVE" => AppColor.green,
+      _ => AppColor.grey,
+    };
   }
 }
 

@@ -37,7 +37,7 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Play using while you are hiking</string>
 	<key>NSCameraUsageDescription</key>
-	<string>your usage description here</string>
+	<string>This app requires access to the camera to accurately perform the eye tests</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Program requires GPS to track cars and job orders</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -45,7 +45,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This we want to use to give information about the nearest vision care centers</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>your usage description here</string>
+	<string>This app require microphone access for voice commands</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Access Warning</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

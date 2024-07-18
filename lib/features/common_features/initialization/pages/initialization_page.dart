@@ -55,6 +55,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
             await PersistentAuthStateService.authState.setActiveRole(role);
 
             // Update the headers with the selected role
+
             ref.read(dioProvider.notifier).updateHeaders(activeRole: role);
 
             logger.d("Active Role: $role");
@@ -274,7 +275,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
-      Role.ROLE_VOLUNTEER : const VisionGuardianDashboardPage(),
+      Role.ROLE_VOLUNTEER: const VisionGuardianDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {
