@@ -119,6 +119,7 @@ class DioService extends StateNotifier<Dio> {
     if (appVersion != null) {
       state.options.headers["X-App-Version"] = appVersion;
     }
+    log("ABHC${state.options.headers}");
   }
 
   void updateTenantHeaders(String? role) {
