@@ -1,11 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -97,13 +96,10 @@ class VgEventDataCards extends StatelessWidget {
                             vertical: AppSize.ks / 2,
                           ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              AppSize.kl,
-                            ),
-                            color: (data.eventStatus ?? "") != "Completed"
-                                ? AppColor.orange
-                                : AppColor.green,
-                          ),
+                              borderRadius: BorderRadius.circular(
+                                AppSize.kl,
+                              ),
+                              color: _getEvenStatusColor(data.eventStatus)),
                           child: Text(
                             data.eventStatus ?? "",
                             softWrap: true,
@@ -212,6 +208,18 @@ class VgEventDataCards extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _getEvenStatusColor(String? value) {
+    return switch (value) {
+      "CANCELLED" => AppColor.red,
+      "MOVED_ONLINE" => AppColor.orange,
+      "RESCHEDULED" => AppColor.yellow,
+      "SCHEDULED" => AppColor.blue,
+      "CREATED" => AppColor.primary,
+      "ACTIVE" => AppColor.green,
+      _ => AppColor.grey,
+    };
   }
 }
 

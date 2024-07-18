@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
@@ -157,7 +159,6 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       eventLoading = true;
       List<VisionGuardianEventModel> response;
       if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
-
         response = await vgAddEventRepository.getVGEvents(
           queryData: {
             "actorIdentifier": globalVolunteerProvider.userId.toString(),
@@ -170,7 +171,6 @@ class AddEventDetailsNotifier extends ChangeNotifier {
             },
           },
         );
-      
       } else {
         response = await vgAddEventRepository.getVGEvents(
           queryData: {
@@ -253,17 +253,20 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       notifyListeners();
       String file = await fileMsProvider.uploadImage(File(_image?.path ?? ""));
       Map<String, String> fileMap = fileMsProvider.parseUrl(file);
-      Map<String, dynamic> actors; 
-      if(PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
-        actors = { "role": "VOLUNTEER",
-        "identifier": globalVolunteerProvider.userId.toString(),
-        "isOwner": true};
+      Map<String, dynamic> actors;
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        actors = {
+          "role": "VOLUNTEER",
+          "identifier": globalVolunteerProvider.userId.toString(),
+          "isOwner": true
+        };
+      } else {
+        actors = {
+          "role": "MEDICAL_DOCTOR",
+          "identifier": globalVGProvider.userId.toString(),
+          "isOwner": true
+        };
       }
-      else {
-       actors = { "role": "MEDICAL_DOCTOR",
-        "identifier": globalVGProvider.userId.toString(),
-        "isOwner": true};
-      };
 
       logger.d("after uplopading image");
 
@@ -276,9 +279,17 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
       var endFormat =
           "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
-      DateFormat format = DateFormat("hh:mm a");
+      DateFormat format = DateFormat("HH:mm");
       DateTime starttime = format.parse(startTime.text);
       DateTime endtime = format.parse(endTime.text);
+      log(starttime.timeZoneName);
+
+      log(startTime.text);
+      log(endTime.text);
+      log(starttime.toString());
+      log(endtime.toString());
+      log("start time is: ${starttime.toIso8601String()}Z");
+      log("end time is: ${endtime.toIso8601String()}Z");
 
       VisionGuardianEventModel vgEventModel = VisionGuardianEventModel(
           title: _eventTitle.text,

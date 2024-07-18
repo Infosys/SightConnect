@@ -25,6 +25,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
         PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"
             ? ref.watch(globalVolunteerProvider).name
             : ref.watch(globalVGProvider).name;
+
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
