@@ -12,7 +12,7 @@ elasticApm {
     // Optional
 
     serviceName = "SightConnect"
-    centralConfig = true
+   
 //    Version: APP_VERSION
 //    serviceVersion = "0.0.0"
 //    apiKey = "your server api key"
