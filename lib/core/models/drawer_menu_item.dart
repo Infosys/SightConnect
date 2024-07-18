@@ -108,7 +108,7 @@ class DrawerMenuItems {
       language,
       accessibilities,
       assessments,
-      // scanner,
+      scanner,
       feedback,
       about,
       privacyPolicy,
