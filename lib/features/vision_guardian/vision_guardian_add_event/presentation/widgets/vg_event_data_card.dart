@@ -30,9 +30,9 @@ class VgEventDataCards extends StatelessWidget {
     );
 
     String startTimeString =
-        DateFormat('h a').format(DateTime.parse(data.startTime!));
+        DateFormat('HH:mm').format(DateTime.parse(data.startTime!));
     String endTimeString =
-        DateFormat('h a').format(DateTime.parse(data.endTime!));
+        DateFormat('HH:mm').format(DateTime.parse(data.endTime!));
 
     return Container(
       width: Responsive.isMobile(context)
@@ -78,15 +78,18 @@ class VgEventDataCards extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AutoSizeText(
-                          data.title.capitalize(),
-                          maxLines: 1,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.black,
+                        SizedBox(
+                          width: AppSize.width(context) * 0.35,
+                          child: AutoSizeText(
+                            data.title.capitalize(),
+                            maxLines: 1,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.black,
+                            ),
                           ),
                         ),
                         const Spacer(),
