@@ -1,4 +1,4 @@
-import 'package:dynamic_form/responsive.dart';
+import 'package:dynamic_form/shared/utlities/responsive.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
