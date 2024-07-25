@@ -13,6 +13,7 @@ class CarePlanProvider extends ChangeNotifier {
     PatientInstruction.VISIT_SECONDARY_CLINIC,
     PatientInstruction.VISIT_TERTIARY_CLINIC,
     PatientInstruction.VISIT_COE,
+    PatientInstruction.VISIT_AS_PER_CONSULT
   ];
   void setPatientInstruction(PatientInstruction? patientInstruction) {
     logger.d("patientInstruction : $patientInstruction");

@@ -136,6 +136,7 @@ const _$PatientInstructionEnumMap = {
   PatientInstruction.VISIT_SECONDARY_CLINIC: 'VISIT_SECONDARY_CLINIC',
   PatientInstruction.VISIT_TERTIARY_CLINIC: 'VISIT_TERTIARY_CLINIC',
   PatientInstruction.VISIT_COE: 'VISIT_COE',
+  PatientInstruction.VISIT_AS_PER_CONSULT: 'VISIT_AS_PER_CONSULT',
 };
 
 const _$TriagePriorityEnumMap = {
