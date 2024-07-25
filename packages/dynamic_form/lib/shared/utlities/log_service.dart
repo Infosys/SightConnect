@@ -9,7 +9,7 @@ class Log {
     return _instance;
   }
 
-  final Logger logger = Logger(
+  static final Logger _logger = Logger(
     printer: PrettyPrinter(
       methodCount: 2,
       errorMethodCount: 8,
@@ -19,15 +19,19 @@ class Log {
     ),
   );
 
-  void d(String message) {
-    logger.d(message);
+  static void d(dynamic message) {
+    _logger.d(message);
   }
 
-  void e(String message) {
-    logger.e(message);
+  static void e(dynamic message) {
+    _logger.e(message);
   }
 
-  void i(String message) {
-    logger.i(message);
+  static void f(dynamic message) {
+    _logger.f(message);
+  }
+
+  static void i(dynamic message) {
+    _logger.i(message);
   }
 }
