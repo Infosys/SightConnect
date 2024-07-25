@@ -10,9 +10,11 @@ class DynamicFormBuilderPage extends StatelessWidget {
     super.key,
     required this.pages,
     required this.title,
+    required this.onSubmitted,
   });
   final String title;
   final List<PageEntity> pages;
+  final Function(Map<String, dynamic>?)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class DynamicFormBuilderPage extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState?.save();
                     Log.f(formKey.currentState?.value);
+                    onSubmitted!(formKey.currentState?.value);
                   } else {
                     debugPrint('Form validation failed');
                   }

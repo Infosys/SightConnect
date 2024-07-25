@@ -11,7 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DynamicFormPage extends StatelessWidget {
-  const DynamicFormPage({super.key});
+  const DynamicFormPage({
+    super.key,
+    this.onSubmitted,
+  });
+  final Function(Map<String, dynamic>?)? onSubmitted;
 
   Future<ResponseJsonEntity>? _loadJson() async {
     const path = "packages/dynamic_form/assets/survey_js_final.json";
@@ -33,7 +37,11 @@ class DynamicFormPage extends StatelessWidget {
         if (snapshot.hasData) {
           final pages = snapshot.data?.pages ?? [];
           final title = snapshot.data?.title ?? '';
-          return DynamicFormBuilderPage(pages: pages, title: title);
+          return DynamicFormBuilderPage(
+            pages: pages,
+            title: title,
+            onSubmitted: onSubmitted,
+          );
         } else if (snapshot.hasError) {
           return DynamicFormErrorWidget(
             error: snapshot.error,
