@@ -598,13 +598,13 @@ Widget locationDetails(
                   fontWeight: FontWeight.w500,
                 )),
             const Spacer(),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                loc.vgViewOnMap,
-                style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
-              ),
-            )
+            // InkWell(
+            //   onTap: () {},
+            //   child: Text(
+            //     loc.vgViewOnMap,
+            //     style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
+            //   ),
+            // )
           ]),
           const SizedBox(
             height: AppSize.km,
@@ -758,15 +758,15 @@ Widget aboutDetails(String description, BuildContext context) {
           const SizedBox(
             height: AppSize.ks,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              InkWell(
-                child: Text(
-                  loc.vgViewAll,
-                  style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
-                ),
-              )
+              // InkWell(
+              //   child: Text(
+              //     loc.vgViewAll,
+              //     style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
+              //   ),
+              // )
             ],
           ),
         ],

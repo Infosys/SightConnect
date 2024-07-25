@@ -196,11 +196,22 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
     String? pinCode;
 
-    await LocationService.getLocationWithPermissions();
-
-    List<String> addressData = await GeocodingService.getPincodeFromLocation();
-    pinCode = addressData[0];
-    logger.f("pinCode is  $pinCode");
+    try {
+      final locationData = await LocationService.getLocationWithPermissions();
+      logger.d("locationData: $locationData");
+      pinCode = "";
+      if (locationData == null) {
+        pinCode = "";
+      } else {
+        List<String> addressData =
+            await GeocodingService.getPincodeFromLocation();
+        pinCode = addressData[0];
+        logger.f("pinCode is  $pinCode");
+      }
+    } on Exception catch (e) {
+      logger.e("Error in getting location data: $e");
+      pinCode = "";
+    }
 
     final status = await navigator.push<bool?>(
       MaterialPageRoute(

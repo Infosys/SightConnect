@@ -254,19 +254,19 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       String file = await fileMsProvider.uploadImage(File(_image?.path ?? ""));
       Map<String, String> fileMap = fileMsProvider.parseUrl(file);
       Map<String, dynamic> actors;
-      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
-        actors = {
-          "role": "VOLUNTEER",
-          "identifier": globalVolunteerProvider.userId.toString(),
-          "isOwner": true
-        };
-      } else {
-        actors = {
-          "role": "MEDICAL_DOCTOR",
-          "identifier": globalVGProvider.userId.toString(),
-          "isOwner": true
-        };
-      }
+      // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      //   actors = {
+      //     "role": "VOLUNTEER",
+      //     "identifier": globalVolunteerProvider.userId.toString(),
+      //     "isOwner": true
+      //   };
+      // } else {
+      //   actors = {
+      //     "role": "MEDICAL_DOCTOR",
+      //     "identifier": globalVGProvider.userId.toString(),
+      //     "isOwner": true
+      //   };
+      // }
 
       logger.d("after uplopading image");
 
