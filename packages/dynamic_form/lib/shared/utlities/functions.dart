@@ -2,7 +2,7 @@ import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
-import 'package:dynamic_form/widgets/form_data_time_picker.dart';
+import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
@@ -89,7 +89,7 @@ _getSubField(ElementElementClassEntity? field) {
 
   switch (field.inputType) {
     case DynamicFormType.DATETIME:
-      return FormDataTimePicker(
+      return FormDateTimePicker(
         field: field,
         onChanged: (value) {
           debugPrint(value.toString());
