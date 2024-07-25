@@ -10,7 +10,7 @@ import 'package:dynamic_form/widgets/app_responsive_widget.dart';
 import 'package:dynamic_form/widgets/error_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
-import 'package:dynamic_form/widgets/form_data_time_picker.dart';
+import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
@@ -227,7 +227,7 @@ Widget getField(
 _getSubField(field) {
   switch (field.inputType) {
     case DynamicFormType.DATETIME:
-      return FormDataTimePicker(
+      return FormDateTimePicker(
         field: field,
         onChanged: (value) {
           debugPrint(value.toString());
