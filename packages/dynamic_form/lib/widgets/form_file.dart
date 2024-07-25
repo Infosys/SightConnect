@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
-import 'package:dynamic_form/services/image_picker.dart';
+import 'package:dynamic_form/shared/utlities/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

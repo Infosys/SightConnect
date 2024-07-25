@@ -17,6 +17,7 @@ dependencies:
   image_picker: ^1.1.2
   intl: ^0.19.0
   json_annotation: ^4.9.0
+  logger:
 
 dev_dependencies:
   flutter_test:
@@ -31,9 +32,6 @@ flutter:
 
   # To add assets to your package, add an assets section, like this:
   assets:
-    - assets/test_form.json
-    - assets/test.json
-    - assets/survey_js.json
     - assets/
   #   - images/a_dot_ham.jpeg
   #
