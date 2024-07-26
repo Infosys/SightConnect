@@ -82,21 +82,9 @@ class VolunteerApproved extends HookConsumerWidget {
                             ),
                             const NextStepCard(
                               icon: Icons.video_library,
-                              title: 'Check Orientation Videos',
+                              title: 'Add Teammates',
                               description:
-                                  'Watch videos to understand our mission and processes.',
-                            ),
-                            const NextStepCard(
-                              icon: Icons.book,
-                              title: 'Go Through Training Material',
-                              description:
-                                  'Review provided materials to prepare for your role.',
-                            ),
-                            const NextStepCard(
-                              icon: Icons.event_available,
-                              title: 'Attend the Live Event',
-                              description:
-                                  'Participate in the scheduled live event.',
+                                  'Invite other volunteers to join your team.',
                             ),
                             const NextStepCard(
                               icon: Icons.message,
@@ -104,6 +92,19 @@ class VolunteerApproved extends HookConsumerWidget {
                               description:
                                   'Begin triaging and contributing to our initiatives.',
                             ),
+                            const NextStepCard(
+                              icon: Icons.book,
+                              title: 'Get Reports',
+                              description:
+                                  'View reports of the triages done by you and you teammates.',
+                            ),
+                            // const NextStepCard(
+                            //   icon: Icons.event_available,
+                            //   title: 'Attend the Live Event',
+                            //   description:
+                            //       'Participate in the scheduled live event.',
+                            // ),
+
                             const SizedBox(height: 24),
                             ElevatedButton(
                                 onPressed: () async {
