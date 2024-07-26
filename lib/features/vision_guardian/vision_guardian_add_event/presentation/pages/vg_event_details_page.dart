@@ -48,18 +48,19 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const VisionGuardianSearchPatient(
-                              search: "search",
-                            )),
+                      builder: (context) => const VisionGuardianSearchPatient(
+                        search: "search",
+                      ),
+                    ),
                   );
                 } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            const VisionGuardianSearchTeammate(
-                              search: "search",
-                            )),
+                      builder: (context) => const VisionGuardianSearchTeammate(
+                        search: "search",
+                      ),
+                    ),
                   );
                 }
               },

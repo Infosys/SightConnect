@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../../core/constants/app_color.dart';
 import '../../../../../shared/theme/text_theme.dart';
@@ -20,26 +19,18 @@ class VgEventDataCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateFormat dateFormat = DateFormat("dd MMM");
-    DateFormat dateFormat2 = DateFormat("dd MMM yy");
-    String startDateString = dateFormat.format(
-      DateTime.parse(data.startDate!),
-    );
-    String endDateString = dateFormat2.format(
-      DateTime.parse(data.endDate!),
-    );
+    String startDateString = DateTime.parse(data.startDate!).formateDate2;
+    String endDateString = DateTime.parse(data.endDate!).formateDate2;
 
-    String startTimeString =
-        DateFormat('HH:mm').format(DateTime.parse(data.startTime!));
-    String endTimeString =
-        DateFormat('HH:mm').format(DateTime.parse(data.endTime!));
+    String startTimeString = DateTime.parse(data.startDate!).formateTime;
+    String endTimeString = DateTime.parse(data.endDate!).formateTime;
 
     return Container(
       width: Responsive.isMobile(context)
           ? AppSize.width(context) * 0.95
           : AppSize.width(context) * 0.95,
       height: Responsive.isMobile(context)
-          ? AppSize.height(context) * 0.16
+          ? AppSize.height(context) * 0.18
           : AppSize.height(context) * 0.24,
       margin: const EdgeInsets.symmetric(vertical: AppSize.ks),
       decoration: BoxDecoration(
@@ -50,154 +41,138 @@ class VgEventDataCards extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(AppSize.km - 5),
-              bottomLeft: Radius.circular(AppSize.km - 5),
-            ),
-            child: AppNetworkImage(
-              borderRadius: 0,
-              imageUrl: _getImageUrl(data.images!.first),
-              shapeCircle: false,
-              width: Responsive.isMobile(context)
-                  ? AppSize.width(context) * 0.25
-                  : AppSize.width(context) * 0.25,
+          Expanded(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(AppSize.km - 5),
+                bottomLeft: Radius.circular(AppSize.km - 5),
+              ),
+              child: AppNetworkImage(
+                borderRadius: 0,
+                imageUrl: _getImageUrl(data.images!.first),
+                shapeCircle: false,
+              ),
             ),
           ),
           Expanded(
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context) * 0.60
-                        : AppSize.width(context) * 0.8,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: AppSize.width(context) * 0.35,
-                          child: AutoSizeText(
-                            data.title.capitalize(),
-                            maxLines: 1,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.black,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSize.km,
-                            vertical: AppSize.ks / 2,
-                          ),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                AppSize.kl,
-                              ),
-                              color: _getEvenStatusColor(data.eventStatus)),
-                          child: Text(
-                            data.eventStatus ?? "",
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: applyRobotoFont(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.ks),
-                  Text(
-                    "${data.id ?? ""}",
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: applyRobotoFont(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                  const SizedBox(height: AppSize.ks),
-                  SizedBox(
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context) * 0.60
-                        : AppSize.width(context) * 0.8,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(
-                              Icons.calendar_month_outlined,
-                              color: AppColor.grey,
-                              size: 14,
+                            Text(
+                              data.title.capitalize(),
+                              maxLines: 1,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              style: applyRobotoFont(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.black,
+                              ),
                             ),
-                            const SizedBox(width: AppSize.ks / 2),
-                            AutoSizeText(
-                              '$startDateString-$endDateString',
+                            const SizedBox(height: AppSize.ks / 2),
+                            Text(
+                              "ID ${data.id ?? ""}",
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
+                                fontSize: 10,
+                                color: AppColor.darkGrey,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(width: AppSize.ks),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.schedule,
-                              color: AppColor.grey,
-                              size: 14,
-                            ),
-                            const SizedBox(width: AppSize.ks / 2),
-                            AutoSizeText(
-                              '$startTimeString-$endTimeString',
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
-                              ),
-                            ),
-                          ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSize.km,
+                          vertical: AppSize.ks / 2,
                         ),
-                      ],
-                    ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            AppSize.kl,
+                          ),
+                          color: _getEvenStatusColor(data.eventStatus),
+                        ),
+                        child: Text(
+                          data.eventStatus ?? "",
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: applyRobotoFont(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: AppSize.ks),
                   Row(
                     children: [
                       const Icon(
-                        Icons.location_on_outlined,
+                        Icons.calendar_month_outlined,
                         color: AppColor.grey,
                         size: 14,
                       ),
                       const SizedBox(width: AppSize.ks / 2),
+                      AutoSizeText(
+                        '$startDateString - $endDateString',
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.ks / 2),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.schedule,
+                        color: AppColor.grey,
+                        size: 14,
+                      ),
+                      const SizedBox(width: AppSize.ks / 2),
+                      AutoSizeText(
+                        '$startTimeString - $endTimeString',
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.ks),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Flexible(
-                        child: AutoSizeText(
-                          "${data.addresses?[0].addressLine1},${data.addresses?[0].city},${data.addresses?[0].state},${data.addresses?[0].pinCode}",
-                          maxLines: 1,
+                        child: Text(
+                          _getAddress(data.addresses),
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: applyRobotoFont(
-                            fontSize: 10,
+                            fontSize: 12,
                             color: AppColor.grey,
                           ),
                         ),
@@ -211,6 +186,22 @@ class VgEventDataCards extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _toTitleCase(String text) {
+    if (text.isEmpty) return text;
+    return text.split(' ').map((word) {
+      if (word.isEmpty) return word;
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }).join(' ');
+  }
+
+  String _getAddress(List<VisionGuardianEventAddress>? address) {
+    if (address != null && address.isNotEmpty) {
+      final addr = address.first;
+      return "${_toTitleCase(addr.addressLine1 ?? "")}, ${_toTitleCase(addr.city ?? "")}, ${_toTitleCase(addr.state ?? "")}, ${addr.pinCode}";
+    }
+    return "";
   }
 
   _getEvenStatusColor(String? value) {

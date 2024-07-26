@@ -67,8 +67,8 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                 service.id == VGServiceId.eye_assessment
                     ? SvgPicture.asset(
                         service.icon,
-                        height: AppSize.kl,
-                        width: AppSize.kl,
+                        height: AppSize.kl + 4,
+                        width: AppSize.kl + 4,
                         colorFilter: const ColorFilter.mode(
                           AppColor.black,
                           BlendMode.srcIn,
@@ -77,13 +77,12 @@ class VisionGuardianServicesCard extends ConsumerWidget {
                     : Icon(service.icon),
                 const SizedBox(height: AppSize.ks),
                 Text(
-                  // '${data["textPrefix"]}\n${data["text"]}',
                   service.text,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: applyFiraSansFont(
-                    fontSize: 10,
+                    fontSize: 12,
                     color: AppColor.black,
                     fontWeight: FontWeight.w400,
                   ),

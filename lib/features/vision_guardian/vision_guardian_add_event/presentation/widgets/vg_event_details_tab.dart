@@ -48,12 +48,15 @@ class EventDetailsTab extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: AppSize.height(context) * 0.23,
+              height: AppSize.height(context) * 0.3,
               decoration: eventDetails.images != null
                   ? BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              _getImageUrl(eventDetails.images![0])),
+                            _getImageUrl(
+                              eventDetails.images![0],
+                            ),
+                          ),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(AppSize.km),
                     )
@@ -180,14 +183,13 @@ class EventDetailsTab extends HookConsumerWidget {
                 ],
               ),
               child: const ExpansionTile(
-                  childrenPadding: EdgeInsets.symmetric(
-                    vertical: AppSize.ks,
-                  ),
-                  title: Text("Add Members"),
-                  visualDensity: VisualDensity.compact,
-                  children: [
-                    EventTeammatesTab(),
-                  ]),
+                // childrenPadding: EdgeInsets.all(16),
+                title: Text("Add Members"),
+                visualDensity: VisualDensity.compact,
+                children: [
+                  EventTeammatesTab(),
+                ],
+              ),
             ),
 
             const SizedBox(
