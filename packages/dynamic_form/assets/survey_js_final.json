@@ -239,10 +239,20 @@
                                                         {
                                                             "type": "text",
                                                             "name": "friendPhone",
-                                                            "title": "Friend's Email",
+                                                            "title": "Friend's Phone",
                                                             "description": "descrion",
                                                             "isRequired": true,
                                                             "requiredErrorText": "Please Enter Friend's Phone Number",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "name": "friendPhone",
+                                                            "title": "Friend's Email",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter Friend's Email",
                                                             "readOnly": false,
                                                             "placeholder": "palceholder"
                                                         }
