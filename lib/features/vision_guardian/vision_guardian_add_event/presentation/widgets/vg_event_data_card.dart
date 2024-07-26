@@ -47,11 +47,13 @@ class VgEventDataCards extends StatelessWidget {
                 topLeft: Radius.circular(AppSize.km - 5),
                 bottomLeft: Radius.circular(AppSize.km - 5),
               ),
-              child: AppNetworkImage(
-                borderRadius: 0,
-                imageUrl: _getImageUrl(data.images!.first),
-                shapeCircle: false,
-              ),
+              child: (data.images == null || data.images!.isEmpty)
+                  ? const Icon(Icons.abc)
+                  : AppNetworkImage(
+                      borderRadius: 0,
+                      imageUrl: _getImageUrl(data.images!.first),
+                      shapeCircle: false,
+                    ),
             ),
           ),
           Expanded(
