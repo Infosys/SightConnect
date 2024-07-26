@@ -5,20 +5,22 @@ import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class DynamicFormBuilderPage extends StatelessWidget {
-  const DynamicFormBuilderPage({
+class FormBuilderPage extends StatelessWidget {
+  FormBuilderPage({
     super.key,
     required this.pages,
     required this.title,
-    required this.onSubmitted,
+    required this.onSubmit,
   });
   final String title;
   final List<PageEntity> pages;
-  final Function(Map<String, dynamic>?)? onSubmitted;
+  final Function(Map<String, dynamic>?)? onSubmit;
+
+  /// The key for the form.
+  final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormBuilderState>();
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -36,21 +38,28 @@ class DynamicFormBuilderPage extends StatelessWidget {
                   formKey: formKey,
                 ),
               const SizedBox(height: 20),
-              SubmitBtn(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState?.save();
-                    Log.f(formKey.currentState?.value);
-                    onSubmitted!(formKey.currentState?.value);
-                  } else {
-                    debugPrint('Form validation failed');
-                  }
-                },
-              ),
+              SubmitBtn(onPressed: _handleSubmit)
             ],
           ),
         ),
       ),
     );
+  }
+
+  /// Handles the form submission.
+  void _handleSubmit() {
+    try {
+      if (formKey.currentState!.validate()) {
+        formKey.currentState?.save();
+        Log.i('Form submitted successfully');
+        Log.f(formKey.currentState?.value);
+        onSubmit?.call(formKey.currentState?.value);
+      } else {
+        Log.e('Form validation failed');
+      }
+    } catch (e, stackTrace) {
+      Log.e('Error occurred: $e');
+      Log.e('Stack trace: $stackTrace');
+    }
   }
 }

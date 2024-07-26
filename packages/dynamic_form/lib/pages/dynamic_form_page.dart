@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
-import 'package:dynamic_form/pages/dynamic_form_builder_page.dart';
+import 'package:dynamic_form/pages/form_builder_page.dart';
 import 'package:dynamic_form/shared/widgets/dynamic_form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +13,9 @@ import 'package:flutter/services.dart';
 class DynamicFormPage extends StatelessWidget {
   const DynamicFormPage({
     super.key,
-    this.onSubmitted,
+    this.onSubmit,
   });
-  final Function(Map<String, dynamic>?)? onSubmitted;
+  final Function(Map<String, dynamic>?)? onSubmit;
 
   Future<ResponseJsonEntity>? _loadJson() async {
     const path = "packages/dynamic_form/assets/survey_js_final.json";
@@ -37,13 +37,10 @@ class DynamicFormPage extends StatelessWidget {
         if (snapshot.hasData) {
           final pages = snapshot.data?.pages ?? [];
           final title = snapshot.data?.title ?? '';
-          return DynamicFormBuilderPage(
-            pages: pages,
-            title: title,
-            onSubmitted: onSubmitted,
-          );
+          return FormBuilderPage(
+              pages: pages, title: title, onSubmit: onSubmit);
         } else if (snapshot.hasError) {
-          return DynamicFormErrorWidget(
+          return FormErrorWidget(
             error: snapshot.error,
             stackTrace: snapshot.stackTrace.toString(),
           );

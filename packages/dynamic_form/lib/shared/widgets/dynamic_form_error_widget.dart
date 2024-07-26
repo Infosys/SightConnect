@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DynamicFormErrorWidget extends StatelessWidget {
-  const DynamicFormErrorWidget({
+class FormErrorWidget extends StatelessWidget {
+  const FormErrorWidget({
     super.key,
     required this.error,
     this.stackTrace,
