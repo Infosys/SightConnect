@@ -83,7 +83,7 @@ _$ConditionModelImpl _$$ConditionModelImplFromJson(Map<String, dynamic> json) =>
       recordedDate:
           const TimestampConverter().fromJson(json['recordedDate'] as String?),
       bodySite: $enumDecodeNullable(_$BodySiteEnumMap, json['bodySite']),
-      code: $enumDecodeNullable(_$CodeEnumMap, json['code']),
+      code: json['code'] as String?,
       note: json['note'] as String?,
     );
 
@@ -93,7 +93,7 @@ Map<String, dynamic> _$$ConditionModelImplToJson(
       'id': instance.id,
       'recordedDate': const TimestampConverter().toJson(instance.recordedDate),
       'bodySite': _$BodySiteEnumMap[instance.bodySite],
-      'code': _$CodeEnumMap[instance.code],
+      'code': instance.code,
       'note': instance.note,
     };
 
@@ -101,10 +101,6 @@ const _$BodySiteEnumMap = {
   BodySite.LEFT_EYE: 'LEFT_EYE',
   BodySite.RIGHT_EYE: 'RIGHT_EYE',
   BodySite.BOTH_EYES: 'BOTH_EYES',
-};
-
-const _$CodeEnumMap = {
-  Code.EYE_TRIAGE: 'EYE_TRIAGE',
 };
 
 _$ServiceRequestModelImpl _$$ServiceRequestModelImplFromJson(

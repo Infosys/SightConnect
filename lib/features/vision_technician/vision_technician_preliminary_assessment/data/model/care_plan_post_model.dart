@@ -58,7 +58,7 @@ class ConditionModel with _$ConditionModel {
     int? id,
     @TimestampConverter() DateTime? recordedDate,
     BodySite? bodySite,
-    Code? code,
+    String? code,
     String? note,
   }) = _ConditionModel;
 
