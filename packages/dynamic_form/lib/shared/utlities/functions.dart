@@ -2,6 +2,7 @@ import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
+import 'package:dynamic_form/widgets/form_conditional_widget.dart';
 import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
@@ -77,32 +78,14 @@ Widget getField(
         },
       );
     case DynamicFormType.CONDITIONAL:
-      return Column(children: _buildConditionalFields(field, key));
+      return ConditionalWidget(
+        field: field,
+        formKey: key,
+      );
 
     default:
       return Container();
   }
-}
-
-List<Widget> _buildConditionalFields(
-    ElementElementClassEntity? field, GlobalKey<FormBuilderState> key) {
-  if (field == null || field.conditions == null) {
-    return [];
-  }
-
-  final List<Widget> widgets = [];
-  final String? dependantField = field.dependantField;
-  String selectedValue = key.currentState?.fields[dependantField]?.value ?? '';
-
-  for (final condition in field.conditions!) {
-    if (condition.value == selectedValue) {
-      for (final subField in condition.fields) {
-        widgets.add(getField(subField, key));
-      }
-    }
-  }
-
-  return widgets;
 }
 
 _getSubField(ElementElementClassEntity? field) {

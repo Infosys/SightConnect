@@ -73,7 +73,7 @@ class DynamicFormJsonMapper {
               _mapToFormType(element.type), element.choices, "string"),
           validators: _getValidators(element.validators),
           choices: element.choices ?? [],
-          dependantField: element.dependantField ?? '',
+          dependantField: element.dependantField,
           conditions: _getConditions(element.conditions),
         ));
       }

@@ -6,7 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../utlities/functions.dart';
 
-class PageWidget extends StatelessWidget {
+class PageWidget extends StatefulWidget {
   const PageWidget({
     super.key,
     required this.name,
@@ -18,18 +18,23 @@ class PageWidget extends StatelessWidget {
   final GlobalKey<FormBuilderState> formKey;
 
   @override
+  State<PageWidget> createState() => _PageWidgetState();
+}
+
+class _PageWidgetState extends State<PageWidget> {
+  @override
   Widget build(BuildContext context) {
-    if (elements.isEmpty) {
+    if (widget.elements.isEmpty) {
       return Container();
     }
 
     return ExpansionTile(
       initiallyExpanded: true,
       title: Text(
-        name,
+        widget.name,
         style: const TextStyle(fontSize: 16.0),
       ),
-      children: elements.map((panel) {
+      children: widget.elements.map((panel) {
         if (panel.elements.isEmpty) {
           return Container();
         }
@@ -39,7 +44,7 @@ class PageWidget extends StatelessWidget {
             title: panel.name,
             child: Wrap(
               runSpacing: 16,
-              children: _buildFields(panel.elements, formKey),
+              children: _buildFields(panel.elements, widget.formKey),
             ),
           ),
         );
