@@ -5,7 +5,7 @@ import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/pages/form_builder_page.dart';
-import 'package:dynamic_form/shared/widgets/dynamic_form_error_widget.dart';
+import 'package:dynamic_form/shared/widgets/form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
