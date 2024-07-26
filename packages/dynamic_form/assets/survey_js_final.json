@@ -156,6 +156,95 @@
                             "name": "question16",
                             "title": "I Agree to the terms and conditions",
                             "validators": []
+                        },
+                        {
+                            "type": "conditional",
+                            "dependantField": "contactType",
+                            "conditions": [
+                                {
+                                    "value": "office",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "officeEmail",
+                                            "title": "Office Email",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter Office Email",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "home",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "homeEmail",
+                                            "title": "Home Email",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter Home Email",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "emergency",
+                                    "fields": [
+                                        {
+                                            "type": "dropdown",
+                                            "name": "emergencyContactType",
+                                            "title": "Emergency Contact Type",
+                                            "description": "dddd",
+                                            "isRequired": true,
+                                            "readOnly": true,
+                                            "choices": [
+                                                "parent",
+                                                "friend"
+                                            ]
+                                        },
+                                        {
+                                            "type": "conditional",
+                                            "dependantField": "emergencyContactType",
+                                            "conditions": [
+                                                {
+                                                    "value": "parent",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "parentPhone",
+                                                            "title": "Parent's Email",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter Parent's Email",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "value": "friend",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "friendPhone",
+                                                            "title": "Friend's Email",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter Friend's Phone Number",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
