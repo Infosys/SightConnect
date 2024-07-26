@@ -49,7 +49,7 @@ class PageWidget extends StatelessWidget {
 
   List<Widget> _buildFields(List<ElementElementClassEntity>? fields,
       GlobalKey<FormBuilderState> key) {
-    if (fields == null) {
+    if (fields == null || fields.isEmpty) {
       return [];
     }
 
