@@ -50,13 +50,13 @@ class VisionGuardianEventBottomNavigationBar extends ConsumerWidget {
                     .currentState!
                     .validate()) {
                   try {
-                    if (ref.watch(addEventDetailsProvider).image == null) {
-                      Fluttertoast.showToast(msg: loc.vgAddEventImage);
-                    } else {
-                      await ref.read(addEventDetailsProvider).addEventDetails();
-                      navigator.pop();
-                      Fluttertoast.showToast(msg: loc.vgEventAdded);
-                    }
+                    // if (ref.watch(addEventDetailsProvider).image == null) {
+                    //   Fluttertoast.showToast(msg: loc.vgAddEventImage);
+                    // }
+
+                    await ref.read(addEventDetailsProvider).addEventDetails();
+                    navigator.pop();
+                    Fluttertoast.showToast(msg: loc.vgEventAdded);
                   } catch (e) {
                     Fluttertoast.showToast(msg: loc.vgEventNotAdded);
                   }

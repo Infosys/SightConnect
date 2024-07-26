@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -93,8 +92,13 @@ class TeammatesDataCards extends HookConsumerWidget {
                                 offset: const Offset(0, 10),
                                 child: InkWell(
                                   onTap: () async {
-                                    var userId = PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"? ref.read(globalVolunteerProvider).userId:
-                                        ref.read(globalVGProvider).userId;
+                                    var userId = PersistentAuthStateService
+                                                .authState.activeRole ==
+                                            "ROLE_VOLUNTEER"
+                                        ? ref
+                                            .read(globalVolunteerProvider)
+                                            .userId
+                                        : ref.read(globalVGProvider).userId;
                                     var navigator = Navigator.of(context);
                                     var model =
                                         ref.read(addEventDetailsProvider);
@@ -118,7 +122,8 @@ class TeammatesDataCards extends HookConsumerWidget {
                                       );
                                     }).onError((error, stackTrace) {
                                       Fluttertoast.showToast(
-                                        msg: loc.vgSomethingWentWrong,
+                                        msg:
+                                            "Failed to Add Teammate, Please try again",
                                       );
                                     });
                                   },

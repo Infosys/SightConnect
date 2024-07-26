@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -50,20 +49,20 @@ class VgEventDataCards extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(AppSize.km - 5),
-              bottomLeft: Radius.circular(AppSize.km - 5),
-            ),
-            child: AppNetworkImage(
-              borderRadius: 0,
-              imageUrl: _getImageUrl(data.images!.first),
-              shapeCircle: false,
-              width: Responsive.isMobile(context)
-                  ? AppSize.width(context) * 0.25
-                  : AppSize.width(context) * 0.25,
-            ),
-          ),
+          // ClipRRect(
+          //   borderRadius: const BorderRadius.only(
+          //     topLeft: Radius.circular(AppSize.km - 5),
+          //     bottomLeft: Radius.circular(AppSize.km - 5),
+          //   ),
+          //   child: AppNetworkImage(
+          //     borderRadius: 0,
+          //     imageUrl: _getImageUrl(data.images!.first),
+          //     shapeCircle: false,
+          //     width: Responsive.isMobile(context)
+          //         ? AppSize.width(context) * 0.25
+          //         : AppSize.width(context) * 0.25,
+          //   ),
+          // ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),

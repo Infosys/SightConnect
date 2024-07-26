@@ -251,8 +251,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       logger.d("inside add event details");
       isLoading = true;
       notifyListeners();
-      String file = await fileMsProvider.uploadImage(File(_image?.path ?? ""));
-      Map<String, String> fileMap = fileMsProvider.parseUrl(file);
+      Map<String, String> fileMap = {};
+      if (_image != null && _image?.path.isNotEmpty == true) {
+        String file =
+            await fileMsProvider.uploadImage(File(_image?.path ?? ""));
+        fileMap = fileMsProvider.parseUrl(file);
+      }
       Map<String, dynamic> actors;
       if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
         actors = {
@@ -301,15 +305,17 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           endTime: "${endtime.toIso8601String()}Z",
           maximumAttendeeCapacity: 0,
           sponsor: "r6B",
-          images: [
-            VisionGuardianEventImage(
-              baseUrl: fileMap["baseUrl"],
-              endpoint: fileMap["endPoint"],
-              fileId: fileMap["fileId"],
-              thumbnail: true,
-              status: "ACTIVE",
-            )
-          ],
+          images: fileMap.isEmpty
+              ? null
+              : [
+                  VisionGuardianEventImage(
+                    baseUrl: fileMap["baseUrl"],
+                    endpoint: fileMap["endPoint"],
+                    fileId: fileMap["fileId"],
+                    thumbnail: true,
+                    status: "ACTIVE",
+                  )
+                ],
           addresses: [
             VisionGuardianEventAddress(
                 venueName: _venueName.text,
