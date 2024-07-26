@@ -144,11 +144,6 @@
             "elements": [
                 {
                     "type": "panel",
-                    "name": "Personal Eye Donation Referral Information",
-                    "elements": []
-                },
-                {
-                    "type": "panel",
                     "name": "Terms and Condition",
                     "elements": [
                         {
@@ -156,6 +151,19 @@
                             "name": "question16",
                             "title": "I Agree to the terms and conditions",
                             "validators": []
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "contactType",
+                            "title": "Contact Type",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "office",
+                                "home",
+                                "emergency"
+                            ]
                         },
                         {
                             "type": "conditional",

@@ -76,10 +76,33 @@ Widget getField(
           debugPrint(value);
         },
       );
+    case DynamicFormType.CONDITIONAL:
+      return Column(children: _buildConditionalFields(field, key));
 
     default:
       return Container();
   }
+}
+
+List<Widget> _buildConditionalFields(
+    ElementElementClassEntity? field, GlobalKey<FormBuilderState> key) {
+  if (field == null || field.conditions == null) {
+    return [];
+  }
+
+  final List<Widget> widgets = [];
+  final String? dependantField = field.dependantField;
+  String selectedValue = key.currentState?.fields[dependantField]?.value ?? '';
+
+  for (final condition in field.conditions!) {
+    if (condition.value == selectedValue) {
+      for (final subField in condition.fields) {
+        widgets.add(getField(subField, key));
+      }
+    }
+  }
+
+  return widgets;
 }
 
 _getSubField(ElementElementClassEntity? field) {

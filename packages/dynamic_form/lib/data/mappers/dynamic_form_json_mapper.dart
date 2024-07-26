@@ -73,10 +73,25 @@ class DynamicFormJsonMapper {
               _mapToFormType(element.type), element.choices, "string"),
           validators: _getValidators(element.validators),
           choices: element.choices ?? [],
+          dependantField: element.dependantField ?? '',
+          conditions: _getConditions(element.conditions),
         ));
       }
     }
     return elementEntities;
+  }
+
+  _getConditions(List<Conditions>? conditions) {
+    final List<ConditionsEntity> conditionsEntities = [];
+    if (conditions != null) {
+      for (final condition in conditions) {
+        conditionsEntities.add(ConditionsEntity(
+          value: condition.value ?? '',
+          fields: _getElements(condition.fields),
+        ));
+      }
+    }
+    return conditionsEntities;
   }
 
   _getChoices(
@@ -137,7 +152,8 @@ class DynamicFormJsonMapper {
         return DynamicFormType.FILE;
       case 'comment':
         return DynamicFormType.TEXTAREA;
-
+      case 'conditional':
+        return DynamicFormType.CONDITIONAL;
       default:
         return DynamicFormType.DEFAULT;
     }

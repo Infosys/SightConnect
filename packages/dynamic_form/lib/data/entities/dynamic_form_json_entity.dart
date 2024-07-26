@@ -99,6 +99,8 @@ class ElementElementClassEntity {
   final int min;
   final int max;
   final int step;
+  final List<ConditionsEntity>? conditions;
+  final String? dependantField;
 
   ElementElementClassEntity({
     required this.type,
@@ -118,6 +120,8 @@ class ElementElementClassEntity {
     required this.min,
     required this.max,
     required this.step,
+    this.conditions,
+    this.dependantField,
   });
 
   factory ElementElementClassEntity.fromJson(Map<String, dynamic> json) =>
@@ -143,6 +147,11 @@ class ElementElementClassEntity {
         min: json["min"],
         max: json["max"],
         step: json["step"],
+        conditions: json["conditions"] == null
+            ? []
+            : List<ConditionsEntity>.from(
+                json["conditions"].map((x) => ConditionsEntity.fromJson(x))),
+        dependantField: json["dependantField"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -165,6 +174,8 @@ class ElementElementClassEntity {
         "min": min,
         "max": max,
         "step": step,
+        "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
+        "dependantField": dependantField,
       };
 }
 
@@ -186,6 +197,28 @@ class RadioChoiceElementEntity {
   Map<String, dynamic> toJson() => {
         "value": value,
         "text": text,
+      };
+}
+
+class ConditionsEntity {
+  final String value;
+  final List<ElementElementClassEntity> fields;
+
+  ConditionsEntity({
+    required this.value,
+    required this.fields,
+  });
+
+  factory ConditionsEntity.fromJson(Map<String, dynamic> json) =>
+      ConditionsEntity(
+        value: json["value"],
+        fields: List<ElementElementClassEntity>.from(
+            json["fields"].map((x) => ElementElementClassEntity.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "value": value,
+        "fields": List<dynamic>.from(fields.map((x) => x.toJson())),
       };
 }
 

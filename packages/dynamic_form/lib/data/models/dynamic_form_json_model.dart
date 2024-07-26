@@ -93,6 +93,7 @@ class PageElementModel {
 
 class ElementElementClassModel {
   String? type;
+  String? dependantField;
   String? name;
   String? title;
   String? description;
@@ -107,6 +108,7 @@ class ElementElementClassModel {
   int? min;
   int? max;
   int? step;
+  List<Conditions>? conditions;
 
   ElementElementClassModel({
     this.type,
@@ -124,6 +126,7 @@ class ElementElementClassModel {
     this.min,
     this.max,
     this.step,
+    this.conditions,
   });
 
   factory ElementElementClassModel.fromJson(Map<String, dynamic> json) =>
@@ -148,6 +151,10 @@ class ElementElementClassModel {
         min: json["min"],
         max: json["max"],
         step: json["step"],
+        conditions: json["conditions"] == null
+            ? []
+            : List<Conditions>.from(
+                json["conditions"]!.map((x) => Conditions.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -169,6 +176,31 @@ class ElementElementClassModel {
         "min": min,
         "max": max,
         "step": step,
+      };
+}
+
+class Conditions {
+  String? value;
+  List<ElementElementClassModel>? fields;
+
+  Conditions({
+    this.value,
+    this.fields,
+  });
+
+  factory Conditions.fromJson(Map<String, dynamic> json) => Conditions(
+        value: json["value"],
+        fields: json["fields"] == null
+            ? []
+            : List<ElementElementClassModel>.from(json["fields"]!
+                .map((x) => ElementElementClassModel.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "value": value,
+        "fields": fields == null
+            ? []
+            : List<dynamic>.from(fields!.map((x) => x.toJson())),
       };
 }
 
