@@ -154,16 +154,21 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColor.white,
-                    child: ClipOval(
-                      child: Image.network(
-                        _getImageUrl(eventDetails.images![0]),
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.fill,
-                      ),
-                    )),
+                  radius: 30,
+                  backgroundColor: AppColor.white,
+                  child: (eventDetails.images != null &&
+                          eventDetails.images!.isNotEmpty)
+                      ? ClipOval(
+                          child: Image.network(
+                            _getImageUrl(eventDetails.images![0]),
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.fill,
+                          ),
+                        )
+                      : const Icon(Icons.person,
+                          size: 60, color: AppColor.white),
+                ),
                 const SizedBox(height: AppSize.km),
                 Text(
                   " ${eventDetails.title}",

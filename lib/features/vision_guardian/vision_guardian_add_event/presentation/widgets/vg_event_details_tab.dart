@@ -49,7 +49,8 @@ class EventDetailsTab extends HookConsumerWidget {
           children: [
             Container(
               height: AppSize.height(context) * 0.3,
-              decoration: eventDetails.images != null
+              decoration: (eventDetails.images != null &&
+                      eventDetails.images!.isNotEmpty)
                   ? BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
