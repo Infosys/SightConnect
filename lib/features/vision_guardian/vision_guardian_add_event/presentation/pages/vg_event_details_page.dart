@@ -166,8 +166,13 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                             fit: BoxFit.fill,
                           ),
                         )
-                      : const Icon(Icons.person,
-                          size: 60, color: AppColor.white),
+                      : Center(
+                          child: Text(
+                            "NO IMAGE",
+                            style: applyRobotoFont(
+                                color: AppColor.black, fontSize: 12),
+                          ),
+                        ),
                 ),
                 const SizedBox(height: AppSize.km),
                 Text(
