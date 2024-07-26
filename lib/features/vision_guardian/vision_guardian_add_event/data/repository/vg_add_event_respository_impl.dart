@@ -24,8 +24,13 @@ class VgAddEventRepositoryImpl extends VgAddEventRepository {
       {required VisionGuardianEventModel vgEventModel,
       required Map<String, dynamic> actor}) async {
     logger.d("inside add event impl");
-    return await remoteDataSource.postVGEvents(
-        vgEventModel: vgEventModel, actor: actor);
+    try {
+      return await remoteDataSource.postVGEvents(
+          vgEventModel: vgEventModel, actor: actor);
+    } on Exception catch (e) {
+      logger.e("Error in postVGEvents impl : $e");
+      rethrow;
+    }
   }
 
   @override

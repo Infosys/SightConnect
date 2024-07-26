@@ -79,6 +79,7 @@ class VisionGuardianEventDateTimeCard extends ConsumerWidget {
                 if (value == null || value.isEmpty) {
                   return loc.vgPleaseEnterEndTime;
                 }
+
                 if (data.startDate.text.isNotEmpty &&
                     data.startTime.text.isNotEmpty) {
                   if (data.startDate.text == data.endDate.text) {

@@ -134,7 +134,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     var vgeventjson = vgEventModel.toJson();
 
     vgeventjson["addresses"] = [vgEventModel.addresses![0].toJson()];
-    vgeventjson["images"] = [vgEventModel.images![0].toJson()];
+    vgeventjson["images"] =
+        vgEventModel.images == null ? [] : [vgEventModel.images![0].toJson()];
 
     vgeventjson["actors"] = [actor];
 
@@ -149,6 +150,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       }
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
+      rethrow;
     } catch (error) {
       rethrow;
     }
