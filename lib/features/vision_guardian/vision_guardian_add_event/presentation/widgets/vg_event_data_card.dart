@@ -123,63 +123,62 @@ class VgEventDataCards extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: AppSize.ks),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_month_outlined,
-                        color: AppColor.grey,
-                        size: 14,
-                      ),
-                      const SizedBox(width: AppSize.ks / 2),
-                      AutoSizeText(
-                        '$startDateString - $endDateString',
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: applyRobotoFont(
-                          fontSize: 12,
+                  Flexible(
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.calendar_month_outlined,
                           color: AppColor.grey,
+                          size: 14,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.ks / 2),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.schedule,
-                        color: AppColor.grey,
-                        size: 14,
-                      ),
-                      const SizedBox(width: AppSize.ks / 2),
-                      AutoSizeText(
-                        '$startTimeString - $endTimeString',
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: applyRobotoFont(
-                          fontSize: 12,
-                          color: AppColor.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.ks),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          _getAddress(data.addresses),
-                          maxLines: 2,
+                        const SizedBox(width: AppSize.ks / 2),
+                        AutoSizeText(
+                          '$startDateString - $endDateString',
+                          softWrap: true,
                           overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                           style: applyRobotoFont(
                             fontSize: 12,
                             color: AppColor.grey,
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.ks / 2),
+                  Flexible(
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.schedule,
+                          color: AppColor.grey,
+                          size: 14,
+                        ),
+                        const SizedBox(width: AppSize.ks / 2),
+                        AutoSizeText(
+                          '$startTimeString - $endTimeString',
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: applyRobotoFont(
+                            fontSize: 12,
+                            color: AppColor.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.ks),
+                  Flexible(
+                    child: Text(
+                      _getAddress(data.addresses),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyRobotoFont(
+                        fontSize: 12,
+                        color: AppColor.grey,
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -190,18 +189,10 @@ class VgEventDataCards extends StatelessWidget {
     );
   }
 
-  String _toTitleCase(String text) {
-    if (text.isEmpty) return text;
-    return text.split(' ').map((word) {
-      if (word.isEmpty) return word;
-      return word[0].toUpperCase() + word.substring(1).toLowerCase();
-    }).join(' ');
-  }
-
   String _getAddress(List<VisionGuardianEventAddress>? address) {
     if (address != null && address.isNotEmpty) {
       final addr = address.first;
-      return "${_toTitleCase(addr.addressLine1 ?? "")}, ${_toTitleCase(addr.city ?? "")}, ${_toTitleCase(addr.state ?? "")}, ${addr.pinCode}";
+      return "${addr.addressLine1.formatTitle()}, ${addr.addressLine2.formatTitle()}, ${addr.city.formatTitle()}, ${addr.state.formatTitle()}, ${addr.pinCode}";
     }
     return "";
   }
