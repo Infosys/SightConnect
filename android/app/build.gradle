@@ -2,22 +2,9 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "co.elastic.apm.android" version "0.19.0"
+ 
 }
-elasticApm {
-    // Minimal configuration
-    serverUrl = "https://healthconnecttech.org/services/apm/"
-    // serverUrl="https://marcom.infosys.com/apmserv/"
 
-    // Optional
-
-    serviceName = "SightConnect"
-   
-//    Version: APP_VERSION
-//    serviceVersion = "0.0.0"
-//    apiKey = "your server api key"
-//    secretToken = "your server auth token"
-}
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')

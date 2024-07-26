@@ -19,7 +19,7 @@
 
   <application
     android:label="SightConnect"
-    android:name="com.healthconnect.sightconnect.Apm"
+    android:name="${applicationName}"
     android:allowBackup="false"
     android:icon="@mipmap/launcher_icon">
     <activity
