@@ -22,8 +22,8 @@ class VgEventDataCards extends StatelessWidget {
     String startDateString = DateTime.parse(data.startDate!).formateDate2;
     String endDateString = DateTime.parse(data.endDate!).formateDate2;
 
-    String startTimeString = DateTime.parse(data.startDate!).formateTime;
-    String endTimeString = DateTime.parse(data.endDate!).formateTime;
+    String startTimeString = DateTime.parse(data.startTime!).formateTime;
+    String endTimeString = DateTime.parse(data.endTime!).formateTime;
 
     return Container(
       width: Responsive.isMobile(context)
@@ -48,7 +48,7 @@ class VgEventDataCards extends StatelessWidget {
                 bottomLeft: Radius.circular(AppSize.km - 5),
               ),
               child: (data.images == null || data.images!.isEmpty)
-                  ? const Icon(Icons.abc)
+                  ? const Center(child: Text("NO IMAGE"))
                   : AppNetworkImage(
                       borderRadius: 0,
                       imageUrl: _getImageUrl(data.images!.first),
