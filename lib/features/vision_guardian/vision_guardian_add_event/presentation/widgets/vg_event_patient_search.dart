@@ -9,7 +9,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VisionGuardianEventPatientSearch extends HookConsumerWidget {
-  const VisionGuardianEventPatientSearch({super.key});
+  const VisionGuardianEventPatientSearch({super.key, required this.onSearchFieldFilled});
+ 
+  final Function(bool isFilled) onSearchFieldFilled;
+
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,8 +27,10 @@ class VisionGuardianEventPatientSearch extends HookConsumerWidget {
           onChanged: (value) {
             if (RegExp(r'^[0-9]{10}$').hasMatch(value)) {
               isValid.value = true;
+              onSearchFieldFilled(true);
             } else {
               isValid.value = false;
+              onSearchFieldFilled(false);
             }
             if (isValid.value) {
               ref.read(addPatientEventProvider).setPatientSearchQuery(value);
