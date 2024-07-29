@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/token_refresh_service.dart';
+import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
@@ -182,15 +183,15 @@ class VolunteerApproved extends HookConsumerWidget {
                               style: TextStyle(color: Colors.grey[600]),
                             ),
                             const SizedBox(height: 8),
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.help_outline,
+                                const Icon(Icons.help_outline,
                                     size: 16, color: Colors.blue),
-                                SizedBox(width: 8),
+                                const SizedBox(width: 8),
                                 Text(
-                                  'sight_connect@infosys.com',
-                                  style: TextStyle(color: Colors.blue),
+                                  Env.appEmail,
+                                  style: const TextStyle(color: Colors.blue),
                                 ),
                               ],
                             ),

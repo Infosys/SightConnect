@@ -219,18 +219,18 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
               );
             },
           ),
-          ListTile(
-            title: const Text("Create New Event"),
-            onTap: () {
-              ref.read(addEventDetailsProvider).setIsLoading();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VGAddEventDetailsPage(),
-                ),
-              );
-            },
-          ),
+          // ListTile(
+          //   title: const Text("Create New Event"),
+          //   onTap: () {
+          //     ref.read(addEventDetailsProvider).setIsLoading();
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => const VGAddEventDetailsPage(),
+          //       ),
+          //     );
+          //   },
+          // ),
           // ListTile(
           //   title: const Text("Settings"),
           //   onTap: () {
