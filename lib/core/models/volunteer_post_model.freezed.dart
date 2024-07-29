@@ -26,6 +26,9 @@ mixin _$VolunteerPostModel {
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
   Status? get status => throw _privateConstructorUsedError;
+  String? get remark => throw _privateConstructorUsedError;
+  bool? get isCooldown => throw _privateConstructorUsedError;
+  DateTime? get cooldownPeriod => throw _privateConstructorUsedError;
   PatientModel? get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,6 +50,9 @@ abstract class $VolunteerPostModelCopyWith<$Res> {
       DateTime? startDate,
       DateTime? endDate,
       Status? status,
+      String? remark,
+      bool? isCooldown,
+      DateTime? cooldownPeriod,
       PatientModel? profile});
 
   $PatientModelCopyWith<$Res>? get profile;
@@ -71,6 +77,9 @@ class _$VolunteerPostModelCopyWithImpl<$Res, $Val extends VolunteerPostModel>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? status = freezed,
+    Object? remark = freezed,
+    Object? isCooldown = freezed,
+    Object? cooldownPeriod = freezed,
     Object? profile = freezed,
   }) {
     return _then(_value.copyWith(
@@ -98,6 +107,18 @@ class _$VolunteerPostModelCopyWithImpl<$Res, $Val extends VolunteerPostModel>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status?,
+      remark: freezed == remark
+          ? _value.remark
+          : remark // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isCooldown: freezed == isCooldown
+          ? _value.isCooldown
+          : isCooldown // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cooldownPeriod: freezed == cooldownPeriod
+          ? _value.cooldownPeriod
+          : cooldownPeriod // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -133,6 +154,9 @@ abstract class _$$VolunteerPostModelImplCopyWith<$Res>
       DateTime? startDate,
       DateTime? endDate,
       Status? status,
+      String? remark,
+      bool? isCooldown,
+      DateTime? cooldownPeriod,
       PatientModel? profile});
 
   @override
@@ -156,6 +180,9 @@ class __$$VolunteerPostModelImplCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? status = freezed,
+    Object? remark = freezed,
+    Object? isCooldown = freezed,
+    Object? cooldownPeriod = freezed,
     Object? profile = freezed,
   }) {
     return _then(_$VolunteerPostModelImpl(
@@ -183,6 +210,18 @@ class __$$VolunteerPostModelImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status?,
+      remark: freezed == remark
+          ? _value.remark
+          : remark // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isCooldown: freezed == isCooldown
+          ? _value.isCooldown
+          : isCooldown // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cooldownPeriod: freezed == cooldownPeriod
+          ? _value.cooldownPeriod
+          : cooldownPeriod // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
@@ -201,6 +240,9 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
       this.startDate,
       this.endDate,
       this.status,
+      this.remark,
+      this.isCooldown,
+      this.cooldownPeriod,
       this.profile});
 
   factory _$VolunteerPostModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -219,11 +261,17 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
   @override
   final Status? status;
   @override
+  final String? remark;
+  @override
+  final bool? isCooldown;
+  @override
+  final DateTime? cooldownPeriod;
+  @override
   final PatientModel? profile;
 
   @override
   String toString() {
-    return 'VolunteerPostModel(id: $id, userId: $userId, userType: $userType, startDate: $startDate, endDate: $endDate, status: $status, profile: $profile)';
+    return 'VolunteerPostModel(id: $id, userId: $userId, userType: $userType, startDate: $startDate, endDate: $endDate, status: $status, remark: $remark, isCooldown: $isCooldown, cooldownPeriod: $cooldownPeriod, profile: $profile)';
   }
 
   @override
@@ -239,13 +287,18 @@ class _$VolunteerPostModelImpl implements _VolunteerPostModel {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.remark, remark) || other.remark == remark) &&
+            (identical(other.isCooldown, isCooldown) ||
+                other.isCooldown == isCooldown) &&
+            (identical(other.cooldownPeriod, cooldownPeriod) ||
+                other.cooldownPeriod == cooldownPeriod) &&
             (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, userId, userType, startDate, endDate, status, profile);
+  int get hashCode => Object.hash(runtimeType, id, userId, userType, startDate,
+      endDate, status, remark, isCooldown, cooldownPeriod, profile);
 
   @JsonKey(ignore: true)
   @override
@@ -270,6 +323,9 @@ abstract class _VolunteerPostModel implements VolunteerPostModel {
       final DateTime? startDate,
       final DateTime? endDate,
       final Status? status,
+      final String? remark,
+      final bool? isCooldown,
+      final DateTime? cooldownPeriod,
       final PatientModel? profile}) = _$VolunteerPostModelImpl;
 
   factory _VolunteerPostModel.fromJson(Map<String, dynamic> json) =
@@ -287,6 +343,12 @@ abstract class _VolunteerPostModel implements VolunteerPostModel {
   DateTime? get endDate;
   @override
   Status? get status;
+  @override
+  String? get remark;
+  @override
+  bool? get isCooldown;
+  @override
+  DateTime? get cooldownPeriod;
   @override
   PatientModel? get profile;
   @override

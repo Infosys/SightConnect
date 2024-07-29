@@ -17,7 +17,12 @@ _$PerformerModelImpl _$$PerformerModelImplFromJson(Map<String, dynamic> json) =>
       endDate: json['endDate'] == null
           ? null
           : DateTime.parse(json['endDate'] as String),
-      status: json['status'] as String?,
+      status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
+      remark: json['remark'] as String?,
+      isCooldown: json['isCooldown'] as bool?,
+      cooldownPeriod: json['cooldownPeriod'] == null
+          ? null
+          : DateTime.parse(json['cooldownPeriod'] as String),
       profile: json['profile'] == null
           ? null
           : PatientModel.fromJson(json['profile'] as Map<String, dynamic>),
@@ -31,6 +36,20 @@ Map<String, dynamic> _$$PerformerModelImplToJson(
       'userType': instance.userType,
       'startDate': instance.startDate?.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
-      'status': instance.status,
+      'status': _$StatusEnumMap[instance.status],
+      'remark': instance.remark,
+      'isCooldown': instance.isCooldown,
+      'cooldownPeriod': instance.cooldownPeriod?.toIso8601String(),
       'profile': instance.profile?.toJson(),
     };
+
+const _$StatusEnumMap = {
+  Status.ACTIVE: 'ACTIVE',
+  Status.INACTIVE: 'INACTIVE',
+  Status.PENDING: 'PENDING',
+  Status.EXPIRED: 'EXPIRED',
+  Status.REJECTED: 'REJECTED',
+  Status.REVOKED: 'REVOKED',
+  Status.SUSPENDED: 'SUSPENDED',
+  Status.PRE_APPROVED: 'PRE_APPROVED',
+};

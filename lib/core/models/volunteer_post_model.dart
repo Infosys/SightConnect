@@ -25,6 +25,9 @@ class VolunteerPostModel with _$VolunteerPostModel {
     DateTime? startDate,
     DateTime? endDate,
     Status? status,
+    String? remark,
+    bool? isCooldown,
+    DateTime? cooldownPeriod,
     PatientModel? profile,
   }) = _VolunteerPostModel;
 
@@ -32,4 +35,13 @@ class VolunteerPostModel with _$VolunteerPostModel {
       _$VolunteerPostModelFromJson(json);
 }
 
-enum Status { ACTIVE, INACTIVE, PENDING, EXPIRED }
+enum Status {
+  ACTIVE,
+  INACTIVE,
+  PENDING,
+  EXPIRED,
+  REJECTED,
+  REVOKED,
+  SUSPENDED,
+  PRE_APPROVED
+}

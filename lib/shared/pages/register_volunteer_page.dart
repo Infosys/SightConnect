@@ -57,19 +57,41 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                     );
                   } else if (value.status == Status.ACTIVE) {
                     return const VolunteerApproved();
-                  } else {
-                    return const Center(
+                  } else if (value.status == Status.REJECTED ||
+                      value.status == Status.REVOKED ||
+                      value.status == Status.SUSPENDED) {
+                    return Center(
                       child: Card(
                         elevation: 4,
                         child: Padding(
-                          padding: EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Your volunteer status has been revoked. Please drop a mail @sight_connect@infosys.com for further details.",
+                                style: applyFiraSansFont(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Center(
+                      child: Card(
+                        elevation: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "There was some problem fetching your details, try again later.",
-                                style: TextStyle(
+                                style: applyFiraSansFont(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ],

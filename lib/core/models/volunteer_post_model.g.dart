@@ -19,6 +19,11 @@ _$VolunteerPostModelImpl _$$VolunteerPostModelImplFromJson(
           ? null
           : DateTime.parse(json['endDate'] as String),
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
+      remark: json['remark'] as String?,
+      isCooldown: json['isCooldown'] as bool?,
+      cooldownPeriod: json['cooldownPeriod'] == null
+          ? null
+          : DateTime.parse(json['cooldownPeriod'] as String),
       profile: json['profile'] == null
           ? null
           : PatientModel.fromJson(json['profile'] as Map<String, dynamic>),
@@ -33,6 +38,9 @@ Map<String, dynamic> _$$VolunteerPostModelImplToJson(
       'startDate': instance.startDate?.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
       'status': _$StatusEnumMap[instance.status],
+      'remark': instance.remark,
+      'isCooldown': instance.isCooldown,
+      'cooldownPeriod': instance.cooldownPeriod?.toIso8601String(),
       'profile': instance.profile?.toJson(),
     };
 
@@ -41,4 +49,8 @@ const _$StatusEnumMap = {
   Status.INACTIVE: 'INACTIVE',
   Status.PENDING: 'PENDING',
   Status.EXPIRED: 'EXPIRED',
+  Status.REJECTED: 'REJECTED',
+  Status.REVOKED: 'REVOKED',
+  Status.SUSPENDED: 'SUSPENDED',
+  Status.PRE_APPROVED: 'PRE_APPROVED',
 };
