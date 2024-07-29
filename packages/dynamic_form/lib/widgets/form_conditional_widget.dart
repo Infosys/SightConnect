@@ -26,10 +26,11 @@ class ConditionalWidget extends StatelessWidget {
           widgets.add(getField(subField, formKey));
         }
       } else {
-        // remove the fields if the condition is not met
         for (final subField in condition.fields) {
-          // formKey.currentState?.fields[subField.name]?.reset();
-          formKey.currentState?.fields.remove(subField.name);
+          Future.microtask(() {
+            formKey.currentState?.fields[subField.name]?.reset();
+            formKey.currentState?.removeInternalFieldValue(subField.name);
+          });
         }
       }
     }
