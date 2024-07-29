@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
@@ -256,57 +257,60 @@ class EventDetailsTab extends HookConsumerWidget {
                       // const SizedBox(
                       //   width: AppSize.km,
                       // ),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            SharedPreferenceService.clearEventId();
-                            ref
-                                .read(addEventDetailsProvider)
-                                .deleteEventDetails(
-                                    eventId: eventDetails.id.toString())
-                                .then((statusCode) {
-                              if (statusCode >= 200 && statusCode < 210) {
-                                Fluttertoast.showToast(
-                                    msg: loc.vgEventDeletedSuccessfully);
-                                ref
-                                    .read(addEventDetailsProvider)
-                                    .filterListEvents(0, "");
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const VisionGuardianDashboardPage(),
+                      PersistentAuthStateService.authState.activeRole ==
+                              "ROLE_VOLUNTEER"
+                          ? const SizedBox()
+                          : Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  SharedPreferenceService.clearEventId();
+                                  ref
+                                      .read(addEventDetailsProvider)
+                                      .deleteEventDetails(
+                                          eventId: eventDetails.id.toString())
+                                      .then((statusCode) {
+                                    if (statusCode >= 200 && statusCode < 210) {
+                                      Fluttertoast.showToast(
+                                          msg: loc.vgEventDeletedSuccessfully);
+                                      ref
+                                          .read(addEventDetailsProvider)
+                                          .filterListEvents(0, "");
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VisionGuardianDashboardPage(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: loc.vgEventDeletionFailed);
+                                    }
+                                  }).catchError((error, stackTrace) {
+                                    logger.e("${error}, ${stackTrace}");
+                                    Fluttertoast.showToast(
+                                        msg: loc.vgEventDeletionFailed);
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColor.red,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      AppSize.kl,
+                                    ),
                                   ),
-                                  (route) => false,
-                                );
-                              } else {
-                                Fluttertoast.showToast(
-                                    msg: loc.vgEventDeletionFailed);
-                              }
-                            }).catchError((error, stackTrace) {
-                              logger.e("${error}, ${stackTrace}");
-                              Fluttertoast.showToast(
-                                  msg: loc.vgEventDeletionFailed);
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColor.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                AppSize.kl,
+                                ),
+                                child: Text(
+                                  loc.vgDeleteEvent,
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColor.white,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          child: Text(
-                            loc.vgDeleteEvent,
-                            style: applyRobotoFont(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColor.white,
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ],
