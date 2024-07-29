@@ -14,6 +14,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_name_avatar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,6 +28,7 @@ class VisionGuardianPatientList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var isRegister = useState<bool>(false);
     ScrollController scrollController =
         ref.watch(addPatientEventProvider).patientListScrollController;
 
@@ -37,14 +39,18 @@ class VisionGuardianPatientList extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const VisionGuardianEventPatientSearch(),
+           VisionGuardianEventPatientSearch(
+            onSearchFieldFilled: (isFilled) {
+              isRegister.value = isFilled;
+            },
+          ),
           const SizedBox(
             height: AppSize.ks,
           ),
           ref.watch(addPatientEventProvider).isLoading
               ? const Center(child: CircularProgressIndicator.adaptive())
               : const SizedBox(),
-          data.isEmpty
+          isRegister.value && data.isEmpty
               ? SingleChildScrollView(
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.6,

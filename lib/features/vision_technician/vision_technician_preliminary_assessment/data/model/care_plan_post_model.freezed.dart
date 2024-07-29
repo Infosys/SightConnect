@@ -723,7 +723,7 @@ mixin _$ConditionModel {
   @TimestampConverter()
   DateTime? get recordedDate => throw _privateConstructorUsedError;
   BodySite? get bodySite => throw _privateConstructorUsedError;
-  Code? get code => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -742,7 +742,7 @@ abstract class $ConditionModelCopyWith<$Res> {
       {int? id,
       @TimestampConverter() DateTime? recordedDate,
       BodySite? bodySite,
-      Code? code,
+      String? code,
       String? note});
 }
 
@@ -781,7 +781,7 @@ class _$ConditionModelCopyWithImpl<$Res, $Val extends ConditionModel>
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as Code?,
+              as String?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -802,7 +802,7 @@ abstract class _$$ConditionModelImplCopyWith<$Res>
       {int? id,
       @TimestampConverter() DateTime? recordedDate,
       BodySite? bodySite,
-      Code? code,
+      String? code,
       String? note});
 }
 
@@ -839,7 +839,7 @@ class __$$ConditionModelImplCopyWithImpl<$Res>
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as Code?,
+              as String?,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -869,7 +869,7 @@ class _$ConditionModelImpl implements _ConditionModel {
   @override
   final BodySite? bodySite;
   @override
-  final Code? code;
+  final String? code;
   @override
   final String? note;
 
@@ -917,7 +917,7 @@ abstract class _ConditionModel implements ConditionModel {
       {final int? id,
       @TimestampConverter() final DateTime? recordedDate,
       final BodySite? bodySite,
-      final Code? code,
+      final String? code,
       final String? note}) = _$ConditionModelImpl;
 
   factory _ConditionModel.fromJson(Map<String, dynamic> json) =
@@ -931,7 +931,7 @@ abstract class _ConditionModel implements ConditionModel {
   @override
   BodySite? get bodySite;
   @override
-  Code? get code;
+  String? get code;
   @override
   String? get note;
   @override

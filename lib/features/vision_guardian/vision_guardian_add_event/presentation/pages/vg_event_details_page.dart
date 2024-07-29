@@ -48,18 +48,19 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const VisionGuardianSearchPatient(
-                              search: "search",
-                            )),
+                      builder: (context) => const VisionGuardianSearchPatient(
+                        search: "search",
+                      ),
+                    ),
                   );
                 } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            const VisionGuardianSearchTeammate(
-                              search: "search",
-                            )),
+                      builder: (context) => const VisionGuardianSearchTeammate(
+                        search: "search",
+                      ),
+                    ),
                   );
                 }
               },
@@ -153,16 +154,26 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColor.white,
-                    child: ClipOval(
-                      child: Image.network(
-                        _getImageUrl(eventDetails.images![0]),
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.fill,
-                      ),
-                    )),
+                  radius: 30,
+                  backgroundColor: AppColor.white,
+                  child: (eventDetails.images != null &&
+                          eventDetails.images!.isNotEmpty)
+                      ? ClipOval(
+                          child: Image.network(
+                            _getImageUrl(eventDetails.images![0]),
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.fill,
+                          ),
+                        )
+                      : Center(
+                          child: Text(
+                            "NO IMAGE",
+                            style: applyRobotoFont(
+                                color: AppColor.black, fontSize: 12),
+                          ),
+                        ),
+                ),
                 const SizedBox(height: AppSize.km),
                 Text(
                   " ${eventDetails.title}",

@@ -12,6 +12,8 @@ extension ThemeExtension on BuildContext {
 extension DateExtension on DateTime? {
   String get formateDate =>
       this == null ? "" : DateFormat('dd/MM/yyyy').format(this!);
+  String get formateDate2 =>
+      this == null ? "" : DateFormat('dd MMM yyyy').format(this!);
 
   String get formateTime =>
       this == null ? "" : DateFormat('hh:mm a').format(this!);

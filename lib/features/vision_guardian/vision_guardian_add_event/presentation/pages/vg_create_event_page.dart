@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_add_event_details_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
@@ -56,57 +57,60 @@ class VisionGuardianEventPage extends HookConsumerWidget {
           ),
         ),
       ),
-      floatingActionButton: InkWell(
-        onTap: () {
-          ref.read(addEventDetailsProvider).setIsLoading();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const VGAddEventDetailsPage(),
-            ),
-          );
-        },
-        child: Container(
-          width: AppSize.width(context) * 0.35,
-          height: AppSize.height(context) * 0.06,
-          padding: const EdgeInsets.only(bottom: AppSize.ks - 1),
-          margin: const EdgeInsets.only(bottom: AppSize.kl),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: AppColor.yellow,
-            boxShadow: const <BoxShadow>[
-              BoxShadow(
-                color: AppColor.grey,
-                blurRadius: 8,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Center(
-            child: RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '+ ',
-                    style: applyRobotoFont(
-                        fontSize: 24,
-                        color: AppColor.black,
-                        fontWeight: FontWeight.w400),
+      floatingActionButton: PersistentAuthStateService.authState.activeRole ==
+              "ROLE_VISION_GUARDIAN"
+          ? InkWell(
+              onTap: () {
+                ref.read(addEventDetailsProvider).setIsLoading();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VGAddEventDetailsPage(),
                   ),
-                  TextSpan(
-                    text: loc.vgAddEvent,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.black,
+                );
+              },
+              child: Container(
+                width: AppSize.width(context) * 0.35,
+                height: AppSize.height(context) * 0.06,
+                padding: const EdgeInsets.only(bottom: AppSize.ks - 1),
+                margin: const EdgeInsets.only(bottom: AppSize.kl),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColor.yellow,
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                      color: AppColor.grey,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '+ ',
+                          style: applyRobotoFont(
+                              fontSize: 24,
+                              color: AppColor.black,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        TextSpan(
+                          text: loc.vgAddEvent,
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColor.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
+            )
+          : null,
       body: SingleChildScrollView(
         controller: ref.watch(addEventDetailsProvider).eventListController,
         child: Consumer(

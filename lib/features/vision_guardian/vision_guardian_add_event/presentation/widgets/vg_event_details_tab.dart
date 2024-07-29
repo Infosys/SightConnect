@@ -48,12 +48,16 @@ class EventDetailsTab extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: AppSize.height(context) * 0.23,
-              decoration: eventDetails.images != null
+              height: AppSize.height(context) * 0.3,
+              decoration: (eventDetails.images != null &&
+                      eventDetails.images!.isNotEmpty)
                   ? BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              _getImageUrl(eventDetails.images![0])),
+                            _getImageUrl(
+                              eventDetails.images![0],
+                            ),
+                          ),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(AppSize.km),
                     )
@@ -180,14 +184,13 @@ class EventDetailsTab extends HookConsumerWidget {
                 ],
               ),
               child: const ExpansionTile(
-                  childrenPadding: EdgeInsets.symmetric(
-                    vertical: AppSize.ks,
-                  ),
-                  title: Text("Add Members"),
-                  visualDensity: VisualDensity.compact,
-                  children: [
-                    EventTeammatesTab(),
-                  ]),
+                // childrenPadding: EdgeInsets.all(16),
+                title: Text("Add Members"),
+                visualDensity: VisualDensity.compact,
+                children: [
+                  EventTeammatesTab(),
+                ],
+              ),
             ),
 
             const SizedBox(
@@ -598,13 +601,13 @@ Widget locationDetails(
                   fontWeight: FontWeight.w500,
                 )),
             const Spacer(),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                loc.vgViewOnMap,
-                style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
-              ),
-            )
+            // InkWell(
+            //   onTap: () {},
+            //   child: Text(
+            //     loc.vgViewOnMap,
+            //     style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
+            //   ),
+            // )
           ]),
           const SizedBox(
             height: AppSize.km,
@@ -758,15 +761,15 @@ Widget aboutDetails(String description, BuildContext context) {
           const SizedBox(
             height: AppSize.ks,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              InkWell(
-                child: Text(
-                  loc.vgViewAll,
-                  style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
-                ),
-              )
+              // InkWell(
+              //   child: Text(
+              //     loc.vgViewAll,
+              //     style: applyRobotoFont(color: AppColor.primary, fontSize: 14),
+              //   ),
+              // )
             ],
           ),
         ],

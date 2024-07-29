@@ -48,7 +48,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
             children: [
               Container(
                 height: Responsive.isMobile(context)
-                    ? AppSize.height(context) * 0.15
+                    ? AppSize.height(context) * 0.1
                     : AppSize.height(context) * 0.3,
                 decoration: const BoxDecoration(
                   color: AppColor.primary,
@@ -60,8 +60,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 child: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppSize.km, top: AppSize.kl),
+                      padding: const EdgeInsets.all(16),
                       child: Text(
                         "${loc.vgWelcome}  ${name}",
                         style: applyFiraSansFont(
@@ -91,7 +90,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
                   ],
                 ),
               ),
-              SizedBox(height: AppSize.height(context) * 0.06),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Column(

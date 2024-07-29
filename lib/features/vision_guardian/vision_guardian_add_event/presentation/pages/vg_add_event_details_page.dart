@@ -38,25 +38,29 @@ class _VGAddEventDetailsPageState extends ConsumerState<VGAddEventDetailsPage>
 
   void getPinode() async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final locationData = await LocationService.getLocationWithPermissions();
-      if (locationData != null) {
-        List<String> addressData =
-            await GeocodingService.getPincodeFromLocation(
-                requiresAddress: true);
-        pincode = addressData[0];
-        address = addressData[1];
-        logger.f("Pincode : $pincode");
-      }
-      var data = ref.read(addEventDetailsProvider);
-      if (pincode != null && pincode!.isNotEmpty) {
-        if (data.pincode.text.isEmpty) {
-          data.pincode.text = pincode!;
+      try {
+        final locationData = await LocationService.getLocationWithPermissions();
+        if (locationData != null) {
+          List<String> addressData =
+              await GeocodingService.getPincodeFromLocation(
+                  requiresAddress: true);
+          pincode = addressData[0];
+          address = addressData[1];
+          logger.f("Pincode : $pincode");
         }
-      }
-      if (address != null && address!.isNotEmpty) {
-        if (data.venueName.text.isEmpty) {
-          data.city.text = address!;
+        var data = ref.read(addEventDetailsProvider);
+        if (pincode != null && pincode!.isNotEmpty) {
+          if (data.pincode.text.isEmpty) {
+            data.pincode.text = pincode!;
+          }
         }
+        if (address != null && address!.isNotEmpty) {
+          if (data.venueName.text.isEmpty) {
+            data.city.text = address!;
+          }
+        }
+      } on Exception catch (e) {
+        logger.f("Error in getPinode : $e");
       }
     });
   }
