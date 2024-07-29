@@ -59,7 +59,9 @@ class _PageWidgetState extends State<PageWidget> {
     }
 
     return fields.map((field) {
-      return AppResponsiveWidget(widget: getField(field, key));
+      return AppResponsiveWidget(
+        widget: getField(field, key),
+      );
     }).toList();
   }
 }

@@ -248,7 +248,7 @@
                                                         },
                                                         {
                                                             "type": "text",
-                                                            "name": "friendPhone",
+                                                            "name": "friendEmail",
                                                             "title": "Friend's Email",
                                                             "description": "descrion",
                                                             "isRequired": true,

@@ -1,5 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
+import 'package:dynamic_form/pages/form_builder_page.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_conditional_widget.dart';
@@ -28,6 +29,7 @@ Widget getField(
       return FormDropDown(
           field: field,
           onChanged: (value) {
+            globalRebuildNotifier.value = !globalRebuildNotifier.value;
             debugPrint(value);
           });
 

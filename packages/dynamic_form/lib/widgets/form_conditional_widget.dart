@@ -1,4 +1,5 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/pages/form_builder_page.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -19,10 +20,16 @@ class ConditionalWidget extends StatelessWidget {
     final String? dependantField = field?.dependantField;
     String selectedValue =
         formKey.currentState?.fields[dependantField]?.value ?? '';
-    for (final condition in field?.conditions ?? []) {
+    for (final ConditionsEntity condition in field?.conditions ?? []) {
       if (condition.value == selectedValue) {
         for (final subField in condition.fields) {
           widgets.add(getField(subField, formKey));
+        }
+      } else {
+        // remove the fields if the condition is not met
+        for (final subField in condition.fields) {
+          // formKey.currentState?.fields[subField.name]?.reset();
+          formKey.currentState?.fields.remove(subField.name);
         }
       }
     }
@@ -32,8 +39,15 @@ class ConditionalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: buildConditionalFields(),
+    return ValueListenableBuilder(
+      valueListenable: globalRebuildNotifier,
+      builder: (context, value, child) {
+        return Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: buildConditionalFields(),
+        );
+      },
     );
   }
 }

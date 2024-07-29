@@ -5,6 +5,8 @@ import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+final ValueNotifier<bool> globalRebuildNotifier = ValueNotifier<bool>(false);
+
 class FormBuilderPage extends StatelessWidget {
   FormBuilderPage({
     super.key,
