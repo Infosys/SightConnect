@@ -23,8 +23,8 @@ enum Role {
   ROLE_VISION_TECHNICIAN,
   ROLE_OPTOMETRIST,
   ROLE_EYE_BANK,
-  ROLE_ORG_ADMIN
-  ROLE_VOLUNTEER,
+  ROLE_ORG_ADMIN,
+  ROLE_VOLUNTEER
 }
 
 Role? roleMapper(String? role) {
@@ -65,7 +65,7 @@ String roleToString(Role role) {
 
     case Role.ROLE_VOLUNTEER:
       return "ROLE_VOLUNTEER";
-          default:
+    default:
       return "";
   }
 }

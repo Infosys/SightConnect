@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/body_site.dart';
-import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/code.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
@@ -8,6 +7,7 @@ import 'package:eye_care_for_all/features/vision_technician/vision_technician_pr
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../common_features/triage/domain/models/enums/status.dart';
+
 part 'care_plan_post_model.freezed.dart';
 part 'care_plan_post_model.g.dart';
 

@@ -1,5 +1,3 @@
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/features/admin/dashboard/presentation/pages/admin_request_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_color.dart';
@@ -51,7 +49,6 @@ class AdminReturnRequestDataSource extends DataTableSource {
             ),
           ),
         ),
-       
         DataCell(
           onTap: () {},
           Text(
@@ -88,7 +85,7 @@ class AdminReturnRequestDataSource extends DataTableSource {
             ),
           ),
         ),
-         DataCell(
+        DataCell(
           onTap: () {},
           Text(
             "${data[index]["Re-distribution Possible"]}",
@@ -100,7 +97,6 @@ class AdminReturnRequestDataSource extends DataTableSource {
             ),
           ),
         ),
-      
       ],
     );
   }
