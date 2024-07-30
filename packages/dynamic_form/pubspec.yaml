@@ -18,6 +18,8 @@ dependencies:
   intl: ^0.19.0
   json_annotation: ^4.9.0
   logger:
+  file_picker:
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:
