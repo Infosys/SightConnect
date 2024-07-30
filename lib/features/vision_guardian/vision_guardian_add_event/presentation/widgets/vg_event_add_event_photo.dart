@@ -4,12 +4,12 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class VisionGuardianAddEventPhoto extends ConsumerWidget {
   const VisionGuardianAddEventPhoto({super.key});
@@ -50,6 +50,7 @@ class VisionGuardianAddEventPhoto extends ConsumerWidget {
               children: [
                 data.image == null
                     ? Container(
+                        padding: const EdgeInsets.all(8),
                         height: 110,
                         width: 110,
                         decoration: BoxDecoration(
@@ -60,12 +61,21 @@ class VisionGuardianAddEventPhoto extends ConsumerWidget {
                             width: 1,
                           ),
                         ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.add_a_photo_outlined,
-                            color: AppColor.grey,
-                            size: 45,
+                        child: Center(
+                          child: Text(
+                            'Uploaded Image will appear here',
+                            softWrap: true,
+                            style: applyRobotoFont(
+                              color: AppColor.grey,
+                              fontSize: 12,
+                            ),
                           ),
+
+                          //  Icon(
+                          //   Icons.add_a_photo_outlined,
+                          //   color: AppColor.grey,
+                          //   size: 45,
+                          // ),
                         ),
                       )
                     : ClipRRect(

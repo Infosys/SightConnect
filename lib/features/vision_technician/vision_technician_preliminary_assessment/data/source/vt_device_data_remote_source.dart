@@ -19,7 +19,7 @@ var vtDeviceDataProvider = FutureProvider((ref) {
 
     try {
       final response = await dio.get(endpoint);
-      logger.f("device response is : ${response.data}");
+      logger.d("device response is : ${response.data}");
       final deviceList = (response.data as List)
           .map((device) => DeviceModel.fromJson(device))
           .toList();

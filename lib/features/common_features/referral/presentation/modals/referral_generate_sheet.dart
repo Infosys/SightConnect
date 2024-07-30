@@ -39,7 +39,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      'Your Referral Code',
+                      loc.referralGenerateSheetHeader,
                       style: applyFiraSansFont(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                         showReferralCollectSheet(context);
                       },
                       label: Text(
-                        "Have a Code? Tap Here",
+                        loc.referralGenerateSheetTapHereButton,
                         style: applyRobotoFont(
                           fontSize: 12,
                           color: AppColor.white,
@@ -79,13 +79,13 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                           ),
                         );
                       },
-                      child: const Text('My Referrals'),
+                      child: Text(loc.referralGenerateSheetMyReferrals),
                     )
                   ],
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Share your referral code with your friends and family to avail benefits.',
+                  loc.referralGenerateSheetShareCode,
                   style: applyRobotoFont(
                     fontSize: 12,
                   ),
@@ -103,7 +103,7 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
                       subject: context.loc?.emailSubject ?? "",
                     );
                   },
-                  child: const Text('Share'),
+                  child: Text(loc.referralGenerateSheetShareButton),
                 ),
                 const SizedBox(height: 24),
               ],
@@ -117,9 +117,8 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
           child: CircularProgressIndicator(),
         ),
       ),
-      error: (err, _) => const ReferralErrorCard(
-        errorMessage:
-            "Apologies, we're unable to generate a referral code at the moment.",
+      error: (err, _) => ReferralErrorCard(
+        errorMessage: loc.referralGenerateSheetReferralGenerateError,
       ),
     );
   }
@@ -127,13 +126,13 @@ class ReferralCodeBottomSheet extends HookConsumerWidget {
 
 class _RefferalCodeCard extends StatelessWidget {
   const _RefferalCodeCard({
-    super.key,
     required this.code,
   });
   final String? code;
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -163,7 +162,7 @@ class _RefferalCodeCard extends StatelessWidget {
               );
             },
             child: Text(
-              'COPY',
+              loc.referralGenerateSheetCopy,
               style: applyRobotoFont(
                 fontSize: 16,
                 color: AppColor.blue,

@@ -203,10 +203,10 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
 
   void _moveToNextLevel() {
     if (currentEye == Eye.left) {
-      logger.f(
+      logger.d(
           " move to next level : currentMaxLevelLeftEye: $_currentMaxLevelLeftEye");
       _currentMaxLevelLeftEye = _currentMaxLevelLeftEye! + 1;
-      logger.f(
+      logger.d(
           "after +1 operation : _currentMaxLevelLeftEye: $_currentMaxLevelLeftEye");
     } else if (currentEye == Eye.right) {
       _currentMaxLevelRightEye = _currentMaxLevelRightEye! + 1;
@@ -257,7 +257,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
     _currentLevelUserResponses!.add(userResponse);
     _singleEyeReport![_currentLevel!] = _currentLevelUserResponses!;
     _totalWrongLevelResponse = _totalWrongLevelResponse! + 1;
- _isGameOver = true;
+    _isGameOver = true;
     _eyesFinalReport[_currentEye!] = _singleEyeReport!;
     notifyListeners();
   }
@@ -281,10 +281,10 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   }
 
   double calculateEyeSight(Eye eye) {
-    logger.f(
+    logger.d(
         "maxLevelLeftEye: $_currentMaxLevelLeftEye, maxLevelRightEye: $_currentMaxLevelRightEye, maxLevelBothEye: $_currentMaxLevelBothEye");
     if (eye == Eye.left) {
-      logger.f("inside calculateEyeSight Left");
+      logger.d("inside calculateEyeSight Left");
       var maxLevelNew = math.max(_currentMaxLevelLeftEye! - 1, 0);
       logger.d("maxLevelNew Left: $maxLevelNew");
 
@@ -327,7 +327,7 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
   /// set patient vision acuity tumbling based on the TriageAssessment model
   Future<List<PostTriageObservationsModel>>
       getVisionAcuityTumblingResponse() async {
-    logger.f("inside getVisionAcuityTumblingResponse");
+    logger.d("inside getVisionAcuityTumblingResponse");
     double leftEyeSight = calculateEyeSight(Eye.left);
     double rightEyeSight = calculateEyeSight(Eye.right);
     double bothEyeSight = calculateEyeSight(Eye.both);
@@ -423,21 +423,21 @@ class DistanceVisualAcuityTestProvider with ChangeNotifier {
 
   set setDiagnosticReportId(int value) {
     _diagnosticReportId = value;
-    logger.f("report id set to : $value");
+    logger.d("report id set to : $value");
   }
 
   Future<Either<Failure, TriagePostModel>>
       updateVisualAcuityTumblingResponse() async {
     try {
       final int drId = _ref.read(globalVisualAcuityProvider).dignosticReportID;
-      logger.f("inside updateVisualAcuityTumblingResponse");
+      logger.d("inside updateVisualAcuityTumblingResponse");
       final distanceVisionAcuityTumblingResponse =
           await getVisionAcuityTumblingResponse();
-      logger.f(
+      logger.d(
           "distanceVisionAcuityTumblingResponse: $distanceVisionAcuityTumblingResponse");
       final shortDistanceTumblingResponse =
           await triageLocalSourceProvider.getVisionAcuityTumblingResponse();
-      logger.f("shortDistanceTumblingResponse: $shortDistanceTumblingResponse");
+      logger.d("shortDistanceTumblingResponse: $shortDistanceTumblingResponse");
 
       final visionAcuityTumblingResponse = [
         ...distanceVisionAcuityTumblingResponse,

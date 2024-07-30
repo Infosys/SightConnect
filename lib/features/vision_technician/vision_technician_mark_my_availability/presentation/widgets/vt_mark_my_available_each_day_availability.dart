@@ -27,7 +27,7 @@ class VtMarkMyAvailableEachDayAvailability extends ConsumerWidget {
             Row(
               children: [
                 Checkbox(
-                  fillColor: MaterialStateProperty.all(AppColor.grey),
+                  fillColor: WidgetStateProperty.all(AppColor.grey),
                   value: dayAvailabilityState.checked,
                   onChanged: (value) {
                     // ref

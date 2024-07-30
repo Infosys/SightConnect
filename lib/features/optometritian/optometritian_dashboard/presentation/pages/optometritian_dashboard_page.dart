@@ -146,6 +146,11 @@ class _OptometritianDashboardPageState
                                 InitializationPage.routeName, (route) => false);
                             ref.invalidate(initializationProvider);
                             isLoading.value = false;
+                            // ref
+                            //     .read(dioRefreshTokenProvider)
+                            //     .whenData((value) async {
+
+                            // });
                           },
                           icon: const Icon(Icons.person),
                           color: Colors.white,

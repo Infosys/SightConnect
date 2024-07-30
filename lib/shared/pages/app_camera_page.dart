@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/services/permission_service.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/enums/triage_enums.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
 import 'package:eye_care_for_all/shared/services/eye_detector_service.dart';
-import 'package:eye_care_for_all/shared/widgets/eye_detector_painter.dart';
 import 'package:eye_care_for_all/shared/widgets/app_camera_preview_widget.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/widgets/eye_detector_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -49,7 +50,10 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
     option: FaceMeshDetectorOptions.faceMesh,
   );
   // Set to ResolutionPreset.high. Do NOT set it to ResolutionPreset.max because for some phones does NOT work.
-  final ResolutionPreset _defaultResolution = ResolutionPreset.high;
+  final ResolutionPreset _defaultResolution =
+      PersistentAuthStateService.authState.activeRole == "ROLE_OPTOMETRIST"
+          ? ResolutionPreset.max
+          : ResolutionPreset.veryHigh;
   bool _canProcess = false;
   bool _isBusy = false;
   String _progressMessage = "Loading...";
@@ -141,39 +145,47 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
           : ImageFormatGroup.bgra8888,
     );
 
-    await _controller.initialize().then(
-      (value) {
+    if (PersistentAuthStateService.authState.activeRole == "ROLE_OPTOMETRIST") {
+      await _controller.initialize().then((value) {
         if (!mounted) {
           return;
         }
-        int streamCount = 0;
-        void processCameraImage(CameraImage image) {
-          streamCount++;
-          if (streamCount % 3 == 0) {
-            final CameraDescription camera = _cameras.firstWhere(
-              (element) => element.lensDirection == _cameraLensDirection,
-            );
-            final DeviceOrientation orientation =
-                _controller.value.deviceOrientation;
-
-            final InputImage? inputImage =
-                EyeDetectorService.inputImageFromCameraImage(
-              image: image,
-              camera: camera,
-              deviceOrientation: orientation,
-            );
-            if (inputImage == null) return;
-            _processImage(inputImage);
+      });
+    } else {
+      await _controller.initialize().then(
+        (value) {
+          if (!mounted) {
+            return;
           }
-        }
+          int streamCount = 0;
+          void processCameraImage(CameraImage image) {
+            streamCount++;
+            if (streamCount % 3 == 0) {
+              final CameraDescription camera = _cameras.firstWhere(
+                (element) => element.lensDirection == _cameraLensDirection,
+              );
+              final DeviceOrientation orientation =
+                  _controller.value.deviceOrientation;
 
-        if (Platform.isAndroid) {
-          _controller.startImageStream(processCameraImage);
-        } else {
-          logger.d("AppCameraPage: Start Live Feed Called: IOS");
-        }
-      },
-    );
+              final InputImage? inputImage =
+                  EyeDetectorService.inputImageFromCameraImage(
+                image: image,
+                camera: camera,
+                deviceOrientation: orientation,
+              );
+              if (inputImage == null) return;
+              _processImage(inputImage);
+            }
+          }
+
+          if (Platform.isAndroid) {
+            _controller.startImageStream(processCameraImage);
+          } else {
+            logger.d("AppCameraPage: Start Live Feed Called: IOS");
+          }
+        },
+      );
+    }
     if (mounted) {
       setState(() {});
     }
@@ -377,8 +389,11 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
         controller: _controller,
         customPaint: Platform.isAndroid ? _customPaint : null,
         onCapture: () async {
-          if (Platform.isAndroid && !_isEyeValid) {
-            return;
+          if (PersistentAuthStateService.authState.activeRole !=
+              "ROLE_OPTOMETRIST") {
+            if (Platform.isAndroid && !_isEyeValid) {
+              return;
+            }
           }
           final XFile? image = await _takePicture(context);
           logger.d("_takePicture: $image");
@@ -421,7 +436,7 @@ class _PatientAppCameraPageState extends ConsumerState<AppCameraPage>
 
   Future<XFile?> _takePicture(BuildContext context) async {
     final loc = context.loc!;
-    _addLoading("Hold the camera steady...");
+    _addLoading(loc.appCameraPageTakePictureLoadingOverlayMessage);
 
     try {
       final XFile? image = await _capturePicture(context);

@@ -13,16 +13,14 @@
     }
   },
   "stepNumber": "{current} இன் {total}",
-   "@referralSmsContent": {
+  "@referralSmsContent": {
     "placeholders": {
       "referral": {
         "type": "String"
       }
-     
     }
   },
-  "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
-
+  "referralSmsContent": "ஏய்! நான் என் கண்களைக் கவனித்துக் கொள்ள சைட் கனெக்ட் பயன்பாட்டைப் பயன்படுத்துகிறேன், நீங்களும் பயன்படுத்த வேண்டும்! உங்கள் கண்களை மதிப்பீடு செய்து, சைட் கனெக்ட் பயன்பாட்டின் மூலம் சரியான நேரத்தில் சிகிச்சையைப் பெறுங்கள். இது உங்கள் கைகளில் தடுப்பு கண் பராமரிப்பைக் கொண்டுவரும் ஒரு தனித்துவமான பயன்பாடாகும். நீங்கள் பதிவுபெறும்போது எனது பரிந்துரை குறியீட்டைப் பயன்படுத்தவும். இப்போது அதைப் பெறுங்கள்ஃ https://healthconnecttech.org/install",
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -71,6 +69,22 @@
     }
   },
   "emergencyTollFreeNumberText": "அவசரநிலை ஏற்பட்டால், தயவுசெய்து {tollFreeNumber} ஐ அழைக்கவும்.",
+  "@referralCollectSheetReferredBy": {
+    "placeholders": {
+      "referredBy": {
+        "type": "String"
+      }
+    }
+  },
+  "referralCollectSheetReferredBy": "நீங்கள் {referredBy} ஆல் குறிப்பிடப்பட்டிருக்கிறீர்கள்",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "distance": {
+        "type": "int"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "கேமரா உங்கள் முகத்திலிருந்து {distance} சென்டிமீட்டர் தொலைவில் இருப்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.",
   "questionnaireTitle": "கண் பரிசோதனை கேள்விகள்",
   "questionnaireExitDialog": "இந்த கேள்விகளுக்கு பதில் அளிப்பது உங்கள் கண் பிரச்சினைகளை கண்டறிய உதவும். நீங்கள் உண்மையில் வெளியேற விரும்புகிறீர்களா?",
   "visualAcuityTitle": "பார்வைக் கூர்மை சோதனை",
@@ -336,7 +350,6 @@
   "permissionNotGranted": "அனுமதி வழங்கப்படவில்லை.",
   "serviceNotAvailable": "சேவை இல்லை",
   "vaDistanceToFace": "எதிர்கொள்ளும் தூரம்",
-  "vaDistanceToFaceInstruction": "கேமரா உங்கள் முகத்திலிருந்து 40 சென்டிமீட்டர் தொலைவில் இருப்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.",
   "vaBringFaceInsideBox": "உங்கள் முகத்தை பெட்டிக்குள் கொண்டு வாருங்கள்.",
   "startAssessment": "மதிப்பீட்டைத் தொடங்குங்கள்",
   "optoAddPatientInfo": "நோயாளி தகவலைச் சேர்க்கவும்",
@@ -696,5 +709,73 @@
   "showTriageHowToProceedBottomSheetBody2": "எனக்கு ஏதேனும் சிக்கல் இருக்கிறதா என்று எனக்குத் தெரியவில்லை",
   "showTriageHowToProceedBottomSheetBody3": "எனக்கு கண் பிரச்சினைகள் எதுவும் இல்லை-சரிபார்க்க விரும்புகிறேன்",
   "appDrawerToastMessageText": "மன்னிக்கவும், மொபைல் பயன்பாட்டில் உள்நுழைவு பிழையை நாங்கள் சந்தித்தோம்.",
-  "myConnectionListAddMembers": "உறுப்பினர் சேர்க்கவும்"
+  "myConnectionListAddMembers": "உறுப்பினர் சேர்க்கவும்",
+  "appDrawerReferral": "பரிந்துரை",
+  "patientTenantDisplayPageHeader": "வாடகைதாரர்கள்",
+  "patientTenantDisplayPageBody": "பட்டியலில் இருந்து ஒரு தொலைநோக்கு மையத்தைத் தேர்ந்தெடுக்கவும்",
+  "patientTenantDisplayPageRequestLocationPermissionButton": "இருப்பிட அனுமதி கோருதல்",
+  "referralGenerateSheetHeader": "உங்கள் பரிந்துரைக் குறியீடு",
+  "referralGenerateSheetTapHereButton": "குறியீடு உள்ளதா? இங்கே தட்டவும்",
+  "referralGenerateSheetMyReferrals": "எனது பரிந்துரைகள்",
+  "referralGenerateSheetShareCode": "நன்மைகளைப் பெற உங்கள் பரிந்துரைக் குறியீட்டை உங்கள் நண்பர்கள் மற்றும் குடும்பத்தினருடன் பகிர்ந்து கொள்ளுங்கள்.",
+  "referralGenerateSheetReferralGenerateError": "மன்னிக்கவும், இந்த நேரத்தில் ஒரு பரிந்துரை குறியீட்டை எங்களால் உருவாக்க முடியவில்லை.",
+  "referralGenerateSheetShareButton": "பகிர்ந்து கொள்ளுங்கள்.",
+  "referralGenerateSheetCopy": "நகல்",
+  "referralCollectSheetYourRefferalCode": "உங்கள் பரிந்துரைக் குறியீடு",
+  "referralCollectSheetReferralCodeMessage": "நன்மைகளைப் பெற உங்கள் பரிந்துரைக் குறியீட்டை உங்கள் நண்பர்கள் மற்றும் குடும்பத்தினருடன் பகிர்ந்து கொள்ளுங்கள்.",
+  "referralCollectSheetHeader": "பரிந்துரை சேகரிக்கவும்",
+  "referralCollectSheetBody": "உங்கள் வெகுமதியை சேகரிக்க பரிந்துரை குறியீட்டை உள்ளிடவும்",
+  "referralCollectSheetTextFieldHeader": "பரிந்துரை குறியீடு",
+  "referralCollectSheetTextFieldBody": "பரிந்துரை குறியீட்டை உள்ளிடவும்",
+  "referralCollectSheetSkipButton": "விலகிச் செல்லுங்கள்.",
+  "referralCollectSheetCollectButton": "சேகரிக்கவும்",
+  "referralCollectSheetError": "மன்னிக்கவும், ஏதோ தவறு நடந்தது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.",
+  "referralCollectSheetSuccessToast": "பரிந்துரை குறியீடு வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது",
+  "referralCollectSheetErrorToast": "நீங்கள் உள்ளிட்ட பரிந்துரை குறியீடு செல்லாது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.",
+  "referralStatisticsPageHeader": "உங்கள் பரிந்துரை புள்ளிவிவரங்கள்",
+  "referralStatisticsPageTotalReferred": "குறிப்பிடப்பட்ட மொத்த தொகை",
+  "referralStatisticsPageSucessfulReferred": "வெற்றிகரமான குறிப்பு",
+  "referralStatisticsPageTotalTriage": "மொத்த முத்திரை",
+  "referralStatisticsPageReferFriendHeader": "ஒரு நண்பரை எவ்வாறு குறிப்பிடுவது?",
+  "referralStatisticsPageReferFriendBody1": "உங்கள் பரிந்துரை குறியீட்டை உங்கள் நண்பருடன் பகிர்ந்து கொள்ளுங்கள்.",
+  "referralStatisticsPageReferFriendBody2": "உங்கள் பரிந்துரை குறியீட்டைப் பயன்படுத்தி உங்கள் நண்பர் பதிவு செய்கிறார்.",
+  "referralStatisticsPageReferFriendBody3": "உங்கள் நண்பர் குறைந்தபட்சம் ஒரு முக்கோண சோதனையை முடிக்கிறார்.",
+  "referralStatisticsPageReferFriendButton": "ஒரு நண்பரைப் பார்க்கவும்",
+  "referralStatisticsPageError": "மன்னிக்கவும், இந்த நேரத்தில் உங்கள் பரிந்துரை புள்ளிவிவரங்களை எங்களால் பெற முடியவில்லை.",
+  "referralStatisticsPageRetryButton": "மீண்டும் முயற்சிக்கவும்",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review",
+  "optionCardNeedHelpTextButton": "Need help to understand this ",
+  "triageTextTypeQuestionCounterText": "Optional",
+  "vaTopAppBarNearVisionTest": "Near Vision Test",
+  "vaDemoPageInstruction": "Tap on the E matching the image shown on top",
+  "vaShowInstructionBottomSheetRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetProceedButton": "Proceed",
+  "touchGestureCardRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "touchGestureCardLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "touchGestureCardBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "touchGestureCardICantSeeOutlineButton": "I Can’t see",
+  "distanceVaTopAppBarDistanceVisionTest": "Distance Vision Test",
+  "fakeDataSourceGetCarouselDataDescription": "Early detection can save your eyes",
+  "fakeDataSourceGetCarouselDataTitle": "Doctor says",
+  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
+  "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
+  "topReadingCardFaceNotFoundError": "No Face",
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen",
+  "roleVolunteer": "VOLUNTEER",
+  "patientHomePageVolunteerInviteeCardJoinUsNowButton": "Join Us Now",
+  "patientHomePageVolunteerInviteeCardTitle": "Become a SightConnect Volunteer!",
+  "patientHomePageVolunteerInviteeCardDescription1": "Promote Preventive Eye Care",
+  "patientHomePageVolunteerInviteeCardDescription2": "Engage with Communities",
+  "patientHomePageVolunteerInviteeCardDescription3": "Support Health Initiatives"
 }

@@ -56,6 +56,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
             await PersistentAuthStateService.authState.setActiveRole(role);
 
             // Update the headers with the selected role
+
             ref.read(dioProvider.notifier).updateHeaders(activeRole: role);
 
             logger.d("Active Role: $role");
@@ -206,10 +207,22 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
   Future<void> _registerUser(NavigatorState navigator, Role role) async {
     String? pinCode;
 
-    await LocationService.getLocationWithPermissions();
-
-    pinCode = await GeocodingService.getPincodeFromLocation();
-    logger.f("pinCode is  $pinCode");
+    try {
+      final locationData = await LocationService.getLocationWithPermissions();
+      logger.d("locationData: $locationData");
+      pinCode = "";
+      if (locationData == null) {
+        pinCode = "";
+      } else {
+        List<String> addressData =
+            await GeocodingService.getPincodeFromLocation();
+        pinCode = addressData[0];
+        logger.f("pinCode is  $pinCode");
+      }
+    } on Exception catch (e) {
+      logger.e("Error in getting location data: $e");
+      pinCode = "";
+    }
 
     final status = await navigator.push<bool?>(
       MaterialPageRoute(
@@ -284,6 +297,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_TECHNICIAN: const VisionTechnicianDashboardPage(),
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
+      Role.ROLE_VOLUNTEER: const VisionGuardianDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {

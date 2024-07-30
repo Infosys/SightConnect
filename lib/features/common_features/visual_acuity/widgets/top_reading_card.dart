@@ -31,7 +31,7 @@ class TopReadingCard extends StatelessWidget {
     // var model = ref.watch(distanceTumblingTestProvider);
     // var optoTypeData = ref.watch(globalVisualAcuityProvider);
     // var currentLevel = model.level;
-    // final loc = context.loc!;
+    final loc = context.loc!;
     // final physicalities = Millimeters.of(context);
     // final mm = physicalities.mm;
     // var scaleFactor = IOSDeviceInfoService.getOptoTypeScaleFactor(context);
@@ -130,7 +130,7 @@ class TopReadingCard extends StatelessWidget {
                               children: [
                                 !isShortDistance
                                     ? Text(
-                                        "Position yourself\n2m from the screen",
+                                        loc.topReadingCardLongDistanceTestMessage,
                                         style: applyRobotoFont(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -140,7 +140,7 @@ class TopReadingCard extends StatelessWidget {
                                     : Text(
                                         distance != null
                                             ? '$distance cm'
-                                            : 'No Face',
+                                            : loc.topReadingCardFaceNotFoundError,
                                         style: applyRobotoFont(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,

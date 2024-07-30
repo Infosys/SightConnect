@@ -1,35 +1,44 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:location/location.dart';
 
 class LocationService {
   Location location = Location();
 
   static Future<LocationData?> getLocationWithPermissions() async {
-    Location location = Location();
-    bool serviceEnabled;
-    PermissionStatus permissionGranted;
-    LocationData locationData;
+    try {
+      Location location = Location();
+      bool serviceEnabled;
+      PermissionStatus permissionGranted;
+      LocationData locationData;
 
-    // Check if location services are enabled
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
+      // Check if location services are enabled
+      serviceEnabled = await location.serviceEnabled();
       if (!serviceEnabled) {
-        return null; // Or handle the case where service cannot be enabled
+        serviceEnabled = await location.requestService();
+        if (!serviceEnabled) {
+          return null; // Or handle the case where service cannot be enabled
+        }
       }
-    }
 
-    // Request location permission
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return null; // Or handle the case where permission is not granted
+      // Request location permission
+      permissionGranted = await location.hasPermission();
+      if (permissionGranted == PermissionStatus.denied) {
+        permissionGranted = await location.requestPermission();
+        if (permissionGranted != PermissionStatus.granted) {
+          return null; // Or handle the case where permission is not granted
+        }
       }
-    }
 
-    // Get the location data
-    locationData = await location.getLocation();
-    return locationData;
+      // Get the location data
+      locationData = await location.getLocation();
+      return locationData;
+    } on Exception catch (e) {
+      logger.f("Error in getLocationWithPermissions : $e");
+      rethrow;
+    } catch (e) {
+      logger.f("Error in getLocationWithPermissions : $e");
+      rethrow;
+    }
   }
 
   static Future<LocationData> getCoordinates() async {

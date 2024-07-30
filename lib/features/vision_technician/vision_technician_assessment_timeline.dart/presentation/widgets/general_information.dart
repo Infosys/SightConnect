@@ -120,7 +120,6 @@ String _formateAddress(
 
 class _InfoChip extends StatelessWidget {
   const _InfoChip({
-    super.key,
     required this.title,
     required this.value,
   });

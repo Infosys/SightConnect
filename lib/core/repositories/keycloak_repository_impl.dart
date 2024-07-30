@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository.dart';
 import 'package:eye_care_for_all/core/services/dio_service.dart';
@@ -60,6 +62,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
     required String refreshToken,
   }) async {
     const url = "/auth/realms/care/protocol/openid-connect/token";
+    logger.d("url : $url");
     try {
       final keycloakResponseMap = await _dio.post<Map<String, dynamic>>(
         url,
@@ -72,6 +75,7 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
           'refresh_token': refreshToken,
         },
       );
+      log("newAccessToken from impl: ${keycloakResponseMap.data!['access_token']}");
       return KeycloakResponse.fromJson(keycloakResponseMap.data!);
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
@@ -85,7 +89,6 @@ class KeycloakRepositoryImpl implements KeycloakRepository {
   @override
   Future<int> sendOtp({required String mobile}) async {
     try {
-     
       final response = await _dio.get<Map<String, dynamic>>(
         "/auth/realms/care/sms/authentication-code",
         queryParameters: {

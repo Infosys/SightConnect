@@ -58,7 +58,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
             height: 28,
           ),
           Text(
-            'Instructions',
+            loc.instructions,
             style: applyFiraSansFont(
               fontSize: 24,
               fontWeight: FontWeight.w500,
@@ -108,7 +108,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                           children: [
                             Center(
                               child: Text(
-                                'Tap on the E matching the image shown on top.',
+                                loc.vaDemoPageInstruction,
                                 style: applyRobotoFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -133,7 +133,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                               VisualAcuityFaceDistancePage(
                                             minDistance: 35,
                                             maxDistance: 45,
-                                            title: "Distance to Face",
+                                            title: loc.vaDistanceToFace,
                                             onProceed: () {
                                               Navigator.of(context)
                                                   .pushReplacement(
@@ -170,7 +170,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                           VisualAcuityFaceDistancePage(
                                         minDistance: 35,
                                         maxDistance: 45,
-                                        title: "Distance to Face",
+                                        title: loc.vaDistanceToFace,
                                         onProceed: () {
                                           Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(

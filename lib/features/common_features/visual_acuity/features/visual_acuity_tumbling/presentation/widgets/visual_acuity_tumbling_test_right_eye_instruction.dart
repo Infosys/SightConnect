@@ -14,12 +14,13 @@ class VisualAcuityTumblingRightEyeInstruction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc!;
     return TraceableWidget(
       actionName: 'VisualAcuity Tumbling LeftEye Instruction Page',
       child: Scaffold(
-        appBar: const CustomAppbar(
+        appBar: CustomAppbar(
           centerTitle: true,
-          title: Text("Near Vision Test"),
+          title: Text(loc.vaTopAppBarNearVisionTest),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -27,7 +28,7 @@ class VisualAcuityTumblingRightEyeInstruction extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                context.loc!.visualAcuityRightEyeHeader,
+                loc.visualAcuityRightEyeHeader,
                 style: applyFiraSansFont(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -76,7 +77,7 @@ class VisualAcuityTumblingRightEyeInstruction extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Text(context.loc!.continueButton),
+                      child: Text(loc.continueButton),
                     ),
                   ),
                 ],

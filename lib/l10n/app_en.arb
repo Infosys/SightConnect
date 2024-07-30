@@ -13,17 +13,14 @@
     }
   },
   "stepNumber": "{current} of {total}",
-
-   "@referralSmsContent": {
+  "@referralSmsContent": {
     "placeholders": {
       "referral": {
         "type": "String"
       }
-     
     }
   },
   "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
-
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -72,6 +69,22 @@
     }
   },
   "emergencyTollFreeNumberText": "In case of emergency, please call {tollFreeNumber}",
+  "@referralCollectSheetReferredBy": {
+    "placeholders": {
+      "referredBy": {
+        "type": "String"
+      }
+    }
+  },
+  "referralCollectSheetReferredBy": "You have been referred by {referredBy}",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "distance": {
+        "type": "int"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "Please ensure that the camera is {distance} cm away from your face.",
   "questionnaireTitle": "Eye Assessment Questions",
   "questionnaireExitDialog": "Answering these questions will help in identifying your eye problems. Do you really wish to exit?",
   "visualAcuityTitle": "Visual Acuity Test",
@@ -336,8 +349,7 @@
   "vaSwipeGestureError": "Invalid swipe gesture. Please try again.",
   "permissionNotGranted": "Permission not granted",
   "serviceNotAvailable": "Service not available",
-  "vaDistanceToFace": "Distance to face",
-  "vaDistanceToFaceInstruction": "Please ensure that the camera is 40cm away from your face",
+  "vaDistanceToFace": "Distance to Face",
   "vaBringFaceInsideBox": "Bring your face inside the box",
   "startAssessment": "Start Assessment",
   "optoAddPatientInfo": "Add Patient Information",
@@ -697,5 +709,73 @@
   "showTriageHowToProceedBottomSheetBody2": "I am not sure if I have a problem",
   "showTriageHowToProceedBottomSheetBody3": "I have no eye issues – just want to check",
   "appDrawerToastMessageText": "Apologies, we encountered a logout error in the mobile app.",
-  "myConnectionListAddMembers": "Add Member"
+  "myConnectionListAddMembers": "Add Member",
+  "appDrawerReferral": "Referral",
+  "patientTenantDisplayPageHeader": "Tenants",
+  "patientTenantDisplayPageBody": "Select a Vision Center from the list",
+  "patientTenantDisplayPageRequestLocationPermissionButton": "Request Location Permission",
+  "referralGenerateSheetHeader": "Your Referral Code",
+  "referralGenerateSheetTapHereButton": "Have a Code? Tap Here",
+  "referralGenerateSheetMyReferrals": "My Referrals",
+  "referralGenerateSheetShareCode": "Share your referral code with your friends and family to avail benefits.",
+  "referralGenerateSheetReferralGenerateError": "Apologies, we're unable to generate a referral code at the moment.",
+  "referralGenerateSheetShareButton": "Share",
+  "referralGenerateSheetCopy": "COPY",
+  "referralCollectSheetYourRefferalCode": "Your Referral Code",
+  "referralCollectSheetReferralCodeMessage": "Share your referral code with your friends and family to avail benefits.",
+  "referralCollectSheetHeader": "Collect Referral",
+  "referralCollectSheetBody": "Enter referral code to collect your reward",
+  "referralCollectSheetTextFieldHeader": "Referral Code",
+  "referralCollectSheetTextFieldBody": "Enter referral code",
+  "referralCollectSheetSkipButton": "Skip",
+  "referralCollectSheetCollectButton": "Collect",
+  "referralCollectSheetError": "Sorry, something went wrong. Please try again.",
+  "referralCollectSheetSuccessToast": "Referral code submitted successfully",
+  "referralCollectSheetErrorToast": "The referral code you entered is invalid. Please try again.",
+  "referralStatisticsPageHeader": "Your Referral Statistics",
+  "referralStatisticsPageTotalReferred": "Total Referred",
+  "referralStatisticsPageSucessfulReferred": "Successful Referred",
+  "referralStatisticsPageTotalTriage": "Total Triage",
+  "referralStatisticsPageReferFriendHeader": "How to refer a friend?",
+  "referralStatisticsPageReferFriendBody1": "Share your referral code with your friend.",
+  "referralStatisticsPageReferFriendBody2": "Your friend register using your referral code.",
+  "referralStatisticsPageReferFriendBody3": "Your friend completes at least one triage test.",
+  "referralStatisticsPageReferFriendButton": "Refer a Friend",
+  "referralStatisticsPageError": "Apologies, we're unable to fetch your referral statistics at the moment.",
+  "referralStatisticsPageRetryButton": "Retry",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review",
+  "optionCardNeedHelpTextButton": "Need help to understand this ",
+  "triageTextTypeQuestionCounterText": "Optional",
+  "vaTopAppBarNearVisionTest": "Near Vision Test",
+  "vaDemoPageInstruction": "Tap on the E matching the image shown on top",
+  "vaShowInstructionBottomSheetRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetProceedButton": "Proceed",
+  "touchGestureCardRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "touchGestureCardLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "touchGestureCardBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "touchGestureCardICantSeeOutlineButton": "I Can’t see",
+  "distanceVaTopAppBarDistanceVisionTest": "Distance Vision Test",
+  "fakeDataSourceGetCarouselDataDescription": "Early detection can save your eyes",
+  "fakeDataSourceGetCarouselDataTitle": "Doctor says",
+  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
+  "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
+  "topReadingCardFaceNotFoundError": "No Face",
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen",
+  "roleVolunteer": "VOLUNTEER",
+  "patientHomePageVolunteerInviteeCardJoinUsNowButton": "Join Us Now",
+  "patientHomePageVolunteerInviteeCardTitle": "Become a SightConnect Volunteer!",
+  "patientHomePageVolunteerInviteeCardDescription1": "Promote Preventive Eye Care",
+  "patientHomePageVolunteerInviteeCardDescription2": "Engage with Communities",
+  "patientHomePageVolunteerInviteeCardDescription3": "Support Health Initiatives"
 }

@@ -77,7 +77,7 @@ class Bottom extends ConsumerWidget {
               child: TextButton(
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(AppColor.primary),
+                      WidgetStateProperty.all<Color>(AppColor.primary),
                 ),
                 onPressed: () {
                   Navigator.of(context).push(

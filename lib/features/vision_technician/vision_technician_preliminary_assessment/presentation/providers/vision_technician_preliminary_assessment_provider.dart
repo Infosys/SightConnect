@@ -119,7 +119,7 @@ class VtTriageProvider extends ChangeNotifier {
     bool isTest = _preliminaryAssessmentHelperProvider.isTest;
 
     if (!triagePosted) {
-      logger.f("inside Triage Posted, triagePostedValue = $triagePosted");
+      logger.d("inside Triage Posted, triagePostedValue = $triagePosted");
       List<PostTriageImagingSelectionModel> imageSelection =
           await _visionTechnicianTriageProvider.getTriageEyeScanResponse();
       logger.d("image selection called");
@@ -178,7 +178,7 @@ class VtTriageProvider extends ChangeNotifier {
           questionResponse: questionResponse,
         );
         logger.d(triagePostModel.toJson());
-        logger.f(
+        logger.d(
             " ${DateTime.now().subtract(const Duration(seconds: 2)).toString()} ------ ${DateTime.now().subtract(const Duration(seconds: 2)).toUtc()}");
         Either<Failure, TriagePostModel> response =
             await _saveTriageUseCase.call(
@@ -193,7 +193,7 @@ class VtTriageProvider extends ChangeNotifier {
         });
         _preliminaryAssessmentHelperProvider.setTriageResponse(triageResponse);
         _preliminaryAssessmentHelperProvider.setTriagePosted(true);
-        logger.f("triage posted");
+        logger.d("triage posted");
       } on Exception catch (e) {
         _preliminaryAssessmentHelperProvider.setLoading(false);
 
@@ -230,7 +230,7 @@ class VtTriageProvider extends ChangeNotifier {
         _preliminaryAssessmentHelperProvider.setCarePlanResponse(result);
       });
       _preliminaryAssessmentHelperProvider.setCarePlanPosted(true);
-      logger.f("care plan posted");
+      logger.d("care plan posted");
     } on Exception catch (e) {
       _preliminaryAssessmentHelperProvider.setLoading(false);
 
@@ -268,7 +268,7 @@ class VtTriageProvider extends ChangeNotifier {
       String? rightEyeValue;
       String? bothEyeValue;
       for (var observation in observations) {
-        logger.f("observation is : $observation");
+        logger.d("observation is : $observation");
         if (observation.identifier == leftEyeIndentifier) {
           leftEyeValue = observation.value;
         }
@@ -280,13 +280,13 @@ class VtTriageProvider extends ChangeNotifier {
         }
       }
 
-      logger.f(
+      logger.d(
           "left eye value: $leftEyeValue, right eye value: $rightEyeValue, both eye value: $bothEyeValue, left eye identifier: $leftEyeIndentifier, right eye identifier: $rightEyeIndentifier, both eye identifier: $bothEyeIndentifier");
 
       DeviceModel? selectedEquipment =
           _preliminaryAssessmentHelperProvider.selectedEquipment;
 
-      logger.f("selected equipment: $selectedEquipment");
+      logger.d("selected equipment: $selectedEquipment");
 
       List<EquipmentObservationValue> equipmentObservationValues = [
         EquipmentObservationValue(
@@ -318,7 +318,7 @@ class VtTriageProvider extends ChangeNotifier {
         ),
       ];
 
-      logger.f("equipment observation values: $equipmentObservationValues");
+      logger.d("equipment observation values: $equipmentObservationValues");
 
       PostEquipmentObservationDto postEquipmentObservationDto =
           PostEquipmentObservationDto(
@@ -330,7 +330,7 @@ class VtTriageProvider extends ChangeNotifier {
       await _postEquipmentDetailsSource
           .postEquipmentDetails(postEquipmentObservationDto);
 
-      logger.f("equipment observation values posted");
+      logger.d("equipment observation values posted");
     } on Error catch (e) {
       Fluttertoast.showToast(msg: "Error saving equipment details: $e");
       logger.e("Error saving equipment details: $e");

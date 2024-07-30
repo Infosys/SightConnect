@@ -13,16 +13,14 @@
     }
   },
   "stepNumber": "{current} / {total}",
-   "@referralSmsContent": {
+  "@referralSmsContent": {
     "placeholders": {
       "referral": {
         "type": "String"
       }
-     
     }
   },
-  "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
-
+  "referralSmsContent": "ഹേയ്! ഞാൻ എൻ്റെ കണ്ണുകളെ പരിപാലിക്കാൻ സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിക്കുന്നു, നിങ്ങളും ഉപയോഗിക്കണം! നിങ്ങളുടെ കണ്ണുകൾ വിലയിരുത്തുകയും സൈറ്റ്കണക്ട് ആപ്പ് ഉപയോഗിച്ച് സമയബന്ധിതമായ ചികിത്സ നേടുകയും ചെയ്യുക. പ്രതിരോധാത്മകമായ ഐക്കെയർ നിങ്ങളുടെ കൈകളിലേക്ക് കൊണ്ടുവരുന്ന ഒരു സവിശേഷ ആപ്ലിക്കേഷനാണിത്. നിങ്ങൾ സൈൻ അപ്പ് ചെയ്യുമ്പോൾ എൻ്റെ റഫറൽ കോഡ് (റഫറൽ) ഉപയോഗിക്കുക. ഇപ്പോൾ അത് നേടുകഃ https://healthconnecttech.org/install",
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -71,6 +69,22 @@
     }
   },
   "emergencyTollFreeNumberText": "അടിയന്തിര സാഹചര്യങ്ങളിൽ, ദയവായി {tollFreeNumber} എന്ന നമ്പറിൽ വിളിക്കുക.",
+  "@referralCollectSheetReferredBy": {
+    "placeholders": {
+      "referredBy": {
+        "type": "String"
+      }
+    }
+  },
+  "referralCollectSheetReferredBy": "{referredBy} ആണ് നിങ്ങളെ റഫർ ചെയ്തിരിക്കുന്നത്",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "distance": {
+        "type": "int"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "ക്യാമറ നിങ്ങളുടെ മുഖത്ത് നിന്ന് {distance} സെന്റിമീറ്റർ അകലെയാണെന്ന് ഉറപ്പാക്കുക.",
   "questionnaireTitle": "നേത്ര അസ്സെസ്സ്മെന്റ് ചോദ്യങ്ങൾ",
   "questionnaireExitDialog": "ഈ ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകുന്നത് നിങ്ങളുടെ കണ്ണിന്റെ പ്രശ്നങ്ങൾ തിരിച്ചറിയാൻ സഹായിക്കും. അസ്സെസ്സ്മെന്റ് ഉപേക്ഷിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെന്ന് ഉറപ്പാണോ?",
   "visualAcuityTitle": "\r\n\r\nകാഴ്ച പ്രവർത്തന പരിശോധന",
@@ -336,7 +350,6 @@
   "permissionNotGranted": "അനുമതി നൽകിയിട്ടില്ല.",
   "serviceNotAvailable": "സേവനം ലഭ്യമല്ല",
   "vaDistanceToFace": "അഭിമുഖീകരിക്കുന്ന ദൂരം",
-  "vaDistanceToFaceInstruction": "ക്യാമറ നിങ്ങളുടെ മുഖത്ത് നിന്ന് 40 സെന്റിമീറ്റർ അകലെയാണെന്ന് ഉറപ്പാക്കുക.",
   "vaBringFaceInsideBox": "നിങ്ങളുടെ മുഖം പെട്ടിക്കുള്ളിൽ കൊണ്ടുവരിക.",
   "startAssessment": "വിലയിരുത്തൽ ആരംഭിക്കുക",
   "optoAddPatientInfo": "രോഗിയുടെ വിവരങ്ങൾ ചേർക്കുക",
@@ -696,5 +709,73 @@
   "showTriageHowToProceedBottomSheetBody2": "എനിക്ക് എന്തെങ്കിലും പ്രശ്നമുണ്ടോ എന്ന് എനിക്ക് ഉറപ്പില്ല",
   "showTriageHowToProceedBottomSheetBody3": "എനിക്ക് കണ്ണിന് പ്രശ്നങ്ങളൊന്നുമില്ല-പരിശോധിക്കാൻ മാത്രമാണ് ഞാൻ ആഗ്രഹിക്കുന്നത്.",
   "appDrawerToastMessageText": "ക്ഷമിക്കണം, മൊബൈൽ ആപ്ലിക്കേഷനിൽ ഒരു ലോഗൌട്ട് പിശക് ഞങ്ങൾ നേരിട്ടു.",
-  "myConnectionListAddMembers": "അംഗങ്ങളെ ചേർക്കുക"
+  "myConnectionListAddMembers": "അംഗങ്ങളെ ചേർക്കുക",
+  "appDrawerReferral": "റഫറൽ",
+  "patientTenantDisplayPageHeader": "വാടകക്കാർ",
+  "patientTenantDisplayPageBody": "പട്ടികയിൽ നിന്ന് ഒരു വിഷൻ സെന്റർ തിരഞ്ഞെടുക്കുക.",
+  "patientTenantDisplayPageRequestLocationPermissionButton": "ലൊക്കേഷൻ അനുമതി അഭ്യർത്ഥിക്കുക",
+  "referralGenerateSheetHeader": "നിങ്ങളുടെ റഫറൽ കോഡ്",
+  "referralGenerateSheetTapHereButton": "ഒരു കോഡ് ഉണ്ടോ? ഇവിടെ ടാപ്പുചെയ്യുക",
+  "referralGenerateSheetMyReferrals": "എൻറെ പരാമർശങ്ങൾ",
+  "referralGenerateSheetShareCode": "ആനുകൂല്യങ്ങൾ ലഭിക്കുന്നതിന് നിങ്ങളുടെ റഫറൽ കോഡ് നിങ്ങളുടെ സുഹൃത്തുക്കളുമായും കുടുംബവുമായും പങ്കിടുക.",
+  "referralGenerateSheetReferralGenerateError": "ക്ഷമിക്കണം, ഞങ്ങൾക്ക് ഇപ്പോൾ ഒരു റഫറൽ കോഡ് സൃഷ്ടിക്കാൻ കഴിയുന്നില്ല.",
+  "referralGenerateSheetShareButton": "പങ്കുവയ്ക്കുക.",
+  "referralGenerateSheetCopy": "പകർപ്പ്",
+  "referralCollectSheetYourRefferalCode": "നിങ്ങളുടെ റഫറൽ കോഡ്",
+  "referralCollectSheetReferralCodeMessage": "ആനുകൂല്യങ്ങൾ ലഭിക്കുന്നതിന് നിങ്ങളുടെ റഫറൽ കോഡ് നിങ്ങളുടെ സുഹൃത്തുക്കളുമായും കുടുംബവുമായും പങ്കിടുക.",
+  "referralCollectSheetHeader": "റഫറൽ ശേഖരിക്കുക",
+  "referralCollectSheetBody": "നിങ്ങളുടെ പ്രതിഫലം ശേഖരിക്കാൻ റഫറൽ കോഡ് നൽകുക",
+  "referralCollectSheetTextFieldHeader": "റഫറൽ കോഡ്",
+  "referralCollectSheetTextFieldBody": "റഫറൽ കോഡ് നൽകുക",
+  "referralCollectSheetSkipButton": "സ്കിപ് ചെയ്യുക",
+  "referralCollectSheetCollectButton": "ശേഖരിക്കുക.",
+  "referralCollectSheetError": "ക്ഷമിക്കണം, എന്തോ കുഴപ്പം സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+  "referralCollectSheetSuccessToast": "റഫറൽ കോഡ് വിജയകരമായി സമർപ്പിച്ചു",
+  "referralCollectSheetErrorToast": "നിങ്ങൾ നൽകിയ റഫറൽ കോഡ് അസാധുവായിരിക്കുന്നു. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+  "referralStatisticsPageHeader": "നിങ്ങളുടെ റഫറൽ സ്ഥിതിവിവരക്കണക്കുകൾ",
+  "referralStatisticsPageTotalReferred": "മൊത്തം പരാമർശിച്ചത്",
+  "referralStatisticsPageSucessfulReferred": "വിജയകരമായ പരാമർശം",
+  "referralStatisticsPageTotalTriage": "ആകെ ട്രിഗ്മെൻ്റ്",
+  "referralStatisticsPageReferFriendHeader": "ഒരു സുഹൃത്തിനെ എങ്ങനെ റഫർ ചെയ്യാം?",
+  "referralStatisticsPageReferFriendBody1": "നിങ്ങളുടെ റഫറൽ കോഡ് നിങ്ങളുടെ സുഹൃത്തുമായി പങ്കിടുക.",
+  "referralStatisticsPageReferFriendBody2": "നിങ്ങളുടെ റഫറൽ കോഡ് ഉപയോഗിച്ച് നിങ്ങളുടെ സുഹൃത്ത് രജിസ്റ്റർ ചെയ്യുന്നു.",
+  "referralStatisticsPageReferFriendBody3": "നിങ്ങളുടെ സുഹൃത്ത് കുറഞ്ഞത് ഒരു ട്രൈജ് ടെസ്റ്റെങ്കിലും പൂർത്തിയാക്കുന്നു.",
+  "referralStatisticsPageReferFriendButton": "ഒരു സുഹൃത്തിനെ റഫർ ചെയ്യുക",
+  "referralStatisticsPageError": "ക്ഷമിക്കണം, നിങ്ങളുടെ റഫറൽ സ്ഥിതിവിവരക്കണക്കുകൾ ഇപ്പോൾ കൊണ്ടുവരാൻ ഞങ്ങൾക്ക് കഴിയുന്നില്ല.",
+  "referralStatisticsPageRetryButton": "വീണ്ടും ശ്രമിക്കുക.",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review",
+  "optionCardNeedHelpTextButton": "Need help to understand this ",
+  "triageTextTypeQuestionCounterText": "Optional",
+  "vaTopAppBarNearVisionTest": "Near Vision Test",
+  "vaDemoPageInstruction": "Tap on the E matching the image shown on top",
+  "vaShowInstructionBottomSheetRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetProceedButton": "Proceed",
+  "touchGestureCardRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "touchGestureCardLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "touchGestureCardBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "touchGestureCardICantSeeOutlineButton": "I Can’t see",
+  "distanceVaTopAppBarDistanceVisionTest": "Distance Vision Test",
+  "fakeDataSourceGetCarouselDataDescription": "Early detection can save your eyes",
+  "fakeDataSourceGetCarouselDataTitle": "Doctor says",
+  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
+  "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
+  "topReadingCardFaceNotFoundError": "No Face",
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen",
+  "roleVolunteer": "VOLUNTEER",
+  "patientHomePageVolunteerInviteeCardJoinUsNowButton": "Join Us Now",
+  "patientHomePageVolunteerInviteeCardTitle": "Become a SightConnect Volunteer!",
+  "patientHomePageVolunteerInviteeCardDescription1": "Promote Preventive Eye Care",
+  "patientHomePageVolunteerInviteeCardDescription2": "Engage with Communities",
+  "patientHomePageVolunteerInviteeCardDescription3": "Support Health Initiatives"
 }

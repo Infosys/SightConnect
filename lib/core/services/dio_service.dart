@@ -130,26 +130,7 @@ class DioService extends StateNotifier<Dio> {
 }
 
 
-// final dioProvider = Provider(
-//   (ref) {
-//     final lang = ref.watch(globalLanguageProvider).currentLocale?.languageCode;
-//     final globalTenant = ref.watch(globalTenantProvider);
-//     final role = PersistentAuthStateService.authState.activeRole;
 
-//     final dio = Dio(
-//       BaseOptions(
-//         baseUrl: ApiConstant.baseUrl,
-//         headers: {
-//           "X-Accept-Language": lang,
-//           "X-Active-Role": role,
-//           "X-App-Version": AppInfoService.appVersion,
-//           "X-Tenant-Code": globalTenant.getTenantId(role),
-//           "X-Organization-Code": globalTenant.getOrganizationId(role),
-//         },
-//       ),
-//     );
-
-//     dio.interceptors.addAll(
 //       [
 //         DioTokenInterceptor(ref, dio),
 //         LogInterceptor(

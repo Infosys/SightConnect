@@ -83,6 +83,7 @@ class PreliminaryAssessmentCarePlan extends HookConsumerWidget {
       PatientInstruction.VISIT_SECONDARY_CLINIC => "Secondary Center",
       PatientInstruction.VISIT_TERTIARY_CLINIC => "Tertiary Center",
       PatientInstruction.VISIT_COE => "Center of Excellence",
+      PatientInstruction.VISIT_AS_PER_CONSULT => "Center Consulted"
     };
   }
 }

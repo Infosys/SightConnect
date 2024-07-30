@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/core/services/file_ms_service.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/contracts/vg_add_event_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
@@ -18,6 +22,7 @@ final addEventDetailsProvider =
     vgAddEventRepository: ref.watch(vgAddEventRepository),
     globalVGProvider: ref.read(globalVGProvider),
     fileMsProvider: ref.read(fileMsServiceProvider),
+    globalVolunteerProvider: ref.read(globalVolunteerProvider),
   );
 });
 
@@ -25,10 +30,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
   final GlobalVGProvider globalVGProvider;
   final FileMsService fileMsProvider;
+  final GlobalVolunteerProvider globalVolunteerProvider;
   AddEventDetailsNotifier({
     required this.vgAddEventRepository,
     required this.globalVGProvider,
     required this.fileMsProvider,
+    required this.globalVolunteerProvider,
   }) {
     List<VisionGuardianEventModel> previousList = [];
     getVgEvents(previousList, "default");
@@ -117,12 +124,22 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       initialValue = true;
       var eventId = int.parse(eventIdValue);
 
-      List<VisionGuardianPatientResponseModel> response =
-          await vgAddEventRepository.getTriageReport(queryData: {
-        "campaignEventId": eventId,
-        "performerId": [globalVGProvider.userId],
-        "pageable": {"page": offset, "size": 10}
-      });
+      List<VisionGuardianPatientResponseModel> response;
+
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        response = await vgAddEventRepository.getTriageReport(queryData: {
+          "campaignEventId": eventId,
+          "performerId": [globalVolunteerProvider.userId],
+          "pageable": {"page": offset, "size": 10}
+        });
+        // response = response + responseVolunteer;
+      } else {
+        response = await vgAddEventRepository.getTriageReport(queryData: {
+          "campaignEventId": eventId,
+          "performerId": [globalVGProvider.userId],
+          "pageable": {"page": offset, "size": 10}
+        });
+      }
 
       setEventPatients(previousList + response);
       setSearchEventPatients(previousList + response);
@@ -140,19 +157,34 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     logger.d("callledddddddddddddddd");
     try {
       eventLoading = true;
-      List<VisionGuardianEventModel> response =
-          await vgAddEventRepository.getVGEvents(
-        queryData: {
-          "actorIdentifier": globalVGProvider.userId.toString(),
-          "eventStatusFilter":
-              eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
-          "pageable": {
-            "page": type == "search" ? searchEventOffset : eventOffset,
-            "size": 10,
-            "title-like": eventSearchQuery,
+      List<VisionGuardianEventModel> response;
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        response = await vgAddEventRepository.getVGEvents(
+          queryData: {
+            "actorIdentifier": globalVolunteerProvider.userId.toString(),
+            "eventStatusFilter":
+                eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
+            "pageable": {
+              "page": type == "search" ? searchEventOffset : eventOffset,
+              "size": 10,
+              "title-like": eventSearchQuery,
+            },
           },
-        },
-      );
+        );
+      } else {
+        response = await vgAddEventRepository.getVGEvents(
+          queryData: {
+            "actorIdentifier": globalVGProvider.userId.toString(),
+            "eventStatusFilter":
+                eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
+            "pageable": {
+              "page": type == "search" ? searchEventOffset : eventOffset,
+              "size": 10,
+              "title-like": eventSearchQuery,
+            },
+          },
+        );
+      }
 
       setEventList(previousList + response, type);
       if (type == "search") {
@@ -219,13 +251,26 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       logger.d("inside add event details");
       isLoading = true;
       notifyListeners();
-      String file = await fileMsProvider.uploadImage(File(_image?.path ?? ""));
-      Map<String, String> fileMap = fileMsProvider.parseUrl(file);
-      Map<String, dynamic> actors = {
-        "role": "MEDICAL_DOCTOR",
-        "identifier": globalVGProvider.userId.toString(),
-        "isOwner": true
-      };
+      Map<String, String> fileMap = {};
+      if (_image != null && _image?.path.isNotEmpty == true) {
+        String file =
+            await fileMsProvider.uploadImage(File(_image?.path ?? ""));
+        fileMap = fileMsProvider.parseUrl(file);
+      }
+      Map<String, dynamic> actors;
+      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+        actors = {
+          "role": "VOLUNTEER",
+          "identifier": globalVolunteerProvider.userId.toString(),
+          "isOwner": true
+        };
+      } else {
+        actors = {
+          "role": "MEDICAL_DOCTOR",
+          "identifier": globalVGProvider.userId.toString(),
+          "isOwner": true
+        };
+      }
 
       logger.d("after uplopading image");
 
@@ -238,9 +283,17 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           "${startDateFormat.year}-${startDateFormat.month.toString().padLeft(2, '0')}-${startDateFormat.day.toString().padLeft(2, '0')}";
       var endFormat =
           "${endDateFormat.year}-${endDateFormat.month.toString().padLeft(2, '0')}-${endDateFormat.day.toString().padLeft(2, '0')}";
-      DateFormat format = DateFormat("hh:mm a");
+      DateFormat format = DateFormat("HH:mm");
       DateTime starttime = format.parse(startTime.text);
       DateTime endtime = format.parse(endTime.text);
+      log(starttime.timeZoneName);
+
+      log(startTime.text);
+      log(endTime.text);
+      log(starttime.toString());
+      log(endtime.toString());
+      log("start time is: ${starttime.toIso8601String()}Z");
+      log("end time is: ${endtime.toIso8601String()}Z");
 
       VisionGuardianEventModel vgEventModel = VisionGuardianEventModel(
           title: _eventTitle.text,
@@ -252,15 +305,17 @@ class AddEventDetailsNotifier extends ChangeNotifier {
           endTime: "${endtime.toIso8601String()}Z",
           maximumAttendeeCapacity: 0,
           sponsor: "r6B",
-          images: [
-            VisionGuardianEventImage(
-              baseUrl: fileMap["baseUrl"],
-              endpoint: fileMap["endPoint"],
-              fileId: fileMap["fileId"],
-              thumbnail: true,
-              status: "ACTIVE",
-            )
-          ],
+          images: fileMap.isEmpty
+              ? null
+              : [
+                  VisionGuardianEventImage(
+                    baseUrl: fileMap["baseUrl"],
+                    endpoint: fileMap["endPoint"],
+                    fileId: fileMap["fileId"],
+                    thumbnail: true,
+                    status: "ACTIVE",
+                  )
+                ],
           addresses: [
             VisionGuardianEventAddress(
                 venueName: _venueName.text,

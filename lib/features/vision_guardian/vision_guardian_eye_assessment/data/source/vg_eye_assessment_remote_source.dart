@@ -43,6 +43,9 @@ class VgEyeAssessmentRemoteSourceImpl implements VgEyeAssessmentRemoteSource {
       } else {
         throw ServerException();
       }
+    } on DioException catch (error) {
+      DioErrorHandler.handleDioError(error);
+      rethrow;
     } catch (error) {
       logger.d(error);
       rethrow;

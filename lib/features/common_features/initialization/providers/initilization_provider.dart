@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/core/models/keycloak.dart';
 import 'package:eye_care_for_all/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/core/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/core/repositories/keycloak_repository_impl.dart';
+import 'package:eye_care_for_all/core/repositories/performers_profile_repository_impl.dart';
 import 'package:eye_care_for_all/core/services/failure.dart';
 import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/core/services/shared_preference.dart';
@@ -34,8 +35,8 @@ class InitializationProvider extends ChangeNotifier {
       return await _checkPatientExist(phone, role);
     } else if (role == Role.ROLE_VISION_GUARDIAN) {
       return await _checkVisionGuardianExist(phone, role);
-    } else if (role == Role.ROLE_ORG_ADMIN) {
-      return await _checkOrgAdminExist(phone, role);
+    } else if (role == Role.ROLE_VOLUNTEER) {
+      return await _checkVolunteerExists();
     } else if (role == Role.ROLE_OPTOMETRIST) {
       //only for testing
       return true;
@@ -149,6 +150,18 @@ class InitializationProvider extends ChangeNotifier {
     });
   }
 
+  Future<bool> _checkVolunteerExists() async {
+    try {
+      final response = await _ref.read(performersProfileRepositoryProvider).getPerformerProfile();
+        await PersistentAuthStateService.authState.saveUserProfileId(
+          response.id.toString(),
+        );
+      return true;
+    } on Exception catch (e) {
+      throw ServerFailure(errorMessage: "Invalid Role");
+    }
+  }
+
   Future<bool> _checkVisionGuardianExist(String phone, Role role) async {
     final response =
         await _ref.read(vgAuthenticationRepositoryProvider).getVgProfile(phone);
@@ -177,37 +190,6 @@ class InitializationProvider extends ChangeNotifier {
         }
       }
     });
-  }
-
-  Future<bool> _checkOrgAdminExist(String phone, Role role) async {
-    // final response =
-    //     await _ref.read(vgAuthenticationRepositoryProvider).getVgProfile(phone);
-    // return response.fold((failure) {
-    //   throw failure;
-    // }, (result) async {
-    //   if (result.isEmpty) {
-    //     // if result is empty then user is not found
-    //     return false;
-    //   } else {
-    //     if (result.first.practiceGrants == null) {
-    //       return false;
-    //     }
-    //     bool isRoleAvailable = result.first.practiceGrants!
-    //         .any((element) => element.grantRole == role.name);
-
-    //     if (isRoleAvailable) {
-    //       final profile = result.first;
-    //       await PersistentAuthStateService.authState.saveUserProfileId(
-    //         profile.id.toString(),
-    //       );
-    //       return true;
-    //     } else {
-    //       // if result is empty then user is not found
-    //       return false;
-    //     }
-    //   }
-    // });
-    return false;
   }
 
   Future<bool> getEighteenPlusDeclarationStatus() async {

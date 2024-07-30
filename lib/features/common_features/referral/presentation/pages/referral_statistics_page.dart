@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/features/common_features/referral/data/models/r
 import 'package:eye_care_for_all/features/common_features/referral/data/repository/referral_repository_impl.dart';
 import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_generate_sheet.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/triage_test_card.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,10 @@ class ReferralStatisticsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     final referralStatsAsyncValue = ref.watch(referralStatsProvider);
     return Scaffold(
-      appBar: const CustomAppbar(title: Text('Your Referral Statistics')),
+      appBar: CustomAppbar(title: Text(loc.referralStatisticsPageHeader)),
       body: referralStatsAsyncValue.when(
         data: (referralStats) {
           return Padding(
@@ -49,14 +51,14 @@ class ReferralStatisticsPage extends ConsumerWidget {
                         Row(
                           children: [
                             _ReferralStatsCard(
-                              title: 'Total Referred',
+                              title: loc.referralStatisticsPageTotalReferred,
                               colorCode: '0xffCFD8DC',
                               value:
                                   referralStats?.referrals?.length.toString() ??
                                       '0',
                             ),
                             _ReferralStatsCard(
-                              title: 'Successful Referred',
+                              title: loc.referralStatisticsPageSucessfulReferred,
                               colorCode: '0xffA5D6A7',
                               value: referralStats?.referralsTriageStatistics
                                       ?.totalReferredCounts
@@ -68,7 +70,7 @@ class ReferralStatisticsPage extends ConsumerWidget {
                         Row(
                           children: [
                             _ReferralStatsCard(
-                              title: 'Total Triage',
+                              title: loc.referralStatisticsPageTotalTriage,
                               colorCode: '0xffD1C4E9',
                               value: referralStats?.referralsTriageStatistics
                                       ?.totalTriagedCounts
@@ -110,34 +112,34 @@ class ReferralStatisticsPage extends ConsumerWidget {
                                         child: FittedBox(
                                           fit: BoxFit.scaleDown,
                                           child: Text(
-                                            "How to refer a friend?",
+                                            loc.referralStatisticsPageReferFriendHeader,
                                             style: applyFiraSansFont(
                                               fontSize: 20,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      const Padding(
-                                        padding: EdgeInsets.all(AppSize.ks),
+                                      Padding(
+                                        padding: const EdgeInsets.all(AppSize.ks),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            SizedBox(height: 8),
+                                            const SizedBox(height: 8),
                                             PatientHomeCardInfoTile(
                                               title:
-                                                  "Share your referral code with your friend.",
+                                                  loc.referralStatisticsPageReferFriendBody1,
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             PatientHomeCardInfoTile(
                                               title:
-                                                  "Your friend register using your referral code.",
+                                                  loc.referralStatisticsPageReferFriendBody2,
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             PatientHomeCardInfoTile(
                                               title:
-                                                  "Your friend completes at least one triage test.",
+                                                  loc.referralStatisticsPageReferFriendBody3,
                                             ),
                                           ],
                                         ),
@@ -162,7 +164,7 @@ class ReferralStatisticsPage extends ConsumerWidget {
                                                 context);
                                           },
                                           child: Text(
-                                            "Refer a Friend",
+                                            loc.referralStatisticsPageReferFriendButton,
                                             style: applyRobotoFont(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,
@@ -193,7 +195,7 @@ class ReferralStatisticsPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Apologies, we're unable to fetch your referral statistics at the moment.",
+                  loc.referralStatisticsPageError,
                   textAlign: TextAlign.center,
                   style: applyFiraSansFont(fontSize: 16),
                 ),
@@ -202,7 +204,7 @@ class ReferralStatisticsPage extends ConsumerWidget {
                   onPressed: () {
                     ref.invalidate(referralStatsProvider);
                   },
-                  child: const Text('Retry'),
+                  child: Text(loc.referralStatisticsPageRetryButton),
                 ),
               ],
             ),

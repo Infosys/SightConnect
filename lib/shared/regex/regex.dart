@@ -16,7 +16,7 @@ class Regex {
   }
 
   static bool isValidCityTownVillageName(String value) {
-    return RegExp(r'^[a-zA-Z0-9]*$').hasMatch(value);
+    return RegExp(r'^[a-zA-Z0-9 ]*$').hasMatch(value);
   }
 
   /// --------

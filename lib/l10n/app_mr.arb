@@ -13,16 +13,14 @@
     }
   },
   "stepNumber": "{current} बाहेर {total}",
-   "@referralSmsContent": {
+  "@referralSmsContent": {
     "placeholders": {
       "referral": {
         "type": "String"
       }
-     
     }
   },
-  "referralSmsContent": "Hey! I'm using SightConnect App to take care of my eyes, and you should too! Assess your eyes and get timely treatment with the SightConnect App. It's a unique app that brings preventive eyecare to your hands. Use my referral code {referral} when you sign up. Get it now: https://healthconnecttech.org/install",
-
+  "referralSmsContent": "अरे! मी माझ्या डोळ्यांची काळजी घेण्यासाठी साइटकनेक्ट अॅप वापरत आहे आणि तुम्हीही ते वापरायला हवे! तुमच्या डोळ्यांचे मूल्यांकन करा आणि साइटकनेक्ट अॅपद्वारे वेळेवर उपचार घ्या. हे एक अद्वितीय अॅप आहे जे तुमच्या हातांमध्ये प्रतिबंधात्मक आयकेअर आणते. तुम्ही साइन अप करता तेव्हा माझा रेफरल कोड वापरा. आता ते मिळवाः https://healthconnecttech.org/install",
   "@loginEnterOTP": {
     "placeholders": {
       "mobileNumber": {
@@ -71,6 +69,22 @@
     }
   },
   "emergencyTollFreeNumberText": "आपत्कालीन परिस्थितीत, कृपया {tollFreeNumber} वर संपर्क साधा",
+  "@referralCollectSheetReferredBy": {
+    "placeholders": {
+      "referredBy": {
+        "type": "String"
+      }
+    }
+  },
+  "referralCollectSheetReferredBy": "तुम्हाला {referredBy} द्वारे संदर्भित केले गेले आहे",
+  "@vaDistanceToFaceInstruction": {
+    "placeholders": {
+      "distance": {
+        "type": "int"
+      }
+    }
+  },
+  "vaDistanceToFaceInstruction": "कृपया कॅमेरा तुमच्या चेहऱ्यापासून {distance} सें. मी. दूर असल्याची खात्री करा.",
   "questionnaireTitle": "डोळ्यांच्या तपासणीचे प्रश्न",
   "questionnaireExitDialog": "या प्रश्नांची उत्तरं देण्याने तुमच्या डोळ्यांच्या समस्या ओळखण्यास मदत होईल. तुम्ही तरीही बाहेर पडू इच्छिता का?",
   "visualAcuityTitle": "दृष्टी अचूकता चाचणी",
@@ -336,7 +350,6 @@
   "permissionNotGranted": "परवानगी मिळाली नाही.",
   "serviceNotAvailable": "सेवा उपलब्ध नाही",
   "vaDistanceToFace": "समोरासमोरचे अंतर",
-  "vaDistanceToFaceInstruction": "कृपया कॅमेरा तुमच्या चेहऱ्यापासून 40 सें. मी. दूर असल्याची खात्री करा.",
   "vaBringFaceInsideBox": "चौकटीच्या आत तुमचा चेहरा आणा.",
   "startAssessment": "मूल्यमापन सुरू करा",
   "optoAddPatientInfo": "रुग्णाची माहिती जोडा",
@@ -696,5 +709,73 @@
   "showTriageHowToProceedBottomSheetBody2": "मला काही समस्या आहे की नाही याची मला खात्री नाही",
   "showTriageHowToProceedBottomSheetBody3": "मला डोळ्यांची कोणतीही समस्या नाही-फक्त तपासायचे आहे",
   "appDrawerToastMessageText": "माफ करा, आम्हाला मोबाईल अॅपमध्ये लॉगआउट त्रुटी आढळली.",
-  "myConnectionListAddMembers": "सदस्य जोडा"
+  "myConnectionListAddMembers": "सदस्य जोडा",
+  "appDrawerReferral": "संदर्भ",
+  "patientTenantDisplayPageHeader": "भाडेकरू",
+  "patientTenantDisplayPageBody": "यादीमधून दृष्टी केंद्र निवडा",
+  "patientTenantDisplayPageRequestLocationPermissionButton": "स्थान परवानगीची विनंती करा",
+  "referralGenerateSheetHeader": "तुमचा संदर्भ कोड",
+  "referralGenerateSheetTapHereButton": "कोड आहे का? येथे टिचकी मारा",
+  "referralGenerateSheetMyReferrals": "माझे संदर्भ",
+  "referralGenerateSheetShareCode": "लाभ मिळवण्यासाठी तुमचा संदर्भ कोड तुमच्या मित्रांना आणि कुटुंबाला कळवा.",
+  "referralGenerateSheetReferralGenerateError": "माफ करा, आम्ही सध्या रेफरल कोड तयार करू शकत नाही.",
+  "referralGenerateSheetShareButton": "शेअर करा.",
+  "referralGenerateSheetCopy": "प्रती",
+  "referralCollectSheetYourRefferalCode": "तुमचा संदर्भ कोड",
+  "referralCollectSheetReferralCodeMessage": "लाभ मिळवण्यासाठी तुमचा संदर्भ कोड तुमच्या मित्रांना आणि कुटुंबाला कळवा.",
+  "referralCollectSheetHeader": "संदर्भ गोळा करा",
+  "referralCollectSheetBody": "तुमचे बक्षीस गोळा करण्यासाठी संदर्भ कोड प्रविष्ट करा",
+  "referralCollectSheetTextFieldHeader": "संदर्भ कोड",
+  "referralCollectSheetTextFieldBody": "संदर्भ कोड प्रविष्ट करा",
+  "referralCollectSheetSkipButton": "स्किप करा.",
+  "referralCollectSheetCollectButton": "गोळा करा.",
+  "referralCollectSheetError": "माफ करा, काहीतरी चूक झाली आहे. कृपया पुन्हा प्रयत्न करा.",
+  "referralCollectSheetSuccessToast": "संदर्भ कोड यशस्वीरित्या सादर करण्यात आला",
+  "referralCollectSheetErrorToast": "तुम्ही प्रविष्ट केलेला संदर्भ कोड अवैध आहे. कृपया पुन्हा प्रयत्न करा.",
+  "referralStatisticsPageHeader": "तुमची संदर्भ आकडेवारी",
+  "referralStatisticsPageTotalReferred": "एकूण संदर्भ",
+  "referralStatisticsPageSucessfulReferred": "यशस्वी संदर्भ",
+  "referralStatisticsPageTotalTriage": "एकूण त्रिकूट",
+  "referralStatisticsPageReferFriendHeader": "एखाद्या मित्राचा संदर्भ कसा घ्यावा?",
+  "referralStatisticsPageReferFriendBody1": "तुमचा संदर्भ कोड तुमच्या मित्रासोबत सामायिक करा.",
+  "referralStatisticsPageReferFriendBody2": "तुमचा मित्र तुमचा संदर्भ कोड वापरून नोंदणी करतो.",
+  "referralStatisticsPageReferFriendBody3": "तुमचा मित्र किमान एक ट्रायएज चाचणी पूर्ण करतो.",
+  "referralStatisticsPageReferFriendButton": "एका मित्राचा संदर्भ घ्या",
+  "referralStatisticsPageError": "माफ करा, आम्ही सध्या तुमची संदर्भ आकडेवारी आणू शकत नाही.",
+  "referralStatisticsPageRetryButton": "पुन्हा प्रयत्न करा.",
+  "triageInstructionPageTopAppBarEyeTest": "Eye Test",
+  "triageInstructionPageHeader": "What you would be doing",
+  "triageInstructionPageBody1": "You will need to place your device at eye level.",
+  "triageInstructionPageBody2": "You will need to select responses to questions.",
+  "triageInstructionPageBody3": "You will need to take clear pictures of your eyes.",
+  "triageInstructionPageComfortableWithSelfTest": "If you are comfortable with doing the test by yourself, you can proceed directly",
+  "triageInstructionPageTestAssistanceRequired": "If you need assistance, please get someone who can help you and start.",
+  "triageInstructionPageIAmReadyButton": "I am ready",
+  "appDrawerAddReview": "Add Review",
+  "optionCardNeedHelpTextButton": "Need help to understand this ",
+  "triageTextTypeQuestionCounterText": "Optional",
+  "vaTopAppBarNearVisionTest": "Near Vision Test",
+  "vaDemoPageInstruction": "Tap on the E matching the image shown on top",
+  "vaShowInstructionBottomSheetRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "vaShowInstructionBottomSheetProceedButton": "Proceed",
+  "touchGestureCardRightEyeInstruction": "Cover your right eye and tap on the E matching the image on top",
+  "touchGestureCardLeftEyeInstruction": "Cover your left eye and tap on the E matching the image on top",
+  "touchGestureCardBothEyesInstruction": "View with both eyes and tap on the E matching the image on top",
+  "touchGestureCardICantSeeOutlineButton": "I Can’t see",
+  "distanceVaTopAppBarDistanceVisionTest": "Distance Vision Test",
+  "fakeDataSourceGetCarouselDataDescription": "Early detection can save your eyes",
+  "fakeDataSourceGetCarouselDataTitle": "Doctor says",
+  "distanceNotifierProviderNoFaceDetectedError": "No face detected. Please face the camera 40 cm from the screen",
+  "appCameraPageTakePictureLoadingOverlayMessage": "Hold the camera steady…",
+  "appCameraPageDefaultLoadingOverlayMessage": "Loading…",
+  "topReadingCardFaceNotFoundError": "No Face",
+  "topReadingCardLongDistanceTestMessage": "Position yourself 2m from the screen",
+  "roleVolunteer": "VOLUNTEER",
+  "patientHomePageVolunteerInviteeCardJoinUsNowButton": "Join Us Now",
+  "patientHomePageVolunteerInviteeCardTitle": "Become a SightConnect Volunteer!",
+  "patientHomePageVolunteerInviteeCardDescription1": "Promote Preventive Eye Care",
+  "patientHomePageVolunteerInviteeCardDescription2": "Engage with Communities",
+  "patientHomePageVolunteerInviteeCardDescription3": "Support Health Initiatives"
 }

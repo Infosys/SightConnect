@@ -15,16 +15,21 @@ enum DrawerMenuItemId {
   tenant,
   feedback,
   referral,
+  volunteer,
 }
 
 class DrawerMenuItem {
   final DrawerMenuItemId id;
   final String title;
   final String icon;
-  const DrawerMenuItem({
+  bool? isPrivacyOrAbout;
+  bool? isReferralOrVolunteer;
+  DrawerMenuItem({
     required this.id,
     required this.title,
     required this.icon,
+    this.isPrivacyOrAbout = false,
+    this.isReferralOrVolunteer = false,
   });
 }
 
@@ -55,9 +60,9 @@ class DrawerMenuItems {
       title: loc.appDrawerScanner,
       icon: AppIcon.scanner,
     );
-    DrawerMenuItem feedback = const DrawerMenuItem(
+    DrawerMenuItem feedback = DrawerMenuItem(
       id: DrawerMenuItemId.feedback,
-      title: "Add Review",
+      title: loc.appDrawerAddReview,
       icon: "assets/drawer_icons/feedback.svg",
     );
 
@@ -65,21 +70,30 @@ class DrawerMenuItems {
       id: DrawerMenuItemId.about,
       title: loc.appDrawerAboutUs,
       icon: AppIcon.drawerAboutUs,
+      isPrivacyOrAbout: true,
     );
     DrawerMenuItem privacyPolicy = DrawerMenuItem(
       id: DrawerMenuItemId.privacyPolicy,
       title: loc.appDrawerPrivacyPolicy,
       icon: "assets/drawer_icons/dpo.svg",
+      isPrivacyOrAbout: true,
     );
     DrawerMenuItem tenant = DrawerMenuItem(
       id: DrawerMenuItemId.tenant,
       title: loc.switchTenant,
       icon: "assets/drawer_icons/accessibility.svg",
     );
-    DrawerMenuItem refferal = const DrawerMenuItem(
+    DrawerMenuItem refferal = DrawerMenuItem(
       id: DrawerMenuItemId.referral,
-      title: "Referral",
+      title: loc.appDrawerReferral,
       icon: "assets/drawer_icons/referral.svg",
+      isReferralOrVolunteer: true,
+    );
+    DrawerMenuItem volunteer = DrawerMenuItem(
+      id: DrawerMenuItemId.volunteer,
+      title: "Become A Volunteer",
+      icon: "assets/drawer_icons/volunteer.svg",
+      isReferralOrVolunteer: true,
     );
 
     // DrawerMenuItem chatbot = const DrawerMenuItem(
@@ -99,6 +113,7 @@ class DrawerMenuItems {
       about,
       privacyPolicy,
       refferal,
+      volunteer,
 
       // chatbot
     ];

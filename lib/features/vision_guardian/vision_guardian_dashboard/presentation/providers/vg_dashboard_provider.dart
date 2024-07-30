@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/core/services/shared_preference.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/data/contracts/vg_dashboard_analytics_repository.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/data/repository/vg_dashboard_analytics_repository_impl.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,11 @@ class VisionGuardianDashboardProvider extends ChangeNotifier {
   VgDashboardAnalyticsRepository vgDashboardAnalyticsRepository;
   void changeIndex(int index) {
     currentIndex = index;
+    notifyListeners();
+  }
+
+  void removeEventId() async {
+    await SharedPreferenceService.clearEventId();
     notifyListeners();
   }
 
@@ -42,6 +48,4 @@ class VisionGuardianDashboardProvider extends ChangeNotifier {
     scrollController?.removeListener(listen);
     scrollController?.dispose();
   }
-
- 
 }

@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/core/constants/app_color.dart';
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/constants/app_size.dart';
 import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/common_features/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/provider/triage_result_provider.dart';
 import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_result/widgets/result_image_card.dart';
@@ -10,6 +11,7 @@ import 'package:eye_care_for_all/features/common_features/visual_acuity/features
 import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
+import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
@@ -35,7 +37,19 @@ class TriageResultPage extends ConsumerWidget {
         }
 
         ref.read(accessibilityProvider).resetBrightness();
-        Navigator.of(context).popUntil((route) => route.isFirst);
+        if (PersistentAuthStateService.authState.activeRole ==
+            "ROLE_VOLUNTEER") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const VisionGuardianDashboardPage()));
+        } else {
+          Navigator.popUntil(context, (route) => route.isFirst);
+        }
+        // Navigator.of(context).pushAndRemoveUntil(
+        //   MaterialPageRoute(builder: (context) => const InitializationPage()),
+        //   (route) => route.isFirst,
+        // );
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -43,7 +57,16 @@ class TriageResultPage extends ConsumerWidget {
           leadingIcon: InkWell(
             onTap: () {
               ref.read(accessibilityProvider).resetBrightness();
-              Navigator.of(context).popUntil((route) => route.isFirst);
+              if (PersistentAuthStateService.authState.activeRole ==
+                  "ROLE_VOLUNTEER") {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const VisionGuardianDashboardPage()));
+              } else {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              }
             },
             child: const Icon(
               Icons.close_outlined,

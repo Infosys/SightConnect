@@ -110,9 +110,10 @@ class OptometristTriageMapper {
       cataract: ref.read(feedBackProvider).isCataract,
       languageUsed:
           ref.read(globalLanguageProvider).currentLocale?.languageCode,
-      longDistanceUsed: ref.read(globalVisualAcuityProvider).optoIsThreeMeters == true
-          ? "3 meters"
-          : "2 meters",
+      longDistanceUsed:
+          ref.read(globalVisualAcuityProvider).optoIsThreeMeters == true
+              ? "3 meters"
+              : "2 meters",
     );
   }
 
@@ -169,20 +170,22 @@ class OptometristTriageMapper {
 
   static List<MediaCapture>? getImagingSelection(
       List<PostTriageImagingSelectionModel> imagingSelection) {
-    logger.f("imagingSelection : $imagingSelection");
+    for (var selection in imagingSelection) {
+      logger.d("imagingSelection: ${selection.toJson()}");
+    }
     List<MediaCapture> output = [];
     imagingSelection = _removeInvalidImagingSelection(imagingSelection);
     output.addAll([
       MediaCapture(
         mediaCode: imagingSelection.first.id,
-        encodingType: "base64-RIGHT",
+        encodingType: "base64-LEFT",
         fileName:
             "${imagingSelection.first.baseUrl}${imagingSelection.first.endpoint}/${imagingSelection.first.fileId}",
         fileType: "JPG",
       ),
       MediaCapture(
         mediaCode: imagingSelection.last.id,
-        encodingType: "base64-LEFT",
+        encodingType: "base64-RIGHT",
         fileName:
             "${imagingSelection.last.baseUrl}${imagingSelection.last.endpoint}/${imagingSelection.last.fileId}",
         fileType: "JPG",

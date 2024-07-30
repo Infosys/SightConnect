@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/core/constants/app_images.dart';
 import 'package:eye_care_for_all/core/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/core/providers/global_volunteer_provider.dart';
+import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_create_event_page.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/providers/vg_analytics_provider.dart';
-import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_carousel.dart';
 import 'package:eye_care_for_all/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards_list.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -21,6 +21,11 @@ class VisionGuardianHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    var name =
+        PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"
+            ? ref.watch(globalVolunteerProvider).name
+            : ref.watch(globalVGProvider).name;
+
     return Scaffold(
       backgroundColor: AppColor.scaffold,
       resizeToAvoidBottomInset: false,
@@ -43,8 +48,8 @@ class VisionGuardianHomePage extends ConsumerWidget {
             children: [
               Container(
                 height: Responsive.isMobile(context)
-                    ? AppSize.height(context) * 0.2
-                    : AppSize.height(context) * 0.35,
+                    ? AppSize.height(context) * 0.1
+                    : AppSize.height(context) * 0.3,
                 decoration: const BoxDecoration(
                   color: AppColor.primary,
                   borderRadius: BorderRadius.only(
@@ -55,39 +60,37 @@ class VisionGuardianHomePage extends ConsumerWidget {
                 child: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                        left: AppSize.km,
-                      ),
+                      padding: const EdgeInsets.all(16),
                       child: Text(
-                        "${loc.vgWelcome}  ${ref.watch(globalVGProvider).name}",
+                        "${loc.vgWelcome}  ${name}",
                         style: applyFiraSansFont(
                           color: AppColor.scaffold,
                           fontSize: 24,
                         ),
                       ),
                     ),
-                    Transform.translate(
-                      offset: Offset(0, AppSize.height(context) * 0.07),
-                      child: SizedBox(
-                        child: ref.watch(getAnalyticsProvider).when(
-                          data: (data) {
-                            return VGCarousel(data: data);
-                          },
-                          error: (error, stackTrace) {
-                            return const Center(
-                              child: Text("Failed to load data"),
-                            );
-                          },
-                          loading: () {
-                            return Container();
-                          },
-                        ),
-                      ),
-                    ),
+                    // Transform.translate(
+                    //   offset: Offset(0, AppSize.height(context) * 0.07),
+                    //   child: SizedBox(
+                    //     child: ref.watch(getAnalyticsProvider).when(
+                    //       data: (data) {
+                    //         return VGCarousel(data: data);
+                    //       },
+                    //       error: (error, stackTrace) {
+                    //         return const Center(
+                    //           child: Text("Failed to load data"),
+                    //         );
+                    //       },
+                    //       loading: () {
+                    //         return Container();
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-              SizedBox(height: AppSize.height(context) * 0.06),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                 child: Column(

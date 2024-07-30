@@ -68,10 +68,11 @@ class GlobalTenantProvider extends ChangeNotifier {
     if (activeRole == "ROLE_VISION_TECHNICIAN") {
       logger.d("changing tenant based on Role = VT");
       return SharedPreferenceService.getTenantIdVt;
-    } else if (activeRole == "ROLE_PATIENT") {
+    } else if (activeRole == "ROLE_PATIENT" || activeRole == "ROLE_VOLUNTEER") {
       logger.d("changing tenant based on Role = Patient");
       return SharedPreferenceService.getTenantId;
     }
+
     return null;
   }
 
@@ -81,7 +82,7 @@ class GlobalTenantProvider extends ChangeNotifier {
     }
     if (activeRole == "ROLE_VISION_TECHNICIAN") {
       return SharedPreferenceService.getOrganizationIdVt;
-    } else if (activeRole == "ROLE_PATIENT") {
+    } else if (activeRole == "ROLE_PATIENT" || activeRole == "ROLE_VOLUNTEER") {
       return SharedPreferenceService.getOrganizationId;
     }
     return null;

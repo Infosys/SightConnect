@@ -133,7 +133,6 @@ class OptometritianReportQuestionnaireCard extends ConsumerWidget {
 class _QuestionnaireList extends ConsumerWidget {
   const _QuestionnaireList({
     required this.questionnaires,
-    super.key,
   });
   final List<QuestionResponse> questionnaires;
 
