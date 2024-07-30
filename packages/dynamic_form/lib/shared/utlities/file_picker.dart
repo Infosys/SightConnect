@@ -10,15 +10,17 @@ class FilePickerService {
     'png',
     'gif',
     'bmp',
-    'webp'
+    'webp',
+    'pdf'
   ];
 
   static Future<FilePickerResult?> pickFiles() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-          // type: FileType.custom,
-          // allowedExtensions: ['jpg', 'pdf', 'doc'],
-          );
+        type: FileType.any,
+        // allowedExtensions: imageExtensions,
+        allowMultiple: true,
+      );
       return result;
     } catch (e) {
       debugPrint('Error picking files: $e');

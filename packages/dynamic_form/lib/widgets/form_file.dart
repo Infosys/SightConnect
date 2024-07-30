@@ -289,7 +289,7 @@ class ImageDisplay extends StatelessWidget {
   });
 
   bool _isImageFile(String? extension) {
-    final imageExtensions = FilePickerService.imageExtensions;
+    final imageExtensions = ['jpg', 'jpeg', 'png'];
     return imageExtensions.contains(extension?.toLowerCase());
   }
 

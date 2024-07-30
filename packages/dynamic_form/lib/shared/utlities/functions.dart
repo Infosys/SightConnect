@@ -11,6 +11,7 @@ import 'package:dynamic_form/widgets/form_radio.dart';
 import 'package:dynamic_form/widgets/form_slider.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -53,8 +54,14 @@ Widget getField(
         field: field,
         onChanged: (value) {
           key.currentState?.setInternalFieldValue(
-              field.name, value.map((e) => e.path).toList());
-          debugPrint(value.toString());
+              field.name,
+              value.map((e) {
+                if (kIsWeb) {
+                  return e.bytes;
+                }
+                return e.path;
+              }).toList());
+          // debugPrint(value.toString());
         },
       );
     case DynamicFormType.SWITCH:
