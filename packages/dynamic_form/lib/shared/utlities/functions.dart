@@ -37,6 +37,7 @@ Widget getField(
       return FormRadio(
         field: field,
         onChanged: (value) {
+          globalRebuildNotifier.value = !globalRebuildNotifier.value;
           debugPrint(value.toString());
         },
       );

@@ -263,6 +263,114 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "bloodGroup",
+                            "title": "Blood Group",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "A+",
+                                "B+",
+                                "otherBloodGroup"
+                            ]
+                        },
+                        {
+                            "type": "conditional",
+                            "dependantField": "bloodGroup",
+                            "conditions": [
+                                {
+                                    "value": "A+",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "aPositive",
+                                            "title": "A+",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter A+",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "B+",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "bPositive",
+                                            "title": "B+",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter B+",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "otherBloodGroup",
+                                    "fields": [
+                                        {
+                                            "type": "radiogroup",
+                                            "name": "otherBloodGroup",
+                                            "title": "Other Blood Group",
+                                            "description": "dddd",
+                                            "isRequired": true,
+                                            "readOnly": true,
+                                            "choices": [
+                                                {
+                                                    "value": "AB+",
+                                                    "text": "AB+"
+                                                },
+                                                {
+                                                    "value": "O+",
+                                                    "text": "O+"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "conditional",
+                                            "dependantField": "otherBloodGroup",
+                                            "conditions": [
+                                                {
+                                                    "value": "AB+",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "abPositive",
+                                                            "title": "AB+",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter AB+",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "value": "O+",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "oPositive",
+                                                            "title": "O+",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter O+",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
