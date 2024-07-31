@@ -127,7 +127,7 @@ class OptionCard extends HookWidget {
               Icon(
                 options[index].icon,
                 color: isSelected ? AppColor.white : AppColor.black,
-                size: isSelected ? 22 : 20,
+                size: isSelected ? 22 : 22,
               ),
               if (!isTablet) const SizedBox(width: 16),
               if (!isTablet)
