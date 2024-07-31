@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/l
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/constants/api_constant.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -68,7 +69,7 @@ class MyApp extends ConsumerWidget {
                 ],
                 navigatorObservers: [matomoObserver],
                 supportedLocales: appLocales.map((e) => Locale(e.locale)),
-                debugShowCheckedModeBanner: false,
+                debugShowCheckedModeBanner: ApiConstant.isDev,
                 themeMode: ref.watch(themeProvider),
                 theme: ref.watch(themeProvider) == ThemeMode.light
                     ? AppTheme.getLightTheme(context)

@@ -28,6 +28,8 @@ class ApiConstant {
         break;
     }
   }
+
+  static bool get isDev => appEnvironment == AppEnvironment.development;
 }
 
 enum AppEnvironment { development, staging, production }
