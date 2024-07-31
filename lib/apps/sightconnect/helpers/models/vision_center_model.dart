@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/enums/facility_type.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/enums/facility_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vision_center_model.freezed.dart';

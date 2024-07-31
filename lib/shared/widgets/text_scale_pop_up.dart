@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../apps/sightconnect/core/providers/global_provider.dart';
+import '../../apps/sightconnect/helpers/providers/global_provider.dart';
 import '../constants/app_color.dart';
 import '../theme/text_theme.dart';
 

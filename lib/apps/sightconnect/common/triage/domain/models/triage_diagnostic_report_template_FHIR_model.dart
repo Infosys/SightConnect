@@ -20,7 +20,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/e
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/questionnaire_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/range_category.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/test_code.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/timestamp_converter.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'triage_diagnostic_report_template_FHIR_model.freezed.dart';

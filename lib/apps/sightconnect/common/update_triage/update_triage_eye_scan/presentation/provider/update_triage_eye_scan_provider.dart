@@ -13,7 +13,6 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/t
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/repositories/triage_repository.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/repositories/triage_urgency_repository.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart'
     as triage_detailed_model;
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
@@ -21,6 +20,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_asse
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/source.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/patient_assesssment_and_test_provider_new.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';

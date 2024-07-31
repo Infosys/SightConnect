@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_close_assessment/data/contracts/vt_close_assessment_reposirtory.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_close_assessment/data/models/vt_close_assessment_model.dart';
@@ -7,6 +6,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_close_assessment/presentation/provider/vt_close_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/failure.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/distance_visual_acuity_tumbling/presentation/widgets/distance_visual_acuity_tumbling_test_right_eye_instruction.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';

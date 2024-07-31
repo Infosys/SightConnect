@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/performer_role.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/source.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'triage_post_model.freezed.dart';

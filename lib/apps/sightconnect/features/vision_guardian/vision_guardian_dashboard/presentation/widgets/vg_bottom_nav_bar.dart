@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/bottom_nav_item.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';

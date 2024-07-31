@@ -13,8 +13,8 @@ import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../../../../../shared/widgets/app_name_avatar.dart';
 import '../../../../../../../shared/widgets/app_network_image.dart';
 import '../../../../../common/initialization/pages/patient_registeration_miniapp_page.dart';
-import '../../../../../core/models/patient_response_model.dart';
-import '../../../../../core/providers/global_patient_provider.dart';
+import '../../../../../helpers/models/patient_response_model.dart';
+import '../../../../../helpers/providers/global_patient_provider.dart';
 import '../providers/appointment_view_model_provider.dart';
 
 class AppointmentPatientSelector extends HookConsumerWidget {

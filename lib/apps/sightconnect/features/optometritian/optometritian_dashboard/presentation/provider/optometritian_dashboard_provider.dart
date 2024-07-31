@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/data/models/optometrician_dashboard_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/contract/optometrician_dashboard_repository.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/repositories/optometrician_dashboard_repository_impl.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

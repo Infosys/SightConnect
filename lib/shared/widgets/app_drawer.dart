@@ -7,9 +7,9 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/l
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/referral/presentation/modals/referral_generate_sheet.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/tenant/presentation/pages/patient_tenants_display_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
@@ -27,7 +27,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 
-import '../../apps/sightconnect/core/models/drawer_menu_item.dart';
+import '../../apps/sightconnect/helpers/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
 import '../pages/help_and_support_page.dart';
 

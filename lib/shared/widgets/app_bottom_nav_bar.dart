@@ -1,7 +1,7 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/bottom_nav_item.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_services/presentation/pages/patient_services_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/bottom_nav_item.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';

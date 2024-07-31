@@ -7,8 +7,8 @@ import '../../../../../../shared/constants/app_size.dart';
 import '../../../../../../shared/theme/app_shadow.dart';
 import '../../../../../../shared/theme/text_theme.dart';
 import '../../../../../../shared/widgets/custom_app_bar.dart';
-import '../../../../core/providers/global_tenant_provider.dart';
-import '../../../../core/providers/global_vt_provider.dart';
+import '../../../../helpers/providers/global_tenant_provider.dart';
+import '../../../../helpers/providers/global_vt_provider.dart';
 import '../widgets/vc_list_tile.dart';
 import '../widgets/vc_radio_button.dart';
 

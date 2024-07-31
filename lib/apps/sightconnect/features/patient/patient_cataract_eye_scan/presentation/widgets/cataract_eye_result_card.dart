@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

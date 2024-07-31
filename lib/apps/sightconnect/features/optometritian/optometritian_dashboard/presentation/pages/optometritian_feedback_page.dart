@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/providers/triage_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';
@@ -18,7 +18,7 @@ import '../../../../../../../shared/services/persistent_auth_service.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../../../common/triage/data/source/local/triage_db_helper.dart';
 import '../../../../../common/triage/presentation/providers/optometrician_triage_provider.dart';
-import '../../../../../core/models/keycloak.dart';
+import '../../../../../helpers/models/keycloak.dart';
 import '../provider/optometritian_add_patient_provider.dart';
 import '../provider/optometritian_feedback_provider.dart';
 

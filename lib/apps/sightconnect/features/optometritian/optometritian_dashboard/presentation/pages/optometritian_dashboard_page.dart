@@ -1,10 +1,10 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_add_patient_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_search_patient_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';

@@ -1,8 +1,5 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_tenant_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/source/vg_add_event_remote_source.dart';
@@ -11,6 +8,9 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_eye_assessment/presentation/pages/vg_eye_assessment_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_home/data/models/vg_bottom_nav_items.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_profile/presentation/pages/vg_profile.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';

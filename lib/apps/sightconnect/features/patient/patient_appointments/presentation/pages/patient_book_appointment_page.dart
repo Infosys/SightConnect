@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/data/models/eua_on_search_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/presentation/providers/appointment_view_model_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/presentation/widgets/appointment_date_selector.dart';
@@ -7,6 +6,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appo
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/presentation/widgets/eye_problem_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/presentation/widgets/nearby_eye_clinic.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/presentation/widgets/select_time.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';

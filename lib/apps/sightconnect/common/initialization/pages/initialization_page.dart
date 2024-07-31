@@ -26,7 +26,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
 import '../../../../../shared/services/location_service.dart';
-import '../../../core/models/keycloak.dart';
+import '../../../helpers/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
   static const String routeName = '/initialization';

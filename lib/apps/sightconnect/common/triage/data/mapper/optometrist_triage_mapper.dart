@@ -5,14 +5,14 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/e
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_optometrician_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_visual_acuity_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/provider/optometritian_feedback_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_optometrician_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_visual_acuity_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../../main.dart';
-import '../../../../core/providers/global_language_provider.dart';
+import '../../../../helpers/providers/global_language_provider.dart';
 
 class OptometristTriageMapper {
   OptometristTriageMapper();

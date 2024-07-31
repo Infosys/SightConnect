@@ -1,7 +1,5 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/usecases/get_assessment_usecase.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/patient_response_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/mappers/triage_report_brief_mapper.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/mappers/triage_report_detailed_mapper.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
@@ -10,6 +8,8 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_asse
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/presentation/provider/patient_assessment_update_data_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/patient_response_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

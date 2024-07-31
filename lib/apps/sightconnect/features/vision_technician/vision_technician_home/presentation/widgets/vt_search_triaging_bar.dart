@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vt_availibility_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/presentation/pages/vt_profile_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_availibility_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/tenant/presentation/widgets/vc_list_tile.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/tenant/presentation/widgets/vc_radio_button.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_tenant_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';

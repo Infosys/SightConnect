@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/timestamp_converter.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'patient_response_model.freezed.dart';

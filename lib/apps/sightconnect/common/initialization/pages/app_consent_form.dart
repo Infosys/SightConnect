@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/app_web_view.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/repositories/consent_repository_impl.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/providers/global_language_provider.dart';
+import '../../../helpers/providers/global_language_provider.dart';
 
 final appConsentFormProvider = FutureProvider((ref) {
   final consentRepository = ref.watch(consentRepositoryProvider);

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';

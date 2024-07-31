@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/usecases/get_triage_current_step_usecase.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/keycloak.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/foundation.dart';

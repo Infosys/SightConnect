@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/keycloak.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';

@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/data/source/remote/triage_remote_source.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/volunteer_post_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_patient_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/volunteer_post_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';

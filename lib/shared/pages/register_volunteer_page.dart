@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/volunteer_post_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/repositories/volunteer_repository_impl.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/volunteer_post_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/volunteer_repository_impl.dart';
 import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';

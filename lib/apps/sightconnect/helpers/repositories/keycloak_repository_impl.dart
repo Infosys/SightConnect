@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/keycloak.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/repositories/keycloak_repository.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/keycloak_repository.dart';
 import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';

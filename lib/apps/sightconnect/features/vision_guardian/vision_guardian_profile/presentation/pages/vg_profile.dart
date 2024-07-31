@@ -1,12 +1,12 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_name_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_organisation_details_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_profile/presentation/widgets/vg_profile_personal_details_card.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';

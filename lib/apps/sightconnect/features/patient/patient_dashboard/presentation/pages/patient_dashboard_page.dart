@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_home/presentation/pages/patient_home_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/pincode_dialog_page.dart';

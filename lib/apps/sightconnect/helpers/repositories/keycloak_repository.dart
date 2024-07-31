@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/keycloak.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart';
 
 abstract class KeycloakRepository {
   Future<int> sendOtp({required String mobile});

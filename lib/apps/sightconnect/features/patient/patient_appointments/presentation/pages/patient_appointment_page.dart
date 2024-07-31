@@ -10,8 +10,8 @@ import '../../../../../../../shared/constants/app_size.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../../../../../shared/widgets/app_name_avatar.dart';
 import '../../../../../../../shared/widgets/app_network_image.dart';
-import '../../../../../core/models/patient_response_model.dart';
-import '../../../../../core/providers/global_patient_provider.dart';
+import '../../../../../helpers/models/patient_response_model.dart';
+import '../../../../../helpers/providers/global_patient_provider.dart';
 import '../widgets/appointment_patient_selector.dart';
 import 'patient_book_appointment_page.dart';
 

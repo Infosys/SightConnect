@@ -16,7 +16,7 @@ import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detectio
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../apps/sightconnect/common/visual_acuity/providers/distance_notifier_provider.dart';
-import '../../apps/sightconnect/core/providers/global_visual_acuity_provider.dart';
+import '../../apps/sightconnect/helpers/providers/global_visual_acuity_provider.dart';
 
 class FaceDistanceDetector extends ConsumerStatefulWidget {
   const FaceDistanceDetector({

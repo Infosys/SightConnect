@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../shared/services/failure.dart';
-import '../../../../core/usecases/usecase.dart';
+import '../../../../helpers/usecases/usecase.dart';
 import '../../data/repositories/triage_repository_impl.dart';
 import '../models/triage_post_model.dart';
 import '../repositories/triage_repository.dart';

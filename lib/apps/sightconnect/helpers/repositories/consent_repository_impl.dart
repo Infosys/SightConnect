@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/consent_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/repositories/consent_repository.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/consent_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_repository.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';

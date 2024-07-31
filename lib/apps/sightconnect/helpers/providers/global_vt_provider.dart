@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_tenant_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vt_availibility_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_availibility_provider.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/services/shared_preference.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assesment_eye_image_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_details.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessement_report_recommeded_center.dart';
@@ -8,6 +7,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessment_report_remark_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_report/presentation/widgets/assessmnet_acuity_score_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';

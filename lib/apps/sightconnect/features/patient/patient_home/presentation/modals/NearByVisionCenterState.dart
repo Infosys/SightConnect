@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:location/location.dart';
 
-import '../../../../../core/models/vision_center_model.dart';
+import '../../../../../helpers/models/vision_center_model.dart';
 
 part 'NearByVisionCenterState.freezed.dart';
 

@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/patient_registeration_miniapp_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/patient_response_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_profile/presentation/provider/patient_helper.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_profile/presentation/provider/patient_profile_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/patient_response_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_update_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_tenant_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';

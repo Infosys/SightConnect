@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/login_mobile_number_field.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/otp_input_field.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/otp_timer.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';

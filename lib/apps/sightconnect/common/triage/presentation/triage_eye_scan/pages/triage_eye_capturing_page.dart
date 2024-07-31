@@ -10,9 +10,9 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/tr
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_eye_scan/widgets/test_completion_dialog.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_result/pages/triage_result_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/keycloak.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_feedback_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_page.dart';

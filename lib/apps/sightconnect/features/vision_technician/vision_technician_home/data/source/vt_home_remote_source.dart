@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/table_params.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/vt_analytics_stats.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';

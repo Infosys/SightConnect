@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/foundation.dart';

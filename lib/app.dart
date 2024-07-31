@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/dashboard/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';

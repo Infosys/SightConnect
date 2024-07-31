@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_visual_acuity_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_visual_acuity_provider.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';

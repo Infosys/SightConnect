@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/repositories/consent_repository_impl.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';

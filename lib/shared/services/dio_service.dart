@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_tenant_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
 import 'package:eye_care_for_all/shared/services/interceptors.dart';

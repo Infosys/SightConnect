@@ -1,8 +1,8 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/enitity/assessment_and_triage_report_entity.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/vt_assessesment_and_test_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_report/presentation/pages/vision_technician_assessment_report_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_assessment_timeline.dart/presentation/widgets/timeline_assessmnet_tile.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/enitity/assessment_and_triage_report_entity.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/vt_assessesment_and_test_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';

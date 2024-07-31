@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/patient_instruction.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/triage_enums.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_close_assessment/data/enums/vt_close_assessment_enums.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/data/enums/category_enum.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../../common/triage/domain/models/enums/status.dart';

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/data/models/optometrician_triage_response.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/data/source/remote/optometrician_triage_remote_source.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_optometrician_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_optometrician_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/triage_enums.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/models/vision_center_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/data/model/care_plan_post_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/vision_center_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

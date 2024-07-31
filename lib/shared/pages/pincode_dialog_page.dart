@@ -6,8 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../apps/sightconnect/common/initialization/pages/patient_registeration_miniapp_page.dart';
-import '../../apps/sightconnect/core/models/patient_response_model.dart';
-import '../../apps/sightconnect/core/providers/global_patient_provider.dart';
+import '../../apps/sightconnect/helpers/models/patient_response_model.dart';
+import '../../apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import '../../main.dart';
 import '../services/geocoding_service.dart';
 import '../services/location_service.dart';

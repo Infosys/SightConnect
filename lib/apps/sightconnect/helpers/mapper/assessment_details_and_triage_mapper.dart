@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/model/triage_detailed_report_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/entities/triage_report_detailed_entity.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/enitity/assessment_and_triage_report_entity.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';

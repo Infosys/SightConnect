@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/volunteer_post_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/volunteer_post_model.dart';
 
 abstract class VolunteerRepository {
   Future<void> postVolunteer(VolunteerPostModel volunteerPostModel);

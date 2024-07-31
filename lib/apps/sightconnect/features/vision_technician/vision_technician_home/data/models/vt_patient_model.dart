@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/timestamp_converter.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/enums/vision_technician_home_enums.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vt_patient_model.freezed.dart';

@@ -27,7 +27,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../core/providers/global_visual_acuity_provider.dart';
+import '../../../../../../helpers/providers/global_visual_acuity_provider.dart';
 import '../../../../../triage/domain/models/enums/observation_code.dart';
 import '../../../../../triage/domain/models/enums/performer_role.dart';
 import '../../../../data/local/tumbling_local_source.dart';

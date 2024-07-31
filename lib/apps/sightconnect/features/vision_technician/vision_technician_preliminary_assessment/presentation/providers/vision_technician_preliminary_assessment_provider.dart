@@ -14,7 +14,6 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/pr
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_eye_scan/provider/triage_eye_scan_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_questionnaire/provider/triage_questionnaire_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/repository/triage_report_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/vt_patient_model.dart';
@@ -28,6 +27,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/preliminary_assessment_helper_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/presentation/providers/vision_technician_triage_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/widgets/traige_exit_alert_box.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
@@ -15,7 +15,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../../../../../../core/providers/global_visual_acuity_provider.dart';
+import '../../../../../../helpers/providers/global_visual_acuity_provider.dart';
 import '../../../../../triage/presentation/triage_member_selection/widget/triage_steps_drawer.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../../../../domain/models/tumbling_models.dart';

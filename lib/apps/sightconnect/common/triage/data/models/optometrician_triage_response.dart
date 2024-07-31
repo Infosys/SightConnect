@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/observation_code.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/models/timestamp_converter.dart';
+import '../../../../helpers/models/timestamp_converter.dart';
 
 part 'optometrician_triage_response.freezed.dart';
 part 'optometrician_triage_response.g.dart';

@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/apps/sightconnect/core/models/patient_response_model.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_optometrician_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/core/providers/global_patient_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/patient_response_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_optometrician_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
