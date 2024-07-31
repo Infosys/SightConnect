@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 // Layout builder
@@ -63,11 +65,22 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final totalPages = (filteredData.length / rowsPerPage).ceil();
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildSearchBar(),
         _buildFilterChips(),
-        _buildPaginatedTable(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildPaginatedTable(),
+              ],
+            ),
+          ),
+        ),
+        _buildPaginationControls(totalPages),
       ],
     );
   }
@@ -111,24 +124,17 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   Widget _buildPaginatedTable() {
     final displayedRows =
         filteredData.skip(currentPage * rowsPerPage).take(rowsPerPage).toList();
-    final totalPages = (filteredData.length / rowsPerPage).ceil();
 
-    return Column(
-      children: [
-        DataTable(
-          columns: widget.headers
-              .map((header) => DataColumn(label: Text(header)))
-              .toList(),
-          rows: displayedRows.map((item) => widget.rowBuilder(item)).toList(),
-        ),
-        _buildPaginationControls(totalPages),
-      ],
+    return DataTable(
+      columns: widget.headers
+          .map((header) => DataColumn(label: Text(header)))
+          .toList(),
+      rows: displayedRows.map((item) => widget.rowBuilder(item)).toList(),
     );
   }
 
   Widget _buildPaginationControls(int totalPages) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
           icon: const Icon(Icons.chevron_left),
@@ -158,8 +164,21 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
 
 class MyTablePage extends StatelessWidget {
   final List<TableData> data = [
-    TableData(id: '1', name: 'Item 1', description: 'Description 1'),
-    TableData(id: '2', name: 'Item 2', description: 'Description 2'),
+    TableData(id: '1', name: 'Arpit', description: 'Description 1'),
+    TableData(id: '2', name: 'Bhavesh', description: 'Description 2'),
+    TableData(id: '3', name: 'C', description: 'Description 3'),
+    TableData(id: '4', name: 'D', description: 'Description 4'),
+    TableData(id: '5', name: 'E', description: 'Description 5'),
+    TableData(id: '6', name: 'F', description: "Description"),
+    TableData(id: '7', name: 'G', description: 'Description 7'),
+    TableData(id: '8', name: 'H', description: 'Description 8'),
+    TableData(id: '9', name: 'I', description: 'Description 9'),
+    TableData(id: '10', name: 'J', description: 'Description 10'),
+    TableData(id: '11', name: 'K', description: 'Description 11'),
+    TableData(id: '12', name: 'L', description: 'Description 12'),
+    TableData(id: '13', name: 'Mehul', description: 'Description 13'),
+    TableData(id: '14', name: 'N', description: 'Description 14'),
+    TableData(id: '15', name: 'O', description: 'Description 15'),
     // Add more data as needed
   ];
 
@@ -185,10 +204,33 @@ class MyTablePage extends StatelessWidget {
           ),
           filterOptions: const ['Option 1', 'Option 2'],
           filterMatcher: (item, filter) => item.name.contains(filter),
-          searchMatcher: (item, query) =>
-              item.name.contains(query) || item.description.contains(query),
+          searchMatcher: (item, query) => searchFunction(item, query),
         ),
       ),
     );
   }
 }
+
+bool searchFunction(TableData item, String query) {
+  return item.id.toLowerCase().contains(query.toLowerCase()) ||
+      item.name.toLowerCase().contains(query.toLowerCase()) ||
+      item.description.toLowerCase().contains(query.toLowerCase());
+}
+
+class Debouncer {
+  Debouncer({required this.milliseconds});
+  final int milliseconds;
+  Timer? _timer;
+  void run(VoidCallback action) {
+    if (_timer?.isActive ?? false) {
+      _timer?.cancel();
+    }
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
+}
+
+// final debouncer = Debouncer(milliseconds: 500);
+// debouncer.run(() {
+//    // put the code that you want to debounce
+//    // example: calling an API, adding a BLoC event
+// });
