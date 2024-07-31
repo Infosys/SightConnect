@@ -18,13 +18,18 @@ class EyeBankDashboardPage extends StatelessWidget {
       ),
       MenuItem(
         id: 2,
-        title: "Patients",
-        icon: Icons.people,
+        title: "Cases",
+        icon: Icons.file_present,
       ),
       MenuItem(
         id: 3,
-        title: "Donors",
-        icon: Icons.people,
+        title: "Organ Inventory",
+        icon: Icons.safety_check,
+      ),
+      MenuItem(
+        id: 4,
+        title: "Delivery",
+        icon: Icons.delivery_dining,
       ),
     ];
     final isMobile = Responsive.isMobile(context);
