@@ -10,7 +10,8 @@ class DesktopClipper extends StatelessWidget {
     if (!kIsWeb) {
       return widget;
     }
-    return Center(
+    return Align(
+      alignment: Alignment.topCenter,
       child: Container(
         color: Colors.pink,
         margin: const EdgeInsets.all(8),
