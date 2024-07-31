@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/common_features/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
+import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 

@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:flutter/material.dart';

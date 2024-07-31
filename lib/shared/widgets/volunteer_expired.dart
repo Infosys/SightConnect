@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/models/volunteer_post_model.dart';
-import 'package:eye_care_for_all/core/repositories/volunteer_repository_impl.dart';
-import 'package:eye_care_for_all/core/services/exceptions.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/core/models/volunteer_post_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/core/repositories/volunteer_repository_impl.dart';
 import 'package:eye_care_for_all/env.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/shared/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/services/exceptions.dart';
+import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/volunteer_approved.dart';
 import 'package:flutter/material.dart';

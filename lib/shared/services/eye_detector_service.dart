@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/shared/widgets/coordinates_translator_android.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
-import '../../features/common_features/triage/domain/models/enums/triage_enums.dart';
+
+import '../../apps/sightconnect/common/triage/domain/models/enums/triage_enums.dart';
 
 class EyeDetectorService {
   static final Map<DeviceOrientation, int> _orientations = {
@@ -74,7 +76,7 @@ class EyeDetectorService {
     );
   }
 
-    static FaceMesh getLargestFace(List<FaceMesh> faces) {
+  static FaceMesh getLargestFace(List<FaceMesh> faces) {
     FaceMesh largestFace = faces.reduce(
       (currentFace, nextFace) =>
           (currentFace.boundingBox.width * currentFace.boundingBox.height) >

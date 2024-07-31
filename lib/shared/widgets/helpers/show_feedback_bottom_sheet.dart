@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:eye_care_for_all/core/services/app_info_service.dart';
+import 'package:eye_care_for_all/shared/services/app_info_service.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';

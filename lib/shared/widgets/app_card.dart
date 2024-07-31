@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:flutter/widgets.dart';
 

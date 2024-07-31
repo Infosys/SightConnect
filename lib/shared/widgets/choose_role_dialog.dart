@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../core/models/keycloak.dart';
+import '../../apps/sightconnect/core/models/keycloak.dart';
 import '../theme/text_theme.dart';
 
 class ChooseRoleDialog extends HookWidget {

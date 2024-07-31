@@ -5,12 +5,12 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/models/patient_response_model.dart';
-import '../../core/providers/global_patient_provider.dart';
-import '../../core/services/geocoding_service.dart';
-import '../../core/services/location_service.dart';
-import '../../features/common_features/initialization/pages/patient_registeration_miniapp_page.dart';
+import '../../apps/sightconnect/common/initialization/pages/patient_registeration_miniapp_page.dart';
+import '../../apps/sightconnect/core/models/patient_response_model.dart';
+import '../../apps/sightconnect/core/providers/global_patient_provider.dart';
 import '../../main.dart';
+import '../services/geocoding_service.dart';
+import '../services/location_service.dart';
 import '../theme/text_theme.dart';
 
 class PincodeDialogPage extends HookConsumerWidget {
