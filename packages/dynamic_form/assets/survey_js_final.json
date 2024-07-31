@@ -1,0 +1,380 @@
+{
+    "title": "Doctor Consent Form",
+    "logoPosition": "right",
+    "pages": [
+        {
+            "name": "page1",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Personal Eye Donation Referral Information",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question3",
+                            "title": "title",
+                            "description": "descrioption",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "validators": [],
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Voluntary - Family Initated"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Voluntary - Volunteer Motivated"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "HCRP - Motivated"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "question1",
+                            "title": "tttt",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "Item 1",
+                                "Item 2",
+                                "Item 3"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question4",
+                            "title": "Donation Counselor/Volunteer",
+                            "description": "descrion",
+                            "isRequired": true,
+                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
+                            "readOnly": false,
+                            "placeholder": "palceholder"
+                        },
+                        {
+                            "type": "comment",
+                            "name": "question11",
+                            "title": "Unit Details",
+                            "description": "desciptio",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "placeholder": "hind"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "question12",
+                            "title": "Condition I Agree to:",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                {
+                                    "value": "Item 1Condition",
+                                    "text": "Condition 1"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Condition 2"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Condition 3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "question13",
+                            "title": "Health Insurance Card",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "maxSize": 5
+                        },
+                        {
+                            "type": "text",
+                            "name": "question14",
+                            "title": "Visual Acuity",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "inputType": "range",
+                            "min": 0,
+                            "max": 100,
+                            "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "page2",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": []
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "contactType",
+                            "title": "Contact Type",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "office",
+                                "home",
+                                "emergency"
+                            ]
+                        },
+                        {
+                            "type": "conditional",
+                            "dependantField": "contactType",
+                            "conditions": [
+                                {
+                                    "value": "office",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "officeEmail",
+                                            "title": "Office Email",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter Office Email",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "home",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "homeEmail",
+                                            "title": "Home Email",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter Home Email",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "emergency",
+                                    "fields": [
+                                        {
+                                            "type": "dropdown",
+                                            "name": "emergencyContactType",
+                                            "title": "Emergency Contact Type",
+                                            "description": "dddd",
+                                            "isRequired": true,
+                                            "readOnly": true,
+                                            "choices": [
+                                                "parent",
+                                                "friend"
+                                            ]
+                                        },
+                                        {
+                                            "type": "conditional",
+                                            "dependantField": "emergencyContactType",
+                                            "conditions": [
+                                                {
+                                                    "value": "parent",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "parentPhone",
+                                                            "title": "Parent's Email",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter Parent's Email",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "value": "friend",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "friendPhone",
+                                                            "title": "Friend's Phone",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter Friend's Phone Number",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        },
+                                                        {
+                                                            "type": "text",
+                                                            "name": "friendEmail",
+                                                            "title": "Friend's Email",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter Friend's Email",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "bloodGroup",
+                            "title": "Blood Group",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "A+",
+                                "B+",
+                                "otherBloodGroup"
+                            ]
+                        },
+                        {
+                            "type": "conditional",
+                            "dependantField": "bloodGroup",
+                            "conditions": [
+                                {
+                                    "value": "A+",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "aPositive",
+                                            "title": "A+",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter A+",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "B+",
+                                    "fields": [
+                                        {
+                                            "type": "text",
+                                            "name": "bPositive",
+                                            "title": "B+",
+                                            "description": "descrion",
+                                            "isRequired": true,
+                                            "requiredErrorText": "Please Enter B+",
+                                            "readOnly": false,
+                                            "placeholder": "palceholder"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "otherBloodGroup",
+                                    "fields": [
+                                        {
+                                            "type": "radiogroup",
+                                            "name": "otherBloodGroup",
+                                            "title": "Other Blood Group",
+                                            "description": "dddd",
+                                            "isRequired": true,
+                                            "readOnly": true,
+                                            "choices": [
+                                                {
+                                                    "value": "AB+",
+                                                    "text": "AB+"
+                                                },
+                                                {
+                                                    "value": "O+",
+                                                    "text": "O+"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "conditional",
+                                            "dependantField": "otherBloodGroup",
+                                            "conditions": [
+                                                {
+                                                    "value": "AB+",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "abPositive",
+                                                            "title": "AB+",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter AB+",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "value": "O+",
+                                                    "fields": [
+                                                        {
+                                                            "type": "text",
+                                                            "name": "oPositive",
+                                                            "title": "O+",
+                                                            "description": "descrion",
+                                                            "isRequired": true,
+                                                            "requiredErrorText": "Please Enter O+",
+                                                            "readOnly": false,
+                                                            "placeholder": "palceholder"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

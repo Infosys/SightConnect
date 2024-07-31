@@ -1,24 +1,24 @@
 import 'dart:ui';
 
-import 'package:eye_care_for_all/core/constants/app_color.dart';
-import 'package:eye_care_for_all/core/constants/app_size.dart';
-import 'package:eye_care_for_all/core/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/core/services/app_info_service.dart';
-import 'package:eye_care_for_all/core/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/features/chatbot/presentation/pages/chatbot_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/app_consent_form.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/initialization_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/features/common_features/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/features/common_features/referral/presentation/modals/referral_generate_sheet.dart';
-import 'package:eye_care_for_all/features/common_features/tenant/presentation/pages/patient_tenants_display_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
-import 'package:eye_care_for_all/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/presentation/pages/chatbot_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/app_consent_form.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/referral/presentation/modals/referral_generate_sheet.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/tenant/presentation/pages/patient_tenants_display_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/presentation/pages/patient_assessments_and_tests_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/helpers/show_feedback_bottom_sheet.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/register_volunteer_page.dart';
+import 'package:eye_care_for_all/shared/services/app_info_service.dart';
+import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/helpers/show_feedback_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -27,7 +27,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:superapp_scanner/pages/superapp_scanner_page.dart';
 
-import '../../core/models/drawer_menu_item.dart';
+import '../../apps/sightconnect/helpers/models/drawer_menu_item.dart';
 import '../pages/about_us_page.dart';
 import '../pages/help_and_support_page.dart';
 

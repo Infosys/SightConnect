@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
-import 'package:eye_care_for_all/core/services/permission_service.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/service/face_distance_detector_service_android.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/service/face_distance_detector_service_ios.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/face_distance_painter.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/face_distance_detector_service_android.dart';
-import 'package:eye_care_for_all/shared/services/face_distance_detector_service_ios.dart';
-import 'package:eye_care_for_all/shared/widgets/face_distance_painter.dart';
+import 'package:eye_care_for_all/shared/services/permission_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,8 +15,8 @@ import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart'
 import 'package:google_mlkit_face_mesh_detection/google_mlkit_face_mesh_detection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/providers/global_visual_acuity_provider.dart';
-import '../../features/common_features/visual_acuity/providers/distance_notifier_provider.dart';
+import '../../apps/sightconnect/common/visual_acuity/providers/distance_notifier_provider.dart';
+import '../../apps/sightconnect/helpers/providers/global_visual_acuity_provider.dart';
 
 class FaceDistanceDetector extends ConsumerStatefulWidget {
   const FaceDistanceDetector({

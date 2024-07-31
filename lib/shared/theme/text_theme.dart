@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/core/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
