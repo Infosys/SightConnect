@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/sightconnect/common/dashboard/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/app_consent_form.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
@@ -72,29 +71,20 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<void> _profileVerification(Role role) async {
     final navigator = Navigator.of(context);
-    // Testing purpose only
-    if (role == Role.ROLE_EYE_BANK) {
-      navigator.pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const EyeBankDashboardPage(),
-        ),
-        (route) => false,
-      );
-    } else {
-      try {
-        final userExist =
-            await ref.read(initializationProvider).checkUserAlreadyExist(role);
-        logger.d("User Exist: $userExist");
-        if (userExist) {
-          _handleExistingUser(navigator, role);
-        } else {
-          _handleNewUser(navigator, role);
-        }
-      } catch (e) {
-        logger.e("checkUserAlreadyExist: $e");
-        // In case of any other error, logout the user
-        await _invalidateAndLogout("Server Error. Please login again.");
+
+    try {
+      final userExist =
+          await ref.read(initializationProvider).checkUserAlreadyExist(role);
+      logger.d("User Exist: $userExist");
+      if (userExist) {
+        _handleExistingUser(navigator, role);
+      } else {
+        _handleNewUser(navigator, role);
       }
+    } catch (e) {
+      logger.e("checkUserAlreadyExist: $e");
+      // In case of any other error, logout the user
+      await _invalidateAndLogout("Server Error. Please login again.");
     }
   }
 

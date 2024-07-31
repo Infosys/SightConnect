@@ -18,12 +18,11 @@ class KeycloakResponse with _$KeycloakResponse {
 }
 
 enum Role {
-  ROLE_PATIENT(),
+  ROLE_PATIENT,
   ROLE_VISION_GUARDIAN,
   ROLE_VISION_TECHNICIAN,
   ROLE_OPTOMETRIST,
-  ROLE_EYE_BANK,
-  ROLE_ORG_ADMIN,
+
   ROLE_VOLUNTEER
 }
 
@@ -37,10 +36,6 @@ Role? roleMapper(String? role) {
       return Role.ROLE_VISION_TECHNICIAN;
     case "ROLE_OPTOMETRIST":
       return Role.ROLE_OPTOMETRIST;
-    case "ROLE_EYE_BANK":
-      return Role.ROLE_EYE_BANK;
-    case "ROLE_ORG_ADMIN":
-      return Role.ROLE_ORG_ADMIN;
     case "ROLE_VOLUNTEER":
       return Role.ROLE_VOLUNTEER;
     default:
@@ -58,11 +53,6 @@ String roleToString(Role role) {
       return "ROLE_VISION_TECHNICIAN";
     case Role.ROLE_OPTOMETRIST:
       return "ROLE_OPTOMETRIST";
-    case Role.ROLE_EYE_BANK:
-      return "ROLE_EYE_BANK";
-    case Role.ROLE_ORG_ADMIN:
-      return "ROLE_ORG_ADMIN";
-
     case Role.ROLE_VOLUNTEER:
       return "ROLE_VOLUNTEER";
     default:
