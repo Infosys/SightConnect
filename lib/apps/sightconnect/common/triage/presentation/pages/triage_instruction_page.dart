@@ -1,10 +1,10 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/widgets/triage_test_counter_indicator.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

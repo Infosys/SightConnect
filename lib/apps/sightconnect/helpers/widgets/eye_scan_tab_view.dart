@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'app_network_image.dart';
+import '../../../../shared/widgets/app_network_image.dart';
 
 class EyeScanTabView extends StatelessWidget {
   const EyeScanTabView({
