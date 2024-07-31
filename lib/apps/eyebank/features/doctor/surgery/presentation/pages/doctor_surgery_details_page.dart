@@ -2,12 +2,12 @@ import 'package:eye_care_for_all/apps/eyebank/features/doctor/surgery/presentati
 import 'package:eye_care_for_all/apps/eyebank/features/doctor/surgery/presentation/widgets/pre_operative_checklist.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/doctor/surgery/presentation/widgets/recipient_details_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/doctor/surgery/presentation/widgets/tissue_details_card.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/doctor_info_card.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
-import 'package:eye_care_for_all/shared/widgets/doctor_info_card.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_checkbox_button.dart';
 import 'package:eye_care_for_all/shared/widgets/input_fields/app_text_field.dart';
 import 'package:flutter/material.dart';

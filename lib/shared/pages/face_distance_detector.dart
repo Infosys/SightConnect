@@ -2,11 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/service/face_distance_detector_service_android.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/service/face_distance_detector_service_ios.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/face_distance_painter.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/face_distance_detector_service_android.dart';
-import 'package:eye_care_for_all/shared/services/face_distance_detector_service_ios.dart';
 import 'package:eye_care_for_all/shared/services/permission_service.dart';
-import 'package:eye_care_for_all/shared/widgets/face_distance_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

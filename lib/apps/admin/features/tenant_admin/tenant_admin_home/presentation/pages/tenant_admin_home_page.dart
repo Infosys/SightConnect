@@ -1,9 +1,9 @@
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/pages/tenant_admin_analytics_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/analytics_cards.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/analytics_cards.dart';
 import 'package:eye_care_for_all/shared/widgets/app_paginated_table.dart';
 import 'package:eye_care_for_all/shared/widgets/home_search_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/statistics_cards_carousel_slider.dart';

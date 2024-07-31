@@ -7,10 +7,10 @@ import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/presentation/w
 import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/presentation/widgets/chat_query_suggestions.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/presentation/widgets/loading_indicator.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/text_to_speech.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

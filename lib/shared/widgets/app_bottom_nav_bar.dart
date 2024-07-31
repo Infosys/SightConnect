@@ -2,11 +2,11 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_noti
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_services/presentation/pages/patient_services_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/helpers/show_triage_how_to_proceed_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/helpers/show_triage_how_to_proceed_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
