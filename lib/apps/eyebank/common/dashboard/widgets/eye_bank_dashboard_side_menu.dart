@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/pages/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -23,21 +24,39 @@ class EyeBankDashboardSideMenu extends HookWidget {
           decoration: BoxDecoration(
               color: AppColor.white, borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.only(top: 16, bottom: 16),
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return OptionCard(
-                index: index,
-                options: items,
-                isSelected: selected.value.id == items[index].id,
-                onSelect: (selectedItem) {
-                  selected.value = selectedItem;
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+                child: Image.asset(
+                  AppImages.logo,
+                  height: 40,
+                ),
+              ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return OptionCard(
+                    index: index,
+                    options: items,
+                    isSelected: selected.value.id == items[index].id,
+                    onSelect: (selectedItem) {
+                      selected.value = selectedItem;
+                    },
+                  );
                 },
-              );
-            },
+              ),
+            ],
           ),
         ),
       );

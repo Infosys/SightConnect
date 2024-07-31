@@ -13,10 +13,10 @@ class DesktopClipper extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
-        color: Colors.pink,
+        // color: Colors.pink,
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(8),
-        constraints: const BoxConstraints(maxWidth: 1400),
+        constraints: const BoxConstraints(maxWidth: 1600),
         child: widget,
       ),
     );
