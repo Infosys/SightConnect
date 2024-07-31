@@ -14,32 +14,45 @@ class EyeBankDashboardSideMenu extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selected = useState<MenuItem>(items.first);
+    final isMobile = Responsive.isMobile(context);
+    final isTablet = Responsive.isTablet(context);
 
-    if (Responsive.isMobile(context)) {
+    if (isMobile) {
       return const SizedBox();
     } else {
       return SingleChildScrollView(
         child: Container(
           width: Responsive.isTablet(context) ? 100 : 300,
           decoration: BoxDecoration(
-              color: AppColor.white, borderRadius: BorderRadius.circular(8)),
+            color: AppColor.white,
+            borderRadius: BorderRadius.circular(8),
+          ),
           padding: const EdgeInsets.only(top: 16, bottom: 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
-                child: Image.asset(
-                  AppImages.logo,
-                  height: 40,
-                ),
-              ),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  margin:
+                      const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+                  child: () {
+                    if (isTablet) {
+                      return Image.asset(
+                        "assets/logo/app_icon.png",
+                        height: 40,
+                      );
+                    } else {
+                      return Image.asset(
+                        AppImages.logo,
+                        height: 40,
+                      );
+                    }
+                  }()),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
