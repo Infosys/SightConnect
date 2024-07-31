@@ -10,23 +10,14 @@ class DesktopClipper extends StatelessWidget {
     if (!kIsWeb) {
       return widget;
     }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Center(
-            child: Container(
-              color: Colors.pink,
-              margin: const EdgeInsets.all(8),
-              padding: const EdgeInsets.all(8),
-              constraints: const BoxConstraints(maxWidth: 1400),
-              child: widget,
-            ),
-          ),
-        ),
-      ],
+    return Center(
+      child: Container(
+        color: Colors.pink,
+        margin: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
+        constraints: const BoxConstraints(maxWidth: 1400),
+        child: widget,
+      ),
     );
   }
 }
