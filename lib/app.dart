@@ -1,9 +1,9 @@
+import 'package:eye_care_for_all/apps/sightconnect/common/dashboard/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/pages/custom_table.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -79,7 +79,7 @@ class MyApp extends ConsumerWidget {
                 // initialRoute: initialRoute,
                 // navigatorKey: AppRouter.navigatorKey,
                 // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: MyTablePage(),
+                home: const EyeBankDashboardPage(),
 
                 // builder: (context, child) {
                 //   return ref.watch(internetProvider).maybeWhen(
