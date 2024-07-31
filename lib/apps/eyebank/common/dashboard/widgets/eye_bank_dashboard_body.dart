@@ -1,4 +1,5 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/admin/dashboard/presentation/widgets/admin_donor_table.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -44,6 +45,14 @@ class EyeBankDashboardBody extends StatelessWidget {
                   )
                 ],
               ),
+              const SizedBox(
+                height: 16,
+              ),
+              const Divider(),
+              const SizedBox(
+                height: 16,
+              ),
+              const AdminDonorTable()
             ],
           ),
         ),
