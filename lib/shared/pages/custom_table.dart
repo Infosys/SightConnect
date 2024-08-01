@@ -109,6 +109,24 @@ class ApiService {
         "Eye": "Left Eye",
         "Category": "Harvests",
         "Status": "Pending"
+      },
+      {
+        "SampleID": "5",
+        "Date": "2022-01-05",
+        "Donor": "Michael",
+        "Tissue": "Whole Globe",
+        "Eye": "Right Eye",
+        "Category": "Reviews",
+        "Status": "Completed"
+      },
+      {
+        "SampleID": "6",
+        "Date": "2022-01-06",
+        "Donor": "Daniel",
+        "Tissue": "Retina",
+        "Eye": "Left Eye",
+        "Category": "Harvests",
+        "Status": "Pending"
       }
       // Add more data as needed
     ];
@@ -144,7 +162,7 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   String searchQuery = '';
   String? selectedFilter;
   int currentPage = 0;
-  final int rowsPerPage = 10;
+  final int rowsPerPage = 5;
   Timer? _debounce;
 
   @override
@@ -283,26 +301,18 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
 
   Widget _buildPaginationControls(int totalPages) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
           icon: const Icon(Icons.chevron_left),
-          onPressed: currentPage > 0
-              ? () {
-                  setState(() {
-                    currentPage--;
-                  });
-                }
-              : null,
+          onPressed:
+              currentPage > 0 ? () => setState(() => currentPage--) : null,
         ),
         Text('Page ${currentPage + 1} of $totalPages'),
         IconButton(
           icon: const Icon(Icons.chevron_right),
           onPressed: currentPage < totalPages - 1
-              ? () {
-                  setState(() {
-                    currentPage++;
-                  });
-                }
+              ? () => setState(() => currentPage++)
               : null,
         ),
       ],
