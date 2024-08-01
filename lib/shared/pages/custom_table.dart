@@ -2,8 +2,120 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
+// Constants
+const String apiUrl = 'https://api.example.com/data';
+
+//Models
+class TableData {
+  final String sampleID;
+  final DateTime date;
+  final String donor;
+  final String tissue;
+  final String eye;
+  final String category;
+  final String status;
+
+  TableData({
+    required this.sampleID,
+    required this.date,
+    required this.donor,
+    required this.tissue,
+    required this.eye,
+    required this.category,
+    required this.status,
+  });
+
+  factory TableData.fromJson(Map<String, dynamic> json) {
+    return TableData(
+      sampleID: json['SampleID'],
+      date: DateTime.parse(json['Date']),
+      donor: json['Donor'],
+      tissue: json['Tissue'],
+      eye: json['Eye'],
+      category: json['Category'],
+      status: json['Status'],
+    );
+  }
+}
+
+//Services
+class ApiService {
+  final Dio _dio = Dio();
+
+  Future<List<TableData>> fetchData() async {
+    final response = await _dio.get(apiUrl);
+
+    if (response.statusCode == 200) {
+      if (response.data is List) {
+        return (response.data as List)
+            .map((item) => TableData.fromJson(item))
+            .toList();
+      } else {
+        throw Exception('Invalid data format');
+      }
+    } else {
+      throw Exception(
+          'Failed to load data with status: ${response.statusCode}');
+    }
+  }
+
+  Future<List<TableData>> fetchMockData() async {
+    // Simulate network delay
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Mock data
+    List<Map<String, dynamic>> mockData = _getMockData();
+
+    // Convert mock data to List<TableData>
+    return mockData.map((item) => TableData.fromJson(item)).toList();
+  }
+
+  List<Map<String, dynamic>> _getMockData() {
+    return [
+      {
+        "SampleID": "1",
+        "Date": "2022-01-01",
+        "Donor": "Axel",
+        "Tissue": "Cornea",
+        "Eye": "Right Eye",
+        "Category": "Reviews",
+        "Status": "Completed"
+      },
+      {
+        "SampleID": "2",
+        "Date": "2022-01-02",
+        "Donor": "Mason",
+        "Tissue": "Whole Globe",
+        "Eye": "Left Eye",
+        "Category": "Harvests",
+        "Status": "Pending"
+      },
+      {
+        "SampleID": "3",
+        "Date": "2022-01-03",
+        "Donor": "Ethan",
+        "Tissue": "Retina",
+        "Eye": "Right Eye",
+        "Category": "Reviews",
+        "Status": "Completed"
+      },
+      {
+        "SampleID": "4",
+        "Date": "2022-01-04",
+        "Donor": "Alexander",
+        "Tissue": "Cornea",
+        "Eye": "Left Eye",
+        "Category": "Harvests",
+        "Status": "Pending"
+      }
+      // Add more data as needed
+    ];
+  }
+}
+
+// Widgets
 class GenericPaginatedTable<T> extends StatefulWidget {
   final List<T> data;
   final List<String> headers;
@@ -23,12 +135,12 @@ class GenericPaginatedTable<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<GenericPaginatedTable<T>> createState() =>
-      _GenericPaginatedTableState<T>();
+  GenericPaginatedTableState<T> createState() =>
+      GenericPaginatedTableState<T>();
 }
 
-class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
-  List<T> filteredData = [];
+class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
+  late List<T> filteredData;
   String searchQuery = '';
   String? selectedFilter;
   int currentPage = 0;
@@ -38,7 +150,7 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   @override
   void initState() {
     super.initState();
-    filteredData = widget.data;
+    filteredData = List.from(widget.data);
   }
 
   @override
@@ -69,11 +181,7 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
         _buildFilterChips(),
         Expanded(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _buildPaginatedTable(),
-              ],
-            ),
+            child: _buildPaginatedTable(),
           ),
         ),
         _buildPaginationControls(totalPages),
@@ -95,7 +203,7 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
           ),
         ),
         onChanged: (query) {
-          if (_debounce?.isActive ?? false) _debounce?.cancel();
+          _debounce?.cancel();
           _debounce = Timer(debounceTime, () {
             setState(() {
               searchQuery = query;
@@ -202,121 +310,20 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 }
 
-class TableData {
-  final String sampleID;
-  final DateTime date;
-  final String donor;
-  final String tissue;
-  final String eye;
-  final String category;
-  final String status;
-
-  TableData({
-    required this.sampleID,
-    required this.date,
-    required this.donor,
-    required this.tissue,
-    required this.eye,
-    required this.category,
-    required this.status,
-  });
-
-  factory TableData.fromJson(Map<String, dynamic> json) {
-    return TableData(
-      sampleID: json['SampleID'],
-      date: DateTime.parse(json['Date']),
-      donor: json['Donor'],
-      tissue: json['Tissue'],
-      eye: json['Eye'],
-      category: json['Category'],
-      status: json['Status'],
-    );
-  }
-}
-
-class ApiService {
-  static const String _apiUrl = 'https://api.example.com/data';
-
-  Future<List<TableData>> fetchData() async {
-    var dio = Dio();
-    final response = await dio.get(_apiUrl);
-
-    if (response.statusCode == 200) {
-      if (response.data is List) {
-        List jsonResponse = response.data;
-        return jsonResponse.map((item) => TableData.fromJson(item)).toList();
-      } else {
-        throw Exception('Invalid data format');
-      }
-    } else {
-      throw Exception(
-          'Failed to load data with status: ${response.statusCode}');
-    }
-  }
-
-  Future<List<TableData>> fetchMockData() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(seconds: 2));
-
-    // Mock data
-    List<Map<String, dynamic>> mockData = [
-      {
-        "SampleID": "1",
-        "Date": "2022-01-01",
-        "Donor": "Axel",
-        "Tissue": "Cornea",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "2",
-        "Date": "2022-01-02",
-        "Donor": "Mason",
-        "Tissue": "Whole Globe",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-      {
-        "SampleID": "3",
-        "Date": "2022-01-03",
-        "Donor": "Ethan",
-        "Tissue": "Retina",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "4",
-        "Date": "2022-01-04",
-        "Donor": "Alexander",
-        "Tissue": "Cornea",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      }
-      // Add more data as needed
-    ];
-
-    // Convert mock data to List<TableData>
-    return mockData.map((item) => TableData.fromJson(item)).toList();
-  }
-}
-
 class MyTablePage extends StatelessWidget {
   MyTablePage({Key? key}) : super(key: key);
 
   final ApiService _apiService = ApiService();
 
   bool searchFunction(TableData item, String query) {
-    return item.sampleID.toLowerCase().contains(query.toLowerCase()) ||
-        item.date.toString().toLowerCase().contains(query.toLowerCase()) ||
-        item.donor.toLowerCase().contains(query.toLowerCase()) ||
-        item.tissue.toLowerCase().contains(query.toLowerCase()) ||
-        item.eye.toLowerCase().contains(query.toLowerCase()) ||
-        item.category.toLowerCase().contains(query.toLowerCase()) ||
-        item.status.toLowerCase().contains(query.toLowerCase());
+    final lowerCaseQuery = query.toLowerCase();
+    return item.sampleID.toLowerCase().contains(lowerCaseQuery) ||
+        item.date.toString().toLowerCase().contains(lowerCaseQuery) ||
+        item.donor.toLowerCase().contains(lowerCaseQuery) ||
+        item.tissue.toLowerCase().contains(lowerCaseQuery) ||
+        item.eye.toLowerCase().contains(lowerCaseQuery) ||
+        item.category.toLowerCase().contains(lowerCaseQuery) ||
+        item.status.toLowerCase().contains(lowerCaseQuery);
   }
 
   @override
@@ -326,7 +333,7 @@ class MyTablePage extends StatelessWidget {
         title: const Text('Generic Table Example'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: FutureBuilder<List<TableData>>(
           future: _apiService.fetchMockData(),
           builder: (context, snapshot) {
@@ -345,22 +352,13 @@ class MyTablePage extends StatelessWidget {
                   'Tissue',
                   'Eye',
                   'Category',
-                  'Status'
+                  'Status',
+                  '',
                 ],
-                rowBuilder: (item) => DataRow(
-                  cells: [
-                    DataCell(Text(item.sampleID)),
-                    DataCell(Text(DateFormat('d MMM yyyy').format(item.date))),
-                    DataCell(Text(item.donor)),
-                    DataCell(Text(item.tissue)),
-                    DataCell(Text(item.eye)),
-                    DataCell(Text(item.category)),
-                    DataCell(Text(item.status)),
-                  ],
-                ),
+                rowBuilder: (item) => _buildDataRow(item, context),
                 filterOptions: const ['Completed', 'Pending'],
                 filterMatcher: (item, filter) => item.status.contains(filter),
-                searchMatcher: (item, query) => searchFunction(item, query),
+                searchMatcher: searchFunction,
               );
             }
           },
@@ -368,22 +366,45 @@ class MyTablePage extends StatelessWidget {
       ),
     );
   }
+
+  DataRow _buildDataRow(TableData item, BuildContext context) {
+    return DataRow(
+      // color: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      //   if (states.contains(WidgetState.selected)) {
+      //     return Theme.of(context).colorScheme.primary.withOpacity(0.08);
+      //   }
+      //   if (item.status == 'Completed') return Colors.green[100];
+      //   return null; // Use default value for other states
+      // }),
+      cells: [
+        DataCell(Text(item.sampleID)),
+        DataCell(Text(item.date.toString())),
+        DataCell(Text(item.donor)),
+        DataCell(Text(item.tissue)),
+        DataCell(Text(item.eye)),
+        DataCell(Text(item.category)),
+        DataCell(_buildStatusCell(item)),
+        const DataCell(Icon(Icons.arrow_forward_ios)),
+      ],
+    );
+  }
+
+  Widget _buildStatusCell(TableData item) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 8.0,
+      ),
+      decoration: BoxDecoration(
+        color: item.status.toLowerCase() == 'completed'
+            ? Colors.green
+            : Colors.yellow,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Text(
+        item.status,
+        style: const TextStyle(color: Colors.black),
+      ),
+    );
+  }
 }
-
-// class Debouncer {
-//   Debouncer({required this.milliseconds});
-//   final int milliseconds;
-//   Timer? _timer;
-//   void run(VoidCallback action) {
-//     if (_timer?.isActive ?? false) {
-//       _timer?.cancel();
-//     }
-//     _timer = Timer(Duration(milliseconds: milliseconds), action);
-//   }
-// }
-
-// final debouncer = Debouncer(milliseconds: 500);
-// debouncer.run(() {
-//    // put the code that you want to debounce
-//    // example: calling an API, adding a BLoC event
-// });
