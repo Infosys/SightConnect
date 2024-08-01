@@ -32,7 +32,7 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   String? selectedFilter;
   int currentPage = 0;
   final int rowsPerPage = 10;
-  Timer? _debounce;
+  // Timer? _debounce;
 
   @override
   void initState() {
@@ -40,11 +40,11 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
     filteredData = widget.data;
   }
 
-  @override
-  void dispose() {
-    _debounce?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _debounce?.cancel();
+  //   super.dispose();
+  // }
 
   void _filterData() {
     setState(() {
@@ -121,15 +121,39 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 
   Widget _buildPaginatedTable() {
-    final displayedRows =
-        filteredData.skip(currentPage * rowsPerPage).take(rowsPerPage).toList();
+    final displayedRows = _getDisplayedRows();
 
-    return DataTable(
-      columns: widget.headers
-          .map((header) => DataColumn(label: Text(header)))
-          .toList(),
-      rows: displayedRows.map((item) => widget.rowBuilder(item)).toList(),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minWidth: constraints.maxWidth),
+            child: DataTable(
+              columns: _buildColumns(),
+              rows: displayedRows.map((item) => widget.rowBuilder(item)).toList(),
+            ),
+          ),
+        );
+      },
     );
+  }
+
+  List<T> _getDisplayedRows() {
+    return filteredData
+        .skip(currentPage * rowsPerPage)
+        .take(rowsPerPage)
+        .toList();
+  }
+
+  List<DataColumn> _buildColumns() {
+    return widget.headers
+        .map((header) => DataColumn(
+              label: Expanded(
+                child: Text(header),
+              ),
+            ))
+        .toList();
   }
 
   Widget _buildPaginationControls(int totalPages) {
@@ -192,117 +216,66 @@ class ApiService {
         throw Exception('Invalid data format');
       }
     } else {
-      throw Exception('Failed to load data with status: ${response.statusCode}');
+      throw Exception(
+          'Failed to load data with status: ${response.statusCode}');
     }
   }
 
-    Future<List<TableData>> fetchMockData() async {
+  Future<List<TableData>> fetchMockData() async {
     // Simulate network delay
     await Future.delayed(const Duration(seconds: 2));
 
     // Mock data
-List<Map<String, dynamic>> mockData = [
-  {
-    "id": "1",
-    "name": "Apple",
-    "description": "A delicious red apple"
-  },
-  {
-    "id": "2",
-    "name": "Banana",
-    "description": "A ripe yellow banana"
-  },
-  {
-    "id": "3",
-    "name": "Cherry",
-    "description": "A sweet red cherry"
-  },
-  {
-    "id": "4",
-    "name": "Date",
-    "description": "A tasty date fruit"
-  },
-  {
-    "id": "5",
-    "name": "Elderberry",
-    "description": "A nutritious elderberry"
-  },
-  {
-    "id": "6",
-    "name": "Fig",
-    "description": "A sweet fig fruit"
-  },
-  {
-    "id": "7",
-    "name": "Grape",
-    "description": "A bunch of juicy grapes"
-  },
-  {
-    "id": "8",
-    "name": "Honeydew",
-    "description": "A refreshing honeydew melon"
-  },
-  {
-    "id": "9",
-    "name": "Ice Cream Bean",
-    "description": "An exotic ice cream bean fruit"
-  },
-  {
-    "id": "10",
-    "name": "Jackfruit",
-    "description": "A large and tasty jackfruit"
-  },
-  {
-    "id": "11",
-    "name": "Kiwi",
-    "description": "A tangy kiwi fruit"
-  },
-  {
-    "id": "12",
-    "name": "Lemon",
-    "description": "A sour lemon fruit"
-  },
-  {
-    "id": "13",
-    "name": "Mango",
-    "description": "A sweet and juicy mango"
-  },
-  {
-    "id": "14",
-    "name": "Nectarine",
-    "description": "A ripe nectarine fruit"
-  },
-  {
-    "id": "15",
-    "name": "Orange",
-    "description": "A juicy orange fruit"
-  },
-  {
-    "id": "16",
-    "name": "Papaya",
-    "description": "A sweet papaya fruit"
-  },
-  {
-    "id": "17",
-    "name": "Quince",
-    "description": "A rare quince fruit"
-  },
-  {
-    "id": "18",
-    "name": "Raspberry",
-    "description": "A handful of raspberries"
-  },
-  {
-    "id": "19",
-    "name": "Strawberry",
-    "description": "A sweet strawberry fruit"
-  },
-  {
-    "id": "20",
-    "name": "Tomato",
-    "description": "A ripe tomato fruit"
-  },
-];
+    List<Map<String, dynamic>> mockData = [
+      {"id": "1", "name": "Apple", "description": "A delicious red apple"},
+      {"id": "2", "name": "Banana", "description": "A ripe yellow banana"},
+      {"id": "3", "name": "Cherry", "description": "A sweet red cherry"},
+      {"id": "4", "name": "Date", "description": "A tasty date fruit"},
+      {
+        "id": "5",
+        "name": "Elderberry",
+        "description": "A nutritious elderberry"
+      },
+      {"id": "6", "name": "Fig", "description": "A sweet fig fruit"},
+      {"id": "7", "name": "Grape", "description": "A bunch of juicy grapes"},
+      {
+        "id": "8",
+        "name": "Honeydew",
+        "description": "A refreshing honeydew melon"
+      },
+      {
+        "id": "9",
+        "name": "Ice Cream Bean",
+        "description": "An exotic ice cream bean fruit"
+      },
+      {
+        "id": "10",
+        "name": "Jackfruit",
+        "description": "A large and tasty jackfruit"
+      },
+      {"id": "11", "name": "Kiwi", "description": "A tangy kiwi fruit"},
+      {"id": "12", "name": "Lemon", "description": "A sour lemon fruit"},
+      {"id": "13", "name": "Mango", "description": "A sweet and juicy mango"},
+      {
+        "id": "14",
+        "name": "Nectarine",
+        "description": "A ripe nectarine fruit"
+      },
+      {"id": "15", "name": "Orange", "description": "A juicy orange fruit"},
+      {"id": "16", "name": "Papaya", "description": "A sweet papaya fruit"},
+      {"id": "17", "name": "Quince", "description": "A rare quince fruit"},
+      {
+        "id": "18",
+        "name": "Raspberry",
+        "description": "A handful of raspberries"
+      },
+      {
+        "id": "19",
+        "name": "Strawberry",
+        "description": "A sweet strawberry fruit"
+      },
+      {"id": "20", "name": "Tomato", "description": "A ripe tomato fruit"},
+    ];
 
     // Convert mock data to List<TableData>
     return mockData.map((item) => TableData.fromJson(item)).toList();
