@@ -1,19 +1,7 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
-// Layout builder
-class TableData {
-  final String id;
-  final String name;
-  final String description;
-
-  TableData({
-    required this.id,
-    required this.name,
-    required this.description,
-  });
-}
 
 class GenericPaginatedTable<T> extends StatefulWidget {
   final List<T> data;
@@ -44,11 +32,18 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   String? selectedFilter;
   int currentPage = 0;
   final int rowsPerPage = 10;
+  Timer? _debounce;
 
   @override
   void initState() {
     super.initState();
     filteredData = widget.data;
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
   }
 
   void _filterData() {
@@ -86,6 +81,7 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 
   Widget _buildSearchBar() {
+    const debounceTime = Duration(milliseconds: 500);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
@@ -94,9 +90,12 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
           border: OutlineInputBorder(),
         ),
         onChanged: (query) {
-          setState(() {
-            searchQuery = query;
-            _filterData();
+          if (_debounce?.isActive ?? false) _debounce?.cancel();
+          _debounce = Timer(debounceTime, () {
+            setState(() {
+              searchQuery = query;
+              _filterData();
+            });
           });
         },
       ),
@@ -162,27 +161,164 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 }
 
-class MyTablePage extends StatelessWidget {
-  final List<TableData> data = [
-    TableData(id: '1', name: 'Arpit', description: 'Description 1'),
-    TableData(id: '2', name: 'Bhavesh', description: 'Description 2'),
-    TableData(id: '3', name: 'C', description: 'Description 3'),
-    TableData(id: '4', name: 'D', description: 'Description 4'),
-    TableData(id: '5', name: 'E', description: 'Description 5'),
-    TableData(id: '6', name: 'F', description: "Description"),
-    TableData(id: '7', name: 'G', description: 'Description 7'),
-    TableData(id: '8', name: 'H', description: 'Description 8'),
-    TableData(id: '9', name: 'I', description: 'Description 9'),
-    TableData(id: '10', name: 'J', description: 'Description 10'),
-    TableData(id: '11', name: 'K', description: 'Description 11'),
-    TableData(id: '12', name: 'L', description: 'Description 12'),
-    TableData(id: '13', name: 'Mehul', description: 'Description 13'),
-    TableData(id: '14', name: 'N', description: 'Description 14'),
-    TableData(id: '15', name: 'O', description: 'Description 15'),
-    // Add more data as needed
-  ];
+class TableData {
+  final String id;
+  final String name;
+  final String description;
 
-  MyTablePage({super.key});
+  TableData({required this.id, required this.name, required this.description});
+
+  factory TableData.fromJson(Map<String, dynamic> json) {
+    return TableData(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+    );
+  }
+}
+
+class ApiService {
+  static const String _apiUrl = 'https://api.example.com/data';
+
+  Future<List<TableData>> fetchData() async {
+    var dio = Dio();
+    final response = await dio.get(_apiUrl);
+
+    if (response.statusCode == 200) {
+      if (response.data is List) {
+        List jsonResponse = response.data;
+        return jsonResponse.map((item) => TableData.fromJson(item)).toList();
+      } else {
+        throw Exception('Invalid data format');
+      }
+    } else {
+      throw Exception('Failed to load data with status: ${response.statusCode}');
+    }
+  }
+
+    Future<List<TableData>> fetchMockData() async {
+    // Simulate network delay
+    await Future.delayed(const Duration(seconds: 2));
+
+    // Mock data
+List<Map<String, dynamic>> mockData = [
+  {
+    "id": "1",
+    "name": "Apple",
+    "description": "A delicious red apple"
+  },
+  {
+    "id": "2",
+    "name": "Banana",
+    "description": "A ripe yellow banana"
+  },
+  {
+    "id": "3",
+    "name": "Cherry",
+    "description": "A sweet red cherry"
+  },
+  {
+    "id": "4",
+    "name": "Date",
+    "description": "A tasty date fruit"
+  },
+  {
+    "id": "5",
+    "name": "Elderberry",
+    "description": "A nutritious elderberry"
+  },
+  {
+    "id": "6",
+    "name": "Fig",
+    "description": "A sweet fig fruit"
+  },
+  {
+    "id": "7",
+    "name": "Grape",
+    "description": "A bunch of juicy grapes"
+  },
+  {
+    "id": "8",
+    "name": "Honeydew",
+    "description": "A refreshing honeydew melon"
+  },
+  {
+    "id": "9",
+    "name": "Ice Cream Bean",
+    "description": "An exotic ice cream bean fruit"
+  },
+  {
+    "id": "10",
+    "name": "Jackfruit",
+    "description": "A large and tasty jackfruit"
+  },
+  {
+    "id": "11",
+    "name": "Kiwi",
+    "description": "A tangy kiwi fruit"
+  },
+  {
+    "id": "12",
+    "name": "Lemon",
+    "description": "A sour lemon fruit"
+  },
+  {
+    "id": "13",
+    "name": "Mango",
+    "description": "A sweet and juicy mango"
+  },
+  {
+    "id": "14",
+    "name": "Nectarine",
+    "description": "A ripe nectarine fruit"
+  },
+  {
+    "id": "15",
+    "name": "Orange",
+    "description": "A juicy orange fruit"
+  },
+  {
+    "id": "16",
+    "name": "Papaya",
+    "description": "A sweet papaya fruit"
+  },
+  {
+    "id": "17",
+    "name": "Quince",
+    "description": "A rare quince fruit"
+  },
+  {
+    "id": "18",
+    "name": "Raspberry",
+    "description": "A handful of raspberries"
+  },
+  {
+    "id": "19",
+    "name": "Strawberry",
+    "description": "A sweet strawberry fruit"
+  },
+  {
+    "id": "20",
+    "name": "Tomato",
+    "description": "A ripe tomato fruit"
+  },
+];
+
+    // Convert mock data to List<TableData>
+    return mockData.map((item) => TableData.fromJson(item)).toList();
+  }
+}
+
+class MyTablePage extends StatelessWidget {
+  MyTablePage({Key? key}) : super(key: key);
+
+  final ApiService _apiService = ApiService();
+
+  bool searchFunction(TableData item, String query) {
+    return item.id.toLowerCase().contains(query.toLowerCase()) ||
+        item.name.toLowerCase().contains(query.toLowerCase()) ||
+        item.description.toLowerCase().contains(query.toLowerCase());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -192,42 +328,48 @@ class MyTablePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GenericPaginatedTable<TableData>(
-          data: data,
-          headers: const ['ID', 'Name', 'Description'],
-          rowBuilder: (item) => DataRow(
-            cells: [
-              DataCell(Text(item.id)),
-              DataCell(Text(item.name)),
-              DataCell(Text(item.description)),
-            ],
-          ),
-          filterOptions: const ['Option 1', 'Option 2'],
-          filterMatcher: (item, filter) => item.name.contains(filter),
-          searchMatcher: (item, query) => searchFunction(item, query),
+        child: FutureBuilder<List<TableData>>(
+          future: _apiService.fetchMockData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              debugPrint(snapshot.error.toString());
+              return const Text('An error occurred, please try again later');
+            } else {
+              return GenericPaginatedTable<TableData>(
+                data: snapshot.data!,
+                headers: const ['ID', 'Name', 'Description'],
+                rowBuilder: (item) => DataRow(
+                  cells: [
+                    DataCell(Text(item.id)),
+                    DataCell(Text(item.name)),
+                    DataCell(Text(item.description)),
+                  ],
+                ),
+                filterOptions: const ['Option 1', 'Option 2'],
+                filterMatcher: (item, filter) => item.name.contains(filter),
+                searchMatcher: (item, query) => searchFunction(item, query),
+              );
+            }
+          },
         ),
       ),
     );
   }
 }
 
-bool searchFunction(TableData item, String query) {
-  return item.id.toLowerCase().contains(query.toLowerCase()) ||
-      item.name.toLowerCase().contains(query.toLowerCase()) ||
-      item.description.toLowerCase().contains(query.toLowerCase());
-}
-
-class Debouncer {
-  Debouncer({required this.milliseconds});
-  final int milliseconds;
-  Timer? _timer;
-  void run(VoidCallback action) {
-    if (_timer?.isActive ?? false) {
-      _timer?.cancel();
-    }
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
-  }
-}
+// class Debouncer {
+//   Debouncer({required this.milliseconds});
+//   final int milliseconds;
+//   Timer? _timer;
+//   void run(VoidCallback action) {
+//     if (_timer?.isActive ?? false) {
+//       _timer?.cancel();
+//     }
+//     _timer = Timer(Duration(milliseconds: milliseconds), action);
+//   }
+// }
 
 // final debouncer = Debouncer(milliseconds: 500);
 // debouncer.run(() {
