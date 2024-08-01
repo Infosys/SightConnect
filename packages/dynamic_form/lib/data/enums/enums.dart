@@ -12,3 +12,8 @@ enum DynamicFormType {
   TEXTAREA,
   CONDITIONAL,
 }
+
+enum FormLayoutType {
+  STEPPER,
+  PANEL,
+}

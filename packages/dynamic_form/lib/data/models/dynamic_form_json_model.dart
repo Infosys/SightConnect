@@ -9,11 +9,13 @@ String responseJsonModelToJson(ResponseJsonModel data) =>
 class ResponseJsonModel {
   String? title;
   String? logoPosition;
+  String? formLayoutType;
   List<PageModel>? pages;
 
   ResponseJsonModel({
     this.title,
     this.logoPosition,
+    this.formLayoutType,
     this.pages,
   });
 
@@ -21,6 +23,7 @@ class ResponseJsonModel {
       ResponseJsonModel(
         title: json["title"],
         logoPosition: json["logoPosition"],
+        formLayoutType: json["formLayoutType"],
         pages: json["pages"] == null
             ? []
             : List<PageModel>.from(
@@ -30,6 +33,7 @@ class ResponseJsonModel {
   Map<String, dynamic> toJson() => {
         "title": title,
         "logoPosition": logoPosition,
+        "formLayoutType": formLayoutType,
         "pages": pages == null
             ? []
             : List<dynamic>.from(pages!.map((x) => x.toJson())),

@@ -38,7 +38,10 @@ class DynamicFormPage extends StatelessWidget {
           final pages = snapshot.data?.pages ?? [];
           final title = snapshot.data?.title ?? '';
           return FormBuilderPage(
-              pages: pages, title: title, onSubmit: onSubmit);
+            pages: pages,
+            title: title,
+            onSubmit: onSubmit,
+          );
         } else if (snapshot.hasError) {
           return FormErrorWidget(
             error: snapshot.error,

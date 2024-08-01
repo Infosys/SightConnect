@@ -1,6 +1,7 @@
 {
     "title": "Doctor Consent Form",
     "logoPosition": "right",
+    "formLayoutType": "STEPPER",
     "pages": [
         {
             "name": "page1",

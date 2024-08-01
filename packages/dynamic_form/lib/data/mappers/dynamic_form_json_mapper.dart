@@ -13,6 +13,7 @@ class DynamicFormJsonMapper {
       return ResponseJsonEntity(
         title: dynamicFormModel.title ?? '',
         logoPosition: dynamicFormModel.logoPosition ?? '',
+        formLayoutType: _mapToFormLayoutType(dynamicFormModel.formLayoutType),
         pages: _getPages(dynamicFormModel.pages),
       );
     } catch (e) {
@@ -157,5 +158,16 @@ class DynamicFormJsonMapper {
       default:
         return DynamicFormType.DEFAULT;
     }
+  }
+}
+
+FormLayoutType _mapToFormLayoutType(String? value) {
+  switch (value) {
+    case 'stepper':
+      return FormLayoutType.STEPPER;
+    case 'panel':
+      return FormLayoutType.PANEL;
+    default:
+      return FormLayoutType.PANEL;
   }
 }

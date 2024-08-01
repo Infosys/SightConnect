@@ -11,11 +11,13 @@ String responseJsonEntityToJson(ResponseJsonEntity data) =>
 class ResponseJsonEntity {
   final String title;
   final String logoPosition;
+  final FormLayoutType formLayoutType;
   final List<PageEntity> pages;
 
   ResponseJsonEntity({
     required this.title,
     required this.logoPosition,
+    required this.formLayoutType,
     required this.pages,
   });
 
@@ -23,6 +25,7 @@ class ResponseJsonEntity {
       ResponseJsonEntity(
         title: json["title"],
         logoPosition: json["logoPosition"],
+        formLayoutType: json["formLayoutType"],
         pages: List<PageEntity>.from(
             json["pages"].map((x) => PageEntity.fromJson(x))),
       );
@@ -30,6 +33,7 @@ class ResponseJsonEntity {
   Map<String, dynamic> toJson() => {
         "title": title,
         "logoPosition": logoPosition,
+        "formLayoutType": formLayoutType,
         "pages": List<dynamic>.from(pages.map((x) => x.toJson())),
       };
 }
