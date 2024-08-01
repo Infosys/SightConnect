@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -9,39 +10,6 @@ import 'package:flutter/material.dart';
 
 // Constants
 const String apiUrl = 'https://api.example.com/data';
-
-//Models
-class TableData {
-  final String sampleID;
-  final DateTime date;
-  final String donor;
-  final String tissue;
-  final String eye;
-  final String category;
-  final String status;
-
-  TableData({
-    required this.sampleID,
-    required this.date,
-    required this.donor,
-    required this.tissue,
-    required this.eye,
-    required this.category,
-    required this.status,
-  });
-
-  factory TableData.fromJson(Map<String, dynamic> json) {
-    return TableData(
-      sampleID: json['SampleID'],
-      date: DateTime.parse(json['Date']),
-      donor: json['Donor'],
-      tissue: json['Tissue'],
-      eye: json['Eye'],
-      category: json['Category'],
-      status: json['Status'],
-    );
-  }
-}
 
 //Services
 class ApiService {
@@ -196,10 +164,17 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   Widget build(BuildContext context) {
     final totalPages = (filteredData.length / rowsPerPage).ceil();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSearchBar(),
-        _buildFilterChips(),
+        if (Responsive.isMobile(context)) _buildSearchBar(),
+        if (Responsive.isMobile(context)) _buildFilterChips(),
+        if (!Responsive.isMobile(context))
+          Row(
+            children: [
+              Expanded(child: _buildFilterChips()),
+              const SizedBox(width: 16),
+              _buildSearchBar(),
+            ],
+          ),
         _buildPaginatedTable(),
         const SizedBox(height: 8),
         _buildPaginationControls(totalPages),
@@ -209,8 +184,10 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
 
   Widget _buildSearchBar() {
     const debounceTime = Duration(milliseconds: 200);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    return SizedBox(
+      width: Responsive.isMobile(context)
+          ? double.infinity
+          : AppSize.width(context) * 0.3,
       child: TextField(
         decoration: const InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 20),
@@ -237,30 +214,34 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 
   Widget _buildFilterChips() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Wrap(
-        spacing: 16.0,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
         children: widget.filterOptions.map((filter) {
-          return ChoiceChip(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
-            label: Text(filter),
-            selected: selectedFilter == filter,
-            onSelected: (selected) {
-              setState(() {
-                selectedFilter = selected ? filter : null;
-                _filterData();
-              });
-            },
-            selectedColor: selectedFilter == filter
-                ? AppColor.primary
-                : AppColor.lightGrey,
-            labelStyle: applyRobotoFont(
-              color: selectedFilter == filter ? AppColor.white : AppColor.black,
-              fontSize: 12,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+          return Padding(
+            padding: const EdgeInsets.only(right: AppSize.km),
+            child: ChoiceChip(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
+              label: Text(filter),
+              selected: selectedFilter == filter,
+              onSelected: (selected) {
+                setState(() {
+                  selectedFilter = selected ? filter : null;
+                  _filterData();
+                });
+              },
+              selectedColor: selectedFilter == filter
+                  ? AppColor.primary
+                  : AppColor.lightGrey,
+              labelStyle: applyRobotoFont(
+                color:
+                    selectedFilter == filter ? AppColor.white : AppColor.black,
+                fontSize: 12,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           );
         }).toList(),
@@ -350,6 +331,39 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 }
 
+//Models
+class TableData {
+  final String sampleID;
+  final DateTime date;
+  final String donor;
+  final String tissue;
+  final String eye;
+  final String category;
+  final String status;
+
+  TableData({
+    required this.sampleID,
+    required this.date,
+    required this.donor,
+    required this.tissue,
+    required this.eye,
+    required this.category,
+    required this.status,
+  });
+
+  factory TableData.fromJson(Map<String, dynamic> json) {
+    return TableData(
+      sampleID: json['SampleID'],
+      date: DateTime.parse(json['Date']),
+      donor: json['Donor'],
+      tissue: json['Tissue'],
+      eye: json['Eye'],
+      category: json['Category'],
+      status: json['Status'],
+    );
+  }
+}
+
 class MyTablePage extends StatelessWidget {
   MyTablePage({Key? key}) : super(key: key);
 
@@ -395,7 +409,14 @@ class MyTablePage extends StatelessWidget {
                   'Status',
                 ],
                 rowBuilder: (item) => _buildDataRow(item, context),
-                filterOptions: const ['Completed', 'Pending'],
+                filterOptions: const [
+                  'HHAHA',
+                  'Completed',
+                  'Pending',
+                  'All',
+                  'None',
+                  ''
+                ],
                 filterMatcher: (item, filter) => item.status.contains(filter),
                 searchMatcher: searchFunction,
               );
