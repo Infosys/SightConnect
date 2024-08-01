@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class GenericPaginatedTable<T> extends StatefulWidget {
   final List<T> data;
@@ -83,11 +84,15 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   Widget _buildSearchBar() {
     const debounceTime = Duration(milliseconds: 500);
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: TextField(
         decoration: const InputDecoration(
           labelText: 'Search',
           border: OutlineInputBorder(),
+          labelStyle: TextStyle(color: Colors.blue),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue),
+          ),
         ),
         onChanged: (query) {
           if (_debounce?.isActive ?? false) _debounce?.cancel();
@@ -103,20 +108,31 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   }
 
   Widget _buildFilterChips() {
-    return Wrap(
-      spacing: 8.0,
-      children: widget.filterOptions.map((filter) {
-        return ChoiceChip(
-          label: Text(filter),
-          selected: selectedFilter == filter,
-          onSelected: (selected) {
-            setState(() {
-              selectedFilter = selected ? filter : null;
-              _filterData();
-            });
-          },
-        );
-      }).toList(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Wrap(
+        spacing: 16.0,
+        children: widget.filterOptions.map((filter) {
+          return ChoiceChip(
+            label: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(filter),
+            ),
+            selected: selectedFilter == filter,
+            onSelected: (selected) {
+              setState(() {
+                selectedFilter = selected ? filter : null;
+                _filterData();
+              });
+            },
+            selectedColor: Colors.blue,
+            labelStyle: TextStyle(
+                color: selectedFilter == filter ? Colors.white : Colors.black),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          );
+        }).toList(),
+      ),
     );
   }
 
@@ -131,7 +147,8 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
             constraints: BoxConstraints(minWidth: constraints.maxWidth),
             child: DataTable(
               columns: _buildColumns(),
-              rows: displayedRows.map((item) => widget.rowBuilder(item)).toList(),
+              rows:
+                  displayedRows.map((item) => widget.rowBuilder(item)).toList(),
             ),
           ),
         );
@@ -186,17 +203,33 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
 }
 
 class TableData {
-  final String id;
-  final String name;
-  final String description;
+  final String sampleID;
+  final DateTime date;
+  final String donor;
+  final String tissue;
+  final String eye;
+  final String category;
+  final String status;
 
-  TableData({required this.id, required this.name, required this.description});
+  TableData({
+    required this.sampleID,
+    required this.date,
+    required this.donor,
+    required this.tissue,
+    required this.eye,
+    required this.category,
+    required this.status,
+  });
 
   factory TableData.fromJson(Map<String, dynamic> json) {
     return TableData(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
+      sampleID: json['SampleID'],
+      date: DateTime.parse(json['Date']),
+      donor: json['Donor'],
+      tissue: json['Tissue'],
+      eye: json['Eye'],
+      category: json['Category'],
+      status: json['Status'],
     );
   }
 }
@@ -227,54 +260,43 @@ class ApiService {
 
     // Mock data
     List<Map<String, dynamic>> mockData = [
-      {"id": "1", "name": "Apple", "description": "A delicious red apple"},
-      {"id": "2", "name": "Banana", "description": "A ripe yellow banana"},
-      {"id": "3", "name": "Cherry", "description": "A sweet red cherry"},
-      {"id": "4", "name": "Date", "description": "A tasty date fruit"},
       {
-        "id": "5",
-        "name": "Elderberry",
-        "description": "A nutritious elderberry"
-      },
-      {"id": "6", "name": "Fig", "description": "A sweet fig fruit"},
-      {"id": "7", "name": "Grape", "description": "A bunch of juicy grapes"},
-      {
-        "id": "8",
-        "name": "Honeydew",
-        "description": "A refreshing honeydew melon"
+        "SampleID": "1",
+        "Date": "2022-01-01",
+        "Donor": "Axel",
+        "Tissue": "Cornea",
+        "Eye": "Right Eye",
+        "Category": "Reviews",
+        "Status": "Completed"
       },
       {
-        "id": "9",
-        "name": "Ice Cream Bean",
-        "description": "An exotic ice cream bean fruit"
+        "SampleID": "2",
+        "Date": "2022-01-02",
+        "Donor": "Mason",
+        "Tissue": "Whole Globe",
+        "Eye": "Left Eye",
+        "Category": "Harvests",
+        "Status": "Pending"
       },
       {
-        "id": "10",
-        "name": "Jackfruit",
-        "description": "A large and tasty jackfruit"
-      },
-      {"id": "11", "name": "Kiwi", "description": "A tangy kiwi fruit"},
-      {"id": "12", "name": "Lemon", "description": "A sour lemon fruit"},
-      {"id": "13", "name": "Mango", "description": "A sweet and juicy mango"},
-      {
-        "id": "14",
-        "name": "Nectarine",
-        "description": "A ripe nectarine fruit"
-      },
-      {"id": "15", "name": "Orange", "description": "A juicy orange fruit"},
-      {"id": "16", "name": "Papaya", "description": "A sweet papaya fruit"},
-      {"id": "17", "name": "Quince", "description": "A rare quince fruit"},
-      {
-        "id": "18",
-        "name": "Raspberry",
-        "description": "A handful of raspberries"
+        "SampleID": "3",
+        "Date": "2022-01-03",
+        "Donor": "Ethan",
+        "Tissue": "Retina",
+        "Eye": "Right Eye",
+        "Category": "Reviews",
+        "Status": "Completed"
       },
       {
-        "id": "19",
-        "name": "Strawberry",
-        "description": "A sweet strawberry fruit"
-      },
-      {"id": "20", "name": "Tomato", "description": "A ripe tomato fruit"},
+        "SampleID": "4",
+        "Date": "2022-01-04",
+        "Donor": "Alexander",
+        "Tissue": "Cornea",
+        "Eye": "Left Eye",
+        "Category": "Harvests",
+        "Status": "Pending"
+      }
+      // Add more data as needed
     ];
 
     // Convert mock data to List<TableData>
@@ -288,9 +310,13 @@ class MyTablePage extends StatelessWidget {
   final ApiService _apiService = ApiService();
 
   bool searchFunction(TableData item, String query) {
-    return item.id.toLowerCase().contains(query.toLowerCase()) ||
-        item.name.toLowerCase().contains(query.toLowerCase()) ||
-        item.description.toLowerCase().contains(query.toLowerCase());
+    return item.sampleID.toLowerCase().contains(query.toLowerCase()) ||
+        item.date.toString().toLowerCase().contains(query.toLowerCase()) ||
+        item.donor.toLowerCase().contains(query.toLowerCase()) ||
+        item.tissue.toLowerCase().contains(query.toLowerCase()) ||
+        item.eye.toLowerCase().contains(query.toLowerCase()) ||
+        item.category.toLowerCase().contains(query.toLowerCase()) ||
+        item.status.toLowerCase().contains(query.toLowerCase());
   }
 
   @override
@@ -312,16 +338,28 @@ class MyTablePage extends StatelessWidget {
             } else {
               return GenericPaginatedTable<TableData>(
                 data: snapshot.data!,
-                headers: const ['ID', 'Name', 'Description'],
+                headers: const [
+                  'SampleID',
+                  'Date',
+                  'Donor',
+                  'Tissue',
+                  'Eye',
+                  'Category',
+                  'Status'
+                ],
                 rowBuilder: (item) => DataRow(
                   cells: [
-                    DataCell(Text(item.id)),
-                    DataCell(Text(item.name)),
-                    DataCell(Text(item.description)),
+                    DataCell(Text(item.sampleID)),
+                    DataCell(Text(DateFormat('d MMM yyyy').format(item.date))),
+                    DataCell(Text(item.donor)),
+                    DataCell(Text(item.tissue)),
+                    DataCell(Text(item.eye)),
+                    DataCell(Text(item.category)),
+                    DataCell(Text(item.status)),
                   ],
                 ),
-                filterOptions: const ['Option 1', 'Option 2'],
-                filterMatcher: (item, filter) => item.name.contains(filter),
+                filterOptions: const ['Completed', 'Pending'],
+                filterMatcher: (item, filter) => item.status.contains(filter),
                 searchMatcher: (item, query) => searchFunction(item, query),
               );
             }
