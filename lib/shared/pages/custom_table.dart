@@ -32,7 +32,7 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   String? selectedFilter;
   int currentPage = 0;
   final int rowsPerPage = 10;
-  // Timer? _debounce;
+  Timer? _debounce;
 
   @override
   void initState() {
@@ -40,11 +40,11 @@ class _GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
     filteredData = widget.data;
   }
 
-  // @override
-  // void dispose() {
-  //   _debounce?.cancel();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   void _filterData() {
     setState(() {
