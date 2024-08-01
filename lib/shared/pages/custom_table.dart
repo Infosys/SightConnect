@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 
@@ -197,27 +200,27 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
       children: [
         _buildSearchBar(),
         _buildFilterChips(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: _buildPaginatedTable(),
-          ),
-        ),
+        _buildPaginatedTable(),
+        const SizedBox(height: 8),
         _buildPaginationControls(totalPages),
       ],
     );
   }
 
   Widget _buildSearchBar() {
-    const debounceTime = Duration(milliseconds: 500);
+    const debounceTime = Duration(milliseconds: 200);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: TextField(
         decoration: const InputDecoration(
-          labelText: 'Search',
-          border: OutlineInputBorder(),
-          labelStyle: TextStyle(color: Colors.blue),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
+          contentPadding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 20),
+          hintText: 'Search...',
+          prefixIcon: Padding(
+            padding: EdgeInsets.only(left: 8, right: 8),
+            child: Icon(
+              Icons.search,
+              size: 30,
+            ),
           ),
         ),
         onChanged: (query) {
@@ -240,10 +243,8 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
         spacing: 16.0,
         children: widget.filterOptions.map((filter) {
           return ChoiceChip(
-            label: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(filter),
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
+            label: Text(filter),
             selected: selectedFilter == filter,
             onSelected: (selected) {
               setState(() {
@@ -251,11 +252,16 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
                 _filterData();
               });
             },
-            selectedColor: Colors.blue,
-            labelStyle: TextStyle(
-                color: selectedFilter == filter ? Colors.white : Colors.black),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            selectedColor: selectedFilter == filter
+                ? AppColor.primary
+                : AppColor.lightGrey,
+            labelStyle: applyRobotoFont(
+              color: selectedFilter == filter ? AppColor.white : AppColor.black,
+              fontSize: 12,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           );
         }).toList(),
       ),
@@ -267,11 +273,35 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        if (Responsive.isMobile(context)) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: displayedRows.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                subtitle: const Text("Mehul Mantoo"),
+                title:
+                    widget.rowBuilder(displayedRows[index]).cells.first.child,
+              );
+            },
+          );
+        }
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
             constraints: BoxConstraints(minWidth: constraints.maxWidth),
             child: DataTable(
+              dataTextStyle: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
+              dataRowMaxHeight: 65,
+              headingRowHeight: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColor.white,
+              ),
               columns: _buildColumns(),
               rows:
                   displayedRows.map((item) => widget.rowBuilder(item)).toList(),
@@ -363,7 +393,6 @@ class MyTablePage extends StatelessWidget {
                   'Eye',
                   'Category',
                   'Status',
-                  '',
                 ],
                 rowBuilder: (item) => _buildDataRow(item, context),
                 filterOptions: const ['Completed', 'Pending'],
@@ -394,7 +423,6 @@ class MyTablePage extends StatelessWidget {
         DataCell(Text(item.eye)),
         DataCell(Text(item.category)),
         DataCell(_buildStatusCell(item)),
-        const DataCell(Icon(Icons.arrow_forward_ios)),
       ],
     );
   }
@@ -407,14 +435,15 @@ class MyTablePage extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: item.status.toLowerCase() == 'completed'
-            ? Colors.green
-            : Colors.yellow,
+            ? AppColor.lightGreen
+            : AppColor.lightRed,
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: Text(
-        item.status,
-        style: const TextStyle(color: Colors.black),
-      ),
+      child: Text(item.status,
+          style: applyRobotoFont(
+            color: Colors.black,
+            fontSize: 12,
+          )),
     );
   }
 }
