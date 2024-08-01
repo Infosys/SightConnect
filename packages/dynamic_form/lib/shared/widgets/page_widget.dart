@@ -9,11 +9,10 @@ import '../utlities/functions.dart';
 class PageWidget extends StatefulWidget {
   const PageWidget({
     super.key,
-    required this.name,
     required this.elements,
     required this.formKey,
   });
-  final String name;
+
   final List<PageElementEntity> elements;
   final GlobalKey<FormBuilderState> formKey;
 
@@ -28,12 +27,7 @@ class _PageWidgetState extends State<PageWidget> {
       return Container();
     }
 
-    return ExpansionTile(
-      initiallyExpanded: true,
-      title: Text(
-        widget.name,
-        style: const TextStyle(fontSize: 16.0),
-      ),
+    return Column(
       children: widget.elements.map((panel) {
         if (panel.elements.isEmpty) {
           return Container();

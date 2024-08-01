@@ -1,7 +1,8 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
-import 'package:dynamic_form/shared/widgets/page_widget.dart';
-import 'package:dynamic_form/shared/widgets/submit_btn.dart';
+import 'package:dynamic_form/shared/widgets/form_panel_view.dart';
+import 'package:dynamic_form/shared/widgets/form_stepper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -13,10 +14,12 @@ class FormBuilderPage extends StatelessWidget {
     required this.pages,
     required this.title,
     required this.onSubmit,
+    required this.layoutType,
   });
   final String title;
   final List<PageEntity> pages;
   final Function(Map<String, dynamic>?)? onSubmit;
+  final FormLayoutType layoutType;
 
   /// The key for the form.
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
@@ -31,25 +34,32 @@ class FormBuilderPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: FormBuilder(
           key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              for (var page in pages)
-                PageWidget(
-                  name: page.name,
-                  elements: page.elements,
-                  formKey: formKey,
-                ),
-              const SizedBox(height: 20),
-              SubmitBtn(onPressed: _handleSubmit)
-            ],
-          ),
+          child: _getFormLayout(),
         ),
       ),
     );
   }
 
-  /// Handles the form submission.
+  _getFormLayout() {
+    switch (layoutType) {
+      case FormLayoutType.STEPPER:
+        return FormStepperView(
+          formKey: formKey,
+          name: title,
+          pages: pages,
+          onSubmit: _handleSubmit,
+        );
+
+      default:
+        return FormPanelView(
+          formKey: formKey,
+          name: title,
+          pages: pages,
+          onSubmit: _handleSubmit,
+        );
+    }
+  }
+
   void _handleSubmit() {
     try {
       if (formKey.currentState!.validate()) {
