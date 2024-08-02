@@ -1,0 +1,555 @@
+{
+    "title": "Eye Donation Screening Form",
+    "logoPosition": "right",
+    "formLayoutType": "stepper",
+    "pages": [
+        {
+            "name": "Form A2",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Personal Eye Donation Referral Information",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question3",
+                            "title": "title",
+                            "description": "descrioption",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "validators": [],
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Voluntary - Family Initated"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Voluntary - Volunteer Motivated"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "HCRP - Motivated"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "question1",
+                            "title": "tttt",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "Item 1",
+                                "Item 2",
+                                "Item 3"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question4",
+                            "title": "Donation Counselor/Volunteer",
+                            "description": "descrion",
+                            "isRequired": true,
+                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
+                            "readOnly": false,
+                            "placeholder": "palceholder"
+                        },
+                        {
+                            "type": "comment",
+                            "name": "question11",
+                            "title": "Unit Details",
+                            "description": "desciptio",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "placeholder": "hind"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "question12",
+                            "title": "Condition I Agree to:",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                {
+                                    "value": "Item 1Condition",
+                                    "text": "Condition 1"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Condition 2"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Condition 3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "question13",
+                            "title": "Health Insurance Card",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "maxSize": 5
+                        },
+                        {
+                            "type": "text",
+                            "name": "question14",
+                            "title": "Visual Acuity",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "inputType": "range",
+                            "min": 0,
+                            "max": 100,
+                            "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Form A3",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Personal Eye Donation Referral Information",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question3",
+                            "title": "title",
+                            "description": "descrioption",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "validators": [],
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Voluntary - Family Initated"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Voluntary - Volunteer Motivated"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "HCRP - Motivated"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "question1",
+                            "title": "tttt",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "Item 1",
+                                "Item 2",
+                                "Item 3"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question4",
+                            "title": "Donation Counselor/Volunteer",
+                            "description": "descrion",
+                            "isRequired": true,
+                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
+                            "readOnly": false,
+                            "placeholder": "palceholder"
+                        },
+                        {
+                            "type": "comment",
+                            "name": "question11",
+                            "title": "Unit Details",
+                            "description": "desciptio",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "placeholder": "hind"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "question12",
+                            "title": "Condition I Agree to:",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                {
+                                    "value": "Item 1Condition",
+                                    "text": "Condition 1"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Condition 2"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Condition 3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "question13",
+                            "title": "Health Insurance Card",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "maxSize": 5
+                        },
+                        {
+                            "type": "text",
+                            "name": "question14",
+                            "title": "Visual Acuity",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "inputType": "range",
+                            "min": 0,
+                            "max": 100,
+                            "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Form A4",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Personal Eye Donation Referral Information",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question3",
+                            "title": "title",
+                            "description": "descrioption",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "validators": [],
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Voluntary - Family Initated"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Voluntary - Volunteer Motivated"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "HCRP - Motivated"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "question1",
+                            "title": "tttt",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "Item 1",
+                                "Item 2",
+                                "Item 3"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question4",
+                            "title": "Donation Counselor/Volunteer",
+                            "description": "descrion",
+                            "isRequired": true,
+                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
+                            "readOnly": false,
+                            "placeholder": "palceholder"
+                        },
+                        {
+                            "type": "comment",
+                            "name": "question11",
+                            "title": "Unit Details",
+                            "description": "desciptio",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "placeholder": "hind"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "question12",
+                            "title": "Condition I Agree to:",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                {
+                                    "value": "Item 1Condition",
+                                    "text": "Condition 1"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Condition 2"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Condition 3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "question13",
+                            "title": "Health Insurance Card",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "maxSize": 5
+                        },
+                        {
+                            "type": "text",
+                            "name": "question14",
+                            "title": "Visual Acuity",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "inputType": "range",
+                            "min": 0,
+                            "max": 100,
+                            "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Form A5",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Personal Eye Donation Referral Information",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "radiogroup",
+                            "name": "question3",
+                            "title": "title",
+                            "description": "descrioption",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "validators": [],
+                            "choices": [
+                                {
+                                    "value": "Item 1",
+                                    "text": "Voluntary - Family Initated"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Voluntary - Volunteer Motivated"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "HCRP - Motivated"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "dropdown",
+                            "name": "question1",
+                            "title": "tttt",
+                            "description": "dddd",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                "Item 1",
+                                "Item 2",
+                                "Item 3"
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "name": "question4",
+                            "title": "Donation Counselor/Volunteer",
+                            "description": "descrion",
+                            "isRequired": true,
+                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
+                            "readOnly": false,
+                            "placeholder": "palceholder"
+                        },
+                        {
+                            "type": "comment",
+                            "name": "question11",
+                            "title": "Unit Details",
+                            "description": "desciptio",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "placeholder": "hind"
+                        },
+                        {
+                            "type": "checkbox",
+                            "name": "question12",
+                            "title": "Condition I Agree to:",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "choices": [
+                                {
+                                    "value": "Item 1Condition",
+                                    "text": "Condition 1"
+                                },
+                                {
+                                    "value": "Item 2",
+                                    "text": "Condition 2"
+                                },
+                                {
+                                    "value": "Item 3",
+                                    "text": "Condition 3"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "file",
+                            "name": "question13",
+                            "title": "Health Insurance Card",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "maxSize": 5
+                        },
+                        {
+                            "type": "text",
+                            "name": "question14",
+                            "title": "Visual Acuity",
+                            "description": "desc",
+                            "isRequired": true,
+                            "readOnly": true,
+                            "inputType": "range",
+                            "min": 0,
+                            "max": 100,
+                            "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "panel",
+                    "name": "Terms and Condition",
+                    "elements": [
+                        {
+                            "type": "boolean",
+                            "name": "question16",
+                            "title": "I Agree to the terms and conditions",
+                            "validators": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
