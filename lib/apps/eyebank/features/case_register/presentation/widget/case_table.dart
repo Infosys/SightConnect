@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/pages/custom_table.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class CaseTable extends StatelessWidget {
           debugPrint(snapshot.error.toString());
           return const Text('An error occurred, please try again later');
         } else {
-          return GenericPaginatedTable<TableData>(
+          return EBPaginatedTable<TableData>(
             data: snapshot.data!,
             headers: const [
               'Sample ID',

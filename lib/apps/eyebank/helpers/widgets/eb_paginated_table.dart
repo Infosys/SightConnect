@@ -13,7 +13,7 @@ const String apiUrl = 'https://api.example.com/data';
 //Services
 
 // Widgets
-class GenericPaginatedTable<T> extends StatefulWidget {
+class EBPaginatedTable<T> extends StatefulWidget {
   final List<T> data;
   final List<String> headers;
   final DataRow Function(T) rowBuilder;
@@ -21,7 +21,7 @@ class GenericPaginatedTable<T> extends StatefulWidget {
   final bool Function(T, String) filterMatcher;
   final bool Function(T, String) searchMatcher;
 
-  const GenericPaginatedTable({
+  const EBPaginatedTable({
     Key? key,
     required this.data,
     required this.headers,
@@ -32,11 +32,10 @@ class GenericPaginatedTable<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  GenericPaginatedTableState<T> createState() =>
-      GenericPaginatedTableState<T>();
+  EBPaginatedTableState<T> createState() => EBPaginatedTableState<T>();
 }
 
-class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
+class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   late List<T> filteredData;
   String searchQuery = '';
   String? selectedFilter;
@@ -171,35 +170,31 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
               itemCount: displayedRows.length,
               itemBuilder: (context, index) {
                 final cells = widget.rowBuilder(displayedRows[index]).cells;
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      12.0,
-                    ), // adjust this value to control the border radius
-                  ),
-                  margin: const EdgeInsets.fromLTRB(
-                      8, 0, 8, 8), // margin around the Card
-                  child: GridView.count(
-                    padding: const EdgeInsets.all(16),
-                    shrinkWrap: true,
-                    crossAxisCount: 2, // number of columns
-                    childAspectRatio: 2,
-                    children: List<Widget>.generate(
-                      cells.length,
-                      (cellIndex) {
-                        return Wrap(
+                final headers = widget.headers;
+                return Container(
+                  child: Wrap(
+                    children: [
+                      for (var cell in cells)
+                        Row(
                           children: [
-                            Text(
-                              '${widget.headers[cellIndex]}: ',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            cells[cellIndex].child,
+                            Expanded(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  headers[cells.indexOf(cell)],
+                                  style: applyRobotoFont(
+                                    fontSize: 12,
+                                    color: AppColor.black,
+                                  ),
+                                ),
+                                cell.child
+                              ],
+                            )),
                           ],
-                        );
-                      },
-                    ),
+                        ),
+                    ],
                   ),
                 );
               },
