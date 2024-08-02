@@ -88,12 +88,16 @@ class PersistentAuthData {
     await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
 
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
-
-    final permissions = decodedToken['SC_PERMISSIONS'] as List<dynamic>;
+    var permission = decodedToken['SC_PERMISSIONS'];
+    if (permission == null || permission.isEmpty) {
+      permission = [];
+    }else{
+    permissions = decodedToken['SC_PERMISSIONS'] as List<dynamic>;
+    } 
 
     roles.removeWhere((element) => !element.toString().startsWith("ROLE_"));
     final username = decodedToken['preferred_username'];
-    await _saveRolesPermissionsAndUserName(roles, username, permissions);
+    await _saveRolesPermissionsAndUserName(roles, username, permissions??[]);
   }
 
   Future<void> _saveRolesPermissionsAndUserName(
