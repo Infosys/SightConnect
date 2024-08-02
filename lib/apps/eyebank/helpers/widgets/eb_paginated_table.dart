@@ -161,69 +161,67 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   Widget _buildPaginatedTable() {
     final displayedRows = _getDisplayedRows();
 
-    return SingleChildScrollView(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (Responsive.isMobile(context)) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: displayedRows.length,
-              itemBuilder: (context, index) {
-                final cells = widget.rowBuilder(displayedRows[index]).cells;
-                final headers = widget.headers;
-                return Card(
-                  // color: Colors.yellow,
-                  margin: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    children: [
-                      for (var cell in cells)
-                        Container(
-                          margin: const EdgeInsets.all(8.0),
-                          child: Wrap(
-                            children: [
-                              Text(
-                                headers[cells.indexOf(cell)],
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  color: AppColor.black,
-                                ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (Responsive.isMobile(context)) {
+          return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: displayedRows.length,
+            itemBuilder: (context, index) {
+              final cells = widget.rowBuilder(displayedRows[index]).cells;
+              final headers = widget.headers;
+              return Card(
+                // color: Colors.yellow,
+                margin: const EdgeInsets.all(8.0),
+                child: Wrap(
+                  children: [
+                    for (var cell in cells)
+                      Container(
+                        margin: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          children: [
+                            Text(
+                              headers[cells.indexOf(cell)],
+                              style: applyRobotoFont(
+                                fontSize: 12,
+                                color: AppColor.black,
                               ),
-                              const SizedBox(width: 8),
-                              cell.child,
-                            ],
-                          ),
+                            ),
+                            const SizedBox(width: 8),
+                            cell.child,
+                          ],
                         ),
-                    ],
-                  ),
-                );
-              },
-            );
-          }
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              constraints: BoxConstraints(minWidth: constraints.maxWidth),
-              child: DataTable(
-                dataTextStyle: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.black,
+                      ),
+                  ],
                 ),
-                dataRowMaxHeight: 65,
-                headingRowHeight: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppColor.white,
-                ),
-                columns: _buildColumns(),
-                rows: displayedRows
-                    .map((item) => widget.rowBuilder(item))
-                    .toList(),
-              ),
-            ),
+              );
+            },
           );
-        },
-      ),
+        }
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            constraints: BoxConstraints(minWidth: constraints.maxWidth),
+            child: DataTable(
+              dataTextStyle: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
+              dataRowMaxHeight: 65,
+              headingRowHeight: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColor.white,
+              ),
+              columns: _buildColumns(),
+              rows:
+                  displayedRows.map((item) => widget.rowBuilder(item)).toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 
