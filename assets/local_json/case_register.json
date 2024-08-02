@@ -1,10 +1,10 @@
 {
-    "title": "Eye Donation Case Registration Form (A1)",
+    "title": "Form A1",
     "logoPosition": "right",
     "formLayoutType": "panel",
     "pages": [
         {
-            "name": "page1",
+            "name": "Death Initimation",
             "elements": [
                 {
                     "type": "panel",

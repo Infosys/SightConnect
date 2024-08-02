@@ -11,6 +11,7 @@ showCustomWoltSheet(BuildContext context, Widget child) {
       pageListBuilder: (modalSheetContext) {
         return [
           WoltModalSheetPage(
+            useSafeArea: true,
             trailingNavBarWidget: IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
@@ -63,7 +64,7 @@ class FormPreviewSheet extends WoltModalType {
   BoxConstraints layoutModal(Size availableSize) {
     final availableWidth = availableSize.width;
     double width = availableWidth > 523.0
-        ? availableWidth * 0.6
+        ? availableWidth * 0.55
         : availableWidth - padding.end;
     return BoxConstraints(
       minWidth: width,
