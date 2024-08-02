@@ -1,10 +1,11 @@
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashbord_menu_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_bottom_nav.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/profile/presentation/pages/eb_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EyeBankDashboardPage extends HookConsumerWidget {
@@ -12,23 +13,18 @@ class EyeBankDashboardPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var selectedMenuItem = useState(0);
-
     final isMobile = Responsive.isMobile(context);
+    final menuProvider = ref.watch(ebDashboardMenuProvider);
     return Scaffold(
-      appBar: const EyeBankDashboardAppbar(
-        onNotificationTap: null,
-        onSettingsTap: null,
+      appBar: EyeBankDashboardAppbar(
+        onProfileTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const EbProfilePage(),
+            ),
+          );
+        },
       ),
-      drawer: isMobile
-          ? Drawer(
-              child: EyeBankDashboardSideMenu(
-                  items: ref.watch(ebDashboardProvider).menuItem,
-                  onSelected: (id) {
-                    selectedMenuItem.value = id!;
-                  }),
-            )
-          : null,
       body: DesktopClipper(
         widget: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,24 +32,31 @@ class EyeBankDashboardPage extends HookConsumerWidget {
             Visibility(
               visible: !isMobile,
               child: EyeBankDashboardSideMenu(
-                  items: ref.watch(ebDashboardProvider).menuItem,
-                  onSelected: (id) {
-                    selectedMenuItem.value = id!;
-                  }),
+                items: menuProvider.menuItem,
+                onSelected: (index) {
+                  menuProvider.setSelectedMenuItem(index);
+                },
+                initialIndex: menuProvider.selectedMenuItem,
+              ),
             ),
             if (!isMobile) const SizedBox(width: 8),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: ref
-                      .watch(ebDashboardProvider)
-                      .pages[selectedMenuItem.value],
-                ),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: menuProvider.pages[menuProvider.selectedMenuItem],
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Visibility(
+        visible: isMobile,
+        child: EyeBankBottomNav(
+          items: menuProvider.menuItem,
+          onSelected: (index) {
+            menuProvider.setSelectedMenuItem(index);
+          },
+          initialIndex: menuProvider.selectedMenuItem,
         ),
       ),
     );

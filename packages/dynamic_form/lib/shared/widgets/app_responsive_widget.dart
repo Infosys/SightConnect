@@ -14,18 +14,29 @@ class AppResponsiveWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Responsive.isMobile(context)
-          ? double.infinity
-          : widget is FormCheckbox ||
-                  widget is FormFile ||
-                  widget is FormSwitch ||
-                  widget is FormRadio ||
-                  widget is FormTextArea ||
-                  widget is FormChip
-              ? MediaQuery.of(context).size.width * 0.9 + 32
-              : MediaQuery.of(context).size.width * 0.3,
-      child: widget,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double width;
+        if (Responsive.isMobile(context)) {
+          width = constraints.maxWidth; // Full width on mobile
+        } else if (widget is FormCheckbox ||
+            widget is FormFile ||
+            widget is FormSwitch ||
+            widget is FormRadio ||
+            widget is FormTextArea ||
+            widget is FormChip) {
+          width =
+              constraints.maxWidth * 0.45; // Adjust width for larger screens
+        } else {
+          width = constraints.maxWidth * 0.3; // Default width for other widgets
+        }
+
+        return Container(
+          width: width,
+          padding: const EdgeInsets.all(8.0),
+          child: widget,
+        );
+      },
     );
   }
 }

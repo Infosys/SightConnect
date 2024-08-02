@@ -1,7 +1,10 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/provider/eb_screening_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/case_close_sheet.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,27 +22,41 @@ class EbScreeningPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(65),
-            child: AppBar(
-              title: Text('Screening CaseID : $caseID'),
-              actions: [
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.close,
-                    color: AppColor.red,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(65),
+          child: AppBar(
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Case ID: $caseID",
+                    style: applyRobotoFont(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  label: Text(
-                    'Close Case',
-                    style: applyRobotoFont(color: AppColor.red),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      showCustomWoltSheet(context, const CaseCloseSheet());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.red,
+                      foregroundColor: AppColor.white,
+                    ),
+                    icon: const Icon(
+                      Icons.close,
+                    ),
+                    label: const Text('Close Case'),
                   ),
-                ),
-                const SizedBox(width: 8)
-              ],
+                ],
+              ),
             ),
           ),
-          body: ref.watch(ebScreeningProvider).when(
+        ),
+        body: DesktopClipper(
+          widget: ref.watch(ebScreeningProvider).when(
                 data: (json) {
                   return DynamicFormPage(json: json);
                 },
@@ -49,7 +66,9 @@ class EbScreeningPage extends ConsumerWidget {
                 error: (error, stackTrace) => Center(
                   child: Text('Error: $error'),
                 ),
-              )),
+              ),
+        ),
+      ),
     );
   }
 }

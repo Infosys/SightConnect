@@ -28,6 +28,7 @@ class _PageWidgetState extends State<PageWidget> {
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: widget.elements.map((panel) {
         if (panel.elements.isEmpty) {
           return Container();
@@ -38,6 +39,7 @@ class _PageWidgetState extends State<PageWidget> {
             title: panel.name,
             child: Wrap(
               runSpacing: 16,
+              alignment: WrapAlignment.start,
               children: _buildFields(panel.elements, widget.formKey),
             ),
           ),

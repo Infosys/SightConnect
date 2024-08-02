@@ -1,17 +1,10 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/age_group_analytics.dart';
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/analytics_card.dart';
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/appointments_analytics.dart';
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/cases_closed_analytics.dart';
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/gender_analytics.dart';
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/ivr_calls_analytics.dart';
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/statidtics_top_card.dart';
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/triage_cases_analytics.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/consultation_type_analytics.dart';
 
 class TenantAdminAnalyticsDashBoardPage extends StatefulWidget {
   const TenantAdminAnalyticsDashBoardPage({super.key});
@@ -106,53 +99,53 @@ class _TenantAdminAnalyticsDashBoardPageState
               //   ],
               // ),
 
-              AnalyticsCard(
-                width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-                title: 'Triage Cases',
-                body: const TriageCasesAnalytics(),
-              ),
+              // AnalyticsCard(
+              //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+              //   title: 'Triage Cases',
+              //   body: const TriageCasesAnalytics(),
+              // ),
               AnalyticsCard(
                 width: AppSize.width(context) / 2 - 2 * AppSize.ks,
                 title: 'Cases Closed',
                 body: const CasesClosedAnalytics(),
               ),
-              AnalyticsCard(
-                width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-                title: 'Consultation Type',
-                body: const ConsultationTypeAnalytics(),
-                height: 270,
-              ),
-              AnalyticsCard(
-                width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-                title: 'Appointments',
-                body: const AppointmentsAnalytics(),
-                titleTrailing: '13.4K',
-                showDivider: true,
-                height: 270,
-              ),
-              AnalyticsCard(
-                width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-                title: 'IVR Calls',
-                body: const IVRCallsAnalytics(),
-                titleTrailing: "12.67K ",
-                showDivider: true,
-              ),
               // AnalyticsCard(
               //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-              //   title: 'Top Suggestions & Prescriptions',
-              //   body: const TopSuggestionsPrescriptionsAnalytics(),
+              //   title: 'Consultation Type',
+              //   body: const ConsultationTypeAnalytics(),
+              //   height: 270,
               // ),
+              // AnalyticsCard(
+              //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+              //   title: 'Appointments',
+              //   body: const AppointmentsAnalytics(),
+              //   titleTrailing: '13.4K',
+              //   showDivider: true,
+              //   height: 270,
+              // ),
+              // AnalyticsCard(
+              //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+              //   title: 'IVR Calls',
+              //   body: const IVRCallsAnalytics(),
+              //   titleTrailing: "12.67K ",
+              //   showDivider: true,
+              // ),
+              // // AnalyticsCard(
+              // //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+              // //   title: 'Top Suggestions & Prescriptions',
+              // //   body: const TopSuggestionsPrescriptionsAnalytics(),
+              // // ),
 
-              AnalyticsCard(
-                width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-                title: 'Gender',
-                body: const GenderAnalytics(),
-              ),
-              AnalyticsCard(
-                width: AppSize.width(context) / 2 - 2 * AppSize.ks,
-                title: 'Age Group',
-                body: const AgeGroupAnalytics(),
-              ),
+              // AnalyticsCard(
+              //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+              //   title: 'Gender',
+              //   body: const GenderAnalytics(),
+              // ),
+              // AnalyticsCard(
+              //   width: AppSize.width(context) / 2 - 2 * AppSize.ks,
+              //   title: 'Age Group',
+              //   body: const AgeGroupAnalytics(),
+              // ),
 
               // AnalyticsCard(
               //   height: Responsive.isMobile(context) ? 220 : 250,

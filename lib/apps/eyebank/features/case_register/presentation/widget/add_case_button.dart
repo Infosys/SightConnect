@@ -13,40 +13,72 @@ class AddCaseButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebCaseCreationProvider).when(
-          data: (json) => OutlinedButton(
-            onPressed: () async {
+          data: (json) => CreateNewCaseSection(
+            onPressed: () {
               showCustomWoltSheet(
                 context,
-                DynamicFormPage(
-                  json: json,
-                ),
+                DynamicFormPage(json: json),
               );
             },
-            child: Text(
-              'Create New Case',
-              style: applyRobotoFont(
-                color: AppColor.black,
-                fontSize: 12,
-              ),
-            ),
+            buttonTxt: 'Create New Case',
           ),
           loading: () => const CircularProgressIndicator(),
           error: (error, stackTrace) {
             Fluttertoast.showToast(msg: 'Error Loading Case Registration JSON');
-            return OutlinedButton.icon(
+            return CreateNewCaseSection(
               onPressed: () {
                 ref.invalidate(ebCaseCreationProvider);
               },
-              icon: const Icon(Icons.refresh),
-              label: Text(
-                'Retry',
-                style: applyRobotoFont(
-                  color: AppColor.black,
-                  fontSize: 12,
-                ),
-              ),
+              buttonTxt: 'Retry',
             );
           },
         );
+  }
+}
+
+class CreateNewCaseSection extends StatelessWidget {
+  const CreateNewCaseSection({
+    super.key,
+    required this.onPressed,
+    required this.buttonTxt,
+  });
+
+  final VoidCallback onPressed;
+  final String buttonTxt;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: AppColor.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Create New Case',
+            style: applyRobotoFont(
+              fontSize: 12,
+            ),
+          ),
+          ElevatedButton.icon(
+            onPressed: onPressed,
+            label: Text(
+              buttonTxt,
+              style: applyRobotoFont(
+                color: AppColor.white,
+                fontSize: 12,
+              ),
+            ),
+            icon: const Icon(
+              Icons.add,
+              size: 16,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
