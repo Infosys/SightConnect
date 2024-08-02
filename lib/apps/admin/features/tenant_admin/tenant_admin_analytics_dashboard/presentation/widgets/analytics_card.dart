@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -28,13 +27,13 @@ class AnalyticsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSize.km),
       ),
       child: Container(
-        constraints: BoxConstraints(
-            maxWidth: Responsive.isMobile(context)
-                ? AppSize.width(context)
-                : width - 500),
-        height: height,
+        // constraints: BoxConstraints(
+        //     maxWidth: Responsive.isMobile(context)
+        //         ? AppSize.width(context)
+        //         : width - 500),
+        // height: height,
+        padding: const EdgeInsets.all(AppSize.km),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -69,13 +68,15 @@ class AnalyticsCard extends StatelessWidget {
                     color: Colors.grey,
                   )
                 : const SizedBox.shrink(),
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: AppSize.km,
-                left: AppSize.km,
-                right: AppSize.km,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  bottom: AppSize.km,
+                  left: AppSize.km,
+                  right: AppSize.km,
+                ),
+                child: body,
               ),
-              child: body,
             ),
           ],
         ),

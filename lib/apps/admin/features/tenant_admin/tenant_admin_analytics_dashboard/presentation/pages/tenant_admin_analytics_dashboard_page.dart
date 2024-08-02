@@ -7,7 +7,9 @@ import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_a
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/statidtics_top_card.dart';
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/top_suggestions_prescriptions_analytics.dart';
 import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/triage_cases_analytics.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -50,15 +52,24 @@ class _TenantAdminAnalyticsDashBoardPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Vision Centre Analytics'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSize.ks),
-          child: Wrap(
-            runSpacing: 16,
+    final w = MediaQuery.of(context).size.width;
+    logger.f(w);
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const StatisticsTopCard(),
+          const SizedBox(height: AppSize.km),
+          GridView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: Responsive.isSemiDesktop(context) ? 2 : 1,
+              crossAxisSpacing: AppSize.ks,
+              mainAxisSpacing: AppSize.ks,
+              childAspectRatio: Responsive.isSemiDesktop(context) ? 1.8 : 1.8,
+            ),
             children: [
               // DropdownMenu<String>(
               //     width: Responsive.isMobile(context)
@@ -98,8 +109,6 @@ class _TenantAdminAnalyticsDashBoardPageState
               //     ),
               //   ],
               // ),
-              // const SizedBox(height: AppSize.km),
-              const StatisticsTopCard(),
 
               AnalyticsCard(
                 width: AppSize.width(context) / 2 - 2 * AppSize.ks,
@@ -147,6 +156,7 @@ class _TenantAdminAnalyticsDashBoardPageState
                 title: 'Age Group',
                 body: const AgeGroupAnalytics(),
               ),
+
               // AnalyticsCard(
               //   height: Responsive.isMobile(context) ? 220 : 250,
               //   width: AppSize.width(context) - 2 * AppSize.ks,
@@ -155,7 +165,7 @@ class _TenantAdminAnalyticsDashBoardPageState
               // ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

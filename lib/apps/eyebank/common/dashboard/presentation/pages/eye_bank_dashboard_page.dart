@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashboard_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
-
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
@@ -46,9 +45,12 @@ class EyeBankDashboardPage extends HookConsumerWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ref
-                    .watch(ebDashboardProvider)
-                    .pages[selectedMenuItem.value],
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: ref
+                      .watch(ebDashboardProvider)
+                      .pages[selectedMenuItem.value],
+                ),
               ),
             ),
           ],
