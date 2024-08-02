@@ -5,12 +5,6 @@ import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
-
-// Constants
-const String apiUrl = 'https://api.example.com/data';
-
-//Services
 
 // Widgets
 class EBPaginatedTable<T> extends StatefulWidget {
@@ -172,23 +166,25 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
                 final cells = widget.rowBuilder(displayedRows[index]).cells;
                 final headers = widget.headers;
                 return Card(
-                  // color: Colors.yellow,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                   margin: const EdgeInsets.all(8.0),
                   child: Wrap(
                     children: [
                       for (var cell in cells)
                         Container(
-                          margin: const EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.all(16.0),
                           child: Wrap(
                             children: [
                               Text(
-                                headers[cells.indexOf(cell)],
+                                "${headers[cells.indexOf(cell)]} : ",
                                 style: applyRobotoFont(
                                   fontSize: 12,
+                                  fontWeight: FontWeight.bold,
                                   color: AppColor.black,
                                 ),
                               ),
-                              const SizedBox(width: 8),
                               cell.child,
                             ],
                           ),
