@@ -29,9 +29,9 @@ class AnalyticsCard extends StatelessWidget {
       ),
       child: Container(
         constraints: BoxConstraints(
-          maxWidth:
-              Responsive.isMobile(context) ? AppSize.width(context) : width,
-        ),
+            maxWidth: Responsive.isMobile(context)
+                ? AppSize.width(context)
+                : width - 500),
         height: height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
