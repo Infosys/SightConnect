@@ -35,7 +35,7 @@ class EBCaseRegisterPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            CaseTable(),
+            const CaseTable(),
 
             // Container(
             //   width: double.infinity,
