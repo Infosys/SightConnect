@@ -17,13 +17,26 @@ class KeycloakResponse with _$KeycloakResponse {
       _$KeycloakResponseFromJson(json);
 }
 
+enum Permissions { EVENT_CREATOR, EYEBANK_ADMIN }
+
 enum Role {
   ROLE_PATIENT,
   ROLE_VISION_GUARDIAN,
   ROLE_VISION_TECHNICIAN,
   ROLE_OPTOMETRIST,
-
+  ROLE_EYEBANK,
   ROLE_VOLUNTEER
+}
+
+Permissions? permissionMapper(String? permission) {
+  switch (permission) {
+    case "EVENT_CREATOR":
+      return Permissions.EVENT_CREATOR;
+    case "EYEBANK_ADMIN":
+      return Permissions.EYEBANK_ADMIN;
+    default:
+      return null;
+  }
 }
 
 Role? roleMapper(String? role) {
@@ -38,8 +51,19 @@ Role? roleMapper(String? role) {
       return Role.ROLE_OPTOMETRIST;
     case "ROLE_VOLUNTEER":
       return Role.ROLE_VOLUNTEER;
+    case "ROLE_EYEBANK":
+      return Role.ROLE_EYEBANK;
     default:
       return null;
+  }
+}
+
+String permissionToString(Permissions permission) {
+  switch (permission) {
+    case Permissions.EVENT_CREATOR:
+      return "EVENT_CREATOR";
+    case Permissions.EYEBANK_ADMIN:
+      return "EYEBANK_ADMIN";
   }
 }
 
@@ -55,9 +79,18 @@ String roleToString(Role role) {
       return "ROLE_OPTOMETRIST";
     case Role.ROLE_VOLUNTEER:
       return "ROLE_VOLUNTEER";
+    case Role.ROLE_EYEBANK:
+      return "ROLE_EYEBANK";
     default:
       return "";
   }
+}
+
+List<Permissions?> permissionListMapper(List<dynamic> permissions) {
+  final result = permissions.map((e) => permissionMapper(e)).toList();
+  // remove all nulls
+  result.removeWhere((element) => element == null);
+  return result;
 }
 
 List<Role?> roleListMapper(List<dynamic> roles) {
