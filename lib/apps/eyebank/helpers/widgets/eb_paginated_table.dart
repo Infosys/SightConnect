@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 
@@ -96,11 +97,12 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
     return SizedBox(
       width: Responsive.isMobile(context)
           ? double.infinity
-          : AppSize.width(context) * 0.3,
+          : AppSize.width(context) * 0.35,
       child: TextField(
         decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20),
+          contentPadding: kIsWeb
+              ? const EdgeInsets.symmetric(vertical: 22.0, horizontal: 20)
+              : const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20),
           hintText: 'Search...',
           prefixIcon: const Padding(
             padding: EdgeInsets.only(left: 8, right: 8),
