@@ -40,7 +40,7 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   String searchQuery = '';
   String? selectedFilter;
   int currentPage = 0;
-  final int rowsPerPage = 5;
+  final int rowsPerPage = 10;
   Timer? _debounce;
 
   @override
