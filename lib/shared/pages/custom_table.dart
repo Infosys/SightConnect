@@ -166,7 +166,9 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
     return Column(
       children: [
         if (Responsive.isMobile(context)) _buildSearchBar(),
+        if (Responsive.isMobile(context)) const SizedBox(height: 16),
         if (Responsive.isMobile(context)) _buildFilterChips(),
+        if (Responsive.isMobile(context)) const SizedBox(height: 16),
         if (!Responsive.isMobile(context))
           Row(
             children: [
@@ -252,44 +254,76 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   Widget _buildPaginatedTable() {
     final displayedRows = _getDisplayedRows();
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (Responsive.isMobile(context)) {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: displayedRows.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                subtitle: const Text(""),
-                title:
-                    widget.rowBuilder(displayedRows[index]).cells.first.child,
+    return Expanded(
+      child: SingleChildScrollView(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (Responsive.isMobile(context)) {
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: displayedRows.length,
+                itemBuilder: (context, index) {
+                  final cells = widget.rowBuilder(displayedRows[index]).cells;
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        12.0,
+                      ), // adjust this value to control the border radius
+                    ),
+                    margin: const EdgeInsets.fromLTRB(
+                        8, 0, 8, 8), // margin around the Card
+                    child: GridView.count(
+                      padding: const EdgeInsets.all(16),
+                      shrinkWrap: true,
+                      crossAxisCount: 2, // number of columns
+                      childAspectRatio: 2,
+                      children: List<Widget>.generate(
+                        cells.length,
+                        (cellIndex) {
+                          return Wrap(
+                            children: [
+                              Text(
+                                '${widget.headers[cellIndex]}: ',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              cells[cellIndex].child,
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
               );
-            },
-          );
-        }
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            constraints: BoxConstraints(minWidth: constraints.maxWidth),
-            child: DataTable(
-              dataTextStyle: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.black,
+            }
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                child: DataTable(
+                  dataTextStyle: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.black,
+                  ),
+                  dataRowMaxHeight: 65,
+                  headingRowHeight: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppColor.white,
+                  ),
+                  columns: _buildColumns(),
+                  rows: displayedRows
+                      .map((item) => widget.rowBuilder(item))
+                      .toList(),
+                ),
               ),
-              dataRowMaxHeight: 65,
-              headingRowHeight: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: AppColor.white,
-              ),
-              columns: _buildColumns(),
-              rows:
-                  displayedRows.map((item) => widget.rowBuilder(item)).toList(),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -400,7 +434,7 @@ class MyTablePage extends StatelessWidget {
               return GenericPaginatedTable<TableData>(
                 data: snapshot.data!,
                 headers: const [
-                  'SampleID',
+                  'Sample ID',
                   'Date',
                   'Donor',
                   'Tissue',
@@ -441,12 +475,15 @@ class MyTablePage extends StatelessWidget {
         DataCell(Text(item.tissue)),
         DataCell(Text(item.eye)),
         DataCell(Text(item.category)),
-        DataCell(_buildStatusCell(item)),
+        DataCell(_buildStatusCell(item, context)),
       ],
     );
   }
 
-  Widget _buildStatusCell(TableData item) {
+  Widget _buildStatusCell(TableData item, BuildContext context) {
+    if (Responsive.isMobile(context)) {
+      return Text(item.status);
+    }
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,
