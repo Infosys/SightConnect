@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/pages/eb_screening_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
@@ -8,8 +9,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/models/table_data.dart';
 
-class CaseTable extends ConsumerWidget {
-  const CaseTable({Key? key}) : super(key: key);
+class CaseRegisterTable extends ConsumerWidget {
+  const CaseRegisterTable({Key? key}) : super(key: key);
 
   bool searchFunction(TableData item, String query) {
     final lowerCaseQuery = query.toLowerCase();
@@ -63,15 +64,21 @@ class CaseTable extends ConsumerWidget {
 
   DataRow _buildDataRow(TableData item, BuildContext context) {
     return DataRow(
-      // color: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-      //   if (states.contains(WidgetState.selected)) {
-      //     return Theme.of(context).colorScheme.primary.withOpacity(0.08);
-      //   }
-      //   if (item.status == 'Completed') return Colors.green[100];
-      //   return null; // Use default value for other states
-      // }),
       cells: [
-        DataCell(Text(item.sampleID)),
+        DataCell(
+          Text(item.sampleID),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const EbScreeningPage(
+                  title: 'Screening',
+                  caseID: '1234',
+                ),
+              ),
+            );
+          },
+        ),
         DataCell(Text(item.date.toString())),
         DataCell(Text(item.donor)),
         DataCell(Text(item.tissue)),
