@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashboard_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +20,27 @@ class EyeBankDashboardPage extends HookConsumerWidget {
         onNotificationTap: null,
         onSettingsTap: null,
       ),
-      drawer: isMobile ? const Drawer() : null,
+      drawer: isMobile
+          ? Drawer(
+              child: EyeBankDashboardSideMenu(
+                  items: ref.watch(ebDashboardProvider).menuItem,
+                  onSelected: (id) {
+                    selectedMenuItem.value = id!;
+                  }),
+            )
+          : null,
       body: DesktopClipper(
         widget: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            EyeBankDashboardSideMenu(
-                items: ref.watch(ebDashboardProvider).menuItem,
-                onSelected: (id) {
-                  selectedMenuItem.value = id!;
-                }),
+            Visibility(
+              visible: !isMobile,
+              child: EyeBankDashboardSideMenu(
+                  items: ref.watch(ebDashboardProvider).menuItem,
+                  onSelected: (id) {
+                    selectedMenuItem.value = id!;
+                  }),
+            ),
             if (!isMobile) const SizedBox(width: 8),
             Expanded(
               child: Padding(
@@ -45,6 +56,12 @@ class EyeBankDashboardPage extends HookConsumerWidget {
     );
   }
 }
+
+
+
+
+
+
 
 
 
