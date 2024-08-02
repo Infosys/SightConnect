@@ -410,12 +410,10 @@ class MyTablePage extends StatelessWidget {
                 ],
                 rowBuilder: (item) => _buildDataRow(item, context),
                 filterOptions: const [
-                  'HHAHA',
                   'Completed',
                   'Pending',
                   'All',
                   'None',
-                  ''
                 ],
                 filterMatcher: (item, filter) => item.status.contains(filter),
                 searchMatcher: searchFunction,
