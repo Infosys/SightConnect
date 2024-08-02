@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Flutter (Chrome)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ],
+        },
+        {
             "name": "EYE_CARE_FOR_ALL_INFOSYS",
             "request": "launch",
             "type": "dart"
