@@ -14,6 +14,7 @@ class EBPaginatedTable<T> extends StatefulWidget {
   final List<String> filterOptions;
   final bool Function(T, String) filterMatcher;
   final bool Function(T, String) searchMatcher;
+  final void Function(int) onPageChange;
 
   const EBPaginatedTable({
     Key? key,
@@ -23,6 +24,7 @@ class EBPaginatedTable<T> extends StatefulWidget {
     required this.filterOptions,
     required this.filterMatcher,
     required this.searchMatcher,
+    required this.onPageChange,
   }) : super(key: key);
 
   @override
@@ -246,14 +248,21 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
       children: [
         IconButton(
           icon: const Icon(Icons.chevron_left),
-          onPressed:
-              currentPage > 0 ? () => setState(() => currentPage--) : null,
+          onPressed: currentPage > 0
+              ? () => setState(() {
+                    currentPage--;
+                    widget.onPageChange(currentPage);
+                  })
+              : null,
         ),
         Text('Page ${currentPage + 1} of $totalPages'),
         IconButton(
           icon: const Icon(Icons.chevron_right),
           onPressed: currentPage < totalPages - 1
-              ? () => setState(() => currentPage++)
+              ? () => setState(() {
+                    currentPage++;
+                    widget.onPageChange(currentPage);
+                  })
               : null,
         ),
       ],

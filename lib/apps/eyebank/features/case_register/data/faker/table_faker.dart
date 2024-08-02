@@ -1,8 +1,13 @@
 import '../models/table_data.dart';
 
 class TableFaker {
-  List<TableData> fetchMockData() {
+  List<TableData> fetchMockData({int page = 0, int pageSize = 10}) {
     List<Map<String, dynamic>> mockData = _getMockData();
+    // Apply pagination
+    // int start = page * pageSize;
+    // int end =
+    //     start + pageSize > mockData.length ? mockData.length : start + pageSize;
+    // List<Map<String, dynamic>> paginatedData = mockData.sublist(start, end);
     return mockData.map((item) => TableData.fromJson(item)).toList();
   }
 

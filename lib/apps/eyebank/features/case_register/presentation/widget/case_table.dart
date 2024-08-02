@@ -38,14 +38,10 @@ class CaseTable extends ConsumerWidget {
                 'Status',
               ],
               rowBuilder: (item) => _buildDataRow(item, context),
-              filterOptions: const [
-                'Completed',
-                'Pending',
-                'All',
-                'None',
-              ],
+              filterOptions: const ['Completed', 'Pending'],
               filterMatcher: (item, filter) => item.status.contains(filter),
               searchMatcher: searchFunction,
+              onPageChange: (index) {},
             );
           },
           error: (error, _) => Center(
