@@ -7,10 +7,17 @@ class AppExit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(
+      buttonPadding: const EdgeInsets.symmetric(horizontal: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const Icon(
+            Icons.exit_to_app,
+            color: Colors.black,
+            size: 40,
+          ),
+          const SizedBox(height: 16),
           Text(
             "Are you sure you want to exit?",
             style: applyRobotoFont(
@@ -22,13 +29,21 @@ class AppExit extends StatelessWidget {
         ],
       ),
       actions: [
-        ElevatedButton(
+        OutlinedButton(
+          style: ElevatedButton.styleFrom(
+            maximumSize: const Size(100, 50),
+            minimumSize: const Size(100, 50),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: const Text("No"),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            maximumSize: const Size(100, 50),
+            minimumSize: const Size(100, 50),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
             Navigator.of(context).pop();

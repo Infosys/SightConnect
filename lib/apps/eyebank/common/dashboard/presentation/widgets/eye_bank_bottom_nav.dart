@@ -36,7 +36,10 @@ class EyeBankBottomNav extends StatelessWidget {
       items: items
           .map(
             (item) => BottomNavigationBarItem(
-              icon: Icon(item.icon),
+              icon: Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Icon(item.icon, size: 20),
+              ),
               label: item.title,
             ),
           )

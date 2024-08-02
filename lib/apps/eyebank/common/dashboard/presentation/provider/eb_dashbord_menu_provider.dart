@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_a
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/data/models/menu_item.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/pages/eb_case_register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebDashboardMenuProvider = ChangeNotifierProvider<EbDashboardMenuProvider>(
@@ -32,22 +33,22 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     MenuItem(
       id: 0,
       title: "Dashboard",
-      icon: Icons.home_filled,
+      icon: FontAwesomeIcons.gauge,
     ),
     MenuItem(
       id: 1,
       title: "'Register Case'",
-      icon: Icons.file_present,
+      icon: FontAwesomeIcons.bookMedical,
     ),
     MenuItem(
       id: 2,
       title: "Organ Inventory",
-      icon: Icons.safety_check,
+      icon: FontAwesomeIcons.boxesStacked,
     ),
     MenuItem(
       id: 3,
       title: "Delivery",
-      icon: Icons.delivery_dining,
+      icon: FontAwesomeIcons.truck,
     ),
   ];
 }

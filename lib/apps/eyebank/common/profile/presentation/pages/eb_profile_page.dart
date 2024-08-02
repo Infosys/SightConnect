@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EbProfilePage extends StatelessWidget {
@@ -12,28 +13,8 @@ class EbProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.white,
-        elevation: 2,
+        elevation: kIsWeb ? 2 : 0,
         title: const Text('Profile'),
-        actions: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColor.grey,
-                width: 1,
-              ),
-              shape: BoxShape.circle,
-              color: AppColor.white,
-            ),
-            child: IconButton(
-              icon: const Icon(
-                Icons.person,
-                size: 24,
-              ),
-              onPressed: () {},
-            ),
-          ),
-          const SizedBox(width: 16),
-        ],
       ),
       body: Container(
         constraints: BoxConstraints(
