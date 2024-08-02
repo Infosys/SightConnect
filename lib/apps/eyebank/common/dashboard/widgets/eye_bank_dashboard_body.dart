@@ -1,6 +1,5 @@
-import 'package:dynamic_form/pages/dynamic_form_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_add_case_button.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/admin/dashboard/presentation/widgets/admin_donor_table.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -31,18 +30,7 @@ class EyeBankDashboardBody extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  OutlinedButton(
-                    onPressed: () {
-                      showCustomWoltSheet(context, const DynamicFormPage());
-                    },
-                    child: Text(
-                      'Add Case',
-                      style: applyRobotoFont(
-                        color: AppColor.black,
-                        fontSize: 12,
-                      ),
-                    ),
-                  )
+                  const AddCaseButton()
                 ],
               ),
               const SizedBox(

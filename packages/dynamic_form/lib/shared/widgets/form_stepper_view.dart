@@ -47,6 +47,40 @@ class _PageWidgetState extends State<FormStepperView> {
               });
             }
           },
+          controlsBuilder: (context, _) {
+            return Row(
+              children: [
+                if (currentStep < widget.pages.length - 1)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        if (currentStep < widget.pages.length - 1) {
+                          setState(() {
+                            currentStep++;
+                          });
+                        }
+                      },
+                      child: const Text('Next'),
+                    ),
+                  ),
+                if (currentStep > 0)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        if (currentStep > 0) {
+                          setState(() {
+                            currentStep--;
+                          });
+                        }
+                      },
+                      child: const Text('Back'),
+                    ),
+                  ),
+              ],
+            );
+          },
           steps: widget.pages.map((panel) {
             return Step(
               title: Text(panel.name),
