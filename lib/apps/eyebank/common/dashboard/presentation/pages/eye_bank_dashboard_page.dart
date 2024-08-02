@@ -1,47 +1,19 @@
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_appbar.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_side_menu.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/pages/eb_case_register_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EyeBankDashboardPage extends HookWidget {
+class EyeBankDashboardPage extends HookConsumerWidget {
   const EyeBankDashboardPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var selectedMenuItem = useState(0);
 
-    final List<Widget> pages = [
-      Container(),
-      const EBCaseRegisterPage(),
-      Container(),
-      Container(),
-    ];
-
-    final menuItem = [
-      MenuItem(
-        id: 0,
-        title: "Dashboard",
-        icon: Icons.home_filled,
-      ),
-      MenuItem(
-        id: 1,
-        title: "Case Registration",
-        icon: Icons.file_present,
-      ),
-      MenuItem(
-        id: 2,
-        title: "Organ Inventory",
-        icon: Icons.safety_check,
-      ),
-      MenuItem(
-        id: 3,
-        title: "Delivery",
-        icon: Icons.delivery_dining,
-      ),
-    ];
     final isMobile = Responsive.isMobile(context);
     return Scaffold(
       appBar: const EyeBankDashboardAppbar(
@@ -54,7 +26,7 @@ class EyeBankDashboardPage extends HookWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             EyeBankDashboardSideMenu(
-                items: menuItem,
+                items: ref.watch(ebDashboardProvider).menuItem,
                 onSelected: (id) {
                   selectedMenuItem.value = id!;
                 }),
@@ -62,7 +34,9 @@ class EyeBankDashboardPage extends HookWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: pages[selectedMenuItem.value],
+                child: ref
+                    .watch(ebDashboardProvider)
+                    .pages[selectedMenuItem.value],
               ),
             ),
           ],
@@ -70,17 +44,6 @@ class EyeBankDashboardPage extends HookWidget {
       ),
     );
   }
-}
-
-class MenuItem {
-  int? id;
-  String? title;
-  IconData? icon;
-  MenuItem({
-    this.id,
-    this.title,
-    this.icon,
-  });
 }
 
 

@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/pages/eye_bank_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/data/models/menu_item.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
