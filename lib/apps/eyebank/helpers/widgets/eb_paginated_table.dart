@@ -171,28 +171,27 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
               itemBuilder: (context, index) {
                 final cells = widget.rowBuilder(displayedRows[index]).cells;
                 final headers = widget.headers;
-                return Container(
+                return Card(
+                  // color: Colors.yellow,
+                  margin: const EdgeInsets.all(8.0),
                   child: Wrap(
                     children: [
                       for (var cell in cells)
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  headers[cells.indexOf(cell)],
-                                  style: applyRobotoFont(
-                                    fontSize: 12,
-                                    color: AppColor.black,
-                                  ),
+                        Container(
+                          margin: const EdgeInsets.all(8.0),
+                          child: Wrap(
+                            children: [
+                              Text(
+                                headers[cells.indexOf(cell)],
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.black,
                                 ),
-                                cell.child
-                              ],
-                            )),
-                          ],
+                              ),
+                              const SizedBox(width: 8),
+                              cell.child,
+                            ],
+                          ),
                         ),
                     ],
                   ),

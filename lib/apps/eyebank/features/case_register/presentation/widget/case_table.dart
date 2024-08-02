@@ -55,39 +55,61 @@ class CaseTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<TableData>>(
-      future: _apiService.fetchMockData(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          debugPrint(snapshot.error.toString());
-          return const Text('An error occurred, please try again later');
-        } else {
-          return EBPaginatedTable<TableData>(
-            data: snapshot.data!,
-            headers: const [
-              'Sample ID',
-              'Date',
-              'Donor',
-              'Tissue',
-              'Eye',
-              'Category',
-              'Status',
-            ],
-            rowBuilder: (item) => _buildDataRow(item, context),
-            filterOptions: const [
-              'Completed',
-              'Pending',
-              'All',
-              'None',
-            ],
-            filterMatcher: (item, filter) => item.status.contains(filter),
-            searchMatcher: searchFunction,
-          );
-        }
-      },
+    return EBPaginatedTable<TableData>(
+      data: ApiService().fetchMockData(),
+      headers: const [
+        'Sample ID',
+        'Date',
+        'Donor',
+        'Tissue',
+        'Eye',
+        'Category',
+        'Status',
+      ],
+      rowBuilder: (item) => _buildDataRow(item, context),
+      filterOptions: const [
+        'Completed',
+        'Pending',
+        'All',
+        'None',
+      ],
+      filterMatcher: (item, filter) => item.status.contains(filter),
+      searchMatcher: searchFunction,
     );
+
+    // return FutureBuilder<List<TableData>>(
+    //   future: _apiService.fetchMockData(),
+    //   builder: (context, snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return const Center(child: CircularProgressIndicator());
+    //     } else if (snapshot.hasError) {
+    //       debugPrint(snapshot.error.toString());
+    //       return const Text('An error occurred, please try again later');
+    //     } else {
+    //       return EBPaginatedTable<TableData>(
+    //         data: snapshot.data!,
+    //         headers: const [
+    //           'Sample ID',
+    //           'Date',
+    //           'Donor',
+    //           'Tissue',
+    //           'Eye',
+    //           'Category',
+    //           'Status',
+    //         ],
+    //         rowBuilder: (item) => _buildDataRow(item, context),
+    //         filterOptions: const [
+    //           'Completed',
+    //           'Pending',
+    //           'All',
+    //           'None',
+    //         ],
+    //         filterMatcher: (item, filter) => item.status.contains(filter),
+    //         searchMatcher: searchFunction,
+    //       );
+    //     }
+    //   },
+    // );
   }
 
   DataRow _buildDataRow(TableData item, BuildContext context) {
@@ -155,14 +177,8 @@ class ApiService {
     }
   }
 
-  Future<List<TableData>> fetchMockData() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(seconds: 2));
-
-    // Mock data
+  List<TableData> fetchMockData() {
     List<Map<String, dynamic>> mockData = _getMockData();
-
-    // Convert mock data to List<TableData>
     return mockData.map((item) => TableData.fromJson(item)).toList();
   }
 
