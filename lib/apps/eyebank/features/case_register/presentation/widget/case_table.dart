@@ -1,46 +1,15 @@
-import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TableData {
-  final String sampleID;
-  final DateTime date;
-  final String donor;
-  final String tissue;
-  final String eye;
-  final String category;
-  final String status;
+import '../../data/models/table_data.dart';
 
-  TableData({
-    required this.sampleID,
-    required this.date,
-    required this.donor,
-    required this.tissue,
-    required this.eye,
-    required this.category,
-    required this.status,
-  });
-
-  factory TableData.fromJson(Map<String, dynamic> json) {
-    return TableData(
-      sampleID: json['SampleID'],
-      date: DateTime.parse(json['Date']),
-      donor: json['Donor'],
-      tissue: json['Tissue'],
-      eye: json['Eye'],
-      category: json['Category'],
-      status: json['Status'],
-    );
-  }
-}
-
-class CaseTable extends StatelessWidget {
-  CaseTable({Key? key}) : super(key: key);
-
-  final ApiService _apiService = ApiService();
+class CaseTable extends ConsumerWidget {
+  const CaseTable({Key? key}) : super(key: key);
 
   bool searchFunction(TableData item, String query) {
     final lowerCaseQuery = query.toLowerCase();
@@ -54,62 +23,42 @@ class CaseTable extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return EBPaginatedTable<TableData>(
-      data: ApiService().fetchMockData(),
-      headers: const [
-        'Sample ID',
-        'Date',
-        'Donor',
-        'Tissue',
-        'Eye',
-        'Category',
-        'Status',
-      ],
-      rowBuilder: (item) => _buildDataRow(item, context),
-      filterOptions: const [
-        'Completed',
-        'Pending',
-        'All',
-        'None',
-      ],
-      filterMatcher: (item, filter) => item.status.contains(filter),
-      searchMatcher: searchFunction,
-    );
-
-    // return FutureBuilder<List<TableData>>(
-    //   future: _apiService.fetchMockData(),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return const Center(child: CircularProgressIndicator());
-    //     } else if (snapshot.hasError) {
-    //       debugPrint(snapshot.error.toString());
-    //       return const Text('An error occurred, please try again later');
-    //     } else {
-    //       return EBPaginatedTable<TableData>(
-    //         data: snapshot.data!,
-    //         headers: const [
-    //           'Sample ID',
-    //           'Date',
-    //           'Donor',
-    //           'Tissue',
-    //           'Eye',
-    //           'Category',
-    //           'Status',
-    //         ],
-    //         rowBuilder: (item) => _buildDataRow(item, context),
-    //         filterOptions: const [
-    //           'Completed',
-    //           'Pending',
-    //           'All',
-    //           'None',
-    //         ],
-    //         filterMatcher: (item, filter) => item.status.contains(filter),
-    //         searchMatcher: searchFunction,
-    //       );
-    //     }
-    //   },
-    // );
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(ebCaseTableProvider).when(
+          data: (data) {
+            return EBPaginatedTable<TableData>(
+              data: data,
+              headers: const [
+                'Sample ID',
+                'Date',
+                'Donor',
+                'Tissue',
+                'Eye',
+                'Category',
+                'Status',
+              ],
+              rowBuilder: (item) => _buildDataRow(item, context),
+              filterOptions: const [
+                'Completed',
+                'Pending',
+                'All',
+                'None',
+              ],
+              filterMatcher: (item, filter) => item.status.contains(filter),
+              searchMatcher: searchFunction,
+            );
+          },
+          error: (error, _) => Center(
+            child: TextButton.icon(
+              onPressed: () {
+                ref.invalidate(ebCaseTableProvider);
+              },
+              label: Text('Error: $error'),
+              icon: const Icon(Icons.refresh),
+            ),
+          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+        );
   }
 
   DataRow _buildDataRow(TableData item, BuildContext context) {
@@ -154,144 +103,5 @@ class CaseTable extends StatelessWidget {
             fontSize: 12,
           )),
     );
-  }
-}
-
-class ApiService {
-  final Dio _dio = Dio();
-
-  Future<List<TableData>> fetchData() async {
-    final response = await _dio.get("");
-
-    if (response.statusCode == 200) {
-      if (response.data is List) {
-        return (response.data as List)
-            .map((item) => TableData.fromJson(item))
-            .toList();
-      } else {
-        throw Exception('Invalid data format');
-      }
-    } else {
-      throw Exception(
-          'Failed to load data with status: ${response.statusCode}');
-    }
-  }
-
-  List<TableData> fetchMockData() {
-    List<Map<String, dynamic>> mockData = _getMockData();
-    return mockData.map((item) => TableData.fromJson(item)).toList();
-  }
-
-  List<Map<String, dynamic>> _getMockData() {
-    return [
-      {
-        "SampleID": "1",
-        "Date": "2022-01-01",
-        "Donor": "Axel",
-        "Tissue": "Cornea",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "2",
-        "Date": "2022-01-02",
-        "Donor": "Mason",
-        "Tissue": "Whole Globe",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-      {
-        "SampleID": "3",
-        "Date": "2022-01-03",
-        "Donor": "Ethan",
-        "Tissue": "Retina",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "4",
-        "Date": "2022-01-04",
-        "Donor": "Alexander",
-        "Tissue": "Cornea",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-      {
-        "SampleID": "5",
-        "Date": "2022-01-05",
-        "Donor": "Michael",
-        "Tissue": "Whole Globe",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "6",
-        "Date": "2022-01-06",
-        "Donor": "Daniel",
-        "Tissue": "Retina",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-      {
-        "SampleID": "11",
-        "Date": "2022-01-01",
-        "Donor": "Axel",
-        "Tissue": "Cornea",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "21",
-        "Date": "2022-01-02",
-        "Donor": "Mason",
-        "Tissue": "Whole Globe",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-      {
-        "SampleID": "31",
-        "Date": "2022-01-03",
-        "Donor": "Ethan",
-        "Tissue": "Retina",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "41",
-        "Date": "2022-01-04",
-        "Donor": "Alexander",
-        "Tissue": "Cornea",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-      {
-        "SampleID": "51",
-        "Date": "2022-01-05",
-        "Donor": "Michael",
-        "Tissue": "Whole Globe",
-        "Eye": "Right Eye",
-        "Category": "Reviews",
-        "Status": "Completed"
-      },
-      {
-        "SampleID": "61",
-        "Date": "2022-01-06",
-        "Donor": "Daniel",
-        "Tissue": "Retina",
-        "Eye": "Left Eye",
-        "Category": "Harvests",
-        "Status": "Pending"
-      },
-    ];
   }
 }
