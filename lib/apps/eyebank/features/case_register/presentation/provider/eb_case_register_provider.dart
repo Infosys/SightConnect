@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_register/data/faker/fake.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_register/data/faker/table_faker.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/data/models/table_data.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
