@@ -4,10 +4,12 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/l
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/services/app_info_service.dart';
+import 'package:eye_care_for_all/shared/services/network_info.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_feedback_better.dart';
@@ -76,23 +78,23 @@ class MyApp extends ConsumerWidget {
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
 
-                // initialRoute: initialRoute,
-                // navigatorKey: AppRouter.navigatorKey,
-                // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: const EyeBankDashboardPage(),
+                initialRoute: initialRoute,
+                navigatorKey: AppRouter.navigatorKey,
+                onUnknownRoute: AppRouter.onUnknownRoute,
+                // home: const EyeBankDashboardPage(),
 
-                // builder: (context, child) {
-                //   return ref.watch(internetProvider).maybeWhen(
-                //         data: (value) {
-                //           if (!value) {
-                //             return const InternetLostPage();
-                //           } else {
-                //             return child!;
-                //           }
-                //         },
-                //         orElse: () => const InternetLostPage(),
-                //       );
-                // },
+                builder: (context, child) {
+                  return ref.watch(internetProvider).maybeWhen(
+                        data: (value) {
+                          if (!value) {
+                            return const InternetLostPage();
+                          } else {
+                            return child!;
+                          }
+                        },
+                        orElse: () => const InternetLostPage(),
+                      );
+                },
               ),
             ),
           );

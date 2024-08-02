@@ -24,10 +24,13 @@ class PersistentAuthData {
   final String _id_token = "id_token";
   final String _sqfliteKey = 'sqflite_pass';
   final String _userType = 'userType';
+  final String _permissions = 'permissions';
+
 
   String? accessToken;
   String? refreshToken;
   List<dynamic>? roles;
+  List<dynamic>? permissions;
   String? activeRole;
   String? username;
   String? userId;
@@ -41,10 +44,14 @@ class PersistentAuthData {
     accessToken = await _storage.read(key: _accessKey);
     refreshToken = await _storage.read(key: _refreshKey);
     username = await _storage.read(key: _usernameKey);
+
     userId = await _storage.read(key: _userIdKey);
     idToken = await _storage.read(key: _id_token);
     final rolesJson = await _storage.read(key: _rolesKey);
+    final permissionJson = await _storage.read(key: _permissions);
+
     roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
+    permissions = permissionJson != null ? List<String>.from(jsonDecode(permissionJson)) : null;
     activeRole = await _storage.read(key: _activeRoleKey);
     userType = await _storage.read(key: _userType);
 
@@ -52,6 +59,7 @@ class PersistentAuthData {
       log("ACCESS TOKEN: $accessToken\n\n\n");
       log("REFRESH TOKEN: $refreshToken\n\n\n");
       log("ROLES: $roles\n\n\n");
+      log("PERMISSIONS: $permissions\n\n\n");
       log("USERNAME: $username\n\n\n");
       log("USERID: $userId\n\n\n");
       log("ID TOKEN: $idToken\n\n\n");
@@ -77,19 +85,25 @@ class PersistentAuthData {
 
     await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
 
+    
+
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
+
+    final permissions = decodedToken['SC_PERMISSIONS'] as List<dynamic>;
 
     roles.removeWhere((element) => !element.toString().startsWith("ROLE_"));
     final username = decodedToken['preferred_username'];
-    await _saveRolesAndUserName(roles, username);
+    await _saveRolesPermissionsAndUserName(roles, username, permissions);
   }
 
-  Future<void> _saveRolesAndUserName(
-      List<dynamic> roles, String username) async {
+  Future<void> _saveRolesPermissionsAndUserName(
+      List<dynamic> roles, String username, List<dynamic> permissions) async {
     this.roles = roles;
     this.username = username;
+    this.permissions = permissions;
     await _storage.write(key: _rolesKey, value: jsonEncode(roles));
     await _storage.write(key: _usernameKey, value: username);
+    await _storage.write(key: _permissions, value: jsonEncode(permissions));
   }
 
   Future<void> setActiveRole(String? role) async {
@@ -169,6 +183,7 @@ class PersistentAuthData {
     await _storage.delete(key: _accessKey);
     await _storage.delete(key: _refreshKey);
     await _storage.delete(key: _rolesKey);
+    await _storage.delete(key: _permissions);
     await _storage.delete(key: _activeRoleKey);
 
     await _storage.delete(key: _usernameKey);
