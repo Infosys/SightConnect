@@ -7,12 +7,15 @@ class EBCaseRegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        AddCaseButton(),
-        SizedBox(height: 8),
-        Expanded(child: SingleChildScrollView(child: CaseRegisterTable())),
-      ],
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          AddCaseButton(),
+          SizedBox(height: 8),
+          Expanded(child: SingleChildScrollView(child: CaseRegisterTable())),
+        ],
+      ),
     );
   }
 }
