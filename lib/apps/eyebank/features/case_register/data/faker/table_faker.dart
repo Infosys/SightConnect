@@ -30,9 +30,9 @@ class TableFaker {
         "SampleID": "3",
         "Date": "2022-01-03",
         "Donor": "Ethan",
-        "Tissue": "Retina",
+        "Tissue": "Sclera",
         "Eye": "Right Eye",
-        "Category": "Reviews",
+        "Category": "Referrals",
         "Status": "Completed"
       },
       {
@@ -57,13 +57,13 @@ class TableFaker {
         "SampleID": "6",
         "Date": "2022-01-06",
         "Donor": "Daniel",
-        "Tissue": "Retina",
+        "Tissue": "Sclera",
         "Eye": "Left Eye",
-        "Category": "Harvests",
+        "Category": "Referrals",
         "Status": "Pending"
       },
       {
-        "SampleID": "11",
+        "SampleID": "7",
         "Date": "2022-01-01",
         "Donor": "Axel",
         "Tissue": "Cornea",
@@ -72,7 +72,7 @@ class TableFaker {
         "Status": "Completed"
       },
       {
-        "SampleID": "21",
+        "SampleID": "8",
         "Date": "2022-01-02",
         "Donor": "Mason",
         "Tissue": "Whole Globe",
@@ -81,16 +81,16 @@ class TableFaker {
         "Status": "Pending"
       },
       {
-        "SampleID": "31",
+        "SampleID": "9",
         "Date": "2022-01-03",
         "Donor": "Ethan",
-        "Tissue": "Retina",
+        "Tissue": "Sclera",
         "Eye": "Right Eye",
-        "Category": "Reviews",
+        "Category": "Referrals",
         "Status": "Completed"
       },
       {
-        "SampleID": "41",
+        "SampleID": "10",
         "Date": "2022-01-04",
         "Donor": "Alexander",
         "Tissue": "Cornea",
@@ -99,7 +99,7 @@ class TableFaker {
         "Status": "Pending"
       },
       {
-        "SampleID": "51",
+        "SampleID": "11",
         "Date": "2022-01-05",
         "Donor": "Michael",
         "Tissue": "Whole Globe",
@@ -108,12 +108,12 @@ class TableFaker {
         "Status": "Completed"
       },
       {
-        "SampleID": "61",
+        "SampleID": "12",
         "Date": "2022-01-06",
         "Donor": "Daniel",
-        "Tissue": "Retina",
+        "Tissue": "Sclera",
         "Eye": "Left Eye",
-        "Category": "Harvests",
+        "Category": "Referrals",
         "Status": "Pending"
       },
     ];
