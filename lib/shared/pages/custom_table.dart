@@ -260,7 +260,7 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
             itemCount: displayedRows.length,
             itemBuilder: (context, index) {
               return ListTile(
-                subtitle: const Text("Mehul Mantoo"),
+                subtitle: const Text(""),
                 title:
                     widget.rowBuilder(displayedRows[index]).cells.first.child,
               );
