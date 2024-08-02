@@ -26,7 +26,6 @@ class PersistentAuthData {
   final String _userType = 'userType';
   final String _permissions = 'permissions';
 
-
   String? accessToken;
   String? refreshToken;
   List<dynamic>? roles;
@@ -51,7 +50,9 @@ class PersistentAuthData {
     final permissionJson = await _storage.read(key: _permissions);
 
     roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
-    permissions = permissionJson != null ? List<String>.from(jsonDecode(permissionJson)) : null;
+    permissions = permissionJson != null
+        ? List<String>.from(jsonDecode(permissionJson))
+        : null;
     activeRole = await _storage.read(key: _activeRoleKey);
     userType = await _storage.read(key: _userType);
 
@@ -85,15 +86,17 @@ class PersistentAuthData {
 
     await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
 
-    
-
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
-
-    final permissions = decodedToken['SC_PERMISSIONS'] as List<dynamic>;
+    var permission = decodedToken['SC_PERMISSIONS'];
+    if (permission == null || permission.isEmpty) {
+      permission = [];
+    }else{
+    permissions = decodedToken['SC_PERMISSIONS'] as List<dynamic>;
+    } 
 
     roles.removeWhere((element) => !element.toString().startsWith("ROLE_"));
     final username = decodedToken['preferred_username'];
-    await _saveRolesPermissionsAndUserName(roles, username, permissions);
+    await _saveRolesPermissionsAndUserName(roles, username, permissions??[]);
   }
 
   Future<void> _saveRolesPermissionsAndUserName(
@@ -201,6 +204,7 @@ class PersistentAuthData {
     idToken = null;
     activeRole = null;
     userType = null;
+    permissions = null;
     logger.d("Logged out successfully");
     logger.d({
       'accessTokenData': accessToken,
