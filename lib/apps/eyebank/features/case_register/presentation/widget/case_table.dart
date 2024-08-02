@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/pages/custom_table.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +67,7 @@ class CaseTable extends StatelessWidget {
           return GenericPaginatedTable<TableData>(
             data: snapshot.data!,
             headers: const [
-              'SampleID',
+              'Sample ID',
               'Date',
               'Donor',
               'Tissue',
@@ -76,12 +77,10 @@ class CaseTable extends StatelessWidget {
             ],
             rowBuilder: (item) => _buildDataRow(item, context),
             filterOptions: const [
-              'HHAHA',
               'Completed',
               'Pending',
               'All',
               'None',
-              ''
             ],
             filterMatcher: (item, filter) => item.status.contains(filter),
             searchMatcher: searchFunction,
@@ -107,12 +106,15 @@ class CaseTable extends StatelessWidget {
         DataCell(Text(item.tissue)),
         DataCell(Text(item.eye)),
         DataCell(Text(item.category)),
-        DataCell(_buildStatusCell(item)),
+        DataCell(_buildStatusCell(item, context)),
       ],
     );
   }
 
-  Widget _buildStatusCell(TableData item) {
+  Widget _buildStatusCell(TableData item, BuildContext context) {
+    if (Responsive.isMobile(context)) {
+      return Text(item.status);
+    }
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,

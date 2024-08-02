@@ -162,75 +162,73 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
   Widget _buildPaginatedTable() {
     final displayedRows = _getDisplayedRows();
 
-    return Expanded(
-      child: SingleChildScrollView(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            if (Responsive.isMobile(context)) {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: displayedRows.length,
-                itemBuilder: (context, index) {
-                  final cells = widget.rowBuilder(displayedRows[index]).cells;
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        12.0,
-                      ), // adjust this value to control the border radius
-                    ),
-                    margin: const EdgeInsets.fromLTRB(
-                        8, 0, 8, 8), // margin around the Card
-                    child: GridView.count(
-                      padding: const EdgeInsets.all(16),
-                      shrinkWrap: true,
-                      crossAxisCount: 2, // number of columns
-                      childAspectRatio: 2,
-                      children: List<Widget>.generate(
-                        cells.length,
-                        (cellIndex) {
-                          return Wrap(
-                            children: [
-                              Text(
-                                '${widget.headers[cellIndex]}: ',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+    return SingleChildScrollView(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (Responsive.isMobile(context)) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: displayedRows.length,
+              itemBuilder: (context, index) {
+                final cells = widget.rowBuilder(displayedRows[index]).cells;
+                return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      12.0,
+                    ), // adjust this value to control the border radius
+                  ),
+                  margin: const EdgeInsets.fromLTRB(
+                      8, 0, 8, 8), // margin around the Card
+                  child: GridView.count(
+                    padding: const EdgeInsets.all(16),
+                    shrinkWrap: true,
+                    crossAxisCount: 2, // number of columns
+                    childAspectRatio: 2,
+                    children: List<Widget>.generate(
+                      cells.length,
+                      (cellIndex) {
+                        return Wrap(
+                          children: [
+                            Text(
+                              '${widget.headers[cellIndex]}: ',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
                               ),
-                              cells[cellIndex].child,
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            cells[cellIndex].child,
+                          ],
+                        );
+                      },
                     ),
-                  );
-                },
-              );
-            }
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                padding: const EdgeInsets.all(16.0),
-                constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                child: DataTable(
-                  dataTextStyle: applyRobotoFont(
-                    fontSize: 14,
-                    color: AppColor.black,
                   ),
-                  dataRowMaxHeight: 65,
-                  headingRowHeight: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: AppColor.white,
-                  ),
-                  columns: _buildColumns(),
-                  rows: displayedRows
-                      .map((item) => widget.rowBuilder(item))
-                      .toList(),
-                ),
-              ),
+                );
+              },
             );
-          },
-        ),
+          }
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
+              child: DataTable(
+                dataTextStyle: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.black,
+                ),
+                dataRowMaxHeight: 65,
+                headingRowHeight: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: AppColor.white,
+                ),
+                columns: _buildColumns(),
+                rows: displayedRows
+                    .map((item) => widget.rowBuilder(item))
+                    .toList(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -269,145 +267,6 @@ class GenericPaginatedTableState<T> extends State<GenericPaginatedTable<T>> {
               : null,
         ),
       ],
-    );
-  }
-}
-
-//Models
-class TableData {
-  final String sampleID;
-  final DateTime date;
-  final String donor;
-  final String tissue;
-  final String eye;
-  final String category;
-  final String status;
-
-  TableData({
-    required this.sampleID,
-    required this.date,
-    required this.donor,
-    required this.tissue,
-    required this.eye,
-    required this.category,
-    required this.status,
-  });
-
-  factory TableData.fromJson(Map<String, dynamic> json) {
-    return TableData(
-      sampleID: json['SampleID'],
-      date: DateTime.parse(json['Date']),
-      donor: json['Donor'],
-      tissue: json['Tissue'],
-      eye: json['Eye'],
-      category: json['Category'],
-      status: json['Status'],
-    );
-  }
-}
-
-class MyTablePage extends StatelessWidget {
-  MyTablePage({Key? key}) : super(key: key);
-
-  final ApiService _apiService = ApiService();
-
-  bool searchFunction(TableData item, String query) {
-    final lowerCaseQuery = query.toLowerCase();
-    return item.sampleID.toLowerCase().contains(lowerCaseQuery) ||
-        item.date.toString().toLowerCase().contains(lowerCaseQuery) ||
-        item.donor.toLowerCase().contains(lowerCaseQuery) ||
-        item.tissue.toLowerCase().contains(lowerCaseQuery) ||
-        item.eye.toLowerCase().contains(lowerCaseQuery) ||
-        item.category.toLowerCase().contains(lowerCaseQuery) ||
-        item.status.toLowerCase().contains(lowerCaseQuery);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Generic Table Example'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: FutureBuilder<List<TableData>>(
-          future: _apiService.fetchMockData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              debugPrint(snapshot.error.toString());
-              return const Text('An error occurred, please try again later');
-            } else {
-              return GenericPaginatedTable<TableData>(
-                data: snapshot.data!,
-                headers: const [
-                  'Sample ID',
-                  'Date',
-                  'Donor',
-                  'Tissue',
-                  'Eye',
-                  'Category',
-                  'Status',
-                ],
-                rowBuilder: (item) => _buildDataRow(item, context),
-                filterOptions: const [
-                  'Completed',
-                  'Pending',
-                  'All',
-                  'None',
-                ],
-                filterMatcher: (item, filter) => item.status.contains(filter),
-                searchMatcher: searchFunction,
-              );
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  DataRow _buildDataRow(TableData item, BuildContext context) {
-    return DataRow(
-      // color: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-      //   if (states.contains(WidgetState.selected)) {
-      //     return Theme.of(context).colorScheme.primary.withOpacity(0.08);
-      //   }
-      //   if (item.status == 'Completed') return Colors.green[100];
-      //   return null; // Use default value for other states
-      // }),
-      cells: [
-        DataCell(Text(item.sampleID)),
-        DataCell(Text(item.date.toString())),
-        DataCell(Text(item.donor)),
-        DataCell(Text(item.tissue)),
-        DataCell(Text(item.eye)),
-        DataCell(Text(item.category)),
-        DataCell(_buildStatusCell(item, context)),
-      ],
-    );
-  }
-
-  Widget _buildStatusCell(TableData item, BuildContext context) {
-    if (Responsive.isMobile(context)) {
-      return Text(item.status);
-    }
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8.0,
-      ),
-      decoration: BoxDecoration(
-        color: item.status.toLowerCase() == 'completed'
-            ? AppColor.lightGreen
-            : AppColor.lightRed,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Text(item.status,
-          style: applyRobotoFont(
-            color: Colors.black,
-            fontSize: 12,
-          )),
     );
   }
 }
