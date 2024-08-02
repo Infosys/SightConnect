@@ -36,7 +36,7 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     ),
     MenuItem(
       id: 1,
-      title: "Case Registration",
+      title: "'Register Case'",
       icon: Icons.file_present,
     ),
     MenuItem(

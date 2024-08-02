@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widg
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/profile/presentation/pages/eb_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:eye_care_for_all/shared/widgets/app_exit.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,48 +16,55 @@ class EyeBankDashboardPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMobile = Responsive.isMobile(context);
     final menuProvider = ref.watch(ebDashboardMenuProvider);
-    return Scaffold(
-      appBar: EyeBankDashboardAppbar(
-        onProfileTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const EbProfilePage(),
-            ),
-          );
-        },
-      ),
-      body: DesktopClipper(
-        widget: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Visibility(
-              visible: !isMobile,
-              child: EyeBankDashboardSideMenu(
-                items: menuProvider.menuItem,
-                onSelected: (index) {
-                  menuProvider.setSelectedMenuItem(index);
-                },
-                initialIndex: menuProvider.selectedMenuItem,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) return;
+        showDialog(context: context, builder: (context) => const AppExit());
+      },
+      child: Scaffold(
+        appBar: EyeBankDashboardAppbar(
+          onProfileTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const EbProfilePage(),
               ),
-            ),
-            if (!isMobile) const SizedBox(width: 8),
-            Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: menuProvider.pages[menuProvider.selectedMenuItem],
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Visibility(
-        visible: isMobile,
-        child: EyeBankBottomNav(
-          items: menuProvider.menuItem,
-          onSelected: (index) {
-            menuProvider.setSelectedMenuItem(index);
+            );
           },
-          initialIndex: menuProvider.selectedMenuItem,
+        ),
+        body: DesktopClipper(
+          widget: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Visibility(
+                visible: !isMobile,
+                child: EyeBankDashboardSideMenu(
+                  items: menuProvider.menuItem,
+                  onSelected: (index) {
+                    menuProvider.setSelectedMenuItem(index);
+                  },
+                  initialIndex: menuProvider.selectedMenuItem,
+                ),
+              ),
+              if (!isMobile) const SizedBox(width: 8),
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: menuProvider.pages[menuProvider.selectedMenuItem],
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: Visibility(
+          visible: isMobile,
+          child: EyeBankBottomNav(
+            items: menuProvider.menuItem,
+            onSelected: (index) {
+              menuProvider.setSelectedMenuItem(index);
+            },
+            initialIndex: menuProvider.selectedMenuItem,
+          ),
         ),
       ),
     );

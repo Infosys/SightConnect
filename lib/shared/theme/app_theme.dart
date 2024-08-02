@@ -86,8 +86,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
           ),
           padding: !kIsWeb
               ? const EdgeInsets.symmetric(
-                  vertical: 14,
-                  horizontal: 20,
+                  vertical: 16,
+                  horizontal: 18,
                 )
               : const EdgeInsets.symmetric(
                   horizontal: AppSize.kl + 4,
@@ -105,8 +105,8 @@ class AppTheme extends StateNotifier<ThemeMode> {
           ),
           padding: !kIsWeb
               ? const EdgeInsets.symmetric(
-                  vertical: 14,
-                  horizontal: 20,
+                  vertical: 16,
+                  horizontal: 18,
                 )
               : const EdgeInsets.symmetric(
                   horizontal: AppSize.kl + 4,
