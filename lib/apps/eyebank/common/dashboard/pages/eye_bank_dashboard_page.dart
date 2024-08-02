@@ -4,30 +4,40 @@ import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentatio
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class EyeBankDashboardPage extends StatelessWidget {
+class EyeBankDashboardPage extends HookWidget {
   const EyeBankDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var selectedMenuItem = useState(0);
+
+    final List<Widget> pages = [
+      Container(),
+      const EBCaseRegisterPage(),
+      Container(),
+      Container(),
+    ];
+
     final menuItem = [
       MenuItem(
-        id: 1,
+        id: 0,
         title: "Dashboard",
         icon: Icons.home_filled,
       ),
       MenuItem(
-        id: 2,
+        id: 1,
         title: "Case Registration",
         icon: Icons.file_present,
       ),
       MenuItem(
-        id: 3,
+        id: 2,
         title: "Organ Inventory",
         icon: Icons.safety_check,
       ),
       MenuItem(
-        id: 4,
+        id: 3,
         title: "Delivery",
         icon: Icons.delivery_dining,
       ),
@@ -43,9 +53,18 @@ class EyeBankDashboardPage extends StatelessWidget {
         widget: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            EyeBankDashboardSideMenu(items: menuItem),
+            EyeBankDashboardSideMenu(
+                items: menuItem,
+                onSelected: (id) {
+                  selectedMenuItem.value = id!;
+                }),
             if (!isMobile) const SizedBox(width: 8),
-            const EBCaseRegisterPage(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: pages[selectedMenuItem.value],
+              ),
+            ),
           ],
         ),
       ),

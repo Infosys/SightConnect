@@ -7,7 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class EyeBankDashboardSideMenu extends HookWidget {
-  const EyeBankDashboardSideMenu({super.key, required this.items});
+  final Function(int? id) onSelected;
+  const EyeBankDashboardSideMenu({
+    super.key,
+    required this.items,
+    required this.onSelected,
+  });
 
   final List<MenuItem> items;
 
@@ -65,6 +70,7 @@ class EyeBankDashboardSideMenu extends HookWidget {
                     isSelected: selected.value.id == items[index].id,
                     onSelect: (selectedItem) {
                       selected.value = selectedItem;
+                      onSelected(selectedItem.id);
                     },
                   );
                 },
