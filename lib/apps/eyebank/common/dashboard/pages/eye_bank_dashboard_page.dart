@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_appbar.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_body.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_side_menu.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/pages/eb_case_register_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class EyeBankDashboardPage extends StatelessWidget {
       ),
       MenuItem(
         id: 2,
-        title: "Cases",
+        title: "Case Registration",
         icon: Icons.file_present,
       ),
       MenuItem(
@@ -45,7 +45,7 @@ class EyeBankDashboardPage extends StatelessWidget {
           children: [
             EyeBankDashboardSideMenu(items: menuItem),
             if (!isMobile) const SizedBox(width: 8),
-            const EyeBankDashboardBody(),
+            const EBCaseRegisterPage(),
           ],
         ),
       ),

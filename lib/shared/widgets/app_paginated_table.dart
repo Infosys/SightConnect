@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/technician/dashboard/presentation/widgets/technician_home_filtertabs.dart';
+import 'package:eye_care_for_all/apps/eyebank/backlog/technician/dashboard/presentation/widgets/technician_home_filtertabs.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
