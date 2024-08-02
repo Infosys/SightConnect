@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashboard_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
