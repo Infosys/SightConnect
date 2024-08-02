@@ -108,6 +108,9 @@ class OptionCard extends HookWidget {
       child: InkWell(
         onTap: () {
           onSelect(options[index]);
+          if (Responsive.isMobile(context)) {
+            Navigator.of(context).pop();
+          }
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
