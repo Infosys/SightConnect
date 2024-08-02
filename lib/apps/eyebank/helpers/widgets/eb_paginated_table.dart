@@ -223,7 +223,10 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
                               const SizedBox(width: 4),
                               Expanded(
                                 flex: 3,
-                                child: cell.child,
+                                child: InkWell(
+                                  onTap: cell.onTap,
+                                  child: cell.child,
+                                ),
                               ),
                             ],
                           ),
