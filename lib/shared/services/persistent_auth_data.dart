@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -26,7 +27,6 @@ class PersistentAuthData {
   final String _userType = 'userType';
   final String _permissions = 'permissions';
 
-
   String? accessToken;
   String? refreshToken;
   List<dynamic>? roles;
@@ -51,7 +51,9 @@ class PersistentAuthData {
     final permissionJson = await _storage.read(key: _permissions);
 
     roles = rolesJson != null ? List<String>.from(jsonDecode(rolesJson)) : null;
-    permissions = permissionJson != null ? List<String>.from(jsonDecode(permissionJson)) : null;
+    permissions = permissionJson != null
+        ? List<String>.from(jsonDecode(permissionJson))
+        : null;
     activeRole = await _storage.read(key: _activeRoleKey);
     userType = await _storage.read(key: _userType);
 
@@ -84,8 +86,6 @@ class PersistentAuthData {
     final decodedToken = JwtDecoder.decode(accessToken);
 
     await saveUserType(decodedToken['USER_TYPE'] ?? "PROD");
-
-    
 
     final roles = decodedToken['realm_access']['roles'] as List<dynamic>;
 
@@ -201,6 +201,7 @@ class PersistentAuthData {
     idToken = null;
     activeRole = null;
     userType = null;
+    permissions = null;
     logger.d("Logged out successfully");
     logger.d({
       'accessTokenData': accessToken,

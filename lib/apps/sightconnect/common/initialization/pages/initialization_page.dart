@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/pages/eye_bank_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/pages/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/app_consent_form.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';

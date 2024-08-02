@@ -7,10 +7,8 @@ import 'package:eye_care_for_all/shared/services/exceptions.dart';
 import 'package:eye_care_for_all/shared/services/failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-var caseRegisterRepositoryProvider = Provider<CaseRegisterRepository>((ref) {
-  return CaseRegisterRepositoryImpl(
-    ref.read(dioProvider),
-  );
+final caseRegisterRepositoryProvider = Provider<CaseRegisterRepository>((ref) {
+  return CaseRegisterRepositoryImpl(ref.watch(dioProvider));
 });
 
 class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
@@ -27,8 +25,10 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
       if (data.statusCode == 200) {
         return Right(data.data);
       } else {
-        return Left(ServerFailure(
-            errorMessage: data.statusMessage ?? 'Error in getA1Form'));
+        return Left(
+          ServerFailure(
+              errorMessage: data.statusMessage ?? 'Error in getA1Form'),
+        );
       }
     } on DioException catch (e) {
       logger.e("Error in getA1Form");

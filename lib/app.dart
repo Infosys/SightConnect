@@ -78,10 +78,10 @@ class MyApp extends ConsumerWidget {
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
 
-                initialRoute: initialRoute,
-                navigatorKey: AppRouter.navigatorKey,
-                onUnknownRoute: AppRouter.onUnknownRoute,
-                // home: const EyeBankDashboardPage(),
+                // initialRoute: initialRoute,
+                // navigatorKey: AppRouter.navigatorKey,
+                // onUnknownRoute: AppRouter.onUnknownRoute,
+                home: const EyeBankDashboardPage(),
 
                 builder: (context, child) {
                   return ref.watch(internetProvider).maybeWhen(

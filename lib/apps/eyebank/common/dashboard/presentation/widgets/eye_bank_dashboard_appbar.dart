@@ -41,7 +41,7 @@ class EyeBankDashboardAppbar extends StatelessWidget
   @override
   Size get preferredSize {
     if (kIsWeb) {
-      return const Size.fromHeight(60);
+      return const Size.fromHeight(65);
     } else {
       return const Size.fromHeight(60);
     }
