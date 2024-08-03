@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 
 enum VGServiceId { create_event, register_patient, eye_assessment }

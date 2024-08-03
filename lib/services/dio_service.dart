@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/env.dart';
+import 'package:eye_care_for_all/services/interceptors.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
-import 'package:eye_care_for_all/shared/services/interceptors.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'app_info_service.dart';

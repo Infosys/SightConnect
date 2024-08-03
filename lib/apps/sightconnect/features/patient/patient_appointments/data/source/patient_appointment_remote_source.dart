@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_appointments/data/models/eua_on_search_model.dart';
 import 'package:eye_care_for_all/env.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stomp_dart_client/stomp.dart';

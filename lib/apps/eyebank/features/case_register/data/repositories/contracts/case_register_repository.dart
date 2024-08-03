@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 
 abstract class CaseRegisterRepository {
   Future<Either<Failure, dynamic>> getA1Form(dynamic queryData);

@@ -3,10 +3,10 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_home/presentation/widgets/vg_services_cards_list.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:flutter/material.dart';

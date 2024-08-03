@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/shared/services/persistent_auth_data.dart';
+import 'package:eye_care_for_all/services/persistent_auth_data.dart';
 
 class PersistentAuthStateService {
   PersistentAuthStateService._();

@@ -2,7 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../../../../../shared/services/failure.dart';
+import '../../../../../../../services/failure.dart';
 import '../../data/models/uhi_search_model.dart';
 import '../../data/repository/patient_appointment_repository.dart';
 import '../../data/source/patient_appointment_remote_source.dart';

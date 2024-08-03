@@ -1,8 +1,8 @@
-import 'package:eye_care_for_all/shared/services/location_service.dart';
+import 'package:eye_care_for_all/services/location_service.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
 
-import '../../main.dart';
+import '../main.dart';
 
 class GeocodingService {
   static Future<List<String>> getPincodeFromLocation(

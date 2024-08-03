@@ -7,8 +7,8 @@ import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.da
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../../services/persistent_auth_service.dart';
 import '../../../../../../../shared/constants/api_constant.dart';
-import '../../../../../../../shared/services/persistent_auth_service.dart';
 
 class IPledgeService extends ConsumerWidget {
   const IPledgeService({super.key});
