@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/pages/tenant_admin_analytics_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/pages/tenant_admin_analytics_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/analytics_cards.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';

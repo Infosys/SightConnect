@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_my_teams/presentation/pages/tenant_admin_my_team_member_analytics.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_my_teams/presentation/pages/tenant_admin_my_team_member_analytics.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';

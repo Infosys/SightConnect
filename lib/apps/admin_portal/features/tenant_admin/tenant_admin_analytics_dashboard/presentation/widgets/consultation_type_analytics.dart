@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/graph_scheme_indicator.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/widgets/graph_scheme_indicator.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:fl_chart/fl_chart.dart';

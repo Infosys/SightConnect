@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_home/presentation/pages/tenant_admin_home_page.dart';
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_my_teams/presentation/pages/tenant_admin_my_teams_homepage.dart';
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_register_team_member/presentation/pages/tenant_admin_register_team_member_page.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_home/presentation/pages/tenant_admin_home_page.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_my_teams/presentation/pages/tenant_admin_my_teams_homepage.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_register_team_member/presentation/pages/tenant_admin_register_team_member_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
