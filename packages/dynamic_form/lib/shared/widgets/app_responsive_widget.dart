@@ -25,10 +25,9 @@ class AppResponsiveWidget extends StatelessWidget {
             widget is FormRadio ||
             widget is FormTextArea ||
             widget is FormChip) {
-          width =
-              constraints.maxWidth * 0.45; // Adjust width for larger screens
+          width = constraints.maxWidth * 0.5;
         } else {
-          width = constraints.maxWidth * 0.3; // Default width for other widgets
+          width = constraints.maxWidth * 0.45;
         }
 
         return Container(
