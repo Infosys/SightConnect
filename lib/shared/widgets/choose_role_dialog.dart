@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../apps/sightconnect/helpers/models/keycloak.dart';
 import '../theme/text_theme.dart';
@@ -16,12 +17,7 @@ class ChooseRoleDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Role?> currentRoles = roles;
-    if (currentRoles.contains(Role.ROLE_EYEBANK)) {
-      if (kIsWeb) {
-        currentRoles = [Role.ROLE_EYEBANK];
-      }
-    }
+    List<Role?> currentRoles = _getRoleListBasedOnPlatform(roles);
     var selectedRole = useState<Role?>(currentRoles.contains(Role.ROLE_PATIENT)
         ? Role.ROLE_PATIENT
         : currentRoles.first);
@@ -167,5 +163,24 @@ class ChooseRoleDialog extends HookWidget {
       Role.ROLE_VOLUNTEER => "VOLUNTEER",
       Role.ROLE_EYEBANK => "EYE BANK",
     };
+  }
+
+  List<Role?> _getRoleListBasedOnPlatform(List<Role?> roles) {
+    if (kIsWeb) {
+      if (roles.contains(Role.ROLE_EYEBANK)) {
+        return [Role.ROLE_EYEBANK];
+      } else {
+        Fluttertoast.showToast(
+            msg: "You do not have the required role for the WEB platform",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            fontSize: 16.0);
+
+        throw Exception("Role not supported");
+      }
+    }
+
+    return roles;
   }
 }
