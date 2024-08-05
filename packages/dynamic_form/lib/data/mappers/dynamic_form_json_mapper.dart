@@ -165,7 +165,7 @@ FormLayoutType _mapToFormLayoutType(String? value) {
   switch (value) {
     case 'stepper':
       return FormLayoutType.STEPPER;
-    case 'panel':
+    case 'expansion-panel':
       return FormLayoutType.PANEL;
     default:
       return FormLayoutType.PANEL;

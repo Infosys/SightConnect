@@ -1,14 +1,14 @@
 {
     "title": "Intimation Form",
     "logoPosition": "right",
-    "formLayoutType": "panel",
+    "formLayoutType": "expansion-panel",
     "pages": [
         {
             "name": "Potential Eye Donor Referral Information",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "Personal Eye Donation Referral Information",
+                    "name": "Doner Details",
                     "elements": [
                         {
                             "type": "text",
