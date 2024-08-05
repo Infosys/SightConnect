@@ -27,26 +27,21 @@ class EbStatisticsTopCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSize.km),
-          Scrollbar(
-            interactive: true,
-            radius: const Radius.circular(10),
-            thumbVisibility: true,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildColumn('1,58,790', 'Overall', context,
-                          isSelected: true),
-                      _buildColumn('80/200', 'Today', context),
-                      _buildColumn('1400', 'Today', context),
-                      _buildColumn('6200', 'Today', context),
-                    ],
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildColumn('1,58,790', 'Overall', context,
+                        isSelected: true),
+                    _buildColumn('80/200', 'Today', context),
+                    _buildColumn('1400', 'Today', context),
+                    _buildColumn('6200', 'Today', context),
+                  ],
                 ),
               ),
             ),
