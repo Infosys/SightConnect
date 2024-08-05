@@ -11,15 +11,14 @@
                     "name": "Doner Details",
                     "elements": [
                         {
-                            "type": "text",
+                            "type": "datetime-local",
                             "name": "death_notification",
                             "title": "Death Notification",
                             "description": "Enter Death Notification Date Time",
                             "isRequired": true,
                             "requiredErrorText": "question is required",
                             "readOnly": true,
-                            "validators": [],
-                            "inputType": "datetime-local"
+                            "validators": []
                         },
                         {
                             "type": "radiogroup",
@@ -55,15 +54,14 @@
                             "placeholder": "Enter Body Location"
                         },
                         {
-                            "type": "text",
+                            "type": "datetime-local",
                             "name": "body_available_until",
                             "title": "Body Available Until",
                             "description": "Enter Body Available Until Date Time",
                             "isRequired": true,
                             "requiredErrorText": "question is required",
                             "readOnly": true,
-                            "validators": [],
-                            "inputType": "datetime-local"
+                            "validators": []
                         }
                     ]
                 }

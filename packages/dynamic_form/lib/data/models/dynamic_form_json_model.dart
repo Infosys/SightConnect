@@ -105,7 +105,7 @@ class ElementElementClassModel {
   String? requiredErrorText;
   bool? readOnly;
   List<Validator>? validators;
-  String? inputType;
+
   List<dynamic>? choices;
   String? placeholder;
   int? maxSize;
@@ -123,7 +123,6 @@ class ElementElementClassModel {
       this.requiredErrorText,
       this.readOnly,
       this.validators,
-      this.inputType,
       this.choices,
       this.placeholder,
       this.maxSize,
@@ -146,7 +145,6 @@ class ElementElementClassModel {
             ? []
             : List<Validator>.from(
                 json["validators"]!.map((x) => Validator.fromJson(x))),
-        inputType: json["inputType"],
         choices: json["choices"] == null
             ? []
             : List<dynamic>.from(json["choices"]!.map((x) => x)),
@@ -173,7 +171,6 @@ class ElementElementClassModel {
         "validators": validators == null
             ? []
             : List<dynamic>.from(validators!.map((x) => x.toJson())),
-        "inputType": inputType,
         "choices":
             choices == null ? [] : List<dynamic>.from(choices!.map((x) => x)),
         "placeholder": placeholder,
