@@ -58,7 +58,6 @@ class DynamicFormJsonMapper {
           type: _mapToFormType(element.type),
           name: element.name ?? '',
           title: element.title ?? '',
-          inputType: _mapToFormType(element.inputType),
           isRequired: element.isRequired ?? false,
           requiredErrorText: element.requiredErrorText ?? '',
           maxSize: element.maxSize ?? 0,
@@ -165,7 +164,7 @@ FormLayoutType _mapToFormLayoutType(String? value) {
   switch (value) {
     case 'stepper':
       return FormLayoutType.STEPPER;
-    case 'panel':
+    case 'expansion-panel':
       return FormLayoutType.PANEL;
     default:
       return FormLayoutType.PANEL;

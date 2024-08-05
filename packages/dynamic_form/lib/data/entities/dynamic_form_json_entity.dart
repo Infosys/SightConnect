@@ -94,7 +94,6 @@ class ElementElementClassEntity {
   final String requiredErrorText;
   final bool readOnly;
   final List<ValidatorEntity> validators;
-  final DynamicFormType inputType;
   final List<RadioChoiceElementEntity>? mapValueChoices;
   final List<String>? stringValueChoices;
   final String placeholder;
@@ -115,7 +114,6 @@ class ElementElementClassEntity {
     required this.requiredErrorText,
     required this.readOnly,
     required this.validators,
-    required this.inputType,
     required this.mapValueChoices,
     required this.stringValueChoices,
     required this.placeholder,
@@ -139,7 +137,6 @@ class ElementElementClassEntity {
         readOnly: json["readOnly"],
         validators: List<ValidatorEntity>.from(
             json["validators"].map((x) => ValidatorEntity.fromJson(x))),
-        inputType: json["inputType"],
         mapValueChoices: List<RadioChoiceElementEntity>.from(
             json["mapValueChoices"]
                 .map((x) => RadioChoiceElementEntity.fromJson(x))),
@@ -167,7 +164,6 @@ class ElementElementClassEntity {
         "requiredErrorText": requiredErrorText,
         "readOnly": readOnly,
         "validators": List<dynamic>.from(validators.map((x) => x.toJson())),
-        "inputType": inputType,
         "mapValueChoices":
             List<dynamic>.from(mapValueChoices!.map((x) => x.toJson())),
         "stringValueChoices":

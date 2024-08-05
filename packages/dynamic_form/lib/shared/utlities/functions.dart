@@ -24,7 +24,12 @@ Widget getField(
   }
   switch (field.type) {
     case DynamicFormType.TEXTFIELD:
-      return _getSubField(field);
+      return FormTextField(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value);
+        },
+      );
 
     case DynamicFormType.DROPDOWN:
       return FormDropDown(
@@ -93,17 +98,6 @@ Widget getField(
         formKey: key,
       );
 
-    default:
-      return Container();
-  }
-}
-
-_getSubField(ElementElementClassEntity? field) {
-  if (field == null) {
-    return Container();
-  }
-
-  switch (field.inputType) {
     case DynamicFormType.DATETIME:
       return FormDateTimePicker(
         field: field,
@@ -115,11 +109,6 @@ _getSubField(ElementElementClassEntity? field) {
       return FormSlider(field: field);
 
     default:
-      return FormTextField(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value);
-        },
-      );
+      return Container();
   }
 }
