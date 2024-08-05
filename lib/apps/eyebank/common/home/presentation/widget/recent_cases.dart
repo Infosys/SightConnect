@@ -7,8 +7,12 @@ class RecentCases extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           Row(
@@ -30,11 +34,14 @@ class RecentCases extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 8.0),
 
           // Recent cases list
           ListView.builder(
             shrinkWrap: true,
             itemCount: 5,
+            padding: const EdgeInsets.all(0),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text('Case $index'),

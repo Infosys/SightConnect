@@ -55,6 +55,7 @@ class _EbHomePageState extends State<EbHomePage> {
             const SizedBox(height: AppSize.km),
             GridView(
               shrinkWrap: true,
+              padding: const EdgeInsets.all(0),
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: Responsive.isSemiDesktop(context) ? 2 : 1,
@@ -69,6 +70,9 @@ class _EbHomePageState extends State<EbHomePage> {
                   body: const EbCasesClosedAnalytics(),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: AppSize.km * 3,
             ),
           ],
         ),
