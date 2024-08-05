@@ -32,14 +32,9 @@ class FormBuilderPage extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: FormBuilder(
-            key: formKey,
-            child: _getFormLayout(),
-          ),
+        child: FormBuilder(
+          key: formKey,
+          child: _getFormLayout(),
         ),
       ),
     );
