@@ -78,38 +78,37 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
           child: isLoading
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: widget.headers
-                        .map((header) => DataColumn(label: Text(header)))
-                        .toList(),
-                    rows: data.map((item) => widget.rowBuilder(item)).toList(),
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columns: widget.headers
+                          .map((header) => DataColumn(label: Text(header)))
+                          .toList(),
+                      rows: data.map((item) => widget.rowBuilder(item)).toList(),
+                    ),
                   ),
-                ),
+              ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(Icons.chevron_left),
               onPressed: currentPage > 0
-                  ? () {
-                      setState(() {
+                  ? () => setState(() {
                         currentPage--;
                         _fetchData();
-                      });
-                    }
+                      })
                   : null,
             ),
             Text('Page ${currentPage + 1}'),
             IconButton(
-              icon: const Icon(Icons.arrow_forward),
-              onPressed: () {
-                setState(() {
+              icon: const Icon(Icons.chevron_right),
+              onPressed: () => setState(() {
                   currentPage++;
                   _fetchData();
-                });
-              },
+                }),
             ),
           ],
         ),

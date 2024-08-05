@@ -14,67 +14,6 @@ import '../../data/models/table_data.dart';
 class CaseRegisterTable extends ConsumerWidget {
   const CaseRegisterTable({Key? key}) : super(key: key);
 
-  bool searchFunction(TableData item, String query) {
-    final lowerCaseQuery = query.toLowerCase();
-    return item.sampleID.toLowerCase().contains(lowerCaseQuery) ||
-        item.date.toString().toLowerCase().contains(lowerCaseQuery) ||
-        item.donor.toLowerCase().contains(lowerCaseQuery) ||
-        item.tissue.toLowerCase().contains(lowerCaseQuery) ||
-        item.eye.toLowerCase().contains(lowerCaseQuery) ||
-        item.category.toLowerCase().contains(lowerCaseQuery) ||
-        item.status.toLowerCase().contains(lowerCaseQuery);
-  }
-
-  DataRow _buildDataRow(TableData item, BuildContext context) {
-    return DataRow(
-      cells: [
-        DataCell(
-          Text(item.sampleID),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const EbScreeningPage(
-                  title: 'Screening',
-                  caseID: '1234',
-                ),
-              ),
-            );
-          },
-        ),
-        DataCell(Text(item.date.toString())),
-        DataCell(Text(item.donor)),
-        DataCell(Text(item.tissue)),
-        DataCell(Text(item.eye)),
-        DataCell(Text(item.category)),
-        DataCell(_buildStatusCell(item, context)),
-      ],
-    );
-  }
-
-  Widget _buildStatusCell(TableData item, BuildContext context) {
-    if (Responsive.isMobile(context)) {
-      return Text(item.status);
-    }
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8.0,
-      ),
-      decoration: BoxDecoration(
-        color: item.status.toLowerCase() == 'completed'
-            ? AppColor.lightGreen
-            : AppColor.lightRed,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Text(item.status,
-          style: applyRobotoFont(
-            color: Colors.black,
-            fontSize: 12,
-          )),
-    );
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebCaseTableProvider).when(
@@ -144,9 +83,9 @@ class CaseRegisterTable extends ConsumerWidget {
                 List<TableData> filteredData = data;
                 // Apply search filter
                 if (searchQuery.isNotEmpty) {
-                  filteredData = filteredData.where((item) {
-                    return searchFunction(item, searchQuery);
-                  }).toList();
+                  filteredData = filteredData
+                      .where((item) => searchFunction(item, searchQuery))
+                      .toList();
                 }
                 // Apply status filter
                 if (selectedFilter != null && selectedFilter.isNotEmpty) {
@@ -159,10 +98,11 @@ class CaseRegisterTable extends ConsumerWidget {
                 int endIndex = startIndex + pageSize;
                 if (startIndex < filteredData.length) {
                   filteredData = filteredData.sublist(
-                      startIndex,
-                      endIndex > filteredData.length
-                          ? filteredData.length
-                          : endIndex);
+                    startIndex,
+                    endIndex > filteredData.length
+                        ? filteredData.length
+                        : endIndex,
+                  );
                 } else {
                   filteredData = [];
                 }
@@ -182,5 +122,66 @@ class CaseRegisterTable extends ConsumerWidget {
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
         );
+  }
+
+  bool searchFunction(TableData item, String query) {
+    final lowerCaseQuery = query.toLowerCase();
+    return item.sampleID.toLowerCase().contains(lowerCaseQuery) ||
+        item.date.toString().toLowerCase().contains(lowerCaseQuery) ||
+        item.donor.toLowerCase().contains(lowerCaseQuery) ||
+        item.tissue.toLowerCase().contains(lowerCaseQuery) ||
+        item.eye.toLowerCase().contains(lowerCaseQuery) ||
+        item.category.toLowerCase().contains(lowerCaseQuery) ||
+        item.status.toLowerCase().contains(lowerCaseQuery);
+  }
+
+  DataRow _buildDataRow(TableData item, BuildContext context) {
+    return DataRow(
+      cells: [
+        DataCell(
+          Text(item.sampleID),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const EbScreeningPage(
+                  title: 'Screening',
+                  caseID: '1234',
+                ),
+              ),
+            );
+          },
+        ),
+        DataCell(Text(item.date.toString())),
+        DataCell(Text(item.donor)),
+        DataCell(Text(item.tissue)),
+        DataCell(Text(item.eye)),
+        DataCell(Text(item.category)),
+        DataCell(_buildStatusCell(item, context)),
+      ],
+    );
+  }
+
+  Widget _buildStatusCell(TableData item, BuildContext context) {
+    if (Responsive.isMobile(context)) {
+      return Text(item.status);
+    }
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 8.0,
+      ),
+      decoration: BoxDecoration(
+        color: item.status.toLowerCase() == 'completed'
+            ? AppColor.lightGreen
+            : AppColor.lightRed,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Text(item.status,
+          style: applyRobotoFont(
+            color: Colors.black,
+            fontSize: 12,
+          )),
+    );
   }
 }
