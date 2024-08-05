@@ -50,13 +50,26 @@ class _EbInfiniteScrollViewState extends State<EbInfiniteScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    return PagedListView<int, Item>(
-      pagingController: _pagingController,
-      builderDelegate: PagedChildBuilderDelegate(
-        itemBuilder: (context, item, index) => ListTile(
-          title: Text(item.name),
-          subtitle: Text(item.description),
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const TextField(),
+          Expanded(
+            child: PagedListView<int, Item>(
+              padding: const EdgeInsets.all(0),
+              pagingController: _pagingController,
+              builderDelegate: PagedChildBuilderDelegate(
+                itemBuilder: (context, item, index) => ListTile(
+                  title: Text(item.name),
+                  subtitle: Text(item.description),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
