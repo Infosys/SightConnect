@@ -11,19 +11,15 @@ showCustomWoltSheet(BuildContext context, Widget child) {
       context: context,
       pageListBuilder: (modalSheetContext) {
         return [
-          WoltModalSheetPage(
-            scrollController: null,
-            useSafeArea: true,
+          NonScrollingWoltModalSheetPage(
+            useSafeArea: false,
             trailingNavBarWidget: IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
                 Navigator.of(modalSheetContext).pop();
               },
             ),
-            child: SizedBox(
-              height: MediaQuery.of(modalSheetContext).size.height,
-              child: child,
-            ),
+            child: child,
           ),
         ];
       },
