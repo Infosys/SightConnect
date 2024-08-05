@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/data/models/menu_item.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,13 @@ class EyeBankBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.white, // Set background color
-      elevation: 8.0, // Set elevation for shadow effect
+      enableFeedback: true,
+      backgroundColor: Colors.white,
+      elevation: 8.0,
+      iconSize: 22.0,
+      landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+      unselectedIconTheme: const IconThemeData(color: Colors.grey),
+      selectedIconTheme: const IconThemeData(color: AppColor.primary),
       selectedLabelStyle: applyRobotoFont(
         fontWeight: FontWeight.w500,
         color: Colors.black,
@@ -29,16 +35,22 @@ class EyeBankBottomNav extends StatelessWidget {
         color: Colors.grey,
         fontSize: 12,
       ),
-      unselectedItemColor: Colors.grey,
-      selectedItemColor: Colors.black, // Set selected item color
-
-      type: BottomNavigationBarType.fixed, // Ensure all items are displayed
+      unselectedItemColor: AppColor.grey,
+      selectedItemColor: AppColor.primary,
+      type: BottomNavigationBarType.fixed,
       items: items
           .map(
             (item) => BottomNavigationBarItem(
+              activeIcon: Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Icon(
+                  item.icon,
+                ),
+              ),
+              tooltip: item.title,
               icon: Padding(
                 padding: const EdgeInsets.only(bottom: 4),
-                child: Icon(item.icon, size: 20),
+                child: Icon(item.icon),
               ),
               label: item.title,
             ),

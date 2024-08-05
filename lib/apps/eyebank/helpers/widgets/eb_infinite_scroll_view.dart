@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_table_card.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -50,26 +51,49 @@ class _EbInfiniteScrollViewState extends State<EbInfiniteScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const TextField(),
-          Expanded(
-            child: PagedListView<int, Item>(
-              padding: const EdgeInsets.all(0),
-              pagingController: _pagingController,
-              builderDelegate: PagedChildBuilderDelegate(
-                itemBuilder: (context, item, index) => ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.description),
-                ),
-              ),
-            ),
+    return PagedListView<int, Item>(
+      padding: const EdgeInsets.all(0),
+      pagingController: _pagingController,
+      builderDelegate: PagedChildBuilderDelegate(
+        itemBuilder: (context, item, index) => const EbTableCard(),
+        firstPageErrorIndicatorBuilder: (context) => const SizedBox(
+          height: 100,
+          child: Center(
+            child: Text('Error loading first page'),
           ),
-        ],
+        ),
+        noItemsFoundIndicatorBuilder: (context) => const SizedBox(
+          height: 100,
+          child: Center(
+            child: Text('No items found'),
+          ),
+        ),
+        newPageErrorIndicatorBuilder: (context) => const SizedBox(
+          height: 100,
+          child: Center(
+            child: Text('Error loading new page'),
+          ),
+        ),
+        firstPageProgressIndicatorBuilder: (context) => const SizedBox(
+          height: 100,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+        newPageProgressIndicatorBuilder: (context) => const SizedBox(
+          height: 100,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+        noMoreItemsIndicatorBuilder: (context) => const SizedBox(
+          height: 100,
+          child: Center(
+            child: Text('No more items'),
+          ),
+        ),
+        animateTransitions: true,
+        transitionDuration: const Duration(milliseconds: 500),
       ),
     );
   }
