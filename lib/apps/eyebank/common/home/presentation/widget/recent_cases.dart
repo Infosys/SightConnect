@@ -42,7 +42,6 @@ class RecentCases extends StatelessWidget {
             shrinkWrap: true,
             itemCount: 5,
             padding: const EdgeInsets.all(0),
-            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text('Case $index'),
