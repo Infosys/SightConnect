@@ -1,15 +1,22 @@
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EbProfilePage extends StatelessWidget {
+class EbProfilePage extends ConsumerWidget {
   const EbProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loc = context.loc!;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.white,
@@ -68,7 +75,20 @@ class EbProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(initializationProvider).logout().then((value) {
+                      Fluttertoast.showToast(msg: loc.loggedOutMessage);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        LoginPage.routeName,
+                        (route) => false,
+                      );
+                    }).catchError((e) {
+                      logger.e(
+                          "Apologies, we encountered a logout error in the mobile app. from OptometritianDashboardPage : $e");
+                      Fluttertoast.showToast(msg: loc.optoLogoutError);
+                    });
+                  },
                   child: const Text('Logout'),
                 ),
               ],
