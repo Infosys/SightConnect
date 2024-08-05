@@ -1,19 +1,19 @@
 {
     "title": "Intimation Form",
     "logoPosition": "right",
-    "formLayoutType": "expansion-panel",
+    "formLayoutType": "",
     "pages": [
         {
             "name": "Potential Eye Donor Referral Information",
             "elements": [
                 {
                     "type": "panel",
-                    "name": "Doner Details",
+                    "name": "Personal Eye Donation Referral Information",
                     "elements": [
                         {
                             "type": "datetime-local",
-                            "name": "death_notification",
-                            "title": "Death Notification",
+                            "name": "A1.1",
+                            "title": "A1.1 Death Notification",
                             "description": "Enter Death Notification Date Time",
                             "isRequired": true,
                             "requiredErrorText": "question is required",
@@ -21,47 +21,36 @@
                             "validators": []
                         },
                         {
-                            "type": "radiogroup",
-                            "name": "relationship",
-                            "title": "Relationship",
-                            "description": "Enter Relationship",
+                            "type": "dropdown",
+                            "name": "A1.2",
+                            "title": "A1.2 Relationship",
+                            "description": null,
                             "isRequired": true,
-                            "readOnly": false,
-                            "validators": [],
+                            "readOnly": true,
                             "choices": [
-                                {
-                                    "value": "Mother",
-                                    "text": "Mother"
-                                },
-                                {
-                                    "value": "Father",
-                                    "text": "Father"
-                                },
-                                {
-                                    "value": "Brother",
-                                    "text": "Brother"
-                                }
+                                "FATHER",
+                                "MOTHER",
+                                "SON"
                             ]
                         },
                         {
                             "type": "text",
-                            "name": "body_location",
-                            "title": "Body Location",
+                            "name": "A1.3",
+                            "title": "A1.3 Body Location",
                             "description": "Enter Body Location",
                             "isRequired": true,
                             "requiredErrorText": "Please Enter Body Location",
-                            "readOnly": false,
-                            "placeholder": "Enter Body Location"
+                            "readOnly": false
                         },
                         {
                             "type": "datetime-local",
-                            "name": "body_available_until",
-                            "title": "Body Available Until",
+                            "name": "A1.4",
+                            "title": "A1.4 Body Available Until",
                             "description": "Enter Body Available Until Date Time",
                             "isRequired": true,
                             "requiredErrorText": "question is required",
                             "readOnly": true,
-                            "validators": []
+                            "validators": null
                         }
                     ]
                 }
