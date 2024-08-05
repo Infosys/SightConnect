@@ -22,7 +22,7 @@ class FormTimePicker extends HookWidget {
       format: DateFormat.jm(),
       inputType: InputType.time,
       decoration: InputDecoration(
-        labelText: field.name,
+        labelText: field.title,
         suffixIcon: const Icon(Icons.watch_outlined),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),

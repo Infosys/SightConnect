@@ -1,10 +1,10 @@
 {
-    "title": "Form A1",
+    "title": "Intimation Form",
     "logoPosition": "right",
     "formLayoutType": "panel",
     "pages": [
         {
-            "name": "Death Initimation",
+            "name": "Potential Eye Donor Referral Information",
             "elements": [
                 {
                     "type": "panel",
@@ -12,129 +12,58 @@
                     "elements": [
                         {
                             "type": "text",
-                            "name": "question2",
+                            "name": "death_notification",
                             "title": "Death Notification",
-                            "description": "Death Notification description",
+                            "description": "Enter Death Notification Date Time",
                             "isRequired": true,
                             "requiredErrorText": "question is required",
                             "readOnly": true,
-                            "validators": [
-                                {
-                                    "type": "regex",
-                                    "text": "error message",
-                                    "regex": "expression"
-                                }
-                            ],
+                            "validators": [],
                             "inputType": "datetime-local"
                         },
                         {
                             "type": "radiogroup",
-                            "name": "question3",
-                            "title": "title",
-                            "description": "descrioption",
+                            "name": "relationship",
+                            "title": "Relationship",
+                            "description": "Enter Relationship",
                             "isRequired": true,
-                            "readOnly": true,
+                            "readOnly": false,
                             "validators": [],
                             "choices": [
                                 {
-                                    "value": "Item 1",
-                                    "text": "Voluntary - Family Initated"
+                                    "value": "Mother",
+                                    "text": "Mother"
                                 },
                                 {
-                                    "value": "Item 2",
-                                    "text": "Voluntary - Volunteer Motivated"
+                                    "value": "Father",
+                                    "text": "Father"
                                 },
                                 {
-                                    "value": "Item 3",
-                                    "text": "HCRP - Motivated"
+                                    "value": "Brother",
+                                    "text": "Brother"
                                 }
                             ]
                         },
                         {
-                            "type": "dropdown",
-                            "name": "question1",
-                            "title": "tttt",
-                            "description": "dddd",
-                            "isRequired": true,
-                            "readOnly": true,
-                            "choices": [
-                                "Item 1",
-                                "Item 2",
-                                "Item 3"
-                            ]
-                        },
-                        {
                             "type": "text",
-                            "name": "question4",
-                            "title": "Donation Counselor/Volunteer",
-                            "description": "descrion",
+                            "name": "body_location",
+                            "title": "Body Location",
+                            "description": "Enter Body Location",
                             "isRequired": true,
-                            "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
+                            "requiredErrorText": "Please Enter Body Location",
                             "readOnly": false,
-                            "placeholder": "palceholder"
-                        },
-                        {
-                            "type": "comment",
-                            "name": "question11",
-                            "title": "Unit Details",
-                            "description": "desciptio",
-                            "isRequired": true,
-                            "readOnly": true,
-                            "placeholder": "hind"
-                        },
-                        {
-                            "type": "checkbox",
-                            "name": "question12",
-                            "title": "Condition I Agree to:",
-                            "isRequired": true,
-                            "readOnly": true,
-                            "choices": [
-                                {
-                                    "value": "Item 1Condition",
-                                    "text": "Condition 1"
-                                },
-                                {
-                                    "value": "Item 2",
-                                    "text": "Condition 2"
-                                },
-                                {
-                                    "value": "Item 3",
-                                    "text": "Condition 3"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "file",
-                            "name": "question13",
-                            "title": "Health Insurance Card",
-                            "description": "desc",
-                            "isRequired": true,
-                            "readOnly": true,
-                            "maxSize": 5
+                            "placeholder": "Enter Body Location"
                         },
                         {
                             "type": "text",
-                            "name": "question14",
-                            "title": "Visual Acuity",
-                            "description": "desc",
+                            "name": "body_available_until",
+                            "title": "Body Available Until",
+                            "description": "Enter Body Available Until Date Time",
                             "isRequired": true,
+                            "requiredErrorText": "question is required",
                             "readOnly": true,
-                            "inputType": "range",
-                            "min": 0,
-                            "max": 100,
-                            "step": 10
-                        }
-                    ]
-                },
-                {
-                    "type": "panel",
-                    "name": "Terms and Condition",
-                    "elements": [
-                        {
-                            "type": "boolean",
-                            "name": "question16",
-                            "title": "I Agree to the terms and conditions",
-                            "validators": []
+                            "validators": [],
+                            "inputType": "datetime-local"
                         }
                     ]
                 }
