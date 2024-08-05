@@ -30,9 +30,11 @@ class _PageWidgetState extends State<FormStepperView> {
     }
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Stepper(
+          physics: const NeverScrollableScrollPhysics(),
           currentStep: currentStep,
           onStepContinue: () {
             if (currentStep < widget.pages.length - 1) {

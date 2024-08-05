@@ -27,30 +27,37 @@ class EbScreeningPage extends ConsumerWidget {
           child: AppBar(
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Case ID: $caseID",
-                    style: applyRobotoFont(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Case ID: $caseID",
+                      style: applyRobotoFont(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      showCustomWoltSheet(context, const CaseCloseSheet());
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.red,
-                      foregroundColor: AppColor.white,
+                    TextButton.icon(
+                      onPressed: () {
+                        showCustomWoltSheet(context, const CaseCloseSheet());
+                      },
+                      style:
+                          TextButton.styleFrom(foregroundColor: AppColor.red),
+                      icon: const Icon(
+                        Icons.close,
+                      ),
+                      label: Text(
+                        'Close Case',
+                        style: applyRobotoFont(
+                          fontSize: 12,
+                          color: AppColor.red,
+                        ),
+                      ),
                     ),
-                    icon: const Icon(
-                      Icons.close,
-                    ),
-                    label: const Text('Close Case'),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
