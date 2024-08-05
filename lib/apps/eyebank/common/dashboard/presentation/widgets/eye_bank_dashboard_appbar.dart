@@ -6,34 +6,37 @@ class EyeBankDashboardAppbar extends StatelessWidget
     implements PreferredSizeWidget {
   const EyeBankDashboardAppbar({
     super.key,
-    this.onNotificationTap,
-    this.onSettingsTap,
+    this.onProfileTap,
   });
 
-  final VoidCallback? onNotificationTap;
-  final VoidCallback? onSettingsTap;
+  final VoidCallback? onProfileTap;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColor.white,
-      elevation: 2,
+      elevation: kIsWeb ? 2 : 0,
       title: const Text('Eye Bank'),
       actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.notifications,
-            size: 24,
+        InkWell(
+          onTap: onProfileTap,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColor.grey,
+                width: 1,
+              ),
+              shape: BoxShape.circle,
+              color: AppColor.white,
+            ),
+            child: const Icon(
+              Icons.person,
+              size: 24,
+            ),
           ),
-          onPressed: () {},
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.settings,
-            size: 24,
-          ),
-          onPressed: () {},
-        ),
+        const SizedBox(width: 16),
       ],
     );
   }

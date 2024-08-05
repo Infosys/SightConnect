@@ -21,10 +21,10 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_asse
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/app_info_service.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/app_info_service.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

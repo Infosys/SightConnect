@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
@@ -64,7 +65,7 @@ class FormPreviewSheet extends WoltModalType {
   BoxConstraints layoutModal(Size availableSize) {
     final availableWidth = availableSize.width;
     double width = availableWidth > 523.0
-        ? availableWidth * 0.55
+        ? availableWidth * (kIsWeb ? 0.55 : 0.9)
         : availableWidth - padding.end;
     return BoxConstraints(
       minWidth: width,

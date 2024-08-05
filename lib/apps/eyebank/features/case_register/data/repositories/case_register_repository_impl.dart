@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final caseRegisterRepositoryProvider = Provider<CaseRegisterRepository>((ref) {

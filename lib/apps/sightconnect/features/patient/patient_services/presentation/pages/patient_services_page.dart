@@ -3,11 +3,11 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_noti
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_profile/presentation/pages/patient_profile_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_services/presentation/widgets/patient_service_category.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/models/bottom_nav_item.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -4,8 +4,8 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/t
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_update_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

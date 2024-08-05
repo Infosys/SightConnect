@@ -3,9 +3,9 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_asse
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/data/source/remote_triage_report_source.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/diagnostic_report_status.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/repository/triage_report_repository.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/network_info.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/network_info.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var triageReportRepositoryProvider = Provider<TriageReportRepository>(

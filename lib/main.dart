@@ -2,17 +2,17 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:eye_care_for_all/app.dart';
+import 'package:eye_care_for_all/services/app_info_service.dart';
+import 'package:eye_care_for_all/services/matomo_logger.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
-import 'package:eye_care_for_all/shared/services/app_info_service.dart';
-import 'package:eye_care_for_all/shared/services/matomo_logger.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
-import 'shared/services/shared_preference.dart';
+import 'services/shared_preference.dart';
 
 Logger logger = Logger();
 bool visionAcuityIsSwipeMode = false;

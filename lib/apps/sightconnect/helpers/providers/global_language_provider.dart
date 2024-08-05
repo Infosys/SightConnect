@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/utils/language_utils.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

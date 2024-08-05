@@ -7,9 +7,9 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/models/volunteer_post
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(

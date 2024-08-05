@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/reposito
 import 'package:eye_care_for_all/apps/sightconnect/helpers/usecases/usecase.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../shared/services/failure.dart';
+import '../../../../../../services/failure.dart';
 import '../../data/repositories/triage_repository_impl.dart';
 
 var getLongDistanceVisualAcuityResponseLocallyUseCase = Provider(

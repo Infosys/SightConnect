@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/screening/data/repositories/contracts/screening_repository.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 var screeningRepositoryProvider = Provider<ScreeningRepository>((ref) {
@@ -82,7 +82,6 @@ class ScreeningRepositoryImpl extends ScreeningRepository {
       logger.e("Error in getPersistedResponse");
       rethrow;
     }
-
   }
 
   @override

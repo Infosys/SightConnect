@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/chatbot/presentation/widgets/chat_message_tile.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var chatbotProvider = Provider((ref) {

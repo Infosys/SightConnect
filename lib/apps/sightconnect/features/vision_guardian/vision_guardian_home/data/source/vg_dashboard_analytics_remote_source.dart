@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/data/models/vt_analytics_stats.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class VgDashboardAnalyticsRemoteSource {

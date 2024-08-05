@@ -50,7 +50,8 @@ class _PageWidgetState extends State<FormPanelView> {
       SubmitBtn(
         key: widget.key,
         onPressed: widget.onSubmit,
-      )
+      ),
+      const SizedBox(height: 100),
     ]);
   }
 }
