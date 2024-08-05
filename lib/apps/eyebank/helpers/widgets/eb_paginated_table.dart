@@ -1,23 +1,25 @@
 import 'dart:async';
 
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class EBPaginatedTable<T> extends StatefulWidget {
   final List<String> headers;
   final DataRow Function(T) rowBuilder;
   final List<String> filterOptions;
-  final bool Function(T, String) filterMatcher;
-  final bool Function(T, String) searchMatcher;
-  final Future<List<T>> Function(int pageNumber, int pageSize,
-      String searchQuery, String? selectedFilter) fetchData;
+  final Future<List<T>> Function(
+    int pageNumber,
+    int pageSize,
+    String searchQuery,
+    String? selectedFilter,
+  ) fetchData;
 
   const EBPaginatedTable({
     Key? key,
     required this.headers,
     required this.rowBuilder,
     required this.filterOptions,
-    required this.filterMatcher,
-    required this.searchMatcher,
     required this.fetchData,
   }) : super(key: key);
 
@@ -76,22 +78,38 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
             onChanged: _onSearchChanged,
           ),
         ),
-        DropdownButton<String>(
-          value: selectedFilter,
-          hint: const Text('Filter'),
-          onChanged: (value) {
-            setState(() {
-              selectedFilter = value;
-              currentPage = 0;
-              _fetchData();
-            });
-          },
-          items: widget.filterOptions.map((filter) {
-            return DropdownMenuItem<String>(
-              value: filter,
-              child: Text(filter),
-            );
-          }).toList(),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Wrap(
+            spacing: 8,
+            children: widget.filterOptions.map((filter) {
+              return ChoiceChip(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
+                label: Text(filter),
+                selected: selectedFilter == filter,
+                onSelected: (selected) {
+                  setState(() {
+                    selectedFilter = selected ? filter : null;
+                    currentPage = 0;
+                    _fetchData();
+                  });
+                },
+                selectedColor: selectedFilter == filter
+                    ? AppColor.primary
+                    : AppColor.lightGrey,
+                labelStyle: applyRobotoFont(
+                  color: selectedFilter == filter
+                      ? AppColor.white
+                      : AppColor.black,
+                  fontSize: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              );
+            }).toList(),
+          ),
         ),
         Expanded(
           child: isLoading
