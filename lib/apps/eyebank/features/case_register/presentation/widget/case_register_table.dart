@@ -1,9 +1,11 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/pages/eb_screening_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -27,21 +29,67 @@ class CaseRegisterTable extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebCaseTableProvider).when(
           data: (data) {
-            return EBPaginatedTable<TableData>(
-              data: data,
-              headers: const [
-                'Sample ID',
-                'Date',
-                'Donor',
-                'Tissue',
-                'Eye',
-                'Category',
-                'Status',
-              ],
-              rowBuilder: (item) => _buildDataRow(item, context),
-              filterOptions: const ['Completed', 'Pending'],
-              filterMatcher: (item, filter) => item.status.contains(filter),
-              searchMatcher: searchFunction,
+            if (!kIsWeb) {
+              return EbInfiniteScrollView<TableData>(
+                fetchPageData: (pageKey, pageSize) async {
+                  final startIndex = pageKey * pageSize;
+                  // Generate dummy data
+                  final newItems = List.generate(
+                    pageSize,
+                    (index) => TableData(
+                      eye: "Eye ${startIndex + index + 1}",
+                      category: "Category ${startIndex + index + 1}",
+                      date: DateTime.now(),
+                      donor: "Donor ${startIndex + index + 1}",
+                      sampleID: "Sample ID ${startIndex + index + 1}",
+                      status: "Status ${startIndex + index + 1}",
+                      tissue: "Tissue ${startIndex + index + 1}",
+                    ),
+                  );
+
+                  // Simulate network delay
+                  await Future.delayed(const Duration(seconds: 2));
+
+                  return newItems;
+                },
+                itemBuilder: (context, item, index) => ListTile(
+                  title: Text(item.sampleID),
+                  subtitle: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(item.donor),
+                      Text(item.tissue),
+                      Text(item.eye),
+                      Text(item.category),
+                      Text(item.status),
+                    ],
+                  ),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                ),
+                showSearch: true,
+                defaultPageSize: 5,
+                filterLogic: (item, query) => searchFunction(item, query),
+              );
+            }
+
+            return SingleChildScrollView(
+              child: EBPaginatedTable<TableData>(
+                data: data,
+                headers: const [
+                  'Sample ID',
+                  'Date',
+                  'Donor',
+                  'Tissue',
+                  'Eye',
+                  'Category',
+                  'Status',
+                ],
+                rowBuilder: (item) => _buildDataRow(item, context),
+                filterOptions: const ['Completed', 'Pending'],
+                filterMatcher: (item, filter) => item.status.contains(filter),
+                searchMatcher: searchFunction,
+              ),
             );
           },
           error: (error, _) => Center(

@@ -176,61 +176,61 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (Responsive.isMobile(context)) {
-          return ListView.builder(
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: displayedRows.length,
-            itemBuilder: (context, index) {
-              final cells = widget.rowBuilder(displayedRows[index]).cells;
-              final headers = widget.headers;
-              return Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (var cell in cells)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                  headers[cells.indexOf(cell)],
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColor.black,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 4),
-                              Expanded(
-                                flex: 3,
-                                child: InkWell(
-                                  onTap: cell.onTap,
-                                  child: cell.child,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        }
+        // if (Responsive.isMobile(context)) {
+        //   return ListView.builder(
+        //     padding: EdgeInsets.zero,
+        //     physics: const NeverScrollableScrollPhysics(),
+        //     shrinkWrap: true,
+        //     itemCount: displayedRows.length,
+        //     itemBuilder: (context, index) {
+        //       final cells = widget.rowBuilder(displayedRows[index]).cells;
+        //       final headers = widget.headers;
+        //       return Container(
+        //         margin: const EdgeInsets.only(bottom: 16),
+        //         decoration: BoxDecoration(
+        //           color: AppColor.white,
+        //           borderRadius: BorderRadius.circular(12.0),
+        //         ),
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(16.0),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             children: [
+        //               for (var cell in cells)
+        //                 Padding(
+        //                   padding: const EdgeInsets.symmetric(vertical: 8.0),
+        //                   child: Row(
+        //                     crossAxisAlignment: CrossAxisAlignment.start,
+        //                     children: [
+        //                       Expanded(
+        //                         flex: 2,
+        //                         child: Text(
+        //                           headers[cells.indexOf(cell)],
+        //                           style: applyRobotoFont(
+        //                             fontSize: 14,
+        //                             fontWeight: FontWeight.bold,
+        //                             color: AppColor.black,
+        //                           ),
+        //                         ),
+        //                       ),
+        //                       const SizedBox(width: 4),
+        //                       Expanded(
+        //                         flex: 3,
+        //                         child: InkWell(
+        //                           onTap: cell.onTap,
+        //                           child: cell.child,
+        //                         ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //             ],
+        //           ),
+        //         ),
+        //       );
+        //     },
+        //   );
+        // }
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Container(
