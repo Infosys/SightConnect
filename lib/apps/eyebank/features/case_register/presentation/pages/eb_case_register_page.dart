@@ -1,8 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/add_case_button.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/widget/case_register_table.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EBCaseRegisterPage extends StatelessWidget {
@@ -10,26 +6,25 @@ class EBCaseRegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Case Register'),
-      ),
+    return const Scaffold(
+      // appBar: AppBar(
+      //   title: const Text('Case Register'),
+      // ),
       body: Column(
         children: [
-          if (!Responsive.isMobile(context)) const AddCaseButton(),
-          const SizedBox(height: 8),
-          if (kIsWeb)
-            const Expanded(
-              child: SingleChildScrollView(
-                child: CaseRegisterTable(),
-              ),
-            ),
-          if (!kIsWeb)
-            const Expanded(
-              child: EbInfiniteScrollView(),
-            ),
+          SizedBox(height: 8),
+          Expanded(
+            child: CaseRegisterTable(),
+          ),
         ],
       ),
     );
   }
+}
+
+class Item {
+  final String name;
+  final String description;
+
+  Item(this.name, this.description);
 }

@@ -1,21 +1,40 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_table_card.dart';
+import 'dart:async';
+
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class EbInfiniteScrollView extends StatefulWidget {
-  const EbInfiniteScrollView({super.key});
+class EbInfiniteScrollView<T> extends StatefulWidget {
+  final Future<List<T>> Function(int pageKey, int pageSize) fetchPageData;
+  final Widget Function(BuildContext context, T item, int index) itemBuilder;
+  final bool showSearch;
+  final bool Function(T item, String query)? filterLogic;
+  final int defaultPageSize;
+
+  const EbInfiniteScrollView({
+    super.key,
+    required this.fetchPageData,
+    required this.itemBuilder,
+    this.showSearch = false,
+    this.defaultPageSize = 20,
+    this.filterLogic,
+  });
 
   @override
-  State<EbInfiniteScrollView> createState() => _EbInfiniteScrollViewState();
+  EbInfiniteScrollViewState<T> createState() => EbInfiniteScrollViewState<T>();
 }
 
-class _EbInfiniteScrollViewState extends State<EbInfiniteScrollView> {
-  static const _pageSize = 20;
-  final PagingController<int, Item> _pagingController =
+class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
+  int _pageSize = 20;
+  final PagingController<int, T> _pagingController =
       PagingController(firstPageKey: 0);
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+  Timer? _debounce;
 
   @override
   void initState() {
+    _pageSize = widget.defaultPageSize;
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -24,84 +43,113 @@ class _EbInfiniteScrollViewState extends State<EbInfiniteScrollView> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 2));
+      logger.f('Fetching page: $pageKey');
+      final newItems = await widget.fetchPageData(pageKey, _pageSize);
 
-      // Generate dummy data
-      final newItems = List.generate(
-        _pageSize,
-        (index) => Item(
-          'Item ${pageKey + index + 1}',
-          'Description for item ${pageKey + index + 1}',
-        ),
-      );
+      final filteredItems = widget.filterLogic != null
+          ? newItems
+              .where((item) => widget.filterLogic!(item, _searchQuery))
+              .toList()
+          : newItems;
 
-      // Check if it's the last page
-      final isLastPage = newItems.length < _pageSize;
+      logger.f(
+          'Fetched ${newItems.length} items, ${filteredItems.length} after filtering');
+
+      final isLastPage = filteredItems.length < _pageSize;
       if (isLastPage) {
-        _pagingController.appendLastPage(newItems);
+        _pagingController.appendLastPage(filteredItems);
+        logger.f('Appended last page');
       } else {
-        final nextPageKey = pageKey + newItems.length;
-        _pagingController.appendPage(newItems, nextPageKey);
+        final nextPageKey = pageKey + filteredItems.length;
+        _pagingController.appendPage(filteredItems, nextPageKey);
+        logger.f('Appended page, next page key: $nextPageKey');
       }
     } catch (error) {
       _pagingController.error = error;
+      logger.f('Error fetching page: $error');
     }
+  }
+
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        _searchQuery = _searchController.text;
+      });
+      _pagingController.refresh();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return PagedListView<int, Item>(
-      padding: const EdgeInsets.all(0),
-      pagingController: _pagingController,
-      builderDelegate: PagedChildBuilderDelegate(
-        itemBuilder: (context, item, index) => const EbTableCard(),
-        firstPageErrorIndicatorBuilder: (context) => const SizedBox(
-          height: 100,
-          child: Center(
-            child: Text('Error loading first page'),
+    return Column(
+      children: [
+        if (widget.showSearch)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: const InputDecoration(
+                labelText: 'Search',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) => _onSearchChanged(),
+            ),
+          ),
+        Expanded(
+          child: PagedListView<int, T>(
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              itemBuilder: widget.itemBuilder,
+              firstPageErrorIndicatorBuilder: (context) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Error loading data'),
+                    ElevatedButton(
+                      onPressed: () => _pagingController.refresh(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+              firstPageProgressIndicatorBuilder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              newPageErrorIndicatorBuilder: (context) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Error loading data'),
+                    ElevatedButton(
+                      onPressed: () =>
+                          _pagingController.retryLastFailedRequest(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+              newPageProgressIndicatorBuilder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              noItemsFoundIndicatorBuilder: (context) => const Center(
+                child: Text('No items found'),
+              ),
+              noMoreItemsIndicatorBuilder: (context) => const Center(
+                child: Text('No more items'),
+              ),
+            ),
           ),
         ),
-        noItemsFoundIndicatorBuilder: (context) => const SizedBox(
-          height: 100,
-          child: Center(
-            child: Text('No items found'),
-          ),
-        ),
-        newPageErrorIndicatorBuilder: (context) => const SizedBox(
-          height: 100,
-          child: Center(
-            child: Text('Error loading new page'),
-          ),
-        ),
-        firstPageProgressIndicatorBuilder: (context) => const SizedBox(
-          height: 100,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-        newPageProgressIndicatorBuilder: (context) => const SizedBox(
-          height: 100,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-        noMoreItemsIndicatorBuilder: (context) => const SizedBox(
-          height: 100,
-          child: Center(
-            child: Text('No more items'),
-          ),
-        ),
-        animateTransitions: true,
-        transitionDuration: const Duration(milliseconds: 500),
-      ),
+      ],
     );
   }
-}
 
-class Item {
-  final String name;
-  final String description;
-
-  Item(this.name, this.description);
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    _searchController.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
 }
