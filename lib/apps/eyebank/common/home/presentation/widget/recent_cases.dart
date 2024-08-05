@@ -33,6 +33,7 @@ class RecentCases extends StatelessWidget {
 
           // Recent cases list
           ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 5,
             itemBuilder: (context, index) {
