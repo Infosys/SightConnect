@@ -8,26 +8,16 @@ class EBCaseRegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {},
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              if (!Responsive.isMobile(context)) const AddCaseButton(),
-              const SizedBox(height: 8),
-              const Expanded(
-                child: SingleChildScrollView(
-                  child: CaseRegisterTable(),
-                ),
-              ),
-            ],
+    return Column(
+      children: [
+        if (!Responsive.isMobile(context)) const AddCaseButton(),
+        const SizedBox(height: 8),
+        const Expanded(
+          child: SingleChildScrollView(
+            child: CaseRegisterTable(),
           ),
         ),
-        floatingActionButton:
-            !Responsive.isMobile(context) ? null : const AddCaseButton(),
-      ),
+      ],
     );
   }
 }

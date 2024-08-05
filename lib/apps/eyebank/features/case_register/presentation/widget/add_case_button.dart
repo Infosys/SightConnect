@@ -14,67 +14,61 @@ class AddCaseButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebCaseCreationProvider).when(
-          data: (json) {
-            if (Responsive.isMobile(context)) {
-              return FloatingActionButton.extended(
-                onPressed: () {
-                  showCustomWoltSheet(
-                    context,
-                    DynamicFormPage(json: json),
-                  );
-                },
-                icon: const Icon(Icons.add),
-                label: Text(
-                  'Create New Case',
-                  style: applyRobotoFont(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ),
-              );
-            }
-            return CreateNewCaseSection(
-              onPressed: () {
-                showCustomWoltSheet(
-                  context,
-                  DynamicFormPage(json: json),
-                );
-              },
-              buttonTxt: 'Create New Case',
-            );
-          },
+          data: (json) => _buildContent(context, json),
           loading: () => const CircularProgressIndicator(),
-          error: (error, stackTrace) {
-            Fluttertoast.showToast(msg: 'Error Loading Case Registration JSON');
-            if (Responsive.isMobile(context)) {
-              return FloatingActionButton.extended(
-                onPressed: () {
-                  ref.invalidate(ebCaseCreationProvider);
-                },
-                icon: const Icon(Icons.refresh),
-                label: Text(
-                  'Retry',
-                  style: applyRobotoFont(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ),
-              );
-            }
-            return CreateNewCaseSection(
-              onPressed: () {
-                ref.invalidate(ebCaseCreationProvider);
-              },
-              buttonTxt: 'Retry',
-            );
-          },
+          error: (error, stackTrace) => _buildErrorContent(context, ref, error),
         );
+  }
+
+  Widget _buildContent(BuildContext context, dynamic json) {
+    if (Responsive.isMobile(context)) {
+      return FloatingActionButton.extended(
+        onPressed: () => _showFormSheet(context, json),
+        icon: const Icon(Icons.add),
+        label: _buildButtonLabel('Create New Case'),
+      );
+    }
+    return _CreateNewCaseSection(
+      onPressed: () => _showFormSheet(context, json),
+      buttonTxt: 'Create New Case',
+    );
+  }
+
+  Widget _buildErrorContent(BuildContext context, WidgetRef ref, Object error) {
+    Fluttertoast.showToast(msg: 'Error Loading Case Registration JSON');
+    if (Responsive.isMobile(context)) {
+      return FloatingActionButton.extended(
+        onPressed: () => ref.invalidate(ebCaseCreationProvider),
+        icon: const Icon(Icons.refresh),
+        label: _buildButtonLabel('Retry'),
+      );
+    }
+    return _CreateNewCaseSection(
+      onPressed: () => ref.invalidate(ebCaseCreationProvider),
+      buttonTxt: 'Retry',
+    );
+  }
+
+  void _showFormSheet(BuildContext context, dynamic json) {
+    showCustomWoltSheet(
+      context,
+      DynamicFormPage(json: json),
+    );
+  }
+
+  Text _buildButtonLabel(String text) {
+    return Text(
+      text,
+      style: applyRobotoFont(
+        fontSize: 12,
+        color: Colors.white,
+      ),
+    );
   }
 }
 
-class CreateNewCaseSection extends StatelessWidget {
-  const CreateNewCaseSection({
-    super.key,
+class _CreateNewCaseSection extends StatelessWidget {
+  const _CreateNewCaseSection({
     required this.onPressed,
     required this.buttonTxt,
   });

@@ -84,6 +84,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
           textStyle: applyRobotoFont(
             fontSize: 14,
           ),
+          minimumSize: const Size(60, 40),
           padding: !kIsWeb
               ? const EdgeInsets.symmetric(
                   vertical: 16,
@@ -103,6 +104,7 @@ class AppTheme extends StateNotifier<ThemeMode> {
           textStyle: applyRobotoFont(
             fontSize: 14,
           ),
+          minimumSize: const Size(60, 40),
           padding: !kIsWeb
               ? const EdgeInsets.symmetric(
                   vertical: 16,
