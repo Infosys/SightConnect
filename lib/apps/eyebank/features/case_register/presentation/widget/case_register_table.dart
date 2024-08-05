@@ -42,7 +42,6 @@ class CaseRegisterTable extends ConsumerWidget {
               filterOptions: const ['Completed', 'Pending'],
               filterMatcher: (item, filter) => item.status.contains(filter),
               searchMatcher: searchFunction,
-              onPageChange: (index) {},
             );
           },
           error: (error, _) => Center(
