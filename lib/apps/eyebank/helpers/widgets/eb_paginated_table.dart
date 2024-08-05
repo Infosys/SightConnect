@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// Widgets
 class EBPaginatedTable<T> extends StatefulWidget {
   final List<T> data;
   final List<String> headers;
