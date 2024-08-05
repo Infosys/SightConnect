@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/pages/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
@@ -78,10 +77,10 @@ class MyApp extends ConsumerWidget {
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
 
-                // initialRoute: initialRoute,
-                // navigatorKey: AppRouter.navigatorKey,
-                // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: const EyeBankDashboardPage(),
+                initialRoute: initialRoute,
+                navigatorKey: AppRouter.navigatorKey,
+                onUnknownRoute: AppRouter.onUnknownRoute,
+                // home: const EyeBankDashboardPage(),
 
                 builder: (context, child) {
                   return ref.watch(internetProvider).maybeWhen(

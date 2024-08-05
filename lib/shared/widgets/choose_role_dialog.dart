@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -16,8 +16,15 @@ class ChooseRoleDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedRole = useState<Role?>(
-        roles.contains(Role.ROLE_PATIENT) ? Role.ROLE_PATIENT : roles.first);
+    List<Role?> currentRoles = roles;
+    if (currentRoles.contains(Role.ROLE_EYEBANK)) {
+      if (kIsWeb) {
+        currentRoles = [Role.ROLE_EYEBANK];
+      }
+    }
+    var selectedRole = useState<Role?>(currentRoles.contains(Role.ROLE_PATIENT)
+        ? Role.ROLE_PATIENT
+        : currentRoles.first);
 
     final loc = context.loc!;
 
@@ -62,7 +69,7 @@ class ChooseRoleDialog extends HookWidget {
             width: MediaQuery.of(context).size.width * 0.8,
             child: SingleChildScrollView(
               child: ListBody(
-                children: roles
+                children: currentRoles
                     .map(
                       (role) => InkWell(
                         onTap: () {
