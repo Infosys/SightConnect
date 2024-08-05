@@ -89,9 +89,17 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: _searchController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Search',
-                border: OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () {
+                    _searchController.clear();
+                    _onSearchChanged();
+                  },
+                ),
+                prefixIconConstraints: const BoxConstraints(minWidth: 40),
+                border: const OutlineInputBorder(),
               ),
               onChanged: (value) => _onSearchChanged(),
             ),
