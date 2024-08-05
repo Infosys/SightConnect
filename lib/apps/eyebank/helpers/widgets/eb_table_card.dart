@@ -18,7 +18,7 @@ class EbTableCard extends StatelessWidget {
           ),
         ],
       ),
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.only(bottom: 16.0, left: 8, right: 8),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(

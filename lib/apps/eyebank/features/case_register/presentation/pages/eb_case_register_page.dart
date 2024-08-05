@@ -10,21 +10,26 @@ class EBCaseRegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (!Responsive.isMobile(context)) const AddCaseButton(),
-        const SizedBox(height: 8),
-        if (kIsWeb)
-          const Expanded(
-            child: SingleChildScrollView(
-              child: CaseRegisterTable(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Case Register'),
+      ),
+      body: Column(
+        children: [
+          if (!Responsive.isMobile(context)) const AddCaseButton(),
+          const SizedBox(height: 8),
+          if (kIsWeb)
+            const Expanded(
+              child: SingleChildScrollView(
+                child: CaseRegisterTable(),
+              ),
             ),
-          ),
-        if (!kIsWeb)
-          const Expanded(
-            child: EbInfiniteScrollView(),
-          ),
-      ],
+          if (!kIsWeb)
+            const Expanded(
+              child: EbInfiniteScrollView(),
+            ),
+        ],
+      ),
     );
   }
 }

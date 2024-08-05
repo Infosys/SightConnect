@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/pages/eb_case_register_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +26,27 @@ class RecentCases extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Text(
-                'View All',
-                style: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.primary,
+              TextButton(
+                onPressed: () {
+                  final navigator = Navigator.of(context);
+                  navigator.push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const EBCaseRegisterPage();
+                      },
+                    ),
+                  );
+                },
+                child: Text(
+                  'View All',
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.primary,
+                  ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8.0),
 
           // Recent cases list
           ListView.builder(

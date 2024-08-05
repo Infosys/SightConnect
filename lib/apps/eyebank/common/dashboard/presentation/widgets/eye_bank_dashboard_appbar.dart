@@ -1,4 +1,6 @@
+import 'package:eye_care_for_all/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,14 @@ class EyeBankDashboardAppbar extends StatelessWidget
     return AppBar(
       backgroundColor: AppColor.white,
       elevation: kIsWeb ? 2 : 0,
-      title: const Text('Eye Bank'),
+      title: Text(
+        AppInfoService.appName,
+        style: applyRobotoFont(
+          fontWeight: FontWeight.w500,
+          fontSize: 20,
+          color: AppColor.black,
+        ),
+      ),
       actions: [
         InkWell(
           onTap: onProfileTap,
