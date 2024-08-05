@@ -20,9 +20,8 @@ class RecentCases extends StatelessWidget {
             children: [
               Text(
                 'Recent Cases',
-                style: applyRobotoFont(
+                style: applyFiraSansFont(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               const Spacer(),

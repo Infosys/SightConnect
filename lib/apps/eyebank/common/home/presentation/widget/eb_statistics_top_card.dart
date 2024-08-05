@@ -28,7 +28,7 @@ class EbStatisticsTopCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSize.km),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: SizedBox(
@@ -76,12 +76,12 @@ class EbStatisticsTopCard extends StatelessWidget {
           AutoSizeText(
             number,
             style: applyFiraSansFont(
-              fontSize: 28,
+              fontSize: 24,
               color: isSelected ? AppColor.white : AppColor.primary,
               fontWeight: FontWeight.w500,
             ),
-            minFontSize: 20,
-            maxFontSize: 28,
+            minFontSize: 16,
+            maxFontSize: 24,
           ),
         ],
       ),
