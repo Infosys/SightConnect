@@ -9,11 +9,11 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/otp_timer.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/matomo_logger.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/services/matomo_logger.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';

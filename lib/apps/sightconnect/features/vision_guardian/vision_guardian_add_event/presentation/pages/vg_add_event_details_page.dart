@@ -5,12 +5,12 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_datetime_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_form_helper_widgets.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/geocoding_service.dart';
+import 'package:eye_care_for_all/services/location_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/regex/regex.dart';
-import 'package:eye_care_for_all/shared/services/geocoding_service.dart';
-import 'package:eye_care_for_all/shared/services/location_service.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';

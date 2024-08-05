@@ -4,10 +4,10 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_empty_result_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_data_card.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

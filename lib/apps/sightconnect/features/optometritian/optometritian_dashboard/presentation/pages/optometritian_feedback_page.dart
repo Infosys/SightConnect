@@ -4,17 +4,17 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/pr
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/network_info.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/network_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../../services/persistent_auth_service.dart';
 import '../../../../../../../shared/constants/app_color.dart';
 import '../../../../../../../shared/constants/app_size.dart';
-import '../../../../../../../shared/services/persistent_auth_service.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
 import '../../../../../common/triage/data/source/local/triage_db_helper.dart';
 import '../../../../../common/triage/presentation/providers/optometrician_triage_provider.dart';

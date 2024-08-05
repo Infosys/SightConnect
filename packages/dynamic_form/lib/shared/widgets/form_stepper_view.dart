@@ -30,8 +30,11 @@ class _PageWidgetState extends State<FormStepperView> {
     }
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Stepper(
+          physics: const NeverScrollableScrollPhysics(),
           currentStep: currentStep,
           onStepContinue: () {
             if (currentStep < widget.pages.length - 1) {
@@ -53,7 +56,7 @@ class _PageWidgetState extends State<FormStepperView> {
                 if (currentStep < widget.pages.length - 1)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: OutlinedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         if (currentStep < widget.pages.length - 1) {
                           setState(() {
@@ -81,8 +84,11 @@ class _PageWidgetState extends State<FormStepperView> {
               ],
             );
           },
-          steps: widget.pages.map((panel) {
+          steps: widget.pages.asMap().entries.map((entry) {
+            final index = entry.key;
+            final panel = entry.value;
             return Step(
+              isActive: currentStep == index,
               title: Text(panel.name),
               content: PageWidget(
                 elements: panel.elements,

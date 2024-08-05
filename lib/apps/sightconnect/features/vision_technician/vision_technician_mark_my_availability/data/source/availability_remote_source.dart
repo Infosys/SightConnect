@@ -3,7 +3,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vi
 import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../shared/services/dio_service.dart';
+import '../../../../../../../services/dio_service.dart';
 
 abstract class AvailabilityRemoteSource {
   Future<bool> markAvailability({required AvailabilityModel availability});

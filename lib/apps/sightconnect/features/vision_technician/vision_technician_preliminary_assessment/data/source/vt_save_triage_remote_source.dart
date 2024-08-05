@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/main.dart';
 
-import '../../../../../../../shared/services/exceptions.dart';
+import '../../../../../../../services/exceptions.dart';
 
 abstract class VTSaveTriageRemoteSource {
   Future<TriagePostModel> saveTriage(TriagePostModel triagePostModel);

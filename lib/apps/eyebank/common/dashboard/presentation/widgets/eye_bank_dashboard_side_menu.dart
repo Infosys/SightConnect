@@ -5,21 +5,22 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EyeBankDashboardSideMenu extends HookWidget {
-  final Function(int? id) onSelected;
+class EyeBankDashboardSideMenu extends HookConsumerWidget {
   const EyeBankDashboardSideMenu({
     super.key,
     required this.items,
     required this.onSelected,
+    required this.initialIndex,
   });
 
   final List<MenuItem> items;
+  final Function(int index) onSelected;
+  final int initialIndex;
 
   @override
-  Widget build(BuildContext context) {
-    final selected = useState<MenuItem>(items.first);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     final isTablet = Responsive.isTablet(context);
 
     return SingleChildScrollView(
@@ -63,10 +64,9 @@ class EyeBankDashboardSideMenu extends HookWidget {
                 return OptionCard(
                   index: index,
                   options: items,
-                  isSelected: selected.value.id == items[index].id,
+                  isSelected: items[index].id == initialIndex,
                   onSelect: (selectedItem) {
-                    selected.value = selectedItem;
-                    onSelected(selectedItem.id);
+                    onSelected(index);
                   },
                 );
               },
@@ -108,6 +108,9 @@ class OptionCard extends HookWidget {
       child: InkWell(
         onTap: () {
           onSelect(options[index]);
+          if (Responsive.isMobile(context)) {
+            Navigator.of(context).pop();
+          }
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),

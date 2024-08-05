@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Widgets
@@ -14,7 +15,6 @@ class EBPaginatedTable<T> extends StatefulWidget {
   final List<String> filterOptions;
   final bool Function(T, String) filterMatcher;
   final bool Function(T, String) searchMatcher;
-  final void Function(int) onPageChange;
 
   const EBPaginatedTable({
     Key? key,
@@ -24,7 +24,6 @@ class EBPaginatedTable<T> extends StatefulWidget {
     required this.filterOptions,
     required this.filterMatcher,
     required this.searchMatcher,
-    required this.onPageChange,
   }) : super(key: key);
 
   @override
@@ -68,7 +67,7 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
     final totalPages = (filteredData.length / rowsPerPage).ceil();
     return Column(
       children: [
-        if (Responsive.isMobile(context)) _buildSearchBar(),
+        if (Responsive.isMobile(context)) _buildSearchBar(context),
         if (Responsive.isMobile(context)) const SizedBox(height: 16),
         if (Responsive.isMobile(context)) _buildFilterChips(),
         if (Responsive.isMobile(context)) const SizedBox(height: 16),
@@ -77,7 +76,7 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
             children: [
               Expanded(child: _buildFilterChips()),
               const SizedBox(width: 16),
-              _buildSearchBar(),
+              _buildSearchBar(context),
             ],
           ),
         _buildPaginatedTable(),
@@ -87,21 +86,44 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildSearchBar(BuildContext context) {
     const debounceTime = Duration(milliseconds: 200);
     return SizedBox(
       width: Responsive.isMobile(context)
           ? double.infinity
-          : AppSize.width(context) * 0.3,
+          : AppSize.width(context) * 0.35,
       child: TextField(
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 22.0, horizontal: 20),
+        decoration: InputDecoration(
+          contentPadding: kIsWeb
+              ? const EdgeInsets.symmetric(vertical: 22.0, horizontal: 20)
+              : const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20),
           hintText: 'Search...',
-          prefixIcon: Padding(
+          prefixIcon: const Padding(
             padding: EdgeInsets.only(left: 8, right: 8),
             child: Icon(
               Icons.search,
-              size: 30,
+              size: 28,
+            ),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1.0,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1.0,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: const BorderSide(
+              color: AppColor.primary,
+              width: 1.0,
             ),
           ),
         ),
@@ -121,32 +143,28 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   Widget _buildFilterChips() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
+      child: Wrap(
+        spacing: 8,
         children: widget.filterOptions.map((filter) {
-          return Padding(
-            padding: const EdgeInsets.only(right: AppSize.km),
-            child: ChoiceChip(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
-              label: Text(filter),
-              selected: selectedFilter == filter,
-              onSelected: (selected) {
-                setState(() {
-                  selectedFilter = selected ? filter : null;
-                  _filterData();
-                });
-              },
-              selectedColor: selectedFilter == filter
-                  ? AppColor.primary
-                  : AppColor.lightGrey,
-              labelStyle: applyRobotoFont(
-                color:
-                    selectedFilter == filter ? AppColor.white : AppColor.black,
-                fontSize: 12,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+          return ChoiceChip(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
+            label: Text(filter),
+            selected: selectedFilter == filter,
+            onSelected: (selected) {
+              setState(() {
+                selectedFilter = selected ? filter : null;
+                _filterData();
+              });
+            },
+            selectedColor: selectedFilter == filter
+                ? AppColor.primary
+                : AppColor.lightGrey,
+            labelStyle: applyRobotoFont(
+              color: selectedFilter == filter ? AppColor.white : AppColor.black,
+              fontSize: 12,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
           );
         }).toList(),
@@ -157,71 +175,86 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   Widget _buildPaginatedTable() {
     final displayedRows = _getDisplayedRows();
 
-    return SingleChildScrollView(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (Responsive.isMobile(context)) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: displayedRows.length,
-              itemBuilder: (context, index) {
-                final cells = widget.rowBuilder(displayedRows[index]).cells;
-                final headers = widget.headers;
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  margin: const EdgeInsets.all(8.0),
-                  child: Wrap(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (Responsive.isMobile(context)) {
+          return ListView.builder(
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: displayedRows.length,
+            itemBuilder: (context, index) {
+              final cells = widget.rowBuilder(displayedRows[index]).cells;
+              final headers = widget.headers;
+              return Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: AppColor.white,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       for (var cell in cells)
-                        Container(
-                          margin: const EdgeInsets.all(16.0),
-                          child: Wrap(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "${headers[cells.indexOf(cell)]} : ",
-                                style: applyRobotoFont(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColor.black,
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  headers[cells.indexOf(cell)],
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColor.black,
+                                  ),
                                 ),
                               ),
-                              cell.child,
+                              const SizedBox(width: 4),
+                              Expanded(
+                                flex: 3,
+                                child: InkWell(
+                                  onTap: cell.onTap,
+                                  child: cell.child,
+                                ),
+                              ),
                             ],
                           ),
                         ),
                     ],
                   ),
-                );
-              },
-            );
-          }
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              constraints: BoxConstraints(minWidth: constraints.maxWidth),
-              child: DataTable(
-                dataTextStyle: applyRobotoFont(
-                  fontSize: 14,
-                  color: AppColor.black,
                 ),
-                dataRowMaxHeight: 65,
-                headingRowHeight: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppColor.white,
-                ),
-                columns: _buildColumns(),
-                rows: displayedRows
-                    .map((item) => widget.rowBuilder(item))
-                    .toList(),
-              ),
-            ),
+              );
+            },
           );
-        },
-      ),
+        }
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            constraints: BoxConstraints(minWidth: constraints.maxWidth),
+            child: DataTable(
+              dataTextStyle: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.black,
+              ),
+              dataRowMaxHeight: 65,
+              headingRowHeight: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColor.white,
+              ),
+              columns: _buildColumns(),
+              rows:
+                  displayedRows.map((item) => widget.rowBuilder(item)).toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -248,21 +281,14 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
       children: [
         IconButton(
           icon: const Icon(Icons.chevron_left),
-          onPressed: currentPage > 0
-              ? () => setState(() {
-                    currentPage--;
-                    widget.onPageChange(currentPage);
-                  })
-              : null,
+          onPressed:
+              currentPage > 0 ? () => setState(() => currentPage--) : null,
         ),
         Text('Page ${currentPage + 1} of $totalPages'),
         IconButton(
           icon: const Icon(Icons.chevron_right),
           onPressed: currentPage < totalPages - 1
-              ? () => setState(() {
-                    currentPage++;
-                    widget.onPageChange(currentPage);
-                  })
+              ? () => setState(() => currentPage++)
               : null,
         ),
       ],

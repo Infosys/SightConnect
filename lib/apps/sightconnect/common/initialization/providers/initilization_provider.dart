@@ -8,9 +8,9 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/performers_profile_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,6 +39,9 @@ class InitializationProvider extends ChangeNotifier {
       return await _checkVolunteerExists();
     } else if (role == Role.ROLE_OPTOMETRIST) {
       //only for testing
+      return true;
+    } else if (role == Role.ROLE_EYEBANK) {
+      // just for testing, please change when profile API for eye bank is implemented.
       return true;
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");

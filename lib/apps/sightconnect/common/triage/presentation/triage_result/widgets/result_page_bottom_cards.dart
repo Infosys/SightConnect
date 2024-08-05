@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/pa
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/providers/accessibility_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_home/presentation/widgets/helpline_card.dart';
+import 'package:eye_care_for_all/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/services/app_info_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

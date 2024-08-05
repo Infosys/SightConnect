@@ -4,8 +4,8 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_availibility_provider.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

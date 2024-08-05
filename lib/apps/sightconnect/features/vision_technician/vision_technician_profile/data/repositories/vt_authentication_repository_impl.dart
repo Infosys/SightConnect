@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/repositories/vt_authentication_repository.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vtAuthenticationRepositoryProvider =

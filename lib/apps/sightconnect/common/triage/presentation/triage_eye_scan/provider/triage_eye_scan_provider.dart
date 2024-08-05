@@ -9,8 +9,8 @@ import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/t
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/usecases/save_triage_eye_scan_locally_usecase.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/providers/triage_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/file_ms_service.dart';
-import 'package:eye_care_for_all/shared/services/network_info.dart';
+import 'package:eye_care_for_all/services/file_ms_service.dart';
+import 'package:eye_care_for_all/services/network_info.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/widget/add_case_button.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/widget/case_table.dart';
-import 'package:eye_care_for_all/shared/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/widget/case_register_table.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EBCaseRegisterPage extends StatelessWidget {
@@ -9,73 +9,25 @@ class EBCaseRegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: AppColor.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Case Registration',
-                    style: applyRobotoFont(
-                      color: AppColor.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const AddCaseButton()
-                ],
+    return Column(
+      children: [
+        if (!Responsive.isMobile(context)) const AddCaseButton(),
+        const SizedBox(height: 8),
+        if (kIsWeb)
+          const Expanded(
+            child: SingleChildScrollView(
+              child: CaseRegisterTable(),
+            ),
+          ),
+        if (!kIsWeb)
+          const Expanded(
+            child: SingleChildScrollView(
+              child: SizedBox(
+                child: Text("Infinite Scroll"),
               ),
             ),
-            const SizedBox(height: 8),
-            const CaseTable(),
-
-            // Container(
-            //   width: double.infinity,
-            //   height: 800,
-            //   decoration: BoxDecoration(
-            //     color: AppColor.white,
-            //     borderRadius: BorderRadius.circular(8),
-            //   ),
-            //   child: Column(
-            //     children: [
-            //       Text(
-            //         'No Cases Found',
-            //         style: applyRobotoFont(
-            //           color: AppColor.black,
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.w500,
-            //         ),
-            //       ),
-            //       const SizedBox(
-            //         height: 8,
-            //       ),
-            //       IconButton(
-            //           onPressed: () {
-            //             Navigator.push(
-            //               context,
-            //               MaterialPageRoute(
-            //                 builder: (context) => const EbScreeningPage(
-            //                   title: 'Screening',
-            //                   caseID: '1234',
-            //                 ),
-            //               ),
-            //             );
-            //           },
-            //           icon: const Icon(Icons.control_point)),
-            //     ],
-            //   ),
-            // )
-          ],
-        ),
-      ),
+          ),
+      ],
     );
   }
 }

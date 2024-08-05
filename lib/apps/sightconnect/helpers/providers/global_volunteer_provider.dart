@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/models/performer_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/performers_profile_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

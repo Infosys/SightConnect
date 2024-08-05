@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_dashboard/presentation/pages/tenant_admin_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_dashboard/presentation/pages/tenant_admin_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/pages/eye_bank_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/app_consent_form.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
@@ -9,22 +10,23 @@ import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dash
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/geocoding_service.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/geocoding_service.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
-import '../../../../../shared/services/location_service.dart';
+import '../../../../../services/location_service.dart';
 import '../../../helpers/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
@@ -268,10 +270,11 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
     if (currentRoles == null) {
       return Future.value(null);
     }
-    final roles = roleListMapper(currentRoles);
+    var roles = roleListMapper(currentRoles);
     if (roles.length == 1) {
       return Future.value(roles.first);
     }
+
     return showDialog<Role>(
       context: context,
       barrierDismissible: false,
@@ -288,17 +291,32 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
       Role.ROLE_VOLUNTEER: const VisionGuardianDashboardPage(),
+      Role.ROLE_EYEBANK: const EyeBankDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {
-      navigator.pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => rolePages[role]!,
-        ),
-        (route) => false,
-      );
-    } else {
-      throw Exception("Invalid Role");
+      if (kIsWeb) {
+        if (role == Role.ROLE_EYEBANK) {
+          navigator.pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => rolePages[role]!,
+            ),
+            (route) => false,
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              duration: Duration(seconds: 3),
+              content: Text("Platform not supported for this role")));
+          throw Exception("Invalid Role");
+        }
+      } else {
+        navigator.pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => rolePages[role]!,
+          ),
+          (route) => false,
+        );
+      }
     }
   }
 
