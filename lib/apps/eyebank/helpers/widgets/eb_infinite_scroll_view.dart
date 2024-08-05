@@ -25,9 +25,8 @@ class EbInfiniteScrollView<T> extends StatefulWidget {
 }
 
 class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
-  int _pageSize = 20;
-  final PagingController<int, T> _pagingController =
-      PagingController(firstPageKey: 0);
+  int _pageSize = 10;
+  late PagingController<int, T> _pagingController;
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   Timer? _debounce;
@@ -35,6 +34,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
   @override
   void initState() {
     _pageSize = widget.defaultPageSize;
+    _pagingController = PagingController(firstPageKey: 0);
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });

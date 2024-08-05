@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/pages/eb_screening_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:flutter/foundation.dart';
@@ -59,6 +60,18 @@ class CaseRegisterTable extends ConsumerWidget {
                   return newItems;
                 },
                 itemBuilder: (context, item, index) => ListTile(
+                  onTap: () {
+                    // Navigate to detail page
+                    final navigator = Navigator.of(context);
+                    navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => EbScreeningPage(
+                          title: item.sampleID,
+                          caseID: item.sampleID,
+                        ),
+                      ),
+                    );
+                  },
                   title: Text(item.sampleID),
                   subtitle: Column(
                     mainAxisSize: MainAxisSize.min,
