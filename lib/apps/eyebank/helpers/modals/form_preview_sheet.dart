@@ -12,6 +12,7 @@ showCustomWoltSheet(BuildContext context, Widget child) {
       pageListBuilder: (modalSheetContext) {
         return [
           WoltModalSheetPage(
+            scrollController: null,
             useSafeArea: true,
             trailingNavBarWidget: IconButton(
               icon: const Icon(Icons.close),

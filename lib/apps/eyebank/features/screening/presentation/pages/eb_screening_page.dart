@@ -45,14 +45,12 @@ class EbScreeningPage extends ConsumerWidget {
                       },
                       style:
                           TextButton.styleFrom(foregroundColor: AppColor.red),
-                      icon: const Icon(
-                        Icons.close,
-                      ),
                       label: Text(
-                        'Close Case',
+                        'Mark as Closed',
                         style: applyRobotoFont(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: AppColor.red,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),

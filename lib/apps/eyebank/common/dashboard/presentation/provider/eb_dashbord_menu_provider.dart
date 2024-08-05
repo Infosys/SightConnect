@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/apps/admin_portal/features/tenant_admin/tenant_admin_analytics_dashboard/presentation/pages/tenant_admin_analytics_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/data/models/menu_item.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/page/eb_home_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/pages/eb_case_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +23,7 @@ class EbDashboardMenuProvider extends ChangeNotifier {
   }
 
   final List<Widget> _pages = [
-    const TenantAdminAnalyticsDashBoardPage(),
+    const EbHomePage(),
     const EBCaseRegisterPage(),
     Container(),
     Container(),
@@ -37,7 +37,7 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     ),
     MenuItem(
       id: 1,
-      title: "Register Case",
+      title: "Case Record",
       icon: FontAwesomeIcons.bookMedical,
     ),
     MenuItem(
