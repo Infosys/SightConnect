@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentatio
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -149,9 +148,6 @@ class CaseSearchWidget extends ConsumerWidget {
   }
 
   Widget _buildStatusCell(TableData item, BuildContext context) {
-    if (Responsive.isMobile(context)) {
-      return Text(item.status);
-    }
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16.0,
