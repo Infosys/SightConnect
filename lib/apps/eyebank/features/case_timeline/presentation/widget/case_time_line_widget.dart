@@ -101,15 +101,15 @@ class CaseTimeLineWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           padding: const EdgeInsets.all(8.0),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey,
-                blurRadius: 2.0,
-                spreadRadius: 0.0,
-                offset: Offset(2.0, 2.0),
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
               ),
             ],
           ),
