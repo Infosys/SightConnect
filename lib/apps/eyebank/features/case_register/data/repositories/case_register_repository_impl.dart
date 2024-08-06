@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/data/repositories/contracts/case_register_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/search_case_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/exceptions.dart';
@@ -85,13 +86,14 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> searchTableData(queryData) async {
+  Future<Either<Failure, SearchCaseModel>> searchTableData(String donorMobile, String caseId) async {
     var endpoint = 'search-table-data';
     try {
       var data =
-          await _dio.get(endpoint, data: queryData, queryParameters: queryData);
+          await _dio.get(endpoint, queryParameters: {'donorMobile': donorMobile, 'caseId': caseId});
       if (data.statusCode == 200) {
-        return Right(data.data);
+        var response = SearchCaseModel.fromJson(data.data);
+        return Right(response);
       } else {
         return Left(ServerFailure(
             errorMessage: data.statusMessage ?? 'Error in searchTableData'));

@@ -1,0 +1,85 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'search_case_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$SearchCaseModelImpl _$$SearchCaseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SearchCaseModelImpl(
+      caseId: (json['caseId'] as num?)?.toInt(),
+      screeningStatus: json['screeningStatus'] as String?,
+      donarBrief: json['donarBrief'] == null
+          ? null
+          : DonarBrief.fromJson(json['donarBrief'] as Map<String, dynamic>),
+      intimateDate: json['intimateDate'] == null
+          ? null
+          : DateTime.parse(json['intimateDate'] as String),
+      performerId: (json['performerId'] as num?)?.toInt(),
+      deathDate: json['deathDate'] == null
+          ? null
+          : DateTime.parse(json['deathDate'] as String),
+      bodyLocation: json['bodyLocation'] == null
+          ? null
+          : BodyLocation.fromJson(json['bodyLocation'] as Map<String, dynamic>),
+      organExtracted: (json['organExtracted'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$$SearchCaseModelImplToJson(
+        _$SearchCaseModelImpl instance) =>
+    <String, dynamic>{
+      'caseId': instance.caseId,
+      'screeningStatus': instance.screeningStatus,
+      'donarBrief': instance.donarBrief?.toJson(),
+      'intimateDate': instance.intimateDate?.toIso8601String(),
+      'performerId': instance.performerId,
+      'deathDate': instance.deathDate?.toIso8601String(),
+      'bodyLocation': instance.bodyLocation?.toJson(),
+      'organExtracted': instance.organExtracted,
+    };
+
+_$BodyLocationImpl _$$BodyLocationImplFromJson(Map<String, dynamic> json) =>
+    _$BodyLocationImpl(
+      street: json['street'] as String?,
+      city: json['city'] as String?,
+      state: json['state'] as String?,
+      zipCode: json['zipCode'] as String?,
+      country: json['country'] as String?,
+      landmark: json['landmark'] as String?,
+      village: json['village'] as String?,
+      district: json['district'] as String?,
+      latitude: json['latitude'] as String?,
+      longitude: json['longitude'] as String?,
+    );
+
+Map<String, dynamic> _$$BodyLocationImplToJson(_$BodyLocationImpl instance) =>
+    <String, dynamic>{
+      'street': instance.street,
+      'city': instance.city,
+      'state': instance.state,
+      'zipCode': instance.zipCode,
+      'country': instance.country,
+      'landmark': instance.landmark,
+      'village': instance.village,
+      'district': instance.district,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+    };
+
+_$DonarBriefImpl _$$DonarBriefImplFromJson(Map<String, dynamic> json) =>
+    _$DonarBriefImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      contact: json['contact'] as String?,
+    );
+
+Map<String, dynamic> _$$DonarBriefImplToJson(_$DonarBriefImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'contact': instance.contact,
+    };
