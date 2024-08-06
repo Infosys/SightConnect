@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class CaseInfoTile extends StatelessWidget {
             title,
             style: applyRobotoFont(
               fontSize: 12,
-              color: Colors.grey,
+              color: AppColor.grey,
             ),
           ),
         ),
@@ -26,6 +27,7 @@ class CaseInfoTile extends StatelessWidget {
             value ?? '--',
             style: applyRobotoFont(
               fontSize: 12,
+              color: AppColor.black,
             ),
           ),
         ),
