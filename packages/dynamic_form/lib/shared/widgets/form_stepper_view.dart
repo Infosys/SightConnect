@@ -106,7 +106,7 @@ class _PageWidgetState extends State<FormStepperView> {
                 stepStyle: StepStyle(
                   indexStyle: const TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                   border: Border.all(
                     color: Theme.of(context).primaryColor,
@@ -114,10 +114,7 @@ class _PageWidgetState extends State<FormStepperView> {
                   ),
                   connectorColor: Colors.black,
                   connectorThickness: 1,
-                  gradient: LinearGradient(colors: [
-                    Theme.of(context).primaryColor,
-                    Theme.of(context).primaryColor.withOpacity(0.7)
-                  ]),
+                  color: Theme.of(context).primaryColor.withOpacity(0.2),
                 ),
                 isActive: currentStep == index,
                 title: const SizedBox(),
