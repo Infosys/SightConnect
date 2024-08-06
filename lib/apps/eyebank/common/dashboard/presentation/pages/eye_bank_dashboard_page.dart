@@ -1,8 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/provider/eb_dashbord_menu_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_bottom_nav.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/profile/presentation/pages/eb_profile_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_exit.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
@@ -22,48 +20,41 @@ class EyeBankDashboardPage extends HookConsumerWidget {
         if (didPop) return;
         showDialog(context: context, builder: (context) => const AppExit());
       },
-      child: Scaffold(
-        appBar: EyeBankDashboardAppbar(
-          onProfileTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const EbProfilePage(),
-              ),
-            );
-          },
-        ),
-        body: DesktopClipper(
-          widget: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Visibility(
-                visible: !isMobile,
-                child: EyeBankDashboardSideMenu(
-                  items: menuProvider.menuItem,
-                  onSelected: (index) {
-                    menuProvider.setSelectedMenuItem(index);
-                  },
-                  initialIndex: menuProvider.selectedMenuItem,
+      child: SafeArea(
+        child: Scaffold(
+          body: DesktopClipper(
+            widget: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible: !isMobile,
+                  child: EyeBankDashboardSideMenu(
+                    items: menuProvider.menuItem,
+                    onSelected: (index) {
+                      menuProvider.setSelectedMenuItem(index);
+                    },
+                    initialIndex: menuProvider.selectedMenuItem,
+                  ),
                 ),
-              ),
-              if (!isMobile) const SizedBox(width: 8),
-              Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: menuProvider.pages[menuProvider.selectedMenuItem],
+                if (!isMobile) const SizedBox(width: 8),
+                Expanded(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: menuProvider.pages[menuProvider.selectedMenuItem],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        bottomNavigationBar: Visibility(
-          visible: isMobile,
-          child: EyeBankBottomNav(
-            items: menuProvider.menuItem,
-            onSelected: (index) {
-              menuProvider.setSelectedMenuItem(index);
-            },
-            initialIndex: menuProvider.selectedMenuItem,
+          bottomNavigationBar: Visibility(
+            visible: isMobile,
+            child: EyeBankBottomNav(
+              items: menuProvider.menuItem,
+              onSelected: (index) {
+                menuProvider.setSelectedMenuItem(index);
+              },
+              initialIndex: menuProvider.selectedMenuItem,
+            ),
           ),
         ),
       ),
