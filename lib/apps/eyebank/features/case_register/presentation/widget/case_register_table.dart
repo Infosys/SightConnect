@@ -83,9 +83,10 @@ class CaseRegisterTable extends ConsumerWidget {
                 List<TableData> filteredData = data;
                 // Apply search filter
                 if (searchQuery.isNotEmpty) {
-                  filteredData = filteredData
+                  filteredData = data
                       .where((item) => searchFunction(item, searchQuery))
                       .toList();
+                  return Future.value(filteredData);
                 }
                 // Apply status filter
                 if (selectedFilter != null && selectedFilter.isNotEmpty) {
@@ -106,7 +107,6 @@ class CaseRegisterTable extends ConsumerWidget {
                 } else {
                   filteredData = [];
                 }
-
                 return Future.value(filteredData);
               },
             );
