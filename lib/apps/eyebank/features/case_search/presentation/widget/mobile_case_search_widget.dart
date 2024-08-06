@@ -38,9 +38,12 @@ class MobileCaseSearchWidget extends StatelessWidget {
         return newItems;
       },
       itemBuilder: (context, item, index) {
-        return CaseRegisterTile(
-          item: item,
+        return InkWell(
           onTap: () => onTap(context, item),
+          child: CaseRegisterTile(
+            item: item,
+            onTap: () => onTap(context, item),
+          ),
         );
       },
       showSearch: true,

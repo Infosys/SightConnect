@@ -41,7 +41,7 @@ class EbScreeningPage extends ConsumerWidget {
                   },
                   style: TextButton.styleFrom(foregroundColor: AppColor.red),
                   label: Text(
-                    'Mark as Closed',
+                    'Reject',
                     style: applyRobotoFont(
                       fontSize: 14,
                       color: AppColor.red,
