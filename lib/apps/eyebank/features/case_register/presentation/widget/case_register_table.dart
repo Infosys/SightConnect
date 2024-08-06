@@ -75,7 +75,7 @@ class CaseRegisterTable extends ConsumerWidget {
               ],
               rowBuilder: (item) => _buildDataRow(item, context),
               filterOptions: const ['Completed', 'Pending'],
-              totalPages: (data.length / pageSize).ceil(),
+              totalPages: calculateTotalPages(data, pageSize),
               fetchData: (
                 int pageNumber,
                 String searchQuery,
@@ -123,6 +123,10 @@ class CaseRegisterTable extends ConsumerWidget {
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
         );
+  }
+
+  int calculateTotalPages(List<TableData> data, int pageSize) {
+    return (data.length / pageSize).ceil();
   }
 
   bool searchFunction(TableData item, String query) {
