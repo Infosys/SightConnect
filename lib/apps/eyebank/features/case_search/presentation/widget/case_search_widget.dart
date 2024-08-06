@@ -43,7 +43,7 @@ class CaseSearchWidget extends ConsumerWidget {
 
                   return newItems;
                 },
-                itemBuilder: (context, item, index) => _CaseRegisterTile(
+                itemBuilder: (context, item, index) => CaseRegisterTile(
                   item: item,
                 ),
                 showSearch: true,
@@ -176,11 +176,11 @@ class CaseSearchWidget extends ConsumerWidget {
   }
 }
 
-class _CaseRegisterTile extends StatelessWidget {
+class CaseRegisterTile extends StatelessWidget {
   final TableData item;
   final bool isCompact;
 
-  const _CaseRegisterTile(
+  const CaseRegisterTile(
       {Key? key, required this.item, this.isCompact = false})
       : super(key: key);
 

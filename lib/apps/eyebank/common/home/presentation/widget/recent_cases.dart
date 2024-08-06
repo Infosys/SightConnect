@@ -1,7 +1,7 @@
 
-import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/widget/case_register_table.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/pages/eb_case_search_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/case_search_widget.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
