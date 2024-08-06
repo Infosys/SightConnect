@@ -4,11 +4,11 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/modals/search_case_model.d
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 import '../../data/models/table_data.dart';
 
@@ -180,8 +180,7 @@ class CaseRegisterTile extends StatelessWidget {
   final TableData item;
   final bool isCompact;
 
-  const CaseRegisterTile(
-      {Key? key, required this.item, this.isCompact = false})
+  const CaseRegisterTile({Key? key, required this.item, this.isCompact = false})
       : super(key: key);
 
   static final SearchCaseModel caseModel = SearchCaseModel(
@@ -213,13 +212,7 @@ class CaseRegisterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isCompact) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildCompactRow(context),
-          const SizedBox(height: 15),
-        ],
-      );
+      return _buildCompactRow(context);
     }
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -228,13 +221,10 @@ class CaseRegisterTile extends StatelessWidget {
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Container(
-          height: 150, // Reduced height for more compactness
           padding: const EdgeInsets.all(12),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             _buildTopRow(context),
-            const SizedBox(height: 8),
-            _buildContactInfo(context),
             const SizedBox(height: 8),
             _buildDateInfo(context),
             const SizedBox(height: 8),
@@ -246,90 +236,88 @@ class CaseRegisterTile extends StatelessWidget {
   }
 
   Widget _buildCompactRow(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                caseModel.donarBrief!.name!,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'Case ID : ${caseModel.caseId}',
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                caseModel.screeningStatus!,
-                style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              caseModel.donarBrief!.contact!,
-              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-            ),
-            Row(
+    return ListTile(
+      onTap: () {},
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.pin_drop,
-                    size: 14, color: Theme.of(context).primaryColor),
-                const SizedBox(
-                  width: 2,
+                Row(
+                  children: [
+                    Text(
+                      caseModel.donarBrief?.name ?? "",
+                      style: applyRobotoFont(fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      caseModel.screeningStatus ?? "",
+                      style: applyRobotoFont(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
                 ),
+                const SizedBox(height: 4),
                 Text(
-                  '${caseModel.bodyLocation!.street!}, ${caseModel.bodyLocation!.city}, ${caseModel.bodyLocation!.state}',
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                  overflow: TextOverflow.ellipsis,
+                  caseModel.donarBrief!.contact!,
+                  style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
                 ),
               ],
             ),
-          ],
-        ),
-      ],
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Case ID: ${caseModel.caseId}',
+                  style: applyRobotoFont(fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildTopRow(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Text(
-            caseModel.donarBrief!.name!,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            overflow: TextOverflow.ellipsis,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                caseModel.donarBrief?.name ?? "",
+                style: applyRobotoFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                caseModel.donarBrief?.contact ?? "",
+                style: applyRobotoFont(fontSize: 12, color: AppColor.grey),
+              ),
+              Text(
+                '${caseModel.bodyLocation!.street!}, ${caseModel.bodyLocation!.city}, ${caseModel.bodyLocation!.state}',
+                style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
@@ -337,14 +325,15 @@ class CaseRegisterTile extends StatelessWidget {
           child: Text(
             'Case ID : ${caseModel.caseId}',
             style: TextStyle(
-                fontSize: 12,
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold),
+              fontSize: 10,
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(width: 8),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(8),
@@ -352,25 +341,11 @@ class CaseRegisterTile extends StatelessWidget {
           child: Text(
             caseModel.screeningStatus!,
             style: const TextStyle(
-                fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
+              fontSize: 12,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildContactInfo(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          caseModel.donarBrief!.contact!,
-          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-        ),
-        Text(
-          '${caseModel.bodyLocation!.street!}, ${caseModel.bodyLocation!.city}, ${caseModel.bodyLocation!.state}',
-          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
@@ -378,35 +353,45 @@ class CaseRegisterTile extends StatelessWidget {
 
   Widget _buildDateInfo(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(Icons.calendar_today,
-            size: 14, color: Theme.of(context).primaryColor),
+        Icon(
+          Icons.calendar_today,
+          size: 14,
+          color: Theme.of(context).primaryColor,
+        ),
         const SizedBox(width: 4),
-        Text(
-          'Death: ${DateFormat('MMM dd, yyyy').format(caseModel.deathDate!)}',
-          style: const TextStyle(fontSize: 12),
+        Flexible(
+          child: Text(
+            'Death: ${caseModel.deathDate.formateDate}',
+            style: const TextStyle(fontSize: 12),
+          ),
         ),
         const SizedBox(width: 8),
-        Text(
-          'Intimate: ${DateFormat('MMM dd, yyyy').format(caseModel.intimateDate!)}',
-          style: const TextStyle(fontSize: 12),
+        Icon(
+          Icons.calendar_today,
+          size: 14,
+          color: Theme.of(context).primaryColor,
+        ),
+        const SizedBox(width: 4),
+        Flexible(
+          child: Text(
+            'Intimate: ${caseModel.intimateDate.formateDate}',
+            style: const TextStyle(fontSize: 12),
+          ),
         ),
       ],
     );
   }
 
   Widget _buildOrganInfo(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
         Text(
           'Organs Extracted:',
-          style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor),
+          style: applyRobotoFont(fontSize: 12, color: AppColor.primary),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(width: 8),
         Wrap(
           spacing: 4,
           runSpacing: 4,
@@ -420,7 +405,7 @@ class CaseRegisterTile extends StatelessWidget {
 
   Widget _buildOrganChip(BuildContext context, String organ) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
@@ -428,7 +413,10 @@ class CaseRegisterTile extends StatelessWidget {
       ),
       child: Text(
         organ,
-        style: TextStyle(fontSize: 10, color: Theme.of(context).primaryColor),
+        style: applyFiraSansFont(
+          fontSize: 10,
+          color: Theme.of(context).primaryColor,
+        ),
       ),
     );
   }
