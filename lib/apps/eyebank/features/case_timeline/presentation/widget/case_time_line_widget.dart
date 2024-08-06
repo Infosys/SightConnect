@@ -19,9 +19,6 @@ class CaseTimeLineWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Timeline.tileBuilder(
-        physics: const BouncingScrollPhysics(
-          decelerationRate: ScrollDecelerationRate.fast,
-        ),
         theme: TimelineThemeData(
           nodePosition: 0,
           color: Colors.grey,

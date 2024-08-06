@@ -1,4 +1,7 @@
+
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/pages/eb_case_search_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/case_search_widget.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,19 @@ class RecentCases extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final newItems = List.generate(
+      1,
+      (index) => TableData(
+        eye: "Eye ${1 + index + 1}",
+        category: "Category ${1 + index + 1}",
+        date: DateTime.now(),
+        donor: "Donor ${1 + index + 1}",
+        sampleID: "Sample ID ${1 + index + 1}",
+        status: "Status ${1 + index + 1}",
+        tissue: "Tissue ${1 + index + 1}",
+      ),
+    );
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -54,9 +70,9 @@ class RecentCases extends StatelessWidget {
             itemCount: 5,
             padding: const EdgeInsets.all(0),
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text('Case $index'),
-                subtitle: const Text('Case details'),
+              return CaseRegisterTile(
+                item: newItems.first,
+                isCompact: true,
               );
             },
           ),

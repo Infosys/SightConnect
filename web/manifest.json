@@ -1,6 +1,6 @@
 {
-    "name": "eye_care_for_all",
-    "short_name": "eye_care_for_all",
+    "name": "SightConnect",
+    "short_name": "SightConnect",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
