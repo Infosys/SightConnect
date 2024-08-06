@@ -1,5 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/pages/eb_screening_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:flutter/foundation.dart';
@@ -156,8 +156,7 @@ class CaseRegisterTile extends StatelessWidget {
             final navigator = Navigator.of(context);
             navigator.push(
               MaterialPageRoute(
-                builder: (context) => EbScreeningPage(
-                  title: item.sampleID,
+                builder: (context) => EbCaseTimeLinePage(
                   caseID: item.sampleID,
                 ),
               ),

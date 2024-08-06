@@ -9,12 +9,15 @@ class CaseTimeLineWidget extends StatelessWidget {
   const CaseTimeLineWidget({
     super.key,
     required this.caseTimeLine,
+    this.onCaseSelected,
   });
+
+  final Function(dynamic)? onCaseSelected;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      padding: const EdgeInsets.all(16),
       child: Timeline.tileBuilder(
         theme: TimelineThemeData(
           nodePosition: 0,

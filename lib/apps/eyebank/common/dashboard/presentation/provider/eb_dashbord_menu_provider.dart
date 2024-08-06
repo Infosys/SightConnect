@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/dashboard/data/models/menu_item.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/page/eb_home_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/pages/eb_case_register_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,10 +23,8 @@ class EbDashboardMenuProvider extends ChangeNotifier {
   }
 
   final List<Widget> _pages = [
-    // const EbHomePage(),
-    const EbCaseTimeLinePage(
-      caseID: '1234',
-    ),
+    const EbHomePage(),
+  
     const EBCaseRegisterPage(),
     Container(),
     Container(),
