@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/pages/eb_screening_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
@@ -43,8 +42,12 @@ class CaseRegisterTable extends ConsumerWidget {
 
                   return newItems;
                 },
-                itemBuilder: (context, item, index) =>
-                    CaseRegisterTile(item: item),
+                itemBuilder: (context, item, index) {
+                  return _CaseRegisterTile(
+                    item: item,
+                    onTap: () => _onTap(context, item),
+                  );
+                },
                 showSearch: true,
                 defaultPageSize: 5,
                 filterLogic: (item, query) => searchFunction(item, query),
@@ -133,17 +136,7 @@ class CaseRegisterTable extends ConsumerWidget {
       cells: [
         DataCell(
           Text(item.sampleID),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const EbScreeningPage(
-                  title: 'Screening',
-                  caseID: '1234',
-                ),
-              ),
-            );
-          },
+          onTap: () => _onTap(context, item),
         ),
         DataCell(Text(item.date.toString())),
         DataCell(Text(item.donor)),
@@ -177,12 +170,26 @@ class CaseRegisterTable extends ConsumerWidget {
           )),
     );
   }
+
+  void _onTap(BuildContext context, TableData item) {
+    final navigator = Navigator.of(context);
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => EbCaseTimeLinePage(caseID: item.sampleID),
+      ),
+    );
+  }
 }
 
-class CaseRegisterTile extends StatelessWidget {
+class _CaseRegisterTile extends StatelessWidget {
   final TableData item;
+  final VoidCallback? onTap;
 
-  const CaseRegisterTile({Key? key, required this.item}) : super(key: key);
+  const _CaseRegisterTile({
+    Key? key,
+    required this.item,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,17 +202,7 @@ class CaseRegisterTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: ListTile(
-          onTap: () {
-            // Navigate to detail page
-            final navigator = Navigator.of(context);
-            navigator.push(
-              MaterialPageRoute(
-                builder: (context) => EbCaseTimeLinePage(
-                  caseID: item.sampleID,
-                ),
-              ),
-            );
-          },
+          onTap: onTap,
           title: Text(
             item.sampleID,
             style: const TextStyle(fontWeight: FontWeight.bold),
