@@ -28,7 +28,7 @@ class CaseTimeLineWidget extends StatelessWidget {
           contentsBuilder: (context, index) {
             final event = caseTimeLine[index];
             final status = event['status'];
-            final isCompleted = status == 'completed';
+            final isCompleted = status == 'COMPLETED';
             return Column(
               children: [
                 Padding(
@@ -39,20 +39,20 @@ class CaseTimeLineWidget extends StatelessWidget {
                         event['serviceRequestCode'] ?? 'Unknown',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       const Spacer(),
-                      // Chip(
-                      //   label: Text(
-                      //     status ?? 'Unknown',
-                      //     style: TextStyle(
-                      //         color: isCompleted ? Colors.white : Colors.black,
-                      //         fontSize: 12),
-                      //   ),
-                      //   backgroundColor:
-                      //       isCompleted ? Colors.green : Colors.red,
-                      // ),
+                      Chip(
+                        label: Text(
+                          status ?? 'Unknown',
+                          style: TextStyle(
+                              color: isCompleted ? Colors.white : Colors.black,
+                              fontSize: 12),
+                        ),
+                        backgroundColor:
+                            isCompleted ? Colors.green : Colors.red,
+                      ),
                     ],
                   ),
                 ),
