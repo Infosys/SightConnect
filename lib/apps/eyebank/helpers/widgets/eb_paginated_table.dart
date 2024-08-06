@@ -8,9 +8,9 @@ class EBPaginatedTable<T> extends StatefulWidget {
   final List<String> headers;
   final DataRow Function(T) rowBuilder;
   final List<String> filterOptions;
+  final int totalPages;
   final Future<List<T>> Function(
     int pageNumber,
-    int pageSize,
     String searchQuery,
     String? selectedFilter,
   ) fetchData;
@@ -20,6 +20,7 @@ class EBPaginatedTable<T> extends StatefulWidget {
     required this.headers,
     required this.rowBuilder,
     required this.filterOptions,
+    required this.totalPages,
     required this.fetchData,
   }) : super(key: key);
 
@@ -32,7 +33,6 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   String searchQuery = '';
   String? selectedFilter;
   int currentPage = 0;
-  final int rowsPerPage = 10;
   Timer? _debounce;
   bool isLoading = false;
 
@@ -47,6 +47,7 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
     _debounce = Timer(const Duration(milliseconds: 500), () {
       setState(() {
         searchQuery = query;
+        selectedFilter = null;
         currentPage = 0;
         _fetchData();
       });
@@ -59,7 +60,6 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
     });
     data = await widget.fetchData(
       currentPage,
-      rowsPerPage,
       searchQuery,
       selectedFilter,
     );
@@ -78,17 +78,18 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
           child: isLoading
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       columns: widget.headers
                           .map((header) => DataColumn(label: Text(header)))
                           .toList(),
-                      rows: data.map((item) => widget.rowBuilder(item)).toList(),
+                      rows:
+                          data.map((item) => widget.rowBuilder(item)).toList(),
                     ),
                   ),
-              ),
+                ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,13 +103,15 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
                       })
                   : null,
             ),
-            Text('Page ${currentPage + 1}'),
+            Text('Page ${currentPage + 1} of ${widget.totalPages}'),
             IconButton(
               icon: const Icon(Icons.chevron_right),
-              onPressed: () => setState(() {
-                  currentPage++;
-                  _fetchData();
-                }),
+              onPressed: currentPage < widget.totalPages - 1
+                  ? () => setState(() {
+                        currentPage++;
+                        _fetchData();
+                      })
+                  : null,
             ),
           ],
         ),
@@ -155,12 +158,13 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
     );
   }
 
-    Widget _buildSearchBar(BuildContext context) {
+  Widget _buildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 22.0, horizontal: 20),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 22.0, horizontal: 20),
           hintText: 'Search...',
           prefixIcon: const Padding(
             padding: EdgeInsets.only(left: 8, right: 8),

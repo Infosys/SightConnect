@@ -16,6 +16,7 @@ class CaseRegisterTable extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const pageSize = 10;
     return ref.watch(ebCaseTableProvider).when(
           data: (data) {
             if (!kIsWeb) {
@@ -74,9 +75,9 @@ class CaseRegisterTable extends ConsumerWidget {
               ],
               rowBuilder: (item) => _buildDataRow(item, context),
               filterOptions: const ['Completed', 'Pending'],
+              totalPages: (data.length / pageSize).ceil(),
               fetchData: (
                 int pageNumber,
-                int pageSize,
                 String searchQuery,
                 String? selectedFilter,
               ) {
