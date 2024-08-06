@@ -1,8 +1,8 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/provider/eb_case_search_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/web_case_search_widget.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/search_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -52,54 +52,13 @@ class CaseSearchWidget extends ConsumerWidget {
               );
             }
 
-            return EBPaginatedTable<TableData>(
-              headers: const [
-                'Sample ID',
-                'Date',
-                'Donor',
-                'Tissue',
-                'Eye',
-                'Category',
-                'Status',
-              ],
-              rowBuilder: (item) => _buildDataRow(item, context),
-              filterOptions: const ['Completed', 'Pending'],
-              totalPages: calculateTotalPages(data, pageSize),
-              fetchData: (
-                int pageNumber,
-                String searchQuery,
-                String? selectedFilter,
-              ) {
-                List<TableData> filteredData = data;
-                // Apply search filter
-                if (searchQuery.isNotEmpty) {
-                  filteredData = data
-                      .where((item) => searchFunction(item, searchQuery))
-                      .toList();
-                  return Future.value(filteredData);
-                }
-                // Apply status filter
-                if (selectedFilter != null && selectedFilter.isNotEmpty) {
-                  filteredData = filteredData
-                      .where((item) => item.status.contains(selectedFilter))
-                      .toList();
-                }
-                // Apply pagination
-                int startIndex = pageNumber * pageSize;
-                int endIndex = startIndex + pageSize;
-                if (startIndex < filteredData.length) {
-                  filteredData = filteredData.sublist(
-                    startIndex,
-                    endIndex > filteredData.length
-                        ? filteredData.length
-                        : endIndex,
-                  );
-                } else {
-                  filteredData = [];
-                }
-                return Future.value(filteredData);
-              },
+            return WebCaseSearchWidget(
+              data: data,
+              pageSize: pageSize,
+              rowBuilder: _buildDataRow,
+              searchFunction: searchFunction,
             );
+
           },
           error: (error, _) => Center(
             child: TextButton.icon(
