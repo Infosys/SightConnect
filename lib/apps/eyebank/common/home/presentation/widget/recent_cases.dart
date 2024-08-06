@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/pages/eb_case_search_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,9 @@ class RecentCases extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
       ),
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           Row(
@@ -61,8 +61,7 @@ class RecentCases extends StatelessWidget {
               ),
             ],
           ),
-
-          // Recent cases list
+          const SizedBox(height: 8),
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -72,6 +71,15 @@ class RecentCases extends StatelessWidget {
               return CaseRegisterTile(
                 item: newItems.first,
                 isCompact: true,
+                onTap: () {
+                  final navigator = Navigator.of(context);
+                  navigator.push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const EbCaseTimeLinePage(caseID: "1234"),
+                    ),
+                  );
+                },
               );
             },
           ),

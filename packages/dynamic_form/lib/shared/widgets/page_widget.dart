@@ -28,20 +28,19 @@ class _PageWidgetState extends State<PageWidget> {
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: widget.elements.map((panel) {
         if (panel.elements.isEmpty) {
           return Container();
         }
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AppCard(
-            title: panel.name,
-            child: Wrap(
-              runSpacing: 16,
-              alignment: WrapAlignment.start,
-              children: _buildFields(panel.elements, widget.formKey),
-            ),
+        return AppCard(
+          title: panel.name,
+          marginBottom: 16,
+          child: Wrap(
+            runSpacing: 16,
+            alignment: WrapAlignment.start,
+            children: _buildFields(panel.elements, widget.formKey),
           ),
         );
       }).toList(),

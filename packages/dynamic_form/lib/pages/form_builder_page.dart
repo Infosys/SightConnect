@@ -21,17 +21,17 @@ class FormBuilderPage extends StatelessWidget {
   final Function(Map<String, dynamic>?)? onSubmit;
   final FormLayoutType layoutType;
 
-  /// The key for the form.
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        automaticallyImplyLeading: false,
-      ),
-      body: SingleChildScrollView(
+      // appBar: AppBar(
+      //   title: Text(title),
+      //   automaticallyImplyLeading: false,
+      // ),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child: FormBuilder(
           key: formKey,
           child: _getFormLayout(),

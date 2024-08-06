@@ -9,7 +9,7 @@ class EbCaseSearchPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Case Register'),
+          title: const Text('Case Records'),
         ),
         body: const CaseSearchWidget(),
       ),

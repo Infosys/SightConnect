@@ -17,7 +17,7 @@ class CaseTimeLineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Timeline.tileBuilder(
         theme: TimelineThemeData(
           nodePosition: 0,
@@ -67,7 +67,7 @@ class CaseTimeLineWidget extends StatelessWidget {
 
   Widget _buildHeader(dynamic event, int index) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Row(
         children: [
           Text(
@@ -99,16 +99,25 @@ class CaseTimeLineWidget extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 2.0,
+                spreadRadius: 0.0,
+                offset: Offset(2.0, 2.0),
+              ),
+            ],
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 8),
                 CaseInfoTile(
                   title: 'Description',
                   value: event['description'],

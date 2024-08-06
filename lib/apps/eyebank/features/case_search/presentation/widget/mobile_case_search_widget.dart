@@ -40,14 +40,17 @@ class MobileCaseSearchWidget extends StatelessWidget {
       itemBuilder: (context, item, index) {
         return InkWell(
           onTap: () => onTap(context, item),
-          child: CaseRegisterTile(
-            item: item,
-            onTap: () => onTap(context, item),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: CaseRegisterTile(
+              item: item,
+              onTap: () => onTap(context, item),
+            ),
           ),
         );
       },
       showSearch: true,
-      defaultPageSize: 5,
+      defaultPageSize: 10,
       filterLogic: (item, query) => searchFunction(item, query),
     );
   }
