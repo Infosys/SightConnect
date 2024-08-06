@@ -29,13 +29,11 @@ class CaseTimeLineWidget extends StatelessWidget {
             final event = caseTimeLine[index];
             final status = event['status'];
             final isCompleted = status == 'completed';
-            return Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
                     children: [
                       Text(
                         event['serviceRequestCode'] ?? 'Unknown',
@@ -44,14 +42,38 @@ class CaseTimeLineWidget extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(event['description'] ?? 'No description'),
-                      const SizedBox(height: 8),
-                      Text(event['timestamp'] ?? 'No timestamp'),
+                      const Spacer(),
+                      // Chip(
+                      //   label: Text(
+                      //     status ?? 'Unknown',
+                      //     style: TextStyle(
+                      //         color: isCompleted ? Colors.white : Colors.black,
+                      //         fontSize: 12),
+                      //   ),
+                      //   backgroundColor:
+                      //       isCompleted ? Colors.green : Colors.red,
+                      // ),
                     ],
                   ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 8),
+                          Text(event['description'] ?? 'No description'),
+                          const SizedBox(height: 8),
+                          Text(event['timestamp'] ?? 'No timestamp'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             );
           },
           indicatorStyle: IndicatorStyle.dot,
