@@ -71,26 +71,34 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildSearchBar(context),
         _buildFilterChips(context),
-        Expanded(
-          child: isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      columns: widget.headers
-                          .map((header) => DataColumn(label: Text(header)))
-                          .toList(),
-                      rows:
-                          data.map((item) => widget.rowBuilder(item)).toList(),
+        () {
+          if (isLoading) {
+            return const LinearProgressIndicator();
+          } else {
+            return Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    decoration: BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
+                    columns: widget.headers
+                        .map((header) => DataColumn(label: Text(header)))
+                        .toList(),
+                    rows: data.map((item) => widget.rowBuilder(item)).toList(),
                   ),
                 ),
-        ),
+              ),
+            );
+          }
+        }(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -8,6 +8,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/profile/presentation/pages/
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EbHomePage extends StatefulWidget {
@@ -61,6 +62,8 @@ class _EbHomePageState extends State<EbHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const EbStatisticsTopCard(),
+            if (kIsWeb) const SizedBox(height: AppSize.km),
+            if (kIsWeb) const AddCaseButton(),
             const SizedBox(height: AppSize.km),
             const RecentCases(),
             const SizedBox(height: AppSize.km),
@@ -88,8 +91,7 @@ class _EbHomePageState extends State<EbHomePage> {
           ],
         ),
       ),
-      floatingActionButton:
-          Responsive.isMobile(context) ? const AddCaseButton() : null,
+      floatingActionButton: !kIsWeb ? const AddCaseButton() : null,
     );
   }
 }
