@@ -25,12 +25,12 @@ class AddCaseButton extends ConsumerWidget {
       return FloatingActionButton.extended(
         onPressed: () => _showFormSheet(context, json),
         icon: const Icon(Icons.add),
-        label: _buildButtonLabel('Create New Case'),
+        label: _buildButtonLabel('Create Case'),
       );
     }
     return _CreateNewCaseSection(
       onPressed: () => _showFormSheet(context, json),
-      buttonTxt: 'Create New Case',
+      buttonTxt: 'Create Case',
     );
   }
 
