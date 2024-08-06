@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/provider/eb_case_search_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/mobile_case_search_widget.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/web_case_search_widget.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
@@ -19,88 +19,19 @@ class CaseSearchWidget extends ConsumerWidget {
     return ref.watch(ebCaseTableProvider).when(
           data: (data) {
             if (!kIsWeb) {
-              return EbInfiniteScrollView<TableData>(
-                fetchPageData: (pageKey, pageSize) async {
-                  final startIndex = pageKey * pageSize;
-                  // Generate dummy data
-                  final newItems = List.generate(
-                    pageSize,
-                    (index) => TableData(
-                      eye: "Eye ${startIndex + index + 1}",
-                      category: "Category ${startIndex + index + 1}",
-                      date: DateTime.now(),
-                      donor: "Donor ${startIndex + index + 1}",
-                      sampleID: "Sample ID ${startIndex + index + 1}",
-                      status: "Status ${startIndex + index + 1}",
-                      tissue: "Tissue ${startIndex + index + 1}",
-                    ),
-                  );
-
-                  // Simulate network delay
-                  await Future.delayed(const Duration(seconds: 2));
-
-                  return newItems;
-                },
-                itemBuilder: (context, item, index) {
-                  return _CaseRegisterTile(
-                    item: item,
-                    onTap: () => _onTap(context, item),
-                  );
-                },
-                showSearch: true,
-                defaultPageSize: 5,
-                filterLogic: (item, query) => searchFunction(item, query),
+              return MobileCaseSearchWidget(
+                onTap: _onTap,
+                searchFunction: searchFunction,
               );
             }
 
-            return EBPaginatedTable<TableData>(
-              headers: const [
-                'Sample ID',
-                'Date',
-                'Donor',
-                'Tissue',
-                'Eye',
-                'Category',
-                'Status',
-              ],
-              rowBuilder: (item) => _buildDataRow(item, context),
-              filterOptions: const ['Completed', 'Pending'],
-              totalPages: calculateTotalPages(data, pageSize),
-              fetchData: (
-                int pageNumber,
-                String searchQuery,
-                String? selectedFilter,
-              ) {
-                List<TableData> filteredData = data;
-                // Apply search filter
-                if (searchQuery.isNotEmpty) {
-                  filteredData = data
-                      .where((item) => searchFunction(item, searchQuery))
-                      .toList();
-                  return Future.value(filteredData);
-                }
-                // Apply status filter
-                if (selectedFilter != null && selectedFilter.isNotEmpty) {
-                  filteredData = filteredData
-                      .where((item) => item.status.contains(selectedFilter))
-                      .toList();
-                }
-                // Apply pagination
-                int startIndex = pageNumber * pageSize;
-                int endIndex = startIndex + pageSize;
-                if (startIndex < filteredData.length) {
-                  filteredData = filteredData.sublist(
-                    startIndex,
-                    endIndex > filteredData.length
-                        ? filteredData.length
-                        : endIndex,
-                  );
-                } else {
-                  filteredData = [];
-                }
-                return Future.value(filteredData);
-              },
+            return WebCaseSearchWidget(
+              data: data,
+              pageSize: pageSize,
+              rowBuilder: _buildDataRow,
+              searchFunction: searchFunction,
             );
+
           },
           error: (error, _) => Center(
             child: TextButton.icon(
