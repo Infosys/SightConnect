@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,7 +16,9 @@ class AddCaseButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebCaseCreationProvider).when(
           data: (json) => _buildContent(context, json),
-          loading: () => const CircularProgressIndicator(),
+          loading: () => kIsWeb
+              ? const LinearProgressIndicator()
+              : const CircularProgressIndicator(),
           error: (error, stackTrace) => _buildErrorContent(context, ref, error),
         );
   }

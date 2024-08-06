@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/case_time_line_widget.dart';
+import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,8 +19,10 @@ class EbCaseTimeLinePage extends ConsumerWidget {
       ),
       body: ref.watch(ebCaseTimeLineProvider(caseID)).when(
             data: (data) {
-              return CaseTimeLineWidget(
-                caseTimeLine: data,
+              return DesktopClipper(
+                widget: CaseTimeLineWidget(
+                  caseTimeLine: data,
+                ),
               );
             },
             loading: () => const Center(
