@@ -1,8 +1,10 @@
+import 'package:eye_care_for_all/apps/eyebank/common/dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/add_case_button.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/eb_analytics_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/eb_cases_closed_analytics.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/eb_statistics_top_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/recent_cases.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/profile/presentation/pages/eb_profile_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -44,6 +46,15 @@ class _EbHomePageState extends State<EbHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: EyeBankDashboardAppbar(
+        onProfileTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const EbProfilePage(),
+            ),
+          );
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

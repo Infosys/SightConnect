@@ -6,12 +6,12 @@ class EBCaseRegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Case Register'),
-        // ),
-        body: CaseRegisterTable(),
+        appBar: AppBar(
+          title: const Text('Case Register'),
+        ),
+        body: const CaseRegisterTable(),
       ),
     );
   }

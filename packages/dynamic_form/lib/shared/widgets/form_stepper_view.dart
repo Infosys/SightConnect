@@ -57,6 +57,9 @@ class _PageWidgetState extends State<FormStepperView> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(100, 40),
+                      ),
                       onPressed: () {
                         if (currentStep < widget.pages.length - 1) {
                           setState(() {
@@ -71,6 +74,9 @@ class _PageWidgetState extends State<FormStepperView> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(100, 40),
+                      ),
                       onPressed: () {
                         if (currentStep > 0) {
                           setState(() {

@@ -92,7 +92,7 @@ class ImagePickerContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(field.name),
+            Text(field.name, textAlign: TextAlign.center),
             const SizedBox(height: 16.0),
             ImageDisplayGrid(
               images: images,
