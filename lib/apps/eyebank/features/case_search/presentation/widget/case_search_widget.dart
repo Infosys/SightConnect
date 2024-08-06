@@ -1,7 +1,10 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/provider/eb_case_search_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/search_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,32 +12,12 @@ import 'package:intl/intl.dart';
 
 import '../../data/models/table_data.dart';
 
-class CaseRegisterTable extends ConsumerWidget {
-  const CaseRegisterTable({Key? key}) : super(key: key);
-
-  bool searchFunction(TableData item, String query) {
-    return item.sampleID.contains(query) ||
-        item.donor.contains(query) ||
-        item.tissue.contains(query) ||
-        item.eye.contains(query) ||
-        item.category.contains(query) ||
-        item.status.contains(query);
-  }
-
-  DataRow _buildDataRow(TableData item, BuildContext context) {
-    return DataRow(cells: [
-      DataCell(Text(item.sampleID)),
-      DataCell(Text(item.date.toIso8601String())),
-      DataCell(Text(item.donor)),
-      DataCell(Text(item.tissue)),
-      DataCell(Text(item.eye)),
-      DataCell(Text(item.category)),
-      DataCell(Text(item.status)),
-    ]);
-  }
+class CaseSearchWidget extends ConsumerWidget {
+  const CaseSearchWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const pageSize = 10;
     return ref.watch(ebCaseTableProvider).when(
           data: (data) {
             if (!kIsWeb) {
@@ -60,7 +43,7 @@ class CaseRegisterTable extends ConsumerWidget {
 
                   return newItems;
                 },
-                itemBuilder: (context, item, index) => CaseRegisterTile(
+                itemBuilder: (context, item, index) => _CaseRegisterTile(
                   item: item,
                 ),
                 showSearch: true,
@@ -81,44 +64,39 @@ class CaseRegisterTable extends ConsumerWidget {
               ],
               rowBuilder: (item) => _buildDataRow(item, context),
               filterOptions: const ['Completed', 'Pending'],
-              filterMatcher: (item, filter) => item.status.contains(filter),
-              searchMatcher: searchFunction,
-              fetchData: (int pageNumber, int pageSize, String searchQuery,
-                  String? selectedFilter) {
+              totalPages: calculateTotalPages(data, pageSize),
+              fetchData: (
+                int pageNumber,
+                String searchQuery,
+                String? selectedFilter,
+              ) {
                 List<TableData> filteredData = data;
-
                 // Apply search filter
                 if (searchQuery.isNotEmpty) {
-                  filteredData = filteredData.where((item) {
-                    return item.sampleID.contains(searchQuery) ||
-                        item.donor.contains(searchQuery) ||
-                        item.tissue.contains(searchQuery) ||
-                        item.eye.contains(searchQuery) ||
-                        item.category.contains(searchQuery) ||
-                        item.status.contains(searchQuery);
-                  }).toList();
+                  filteredData = data
+                      .where((item) => searchFunction(item, searchQuery))
+                      .toList();
+                  return Future.value(filteredData);
                 }
-
                 // Apply status filter
                 if (selectedFilter != null && selectedFilter.isNotEmpty) {
                   filteredData = filteredData
                       .where((item) => item.status.contains(selectedFilter))
                       .toList();
                 }
-
                 // Apply pagination
                 int startIndex = pageNumber * pageSize;
                 int endIndex = startIndex + pageSize;
                 if (startIndex < filteredData.length) {
                   filteredData = filteredData.sublist(
-                      startIndex,
-                      endIndex > filteredData.length
-                          ? filteredData.length
-                          : endIndex);
+                    startIndex,
+                    endIndex > filteredData.length
+                        ? filteredData.length
+                        : endIndex,
+                  );
                 } else {
                   filteredData = [];
                 }
-
                 return Future.value(filteredData);
               },
             );
@@ -135,13 +113,75 @@ class CaseRegisterTable extends ConsumerWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
         );
   }
+
+  int calculateTotalPages(List<TableData> data, int pageSize) {
+    return (data.length / pageSize).ceil();
+  }
+
+  bool searchFunction(TableData item, String query) {
+    final lowerCaseQuery = query.toLowerCase();
+    return item.sampleID.toLowerCase().contains(lowerCaseQuery) ||
+        item.date.toString().toLowerCase().contains(lowerCaseQuery) ||
+        item.donor.toLowerCase().contains(lowerCaseQuery) ||
+        item.tissue.toLowerCase().contains(lowerCaseQuery) ||
+        item.eye.toLowerCase().contains(lowerCaseQuery) ||
+        item.category.toLowerCase().contains(lowerCaseQuery) ||
+        item.status.toLowerCase().contains(lowerCaseQuery);
+  }
+
+  DataRow _buildDataRow(TableData item, BuildContext context) {
+    return DataRow(
+      cells: [
+        DataCell(
+          Text(item.sampleID),
+          onTap: () => _onTap(context, item),
+        ),
+        DataCell(Text(item.date.toString())),
+        DataCell(Text(item.donor)),
+        DataCell(Text(item.tissue)),
+        DataCell(Text(item.eye)),
+        DataCell(Text(item.category)),
+        DataCell(_buildStatusCell(item, context)),
+      ],
+    );
+  }
+
+  Widget _buildStatusCell(TableData item, BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 8.0,
+      ),
+      decoration: BoxDecoration(
+        color: item.status.toLowerCase() == 'completed'
+            ? AppColor.lightGreen
+            : AppColor.lightRed,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Text(item.status,
+          style: applyRobotoFont(
+            color: Colors.black,
+            fontSize: 12,
+          )),
+    );
+  }
+
+  void _onTap(BuildContext context, TableData item) {
+    final navigator = Navigator.of(context);
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => EbCaseTimeLinePage(caseID: item.sampleID),
+      ),
+    );
+  }
 }
 
-class CaseRegisterTile extends StatelessWidget {
+class _CaseRegisterTile extends StatelessWidget {
   final TableData item;
   final bool isCompact;
 
-  const CaseRegisterTile({Key? key, required this.item, this.isCompact = false})
+  const _CaseRegisterTile(
+      {Key? key, required this.item, this.isCompact = false})
       : super(key: key);
 
   static final SearchCaseModel caseModel = SearchCaseModel(
