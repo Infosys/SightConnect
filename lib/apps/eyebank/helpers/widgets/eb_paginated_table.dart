@@ -136,11 +136,13 @@ class EBPaginatedTableState<T> extends State<EBPaginatedTable<T>> {
             label: Text(filter),
             selected: selectedFilter == filter,
             onSelected: (selected) {
-              setState(() {
-                selectedFilter = selected ? filter : null;
-                currentPage = 0;
-                _fetchData();
-              });
+              if (searchQuery.isEmpty) {
+                setState(() {
+                  selectedFilter = selected ? filter : null;
+                  currentPage = 0;
+                  _fetchData();
+                });
+              }
             },
             selectedColor: selectedFilter == filter
                 ? AppColor.primary
