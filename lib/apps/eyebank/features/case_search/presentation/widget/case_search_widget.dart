@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_register/presentation/provider/eb_case_register_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/provider/eb_case_search_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
@@ -11,8 +11,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/models/table_data.dart';
 
-class CaseRegisterTable extends ConsumerWidget {
-  const CaseRegisterTable({Key? key}) : super(key: key);
+class CaseSearchWidget extends ConsumerWidget {
+  const CaseSearchWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
