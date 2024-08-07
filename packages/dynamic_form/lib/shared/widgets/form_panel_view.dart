@@ -18,40 +18,62 @@ class FormPanelView extends StatefulWidget {
   final VoidCallback? onSubmit;
 
   @override
-  State<FormPanelView> createState() => _PageWidgetState();
+  State<FormPanelView> createState() => _FormPanelViewState();
 }
 
-class _PageWidgetState extends State<FormPanelView> {
+class _FormPanelViewState extends State<FormPanelView> {
   @override
   Widget build(BuildContext context) {
     if (widget.pages.isEmpty) {
       return Container();
     }
 
-    return Column(children: [
-      ...widget.pages.map((panel) {
-        if (panel.elements.isEmpty) {
-          return Container();
-        }
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ExpansionTile(
-            initiallyExpanded: panel.name == widget.pages.first.name,
-            title: Text(panel.name),
-            children: [
-              PageWidget(
-                elements: panel.elements,
-                formKey: widget.formKey,
-              )
-            ],
+    if (widget.pages.length == 1) {
+      final panel = widget.pages.first;
+      if (panel.elements.isEmpty) {
+        return Container();
+      }
+      return Column(
+        children: [
+          PageWidget(
+            elements: panel.elements,
+            formKey: widget.formKey,
           ),
-        );
-      }),
-      SubmitBtn(
-        key: widget.key,
-        onPressed: widget.onSubmit,
-      ),
-      const SizedBox(height: 100),
-    ]);
+          SubmitBtn(
+            key: widget.key,
+            onPressed: widget.onSubmit,
+          ),
+          const SizedBox(height: 100),
+        ],
+      );
+    }
+
+    return Column(
+      children: [
+        ...widget.pages.map((panel) {
+          if (panel.elements.isEmpty) {
+            return Container();
+          }
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ExpansionTile(
+              initiallyExpanded: panel.name == widget.pages.first.name,
+              title: Text(panel.name),
+              children: [
+                PageWidget(
+                  elements: panel.elements,
+                  formKey: widget.formKey,
+                )
+              ],
+            ),
+          );
+        }),
+        SubmitBtn(
+          key: widget.key,
+          onPressed: widget.onSubmit,
+        ),
+        const SizedBox(height: 100),
+      ],
+    );
   }
 }
