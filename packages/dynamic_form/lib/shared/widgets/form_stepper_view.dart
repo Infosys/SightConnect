@@ -120,7 +120,6 @@ class _PageWidgetState extends State<FormStepperView> {
                 ),
                 isActive: currentStep == index,
                 title: const SizedBox(),
-                label: Text(panel.name, style: const TextStyle(fontSize: 12)),
                 content: PageWidget(
                   elements: panel.elements,
                   formKey: widget.formKey,
