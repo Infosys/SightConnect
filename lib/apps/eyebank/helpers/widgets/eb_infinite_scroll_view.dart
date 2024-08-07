@@ -82,12 +82,14 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return CustomScrollView(
+      slivers: [
         if (widget.showSearch)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            snap: true,
+            title: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 labelText: 'Search',
@@ -98,54 +100,50 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                     _onSearchChanged();
                   },
                 ),
-                prefixIconConstraints: const BoxConstraints(minWidth: 40),
                 border: const OutlineInputBorder(),
               ),
               onChanged: (value) => _onSearchChanged(),
             ),
           ),
-        Expanded(
-          child: PagedListView<int, T>(
-            pagingController: _pagingController,
-            builderDelegate: PagedChildBuilderDelegate<T>(
-              itemBuilder: widget.itemBuilder,
-              firstPageErrorIndicatorBuilder: (context) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Error loading data'),
-                    ElevatedButton(
-                      onPressed: () => _pagingController.refresh(),
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
+        PagedSliverList<int, T>(
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate<T>(
+            itemBuilder: widget.itemBuilder,
+            firstPageErrorIndicatorBuilder: (context) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Error loading data'),
+                  ElevatedButton(
+                    onPressed: () => _pagingController.refresh(),
+                    child: const Text('Retry'),
+                  ),
+                ],
               ),
-              firstPageProgressIndicatorBuilder: (context) => const Center(
-                child: CircularProgressIndicator(),
+            ),
+            firstPageProgressIndicatorBuilder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            newPageErrorIndicatorBuilder: (context) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Error loading data'),
+                  ElevatedButton(
+                    onPressed: () => _pagingController.retryLastFailedRequest(),
+                    child: const Text('Retry'),
+                  ),
+                ],
               ),
-              newPageErrorIndicatorBuilder: (context) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Error loading data'),
-                    ElevatedButton(
-                      onPressed: () =>
-                          _pagingController.retryLastFailedRequest(),
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
-              ),
-              newPageProgressIndicatorBuilder: (context) => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              noItemsFoundIndicatorBuilder: (context) => const Center(
-                child: Text('No items found'),
-              ),
-              noMoreItemsIndicatorBuilder: (context) => const Center(
-                child: Text('No more items'),
-              ),
+            ),
+            newPageProgressIndicatorBuilder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            noItemsFoundIndicatorBuilder: (context) => const Center(
+              child: Text('No items found'),
+            ),
+            noMoreItemsIndicatorBuilder: (context) => const Center(
+              child: Text('No more items'),
             ),
           ),
         ),

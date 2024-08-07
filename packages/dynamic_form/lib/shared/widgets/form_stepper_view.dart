@@ -104,8 +104,8 @@ class _PageWidgetState extends State<FormStepperView> {
               final panel = entry.value;
               return Step(
                 stepStyle: StepStyle(
-                  indexStyle: const TextStyle(
-                    color: Colors.black,
+                  indexStyle: TextStyle(
+                    color: currentStep == index ? Colors.white : Colors.black,
                     fontSize: 14,
                   ),
                   border: Border.all(
@@ -114,7 +114,9 @@ class _PageWidgetState extends State<FormStepperView> {
                   ),
                   connectorColor: Colors.black,
                   connectorThickness: 1,
-                  color: Theme.of(context).primaryColor.withOpacity(0.2),
+                  color: currentStep == index
+                      ? Theme.of(context).primaryColor
+                      : Colors.white,
                 ),
                 isActive: currentStep == index,
                 title: const SizedBox(),
