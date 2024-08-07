@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -84,15 +83,14 @@ class AppTheme extends StateNotifier<ThemeMode> {
           textStyle: applyRobotoFont(
             fontSize: 14,
           ),
-          minimumSize: const Size(60, 40),
-          padding: !kIsWeb
+          padding: Responsive.isMobile(context)
               ? const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 18,
+                  vertical: 14,
+                  horizontal: 20,
                 )
               : const EdgeInsets.symmetric(
-                  horizontal: AppSize.kl + 4,
-                  vertical: AppSize.kl - 2,
+                  horizontal: AppSize.kl,
+                  vertical: AppSize.km,
                 ),
         ),
       ),
@@ -104,15 +102,14 @@ class AppTheme extends StateNotifier<ThemeMode> {
           textStyle: applyRobotoFont(
             fontSize: 14,
           ),
-          minimumSize: const Size(60, 40),
-          padding: !kIsWeb
+          padding: Responsive.isMobile(context)
               ? const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 18,
+                  vertical: 14,
+                  horizontal: 20,
                 )
               : const EdgeInsets.symmetric(
-                  horizontal: AppSize.kl + 4,
-                  vertical: AppSize.kl - 2,
+                  horizontal: AppSize.kl,
+                  vertical: AppSize.km,
                 ),
         ),
       ),
