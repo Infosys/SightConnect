@@ -1,6 +1,7 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/provider/eb_screening_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/case_close_sheet.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_exit_dialog.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -27,6 +28,12 @@ class EbScreeningPage extends ConsumerWidget {
                 data: (json) {
                   return DynamicFormPage(
                     json: json,
+                    onPopInvoked: () {
+                      showFormExitDialog(
+                        context,
+                        onSave: () {},
+                      );
+                    },
                     actions: [
                       TextButton.icon(
                         onPressed: () {

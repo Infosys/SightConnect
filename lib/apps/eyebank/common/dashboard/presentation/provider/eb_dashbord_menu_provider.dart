@@ -32,8 +32,8 @@ class EbDashboardMenuProvider extends ChangeNotifier {
   final _menuItem = [
     MenuItem(
       id: 0,
-      title: "Dashboard",
-      icon: FontAwesomeIcons.gauge,
+      title: "Home",
+      icon: FontAwesomeIcons.house,
     ),
     MenuItem(
       id: 1,

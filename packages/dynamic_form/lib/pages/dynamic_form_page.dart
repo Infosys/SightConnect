@@ -47,7 +47,7 @@ class DynamicFormPage extends StatelessWidget {
           final FormLayoutType formLayout =
               snapshot.data?.formLayoutType ?? FormLayoutType.PANEL;
           return PopScope(
-            canPop: onPopInvoked != null,
+            canPop: onPopInvoked == null,
             onPopInvoked: (value) {
               if (value) {
                 return;
@@ -63,7 +63,11 @@ class DynamicFormPage extends StatelessWidget {
                 leading: IconButton(
                   icon: Icon(backButtonIcon),
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (onPopInvoked != null) {
+                      onPopInvoked?.call();
+                    } else {
+                      Navigator.pop(context);
+                    }
                   },
                 ),
               ),

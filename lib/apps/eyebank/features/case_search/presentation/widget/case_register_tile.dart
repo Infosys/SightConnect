@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/search_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/models/search_case_model.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
