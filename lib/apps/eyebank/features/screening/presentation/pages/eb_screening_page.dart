@@ -22,41 +22,29 @@ class EbScreeningPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(65),
-          child: AppBar(
-            title: Row(
-              children: [
-                Text(
-                  "Case ID: $caseID",
-                  style: applyRobotoFont(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const Spacer(),
-                TextButton.icon(
-                  onPressed: () {
-                    showCustomWoltSheet(context, const CaseCloseSheet());
-                  },
-                  style: TextButton.styleFrom(foregroundColor: AppColor.red),
-                  label: Text(
-                    'Reject',
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.red,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         body: DesktopClipper(
           widget: ref.watch(ebScreeningProvider).when(
                 data: (json) {
-                  return DynamicFormPage(json: json);
+                  return DynamicFormPage(
+                    json: json,
+                    actions: [
+                      TextButton.icon(
+                        onPressed: () {
+                          showCustomWoltSheet(context, const CaseCloseSheet());
+                        },
+                        style:
+                            TextButton.styleFrom(foregroundColor: AppColor.red),
+                        label: Text(
+                          'Reject',
+                          style: applyRobotoFont(
+                            fontSize: 14,
+                            color: AppColor.red,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                 },
                 loading: () => const Center(
                   child: CircularProgressIndicator(),

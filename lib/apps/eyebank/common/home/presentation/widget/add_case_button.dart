@@ -55,9 +55,10 @@ class AddCaseButton extends ConsumerWidget {
   void _showFormSheet(BuildContext context, dynamic json) {
     showCustomWoltSheet(
       context,
-      Padding(
-          padding: const EdgeInsets.only(top: 32),
-          child: DynamicFormPage(json: json)),
+      DynamicFormPage(
+        json: json,
+        backButtonIcon: Icons.close,
+      ),
     );
   }
 
