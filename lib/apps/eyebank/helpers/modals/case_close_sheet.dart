@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -13,60 +14,64 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            'Close Case',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Are you sure you want to close this case?',
-            style: TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _reasonController,
-            decoration: const InputDecoration(
-              labelText: 'Reason for closing the case',
-              border: OutlineInputBorder(),
-            ),
-            maxLines: 5,
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cancel'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Close Case'),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Are you sure you want to close this case?',
+              style: applyRobotoFont(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
               ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  final reason = _reasonController.text;
-                  if (reason.isNotEmpty) {
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _reasonController,
+              decoration: const InputDecoration(
+                labelText: 'Reason for closing the case',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 5,
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                OutlinedButton(
+                  onPressed: () {
                     Navigator.of(context).pop();
-                  } else {
-                    Fluttertoast.showToast(
-                        msg: 'Please provide a reason for closing the case');
-                  }
-                },
-                child: const Text('Confirm'),
-              ),
-            ],
-          ),
-        ],
+                  },
+                  child: const Text('Cancel'),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {
+                    final reason = _reasonController.text;
+                    if (reason.isNotEmpty) {
+                      Navigator.of(context).pop();
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: 'Please provide a reason for closing the case');
+                    }
+                  },
+                  child: const Text('Confirm'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

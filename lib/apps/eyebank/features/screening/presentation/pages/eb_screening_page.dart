@@ -30,7 +30,10 @@ class EbScreeningPage extends ConsumerWidget {
                     actions: [
                       TextButton.icon(
                         onPressed: () {
-                          showCustomWoltSheet(context, const CaseCloseSheet());
+                          showCustomWoltSheet(
+                            context,
+                            const CaseCloseSheet(),
+                          );
                         },
                         style:
                             TextButton.styleFrom(foregroundColor: AppColor.red),

@@ -114,7 +114,7 @@ class _PageWidgetState extends State<FormStepperView> {
                     color: Theme.of(context).primaryColor,
                     width: 1,
                   ),
-                  connectorColor: Colors.black,
+                  connectorColor: Colors.black45,
                   connectorThickness: 1,
                   color: currentStep == index
                       ? Theme.of(context).primaryColor

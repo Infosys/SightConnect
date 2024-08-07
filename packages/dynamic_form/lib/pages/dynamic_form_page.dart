@@ -15,10 +15,12 @@ class DynamicFormPage extends StatelessWidget {
     super.key,
     this.onSubmit,
     this.actions,
+    this.onPopInvoked,
     this.backButtonIcon = Icons.arrow_back,
     required this.json,
   });
   final Function(Map<String, dynamic>?)? onSubmit;
+  final Function()? onPopInvoked;
 
   final List<Widget>? actions;
   final String json;
@@ -36,37 +38,34 @@ class DynamicFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvoked: (value) {
-        if (value) {
-          return;
-        }
-        showDialog(
-          context: context,
-          builder: (context) => const AlertDialog(
-            title: Text('Warning'),
-            content: Text('Are you sure you want to exit?'),
-          ),
-        );
-      },
-      child: FutureBuilder(
-        future: _loadJson(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final pages = snapshot.data?.pages ?? [];
-            final title = snapshot.data?.title ?? '';
-            final FormLayoutType formLayout =
-                snapshot.data?.formLayoutType ?? FormLayoutType.PANEL;
-            return Scaffold(
+    return FutureBuilder(
+      future: _loadJson(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final pages = snapshot.data?.pages ?? [];
+          final title = snapshot.data?.title ?? '';
+          final FormLayoutType formLayout =
+              snapshot.data?.formLayoutType ?? FormLayoutType.PANEL;
+          return PopScope(
+            canPop: onPopInvoked != null,
+            onPopInvoked: (value) {
+              if (value) {
+                return;
+              }
+              if (onPopInvoked != null) {
+                onPopInvoked?.call();
+              }
+            },
+            child: Scaffold(
               appBar: AppBar(
                 title: Text(title),
                 actions: actions,
                 leading: IconButton(
-                    icon: Icon(backButtonIcon),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
+                  icon: Icon(backButtonIcon),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
               body: FormBuilderPage(
                 pages: pages,
@@ -74,17 +73,17 @@ class DynamicFormPage extends StatelessWidget {
                 onSubmit: onSubmit,
                 layoutType: formLayout,
               ),
-            );
-          } else if (snapshot.hasError) {
-            return FormErrorWidget(
-              error: snapshot.error,
-              stackTrace: snapshot.stackTrace.toString(),
-            );
-          } else {
-            return const LoaderWidget();
-          }
-        },
-      ),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return FormErrorWidget(
+            error: snapshot.error,
+            stackTrace: snapshot.stackTrace.toString(),
+          );
+        } else {
+          return const LoaderWidget();
+        }
+      },
     );
   }
 }
