@@ -40,6 +40,8 @@ class _PageWidgetState extends State<FormStepperView> {
             type: StepperType.horizontal,
             physics: const ClampingScrollPhysics(),
             currentStep: currentStep,
+            stepIconMargin: EdgeInsets.zero,
+            stepIconHeight: 24,
             onStepTapped: (step) {
               setState(() {
                 currentStep = step;
