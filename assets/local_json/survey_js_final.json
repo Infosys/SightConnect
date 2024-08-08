@@ -1,7 +1,7 @@
 {
     "title": "Doctor Consent Form",
     "logoPosition": "right",
-    "formLayoutType": "stepper",
+    "formLayoutType": "",
     "pages": [
         {
             "name": "page1",
@@ -123,6 +123,46 @@
                             "min": 0,
                             "max": 100,
                             "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "repeated-panel",
+                    "name": "Rading Panel",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": true,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "datetime-local"
                         }
                     ]
                 },

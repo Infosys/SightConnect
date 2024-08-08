@@ -40,7 +40,7 @@ class DynamicFormJsonMapper {
     if (elements != null) {
       for (final element in elements) {
         pageElementEntities.add(PageElementEntity(
-          type: _mapToFormType(element.type).toString(),
+          type: element.type ?? '',
           name: element.name ?? '',
           elements: _getElements(element.elements),
         ));

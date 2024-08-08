@@ -51,11 +51,13 @@ class FormBuilderPage extends StatelessWidget {
         );
 
       default:
-        return FormPanelView(
-          formKey: formKey,
-          name: title,
-          pages: pages,
-          onSubmit: _handleSubmit,
+        return SingleChildScrollView(
+          child: FormPanelView(
+            formKey: formKey,
+            name: title,
+            pages: pages,
+            onSubmit: _handleSubmit,
+          ),
         );
     }
   }
