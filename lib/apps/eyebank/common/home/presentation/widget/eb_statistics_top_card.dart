@@ -1,14 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/repositories/case_register_repository_impl.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EbStatisticsTopCard extends StatelessWidget {
+class EbStatisticsTopCard extends ConsumerWidget {
   const EbStatisticsTopCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.all(AppSize.km),
       width: AppSize.width(context) - AppSize.ks * 2,
@@ -20,10 +25,25 @@ class EbStatisticsTopCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          AutoSizeText(
-            'Cases Attended',
-            style: applyFiraSansFont(
-              fontSize: 16,
+          InkWell(
+            onTap: () async {
+              var response =
+                  await ref.read(caseRegisterRepositoryProvider).postA1Form('');
+              logger.i('Response: $response');
+              response.fold(
+                (failure) {
+                  EyeBankErrorCard.showErrorDialog(failure, context);
+                },
+                (data) {
+                  logger.i('Data: $data');
+                },
+              );
+            },
+            child: AutoSizeText(
+              'Cases Attended',
+              style: applyFiraSansFont(
+                fontSize: 16,
+              ),
             ),
           ),
           const SizedBox(height: AppSize.km),

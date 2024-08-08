@@ -5,7 +5,9 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_lang
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/app_info_service.dart';
+import 'package:eye_care_for_all/services/network_info.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/shared/pages/internet_lost_page.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
@@ -75,22 +77,22 @@ class MyApp extends ConsumerWidget {
                     ? AppTheme.getLightTheme(context)
                     : AppTheme.getDarkTheme(context),
                 routes: AppRouter.routes,
-                // initialRoute: initialRoute,
-                // navigatorKey: AppRouter.navigatorKey,
-                // onUnknownRoute: AppRouter.onUnknownRoute,
-                home: const EyeBankDashboardPage(),
-                // builder: (context, child) {
-                //   return ref.watch(internetProvider).maybeWhen(
-                //         data: (value) {
-                //           if (!value) {
-                //             return const InternetLostPage();
-                //           } else {
-                //             return child!;
-                //           }
-                //         },
-                //         orElse: () => const InternetLostPage(),
-                //       );
-                // },
+                initialRoute: initialRoute,
+                navigatorKey: AppRouter.navigatorKey,
+                onUnknownRoute: AppRouter.onUnknownRoute,
+                // home: const EyeBankDashboardPage(),
+                builder: (context, child) {
+                  return ref.watch(internetProvider).maybeWhen(
+                        data: (value) {
+                          if (!value) {
+                            return const InternetLostPage();
+                          } else {
+                            return child!;
+                          }
+                        },
+                        orElse: () => const InternetLostPage(),
+                      );
+                },
               ),
             ),
           );

@@ -2,8 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/models/search_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:eye_care_for_all/services/failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,25 +44,37 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   }
 
   @override
-  Future<Either<Failure, dynamic>> postA1Form(queryData) async {
-    var endpoint = 'a1-form';
-    try {
-      var data = await _dio.post(endpoint,
-          data: queryData, queryParameters: queryData);
+  Future<Either<EBFailure, dynamic>> postA1Form(queryData) async {
+    return EyeBankErrorHandler.handle(() async {
+      var endPoint =
+          '/services/orchestration/api/v2/patients/triage-reports?queryText=${queryData}';
+      var data = await _dio.get(endPoint);
       if (data.statusCode == 200) {
-        return Right(data.data);
+        return data.data;
       } else {
-        return Left(ServerFailure(
-            errorMessage: data.statusMessage ?? 'Error in postA1Form'));
+        throw Exception(data.statusMessage ?? 'Error in getA1Form');
       }
-    } on DioException catch (e) {
-      logger.e("Error in postA1Form");
-      DioErrorHandler.handleDioError(e);
-      rethrow;
-    } catch (e) {
-      logger.e("Error in postA1Form");
-      rethrow;
-    }
+    });
+    // var endPoint =
+    //     '/services/orchestration/api/v2/patients/triage-reports?queryText=${queryData}';
+    // try {
+    //   var data = await _dio.post(
+    //     endPoint,
+    //   );
+    //   if (data.statusCode == 200) {
+    //     return Right(data.data);
+    //   } else {
+    //     return Left(ServerFailure(
+    //         errorMessage: data.statusMessage ?? 'Error in postA1Form'));
+    //   }
+    // } on DioException catch (e) {
+    //   logger.e("Error in postA1Form");
+    //   DioErrorHandler.handleDioError(e);
+    //   rethrow;
+    // } catch (e) {
+    //   logger.e("Error in postA1Form");
+    //   rethrow;
+    // }
   }
 
   @override
