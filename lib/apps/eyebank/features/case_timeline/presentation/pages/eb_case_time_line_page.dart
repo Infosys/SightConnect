@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/enums/enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/case_time_line_widget.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/pages/eb_screening_page.dart';
@@ -20,10 +22,10 @@ class EbCaseTimeLinePage extends ConsumerWidget {
       ),
       body: DesktopClipper(
         widget: ref.watch(ebCaseTimeLineProvider(caseID)).when(
-              data: (data) {
+              data: (List<EBTimeLineCaseModel> data) {
                 return CaseTimeLineWidget(
                   caseTimeLine: data,
-                  onCaseSelected: (event) =>
+                  onCaseSelected: (EBTimeLineCaseModel event) =>
                       _handleCaseSelected(context, event),
                 );
               },
@@ -38,17 +40,21 @@ class EbCaseTimeLinePage extends ConsumerWidget {
     );
   }
 
-  _handleCaseSelected(BuildContext context, dynamic event) {
-    final String name = event['serviceRequestCode'];
-    if (name == 'PRELIMINARY ASSESSMENT') {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const EbScreeningPage(
-            caseID: '123',
-            title: 'Screening',
+  _handleCaseSelected(BuildContext context, EBTimeLineCaseModel event) {
+    final navigator = Navigator.of(context);
+    switch (event.stageName) {
+      case CaseTimeLineSteps.INTIMATION:
+        navigator.push(
+          MaterialPageRoute(
+            builder: (context) => EbScreeningPage(
+              title: event.stageName.name,
+              caseID: '',
+            ),
           ),
-        ),
-      );
+        );
+        break;
+      default:
+        break;
     }
   }
 }

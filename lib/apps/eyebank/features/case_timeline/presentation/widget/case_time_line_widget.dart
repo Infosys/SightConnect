@@ -1,12 +1,15 @@
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/enums/enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/case_info_tile.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
 class CaseTimeLineWidget extends StatelessWidget {
-  final dynamic caseTimeLine;
-  final Function(dynamic)? onCaseSelected;
+  final List<EBTimeLineCaseModel> caseTimeLine;
+  final Function(EBTimeLineCaseModel)? onCaseSelected;
 
   const CaseTimeLineWidget({
     super.key,
@@ -33,11 +36,12 @@ class CaseTimeLineWidget extends StatelessWidget {
         builder: TimelineTileBuilder.connected(
           contentsBuilder: (context, index) {
             final event = caseTimeLine[index];
-            final status = event['status'];
-            final isCompleted = status == 'COMPLETED' || status == 'ACTIVE';
+            final status = event.status;
+            final isCompleted = status == EBCaseStatus.COMPLETED ||
+                status == EBCaseStatus.IN_PROGRESS;
 
             return Padding(
-              padding: const EdgeInsets.only(bottom: 32.0),
+              padding: const EdgeInsets.only(bottom: 12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -65,13 +69,13 @@ class CaseTimeLineWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(dynamic event, int index) {
+  Widget _buildHeader(EBTimeLineCaseModel event, int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Row(
         children: [
           Text(
-            event['serviceRequestCode'] ?? 'Unknown',
+            event.stageName.name.toUpperCase(),
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 14,
@@ -94,7 +98,7 @@ class CaseTimeLineWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCompletedCard(dynamic event, VoidCallback? onTap) {
+  Widget _buildCompletedCard(EBTimeLineCaseModel event, VoidCallback? onTap) {
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -119,19 +123,20 @@ class CaseTimeLineWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CaseInfoTile(
-                  title: 'Description',
-                  value: event['description'],
+                  title: 'Start Date',
+                  value: event.initiateDate.formateDate,
                 ),
                 const SizedBox(height: 8),
                 CaseInfoTile(
-                  title: 'Timestamp',
-                  value: event['timestamp']?.split('T').first,
+                  title: 'Last Modified Time',
+                  value: event.recentUpdatedTime.formateDate,
                 ),
                 const SizedBox(height: 8),
                 CaseInfoTile(
                   title: 'Status',
-                  value: event['status'],
+                  value: event.status.displayValue.toUpperCase(),
                 ),
+                const SizedBox(height: 8),
               ],
             ),
           ),
@@ -140,9 +145,9 @@ class CaseTimeLineWidget extends StatelessWidget {
     );
   }
 
-  Widget? _buildIndicator(dynamic event) {
-    final status = event['status'];
-    if (status == 'COMPLETED') {
+  Widget? _buildIndicator(EBTimeLineCaseModel event) {
+    final EBCaseStatus status = event.status;
+    if (status == EBCaseStatus.COMPLETED) {
       return const DotIndicator(
         color: AppColor.green,
         child: Icon(
@@ -151,7 +156,7 @@ class CaseTimeLineWidget extends StatelessWidget {
           size: 12.0,
         ),
       );
-    } else if (status == 'ACTIVE') {
+    } else if (status == EBCaseStatus.IN_PROGRESS) {
       return const DotIndicator(
         color: AppColor.primary,
         child: Icon(
@@ -160,7 +165,7 @@ class CaseTimeLineWidget extends StatelessWidget {
           size: 12.0,
         ),
       );
-    } else if (status == 'PENDING') {
+    } else if (status == EBCaseStatus.PENDING) {
       return DotIndicator(
         color: AppColor.grey.withOpacity(0.5),
         child: const Icon(
@@ -173,15 +178,21 @@ class CaseTimeLineWidget extends StatelessWidget {
     return null;
   }
 
-  Widget? _buildConnector(dynamic event) {
-    final status = event['status'];
-    if (status == 'COMPLETED') {
-      return const SolidLineConnector(color: AppColor.green);
-    } else if (status == 'ACTIVE') {
-      return const SolidLineConnector(color: AppColor.primary);
-    } else if (status == 'PENDING') {
-      return const SolidLineConnector(color: AppColor.lightGrey);
+  Widget _buildConnector(EBTimeLineCaseModel event) {
+    final EBCaseStatus status = event.status;
+    if (status == EBCaseStatus.COMPLETED) {
+      return const SolidLineConnector(
+        color: AppColor.green,
+      );
+    } else if (status == EBCaseStatus.IN_PROGRESS) {
+      return const SolidLineConnector(
+        color: AppColor.primary,
+      );
+    } else if (status == EBCaseStatus.PENDING) {
+      return SolidLineConnector(
+        color: AppColor.grey.withOpacity(0.5),
+      );
     }
-    return null;
+    return const SolidLineConnector(color: Colors.grey);
   }
 }

@@ -1,50 +1,77 @@
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/enums/enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebCaseTimeLineProvider = FutureProvider.family((ref, caseID) async {
   return Future.delayed(const Duration(seconds: 1), () {
-    return [
-      {
-        "serviceRequestCode": "PRELIMINARY ASSESSMENT",
-        "description": "Initial assessment of the case",
-        "timestamp": "2023-10-01T11:00:00Z",
-        "status": "COMPLETED"
-      },
-      {
-        "serviceRequestCode": "CORNEA RECOVERY",
-        "description": "Recovery of the cornea",
-        "timestamp": "2023-10-01T12:00:00Z",
-        "status": "COMPLETED",
-      },
-      {
-        "serviceRequestCode": "EYE BANK TRANSPORTAION",
-        "description": "Transportation to the eye bank",
-        "timestamp": "2023-10-01T15:00:00Z",
-        "status": "ACTIVE"
-      },
-      {
-        "serviceRequestCode": "EVALUATION",
-        "description": "Evaluation of the cornea",
-        "timestamp": "2023-10-01T16:00:00Z",
-        "status": "PENDING"
-      },
-      {
-        "serviceRequestCode": "SEROLOGY",
-        "description": "Serology testing",
-        "timestamp": "2023-10-01T17:00:00Z",
-        "status": "PENDING"
-      },
-      {
-        "serviceRequestCode": "RECIPIENT TRANSPORTATION",
-        "description": "Transportation to the recipient",
-        "timestamp": "2023-10-01T18:00:00Z",
-        "status": "PENDING"
-      },
-      {
-        "serviceRequestCode": "RE EVALUATION",
-        "description": "Re-evaluation of the case",
-        "timestamp": "2023-10-01T19:00:00Z",
-        "status": "PENDING"
-      },
+    List<EBTimeLineCaseModel> timeline = [
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.COMPLETED,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.INTIMATION,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.COMPLETED,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.PRELIMINARY_ASSESSMENT,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.COMPLETED,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.CORNEA_RECOVERY,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.IN_PROGRESS,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.SHIPPED_TO_EYEBANK,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.PENDING,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.RECEIVED_AT_EYEBANK,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.PENDING,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.SEROLOGY,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.PENDING,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.EVALUATION_OD,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.PENDING,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.EVALUATION_OS,
+      ),
+      EBTimeLineCaseModel(
+        initiateDate: DateTime.now(),
+        recentUpdatedTime: DateTime.now(),
+        status: EBCaseStatus.PENDING,
+        assessmentName: EBAssessmentName.TEMPLATE,
+        stageName: CaseTimeLineSteps.INVENTORY,
+      ),
     ];
+    return timeline;
   });
 });
+
+
+// INTIMATION, PRELIMINARY_ASSESSMENT, CORNEA_RECOVERY, SHIPPED TO EYEBANK, RECEIVED AT EYEBANK, SEROLOGY, EVALUATION OD , EVALUATION OS , INVENTORY 
