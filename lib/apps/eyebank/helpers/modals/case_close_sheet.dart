@@ -16,7 +16,7 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Close Case'),
+        title: const Text('Reject Case'),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
@@ -30,7 +30,7 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Are you sure you want to close this case?',
+              'Are you sure you want to reject this case?',
               style: applyRobotoFont(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -40,7 +40,7 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
             TextField(
               controller: _reasonController,
               decoration: const InputDecoration(
-                labelText: 'Reason for closing the case',
+                labelText: 'Reason for rejection',
                 border: OutlineInputBorder(),
               ),
               maxLines: 5,
@@ -59,11 +59,11 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
                 ElevatedButton(
                   onPressed: () {
                     final reason = _reasonController.text;
+                    const msg = "Please provide a reason for rejection";
                     if (reason.isNotEmpty) {
                       Navigator.of(context).pop();
                     } else {
-                      Fluttertoast.showToast(
-                          msg: 'Please provide a reason for closing the case');
+                      Fluttertoast.showToast(msg: msg);
                     }
                   },
                   child: const Text('Confirm'),
