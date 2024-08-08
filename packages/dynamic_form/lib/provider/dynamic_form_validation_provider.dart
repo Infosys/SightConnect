@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final dynamicFormValidationProvider =
-    ChangeNotfierProvider<DynamicFormValidationProvider>(
-        (ref) => DynamicFormValidationProvider());
+    ChangeNotifierProvider<DynamicFormValidationProvider>((ref) {
+  return DynamicFormValidationProvider();
+});
 
 class DynamicFormValidationProvider extends ChangeNotifier {
   final Map<String, String> _errors = {};
