@@ -118,7 +118,7 @@ class CaseTimeLineWidget extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -136,7 +136,6 @@ class CaseTimeLineWidget extends StatelessWidget {
                   title: 'Status',
                   value: event.status.displayValue.toUpperCase(),
                 ),
-                const SizedBox(height: 8),
               ],
             ),
           ),
