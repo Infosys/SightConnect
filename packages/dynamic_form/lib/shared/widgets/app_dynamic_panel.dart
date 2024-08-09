@@ -20,44 +20,41 @@ class AppDynamicPanel extends StatefulWidget {
 
 class _AppDynamicPanelState extends State<AppDynamicPanel> {
   final formKey = GlobalKey<FormBuilderState>();
-  Map<String, Widget> repeatedField = {};
-  List<String> repeatedFieldKeys = [];
+  List<String> repeatedPanelKeys = [];
 
   @override
   void initState() {
     super.initState();
-    repeatedField = {};
-    repeatedFieldKeys = [];
-    addField();
+    addPanel();
   }
 
-  deleteField(String key) {
+  void addPanel() {
     setState(() {
-      repeatedField.remove(key);
-      repeatedFieldKeys.remove(key);
+      repeatedPanelKeys.add(getUniqueKey());
+    });
+  }
+
+  void removePanel(String key) {
+    setState(() {
+      repeatedPanelKeys.remove(key);
     });
 
-    List<String> toDeleteKey = formKey.currentState!.fields.keys
+    List<String> toDeleteKeys = formKey.currentState!.fields.keys
         .where((element) => element.contains(key))
         .toList();
-    for (var element in toDeleteKey) {
+    for (var element in toDeleteKeys) {
       Future.microtask(() {
         formKey.currentState?.fields[element]?.reset();
         formKey.currentState?.removeInternalFieldValue(element);
       });
     }
+
+    // Trigger a rebuild to ensure UI updates correctly
+    setState(() {});
   }
 
   String getUniqueKey() {
     return DateTime.now().millisecondsSinceEpoch.toString();
-  }
-
-  void addField() {
-    final key = getUniqueKey();
-    setState(() {
-      repeatedField[key] = _getRepeatedField(deleteField, key);
-      repeatedFieldKeys.add(key);
-    });
   }
 
   @override
@@ -83,14 +80,12 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Column(
-                    children: repeatedFieldKeys
-                        .map((key) => repeatedField[key]!)
+                    children: repeatedPanelKeys
+                        .map((key) => _buildRepeatedPanel(key))
                         .toList(),
                   ),
                   IconButton(
-                    onPressed: () {
-                      addField();
-                    },
+                    onPressed: addPanel,
                     icon: const Icon(Icons.add),
                   ),
                 ],
@@ -102,8 +97,9 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
     );
   }
 
-  Widget _getRepeatedField(Function(String key) removeField, String fieldKey) {
+  Widget _buildRepeatedPanel(String key) {
     return Row(
+      key: ValueKey(key), // Ensure each panel has a unique key
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Expanded(
@@ -112,25 +108,18 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
-                children:
-                    _buildFields(widget.panel.elements, formKey, fieldKey),
+                children: _buildFields(widget.panel.elements, formKey, key),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               const Divider(),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
             ],
           ),
         ),
         Container(
           padding: const EdgeInsets.only(bottom: 32),
           child: IconButton(
-            onPressed: () {
-              removeField(fieldKey);
-            },
+            onPressed: () => removePanel(key),
             icon: const Icon(Icons.delete),
           ),
         ),
