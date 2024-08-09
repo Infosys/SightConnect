@@ -137,7 +137,7 @@
                         },
                         {
                             "type": "text",
-                            "name": "question2",
+                            "name": "question15",
                             "title": "Death Notification",
                             "description": "Death Notification description",
                             "isRequired": false,
