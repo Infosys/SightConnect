@@ -1,5 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +33,13 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
   }
 
   deleteField(String key) {
+    Log.f(key);
     return () {
       setState(() {
         repeatedField.remove(key);
         repeatedFieldKeys.remove(key);
+        formKey.currentState?.fields
+            .removeWhere((key, value) => key.contains(key));
       });
     };
   }
@@ -54,28 +58,43 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
 
   @override
   Widget build(BuildContext context) {
-    return AppCard(
-      marginBottom: 16,
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Column(
-              children:
-                  repeatedFieldKeys.map((key) => repeatedField[key]!).toList(),
+    return FormBuilderField(
+      name: widget.panel.name,
+      onSaved: (newValue) {
+        formKey.currentState?.save();
+        final value = formKey.currentState?.value;
+        widget.globalFormKey.currentState?.fields[widget.panel.name]
+            ?.didChange(value);
+      },
+      builder: (field) {
+        return FormBuilder(
+          key: formKey,
+          child: AppCard(
+            marginBottom: 16,
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    children: repeatedFieldKeys
+                        .map((key) => repeatedField[key]!)
+                        .toList(),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      addField();
+                    },
+                    icon: const Icon(Icons.add),
+                  ),
+                ],
+              ),
             ),
-            IconButton(
-              onPressed: () {
-                addField();
-              },
-              icon: const Icon(Icons.add),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -105,7 +124,9 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
         Container(
           padding: const EdgeInsets.only(bottom: 32),
           child: IconButton(
-            onPressed: removeField(fieldKey),
+            onPressed: () {
+              removeField(fieldKey);
+            },
             icon: const Icon(Icons.delete),
           ),
         ),
