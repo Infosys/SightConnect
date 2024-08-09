@@ -1,6 +1,5 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
-import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +32,20 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
   }
 
   deleteField(String key) {
-    Log.f(key);
-    return () {
-      setState(() {
-        repeatedField.remove(key);
-        repeatedFieldKeys.remove(key);
-        formKey.currentState?.fields
-            .removeWhere((key, value) => key.contains(key));
+    setState(() {
+      repeatedField.remove(key);
+      repeatedFieldKeys.remove(key);
+    });
+
+    List<String> toDeleteKey = formKey.currentState!.fields.keys
+        .where((element) => element.contains(key))
+        .toList();
+    for (var element in toDeleteKey) {
+      Future.microtask(() {
+        formKey.currentState?.fields[element]?.reset();
+        formKey.currentState?.removeInternalFieldValue(element);
       });
-    };
+    }
   }
 
   String getUniqueKey() {
