@@ -58,6 +58,7 @@ class _FormPanelViewState extends State<FormPanelView> {
             padding: const EdgeInsets.all(8.0),
             child: ExpansionTile(
               initiallyExpanded: panel.name == widget.pages.first.name,
+              maintainState: true,
               title: Text(panel.name),
               children: [
                 PageWidget(

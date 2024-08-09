@@ -25,17 +25,11 @@ class FormBuilderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // appBar: AppBar(
-      //   title: Text(title),
-      //   automaticallyImplyLeading: false,
-      // ),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: FormBuilder(
-          key: formKey,
-          child: _getFormLayout(),
-        ),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: FormBuilder(
+        key: formKey,
+        child: _getFormLayout(),
       ),
     );
   }

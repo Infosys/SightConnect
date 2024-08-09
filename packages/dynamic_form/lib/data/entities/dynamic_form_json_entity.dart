@@ -60,7 +60,7 @@ class PageEntity {
 }
 
 class PageElementEntity {
-  final String type;
+  final FormPanelType type;
   final String name;
   final List<ElementElementClassEntity> elements;
 
