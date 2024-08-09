@@ -7,11 +7,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class AppDynamicPanel extends StatefulWidget {
   final PageElementEntity panel;
-  final GlobalKey<FormBuilderState> formKey;
+  final GlobalKey<FormBuilderState> globalFormKey;
   const AppDynamicPanel({
     super.key,
     required this.panel,
-    required this.formKey,
+    required this.globalFormKey,
   });
 
   @override
@@ -19,6 +19,7 @@ class AppDynamicPanel extends StatefulWidget {
 }
 
 class _AppDynamicPanelState extends State<AppDynamicPanel> {
+  final formKey = GlobalKey<FormBuilderState>();
   Map<String, Widget> repeatedField = {};
   List<String> repeatedFieldKeys = [];
 
@@ -63,7 +64,8 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Column(
-              children: repeatedField.values.toList(),
+              children:
+                  repeatedFieldKeys.map((key) => repeatedField[key]!).toList(),
             ),
             IconButton(
               onPressed: () {
@@ -87,7 +89,8 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
-                children: _buildFields(widget.panel.elements, widget.formKey),
+                children:
+                    _buildFields(widget.panel.elements, formKey, fieldKey),
               ),
               const SizedBox(
                 height: 16,
@@ -110,13 +113,19 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
     );
   }
 
-  List<Widget> _buildFields(List<ElementElementClassEntity>? fields,
-      GlobalKey<FormBuilderState> key) {
+  List<Widget> _buildFields(
+    List<ElementElementClassEntity>? fields,
+    GlobalKey<FormBuilderState> key,
+    String keyExtension,
+  ) {
     if (fields == null || fields.isEmpty) {
       return [];
     }
 
-    return fields.map((field) {
+    return fields.map((ElementElementClassEntity field) {
+      field = field.copyWith(
+        name: '${field.name}_$keyExtension',
+      );
       return AppResponsiveWidget(
         widget: getField(field, key),
       );

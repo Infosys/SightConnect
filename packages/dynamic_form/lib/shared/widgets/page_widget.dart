@@ -39,7 +39,7 @@ class _PageWidgetState extends State<PageWidget> {
         return panel.type == FormPanelType.REPEATED_PANEL
             ? AppDynamicPanel(
                 panel: panel,
-                formKey: widget.formKey,
+                globalFormKey: widget.formKey,
               )
             : AppCard(
                 title: panel.name,

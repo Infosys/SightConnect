@@ -18,7 +18,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../widgets/form_text_area.dart';
 
 Widget getField(
-    ElementElementClassEntity? field, GlobalKey<FormBuilderState> key) {
+  ElementElementClassEntity? field,
+  GlobalKey<FormBuilderState> key,
+) {
   if (field == null) {
     return Container();
   }

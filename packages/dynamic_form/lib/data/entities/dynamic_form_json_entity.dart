@@ -177,6 +177,48 @@ class ElementElementClassEntity {
         "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
         "dependantField": dependantField,
       };
+
+  ElementElementClassEntity copyWith({
+    DynamicFormType? type,
+    String? name,
+    String? title,
+    String? description,
+    bool? isRequired,
+    String? requiredErrorText,
+    bool? readOnly,
+    List<ValidatorEntity>? validators,
+    List<RadioChoiceElementEntity>? mapValueChoices,
+    List<String>? stringValueChoices,
+    String? placeholder,
+    List<dynamic>? choices,
+    int? maxSize,
+    int? min,
+    int? max,
+    int? step,
+    List<ConditionsEntity>? conditions,
+    String? dependantField,
+  }) {
+    return ElementElementClassEntity(
+      type: type ?? this.type,
+      name: name ?? this.name,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      isRequired: isRequired ?? this.isRequired,
+      requiredErrorText: requiredErrorText ?? this.requiredErrorText,
+      readOnly: readOnly ?? this.readOnly,
+      validators: validators ?? this.validators,
+      mapValueChoices: mapValueChoices ?? this.mapValueChoices,
+      stringValueChoices: stringValueChoices ?? this.stringValueChoices,
+      placeholder: placeholder ?? this.placeholder,
+      choices: choices ?? this.choices,
+      maxSize: maxSize ?? this.maxSize,
+      min: min ?? this.min,
+      max: max ?? this.max,
+      step: step ?? this.step,
+      conditions: conditions ?? this.conditions,
+      dependantField: dependantField ?? this.dependantField,
+    );
+  }
 }
 
 class RadioChoiceElementEntity {
