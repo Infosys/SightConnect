@@ -20,23 +20,23 @@ class EbCaseTimeLinePage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Case Timeline'),
       ),
-      body: DesktopClipper(
-        widget: ref.watch(ebCaseTimeLineProvider(caseID)).when(
-              data: (List<EBTimeLineCaseModel> data) {
-                return CaseTimeLineWidget(
+      body: ref.watch(ebCaseTimeLineProvider(caseID)).when(
+            data: (List<EBTimeLineCaseModel> data) {
+              return DesktopClipper(
+                widget: CaseTimeLineWidget(
                   caseTimeLine: data,
                   onCaseSelected: (EBTimeLineCaseModel event) =>
                       _handleCaseSelected(context, event),
-                );
-              },
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              error: (error, stackTrace) => Center(
-                child: Text('Error: $error'),
-              ),
+                ),
+              );
+            },
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
             ),
-      ),
+            error: (error, stackTrace) => Center(
+              child: Text('Error: $error'),
+            ),
+          ),
     );
   }
 

@@ -1,10 +1,12 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/case_time_line_widget.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
 class InnerTimeline extends StatelessWidget {
   final List<EBTimeLineCaseModel> substep;
+
   const InnerTimeline({
     Key? key,
     required this.substep,
@@ -26,27 +28,41 @@ class InnerTimeline extends StatelessWidget {
             thickness: 2.5,
           ),
         ),
-        builder: TimelineTileBuilder(
-          indicatorBuilder: (context, index) => buildIndicator(substep[index]),
-          startConnectorBuilder: (_, index) => Connector.solidLine(),
-          endConnectorBuilder: (_, index) => Connector.solidLine(),
+        builder: TimelineTileBuilder.connected(
+          indicatorBuilder: (context, index) =>
+              CaseIndicator(event: substep[index]),
+          connectorBuilder: (context, index, type) =>
+              CaseConnector(event: substep[index]),
+          firstConnectorBuilder: (context) =>
+              const DashedLineConnector(color: Colors.grey),
+          itemCount: substep.length,
+          indicatorPositionBuilder: (context, index) => 0,
+          nodePositionBuilder: (context, index) => 0,
+          // indicatorBuilder: (context, index) =>
+          //     CaseIndicator(event: substep[index]),
+
           contentsBuilder: (_, index) {
             return Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(substep[index].assessmentName.name),
+                  Text(
+                    substep[index].stageName.name.toUpperCase(),
+                    style: applyRobotoFont(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 4.0),
-                  buildCompletedCard(
-                    substep[index],
-                    null,
-                  )
+                  CompletedCard(
+                    event: substep[index],
+                    onTap: null,
+                  ),
                 ],
               ),
             );
           },
-          itemCount: substep.length,
         ),
       ),
     );

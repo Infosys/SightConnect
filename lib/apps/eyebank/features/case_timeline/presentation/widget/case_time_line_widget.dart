@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/enums/enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/models/eb_time_line_case_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/case_info_tile.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/inner_timeline.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -46,11 +45,15 @@ class CaseTimeLineWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(event, index),
+                  CaseHeader(
+                    event: event,
+                    index: index,
+                    caseTimeLine: caseTimeLine,
+                  ),
                   if (isCompleted && event.subSteps.isEmpty)
-                    buildCompletedCard(
-                      event,
-                      () => onCaseSelected?.call(event),
+                    CompletedCard(
+                      event: event,
+                      onTap: () => onCaseSelected?.call(event),
                     ),
                   if (event.subSteps.isNotEmpty)
                     Expanded(
@@ -63,9 +66,9 @@ class CaseTimeLineWidget extends StatelessWidget {
             );
           },
           indicatorBuilder: (context, index) =>
-              buildIndicator(caseTimeLine[index]),
+              CaseIndicator(event: caseTimeLine[index]),
           connectorBuilder: (context, index, type) =>
-              _buildConnector(caseTimeLine[index]),
+              CaseConnector(event: caseTimeLine[index]),
           firstConnectorBuilder: (context) =>
               const DashedLineConnector(color: Colors.grey),
           itemCount: caseTimeLine.length,
@@ -75,17 +78,31 @@ class CaseTimeLineWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildHeader(EBTimeLineCaseModel event, int index) {
+class CaseHeader extends StatelessWidget {
+  final EBTimeLineCaseModel event;
+  final int index;
+  final List<EBTimeLineCaseModel> caseTimeLine;
+
+  const CaseHeader({
+    super.key,
+    required this.event,
+    required this.index,
+    required this.caseTimeLine,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Row(
         children: [
           Text(
             event.stageName.name.toUpperCase(),
-            style: const TextStyle(
+            style: applyRobotoFont(
+              fontSize: 12,
               fontWeight: FontWeight.bold,
-              fontSize: 14,
             ),
           ),
           if (index == caseTimeLine.length - 1)
@@ -104,8 +121,15 @@ class CaseTimeLineWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildConnector(EBTimeLineCaseModel event) {
+class CaseConnector extends StatelessWidget {
+  final EBTimeLineCaseModel event;
+
+  const CaseConnector({super.key, required this.event});
+
+  @override
+  Widget build(BuildContext context) {
     final EBCaseStatus status = event.status;
     if (status == EBCaseStatus.COMPLETED) {
       return const SolidLineConnector(
@@ -124,13 +148,22 @@ class CaseTimeLineWidget extends StatelessWidget {
   }
 }
 
-Widget buildCompletedCard(EBTimeLineCaseModel event, VoidCallback? onTap) {
-  return InkWell(
-    onTap: onTap,
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
+class CompletedCard extends StatelessWidget {
+  final EBTimeLineCaseModel event;
+  final VoidCallback? onTap;
+
+  const CompletedCard({super.key, required this.event, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 8.0,
+        ),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
@@ -143,62 +176,116 @@ Widget buildCompletedCard(EBTimeLineCaseModel event, VoidCallback? onTap) {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CaseInfoTile(
-                title: 'Start Date',
-                value: event.initiateDate.formateDate,
-              ),
-              const SizedBox(height: 8),
-              CaseInfoTile(
-                title: 'Last Modified Time',
-                value: event.recentUpdatedTime.formateDate,
-              ),
-              // const SizedBox(height: 8),
-              // CaseInfoTile(
-              //   title: 'Status',
-              //   value: event.status.displayValue.toUpperCase(),
-              // ),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildInfoColumn(
+                  icon: Icons.date_range,
+                  label: "Start Date",
+                  value: event.initiateDate.formateDate,
+                ),
+                _buildInfoColumn(
+                  icon: Icons.update,
+                  label: "Last Modified",
+                  value: event.recentUpdatedTime.formateDate,
+                ),
+                _buildInfoColumn(
+                  icon: Icons.check_circle,
+                  label: "Status",
+                  value: event.status.name,
+                  valueColor: event.status.name == "COMPLETED"
+                      ? Colors.green
+                      : Colors.orange,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-    ),
-  );
+    );
+  }
+
+  Widget _buildInfoColumn({
+    required IconData icon,
+    required String label,
+    required String value,
+    Color? valueColor,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 14.0, color: Colors.grey),
+            const SizedBox(width: 4.0),
+            Text(
+              label,
+              style: applyRobotoFont(
+                fontSize: 8,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          value,
+          style: applyRobotoFont(
+            fontSize: 10,
+            color: valueColor ?? Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
 }
 
-Widget? buildIndicator(EBTimeLineCaseModel event) {
-  final EBCaseStatus status = event.status;
-  if (status == EBCaseStatus.COMPLETED) {
+class CaseIndicator extends StatelessWidget {
+  final EBTimeLineCaseModel event;
+
+  const CaseIndicator({super.key, required this.event});
+
+  @override
+  Widget build(BuildContext context) {
+    final EBCaseStatus status = event.status;
+    if (status == EBCaseStatus.COMPLETED) {
+      return const DotIndicator(
+        color: AppColor.green,
+        child: Icon(
+          Icons.check,
+          color: Colors.white,
+          size: 12.0,
+        ),
+      );
+    } else if (status == EBCaseStatus.IN_PROGRESS) {
+      return const DotIndicator(
+        color: AppColor.primary,
+        child: Icon(
+          Icons.more_horiz,
+          color: Colors.white,
+          size: 12.0,
+        ),
+      );
+    } else if (status == EBCaseStatus.PENDING) {
+      return DotIndicator(
+        color: AppColor.grey.withOpacity(0.5),
+        child: const Icon(
+          Icons.access_time,
+          color: Colors.white,
+          size: 12.0,
+        ),
+      );
+    }
     return const DotIndicator(
-      color: AppColor.green,
+      color: Colors.grey,
       child: Icon(
-        Icons.check,
-        color: Colors.white,
-        size: 12.0,
-      ),
-    );
-  } else if (status == EBCaseStatus.IN_PROGRESS) {
-    return const DotIndicator(
-      color: AppColor.primary,
-      child: Icon(
-        Icons.more_horiz,
-        color: Colors.white,
-        size: 12.0,
-      ),
-    );
-  } else if (status == EBCaseStatus.PENDING) {
-    return DotIndicator(
-      color: AppColor.grey.withOpacity(0.5),
-      child: const Icon(
-        Icons.access_time,
+        Icons.error,
         color: Colors.white,
         size: 12.0,
       ),
     );
   }
-  return null;
 }

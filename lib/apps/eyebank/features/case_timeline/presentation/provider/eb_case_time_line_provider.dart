@@ -29,30 +29,30 @@ var local_timeline_json = [
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
     "assessmentName": "TEMPLATE",
-    "stageName": "CORNEA_RECOVERY"
-  },
-  {
-    "initiateDate": "2023-10-01T12:00:00Z",
-    "recentUpdatedTime": "2023-10-01T12:00:00Z",
-    "status": "IN_PROGRESS",
-    "assessmentName": "TEMPLATE",
-    "stageName": "SHIPPED_TO_EYEBANK",
+    "stageName": "CORNEA_RECOVERY",
     "subSteps": [
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
         "assessmentName": "TEMPLATE",
-        "stageName": "EVALUATION_OS"
+        "stageName": "HEMODILUTION"
       },
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
         "assessmentName": "TEMPLATE",
-        "stageName": "INVENTORY"
+        "stageName": "BLOOD_SAMPLE"
       }
     ]
+  },
+  {
+    "initiateDate": "2023-10-01T12:00:00Z",
+    "recentUpdatedTime": "2023-10-01T12:00:00Z",
+    "status": "IN_PROGRESS",
+    "assessmentName": "TEMPLATE",
+    "stageName": "SHIPPED_TO_EYEBANK"
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
@@ -66,6 +66,50 @@ var local_timeline_json = [
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "PENDING",
     "assessmentName": "TEMPLATE",
-    "stageName": "EVALUATION_OD",
+    "stageName": "EVALUATION",
+    "subSteps": [
+      {
+        "initiateDate": "2023-10-01T12:00:00Z",
+        "recentUpdatedTime": "2023-10-01T12:00:00Z",
+        "status": "PENDING",
+        "assessmentName": "TEMPLATE",
+        "stageName": "SEROLOGY"
+      },
+      {
+        "initiateDate": "2023-10-01T12:00:00Z",
+        "recentUpdatedTime": "2023-10-01T12:00:00Z",
+        "status": "PENDING",
+        "assessmentName": "TEMPLATE",
+        "stageName": "EVALUATION_OD"
+      },
+      {
+        "initiateDate": "2023-10-01T12:00:00Z",
+        "recentUpdatedTime": "2023-10-01T12:00:00Z",
+        "status": "PENDING",
+        "assessmentName": "TEMPLATE",
+        "stageName": "EVALUATION_OS"
+      }
+    ]
+  },
+  {
+    "initiateDate": "2023-10-01T12:00:00Z",
+    "recentUpdatedTime": "2023-10-01T12:00:00Z",
+    "status": "PENDING",
+    "assessmentName": "TEMPLATE",
+    "stageName": "INVENTORY"
   }
 ];
+
+
+//INITIMATION
+// PRELIMINARY_ASSESSMENT
+//CORNEA_RECOVERY 
+   // HEMODILUTION
+   // BLOOD_SAMPLE
+// SHIPPED TO EYEBANK
+//RECIVED AT EYEBANK   
+// EVALUATION
+    // SEROLOGY
+    //EVALUATION OD 
+    // EVALUATION OS
+// INVENTORY
