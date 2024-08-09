@@ -34,8 +34,7 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
       resizeToAvoidBottomInset: false,
       drawer: buildDrawer(context, ref: ref),
       appBar: CustomAppbar(
-        title: Text(
-            "Event : ${eventDetails.title!.capitalize()} - ${eventDetails.id!}"),
+        title: Text("Event : ${eventDetails.title!} - ${eventDetails.id!}"),
         centerTitle: false,
         actions: [
           Visibility(
@@ -43,13 +42,15 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
             child: IconButton(
               onPressed: () {
                 if (tabIndex.value == 0) {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const VisionGuardianSearchPatient(
+                      builder: (context) => VisionGuardianSearchPatient(
                         search: "search",
+                        eventDetails: eventDetails,
                       ),
                     ),
+                    (route) => false,
                   );
                 } else {
                   Navigator.push(

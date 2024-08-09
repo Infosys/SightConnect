@@ -449,7 +449,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     logger.d("page");
     if (eventPatientController.position.pixels ==
             eventPatientController.position.maxScrollExtent &&
-        (newEventPatientList.length == 10 || newEventPatientList.isEmpty)) {
+        (newEventPatientList.length == 10 )) {
       offset = offset + 1;
       getEventPatientTriageReport(listOfEventPatients);
     }
