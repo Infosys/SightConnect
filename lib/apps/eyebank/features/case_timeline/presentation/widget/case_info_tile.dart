@@ -25,7 +25,7 @@ class CaseInfoTile extends StatelessWidget {
           child: Text(
             value ?? '--',
             style: applyRobotoFont(
-              fontSize: 14,
+              fontSize: 12,
               color: AppColor.black,
             ),
           ),
