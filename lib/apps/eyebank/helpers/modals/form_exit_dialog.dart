@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 void showFormExitDialog(BuildContext context, {required VoidCallback onSave}) {
@@ -17,7 +18,27 @@ class FormExitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Exit Form'),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      title: Row(
+        children: [
+          Text(
+            'Exit Form',
+            style: applyRobotoFont(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.close),
+          ),
+        ],
+      ),
       content: const Text(
         'You have unsaved changes. Do you want to save your changes before exiting?',
       ),

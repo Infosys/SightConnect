@@ -22,7 +22,6 @@ class CaseInfoTile extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 2,
           child: Text(
             value ?? '--',
             style: applyRobotoFont(
