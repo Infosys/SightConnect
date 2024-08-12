@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/repositories/case_register_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -28,11 +27,11 @@ class EbStatisticsTopCard extends ConsumerWidget {
           InkWell(
             onTap: () async {
               var response =
-                  await ref.read(caseRegisterRepositoryProvider).postA1Form('');
+                  await ref.read(caseRegisterRepositoryProvider).postA1Form('84456728922');
               logger.i('Response: $response');
               response.fold(
                 (failure) {
-                  EyeBankErrorCard.showErrorDialog(failure, context);
+                  EyeBankErrorCard.showErrorToast(failure, context);
                 },
                 (data) {
                   logger.i('Data: $data');
