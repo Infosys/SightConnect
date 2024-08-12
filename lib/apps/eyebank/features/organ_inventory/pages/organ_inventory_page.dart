@@ -34,6 +34,13 @@ class OrganInventoryPage extends StatelessWidget {
           ],
           title: const Text('Organ Inventory'),
           bottom: const TabBar(
+            indicatorSize: TabBarIndicatorSize.label,
+            indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColor.white,
+              ),
+            ),
             tabs: [
               Tab(text: 'Overview'),
               Badge(

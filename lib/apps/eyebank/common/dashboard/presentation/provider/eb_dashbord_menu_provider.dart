@@ -27,7 +27,14 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     const EbHomePage(),
     const EbCaseSearchPage(),
     const OrganInventoryPage(),
-    Container(),
+    Scaffold(
+      appBar: AppBar(
+        title: const Text("Notification"),
+      ),
+      body: const Center(
+        child: Text("No Notification"),
+      ),
+    ),
   ];
 
   final _menuItem = [
@@ -38,8 +45,8 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     ),
     MenuItem(
       id: 1,
-      title: "Case Record",
-      icon: FontAwesomeIcons.bookMedical,
+      title: "Records",
+      icon: FontAwesomeIcons.laptopFile,
     ),
     MenuItem(
       id: 2,
@@ -48,8 +55,8 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     ),
     MenuItem(
       id: 3,
-      title: "Delivery",
-      icon: FontAwesomeIcons.truck,
+      title: "Notification",
+      icon: FontAwesomeIcons.bell,
     ),
   ];
 }
