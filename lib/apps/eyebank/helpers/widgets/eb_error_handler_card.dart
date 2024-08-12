@@ -1,12 +1,15 @@
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class EyeBankErrorCard {
   static void showErrorDialog(EBFailure failure, BuildContext context) {
     int statusCode = failure.statusCode ?? 500;
     String statusMessage = failure.errorMessage;
-    String? details = failure.detail;
+    String? details = failure.errorObject?.detail;
+    String? errorMessage = failure.errorObject?.message;
+    String displayMessage = errorMessage ?? details ?? "An error occurred";
     if (failure is EBServerFailure) {
       showDialog(
         context: context,
@@ -15,7 +18,7 @@ class EyeBankErrorCard {
             content: ErrorCard(
                 statusCode: statusCode,
                 statusMessage: statusMessage,
-                details: details),
+                details: displayMessage),
           );
         },
       );
@@ -27,9 +30,65 @@ class EyeBankErrorCard {
             content: ErrorCard(
                 statusCode: statusCode,
                 statusMessage: statusMessage,
-                details: details),
+                details: displayMessage),
           );
         },
+      );
+    }
+  }
+
+  static void showErrorToast(EBFailure failure, BuildContext context) {
+    int statusCode = failure.statusCode ?? 500;
+    String statusMessage = failure.errorMessage;
+    String? details = failure.errorObject?.detail;
+    String? errorMessage = failure.errorObject?.message;
+    String displayMessage = errorMessage ?? details ?? "An error occurred";
+    if (failure is EBServerFailure) {
+      Fluttertoast.showToast(
+        msg: "Error: $statusCode\n$displayMessage",
+        toastLength: Toast.values[1],
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 5,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 12.0,
+      );
+    } else if (failure is EBUnknownFailure) {
+      Fluttertoast.showToast(
+        msg: "Error: $statusCode\n$displayMessage",
+        toastLength: Toast.values[1],
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 5,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 12.0,
+      );
+    }
+  }
+
+  static void showErrorSncakBar(EBFailure failure, BuildContext context) {
+    int statusCode = failure.statusCode ?? 500;
+    String statusMessage = failure.errorMessage;
+    String? details = failure.errorObject?.detail;
+    String? errorMessage = failure.errorObject?.message;
+    String displayMessage = errorMessage ?? details ?? "An error occurred";
+    if (failure is EBServerFailure) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: ErrorCard(
+              statusCode: statusCode,
+              statusMessage: statusMessage,
+              details: displayMessage),
+        ),
+      );
+    } else if (failure is EBUnknownFailure) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: ErrorCard(
+              statusCode: statusCode,
+              statusMessage: statusMessage,
+              details: displayMessage),
+        ),
       );
     }
   }
