@@ -15,7 +15,7 @@
                             "name": "question2",
                             "title": "Death Notification",
                             "description": "Death Notification description",
-                            "isRequired": true,
+                            "isRequired": false,
                             "requiredErrorText": "question is required",
                             "readOnly": true,
                             "validators": [
@@ -32,8 +32,8 @@
                             "name": "question3",
                             "title": "title",
                             "description": "descrioption",
-                            "isRequired": true,
-                            "readOnly": true,
+                            "isRequired": false,
+                            "readOnly": false,
                             "validators": [],
                             "choices": [
                                 {
@@ -55,7 +55,7 @@
                             "name": "question1",
                             "title": "tttt",
                             "description": "dddd",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "choices": [
                                 "Item 1",
@@ -68,7 +68,7 @@
                             "name": "question4",
                             "title": "Donation Counselor/Volunteer",
                             "description": "descrion",
-                            "isRequired": true,
+                            "isRequired":false,
                             "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
                             "readOnly": false,
                             "placeholder": "palceholder"
@@ -78,7 +78,7 @@
                             "name": "question11",
                             "title": "Unit Details",
                             "description": "desciptio",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "placeholder": "hind"
                         },
@@ -86,7 +86,7 @@
                             "type": "checkbox",
                             "name": "question12",
                             "title": "Condition I Agree to:",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "choices": [
                                 {
@@ -108,7 +108,7 @@
                             "name": "question13",
                             "title": "Health Insurance Card",
                             "description": "desc",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "maxSize": 5
                         },
@@ -117,7 +117,7 @@
                             "name": "question14",
                             "title": "Visual Acuity",
                             "description": "desc",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "inputType": "range",
                             "min": 0,

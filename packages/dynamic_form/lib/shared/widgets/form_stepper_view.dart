@@ -1,10 +1,12 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/provider/dynamic_form_validation_provider.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FormStepperView extends StatefulWidget {
+class FormStepperView extends ConsumerStatefulWidget {
   const FormStepperView({
     super.key,
     required this.name,
@@ -18,10 +20,10 @@ class FormStepperView extends StatefulWidget {
   final VoidCallback? onSubmit;
 
   @override
-  State<FormStepperView> createState() => _PageWidgetState();
+  ConsumerState<FormStepperView> createState() => _PageWidgetState();
 }
 
-class _PageWidgetState extends State<FormStepperView> {
+class _PageWidgetState extends ConsumerState<FormStepperView> {
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,15 @@ class _PageWidgetState extends State<FormStepperView> {
                             for (var field in element.elements) {
                               final fieldValue = widget
                                   .formKey.currentState?.value[field.name];
-                              if (field.isRequired && fieldValue != null) {}
+                              if (field.isRequired && fieldValue == null) {
+                                ref
+                                    .watch(dynamicFormValidationProvider)
+                                    .updateValidation(currentStep, false);
+                              } else {
+                                ref
+                                    .watch(dynamicFormValidationProvider)
+                                    .updateValidation(currentStep, true);
+                              }
                             }
                           }
                         },
@@ -146,4 +156,14 @@ class _PageWidgetState extends State<FormStepperView> {
       ],
     );
   }
+
+  // void _handleSubmit() {
+  //   // Save the form state before validation
+  //   widget.formKey.currentState?.save();
+
+  //   _validatePanels();
+  //   if (panelValidationStatus.every((status) => status)) {
+  //     widget.onSubmit?.call();
+  //   }
+  // }
 }

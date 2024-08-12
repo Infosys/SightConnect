@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final dynamicFormValidationProvider =
-    ChangeNotifierProvider<DynamicFormValidationProvider>((ref) {
-  return DynamicFormValidationProvider();
-});
+    ChangeNotifierProvider<DynamicFormValidationProvider>(
+  (ref) => DynamicFormValidationProvider(),
+);
 
 class DynamicFormValidationProvider extends ChangeNotifier {
-    List<bool> validationList = [];
+  List<bool> validationList = [];
 
   void updateValidation(int index, bool value) {
     if (index < validationList.length) {
