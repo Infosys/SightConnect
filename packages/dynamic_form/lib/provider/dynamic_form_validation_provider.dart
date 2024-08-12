@@ -7,25 +7,14 @@ final dynamicFormValidationProvider =
 });
 
 class DynamicFormValidationProvider extends ChangeNotifier {
-  final Map<String, String> _errors = {};
+    List<bool> validationList = [];
 
-  void addError({required String key, required String error}) {
-    _errors[key] = error;
+  void updateValidation(int index, bool value) {
+    if (index < validationList.length) {
+      validationList[index] = value;
+    } else {
+      validationList.add(value);
+    }
     notifyListeners();
   }
-
-  void removeError({required String key}) {
-    _errors.remove(key);
-    notifyListeners();
-  }
-
-  bool hasError({required String key}) {
-    return _errors.containsKey(key);
-  }
-
-  String? getError({required String key}) {
-    return _errors[key];
-  }
-
-  bool get hasErrors => _errors.isNotEmpty;
 }

@@ -77,6 +77,14 @@ class _PageWidgetState extends State<FormStepperView> {
                               currentStep++;
                             });
                           }
+                          final page = widget.pages[currentStep];
+                          for (var element in page.elements) {
+                            for (var field in element.elements) {
+                              final fieldValue = widget
+                                  .formKey.currentState?.value[field.name];
+                              if (field.isRequired && fieldValue != null) {}
+                            }
+                          }
                         },
                         child: const Text('Next'),
                       ),
