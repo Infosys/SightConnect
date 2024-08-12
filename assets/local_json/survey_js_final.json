@@ -1,7 +1,7 @@
 {
     "title": "Doctor Consent Form",
     "logoPosition": "right",
-    "formLayoutType": "stepper",
+    "formLayoutType": "",
     "pages": [
         {
             "name": "page1",
@@ -15,16 +15,10 @@
                             "name": "question2",
                             "title": "Death Notification",
                             "description": "Death Notification description",
-                            "isRequired": true,
+                            "isRequired": false,
                             "requiredErrorText": "question is required",
                             "readOnly": true,
-                            "validators": [
-                                {
-                                    "type": "regex",
-                                    "text": "error message",
-                                    "regex": "expression"
-                                }
-                            ],
+                            "validators": [],
                             "inputType": "datetime-local"
                         },
                         {
@@ -32,7 +26,7 @@
                             "name": "question3",
                             "title": "title",
                             "description": "descrioption",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "validators": [],
                             "choices": [
@@ -55,7 +49,7 @@
                             "name": "question1",
                             "title": "tttt",
                             "description": "dddd",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "choices": [
                                 "Item 1",
@@ -68,7 +62,7 @@
                             "name": "question4",
                             "title": "Donation Counselor/Volunteer",
                             "description": "descrion",
-                            "isRequired": true,
+                            "isRequired": false,
                             "requiredErrorText": "Please Enter Donation Counselor/Volunteer",
                             "readOnly": false,
                             "placeholder": "palceholder"
@@ -78,7 +72,7 @@
                             "name": "question11",
                             "title": "Unit Details",
                             "description": "desciptio",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "placeholder": "hind"
                         },
@@ -86,7 +80,7 @@
                             "type": "checkbox",
                             "name": "question12",
                             "title": "Condition I Agree to:",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "choices": [
                                 {
@@ -108,7 +102,7 @@
                             "name": "question13",
                             "title": "Health Insurance Card",
                             "description": "desc",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "maxSize": 5
                         },
@@ -117,12 +111,40 @@
                             "name": "question14",
                             "title": "Visual Acuity",
                             "description": "desc",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "inputType": "range",
                             "min": 0,
                             "max": 100,
                             "step": 10
+                        }
+                    ]
+                },
+                {
+                    "type": "repeated-panel",
+                    "name": "Rading Panel",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "question2",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": false,
+                            "requiredErrorText": "question is required",
+                            "readOnly": false,
+                            "validators": [],
+                            "inputType": "datetime-local"
+                        },
+                        {
+                            "type": "text",
+                            "name": "question15",
+                            "title": "Death Notification",
+                            "description": "Death Notification description",
+                            "isRequired": false,
+                            "requiredErrorText": "question is required",
+                            "readOnly": false,
+                            "validators": [],
+                            "inputType": "datetime-local"
                         }
                     ]
                 },
@@ -158,7 +180,7 @@
                             "name": "contactType",
                             "title": "Contact Type",
                             "description": "dddd",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "choices": [
                                 "office",
@@ -178,7 +200,7 @@
                                             "name": "officeEmail",
                                             "title": "Office Email",
                                             "description": "descrion",
-                                            "isRequired": true,
+                                            "isRequired": false,
                                             "requiredErrorText": "Please Enter Office Email",
                                             "readOnly": false,
                                             "placeholder": "palceholder"
@@ -193,7 +215,7 @@
                                             "name": "homeEmail",
                                             "title": "Home Email",
                                             "description": "descrion",
-                                            "isRequired": true,
+                                            "isRequired": false,
                                             "requiredErrorText": "Please Enter Home Email",
                                             "readOnly": false,
                                             "placeholder": "palceholder"
@@ -208,7 +230,7 @@
                                             "name": "emergencyContactType",
                                             "title": "Emergency Contact Type",
                                             "description": "dddd",
-                                            "isRequired": true,
+                                            "isRequired": false,
                                             "readOnly": true,
                                             "choices": [
                                                 "parent",
@@ -227,7 +249,7 @@
                                                             "name": "parentPhone",
                                                             "title": "Parent's Email",
                                                             "description": "descrion",
-                                                            "isRequired": true,
+                                                            "isRequired": false,
                                                             "requiredErrorText": "Please Enter Parent's Email",
                                                             "readOnly": false,
                                                             "placeholder": "palceholder"
@@ -242,7 +264,7 @@
                                                             "name": "friendPhone",
                                                             "title": "Friend's Phone",
                                                             "description": "descrion",
-                                                            "isRequired": true,
+                                                            "isRequired": false,
                                                             "requiredErrorText": "Please Enter Friend's Phone Number",
                                                             "readOnly": false,
                                                             "placeholder": "palceholder"
@@ -252,7 +274,7 @@
                                                             "name": "friendEmail",
                                                             "title": "Friend's Email",
                                                             "description": "descrion",
-                                                            "isRequired": true,
+                                                            "isRequired": false,
                                                             "requiredErrorText": "Please Enter Friend's Email",
                                                             "readOnly": false,
                                                             "placeholder": "palceholder"
@@ -270,7 +292,7 @@
                             "name": "bloodGroup",
                             "title": "Blood Group",
                             "description": "dddd",
-                            "isRequired": true,
+                            "isRequired": false,
                             "readOnly": true,
                             "choices": [
                                 "A+",
@@ -290,7 +312,7 @@
                                             "name": "aPositive",
                                             "title": "A+",
                                             "description": "descrion",
-                                            "isRequired": true,
+                                            "isRequired": false,
                                             "requiredErrorText": "Please Enter A+",
                                             "readOnly": false,
                                             "placeholder": "palceholder"
@@ -305,7 +327,7 @@
                                             "name": "bPositive",
                                             "title": "B+",
                                             "description": "descrion",
-                                            "isRequired": true,
+                                            "isRequired": false,
                                             "requiredErrorText": "Please Enter B+",
                                             "readOnly": false,
                                             "placeholder": "palceholder"
@@ -320,7 +342,7 @@
                                             "name": "otherBloodGroup",
                                             "title": "Other Blood Group",
                                             "description": "dddd",
-                                            "isRequired": true,
+                                            "isRequired": false,
                                             "readOnly": true,
                                             "choices": [
                                                 {
@@ -345,7 +367,7 @@
                                                             "name": "abPositive",
                                                             "title": "AB+",
                                                             "description": "descrion",
-                                                            "isRequired": true,
+                                                            "isRequired": false,
                                                             "requiredErrorText": "Please Enter AB+",
                                                             "readOnly": false,
                                                             "placeholder": "palceholder"
@@ -360,7 +382,7 @@
                                                             "name": "oPositive",
                                                             "title": "O+",
                                                             "description": "descrion",
-                                                            "isRequired": true,
+                                                            "isRequired": false,
                                                             "requiredErrorText": "Please Enter O+",
                                                             "readOnly": false,
                                                             "placeholder": "palceholder"

@@ -17,3 +17,8 @@ enum FormLayoutType {
   STEPPER,
   PANEL,
 }
+
+enum FormPanelType {
+  PANEL,
+  REPEATED_PANEL,
+}

@@ -1,0 +1,105 @@
+{
+    "title": "Doctor Consent Form",
+    "logoPosition": "right",
+    "formLayoutType": "",
+    "pages": [
+        {
+            "name": "Eye Assessment",
+            "repeats": true,
+            "maxRepeat": 2,
+            "minRepeat": 1,
+            "differentiator": "C3.1",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Eye Assessment",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "C3.1[0]",
+                            "title": "Tissue Type",
+                            "description": "Tissue Type",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": false,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "choice"
+                        },
+                        {
+                            "type": "text",
+                            "name": "C3.4[0]",
+                            "title": "Iris Color",
+                            "description": "Iris Color",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": false,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "String"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Eye Assessment",
+            "repeats": true,
+            "maxRepeat": 2,
+            "minRepeat": 1,
+            "differentiator": "C3.1",
+            "elements": [
+                {
+                    "type": "panel",
+                    "name": "Eye Assessment",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "name": "C3.1[1]",
+                            "title": "Tissue Type",
+                            "description": "Tissue Type",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": false,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "choice"
+                        },
+                        {
+                            "type": "text",
+                            "name": "C3.4[1]",
+                            "title": "Iris Color",
+                            "description": "Iris Color",
+                            "isRequired": true,
+                            "requiredErrorText": "question is required",
+                            "readOnly": false,
+                            "validators": [
+                                {
+                                    "type": "regex",
+                                    "text": "error message",
+                                    "regex": "expression"
+                                }
+                            ],
+                            "inputType": "String"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

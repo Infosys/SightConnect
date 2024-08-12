@@ -40,7 +40,7 @@ class DynamicFormJsonMapper {
     if (elements != null) {
       for (final element in elements) {
         pageElementEntities.add(PageElementEntity(
-          type: _mapToFormType(element.type).toString(),
+          type: _getPanelType(element.type),
           name: element.name ?? '',
           elements: _getElements(element.elements),
         ));
@@ -168,5 +168,16 @@ FormLayoutType _mapToFormLayoutType(String? value) {
       return FormLayoutType.PANEL;
     default:
       return FormLayoutType.PANEL;
+  }
+}
+
+FormPanelType _getPanelType(String? value) {
+  switch (value) {
+    case 'panel':
+      return FormPanelType.PANEL;
+    case 'repeated-panel':
+      return FormPanelType.REPEATED_PANEL;
+    default:
+      return FormPanelType.PANEL;
   }
 }

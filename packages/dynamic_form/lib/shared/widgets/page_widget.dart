@@ -1,5 +1,7 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
+import 'package:dynamic_form/shared/widgets/app_dynamic_panel.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -34,15 +36,20 @@ class _PageWidgetState extends State<PageWidget> {
         if (panel.elements.isEmpty) {
           return Container();
         }
-        return AppCard(
-          title: panel.name,
-          marginBottom: 16,
-          child: Wrap(
-            runSpacing: 16,
-            alignment: WrapAlignment.start,
-            children: _buildFields(panel.elements, widget.formKey),
-          ),
-        );
+        return panel.type == FormPanelType.REPEATED_PANEL
+            ? AppDynamicPanel(
+                panel: panel,
+                globalFormKey: widget.formKey,
+              )
+            : AppCard(
+                title: panel.name,
+                marginBottom: 16,
+                child: Wrap(
+                  runSpacing: 16,
+                  alignment: WrapAlignment.start,
+                  children: _buildFields(panel.elements, widget.formKey),
+                ),
+              );
       }).toList(),
     );
   }
