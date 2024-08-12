@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_inventory_timline.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_inventory_overview.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_request_widget.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -35,15 +35,18 @@ class OrganInventoryPage extends StatelessWidget {
           title: const Text('Organ Inventory'),
           bottom: const TabBar(
             tabs: [
-              Tab(text: 'Requests'),
-              Tab(text: 'Timeline'),
+              Tab(text: 'Overview'),
+              Badge(
+                label: Text("New"),
+                child: Tab(text: 'Request (93)'),
+              ),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
+            OrganInventoryOverview(),
             OrganRequestWidget(),
-            OrganInventoryTimline(),
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
