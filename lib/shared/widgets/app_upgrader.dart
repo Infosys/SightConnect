@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/constants/api_constant.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:upgrader/upgrader.dart';
@@ -14,10 +15,10 @@ class AppUpgrader extends StatelessWidget {
   Widget build(BuildContext context) {
     return UpgradeAlert(
       dialogStyle: UpgradeDialogStyle.cupertino,
-      showIgnore: kDebugMode ? true : false,
-      showLater: kDebugMode ? true : false,
-      shouldPopScope: () => kDebugMode ? true : false,
-      canDismissDialog: kDebugMode ? true : false,
+      showIgnore: (kDebugMode || ApiConstant.isDev) ? true : false,
+      showLater: (kDebugMode || ApiConstant.isDev) ? true : false,
+      shouldPopScope: () => (kDebugMode || ApiConstant.isDev) ? true : false,
+      canDismissDialog: (kDebugMode || ApiConstant.isDev) ? true : false,
       onUpdate: () {
         return true;
       },

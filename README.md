@@ -10,6 +10,9 @@ flutter run -d chrome --web-browser-flag "--disable-web-security"
 
 flutter gen-l10n
 
+#Remove comment
+(?://.*$|/\*[\s\S]*?\*/)  
+
 ### Localization
 
 To generate arb files and app_localizations dart files, You need to run a javascript file.
