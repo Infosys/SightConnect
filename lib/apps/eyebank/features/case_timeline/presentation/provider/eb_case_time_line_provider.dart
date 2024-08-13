@@ -41,10 +41,26 @@ var local_timeline_json = [
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "PENDING",
+        "status": "COMPLETED",
         "assessmentName": "TEMPLATE",
-        "stageName": "BLOOD_SAMPLE"
-      }
+        "stageName": "CORNEA_RECOVERY",
+        "subSteps": [
+          {
+            "initiateDate": "2023-10-01T12:00:00Z",
+            "recentUpdatedTime": "2023-10-01T12:00:00Z",
+            "status": "PENDING",
+            "assessmentName": "TEMPLATE",
+            "stageName": "HEMODILUTION"
+          },
+          {
+            "initiateDate": "2023-10-01T12:00:00Z",
+            "recentUpdatedTime": "2023-10-01T12:00:00Z",
+            "status": "PENDING",
+            "assessmentName": "TEMPLATE",
+            "stageName": "BLOOD_SAMPLE"
+          }
+        ]
+      },
     ]
   },
   {
