@@ -8,7 +8,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../utlities/functions.dart';
 
-class PageWidget extends StatefulWidget {
+class PageWidget extends StatelessWidget {
   const PageWidget({
     super.key,
     required this.elements,
@@ -19,37 +19,33 @@ class PageWidget extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
 
   @override
-  State<PageWidget> createState() => _PageWidgetState();
-}
-
-class _PageWidgetState extends State<PageWidget> {
-  @override
   Widget build(BuildContext context) {
-    if (widget.elements.isEmpty) {
+    if (elements.isEmpty) {
       return Container();
     }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: widget.elements.map((panel) {
+      children: elements.map((panel) {
         if (panel.elements.isEmpty) {
           return Container();
+        } else if (panel.type == FormPanelType.REPEATED_PANEL) {
+          return AppDynamicPanel(
+            panel: panel,
+            globalFormKey: formKey,
+          );
+        } else {
+          return AppCard(
+            title: panel.name,
+            marginBottom: 16,
+            child: Wrap(
+              runSpacing: 16,
+              alignment: WrapAlignment.start,
+              children: _buildFields(panel.elements, formKey),
+            ),
+          );
         }
-        return panel.type == FormPanelType.REPEATED_PANEL
-            ? AppDynamicPanel(
-                panel: panel,
-                globalFormKey: widget.formKey,
-              )
-            : AppCard(
-                title: panel.name,
-                marginBottom: 16,
-                child: Wrap(
-                  runSpacing: 16,
-                  alignment: WrapAlignment.start,
-                  children: _buildFields(panel.elements, widget.formKey),
-                ),
-              );
       }).toList(),
     );
   }

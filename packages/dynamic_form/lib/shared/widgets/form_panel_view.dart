@@ -1,4 +1,5 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class FormPanelView extends StatefulWidget {
 class _FormPanelViewState extends State<FormPanelView> {
   @override
   Widget build(BuildContext context) {
+    Log.f("FormPanelView");
+
     if (widget.pages.isEmpty) {
       return Container();
     }

@@ -6,6 +6,7 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/pages/form_builder_page.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class DynamicFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Log.f("DynamicFormPage");
     return FutureBuilder(
       future: _loadJson(),
       builder: (context, snapshot) {
