@@ -1,24 +1,44 @@
 import 'dart:async';
 
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class EbInfiniteScrollView<T> extends StatefulWidget {
-  final Future<List<T>> Function(int pageKey, int pageSize) fetchPageData;
+  final Future<List<T>> Function(
+      int pageKey, int pageSize, List<String> filters) fetchPageData;
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
-  final bool showSearch;
-  final bool Function(T item, String query)? filterLogic;
+  final bool enableSearch;
+  final bool enableFilter;
+  final List<String>? filterOptions;
   final int defaultPageSize;
+  final VoidCallback? onSearchTap;
 
-  const EbInfiniteScrollView({
+  EbInfiniteScrollView({
     super.key,
     required this.fetchPageData,
     required this.itemBuilder,
-    this.showSearch = false,
-    this.defaultPageSize = 20,
-    this.filterLogic,
-  });
+    this.enableSearch = false,
+    this.enableFilter = false,
+    this.defaultPageSize = 10,
+    this.filterOptions,
+    this.onSearchTap,
+  }) {
+    if (enableFilter) {
+      if (filterOptions == null) {
+        throw ArgumentError(
+            'filterOptions are required when enableFilter is true');
+      }
+    }
+    if (enableSearch) {
+      if (onSearchTap == null) {
+        throw ArgumentError(
+            'onSearchTap is required when enableSearch is true');
+      }
+    }
+  }
 
   @override
   EbInfiniteScrollViewState<T> createState() => EbInfiniteScrollViewState<T>();
@@ -28,7 +48,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
   int _pageSize = 10;
   late PagingController<int, T> _pagingController;
   final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
+  final List<String> _selectedFilters = [];
   Timer? _debounce;
 
   @override
@@ -38,71 +58,86 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
+    _pagingController.addListener(() {
+      setState(() {
+        logger.d("Next Page Key: ${_pagingController.nextPageKey}");
+      });
+    });
     super.initState();
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      logger.f('Fetching page: $pageKey');
-      final newItems = await widget.fetchPageData(pageKey, _pageSize);
+      final newItems =
+          await widget.fetchPageData(pageKey, _pageSize, _selectedFilters);
 
-      final filteredItems = widget.filterLogic != null
-          ? newItems
-              .where((item) => widget.filterLogic!(item, _searchQuery))
-              .toList()
-          : newItems;
-
-      logger.f(
-          'Fetched ${newItems.length} items, ${filteredItems.length} after filtering');
-
-      final isLastPage = filteredItems.length < _pageSize;
+      final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
-        _pagingController.appendLastPage(filteredItems);
-        logger.f('Appended last page');
+        _pagingController.appendLastPage(newItems);
       } else {
-        final nextPageKey = pageKey + filteredItems.length;
-        _pagingController.appendPage(filteredItems, nextPageKey);
-        logger.f('Appended page, next page key: $nextPageKey');
+        final nextPageKey = pageKey + newItems.length;
+        _pagingController.appendPage(newItems, nextPageKey);
       }
     } catch (error) {
+      logger.e(error);
       _pagingController.error = error;
-      logger.f('Error fetching page: $error');
     }
-  }
-
-  void _onSearchChanged() {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      setState(() {
-        _searchQuery = _searchController.text;
-      });
-      _pagingController.refresh();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        if (widget.showSearch)
+        if (widget.enableSearch || widget.enableFilter)
           SliverAppBar(
             floating: true,
             pinned: true,
             snap: true,
-            title: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    _searchController.clear();
-                    _onSearchChanged();
-                  },
+            title: Row(
+              children: [
+                Expanded(
+                  child: widget.enableSearch
+                      ? InkWell(
+                          onTap: widget.onSearchTap,
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              children: [
+                                const SizedBox(width: 12),
+                                Text(
+                                  'Search',
+                                  style: applyRobotoFont(
+                                    fontSize: 14,
+                                    color: AppColor.grey,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.search,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 8),
+                              ],
+                            ),
+                          ),
+                        )
+                      : widget.enableFilter
+                          ? Text(
+                              'Total ${_pagingController.itemList?.length ?? 0} Records')
+                          : Container(),
                 ),
-                border: const OutlineInputBorder(),
-              ),
-              onChanged: (value) => _onSearchChanged(),
+                if (widget.enableFilter)
+                  IconButton(
+                    icon: const Icon(Icons.filter_list),
+                    onPressed: () {
+                      _showFilterBottomSheet();
+                    },
+                  ),
+              ],
             ),
           ),
         PagedSliverList<int, T>(
@@ -114,6 +149,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Error loading data'),
+                  const SizedBox(height: 8),
                   ElevatedButton(
                     onPressed: () => _pagingController.refresh(),
                     child: const Text('Retry'),
@@ -148,6 +184,82 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
           ),
         ),
       ],
+    );
+  }
+
+  _showFilterBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Filters',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _selectedFilters.clear();
+                          });
+                        },
+                        child: const Text('Clear all'),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: widget.filterOptions!.length,
+                    itemBuilder: (context, index) {
+                      final filter = widget.filterOptions![index];
+                      return CheckboxListTile(
+                        title: Text(filter),
+                        value: _selectedFilters.contains(filter),
+                        onChanged: (value) {
+                          setState(() {
+                            if (value!) {
+                              _selectedFilters.add(filter);
+                            } else {
+                              _selectedFilters.remove(filter);
+                            }
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _pagingController.refresh();
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Apply'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
