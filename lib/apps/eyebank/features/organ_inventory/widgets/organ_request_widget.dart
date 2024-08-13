@@ -1,5 +1,7 @@
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/modals/organ_tissue_search_delegate.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -13,103 +15,45 @@ class OrganRequestWidget extends StatefulWidget {
 }
 
 class _OrganRequestWidgetState extends State<OrganRequestWidget> {
-  final List<String> _filters = ['All', 'Pending', 'Completed'];
-  String _selectedFilter = 'All';
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _buildFilterChips(),
-          Expanded(
-            child: _buildRequestList(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFilterChips() {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Wrap(
-        spacing: 8.0,
-        children: _filters.map((filter) {
-          final bool isSelected = _selectedFilter == filter;
-          return FilterChip(
-            backgroundColor:
-                isSelected ? AppColor.primary.withOpacity(0.1) : AppColor.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              side: BorderSide(
-                color: isSelected
-                    ? AppColor.primary
-                    : Colors.grey.withOpacity(0.5),
-              ),
+      child: EbInfiniteScrollView<TableData>(
+        fetchPageData: (pageKey, pageSize, filters) async {
+          final records = List.generate(
+            pageSize,
+            (index) => TableData(
+              eye: "Eye ${index + 1}",
+              category: "Category ${index + 1}",
+              date: DateTime.now(),
+              donor: "Donor ${index + 1}",
+              sampleID: "Sample ID ${index + 1}",
+              status: "Status ${index + 1}",
+              tissue: "Tissue ${index + 1}",
             ),
-            label: Text(
-              filter,
-              style: applyFiraSansFont(
-                fontSize: 12.0,
-                color: isSelected ? AppColor.primary : Colors.black,
-              ),
-            ),
-            selected: isSelected,
-            selectedColor: AppColor.primary.withOpacity(0.2),
-            onSelected: (bool selected) {
-              setState(() {
-                _selectedFilter = selected ? filter : 'All';
-              });
-            },
-            checkmarkColor: AppColor.primary,
           );
-        }).toList(),
+          return Future.value(records);
+        },
+        itemBuilder: (context, item, index) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: OrganRequestCard(
+              doctorName: 'Dr. John Doe',
+              priority: 'High',
+              tissue: 'Cornea',
+              eyeInvolved: 'Right Eye',
+              tissueExpiryTime: '2 days 3 hours',
+              transplantationTechnique: 'PKP, EK, ALK',
+            ),
+          );
+        },
+        filterOptions: const ["Status 1", "Status 2", "Status 3"],
+        enableSearch: false,
+        enableFilter: true,
+        defaultPageSize: 10,
+        onSearchTap: () {},
       ),
-    );
-  }
-
-  Widget _buildRequestList() {
-    return CustomScrollView(
-      slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              if (_selectedFilter != 'All' && _selectedFilter != 'Pending') {
-                return Container();
-              }
-              return InkWell(
-                onTap: () {
-                  _showAssignmentFlow(context, index);
-                },
-                child: const OrganRequestCard(
-                  doctorName: 'Dr. John Doe',
-                  priority: 'High',
-                  tissue: 'Cornea',
-                  eyeInvolved: 'Right Eye',
-                  tissueExpiryTime: '2 days 3 hours',
-                  transplantationTechnique: 'PKP, EK, ALK',
-                ),
-              );
-            },
-            childCount: 20,
-          ),
-        ),
-      ],
     );
   }
 
