@@ -115,7 +115,13 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
               return Step(
                 stepStyle: StepStyle(
                   indexStyle: TextStyle(
-                    color: currentStep == index ? Colors.white : Colors.black,
+                    color: () {
+                      if (validationList.length == widget.pages.length) {
+                        return Colors.white;
+                      } else {
+                        return currentStep == index ? Colors.white : Colors.black;
+                      }
+                    }(),
                     fontSize: 14,
                   ),
                   border: Border.all(
@@ -162,6 +168,7 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
     final validationList =
         ref.read(dynamicFormValidationProvider).validationList;
     // Log.d('Validation List: $validationList');
+    setState(() {});
     if (validationList.every((status) => status)) {
       widget.onSubmit?.call();
     }
