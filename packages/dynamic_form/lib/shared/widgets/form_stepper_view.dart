@@ -165,13 +165,13 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
 
   void _handleSubmit() {
     _validatePanel(currentStep);
-    final validationList =
-        ref.read(dynamicFormValidationProvider).validationList;
+    // final validationList =
+    //     ref.read(dynamicFormValidationProvider).validationList;
     // Log.d('Validation List: $validationList');
     setState(() {});
-    if (validationList.every((status) => status)) {
+    // if (validationList.every((status) => status)) {
       widget.onSubmit?.call();
-    }
+    // }
   }
 
   void _validatePanel(int pageIndex) {
