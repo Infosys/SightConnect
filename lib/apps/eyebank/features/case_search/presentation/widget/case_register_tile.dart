@@ -1,4 +1,5 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/search_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/contracts/eb_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -6,30 +7,33 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/table_data.dart';
 
-final SearchCaseModel caseModel = SearchCaseModel(
-  caseId: 1945,
-  screeningStatus: 'Final',
-  donarBrief: const DonarBrief(
-    id: 9334,
+final EncounterBriefModel caseModel = EncounterBriefModel(
+  encounterId: 0,
+  encounterStatus: AssessmentName.INTIMATION,
+  donorBrief: const DonorBrief(
+    id: 0,
     name: "George Soros",
-    contact: '9898787878',
+    contact: "9363476747",
   ),
-  intimateDate: DateTime.parse('2024-08-06T07:00:22.706Z'),
+  intimateDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
   performerId: 0,
-  deathDate: DateTime.parse('2024-08-06T07:00:22.706Z'),
+  deathDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
   bodyLocation: const BodyLocation(
-    street: '42 Avenue Street',
-    city: 'New York City',
-    state: 'New York',
-    zipCode: '10001',
-    country: 'USA',
-    landmark: 'Statue of Liberty',
-    village: 'string',
-    district: 'string',
-    latitude: 'string',
-    longitude: 'string',
+    addressLine1: "42 Avenue Street",
+    addressLine2: "New York City",
+    street: "42 Avenue Street",
+    city: "New York City",
+    state: "New York",
+    zipCode: "10001",
+    country: "USA",
+    landmark: "string",
+    village: "string",
+    district: "string",
+    latitude: "string",
+    longitude: "string",
   ),
-  organExtracted: ['Cornea', 'Kidney', 'Liver'],
+  organExtracted: ["Heart"],
+  lastModifiedDate: DateTime.parse('2024-08-13T07:41:19.692Z'),
 );
 
 class CaseRegisterTile extends StatelessWidget {
@@ -66,7 +70,7 @@ class _CompactCard extends StatelessWidget {
     this.caseModel,
   });
   final Function()? onTap;
-  final SearchCaseModel? caseModel;
+  final EncounterBriefModel? caseModel;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +114,7 @@ class _DetailedCard extends StatelessWidget {
   });
 
   final Function()? onTap;
-  final SearchCaseModel? caseModel;
+  final EncounterBriefModel? caseModel;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +162,7 @@ Widget _buildTopRow(BuildContext context) {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: caseModel.donarBrief?.name ?? "",
+                    text: caseModel.donorBrief?.name ?? "",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -173,7 +177,7 @@ Widget _buildTopRow(BuildContext context) {
                     ),
                   ),
                   TextSpan(
-                    text: caseModel.donarBrief?.contact ?? "",
+                    text: caseModel.donorBrief?.contact ?? "",
                     style:
                         applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
                   ),
@@ -194,12 +198,12 @@ Widget _buildTopRow(BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            'Case ID: ${caseModel.caseId ?? ""}',
+            'Case ID: ${caseModel.encounterId ?? ""}',
             style: applyRobotoFont(fontSize: 14),
           ),
           const SizedBox(height: 4),
           Text(
-            caseModel.screeningStatus ?? "",
+            caseModel.encounterStatus.toString() ?? "",
             style: applyRobotoFont(
               fontSize: 12,
               color: AppColor.primary,

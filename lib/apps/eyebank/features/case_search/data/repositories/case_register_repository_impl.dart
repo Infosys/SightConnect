@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/repositories/contracts/case_register_repository.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/search_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
@@ -100,14 +100,14 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   }
 
   @override
-  Future<Either<Failure, SearchCaseModel>> searchTableData(
+  Future<Either<Failure, EncounterBriefModel>> searchTableData(
       String donorMobile, String caseId) async {
     var endpoint = 'search-table-data';
     try {
       var data = await _dio.get(endpoint,
           queryParameters: {'donorMobile': donorMobile, 'caseId': caseId});
       if (data.statusCode == 200) {
-        var response = SearchCaseModel.fromJson(data.data);
+        var response = EncounterBriefModel.fromJson(data.data);
         return Right(response);
       } else {
         return Left(ServerFailure(
