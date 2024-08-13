@@ -31,11 +31,7 @@ class OrganInventoryOverview extends StatelessWidget {
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                        colors: [Colors.teal.shade100, Colors.teal.shade400],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
+                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black26,
@@ -45,23 +41,23 @@ class OrganInventoryOverview extends StatelessWidget {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             stat['icon'] as IconData,
                             size: 40.0,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
-                          const SizedBox(height: 16.0),
+                          const SizedBox(height: 12.0),
                           Text(
                             stat['title'] as String? ?? '',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                           const SizedBox(height: 8.0),
@@ -70,7 +66,7 @@ class OrganInventoryOverview extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                         ],
@@ -92,14 +88,15 @@ class OrganInventoryOverview extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   elevation: 5,
+                  color: Colors.white,
                   child: ListTile(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    contentPadding: const EdgeInsets.all(16.0),
-                    tileColor: Colors.teal.withOpacity(0.1),
+                    contentPadding: const EdgeInsets.all(8.0), // Reduced padding
+                    tileColor: Colors.white,
                     leading: CircleAvatar(
-                      backgroundColor: Colors.teal,
+                      backgroundColor: Colors.black,
                       child: Text(
                         '#$index',
                         style: const TextStyle(color: Colors.white),
@@ -109,7 +106,7 @@ class OrganInventoryOverview extends StatelessWidget {
                       'Cornea Request #$index',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.teal,
+                        color: Colors.black,
                       ),
                     ),
                     subtitle: Column(
@@ -118,7 +115,7 @@ class OrganInventoryOverview extends StatelessWidget {
                         const SizedBox(height: 8),
                         const Text(
                           'Doctor: Dr. Smith',
-                          style: TextStyle(color: Colors.black87),
+                          style: TextStyle(color: Colors.black54),
                         ),
                         const SizedBox(height: 8),
                         Text(
@@ -128,7 +125,7 @@ class OrganInventoryOverview extends StatelessWidget {
                       ],
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.arrow_forward, color: Colors.teal),
+                      icon: const Icon(Icons.arrow_forward, color: Colors.black),
                       onPressed: () {},
                     ),
                   ),
