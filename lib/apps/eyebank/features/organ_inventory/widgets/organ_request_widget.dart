@@ -35,25 +35,32 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
     return Wrap(
       spacing: 8.0,
       children: _filters.map((filter) {
+        final bool isSelected = _selectedFilter == filter;
         return FilterChip(
-          backgroundColor: AppColor.lightGrey,
+          backgroundColor:
+              isSelected ? AppColor.primary.withOpacity(0.1) : AppColor.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
+            side: BorderSide(
+              color:
+                  isSelected ? AppColor.primary : Colors.grey.withOpacity(0.5),
+            ),
           ),
           label: Text(
             filter,
             style: applyFiraSansFont(
               fontSize: 12.0,
-              color:
-                  _selectedFilter == filter ? AppColor.primary : Colors.black,
+              color: isSelected ? AppColor.primary : Colors.black,
             ),
           ),
-          selected: _selectedFilter == filter,
+          selected: isSelected,
+          selectedColor: AppColor.primary.withOpacity(0.2),
           onSelected: (bool selected) {
             setState(() {
               _selectedFilter = selected ? filter : 'All';
             });
           },
+          checkmarkColor: AppColor.primary,
         );
       }).toList(),
     );

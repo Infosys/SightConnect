@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_inventory_overview.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_request_button.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_request_widget.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -12,6 +13,7 @@ class OrganInventoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
+      initialIndex: 1,
       child: Scaffold(
         appBar: AppBar(
           systemOverlayStyle: const SystemUiOverlayStyle(
@@ -56,10 +58,7 @@ class OrganInventoryPage extends StatelessWidget {
             OrganRequestWidget(),
           ],
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          label: const Text('Add Request'),
-        ),
+        floatingActionButton: const OrganRequestButton(),
       ),
     );
   }
