@@ -30,7 +30,7 @@ abstract class EyeBankRepository {
       String encounterID, AssessmentName stage, SubmitFormDataRequestModel requestData);
   Future<Either<EBFailure, dynamic>> rejectEncounter(
       RejectEncounterRequestModel requestData);
-  Future<Either<EBFailure, dynamic>> fetchFormByStage(dynamic queryData);
+  Future<Either<EBFailure, dynamic>> fetchFormByStage(AssessmentName stage);
 }
 
 class GetAllEncountersParams {
