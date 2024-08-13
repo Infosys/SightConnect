@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -7,14 +8,11 @@ import 'package:flutter/material.dart';
 class WebCaseSearchWidget extends StatelessWidget {
   final int pageSize;
   final List<TableData> data;
-  final bool Function(TableData, String) searchFunction;
-  final Function(TableData) onTap;
+
   const WebCaseSearchWidget({
     super.key,
     required this.data,
     required this.pageSize,
-    required this.searchFunction,
-    required this.onTap,
   });
 
   @override
@@ -29,7 +27,8 @@ class WebCaseSearchWidget extends StatelessWidget {
         'Category',
         'Status',
       ],
-      rowBuilder: (item) => _buildDataRow(item, context, () => onTap(item)),
+      rowBuilder: (item) =>
+          _buildDataRow(item, context, () => _onTap(context, item)),
       filterOptions: const ['Completed', 'Pending'],
       totalPages: (data.length / pageSize).ceil(),
       fetchData: (
@@ -104,6 +103,26 @@ class WebCaseSearchWidget extends StatelessWidget {
             color: Colors.black,
             fontSize: 12,
           )),
+    );
+  }
+
+  bool searchFunction(TableData item, String query) {
+    final lowerCaseQuery = query.toLowerCase();
+    return item.sampleID.toLowerCase().contains(lowerCaseQuery) ||
+        item.date.toString().toLowerCase().contains(lowerCaseQuery) ||
+        item.donor.toLowerCase().contains(lowerCaseQuery) ||
+        item.tissue.toLowerCase().contains(lowerCaseQuery) ||
+        item.eye.toLowerCase().contains(lowerCaseQuery) ||
+        item.category.toLowerCase().contains(lowerCaseQuery) ||
+        item.status.toLowerCase().contains(lowerCaseQuery);
+  }
+
+  void _onTap(BuildContext context, TableData item) {
+    final navigator = Navigator.of(context);
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => EbCaseTimeLinePage(caseID: item.sampleID),
+      ),
     );
   }
 }

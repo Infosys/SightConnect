@@ -13,7 +13,7 @@ import '../models/reject_encounter_request_model.dart';
 import '../models/submit_form_data_request_model.dart';
 import '../models/timeline_model.dart';
 
-var eyeBankRepositoryProvider = Provider<EyeBankRepository>((ref) {
+final eyeBankRepositoryProvider = Provider<EyeBankRepository>((ref) {
   return EyeBankRepositoryImpl(ref.watch(dioProvider));
 });
 
@@ -26,9 +26,9 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   Future<Either<EBFailure, List<EncounterBriefModel>>> getAllEncounters(
       GetAllEncountersParams params) {
     return EyeBankErrorHandler.handle(() async {
-      var endPoint =
+      final endPoint =
           '/encounters?encounterStage=${params.encounterStage}&startDate=${params.startDate}&endDate=${params.endDate}&page=${params.page}&size=${params.size}';
-      var response = await _dio.get(endPoint);
+      final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         return response.data;
       } else {
@@ -38,12 +38,12 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   }
 
   @override
-  Future<Either<EBFailure, List<EncounterBriefModel>>>
-      searchEncounter(SearchEncounterParams params) {
+  Future<Either<EBFailure, List<EncounterBriefModel>>> searchEncounter(
+      SearchEncounterParams params) {
     return EyeBankErrorHandler.handle(() async {
-      var endPoint =
+      final endPoint =
           '/encounters/search?mobile=${params.mobile}&identifier=${params.identifier}&identifierType=${params.identifierType}';
-      var response = await _dio.get(endPoint);
+      final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         return response.data;
       } else {
@@ -58,21 +58,23 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
     AssessmentName stage,
   ) {
     return EyeBankErrorHandler.handle(() async {
-      var endPoint = '/encounters/$encounterID/forms/$stage';
-      var response = await _dio.get(endPoint);
+      final endPoint = '/encounters/$encounterID/forms/$stage';
+      final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         return response.data;
       } else {
-        throw Exception(response.statusMessage ?? 'Error in fetchFormByIDAndStage');
+        throw Exception(
+            response.statusMessage ?? 'Error in fetchFormByIDAndStage');
       }
     });
   }
 
   @override
-  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(String encounterID) {
+  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(
+      String encounterID) {
     return EyeBankErrorHandler.handle(() async {
-      var endPoint = '/encounters/$encounterID/timeline';
-      var response = await _dio.get(endPoint);
+      final endPoint = '/encounters/$encounterID/timeline';
+      final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         return response.data;
       } else {
@@ -83,12 +85,16 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
-      String encounterID, AssessmentName stage, SubmitFormDataRequestModel requestData) {
+      String encounterID,
+      AssessmentName stage,
+      SubmitFormDataRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
-      var endPoint = '/encounters/stage/$stage/forms/SAVE?encounterId=$encounterID';
-      var response = await _dio.post(endPoint, data: requestData.toJson());
+      final endPoint =
+          '/encounters/stage/$stage/forms/SAVE?encounterId=$encounterID';
+      final response = await _dio.post(endPoint, data: requestData.toJson());
       if (response.statusCode == 200) {
-        return response.data.map((e) => SubmitFormDataResponseModel.fromJson(e));
+        return response.data
+            .map((e) => SubmitFormDataResponseModel.fromJson(e));
       } else {
         throw Exception(response.statusMessage ?? 'Error in saveOrDraftForm');
       }
@@ -97,10 +103,10 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, dynamic>> rejectEncounter(
-    RejectEncounterRequestModel requestData) {
+      RejectEncounterRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
-      var endPoint = '/encounters/reject';
-      var response = await _dio.post(endPoint, data: requestData.toJson());
+      const endPoint = '/encounters/reject';
+      final response = await _dio.post(endPoint, data: requestData.toJson());
       if (response.statusCode == 200) {
         return response.data;
       } else {

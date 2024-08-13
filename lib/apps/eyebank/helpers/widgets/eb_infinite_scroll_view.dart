@@ -149,6 +149,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Error loading data'),
+                  const SizedBox(height: 8),
                   ElevatedButton(
                     onPressed: () => _pagingController.refresh(),
                     child: const Text('Retry'),

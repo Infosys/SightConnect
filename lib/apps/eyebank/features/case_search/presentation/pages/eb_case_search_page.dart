@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/case_search_widget.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/mobile_case_search_widget.dart';
 import 'package:flutter/material.dart';
 
 class EbCaseSearchPage extends StatelessWidget {
@@ -11,7 +11,16 @@ class EbCaseSearchPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Case Records'),
         ),
-        body: const CaseSearchWidget(),
+        body: () {
+          return const MobileCaseSearchWidget();
+
+          // return WebCaseSearchWidget(
+          //   data: data,
+          //   pageSize: 10,
+          //   searchFunction: searchFunction,
+          //   onTap: (item) => _onTap(context, item),
+          // );
+        }(),
       ),
     );
   }
