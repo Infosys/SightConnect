@@ -1,5 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/provider/dynamic_form_validation_provider.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,9 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
+    final validationList =
+        ref.read(dynamicFormValidationProvider).validationList;
+    Log.d('Validation List: $validationList');
     if (widget.pages.isEmpty) {
       return Container();
     }
@@ -74,22 +78,7 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
                           minimumSize: const Size(100, 40),
                         ),
                         onPressed: () {
-                          final page = widget.pages[currentStep];
-                          for (var element in page.elements) {
-                            for (var field in element.elements) {
-                              final fieldValue = widget
-                                  .formKey.currentState?.value[field.name];
-                              if (field.isRequired && fieldValue == null) {
-                                ref
-                                    .read(dynamicFormValidationProvider)
-                                    .updateValidation(currentStep, false);
-                              } else {
-                                ref
-                                    .read(dynamicFormValidationProvider)
-                                    .updateValidation(currentStep, true);
-                              }
-                            }
-                          }
+                          _validatePanel(currentStep);
                           if (currentStep < widget.pages.length - 1) {
                             setState(() {
                               currentStep++;
@@ -151,20 +140,38 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
         if (currentStep == widget.pages.length - 1)
           SubmitBtn(
             key: widget.key,
-            onPressed: widget.onSubmit,
+            onPressed: _handleSubmit,
           )
       ],
     );
   }
 
-  // void _handleSubmit() {
-  //   // Save the form state before validation
-  //   widget.formKey.currentState?.save();
-  //   final validationStatusList =
-  //       ref.watch(dynamicFormValidationProvider).validationList;
+  void _handleSubmit() {
+    _validatePanel(currentStep);
+    final validationList =
+        ref.read(dynamicFormValidationProvider).validationList;
+    Log.d('Validation List: $validationList');
+    if (validationList.every((status) => status)) {
+      widget.onSubmit?.call();
+    }
+  }
 
-  //   if (validationStatusList.every((status) => status)) {
-  //     widget.onSubmit?.call();
-  //   }
-  // }
+  void _validatePanel(int pageIndex) {
+    widget.formKey.currentState?.save();
+    final page = widget.pages[pageIndex];
+    for (final element in page.elements) {
+      for (final field in element.elements) {
+        final fieldValue = widget.formKey.currentState?.value[field.name];
+        Log.d(
+            'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}');
+        if (field.isRequired && fieldValue == null) {
+          ref
+              .read(dynamicFormValidationProvider)
+              .updateValidation(pageIndex, false);
+          return;
+        }
+      }
+    }
+    ref.read(dynamicFormValidationProvider).updateValidation(pageIndex, true);
+  }
 }
