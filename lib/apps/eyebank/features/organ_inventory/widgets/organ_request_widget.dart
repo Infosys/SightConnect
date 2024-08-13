@@ -21,6 +21,7 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildFilterChips(),
           Expanded(
@@ -32,37 +33,53 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
   }
 
   Widget _buildFilterChips() {
-    return Wrap(
-      spacing: 8.0,
-      children: _filters.map((filter) {
-        final bool isSelected = _selectedFilter == filter;
-        return FilterChip(
-          backgroundColor:
-              isSelected ? AppColor.primary.withOpacity(0.1) : AppColor.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            side: BorderSide(
-              color:
-                  isSelected ? AppColor.primary : Colors.grey.withOpacity(0.5),
-            ),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
           ),
-          label: Text(
-            filter,
-            style: applyFiraSansFont(
-              fontSize: 12.0,
-              color: isSelected ? AppColor.primary : Colors.black,
+        ],
+      ),
+      child: Wrap(
+        spacing: 8.0,
+        children: _filters.map((filter) {
+          final bool isSelected = _selectedFilter == filter;
+          return FilterChip(
+            backgroundColor:
+                isSelected ? AppColor.primary.withOpacity(0.1) : AppColor.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              side: BorderSide(
+                color: isSelected
+                    ? AppColor.primary
+                    : Colors.grey.withOpacity(0.5),
+              ),
             ),
-          ),
-          selected: isSelected,
-          selectedColor: AppColor.primary.withOpacity(0.2),
-          onSelected: (bool selected) {
-            setState(() {
-              _selectedFilter = selected ? filter : 'All';
-            });
-          },
-          checkmarkColor: AppColor.primary,
-        );
-      }).toList(),
+            label: Text(
+              filter,
+              style: applyFiraSansFont(
+                fontSize: 12.0,
+                color: isSelected ? AppColor.primary : Colors.black,
+              ),
+            ),
+            selected: isSelected,
+            selectedColor: AppColor.primary.withOpacity(0.2),
+            onSelected: (bool selected) {
+              setState(() {
+                _selectedFilter = selected ? filter : 'All';
+              });
+            },
+            checkmarkColor: AppColor.primary,
+          );
+        }).toList(),
+      ),
     );
   }
 
@@ -132,7 +149,7 @@ class OrganRequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
