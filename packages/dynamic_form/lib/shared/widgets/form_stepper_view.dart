@@ -30,7 +30,8 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
   Widget build(BuildContext context) {
     final validationList =
         ref.read(dynamicFormValidationProvider).validationList;
-    Log.d('Validation List: $validationList');
+    // final validationList = [true, true, true, false];
+    // Log.d('Validation List: $validationList');
     if (widget.pages.isEmpty) {
       return Container();
     }
@@ -123,9 +124,19 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
                   ),
                   connectorColor: Colors.black45,
                   connectorThickness: 1,
-                  color: currentStep == index
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
+                  color: () {
+                    if (validationList.length == widget.pages.length) {
+                      return currentStep == index
+                          ? Theme.of(context).primaryColor
+                          : validationList[index]
+                              ? Colors.white
+                              : Colors.red;
+                    } else {
+                      return currentStep == index
+                          ? Theme.of(context).primaryColor
+                          : Colors.white;
+                    }
+                  }(),
                 ),
                 isActive: currentStep == index,
                 title: const SizedBox(),
@@ -150,7 +161,7 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
     _validatePanel(currentStep);
     final validationList =
         ref.read(dynamicFormValidationProvider).validationList;
-    Log.d('Validation List: $validationList');
+    // Log.d('Validation List: $validationList');
     if (validationList.every((status) => status)) {
       widget.onSubmit?.call();
     }
@@ -163,7 +174,7 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
       for (final field in element.elements) {
         final fieldValue = widget.formKey.currentState?.value[field.name];
         Log.d(
-            'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}');
+            'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}, ,currentIndex: $pageIndex');
         if (field.isRequired && fieldValue == null) {
           ref
               .read(dynamicFormValidationProvider)
