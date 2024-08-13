@@ -74,11 +74,6 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
                           minimumSize: const Size(100, 40),
                         ),
                         onPressed: () {
-                          if (currentStep < widget.pages.length - 1) {
-                            setState(() {
-                              currentStep++;
-                            });
-                          }
                           final page = widget.pages[currentStep];
                           for (var element in page.elements) {
                             for (var field in element.elements) {
@@ -86,14 +81,19 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
                                   .formKey.currentState?.value[field.name];
                               if (field.isRequired && fieldValue == null) {
                                 ref
-                                    .watch(dynamicFormValidationProvider)
+                                    .read(dynamicFormValidationProvider)
                                     .updateValidation(currentStep, false);
                               } else {
                                 ref
-                                    .watch(dynamicFormValidationProvider)
+                                    .read(dynamicFormValidationProvider)
                                     .updateValidation(currentStep, true);
                               }
                             }
+                          }
+                          if (currentStep < widget.pages.length - 1) {
+                            setState(() {
+                              currentStep++;
+                            });
                           }
                         },
                         child: const Text('Next'),
@@ -160,9 +160,10 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
   // void _handleSubmit() {
   //   // Save the form state before validation
   //   widget.formKey.currentState?.save();
+  //   final validationStatusList =
+  //       ref.watch(dynamicFormValidationProvider).validationList;
 
-  //   _validatePanels();
-  //   if (panelValidationStatus.every((status) => status)) {
+  //   if (validationStatusList.every((status) => status)) {
   //     widget.onSubmit?.call();
   //   }
   // }
