@@ -203,7 +203,7 @@ Widget _buildTopRow(BuildContext context) {
           ),
           const SizedBox(height: 4),
           Text(
-            caseModel.encounterStatus.toString() ?? "",
+            caseModel.encounterStatus?.name ?? "",
             style: applyRobotoFont(
               fontSize: 12,
               color: AppColor.primary,
