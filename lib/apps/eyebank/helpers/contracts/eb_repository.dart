@@ -1,11 +1,3 @@
-// getAllEncounters  https://api.example.com/encounters?encounterStage=INTIMATION&startDate=12%2F2%2F24&endDate=12%2F3%2F24&page=0&size=10
-// searchEncounter  https://api.example.com/encounters/search?mobile=8770386119&identifier=1234&identifierType=ENCOUNTER
-// fetchFormByIDAndStage https://api.example.com/encounters/2322333/forms/INTIMATION
-// fetchTimelineByID https://api.example.com/encounters/23232/timeline
-// saveOrDraftForm https://api.example.com/encounters/stage/INTIMATION/forms/SAVE?encounterId=23432423423
-// rejectEncounter https://api.example.com/encounters/reject
-// fetchFormByStage https://api.example.com/forms/assessment?stage=INTIMATION
-
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/models/reject_encounter_request_model.dart';
