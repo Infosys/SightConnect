@@ -105,7 +105,6 @@ class ElementElementClassModel {
   String? requiredErrorText;
   bool? readOnly;
   List<Validator>? validators;
-
   List<dynamic>? choices;
   String? placeholder;
   int? maxSize;
@@ -113,6 +112,7 @@ class ElementElementClassModel {
   int? max;
   int? step;
   List<Conditions>? conditions;
+  List<ElementElementClassModel>? elements;
 
   ElementElementClassModel(
       {this.type,
@@ -130,7 +130,8 @@ class ElementElementClassModel {
       this.max,
       this.step,
       this.conditions,
-      this.dependantField});
+      this.dependantField,
+      this.elements});
 
   factory ElementElementClassModel.fromJson(Map<String, dynamic> json) =>
       ElementElementClassModel(
@@ -158,6 +159,10 @@ class ElementElementClassModel {
             : List<Conditions>.from(
                 json["conditions"]!.map((x) => Conditions.fromJson(x))),
         dependantField: json["dependantField"],
+        elements: json["elements"] == null
+            ? []
+            : List<ElementElementClassModel>.from(json["elements"]!
+                .map((x) => ElementElementClassModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -182,6 +187,9 @@ class ElementElementClassModel {
             ? []
             : List<dynamic>.from(conditions!.map((x) => x.toJson())),
         "dependantField": dependantField,
+        "elements": elements == null
+            ? []
+            : List<dynamic>.from(elements!.map((x) => x.toJson())),
       };
 }
 

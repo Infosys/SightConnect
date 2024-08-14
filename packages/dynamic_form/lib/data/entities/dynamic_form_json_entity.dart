@@ -104,6 +104,7 @@ class ElementElementClassEntity {
   final int step;
   final List<ConditionsEntity>? conditions;
   final String? dependantField;
+  final List<ElementElementClassEntity>? elements;
 
   ElementElementClassEntity({
     required this.type,
@@ -124,6 +125,7 @@ class ElementElementClassEntity {
     required this.step,
     this.conditions,
     this.dependantField,
+    this.elements,
   });
 
   factory ElementElementClassEntity.fromJson(Map<String, dynamic> json) =>
@@ -153,6 +155,10 @@ class ElementElementClassEntity {
             : List<ConditionsEntity>.from(
                 json["conditions"].map((x) => ConditionsEntity.fromJson(x))),
         dependantField: json["dependantField"],
+        elements: json["elements"] == null
+            ? []
+            : List<ElementElementClassEntity>.from(json["elements"]
+                .map((x) => ElementElementClassEntity.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -176,6 +182,7 @@ class ElementElementClassEntity {
         "step": step,
         "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
         "dependantField": dependantField,
+        "elements": List<dynamic>.from(elements!.map((x) => x.toJson())),
       };
 
   ElementElementClassEntity copyWith({
