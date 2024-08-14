@@ -11,6 +11,18 @@
                     "name": "Personal Eye Donation Referral Information",
                     "elements": [
                         {
+                            "type": "panel",
+                            "name": "Terms and Condition",
+                            "elements": [
+                                {
+                                    "type": "boolean",
+                                    "name": "question16",
+                                    "title": "I Agree to the terms and conditions",
+                                    "validators": []
+                                }
+                            ]
+                        },
+                        {
                             "type": "text",
                             "name": "question2",
                             "title": "Death Notification",
