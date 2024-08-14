@@ -15,36 +15,38 @@ var local_timeline_json = [
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "TEMPLATE",
+    "assessmentName": "INTIMATION",
     "stageName": "INTIMATION"
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "TEMPLATE",
-    "stageName": "PRELIMINARY_ASSESSMENT"
+    "assessmentName": "PRELIMINARY_ASSESSMENT",
+    "stageName": "PRELIMINARY ASSESSMENT"
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "TEMPLATE",
-    "stageName": "CORNEA_RECOVERY",
+    "assessmentName": "CORNEA_RECOVERY",
+    "stageName": "CORNEA RECOVERY",
     "subSteps": [
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "HEMODILUTION"
+        "assessmentName": "HEMODILUTION",
+        "stageName": "HEMODILUTION",
+        "subSteps": [],
       },
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "BLOOD_SAMPLE"
+        "assessmentName": "BLOOD_SAMPLE",
+        "stageName": "BLOOD SAMPLE",
+        "subSteps": [],
       }
     ]
   },
@@ -52,43 +54,48 @@ var local_timeline_json = [
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "IN_PROGRESS",
-    "assessmentName": "TEMPLATE",
-    "stageName": "SHIPPED_TO_EYEBANK"
+    "assessmentName": "SHIPPED_TO_EYEBANK",
+    "stageName": "SHIPPED TO EYEBANK",
+    "subSteps": [],
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "PENDING",
-    "assessmentName": "TEMPLATE",
-    "stageName": "RECEIVED_AT_EYEBANK"
+    "assessmentName": "RECEIVED_AT_EYEBANK",
+    "stageName": "RECEIVED AT EYEBANK",
+    "subSteps": [],
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "PENDING",
-    "assessmentName": "TEMPLATE",
+    "assessmentName": "EVALUATION",
     "stageName": "EVALUATION",
     "subSteps": [
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "SEROLOGY"
+        "assessmentName": "SEROLOGY",
+        "stageName": "SEROLOGY",
+        "subSteps": [],
       },
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "EVALUATION_OD"
+        "assessmentName": "EVALUATION_OD",
+        "stageName": "EVALUATION OD",
+        "subSteps": [],
       },
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
         "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "EVALUATION_OS"
+        "assessmentName": "EVALUATION_OS",
+        "stageName": "EVALUATION OS",
+        "subSteps": [],
       }
     ]
   },
@@ -96,8 +103,9 @@ var local_timeline_json = [
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "PENDING",
-    "assessmentName": "TEMPLATE",
-    "stageName": "INVENTORY"
+    "assessmentName": "INVENTORY",
+    "stageName": "INVENTORY",
+    "subSteps": [],
   }
 ];
 

@@ -16,7 +16,7 @@ class CaseConnector extends StatelessWidget {
     return SolidLineConnector(color: _getStatusColor(event.status));
   }
 
-  Color _getStatusColor(EBCaseStatus status) {
+  Color _getStatusColor(EBCaseStatus? status) {
     return switch (status) {
       EBCaseStatus.COMPLETED => AppColor.green,
       EBCaseStatus.IN_PROGRESS => AppColor.primary,
@@ -79,7 +79,7 @@ class CompletedCard extends StatelessWidget {
                 _buildInfoColumn(
                   icon: Icons.check_circle,
                   label: "Status",
-                  value: event.status.name,
+                  value: event.status?.name ?? "",
                   valueColor: _getStatusColor(event.status),
                 ),
               ],
@@ -124,7 +124,7 @@ class CompletedCard extends StatelessWidget {
     );
   }
 
-  Color _getStatusColor(EBCaseStatus status) {
+  Color _getStatusColor(EBCaseStatus? status) {
     return switch (status) {
       EBCaseStatus.COMPLETED => AppColor.green,
       EBCaseStatus.IN_PROGRESS => AppColor.primary,
@@ -151,7 +151,7 @@ class CaseIndicator extends StatelessWidget {
     );
   }
 
-  IconData _getStatusIcon(EBCaseStatus status) {
+  IconData _getStatusIcon(EBCaseStatus? status) {
     return switch (status) {
       EBCaseStatus.COMPLETED => Icons.check_circle,
       EBCaseStatus.IN_PROGRESS => Icons.autorenew,
@@ -160,7 +160,7 @@ class CaseIndicator extends StatelessWidget {
     };
   }
 
-  Color _getStatusColor(EBCaseStatus status) {
+  Color _getStatusColor(EBCaseStatus? status) {
     return switch (status) {
       EBCaseStatus.COMPLETED => AppColor.green,
       EBCaseStatus.IN_PROGRESS => AppColor.primary,
@@ -192,7 +192,7 @@ class CaseHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            event.stageName.name.toUpperCase(),
+            event.stageName.toUpperCase(),
             style: applyRobotoFont(
               fontSize: isNested ? 11 : 12,
               fontWeight: FontWeight.bold,

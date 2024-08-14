@@ -5,7 +5,7 @@ class EBTimeLineCaseModel {
   final DateTime recentUpdatedTime;
   final EBCaseStatus status;
   final EBAssessmentName assessmentName;
-  final CaseTimeLineSteps stageName;
+  final String stageName;
   final List<EBTimeLineCaseModel> subSteps;
 
   EBTimeLineCaseModel({
@@ -19,26 +19,38 @@ class EBTimeLineCaseModel {
 
   factory EBTimeLineCaseModel.fromJson(Map<String, dynamic> json) {
     return EBTimeLineCaseModel(
-      initiateDate: DateTime.parse(json['initiateDate']),
-      recentUpdatedTime: DateTime.parse(json['recentUpdatedTime']),
-      status: EBCaseStatus.values.firstWhere(
-        (element) => element.toString().split('.').last == json['status'],
-        orElse: () => EBCaseStatus.PENDING, // Default value if not found
-      ),
-      assessmentName: EBAssessmentName.values.firstWhere(
-        (element) =>
-            element.toString().split('.').last == json['assessmentName'],
-        orElse: () => EBAssessmentName.TEMPLATE, // Default value if not found
-      ),
-      stageName: CaseTimeLineSteps.values.firstWhere(
-        (element) => element.toString().split('.').last == json['stageName'],
-        orElse: () =>
-            CaseTimeLineSteps.INTIMATION, // Default value if not found
-      ),
-      subSteps: json['subSteps'] != null
-          ? List<EBTimeLineCaseModel>.from(
-              json['subSteps'].map((x) => EBTimeLineCaseModel.fromJson(x)))
-          : [],
+      initiateDate: DateTime.parse(json['initiateDate'] as String),
+      recentUpdatedTime: DateTime.parse(json['recentUpdatedTime'] as String),
+      status: getStatus(json['status'] as String),
+      assessmentName: getAssessmentStatus(json['assessmentName'] as String),
+      stageName: json['stageName'] as String,
+      subSteps: (json['subSteps'] as List<dynamic>?)
+              ?.map((e) => EBTimeLineCaseModel.fromJson(e))
+              .toList() ??
+          [],
     );
+  }
+  static EBCaseStatus getStatus(String name) {
+    return switch (name) {
+      "PENDING" => EBCaseStatus.PENDING,
+      "COMPLETED" => EBCaseStatus.COMPLETED,
+      "IN_PROGRESS" => EBCaseStatus.IN_PROGRESS,
+      _ => EBCaseStatus.UNKNOWN,
+    };
+  }
+
+  static EBAssessmentName getAssessmentStatus(String name) {
+    return switch (name) {
+      "INTIMATION" => EBAssessmentName.INTIMATION,
+      "PRELIMINARY_ASSESSMENT" => EBAssessmentName.PRELIMINARY_ASSESSMENT,
+      "CORNEA_RECOVERY" => EBAssessmentName.CORNEA_RECOVERY,
+      "SHIPPED_TO_EYEBANK" => EBAssessmentName.SHIPPED_TO_EYEBANK,
+      "RECEIVED_AT_EYEBANK" => EBAssessmentName.RECEIVED_AT_EYEBANK,
+      "SEROLOGY" => EBAssessmentName.SEROLOGY,
+      "EVALUATION_OD" => EBAssessmentName.EVALUATION_OD,
+      "EVALUATION_OS" => EBAssessmentName.EVALUATION_OS,
+      "INVENTORY" => EBAssessmentName.INVENTORY,
+      _ => EBAssessmentName.UNKNOWN,
+    };
   }
 }

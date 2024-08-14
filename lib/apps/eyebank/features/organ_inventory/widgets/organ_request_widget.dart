@@ -36,15 +36,20 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
           return Future.value(records);
         },
         itemBuilder: (context, item, index) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: OrganRequestCard(
-              doctorName: 'Dr. John Doe',
-              priority: 'High',
-              tissue: 'Cornea',
-              eyeInvolved: 'Right Eye',
-              tissueExpiryTime: '2 days 3 hours',
-              transplantationTechnique: 'PKP, EK, ALK',
+          return InkWell(
+            onTap: () {
+              _showAssignmentFlow(context, index);
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: OrganRequestCard(
+                doctorName: 'Dr. John Doe',
+                priority: 'High',
+                tissue: 'Cornea',
+                eyeInvolved: 'Right Eye',
+                tissueExpiryTime: '2 days 3 hours',
+                transplantationTechnique: 'PKP, EK, ALK',
+              ),
             ),
           );
         },

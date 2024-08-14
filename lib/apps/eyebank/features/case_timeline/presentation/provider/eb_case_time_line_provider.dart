@@ -3,129 +3,106 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebCaseTimeLineProvider = FutureProvider.family((ref, caseID) async {
   return Future.delayed(const Duration(seconds: 1), () {
-    return local_timeline_json
-        .map((e) => EBTimeLineCaseModel.fromJson(e))
-        .toList();
+    return sampleJson.map((e) => EBTimeLineCaseModel.fromJson(e)).toList();
   });
 });
 
-var local_timeline_json = [
+var sampleJson = [
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "TEMPLATE",
-    "stageName": "INTIMATION"
+    "assessmentName": "INTIMATION",
+    "stageName": "INTIMATION",
+    "subSteps": [],
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "TEMPLATE",
-    "stageName": "PRELIMINARY_ASSESSMENT"
+    "assessmentName": "PRELIMINARY_ASSESSMENT",
+    "stageName": "PRELIMINARY ASSESSMENT",
+    "subSteps": [],
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "TEMPLATE",
-    "stageName": "CORNEA_RECOVERY",
-    "subSteps": [
-      {
-        "initiateDate": "2023-10-01T12:00:00Z",
-        "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "HEMODILUTION"
-      },
-      {
-        "initiateDate": "2023-10-01T12:00:00Z",
-        "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "COMPLETED",
-        "assessmentName": "TEMPLATE",
-        "stageName": "CORNEA_RECOVERY",
-        "subSteps": [
-          {
-            "initiateDate": "2023-10-01T12:00:00Z",
-            "recentUpdatedTime": "2023-10-01T12:00:00Z",
-            "status": "PENDING",
-            "assessmentName": "TEMPLATE",
-            "stageName": "HEMODILUTION"
-          },
-          {
-            "initiateDate": "2023-10-01T12:00:00Z",
-            "recentUpdatedTime": "2023-10-01T12:00:00Z",
-            "status": "PENDING",
-            "assessmentName": "TEMPLATE",
-            "stageName": "BLOOD_SAMPLE"
-          }
-        ]
-      },
-    ]
+    "assessmentName": "CORNEA_RECOVERY",
+    "stageName": "CORNEA RECOVERY",
+    "subSteps": [],
+  },
+  {
+    "initiateDate": "2023-10-01T12:00:00Z",
+    "recentUpdatedTime": "2023-10-01T12:00:00Z",
+    "status": "COMPLETED",
+    "assessmentName": "SHIPPED_TO_EYEBANK",
+    "stageName": "SHIPPED TO EYEBANK",
+    "subSteps": [],
+  },
+  {
+    "initiateDate": "2023-10-01T12:00:00Z",
+    "recentUpdatedTime": "2023-10-01T12:00:00Z",
+    "status": "COMPLETED",
+    "assessmentName": "RECEIVED_AT_EYEBANK",
+    "stageName": "RECEIVED AT EYEBANK",
+    "subSteps": [],
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "IN_PROGRESS",
-    "assessmentName": "TEMPLATE",
-    "stageName": "SHIPPED_TO_EYEBANK"
+    "assessmentName": "SEROLOGY",
+    "stageName": "SEROLOGY",
+    "subSteps": [],
   },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
-    "status": "PENDING",
-    "assessmentName": "TEMPLATE",
-    "stageName": "RECEIVED_AT_EYEBANK"
-  },
-  {
-    "initiateDate": "2023-10-01T12:00:00Z",
-    "recentUpdatedTime": "2023-10-01T12:00:00Z",
-    "status": "PENDING",
-    "assessmentName": "TEMPLATE",
-    "stageName": "EVALUATION",
+    "status": "IN_PROGRESS",
+    "assessmentName": "EVALUATION",
+    "stageName": "TISSUE EVALUATION",
     "subSteps": [
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "SEROLOGY"
+        "status": "IN_PROGRESS",
+        "assessmentName": "EVALUATION_OD",
+        "stageName": "EVALUATION OD",
+        "subSteps": [],
       },
       {
         "initiateDate": "2023-10-01T12:00:00Z",
         "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "EVALUATION_OD"
+        "status": "IN_PROGRESS",
+        "assessmentName": "EVALUATION_OS",
+        "stageName": "EVALUATION OS",
+        "subSteps": [],
       },
-      {
-        "initiateDate": "2023-10-01T12:00:00Z",
-        "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "PENDING",
-        "assessmentName": "TEMPLATE",
-        "stageName": "EVALUATION_OS"
-      }
-    ]
+    ],
   },
+  // {
+  //   "initiateDate": "2023-10-01T12:00:00Z",
+  //   "recentUpdatedTime": "2023-10-01T12:00:00Z",
+  //   "status": "IN_PROGRESS",
+  //   "assessmentName": "EVALUATION_OD",
+  //   "stageName": "TISSUE EVALUATION OD",
+  //   "subSteps": [],
+  // },
+  // {
+  //   "initiateDate": "2023-10-01T12:00:00Z",
+  //   "recentUpdatedTime": "2023-10-01T12:00:00Z",
+  //   "status": "IN_PROGRESS",
+  //   "assessmentName": "EVALUATION_OS",
+  //   "stageName": "TISSUE EVALUATION OS",
+  //   "subSteps": [],
+  // },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
-    "status": "PENDING",
-    "assessmentName": "TEMPLATE",
-    "stageName": "INVENTORY"
-  }
+    "status": "UNKNOWN",
+    "assessmentName": "INVENTORY",
+    "stageName": "INVENTORY",
+    "subSteps": [],
+  },
 ];
-
-
-//INITIMATION
-// PRELIMINARY_ASSESSMENT
-//CORNEA_RECOVERY 
-   // HEMODILUTION
-   // BLOOD_SAMPLE
-// SHIPPED TO EYEBANK
-//RECIVED AT EYEBANK   
-// EVALUATION
-    // SEROLOGY
-    //EVALUATION OD 
-    // EVALUATION OS
-// INVENTORY

@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/enums/enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/widget/case_time_line_widget.dart';
@@ -42,19 +41,20 @@ class EbCaseTimeLinePage extends ConsumerWidget {
 
   _handleCaseSelected(BuildContext context, EBTimeLineCaseModel event) {
     final navigator = Navigator.of(context);
-    switch (event.stageName) {
-      case CaseTimeLineSteps.INTIMATION:
-        navigator.push(
-          MaterialPageRoute(
-            builder: (context) => EbScreeningPage(
-              title: event.stageName.name,
-              caseID: '',
-            ),
-          ),
-        );
-        break;
-      default:
-        break;
-    }
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => EbScreeningPage(
+          title: event.stageName,
+          caseID: '',
+        ),
+      ),
+    );
+    // switch (event.stageName) {
+    //   case CaseTimeLineSteps.INTIMATION:
+
+    //     break;
+    //   default:
+    //     break;
+    // }
   }
 }
