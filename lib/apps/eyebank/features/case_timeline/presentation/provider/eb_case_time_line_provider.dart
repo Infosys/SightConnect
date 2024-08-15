@@ -7,7 +7,7 @@ final ebCaseTimeLineProvider = FutureProvider.family((ref, caseID) async {
   });
 });
 
-var sampleJson = [
+const sampleJson = [
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
@@ -20,8 +20,8 @@ var sampleJson = [
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "COMPLETED",
-    "assessmentName": "PRELIMINARY_ASSESSMENT",
-    "stageName": "PRELIMINARY ASSESSMENT",
+    "assessmentName": "PRELIMINARY_SCREENING",
+    "stageName": "PRELIMINARY SCREENING",
     "subSteps": [],
   },
   {
@@ -60,49 +60,16 @@ var sampleJson = [
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "IN_PROGRESS",
-    "assessmentName": "EVALUATION",
-    "stageName": "TISSUE EVALUATION",
-    "subSteps": [
-      {
-        "initiateDate": "2023-10-01T12:00:00Z",
-        "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "IN_PROGRESS",
-        "assessmentName": "EVALUATION_OD",
-        "stageName": "EVALUATION OD",
-        "subSteps": [],
-      },
-      {
-        "initiateDate": "2023-10-01T12:00:00Z",
-        "recentUpdatedTime": "2023-10-01T12:00:00Z",
-        "status": "IN_PROGRESS",
-        "assessmentName": "EVALUATION_OS",
-        "stageName": "EVALUATION OS",
-        "subSteps": [],
-      },
-    ],
+    "assessmentName": "CORNEA_EVALUATION",
+    "stageName": "CORNEA EVALUATION",
+    "subSteps": [],
   },
-  // {
-  //   "initiateDate": "2023-10-01T12:00:00Z",
-  //   "recentUpdatedTime": "2023-10-01T12:00:00Z",
-  //   "status": "IN_PROGRESS",
-  //   "assessmentName": "EVALUATION_OD",
-  //   "stageName": "TISSUE EVALUATION OD",
-  //   "subSteps": [],
-  // },
-  // {
-  //   "initiateDate": "2023-10-01T12:00:00Z",
-  //   "recentUpdatedTime": "2023-10-01T12:00:00Z",
-  //   "status": "IN_PROGRESS",
-  //   "assessmentName": "EVALUATION_OS",
-  //   "stageName": "TISSUE EVALUATION OS",
-  //   "subSteps": [],
-  // },
   {
     "initiateDate": "2023-10-01T12:00:00Z",
     "recentUpdatedTime": "2023-10-01T12:00:00Z",
     "status": "UNKNOWN",
-    "assessmentName": "INVENTORY",
-    "stageName": "INVENTORY",
+    "assessmentName": "IN_INVENTORY",
+    "stageName": " IN INVENTORY",
     "subSteps": [],
   },
 ];

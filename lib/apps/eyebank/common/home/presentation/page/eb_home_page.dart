@@ -3,22 +3,22 @@ import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/ad
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/eb_analytics_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/eb_cases_closed_analytics.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/eb_statistics_top_card.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/home/presentation/widget/recent_cases.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/profile/presentation/pages/eb_profile_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/presentation/widget/recent_cases.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class EbHomePage extends StatefulWidget {
-  const EbHomePage({super.key});
+class EBHomePage extends StatefulWidget {
+  const EBHomePage({super.key});
 
   @override
-  State<EbHomePage> createState() => _EbHomePageState();
+  State<EBHomePage> createState() => _EBHomePageState();
 }
 
-class _EbHomePageState extends State<EbHomePage> {
+class _EBHomePageState extends State<EBHomePage> {
   late int showingTooltip;
 
   @override

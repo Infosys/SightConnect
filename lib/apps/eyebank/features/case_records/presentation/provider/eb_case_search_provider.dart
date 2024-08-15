@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/data/models/table_data.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final ebCaseCreationProvider = FutureProvider<String>((ref) async {
   try {
     return await rootBundle.loadString(
-      'assets/local_json/case_register.json',
+      'assets/eyebank/local_json/case_register.json',
     );
   } catch (e) {
     logger.f('Error Converting json: $e');
@@ -14,7 +14,7 @@ final ebCaseCreationProvider = FutureProvider<String>((ref) async {
   }
 });
 
-final getRecordsProvider =
+final ebGetRecordsProvider =
     FutureProvider.family<List<TableData>, GetRecordsParams>(
         (ref, params) async {
   final List<TableData> fakeData = List.generate(

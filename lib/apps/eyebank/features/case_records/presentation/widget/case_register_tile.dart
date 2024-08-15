@@ -36,12 +36,12 @@ final EncounterBriefModel caseModel = EncounterBriefModel(
   lastModifiedDate: DateTime.parse('2024-08-13T07:41:19.692Z'),
 );
 
-class CaseRegisterTile extends StatelessWidget {
+class EBCaseCard extends StatelessWidget {
   final TableData item;
   final bool isCompact;
   final VoidCallback? onTap;
 
-  const CaseRegisterTile({
+  const EBCaseCard({
     Key? key,
     required this.item,
     this.isCompact = false,

@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -20,16 +22,33 @@ class OrganInventoryOverview extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: () {
+                  if (Responsive.isMobile(context)) {
+                    return 2;
+                  } else if (Responsive.isTablet(context)) {
+                    return 3;
+                  } else {
+                    return 4;
+                  }
+                }(),
                 mainAxisSpacing: 10.0,
                 crossAxisSpacing: 10.0,
-                childAspectRatio: 1.1,
+                childAspectRatio: () {
+                  if (Responsive.isMobile(context)) {
+                    return 1.5;
+                  } else if (Responsive.isTablet(context)) {
+                    return 1.0;
+                  } else {
+                    return 1.0;
+                  }
+                }(),
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final stat = inventoryStats[index];
                   return Container(
+                    padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10.0),
@@ -42,44 +61,47 @@ class OrganInventoryOverview extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              (stat['count'] as int).toString(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              style: applyRobotoFont(
-                                fontSize: 40.0,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AutoSizeText(
+                          " ${stat['count']}",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: applyRobotoFont(
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
                           ),
-                          Text(
+                        ),
+                        const SizedBox(height: 8.0),
+                        Flexible(
+                          child: Text(
                             " ^ 15%",
                             textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: applyRobotoFont(
                               fontSize: 12.0,
                               color: AppColor.altGreen,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(height: 16.0),
-                          Text(
+                        ),
+                        const SizedBox(height: 16.0),
+                        Flexible(
+                          child: Text(
                             stat['title'] as String? ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             style: applyRobotoFont(
                               fontSize: 12.0,
                               color: AppColor.grey,
                             ),
                           ),
-                          const SizedBox(height: 8.0),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   );
                 },

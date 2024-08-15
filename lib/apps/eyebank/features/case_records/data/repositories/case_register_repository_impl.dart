@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/repositories/contracts/case_register_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/main.dart';

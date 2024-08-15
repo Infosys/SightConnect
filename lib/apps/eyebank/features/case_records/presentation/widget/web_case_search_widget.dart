@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_paginated_table.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';

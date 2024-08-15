@@ -1,8 +1,8 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/mobile_case_search_widget.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/presentation/widget/mobile_case_search_widget.dart';
 import 'package:flutter/material.dart';
 
-class EbCaseSearchPage extends StatelessWidget {
-  const EbCaseSearchPage({super.key});
+class EBCaseRecordsPage extends StatelessWidget {
+  const EBCaseRecordsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

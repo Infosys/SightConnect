@@ -1,6 +1,7 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/provider/eb_case_search_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/data/models/table_data.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/presentation/provider/eb_case_search_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,15 +18,23 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           pageNumber: pageKey,
           pageSize: pageSize,
         );
-        final records = await ref.read(getRecordsProvider(params).future);
+        final records = await ref.read(ebGetRecordsProvider(params).future);
         return records;
       },
       itemBuilder: (context, item, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: CaseRegisterTile(
+          child: EBCaseCard(
             item: item,
-            onTap: () {},
+            onTap: () {
+              final navigator = Navigator.of(context);
+              navigator.push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const EbCaseTimeLinePage(caseID: "1234"),
+                ),
+              );
+            },
           ),
         );
       },

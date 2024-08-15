@@ -42,14 +42,19 @@ class EBTimeLineCaseModel {
   static EBAssessmentName getAssessmentStatus(String name) {
     return switch (name) {
       "INTIMATION" => EBAssessmentName.INTIMATION,
-      "PRELIMINARY_ASSESSMENT" => EBAssessmentName.PRELIMINARY_ASSESSMENT,
+      "PRELIMINARY_SCREENING" => EBAssessmentName.PRELIMINARY_SCREENING,
       "CORNEA_RECOVERY" => EBAssessmentName.CORNEA_RECOVERY,
       "SHIPPED_TO_EYEBANK" => EBAssessmentName.SHIPPED_TO_EYEBANK,
-      "RECEIVED_AT_EYEBANK" => EBAssessmentName.RECEIVED_AT_EYEBANK,
+      "RECEIVED_TO_EYEBANK" => EBAssessmentName.RECEIVED_TO_EYEBANK,
       "SEROLOGY" => EBAssessmentName.SEROLOGY,
-      "EVALUATION_OD" => EBAssessmentName.EVALUATION_OD,
-      "EVALUATION_OS" => EBAssessmentName.EVALUATION_OS,
-      "INVENTORY" => EBAssessmentName.INVENTORY,
+      "CORNEA_EVALUATION" => EBAssessmentName.CORNEA_EVALUATION,
+      "IN_INVENTORY" => EBAssessmentName.IN_INVENTORY,
+// ONLY FOR TESTING  -------------------------------------
+      "ISSUE_ACQUISITION" => EBAssessmentName.ISSUE_ACQUISITION,
+      "ADVERSE_REACTION_REPORT" => EBAssessmentName.ADVERSE_REACTION_REPORT,
+      "DOCTOR_ASSESSMENT" => EBAssessmentName.DOCTOR_ASSESSMENT,
+// ONLY FOR TESTING-------------------------------------
+
       _ => EBAssessmentName.UNKNOWN,
     };
   }

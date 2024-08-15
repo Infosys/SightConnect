@@ -51,13 +51,12 @@ class FormExitDialog extends StatelessWidget {
           },
           child: const Text('Discard'),
         ),
-        TextButton.icon(
+        ElevatedButton(
           onPressed: () {
             onSave();
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.save),
-          label: const Text('Save'),
+          child: const Text('Save'),
         ),
       ],
     );

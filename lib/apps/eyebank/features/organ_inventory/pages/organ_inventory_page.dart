@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_inventory_overview.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_request_button.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_request_widget.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_request_overview.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class OrganInventoryPage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.search, color: AppColor.white),
               onPressed: () {
-                // showSearch(context: context, delegate: null);
+                // Open search delegate
               },
             ),
           ],
@@ -53,9 +53,10 @@ class OrganInventoryPage extends StatelessWidget {
           ),
         ),
         body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             OrganInventoryOverview(),
-            OrganRequestWidget(),
+            OrganRequestOverview(),
           ],
         ),
         floatingActionButton: const OrganRequestButton(),

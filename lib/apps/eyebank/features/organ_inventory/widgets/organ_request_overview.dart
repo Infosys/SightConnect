@@ -1,20 +1,15 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/modals/organ_tissue_search_delegate.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/organ_inventory/widgets/organ_inventory_timline.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-class OrganRequestWidget extends StatefulWidget {
-  const OrganRequestWidget({super.key});
+class OrganRequestOverview extends StatelessWidget {
+  const OrganRequestOverview({super.key});
 
-  @override
-  _OrganRequestWidgetState createState() => _OrganRequestWidgetState();
-}
-
-class _OrganRequestWidgetState extends State<OrganRequestWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,21 +31,23 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
           return Future.value(records);
         },
         itemBuilder: (context, item, index) {
-          return InkWell(
-            onTap: () {
+          return _OrganRequestCard(
+            doctorName: 'Dr. John Doe',
+            priority: 'High',
+            tissue: 'Cornea',
+            eyeInvolved: 'Right Eye',
+            tissueExpiryTime: '2 days 3 hours',
+            transplantationTechnique: 'PKP, EK, ALK',
+            onTimeLine: () {
+              final navigator = Navigator.of(context);
+              navigator.push(
+                MaterialPageRoute(
+                    builder: (context) => const OrganInventoryTimline()),
+              );
+            },
+            onAssignTissue: () {
               _showAssignmentFlow(context, index);
             },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: OrganRequestCard(
-                doctorName: 'Dr. John Doe',
-                priority: 'High',
-                tissue: 'Cornea',
-                eyeInvolved: 'Right Eye',
-                tissueExpiryTime: '2 days 3 hours',
-                transplantationTechnique: 'PKP, EK, ALK',
-              ),
-            ),
           );
         },
         filterOptions: const ["Status 1", "Status 2", "Status 3"],
@@ -63,10 +60,9 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
   }
 
   void _showAssignmentFlow(BuildContext context, int requestIndex) async {
-    final tissues = ['Tissue 1', 'Tissue 2', 'Tissue 3']; // Example tissue list
     final selectedTissue = await showSearch<String>(
       context: context,
-      delegate: OrganTissueSearchDelegate(tissues),
+      delegate: OrganTissueSearchDelegate(),
     );
 
     if (selectedTissue != null) {
@@ -76,15 +72,17 @@ class _OrganRequestWidgetState extends State<OrganRequestWidget> {
   }
 }
 
-class OrganRequestCard extends StatelessWidget {
+class _OrganRequestCard extends StatelessWidget {
   final String doctorName;
   final String priority;
   final String tissue;
   final String eyeInvolved;
   final String tissueExpiryTime;
   final String transplantationTechnique;
+  final VoidCallback? onAssignTissue;
+  final VoidCallback? onTimeLine;
 
-  const OrganRequestCard({
+  const _OrganRequestCard({
     Key? key,
     required this.doctorName,
     required this.priority,
@@ -92,6 +90,8 @@ class OrganRequestCard extends StatelessWidget {
     required this.eyeInvolved,
     required this.tissueExpiryTime,
     required this.transplantationTechnique,
+    this.onAssignTissue,
+    this.onTimeLine,
   }) : super(key: key);
 
   @override
@@ -115,11 +115,10 @@ class OrganRequestCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 2,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const CircleAvatar(
                       backgroundColor: AppColor.altGrey,
@@ -144,48 +143,34 @@ class OrganRequestCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Chip(
-                        padding: const EdgeInsets.all(2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        label: Text(priority),
-                        backgroundColor: AppColor.mediumRed,
-                        labelStyle: applyFiraSansFont(
-                          fontSize: 12.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: ActionChip(
-                        onPressed: () {
-                          final navigator = Navigator.of(context);
-                          navigator.push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const EbCaseTimeLinePage(caseID: "1234"),
-                            ),
-                          );
-                        },
-                        padding: const EdgeInsets.all(2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        label: const Icon(
-                          Icons.timeline,
-                          color: Colors.white,
-                        ),
-                        backgroundColor: AppColor.mediumOrange,
-                      ),
-                    ),
                   ],
                 ),
+              ),
+              Chip(
+                padding: const EdgeInsets.all(2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                label: Text(priority),
+                backgroundColor: AppColor.mediumRed,
+                labelStyle: applyFiraSansFont(
+                  fontSize: 12.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              ActionChip(
+                onPressed: onTimeLine,
+                padding: const EdgeInsets.all(2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                label: const Icon(
+                  Icons.timeline,
+                  color: Colors.white,
+                ),
+                backgroundColor: AppColor.mediumOrange,
               ),
             ],
           ),
@@ -217,6 +202,17 @@ class OrganRequestCard extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 8.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton.icon(
+                onPressed: onAssignTissue,
+                label: const Text('Assign Tissue'),
+                icon: const Icon(Icons.add),
+              ),
+            ],
+          )
         ],
       ),
     );

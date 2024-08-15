@@ -1,5 +1,5 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/screening/presentation/provider/eb_screening_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/form_management/presentation/provider/eb_form_manage_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/case_close_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_exit_dialog.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
@@ -9,11 +9,11 @@ import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EbScreeningPage extends ConsumerWidget {
+class EBFormManagePage extends ConsumerWidget {
   final String title;
   final String caseID;
 
-  const EbScreeningPage({
+  const EBFormManagePage({
     super.key,
     required this.title,
     required this.caseID,
@@ -24,7 +24,7 @@ class EbScreeningPage extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         body: DesktopClipper(
-          widget: ref.watch(ebScreeningProvider).when(
+          widget: ref.watch(ebFormManageProvider).when(
                 data: (json) {
                   return DynamicFormPage(
                     json: json,

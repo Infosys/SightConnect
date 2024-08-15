@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/data/models/table_data.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/pages/eb_case_search_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/case_search/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/data/models/table_data.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/presentation/pages/eb_case_records_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/case_records/presentation/widget/case_register_tile.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -46,7 +46,7 @@ class RecentCases extends StatelessWidget {
                   navigator.push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return const EbCaseSearchPage();
+                        return const EBCaseRecordsPage();
                       },
                     ),
                   );
@@ -68,7 +68,7 @@ class RecentCases extends StatelessWidget {
             itemCount: 5,
             padding: const EdgeInsets.all(0),
             itemBuilder: (context, index) {
-              return CaseRegisterTile(
+              return EBCaseCard(
                 item: newItems.first,
                 isCompact: true,
                 onTap: () {
