@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AppInfoService {
@@ -12,8 +11,7 @@ class AppInfoService {
   static String appEmail = Env.appEmail;
 
   static PackageInfo? _packageInfo;
-  static String get appName =>
-      kIsWeb ? 'SightConnect' : _packageInfo?.appName ?? '';
+  static String get appName => _packageInfo?.appName ?? '';
   static String get appVersion =>
       "${_packageInfo?.version ?? ''}+${_packageInfo?.buildNumber ?? ''}";
   static String get buildNumber => _packageInfo?.buildNumber ?? '';
