@@ -5,8 +5,8 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/models/submit_form_data_re
 import 'package:eye_care_for_all/apps/eyebank/helpers/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 
-import '../models/form_data_model.dart';
-import '../models/timeline_model.dart';
+import '../../models/form_data_model.dart';
+import '../../models/timeline_model.dart';
 
 abstract class EyeBankRepository {
   Future<Either<EBFailure, List<EncounterBriefModel>>> getAllEncounters(
@@ -17,9 +17,12 @@ abstract class EyeBankRepository {
     String encounterID,
     AssessmentName stage,
   );
-  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(String encounterID);
+  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(
+      String encounterID);
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
-      String encounterID, AssessmentName stage, SubmitFormDataRequestModel requestData);
+      String encounterID,
+      AssessmentName stage,
+      SubmitFormDataRequestModel requestData);
   Future<Either<EBFailure, dynamic>> rejectEncounter(
       RejectEncounterRequestModel requestData);
   Future<Either<EBFailure, dynamic>> fetchFormByStage(AssessmentName stage);
@@ -64,13 +67,11 @@ enum IdentifierType {
   BDP,
 }
 
-enum EncounterStatus{
+enum EncounterStatus {
   COMPLETED,
   PENDING,
   REJECTED,
   ACTIVE,
 }
 
-enum Reason{
-  UNSUITABLE
-}
+enum Reason { UNSUITABLE }

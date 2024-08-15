@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/pages/eb_form_manage_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/providers/organ_timeline_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

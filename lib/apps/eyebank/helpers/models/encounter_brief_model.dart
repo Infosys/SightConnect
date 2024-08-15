@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../contracts/eb_repository.dart';
+import '../respositories/contracts/eb_repository.dart';
 
 part 'encounter_brief_model.freezed.dart';
 part 'encounter_brief_model.g.dart';

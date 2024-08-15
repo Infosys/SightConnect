@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/modals/organ_tissue_search_delegate.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/widgets/organ_inventory_timline.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/modals/organ_tissue_search_delegate.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_timline.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
