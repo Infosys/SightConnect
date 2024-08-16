@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/respositories/contracts/eb_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'submit_form_data_response_model.freezed.dart';

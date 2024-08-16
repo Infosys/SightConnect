@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/services/failure.dart';
 

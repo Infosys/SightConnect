@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/reject_encounter_request_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/submit_form_data_request_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/submit_form_data_response_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/reject_encounter_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 
 import '../../models/form_data_model.dart';

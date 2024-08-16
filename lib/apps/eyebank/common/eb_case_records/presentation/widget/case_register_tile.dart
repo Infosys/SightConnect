@@ -1,5 +1,5 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/models/encounter_brief_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/respositories/contracts/eb_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
