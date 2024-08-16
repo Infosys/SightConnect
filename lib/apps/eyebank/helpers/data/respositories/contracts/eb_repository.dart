@@ -13,6 +13,7 @@ abstract class EyeBankRepository {
       GetAllEncountersParams params);
   Future<Either<EBFailure, List<EncounterBriefModel>>> searchEncounter(
       SearchEncounterParams params);
+
   Future<Either<EBFailure, FormDataModel>> fetchFormByIDAndStage(
     String encounterID,
     AssessmentName stage,

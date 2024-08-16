@@ -1,5 +1,5 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_search_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';

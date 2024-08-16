@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_search_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/pages/eb_case_search_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
@@ -42,7 +43,16 @@ class MobileCaseSearchWidget extends ConsumerWidget {
       enableSearch: true,
       enableFilter: true,
       defaultPageSize: 10,
-      onSearchTap: () {},
+      onSearchTap: () {
+        final navigator = Navigator.of(context);
+        navigator.push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const EBCaseSearchPage();
+            },
+          ),
+        );
+      },
     );
   }
 }
