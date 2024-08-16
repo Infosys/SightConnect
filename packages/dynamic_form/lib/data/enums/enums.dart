@@ -11,6 +11,7 @@ enum DynamicFormType {
   DEFAULT,
   TEXTAREA,
   CONDITIONAL,
+  PANEL
 }
 
 enum FormLayoutType {

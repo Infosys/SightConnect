@@ -11,6 +11,30 @@
                     "name": "Personal Eye Donation Referral Information",
                     "elements": [
                         {
+                            "type": "panel",
+                            "name": "Terms and Condition Level 2",
+                            "elements": [
+                                {
+                                    "type": "boolean",
+                                    "name": "question Nested Panel Level 2",
+                                    "title": "Nested Panel Level 2",
+                                    "validators": []
+                                },
+                                {
+                                    "type": "panel",
+                                    "name": "Terms and Condition  Level 3",
+                                    "elements": [
+                                        {
+                                            "type": "boolean",
+                                            "name": "question Nested Panel Level 3",
+                                            "title": "Nested Panel Level 3",
+                                            "validators": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "type": "text",
                             "name": "question2",
                             "title": "Death Notification",
@@ -150,7 +174,7 @@
                 },
                 {
                     "type": "panel",
-                    "name": "Terms and Condition",
+                    "name": "Terms and Condition Level 1",
                     "elements": [
                         {
                             "type": "boolean",

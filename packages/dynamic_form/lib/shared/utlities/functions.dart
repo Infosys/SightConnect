@@ -7,6 +7,7 @@ import 'package:dynamic_form/widgets/form_conditional_widget.dart';
 import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
+import 'package:dynamic_form/widgets/form_nested_pannel_widget.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
 import 'package:dynamic_form/widgets/form_slider.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
@@ -109,6 +110,9 @@ Widget getField(
       );
     case DynamicFormType.SLIDER:
       return FormSlider(field: field);
+
+    case DynamicFormType.PANEL:
+      return FormNestedPannelWidget(field: field, formKey: key);
 
     default:
       return Container();

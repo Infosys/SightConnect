@@ -75,6 +75,7 @@ class DynamicFormJsonMapper {
           choices: element.choices ?? [],
           dependantField: element.dependantField,
           conditions: _getConditions(element.conditions),
+          elements: _getElements(element.elements),
         ));
       }
     }
@@ -154,6 +155,8 @@ class DynamicFormJsonMapper {
         return DynamicFormType.TEXTAREA;
       case 'conditional':
         return DynamicFormType.CONDITIONAL;
+      case 'panel':
+        return DynamicFormType.PANEL;
       default:
         return DynamicFormType.DEFAULT;
     }
