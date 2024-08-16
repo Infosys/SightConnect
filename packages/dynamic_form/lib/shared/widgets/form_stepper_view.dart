@@ -166,9 +166,16 @@ class _PageWidgetState extends State<FormStepperView> {
                 ),
                 isActive: currentStep == index,
                 title: const SizedBox(),
-                content: PageWidget(
-                  elements: panel.elements,
-                  formKey: widget.formKey,
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(panel.name, style: const TextStyle(fontSize: 18)),
+                    const SizedBox(height: 8),
+                    PageWidget(
+                      elements: panel.elements,
+                      formKey: widget.formKey,
+                    ),
+                  ],
                 ),
               );
             }).toList(),
