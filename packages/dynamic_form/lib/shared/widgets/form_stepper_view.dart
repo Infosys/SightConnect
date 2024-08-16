@@ -1,10 +1,13 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/provider/dynamic_form_validation_provider.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FormStepperView extends StatefulWidget {
+class FormStepperView extends ConsumerStatefulWidget {
   const FormStepperView({
     super.key,
     required this.name,
@@ -18,13 +21,17 @@ class FormStepperView extends StatefulWidget {
   final VoidCallback? onSubmit;
 
   @override
-  State<FormStepperView> createState() => _PageWidgetState();
+  ConsumerState<FormStepperView> createState() => _PageWidgetState();
 }
 
-class _PageWidgetState extends State<FormStepperView> {
+class _PageWidgetState extends ConsumerState<FormStepperView> {
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
+    final validationList =
+        ref.read(dynamicFormValidationProvider).validationList;
+    // final validationList = [true, true, true, false];
+    // Log.d('Validation List: $validationList');
     if (widget.pages.isEmpty) {
       return Container();
     }
@@ -72,6 +79,7 @@ class _PageWidgetState extends State<FormStepperView> {
                           minimumSize: const Size(100, 40),
                         ),
                         onPressed: () {
+                          _validatePanel(currentStep);
                           if (currentStep < widget.pages.length - 1) {
                             setState(() {
                               currentStep++;
@@ -107,7 +115,13 @@ class _PageWidgetState extends State<FormStepperView> {
               return Step(
                 stepStyle: StepStyle(
                   indexStyle: TextStyle(
-                    color: currentStep == index ? Colors.white : Colors.black,
+                    color: () {
+                      if (validationList.length == widget.pages.length) {
+                        return Colors.white;
+                      } else {
+                        return currentStep == index ? Colors.white : Colors.black;
+                      }
+                    }(),
                     fontSize: 14,
                   ),
                   border: Border.all(
@@ -116,9 +130,19 @@ class _PageWidgetState extends State<FormStepperView> {
                   ),
                   connectorColor: Colors.black45,
                   connectorThickness: 1,
-                  color: currentStep == index
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
+                  color: () {
+                    if (validationList.length == widget.pages.length) {
+                      return currentStep == index
+                          ? Theme.of(context).primaryColor
+                          : validationList[index]
+                              ? Colors.white
+                              : Colors.red;
+                    } else {
+                      return currentStep == index
+                          ? Theme.of(context).primaryColor
+                          : Colors.white;
+                    }
+                  }(),
                 ),
                 isActive: currentStep == index,
                 title: const SizedBox(),
@@ -133,9 +157,39 @@ class _PageWidgetState extends State<FormStepperView> {
         if (currentStep == widget.pages.length - 1)
           SubmitBtn(
             key: widget.key,
-            onPressed: widget.onSubmit,
+            onPressed: _handleSubmit,
           )
       ],
     );
+  }
+
+  void _handleSubmit() {
+    _validatePanel(currentStep);
+    // final validationList =
+    //     ref.read(dynamicFormValidationProvider).validationList;
+    // Log.d('Validation List: $validationList');
+    setState(() {});
+    // if (validationList.every((status) => status)) {
+      widget.onSubmit?.call();
+    // }
+  }
+
+  void _validatePanel(int pageIndex) {
+    widget.formKey.currentState?.save();
+    final page = widget.pages[pageIndex];
+    for (final element in page.elements) {
+      for (final field in element.elements) {
+        final fieldValue = widget.formKey.currentState?.value[field.name];
+        Log.d(
+            'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}, ,currentIndex: $pageIndex');
+        if (field.isRequired && fieldValue == null) {
+          ref
+              .read(dynamicFormValidationProvider)
+              .updateValidation(pageIndex, false);
+          return;
+        }
+      }
+    }
+    ref.read(dynamicFormValidationProvider).updateValidation(pageIndex, true);
   }
 }
