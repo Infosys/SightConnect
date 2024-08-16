@@ -128,20 +128,3 @@ class DioService extends StateNotifier<Dio> {
         tenantProvider.getOrganizationId(role);
   }
 }
-
-
-
-//       [
-//         DioTokenInterceptor(ref, dio),
-//         LogInterceptor(
-//           requestHeader: true,
-//           requestBody: true,
-//           request: true,
-//           responseBody: false,
-//           responseHeader: false,
-//         )
-//       ],
-//     );
-//     return dio;
-//   },
-// );
