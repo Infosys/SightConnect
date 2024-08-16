@@ -1,9 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_reject_case_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EBTimelineRepo {
-  // ADD YOUR METHODS HERE
+  Future<Either<EBFailure, void>> rejectCase(
+      EBRejectCaseRequestModel request, int encounterId);
 }
 
 final ebTimlineRepoProvider = Provider(
@@ -13,6 +19,22 @@ final ebTimlineRepoProvider = Provider(
 );
 
 class EBTimelineRepoImpl extends EBTimelineRepo {
-  Dio dio;
-  EBTimelineRepoImpl(this.dio);
+  final Dio _dio;
+  EBTimelineRepoImpl(this._dio);
+
+  @override
+  Future<Either<EBFailure, void>> rejectCase(
+      EBRejectCaseRequestModel request, int encounterId) {
+    return EyeBankErrorHandler.handle(() async {
+      final endPoint = '/encounters/$encounterId/reject';
+
+      final response = await _dio.post(endPoint, data: request.toJson());
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        logger.f(response.data);
+        throw Exception(response.statusMessage ?? 'Error in rejectCase');
+      }
+    });
+  }
 }

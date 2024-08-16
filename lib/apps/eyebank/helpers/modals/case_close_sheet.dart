@@ -1,19 +1,17 @@
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_reject_provider.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CaseCloseSheet extends StatefulWidget {
-  const CaseCloseSheet({super.key});
-
-  @override
-  _CaseCloseSheetState createState() => _CaseCloseSheetState();
-}
-
-class _CaseCloseSheetState extends State<CaseCloseSheet> {
-  final TextEditingController _reasonController = TextEditingController();
+class CaseCloseSheet extends ConsumerWidget {
+  final int caseID;
+  const CaseCloseSheet({required this.caseID, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final model = ref.watch(ebCaseRejectProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Reject Case'),
@@ -37,8 +35,32 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
               ),
             ),
             const SizedBox(height: 16),
+            DropdownButtonFormField<EBRejectCaseReasonEnum>(
+              value: model.rejectReason,
+              onChanged: (value) {
+                model.setRejectReason = value;
+              },
+              validator: (value) {
+                if (value == null) {
+                  return 'Please select a reason';
+                }
+                return null;
+              },
+              items:
+                  model.getRejectReason().map((EBRejectCaseReasonEnum value) {
+                return DropdownMenuItem<EBRejectCaseReasonEnum>(
+                  value: value,
+                  child: Text(value.displayValue),
+                );
+              }).toList(),
+              decoration: const InputDecoration(
+                labelText: 'Select reason for rejection',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
             TextField(
-              controller: _reasonController,
+              controller: model.commentController,
               decoration: const InputDecoration(
                 labelText: 'Reason for rejection',
                 border: OutlineInputBorder(),
@@ -57,14 +79,20 @@ class _CaseCloseSheetState extends State<CaseCloseSheet> {
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () {
-                    final reason = _reasonController.text;
-                    const msg = "Please provide a reason for rejection";
-                    if (reason.isNotEmpty) {
-                      Navigator.of(context).pop();
-                    } else {
-                      Fluttertoast.showToast(msg: msg);
-                    }
+                  onPressed: () async {
+                    final response =
+                        await ref.read(ebCaseRejectProvider).rejectCase(caseID);
+                    response.fold(
+                      (l) {
+                        Fluttertoast.showToast(msg: l.errorMessage);
+                      },
+                      (r) {
+                        Navigator.of(context).pop();
+
+                        Fluttertoast.showToast(
+                            msg: 'Case rejected successfully');
+                      },
+                    );
                   },
                   child: const Text('Confirm'),
                 ),

@@ -1,8 +1,6 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/case_close_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_exit_dialog.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
@@ -37,19 +35,15 @@ class EBFormManagePage extends ConsumerWidget {
                     },
                     actions: [
                       TextButton.icon(
-                        onPressed: () {
-                          showCustomWoltSheet(
-                            context,
-                            const CaseCloseSheet(),
-                          );
-                        },
-                        style:
-                            TextButton.styleFrom(foregroundColor: AppColor.red),
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          foregroundColor: AppColor.primary,
+                        ),
                         label: Text(
-                          'Reject',
+                          'Draft',
                           style: applyRobotoFont(
                             fontSize: 14,
-                            color: AppColor.red,
+                            color: AppColor.primary,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
