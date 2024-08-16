@@ -11,7 +11,7 @@ import '../models/encounter_brief_model.dart';
 import '../models/form_data_model.dart';
 import '../models/reject_encounter_request_model.dart';
 import '../models/submit_form_data_request_model.dart';
-import '../models/timeline_model.dart';
+import '../models/eb_timeline_model.dart';
 
 final eyeBankRepositoryProvider = Provider<EyeBankRepository>((ref) {
   return EyeBankRepositoryImpl(ref.watch(dioProvider));
@@ -70,7 +70,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   }
 
   @override
-  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(
+  Future<Either<EBFailure, EBTimelineModel>> fetchTimelineByID(
       String encounterID) {
     return EyeBankErrorHandler.handle(() async {
       final endPoint = '/encounters/$encounterID/timeline';

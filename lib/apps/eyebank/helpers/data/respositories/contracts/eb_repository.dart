@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_da
 import 'package:eye_care_for_all/services/eb_failure.dart';
 
 import '../../models/form_data_model.dart';
-import '../../models/timeline_model.dart';
+import '../../models/eb_timeline_model.dart';
 
 abstract class EyeBankRepository {
   Future<Either<EBFailure, List<EncounterBriefModel>>> getAllEncounters(
@@ -18,7 +18,7 @@ abstract class EyeBankRepository {
     String encounterID,
     AssessmentName stage,
   );
-  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(
+  Future<Either<EBFailure, EBTimelineModel>> fetchTimelineByID(
       String encounterID);
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
       String encounterID,
