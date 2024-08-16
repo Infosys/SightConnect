@@ -1,13 +1,11 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
-import 'package:dynamic_form/provider/dynamic_form_validation_provider.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/shared/widgets/submit_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FormStepperView extends ConsumerStatefulWidget {
+class FormStepperView extends StatefulWidget {
   const FormStepperView({
     super.key,
     required this.name,
@@ -21,15 +19,35 @@ class FormStepperView extends ConsumerStatefulWidget {
   final VoidCallback? onSubmit;
 
   @override
-  ConsumerState<FormStepperView> createState() => _PageWidgetState();
+  State<FormStepperView> createState() => _PageWidgetState();
 }
 
-class _PageWidgetState extends ConsumerState<FormStepperView> {
+class _PageWidgetState extends State<FormStepperView> {
   int currentStep = 0;
+  final List<bool> validationList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    validationList.clear();
+  }
+
+  void updateValidation(int index, bool value) {
+    if (index < validationList.length) {
+      setState(() {
+        validationList[index] = value;
+      });
+    } else {
+      setState(() {
+        validationList.add(value);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final validationList =
-        ref.read(dynamicFormValidationProvider).validationList;
+    // final validationList =
+    //     ref.read(dynamicFormValidationProvider).validationList;
     // final validationList = [true, true, true, false];
     // Log.d('Validation List: $validationList');
     if (widget.pages.isEmpty) {
@@ -119,7 +137,9 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
                       if (validationList.length == widget.pages.length) {
                         return Colors.white;
                       } else {
-                        return currentStep == index ? Colors.white : Colors.black;
+                        return currentStep == index
+                            ? Colors.white
+                            : Colors.black;
                       }
                     }(),
                     fontSize: 14,
@@ -170,7 +190,7 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
     // Log.d('Validation List: $validationList');
     setState(() {});
     // if (validationList.every((status) => status)) {
-      widget.onSubmit?.call();
+    widget.onSubmit?.call();
     // }
   }
 
@@ -183,13 +203,11 @@ class _PageWidgetState extends ConsumerState<FormStepperView> {
         Log.d(
             'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}, ,currentIndex: $pageIndex');
         if (field.isRequired && fieldValue == null) {
-          ref
-              .read(dynamicFormValidationProvider)
-              .updateValidation(pageIndex, false);
+          updateValidation(pageIndex, false);
           return;
         }
       }
     }
-    ref.read(dynamicFormValidationProvider).updateValidation(pageIndex, true);
+    updateValidation(pageIndex, true);
   }
 }
