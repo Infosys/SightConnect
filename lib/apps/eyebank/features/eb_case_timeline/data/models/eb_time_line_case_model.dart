@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/enums/enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
 
 class EBTimeLineCaseModel {
   final DateTime initiateDate;
