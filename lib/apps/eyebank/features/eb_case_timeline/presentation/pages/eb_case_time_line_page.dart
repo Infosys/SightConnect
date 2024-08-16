@@ -2,7 +2,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/case_close_sheet.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/eb_reject_case_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -27,7 +27,7 @@ class EbCaseTimeLinePage extends ConsumerWidget {
             onPressed: () {
               showCustomWoltSheet(
                 context,
-                const CaseCloseSheet(
+                const EBRejectCaseSheet(
                   caseID: 1234,
                 ),
               );

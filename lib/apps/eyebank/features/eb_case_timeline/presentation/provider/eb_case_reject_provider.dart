@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ebCaseRejectProvider = ChangeNotifierProvider(
+final ebCaseRejectProvider = ChangeNotifierProvider.autoDispose(
   (ref) => EBCaseRejectProvider(
     ref.watch(ebTimlineRepoProvider),
   ),

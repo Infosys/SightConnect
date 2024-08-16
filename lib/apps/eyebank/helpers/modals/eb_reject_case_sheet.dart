@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CaseCloseSheet extends ConsumerWidget {
+class EBRejectCaseSheet extends ConsumerWidget {
   final int caseID;
-  const CaseCloseSheet({required this.caseID, super.key});
+  const EBRejectCaseSheet({required this.caseID, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,20 +79,8 @@ class CaseCloseSheet extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () async {
-                    final response =
-                        await ref.read(ebCaseRejectProvider).rejectCase(caseID);
-                    response.fold(
-                      (l) {
-                        Fluttertoast.showToast(msg: l.errorMessage);
-                      },
-                      (r) {
-                        Navigator.of(context).pop();
-
-                        Fluttertoast.showToast(
-                            msg: 'Case rejected successfully');
-                      },
-                    );
+                  onPressed: () {
+                    onConfirm(context, model);
                   },
                   child: const Text('Confirm'),
                 ),
@@ -102,5 +90,27 @@ class CaseCloseSheet extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> onConfirm(BuildContext context, model) async {
+    try {
+      if (model.rejectReason == null) {
+        Fluttertoast.showToast(msg: 'Please select a reason');
+      } else {
+        final response = await model.rejectCase(caseID);
+        response.fold(
+          (l) {
+            Fluttertoast.showToast(msg: l.errorMessage);
+          },
+          (r) {
+            Navigator.of(context).pop();
+
+            Fluttertoast.showToast(msg: 'Case rejected successfully');
+          },
+        );
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    }
   }
 }
