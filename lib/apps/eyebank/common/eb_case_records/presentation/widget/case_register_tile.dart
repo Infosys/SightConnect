@@ -1,43 +1,11 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/models/table_data.dart';
-
-final EncounterBriefModel caseModel = EncounterBriefModel(
-  encounterId: 0,
-  encounterStatus: AssessmentName.INTIMATION,
-  donorBrief: const DonorBrief(
-    id: 0,
-    name: "George Soros",
-    contact: "9363476747",
-  ),
-  intimateDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
-  performerId: 0,
-  deathDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
-  bodyLocation: const BodyLocation(
-    addressLine1: "42 Avenue Street",
-    addressLine2: "New York City",
-    street: "42 Avenue Street",
-    city: "New York City",
-    state: "New York",
-    zipCode: "10001",
-    country: "USA",
-    landmark: "string",
-    village: "string",
-    district: "string",
-    latitude: "string",
-    longitude: "string",
-  ),
-  organExtracted: ["Heart"],
-  lastModifiedDate: DateTime.parse('2024-08-13T07:41:19.692Z'),
-);
-
 class EBCaseCard extends StatelessWidget {
-  final TableData item;
+  final EncounterBriefEntity item;
   final bool isCompact;
   final VoidCallback? onTap;
 
@@ -52,12 +20,12 @@ class EBCaseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isCompact) {
       return _CompactCard(
-        caseModel: caseModel,
+        item: item,
         onTap: onTap,
       );
     }
     return _DetailedCard(
-      caseModel: caseModel,
+      item: item,
       onTap: onTap,
     );
   }
@@ -67,10 +35,10 @@ class _CompactCard extends StatelessWidget {
   const _CompactCard({
     super.key,
     this.onTap,
-    this.caseModel,
+    this.item,
   });
   final Function()? onTap;
-  final EncounterBriefModel? caseModel;
+  final EncounterBriefEntity? item;
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +62,7 @@ class _CompactCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTopRow(context),
-            // const SizedBox(height: 8),
-            // _buildDateInfo(context),
-            // const SizedBox(height: 8),
-            // _buildOrganInfo(context),
+            _buildTopRow(context, item),
           ],
         ),
       ),
@@ -110,11 +74,11 @@ class _DetailedCard extends StatelessWidget {
   const _DetailedCard({
     super.key,
     this.onTap,
-    this.caseModel,
+    this.item,
   });
 
   final Function()? onTap;
-  final EncounterBriefModel? caseModel;
+  final EncounterBriefEntity? item;
 
   @override
   Widget build(BuildContext context) {
@@ -138,11 +102,11 @@ class _DetailedCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTopRow(context),
+            _buildTopRow(context, item),
             const SizedBox(height: 8),
-            _buildDateInfo(context),
+            _buildDateInfo(context, item),
             const SizedBox(height: 8),
-            _buildOrganInfo(context),
+            _buildOrganInfo(context, item),
           ],
         ),
       ),
@@ -150,7 +114,7 @@ class _DetailedCard extends StatelessWidget {
   }
 }
 
-Widget _buildTopRow(BuildContext context) {
+Widget _buildTopRow(BuildContext context, EncounterBriefEntity? item) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -162,7 +126,7 @@ Widget _buildTopRow(BuildContext context) {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: caseModel.donorBrief?.name ?? "",
+                    text: item?.donorBrief?.name ?? "",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -177,7 +141,7 @@ Widget _buildTopRow(BuildContext context) {
                     ),
                   ),
                   TextSpan(
-                    text: caseModel.donorBrief?.contact ?? "",
+                    text: item?.donorBrief?.contact ?? "",
                     style:
                         applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
                   ),
@@ -187,7 +151,7 @@ Widget _buildTopRow(BuildContext context) {
             ),
             const SizedBox(height: 4),
             Text(
-              '${caseModel.bodyLocation?.street ?? ""}, ${caseModel.bodyLocation?.city ?? ""}, ${caseModel.bodyLocation?.state ?? ""}',
+              '${item?.bodyLocation?.street ?? ""}, ${item?.bodyLocation?.city ?? ""}, ${item?.bodyLocation?.state ?? ""}',
               style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
               overflow: TextOverflow.ellipsis,
             ),
@@ -198,12 +162,12 @@ Widget _buildTopRow(BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            'Case ID: ${caseModel.encounterId ?? ""}',
+            'Case ID: ${item?.encounterId ?? ""}',
             style: applyRobotoFont(fontSize: 14),
           ),
           const SizedBox(height: 4),
           Text(
-            caseModel.encounterStatus?.name ?? "",
+            item?.encounterStatus?.displayValue ?? "",
             style: applyRobotoFont(
               fontSize: 12,
               color: AppColor.primary,
@@ -216,13 +180,12 @@ Widget _buildTopRow(BuildContext context) {
   );
 }
 
-Widget _buildDateInfo(BuildContext context) {
+Widget _buildDateInfo(BuildContext context, EncounterBriefEntity? item) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      _buildDateColumn(context, 'Death', caseModel.deathDate?.formateDate),
-      _buildDateColumn(
-          context, 'Intimate', caseModel.intimateDate?.formateDate),
+      _buildDateColumn(context, 'Death', item?.deathDate?.formateDate),
+      _buildDateColumn(context, 'Intimate', item?.intimateDate?.formateDate),
     ],
   );
 }
@@ -251,7 +214,7 @@ Widget _buildDateColumn(BuildContext context, String label, String? date) {
   );
 }
 
-Widget _buildOrganInfo(BuildContext context) {
+Widget _buildOrganInfo(BuildContext context, EncounterBriefEntity? item) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -263,7 +226,7 @@ Widget _buildOrganInfo(BuildContext context) {
       Wrap(
         spacing: 4,
         runSpacing: 4,
-        children: caseModel.organExtracted
+        children: item?.organExtracted
                 ?.map((organ) => _buildOrganChip(context, organ))
                 .toList() ??
             [],

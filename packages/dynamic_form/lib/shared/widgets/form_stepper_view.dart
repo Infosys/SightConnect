@@ -135,7 +135,11 @@ class _PageWidgetState extends State<FormStepperView> {
                   indexStyle: TextStyle(
                     color: () {
                       if (validationList.length == widget.pages.length) {
-                        return Colors.white;
+                        return currentStep == index
+                            ? Colors.white
+                            : validationList[index]
+                                ? Colors.black
+                                : Colors.white;
                       } else {
                         return currentStep == index
                             ? Colors.white

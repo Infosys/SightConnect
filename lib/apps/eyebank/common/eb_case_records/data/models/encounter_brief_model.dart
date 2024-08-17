@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../respositories/contracts/eb_repository.dart';
-
 part 'encounter_brief_model.freezed.dart';
 part 'encounter_brief_model.g.dart';
 
@@ -9,7 +7,7 @@ part 'encounter_brief_model.g.dart';
 class EncounterBriefModel with _$EncounterBriefModel {
   const factory EncounterBriefModel({
     int? encounterId,
-    AssessmentName? encounterStatus,
+    String? encounterStatus,
     DonorBrief? donorBrief,
     DateTime? intimateDate,
     int? performerId,
