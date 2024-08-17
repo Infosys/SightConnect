@@ -28,8 +28,7 @@ abstract class EBTimelineRepo {
     String? timelineVersion,
   });
   // GET : Form configuration by stage
-  Future<Either<EBFailure, EBFormIntimationResponseModel>>
-      getFormConfiguration({
+  Future<Either<EBFailure, dynamic>> getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
   });
@@ -100,8 +99,7 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
   }
 
   @override
-  Future<Either<EBFailure, EBFormIntimationResponseModel>>
-      getFormConfiguration({
+  Future<Either<EBFailure, dynamic>> getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
   }) {
