@@ -1,16 +1,17 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/mappers/encounter_brief_mapper.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
 import 'package:eye_care_for_all/faker/dummy_ecounter_brief.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ebIntimationFormProvider = FutureProvider<String>((ref) async {
-//   final repo = ref.watch(ebTimlineRepoProvider);
-//   final res= await repo.getIntimationForm(timelineName: "CORNEA_DONATION");
-//  return  res.fold((l) => throw l, (r) => r);
-  return await rootBundle
-      .loadString('assets/eyebank/local_json/case_register.json');
+final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
+  final repo = ref.watch(ebTimlineRepoProvider);
+  final res = await repo.getIntimationForm(timelineName: "CORNEA_DONATION");
+  return res.fold(
+    (l) => throw l,
+    (r) => r.stage,
+  );
 });
 final ebSubmitIntimationFormProvider = StateProvider((ref) {
   // final repo = ref.watch(ebTimlineRepoProvider);
