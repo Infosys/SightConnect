@@ -30,6 +30,41 @@ final ebGetRecordsProvider =
       apiData.map((e) => EncounterBriefMapper.mapToEntity(e)).toList());
 });
 
+final ebSearchRecordProvider =
+    FutureProvider.family<List<EncounterBriefModel>, String>(
+  (ref, query) async {
+    print('Query: $query'); // Debug print
+    final List<EncounterBriefModel> fakeData = List.generate(
+      10,
+      (index) => EncounterBriefModel(
+        encounterId: index + 1,
+        encounterStatus: "PENDING",
+        donorBrief: const DonorBrief(
+          id: 0,
+          name: "George Soros",
+          contact: "9363476747",
+        ),
+        intimateDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
+        performerId: 0,
+        deathDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
+      ),
+    );
+
+    // Simulate a delay for fetching the data
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    // Filter the data based on the query
+
+    final filteredData = fakeData
+        .where((encounter) =>
+            encounter.encounterId.toString().contains(query.toLowerCase()))
+        .toList();
+
+    return filteredData;
+  },
+);
+
 class GetRecordsParams {
   final List<String>? filters;
   final int pageNumber;
