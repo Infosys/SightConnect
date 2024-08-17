@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 
 class EncounterBriefMapper {
   EncounterBriefMapper._();
@@ -7,7 +8,7 @@ class EncounterBriefMapper {
   static EncounterBriefEntity mapToEntity(EncounterBriefModel model) {
     return EncounterBriefEntity(
       encounterId: model.encounterId,
-      encounterStatus: model.encounterStatus,
+      encounterStatus: _getStageName(model.encounterStatus),
       donorBrief: model.donorBrief != null
           ? DonorBriefEntity(
               id: model.donorBrief?.id,
@@ -37,5 +38,14 @@ class EncounterBriefMapper {
       organExtracted: model.organExtracted,
       lastModifiedDate: model.lastModifiedDate,
     );
+  }
+
+  static _getStageName(String? stage) {
+    const stages = EBStageName.values;
+    for (var i = 0; i < stages.length; i++) {
+      if (stages[i].name == stage) {
+        return stages[i];
+      }
+    }
   }
 }
