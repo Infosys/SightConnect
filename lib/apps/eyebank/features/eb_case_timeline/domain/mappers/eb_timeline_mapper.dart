@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/e
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/main.dart';
 
 class EBTimelineMapper {
@@ -14,7 +15,7 @@ class EBTimelineMapper {
         timelineName: configModel.timelineName,
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: m.serviceRequestId,
-        assessmentName: _getAssessmentName(m.assessmentName ?? ""),
+        assessmentName: _getStageName(m.assessmentName),
         stageName: m.stageName,
         assessmentVersion: m.assessmentVersion,
         status: _getCaseStatus(m.status ?? ""),
@@ -25,7 +26,10 @@ class EBTimelineMapper {
     }
     logger.f(data);
     final newConfigModel = configModel.copyWith(
-      stages: configModel.stages!.where((stage) => !model.any((element) => element.assessmentName == stage)).toList(),
+      stages: configModel.stages!
+          .where((stage) =>
+              !model.any((element) => element.assessmentName == stage))
+          .toList(),
     );
     logger.f("newConfigModel: $newConfigModel");
 
@@ -34,7 +38,7 @@ class EBTimelineMapper {
         timelineName: configModel.timelineName,
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: null,
-        assessmentName: _getAssessmentName(stage),
+        assessmentName: _getStageName(stage),
         stageName: stage,
         assessmentVersion: null,
         status: EBCaseStatus.UNKNOWN,
@@ -45,6 +49,15 @@ class EBTimelineMapper {
     }
 
     return data;
+  }
+
+  static _getStageName(String? reason) {
+    const reasons = EBStageName.values;
+    for (var i = 0; i < reasons.length; i++) {
+      if (reasons[i].name == reason) {
+        return reasons[i];
+      }
+    }
   }
 
   static EBCaseStatus _getCaseStatus(String status) {

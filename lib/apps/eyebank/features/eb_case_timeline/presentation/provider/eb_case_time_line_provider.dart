@@ -1,19 +1,15 @@
-import 'dart:developer';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../main.dart';
 import '../../../../../../services/eb_failure.dart';
 import '../../../../helpers/data/models/eb_timeline_config_model.dart';
 import '../../../../helpers/data/respositories/eb_repository_impl.dart';
-import '../../data/models/eb_time_line_case_model.dart';
 import '../../domain/entities/eb_timeline_entity.dart';
 import '../../domain/mappers/eb_timeline_mapper.dart';
 
 final ebCaseTimeLineProvider =
     FutureProvider.family<List<EBTimelineEntity>, Map<String, dynamic>>(
         (ref, Map<String, dynamic> params) async {
-
   final repo = ref.read(ebRepositoryProvider);
   try {
     final timelinesResult = await repo.fetchTimelineByID(params['encounterID']);

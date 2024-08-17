@@ -1,10 +1,12 @@
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
+
 import '../enums/eb_timline_enums.dart';
 
 class EBTimelineEntity {
   final String? timelineName;
   final String? timelineVersion;
   final int? serviceRequestId;
-  final EBAssessmentName? assessmentName;
+  final EBStageName? assessmentName;
   final String? stageName;
   final String? assessmentVersion;
   final EBCaseStatus? status;
@@ -30,6 +32,4 @@ class EBTimelineEntity {
   String toString() {
     return 'EbTimelineEntity(timelineName: $timelineName, timelineVersion: $timelineVersion, serviceRequestId: $serviceRequestId, assessmentName: $assessmentName, stageName: $stageName, assessmentVersion: $assessmentVersion, status: $status, initiateDate: $initiateDate, recentUpdatedTime: $recentUpdatedTime, subStages: $subStages)';
   }
-
-
 }
