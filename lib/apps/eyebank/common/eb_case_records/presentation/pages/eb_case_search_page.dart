@@ -1,6 +1,6 @@
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,7 +8,6 @@ class EBCaseSearchPage extends StatefulWidget {
   const EBCaseSearchPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _EBCaseSearchPageState createState() => _EBCaseSearchPageState();
 }
 
@@ -32,8 +31,7 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
               ),
               onChanged: (value) {
                 setState(() {
-                  query = value;
-                  print('Query updated: $query'); // Debug print
+                  query = value.trim();
                 });
               },
             ),
@@ -47,24 +45,16 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
                     );
                   }
 
-                  final searchResults = ref.watch(ebSearchRecordProvider(query));
+                  final searchResults =
+                      ref.watch(ebSearchRecordProvider(query));
 
                   return searchResults.when(
                     data: (results) {
-                      print('Search results: $results'); // Debug print
                       return ListView.builder(
                         itemCount: results.length,
                         itemBuilder: (context, index) {
                           return EBCaseCard(
-                            item: TableData(
-                              eye: 'Eye ${index + 1}',
-                              category: 'Category ${index + 1}',
-                              date: DateTime.now(),
-                              donor: 'Donor ${index + 1}',
-                              sampleID: 'Sample ID ${index + 1}',
-                              status: 'Status ${index + 1}',
-                              tissue: 'Tissue ${index + 1}',
-                            ),
+                            item: results[index],
                           );
                         },
                       );
@@ -72,7 +62,7 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
                     loading: () =>
                         const Center(child: CircularProgressIndicator()),
                     error: (error, stack) {
-                      print('Error: $error'); // Debug print
+                      logger.f('Error: $error'); // Debug print
                       return Center(child: Text('Error: $error'));
                     },
                   );

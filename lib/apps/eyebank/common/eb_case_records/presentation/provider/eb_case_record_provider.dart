@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/mappers/encounter_brief_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/faker/dummy_ecounter_brief.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -31,15 +32,14 @@ final ebGetRecordsProvider =
 });
 
 final ebSearchRecordProvider =
-    FutureProvider.family<List<EncounterBriefModel>, String>(
+    FutureProvider.family<List<EncounterBriefEntity>, String>(
   (ref, query) async {
-    print('Query: $query'); // Debug print
-    final List<EncounterBriefModel> fakeData = List.generate(
+    final List<EncounterBriefEntity> fakeData = List.generate(
       10,
-      (index) => EncounterBriefModel(
+      (index) => EncounterBriefEntity(
         encounterId: index + 1,
-        encounterStatus: "PENDING",
-        donorBrief: const DonorBrief(
+        encounterStatus: EBStageName.DONOR_SCREENING,
+        donorBrief: DonorBriefEntity(
           id: 0,
           name: "George Soros",
           contact: "9363476747",
@@ -50,12 +50,7 @@ final ebSearchRecordProvider =
       ),
     );
 
-    // Simulate a delay for fetching the data
-
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    // Filter the data based on the query
-
+    await Future.delayed(const Duration(milliseconds: 300));
     final filteredData = fakeData
         .where((encounter) =>
             encounter.encounterId.toString().contains(query.toLowerCase()))
