@@ -34,7 +34,7 @@ class EBHomePage extends StatelessWidget {
           children: [
             const EbStatisticsTopCard(),
             if (kIsWeb) const SizedBox(height: AppSize.km),
-            // if (kIsWeb) const AddCaseButton(),
+            if (kIsWeb) const AddCaseButton(),
             const SizedBox(height: AppSize.km),
             const RecentCases(),
             const SizedBox(height: AppSize.km),
@@ -56,7 +56,6 @@ class EBHomePage extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(
               height: AppSize.km * 3,
             ),
