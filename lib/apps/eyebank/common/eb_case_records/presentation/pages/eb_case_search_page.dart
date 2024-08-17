@@ -41,8 +41,13 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
             Expanded(
               child: Consumer(
                 builder: (context, ref, child) {
-                  final searchResults =
-                      ref.watch(ebSearchRecordProvider(query));
+                  if (query.isEmpty) {
+                    return const Center(
+                      child: Text('Enter a search query to see results'),
+                    );
+                  }
+
+                  final searchResults = ref.watch(ebSearchRecordProvider(query));
 
                   return searchResults.when(
                     data: (results) {
