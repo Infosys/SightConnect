@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/reject_encounter_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/reject_encounter_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 
-import '../../models/form_data_model.dart';
 import '../../models/eb_timeline_model.dart';
+import '../../models/form_data_model.dart';
 
 abstract class EyeBankRepository {
   Future<Either<EBFailure, List<EncounterBriefModel>>> getAllEncounters(
@@ -24,7 +24,8 @@ abstract class EyeBankRepository {
   Future<Either<EBFailure, EbTimelineConfigModel>> fetchTimelineStages(
       String timelineName, String timelineVersion);
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
-      String stageName, String stageVersion,
+      String stageName,
+      String stageVersion,
       EBSubmitFormDataRequestModel requestData);
   Future<Either<EBFailure, dynamic>> rejectEncounter(
       RejectEncounterRequestModel requestData);

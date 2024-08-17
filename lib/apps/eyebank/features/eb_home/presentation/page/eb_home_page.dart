@@ -5,47 +5,18 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widg
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_cases_closed_analytics.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_statistics_top_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_profile/presentation/pages/eb_profile_page.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class EBHomePage extends StatefulWidget {
+class EBHomePage extends StatelessWidget {
   const EBHomePage({super.key});
 
   @override
-  State<EBHomePage> createState() => _EBHomePageState();
-}
-
-class _EBHomePageState extends State<EBHomePage> {
-  late int showingTooltip;
-
-  @override
-  void initState() {
-    showingTooltip = -1;
-    super.initState();
-  }
-
-  BarChartGroupData generateGroupData(int x, int y, Color color) {
-    return BarChartGroupData(
-      x: x,
-      showingTooltipIndicators: showingTooltip == x ? [0] : [],
-      barRods: [
-        BarChartRodData(
-          toY: y.toDouble(),
-          color: color,
-          width: 20,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(0),
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    logger.f('EBHomePage');
     return Scaffold(
       appBar: EyeBankDashboardAppbar(
         onProfileTap: () {

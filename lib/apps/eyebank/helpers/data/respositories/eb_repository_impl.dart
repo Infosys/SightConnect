@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
@@ -8,11 +9,10 @@ import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/eb_submit_form_data_request_model.dart';
 import '../models/eb_timeline_model.dart';
-import '../models/encounter_brief_model.dart';
 import '../models/form_data_model.dart';
 import '../models/reject_encounter_request_model.dart';
-import '../models/eb_submit_form_data_request_model.dart';
 
 final ebRepositoryProvider = Provider<EyeBankRepository>((ref) {
   return EyeBankRepositoryImpl(ref.watch(dioProvider));
@@ -186,13 +186,14 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
-      String stageName, String stageVersion,
+      String stageName,
+      String stageVersion,
       EBSubmitFormDataRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
       // /eyebank/api/encounters/DEATH_INTIMATION?stageVersion=1
 
       final endPoint = '/encounters/$stageName?stageVersion=$stageVersion';
-          
+
       final response = await _dio.post(endPoint, data: requestData.toJson());
       if (response.statusCode == 200) {
         return response.data

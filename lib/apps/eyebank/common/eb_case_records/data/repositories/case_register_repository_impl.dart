@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
@@ -20,30 +20,6 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   CaseRegisterRepositoryImpl(this._dio);
 
   @override
-  Future<Either<Failure, dynamic>> getA1Form(queryData) async {
-    var endpoint = 'a1-form';
-    try {
-      var data =
-          await _dio.get(endpoint, data: queryData, queryParameters: queryData);
-      if (data.statusCode == 200) {
-        return Right(data.data);
-      } else {
-        return Left(
-          ServerFailure(
-              errorMessage: data.statusMessage ?? 'Error in getA1Form'),
-        );
-      }
-    } on DioException catch (e) {
-      logger.e("Error in getA1Form");
-      DioErrorHandler.handleDioError(e);
-      rethrow;
-    } catch (e) {
-      logger.e("Error in getA1Form");
-      rethrow;
-    }
-  }
-
-  @override
   Future<Either<EBFailure, dynamic>> postA1Form(queryData) async {
     return EyeBankErrorHandler.handle(() async {
       var endPoint =
@@ -55,26 +31,6 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
         throw Exception(data.statusMessage ?? 'Error in getA1Form');
       }
     });
-    // var endPoint =
-    //     '/services/orchestration/api/v2/patients/triage-reports?queryText=${queryData}';
-    // try {
-    //   var data = await _dio.post(
-    //     endPoint,
-    //   );
-    //   if (data.statusCode == 200) {
-    //     return Right(data.data);
-    //   } else {
-    //     return Left(ServerFailure(
-    //         errorMessage: data.statusMessage ?? 'Error in postA1Form'));
-    //   }
-    // } on DioException catch (e) {
-    //   logger.e("Error in postA1Form");
-    //   DioErrorHandler.handleDioError(e);
-    //   rethrow;
-    // } catch (e) {
-    //   logger.e("Error in postA1Form");
-    //   rethrow;
-    // }
   }
 
   @override

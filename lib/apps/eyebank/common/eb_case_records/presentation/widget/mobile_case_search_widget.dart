@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/pages/eb_case_search_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
@@ -12,7 +12,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return EbInfiniteScrollView<TableData>(
+    return EbInfiniteScrollView<EncounterBriefEntity>(
       fetchPageData: (pageKey, pageSize, filters) async {
         final params = GetRecordsParams(
           filters: filters,

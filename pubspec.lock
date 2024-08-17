@@ -1431,10 +1431,10 @@ packages:
     dependency: transitive
     description:
       name: permission_handler_android
-      sha256: eaf2a1ec4472775451e88ca6a7b86559ef2f1d1ed903942ed135e38ea0097dca
+      sha256: "2e2a64834daafdde3aa7a0d9a6b90c97fc6229853ac18c2271a9d055631570c1"
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
-    version: "12.0.8"
+    version: "12.0.11"
   permission_handler_apple:
     dependency: transitive
     description:

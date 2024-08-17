@@ -6,7 +6,6 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/pages/form_builder_page.dart';
-import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +14,15 @@ class DynamicFormPage extends StatelessWidget {
   const DynamicFormPage({
     super.key,
     this.onSubmit,
-    this.actions,
     this.onPopInvoked,
     this.backButtonIcon = Icons.arrow_back,
+    this.enableDraft = false,
     required this.json,
   });
-  final Function(Map<String, dynamic>?)? onSubmit;
+  final Function(Map<String, dynamic>? data, DynamicFormSavingType mode)?
+      onSubmit;
   final Function()? onPopInvoked;
-
-  final List<Widget>? actions;
+  final bool enableDraft;
   final String json;
   final IconData backButtonIcon;
 
@@ -39,7 +38,6 @@ class DynamicFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Log.f("DynamicFormPage");
     return FutureBuilder(
       future: _loadJson(),
       builder: (context, snapshot) {
@@ -48,38 +46,14 @@ class DynamicFormPage extends StatelessWidget {
           final title = snapshot.data?.title ?? '';
           final FormLayoutType formLayout =
               snapshot.data?.formLayoutType ?? FormLayoutType.PANEL;
-          return PopScope(
-            canPop: onPopInvoked == null,
-            onPopInvoked: (value) {
-              if (value) {
-                return;
-              }
-              if (onPopInvoked != null) {
-                onPopInvoked?.call();
-              }
-            },
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(title),
-                actions: actions,
-                leading: IconButton(
-                  icon: Icon(backButtonIcon),
-                  onPressed: () {
-                    if (onPopInvoked != null) {
-                      onPopInvoked?.call();
-                    } else {
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
-              ),
-              body: FormBuilderPage(
-                pages: pages,
-                title: title,
-                onSubmit: onSubmit,
-                layoutType: formLayout,
-              ),
-            ),
+          return FormBuilderPage(
+            pages: pages,
+            title: title,
+            onSubmit: onSubmit,
+            layoutType: formLayout,
+            backButtonIcon: backButtonIcon,
+            onPopInvoked: onPopInvoked,
+            enableDraft: enableDraft,
           );
         } else if (snapshot.hasError) {
           return FormErrorWidget(

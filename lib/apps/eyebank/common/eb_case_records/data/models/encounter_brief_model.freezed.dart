@@ -21,7 +21,7 @@ EncounterBriefModel _$EncounterBriefModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EncounterBriefModel {
   int? get encounterId => throw _privateConstructorUsedError;
-  AssessmentName? get encounterStatus => throw _privateConstructorUsedError;
+  String? get encounterStatus => throw _privateConstructorUsedError;
   DonorBrief? get donorBrief => throw _privateConstructorUsedError;
   DateTime? get intimateDate => throw _privateConstructorUsedError;
   int? get performerId => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $EncounterBriefModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? encounterId,
-      AssessmentName? encounterStatus,
+      String? encounterStatus,
       DonorBrief? donorBrief,
       DateTime? intimateDate,
       int? performerId,
@@ -88,7 +88,7 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
       encounterStatus: freezed == encounterStatus
           ? _value.encounterStatus
           : encounterStatus // ignore: cast_nullable_to_non_nullable
-              as AssessmentName?,
+              as String?,
       donorBrief: freezed == donorBrief
           ? _value.donorBrief
           : donorBrief // ignore: cast_nullable_to_non_nullable
@@ -155,7 +155,7 @@ abstract class _$$EncounterBriefModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? encounterId,
-      AssessmentName? encounterStatus,
+      String? encounterStatus,
       DonorBrief? donorBrief,
       DateTime? intimateDate,
       int? performerId,
@@ -199,7 +199,7 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
       encounterStatus: freezed == encounterStatus
           ? _value.encounterStatus
           : encounterStatus // ignore: cast_nullable_to_non_nullable
-              as AssessmentName?,
+              as String?,
       donorBrief: freezed == donorBrief
           ? _value.donorBrief
           : donorBrief // ignore: cast_nullable_to_non_nullable
@@ -253,7 +253,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
   @override
   final int? encounterId;
   @override
-  final AssessmentName? encounterStatus;
+  final String? encounterStatus;
   @override
   final DonorBrief? donorBrief;
   @override
@@ -339,7 +339,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
 abstract class _EncounterBriefModel implements EncounterBriefModel {
   const factory _EncounterBriefModel(
       {final int? encounterId,
-      final AssessmentName? encounterStatus,
+      final String? encounterStatus,
       final DonorBrief? donorBrief,
       final DateTime? intimateDate,
       final int? performerId,
@@ -354,7 +354,7 @@ abstract class _EncounterBriefModel implements EncounterBriefModel {
   @override
   int? get encounterId;
   @override
-  AssessmentName? get encounterStatus;
+  String? get encounterStatus;
   @override
   DonorBrief? get donorBrief;
   @override
