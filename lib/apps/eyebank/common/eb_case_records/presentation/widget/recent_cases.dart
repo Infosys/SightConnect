@@ -1,7 +1,8 @@
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/pages/eb_case_records_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +14,33 @@ class RecentCases extends StatelessWidget {
   Widget build(BuildContext context) {
     final newItems = List.generate(
       1,
-      (index) => TableData(
-        eye: "Eye ${1 + index + 1}",
-        category: "Category ${1 + index + 1}",
-        date: DateTime.now(),
-        donor: "Donor ${1 + index + 1}",
-        sampleID: "Sample ID ${1 + index + 1}",
-        status: "Status ${1 + index + 1}",
-        tissue: "Tissue ${1 + index + 1}",
+      (index) => EncounterBriefModel(
+        encounterId: 0,
+        encounterStatus: AssessmentName.INTIMATION,
+        donorBrief: const DonorBrief(
+          id: 0,
+          name: "George Soros",
+          contact: "9363476747",
+        ),
+        intimateDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
+        performerId: 0,
+        deathDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
+        bodyLocation: const BodyLocation(
+          addressLine1: "42 Avenue Street",
+          addressLine2: "New York City",
+          street: "42 Avenue Street",
+          city: "New York City",
+          state: "New York",
+          zipCode: "10001",
+          country: "USA",
+          landmark: "string",
+          village: "string",
+          district: "string",
+          latitude: "string",
+          longitude: "string",
+        ),
+        organExtracted: ["Heart"],
+        lastModifiedDate: DateTime.parse('2024-08-13T07:41:19.692Z'),
       ),
     );
 

@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/models/table_data.dart';
 
 final EncounterBriefModel caseModel = EncounterBriefModel(
   encounterId: 0,
@@ -37,7 +36,7 @@ final EncounterBriefModel caseModel = EncounterBriefModel(
 );
 
 class EBCaseCard extends StatelessWidget {
-  final TableData item;
+  final EncounterBriefModel item;
   final bool isCompact;
   final VoidCallback? onTap;
 
