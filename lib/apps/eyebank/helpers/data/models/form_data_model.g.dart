@@ -11,7 +11,7 @@ _$FormDataModelImpl _$$FormDataModelImplFromJson(Map<String, dynamic> json) =>
       encounterId: (json['encounterId'] as num?)?.toInt(),
       tenantId: json['tenantId'] as String?,
       assessmentName:
-          $enumDecodeNullable(_$AssessmentNameEnumMap, json['assessmentName']),
+          $enumDecodeNullable(_$EBStageNameEnumMap, json['assessmentName']),
       assessmentVersion: json['assessmentVersion'] as String?,
       forms: (json['forms'] as List<dynamic>?)
           ?.map((e) => Form.fromJson(e as Map<String, dynamic>))
@@ -22,14 +22,20 @@ Map<String, dynamic> _$$FormDataModelImplToJson(_$FormDataModelImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'tenantId': instance.tenantId,
-      'assessmentName': _$AssessmentNameEnumMap[instance.assessmentName],
+      'assessmentName': _$EBStageNameEnumMap[instance.assessmentName],
       'assessmentVersion': instance.assessmentVersion,
       'forms': instance.forms?.map((e) => e.toJson()).toList(),
     };
 
-const _$AssessmentNameEnumMap = {
-  AssessmentName.INTIMATION: 'INTIMATION',
-  AssessmentName.PRELIMINARY: 'PRELIMINARY',
+const _$EBStageNameEnumMap = {
+  EBStageName.DEATH_INTIMATION: 'DEATH_INTIMATION',
+  EBStageName.DONOR_SCREENING: 'DONOR_SCREENING',
+  EBStageName.CORNEA_RECOVERY: 'CORNEA_RECOVERY',
+  EBStageName.SHIPPED_TO_EYEBANK: 'SHIPPED_TO_EYEBANK',
+  EBStageName.RECEIVED_AT_EYEBANK: 'RECEIVED_AT_EYEBANK',
+  EBStageName.SEROLOGY: 'SEROLOGY',
+  EBStageName.CORNEA_EVALUATION: 'CORNEA_EVALUATION',
+  EBStageName.IN_INVENTORY: 'IN_INVENTORY',
 };
 
 _$FormImpl _$$FormImplFromJson(Map<String, dynamic> json) => _$FormImpl(

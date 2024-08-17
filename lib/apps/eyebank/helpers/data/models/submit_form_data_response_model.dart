@@ -20,16 +20,8 @@ class Forms with _$Forms {
   const factory Forms({
     int? identifier,
     IdentifierType? identifierType,
-    FormData? formData,
+    Map<String, dynamic>? formData,
   }) = _Forms;
 
   factory Forms.fromJson(Map<String, dynamic> json) => _$FormsFromJson(json);
-}
-
-@freezed
-class FormData with _$FormData {
-  const factory FormData() = _FormData;
-
-  factory FormData.fromJson(Map<String, dynamic> json) =>
-      _$FormDataFromJson(json);
 }

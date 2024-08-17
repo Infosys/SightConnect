@@ -13,8 +13,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/eb_submit_form_data_request_model.dart';
 import '../models/eb_timeline_model.dart';
-import '../models/form_data_model.dart';
-import '../models/reject_encounter_request_model.dart';
 
 final ebRepositoryProvider = Provider<EyeBankRepository>((ref) {
   return EyeBankRepositoryImpl(ref.watch(dioProvider));
@@ -51,23 +49,6 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
         return response.data;
       } else {
         throw Exception(response.statusMessage ?? 'Error in searchEncounter');
-      }
-    });
-  }
-
-  @override
-  Future<Either<EBFailure, FormDataModel>> fetchFormByIDAndStage(
-    String encounterID,
-    AssessmentName stage,
-  ) {
-    return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/encounters/$encounterID/forms/$stage';
-      final response = await _dio.get(endPoint);
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(
-            response.statusMessage ?? 'Error in fetchFormByIDAndStage');
       }
     });
   }
@@ -150,7 +131,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   }
 
   @override
-  Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
+  Future<Either<EBFailure, SubmitFormDataResponseModel>> saveIntimationForm(
       String stageName,
       String stageVersion,
       EBSubmitFormDataRequestModel requestData) {
@@ -158,38 +139,10 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       final endPoint = '/encounters/$stageName?stageVersion=$stageVersion';
       final response = await _dio.post(endPoint, data: requestData.toJson());
       if (response.statusCode == 200) {
-        return response.data
-            .map((e) => SubmitFormDataResponseModel.fromJson(e));
+        return SubmitFormDataResponseModel.fromJson(response.data);
       } else {
         throw Exception(response.statusMessage ?? 'Error in saveOrDraftForm');
       }
     });
   }
-
-  @override
-  Future<Either<EBFailure, dynamic>> rejectEncounter(
-      RejectEncounterRequestModel requestData) {
-    return EyeBankErrorHandler.handle(() async {
-      const endPoint = '/encounters/reject';
-      final response = await _dio.post(endPoint, data: requestData.toJson());
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(response.statusMessage ?? 'Error in rejectEncounter');
-      }
-    });
-  }
-
-  // @override
-  // Future<Either<EBFailure, dynamic>> fetchFormByStage(AssessmentName stage, String stageVersion) {
-  //   return EyeBankErrorHandler.handle(() async {
-  //     var endPoint = '/forms/assessment?stage=$stage';
-  //     var response = await _dio.get(endPoint);
-  //     if (response.statusCode == 200) {
-  //       return response.data;
-  //     } else {
-  //       throw Exception(response.statusMessage ?? 'Error in fetchFormByStage');
-  //     }
-  //   });
-  // }
 }

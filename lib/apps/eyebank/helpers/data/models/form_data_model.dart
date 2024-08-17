@@ -1,4 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'form_data_model.freezed.dart';
@@ -9,7 +10,7 @@ class FormDataModel with _$FormDataModel {
   const factory FormDataModel({
     int? encounterId,
     String? tenantId,
-    AssessmentName? assessmentName,
+    EBStageName? assessmentName,
     String? assessmentVersion,
     List<Form>? forms,
   }) = _FormDataModel;

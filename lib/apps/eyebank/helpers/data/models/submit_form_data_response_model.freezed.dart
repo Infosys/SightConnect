@@ -205,7 +205,7 @@ Forms _$FormsFromJson(Map<String, dynamic> json) {
 mixin _$Forms {
   int? get identifier => throw _privateConstructorUsedError;
   IdentifierType? get identifierType => throw _privateConstructorUsedError;
-  FormData? get formData => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get formData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -218,9 +218,9 @@ abstract class $FormsCopyWith<$Res> {
       _$FormsCopyWithImpl<$Res, Forms>;
   @useResult
   $Res call(
-      {int? identifier, IdentifierType? identifierType, FormData? formData});
-
-  $FormDataCopyWith<$Res>? get formData;
+      {int? identifier,
+      IdentifierType? identifierType,
+      Map<String, dynamic>? formData});
 }
 
 /// @nodoc
@@ -252,20 +252,8 @@ class _$FormsCopyWithImpl<$Res, $Val extends Forms>
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
-              as FormData?,
+              as Map<String, dynamic>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FormDataCopyWith<$Res>? get formData {
-    if (_value.formData == null) {
-      return null;
-    }
-
-    return $FormDataCopyWith<$Res>(_value.formData!, (value) {
-      return _then(_value.copyWith(formData: value) as $Val);
-    });
   }
 }
 
@@ -277,10 +265,9 @@ abstract class _$$FormsImplCopyWith<$Res> implements $FormsCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? identifier, IdentifierType? identifierType, FormData? formData});
-
-  @override
-  $FormDataCopyWith<$Res>? get formData;
+      {int? identifier,
+      IdentifierType? identifierType,
+      Map<String, dynamic>? formData});
 }
 
 /// @nodoc
@@ -308,9 +295,9 @@ class __$$FormsImplCopyWithImpl<$Res>
           : identifierType // ignore: cast_nullable_to_non_nullable
               as IdentifierType?,
       formData: freezed == formData
-          ? _value.formData
+          ? _value._formData
           : formData // ignore: cast_nullable_to_non_nullable
-              as FormData?,
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -318,7 +305,11 @@ class __$$FormsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$FormsImpl implements _Forms {
-  const _$FormsImpl({this.identifier, this.identifierType, this.formData});
+  const _$FormsImpl(
+      {this.identifier,
+      this.identifierType,
+      final Map<String, dynamic>? formData})
+      : _formData = formData;
 
   factory _$FormsImpl.fromJson(Map<String, dynamic> json) =>
       _$$FormsImplFromJson(json);
@@ -327,8 +318,15 @@ class _$FormsImpl implements _Forms {
   final int? identifier;
   @override
   final IdentifierType? identifierType;
+  final Map<String, dynamic>? _formData;
   @override
-  final FormData? formData;
+  Map<String, dynamic>? get formData {
+    final value = _formData;
+    if (value == null) return null;
+    if (_formData is EqualUnmodifiableMapView) return _formData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
@@ -344,14 +342,13 @@ class _$FormsImpl implements _Forms {
                 other.identifier == identifier) &&
             (identical(other.identifierType, identifierType) ||
                 other.identifierType == identifierType) &&
-            (identical(other.formData, formData) ||
-                other.formData == formData));
+            const DeepCollectionEquality().equals(other._formData, _formData));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, identifier, identifierType, formData);
+  int get hashCode => Object.hash(runtimeType, identifier, identifierType,
+      const DeepCollectionEquality().hash(_formData));
 
   @JsonKey(ignore: true)
   @override
@@ -371,7 +368,7 @@ abstract class _Forms implements Forms {
   const factory _Forms(
       {final int? identifier,
       final IdentifierType? identifierType,
-      final FormData? formData}) = _$FormsImpl;
+      final Map<String, dynamic>? formData}) = _$FormsImpl;
 
   factory _Forms.fromJson(Map<String, dynamic> json) = _$FormsImpl.fromJson;
 
@@ -380,89 +377,9 @@ abstract class _Forms implements Forms {
   @override
   IdentifierType? get identifierType;
   @override
-  FormData? get formData;
+  Map<String, dynamic>? get formData;
   @override
   @JsonKey(ignore: true)
   _$$FormsImplCopyWith<_$FormsImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-FormData _$FormDataFromJson(Map<String, dynamic> json) {
-  return _FormData.fromJson(json);
-}
-
-/// @nodoc
-mixin _$FormData {
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FormDataCopyWith<$Res> {
-  factory $FormDataCopyWith(FormData value, $Res Function(FormData) then) =
-      _$FormDataCopyWithImpl<$Res, FormData>;
-}
-
-/// @nodoc
-class _$FormDataCopyWithImpl<$Res, $Val extends FormData>
-    implements $FormDataCopyWith<$Res> {
-  _$FormDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$FormDataImplCopyWith<$Res> {
-  factory _$$FormDataImplCopyWith(
-          _$FormDataImpl value, $Res Function(_$FormDataImpl) then) =
-      __$$FormDataImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FormDataImplCopyWithImpl<$Res>
-    extends _$FormDataCopyWithImpl<$Res, _$FormDataImpl>
-    implements _$$FormDataImplCopyWith<$Res> {
-  __$$FormDataImplCopyWithImpl(
-      _$FormDataImpl _value, $Res Function(_$FormDataImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$FormDataImpl implements _FormData {
-  const _$FormDataImpl();
-
-  factory _$FormDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FormDataImplFromJson(json);
-
-  @override
-  String toString() {
-    return 'FormData()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FormDataImpl);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FormDataImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _FormData implements FormData {
-  const factory _FormData() = _$FormDataImpl;
-
-  factory _FormData.fromJson(Map<String, dynamic> json) =
-      _$FormDataImpl.fromJson;
 }

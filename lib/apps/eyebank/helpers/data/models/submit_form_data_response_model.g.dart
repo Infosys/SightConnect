@@ -26,16 +26,14 @@ _$FormsImpl _$$FormsImplFromJson(Map<String, dynamic> json) => _$FormsImpl(
       identifier: (json['identifier'] as num?)?.toInt(),
       identifierType:
           $enumDecodeNullable(_$IdentifierTypeEnumMap, json['identifierType']),
-      formData: json['formData'] == null
-          ? null
-          : FormData.fromJson(json['formData'] as Map<String, dynamic>),
+      formData: json['formData'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$FormsImplToJson(_$FormsImpl instance) =>
     <String, dynamic>{
       'identifier': instance.identifier,
       'identifierType': _$IdentifierTypeEnumMap[instance.identifierType],
-      'formData': instance.formData?.toJson(),
+      'formData': instance.formData,
     };
 
 const _$IdentifierTypeEnumMap = {
@@ -43,9 +41,3 @@ const _$IdentifierTypeEnumMap = {
   IdentifierType.SERVICE_REQUEST: 'SERVICE_REQUEST',
   IdentifierType.BDP: 'BDP',
 };
-
-_$FormDataImpl _$$FormDataImplFromJson(Map<String, dynamic> json) =>
-    _$FormDataImpl();
-
-Map<String, dynamic> _$$FormDataImplToJson(_$FormDataImpl instance) =>
-    <String, dynamic>{};

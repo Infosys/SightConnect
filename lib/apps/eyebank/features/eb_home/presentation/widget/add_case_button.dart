@@ -60,7 +60,7 @@ class AddCaseButton extends StatelessWidget {
                       verifiedByRole: null,
                     );
 
-                    ref.read(ebRepositoryProvider).saveOrDraftForm(
+                    ref.read(ebRepositoryProvider).saveIntimationForm(
                         "", "0.0.1", submitData); //add stage name
                   } catch (e) {
                     logger.e(e);

@@ -22,7 +22,7 @@ FormDataModel _$FormDataModelFromJson(Map<String, dynamic> json) {
 mixin _$FormDataModel {
   int? get encounterId => throw _privateConstructorUsedError;
   String? get tenantId => throw _privateConstructorUsedError;
-  AssessmentName? get assessmentName => throw _privateConstructorUsedError;
+  EBStageName? get assessmentName => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
   List<Form>? get forms => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $FormDataModelCopyWith<$Res> {
   $Res call(
       {int? encounterId,
       String? tenantId,
-      AssessmentName? assessmentName,
+      EBStageName? assessmentName,
       String? assessmentVersion,
       List<Form>? forms});
 }
@@ -77,7 +77,7 @@ class _$FormDataModelCopyWithImpl<$Res, $Val extends FormDataModel>
       assessmentName: freezed == assessmentName
           ? _value.assessmentName
           : assessmentName // ignore: cast_nullable_to_non_nullable
-              as AssessmentName?,
+              as EBStageName?,
       assessmentVersion: freezed == assessmentVersion
           ? _value.assessmentVersion
           : assessmentVersion // ignore: cast_nullable_to_non_nullable
@@ -101,7 +101,7 @@ abstract class _$$FormDataModelImplCopyWith<$Res>
   $Res call(
       {int? encounterId,
       String? tenantId,
-      AssessmentName? assessmentName,
+      EBStageName? assessmentName,
       String? assessmentVersion,
       List<Form>? forms});
 }
@@ -135,7 +135,7 @@ class __$$FormDataModelImplCopyWithImpl<$Res>
       assessmentName: freezed == assessmentName
           ? _value.assessmentName
           : assessmentName // ignore: cast_nullable_to_non_nullable
-              as AssessmentName?,
+              as EBStageName?,
       assessmentVersion: freezed == assessmentVersion
           ? _value.assessmentVersion
           : assessmentVersion // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ class _$FormDataModelImpl implements _FormDataModel {
   @override
   final String? tenantId;
   @override
-  final AssessmentName? assessmentName;
+  final EBStageName? assessmentName;
   @override
   final String? assessmentVersion;
   final List<Form>? _forms;
@@ -229,7 +229,7 @@ abstract class _FormDataModel implements FormDataModel {
   const factory _FormDataModel(
       {final int? encounterId,
       final String? tenantId,
-      final AssessmentName? assessmentName,
+      final EBStageName? assessmentName,
       final String? assessmentVersion,
       final List<Form>? forms}) = _$FormDataModelImpl;
 
@@ -241,7 +241,7 @@ abstract class _FormDataModel implements FormDataModel {
   @override
   String? get tenantId;
   @override
-  AssessmentName? get assessmentName;
+  EBStageName? get assessmentName;
   @override
   String? get assessmentVersion;
   @override
