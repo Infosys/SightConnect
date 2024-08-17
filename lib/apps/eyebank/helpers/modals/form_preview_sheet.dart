@@ -13,7 +13,7 @@ showCustomWoltSheet(BuildContext context, Widget child) {
         return [
           WoltModalSheetPage(
             useSafeArea: false,
-            // navBarHeight: 1,
+            navBarHeight: kIsWeb ? null : 1,
             child: SizedBox(
               height: MediaQuery.of(modalSheetContext).size.height,
               child: child,
