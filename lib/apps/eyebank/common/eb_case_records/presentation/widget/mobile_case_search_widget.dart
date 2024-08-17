@@ -31,8 +31,8 @@ class MobileCaseSearchWidget extends ConsumerWidget {
               final navigator = Navigator.of(context);
               navigator.push(
                 MaterialPageRoute(
-                  builder: (context) =>
-                      const EbCaseTimeLinePage(caseID: "1234"),
+                  builder: (context) => const EbCaseTimeLinePage(
+                      encounterID: 1, timelineVersion: '1'),
                 ),
               );
             },

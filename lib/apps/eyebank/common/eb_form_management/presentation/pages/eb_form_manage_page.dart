@@ -28,7 +28,9 @@ class EBFormManagePage extends ConsumerWidget {
                 data: (json) {
                   return DynamicFormPage(
                     json: json,
-                    onSubmit: (data) {},
+                    onSubmit: (data) {
+                      
+                    },
                     onPopInvoked: () {
                       showFormExitDialog(
                         context,

@@ -1,4 +1,4 @@
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
 class CaseConnector extends StatelessWidget {
-  final EBTimeLineCaseModel event;
+  final EBTimelineEntity event;
 
   const CaseConnector({super.key, required this.event});
 
@@ -27,7 +27,7 @@ class CaseConnector extends StatelessWidget {
 }
 
 class CompletedCard extends StatelessWidget {
-  final EBTimeLineCaseModel event;
+  final EBTimelineEntity event;
   final VoidCallback? onTap;
   final bool isNested;
 
@@ -79,7 +79,7 @@ class CompletedCard extends StatelessWidget {
                 _buildInfoColumn(
                   icon: Icons.check_circle,
                   label: "Status",
-                  value: event.status.name ?? "",
+                  value: event.status?.name ?? "",
                   valueColor: _getStatusColor(event.status),
                 ),
               ],
@@ -135,7 +135,7 @@ class CompletedCard extends StatelessWidget {
 }
 
 class CaseIndicator extends StatelessWidget {
-  final EBTimeLineCaseModel event;
+  final EBTimelineEntity event;
 
   const CaseIndicator({super.key, required this.event});
 
@@ -171,9 +171,9 @@ class CaseIndicator extends StatelessWidget {
 }
 
 class CaseHeader extends StatelessWidget {
-  final EBTimeLineCaseModel event;
+  final EBTimelineEntity event;
   final int index;
-  final List<EBTimeLineCaseModel> caseTimeLine;
+  final List<EBTimelineEntity> caseTimeLine;
   final bool isNested;
 
   const CaseHeader({
@@ -192,7 +192,7 @@ class CaseHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            event.stageName.toUpperCase(),
+            event.stageName?.toUpperCase() ?? "",
             style: applyRobotoFont(
               fontSize: isNested ? 11 : 12,
               fontWeight: FontWeight.bold,

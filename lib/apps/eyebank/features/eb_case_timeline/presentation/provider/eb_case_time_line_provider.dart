@@ -1,10 +1,49 @@
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
+import 'dart:developer';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ebCaseTimeLineProvider = FutureProvider.family((ref, caseID) async {
-  return Future.delayed(const Duration(seconds: 1), () {
-    return sampleJson.map((e) => EBTimeLineCaseModel.fromJson(e)).toList();
-  });
+import '../../../../../../main.dart';
+import '../../../../../../services/eb_failure.dart';
+import '../../../../helpers/data/models/eb_timeline_config_model.dart';
+import '../../../../helpers/data/respositories/eb_repository_impl.dart';
+import '../../data/models/eb_time_line_case_model.dart';
+import '../../domain/entities/eb_timeline_entity.dart';
+import '../../domain/mappers/eb_timeline_mapper.dart';
+
+final ebCaseTimeLineProvider =
+    FutureProvider.family<List<EBTimelineEntity>, Map<String, dynamic>>(
+        (ref, Map<String, dynamic> params) async {
+
+  final repo = ref.read(ebRepositoryProvider);
+  try {
+    final timelinesResult = await repo.fetchTimelineByID(params['encounterID']);
+    // logger.f('timelinesResult: $timelinesResult');
+    final stagesResult = await repo.fetchTimelineStages(
+        "CORNEA_DONATION", params['timelineVersion']);
+    // logger.f('stagesResult: $stagesResult');
+    if (timelinesResult.isRight() && stagesResult.isRight()) {
+      final timelines = timelinesResult.getOrElse(() => []);
+      final stages =
+          stagesResult.getOrElse(() => const EbTimelineConfigModel());
+      // log(EBTimelineMapper.mapToEntity(timelines, stages).toString());
+      return Future.delayed(
+        const Duration(milliseconds: 100),
+        () {
+          return EBTimelineMapper.mapToEntity(timelines, stages);
+        },
+      );
+    } else {
+      throw EBServerFailure(
+          errorMessage: "failure in fetching timeline",
+          errorObject: EBErrorObject());
+    }
+  } on EBFailure catch (e) {
+    logger.e('EBFailure: $e');
+    rethrow;
+  } catch (e) {
+    logger.e('Error: $e');
+    rethrow;
+  }
 });
 
 const sampleJson = [

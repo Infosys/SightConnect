@@ -25,8 +25,11 @@ mixin _$EBTimelineModel {
   String? get stageName => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get initiateDate => throw _privateConstructorUsedError;
-  DateTime? get recentUpdated => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get recentUpdated =>
+      throw _privateConstructorUsedError; //add converter
   List<String>? get subStages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,8 +50,8 @@ abstract class $EBTimelineModelCopyWith<$Res> {
       String? stageName,
       String? assessmentVersion,
       String? status,
-      DateTime? initiateDate,
-      DateTime? recentUpdated,
+      @TimestampConverter() DateTime? initiateDate,
+      @TimestampConverter() DateTime? recentUpdated,
       List<String>? subStages});
 }
 
@@ -125,8 +128,8 @@ abstract class _$$EBTimelineModelImplCopyWith<$Res>
       String? stageName,
       String? assessmentVersion,
       String? status,
-      DateTime? initiateDate,
-      DateTime? recentUpdated,
+      @TimestampConverter() DateTime? initiateDate,
+      @TimestampConverter() DateTime? recentUpdated,
       List<String>? subStages});
 }
 
@@ -196,8 +199,8 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
       this.stageName,
       this.assessmentVersion,
       this.status,
-      this.initiateDate,
-      this.recentUpdated,
+      @TimestampConverter() this.initiateDate,
+      @TimestampConverter() this.recentUpdated,
       final List<String>? subStages})
       : _subStages = subStages;
 
@@ -215,10 +218,14 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
   @override
   final String? status;
   @override
+  @TimestampConverter()
   final DateTime? initiateDate;
   @override
+  @TimestampConverter()
   final DateTime? recentUpdated;
+//add converter
   final List<String>? _subStages;
+//add converter
   @override
   List<String>? get subStages {
     final value = _subStages;
@@ -290,8 +297,8 @@ abstract class _EBTimelineModel implements EBTimelineModel {
       final String? stageName,
       final String? assessmentVersion,
       final String? status,
-      final DateTime? initiateDate,
-      final DateTime? recentUpdated,
+      @TimestampConverter() final DateTime? initiateDate,
+      @TimestampConverter() final DateTime? recentUpdated,
       final List<String>? subStages}) = _$EBTimelineModelImpl;
 
   factory _EBTimelineModel.fromJson(Map<String, dynamic> json) =
@@ -308,10 +315,12 @@ abstract class _EBTimelineModel implements EBTimelineModel {
   @override
   String? get status;
   @override
+  @TimestampConverter()
   DateTime? get initiateDate;
   @override
+  @TimestampConverter()
   DateTime? get recentUpdated;
-  @override
+  @override //add converter
   List<String>? get subStages;
   @override
   @JsonKey(ignore: true)

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'eb_timeline_model.freezed.dart';
@@ -11,8 +12,10 @@ class EBTimelineModel with _$EBTimelineModel {
     String? stageName,
     String? assessmentVersion,
     String? status,
-    DateTime? initiateDate,
-    DateTime? recentUpdated,
+    @TimestampConverter() DateTime? initiateDate,
+    @TimestampConverter() DateTime? recentUpdated,
+    //add converter
+
     List<String>? subStages,
   }) = _EBTimelineModel;
 

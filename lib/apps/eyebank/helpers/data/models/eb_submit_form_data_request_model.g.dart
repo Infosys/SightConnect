@@ -1,14 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'submit_form_data_request_model.dart';
+part of 'eb_submit_form_data_request_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SubmitFormDataRequestModelImpl _$$SubmitFormDataRequestModelImplFromJson(
+_$EBSubmitFormDataRequestModelImpl _$$EBSubmitFormDataRequestModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$SubmitFormDataRequestModelImpl(
+    _$EBSubmitFormDataRequestModelImpl(
+      timelineName: json['timelineName'] as String?,
+      timelineVersion: json['timelineVersion'] as String?,
       formData: json['formData'] == null
           ? null
           : FormData.fromJson(json['formData'] as Map<String, dynamic>),
@@ -18,9 +20,11 @@ _$SubmitFormDataRequestModelImpl _$$SubmitFormDataRequestModelImplFromJson(
       verifiedByRole: json['verifiedByRole'] as String?,
     );
 
-Map<String, dynamic> _$$SubmitFormDataRequestModelImplToJson(
-        _$SubmitFormDataRequestModelImpl instance) =>
+Map<String, dynamic> _$$EBSubmitFormDataRequestModelImplToJson(
+        _$EBSubmitFormDataRequestModelImpl instance) =>
     <String, dynamic>{
+      'timelineName': instance.timelineName,
+      'timelineVersion': instance.timelineVersion,
       'formData': instance.formData?.toJson(),
       'performerId': instance.performerId,
       'performerRole': instance.performerRole,

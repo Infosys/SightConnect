@@ -76,7 +76,7 @@ class RecentCases extends StatelessWidget {
                   navigator.push(
                     MaterialPageRoute(
                       builder: (context) =>
-                          const EbCaseTimeLinePage(caseID: "1234"),
+                          const EbCaseTimeLinePage(encounterID: 1, timelineVersion: '1'),
                     ),
                   );
                 },
