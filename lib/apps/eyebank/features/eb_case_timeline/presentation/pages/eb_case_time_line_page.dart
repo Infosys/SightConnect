@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/pages/eb_form_manage_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/eb_reject_case_sheet.dart';
@@ -11,11 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EbCaseTimeLinePage extends ConsumerWidget {
-  final String caseID;
+  final int encounterID;
+  final String timelineVersion;
   const EbCaseTimeLinePage({
     super.key,
-    required this.caseID,
+    required this.encounterID,
+    required this.timelineVersion,
   });
+
+  static final Map<String, dynamic> _params = {
+    'encounterID': "1",
+    'timelineVersion': "1",
+  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,12 +55,14 @@ class EbCaseTimeLinePage extends ConsumerWidget {
           ),
         ],
       ),
-      body: ref.watch(ebCaseTimeLineProvider(caseID)).when(
-            data: (List<EBTimeLineCaseModel> data) {
+      body: ref.watch(ebCaseTimeLineProvider(_params)).when(
+            data: (data) {
+              log('data: $data');
+              final List<EBTimelineEntity> caseTimeLine = data;
               return DesktopClipper(
                 widget: CaseTimeLineWidget(
-                  caseTimeLine: data,
-                  onCaseSelected: (EBTimeLineCaseModel event) =>
+                  caseTimeLine: caseTimeLine,
+                  onCaseSelected: (EBTimelineEntity event) =>
                       _handleCaseSelected(context, event),
                 ),
               );
@@ -66,12 +77,12 @@ class EbCaseTimeLinePage extends ConsumerWidget {
     );
   }
 
-  _handleCaseSelected(BuildContext context, EBTimeLineCaseModel event) {
+  _handleCaseSelected(BuildContext context, EBTimelineEntity event) {
     final navigator = Navigator.of(context);
     navigator.push(
       MaterialPageRoute(
         builder: (context) => EBFormManagePage(
-          title: event.stageName,
+          title: event.title?.displayValue??"Display Name not found",
           caseID: '',
         ),
       ),

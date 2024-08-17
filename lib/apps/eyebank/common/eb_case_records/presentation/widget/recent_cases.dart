@@ -71,8 +71,10 @@ class RecentCases extends ConsumerWidget {
                           final navigator = Navigator.of(context);
                           navigator.push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const EbCaseTimeLinePage(caseID: "1234"),
+                              builder: (context) => const EbCaseTimeLinePage(
+                                encounterID: 12,
+                                timelineVersion: "",
+                              ),
                             ),
                           );
                         },

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'submit_form_data_request_model.dart';
+part of 'eb_submit_form_data_request_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-SubmitFormDataRequestModel _$SubmitFormDataRequestModelFromJson(
+EBSubmitFormDataRequestModel _$EBSubmitFormDataRequestModelFromJson(
     Map<String, dynamic> json) {
-  return _SubmitFormDataRequestModel.fromJson(json);
+  return _EBSubmitFormDataRequestModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SubmitFormDataRequestModel {
+mixin _$EBSubmitFormDataRequestModel {
+  String? get timelineName => throw _privateConstructorUsedError;
+  String? get timelineVersion => throw _privateConstructorUsedError;
   FormData? get formData => throw _privateConstructorUsedError;
   String? get performerId => throw _privateConstructorUsedError;
   String? get performerRole => throw _privateConstructorUsedError;
@@ -29,19 +31,22 @@ mixin _$SubmitFormDataRequestModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SubmitFormDataRequestModelCopyWith<SubmitFormDataRequestModel>
+  $EBSubmitFormDataRequestModelCopyWith<EBSubmitFormDataRequestModel>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SubmitFormDataRequestModelCopyWith<$Res> {
-  factory $SubmitFormDataRequestModelCopyWith(SubmitFormDataRequestModel value,
-          $Res Function(SubmitFormDataRequestModel) then) =
-      _$SubmitFormDataRequestModelCopyWithImpl<$Res,
-          SubmitFormDataRequestModel>;
+abstract class $EBSubmitFormDataRequestModelCopyWith<$Res> {
+  factory $EBSubmitFormDataRequestModelCopyWith(
+          EBSubmitFormDataRequestModel value,
+          $Res Function(EBSubmitFormDataRequestModel) then) =
+      _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
+          EBSubmitFormDataRequestModel>;
   @useResult
   $Res call(
-      {FormData? formData,
+      {String? timelineName,
+      String? timelineVersion,
+      FormData? formData,
       String? performerId,
       String? performerRole,
       String? verifiedById,
@@ -51,10 +56,10 @@ abstract class $SubmitFormDataRequestModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SubmitFormDataRequestModelCopyWithImpl<$Res,
-        $Val extends SubmitFormDataRequestModel>
-    implements $SubmitFormDataRequestModelCopyWith<$Res> {
-  _$SubmitFormDataRequestModelCopyWithImpl(this._value, this._then);
+class _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
+        $Val extends EBSubmitFormDataRequestModel>
+    implements $EBSubmitFormDataRequestModelCopyWith<$Res> {
+  _$EBSubmitFormDataRequestModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -64,6 +69,8 @@ class _$SubmitFormDataRequestModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? timelineName = freezed,
+    Object? timelineVersion = freezed,
     Object? formData = freezed,
     Object? performerId = freezed,
     Object? performerRole = freezed,
@@ -71,6 +78,14 @@ class _$SubmitFormDataRequestModelCopyWithImpl<$Res,
     Object? verifiedByRole = freezed,
   }) {
     return _then(_value.copyWith(
+      timelineName: freezed == timelineName
+          ? _value.timelineName
+          : timelineName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timelineVersion: freezed == timelineVersion
+          ? _value.timelineVersion
+          : timelineVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
@@ -108,16 +123,18 @@ class _$SubmitFormDataRequestModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$SubmitFormDataRequestModelImplCopyWith<$Res>
-    implements $SubmitFormDataRequestModelCopyWith<$Res> {
-  factory _$$SubmitFormDataRequestModelImplCopyWith(
-          _$SubmitFormDataRequestModelImpl value,
-          $Res Function(_$SubmitFormDataRequestModelImpl) then) =
-      __$$SubmitFormDataRequestModelImplCopyWithImpl<$Res>;
+abstract class _$$EBSubmitFormDataRequestModelImplCopyWith<$Res>
+    implements $EBSubmitFormDataRequestModelCopyWith<$Res> {
+  factory _$$EBSubmitFormDataRequestModelImplCopyWith(
+          _$EBSubmitFormDataRequestModelImpl value,
+          $Res Function(_$EBSubmitFormDataRequestModelImpl) then) =
+      __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {FormData? formData,
+      {String? timelineName,
+      String? timelineVersion,
+      FormData? formData,
       String? performerId,
       String? performerRole,
       String? verifiedById,
@@ -128,25 +145,35 @@ abstract class _$$SubmitFormDataRequestModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SubmitFormDataRequestModelImplCopyWithImpl<$Res>
-    extends _$SubmitFormDataRequestModelCopyWithImpl<$Res,
-        _$SubmitFormDataRequestModelImpl>
-    implements _$$SubmitFormDataRequestModelImplCopyWith<$Res> {
-  __$$SubmitFormDataRequestModelImplCopyWithImpl(
-      _$SubmitFormDataRequestModelImpl _value,
-      $Res Function(_$SubmitFormDataRequestModelImpl) _then)
+class __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>
+    extends _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
+        _$EBSubmitFormDataRequestModelImpl>
+    implements _$$EBSubmitFormDataRequestModelImplCopyWith<$Res> {
+  __$$EBSubmitFormDataRequestModelImplCopyWithImpl(
+      _$EBSubmitFormDataRequestModelImpl _value,
+      $Res Function(_$EBSubmitFormDataRequestModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? timelineName = freezed,
+    Object? timelineVersion = freezed,
     Object? formData = freezed,
     Object? performerId = freezed,
     Object? performerRole = freezed,
     Object? verifiedById = freezed,
     Object? verifiedByRole = freezed,
   }) {
-    return _then(_$SubmitFormDataRequestModelImpl(
+    return _then(_$EBSubmitFormDataRequestModelImpl(
+      timelineName: freezed == timelineName
+          ? _value.timelineName
+          : timelineName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timelineVersion: freezed == timelineVersion
+          ? _value.timelineVersion
+          : timelineVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
@@ -173,18 +200,25 @@ class __$$SubmitFormDataRequestModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SubmitFormDataRequestModelImpl implements _SubmitFormDataRequestModel {
-  const _$SubmitFormDataRequestModelImpl(
-      {this.formData,
+class _$EBSubmitFormDataRequestModelImpl
+    implements _EBSubmitFormDataRequestModel {
+  const _$EBSubmitFormDataRequestModelImpl(
+      {this.timelineName,
+      this.timelineVersion,
+      this.formData,
       this.performerId,
       this.performerRole,
       this.verifiedById,
       this.verifiedByRole});
 
-  factory _$SubmitFormDataRequestModelImpl.fromJson(
+  factory _$EBSubmitFormDataRequestModelImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$SubmitFormDataRequestModelImplFromJson(json);
+      _$$EBSubmitFormDataRequestModelImplFromJson(json);
 
+  @override
+  final String? timelineName;
+  @override
+  final String? timelineVersion;
   @override
   final FormData? formData;
   @override
@@ -198,14 +232,18 @@ class _$SubmitFormDataRequestModelImpl implements _SubmitFormDataRequestModel {
 
   @override
   String toString() {
-    return 'SubmitFormDataRequestModel(formData: $formData, performerId: $performerId, performerRole: $performerRole, verifiedById: $verifiedById, verifiedByRole: $verifiedByRole)';
+    return 'EBSubmitFormDataRequestModel(timelineName: $timelineName, timelineVersion: $timelineVersion, formData: $formData, performerId: $performerId, performerRole: $performerRole, verifiedById: $verifiedById, verifiedByRole: $verifiedByRole)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubmitFormDataRequestModelImpl &&
+            other is _$EBSubmitFormDataRequestModelImpl &&
+            (identical(other.timelineName, timelineName) ||
+                other.timelineName == timelineName) &&
+            (identical(other.timelineVersion, timelineVersion) ||
+                other.timelineVersion == timelineVersion) &&
             (identical(other.formData, formData) ||
                 other.formData == formData) &&
             (identical(other.performerId, performerId) ||
@@ -220,36 +258,43 @@ class _$SubmitFormDataRequestModelImpl implements _SubmitFormDataRequestModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, formData, performerId,
-      performerRole, verifiedById, verifiedByRole);
+  int get hashCode => Object.hash(runtimeType, timelineName, timelineVersion,
+      formData, performerId, performerRole, verifiedById, verifiedByRole);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SubmitFormDataRequestModelImplCopyWith<_$SubmitFormDataRequestModelImpl>
-      get copyWith => __$$SubmitFormDataRequestModelImplCopyWithImpl<
-          _$SubmitFormDataRequestModelImpl>(this, _$identity);
+  _$$EBSubmitFormDataRequestModelImplCopyWith<
+          _$EBSubmitFormDataRequestModelImpl>
+      get copyWith => __$$EBSubmitFormDataRequestModelImplCopyWithImpl<
+          _$EBSubmitFormDataRequestModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SubmitFormDataRequestModelImplToJson(
+    return _$$EBSubmitFormDataRequestModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _SubmitFormDataRequestModel
-    implements SubmitFormDataRequestModel {
-  const factory _SubmitFormDataRequestModel(
-      {final FormData? formData,
+abstract class _EBSubmitFormDataRequestModel
+    implements EBSubmitFormDataRequestModel {
+  const factory _EBSubmitFormDataRequestModel(
+      {final String? timelineName,
+      final String? timelineVersion,
+      final FormData? formData,
       final String? performerId,
       final String? performerRole,
       final String? verifiedById,
-      final String? verifiedByRole}) = _$SubmitFormDataRequestModelImpl;
+      final String? verifiedByRole}) = _$EBSubmitFormDataRequestModelImpl;
 
-  factory _SubmitFormDataRequestModel.fromJson(Map<String, dynamic> json) =
-      _$SubmitFormDataRequestModelImpl.fromJson;
+  factory _EBSubmitFormDataRequestModel.fromJson(Map<String, dynamic> json) =
+      _$EBSubmitFormDataRequestModelImpl.fromJson;
 
+  @override
+  String? get timelineName;
+  @override
+  String? get timelineVersion;
   @override
   FormData? get formData;
   @override
@@ -262,7 +307,8 @@ abstract class _SubmitFormDataRequestModel
   String? get verifiedByRole;
   @override
   @JsonKey(ignore: true)
-  _$$SubmitFormDataRequestModelImplCopyWith<_$SubmitFormDataRequestModelImpl>
+  _$$EBSubmitFormDataRequestModelImplCopyWith<
+          _$EBSubmitFormDataRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

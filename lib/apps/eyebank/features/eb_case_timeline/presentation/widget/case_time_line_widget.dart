@@ -1,11 +1,11 @@
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_timline_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
 class CaseTimeLineWidget extends StatelessWidget {
-  final List<EBTimeLineCaseModel> caseTimeLine;
-  final Function(EBTimeLineCaseModel)? onCaseSelected;
+  final List<EBTimelineEntity> caseTimeLine;
+  final Function(EBTimelineEntity)? onCaseSelected;
   final bool isNested;
 
   const CaseTimeLineWidget({
@@ -48,10 +48,10 @@ class CaseTimeLineWidget extends StatelessWidget {
                     isNested: isNested,
                     onTap: () => onCaseSelected?.call(event),
                   ),
-                  if (event.subSteps.isNotEmpty)
+                  if (event.subStages?.isNotEmpty ?? false)
                     SizedBox(
                       child: CaseTimeLineWidget(
-                        caseTimeLine: event.subSteps,
+                        caseTimeLine: event.subStages ?? [],
                         onCaseSelected: onCaseSelected,
                         isNested: true,
                       ),

@@ -16,11 +16,11 @@ class OrganInventoryTimline extends ConsumerWidget {
       ),
       body: ref.watch(ebOrganInventoryTimlineProvider("")).when(
             data: (List<EBTimeLineCaseModel> data) {
-              return CaseTimeLineWidget(
-                caseTimeLine: data,
-                onCaseSelected: (EBTimeLineCaseModel event) =>
-                    _handleCaseSelected(context, event),
-              );
+              // return CaseTimeLineWidget(
+              //   caseTimeLine: data,
+              //   onCaseSelected: (EBTimeLineCaseModel event) =>
+              //       _handleCaseSelected(context, event),
+              // );
             },
             loading: () => const Center(
               child: CircularProgressIndicator(),

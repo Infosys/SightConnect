@@ -39,8 +39,9 @@ class EyeBankErrorHandler {
       return Left(EBUnknownFailure(
           errorMessage:
               "No internet connection. Please check your network settings."));
-    } catch (e) {
+    } catch (e, s) {
       logger.e("Exception: $e");
+      logger.e(s);
       return Left(EBUnknownFailure(errorMessage: e.toString()));
     }
   }

@@ -1,5 +1,7 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
@@ -47,7 +49,19 @@ class AddCaseButton extends StatelessWidget {
                 backButtonIcon: Icons.close,
                 onSubmit: (data, mode) {
                   try {
-                    // final provider = ref.read(ebSubmitIntimationFormProvider);
+                    EBSubmitFormDataRequestModel submitData =
+                        EBSubmitFormDataRequestModel(
+                      timelineName: null,
+                      timelineVersion: null,
+                      formData: FormData.fromJson(data!),
+                      performerId: null,
+                      performerRole: null,
+                      verifiedById: null,
+                      verifiedByRole: null,
+                    );
+
+                    ref.read(ebRepositoryProvider).saveOrDraftForm(
+                        "", "0.0.1", submitData); //add stage name
                   } catch (e) {
                     logger.e(e);
                   }

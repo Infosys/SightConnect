@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
@@ -8,12 +11,12 @@ import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/eb_submit_form_data_request_model.dart';
+import '../models/eb_timeline_model.dart';
 import '../models/form_data_model.dart';
 import '../models/reject_encounter_request_model.dart';
-import '../models/submit_form_data_request_model.dart';
-import '../models/timeline_model.dart';
 
-final eyeBankRepositoryProvider = Provider<EyeBankRepository>((ref) {
+final ebRepositoryProvider = Provider<EyeBankRepository>((ref) {
   return EyeBankRepositoryImpl(ref.watch(dioProvider));
 });
 
@@ -70,27 +73,89 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   }
 
   @override
-  Future<Either<EBFailure, TimelineModel>> fetchTimelineByID(
+  Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(
       String encounterID) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/encounters/$encounterID/timeline';
+      // [ DEATH_INTIMATION, DONOR_SCREENING, CORNEA_RECOVERY, SHIPPED_TO_EYEBANK, RECEIVED_AT_EYEBANK, SEROLOGY, CORNEA_EVALUATION, IN_INVENTORY ]
+      //    int? serviceRequestId,
+      // String? title,
+      // String? stage,
+      // String? assessmentVersion,
+      // String? status,
+      // @TimestampConverter() DateTime? initiateDate,
+      // @TimestampConverter() DateTime? recentUpdated,
+      // List<EBTimelineModel>? stages,
+      const sampleJson = [
+        {
+          "serviceRequestId": 1,
+          "title": "DEATH_INTIMATION",
+          "stage": "DEATH_INTIMATION",
+          "assessmentVersion": "1",
+          "status": "COMPLETED",
+          "initiateDate": "2023-10-01T12:00:00Z",
+          "recentUpdated": "2023-10-01T12:00:00Z",
+          "stages": []
+        },
+        {
+          "serviceRequestId": 2,
+          "title": "DONOR_SCREENING",
+          "stage": "DONOR_SCREENING",
+          "assessmentVersion": "1",
+          "status": "COMPLETED",
+          "initiateDate": "2023-10-01T12:00:00Z",
+          "recentUpdated": "2023-10-01T12:00:00Z",
+          "stages": []
+        },
+        {
+          "serviceRequestId": 3,
+          "title": "CORNEA_RECOVERY",
+          "stage": "CORNEA_RECOVERY",
+          "assessmentVersion": "1",
+          "status": "COMPLETED",
+          "initiateDate": "2023-10-01T12:00:00Z",
+          "recentUpdated": "2023-10-01T12:00:00Z",
+          "stages": []
+        },
+      ];
+
+      return Future.delayed(
+        const Duration(seconds: 1),
+        () => sampleJson.map((e) => EBTimelineModel.fromJson(e)).toList(),
+      );
+      // final endPoint = '/encounters/$encounterID/timeline';
+      // final response = await _dio.get(endPoint);
+      // if (response.statusCode == 200) {
+      //   return response.data.map((e) => EBTimelineModel.fromJson(e)).toList();
+      // } else {
+      //   throw Exception(response.statusMessage ?? 'Error in fetchTimelineByID');
+      // }
+    });
+  }
+
+  @override
+  Future<Either<EBFailure, EbTimelineConfigModel>> fetchTimelineStages(
+      String timelineName, String timelineVersion) {
+    return EyeBankErrorHandler.handle(() async {
+      const endPoint =
+          '/services/configs/api/timelines/CORNEA_DONATION?timelineVersion=0.0.1';
       final response = await _dio.get(endPoint);
+      log(response.toString());
       if (response.statusCode == 200) {
-        return response.data;
+        return EbTimelineConfigModel.fromJson((response.data));
       } else {
-        throw Exception(response.statusMessage ?? 'Error in fetchTimelineByID');
+        throw Exception(
+            response.statusMessage ?? 'Error in fetchTimelineStages');
       }
     });
   }
 
   @override
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveOrDraftForm(
-      String encounterID,
-      AssessmentName stage,
-      SubmitFormDataRequestModel requestData) {
+      String stageName,
+      String stageVersion,
+      EBSubmitFormDataRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint =
-          '/encounters/stage/$stage/forms/SAVE?encounterId=$encounterID';
+      final endPoint = '/encounters/$stageName?stageVersion=$stageVersion';
       final response = await _dio.post(endPoint, data: requestData.toJson());
       if (response.statusCode == 200) {
         return response.data
@@ -115,16 +180,16 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
     });
   }
 
-  @override
-  Future<Either<EBFailure, dynamic>> fetchFormByStage(AssessmentName stage) {
-    return EyeBankErrorHandler.handle(() async {
-      var endPoint = '/forms/assessment?stage=$stage';
-      var response = await _dio.get(endPoint);
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(response.statusMessage ?? 'Error in fetchFormByStage');
-      }
-    });
-  }
+  // @override
+  // Future<Either<EBFailure, dynamic>> fetchFormByStage(AssessmentName stage, String stageVersion) {
+  //   return EyeBankErrorHandler.handle(() async {
+  //     var endPoint = '/forms/assessment?stage=$stage';
+  //     var response = await _dio.get(endPoint);
+  //     if (response.statusCode == 200) {
+  //       return response.data;
+  //     } else {
+  //       throw Exception(response.statusMessage ?? 'Error in fetchFormByStage');
+  //     }
+  //   });
+  // }
 }
