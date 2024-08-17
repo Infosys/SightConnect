@@ -79,7 +79,7 @@ class CompletedCard extends StatelessWidget {
                 _buildInfoColumn(
                   icon: Icons.check_circle,
                   label: "Status",
-                  value: event.status.name ?? "",
+                  value: event.status.name,
                   valueColor: _getStatusColor(event.status),
                 ),
               ],

@@ -2,6 +2,10 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/eb_reject_case_sheet.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,6 +22,29 @@ class EbCaseTimeLinePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Case Timeline'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              showCustomWoltSheet(
+                context,
+                const EBRejectCaseSheet(
+                  caseID: 1234,
+                ),
+              );
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: AppColor.red,
+            ),
+            child: Text(
+              'Reject Case',
+              style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.red,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
       ),
       body: ref.watch(ebCaseTimeLineProvider(caseID)).when(
             data: (List<EBTimeLineCaseModel> data) {

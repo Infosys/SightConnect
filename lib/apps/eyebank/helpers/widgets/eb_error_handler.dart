@@ -14,18 +14,22 @@ class EyeBankErrorHandler {
     } on DioException catch (e) {
       logger.e("DioException: ${e.message}");
       _printDioError(e);
-      return Left(EBServerFailure(
+      return Left(
+        EBServerFailure(
           errorMessage: e.message ?? "Something went wrong",
           statusCode: e.response?.statusCode,
           errorObject: EBErrorObject(
-              type: e.response?.data["type"],
-              title: e.response?.data["title"],
-              status: e.response?.statusCode,
-              detail: e.response?.data["detail"],
-              instance: e.response?.data["instance"],
-              message: e.response?.data["message"],
-              params: e.response?.data["params"],
-              path: e.response?.data["path"])));
+            type: e.response?.data["type"],
+            title: e.response?.data["title"],
+            status: e.response?.statusCode,
+            detail: e.response?.data["detail"],
+            instance: e.response?.data["instance"],
+            message: e.response?.data["message"],
+            params: e.response?.data["params"],
+            path: e.response?.data["path"],
+          ),
+        ),
+      );
     } on TimeoutException catch (e) {
       logger.e("TimeoutException: $e");
       return Left(EBUnknownFailure(
