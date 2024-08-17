@@ -49,7 +49,8 @@ class AddCaseButton extends StatelessWidget {
                 backButtonIcon: Icons.close,
                 onSubmit: (data, mode) {
                   try {
-                    EBSubmitFormDataRequestModel submitData = EBSubmitFormDataRequestModel(
+                    EBSubmitFormDataRequestModel submitData =
+                        EBSubmitFormDataRequestModel(
                       timelineName: null,
                       timelineVersion: null,
                       formData: FormData.fromJson(data!),
@@ -59,8 +60,8 @@ class AddCaseButton extends StatelessWidget {
                       verifiedByRole: null,
                     );
 
-                    ref.read(ebRepositoryProvider).saveOrDraftForm( "", "0.0.1", submitData); //add stage name
-
+                    ref.read(ebRepositoryProvider).saveOrDraftForm(
+                        "", "0.0.1", submitData); //add stage name
                   } catch (e) {
                     logger.e(e);
                   }
