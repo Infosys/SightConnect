@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
@@ -102,15 +104,28 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
   Future<Either<EBFailure, dynamic>> getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
-  }) {
-    return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/configs/api/stages/${stage.name}';
+  }) async {
+    try {
+      log(stage.name);
+      final endPoint = '/services/configs/api/stages/${stage.name}';
       final response = await _dio.get(endPoint);
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(response.statusMessage ?? 'getFormConfiguraton');
-      }
-    });
+      log(response.data);
+      return response.data;
+    } catch (e) {
+      logger.f('Error in getFormConfiguration: $e');
+      rethrow;
+    }
+
+    // return EyeBankErrorHandler.handle(() async {
+    //   final endPoint = '/services/configs/api/stages/${stage.name}';
+    //   final response = await _dio.get(endPoint);
+    //   log(response.data);
+    //   return response.data;
+    //   // if (response.statusCode == 200) {
+    //   //   return response.data;
+    //   // } else {
+    //   //   throw Exception(response.statusMessage ?? 'getFormConfiguraton');
+    //   // }
+    // });
   }
 }

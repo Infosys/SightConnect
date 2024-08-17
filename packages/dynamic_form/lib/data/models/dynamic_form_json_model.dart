@@ -41,7 +41,7 @@ class ResponseJsonModel {
 }
 
 class PageModel {
-  int? name;
+  String? name;
   List<PageElementModel>? elements;
 
   PageModel({
@@ -67,7 +67,7 @@ class PageModel {
 
 class PageElementModel {
   String? type;
-  int? name;
+  dynamic name;
   List<ElementElementClassModel>? elements;
 
   PageElementModel({

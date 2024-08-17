@@ -52,6 +52,19 @@ class _PageWidgetState extends State<FormStepperView> {
     // Log.d('Validation List: $validationList');
     if (widget.pages.isEmpty) {
       return Container();
+    } else if (widget.pages.length == 1) {
+      return Column(
+        children: [
+          PageWidget(
+            elements: widget.pages.first.elements,
+            formKey: widget.formKey,
+          ),
+          SubmitBtn(
+            key: widget.key,
+            onPressed: _handleSubmit,
+          ),
+        ],
+      );
     }
 
     return Column(

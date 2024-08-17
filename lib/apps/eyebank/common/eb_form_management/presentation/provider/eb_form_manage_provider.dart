@@ -4,20 +4,28 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/mod
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/repositories/eb_form_manage_repo.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/domain/entity/eb_form_action_request_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/domain/mappers/eb_form_action_request_mapper.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../helpers/domain/enums/global_eb_enums.dart';
+
 final ebFormManageProvider = FutureProvider<String>((ref) async {
-  try {
-    return await rootBundle
-        .loadString('assets/eyebank/local_json/screening_form.json');
-  } catch (e) {
-    logger.f('Error Converting json: $e');
-    rethrow;
-  }
+  final repo = ref.watch(ebTimlineRepoProvider);
+  final res =
+      await repo.getFormConfiguration(stage: EBStageName.DONOR_SCREENING);
+  return res.fold(
+    (l) => throw l,
+    (r) => r,
+  );
+  // try {
+  //   return await rootBundle
+  //       .loadString('assets/eyebank/local_json/screening_form.json');
+  // } catch (e) {
+  //   logger.f('Error Converting json: $e');
+  //   rethrow;
+  // }
 });
 
 final ebSaveOrDraftProvider = Provider<EbFormManageProvider>((ref) {
