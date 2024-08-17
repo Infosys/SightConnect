@@ -8,15 +8,13 @@ part 'eb_timeline_model.g.dart';
 class EBTimelineModel with _$EBTimelineModel {
   const factory EBTimelineModel({
     int? serviceRequestId,
-    String? assessmentName,
-    String? stageName,
+    String? title,
+    String? stage,
     String? assessmentVersion,
     String? status,
     @TimestampConverter() DateTime? initiateDate,
     @TimestampConverter() DateTime? recentUpdated,
-    //add converter
-
-    List<String>? subStages,
+    List<EBTimelineModel>? stages,
   }) = _EBTimelineModel;
 
   factory EBTimelineModel.fromJson(Map<String, dynamic> json) =>

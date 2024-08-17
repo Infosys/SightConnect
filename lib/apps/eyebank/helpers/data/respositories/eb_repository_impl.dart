@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
@@ -74,68 +76,48 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(
       String encounterID) {
     return EyeBankErrorHandler.handle(() async {
+      // [ DEATH_INTIMATION, DONOR_SCREENING, CORNEA_RECOVERY, SHIPPED_TO_EYEBANK, RECEIVED_AT_EYEBANK, SEROLOGY, CORNEA_EVALUATION, IN_INVENTORY ]
+      //    int? serviceRequestId,
+      // String? title,
+      // String? stage,
+      // String? assessmentVersion,
+      // String? status,
+      // @TimestampConverter() DateTime? initiateDate,
+      // @TimestampConverter() DateTime? recentUpdated,
+      // List<EBTimelineModel>? stages,
       const sampleJson = [
         {
-          "serviceRequestId": 0,
-          "assessmentName": "INTIMATION",
-          "stageName": "INTIMATION",
-          "assessmentVersion": "string",
+          "serviceRequestId": 1,
+          "title": "DEATH_INTIMATION",
+          "stage": "DEATH_INTIMATION",
+          "assessmentVersion": "1",
           "status": "COMPLETED",
-          "initiateDate": "2024-08-16T12:14:20.360Z",
-          "recentUpdated": "2024-08-16T12:14:20.360Z",
-          "subStages": ["string"]
+          "initiateDate": "2023-10-01T12:00:00Z",
+          "recentUpdated": "2023-10-01T12:00:00Z",
+          "stages": []
         },
         {
-          "serviceRequestId": 0,
-          "assessmentName": "PRELIMINARY_SCREENING",
-          "stageName": "PRELIMINARY SCREENING",
-          "assessmentVersion": "string",
+          "serviceRequestId": 2,
+          "title": "DONOR_SCREENING",
+          "stage": "DONOR_SCREENING",
+          "assessmentVersion": "1",
           "status": "COMPLETED",
-          "initiateDate": "2024-08-16T12:14:20.360Z",
-          "recentUpdated": "2024-08-16T12:14:20.360Z",
-          "subStages": ["string"]
+          "initiateDate": "2023-10-01T12:00:00Z",
+          "recentUpdated": "2023-10-01T12:00:00Z",
+          "stages": []
         },
         {
-          "serviceRequestId": 0,
-          "assessmentName": "CORNEA_RECOVERY",
-          "stageName": "CORNEA RECOVERY",
-          "assessmentVersion": "string",
+          "serviceRequestId": 3,
+          "title": "CORNEA_RECOVERY",
+          "stage": "CORNEA_RECOVERY",
+          "assessmentVersion": "1",
           "status": "COMPLETED",
-          "initiateDate": "2024-08-16T12:14:20.360Z",
-          "recentUpdated": "2024-08-16T12:14:20.360Z",
-          "subStages": ["string"]
+          "initiateDate": "2023-10-01T12:00:00Z",
+          "recentUpdated": "2023-10-01T12:00:00Z",
+          "stages": []
         },
-        // {
-        //   "serviceRequestId": 0,
-        //   "assessmentName": "SHIPPED_TO_EYEBANK",
-        //   "stageName": "SHIPPED TO EYEBANK",
-        //   "assessmentVersion": "string",
-        //   "status": "COMPLETED",
-        //   "initiateDate": "2024-08-16T12:14:20.360Z",
-        //   "recentUpdated": "2024-08-16T12:14:20.360Z",
-        //   "subStages": ["string"]
-        // },
-        // {
-        //   "serviceRequestId": 0,
-        //   "assessmentName": "EYE_BANK_ASSESSMENT",
-        //   "stageName": "EYE BANK ASSESSMENT",
-        //   "assessmentVersion": "string",
-        //   "status": "COMPLETED",
-        //   "initiateDate": "2024-08-16T12:14:20.360Z",
-        //   "recentUpdated": "2024-08-16T12:14:20.360Z",
-        //   "subStages": ["string"]
-        // },
-        // {
-        //   "serviceRequestId": 0,
-        //   "assessmentName": "EYE_BANK_ASSESSMENT",
-        //   "stageName": "EYE BANK ASSESSMENT",
-        //   "assessmentVersion": "string",
-        //   "status": "COMPLETED",
-        //   "initiateDate": "2024-08-16T12:14:20.360Z",
-        //   "recentUpdated": "2024-08-16T12:14:20.360Z",
-        //   "subStages": ["string"]
-        // },
       ];
+
       return Future.delayed(
         const Duration(seconds: 1),
         () => sampleJson.map((e) => EBTimelineModel.fromJson(e)).toList(),
@@ -154,33 +136,16 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   Future<Either<EBFailure, EbTimelineConfigModel>> fetchTimelineStages(
       String timelineName, String timelineVersion) {
     return EyeBankErrorHandler.handle(() async {
-      return Future.delayed(
-        const Duration(seconds: 1),
-        () => const EbTimelineConfigModel(
-          timelineName: 'CORNEA_DONATION',
-          timelineVersion: '1',
-          stages: [
-            'INTIMATION',
-            'PRELIMINARY_SCREENING',
-            'CORNEA_RECOVERY',
-            'SHIPPED_TO_EYEBANK',
-            'RECEIVED_TO_EYEBANK',
-            'SEROLOGY',
-            'CORNEA_EVALUATION',
-            'IN_INVENTORY',
-          ],
-        ),
-      );
-
-      // final endPoint =
-      //     '/config/timeline/$timelineName?timelineVersion=$timelineVersion';
-      // final response = await _dio.get(endPoint);
-      // if (response.statusCode == 200) {
-      //   return response.data;
-      // } else {
-      //   throw Exception(
-      //       response.statusMessage ?? 'Error in fetchTimelineStages');
-      // }
+      const endPoint =
+          '/services/configs/api/timelines/CORNEA_DONATION?timelineVersion=0.0.1';
+      final response = await _dio.get(endPoint);
+      log(response.toString());
+      if (response.statusCode == 200) {
+        return EbTimelineConfigModel.fromJson((response.data));
+      } else {
+        throw Exception(
+            response.statusMessage ?? 'Error in fetchTimelineStages');
+      }
     });
   }
 
@@ -190,10 +155,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       String stageVersion,
       EBSubmitFormDataRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
-      // /eyebank/api/encounters/DEATH_INTIMATION?stageVersion=1
-
       final endPoint = '/encounters/$stageName?stageVersion=$stageVersion';
-
       final response = await _dio.post(endPoint, data: requestData.toJson());
       if (response.statusCode == 200) {
         return response.data

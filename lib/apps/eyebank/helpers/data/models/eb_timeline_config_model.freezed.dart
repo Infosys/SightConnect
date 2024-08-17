@@ -21,9 +21,9 @@ EbTimelineConfigModel _$EbTimelineConfigModelFromJson(
 
 /// @nodoc
 mixin _$EbTimelineConfigModel {
+  List<String>? get stages => throw _privateConstructorUsedError;
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
-  List<String>? get stages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $EbTimelineConfigModelCopyWith<$Res> {
       _$EbTimelineConfigModelCopyWithImpl<$Res, EbTimelineConfigModel>;
   @useResult
   $Res call(
-      {String? timelineName, String? timelineVersion, List<String>? stages});
+      {List<String>? stages, String? timelineName, String? timelineVersion});
 }
 
 /// @nodoc
@@ -55,11 +55,15 @@ class _$EbTimelineConfigModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? stages = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
-    Object? stages = freezed,
   }) {
     return _then(_value.copyWith(
+      stages: freezed == stages
+          ? _value.stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -68,10 +72,6 @@ class _$EbTimelineConfigModelCopyWithImpl<$Res,
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      stages: freezed == stages
-          ? _value.stages
-          : stages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
     ) as $Val);
   }
 }
@@ -86,7 +86,7 @@ abstract class _$$EbTimelineConfigModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? timelineName, String? timelineVersion, List<String>? stages});
+      {List<String>? stages, String? timelineName, String? timelineVersion});
 }
 
 /// @nodoc
@@ -101,11 +101,15 @@ class __$$EbTimelineConfigModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? stages = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
-    Object? stages = freezed,
   }) {
     return _then(_$EbTimelineConfigModelImpl(
+      stages: freezed == stages
+          ? _value._stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -114,10 +118,6 @@ class __$$EbTimelineConfigModelImplCopyWithImpl<$Res>
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      stages: freezed == stages
-          ? _value._stages
-          : stages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
     ));
   }
 }
@@ -126,16 +126,12 @@ class __$$EbTimelineConfigModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
   const _$EbTimelineConfigModelImpl(
-      {this.timelineName, this.timelineVersion, final List<String>? stages})
+      {final List<String>? stages, this.timelineName, this.timelineVersion})
       : _stages = stages;
 
   factory _$EbTimelineConfigModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EbTimelineConfigModelImplFromJson(json);
 
-  @override
-  final String? timelineName;
-  @override
-  final String? timelineVersion;
   final List<String>? _stages;
   @override
   List<String>? get stages {
@@ -147,8 +143,13 @@ class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
   }
 
   @override
+  final String? timelineName;
+  @override
+  final String? timelineVersion;
+
+  @override
   String toString() {
-    return 'EbTimelineConfigModel(timelineName: $timelineName, timelineVersion: $timelineVersion, stages: $stages)';
+    return 'EbTimelineConfigModel(stages: $stages, timelineName: $timelineName, timelineVersion: $timelineVersion)';
   }
 
   @override
@@ -156,17 +157,20 @@ class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EbTimelineConfigModelImpl &&
+            const DeepCollectionEquality().equals(other._stages, _stages) &&
             (identical(other.timelineName, timelineName) ||
                 other.timelineName == timelineName) &&
             (identical(other.timelineVersion, timelineVersion) ||
-                other.timelineVersion == timelineVersion) &&
-            const DeepCollectionEquality().equals(other._stages, _stages));
+                other.timelineVersion == timelineVersion));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, timelineName, timelineVersion,
-      const DeepCollectionEquality().hash(_stages));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_stages),
+      timelineName,
+      timelineVersion);
 
   @JsonKey(ignore: true)
   @override
@@ -185,19 +189,19 @@ class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
 
 abstract class _EbTimelineConfigModel implements EbTimelineConfigModel {
   const factory _EbTimelineConfigModel(
-      {final String? timelineName,
-      final String? timelineVersion,
-      final List<String>? stages}) = _$EbTimelineConfigModelImpl;
+      {final List<String>? stages,
+      final String? timelineName,
+      final String? timelineVersion}) = _$EbTimelineConfigModelImpl;
 
   factory _EbTimelineConfigModel.fromJson(Map<String, dynamic> json) =
       _$EbTimelineConfigModelImpl.fromJson;
 
   @override
+  List<String>? get stages;
+  @override
   String? get timelineName;
   @override
   String? get timelineVersion;
-  @override
-  List<String>? get stages;
   @override
   @JsonKey(ignore: true)
   _$$EbTimelineConfigModelImplCopyWith<_$EbTimelineConfigModelImpl>

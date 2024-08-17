@@ -28,10 +28,13 @@ final ebCaseTimeLineProvider =
           return EBTimelineMapper.mapToEntity(timelines, stages);
         },
       );
-    } else {
+    } 
+    else {
       throw EBServerFailure(
           errorMessage: "failure in fetching timeline",
-          errorObject: EBErrorObject());
+          errorObject: EBErrorObject(
+            
+          ));
     }
   } on EBFailure catch (e) {
     logger.e('EBFailure: $e');

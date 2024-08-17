@@ -21,16 +21,15 @@ EBTimelineModel _$EBTimelineModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EBTimelineModel {
   int? get serviceRequestId => throw _privateConstructorUsedError;
-  String? get assessmentName => throw _privateConstructorUsedError;
-  String? get stageName => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get stage => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get initiateDate => throw _privateConstructorUsedError;
   @TimestampConverter()
-  DateTime? get recentUpdated =>
-      throw _privateConstructorUsedError; //add converter
-  List<String>? get subStages => throw _privateConstructorUsedError;
+  DateTime? get recentUpdated => throw _privateConstructorUsedError;
+  List<EBTimelineModel>? get stages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,13 +45,13 @@ abstract class $EBTimelineModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? serviceRequestId,
-      String? assessmentName,
-      String? stageName,
+      String? title,
+      String? stage,
       String? assessmentVersion,
       String? status,
       @TimestampConverter() DateTime? initiateDate,
       @TimestampConverter() DateTime? recentUpdated,
-      List<String>? subStages});
+      List<EBTimelineModel>? stages});
 }
 
 /// @nodoc
@@ -69,26 +68,26 @@ class _$EBTimelineModelCopyWithImpl<$Res, $Val extends EBTimelineModel>
   @override
   $Res call({
     Object? serviceRequestId = freezed,
-    Object? assessmentName = freezed,
-    Object? stageName = freezed,
+    Object? title = freezed,
+    Object? stage = freezed,
     Object? assessmentVersion = freezed,
     Object? status = freezed,
     Object? initiateDate = freezed,
     Object? recentUpdated = freezed,
-    Object? subStages = freezed,
+    Object? stages = freezed,
   }) {
     return _then(_value.copyWith(
       serviceRequestId: freezed == serviceRequestId
           ? _value.serviceRequestId
           : serviceRequestId // ignore: cast_nullable_to_non_nullable
               as int?,
-      assessmentName: freezed == assessmentName
-          ? _value.assessmentName
-          : assessmentName // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      stageName: freezed == stageName
-          ? _value.stageName
-          : stageName // ignore: cast_nullable_to_non_nullable
+      stage: freezed == stage
+          ? _value.stage
+          : stage // ignore: cast_nullable_to_non_nullable
               as String?,
       assessmentVersion: freezed == assessmentVersion
           ? _value.assessmentVersion
@@ -106,10 +105,10 @@ class _$EBTimelineModelCopyWithImpl<$Res, $Val extends EBTimelineModel>
           ? _value.recentUpdated
           : recentUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      subStages: freezed == subStages
-          ? _value.subStages
-          : subStages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      stages: freezed == stages
+          ? _value.stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<EBTimelineModel>?,
     ) as $Val);
   }
 }
@@ -124,13 +123,13 @@ abstract class _$$EBTimelineModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? serviceRequestId,
-      String? assessmentName,
-      String? stageName,
+      String? title,
+      String? stage,
       String? assessmentVersion,
       String? status,
       @TimestampConverter() DateTime? initiateDate,
       @TimestampConverter() DateTime? recentUpdated,
-      List<String>? subStages});
+      List<EBTimelineModel>? stages});
 }
 
 /// @nodoc
@@ -145,26 +144,26 @@ class __$$EBTimelineModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? serviceRequestId = freezed,
-    Object? assessmentName = freezed,
-    Object? stageName = freezed,
+    Object? title = freezed,
+    Object? stage = freezed,
     Object? assessmentVersion = freezed,
     Object? status = freezed,
     Object? initiateDate = freezed,
     Object? recentUpdated = freezed,
-    Object? subStages = freezed,
+    Object? stages = freezed,
   }) {
     return _then(_$EBTimelineModelImpl(
       serviceRequestId: freezed == serviceRequestId
           ? _value.serviceRequestId
           : serviceRequestId // ignore: cast_nullable_to_non_nullable
               as int?,
-      assessmentName: freezed == assessmentName
-          ? _value.assessmentName
-          : assessmentName // ignore: cast_nullable_to_non_nullable
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      stageName: freezed == stageName
-          ? _value.stageName
-          : stageName // ignore: cast_nullable_to_non_nullable
+      stage: freezed == stage
+          ? _value.stage
+          : stage // ignore: cast_nullable_to_non_nullable
               as String?,
       assessmentVersion: freezed == assessmentVersion
           ? _value.assessmentVersion
@@ -182,10 +181,10 @@ class __$$EBTimelineModelImplCopyWithImpl<$Res>
           ? _value.recentUpdated
           : recentUpdated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      subStages: freezed == subStages
-          ? _value._subStages
-          : subStages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      stages: freezed == stages
+          ? _value._stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<EBTimelineModel>?,
     ));
   }
 }
@@ -195,14 +194,14 @@ class __$$EBTimelineModelImplCopyWithImpl<$Res>
 class _$EBTimelineModelImpl implements _EBTimelineModel {
   const _$EBTimelineModelImpl(
       {this.serviceRequestId,
-      this.assessmentName,
-      this.stageName,
+      this.title,
+      this.stage,
       this.assessmentVersion,
       this.status,
       @TimestampConverter() this.initiateDate,
       @TimestampConverter() this.recentUpdated,
-      final List<String>? subStages})
-      : _subStages = subStages;
+      final List<EBTimelineModel>? stages})
+      : _stages = stages;
 
   factory _$EBTimelineModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EBTimelineModelImplFromJson(json);
@@ -210,9 +209,9 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
   @override
   final int? serviceRequestId;
   @override
-  final String? assessmentName;
+  final String? title;
   @override
-  final String? stageName;
+  final String? stage;
   @override
   final String? assessmentVersion;
   @override
@@ -223,21 +222,19 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
   @override
   @TimestampConverter()
   final DateTime? recentUpdated;
-//add converter
-  final List<String>? _subStages;
-//add converter
+  final List<EBTimelineModel>? _stages;
   @override
-  List<String>? get subStages {
-    final value = _subStages;
+  List<EBTimelineModel>? get stages {
+    final value = _stages;
     if (value == null) return null;
-    if (_subStages is EqualUnmodifiableListView) return _subStages;
+    if (_stages is EqualUnmodifiableListView) return _stages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'EBTimelineModel(serviceRequestId: $serviceRequestId, assessmentName: $assessmentName, stageName: $stageName, assessmentVersion: $assessmentVersion, status: $status, initiateDate: $initiateDate, recentUpdated: $recentUpdated, subStages: $subStages)';
+    return 'EBTimelineModel(serviceRequestId: $serviceRequestId, title: $title, stage: $stage, assessmentVersion: $assessmentVersion, status: $status, initiateDate: $initiateDate, recentUpdated: $recentUpdated, stages: $stages)';
   }
 
   @override
@@ -247,10 +244,8 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
             other is _$EBTimelineModelImpl &&
             (identical(other.serviceRequestId, serviceRequestId) ||
                 other.serviceRequestId == serviceRequestId) &&
-            (identical(other.assessmentName, assessmentName) ||
-                other.assessmentName == assessmentName) &&
-            (identical(other.stageName, stageName) ||
-                other.stageName == stageName) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.stage, stage) || other.stage == stage) &&
             (identical(other.assessmentVersion, assessmentVersion) ||
                 other.assessmentVersion == assessmentVersion) &&
             (identical(other.status, status) || other.status == status) &&
@@ -258,8 +253,7 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
                 other.initiateDate == initiateDate) &&
             (identical(other.recentUpdated, recentUpdated) ||
                 other.recentUpdated == recentUpdated) &&
-            const DeepCollectionEquality()
-                .equals(other._subStages, _subStages));
+            const DeepCollectionEquality().equals(other._stages, _stages));
   }
 
   @JsonKey(ignore: true)
@@ -267,13 +261,13 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
   int get hashCode => Object.hash(
       runtimeType,
       serviceRequestId,
-      assessmentName,
-      stageName,
+      title,
+      stage,
       assessmentVersion,
       status,
       initiateDate,
       recentUpdated,
-      const DeepCollectionEquality().hash(_subStages));
+      const DeepCollectionEquality().hash(_stages));
 
   @JsonKey(ignore: true)
   @override
@@ -293,13 +287,13 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
 abstract class _EBTimelineModel implements EBTimelineModel {
   const factory _EBTimelineModel(
       {final int? serviceRequestId,
-      final String? assessmentName,
-      final String? stageName,
+      final String? title,
+      final String? stage,
       final String? assessmentVersion,
       final String? status,
       @TimestampConverter() final DateTime? initiateDate,
       @TimestampConverter() final DateTime? recentUpdated,
-      final List<String>? subStages}) = _$EBTimelineModelImpl;
+      final List<EBTimelineModel>? stages}) = _$EBTimelineModelImpl;
 
   factory _EBTimelineModel.fromJson(Map<String, dynamic> json) =
       _$EBTimelineModelImpl.fromJson;
@@ -307,9 +301,9 @@ abstract class _EBTimelineModel implements EBTimelineModel {
   @override
   int? get serviceRequestId;
   @override
-  String? get assessmentName;
+  String? get title;
   @override
-  String? get stageName;
+  String? get stage;
   @override
   String? get assessmentVersion;
   @override
@@ -320,8 +314,8 @@ abstract class _EBTimelineModel implements EBTimelineModel {
   @override
   @TimestampConverter()
   DateTime? get recentUpdated;
-  @override //add converter
-  List<String>? get subStages;
+  @override
+  List<EBTimelineModel>? get stages;
   @override
   @JsonKey(ignore: true)
   _$$EBTimelineModelImplCopyWith<_$EBTimelineModelImpl> get copyWith =>

@@ -40,3 +40,32 @@ enum EBStageName {
     required this.displayValue,
   });
 }
+
+enum EBStatus {
+  // COMPLETED, PENDING, REJECTED, ACTIVE, UNKNOWN
+  COMPLETED(
+    value: 'COMPLETED',
+    displayValue: 'Completed',
+  ),
+  PENDING(
+    value: 'PENDING',
+    displayValue: 'Pending',
+  ),
+  REJECTED(
+    value: 'REJECTED',
+    displayValue: 'Rejected',
+  ),
+  ACTIVE(
+    value: 'ACTIVE',
+    displayValue: 'Active',
+  ),
+  UNKNOWN(value: 'UNKNOWN', displayValue: 'Yet to be updated');
+
+  final String value;
+  final String displayValue;
+
+  const EBStatus({
+    required this.value,
+    required this.displayValue,
+  });
+}

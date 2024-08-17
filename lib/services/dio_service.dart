@@ -21,6 +21,17 @@ final keycloakDioProvider = Provider(
   },
 );
 
+final ebDioProvider = Provider(
+  (ref) {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstant.baseUrl,
+      ),
+    );
+    return dio;
+  },
+);
+
 final dioProvider = StateNotifierProvider<DioService, Dio>((ref) {
   return DioService(ref);
 });

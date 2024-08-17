@@ -10,16 +10,16 @@ _$EBTimelineModelImpl _$$EBTimelineModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EBTimelineModelImpl(
       serviceRequestId: (json['serviceRequestId'] as num?)?.toInt(),
-      assessmentName: json['assessmentName'] as String?,
-      stageName: json['stageName'] as String?,
+      title: json['title'] as String?,
+      stage: json['stage'] as String?,
       assessmentVersion: json['assessmentVersion'] as String?,
       status: json['status'] as String?,
       initiateDate:
           const TimestampConverter().fromJson(json['initiateDate'] as String?),
       recentUpdated:
           const TimestampConverter().fromJson(json['recentUpdated'] as String?),
-      subStages: (json['subStages'] as List<dynamic>?)
-          ?.map((e) => e as String)
+      stages: (json['stages'] as List<dynamic>?)
+          ?.map((e) => EBTimelineModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -27,12 +27,12 @@ Map<String, dynamic> _$$EBTimelineModelImplToJson(
         _$EBTimelineModelImpl instance) =>
     <String, dynamic>{
       'serviceRequestId': instance.serviceRequestId,
-      'assessmentName': instance.assessmentName,
-      'stageName': instance.stageName,
+      'title': instance.title,
+      'stage': instance.stage,
       'assessmentVersion': instance.assessmentVersion,
       'status': instance.status,
       'initiateDate': const TimestampConverter().toJson(instance.initiateDate),
       'recentUpdated':
           const TimestampConverter().toJson(instance.recentUpdated),
-      'subStages': instance.subStages,
+      'stages': instance.stages?.map((e) => e.toJson()).toList(),
     };

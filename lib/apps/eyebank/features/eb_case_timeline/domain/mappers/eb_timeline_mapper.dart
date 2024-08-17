@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
@@ -15,8 +14,8 @@ class EBTimelineMapper {
         timelineName: configModel.timelineName,
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: m.serviceRequestId,
-        assessmentName: _getStageName(m.assessmentName),
-        stageName: m.stageName,
+        stage: _getStageName(m.stage),
+        title: _getStageName(m.title),
         assessmentVersion: m.assessmentVersion,
         status: _getCaseStatus(m.status ?? ""),
         initiateDate: m.initiateDate,
@@ -27,8 +26,7 @@ class EBTimelineMapper {
     logger.f(data);
     final newConfigModel = configModel.copyWith(
       stages: configModel.stages!
-          .where((stage) =>
-              !model.any((element) => element.assessmentName == stage))
+          .where((stage) => !model.any((element) => element.stage == stage))
           .toList(),
     );
     logger.f("newConfigModel: $newConfigModel");
@@ -38,10 +36,10 @@ class EBTimelineMapper {
         timelineName: configModel.timelineName,
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: null,
-        assessmentName: _getStageName(stage),
-        stageName: stage,
+        stage: _getStageName(stage),
+        title: _getStageName(stage),
         assessmentVersion: null,
-        status: EBCaseStatus.UNKNOWN,
+        status: EBStatus.UNKNOWN,
         initiateDate: null,
         recentUpdatedTime: null,
         subStages: null,
@@ -60,90 +58,13 @@ class EBTimelineMapper {
     }
   }
 
-  static EBCaseStatus _getCaseStatus(String status) {
-    switch (status) {
-      case "PENDING":
-        return EBCaseStatus.PENDING;
-      case "COMPLETED":
-        return EBCaseStatus.COMPLETED;
-      case "IN_PROGRESS":
-        return EBCaseStatus.IN_PROGRESS;
-      case "CANCELLED":
-        return EBCaseStatus.CANCELLED;
-      default:
-        return EBCaseStatus.UNKNOWN;
+  static EBStatus _getCaseStatus(String status) {
+    const statuses = EBStatus.values;
+    for (var i = 0; i < statuses.length; i++) {
+      if (statuses[i].value == status) {
+        return statuses[i];
+      }
     }
-  }
-
-  static EBAssessmentName _getAssessmentName(String name) {
-    switch (name) {
-      case "INTIMATION":
-        return EBAssessmentName.INTIMATION;
-      case "PRELIMINARY_SCREENING":
-        return EBAssessmentName.PRELIMINARY_SCREENING;
-      case "CORNEA_RECOVERY":
-        return EBAssessmentName.CORNEA_RECOVERY;
-      case "SHIPPED_TO_EYEBANK":
-        return EBAssessmentName.SHIPPED_TO_EYEBANK;
-      case "RECEIVED_TO_EYEBANK":
-        return EBAssessmentName.RECEIVED_TO_EYEBANK;
-      case "SEROLOGY":
-        return EBAssessmentName.SEROLOGY;
-      case "CORNEA_EVALUATION":
-        return EBAssessmentName.CORNEA_EVALUATION;
-      case "IN_INVENTORY":
-        return EBAssessmentName.IN_INVENTORY;
-      case "UNKNOWN":
-        return EBAssessmentName.UNKNOWN;
-      case "ISSUE_ACQUISITION":
-        return EBAssessmentName.ISSUE_ACQUISITION;
-      case "ADVERSE_REACTION_REPORT":
-        return EBAssessmentName.ADVERSE_REACTION_REPORT;
-      case "DOCTOR_ASSESSMENT":
-        return EBAssessmentName.DOCTOR_ASSESSMENT;
-      default:
-        return EBAssessmentName.UNKNOWN;
-    }
+    return EBStatus.UNKNOWN;
   }
 }
-
-//  return configModel.stages!.map((stage) {
-//       if (stage == model.assessmentName) {
-//         return EBTimelineEntity(
-//           timelineName: configModel.timelineName,
-//           timelineVersion: configModel.timelineVersion,
-//           serviceRequestId: model.serviceRequestId,
-//           assessmentName: model.assessmentName,
-//           stageName: model.stageName,
-//           assessmentVersion: model.assessmentVersion,
-//           status: model.status,
-//           initiateDate: model.initiateDate,
-//           recentUpdatedTime: model.recentUpdated,
-//           subStages: model.subStages,
-//         );
-//       } else {
-//         return EBTimelineEntity(
-//           timelineName: configModel.timelineName,
-//           timelineVersion: configModel.timelineVersion,
-//           serviceRequestId: null,
-//           assessmentName: model.assessmentName,
-//           stageName: null,
-//           assessmentVersion: null,
-//           status: null,
-//           initiateDate: null,
-//           recentUpdatedTime: null,
-//           subStages: null,
-//         );
-//       }
-//     }).toList();
-
-//  final String? timelineName;
-//   final String? timelineVersion;
-//   final int? serviceRequestId;
-//   final String? assessmentName;
-//   final String? stageName;
-//   final String? assessmentVersion;
-//   final String? status;
-//   final DateTime? initiateDate;
-//   final DateTime? recentUpdatedTime;
-//   final List<String>? subStages;

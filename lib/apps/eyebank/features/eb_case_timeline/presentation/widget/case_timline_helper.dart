@@ -6,6 +6,8 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
+import '../../../../helpers/domain/enums/global_eb_enums.dart';
+
 class CaseConnector extends StatelessWidget {
   final EBTimelineEntity event;
 
@@ -16,11 +18,13 @@ class CaseConnector extends StatelessWidget {
     return SolidLineConnector(color: _getStatusColor(event.status));
   }
 
-  Color _getStatusColor(EBCaseStatus? status) {
+  Color _getStatusColor(EBStatus? status) {
     return switch (status) {
-      EBCaseStatus.COMPLETED => AppColor.green,
-      EBCaseStatus.IN_PROGRESS => AppColor.primary,
-      EBCaseStatus.PENDING => AppColor.orange,
+      EBStatus.COMPLETED => AppColor.green,
+      // EBStatus.IN_PROGRESS => AppColor.primary,
+      EBStatus.ACTIVE => AppColor.primary,
+      EBStatus.REJECTED=> AppColor.red,
+      EBStatus.PENDING => AppColor.orange,
       _ => Colors.grey
     };
   }
@@ -124,12 +128,19 @@ class CompletedCard extends StatelessWidget {
     );
   }
 
-  Color _getStatusColor(EBCaseStatus? status) {
+  Color _getStatusColor(EBStatus? status) {
     return switch (status) {
-      EBCaseStatus.COMPLETED => AppColor.green,
-      EBCaseStatus.IN_PROGRESS => AppColor.primary,
-      EBCaseStatus.PENDING => AppColor.orange,
+
+      EBStatus.COMPLETED => AppColor.green,
+      // EBStatus.IN_PROGRESS => AppColor.primary,
+      EBStatus.ACTIVE => AppColor.primary,
+      EBStatus.REJECTED=> AppColor.red,
+      EBStatus.PENDING => AppColor.orange,
       _ => Colors.grey
+      // EBCaseStatus.COMPLETED => AppColor.green,
+      // EBCaseStatus.IN_PROGRESS => AppColor.primary,
+      // EBCaseStatus.PENDING => AppColor.orange,
+      // _ => Colors.grey
     };
   }
 }
@@ -151,21 +162,34 @@ class CaseIndicator extends StatelessWidget {
     );
   }
 
-  IconData _getStatusIcon(EBCaseStatus? status) {
+  IconData _getStatusIcon(EBStatus? status) {
     return switch (status) {
-      EBCaseStatus.COMPLETED => Icons.check_circle,
-      EBCaseStatus.IN_PROGRESS => Icons.autorenew,
-      EBCaseStatus.PENDING => Icons.hourglass_empty,
+      EBStatus.COMPLETED => Icons.check_circle,
+      // EBStatus.IN_PROGRESS => Icons.autorenew,
+      EBStatus.ACTIVE => Icons.check_circle,
+      EBStatus.REJECTED => Icons.cancel,
+      EBStatus.PENDING => Icons.hourglass_empty,
       _ => Icons.help_outline,
+      // EBCaseStatus.COMPLETED => Icons.check_circle,
+      // EBCaseStatus.IN_PROGRESS => Icons.autorenew,
+      // EBCaseStatus.PENDING => Icons.hourglass_empty,
+      // _ => Icons.help_outline,
     };
   }
 
-  Color _getStatusColor(EBCaseStatus? status) {
+  Color _getStatusColor(EBStatus? status) {
     return switch (status) {
-      EBCaseStatus.COMPLETED => AppColor.green,
-      EBCaseStatus.IN_PROGRESS => AppColor.primary,
-      EBCaseStatus.PENDING => AppColor.orange,
+      EBStatus.COMPLETED => AppColor.green,
+      // EBStatus.IN_PROGRESS => AppColor.primary,
+      EBStatus.ACTIVE => AppColor.primary,
+      EBStatus.REJECTED => AppColor.red,
+      EBStatus.PENDING => AppColor.orange,
       _ => Colors.grey
+
+      // EBCaseStatus.COMPLETED => AppColor.green,
+      // EBCaseStatus.IN_PROGRESS => AppColor.primary,
+      // EBCaseStatus.PENDING => AppColor.orange,
+      // _ => Colors.grey
     };
   }
 }
@@ -192,7 +216,7 @@ class CaseHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            event.assessmentName?.displayValue.toUpperCase() ?? "",
+            event.title?.displayValue.toUpperCase() ?? "",
             style: applyRobotoFont(
               fontSize: isNested ? 11 : 12,
               fontWeight: FontWeight.bold,
