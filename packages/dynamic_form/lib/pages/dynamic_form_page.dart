@@ -14,17 +14,18 @@ class DynamicFormPage extends StatelessWidget {
   const DynamicFormPage({
     super.key,
     this.onSubmit,
-    this.onPopInvoked,
     this.backButtonIcon = Icons.arrow_back,
     this.enableDraft = false,
+    this.canPop = false,
     required this.json,
   });
   final Function(Map<String, dynamic>? data, DynamicFormSavingType mode)?
       onSubmit;
-  final Function()? onPopInvoked;
+
   final bool enableDraft;
   final String json;
   final IconData backButtonIcon;
+  final bool canPop;
 
   Future<ResponseJsonEntity>? _loadJson() async {
     try {
@@ -52,8 +53,8 @@ class DynamicFormPage extends StatelessWidget {
             onSubmit: onSubmit,
             layoutType: formLayout,
             backButtonIcon: backButtonIcon,
-            onPopInvoked: onPopInvoked,
             enableDraft: enableDraft,
+            canPop: canPop,
           );
         } else if (snapshot.hasError) {
           return FormErrorWidget(

@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 void showFormExitDialog(BuildContext context, {required VoidCallback onSave}) {
@@ -23,13 +22,11 @@ class FormExitDialog extends StatelessWidget {
       ),
       title: Row(
         children: [
-          Text(
-            'Exit Form',
-            style: applyRobotoFont(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          const Text('Exit Form',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              )),
           const Spacer(),
           IconButton(
             onPressed: () {
@@ -56,7 +53,7 @@ class FormExitDialog extends StatelessWidget {
             onSave();
             Navigator.of(context).pop();
           },
-          child: const Text('Save'),
+          child: const Text('Draft'),
         ),
       ],
     );

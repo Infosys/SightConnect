@@ -1,5 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
+import 'package:dynamic_form/shared/utlities/form_exit_dialog.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/form_panel_view.dart';
 import 'package:dynamic_form/shared/widgets/form_stepper_view.dart';
@@ -16,8 +17,8 @@ class FormBuilderPage extends StatefulWidget {
     required this.onSubmit,
     required this.layoutType,
     required this.backButtonIcon,
-    required this.onPopInvoked,
     required this.enableDraft,
+    required this.canPop,
   });
   final String title;
   final List<PageEntity> pages;
@@ -25,7 +26,7 @@ class FormBuilderPage extends StatefulWidget {
       onSubmit;
   final FormLayoutType layoutType;
   final IconData backButtonIcon;
-  final Function()? onPopInvoked;
+  final bool canPop;
   final bool enableDraft;
   @override
   State<FormBuilderPage> createState() => _FormBuilderPageState();
@@ -42,13 +43,13 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: widget.onPopInvoked == null,
+      canPop: widget.canPop,
       onPopInvoked: (value) {
         if (value) {
           return;
         }
-        if (widget.onPopInvoked != null) {
-          widget.onPopInvoked?.call();
+        if (widget.canPop) {
+          showFormExitDialog(context, onSave: _handleSubmit);
         } else {
           Navigator.pop(context);
         }
@@ -59,12 +60,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
           actions: widget.enableDraft
               ? [
                   TextButton.icon(
-                    onPressed: () {
-                      widget.onSubmit?.call(
-                        formKey.currentState?.value,
-                        DynamicFormSavingType.DRAFT,
-                      );
-                    },
+                    onPressed: _handleDraft,
                     label: Text(
                       'Draft',
                       style: TextStyle(
@@ -78,8 +74,8 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
           leading: IconButton(
             icon: Icon(widget.backButtonIcon),
             onPressed: () {
-              if (widget.onPopInvoked != null) {
-                widget.onPopInvoked?.call();
+              if (widget.canPop) {
+                showFormExitDialog(context, onSave: _handleDraft);
               } else {
                 Navigator.pop(context);
               }
@@ -117,6 +113,13 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
           ),
         );
     }
+  }
+
+  void _handleDraft() {
+    widget.onSubmit?.call(
+      formKey.currentState?.value,
+      DynamicFormSavingType.DRAFT,
+    );
   }
 
   void _handleSubmit() {

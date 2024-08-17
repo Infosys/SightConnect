@@ -30,11 +30,11 @@ class EbFormManageProvider extends ChangeNotifier {
 
   EbFormManageProvider(this._ebFormManageRepository);
 
-  Future<Either<EBFailure, void>> saveOrDraft(
-    int encounterId,
-    DynamicFormSavingType action,
-    dynamic formData,
-  ) async {
+  Future<Either<EBFailure, void>> saveOrDraft({
+    required int encounterId,
+    required DynamicFormSavingType action,
+    required dynamic formData,
+  }) async {
     EBFormActionRequestEntity data = EBFormActionRequestEntity(
       timelineName: 'timelineName',
       timelineVersion: 'timelineVersion',

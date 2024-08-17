@@ -1,6 +1,6 @@
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_exit_dialog.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,36 +24,11 @@ class EBFormManagePage extends ConsumerWidget {
           widget: ref.watch(ebFormManageProvider).when(
                 data: (json) {
                   return DynamicFormPage(
+                    canPop: true,
                     enableDraft: true,
                     json: json,
-                    onSubmit: (data, mode) async {
-                      try {
-                        final response = await ref
-                            .read(ebSaveOrDraftProvider)
-                            .saveOrDraft(1234, mode, data);
-                        response.fold(
-                          (failure) {
-                            Fluttertoast.showToast(
-                              msg: failure.errorMessage,
-                            );
-                          },
-                          (success) {
-                            Fluttertoast.showToast(
-                              msg: 'Form saved successfully',
-                            );
-                          },
-                        );
-                      } catch (e) {
-                        Fluttertoast.showToast(
-                          msg: 'Failed to save form',
-                        );
-                      }
-                    },
-                    onPopInvoked: () {
-                      showFormExitDialog(
-                        context,
-                        onSave: () {},
-                      );
+                    onSubmit: (data, mode) {
+                      _handleSubmit(ref, data, mode);
                     },
                   );
                 },
@@ -67,5 +42,35 @@ class EBFormManagePage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void _handleSubmit(
+    WidgetRef ref,
+    Map<String, dynamic>? data,
+    DynamicFormSavingType mode,
+  ) async {
+    try {
+      final response = await ref.read(ebSaveOrDraftProvider).saveOrDraft(
+            encounterId: 1234,
+            action: mode,
+            formData: data,
+          );
+      response.fold(
+        (failure) {
+          Fluttertoast.showToast(
+            msg: failure.errorMessage,
+          );
+        },
+        (success) {
+          Fluttertoast.showToast(
+            msg: 'Form saved successfully',
+          );
+        },
+      );
+    } catch (e) {
+      Fluttertoast.showToast(
+        msg: 'Failed to save form',
+      );
+    }
   }
 }
