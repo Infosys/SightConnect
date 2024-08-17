@@ -30,7 +30,7 @@ abstract class EBTimelineRepo {
     String? timelineVersion,
   });
   // GET : Form configuration by stage
-  Future<Either<EBFailure, dynamic>> getFormConfiguration({
+  Future<Either<EBFailure, Map<String, dynamic>>> getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
   });
@@ -101,31 +101,19 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
   }
 
   @override
-  Future<Either<EBFailure, dynamic>> getFormConfiguration({
+  Future<Either<EBFailure, Map<String, dynamic>>> getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
-  }) async {
-    try {
-      log(stage.name);
+  }) {
+    return EyeBankErrorHandler.handle(() async {
       final endPoint = '/services/configs/api/stages/${stage.name}';
-      final response = await _dio.get(endPoint);
-      log(response.data);
-      return response.data;
-    } catch (e) {
-      logger.f('Error in getFormConfiguration: $e');
-      rethrow;
-    }
-
-    // return EyeBankErrorHandler.handle(() async {
-    //   final endPoint = '/services/configs/api/stages/${stage.name}';
-    //   final response = await _dio.get(endPoint);
-    //   log(response.data);
-    //   return response.data;
-    //   // if (response.statusCode == 200) {
-    //   //   return response.data;
-    //   // } else {
-    //   //   throw Exception(response.statusMessage ?? 'getFormConfiguraton');
-    //   // }
-    // });
+      final response = await _dio.get<Map<String, dynamic>>(endPoint);
+      log(response.data.toString());
+      if (response.statusCode == 200) {
+        return Future.value(response.data);
+      } else {
+        throw Exception(response.statusMessage ?? 'getFormConfiguraton');
+      }
+    });
   }
 }

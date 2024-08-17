@@ -11,7 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../helpers/domain/enums/global_eb_enums.dart';
 
-final ebFormManageProvider = FutureProvider<String>((ref) async {
+final ebFormManageProvider = FutureProvider<dynamic>((ref) async {
   final repo = ref.watch(ebTimlineRepoProvider);
   final res =
       await repo.getFormConfiguration(stage: EBStageName.DONOR_SCREENING);

@@ -30,7 +30,10 @@ class FormNestedPannelWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ...field.elements!.map((e) {
-          return getField(e, formKey);
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: getField(e, formKey),
+          );
         }),
       ],
     );

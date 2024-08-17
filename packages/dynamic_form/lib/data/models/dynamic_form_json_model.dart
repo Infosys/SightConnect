@@ -146,9 +146,9 @@ class ElementElementClassModel {
             ? []
             : List<Validator>.from(
                 json["validators"]!.map((x) => Validator.fromJson(x))),
-        choices: json["choices"] == null
+        choices: json["options"] == null
             ? []
-            : List<dynamic>.from(json["choices"]!.map((x) => x)),
+            : List<dynamic>.from(json["options"]!.map((x) => x)),
         placeholder: json["placeholder"],
         maxSize: json["maxSize"],
         min: json["min"],

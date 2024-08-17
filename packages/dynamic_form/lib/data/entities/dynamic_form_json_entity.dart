@@ -239,13 +239,13 @@ class RadioChoiceElementEntity {
 
   factory RadioChoiceElementEntity.fromJson(Map<String, dynamic> json) =>
       RadioChoiceElementEntity(
-        value: json["value"],
-        text: json["text"],
+        value: json["name"],
+        text: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
-        "value": value,
-        "text": text,
+        "name": value,
+        "title": text,
       };
 }
 

@@ -100,7 +100,9 @@ class DynamicFormJsonMapper {
     if (choices == null) {
       return null;
     }
-    if (type == DynamicFormType.RADIO || type == DynamicFormType.CHECKBOX) {
+    if (type == DynamicFormType.RADIO ||
+        type == DynamicFormType.CHECKBOX ||
+        type == DynamicFormType.DROPDOWN) {
       if (currentChoiceType == "map") {
         return choices
             .map((e) => RadioChoiceElementEntity.fromJson(e))
@@ -151,7 +153,7 @@ class DynamicFormJsonMapper {
         return DynamicFormType.SWITCH;
       case 'FILE':
         return DynamicFormType.FILE;
-      case 'comment':
+      case 'TEXTAREA':
         return DynamicFormType.TEXTAREA;
       case 'conditional':
         return DynamicFormType.CONDITIONAL;
