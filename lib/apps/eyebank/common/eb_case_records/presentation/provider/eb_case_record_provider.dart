@@ -1,17 +1,17 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ebCaseCreationProvider = FutureProvider<String>((ref) async {
-  try {
-    return await rootBundle.loadString(
-      'assets/eyebank/local_json/case_register.json',
-    );
-  } catch (e) {
-    logger.f('Error Converting json: $e');
-    rethrow;
-  }
+final ebIntimationFormProvider = FutureProvider<String>((ref) async {
+//   final repo = ref.watch(ebTimlineRepoProvider);
+//   final res= await repo.getIntimationForm(timelineName: "CORNEA_DONATION");
+//  return  res.fold((l) => throw l, (r) => r);
+  return await rootBundle
+      .loadString('assets/eyebank/local_json/case_register.json');
+});
+final ebSubmitIntimationFormProvider = StateProvider((ref) {
+  // final repo = ref.watch(ebTimlineRepoProvider);
+  // return repo
 });
 
 final ebGetRecordsProvider =

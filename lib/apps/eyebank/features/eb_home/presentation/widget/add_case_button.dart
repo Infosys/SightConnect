@@ -1,73 +1,77 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddCaseButton extends ConsumerWidget {
+class AddCaseButton extends StatelessWidget {
   const AddCaseButton({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(ebCaseCreationProvider).when(
-          data: (json) => _buildContent(context, json),
-          loading: () => kIsWeb
-              ? const LinearProgressIndicator()
-              : const CircularProgressIndicator(),
-          error: (error, stackTrace) => _buildErrorContent(context, ref, error),
-        );
-  }
-
-  Widget _buildContent(BuildContext context, dynamic json) {
-    if (Responsive.isMobile(context)) {
+  Widget build(BuildContext context) {
+    if (kIsWeb) {
+      return _CreateNewCaseSection(
+        onPressed: () => _handleButtonPress(context),
+        buttonTxt: 'Create Case',
+      );
+    } else {
       return FloatingActionButton.extended(
-        onPressed: () => _showFormSheet(context, json),
+        onPressed: () => _handleButtonPress(context),
         icon: const Icon(Icons.add),
-        label: _buildButtonLabel('Create Case'),
+        label: Text(
+          'Create Case',
+          style: applyRobotoFont(
+            fontSize: 12,
+            color: Colors.white,
+          ),
+        ),
       );
     }
-    return _CreateNewCaseSection(
-      onPressed: () => _showFormSheet(context, json),
-      buttonTxt: 'Create Case',
-    );
   }
 
-  Widget _buildErrorContent(BuildContext context, WidgetRef ref, Object error) {
-    Fluttertoast.showToast(msg: 'Error Loading Case Registration JSON');
-    if (Responsive.isMobile(context)) {
-      return FloatingActionButton.extended(
-        onPressed: () => ref.invalidate(ebCaseCreationProvider),
-        icon: const Icon(Icons.refresh),
-        label: _buildButtonLabel('Retry'),
-      );
-    }
-    return _CreateNewCaseSection(
-      onPressed: () => ref.invalidate(ebCaseCreationProvider),
-      buttonTxt: 'Retry',
-    );
-  }
-
-  void _showFormSheet(BuildContext context, dynamic json) {
+  void _handleButtonPress(BuildContext context) {
     showCustomWoltSheet(
       context,
-      DynamicFormPage(
-        json: json,
-        backButtonIcon: Icons.close,
-      ),
-    );
-  }
+      Consumer(
+        builder: (context, ref, child) {
+          final asyncValue = ref.watch(ebIntimationFormProvider);
 
-  Text _buildButtonLabel(String text) {
-    return Text(
-      text,
-      style: applyRobotoFont(
-        fontSize: 12,
-        color: Colors.white,
+          return asyncValue.when(
+            data: (json) {
+              return DynamicFormPage(
+                json: json,
+                backButtonIcon: Icons.close,
+                onSubmit: (data) {
+                  try {
+                    // final provider = ref.read(ebSubmitIntimationFormProvider);
+                  } catch (e) {
+                    logger.e(e);
+                  }
+                },
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stackTrace) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Error loading case registration JSON'),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.invalidate(ebIntimationFormProvider);
+                    },
+                    child: const Text('Retry'),
+                  ),
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }
