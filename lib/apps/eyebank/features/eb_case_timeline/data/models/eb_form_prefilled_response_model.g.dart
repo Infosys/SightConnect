@@ -11,7 +11,7 @@ _$EBFormPrefilledResponseModelImpl _$$EBFormPrefilledResponseModelImplFromJson(
     _$EBFormPrefilledResponseModelImpl(
       encounterId: (json['encounterId'] as num?)?.toInt(),
       tenantId: json['tenantId'] as String?,
-      assessmentName: json['assessmentName'] as String?,
+      stageName: json['stageName'] as String?,
       assessmentVersion: json['assessmentVersion'] as String?,
       eBforms: (json['forms'] as List<dynamic>?)
           ?.map((e) => EBform.fromJson(e as Map<String, dynamic>))
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$EBFormPrefilledResponseModelImplToJson(
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'tenantId': instance.tenantId,
-      'assessmentName': instance.assessmentName,
+      'stageName': instance.stageName,
       'assessmentVersion': instance.assessmentVersion,
       'forms': instance.eBforms?.map((e) => e.toJson()).toList(),
     };
@@ -31,20 +31,12 @@ Map<String, dynamic> _$$EBFormPrefilledResponseModelImplToJson(
 _$EBformImpl _$$EBformImplFromJson(Map<String, dynamic> json) => _$EBformImpl(
       identifier: (json['identifier'] as num?)?.toInt(),
       identifierType: json['identifierType'] as String?,
-      eBformData: json['formData'] == null
-          ? null
-          : EBformData.fromJson(json['formData'] as Map<String, dynamic>),
+      eBformData: json['formData'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$EBformImplToJson(_$EBformImpl instance) =>
     <String, dynamic>{
       'identifier': instance.identifier,
       'identifierType': instance.identifierType,
-      'formData': instance.eBformData?.toJson(),
+      'formData': instance.eBformData,
     };
-
-_$EBformDataImpl _$$EBformDataImplFromJson(Map<String, dynamic> json) =>
-    _$EBformDataImpl();
-
-Map<String, dynamic> _$$EBformDataImplToJson(_$EBformDataImpl instance) =>
-    <String, dynamic>{};

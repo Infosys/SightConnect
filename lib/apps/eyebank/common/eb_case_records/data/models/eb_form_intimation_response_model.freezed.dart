@@ -243,12 +243,16 @@ Stage _$StageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Stage {
-  @JsonKey(name: "stageName")
-  String? get stageName => throw _privateConstructorUsedError;
-  @JsonKey(name: "stageVersion")
-  String? get stageVersion => throw _privateConstructorUsedError;
-  @JsonKey(name: "stageConfig")
-  StageConfig? get stageConfig => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "version")
+  String? get version => throw _privateConstructorUsedError;
+  @JsonKey(name: "logoPosition")
+  String? get logoPosition => throw _privateConstructorUsedError;
+  @JsonKey(name: "formLayoutType")
+  String? get formLayoutType => throw _privateConstructorUsedError;
+  @JsonKey(name: "pages")
+  List<Page>? get pages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -261,11 +265,11 @@ abstract class $StageCopyWith<$Res> {
       _$StageCopyWithImpl<$Res, Stage>;
   @useResult
   $Res call(
-      {@JsonKey(name: "stageName") String? stageName,
-      @JsonKey(name: "stageVersion") String? stageVersion,
-      @JsonKey(name: "stageConfig") StageConfig? stageConfig});
-
-  $StageConfigCopyWith<$Res>? get stageConfig;
+      {@JsonKey(name: "name") String? name,
+      @JsonKey(name: "version") String? version,
+      @JsonKey(name: "logoPosition") String? logoPosition,
+      @JsonKey(name: "formLayoutType") String? formLayoutType,
+      @JsonKey(name: "pages") List<Page>? pages});
 }
 
 /// @nodoc
@@ -281,36 +285,34 @@ class _$StageCopyWithImpl<$Res, $Val extends Stage>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stageName = freezed,
-    Object? stageVersion = freezed,
-    Object? stageConfig = freezed,
+    Object? name = freezed,
+    Object? version = freezed,
+    Object? logoPosition = freezed,
+    Object? formLayoutType = freezed,
+    Object? pages = freezed,
   }) {
     return _then(_value.copyWith(
-      stageName: freezed == stageName
-          ? _value.stageName
-          : stageName // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      stageVersion: freezed == stageVersion
-          ? _value.stageVersion
-          : stageVersion // ignore: cast_nullable_to_non_nullable
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
               as String?,
-      stageConfig: freezed == stageConfig
-          ? _value.stageConfig
-          : stageConfig // ignore: cast_nullable_to_non_nullable
-              as StageConfig?,
+      logoPosition: freezed == logoPosition
+          ? _value.logoPosition
+          : logoPosition // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formLayoutType: freezed == formLayoutType
+          ? _value.formLayoutType
+          : formLayoutType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pages: freezed == pages
+          ? _value.pages
+          : pages // ignore: cast_nullable_to_non_nullable
+              as List<Page>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $StageConfigCopyWith<$Res>? get stageConfig {
-    if (_value.stageConfig == null) {
-      return null;
-    }
-
-    return $StageConfigCopyWith<$Res>(_value.stageConfig!, (value) {
-      return _then(_value.copyWith(stageConfig: value) as $Val);
-    });
   }
 }
 
@@ -322,12 +324,11 @@ abstract class _$$StageImplCopyWith<$Res> implements $StageCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "stageName") String? stageName,
-      @JsonKey(name: "stageVersion") String? stageVersion,
-      @JsonKey(name: "stageConfig") StageConfig? stageConfig});
-
-  @override
-  $StageConfigCopyWith<$Res>? get stageConfig;
+      {@JsonKey(name: "name") String? name,
+      @JsonKey(name: "version") String? version,
+      @JsonKey(name: "logoPosition") String? logoPosition,
+      @JsonKey(name: "formLayoutType") String? formLayoutType,
+      @JsonKey(name: "pages") List<Page>? pages});
 }
 
 /// @nodoc
@@ -341,23 +342,33 @@ class __$$StageImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stageName = freezed,
-    Object? stageVersion = freezed,
-    Object? stageConfig = freezed,
+    Object? name = freezed,
+    Object? version = freezed,
+    Object? logoPosition = freezed,
+    Object? formLayoutType = freezed,
+    Object? pages = freezed,
   }) {
     return _then(_$StageImpl(
-      stageName: freezed == stageName
-          ? _value.stageName
-          : stageName // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      stageVersion: freezed == stageVersion
-          ? _value.stageVersion
-          : stageVersion // ignore: cast_nullable_to_non_nullable
+      version: freezed == version
+          ? _value.version
+          : version // ignore: cast_nullable_to_non_nullable
               as String?,
-      stageConfig: freezed == stageConfig
-          ? _value.stageConfig
-          : stageConfig // ignore: cast_nullable_to_non_nullable
-              as StageConfig?,
+      logoPosition: freezed == logoPosition
+          ? _value.logoPosition
+          : logoPosition // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formLayoutType: freezed == formLayoutType
+          ? _value.formLayoutType
+          : formLayoutType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pages: freezed == pages
+          ? _value._pages
+          : pages // ignore: cast_nullable_to_non_nullable
+              as List<Page>?,
     ));
   }
 }
@@ -366,26 +377,42 @@ class __$$StageImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StageImpl implements _Stage {
   const _$StageImpl(
-      {@JsonKey(name: "stageName") this.stageName,
-      @JsonKey(name: "stageVersion") this.stageVersion,
-      @JsonKey(name: "stageConfig") this.stageConfig});
+      {@JsonKey(name: "name") this.name,
+      @JsonKey(name: "version") this.version,
+      @JsonKey(name: "logoPosition") this.logoPosition,
+      @JsonKey(name: "formLayoutType") this.formLayoutType,
+      @JsonKey(name: "pages") final List<Page>? pages})
+      : _pages = pages;
 
   factory _$StageImpl.fromJson(Map<String, dynamic> json) =>
       _$$StageImplFromJson(json);
 
   @override
-  @JsonKey(name: "stageName")
-  final String? stageName;
+  @JsonKey(name: "name")
+  final String? name;
   @override
-  @JsonKey(name: "stageVersion")
-  final String? stageVersion;
+  @JsonKey(name: "version")
+  final String? version;
   @override
-  @JsonKey(name: "stageConfig")
-  final StageConfig? stageConfig;
+  @JsonKey(name: "logoPosition")
+  final String? logoPosition;
+  @override
+  @JsonKey(name: "formLayoutType")
+  final String? formLayoutType;
+  final List<Page>? _pages;
+  @override
+  @JsonKey(name: "pages")
+  List<Page>? get pages {
+    final value = _pages;
+    if (value == null) return null;
+    if (_pages is EqualUnmodifiableListView) return _pages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Stage(stageName: $stageName, stageVersion: $stageVersion, stageConfig: $stageConfig)';
+    return 'Stage(name: $name, version: $version, logoPosition: $logoPosition, formLayoutType: $formLayoutType, pages: $pages)';
   }
 
   @override
@@ -393,18 +420,19 @@ class _$StageImpl implements _Stage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StageImpl &&
-            (identical(other.stageName, stageName) ||
-                other.stageName == stageName) &&
-            (identical(other.stageVersion, stageVersion) ||
-                other.stageVersion == stageVersion) &&
-            (identical(other.stageConfig, stageConfig) ||
-                other.stageConfig == stageConfig));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.logoPosition, logoPosition) ||
+                other.logoPosition == logoPosition) &&
+            (identical(other.formLayoutType, formLayoutType) ||
+                other.formLayoutType == formLayoutType) &&
+            const DeepCollectionEquality().equals(other._pages, _pages));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, stageName, stageVersion, stageConfig);
+  int get hashCode => Object.hash(runtimeType, name, version, logoPosition,
+      formLayoutType, const DeepCollectionEquality().hash(_pages));
 
   @JsonKey(ignore: true)
   @override
@@ -422,105 +450,570 @@ class _$StageImpl implements _Stage {
 
 abstract class _Stage implements Stage {
   const factory _Stage(
-          {@JsonKey(name: "stageName") final String? stageName,
-          @JsonKey(name: "stageVersion") final String? stageVersion,
-          @JsonKey(name: "stageConfig") final StageConfig? stageConfig}) =
-      _$StageImpl;
+      {@JsonKey(name: "name") final String? name,
+      @JsonKey(name: "version") final String? version,
+      @JsonKey(name: "logoPosition") final String? logoPosition,
+      @JsonKey(name: "formLayoutType") final String? formLayoutType,
+      @JsonKey(name: "pages") final List<Page>? pages}) = _$StageImpl;
 
   factory _Stage.fromJson(Map<String, dynamic> json) = _$StageImpl.fromJson;
 
   @override
-  @JsonKey(name: "stageName")
-  String? get stageName;
+  @JsonKey(name: "name")
+  String? get name;
   @override
-  @JsonKey(name: "stageVersion")
-  String? get stageVersion;
+  @JsonKey(name: "version")
+  String? get version;
   @override
-  @JsonKey(name: "stageConfig")
-  StageConfig? get stageConfig;
+  @JsonKey(name: "logoPosition")
+  String? get logoPosition;
+  @override
+  @JsonKey(name: "formLayoutType")
+  String? get formLayoutType;
+  @override
+  @JsonKey(name: "pages")
+  List<Page>? get pages;
   @override
   @JsonKey(ignore: true)
   _$$StageImplCopyWith<_$StageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-StageConfig _$StageConfigFromJson(Map<String, dynamic> json) {
-  return _StageConfig.fromJson(json);
+Page _$PageFromJson(Map<String, dynamic> json) {
+  return _Page.fromJson(json);
 }
 
 /// @nodoc
-mixin _$StageConfig {
+mixin _$Page {
+  @JsonKey(name: "title")
+  String? get title => throw _privateConstructorUsedError;
+  @JsonKey(name: "pageNumber")
+  int? get pageNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "elements")
+  List<Element>? get elements => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PageCopyWith<Page> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StageConfigCopyWith<$Res> {
-  factory $StageConfigCopyWith(
-          StageConfig value, $Res Function(StageConfig) then) =
-      _$StageConfigCopyWithImpl<$Res, StageConfig>;
+abstract class $PageCopyWith<$Res> {
+  factory $PageCopyWith(Page value, $Res Function(Page) then) =
+      _$PageCopyWithImpl<$Res, Page>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "title") String? title,
+      @JsonKey(name: "pageNumber") int? pageNumber,
+      @JsonKey(name: "elements") List<Element>? elements});
 }
 
 /// @nodoc
-class _$StageConfigCopyWithImpl<$Res, $Val extends StageConfig>
-    implements $StageConfigCopyWith<$Res> {
-  _$StageConfigCopyWithImpl(this._value, this._then);
+class _$PageCopyWithImpl<$Res, $Val extends Page>
+    implements $PageCopyWith<$Res> {
+  _$PageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? pageNumber = freezed,
+    Object? elements = freezed,
+  }) {
+    return _then(_value.copyWith(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pageNumber: freezed == pageNumber
+          ? _value.pageNumber
+          : pageNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      elements: freezed == elements
+          ? _value.elements
+          : elements // ignore: cast_nullable_to_non_nullable
+              as List<Element>?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$StageConfigImplCopyWith<$Res> {
-  factory _$$StageConfigImplCopyWith(
-          _$StageConfigImpl value, $Res Function(_$StageConfigImpl) then) =
-      __$$StageConfigImplCopyWithImpl<$Res>;
+abstract class _$$PageImplCopyWith<$Res> implements $PageCopyWith<$Res> {
+  factory _$$PageImplCopyWith(
+          _$PageImpl value, $Res Function(_$PageImpl) then) =
+      __$$PageImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "title") String? title,
+      @JsonKey(name: "pageNumber") int? pageNumber,
+      @JsonKey(name: "elements") List<Element>? elements});
 }
 
 /// @nodoc
-class __$$StageConfigImplCopyWithImpl<$Res>
-    extends _$StageConfigCopyWithImpl<$Res, _$StageConfigImpl>
-    implements _$$StageConfigImplCopyWith<$Res> {
-  __$$StageConfigImplCopyWithImpl(
-      _$StageConfigImpl _value, $Res Function(_$StageConfigImpl) _then)
+class __$$PageImplCopyWithImpl<$Res>
+    extends _$PageCopyWithImpl<$Res, _$PageImpl>
+    implements _$$PageImplCopyWith<$Res> {
+  __$$PageImplCopyWithImpl(_$PageImpl _value, $Res Function(_$PageImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? pageNumber = freezed,
+    Object? elements = freezed,
+  }) {
+    return _then(_$PageImpl(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pageNumber: freezed == pageNumber
+          ? _value.pageNumber
+          : pageNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      elements: freezed == elements
+          ? _value._elements
+          : elements // ignore: cast_nullable_to_non_nullable
+              as List<Element>?,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$StageConfigImpl implements _StageConfig {
-  const _$StageConfigImpl();
+class _$PageImpl implements _Page {
+  const _$PageImpl(
+      {@JsonKey(name: "title") this.title,
+      @JsonKey(name: "pageNumber") this.pageNumber,
+      @JsonKey(name: "elements") final List<Element>? elements})
+      : _elements = elements;
 
-  factory _$StageConfigImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StageConfigImplFromJson(json);
+  factory _$PageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PageImplFromJson(json);
+
+  @override
+  @JsonKey(name: "title")
+  final String? title;
+  @override
+  @JsonKey(name: "pageNumber")
+  final int? pageNumber;
+  final List<Element>? _elements;
+  @override
+  @JsonKey(name: "elements")
+  List<Element>? get elements {
+    final value = _elements;
+    if (value == null) return null;
+    if (_elements is EqualUnmodifiableListView) return _elements;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'StageConfig()';
+    return 'Page(title: $title, pageNumber: $pageNumber, elements: $elements)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StageConfigImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$PageImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.pageNumber, pageNumber) ||
+                other.pageNumber == pageNumber) &&
+            const DeepCollectionEquality().equals(other._elements, _elements));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, title, pageNumber,
+      const DeepCollectionEquality().hash(_elements));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PageImplCopyWith<_$PageImpl> get copyWith =>
+      __$$PageImplCopyWithImpl<_$PageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StageConfigImplToJson(
+    return _$$PageImplToJson(
       this,
     );
   }
 }
 
-abstract class _StageConfig implements StageConfig {
-  const factory _StageConfig() = _$StageConfigImpl;
+abstract class _Page implements Page {
+  const factory _Page(
+      {@JsonKey(name: "title") final String? title,
+      @JsonKey(name: "pageNumber") final int? pageNumber,
+      @JsonKey(name: "elements") final List<Element>? elements}) = _$PageImpl;
 
-  factory _StageConfig.fromJson(Map<String, dynamic> json) =
-      _$StageConfigImpl.fromJson;
+  factory _Page.fromJson(Map<String, dynamic> json) = _$PageImpl.fromJson;
+
+  @override
+  @JsonKey(name: "title")
+  String? get title;
+  @override
+  @JsonKey(name: "pageNumber")
+  int? get pageNumber;
+  @override
+  @JsonKey(name: "elements")
+  List<Element>? get elements;
+  @override
+  @JsonKey(ignore: true)
+  _$$PageImplCopyWith<_$PageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Element _$ElementFromJson(Map<String, dynamic> json) {
+  return _Element.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Element {
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "type")
+  String? get type => throw _privateConstructorUsedError;
+  @JsonKey(name: "prefix")
+  String? get prefix => throw _privateConstructorUsedError;
+  @JsonKey(name: "title")
+  String? get title => throw _privateConstructorUsedError;
+  @JsonKey(name: "description")
+  String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: "repeats")
+  bool? get repeats => throw _privateConstructorUsedError;
+  @JsonKey(name: "minRepeat")
+  int? get minRepeat => throw _privateConstructorUsedError;
+  @JsonKey(name: "maxRepeat")
+  int? get maxRepeat => throw _privateConstructorUsedError;
+  @JsonKey(name: "elements")
+  List<Element>? get elements => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ElementCopyWith<Element> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ElementCopyWith<$Res> {
+  factory $ElementCopyWith(Element value, $Res Function(Element) then) =
+      _$ElementCopyWithImpl<$Res, Element>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "name") String? name,
+      @JsonKey(name: "type") String? type,
+      @JsonKey(name: "prefix") String? prefix,
+      @JsonKey(name: "title") String? title,
+      @JsonKey(name: "description") String? description,
+      @JsonKey(name: "repeats") bool? repeats,
+      @JsonKey(name: "minRepeat") int? minRepeat,
+      @JsonKey(name: "maxRepeat") int? maxRepeat,
+      @JsonKey(name: "elements") List<Element>? elements});
+}
+
+/// @nodoc
+class _$ElementCopyWithImpl<$Res, $Val extends Element>
+    implements $ElementCopyWith<$Res> {
+  _$ElementCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? type = freezed,
+    Object? prefix = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? repeats = freezed,
+    Object? minRepeat = freezed,
+    Object? maxRepeat = freezed,
+    Object? elements = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prefix: freezed == prefix
+          ? _value.prefix
+          : prefix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repeats: freezed == repeats
+          ? _value.repeats
+          : repeats // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      minRepeat: freezed == minRepeat
+          ? _value.minRepeat
+          : minRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxRepeat: freezed == maxRepeat
+          ? _value.maxRepeat
+          : maxRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+      elements: freezed == elements
+          ? _value.elements
+          : elements // ignore: cast_nullable_to_non_nullable
+              as List<Element>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ElementImplCopyWith<$Res> implements $ElementCopyWith<$Res> {
+  factory _$$ElementImplCopyWith(
+          _$ElementImpl value, $Res Function(_$ElementImpl) then) =
+      __$$ElementImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "name") String? name,
+      @JsonKey(name: "type") String? type,
+      @JsonKey(name: "prefix") String? prefix,
+      @JsonKey(name: "title") String? title,
+      @JsonKey(name: "description") String? description,
+      @JsonKey(name: "repeats") bool? repeats,
+      @JsonKey(name: "minRepeat") int? minRepeat,
+      @JsonKey(name: "maxRepeat") int? maxRepeat,
+      @JsonKey(name: "elements") List<Element>? elements});
+}
+
+/// @nodoc
+class __$$ElementImplCopyWithImpl<$Res>
+    extends _$ElementCopyWithImpl<$Res, _$ElementImpl>
+    implements _$$ElementImplCopyWith<$Res> {
+  __$$ElementImplCopyWithImpl(
+      _$ElementImpl _value, $Res Function(_$ElementImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? type = freezed,
+    Object? prefix = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? repeats = freezed,
+    Object? minRepeat = freezed,
+    Object? maxRepeat = freezed,
+    Object? elements = freezed,
+  }) {
+    return _then(_$ElementImpl(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prefix: freezed == prefix
+          ? _value.prefix
+          : prefix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repeats: freezed == repeats
+          ? _value.repeats
+          : repeats // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      minRepeat: freezed == minRepeat
+          ? _value.minRepeat
+          : minRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxRepeat: freezed == maxRepeat
+          ? _value.maxRepeat
+          : maxRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+      elements: freezed == elements
+          ? _value._elements
+          : elements // ignore: cast_nullable_to_non_nullable
+              as List<Element>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ElementImpl implements _Element {
+  const _$ElementImpl(
+      {@JsonKey(name: "name") this.name,
+      @JsonKey(name: "type") this.type,
+      @JsonKey(name: "prefix") this.prefix,
+      @JsonKey(name: "title") this.title,
+      @JsonKey(name: "description") this.description,
+      @JsonKey(name: "repeats") this.repeats,
+      @JsonKey(name: "minRepeat") this.minRepeat,
+      @JsonKey(name: "maxRepeat") this.maxRepeat,
+      @JsonKey(name: "elements") final List<Element>? elements})
+      : _elements = elements;
+
+  factory _$ElementImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ElementImplFromJson(json);
+
+  @override
+  @JsonKey(name: "name")
+  final String? name;
+  @override
+  @JsonKey(name: "type")
+  final String? type;
+  @override
+  @JsonKey(name: "prefix")
+  final String? prefix;
+  @override
+  @JsonKey(name: "title")
+  final String? title;
+  @override
+  @JsonKey(name: "description")
+  final String? description;
+  @override
+  @JsonKey(name: "repeats")
+  final bool? repeats;
+  @override
+  @JsonKey(name: "minRepeat")
+  final int? minRepeat;
+  @override
+  @JsonKey(name: "maxRepeat")
+  final int? maxRepeat;
+  final List<Element>? _elements;
+  @override
+  @JsonKey(name: "elements")
+  List<Element>? get elements {
+    final value = _elements;
+    if (value == null) return null;
+    if (_elements is EqualUnmodifiableListView) return _elements;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'Element(name: $name, type: $type, prefix: $prefix, title: $title, description: $description, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, elements: $elements)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ElementImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.prefix, prefix) || other.prefix == prefix) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.repeats, repeats) || other.repeats == repeats) &&
+            (identical(other.minRepeat, minRepeat) ||
+                other.minRepeat == minRepeat) &&
+            (identical(other.maxRepeat, maxRepeat) ||
+                other.maxRepeat == maxRepeat) &&
+            const DeepCollectionEquality().equals(other._elements, _elements));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      type,
+      prefix,
+      title,
+      description,
+      repeats,
+      minRepeat,
+      maxRepeat,
+      const DeepCollectionEquality().hash(_elements));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ElementImplCopyWith<_$ElementImpl> get copyWith =>
+      __$$ElementImplCopyWithImpl<_$ElementImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ElementImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Element implements Element {
+  const factory _Element(
+          {@JsonKey(name: "name") final String? name,
+          @JsonKey(name: "type") final String? type,
+          @JsonKey(name: "prefix") final String? prefix,
+          @JsonKey(name: "title") final String? title,
+          @JsonKey(name: "description") final String? description,
+          @JsonKey(name: "repeats") final bool? repeats,
+          @JsonKey(name: "minRepeat") final int? minRepeat,
+          @JsonKey(name: "maxRepeat") final int? maxRepeat,
+          @JsonKey(name: "elements") final List<Element>? elements}) =
+      _$ElementImpl;
+
+  factory _Element.fromJson(Map<String, dynamic> json) = _$ElementImpl.fromJson;
+
+  @override
+  @JsonKey(name: "name")
+  String? get name;
+  @override
+  @JsonKey(name: "type")
+  String? get type;
+  @override
+  @JsonKey(name: "prefix")
+  String? get prefix;
+  @override
+  @JsonKey(name: "title")
+  String? get title;
+  @override
+  @JsonKey(name: "description")
+  String? get description;
+  @override
+  @JsonKey(name: "repeats")
+  bool? get repeats;
+  @override
+  @JsonKey(name: "minRepeat")
+  int? get minRepeat;
+  @override
+  @JsonKey(name: "maxRepeat")
+  int? get maxRepeat;
+  @override
+  @JsonKey(name: "elements")
+  List<Element>? get elements;
+  @override
+  @JsonKey(ignore: true)
+  _$$ElementImplCopyWith<_$ElementImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

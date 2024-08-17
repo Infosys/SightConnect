@@ -18,18 +18,41 @@ class EBFormIntimationResponseModel with _$EBFormIntimationResponseModel {
 @freezed
 class Stage with _$Stage {
   const factory Stage({
-    @JsonKey(name: "stageName") String? stageName,
-    @JsonKey(name: "stageVersion") String? stageVersion,
-    @JsonKey(name: "stageConfig") StageConfig? stageConfig,
+    @JsonKey(name: "name") String? name,
+    @JsonKey(name: "version") String? version,
+    @JsonKey(name: "logoPosition") String? logoPosition,
+    @JsonKey(name: "formLayoutType") String? formLayoutType,
+    @JsonKey(name: "pages") List<Page>? pages,
   }) = _Stage;
 
   factory Stage.fromJson(Map<String, dynamic> json) => _$StageFromJson(json);
 }
 
 @freezed
-class StageConfig with _$StageConfig {
-  const factory StageConfig() = _StageConfig;
+class Page with _$Page {
+  const factory Page({
+    @JsonKey(name: "title") String? title,
+    @JsonKey(name: "pageNumber") int? pageNumber,
+    @JsonKey(name: "elements") List<Element>? elements,
+  }) = _Page;
 
-  factory StageConfig.fromJson(Map<String, dynamic> json) =>
-      _$StageConfigFromJson(json);
+  factory Page.fromJson(Map<String, dynamic> json) => _$PageFromJson(json);
+}
+
+@freezed
+class Element with _$Element {
+  const factory Element({
+    @JsonKey(name: "name") String? name,
+    @JsonKey(name: "type") String? type,
+    @JsonKey(name: "prefix") String? prefix,
+    @JsonKey(name: "title") String? title,
+    @JsonKey(name: "description") String? description,
+    @JsonKey(name: "repeats") bool? repeats,
+    @JsonKey(name: "minRepeat") int? minRepeat,
+    @JsonKey(name: "maxRepeat") int? maxRepeat,
+    @JsonKey(name: "elements") List<Element>? elements,
+  }) = _Element;
+
+  factory Element.fromJson(Map<String, dynamic> json) =>
+      _$ElementFromJson(json);
 }

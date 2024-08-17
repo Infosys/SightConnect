@@ -20,16 +20,4 @@ class EBRejectCaseRequestEntity {
   String toString() {
     return 'EBRejectCaseRequestEntity(reason: $reason, comments: $comments, performerId: $performerId, performerRole: $performerRole, verifiedById: $verifiedById, verifiedByRole: $verifiedByRole)';
   }
-
-  factory EBRejectCaseRequestEntity.fromJson(Map<String, dynamic> json) {
-    return EBRejectCaseRequestEntity(
-      reason: EBRejectCaseReasonEnum.values
-          .firstWhere((element) => element.toString() == json['reason']),
-      comments: json['comments'],
-      performerId: json['performerId'],
-      performerRole: json['performerRole'],
-      verifiedById: json['verifiedById'],
-      verifiedByRole: json['verifiedByRole'],
-    );
-  }
 }

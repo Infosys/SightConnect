@@ -8,7 +8,7 @@ class EBFormPrefilledResponseModel with _$EBFormPrefilledResponseModel {
   const factory EBFormPrefilledResponseModel({
     @JsonKey(name: "encounterId") int? encounterId,
     @JsonKey(name: "tenantId") String? tenantId,
-    @JsonKey(name: "assessmentName") String? assessmentName,
+    @JsonKey(name: "stageName") String? stageName,
     @JsonKey(name: "assessmentVersion") String? assessmentVersion,
     @JsonKey(name: "forms") List<EBform>? eBforms,
   }) = _EBFormPrefilledResponseModel;
@@ -22,16 +22,8 @@ class EBform with _$EBform {
   const factory EBform({
     @JsonKey(name: "identifier") int? identifier,
     @JsonKey(name: "identifierType") String? identifierType,
-    @JsonKey(name: "formData") EBformData? eBformData,
+    @JsonKey(name: "formData") Map<String, dynamic>? eBformData,
   }) = _EBform;
 
   factory EBform.fromJson(Map<String, dynamic> json) => _$EBformFromJson(json);
-}
-
-@freezed
-class EBformData with _$EBformData {
-  const factory EBformData() = _EBformData;
-
-  factory EBformData.fromJson(Map<String, dynamic> json) =>
-      _$EBformDataFromJson(json);
 }

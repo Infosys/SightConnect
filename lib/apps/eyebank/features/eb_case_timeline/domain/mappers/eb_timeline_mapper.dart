@@ -28,15 +28,11 @@ class EbTimelineMapper {
   }
 
   static _getReason(String? reason) {
-    switch (reason) {
-      case 'NOT_SCREENED':
-        return EBRejectCaseReasonEnum.NOT_SCREENED;
-      case 'NOT_PROCEEDED':
-        return EBRejectCaseReasonEnum.NOT_PROCEEDED;
-      case 'UNSUITABLE':
-        return EBRejectCaseReasonEnum.UNSUITABLE;
-      default:
-        return EBRejectCaseReasonEnum.OTHER;
+    const reasons = EBRejectCaseReasonEnum.values;
+    for (var i = 0; i < reasons.length; i++) {
+      if (reasons[i].name == reason) {
+        return reasons[i];
+      }
     }
   }
 }
