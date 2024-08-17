@@ -10,8 +10,7 @@ _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EncounterBriefModelImpl(
       encounterId: (json['encounterId'] as num?)?.toInt(),
-      encounterStatus:
-          $enumDecodeNullable(_$AssessmentNameEnumMap, json['encounterStatus']),
+      encounterStatus: json['encounterStatus'] as String?,
       donorBrief: json['donorBrief'] == null
           ? null
           : DonorBrief.fromJson(json['donorBrief'] as Map<String, dynamic>),
@@ -37,7 +36,7 @@ Map<String, dynamic> _$$EncounterBriefModelImplToJson(
         _$EncounterBriefModelImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
-      'encounterStatus': _$AssessmentNameEnumMap[instance.encounterStatus],
+      'encounterStatus': instance.encounterStatus,
       'donorBrief': instance.donorBrief?.toJson(),
       'intimateDate': instance.intimateDate?.toIso8601String(),
       'performerId': instance.performerId,
@@ -46,11 +45,6 @@ Map<String, dynamic> _$$EncounterBriefModelImplToJson(
       'organExtracted': instance.organExtracted,
       'lastModifiedDate': instance.lastModifiedDate?.toIso8601String(),
     };
-
-const _$AssessmentNameEnumMap = {
-  AssessmentName.INTIMATION: 'INTIMATION',
-  AssessmentName.PRELIMINARY: 'PRELIMINARY',
-};
 
 _$BodyLocationImpl _$$BodyLocationImplFromJson(Map<String, dynamic> json) =>
     _$BodyLocationImpl(
