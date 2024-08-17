@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/enti
 class EncounterBriefMapper {
   EncounterBriefMapper._();
 
-  EncounterBriefEntity mapToEntity(EncounterBriefModel model) {
+  static EncounterBriefEntity mapToEntity(EncounterBriefModel model) {
     return EncounterBriefEntity(
       encounterId: model.encounterId,
       encounterStatus: model.encounterStatus,
