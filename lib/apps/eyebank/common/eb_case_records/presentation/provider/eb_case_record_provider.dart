@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -16,6 +15,7 @@ final ebCaseCreationProvider = FutureProvider<String>((ref) async {
   }
 });
 
+//EncounterBriefEntity
 final ebGetRecordsProvider =
     FutureProvider.family<List<EncounterBriefModel>, GetRecordsParams>(
         (ref, params) async {
@@ -26,7 +26,7 @@ final ebGetRecordsProvider =
       encounterStatus: AssessmentName.INTIMATION,
       donorBrief: const DonorBrief(
         id: 0,
-        name: "George Soros",
+        name: "MEHUL MANTOO",
         contact: "9363476747",
       ),
       intimateDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
