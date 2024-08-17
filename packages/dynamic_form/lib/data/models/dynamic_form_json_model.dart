@@ -41,7 +41,7 @@ class ResponseJsonModel {
 }
 
 class PageModel {
-  String? name;
+  int? name;
   List<PageElementModel>? elements;
 
   PageModel({
@@ -67,7 +67,7 @@ class PageModel {
 
 class PageElementModel {
   String? type;
-  String? name;
+  int? name;
   List<ElementElementClassModel>? elements;
 
   PageElementModel({
@@ -98,7 +98,7 @@ class PageElementModel {
 class ElementElementClassModel {
   String? type;
   String? dependantField;
-  String? name;
+  int? name;
   String? title;
   String? description;
   bool? isRequired;
