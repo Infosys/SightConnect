@@ -27,7 +27,7 @@ class DynamicFormJsonMapper {
     if (pages != null) {
       for (final page in pages) {
         pageEntities.add(PageEntity(
-          name: page.name ?? '',
+          name: page.name.toString(),
           elements: _getPageElements(page.elements),
         ));
       }
@@ -41,7 +41,7 @@ class DynamicFormJsonMapper {
       for (final element in elements) {
         pageElementEntities.add(PageElementEntity(
           type: _getPanelType(element.type),
-          name: element.name ?? '',
+          name: element.name.toString(),
           elements: _getElements(element.elements),
         ));
       }
@@ -56,7 +56,7 @@ class DynamicFormJsonMapper {
       for (final element in elements) {
         elementEntities.add(ElementElementClassEntity(
           type: _mapToFormType(element.type),
-          name: element.name ?? '',
+          name: element.name.toString(),
           title: element.title ?? '',
           isRequired: element.isRequired ?? false,
           requiredErrorText: element.requiredErrorText ?? '',
@@ -133,7 +133,7 @@ class DynamicFormJsonMapper {
 
   DynamicFormType _mapToFormType(String? value) {
     switch (value) {
-      case 'text':
+      case 'String':
         return DynamicFormType.TEXTFIELD;
       case 'radiogroup':
         return DynamicFormType.RADIO;
@@ -141,7 +141,7 @@ class DynamicFormJsonMapper {
         return DynamicFormType.CHECKBOX;
       case 'dropdown':
         return DynamicFormType.DROPDOWN;
-      case 'datetime-local':
+      case 'DateTime':
         return DynamicFormType.DATETIME;
       case 'CHIPS':
         return DynamicFormType.CHIPS;
