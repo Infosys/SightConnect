@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_prefilled_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_reject_case_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
@@ -10,15 +11,27 @@ import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EBTimelineRepo {
+  // POST : Reject case
   Future<Either<EBFailure, void>> rejectCase(
     EBRejectCaseRequestModel request,
     int encounterId,
   );
+  // GET : Prefilled form by stage and encounter id
   Future<Either<EBFailure, EBFormPrefilledResponseModel>>
       fetchPrefilledFormByStageAndId(
     int encounterId,
     EBStageName stage,
   );
+  // GET : AI form for creating new case
+  Future<Either<EBFailure, EBFormIntimationResponseModel>> getAIForm({
+    required String timelineName,
+    String? timelineVersion,
+  });
+  // GET : Form configuration by stage
+  Future<Either<EBFailure, EBFormIntimationResponseModel>> getFormConfiguraton({
+    required EBStageName stage,
+    double? stageVersion,
+  });
 }
 
 final ebTimlineRepoProvider = Provider(
@@ -63,6 +76,38 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
         logger.f(response.data);
         throw Exception(response.statusMessage ??
             'Error in fetchPrefilledFormByStageAndId');
+      }
+    });
+  }
+
+  @override
+  Future<Either<EBFailure, EBFormIntimationResponseModel>> getAIForm({
+    required String timelineName,
+    String? timelineVersion,
+  }) {
+    return EyeBankErrorHandler.handle(() async {
+      final endPoint = '/configs/api/timelines/$timelineName/initialStage';
+      final response = await _dio.get(endPoint);
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception(response.statusMessage ?? 'Error in getAIForm');
+      }
+    });
+  }
+
+  @override
+  Future<Either<EBFailure, EBFormIntimationResponseModel>> getFormConfiguraton({
+    required EBStageName stage,
+    double? stageVersion,
+  }) {
+    return EyeBankErrorHandler.handle(() async {
+      final endPoint = '/configs/api/stages/${stage.name}';
+      final response = await _dio.get(endPoint);
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception(response.statusMessage ?? 'getFormConfiguraton');
       }
     });
   }

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/eb_form_intimation_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
@@ -78,21 +77,5 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
       logger.e("Error in searchTableData");
       rethrow;
     }
-  }
-
-  @override
-  Future<Either<EBFailure, EBFormIntimationResponseModel>> getAIForm({
-    required String timelineName,
-    String? timelineVersion,
-  }) {
-    return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/configs/api/timelines/$timelineName/initialStage';
-      final response = await _dio.get(endPoint);
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(response.statusMessage ?? 'Error in getAIForm');
-      }
-    });
   }
 }

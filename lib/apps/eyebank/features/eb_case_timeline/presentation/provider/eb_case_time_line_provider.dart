@@ -6,7 +6,6 @@ final ebCaseTimeLineProvider = FutureProvider.family((ref, caseID) async {
     return sampleJson.map((e) => EBTimeLineCaseModel.fromJson(e)).toList();
   });
 });
-
 const sampleJson = [
   {
     "initiateDate": "2023-10-01T12:00:00Z",
