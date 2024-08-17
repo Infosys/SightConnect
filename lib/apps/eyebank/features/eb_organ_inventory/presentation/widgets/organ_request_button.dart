@@ -36,7 +36,7 @@ class OrganRequestButton extends StatelessWidget {
               return DynamicFormPage(
                 json: json,
                 backButtonIcon: Icons.close,
-                onSubmit: (data) {},
+                onSubmit: (data, mode) {},
               );
             },
             loading: () => const Center(child: CircularProgressIndicator()),

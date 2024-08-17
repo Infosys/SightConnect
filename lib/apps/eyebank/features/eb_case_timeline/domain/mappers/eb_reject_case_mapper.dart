@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/mod
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_reject_case_request_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
 
-class EbTimelineMapper {
-  EbTimelineMapper._();
+class EBRejectCaseMapper {
+  EBRejectCaseMapper._();
 
   static EBRejectCaseRequestEntity mapToEntity(EBRejectCaseRequestModel model) {
     return EBRejectCaseRequestEntity(

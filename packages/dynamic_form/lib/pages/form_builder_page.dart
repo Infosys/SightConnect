@@ -15,12 +15,18 @@ class FormBuilderPage extends StatefulWidget {
     required this.title,
     required this.onSubmit,
     required this.layoutType,
+    required this.backButtonIcon,
+    required this.onPopInvoked,
+    required this.enableDraft,
   });
   final String title;
   final List<PageEntity> pages;
-  final Function(Map<String, dynamic>?)? onSubmit;
+  final Function(Map<String, dynamic>? data, DynamicFormSavingType mode)?
+      onSubmit;
   final FormLayoutType layoutType;
-
+  final IconData backButtonIcon;
+  final Function()? onPopInvoked;
+  final bool enableDraft;
   @override
   State<FormBuilderPage> createState() => _FormBuilderPageState();
 }
@@ -35,12 +41,58 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
 
   @override
   Widget build(BuildContext context) {
-    Log.f("FormBuilderPage ");
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: FormBuilder(
-        key: formKey,
-        child: _getFormLayout(),
+    return PopScope(
+      canPop: widget.onPopInvoked == null,
+      onPopInvoked: (value) {
+        if (value) {
+          return;
+        }
+        if (widget.onPopInvoked != null) {
+          widget.onPopInvoked?.call();
+        } else {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          actions: widget.enableDraft
+              ? [
+                  TextButton.icon(
+                    onPressed: () {
+                      widget.onSubmit?.call(
+                        formKey.currentState?.value,
+                        DynamicFormSavingType.DRAFT,
+                      );
+                    },
+                    label: Text(
+                      'Draft',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                  ),
+                ]
+              : null,
+          leading: IconButton(
+            icon: Icon(widget.backButtonIcon),
+            onPressed: () {
+              if (widget.onPopInvoked != null) {
+                widget.onPopInvoked?.call();
+              } else {
+                Navigator.pop(context);
+              }
+            },
+          ),
+        ),
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: FormBuilder(
+            key: formKey,
+            child: _getFormLayout(),
+          ),
+        ),
       ),
     );
   }
@@ -73,7 +125,10 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         formKey.currentState?.save();
         Log.i('Form submitted successfully');
         Log.f(formKey.currentState?.value);
-        widget.onSubmit?.call(formKey.currentState?.value);
+        widget.onSubmit?.call(
+          formKey.currentState?.value,
+          DynamicFormSavingType.SUBMIT,
+        );
       } else {
         Log.e('Form validation failed');
       }

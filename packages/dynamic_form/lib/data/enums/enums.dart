@@ -23,3 +23,8 @@ enum FormPanelType {
   PANEL,
   REPEATED_PANEL,
 }
+
+enum DynamicFormSavingType {
+  DRAFT,
+  SUBMIT,
+}

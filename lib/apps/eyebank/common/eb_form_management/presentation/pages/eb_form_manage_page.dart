@@ -1,10 +1,9 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_exit_dialog.dart';
-import 'package:eye_care_for_all/shared/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EBFormManagePage extends ConsumerWidget {
@@ -25,30 +24,37 @@ class EBFormManagePage extends ConsumerWidget {
           widget: ref.watch(ebFormManageProvider).when(
                 data: (json) {
                   return DynamicFormPage(
+                    enableDraft: true,
                     json: json,
-                    onSubmit: (data) {},
+                    onSubmit: (data, mode) async {
+                      try {
+                        final response = await ref
+                            .read(ebSaveOrDraftProvider)
+                            .saveOrDraft(1234, mode, data);
+                        response.fold(
+                          (failure) {
+                            Fluttertoast.showToast(
+                              msg: failure.errorMessage,
+                            );
+                          },
+                          (success) {
+                            Fluttertoast.showToast(
+                              msg: 'Form saved successfully',
+                            );
+                          },
+                        );
+                      } catch (e) {
+                        Fluttertoast.showToast(
+                          msg: 'Failed to save form',
+                        );
+                      }
+                    },
                     onPopInvoked: () {
                       showFormExitDialog(
                         context,
                         onSave: () {},
                       );
                     },
-                    actions: [
-                      TextButton.icon(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          foregroundColor: AppColor.primary,
-                        ),
-                        label: Text(
-                          'Draft',
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            color: AppColor.primary,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
                   );
                 },
                 loading: () => const Center(

@@ -45,7 +45,7 @@ class AddCaseButton extends StatelessWidget {
               return DynamicFormPage(
                 json: json,
                 backButtonIcon: Icons.close,
-                onSubmit: (data) {
+                onSubmit: (data, mode) {
                   try {
                     // final provider = ref.read(ebSubmitIntimationFormProvider);
                   } catch (e) {
