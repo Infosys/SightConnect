@@ -23,12 +23,13 @@ abstract class EBTimelineRepo {
     EBStageName stage,
   );
   // GET : AI form for creating new case
-  Future<Either<EBFailure, EBFormIntimationResponseModel>> getAIForm({
+  Future<Either<EBFailure, EBFormIntimationResponseModel>> getIntimationForm({
     required String timelineName,
     String? timelineVersion,
   });
   // GET : Form configuration by stage
-  Future<Either<EBFailure, EBFormIntimationResponseModel>> getFormConfiguraton({
+  Future<Either<EBFailure, EBFormIntimationResponseModel>>
+      getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
   });
@@ -81,7 +82,7 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
   }
 
   @override
-  Future<Either<EBFailure, EBFormIntimationResponseModel>> getAIForm({
+  Future<Either<EBFailure, EBFormIntimationResponseModel>> getIntimationForm({
     required String timelineName,
     String? timelineVersion,
   }) {
@@ -97,7 +98,8 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
   }
 
   @override
-  Future<Either<EBFailure, EBFormIntimationResponseModel>> getFormConfiguraton({
+  Future<Either<EBFailure, EBFormIntimationResponseModel>>
+      getFormConfiguration({
     required EBStageName stage,
     double? stageVersion,
   }) {
