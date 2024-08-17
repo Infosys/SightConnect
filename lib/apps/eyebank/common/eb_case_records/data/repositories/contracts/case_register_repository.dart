@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/eb_form_intimation_response_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/services/failure.dart';
 

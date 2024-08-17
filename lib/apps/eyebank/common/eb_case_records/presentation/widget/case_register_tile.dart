@@ -1,11 +1,11 @@
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class EBCaseCard extends StatelessWidget {
-  final EncounterBriefModel item;
+  final EncounterBriefEntity item;
   final bool isCompact;
   final VoidCallback? onTap;
 
@@ -38,7 +38,7 @@ class _CompactCard extends StatelessWidget {
     this.item,
   });
   final Function()? onTap;
-  final EncounterBriefModel? item;
+  final EncounterBriefEntity? item;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class _DetailedCard extends StatelessWidget {
   });
 
   final Function()? onTap;
-  final EncounterBriefModel? item;
+  final EncounterBriefEntity? item;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class _DetailedCard extends StatelessWidget {
   }
 }
 
-Widget _buildTopRow(BuildContext context, EncounterBriefModel? item) {
+Widget _buildTopRow(BuildContext context, EncounterBriefEntity? item) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -167,7 +167,7 @@ Widget _buildTopRow(BuildContext context, EncounterBriefModel? item) {
           ),
           const SizedBox(height: 4),
           Text(
-            item?.encounterStatus?.name ?? "",
+            item?.encounterStatus?.displayValue ?? "",
             style: applyRobotoFont(
               fontSize: 12,
               color: AppColor.primary,
@@ -180,7 +180,7 @@ Widget _buildTopRow(BuildContext context, EncounterBriefModel? item) {
   );
 }
 
-Widget _buildDateInfo(BuildContext context, EncounterBriefModel? item) {
+Widget _buildDateInfo(BuildContext context, EncounterBriefEntity? item) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -214,7 +214,7 @@ Widget _buildDateColumn(BuildContext context, String label, String? date) {
   );
 }
 
-Widget _buildOrganInfo(BuildContext context, EncounterBriefModel? item) {
+Widget _buildOrganInfo(BuildContext context, EncounterBriefEntity? item) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
