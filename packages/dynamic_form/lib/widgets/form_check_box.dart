@@ -19,7 +19,7 @@ class FormCheckbox extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.name,
       decoration: InputDecoration(
-        labelText: field.name,
+        labelText: field.title,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),

@@ -47,10 +47,12 @@ class ResponseJsonModel {
 class PageModel {
   String? name;
   List<PageElementModel>? elements;
+  String? title;
 
   PageModel({
     this.name,
     this.elements,
+    this.title,
   });
 
   factory PageModel.fromJson(Map<String, dynamic> json) => PageModel(
@@ -59,6 +61,7 @@ class PageModel {
             ? []
             : List<PageElementModel>.from(
                 json["elements"]!.map((x) => PageElementModel.fromJson(x))),
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,6 +69,7 @@ class PageModel {
         "elements": elements == null
             ? []
             : List<dynamic>.from(elements!.map((x) => x.toJson())),
+        "title": title,
       };
 }
 

@@ -15,8 +15,8 @@ class FormDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String label = field.name;
-    final String hint = field.name;
+    final String label = field.title;
+    final String hint = field.description;
     final List<DropdownMenuItem<String>> options = field.choices!
         .map((element) => DropdownMenuItem<String>(
               value: element.name,

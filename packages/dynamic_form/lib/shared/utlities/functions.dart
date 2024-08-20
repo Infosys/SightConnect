@@ -112,7 +112,10 @@ Widget getField(
       return FormSlider(field: field);
 
     case DynamicFormType.PANEL:
-      return FormNestedPannelWidget(field: field, formKey: key);
+      return FormNestedPannelWidget(
+        field: field,
+        formKey: key,
+      );
 
     default:
       return Container();

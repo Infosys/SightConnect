@@ -36,6 +36,7 @@ class DynamicFormJsonMapper {
       for (final page in pages) {
         pageEntities.add(PageEntity(
           name: page.name.toString(),
+          title: page.title ?? '',
           elements: _getPageElements(page.elements),
         ));
       }

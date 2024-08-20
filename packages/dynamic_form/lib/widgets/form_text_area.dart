@@ -20,8 +20,8 @@ class FormTextArea extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.name,
       decoration: InputDecoration(
-        labelText: field.name,
-        hintText: field.name,
+        labelText: field.title,
+        hintText: field.description,
         contentPadding: const EdgeInsets.symmetric(
           vertical: 20.0,
           horizontal: 20.0,

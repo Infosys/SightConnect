@@ -59,6 +59,7 @@ class _PageWidgetState extends State<FormStepperView> {
           PageWidget(
             elements: widget.pages.first.elements,
             formKey: widget.formKey,
+            name: widget.pages.first.name,
           ),
           SubmitBtn(
             key: widget.key,
@@ -75,6 +76,7 @@ class _PageWidgetState extends State<FormStepperView> {
         return PageWidget(
           elements: panel.elements,
           formKey: widget.formKey,
+          name: panel.name,
         );
       }).toList(),
       onSubmit: _handleSubmit,

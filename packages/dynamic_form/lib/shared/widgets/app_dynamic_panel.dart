@@ -8,10 +8,12 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 class AppDynamicPanel extends StatefulWidget {
   final PageElementEntity panel;
   final GlobalKey<FormBuilderState> globalFormKey;
+  final String name;
   const AppDynamicPanel({
     super.key,
     required this.panel,
     required this.globalFormKey,
+    required this.name,
   });
 
   @override
@@ -60,7 +62,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
   @override
   Widget build(BuildContext context) {
     return FormBuilderField(
-      name: widget.panel.name,
+      name: widget.name,
       onSaved: (newValue) {
         formKey.currentState?.save();
         final value = formKey.currentState?.value;

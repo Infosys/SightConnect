@@ -13,10 +13,12 @@ class PageWidget extends StatelessWidget {
     super.key,
     required this.elements,
     required this.formKey,
+    required this.name,
   });
 
   final List<PageElementEntity> elements;
   final GlobalKey<FormBuilderState> formKey;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +34,13 @@ class PageWidget extends StatelessWidget {
           return Container();
         } else if (panel.type == FormPanelType.REPEATED_PANEL) {
           return AppDynamicPanel(
+            name: name,
             panel: panel,
             globalFormKey: formKey,
           );
         } else {
           return AppCard(
-            title: panel.name,
+            title: name,
             marginBottom: 16,
             child: Wrap(
               runSpacing: 16,

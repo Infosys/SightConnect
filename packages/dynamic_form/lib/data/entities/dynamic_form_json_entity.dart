@@ -45,21 +45,26 @@ class ResponseJsonEntity {
 class PageEntity {
   final String name;
   final List<PageElementEntity> elements;
+  final String title;
 
   PageEntity({
     required this.name,
     required this.elements,
+    required this.title,
   });
 
   factory PageEntity.fromJson(Map<String, dynamic> json) => PageEntity(
         name: json["name"],
         elements: List<PageElementEntity>.from(
-            json["elements"].map((x) => PageElementEntity.fromJson(x))),
+          json["elements"].map((x) => PageElementEntity.fromJson(x)),
+        ),
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "elements": List<dynamic>.from(elements.map((x) => x.toJson())),
+        "title": title,
       };
 }
 
