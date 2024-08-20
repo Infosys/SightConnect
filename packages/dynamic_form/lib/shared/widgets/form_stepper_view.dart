@@ -29,7 +29,6 @@ class _PageWidgetState extends State<FormStepperView> {
   @override
   void initState() {
     super.initState();
-    validationList.clear();
   }
 
   void updateValidation(int index, bool value) {
@@ -149,7 +148,17 @@ class _PageWidgetState extends State<FormStepperView> {
                     fontSize: 14,
                   ),
                   border: Border.all(
-                    color: Theme.of(context).primaryColor,
+                    color: () {
+                      if (validationList.length == widget.pages.length) {
+                        return currentStep == index
+                            ? Theme.of(context).primaryColor
+                            : validationList[index]
+                                ? Theme.of(context).primaryColor
+                                : Colors.red;
+                      } else {
+                        return Theme.of(context).primaryColor;
+                      }
+                    }(),
                     width: 1,
                   ),
                   connectorColor: Colors.black45,
