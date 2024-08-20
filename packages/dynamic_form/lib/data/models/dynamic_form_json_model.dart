@@ -21,7 +21,7 @@ class ResponseJsonModel {
 
   factory ResponseJsonModel.fromJson(Map<String, dynamic> json) =>
       ResponseJsonModel(
-        title: json["title"],
+        title: json["name"],
         logoPosition: json["logoPosition"],
         formLayoutType: json["formLayoutType"],
         pages: json["pages"] == null
@@ -31,7 +31,7 @@ class ResponseJsonModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "title": title,
+        "name": title,
         "logoPosition": logoPosition,
         "formLayoutType": formLayoutType,
         "pages": pages == null

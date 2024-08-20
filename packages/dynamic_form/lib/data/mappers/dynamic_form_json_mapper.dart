@@ -11,7 +11,7 @@ class DynamicFormJsonMapper {
   ResponseJsonEntity modeltoEntity(ResponseJsonModel dynamicFormModel) {
     try {
       return ResponseJsonEntity(
-        title: dynamicFormModel.title ?? '',
+        title: _formatTitle(dynamicFormModel.title),
         logoPosition: dynamicFormModel.logoPosition ?? '',
         formLayoutType: _mapToFormLayoutType(dynamicFormModel.formLayoutType),
         pages: _getPages(dynamicFormModel.pages),
@@ -20,6 +20,13 @@ class DynamicFormJsonMapper {
       debugPrint('DynamicFormJsonMapper $e');
       rethrow;
     }
+  }
+
+  _formatTitle(String? title) {
+    if (title == null) {
+      return '';
+    }
+    return title.contains('_') ? title.replaceAll('_', ' ') : title;
   }
 
   List<PageEntity> _getPages(List<PageModel>? pages) {
