@@ -10,6 +10,8 @@ _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EncounterBriefModelImpl(
       encounterId: (json['encounterId'] as num?)?.toInt(),
+      timelineName: json['timelineName'] as String?,
+      timelineVersion: json['timelineVersion'] as String?,
       encounterStatus: json['encounterStatus'] as String?,
       donorBrief: json['donorBrief'] == null
           ? null
@@ -36,6 +38,8 @@ Map<String, dynamic> _$$EncounterBriefModelImplToJson(
         _$EncounterBriefModelImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
+      'timelineName': instance.timelineName,
+      'timelineVersion': instance.timelineVersion,
       'encounterStatus': instance.encounterStatus,
       'donorBrief': instance.donorBrief?.toJson(),
       'intimateDate': instance.intimateDate?.toIso8601String(),
@@ -60,6 +64,7 @@ _$BodyLocationImpl _$$BodyLocationImplFromJson(Map<String, dynamic> json) =>
       district: json['district'] as String?,
       latitude: json['latitude'] as String?,
       longitude: json['longitude'] as String?,
+      direction: json['direction'] as String?,
     );
 
 Map<String, dynamic> _$$BodyLocationImplToJson(_$BodyLocationImpl instance) =>
@@ -76,6 +81,7 @@ Map<String, dynamic> _$$BodyLocationImplToJson(_$BodyLocationImpl instance) =>
       'district': instance.district,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'direction': instance.direction,
     };
 
 _$DonorBriefImpl _$$DonorBriefImplFromJson(Map<String, dynamic> json) =>

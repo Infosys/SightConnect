@@ -2,6 +2,8 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enu
 
 class EncounterBriefEntity {
   final int? encounterId;
+  final String? timelineName;
+  final String? timelineVersion;
   final EBStageName? encounterStatus;
   final DonorBriefEntity? donorBrief;
   final DateTime? intimateDate;
@@ -13,6 +15,8 @@ class EncounterBriefEntity {
 
   EncounterBriefEntity({
     this.encounterId,
+    this.timelineName,
+    this.timelineVersion,
     this.encounterStatus,
     this.donorBrief,
     this.intimateDate,
@@ -37,6 +41,7 @@ class BodyLocationEntity {
   final String? district;
   final String? latitude;
   final String? longitude;
+  final String? direction;
 
   BodyLocationEntity({
     this.addressLine1,
@@ -51,6 +56,7 @@ class BodyLocationEntity {
     this.district,
     this.latitude,
     this.longitude,
+    this.direction,
   });
 }
 

@@ -1,6 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/enums/eb_timline_enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 
 class EncounterBriefMapper {
   EncounterBriefMapper._();
@@ -8,7 +8,9 @@ class EncounterBriefMapper {
   static EncounterBriefEntity mapToEntity(EncounterBriefModel model) {
     return EncounterBriefEntity(
       encounterId: model.encounterId,
-      encounterStatus: _getReason(model.encounterStatus),
+      timelineName: model.timelineName,
+      timelineVersion: model.timelineVersion,
+      encounterStatus: _getStageName(model.encounterStatus),
       donorBrief: model.donorBrief != null
           ? DonorBriefEntity(
               id: model.donorBrief?.id,
@@ -33,6 +35,7 @@ class EncounterBriefMapper {
               district: model.bodyLocation?.district,
               latitude: model.bodyLocation?.latitude,
               longitude: model.bodyLocation?.longitude,
+              direction: model.bodyLocation?.direction,
             )
           : null,
       organExtracted: model.organExtracted,
@@ -40,11 +43,11 @@ class EncounterBriefMapper {
     );
   }
 
-  static _getReason(String? reason) {
-    const reasons = EBRejectCaseReasonEnum.values;
-    for (var i = 0; i < reasons.length; i++) {
-      if (reasons[i].name == reason) {
-        return reasons[i];
+  static _getStageName(String? stage) {
+    const stages = EBStageName.values;
+    for (var i = 0; i < stages.length; i++) {
+      if (stages[i].name == stage) {
+        return stages[i];
       }
     }
   }
