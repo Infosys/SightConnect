@@ -15,14 +15,23 @@ class FormDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String label = field.name;
-    final String hint = field.name;
-    final List<DropdownMenuItem<String>> options = field.mapValueChoices!
+    final String label = field.title;
+    final String hint = field.description;
+    final List<DropdownMenuItem<String>> options = field.choices!
         .map((element) => DropdownMenuItem<String>(
-              value: element.value,
-              child: Text(element.text),
+              value: element.name,
+              child: Text(element.title),
             ))
         .toList();
+
+    if (!field.isRequired) {
+      options.insert(
+          0,
+          DropdownMenuItem<String>(
+            value: null,
+            child: Text('--Select ${field.title}--'),
+          ));
+    }
 
     return FormBuilderDropdown<String>(
       name: label,

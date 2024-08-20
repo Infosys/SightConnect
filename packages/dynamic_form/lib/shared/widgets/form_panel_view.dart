@@ -41,6 +41,7 @@ class _FormPanelViewState extends State<FormPanelView> {
           PageWidget(
             elements: panel.elements,
             formKey: widget.formKey,
+            name: panel.name,
           ),
           SubmitBtn(
             key: widget.key,
@@ -67,6 +68,7 @@ class _FormPanelViewState extends State<FormPanelView> {
                 PageWidget(
                   elements: panel.elements,
                   formKey: widget.formKey,
+                  name: panel.name,
                 )
               ],
             ),

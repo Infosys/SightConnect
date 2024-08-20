@@ -19,18 +19,19 @@ class FormCheckbox extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.name,
       decoration: InputDecoration(
-        labelText: field.name,
+        labelText: field.title,
+        hintText: field.description,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      options: field.mapValueChoices!
+      options: field.choices!
           .map((element) => FormBuilderFieldOption(
-                value: element.value,
-                child: Text(element.text),
+                value: element.name,
+                child: Text(element.title),
               ))
           .toList(),
     );

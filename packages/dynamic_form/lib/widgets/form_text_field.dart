@@ -19,6 +19,7 @@ class FormTextField extends StatelessWidget {
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.name,
+      keyboardType: _getKeyBoardType(),
       decoration: InputDecoration(
         labelText: field.title,
         hintText: field.description,
@@ -46,5 +47,18 @@ class FormTextField extends StatelessWidget {
       onChanged: onChanged,
       readOnly: field.readOnly,
     );
+  }
+
+  _getKeyBoardType() {
+    switch (field.inputType) {
+      case 'TEXT':
+        return TextInputType.text;
+      case 'INTEGER':
+        return TextInputType.number;
+      case 'DOUBLE':
+        return const TextInputType.numberWithOptions(decimal: true);
+      default:
+        return TextInputType.text;
+    }
   }
 }

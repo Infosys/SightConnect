@@ -23,7 +23,7 @@ class FormDatePicker extends HookWidget {
       format: DateFormat.d().add_MMM().add_y(),
       inputType: InputType.date,
       decoration: InputDecoration(
-        labelText: field.name,
+        labelText: field.title,
         suffixIcon: const Icon(Icons.calendar_today),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),

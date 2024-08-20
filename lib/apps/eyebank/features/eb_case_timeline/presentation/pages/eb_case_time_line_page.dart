@@ -82,17 +82,10 @@ class EbCaseTimeLinePage extends ConsumerWidget {
     navigator.push(
       MaterialPageRoute(
         builder: (context) => EBFormManagePage(
-          title: event.title?.displayValue??"Display Name not found",
-          caseID: '',
+          title: event.title?.displayValue ?? "Display Name not found",
+          stageName: event.stage,
         ),
       ),
     );
-    // switch (event.stageName) {
-    //   case CaseTimeLineSteps.INTIMATION:
-
-    //     break;
-    //   default:
-    //     break;
-    // }
   }
 }

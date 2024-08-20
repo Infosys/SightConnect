@@ -16,7 +16,7 @@ class FormChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = field.mapValueChoices!;
+    final options = field.choices!;
     var selectedValue = useState<String>('');
 
     return FormBuilderChoiceChip<String>(
@@ -48,13 +48,13 @@ class FormChip extends HookWidget {
           : null,
       options: options
           .map((option) => FormBuilderChipOption(
-                value: option.value,
+                value: option.name,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    option.text,
+                    option.title,
                     style: TextStyle(
-                      color: selectedValue.value == option.value
+                      color: selectedValue.value == option.name
                           ? Colors.white
                           : Colors.black,
                       fontSize: 10,

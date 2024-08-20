@@ -22,10 +22,10 @@ class FormNestedPannelWidget extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         Text(
-          field.name,
+          field.title,
           style: const TextStyle(
             fontSize: 14,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w400,
           ),
         ),
         const SizedBox(height: 10),

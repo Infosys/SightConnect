@@ -9,13 +9,15 @@ String responseJsonEntityToJson(ResponseJsonEntity data) =>
     json.encode(data.toJson());
 
 class ResponseJsonEntity {
-  final String title;
+  final String name;
+  final String version;
   final String logoPosition;
   final FormLayoutType formLayoutType;
   final List<PageEntity> pages;
 
   ResponseJsonEntity({
-    required this.title,
+    required this.name,
+    required this.version,
     required this.logoPosition,
     required this.formLayoutType,
     required this.pages,
@@ -23,7 +25,8 @@ class ResponseJsonEntity {
 
   factory ResponseJsonEntity.fromJson(Map<String, dynamic> json) =>
       ResponseJsonEntity(
-        title: json["title"],
+        name: json["name"],
+        version: json["version"],
         logoPosition: json["logoPosition"],
         formLayoutType: json["formLayoutType"],
         pages: List<PageEntity>.from(
@@ -31,7 +34,8 @@ class ResponseJsonEntity {
       );
 
   Map<String, dynamic> toJson() => {
-        "title": title,
+        "title": name,
+        "version": version,
         "logoPosition": logoPosition,
         "formLayoutType": formLayoutType,
         "pages": List<dynamic>.from(pages.map((x) => x.toJson())),
@@ -41,21 +45,26 @@ class ResponseJsonEntity {
 class PageEntity {
   final String name;
   final List<PageElementEntity> elements;
+  final String title;
 
   PageEntity({
     required this.name,
     required this.elements,
+    required this.title,
   });
 
   factory PageEntity.fromJson(Map<String, dynamic> json) => PageEntity(
         name: json["name"],
         elements: List<PageElementEntity>.from(
-            json["elements"].map((x) => PageElementEntity.fromJson(x))),
+          json["elements"].map((x) => PageElementEntity.fromJson(x)),
+        ),
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "elements": List<dynamic>.from(elements.map((x) => x.toJson())),
+        "title": title,
       };
 }
 
@@ -88,16 +97,15 @@ class PageElementEntity {
 class ElementElementClassEntity {
   final DynamicFormType type;
   final String name;
+  final String? prefix;
   final String title;
   final String description;
   final bool isRequired;
   final String requiredErrorText;
   final bool readOnly;
   final List<ValidatorEntity> validators;
-  final List<RadioChoiceElementEntity>? mapValueChoices;
-  final List<String>? stringValueChoices;
+  final List<ChoiceElementEntity>? choices;
   final String placeholder;
-  final List<dynamic> choices;
   final int maxSize;
   final int min;
   final int max;
@@ -105,6 +113,10 @@ class ElementElementClassEntity {
   final List<ConditionsEntity>? conditions;
   final String? dependantField;
   final List<ElementElementClassEntity>? elements;
+  final bool repeats;
+  final int? minRepeat;
+  final int? maxRepeat;
+  final String? inputType;
 
   ElementElementClassEntity({
     required this.type,
@@ -115,17 +127,20 @@ class ElementElementClassEntity {
     required this.requiredErrorText,
     required this.readOnly,
     required this.validators,
-    required this.mapValueChoices,
-    required this.stringValueChoices,
-    required this.placeholder,
     required this.choices,
+    required this.placeholder,
     required this.maxSize,
     required this.min,
     required this.max,
     required this.step,
+    required this.repeats,
     this.conditions,
     this.dependantField,
     this.elements,
+    this.prefix,
+    this.minRepeat,
+    this.maxRepeat,
+    this.inputType,
   });
 
   factory ElementElementClassEntity.fromJson(Map<String, dynamic> json) =>
@@ -139,26 +154,27 @@ class ElementElementClassEntity {
         readOnly: json["readOnly"],
         validators: List<ValidatorEntity>.from(
             json["validators"].map((x) => ValidatorEntity.fromJson(x))),
-        mapValueChoices: List<RadioChoiceElementEntity>.from(
-            json["mapValueChoices"]
-                .map((x) => RadioChoiceElementEntity.fromJson(x))),
-        stringValueChoices:
-            List<String>.from(json["stringValueChoices"].map((x) => x)),
+        choices: List<ChoiceElementEntity>.from(
+            json["choices"].map((x) => ChoiceElementEntity.fromJson(x))),
         placeholder: json["placeholder"],
-        choices: List<dynamic>.from(json["choices"].map((x) => x)),
         maxSize: json["maxSize"],
         min: json["min"],
         max: json["max"],
         step: json["step"],
+        repeats: json["repeats"],
         conditions: json["conditions"] == null
-            ? []
+            ? null
             : List<ConditionsEntity>.from(
                 json["conditions"].map((x) => ConditionsEntity.fromJson(x))),
         dependantField: json["dependantField"],
         elements: json["elements"] == null
-            ? []
+            ? null
             : List<ElementElementClassEntity>.from(json["elements"]
                 .map((x) => ElementElementClassEntity.fromJson(x))),
+        prefix: json["prefix"],
+        minRepeat: json["minRepeat"],
+        maxRepeat: json["maxRepeat"],
+        inputType: json["inputType"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -170,20 +186,30 @@ class ElementElementClassEntity {
         "requiredErrorText": requiredErrorText,
         "readOnly": readOnly,
         "validators": List<dynamic>.from(validators.map((x) => x.toJson())),
-        "mapValueChoices":
-            List<dynamic>.from(mapValueChoices!.map((x) => x.toJson())),
-        "stringValueChoices":
-            List<dynamic>.from(stringValueChoices!.map((x) => x)),
+        "choices": List<dynamic>.from(choices!.map((x) => x.toJson())),
         "placeholder": placeholder,
-        "choices": List<dynamic>.from(choices.map((x) => x)),
         "maxSize": maxSize,
         "min": min,
         "max": max,
         "step": step,
-        "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
+        "repeats": repeats,
+        "conditions": conditions == null
+            ? null
+            : List<dynamic>.from(conditions!.map((x) => x.toJson())),
         "dependantField": dependantField,
-        "elements": List<dynamic>.from(elements!.map((x) => x.toJson())),
+        "elements": elements == null
+            ? null
+            : List<dynamic>.from(elements!.map((x) => x.toJson())),
+        "prefix": prefix,
+        "minRepeat": minRepeat,
+        "maxRepeat": maxRepeat,
+        "inputType": inputType,
       };
+
+  @override
+  String toString() {
+    return 'ElementElementClassEntity{type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType}';
+  }
 
   ElementElementClassEntity copyWith({
     DynamicFormType? type,
@@ -194,16 +220,19 @@ class ElementElementClassEntity {
     String? requiredErrorText,
     bool? readOnly,
     List<ValidatorEntity>? validators,
-    List<RadioChoiceElementEntity>? mapValueChoices,
-    List<String>? stringValueChoices,
+    List<ChoiceElementEntity>? choices,
     String? placeholder,
-    List<dynamic>? choices,
     int? maxSize,
     int? min,
     int? max,
     int? step,
     List<ConditionsEntity>? conditions,
     String? dependantField,
+    List<ElementElementClassEntity>? elements,
+    bool? repeats,
+    int? minRepeat,
+    int? maxRepeat,
+    String? inputType,
   }) {
     return ElementElementClassEntity(
       type: type ?? this.type,
@@ -214,38 +243,41 @@ class ElementElementClassEntity {
       requiredErrorText: requiredErrorText ?? this.requiredErrorText,
       readOnly: readOnly ?? this.readOnly,
       validators: validators ?? this.validators,
-      mapValueChoices: mapValueChoices ?? this.mapValueChoices,
-      stringValueChoices: stringValueChoices ?? this.stringValueChoices,
-      placeholder: placeholder ?? this.placeholder,
       choices: choices ?? this.choices,
+      placeholder: placeholder ?? this.placeholder,
       maxSize: maxSize ?? this.maxSize,
       min: min ?? this.min,
       max: max ?? this.max,
       step: step ?? this.step,
       conditions: conditions ?? this.conditions,
       dependantField: dependantField ?? this.dependantField,
+      elements: elements ?? this.elements,
+      repeats: repeats ?? this.repeats,
+      minRepeat: minRepeat ?? this.minRepeat,
+      maxRepeat: maxRepeat ?? this.maxRepeat,
+      inputType: inputType ?? this.inputType,
     );
   }
 }
 
-class RadioChoiceElementEntity {
-  final String value;
-  final String text;
+class ChoiceElementEntity {
+  final String name;
+  final String title;
 
-  RadioChoiceElementEntity({
-    required this.value,
-    required this.text,
+  ChoiceElementEntity({
+    required this.name,
+    required this.title,
   });
 
-  factory RadioChoiceElementEntity.fromJson(Map<String, dynamic> json) =>
-      RadioChoiceElementEntity(
-        value: json["name"],
-        text: json["title"],
+  factory ChoiceElementEntity.fromJson(Map<String, dynamic> json) =>
+      ChoiceElementEntity(
+        name: json["name"],
+        title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": value,
-        "title": text,
+        "name": name,
+        "title": title,
       };
 }
 
