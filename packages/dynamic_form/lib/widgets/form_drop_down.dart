@@ -24,6 +24,15 @@ class FormDropDown extends StatelessWidget {
             ))
         .toList();
 
+    if (!field.isRequired) {
+      options.insert(
+          0,
+          DropdownMenuItem<String>(
+            value: null,
+            child: Text('--Select ${field.title}--'),
+          ));
+    }
+
     return FormBuilderDropdown<String>(
       name: label,
       autofocus: false,

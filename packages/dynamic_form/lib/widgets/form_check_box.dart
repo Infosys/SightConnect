@@ -20,8 +20,9 @@ class FormCheckbox extends StatelessWidget {
       name: field.name,
       decoration: InputDecoration(
         labelText: field.title,
+        hintText: field.description,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
       validator: field.isRequired

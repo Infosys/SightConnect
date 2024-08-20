@@ -4,7 +4,9 @@ import 'package:dynamic_form/pages/form_builder_page.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_conditional_widget.dart';
+import 'package:dynamic_form/widgets/form_date_picker.dart';
 import 'package:dynamic_form/widgets/form_date_time_picker.dart';
+import 'package:dynamic_form/widgets/form_display.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_nested_pannel_widget.dart';
@@ -116,6 +118,17 @@ Widget getField(
         field: field,
         formKey: key,
       );
+
+    case DynamicFormType.DATE:
+      return FormDatePicker(
+        field: field,
+        onChanged: (value) {
+          debugPrint(value.toString());
+        },
+      );
+
+    case DynamicFormType.DISPLAY:
+      return FormDisplay(field: field);
 
     default:
       return Container();

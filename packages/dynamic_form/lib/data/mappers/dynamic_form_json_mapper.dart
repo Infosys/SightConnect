@@ -160,6 +160,10 @@ class DynamicFormJsonMapper {
         return DynamicFormType.CONDITIONAL;
       case 'PANEL':
         return DynamicFormType.PANEL;
+      case 'DATE':
+        return DynamicFormType.DATE;
+      case 'DISPLAY':
+        return DynamicFormType.DISPLAY;
       default:
         return DynamicFormType.DEFAULT;
     }
