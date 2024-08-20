@@ -54,18 +54,20 @@ class _PageWidgetState extends State<FormStepperView> {
     if (widget.pages.isEmpty) {
       return Container();
     } else if (widget.pages.length == 1) {
-      return Column(
-        children: [
-          PageWidget(
-            elements: widget.pages.first.elements,
-            formKey: widget.formKey,
-            name: widget.pages.first.name,
-          ),
-          SubmitBtn(
-            key: widget.key,
-            onPressed: _handleSubmit,
-          ),
-        ],
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            PageWidget(
+              elements: widget.pages.first.elements,
+              formKey: widget.formKey,
+              name: widget.pages.first.name,
+            ),
+            SubmitBtn(
+              key: widget.key,
+              onPressed: _handleSubmit,
+            ),
+          ],
+        ),
       );
     }
 

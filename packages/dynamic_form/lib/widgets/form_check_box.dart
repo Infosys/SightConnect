@@ -22,7 +22,7 @@ class FormCheckbox extends StatelessWidget {
         labelText: field.title,
         hintText: field.description,
         contentPadding:
-            const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+            const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
       validator: field.isRequired
