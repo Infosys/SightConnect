@@ -62,7 +62,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
                   TextButton.icon(
                     onPressed: _handleDraft,
                     label: Text(
-                      'Draft',
+                      'Save as Draft',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,

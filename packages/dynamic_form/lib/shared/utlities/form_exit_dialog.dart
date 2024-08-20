@@ -53,7 +53,7 @@ class FormExitDialog extends StatelessWidget {
             onSave();
             Navigator.of(context).pop();
           },
-          child: const Text('Draft'),
+          child: const Text('Save as Draft'),
         ),
       ],
     );
