@@ -8,6 +8,8 @@ class EncounterBriefMapper {
   static EncounterBriefEntity mapToEntity(EncounterBriefModel model) {
     return EncounterBriefEntity(
       encounterId: model.encounterId,
+      timelineName: model.timelineName,
+      timelineVersion: model.timelineVersion,
       encounterStatus: _getStageName(model.encounterStatus),
       donorBrief: model.donorBrief != null
           ? DonorBriefEntity(
@@ -33,6 +35,7 @@ class EncounterBriefMapper {
               district: model.bodyLocation?.district,
               latitude: model.bodyLocation?.latitude,
               longitude: model.bodyLocation?.longitude,
+              direction: model.bodyLocation?.direction,
             )
           : null,
       organExtracted: model.organExtracted,
