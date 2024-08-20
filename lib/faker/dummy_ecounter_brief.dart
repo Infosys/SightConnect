@@ -1,30 +1,34 @@
 final dummyEncounterBrief = [
-  for (int i = 1; i <= 10; i++)
+  for (var i = 0; i < 5; i++)
     {
       "encounterId": i,
-      "timelineName": "string",
-      "timelineVersion": "string",
+      "timelineName": "Timeline$i",
+      "timelineVersion": "v$i",
       "activeStages": ["DEATH_INTIMATION"],
-      "donorBrief": {"id": i, "name": "string", "contact": "6126833458"},
-      "intimateDate": "2024-08-17T09:06:45.386Z",
-      "performerId": i,
-      "deathDate": "2024-08-17T09:06:45.386Z",
-      "bodyLocation": {
-        "addressLine1": "string",
-        "addressLine2": "string",
-        "street": "string",
-        "city": "string",
-        "state": "string",
-        "zipCode": "string",
-        "country": "string",
-        "landmark": "string",
-        "village": "string",
-        "district": "string",
-        "latitude": "string",
-        "longitude": "string",
-        "direction": "string"
+      "donorBrief": {
+        "id": i,
+        "name": "Donor$i",
+        "contact": "905232919$i"
       },
-      "organExtracted": ["string"],
-      "lastModifiedDate": "2024-08-17T09:06:45.386Z"
-    }
+      "intimateDate": "2024-08-17T07:29:40.409Z",
+      "performerId": i,
+      "deathDate": "2024-08-17T07:29:40.409Z",
+      "bodyLocation": {
+        "addressLine1": "Address$i",
+        "addressLine2": "Address$i",
+        "street": "Street$i",
+        "city": "City$i",
+        "state": "State$i",
+        "zipCode": "Zip$i",
+        "country": "Country$i",
+        "landmark": "Landmark$i",
+        "village": "Village$i",
+        "district": "District$i",
+        "latitude": "Lat$i",
+        "longitude": "Long$i",
+        "direction": "Direction$i"
+      },
+      "organExtracted": ["Organ$i"],
+      "lastModifiedDate": "2024-08-17T07:29:40.409Z"
+    },
 ];

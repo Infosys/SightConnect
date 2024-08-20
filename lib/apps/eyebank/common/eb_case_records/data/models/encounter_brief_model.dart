@@ -7,6 +7,8 @@ part 'encounter_brief_model.g.dart';
 class EncounterBriefModel with _$EncounterBriefModel {
   const factory EncounterBriefModel({
     int? encounterId,
+    String? timelineName,
+    String? timelineVersion,
     String? encounterStatus,
     DonorBrief? donorBrief,
     DateTime? intimateDate,
@@ -36,6 +38,7 @@ class BodyLocation with _$BodyLocation {
     String? district,
     String? latitude,
     String? longitude,
+    String? direction,
   }) = _BodyLocation;
 
   factory BodyLocation.fromJson(Map<String, dynamic> json) =>

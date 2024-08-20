@@ -21,6 +21,8 @@ EncounterBriefModel _$EncounterBriefModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EncounterBriefModel {
   int? get encounterId => throw _privateConstructorUsedError;
+  String? get timelineName => throw _privateConstructorUsedError;
+  String? get timelineVersion => throw _privateConstructorUsedError;
   String? get encounterStatus => throw _privateConstructorUsedError;
   DonorBrief? get donorBrief => throw _privateConstructorUsedError;
   DateTime? get intimateDate => throw _privateConstructorUsedError;
@@ -44,6 +46,8 @@ abstract class $EncounterBriefModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? encounterId,
+      String? timelineName,
+      String? timelineVersion,
       String? encounterStatus,
       DonorBrief? donorBrief,
       DateTime? intimateDate,
@@ -71,6 +75,8 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
   @override
   $Res call({
     Object? encounterId = freezed,
+    Object? timelineName = freezed,
+    Object? timelineVersion = freezed,
     Object? encounterStatus = freezed,
     Object? donorBrief = freezed,
     Object? intimateDate = freezed,
@@ -85,6 +91,14 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
               as int?,
+      timelineName: freezed == timelineName
+          ? _value.timelineName
+          : timelineName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timelineVersion: freezed == timelineVersion
+          ? _value.timelineVersion
+          : timelineVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
       encounterStatus: freezed == encounterStatus
           ? _value.encounterStatus
           : encounterStatus // ignore: cast_nullable_to_non_nullable
@@ -155,6 +169,8 @@ abstract class _$$EncounterBriefModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? encounterId,
+      String? timelineName,
+      String? timelineVersion,
       String? encounterStatus,
       DonorBrief? donorBrief,
       DateTime? intimateDate,
@@ -182,6 +198,8 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? encounterId = freezed,
+    Object? timelineName = freezed,
+    Object? timelineVersion = freezed,
     Object? encounterStatus = freezed,
     Object? donorBrief = freezed,
     Object? intimateDate = freezed,
@@ -196,6 +214,14 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
               as int?,
+      timelineName: freezed == timelineName
+          ? _value.timelineName
+          : timelineName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timelineVersion: freezed == timelineVersion
+          ? _value.timelineVersion
+          : timelineVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
       encounterStatus: freezed == encounterStatus
           ? _value.encounterStatus
           : encounterStatus // ignore: cast_nullable_to_non_nullable
@@ -237,6 +263,8 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
 class _$EncounterBriefModelImpl implements _EncounterBriefModel {
   const _$EncounterBriefModelImpl(
       {this.encounterId,
+      this.timelineName,
+      this.timelineVersion,
       this.encounterStatus,
       this.donorBrief,
       this.intimateDate,
@@ -252,6 +280,10 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
 
   @override
   final int? encounterId;
+  @override
+  final String? timelineName;
+  @override
+  final String? timelineVersion;
   @override
   final String? encounterStatus;
   @override
@@ -279,7 +311,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
 
   @override
   String toString() {
-    return 'EncounterBriefModel(encounterId: $encounterId, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, lastModifiedDate: $lastModifiedDate)';
+    return 'EncounterBriefModel(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, lastModifiedDate: $lastModifiedDate)';
   }
 
   @override
@@ -289,6 +321,10 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
             other is _$EncounterBriefModelImpl &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
+            (identical(other.timelineName, timelineName) ||
+                other.timelineName == timelineName) &&
+            (identical(other.timelineVersion, timelineVersion) ||
+                other.timelineVersion == timelineVersion) &&
             (identical(other.encounterStatus, encounterStatus) ||
                 other.encounterStatus == encounterStatus) &&
             (identical(other.donorBrief, donorBrief) ||
@@ -312,6 +348,8 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
   int get hashCode => Object.hash(
       runtimeType,
       encounterId,
+      timelineName,
+      timelineVersion,
       encounterStatus,
       donorBrief,
       intimateDate,
@@ -339,6 +377,8 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
 abstract class _EncounterBriefModel implements EncounterBriefModel {
   const factory _EncounterBriefModel(
       {final int? encounterId,
+      final String? timelineName,
+      final String? timelineVersion,
       final String? encounterStatus,
       final DonorBrief? donorBrief,
       final DateTime? intimateDate,
@@ -353,6 +393,10 @@ abstract class _EncounterBriefModel implements EncounterBriefModel {
 
   @override
   int? get encounterId;
+  @override
+  String? get timelineName;
+  @override
+  String? get timelineVersion;
   @override
   String? get encounterStatus;
   @override
@@ -393,6 +437,7 @@ mixin _$BodyLocation {
   String? get district => throw _privateConstructorUsedError;
   String? get latitude => throw _privateConstructorUsedError;
   String? get longitude => throw _privateConstructorUsedError;
+  String? get direction => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -418,7 +463,8 @@ abstract class $BodyLocationCopyWith<$Res> {
       String? village,
       String? district,
       String? latitude,
-      String? longitude});
+      String? longitude,
+      String? direction});
 }
 
 /// @nodoc
@@ -446,6 +492,7 @@ class _$BodyLocationCopyWithImpl<$Res, $Val extends BodyLocation>
     Object? district = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? direction = freezed,
   }) {
     return _then(_value.copyWith(
       addressLine1: freezed == addressLine1
@@ -496,6 +543,10 @@ class _$BodyLocationCopyWithImpl<$Res, $Val extends BodyLocation>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as String?,
+      direction: freezed == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -520,7 +571,8 @@ abstract class _$$BodyLocationImplCopyWith<$Res>
       String? village,
       String? district,
       String? latitude,
-      String? longitude});
+      String? longitude,
+      String? direction});
 }
 
 /// @nodoc
@@ -546,6 +598,7 @@ class __$$BodyLocationImplCopyWithImpl<$Res>
     Object? district = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? direction = freezed,
   }) {
     return _then(_$BodyLocationImpl(
       addressLine1: freezed == addressLine1
@@ -596,6 +649,10 @@ class __$$BodyLocationImplCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as String?,
+      direction: freezed == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -615,7 +672,8 @@ class _$BodyLocationImpl implements _BodyLocation {
       this.village,
       this.district,
       this.latitude,
-      this.longitude});
+      this.longitude,
+      this.direction});
 
   factory _$BodyLocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$BodyLocationImplFromJson(json);
@@ -644,10 +702,12 @@ class _$BodyLocationImpl implements _BodyLocation {
   final String? latitude;
   @override
   final String? longitude;
+  @override
+  final String? direction;
 
   @override
   String toString() {
-    return 'BodyLocation(addressLine1: $addressLine1, addressLine2: $addressLine2, street: $street, city: $city, state: $state, zipCode: $zipCode, country: $country, landmark: $landmark, village: $village, district: $district, latitude: $latitude, longitude: $longitude)';
+    return 'BodyLocation(addressLine1: $addressLine1, addressLine2: $addressLine2, street: $street, city: $city, state: $state, zipCode: $zipCode, country: $country, landmark: $landmark, village: $village, district: $district, latitude: $latitude, longitude: $longitude, direction: $direction)';
   }
 
   @override
@@ -672,7 +732,9 @@ class _$BodyLocationImpl implements _BodyLocation {
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
-                other.longitude == longitude));
+                other.longitude == longitude) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction));
   }
 
   @JsonKey(ignore: true)
@@ -690,7 +752,8 @@ class _$BodyLocationImpl implements _BodyLocation {
       village,
       district,
       latitude,
-      longitude);
+      longitude,
+      direction);
 
   @JsonKey(ignore: true)
   @override
@@ -719,7 +782,8 @@ abstract class _BodyLocation implements BodyLocation {
       final String? village,
       final String? district,
       final String? latitude,
-      final String? longitude}) = _$BodyLocationImpl;
+      final String? longitude,
+      final String? direction}) = _$BodyLocationImpl;
 
   factory _BodyLocation.fromJson(Map<String, dynamic> json) =
       _$BodyLocationImpl.fromJson;
@@ -748,6 +812,8 @@ abstract class _BodyLocation implements BodyLocation {
   String? get latitude;
   @override
   String? get longitude;
+  @override
+  String? get direction;
   @override
   @JsonKey(ignore: true)
   _$$BodyLocationImplCopyWith<_$BodyLocationImpl> get copyWith =>
