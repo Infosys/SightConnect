@@ -22,7 +22,7 @@ class TumblingEReportCard extends StatelessWidget {
     List<ObservationBriefEntity> longDistance =
         tumblingEData!.where((element) => element.code == "Distance").toList();
     final loc = context.loc!;
-    logger.d("shortDistance : $shortDistance \n longDistance : $longDistance");
+    logger.d("shortDistance : ${shortDistance.map((e) => e.toString()) } \n longDistance : ${longDistance.map((e) => e.toString())}");
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
