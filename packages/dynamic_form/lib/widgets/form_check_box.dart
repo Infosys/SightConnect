@@ -27,10 +27,10 @@ class FormCheckbox extends StatelessWidget {
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      options: field.mapValueChoices!
+      options: field.choices!
           .map((element) => FormBuilderFieldOption(
-                value: element.value,
-                child: Text(element.text),
+                value: element.name,
+                child: Text(element.title),
               ))
           .toList(),
     );

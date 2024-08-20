@@ -11,7 +11,8 @@ class DynamicFormJsonMapper {
   ResponseJsonEntity modeltoEntity(ResponseJsonModel dynamicFormModel) {
     try {
       return ResponseJsonEntity(
-        title: _formatTitle(dynamicFormModel.title),
+        name: _formatTitle(dynamicFormModel.name),
+        version: dynamicFormModel.version ?? '',
         logoPosition: dynamicFormModel.logoPosition ?? '',
         formLayoutType: _mapToFormLayoutType(dynamicFormModel.formLayoutType),
         pages: _getPages(dynamicFormModel.pages),
@@ -61,29 +62,32 @@ class DynamicFormJsonMapper {
     final List<ElementElementClassEntity> elementEntities = [];
     if (elements != null) {
       for (final element in elements) {
-        elementEntities.add(ElementElementClassEntity(
-          type: _mapToFormType(element.type),
-          name: element.name.toString(),
-          title: element.title ?? '',
-          isRequired: element.isRequired ?? false,
-          requiredErrorText: element.requiredErrorText ?? '',
-          maxSize: element.maxSize ?? 0,
-          placeholder: element.placeholder ?? '',
-          description: element.description ?? '',
-          readOnly: element.readOnly ?? false,
-          min: element.min ?? 0,
-          max: element.max ?? 3,
-          step: element.step ?? 0,
-          mapValueChoices:
-              _getChoices(_mapToFormType(element.type), element.choices, "map"),
-          stringValueChoices: _getChoices(
-              _mapToFormType(element.type), element.choices, "string"),
-          validators: _getValidators(element.validators),
-          choices: element.choices ?? [],
-          dependantField: element.dependantField,
-          conditions: _getConditions(element.conditions),
-          elements: _getElements(element.elements),
-        ));
+        elementEntities.add(
+          ElementElementClassEntity(
+            type: _mapToFormType(element.type),
+            name: element.name.toString(),
+            title: element.title ?? '',
+            isRequired: element.isRequired ?? false,
+            requiredErrorText: element.requiredErrorText ?? '',
+            maxSize: element.maxSize ?? 0,
+            placeholder: element.placeholder ?? '',
+            description: element.description ?? '',
+            readOnly: element.readOnly ?? false,
+            min: element.min ?? 0,
+            max: element.max ?? 3,
+            step: element.step ?? 0,
+            choices: _getChoices(element.options),
+            validators: _getValidators(element.validators),
+            dependantField: element.dependantField,
+            conditions: _getConditions(element.conditions),
+            elements: _getElements(element.elements),
+            repeats: element.repeats ?? false,
+            minRepeat: element.minRepeat,
+            maxRepeat: element.maxRepeat,
+            inputType: element.inputType,
+            prefix: element.prefix,
+          ),
+        );
       }
     }
     return elementEntities;
@@ -102,28 +106,17 @@ class DynamicFormJsonMapper {
     return conditionsEntities;
   }
 
-  _getChoices(
-      DynamicFormType type, List<dynamic>? choices, String currentChoiceType) {
-    if (choices == null) {
-      return null;
-    }
-    if (type == DynamicFormType.RADIO ||
-        type == DynamicFormType.CHECKBOX ||
-        type == DynamicFormType.DROPDOWN) {
-      if (currentChoiceType == "map") {
-        return choices
-            .map((e) => RadioChoiceElementEntity.fromJson(e))
-            .toList();
-      } else {
-        return null;
-      }
-    } else if (type == DynamicFormType.DROPDOWN) {
-      if (currentChoiceType == "string") {
-        return choices.map((e) => e.toString()).toList();
-      } else {
-        return null;
+  _getChoices(List<OptionsModel>? choices) {
+    final List<ChoiceElementEntity> choiceEntities = [];
+    if (choices != null) {
+      for (final choice in choices) {
+        choiceEntities.add(ChoiceElementEntity(
+          name: choice.name ?? '',
+          title: choice.title ?? '',
+        ));
       }
     }
+    return choiceEntities;
   }
 
   List<ValidatorEntity> _getValidators(List<Validator>? validators) {

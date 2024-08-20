@@ -45,7 +45,7 @@ class DynamicFormPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final pages = snapshot.data?.pages ?? [];
-          final title = snapshot.data?.title ?? '';
+          final title = snapshot.data?.name ?? '';
           final FormLayoutType formLayout =
               snapshot.data?.formLayoutType ?? FormLayoutType.PANEL;
           return FormBuilderPage(

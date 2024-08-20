@@ -7,36 +7,40 @@ String responseJsonModelToJson(ResponseJsonModel data) =>
     json.encode(data.toJson());
 
 class ResponseJsonModel {
-  String? title;
+  String? name;
+  String? version;
   String? logoPosition;
   String? formLayoutType;
   List<PageModel>? pages;
 
   ResponseJsonModel({
-    this.title,
+    this.name,
     this.logoPosition,
     this.formLayoutType,
     this.pages,
+    this.version,
   });
 
   factory ResponseJsonModel.fromJson(Map<String, dynamic> json) =>
       ResponseJsonModel(
-        title: json["name"],
+        name: json["name"],
         logoPosition: json["logoPosition"],
         formLayoutType: json["formLayoutType"],
         pages: json["pages"] == null
             ? []
             : List<PageModel>.from(
                 json["pages"]!.map((x) => PageModel.fromJson(x))),
+        version: json["version"],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": title,
+        "name": name,
         "logoPosition": logoPosition,
         "formLayoutType": formLayoutType,
         "pages": pages == null
             ? []
             : List<dynamic>.from(pages!.map((x) => x.toJson())),
+        "version": version
       };
 }
 
@@ -96,17 +100,22 @@ class PageElementModel {
 }
 
 class ElementElementClassModel {
-  String? type;
-  String? dependantField;
   int? name;
+  String? type;
+  String? prefix;
+  String? dependantField;
   String? title;
   String? description;
+  bool? repeats;
+  int? minRepeat;
+  int? maxRepeat;
   bool? isRequired;
   String? requiredErrorText;
   bool? readOnly;
   List<Validator>? validators;
-  List<dynamic>? choices;
+  List<OptionsModel>? options;
   String? placeholder;
+  String? inputType;
   int? maxSize;
   int? min;
   int? max;
@@ -114,24 +123,25 @@ class ElementElementClassModel {
   List<Conditions>? conditions;
   List<ElementElementClassModel>? elements;
 
-  ElementElementClassModel(
-      {this.type,
-      this.name,
-      this.title,
-      this.description,
-      this.isRequired,
-      this.requiredErrorText,
-      this.readOnly,
-      this.validators,
-      this.choices,
-      this.placeholder,
-      this.maxSize,
-      this.min,
-      this.max,
-      this.step,
-      this.conditions,
-      this.dependantField,
-      this.elements});
+  ElementElementClassModel({
+    this.type,
+    this.name,
+    this.title,
+    this.description,
+    this.isRequired,
+    this.requiredErrorText,
+    this.readOnly,
+    this.validators,
+    this.options,
+    this.placeholder,
+    this.maxSize,
+    this.min,
+    this.max,
+    this.step,
+    this.conditions,
+    this.dependantField,
+    this.elements,
+  });
 
   factory ElementElementClassModel.fromJson(Map<String, dynamic> json) =>
       ElementElementClassModel(
@@ -146,9 +156,10 @@ class ElementElementClassModel {
             ? []
             : List<Validator>.from(
                 json["validators"]!.map((x) => Validator.fromJson(x))),
-        choices: json["options"] == null
+        options: json["options"] == null
             ? []
-            : List<dynamic>.from(json["options"]!.map((x) => x)),
+            : List<OptionsModel>.from(
+                json["options"]!.map((x) => OptionsModel.fromJson(x))),
         placeholder: json["placeholder"],
         maxSize: json["maxSize"],
         min: json["min"],
@@ -176,8 +187,9 @@ class ElementElementClassModel {
         "validators": validators == null
             ? []
             : List<dynamic>.from(validators!.map((x) => x.toJson())),
-        "choices":
-            choices == null ? [] : List<dynamic>.from(choices!.map((x) => x)),
+        "options": options == null
+            ? []
+            : List<dynamic>.from(options!.map((x) => x.toJson())),
         "placeholder": placeholder,
         "maxSize": maxSize,
         "min": min,
@@ -190,6 +202,26 @@ class ElementElementClassModel {
         "elements": elements == null
             ? []
             : List<dynamic>.from(elements!.map((x) => x.toJson())),
+      };
+}
+
+class OptionsModel {
+  String? name;
+  String? title;
+
+  OptionsModel({
+    this.name,
+    this.title,
+  });
+
+  factory OptionsModel.fromJson(Map<String, dynamic> json) => OptionsModel(
+        name: json["name"],
+        title: json["title"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "title": title,
       };
 }
 
