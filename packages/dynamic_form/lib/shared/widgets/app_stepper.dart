@@ -78,6 +78,34 @@ class AppStepperState extends State<AppStepper> {
     if (widget.pages.isEmpty) {
       return Container();
     }
+
+    if (widget.pages.length == 1) {
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            PageWidget(
+              elements: widget.pages[0].elements,
+              formKey: widget.formKey,
+              name: widget.pages[0].name,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: _handleSubmit,
+                    child: const Text('SUBMIT'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -175,6 +203,7 @@ class _StepLayout extends StatelessWidget {
             child: PageWidget(
               elements: pages[currentStep].elements,
               formKey: formKey,
+              name: pages[currentStep].name,
             ),
           ),
       ],
@@ -232,6 +261,7 @@ class _StepLayout extends StatelessWidget {
             child: Text(
               stepNames[index],
               maxLines: 2,
+              textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: currentStep == index
@@ -286,7 +316,7 @@ class _StepLayout extends StatelessWidget {
   List<Widget> _buildStepIndicators(BuildContext context) {
     return List.generate(pages.length, (index) {
       return Container(
-        margin: const EdgeInsets.all(4),
+        margin: const EdgeInsets.all(8),
         width: 8,
         height: 8,
         decoration: BoxDecoration(

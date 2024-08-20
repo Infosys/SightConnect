@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
@@ -7,6 +5,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_co
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -120,7 +119,10 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       const endPoint =
           '/services/configs/api/timelines/CORNEA_DONATION?timelineVersion=0.0.1';
       final response = await _dio.get(endPoint);
-      log(response.toString());
+      logger.d({
+        "RESPONSE": response.data,
+      });
+
       if (response.statusCode == 200) {
         return EbTimelineConfigModel.fromJson((response.data));
       } else {
@@ -136,8 +138,14 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       String stageVersion,
       EBSubmitFormDataRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/encounters/$stageName?stageVersion=$stageVersion';
-      final response = await _dio.post(endPoint, data: requestData.toJson());
+      final endPoint = '/encounters/$stageName';
+      final response = await _dio.post(
+        endPoint,
+        queryParameters: {
+          'stageVersion': stageVersion,
+        },
+        data: requestData.toJson(),
+      );
       if (response.statusCode == 200) {
         return SubmitFormDataResponseModel.fromJson(response.data);
       } else {

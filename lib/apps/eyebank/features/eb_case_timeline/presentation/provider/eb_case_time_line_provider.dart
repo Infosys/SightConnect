@@ -15,7 +15,9 @@ final ebCaseTimeLineProvider =
     final timelinesResult = await repo.fetchTimelineByID(params['encounterID']);
     // logger.f('timelinesResult: $timelinesResult');
     final stagesResult = await repo.fetchTimelineStages(
-        "CORNEA_DONATION", params['timelineVersion']);
+      "CORNEA_DONATION",
+      params['timelineVersion'],
+    );
     // logger.f('stagesResult: $stagesResult');
     if (timelinesResult.isRight() && stagesResult.isRight()) {
       final timelines = timelinesResult.getOrElse(() => []);
@@ -28,13 +30,10 @@ final ebCaseTimeLineProvider =
           return EBTimelineMapper.mapToEntity(timelines, stages);
         },
       );
-    } 
-    else {
+    } else {
       throw EBServerFailure(
           errorMessage: "failure in fetching timeline",
-          errorObject: EBErrorObject(
-            
-          ));
+          errorObject: EBErrorObject());
     }
   } on EBFailure catch (e) {
     logger.e('EBFailure: $e');

@@ -26,7 +26,8 @@ class EBTimelineMapper {
     logger.f(data);
     final newConfigModel = configModel.copyWith(
       stages: configModel.stages!
-          .where((stage) => !model.any((element) => element.stage == stage))
+          .where((stage) =>
+              !model.any((element) => element.stage == stage.stageName))
           .toList(),
     );
     logger.f("newConfigModel: $newConfigModel");
@@ -36,8 +37,8 @@ class EBTimelineMapper {
         timelineName: configModel.timelineName,
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: null,
-        stage: _getStageName(stage),
-        title: _getStageName(stage),
+        stage: _getStageName(stage.stageName),
+        title: _getStageName(stage.stageName),
         assessmentVersion: null,
         status: EBStatus.UNKNOWN,
         initiateDate: null,

@@ -11,9 +11,7 @@ _$EBSubmitFormDataRequestModelImpl _$$EBSubmitFormDataRequestModelImplFromJson(
     _$EBSubmitFormDataRequestModelImpl(
       timelineName: json['timelineName'] as String?,
       timelineVersion: json['timelineVersion'] as String?,
-      formData: json['formData'] == null
-          ? null
-          : FormData.fromJson(json['formData'] as Map<String, dynamic>),
+      formData: json['formData'],
       performerId: json['performerId'] as String?,
       performerRole: json['performerRole'] as String?,
       verifiedById: json['verifiedById'] as String?,
@@ -25,15 +23,9 @@ Map<String, dynamic> _$$EBSubmitFormDataRequestModelImplToJson(
     <String, dynamic>{
       'timelineName': instance.timelineName,
       'timelineVersion': instance.timelineVersion,
-      'formData': instance.formData?.toJson(),
+      'formData': instance.formData,
       'performerId': instance.performerId,
       'performerRole': instance.performerRole,
       'verifiedById': instance.verifiedById,
       'verifiedByRole': instance.verifiedByRole,
     };
-
-_$FormDataImpl _$$FormDataImplFromJson(Map<String, dynamic> json) =>
-    _$FormDataImpl();
-
-Map<String, dynamic> _$$FormDataImplToJson(_$FormDataImpl instance) =>
-    <String, dynamic>{};

@@ -21,9 +21,9 @@ EbTimelineConfigModel _$EbTimelineConfigModelFromJson(
 
 /// @nodoc
 mixin _$EbTimelineConfigModel {
-  List<String>? get stages => throw _privateConstructorUsedError;
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
+  List<Stage>? get stages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $EbTimelineConfigModelCopyWith<$Res> {
       _$EbTimelineConfigModelCopyWithImpl<$Res, EbTimelineConfigModel>;
   @useResult
   $Res call(
-      {List<String>? stages, String? timelineName, String? timelineVersion});
+      {String? timelineName, String? timelineVersion, List<Stage>? stages});
 }
 
 /// @nodoc
@@ -55,15 +55,11 @@ class _$EbTimelineConfigModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stages = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
+    Object? stages = freezed,
   }) {
     return _then(_value.copyWith(
-      stages: freezed == stages
-          ? _value.stages
-          : stages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -72,6 +68,10 @@ class _$EbTimelineConfigModelCopyWithImpl<$Res,
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
+      stages: freezed == stages
+          ? _value.stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<Stage>?,
     ) as $Val);
   }
 }
@@ -86,7 +86,7 @@ abstract class _$$EbTimelineConfigModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<String>? stages, String? timelineName, String? timelineVersion});
+      {String? timelineName, String? timelineVersion, List<Stage>? stages});
 }
 
 /// @nodoc
@@ -101,15 +101,11 @@ class __$$EbTimelineConfigModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stages = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
+    Object? stages = freezed,
   }) {
     return _then(_$EbTimelineConfigModelImpl(
-      stages: freezed == stages
-          ? _value._stages
-          : stages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -118,6 +114,10 @@ class __$$EbTimelineConfigModelImplCopyWithImpl<$Res>
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
+      stages: freezed == stages
+          ? _value._stages
+          : stages // ignore: cast_nullable_to_non_nullable
+              as List<Stage>?,
     ));
   }
 }
@@ -126,15 +126,19 @@ class __$$EbTimelineConfigModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
   const _$EbTimelineConfigModelImpl(
-      {final List<String>? stages, this.timelineName, this.timelineVersion})
+      {this.timelineName, this.timelineVersion, final List<Stage>? stages})
       : _stages = stages;
 
   factory _$EbTimelineConfigModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EbTimelineConfigModelImplFromJson(json);
 
-  final List<String>? _stages;
   @override
-  List<String>? get stages {
+  final String? timelineName;
+  @override
+  final String? timelineVersion;
+  final List<Stage>? _stages;
+  @override
+  List<Stage>? get stages {
     final value = _stages;
     if (value == null) return null;
     if (_stages is EqualUnmodifiableListView) return _stages;
@@ -143,13 +147,8 @@ class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
   }
 
   @override
-  final String? timelineName;
-  @override
-  final String? timelineVersion;
-
-  @override
   String toString() {
-    return 'EbTimelineConfigModel(stages: $stages, timelineName: $timelineName, timelineVersion: $timelineVersion)';
+    return 'EbTimelineConfigModel(timelineName: $timelineName, timelineVersion: $timelineVersion, stages: $stages)';
   }
 
   @override
@@ -157,20 +156,17 @@ class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EbTimelineConfigModelImpl &&
-            const DeepCollectionEquality().equals(other._stages, _stages) &&
             (identical(other.timelineName, timelineName) ||
                 other.timelineName == timelineName) &&
             (identical(other.timelineVersion, timelineVersion) ||
-                other.timelineVersion == timelineVersion));
+                other.timelineVersion == timelineVersion) &&
+            const DeepCollectionEquality().equals(other._stages, _stages));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_stages),
-      timelineName,
-      timelineVersion);
+  int get hashCode => Object.hash(runtimeType, timelineName, timelineVersion,
+      const DeepCollectionEquality().hash(_stages));
 
   @JsonKey(ignore: true)
   @override
@@ -189,21 +185,240 @@ class _$EbTimelineConfigModelImpl implements _EbTimelineConfigModel {
 
 abstract class _EbTimelineConfigModel implements EbTimelineConfigModel {
   const factory _EbTimelineConfigModel(
-      {final List<String>? stages,
-      final String? timelineName,
-      final String? timelineVersion}) = _$EbTimelineConfigModelImpl;
+      {final String? timelineName,
+      final String? timelineVersion,
+      final List<Stage>? stages}) = _$EbTimelineConfigModelImpl;
 
   factory _EbTimelineConfigModel.fromJson(Map<String, dynamic> json) =
       _$EbTimelineConfigModelImpl.fromJson;
 
   @override
-  List<String>? get stages;
-  @override
   String? get timelineName;
   @override
   String? get timelineVersion;
   @override
+  List<Stage>? get stages;
+  @override
   @JsonKey(ignore: true)
   _$$EbTimelineConfigModelImplCopyWith<_$EbTimelineConfigModelImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+Stage _$StageFromJson(Map<String, dynamic> json) {
+  return _Stage.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Stage {
+  String? get stageName => throw _privateConstructorUsedError;
+  String? get stageVersion => throw _privateConstructorUsedError;
+  dynamic get repeats => throw _privateConstructorUsedError;
+  int? get minRepeat => throw _privateConstructorUsedError;
+  int? get maxRepeat => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $StageCopyWith<Stage> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $StageCopyWith<$Res> {
+  factory $StageCopyWith(Stage value, $Res Function(Stage) then) =
+      _$StageCopyWithImpl<$Res, Stage>;
+  @useResult
+  $Res call(
+      {String? stageName,
+      String? stageVersion,
+      dynamic repeats,
+      int? minRepeat,
+      int? maxRepeat});
+}
+
+/// @nodoc
+class _$StageCopyWithImpl<$Res, $Val extends Stage>
+    implements $StageCopyWith<$Res> {
+  _$StageCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stageName = freezed,
+    Object? stageVersion = freezed,
+    Object? repeats = freezed,
+    Object? minRepeat = freezed,
+    Object? maxRepeat = freezed,
+  }) {
+    return _then(_value.copyWith(
+      stageName: freezed == stageName
+          ? _value.stageName
+          : stageName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stageVersion: freezed == stageVersion
+          ? _value.stageVersion
+          : stageVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repeats: freezed == repeats
+          ? _value.repeats
+          : repeats // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      minRepeat: freezed == minRepeat
+          ? _value.minRepeat
+          : minRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxRepeat: freezed == maxRepeat
+          ? _value.maxRepeat
+          : maxRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$StageImplCopyWith<$Res> implements $StageCopyWith<$Res> {
+  factory _$$StageImplCopyWith(
+          _$StageImpl value, $Res Function(_$StageImpl) then) =
+      __$$StageImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? stageName,
+      String? stageVersion,
+      dynamic repeats,
+      int? minRepeat,
+      int? maxRepeat});
+}
+
+/// @nodoc
+class __$$StageImplCopyWithImpl<$Res>
+    extends _$StageCopyWithImpl<$Res, _$StageImpl>
+    implements _$$StageImplCopyWith<$Res> {
+  __$$StageImplCopyWithImpl(
+      _$StageImpl _value, $Res Function(_$StageImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stageName = freezed,
+    Object? stageVersion = freezed,
+    Object? repeats = freezed,
+    Object? minRepeat = freezed,
+    Object? maxRepeat = freezed,
+  }) {
+    return _then(_$StageImpl(
+      stageName: freezed == stageName
+          ? _value.stageName
+          : stageName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stageVersion: freezed == stageVersion
+          ? _value.stageVersion
+          : stageVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      repeats: freezed == repeats ? _value.repeats! : repeats,
+      minRepeat: freezed == minRepeat
+          ? _value.minRepeat
+          : minRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxRepeat: freezed == maxRepeat
+          ? _value.maxRepeat
+          : maxRepeat // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$StageImpl implements _Stage {
+  const _$StageImpl(
+      {this.stageName,
+      this.stageVersion,
+      this.repeats = false,
+      this.minRepeat,
+      this.maxRepeat});
+
+  factory _$StageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StageImplFromJson(json);
+
+  @override
+  final String? stageName;
+  @override
+  final String? stageVersion;
+  @override
+  @JsonKey()
+  final dynamic repeats;
+  @override
+  final int? minRepeat;
+  @override
+  final int? maxRepeat;
+
+  @override
+  String toString() {
+    return 'Stage(stageName: $stageName, stageVersion: $stageVersion, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StageImpl &&
+            (identical(other.stageName, stageName) ||
+                other.stageName == stageName) &&
+            (identical(other.stageVersion, stageVersion) ||
+                other.stageVersion == stageVersion) &&
+            const DeepCollectionEquality().equals(other.repeats, repeats) &&
+            (identical(other.minRepeat, minRepeat) ||
+                other.minRepeat == minRepeat) &&
+            (identical(other.maxRepeat, maxRepeat) ||
+                other.maxRepeat == maxRepeat));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, stageName, stageVersion,
+      const DeepCollectionEquality().hash(repeats), minRepeat, maxRepeat);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StageImplCopyWith<_$StageImpl> get copyWith =>
+      __$$StageImplCopyWithImpl<_$StageImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$StageImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Stage implements Stage {
+  const factory _Stage(
+      {final String? stageName,
+      final String? stageVersion,
+      final dynamic repeats,
+      final int? minRepeat,
+      final int? maxRepeat}) = _$StageImpl;
+
+  factory _Stage.fromJson(Map<String, dynamic> json) = _$StageImpl.fromJson;
+
+  @override
+  String? get stageName;
+  @override
+  String? get stageVersion;
+  @override
+  dynamic get repeats;
+  @override
+  int? get minRepeat;
+  @override
+  int? get maxRepeat;
+  @override
+  @JsonKey(ignore: true)
+  _$$StageImplCopyWith<_$StageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

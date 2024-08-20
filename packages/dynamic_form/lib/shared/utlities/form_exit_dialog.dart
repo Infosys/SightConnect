@@ -20,26 +20,24 @@ class FormExitDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      title: Row(
-        children: [
-          const Text('Exit Form',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              )),
-          const Spacer(),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(Icons.close),
-          ),
-        ],
+      title: const Text(
+        'Unsaved Changes',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
       ),
       content: const Text(
-        'You have unsaved changes. Do you want to save your changes before exiting?',
+        'You have unsaved changes. Would you like to save them before exiting?',
       ),
       actions: [
+        ElevatedButton(
+          onPressed: () {
+            onSave();
+            Navigator.of(context).pop();
+          },
+          child: const Text('Save as Draft'),
+        ),
         TextButton(
           onPressed: () {
             Navigator.of(context)
@@ -47,13 +45,6 @@ class FormExitDialog extends StatelessWidget {
               ..pop();
           },
           child: const Text('Discard'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            onSave();
-            Navigator.of(context).pop();
-          },
-          child: const Text('Save as Draft'),
         ),
       ],
     );

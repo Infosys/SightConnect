@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/pages/eb_form_manage_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
@@ -57,7 +55,6 @@ class EbCaseTimeLinePage extends ConsumerWidget {
       ),
       body: ref.watch(ebCaseTimeLineProvider(_params)).when(
             data: (data) {
-              log('data: $data');
               final List<EBTimelineEntity> caseTimeLine = data;
               return DesktopClipper(
                 widget: CaseTimeLineWidget(

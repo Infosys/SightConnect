@@ -8,7 +8,7 @@ class EBSubmitFormDataRequestModel with _$EBSubmitFormDataRequestModel {
   const factory EBSubmitFormDataRequestModel({
     String? timelineName,
     String? timelineVersion,
-    FormData? formData,
+    dynamic formData,
     String? performerId,
     String? performerRole,
     String? verifiedById,
@@ -17,12 +17,4 @@ class EBSubmitFormDataRequestModel with _$EBSubmitFormDataRequestModel {
 
   factory EBSubmitFormDataRequestModel.fromJson(Map<String, dynamic> json) =>
       _$EBSubmitFormDataRequestModelFromJson(json);
-}
-
-@freezed
-class FormData with _$FormData {
-  const factory FormData() = _FormData;
-
-  factory FormData.fromJson(Map<String, dynamic> json) =>
-      _$FormDataFromJson(json);
 }

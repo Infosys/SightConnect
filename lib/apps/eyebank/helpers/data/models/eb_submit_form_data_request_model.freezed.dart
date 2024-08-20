@@ -23,7 +23,7 @@ EBSubmitFormDataRequestModel _$EBSubmitFormDataRequestModelFromJson(
 mixin _$EBSubmitFormDataRequestModel {
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
-  FormData? get formData => throw _privateConstructorUsedError;
+  dynamic get formData => throw _privateConstructorUsedError;
   String? get performerId => throw _privateConstructorUsedError;
   String? get performerRole => throw _privateConstructorUsedError;
   String? get verifiedById => throw _privateConstructorUsedError;
@@ -46,13 +46,11 @@ abstract class $EBSubmitFormDataRequestModelCopyWith<$Res> {
   $Res call(
       {String? timelineName,
       String? timelineVersion,
-      FormData? formData,
+      dynamic formData,
       String? performerId,
       String? performerRole,
       String? verifiedById,
       String? verifiedByRole});
-
-  $FormDataCopyWith<$Res>? get formData;
 }
 
 /// @nodoc
@@ -89,7 +87,7 @@ class _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
-              as FormData?,
+              as dynamic,
       performerId: freezed == performerId
           ? _value.performerId
           : performerId // ignore: cast_nullable_to_non_nullable
@@ -108,18 +106,6 @@ class _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
               as String?,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FormDataCopyWith<$Res>? get formData {
-    if (_value.formData == null) {
-      return null;
-    }
-
-    return $FormDataCopyWith<$Res>(_value.formData!, (value) {
-      return _then(_value.copyWith(formData: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -134,14 +120,11 @@ abstract class _$$EBSubmitFormDataRequestModelImplCopyWith<$Res>
   $Res call(
       {String? timelineName,
       String? timelineVersion,
-      FormData? formData,
+      dynamic formData,
       String? performerId,
       String? performerRole,
       String? verifiedById,
       String? verifiedByRole});
-
-  @override
-  $FormDataCopyWith<$Res>? get formData;
 }
 
 /// @nodoc
@@ -177,7 +160,7 @@ class __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
-              as FormData?,
+              as dynamic,
       performerId: freezed == performerId
           ? _value.performerId
           : performerId // ignore: cast_nullable_to_non_nullable
@@ -220,7 +203,7 @@ class _$EBSubmitFormDataRequestModelImpl
   @override
   final String? timelineVersion;
   @override
-  final FormData? formData;
+  final dynamic formData;
   @override
   final String? performerId;
   @override
@@ -244,8 +227,7 @@ class _$EBSubmitFormDataRequestModelImpl
                 other.timelineName == timelineName) &&
             (identical(other.timelineVersion, timelineVersion) ||
                 other.timelineVersion == timelineVersion) &&
-            (identical(other.formData, formData) ||
-                other.formData == formData) &&
+            const DeepCollectionEquality().equals(other.formData, formData) &&
             (identical(other.performerId, performerId) ||
                 other.performerId == performerId) &&
             (identical(other.performerRole, performerRole) ||
@@ -258,8 +240,15 @@ class _$EBSubmitFormDataRequestModelImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, timelineName, timelineVersion,
-      formData, performerId, performerRole, verifiedById, verifiedByRole);
+  int get hashCode => Object.hash(
+      runtimeType,
+      timelineName,
+      timelineVersion,
+      const DeepCollectionEquality().hash(formData),
+      performerId,
+      performerRole,
+      verifiedById,
+      verifiedByRole);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +271,7 @@ abstract class _EBSubmitFormDataRequestModel
   const factory _EBSubmitFormDataRequestModel(
       {final String? timelineName,
       final String? timelineVersion,
-      final FormData? formData,
+      final dynamic formData,
       final String? performerId,
       final String? performerRole,
       final String? verifiedById,
@@ -296,7 +285,7 @@ abstract class _EBSubmitFormDataRequestModel
   @override
   String? get timelineVersion;
   @override
-  FormData? get formData;
+  dynamic get formData;
   @override
   String? get performerId;
   @override
@@ -310,84 +299,4 @@ abstract class _EBSubmitFormDataRequestModel
   _$$EBSubmitFormDataRequestModelImplCopyWith<
           _$EBSubmitFormDataRequestModelImpl>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-FormData _$FormDataFromJson(Map<String, dynamic> json) {
-  return _FormData.fromJson(json);
-}
-
-/// @nodoc
-mixin _$FormData {
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FormDataCopyWith<$Res> {
-  factory $FormDataCopyWith(FormData value, $Res Function(FormData) then) =
-      _$FormDataCopyWithImpl<$Res, FormData>;
-}
-
-/// @nodoc
-class _$FormDataCopyWithImpl<$Res, $Val extends FormData>
-    implements $FormDataCopyWith<$Res> {
-  _$FormDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$FormDataImplCopyWith<$Res> {
-  factory _$$FormDataImplCopyWith(
-          _$FormDataImpl value, $Res Function(_$FormDataImpl) then) =
-      __$$FormDataImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FormDataImplCopyWithImpl<$Res>
-    extends _$FormDataCopyWithImpl<$Res, _$FormDataImpl>
-    implements _$$FormDataImplCopyWith<$Res> {
-  __$$FormDataImplCopyWithImpl(
-      _$FormDataImpl _value, $Res Function(_$FormDataImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$FormDataImpl implements _FormData {
-  const _$FormDataImpl();
-
-  factory _$FormDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FormDataImplFromJson(json);
-
-  @override
-  String toString() {
-    return 'FormData()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FormDataImpl);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FormDataImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _FormData implements FormData {
-  const factory _FormData() = _$FormDataImpl;
-
-  factory _FormData.fromJson(Map<String, dynamic> json) =
-      _$FormDataImpl.fromJson;
 }
