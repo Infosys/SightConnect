@@ -23,26 +23,26 @@ class AppStepper extends StatefulWidget {
 }
 
 class AppStepperState extends State<AppStepper> {
-  int currentStep = 0;
-  final List<bool> validationList = [];
+  int _currentStep = 0;
+  final List<bool> _validationList = [];
 
   void _nextStep() {
-    _validatePanel(currentStep);
-    if (currentStep < widget.pages.length - 1) {
-      setState(() => currentStep++);
+    _validatePanel(_currentStep);
+    if (_currentStep < widget.pages.length - 1) {
+      setState(() => _currentStep++);
     }
   }
 
   void _previousStep() {
-    if (currentStep > 0) {
-      setState(() => currentStep--);
+    if (_currentStep > 0) {
+      setState(() => _currentStep--);
     }
   }
 
-  void _onStepTapped(int index) => setState(() => currentStep = index);
+  void _onStepTapped(int index) => setState(() => _currentStep = index);
 
   void _handleSubmit() {
-    _validatePanel(currentStep);
+    _validatePanel(_currentStep);
     widget.onSubmit?.call();
   }
 
@@ -55,20 +55,20 @@ class AppStepperState extends State<AppStepper> {
         Log.d(
             'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}, ,currentIndex: $pageIndex');
         if (field.isRequired && fieldValue == null) {
-          updateValidation(pageIndex, false);
+          _updateValidation(pageIndex, false);
           return;
         }
       }
     }
-    updateValidation(pageIndex, true);
+    _updateValidation(pageIndex, true);
   }
 
-  void updateValidation(int index, bool value) {
+  void _updateValidation(int index, bool value) {
     setState(() {
-      if (index < validationList.length) {
-        validationList[index] = value;
+      if (index < _validationList.length) {
+        _validationList[index] = value;
       } else {
-        validationList.add(value);
+        _validationList.add(value);
       }
     });
   }
@@ -84,10 +84,10 @@ class AppStepperState extends State<AppStepper> {
           child: _StepLayout(
             axis: widget.axis,
             stepNames: widget.pages.map((e) => e.name).toList(),
-            validationList: validationList,
+            validationList: _validationList,
             pages: widget.pages,
             formKey: widget.formKey,
-            currentStep: currentStep,
+            currentStep: _currentStep,
             onStepTapped: _onStepTapped,
           ),
         ),
@@ -101,17 +101,17 @@ class AppStepperState extends State<AppStepper> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      if (currentStep > 0)
+                      if (_currentStep > 0)
                         OutlinedButton(
                           onPressed: _previousStep,
                           child: const Text('BACK'),
                         ),
-                      if (currentStep < widget.pages.length - 1)
+                      if (_currentStep < widget.pages.length - 1)
                         ElevatedButton(
                           onPressed: _nextStep,
                           child: const Text('NEXT'),
                         ),
-                      if (currentStep == widget.pages.length - 1)
+                      if (_currentStep == widget.pages.length - 1)
                         ElevatedButton(
                           onPressed: _handleSubmit,
                           child: const Text('SUBMIT'),
