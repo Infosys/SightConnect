@@ -20,7 +20,7 @@ EncounterBriefModel _$EncounterBriefModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EncounterBriefModel {
-  int? get encounterId => throw _privateConstructorUsedError;
+  String? get encounterId => throw _privateConstructorUsedError;
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
   String? get encounterStatus => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $EncounterBriefModelCopyWith<$Res> {
       _$EncounterBriefModelCopyWithImpl<$Res, EncounterBriefModel>;
   @useResult
   $Res call(
-      {int? encounterId,
+      {String? encounterId,
       String? timelineName,
       String? timelineVersion,
       String? encounterStatus,
@@ -90,7 +90,7 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ abstract class _$$EncounterBriefModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? encounterId,
+      {String? encounterId,
       String? timelineName,
       String? timelineVersion,
       String? encounterStatus,
@@ -213,7 +213,7 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -279,7 +279,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
       _$$EncounterBriefModelImplFromJson(json);
 
   @override
-  final int? encounterId;
+  final String? encounterId;
   @override
   final String? timelineName;
   @override
@@ -376,7 +376,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
 
 abstract class _EncounterBriefModel implements EncounterBriefModel {
   const factory _EncounterBriefModel(
-      {final int? encounterId,
+      {final String? encounterId,
       final String? timelineName,
       final String? timelineVersion,
       final String? encounterStatus,
@@ -392,7 +392,7 @@ abstract class _EncounterBriefModel implements EncounterBriefModel {
       _$EncounterBriefModelImpl.fromJson;
 
   @override
-  int? get encounterId;
+  String? get encounterId;
   @override
   String? get timelineName;
   @override

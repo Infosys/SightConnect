@@ -9,7 +9,7 @@ part of 'encounter_brief_model.dart';
 _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EncounterBriefModelImpl(
-      encounterId: (json['encounterId'] as num?)?.toInt(),
+      encounterId: json['encounterId'] as String?,
       timelineName: json['timelineName'] as String?,
       timelineVersion: json['timelineVersion'] as String?,
       encounterStatus: json['encounterStatus'] as String?,

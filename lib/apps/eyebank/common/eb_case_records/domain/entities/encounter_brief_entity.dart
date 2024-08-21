@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 
 class EncounterBriefEntity {
-  final int? encounterId;
+  final String? encounterId;
   final String? timelineName;
   final String? timelineVersion;
   final EBStageName? encounterStatus;

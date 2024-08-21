@@ -37,7 +37,7 @@ final ebSearchRecordProvider =
     final List<EncounterBriefEntity> fakeData = List.generate(
       10,
       (index) => EncounterBriefEntity(
-        encounterId: index + 1,
+        encounterId: (index + 1).toString(),
         encounterStatus: EBStageName.DONOR_SCREENING,
         donorBrief: DonorBriefEntity(
           id: 0,

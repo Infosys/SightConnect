@@ -6,7 +6,7 @@ part 'encounter_brief_model.g.dart';
 @freezed
 class EncounterBriefModel with _$EncounterBriefModel {
   const factory EncounterBriefModel({
-    int? encounterId,
+    String? encounterId,
     String? timelineName,
     String? timelineVersion,
     String? encounterStatus,
