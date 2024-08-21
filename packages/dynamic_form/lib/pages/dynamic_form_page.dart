@@ -10,7 +10,7 @@ import 'package:dynamic_form/shared/widgets/form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
 import 'package:flutter/material.dart';
 
-class DynamicFormPage extends StatelessWidget {
+class DynamicFormPage extends StatefulWidget {
   const DynamicFormPage({
     super.key,
     this.onSubmit,
@@ -19,19 +19,32 @@ class DynamicFormPage extends StatelessWidget {
     this.canPop = false,
     required this.json,
   });
+
   final Function(Map<String, dynamic>? data, DynamicFormSavingType mode)?
       onSubmit;
-
   final bool enableDraft;
   final dynamic json;
   final IconData backButtonIcon;
   final bool canPop;
 
+  @override
+  _DynamicFormPageState createState() => _DynamicFormPageState();
+}
+
+class _DynamicFormPageState extends State<DynamicFormPage> {
+  late Future<ResponseJsonEntity>? _futureJson;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureJson = _loadJson();
+  }
+
   Future<ResponseJsonEntity>? _loadJson() async {
     try {
-      Log.f(json);
+      Log.f(widget.json);
       return DynamicFormJsonMapper()
-          .modeltoEntity(ResponseJsonModel.fromJson(json));
+          .modeltoEntity(ResponseJsonModel.fromJson(widget.json));
     } catch (e) {
       log('DF:Error Converting json: $e');
       rethrow;
@@ -41,7 +54,7 @@ class DynamicFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _loadJson(),
+      future: _futureJson,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final pages = snapshot.data?.pages ?? [];
@@ -51,11 +64,11 @@ class DynamicFormPage extends StatelessWidget {
           return FormBuilderPage(
             pages: pages,
             title: title,
-            onSubmit: onSubmit,
+            onSubmit: widget.onSubmit,
             layoutType: formLayout,
-            backButtonIcon: backButtonIcon,
-            enableDraft: enableDraft,
-            canPop: canPop,
+            backButtonIcon: widget.backButtonIcon,
+            enableDraft: widget.enableDraft,
+            canPop: widget.canPop,
           );
         } else if (snapshot.hasError) {
           return FormErrorWidget(

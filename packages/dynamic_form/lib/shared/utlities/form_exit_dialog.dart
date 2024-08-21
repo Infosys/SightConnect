@@ -18,7 +18,7 @@ class FormExitDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8),
       ),
       title: const Text(
         'Unsaved Changes',
@@ -31,7 +31,7 @@ class FormExitDialog extends StatelessWidget {
         'You have unsaved changes. Would you like to save them before exiting?',
       ),
       actions: [
-        ElevatedButton(
+        TextButton(
           onPressed: () {
             onSave();
             Navigator.of(context).pop();

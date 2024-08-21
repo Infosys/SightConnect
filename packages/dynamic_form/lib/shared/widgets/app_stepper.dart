@@ -120,12 +120,13 @@ class AppStepperState extends State<AppStepper> {
           ),
         ),
         SliverPadding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: EdgeInsets.zero,
           sliver: SliverList(
             delegate: SliverChildListDelegate(
               [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -186,6 +187,7 @@ class _StepLayout extends StatelessWidget {
     return Column(
       children: [
         SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -193,10 +195,25 @@ class _StepLayout extends StatelessWidget {
             children: _buildStepWidgets(context),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _buildStepIndicators(context),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Total Pages: ${currentStep + 1}/${pages.length}',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: _buildStepIndicators(context),
+        // ),
         if (currentStep < pages.length)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -227,16 +244,16 @@ class _StepLayout extends StatelessWidget {
 
   Widget _buildStepWidget(BuildContext context, int index) {
     return Container(
-      width: 80,
-      margin: const EdgeInsets.all(4),
+      width: 70,
+      // color: Colors.yellow,
+      margin: const EdgeInsets.all(2),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8.0),
-            width: 24,
-            height: 24,
+            width: 22,
+            height: 22,
             decoration: BoxDecoration(
               shape: axis == Axis.horizontal
                   ? BoxShape.circle
@@ -251,6 +268,7 @@ class _StepLayout extends StatelessWidget {
               child: Text(
                 '${index + 1}',
                 style: TextStyle(
+                  fontSize: 12,
                   color: _getTextColor(context, index),
                 ),
               ),
@@ -264,6 +282,7 @@ class _StepLayout extends StatelessWidget {
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
+                fontSize: 12,
                 color: currentStep == index
                     ? Theme.of(context).primaryColor
                     : Colors.grey,
