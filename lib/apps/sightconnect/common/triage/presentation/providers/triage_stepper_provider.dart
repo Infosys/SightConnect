@@ -12,7 +12,7 @@ var triageStepperProvider = ChangeNotifierProvider(
 );
 
 class TriageStepperProvider extends ChangeNotifier {
-  int _maxSteps = 3;
+  int _maxSteps = 4;
   int _currentStep = 0;
   final GetTriageCurrentStepUseCase _useCase;
   TriageStepperProvider(this._useCase) {
@@ -28,7 +28,7 @@ class TriageStepperProvider extends ChangeNotifier {
     if (role! == Role.ROLE_OPTOMETRIST) {
       _maxSteps = 4;
     } else {
-      _maxSteps = 3;
+      _maxSteps = 4;
     }
     notifyListeners();
   }
