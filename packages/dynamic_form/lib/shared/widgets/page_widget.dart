@@ -37,6 +37,8 @@ class PageWidget extends StatelessWidget {
             name: name,
             panel: panel,
             globalFormKey: formKey,
+            minRepeat: panel.minRepeat ?? 1,
+            maxRepeat: panel.maxRepeat ?? panel.minRepeat ?? 1,
           );
         } else {
           return AppCard(

@@ -9,11 +9,16 @@ class AppDynamicPanel extends StatefulWidget {
   final PageElementEntity panel;
   final GlobalKey<FormBuilderState> globalFormKey;
   final String name;
+  final int minRepeat;
+  final int maxRepeat;
+
   const AppDynamicPanel({
     super.key,
     required this.panel,
     required this.globalFormKey,
     required this.name,
+    required this.minRepeat,
+    required this.maxRepeat,
   });
 
   @override
@@ -27,10 +32,22 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
   @override
   void initState() {
     super.initState();
-    addPanel();
+    // Ensure the minimum number of panels is shown by default
+    for (int i = 0; i < widget.minRepeat; i++) {
+      repeatedPanelKeys.add(getUniqueKey());
+    }
   }
 
   void addPanel() {
+    if (repeatedPanelKeys.length >= widget.maxRepeat) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Maximum limit reached'),
+        ),
+      );
+      return;
+    }
+
     setState(() {
       repeatedPanelKeys.add(getUniqueKey());
     });
@@ -86,16 +103,17 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
                         .toList(),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton.icon(
-                      onPressed: addPanel,
-                      icon: const Icon(Icons.add),
-                      label: const Text('Add'),
-                    ),
-                  ],
-                ),
+                if (repeatedPanelKeys.length < widget.maxRepeat)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton.icon(
+                        onPressed: addPanel,
+                        icon: const Icon(Icons.add),
+                        label: const Text('Add'),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -112,16 +130,17 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
         Expanded(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton.icon(
-                    onPressed: () => removePanel(key),
-                    icon: const Icon(Icons.remove),
-                    label: const Text('Remove'),
-                  ),
-                ],
-              ),
+              if (repeatedPanelKeys.length > widget.minRepeat)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () => removePanel(key),
+                      icon: const Icon(Icons.remove),
+                      label: const Text('Remove'),
+                    ),
+                  ],
+                ),
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
