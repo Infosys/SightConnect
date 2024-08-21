@@ -72,26 +72,31 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
       builder: (field) {
         return FormBuilder(
           key: formKey,
-          child: AppCard(
-            marginBottom: 16,
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                AppCard(
+                  child: Column(
                     children: repeatedPanelKeys
                         .map((key) => _buildRepeatedPanel(key))
                         .toList(),
                   ),
-                  IconButton(
-                    onPressed: addPanel,
-                    icon: const Icon(Icons.add),
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton.icon(
+                      onPressed: addPanel,
+                      icon: const Icon(Icons.add),
+                      label: const Text('Add'),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
@@ -107,22 +112,45 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
         Expanded(
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton.icon(
+                    onPressed: () => removePanel(key),
+                    icon: const Icon(Icons.remove),
+                    label: const Text('Remove'),
+                  ),
+                ],
+              ),
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
                 children: _buildFields(widget.panel.elements, formKey, key),
               ),
-              const SizedBox(height: 16),
-              const Divider(),
-              const SizedBox(height: 16),
+              const Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Divider(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        'End of Panel',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Divider(),
+                    ),
+                  ],
+                ),
+              ),
             ],
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(bottom: 32),
-          child: IconButton(
-            onPressed: () => removePanel(key),
-            icon: const Icon(Icons.delete),
           ),
         ),
       ],

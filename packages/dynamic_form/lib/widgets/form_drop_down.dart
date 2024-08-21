@@ -20,7 +20,10 @@ class FormDropDown extends StatelessWidget {
     final List<DropdownMenuItem<String>> options = field.choices!
         .map((element) => DropdownMenuItem<String>(
               value: element.name,
-              child: Text(element.title),
+              child: Text(
+                element.title,
+                maxLines: 1,
+              ),
             ))
         .toList();
 
