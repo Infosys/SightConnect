@@ -224,7 +224,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                           const SizedBox(
                             height: AppSize.kl * 3.5,
                           ),
-                          if (role == "ROLE_OPTOMETRIST")
+                          if (role == "ROLE_OPTOMETRIST" || role == "ROLE_PATIENT")
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               mainAxisAlignment: MainAxisAlignment.start,

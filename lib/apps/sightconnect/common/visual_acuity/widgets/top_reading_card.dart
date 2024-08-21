@@ -145,7 +145,7 @@ class TopReadingCard extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: AppSize.ks),
-                        Text(
+                       if(!isShortDistance) Text(
                           loc.topReadingCardLongDistanceTestMessage,
                           style: applyRobotoFont(
                             fontSize: 16,
