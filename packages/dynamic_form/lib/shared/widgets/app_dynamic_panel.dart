@@ -146,29 +146,8 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
                 alignment: WrapAlignment.start,
                 children: _buildFields(widget.panel.elements, formKey, key),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        'End of Panel',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(),
-                    ),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 16),
+              const Divider(),
             ],
           ),
         ),

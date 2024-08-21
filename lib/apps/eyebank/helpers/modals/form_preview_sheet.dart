@@ -11,7 +11,7 @@ showCustomWoltSheet(BuildContext context, Widget child) {
       context: context,
       pageListBuilder: (modalSheetContext) {
         return [
-          WoltModalSheetPage(
+          NonScrollingWoltModalSheetPage(
             useSafeArea: false,
             navBarHeight: kIsWeb ? null : 1,
             child: SizedBox(
