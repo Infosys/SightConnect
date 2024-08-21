@@ -11,7 +11,7 @@ class EncounterBriefEntity {
   final DateTime? deathDate;
   final BodyLocationEntity? bodyLocation;
   final List<String>? organExtracted;
-  final DateTime? lastModifiedDate;
+  final Map<String, dynamic>? metaData;
 
   EncounterBriefEntity({
     this.encounterId,
@@ -24,7 +24,7 @@ class EncounterBriefEntity {
     this.deathDate,
     this.bodyLocation,
     this.organExtracted,
-    this.lastModifiedDate,
+    this.metaData,
   });
 }
 

@@ -29,9 +29,7 @@ _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
       organExtracted: (json['organExtracted'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      lastModifiedDate: json['lastModifiedDate'] == null
-          ? null
-          : DateTime.parse(json['lastModifiedDate'] as String),
+      metaData: json['metaData'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$EncounterBriefModelImplToJson(
@@ -47,7 +45,7 @@ Map<String, dynamic> _$$EncounterBriefModelImplToJson(
       'deathDate': instance.deathDate?.toIso8601String(),
       'bodyLocation': instance.bodyLocation?.toJson(),
       'organExtracted': instance.organExtracted,
-      'lastModifiedDate': instance.lastModifiedDate?.toIso8601String(),
+      'metaData': instance.metaData,
     };
 
 _$BodyLocationImpl _$$BodyLocationImplFromJson(Map<String, dynamic> json) =>

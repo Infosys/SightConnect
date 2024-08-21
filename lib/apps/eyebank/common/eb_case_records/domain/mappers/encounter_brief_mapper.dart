@@ -39,7 +39,7 @@ class EncounterBriefMapper {
             )
           : null,
       organExtracted: model.organExtracted,
-      lastModifiedDate: model.lastModifiedDate,
+      metaData: model.metaData,
     );
   }
 

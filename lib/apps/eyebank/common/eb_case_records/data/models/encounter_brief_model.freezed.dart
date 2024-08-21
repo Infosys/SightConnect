@@ -30,7 +30,7 @@ mixin _$EncounterBriefModel {
   DateTime? get deathDate => throw _privateConstructorUsedError;
   BodyLocation? get bodyLocation => throw _privateConstructorUsedError;
   List<String>? get organExtracted => throw _privateConstructorUsedError;
-  DateTime? get lastModifiedDate => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get metaData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +55,7 @@ abstract class $EncounterBriefModelCopyWith<$Res> {
       DateTime? deathDate,
       BodyLocation? bodyLocation,
       List<String>? organExtracted,
-      DateTime? lastModifiedDate});
+      Map<String, dynamic>? metaData});
 
   $DonorBriefCopyWith<$Res>? get donorBrief;
   $BodyLocationCopyWith<$Res>? get bodyLocation;
@@ -84,7 +84,7 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
     Object? deathDate = freezed,
     Object? bodyLocation = freezed,
     Object? organExtracted = freezed,
-    Object? lastModifiedDate = freezed,
+    Object? metaData = freezed,
   }) {
     return _then(_value.copyWith(
       encounterId: freezed == encounterId
@@ -127,10 +127,10 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
           ? _value.organExtracted
           : organExtracted // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      lastModifiedDate: freezed == lastModifiedDate
-          ? _value.lastModifiedDate
-          : lastModifiedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      metaData: freezed == metaData
+          ? _value.metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -178,7 +178,7 @@ abstract class _$$EncounterBriefModelImplCopyWith<$Res>
       DateTime? deathDate,
       BodyLocation? bodyLocation,
       List<String>? organExtracted,
-      DateTime? lastModifiedDate});
+      Map<String, dynamic>? metaData});
 
   @override
   $DonorBriefCopyWith<$Res>? get donorBrief;
@@ -207,7 +207,7 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
     Object? deathDate = freezed,
     Object? bodyLocation = freezed,
     Object? organExtracted = freezed,
-    Object? lastModifiedDate = freezed,
+    Object? metaData = freezed,
   }) {
     return _then(_$EncounterBriefModelImpl(
       encounterId: freezed == encounterId
@@ -250,10 +250,10 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
           ? _value._organExtracted
           : organExtracted // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      lastModifiedDate: freezed == lastModifiedDate
-          ? _value.lastModifiedDate
-          : lastModifiedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      metaData: freezed == metaData
+          ? _value._metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -272,8 +272,9 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
       this.deathDate,
       this.bodyLocation,
       final List<String>? organExtracted,
-      this.lastModifiedDate})
-      : _organExtracted = organExtracted;
+      final Map<String, dynamic>? metaData})
+      : _organExtracted = organExtracted,
+        _metaData = metaData;
 
   factory _$EncounterBriefModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$EncounterBriefModelImplFromJson(json);
@@ -306,12 +307,19 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final Map<String, dynamic>? _metaData;
   @override
-  final DateTime? lastModifiedDate;
+  Map<String, dynamic>? get metaData {
+    final value = _metaData;
+    if (value == null) return null;
+    if (_metaData is EqualUnmodifiableMapView) return _metaData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'EncounterBriefModel(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, lastModifiedDate: $lastModifiedDate)';
+    return 'EncounterBriefModel(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
   }
 
   @override
@@ -339,8 +347,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
                 other.bodyLocation == bodyLocation) &&
             const DeepCollectionEquality()
                 .equals(other._organExtracted, _organExtracted) &&
-            (identical(other.lastModifiedDate, lastModifiedDate) ||
-                other.lastModifiedDate == lastModifiedDate));
+            const DeepCollectionEquality().equals(other._metaData, _metaData));
   }
 
   @JsonKey(ignore: true)
@@ -357,7 +364,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
       deathDate,
       bodyLocation,
       const DeepCollectionEquality().hash(_organExtracted),
-      lastModifiedDate);
+      const DeepCollectionEquality().hash(_metaData));
 
   @JsonKey(ignore: true)
   @override
@@ -386,7 +393,7 @@ abstract class _EncounterBriefModel implements EncounterBriefModel {
       final DateTime? deathDate,
       final BodyLocation? bodyLocation,
       final List<String>? organExtracted,
-      final DateTime? lastModifiedDate}) = _$EncounterBriefModelImpl;
+      final Map<String, dynamic>? metaData}) = _$EncounterBriefModelImpl;
 
   factory _EncounterBriefModel.fromJson(Map<String, dynamic> json) =
       _$EncounterBriefModelImpl.fromJson;
@@ -412,7 +419,7 @@ abstract class _EncounterBriefModel implements EncounterBriefModel {
   @override
   List<String>? get organExtracted;
   @override
-  DateTime? get lastModifiedDate;
+  Map<String, dynamic>? get metaData;
   @override
   @JsonKey(ignore: true)
   _$$EncounterBriefModelImplCopyWith<_$EncounterBriefModelImpl> get copyWith =>

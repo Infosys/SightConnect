@@ -16,7 +16,7 @@ class EncounterBriefModel with _$EncounterBriefModel {
     DateTime? deathDate,
     BodyLocation? bodyLocation,
     List<String>? organExtracted,
-    DateTime? lastModifiedDate,
+    Map<String, dynamic>? metaData,
   }) = _EncounterBriefModel;
 
   factory EncounterBriefModel.fromJson(Map<String, dynamic> json) =>
