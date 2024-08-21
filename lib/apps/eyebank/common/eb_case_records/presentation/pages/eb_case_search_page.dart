@@ -13,63 +13,126 @@ class EBCaseSearchPage extends StatefulWidget {
 
 class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
   String query = '';
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    // Request focus when the page is initialized
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _focusNode.requestFocus();
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('EB Case Search'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Search',
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (value) {
-                setState(() {
-                  query = value.trim();
-                });
-              },
-            ),
-            const SizedBox(height: 26),
-            Expanded(
-              child: Consumer(
-                builder: (context, ref, child) {
-                  if (query.isEmpty) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: _buildAppBar(
+          onSubmitted: (value) {
+            setState(() {
+              query = value;
+            });
+          },
+        ),
+        body: GestureDetector(
+          onTap: () {
+            _focusNode.unfocus();
+          },
+          child: Consumer(
+            builder: (context, ref, child) {
+              if (query.isEmpty) {
+                return const Center(
+                  child: Text('Enter a search query to see results'),
+                );
+              }
+
+              final searchResults = ref.watch(ebSearchRecordProvider(query));
+              return searchResults.when(
+                data: (results) {
+                  if (results.isEmpty) {
                     return const Center(
-                      child: Text('Enter a search query to see results'),
+                      child: Text('No results found'),
                     );
                   }
-
-                  final searchResults =
-                      ref.watch(ebSearchRecordProvider(query));
-
-                  return searchResults.when(
-                    data: (results) {
-                      return ListView.builder(
-                        itemCount: results.length,
-                        itemBuilder: (context, index) {
-                          return EBCaseCard(
-                            item: results[index],
-                          );
-                        },
+                  return ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    itemCount: results.length,
+                    itemBuilder: (context, index) {
+                      return EBCaseCard(
+                        item: results[index],
                       );
-                    },
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    error: (error, stack) {
-                      logger.f('Error: $error'); // Debug print
-                      return Center(child: Text('Error: $error'));
                     },
                   );
                 },
-              ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (error, stack) {
+                  logger.d('Error: $error');
+                  return Center(child: Text('Error: $error'));
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildAppBar({
+    required Function(String) onSubmitted,
+  }) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      title: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: TextField(
+          focusNode: _focusNode,
+          decoration: InputDecoration(
+            hintText: 'Search for a case record',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide.none,
             ),
-          ],
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide.none,
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide.none,
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide.none,
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+          ),
+          onSubmitted: (value) {
+            onSubmitted(value.trim());
+          },
         ),
       ),
     );

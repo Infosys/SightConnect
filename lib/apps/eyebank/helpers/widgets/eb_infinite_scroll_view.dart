@@ -100,13 +100,19 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                       ? InkWell(
                           onTap: widget.onSearchTap,
                           child: Container(
-                            height: 40,
+                            height: 45,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
                               children: [
+                                const SizedBox(width: 12),
+                                const Icon(
+                                  Icons.search,
+                                  color: AppColor.grey,
+                                  size: 16,
+                                ),
                                 const SizedBox(width: 12),
                                 Text(
                                   'Search',
@@ -115,12 +121,6 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                                     color: AppColor.grey,
                                   ),
                                 ),
-                                const Spacer(),
-                                const Icon(
-                                  Icons.search,
-                                  size: 16,
-                                ),
-                                const SizedBox(width: 8),
                               ],
                             ),
                           ),

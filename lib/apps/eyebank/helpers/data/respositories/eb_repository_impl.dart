@@ -138,7 +138,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       String stageVersion,
       EBSubmitFormDataRequestModel requestData) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/encounters/$stageName';
+      final endPoint = '/services/eyebank/api/encounters/$stageName';
       final response = await _dio.post(
         endPoint,
         queryParameters: {
