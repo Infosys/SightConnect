@@ -77,11 +77,17 @@ class PageElementModel {
   String? type;
   dynamic name;
   List<ElementElementClassModel>? elements;
+  bool? repeats;
+  int? minRepeat;
+  int? maxRepeat;
 
   PageElementModel({
     this.type,
     this.name,
     this.elements,
+    this.repeats,
+    this.minRepeat,
+    this.maxRepeat,
   });
 
   factory PageElementModel.fromJson(Map<String, dynamic> json) =>
@@ -92,6 +98,9 @@ class PageElementModel {
             ? []
             : List<ElementElementClassModel>.from(json["elements"]!
                 .map((x) => ElementElementClassModel.fromJson(x))),
+        repeats: json["repeats"],
+        minRepeat: json["minRepeat"],
+        maxRepeat: json["maxRepeat"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -100,6 +109,9 @@ class PageElementModel {
         "elements": elements == null
             ? []
             : List<dynamic>.from(elements!.map((x) => x.toJson())),
+        "repeats": repeats,
+        "minRepeat": minRepeat,
+        "maxRepeat": maxRepeat,
       };
 }
 
