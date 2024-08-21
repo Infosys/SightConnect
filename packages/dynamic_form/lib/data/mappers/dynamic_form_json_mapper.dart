@@ -49,9 +49,12 @@ class DynamicFormJsonMapper {
     if (elements != null) {
       for (final element in elements) {
         pageElementEntities.add(PageElementEntity(
-          type: _getPanelType(element.type),
+          type: _getPanelType(element.repeats),
           name: element.name.toString(),
           elements: _getElements(element.elements),
+          repeats: element.repeats ?? false,
+          maxRepeat: element.maxRepeat,
+          minRepeat: element.minRepeat,
         ));
       }
     }
@@ -181,13 +184,10 @@ FormLayoutType _mapToFormLayoutType(String? value) {
   }
 }
 
-FormPanelType _getPanelType(String? value) {
-  switch (value) {
-    case 'panel':
-      return FormPanelType.PANEL;
-    case 'repeated-panel':
-      return FormPanelType.REPEATED_PANEL;
-    default:
-      return FormPanelType.PANEL;
+FormPanelType _getPanelType(bool? repeats) {
+  if (repeats == true) {
+    return FormPanelType.REPEATED_PANEL;
+  } else {
+    return FormPanelType.PANEL;
   }
 }
