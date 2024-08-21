@@ -17,6 +17,7 @@ class DynamicFormPage extends StatefulWidget {
     this.backButtonIcon = Icons.arrow_back,
     this.enableDraft = false,
     this.canPop = false,
+    this.initialValue,
     required this.json,
   });
 
@@ -24,6 +25,7 @@ class DynamicFormPage extends StatefulWidget {
       onSubmit;
   final bool enableDraft;
   final dynamic json;
+  final dynamic initialValue;
   final IconData backButtonIcon;
   final bool canPop;
 
@@ -43,8 +45,10 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
   Future<ResponseJsonEntity>? _loadJson() async {
     try {
       Log.f(widget.json);
-      return DynamicFormJsonMapper()
-          .modeltoEntity(ResponseJsonModel.fromJson(widget.json));
+      return DynamicFormJsonMapper().modeltoEntity(
+        dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
+        initialValues: widget.initialValue,
+      );
     } catch (e) {
       log('DF:Error Converting json: $e');
       rethrow;

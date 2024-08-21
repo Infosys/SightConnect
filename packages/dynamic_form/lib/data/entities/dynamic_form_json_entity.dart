@@ -129,6 +129,7 @@ class ElementElementClassEntity {
   final int? minRepeat;
   final int? maxRepeat;
   final String? inputType;
+  final String? initialValue;
 
   ElementElementClassEntity({
     required this.type,
@@ -146,6 +147,7 @@ class ElementElementClassEntity {
     required this.max,
     required this.step,
     required this.repeats,
+    this.initialValue,
     this.conditions,
     this.dependantField,
     this.elements,

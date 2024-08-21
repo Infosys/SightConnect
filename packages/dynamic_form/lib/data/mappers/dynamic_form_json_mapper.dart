@@ -8,8 +8,14 @@ class DynamicFormJsonMapper {
     return ResponseJsonModel();
   }
 
-  ResponseJsonEntity modeltoEntity(ResponseJsonModel dynamicFormModel) {
+  Map<String, dynamic>? initialValues;
+
+  ResponseJsonEntity modeltoEntity({
+    required ResponseJsonModel dynamicFormModel,
+    required Map<String, dynamic>? initialValues,
+  }) {
     try {
+      this.initialValues = initialValues;
       return ResponseJsonEntity(
         name: _formatTitle(dynamicFormModel.name),
         version: dynamicFormModel.version ?? '',
@@ -37,7 +43,9 @@ class DynamicFormJsonMapper {
         pageEntities.add(PageEntity(
           name: page.name.toString(),
           title: page.title ?? '',
-          elements: _getPageElements(page.elements),
+          elements: _getPageElements(
+            page.elements,
+          ),
         ));
       }
     }
@@ -51,7 +59,9 @@ class DynamicFormJsonMapper {
         pageElementEntities.add(PageElementEntity(
           type: _getPanelType(element.repeats),
           name: element.name.toString(),
-          elements: _getElements(element.elements),
+          elements: _getElements(
+            element.elements,
+          ),
           repeats: element.repeats ?? false,
           maxRepeat: element.maxRepeat,
           minRepeat: element.minRepeat,
@@ -62,12 +72,14 @@ class DynamicFormJsonMapper {
   }
 
   List<ElementElementClassEntity> _getElements(
-      List<ElementElementClassModel>? elements) {
+    List<ElementElementClassModel>? elements,
+  ) {
     final List<ElementElementClassEntity> elementEntities = [];
     if (elements != null) {
       for (final element in elements) {
         elementEntities.add(
           ElementElementClassEntity(
+            initialValue: initialValues?[element.name.toString()],
             type: _mapToFormType(element.type),
             name: element.name.toString(),
             title: element.title ?? '',

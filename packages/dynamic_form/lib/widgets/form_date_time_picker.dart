@@ -18,6 +18,7 @@ class FormDateTimePicker extends HookWidget {
   Widget build(BuildContext context) {
     return FormBuilderDateTimePicker(
       initialEntryMode: DatePickerEntryMode.calendar,
+      initialValue: DateTime.tryParse(field.initialValue ?? ''),
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       format: DateFormat.d().add_MMM().add_y().add_jm(),
