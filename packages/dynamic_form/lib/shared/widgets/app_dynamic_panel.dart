@@ -1,5 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +29,41 @@ class AppDynamicPanel extends StatefulWidget {
 class _AppDynamicPanelState extends State<AppDynamicPanel> {
   final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
+  Map<String, dynamic> formatedInitialValue = {};
 
   @override
   void initState() {
     super.initState();
-    // Ensure the minimum number of panels is shown by default
-    for (int i = 0; i < widget.minRepeat; i++) {
-      repeatedPanelKeys.add(getUniqueKey());
+    if (widget.panel.initialValue != null) {
+      _createdPrefilledPanels();
+    } else {
+      for (int i = 0; i < widget.minRepeat; i++) {
+        repeatedPanelKeys.add(getUniqueKey());
+      }
     }
+  }
+
+  _createdPrefilledPanels() {
+    List<dynamic> prefilledPanels = widget.panel.initialValue ?? [];
+    for (int i = 0; i < prefilledPanels.length; i++) {
+      var key = getUniqueKey();
+      Log.f(key);
+      repeatedPanelKeys.add(key);
+    }
+    formatedInitialValue = _formatInitialValue(prefilledPanels);
+    Log.f(formatedInitialValue);
+  }
+
+  Map<String, dynamic> _formatInitialValue(List<dynamic> prefilledPanels) {
+    Map<String, dynamic> formattedValue = {};
+    for (int i = 0; i < prefilledPanels.length; i++) {
+      Map<String, dynamic> temp = prefilledPanels[i];
+      for (var element in temp.entries) {
+        formattedValue['${element.key}_${repeatedPanelKeys[i]}'] =
+            element.value;
+      }
+    }
+    return formattedValue;
   }
 
   void addPanel() {
@@ -187,6 +215,10 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
       field = field.copyWith(
         name: '${field.name}_$keyExtension',
       );
+      field = field.copyWith(
+        initialValue: formatedInitialValue[field.name],
+      );
+
       return AppResponsiveWidget(
         widget: getField(field, key),
       );

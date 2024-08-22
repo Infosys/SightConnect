@@ -16,11 +16,22 @@ class FormDateTimePicker extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    getInitialValue() {
+      try {
+        var initialValue = field.initialValue;
+        if (initialValue != null) {
+          return DateTime.parse(initialValue);
+        }
+        return null;
+      } catch (e) {
+        return null;
+      }
+    }
 
     return FormBuilderDateTimePicker(
       initialEntryMode: DatePickerEntryMode.calendar,
-      initialValue: DateTime.tryParse(field.initialValue ?? ''),
       autofocus: false,
+      initialValue: getInitialValue(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       format: DateFormat.d().add_MMM().add_y().add_jm(),
       decoration: InputDecoration(
