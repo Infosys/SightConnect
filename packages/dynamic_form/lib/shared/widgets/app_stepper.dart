@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
-import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -24,327 +25,92 @@ class AppStepper extends StatefulWidget {
 
 class AppStepperState extends State<AppStepper> {
   int _currentStep = 0;
-  final List<bool> _validationList = [];
 
   void _nextStep() {
-    _validatePanel(_currentStep);
     if (_currentStep < widget.pages.length - 1) {
-      setState(() => _currentStep++);
+      setState(() {
+        _currentStep++;
+      });
     }
   }
 
   void _previousStep() {
     if (_currentStep > 0) {
-      setState(() => _currentStep--);
+      setState(() {
+        _currentStep--;
+      });
     }
   }
 
-  void _onStepTapped(int index) => setState(() => _currentStep = index);
+  void _onStepTapped(int index) {
+    setState(() {
+      _currentStep = index;
+    });
+  }
 
   void _handleSubmit() {
-    _validatePanel(_currentStep);
     widget.onSubmit?.call();
-  }
-
-  void _validatePanel(int pageIndex) {
-    widget.formKey.currentState?.save();
-    final page = widget.pages[pageIndex];
-    for (final element in page.elements) {
-      for (final field in element.elements) {
-        final fieldValue = widget.formKey.currentState?.value[field.name];
-        Log.d(
-            'Validating field: ${field.name}, value: $fieldValue, isRequired: ${field.isRequired}, ,currentIndex: $pageIndex');
-        if (field.isRequired && fieldValue == null) {
-          _updateValidation(pageIndex, false);
-          return;
-        }
-      }
-    }
-    _updateValidation(pageIndex, true);
-  }
-
-  void _updateValidation(int index, bool value) {
-    setState(() {
-      if (index < _validationList.length) {
-        _validationList[index] = value;
-      } else {
-        _validationList.add(value);
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    log("AppStepper");
     if (widget.pages.isEmpty) {
       return Container();
     }
 
-    if (widget.pages.length == 1) {
-      return SingleChildScrollView(
-        child: Column(
-          children: [
-            PageWidget(
-              elements: widget.pages[0].elements,
-              formKey: widget.formKey,
-              name: widget.pages[0].name,
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    onPressed: _handleSubmit,
-                    child: const Text('SUBMIT'),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+    return Stepper(
+      elevation: 0,
+      physics: const ClampingScrollPhysics(),
+      type: widget.axis == Axis.horizontal
+          ? StepperType.horizontal
+          : StepperType.vertical,
+      currentStep: _currentStep,
+      onStepTapped: _onStepTapped,
+      onStepContinue: _nextStep,
+      onStepCancel: _previousStep,
+      steps: widget.pages.map((page) {
+        return Step(
+          state: StepState.indexed,
+          title: const SizedBox(),
 
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: _StepLayout(
-            axis: widget.axis,
-            stepNames: widget.pages.map((e) => e.name).toList(),
-            validationList: _validationList,
-            pages: widget.pages,
+          // title: Container(
+          //   constraints: const BoxConstraints(maxWidth: 80),
+          //   child: Text(
+          //     page.name,
+          //     maxLines: 2,
+          //     overflow: TextOverflow.ellipsis,
+          //   ),
+          // ),
+          content: PageWidget(
+            elements: page.elements,
             formKey: widget.formKey,
-            currentStep: _currentStep,
-            onStepTapped: _onStepTapped,
+            name: page.name,
           ),
-        ),
-        SliverPadding(
-          padding: EdgeInsets.zero,
-          sliver: SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (_currentStep > 0)
-                        OutlinedButton(
-                          onPressed: _previousStep,
-                          child: const Text('BACK'),
-                        ),
-                      if (_currentStep < widget.pages.length - 1)
-                        ElevatedButton(
-                          onPressed: _nextStep,
-                          child: const Text('NEXT'),
-                        ),
-                      if (_currentStep == widget.pages.length - 1)
-                        ElevatedButton(
-                          onPressed: _handleSubmit,
-                          child: const Text('SUBMIT'),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _StepLayout extends StatelessWidget {
-  const _StepLayout({
-    required this.axis,
-    required this.stepNames,
-    required this.validationList,
-    required this.pages,
-    required this.formKey,
-    required this.currentStep,
-    required this.onStepTapped,
-  });
-
-  final Axis axis;
-  final List<String> stepNames;
-  final List<bool> validationList;
-  final List<PageEntity> pages;
-  final GlobalKey<FormBuilderState> formKey;
-  final int currentStep;
-  final void Function(int) onStepTapped;
-
-  @override
-  Widget build(BuildContext context) {
-    return axis == Axis.horizontal
-        ? _buildHorizontalLayout(context)
-        : _buildVerticalLayout(context);
-  }
-
-  Widget _buildHorizontalLayout(BuildContext context) {
-    return Column(
-      children: [
-        SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _buildStepWidgets(context),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'Total Pages: ${currentStep + 1}/${pages.length}',
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+        );
+      }).toList(),
+      controlsBuilder: (BuildContext context, ControlsDetails details) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            if (_currentStep > 0)
+              OutlinedButton(
+                onPressed: details.onStepCancel,
+                child: const Text('BACK'),
               ),
-            ],
-          ),
-        ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: _buildStepIndicators(context),
-        // ),
-        if (currentStep < pages.length)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: PageWidget(
-              elements: pages[currentStep].elements,
-              formKey: formKey,
-              name: pages[currentStep].name,
-            ),
-          ),
-      ],
-    );
-  }
-
-  Widget _buildVerticalLayout(BuildContext context) {
-    return Column(
-      children: _buildStepWidgets(context),
-    );
-  }
-
-  List<Widget> _buildStepWidgets(BuildContext context) {
-    return List.generate(pages.length, (index) {
-      return GestureDetector(
-        onTap: () => onStepTapped(index),
-        child: _buildStepWidget(context, index),
-      );
-    });
-  }
-
-  Widget _buildStepWidget(BuildContext context, int index) {
-    return Container(
-      width: 70,
-      // color: Colors.yellow,
-      margin: const EdgeInsets.all(2),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 22,
-            height: 22,
-            decoration: BoxDecoration(
-              shape: axis == Axis.horizontal
-                  ? BoxShape.circle
-                  : BoxShape.rectangle,
-              color: _getStepColor(context, index),
-              border: Border.all(
-                color: _getBorderColor(context, index),
-                width: 1,
+            if (_currentStep < widget.pages.length - 1)
+              ElevatedButton(
+                onPressed: details.onStepContinue,
+                child: const Text('NEXT'),
               ),
-            ),
-            child: Center(
-              child: Text(
-                '${index + 1}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: _getTextColor(context, index),
-                ),
+            if (_currentStep == widget.pages.length - 1)
+              ElevatedButton(
+                onPressed: _handleSubmit,
+                child: const Text('SUBMIT'),
               ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Flexible(
-            child: Text(
-              stepNames[index],
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 12,
-                color: currentStep == index
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey,
-              ),
-            ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
-  }
-
-  Color _getStepColor(BuildContext context, int index) {
-    if (validationList.length == pages.length) {
-      return currentStep == index
-          ? Theme.of(context).primaryColor
-          : validationList[index]
-              ? Colors.white
-              : Colors.red;
-    } else {
-      return currentStep == index
-          ? Theme.of(context).primaryColor
-          : Colors.white;
-    }
-  }
-
-  Color _getBorderColor(BuildContext context, int index) {
-    if (validationList.length == pages.length) {
-      return currentStep == index
-          ? Theme.of(context).primaryColor
-          : validationList[index]
-              ? Theme.of(context).primaryColor
-              : Colors.red;
-    } else {
-      return Theme.of(context).primaryColor;
-    }
-  }
-
-  Color _getTextColor(BuildContext context, int index) {
-    if (validationList.length == pages.length) {
-      return currentStep == index
-          ? Colors.white
-          : validationList[index]
-              ? Colors.black
-              : Colors.white;
-    } else {
-      return currentStep == index ? Colors.white : Colors.black;
-    }
-  }
-
-  List<Widget> _buildStepIndicators(BuildContext context) {
-    return List.generate(pages.length, (index) {
-      return Container(
-        margin: const EdgeInsets.all(8),
-        width: 8,
-        height: 8,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: currentStep == index
-              ? Theme.of(context).primaryColor
-              : Colors.grey,
-        ),
-      );
-    });
   }
 }

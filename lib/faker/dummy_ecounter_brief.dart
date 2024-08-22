@@ -1,15 +1,11 @@
 final dummyEncounterBrief = [
   for (var i = 0; i < 5; i++)
     {
-      "encounterId": i,
+      "encounterId": "Encounter$i",
       "timelineName": "Timeline$i",
       "timelineVersion": "v$i",
       "activeStages": ["DEATH_INTIMATION"],
-      "donorBrief": {
-        "id": i,
-        "name": "Donor$i",
-        "contact": "905232919$i"
-      },
+      "donorBrief": {"id": i, "name": "Donor$i", "contact": "905232919$i"},
       "intimateDate": "2024-08-17T07:29:40.409Z",
       "performerId": i,
       "deathDate": "2024-08-17T07:29:40.409Z",

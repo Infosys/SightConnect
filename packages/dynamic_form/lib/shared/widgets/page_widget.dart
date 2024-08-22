@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
@@ -22,6 +24,7 @@ class PageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("PageWidget .build()");
     if (elements.isEmpty) {
       return Container();
     }

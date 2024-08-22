@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
@@ -78,6 +80,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
 
   @override
   Widget build(BuildContext context) {
+    log("AppDynamicPanel build");
     return FormBuilderField(
       name: widget.name,
       onSaved: (newValue) {
