@@ -80,7 +80,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
   Widget build(BuildContext context) {
     // log("AppDynamicPanel build");
     return FormBuilderField(
-      name: widget.name,
+      name: widget.panel.name,
       onSaved: (newValue) {
         formKey.currentState?.save();
         final value = formKey.currentState?.value;
