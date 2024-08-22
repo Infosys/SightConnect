@@ -9,6 +9,35 @@ part of 'encounter_brief_model.dart';
 _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EncounterBriefModelImpl(
+      content: (json['content'] as List<dynamic>?)
+          ?.map((e) => ContentBrief.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      totalElements: (json['totalElements'] as num?)?.toInt(),
+      totalPages: (json['totalPages'] as num?)?.toInt(),
+      size: (json['size'] as num?)?.toInt(),
+      number: (json['number'] as num?)?.toInt(),
+      numberOfElements: (json['numberOfElements'] as num?)?.toInt(),
+      empty: json['empty'] as bool?,
+      first: json['first'] as bool?,
+      last: json['last'] as bool?,
+    );
+
+Map<String, dynamic> _$$EncounterBriefModelImplToJson(
+        _$EncounterBriefModelImpl instance) =>
+    <String, dynamic>{
+      'content': instance.content?.map((e) => e.toJson()).toList(),
+      'totalElements': instance.totalElements,
+      'totalPages': instance.totalPages,
+      'size': instance.size,
+      'number': instance.number,
+      'numberOfElements': instance.numberOfElements,
+      'empty': instance.empty,
+      'first': instance.first,
+      'last': instance.last,
+    };
+
+_$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
+    _$ContentBriefImpl(
       encounterId: json['encounterId'] as String?,
       timelineName: json['timelineName'] as String?,
       timelineVersion: json['timelineVersion'] as String?,
@@ -32,8 +61,7 @@ _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
       metaData: json['metaData'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$$EncounterBriefModelImplToJson(
-        _$EncounterBriefModelImpl instance) =>
+Map<String, dynamic> _$$ContentBriefImplToJson(_$ContentBriefImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'timelineName': instance.timelineName,

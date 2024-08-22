@@ -1,6 +1,30 @@
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 
 class EncounterBriefEntity {
+  final List<ContentBriefEntity>? content;
+  final int? totalElements;
+  final int? totalPages;
+  final int? size;
+  final int? number;
+  final int? numberOfElements;
+  final bool? empty;
+  final bool? first;
+  final bool? last;
+
+  EncounterBriefEntity({
+    this.content,
+    this.totalElements,
+    this.totalPages,
+    this.size,
+    this.number,
+    this.numberOfElements,
+    this.empty,
+    this.first,
+    this.last,
+  });
+}
+
+class ContentBriefEntity {
   final String? encounterId;
   final String? timelineName;
   final String? timelineVersion;
@@ -13,7 +37,7 @@ class EncounterBriefEntity {
   final List<String>? organExtracted;
   final Map<String, dynamic>? metaData;
 
-  EncounterBriefEntity({
+  ContentBriefEntity({
     this.encounterId,
     this.timelineName,
     this.timelineVersion,

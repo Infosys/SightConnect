@@ -6,6 +6,24 @@ part 'encounter_brief_model.g.dart';
 @freezed
 class EncounterBriefModel with _$EncounterBriefModel {
   const factory EncounterBriefModel({
+    List<ContentBrief>? content,
+    int? totalElements,
+    int? totalPages,
+    int? size,
+    int? number,
+    int? numberOfElements,
+    bool? empty,
+    bool? first,
+    bool? last,
+  }) = _EncounterBriefModel;
+
+  factory EncounterBriefModel.fromJson(Map<String, dynamic> json) =>
+      _$EncounterBriefModelFromJson(json);
+}
+
+@freezed
+class ContentBrief with _$ContentBrief {
+  const factory ContentBrief({
     String? encounterId,
     String? timelineName,
     String? timelineVersion,
@@ -17,10 +35,10 @@ class EncounterBriefModel with _$EncounterBriefModel {
     BodyLocation? bodyLocation,
     List<String>? organExtracted,
     Map<String, dynamic>? metaData,
-  }) = _EncounterBriefModel;
+  }) = _ContentBrief;
 
-  factory EncounterBriefModel.fromJson(Map<String, dynamic> json) =>
-      _$EncounterBriefModelFromJson(json);
+  factory ContentBrief.fromJson(Map<String, dynamic> json) =>
+      _$ContentBriefFromJson(json);
 }
 
 @freezed

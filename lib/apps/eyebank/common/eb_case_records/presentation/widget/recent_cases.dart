@@ -60,12 +60,12 @@ class RecentCases extends ConsumerWidget {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: data.length,
+                    itemCount: data.content?.length,
                     padding: const EdgeInsets.all(0),
                     itemBuilder: (context, index) {
-                      final item = data[index];
+                      final item = data.content?[index];
                       return EBCaseCard(
-                        item: item,
+                        item: item!,
                         isCompact: true,
                         onTap: () {
                           final navigator = Navigator.of(context);
