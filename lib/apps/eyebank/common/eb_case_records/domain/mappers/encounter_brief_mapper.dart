@@ -18,14 +18,15 @@ class EncounterBriefMapper {
     );
   }
 
-  static List<ContentBriefEntity> _mapContentBrief(List<ContentBrief> contentModel) {
+  static List<ContentBriefEntity> _mapContentBrief(
+      List<ContentBrief> contentModel) {
     return contentModel
         .map(
           (contentModel) => ContentBriefEntity(
             encounterId: contentModel.encounterId,
             timelineName: contentModel.timelineName,
             timelineVersion: contentModel.timelineVersion,
-            encounterStatus: _getStageName(contentModel.encounterStatus),
+            activeStages: _getStageName(contentModel.activeStages),
             donorBrief: contentModel.donorBrief != null
                 ? DonorBriefEntity(
                     id: contentModel.donorBrief?.id,
@@ -60,12 +61,11 @@ class EncounterBriefMapper {
         .toList();
   }
 
-  static _getStageName(String? stage) {
+  static _getStageName(List<String>? data) {
     const stages = EBStageName.values;
-    for (var i = 0; i < stages.length; i++) {
-      if (stages[i].name == stage) {
-        return stages[i];
-      }
-    }
+    return data?.map((e) {
+      final stage = stages.firstWhere((element) => element.name == e);
+      return stage;
+    }).toList();
   }
 }

@@ -151,33 +151,34 @@ Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
             ),
             const SizedBox(height: 4),
             Text(
-              '${item?.bodyLocation?.street ?? ""}, ${item?.bodyLocation?.city ?? ""}, ${item?.bodyLocation?.state ?? ""}',
+              _getAddress(item?.bodyLocation),
               style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
               overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
       ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            'Case ID: ${item?.encounterId ?? ""}',
-            style: applyRobotoFont(fontSize: 14),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            item?.encounterStatus?.displayValue ?? "",
-            style: applyRobotoFont(
-              fontSize: 12,
-              color: AppColor.primary,
-              fontWeight: FontWeight.w500,
+      Flexible(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              'Case ID: ${item?.encounterId ?? ""}',
+              maxLines: 2,
+              textAlign: TextAlign.end,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(fontSize: 14),
             ),
-          ),
-        ],
+            const SizedBox(height: 4),
+          ],
+        ),
       ),
     ],
   );
+}
+
+_getAddress(BodyLocationEntity? bodyLocation) {
+  return '${bodyLocation?.street ?? ""}, ${bodyLocation?.city ?? ""}, ${bodyLocation?.state ?? ""}';
 }
 
 Widget _buildDateInfo(BuildContext context, ContentBriefEntity? item) {
@@ -219,15 +220,16 @@ Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Organs Extracted:',
+        'Active Stages: ',
         style: applyRobotoFont(fontSize: 12, color: AppColor.primary),
       ),
       const SizedBox(height: 4),
       Wrap(
         spacing: 4,
         runSpacing: 4,
-        children: item?.organExtracted
-                ?.map((organ) => _buildOrganChip(context, organ))
+        children: item?.activeStages
+                .map((stage) =>
+                    _buildOrganChip(context, stage.displayValue.toUpperCase()))
                 .toList() ??
             [],
       ),

@@ -28,7 +28,7 @@ class ContentBrief with _$ContentBrief {
     String? encounterId,
     String? timelineName,
     String? timelineVersion,
-    String? encounterStatus,
+    List<String>? activeStages,
     DonorBrief? donorBrief,
     @TimestampConverter() DateTime? intimateDate,
     int? performerId,

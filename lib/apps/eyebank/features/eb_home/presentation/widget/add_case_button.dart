@@ -2,13 +2,14 @@ import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddCaseButton extends StatelessWidget {
@@ -53,11 +54,10 @@ class AddCaseButton extends StatelessWidget {
                     final repo = ref.read(ebRepositoryProvider);
                     final submitData =
                         EBSubmitFormDataRequestModel(formData: data);
-                    await repo.saveIntimationForm(
-                      EBStageName.DEATH_INTIMATION.value,
-                      "0.0.1",
-                      submitData,
-                    );
+                    await repo.saveIntimationForm(submitData);
+                  } on EBFailure catch (e, _) {
+                    logger.e(e);
+                    Fluttertoast.showToast(msg: e.errorMessage);
                   } catch (e) {
                     logger.e(e);
                   }

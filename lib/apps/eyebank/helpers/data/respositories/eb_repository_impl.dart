@@ -21,7 +21,6 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   EyeBankRepositoryImpl(this._dio);
 
-
   @override
   Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(
       String encounterID) {
@@ -104,16 +103,12 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, SubmitFormDataResponseModel>> saveIntimationForm(
-      String stageName,
-      String stageVersion,
-      EBSubmitFormDataRequestModel requestData) {
+    EBSubmitFormDataRequestModel requestData,
+  ) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/services/eyebank/api/encounters/$stageName';
+      const endPoint = '/services/eyebank/api/encounters/forms/intimation/save';
       final response = await _dio.post(
         endPoint,
-        queryParameters: {
-          'stageVersion': stageVersion,
-        },
         data: requestData.toJson(),
       );
       if (response.statusCode == 200) {

@@ -346,7 +346,7 @@ mixin _$ContentBrief {
   String? get encounterId => throw _privateConstructorUsedError;
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
-  String? get encounterStatus => throw _privateConstructorUsedError;
+  List<String>? get activeStages => throw _privateConstructorUsedError;
   DonorBrief? get donorBrief => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get intimateDate => throw _privateConstructorUsedError;
@@ -373,7 +373,7 @@ abstract class $ContentBriefCopyWith<$Res> {
       {String? encounterId,
       String? timelineName,
       String? timelineVersion,
-      String? encounterStatus,
+      List<String>? activeStages,
       DonorBrief? donorBrief,
       @TimestampConverter() DateTime? intimateDate,
       int? performerId,
@@ -402,7 +402,7 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
     Object? encounterId = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
-    Object? encounterStatus = freezed,
+    Object? activeStages = freezed,
     Object? donorBrief = freezed,
     Object? intimateDate = freezed,
     Object? performerId = freezed,
@@ -424,10 +424,10 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      encounterStatus: freezed == encounterStatus
-          ? _value.encounterStatus
-          : encounterStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
+      activeStages: freezed == activeStages
+          ? _value.activeStages
+          : activeStages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       donorBrief: freezed == donorBrief
           ? _value.donorBrief
           : donorBrief // ignore: cast_nullable_to_non_nullable
@@ -496,7 +496,7 @@ abstract class _$$ContentBriefImplCopyWith<$Res>
       {String? encounterId,
       String? timelineName,
       String? timelineVersion,
-      String? encounterStatus,
+      List<String>? activeStages,
       DonorBrief? donorBrief,
       @TimestampConverter() DateTime? intimateDate,
       int? performerId,
@@ -525,7 +525,7 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
     Object? encounterId = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
-    Object? encounterStatus = freezed,
+    Object? activeStages = freezed,
     Object? donorBrief = freezed,
     Object? intimateDate = freezed,
     Object? performerId = freezed,
@@ -547,10 +547,10 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
-      encounterStatus: freezed == encounterStatus
-          ? _value.encounterStatus
-          : encounterStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
+      activeStages: freezed == activeStages
+          ? _value._activeStages
+          : activeStages // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       donorBrief: freezed == donorBrief
           ? _value.donorBrief
           : donorBrief // ignore: cast_nullable_to_non_nullable
@@ -590,7 +590,7 @@ class _$ContentBriefImpl implements _ContentBrief {
       {this.encounterId,
       this.timelineName,
       this.timelineVersion,
-      this.encounterStatus,
+      final List<String>? activeStages,
       this.donorBrief,
       @TimestampConverter() this.intimateDate,
       this.performerId,
@@ -598,7 +598,8 @@ class _$ContentBriefImpl implements _ContentBrief {
       this.bodyLocation,
       final List<String>? organExtracted,
       final Map<String, dynamic>? metaData})
-      : _organExtracted = organExtracted,
+      : _activeStages = activeStages,
+        _organExtracted = organExtracted,
         _metaData = metaData;
 
   factory _$ContentBriefImpl.fromJson(Map<String, dynamic> json) =>
@@ -610,8 +611,16 @@ class _$ContentBriefImpl implements _ContentBrief {
   final String? timelineName;
   @override
   final String? timelineVersion;
+  final List<String>? _activeStages;
   @override
-  final String? encounterStatus;
+  List<String>? get activeStages {
+    final value = _activeStages;
+    if (value == null) return null;
+    if (_activeStages is EqualUnmodifiableListView) return _activeStages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final DonorBrief? donorBrief;
   @override
@@ -646,7 +655,7 @@ class _$ContentBriefImpl implements _ContentBrief {
 
   @override
   String toString() {
-    return 'ContentBrief(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
+    return 'ContentBrief(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
   }
 
   @override
@@ -660,8 +669,8 @@ class _$ContentBriefImpl implements _ContentBrief {
                 other.timelineName == timelineName) &&
             (identical(other.timelineVersion, timelineVersion) ||
                 other.timelineVersion == timelineVersion) &&
-            (identical(other.encounterStatus, encounterStatus) ||
-                other.encounterStatus == encounterStatus) &&
+            const DeepCollectionEquality()
+                .equals(other._activeStages, _activeStages) &&
             (identical(other.donorBrief, donorBrief) ||
                 other.donorBrief == donorBrief) &&
             (identical(other.intimateDate, intimateDate) ||
@@ -684,7 +693,7 @@ class _$ContentBriefImpl implements _ContentBrief {
       encounterId,
       timelineName,
       timelineVersion,
-      encounterStatus,
+      const DeepCollectionEquality().hash(_activeStages),
       donorBrief,
       intimateDate,
       performerId,
@@ -712,7 +721,7 @@ abstract class _ContentBrief implements ContentBrief {
       {final String? encounterId,
       final String? timelineName,
       final String? timelineVersion,
-      final String? encounterStatus,
+      final List<String>? activeStages,
       final DonorBrief? donorBrief,
       @TimestampConverter() final DateTime? intimateDate,
       final int? performerId,
@@ -731,7 +740,7 @@ abstract class _ContentBrief implements ContentBrief {
   @override
   String? get timelineVersion;
   @override
-  String? get encounterStatus;
+  List<String>? get activeStages;
   @override
   DonorBrief? get donorBrief;
   @override

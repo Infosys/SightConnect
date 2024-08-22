@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
-import 'package:eye_care_for_all/faker/dummy_encounter_brief.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,24 +24,27 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
       GetAllEncountersParams params) {
     // FAKER Data
     //REMOVE THIS FOR PRODUCTION
-    return Future.value(
-        Right(EncounterBriefModel.fromJson(Faker.dummyEncounterBrief)));
+    // return Future.value(
+    //     Right(EncounterBriefModel.fromJson(Faker.dummyEncounterBrief)));
 
     return EyeBankErrorHandler.handle(() async {
-      const endPoint = '/services/eyebank/api/encounters';
+      const endPoint = "/services/eyebank/api/encounters";
+      final parameters = {
+        // 'encounterStage': params.encounterStage,
+        // 'startDate': params.startDate,
+        // 'endDate': params.endDate,
+        'pageable': {
+          "page": params.page,
+          "size": params.size,
+        }
+      };
       final response = await _dio.get(
         endPoint,
-        queryParameters: {
-          'encounterStage': params.encounterStage,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'pageable': {
-            "page": params.page,
-            "size": params.size,
-          }
-        },
+        queryParameters: parameters,
       );
+
       if (response.statusCode == 200) {
+        log(EncounterBriefModel.fromJson(response.data).toString());
         return EncounterBriefModel.fromJson(response.data);
       } else {
         throw Exception(response.statusMessage ?? 'Error in getAllEncounters');

@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_tenant_provider.dart';
 import 'package:eye_care_for_all/env.dart';
-import 'package:eye_care_for_all/services/interceptors.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -85,7 +84,7 @@ class DioService extends StateNotifier<Dio> {
           ),
         ) {
     // setupRequestHeaders();
-    // setupInterceptors();
+    setupInterceptors();
   }
 
   void setupRequestHeaders() {
@@ -104,7 +103,7 @@ class DioService extends StateNotifier<Dio> {
 
   void setupInterceptors() {
     state.interceptors.addAll([
-      DioTokenInterceptor(ref, state),
+      // DioTokenInterceptor(ref, state),
       LogInterceptor(
         requestHeader: true,
         requestBody: true,

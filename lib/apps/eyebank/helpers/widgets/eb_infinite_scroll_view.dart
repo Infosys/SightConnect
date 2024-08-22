@@ -90,104 +90,107 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        if (widget.enableSearch || widget.enableFilter)
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            snap: true,
-            title: Row(
-              children: [
-                Expanded(
-                  child: widget.enableSearch
-                      ? InkWell(
-                          onTap: widget.onSearchTap,
-                          child: Container(
-                            height: 45,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 12),
-                                const Icon(
-                                  Icons.search,
-                                  color: AppColor.grey,
-                                  size: 16,
-                                ),
-                                const SizedBox(width: 12),
-                                Text(
-                                  'Search',
-                                  style: applyRobotoFont(
-                                    fontSize: 14,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if (widget.enableSearch || widget.enableFilter)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: widget.enableSearch
+                        ? InkWell(
+                            onTap: widget.onSearchTap,
+                            child: Container(
+                              height: 45,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 12),
+                                  const Icon(
+                                    Icons.search,
                                     color: AppColor.grey,
+                                    size: 16,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    'Search',
+                                    style: applyRobotoFont(
+                                      fontSize: 14,
+                                      color: AppColor.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      : widget.enableFilter
-                          ? Text(
-                              'Total ${_pagingController.itemList?.length ?? 0} Records')
-                          : Container(),
+                          )
+                        : widget.enableFilter
+                            ? Text(
+                                'Total ${_pagingController.itemList?.length ?? 0} Records')
+                            : Container(),
+                  ),
+                  if (widget.enableFilter)
+                    IconButton(
+                      icon: const Icon(Icons.filter_list),
+                      onPressed: () {
+                        _showFilterBottomSheet();
+                      },
+                    ),
+                ],
+              ),
+            ),
+          PagedListView<int, T>(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              itemBuilder: widget.itemBuilder,
+              firstPageErrorIndicatorBuilder: (context) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Error loading data'),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () => _pagingController.refresh(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
                 ),
-                if (widget.enableFilter)
-                  IconButton(
-                    icon: const Icon(Icons.filter_list),
-                    onPressed: () {
-                      _showFilterBottomSheet();
-                    },
-                  ),
-              ],
-            ),
-          ),
-        PagedSliverList<int, T>(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<T>(
-            itemBuilder: widget.itemBuilder,
-            firstPageErrorIndicatorBuilder: (context) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Error loading data'),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => _pagingController.refresh(),
-                    child: const Text('Retry'),
-                  ),
-                ],
+              ),
+              firstPageProgressIndicatorBuilder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              newPageErrorIndicatorBuilder: (context) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Error loading data'),
+                    ElevatedButton(
+                      onPressed: () =>
+                          _pagingController.retryLastFailedRequest(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+              newPageProgressIndicatorBuilder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              noItemsFoundIndicatorBuilder: (context) => const Center(
+                child: Text('No items found'),
+              ),
+              noMoreItemsIndicatorBuilder: (context) => const Center(
+                child: Text('No more items'),
               ),
             ),
-            firstPageProgressIndicatorBuilder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            newPageErrorIndicatorBuilder: (context) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Error loading data'),
-                  ElevatedButton(
-                    onPressed: () => _pagingController.retryLastFailedRequest(),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            ),
-            newPageProgressIndicatorBuilder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            noItemsFoundIndicatorBuilder: (context) => const Center(
-              child: Text('No items found'),
-            ),
-            noMoreItemsIndicatorBuilder: (context) => const Center(
-              child: Text('No more items'),
-            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

@@ -41,7 +41,9 @@ _$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
       encounterId: json['encounterId'] as String?,
       timelineName: json['timelineName'] as String?,
       timelineVersion: json['timelineVersion'] as String?,
-      encounterStatus: json['encounterStatus'] as String?,
+      activeStages: (json['activeStages'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       donorBrief: json['donorBrief'] == null
           ? null
           : DonorBrief.fromJson(json['donorBrief'] as Map<String, dynamic>),
@@ -64,7 +66,7 @@ Map<String, dynamic> _$$ContentBriefImplToJson(_$ContentBriefImpl instance) =>
       'encounterId': instance.encounterId,
       'timelineName': instance.timelineName,
       'timelineVersion': instance.timelineVersion,
-      'encounterStatus': instance.encounterStatus,
+      'activeStages': instance.activeStages,
       'donorBrief': instance.donorBrief?.toJson(),
       'intimateDate': const TimestampConverter().toJson(instance.intimateDate),
       'performerId': instance.performerId,

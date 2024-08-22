@@ -22,13 +22,19 @@ class EncounterBriefEntity {
     this.first,
     this.last,
   });
+  // toSTring() method
+
+  @override
+  String toString() {
+    return 'EncounterBriefEntity(content: $content, totalElements: $totalElements, totalPages: $totalPages, size: $size, number: $number, numberOfElements: $numberOfElements, empty: $empty, first: $first, last: $last)';
+  }
 }
 
 class ContentBriefEntity {
   final String? encounterId;
   final String? timelineName;
   final String? timelineVersion;
-  final EBStageName? encounterStatus;
+  final List<EBStageName> activeStages;
   final DonorBriefEntity? donorBrief;
   final DateTime? intimateDate;
   final int? performerId;
@@ -41,7 +47,7 @@ class ContentBriefEntity {
     this.encounterId,
     this.timelineName,
     this.timelineVersion,
-    this.encounterStatus,
+    this.activeStages = const [],
     this.donorBrief,
     this.intimateDate,
     this.performerId,
@@ -50,6 +56,11 @@ class ContentBriefEntity {
     this.organExtracted,
     this.metaData,
   });
+
+  @override
+  String toString() {
+    return 'ContentBriefEntity(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
+  }
 }
 
 class BodyLocationEntity {
@@ -82,6 +93,11 @@ class BodyLocationEntity {
     this.longitude,
     this.direction,
   });
+
+  @override
+  String toString() {
+    return 'BodyLocationEntity(addressLine1: $addressLine1, addressLine2: $addressLine2, street: $street, city: $city, state: $state, zipCode: $zipCode, country: $country, landmark: $landmark, village: $village, district: $district, latitude: $latitude, longitude: $longitude, direction: $direction)';
+  }
 }
 
 class DonorBriefEntity {
@@ -94,4 +110,8 @@ class DonorBriefEntity {
     this.name,
     this.contact,
   });
+  @override
+  String toString() {
+    return 'DonorBriefEntity(id: $id, name: $name, contact: $contact)';
+  }
 }

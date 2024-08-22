@@ -64,6 +64,7 @@ class RecentCases extends ConsumerWidget {
                     padding: const EdgeInsets.all(0),
                     itemBuilder: (context, index) {
                       final item = data.content?[index];
+
                       return EBCaseCard(
                         item: item!,
                         isCompact: true,
