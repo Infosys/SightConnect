@@ -185,7 +185,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                   ),
                   Text(
                     global.isTriageMode() || global.isStandaloneMode()
-                        ? "Done! Visual Acuity Test is completed for both eyes. You need to take the Long Distance Visual Acuity Test now."
+                        ? "Done! Visual Acuity Test is completed for both eyes. You need to take the Distance Visual Acuity Test now."
                         : "Your data has been saved successfully",
                     style: applyRobotoFont(
                       fontSize: 14,
