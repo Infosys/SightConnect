@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
+import 'package:eye_care_for_all/faker/dummy_encounter_brief.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +23,11 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   @override
   Future<Either<EBFailure, EncounterBriefModel>> getAllEncounters(
       GetAllEncountersParams params) {
+    // FAKER Data
+    //REMOVE THIS FOR PRODUCTION
+    return Future.value(
+        Right(EncounterBriefModel.fromJson(Faker.dummyEncounterBrief)));
+
     return EyeBankErrorHandler.handle(() async {
       const endPoint = '/services/eyebank/api/encounters';
       final response = await _dio.get(
