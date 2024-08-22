@@ -2,9 +2,9 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EBFormManagePage extends ConsumerWidget {
@@ -55,28 +55,32 @@ class EBFormManagePage extends ConsumerWidget {
     Map<String, dynamic>? data,
     DynamicFormSavingType mode,
   ) async {
-    try {
-      final response = await ref.read(ebSaveOrDraftProvider).saveOrDraft(
-            encounterId: 1234,
-            action: mode,
-            formData: data,
-          );
-      response.fold(
-        (failure) {
-          Fluttertoast.showToast(
-            msg: failure.errorMessage,
-          );
-        },
-        (success) {
-          Fluttertoast.showToast(
-            msg: 'Form saved successfully',
-          );
-        },
-      );
-    } catch (e) {
-      Fluttertoast.showToast(
-        msg: 'Failed to save form',
-      );
-    }
+    logger.f({
+      'data': data,
+      'mode': mode,
+    });
+    // try {
+    //   final response = await ref.read(ebSaveOrDraftProvider).saveOrDraft(
+    //         encounterId: 1234,
+    //         action: mode,
+    //         formData: data,
+    //       );
+    //   response.fold(
+    //     (failure) {
+    //       Fluttertoast.showToast(
+    //         msg: failure.errorMessage,
+    //       );
+    //     },
+    //     (success) {
+    //       Fluttertoast.showToast(
+    //         msg: 'Form saved successfully',
+    //       );
+    //     },
+    //   );
+    // } catch (e) {
+    //   Fluttertoast.showToast(
+    //     msg: 'Failed to save form',
+    //   );
+    // }
   }
 }

@@ -73,15 +73,6 @@ class AppStepperState extends State<AppStepper> {
         return Step(
           state: StepState.indexed,
           title: const SizedBox(),
-
-          // title: Container(
-          //   constraints: const BoxConstraints(maxWidth: 80),
-          //   child: Text(
-          //     page.name,
-          //     maxLines: 2,
-          //     overflow: TextOverflow.ellipsis,
-          //   ),
-          // ),
           content: PageWidget(
             elements: page.elements,
             formKey: widget.formKey,

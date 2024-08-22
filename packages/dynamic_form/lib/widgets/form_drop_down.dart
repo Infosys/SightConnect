@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -17,7 +15,6 @@ class FormDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('FormDropDown.build()');
     final String label = field.title;
     final String hint = field.description;
     final List<DropdownMenuItem<String>> options = field.choices!

@@ -116,6 +116,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
   }
 
   void _handleDraft() {
+    formKey.currentState?.save();
     widget.onSubmit?.call(
       formKey.currentState?.value,
       DynamicFormSavingType.DRAFT,
