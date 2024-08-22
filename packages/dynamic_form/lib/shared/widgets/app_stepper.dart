@@ -57,6 +57,14 @@ class AppStepperState extends State<AppStepper> {
     log("AppStepper");
     if (widget.pages.isEmpty) {
       return Container();
+    } else if (widget.pages.length == 1) {
+      return SingleChildScrollView(
+        child: PageWidget(
+          elements: widget.pages.first.elements,
+          formKey: widget.formKey,
+          name: widget.pages.first.name,
+        ),
+      );
     }
 
     return Stepper(
