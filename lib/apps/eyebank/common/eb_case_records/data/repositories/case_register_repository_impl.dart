@@ -28,19 +28,20 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
     //     Right(EncounterBriefModel.fromJson(Faker.dummyEncounterBrief)));
 
     return EyeBankErrorHandler.handle(() async {
-      const endPoint = "/services/eyebank/api/encounters";
-      final parameters = {
-        // 'encounterStage': params.encounterStage,
-        // 'startDate': params.startDate,
-        // 'endDate': params.endDate,
-        'pageable': {
-          "page": params.page,
-          "size": params.size,
-        }
-      };
+      final endPoint =
+          "/services/eyebank/api/encounters?page=${params.page}&size=${params.size}";
+      // final parameters = {
+      //   // 'encounterStage': params.encounterStage,
+      //   // 'startDate': params.startDate,
+      //   // 'endDate': params.endDate,
+      //   'pageable': {
+      //     "page": params.page,
+      //     "size": params.size,
+      //   }
+      // };
       final response = await _dio.get(
         endPoint,
-        queryParameters: parameters,
+        // queryParameters: parameters,
       );
 
       if (response.statusCode == 200) {

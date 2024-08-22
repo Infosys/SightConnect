@@ -46,7 +46,7 @@ class EbInfiniteScrollView<T> extends StatefulWidget {
 }
 
 class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
-  int _pageSize = 10;
+  int _pageSize = 0;
   late PagingController<int, T> _pagingController;
   final TextEditingController _searchController = TextEditingController();
   final List<String> _selectedFilters = [];
@@ -72,11 +72,17 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
       final newItems =
           await widget.fetchPageData(pageKey, _pageSize, _selectedFilters);
 
+      // Check if the response is empty
+      if (newItems.isEmpty) {
+        _pagingController.appendLastPage([]);
+        return;
+      }
+
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
       } else {
-        final nextPageKey = pageKey + newItems.length;
+        final nextPageKey = pageKey + 1;
         _pagingController.appendPage(newItems, nextPageKey);
       }
     } on EBFailure catch (e, _) {
@@ -200,69 +206,72 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Filters',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Filters',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _selectedFilters.clear();
-                          });
-                        },
-                        child: const Text('Clear all'),
-                      ),
-                    ],
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedFilters.clear();
+                            });
+                          },
+                          child: const Text('Clear all'),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const Divider(),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: widget.filterOptions!.length,
-                    itemBuilder: (context, index) {
-                      final filter = widget.filterOptions![index];
-                      return CheckboxListTile(
-                        title: Text(filter),
-                        value: _selectedFilters.contains(filter),
-                        onChanged: (value) {
-                          setState(() {
-                            if (value!) {
-                              _selectedFilters.add(filter);
-                            } else {
-                              _selectedFilters.remove(filter);
-                            }
-                          });
-                        },
-                      );
-                    },
+                  const Divider(),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: widget.filterOptions!.length,
+                      itemBuilder: (context, index) {
+                        final filter = widget.filterOptions![index];
+                        return CheckboxListTile(
+                          title: Text(filter),
+                          value: _selectedFilters.contains(filter),
+                          onChanged: (value) {
+                            setState(() {
+                              if (value!) {
+                                _selectedFilters.add(filter);
+                              } else {
+                                _selectedFilters.remove(filter);
+                              }
+                            });
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _pagingController.refresh();
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Apply'),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            _pagingController.refresh();
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Apply'),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         );

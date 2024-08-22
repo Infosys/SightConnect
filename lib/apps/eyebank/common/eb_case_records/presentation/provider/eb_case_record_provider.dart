@@ -22,6 +22,7 @@ final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
 final ebGetRecordsProvider =
     FutureProvider.family<EncounterBriefEntity, GetRecordsParams>(
   (ref, params) async {
+    await Future.delayed(const Duration(seconds: 3));
     final repo = ref.watch(ebCaseRegisterRepositoryProvider);
     final p = GetAllEncountersParams(
       // encounterStage: null,
@@ -30,6 +31,7 @@ final ebGetRecordsProvider =
       page: params.pageNumber,
       size: params.pageSize,
     );
+
     final result = await repo.getAllEncounters(p);
     return result.fold(
       (l) => throw l,
