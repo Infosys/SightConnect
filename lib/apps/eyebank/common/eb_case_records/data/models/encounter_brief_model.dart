@@ -30,6 +30,7 @@ class ContentBrief with _$ContentBrief {
     String? timelineVersion,
     List<String>? activeStages,
     DonorBrief? donorBrief,
+    NotifierBrief? notifierBrief,
     @TimestampConverter() DateTime? intimateDate,
     int? performerId,
     @TimestampConverter() DateTime? deathDate,
@@ -74,4 +75,16 @@ class DonorBrief with _$DonorBrief {
 
   factory DonorBrief.fromJson(Map<String, dynamic> json) =>
       _$DonorBriefFromJson(json);
+}
+
+@freezed
+class NotifierBrief with _$DonorBrief {
+  const factory NotifierBrief({
+    int? id,
+    String? name,
+    String? contact,
+  }) = _NotifierBrief;
+
+  factory NotifierBrief.fromJson(Map<String, dynamic> json) =>
+      _$NotifierBriefFromJson(json);
 }

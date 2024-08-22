@@ -36,6 +36,7 @@ class ContentBriefEntity {
   final String? timelineVersion;
   final List<EBStageName> activeStages;
   final DonorBriefEntity? donorBrief;
+  final NotifierBriefEntity? notifierBrief;
   final DateTime? intimateDate;
   final int? performerId;
   final DateTime? deathDate;
@@ -49,6 +50,7 @@ class ContentBriefEntity {
     this.timelineVersion,
     this.activeStages = const [],
     this.donorBrief,
+    this.notifierBrief,
     this.intimateDate,
     this.performerId,
     this.deathDate,
@@ -113,5 +115,21 @@ class DonorBriefEntity {
   @override
   String toString() {
     return 'DonorBriefEntity(id: $id, name: $name, contact: $contact)';
+  }
+}
+
+class NotifierBriefEntity {
+  final int? id;
+  final String? name;
+  final String? contact;
+
+  NotifierBriefEntity({
+    this.id,
+    this.name,
+    this.contact,
+  });
+  @override
+  String toString() {
+    return 'NotifierBriefEntity(id: $id, name: $name, contact: $contact)';
   }
 }
