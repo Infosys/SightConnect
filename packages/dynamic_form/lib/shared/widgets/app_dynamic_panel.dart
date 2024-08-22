@@ -76,16 +76,34 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
     return DateTime.now().millisecondsSinceEpoch.toString();
   }
 
+  List<dynamic> _formatValue(Map<String, dynamic> value) {
+    List<dynamic> toConvert = [];
+
+    for (var key in repeatedPanelKeys) {
+      Map<String, dynamic> temp = {};
+      for (var element in value.entries) {
+        if (element.key.contains(key)) {
+          temp[element.key.split('_').first] = element.value;
+        }
+      }
+      toConvert.add(temp);
+    }
+
+    return toConvert;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // log("AppDynamicPanel build");
     return FormBuilderField(
       name: widget.panel.name,
       onSaved: (newValue) {
         formKey.currentState?.save();
         final value = formKey.currentState?.value;
+
+        final formatedValue = _formatValue(value ?? {});
+
         widget.globalFormKey.currentState?.fields[widget.panel.name]
-            ?.didChange(value);
+            ?.didChange(formatedValue);
       },
       builder: (field) {
         return FormBuilder(
@@ -100,7 +118,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
                 AppCard(
                   child: Column(
                     children: repeatedPanelKeys
-                        .map((key) => _buildRepeatedPanel(key))
+                        .map((key) => buildRepeatedPanel(key))
                         .toList(),
                   ),
                 ),
@@ -123,7 +141,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
     );
   }
 
-  Widget _buildRepeatedPanel(String key) {
+  Widget buildRepeatedPanel(String key) {
     return Row(
       key: ValueKey(key), // Ensure each panel has a unique key
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -145,7 +163,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
-                children: _buildFields(widget.panel.elements, formKey, key),
+                children: buildFields(widget.panel.elements, formKey, key),
               ),
               const SizedBox(height: 16),
               const Divider(),
@@ -156,7 +174,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
     );
   }
 
-  List<Widget> _buildFields(
+  List<Widget> buildFields(
     List<ElementElementClassEntity>? fields,
     GlobalKey<FormBuilderState> key,
     String keyExtension,
