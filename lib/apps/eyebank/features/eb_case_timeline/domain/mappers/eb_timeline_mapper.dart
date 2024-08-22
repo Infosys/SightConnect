@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/main.dart';
 class EBTimelineMapper {
   static List<EBTimelineEntity> mapToEntity(
       List<EBTimelineModel> model, EbTimelineConfigModel configModel) {
-    logger.e("data inside mapper is $model \n $configModel");
+    logger.d("data inside mapper is $model \n $configModel");
     List<EBTimelineEntity> data = [];
     for (var m in model) {
       data.add(EBTimelineEntity(
