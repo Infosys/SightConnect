@@ -78,13 +78,13 @@ class _TriagePageState extends ConsumerState<TriagePage> {
             roleMapper(PersistentAuthStateService.authState.activeRole);
         return switch (role) {
           Role.ROLE_OPTOMETRIST =>
-            optometristTriage(currentStep, context, data),
-          Role.ROLE_PATIENT => patientTriage(currentStep, context, data),
+            triage(currentStep, context, data),
+          Role.ROLE_PATIENT => triage(currentStep, context, data),
           Role.ROLE_VISION_GUARDIAN =>
-            patientTriage(currentStep, context, data),
+            triage(currentStep, context, data),
           Role.ROLE_VISION_TECHNICIAN =>
-            patientTriage(currentStep, context, data),
-          Role.ROLE_VOLUNTEER => patientTriage(currentStep, context, data),
+            triage(currentStep, context, data),
+          Role.ROLE_VOLUNTEER => triage(currentStep, context, data),
           _ => const SizedBox()
         };
       },
@@ -126,7 +126,7 @@ class _TriagePageState extends ConsumerState<TriagePage> {
     );
   }
 
-  dynamic optometristTriage(int currentStep, BuildContext context,
+  dynamic triage(int currentStep, BuildContext context,
       DiagnosticReportTemplateFHIRModel data) {
     switch (currentStep) {
       case 0:
@@ -149,23 +149,23 @@ class _TriagePageState extends ConsumerState<TriagePage> {
     }
   }
 
-  dynamic patientTriage(int currentStep, BuildContext context,
-      DiagnosticReportTemplateFHIRModel data) {
-    switch (currentStep) {
-      case 0:
-        return TriageQuestionnairePage(
-          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
-        );
-      case 1:
-        ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
-        return const VisualAcuityTumblingPage();
-      case 2:
-        return const TriageEyeScanPage();
+  // dynamic patientTriage(int currentStep, BuildContext context,
+  //     DiagnosticReportTemplateFHIRModel data) {
+  //   switch (currentStep) {
+  //     case 0:
+  //       return TriageQuestionnairePage(
+  //         questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+  //       );
+  //     case 1:
+  //       ref.read(globalProvider).setVAMode = VisionAcuityMode.TRIAGE;
+  //       return const VisualAcuityTumblingPage();
+  //     case 2:
+  //       return const TriageEyeScanPage();
 
-      default:
-        return TriageQuestionnairePage(
-          questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
-        );
-    }
-  }
+  //     default:
+  //       return TriageQuestionnairePage(
+  //         questionnaireSections: data.questionnaire?.questionnaireItem ?? [],
+  //       );
+  //   }
+  // }
 }

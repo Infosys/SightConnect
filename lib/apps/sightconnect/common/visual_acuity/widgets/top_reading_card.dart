@@ -103,11 +103,13 @@ class TopReadingCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: AppSize.km),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: isShortDistance
+                              ? MainAxisAlignment.spaceBetween
+                              : MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
                               "${currentLevel.snellerFraction}  ",
@@ -125,38 +127,33 @@ class TopReadingCard extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                !isShortDistance
-                                    ? Text(
-                                        loc.topReadingCardLongDistanceTestMessage,
-                                        style: applyRobotoFont(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        softWrap: true,
-                                      )
-                                    : Text(
-                                        distance != null
-                                            ? '$distance cm'
-                                            : loc
-                                                .topReadingCardFaceNotFoundError,
-                                        style: applyRobotoFont(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: (distance != null &&
-                                                  (distance >= lowerLimit &&
-                                                      distance <= upperLimit))
-                                              ? AppColor.green
-                                              : AppColor.red,
-                                        ),
-                                      ),
-                              ],
-                            ),
+                            if (isShortDistance)
+                              Text(
+                                distance != null
+                                    ? '$distance cm'
+                                    : loc.topReadingCardFaceNotFoundError,
+                                style: applyRobotoFont(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: (distance != null &&
+                                          (distance >= lowerLimit &&
+                                              distance <= upperLimit))
+                                      ? AppColor.green
+                                      : AppColor.red,
+                                ),
+                              ),
                           ],
                         ),
-                        const SizedBox(height: AppSize.km),
+                        const SizedBox(height: AppSize.ks),
+                       if(!isShortDistance) Text(
+                          loc.topReadingCardLongDistanceTestMessage,
+                          style: applyRobotoFont(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          softWrap: true,
+                        ),
+                        const SizedBox(height: AppSize.ks),
                       ],
                     ),
                   ),

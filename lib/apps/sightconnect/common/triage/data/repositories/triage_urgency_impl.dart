@@ -40,7 +40,9 @@ class TriageUrgencyRepositoryImpl extends TriageUrgencyRepository {
     double visualAcuityUrgency = 1;
 
     for (var observation in visionAcuityResponse) {
-      visionAcuityScore += observation.score!;
+      if (observation.score != null && observation.score! > visionAcuityScore) {
+        visionAcuityScore == observation.score!;
+      }
     }
     if (visionAcuityScore >= 5) {
       visualAcuityUrgency = 3;

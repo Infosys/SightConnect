@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_card.dart';
@@ -51,45 +50,66 @@ class DistanceVisualAcuityDialog {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: AppSize.height(context) * 0.1,
+                    ),
                     Text(
-                      _mapEyeTitle(context, eye),
+                      "Please maintain a 2-meter distance from the screen",
                       style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                       softWrap: true,
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(
-                      height: AppSize.km,
+                      height: AppSize.kl + 10,
+                    ),
+                    Center(
+                      child: Text(
+                        _mapEyeTitle(context, eye),
+                        style: applyFiraSansFont(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        softWrap: true,
+                      ),
+                    ),
+                    // const SizedBox(
+                    //   height: AppSize.km,
+                    // ),
+                    SizedBox(
+                      height: AppSize.height(context) * 0.1,
                     ),
                     Text(
                       _mapEyeInstruction(context, eye),
                       style: applyRobotoFont(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
                       softWrap: true,
+                      textAlign: TextAlign.center,
                     ),
-                    const SizedBox(
-                      height: AppSize.km + 2,
-                    ),
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColor.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: applyLightShadow(),
-                        ),
-                        height: AppSize.height(context) * 0.5,
-                        width: AppSize.width(context) * 0.7,
-                        child: _mapEyeInstructionImage(context, eye).isEmpty
-                            ? const SizedBox()
-                            : Image.asset(
-                                _mapEyeInstructionImage(context, eye),
-                              ),
-                      ),
-                    ),
+                    // const SizedBox(
+                    //   height: AppSize.km + 2,
+                    // ),
+                    // Center(
+                    //   child: Container(
+                    //     padding: const EdgeInsets.all(8),
+                    //     decoration: BoxDecoration(
+                    //       color: AppColor.white,
+                    //       borderRadius: BorderRadius.circular(16),
+                    //       boxShadow: applyLightShadow(),
+                    //     ),
+                    //     height: AppSize.height(context) * 0.5,
+                    //     width: AppSize.width(context) * 0.7,
+                    //     child: _mapEyeInstructionImage(context, eye).isEmpty
+                    //         ? const SizedBox()
+                    //         : Image.asset(
+                    //             _mapEyeInstructionImage(context, eye),
+                    //           ),
+                    //   ),
+                    // ),
                     const Spacer(),
                     Row(
                       children: [
@@ -255,7 +275,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
     await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
     navigator
       ..pop()
-      ..pop()
+      // ..pop()
       ..pop();
   }
 
@@ -281,7 +301,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
           ..pop()
           ..pop()
           ..pop()
-          ..pop()
+          // ..pop()
           ..pop()
           ..pop()
           ..pop()
@@ -295,7 +315,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
           ..pop()
           ..pop()
           ..pop()
-          ..pop()
+          // ..pop()
           ..pop()
           ..pop()
           ..pop()

@@ -139,7 +139,8 @@ class TriageStepsDrawer extends ConsumerWidget {
                               weight: 10,
                             ),
                           ),
-                          if (role == "ROLE_OPTOMETRIST")
+                          if (role == "ROLE_OPTOMETRIST" ||
+                              role == "ROLE_PATIENT")
                             const EasyStep(
                               icon: Icon(
                                 Icons.more_horiz,
@@ -224,7 +225,8 @@ class TriageStepsDrawer extends ConsumerWidget {
                           const SizedBox(
                             height: AppSize.kl * 3.5,
                           ),
-                          if (role == "ROLE_OPTOMETRIST")
+                          if (role == "ROLE_OPTOMETRIST" ||
+                              role == "ROLE_PATIENT")
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               mainAxisAlignment: MainAxisAlignment.start,

@@ -18,6 +18,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
+import '../../../distance_visual_acuity_tumbling/presentation/pages/distance_visual_acuity_tumbling_page.dart';
 import 'visual_acuity_tumbling_overlay.dart';
 
 class VisualAcuityDialog {
@@ -184,8 +185,7 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
                   ),
                   Text(
                     global.isTriageMode() || global.isStandaloneMode()
-                        ? AppLocalizations.of(context)!
-                            .visualAcuityCompletionDialog
+                        ? "Done! Visual Acuity Test is completed for both eyes. You need to take the Distance Visual Acuity Test now."
                         : "Your data has been saved successfully",
                     style: applyRobotoFont(
                       fontSize: 14,
@@ -271,49 +271,49 @@ class VisualAcuitySuccessDialog extends HookConsumerWidget {
   }
 
   Future<void> _saveUpdateMode(WidgetRef ref, NavigatorState navigator) async {
-    // await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
+    await ref.read(tumblingTestProvider).saveVisionAcuityResponseToDB();
 
-    // navigator.push(
-    //   MaterialPageRoute(
-    //     builder: (context) => const DistanceVisualAcuityTumblingPage(),
-    //   ),
-    // );
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => const DistanceVisualAcuityTumblingPage(),
+      ),
+    );
 
     /////////////////////////////////////////////////////////////////////////
 
-    final result = await ref
-        .read(tumblingTestProvider)
-        .updateVisualAcuityTumblingResponse();
+    // final result = await ref
+    //     .read(tumblingTestProvider)
+    //     .updateVisualAcuityTumblingResponse();
 
-    result.fold(
-      (failure) {
-        Fluttertoast.showToast(
-            msg: "Failed to update observation at this moment");
+    // result.fold(
+    //   (failure) {
+    //     Fluttertoast.showToast(
+    //         msg: "Failed to update observation at this moment");
 
-        navigator
-          // ..pop()
-          // ..pop()
-          // ..pop()
-          // ..pop()
-          ..pop()
-          ..pop()
-          ..pop()
-          ..pop()
-          ..pop();
-      },
-      (result) {
-        Fluttertoast.showToast(msg: "Observation Updated");
-        navigator
-          // ..pop()
-          // ..pop()
-          // ..pop()
-          // ..pop()
-          ..pop()
-          ..pop()
-          ..pop()
-          ..pop()
-          ..pop();
-      },
-    );
+    //     navigator
+    //       // ..pop()
+    //       // ..pop()
+    //       // ..pop()
+    //       // ..pop()
+    //       ..pop()
+    //       ..pop()
+    //       ..pop()
+    //       ..pop()
+    //       ..pop();
+    //   },
+    //   (result) {
+    //     Fluttertoast.showToast(msg: "Observation Updated");
+    //     navigator
+    //       // ..pop()
+    //       // ..pop()
+    //       // ..pop()
+    //       // ..pop()
+    //       ..pop()
+    //       ..pop()
+    //       ..pop()
+    //       ..pop()
+    //       ..pop();
+    //   },
+    // );
   }
 }
