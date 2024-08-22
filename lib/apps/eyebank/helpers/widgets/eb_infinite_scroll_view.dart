@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -78,6 +79,9 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
         final nextPageKey = pageKey + newItems.length;
         _pagingController.appendPage(newItems, nextPageKey);
       }
+    } on EBFailure catch (e, _) {
+      logger.e(e);
+      _pagingController.error = e.errorMessage;
     } catch (error) {
       logger.e(error);
       _pagingController.error = error;

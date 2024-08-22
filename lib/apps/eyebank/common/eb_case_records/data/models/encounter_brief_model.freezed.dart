@@ -20,17 +20,15 @@ EncounterBriefModel _$EncounterBriefModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EncounterBriefModel {
-  String? get encounterId => throw _privateConstructorUsedError;
-  String? get timelineName => throw _privateConstructorUsedError;
-  String? get timelineVersion => throw _privateConstructorUsedError;
-  String? get encounterStatus => throw _privateConstructorUsedError;
-  DonorBrief? get donorBrief => throw _privateConstructorUsedError;
-  DateTime? get intimateDate => throw _privateConstructorUsedError;
-  int? get performerId => throw _privateConstructorUsedError;
-  DateTime? get deathDate => throw _privateConstructorUsedError;
-  BodyLocation? get bodyLocation => throw _privateConstructorUsedError;
-  List<String>? get organExtracted => throw _privateConstructorUsedError;
-  DateTime? get lastModifiedDate => throw _privateConstructorUsedError;
+  List<ContentBrief>? get content => throw _privateConstructorUsedError;
+  int? get totalElements => throw _privateConstructorUsedError;
+  int? get totalPages => throw _privateConstructorUsedError;
+  int? get size => throw _privateConstructorUsedError;
+  int? get number => throw _privateConstructorUsedError;
+  int? get numberOfElements => throw _privateConstructorUsedError;
+  bool? get empty => throw _privateConstructorUsedError;
+  bool? get first => throw _privateConstructorUsedError;
+  bool? get last => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,26 +43,353 @@ abstract class $EncounterBriefModelCopyWith<$Res> {
       _$EncounterBriefModelCopyWithImpl<$Res, EncounterBriefModel>;
   @useResult
   $Res call(
-      {String? encounterId,
-      String? timelineName,
-      String? timelineVersion,
-      String? encounterStatus,
-      DonorBrief? donorBrief,
-      DateTime? intimateDate,
-      int? performerId,
-      DateTime? deathDate,
-      BodyLocation? bodyLocation,
-      List<String>? organExtracted,
-      DateTime? lastModifiedDate});
-
-  $DonorBriefCopyWith<$Res>? get donorBrief;
-  $BodyLocationCopyWith<$Res>? get bodyLocation;
+      {List<ContentBrief>? content,
+      int? totalElements,
+      int? totalPages,
+      int? size,
+      int? number,
+      int? numberOfElements,
+      bool? empty,
+      bool? first,
+      bool? last});
 }
 
 /// @nodoc
 class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
     implements $EncounterBriefModelCopyWith<$Res> {
   _$EncounterBriefModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? content = freezed,
+    Object? totalElements = freezed,
+    Object? totalPages = freezed,
+    Object? size = freezed,
+    Object? number = freezed,
+    Object? numberOfElements = freezed,
+    Object? empty = freezed,
+    Object? first = freezed,
+    Object? last = freezed,
+  }) {
+    return _then(_value.copyWith(
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as List<ContentBrief>?,
+      totalElements: freezed == totalElements
+          ? _value.totalElements
+          : totalElements // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int?,
+      numberOfElements: freezed == numberOfElements
+          ? _value.numberOfElements
+          : numberOfElements // ignore: cast_nullable_to_non_nullable
+              as int?,
+      empty: freezed == empty
+          ? _value.empty
+          : empty // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      first: freezed == first
+          ? _value.first
+          : first // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      last: freezed == last
+          ? _value.last
+          : last // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$EncounterBriefModelImplCopyWith<$Res>
+    implements $EncounterBriefModelCopyWith<$Res> {
+  factory _$$EncounterBriefModelImplCopyWith(_$EncounterBriefModelImpl value,
+          $Res Function(_$EncounterBriefModelImpl) then) =
+      __$$EncounterBriefModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<ContentBrief>? content,
+      int? totalElements,
+      int? totalPages,
+      int? size,
+      int? number,
+      int? numberOfElements,
+      bool? empty,
+      bool? first,
+      bool? last});
+}
+
+/// @nodoc
+class __$$EncounterBriefModelImplCopyWithImpl<$Res>
+    extends _$EncounterBriefModelCopyWithImpl<$Res, _$EncounterBriefModelImpl>
+    implements _$$EncounterBriefModelImplCopyWith<$Res> {
+  __$$EncounterBriefModelImplCopyWithImpl(_$EncounterBriefModelImpl _value,
+      $Res Function(_$EncounterBriefModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? content = freezed,
+    Object? totalElements = freezed,
+    Object? totalPages = freezed,
+    Object? size = freezed,
+    Object? number = freezed,
+    Object? numberOfElements = freezed,
+    Object? empty = freezed,
+    Object? first = freezed,
+    Object? last = freezed,
+  }) {
+    return _then(_$EncounterBriefModelImpl(
+      content: freezed == content
+          ? _value._content
+          : content // ignore: cast_nullable_to_non_nullable
+              as List<ContentBrief>?,
+      totalElements: freezed == totalElements
+          ? _value.totalElements
+          : totalElements // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as int?,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int?,
+      numberOfElements: freezed == numberOfElements
+          ? _value.numberOfElements
+          : numberOfElements // ignore: cast_nullable_to_non_nullable
+              as int?,
+      empty: freezed == empty
+          ? _value.empty
+          : empty // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      first: freezed == first
+          ? _value.first
+          : first // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      last: freezed == last
+          ? _value.last
+          : last // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$EncounterBriefModelImpl implements _EncounterBriefModel {
+  const _$EncounterBriefModelImpl(
+      {final List<ContentBrief>? content,
+      this.totalElements,
+      this.totalPages,
+      this.size,
+      this.number,
+      this.numberOfElements,
+      this.empty,
+      this.first,
+      this.last})
+      : _content = content;
+
+  factory _$EncounterBriefModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EncounterBriefModelImplFromJson(json);
+
+  final List<ContentBrief>? _content;
+  @override
+  List<ContentBrief>? get content {
+    final value = _content;
+    if (value == null) return null;
+    if (_content is EqualUnmodifiableListView) return _content;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final int? totalElements;
+  @override
+  final int? totalPages;
+  @override
+  final int? size;
+  @override
+  final int? number;
+  @override
+  final int? numberOfElements;
+  @override
+  final bool? empty;
+  @override
+  final bool? first;
+  @override
+  final bool? last;
+
+  @override
+  String toString() {
+    return 'EncounterBriefModel(content: $content, totalElements: $totalElements, totalPages: $totalPages, size: $size, number: $number, numberOfElements: $numberOfElements, empty: $empty, first: $first, last: $last)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EncounterBriefModelImpl &&
+            const DeepCollectionEquality().equals(other._content, _content) &&
+            (identical(other.totalElements, totalElements) ||
+                other.totalElements == totalElements) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.numberOfElements, numberOfElements) ||
+                other.numberOfElements == numberOfElements) &&
+            (identical(other.empty, empty) || other.empty == empty) &&
+            (identical(other.first, first) || other.first == first) &&
+            (identical(other.last, last) || other.last == last));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_content),
+      totalElements,
+      totalPages,
+      size,
+      number,
+      numberOfElements,
+      empty,
+      first,
+      last);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EncounterBriefModelImplCopyWith<_$EncounterBriefModelImpl> get copyWith =>
+      __$$EncounterBriefModelImplCopyWithImpl<_$EncounterBriefModelImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$EncounterBriefModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _EncounterBriefModel implements EncounterBriefModel {
+  const factory _EncounterBriefModel(
+      {final List<ContentBrief>? content,
+      final int? totalElements,
+      final int? totalPages,
+      final int? size,
+      final int? number,
+      final int? numberOfElements,
+      final bool? empty,
+      final bool? first,
+      final bool? last}) = _$EncounterBriefModelImpl;
+
+  factory _EncounterBriefModel.fromJson(Map<String, dynamic> json) =
+      _$EncounterBriefModelImpl.fromJson;
+
+  @override
+  List<ContentBrief>? get content;
+  @override
+  int? get totalElements;
+  @override
+  int? get totalPages;
+  @override
+  int? get size;
+  @override
+  int? get number;
+  @override
+  int? get numberOfElements;
+  @override
+  bool? get empty;
+  @override
+  bool? get first;
+  @override
+  bool? get last;
+  @override
+  @JsonKey(ignore: true)
+  _$$EncounterBriefModelImplCopyWith<_$EncounterBriefModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ContentBrief _$ContentBriefFromJson(Map<String, dynamic> json) {
+  return _ContentBrief.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ContentBrief {
+  String? get encounterId => throw _privateConstructorUsedError;
+  String? get timelineName => throw _privateConstructorUsedError;
+  String? get timelineVersion => throw _privateConstructorUsedError;
+  String? get encounterStatus => throw _privateConstructorUsedError;
+  DonorBrief? get donorBrief => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get intimateDate => throw _privateConstructorUsedError;
+  int? get performerId => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get deathDate => throw _privateConstructorUsedError;
+  BodyLocation? get bodyLocation => throw _privateConstructorUsedError;
+  List<String>? get organExtracted => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get metaData => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ContentBriefCopyWith<ContentBrief> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ContentBriefCopyWith<$Res> {
+  factory $ContentBriefCopyWith(
+          ContentBrief value, $Res Function(ContentBrief) then) =
+      _$ContentBriefCopyWithImpl<$Res, ContentBrief>;
+  @useResult
+  $Res call(
+      {String? encounterId,
+      String? timelineName,
+      String? timelineVersion,
+      String? encounterStatus,
+      DonorBrief? donorBrief,
+      @TimestampConverter() DateTime? intimateDate,
+      int? performerId,
+      @TimestampConverter() DateTime? deathDate,
+      BodyLocation? bodyLocation,
+      List<String>? organExtracted,
+      Map<String, dynamic>? metaData});
+
+  $DonorBriefCopyWith<$Res>? get donorBrief;
+  $BodyLocationCopyWith<$Res>? get bodyLocation;
+}
+
+/// @nodoc
+class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
+    implements $ContentBriefCopyWith<$Res> {
+  _$ContentBriefCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -84,7 +409,7 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
     Object? deathDate = freezed,
     Object? bodyLocation = freezed,
     Object? organExtracted = freezed,
-    Object? lastModifiedDate = freezed,
+    Object? metaData = freezed,
   }) {
     return _then(_value.copyWith(
       encounterId: freezed == encounterId
@@ -127,10 +452,10 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
           ? _value.organExtracted
           : organExtracted // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      lastModifiedDate: freezed == lastModifiedDate
-          ? _value.lastModifiedDate
-          : lastModifiedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      metaData: freezed == metaData
+          ? _value.metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 
@@ -160,11 +485,11 @@ class _$EncounterBriefModelCopyWithImpl<$Res, $Val extends EncounterBriefModel>
 }
 
 /// @nodoc
-abstract class _$$EncounterBriefModelImplCopyWith<$Res>
-    implements $EncounterBriefModelCopyWith<$Res> {
-  factory _$$EncounterBriefModelImplCopyWith(_$EncounterBriefModelImpl value,
-          $Res Function(_$EncounterBriefModelImpl) then) =
-      __$$EncounterBriefModelImplCopyWithImpl<$Res>;
+abstract class _$$ContentBriefImplCopyWith<$Res>
+    implements $ContentBriefCopyWith<$Res> {
+  factory _$$ContentBriefImplCopyWith(
+          _$ContentBriefImpl value, $Res Function(_$ContentBriefImpl) then) =
+      __$$ContentBriefImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -173,12 +498,12 @@ abstract class _$$EncounterBriefModelImplCopyWith<$Res>
       String? timelineVersion,
       String? encounterStatus,
       DonorBrief? donorBrief,
-      DateTime? intimateDate,
+      @TimestampConverter() DateTime? intimateDate,
       int? performerId,
-      DateTime? deathDate,
+      @TimestampConverter() DateTime? deathDate,
       BodyLocation? bodyLocation,
       List<String>? organExtracted,
-      DateTime? lastModifiedDate});
+      Map<String, dynamic>? metaData});
 
   @override
   $DonorBriefCopyWith<$Res>? get donorBrief;
@@ -187,11 +512,11 @@ abstract class _$$EncounterBriefModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$EncounterBriefModelImplCopyWithImpl<$Res>
-    extends _$EncounterBriefModelCopyWithImpl<$Res, _$EncounterBriefModelImpl>
-    implements _$$EncounterBriefModelImplCopyWith<$Res> {
-  __$$EncounterBriefModelImplCopyWithImpl(_$EncounterBriefModelImpl _value,
-      $Res Function(_$EncounterBriefModelImpl) _then)
+class __$$ContentBriefImplCopyWithImpl<$Res>
+    extends _$ContentBriefCopyWithImpl<$Res, _$ContentBriefImpl>
+    implements _$$ContentBriefImplCopyWith<$Res> {
+  __$$ContentBriefImplCopyWithImpl(
+      _$ContentBriefImpl _value, $Res Function(_$ContentBriefImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -207,9 +532,9 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
     Object? deathDate = freezed,
     Object? bodyLocation = freezed,
     Object? organExtracted = freezed,
-    Object? lastModifiedDate = freezed,
+    Object? metaData = freezed,
   }) {
-    return _then(_$EncounterBriefModelImpl(
+    return _then(_$ContentBriefImpl(
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
@@ -250,33 +575,34 @@ class __$$EncounterBriefModelImplCopyWithImpl<$Res>
           ? _value._organExtracted
           : organExtracted // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      lastModifiedDate: freezed == lastModifiedDate
-          ? _value.lastModifiedDate
-          : lastModifiedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      metaData: freezed == metaData
+          ? _value._metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$EncounterBriefModelImpl implements _EncounterBriefModel {
-  const _$EncounterBriefModelImpl(
+class _$ContentBriefImpl implements _ContentBrief {
+  const _$ContentBriefImpl(
       {this.encounterId,
       this.timelineName,
       this.timelineVersion,
       this.encounterStatus,
       this.donorBrief,
-      this.intimateDate,
+      @TimestampConverter() this.intimateDate,
       this.performerId,
-      this.deathDate,
+      @TimestampConverter() this.deathDate,
       this.bodyLocation,
       final List<String>? organExtracted,
-      this.lastModifiedDate})
-      : _organExtracted = organExtracted;
+      final Map<String, dynamic>? metaData})
+      : _organExtracted = organExtracted,
+        _metaData = metaData;
 
-  factory _$EncounterBriefModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$EncounterBriefModelImplFromJson(json);
+  factory _$ContentBriefImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ContentBriefImplFromJson(json);
 
   @override
   final String? encounterId;
@@ -289,10 +615,12 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
   @override
   final DonorBrief? donorBrief;
   @override
+  @TimestampConverter()
   final DateTime? intimateDate;
   @override
   final int? performerId;
   @override
+  @TimestampConverter()
   final DateTime? deathDate;
   @override
   final BodyLocation? bodyLocation;
@@ -306,19 +634,26 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final Map<String, dynamic>? _metaData;
   @override
-  final DateTime? lastModifiedDate;
+  Map<String, dynamic>? get metaData {
+    final value = _metaData;
+    if (value == null) return null;
+    if (_metaData is EqualUnmodifiableMapView) return _metaData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'EncounterBriefModel(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, lastModifiedDate: $lastModifiedDate)';
+    return 'ContentBrief(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, encounterStatus: $encounterStatus, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EncounterBriefModelImpl &&
+            other is _$ContentBriefImpl &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
             (identical(other.timelineName, timelineName) ||
@@ -339,8 +674,7 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
                 other.bodyLocation == bodyLocation) &&
             const DeepCollectionEquality()
                 .equals(other._organExtracted, _organExtracted) &&
-            (identical(other.lastModifiedDate, lastModifiedDate) ||
-                other.lastModifiedDate == lastModifiedDate));
+            const DeepCollectionEquality().equals(other._metaData, _metaData));
   }
 
   @JsonKey(ignore: true)
@@ -357,39 +691,38 @@ class _$EncounterBriefModelImpl implements _EncounterBriefModel {
       deathDate,
       bodyLocation,
       const DeepCollectionEquality().hash(_organExtracted),
-      lastModifiedDate);
+      const DeepCollectionEquality().hash(_metaData));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EncounterBriefModelImplCopyWith<_$EncounterBriefModelImpl> get copyWith =>
-      __$$EncounterBriefModelImplCopyWithImpl<_$EncounterBriefModelImpl>(
-          this, _$identity);
+  _$$ContentBriefImplCopyWith<_$ContentBriefImpl> get copyWith =>
+      __$$ContentBriefImplCopyWithImpl<_$ContentBriefImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$EncounterBriefModelImplToJson(
+    return _$$ContentBriefImplToJson(
       this,
     );
   }
 }
 
-abstract class _EncounterBriefModel implements EncounterBriefModel {
-  const factory _EncounterBriefModel(
+abstract class _ContentBrief implements ContentBrief {
+  const factory _ContentBrief(
       {final String? encounterId,
       final String? timelineName,
       final String? timelineVersion,
       final String? encounterStatus,
       final DonorBrief? donorBrief,
-      final DateTime? intimateDate,
+      @TimestampConverter() final DateTime? intimateDate,
       final int? performerId,
-      final DateTime? deathDate,
+      @TimestampConverter() final DateTime? deathDate,
       final BodyLocation? bodyLocation,
       final List<String>? organExtracted,
-      final DateTime? lastModifiedDate}) = _$EncounterBriefModelImpl;
+      final Map<String, dynamic>? metaData}) = _$ContentBriefImpl;
 
-  factory _EncounterBriefModel.fromJson(Map<String, dynamic> json) =
-      _$EncounterBriefModelImpl.fromJson;
+  factory _ContentBrief.fromJson(Map<String, dynamic> json) =
+      _$ContentBriefImpl.fromJson;
 
   @override
   String? get encounterId;
@@ -402,20 +735,22 @@ abstract class _EncounterBriefModel implements EncounterBriefModel {
   @override
   DonorBrief? get donorBrief;
   @override
+  @TimestampConverter()
   DateTime? get intimateDate;
   @override
   int? get performerId;
   @override
+  @TimestampConverter()
   DateTime? get deathDate;
   @override
   BodyLocation? get bodyLocation;
   @override
   List<String>? get organExtracted;
   @override
-  DateTime? get lastModifiedDate;
+  Map<String, dynamic>? get metaData;
   @override
   @JsonKey(ignore: true)
-  _$$EncounterBriefModelImplCopyWith<_$EncounterBriefModelImpl> get copyWith =>
+  _$$ContentBriefImplCopyWith<_$ContentBriefImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

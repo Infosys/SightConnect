@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'encounter_brief_model.freezed.dart';
@@ -6,21 +7,39 @@ part 'encounter_brief_model.g.dart';
 @freezed
 class EncounterBriefModel with _$EncounterBriefModel {
   const factory EncounterBriefModel({
+    List<ContentBrief>? content,
+    int? totalElements,
+    int? totalPages,
+    int? size,
+    int? number,
+    int? numberOfElements,
+    bool? empty,
+    bool? first,
+    bool? last,
+  }) = _EncounterBriefModel;
+
+  factory EncounterBriefModel.fromJson(Map<String, dynamic> json) =>
+      _$EncounterBriefModelFromJson(json);
+}
+
+@freezed
+class ContentBrief with _$ContentBrief {
+  const factory ContentBrief({
     String? encounterId,
     String? timelineName,
     String? timelineVersion,
     String? encounterStatus,
     DonorBrief? donorBrief,
-    DateTime? intimateDate,
+    @TimestampConverter() DateTime? intimateDate,
     int? performerId,
-    DateTime? deathDate,
+    @TimestampConverter() DateTime? deathDate,
     BodyLocation? bodyLocation,
     List<String>? organExtracted,
-    DateTime? lastModifiedDate,
-  }) = _EncounterBriefModel;
+    Map<String, dynamic>? metaData,
+  }) = _ContentBrief;
 
-  factory EncounterBriefModel.fromJson(Map<String, dynamic> json) =>
-      _$EncounterBriefModelFromJson(json);
+  factory ContentBrief.fromJson(Map<String, dynamic> json) =>
+      _$ContentBriefFromJson(json);
 }
 
 @freezed

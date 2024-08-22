@@ -1,9 +1,8 @@
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/case_register_repository_impl.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/mappers/encounter_brief_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
-import 'package:eye_care_for_all/faker/dummy_ecounter_brief.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
@@ -14,49 +13,50 @@ final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
     (r) => r.stage,
   );
 });
-final ebSubmitIntimationFormProvider = StateProvider((ref) {
-  // final repo = ref.watch(ebTimlineRepoProvider);
-  // return repo
-});
+// final ebSubmitIntimationFormProvider = StateProvider((ref) {
+//   // final repo = ref.watch(ebTimlineRepoProvider);
+//   // return repo
+// });
 
-//EncounterBriefEntity
+//GET ALL ENCOUNTERS
 final ebGetRecordsProvider =
-    FutureProvider.family<List<EncounterBriefEntity>, GetRecordsParams>(
-        (ref, params) async {
-  await Future.delayed(const Duration(milliseconds: 500));
+    FutureProvider.family<EncounterBriefEntity, GetRecordsParams>(
+  (ref, params) async {
+    final repo = ref.watch(ebCaseRegisterRepositoryProvider);
+    final p = GetAllEncountersParams(
+      // encounterStage: null,
+      // startDate: null,
+      // endDate: null,
+      page: params.pageNumber,
+      size: params.pageSize,
+    );
+    final result = await repo.getAllEncounters(p);
+    return result.fold(
+      (l) => throw l,
+      (r) => EncounterBriefMapper.mapToEntity(r),
+    );
+  },
+);
 
-  final apiData =
-      dummyEncounterBrief.map((e) => EncounterBriefModel.fromJson(e)).toList();
-  return Future.value(
-      apiData.map((e) => EncounterBriefMapper.mapToEntity(e)).toList());
-});
-
+//SEARCH ENCOUNTER
 final ebSearchRecordProvider =
-    FutureProvider.family<List<EncounterBriefEntity>, String>(
-  (ref, query) async {
-    final List<EncounterBriefEntity> fakeData = List.generate(
-      10,
-      (index) => EncounterBriefEntity(
-        encounterId: (index + 1).toString(),
-        encounterStatus: EBStageName.DONOR_SCREENING,
-        donorBrief: DonorBriefEntity(
-          id: 0,
-          name: "George Soros",
-          contact: "9363476747",
-        ),
-        intimateDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
-        performerId: 0,
-        deathDate: DateTime.parse('2024-08-13T07:41:19.691Z'),
-      ),
+    FutureProvider.family<EncounterBriefEntity, SearchRecordParams>(
+  (ref, params) async {
+    if (params.searchKey.isEmpty) {
+      return EncounterBriefEntity(content: []);
+    }
+    final repo = ref.watch(ebCaseRegisterRepositoryProvider);
+    final p = SearchEncounterParams(
+      mobile: params.searchKey,
+      page: params.pageNumber,
+      size: params.pageSize,
     );
 
-    await Future.delayed(const Duration(milliseconds: 300));
-    final filteredData = fakeData
-        .where((encounter) =>
-            encounter.encounterId.toString().contains(query.toLowerCase()))
-        .toList();
-
-    return filteredData;
+    final result = await repo.searchEncounter(p);
+    return result.fold(
+      (l) => throw l,
+      (r) => EncounterBriefMapper.mapToEntity(r),
+    );
   },
 );
 
@@ -69,5 +69,19 @@ class GetRecordsParams {
     this.filters,
     required this.pageNumber,
     required this.pageSize,
+  });
+}
+
+class SearchRecordParams {
+  final List<String>? filters;
+  final int pageNumber;
+  final int pageSize;
+  final String searchKey;
+
+  SearchRecordParams({
+    this.filters,
+    required this.pageNumber,
+    required this.pageSize,
+    required this.searchKey,
   });
 }

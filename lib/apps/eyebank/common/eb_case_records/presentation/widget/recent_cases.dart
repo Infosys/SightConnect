@@ -7,14 +7,14 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final params = GetRecordsParams(
-  filters: [],
-  pageNumber: 0,
-  pageSize: 10,
-);
-
 class RecentCases extends ConsumerWidget {
   const RecentCases({super.key});
+
+  static final params = GetRecordsParams(
+    filters: [],
+    pageNumber: 0,
+    pageSize: 10,
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,12 +60,12 @@ class RecentCases extends ConsumerWidget {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: data.length,
+                    itemCount: data.content?.length,
                     padding: const EdgeInsets.all(0),
                     itemBuilder: (context, index) {
-                      final item = data[index];
+                      final item = data.content?[index];
                       return EBCaseCard(
-                        item: item,
+                        item: item!,
                         isCompact: true,
                         onTap: () {
                           final navigator = Navigator.of(context);

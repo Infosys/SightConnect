@@ -9,6 +9,35 @@ part of 'encounter_brief_model.dart';
 _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EncounterBriefModelImpl(
+      content: (json['content'] as List<dynamic>?)
+          ?.map((e) => ContentBrief.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      totalElements: (json['totalElements'] as num?)?.toInt(),
+      totalPages: (json['totalPages'] as num?)?.toInt(),
+      size: (json['size'] as num?)?.toInt(),
+      number: (json['number'] as num?)?.toInt(),
+      numberOfElements: (json['numberOfElements'] as num?)?.toInt(),
+      empty: json['empty'] as bool?,
+      first: json['first'] as bool?,
+      last: json['last'] as bool?,
+    );
+
+Map<String, dynamic> _$$EncounterBriefModelImplToJson(
+        _$EncounterBriefModelImpl instance) =>
+    <String, dynamic>{
+      'content': instance.content?.map((e) => e.toJson()).toList(),
+      'totalElements': instance.totalElements,
+      'totalPages': instance.totalPages,
+      'size': instance.size,
+      'number': instance.number,
+      'numberOfElements': instance.numberOfElements,
+      'empty': instance.empty,
+      'first': instance.first,
+      'last': instance.last,
+    };
+
+_$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
+    _$ContentBriefImpl(
       encounterId: json['encounterId'] as String?,
       timelineName: json['timelineName'] as String?,
       timelineVersion: json['timelineVersion'] as String?,
@@ -16,38 +45,33 @@ _$EncounterBriefModelImpl _$$EncounterBriefModelImplFromJson(
       donorBrief: json['donorBrief'] == null
           ? null
           : DonorBrief.fromJson(json['donorBrief'] as Map<String, dynamic>),
-      intimateDate: json['intimateDate'] == null
-          ? null
-          : DateTime.parse(json['intimateDate'] as String),
+      intimateDate:
+          const TimestampConverter().fromJson(json['intimateDate'] as String?),
       performerId: (json['performerId'] as num?)?.toInt(),
-      deathDate: json['deathDate'] == null
-          ? null
-          : DateTime.parse(json['deathDate'] as String),
+      deathDate:
+          const TimestampConverter().fromJson(json['deathDate'] as String?),
       bodyLocation: json['bodyLocation'] == null
           ? null
           : BodyLocation.fromJson(json['bodyLocation'] as Map<String, dynamic>),
       organExtracted: (json['organExtracted'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      lastModifiedDate: json['lastModifiedDate'] == null
-          ? null
-          : DateTime.parse(json['lastModifiedDate'] as String),
+      metaData: json['metaData'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$$EncounterBriefModelImplToJson(
-        _$EncounterBriefModelImpl instance) =>
+Map<String, dynamic> _$$ContentBriefImplToJson(_$ContentBriefImpl instance) =>
     <String, dynamic>{
       'encounterId': instance.encounterId,
       'timelineName': instance.timelineName,
       'timelineVersion': instance.timelineVersion,
       'encounterStatus': instance.encounterStatus,
       'donorBrief': instance.donorBrief?.toJson(),
-      'intimateDate': instance.intimateDate?.toIso8601String(),
+      'intimateDate': const TimestampConverter().toJson(instance.intimateDate),
       'performerId': instance.performerId,
-      'deathDate': instance.deathDate?.toIso8601String(),
+      'deathDate': const TimestampConverter().toJson(instance.deathDate),
       'bodyLocation': instance.bodyLocation?.toJson(),
       'organExtracted': instance.organExtracted,
-      'lastModifiedDate': instance.lastModifiedDate?.toIso8601String(),
+      'metaData': instance.metaData,
     };
 
 _$BodyLocationImpl _$$BodyLocationImplFromJson(Map<String, dynamic> json) =>

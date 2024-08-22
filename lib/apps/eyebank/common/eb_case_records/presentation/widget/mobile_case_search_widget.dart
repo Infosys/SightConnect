@@ -12,7 +12,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return EbInfiniteScrollView<EncounterBriefEntity>(
+    return EbInfiniteScrollView<ContentBriefEntity>(
       fetchPageData: (pageKey, pageSize, filters) async {
         final params = GetRecordsParams(
           filters: filters,
@@ -20,7 +20,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           pageSize: pageSize,
         );
         final records = await ref.read(ebGetRecordsProvider(params).future);
-        return records;
+        return records.content ?? [];
       },
       itemBuilder: (context, item, index) {
         return Padding(

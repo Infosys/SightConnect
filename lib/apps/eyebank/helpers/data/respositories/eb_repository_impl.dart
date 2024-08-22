@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
@@ -22,35 +21,6 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   EyeBankRepositoryImpl(this._dio);
 
-  @override
-  Future<Either<EBFailure, List<EncounterBriefModel>>> getAllEncounters(
-      GetAllEncountersParams params) {
-    return EyeBankErrorHandler.handle(() async {
-      final endPoint =
-          '/encounters?encounterStage=${params.encounterStage}&startDate=${params.startDate}&endDate=${params.endDate}&page=${params.page}&size=${params.size}';
-      final response = await _dio.get(endPoint);
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(response.statusMessage ?? 'Error in getAllEncounters');
-      }
-    });
-  }
-
-  @override
-  Future<Either<EBFailure, List<EncounterBriefModel>>> searchEncounter(
-      SearchEncounterParams params) {
-    return EyeBankErrorHandler.handle(() async {
-      final endPoint =
-          '/encounters/search?mobile=${params.mobile}&identifier=${params.identifier}&identifierType=${params.identifierType}';
-      final response = await _dio.get(endPoint);
-      if (response.statusCode == 200) {
-        return response.data;
-      } else {
-        throw Exception(response.statusMessage ?? 'Error in searchEncounter');
-      }
-    });
-  }
 
   @override
   Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(

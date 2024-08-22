@@ -7,40 +7,57 @@ class EncounterBriefMapper {
 
   static EncounterBriefEntity mapToEntity(EncounterBriefModel model) {
     return EncounterBriefEntity(
-      encounterId: model.encounterId,
-      timelineName: model.timelineName,
-      timelineVersion: model.timelineVersion,
-      encounterStatus: _getStageName(model.encounterStatus),
-      donorBrief: model.donorBrief != null
-          ? DonorBriefEntity(
-              id: model.donorBrief?.id,
-              name: model.donorBrief?.name,
-              contact: model.donorBrief?.contact,
-            )
-          : null,
-      intimateDate: model.intimateDate,
-      performerId: model.performerId,
-      deathDate: model.deathDate,
-      bodyLocation: model.bodyLocation != null
-          ? BodyLocationEntity(
-              addressLine1: model.bodyLocation?.addressLine1,
-              addressLine2: model.bodyLocation?.addressLine2,
-              street: model.bodyLocation?.street,
-              city: model.bodyLocation?.city,
-              state: model.bodyLocation?.state,
-              zipCode: model.bodyLocation?.zipCode,
-              country: model.bodyLocation?.country,
-              landmark: model.bodyLocation?.landmark,
-              village: model.bodyLocation?.village,
-              district: model.bodyLocation?.district,
-              latitude: model.bodyLocation?.latitude,
-              longitude: model.bodyLocation?.longitude,
-              direction: model.bodyLocation?.direction,
-            )
-          : null,
-      organExtracted: model.organExtracted,
-      lastModifiedDate: model.lastModifiedDate,
+      content: _mapContentBrief(model.content ?? []),
+      totalPages: model.totalPages,
+      size: model.size,
+      number: model.number,
+      numberOfElements: model.numberOfElements,
+      empty: model.empty,
+      first: model.first,
+      last: model.last,
     );
+  }
+
+  static List<ContentBriefEntity> _mapContentBrief(List<ContentBrief> contentModel) {
+    return contentModel
+        .map(
+          (contentModel) => ContentBriefEntity(
+            encounterId: contentModel.encounterId,
+            timelineName: contentModel.timelineName,
+            timelineVersion: contentModel.timelineVersion,
+            encounterStatus: _getStageName(contentModel.encounterStatus),
+            donorBrief: contentModel.donorBrief != null
+                ? DonorBriefEntity(
+                    id: contentModel.donorBrief?.id,
+                    name: contentModel.donorBrief?.name,
+                    contact: contentModel.donorBrief?.contact,
+                  )
+                : null,
+            intimateDate: contentModel.intimateDate,
+            performerId: contentModel.performerId,
+            deathDate: contentModel.deathDate,
+            bodyLocation: contentModel.bodyLocation != null
+                ? BodyLocationEntity(
+                    addressLine1: contentModel.bodyLocation?.addressLine1,
+                    addressLine2: contentModel.bodyLocation?.addressLine2,
+                    street: contentModel.bodyLocation?.street,
+                    city: contentModel.bodyLocation?.city,
+                    state: contentModel.bodyLocation?.state,
+                    zipCode: contentModel.bodyLocation?.zipCode,
+                    country: contentModel.bodyLocation?.country,
+                    landmark: contentModel.bodyLocation?.landmark,
+                    village: contentModel.bodyLocation?.village,
+                    district: contentModel.bodyLocation?.district,
+                    latitude: contentModel.bodyLocation?.latitude,
+                    longitude: contentModel.bodyLocation?.longitude,
+                    direction: contentModel.bodyLocation?.direction,
+                  )
+                : null,
+            organExtracted: contentModel.organExtracted,
+            metaData: contentModel.metaData,
+          ),
+        )
+        .toList();
   }
 
   static _getStageName(String? stage) {

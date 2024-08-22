@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class EBCaseCard extends StatelessWidget {
-  final EncounterBriefEntity item;
+  final ContentBriefEntity item;
   final bool isCompact;
   final VoidCallback? onTap;
 
@@ -38,7 +38,7 @@ class _CompactCard extends StatelessWidget {
     this.item,
   });
   final Function()? onTap;
-  final EncounterBriefEntity? item;
+  final ContentBriefEntity? item;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class _DetailedCard extends StatelessWidget {
   });
 
   final Function()? onTap;
-  final EncounterBriefEntity? item;
+  final ContentBriefEntity? item;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class _DetailedCard extends StatelessWidget {
   }
 }
 
-Widget _buildTopRow(BuildContext context, EncounterBriefEntity? item) {
+Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -180,7 +180,7 @@ Widget _buildTopRow(BuildContext context, EncounterBriefEntity? item) {
   );
 }
 
-Widget _buildDateInfo(BuildContext context, EncounterBriefEntity? item) {
+Widget _buildDateInfo(BuildContext context, ContentBriefEntity? item) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -214,7 +214,7 @@ Widget _buildDateColumn(BuildContext context, String label, String? date) {
   );
 }
 
-Widget _buildOrganInfo(BuildContext context, EncounterBriefEntity? item) {
+Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
