@@ -11,15 +11,29 @@ showCustomWoltSheet(BuildContext context, Widget child) {
       context: context,
       pageListBuilder: (modalSheetContext) {
         return [
-          NonScrollingWoltModalSheetPage(
-            useSafeArea: false,
-            navBarHeight: kIsWeb ? null : 1,
+          WoltModalSheetPage(
+            // navBarHeight: 1,
             child: SizedBox(
               height: MediaQuery.of(modalSheetContext).size.height,
               child: child,
             ),
           ),
         ];
+        // if (kIsWeb) {
+        //   return [
+
+        //   ];
+        // }
+        // return [
+        //   NonScrollingWoltModalSheetPage(
+        //     useSafeArea: false,
+        //     navBarHeight: kIsWeb ? null : 1,
+        //     child: SizedBox(
+        //       height: MediaQuery.of(modalSheetContext).size.height,
+        //       child: child,
+        //     ),
+        //   ),
+        // ];
       },
       modalTypeBuilder: (context) {
         if (Responsive.isMobile(context)) {

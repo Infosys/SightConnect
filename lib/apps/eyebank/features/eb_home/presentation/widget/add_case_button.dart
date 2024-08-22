@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
@@ -52,12 +51,23 @@ class AddCaseButton extends StatelessWidget {
                 onSubmit: (data, mode) async {
                   try {
                     final repo = ref.read(ebRepositoryProvider);
-                    final submitData =
-                        EBSubmitFormDataRequestModel(formData: data);
-                    await repo.saveIntimationForm(submitData);
-                  } on EBFailure catch (e, _) {
-                    logger.e(e);
-                    Fluttertoast.showToast(msg: e.errorMessage);
+                    final submitData = EBSubmitFormDataRequestModel(
+                      formData: data,
+                      timelineName: "CORNEA_DONATION",
+                      timelineVersion: "0.0.1",
+                      // performerId: "902",
+                      // performerRole: "TECHNICIAN",
+                    );
+                    logger.f(submitData.toJson());
+                    final res = await repo.saveIntimationForm(submitData);
+
+                    res.fold((l) {
+                      logger.e(l);
+                      Fluttertoast.showToast(msg: l.errorMessage);
+                    }, (r) {
+                      Navigator.pop(context);
+                      Fluttertoast.showToast(msg: 'Case created successfully');
+                    });
                   } catch (e) {
                     logger.e(e);
                   }

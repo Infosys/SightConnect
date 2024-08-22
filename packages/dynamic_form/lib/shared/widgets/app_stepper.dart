@@ -59,10 +59,25 @@ class AppStepperState extends State<AppStepper> {
       return Container();
     } else if (widget.pages.length == 1) {
       return SingleChildScrollView(
-        child: PageWidget(
-          elements: widget.pages.first.elements,
-          formKey: widget.formKey,
-          name: widget.pages.first.name,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PageWidget(
+              elements: widget.pages.first.elements,
+              formKey: widget.formKey,
+              name: widget.pages.first.name,
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: _handleSubmit,
+                  child: const Text('SUBMIT'),
+                ),
+              ],
+            ),
+          ],
         ),
       );
     }

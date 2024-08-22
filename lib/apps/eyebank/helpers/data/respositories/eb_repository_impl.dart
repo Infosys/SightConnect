@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/submit_form_data_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/contracts/eb_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -102,7 +101,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   }
 
   @override
-  Future<Either<EBFailure, SubmitFormDataResponseModel>> saveIntimationForm(
+  Future<Either<EBFailure, void>> saveIntimationForm(
     EBSubmitFormDataRequestModel requestData,
   ) {
     return EyeBankErrorHandler.handle(() async {
@@ -112,7 +111,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
         data: requestData.toJson(),
       );
       if (response.statusCode == 200) {
-        return SubmitFormDataResponseModel.fromJson(response.data);
+        return;
       } else {
         throw Exception(response.statusMessage ?? 'Error in saveOrDraftForm');
       }
