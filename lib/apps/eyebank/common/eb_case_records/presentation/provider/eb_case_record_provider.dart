@@ -1,9 +1,8 @@
-import 'package:dynamic_form/shared/utlities/log_service.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/case_register_repository_impl.dart';
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/mappers/encounter_brief_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
-import 'package:eye_care_for_all/faker/dummy_encounter_brief.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
@@ -14,37 +13,50 @@ final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
     (r) => r.stage,
   );
 });
-final ebSubmitIntimationFormProvider = StateProvider((ref) {
-  // final repo = ref.watch(ebTimlineRepoProvider);
-  // return repo
-});
+// final ebSubmitIntimationFormProvider = StateProvider((ref) {
+//   // final repo = ref.watch(ebTimlineRepoProvider);
+//   // return repo
+// });
 
-//EncounterBriefEntity
+//GET ALL ENCOUNTERS
 final ebGetRecordsProvider =
     FutureProvider.family<EncounterBriefEntity, GetRecordsParams>(
-        (ref, params) async {
-  await Future.delayed(const Duration(milliseconds: 500));
+  (ref, params) async {
+    final repo = ref.watch(ebCaseRegisterRepositoryProvider);
+    final p = GetAllEncountersParams(
+      // encounterStage: null,
+      // startDate: null,
+      // endDate: null,
+      page: params.pageNumber,
+      size: params.pageSize,
+    );
+    final result = await repo.getAllEncounters(p);
+    return result.fold(
+      (l) => throw l,
+      (r) => EncounterBriefMapper.mapToEntity(r),
+    );
+  },
+);
 
-  final apiData = EncounterBriefModel.fromJson(dummyEncounterBrief);
-  final result = EncounterBriefMapper.mapToEntity(apiData);
-  Log.d({'ebGetRecordsProvider', result});
-  return Future.value(result);
-});
-
+//SEARCH ENCOUNTER
 final ebSearchRecordProvider =
-    FutureProvider.family<List<ContentBriefEntity>, String>(
-  (ref, query) async {
-    final apiData = EncounterBriefModel.fromJson(dummyEncounterBrief);
-    final result = EncounterBriefMapper.mapToEntity(apiData);
+    FutureProvider.family<EncounterBriefEntity, SearchRecordParams>(
+  (ref, params) async {
+    if (params.searchKey.isEmpty) {
+      return EncounterBriefEntity(content: []);
+    }
+    final repo = ref.watch(ebCaseRegisterRepositoryProvider);
+    final p = SearchEncounterParams(
+      mobile: params.searchKey,
+      page: params.pageNumber,
+      size: params.pageSize,
+    );
 
-    await Future.delayed(const Duration(milliseconds: 300));
-    final filteredData = result.content
-        ?.where((encounter) =>
-                encounter.encounterId?.toString().contains(query.toLowerCase()) ??
-                false)
-        .toList();
-
-    return filteredData!;
+    final result = await repo.searchEncounter(p);
+    return result.fold(
+      (l) => throw l,
+      (r) => EncounterBriefMapper.mapToEntity(r),
+    );
   },
 );
 
@@ -57,5 +69,19 @@ class GetRecordsParams {
     this.filters,
     required this.pageNumber,
     required this.pageSize,
+  });
+}
+
+class SearchRecordParams {
+  final List<String>? filters;
+  final int pageNumber;
+  final int pageSize;
+  final String searchKey;
+
+  SearchRecordParams({
+    this.filters,
+    required this.pageNumber,
+    required this.pageSize,
+    required this.searchKey,
   });
 }

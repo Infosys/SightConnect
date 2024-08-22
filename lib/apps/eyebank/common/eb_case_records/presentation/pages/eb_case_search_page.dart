@@ -1,6 +1,8 @@
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,35 +49,50 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
           },
           child: Consumer(
             builder: (context, ref, child) {
-              if (query.isEmpty) {
-                return const Center(
-                  child: Text('Enter a search query to see results'),
-                );
-              }
-
-              final searchResults = ref.watch(ebSearchRecordProvider(query));
-              return searchResults.when(
-                data: (results) {
-                  if (results.isEmpty) {
-                    return const Center(
-                      child: Text('No results found'),
-                    );
-                  }
-                  return ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    itemCount: results.length,
-                    itemBuilder: (context, index) {
-                      return EBCaseCard(
-                        item: results[index],
-                      );
-                    },
+              return EbInfiniteScrollView<ContentBriefEntity>(
+                fetchPageData: (pageKey, pageSize, filters) async {
+                  final params = SearchRecordParams(
+                    searchKey: query,
+                    filters: filters,
+                    pageNumber: pageKey,
+                    pageSize: pageSize,
+                  );
+                  final records =
+                      await ref.read(ebSearchRecordProvider(params).future);
+                  return records.content ?? [];
+                },
+                itemBuilder: (context, item, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: EBCaseCard(
+                      item: item,
+                      onTap: () {
+                        final navigator = Navigator.of(context);
+                        navigator.push(
+                          MaterialPageRoute(
+                            builder: (context) => const EbCaseTimeLinePage(
+                              encounterID: 1,
+                              timelineVersion: '1',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, stack) {
-                  logger.d('Error: $error');
-                  return Center(child: Text('Error: $error'));
+                filterOptions: const [],
+                enableSearch: false,
+                enableFilter: false,
+                defaultPageSize: 10,
+                onSearchTap: () {
+                  final navigator = Navigator.of(context);
+                  navigator.push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const EBCaseSearchPage();
+                      },
+                    ),
+                  );
                 },
               );
             },

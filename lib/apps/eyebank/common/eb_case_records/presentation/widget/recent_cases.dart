@@ -7,14 +7,14 @@ import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final params = GetRecordsParams(
-  filters: [],
-  pageNumber: 0,
-  pageSize: 10,
-);
-
 class RecentCases extends ConsumerWidget {
   const RecentCases({super.key});
+
+  static final params = GetRecordsParams(
+    filters: [],
+    pageNumber: 0,
+    pageSize: 10,
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

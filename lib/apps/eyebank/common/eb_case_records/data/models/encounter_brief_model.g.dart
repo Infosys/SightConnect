@@ -45,13 +45,11 @@ _$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
       donorBrief: json['donorBrief'] == null
           ? null
           : DonorBrief.fromJson(json['donorBrief'] as Map<String, dynamic>),
-      intimateDate: json['intimateDate'] == null
-          ? null
-          : DateTime.parse(json['intimateDate'] as String),
+      intimateDate:
+          const TimestampConverter().fromJson(json['intimateDate'] as String?),
       performerId: (json['performerId'] as num?)?.toInt(),
-      deathDate: json['deathDate'] == null
-          ? null
-          : DateTime.parse(json['deathDate'] as String),
+      deathDate:
+          const TimestampConverter().fromJson(json['deathDate'] as String?),
       bodyLocation: json['bodyLocation'] == null
           ? null
           : BodyLocation.fromJson(json['bodyLocation'] as Map<String, dynamic>),
@@ -68,9 +66,9 @@ Map<String, dynamic> _$$ContentBriefImplToJson(_$ContentBriefImpl instance) =>
       'timelineVersion': instance.timelineVersion,
       'encounterStatus': instance.encounterStatus,
       'donorBrief': instance.donorBrief?.toJson(),
-      'intimateDate': instance.intimateDate?.toIso8601String(),
+      'intimateDate': const TimestampConverter().toJson(instance.intimateDate),
       'performerId': instance.performerId,
-      'deathDate': instance.deathDate?.toIso8601String(),
+      'deathDate': const TimestampConverter().toJson(instance.deathDate),
       'bodyLocation': instance.bodyLocation?.toJson(),
       'organExtracted': instance.organExtracted,
       'metaData': instance.metaData,

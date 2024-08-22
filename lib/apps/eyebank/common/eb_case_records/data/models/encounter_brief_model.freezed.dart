@@ -348,8 +348,10 @@ mixin _$ContentBrief {
   String? get timelineVersion => throw _privateConstructorUsedError;
   String? get encounterStatus => throw _privateConstructorUsedError;
   DonorBrief? get donorBrief => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get intimateDate => throw _privateConstructorUsedError;
   int? get performerId => throw _privateConstructorUsedError;
+  @TimestampConverter()
   DateTime? get deathDate => throw _privateConstructorUsedError;
   BodyLocation? get bodyLocation => throw _privateConstructorUsedError;
   List<String>? get organExtracted => throw _privateConstructorUsedError;
@@ -373,9 +375,9 @@ abstract class $ContentBriefCopyWith<$Res> {
       String? timelineVersion,
       String? encounterStatus,
       DonorBrief? donorBrief,
-      DateTime? intimateDate,
+      @TimestampConverter() DateTime? intimateDate,
       int? performerId,
-      DateTime? deathDate,
+      @TimestampConverter() DateTime? deathDate,
       BodyLocation? bodyLocation,
       List<String>? organExtracted,
       Map<String, dynamic>? metaData});
@@ -496,9 +498,9 @@ abstract class _$$ContentBriefImplCopyWith<$Res>
       String? timelineVersion,
       String? encounterStatus,
       DonorBrief? donorBrief,
-      DateTime? intimateDate,
+      @TimestampConverter() DateTime? intimateDate,
       int? performerId,
-      DateTime? deathDate,
+      @TimestampConverter() DateTime? deathDate,
       BodyLocation? bodyLocation,
       List<String>? organExtracted,
       Map<String, dynamic>? metaData});
@@ -590,9 +592,9 @@ class _$ContentBriefImpl implements _ContentBrief {
       this.timelineVersion,
       this.encounterStatus,
       this.donorBrief,
-      this.intimateDate,
+      @TimestampConverter() this.intimateDate,
       this.performerId,
-      this.deathDate,
+      @TimestampConverter() this.deathDate,
       this.bodyLocation,
       final List<String>? organExtracted,
       final Map<String, dynamic>? metaData})
@@ -613,10 +615,12 @@ class _$ContentBriefImpl implements _ContentBrief {
   @override
   final DonorBrief? donorBrief;
   @override
+  @TimestampConverter()
   final DateTime? intimateDate;
   @override
   final int? performerId;
   @override
+  @TimestampConverter()
   final DateTime? deathDate;
   @override
   final BodyLocation? bodyLocation;
@@ -710,9 +714,9 @@ abstract class _ContentBrief implements ContentBrief {
       final String? timelineVersion,
       final String? encounterStatus,
       final DonorBrief? donorBrief,
-      final DateTime? intimateDate,
+      @TimestampConverter() final DateTime? intimateDate,
       final int? performerId,
-      final DateTime? deathDate,
+      @TimestampConverter() final DateTime? deathDate,
       final BodyLocation? bodyLocation,
       final List<String>? organExtracted,
       final Map<String, dynamic>? metaData}) = _$ContentBriefImpl;
@@ -731,10 +735,12 @@ abstract class _ContentBrief implements ContentBrief {
   @override
   DonorBrief? get donorBrief;
   @override
+  @TimestampConverter()
   DateTime? get intimateDate;
   @override
   int? get performerId;
   @override
+  @TimestampConverter()
   DateTime? get deathDate;
   @override
   BodyLocation? get bodyLocation;

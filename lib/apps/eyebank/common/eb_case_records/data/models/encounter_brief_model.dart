@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'encounter_brief_model.freezed.dart';
@@ -29,9 +30,9 @@ class ContentBrief with _$ContentBrief {
     String? timelineVersion,
     String? encounterStatus,
     DonorBrief? donorBrief,
-    DateTime? intimateDate,
+    @TimestampConverter() DateTime? intimateDate,
     int? performerId,
-    DateTime? deathDate,
+    @TimestampConverter() DateTime? deathDate,
     BodyLocation? bodyLocation,
     List<String>? organExtracted,
     Map<String, dynamic>? metaData,

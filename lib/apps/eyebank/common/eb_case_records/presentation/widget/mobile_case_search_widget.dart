@@ -20,7 +20,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           pageSize: pageSize,
         );
         final records = await ref.read(ebGetRecordsProvider(params).future);
-        return records.content??[];
+        return records.content ?? [];
       },
       itemBuilder: (context, item, index) {
         return Padding(
