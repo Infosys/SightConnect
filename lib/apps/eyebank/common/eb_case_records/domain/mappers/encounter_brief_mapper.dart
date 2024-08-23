@@ -23,6 +23,7 @@ class EncounterBriefMapper {
     return contentModel
         .map(
           (contentModel) => ContentBriefEntity(
+            caseId: contentModel.caseId,
             encounterId: contentModel.encounterId,
             timelineName: contentModel.timelineName,
             timelineVersion: contentModel.timelineVersion,
@@ -34,8 +35,8 @@ class EncounterBriefMapper {
                     contact: contentModel.donorBrief?.contact,
                   )
                 : null,
-            notifierBrief: contentModel.notifierBrief != null?
-                NotifierBriefEntity(
+            notifierBrief: contentModel.notifierBrief != null
+                ? NotifierBriefEntity(
                     id: contentModel.notifierBrief?.id,
                     name: contentModel.notifierBrief?.name,
                     contact: contentModel.notifierBrief?.contact,

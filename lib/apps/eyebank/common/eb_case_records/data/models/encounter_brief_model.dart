@@ -25,6 +25,7 @@ class EncounterBriefModel with _$EncounterBriefModel {
 @freezed
 class ContentBrief with _$ContentBrief {
   const factory ContentBrief({
+    int? caseId,
     String? encounterId,
     String? timelineName,
     String? timelineVersion,

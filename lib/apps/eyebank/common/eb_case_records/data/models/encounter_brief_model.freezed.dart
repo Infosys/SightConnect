@@ -343,6 +343,7 @@ ContentBrief _$ContentBriefFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContentBrief {
+  int? get caseId => throw _privateConstructorUsedError;
   String? get encounterId => throw _privateConstructorUsedError;
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
@@ -371,7 +372,8 @@ abstract class $ContentBriefCopyWith<$Res> {
       _$ContentBriefCopyWithImpl<$Res, ContentBrief>;
   @useResult
   $Res call(
-      {String? encounterId,
+      {int? caseId,
+      String? encounterId,
       String? timelineName,
       String? timelineVersion,
       List<String>? activeStages,
@@ -402,6 +404,7 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? caseId = freezed,
     Object? encounterId = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
@@ -416,6 +419,10 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
     Object? metaData = freezed,
   }) {
     return _then(_value.copyWith(
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
@@ -513,7 +520,8 @@ abstract class _$$ContentBriefImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? encounterId,
+      {int? caseId,
+      String? encounterId,
       String? timelineName,
       String? timelineVersion,
       List<String>? activeStages,
@@ -545,6 +553,7 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? caseId = freezed,
     Object? encounterId = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
@@ -559,6 +568,10 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
     Object? metaData = freezed,
   }) {
     return _then(_$ContentBriefImpl(
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
       encounterId: freezed == encounterId
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
@@ -615,7 +628,8 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContentBriefImpl implements _ContentBrief {
   const _$ContentBriefImpl(
-      {this.encounterId,
+      {this.caseId,
+      this.encounterId,
       this.timelineName,
       this.timelineVersion,
       final List<String>? activeStages,
@@ -634,6 +648,8 @@ class _$ContentBriefImpl implements _ContentBrief {
   factory _$ContentBriefImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContentBriefImplFromJson(json);
 
+  @override
+  final int? caseId;
   @override
   final String? encounterId;
   @override
@@ -686,7 +702,7 @@ class _$ContentBriefImpl implements _ContentBrief {
 
   @override
   String toString() {
-    return 'ContentBrief(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, notifierBrief: $notifierBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
+    return 'ContentBrief(caseId: $caseId, encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, notifierBrief: $notifierBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
   }
 
   @override
@@ -694,6 +710,7 @@ class _$ContentBriefImpl implements _ContentBrief {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ContentBriefImpl &&
+            (identical(other.caseId, caseId) || other.caseId == caseId) &&
             (identical(other.encounterId, encounterId) ||
                 other.encounterId == encounterId) &&
             (identical(other.timelineName, timelineName) ||
@@ -723,6 +740,7 @@ class _$ContentBriefImpl implements _ContentBrief {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      caseId,
       encounterId,
       timelineName,
       timelineVersion,
@@ -752,7 +770,8 @@ class _$ContentBriefImpl implements _ContentBrief {
 
 abstract class _ContentBrief implements ContentBrief {
   const factory _ContentBrief(
-      {final String? encounterId,
+      {final int? caseId,
+      final String? encounterId,
       final String? timelineName,
       final String? timelineVersion,
       final List<String>? activeStages,
@@ -768,6 +787,8 @@ abstract class _ContentBrief implements ContentBrief {
   factory _ContentBrief.fromJson(Map<String, dynamic> json) =
       _$ContentBriefImpl.fromJson;
 
+  @override
+  int? get caseId;
   @override
   String? get encounterId;
   @override

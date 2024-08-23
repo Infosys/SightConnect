@@ -38,6 +38,7 @@ Map<String, dynamic> _$$EncounterBriefModelImplToJson(
 
 _$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
     _$ContentBriefImpl(
+      caseId: (json['caseId'] as num?)?.toInt(),
       encounterId: json['encounterId'] as String?,
       timelineName: json['timelineName'] as String?,
       timelineVersion: json['timelineVersion'] as String?,
@@ -67,6 +68,7 @@ _$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ContentBriefImplToJson(_$ContentBriefImpl instance) =>
     <String, dynamic>{
+      'caseId': instance.caseId,
       'encounterId': instance.encounterId,
       'timelineName': instance.timelineName,
       'timelineVersion': instance.timelineVersion,

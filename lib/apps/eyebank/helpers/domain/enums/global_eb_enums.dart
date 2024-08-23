@@ -43,6 +43,7 @@ enum EBStageName {
 
 enum EBStatus {
   // COMPLETED, PENDING, REJECTED, ACTIVE, UNKNOWN
+
   COMPLETED(
     value: 'COMPLETED',
     displayValue: 'Completed',

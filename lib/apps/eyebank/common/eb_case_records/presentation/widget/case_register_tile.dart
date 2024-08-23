@@ -126,7 +126,8 @@ Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: item?.notifierBrief?.name ?? "",
+                    text:
+                        item?.notifierBrief?.name.capitalizeFirstOfEach() ?? "",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -151,27 +152,45 @@ Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
             ),
             const SizedBox(height: 4),
             Text(
-              _getAddress(item?.bodyLocation),
-              style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
+              item?.organExtracted?.join(", ") ?? "",
+              // _getAddress(item?.bodyLocation),
+              style: applyRobotoFont(
+                fontSize: 10,
+                color: AppColor.red,
+                fontWeight: FontWeight.w500,
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
       ),
-      Flexible(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              'Case ID: ${item?.encounterId ?? ""}',
-              maxLines: 2,
-              textAlign: TextAlign.end,
-              overflow: TextOverflow.ellipsis,
-              style: applyRobotoFont(fontSize: 14),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: 'CASE ID: ',
+                  style: applyRobotoFont(
+                    fontSize: 12,
+                  ),
+                ),
+                TextSpan(
+                  text: '${item?.caseId ?? ""}',
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 4),
-          ],
-        ),
+            maxLines: 2,
+            textAlign: TextAlign.end,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 4),
+        ],
       ),
     ],
   );
@@ -194,7 +213,8 @@ Widget _buildDateInfo(BuildContext context, ContentBriefEntity? item) {
 
 Widget _buildDateColumn(BuildContext context, String label, String? date) {
   return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisSize: MainAxisSize.min,
     children: [
       Row(
         children: [

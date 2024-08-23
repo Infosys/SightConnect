@@ -32,6 +32,7 @@ class EncounterBriefEntity {
 
 class ContentBriefEntity {
   final String? encounterId;
+  final int? caseId;
   final String? timelineName;
   final String? timelineVersion;
   final List<EBStageName> activeStages;
@@ -45,6 +46,7 @@ class ContentBriefEntity {
   final Map<String, dynamic>? metaData;
 
   ContentBriefEntity({
+    this.caseId,
     this.encounterId,
     this.timelineName,
     this.timelineVersion,
@@ -61,7 +63,7 @@ class ContentBriefEntity {
 
   @override
   String toString() {
-    return 'ContentBriefEntity(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
+    return 'ContentBriefEntity(caseId: $caseId, encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, notifierBrief: $notifierBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
   }
 }
 
