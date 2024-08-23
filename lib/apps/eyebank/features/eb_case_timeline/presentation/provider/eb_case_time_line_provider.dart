@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../main.dart';
@@ -23,7 +21,7 @@ final ebCaseTimeLineProvider =
       final timelines = timelinesResult.getOrElse(() => []);
       final stages =
           stagesResult.getOrElse(() => const EbTimelineConfigModel());
-      log(EBTimelineMapper.mapToEntity(timelines, stages).toString());
+      // log(EBTimelineMapper.mapToEntity(timelines, stages).toString());
       return EBTimelineMapper.mapToEntity(timelines, stages);
     } else {
       throw EBServerFailure(

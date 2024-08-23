@@ -4,7 +4,7 @@ class EBTimelineEntity {
   final String? timelineName;
   final String? timelineVersion;
   final String? serviceRequestId;
-  final EBStageName? title;
+  final String? title;
   final EBStageName? stage;
   final String? assessmentVersion;
   final EBStatus? status;

@@ -198,7 +198,7 @@ class CaseHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            event.title?.displayValue.toUpperCase() ?? "",
+            event.title?.toUpperCase() ?? "",
             style: applyRobotoFont(
               fontSize: isNested ? 11 : 12,
               fontWeight: FontWeight.bold,
