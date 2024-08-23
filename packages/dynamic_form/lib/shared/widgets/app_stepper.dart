@@ -94,6 +94,7 @@ class AppStepperState extends State<AppStepper> {
       onStepCancel: _previousStep,
       steps: widget.pages.map((page) {
         return Step(
+          isActive: _currentStep == widget.pages.indexOf(page),
           state: StepState.indexed,
           title: const SizedBox(),
           content: PageWidget(

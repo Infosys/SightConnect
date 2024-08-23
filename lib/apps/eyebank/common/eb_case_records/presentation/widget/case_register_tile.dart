@@ -186,7 +186,8 @@ Widget _buildDateInfo(BuildContext context, ContentBriefEntity? item) {
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       _buildDateColumn(context, 'Death', item?.deathDate?.formateDate),
-      _buildDateColumn(context, 'Intimate', item?.intimateDate?.formateDate),
+      _buildDateColumn(
+          context, 'Intimated On ', item?.intimateDate?.formateDate),
     ],
   );
 }

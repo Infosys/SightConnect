@@ -58,7 +58,7 @@ class MyApp extends ConsumerWidget {
             ),
             child: AppFeedbackBetter(
               child: MaterialApp(
-                title: AppInfoService.appName,
+                title: kIsWeb ? "" : AppInfoService.appName,
                 locale: ref.watch(globalLanguageProvider).currentLocale,
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
