@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../main.dart';
@@ -8,28 +10,21 @@ import '../../domain/entities/eb_timeline_entity.dart';
 import '../../domain/mappers/eb_timeline_mapper.dart';
 
 final ebCaseTimeLineProvider =
-    FutureProvider.family<List<EBTimelineEntity>, Map<String, dynamic>>(
-        (ref, Map<String, dynamic> params) async {
+    FutureProvider.family<List<EBTimelineEntity>, String?>(
+        (ref, encounterId) async {
   final repo = ref.read(ebRepositoryProvider);
   try {
-    final timelinesResult = await repo.fetchTimelineByID(params['encounterID']);
+    final timelinesResult = await repo.fetchTimelineByID(encounterId);
     // logger.f('timelinesResult: $timelinesResult');
-    final stagesResult = await repo.fetchTimelineStages(
-      "CORNEA_DONATION",
-      params['timelineVersion'],
-    );
+    final stagesResult =
+        await repo.fetchTimelineStages("CORNEA_DONATION", "0.0.1");
     // logger.f('stagesResult: $stagesResult');
     if (timelinesResult.isRight() && stagesResult.isRight()) {
       final timelines = timelinesResult.getOrElse(() => []);
       final stages =
           stagesResult.getOrElse(() => const EbTimelineConfigModel());
-      // log(EBTimelineMapper.mapToEntity(timelines, stages).toString());
-      return Future.delayed(
-        const Duration(milliseconds: 100),
-        () {
-          return EBTimelineMapper.mapToEntity(timelines, stages);
-        },
-      );
+      log(EBTimelineMapper.mapToEntity(timelines, stages).toString());
+      return EBTimelineMapper.mapToEntity(timelines, stages);
     } else {
       throw EBServerFailure(
           errorMessage: "failure in fetching timeline",

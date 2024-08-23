@@ -7,7 +7,7 @@ part 'eb_timeline_model.g.dart';
 @freezed
 class EBTimelineModel with _$EBTimelineModel {
   const factory EBTimelineModel({
-    int? serviceRequestId,
+    String? serviceRequestId,
     String? title,
     String? stage,
     String? assessmentVersion,

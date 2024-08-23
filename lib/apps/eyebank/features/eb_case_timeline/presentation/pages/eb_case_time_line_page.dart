@@ -11,18 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EbCaseTimeLinePage extends ConsumerWidget {
-  final int encounterID;
-  final String timelineVersion;
+  final String? encounterID;
+
   const EbCaseTimeLinePage({
     super.key,
     required this.encounterID,
-    required this.timelineVersion,
   });
-
-  static final Map<String, dynamic> _params = {
-    'encounterID': "1",
-    'timelineVersion': "1",
-  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,7 +51,7 @@ class EbCaseTimeLinePage extends ConsumerWidget {
             ),
           ],
         ),
-        body: ref.watch(ebCaseTimeLineProvider(_params)).when(
+        body: ref.watch(ebCaseTimeLineProvider(encounterID)).when(
               data: (data) {
                 final List<EBTimelineEntity> caseTimeLine = data;
                 return DesktopClipper(

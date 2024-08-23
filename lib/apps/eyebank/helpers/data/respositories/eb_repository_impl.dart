@@ -22,61 +22,55 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(
-      String encounterID) {
+      String? encounterID) {
     return EyeBankErrorHandler.handle(() async {
-      // [ DEATH_INTIMATION, DONOR_SCREENING, CORNEA_RECOVERY, SHIPPED_TO_EYEBANK, RECEIVED_AT_EYEBANK, SEROLOGY, CORNEA_EVALUATION, IN_INVENTORY ]
-      //    int? serviceRequestId,
-      // String? title,
-      // String? stage,
-      // String? assessmentVersion,
-      // String? status,
-      // @TimestampConverter() DateTime? initiateDate,
-      // @TimestampConverter() DateTime? recentUpdated,
-      // List<EBTimelineModel>? stages,
-      const sampleJson = [
-        {
-          "serviceRequestId": 1,
-          "title": "DEATH_INTIMATION",
-          "stage": "DEATH_INTIMATION",
-          "assessmentVersion": "1",
-          "status": "COMPLETED",
-          "initiateDate": "2023-10-01T12:00:00Z",
-          "recentUpdated": "2023-10-01T12:00:00Z",
-          "stages": []
-        },
-        {
-          "serviceRequestId": 2,
-          "title": "DONOR_SCREENING",
-          "stage": "DONOR_SCREENING",
-          "assessmentVersion": "1",
-          "status": "COMPLETED",
-          "initiateDate": "2023-10-01T12:00:00Z",
-          "recentUpdated": "2023-10-01T12:00:00Z",
-          "stages": []
-        },
-        {
-          "serviceRequestId": 3,
-          "title": "CORNEA_RECOVERY",
-          "stage": "CORNEA_RECOVERY",
-          "assessmentVersion": "1",
-          "status": "COMPLETED",
-          "initiateDate": "2023-10-01T12:00:00Z",
-          "recentUpdated": "2023-10-01T12:00:00Z",
-          "stages": []
-        },
-      ];
+      // const sampleJson = [
+      //   {
+      //     "serviceRequestId": 1,
+      //     "title": "DEATH_INTIMATION",
+      //     "stage": "DEATH_INTIMATION",
+      //     "assessmentVersion": "1",
+      //     "status": "COMPLETED",
+      //     "initiateDate": "2023-10-01T12:00:00Z",
+      //     "recentUpdated": "2023-10-01T12:00:00Z",
+      //     "stages": []
+      //   },
+      //   {
+      //     "serviceRequestId": 2,
+      //     "title": "DONOR_SCREENING",
+      //     "stage": "DONOR_SCREENING",
+      //     "assessmentVersion": "1",
+      //     "status": "COMPLETED",
+      //     "initiateDate": "2023-10-01T12:00:00Z",
+      //     "recentUpdated": "2023-10-01T12:00:00Z",
+      //     "stages": []
+      //   },
+      //   {
+      //     "serviceRequestId": 3,
+      //     "title": "CORNEA_RECOVERY",
+      //     "stage": "CORNEA_RECOVERY",
+      //     "assessmentVersion": "1",
+      //     "status": "COMPLETED",
+      //     "initiateDate": "2023-10-01T12:00:00Z",
+      //     "recentUpdated": "2023-10-01T12:00:00Z",
+      //     "stages": []
+      //   },
+      // ];
 
-      return Future.delayed(
-        const Duration(seconds: 1),
-        () => sampleJson.map((e) => EBTimelineModel.fromJson(e)).toList(),
-      );
-      // final endPoint = '/encounters/$encounterID/timeline';
-      // final response = await _dio.get(endPoint);
-      // if (response.statusCode == 200) {
-      //   return response.data.map((e) => EBTimelineModel.fromJson(e)).toList();
-      // } else {
-      //   throw Exception(response.statusMessage ?? 'Error in fetchTimelineByID');
-      // }
+      // return Future.delayed(
+      //   const Duration(seconds: 1),
+      //   () => sampleJson.map((e) => EBTimelineModel.fromJson(e)).toList(),
+      // );
+
+      final endPoint = '/services/eyebank/api/encounters/$encounterID/timeline';
+      final response = await _dio.get(endPoint);
+      if (response.statusCode == 200) {
+        return (response.data as List)
+            .map((e) => EBTimelineModel.fromJson(e))
+            .toList();
+      } else {
+        throw Exception(response.statusMessage ?? 'Error in fetchTimelineByID');
+      }
     });
   }
 

@@ -121,10 +121,7 @@ class WebCaseSearchWidget extends StatelessWidget {
     final navigator = Navigator.of(context);
     navigator.push(
       MaterialPageRoute(
-        builder: (context) => const EbCaseTimeLinePage(
-          encounterID: 1,
-          timelineVersion: '1',
-        ),
+        builder: (context) => const EbCaseTimeLinePage(encounterID: "123"),
       ),
     );
   }

@@ -7,7 +7,7 @@ import '../../models/eb_timeline_model.dart';
 
 abstract class EyeBankRepository {
   Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(
-    String encounterID,
+    String? encounterID,
   );
 
   Future<Either<EBFailure, EbTimelineConfigModel>> fetchTimelineStages(

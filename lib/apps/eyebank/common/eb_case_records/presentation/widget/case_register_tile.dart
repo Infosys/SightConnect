@@ -204,7 +204,14 @@ Widget _buildDateColumn(BuildContext context, String label, String? date) {
             color: Theme.of(context).primaryColor,
           ),
           const SizedBox(width: 4),
-          Text(label),
+          Text(
+            label,
+            style: applyRobotoFont(
+              fontSize: 12,
+              color: AppColor.darkGrey,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ],
       ),
       const SizedBox(height: 4),
@@ -222,7 +229,7 @@ Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
     children: [
       Text(
         'Active Stages: ',
-        style: applyRobotoFont(fontSize: 12, color: AppColor.primary),
+        style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
       ),
       const SizedBox(height: 4),
       Wrap(

@@ -1,11 +1,9 @@
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 
-import '../enums/eb_timline_enums.dart';
-
 class EBTimelineEntity {
   final String? timelineName;
   final String? timelineVersion;
-  final int? serviceRequestId;
+  final String? serviceRequestId;
   final EBStageName? title;
   final EBStageName? stage;
   final String? assessmentVersion;

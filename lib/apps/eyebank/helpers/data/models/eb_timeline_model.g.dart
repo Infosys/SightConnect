@@ -9,7 +9,7 @@ part of 'eb_timeline_model.dart';
 _$EBTimelineModelImpl _$$EBTimelineModelImplFromJson(
         Map<String, dynamic> json) =>
     _$EBTimelineModelImpl(
-      serviceRequestId: (json['serviceRequestId'] as num?)?.toInt(),
+      serviceRequestId: json['serviceRequestId'] as String?,
       title: json['title'] as String?,
       stage: json['stage'] as String?,
       assessmentVersion: json['assessmentVersion'] as String?,

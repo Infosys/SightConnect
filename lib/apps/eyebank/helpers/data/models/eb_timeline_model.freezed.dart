@@ -20,7 +20,7 @@ EBTimelineModel _$EBTimelineModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EBTimelineModel {
-  int? get serviceRequestId => throw _privateConstructorUsedError;
+  String? get serviceRequestId => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get stage => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $EBTimelineModelCopyWith<$Res> {
       _$EBTimelineModelCopyWithImpl<$Res, EBTimelineModel>;
   @useResult
   $Res call(
-      {int? serviceRequestId,
+      {String? serviceRequestId,
       String? title,
       String? stage,
       String? assessmentVersion,
@@ -80,7 +80,7 @@ class _$EBTimelineModelCopyWithImpl<$Res, $Val extends EBTimelineModel>
       serviceRequestId: freezed == serviceRequestId
           ? _value.serviceRequestId
           : serviceRequestId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ abstract class _$$EBTimelineModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? serviceRequestId,
+      {String? serviceRequestId,
       String? title,
       String? stage,
       String? assessmentVersion,
@@ -156,7 +156,7 @@ class __$$EBTimelineModelImplCopyWithImpl<$Res>
       serviceRequestId: freezed == serviceRequestId
           ? _value.serviceRequestId
           : serviceRequestId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -207,7 +207,7 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
       _$$EBTimelineModelImplFromJson(json);
 
   @override
-  final int? serviceRequestId;
+  final String? serviceRequestId;
   @override
   final String? title;
   @override
@@ -286,7 +286,7 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
 
 abstract class _EBTimelineModel implements EBTimelineModel {
   const factory _EBTimelineModel(
-      {final int? serviceRequestId,
+      {final String? serviceRequestId,
       final String? title,
       final String? stage,
       final String? assessmentVersion,
@@ -299,7 +299,7 @@ abstract class _EBTimelineModel implements EBTimelineModel {
       _$EBTimelineModelImpl.fromJson;
 
   @override
-  int? get serviceRequestId;
+  String? get serviceRequestId;
   @override
   String? get title;
   @override
