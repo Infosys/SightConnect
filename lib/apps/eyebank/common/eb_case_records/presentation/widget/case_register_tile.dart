@@ -167,27 +167,12 @@ Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
       Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: 'CASE ID: ',
-                  style: applyRobotoFont(
-                    fontSize: 12,
-                  ),
-                ),
-                TextSpan(
-                  text: '${item?.caseId ?? ""}',
-                  style: applyRobotoFont(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+          Text(
+            'Case ID: ${item?.caseId ?? ""}',
+            style: applyRobotoFont(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
             ),
-            maxLines: 2,
-            textAlign: TextAlign.end,
-            overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 4),
         ],
