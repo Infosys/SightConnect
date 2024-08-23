@@ -14,16 +14,17 @@ class PatientHomePageAppBar extends ConsumerWidget
   Widget build(BuildContext context, WidgetRef ref) {
     var model = ref.watch(patientDashboardProvider);
     return AppBar(
-      flexibleSpace: model.isVisible
-          ? null
-          : ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  color: Colors.transparent,
-                ),
-              ),
-            ),
+      //  model.isVisible
+      //     ? null
+      //     :
+      flexibleSpace: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            color: Colors.transparent,
+          ),
+        ),
+      ),
       elevation: 0,
       backgroundColor:
           model.isVisible ? Colors.transparent : Colors.white.withAlpha(350),
