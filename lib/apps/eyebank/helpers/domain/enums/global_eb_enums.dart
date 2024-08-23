@@ -42,24 +42,15 @@ enum EBStageName {
 }
 
 enum EBStatus {
-  // COMPLETED, PENDING, REJECTED, ACTIVE, UNKNOWN
+// INITIATED, PENDING, UNDER_PROCESS, SUBMITTED, VERIFIED, ACCEPTED, REJECTED
 
-  COMPLETED(
-    value: 'COMPLETED',
-    displayValue: 'Completed',
-  ),
-  PENDING(
-    value: 'PENDING',
-    displayValue: 'Pending',
-  ),
-  REJECTED(
-    value: 'REJECTED',
-    displayValue: 'Rejected',
-  ),
-  ACTIVE(
-    value: 'ACTIVE',
-    displayValue: 'Active',
-  ),
+  INITIATED(value: 'INITIATED', displayValue: 'Initiated'),
+  PENDING(value: 'PENDING', displayValue: 'Pending'),
+  UNDER_PROCESS(value: 'UNDER_PROCESS', displayValue: 'Under Process'),
+  SUBMITTED(value: 'SUBMITTED', displayValue: 'Submitted'),
+  VERIFIED(value: 'VERIFIED', displayValue: 'Verified'),
+  ACCEPTED(value: 'ACCEPTED', displayValue: 'Accepted'),
+  REJECTED(value: 'REJECTED', displayValue: 'Rejected'),
   UNKNOWN(value: 'UNKNOWN', displayValue: 'Yet to be updated');
 
   final String value;
