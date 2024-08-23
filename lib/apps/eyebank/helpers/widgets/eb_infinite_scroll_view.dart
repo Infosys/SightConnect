@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/filter_bottom_sheet.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
@@ -9,11 +8,11 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class EbInfiniteScrollView<T> extends StatefulWidget {
   final Future<List<T>> Function(
-      int pageKey, int pageSize, List<String> filters) fetchPageData;
+      int pageKey, int pageSize, List<Filter> filters) fetchPageData;
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
   final bool enableSearch;
   final bool enableFilter;
-  final List<String>? filterOptions;
+  final List<Filter>? filterOptions;
   final int defaultPageSize;
   final VoidCallback? onSearchTap;
 
@@ -49,8 +48,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
   int _pageSize = 0;
   late PagingController<int, T> _pagingController;
   final TextEditingController _searchController = TextEditingController();
-  final List<String> _selectedFilters = [];
-  Timer? _debounce;
+  final List<Filter> _selectedFilters = [];
 
   @override
   void initState() {
@@ -200,79 +198,19 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
     );
   }
 
-  _showFilterBottomSheet() {
+  void _showFilterBottomSheet() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        const Text(
-                          'Filters',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedFilters.clear();
-                            });
-                          },
-                          child: const Text('Clear all'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: widget.filterOptions!.length,
-                      itemBuilder: (context, index) {
-                        final filter = widget.filterOptions![index];
-                        return CheckboxListTile(
-                          title: Text(filter),
-                          value: _selectedFilters.contains(filter),
-                          onChanged: (value) {
-                            setState(() {
-                              if (value!) {
-                                _selectedFilters.add(filter);
-                              } else {
-                                _selectedFilters.remove(filter);
-                              }
-                            });
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            _pagingController.refresh();
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Apply'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
+        return FilterBottomSheet(
+          filterOptions: widget.filterOptions!,
+          selectedFilters: _selectedFilters,
+          onApply: (selectedFilters) {
+            setState(() {
+              _selectedFilters.clear();
+              _selectedFilters.addAll(selectedFilters);
+            });
+            _pagingController.refresh();
           },
         );
       },
@@ -283,7 +221,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
   void dispose() {
     _pagingController.dispose();
     _searchController.dispose();
-    _debounce?.cancel();
+
     super.dispose();
   }
 }

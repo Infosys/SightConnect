@@ -9,13 +9,6 @@ abstract class CaseRegisterRepository {
   Future<Either<EBFailure, EncounterBriefModel>> searchEncounter(
     SearchEncounterParams params,
   );
-
-  ///---------------------------------------------------------//
-
-  // Future<Either<EBFailure, dynamic>> postA1Form(dynamic queryData);
-  // Future<Either<Failure, dynamic>> getScreeningFilterData();
-  // Future<Either<Failure, EncounterBriefModel>> searchTableData(
-  //     String donorMobile, String caseId);
 }
 
 class GetAllEncountersParams {

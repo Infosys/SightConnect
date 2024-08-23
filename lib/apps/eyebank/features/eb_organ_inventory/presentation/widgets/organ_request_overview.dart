@@ -50,7 +50,7 @@ class OrganRequestOverview extends StatelessWidget {
             },
           );
         },
-        filterOptions: const ["Status 1", "Status 2", "Status 3"],
+        filterOptions: const [],
         enableSearch: false,
         enableFilter: true,
         defaultPageSize: 10,

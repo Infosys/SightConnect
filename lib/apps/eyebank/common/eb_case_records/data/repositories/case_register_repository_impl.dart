@@ -22,26 +22,23 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   @override
   Future<Either<EBFailure, EncounterBriefModel>> getAllEncounters(
       GetAllEncountersParams params) {
-    // FAKER Data
     //REMOVE THIS FOR PRODUCTION
     // return Future.value(
     //     Right(EncounterBriefModel.fromJson(Faker.dummyEncounterBrief)));
 
     return EyeBankErrorHandler.handle(() async {
-      final endPoint =
-          "/services/eyebank/api/encounters?page=${params.page}&size=${params.size}";
-      // final parameters = {
-      //   // 'encounterStage': params.encounterStage,
-      //   // 'startDate': params.startDate,
-      //   // 'endDate': params.endDate,
-      //   'pageable': {
-      //     "page": params.page,
-      //     "size": params.size,
-      //   }
-      // };
+      const endPoint = '/services/eyebank/api/encounters';
+      final queryParams = {
+        'page': params.page,
+        'size': params.size,
+        if (params.encounterStage != null)
+          'encounterStage': params.encounterStage,
+        if (params.startDate != null) 'startDate': params.startDate,
+        if (params.endDate != null) 'endDate': params.endDate,
+      };
       final response = await _dio.get(
         endPoint,
-        // queryParameters: parameters,
+        queryParameters: queryParams,
       );
 
       if (response.statusCode == 200) {
@@ -57,23 +54,10 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   Future<Either<EBFailure, EncounterBriefModel>> searchEncounter(
       SearchEncounterParams params) {
     return EyeBankErrorHandler.handle(() async {
-      // https: //healthconnect.infosysapps.com/services/eyebank/api/encounters/search?page=0&size=1&mobile=9999677907
-
       final endPoint =
           "/services/eyebank/api/encounters/search?page=${params.page}&size=${params.size}&mobile=${params.mobile}";
 
-      final response = await _dio.get(
-        endPoint,
-        // queryParameters: {
-        //   'mobile': params.mobile,
-        //   // 'identifier': params.identifier,
-        //   // 'identifierType': params.identifierType,
-        //   'pageable': {
-        //     "page": params.page,
-        //     "size": params.size,
-        //   }
-        // },
-      );
+      final response = await _dio.get(endPoint);
       log(response.data.toString());
       if (response.statusCode == 200) {
         return EncounterBriefModel.fromJson(response.data);
@@ -82,64 +66,4 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
       }
     });
   }
-
-  // @override
-  // Future<Either<EBFailure, dynamic>> postA1Form(queryData) async {
-  //   return EyeBankErrorHandler.handle(() async {
-  //     var endPoint =
-  //         '/services/orchestration/api/v2/patients/triage-reports?queryText=${queryData}';
-  //     var data = await _dio.get(endPoint);
-  //     if (data.statusCode == 200) {
-  //       return data.data;
-  //     } else {
-  //       throw Exception(data.statusMessage ?? 'Error in getA1Form');
-  //     }
-  //   });
-  // }
-
-  // @override
-  // Future<Either<Failure, dynamic>> getScreeningFilterData() async {
-  //   var endpoint = 'screening-filter-data';
-  //   try {
-  //     var data = await _dio.get(endpoint);
-  //     if (data.statusCode == 200) {
-  //       return Right(data.data);
-  //     } else {
-  //       return Left(ServerFailure(
-  //           errorMessage:
-  //               data.statusMessage ?? 'Error in getScreeningFilterData'));
-  //     }
-  //   } on DioException catch (e) {
-  //     logger.e("Error in getScreeningFilterData");
-  //     DioErrorHandler.handleDioError(e);
-  //     rethrow;
-  //   } catch (e) {
-  //     logger.e("Error in getScreeningFilterData");
-  //     rethrow;
-  //   }
-  // }
-
-  // @override
-  // Future<Either<Failure, EncounterBriefModel>> searchTableData(
-  //     String donorMobile, String caseId) async {
-  //   var endpoint = 'search-table-data';
-  //   try {
-  //     var data = await _dio.get(endpoint,
-  //         queryParameters: {'donorMobile': donorMobile, 'caseId': caseId});
-  //     if (data.statusCode == 200) {
-  //       var response = EncounterBriefModel.fromJson(data.data);
-  //       return Right(response);
-  //     } else {
-  //       return Left(ServerFailure(
-  //           errorMessage: data.statusMessage ?? 'Error in searchTableData'));
-  //     }
-  //   } on DioException catch (e) {
-  //     logger.e("Error in searchTableData");
-  //     DioErrorHandler.handleDioError(e);
-  //     rethrow;
-  //   } catch (e) {
-  //     logger.e("Error in searchTableData");
-  //     rethrow;
-  //   }
-  // }
 }

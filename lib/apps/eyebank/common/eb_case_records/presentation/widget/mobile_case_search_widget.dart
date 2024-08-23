@@ -5,8 +5,11 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentatio
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'filter_bottom_sheet.dart';
 
 class MobileCaseSearchWidget extends ConsumerWidget {
   const MobileCaseSearchWidget({super.key});
@@ -15,10 +18,19 @@ class MobileCaseSearchWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return EbInfiniteScrollView<ContentBriefEntity>(
       fetchPageData: (pageKey, pageSize, filters) async {
+        logger.d({
+          "Filters": filters.map((e) => e.value).toList(),
+        });
+        final filterMap = {
+          for (var filter in filters) filter.name: filter.value
+        };
+
         final params = GetRecordsParams(
-          filters: filters,
-          pageNumber: pageKey,
-          pageSize: pageSize,
+          page: pageKey,
+          size: pageSize,
+          startDate: filterMap['Start Date'],
+          endDate: filterMap['End Date'],
+          encounterStage: filterMap['Timeline Stage'],
         );
         final records = await ref.read(ebGetRecordsProvider(params).future);
         return records.content ?? [];
@@ -41,7 +53,21 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           ),
         );
       },
-      filterOptions: EBStageName.values.map((e) => e.name).toList(),
+      filterOptions: [
+        Filter(
+          name: 'Start Date',
+          type: FilterType.date,
+        ),
+        Filter(
+          name: 'End Date',
+          type: FilterType.date,
+        ),
+        Filter(
+          name: "Timeline Stage",
+          type: FilterType.dropdown,
+          dropdownOptions: EBStageName.values.map((e) => e.value).toList(),
+        )
+      ],
       enableSearch: true,
       enableFilter: true,
       defaultPageSize: 10,

@@ -11,9 +11,8 @@ class RecentCases extends ConsumerWidget {
   const RecentCases({super.key});
 
   static final params = GetRecordsParams(
-    filters: [],
-    pageNumber: 0,
-    pageSize: 10,
+    page: 0,
+    size: 5,
   );
 
   @override

@@ -25,11 +25,11 @@ final ebGetRecordsProvider =
     await Future.delayed(const Duration(seconds: 3));
     final repo = ref.watch(ebCaseRegisterRepositoryProvider);
     final p = GetAllEncountersParams(
-      // encounterStage: null,
-      // startDate: null,
-      // endDate: null,
-      page: params.pageNumber,
-      size: params.pageSize,
+      encounterStage: params.encounterStage,
+      startDate: params.startDate,
+      endDate: params.endDate,
+      page: params.page,
+      size: params.size,
     );
 
     final result = await repo.getAllEncounters(p);
@@ -63,14 +63,18 @@ final ebSearchRecordProvider =
 );
 
 class GetRecordsParams {
-  final List<String>? filters;
-  final int pageNumber;
-  final int pageSize;
+  final String? encounterStage;
+  final String? startDate;
+  final String? endDate;
+  final int? page;
+  final int? size;
 
   GetRecordsParams({
-    this.filters,
-    required this.pageNumber,
-    required this.pageSize,
+    this.encounterStage,
+    this.startDate,
+    this.endDate,
+    this.page,
+    this.size,
   });
 }
 
