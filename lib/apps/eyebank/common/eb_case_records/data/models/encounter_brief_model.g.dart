@@ -47,6 +47,10 @@ _$ContentBriefImpl _$$ContentBriefImplFromJson(Map<String, dynamic> json) =>
       donorBrief: json['donorBrief'] == null
           ? null
           : DonorBrief.fromJson(json['donorBrief'] as Map<String, dynamic>),
+      notifierBrief: json['notifierBrief'] == null
+          ? null
+          : NotifierBrief.fromJson(
+              json['notifierBrief'] as Map<String, dynamic>),
       intimateDate:
           const TimestampConverter().fromJson(json['intimateDate'] as String?),
       performerId: (json['performerId'] as num?)?.toInt(),
@@ -68,6 +72,7 @@ Map<String, dynamic> _$$ContentBriefImplToJson(_$ContentBriefImpl instance) =>
       'timelineVersion': instance.timelineVersion,
       'activeStages': instance.activeStages,
       'donorBrief': instance.donorBrief?.toJson(),
+      'notifierBrief': instance.notifierBrief?.toJson(),
       'intimateDate': const TimestampConverter().toJson(instance.intimateDate),
       'performerId': instance.performerId,
       'deathDate': const TimestampConverter().toJson(instance.deathDate),
@@ -118,6 +123,20 @@ _$DonorBriefImpl _$$DonorBriefImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$DonorBriefImplToJson(_$DonorBriefImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'contact': instance.contact,
+    };
+
+_$NotifierBriefImpl _$$NotifierBriefImplFromJson(Map<String, dynamic> json) =>
+    _$NotifierBriefImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      contact: json['contact'] as String?,
+    );
+
+Map<String, dynamic> _$$NotifierBriefImplToJson(_$NotifierBriefImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

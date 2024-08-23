@@ -34,6 +34,13 @@ class EncounterBriefMapper {
                     contact: contentModel.donorBrief?.contact,
                   )
                 : null,
+            notifierBrief: contentModel.notifierBrief != null?
+                NotifierBriefEntity(
+                    id: contentModel.notifierBrief?.id,
+                    name: contentModel.notifierBrief?.name,
+                    contact: contentModel.notifierBrief?.contact,
+                  )
+                : null,
             intimateDate: contentModel.intimateDate,
             performerId: contentModel.performerId,
             deathDate: contentModel.deathDate,

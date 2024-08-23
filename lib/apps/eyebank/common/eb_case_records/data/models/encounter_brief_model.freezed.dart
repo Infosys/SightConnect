@@ -348,6 +348,7 @@ mixin _$ContentBrief {
   String? get timelineVersion => throw _privateConstructorUsedError;
   List<String>? get activeStages => throw _privateConstructorUsedError;
   DonorBrief? get donorBrief => throw _privateConstructorUsedError;
+  NotifierBrief? get notifierBrief => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get intimateDate => throw _privateConstructorUsedError;
   int? get performerId => throw _privateConstructorUsedError;
@@ -375,6 +376,7 @@ abstract class $ContentBriefCopyWith<$Res> {
       String? timelineVersion,
       List<String>? activeStages,
       DonorBrief? donorBrief,
+      NotifierBrief? notifierBrief,
       @TimestampConverter() DateTime? intimateDate,
       int? performerId,
       @TimestampConverter() DateTime? deathDate,
@@ -383,6 +385,7 @@ abstract class $ContentBriefCopyWith<$Res> {
       Map<String, dynamic>? metaData});
 
   $DonorBriefCopyWith<$Res>? get donorBrief;
+  $NotifierBriefCopyWith<$Res>? get notifierBrief;
   $BodyLocationCopyWith<$Res>? get bodyLocation;
 }
 
@@ -404,6 +407,7 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
     Object? timelineVersion = freezed,
     Object? activeStages = freezed,
     Object? donorBrief = freezed,
+    Object? notifierBrief = freezed,
     Object? intimateDate = freezed,
     Object? performerId = freezed,
     Object? deathDate = freezed,
@@ -432,6 +436,10 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
           ? _value.donorBrief
           : donorBrief // ignore: cast_nullable_to_non_nullable
               as DonorBrief?,
+      notifierBrief: freezed == notifierBrief
+          ? _value.notifierBrief
+          : notifierBrief // ignore: cast_nullable_to_non_nullable
+              as NotifierBrief?,
       intimateDate: freezed == intimateDate
           ? _value.intimateDate
           : intimateDate // ignore: cast_nullable_to_non_nullable
@@ -473,6 +481,18 @@ class _$ContentBriefCopyWithImpl<$Res, $Val extends ContentBrief>
 
   @override
   @pragma('vm:prefer-inline')
+  $NotifierBriefCopyWith<$Res>? get notifierBrief {
+    if (_value.notifierBrief == null) {
+      return null;
+    }
+
+    return $NotifierBriefCopyWith<$Res>(_value.notifierBrief!, (value) {
+      return _then(_value.copyWith(notifierBrief: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $BodyLocationCopyWith<$Res>? get bodyLocation {
     if (_value.bodyLocation == null) {
       return null;
@@ -498,6 +518,7 @@ abstract class _$$ContentBriefImplCopyWith<$Res>
       String? timelineVersion,
       List<String>? activeStages,
       DonorBrief? donorBrief,
+      NotifierBrief? notifierBrief,
       @TimestampConverter() DateTime? intimateDate,
       int? performerId,
       @TimestampConverter() DateTime? deathDate,
@@ -507,6 +528,8 @@ abstract class _$$ContentBriefImplCopyWith<$Res>
 
   @override
   $DonorBriefCopyWith<$Res>? get donorBrief;
+  @override
+  $NotifierBriefCopyWith<$Res>? get notifierBrief;
   @override
   $BodyLocationCopyWith<$Res>? get bodyLocation;
 }
@@ -527,6 +550,7 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
     Object? timelineVersion = freezed,
     Object? activeStages = freezed,
     Object? donorBrief = freezed,
+    Object? notifierBrief = freezed,
     Object? intimateDate = freezed,
     Object? performerId = freezed,
     Object? deathDate = freezed,
@@ -555,6 +579,10 @@ class __$$ContentBriefImplCopyWithImpl<$Res>
           ? _value.donorBrief
           : donorBrief // ignore: cast_nullable_to_non_nullable
               as DonorBrief?,
+      notifierBrief: freezed == notifierBrief
+          ? _value.notifierBrief
+          : notifierBrief // ignore: cast_nullable_to_non_nullable
+              as NotifierBrief?,
       intimateDate: freezed == intimateDate
           ? _value.intimateDate
           : intimateDate // ignore: cast_nullable_to_non_nullable
@@ -592,6 +620,7 @@ class _$ContentBriefImpl implements _ContentBrief {
       this.timelineVersion,
       final List<String>? activeStages,
       this.donorBrief,
+      this.notifierBrief,
       @TimestampConverter() this.intimateDate,
       this.performerId,
       @TimestampConverter() this.deathDate,
@@ -624,6 +653,8 @@ class _$ContentBriefImpl implements _ContentBrief {
   @override
   final DonorBrief? donorBrief;
   @override
+  final NotifierBrief? notifierBrief;
+  @override
   @TimestampConverter()
   final DateTime? intimateDate;
   @override
@@ -655,7 +686,7 @@ class _$ContentBriefImpl implements _ContentBrief {
 
   @override
   String toString() {
-    return 'ContentBrief(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
+    return 'ContentBrief(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, activeStages: $activeStages, donorBrief: $donorBrief, notifierBrief: $notifierBrief, intimateDate: $intimateDate, performerId: $performerId, deathDate: $deathDate, bodyLocation: $bodyLocation, organExtracted: $organExtracted, metaData: $metaData)';
   }
 
   @override
@@ -673,6 +704,8 @@ class _$ContentBriefImpl implements _ContentBrief {
                 .equals(other._activeStages, _activeStages) &&
             (identical(other.donorBrief, donorBrief) ||
                 other.donorBrief == donorBrief) &&
+            (identical(other.notifierBrief, notifierBrief) ||
+                other.notifierBrief == notifierBrief) &&
             (identical(other.intimateDate, intimateDate) ||
                 other.intimateDate == intimateDate) &&
             (identical(other.performerId, performerId) ||
@@ -695,6 +728,7 @@ class _$ContentBriefImpl implements _ContentBrief {
       timelineVersion,
       const DeepCollectionEquality().hash(_activeStages),
       donorBrief,
+      notifierBrief,
       intimateDate,
       performerId,
       deathDate,
@@ -723,6 +757,7 @@ abstract class _ContentBrief implements ContentBrief {
       final String? timelineVersion,
       final List<String>? activeStages,
       final DonorBrief? donorBrief,
+      final NotifierBrief? notifierBrief,
       @TimestampConverter() final DateTime? intimateDate,
       final int? performerId,
       @TimestampConverter() final DateTime? deathDate,
@@ -743,6 +778,8 @@ abstract class _ContentBrief implements ContentBrief {
   List<String>? get activeStages;
   @override
   DonorBrief? get donorBrief;
+  @override
+  NotifierBrief? get notifierBrief;
   @override
   @TimestampConverter()
   DateTime? get intimateDate;
@@ -1332,5 +1369,176 @@ abstract class _DonorBrief implements DonorBrief {
   @override
   @JsonKey(ignore: true)
   _$$DonorBriefImplCopyWith<_$DonorBriefImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+NotifierBrief _$NotifierBriefFromJson(Map<String, dynamic> json) {
+  return _NotifierBrief.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NotifierBrief {
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get contact => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NotifierBriefCopyWith<NotifierBrief> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NotifierBriefCopyWith<$Res> {
+  factory $NotifierBriefCopyWith(
+          NotifierBrief value, $Res Function(NotifierBrief) then) =
+      _$NotifierBriefCopyWithImpl<$Res, NotifierBrief>;
+  @useResult
+  $Res call({int? id, String? name, String? contact});
+}
+
+/// @nodoc
+class _$NotifierBriefCopyWithImpl<$Res, $Val extends NotifierBrief>
+    implements $NotifierBriefCopyWith<$Res> {
+  _$NotifierBriefCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? contact = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contact: freezed == contact
+          ? _value.contact
+          : contact // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NotifierBriefImplCopyWith<$Res>
+    implements $NotifierBriefCopyWith<$Res> {
+  factory _$$NotifierBriefImplCopyWith(
+          _$NotifierBriefImpl value, $Res Function(_$NotifierBriefImpl) then) =
+      __$$NotifierBriefImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? id, String? name, String? contact});
+}
+
+/// @nodoc
+class __$$NotifierBriefImplCopyWithImpl<$Res>
+    extends _$NotifierBriefCopyWithImpl<$Res, _$NotifierBriefImpl>
+    implements _$$NotifierBriefImplCopyWith<$Res> {
+  __$$NotifierBriefImplCopyWithImpl(
+      _$NotifierBriefImpl _value, $Res Function(_$NotifierBriefImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? contact = freezed,
+  }) {
+    return _then(_$NotifierBriefImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contact: freezed == contact
+          ? _value.contact
+          : contact // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NotifierBriefImpl implements _NotifierBrief {
+  const _$NotifierBriefImpl({this.id, this.name, this.contact});
+
+  factory _$NotifierBriefImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NotifierBriefImplFromJson(json);
+
+  @override
+  final int? id;
+  @override
+  final String? name;
+  @override
+  final String? contact;
+
+  @override
+  String toString() {
+    return 'NotifierBrief(id: $id, name: $name, contact: $contact)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NotifierBriefImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.contact, contact) || other.contact == contact));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, contact);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NotifierBriefImplCopyWith<_$NotifierBriefImpl> get copyWith =>
+      __$$NotifierBriefImplCopyWithImpl<_$NotifierBriefImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NotifierBriefImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NotifierBrief implements NotifierBrief {
+  const factory _NotifierBrief(
+      {final int? id,
+      final String? name,
+      final String? contact}) = _$NotifierBriefImpl;
+
+  factory _NotifierBrief.fromJson(Map<String, dynamic> json) =
+      _$NotifierBriefImpl.fromJson;
+
+  @override
+  int? get id;
+  @override
+  String? get name;
+  @override
+  String? get contact;
+  @override
+  @JsonKey(ignore: true)
+  _$$NotifierBriefImplCopyWith<_$NotifierBriefImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
