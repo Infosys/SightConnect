@@ -19,11 +19,13 @@ class CaseConnector extends StatelessWidget {
 
   Color _getStatusColor(EBStatus? status) {
     return switch (status) {
-      EBStatus.COMPLETED => AppColor.green,
-      // EBStatus.IN_PROGRESS => AppColor.primary,
-      EBStatus.ACTIVE => AppColor.primary,
-      EBStatus.REJECTED => AppColor.red,
+      EBStatus.INITIATED => AppColor.grey,
       EBStatus.PENDING => AppColor.orange,
+      EBStatus.UNDER_PROCESS => AppColor.orange,
+      EBStatus.SUBMITTED => AppColor.primary,
+      EBStatus.VERIFIED => AppColor.lightGreen,
+      EBStatus.ACCEPTED => AppColor.green,
+      EBStatus.REJECTED => AppColor.red,
       _ => Colors.grey
     };
   }
@@ -128,11 +130,15 @@ class CompletedCard extends StatelessWidget {
   }
 
   Color _getStatusColor(EBStatus? status) {
+    // INITIATED, PENDING, UNDER_PROCESS, SUBMITTED, VERIFIED, ACCEPTED, REJECTED
     return switch (status) {
-      EBStatus.COMPLETED => AppColor.green,
-      EBStatus.ACTIVE => AppColor.primary,
-      EBStatus.REJECTED => AppColor.red,
+      EBStatus.INITIATED => AppColor.grey,
       EBStatus.PENDING => AppColor.orange,
+      EBStatus.UNDER_PROCESS => AppColor.orange,
+      EBStatus.SUBMITTED => AppColor.primary,
+      EBStatus.VERIFIED => AppColor.lightGreen,
+      EBStatus.ACCEPTED => AppColor.green,
+      EBStatus.REJECTED => AppColor.red,
       _ => Colors.grey
     };
   }
@@ -157,20 +163,26 @@ class CaseIndicator extends StatelessWidget {
 
   IconData _getStatusIcon(EBStatus? status) {
     return switch (status) {
-      EBStatus.COMPLETED => Icons.check_circle,
-      EBStatus.ACTIVE => Icons.check_circle,
-      EBStatus.REJECTED => Icons.cancel,
+      EBStatus.INITIATED => Icons.play_circle_outline,
       EBStatus.PENDING => Icons.hourglass_empty,
+      EBStatus.UNDER_PROCESS => Icons.autorenew,
+      EBStatus.SUBMITTED => Icons.send,
+      EBStatus.VERIFIED => Icons.verified,
+      EBStatus.ACCEPTED => Icons.check_circle,
+      EBStatus.REJECTED => Icons.cancel,
       _ => Icons.help_outline,
     };
   }
 
   Color _getStatusColor(EBStatus? status) {
     return switch (status) {
-      EBStatus.COMPLETED => AppColor.green,
-      EBStatus.ACTIVE => AppColor.primary,
-      EBStatus.REJECTED => AppColor.red,
+      EBStatus.INITIATED => AppColor.grey,
       EBStatus.PENDING => AppColor.orange,
+      EBStatus.UNDER_PROCESS => AppColor.orange,
+      EBStatus.SUBMITTED => AppColor.primary,
+      EBStatus.VERIFIED => AppColor.lightGreen,
+      EBStatus.ACCEPTED => AppColor.green,
+      EBStatus.REJECTED => AppColor.red,
       _ => Colors.grey
     };
   }
