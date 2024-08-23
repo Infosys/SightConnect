@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/pages/eb_case_search_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/recent_cases.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/add_case_button.dart';
@@ -19,6 +20,16 @@ class EBHomePage extends StatelessWidget {
     logger.f('EBHomePage');
     return Scaffold(
       appBar: EyeBankDashboardAppbar(
+        onSearchTap: () {
+          final navigator = Navigator.of(context);
+          navigator.push(
+            MaterialPageRoute(
+              builder: (context) {
+                return const EBCaseSearchPage();
+              },
+            ),
+          );
+        },
         onProfileTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(

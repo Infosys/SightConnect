@@ -20,8 +20,10 @@ class EBFormManagePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (stageName == null) {
-      return const Center(
-        child: Text('Error: Stage name is required'),
+      return const Scaffold(
+        body: Center(
+          child: Text('Stage name is required'),
+        ),
       );
     }
     return SafeArea(

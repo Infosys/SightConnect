@@ -1,34 +1,67 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class EBCaseSearchPage extends StatefulWidget {
+class EBCaseSearchPage extends ConsumerStatefulWidget {
   const EBCaseSearchPage({super.key});
 
   @override
   _EBCaseSearchPageState createState() => _EBCaseSearchPageState();
 }
 
-class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
-  String query = '';
+class _EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
   final FocusNode _focusNode = FocusNode();
+  static const _pageSize = 10;
+  String query = '';
+  SearchRecordParams param = SearchRecordParams(
+    searchKey: '',
+    pageNumber: 0,
+    pageSize: _pageSize,
+  );
+
+  final PagingController<int, ContentBriefEntity> _pagingController =
+      PagingController(firstPageKey: 0);
 
   @override
   void initState() {
     super.initState();
-    // Request focus when the page is initialized
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
     });
+
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+  }
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      param = SearchRecordParams(
+        searchKey: query,
+        pageNumber: pageKey,
+        pageSize: _pageSize,
+      );
+      final newItems = await ref.read(ebSearchRecordProvider(param).future);
+      final isLastPage = (newItems.content?.length ?? 0) < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems.content ?? []);
+      } else {
+        final nextPageKey = pageKey + (newItems.content?.length ?? 0);
+        _pagingController.appendPage(newItems.content ?? [], nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
+    _pagingController.dispose();
     super.dispose();
   }
 
@@ -40,6 +73,7 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
           onSubmitted: (value) {
             setState(() {
               query = value;
+              _pagingController.refresh();
             });
           },
         ),
@@ -49,51 +83,20 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
           },
           child: Consumer(
             builder: (context, ref, child) {
-              return EbInfiniteScrollView<ContentBriefEntity>(
-                fetchPageData: (pageKey, pageSize, filters) async {
-                  final params = SearchRecordParams(
-                    searchKey: query,
-                    filters: filters,
-                    pageNumber: pageKey,
-                    pageSize: pageSize,
-                  );
-                  final records =
-                      await ref.read(ebSearchRecordProvider(params).future);
-                  return records.content ?? [];
-                },
-                itemBuilder: (context, item, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: EBCaseCard(
-                      item: item,
-                      onTap: () {
-                        final navigator = Navigator.of(context);
-                        navigator.push(
-                          MaterialPageRoute(
-                            builder: (context) => const EbCaseTimeLinePage(
-                              encounterID: 1,
-                              timelineVersion: '1',
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
-                filterOptions: const [],
-                enableSearch: false,
-                enableFilter: false,
-                defaultPageSize: 10,
-                onSearchTap: () {
-                  final navigator = Navigator.of(context);
-                  navigator.push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const EBCaseSearchPage();
-                      },
-                    ),
-                  );
-                },
+              return PagedListView<int, ContentBriefEntity>(
+                pagingController: _pagingController,
+                builderDelegate: PagedChildBuilderDelegate<ContentBriefEntity>(
+                  itemBuilder: (context, item, index) => EBCaseCard(
+                    item: item,
+                    onTap: () {},
+                  ),
+                  firstPageErrorIndicatorBuilder: (context) => const Center(
+                    child: Text('Error loading cases'),
+                  ),
+                  noItemsFoundIndicatorBuilder: (context) => const Center(
+                    child: Text('No cases found'),
+                  ),
+                ),
               );
             },
           ),
@@ -118,7 +121,7 @@ class _EBCaseSearchPageState extends State<EBCaseSearchPage> {
         child: TextField(
           focusNode: _focusNode,
           decoration: InputDecoration(
-            hintText: 'Search for a case record',
+            hintText: 'Search by phone number',
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
               borderSide: BorderSide.none,

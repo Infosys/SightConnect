@@ -126,7 +126,7 @@ Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: item?.donorBrief?.name ?? "",
+                    text: item?.notifierBrief?.name ?? "",
                     style: applyRobotoFont(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -141,7 +141,7 @@ Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
                     ),
                   ),
                   TextSpan(
-                    text: item?.donorBrief?.contact ?? "",
+                    text: item?.notifierBrief?.contact ?? "",
                     style:
                         applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
                   ),

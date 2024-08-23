@@ -9,9 +9,11 @@ class EyeBankDashboardAppbar extends StatelessWidget
   const EyeBankDashboardAppbar({
     super.key,
     this.onProfileTap,
+    this.onSearchTap,
   });
 
   final VoidCallback? onProfileTap;
+  final VoidCallback? onSearchTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,25 @@ class EyeBankDashboardAppbar extends StatelessWidget
         ),
       ),
       actions: [
+        InkWell(
+          onTap: onSearchTap,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     color: AppColor.grey,
+            //     width: 1,
+            //   ),
+            //   shape: BoxShape.circle,
+            //   color: AppColor.white,
+            // ),
+            child: const Icon(
+              Icons.search,
+              size: 24,
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
         InkWell(
           onTap: onProfileTap,
           child: Container(
