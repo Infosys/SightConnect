@@ -65,6 +65,7 @@ class DynamicFormJsonMapper {
           repeats: element.repeats ?? false,
           maxRepeat: element.maxRepeat,
           minRepeat: element.minRepeat,
+          initialValue: initialValues?[element.name.toString()],
         ));
       }
     }

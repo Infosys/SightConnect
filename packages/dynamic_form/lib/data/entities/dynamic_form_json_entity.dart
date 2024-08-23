@@ -75,6 +75,7 @@ class PageElementEntity {
   final bool repeats;
   final int? minRepeat;
   final int? maxRepeat;
+  final List<dynamic>? initialValue;
 
   PageElementEntity({
     required this.type,
@@ -83,6 +84,7 @@ class PageElementEntity {
     required this.repeats,
     required this.minRepeat,
     required this.maxRepeat,
+    this.initialValue,
   });
 
   factory PageElementEntity.fromJson(Map<String, dynamic> json) =>
@@ -94,6 +96,7 @@ class PageElementEntity {
         repeats: json["repeats"],
         minRepeat: json["minRepeat"],
         maxRepeat: json["maxRepeat"],
+        initialValue: json["initialValue"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -103,6 +106,7 @@ class PageElementEntity {
         "repeats": repeats,
         "minRepeat": minRepeat,
         "maxRepeat": maxRepeat,
+        "initialValue": initialValue,
       };
 }
 
@@ -189,6 +193,7 @@ class ElementElementClassEntity {
         minRepeat: json["minRepeat"],
         maxRepeat: json["maxRepeat"],
         inputType: json["inputType"],
+        initialValue: json["initialValue"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -218,6 +223,7 @@ class ElementElementClassEntity {
         "minRepeat": minRepeat,
         "maxRepeat": maxRepeat,
         "inputType": inputType,
+        "initialValue": initialValue,
       };
 
   @override
@@ -247,6 +253,7 @@ class ElementElementClassEntity {
     int? minRepeat,
     int? maxRepeat,
     String? inputType,
+    String? initialValue,
   }) {
     return ElementElementClassEntity(
       type: type ?? this.type,
@@ -270,6 +277,7 @@ class ElementElementClassEntity {
       minRepeat: minRepeat ?? this.minRepeat,
       maxRepeat: maxRepeat ?? this.maxRepeat,
       inputType: inputType ?? this.inputType,
+      initialValue: initialValue ?? this.initialValue,
     );
   }
 }
