@@ -6,44 +6,56 @@ import 'package:flutter/material.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 showCustomWoltSheet(BuildContext context, Widget child) {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    WoltModalSheet.show<void>(
-      context: context,
-      pageListBuilder: (modalSheetContext) {
-        return [
-          WoltModalSheetPage(
-            // navBarHeight: 1,
-            child: SizedBox(
-              height: MediaQuery.of(modalSheetContext).size.height,
-              child: child,
+  if (kIsWeb) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      WoltModalSheet.show<void>(
+        context: context,
+        pageListBuilder: (modalSheetContext) {
+          return [
+            WoltModalSheetPage(
+              // navBarHeight: 1,
+              child: SizedBox(
+                height: MediaQuery.of(modalSheetContext).size.height,
+                child: child,
+              ),
             ),
-          ),
-        ];
-        // if (kIsWeb) {
-        //   return [
-
-        //   ];
-        // }
-        // return [
-        //   NonScrollingWoltModalSheetPage(
-        //     useSafeArea: false,
-        //     navBarHeight: kIsWeb ? null : 1,
-        //     child: SizedBox(
-        //       height: MediaQuery.of(modalSheetContext).size.height,
-        //       child: child,
-        //     ),
-        //   ),
-        // ];
-      },
-      modalTypeBuilder: (context) {
-        if (Responsive.isMobile(context)) {
-          return WoltModalType.bottomSheet();
-        } else {
-          return const FormPreviewSheet();
-        }
-      },
-    );
-  });
+          ];
+        },
+        modalTypeBuilder: (context) {
+          if (Responsive.isMobile(context)) {
+            return WoltModalType.bottomSheet();
+          } else {
+            return const FormPreviewSheet();
+          }
+        },
+      );
+    });
+  } else {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      WoltModalSheet.show<void>(
+        context: context,
+        pageListBuilder: (modalSheetContext) {
+          return [
+            WoltModalSheetPage(
+              navBarHeight: 1,
+              useSafeArea: true,
+              child: SizedBox(
+                height: MediaQuery.of(modalSheetContext).size.height,
+                child: child,
+              ),
+            ),
+          ];
+        },
+        modalTypeBuilder: (context) {
+          if (Responsive.isMobile(context)) {
+            return WoltModalType.bottomSheet();
+          } else {
+            return const FormPreviewSheet();
+          }
+        },
+      );
+    });
+  }
 }
 
 class FormPreviewSheet extends WoltModalType {

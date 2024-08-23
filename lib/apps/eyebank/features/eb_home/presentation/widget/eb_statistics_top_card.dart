@@ -37,7 +37,7 @@ class EbStatisticsTopCard extends ConsumerWidget {
               // );
             },
             child: AutoSizeText(
-              'Case Overview',
+              'Overview',
               style: applyFiraSansFont(
                 fontSize: 16,
               ),
