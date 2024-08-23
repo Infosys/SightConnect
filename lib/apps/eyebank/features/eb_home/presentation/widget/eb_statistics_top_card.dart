@@ -37,7 +37,7 @@ class EbStatisticsTopCard extends ConsumerWidget {
               // );
             },
             child: AutoSizeText(
-              'Cases Attended',
+              'Case Overview',
               style: applyFiraSansFont(
                 fontSize: 16,
               ),

@@ -9,10 +9,10 @@ class EBCaseSearchPage extends ConsumerStatefulWidget {
   const EBCaseSearchPage({super.key});
 
   @override
-  _EBCaseSearchPageState createState() => _EBCaseSearchPageState();
+  EBCaseSearchPageState createState() => EBCaseSearchPageState();
 }
 
-class _EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
+class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
   final FocusNode _focusNode = FocusNode();
   static const _pageSize = 10;
   String query = '';
@@ -69,13 +69,12 @@ class _EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(
+        appBar: _EBSearchAppBar(
           onSubmitted: (value) {
-            setState(() {
-              query = value;
-              _pagingController.refresh();
-            });
+            query = value;
+            _pagingController.refresh();
           },
+          focusNode: _focusNode,
         ),
         body: GestureDetector(
           onTap: () {
@@ -104,10 +103,20 @@ class _EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
       ),
     );
   }
+}
 
-  _buildAppBar({
-    required Function(String) onSubmitted,
-  }) {
+class _EBSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _EBSearchAppBar({
+    required this.onSubmitted,
+    required this.focusNode,
+    this.onFilter,
+  });
+  final Function(String) onSubmitted;
+  final Function()? onFilter;
+  final FocusNode focusNode;
+
+  @override
+  Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
       leading: IconButton(
@@ -118,43 +127,58 @@ class _EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
       ),
       title: Container(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: TextField(
-          focusNode: _focusNode,
-          decoration: InputDecoration(
-            hintText: 'Search by phone number',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                focusNode: focusNode,
+                decoration: InputDecoration(
+                  hintText: 'Search by phone number',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+                ),
+                onSubmitted: (value) {
+                  onSubmitted(value.trim());
+                },
+              ),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.filter_alt),
+              onPressed: onFilter,
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
-            ),
-            filled: true,
-            fillColor: Colors.white,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-          ),
-          onSubmitted: (value) {
-            onSubmitted(value.trim());
-          },
+          ],
         ),
       ),
     );
   }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size.fromHeight(56.0);
 }

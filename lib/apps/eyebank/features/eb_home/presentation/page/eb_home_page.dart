@@ -6,7 +6,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widg
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_cases_closed_analytics.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_statistics_top_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_profile/presentation/pages/eb_profile_page.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +16,6 @@ class EBHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.f('EBHomePage');
     return Scaffold(
       appBar: EyeBankDashboardAppbar(
         onSearchTap: () {

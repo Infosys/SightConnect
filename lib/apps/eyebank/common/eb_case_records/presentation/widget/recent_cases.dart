@@ -29,7 +29,7 @@ class RecentCases extends ConsumerWidget {
                   Row(
                     children: [
                       Text(
-                        'Recent Cases',
+                        'Recent Records',
                         style: applyFiraSansFont(
                           fontSize: 16,
                         ),

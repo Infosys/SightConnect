@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/data/models/
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/page/eb_home_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/pages/organ_inventory_page.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebDashboardMenuProvider = ChangeNotifierProvider<EbDashboardMenuProvider>(
@@ -41,22 +40,22 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     MenuItem(
       id: 0,
       title: "Home",
-      icon: FontAwesomeIcons.house,
+      icon: Icons.home,
     ),
     MenuItem(
       id: 1,
-      title: "Records",
-      icon: FontAwesomeIcons.laptopFile,
+      title: "Patient Records",
+      icon: Icons.list,
     ),
     MenuItem(
       id: 2,
       title: "Organ Inventory",
-      icon: FontAwesomeIcons.boxesStacked,
+      icon: Icons.inventory,
     ),
     MenuItem(
       id: 3,
       title: "Notification",
-      icon: FontAwesomeIcons.bell,
+      icon: Icons.notifications,
     ),
   ];
 }
