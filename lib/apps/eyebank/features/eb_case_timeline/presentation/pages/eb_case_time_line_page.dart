@@ -26,51 +26,56 @@ class EbCaseTimeLinePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Case Timeline'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              showCustomWoltSheet(
-                context,
-                const EBRejectCaseSheet(
-                  caseID: 1234,
+    return RefreshIndicator(
+      onRefresh: () async {
+        ref.invalidate(ebCaseTimeLineProvider);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Case Timeline'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                showCustomWoltSheet(
+                  context,
+                  const EBRejectCaseSheet(
+                    caseID: 1234,
+                  ),
+                );
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: AppColor.red,
+              ),
+              child: Text(
+                'Reject Case',
+                style: applyRobotoFont(
+                  fontSize: 14,
+                  color: AppColor.red,
+                  fontWeight: FontWeight.w500,
                 ),
-              );
-            },
-            style: TextButton.styleFrom(
-              foregroundColor: AppColor.red,
-            ),
-            child: Text(
-              'Reject Case',
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.red,
-                fontWeight: FontWeight.w500,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+        body: ref.watch(ebCaseTimeLineProvider(_params)).when(
+              data: (data) {
+                final List<EBTimelineEntity> caseTimeLine = data;
+                return DesktopClipper(
+                  widget: CaseTimeLineWidget(
+                    caseTimeLine: caseTimeLine,
+                    onCaseSelected: (EBTimelineEntity event) =>
+                        _handleCaseSelected(context, event),
+                  ),
+                );
+              },
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              error: (error, stackTrace) => Center(
+                child: Text('Error: $error'),
+              ),
+            ),
       ),
-      body: ref.watch(ebCaseTimeLineProvider(_params)).when(
-            data: (data) {
-              final List<EBTimelineEntity> caseTimeLine = data;
-              return DesktopClipper(
-                widget: CaseTimeLineWidget(
-                  caseTimeLine: caseTimeLine,
-                  onCaseSelected: (EBTimelineEntity event) =>
-                      _handleCaseSelected(context, event),
-                ),
-              );
-            },
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            error: (error, stackTrace) => Center(
-              child: Text('Error: $error'),
-            ),
-          ),
     );
   }
 

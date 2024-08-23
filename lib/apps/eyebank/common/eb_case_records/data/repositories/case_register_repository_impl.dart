@@ -57,19 +57,22 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   Future<Either<EBFailure, EncounterBriefModel>> searchEncounter(
       SearchEncounterParams params) {
     return EyeBankErrorHandler.handle(() async {
-      const endPoint = '/services/eyebank/api/encounters/search';
+      // https: //healthconnect.infosysapps.com/services/eyebank/api/encounters/search?page=0&size=1&mobile=9999677907
+
+      final endPoint =
+          "/services/eyebank/api/encounters/search?page=${params.page}&size=${params.size}&mobile=${params.mobile}";
 
       final response = await _dio.get(
         endPoint,
-        queryParameters: {
-          'mobile': params.mobile,
-          // 'identifier': params.identifier,
-          // 'identifierType': params.identifierType,
-          'pageable': {
-            "page": params.page,
-            "size": params.size,
-          }
-        },
+        // queryParameters: {
+        //   'mobile': params.mobile,
+        //   // 'identifier': params.identifier,
+        //   // 'identifierType': params.identifierType,
+        //   'pageable': {
+        //     "page": params.page,
+        //     "size": params.size,
+        //   }
+        // },
       );
       log(response.data.toString());
       if (response.statusCode == 200) {
