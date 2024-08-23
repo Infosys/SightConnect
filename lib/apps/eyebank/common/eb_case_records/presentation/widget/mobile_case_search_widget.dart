@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentatio
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +15,6 @@ class MobileCaseSearchWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return EbInfiniteScrollView<ContentBriefEntity>(
       fetchPageData: (pageKey, pageSize, filters) async {
-        logger.f("SAM  $pageKey $pageSize $filters");
         final params = GetRecordsParams(
           filters: filters,
           pageNumber: pageKey,
@@ -26,8 +24,6 @@ class MobileCaseSearchWidget extends ConsumerWidget {
         return records.content ?? [];
       },
       itemBuilder: (context, item, index) {
-        logger.f("123456 ");
-        logger.f(item);
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: EBCaseCard(
