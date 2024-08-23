@@ -104,25 +104,28 @@ class AppStepperState extends State<AppStepper> {
         );
       }).toList(),
       controlsBuilder: (BuildContext context, ControlsDetails details) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            if (_currentStep > 0)
-              OutlinedButton(
-                onPressed: details.onStepCancel,
-                child: const Text('BACK'),
-              ),
-            if (_currentStep < widget.pages.length - 1)
-              ElevatedButton(
-                onPressed: details.onStepContinue,
-                child: const Text('NEXT'),
-              ),
-            if (_currentStep == widget.pages.length - 1)
-              ElevatedButton(
-                onPressed: _handleSubmit,
-                child: const Text('SUBMIT'),
-              ),
-          ],
+        return Padding(
+          padding: const EdgeInsets.only(top: 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              if (_currentStep > 0)
+                OutlinedButton(
+                  onPressed: details.onStepCancel,
+                  child: const Text('BACK'),
+                ),
+              if (_currentStep < widget.pages.length - 1)
+                ElevatedButton(
+                  onPressed: details.onStepContinue,
+                  child: const Text('NEXT'),
+                ),
+              if (_currentStep == widget.pages.length - 1)
+                ElevatedButton(
+                  onPressed: _handleSubmit,
+                  child: const Text('SUBMIT'),
+                ),
+            ],
+          ),
         );
       },
     );

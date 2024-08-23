@@ -144,6 +144,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppCard(
+                  title: widget.name,
                   child: Column(
                     children: repeatedPanelKeys
                         .map((key) => buildRepeatedPanel(key))
