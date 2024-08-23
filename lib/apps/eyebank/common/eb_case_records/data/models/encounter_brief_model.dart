@@ -78,7 +78,7 @@ class DonorBrief with _$DonorBrief {
 }
 
 @freezed
-class NotifierBrief with _$DonorBrief {
+class NotifierBrief with _$NotifierBrief {
   const factory NotifierBrief({
     int? id,
     String? name,

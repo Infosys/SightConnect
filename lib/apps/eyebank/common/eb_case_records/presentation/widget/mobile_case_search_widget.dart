@@ -49,7 +49,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
       filterOptions: EBStageName.values.map((e) => e.name).toList(),
       enableSearch: true,
       enableFilter: true,
-      defaultPageSize: 3,
+      defaultPageSize: 10,
       onSearchTap: () {
         final navigator = Navigator.of(context);
         navigator.push(
