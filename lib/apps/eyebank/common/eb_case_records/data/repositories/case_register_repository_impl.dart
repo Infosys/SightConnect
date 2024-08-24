@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/encounter_brief_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/repositories/contracts/case_register_repository.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,10 +55,30 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   Future<Either<EBFailure, EncounterBriefModel>> searchEncounter(
       SearchEncounterParams params) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint =
-          "/services/eyebank/api/encounters/search?page=${params.page}&size=${params.size}&mobile=${params.mobile}";
+      logger.f(
+          "Search Encounter Params: identifier : ${params.identifier}, identifierType: ${params.identifierType}, mobile: ${params.mobile}, page: ${params.page}, size: ${params.size}");
+      const endPoint = "/services/eyebank/api/encounters/search";
+      final queryParams = {
+        'page': params.page,
+        'size': params.size,
+        if (params.mobile != null && params.mobile != '')
+          'mobile': params.mobile,
+        if (params.identifier != null &&
+            params.identifierType != null &&
+            params.identifierType != '' &&
+            params.identifier != '')
+          'identifier': params.identifier,
+        if (params.identifier != null &&
+            params.identifierType != null &&
+            params.identifierType != '' &&
+            params.identifier != '')
+          'identifierType': params.identifierType,
+      };
 
-      final response = await _dio.get(endPoint);
+      final response = await _dio.get(
+        endPoint,
+        queryParameters: queryParams,
+      );
       log(response.data.toString());
       if (response.statusCode == 200) {
         return EncounterBriefModel.fromJson(response.data);

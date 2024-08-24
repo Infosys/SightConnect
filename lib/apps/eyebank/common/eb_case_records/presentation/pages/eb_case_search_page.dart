@@ -1,7 +1,11 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -16,10 +20,14 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
   final FocusNode _focusNode = FocusNode();
   static const _pageSize = 10;
   String query = '';
+  String identifier = '';
+  String identifierType = '';
   SearchRecordParams param = SearchRecordParams(
     searchKey: '',
     pageNumber: 0,
     pageSize: _pageSize,
+    identifier: '',
+    identifierType: '',
   );
 
   final PagingController<int, ContentBriefEntity> _pagingController =
@@ -44,6 +52,8 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
         searchKey: query,
         pageNumber: pageKey,
         pageSize: _pageSize,
+        identifier: identifier,
+        identifierType: identifierType,
       );
       final newItems = await ref.read(ebSearchRecordProvider(param).future);
       final isLastPage = (newItems.content?.length ?? 0) < _pageSize;
@@ -71,10 +81,28 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
       child: Scaffold(
         appBar: _EBSearchAppBar(
           onSubmitted: (value) {
-            query = value;
-            _pagingController.refresh();
+            if (identifierType == "mobile" || identifierType.isEmpty) {
+              query = value;
+              _pagingController.refresh();
+            } else {
+              identifier = value;
+              logger.f("identifier: $identifier");
+              query = '';
+              _pagingController.refresh();
+            }
           },
           focusNode: _focusNode,
+          onFilter: (identifierType) {
+            logger.f(identifierType);
+            if (identifierType != null && identifierType.isNotEmpty) {
+              if (identifierType == "mobile") {
+                this.identifierType = '';
+                identifier = '';
+              }
+              this.identifierType = identifierType;
+            }
+            logger.f(this.identifierType);
+          },
         ),
         body: GestureDetector(
           onTap: () {
@@ -105,18 +133,96 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
   }
 }
 
-class _EBSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
+class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
   const _EBSearchAppBar({
     required this.onSubmitted,
     required this.focusNode,
     this.onFilter,
   });
   final Function(String) onSubmitted;
-  final Function()? onFilter;
+  final Function(String? identifierType)? onFilter;
   final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
+    var selectedFilter = useState<String>("mobile");
+    final List<PopupMenuEntry> filterOptions = [
+      PopupMenuItem(
+        value: "mobile",
+        child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            color: selectedFilter.value == "mobile"
+                ? AppColor.primary
+                : Colors.white,
+            child: Text(
+              'Mobile Number',
+              style: applyRobotoFont(
+                color: selectedFilter.value == "mobile"
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+      PopupMenuItem(
+        value: "ENCOUNTER",
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            color: selectedFilter.value == "ENCOUNTER"
+                ? AppColor.primary
+                : Colors.white,
+            child: Text(
+              'Encounter ID',
+              style: applyRobotoFont(
+                color: selectedFilter.value == "ENCOUNTER"
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+      PopupMenuItem(
+        value: "SERVICE_REQUEST",
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            color: selectedFilter.value == "SERVICE_REQUEST"
+                ? AppColor.primary
+                : Colors.white,
+            child: Text(
+              'Service Request ID',
+              style: applyRobotoFont(
+                color: selectedFilter.value == "SERVICE_REQUEST"
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+      PopupMenuItem(
+        value: "BDP",
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            color:
+                selectedFilter.value == "BDP" ? AppColor.primary : Colors.white,
+            child: Text(
+              'BDP ID',
+              style: applyRobotoFont(
+                color:
+                    selectedFilter.value == "BDP" ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+    ];
+
     return AppBar(
       backgroundColor: Colors.white,
       leading: IconButton(
@@ -133,7 +239,7 @@ class _EBSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: TextField(
                 focusNode: focusNode,
                 decoration: InputDecoration(
-                  hintText: 'Search by phone number',
+                  hintText: getHintText(selectedFilter.value), 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide.none,
@@ -168,10 +274,30 @@ class _EBSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             const SizedBox(width: 8),
-            IconButton(
-              icon: const Icon(Icons.filter_alt),
-              onPressed: onFilter,
-            ),
+            PopupMenuButton(
+                padding: EdgeInsets.zero,
+                icon: const Icon(Icons.filter_list),
+                itemBuilder: (context) {
+                  return filterOptions;
+                },
+                onSelected: (value) {
+                  if (value == 'mobile') {
+                    selectedFilter.value = 'mobile';
+                    onFilter?.call('mobile');
+                  }
+                  if (value == 'ENCOUNTER') {
+                    selectedFilter.value = 'ENCOUNTER';
+                    onFilter?.call('ENCOUNTER');
+                  }
+                  if (value == 'SERVICE_REQUEST') {
+                    selectedFilter.value = 'SERVICE_REQUEST';
+                    onFilter?.call('SERVICE_REQUEST');
+                  }
+                  if (value == 'BDP') {
+                    selectedFilter.value = 'BDP';
+                    onFilter?.call('BDP');
+                  }
+                }),
           ],
         ),
       ),
@@ -181,4 +307,20 @@ class _EBSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(56.0);
+
+  String getHintText(String selectedFilter) {
+    if (selectedFilter == 'mobile') {
+      return 'Search by Mobile Number';
+    }
+    if (selectedFilter == 'ENCOUNTER') {
+      return 'Search by Encounter ID';
+    }
+    if (selectedFilter == 'SERVICE_REQUEST') {
+      return 'Search by Service Request ID';
+    }
+    if (selectedFilter == 'BDP') {
+      return 'Search by BDP ID';
+    }
+    return '';
+  }
 }
