@@ -9,12 +9,11 @@ import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../helpers/domain/enums/global_eb_enums.dart';
-
 final ebFormManageProvider =
-    FutureProvider.family<dynamic, EBStageName?>((ref, stage) async {
+    FutureProvider.family<dynamic, EbStageParams>((ref, stage) async {
   final repo = ref.watch(ebTimlineRepoProvider);
-  final res = await repo.getFormConfiguration(stage: stage!);
+  final res = await repo.getFormConfiguration(
+      stage: stage.stageName, stageVersion: stage.stageVersion);
   return res.fold(
     (l) => throw l,
     (r) => r,
@@ -27,6 +26,29 @@ final ebFormManageProvider =
   //   rethrow;
   // }
 });
+
+class EbStageParams {
+  final String? stageName;
+  final String? stageVersion;
+
+  EbStageParams({
+    required this.stageName,
+    required this.stageVersion,
+  });
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is EbStageParams &&
+        other.stageName == stageName &&
+        other.stageVersion == stageVersion;
+  }
+
+  @override
+  int get hashCode => stageName.hashCode ^ stageVersion.hashCode;
+}
+
+//--------------------Provider-------------------------
 
 final ebSaveOrDraftProvider = Provider<EbFormManageProvider>((ref) {
   return EbFormManageProvider(ref.watch(ebFormManageRepositoryProvider));

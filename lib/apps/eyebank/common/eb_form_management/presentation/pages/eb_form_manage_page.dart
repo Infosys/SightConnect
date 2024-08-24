@@ -1,7 +1,6 @@
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +8,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EBFormManagePage extends ConsumerWidget {
   final String title;
-  final EBStageName? stageName;
+  final String? stageName;
+  final String? stageVersion;
 
   const EBFormManagePage({
     super.key,
-    required this.title,
-    this.stageName,
+    this.title = "",
+    required this.stageName,
+    required this.stageVersion,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    logger.f({
+      'stageName': stageName,
+      'stageVersion': stageVersion,
+    });
     if (stageName == null) {
       return const Scaffold(
         body: Center(
@@ -29,7 +34,16 @@ class EBFormManagePage extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         body: DesktopClipper(
-          widget: ref.watch(ebFormManageProvider(stageName)).when(
+          widget: ref
+              .watch(
+                ebFormManageProvider(
+                  EbStageParams(
+                    stageName: stageName,
+                    stageVersion: stageVersion,
+                  ),
+                ),
+              )
+              .when(
                 data: (json) {
                   return DynamicFormPage(
                     canPop: true,

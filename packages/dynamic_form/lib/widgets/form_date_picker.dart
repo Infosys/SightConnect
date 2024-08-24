@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:intl/intl.dart';
 
 class FormDatePicker extends HookWidget {
   const FormDatePicker({
@@ -33,7 +32,9 @@ class FormDatePicker extends HookWidget {
       initialValue: getInitialValue(),
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      format: DateFormat.d().add_MMM().add_y(),
+      valueTransformer: (DateTime? value) {
+        return value?.toUtc().toIso8601String();
+      },
       inputType: InputType.date,
       decoration: InputDecoration(
         labelText: field.title,

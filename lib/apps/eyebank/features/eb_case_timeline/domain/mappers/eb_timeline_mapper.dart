@@ -16,7 +16,7 @@ class EBTimelineMapper {
         serviceRequestId: m.serviceRequestId,
         stage: _getStageName(m.stage),
         title: m.title,
-        assessmentVersion: m.assessmentVersion,
+        stageVersion: _getStageVersion(m.stage, configModel),
         status: _getCaseStatus(m.status ?? ""),
         initiateDate: m.initiateDate,
         recentUpdatedTime: m.recentUpdated,
@@ -44,7 +44,7 @@ class EBTimelineMapper {
         serviceRequestId: null,
         stage: _getStageName(stage.stageName),
         title: stage.stageName,
-        assessmentVersion: null,
+        stageVersion: stage.stageVersion,
         status: EBStatus.UNKNOWN,
         initiateDate: null,
         recentUpdatedTime: null,
@@ -62,6 +62,16 @@ class EBTimelineMapper {
         return reasons[i];
       }
     }
+  }
+
+  static String? _getStageVersion(
+      String? stageName, EbTimelineConfigModel configModel) {
+    for (var stage in configModel.stages!) {
+      if (stage.stageName == stageName) {
+        return stage.stageVersion;
+      }
+    }
+    return null;
   }
 
   static EBStatus _getCaseStatus(String status) {

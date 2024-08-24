@@ -6,7 +6,7 @@ class EBTimelineEntity {
   final String? serviceRequestId;
   final String? title;
   final EBStageName? stage;
-  final String? assessmentVersion;
+  final String? stageVersion;
   final EBStatus? status;
   final DateTime? initiateDate;
   final DateTime? recentUpdatedTime;
@@ -18,7 +18,7 @@ class EBTimelineEntity {
     this.serviceRequestId,
     this.title,
     this.stage,
-    this.assessmentVersion,
+    this.stageVersion,
     this.status,
     this.initiateDate,
     this.recentUpdatedTime,
@@ -28,6 +28,6 @@ class EBTimelineEntity {
   //to string
   @override
   String toString() {
-    return 'EbTimelineEntity(timelineName: $timelineName, timelineVersion: $timelineVersion, serviceRequestId: $serviceRequestId, stage: $stage, title: $title, assessmentVersion: $assessmentVersion, status: $status, initiateDate: $initiateDate, recentUpdatedTime: $recentUpdatedTime, subStages: $subStages)';
+    return 'EBTimelineEntity(timelineName: $timelineName, timelineVersion: $timelineVersion, serviceRequestId: $serviceRequestId, title: $title, stage: $stage, stageVersion: $stageVersion, status: $status, initiateDate: $initiateDate, recentUpdatedTime: $recentUpdatedTime, subStages: $subStages)';
   }
 }

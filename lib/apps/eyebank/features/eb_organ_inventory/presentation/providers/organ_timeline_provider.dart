@@ -1,12 +1,9 @@
-import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_time_line_case_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final ebOrganInventoryTimlineProvider =
-    FutureProvider.family((ref, caseID) async {
-  return Future.delayed(const Duration(seconds: 1), () {
-    return sampleJson.map((e) => EBTimeLineCaseModel.fromJson(e)).toList();
-  });
-});
+// final ebOrganInventoryTimlineProvider =
+//     FutureProvider.family((ref, caseID) async {
+//   return Future.delayed(const Duration(seconds: 1), () {
+//     return sampleJson.map((e) => EBTimeLineCaseModel.fromJson(e)).toList();
+//   });
+// });
 
 const sampleJson = [
   {

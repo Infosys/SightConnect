@@ -31,8 +31,8 @@ abstract class EBTimelineRepo {
   });
   // GET : Form configuration by stage
   Future<Either<EBFailure, Map<String, dynamic>>> getFormConfiguration({
-    required EBStageName stage,
-    double? stageVersion,
+    required String? stage,
+    required String? stageVersion,
   });
 }
 
@@ -102,12 +102,17 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
 
   @override
   Future<Either<EBFailure, Map<String, dynamic>>> getFormConfiguration({
-    required EBStageName stage,
-    double? stageVersion,
+    required String? stage,
+    required String? stageVersion,
   }) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/services/configs/api/stages/${stage.name}';
-      final response = await _dio.get<Map<String, dynamic>>(endPoint);
+      final endPoint = '/services/configs/api/stages/${stage}';
+      final response = await _dio.get<Map<String, dynamic>>(
+        endPoint,
+        queryParameters: {
+          'version': stageVersion,
+        },
+      );
       log(response.data.toString());
       if (response.statusCode == 200) {
         return Future.value(response.data);
