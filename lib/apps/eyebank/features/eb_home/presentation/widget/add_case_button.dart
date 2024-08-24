@@ -52,12 +52,7 @@ class AddCaseButton extends StatelessWidget {
                   try {
                     final repo = ref.read(ebRepositoryProvider);
                     final submitData = EBSubmitFormDataRequestModel(
-                      formData: data,
-                      timelineName: "CORNEA_DONATION",
-                      timelineVersion: "0.0.1",
-                      // performerId: "902",
-                      // performerRole: "TECHNICIAN",
-                    );
+                        formData: data, timelineName: "CORNEA_DONATION");
                     logger.f(submitData.toJson());
                     final res = await repo.saveIntimationForm(submitData);
 

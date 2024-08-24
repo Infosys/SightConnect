@@ -73,6 +73,7 @@ class RecentCases extends ConsumerWidget {
                             MaterialPageRoute(
                               builder: (context) => EbCaseTimeLinePage(
                                 encounterID: item.encounterId,
+                                timlineVersion: item.timelineVersion,
                               ),
                             ),
                           );

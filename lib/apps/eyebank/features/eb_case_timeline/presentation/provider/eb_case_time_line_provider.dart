@@ -8,11 +8,10 @@ import '../../domain/entities/eb_timeline_entity.dart';
 import '../../domain/mappers/eb_timeline_mapper.dart';
 
 final ebCaseTimeLineProvider =
-    FutureProvider.family<List<EBTimelineEntity>, String?>(
-        (ref, encounterId) async {
+    FutureProvider.family<List<EBTimelineEntity>, String?>((ref, data) async {
   final repo = ref.read(ebRepositoryProvider);
   try {
-    final timelinesResult = await repo.fetchTimelineByID(encounterId);
+    final timelinesResult = await repo.fetchTimelineByID(data);
     // logger.f('timelinesResult: $timelinesResult');
     final stagesResult =
         await repo.fetchTimelineStages("CORNEA_DONATION", "0.0.1");
@@ -36,6 +35,7 @@ final ebCaseTimeLineProvider =
     rethrow;
   }
 });
+
 const sampleJson = [
   {
     "initiateDate": "2023-10-01T12:00:00Z",

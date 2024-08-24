@@ -12,10 +12,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EbCaseTimeLinePage extends ConsumerWidget {
   final String? encounterID;
+  final String? timlineVersion;
 
   const EbCaseTimeLinePage({
     super.key,
     required this.encounterID,
+    this.timlineVersion,
   });
 
   @override

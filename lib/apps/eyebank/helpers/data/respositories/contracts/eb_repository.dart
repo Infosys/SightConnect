@@ -11,7 +11,9 @@ abstract class EyeBankRepository {
   );
 
   Future<Either<EBFailure, EbTimelineConfigModel>> fetchTimelineStages(
-      String timelineName, String timelineVersion);
+    String timelineName,
+    String? timelineVersion,
+  );
   Future<Either<EBFailure, void>> saveIntimationForm(
     EBSubmitFormDataRequestModel requestData,
   );

@@ -46,6 +46,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
                 MaterialPageRoute(
                   builder: (context) => EbCaseTimeLinePage(
                     encounterID: item.encounterId,
+                    timlineVersion: item.timelineVersion,
                   ),
                 ),
               );

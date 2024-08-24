@@ -76,11 +76,15 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, EbTimelineConfigModel>> fetchTimelineStages(
-      String timelineName, String timelineVersion) {
+      String timelineName, String? timelineVersion) {
     return EyeBankErrorHandler.handle(() async {
-      const endPoint =
-          '/services/configs/api/timelines/CORNEA_DONATION?timelineVersion=0.0.1';
-      final response = await _dio.get(endPoint);
+      final endPoint = '/services/configs/api/timelines/$timelineName';
+      final queryParams = <String, dynamic>{};
+      if (timelineVersion != null) {
+        queryParams['version'] = timelineVersion;
+      }
+
+      final response = await _dio.get(endPoint, queryParameters: queryParams);
       logger.d({
         "RESPONSE": response.data,
       });
