@@ -53,7 +53,14 @@ class EbCaseTimeLinePage extends ConsumerWidget {
             ),
           ],
         ),
-        body: ref.watch(ebCaseTimeLineProvider(encounterID)).when(
+        body: ref
+            .watch(ebCaseTimeLineProvider(
+              EbTimlineParams(
+                encounterID: encounterID,
+                timelineVersion: timlineVersion,
+              ),
+            ))
+            .when(
               data: (data) {
                 final List<EBTimelineEntity> caseTimeLine = data;
                 return DesktopClipper(
