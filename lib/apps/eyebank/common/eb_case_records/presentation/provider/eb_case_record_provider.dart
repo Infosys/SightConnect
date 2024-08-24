@@ -44,7 +44,7 @@ final ebGetRecordsProvider =
 final ebSearchRecordProvider =
     FutureProvider.family<EncounterBriefEntity, SearchRecordParams>(
   (ref, params) async {
-    if (params.searchKey.isEmpty) {
+    if (params.searchKey.isEmpty && params.identifier == null) {
       return EncounterBriefEntity(content: []);
     }
     final repo = ref.watch(ebCaseRegisterRepositoryProvider);
@@ -52,6 +52,8 @@ final ebSearchRecordProvider =
       mobile: params.searchKey,
       page: params.pageNumber,
       size: params.pageSize,
+      identifier: params.identifier,
+      identifierType: params.identifierType,
     );
 
     final result = await repo.searchEncounter(p);
@@ -83,11 +85,15 @@ class SearchRecordParams {
   final int pageNumber;
   final int pageSize;
   final String searchKey;
+  final String? identifierType;
+  final String? identifier;
 
   SearchRecordParams({
     this.filters,
     required this.pageNumber,
     required this.pageSize,
     required this.searchKey,
+    this.identifierType,
+    this.identifier,
   });
 }
