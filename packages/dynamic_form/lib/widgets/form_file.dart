@@ -255,6 +255,10 @@ class UploadButton extends StatelessWidget {
               onPressed: () async {
                 try {
                   final files = await FilePickerService.pickFiles();
+
+                  /// upload to server
+                  /// then set the data
+
                   if (files != null) {
                     images.value = List.from(images.value)..addAll(files.files);
                     onChanged(images.value);
