@@ -1,0 +1,19 @@
+ {
+   "timelineName": "CORNEA_DONATION",
+   "timelineVersion": null,
+   "formData": {
+     "initimationRequest.notifierName": "Potter",
+     "initimationRequest.notificationDate": "2024-08-24T06:30:00.000Z",
+     "initimationRequest.relationship": "FATHER",
+     "initimationRequest.phoneNumber": "9000000000",
+     "initimationRequest.alternatePhoneNumber": "9000000000",
+     "initimationRequest.deathDateTime": "2024-08-24T06:30:00.000Z",
+     "initimationRequest.bodyLocation.direction": "Delhi",
+     "initimationRequest.bodyLocation.pinCode": "290111",
+     "initimationRequest.bodyAvailableUntil": "2024-08-24T06:30:00.000Z"
+   },
+   "performerId": null,
+   "performerRole": null,
+   "verifiedById": null,
+   "verifiedByRole": null
+ }

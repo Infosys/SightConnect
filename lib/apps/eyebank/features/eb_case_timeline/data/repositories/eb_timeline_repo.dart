@@ -88,7 +88,8 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
     String? timelineVersion,
   }) {
     return EyeBankErrorHandler.handle(() async {
-      final endPoint = '/services/configs/api/timelines/$timelineName/lead';
+      final endPoint =
+          '/services/configs/api/timelines/$timelineName/initialStage';
       final response = await _dio.get(endPoint);
 
       if (response.statusCode == 200) {
