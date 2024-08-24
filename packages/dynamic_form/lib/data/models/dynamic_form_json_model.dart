@@ -116,7 +116,7 @@ class PageElementModel {
 }
 
 class ElementElementClassModel {
-  int? name;
+  dynamic name;
   String? type;
   String? prefix;
   String? dependantField;
