@@ -61,13 +61,15 @@ Widget getField(
     case DynamicFormType.FILE:
       return FormFile(
         field: field,
-        onChanged: (value) {
-          key.currentState?.setInternalFieldValue(
-              field.name,
-              value.map((e) {
-                return e;
-              }).toList());
-          debugPrint(value.toString());
+        onChanged: (docs) {
+          if (docs.length == 1) {
+            key.currentState?.setInternalFieldValue(field.name, docs.first);
+          } else {
+            key.currentState?.setInternalFieldValue(
+                field.name, docs.map((e) => e).toList());
+          }
+
+          debugPrint(docs.toString());
         },
       );
     case DynamicFormType.SWITCH:

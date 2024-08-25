@@ -75,6 +75,7 @@ class AppStepperState extends State<AppStepper> {
                   onPressed: _handleSubmit,
                   child: const Text('SUBMIT'),
                 ),
+                const SizedBox(width: 16),
               ],
             ),
           ],
