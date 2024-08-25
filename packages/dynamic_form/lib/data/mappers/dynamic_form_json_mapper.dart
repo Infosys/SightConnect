@@ -1,6 +1,7 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
 
 class DynamicFormJsonMapper {
@@ -15,6 +16,7 @@ class DynamicFormJsonMapper {
     required Map<String, dynamic>? initialValues,
   }) {
     try {
+      Log.f(initialValues);
       this.initialValues = initialValues;
       return ResponseJsonEntity(
         name: _formatTitle(dynamicFormModel.name),

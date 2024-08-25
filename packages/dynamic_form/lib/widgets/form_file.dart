@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/cloud_service.dart';
 import 'package:dynamic_form/shared/utlities/file_picker.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,9 +19,20 @@ class FormFile extends HookWidget {
   final ElementElementClassEntity field;
   final Function(List<String>) onChanged;
 
+  List<String> getInitialValue() {
+    try {
+      return field.initialValue != null
+          ? List<String>.from(field.initialValue)
+          : [];
+    } catch (e) {
+      Log.f(' FormFile: $e');
+      return [];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final images = useState<List<String>>([]);
+    final images = useState<List<String>>(getInitialValue());
     final showAllImages = useState<bool>(false);
     final isLoading = useState<bool>(false);
 
@@ -146,7 +158,7 @@ class ImageDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (url == null) {
+    if (url == null && url!.isEmpty) {
       return const SizedBox();
     }
 

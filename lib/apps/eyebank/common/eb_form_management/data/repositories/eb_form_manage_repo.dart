@@ -9,8 +9,14 @@ import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EBFormManageRepository {
-  Future<Either<EBFailure, void>> saveOrDraft(int encounterId, String stageName,
-      DynamicFormSavingType action, EBFormActionRequestModel data);
+  Future<Either<EBFailure, void>> saveOrDraft(
+    String? encounterId,
+    String? stageName,
+    String? stageVersion,
+    String? serviceRequestId,
+    DynamicFormSavingType action,
+    EBFormActionRequestModel requestData,
+  );
 }
 
 final ebFormManageRepositoryProvider = Provider<EBFormManageRepository>((ref) {
@@ -21,13 +27,27 @@ class EBFormManageRepositoryImpl implements EBFormManageRepository {
   final Dio _dio;
   EBFormManageRepositoryImpl(this._dio);
   @override
-  Future<Either<EBFailure, void>> saveOrDraft(int encounterId, String stageName,
-      DynamicFormSavingType action, EBFormActionRequestModel requestData) {
+  Future<Either<EBFailure, void>> saveOrDraft(
+    String? encounterId,
+    String? stageName,
+    String? stageVersion,
+    String? serviceRequestId,
+    DynamicFormSavingType action,
+    EBFormActionRequestModel requestData,
+  ) {
     return EyeBankErrorHandler.handle(() async {
       final endPoint =
-          '/eyebank/api/encounters/$encounterId/stage/$stageName/forms/${action.name}';
+          '/services/eyebank/api/encounters/$encounterId/stage/$stageName/forms/${action.name}';
 
-      final response = await _dio.post(endPoint, data: requestData.toJson());
+      final response = await _dio.post(
+        endPoint,
+        data: requestData.toJson(),
+        queryParameters: {
+          'stageVersion': stageVersion,
+          'serviceRequestId': serviceRequestId
+        },
+      );
+
       if (response.statusCode == 200) {
         return response.data;
       } else {

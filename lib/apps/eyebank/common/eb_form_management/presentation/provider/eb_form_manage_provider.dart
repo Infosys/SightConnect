@@ -2,22 +2,38 @@ import 'package:dartz/dartz.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/models/eb_form_action_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/repositories/eb_form_manage_repo.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/domain/entity/eb_form_action_request_entity.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/domain/mappers/eb_form_action_request_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_form_prefilled_response_entity.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/mappers/eb_form_prefilled_mapper.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ebFormManageProvider =
-    FutureProvider.family<dynamic, EbStageParams>((ref, stage) async {
-  final repo = ref.watch(ebTimlineRepoProvider);
-  final res = await repo.getFormConfiguration(
-      stage: stage.stageName, stageVersion: stage.stageVersion);
-  return res.fold(
-    (l) => throw l,
-    (r) => r,
-  );
+    FutureProvider.family<EBFormPrefilledResponseEntity, EbStageParams>(
+        (ref, stage) async {
+  try {
+    final repo = ref.watch(ebTimlineRepoProvider);
+    final res = await repo.getFormConfiguration(
+        stage: stage.stageName, stageVersion: stage.stageVersion);
+    final result1 = res.fold(
+      (l) => throw l,
+      (r) => r,
+    );
+    final res2 = await repo.fetchPrefilledFormByStageAndId(
+        stage.encounterId, stage.serviceRequestId, stage.stageName);
+
+    final result2 = res2.fold(
+      (l) => throw l,
+      (r) => r,
+    );
+    return EBFormPrefilledMapper.mapToEntity(result2, result1);
+  } catch (e) {
+    logger.f('Error fetching form: $e');
+    rethrow;
+  }
+
   // try {
   //   return await rootBundle
   //       .loadString('assets/eyebank/local_json/screening_form.json');
@@ -30,10 +46,14 @@ final ebFormManageProvider =
 class EbStageParams {
   final String? stageName;
   final String? stageVersion;
+  final String? encounterId;
+  final String? serviceRequestId;
 
   EbStageParams({
     required this.stageName,
     required this.stageVersion,
+    required this.encounterId,
+    required this.serviceRequestId,
   });
   @override
   bool operator ==(Object other) {
@@ -56,28 +76,25 @@ final ebSaveOrDraftProvider = Provider<EbFormManageProvider>((ref) {
 
 class EbFormManageProvider extends ChangeNotifier {
   final EBFormManageRepository _ebFormManageRepository;
-  final String stageName = 'stageName';
 
   EbFormManageProvider(this._ebFormManageRepository);
 
   Future<Either<EBFailure, void>> saveOrDraft({
-    required int encounterId,
+    required String? encounterId,
+    required String? stageName,
+    required String? stageVersion,
+    required String? serviceRequestId,
     required DynamicFormSavingType action,
+    required EBFormActionRequestModel ebFormActionRequestModel,
     required dynamic formData,
   }) async {
-    EBFormActionRequestEntity data = EBFormActionRequestEntity(
-      timelineName: 'timelineName',
-      timelineVersion: 'timelineVersion',
-      eBformData: formData,
-      performerId: 'performerId',
-      performerRole: 'performerRole',
-      verifiedById: 'verifiedById',
-      verifiedByRole: 'verifiedByRole',
-    );
-
-    EBFormActionRequestModel modelData =
-        EbFormActionRequestMapper.mapToModel(data);
     return await _ebFormManageRepository.saveOrDraft(
-        encounterId, stageName, action, modelData);
+      encounterId,
+      stageName,
+      stageVersion,
+      serviceRequestId,
+      action,
+      ebFormActionRequestModel,
+    );
   }
 }

@@ -15,7 +15,17 @@ class FormRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? getInitialValue() {
+      final String? initialValue = field.initialValue;
+      if (initialValue != null &&
+          field.choices!.any((item) => item.name == initialValue)) {
+        return initialValue;
+      }
+      return null;
+    }
+
     return FormBuilderRadioGroup<String>(
+      initialValue: getInitialValue(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       wrapDirection: Axis.vertical,
       wrapAlignment: WrapAlignment.start,

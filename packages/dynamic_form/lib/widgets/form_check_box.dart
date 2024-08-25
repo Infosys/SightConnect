@@ -15,7 +15,18 @@ class FormCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String>? getInitialValue() {
+      final List<String>? initialValue = field.initialValue as List<String>?;
+      if (initialValue != null &&
+          initialValue.every((element) =>
+              field.choices!.any((item) => item.name == element))) {
+        return initialValue;
+      }
+      return null;
+    }
+
     return FormBuilderCheckboxGroup<String>(
+      initialValue: getInitialValue(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       name: field.name,
       decoration: InputDecoration(

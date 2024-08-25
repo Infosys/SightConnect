@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_prefilled_response_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_reject_case_request_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
@@ -21,8 +20,9 @@ abstract class EBTimelineRepo {
   // GET : Prefilled form by stage and encounter id
   Future<Either<EBFailure, EBFormPrefilledResponseModel>>
       fetchPrefilledFormByStageAndId(
-    int encounterId,
-    EBStageName stage,
+    String? encounterId,
+    String? serviceRequestId,
+    String? stage,
   );
   // GET : AI form for creating new case
   Future<Either<EBFailure, EBFormIntimationResponseModel>> getIntimationForm({
@@ -65,19 +65,27 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
   @override
   Future<Either<EBFailure, EBFormPrefilledResponseModel>>
       fetchPrefilledFormByStageAndId(
-    int encounterId,
-    EBStageName stage,
+    String? encounterId,
+    String? serviceRequestId,
+    String? stage,
   ) {
+    log("ABHISHEK $encounterId $serviceRequestId $stage");
     return EyeBankErrorHandler.handle(() async {
       final endPoint =
-          '/eyebank/api/encounters/$encounterId/stage/${stage.name}';
-      final response = await _dio.get(endPoint);
+          '/services/eyebank/api/encounters/$encounterId/stage/$stage';
+      final response = await _dio.get(
+        endPoint,
+        queryParameters: {
+          'serviceRequestId': serviceRequestId,
+        },
+      );
       if (response.statusCode == 200) {
-        return response.data;
+        return EBFormPrefilledResponseModel.fromJson(response.data);
       } else {
         logger.f(response.data);
-        throw Exception(response.statusMessage ??
-            'Error in fetchPrefilledFormByStageAndId');
+        throw Exception(
+          response.statusMessage ?? 'Error in fetchPrefilledFormByStageAndId',
+        );
       }
     });
   }

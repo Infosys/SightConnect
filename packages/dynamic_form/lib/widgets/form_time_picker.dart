@@ -16,10 +16,26 @@ class FormTimePicker extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime? getInitialValue() {
+      try {
+        return field.initialValue != null
+            ? DateFormat.jm().parse(field.initialValue as String)
+            : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
     return FormBuilderDateTimePicker(
       autofocus: false,
+      initialValue: getInitialValue(),
+      format: DateFormat.jm(), // Display time in 'hh:mm a' format
+      valueTransformer: (DateTime? value) {
+        return value
+            ?.toUtc()
+            .toIso8601String(); // Send value in UTC ISO 8601 format
+      },
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      format: DateFormat.jm(),
       inputType: InputType.time,
       decoration: InputDecoration(
         labelText: field.title,

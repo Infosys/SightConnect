@@ -133,7 +133,7 @@ class ElementElementClassEntity {
   final int? minRepeat;
   final int? maxRepeat;
   final String? inputType;
-  final String? initialValue;
+  final dynamic initialValue;
 
   ElementElementClassEntity({
     required this.type,

@@ -14,13 +14,22 @@ class FormChip extends HookWidget {
   final ElementElementClassEntity field;
   final Function(String?)? onChanged;
 
+  String? getInitialValue() {
+    try {
+      return field.initialValue != null ? field.initialValue as String? : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final options = field.choices!;
-    var selectedValue = useState<String>('');
+    var selectedValue = useState<String>(getInitialValue() ?? '');
 
     return FormBuilderChoiceChip<String>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      initialValue: getInitialValue(), // Set the initial value
       name: field.name,
       spacing: 10,
       runSpacing: 10,
@@ -37,6 +46,7 @@ class FormChip extends HookWidget {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       selectedColor: Theme.of(context).primaryColor,
+
       onChanged: (value) {
         selectedValue.value = value!;
         onChanged?.call(value);

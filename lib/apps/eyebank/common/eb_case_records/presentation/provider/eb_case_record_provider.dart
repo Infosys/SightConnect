@@ -7,7 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
 
-final ebIntimationFormProvider = FutureProvider<EBFormIntimationResponseModel>((ref) async {
+final ebIntimationFormProvider =
+    FutureProvider<EBFormIntimationResponseModel>((ref) async {
   final repo = ref.watch(ebTimlineRepoProvider);
   final res = await repo.getIntimationForm(timelineName: "CORNEA_DONATION");
   return res.fold(

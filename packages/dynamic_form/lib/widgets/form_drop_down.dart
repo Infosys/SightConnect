@@ -36,8 +36,28 @@ class FormDropDown extends StatelessWidget {
           ));
     }
 
+    String? getInitialValue() {
+      try {
+        // log('Initial Value: ${field.initialValue} ${field.name}');
+        if (field.initialValue != null && field.initialValue.isNotEmpty) {
+          final initialValue = field.initialValue;
+          final values = options.map((option) => option.value).toList();
+          if (values.contains(initialValue)) {
+            return initialValue;
+          } else {
+            // log('Initial value not in options, setting to null');
+            return null;
+          }
+        } else {
+          return null;
+        }
+      } catch (e) {
+        return null;
+      }
+    }
+
     return FormBuilderDropdown<String>(
-      initialValue: field.initialValue,
+      initialValue: getInitialValue(),
       name: field.name,
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,

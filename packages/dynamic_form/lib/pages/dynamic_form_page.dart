@@ -17,6 +17,7 @@ class DynamicFormPage extends StatefulWidget {
     this.backButtonIcon = Icons.arrow_back,
     this.enableDraft = false,
     this.canPop = false,
+    this.readOnly = false,
     this.initialValue,
     required this.json,
   });
@@ -28,6 +29,7 @@ class DynamicFormPage extends StatefulWidget {
   final dynamic initialValue;
   final IconData backButtonIcon;
   final bool canPop;
+  final bool readOnly;
 
   @override
   _DynamicFormPageState createState() => _DynamicFormPageState();
@@ -46,99 +48,103 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
     try {
       Log.f(widget.json);
       return DynamicFormJsonMapper().modeltoEntity(
-          dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
-          initialValues: const {
-            // "preliminaryRequest.toDonateOrganTissue": ["CORNEA"],
-            "preliminaryRequest.consignmentNotificationDateTime":
-                "2024-08-25T06:30:00.000Z",
-            "preliminaryRequest.referralMethod": "VOLUNTARY_FAMILY_INITIATED",
-            "preliminaryRequest.counselling.counselor.name": "Rohit",
-            "preliminaryRequest.counselling.counselor.phoneNumber":
-                "9999999999",
-            "preliminaryRequest.counselling.counselor.counselorDetailSource":
-                "MAX",
-            "preliminaryRequest.unit": "ICU",
-            "preliminaryRequest.unitDetails": "Unit Details",
-            "preliminaryRequest.counselling.counselor.address": "Near Vaishali",
-            "preliminaryRequest.counselling.counselor.address.pincode":
-                "201007",
-            "preliminaryRequest.firstName": "Donor",
-            "preliminaryRequest.lastName": "Family Name",
-            "preliminaryRequest.dob": "1999-08-24T18:30:00.000Z",
-            "preliminaryRequest.age": "54",
-            "preliminaryRequest.gender": "MALE",
-            "preliminaryRequest.religion": "Religion",
-            "preliminaryRequest.height": "180",
-            "preliminaryRequest.weight": "84",
-            "preliminaryRequest.name": "Max",
-            "preliminaryRequest.mrn": "1123",
-            "preliminaryRequest.admissionDateTime": "2024-08-25T06:30:00.000Z",
-            "preliminaryRequest.attendingPhysician.name": "Ramu",
-            "preliminaryRequest.deathCause": "cause of Death",
-            "preliminaryRequest.deathCircumstances": "Leading to Death",
-            "preliminaryRequest.deathTime": "2024-08-25T06:30:00.000Z",
-            "preliminaryRequest.isActualDeathTime": "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.duration":
-                "Yes",
-            "preliminaryRequest.generalScreening.properties.general_screening.durationUnit":
-                "DAYS",
-            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHCV":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfCancer":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isDementia":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isAlzheimer":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.inIsolation":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms":
-                "NO",
-            "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt":
-                "last hour",
-            "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount":
-                "48",
-            "preliminaryRequest.generalScreening.properties.general_screening.transferredRemark":
-                "transferred",
-            "preliminaryRequest.generalScreening.properties.general_screening.medicalHx":
-                "Hx",
-            "preliminaryRequest.generalScreening.properties.general_screening.socialAndBehavioralHx":
-                "Behave",
-            "preliminaryRequest.generalScreening.outcome.status": "REJECTED",
-            "preliminaryRequest.generalScreening.outcome.remarks": "remark",
-            // "preliminaryRequest.tissueScreening.productCode": ["TISSUE"],
-            // "preliminaryRequest.tissueScreening.productCategory": ["CORNEA"],
-            "preliminaryRequest.tissueScreening.properties.hx": "NO",
-            "preliminaryRequest.tissueScreening.properties.notScreened":
-                "not screnned",
-            "preliminaryRequest.tissueScreening.properties.notSuitable":
-                "unsuitable ",
-            "preliminaryRequest.tissueScreening.properties.notProceeded":
-                "not proceeded",
-            "preliminaryRequest.tissueScreening.outcome.status": "REJECTED",
-            "preliminaryRequest.tissueScreening.outcome.remarks":
-                "Outocme remark ",
-            "preliminaryRequest.isMedicoLegalCase": "NO",
-            "preliminaryRequest.isDonationPermitted": "NO",
-            "preliminaryRequest.medicoLegalId": "case id",
-            "preliminaryRequest.medicoLegalFacility": "faility",
-            "preliminaryRequest.releasedBy": "release",
-            "preliminaryRequest.contactNumber": "9882222222",
-            "preliminaryRequest.notes": "restriction",
-            "preliminaryRequest.specialCases": "request",
-            "preliminaryRequest.autopsyId": "autopsy",
-            "preliminaryRequest.autopsyPerformer": "perfomed by",
-            "preliminaryRequest.autopsyLocation": "lcoation",
-            // "preliminaryRequest.consent.type": ["KIN_DONATION_CONSENT"]
-          });
+        dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
+        initialValues: widget.initialValue as Map<String, dynamic>?,
+      );
+
+      // initialValues: {
+      //   "preliminaryRequest.toDonateOrganTissue": ["CORNEA"],
+      //   "preliminaryRequest.consignmentNotificationDateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "preliminaryRequest.referralMethod": "VOLUNTARY_FAMILY_INITIATED",
+      //   "preliminaryRequest.counsellings.counselor.name": "Name",
+      //   "preliminaryRequest.counsellings.counselor.phoneNumber":
+      //       "8899922222",
+      //   "preliminaryRequest.counsellings.counselor.counselorDetailSource":
+      //       "222",
+      //   "preliminaryRequest.unit": "ICU",
+      //   "preliminaryRequest.unitDetails": "Unit Details",
+      //   "preliminaryRequest.recoveryAddress.direction": "22",
+      //   "preliminaryRequest.recoveryAddress.pincode": "111111",
+      //   "preliminaryRequest.firstName": "Donor",
+      //   "preliminaryRequest.lastName": "Family Name",
+      //   "preliminaryRequest.dob": "1999-08-24T18:30:00.000Z",
+      //   "preliminaryRequest.age": "54",
+      //   "preliminaryRequest.gender": "MALE",
+      //   "preliminaryRequest.religion": "Religion",
+      //   "preliminaryRequest.height": "180",
+      //   "preliminaryRequest.weight": "84",
+      //   "preliminaryRequest.name": "Max",
+      //   "preliminaryRequest.mrn": "1123",
+      //   "preliminaryRequest.admissionDateTime": "2024-08-25T06:30:00.000Z",
+      //   "preliminaryRequest.attendingPhysician.name": "Ramu",
+      //   "preliminaryRequest.deathCause": "cause of Death",
+      //   "preliminaryRequest.deathCircumstances": "Leading to Death",
+      //   "preliminaryRequest.deathTime": "2024-08-25T06:30:00.000Z",
+      //   "preliminaryRequest.isActualDeathTime": "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.duration":
+      //       "Yes",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.durationUnit":
+      //       "HOURS",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV":
+      //       "1",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHCV":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfCancer":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isDementia":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isAlzheimer":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.inIsolation":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms":
+      //       "0",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt":
+      //       "last hour",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount":
+      //       "48",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.transferredRemark":
+      //       "transferred",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.medicalHx":
+      //       "Hx",
+      //   "preliminaryRequest.generalScreening.properties.general_screening.socialAndBehavioralHx":
+      //       "Behave",
+      //   "preliminaryRequest.generalScreening.outcome.status": "REJECTED",
+      //   "preliminaryRequest.generalScreening.outcome.remarks": "remark",
+      //   "preliminaryRequest.tissueScreening.productCode": ["TISSUE"],
+      //   "preliminaryRequest.tissueScreening.productCategory": ["CORNEA"],
+      //   "preliminaryRequest.tissueScreening.properties.hx": "0",
+      //   "preliminaryRequest.tissueScreening.properties.notScreened":
+      //       "not screnned",
+      //   "preliminaryRequest.tissueScreening.properties.notSuitable":
+      //       "unsuitable ",
+      //   "preliminaryRequest.tissueScreening.properties.notProceeded":
+      //       "not proceeded",
+      //   "preliminaryRequest.tissueScreening.outcome.status": "REJECTED",
+      //   "preliminaryRequest.tissueScreening.outcome.remarks":
+      //       "Outocme remark ",
+      //   "preliminaryRequest.isMedicoLegalCase": "0",
+      //   "preliminaryRequest.isDonationPermitted": "0",
+      //   "preliminaryRequest.medicoLegalId": "case id",
+      //   "preliminaryRequest.medicoLegalFacility": "faility",
+      //   "preliminaryRequest.releasedBy": "release",
+      //   "preliminaryRequest.contactNumber": "9882222222",
+      //   "preliminaryRequest.notes": "restriction",
+      //   "preliminaryRequest.specialCases": "request",
+      //   "preliminaryRequest.autopsyId": "autopsy",
+      //   "preliminaryRequest.autopsyPerformer": "perfomed by",
+      //   "preliminaryRequest.autopsyLocation": "lcoation",
+      //   "preliminaryRequest.consentType": ["KIN_DONATION_CONSENT"],
+      //   "preliminaryRequest.consentDocumentUrl":
+      //       "https://healthconnect.infosysapps.com/services/filems/api/file/download/1724582230416-49d78967-7705-4d47-997f-2b8eb67624bf"
+      // });
     } catch (e) {
       log('DF:Error Converting json: $e');
       rethrow;

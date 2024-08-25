@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/entities/encounter_brief_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -115,7 +116,17 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
                 builderDelegate: PagedChildBuilderDelegate<ContentBriefEntity>(
                   itemBuilder: (context, item, index) => EBCaseCard(
                     item: item,
-                    onTap: () {},
+                    onTap: () {
+                      final navigator = Navigator.of(context);
+                      navigator.push(
+                        MaterialPageRoute(
+                          builder: (context) => EbCaseTimeLinePage(
+                            encounterID: item.encounterId,
+                            timlineVersion: item.timelineVersion,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   firstPageErrorIndicatorBuilder: (context) => const Center(
                     child: Text('Error loading cases'),
@@ -239,7 +250,7 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
               child: TextField(
                 focusNode: focusNode,
                 decoration: InputDecoration(
-                  hintText: getHintText(selectedFilter.value), 
+                  hintText: getHintText(selectedFilter.value),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide.none,

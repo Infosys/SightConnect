@@ -87,9 +87,13 @@ class EbCaseTimeLinePage extends ConsumerWidget {
     navigator.push(
       MaterialPageRoute(
         builder: (context) => EBFormManagePage(
-          title: event.title ?? "Display Name not found",
+          title: event.title ?? "",
           stageName: event.stage?.value,
           stageVersion: event.stageVersion,
+          serviceRequestId: event.serviceRequestId,
+          encounterId: encounterID,
+          timelineName: event.timelineName,
+          timelineVersion: event.timelineVersion,
         ),
       ),
     );
