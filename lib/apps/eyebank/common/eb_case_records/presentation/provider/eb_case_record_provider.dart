@@ -5,12 +5,14 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/domain/mapp
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ebIntimationFormProvider = FutureProvider<dynamic>((ref) async {
+import '../../../../features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
+
+final ebIntimationFormProvider = FutureProvider<EBFormIntimationResponseModel>((ref) async {
   final repo = ref.watch(ebTimlineRepoProvider);
   final res = await repo.getIntimationForm(timelineName: "CORNEA_DONATION");
   return res.fold(
     (l) => throw l,
-    (r) => r.stage,
+    (r) => r,
   );
 });
 // final ebSubmitIntimationFormProvider = StateProvider((ref) {

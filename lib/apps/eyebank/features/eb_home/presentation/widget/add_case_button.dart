@@ -44,9 +44,9 @@ class AddCaseButton extends StatelessWidget {
           final asyncValue = ref.watch(ebIntimationFormProvider);
 
           return asyncValue.when(
-            data: (json) {
+            data: (dataJson) {
               return DynamicFormPage(
-                json: json,
+                json: dataJson.stage!.toJson(),
                 backButtonIcon: Icons.close,
                 onSubmit: (data, mode) async {
                   try {
@@ -54,8 +54,7 @@ class AddCaseButton extends StatelessWidget {
                     final submitData = EBSubmitFormDataRequestModel(
                         formData: data, timelineName: "CORNEA_DONATION");
                     logger.f(submitData.toJson());
-                    final res = await repo.saveIntimationForm(submitData);
-
+                    final res = await repo.saveIntimationForm(submitData, dataJson.stage?.version??'0.0.1');
                     res.fold((l) {
                       logger.e(l);
                       Fluttertoast.showToast(msg: l.errorMessage);
