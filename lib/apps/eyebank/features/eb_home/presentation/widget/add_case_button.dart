@@ -46,7 +46,7 @@ class AddCaseButton extends StatelessWidget {
           return asyncValue.when(
             data: (dataJson) {
               return DynamicFormPage(
-                json: dataJson.stage,
+                json: dataJson.stage!.toJson(),
                 backButtonIcon: Icons.close,
                 onSubmit: (data, mode) async {
                   try {
