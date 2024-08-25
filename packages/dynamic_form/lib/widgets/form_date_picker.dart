@@ -1,4 +1,5 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,7 +16,7 @@ class FormDatePicker extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    getInitialValue() {
+    DateTime? getInitialValue() {
       try {
         var initialValue = field.initialValue;
         if (initialValue != null) {
@@ -23,6 +24,7 @@ class FormDatePicker extends HookWidget {
         }
         return null;
       } catch (e) {
+        Log.e("FormDatePicker:$e");
         return null;
       }
     }

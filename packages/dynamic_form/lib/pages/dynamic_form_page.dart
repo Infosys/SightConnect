@@ -46,156 +46,99 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
     try {
       Log.f(widget.json);
       return DynamicFormJsonMapper().modeltoEntity(
-        dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
-        initialValues: {},
-        // initialValues: {
-        //   "3501800": [
-        //     {
-        //       "3501801": "OS",
-        //       "3501802": null,
-        //       "3501803": "INFLAMATION",
-        //       "3501804": "qq",
-        //       "3501805": "LACERATION",
-        //       "3501806": "bb",
-        //       "3501807": "DISCHARGE",
-        //       "3501808": "vv",
-        //       "3501809": "CLOUDINESS",
-        //       "3501810": "bb",
-        //       "3501811": "ARCUS",
-        //       "3501812": "ff",
-        //       "3501813": "PHAKIC",
-        //       "3501814": "BROWN",
-        //       "3501815": "tt",
-        //       "3501816": "rr",
-        //       "3501817": "YES",
-        //       "3501818": "ee",
-        //       "3501819": "ww",
-        //       "3501820": "REJECTED",
-        //       "3501821": "yy"
-        //     },
-        //     {
-        //       "3501801": "OD",
-        //       "3501802": null,
-        //       "3501803": "CONTUSION",
-        //       "3501804": "qq",
-        //       "3501805": "UNREMARKABLE",
-        //       "3501806": "ww",
-        //       "3501807": "PETECHIA",
-        //       "3501808": "ee",
-        //       "3501809": "UNREMARKABLE",
-        //       "3501810": "rr",
-        //       "3501811": "ARCUS",
-        //       "3501812": "tt",
-        //       "3501813": "APHAKIC",
-        //       "3501814": "BLACK",
-        //       "3501815": "yy",
-        //       "3501816": "uu",
-        //       "3501817": "NO",
-        //       "3501818": "ii",
-        //       "3501819": "oo",
-        //       "3501820": "ACCEPTED",
-        //       "3501821": "pp"
-        //     }
-        //   ],
-        //   "3501900": [
-        //     {
-        //       "3501901": "IN_SITU",
-        //       "3501902": "2024-08-22 12:00:00.000",
-        //       "3501903": "a",
-        //       "3501904": "12",
-        //       "3501905": "12",
-        //       "3501906": "TRANSPLANT",
-        //       "3501907": "MK_MEDIUM",
-        //       "3501908": "12",
-        //       "3501909": "2024-08-22 12:00:00.000",
-        //       "3501910": "YES"
-        //     },
-        //     {
-        //       "3501901": "ENCLEATION",
-        //       "3501902": "2024-08-29 12:00:00.000",
-        //       "3501903": "23",
-        //       "3501904": "23",
-        //       "3501905": "23",
-        //       "3501906": "RESEARCH",
-        //       "3501907": "MK_MEDIUM",
-        //       "3501908": "23",
-        //       "3501909": "2024-08-30 12:00:00.000",
-        //       "3501910": "YES"
-        //     }
-        //   ],
-        //   "3501601": "DEATH_CERTIFICATE",
-        //   "3501602": "NOT_COOLED",
-        //   "3501603": "2024-08-23 12:00:00.000",
-        //   "3501604": "2024-08-23 18:00:00.000",
-        //   "3501701": "NO",
-        //   "3501702": "",
-        //   "3501703": "No",
-        //   "3501704": "abc",
-        //   "3501705": "abc",
-        //   "3501707": "YES",
-        //   "3501708": "NO",
-        //   "3501709": "YES",
-        //   "3501710": "UNABLE_TO_VISUALIZE",
-        //   "3501711": "ss",
-        //   "3501712": "NO",
-        //   "3501713": "YES",
-        //   "3501714": "NO",
-        //   "3501715": "YES",
-        //   "3501716": "YES",
-        //   "3501717": "NO",
-        //   "3501718": "vv",
-        //   "3501719": "ACCEPTED",
-        //   "3501720": "bb",
-        //   "3502002": "NO",
-        //   "3502004": "2024-08-23 12:00:00.000",
-        //   "3502005": "12",
-        //   "3502007": "NO",
-        //   "3502008": "no",
-        //   "3502010": "2024-08-23 12:00:00.000",
-        //   "3502011": "11",
-        //   "3502012": "22",
-        //   "3502014": "NO",
-        //   "3502016": "44",
-        //   "3502017": "2024-08-23 12:00:00.000",
-        //   "3502018": "55",
-        //   "3502019": "REJECTED",
-        //   "3502020": "vv",
-        //   "3502102": null,
-        //   "3502103": null,
-        //   "3502104": null,
-        //   "3502107": null,
-        //   "3502108": null,
-        //   "3502109": null,
-        //   "3502110": null,
-        //   "3502111": null,
-        //   "3502112": null,
-        //   "3502116": "zz",
-        //   "3502117": "2024-08-24 12:00:00.000",
-        //   "3502118": "cc",
-        //   "3502119": "vv",
-        //   "3502122": "bb",
-        //   "3502123": "2024-08-30 17:00:00.000",
-        //   "3502124": "nn",
-        //   "3502125": "mm",
-        //   "3502128": "aa",
-        //   "3502129": "2024-08-14 16:00:00.000",
-        //   "3502130": "dd",
-        //   "3502131": "ff",
-        //   "3502132": "gg",
-        //   "3502133": "hh",
-        //   "3502135": "aa",
-        //   "3502136": "ss",
-        //   "3502138": "YES",
-        //   "3502139": "NO",
-        //   "3502141": "ff",
-        //   "3502142": "2024-08-23 12:00:00.000",
-        //   "3502144": "hh",
-        //   "3502145": "2024-08-07 12:00:00.000",
-        //   "3502147": "2024-08-23 12:00:00.000",
-        //   "3502149": "ACCEPTED",
-        //   "3502150": "kk"
-        // },
-      );
+          dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
+          initialValues: const {
+            // "preliminaryRequest.toDonateOrganTissue": ["CORNEA"],
+            "preliminaryRequest.consignmentNotificationDateTime":
+                "2024-08-25T06:30:00.000Z",
+            "preliminaryRequest.referralMethod": "VOLUNTARY_FAMILY_INITIATED",
+            "preliminaryRequest.counselling.counselor.name": "Rohit",
+            "preliminaryRequest.counselling.counselor.phoneNumber":
+                "9999999999",
+            "preliminaryRequest.counselling.counselor.counselorDetailSource":
+                "MAX",
+            "preliminaryRequest.unit": "ICU",
+            "preliminaryRequest.unitDetails": "Unit Details",
+            "preliminaryRequest.counselling.counselor.address": "Near Vaishali",
+            "preliminaryRequest.counselling.counselor.address.pincode":
+                "201007",
+            "preliminaryRequest.firstName": "Donor",
+            "preliminaryRequest.lastName": "Family Name",
+            "preliminaryRequest.dob": "1999-08-24T18:30:00.000Z",
+            "preliminaryRequest.age": "54",
+            "preliminaryRequest.gender": "MALE",
+            "preliminaryRequest.religion": "Religion",
+            "preliminaryRequest.height": "180",
+            "preliminaryRequest.weight": "84",
+            "preliminaryRequest.name": "Max",
+            "preliminaryRequest.mrn": "1123",
+            "preliminaryRequest.admissionDateTime": "2024-08-25T06:30:00.000Z",
+            "preliminaryRequest.attendingPhysician.name": "Ramu",
+            "preliminaryRequest.deathCause": "cause of Death",
+            "preliminaryRequest.deathCircumstances": "Leading to Death",
+            "preliminaryRequest.deathTime": "2024-08-25T06:30:00.000Z",
+            "preliminaryRequest.isActualDeathTime": "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.duration":
+                "Yes",
+            "preliminaryRequest.generalScreening.properties.general_screening.durationUnit":
+                "DAYS",
+            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHCV":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfCancer":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isDementia":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isAlzheimer":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.inIsolation":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms":
+                "NO",
+            "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt":
+                "last hour",
+            "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount":
+                "48",
+            "preliminaryRequest.generalScreening.properties.general_screening.transferredRemark":
+                "transferred",
+            "preliminaryRequest.generalScreening.properties.general_screening.medicalHx":
+                "Hx",
+            "preliminaryRequest.generalScreening.properties.general_screening.socialAndBehavioralHx":
+                "Behave",
+            "preliminaryRequest.generalScreening.outcome.status": "REJECTED",
+            "preliminaryRequest.generalScreening.outcome.remarks": "remark",
+            // "preliminaryRequest.tissueScreening.productCode": ["TISSUE"],
+            // "preliminaryRequest.tissueScreening.productCategory": ["CORNEA"],
+            "preliminaryRequest.tissueScreening.properties.hx": "NO",
+            "preliminaryRequest.tissueScreening.properties.notScreened":
+                "not screnned",
+            "preliminaryRequest.tissueScreening.properties.notSuitable":
+                "unsuitable ",
+            "preliminaryRequest.tissueScreening.properties.notProceeded":
+                "not proceeded",
+            "preliminaryRequest.tissueScreening.outcome.status": "REJECTED",
+            "preliminaryRequest.tissueScreening.outcome.remarks":
+                "Outocme remark ",
+            "preliminaryRequest.isMedicoLegalCase": "NO",
+            "preliminaryRequest.isDonationPermitted": "NO",
+            "preliminaryRequest.medicoLegalId": "case id",
+            "preliminaryRequest.medicoLegalFacility": "faility",
+            "preliminaryRequest.releasedBy": "release",
+            "preliminaryRequest.contactNumber": "9882222222",
+            "preliminaryRequest.notes": "restriction",
+            "preliminaryRequest.specialCases": "request",
+            "preliminaryRequest.autopsyId": "autopsy",
+            "preliminaryRequest.autopsyPerformer": "perfomed by",
+            "preliminaryRequest.autopsyLocation": "lcoation",
+            // "preliminaryRequest.consent.type": ["KIN_DONATION_CONSENT"]
+          });
     } catch (e) {
       log('DF:Error Converting json: $e');
       rethrow;
