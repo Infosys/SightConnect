@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/services/cloud_service.dart';
 import 'package:dynamic_form/shared/utlities/file_picker.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -17,14 +16,15 @@ class FormFile extends HookWidget {
   });
 
   final ElementElementClassEntity field;
-  final Function(List<PlatformFile>) onChanged;
+  final Function(List<String>) onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final images = useState<List<PlatformFile>>([]);
+    final images = useState<List<String>>([]);
     final showAllImages = useState<bool>(false);
+    final isLoading = useState<bool>(false);
 
-    return FormField<List<PlatformFile>>(
+    return FormField<List<String>>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         value = value ?? [];
@@ -38,12 +38,13 @@ class FormFile extends HookWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ImagePickerContainer(
+            ImagePicker(
               state: state,
               field: field,
               images: images,
               showAllImages: showAllImages,
               onChanged: onChanged,
+              isLoading: isLoading,
             ),
             const SizedBox(height: 8),
             Text(
@@ -60,21 +61,23 @@ class FormFile extends HookWidget {
   }
 }
 
-class ImagePickerContainer extends StatelessWidget {
-  const ImagePickerContainer({
+class ImagePicker extends StatelessWidget {
+  const ImagePicker({
     super.key,
     required this.state,
     required this.field,
     required this.images,
     required this.showAllImages,
     required this.onChanged,
+    required this.isLoading,
   });
 
-  final FormFieldState<List<PlatformFile>> state;
+  final FormFieldState<List<String>> state;
   final ElementElementClassEntity field;
-  final ValueNotifier<List<PlatformFile>> images;
+  final ValueNotifier<List<String>> images;
   final ValueNotifier<bool> showAllImages;
-  final Function(List<PlatformFile>) onChanged;
+  final Function(List<String>) onChanged;
+  final ValueNotifier<bool> isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +97,32 @@ class ImagePickerContainer extends StatelessWidget {
           children: [
             Text(field.title, textAlign: TextAlign.center),
             const SizedBox(height: 16.0),
-            ImageDisplayGrid(
-              images: images,
-              showAllImages: showAllImages,
-              onChanged: onChanged,
-              state: state,
-            ),
+            if (isLoading.value)
+              const Center(
+                child: Column(
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 8),
+                    Text('Uploading...'),
+                  ],
+                ),
+              )
+            else
+              ImageGrid(
+                images: images,
+                showAllImages: showAllImages,
+                onChanged: onChanged,
+                state: state,
+                isLoading: isLoading,
+              ),
             const SizedBox(height: 16.0),
             if (images.value.isEmpty)
-              UploadButton(onChanged: onChanged, images: images, state: state),
+              InitialUploadButton(
+                onChanged: onChanged,
+                images: images,
+                state: state,
+                isLoading: isLoading,
+              ),
           ],
         ),
       ),
@@ -110,19 +130,95 @@ class ImagePickerContainer extends StatelessWidget {
   }
 }
 
-class ImageDisplayGrid extends StatelessWidget {
-  const ImageDisplayGrid({
+class ImageDisplay extends StatelessWidget {
+  final String? url;
+  final double? borderRadius;
+  final double? height;
+  final double? width;
+
+  const ImageDisplay({
+    super.key,
+    this.url,
+    this.borderRadius,
+    this.height,
+    this.width,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (url == null) {
+      return const SizedBox();
+    }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius ?? 8),
+      child: Image.network(
+        url!,
+        height: height ?? 300,
+        width: width ?? 300,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return const Icon(Icons.error);
+        },
+      ),
+    );
+  }
+}
+
+class UploadFileButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  const UploadFileButton({
+    super.key,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Column(
+        children: [
+          Icon(
+            Icons.cloud_upload_sharp,
+            color: Colors.grey.shade400,
+            size: 72,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Choose your file here',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Supported files: JPG, JPEG, PNG, PDF',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Max size: 5MB',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ImageGrid extends StatelessWidget {
+  const ImageGrid({
     super.key,
     required this.images,
     required this.showAllImages,
     required this.onChanged,
     required this.state,
+    required this.isLoading,
   });
 
-  final ValueNotifier<List<PlatformFile>> images;
+  final ValueNotifier<bool> isLoading;
+  final ValueNotifier<List<String>> images;
   final ValueNotifier<bool> showAllImages;
-  final Function(List<PlatformFile>) onChanged;
-  final FormFieldState<List<PlatformFile>> state;
+  final Function(List<String>) onChanged;
+  final FormFieldState<List<String>> state;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +236,7 @@ class ImageDisplayGrid extends StatelessWidget {
                   alignment: Alignment.topRight,
                   children: [
                     ImageDisplay(
-                      file: image,
+                      url: image,
                       borderRadius: 8.0,
                       height: 100,
                       width: 100,
@@ -178,23 +274,34 @@ class ImageDisplayGrid extends StatelessWidget {
             onTap: () => showAllImages.value = !showAllImages.value,
           ),
         if (images.value.isNotEmpty)
-          ImageAddButton(onChanged: onChanged, images: images, state: state),
+          AddImageButton(
+            onChanged: onChanged,
+            images: images,
+            state: state,
+            isLoading: isLoading,
+          ),
       ],
     );
   }
 }
 
-class ImageAddButton extends StatelessWidget {
-  const ImageAddButton({
+class AddImageButton extends StatelessWidget {
+  const AddImageButton({
     super.key,
     required this.onChanged,
     required this.images,
     required this.state,
+    required this.isLoading,
   });
 
-  final Function(List<PlatformFile>) onChanged;
-  final ValueNotifier<List<PlatformFile>> images;
-  final FormFieldState<List<PlatformFile>> state;
+  final Function(List<String>) onChanged;
+  final ValueNotifier<List<String>> images;
+  final FormFieldState<List<String>> state;
+  final ValueNotifier<bool> isLoading;
+
+  Future<String> uploadFile(PlatformFile file) async {
+    return CloudService().uploadImage(file);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,9 +316,13 @@ class ImageAddButton extends StatelessWidget {
         child: InkWell(
           onTap: () async {
             try {
+              isLoading.value = true;
               final files = await FilePickerService.pickFiles();
               if (files != null) {
-                images.value = List.from(images.value)..addAll(files.files);
+                for (var file in files.files) {
+                  final url = await uploadFile(file);
+                  images.value = List.from(images.value)..add(url);
+                }
                 onChanged(images.value);
                 state.didChange(images.value);
               } else {
@@ -219,6 +330,8 @@ class ImageAddButton extends StatelessWidget {
               }
             } catch (e) {
               debugPrint('Error picking images: $e');
+            } finally {
+              isLoading.value = false;
             }
           },
           child: const Icon(
@@ -231,185 +344,56 @@ class ImageAddButton extends StatelessWidget {
   }
 }
 
-class UploadButton extends StatelessWidget {
-  const UploadButton({
+class InitialUploadButton extends StatelessWidget {
+  const InitialUploadButton({
     super.key,
     required this.onChanged,
     required this.images,
     required this.state,
+    required this.isLoading,
   });
 
-  final Function(List<PlatformFile>) onChanged;
-  final ValueNotifier<List<PlatformFile>> images;
-  final FormFieldState<List<PlatformFile>> state;
+  final Function(List<String>) onChanged;
+  final ValueNotifier<List<String>> images;
+  final FormFieldState<List<String>> state;
+  final ValueNotifier<bool> isLoading;
+
+  Future<String> uploadFile(PlatformFile file) async {
+    return CloudService().uploadImage(file);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: FileUploadButton(
-              onPressed: () async {
-                try {
-                  final files = await FilePickerService.pickFiles();
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: UploadFileButton(
+            onPressed: () async {
+              try {
+                isLoading.value = true;
+                final files = await FilePickerService.pickFiles();
 
-                  /// upload to server
-                  /// then set the data
-
-                  if (files != null) {
-                    images.value = List.from(images.value)..addAll(files.files);
-                    onChanged(images.value);
-                    state.didChange(images.value);
-                  } else {
-                    debugPrint('No images selected.');
+                if (files != null) {
+                  for (var file in files.files) {
+                    final url = await uploadFile(file);
+                    images.value = List.from(images.value)..add(url);
                   }
-                } catch (e) {
-                  debugPrint('Error picking images: $e');
+                  onChanged(images.value);
+                  state.didChange(images.value);
+                } else {
+                  debugPrint('No images selected.');
                 }
-              },
-            ),
+              } catch (e) {
+                debugPrint('Error picking images: $e');
+              } finally {
+                isLoading.value = false;
+              }
+            },
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class ImageDisplay extends StatelessWidget {
-  final PlatformFile? file;
-  final double? borderRadius;
-  final double? height;
-  final double? width;
-
-  const ImageDisplay({
-    super.key,
-    this.file,
-    this.borderRadius,
-    this.height,
-    this.width,
-  });
-
-  bool _isImageFile(String? extension) {
-    final imageExtensions = ['jpg', 'jpeg', 'png'];
-    return imageExtensions.contains(extension?.toLowerCase());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (file == null) {
-      return const SizedBox();
-    }
-
-    final fileExtension = file!.extension;
-
-    if (kIsWeb) {
-      if (!_isImageFile(fileExtension)) {
-        return SizedBox(
-          height: height ?? 300,
-          width: width ?? 300,
-          child: const Center(
-            child: Icon(
-              Icons.insert_drive_file,
-              size: 72,
-            ),
-          ),
-        );
-      }
-
-      return FutureBuilder<Uint8List?>(
-        future: file!.bytes != null
-            ? Future.value(file!.bytes)
-            : file!.readStream?.first as Future<Uint8List?>?,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return SizedBox(
-              height: height ?? 300,
-              width: width ?? 300,
-              child: const Center(child: CircularProgressIndicator()),
-            );
-          } else if (snapshot.hasError) {
-            return const Text('Error loading image');
-          } else if (snapshot.hasData) {
-            final uint8List = snapshot.data!;
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(borderRadius ?? 8),
-              child: Image.memory(
-                uint8List,
-                height: height ?? 300,
-                width: width ?? 300,
-                fit: BoxFit.cover,
-              ),
-            );
-          } else {
-            return const Text('Error loading image');
-          }
-        },
-      );
-    } else {
-      if (!_isImageFile(fileExtension)) {
-        return SizedBox(
-          height: height ?? 300,
-          width: width ?? 300,
-          child: const Center(
-            child: Icon(
-              Icons.insert_drive_file,
-              size: 72,
-            ),
-          ),
-        );
-      }
-
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius ?? 8),
-        child: Image.file(
-          File(file!.path!),
-          height: height ?? 300,
-          width: width ?? 300,
-          fit: BoxFit.cover,
         ),
-      );
-    }
-  }
-}
-
-class FileUploadButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  const FileUploadButton({
-    super.key,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Column(
-        children: [
-          Icon(
-            Icons.cloud_upload_sharp,
-            color: Colors.grey.shade400,
-            size: 72,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Choose your file here',
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Supported files: JPG, JPEG, PNG, PDF',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Max size: 5MB',
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ],
-      ),
+      ],
     );
   }
 }

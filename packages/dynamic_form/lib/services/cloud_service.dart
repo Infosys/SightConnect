@@ -1,12 +1,15 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 
 class CloudService {
-  final Dio _dio;
-  final String baseUrl = "https://healthconnect.infosysapps.com";
-  CloudService(this._dio);
+  static const String baseUrl = "https://healthconnect.infosysapps.com";
+
+  final dio = Dio(
+    BaseOptions(baseUrl: baseUrl),
+  );
+
   Future<String> _getImage(String fileId) async {
     try {
       final url = "$baseUrl/services/filems/api/file/download/$fileId";
@@ -18,20 +21,29 @@ class CloudService {
     }
   }
 
-  Future<String> uploadImage(File file) async {
+  Future<String> uploadImage(PlatformFile file) async {
     const endpoint =
         "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
 
-    var data = FormData.fromMap({
-      'files': [
-        await MultipartFile.fromFile(
-          file.path,
-        )
-      ],
+    MultipartFile multipartFile;
+    if (kIsWeb) {
+      multipartFile = MultipartFile.fromBytes(
+        file.bytes!,
+        filename: file.name,
+      );
+    } else {
+      multipartFile = await MultipartFile.fromFile(
+        file.path!,
+        filename: file.name,
+      );
+    }
+
+    final data = FormData.fromMap({
+      'files': [multipartFile],
     });
 
     try {
-      final response = await _dio.post(endpoint, data: data);
+      final response = await dio.post(endpoint, data: data);
       Log.d({"uploadImage": response.data});
       if (response.statusCode == 200) {
         final body = response.data;
