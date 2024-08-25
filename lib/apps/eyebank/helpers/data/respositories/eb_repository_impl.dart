@@ -100,12 +100,15 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
   @override
   Future<Either<EBFailure, void>> saveIntimationForm(
-    EBSubmitFormDataRequestModel requestData,
+    EBSubmitFormDataRequestModel requestData, String stageVersion,
   ) {
     return EyeBankErrorHandler.handle(() async {
-      const endPoint = '/services/eyebank/api/encounters/forms/intimation/save';
+      const endPoint = '/services/eyebank/api/encounters/DEATH_INTIMATION';
       final response = await _dio.post(
         endPoint,
+        queryParameters: {
+          'stageVersion': stageVersion,
+        },
         data: requestData.toJson(),
       );
       if (response.statusCode == 200) {
