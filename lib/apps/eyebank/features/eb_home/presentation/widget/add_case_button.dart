@@ -54,7 +54,7 @@ class AddCaseButton extends StatelessWidget {
                     final submitData = EBSubmitFormDataRequestModel(
                         formData: data, timelineName: "CORNEA_DONATION");
                     logger.f(submitData.toJson());
-                    final res = await repo.saveIntimationForm(submitData, dataJson.stage?.version??'0.0.1');
+                    final res = await repo.saveIntimationForm(submitData, dataJson.version??'0.0.1');
                     res.fold((l) {
                       logger.e(l);
                       Fluttertoast.showToast(msg: l.errorMessage);
