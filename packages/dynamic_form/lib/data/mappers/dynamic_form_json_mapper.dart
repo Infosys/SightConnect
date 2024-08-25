@@ -144,6 +144,11 @@ class DynamicFormJsonMapper {
           type: validator.type ?? '',
           text: validator.text ?? '',
           regex: validator.regex ?? '',
+          size: validator.size ?? "",
+          unit: validator.unit ?? "",
+          types: validator.types ?? [],
+          uploadUrl: validator.uploadUrl ?? "",
+          downloadUrl: validator.downloadUrl ?? "",
         ));
       }
     }

@@ -329,11 +329,21 @@ class ValidatorEntity {
   final String type;
   final String text;
   final String regex;
+  final String size;
+  final String unit;
+  final List<String> types;
+  final String uploadUrl;
+  final String downloadUrl;
 
   ValidatorEntity({
     required this.type,
     required this.text,
     required this.regex,
+    required this.size,
+    required this.unit,
+    required this.types,
+    required this.uploadUrl,
+    required this.downloadUrl,
   });
 
   factory ValidatorEntity.fromJson(Map<String, dynamic> json) =>
@@ -341,11 +351,21 @@ class ValidatorEntity {
         type: json["type"],
         text: json["text"],
         regex: json["regex"],
+        size: json["size"],
+        unit: json["unit"],
+        types: List<String>.from(json["types"].map((x) => x)),
+        uploadUrl: json["uploadUrl"],
+        downloadUrl: json["downloadUrl"],
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
         "text": text,
         "regex": regex,
+        "size": size,
+        "unit": unit,
+        "types": List<dynamic>.from(types.map((x) => x)),
+        "uploadUrl": uploadUrl,
+        "downloadUrl": downloadUrl,
       };
 }

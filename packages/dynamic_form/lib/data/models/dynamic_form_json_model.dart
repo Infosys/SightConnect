@@ -270,22 +270,44 @@ class Validator {
   String? type;
   String? text;
   String? regex;
+  String? size;
+  String? unit;
+  List<String>? types;
+  String? uploadUrl;
+  String? downloadUrl;
 
   Validator({
     this.type,
     this.text,
     this.regex,
+    this.size,
+    this.unit,
+    this.types,
+    this.uploadUrl,
+    this.downloadUrl,
   });
 
   factory Validator.fromJson(Map<String, dynamic> json) => Validator(
         type: json["type"],
         text: json["text"],
         regex: json["regex"],
+        size: json["size"],
+        unit: json["unit"],
+        types: json["types"] == null
+            ? []
+            : List<String>.from(json["types"].map((x) => x)),
+        uploadUrl: json["uploadUrl"],
+        downloadUrl: json["downloadUrl"],
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
         "text": text,
         "regex": regex,
+        "size": size,
+        "unit": unit,
+        "types": types == null ? [] : List<dynamic>.from(types!.map((x) => x)),
+        "uploadUrl": uploadUrl,
+        "downloadUrl": downloadUrl,
       };
 }
