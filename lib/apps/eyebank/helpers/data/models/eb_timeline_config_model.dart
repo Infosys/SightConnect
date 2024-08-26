@@ -20,6 +20,7 @@ class Stage with _$Stage {
   const factory Stage({
     String? stageName,
     String? stageVersion,
+    String? title,
     @Default(false) repeats,
     int? minRepeat,
     int? maxRepeat,

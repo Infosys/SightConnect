@@ -65,6 +65,7 @@ class AppStepperState extends State<AppStepper> {
           mainAxisSize: MainAxisSize.min,
           children: [
             PageWidget(
+              readOnly: widget.readOnly,
               elements: widget.pages.first.elements,
               formKey: widget.formKey,
               name: widget.pages.first.name,
@@ -101,6 +102,7 @@ class AppStepperState extends State<AppStepper> {
           state: StepState.indexed,
           title: const SizedBox(),
           content: PageWidget(
+            readOnly: widget.readOnly,
             elements: page.elements,
             formKey: widget.formKey,
             name: page.name,

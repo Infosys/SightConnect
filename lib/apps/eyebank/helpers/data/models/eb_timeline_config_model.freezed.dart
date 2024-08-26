@@ -212,6 +212,7 @@ Stage _$StageFromJson(Map<String, dynamic> json) {
 mixin _$Stage {
   String? get stageName => throw _privateConstructorUsedError;
   String? get stageVersion => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   dynamic get repeats => throw _privateConstructorUsedError;
   int? get minRepeat => throw _privateConstructorUsedError;
   int? get maxRepeat => throw _privateConstructorUsedError;
@@ -229,6 +230,7 @@ abstract class $StageCopyWith<$Res> {
   $Res call(
       {String? stageName,
       String? stageVersion,
+      String? title,
       dynamic repeats,
       int? minRepeat,
       int? maxRepeat});
@@ -249,6 +251,7 @@ class _$StageCopyWithImpl<$Res, $Val extends Stage>
   $Res call({
     Object? stageName = freezed,
     Object? stageVersion = freezed,
+    Object? title = freezed,
     Object? repeats = freezed,
     Object? minRepeat = freezed,
     Object? maxRepeat = freezed,
@@ -261,6 +264,10 @@ class _$StageCopyWithImpl<$Res, $Val extends Stage>
       stageVersion: freezed == stageVersion
           ? _value.stageVersion
           : stageVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
       repeats: freezed == repeats
           ? _value.repeats
@@ -288,6 +295,7 @@ abstract class _$$StageImplCopyWith<$Res> implements $StageCopyWith<$Res> {
   $Res call(
       {String? stageName,
       String? stageVersion,
+      String? title,
       dynamic repeats,
       int? minRepeat,
       int? maxRepeat});
@@ -306,6 +314,7 @@ class __$$StageImplCopyWithImpl<$Res>
   $Res call({
     Object? stageName = freezed,
     Object? stageVersion = freezed,
+    Object? title = freezed,
     Object? repeats = freezed,
     Object? minRepeat = freezed,
     Object? maxRepeat = freezed,
@@ -318,6 +327,10 @@ class __$$StageImplCopyWithImpl<$Res>
       stageVersion: freezed == stageVersion
           ? _value.stageVersion
           : stageVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String?,
       repeats: freezed == repeats ? _value.repeats! : repeats,
       minRepeat: freezed == minRepeat
@@ -338,6 +351,7 @@ class _$StageImpl implements _Stage {
   const _$StageImpl(
       {this.stageName,
       this.stageVersion,
+      this.title,
       this.repeats = false,
       this.minRepeat,
       this.maxRepeat});
@@ -350,6 +364,8 @@ class _$StageImpl implements _Stage {
   @override
   final String? stageVersion;
   @override
+  final String? title;
+  @override
   @JsonKey()
   final dynamic repeats;
   @override
@@ -359,7 +375,7 @@ class _$StageImpl implements _Stage {
 
   @override
   String toString() {
-    return 'Stage(stageName: $stageName, stageVersion: $stageVersion, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat)';
+    return 'Stage(stageName: $stageName, stageVersion: $stageVersion, title: $title, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat)';
   }
 
   @override
@@ -371,6 +387,7 @@ class _$StageImpl implements _Stage {
                 other.stageName == stageName) &&
             (identical(other.stageVersion, stageVersion) ||
                 other.stageVersion == stageVersion) &&
+            (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality().equals(other.repeats, repeats) &&
             (identical(other.minRepeat, minRepeat) ||
                 other.minRepeat == minRepeat) &&
@@ -380,7 +397,7 @@ class _$StageImpl implements _Stage {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, stageName, stageVersion,
+  int get hashCode => Object.hash(runtimeType, stageName, stageVersion, title,
       const DeepCollectionEquality().hash(repeats), minRepeat, maxRepeat);
 
   @JsonKey(ignore: true)
@@ -401,6 +418,7 @@ abstract class _Stage implements Stage {
   const factory _Stage(
       {final String? stageName,
       final String? stageVersion,
+      final String? title,
       final dynamic repeats,
       final int? minRepeat,
       final int? maxRepeat}) = _$StageImpl;
@@ -411,6 +429,8 @@ abstract class _Stage implements Stage {
   String? get stageName;
   @override
   String? get stageVersion;
+  @override
+  String? get title;
   @override
   dynamic get repeats;
   @override

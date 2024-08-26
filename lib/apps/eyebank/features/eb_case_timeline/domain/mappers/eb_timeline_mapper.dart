@@ -15,7 +15,9 @@ class EBTimelineMapper {
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: m.serviceRequestId,
         stage: _getStageName(m.stage),
-        title: m.title,
+        title: configModel.stages!
+            .firstWhere((element) => element.stageName == m.stage)
+            .title,
         stageVersion: _getStageVersion(m.stage, configModel),
         status: _getCaseStatus(m.status ?? ""),
         initiateDate: m.initiateDate,
@@ -43,7 +45,7 @@ class EBTimelineMapper {
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: null,
         stage: _getStageName(stage.stageName),
-        title: stage.stageName,
+        title: stage.title,
         stageVersion: stage.stageVersion,
         status: EBStatus.UNKNOWN,
         initiateDate: null,

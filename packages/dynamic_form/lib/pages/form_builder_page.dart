@@ -62,13 +62,12 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
           actions: widget.enableDraft
               ? [
                   TextButton.icon(
-                    onPressed: _handleDraft,
-                    label: Text(
+                    onPressed: widget.readOnly ? null : _handleDraft,
+                    label: const Text(
                       'Save as Draft',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),

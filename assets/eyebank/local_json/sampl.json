@@ -1,4 +1,7 @@
- {
+{
+  "timelineName": "CORNEA_DONATION",
+  "timelineVersion": "0.0.1",
+  "formData":  {
      "preliminaryRequest.counsellings": [
        {
          "preliminaryRequest.counsellings.counselor.name": "aababab",
@@ -44,7 +47,7 @@
      "preliminaryRequest.deathTime": "2024-08-26T06:30:00.000Z",
      "preliminaryRequest.isActualDeathTime": 0,
      "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport": false,
-     "preliminaryRequest.generalScreening.properties.general_screening.duration": "sample",
+     "preliminaryRequest.generalScreening.properties.general_screening.duration":"2.0",
      "preliminaryRequest.generalScreening.properties.general_screening.durationUnit": "HOURS",
      "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV": 0,
      "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV": 0,
@@ -55,8 +58,8 @@
      "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease": 0,
      "preliminaryRequest.generalScreening.properties.general_screening.inIsolation": false,
      "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms": false,
-     "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt": "sample",
-     "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount": "sample",
+     "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt": "2.0",
+     "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount": "2.0",
      "preliminaryRequest.generalScreening.properties.general_screening.transferredRemark": "sample",
      "preliminaryRequest.generalScreening.properties.general_screening.medicalHx": "sample",
      "preliminaryRequest.generalScreening.properties.general_screening.socialAndBehavioralHx": "sample",
@@ -76,4 +79,9 @@
      "preliminaryRequest.autopsyLocation": "sample",
      "preliminaryRequest.consentType": "KIN_DONATION_CONSENT",
      "preliminaryRequest.consentDocumentUrl": "https://healthconnect.infosysapps.com/services/filems/api/file/download/1724665082789-f6632ee3-df58-4ed0-8e17-97857e7ea758"
-   }
+   },
+  "performerId": "900",
+  "performerRole": "TECHNICIAN"
+
+ 
+}

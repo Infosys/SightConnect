@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:dynamic_form/shared/widgets/app_dynamic_panel.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
@@ -16,11 +17,13 @@ class PageWidget extends StatelessWidget {
     required this.elements,
     required this.formKey,
     required this.name,
+    this.readOnly = false,
   });
 
   final List<PageElementEntity> elements;
   final GlobalKey<FormBuilderState> formKey;
   final String name;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,7 @@ class PageWidget extends StatelessWidget {
           return Container();
         } else if (panel.type == FormPanelType.REPEATED_PANEL) {
           return AppDynamicPanel(
+            readOnly: readOnly,
             name: name,
             panel: panel,
             globalFormKey: formKey,
@@ -68,12 +72,15 @@ class PageWidget extends StatelessWidget {
 
       if (field.type == DynamicFormType.PANEL && field.repeats == true) {
         log("DynamicFormType.PANEL && field.repeats == true");
+        Log.i(field.initialValue);
         return AppDynamicPanel(
+          readOnly: readOnly,
           name: field.title,
           globalFormKey: key,
           minRepeat: field.minRepeat ?? 1,
           maxRepeat: field.maxRepeat ?? 1,
           panel: PageElementEntity(
+            initialValue: field.initialValue,
             name: field.name,
             elements: field.elements ?? [],
             repeats: field.repeats,

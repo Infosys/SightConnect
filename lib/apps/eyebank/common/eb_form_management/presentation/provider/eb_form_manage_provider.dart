@@ -29,7 +29,7 @@ final ebFormManageProvider =
         stage.encounterId, stage.serviceRequestId, stage.stageName);
 
     final result2 = res2.fold(
-      (l) => throw l,
+      (l) => null, // This has to change
       (r) => r,
     );
     return EBFormPrefilledMapper.mapToEntity(result2, result1);

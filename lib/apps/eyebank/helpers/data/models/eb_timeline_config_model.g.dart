@@ -27,6 +27,7 @@ Map<String, dynamic> _$$EbTimelineConfigModelImplToJson(
 _$StageImpl _$$StageImplFromJson(Map<String, dynamic> json) => _$StageImpl(
       stageName: json['stageName'] as String?,
       stageVersion: json['stageVersion'] as String?,
+      title: json['title'] as String?,
       repeats: json['repeats'] ?? false,
       minRepeat: (json['minRepeat'] as num?)?.toInt(),
       maxRepeat: (json['maxRepeat'] as num?)?.toInt(),
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$StageImplToJson(_$StageImpl instance) =>
     <String, dynamic>{
       'stageName': instance.stageName,
       'stageVersion': instance.stageVersion,
+      'title': instance.title,
       'repeats': instance.repeats,
       'minRepeat': instance.minRepeat,
       'maxRepeat': instance.maxRepeat,

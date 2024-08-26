@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
@@ -12,9 +14,11 @@ class AppDynamicPanel extends StatefulWidget {
   final String name;
   final int minRepeat;
   final int maxRepeat;
+  final bool readOnly;
 
   const AppDynamicPanel({
     super.key,
+    this.readOnly = false,
     required this.panel,
     required this.globalFormKey,
     required this.name,
@@ -47,14 +51,20 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   }
 
   _createdPrefilledPanels() {
-    List<dynamic> prefilledPanels = widget.panel.initialValue ?? [];
-    for (int i = 0; i < prefilledPanels.length; i++) {
-      var key = getUniqueKey();
-      Log.f(key);
-      repeatedPanelKeys.add(key);
+    try {
+      List<dynamic> prefilledPanels = widget.panel.initialValue ?? [];
+      log("Length: ${prefilledPanels.length}");
+
+      for (int i = 0; i < prefilledPanels.length; i++) {
+        var key = getUniqueKey();
+        Log.f(key);
+        repeatedPanelKeys.add(key);
+      }
+      formatedInitialValue = _formatInitialValue(prefilledPanels);
+      Log.f(formatedInitialValue);
+    } catch (e) {
+      Log.e(" AppDynamicPanel _createdPrefilledPanels error: $e");
     }
-    formatedInitialValue = _formatInitialValue(prefilledPanels);
-    Log.f(formatedInitialValue);
   }
 
   Map<String, dynamic> _formatInitialValue(List<dynamic> prefilledPanels) {
@@ -125,7 +135,10 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return FormBuilderField(
+      enabled: !widget.readOnly,
       name: widget.panel.name,
       onSaved: (newValue) {
         formKey.currentState?.save();
@@ -138,6 +151,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       },
       builder: (field) {
         return FormBuilder(
+          enabled: !widget.readOnly,
           key: formKey,
           child: SizedBox(
             width: double.infinity,
@@ -160,7 +174,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton.icon(
-                        onPressed: addPanel,
+                        onPressed: widget.readOnly ? null : addPanel,
                         icon: const Icon(Icons.add),
                         label: const Text('Add'),
                       ),
@@ -187,7 +201,8 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton.icon(
-                      onPressed: () => removePanel(key),
+                      onPressed:
+                          widget.readOnly ? null : () => removePanel(key),
                       icon: const Icon(Icons.remove),
                       label: const Text('Remove'),
                     ),
