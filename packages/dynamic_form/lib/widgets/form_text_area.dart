@@ -48,6 +48,7 @@ class FormTextArea extends StatelessWidget {
       },
       onChanged: onChanged,
       maxLines: field.max,
+      enabled: field.readOnly ? false : true,
     );
   }
 }

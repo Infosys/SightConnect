@@ -28,5 +28,5 @@ enum FormPanelType {
 
 enum DynamicFormSavingType {
   DRAFT,
-  SUBMIT,
+  SAVE,
 }

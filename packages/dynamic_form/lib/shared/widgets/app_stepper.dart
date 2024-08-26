@@ -12,12 +12,14 @@ class AppStepper extends StatefulWidget {
     required this.formKey,
     required this.onSubmit,
     this.axis = Axis.horizontal,
+    this.readOnly = false,
   });
 
   final List<PageEntity> pages;
   final GlobalKey<FormBuilderState> formKey;
   final VoidCallback? onSubmit;
   final Axis axis;
+  final bool readOnly;
 
   @override
   AppStepperState createState() => AppStepperState();
@@ -72,7 +74,7 @@ class AppStepperState extends State<AppStepper> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  onPressed: _handleSubmit,
+                  onPressed: widget.readOnly ? null : _handleSubmit,
                   child: const Text('SUBMIT'),
                 ),
                 const SizedBox(width: 16),
@@ -123,7 +125,7 @@ class AppStepperState extends State<AppStepper> {
                 ),
               if (_currentStep == widget.pages.length - 1)
                 ElevatedButton(
-                  onPressed: _handleSubmit,
+                  onPressed: widget.readOnly ? null : _handleSubmit,
                   child: const Text('SUBMIT'),
                 ),
             ],

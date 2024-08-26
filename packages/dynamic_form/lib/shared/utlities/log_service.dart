@@ -16,6 +16,9 @@ class Log {
       lineLength: 120,
       colors: true,
       printEmojis: true,
+      levelEmojis: {
+        Level.error: 'DYNAMIC_FORM ERROR',
+      },
     ),
   );
 

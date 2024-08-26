@@ -143,6 +143,7 @@ class ElementElementClassModel {
     this.type,
     this.name,
     this.title,
+    this.repeats,
     this.description,
     this.isRequired,
     this.requiredErrorText,
@@ -153,6 +154,8 @@ class ElementElementClassModel {
     this.maxSize,
     this.min,
     this.max,
+    this.maxRepeat,
+    this.minRepeat,
     this.step,
     this.conditions,
     this.dependantField,
@@ -164,6 +167,7 @@ class ElementElementClassModel {
         type: json["type"],
         name: json["name"],
         title: json["title"],
+        repeats: json["repeats"],
         description: json["description"],
         isRequired: json["isRequired"],
         requiredErrorText: json["requiredErrorText"],
@@ -180,6 +184,8 @@ class ElementElementClassModel {
         maxSize: json["maxSize"],
         min: json["min"],
         max: json["max"],
+        maxRepeat: json["maxRepeat"],
+        minRepeat: json["minRepeat"],
         step: json["step"],
         conditions: json["conditions"] == null
             ? []
@@ -200,6 +206,7 @@ class ElementElementClassModel {
         "isRequired": isRequired,
         "requiredErrorText": requiredErrorText,
         "readOnly": readOnly,
+        "repeats": repeats,
         "validators": validators == null
             ? []
             : List<dynamic>.from(validators!.map((x) => x.toJson())),
@@ -210,6 +217,8 @@ class ElementElementClassModel {
         "maxSize": maxSize,
         "min": min,
         "max": max,
+        "maxRepeat": maxRepeat,
+        "minRepeat": minRepeat,
         "step": step,
         "conditions": conditions == null
             ? []
@@ -222,7 +231,7 @@ class ElementElementClassModel {
 }
 
 class OptionsModel {
-  String? name;
+  dynamic name;
   String? title;
 
   OptionsModel({

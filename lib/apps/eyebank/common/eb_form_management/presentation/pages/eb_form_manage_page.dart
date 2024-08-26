@@ -2,6 +2,7 @@ import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/models/eb_form_action_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class EBFormManagePage extends ConsumerWidget {
   final String? encounterId;
   final String? timelineName;
   final String? timelineVersion;
+  final EBStatus? status;
 
   const EBFormManagePage({
     super.key,
@@ -26,6 +28,7 @@ class EBFormManagePage extends ConsumerWidget {
     required this.encounterId,
     required this.timelineName,
     required this.timelineVersion,
+    this.status,
   });
 
   @override
@@ -61,6 +64,7 @@ class EBFormManagePage extends ConsumerWidget {
                   final initialVal = json.formData;
 
                   return DynamicFormPage(
+                    readOnly: _openInReadMode(status),
                     canPop: true,
                     enableDraft: true,
                     json: data,
@@ -91,6 +95,14 @@ class EBFormManagePage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  _openInReadMode(EBStatus? status) {
+    if (status == EBStatus.ACCEPTED) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   void _handleSubmit({

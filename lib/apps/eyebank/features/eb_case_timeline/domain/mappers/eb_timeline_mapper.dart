@@ -35,7 +35,7 @@ class EBTimelineMapper {
               }))
           .toList(),
     );
-    logger.f("newConfigModel: $newConfigModel");
+    logger.d("newConfigModel: $newConfigModel");
 
     for (var stage in newConfigModel.stages!) {
       data.add(EBTimelineEntity(

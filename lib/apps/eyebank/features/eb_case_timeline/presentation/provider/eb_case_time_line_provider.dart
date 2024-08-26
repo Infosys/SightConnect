@@ -7,9 +7,8 @@ import '../../../../helpers/data/respositories/eb_repository_impl.dart';
 import '../../domain/entities/eb_timeline_entity.dart';
 import '../../domain/mappers/eb_timeline_mapper.dart';
 
-final ebCaseTimeLineProvider =
-    FutureProvider.family<List<EBTimelineEntity>, EbTimlineParams>(
-        (ref, data) async {
+final ebCaseTimeLineProvider = FutureProvider.family
+    .autoDispose<List<EBTimelineEntity>, EbTimlineParams>((ref, data) async {
   final repo = ref.read(ebRepositoryProvider);
   try {
     final timelinesResult = await repo.fetchTimelineByID(data.encounterID);

@@ -10,21 +10,23 @@ class FormStepperView extends StatefulWidget {
     required this.pages,
     required this.formKey,
     required this.onSubmit,
+    this.readOnly = false,
   });
   final String name;
   final List<PageEntity> pages;
   final GlobalKey<FormBuilderState> formKey;
   final VoidCallback? onSubmit;
+  final bool readOnly;
 
   @override
   State<FormStepperView> createState() => _PageWidgetState();
 }
 
 class _PageWidgetState extends State<FormStepperView> {
-
   @override
   Widget build(BuildContext context) {
     return AppStepper(
+      readOnly: widget.readOnly,
       axis: Axis.horizontal,
       pages: widget.pages,
       formKey: widget.formKey,

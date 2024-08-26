@@ -10,37 +10,41 @@ class FormCheckbox extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
-  final Function(List<dynamic>?)? onChanged;
+  final Object field;
+  final Function(Object?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    List<String>? getInitialValue() {
-      final List<String>? initialValue = field.initialValue as List<String>?;
+    final ElementElementClassEntity fieldEntity =
+        field as ElementElementClassEntity;
+
+    List<Object>? getInitialValue() {
+      final List<Object>? initialValue =
+          fieldEntity.initialValue as List<Object>?;
       if (initialValue != null &&
           initialValue.every((element) =>
-              field.choices!.any((item) => item.name == element))) {
+              fieldEntity.choices!.any((item) => item.name == element))) {
         return initialValue;
       }
       return null;
     }
 
-    return FormBuilderCheckboxGroup<String>(
+    return FormBuilderCheckboxGroup<Object?>(
       initialValue: getInitialValue(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: field.name,
+      name: fieldEntity.name,
       decoration: InputDecoration(
-        labelText: field.title,
-        hintText: field.description,
+        labelText: fieldEntity.title,
+        hintText: fieldEntity.description,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
-      validator: field.isRequired
+      validator: fieldEntity.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      options: field.choices!
-          .map((element) => FormBuilderFieldOption(
+      options: fieldEntity.choices!
+          .map((element) => FormBuilderFieldOption<Object?>(
                 value: element.name,
                 child: Text(element.title),
               ))

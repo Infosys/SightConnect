@@ -21,6 +21,10 @@ final ebFormManageProvider =
       (l) => throw l,
       (r) => r,
     );
+    if (stage.serviceRequestId == null) {
+      return EBFormPrefilledMapper.mapToEntity(null, result1);
+    }
+    //-----------------Fetch prefilled form-------------------
     final res2 = await repo.fetchPrefilledFormByStageAndId(
         stage.encounterId, stage.serviceRequestId, stage.stageName);
 

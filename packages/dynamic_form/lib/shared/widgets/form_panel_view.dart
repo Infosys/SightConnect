@@ -12,11 +12,13 @@ class FormPanelView extends StatefulWidget {
     required this.pages,
     required this.formKey,
     required this.onSubmit,
+    this.readOnly = false,
   });
   final String name;
   final List<PageEntity> pages;
   final GlobalKey<FormBuilderState> formKey;
   final VoidCallback? onSubmit;
+  final bool readOnly;
 
   @override
   State<FormPanelView> createState() => _FormPanelViewState();

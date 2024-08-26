@@ -123,6 +123,7 @@ class ElementElementClassEntity {
   final List<ChoiceElementEntity>? choices;
   final String placeholder;
   final int maxSize;
+
   final int min;
   final int max;
   final int step;
@@ -253,7 +254,7 @@ class ElementElementClassEntity {
     int? minRepeat,
     int? maxRepeat,
     String? inputType,
-    String? initialValue,
+    dynamic initialValue,
   }) {
     return ElementElementClassEntity(
       type: type ?? this.type,
@@ -283,7 +284,7 @@ class ElementElementClassEntity {
 }
 
 class ChoiceElementEntity {
-  final String name;
+  final dynamic name;
   final String title;
 
   ChoiceElementEntity({

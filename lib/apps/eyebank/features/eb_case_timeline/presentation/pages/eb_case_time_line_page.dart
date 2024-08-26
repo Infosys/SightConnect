@@ -83,6 +83,9 @@ class EbCaseTimeLinePage extends ConsumerWidget {
   }
 
   _handleCaseSelected(BuildContext context, EBTimelineEntity event) {
+    // if (event.serviceRequestId == null) {
+    //   return;
+    // }
     final navigator = Navigator.of(context);
     navigator.push(
       MaterialPageRoute(
@@ -94,6 +97,7 @@ class EbCaseTimeLinePage extends ConsumerWidget {
           encounterId: encounterID,
           timelineName: event.timelineName,
           timelineVersion: event.timelineVersion,
+          status: event.status,
         ),
       ),
     );

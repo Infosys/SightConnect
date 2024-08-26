@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
@@ -69,7 +67,6 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
     String? serviceRequestId,
     String? stage,
   ) {
-    log("ABHISHEK $encounterId $serviceRequestId $stage");
     return EyeBankErrorHandler.handle(() async {
       final endPoint =
           '/services/eyebank/api/encounters/$encounterId/stage/$stage';
@@ -120,7 +117,7 @@ class EBTimelineRepoImpl extends EBTimelineRepo {
           'version': stageVersion,
         },
       );
-      log(response.data.toString());
+      logger.d(response.data.toString());
       if (response.statusCode == 200) {
         return Future.value(response.data);
       } else {

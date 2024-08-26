@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
@@ -50,103 +48,213 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
       return DynamicFormJsonMapper().modeltoEntity(
         dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
         initialValues: widget.initialValue as Map<String, dynamic>?,
+
+        // widget.initialValue as Map<String, dynamic>?,
       );
 
       // initialValues: {
-      //   "preliminaryRequest.toDonateOrganTissue": ["CORNEA"],
-      //   "preliminaryRequest.consignmentNotificationDateTime":
+      //   "corneaRetrievalRequest.penLightAssessment.propeties.penlight": [
+      //     {
+      //       "corneaRetrievalRequest.penLightAssessment.productCode":
+      //           "CORNEA_OD",
+      //       "corneaRetrievalRequest.penLightAssessment.productIdentifier":
+      //           null,
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.superiorLidCondition":
+      //           "UNREMARKABLE",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.superiorLidRemark":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.inferiorLidCondition":
+      //           "INFLAMMATION",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.inferiorLidRemark":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.conjunctivaCondition":
+      //           "INFLAMMATION",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.conjunctivaRemark":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.epitheliumCondition":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.cornealStromaCondition":
+      //           "UNREMARKABLE",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.cornealStromaConditionRemark":
+      //           "PHAKIC",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.intraOcularCondition":
+      //           "BROWN",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.pupilDiameter":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.abnormalities":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.isEvidenceOfSurgery":
+      //           0,
+      //       "corneaRetrievalRequest.penLightAssessment.properties.penlight.surgeryRemark":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.performedBy":
+      //           "sample",
+      //       "corneaRetrievalRequest.penLightAssessment.outcome.status":
+      //           "REJECTED",
+      //       "corneaRetrievalRequest.penLightAssessment.outcome.remark":
+      //           "sample"
+      //     }
+      //   ],
+      //   "corneaRetrievalRequest.recoveryInformation": [
+      //     {
+      //       "corneaRetrievalRequest.recoveryInformation.productCode":
+      //           "CORNEA_OS",
+      //       "corneaRetrievalRequest.recoveryInformation.productIdentifier":
+      //           null,
+      //       "corneaRetrievalRequest.recoveryInformation.extractionMethod":
+      //           "IN_SITU",
+      //       "corneaRetrievalRequest.recoveryInformation.extractionDateTime":
+      //           "2024-08-25T06:30:00.000Z",
+      //       "corneaRetrievalRequest.recoveryInformation.performedBy":
+      //           "details",
+      //       "corneaRetrievalRequest.recoveryInformation.assistedBy":
+      //           "details",
+      //       "corneaRetrievalRequest.recoveryInformation.properties.comments":
+      //           "details",
+      //       "corneaRetrievalRequest.recoveryInformation.intent": "RESEARCH",
+      //       "corneaRetrievalRequest.recoveryInformation.storageMedium":
+      //           "MK_MEDIUM",
+      //       "corneaRetrievalRequest.recoveryInformation.lotNumber":
+      //           "details",
+      //       "corneaRetrievalRequest.recoveryInformation.expirationDate":
+      //           "2024-08-25T06:30:00.000Z",
+      //       "corneaRetrievalRequest.recoveryInformation.properties.scleraRecovered":
+      //           0
+      //     }
+      //   ],
+      //   "corneaRetrievalRequest.deathVerifiedBy": "DEATH_CERTIFICATE",
+      //   "corneaRetrievalRequest.coolingType": "NOT_COOLED",
+      //   "corneaRetrievalRequest.refrigerationTime":
       //       "2024-08-25T06:30:00.000Z",
-      //   "preliminaryRequest.referralMethod": "VOLUNTARY_FAMILY_INITIATED",
-      //   "preliminaryRequest.counsellings.counselor.name": "Name",
-      //   "preliminaryRequest.counsellings.counselor.phoneNumber":
-      //       "8899922222",
-      //   "preliminaryRequest.counsellings.counselor.counselorDetailSource":
-      //       "222",
-      //   "preliminaryRequest.unit": "ICU",
-      //   "preliminaryRequest.unitDetails": "Unit Details",
-      //   "preliminaryRequest.recoveryAddress.direction": "22",
-      //   "preliminaryRequest.recoveryAddress.pincode": "111111",
-      //   "preliminaryRequest.firstName": "Donor",
-      //   "preliminaryRequest.lastName": "Family Name",
-      //   "preliminaryRequest.dob": "1999-08-24T18:30:00.000Z",
-      //   "preliminaryRequest.age": "54",
-      //   "preliminaryRequest.gender": "MALE",
-      //   "preliminaryRequest.religion": "Religion",
-      //   "preliminaryRequest.height": "180",
-      //   "preliminaryRequest.weight": "84",
-      //   "preliminaryRequest.name": "Max",
-      //   "preliminaryRequest.mrn": "1123",
-      //   "preliminaryRequest.admissionDateTime": "2024-08-25T06:30:00.000Z",
-      //   "preliminaryRequest.attendingPhysician.name": "Ramu",
-      //   "preliminaryRequest.deathCause": "cause of Death",
-      //   "preliminaryRequest.deathCircumstances": "Leading to Death",
-      //   "preliminaryRequest.deathTime": "2024-08-25T06:30:00.000Z",
-      //   "preliminaryRequest.isActualDeathTime": "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.duration":
+      //   "corneaRetrievalRequest.deRefrigerationTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isIdentifiedUsingIDTag":
+      //       1,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.identifiedBy":
       //       "Yes",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.durationUnit":
-      //       "HOURS",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV":
-      //       "1",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHCV":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfCancer":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isDementia":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isAlzheimer":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.inIsolation":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms":
-      //       "0",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt":
-      //       "last hour",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount":
-      //       "48",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.transferredRemark":
-      //       "transferred",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.medicalHx":
-      //       "Hx",
-      //   "preliminaryRequest.generalScreening.properties.general_screening.socialAndBehavioralHx":
-      //       "Behave",
-      //   "preliminaryRequest.generalScreening.outcome.status": "REJECTED",
-      //   "preliminaryRequest.generalScreening.outcome.remarks": "remark",
-      //   "preliminaryRequest.tissueScreening.productCode": ["TISSUE"],
-      //   "preliminaryRequest.tissueScreening.productCategory": ["CORNEA"],
-      //   "preliminaryRequest.tissueScreening.properties.hx": "0",
-      //   "preliminaryRequest.tissueScreening.properties.notScreened":
-      //       "not screnned",
-      //   "preliminaryRequest.tissueScreening.properties.notSuitable":
-      //       "unsuitable ",
-      //   "preliminaryRequest.tissueScreening.properties.notProceeded":
-      //       "not proceeded",
-      //   "preliminaryRequest.tissueScreening.outcome.status": "REJECTED",
-      //   "preliminaryRequest.tissueScreening.outcome.remarks":
-      //       "Outocme remark ",
-      //   "preliminaryRequest.isMedicoLegalCase": "0",
-      //   "preliminaryRequest.isDonationPermitted": "0",
-      //   "preliminaryRequest.medicoLegalId": "case id",
-      //   "preliminaryRequest.medicoLegalFacility": "faility",
-      //   "preliminaryRequest.releasedBy": "release",
-      //   "preliminaryRequest.contactNumber": "9882222222",
-      //   "preliminaryRequest.notes": "restriction",
-      //   "preliminaryRequest.specialCases": "request",
-      //   "preliminaryRequest.autopsyId": "autopsy",
-      //   "preliminaryRequest.autopsyPerformer": "perfomed by",
-      //   "preliminaryRequest.autopsyLocation": "lcoation",
-      //   "preliminaryRequest.consentType": ["KIN_DONATION_CONSENT"],
-      //   "preliminaryRequest.consentDocumentUrl":
-      //       "https://healthconnect.infosysapps.com/services/filems/api/file/download/1724582230416-49d78967-7705-4d47-997f-2b8eb67624bf"
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.identifiedThrough":
+      //       "No",
+      //   "corneaRetrievalRequest.physicalAssessment.performedBy": "No",
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.physicalExaminationFinding":
+      //       "Findings",
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isJaundice":
+      //       1,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isIcetrus":
+      //       0,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.evidenceOfSexuallyTransmittedDisease":
+      //       0,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isLymphadenopathy":
+      //       0,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isWhiteSpotsInMouth":
+      //       1,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.whiteSpotsInMouth":
+      //       "details",
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.needleTrackOrSignOfIVDrugs":
+      //       0,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isColouredSpotsOrLesions":
+      //       1,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isEvidenceOfBloodLoss":
+      //       1,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isSkinLesions":
+      //       1,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isEvidenceOfSmallpoxVaccinationOrScab":
+      //       true,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.isMucusMembraneHemorrhages":
+      //       true,
+      //   "corneaRetrievalRequest.physicalAssessment.properties.physical_assessment.remarks":
+      //       "details",
+      //   "corneaRetrievalRequest.physicalAssessment.outcome.status":
+      //       "REJECTED",
+      //   "corneaRetrievalRequest.physicalAssessment.outcome.remark":
+      //       "details",
+      //   "corneaRetrievalRequest.labReport.properties.wbc.isWbcPerformed": 0,
+      //   "corneaRetrievalRequest.labReport.properties.wbc.metrics.dateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.labReport.properties.wbc.metrics.count":
+      //       "123",
+      //   "corneaRetrievalRequest.labReport.properties.temperature.isRecorded":
+      //       1,
+      //   "corneaRetrievalRequest.labReport.properties.temperature.notRecordedReason":
+      //       "details",
+      //   "corneaRetrievalRequest.labReport.properties.temperature.metrics.dateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.labReport.properties.temperature.metrics.result":
+      //       "details",
+      //   "corneaRetrievalRequest.labReport.properties.temperature.metrics.units":
+      //       "details",
+      //   "corneaRetrievalRequest.labReport.properties.cultures.isCultures":
+      //       1,
+      //   "corneaRetrievalRequest.labReport.properties.cultures.metrics.cultureSource":
+      //       "details",
+      //   "corneaRetrievalRequest.labReport.properties.cultures.metrics.dateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.labReport.properties.cultures.metrics.result":
+      //       "details",
+      //   "corneaRetrievalRequest.labReport.outcome.status": "ACCEPTED",
+      //   "corneaRetrievalRequest.labReport.outcome.remark": "details",
+      //   "corneaRetrievalRequest.sample.collectedOn":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.sample.wasCollectedPreMortem":
+      //       "POST_MORTEM",
+      //   "corneaRetrievalRequest.sample.collectedBy": "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.details.donorName":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.samples.collectedOn":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.hemodilution.samples.collectedBy":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.details.wasDonorInfusedOrTransfused":
+      //       0,
+      //   "corneaRetrievalRequest.hemodilution.properties.details.isDonorsAgeGreaterThan12Years":
+      //       1,
+      //   "corneaRetrievalRequest.hemodilution.properties.details.isBloodLossOccured":
+      //       1,
+      //   "corneaRetrievalRequest.hemodilution.properties.bloodProducts.bloodProduct":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.bloodProducts.dateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.hemodilution.properties.bloodProducts.volume":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalBloodProductsTranfused":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.colloid.colloidDesc":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.colloid.dateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.hemodilution.properties.colloid.volume":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.colloid.totalColloidsTranfused":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.crystalloid.crystalloidDesc":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.crystalloid.dateTime":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.hemodilution.properties.crystalloid.volume":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.crystalloid.totalCrystalloidsTranfused":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.crystalloid.ABC":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.crystalloid.BC":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.corneaEvaluation.PV":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.corneaEvaluation.BV":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.isBCGreaterPV": 1,
+      //   "corneaRetrievalRequest.hemodilution.properties.isABCGreaterPV": 0,
+      //   "corneaRetrievalRequest.hemodilution.properties.isAcecepted": 0,
+      //   "corneaRetrievalRequest.hemodilution.properties.rejected.initial":
+      //       "details",
+      //   "corneaRetrievalRequest.hemodilution.properties.rejected.date":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.hemodilution.performedOn":
+      //       "2024-08-25T06:30:00.000Z",
+      //   "corneaRetrievalRequest.hemodilution.outcome.status": "ACCEPTED",
+      //   "corneaRetrievalRequest.hemodilution.outcome.remark": "details"
       // });
     } catch (e) {
-      log('DF:Error Converting json: $e');
+      Log.e('$e');
       rethrow;
     }
   }
@@ -162,6 +270,7 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
           final FormLayoutType formLayout =
               snapshot.data?.formLayoutType ?? FormLayoutType.PANEL;
           return FormBuilderPage(
+            readOnly: widget.readOnly,
             pages: pages,
             title: title,
             onSubmit: widget.onSubmit,

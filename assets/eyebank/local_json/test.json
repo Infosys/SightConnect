@@ -1,4 +1,5 @@
-{
+ 
+ {
      "preliminaryRequest.toDonateOrganTissue": [
        "CORNEA"
      ],
@@ -26,40 +27,36 @@
      "preliminaryRequest.deathCause": "cause of Death",
      "preliminaryRequest.deathCircumstances": "Leading to Death",
      "preliminaryRequest.deathTime": "2024-08-25T06:30:00.000Z",
-     "preliminaryRequest.isActualDeathTime": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport": "0",
+     "preliminaryRequest.isActualDeathTime": 0,
+     "preliminaryRequest.generalScreening.properties.general_screening.inLifeSupport": false,
      "preliminaryRequest.generalScreening.properties.general_screening.duration": "Yes",
      "preliminaryRequest.generalScreening.properties.general_screening.durationUnit": "HOURS",
-     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV": "1",
-     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHCV": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfCancer": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.isDementia": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.isAlzheimer": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.inIsolation": "0",
-     "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms": "0",
+     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHIV": 0,
+     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHBV": 1,
+     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfHCV": 1,
+     "preliminaryRequest.generalScreening.properties.general_screening.isHistoryOfCancer": 2,
+     "preliminaryRequest.generalScreening.properties.general_screening.isDementia": 0,
+     "preliminaryRequest.generalScreening.properties.general_screening.isAlzheimer": 1,
+     "preliminaryRequest.generalScreening.properties.general_screening.isCNSDisease": 1,
+     "preliminaryRequest.generalScreening.properties.general_screening.inIsolation": false,
+     "preliminaryRequest.generalScreening.properties.general_screening.isSystemicInfectionSymptoms": false,
      "preliminaryRequest.generalScreening.properties.general_screening.ivFluidAmt": "last hour",
      "preliminaryRequest.generalScreening.properties.general_screening.bloodAmount": "48",
      "preliminaryRequest.generalScreening.properties.general_screening.transferredRemark": "transferred",
      "preliminaryRequest.generalScreening.properties.general_screening.medicalHx": "Hx",
      "preliminaryRequest.generalScreening.properties.general_screening.socialAndBehavioralHx": "Behave",
      "preliminaryRequest.generalScreening.outcome.status": "REJECTED",
-     "preliminaryRequest.generalScreening.outcome.remarks": "remark",
-     "preliminaryRequest.tissueScreening.productCode": [
-       "TISSUE"
-     ],
-     "preliminaryRequest.tissueScreening.productCategory": [
-       "CORNEA"
-     ],
-     "preliminaryRequest.tissueScreening.properties.hx": "0",
+     "preliminaryRequest.generalScreening.outcome.remark": "Remark",
+     "preliminaryRequest.tissueScreening.productCode": "CORNEA",
+     "preliminaryRequest.tissueScreening.productCategory": "TISSUE",
+     "preliminaryRequest.tissueScreening.properties.hx": 0,
      "preliminaryRequest.tissueScreening.properties.notScreened": "not screnned",
      "preliminaryRequest.tissueScreening.properties.notSuitable": "unsuitable ",
      "preliminaryRequest.tissueScreening.properties.notProceeded": "not proceeded",
      "preliminaryRequest.tissueScreening.outcome.status": "REJECTED",
-     "preliminaryRequest.tissueScreening.outcome.remarks": "Outocme remark ",
-     "preliminaryRequest.isMedicoLegalCase": "0",
-     "preliminaryRequest.isDonationPermitted": "0",
+     "preliminaryRequest.tissueScreening.outcome.remark": "remark",
+     "preliminaryRequest.isMedicoLegalCase": false,
+     "preliminaryRequest.isDonationPermitted": 1,
      "preliminaryRequest.medicoLegalId": "case id",
      "preliminaryRequest.medicoLegalFacility": "faility",
      "preliminaryRequest.releasedBy": "release",
@@ -69,9 +66,12 @@
      "preliminaryRequest.autopsyId": "autopsy",
      "preliminaryRequest.autopsyPerformer": "perfomed by",
      "preliminaryRequest.autopsyLocation": "lcoation",
-     "preliminaryRequest.consentType": [
-       "KIN_DONATION_CONSENT"
-     ],
-     "preliminaryRequest.consentDocumentUrl": "https://healthconnect.infosysapps.com/services/filems/api/file/download/1724582230416-49d78967-7705-4d47-997f-2b8eb67624bf"
-   }
+     "preliminaryRequest.consentType": "KIN_DONATION_CONSENT"
+    ,
  
+    "preliminaryRequest.consentDocumentUrl":
+        "https://healthconnect.infosysapps.com/services/filems/api/file/download/1724582230416-49d78967-7705-4d47-997f-2b8eb67624bf"
+
+ 
+   }
+  

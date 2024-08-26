@@ -46,7 +46,8 @@ class FormTextField extends StatelessWidget {
         return null;
       },
       onChanged: onChanged,
-      readOnly: field.readOnly,
+      enabled: field.readOnly ? false : true,
+      // readOnly: field.readOnly,
     );
   }
 

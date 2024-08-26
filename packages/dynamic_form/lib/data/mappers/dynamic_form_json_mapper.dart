@@ -16,7 +16,7 @@ class DynamicFormJsonMapper {
     required Map<String, dynamic>? initialValues,
   }) {
     try {
-      Log.f(initialValues);
+      Log.f({"DynamicFormJsonMapper": initialValues});
       this.initialValues = initialValues;
       return ResponseJsonEntity(
         name: _formatTitle(dynamicFormModel.name),
@@ -82,7 +82,8 @@ class DynamicFormJsonMapper {
       for (final element in elements) {
         elementEntities.add(
           ElementElementClassEntity(
-            initialValue: initialValues?[element.name.toString()],
+            initialValue:
+                _getInitialValType(_mapToFormType(element.type), element),
             type: _mapToFormType(element.type),
             name: element.name.toString(),
             title: element.title ?? '',
@@ -101,15 +102,27 @@ class DynamicFormJsonMapper {
             conditions: _getConditions(element.conditions),
             elements: _getElements(element.elements),
             repeats: element.repeats ?? false,
-            minRepeat: element.minRepeat,
-            maxRepeat: element.maxRepeat,
+            minRepeat: element.minRepeat ?? 1,
+            maxRepeat: element.maxRepeat ?? 1,
             inputType: element.inputType,
             prefix: element.prefix,
           ),
         );
       }
     }
+    // Log.e(elementEntities.toList());
     return elementEntities;
+  }
+
+  _getInitialValType(DynamicFormType type, ElementElementClassModel element) {
+    if (type == DynamicFormType.TEXTFIELD || type == DynamicFormType.TEXTAREA) {
+      if (initialValues?[element.name.toString()] == null) {
+        return null;
+      }
+      return initialValues?[element.name.toString()].toString();
+    } else {
+      return initialValues?[element.name.toString()];
+    }
   }
 
   _getConditions(List<Conditions>? conditions) {
@@ -185,8 +198,10 @@ class DynamicFormJsonMapper {
         return DynamicFormType.PANEL;
       case 'DATE':
         return DynamicFormType.DATE;
+
       case 'DISPLAY':
         return DynamicFormType.DISPLAY;
+
       default:
         return DynamicFormType.DEFAULT;
     }

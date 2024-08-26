@@ -26,10 +26,13 @@ class AppDynamicPanel extends StatefulWidget {
   State<AppDynamicPanel> createState() => _AppDynamicPanelState();
 }
 
-class _AppDynamicPanelState extends State<AppDynamicPanel> {
+class _AppDynamicPanelState extends State<AppDynamicPanel>
+    with AutomaticKeepAliveClientMixin {
   final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
   Map<String, dynamic> formatedInitialValue = {};
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -140,10 +143,11 @@ class _AppDynamicPanelState extends State<AppDynamicPanel> {
             width: double.infinity,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppCard(
+                  paddingAll: 0,
                   title: widget.name,
                   child: Column(
                     children: repeatedPanelKeys

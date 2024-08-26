@@ -21,11 +21,15 @@ class FormFile extends HookWidget {
 
   List<String> getInitialValue() {
     try {
-      return field.initialValue != null
-          ? List<String>.from(field.initialValue)
-          : [];
+      if (field.initialValue is String) {
+        return [field.initialValue as String];
+      } else if (field.initialValue is Iterable) {
+        return List<String>.from(field.initialValue);
+      } else {
+        return [];
+      }
     } catch (e) {
-      Log.f(' FormFile: $e');
+      Log.f('FormFile: $e');
       return [];
     }
   }

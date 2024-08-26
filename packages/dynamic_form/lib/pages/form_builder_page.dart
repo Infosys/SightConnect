@@ -19,6 +19,7 @@ class FormBuilderPage extends StatefulWidget {
     required this.backButtonIcon,
     required this.enableDraft,
     required this.canPop,
+    required this.readOnly,
   });
   final String title;
   final List<PageEntity> pages;
@@ -28,6 +29,7 @@ class FormBuilderPage extends StatefulWidget {
   final IconData backButtonIcon;
   final bool canPop;
   final bool enableDraft;
+  final bool readOnly;
   @override
   State<FormBuilderPage> createState() => _FormBuilderPageState();
 }
@@ -85,6 +87,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: FormBuilder(
+            enabled: !widget.readOnly,
             key: formKey,
             child: _getFormLayout(),
           ),
@@ -101,6 +104,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
           name: widget.title,
           pages: widget.pages,
           onSubmit: _handleSubmit,
+          readOnly: widget.readOnly,
         );
 
       default:
@@ -131,7 +135,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         Log.f(formKey.currentState?.value);
         widget.onSubmit?.call(
           formKey.currentState?.value,
-          DynamicFormSavingType.SUBMIT,
+          DynamicFormSavingType.SAVE,
         );
       } else {
         Log.e('Form validation failed');

@@ -6,19 +6,19 @@ class EBFormPrefilledMapper {
   EBFormPrefilledMapper._();
 
   static EBFormPrefilledResponseEntity mapToEntity(
-    EBFormPrefilledResponseModel model,
+    EBFormPrefilledResponseModel? model,
     Map<String, dynamic> formData,
   ) {
     try {
       return EBFormPrefilledResponseEntity(
-        encounterId: model.encounterId,
-        tenantId: model.tenantId,
-        stageName: model.stageName,
-        stageVersion: model.stageVersion,
-        formData: model.formData,
+        encounterId: model?.encounterId,
+        tenantId: model?.tenantId,
+        stageName: model?.stageName,
+        stageVersion: model?.stageVersion,
+        formData: model?.formData,
         displayFormData: formData,
-        metaData: model.metaData,
-        serviceRequestId: model.serviceRequestId,
+        metaData: model?.metaData,
+        serviceRequestId: model?.serviceRequestId,
       );
     } catch (e) {
       logger.e(e);

@@ -31,7 +31,7 @@ Widget getField(
       return FormTextField(
         field: field,
         onChanged: (value) {
-          // debugPrint(value);
+          debugPrint(value);
         },
       );
 
@@ -40,7 +40,7 @@ Widget getField(
           field: field,
           onChanged: (value) {
             globalRebuildNotifier.value = !globalRebuildNotifier.value;
-            debugPrint(value);
+            debugPrint(value.toString());
           });
 
     case DynamicFormType.RADIO:
@@ -62,7 +62,9 @@ Widget getField(
       return FormFile(
         field: field,
         onChanged: (docs) {
-          if (docs.length == 1) {
+          if (docs.isEmpty) {
+            key.currentState?.setInternalFieldValue(field.name, null);
+          } else if (docs.length == 1) {
             key.currentState?.setInternalFieldValue(field.name, docs.first);
           } else {
             key.currentState?.setInternalFieldValue(
