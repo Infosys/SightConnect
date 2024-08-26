@@ -196,8 +196,11 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               lastDate: DateTime(2100),
             );
             if (picked != null) {
+              final adjustedPicked =
+                  DateTime(picked.year, picked.month, picked.day, 12, 0, 0);
               setState(() {
-                filter.value = picked.toUtc().toIso8601String();
+                filter.value = adjustedPicked.toUtc().toIso8601String();
+
                 if (!_selectedFilters.contains(filter)) {
                   _selectedFilters.add(filter);
                 }

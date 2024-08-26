@@ -14,12 +14,10 @@ class FormFile extends HookWidget {
     super.key,
     required this.onChanged,
     required this.field,
-    this.readOnly = false,
   });
 
   final ElementElementClassEntity field;
   final Function(List<String>) onChanged;
-  final bool readOnly;
 
   List<String> getInitialValue() {
     try {
@@ -41,8 +39,11 @@ class FormFile extends HookWidget {
     final images = useState<List<String>>(getInitialValue());
     final showAllImages = useState<bool>(false);
     final isLoading = useState<bool>(false);
+    final readOnly = field.initialValue != null;
 
     return FormField<List<String>>(
+      enabled: !readOnly,
+      initialValue: images.value,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         value = value ?? [];
@@ -52,27 +53,30 @@ class FormFile extends HookWidget {
         return null;
       },
       builder: (state) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ImagePicker(
-              state: state,
-              field: field,
-              images: images,
-              showAllImages: showAllImages,
-              onChanged: onChanged,
-              isLoading: isLoading,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              state.errorText ?? '',
-              style: const TextStyle(
-                color: Colors.red,
-                fontSize: 12.0,
+        return IgnorePointer(
+          ignoring: readOnly,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ImagePicker(
+                state: state,
+                field: field,
+                images: images,
+                showAllImages: showAllImages,
+                onChanged: onChanged,
+                isLoading: isLoading,
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                state.errorText ?? '',
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontSize: 12.0,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -291,13 +295,13 @@ class ImageGrid extends StatelessWidget {
             ),
             onTap: () => showAllImages.value = !showAllImages.value,
           ),
-        if (images.value.isNotEmpty)
-          AddImageButton(
-            onChanged: onChanged,
-            images: images,
-            state: state,
-            isLoading: isLoading,
-          ),
+        // if (images.value.isNotEmpty)
+        //   AddImageButton(
+        //     onChanged: onChanged,
+        //     images: images,
+        //     state: state,
+        //     isLoading: isLoading,
+        //   ),
       ],
     );
   }

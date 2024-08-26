@@ -33,7 +33,10 @@ class FormDropDown extends StatelessWidget {
           0,
           DropdownMenuItem<Object?>(
             value: null,
-            child: Text('--Select ${field.title}--'),
+            child: Text(
+              '--Select ${field.title}--',
+              overflow: TextOverflow.ellipsis,
+            ),
           ));
     }
 

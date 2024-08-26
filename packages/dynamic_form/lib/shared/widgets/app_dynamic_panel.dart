@@ -157,13 +157,14 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
             width: double.infinity,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppCard(
-                  paddingAll: 0,
+                  // paddingAll: 0,
                   title: widget.name,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: repeatedPanelKeys
                         .map((key) => buildRepeatedPanel(key))
                         .toList(),
@@ -195,6 +196,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       children: [
         Expanded(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (repeatedPanelKeys.length > widget.minRepeat)
                 Row(

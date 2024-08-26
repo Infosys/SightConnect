@@ -1,10 +1,4 @@
 import 'package:dynamic_form/shared/utlities/responsive.dart';
-import 'package:dynamic_form/widgets/form_check_box.dart';
-import 'package:dynamic_form/widgets/form_chips.dart';
-import 'package:dynamic_form/widgets/form_file.dart';
-import 'package:dynamic_form/widgets/form_radio.dart';
-import 'package:dynamic_form/widgets/form_switch.dart';
-import 'package:dynamic_form/widgets/form_text_area.dart';
 import 'package:flutter/material.dart';
 
 class AppResponsiveWidget extends StatelessWidget {
@@ -19,15 +13,18 @@ class AppResponsiveWidget extends StatelessWidget {
         double width;
         if (Responsive.isMobile(context)) {
           width = constraints.maxWidth; // Full width on mobile
-        } else if (widget is FormCheckbox ||
-            widget is FormFile ||
-            widget is FormSwitch ||
-            widget is FormRadio ||
-            widget is FormTextArea ||
-            widget is FormChip) {
-          width = constraints.maxWidth * 0.5;
-        } else {
-          width = constraints.maxWidth * 0.45;
+        }
+        // else if (widget is FormCheckbox ||
+        //     widget is FormFile ||
+        //     widget is FormSwitch ||
+        //     widget is FormRadio ||
+        //     widget is FormTextArea ||
+        //     widget is FormChip) {
+        //   width = constraints.maxWidth * 0.5;
+        // }
+
+        else {
+          width = constraints.maxWidth * 0.3;
         }
 
         return Container(

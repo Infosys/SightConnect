@@ -63,7 +63,7 @@ class EBFormManagePage extends ConsumerWidget {
 
                   return DynamicFormPage(
                     readOnly: _openInReadMode(status),
-                    canPop: true,
+                    canPop: _openInReadMode(status) ? false : true,
                     enableDraft: true,
                     json: data,
                     initialValue: initialVal,

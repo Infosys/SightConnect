@@ -10,8 +10,8 @@ import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final ebFormManageProvider =
-    FutureProvider.family<EBFormPrefilledResponseEntity, EbStageParams>(
+final ebFormManageProvider = FutureProvider.family
+    .autoDispose<EBFormPrefilledResponseEntity, EbStageParams>(
         (ref, stage) async {
   try {
     final repo = ref.watch(ebTimlineRepoProvider);

@@ -15,7 +15,7 @@ class DesktopClipper extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(8),
-        constraints: const BoxConstraints(maxWidth: 1962),
+        constraints: const BoxConstraints(maxWidth: 1600),
         child: widget,
       ),
     );

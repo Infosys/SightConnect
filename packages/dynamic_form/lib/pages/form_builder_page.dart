@@ -46,16 +46,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: widget.canPop,
-      onPopInvoked: (value) {
-        if (value) {
-          return;
-        }
-        if (widget.canPop) {
-          showFormExitDialog(context, onSave: _handleSubmit);
-        } else {
-          Navigator.pop(context);
-        }
-      },
+      onPopInvoked: _onPopInvoked,
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -94,6 +85,17 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         ),
       ),
     );
+  }
+
+  _onPopInvoked(bool value) {
+    if (value) {
+      return;
+    }
+    if (widget.canPop) {
+      showFormExitDialog(context, onSave: _handleSubmit);
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   _getFormLayout() {
