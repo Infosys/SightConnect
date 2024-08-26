@@ -1,7 +1,7 @@
-import 'package:eye_care_for_all/apps/admin/features/tenant_admin/tenant_admin_dashboard/presentation/pages/tenant_admin_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_home/presentation/pages/vision_technician_home_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_ivr_call_history/presentation/pages/vision_technician_ivr_call_history_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_mark_my_availability/presentation/pages/vision_technician_mark_my_availability_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_register_page/presentation/pages/vision_technician_register_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_provider.dart';
@@ -105,7 +105,8 @@ class VisionTechnicianDashboardPage extends ConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const TenantAdminDashBoardPage(),
+                  builder: (context) => const VisionTechnicianIvrCallHistory(),
+                  // TenantAdminDashBoardPage()
                 ),
               );
               break;

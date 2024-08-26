@@ -30,7 +30,7 @@ void cameraCaptureAlert(BuildContext context, Eye eye) {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "${eye.toString().split('_')[0].split('.')[1].toLowerCase().capitalize()} Eye Scan complete",
+            "Eye Scan complete",
             style: applyRobotoFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
