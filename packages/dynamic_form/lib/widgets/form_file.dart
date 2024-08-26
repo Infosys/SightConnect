@@ -14,10 +14,12 @@ class FormFile extends HookWidget {
     super.key,
     required this.onChanged,
     required this.field,
+    this.readOnly = false,
   });
 
   final ElementElementClassEntity field;
   final Function(List<String>) onChanged;
+  final bool readOnly;
 
   List<String> getInitialValue() {
     try {
