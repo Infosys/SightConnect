@@ -66,9 +66,10 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
                     label: Text(
                       'Save as Draft',
                       style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ]

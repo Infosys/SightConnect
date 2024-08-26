@@ -2,12 +2,11 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/eb_reject_case_sheet.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EbCaseTimeLinePage extends ConsumerWidget {
@@ -32,12 +31,14 @@ class EbCaseTimeLinePage extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () {
-                showCustomWoltSheet(
-                  context,
-                  const EBRejectCaseSheet(
-                    caseID: 1234,
-                  ),
-                );
+                // showCustomWoltSheet(
+                //   context,
+                //   const EBRejectCaseSheet(
+                //     caseID: 1234,
+                //   ),
+                // );
+
+                Fluttertoast.showToast(msg: 'Soon to be implemented');
               },
               style: TextButton.styleFrom(
                 foregroundColor: AppColor.red,

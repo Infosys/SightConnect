@@ -56,6 +56,7 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
         identifier: identifier,
         identifierType: identifierType,
       );
+
       final newItems = await ref.read(ebSearchRecordProvider(param).future);
       final isLastPage = (newItems.content?.length ?? 0) < _pageSize;
       if (isLastPage) {
@@ -112,6 +113,7 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
           child: Consumer(
             builder: (context, ref, child) {
               return PagedListView<int, ContentBriefEntity>(
+                padding: const EdgeInsets.all(16.0),
                 pagingController: _pagingController,
                 builderDelegate: PagedChildBuilderDelegate<ContentBriefEntity>(
                   itemBuilder: (context, item, index) => EBCaseCard(

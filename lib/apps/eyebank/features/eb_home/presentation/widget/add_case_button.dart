@@ -67,6 +67,8 @@ class AddCaseButton extends StatelessWidget {
                       logger.e(l);
                       Fluttertoast.showToast(msg: l.errorMessage);
                     }, (r) {
+                      // invalidating recent cases provider to refresh the list
+                      ref.invalidate(ebGetRecordsProvider);
                       Navigator.pop(context);
                       Fluttertoast.showToast(msg: 'Case created successfully');
                     });

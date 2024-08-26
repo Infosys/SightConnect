@@ -27,7 +27,7 @@ class FormPanelView extends StatefulWidget {
 class _FormPanelViewState extends State<FormPanelView> {
   @override
   Widget build(BuildContext context) {
-    Log.f("FormPanelView");
+    Log.i("FormPanelView Build");
 
     if (widget.pages.isEmpty) {
       return Container();

@@ -33,10 +33,7 @@ class EBFormManagePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    logger.f({
-      'stageName': stageName,
-      'stageVersion': stageVersion,
-    });
+    // logger.f({'stageName': stageName, 'stageVersion': stageVersion});
     if (stageName == null) {
       return const Scaffold(
         body: Center(

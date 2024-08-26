@@ -53,7 +53,7 @@ class EbStatisticsTopCard extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildColumn('7267', 'Overall', context, isSelected: true),
+                    _buildColumn('-', 'Overall', context, isSelected: true),
                     _buildColumn('-', 'Today', context),
                     _buildColumn('-', 'Active', context),
                     _buildColumn('-', 'Rejected', context),

@@ -56,7 +56,7 @@ class AppStepperState extends State<AppStepper> {
 
   @override
   Widget build(BuildContext context) {
-    log("AppStepper");
+    log("AppStepper Build");
     if (widget.pages.isEmpty) {
       return Container();
     } else if (widget.pages.length == 1) {

@@ -25,7 +25,6 @@ final ebIntimationFormProvider =
 final ebGetRecordsProvider =
     FutureProvider.family<EncounterBriefEntity, GetRecordsParams>(
   (ref, params) async {
-    await Future.delayed(const Duration(seconds: 3));
     final repo = ref.watch(ebCaseRegisterRepositoryProvider);
     final p = GetAllEncountersParams(
       encounterStage: params.encounterStage,

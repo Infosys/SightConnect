@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
-import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:dynamic_form/shared/widgets/app_dynamic_panel.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
@@ -65,7 +64,7 @@ class PageWidget extends StatelessWidget {
     }
 
     return fields.map((field) {
-      Log.i(field.toJson());
+      // Log.i(field.toJson());
 
       if (field.type == DynamicFormType.PANEL && field.repeats == true) {
         log("DynamicFormType.PANEL && field.repeats == true");
