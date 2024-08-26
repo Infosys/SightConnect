@@ -40,6 +40,11 @@ class FormFile extends HookWidget {
     final showAllImages = useState<bool>(false);
     final isLoading = useState<bool>(false);
     final readOnly = field.initialValue != null;
+    useEffect(() {
+      // Update the form state with the initial value
+      onChanged(images.value);
+      return;
+    }, []);
 
     return FormField<List<String>>(
       enabled: !readOnly,
