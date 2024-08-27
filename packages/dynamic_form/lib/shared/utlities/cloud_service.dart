@@ -10,7 +10,7 @@ class CloudService {
     BaseOptions(baseUrl: baseUrl),
   );
 
-  Future<String> _getImage(String fileId) async {
+  Future<String> _getFile(String fileId) async {
     try {
       final url = "$baseUrl/services/filems/api/file/download/$fileId";
       Log.d({"url": url});
@@ -22,7 +22,9 @@ class CloudService {
   }
 
   Future<String> uploadImage(PlatformFile file) async {
-    const endpoint = "/services/filems/api/file/sync-upload?doc_type=eyebank";
+    const endpoint = 
+    "/services/filems/api/file/sync-upload?doc_type=EYEBANK";
+    // "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
 
     MultipartFile multipartFile;
     if (kIsWeb) {
@@ -43,13 +45,13 @@ class CloudService {
 
     try {
       final response = await dio.post(endpoint, data: data);
-      Log.d({"uploadImage": response.data});
+      Log.d({"uploadFile": response.data});
       if (response.statusCode == 200) {
         final body = response.data;
         final fileId = body['id'];
-        return _getImage(fileId);
+        return _getFile(fileId);
       } else {
-        throw Exception("Failed to upload image");
+        throw Exception("Failed to upload file");
       }
     } catch (e) {
       Log.e(e);
