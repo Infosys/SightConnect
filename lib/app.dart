@@ -50,12 +50,17 @@ class MyApp extends ConsumerWidget {
         } else {
           return MediaQuery(
             data: mediaQueryData.copyWith(
-              textScaler: Responsive.isMobile(context)
-                  ? TextScaler.linear(
-                      ref.watch(globalTextScaleFactorProvider).textScaleFactor,
-                    )
-                  : const TextScaler.linear(1.3),
-            ),
+                textScaler: Responsive.isMobile(context)
+                    ? TextScaler.linear(
+                        ref
+                            .watch(globalTextScaleFactorProvider)
+                            .textScaleFactor,
+                      )
+                    : TextScaler.linear(
+                        ref
+                            .watch(globalTextScaleFactorProvider)
+                            .textScaleFactor,
+                      )),
             child: AppFeedbackBetter(
               child: MaterialApp(
                 title: kIsWeb ? "" : AppInfoService.appName,
