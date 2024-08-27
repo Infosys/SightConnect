@@ -8,6 +8,7 @@ import 'package:dynamic_form/widgets/form_date_picker.dart';
 import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_display.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
+import 'package:dynamic_form/widgets/form_duration.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_nested_pannel_widget.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
@@ -129,6 +130,14 @@ Widget getField(
 
     case DynamicFormType.DISPLAY:
       return FormDisplay(field: field);
+
+    case DynamicFormType.DURATION:
+      return FormDuration(
+        field: field,
+        onChanged: (value) {
+          key.currentState?.setInternalFieldValue(field.name, value);
+        },
+      );
 
     default:
       return Container();

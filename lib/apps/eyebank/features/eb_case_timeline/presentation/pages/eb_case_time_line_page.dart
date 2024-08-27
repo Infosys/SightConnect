@@ -4,7 +4,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
-import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -64,12 +63,10 @@ class EbCaseTimeLinePage extends ConsumerWidget {
             .when(
               data: (data) {
                 final List<EBTimelineEntity> caseTimeLine = data;
-                return DesktopClipper(
-                  widget: CaseTimeLineWidget(
-                    caseTimeLine: caseTimeLine,
-                    onCaseSelected: (EBTimelineEntity event) =>
-                        _handleCaseSelected(context, event),
-                  ),
+                return CaseTimeLineWidget(
+                  caseTimeLine: caseTimeLine,
+                  onCaseSelected: (EBTimelineEntity event) =>
+                      _handleCaseSelected(context, event),
                 );
               },
               loading: () => const Center(

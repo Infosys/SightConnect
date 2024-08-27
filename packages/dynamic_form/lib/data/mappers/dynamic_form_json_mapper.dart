@@ -207,6 +207,9 @@ class DynamicFormJsonMapper {
       case 'HIDDEN':
         return DynamicFormType.HIDDEN;
 
+      case 'DURATION':
+        return DynamicFormType.DURATION;
+
       default:
         return DynamicFormType.DEFAULT;
     }

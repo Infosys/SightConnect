@@ -1,22 +1,24 @@
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DesktopClipper extends StatelessWidget {
-  const DesktopClipper({super.key, required this.widget});
-  final Widget widget;
+  const DesktopClipper({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     if (!kIsWeb) {
-      return widget;
+      return child;
     }
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        padding: const EdgeInsets.all(8),
-        constraints: const BoxConstraints(maxWidth: 1600),
-        child: widget,
+    return Container(
+      color: AppColor.scaffold,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1600),
+          child: child,
+        ),
       ),
     );
   }
