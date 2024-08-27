@@ -14,6 +14,7 @@ enum DynamicFormType {
   PANEL,
   DATE,
   DISPLAY,
+  DURATION,
   HIDDEN,
 }
 
