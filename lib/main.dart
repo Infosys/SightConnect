@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/services/app_info_service.dart';
 import 'package:eye_care_for_all/services/matomo_logger.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
+import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -33,7 +34,7 @@ Future<void> main() async {
 
   runApp(
     const ProviderScope(
-      child: MyApp(),
+      child: DesktopClipper(child: MyApp()),
     ),
   );
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +60,8 @@ class FormDropDown extends StatelessWidget {
         return null;
       }
     }
+
+    log(field.toJson().toString());
 
     return FormBuilderDropdown<Object?>(
       initialValue: getInitialValue(),

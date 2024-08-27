@@ -140,10 +140,15 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
     super.build(context);
 
     return FormBuilderField(
+      validator: (value) {
+        formKey.currentState?.validate();
+        return null;
+      },
       enabled: !widget.readOnly,
       name: widget.panel.name,
       onSaved: (newValue) {
         formKey.currentState?.save();
+
         final value = formKey.currentState?.value;
 
         final formatedValue = _formatValue(value ?? {});

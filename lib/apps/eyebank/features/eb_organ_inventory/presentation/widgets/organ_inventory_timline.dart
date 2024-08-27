@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/e
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
-import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -36,12 +35,10 @@ class OrganInventoryTimline extends ConsumerWidget {
             .when(
               data: (data) {
                 final List<EBTimelineEntity> caseTimeLine = data;
-                return DesktopClipper(
-                  widget: CaseTimeLineWidget(
-                    caseTimeLine: caseTimeLine,
-                    onCaseSelected: (EBTimelineEntity event) =>
-                        _handleCaseSelected(context, event),
-                  ),
+                return CaseTimeLineWidget(
+                  caseTimeLine: caseTimeLine,
+                  onCaseSelected: (EBTimelineEntity event) =>
+                      _handleCaseSelected(context, event),
                 );
               },
               loading: () => const Center(

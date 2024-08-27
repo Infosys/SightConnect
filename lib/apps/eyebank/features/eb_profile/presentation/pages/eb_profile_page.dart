@@ -7,7 +7,6 @@ import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
-import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -26,150 +25,148 @@ class EBProfilePage extends ConsumerWidget {
         elevation: kIsWeb ? 2 : 0,
         title: const Text('Profile'),
       ),
-      body: DesktopClipper(
-        widget: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                //top card starts here
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _squareAvatar(),
-                    const SizedBox(width: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          PersistentAuthStateService.authState.userId ??
-                              "John Doe",
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'ABCD EFGH IJK 1234',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        _rowListTile(
-                          title: "Gender",
-                          subtitle: "Male",
-                          title2: "Mobile",
-                          subtitle2:
-                              PersistentAuthStateService.authState.username ??
-                                  "+1234567890",
-                          isSpaceBetween: false,
-                          titleColor: AppColor.grey,
-                          subtitleColor: AppColor.black,
-                          titleSize: 12,
-                          subtitleSize: 16,
-                          // widthConstraint: AppSize.width(context) * 0.08,
-                          spaceBetween: 30,
-                          // widthConstraint2: AppSize.width(context) * 0.26,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                //top card ends here
-
-                //personal info card starts here
-                const SizedBox(height: 16),
-                const Text(
-                  'Personal Information',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                AppCard(
-                  margin: null,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              //top card starts here
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _squareAvatar(),
+                  const SizedBox(width: 20),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _rowListTile(
-                          title: "HPR ID",
-                          subtitle: "1234567890123456",
-                          title2: "Email ID",
-                          subtitle2: "priyarajarajan_r01@abcde.com",
-                          isSpaceBetween: false,
-                          titleColor: AppColor.grey,
-                          subtitleColor: AppColor.black,
-                          titleSize: 12,
-                          subtitleSize: 16,
-                          widthConstraint: AppSize.width(context) * 0.38,
-                          spaceBetween: 30
-                          // widthConstraint2: AppSize.width(context) * 0.26,
-                          ),
+                      Text(
+                        PersistentAuthStateService.authState.userId ??
+                            "John Doe",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       const SizedBox(height: 16),
+                      const Text(
+                        'ABCD EFGH IJK 1234',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
                       _rowListTile(
-                          title: "Address",
-                          subtitle: "123, ABCD Street, XYZ City, 123456",
-                          title2: "State",
-                          subtitle2: "State",
-                          isSpaceBetween: false,
-                          titleColor: AppColor.grey,
-                          subtitleColor: AppColor.black,
-                          titleSize: 12,
-                          subtitleSize: 16,
-                          widthConstraint: AppSize.width(context) * 0.38,
-                          spaceBetween: 30
-                          // widthConstraint2: AppSize.width(context) * 0.26,
-                          ),
-                      const SizedBox(height: 16),
-                      _rowListTile(
-                        title: "Pincode",
-                        subtitle: "123456",
-                        title2: "Country",
-                        subtitle2: "India",
+                        title: "Gender",
+                        subtitle: "Male",
+                        title2: "Mobile",
+                        subtitle2:
+                            PersistentAuthStateService.authState.username ??
+                                "+1234567890",
                         isSpaceBetween: false,
                         titleColor: AppColor.grey,
                         subtitleColor: AppColor.black,
                         titleSize: 12,
                         subtitleSize: 16,
-                        // widthConstraint: AppSize.width(context) * 0.2,
+                        // widthConstraint: AppSize.width(context) * 0.08,
                         spaceBetween: 30,
-                        widthConstraint2: AppSize.width(context) * 0.26,
+                        // widthConstraint2: AppSize.width(context) * 0.26,
                       ),
                     ],
                   ),
-                ),
-                //personal info card ends here
+                ],
+              ),
+              //top card ends here
 
-                SizedBox(height: AppSize.height(context) * 0.1),
-                OutlinedButton(
-                  onPressed: () {
-                    ref.read(initializationProvider).logout().then((value) {
-                      Fluttertoast.showToast(msg: loc.loggedOutMessage);
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        LoginPage.routeName,
-                        (route) => false,
-                      );
-                    }).catchError((e) {
-                      logger.e(
-                          "Apologies, we encountered a logout error in the mobile app. from OptometritianDashboardPage : $e");
-                      Fluttertoast.showToast(msg: loc.optoLogoutError);
-                    });
-                  },
-                  child: const Text('Logout'),
+              //personal info card starts here
+              const SizedBox(height: 16),
+              const Text(
+                'Personal Information',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+              AppCard(
+                margin: null,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _rowListTile(
+                        title: "HPR ID",
+                        subtitle: "1234567890123456",
+                        title2: "Email ID",
+                        subtitle2: "priyarajarajan_r01@abcde.com",
+                        isSpaceBetween: false,
+                        titleColor: AppColor.grey,
+                        subtitleColor: AppColor.black,
+                        titleSize: 12,
+                        subtitleSize: 16,
+                        widthConstraint: AppSize.width(context) * 0.38,
+                        spaceBetween: 30
+                        // widthConstraint2: AppSize.width(context) * 0.26,
+                        ),
+                    const SizedBox(height: 16),
+                    _rowListTile(
+                        title: "Address",
+                        subtitle: "123, ABCD Street, XYZ City, 123456",
+                        title2: "State",
+                        subtitle2: "State",
+                        isSpaceBetween: false,
+                        titleColor: AppColor.grey,
+                        subtitleColor: AppColor.black,
+                        titleSize: 12,
+                        subtitleSize: 16,
+                        widthConstraint: AppSize.width(context) * 0.38,
+                        spaceBetween: 30
+                        // widthConstraint2: AppSize.width(context) * 0.26,
+                        ),
+                    const SizedBox(height: 16),
+                    _rowListTile(
+                      title: "Pincode",
+                      subtitle: "123456",
+                      title2: "Country",
+                      subtitle2: "India",
+                      isSpaceBetween: false,
+                      titleColor: AppColor.grey,
+                      subtitleColor: AppColor.black,
+                      titleSize: 12,
+                      subtitleSize: 16,
+                      // widthConstraint: AppSize.width(context) * 0.2,
+                      spaceBetween: 30,
+                      widthConstraint2: AppSize.width(context) * 0.26,
+                    ),
+                  ],
+                ),
+              ),
+              //personal info card ends here
+
+              SizedBox(height: AppSize.height(context) * 0.1),
+              OutlinedButton(
+                onPressed: () {
+                  ref.read(initializationProvider).logout().then((value) {
+                    Fluttertoast.showToast(msg: loc.loggedOutMessage);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      LoginPage.routeName,
+                      (route) => false,
+                    );
+                  }).catchError((e) {
+                    logger.e(
+                        "Apologies, we encountered a logout error in the mobile app. from OptometritianDashboardPage : $e");
+                    Fluttertoast.showToast(msg: loc.optoLogoutError);
+                  });
+                },
+                child: const Text('Logout'),
+              ),
+            ],
           ),
         ),
       ),
