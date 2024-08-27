@@ -22,8 +22,7 @@ class CloudService {
   }
 
   Future<String> uploadImage(PlatformFile file) async {
-    const endpoint =
-        "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
+    const endpoint = "/services/filems/api/file/sync-upload?doc_type=eyebank";
 
     MultipartFile multipartFile;
     if (kIsWeb) {

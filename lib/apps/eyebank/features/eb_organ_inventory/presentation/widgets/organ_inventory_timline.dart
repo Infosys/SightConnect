@@ -28,9 +28,7 @@ class OrganInventoryTimline extends ConsumerWidget {
         body: ref
             .watch(ebOrganTimelineProvider(
               EbOrganTimlineParams(
-                encounterID: encounterID,
-                timelineVersion: timlineVersion,
-              ),
+                  encounterID: encounterID, timelineVersion: '0.0.1'),
             ))
             .when(
               data: (data) {
