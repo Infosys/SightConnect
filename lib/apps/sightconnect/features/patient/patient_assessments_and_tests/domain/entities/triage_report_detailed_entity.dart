@@ -68,6 +68,11 @@ class ObservationBriefEntity {
     this.bodySite,
     this.code,
   });
+
+   @override
+  String toString() {
+    return 'ObservationBriefEntity(observationValue: $observationValue, observationId: $observationId, observationValueIdentifier: $observationValueIdentifier, bodySite: $bodySite, code: $code)';
+  }
 }
 
 class ImageBriefEntity {
