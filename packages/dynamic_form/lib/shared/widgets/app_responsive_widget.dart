@@ -10,28 +10,18 @@ class AppResponsiveWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        double width;
         if (Responsive.isMobile(context)) {
-          width = constraints.maxWidth; // Full width on mobile
+          return SizedBox(
+            width: constraints.maxWidth,
+            child: widget,
+          );
+        } else {
+          return Container(
+            width: constraints.maxWidth * 0.33,
+            padding: const EdgeInsets.only(right: 16),
+            child: widget,
+          );
         }
-        // else if (widget is FormCheckbox ||
-        //     widget is FormFile ||
-        //     widget is FormSwitch ||
-        //     widget is FormRadio ||
-        //     widget is FormTextArea ||
-        //     widget is FormChip) {
-        //   width = constraints.maxWidth * 0.5;
-        // }
-
-        else {
-          width = constraints.maxWidth * 0.3;
-        }
-
-        return Container(
-          width: width,
-          padding: const EdgeInsets.only(right: 16),
-          child: widget,
-        );
       },
     );
   }

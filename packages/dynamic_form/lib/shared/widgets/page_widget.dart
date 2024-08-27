@@ -39,6 +39,7 @@ class PageWidget extends StatelessWidget {
           return Container();
         } else if (panel.type == FormPanelType.REPEATED_PANEL) {
           return AppDynamicPanel(
+            appCardPadding: 16,
             readOnly: readOnly,
             name: name,
             panel: panel,
@@ -74,6 +75,7 @@ class PageWidget extends StatelessWidget {
         log("DynamicFormType.PANEL && field.repeats == true");
         Log.i(field.initialValue);
         return AppDynamicPanel(
+          appCardPadding: 0,
           readOnly: readOnly,
           name: field.title,
           globalFormKey: key,

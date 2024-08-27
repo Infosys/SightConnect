@@ -80,34 +80,36 @@ class DynamicFormJsonMapper {
     final List<ElementElementClassEntity> elementEntities = [];
     if (elements != null) {
       for (final element in elements) {
-        elementEntities.add(
-          ElementElementClassEntity(
-            initialValue:
-                _getInitialValType(_mapToFormType(element.type), element),
-            type: _mapToFormType(element.type),
-            name: element.name.toString(),
-            title: element.title ?? '',
-            isRequired: element.isRequired ?? false,
-            requiredErrorText: element.requiredErrorText ?? '',
-            maxSize: element.maxSize ?? 0,
-            placeholder: element.placeholder ?? '',
-            description: element.description ?? '',
-            readOnly: element.readOnly ?? false,
-            min: element.min ?? 0,
-            max: element.max ?? 3,
-            step: element.step ?? 0,
-            choices: _getChoices(element.options),
-            validators: _getValidators(element.validators),
-            dependantField: element.dependantField,
-            conditions: _getConditions(element.conditions),
-            elements: _getElements(element.elements),
-            repeats: element.repeats ?? false,
-            minRepeat: element.minRepeat ?? 1,
-            maxRepeat: element.maxRepeat ?? 1,
-            inputType: element.inputType,
-            prefix: element.prefix,
-          ),
-        );
+        if (element.type != DynamicFormType.HIDDEN.name) {
+          elementEntities.add(
+            ElementElementClassEntity(
+              initialValue:
+                  _getInitialValType(_mapToFormType(element.type), element),
+              type: _mapToFormType(element.type),
+              name: element.name.toString(),
+              title: element.title ?? '',
+              isRequired: element.isRequired ?? false,
+              requiredErrorText: element.requiredErrorText ?? '',
+              maxSize: element.maxSize ?? 0,
+              placeholder: element.placeholder ?? '',
+              description: element.description ?? '',
+              readOnly: element.readOnly ?? false,
+              min: element.min ?? 0,
+              max: element.max ?? 3,
+              step: element.step ?? 0,
+              choices: _getChoices(element.options),
+              validators: _getValidators(element.validators),
+              dependantField: element.dependantField,
+              conditions: _getConditions(element.conditions),
+              elements: _getElements(element.elements),
+              repeats: element.repeats ?? false,
+              minRepeat: element.minRepeat ?? 1,
+              maxRepeat: element.maxRepeat ?? 1,
+              inputType: element.inputType,
+              prefix: element.prefix,
+            ),
+          );
+        }
       }
     }
     // Log.e(elementEntities.toList());
@@ -201,6 +203,9 @@ class DynamicFormJsonMapper {
 
       case 'DISPLAY':
         return DynamicFormType.DISPLAY;
+
+      case 'HIDDEN':
+        return DynamicFormType.HIDDEN;
 
       default:
         return DynamicFormType.DEFAULT;

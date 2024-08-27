@@ -20,12 +20,11 @@ class FormNestedPannelWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10),
         Text(
           field.title,
           style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 10),

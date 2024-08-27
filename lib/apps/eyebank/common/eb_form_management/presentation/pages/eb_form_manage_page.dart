@@ -5,7 +5,6 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/widgets/desktop_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,53 +43,51 @@ class EBFormManagePage extends ConsumerWidget {
     }
     return SafeArea(
       child: Scaffold(
-        body: DesktopClipper(
-          widget: ref
-              .watch(
-                ebFormManageProvider(
-                  EbStageParams(
-                    stageName: stageName,
-                    stageVersion: stageVersion,
-                    encounterId: encounterId,
-                    serviceRequestId: serviceRequestId,
-                  ),
-                ),
-              )
-              .when(
-                data: (json) {
-                  final data = json.displayFormData;
-                  final initialVal = json.formData;
-
-                  return DynamicFormPage(
-                    readOnly: _openInReadMode(status),
-                    canPop: _openInReadMode(status) ? false : true,
-                    enableDraft: true,
-                    json: data,
-                    initialValue: initialVal,
-                    onSubmit: (data, mode) {
-                      _handleSubmit(
-                        ref: ref,
-                        stageVersion: stageVersion,
-                        encounterId: encounterId,
-                        serviceRequestId: serviceRequestId,
-                        stageName: stageName,
-                        data: data,
-                        mode: mode,
-                        timelineName: timelineName,
-                        timelineVersion: timelineVersion,
-                        context: context,
-                      );
-                    },
-                  );
-                },
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                error: (error, stackTrace) => Center(
-                  child: Text('Error: $error'),
+        body: ref
+            .watch(
+              ebFormManageProvider(
+                EbStageParams(
+                  stageName: stageName,
+                  stageVersion: stageVersion,
+                  encounterId: encounterId,
+                  serviceRequestId: serviceRequestId,
                 ),
               ),
-        ),
+            )
+            .when(
+              data: (json) {
+                final data = json.displayFormData;
+                final initialVal = json.formData;
+
+                return DynamicFormPage(
+                  readOnly: _openInReadMode(status),
+                  canPop: _openInReadMode(status) ? false : true,
+                  enableDraft: true,
+                  json: data,
+                  initialValue: initialVal,
+                  onSubmit: (data, mode) {
+                    _handleSubmit(
+                      ref: ref,
+                      stageVersion: stageVersion,
+                      encounterId: encounterId,
+                      serviceRequestId: serviceRequestId,
+                      stageName: stageName,
+                      data: data,
+                      mode: mode,
+                      timelineName: timelineName,
+                      timelineVersion: timelineVersion,
+                      context: context,
+                    );
+                  },
+                );
+              },
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              error: (error, stackTrace) => Center(
+                child: Text('Error: $error'),
+              ),
+            ),
       ),
     );
   }

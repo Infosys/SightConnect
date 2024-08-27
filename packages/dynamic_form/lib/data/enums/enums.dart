@@ -13,7 +13,8 @@ enum DynamicFormType {
   CONDITIONAL,
   PANEL,
   DATE,
-  DISPLAY
+  DISPLAY,
+  HIDDEN,
 }
 
 enum FormLayoutType {

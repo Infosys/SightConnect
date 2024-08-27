@@ -15,6 +15,7 @@ class AppDynamicPanel extends StatefulWidget {
   final int minRepeat;
   final int maxRepeat;
   final bool readOnly;
+  final double appCardPadding;
 
   const AppDynamicPanel({
     super.key,
@@ -24,6 +25,7 @@ class AppDynamicPanel extends StatefulWidget {
     required this.name,
     required this.minRepeat,
     required this.maxRepeat,
+    required this.appCardPadding,
   });
 
   @override
@@ -161,7 +163,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppCard(
-                  // paddingAll: 0,
+                  paddingAll: widget.appCardPadding,
                   title: widget.name,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -174,10 +176,13 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton.icon(
-                        onPressed: widget.readOnly ? null : addPanel,
-                        icon: const Icon(Icons.add),
-                        label: const Text('Add'),
+                      Container(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: TextButton.icon(
+                          onPressed: widget.readOnly ? null : addPanel,
+                          icon: const Icon(Icons.add),
+                          label: const Text('Add'),
+                        ),
                       ),
                     ],
                   ),
