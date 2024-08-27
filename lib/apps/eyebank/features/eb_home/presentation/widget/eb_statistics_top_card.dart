@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dynamic_form/shared/widgets/generic_media_preview.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -23,17 +24,10 @@ class EbStatisticsTopCard extends ConsumerWidget {
         children: [
           InkWell(
             onTap: () async {
-              // TODO : Remove this code
-              // var response =
-              //     await ref.read(caseRegisterRepositoryProvider).postA1Form('84456728922');
-              // logger.i('Response: $response');
-              // response.fold(
-              //   (failure) {
-              //     EyeBankErrorCard.showErrorToast(failure, context);
-              //   },
-              //   (data) {
-              //     logger.i('Data: $data');
-              //   },
+              // showGenericMediaPreview(
+              //   context,
+              //   "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
+              //   isDialog: false,
               // );
             },
             child: AutoSizeText(
