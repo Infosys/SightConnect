@@ -1,4 +1,10 @@
 enum EBStageName {
+  UNDEFINED(
+    value: 'UNDEFINED',
+    displayValue: 'Undefined',
+  ),
+/////-------------------CORNEA DONATION-------------------/////
+
   DEATH_INTIMATION(
     value: 'DEATH_INTIMATION',
     displayValue: 'Death Intimation',

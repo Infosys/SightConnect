@@ -1,3 +1,6 @@
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_overview.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_request_button.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_request_overview.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -52,19 +55,11 @@ class OrganInventoryPage extends StatelessWidget {
         body: const TabBarView(
           physics: NeverScrollableScrollPhysics(),
           children: [
-            SizedBox(
-                child: Center(
-              child: Text("Coming Soon"),
-            )),
-            SizedBox(
-                child: Center(
-              child: Text("Coming Soon"),
-            )),
-            // OrganInventoryOverview(),
-            // OrganRequestOverview(),
+            OrganInventoryOverview(),
+            OrganRequestOverview(),
           ],
         ),
-        // floatingActionButton: const OrganRequestButton(),
+        floatingActionButton: const OrganRequestButton(),
       ),
     );
   }

@@ -7,6 +7,19 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+final records = List.generate(
+  10,
+  (index) => TableData(
+    eye: "Eye ${index + 1}",
+    category: "Category ${index + 1}",
+    date: DateTime.now(),
+    donor: "Donor ${index + 1}",
+    sampleID: "Sample ID ${index + 1}",
+    status: "Status ${index + 1}",
+    tissue: "Tissue ${index + 1}",
+  ),
+);
+
 class OrganRequestOverview extends StatelessWidget {
   const OrganRequestOverview({super.key});
 
@@ -16,19 +29,17 @@ class OrganRequestOverview extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: EbInfiniteScrollView<TableData>(
         fetchPageData: (pageKey, pageSize, filters) async {
-          final records = List.generate(
-            pageSize,
-            (index) => TableData(
-              eye: "Eye ${index + 1}",
-              category: "Category ${index + 1}",
+          return [
+            TableData(
+              eye: "",
+              category: "",
               date: DateTime.now(),
-              donor: "Donor ${index + 1}",
-              sampleID: "Sample ID ${index + 1}",
-              status: "Status ${index + 1}",
-              tissue: "Tissue ${index + 1}",
+              donor: "",
+              sampleID: "",
+              status: "",
+              tissue: "",
             ),
-          );
-          return Future.value(records);
+          ];
         },
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
@@ -42,11 +53,14 @@ class OrganRequestOverview extends StatelessWidget {
               final navigator = Navigator.of(context);
               navigator.push(
                 MaterialPageRoute(
-                    builder: (context) => const OrganInventoryTimline()),
+                  builder: (context) => const OrganInventoryTimline(
+                    encounterID: '12',
+                  ),
+                ),
               );
             },
             onAssignTissue: () {
-              _showAssignmentFlow(context, index);
+              // _showAssignmentFlow(context, index);
             },
           );
         },
@@ -202,14 +216,17 @@ class _OrganRequestCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton.icon(
+                onPressed: () {},
+                label: const Text('Rejected'),
+              ),
+              TextButton.icon(
                 onPressed: onAssignTissue,
-                label: const Text('Assign Tissue'),
-                icon: const Icon(Icons.add),
+                label: const Text('Accepted'),
               ),
             ],
           )
