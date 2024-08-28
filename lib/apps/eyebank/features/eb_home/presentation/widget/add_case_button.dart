@@ -128,6 +128,9 @@ class _CreateNewCaseSection extends StatelessWidget {
             ),
           ),
           ElevatedButton.icon(
+            style: kIsWeb
+                ? ElevatedButton.styleFrom(padding: const EdgeInsets.all(18))
+                : null,
             onPressed: onPressed,
             label: Text(
               buttonTxt,
