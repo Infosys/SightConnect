@@ -115,8 +115,8 @@ class VtTriageProvider extends ChangeNotifier {
     logger.d("triageUrgency called");
 
     bool triagePosted = _preliminaryAssessmentHelperProvider.triagePosted;
-    bool carePlanPosted = _preliminaryAssessmentHelperProvider.carePlanPosted;
-    bool isTest = _preliminaryAssessmentHelperProvider.isTest;
+    // bool carePlanPosted = _preliminaryAssessmentHelperProvider.carePlanPosted;
+    // bool isTest = _preliminaryAssessmentHelperProvider.isTest;
 
     if (!triagePosted) {
       logger.d("inside Triage Posted, triagePostedValue = $triagePosted");

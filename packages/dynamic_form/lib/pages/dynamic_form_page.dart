@@ -30,7 +30,7 @@ class DynamicFormPage extends StatefulWidget {
   final bool readOnly;
 
   @override
-  _DynamicFormPageState createState() => _DynamicFormPageState();
+  State<DynamicFormPage> createState() => _DynamicFormPageState();
 }
 
 class _DynamicFormPageState extends State<DynamicFormPage> {

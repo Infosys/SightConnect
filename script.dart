@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 void main() {
   final projectDir = Directory.current;
   final assetsDir = Directory('${projectDir.path}/assets');
@@ -32,11 +34,11 @@ void main() {
     RegExp(r'\bfaker\b', caseSensitive: false), // Faker data
   ];
 
-  print('Scanning lib directory: ${libDir.path}');
+  debugPrint('Scanning lib directory: ${libDir.path}');
   scanDirectory(libDir, sensitivePatterns, baseDir: libDir);
-  print('--- End of lib directory ---\n');
+  debugPrint('--- End of lib directory ---\n');
 
-  print('Listing .json files in assets, lib, and root directories:\n');
+  debugPrint('Listing .json files in assets, lib, and root directories:\n');
   listJsonFiles(projectDir, recursive: false); // Root directory, non-recursive
   listJsonFiles(assetsDir, recursive: true); // assets directory, recursive
   listJsonFiles(libDir, recursive: true); // lib directory, recursive
@@ -45,7 +47,7 @@ void main() {
 void scanDirectory(Directory dir, List<RegExp> sensitivePatterns,
     {Directory? baseDir}) {
   if (!dir.existsSync()) {
-    print('Directory ${dir.path} does not exist.');
+    debugPrint('Directory ${dir.path} does not exist.');
     return;
   }
 
@@ -69,27 +71,27 @@ void scanDirectory(Directory dir, List<RegExp> sensitivePatterns,
         }
       } catch (e) {
         // Skip files that cannot be read as text
-        print('Skipping file: $relativePath due to error: $e');
+        debugPrint('Skipping file: $relativePath due to error: $e');
       }
     }
   });
 
   if (filesWithSensitiveInfo.isNotEmpty) {
-    print(
+    debugPrint(
         '\x1B[31m// Files containing potential sensitive information:\x1B[0m');
     filesWithSensitiveInfo.forEach((filePath, sensitiveData) {
-      print('\x1B[34m$filePath:\x1B[0m');
+      debugPrint('\x1B[34m$filePath:\x1B[0m');
       for (var data in sensitiveData) {
-        print('  - \x1B[33m$data\x1B[0m');
+        debugPrint('  - \x1B[33m$data\x1B[0m');
       }
     });
-    print('');
+    debugPrint('');
   }
 }
 
 void listJsonFiles(Directory dir, {bool recursive = false}) {
   if (!dir.existsSync()) {
-    print('Directory ${dir.path} does not exist.');
+    debugPrint('Directory ${dir.path} does not exist.');
     return;
   }
 
@@ -100,10 +102,10 @@ void listJsonFiles(Directory dir, {bool recursive = false}) {
           entity.path.replaceFirst(dir.path, '').replaceFirst('/', ''));
 
   if (jsonFiles.isNotEmpty) {
-    print('Directory: ${dir.path}');
+    debugPrint('Directory: ${dir.path}');
     for (var file in jsonFiles) {
-      print('  - $file');
+      debugPrint('  - $file');
     }
-    print('');
+    debugPrint('');
   }
 }

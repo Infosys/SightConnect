@@ -10,44 +10,42 @@ class AdminDashboardPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: DefaultTabController(
         length: 4,
-        child: Container(
-          child: const Column(
-            children: [
-              TabBar(
-                physics: NeverScrollableScrollPhysics(),
-                labelColor: AppColor.primary,
-                unselectedLabelColor: AppColor.grey,
-                indicatorColor: AppColor.primary,
-                tabs: [
-                  Tab(
-                    text: 'Requests',
-                  ),
-                  Tab(
-                    text: 'Inventory',
-                  ),
-                  Tab(
-                    text: 'Distribution',
-                  ),
-                  Tab(
-                    text: 'Return Request',
-                  ),
+        child: Column(
+          children: [
+            TabBar(
+              physics: NeverScrollableScrollPhysics(),
+              labelColor: AppColor.primary,
+              unselectedLabelColor: AppColor.grey,
+              indicatorColor: AppColor.primary,
+              tabs: [
+                Tab(
+                  text: 'Requests',
+                ),
+                Tab(
+                  text: 'Inventory',
+                ),
+                Tab(
+                  text: 'Distribution',
+                ),
+                Tab(
+                  text: 'Return Request',
+                ),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  AdminRequestPage(),
+                  AdminInventoryPage(),
+                  AdminDistributionPage(),
+                  AdminReturnRequestPage()
                 ],
               ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    AdminRequestPage(),
-                    AdminInventoryPage(),
-                    AdminDistributionPage(),
-                    AdminReturnRequestPage()
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

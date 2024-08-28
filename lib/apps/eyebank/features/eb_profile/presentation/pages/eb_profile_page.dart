@@ -18,7 +18,7 @@ class EBProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    bool isWeb = kIsWeb;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.white,

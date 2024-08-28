@@ -102,27 +102,24 @@ class AdminReturnRequestDataSource extends DataTableSource {
   }
 
   @override
-  // TODO: implement isRowCountApproximate
   bool get isRowCountApproximate => false;
 
   @override
-  // TODO: implement rowCount
   int get rowCount => data.length;
 
   @override
-  // TODO: implement selectedRowCount
   int get selectedRowCount => 0;
 }
 
-_getColor(String priority) {
-  switch (priority) {
-    case "Pending":
-      return AppColor.lightRed;
-    case "In Transit":
-      return AppColor.yellow.withOpacity(0.2);
-    case "Delivered":
-      return AppColor.lightGreen;
-    default:
-      return AppColor.grey;
-  }
-}
+// _getColor(String priority) {
+//   switch (priority) {
+//     case "Pending":
+//       return AppColor.lightRed;
+//     case "In Transit":
+//       return AppColor.yellow.withOpacity(0.2);
+//     case "Delivered":
+//       return AppColor.lightGreen;
+//     default:
+//       return AppColor.grey;
+//   }
+// }

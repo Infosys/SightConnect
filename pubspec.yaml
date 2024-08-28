@@ -86,7 +86,6 @@ dependencies:
   go_router: ^14.2.1
   # app_settings: ^5.1.1
   flutter_email_sender: ^6.0.3
-  wolt_modal_sheet: ^0.8.0
   timelines: ^0.1.0
 
   flutter_miniapp_web_runner:

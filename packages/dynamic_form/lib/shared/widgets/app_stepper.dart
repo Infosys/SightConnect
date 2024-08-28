@@ -81,6 +81,7 @@ class AppStepperState extends State<AppStepper> {
                 const SizedBox(width: 16),
               ],
             ),
+            const SizedBox(height: 24),
           ],
         ),
       );
