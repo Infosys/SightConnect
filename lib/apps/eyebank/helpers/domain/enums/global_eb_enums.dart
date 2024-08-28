@@ -57,7 +57,7 @@ enum EBStatus {
   VERIFIED(value: 'VERIFIED', displayValue: 'Verified'),
   ACCEPTED(value: 'ACCEPTED', displayValue: 'Accepted'),
   REJECTED(value: 'REJECTED', displayValue: 'Rejected'),
-  UNKNOWN(value: 'UNKNOWN', displayValue: 'Yet to be updated');
+  UNKNOWN(value: 'UNKNOWN', displayValue: 'In Queue');
 
   final String value;
   final String displayValue;

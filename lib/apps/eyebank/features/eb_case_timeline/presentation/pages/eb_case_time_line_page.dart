@@ -2,7 +2,8 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
-import 'package:eye_care_for_all/shared/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,33 +26,34 @@ class EbCaseTimeLinePage extends ConsumerWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
-            children: [
-              const Text('Case Timeline'),
-              SizedBox(width: AppSize.width(context) * 0.322),
-              InkWell(
-                onTap: () {
-                  // showCustomWoltSheet(
-                  //   context,
-                  //   const EBRejectCaseSheet(
-                  //     caseID: 1234,
-                  //   ),
-                  // );
+          title: const Text('Case Timeline'),
+          actions: [
+            TextButton.icon(
+              onPressed: () {
+                // showCustomWoltSheet(
+                //   context,
+                //   const EBRejectCaseSheet(
+                //     caseID: 1234,
+                //   ),
+                // );
 
-                  Fluttertoast.showToast(msg: 'Soon to be implemented');
-                },
-                child: const Row(
-                  children: [
-                    Text(
-                      'REJECT',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.amber),
-                    ),
-                  ],
+                Fluttertoast.showToast(msg: 'Soon to be implemented');
+              },
+              icon: const Icon(
+                Icons.cancel,
+                size: 22,
+              ),
+              label: Text(
+                'REJECT',
+                style: applyRobotoFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.primary,
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(width: 16)
+          ],
         ),
         body: ref
             .watch(ebCaseTimeLineProvider(

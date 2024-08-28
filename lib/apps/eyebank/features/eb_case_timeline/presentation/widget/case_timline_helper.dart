@@ -219,7 +219,7 @@ class BaseCard extends StatelessWidget {
 class StatusUtils {
   static Color getStatusColor(EBStatus? status) {
     return switch (status) {
-      EBStatus.INITIATED => AppColor.grey,
+      EBStatus.INITIATED => AppColor.primary,
       EBStatus.PENDING => AppColor.orange,
       EBStatus.UNDER_PROCESS => AppColor.orange,
       EBStatus.SUBMITTED => AppColor.primary,

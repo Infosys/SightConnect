@@ -42,7 +42,7 @@ class OrganInventoryOverview extends StatelessWidget {
                 crossAxisSpacing: 10.0,
                 childAspectRatio: () {
                   if (Responsive.isMobile(context)) {
-                    return 1.5;
+                    return 1.0;
                   } else if (Responsive.isTablet(context)) {
                     return 1.0;
                   } else {

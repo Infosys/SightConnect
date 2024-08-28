@@ -241,6 +241,7 @@ Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
         spacing: 4,
         runSpacing: 4,
         children: item?.activeStages
+                .toSet()
                 .map((stage) =>
                     _buildOrganChip(context, stage.displayValue.toUpperCase()))
                 .toList() ??
