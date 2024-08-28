@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/e
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
-import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,6 +28,9 @@ class EbCaseTimeLinePage extends ConsumerWidget {
           title: const Text('Case Timeline'),
           actions: [
             TextButton.icon(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColor.red,
+              ),
               onPressed: () {
                 // showCustomWoltSheet(
                 //   context,
@@ -43,14 +45,7 @@ class EbCaseTimeLinePage extends ConsumerWidget {
                 Icons.cancel,
                 size: 22,
               ),
-              label: Text(
-                'REJECT',
-                style: applyRobotoFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.primary,
-                ),
-              ),
+              label: const Text('REJECT'),
             ),
             const SizedBox(width: 16)
           ],
