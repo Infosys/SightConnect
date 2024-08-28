@@ -65,6 +65,9 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       final endPoint = '/services/eyebank/api/encounters/$encounterID/timeline';
       final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
+        logger.d({
+          "RESPONSE CONFIG": response.data,
+        });
         return (response.data as List)
             .map((e) => EBTimelineModel.fromJson(e))
             .toList();

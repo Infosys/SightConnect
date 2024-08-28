@@ -7,17 +7,19 @@ import 'package:eye_care_for_all/main.dart';
 class EBTimelineMapper {
   static List<EBTimelineEntity> mapToEntity(
       List<EBTimelineModel> model, EbTimelineConfigModel configModel) {
-    logger.d("data inside mapper is $model \n $configModel");
+    // logger.d("EBTimelineMapper.mapToEntity");
+    // logger.d(model);
+    // logger.d("configModel");
+    // logger.d(configModel);
     List<EBTimelineEntity> data = [];
+
     for (var m in model) {
       data.add(EBTimelineEntity(
         timelineName: configModel.timelineName,
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: m.serviceRequestId,
         stage: _getStageName(m.stage),
-        title: configModel.stages!
-            .firstWhere((element) => element.stageName == m.stage)
-            .title,
+        title: m.title,
         stageVersion: _getStageVersion(m.stage, configModel),
         status: _getCaseStatus(m.status ?? ""),
         initiateDate: m.initiateDate,
@@ -25,7 +27,7 @@ class EBTimelineMapper {
         subStages: null,
       ));
     }
-    logger.f(data);
+    logger.f("ACTIVE STAGES: $data}");
     final newConfigModel = configModel.copyWith(
       stages: configModel.stages!
           .where((stage) => !model.any((element) {
@@ -37,6 +39,7 @@ class EBTimelineMapper {
               }))
           .toList(),
     );
+
     logger.d("newConfigModel: $newConfigModel");
 
     for (var stage in newConfigModel.stages!) {
@@ -54,6 +57,7 @@ class EBTimelineMapper {
       ));
     }
 
+    //logger.d("FINAL STAGES $data");
     return data;
   }
 
