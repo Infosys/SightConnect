@@ -18,7 +18,7 @@ class FormTextArea extends StatelessWidget {
     return FormBuilderTextField(
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      initialValue: field.initialValue,
+      initialValue: field.initialValue?.toString(),
       name: field.name,
       decoration: InputDecoration(
         labelText: field.title,
