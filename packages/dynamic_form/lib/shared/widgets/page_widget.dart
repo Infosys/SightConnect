@@ -43,7 +43,7 @@ class PageWidget extends StatelessWidget {
             readOnly: readOnly,
             name: name,
             panel: panel,
-            formKey: formKey,
+            globalFormKey: formKey,
             minRepeat: panel.minRepeat ?? 1,
             maxRepeat: panel.maxRepeat ?? panel.minRepeat ?? 1,
           );
@@ -78,7 +78,7 @@ class PageWidget extends StatelessWidget {
           appCardPadding: 0,
           readOnly: readOnly,
           name: field.title,
-          formKey: key,
+          globalFormKey: key,
           minRepeat: field.minRepeat ?? 1,
           maxRepeat: field.maxRepeat ?? 1,
           panel: PageElementEntity(

@@ -10,7 +10,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class AppDynamicPanel extends StatefulWidget {
   final PageElementEntity panel;
-  final GlobalKey<FormBuilderState> formKey;
+  final GlobalKey<FormBuilderState> globalFormKey;
   final String name;
   final int minRepeat;
   final int maxRepeat;
@@ -21,7 +21,7 @@ class AppDynamicPanel extends StatefulWidget {
     super.key,
     this.readOnly = false,
     required this.panel,
-    required this.formKey,
+    required this.globalFormKey,
     required this.name,
     required this.minRepeat,
     required this.maxRepeat,
@@ -34,7 +34,7 @@ class AppDynamicPanel extends StatefulWidget {
 
 class _AppDynamicPanelState extends State<AppDynamicPanel>
     with AutomaticKeepAliveClientMixin {
-  // final formKey = GlobalKey<FormBuilderState>();
+  final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
   Map<String, dynamic> formatedInitialValue = {};
   @override
@@ -49,7 +49,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       _createdPrefilledPanels();
     } else {
       for (int i = 0; i < widget.minRepeat; i++) {
-        repeatedPanelKeys.add(getUniqueKey(i));
+        repeatedPanelKeys.add(getUniqueKey());
       }
     }
   }
@@ -60,7 +60,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       log("Length: ${prefilledPanels.length}");
 
       for (int i = 0; i < prefilledPanels.length; i++) {
-        var key = getUniqueKey(i);
+        var key = getUniqueKey();
         Log.f(key);
         repeatedPanelKeys.add(key);
       }
@@ -94,7 +94,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
     }
 
     setState(() {
-      repeatedPanelKeys.add(getUniqueKey(repeatedPanelKeys.length));
+      repeatedPanelKeys.add(getUniqueKey());
     });
   }
 
@@ -103,13 +103,13 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       repeatedPanelKeys.remove(key);
     });
 
-    List<String> toDeleteKeys = widget.formKey.currentState!.fields.keys
+    List<String> toDeleteKeys = formKey.currentState!.fields.keys
         .where((element) => element.contains(key))
         .toList();
     for (var element in toDeleteKeys) {
       Future.microtask(() {
-        widget.formKey.currentState?.fields[element]?.reset();
-        widget.formKey.currentState?.removeInternalFieldValue(element);
+        formKey.currentState?.fields[element]?.reset();
+        formKey.currentState?.removeInternalFieldValue(element);
       });
     }
 
@@ -117,63 +117,87 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
     setState(() {});
   }
 
-  String getUniqueKey(int index) {
-    return "[$index]";
+  String getUniqueKey() {
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 
-  // List<dynamic> _formatValue(Map<String, dynamic> value) {
-  //   List<dynamic> toConvert = [];
+  List<dynamic> _formatValue(Map<String, dynamic> value) {
+    List<dynamic> toConvert = [];
 
-  //   for (var key in repeatedPanelKeys) {
-  //     Map<String, dynamic> temp = {};
-  //     for (var element in value.entries) {
-  //       if (element.key.contains(key)) {
-  //         temp[element.key.split('_').first] = element.value;
-  //       }
-  //     }
-  //     toConvert.add(temp);
-  //   }
+    for (var key in repeatedPanelKeys) {
+      Map<String, dynamic> temp = {};
+      for (var element in value.entries) {
+        if (element.key.contains(key)) {
+          temp[element.key.split('_').first] = element.value;
+        }
+      }
+      toConvert.add(temp);
+    }
 
-  //   return toConvert;
-  // }
+    return toConvert;
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          AppCard(
-            paddingAll: widget.appCardPadding,
-            title: widget.name,
+    return FormBuilderField(
+      validator: (value) {
+        formKey.currentState?.validate();
+        return null;
+      },
+      enabled: !widget.readOnly,
+      name: widget.panel.name,
+      onSaved: (newValue) {
+        formKey.currentState?.save();
+
+        final value = formKey.currentState?.value;
+
+        final formatedValue = _formatValue(value ?? {});
+
+        widget.globalFormKey.currentState?.fields[widget.panel.name]
+            ?.didChange(formatedValue);
+      },
+      builder: (field) {
+        return FormBuilder(
+          enabled: !widget.readOnly,
+          key: formKey,
+          child: SizedBox(
+            width: double.infinity,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: repeatedPanelKeys
-                  .map((key) => buildRepeatedPanel(key))
-                  .toList(),
-            ),
-          ),
-          if (repeatedPanelKeys.length < widget.maxRepeat)
-            Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: TextButton.icon(
-                    onPressed: widget.readOnly ? null : addPanel,
-                    icon: const Icon(Icons.add),
-                    label: const Text('Add'),
+                AppCard(
+                  paddingAll: widget.appCardPadding,
+                  title: widget.name,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: repeatedPanelKeys
+                        .map((key) => buildRepeatedPanel(key))
+                        .toList(),
                   ),
                 ),
+                if (repeatedPanelKeys.length < widget.maxRepeat)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: TextButton.icon(
+                          onPressed: widget.readOnly ? null : addPanel,
+                          icon: const Icon(Icons.add),
+                          label: const Text('Add'),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -201,11 +225,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
-                children: buildFields(
-                  widget.panel.elements,
-                  widget.formKey,
-                  key,
-                ),
+                children: buildFields(widget.panel.elements, formKey, key),
               ),
               const SizedBox(height: 16),
               const Divider(),
@@ -226,13 +246,8 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
     }
 
     return fields.map((ElementElementClassEntity field) {
-      String panelName = widget.panel.name;
-      String fieldName = field.name;
-      List<String> split = fieldName.split(panelName);
-      // Log.f("$panelName$keyExtension${split[1]}");
-
       field = field.copyWith(
-        name: "$panelName$keyExtension${split[1]}",
+        name: '${field.name}_$keyExtension',
       );
       field = field.copyWith(
         initialValue: formatedInitialValue[field.name],
