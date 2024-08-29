@@ -3,7 +3,9 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentatio
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
@@ -65,7 +67,7 @@ class AddCaseButton extends StatelessWidget {
                     );
                     res.fold((l) {
                       logger.e(l);
-                      Fluttertoast.showToast(msg: l.errorMessage);
+                      EyeBankErrorCard.showErrorToast(l, context);
                     }, (r) {
                       // invalidating recent cases provider to refresh the list
                       ref.invalidate(ebGetRecordsProvider);
@@ -80,18 +82,28 @@ class AddCaseButton extends StatelessWidget {
             },
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, stackTrace) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Error loading case registration JSON'),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      ref.invalidate(ebIntimationFormProvider);
-                    },
-                    child: const Text('Retry'),
-                  ),
-                ],
+              logger.e(error);
+              String msg = "";
+              if (error is EBFailure) {
+                msg = error.errorMessage;
+              } else {
+                msg = "An error occurred. Please try again later.";
+              }
+              return Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(msg),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.invalidate(ebIntimationFormProvider);
+                      },
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
               );
             },
           );

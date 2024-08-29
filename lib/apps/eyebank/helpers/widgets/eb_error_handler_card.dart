@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class EyeBankErrorCard {
+  EyeBankErrorCard._();
   static void showErrorDialog(EBFailure failure, BuildContext context) {
     int statusCode = failure.statusCode ?? 500;
     String statusMessage = failure.errorMessage;

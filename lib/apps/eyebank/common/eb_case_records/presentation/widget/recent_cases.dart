@@ -2,6 +2,8 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentatio
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +87,17 @@ class RecentCases extends ConsumerWidget {
               ),
             );
           },
-          error: (error, s) => Center(child: Text('Error: $error')),
+          error: (error, s) {
+            logger.e(error);
+            String msg = "";
+            if (error is EBFailure) {
+              msg = error.errorMessage;
+            } else {
+              msg = "An error occurred. Please try again later.";
+            }
+
+            return Center(child: Text(msg));
+          },
           loading: () => const Center(child: CircularProgressIndicator()),
         );
   }

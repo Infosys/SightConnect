@@ -3,6 +3,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentatio
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/case_register_tile.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/pages/eb_case_time_line_page.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,10 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
         final nextPageKey = pageKey + (newItems.content?.length ?? 0);
         _pagingController.appendPage(newItems.content ?? [], nextPageKey);
       }
+    } on EBFailure catch (error) {
+      _pagingController.error = error;
     } catch (error) {
+      logger.e(error);
       _pagingController.error = error;
     }
   }
@@ -318,7 +322,6 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(56.0);
 
   String getHintText(String selectedFilter) {
