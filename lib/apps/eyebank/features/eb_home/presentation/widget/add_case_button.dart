@@ -135,8 +135,8 @@ class _CreateNewCaseSection extends StatelessWidget {
         children: [
           Text(
             'Create New Case',
-            style: applyRobotoFont(
-              fontSize: 12,
+            style: applyFiraSansFont(
+              fontSize: 16,
             ),
           ),
           ElevatedButton.icon(

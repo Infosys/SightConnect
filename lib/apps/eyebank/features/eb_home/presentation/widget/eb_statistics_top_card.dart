@@ -22,12 +22,13 @@ class EbStatisticsTopCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AutoSizeText(
-            'Overview',
+            'Cornea Statistics',
             style: applyFiraSansFont(
               fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppSize.km),
+          const SizedBox(height: AppSize.ks),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: SingleChildScrollView(
@@ -37,10 +38,24 @@ class EbStatisticsTopCard extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildColumn('-', 'Overall', context, isSelected: true),
-                    _buildColumn('-', 'Today', context),
-                    _buildColumn('-', 'Active', context),
-                    _buildColumn('-', 'Rejected', context),
+                    _buildColumn(
+                      '2343',
+                      'Available',
+                      context,
+                      isSelected: true,
+                    ),
+                    const SizedBox(width: 4),
+                    _buildColumn(
+                      '328320',
+                      'Transplanted',
+                      context,
+                    ),
+                    const SizedBox(width: 4),
+                    _buildColumn(
+                      '298',
+                      'Rejected',
+                      context,
+                    ),
                   ],
                 ),
               ),
