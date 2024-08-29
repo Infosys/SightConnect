@@ -21,6 +21,7 @@ class RecentCases extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebGetRecordsProvider(params)).when(
           data: (data) {
+            logger.i(data);
             return Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
@@ -65,9 +66,12 @@ class RecentCases extends ConsumerWidget {
                     padding: const EdgeInsets.all(0),
                     itemBuilder: (context, index) {
                       final item = data.content?[index];
+                      if (item == null) {
+                        return const SizedBox();
+                      }
 
                       return EBCaseCard(
-                        item: item!,
+                        item: item,
                         isCompact: true,
                         onTap: () {
                           final navigator = Navigator.of(context);

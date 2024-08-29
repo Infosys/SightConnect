@@ -23,10 +23,6 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
   @override
   Future<Either<EBFailure, EncounterBriefModel>> getAllEncounters(
       GetAllEncountersParams params) {
-    //REMOVE THIS FOR PRODUCTION
-    // return Future.value(
-    //     Right(EncounterBriefModel.fromJson(Faker.dummyEncounterBrief)));
-
     return EyeBankErrorHandler.handle(() async {
       const endPoint = '/services/eyebank/api/encounters';
       final queryParams = {
@@ -43,7 +39,6 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
       );
 
       if (response.statusCode == 200) {
-        log(EncounterBriefModel.fromJson(response.data).toString());
         return EncounterBriefModel.fromJson(response.data);
       } else {
         throw Exception(response.statusMessage ?? 'Error in getAllEncounters');
@@ -56,7 +51,8 @@ class CaseRegisterRepositoryImpl extends CaseRegisterRepository {
       SearchEncounterParams params) {
     return EyeBankErrorHandler.handle(() async {
       logger.f(
-          "Search Encounter Params: identifier : ${params.identifier}, identifierType: ${params.identifierType}, mobile: ${params.mobile}, page: ${params.page}, size: ${params.size}");
+        "Search Encounter Params: identifier : ${params.identifier}, identifierType: ${params.identifierType}, mobile: ${params.mobile}, page: ${params.page}, size: ${params.size}",
+      );
       const endPoint = "/services/eyebank/api/encounters/search";
       final queryParams = {
         'page': params.page,

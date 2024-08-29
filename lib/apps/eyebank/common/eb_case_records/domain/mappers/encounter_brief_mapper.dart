@@ -27,7 +27,7 @@ class EncounterBriefMapper {
             encounterId: contentModel.encounterId,
             timelineName: contentModel.timelineName,
             timelineVersion: contentModel.timelineVersion,
-            activeStages: _getStageName(contentModel.activeStages),
+            activeStages: _getStageName(contentModel.activeStages) ?? [],
             donorBrief: contentModel.donorBrief != null
                 ? DonorBriefEntity(
                     id: contentModel.donorBrief?.id,
@@ -69,11 +69,16 @@ class EncounterBriefMapper {
         .toList();
   }
 
-  static _getStageName(List<String>? data) {
+  static List<EBStageName>? _getStageName(List<String>? data) {
     const stages = EBStageName.values;
-    return data?.map((e) {
-      final stage = stages.firstWhere((element) => element.name == e);
-      return stage;
-    }).toList();
+
+    return data
+        ?.map((e) {
+          final stage = stages.firstWhere((element) => element.name == e,
+              orElse: () => EBStageName.UNDEFINED);
+          return stage;
+        })
+        .where((stage) => stage != stages.first)
+        .toList();
   }
 }

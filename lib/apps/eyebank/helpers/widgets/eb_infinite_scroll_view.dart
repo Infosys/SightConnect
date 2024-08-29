@@ -189,7 +189,7 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                 child: Text('No items found'),
               ),
               noMoreItemsIndicatorBuilder: (context) => const Center(
-                child: Text('No more items'),
+                child: SizedBox(),
               ),
             ),
           ),
