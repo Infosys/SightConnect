@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,18 +26,6 @@ class EBStageAnalytics extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String formatNumber(int number) {
-      if (number >= 1000000000) {
-        return '${(number / 1000000000).toStringAsFixed(1)}B';
-      } else if (number >= 1000000) {
-        return '${(number / 1000000).toStringAsFixed(1)}M';
-      } else if (number >= 1000) {
-        return '${(number / 1000).toStringAsFixed(1)}K';
-      } else {
-        return number.toString();
-      }
-    }
-
     final stagesAsyncValue = ref.watch(stageAnalyticsProvider);
 
     return Padding(
@@ -56,19 +47,6 @@ class EBStageAnalytics extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
             child: stagesAsyncValue.when(
               data: (stages) => Wrap(
                 spacing: 8.0,
@@ -77,7 +55,7 @@ class EBStageAnalytics extends ConsumerWidget {
                   return EBStageStatsTile(
                     icon: Icons.circle,
                     title: stage['stageName'].toString(),
-                    value: formatNumber(stage['count'] as int),
+                    value: stage['count'].toString().formatNumber(),
                     color: AppColor.green,
                   );
                 }).toList(),
@@ -114,7 +92,8 @@ class EBStageStatsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 190,
+      height: 60,
+      width: min(170, MediaQuery.of(context).size.width / 2.2),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -131,7 +110,7 @@ class EBStageStatsTile extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: color.withOpacity(0.3),
@@ -139,24 +118,24 @@ class EBStageStatsTile extends StatelessWidget {
             child: Icon(
               icon,
               color: color,
-              size: 18,
+              size: 14,
             ),
           ),
           const SizedBox(width: 8),
-          Flexible(
+          Expanded(
             child: Text(
               title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: applyFiraSansFont(
-                fontSize: 14,
+                fontSize: 12,
               ),
             ),
           ),
           const SizedBox(width: 8),
           Text(
             value,
-            style: applyFiraSansFont(fontSize: 14, fontWeight: FontWeight.w500),
+            style: applyFiraSansFont(fontSize: 12, fontWeight: FontWeight.w500),
           ),
         ],
       ),

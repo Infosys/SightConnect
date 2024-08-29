@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -89,7 +90,7 @@ class EbStatisticsTopCard extends ConsumerWidget {
               maxFontSize: 14,
             ),
           AutoSizeText(
-            number,
+            number.formatNumber(),
             style: applyFiraSansFont(
               fontSize: 24,
               color: isSelected ? AppColor.white : AppColor.primary,
