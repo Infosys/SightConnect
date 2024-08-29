@@ -43,7 +43,9 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   @override
   void initState() {
     super.initState();
-    if (widget.panel.initialValue != null) {
+
+    if (widget.panel.initialValue != null &&
+        widget.panel.initialValue!.isNotEmpty) {
       _createdPrefilledPanels();
     } else {
       for (int i = 0; i < widget.minRepeat; i++) {
