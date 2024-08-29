@@ -39,7 +39,7 @@ class FormFile extends HookWidget {
     final images = useState<List<String>>(getInitialValue());
     final showAllImages = useState<bool>(false);
     final isLoading = useState<bool>(false);
-    final readOnly = field.initialValue != null;
+
     useEffect(() {
       // Update the form state with the initial value
       onChanged(images.value);
@@ -47,7 +47,6 @@ class FormFile extends HookWidget {
     }, []);
 
     return FormField<List<String>>(
-      enabled: !readOnly,
       initialValue: images.value,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -59,7 +58,7 @@ class FormFile extends HookWidget {
       },
       builder: (state) {
         return IgnorePointer(
-          ignoring: readOnly,
+          ignoring: state.widget.enabled,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,

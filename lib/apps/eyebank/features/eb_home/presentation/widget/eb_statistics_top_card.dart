@@ -21,19 +21,10 @@ class EbStatisticsTopCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          InkWell(
-            onTap: () async {
-              // showGenericMediaPreview(
-              //   context,
-              //   "https://www.irs.gov/pub/irs-pdf/fw4.pdf",
-              //   isDialog: false,
-              // );
-            },
-            child: AutoSizeText(
-              'Overview',
-              style: applyFiraSansFont(
-                fontSize: 16,
-              ),
+          AutoSizeText(
+            'Overview',
+            style: applyFiraSansFont(
+              fontSize: 16,
             ),
           ),
           const SizedBox(height: AppSize.km),
