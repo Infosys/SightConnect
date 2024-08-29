@@ -162,84 +162,8 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedFilter = useState<String>("mobile");
-    final List<PopupMenuEntry> filterOptions = [
-      PopupMenuItem(
-        value: "mobile",
-        child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            color: selectedFilter.value == "mobile"
-                ? AppColor.primary
-                : Colors.white,
-            child: Text(
-              'Mobile Number',
-              style: applyRobotoFont(
-                color: selectedFilter.value == "mobile"
-                    ? Colors.white
-                    : Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
-            )),
-      ),
-      PopupMenuItem(
-        value: "ENCOUNTER",
-        child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            width: double.infinity,
-            color: selectedFilter.value == "ENCOUNTER"
-                ? AppColor.primary
-                : Colors.white,
-            child: Text(
-              'Encounter ID',
-              style: applyRobotoFont(
-                color: selectedFilter.value == "ENCOUNTER"
-                    ? Colors.white
-                    : Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
-            )),
-      ),
-      PopupMenuItem(
-        value: "SERVICE_REQUEST",
-        child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            width: double.infinity,
-            color: selectedFilter.value == "SERVICE_REQUEST"
-                ? AppColor.primary
-                : Colors.white,
-            child: Text(
-              'Service Request ID',
-              style: applyRobotoFont(
-                color: selectedFilter.value == "SERVICE_REQUEST"
-                    ? Colors.white
-                    : Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
-            )),
-      ),
-      PopupMenuItem(
-        value: "BDP",
-        child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            width: double.infinity,
-            color:
-                selectedFilter.value == "BDP" ? AppColor.primary : Colors.white,
-            child: Text(
-              'BDP ID',
-              style: applyRobotoFont(
-                color:
-                    selectedFilter.value == "BDP" ? Colors.white : Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
-            )),
-      ),
-    ];
-
+    var selectedFilter = useState<_IdentifierDataType>(_IdentifierDataType.MOBILE);
+    final List<PopupMenuEntry> filterOptions = getFilterOptions(selectedFilter);
     return AppBar(
       backgroundColor: Colors.white,
       leading: IconButton(
@@ -299,19 +223,19 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
                 },
                 onSelected: (value) {
                   if (value == 'mobile') {
-                    selectedFilter.value = 'mobile';
+                    selectedFilter.value = _IdentifierDataType.MOBILE;
                     onFilter?.call('mobile');
                   }
                   if (value == 'ENCOUNTER') {
-                    selectedFilter.value = 'ENCOUNTER';
+                    selectedFilter.value = _IdentifierDataType.ENCOUNTER;
                     onFilter?.call('ENCOUNTER');
                   }
                   if (value == 'SERVICE_REQUEST') {
-                    selectedFilter.value = 'SERVICE_REQUEST';
+                    selectedFilter.value = _IdentifierDataType.SERVICE_REQUEST;
                     onFilter?.call('SERVICE_REQUEST');
                   }
                   if (value == 'BDP') {
-                    selectedFilter.value = 'BDP';
+                    selectedFilter.value = _IdentifierDataType.BDP;
                     onFilter?.call('BDP');
                   }
                 }),
@@ -324,19 +248,105 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(56.0);
 
-  String getHintText(String selectedFilter) {
-    if (selectedFilter == 'mobile') {
+  String getHintText(_IdentifierDataType selectedFilter) {
+    if (selectedFilter == _IdentifierDataType.MOBILE) {
       return 'Search by Mobile Number';
     }
-    if (selectedFilter == 'ENCOUNTER') {
+    if (selectedFilter == _IdentifierDataType.ENCOUNTER) {
       return 'Search by Encounter ID';
     }
-    if (selectedFilter == 'SERVICE_REQUEST') {
+    if (selectedFilter == _IdentifierDataType.SERVICE_REQUEST) {
       return 'Search by Service Request ID';
     }
-    if (selectedFilter == 'BDP') {
+    if (selectedFilter == _IdentifierDataType.BDP) {
       return 'Search by BDP ID';
     }
     return '';
   }
+
+  List<PopupMenuEntry> getFilterOptions(ValueNotifier<_IdentifierDataType> selectedFilter) {
+    return <PopupMenuEntry>[
+      PopupMenuItem(
+        value: "mobile",
+        child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            color: selectedFilter.value == _IdentifierDataType.MOBILE
+                ? AppColor.primary
+                : Colors.white,
+            child: Text(
+              'Mobile Number',
+              style: applyRobotoFont(
+                color: selectedFilter.value == _IdentifierDataType.MOBILE
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+      PopupMenuItem(
+        value: "ENCOUNTER",
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            color: selectedFilter.value == _IdentifierDataType.ENCOUNTER
+                ? AppColor.primary
+                : Colors.white,
+            child: Text(
+              'Encounter ID',
+              style: applyRobotoFont(
+                color: selectedFilter.value == _IdentifierDataType.ENCOUNTER
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+      PopupMenuItem(
+        value: "SERVICE_REQUEST",
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            color: selectedFilter.value == _IdentifierDataType.SERVICE_REQUEST
+                ? AppColor.primary
+                : Colors.white,
+            child: Text(
+              'Service Request ID',
+              style: applyRobotoFont(
+                color: selectedFilter.value == _IdentifierDataType.SERVICE_REQUEST
+                    ? Colors.white
+                    : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+      PopupMenuItem(
+        value: "BDP",
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            width: double.infinity,
+            color:
+                selectedFilter.value == _IdentifierDataType.BDP ? AppColor.primary : Colors.white,
+            child: Text(
+              'BDP ID',
+              style: applyRobotoFont(
+                color:
+                    selectedFilter.value == _IdentifierDataType.BDP ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
+            )),
+      ),
+    ];
+  }
+}
+
+enum _IdentifierDataType {
+  MOBILE,
+  ENCOUNTER,
+  SERVICE_REQUEST,
+  BDP,
 }
