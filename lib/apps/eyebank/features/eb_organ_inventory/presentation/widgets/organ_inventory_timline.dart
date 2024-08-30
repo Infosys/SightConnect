@@ -73,7 +73,7 @@ class OrganInventoryTimline extends ConsumerWidget {
     //   return;
     // }
 
-    logger.i(event.toString());
+    // logger.i(event.toString());
 
     final navigator = Navigator.of(context);
     navigator.push(

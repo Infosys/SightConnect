@@ -141,11 +141,47 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         );
       } else {
         Log.e('Form validation failed');
+
+        _showSnackBar('Please fill all required fields');
       }
     } catch (e, stackTrace) {
       Log.e('Error occurred: $e');
       Log.e('Stack trace: $stackTrace');
     }
+  }
+
+  void _showSnackBar(String message) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.removeCurrentSnackBar();
+    scaffold.showSnackBar(
+      SnackBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: const Color(0xFF296DF6),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        content: Row(
+          children: [
+            const Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 8.0),
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

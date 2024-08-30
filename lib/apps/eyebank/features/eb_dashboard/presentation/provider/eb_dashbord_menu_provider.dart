@@ -44,12 +44,12 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     ),
     MenuItem(
       id: 1,
-      title: "Patient Records",
+      title: "Recipient Records",
       icon: Icons.list,
     ),
     MenuItem(
       id: 2,
-      title: "Organ Inventory",
+      title: "Inventory",
       icon: Icons.inventory,
     ),
     MenuItem(

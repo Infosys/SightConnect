@@ -25,18 +25,18 @@ class EbHomeStageAnalyticsCard extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                children: [
-                  Text(
-                    'Stage Analytics',
-                    style: applyFiraSansFont(
-                      fontSize: 16,
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-              const SizedBox(height: 16),
+              // Row(
+              //   children: [
+              //     Text(
+              //       'Stage Analytics',
+              //       style: applyFiraSansFont(
+              //         fontSize: 16,
+              //       ),
+              //     ),
+              //     const Spacer(),
+              //   ],
+              // ),
+              // const SizedBox(height: 16),
               Container(
                 child: stagesAsyncValue.when(
                   data: (stages) => Wrap(

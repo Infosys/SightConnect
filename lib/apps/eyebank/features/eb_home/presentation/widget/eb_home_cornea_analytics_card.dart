@@ -22,14 +22,6 @@ class EbHomeCorneaAnalyticsCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          AutoSizeText(
-            'Cornea Statistics',
-            style: applyFiraSansFont(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: AppSize.ks),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: SingleChildScrollView(
