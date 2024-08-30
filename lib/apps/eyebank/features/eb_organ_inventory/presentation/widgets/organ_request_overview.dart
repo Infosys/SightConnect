@@ -146,31 +146,10 @@ class _OrganRequestCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Chip(
-              //   padding: const EdgeInsets.all(2),
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.circular(8.0),
-              //   ),
-              //   label: Text(priority),
-              //   backgroundColor: AppColor.mediumRed,
-              //   labelStyle: applyFiraSansFont(
-              //     fontSize: 12.0,
-              //     color: Colors.white,
-              //     fontWeight: FontWeight.w500,
-              //   ),
-              // ),
               const SizedBox(width: 8.0),
-              ActionChip(
+              TextButton(
                 onPressed: onTimeLine,
-                padding: const EdgeInsets.all(2),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                label: const Icon(
-                  Icons.timeline,
-                  color: Colors.white,
-                ),
-                backgroundColor: AppColor.mediumOrange,
+                child: const Text("View Timeline"),
               ),
             ],
           ),
@@ -204,16 +183,26 @@ class _OrganRequestCard extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton.icon(
                 onPressed: () {},
-                label: const Text('Rejected'),
+                style: TextButton.styleFrom(
+                  foregroundColor: AppColor.red,
+                ),
+                label: const Text('Reject'),
+                icon: const Icon(
+                  Icons.close,
+                  size: 18,
+                ),
               ),
               TextButton.icon(
-                onPressed: onAssignTissue,
-                label: const Text('Accepted'),
-              ),
+                  onPressed: onAssignTissue,
+                  label: const Text('Accept'),
+                  icon: const Icon(
+                    Icons.check,
+                    size: 18,
+                  )),
             ],
           )
         ],

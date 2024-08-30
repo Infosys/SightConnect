@@ -85,6 +85,10 @@ enum EBStageName {
       orElse: () => EBStageName.UNDEFINED,
     );
   }
+
+  // remove undefined from the list
+  static List<EBStageName> get options =>
+      List<EBStageName>.from(EBStageName.values)..remove(EBStageName.UNDEFINED);
 }
 
 enum EBStatus {

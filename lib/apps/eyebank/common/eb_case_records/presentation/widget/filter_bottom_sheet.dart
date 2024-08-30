@@ -6,13 +6,15 @@ import 'package:intl/intl.dart';
 enum FilterType { string, date, dropdown }
 
 class Filter {
-  final String name;
+  final String? name;
+  final String? hintText;
   final FilterType type;
   String? value; // Made mutable
   List<String>? dropdownOptions;
 
   Filter({
-    required this.name,
+    this.name,
+    this.hintText,
     required this.type,
     this.value,
     this.dropdownOptions,
@@ -129,14 +131,16 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
       case FilterType.string:
         return CheckboxListTile(
           dense: true,
-          title: Text(
-            filter.name,
-            style: applyRobotoFont(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+          title: filter.name == null
+              ? Container()
+              : Text(
+                  filter.name!,
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
           value: _selectedFilters.contains(filter),
           onChanged: (value) {
             setState(() {
@@ -156,14 +160,15 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                filter.name,
-                style: applyRobotoFont(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Colors.black,
+              if (filter.name != null)
+                Text(
+                  filter.name!,
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
               const SizedBox(height: 4),
               Text(
                 filter.value != null
@@ -211,20 +216,24 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
       case FilterType.dropdown:
         return ListTile(
           dense: true,
-          title: Text(
-            filter.name,
-            style: applyRobotoFont(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-          ),
+          title: filter.name == null
+              ? Container()
+              : Text(
+                  filter.name!,
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
           subtitle: Row(
             children: [
               Expanded(
                 child: DropdownButton<String>(
                   value: filter.value,
-                  hint: const Text('Select option'),
+                  hint: filter.hintText != null
+                      ? Text(filter.hintText!)
+                      : const Text('Select Option'),
                   items: filter.dropdownOptions?.map((String option) {
                     return DropdownMenuItem<String>(
                       value: option,
