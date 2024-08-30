@@ -30,7 +30,10 @@ final ebFormManageProvider = FutureProvider.family
 
     final result2 = res2.fold(
       (l) => null, // This has to change
-      (r) => r,
+      (r) {
+        print("PrefilledForm ${r.toJson()}");
+        return r;
+      },
     );
     return EBFormPrefilledMapper.mapToEntity(result2, result1);
   } catch (e) {
