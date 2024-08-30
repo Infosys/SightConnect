@@ -1,4 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/eb_organ_inventory_analytics_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -77,10 +79,6 @@ class EbOrganTimlineParams {
   int get hashCode => encounterID.hashCode ^ timelineVersion.hashCode;
 }
 
-
-
-
-
 // const sampleJson = [
 //   {
 //     "initiateDate": "2023-10-01T12:00:00Z",
@@ -147,3 +145,13 @@ class EbOrganTimlineParams {
 //     "subSteps": [],
 //   },
 // ];
+
+final ebOrganInventoryAnalyticsProvder =
+    FutureProvider.autoDispose<EbOrganInventoryAnalyticsModel>((ref) async {
+  final repository = ref.watch(ebOrganInventoryRepositoryProvider);
+  final result = await repository.getOrganInventoryStatistics();
+  return result.fold(
+    (l) => throw l,
+    (r) => r,
+  );
+});

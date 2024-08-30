@@ -3,6 +3,7 @@ enum EBStageName {
     value: 'UNDEFINED',
     displayValue: 'Undefined',
   ),
+
 /////-------------------CORNEA DONATION-------------------/////
 
   DEATH_INTIMATION(
@@ -37,7 +38,9 @@ enum EBStageName {
     value: 'IN_INVENTORY',
     displayValue: 'In Inventory',
   ),
-  //-------------------CORNEA DONATION-------------------/////
+
+  /////-------------------CORNEA DONATION-------------------/////
+
   CORNEA_REQUEST(
     value: 'CORNEA_REQUEST',
     displayValue: 'Cornea Request',
@@ -75,6 +78,13 @@ enum EBStageName {
     required this.value,
     required this.displayValue,
   });
+
+  static EBStageName fromValue(String value) {
+    return EBStageName.values.firstWhere(
+      (stage) => stage.value == value,
+      orElse: () => EBStageName.UNDEFINED,
+    );
+  }
 }
 
 enum EBStatus {

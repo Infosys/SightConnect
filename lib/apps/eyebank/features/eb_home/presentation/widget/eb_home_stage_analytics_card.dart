@@ -1,76 +1,73 @@
 import 'dart:math';
 
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/provider/eb_home_analytics_provider.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final stageAnalyticsProvider = FutureProvider((ref) {
-  final names =
-      EBStageName.values.where((e) => e != EBStageName.UNDEFINED).toList();
-  final stages = names.asMap().entries.map((entry) {
-    final index = entry.key;
-    final e = entry.value;
-    return {
-      'stageName': e.displayValue.toUpperCase(),
-      'count': index * 98345,
-    };
-  }).toList();
-  return Future.value(stages);
-});
-
-class EBStageAnalytics extends ConsumerWidget {
-  const EBStageAnalytics({super.key});
+class EbHomeStageAnalyticsCard extends ConsumerWidget {
+  const EbHomeStageAnalyticsCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stagesAsyncValue = ref.watch(stageAnalyticsProvider);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
+    return Wrap(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                'Stage Analytics',
-                style: applyFiraSansFont(
-                  fontSize: 16,
+              Row(
+                children: [
+                  Text(
+                    'Stage Analytics',
+                    style: applyFiraSansFont(
+                      fontSize: 16,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Container(
+                child: stagesAsyncValue.when(
+                  data: (stages) => Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: stages.map((stage) {
+                      return EBStageStatsTile(
+                        icon: Icons.circle,
+                        title: stage.code.displayValue.toUpperCase(),
+                        value: stage.count?.toString().formatNumber() ?? '0',
+                        color: AppColor.green,
+                      );
+                    }).toList(),
+                  ),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (error, stack) {
+                    logger.e(error);
+                    String msg = "";
+                    if (error is EBFailure) {
+                      msg = error.errorMessage;
+                    } else {
+                      msg = "An error occurred. Please try again later.";
+                    }
+                    return Center(child: Text(msg));
+                  },
                 ),
               ),
-              const Spacer(),
             ],
           ),
-          const SizedBox(height: 16),
-          Container(
-            child: stagesAsyncValue.when(
-              data: (stages) => Wrap(
-                spacing: 8.0,
-                runSpacing: 8.0,
-                children: stages.map((stage) {
-                  return EBStageStatsTile(
-                    icon: Icons.circle,
-                    title: stage['stageName'].toString(),
-                    value: stage['count'].toString().formatNumber(),
-                    color: AppColor.green,
-                  );
-                }).toList(),
-              ),
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) => Center(
-                child: Text(
-                  'Error: $error',
-                  style: applyFiraSansFont(fontSize: 14, color: Colors.red),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

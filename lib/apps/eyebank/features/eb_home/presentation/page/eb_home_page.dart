@@ -2,8 +2,8 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentatio
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/recent_cases.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/widgets/eye_bank_dashboard_appbar.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/add_case_button.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_analytics_card.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_statistics_top_card.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_home_cornea_analytics_card.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/widget/eb_home_stage_analytics_card.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_profile/presentation/pages/eb_profile_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:flutter/foundation.dart';
@@ -39,17 +39,13 @@ class EBHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            EbStatisticsTopCard(),
+            EbHomeCorneaAnalyticsCard(),
             if (kIsWeb) SizedBox(height: AppSize.km),
             if (kIsWeb) AddCaseButton(),
             SizedBox(height: AppSize.km),
             RecentCases(),
             SizedBox(height: AppSize.km),
-            Wrap(
-              children: [
-                EBStageAnalytics(),
-              ],
-            ),
+            EbHomeStageAnalyticsCard(),
             SizedBox(height: AppSize.kl * 4),
           ],
         ),
