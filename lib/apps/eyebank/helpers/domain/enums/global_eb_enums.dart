@@ -36,6 +36,36 @@ enum EBStageName {
   IN_INVENTORY(
     value: 'IN_INVENTORY',
     displayValue: 'In Inventory',
+  ),
+  //-------------------CORNEA DONATION-------------------/////
+  CORNEA_REQUEST(
+    value: 'CORNEA_REQUEST',
+    displayValue: 'Cornea Request',
+  ),
+  CORNEA_ASSIGNMENT(
+    value: 'CORNEA_ASSIGNMENT',
+    displayValue: 'Cornea Assignment',
+  ),
+  CORNEA_CONFIRMATION(
+    value: 'CORNEA_CONFIRMATION',
+    displayValue: 'Cornea Confirmation',
+  ),
+  SENT_TO_SURGEON(
+    value: 'SENT_TO_SURGEON',
+    displayValue: 'Sent to Surgeon',
+  ),
+  RECEIVED_BY_SURGEON(
+    value: 'RECEIVED_BY_SURGEON',
+    displayValue: 'Received by Surge on',
+  ),
+
+  CORNEA_TRANSPLANT(
+    value: 'CORNEA_TRANSPLANT',
+    displayValue: 'Cornea Transplant',
+  ),
+  ADVESRE_REACTION(
+    value: 'ADVERSE_REACTION',
+    displayValue: 'Adverse Reaction',
   );
 
   final String value;

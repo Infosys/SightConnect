@@ -44,13 +44,14 @@ class EBOrganMapper {
     }).toList();
   }
 
-  static _getStageName(String? reason) {
-    const reasons = EBStageName.values;
-    for (var i = 0; i < reasons.length; i++) {
-      if (reasons[i].name == reason) {
-        return reasons[i];
+  static EBStageName? _getStageName(String? stageName) {
+    const stages = EBStageName.values;
+    for (var i = 0; i < stages.length; i++) {
+      if (stages[i].name == stageName) {
+        return stages[i];
       }
     }
+    return null;
   }
 }
 

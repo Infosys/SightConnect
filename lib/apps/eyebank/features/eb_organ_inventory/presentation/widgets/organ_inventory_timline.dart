@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/pages/eb_form_manage_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
@@ -30,7 +31,9 @@ class OrganInventoryTimline extends ConsumerWidget {
         body: ref
             .watch(ebOrganTimelineProvider(
               EbOrganTimlineParams(
-                  encounterID: encounterID, timelineVersion: '0.0.1'),
+                encounterID: encounterID,
+                timelineVersion: '0.0.1',
+              ),
             ))
             .when(
               data: (data) {
@@ -65,25 +68,27 @@ class OrganInventoryTimline extends ConsumerWidget {
   }
 
   _handleCaseSelected(BuildContext context, EBTimelineEntity event) {
-    showAssignmentFlow(context, 0);
+    // showAssignmentFlow(context, 0);
     // if (event.serviceRequestId == null) {
     //   return;
     // }
 
-    // final navigator = Navigator.of(context);
-    // navigator.push(
-    //   MaterialPageRoute(
-    //     builder: (context) => EBFormManagePage(
-    //       title: event.title ?? "",
-    //       stageName: event.stage?.value,
-    //       stageVersion: event.stageVersion,
-    //       serviceRequestId: event.serviceRequestId,
-    //       encounterId: encounterID,
-    //       timelineName: event.timelineName,
-    //       timelineVersion: event.timelineVersion,
-    //       status: event.status,
-    //     ),
-    //   ),
-    // );
+    logger.i(event.toString());
+
+    final navigator = Navigator.of(context);
+    navigator.push(
+      MaterialPageRoute(
+        builder: (context) => EBFormManagePage(
+          title: event.title ?? "",
+          stageName: event.stage?.value,
+          stageVersion: event.stageVersion,
+          serviceRequestId: event.serviceRequestId,
+          encounterId: encounterID,
+          timelineName: event.timelineName,
+          timelineVersion: event.timelineVersion,
+          status: event.status,
+        ),
+      ),
+    );
   }
 }
