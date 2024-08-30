@@ -66,7 +66,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
       final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         logger.d({
-          "RESPONSE CONFIG": response.data,
+          "RESPONSE EYEBANK TIMELINE": response.data,
         });
         return (response.data as List)
             .map((e) => EBTimelineModel.fromJson(e))
@@ -89,7 +89,7 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
 
       final response = await _dio.get(endPoint, queryParameters: queryParams);
       logger.d({
-        "RESPONSE": response.data,
+        "RESPONSE CONFIG TIMELINE": response.data,
       });
 
       if (response.statusCode == 200) {

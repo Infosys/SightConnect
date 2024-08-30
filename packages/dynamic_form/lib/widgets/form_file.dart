@@ -57,30 +57,27 @@ class FormFile extends HookWidget {
         return null;
       },
       builder: (state) {
-        return IgnorePointer(
-          ignoring: state.widget.enabled,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ImagePicker(
-                state: state,
-                field: field,
-                images: images,
-                showAllImages: showAllImages,
-                onChanged: onChanged,
-                isLoading: isLoading,
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ImagePicker(
+              state: state,
+              field: field,
+              images: images,
+              showAllImages: showAllImages,
+              onChanged: onChanged,
+              isLoading: isLoading,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              state.errorText ?? '',
+              style: const TextStyle(
+                color: Colors.red,
+                fontSize: 12.0,
               ),
-              const SizedBox(height: 8),
-              Text(
-                state.errorText ?? '',
-                style: const TextStyle(
-                  color: Colors.red,
-                  fontSize: 12.0,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

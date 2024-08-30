@@ -21,7 +21,6 @@ class RecentCases extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(ebGetRecordsProvider(params)).when(
           data: (data) {
-            logger.i(data);
             return Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(8.0)),

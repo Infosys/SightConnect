@@ -1,7 +1,9 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/modals/organ_tissue_search_delegate.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -50,10 +52,24 @@ class OrganInventoryTimline extends ConsumerWidget {
     );
   }
 
+  void showAssignmentFlow(BuildContext context, int requestIndex) async {
+    final selectedTissue = await showSearch<String>(
+      context: context,
+      delegate: OrganTissueSearchDelegate(),
+    );
+
+    if (selectedTissue != null) {
+      // Handle the selected tissue assignment
+      logger.f('Assigned $selectedTissue to request #$requestIndex');
+    }
+  }
+
   _handleCaseSelected(BuildContext context, EBTimelineEntity event) {
+    showAssignmentFlow(context, 0);
     // if (event.serviceRequestId == null) {
     //   return;
     // }
+
     // final navigator = Navigator.of(context);
     // navigator.push(
     //   MaterialPageRoute(

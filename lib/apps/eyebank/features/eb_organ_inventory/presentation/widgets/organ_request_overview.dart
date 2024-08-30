@@ -1,8 +1,6 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/modals/organ_tissue_search_delegate.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_timline.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -71,18 +69,6 @@ class OrganRequestOverview extends StatelessWidget {
         onSearchTap: () {},
       ),
     );
-  }
-
-  void _showAssignmentFlow(BuildContext context, int requestIndex) async {
-    final selectedTissue = await showSearch<String>(
-      context: context,
-      delegate: OrganTissueSearchDelegate(),
-    );
-
-    if (selectedTissue != null) {
-      // Handle the selected tissue assignment
-      logger.f('Assigned $selectedTissue to request #$requestIndex');
-    }
   }
 }
 
@@ -160,19 +146,19 @@ class _OrganRequestCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Chip(
-                padding: const EdgeInsets.all(2),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                label: Text(priority),
-                backgroundColor: AppColor.mediumRed,
-                labelStyle: applyFiraSansFont(
-                  fontSize: 12.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              // Chip(
+              //   padding: const EdgeInsets.all(2),
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.circular(8.0),
+              //   ),
+              //   label: Text(priority),
+              //   backgroundColor: AppColor.mediumRed,
+              //   labelStyle: applyFiraSansFont(
+              //     fontSize: 12.0,
+              //     color: Colors.white,
+              //     fontWeight: FontWeight.w500,
+              //   ),
+              // ),
               const SizedBox(width: 8.0),
               ActionChip(
                 onPressed: onTimeLine,
