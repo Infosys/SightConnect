@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/provider/eb_home_analytics_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
@@ -42,6 +43,10 @@ class EbHomeStageAnalyticsCard extends ConsumerWidget {
                     spacing: 8.0,
                     runSpacing: 8.0,
                     children: stages.map((stage) {
+                      if (stage.code == EBStageName.UNDEFINED) {
+                        return const SizedBox();
+                      }
+
                       return EBStageStatsTile(
                         icon: Icons.circle,
                         title: stage.code.displayValue.toUpperCase(),
