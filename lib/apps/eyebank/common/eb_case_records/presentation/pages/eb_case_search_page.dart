@@ -162,7 +162,8 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedFilter = useState<_IdentifierDataType>(_IdentifierDataType.MOBILE);
+    var selectedFilter =
+        useState<_IdentifierDataType>(_IdentifierDataType.MOBILE);
     final List<PopupMenuEntry> filterOptions = getFilterOptions(selectedFilter);
     return AppBar(
       backgroundColor: Colors.white,
@@ -264,21 +265,19 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
     return '';
   }
 
-  List<PopupMenuEntry> getFilterOptions(ValueNotifier<_IdentifierDataType> selectedFilter) {
+  List<PopupMenuEntry> getFilterOptions(
+      ValueNotifier<_IdentifierDataType> selectedFilter) {
     return <PopupMenuEntry>[
       PopupMenuItem(
         value: "mobile",
         child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            color: selectedFilter.value == _IdentifierDataType.MOBILE
-                ? AppColor.primary
-                : Colors.white,
             child: Text(
               'Mobile Number',
               style: applyRobotoFont(
                 color: selectedFilter.value == _IdentifierDataType.MOBILE
-                    ? Colors.white
+                    ? AppColor.primary
                     : Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 14.0,
@@ -290,14 +289,11 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             width: double.infinity,
-            color: selectedFilter.value == _IdentifierDataType.ENCOUNTER
-                ? AppColor.primary
-                : Colors.white,
             child: Text(
               'Encounter ID',
               style: applyRobotoFont(
                 color: selectedFilter.value == _IdentifierDataType.ENCOUNTER
-                    ? Colors.white
+                    ? AppColor.primary
                     : Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 14.0,
@@ -309,15 +305,13 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             width: double.infinity,
-            color: selectedFilter.value == _IdentifierDataType.SERVICE_REQUEST
-                ? AppColor.primary
-                : Colors.white,
             child: Text(
               'Service Request ID',
               style: applyRobotoFont(
-                color: selectedFilter.value == _IdentifierDataType.SERVICE_REQUEST
-                    ? Colors.white
-                    : Colors.black,
+                color:
+                    selectedFilter.value == _IdentifierDataType.SERVICE_REQUEST
+                        ? AppColor.primary
+                        : Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 14.0,
               ),
@@ -328,13 +322,12 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             width: double.infinity,
-            color:
-                selectedFilter.value == _IdentifierDataType.BDP ? AppColor.primary : Colors.white,
             child: Text(
               'BDP ID',
               style: applyRobotoFont(
-                color:
-                    selectedFilter.value == _IdentifierDataType.BDP ? Colors.white : Colors.black,
+                color: selectedFilter.value == _IdentifierDataType.BDP
+                    ? AppColor.primary
+                    : Colors.black,
                 fontWeight: FontWeight.w500,
                 fontSize: 14.0,
               ),
