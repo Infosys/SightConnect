@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/widget/case_time_line_widget.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/modals/organ_tissue_search_delegate.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -55,40 +55,33 @@ class OrganInventoryTimline extends ConsumerWidget {
     );
   }
 
-  void showAssignmentFlow(BuildContext context, int requestIndex) async {
-    final selectedTissue = await showSearch<String>(
-      context: context,
-      delegate: OrganTissueSearchDelegate(),
-    );
-
-    if (selectedTissue != null) {
-      // Handle the selected tissue assignment
-      logger.f('Assigned $selectedTissue to request #$requestIndex');
-    }
+  void showAssignmentFlow(
+      BuildContext context, String? serviceRequestId) async {
+    final navigator = Navigator.of(context);
+    navigator.push(MaterialPageRoute(builder: (context) {
+      return const OrganTissueSearchScreen();
+    }));
   }
 
   _handleCaseSelected(BuildContext context, EBTimelineEntity event) {
-    // showAssignmentFlow(context, 0);
-    // if (event.serviceRequestId == null) {
-    //   return;
-    // }
-
-    // logger.i(event.toString());
-
-    final navigator = Navigator.of(context);
-    navigator.push(
-      MaterialPageRoute(
-        builder: (context) => EBFormManagePage(
-          title: event.title ?? "",
-          stageName: event.stage?.value,
-          stageVersion: event.stageVersion,
-          serviceRequestId: event.serviceRequestId,
-          encounterId: encounterID,
-          timelineName: event.timelineName,
-          timelineVersion: event.timelineVersion,
-          status: event.status,
+    if (event.stage == EBStageName.CORNEA_ASSIGNMENT) {
+      showAssignmentFlow(context, event.serviceRequestId);
+    } else {
+      final navigator = Navigator.of(context);
+      navigator.push(
+        MaterialPageRoute(
+          builder: (context) => EBFormManagePage(
+            title: event.title ?? "",
+            stageName: event.stage?.value,
+            stageVersion: event.stageVersion,
+            serviceRequestId: event.serviceRequestId,
+            encounterId: encounterID,
+            timelineName: event.timelineName,
+            timelineVersion: event.timelineVersion,
+            status: event.status,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

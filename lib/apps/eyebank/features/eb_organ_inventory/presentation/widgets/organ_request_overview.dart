@@ -1,23 +1,41 @@
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/data/models/table_data.dart';
+// Update TableData model
+import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/filter_bottom_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_timline.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
+class TableData {
+  final String encounterId;
+  final String tissueTypeRequested;
+  final String requestedBy;
+  final DateTime requestedDate;
+  final List<String> procedures;
+
+  TableData({
+    required this.encounterId,
+    required this.tissueTypeRequested,
+    required this.requestedBy,
+    required this.requestedDate,
+    required this.procedures,
+  });
+}
+
+// Update records list
 final records = List.generate(
   10,
   (index) => TableData(
-    eye: "Eye ${index + 1}",
-    category: "Category ${index + 1}",
-    date: DateTime.now(),
-    donor: "Donor ${index + 1}",
-    sampleID: "Sample ID ${index + 1}",
-    status: "Status ${index + 1}",
-    tissue: "Tissue ${index + 1}",
+    encounterId: "ID ${index + 1}",
+    tissueTypeRequested: "CORNEA",
+    requestedBy: "Requester ${index + 1}",
+    requestedDate: DateTime.now(),
+    procedures: ["PK"],
   ),
 );
 
+// Update fetchPageData function
 class OrganRequestOverview extends StatelessWidget {
   const OrganRequestOverview({super.key});
 
@@ -29,24 +47,21 @@ class OrganRequestOverview extends StatelessWidget {
         fetchPageData: (pageKey, pageSize, filters) async {
           return [
             TableData(
-              eye: "",
-              category: "",
-              date: DateTime.now(),
-              donor: "",
-              sampleID: "",
-              status: "",
-              tissue: "",
+              encounterId: "ID 1",
+              tissueTypeRequested: "CORNEA",
+              requestedBy: "Requester 1",
+              requestedDate: DateTime.now(),
+              procedures: ["PK"],
             ),
           ];
         },
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
-            doctorName: 'Dr. John Doe',
-            priority: 'High',
-            tissue: 'Cornea',
-            eyeInvolved: 'Right Eye',
-            tissueExpiryTime: '2 days 3 hours',
-            transplantationTechnique: 'PKP, EK, ALK',
+            encounterId: item.encounterId,
+            tissueTypeRequested: item.tissueTypeRequested,
+            requestedBy: item.requestedBy,
+            requestedDate: item.requestedDate,
+            procedures: item.procedures.join(", "),
             onTimeLine: () {
               final navigator = Navigator.of(context);
               navigator.push(
@@ -62,7 +77,31 @@ class OrganRequestOverview extends StatelessWidget {
             },
           );
         },
-        filterOptions: const [],
+        filterOptions: [
+          Filter(
+            name: 'Filter by Surgery Type',
+            type: FilterType.dropdown,
+            dropdownOptions: [
+              'PK',
+              'EK',
+              'DALK',
+              'K_LAL',
+              'K_PRO',
+              'OTHERS',
+            ],
+          ),
+          Filter(
+            name: 'Filter by Stage',
+            type: FilterType.dropdown,
+            dropdownOptions: [
+              'REQUESTED',
+              'ASSIGNED',
+              'REJECTED',
+              'COMPLETED',
+            ],
+          ),
+          Filter(name: 'Request Date', type: FilterType.date),
+        ],
         enableSearch: false,
         enableFilter: true,
         defaultPageSize: 10,
@@ -73,23 +112,21 @@ class OrganRequestOverview extends StatelessWidget {
 }
 
 class _OrganRequestCard extends StatelessWidget {
-  final String doctorName;
-  final String priority;
-  final String tissue;
-  final String eyeInvolved;
-  final String tissueExpiryTime;
-  final String transplantationTechnique;
+  final String encounterId;
+  final String tissueTypeRequested;
+  final String requestedBy;
+  final DateTime requestedDate;
+  final String procedures;
   final VoidCallback? onAssignTissue;
   final VoidCallback? onTimeLine;
 
   const _OrganRequestCard({
     Key? key,
-    required this.doctorName,
-    required this.priority,
-    required this.tissue,
-    required this.eyeInvolved,
-    required this.tissueExpiryTime,
-    required this.transplantationTechnique,
+    required this.encounterId,
+    required this.tissueTypeRequested,
+    required this.requestedBy,
+    required this.requestedDate,
+    required this.procedures,
     this.onAssignTissue,
     this.onTimeLine,
   }) : super(key: key);
@@ -117,67 +154,52 @@ class _OrganRequestCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const CircleAvatar(
+                backgroundColor: AppColor.altGrey,
+                child: Icon(Icons.person, color: Colors.white),
+              ),
+              const SizedBox(width: 8.0),
               Expanded(
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CircleAvatar(
-                      backgroundColor: AppColor.altGrey,
+                    Text(
+                      requestedBy,
+                      style: applyRobotoFont(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    const SizedBox(width: 8.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          doctorName,
-                          style: applyRobotoFont(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          "M.D. Ophthalmology",
-                          style: applyRobotoFont(
-                            fontSize: 12.0,
-                            color: AppColor.blackOpacity,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      "Requested Date: ${requestedDate.formateDate}",
+                      style: applyRobotoFont(
+                        fontSize: 14.0,
+                        color: AppColor.blackOpacity,
+                      ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(width: 8.0),
-              TextButton(
-                onPressed: onTimeLine,
-                child: const Text("View Timeline"),
+              Tooltip(
+                message: "View Timeline",
+                child: TextButton(
+                  onPressed: onTimeLine,
+                  child: const Text("View Timeline"),
+                ),
               ),
             ],
           ),
-          const SizedBox(height: 4.0),
+          const SizedBox(height: 12.0),
           Row(
             children: [
               Expanded(
                 flex: 1,
-                child: _buildDetailColumn('Tissue:', tissue),
+                child: _buildDetailColumn('Tissue Type:', tissueTypeRequested),
               ),
               Expanded(
                 flex: 1,
-                child: _buildDetailColumn('Eye Involved:', eyeInvolved),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8.0),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child:
-                    _buildDetailColumn('Tissue Expiry Time:', tissueExpiryTime),
-              ),
-              Expanded(
-                flex: 1,
-                child: _buildDetailColumn(
-                    'Transplantation Technique:', transplantationTechnique),
+                child: _buildDetailColumn('Procedures:', procedures),
               ),
             ],
           ),
@@ -185,24 +207,34 @@ class _OrganRequestCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton.icon(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  foregroundColor: AppColor.red,
-                ),
-                label: const Text('Reject'),
-                icon: const Icon(
-                  Icons.close,
-                  size: 18,
+              Tooltip(
+                message: "Reject Request",
+                child: TextButton.icon(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColor.red,
+                  ),
+                  label: const Text('Reject'),
+                  icon: const Icon(
+                    Icons.close,
+                    size: 18,
+                  ),
                 ),
               ),
-              TextButton.icon(
+              Tooltip(
+                message: "Accept Request",
+                child: TextButton.icon(
                   onPressed: onAssignTissue,
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColor.green,
+                  ),
                   label: const Text('Accept'),
                   icon: const Icon(
                     Icons.check,
                     size: 18,
-                  )),
+                  ),
+                ),
+              ),
             ],
           )
         ],
@@ -219,17 +251,17 @@ class _OrganRequestCard extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyFiraSansFont(
-            fontSize: 12.0,
+            fontSize: 14.0,
             color: AppColor.grey,
           ),
         ),
-        const SizedBox(height: 2.0),
+        const SizedBox(height: 4.0),
         Text(
           value,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: applyRobotoFont(
-            fontSize: 12.0,
+            fontSize: 14.0,
             color: AppColor.black,
           ),
         ),

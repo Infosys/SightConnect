@@ -1,145 +1,179 @@
+import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class OrganTissueSearchDelegate extends SearchDelegate<String> {
-  OrganTissueSearchDelegate();
+Future<Map<String, dynamic>> fetchTissues(int pageKey, int pageSize) async {
+  await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+  return {
+    "content": [
+      {
+        "tissueId": "1",
+        "cellCount": 1000,
+        "harvestDate": "2023-01-01",
+        "suitableProcedures": ["PK"],
+        "clearZone": "Clear",
+        "lensType": "Type A",
+        "Pachemetry": 500,
+        "tissueExpiry": "2024-08-30T14:02:54.118Z"
+      },
+      {
+        "tissueId": "2",
+        "cellCount": 1200,
+        "harvestDate": "2023-02-01",
+        "suitableProcedures": ["PK", "DMEK"],
+        "clearZone": "Clear",
+        "lensType": "Type B",
+        "Pachemetry": 520,
+        "tissueExpiry": "2024-09-30T14:02:54.118Z"
+      },
+    ],
+    "totalElements": 2,
+    "totalPages": 1,
+    "size": pageSize,
+    "number": pageKey,
+    "numberOfElements": 2,
+    "empty": false,
+    "first": true,
+    "last": true
+  };
+}
 
-  final List<Map<String, String>> tissues = [
-    {
-      'name': 'Cornea Tissue 1',
-      'expiryDate': '2023-12-01',
-      'patientAge': '45',
-      'corneaIssue': 'Keratoconus',
-      'tissueType': 'OD',
-    },
-    {
-      'name': 'Cornea Tissue 2',
-      'expiryDate': '2023-11-15',
-      'patientAge': '60',
-      'corneaIssue': 'Fuchs\' Dystrophy',
-      'tissueType': 'OS',
-    },
-    {
-      'name': 'Cornea Tissue 3',
-      'expiryDate': '2023-10-20',
-      'patientAge': '30',
-      'corneaIssue': 'Corneal Scarring',
-      'tissueType': 'OD',
-    },
-  ];
+final tissuesProvider =
+    FutureProvider.family<Map<String, dynamic>, int>((ref, pageKey) async {
+  const pageSize = 10;
+  return fetchTissues(pageKey, pageSize);
+});
+
+class OrganTissueSearchScreen extends ConsumerStatefulWidget {
+  const OrganTissueSearchScreen({Key? key}) : super(key: key);
 
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
+  _OrganTissueSearchScreenState createState() =>
+      _OrganTissueSearchScreenState();
+}
+
+class _OrganTissueSearchScreenState
+    extends ConsumerState<OrganTissueSearchScreen> {
+  final PagingController<int, Map<String, dynamic>> _pagingController =
+      PagingController(firstPageKey: 0);
+  String query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+  }
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final newItems = await ref.read(tissuesProvider(pageKey).future);
+      final isLastPage = (newItems['content'] as List).length < 10;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems['content']);
+      } else {
+        final nextPageKey = pageKey + (newItems['content'] as List).length;
+        _pagingController.appendPage(newItems['content'], nextPageKey);
+      }
+    } on EBFailure catch (error) {
+      _pagingController.error = error;
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: TextField(
+          decoration: const InputDecoration(
+            hintText: 'Search...',
+            border: InputBorder.none,
+          ),
+          onChanged: (value) {
+            setState(() {
+              query = value;
+              _pagingController.refresh();
+            });
+          },
+        ),
       ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.arrow_back),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    final results = tissues
-        .where((tissue) =>
-            tissue['name']!.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: results.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            close(context, results[index]['name']!);
-          },
-          child: Container(
-              padding: const EdgeInsets.all(16.0),
-              margin: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3),
+      body: PagedListView<int, Map<String, dynamic>>(
+        pagingController: _pagingController,
+        builderDelegate: PagedChildBuilderDelegate<Map<String, dynamic>>(
+          itemBuilder: (context, item, index) {
+            return Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  margin: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Wrap(
-                spacing: 16.0,
-                runAlignment: WrapAlignment.spaceBetween,
-                runSpacing: 16.0,
-                children: [
-                  _buildDetailColumn('Name', results[index]['name']!),
-                  _buildDetailColumn(
-                      'Expiry Date', results[index]['expiryDate']!),
-                  _buildDetailColumn(
-                      'Patient Age', results[index]['patientAge']!),
-                  _buildDetailColumn(
-                      'Cornea Issue', results[index]['corneaIssue']!),
-                  _buildDetailColumn(
-                      'Tissue Type', results[index]['tissueType']!),
-                ],
-              )),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestions = tissues
-        .where((tissue) =>
-            tissue['name']!.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            query = suggestions[index]['name']!;
-            showResults(context);
-          },
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            margin: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Wrap(
+                        spacing: 16.0,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        runSpacing: 16.0,
+                        children: [
+                          _buildDetailColumn('Tissue ID', item['tissueId']),
+                          _buildDetailColumn(
+                              'Cell Count', item['cellCount'].toString()),
+                          _buildDetailColumn(
+                              'Harvest Date', item['harvestDate']),
+                          _buildDetailColumn('Suitable Procedures',
+                              item['suitableProcedures'].join(', ')),
+                          _buildDetailColumn('Clear Zone', item['clearZone']),
+                          _buildDetailColumn('Lens Type', item['lensType']),
+                          _buildDetailColumn(
+                              'Pachemetry', item['Pachemetry'].toString()),
+                          _buildDetailColumn(
+                              'Tissue Expiry', item['tissueExpiry']),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 16,
+                  right: 16,
+                  child: TextButton.icon(
+                    onPressed: () {},
+                    label: const Text('Assign Tissue'),
+                    icon: const Icon(Icons.add),
+                  ),
                 ),
               ],
-            ),
-            child: ListTile(
-              onTap: null,
-              title: Text(suggestions[index]['name']!),
-              subtitle: Text(suggestions[index]['expiryDate']!),
-            ),
-          ),
-        );
-      },
+            );
+          },
+          firstPageErrorIndicatorBuilder: (context) =>
+              const Center(child: Text('Error loading tissues')),
+          noItemsFoundIndicatorBuilder: (context) =>
+              const Center(child: Text('No tissues found')),
+        ),
+      ),
     );
   }
 

@@ -39,22 +39,27 @@ class EbHomeStageAnalyticsCard extends ConsumerWidget {
               // const SizedBox(height: 16),
               Container(
                 child: stagesAsyncValue.when(
-                  data: (stages) => Wrap(
-                    spacing: 8.0,
-                    runSpacing: 8.0,
-                    children: stages.map((stage) {
-                      if (stage.code == EBStageName.UNDEFINED) {
-                        return const SizedBox();
-                      }
+                  data: (stages) {
+                    stages = stages
+                        .where((stage) => stage.code != EBStageName.UNDEFINED)
+                        .toList();
+                    return Wrap(
+                      spacing: 8.0,
+                      runSpacing: 8.0,
+                      children: stages.map((stage) {
+                        if (stage.code == EBStageName.UNDEFINED) {
+                          return const SizedBox();
+                        }
 
-                      return EBStageStatsTile(
-                        icon: Icons.circle,
-                        title: stage.code.displayValue.toUpperCase(),
-                        value: stage.count?.toString().formatNumber() ?? '0',
-                        color: AppColor.green,
-                      );
-                    }).toList(),
-                  ),
+                        return EBStageStatsTile(
+                          icon: Icons.circle,
+                          title: stage.code.displayValue.toUpperCase(),
+                          value: stage.count?.toString().formatNumber() ?? '0',
+                          color: AppColor.green,
+                        );
+                      }).toList(),
+                    );
+                  },
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                   error: (error, stack) {
@@ -95,7 +100,7 @@ class EBStageStatsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      width: min(170, MediaQuery.of(context).size.width / 2.2),
+      width: min(140, MediaQuery.of(context).size.width / 2.2),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,

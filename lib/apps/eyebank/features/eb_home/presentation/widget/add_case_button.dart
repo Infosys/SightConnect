@@ -1,16 +1,12 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AddCaseButton extends StatelessWidget {
@@ -52,28 +48,29 @@ class AddCaseButton extends StatelessWidget {
                 backButtonIcon: Icons.close,
                 onSubmit: (formResponse, mode) async {
                   try {
-                    final repo = ref.read(ebRepositoryProvider);
-                    final submitData = EBSubmitFormDataRequestModel(
-                      formData: formResponse,
-                      timelineName: intimationData.timelineName,
-                      timelineVersion: intimationData.timelineVersion,
-                      performerId: "900",
-                      performerRole: "TECHNICIAN",
-                    );
-                    logger.f(submitData.toJson());
-                    final res = await repo.saveIntimationForm(
-                      submitData,
-                      intimationData.stageVersion,
-                    );
-                    res.fold((l) {
-                      logger.e(l);
-                      EyeBankErrorCard.showErrorToast(l, context);
-                    }, (r) {
-                      // invalidating recent cases provider to refresh the list
-                      ref.invalidate(ebGetRecordsProvider);
-                      Navigator.pop(context);
-                      Fluttertoast.showToast(msg: 'Case created successfully');
-                    });
+                    logger.f(formResponse);
+                    // final repo = ref.read(ebRepositoryProvider);
+                    // final submitData = EBSubmitFormDataRequestModel(
+                    //   formData: formResponse,
+                    //   timelineName: intimationData.timelineName,
+                    //   timelineVersion: intimationData.timelineVersion,
+                    //   performerId: "900",
+                    //   performerRole: "TECHNICIAN",
+                    // );
+                    // logger.f(submitData.toJson());
+                    // final res = await repo.saveIntimationForm(
+                    //   submitData,
+                    //   intimationData.stageVersion,
+                    // );
+                    // res.fold((l) {
+                    //   logger.e(l);
+                    //   EyeBankErrorCard.showErrorToast(l, context);
+                    // }, (r) {
+                    //   // invalidating recent cases provider to refresh the list
+                    //   ref.invalidate(ebGetRecordsProvider);
+                    //   Navigator.pop(context);
+                    //   Fluttertoast.showToast(msg: 'Case created successfully');
+                    // });
                   } catch (e) {
                     logger.e(e);
                   }

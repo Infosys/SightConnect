@@ -14,14 +14,6 @@ class OrganInventoryPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColor.pureBlue,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search, size: 22),
-              onPressed: () {
-                // Open search delegate
-              },
-            ),
-          ],
           title: const Text('Organ Inventory'),
           bottom: const TabBar(
             dividerColor: AppColor.grey,
