@@ -1,12 +1,15 @@
 import 'dart:developer';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:uuid/uuid.dart';
 
 class AppDynamicPanel extends StatefulWidget {
   final PageElementEntity panel;
@@ -37,6 +40,8 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
   Map<String, dynamic> formatedInitialValue = {};
+  final Uuid uuid = const Uuid();
+
   @override
   bool get wantKeepAlive => true;
 
@@ -118,7 +123,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   }
 
   String getUniqueKey() {
-    return DateTime.now().millisecondsSinceEpoch.toString();
+    return uuid.v4();
   }
 
   List<dynamic> _formatValue(Map<String, dynamic> value) {
@@ -141,63 +146,69 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return FormBuilderField(
-      validator: (value) {
-        formKey.currentState?.validate();
-        return null;
-      },
-      enabled: !widget.readOnly,
-      name: widget.panel.name,
-      onSaved: (newValue) {
-        formKey.currentState?.save();
-
-        final value = formKey.currentState?.value;
-
-        final formatedValue = _formatValue(value ?? {});
-
-        widget.globalFormKey.currentState?.fields[widget.panel.name]
-            ?.didChange(formatedValue);
-      },
-      builder: (field) {
-        return FormBuilder(
+    return DottedBorder(
+      borderType: BorderType.RRect,
+      radius: const Radius.circular(16),
+      color: Colors.grey.shade300,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        child: FormBuilderField(
+          validator: (value) {
+            formKey.currentState?.validate();
+            return null;
+          },
           enabled: !widget.readOnly,
-          key: formKey,
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                AppCard(
-                  paddingAll: widget.appCardPadding,
-                  title: widget.name,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: repeatedPanelKeys
-                        .map((key) => buildRepeatedPanel(key))
-                        .toList(),
-                  ),
+          name: widget.panel.name,
+          onSaved: (newValue) {
+            formKey.currentState?.save();
+            final value = formKey.currentState?.value;
+            final formatedValue = _formatValue(value ?? {});
+            widget.globalFormKey.currentState?.fields[widget.panel.name]
+                ?.didChange(formatedValue);
+          },
+          builder: (field) {
+            return FormBuilder(
+              enabled: !widget.readOnly,
+              key: formKey,
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    AppCard(
+                      paddingAll: widget.appCardPadding,
+                      title: widget.name,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ...repeatedPanelKeys
+                                .map((key) => buildRepeatedPanel(key)),
+                            if (repeatedPanelKeys.length < widget.maxRepeat)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(top: 16),
+                                    child: TextButton.icon(
+                                      onPressed:
+                                          widget.readOnly ? null : addPanel,
+                                      icon: const Icon(Icons.add),
+                                      label: const Text('Add'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ]),
+                    ),
+                  ],
                 ),
-                if (repeatedPanelKeys.length < widget.maxRepeat)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: TextButton.icon(
-                          onPressed: widget.readOnly ? null : addPanel,
-                          icon: const Icon(Icons.add),
-                          label: const Text('Add'),
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ),
-        );
-      },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -227,8 +238,6 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
                 alignment: WrapAlignment.start,
                 children: buildFields(widget.panel.elements, formKey, key),
               ),
-              const SizedBox(height: 16),
-              const Divider(),
             ],
           ),
         ),
@@ -252,6 +261,26 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       field = field.copyWith(
         initialValue: formatedInitialValue[field.name],
       );
+
+      if (field.type == DynamicFormType.PANEL && field.repeats == true) {
+        return AppDynamicPanel(
+          appCardPadding: 0,
+          readOnly: widget.readOnly,
+          name: field.title,
+          globalFormKey: key,
+          minRepeat: field.minRepeat ?? 1,
+          maxRepeat: field.maxRepeat ?? 1,
+          panel: PageElementEntity(
+            initialValue: field.initialValue,
+            name: field.name,
+            elements: field.elements ?? [],
+            repeats: field.repeats,
+            type: FormPanelType.REPEATED_PANEL,
+            minRepeat: field.minRepeat ?? 1,
+            maxRepeat: field.maxRepeat ?? 1,
+          ),
+        );
+      }
 
       return AppResponsiveWidget(
         widget: getField(field, key),
