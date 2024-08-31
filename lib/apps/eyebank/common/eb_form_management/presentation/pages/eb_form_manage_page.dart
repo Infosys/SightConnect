@@ -113,7 +113,7 @@ class EBFormManagePage extends ConsumerWidget {
     required String? timelineVersion,
     required BuildContext context,
   }) async {
-    print('FORMDATA: $data');
+    logger.d('FORMDATA: $data');
 
     try {
       final response = await ref.read(ebSaveOrDraftProvider).saveOrDraft(

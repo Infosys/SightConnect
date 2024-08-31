@@ -31,7 +31,7 @@ final ebFormManageProvider = FutureProvider.family
     final result2 = res2.fold(
       (l) => null, // This has to change
       (r) {
-        print("PrefilledForm ${r.toJson()}");
+        logger.d("PrefilledForm ${r.toJson()}");
         return r;
       },
     );

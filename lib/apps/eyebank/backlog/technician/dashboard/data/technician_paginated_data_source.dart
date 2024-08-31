@@ -162,14 +162,11 @@ class TechnicianPaginatedDataSource extends DataTableSource {
   }
 
   @override
-  // TODO: implement isRowCountApproximate
   bool get isRowCountApproximate => false;
 
   @override
-  // TODO: implement rowCount
   int get rowCount => data.length;
 
   @override
-  // TODO: implement selectedRowCount
   int get selectedRowCount => 0;
 }

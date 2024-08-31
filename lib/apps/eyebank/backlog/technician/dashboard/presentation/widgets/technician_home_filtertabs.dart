@@ -72,7 +72,6 @@ class AppSearchFilterTabs extends HookConsumerWidget {
 
 class _SearchAndFilter extends StatelessWidget {
   const _SearchAndFilter({
-    super.key,
     this.searchController,
     this.onSearch,
   });
