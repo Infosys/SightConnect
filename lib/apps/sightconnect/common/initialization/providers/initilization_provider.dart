@@ -14,6 +14,7 @@ import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../eyebank/features/eb_profile/data/repositories/eb_profile_repository_impl.dart';
 import '../../../features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 
 var initializationProvider =
@@ -41,8 +42,7 @@ class InitializationProvider extends ChangeNotifier {
       //only for testing
       return true;
     } else if (role == Role.ROLE_EYEBANK_TECHNICIAN) {
-      // just for testing, please change when profile API for eye bank is implemented.
-      return true;
+      return _checkEyeBankTechnicianExist(phone, role);
     } else {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
@@ -99,6 +99,35 @@ class InitializationProvider extends ChangeNotifier {
     required String mobile,
   }) async {
     return await _ref.read(keycloakRepositoryProvider).sendOtp(mobile: mobile);
+  }
+
+  Future<bool> _checkEyeBankTechnicianExist(String phone, Role role) async {
+    final response =
+        await _ref.read(ebProfileRepositoryProvider).getEBProfile(phone);
+    return response.fold((failure) {
+      logger.e("Eye Bank Technician Profile Not Found: $failure");
+      throw failure;
+    }, (result) async {
+      logger.d("Eye Bank Technician Profile Found: $result");
+
+      if (result.practiceGrants == null) {
+        return false;
+      }
+
+      bool isRoleAvailable = result.practiceGrants!
+          .any((element) => element.grantRole == role.name);
+
+      if (isRoleAvailable) {
+        final profile = result;
+        await PersistentAuthStateService.authState.saveUserProfileId(
+          profile.id.toString(),
+        );
+        return true;
+      } else {
+        // if result is empty then user is not found
+        return false;
+      }
+    });
   }
 
   Future<bool> _checkVisionTechnicianExist(String phone, Role role) async {
