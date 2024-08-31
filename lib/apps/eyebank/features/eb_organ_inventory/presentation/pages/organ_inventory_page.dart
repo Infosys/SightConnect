@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/pages/tissue_display_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_overview.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,19 @@ class OrganInventoryPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColor.pureBlue,
           title: const Text('Organ Inventory'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                final navigator = Navigator.of(context);
+                navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => const TissueDisplayPage(),
+                  ),
+                );
+              },
+            ),
+          ],
           bottom: const TabBar(
             dividerColor: AppColor.grey,
             labelColor: AppColor.black,
