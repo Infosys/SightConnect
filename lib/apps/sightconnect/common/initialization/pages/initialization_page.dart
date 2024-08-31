@@ -19,7 +19,6 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -291,32 +290,16 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
       Role.ROLE_VOLUNTEER: const VisionGuardianDashboardPage(),
-      Role.ROLE_EYEBANK: const EBDashboardPage(),
+      Role.ROLE_EYEBANK_TECHNICIAN: const EBDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {
-      if (kIsWeb) {
-        if (role == Role.ROLE_EYEBANK) {
-          navigator.pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => rolePages[role]!,
-            ),
-            (route) => false,
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              duration: Duration(seconds: 3),
-              content: Text("Platform not supported for this role")));
-          throw Exception("Invalid Role");
-        }
-      } else {
-        navigator.pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => rolePages[role]!,
-          ),
-          (route) => false,
-        );
-      }
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => rolePages[role]!,
+        ),
+        (route) => false,
+      );
     }
   }
 

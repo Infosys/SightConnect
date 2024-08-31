@@ -161,14 +161,14 @@ class ChooseRoleDialog extends HookWidget {
       Role.ROLE_PATIENT => loc.rolePatient,
       Role.ROLE_VISION_GUARDIAN => loc.roleVisionGuardian,
       Role.ROLE_VOLUNTEER => "VOLUNTEER",
-      Role.ROLE_EYEBANK => "EYE BANK",
+      Role.ROLE_EYEBANK_TECHNICIAN => "EYE BANK",
     };
   }
 
   List<Role?> _getRoleListBasedOnPlatform(List<Role?> roles) {
     if (kIsWeb) {
-      if (roles.contains(Role.ROLE_EYEBANK)) {
-        return [Role.ROLE_EYEBANK];
+      if (roles.contains(Role.ROLE_EYEBANK_TECHNICIAN)) {
+        return [Role.ROLE_EYEBANK_TECHNICIAN];
       } else {
         Fluttertoast.showToast(
             msg: "You do not have the required role for the WEB platform",
