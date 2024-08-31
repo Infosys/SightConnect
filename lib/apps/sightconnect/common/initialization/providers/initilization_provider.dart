@@ -40,7 +40,7 @@ class InitializationProvider extends ChangeNotifier {
     } else if (role == Role.ROLE_OPTOMETRIST) {
       //only for testing
       return true;
-    } else if (role == Role.ROLE_EYEBANK) {
+    } else if (role == Role.ROLE_EYEBANK_TECHNICIAN) {
       // just for testing, please change when profile API for eye bank is implemented.
       return true;
     } else {

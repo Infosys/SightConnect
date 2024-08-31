@@ -72,11 +72,13 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
 
       // Check if the response is empty
       if (newItems.isEmpty) {
+        if (!mounted) return;
         _pagingController.appendLastPage([]);
         return;
       }
 
       final isLastPage = newItems.length < _pageSize;
+      if (!mounted) return;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
       } else {
@@ -84,9 +86,11 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
         _pagingController.appendPage(newItems, nextPageKey);
       }
     } on EBFailure catch (e, _) {
+      if (!mounted) return;
       logger.e(e);
       _pagingController.error = e.errorMessage;
     } catch (error) {
+      if (!mounted) return;
       logger.e(error);
       _pagingController.error = error;
     }

@@ -48,7 +48,7 @@ class EyeBankErrorHandler {
 
   static void _printDioError(Object e) {
     if (e is DioException) {
-      logger.e(e.stackTrace);
+      // logger.e(e.stackTrace);
       if (e.response != null) {
         logger.e(e.response!.data);
       }

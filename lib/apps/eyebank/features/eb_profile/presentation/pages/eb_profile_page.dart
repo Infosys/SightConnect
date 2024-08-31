@@ -32,7 +32,6 @@ class EBProfilePage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              //top card starts here
               Row(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +145,6 @@ class EBProfilePage extends ConsumerWidget {
                   ],
                 ),
               ),
-              //personal info card ends here
 
               SizedBox(height: AppSize.height(context) * 0.1),
               OutlinedButton(

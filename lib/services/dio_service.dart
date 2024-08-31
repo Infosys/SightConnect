@@ -20,17 +20,6 @@ final keycloakDioProvider = Provider(
   },
 );
 
-final ebDioProvider = Provider(
-  (ref) {
-    final dio = Dio(
-      BaseOptions(
-        baseUrl: ApiConstant.baseUrl,
-      ),
-    );
-    return dio;
-  },
-);
-
 final dioProvider = StateNotifierProvider<DioService, Dio>((ref) {
   return DioService(ref);
 });
@@ -77,13 +66,13 @@ class DioService extends StateNotifier<Dio> {
           Dio(
             BaseOptions(
               baseUrl: ApiConstant.baseUrl,
-              sendTimeout: const Duration(seconds: 120),
-              receiveTimeout: const Duration(seconds: 120),
-              connectTimeout: const Duration(seconds: 120),
+              // sendTimeout: const Duration(seconds: 120),
+              // receiveTimeout: const Duration(seconds: 120),
+              // connectTimeout: const Duration(seconds: 120),
             ),
           ),
         ) {
-    // setupRequestHeaders();
+    setupRequestHeaders();
     setupInterceptors();
   }
 

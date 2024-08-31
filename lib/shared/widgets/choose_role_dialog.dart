@@ -1,11 +1,10 @@
 import 'dart:ui';
 
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../apps/sightconnect/helpers/models/keycloak.dart';
 import '../theme/text_theme.dart';
@@ -17,10 +16,11 @@ class ChooseRoleDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Role?> currentRoles = _getRoleListBasedOnPlatform(roles);
-    var selectedRole = useState<Role?>(currentRoles.contains(Role.ROLE_PATIENT)
-        ? Role.ROLE_PATIENT
-        : currentRoles.first);
+    logger.f({
+      "roles": roles,
+    });
+    var selectedRole = useState<Role?>(
+        roles.contains(Role.ROLE_PATIENT) ? Role.ROLE_PATIENT : roles.first);
 
     final loc = context.loc!;
 
@@ -65,7 +65,7 @@ class ChooseRoleDialog extends HookWidget {
             width: MediaQuery.of(context).size.width * 0.8,
             child: SingleChildScrollView(
               child: ListBody(
-                children: currentRoles
+                children: roles
                     .map(
                       (role) => InkWell(
                         onTap: () {
@@ -161,26 +161,7 @@ class ChooseRoleDialog extends HookWidget {
       Role.ROLE_PATIENT => loc.rolePatient,
       Role.ROLE_VISION_GUARDIAN => loc.roleVisionGuardian,
       Role.ROLE_VOLUNTEER => "VOLUNTEER",
-      Role.ROLE_EYEBANK => "EYE BANK",
+      Role.ROLE_EYEBANK_TECHNICIAN => "EYEBANK TECHNICIAN",
     };
-  }
-
-  List<Role?> _getRoleListBasedOnPlatform(List<Role?> roles) {
-    if (kIsWeb) {
-      if (roles.contains(Role.ROLE_EYEBANK)) {
-        return [Role.ROLE_EYEBANK];
-      } else {
-        Fluttertoast.showToast(
-            msg: "You do not have the required role for the WEB platform",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            fontSize: 16.0);
-
-        throw Exception("Role not supported");
-      }
-    }
-
-    return roles;
   }
 }

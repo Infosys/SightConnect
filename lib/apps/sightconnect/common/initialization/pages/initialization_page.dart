@@ -19,7 +19,6 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,7 +29,7 @@ import '../../../../../services/location_service.dart';
 import '../../../helpers/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
-  static const String routeName = '/initialization';
+  static const String routeName = '/';
   const InitializationPage({super.key});
 
   @override
@@ -139,7 +138,10 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       NavigatorState navigator, Role role) async {
     try {
       final model = ref.read(initializationProvider);
-      if (role == Role.ROLE_OPTOMETRIST) {
+      if (role == Role.ROLE_EYEBANK_TECHNICIAN) {
+        // Skip consent and 18+ declaration for eye bank technician
+        return true;
+      } else if (role == Role.ROLE_OPTOMETRIST) {
         // Skip consent and 18+ declaration for optometrist
         return true;
       } else if (role == Role.ROLE_PATIENT) {
@@ -171,6 +173,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         return isConsentAccepted;
       }
     } catch (e) {
+      logger.e("_verifyRoleSpecificConsent: $e");
       rethrow;
     }
   }
@@ -291,32 +294,16 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
       Role.ROLE_VOLUNTEER: const VisionGuardianDashboardPage(),
-      Role.ROLE_EYEBANK: const EBDashboardPage(),
+      Role.ROLE_EYEBANK_TECHNICIAN: const EBDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {
-      if (kIsWeb) {
-        if (role == Role.ROLE_EYEBANK) {
-          navigator.pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => rolePages[role]!,
-            ),
-            (route) => false,
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              duration: Duration(seconds: 3),
-              content: Text("Platform not supported for this role")));
-          throw Exception("Invalid Role");
-        }
-      } else {
-        navigator.pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => rolePages[role]!,
-          ),
-          (route) => false,
-        );
-      }
+      navigator.pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => rolePages[role]!,
+        ),
+        (route) => false,
+      );
     }
   }
 
