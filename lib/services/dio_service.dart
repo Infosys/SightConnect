@@ -67,9 +67,9 @@ class DioService extends StateNotifier<Dio> {
           Dio(
             BaseOptions(
               baseUrl: ApiConstant.baseUrl,
-              // sendTimeout: const Duration(seconds: 120),
-              // receiveTimeout: const Duration(seconds: 120),
-              // connectTimeout: const Duration(seconds: 120),
+              sendTimeout: const Duration(seconds: 120),
+              receiveTimeout: const Duration(seconds: 120),
+              connectTimeout: const Duration(seconds: 120),
             ),
           ),
         ) {
