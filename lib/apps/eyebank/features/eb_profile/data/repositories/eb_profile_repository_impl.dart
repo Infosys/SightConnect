@@ -5,9 +5,16 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.d
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'contracts/eb_profile_repository.dart';
+
+var ebProfileProvider = FutureProvider((ref) {
+  return ref
+      .watch(ebProfileRepositoryProvider)
+      .getEBProfile(PersistentAuthStateService.authState.username!);
+});
 
 var ebProfileRepositoryProvider =
     Provider((ref) => EBProfileRepositoryImpl(ref.watch(dioProvider)));
@@ -19,7 +26,7 @@ class EBProfileRepositoryImpl implements EBProfileRepository {
 
   @override
   Future<Either<EBFailure, EBProfileModel>> getEBProfile(String mobile) {
-   return EyeBankErrorHandler.handle(() async {
+    return EyeBankErrorHandler.handle(() async {
       logger.d(_dio.options.headers.toString());
       if (mobile.startsWith("+91")) {
         mobile = mobile.substring(3);
