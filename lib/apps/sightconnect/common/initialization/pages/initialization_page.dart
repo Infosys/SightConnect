@@ -138,10 +138,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       NavigatorState navigator, Role role) async {
     try {
       final model = ref.read(initializationProvider);
-      if (role == Role.ROLE_EYEBANK_TECHNICIAN) {
-        // Skip consent and 18+ declaration for eye bank technician
-        return true;
-      } else if (role == Role.ROLE_OPTOMETRIST) {
+      if (role == Role.ROLE_OPTOMETRIST) {
         // Skip consent and 18+ declaration for optometrist
         return true;
       } else if (role == Role.ROLE_PATIENT) {

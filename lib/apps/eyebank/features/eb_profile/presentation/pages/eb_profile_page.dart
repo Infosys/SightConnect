@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/main.dart';
@@ -146,7 +147,36 @@ class EBProfilePage extends ConsumerWidget {
                 ),
               ),
 
-              SizedBox(height: AppSize.height(context) * 0.1),
+              const SizedBox(height: 16),
+              Visibility(
+                visible:
+                    PersistentAuthStateService.authState.roles?.length != 1,
+                child: InkWell(
+                  onTap: () async {
+                    final navigator = Navigator.of(context);
+                    await ref.read(initializationProvider).resetProfile();
+                    navigator.pushNamedAndRemoveUntil(
+                        InitializationPage.routeName, (route) => false);
+                  },
+                  child: AppCard(
+                      margin: null,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.person,
+                            color: AppColor.black,
+                          ),
+                          Text(
+                            loc.switchProfile,
+                            style: applyRobotoFont(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      )),
+                ),
+              ),
+              const SizedBox(height: 16 * 2),
               OutlinedButton(
                 onPressed: () {
                   ref.read(initializationProvider).logout().then((value) {
