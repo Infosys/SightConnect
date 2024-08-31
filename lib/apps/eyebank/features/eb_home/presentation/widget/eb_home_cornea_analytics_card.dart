@@ -32,20 +32,20 @@ class EbHomeCorneaAnalyticsCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildColumn(
-                      '2343',
+                      '129568',
                       'Available',
                       context,
                       isSelected: true,
                     ),
                     const SizedBox(width: 4),
                     _buildColumn(
-                      '328320',
+                      '77203',
                       'Transplanted',
                       context,
                     ),
                     const SizedBox(width: 4),
                     _buildColumn(
-                      '298',
+                      '2390',
                       'Rejected',
                       context,
                     ),

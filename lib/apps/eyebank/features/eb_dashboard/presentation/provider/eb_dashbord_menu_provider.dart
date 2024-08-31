@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/pages/eb_case_records_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/data/models/menu_item.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_home/presentation/page/eb_home_page.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/pages/organ_inventory_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,15 +25,7 @@ class EbDashboardMenuProvider extends ChangeNotifier {
   final List<Widget> _pages = [
     const EBHomePage(),
     const EBCaseRecordsPage(),
-    // const OrganInventoryPage(),
-    Scaffold(
-      appBar: AppBar(
-        title: const Text("Organ Inventory"),
-      ),
-      body: const Center(
-        child: Text("No Organ Inventory"),
-      ),
-    ),
+    const OrganInventoryPage(),
     Scaffold(
       appBar: AppBar(
         title: const Text("Notification"),

@@ -5,7 +5,9 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -116,15 +118,14 @@ class EBFormManagePage extends ConsumerWidget {
     logger.d('FORMDATA: $data');
 
     try {
+      final profile = ref.read(globalEBProvider);
       final response = await ref.read(ebSaveOrDraftProvider).saveOrDraft(
             ebFormActionRequestModel: EBFormActionRequestModel(
               timelineName: timelineName,
               timelineVersion: timelineVersion,
               eBformData: data,
-              performerId: '900',
-              performerRole: 'TECHNICIAN',
-              // verifiedById: '1',
-              // verifiedByRole: 'Doctor',
+              performerId: profile.userId.toString(),
+              performerRole: PersistentAuthStateService.authState.activeRole,
             ),
             serviceRequestId: serviceRequestId,
             stageName: stageName,

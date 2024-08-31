@@ -29,7 +29,7 @@ import '../../../../../services/location_service.dart';
 import '../../../helpers/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
-  static const String routeName = '/';
+  static const String routeName = '/intialization';
   const InitializationPage({super.key});
 
   @override

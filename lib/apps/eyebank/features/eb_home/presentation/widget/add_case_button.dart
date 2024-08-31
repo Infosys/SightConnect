@@ -4,8 +4,10 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/foundation.dart';
@@ -54,12 +56,15 @@ class AddCaseButton extends StatelessWidget {
                   try {
                     logger.f(formResponse);
                     final repo = ref.read(ebRepositoryProvider);
+                    final profile = ref.read(globalEBProvider);
+
                     final submitData = EBSubmitFormDataRequestModel(
                       formData: formResponse,
                       timelineName: intimationData.timelineName,
                       timelineVersion: intimationData.timelineVersion,
-                      performerId: "900",
-                      performerRole: "TECHNICIAN",
+                      performerId: profile.userId.toString(),
+                      performerRole:
+                          PersistentAuthStateService.authState.activeRole,
                     );
                     logger.f(submitData.toJson());
                     final res = await repo.saveIntimationForm(

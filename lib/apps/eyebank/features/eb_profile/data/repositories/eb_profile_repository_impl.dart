@@ -10,7 +10,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'contracts/eb_profile_repository.dart';
 
-var ebProfileProvider = FutureProvider((ref) {
+final ebProfileProvider = FutureProvider((ref) {
+  if (PersistentAuthStateService.authState.username == null) {
+    return throw EBUnknownFailure(errorMessage: "Username is null");
+  }
   return ref
       .watch(ebProfileRepositoryProvider)
       .getEBProfile(PersistentAuthStateService.authState.username!);
