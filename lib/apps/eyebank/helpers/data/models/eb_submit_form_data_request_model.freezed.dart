@@ -21,13 +21,18 @@ EBSubmitFormDataRequestModel _$EBSubmitFormDataRequestModelFromJson(
 
 /// @nodoc
 mixin _$EBSubmitFormDataRequestModel {
+  String? get encounterId => throw _privateConstructorUsedError;
   String? get timelineName => throw _privateConstructorUsedError;
   String? get timelineVersion => throw _privateConstructorUsedError;
+  String? get stageName => throw _privateConstructorUsedError;
+  String? get stageVersion => throw _privateConstructorUsedError;
   dynamic get formData => throw _privateConstructorUsedError;
+  String? get serviceRequestId => throw _privateConstructorUsedError;
   String? get performerId => throw _privateConstructorUsedError;
   String? get performerRole => throw _privateConstructorUsedError;
   String? get verifiedById => throw _privateConstructorUsedError;
   String? get verifiedByRole => throw _privateConstructorUsedError;
+  dynamic get metaData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,13 +49,18 @@ abstract class $EBSubmitFormDataRequestModelCopyWith<$Res> {
           EBSubmitFormDataRequestModel>;
   @useResult
   $Res call(
-      {String? timelineName,
+      {String? encounterId,
+      String? timelineName,
       String? timelineVersion,
+      String? stageName,
+      String? stageVersion,
       dynamic formData,
+      String? serviceRequestId,
       String? performerId,
       String? performerRole,
       String? verifiedById,
-      String? verifiedByRole});
+      String? verifiedByRole,
+      dynamic metaData});
 }
 
 /// @nodoc
@@ -67,15 +77,24 @@ class _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? encounterId = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
+    Object? stageName = freezed,
+    Object? stageVersion = freezed,
     Object? formData = freezed,
+    Object? serviceRequestId = freezed,
     Object? performerId = freezed,
     Object? performerRole = freezed,
     Object? verifiedById = freezed,
     Object? verifiedByRole = freezed,
+    Object? metaData = freezed,
   }) {
     return _then(_value.copyWith(
+      encounterId: freezed == encounterId
+          ? _value.encounterId
+          : encounterId // ignore: cast_nullable_to_non_nullable
+              as String?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -84,10 +103,22 @@ class _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
+      stageName: freezed == stageName
+          ? _value.stageName
+          : stageName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stageVersion: freezed == stageVersion
+          ? _value.stageVersion
+          : stageVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      serviceRequestId: freezed == serviceRequestId
+          ? _value.serviceRequestId
+          : serviceRequestId // ignore: cast_nullable_to_non_nullable
+              as String?,
       performerId: freezed == performerId
           ? _value.performerId
           : performerId // ignore: cast_nullable_to_non_nullable
@@ -104,6 +135,10 @@ class _$EBSubmitFormDataRequestModelCopyWithImpl<$Res,
           ? _value.verifiedByRole
           : verifiedByRole // ignore: cast_nullable_to_non_nullable
               as String?,
+      metaData: freezed == metaData
+          ? _value.metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -118,13 +153,18 @@ abstract class _$$EBSubmitFormDataRequestModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? timelineName,
+      {String? encounterId,
+      String? timelineName,
       String? timelineVersion,
+      String? stageName,
+      String? stageVersion,
       dynamic formData,
+      String? serviceRequestId,
       String? performerId,
       String? performerRole,
       String? verifiedById,
-      String? verifiedByRole});
+      String? verifiedByRole,
+      dynamic metaData});
 }
 
 /// @nodoc
@@ -140,15 +180,24 @@ class __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? encounterId = freezed,
     Object? timelineName = freezed,
     Object? timelineVersion = freezed,
+    Object? stageName = freezed,
+    Object? stageVersion = freezed,
     Object? formData = freezed,
+    Object? serviceRequestId = freezed,
     Object? performerId = freezed,
     Object? performerRole = freezed,
     Object? verifiedById = freezed,
     Object? verifiedByRole = freezed,
+    Object? metaData = freezed,
   }) {
     return _then(_$EBSubmitFormDataRequestModelImpl(
+      encounterId: freezed == encounterId
+          ? _value.encounterId
+          : encounterId // ignore: cast_nullable_to_non_nullable
+              as String?,
       timelineName: freezed == timelineName
           ? _value.timelineName
           : timelineName // ignore: cast_nullable_to_non_nullable
@@ -157,10 +206,22 @@ class __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>
           ? _value.timelineVersion
           : timelineVersion // ignore: cast_nullable_to_non_nullable
               as String?,
+      stageName: freezed == stageName
+          ? _value.stageName
+          : stageName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stageVersion: freezed == stageVersion
+          ? _value.stageVersion
+          : stageVersion // ignore: cast_nullable_to_non_nullable
+              as String?,
       formData: freezed == formData
           ? _value.formData
           : formData // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      serviceRequestId: freezed == serviceRequestId
+          ? _value.serviceRequestId
+          : serviceRequestId // ignore: cast_nullable_to_non_nullable
+              as String?,
       performerId: freezed == performerId
           ? _value.performerId
           : performerId // ignore: cast_nullable_to_non_nullable
@@ -177,6 +238,10 @@ class __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>
           ? _value.verifiedByRole
           : verifiedByRole // ignore: cast_nullable_to_non_nullable
               as String?,
+      metaData: freezed == metaData
+          ? _value.metaData
+          : metaData // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -186,24 +251,37 @@ class __$$EBSubmitFormDataRequestModelImplCopyWithImpl<$Res>
 class _$EBSubmitFormDataRequestModelImpl
     implements _EBSubmitFormDataRequestModel {
   const _$EBSubmitFormDataRequestModelImpl(
-      {this.timelineName,
+      {this.encounterId,
+      this.timelineName,
       this.timelineVersion,
+      this.stageName,
+      this.stageVersion,
       this.formData,
+      this.serviceRequestId,
       this.performerId,
       this.performerRole,
       this.verifiedById,
-      this.verifiedByRole});
+      this.verifiedByRole,
+      this.metaData});
 
   factory _$EBSubmitFormDataRequestModelImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$EBSubmitFormDataRequestModelImplFromJson(json);
 
   @override
+  final String? encounterId;
+  @override
   final String? timelineName;
   @override
   final String? timelineVersion;
   @override
+  final String? stageName;
+  @override
+  final String? stageVersion;
+  @override
   final dynamic formData;
+  @override
+  final String? serviceRequestId;
   @override
   final String? performerId;
   @override
@@ -212,10 +290,12 @@ class _$EBSubmitFormDataRequestModelImpl
   final String? verifiedById;
   @override
   final String? verifiedByRole;
+  @override
+  final dynamic metaData;
 
   @override
   String toString() {
-    return 'EBSubmitFormDataRequestModel(timelineName: $timelineName, timelineVersion: $timelineVersion, formData: $formData, performerId: $performerId, performerRole: $performerRole, verifiedById: $verifiedById, verifiedByRole: $verifiedByRole)';
+    return 'EBSubmitFormDataRequestModel(encounterId: $encounterId, timelineName: $timelineName, timelineVersion: $timelineVersion, stageName: $stageName, stageVersion: $stageVersion, formData: $formData, serviceRequestId: $serviceRequestId, performerId: $performerId, performerRole: $performerRole, verifiedById: $verifiedById, verifiedByRole: $verifiedByRole, metaData: $metaData)';
   }
 
   @override
@@ -223,11 +303,19 @@ class _$EBSubmitFormDataRequestModelImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EBSubmitFormDataRequestModelImpl &&
+            (identical(other.encounterId, encounterId) ||
+                other.encounterId == encounterId) &&
             (identical(other.timelineName, timelineName) ||
                 other.timelineName == timelineName) &&
             (identical(other.timelineVersion, timelineVersion) ||
                 other.timelineVersion == timelineVersion) &&
+            (identical(other.stageName, stageName) ||
+                other.stageName == stageName) &&
+            (identical(other.stageVersion, stageVersion) ||
+                other.stageVersion == stageVersion) &&
             const DeepCollectionEquality().equals(other.formData, formData) &&
+            (identical(other.serviceRequestId, serviceRequestId) ||
+                other.serviceRequestId == serviceRequestId) &&
             (identical(other.performerId, performerId) ||
                 other.performerId == performerId) &&
             (identical(other.performerRole, performerRole) ||
@@ -235,20 +323,26 @@ class _$EBSubmitFormDataRequestModelImpl
             (identical(other.verifiedById, verifiedById) ||
                 other.verifiedById == verifiedById) &&
             (identical(other.verifiedByRole, verifiedByRole) ||
-                other.verifiedByRole == verifiedByRole));
+                other.verifiedByRole == verifiedByRole) &&
+            const DeepCollectionEquality().equals(other.metaData, metaData));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      encounterId,
       timelineName,
       timelineVersion,
+      stageName,
+      stageVersion,
       const DeepCollectionEquality().hash(formData),
+      serviceRequestId,
       performerId,
       performerRole,
       verifiedById,
-      verifiedByRole);
+      verifiedByRole,
+      const DeepCollectionEquality().hash(metaData));
 
   @JsonKey(ignore: true)
   @override
@@ -269,23 +363,36 @@ class _$EBSubmitFormDataRequestModelImpl
 abstract class _EBSubmitFormDataRequestModel
     implements EBSubmitFormDataRequestModel {
   const factory _EBSubmitFormDataRequestModel(
-      {final String? timelineName,
+      {final String? encounterId,
+      final String? timelineName,
       final String? timelineVersion,
+      final String? stageName,
+      final String? stageVersion,
       final dynamic formData,
+      final String? serviceRequestId,
       final String? performerId,
       final String? performerRole,
       final String? verifiedById,
-      final String? verifiedByRole}) = _$EBSubmitFormDataRequestModelImpl;
+      final String? verifiedByRole,
+      final dynamic metaData}) = _$EBSubmitFormDataRequestModelImpl;
 
   factory _EBSubmitFormDataRequestModel.fromJson(Map<String, dynamic> json) =
       _$EBSubmitFormDataRequestModelImpl.fromJson;
 
   @override
+  String? get encounterId;
+  @override
   String? get timelineName;
   @override
   String? get timelineVersion;
   @override
+  String? get stageName;
+  @override
+  String? get stageVersion;
+  @override
   dynamic get formData;
+  @override
+  String? get serviceRequestId;
   @override
   String? get performerId;
   @override
@@ -294,6 +401,8 @@ abstract class _EBSubmitFormDataRequestModel
   String? get verifiedById;
   @override
   String? get verifiedByRole;
+  @override
+  dynamic get metaData;
   @override
   @JsonKey(ignore: true)
   _$$EBSubmitFormDataRequestModelImplCopyWith<

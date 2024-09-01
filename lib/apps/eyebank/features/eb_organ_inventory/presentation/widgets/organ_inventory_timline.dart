@@ -56,7 +56,10 @@ class OrganInventoryTimline extends ConsumerWidget {
   }
 
   void showAssignmentFlow(
-      BuildContext context, String? serviceRequestId) async {
+    BuildContext context,
+    String? serviceRequestId,
+    EBTimelineEntity event,
+  ) async {
     final navigator = Navigator.of(context);
     navigator.push(MaterialPageRoute(builder: (context) {
       return const OrganTissueSearchScreen();
@@ -65,7 +68,7 @@ class OrganInventoryTimline extends ConsumerWidget {
 
   _handleCaseSelected(BuildContext context, EBTimelineEntity event) {
     if (event.stage == EBStageName.CORNEA_ASSIGNMENT) {
-      showAssignmentFlow(context, event.serviceRequestId);
+      showAssignmentFlow(context, event.serviceRequestId, event);
     } else {
       final navigator = Navigator.of(context);
       navigator.push(

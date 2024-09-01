@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/rep
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_form_prefilled_response_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/mappers/eb_form_prefilled_mapper.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter/foundation.dart';
@@ -102,6 +103,16 @@ class EbFormManageProvider extends ChangeNotifier {
       serviceRequestId,
       action,
       ebFormActionRequestModel,
+    );
+  }
+
+  Future<Either<EBFailure, void>> saveOrDraftTransplatForm({
+    required DynamicFormSavingType action,
+    required EBSubmitFormDataRequestModel ebFormActionRequestModel,
+  }) async {
+    return await _ebFormManageRepository.saveOrDraftTransplatForm(
+      ebFormActionRequestModel,
+      action,
     );
   }
 }

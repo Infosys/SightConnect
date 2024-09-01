@@ -24,44 +24,6 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   Future<Either<EBFailure, List<EBTimelineModel>>> fetchTimelineByID(
       String? encounterID) {
     return EyeBankErrorHandler.handle(() async {
-      // const sampleJson = [
-      //   {
-      //     "serviceRequestId": 1,
-      //     "title": "DEATH_INTIMATION",
-      //     "stage": "DEATH_INTIMATION",
-      //     "assessmentVersion": "1",
-      //     "status": "COMPLETED",
-      //     "initiateDate": "2023-10-01T12:00:00Z",
-      //     "recentUpdated": "2023-10-01T12:00:00Z",
-      //     "stages": []
-      //   },
-      //   {
-      //     "serviceRequestId": 2,
-      //     "title": "DONOR_SCREENING",
-      //     "stage": "DONOR_SCREENING",
-      //     "assessmentVersion": "1",
-      //     "status": "COMPLETED",
-      //     "initiateDate": "2023-10-01T12:00:00Z",
-      //     "recentUpdated": "2023-10-01T12:00:00Z",
-      //     "stages": []
-      //   },
-      //   {
-      //     "serviceRequestId": 3,
-      //     "title": "CORNEA_RECOVERY",
-      //     "stage": "CORNEA_RECOVERY",
-      //     "assessmentVersion": "1",
-      //     "status": "COMPLETED",
-      //     "initiateDate": "2023-10-01T12:00:00Z",
-      //     "recentUpdated": "2023-10-01T12:00:00Z",
-      //     "stages": []
-      //   },
-      // ];
-
-      // return Future.delayed(
-      //   const Duration(seconds: 1),
-      //   () => sampleJson.map((e) => EBTimelineModel.fromJson(e)).toList(),
-      // );
-
       final endPoint = '/services/eyebank/api/encounters/$encounterID/timeline';
       final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {

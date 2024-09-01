@@ -16,10 +16,6 @@ final ebIntimationFormProvider =
     (r) => r,
   );
 });
-// final ebSubmitIntimationFormProvider = StateProvider((ref) {
-//   // final repo = ref.watch(ebTimlineRepoProvider);
-//   // return repo
-// });
 
 //GET ALL ENCOUNTERS
 final ebGetRecordsProvider =
