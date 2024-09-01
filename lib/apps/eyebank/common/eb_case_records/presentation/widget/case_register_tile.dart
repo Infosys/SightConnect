@@ -229,6 +229,9 @@ Widget _buildDateColumn(BuildContext context, String label, String? date) {
 }
 
 Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
+  if (item?.activeStages == null || item!.activeStages.isEmpty) {
+    return const SizedBox();
+  }
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -240,7 +243,7 @@ Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
       Wrap(
         spacing: 4,
         runSpacing: 4,
-        children: item?.activeStages
+        children: item.activeStages
                 .toSet()
                 .map((stage) =>
                     _buildOrganChip(context, stage.displayValue.toUpperCase()))

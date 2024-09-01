@@ -3,6 +3,7 @@ import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/data/models/eb_form_action_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/common/eb_form_management/presentation/provider/eb_form_manage_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presentation/provider/eb_case_time_line_provider.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
@@ -176,6 +177,7 @@ class EBFormManagePage extends ConsumerWidget {
         },
         (success) {
           ref.invalidate(ebCaseTimeLineProvider);
+          ref.invalidate(ebOrganTimelineProvider);
           final navigator = Navigator.of(context);
           navigator.pop();
           Fluttertoast.showToast(
