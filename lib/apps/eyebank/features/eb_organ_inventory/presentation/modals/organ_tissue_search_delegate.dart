@@ -6,35 +6,48 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 Future<Map<String, dynamic>> fetchTissues(int pageKey, int pageSize) async {
-  await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+  await Future.delayed(const Duration(seconds: 2));
   return {
     "content": [
       {
-        "tissueId": "1",
-        "cellCount": 1000,
-        "harvestDate": "2023-01-01",
-        "suitableProcedures": ["PK"],
-        "clearZone": "Clear",
-        "lensType": "Type A",
-        "Pachemetry": 500,
-        "tissueExpiry": "2024-08-30T14:02:54.118Z"
-      },
-      {
-        "tissueId": "2",
-        "cellCount": 1200,
-        "harvestDate": "2023-02-01",
-        "suitableProcedures": ["PK", "DMEK"],
-        "clearZone": "Clear",
-        "lensType": "Type B",
-        "Pachemetry": 520,
-        "tissueExpiry": "2024-09-30T14:02:54.118Z"
+        "id": 2101,
+        "identifier": "OD-000001",
+        "productCategory": "ORGAN",
+        "productCode": "CORNEA_OD",
+        "productStatus": null,
+        "expiryDate": null,
+        "lotNumber": null,
+        "storageMedium": null,
+        "properties": null,
+        "storageTemp": null,
+        "document": null,
+        "recoveryInformation": {
+          "id": 2151,
+          "extractionMethod": "IN_SITU",
+          "extractionDateTime": "2024-08-27T06:30:00Z",
+          "lotNumber": "12",
+          "storageMedium": "MK_MEDIUM",
+          "expirationDate": "2024-08-27T06:30:00Z",
+          "intent": "RESEARCH",
+          "performedBy": "12",
+          "performerRole": null,
+          "assistedBy": "12",
+          "assistedRole": null,
+          "properties": {"comments": "12", "scleraRecovered": 0},
+          "storageTemp": null,
+          "documents": null,
+          "productCategory": "ORGAN",
+          "productCode": "CORNEA_OD",
+          "productIdentifier": "OD-000001"
+        },
+        "encounterId": 1001
       },
     ],
-    "totalElements": 2,
+    "totalElements": 1,
     "totalPages": 1,
     "size": pageSize,
     "number": pageKey,
-    "numberOfElements": 2,
+    "numberOfElements": 1,
     "empty": false,
     "first": true,
     "last": true
@@ -113,59 +126,62 @@ class _OrganTissueSearchScreenState
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Map<String, dynamic>>(
           itemBuilder: (context, item, index) {
-            return Stack(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16.0),
-                  margin: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
+            return Container(
+              padding: const EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    spacing: 16.0,
+                    runAlignment: WrapAlignment.spaceBetween,
+                    runSpacing: 16.0,
                     children: [
-                      Wrap(
-                        spacing: 16.0,
-                        runAlignment: WrapAlignment.spaceBetween,
-                        runSpacing: 16.0,
-                        children: [
-                          _buildDetailColumn('Tissue ID', item['tissueId']),
-                          _buildDetailColumn(
-                              'Cell Count', item['cellCount'].toString()),
-                          _buildDetailColumn(
-                              'Harvest Date', item['harvestDate']),
-                          _buildDetailColumn('Suitable Procedures',
-                              item['suitableProcedures'].join(', ')),
-                          _buildDetailColumn('Clear Zone', item['clearZone']),
-                          _buildDetailColumn('Lens Type', item['lensType']),
-                          _buildDetailColumn(
-                              'Pachemetry', item['Pachemetry'].toString()),
-                          _buildDetailColumn(
-                              'Tissue Expiry', item['tissueExpiry']),
-                        ],
+                      _buildDetailColumn('ID', item['id'].toString()),
+                      _buildDetailColumn('Identifier', item['identifier']),
+                      _buildDetailColumn(
+                          'Product Category', item['productCategory']),
+                      _buildDetailColumn('Product Code', item['productCode']),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          _showDetailsBottomSheet(context, item);
+                        },
+                        child: const Text('Details'),
+                      ),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextButton.icon(
+                          onPressed: () {
+                            _assignToRequest(item);
+                          },
+                          label: const Text('Assign Tissue'),
+                          icon: const Icon(Icons.chevron_left),
+                        ),
                       ),
                     ],
                   ),
-                ),
-                Positioned(
-                  bottom: 16,
-                  right: 16,
-                  child: TextButton.icon(
-                    onPressed: () {},
-                    label: const Text('Assign Tissue'),
-                    icon: const Icon(Icons.add),
-                  ),
-                ),
-              ],
+                ],
+              ),
             );
           },
           firstPageErrorIndicatorBuilder: (context) =>
@@ -202,5 +218,50 @@ class _OrganTissueSearchScreenState
         ),
       ],
     );
+  }
+
+  void _showDetailsBottomSheet(
+      BuildContext context, Map<String, dynamic> item) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Wrap(
+            spacing: 16.0,
+            runSpacing: 16.0,
+            runAlignment: WrapAlignment.spaceBetween,
+            children: [
+              _buildDetailColumn('ID', item['id'].toString()),
+              _buildDetailColumn('Identifier', item['identifier']),
+              _buildDetailColumn('Product Category', item['productCategory']),
+              _buildDetailColumn('Product Code', item['productCode']),
+              _buildDetailColumn('Extraction Method',
+                  item['recoveryInformation']['extractionMethod']),
+              _buildDetailColumn('Extraction DateTime',
+                  item['recoveryInformation']['extractionDateTime']),
+              _buildDetailColumn(
+                  'Lot Number', item['recoveryInformation']['lotNumber']),
+              _buildDetailColumn('Storage Medium',
+                  item['recoveryInformation']['storageMedium']),
+              _buildDetailColumn('Expiration Date',
+                  item['recoveryInformation']['expirationDate']),
+              _buildDetailColumn(
+                  'Intent', item['recoveryInformation']['intent']),
+              _buildDetailColumn(
+                  'Performed By', item['recoveryInformation']['performedBy']),
+              _buildDetailColumn('Comments',
+                  item['recoveryInformation']['properties']['comments']),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _assignToRequest(Map<String, dynamic> item) {
+    // Implement the logic to assign the tissue to a request
+    // For example, you can navigate to another screen or show a dialog
+    print('Assigning tissue with ID ${item['id']} to a request');
   }
 }

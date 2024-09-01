@@ -74,7 +74,7 @@ class DioService extends StateNotifier<Dio> {
           ),
         ) {
     setupRequestHeaders();
-    setupInterceptors();
+    // setupInterceptors();
   }
 
   void setupRequestHeaders() {

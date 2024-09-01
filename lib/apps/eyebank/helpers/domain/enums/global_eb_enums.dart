@@ -39,7 +39,7 @@ enum EBStageName {
     displayValue: 'In Inventory',
   ),
 
-  /////-------------------CORNEA DONATION-------------------/////
+  /////-------------------CORNEA TRANSPLANT-------------------/////
 
   CORNEA_REQUEST(
     value: 'CORNEA_REQUEST',

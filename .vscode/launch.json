@@ -11,9 +11,8 @@
             "args": [
                 "-d",
                 "chrome",
-                "--web-browser-flag",
-                "--disable-web-security"
-            ],
+                "--web-browser-flag=--disable-web-security"
+            ]
         },
         {
             "name": "EYE_CARE_FOR_ALL_INFOSYS",
@@ -28,66 +27,6 @@
         },
         {
             "name": "EYE_CARE_FOR_ALL_INFOSYS (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "dynamic_form",
-            "cwd": "packages\\dynamic_form",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "dynamic_form (profile mode)",
-            "cwd": "packages\\dynamic_form",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "dynamic_form (release mode)",
-            "cwd": "packages\\dynamic_form",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "flutter_miniapp_web_runner",
-            "cwd": "packages\\flutter_miniapp_web_runner",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "flutter_miniapp_web_runner (profile mode)",
-            "cwd": "packages\\flutter_miniapp_web_runner",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "flutter_miniapp_web_runner (release mode)",
-            "cwd": "packages\\flutter_miniapp_web_runner",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "superapp_scanner",
-            "cwd": "packages\\superapp_scanner",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "superapp_scanner (profile mode)",
-            "cwd": "packages\\superapp_scanner",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "superapp_scanner (release mode)",
-            "cwd": "packages\\superapp_scanner",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

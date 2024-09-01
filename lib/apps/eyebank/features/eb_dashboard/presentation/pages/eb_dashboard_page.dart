@@ -1,16 +1,12 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/provider/eb_dashbord_menu_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/widgets/eye_bank_bottom_nav.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_profile/data/repositories/eb_profile_repository_impl.dart';
-import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_exit.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EBDashboardPage extends HookConsumerWidget {
@@ -19,23 +15,25 @@ class EBDashboardPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    ref.listen(ebProfileProvider, (previous, next) {
-      if (next.hasError) {
-        logger.d("Logged out from PatientDashboardPage ");
-        ref.read(initializationProvider).logout().then((value) {
-          Fluttertoast.showToast(msg: loc.patientLoggedOut);
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            LoginPage.routeName,
-            (route) => false,
-          );
-        }).catchError((e) {
-          logger.e(
-              "Apologies, we encountered a logout error in the mobile app. from EBDashboardPage : $e");
-          Fluttertoast.showToast(msg: loc.patientLogoutError);
-        });
-      }
-    });
+    // ref.listen(getEBProfileProvider, (previous, next) {
+    //   if (next.hasError) {
+    //     logger.d("Logged out from PatientDashboardPage ");
+    //     ref.read(initializationProvider).logout().then((value) {
+    //       Fluttertoast.showToast(msg: loc.patientLoggedOut);
+    //       Navigator.pushNamedAndRemoveUntil(
+    //         context,
+    //         LoginPage.routeName,
+    //         (route) => false,
+    //       );
+    //     }).catchError((e) {
+    //       logger.e(
+    //           "Apologies, we encountered a logout error in the mobile app. from EBDashboardPage : $e");
+    //       Fluttertoast.showToast(msg: loc.patientLogoutError);
+    //     });
+    //   }
+    // });
+
+    return const _EBDashboardLayout();
 
     return ref.watch(getEBProfileProvider).when(
           data: (data) {

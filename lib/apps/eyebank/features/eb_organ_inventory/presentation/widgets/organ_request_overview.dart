@@ -66,8 +66,9 @@ class OrganRequestOverview extends StatelessWidget {
               final navigator = Navigator.of(context);
               navigator.push(
                 MaterialPageRoute(
-                  builder: (context) => const OrganInventoryTimline(
-                    encounterID: '12',
+                  builder: (context) => OrganInventoryTimline(
+                    encounterID: item.encounterId,
+                    timlineVersion: "0.0.1",
                   ),
                 ),
               );
