@@ -13,7 +13,12 @@ abstract class EBOrganInventoryRepository {
       getOrganInventoryStatistics();
 
   Future<Either<EBFailure, OrganTissueSearchDeligateModel>>
-      getOrganTissueSearchDelegate();
+      getOrganTissueSearchDelegate(
+          {List<String>? procedure,
+          String? tissueId,
+          String? tissueExpiry,
+          int? page,
+          int? size});
 }
 
 final ebOrganInventoryRepositoryProvider = Provider(
@@ -44,9 +49,24 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
 
   @override
   Future<Either<EBFailure, OrganTissueSearchDeligateModel>>
-      getOrganTissueSearchDelegate() {
+      getOrganTissueSearchDelegate(
+          {List<String>? procedure,
+          String? tissueId,
+          String? tissueExpiry,
+          int? page,
+          int? size}) async {
     return EyeBankErrorHandler.handle(() async {
-      const endPoint = '/services/eyebank/api/encounters/filters/tissues';
+      final queryParams = {
+        'procedure': procedure,
+        'tissueId': tissueId,
+        'tissueExpiry': tissueExpiry,
+        'page': page,
+        'size': size,
+      };
+      queryParams.removeWhere((key, value) => value == null);
+
+      const endPoint = '/services/eyebank/api/encounters/inventory/search';
+
       final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         final data = OrganTissueSearchDeligateModel.fromJson(response.data);
