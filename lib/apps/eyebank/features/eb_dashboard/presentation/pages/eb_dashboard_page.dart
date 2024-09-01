@@ -33,7 +33,7 @@ class EBDashboardPage extends HookConsumerWidget {
     //   }
     // });
 
-    return const _EBDashboardLayout();
+    // return const _EBDashboardLayout();
 
     return ref.watch(getEBProfileProvider).when(
           data: (data) {
