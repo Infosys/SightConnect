@@ -1,47 +1,14 @@
-// Update TableData model
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/filter_bottom_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_request_model.dart';
-import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_timline.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-class OrganRequestOverviewProviderParam {
-  final int pageKey;
-  final int pageSize;
-  final List<Filter>? filters;
-
-  OrganRequestOverviewProviderParam({
-    required this.pageKey,
-    required this.pageSize,
-    this.filters,
-  });
-}
-
-final organRequestOverviewProvider = FutureProvider.family<
-    OrganTissueRequestModel,
-    OrganRequestOverviewProviderParam>((ref, param) async {
-  final repo = ref.read(ebOrganInventoryRepositoryProvider);
-  final response = await repo.getOrganTissueRequest(
-    page: param.pageKey,
-    size: param.pageSize,
-  );
-  return response.fold((e) => throw e, (data) => data);
-});
-
-Future<List<Content>> fetchPageData(
-    int pageKey, int pageSize, List<Filter> filters, WidgetRef ref) async {
-  final repo = ref.read(ebOrganInventoryRepositoryProvider);
-  final response = await repo.getOrganTissueRequest(
-    page: pageKey,
-    size: pageSize,
-  );
-  return response.fold((e) => throw e, (data) => data.content ?? []);
-}
 
 class OrganRequestOverview extends ConsumerWidget {
   const OrganRequestOverview({super.key});
@@ -51,8 +18,25 @@ class OrganRequestOverview extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: EbInfiniteScrollView<Content>(
-        fetchPageData: (pageKey, pageSize, filters) =>
-            fetchPageData(pageKey, pageSize, filters, ref),
+        fetchPageData: (pageKey, pageSize, filters) async {
+          logger.d({
+            "Filters": filters.map((e) => e.value).toList(),
+          });
+          final filterMap = {
+            for (var filter in filters) filter.name: filter.value
+          };
+
+          final params = GetOrganTissueRequestParams(
+            page: pageKey,
+            size: pageSize,
+            surgeryType: filterMap['Filter by Surgery Type'],
+            stage: filterMap['Filter by Stage'],
+            requestDate: filterMap['Request Date'],
+          );
+          final records =
+              await ref.read(organRequestOverviewProvider(params).future);
+          return records.content ?? [];
+        },
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
             encounterId: item.encounterId ?? '',
@@ -73,9 +57,8 @@ class OrganRequestOverview extends ConsumerWidget {
                 ),
               );
             },
-            onAssignTissue: () {
-              // _showAssignmentFlow(context, index);
-            },
+            onAccept: () {},
+            onReject: () {},
           );
         },
         filterOptions: [
@@ -106,7 +89,6 @@ class OrganRequestOverview extends ConsumerWidget {
         enableSearch: false,
         enableFilter: true,
         defaultPageSize: 10,
-        onSearchTap: () {},
       ),
     );
   }
@@ -118,7 +100,8 @@ class _OrganRequestCard extends StatelessWidget {
   final String requestedBy;
   final DateTime? requestedDate;
   final String procedures;
-  final VoidCallback? onAssignTissue;
+  final VoidCallback? onAccept;
+  final VoidCallback? onReject;
   final VoidCallback? onTimeLine;
 
   const _OrganRequestCard({
@@ -128,7 +111,8 @@ class _OrganRequestCard extends StatelessWidget {
     required this.requestedBy,
     required this.requestedDate,
     required this.procedures,
-    this.onAssignTissue,
+    this.onAccept,
+    this.onReject,
     this.onTimeLine,
   }) : super(key: key);
 
@@ -211,7 +195,7 @@ class _OrganRequestCard extends StatelessWidget {
               Tooltip(
                 message: "Reject Request",
                 child: TextButton.icon(
-                  onPressed: () {},
+                  onPressed: onReject,
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.red,
                   ),
@@ -225,7 +209,7 @@ class _OrganRequestCard extends StatelessWidget {
               Tooltip(
                 message: "Accept Request",
                 child: TextButton.icon(
-                  onPressed: onAssignTissue,
+                  onPressed: onAccept,
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.green,
                   ),

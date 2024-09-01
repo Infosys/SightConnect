@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/mappers/eb_timeline_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/eb_organ_inventory_analytics_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -70,4 +71,31 @@ final ebOrganInventoryAnalyticsProvder =
     (l) => throw l,
     (r) => r,
   );
+});
+
+class GetOrganTissueRequestParams {
+  final int page;
+  final int size;
+  final String? surgeryType;
+  final String? stage;
+  final String? requestDate;
+
+  GetOrganTissueRequestParams({
+    required this.page,
+    required this.size,
+    this.surgeryType,
+    this.stage,
+    this.requestDate,
+  });
+}
+
+final organRequestOverviewProvider =
+    FutureProvider.family<OrganTissueRequestModel, GetOrganTissueRequestParams>(
+        (ref, param) async {
+  final repo = ref.read(ebOrganInventoryRepositoryProvider);
+  final response = await repo.getOrganTissueRequest(
+    page: param.page,
+    size: param.size,
+  );
+  return response.fold((e) => throw e, (data) => data);
 });
