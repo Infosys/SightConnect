@@ -11,7 +11,10 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 final tissuesProvider = FutureProvider.family
     .autoDispose<OrganTissueSearchDeligateModel, int>((ref, pageKey) async {
   final repo = ref.read(ebOrganInventoryRepositoryProvider);
-  final response = await repo.getOrganTissueSearchDelegate();
+  final response = await repo.getOrganTissueSearchDelegate(
+    page: pageKey,
+    size: 10,
+  );
   return response.fold(
     (e) => throw e,
     (data) => data,
@@ -19,8 +22,7 @@ final tissuesProvider = FutureProvider.family
 });
 
 class OrganTissueSearchScreen extends ConsumerStatefulWidget {
-  const OrganTissueSearchScreen({this.onAssign, Key? key}) : super(key: key);
-  final Function(dynamic)? onAssign;
+  const OrganTissueSearchScreen({Key? key}) : super(key: key);
 
   @override
   _OrganTissueSearchScreenState createState() =>
