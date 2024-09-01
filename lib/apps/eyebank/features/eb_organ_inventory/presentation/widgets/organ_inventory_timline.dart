@@ -64,6 +64,21 @@ class OrganInventoryTimline extends ConsumerWidget {
     navigator.push(MaterialPageRoute(builder: (context) {
       return OrganTissueSearchScreen(onAssignToRequest: (content) {
         logger.i(content.toString());
+        final navigator = Navigator.of(context);
+        navigator.push(
+          MaterialPageRoute(
+            builder: (context) => EBFormManagePage(
+              title: event.title ?? "",
+              stageName: event.stage?.value,
+              stageVersion: event.stageVersion,
+              serviceRequestId: event.serviceRequestId,
+              encounterId: encounterID,
+              timelineName: event.timelineName,
+              timelineVersion: event.timelineVersion,
+              status: event.status,
+            ),
+          ),
+        );
       });
     }));
   }

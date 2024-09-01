@@ -64,11 +64,11 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
 
       for (int i = 0; i < prefilledPanels.length; i++) {
         var key = getUniqueKey();
-        Log.f(key);
+        // Log.f(key);
         repeatedPanelKeys.add(key);
       }
       formatedInitialValue = _formatInitialValue(prefilledPanels);
-      Log.f(formatedInitialValue);
+      // Log.f(formatedInitialValue);
     } catch (e) {
       Log.e(" AppDynamicPanel _createdPrefilledPanels error: $e");
     }
@@ -77,7 +77,10 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   Map<String, dynamic> _formatInitialValue(List<dynamic> prefilledPanels) {
     Map<String, dynamic> formattedValue = {};
     for (int i = 0; i < prefilledPanels.length; i++) {
-      Map<String, dynamic> temp = prefilledPanels[i];
+      Map<String, dynamic>? temp = prefilledPanels[i];
+      if (temp == null) {
+        continue;
+      }
       for (var element in temp.entries) {
         formattedValue['${element.key}_${repeatedPanelKeys[i]}'] =
             element.value;
