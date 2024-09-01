@@ -101,8 +101,8 @@ class GetOrganTissueRequestParams {
   });
 }
 
-final organRequestOverviewProvider =
-    FutureProvider.family<OrganTissueRequestModel, GetOrganTissueRequestParams>(
+final organRequestOverviewProvider = FutureProvider.family
+    .autoDispose<OrganTissueRequestModel, GetOrganTissueRequestParams>(
         (ref, param) async {
   final repo = ref.read(ebOrganInventoryRepositoryProvider);
   final response = await repo.getOrganTissueRequest(

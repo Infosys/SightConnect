@@ -15,79 +15,84 @@ class OrganRequestOverview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: EbInfiniteScrollView<Content>(
-        fetchPageData: (pageKey, pageSize, filters) async {
-          logger.d({
-            "Filters": filters.map((e) => e.value).toList(),
-          });
-          final filterMap = {
-            for (var filter in filters) filter.name: filter.value
-          };
+    return RefreshIndicator(
+      onRefresh: () async {
+        ref.invalidate(organRequestOverviewProvider);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: EbInfiniteScrollView<Content>(
+          fetchPageData: (pageKey, pageSize, filters) async {
+            logger.d({
+              "Filters": filters.map((e) => e.value).toList(),
+            });
+            final filterMap = {
+              for (var filter in filters) filter.name: filter.value
+            };
 
-          final params = GetOrganTissueRequestParams(
-            page: pageKey,
-            size: pageSize,
-            surgeryType: filterMap['Filter by Surgery Type'],
-            stage: filterMap['Filter by Stage'],
-            requestDate: filterMap['Request Date'],
-          );
-          final records =
-              await ref.read(organRequestOverviewProvider(params).future);
-          return records.content ?? [];
-        },
-        itemBuilder: (context, item, index) {
-          return _OrganRequestCard(
-            encounterId: item.encounterId ?? '',
-            tissueTypeRequested: item.tissueTypeRequested ?? '',
-            requestedBy: item.requestedBy ?? '',
-            requestedDate: item.requestedDate == null
-                ? null
-                : DateTime.parse(item.requestedDate!),
-            procedures: item.procedures?.join(', ') ?? '',
-            onTimeLine: () {
-              final navigator = Navigator.of(context);
-              navigator.push(
-                MaterialPageRoute(
-                  builder: (context) => OrganInventoryTimline(
-                    encounterID: item.encounterId,
-                    timlineVersion: "0.0.1",
+            final params = GetOrganTissueRequestParams(
+              page: pageKey,
+              size: pageSize,
+              surgeryType: filterMap['Filter by Surgery Type'],
+              stage: filterMap['Filter by Stage'],
+              requestDate: filterMap['Request Date'],
+            );
+            final records =
+                await ref.read(organRequestOverviewProvider(params).future);
+            return records.content ?? [];
+          },
+          itemBuilder: (context, item, index) {
+            return _OrganRequestCard(
+              encounterId: item.encounterId ?? '',
+              tissueTypeRequested: item.tissueTypeRequested ?? '',
+              requestedBy: item.requestedBy ?? '',
+              requestedDate: item.requestedDate == null
+                  ? null
+                  : DateTime.parse(item.requestedDate!),
+              procedures: item.procedures?.join(', ') ?? '',
+              onTimeLine: () {
+                final navigator = Navigator.of(context);
+                navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => OrganInventoryTimline(
+                      encounterID: item.encounterId,
+                      timlineVersion: "0.0.1",
+                    ),
                   ),
-                ),
-              );
-            },
-            onReject: () {},
-          );
-        },
-        filterOptions: [
-          Filter(
-            name: 'Filter by Surgery Type',
-            type: FilterType.dropdown,
-            dropdownOptions: [
-              'PK',
-              'EK',
-              'DALK',
-              'K_LAL',
-              'K_PRO',
-              'OTHERS',
-            ],
-          ),
-          Filter(
-            name: 'Filter by Stage',
-            type: FilterType.dropdown,
-            dropdownOptions: [
-              'REQUESTED',
-              'ASSIGNED',
-              'REJECTED',
-              'COMPLETED',
-            ],
-          ),
-          Filter(name: 'Request Date', type: FilterType.date),
-        ],
-        enableSearch: false,
-        enableFilter: true,
-        defaultPageSize: 10,
+                );
+              },
+              onReject: () {},
+            );
+          },
+          filterOptions: [
+            Filter(
+              name: 'Filter by Surgery Type',
+              type: FilterType.dropdown,
+              dropdownOptions: [
+                'PK',
+                'EK',
+                'DALK',
+                'K_LAL',
+                'K_PRO',
+                'OTHERS',
+              ],
+            ),
+            Filter(
+              name: 'Filter by Stage',
+              type: FilterType.dropdown,
+              dropdownOptions: [
+                'REQUESTED',
+                'ASSIGNED',
+                'REJECTED',
+                'COMPLETED',
+              ],
+            ),
+            Filter(name: 'Request Date', type: FilterType.date),
+          ],
+          enableSearch: false,
+          enableFilter: true,
+          defaultPageSize: 10,
+        ),
       ),
     );
   }
