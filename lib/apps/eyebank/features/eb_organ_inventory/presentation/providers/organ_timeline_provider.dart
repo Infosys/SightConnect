@@ -1,7 +1,7 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/mappers/eb_timeline_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/eb_organ_inventory_analytics_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../main.dart';
@@ -14,12 +14,23 @@ final ebOrganTimelineProvider = FutureProvider.family
         (ref, data) async {
   final repo = ref.read(ebRepositoryProvider);
   try {
+    final timelinesResult = await repo.fetchTimelineByID(data.encounterID);
+    // logger.f('timelinesResult: $timelinesResult');
     final stagesResult =
         await repo.fetchTimelineStages(data.timelineName, data.timelineVersion);
-
-    final stages = stagesResult.getOrElse(() => const EbTimelineConfigModel());
-    logger.i(stages.toJson());
-    return EBOrganMapper.mapToEntity(stages);
+    // logger.f('stagesResult: $stagesResult');
+    if (timelinesResult.isRight() && stagesResult.isRight()) {
+      final timelines = timelinesResult.getOrElse(() => []);
+      final stages =
+          stagesResult.getOrElse(() => const EbTimelineConfigModel());
+      // log(EBTimelineMapper.mapToEntity(timelines, stages).toString());
+      return EBTimelineMapper.mapToEntity(timelines, stages);
+    } else {
+      throw EBServerFailure(
+        errorMessage: "failure in fetching timeline",
+        errorObject: EBErrorObject(),
+      );
+    }
   } on EBFailure catch (e) {
     logger.e('EBFailure: $e');
     rethrow;
@@ -28,38 +39,6 @@ final ebOrganTimelineProvider = FutureProvider.family
     rethrow;
   }
 });
-
-class EBOrganMapper {
-  static List<EBTimelineEntity> mapToEntity(EbTimelineConfigModel configModel) {
-    if (configModel.stages == null) {
-      return [];
-    }
-    return configModel.stages!.map((stage) {
-      return EBTimelineEntity(
-        timelineName: configModel.timelineName,
-        timelineVersion: configModel.timelineVersion,
-        serviceRequestId: null,
-        stage: _getStageName(stage.stageName),
-        title: stage.title,
-        stageVersion: stage.stageVersion,
-        status: EBStatus.UNKNOWN,
-        initiateDate: null,
-        recentUpdatedTime: null,
-        subStages: null,
-      );
-    }).toList();
-  }
-
-  static EBStageName? _getStageName(String? stageName) {
-    const stages = EBStageName.values;
-    for (var i = 0; i < stages.length; i++) {
-      if (stages[i].name == stageName) {
-        return stages[i];
-      }
-    }
-    return null;
-  }
-}
 
 class EbOrganTimlineParams {
   final String? encounterID;
