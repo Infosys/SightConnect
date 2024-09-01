@@ -18,6 +18,7 @@ final ebOrganTimelineProvider = FutureProvider.family
         await repo.fetchTimelineStages(data.timelineName, data.timelineVersion);
 
     final stages = stagesResult.getOrElse(() => const EbTimelineConfigModel());
+    logger.i(stages.toJson());
     return EBOrganMapper.mapToEntity(stages);
   } on EBFailure catch (e) {
     logger.e('EBFailure: $e');
@@ -30,6 +31,9 @@ final ebOrganTimelineProvider = FutureProvider.family
 
 class EBOrganMapper {
   static List<EBTimelineEntity> mapToEntity(EbTimelineConfigModel configModel) {
+    if (configModel.stages == null) {
+      return [];
+    }
     return configModel.stages!.map((stage) {
       return EBTimelineEntity(
         timelineName: configModel.timelineName,

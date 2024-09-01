@@ -53,9 +53,9 @@ enum EBStageName {
     value: 'CORNEA_CONFIRMATION',
     displayValue: 'Cornea Confirmation',
   ),
-  SENT_TO_SURGEON(
-    value: 'SENT_TO_SURGEON',
-    displayValue: 'Sent to Surgeon',
+  SHIPPED_TO_SURGEON(
+    value: 'SHIPPED_TO_SURGEON',
+    displayValue: 'Shipped to Surgeon',
   ),
   RECEIVED_BY_SURGEON(
     value: 'RECEIVED_BY_SURGEON',
@@ -66,7 +66,7 @@ enum EBStageName {
     value: 'CORNEA_TRANSPLANT',
     displayValue: 'Cornea Transplant',
   ),
-  ADVESRE_REACTION(
+  ADVERSE_REACTION(
     value: 'ADVERSE_REACTION',
     displayValue: 'Adverse Reaction',
   );
