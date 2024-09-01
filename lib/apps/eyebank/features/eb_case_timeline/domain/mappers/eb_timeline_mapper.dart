@@ -31,10 +31,10 @@ class EBTimelineMapper {
     final newConfigModel = configModel.copyWith(
       stages: configModel.stages!
           .where((stage) => !model.any((element) {
-                logger.i({
-                  "element.stage": element.stage,
-                  "stage.stageName": stage.stageName
-                });
+                // logger.i({
+                //   "element.stage": element.stage,
+                //   "stage.stageName": stage.stageName
+                // });
                 return element.stage == stage.stageName;
               }))
           .toList(),

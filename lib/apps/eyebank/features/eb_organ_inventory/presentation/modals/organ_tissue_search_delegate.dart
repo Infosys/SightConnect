@@ -137,16 +137,17 @@ class _OrganTissueSearchScreenState
                           },
                           child: const Text('Details'),
                         ),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: TextButton.icon(
-                            onPressed: () {
-                              widget.onAssignToRequest?.call(item);
-                            },
-                            label: const Text('Assign Tissue'),
-                            icon: const Icon(Icons.chevron_left),
+                        if (widget.onAssignToRequest != null)
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: TextButton.icon(
+                              onPressed: () {
+                                widget.onAssignToRequest?.call(item);
+                              },
+                              label: const Text('Assign Tissue'),
+                              icon: const Icon(Icons.chevron_left),
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ],
