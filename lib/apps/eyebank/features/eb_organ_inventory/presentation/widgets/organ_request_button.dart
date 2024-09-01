@@ -1,5 +1,4 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
-import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/provider/eb_case_record_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
@@ -7,11 +6,12 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../providers/organ_timeline_provider.dart';
 
 class OrganRequestButton extends StatelessWidget {
   const OrganRequestButton({super.key});
@@ -36,7 +36,7 @@ class OrganRequestButton extends StatelessWidget {
       context,
       Consumer(
         builder: (context, ref, child) {
-          final asyncValue = ref.watch(ebIntimationFormProvider);
+          final asyncValue = ref.watch(ebAddRequestProvider);
 
           return asyncValue.when(
             data: (intimationData) {
@@ -71,7 +71,7 @@ class OrganRequestButton extends StatelessWidget {
                       EyeBankErrorCard.showErrorToast(l, context);
                     }, (r) {
                       // invalidating recent cases provider to refresh the list
-                      ref.invalidate(ebGetRecordsProvider);
+                      ref.invalidate(organRequestOverviewProvider);
                       Navigator.pop(context);
                       Fluttertoast.showToast(msg: 'Case created successfully');
                     });
@@ -90,7 +90,7 @@ class OrganRequestButton extends StatelessWidget {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      ref.invalidate(ebIntimationFormProvider);
+                      ref.invalidate(ebAddRequestProvider);
                     },
                     child: const Text('Retry'),
                   ),
@@ -99,52 +99,6 @@ class OrganRequestButton extends StatelessWidget {
             },
           );
         },
-      ),
-    );
-  }
-}
-
-class _CreateNewCaseSection extends StatelessWidget {
-  const _CreateNewCaseSection({
-    required this.onPressed,
-    required this.buttonTxt,
-  });
-
-  final VoidCallback onPressed;
-  final String buttonTxt;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: AppColor.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Create New Case',
-            style: applyRobotoFont(
-              fontSize: 12,
-            ),
-          ),
-          ElevatedButton.icon(
-            onPressed: onPressed,
-            label: Text(
-              buttonTxt,
-              style: applyRobotoFont(
-                color: AppColor.white,
-                fontSize: 12,
-              ),
-            ),
-            icon: const Icon(
-              Icons.add,
-              size: 16,
-            ),
-          ),
-        ],
       ),
     );
   }

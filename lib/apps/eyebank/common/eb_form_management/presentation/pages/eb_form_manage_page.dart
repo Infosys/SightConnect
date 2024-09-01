@@ -114,8 +114,8 @@ class EBFormManagePage extends ConsumerWidget {
     required String? timelineVersion,
     required BuildContext context,
   }) async {
-    logger.d('FORMDATA: $data');
-    logger.d('MODE: $mode');
+    logger.f('Submitting form');
+    logger.f(data);
 
     final profile = ref.read(globalEBProvider);
     // final performedID = profile.userId.toString();

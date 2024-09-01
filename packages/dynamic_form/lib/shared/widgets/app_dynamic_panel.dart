@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
@@ -62,7 +60,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   _createdPrefilledPanels() {
     try {
       List<dynamic> prefilledPanels = widget.panel.initialValue ?? [];
-      log("Length: ${prefilledPanels.length}");
+      // log("Length: ${prefilledPanels.length}");
 
       for (int i = 0; i < prefilledPanels.length; i++) {
         var key = getUniqueKey();

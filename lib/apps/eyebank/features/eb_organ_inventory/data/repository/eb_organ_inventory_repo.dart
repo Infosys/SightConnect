@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/m
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_search_deligate_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,6 +113,7 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
           '/services/eyebank/api/encounters/filter/tissue-requests';
 
       final response = await _dio.get(endPoint, queryParameters: queryParams);
+      logger.f(response.data);
       if (response.statusCode == 200) {
         final data = OrganTissueRequestModel.fromJson(response.data);
         return data;

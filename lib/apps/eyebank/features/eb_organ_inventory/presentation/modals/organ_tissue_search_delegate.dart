@@ -1,6 +1,5 @@
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_search_deligate_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
-import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -22,8 +21,11 @@ final tissuesProvider = FutureProvider.family
 });
 
 class OrganTissueSearchScreen extends ConsumerStatefulWidget {
-  const OrganTissueSearchScreen({Key? key}) : super(key: key);
-
+  const OrganTissueSearchScreen({
+    Key? key,
+    this.onAssignToRequest,
+  }) : super(key: key);
+  final Function(dynamic)? onAssignToRequest;
   @override
   _OrganTissueSearchScreenState createState() =>
       _OrganTissueSearchScreenState();
@@ -139,7 +141,7 @@ class _OrganTissueSearchScreenState
                           textDirection: TextDirection.rtl,
                           child: TextButton.icon(
                             onPressed: () {
-                              _assignToRequest(item);
+                              widget.onAssignToRequest?.call(item);
                             },
                             label: const Text('Assign Tissue'),
                             icon: const Icon(Icons.chevron_left),
@@ -227,11 +229,5 @@ class _OrganTissueSearchScreenState
         );
       },
     );
-  }
-
-  void _assignToRequest(Content item) {
-    // Implement the logic to assign the tissue to a request
-    // For example, you can navigate to another screen or show a dialog
-    logger.f('Assigning tissue with ID ${item.id} to a request');
   }
 }

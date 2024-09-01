@@ -57,7 +57,6 @@ class OrganRequestOverview extends ConsumerWidget {
                 ),
               );
             },
-            onAccept: () {},
             onReject: () {},
           );
         },
@@ -100,7 +99,7 @@ class _OrganRequestCard extends StatelessWidget {
   final String requestedBy;
   final DateTime? requestedDate;
   final String procedures;
-  final VoidCallback? onAccept;
+
   final VoidCallback? onReject;
   final VoidCallback? onTimeLine;
 
@@ -111,7 +110,6 @@ class _OrganRequestCard extends StatelessWidget {
     required this.requestedBy,
     required this.requestedDate,
     required this.procedures,
-    this.onAccept,
     this.onReject,
     this.onTimeLine,
   }) : super(key: key);
@@ -139,52 +137,29 @@ class _OrganRequestCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CircleAvatar(
-                backgroundColor: AppColor.altGrey,
-                child: Icon(Icons.person, color: Colors.white),
-              ),
-              const SizedBox(width: 8.0),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      requestedBy,
-                      style: applyRobotoFont(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      "Requested Date: ${requestedDate.formateDate}",
-                      style: applyRobotoFont(
-                        fontSize: 14.0,
-                        color: AppColor.blackOpacity,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 8.0),
-              Tooltip(
-                message: "View Timeline",
-                child: TextButton(
-                  onPressed: onTimeLine,
-                  child: const Text("View Timeline"),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12.0),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
                 child: _buildDetailColumn('Tissue Type:', tissueTypeRequested),
               ),
               Expanded(
-                flex: 1,
                 child: _buildDetailColumn('Procedures:', procedures),
+              ),
+              Expanded(
+                child: _buildDetailColumn(
+                    'Requested Date:', requestedDate.formateDate),
+              ),
+              Tooltip(
+                message: "View Timeline",
+                child: InkWell(
+                  onTap: onTimeLine,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColor.grey.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.timeline),
+                  ),
+                ),
               ),
             ],
           ),
@@ -202,20 +177,6 @@ class _OrganRequestCard extends StatelessWidget {
                   label: const Text('Reject'),
                   icon: const Icon(
                     Icons.close,
-                    size: 18,
-                  ),
-                ),
-              ),
-              Tooltip(
-                message: "Accept Request",
-                child: TextButton.icon(
-                  onPressed: onAccept,
-                  style: TextButton.styleFrom(
-                    foregroundColor: AppColor.green,
-                  ),
-                  label: const Text('Accept'),
-                  icon: const Icon(
-                    Icons.check,
                     size: 18,
                   ),
                 ),

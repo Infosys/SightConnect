@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/presenta
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/modals/organ_tissue_search_delegate.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/providers/organ_timeline_provider.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -61,7 +62,9 @@ class OrganInventoryTimline extends ConsumerWidget {
   ) async {
     final navigator = Navigator.of(context);
     navigator.push(MaterialPageRoute(builder: (context) {
-      return const OrganTissueSearchScreen();
+      return OrganTissueSearchScreen(onAssignToRequest: (content) {
+        logger.i(content.toString());
+      });
     }));
   }
 

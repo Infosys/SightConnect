@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/models/eb_form_intimation_response_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/data/repositories/eb_timeline_repo.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/entities/eb_timeline_entity.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/mappers/eb_timeline_mapper.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/eb_organ_inventory_analytics_model.dart';
@@ -9,6 +11,16 @@ import '../../../../../../main.dart';
 import '../../../../../../services/eb_failure.dart';
 import '../../../../helpers/data/models/eb_timeline_config_model.dart';
 import '../../../../helpers/data/respositories/eb_repository_impl.dart';
+
+final ebAddRequestProvider =
+    FutureProvider<EBFormIntimationResponseModel>((ref) async {
+  final repo = ref.watch(ebTimlineRepoProvider);
+  final res = await repo.getIntimationForm(timelineName: "CORNEA_TRANSPLANT");
+  return res.fold(
+    (l) => throw l,
+    (r) => r,
+  );
+});
 
 final ebOrganTimelineProvider = FutureProvider.family
     .autoDispose<List<EBTimelineEntity>, EbOrganTimlineParams>(
@@ -97,5 +109,7 @@ final organRequestOverviewProvider =
     page: param.page,
     size: param.size,
   );
-  return response.fold((e) => throw e, (data) => data);
+  return response.fold((e) => throw e, (data) {
+    return data;
+  });
 });
