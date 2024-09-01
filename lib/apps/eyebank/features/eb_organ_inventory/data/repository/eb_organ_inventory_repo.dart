@@ -59,12 +59,13 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
 
   @override
   Future<Either<EBFailure, OrganTissueSearchDeligateModel>>
-      getOrganTissueSearchDelegate(
-          {List<String>? procedure,
-          String? tissueId,
-          String? tissueExpiry,
-          int? page,
-          int? size}) async {
+      getOrganTissueSearchDelegate({
+    List<String>? procedure,
+    String? tissueId,
+    String? tissueExpiry,
+    int? page,
+    int? size,
+  }) async {
     return EyeBankErrorHandler.handle(() async {
       final queryParams = {
         'procedure': procedure,
@@ -75,9 +76,9 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
       };
       queryParams.removeWhere((key, value) => value == null);
 
-      const endPoint = '/services/eyebank/api/encounters/inventory/search';
+      const endPoint = '/services/eyebank/api/encounters/filters/tissues';
 
-      final response = await _dio.get(endPoint);
+      final response = await _dio.get(endPoint, queryParameters: queryParams);
       if (response.statusCode == 200) {
         final data = OrganTissueSearchDeligateModel.fromJson(response.data);
         return data;
