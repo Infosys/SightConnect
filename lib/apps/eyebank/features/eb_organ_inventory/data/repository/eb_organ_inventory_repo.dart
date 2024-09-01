@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/eb_organ_inventory_analytics_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_search_deligate_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
@@ -19,6 +21,14 @@ abstract class EBOrganInventoryRepository {
           String? tissueExpiry,
           int? page,
           int? size});
+
+  Future<Either<EBFailure, OrganTissueRequestModel>> getOrganTissueRequest(
+      {List<EBStageName> stage,
+      List<String>? procedure,
+      String? requestedBy,
+      String? requestDate,
+      int? page,
+      int? size});
 }
 
 final ebOrganInventoryRepositoryProvider = Provider(
@@ -70,6 +80,39 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
       final response = await _dio.get(endPoint);
       if (response.statusCode == 200) {
         final data = OrganTissueSearchDeligateModel.fromJson(response.data);
+        return data;
+      } else {
+        throw Exception(response.statusMessage ??
+            'Failed to fetch organ inventory statistics');
+      }
+    });
+  }
+
+  @override
+  Future<Either<EBFailure, OrganTissueRequestModel>> getOrganTissueRequest(
+      {List<EBStageName>? stage,
+      List<String>? procedure,
+      String? requestedBy,
+      String? requestDate,
+      int? page,
+      int? size}) {
+    return EyeBankErrorHandler.handle(() async {
+      final queryParams = {
+        'stage': stage,
+        'procedure': procedure,
+        'requestedBy': requestedBy,
+        'requestDate': requestDate,
+        'page': page,
+        'size': size,
+      };
+      queryParams.removeWhere((key, value) => value == null);
+
+      const endPoint =
+          '/services/eyebank/api/encounters/filters/tissue-requests';
+
+      final response = await _dio.get(endPoint);
+      if (response.statusCode == 200) {
+        final data = OrganTissueRequestModel.fromJson(response.data);
         return data;
       } else {
         throw Exception(response.statusMessage ??

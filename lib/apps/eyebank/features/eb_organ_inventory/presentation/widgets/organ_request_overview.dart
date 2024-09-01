@@ -1,67 +1,65 @@
 // Update TableData model
 import 'package:eye_care_for_all/apps/eyebank/common/eb_case_records/presentation/widget/filter_bottom_sheet.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/model/organ_tissue_request_model.dart';
+import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/presentation/widgets/organ_inventory_timline.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TableData {
-  final String encounterId;
-  final String tissueTypeRequested;
-  final String requestedBy;
-  final DateTime requestedDate;
-  final List<String> procedures;
+class OrganRequestOverviewProviderParam {
+  final int pageKey;
+  final int pageSize;
+  final List<Filter>? filters;
 
-  TableData({
-    required this.encounterId,
-    required this.tissueTypeRequested,
-    required this.requestedBy,
-    required this.requestedDate,
-    required this.procedures,
+  OrganRequestOverviewProviderParam({
+    required this.pageKey,
+    required this.pageSize,
+    this.filters,
   });
 }
 
-// Update records list
-final records = List.generate(
-  10,
-  (index) => TableData(
-    encounterId: "ID ${index + 1}",
-    tissueTypeRequested: "CORNEA",
-    requestedBy: "Requester ${index + 1}",
-    requestedDate: DateTime.now(),
-    procedures: ["PK"],
-  ),
-);
+final organRequestOverviewProvider = FutureProvider.family<
+    OrganTissueRequestModel,
+    OrganRequestOverviewProviderParam>((ref, param) async {
+  final repo = ref.read(ebOrganInventoryRepositoryProvider);
+  final response = await repo.getOrganTissueRequest(
+    page: param.pageKey,
+    size: param.pageSize,
+  );
+  return response.fold((e) => throw e, (data) => data);
+});
 
-// Update fetchPageData function
-class OrganRequestOverview extends StatelessWidget {
+Future<List<Content>> fetchPageData(
+    int pageKey, int pageSize, List<Filter> filters, WidgetRef ref) async {
+  final repo = ref.read(ebOrganInventoryRepositoryProvider);
+  final response = await repo.getOrganTissueRequest(
+    page: pageKey,
+    size: pageSize,
+  );
+  return response.fold((e) => throw e, (data) => data.content ?? []);
+}
+
+class OrganRequestOverview extends ConsumerWidget {
   const OrganRequestOverview({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: EbInfiniteScrollView<TableData>(
-        fetchPageData: (pageKey, pageSize, filters) async {
-          return [
-            TableData(
-              encounterId: "ID 1",
-              tissueTypeRequested: "CORNEA",
-              requestedBy: "Requester 1",
-              requestedDate: DateTime.now(),
-              procedures: ["PK"],
-            ),
-          ];
-        },
+      child: EbInfiniteScrollView<Content>(
+        fetchPageData: (pageKey, pageSize, filters) =>
+            fetchPageData(pageKey, pageSize, filters, ref),
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
-            encounterId: item.encounterId,
-            tissueTypeRequested: item.tissueTypeRequested,
-            requestedBy: item.requestedBy,
-            requestedDate: item.requestedDate,
-            procedures: item.procedures.join(", "),
+            encounterId: item.encounterId ?? '',
+            tissueTypeRequested: item.tissueTypeRequested ?? '',
+            requestedBy: item.requestedBy ?? '',
+            requestedDate: DateTime.parse(item.requestedDate ?? ''),
+            procedures: item.procedures?.join(', ') ?? '',
             onTimeLine: () {
               final navigator = Navigator.of(context);
               navigator.push(
