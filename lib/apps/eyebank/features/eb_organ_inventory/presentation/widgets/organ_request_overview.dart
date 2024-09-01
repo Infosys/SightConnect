@@ -90,7 +90,7 @@ class OrganRequestOverview extends ConsumerWidget {
             Filter(name: 'Request Date', type: FilterType.date),
           ],
           enableSearch: false,
-          enableFilter: true,
+          enableFilter: false,
           defaultPageSize: 10,
         ),
       ),
@@ -174,16 +174,12 @@ class _OrganRequestCard extends StatelessWidget {
             children: [
               Tooltip(
                 message: "Reject Request",
-                child: TextButton.icon(
+                child: TextButton(
                   onPressed: onReject,
                   style: TextButton.styleFrom(
                     foregroundColor: AppColor.red,
                   ),
-                  label: const Text('Reject'),
-                  icon: const Icon(
-                    Icons.close,
-                    size: 18,
-                  ),
+                  child: const Text('Reject'),
                 ),
               ),
             ],
