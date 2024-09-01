@@ -96,6 +96,53 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
       String? requestDate,
       int? page,
       int? size}) {
+    final dummy = {
+      "content": [
+        {
+          "id": 2101,
+          "identifier": "OD-000001",
+          "productCategory": "ORGAN",
+          "productCode": "CORNEA_OD",
+          "productStatus": null,
+          "expiryDate": null,
+          "lotNumber": null,
+          "storageMedium": null,
+          "properties": null,
+          "storageTemp": null,
+          "document": null,
+          "recoveryInformation": {
+            "id": 2151,
+            "extractionMethod": "IN_SITU",
+            // "extractionDateTime": "2024-08-27T06:30:00Z",
+            "lotNumber": "12",
+            "storageMedium": "MK_MEDIUM",
+            // "expirationDate": "2024-08-27T06:30:00Z",
+            "intent": "RESEARCH",
+            "performedBy": "12",
+            "performerRole": null,
+            "assistedBy": "12",
+            "assistedRole": null,
+            "properties": {"comments": "12", "scleraRecovered": 0},
+            "storageTemp": null,
+            "documents": null,
+            "productCategory": "ORGAN",
+            "productCode": "CORNEA_OD",
+            "productIdentifier": "OD-000001"
+          },
+          "encounterId": "1001"
+        }
+      ],
+      "totalElements": 0,
+      "totalPages": 0,
+      "size": 0,
+      "number": 0,
+      "numberOfElements": 0,
+      "empty": true,
+      "first": true,
+      "last": true
+    };
+    return Future.value(Right(OrganTissueRequestModel.fromJson(dummy)));
+
     return EyeBankErrorHandler.handle(() async {
       final queryParams = {
         'stage': stage,

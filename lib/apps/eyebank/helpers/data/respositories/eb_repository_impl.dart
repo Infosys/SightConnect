@@ -67,9 +67,10 @@ class EyeBankRepositoryImpl extends EyeBankRepository {
   Future<Either<EBFailure, void>> saveIntimationForm(
     EBSubmitFormDataRequestModel requestData,
     String? stageVersion,
+    String? stageName,
   ) {
     return EyeBankErrorHandler.handle(() async {
-      const endPoint = '/services/eyebank/api/encounters/DEATH_INTIMATION';
+      final endPoint = '/services/eyebank/api/encounters/$stageName';
       final response = await _dio.post(
         endPoint,
         queryParameters: {

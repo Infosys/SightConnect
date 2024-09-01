@@ -11,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../helpers/data/models/eb_submit_form_data_request_model.dart';
-
 class EBFormManagePage extends ConsumerWidget {
   final String title;
   final String? stageName;
@@ -125,37 +123,52 @@ class EBFormManagePage extends ConsumerWidget {
     const performedID = "1223";
     const performedRole = "TECHNICIAN";
 
-    if (timelineName == "CORNEA_TRANSPLANT") {
-      _submitTransplatForms(
-        ref: ref,
-        stageName: stageName,
-        stageVersion: stageVersion,
-        serviceRequestId: serviceRequestId,
-        encounterId: encounterId,
-        data: data,
-        mode: mode,
-        timelineName: timelineName,
-        timelineVersion: timelineVersion,
-        performedID: performedID,
-        performedRole: performedRole,
-        context: context,
-      );
-    } else {
-      _submitInventoryForms(
-        ref: ref,
-        stageName: stageName,
-        stageVersion: stageVersion,
-        serviceRequestId: serviceRequestId,
-        encounterId: encounterId,
-        data: data,
-        mode: mode,
-        timelineName: timelineName,
-        timelineVersion: timelineVersion,
-        performedID: performedID,
-        performedRole: performedRole,
-        context: context,
-      );
-    }
+    _submitInventoryForms(
+      ref: ref,
+      stageName: stageName,
+      stageVersion: stageVersion,
+      serviceRequestId: serviceRequestId,
+      encounterId: encounterId,
+      data: data,
+      mode: mode,
+      timelineName: timelineName,
+      timelineVersion: timelineVersion,
+      performedID: performedID,
+      performedRole: performedRole,
+      context: context,
+    );
+
+    // if (timelineName == "CORNEA_TRANSPLANT") {
+    //   _submitTransplatForms(
+    //     ref: ref,
+    //     stageName: stageName,
+    //     stageVersion: stageVersion,
+    //     serviceRequestId: serviceRequestId,
+    //     encounterId: encounterId,
+    //     data: data,
+    //     mode: mode,
+    //     timelineName: timelineName,
+    //     timelineVersion: timelineVersion,
+    //     performedID: performedID,
+    //     performedRole: performedRole,
+    //     context: context,
+    //   );
+    // } else {
+    //   _submitInventoryForms(
+    //     ref: ref,
+    //     stageName: stageName,
+    //     stageVersion: stageVersion,
+    //     serviceRequestId: serviceRequestId,
+    //     encounterId: encounterId,
+    //     data: data,
+    //     mode: mode,
+    //     timelineName: timelineName,
+    //     timelineVersion: timelineVersion,
+    //     performedID: performedID,
+    //     performedRole: performedRole,
+    //     context: context,
+    //   );
+    // }
   }
 
   _submitInventoryForms({
@@ -209,55 +222,55 @@ class EBFormManagePage extends ConsumerWidget {
     }
   }
 
-  _submitTransplatForms({
-    required WidgetRef ref,
-    required String? stageName,
-    required String? stageVersion,
-    required String? serviceRequestId,
-    required String? encounterId,
-    required Map<String, dynamic>? data,
-    required DynamicFormSavingType mode,
-    required String? timelineName,
-    required String? timelineVersion,
-    required String? performedID,
-    required String? performedRole,
-    required BuildContext context,
-  }) async {
-    try {
-      final response =
-          await ref.read(ebSaveOrDraftProvider).saveOrDraftTransplatForm(
-                action: mode,
-                ebFormActionRequestModel: EBSubmitFormDataRequestModel(
-                  encounterId: encounterId,
-                  formData: data,
-                  serviceRequestId: serviceRequestId,
-                  stageName: stageName,
-                  stageVersion: stageVersion,
-                  timelineName: timelineName,
-                  timelineVersion: timelineVersion,
-                  performerId: performedID,
-                  performerRole: performedRole,
-                ),
-              );
+  // _submitTransplatForms({
+  //   required WidgetRef ref,
+  //   required String? stageName,
+  //   required String? stageVersion,
+  //   required String? serviceRequestId,
+  //   required String? encounterId,
+  //   required Map<String, dynamic>? data,
+  //   required DynamicFormSavingType mode,
+  //   required String? timelineName,
+  //   required String? timelineVersion,
+  //   required String? performedID,
+  //   required String? performedRole,
+  //   required BuildContext context,
+  // }) async {
+  //   try {
+  //     final response =
+  //         await ref.read(ebSaveOrDraftProvider).saveOrDraftTransplatForm(
+  //               action: mode,
+  //               ebFormActionRequestModel: EBSubmitFormDataRequestModel(
+  //                 encounterId: encounterId,
+  //                 formData: data,
+  //                 serviceRequestId: serviceRequestId,
+  //                 stageName: stageName,
+  //                 stageVersion: stageVersion,
+  //                 timelineName: timelineName,
+  //                 timelineVersion: timelineVersion,
+  //                 performerId: performedID,
+  //                 performerRole: performedRole,
+  //               ),
+  //             );
 
-      response.fold(
-        (failure) {
-          EyeBankErrorCard.showErrorToast(failure, context);
-        },
-        (success) {
-          ref.invalidate(ebCaseTimeLineProvider);
-          final navigator = Navigator.of(context);
-          navigator.pop();
-          Fluttertoast.showToast(
-            msg: 'Form saved successfully',
-          );
-        },
-      );
-    } catch (e) {
-      logger.f('Error: $e');
-      Fluttertoast.showToast(
-        msg: 'Failed to save form',
-      );
-    }
-  }
+  //     response.fold(
+  //       (failure) {
+  //         EyeBankErrorCard.showErrorToast(failure, context);
+  //       },
+  //       (success) {
+  //         ref.invalidate(ebCaseTimeLineProvider);
+  //         final navigator = Navigator.of(context);
+  //         navigator.pop();
+  //         Fluttertoast.showToast(
+  //           msg: 'Form saved successfully',
+  //         );
+  //       },
+  //     );
+  //   } catch (e) {
+  //     logger.f('Error: $e');
+  //     Fluttertoast.showToast(
+  //       msg: 'Failed to save form',
+  //     );
+  //   }
+  // }
 }

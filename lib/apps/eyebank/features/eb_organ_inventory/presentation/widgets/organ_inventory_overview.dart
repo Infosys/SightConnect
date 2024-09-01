@@ -19,42 +19,45 @@ class OrganInventoryOverview extends ConsumerWidget {
 
     return Scaffold(
       body: organInventoryStatsAsyncValue.when(
-          data: (stats) => Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+        data: (stats) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Organ Inventory Overview',
+                  style: applyFiraSansFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Wrap(
+                  spacing: 16.0,
+                  runSpacing: 16.0,
                   children: [
-                    Text(
-                      'Organ Inventory Overview',
-                      style: applyFiraSansFont(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Wrap(
-                      spacing: 16.0,
-                      runSpacing: 16.0,
-                      children: [
-                        _buildStatCard(context, 'Day', stats.day),
-                        _buildStatCard(context, 'Week', stats.week),
-                        _buildStatCard(context, 'Month', stats.month),
-                      ],
-                    ),
+                    _buildStatCard(context, 'Day', stats.day),
+                    _buildStatCard(context, 'Week', stats.week),
+                    _buildStatCard(context, 'Month', stats.month),
                   ],
                 ),
-              ),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stack) {
-            logger.e(error);
-            String msg = "";
-            if (error is EBFailure) {
-              msg = error.errorMessage;
-            } else {
-              msg = "An error occurred. Please try again later.";
-            }
-            return Center(child: Text(msg));
-          }),
+              ],
+            ),
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) {
+          logger.e(error);
+          String msg = "";
+          if (error is EBFailure) {
+            msg = error.errorMessage;
+          } else {
+            msg = "An error occurred. Please try again later.";
+          }
+          return Center(child: Text(msg));
+        },
+      ),
     );
   }
 

@@ -58,7 +58,9 @@ class OrganRequestOverview extends ConsumerWidget {
             encounterId: item.encounterId ?? '',
             tissueTypeRequested: item.tissueTypeRequested ?? '',
             requestedBy: item.requestedBy ?? '',
-            requestedDate: DateTime.parse(item.requestedDate ?? ''),
+            requestedDate: item.requestedDate == null
+                ? null
+                : DateTime.parse(item.requestedDate!),
             procedures: item.procedures?.join(', ') ?? '',
             onTimeLine: () {
               final navigator = Navigator.of(context);
@@ -114,7 +116,7 @@ class _OrganRequestCard extends StatelessWidget {
   final String encounterId;
   final String tissueTypeRequested;
   final String requestedBy;
-  final DateTime requestedDate;
+  final DateTime? requestedDate;
   final String procedures;
   final VoidCallback? onAssignTissue;
   final VoidCallback? onTimeLine;
