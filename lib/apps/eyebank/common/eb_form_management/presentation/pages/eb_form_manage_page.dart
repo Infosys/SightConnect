@@ -7,6 +7,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enu
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -118,10 +119,10 @@ class EBFormManagePage extends ConsumerWidget {
     logger.f(data);
 
     final profile = ref.read(globalEBProvider);
-    // final performedID = profile.userId.toString();
-    // final performedRole = PersistentAuthStateService.authState.activeRole;
-    const performedID = "1223";
-    const performedRole = "TECHNICIAN";
+    final performedID = profile.userId.toString();
+    final performedRole = PersistentAuthStateService.authState.activeRole;
+    // const performedID = "1223";
+    // const performedRole = "TECHNICIAN";
 
     _submitInventoryForms(
       ref: ref,

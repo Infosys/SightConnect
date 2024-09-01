@@ -118,7 +118,7 @@ class _OrganTissueSearchScreenState
                       runAlignment: WrapAlignment.spaceBetween,
                       runSpacing: 16.0,
                       children: [
-                        _buildDetailColumn('ID', item.id ?? ''),
+                        _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
                         _buildDetailColumn('Identifier', item.identifier ?? ''),
                         _buildDetailColumn(
                             'Product Category', item.productCategory ?? ''),

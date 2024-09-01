@@ -6,6 +6,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -48,10 +49,11 @@ class OrganRequestButton extends StatelessWidget {
                     logger.f(formResponse);
                     final repo = ref.read(ebRepositoryProvider);
                     final profile = ref.read(globalEBProvider);
-                    // final performId = profile.userId.toString();
-                    // final performRole = PersistentAuthStateService.authState.activeRole;
-                    const performId = "1223";
-                    const performRole = "TECHNICIAN";
+                    final performId = profile.userId.toString();
+                    final performRole =
+                        PersistentAuthStateService.authState.activeRole;
+                    // const performId = "1223";
+                    // const performRole = "TECHNICIAN";
 
                     final submitData = EBSubmitFormDataRequestModel(
                       formData: formResponse,

@@ -53,9 +53,9 @@ enum EBStageName {
     value: 'CORNEA_CONFIRMATION',
     displayValue: 'Cornea Confirmation',
   ),
-  SHIPPED_TO_SURGEON(
-    value: 'SHIPPED_TO_SURGEON',
-    displayValue: 'Shipped to Surgeon',
+  SENT_TO_SURGEON(
+    value: 'SENT_TO_SURGEON',
+    displayValue: 'Sent to Surgeon',
   ),
   RECEIVED_BY_SURGEON(
     value: 'RECEIVED_BY_SURGEON',
