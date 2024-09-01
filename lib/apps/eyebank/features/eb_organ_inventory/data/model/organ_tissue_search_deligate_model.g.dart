@@ -39,6 +39,7 @@ Map<String, dynamic> _$$OrganTissueSearchDeligateModelImplToJson(
 _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
     _$ContentImpl(
       id: (json['id'] as num?)?.toInt(),
+      tissueId: json['tissueId'] as String?,
       identifier: json['identifier'] as String?,
       productCategory: json['productCategory'] as String?,
       productCode: json['productCode'] as String?,
@@ -59,6 +60,7 @@ _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'tissueId': instance.tissueId,
       'identifier': instance.identifier,
       'productCategory': instance.productCategory,
       'productCode': instance.productCode,

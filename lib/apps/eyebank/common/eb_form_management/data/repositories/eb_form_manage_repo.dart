@@ -46,6 +46,7 @@ class EBFormManageRepositoryImpl implements EBFormManageRepository {
       final endPoint =
           '/services/eyebank/api/encounters/$encounterId/stage/$stageName/forms/${action.name}';
 
+      logger.i('Saving form: $requestData');
       final response = await _dio.post(
         endPoint,
         data: requestData.toJson(),
@@ -54,6 +55,8 @@ class EBFormManageRepositoryImpl implements EBFormManageRepository {
           'serviceRequestId': serviceRequestId
         },
       );
+
+      logger.i(response.data);
 
       if (response.statusCode == 200) {
         return response.data;

@@ -80,6 +80,7 @@ class EBOrganInventoryRepositoryImpl extends EBOrganInventoryRepository {
       const endPoint = '/services/eyebank/api/encounters/filters/tissues';
 
       final response = await _dio.get(endPoint, queryParameters: queryParams);
+      logger.f(response.data);
       if (response.statusCode == 200) {
         final data = OrganTissueSearchDeligateModel.fromJson(response.data);
         return data;

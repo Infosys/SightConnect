@@ -25,6 +25,7 @@ class OrganTissueSearchDeligateModel with _$OrganTissueSearchDeligateModel {
 class Content with _$Content {
   const factory Content({
     @JsonKey(name: "id") int? id,
+    @JsonKey(name: "tissueId") String? tissueId,
     @JsonKey(name: "identifier") String? identifier,
     @JsonKey(name: "productCategory") String? productCategory,
     @JsonKey(name: "productCode") String? productCode,

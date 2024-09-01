@@ -385,6 +385,8 @@ Content _$ContentFromJson(Map<String, dynamic> json) {
 mixin _$Content {
   @JsonKey(name: "id")
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "tissueId")
+  String? get tissueId => throw _privateConstructorUsedError;
   @JsonKey(name: "identifier")
   String? get identifier => throw _privateConstructorUsedError;
   @JsonKey(name: "productCategory")
@@ -423,6 +425,7 @@ abstract class $ContentCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "tissueId") String? tissueId,
       @JsonKey(name: "identifier") String? identifier,
       @JsonKey(name: "productCategory") String? productCategory,
       @JsonKey(name: "productCode") String? productCode,
@@ -454,6 +457,7 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
   @override
   $Res call({
     Object? id = freezed,
+    Object? tissueId = freezed,
     Object? identifier = freezed,
     Object? productCategory = freezed,
     Object? productCode = freezed,
@@ -472,6 +476,10 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
+      tissueId: freezed == tissueId
+          ? _value.tissueId
+          : tissueId // ignore: cast_nullable_to_non_nullable
+              as String?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -546,6 +554,7 @@ abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "tissueId") String? tissueId,
       @JsonKey(name: "identifier") String? identifier,
       @JsonKey(name: "productCategory") String? productCategory,
       @JsonKey(name: "productCode") String? productCode,
@@ -576,6 +585,7 @@ class __$$ContentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? tissueId = freezed,
     Object? identifier = freezed,
     Object? productCategory = freezed,
     Object? productCode = freezed,
@@ -594,6 +604,10 @@ class __$$ContentImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
+      tissueId: freezed == tissueId
+          ? _value.tissueId
+          : tissueId // ignore: cast_nullable_to_non_nullable
+              as String?,
       identifier: freezed == identifier
           ? _value.identifier
           : identifier // ignore: cast_nullable_to_non_nullable
@@ -651,6 +665,7 @@ class __$$ContentImplCopyWithImpl<$Res>
 class _$ContentImpl implements _Content {
   const _$ContentImpl(
       {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "tissueId") this.tissueId,
       @JsonKey(name: "identifier") this.identifier,
       @JsonKey(name: "productCategory") this.productCategory,
       @JsonKey(name: "productCode") this.productCode,
@@ -670,6 +685,9 @@ class _$ContentImpl implements _Content {
   @override
   @JsonKey(name: "id")
   final int? id;
+  @override
+  @JsonKey(name: "tissueId")
+  final String? tissueId;
   @override
   @JsonKey(name: "identifier")
   final String? identifier;
@@ -709,7 +727,7 @@ class _$ContentImpl implements _Content {
 
   @override
   String toString() {
-    return 'Content(id: $id, identifier: $identifier, productCategory: $productCategory, productCode: $productCode, productStatus: $productStatus, expiryDate: $expiryDate, lotNumber: $lotNumber, storageMedium: $storageMedium, properties: $properties, storageTemp: $storageTemp, document: $document, recoveryInformation: $recoveryInformation, encounterId: $encounterId)';
+    return 'Content(id: $id, tissueId: $tissueId, identifier: $identifier, productCategory: $productCategory, productCode: $productCode, productStatus: $productStatus, expiryDate: $expiryDate, lotNumber: $lotNumber, storageMedium: $storageMedium, properties: $properties, storageTemp: $storageTemp, document: $document, recoveryInformation: $recoveryInformation, encounterId: $encounterId)';
   }
 
   @override
@@ -718,6 +736,8 @@ class _$ContentImpl implements _Content {
         (other.runtimeType == runtimeType &&
             other is _$ContentImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.tissueId, tissueId) ||
+                other.tissueId == tissueId) &&
             (identical(other.identifier, identifier) ||
                 other.identifier == identifier) &&
             (identical(other.productCategory, productCategory) ||
@@ -747,6 +767,7 @@ class _$ContentImpl implements _Content {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      tissueId,
       identifier,
       productCategory,
       productCode,
@@ -777,6 +798,7 @@ class _$ContentImpl implements _Content {
 abstract class _Content implements Content {
   const factory _Content(
       {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "tissueId") final String? tissueId,
       @JsonKey(name: "identifier") final String? identifier,
       @JsonKey(name: "productCategory") final String? productCategory,
       @JsonKey(name: "productCode") final String? productCode,
@@ -796,6 +818,9 @@ abstract class _Content implements Content {
   @override
   @JsonKey(name: "id")
   int? get id;
+  @override
+  @JsonKey(name: "tissueId")
+  String? get tissueId;
   @override
   @JsonKey(name: "identifier")
   String? get identifier;

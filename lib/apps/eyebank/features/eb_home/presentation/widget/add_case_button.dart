@@ -59,6 +59,7 @@ class AddCaseButton extends StatelessWidget {
                     final profile = ref.read(globalEBProvider);
                     // final performId = profile.userId.toString();
                     // final performRole = PersistentAuthStateService.authState.activeRole;
+
                     const performId = "1223";
                     const performRole = "TECHNICIAN";
 

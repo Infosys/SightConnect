@@ -25,7 +25,7 @@ class OrganTissueSearchScreen extends ConsumerStatefulWidget {
     Key? key,
     this.onAssignToRequest,
   }) : super(key: key);
-  final Function(dynamic)? onAssignToRequest;
+  final Function(Content)? onAssignToRequest;
   @override
   _OrganTissueSearchScreenState createState() =>
       _OrganTissueSearchScreenState();
