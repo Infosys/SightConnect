@@ -261,6 +261,14 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       );
       field = field.copyWith(
         initialValue: formatedInitialValue[field.name],
+        elements: field.elements
+                ?.map((e) => e.copyWith(
+                      name: '${e.name}_$keyExtension',
+                      initialValue:
+                          formatedInitialValue['${e.name}_$keyExtension'],
+                    ))
+                .toList() ??
+            [],
       );
 
       if (field.type == DynamicFormType.PANEL && field.repeats == true) {
