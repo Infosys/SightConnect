@@ -137,38 +137,6 @@ class EBFormManagePage extends ConsumerWidget {
       performedRole: performedRole,
       context: context,
     );
-
-    // if (timelineName == "CORNEA_TRANSPLANT") {
-    //   _submitTransplatForms(
-    //     ref: ref,
-    //     stageName: stageName,
-    //     stageVersion: stageVersion,
-    //     serviceRequestId: serviceRequestId,
-    //     encounterId: encounterId,
-    //     data: data,
-    //     mode: mode,
-    //     timelineName: timelineName,
-    //     timelineVersion: timelineVersion,
-    //     performedID: performedID,
-    //     performedRole: performedRole,
-    //     context: context,
-    //   );
-    // } else {
-    //   _submitInventoryForms(
-    //     ref: ref,
-    //     stageName: stageName,
-    //     stageVersion: stageVersion,
-    //     serviceRequestId: serviceRequestId,
-    //     encounterId: encounterId,
-    //     data: data,
-    //     mode: mode,
-    //     timelineName: timelineName,
-    //     timelineVersion: timelineVersion,
-    //     performedID: performedID,
-    //     performedRole: performedRole,
-    //     context: context,
-    //   );
-    // }
   }
 
   _submitInventoryForms({

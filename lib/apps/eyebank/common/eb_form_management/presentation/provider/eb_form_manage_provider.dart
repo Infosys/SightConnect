@@ -41,14 +41,6 @@ final ebFormManageProvider = FutureProvider.family
     logger.f('Error fetching form: $e');
     rethrow;
   }
-
-  // try {
-  //   return await rootBundle
-  //       .loadString('assets/eyebank/local_json/screening_form.json');
-  // } catch (e) {
-  //   logger.f('Error Converting json: $e');
-  //   rethrow;
-  // }
 });
 
 class EbStageParams {
