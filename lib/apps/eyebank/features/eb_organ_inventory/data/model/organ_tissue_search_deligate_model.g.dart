@@ -38,101 +38,32 @@ Map<String, dynamic> _$$OrganTissueSearchDeligateModelImplToJson(
 
 _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
     _$ContentImpl(
-      id: (json['id'] as num?)?.toInt(),
       tissueId: json['tissueId'] as String?,
-      identifier: json['identifier'] as String?,
-      productCategory: json['productCategory'] as String?,
-      productCode: json['productCode'] as String?,
-      productStatus: json['productStatus'],
-      expiryDate: json['expiryDate'],
-      lotNumber: json['lotNumber'],
-      storageMedium: json['storageMedium'],
-      properties: json['properties'],
-      storageTemp: json['storageTemp'],
-      document: json['document'],
-      recoveryInformation: json['recoveryInformation'] == null
-          ? null
-          : RecoveryInformation.fromJson(
-              json['recoveryInformation'] as Map<String, dynamic>),
+      cellCount: (json['cellCount'] as num?)?.toInt(),
+      harvestDate: json['harvestDate'] as String?,
+      suitableProcedures: (json['suitableProcedures'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      clearZone: json['clearZone'] as String?,
+      lensType: json['lensType'] as String?,
+      pachemetry: json['pachemetry'] as String?,
+      tissueExpiry: json['tissueExpiry'] as String?,
+      extractionMethod: json['extractionMethod'] as String?,
+      storageMedium: json['storageMedium'] as String?,
       encounterId: (json['encounterId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'tissueId': instance.tissueId,
-      'identifier': instance.identifier,
-      'productCategory': instance.productCategory,
-      'productCode': instance.productCode,
-      'productStatus': instance.productStatus,
-      'expiryDate': instance.expiryDate,
-      'lotNumber': instance.lotNumber,
-      'storageMedium': instance.storageMedium,
-      'properties': instance.properties,
-      'storageTemp': instance.storageTemp,
-      'document': instance.document,
-      'recoveryInformation': instance.recoveryInformation?.toJson(),
-      'encounterId': instance.encounterId,
-    };
-
-_$RecoveryInformationImpl _$$RecoveryInformationImplFromJson(
-        Map<String, dynamic> json) =>
-    _$RecoveryInformationImpl(
-      id: (json['id'] as num?)?.toInt(),
-      extractionMethod: json['extractionMethod'] as String?,
-      extractionDateTime: json['extractionDateTime'] == null
-          ? null
-          : DateTime.parse(json['extractionDateTime'] as String),
-      lotNumber: json['lotNumber'] as String?,
-      storageMedium: json['storageMedium'] as String?,
-      expirationDate: json['expirationDate'] == null
-          ? null
-          : DateTime.parse(json['expirationDate'] as String),
-      intent: json['intent'] as String?,
-      performedBy: json['performedBy'] as String?,
-      performerRole: json['performerRole'],
-      assistedBy: json['assistedBy'] as String?,
-      assistedRole: json['assistedRole'],
-      properties: json['properties'] == null
-          ? null
-          : Properties.fromJson(json['properties'] as Map<String, dynamic>),
-      storageTemp: json['storageTemp'],
-      documents: json['documents'],
-      productCategory: json['productCategory'] as String?,
-      productCode: json['productCode'] as String?,
-      productIdentifier: json['productIdentifier'] as String?,
-    );
-
-Map<String, dynamic> _$$RecoveryInformationImplToJson(
-        _$RecoveryInformationImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
+      'cellCount': instance.cellCount,
+      'harvestDate': instance.harvestDate,
+      'suitableProcedures': instance.suitableProcedures,
+      'clearZone': instance.clearZone,
+      'lensType': instance.lensType,
+      'pachemetry': instance.pachemetry,
+      'tissueExpiry': instance.tissueExpiry,
       'extractionMethod': instance.extractionMethod,
-      'extractionDateTime': instance.extractionDateTime?.toIso8601String(),
-      'lotNumber': instance.lotNumber,
       'storageMedium': instance.storageMedium,
-      'expirationDate': instance.expirationDate?.toIso8601String(),
-      'intent': instance.intent,
-      'performedBy': instance.performedBy,
-      'performerRole': instance.performerRole,
-      'assistedBy': instance.assistedBy,
-      'assistedRole': instance.assistedRole,
-      'properties': instance.properties?.toJson(),
-      'storageTemp': instance.storageTemp,
-      'documents': instance.documents,
-      'productCategory': instance.productCategory,
-      'productCode': instance.productCode,
-      'productIdentifier': instance.productIdentifier,
-    };
-
-_$PropertiesImpl _$$PropertiesImplFromJson(Map<String, dynamic> json) =>
-    _$PropertiesImpl(
-      comments: json['comments'] as String?,
-      scleraRecovered: (json['scleraRecovered'] as num?)?.toInt(),
-    );
-
-Map<String, dynamic> _$$PropertiesImplToJson(_$PropertiesImpl instance) =>
-    <String, dynamic>{
-      'comments': instance.comments,
-      'scleraRecovered': instance.scleraRecovered,
+      'encounterId': instance.encounterId,
     };

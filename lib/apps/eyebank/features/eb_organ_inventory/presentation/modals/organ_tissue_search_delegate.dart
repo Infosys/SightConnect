@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/m
 import 'package:eye_care_for_all/apps/eyebank/features/eb_organ_inventory/data/repository/eb_organ_inventory_repo.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -119,11 +120,15 @@ class _OrganTissueSearchScreenState
                       runSpacing: 16.0,
                       children: [
                         _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
-                        _buildDetailColumn('Identifier', item.identifier ?? ''),
+                        _buildDetailColumn('Cell Count', item.cellCount ?? ''),
                         _buildDetailColumn(
-                            'Product Category', item.productCategory ?? ''),
+                          'Harvest Date',
+                          item.harvestDate != null
+                              ? DateTime.tryParse(item.harvestDate!).formateDate
+                              : "",
+                        ),
                         _buildDetailColumn(
-                            'Product Code', item.productCode ?? ''),
+                            'Tissue Expiry', item.tissueExpiry ?? ''),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -202,29 +207,24 @@ class _OrganTissueSearchScreenState
             runSpacing: 16.0,
             runAlignment: WrapAlignment.spaceBetween,
             children: [
-              _buildDetailColumn('ID', item.id ?? ''),
-              _buildDetailColumn('Identifier', item.identifier ?? ''),
+              _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
+              _buildDetailColumn('Cell Count', item.cellCount ?? ''),
               _buildDetailColumn(
-                  'Product Category', item.productCategory ?? ''),
-              _buildDetailColumn('Product Code', item.productCode ?? ''),
-              _buildDetailColumn('Extraction Method',
-                  item.recoveryInformation?.extractionMethod ?? ''),
+                'Harvest Date',
+                item.harvestDate != null
+                    ? DateTime.tryParse(item.harvestDate!).formateDate
+                    : "",
+              ),
+              _buildDetailColumn('Suitable Procedures',
+                  item.suitableProcedures?.join(', ') ?? ''),
+              _buildDetailColumn('Clear Zone', item.clearZone ?? ''),
+              _buildDetailColumn('Lens Type', item.lensType ?? ''),
+              _buildDetailColumn('Pachemetry', item.pachemetry ?? ''),
+              _buildDetailColumn('Tissue Expiry', item.tissueExpiry ?? ''),
               _buildDetailColumn(
-                  'Extraction DateTime',
-                  item.recoveryInformation?.extractionDateTime.toString() ??
-                      ''),
-              _buildDetailColumn(
-                  'Lot Number', item.recoveryInformation?.lotNumber ?? ''),
-              _buildDetailColumn('Storage Medium',
-                  item.recoveryInformation?.storageMedium ?? ''),
-              _buildDetailColumn('Expiration Date',
-                  item.recoveryInformation?.expirationDate.toString() ?? ''),
-              _buildDetailColumn(
-                  'Intent', item.recoveryInformation?.intent ?? ''),
-              _buildDetailColumn(
-                  'Performed By', item.recoveryInformation?.performedBy ?? ''),
-              _buildDetailColumn('Comments',
-                  item.recoveryInformation?.properties?.comments ?? ''),
+                  'Extraction Method', item.extractionMethod ?? ''),
+              _buildDetailColumn('Storage Medium', item.storageMedium ?? ''),
+              _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
             ],
           ),
         );
