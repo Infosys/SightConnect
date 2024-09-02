@@ -155,18 +155,10 @@ class _OrganRequestCard extends StatelessWidget {
                 child: _buildDetailColumn(
                     'Requested Date:', requestedDate.formateDate),
               ),
-              Tooltip(
-                message: "View Timeline",
-                child: InkWell(
-                  onTap: onTimeLine,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColor.grey.withOpacity(0.1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.timeline),
-                  ),
+              Expanded(
+                child: _buildDetailColumn(
+                  'Requested By:',
+                  requestedBy,
                 ),
               ),
             ],
@@ -183,6 +175,20 @@ class _OrganRequestCard extends StatelessWidget {
                     foregroundColor: AppColor.red,
                   ),
                   child: const Text('Reject'),
+                ),
+              ),
+              Tooltip(
+                message: "View Timeline",
+                child: InkWell(
+                  onTap: onTimeLine,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColor.grey.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.timeline),
+                  ),
                 ),
               ),
             ],
