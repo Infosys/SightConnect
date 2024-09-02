@@ -20,7 +20,7 @@ class FormCheckbox extends StatelessWidget {
 
     List<Object>? getInitialValue() {
       final List<Object>? initialValue =
-          fieldEntity.initialValue as List<Object>?;
+          (fieldEntity.initialValue as List<dynamic>?)?.cast<Object>();
       if (initialValue != null &&
           initialValue.every((element) =>
               fieldEntity.choices!.any((item) => item.name == element))) {
