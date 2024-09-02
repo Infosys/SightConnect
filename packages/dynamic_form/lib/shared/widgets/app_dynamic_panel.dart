@@ -299,7 +299,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       }
 
       return AppResponsiveWidget(
-        widget: getField(field, key),
+        widget: getField(field, key, readOnly: widget.readOnly),
       );
     }).toList();
   }

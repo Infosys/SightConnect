@@ -22,8 +22,9 @@ import '../../widgets/form_text_area.dart';
 
 Widget getField(
   ElementElementClassEntity? field,
-  GlobalKey<FormBuilderState> key,
-) {
+  GlobalKey<FormBuilderState> key, {
+  bool readOnly = false,
+}) {
   if (field == null) {
     return Container();
   }
@@ -118,6 +119,7 @@ Widget getField(
       return FormNestedPannelWidget(
         field: field,
         formKey: key,
+        readOnly: readOnly,
       );
 
     case DynamicFormType.DATE:

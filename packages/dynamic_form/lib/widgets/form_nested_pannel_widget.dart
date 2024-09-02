@@ -8,10 +8,12 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 class FormNestedPannelWidget extends StatelessWidget {
   final ElementElementClassEntity field;
   final GlobalKey<FormBuilderState> formKey;
+  final bool readOnly;
   const FormNestedPannelWidget({
     super.key,
     required this.field,
     required this.formKey,
+    this.readOnly = false,
   });
 
   @override
@@ -74,7 +76,7 @@ class FormNestedPannelWidget extends StatelessWidget {
       if (field.type == DynamicFormType.PANEL && field.repeats == true) {
         return AppDynamicPanel(
           appCardPadding: 0,
-          readOnly: false,
+          readOnly: readOnly,
           name: field.title,
           globalFormKey: key,
           minRepeat: field.minRepeat ?? 1,
@@ -93,7 +95,7 @@ class FormNestedPannelWidget extends StatelessWidget {
 
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: getField(field, formKey),
+        child: getField(field, formKey, readOnly: readOnly),
       );
     }).toList();
   }

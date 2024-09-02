@@ -175,10 +175,12 @@ class EBFormManagePage extends ConsumerWidget {
         (failure) {
           EyeBankErrorCard.showErrorToast(failure, context);
         },
-        (success) {
+        (success) async {
+          final navigator = Navigator.of(context);
           ref.invalidate(ebCaseTimeLineProvider);
           ref.invalidate(ebOrganTimelineProvider);
-          final navigator = Navigator.of(context);
+          await Future.delayed(const Duration(milliseconds: 500));
+
           navigator.pop();
           Fluttertoast.showToast(
             msg: 'Form saved successfully',

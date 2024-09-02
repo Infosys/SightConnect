@@ -38,6 +38,7 @@ class PageWidget extends StatelessWidget {
         if (panel.elements.isEmpty) {
           return Container();
         } else if (panel.type == FormPanelType.REPEATED_PANEL) {
+          log("FormPanelType.REPEATED_PANEL ${panel.name}");
           return AppDynamicPanel(
             appCardPadding: 16,
             readOnly: readOnly,
@@ -73,7 +74,7 @@ class PageWidget extends StatelessWidget {
 
       if (field.type == DynamicFormType.PANEL && field.repeats == true) {
         log("DynamicFormType.PANEL && field.repeats == true");
-        Log.i(field.initialValue);
+        Log.i("ABHI$readOnly");
         return AppDynamicPanel(
           appCardPadding: 0,
           readOnly: readOnly,
@@ -92,8 +93,9 @@ class PageWidget extends StatelessWidget {
           ),
         );
       }
+      log("DynamicFormType.PANEL && field.repeats == false");
       return AppResponsiveWidget(
-        widget: getField(field, key),
+        widget: getField(field, key, readOnly: readOnly),
       );
     }).toList();
   }
