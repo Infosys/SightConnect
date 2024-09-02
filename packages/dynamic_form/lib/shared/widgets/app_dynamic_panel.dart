@@ -237,7 +237,12 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
               Wrap(
                 runSpacing: 16,
                 alignment: WrapAlignment.start,
-                children: buildFields(widget.panel.elements, formKey, key),
+                children: buildFields(
+                  widget.panel.name,
+                  widget.panel.elements,
+                  formKey,
+                  key,
+                ),
               ),
             ],
           ),
@@ -247,6 +252,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
   }
 
   List<Widget> buildFields(
+    String panelName,
     List<ElementElementClassEntity>? fields,
     GlobalKey<FormBuilderState> key,
     String keyExtension,
@@ -261,13 +267,14 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
       );
       field = field.copyWith(
         initialValue: formatedInitialValue[field.name],
-        elements: field.elements
-                ?.map((e) => e.copyWith(
-                      name: '${e.name}_$keyExtension',
-                      initialValue:
-                          formatedInitialValue['${e.name}_$keyExtension'],
-                    ))
-                .toList() ??
+        elements: field.elements?.map((e) {
+              Log.f('$panelName.${e.name}_$keyExtension');
+              return e.copyWith(
+                name: '${e.name}_$keyExtension',
+                initialValue:
+                    formatedInitialValue['$panelName.${e.name}_$keyExtension'],
+              );
+            }).toList() ??
             [],
       );
 
