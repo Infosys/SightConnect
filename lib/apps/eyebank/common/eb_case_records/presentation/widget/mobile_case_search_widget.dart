@@ -64,11 +64,10 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           type: FilterType.date,
         ),
         Filter(
-          hintText: "Select Timeline Stage",
+          name: 'Timeline Stage',
           type: FilterType.dropdown,
-          dropdownOptions: EBStageName.options
-              .map((e) => e.displayValue.toUpperCase())
-              .toList(),
+          dropdownOptions:
+              EBStageName.options.map((e) => e.name.toUpperCase()).toList(),
         )
       ],
       enableSearch: true,

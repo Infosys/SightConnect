@@ -21,8 +21,8 @@ class EBCaseCard extends StatelessWidget {
     return InkWell(
       onTap: () => _showDetails(context),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 16.0),
-        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.only(bottom: 8.0),
+        padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
@@ -78,7 +78,8 @@ class EBCaseCard extends StatelessWidget {
                   AppColor.primary,
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 8),
           ],
         ),
       ),
