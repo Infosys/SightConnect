@@ -143,30 +143,17 @@ class _OrganRequestCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: _buildDetailColumn('Tissue Type:', tissueTypeRequested),
+              const CircleAvatar(
+                maxRadius: 16,
+                backgroundColor: AppColor.pureBlue,
               ),
-              Expanded(
-                child: _buildDetailColumn('Procedures:', procedures),
+              const SizedBox(width: 8),
+              Text(
+                "DR. John Doe",
+                style: applyRobotoFont(fontSize: 12.0),
               ),
-              Expanded(
-                child: _buildDetailColumn(
-                    'Requested Date:', requestedDate.formateDate),
-              ),
-              Expanded(
-                child: _buildDetailColumn(
-                  'Requested By:',
-                  requestedBy,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+              const Spacer(),
               Tooltip(
                 message: "Reject Request",
                 child: TextButton(
@@ -177,17 +164,34 @@ class _OrganRequestCard extends StatelessWidget {
                   child: const Text('Reject'),
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Wrap(
+            spacing: 16.0,
+            runSpacing: 8.0,
+            children: [
+              _buildDetailColumn('Tissue Type:', tissueTypeRequested),
+              _buildDetailColumn('Procedures:', procedures),
+              _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
+              _buildDetailColumn('Requested By:', requestedBy),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // text button
               Tooltip(
                 message: "View Timeline",
                 child: InkWell(
                   onTap: onTimeLine,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColor.grey.withOpacity(0.1),
-                      shape: BoxShape.circle,
+                  child: Text(
+                    'Show Timeline',
+                    style: applyRobotoFont(
+                      fontSize: 12.0,
+                      color: AppColor.primary,
                     ),
-                    child: const Icon(Icons.timeline),
                   ),
                 ),
               ),
@@ -198,30 +202,37 @@ class _OrganRequestCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailColumn(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyFiraSansFont(
-            fontSize: 14.0,
-            color: AppColor.grey,
+  Widget _buildDetailColumn(String label, dynamic value) {
+    if (value == null || value == '') {
+      return const SizedBox.shrink();
+    }
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 120),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: applyFiraSansFont(
+              fontSize: 10.0,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        const SizedBox(height: 4.0),
-        Text(
-          value,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(
-            fontSize: 14.0,
-            color: AppColor.black,
+          const SizedBox(height: 4.0),
+          Text(
+            value.toString(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 12.0,
+              color: Colors.black,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

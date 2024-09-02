@@ -18,256 +18,181 @@ class EBCaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (isCompact) {
-      return _CompactCard(
-        item: item,
-        onTap: onTap,
-      );
-    }
-    return _DetailedCard(
-      item: item,
-      onTap: onTap,
-    );
-  }
-}
-
-class _CompactCard extends StatelessWidget {
-  const _CompactCard({
-    super.key,
-    this.onTap,
-    this.item,
-  });
-  final Function()? onTap;
-  final ContentBriefEntity? item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: InkWell(
-        onTap: onTap,
+    return InkWell(
+      onTap: () => _showDetails(context),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16.0),
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTopRow(context, item),
+            Row(
+              children: [
+                _buildDetailColumn('Case ID', item.caseId ?? ''),
+                const SizedBox(width: 8),
+                _buildDetailColumn(
+                    'Intimate Date', item.intimateDate.formateDate),
+                const SizedBox(width: 8),
+                _buildDetailColumn(
+                    'Notifier Contact', item.notifierBrief?.contact ?? ''),
+                const Spacer(),
+                IconButton(
+                  onPressed: onTap,
+                  icon: const Icon(
+                    Icons.timeline_outlined,
+                    size: 20,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              runAlignment: WrapAlignment.spaceBetween,
+              runSpacing: 8,
+              children: [
+                if (item.activeStages.isEmpty)
+                  ..._buildActiveStageChips(
+                    ["CASE CLOSED"],
+                    AppColor.grey,
+                  ),
+                ..._buildActiveStageChips(
+                  item.activeStages
+                      .map((e) => e.displayValue.toUpperCase())
+                      .toList(),
+                  AppColor.primary,
+                ),
+              ],
+            )
           ],
         ),
       ),
     );
   }
-}
 
-class _DetailedCard extends StatelessWidget {
-  const _DetailedCard({
-    super.key,
-    this.onTap,
-    this.item,
-  });
-
-  final Function()? onTap;
-  final ContentBriefEntity? item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8, top: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: InkWell(
-        onTap: onTap,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildTopRow(context, item),
-            const SizedBox(height: 8),
-            _buildDateInfo(context, item),
-            const SizedBox(height: 8),
-            _buildOrganInfo(context, item),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-Widget _buildTopRow(BuildContext context, ContentBriefEntity? item) {
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text.rich(
-              TextSpan(
+  void _showDetails(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Wrap(
+            spacing: 16.0,
+            runSpacing: 16.0,
+            runAlignment: WrapAlignment.spaceBetween,
+            children: [
+              ..._buildActiveStageChips(
+                item.organExtracted ?? [],
+                AppColor.red,
+              ),
+              _buildDetailColumn('Case ID', item.caseId ?? ''),
+              _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
+              _buildDetailColumn('Performer ID', item.performerId ?? ''),
+              _buildDetailColumn('Intimate Date',
+                  item.intimateDate.formatDateTimeWithFullMonthName),
+              _buildDetailColumn(
+                  'Death Date', item.deathDate.formatDateTimeWithFullMonthName),
+              _buildDetailColumn(
+                  'Body Location', item.bodyLocation?.addressLine1 ?? ""),
+              _buildDetailColumn('Donor Name', item.donorBrief?.name ?? ''),
+              _buildDetailColumn(
+                  'Donor Contact', item.donorBrief?.contact ?? ''),
+              _buildDetailColumn(
+                  'Notifier Name', item.notifierBrief?.name ?? ''),
+              _buildDetailColumn(
+                  'Notifier Contact', item.notifierBrief?.contact ?? ''),
+              _buildDetailColumn('Active Stages', ''),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextSpan(
-                    text:
-                        item?.notifierBrief?.name.capitalizeFirstOfEach() ?? "",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                  if (item.activeStages.isEmpty)
+                    ..._buildActiveStageChips(
+                      ["CASE CLOSED"],
+                      AppColor.grey,
                     ),
-                  ),
-                  TextSpan(
-                    text: " | ",
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                  TextSpan(
-                    text: item?.notifierBrief?.contact ?? "",
-                    style:
-                        applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
+                  ..._buildActiveStageChips(
+                    item.activeStages.map((e) {
+                      return e.displayValue.toUpperCase();
+                    }).toList(),
+                    AppColor.primary,
                   ),
                 ],
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              item?.organExtracted?.join(", ") ?? "",
-              // _getAddress(item?.bodyLocation),
-              style: applyRobotoFont(
-                fontSize: 10,
-                color: AppColor.red,
-                fontWeight: FontWeight.w500,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  List<Widget> _buildActiveStageChips(
+    List<String> activeStages,
+    Color color,
+  ) {
+    return activeStages.map((stage) {
+      return Container(
+        margin: const EdgeInsets.only(right: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          border: Border.all(color: color),
+          borderRadius: BorderRadius.circular(6),
         ),
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            'Case ID: ${item?.caseId ?? ""}',
-            style: applyRobotoFont(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+        child: Text(
+          stage,
+          style: applyRobotoFont(
+            fontSize: 10.0,
+            color: color,
+            fontWeight: FontWeight.w500,
           ),
-          const SizedBox(height: 4),
-        ],
-      ),
-    ],
-  );
-}
+        ),
+      );
+    }).toList();
+  }
 
-_getAddress(BodyLocationEntity? bodyLocation) {
-  return '${bodyLocation?.street ?? ""}, ${bodyLocation?.city ?? ""}, ${bodyLocation?.state ?? ""}';
-}
+  Widget _buildDetailColumn(String label, dynamic value) {
+    if (value == null || value == '') {
+      return SizedBox.fromSize();
+    }
 
-Widget _buildDateInfo(BuildContext context, ContentBriefEntity? item) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      _buildDateColumn(context, 'Death', item?.deathDate?.formateDate),
-      _buildDateColumn(
-          context, 'Intimated On ', item?.intimateDate?.formateDate),
-    ],
-  );
-}
-
-Widget _buildDateColumn(BuildContext context, String label, String? date) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      Row(
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 120),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.calendar_today,
-            size: 14,
-            color: Theme.of(context).primaryColor,
-          ),
-          const SizedBox(width: 4),
           Text(
             label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: applyFiraSansFont(
+              fontSize: 10.0,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 4.0),
+          Text(
+            value.toString(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
-              fontSize: 12,
-              color: AppColor.darkGrey,
-              fontWeight: FontWeight.w500,
+              fontSize: 12.0,
+              color: Colors.black,
             ),
           ),
         ],
       ),
-      const SizedBox(height: 4),
-      Text(
-        date ?? "",
-        style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
-      ),
-    ],
-  );
-}
-
-Widget _buildOrganInfo(BuildContext context, ContentBriefEntity? item) {
-  if (item?.activeStages == null || item!.activeStages.isEmpty) {
-    return const SizedBox();
+    );
   }
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Active Stages: ',
-        style: applyRobotoFont(fontSize: 12, color: AppColor.darkGrey),
-      ),
-      const SizedBox(height: 4),
-      Wrap(
-        spacing: 4,
-        runSpacing: 4,
-        children: item.activeStages
-                .toSet()
-                .map((stage) =>
-                    _buildOrganChip(context, stage.displayValue.toUpperCase()))
-                .toList() ??
-            [],
-      ),
-    ],
-  );
-}
-
-Widget _buildOrganChip(BuildContext context, String organ) {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-    decoration: BoxDecoration(
-      color: Theme.of(context).primaryColor.withOpacity(0.1),
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Theme.of(context).primaryColor, width: 0.5),
-    ),
-    child: Text(
-      organ,
-      style: applyFiraSansFont(
-        fontSize: 10,
-        color: Theme.of(context).primaryColor,
-      ),
-    ),
-  );
 }
