@@ -43,7 +43,7 @@ _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
       requestedBy: json['requestedBy'] as String?,
       requestedDate: json['requestedDate'] as String?,
       procedures: (json['procedures'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => e as String?)
           .toList(),
     );
 

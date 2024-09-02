@@ -36,7 +36,7 @@ class _OrganTissueSearchScreenState
     extends ConsumerState<OrganTissueSearchScreen> {
   final PagingController<int, Content> _pagingController =
       PagingController(firstPageKey: 0);
-  String query = '';
+  String query = '--';
 
   @override
   void initState() {
@@ -121,9 +121,10 @@ class _OrganTissueSearchScreenState
                         runAlignment: WrapAlignment.spaceBetween,
                         runSpacing: 16.0,
                         children: [
-                          _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
                           _buildDetailColumn(
-                              'Cell Count', item.cellCount ?? ''),
+                              'Tissue ID', item.tissueId ?? '--'),
+                          _buildDetailColumn(
+                              'Cell Count', item.cellCount ?? '--'),
                           _buildDetailColumn(
                             'Harvest Date',
                             item.harvestDate != null
@@ -132,7 +133,12 @@ class _OrganTissueSearchScreenState
                                 : "",
                           ),
                           _buildDetailColumn(
-                              'Tissue Expiry', item.tissueExpiry ?? ''),
+                            'Tissue Expiry',
+                            item.tissueExpiry != null
+                                ? DateTime.tryParse(item.tissueExpiry!)
+                                    .formateDate
+                                : "",
+                          ),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -169,7 +175,7 @@ class _OrganTissueSearchScreenState
   }
 
   Widget _buildDetailColumn(String label, dynamic value) {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -181,7 +187,7 @@ class _OrganTissueSearchScreenState
             color: AppColor.grey,
           ),
         ),
-        const SizedBox(height: 2.0),
+        const Spacer(),
         Text(
           value.toString(),
           maxLines: 1,
@@ -202,12 +208,13 @@ class _OrganTissueSearchScreenState
         return Padding(
           padding: const EdgeInsets.all(24.0),
           child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
             spacing: 16.0,
-            runSpacing: 16.0,
             runAlignment: WrapAlignment.spaceBetween,
+            runSpacing: 16.0,
             children: [
-              _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
-              _buildDetailColumn('Cell Count', item.cellCount ?? ''),
+              _buildDetailColumn('Tissue ID', item.tissueId ?? '--'),
+              _buildDetailColumn('Cell Count', item.cellCount ?? '--'),
               _buildDetailColumn(
                 'Harvest Date',
                 item.harvestDate != null
@@ -215,15 +222,20 @@ class _OrganTissueSearchScreenState
                     : "",
               ),
               _buildDetailColumn('Suitable Procedures',
-                  item.suitableProcedures?.join(', ') ?? ''),
-              _buildDetailColumn('Clear Zone', item.clearZone ?? ''),
-              _buildDetailColumn('Lens Type', item.lensType ?? ''),
-              _buildDetailColumn('Pachemetry', item.pachemetry ?? ''),
-              _buildDetailColumn('Tissue Expiry', item.tissueExpiry ?? ''),
+                  item.suitableProcedures?.join(', ') ?? '--'),
+              _buildDetailColumn('Clear Zone', item.clearZone ?? '--'),
+              _buildDetailColumn('Lens Type', item.lensType ?? '--'),
+              _buildDetailColumn('Pachemetry', item.pachemetry ?? '--'),
               _buildDetailColumn(
-                  'Extraction Method', item.extractionMethod ?? ''),
-              _buildDetailColumn('Storage Medium', item.storageMedium ?? ''),
-              _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
+                'Tissue Expiry',
+                item.tissueExpiry != null
+                    ? DateTime.tryParse(item.tissueExpiry!).formateDate
+                    : "",
+              ),
+              _buildDetailColumn(
+                  'Extraction Method', item.extractionMethod ?? '--'),
+              _buildDetailColumn('Storage Medium', item.storageMedium ?? '--'),
+              // _buildDetailColumn('Encounter ID', item.encounterId ?? '--'),
             ],
           ),
         );

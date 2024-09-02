@@ -384,7 +384,7 @@ mixin _$Content {
   @JsonKey(name: "requestedDate")
   String? get requestedDate => throw _privateConstructorUsedError;
   @JsonKey(name: "procedures")
-  List<String>? get procedures => throw _privateConstructorUsedError;
+  List<String?>? get procedures => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -401,7 +401,7 @@ abstract class $ContentCopyWith<$Res> {
       @JsonKey(name: "tissueTypeRequested") String? tissueTypeRequested,
       @JsonKey(name: "requestedBy") String? requestedBy,
       @JsonKey(name: "requestedDate") String? requestedDate,
-      @JsonKey(name: "procedures") List<String>? procedures});
+      @JsonKey(name: "procedures") List<String?>? procedures});
 }
 
 /// @nodoc
@@ -443,7 +443,7 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
       procedures: freezed == procedures
           ? _value.procedures
           : procedures // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String?>?,
     ) as $Val);
   }
 }
@@ -460,7 +460,7 @@ abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
       @JsonKey(name: "tissueTypeRequested") String? tissueTypeRequested,
       @JsonKey(name: "requestedBy") String? requestedBy,
       @JsonKey(name: "requestedDate") String? requestedDate,
-      @JsonKey(name: "procedures") List<String>? procedures});
+      @JsonKey(name: "procedures") List<String?>? procedures});
 }
 
 /// @nodoc
@@ -500,7 +500,7 @@ class __$$ContentImplCopyWithImpl<$Res>
       procedures: freezed == procedures
           ? _value._procedures
           : procedures // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String?>?,
     ));
   }
 }
@@ -513,7 +513,7 @@ class _$ContentImpl implements _Content {
       @JsonKey(name: "tissueTypeRequested") this.tissueTypeRequested,
       @JsonKey(name: "requestedBy") this.requestedBy,
       @JsonKey(name: "requestedDate") this.requestedDate,
-      @JsonKey(name: "procedures") final List<String>? procedures})
+      @JsonKey(name: "procedures") final List<String?>? procedures})
       : _procedures = procedures;
 
   factory _$ContentImpl.fromJson(Map<String, dynamic> json) =>
@@ -531,10 +531,10 @@ class _$ContentImpl implements _Content {
   @override
   @JsonKey(name: "requestedDate")
   final String? requestedDate;
-  final List<String>? _procedures;
+  final List<String?>? _procedures;
   @override
   @JsonKey(name: "procedures")
-  List<String>? get procedures {
+  List<String?>? get procedures {
     final value = _procedures;
     if (value == null) return null;
     if (_procedures is EqualUnmodifiableListView) return _procedures;
@@ -595,7 +595,7 @@ abstract class _Content implements Content {
       @JsonKey(name: "requestedBy") final String? requestedBy,
       @JsonKey(name: "requestedDate") final String? requestedDate,
       @JsonKey(name: "procedures")
-      final List<String>? procedures}) = _$ContentImpl;
+      final List<String?>? procedures}) = _$ContentImpl;
 
   factory _Content.fromJson(Map<String, dynamic> json) = _$ContentImpl.fromJson;
 
@@ -613,7 +613,7 @@ abstract class _Content implements Content {
   String? get requestedDate;
   @override
   @JsonKey(name: "procedures")
-  List<String>? get procedures;
+  List<String?>? get procedures;
   @override
   @JsonKey(ignore: true)
   _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
