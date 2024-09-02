@@ -47,6 +47,9 @@ class EBCaseCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 _buildDetailColumn(
                     'Notifier Contact', item.notifierBrief?.contact ?? ''),
+                const SizedBox(width: 8),
+                _buildDetailColumn(
+                    'Notifier Name', item.notifierBrief?.name ?? ''),
                 const Spacer(),
                 IconButton(
                   onPressed: onTap,

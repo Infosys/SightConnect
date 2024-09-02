@@ -150,7 +150,7 @@ class _OrganRequestCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                "DR. John Doe",
+                requestedBy.formatTitle(),
                 style: applyRobotoFont(fontSize: 12.0),
               ),
               const Spacer(),
