@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class FormDisplay extends StatelessWidget {
   const FormDisplay({super.key, required this.field});
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class FormDropDown extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(Object?)? onChanged;
 
   @override
@@ -99,7 +99,7 @@ class FormDropDown extends StatelessWidget {
 //     this.onChanged,
 //   });
 
-//   final ElementElementClassEntity field;
+//   final ElementClassEntity field;
 //   final Function(String?)? onChanged;
 
 //   @override

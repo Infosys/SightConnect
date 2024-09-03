@@ -10,7 +10,7 @@ class FormTextField extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(String?)? onChanged;
 
   @override

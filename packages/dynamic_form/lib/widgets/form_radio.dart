@@ -15,8 +15,7 @@ class FormRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ElementElementClassEntity fieldEntity =
-        field as ElementElementClassEntity;
+    final ElementClassEntity fieldEntity = field as ElementClassEntity;
 
     Object? getInitialValue() {
       final Object? initialValue = fieldEntity.initialValue;

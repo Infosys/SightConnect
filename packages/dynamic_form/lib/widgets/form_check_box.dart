@@ -15,8 +15,7 @@ class FormCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ElementElementClassEntity fieldEntity =
-        field as ElementElementClassEntity;
+    final ElementClassEntity fieldEntity = field as ElementClassEntity;
 
     List<Object>? getInitialValue() {
       final List<Object>? initialValue =

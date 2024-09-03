@@ -16,7 +16,7 @@ class FormFile extends HookWidget {
     required this.field,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(List<String>) onChanged;
 
   List<String> getInitialValue() {
@@ -96,7 +96,7 @@ class ImagePicker extends StatelessWidget {
   });
 
   final FormFieldState<List<String>> state;
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final ValueNotifier<List<String>> images;
   final ValueNotifier<bool> showAllImages;
   final Function(List<String>) onChanged;

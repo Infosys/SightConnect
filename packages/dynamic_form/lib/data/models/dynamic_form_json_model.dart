@@ -46,7 +46,7 @@ class ResponseJsonModel {
 
 class PageModel {
   String? name;
-  List<ElementElementClassModel>? elements;
+  List<ElementClassModel>? elements;
   String? title;
 
   PageModel({
@@ -59,8 +59,8 @@ class PageModel {
         name: json["name"],
         elements: json["elements"] == null
             ? []
-            : List<ElementElementClassModel>.from(
-                json["elements"]!.map((x) => ElementElementClassModel.fromJson(x))),
+            : List<ElementClassModel>.from(
+                json["elements"]!.map((x) => ElementClassModel.fromJson(x))),
         title: json["title"],
       );
 
@@ -73,49 +73,7 @@ class PageModel {
       };
 }
 
-// class PageElementModel {
-//   String? type;
-//   dynamic name;
-//   List<ElementElementClassModel>? elements;
-//   bool? repeats;
-//   int? minRepeat;
-//   int? maxRepeat;
-
-//   PageElementModel({
-//     this.type,
-//     this.name,
-//     this.elements,
-//     this.repeats,
-//     this.minRepeat,
-//     this.maxRepeat,
-//   });
-
-//   factory PageElementModel.fromJson(Map<String, dynamic> json) =>
-//       PageElementModel(
-//         type: json["type"],
-//         name: json["name"],
-//         elements: json["elements"] == null
-//             ? []
-//             : List<ElementElementClassModel>.from(json["elements"]!
-//                 .map((x) => ElementElementClassModel.fromJson(x))),
-//         repeats: json["repeats"],
-//         minRepeat: json["minRepeat"],
-//         maxRepeat: json["maxRepeat"],
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "type": type,
-//         "name": name,
-//         "elements": elements == null
-//             ? []
-//             : List<dynamic>.from(elements!.map((x) => x.toJson())),
-//         "repeats": repeats,
-//         "minRepeat": minRepeat,
-//         "maxRepeat": maxRepeat,
-//       };
-// }
-
-class ElementElementClassModel {
+class ElementClassModel {
   dynamic name;
   String? type;
   String? prefix;
@@ -137,9 +95,9 @@ class ElementElementClassModel {
   int? max;
   int? step;
   List<Conditions>? conditions;
-  List<ElementElementClassModel>? elements;
+  List<ElementClassModel>? elements;
 
-  ElementElementClassModel({
+  ElementClassModel({
     this.type,
     this.name,
     this.title,
@@ -162,8 +120,8 @@ class ElementElementClassModel {
     this.elements,
   });
 
-  factory ElementElementClassModel.fromJson(Map<String, dynamic> json) =>
-      ElementElementClassModel(
+  factory ElementClassModel.fromJson(Map<String, dynamic> json) =>
+      ElementClassModel(
         type: json["type"],
         name: json["name"],
         title: json["title"],
@@ -194,8 +152,8 @@ class ElementElementClassModel {
         dependantField: json["dependantField"],
         elements: json["elements"] == null
             ? []
-            : List<ElementElementClassModel>.from(json["elements"]!
-                .map((x) => ElementElementClassModel.fromJson(x))),
+            : List<ElementClassModel>.from(
+                json["elements"]!.map((x) => ElementClassModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -252,7 +210,7 @@ class OptionsModel {
 
 class Conditions {
   String? value;
-  List<ElementElementClassModel>? fields;
+  List<ElementClassModel>? fields;
 
   Conditions({
     this.value,
@@ -263,8 +221,8 @@ class Conditions {
         value: json["value"],
         fields: json["fields"] == null
             ? []
-            : List<ElementElementClassModel>.from(json["fields"]!
-                .map((x) => ElementElementClassModel.fromJson(x))),
+            : List<ElementClassModel>.from(
+                json["fields"]!.map((x) => ElementClassModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

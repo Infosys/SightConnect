@@ -23,11 +23,6 @@ enum FormLayoutType {
   PANEL,
 }
 
-// enum FormPanelType {
-//   PANEL,
-//   REPEATED_PANEL,
-// }
-
 enum DynamicFormSavingType {
   DRAFT,
   SAVE,

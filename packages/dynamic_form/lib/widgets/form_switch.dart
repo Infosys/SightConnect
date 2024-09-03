@@ -12,7 +12,7 @@ class FormSwitch extends HookWidget {
     required this.onChanged,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final void Function(bool) onChanged;
 
   bool? getInitialValue() {

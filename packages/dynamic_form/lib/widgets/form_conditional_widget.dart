@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ConditionalWidget extends StatelessWidget {
-  final ElementElementClassEntity? field;
+  final ElementClassEntity? field;
   final GlobalKey<FormBuilderState> formKey;
 
   const ConditionalWidget({

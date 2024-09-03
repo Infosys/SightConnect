@@ -10,7 +10,7 @@ import 'package:dynamic_form/widgets/form_display.dart';
 import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_duration.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
-import 'package:dynamic_form/widgets/form_nested_pannel_widget.dart';
+import 'package:dynamic_form/widgets/form_panel_widget.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
 import 'package:dynamic_form/widgets/form_slider.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
@@ -21,7 +21,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../widgets/form_text_area.dart';
 
 Widget getField(
-  ElementElementClassEntity? field,
+  ElementClassEntity? field,
   GlobalKey<FormBuilderState> key,
 ) {
   if (field == null) {
@@ -115,7 +115,7 @@ Widget getField(
       return FormSlider(field: field);
 
     case DynamicFormType.PANEL:
-      return FormNestedPannelWidget(
+      return FormPanelWidget(
         field: field,
         formKey: key,
       );

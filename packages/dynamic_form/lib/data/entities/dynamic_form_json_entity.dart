@@ -44,7 +44,7 @@ class ResponseJsonEntity {
 
 class PageEntity {
   final String name;
-  final List<ElementElementClassEntity> elements;
+  final List<ElementClassEntity> elements;
   final String title;
 
   PageEntity({
@@ -55,8 +55,8 @@ class PageEntity {
 
   factory PageEntity.fromJson(Map<String, dynamic> json) => PageEntity(
         name: json["name"],
-        elements: List<ElementElementClassEntity>.from(
-          json["elements"].map((x) => ElementElementClassEntity.fromJson(x)),
+        elements: List<ElementClassEntity>.from(
+          json["elements"].map((x) => ElementClassEntity.fromJson(x)),
         ),
         title: json["title"],
       );
@@ -71,7 +71,7 @@ class PageEntity {
 // class PageElementEntity {
 //   final FormPanelType type;
 //   final String name;
-//   final List<ElementElementClassEntity> elements;
+//   final List<ElementClassEntity> elements;
 //   final bool repeats;
 //   final int? minRepeat;
 //   final int? maxRepeat;
@@ -91,8 +91,8 @@ class PageEntity {
 //       PageElementEntity(
 //         type: json["type"],
 //         name: json["name"],
-//         elements: List<ElementElementClassEntity>.from(
-//             json["elements"].map((x) => ElementElementClassEntity.fromJson(x))),
+//         elements: List<ElementClassEntity>.from(
+//             json["elements"].map((x) => ElementClassEntity.fromJson(x))),
 //         repeats: json["repeats"],
 //         minRepeat: json["minRepeat"],
 //         maxRepeat: json["maxRepeat"],
@@ -110,7 +110,7 @@ class PageEntity {
 //       };
 // }
 
-class ElementElementClassEntity {
+class ElementClassEntity {
   final DynamicFormType type;
   final String name;
   final String? prefix;
@@ -129,14 +129,14 @@ class ElementElementClassEntity {
   final int step;
   final List<ConditionsEntity>? conditions;
   final String? dependantField;
-  final List<ElementElementClassEntity>? elements;
+  final List<ElementClassEntity>? elements;
   final bool repeats;
   final int? minRepeat;
   final int? maxRepeat;
   final String? inputType;
   final dynamic initialValue;
 
-  ElementElementClassEntity({
+  ElementClassEntity({
     required this.type,
     required this.name,
     required this.title,
@@ -162,8 +162,8 @@ class ElementElementClassEntity {
     this.inputType,
   });
 
-  factory ElementElementClassEntity.fromJson(Map<String, dynamic> json) =>
-      ElementElementClassEntity(
+  factory ElementClassEntity.fromJson(Map<String, dynamic> json) =>
+      ElementClassEntity(
         type: json["type"],
         name: json["name"],
         title: json["title"],
@@ -188,8 +188,8 @@ class ElementElementClassEntity {
         dependantField: json["dependantField"],
         elements: json["elements"] == null
             ? null
-            : List<ElementElementClassEntity>.from(json["elements"]
-                .map((x) => ElementElementClassEntity.fromJson(x))),
+            : List<ElementClassEntity>.from(
+                json["elements"].map((x) => ElementClassEntity.fromJson(x))),
         prefix: json["prefix"],
         minRepeat: json["minRepeat"],
         maxRepeat: json["maxRepeat"],
@@ -229,10 +229,10 @@ class ElementElementClassEntity {
 
   @override
   String toString() {
-    return 'ElementElementClassEntity{type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType}';
+    return 'ElementClassEntity{type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType}';
   }
 
-  ElementElementClassEntity copyWith({
+  ElementClassEntity copyWith({
     DynamicFormType? type,
     String? name,
     String? title,
@@ -249,14 +249,14 @@ class ElementElementClassEntity {
     int? step,
     List<ConditionsEntity>? conditions,
     String? dependantField,
-    List<ElementElementClassEntity>? elements,
+    List<ElementClassEntity>? elements,
     bool? repeats,
     int? minRepeat,
     int? maxRepeat,
     String? inputType,
     dynamic initialValue,
   }) {
-    return ElementElementClassEntity(
+    return ElementClassEntity(
       type: type ?? this.type,
       name: name ?? this.name,
       title: title ?? this.title,
@@ -306,7 +306,7 @@ class ChoiceElementEntity {
 
 class ConditionsEntity {
   final String value;
-  final List<ElementElementClassEntity> fields;
+  final List<ElementClassEntity> fields;
 
   ConditionsEntity({
     required this.value,
@@ -316,8 +316,8 @@ class ConditionsEntity {
   factory ConditionsEntity.fromJson(Map<String, dynamic> json) =>
       ConditionsEntity(
         value: json["value"],
-        fields: List<ElementElementClassEntity>.from(
-            json["fields"].map((x) => ElementElementClassEntity.fromJson(x))),
+        fields: List<ElementClassEntity>.from(
+            json["fields"].map((x) => ElementClassEntity.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
