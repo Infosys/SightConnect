@@ -10,7 +10,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:uuid/uuid.dart';
 
 class AppDynamicPanel extends StatefulWidget {
-  final PageElementEntity panel;
+  final ElementElementClassEntity panel;
   final GlobalKey<FormBuilderState> globalFormKey;
   final String name;
   final int minRepeat;
@@ -279,7 +279,7 @@ class _AppDynamicPanelState extends State<AppDynamicPanel>
           globalFormKey: key,
           minRepeat: field.minRepeat ?? 1,
           maxRepeat: field.maxRepeat ?? 1,
-          panel: PageElementEntity(
+          panel: ElementElementClassEntity(
             initialValue: field.initialValue,
             name: field.name,
             elements: field.elements ?? [],

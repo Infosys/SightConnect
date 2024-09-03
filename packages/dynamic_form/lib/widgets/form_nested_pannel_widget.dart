@@ -31,33 +31,6 @@ class FormNestedPannelWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ...buildFields(field.elements, formKey),
-
-        // ...field.elements!.map((e) {
-        //   if (field.repeats == true) {
-        //     return AppDynamicPanel(
-        //       appCardPadding: 0,
-        //       readOnly: false,
-        //       name: field.title,
-        //       globalFormKey: formKey,
-        //       minRepeat: field.minRepeat ?? 1,
-        //       maxRepeat: field.maxRepeat ?? 1,
-        //       panel: PageElementEntity(
-        //         initialValue: field.initialValue,
-        //         name: field.name,
-        //         elements: field.elements ?? [],
-        //         repeats: field.repeats,
-        //         type: FormPanelType.REPEATED_PANEL,
-        //         minRepeat: field.minRepeat ?? 1,
-        //         maxRepeat: field.maxRepeat ?? 1,
-        //       ),
-        //     );
-        //   }
-
-        //   return Padding(
-        //     padding: const EdgeInsets.symmetric(vertical: 8),
-        //     child: getField(e, formKey),
-        //   );
-        // }),
       ],
     );
   }
@@ -79,7 +52,7 @@ class FormNestedPannelWidget extends StatelessWidget {
           globalFormKey: key,
           minRepeat: field.minRepeat ?? 1,
           maxRepeat: field.maxRepeat ?? 1,
-          panel: PageElementEntity(
+          panel: ElementElementClassEntity(
             initialValue: field.initialValue,
             name: field.name,
             elements: field.elements ?? [],

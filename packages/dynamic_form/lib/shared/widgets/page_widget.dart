@@ -20,7 +20,7 @@ class PageWidget extends StatelessWidget {
     this.readOnly = false,
   });
 
-  final List<PageElementEntity> elements;
+  final List<ElementElementClassEntity> elements;
   final GlobalKey<FormBuilderState> formKey;
   final String name;
   final bool readOnly;
@@ -37,7 +37,7 @@ class PageWidget extends StatelessWidget {
       children: elements.map((panel) {
         if (panel.elements.isEmpty) {
           return Container();
-        } else if (panel.type == FormPanelType.REPEATED_PANEL) {
+        } else if (panel.type == DynamicFormType.PANEL && panel.repeats == true) {
           return AppDynamicPanel(
             appCardPadding: 16,
             readOnly: readOnly,
@@ -81,7 +81,7 @@ class PageWidget extends StatelessWidget {
           globalFormKey: key,
           minRepeat: field.minRepeat ?? 1,
           maxRepeat: field.maxRepeat ?? 1,
-          panel: PageElementEntity(
+          panel: ElementElementClassEntity(
             initialValue: field.initialValue,
             name: field.name,
             elements: field.elements ?? [],

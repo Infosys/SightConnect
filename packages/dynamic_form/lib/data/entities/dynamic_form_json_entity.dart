@@ -44,7 +44,7 @@ class ResponseJsonEntity {
 
 class PageEntity {
   final String name;
-  final List<PageElementEntity> elements;
+  final List<ElementElementClassEntity> elements;
   final String title;
 
   PageEntity({
@@ -55,8 +55,8 @@ class PageEntity {
 
   factory PageEntity.fromJson(Map<String, dynamic> json) => PageEntity(
         name: json["name"],
-        elements: List<PageElementEntity>.from(
-          json["elements"].map((x) => PageElementEntity.fromJson(x)),
+        elements: List<ElementElementClassEntity>.from(
+          json["elements"].map((x) => ElementElementClassEntity.fromJson(x)),
         ),
         title: json["title"],
       );
@@ -68,47 +68,47 @@ class PageEntity {
       };
 }
 
-class PageElementEntity {
-  final FormPanelType type;
-  final String name;
-  final List<ElementElementClassEntity> elements;
-  final bool repeats;
-  final int? minRepeat;
-  final int? maxRepeat;
-  final List<dynamic>? initialValue;
+// class PageElementEntity {
+//   final FormPanelType type;
+//   final String name;
+//   final List<ElementElementClassEntity> elements;
+//   final bool repeats;
+//   final int? minRepeat;
+//   final int? maxRepeat;
+//   final List<dynamic>? initialValue;
 
-  PageElementEntity({
-    required this.type,
-    required this.name,
-    required this.elements,
-    required this.repeats,
-    required this.minRepeat,
-    required this.maxRepeat,
-    this.initialValue,
-  });
+//   PageElementEntity({
+//     required this.type,
+//     required this.name,
+//     required this.elements,
+//     required this.repeats,
+//     required this.minRepeat,
+//     required this.maxRepeat,
+//     this.initialValue,
+//   });
 
-  factory PageElementEntity.fromJson(Map<String, dynamic> json) =>
-      PageElementEntity(
-        type: json["type"],
-        name: json["name"],
-        elements: List<ElementElementClassEntity>.from(
-            json["elements"].map((x) => ElementElementClassEntity.fromJson(x))),
-        repeats: json["repeats"],
-        minRepeat: json["minRepeat"],
-        maxRepeat: json["maxRepeat"],
-        initialValue: json["initialValue"],
-      );
+//   factory PageElementEntity.fromJson(Map<String, dynamic> json) =>
+//       PageElementEntity(
+//         type: json["type"],
+//         name: json["name"],
+//         elements: List<ElementElementClassEntity>.from(
+//             json["elements"].map((x) => ElementElementClassEntity.fromJson(x))),
+//         repeats: json["repeats"],
+//         minRepeat: json["minRepeat"],
+//         maxRepeat: json["maxRepeat"],
+//         initialValue: json["initialValue"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "type": type,
-        "name": name,
-        "elements": List<dynamic>.from(elements.map((x) => x.toJson())),
-        "repeats": repeats,
-        "minRepeat": minRepeat,
-        "maxRepeat": maxRepeat,
-        "initialValue": initialValue,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "type": type,
+//         "name": name,
+//         "elements": List<dynamic>.from(elements.map((x) => x.toJson())),
+//         "repeats": repeats,
+//         "minRepeat": minRepeat,
+//         "maxRepeat": maxRepeat,
+//         "initialValue": initialValue,
+//       };
+// }
 
 class ElementElementClassEntity {
   final DynamicFormType type;

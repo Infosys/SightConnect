@@ -45,7 +45,7 @@ class DynamicFormJsonMapper {
         pageEntities.add(PageEntity(
           name: page.name.toString(),
           title: page.title ?? '',
-          elements: _getPageElements(
+          elements: _getElements(
             page.elements,
           ),
         ));
@@ -54,25 +54,25 @@ class DynamicFormJsonMapper {
     return pageEntities;
   }
 
-  List<PageElementEntity> _getPageElements(List<PageElementModel>? elements) {
-    final List<PageElementEntity> pageElementEntities = [];
-    if (elements != null) {
-      for (final element in elements) {
-        pageElementEntities.add(PageElementEntity(
-          type: _getPanelType(element.repeats),
-          name: element.name.toString(),
-          elements: _getElements(
-            element.elements,
-          ),
-          repeats: element.repeats ?? false,
-          maxRepeat: element.maxRepeat,
-          minRepeat: element.minRepeat,
-          initialValue: initialValues?[element.name.toString()],
-        ));
-      }
-    }
-    return pageElementEntities;
-  }
+  // List<PageElementEntity> _getPageElements(List<PageElementModel>? elements) {
+  //   final List<PageElementEntity> pageElementEntities = [];
+  //   if (elements != null) {
+  //     for (final element in elements) {
+  //       pageElementEntities.add(PageElementEntity(
+  //         type: _getPanelType(element.repeats),
+  //         name: element.name.toString(),
+  //         elements: _getElements(
+  //           element.elements,
+  //         ),
+  //         repeats: element.repeats ?? false,
+  //         maxRepeat: element.maxRepeat,
+  //         minRepeat: element.minRepeat,
+  //         initialValue: initialValues?[element.name.toString()],
+  //       ));
+  //     }
+  //   }
+  //   return pageElementEntities;
+  // }
 
   List<ElementElementClassEntity> _getElements(
     List<ElementElementClassModel>? elements,
@@ -227,10 +227,10 @@ FormLayoutType _mapToFormLayoutType(String? value) {
   }
 }
 
-FormPanelType _getPanelType(bool? repeats) {
-  if (repeats == true) {
-    return FormPanelType.REPEATED_PANEL;
-  } else {
-    return FormPanelType.PANEL;
-  }
-}
+// FormPanelType _getPanelType(bool? repeats) {
+//   if (repeats == true) {
+//     return FormPanelType.REPEATED_PANEL;
+//   } else {
+//     return FormPanelType.PANEL;
+//   }
+// }
