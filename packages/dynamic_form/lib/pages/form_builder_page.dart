@@ -51,20 +51,30 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          actions: widget.enableDraft
-              ? [
-                  TextButton.icon(
-                    onPressed: widget.readOnly ? null : _handleDraft,
-                    label: const Text(
-                      'Save as Draft',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+          actions: [
+            Tooltip(
+              message: 'Print form data',
+              child: TextButton(
+                onPressed: () {
+                  if (formKey.currentState?.instantValue != null) {
+                    Log.f(formKey.currentState!.instantValue);
+                  }
+                },
+                child: const Text("PRINT"),
+              ),
+            ),
+            if (widget.enableDraft)
+              TextButton.icon(
+                onPressed: widget.readOnly ? null : _handleDraft,
+                label: const Text(
+                  'Save as Draft',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
-                ]
-              : null,
+                ),
+              ),
+          ],
           leading: IconButton(
             icon: Icon(widget.backButtonIcon),
             onPressed: () {

@@ -27,8 +27,8 @@ class FormPanelWidget extends StatelessWidget {
         Text(
           field.title,
           style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+            fontWeight: FontWeight.w800,
           ),
         ),
         const SizedBox(height: 8),
@@ -134,13 +134,6 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        ElevatedButton(
-            onPressed: () {
-              if (widget.formKey.currentState?.instantValue != null) {
-                Log.f(widget.formKey.currentState!.instantValue);
-              }
-            },
-            child: const Text("print")),
         for (int i = 0; i < _panelKeys.length; i++)
           Padding(
             padding: const EdgeInsets.only(bottom: 16),

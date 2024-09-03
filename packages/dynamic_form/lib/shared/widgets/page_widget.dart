@@ -32,7 +32,7 @@ class PageWidget extends StatelessWidget {
           return Container();
         } else {
           return AppCard(
-            title: name,
+            title: null,
             marginBottom: 16,
             child: Wrap(
               runSpacing: 16,
