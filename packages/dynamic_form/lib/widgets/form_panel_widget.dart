@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:uuid/uuid.dart';
 
 class FormPanelWidget extends StatelessWidget {
   final ElementClassEntity field;
@@ -63,31 +62,64 @@ class RepeatingFieldPanel extends StatefulWidget {
   State<RepeatingFieldPanel> createState() => _RepeatingFieldPanelState();
 }
 
-class _RepeatingFieldPanelState extends State<RepeatingFieldPanel> {
-  List<String> _panelKeys = [];
+class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
+    with AutomaticKeepAliveClientMixin {
+  List<String> repeatedPanelKeys = [];
+  Map<String, dynamic> formatedInitialValue = {};
+  final Uuid uuid = const Uuid();
   int maxRepeats = 0;
   int minRepeats = 0;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
     super.initState();
-    maxRepeats = widget.field.maxRepeat ?? 1;
+    maxRepeats = widget.field.maxRepeat ?? 0;
     minRepeats = widget.field.minRepeat ?? 0;
-    _initializeFields();
+
+    if (widget.field.initialValue != null &&
+        widget.field.initialValue!.isNotEmpty) {
+      _createdPrefilledPanels();
+    } else {
+      for (int i = 0; i < minRepeats; i++) {
+        repeatedPanelKeys.add(getUniqueKey());
+      }
+    }
   }
 
-  void _initializeFields() {
-    final int initialCount = widget.field.minRepeat ?? 0;
-    _panelKeys =
-        List.generate(initialCount, (index) => _generateUniqueKey(index));
+  _createdPrefilledPanels() {
+    try {
+      List<dynamic> prefilledPanels = widget.field.initialValue ?? [];
+      for (int i = 0; i < prefilledPanels.length; i++) {
+        var key = getUniqueKey();
+
+        repeatedPanelKeys.add(key);
+      }
+      formatedInitialValue = _formatInitialValue(prefilledPanels);
+    } catch (e) {
+      Log.e(" AppDynamicPanel _createdPrefilledPanels error: $e");
+    }
   }
 
-  String _generateUniqueKey(int index) {
-    return "${widget.field.name}[$index]";
+  Map<String, dynamic> _formatInitialValue(List<dynamic> prefilledPanels) {
+    Map<String, dynamic> formattedValue = {};
+    for (int i = 0; i < prefilledPanels.length; i++) {
+      Map<String, dynamic>? temp = prefilledPanels[i];
+      if (temp == null) {
+        continue;
+      }
+      for (var element in temp.entries) {
+        formattedValue['${element.key}_${repeatedPanelKeys[i]}'] =
+            element.value;
+      }
+    }
+    return formattedValue;
   }
 
-  void _addPanel() {
-    if (_panelKeys.length >= maxRepeats) {
+  void addPanel() {
+    if (repeatedPanelKeys.length >= maxRepeats) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Maximum limit reached'),
@@ -95,46 +127,57 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel> {
       );
       return;
     }
+
     setState(() {
-      _panelKeys.add(_generateUniqueKey(_panelKeys.length));
+      repeatedPanelKeys.add(getUniqueKey());
     });
   }
 
-  void _removePanel(int index) {
-    final key = _panelKeys[index];
-    log("Panel Key: $key");
+  void removePanel(String key) {
     setState(() {
-      _panelKeys.removeAt(index);
+      repeatedPanelKeys.remove(key);
     });
 
     List<String> toDeleteKeys = widget.formKey.currentState!.fields.keys
         .where((element) => element.contains(key))
         .toList();
-    log(toDeleteKeys.toString());
     for (var element in toDeleteKeys) {
-      log(element);
       Future.microtask(() {
         widget.formKey.currentState?.fields[element]?.reset();
         widget.formKey.currentState?.removeInternalFieldValue(element);
       });
     }
-
-    // Update keys of remaining panels
-    for (int i = index; i < _panelKeys.length; i++) {
-      _panelKeys[i] = _generateUniqueKey(i);
-    }
-
     // Trigger a rebuild to ensure UI updates correctly
     setState(() {});
   }
 
+  String getUniqueKey() {
+    return uuid.v4();
+  }
+
+  List<dynamic> _formatValue(Map<String, dynamic> value) {
+    List<dynamic> toConvert = [];
+
+    for (var key in repeatedPanelKeys) {
+      Map<String, dynamic> temp = {};
+      for (var element in value.entries) {
+        if (element.key.contains(key)) {
+          temp[element.key.split('_').first] = element.value;
+        }
+      }
+      toConvert.add(temp);
+    }
+
+    return toConvert;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Log.f(_panelKeys);
+    super.build(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        for (int i = 0; i < _panelKeys.length; i++)
+        for (int i = 0; i < repeatedPanelKeys.length; i++)
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: DottedBorder(
@@ -143,24 +186,33 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel> {
               color: Colors.grey.shade300,
               child: Container(
                 padding: const EdgeInsets.all(16),
-                key: Key(_panelKeys[i]),
+                key: Key(repeatedPanelKeys[i]),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     if (i >= minRepeats)
                       TextButton.icon(
-                        onPressed: () => _removePanel(i),
+                        onPressed: () => removePanel(repeatedPanelKeys[i]),
                         icon: const Icon(Icons.remove),
                         label: const Text('Remove'),
                       ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: widget.field.elements!.map((field) {
-                        final propertyName =
-                            field.name.split(widget.field.name).last;
-                        final nameKey = "${widget.field.name}[$i]$propertyName";
+                        final keyExtension = repeatedPanelKeys[i];
                         field = field.copyWith(
-                          name: nameKey,
+                          name: '${field.name}_$keyExtension',
+                        );
+                        field = field.copyWith(
+                          initialValue: formatedInitialValue[field.name],
+                          elements: field.elements?.map((e) {
+                                return e.copyWith(
+                                  name: '${e.name}_$keyExtension',
+                                  initialValue: formatedInitialValue[
+                                      '${widget.field}.${e.name}_$keyExtension'],
+                                );
+                              }).toList() ??
+                              [],
                         );
 
                         return Padding(
@@ -172,9 +224,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel> {
                         );
                       }).toList(),
                     ),
-                    if (_panelKeys.length < maxRepeats)
+                    if (repeatedPanelKeys.length < maxRepeats)
                       TextButton.icon(
-                        onPressed: _addPanel,
+                        onPressed: addPanel,
                         icon: const Icon(Icons.add),
                         label: const Text('Add'),
                       ),
