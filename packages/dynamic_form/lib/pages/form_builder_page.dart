@@ -1,5 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
+import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
 import 'package:dynamic_form/shared/utlities/form_exit_dialog.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/form_panel_view.dart';
@@ -103,10 +104,10 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
       case FormLayoutType.STEPPER:
         return FormStepperView(
           formKey: formKey,
-          name: widget.title,
           pages: widget.pages,
           onSubmit: _handleSubmit,
           readOnly: widget.readOnly,
+          axis: Axis.horizontal,
         );
 
       default:
@@ -141,60 +142,14 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         );
       } else {
         Log.e('Form validation failed');
-
-        _showSnackBar('Please fill all required fields');
+        DynamicFormModals.showSnackBar(
+          context: context,
+          message: 'Please fill all required fields',
+        );
       }
     } catch (e, stackTrace) {
       Log.e('Error occurred: $e');
       Log.e('Stack trace: $stackTrace');
     }
-  }
-
-  void _showSnackBar(String message) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.removeCurrentSnackBar();
-    scaffold.showSnackBar(
-      SnackBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: const Color(0xFF296DF6),
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-        content: Row(
-          children: [
-            const Icon(
-              Icons.info,
-              color: Colors.white,
-            ),
-            const SizedBox(width: 8.0),
-            Expanded(
-              child: Text(
-                message,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DynamicFormPage extends StatefulWidget {
-  const DynamicFormPage({super.key});
-
-  @override
-  State<DynamicFormPage> createState() => _DynamicFormPageState();
-}
-
-class _DynamicFormPageState extends State<DynamicFormPage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
