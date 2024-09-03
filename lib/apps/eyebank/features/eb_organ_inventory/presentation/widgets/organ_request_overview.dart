@@ -120,8 +120,8 @@ class _OrganRequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      padding: const EdgeInsets.all(12.0),
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -161,7 +161,7 @@ class _OrganRequestCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 4.0),
           Wrap(
             spacing: 16.0,
             runSpacing: 8.0,
