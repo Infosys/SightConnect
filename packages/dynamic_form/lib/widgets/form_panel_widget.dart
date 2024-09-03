@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,9 @@ class FormPanelWidget extends StatelessWidget {
             fontWeight: FontWeight.w800,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         if (field.repeats)
-          RepeatingFieldPanel(field: field, formKey: formKey)
+          RepeatingFieldPanel(field: field, globalFormKey: formKey)
         else
           Wrap(
             runSpacing: 16,
@@ -50,12 +51,12 @@ class FormPanelWidget extends StatelessWidget {
 
 class RepeatingFieldPanel extends StatefulWidget {
   final ElementClassEntity field;
-  final GlobalKey<FormBuilderState> formKey;
+  final GlobalKey<FormBuilderState> globalFormKey;
 
   const RepeatingFieldPanel({
     super.key,
     required this.field,
-    required this.formKey,
+    required this.globalFormKey,
   });
 
   @override
@@ -64,6 +65,7 @@ class RepeatingFieldPanel extends StatefulWidget {
 
 class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     with AutomaticKeepAliveClientMixin {
+  final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
   Map<String, dynamic> formatedInitialValue = {};
   final Uuid uuid = const Uuid();
@@ -92,14 +94,17 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
   _createdPrefilledPanels() {
     try {
       List<dynamic> prefilledPanels = widget.field.initialValue ?? [];
+      Log.d("RepeatingFieldPanel _createdPrefilledPanels: $prefilledPanels");
+
       for (int i = 0; i < prefilledPanels.length; i++) {
         var key = getUniqueKey();
-
         repeatedPanelKeys.add(key);
       }
       formatedInitialValue = _formatInitialValue(prefilledPanels);
+      Log.d(
+          "RepeatingFieldPanel _createdPrefilledPanels: $formatedInitialValue");
     } catch (e) {
-      Log.e(" AppDynamicPanel _createdPrefilledPanels error: $e");
+      Log.e("RepeatingFieldPanel _createdPrefilledPanels error: $e");
     }
   }
 
@@ -120,10 +125,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
 
   void addPanel() {
     if (repeatedPanelKeys.length >= maxRepeats) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Maximum limit reached'),
-        ),
+      DynamicFormModals.showSnackBar(
+        context: context,
+        message: 'Maximum limit reached',
       );
       return;
     }
@@ -137,16 +141,16 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     setState(() {
       repeatedPanelKeys.remove(key);
     });
-
-    List<String> toDeleteKeys = widget.formKey.currentState!.fields.keys
+    List<String> toDeleteKeys = formKey.currentState!.fields.keys
         .where((element) => element.contains(key))
         .toList();
     for (var element in toDeleteKeys) {
       Future.microtask(() {
-        widget.formKey.currentState?.fields[element]?.reset();
-        widget.formKey.currentState?.removeInternalFieldValue(element);
+        formKey.currentState?.fields[element]?.reset();
+        formKey.currentState?.removeInternalFieldValue(element);
       });
     }
+
     // Trigger a rebuild to ensure UI updates correctly
     setState(() {});
   }
@@ -167,74 +171,145 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
       }
       toConvert.add(temp);
     }
-
     return toConvert;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        for (int i = 0; i < repeatedPanelKeys.length; i++)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: DottedBorder(
-              borderType: BorderType.RRect,
-              radius: const Radius.circular(16),
-              color: Colors.grey.shade300,
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                key: Key(repeatedPanelKeys[i]),
+
+    return DottedBorder(
+      borderType: BorderType.RRect,
+      radius: const Radius.circular(16),
+      color: Colors.grey.shade300,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: FormBuilderField(
+          validator: (value) {
+            formKey.currentState?.validate();
+            return null;
+          },
+          name: widget.field.name,
+          onSaved: (newValue) {
+            formKey.currentState?.save();
+            final value = formKey.currentState?.value;
+            final formatedValue = _formatValue(value ?? {});
+            widget.globalFormKey.currentState?.fields[widget.field.name]
+                ?.didChange(formatedValue);
+          },
+          builder: (field) {
+            return FormBuilder(
+              key: formKey,
+              child: SizedBox(
+                width: double.infinity,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if (i >= minRepeats)
-                      TextButton.icon(
-                        onPressed: () => removePanel(repeatedPanelKeys[i]),
-                        icon: const Icon(Icons.remove),
-                        label: const Text('Remove'),
-                      ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      children: widget.field.elements!.map((field) {
-                        final keyExtension = repeatedPanelKeys[i];
-                        field = field.copyWith(
-                          name: '${field.name}_$keyExtension',
-                        );
-                        field = field.copyWith(
-                          initialValue: formatedInitialValue[field.name],
-                          elements: field.elements?.map((e) {
-                                return e.copyWith(
-                                  name: '${e.name}_$keyExtension',
-                                  initialValue: formatedInitialValue[
-                                      '${widget.field}.${e.name}_$keyExtension'],
-                                );
-                              }).toList() ??
-                              [],
-                        );
-
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: getField(
-                            field,
-                            widget.formKey,
+                      children: [
+                        ...repeatedPanelKeys
+                            .map((key) => buildRepeatedPanel(key)),
+                        if (repeatedPanelKeys.length < maxRepeats)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Repeating Panel',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextButton.icon(
+                                  onPressed: addPanel,
+                                  icon: const Icon(Icons.add),
+                                  label: const Text('Add'),
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0,
+                                      vertical: 8.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        );
-                      }).toList(),
+                      ],
                     ),
-                    if (repeatedPanelKeys.length < maxRepeats)
-                      TextButton.icon(
-                        onPressed: addPanel,
-                        icon: const Icon(Icons.add),
-                        label: const Text('Add'),
-                      ),
                   ],
                 ),
               ),
-            ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget buildRepeatedPanel(String key) {
+    return Row(
+      key: ValueKey(key), // Ensure each panel has a unique key
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (repeatedPanelKeys.length > minRepeats)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Panel ${repeatedPanelKeys.indexOf(key) + 1}',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                      TextButton.icon(
+                        onPressed: () => removePanel(key),
+                        icon: const Icon(Icons.remove),
+                        label: const Text('Remove'),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.red,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 8.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              Wrap(
+                runSpacing: 16,
+                alignment: WrapAlignment.start,
+                children: [
+                  for (int i = 0; i < widget.field.elements!.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: getField(
+                        widget.field.elements![i].copyWith(
+                          name: '${widget.field.elements![i].name}_$key',
+                          initialValue: formatedInitialValue[
+                              '${widget.field.elements![i].name}_$key'],
+                        ),
+                        widget.globalFormKey,
+                      ),
+                    ),
+                ],
+              ),
+            ],
           ),
+        ),
       ],
     );
   }
