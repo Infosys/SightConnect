@@ -51,6 +51,7 @@ _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
       extractionMethod: json['extractionMethod'] as String?,
       storageMedium: json['storageMedium'] as String?,
       encounterId: (json['encounterId'] as num?)?.toInt(),
+      donorAge: (json['donorAge'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
@@ -66,4 +67,5 @@ Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
       'extractionMethod': instance.extractionMethod,
       'storageMedium': instance.storageMedium,
       'encounterId': instance.encounterId,
+      'donorAge': instance.donorAge,
     };

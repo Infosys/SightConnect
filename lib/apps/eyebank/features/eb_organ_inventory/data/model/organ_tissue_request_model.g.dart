@@ -45,6 +45,9 @@ _$ContentImpl _$$ContentImplFromJson(Map<String, dynamic> json) =>
       procedures: (json['procedures'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
+      recipientName: json['recipientName'] as String?,
+      recipientDOB: json['recipientDOB'] as String?,
+      recipientContactNumber: json['recipientContactNumber'] as String?,
     );
 
 Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
@@ -54,4 +57,7 @@ Map<String, dynamic> _$$ContentImplToJson(_$ContentImpl instance) =>
       'requestedBy': instance.requestedBy,
       'requestedDate': instance.requestedDate,
       'procedures': instance.procedures,
+      'recipientName': instance.recipientName,
+      'recipientDOB': instance.recipientDOB,
+      'recipientContactNumber': instance.recipientContactNumber,
     };

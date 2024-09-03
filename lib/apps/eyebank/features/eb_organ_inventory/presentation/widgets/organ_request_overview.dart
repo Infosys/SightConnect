@@ -40,6 +40,7 @@ class OrganRequestOverview extends ConsumerWidget {
         },
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
+            recipientName: item.recipientName ?? '',
             encounterId: item.encounterId ?? '',
             tissueTypeRequested: item.tissueTypeRequested ?? '',
             requestedBy: item.requestedBy ?? '',
@@ -102,6 +103,7 @@ class _OrganRequestCard extends StatelessWidget {
   final String requestedBy;
   final DateTime? requestedDate;
   final String? procedures;
+  final String recipientName;
 
   final VoidCallback? onReject;
   final VoidCallback? onTimeLine;
@@ -113,6 +115,7 @@ class _OrganRequestCard extends StatelessWidget {
     required this.requestedBy,
     required this.requestedDate,
     required this.procedures,
+    required this.recipientName,
     this.onReject,
     this.onTimeLine,
   }) : super(key: key);
@@ -144,9 +147,22 @@ class _OrganRequestCard extends StatelessWidget {
                 backgroundColor: AppColor.pureBlue,
               ),
               const SizedBox(width: 8),
-              Text(
-                requestedBy.formatTitle(),
-                style: applyRobotoFont(fontSize: 12.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    requestedBy.formatTitle(),
+                    style: applyRobotoFont(fontSize: 12.0),
+                  ),
+                  Text(
+                    "Tissue Requested: $tissueTypeRequested",
+                    style: applyRobotoFont(
+                      fontSize: 10.0,
+                      color: AppColor.grey,
+                    ),
+                  ),
+                ],
               ),
               const Spacer(),
               Tooltip(
@@ -161,15 +177,14 @@ class _OrganRequestCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 4.0),
+          const SizedBox(height: 8.0),
           Wrap(
             spacing: 16.0,
             runSpacing: 8.0,
             children: [
-              _buildDetailColumn('Tissue Type:', tissueTypeRequested),
+              _buildDetailColumn('Donor Name:', recipientName),
               _buildDetailColumn('Procedures:', procedures),
               _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
-              _buildDetailColumn('Requested By:', requestedBy),
             ],
           ),
           const SizedBox(height: 8.0),
@@ -198,9 +213,9 @@ class _OrganRequestCard extends StatelessWidget {
   }
 
   Widget _buildDetailColumn(String label, dynamic value) {
-    if (value == null || value == '') {
-      return const SizedBox.shrink();
-    }
+    // if (value == null || value == '') {
+    //   return const SizedBox.shrink();
+    // }
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 120),

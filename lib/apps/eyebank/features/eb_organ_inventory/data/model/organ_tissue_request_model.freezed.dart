@@ -385,6 +385,12 @@ mixin _$Content {
   String? get requestedDate => throw _privateConstructorUsedError;
   @JsonKey(name: "procedures")
   List<String?>? get procedures => throw _privateConstructorUsedError;
+  @JsonKey(name: "recipientName")
+  String? get recipientName => throw _privateConstructorUsedError;
+  @JsonKey(name: "recipientDOB")
+  String? get recipientDOB => throw _privateConstructorUsedError;
+  @JsonKey(name: "recipientContactNumber")
+  String? get recipientContactNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -401,7 +407,10 @@ abstract class $ContentCopyWith<$Res> {
       @JsonKey(name: "tissueTypeRequested") String? tissueTypeRequested,
       @JsonKey(name: "requestedBy") String? requestedBy,
       @JsonKey(name: "requestedDate") String? requestedDate,
-      @JsonKey(name: "procedures") List<String?>? procedures});
+      @JsonKey(name: "procedures") List<String?>? procedures,
+      @JsonKey(name: "recipientName") String? recipientName,
+      @JsonKey(name: "recipientDOB") String? recipientDOB,
+      @JsonKey(name: "recipientContactNumber") String? recipientContactNumber});
 }
 
 /// @nodoc
@@ -422,6 +431,9 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
     Object? requestedBy = freezed,
     Object? requestedDate = freezed,
     Object? procedures = freezed,
+    Object? recipientName = freezed,
+    Object? recipientDOB = freezed,
+    Object? recipientContactNumber = freezed,
   }) {
     return _then(_value.copyWith(
       encounterId: freezed == encounterId
@@ -444,6 +456,18 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
           ? _value.procedures
           : procedures // ignore: cast_nullable_to_non_nullable
               as List<String?>?,
+      recipientName: freezed == recipientName
+          ? _value.recipientName
+          : recipientName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recipientDOB: freezed == recipientDOB
+          ? _value.recipientDOB
+          : recipientDOB // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recipientContactNumber: freezed == recipientContactNumber
+          ? _value.recipientContactNumber
+          : recipientContactNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -460,7 +484,10 @@ abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
       @JsonKey(name: "tissueTypeRequested") String? tissueTypeRequested,
       @JsonKey(name: "requestedBy") String? requestedBy,
       @JsonKey(name: "requestedDate") String? requestedDate,
-      @JsonKey(name: "procedures") List<String?>? procedures});
+      @JsonKey(name: "procedures") List<String?>? procedures,
+      @JsonKey(name: "recipientName") String? recipientName,
+      @JsonKey(name: "recipientDOB") String? recipientDOB,
+      @JsonKey(name: "recipientContactNumber") String? recipientContactNumber});
 }
 
 /// @nodoc
@@ -479,6 +506,9 @@ class __$$ContentImplCopyWithImpl<$Res>
     Object? requestedBy = freezed,
     Object? requestedDate = freezed,
     Object? procedures = freezed,
+    Object? recipientName = freezed,
+    Object? recipientDOB = freezed,
+    Object? recipientContactNumber = freezed,
   }) {
     return _then(_$ContentImpl(
       encounterId: freezed == encounterId
@@ -501,6 +531,18 @@ class __$$ContentImplCopyWithImpl<$Res>
           ? _value._procedures
           : procedures // ignore: cast_nullable_to_non_nullable
               as List<String?>?,
+      recipientName: freezed == recipientName
+          ? _value.recipientName
+          : recipientName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recipientDOB: freezed == recipientDOB
+          ? _value.recipientDOB
+          : recipientDOB // ignore: cast_nullable_to_non_nullable
+              as String?,
+      recipientContactNumber: freezed == recipientContactNumber
+          ? _value.recipientContactNumber
+          : recipientContactNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -513,7 +555,10 @@ class _$ContentImpl implements _Content {
       @JsonKey(name: "tissueTypeRequested") this.tissueTypeRequested,
       @JsonKey(name: "requestedBy") this.requestedBy,
       @JsonKey(name: "requestedDate") this.requestedDate,
-      @JsonKey(name: "procedures") final List<String?>? procedures})
+      @JsonKey(name: "procedures") final List<String?>? procedures,
+      @JsonKey(name: "recipientName") this.recipientName,
+      @JsonKey(name: "recipientDOB") this.recipientDOB,
+      @JsonKey(name: "recipientContactNumber") this.recipientContactNumber})
       : _procedures = procedures;
 
   factory _$ContentImpl.fromJson(Map<String, dynamic> json) =>
@@ -543,8 +588,18 @@ class _$ContentImpl implements _Content {
   }
 
   @override
+  @JsonKey(name: "recipientName")
+  final String? recipientName;
+  @override
+  @JsonKey(name: "recipientDOB")
+  final String? recipientDOB;
+  @override
+  @JsonKey(name: "recipientContactNumber")
+  final String? recipientContactNumber;
+
+  @override
   String toString() {
-    return 'Content(encounterId: $encounterId, tissueTypeRequested: $tissueTypeRequested, requestedBy: $requestedBy, requestedDate: $requestedDate, procedures: $procedures)';
+    return 'Content(encounterId: $encounterId, tissueTypeRequested: $tissueTypeRequested, requestedBy: $requestedBy, requestedDate: $requestedDate, procedures: $procedures, recipientName: $recipientName, recipientDOB: $recipientDOB, recipientContactNumber: $recipientContactNumber)';
   }
 
   @override
@@ -561,7 +616,13 @@ class _$ContentImpl implements _Content {
             (identical(other.requestedDate, requestedDate) ||
                 other.requestedDate == requestedDate) &&
             const DeepCollectionEquality()
-                .equals(other._procedures, _procedures));
+                .equals(other._procedures, _procedures) &&
+            (identical(other.recipientName, recipientName) ||
+                other.recipientName == recipientName) &&
+            (identical(other.recipientDOB, recipientDOB) ||
+                other.recipientDOB == recipientDOB) &&
+            (identical(other.recipientContactNumber, recipientContactNumber) ||
+                other.recipientContactNumber == recipientContactNumber));
   }
 
   @JsonKey(ignore: true)
@@ -572,7 +633,10 @@ class _$ContentImpl implements _Content {
       tissueTypeRequested,
       requestedBy,
       requestedDate,
-      const DeepCollectionEquality().hash(_procedures));
+      const DeepCollectionEquality().hash(_procedures),
+      recipientName,
+      recipientDOB,
+      recipientContactNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -594,8 +658,11 @@ abstract class _Content implements Content {
       @JsonKey(name: "tissueTypeRequested") final String? tissueTypeRequested,
       @JsonKey(name: "requestedBy") final String? requestedBy,
       @JsonKey(name: "requestedDate") final String? requestedDate,
-      @JsonKey(name: "procedures")
-      final List<String?>? procedures}) = _$ContentImpl;
+      @JsonKey(name: "procedures") final List<String?>? procedures,
+      @JsonKey(name: "recipientName") final String? recipientName,
+      @JsonKey(name: "recipientDOB") final String? recipientDOB,
+      @JsonKey(name: "recipientContactNumber")
+      final String? recipientContactNumber}) = _$ContentImpl;
 
   factory _Content.fromJson(Map<String, dynamic> json) = _$ContentImpl.fromJson;
 
@@ -614,6 +681,15 @@ abstract class _Content implements Content {
   @override
   @JsonKey(name: "procedures")
   List<String?>? get procedures;
+  @override
+  @JsonKey(name: "recipientName")
+  String? get recipientName;
+  @override
+  @JsonKey(name: "recipientDOB")
+  String? get recipientDOB;
+  @override
+  @JsonKey(name: "recipientContactNumber")
+  String? get recipientContactNumber;
   @override
   @JsonKey(ignore: true)
   _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>

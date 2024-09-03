@@ -126,11 +126,10 @@ class _OrganTissueSearchScreenState
                           _buildDetailColumn(
                               'Cell Count', item.cellCount ?? '--'),
                           _buildDetailColumn(
-                            'Harvest Date',
-                            item.harvestDate != null
-                                ? DateTime.tryParse(item.harvestDate!)
-                                    .formateDate
-                                : "",
+                            'Donor Age',
+                            item.donorAge != null
+                                ? item.donorAge.toString()
+                                : "--",
                           ),
                           _buildDetailColumn(
                             'Tissue Expiry',
@@ -215,6 +214,10 @@ class _OrganTissueSearchScreenState
             children: [
               _buildDetailColumn('Tissue ID', item.tissueId ?? '--'),
               _buildDetailColumn('Cell Count', item.cellCount ?? '--'),
+              _buildDetailColumn(
+                'Donor Age',
+                item.donorAge != null ? item.donorAge.toString() : "--",
+              ),
               _buildDetailColumn(
                 'Harvest Date',
                 item.harvestDate != null
