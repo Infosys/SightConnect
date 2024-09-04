@@ -62,13 +62,7 @@ class EBProfilePage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       _buildSectionCard(
-                        title: 'Current Work Details',
-                        child: _buildCurrentWorkDetails(
-                            profile.currentWorkDetails),
-                      ),
-                      const SizedBox(height: 16),
-                      _buildSectionCard(
-                        title: 'Registration Academic',
+                        title: 'Registration Details',
                         child: _buildRegistrationAcademic(
                             profile.registrationAcademic),
                       ),
@@ -138,12 +132,13 @@ class EBProfilePage extends ConsumerWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            style: applyFiraSansFont(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppColor.black,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           child,
         ],
       ),
@@ -158,10 +153,6 @@ class EBProfilePage extends ConsumerWidget {
         _columnListTile(
           title: 'Health Professional Type',
           subtitle: profile.healthProfessionalType ?? 'N/A',
-        ),
-        _columnListTile(
-          title: 'Practitioner Type',
-          subtitle: profile.practitionerType ?? 'N/A',
         ),
         _columnListTile(
           title: 'Official Mobile',
@@ -212,43 +203,12 @@ class EBProfilePage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _rowListTile(
-          title: 'Public Mobile Number',
+          title: 'Contact Number',
           subtitle: contact.publicMobileNumber ?? 'N/A',
         ),
         _rowListTile(
-          title: 'Landline Number',
-          subtitle: contact.landLineNumber ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Public Email',
+          title: 'Email',
           subtitle: contact.publicEmail ?? 'N/A',
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCurrentWorkDetails(CurrentWorkDetails? workDetails) {
-    if (workDetails == null) {
-      return const Text('No current work details available.');
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _rowListTile(
-          title: 'Currently Working',
-          subtitle: workDetails.currentlyWorking ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Purpose of Work',
-          subtitle: workDetails.purposeOfWork ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Work Status',
-          subtitle: workDetails.chooseWorkStatus ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Reason for Not Working',
-          subtitle: workDetails.reasonForNotWorking ?? 'N/A',
         ),
       ],
     );
@@ -261,10 +221,6 @@ class EBProfilePage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _rowListTile(
-          title: 'Category',
-          subtitle: registration.category ?? 'N/A',
-        ),
         ...registration.registrationData
                 ?.map((data) => _buildRegistrationDatum(data)) ??
             [],
@@ -277,16 +233,8 @@ class EBProfilePage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _rowListTile(
-          title: 'Registered With Council',
-          subtitle: data.registeredWithCouncil ?? 'N/A',
-        ),
-        _rowListTile(
           title: 'Registration Number',
           subtitle: data.registrationNumber ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Registration Certificate',
-          subtitle: data.registrationCertificate ?? 'N/A',
         ),
       ],
     );
@@ -325,7 +273,8 @@ class EBProfilePage extends ConsumerWidget {
     required String title,
     required String subtitle,
   }) {
-    return Padding(
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 200),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

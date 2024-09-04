@@ -48,22 +48,20 @@ class FormTextField extends StatelessWidget {
             }
           }
 
-          return null;
-        },
-        onChanged: onChanged,
-        enabled: field.readOnly ? false : true,
-        // readOnly: field.readOnly,
-      ),
+        return null;
+      },
+      onChanged: onChanged,
+      enabled: field.readOnly ? false : true,
     );
   }
 
   _getKeyBoardType() {
     switch (field.inputType) {
-      case 'TEXT':
+      case "TEXT":
         return TextInputType.text;
-      case 'INTEGER':
+      case "INTEGER":
         return TextInputType.number;
-      case 'DOUBLE':
+      case "DOUBLE":
         return const TextInputType.numberWithOptions(decimal: true);
       default:
         return TextInputType.text;

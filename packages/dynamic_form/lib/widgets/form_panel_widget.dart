@@ -94,15 +94,15 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
   _createdPrefilledPanels() {
     try {
       List<dynamic> prefilledPanels = widget.field.initialValue ?? [];
-      Log.d("RepeatingFieldPanel _createdPrefilledPanels: $prefilledPanels");
+      // Log.d("RepeatingFieldPanel _createdPrefilledPanels: $prefilledPanels");
 
       for (int i = 0; i < prefilledPanels.length; i++) {
         var key = getUniqueKey();
         repeatedPanelKeys.add(key);
       }
       formatedInitialValue = _formatInitialValue(prefilledPanels);
-      Log.d(
-          "RepeatingFieldPanel _createdPrefilledPanels: $formatedInitialValue");
+      // Log.d(
+      //     "RepeatingFieldPanel _createdPrefilledPanels: $formatedInitialValue");
     } catch (e) {
       Log.e("RepeatingFieldPanel _createdPrefilledPanels error: $e");
     }
