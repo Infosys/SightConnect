@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
+import 'package:eye_care_for_all/shared/services/exceptions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../main.dart';
@@ -39,7 +40,7 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
     //   ],
     // });
 
-    String url = "/services/ai/api/detect/";
+    String url = "/services/ai/predict/";
 
     logger.d("model post call initiated");
     logger.d(url);
@@ -54,7 +55,8 @@ class PatientEyeScanRepositoryImpl extends PatientEyeScanRepository {
       logger.d("post called ended");
       logger.d("api res is : ${response.data.toString()}");
       return response.data;
-    } on Exception catch (e) {
+    } on DioException catch (e) {
+      DioErrorHandler.handleDioError(e);
       if (e == DioExceptionType.sendTimeout ||
           e == DioExceptionType.receiveTimeout) {
         logger.d("Connection  Timeout Exception");

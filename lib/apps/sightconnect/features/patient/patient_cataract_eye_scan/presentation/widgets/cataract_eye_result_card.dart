@@ -82,7 +82,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               Text(
                                 isCataraact
                                     ? "${model.rightEyeScoreValue.toString()}%"
-                                    : "${model.rightRednessScore.toString()}%",
+                                    : "${model.rightRednessScore!.round().toString()}%",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -163,7 +163,7 @@ class EyeResultImageCard extends ConsumerWidget {
                               Text(
                                 isCataraact
                                     ? "${model.leftEyeScoreValue.toString()}%"
-                                    : "${model.leftRednessScore.toString()}%",
+                                    : "${model.leftRednessScore!.round().toString()}%",
                                 style: applyFiraSansFont(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

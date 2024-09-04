@@ -44,7 +44,7 @@ class PatientEyesReportPage extends ConsumerWidget {
               height: AppSize.ks,
             ),
 
-            const ExperthelpCard(),
+            // const ExperthelpCard(),
 
             //scan now buttons
 
