@@ -81,7 +81,9 @@ bool computeExp(
   try {
     Expression exp = Expression.parse(expression);
     const evaluator = ExpressionEvaluator();
+    Log.f(valueMap);
     var r = evaluator.eval(exp, valueMap);
+    Log.f('Evaluated exp: $r');
     return r;
   } catch (e) {
     Log.e('Failed to eval exp: $e');
