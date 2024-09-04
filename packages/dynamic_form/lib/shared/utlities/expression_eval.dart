@@ -1,20 +1,10 @@
+import 'package:dynamic_form/shared/utlities/log_service.dart';
+
 abstract class Expression {
   bool evaluate(Map<String, dynamic> valueMap);
 }
 
-class EqualsExpression implements Expression {
-  final String key;
-  final dynamic value;
-
-  EqualsExpression(this.key, this.value);
-
-  @override
-  bool evaluate(Map<String, dynamic> valueMap) {
-    return valueMap[key] == value;
-  }
-}
-
-class AndExpression implements Expression {
+class AndExpression extends Expression {
   final Expression left;
   final Expression right;
 
@@ -26,7 +16,7 @@ class AndExpression implements Expression {
   }
 }
 
-class OrExpression implements Expression {
+class OrExpression extends Expression {
   final Expression left;
   final Expression right;
 
@@ -38,21 +28,55 @@ class OrExpression implements Expression {
   }
 }
 
+class EqualsExpression extends Expression {
+  final String left;
+  final dynamic right;
+
+  EqualsExpression(this.left, this.right);
+
+  @override
+  bool evaluate(Map<String, dynamic> valueMap) {
+    return valueMap[left] == right;
+  }
+}
+
 class ExpressionFactory {
   static Expression parse(String expression) {
-    // Simplified parser for demonstration purposes
-    if (expression.contains('&&')) {
-      var parts = expression.split('&&');
-      return AndExpression(parse(parts[0].trim()), parse(parts[1].trim()));
-    } else if (expression.contains('||')) {
-      var parts = expression.split('||');
-      return OrExpression(parse(parts[0].trim()), parse(parts[1].trim()));
-    } else if (expression.contains('==')) {
-      var parts = expression.split('==');
-      return EqualsExpression(parts[0].trim(), parts[1].trim() == 'true');
-    } else {
-      throw UnsupportedError('Unsupported expression: $expression');
+    return _parseOrExpression(expression);
+  }
+
+  static Expression _parseOrExpression(String expression) {
+    var parts = expression.split('||');
+    if (parts.length > 1) {
+      return OrExpression(_parseOrExpression(parts[0].trim()),
+          _parseAndExpression(parts[1].trim()));
     }
+    return _parseAndExpression(expression);
+  }
+
+  static Expression _parseAndExpression(String expression) {
+    var parts = expression.split('&&');
+    if (parts.length > 1) {
+      return AndExpression(_parseAndExpression(parts[0].trim()),
+          _parseEqualsExpression(parts[1].trim()));
+    }
+    return _parseEqualsExpression(expression);
+  }
+
+  static Expression _parseEqualsExpression(String expression) {
+    var parts = expression.split('==');
+    if (parts.length > 1) {
+      return EqualsExpression(parts[0].trim(), _parseValue(parts[1].trim()));
+    }
+    throw UnsupportedError('Unsupported expression: $expression');
+  }
+
+  static dynamic _parseValue(String value) {
+    if (value == 'true') return true;
+    if (value == 'false') return false;
+    if (int.tryParse(value) != null) return int.parse(value);
+    if (double.tryParse(value) != null) return double.parse(value);
+    return value;
   }
 }
 
@@ -64,6 +88,7 @@ bool computeExp(String? expression, Map<String, dynamic>? valueMap) {
     var exp = ExpressionFactory.parse(expression);
     return exp.evaluate(valueMap);
   } catch (e) {
-    return false;
+    Log.e('Error evaluating expression: $expression $e');
+    return true;
   }
 }

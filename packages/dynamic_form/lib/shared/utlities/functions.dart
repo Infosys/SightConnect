@@ -1,6 +1,7 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/pages/form_builder_page.dart';
+import 'package:dynamic_form/shared/utlities/expression_eval.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_conditional_widget.dart';
@@ -29,115 +30,161 @@ Widget getField(
   }
   switch (field.type) {
     case DynamicFormType.TEXTFIELD:
-      return FormTextField(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value);
-        },
-        formKey: key,
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormTextField(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value);
+          },
+          formKey: key,
+        ),
       );
 
     case DynamicFormType.DROPDOWN:
-      return FormDropDown(
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormDropDown(
+            field: field,
+            onChanged: (value) {
+              globalRebuildNotifier.value = !globalRebuildNotifier.value;
+              debugPrint(value.toString());
+            }),
+      );
+
+    case DynamicFormType.RADIO:
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormRadio(
           field: field,
           onChanged: (value) {
             globalRebuildNotifier.value = !globalRebuildNotifier.value;
             debugPrint(value.toString());
-          });
-
-    case DynamicFormType.RADIO:
-      return FormRadio(
-        field: field,
-        onChanged: (value) {
-          globalRebuildNotifier.value = !globalRebuildNotifier.value;
-          debugPrint(value.toString());
-        },
+          },
+        ),
       );
     case DynamicFormType.CHECKBOX:
-      return FormCheckbox(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormCheckbox(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value.toString());
+          },
+        ),
       );
     case DynamicFormType.FILE:
-      return FormFile(
-        field: field,
-        onChanged: (docs) {
-          if (docs.isEmpty) {
-            key.currentState?.setInternalFieldValue(field.name, null);
-          } else if (docs.length == 1) {
-            key.currentState?.setInternalFieldValue(field.name, docs.first);
-          } else {
-            key.currentState?.setInternalFieldValue(
-                field.name, docs.map((e) => e).toList());
-          }
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormFile(
+          field: field,
+          onChanged: (docs) {
+            if (docs.isEmpty) {
+              key.currentState?.setInternalFieldValue(field.name, null);
+            } else if (docs.length == 1) {
+              key.currentState?.setInternalFieldValue(field.name, docs.first);
+            } else {
+              key.currentState?.setInternalFieldValue(
+                  field.name, docs.map((e) => e).toList());
+            }
 
-          debugPrint(docs.toString());
-        },
+            debugPrint(docs.toString());
+          },
+        ),
       );
     case DynamicFormType.SWITCH:
-      return FormSwitch(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormSwitch(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value.toString());
+          },
+        ),
       );
 
     case DynamicFormType.CHIPS:
-      return FormChip(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormChip(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value.toString());
+          },
+        ),
       );
 
     case DynamicFormType.TEXTAREA:
-      return FormTextArea(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value);
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormTextArea(
+          field: field,
+          formKey: key,
+          onChanged: (value) {
+            debugPrint(value);
+          },
+        ),
       );
     case DynamicFormType.CONDITIONAL:
-      return ConditionalWidget(
-        field: field,
-        formKey: key,
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: ConditionalWidget(
+          field: field,
+          formKey: key,
+        ),
       );
 
     case DynamicFormType.DATETIME:
-      return FormDateTimePicker(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormDateTimePicker(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value.toString());
+          },
+        ),
       );
     case DynamicFormType.SLIDER:
-      return FormSlider(field: field);
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormSlider(field: field),
+      );
 
     case DynamicFormType.PANEL:
-      return FormPanelWidget(
-        field: field,
-        formKey: key,
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormPanelWidget(
+          field: field,
+          formKey: key,
+        ),
       );
 
     case DynamicFormType.DATE:
-      return FormDatePicker(
-        field: field,
-        onChanged: (value) {
-          debugPrint(value.toString());
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormDatePicker(
+          field: field,
+          onChanged: (value) {
+            debugPrint(value.toString());
+          },
+        ),
       );
 
     case DynamicFormType.DISPLAY:
-      return FormDisplay(field: field);
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormDisplay(field: field),
+      );
 
     case DynamicFormType.DURATION:
-      return FormDuration(
-        field: field,
-        onChanged: (value) {
-          key.currentState?.setInternalFieldValue(field.name, value);
-        },
+      return Visibility(
+        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+        child: FormDuration(
+          field: field,
+          onChanged: (value) {
+            key.currentState?.setInternalFieldValue(field.name, value);
+          },
+        ),
       );
 
     default:

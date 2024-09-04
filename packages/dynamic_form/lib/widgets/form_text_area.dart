@@ -7,11 +7,13 @@ class FormTextArea extends StatelessWidget {
   const FormTextArea({
     super.key,
     required this.field,
+    required this.formKey,
     this.onChanged,
   });
 
   final ElementClassEntity field;
   final Function(String?)? onChanged;
+  final GlobalKey<FormBuilderState> formKey;
 
   @override
   Widget build(BuildContext context) {

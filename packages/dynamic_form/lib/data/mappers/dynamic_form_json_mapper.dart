@@ -98,8 +98,8 @@ class DynamicFormJsonMapper {
                   maxRepeat: element.maxRepeat ?? 1,
                   inputType: element.inputType,
                   prefix: element.prefix,
-                  visibleIf: element.name.contains(
-                          'preliminaryRequest.generalScreening.properties.general_screening')
+                  visibleIf: element.name
+                          .contains('preliminaryRequest.generalScreening')
                       ? "preliminaryRequest.isMedicoLegalCase == true"
                       : null,
                 ),
