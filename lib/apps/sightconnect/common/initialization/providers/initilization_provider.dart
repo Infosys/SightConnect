@@ -55,8 +55,11 @@ class InitializationProvider extends ChangeNotifier {
     } catch (e) {
       rethrow;
     }
-    // Triage Database logout
-    await TriageDBHelper().deleteFullDatabase();
+    if (!kIsWeb) {
+      // Triage Database logout
+      await TriageDBHelper().deleteFullDatabase();
+    }
+
     // Shared Preference logout
     await SharedPreferenceService.clearAll();
     // Flutter Secure Storage logout

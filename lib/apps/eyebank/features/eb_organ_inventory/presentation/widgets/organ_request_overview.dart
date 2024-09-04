@@ -16,86 +16,82 @@ class OrganRequestOverview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        ref.invalidate(organRequestOverviewProvider);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: EbInfiniteScrollView<Content>(
-          fetchPageData: (pageKey, pageSize, filters) async {
-            logger.d({
-              "Filters": filters.map((e) => e.value).toList(),
-            });
-            final filterMap = {
-              for (var filter in filters) filter.name: filter.value
-            };
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: EbInfiniteScrollView<Content>(
+        fetchPageData: (pageKey, pageSize, filters) async {
+          logger.d({
+            "Filters": filters.map((e) => e.value).toList(),
+          });
+          final filterMap = {
+            for (var filter in filters) filter.name: filter.value
+          };
 
-            final params = GetOrganTissueRequestParams(
-              page: pageKey,
-              size: pageSize,
-              surgeryType: filterMap['Filter by Surgery Type'],
-              stage: filterMap['Filter by Stage'],
-              requestDate: filterMap['Request Date'],
-            );
-            final records =
-                await ref.read(organRequestOverviewProvider(params).future);
-            return records.content ?? [];
-          },
-          itemBuilder: (context, item, index) {
-            return _OrganRequestCard(
-              encounterId: item.encounterId ?? '',
-              tissueTypeRequested: item.tissueTypeRequested ?? '',
-              requestedBy: item.requestedBy ?? '',
-              requestedDate: item.requestedDate == null
-                  ? null
-                  : DateTime.parse(item.requestedDate!),
-              procedures: item.procedures?.join(', ') ?? '',
-              onTimeLine: () {
-                final navigator = Navigator.of(context);
-                navigator.push(
-                  MaterialPageRoute(
-                    builder: (context) => OrganInventoryTimline(
-                      encounterID: item.encounterId,
-                      timlineVersion: "0.0.1",
-                    ),
+          final params = GetOrganTissueRequestParams(
+            page: pageKey,
+            size: pageSize,
+            surgeryType: filterMap['Filter by Surgery Type'],
+            stage: filterMap['Filter by Stage'],
+            requestDate: filterMap['Request Date'],
+          );
+          final records =
+              await ref.read(organRequestOverviewProvider(params).future);
+          return records.content ?? [];
+        },
+        itemBuilder: (context, item, index) {
+          return _OrganRequestCard(
+            recipientName: item.recipientName ?? '',
+            encounterId: item.encounterId ?? '',
+            tissueTypeRequested: item.tissueTypeRequested ?? '',
+            requestedBy: item.requestedBy ?? '',
+            requestedDate: item.requestedDate == null
+                ? null
+                : DateTime.parse(item.requestedDate!),
+            procedures: item.procedures?.join(', ') ?? '',
+            onTimeLine: () {
+              final navigator = Navigator.of(context);
+              navigator.push(
+                MaterialPageRoute(
+                  builder: (context) => OrganInventoryTimline(
+                    encounterID: item.encounterId,
+                    timlineVersion: "0.0.1",
                   ),
-                );
-              },
-              onReject: () {
-                Fluttertoast.showToast(msg: 'Soon to be implemented');
-              },
-            );
-          },
-          filterOptions: [
-            Filter(
-              name: 'Filter by Surgery Type',
-              type: FilterType.dropdown,
-              dropdownOptions: [
-                'PK',
-                'EK',
-                'DALK',
-                'K_LAL',
-                'K_PRO',
-                'OTHERS',
-              ],
-            ),
-            Filter(
-              name: 'Filter by Stage',
-              type: FilterType.dropdown,
-              dropdownOptions: [
-                'REQUESTED',
-                'ASSIGNED',
-                'REJECTED',
-                'COMPLETED',
-              ],
-            ),
-            Filter(name: 'Request Date', type: FilterType.date),
-          ],
-          enableSearch: false,
-          enableFilter: false,
-          defaultPageSize: 10,
-        ),
+                ),
+              );
+            },
+            onReject: () {
+              Fluttertoast.showToast(msg: 'Soon to be implemented');
+            },
+          );
+        },
+        filterOptions: [
+          Filter(
+            name: 'Filter by Surgery Type',
+            type: FilterType.dropdown,
+            dropdownOptions: [
+              'PK',
+              'EK',
+              'DALK',
+              'K_LAL',
+              'K_PRO',
+              'OTHERS',
+            ],
+          ),
+          Filter(
+            name: 'Filter by Stage',
+            type: FilterType.dropdown,
+            dropdownOptions: [
+              'REQUESTED',
+              'ASSIGNED',
+              'REJECTED',
+              'COMPLETED',
+            ],
+          ),
+          Filter(name: 'Request Date', type: FilterType.date),
+        ],
+        enableSearch: false,
+        enableFilter: false,
+        defaultPageSize: 10,
       ),
     );
   }
@@ -106,7 +102,8 @@ class _OrganRequestCard extends StatelessWidget {
   final String tissueTypeRequested;
   final String requestedBy;
   final DateTime? requestedDate;
-  final String procedures;
+  final String? procedures;
+  final String recipientName;
 
   final VoidCallback? onReject;
   final VoidCallback? onTimeLine;
@@ -118,6 +115,7 @@ class _OrganRequestCard extends StatelessWidget {
     required this.requestedBy,
     required this.requestedDate,
     required this.procedures,
+    required this.recipientName,
     this.onReject,
     this.onTimeLine,
   }) : super(key: key);
@@ -125,8 +123,8 @@ class _OrganRequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      padding: const EdgeInsets.all(12.0),
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -143,30 +141,30 @@ class _OrganRequestCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: _buildDetailColumn('Tissue Type:', tissueTypeRequested),
+              const CircleAvatar(
+                maxRadius: 16,
+                backgroundColor: AppColor.pureBlue,
               ),
-              Expanded(
-                child: _buildDetailColumn('Procedures:', procedures),
+              const SizedBox(width: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    requestedBy.formatTitle(),
+                    style: applyRobotoFont(fontSize: 12.0),
+                  ),
+                  Text(
+                    "Tissue Requested: $tissueTypeRequested",
+                    style: applyRobotoFont(
+                      fontSize: 10.0,
+                      color: AppColor.grey,
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                child: _buildDetailColumn(
-                    'Requested Date:', requestedDate.formateDate),
-              ),
-              Expanded(
-                child: _buildDetailColumn(
-                  'Requested By:',
-                  requestedBy,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+              const Spacer(),
               Tooltip(
                 message: "Reject Request",
                 child: TextButton(
@@ -177,17 +175,33 @@ class _OrganRequestCard extends StatelessWidget {
                   child: const Text('Reject'),
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Wrap(
+            spacing: 16.0,
+            runSpacing: 8.0,
+            children: [
+              _buildDetailColumn('Donor Name:', recipientName),
+              _buildDetailColumn('Procedures:', procedures),
+              _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // text button
               Tooltip(
                 message: "View Timeline",
                 child: InkWell(
                   onTap: onTimeLine,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColor.grey.withOpacity(0.1),
-                      shape: BoxShape.circle,
+                  child: Text(
+                    'Show Timeline',
+                    style: applyRobotoFont(
+                      fontSize: 12.0,
+                      color: AppColor.primary,
                     ),
-                    child: const Icon(Icons.timeline),
                   ),
                 ),
               ),
@@ -198,30 +212,37 @@ class _OrganRequestCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailColumn(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyFiraSansFont(
-            fontSize: 14.0,
-            color: AppColor.grey,
+  Widget _buildDetailColumn(String label, dynamic value) {
+    // if (value == null || value == '') {
+    //   return const SizedBox.shrink();
+    // }
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 120),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: applyFiraSansFont(
+              fontSize: 10.0,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        const SizedBox(height: 4.0),
-        Text(
-          value,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(
-            fontSize: 14.0,
-            color: AppColor.black,
+          const SizedBox(height: 4.0),
+          Text(
+            value.toString(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 12.0,
+              color: Colors.black,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

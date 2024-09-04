@@ -35,6 +35,7 @@ class Content with _$Content {
     @JsonKey(name: "extractionMethod") String? extractionMethod,
     @JsonKey(name: "storageMedium") String? storageMedium,
     @JsonKey(name: "encounterId") int? encounterId,
+    @JsonKey(name: "donorAge") int? donorAge,
   }) = _Content;
 
   factory Content.fromJson(Map<String, dynamic> json) =>

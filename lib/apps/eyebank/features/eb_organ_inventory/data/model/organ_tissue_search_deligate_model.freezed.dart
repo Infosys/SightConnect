@@ -405,6 +405,8 @@ mixin _$Content {
   String? get storageMedium => throw _privateConstructorUsedError;
   @JsonKey(name: "encounterId")
   int? get encounterId => throw _privateConstructorUsedError;
+  @JsonKey(name: "donorAge")
+  int? get donorAge => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -427,7 +429,8 @@ abstract class $ContentCopyWith<$Res> {
       @JsonKey(name: "tissueExpiry") String? tissueExpiry,
       @JsonKey(name: "extractionMethod") String? extractionMethod,
       @JsonKey(name: "storageMedium") String? storageMedium,
-      @JsonKey(name: "encounterId") int? encounterId});
+      @JsonKey(name: "encounterId") int? encounterId,
+      @JsonKey(name: "donorAge") int? donorAge});
 }
 
 /// @nodoc
@@ -454,6 +457,7 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
     Object? extractionMethod = freezed,
     Object? storageMedium = freezed,
     Object? encounterId = freezed,
+    Object? donorAge = freezed,
   }) {
     return _then(_value.copyWith(
       tissueId: freezed == tissueId
@@ -500,6 +504,10 @@ class _$ContentCopyWithImpl<$Res, $Val extends Content>
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
               as int?,
+      donorAge: freezed == donorAge
+          ? _value.donorAge
+          : donorAge // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -522,7 +530,8 @@ abstract class _$$ContentImplCopyWith<$Res> implements $ContentCopyWith<$Res> {
       @JsonKey(name: "tissueExpiry") String? tissueExpiry,
       @JsonKey(name: "extractionMethod") String? extractionMethod,
       @JsonKey(name: "storageMedium") String? storageMedium,
-      @JsonKey(name: "encounterId") int? encounterId});
+      @JsonKey(name: "encounterId") int? encounterId,
+      @JsonKey(name: "donorAge") int? donorAge});
 }
 
 /// @nodoc
@@ -547,6 +556,7 @@ class __$$ContentImplCopyWithImpl<$Res>
     Object? extractionMethod = freezed,
     Object? storageMedium = freezed,
     Object? encounterId = freezed,
+    Object? donorAge = freezed,
   }) {
     return _then(_$ContentImpl(
       tissueId: freezed == tissueId
@@ -593,6 +603,10 @@ class __$$ContentImplCopyWithImpl<$Res>
           ? _value.encounterId
           : encounterId // ignore: cast_nullable_to_non_nullable
               as int?,
+      donorAge: freezed == donorAge
+          ? _value.donorAge
+          : donorAge // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -612,7 +626,8 @@ class _$ContentImpl implements _Content {
       @JsonKey(name: "tissueExpiry") this.tissueExpiry,
       @JsonKey(name: "extractionMethod") this.extractionMethod,
       @JsonKey(name: "storageMedium") this.storageMedium,
-      @JsonKey(name: "encounterId") this.encounterId})
+      @JsonKey(name: "encounterId") this.encounterId,
+      @JsonKey(name: "donorAge") this.donorAge})
       : _suitableProcedures = suitableProcedures;
 
   factory _$ContentImpl.fromJson(Map<String, dynamic> json) =>
@@ -660,10 +675,13 @@ class _$ContentImpl implements _Content {
   @override
   @JsonKey(name: "encounterId")
   final int? encounterId;
+  @override
+  @JsonKey(name: "donorAge")
+  final int? donorAge;
 
   @override
   String toString() {
-    return 'Content(tissueId: $tissueId, cellCount: $cellCount, harvestDate: $harvestDate, suitableProcedures: $suitableProcedures, clearZone: $clearZone, lensType: $lensType, pachemetry: $pachemetry, tissueExpiry: $tissueExpiry, extractionMethod: $extractionMethod, storageMedium: $storageMedium, encounterId: $encounterId)';
+    return 'Content(tissueId: $tissueId, cellCount: $cellCount, harvestDate: $harvestDate, suitableProcedures: $suitableProcedures, clearZone: $clearZone, lensType: $lensType, pachemetry: $pachemetry, tissueExpiry: $tissueExpiry, extractionMethod: $extractionMethod, storageMedium: $storageMedium, encounterId: $encounterId, donorAge: $donorAge)';
   }
 
   @override
@@ -692,7 +710,9 @@ class _$ContentImpl implements _Content {
             (identical(other.storageMedium, storageMedium) ||
                 other.storageMedium == storageMedium) &&
             (identical(other.encounterId, encounterId) ||
-                other.encounterId == encounterId));
+                other.encounterId == encounterId) &&
+            (identical(other.donorAge, donorAge) ||
+                other.donorAge == donorAge));
   }
 
   @JsonKey(ignore: true)
@@ -709,7 +729,8 @@ class _$ContentImpl implements _Content {
       tissueExpiry,
       extractionMethod,
       storageMedium,
-      encounterId);
+      encounterId,
+      donorAge);
 
   @JsonKey(ignore: true)
   @override
@@ -738,7 +759,8 @@ abstract class _Content implements Content {
       @JsonKey(name: "tissueExpiry") final String? tissueExpiry,
       @JsonKey(name: "extractionMethod") final String? extractionMethod,
       @JsonKey(name: "storageMedium") final String? storageMedium,
-      @JsonKey(name: "encounterId") final int? encounterId}) = _$ContentImpl;
+      @JsonKey(name: "encounterId") final int? encounterId,
+      @JsonKey(name: "donorAge") final int? donorAge}) = _$ContentImpl;
 
   factory _Content.fromJson(Map<String, dynamic> json) = _$ContentImpl.fromJson;
 
@@ -775,6 +797,9 @@ abstract class _Content implements Content {
   @override
   @JsonKey(name: "encounterId")
   int? get encounterId;
+  @override
+  @JsonKey(name: "donorAge")
+  int? get donorAge;
   @override
   @JsonKey(ignore: true)
   _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>

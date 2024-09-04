@@ -28,7 +28,10 @@ class Content with _$Content {
     @JsonKey(name: "tissueTypeRequested") String? tissueTypeRequested,
     @JsonKey(name: "requestedBy") String? requestedBy,
     @JsonKey(name: "requestedDate") String? requestedDate,
-    @JsonKey(name: "procedures") List<String>? procedures,
+    @JsonKey(name: "procedures") List<String?>? procedures,
+    @JsonKey(name: "recipientName") String? recipientName,
+    @JsonKey(name: "recipientDOB") String? recipientDOB,
+    @JsonKey(name: "recipientContactNumber") String? recipientContactNumber,
   }) = _Content;
 
   factory Content.fromJson(Map<String, dynamic> json) =>

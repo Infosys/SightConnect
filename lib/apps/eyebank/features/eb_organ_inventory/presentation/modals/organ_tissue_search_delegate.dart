@@ -36,7 +36,7 @@ class _OrganTissueSearchScreenState
     extends ConsumerState<OrganTissueSearchScreen> {
   final PagingController<int, Content> _pagingController =
       PagingController(firstPageKey: 0);
-  String query = '';
+  String query = '--';
 
   @override
   void initState() {
@@ -95,67 +95,71 @@ class _OrganTissueSearchScreenState
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<Content>(
             itemBuilder: (context, item, index) {
-              return Container(
-                padding: const EdgeInsets.all(16.0),
-                margin: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.start,
-                      spacing: 16.0,
-                      runAlignment: WrapAlignment.spaceBetween,
-                      runSpacing: 16.0,
-                      children: [
-                        _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
-                        _buildDetailColumn('Cell Count', item.cellCount ?? ''),
-                        _buildDetailColumn(
-                          'Harvest Date',
-                          item.harvestDate != null
-                              ? DateTime.tryParse(item.harvestDate!).formateDate
-                              : "",
-                        ),
-                        _buildDetailColumn(
-                            'Tissue Expiry', item.tissueExpiry ?? ''),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    const Divider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            _showDetailsBottomSheet(context, item);
-                          },
-                          child: const Text('Details'),
-                        ),
-                        if (widget.onAssignToRequest != null)
-                          Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: TextButton.icon(
-                              onPressed: () {
-                                widget.onAssignToRequest?.call(item);
-                              },
-                              label: const Text('Assign Tissue'),
-                              icon: const Icon(Icons.chevron_left),
-                            ),
+              return InkWell(
+                onTap: () => _showDetailsBottomSheet(context, item),
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  margin: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        spacing: 16.0,
+                        runAlignment: WrapAlignment.spaceBetween,
+                        runSpacing: 16.0,
+                        children: [
+                          _buildDetailColumn(
+                              'Tissue ID', item.tissueId ?? '--'),
+                          _buildDetailColumn(
+                              'Cell Count', item.cellCount ?? '--'),
+                          _buildDetailColumn(
+                            'Donor Age',
+                            item.donorAge != null
+                                ? item.donorAge.toString()
+                                : "--",
                           ),
-                      ],
-                    ),
-                  ],
+                          _buildDetailColumn(
+                            'Tissue Expiry',
+                            item.tissueExpiry != null
+                                ? DateTime.tryParse(item.tissueExpiry!)
+                                    .formateDate
+                                : "",
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      if (widget.onAssignToRequest != null) const Divider(),
+                      if (widget.onAssignToRequest != null)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: TextButton.icon(
+                                onPressed: () {
+                                  widget.onAssignToRequest?.call(item);
+                                },
+                                label: const Text('Assign Tissue'),
+                                icon: const Icon(Icons.chevron_left),
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -170,7 +174,7 @@ class _OrganTissueSearchScreenState
   }
 
   Widget _buildDetailColumn(String label, dynamic value) {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -182,7 +186,7 @@ class _OrganTissueSearchScreenState
             color: AppColor.grey,
           ),
         ),
-        const SizedBox(height: 2.0),
+        const Spacer(),
         Text(
           value.toString(),
           maxLines: 1,
@@ -203,12 +207,17 @@ class _OrganTissueSearchScreenState
         return Padding(
           padding: const EdgeInsets.all(24.0),
           child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
             spacing: 16.0,
-            runSpacing: 16.0,
             runAlignment: WrapAlignment.spaceBetween,
+            runSpacing: 16.0,
             children: [
-              _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
-              _buildDetailColumn('Cell Count', item.cellCount ?? ''),
+              _buildDetailColumn('Tissue ID', item.tissueId ?? '--'),
+              _buildDetailColumn('Cell Count', item.cellCount ?? '--'),
+              _buildDetailColumn(
+                'Donor Age',
+                item.donorAge != null ? item.donorAge.toString() : "--",
+              ),
               _buildDetailColumn(
                 'Harvest Date',
                 item.harvestDate != null
@@ -216,15 +225,20 @@ class _OrganTissueSearchScreenState
                     : "",
               ),
               _buildDetailColumn('Suitable Procedures',
-                  item.suitableProcedures?.join(', ') ?? ''),
-              _buildDetailColumn('Clear Zone', item.clearZone ?? ''),
-              _buildDetailColumn('Lens Type', item.lensType ?? ''),
-              _buildDetailColumn('Pachemetry', item.pachemetry ?? ''),
-              _buildDetailColumn('Tissue Expiry', item.tissueExpiry ?? ''),
+                  item.suitableProcedures?.join(', ') ?? '--'),
+              _buildDetailColumn('Clear Zone', item.clearZone ?? '--'),
+              _buildDetailColumn('Lens Type', item.lensType ?? '--'),
+              _buildDetailColumn('Pachemetry', item.pachemetry ?? '--'),
               _buildDetailColumn(
-                  'Extraction Method', item.extractionMethod ?? ''),
-              _buildDetailColumn('Storage Medium', item.storageMedium ?? ''),
-              _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
+                'Tissue Expiry',
+                item.tissueExpiry != null
+                    ? DateTime.tryParse(item.tissueExpiry!).formateDate
+                    : "",
+              ),
+              _buildDetailColumn(
+                  'Extraction Method', item.extractionMethod ?? '--'),
+              _buildDetailColumn('Storage Medium', item.storageMedium ?? '--'),
+              // _buildDetailColumn('Encounter ID', item.encounterId ?? '--'),
             ],
           ),
         );
