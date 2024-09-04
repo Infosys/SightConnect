@@ -1,5 +1,5 @@
-import 'package:dart_eval/dart_eval.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
+import 'package:expressions/expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -9,16 +9,19 @@ class FormTextField extends StatelessWidget {
   const FormTextField({
     super.key,
     required this.field,
+    required this.formKey,
     this.onChanged,
   });
 
   final ElementClassEntity field;
   final Function(String?)? onChanged;
+  final GlobalKey<FormBuilderState> formKey;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-        visible: computeExp(field.visibleIf),
+        visible:
+            computeExp(field.visibleIf, formKey.currentState?.instantValue),
         child: FormBuilderTextField(
           autofocus: false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -68,12 +71,18 @@ class FormTextField extends StatelessWidget {
   }
 }
 
-computeExp(String? visibleIf) {
-  if (visibleIf == null) {
+bool computeExp(
+  String? expression,
+  Map<String, dynamic>? valueMap,
+) {
+  if (expression == null || valueMap == null) {
     return true;
   }
   try {
-    eval(visibleIf);
+    Expression exp = Expression.parse(expression);
+    const evaluator = ExpressionEvaluator();
+    var r = evaluator.eval(exp, valueMap);
+    return r;
   } catch (e) {
     Log.e('Failed to eval exp: $e');
     return true;

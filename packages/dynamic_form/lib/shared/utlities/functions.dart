@@ -34,6 +34,7 @@ Widget getField(
         onChanged: (value) {
           debugPrint(value);
         },
+        formKey: key,
       );
 
     case DynamicFormType.DROPDOWN:
