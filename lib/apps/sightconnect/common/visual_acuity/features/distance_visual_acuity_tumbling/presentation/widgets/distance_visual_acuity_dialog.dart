@@ -10,9 +10,11 @@ import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../../../shared/theme/app_shadow.dart';
 import '../../../../../triage/presentation/providers/triage_stepper_provider.dart';
 import '../../../../domain/enums/tumbling_enums.dart';
 import '../pages/distance_visual_acuity_result_page.dart';
@@ -50,66 +52,88 @@ class DistanceVisualAcuityDialog {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: AppSize.height(context) * 0.1,
-                    ),
                     Text(
-                      "Please maintain a 2-meter distance from the screen",
+                      _mapEyeTitle(context, eye),
                       style: applyFiraSansFont(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                       softWrap: true,
-                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(
-                      height: AppSize.kl + 10,
-                    ),
-                    Center(
-                      child: Text(
-                        _mapEyeTitle(context, eye),
-                        style: applyFiraSansFont(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        softWrap: true,
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   height: AppSize.km,
-                    // ),
-                    SizedBox(
-                      height: AppSize.height(context) * 0.1,
+                      height: AppSize.km,
                     ),
                     Text(
                       _mapEyeInstruction(context, eye),
                       style: applyRobotoFont(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
                       softWrap: true,
-                      textAlign: TextAlign.center,
                     ),
-                    // const SizedBox(
-                    //   height: AppSize.km + 2,
-                    // ),
-                    // Center(
-                    //   child: Container(
-                    //     padding: const EdgeInsets.all(8),
-                    //     decoration: BoxDecoration(
-                    //       color: AppColor.white,
-                    //       borderRadius: BorderRadius.circular(16),
-                    //       boxShadow: applyLightShadow(),
-                    //     ),
-                    //     height: AppSize.height(context) * 0.5,
-                    //     width: AppSize.width(context) * 0.7,
-                    //     child: _mapEyeInstructionImage(context, eye).isEmpty
-                    //         ? const SizedBox()
-                    //         : Image.asset(
-                    //             _mapEyeInstructionImage(context, eye),
-                    //           ),
-                    //   ),
-                    // ),
+                    const SizedBox(
+                      height: AppSize.km + 2,
+                    ),
+                    Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColor.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: applyLightShadow(),
+                        ),
+                        height: AppSize.height(context) * 0.5,
+                        width: AppSize.width(context) * 0.7,
+                        child: Center(
+                          child: Image.asset(
+                            "assets/images/distant.png",
+                          ),
+                        ),
+
+                        // Image.asset(
+                        //   "assets/images/visualAcuityRightEye.png",
+                        // ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Center(
+                      child: Container(
+                        width: AppSize.width(context) * 0.8,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColor.primary,
+                            width: 2,
+                          ),
+                          color: Color(int.parse(
+                            '0xFFFFFFFF',
+                          )),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: SvgPicture.asset(
+                                "assets/images/triage_card_bg.svg",
+                                color: AppColor.lightBlue,
+                                width: AppSize.width(context),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                  "Please maintain a 2-meter distance from the screen",
+                                  textAlign: TextAlign.center,
+                                  style: applyRobotoFont()),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     const Spacer(),
                     Row(
                       children: [
