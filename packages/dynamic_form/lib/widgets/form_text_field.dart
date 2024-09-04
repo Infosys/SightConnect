@@ -18,41 +18,40 @@ class FormTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: computeExp(field.visibleIf),
-      child: FormBuilderTextField(
-        autofocus: false,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        initialValue: field.initialValue?.toString(),
-        name: field.name,
+        visible: computeExp(field.visibleIf),
+        child: FormBuilderTextField(
+          autofocus: false,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          initialValue: field.initialValue?.toString(),
+          name: field.name,
+          keyboardType: _getKeyBoardType(),
+          decoration: InputDecoration(
+            labelText: field.title,
+            hintText: field.description,
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+          ),
+          validator: (value) {
+            value = value ?? '';
+            if (field.isRequired && value.isEmpty) {
+              return field.requiredErrorText;
+            }
 
-        keyboardType: _getKeyBoardType(),
-        decoration: InputDecoration(
-          labelText: field.title,
-          hintText: field.description,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        ),
-        validator: (value) {
-          value = value ?? '';
-          if (field.isRequired && value.isEmpty) {
-            return field.requiredErrorText;
-          }
-
-          if (field.validators.isNotEmpty) {
-            for (var validator in field.validators) {
-              if (validator.type == 'regex') {
-                if (!RegExp(validator.regex).hasMatch(value)) {
-                  return validator.text;
+            if (field.validators.isNotEmpty) {
+              for (var validator in field.validators) {
+                if (validator.type == 'regex') {
+                  if (!RegExp(validator.regex).hasMatch(value)) {
+                    return validator.text;
+                  }
                 }
               }
             }
-          }
 
-        return null;
-      },
-      onChanged: onChanged,
-      enabled: field.readOnly ? false : true,
-    );
+            return null;
+          },
+          onChanged: onChanged,
+          enabled: field.readOnly ? false : true,
+        ));
   }
 
   _getKeyBoardType() {
