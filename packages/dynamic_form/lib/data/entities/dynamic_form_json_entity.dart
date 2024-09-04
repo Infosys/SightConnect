@@ -135,6 +135,7 @@ class ElementClassEntity {
   final int? maxRepeat;
   final String? inputType;
   final dynamic initialValue;
+  final String? visibleIf;
 
   ElementClassEntity({
     required this.type,
@@ -160,6 +161,7 @@ class ElementClassEntity {
     this.minRepeat,
     this.maxRepeat,
     this.inputType,
+    this.visibleIf,
   });
 
   factory ElementClassEntity.fromJson(Map<String, dynamic> json) =>
@@ -195,6 +197,7 @@ class ElementClassEntity {
         maxRepeat: json["maxRepeat"],
         inputType: json["inputType"],
         initialValue: json["initialValue"],
+        visibleIf: json["visibleIf"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -225,11 +228,12 @@ class ElementClassEntity {
         "maxRepeat": maxRepeat,
         "inputType": inputType,
         "initialValue": initialValue,
+        "visibleIf": visibleIf,
       };
 
   @override
   String toString() {
-    return 'ElementClassEntity{type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType}';
+    return 'ElementClassEntity{type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType initialValue: $initialValue, visibleIf: $visibleIf}';
   }
 
   ElementClassEntity copyWith({
