@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation
 import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/widgets/eye_bank_dashboard_side_menu.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_exit.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class EBDashboardPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loc = context.loc!;
+    // final loc = context.loc!;
     // ref.listen(getEBProfileProvider, (previous, next) {
     //   if (next.hasError) {
     //     logger.d("Logged out from PatientDashboardPage ");

@@ -38,7 +38,7 @@ class PageWidget extends StatelessWidget {
               runSpacing: 16,
               alignment: WrapAlignment.start,
               children: elements.map((field) {
-                return getField(field, formKey);
+                return getField(field, formKey, readOnly);
               }).toList(),
             ),
           );

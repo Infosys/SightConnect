@@ -23,7 +23,6 @@ class FormDropDown extends StatelessWidget {
               value: element.name,
               child: Text(
                 element.title,
-                maxLines: 1,
               ),
             ))
         .toList();
@@ -33,10 +32,9 @@ class FormDropDown extends StatelessWidget {
           0,
           DropdownMenuItem<Object?>(
             value: null,
-            child: Text(
-              '--Select ${field.title}--',
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: Text('--Select ${field.title}--',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.grey[600])),
           ));
     }
 

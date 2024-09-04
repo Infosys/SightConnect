@@ -52,17 +52,6 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
         appBar: AppBar(
           title: Text(widget.title),
           actions: [
-            Tooltip(
-              message: 'Print form data',
-              child: TextButton(
-                onPressed: () {
-                  if (formKey.currentState?.instantValue != null) {
-                    Log.f(formKey.currentState!.instantValue);
-                  }
-                },
-                child: const Text("PRINT"),
-              ),
-            ),
             if (widget.enableDraft)
               TextButton.icon(
                 onPressed: widget.readOnly ? null : _handleDraft,

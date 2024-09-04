@@ -4,7 +4,6 @@ import 'package:dynamic_form/pages/form_builder_page.dart';
 import 'package:dynamic_form/shared/utlities/expression_eval.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
-import 'package:dynamic_form/widgets/form_conditional_widget.dart';
 import 'package:dynamic_form/widgets/form_date_picker.dart';
 import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_display.dart';
@@ -24,14 +23,16 @@ import '../../widgets/form_text_area.dart';
 Widget getField(
   ElementClassEntity? field,
   GlobalKey<FormBuilderState> key,
+  bool readOnly,
 ) {
   if (field == null) {
     return Container();
   }
   switch (field.type) {
     case DynamicFormType.TEXTFIELD:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormTextField(
           field: field,
           onChanged: (value) {
@@ -40,10 +41,10 @@ Widget getField(
           formKey: key,
         ),
       );
-
     case DynamicFormType.DROPDOWN:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormDropDown(
             field: field,
             onChanged: (value) {
@@ -53,8 +54,9 @@ Widget getField(
       );
 
     case DynamicFormType.RADIO:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormRadio(
           field: field,
           onChanged: (value) {
@@ -64,8 +66,9 @@ Widget getField(
         ),
       );
     case DynamicFormType.CHECKBOX:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormCheckbox(
           field: field,
           onChanged: (value) {
@@ -74,9 +77,11 @@ Widget getField(
         ),
       );
     case DynamicFormType.FILE:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormFile(
+          readOnly: readOnly,
           field: field,
           onChanged: (docs) {
             if (docs.isEmpty) {
@@ -93,8 +98,9 @@ Widget getField(
         ),
       );
     case DynamicFormType.SWITCH:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormSwitch(
           field: field,
           onChanged: (value) {
@@ -102,10 +108,10 @@ Widget getField(
           },
         ),
       );
-
     case DynamicFormType.CHIPS:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormChip(
           field: field,
           onChanged: (value) {
@@ -115,8 +121,9 @@ Widget getField(
       );
 
     case DynamicFormType.TEXTAREA:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormTextArea(
           field: field,
           formKey: key,
@@ -125,18 +132,10 @@ Widget getField(
           },
         ),
       );
-    case DynamicFormType.CONDITIONAL:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
-        child: ConditionalWidget(
-          field: field,
-          formKey: key,
-        ),
-      );
-
     case DynamicFormType.DATETIME:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormDateTimePicker(
           field: field,
           onChanged: (value) {
@@ -145,23 +144,27 @@ Widget getField(
         ),
       );
     case DynamicFormType.SLIDER:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormSlider(field: field),
       );
 
     case DynamicFormType.PANEL:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormPanelWidget(
+          readOnly: readOnly,
           field: field,
           formKey: key,
         ),
       );
 
     case DynamicFormType.DATE:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormDatePicker(
           field: field,
           onChanged: (value) {
@@ -171,14 +174,16 @@ Widget getField(
       );
 
     case DynamicFormType.DISPLAY:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormDisplay(field: field),
       );
 
     case DynamicFormType.DURATION:
-      return Visibility(
-        visible: computeExp(field.visibleIf, key.currentState?.instantValue),
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
         child: FormDuration(
           field: field,
           onChanged: (value) {
@@ -186,8 +191,30 @@ Widget getField(
           },
         ),
       );
+    case DynamicFormType.CONDITIONAL:
+      return const SizedBox.shrink();
 
     default:
-      return Container();
+      return const SizedBox.shrink();
+  }
+}
+
+class VisibiltyWrapper extends StatelessWidget {
+  const VisibiltyWrapper({
+    super.key,
+    required this.child,
+    required this.field,
+    required this.formKey,
+  });
+  final Widget child;
+  final ElementClassEntity field;
+  final GlobalKey<FormBuilderState> formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: computeExp(field.visibleIf, formKey.currentState?.instantValue),
+      child: child,
+    );
   }
 }

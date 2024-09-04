@@ -10,10 +10,12 @@ import 'package:uuid/uuid.dart';
 class FormPanelWidget extends StatelessWidget {
   final ElementClassEntity field;
   final GlobalKey<FormBuilderState> formKey;
+  final bool readOnly;
   const FormPanelWidget({
     super.key,
     required this.field,
     required this.formKey,
+    this.readOnly = false,
   });
 
   @override
@@ -33,14 +35,18 @@ class FormPanelWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         if (field.repeats)
-          RepeatingFieldPanel(field: field, globalFormKey: formKey)
+          RepeatingFieldPanel(
+            field: field,
+            globalFormKey: formKey,
+            readOnly: readOnly,
+          )
         else
           Wrap(
             runSpacing: 16,
             alignment: WrapAlignment.start,
             children: field.elements!.map(
               (field) {
-                return getField(field, formKey);
+                return getField(field, formKey, readOnly);
               },
             ).toList(),
           ),
@@ -52,11 +58,13 @@ class FormPanelWidget extends StatelessWidget {
 class RepeatingFieldPanel extends StatefulWidget {
   final ElementClassEntity field;
   final GlobalKey<FormBuilderState> globalFormKey;
+  final bool readOnly;
 
   const RepeatingFieldPanel({
     super.key,
     required this.field,
     required this.globalFormKey,
+    this.readOnly = false,
   });
 
   @override
@@ -185,6 +193,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
       child: Container(
         padding: const EdgeInsets.all(16),
         child: FormBuilderField(
+          enabled: !widget.readOnly,
           validator: (value) {
             formKey.currentState?.validate();
             return null;
@@ -200,6 +209,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
           builder: (field) {
             return FormBuilder(
               key: formKey,
+              enabled: !widget.readOnly,
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
@@ -226,7 +236,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                                   ),
                                 ),
                                 TextButton.icon(
-                                  onPressed: addPanel,
+                                  onPressed: widget.readOnly ? null : addPanel,
                                   icon: const Icon(Icons.add),
                                   label: const Text('Add'),
                                   style: TextButton.styleFrom(
@@ -275,7 +285,8 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                         ),
                       ),
                       TextButton.icon(
-                        onPressed: () => removePanel(key),
+                        onPressed:
+                            widget.readOnly ? null : () => removePanel(key),
                         icon: const Icon(Icons.remove),
                         label: const Text('Remove'),
                         style: TextButton.styleFrom(
@@ -303,6 +314,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                               '${widget.field.elements![i].name}_$key'],
                         ),
                         widget.globalFormKey,
+                        widget.readOnly,
                       ),
                     ),
                 ],

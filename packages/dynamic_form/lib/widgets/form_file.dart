@@ -14,10 +14,12 @@ class FormFile extends HookWidget {
     super.key,
     required this.onChanged,
     required this.field,
+    this.readOnly = false,
   });
 
   final ElementClassEntity field;
   final Function(List<String>) onChanged;
+  final bool readOnly;
 
   List<String> getInitialValue() {
     try {
@@ -48,6 +50,7 @@ class FormFile extends HookWidget {
 
     return FormField<List<String>>(
       initialValue: images.value,
+      enabled: !readOnly,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         value = value ?? [];
@@ -57,27 +60,30 @@ class FormFile extends HookWidget {
         return null;
       },
       builder: (state) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ImagePicker(
-              state: state,
-              field: field,
-              images: images,
-              showAllImages: showAllImages,
-              onChanged: onChanged,
-              isLoading: isLoading,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              state.errorText ?? '',
-              style: const TextStyle(
-                color: Colors.red,
-                fontSize: 12.0,
+        return IgnorePointer(
+          ignoring: readOnly,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ImagePicker(
+                state: state,
+                field: field,
+                images: images,
+                showAllImages: showAllImages,
+                onChanged: onChanged,
+                isLoading: isLoading,
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                state.errorText ?? '',
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontSize: 12.0,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
