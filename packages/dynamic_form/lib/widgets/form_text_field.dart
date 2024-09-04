@@ -1,5 +1,4 @@
-import 'package:dynamic_form/shared/utlities/log_service.dart';
-import 'package:expressions/expressions.dart';
+import 'package:dynamic_form/shared/utlities/expression_eval.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -71,22 +70,14 @@ class FormTextField extends StatelessWidget {
   }
 }
 
-bool computeExp(
-  String? expression,
-  Map<String, dynamic>? valueMap,
-) {
+bool computeExp(String? expression, Map<String, dynamic>? valueMap) {
   if (expression == null || valueMap == null) {
     return true;
   }
   try {
-    Expression exp = Expression.parse(expression);
-    const evaluator = ExpressionEvaluator();
-    Log.f(valueMap);
-    var r = evaluator.eval(exp, valueMap);
-    Log.f('Evaluated exp: $r');
-    return r;
+    var exp = ExpressionFactory.parse(expression);
+    return exp.evaluate(valueMap);
   } catch (e) {
-    Log.e('Failed to eval exp: $e');
-    return true;
+    return false;
   }
 }

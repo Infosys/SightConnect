@@ -100,7 +100,7 @@ class DynamicFormJsonMapper {
                   prefix: element.prefix,
                   visibleIf: element.name.contains(
                           'preliminaryRequest.generalScreening.properties.general_screening')
-                      ? "'preliminaryRequest.isMedicoLegalCase' == 'true'"
+                      ? "preliminaryRequest.isMedicoLegalCase == true"
                       : null,
                 ),
               );

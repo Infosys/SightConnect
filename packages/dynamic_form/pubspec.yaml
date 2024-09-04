@@ -40,7 +40,7 @@ dependencies:
   path_provider: any
   path: any
   uuid: ^3.0.7
-  expressions: ^0.2.5+1
+ 
 
 dev_dependencies:
   flutter_test:
