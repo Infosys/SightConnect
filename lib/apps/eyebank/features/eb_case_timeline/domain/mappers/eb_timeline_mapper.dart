@@ -2,7 +2,6 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_case_timeline/domain/e
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_config_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_timeline_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
-import 'package:eye_care_for_all/main.dart';
 
 class EBTimelineMapper {
   static List<EBTimelineEntity> mapToEntity(
@@ -27,7 +26,7 @@ class EBTimelineMapper {
         subStages: null,
       ));
     }
-    logger.f("ACTIVE STAGES: $data}");
+    // logger.f("ACTIVE STAGES: $data}");
     final newConfigModel = configModel.copyWith(
       stages: configModel.stages!
           .where((stage) => !model.any((element) {
@@ -40,7 +39,7 @@ class EBTimelineMapper {
           .toList(),
     );
 
-    logger.d("newConfigModel: $newConfigModel");
+    // logger.d("newConfigModel: $newConfigModel");
 
     for (var stage in newConfigModel.stages!) {
       data.add(EBTimelineEntity(
