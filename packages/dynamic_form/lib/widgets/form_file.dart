@@ -29,7 +29,7 @@ class FormFile extends HookWidget {
         return [];
       }
     } catch (e) {
-      Log.f('FormFile: $e');
+      Log.e('FormFile: $e');
       return [];
     }
   }

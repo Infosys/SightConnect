@@ -42,11 +42,15 @@ class EqualsExpression extends Expression {
 
 class ExpressionFactory {
   static Expression parse(String expression) {
-    return _parseOrExpression(expression);
+    try {
+      return _parseOrExpression(expression);
+    } catch (e) {
+      throw FormatException('Invalid expression format: $expression');
+    }
   }
 
   static Expression _parseOrExpression(String expression) {
-    var parts = expression.split('||');
+    var parts = _splitExpression(expression, '||');
     if (parts.length > 1) {
       return OrExpression(_parseOrExpression(parts[0].trim()),
           _parseAndExpression(parts[1].trim()));
@@ -55,7 +59,7 @@ class ExpressionFactory {
   }
 
   static Expression _parseAndExpression(String expression) {
-    var parts = expression.split('&&');
+    var parts = _splitExpression(expression, '&&');
     if (parts.length > 1) {
       return AndExpression(_parseAndExpression(parts[0].trim()),
           _parseEqualsExpression(parts[1].trim()));
@@ -64,11 +68,27 @@ class ExpressionFactory {
   }
 
   static Expression _parseEqualsExpression(String expression) {
-    var parts = expression.split('==');
+    var parts = _splitExpression(expression, '==');
     if (parts.length > 1) {
       return EqualsExpression(parts[0].trim(), _parseValue(parts[1].trim()));
     }
-    throw UnsupportedError('Unsupported expression: $expression');
+    throw FormatException('Unsupported expression: $expression');
+  }
+
+  static List<String> _splitExpression(String expression, String operator) {
+    List<String> parts = [];
+    int depth = 0;
+    int start = 0;
+    for (int i = 0; i < expression.length; i++) {
+      if (expression[i] == '(') depth++;
+      if (expression[i] == ')') depth--;
+      if (depth == 0 && expression.substring(i).startsWith(operator)) {
+        parts.add(expression.substring(start, i));
+        start = i + operator.length;
+      }
+    }
+    parts.add(expression.substring(start));
+    return parts;
   }
 
   static dynamic _parseValue(String value) {
@@ -89,6 +109,14 @@ bool computeExp(String? expression, Map<String, dynamic>? valueMap) {
     return exp.evaluate(valueMap);
   } catch (e) {
     Log.e('Error evaluating expression: $expression $e');
-    return true;
+    return false;
   }
 }
+
+// Example expressions:
+// "a == 1 && b == 2"
+// "a == 1 || b == 2"
+// "a == 1 && b == 2 || c == 3"
+// "(a == 1 || b == 2) && c == 3"
+// "a == true && b == false"
+// "a == 1.5 && b == 2"

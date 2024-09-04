@@ -145,7 +145,7 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
       if (formKey.currentState!.validate()) {
         formKey.currentState?.save();
         Log.i('Form submitted successfully');
-        Log.f(formKey.currentState?.value);
+        // Log.f(formKey.currentState?.value);
         widget.onSubmit?.call(
           formKey.currentState?.value,
           DynamicFormSavingType.SAVE,

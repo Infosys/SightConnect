@@ -118,10 +118,12 @@ class ElementClassModel {
     this.conditions,
     this.dependantField,
     this.elements,
+    this.inputType,
   });
 
   factory ElementClassModel.fromJson(Map<String, dynamic> json) =>
       ElementClassModel(
+        inputType: json["inputType"],
         type: json["type"],
         name: json["name"],
         title: json["title"],
@@ -157,6 +159,7 @@ class ElementClassModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "inputType": inputType,
         "type": type,
         "name": name,
         "title": title,
