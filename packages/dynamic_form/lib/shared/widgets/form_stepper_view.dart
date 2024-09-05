@@ -25,11 +25,13 @@ class FormStepperView extends StatefulWidget {
 
 class FormStepperViewState extends State<FormStepperView> {
   int _currentStep = 0;
+  final ScrollController _scrollController = ScrollController();
 
   void _nextStep() {
     if (_currentStep < widget.pages.length - 1) {
       setState(() {
         _currentStep++;
+        _scrollToTop();
       });
     }
   }
@@ -38,6 +40,7 @@ class FormStepperViewState extends State<FormStepperView> {
     if (_currentStep > 0) {
       setState(() {
         _currentStep--;
+        _scrollToTop();
       });
     }
   }
@@ -45,11 +48,20 @@ class FormStepperViewState extends State<FormStepperView> {
   void _onStepTapped(int index) {
     setState(() {
       _currentStep = index;
+      _scrollToTop();
     });
   }
 
   void _handleSubmit() {
     widget.onSubmit?.call();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0.0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
@@ -58,6 +70,7 @@ class FormStepperViewState extends State<FormStepperView> {
       return Container();
     } else if (widget.pages.length == 1) {
       return SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -86,6 +99,7 @@ class FormStepperViewState extends State<FormStepperView> {
 
     return Stepper(
       elevation: 0,
+      controller: _scrollController,
       physics: const ClampingScrollPhysics(),
       type: widget.axis == Axis.horizontal
           ? StepperType.horizontal

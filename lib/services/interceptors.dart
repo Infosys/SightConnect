@@ -91,11 +91,15 @@ class DioTokenInterceptor extends Interceptor {
   }
 
   Future<void> _logout() async {
-    await _ref.read(initializationProvider).logout();
-    AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-      LoginPage.routeName,
-      (route) => false,
-    );
+    try {
+      await _ref.read(initializationProvider).logout();
+      AppRouter.navigatorKey.currentState!.pushNamedAndRemoveUntil(
+        LoginPage.routeName,
+        (route) => false,
+      );
+    } catch (e) {
+      logger.e("Error while logging out $e");
+    }
   }
 }
 

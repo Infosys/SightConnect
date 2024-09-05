@@ -278,25 +278,17 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Panel ${repeatedPanelKeys.indexOf(key) + 1}',
-                        style: TextStyle(
+                        "${widget.field.title} ${repeatedPanelKeys.indexOf(key) + 1}",
+                        style: const TextStyle(
                           fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade700,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      TextButton.icon(
+                      IconButton(
                         onPressed:
                             widget.readOnly ? null : () => removePanel(key),
-                        icon: const Icon(Icons.remove),
-                        label: const Text('Remove'),
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.red,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 8.0,
-                          ),
-                        ),
+                        icon: const Icon(Icons.delete,
+                            color: Color.fromARGB(255, 242, 100, 90)),
                       ),
                     ],
                   ),
