@@ -82,6 +82,6 @@
         <path d="M 1.99999988079071 0 L 4 3 L -2.384185791015625e-07 3 L 1.99999988079071 0 Z" stroke="none" fill="#c5cfd6"/>
       </g>
     </g>
-    <text id="_6_Feet" data-name="6 Feet" transform="translate(182 372)" fill="#333" font-size="8" font-family="Roboto-Regular, Roboto"><tspan x="0" y="8">6 Feet</tspan></text>
+    <text id="_6_Feet" data-name="6 Feet" transform="translate(182 372)" fill="#333" font-size="8" font-family="Roboto-Regular, Roboto"><tspan x="0" y="8">2 meters</tspan></text>
   </g>
 </svg>

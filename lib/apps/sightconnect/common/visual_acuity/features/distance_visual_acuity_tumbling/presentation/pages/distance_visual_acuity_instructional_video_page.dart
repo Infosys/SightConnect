@@ -98,7 +98,9 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
                   ),
                 ),
               ),
-        body: Padding(
+        body: 
+        
+        Padding(
           padding: Responsive.isMobile(context)
               ? const EdgeInsets.all(AppSize.kl)
               : const EdgeInsets.all(AppSize.kl),
@@ -235,6 +237,7 @@ class DistanceVisualAcuityInstructionalVideoPage extends ConsumerWidget {
             ],
           ),
         ),
+     
       ),
     );
   }

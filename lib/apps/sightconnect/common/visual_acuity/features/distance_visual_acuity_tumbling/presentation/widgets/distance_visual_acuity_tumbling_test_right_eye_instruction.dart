@@ -19,6 +19,8 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
+    final screenHeight = AppSize.height(context);
+    final imageHeight = screenHeight * (264 / 892);
     return TraceableWidget(
       actionName:
           'VisualAcuity Tumbling LeftEye Instruction Page - Long Distance',
@@ -28,7 +30,8 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
           title: Text(loc.distanceVaTopAppBarDistanceVisionTest),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding:
+              const EdgeInsets.symmetric(horizontal: AppSize.kl, vertical: 14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,9 +54,14 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
                 ),
                 softWrap: true,
               ),
-              const SizedBox(
-                height: AppSize.km + 2,
+              const SizedBox(height: AppSize.km),
+              Text(
+                "This part of the test requires an assistant as it must be taken from a 2-meter distance. Call a friend, family member, or neighbor to help you with this test.",
+                softWrap: true,
+                style:
+                    applyRobotoFont(fontSize: 14, fontWeight: FontWeight.w400),
               ),
+              const Spacer(),
               Center(
                 child: Container(
                   padding: const EdgeInsets.all(8),
@@ -62,11 +70,11 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: applyLightShadow(),
                   ),
-                  height: AppSize.height(context) * 0.5,
-                  width: AppSize.width(context) * 0.7,
+
                   child: Center(
-                    child: Image.asset(
-                      "assets/images/distant.png",
+                    child: SvgPicture.asset(
+                      "assets/images/distance_va_instruction.svg",
+                      height: imageHeight,
                     ),
                   ),
 
@@ -80,37 +88,17 @@ class DistanceVisualAcuityTumblingRightEyeInstruction extends ConsumerWidget {
                 child: Container(
                   width: AppSize.width(context) * 0.8,
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColor.primary,
-                      width: 2,
-                    ),
-                    color: Color(int.parse(
-                      '0xFFFFFFFF',
-                    )),
+                    border: Border.all(width: 2, color: AppColor.blue),
+                    color: AppColor.white,
+                    boxShadow: applyLightShadow(),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: SvgPicture.asset(
-                          "assets/images/triage_card_bg.svg",
-                          color: AppColor.lightBlue,
-                          width: AppSize.width(context),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            "Please maintain a 2-meter distance from the screen",
-                            textAlign: TextAlign.center,
-                            style: applyRobotoFont()),
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        "Please maintain a 2-meter distance from the screen",
+                        textAlign: TextAlign.center,
+                        style: applyRobotoFont()),
                   ),
                 ),
               ),
