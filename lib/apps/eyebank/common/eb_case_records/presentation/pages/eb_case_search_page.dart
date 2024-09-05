@@ -59,6 +59,9 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
       );
 
       final newItems = await ref.read(ebSearchRecordProvider(param).future);
+      if (!mounted) {
+        return;
+      }
       final isLastPage = (newItems.content?.length ?? 0) < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems.content ?? []);
@@ -67,10 +70,14 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
         _pagingController.appendPage(newItems.content ?? [], nextPageKey);
       }
     } on EBFailure catch (error) {
-      _pagingController.error = error;
+      if (mounted) {
+        _pagingController.error = error;
+      }
     } catch (error) {
-      logger.e(error);
-      _pagingController.error = error;
+      if (mounted) {
+        logger.e(error);
+        _pagingController.error = error;
+      }
     }
   }
 
