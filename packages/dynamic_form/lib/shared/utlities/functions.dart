@@ -199,7 +199,7 @@ Widget getField(
   }
 }
 
-class VisibiltyWrapper extends StatelessWidget {
+class VisibiltyWrapper extends StatefulWidget {
   const VisibiltyWrapper({
     super.key,
     required this.child,
@@ -211,9 +211,19 @@ class VisibiltyWrapper extends StatelessWidget {
   final GlobalKey<FormBuilderState> formKey;
 
   @override
+  State<VisibiltyWrapper> createState() => _VisibiltyWrapperState();
+}
+
+class _VisibiltyWrapperState extends State<VisibiltyWrapper> {
+  @override
   Widget build(BuildContext context) {
-    final isVisible =
-        computeExp(field.visibleIf, formKey.currentState?.instantValue);
-    return isVisible ? child : const SizedBox.shrink();
+    final isVisible = computeExp(
+        widget.field.visibleIf, widget.formKey.currentState?.instantValue);
+
+    if (!isVisible) {
+      widget.formKey.currentState
+          ?.setInternalFieldValue(widget.field.name, null);
+    }
+    return isVisible ? widget.child : const SizedBox.shrink();
   }
 }
