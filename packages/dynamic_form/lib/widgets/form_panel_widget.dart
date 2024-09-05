@@ -222,7 +222,8 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                       children: [
                         ...repeatedPanelKeys
                             .map((key) => buildRepeatedPanel(key)),
-                        if (repeatedPanelKeys.length < maxRepeats)
+                        if (repeatedPanelKeys.length < maxRepeats &&
+                            !widget.readOnly)
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Row(
