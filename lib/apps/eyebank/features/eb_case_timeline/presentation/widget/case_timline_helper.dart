@@ -177,6 +177,9 @@ class CaseHeader extends StatelessWidget {
             style: applyRobotoFont(
               fontSize: isNested ? 11 : 12,
               fontWeight: FontWeight.bold,
+              color: event.status == EBStatus.UNKNOWN
+                  ? AppColor.grey
+                  : AppColor.black,
             ),
           ),
         ],

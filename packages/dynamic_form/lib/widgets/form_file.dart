@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:dotted_border/dotted_border.dart';
@@ -14,10 +15,12 @@ class FormFile extends HookWidget {
     super.key,
     required this.onChanged,
     required this.field,
+    this.readOnly = false,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(List<String>) onChanged;
+  final bool readOnly;
 
   List<String> getInitialValue() {
     try {
@@ -29,7 +32,7 @@ class FormFile extends HookWidget {
         return [];
       }
     } catch (e) {
-      Log.f('FormFile: $e');
+      Log.e('FormFile: $e');
       return [];
     }
   }
@@ -48,6 +51,7 @@ class FormFile extends HookWidget {
 
     return FormField<List<String>>(
       initialValue: images.value,
+      enabled: !readOnly,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         value = value ?? [];
@@ -57,27 +61,30 @@ class FormFile extends HookWidget {
         return null;
       },
       builder: (state) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ImagePicker(
-              state: state,
-              field: field,
-              images: images,
-              showAllImages: showAllImages,
-              onChanged: onChanged,
-              isLoading: isLoading,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              state.errorText ?? '',
-              style: const TextStyle(
-                color: Colors.red,
-                fontSize: 12.0,
+        return IgnorePointer(
+          ignoring: readOnly,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ImagePicker(
+                state: state,
+                field: field,
+                images: images,
+                showAllImages: showAllImages,
+                onChanged: onChanged,
+                isLoading: isLoading,
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                state.errorText ?? '',
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontSize: 12.0,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -96,7 +103,7 @@ class ImagePicker extends StatelessWidget {
   });
 
   final FormFieldState<List<String>> state;
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final ValueNotifier<List<String>> images;
   final ValueNotifier<bool> showAllImages;
   final Function(List<String>) onChanged;
@@ -169,22 +176,52 @@ class ImageDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('ImageDisplay: $url');
     if (url == null && url!.isEmpty) {
       return const SizedBox();
     }
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius ?? 8),
-      child: Image.network(
-        url!,
-        height: height ?? 300,
-        width: width ?? 300,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return const Icon(Icons.error);
-        },
-      ),
-    );
+    if (_getFileType(url!) == null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        child: Image.network(
+          url!,
+          height: height ?? 300,
+          width: width ?? 300,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error);
+          },
+        ),
+      );
+    } else if (["jpg", "jpeg", "png"].contains(_getFileType(url!))) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        child: Image.network(
+          url!,
+          height: height ?? 300,
+          width: width ?? 300,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error);
+          },
+        ),
+      );
+    } else {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        child: const Icon(
+          Icons.file_copy,
+          size: 100,
+        ),
+      );
+    }
+  }
+
+  String? _getFileType(String url) {
+    final uri = Uri.parse(url);
+    final fileType = uri.queryParameters['source']?.split(".").last;
+    return fileType;
   }
 }
 

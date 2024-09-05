@@ -16,8 +16,7 @@ class FormChip extends HookWidget {
 
   Object? getInitialValue() {
     try {
-      final ElementElementClassEntity fieldEntity =
-          field as ElementElementClassEntity;
+      final ElementClassEntity fieldEntity = field as ElementClassEntity;
       return fieldEntity.initialValue;
     } catch (e) {
       return null;
@@ -26,8 +25,7 @@ class FormChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ElementElementClassEntity fieldEntity =
-        field as ElementElementClassEntity;
+    final ElementClassEntity fieldEntity = field as ElementClassEntity;
     final options = fieldEntity.choices!;
     var selectedValue = useState<Object>(getInitialValue() ?? '');
 

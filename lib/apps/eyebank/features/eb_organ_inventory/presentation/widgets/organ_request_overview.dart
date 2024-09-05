@@ -40,6 +40,7 @@ class OrganRequestOverview extends ConsumerWidget {
         },
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
+            recipientAge: item.recipientDOB ?? '',
             recipientName: item.recipientName ?? '',
             encounterId: item.encounterId ?? '',
             tissueTypeRequested: item.tissueTypeRequested ?? '',
@@ -104,6 +105,7 @@ class _OrganRequestCard extends StatelessWidget {
   final DateTime? requestedDate;
   final String? procedures;
   final String recipientName;
+  final String recipientAge;
 
   final VoidCallback? onReject;
   final VoidCallback? onTimeLine;
@@ -116,6 +118,7 @@ class _OrganRequestCard extends StatelessWidget {
     required this.requestedDate,
     required this.procedures,
     required this.recipientName,
+    required this.recipientAge,
     this.onReject,
     this.onTimeLine,
   }) : super(key: key);
@@ -145,6 +148,11 @@ class _OrganRequestCard extends StatelessWidget {
               const CircleAvatar(
                 maxRadius: 16,
                 backgroundColor: AppColor.pureBlue,
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 16,
+                ),
               ),
               const SizedBox(width: 8),
               Column(
@@ -153,7 +161,11 @@ class _OrganRequestCard extends StatelessWidget {
                 children: [
                   Text(
                     requestedBy.formatTitle(),
-                    style: applyRobotoFont(fontSize: 12.0),
+                    style: applyRobotoFont(
+                      fontSize: 12.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     "Tissue Requested: $tissueTypeRequested",
@@ -183,6 +195,7 @@ class _OrganRequestCard extends StatelessWidget {
             runSpacing: 8.0,
             children: [
               _buildDetailColumn('Donor Name:', recipientName),
+              _buildDetailColumn('Donor Age:', recipientAge),
               _buildDetailColumn('Procedures:', procedures),
               _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
             ],

@@ -1,7 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
-import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
 
 class DynamicFormJsonMapper {
@@ -16,7 +15,6 @@ class DynamicFormJsonMapper {
     required Map<String, dynamic>? initialValues,
   }) {
     try {
-      Log.f({"DynamicFormJsonMapper": initialValues});
       this.initialValues = initialValues;
       return ResponseJsonEntity(
         name: _formatTitle(dynamicFormModel.name),
@@ -26,211 +24,259 @@ class DynamicFormJsonMapper {
         pages: _getPages(dynamicFormModel.pages),
       );
     } catch (e) {
-      debugPrint('DynamicFormJsonMapper $e');
+      debugPrint('DynamicFormJsonMapper modeltoEntity: $e');
       rethrow;
     }
   }
 
   _formatTitle(String? title) {
-    if (title == null) {
-      return '';
+    try {
+      if (title == null) {
+        return '';
+      }
+      return title.contains('_') ? title.replaceAll('_', ' ') : title;
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _formatTitle: $e');
+      rethrow;
     }
-    return title.contains('_') ? title.replaceAll('_', ' ') : title;
   }
 
   List<PageEntity> _getPages(List<PageModel>? pages) {
-    final List<PageEntity> pageEntities = [];
-    if (pages != null) {
-      for (final page in pages) {
-        pageEntities.add(PageEntity(
-          name: page.name.toString(),
-          title: page.title ?? '',
-          elements: _getPageElements(
-            page.elements,
-          ),
-        ));
-      }
-    }
-    return pageEntities;
-  }
-
-  List<PageElementEntity> _getPageElements(List<PageElementModel>? elements) {
-    final List<PageElementEntity> pageElementEntities = [];
-    if (elements != null) {
-      for (final element in elements) {
-        pageElementEntities.add(PageElementEntity(
-          type: _getPanelType(element.repeats),
-          name: element.name.toString(),
-          elements: _getElements(
-            element.elements,
-          ),
-          repeats: element.repeats ?? false,
-          maxRepeat: element.maxRepeat,
-          minRepeat: element.minRepeat,
-          initialValue: initialValues?[element.name.toString()],
-        ));
-      }
-    }
-    return pageElementEntities;
-  }
-
-  List<ElementElementClassEntity> _getElements(
-    List<ElementElementClassModel>? elements,
-  ) {
-    final List<ElementElementClassEntity> elementEntities = [];
-    if (elements != null) {
-      for (final element in elements) {
-        if (element.type != DynamicFormType.HIDDEN.name) {
-          elementEntities.add(
-            ElementElementClassEntity(
-              initialValue:
-                  _getInitialValType(_mapToFormType(element.type), element),
-              type: _mapToFormType(element.type),
-              name: element.name.toString(),
-              title: element.title ?? '',
-              isRequired: element.isRequired ?? false,
-              requiredErrorText: element.requiredErrorText ?? '',
-              maxSize: element.maxSize ?? 0,
-              placeholder: element.placeholder ?? '',
-              description: element.description ?? '',
-              readOnly: element.readOnly ?? false,
-              min: element.min ?? 0,
-              max: element.max ?? 3,
-              step: element.step ?? 0,
-              choices: _getChoices(element.options),
-              validators: _getValidators(element.validators),
-              dependantField: element.dependantField,
-              conditions: _getConditions(element.conditions),
-              elements: _getElements(element.elements),
-              repeats: element.repeats ?? false,
-              minRepeat: element.minRepeat ?? 1,
-              maxRepeat: element.maxRepeat ?? 1,
-              inputType: element.inputType,
-              prefix: element.prefix,
-            ),
-          );
+    try {
+      final List<PageEntity> pageEntities = [];
+      if (pages != null) {
+        for (final page in pages) {
+          try {
+            pageEntities.add(PageEntity(
+              name: page.name.toString(),
+              title: page.title ?? '',
+              elements: _getElements(page.elements),
+            ));
+          } catch (e) {
+            debugPrint('DynamicFormJsonMapper _getPages: $e');
+            rethrow;
+          }
         }
       }
+      return pageEntities;
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _getPages: $e');
+      rethrow;
     }
-    // Log.e(elementEntities.toList());
-    return elementEntities;
   }
 
-  _getInitialValType(DynamicFormType type, ElementElementClassModel element) {
-    if (type == DynamicFormType.TEXTFIELD || type == DynamicFormType.TEXTAREA) {
-      if (initialValues?[element.name.toString()] == null) {
-        return null;
+  List<ElementClassEntity> _getElements(List<ElementClassModel>? elements) {
+    try {
+      final List<ElementClassEntity> elementEntities = [];
+      if (elements != null) {
+        for (final element in elements) {
+          try {
+            if (element.type != DynamicFormType.HIDDEN.name) {
+              elementEntities.add(
+                ElementClassEntity(
+                  initialValue:
+                      _getInitialValType(_mapToFormType(element.type), element),
+                  type: _mapToFormType(element.type),
+                  name: element.name.toString(),
+                  title: element.title ?? '',
+                  isRequired: element.isRequired ?? false,
+                  requiredErrorText: element.requiredErrorText ?? '',
+                  maxSize: element.maxSize ?? 0,
+                  placeholder: element.placeholder ?? '',
+                  description: element.description ?? '',
+                  readOnly: element.readOnly ?? false,
+                  min: element.min ?? 0,
+                  max: element.max ?? 3,
+                  step: element.step ?? 0,
+                  choices: _getChoices(element.options),
+                  validators: _getValidators(element.validators),
+                  dependantField: element.dependantField,
+                  conditions: _getConditions(element.conditions),
+                  elements: _getElements(element.elements),
+                  repeats: element.repeats ?? false,
+                  minRepeat: element.minRepeat ?? 1,
+                  maxRepeat: element.maxRepeat ?? 1,
+                  inputType: element.inputType,
+                  prefix: element.prefix,
+                  visibleIf: element.visibleIf,
+                ),
+              );
+            }
+          } catch (e) {
+            debugPrint('DynamicFormJsonMapper _getElements: $e');
+            rethrow;
+          }
+        }
       }
-      return initialValues?[element.name.toString()].toString();
-    } else {
-      return initialValues?[element.name.toString()];
+      return elementEntities;
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _getElements: $e');
+      rethrow;
+    }
+  }
+
+  // getVisibleIf(String? visibleIf) {
+  //   try {
+  //     if (visibleIf ==
+  //         'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == true') {
+  //       return 'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == 1';
+  //     }
+  //     return visibleIf;
+  //   } catch (e) {
+  //     debugPrint('DynamicFormJsonMapper getVisibleIf: $e');
+  //     rethrow;
+  //   }
+  // }
+
+  _getInitialValType(DynamicFormType type, ElementClassModel element) {
+    try {
+      if (type == DynamicFormType.TEXTFIELD ||
+          type == DynamicFormType.TEXTAREA) {
+        if (initialValues?[element.name.toString()] == null) {
+          return null;
+        }
+        return initialValues?[element.name.toString()].toString();
+      } else {
+        return initialValues?[element.name.toString()];
+      }
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _getInitialValType: $e');
+      rethrow;
     }
   }
 
   _getConditions(List<Conditions>? conditions) {
-    final List<ConditionsEntity> conditionsEntities = [];
-    if (conditions != null) {
-      for (final condition in conditions) {
-        conditionsEntities.add(ConditionsEntity(
-          value: condition.value ?? '',
-          fields: _getElements(condition.fields),
-        ));
+    try {
+      final List<ConditionsEntity> conditionsEntities = [];
+      if (conditions != null) {
+        for (final condition in conditions) {
+          try {
+            conditionsEntities.add(ConditionsEntity(
+              value: condition.value ?? '',
+              fields: _getElements(condition.fields),
+            ));
+          } catch (e) {
+            debugPrint('DynamicFormJsonMapper _getConditions: $e');
+            rethrow;
+          }
+        }
       }
+      return conditionsEntities;
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _getConditions: $e');
+      rethrow;
     }
-    return conditionsEntities;
   }
 
   _getChoices(List<OptionsModel>? choices) {
-    final List<ChoiceElementEntity> choiceEntities = [];
-    if (choices != null) {
-      for (final choice in choices) {
-        choiceEntities.add(ChoiceElementEntity(
-          name: choice.name ?? '',
-          title: choice.title ?? '',
-        ));
+    try {
+      final List<ChoiceElementEntity> choiceEntities = [];
+      if (choices != null) {
+        for (final choice in choices) {
+          try {
+            choiceEntities.add(ChoiceElementEntity(
+              name: choice.name ?? '',
+              title: choice.title ?? '',
+            ));
+          } catch (e) {
+            debugPrint('DynamicFormJsonMapper _getChoices: $e');
+            rethrow;
+          }
+        }
       }
+      return choiceEntities;
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _getChoices: $e');
+      rethrow;
     }
-    return choiceEntities;
   }
 
   List<ValidatorEntity> _getValidators(List<Validator>? validators) {
-    final List<ValidatorEntity> validatorEntities = [];
-    if (validators != null) {
-      for (final validator in validators) {
-        validatorEntities.add(ValidatorEntity(
-          type: validator.type ?? '',
-          text: validator.text ?? '',
-          regex: validator.regex ?? '',
-          size: validator.size ?? "",
-          unit: validator.unit ?? "",
-          types: validator.types ?? [],
-          uploadUrl: validator.uploadUrl ?? "",
-          downloadUrl: validator.downloadUrl ?? "",
-        ));
+    try {
+      final List<ValidatorEntity> validatorEntities = [];
+      if (validators != null) {
+        for (final validator in validators) {
+          try {
+            validatorEntities.add(ValidatorEntity(
+              type: validator.type ?? '',
+              text: validator.text ?? '',
+              regex: validator.regex ?? '',
+              size: validator.size ?? "",
+              unit: validator.unit ?? "",
+              types: validator.types ?? [],
+              uploadUrl: validator.uploadUrl ?? "",
+              downloadUrl: validator.downloadUrl ?? "",
+            ));
+          } catch (e) {
+            debugPrint('DynamicFormJsonMapper _getValidators: $e');
+            rethrow;
+          }
+        }
       }
+      return validatorEntities;
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _getValidators: $e');
+      rethrow;
     }
-    return validatorEntities;
   }
 
   DynamicFormType _mapToFormType(String? value) {
-    switch (value) {
-      case 'TEXTFIELD':
-        return DynamicFormType.TEXTFIELD;
-      case 'RADIO':
-        return DynamicFormType.RADIO;
-      case 'CHECKBOX':
-        return DynamicFormType.CHECKBOX;
-      case 'DROPDOWN':
-        return DynamicFormType.DROPDOWN;
-      case 'DATETIME':
-        return DynamicFormType.DATETIME;
-      case 'CHIPS':
-        return DynamicFormType.CHIPS;
-      case 'RANGE':
-        return DynamicFormType.SLIDER;
-      case 'SWITCH':
-        return DynamicFormType.SWITCH;
-      case 'FILE':
-        return DynamicFormType.FILE;
-      case 'TEXTAREA':
-        return DynamicFormType.TEXTAREA;
-      case 'conditional':
-        return DynamicFormType.CONDITIONAL;
-      case 'PANEL':
-        return DynamicFormType.PANEL;
-      case 'DATE':
-        return DynamicFormType.DATE;
-
-      case 'DISPLAY':
-        return DynamicFormType.DISPLAY;
-
-      case 'HIDDEN':
-        return DynamicFormType.HIDDEN;
-
-      case 'DURATION':
-        return DynamicFormType.DURATION;
-
-      default:
-        return DynamicFormType.DEFAULT;
+    try {
+      switch (value) {
+        case 'TEXTFIELD':
+          return DynamicFormType.TEXTFIELD;
+        case 'RADIO':
+          return DynamicFormType.RADIO;
+        case 'CHECKBOX':
+          return DynamicFormType.CHECKBOX;
+        case 'DROPDOWN':
+          return DynamicFormType.DROPDOWN;
+        case 'DATETIME':
+          return DynamicFormType.DATETIME;
+        case 'CHIPS':
+          return DynamicFormType.CHIPS;
+        case 'RANGE':
+          return DynamicFormType.SLIDER;
+        case 'SWITCH':
+          return DynamicFormType.SWITCH;
+        case 'FILE':
+          return DynamicFormType.FILE;
+        case 'TEXTAREA':
+          return DynamicFormType.TEXTAREA;
+        case 'conditional':
+          return DynamicFormType.CONDITIONAL;
+        case 'PANEL':
+          return DynamicFormType.PANEL;
+        case 'DATE':
+          return DynamicFormType.DATE;
+        case 'DISPLAY':
+          return DynamicFormType.DISPLAY;
+        case 'HIDDEN':
+          return DynamicFormType.HIDDEN;
+        case 'DURATION':
+          return DynamicFormType.DURATION;
+        default:
+          return DynamicFormType.DEFAULT;
+      }
+    } catch (e) {
+      debugPrint('DynamicFormJsonMapper _mapToFormType: $e');
+      rethrow;
     }
   }
 }
 
 FormLayoutType _mapToFormLayoutType(String? value) {
-  switch (value) {
-    case 'stepper':
-      return FormLayoutType.STEPPER;
-    case 'expansion-panel':
-      return FormLayoutType.PANEL;
-    default:
-      return FormLayoutType.PANEL;
-  }
-}
-
-FormPanelType _getPanelType(bool? repeats) {
-  if (repeats == true) {
-    return FormPanelType.REPEATED_PANEL;
-  } else {
-    return FormPanelType.PANEL;
+  try {
+    switch (value) {
+      case 'stepper':
+        return FormLayoutType.STEPPER;
+      case 'expansion-panel':
+        return FormLayoutType.PANEL;
+      default:
+        return FormLayoutType.PANEL;
+    }
+  } catch (e) {
+    debugPrint('DynamicFormJsonMapper _mapToFormLayoutType: $e');
+    rethrow;
   }
 }

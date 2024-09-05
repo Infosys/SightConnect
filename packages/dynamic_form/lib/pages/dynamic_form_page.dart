@@ -6,6 +6,7 @@ import 'package:dynamic_form/pages/form_builder_page.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DynamicFormPage extends StatefulWidget {
@@ -44,15 +45,25 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
 
   Future<ResponseJsonEntity>? _loadJson() async {
     try {
-      // Log.f(widget.json);
-      return DynamicFormJsonMapper().modeltoEntity(
-        dynamicFormModel: ResponseJsonModel.fromJson(widget.json),
-        initialValues: widget.initialValue as Map<String, dynamic>?,
-      );
+      Log.f(widget.json);
+      return await compute(_parseJsonInIsolate, {
+        'json': widget.json,
+        'initialValue': widget.initialValue,
+      });
     } catch (e) {
       Log.e('$e');
       rethrow;
     }
+  }
+
+  static Future<ResponseJsonEntity> _parseJsonInIsolate(
+      Map<String, dynamic> params) async {
+    final json = params['json'];
+    final initialValue = params['initialValue'] as Map<String, dynamic>?;
+    return DynamicFormJsonMapper().modeltoEntity(
+      dynamicFormModel: ResponseJsonModel.fromJson(json),
+      initialValues: initialValue,
+    );
   }
 
   @override

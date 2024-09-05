@@ -31,6 +31,10 @@ class OrganInventoryPage extends StatelessWidget {
             ),
           ],
           bottom: const TabBar(
+            dividerHeight: 1,
+            enableFeedback: true,
+            automaticIndicatorColorAdjustment: true,
+            mouseCursor: MouseCursor.defer,
             dividerColor: AppColor.grey,
             labelColor: AppColor.black,
             indicatorSize: TabBarIndicatorSize.label,
@@ -42,14 +46,13 @@ class OrganInventoryPage extends StatelessWidget {
             tabs: [
               Badge(
                 label: Text("New"),
-                child: Tab(text: 'Request'),
+                child: Tab(text: 'Requests'),
               ),
-              Tab(text: 'Overview'),
+              Tab(text: 'Statistics'),
             ],
           ),
         ),
         body: const TabBarView(
-          physics: NeverScrollableScrollPhysics(),
           children: [
             OrganRequestOverview(),
             OrganInventoryOverview(),

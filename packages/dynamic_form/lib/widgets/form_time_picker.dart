@@ -11,7 +11,7 @@ class FormTimePicker extends HookWidget {
     required this.field,
     required this.onChanged,
   });
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(DateTime?) onChanged;
 
   @override

@@ -26,7 +26,7 @@ class OrganInventoryOverview extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Organ Inventory Overview',
+                  'Organ Inventory Summary',
                   style: applyFiraSansFont(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

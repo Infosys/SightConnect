@@ -10,7 +10,7 @@ class FormDuration extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(int)? onChanged;
 
   @override

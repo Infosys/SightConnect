@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/l
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/app_info_service.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -62,18 +63,26 @@ class EBProfilePage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       _buildSectionCard(
-                        title: 'Current Work Details',
-                        child: _buildCurrentWorkDetails(
-                            profile.currentWorkDetails),
-                      ),
-                      const SizedBox(height: 16),
-                      _buildSectionCard(
-                        title: 'Registration Academic',
+                        title: 'Registration Details',
                         child: _buildRegistrationAcademic(
                             profile.registrationAcademic),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 24),
                       _buildLogoutButton(context, ref, loc),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "App Version: ${AppInfoService.appVersion}",
+                            style: applyRobotoFont(
+                              fontWeight: FontWeight.normal,
+                              color: AppColor.grey,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 16 * 4),
                     ],
                   ),
@@ -104,12 +113,19 @@ class EBProfilePage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "${profile.personalInformation?.firstName ?? ''} ${profile.personalInformation?.lastName ?? ''}",
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          Chip(
+            padding: const EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
+            backgroundColor: AppColor.pureBlue,
+            label: Text(
+                "${profile.personalInformation?.firstName ?? ''} ${profile.personalInformation?.lastName ?? ''}",
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.black,
+                )),
           ),
           const SizedBox(height: 8),
           _buildPersonalInfo(profile),
@@ -138,12 +154,13 @@ class EBProfilePage extends ConsumerWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            style: applyFiraSansFont(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppColor.black,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           child,
         ],
       ),
@@ -158,10 +175,6 @@ class EBProfilePage extends ConsumerWidget {
         _columnListTile(
           title: 'Health Professional Type',
           subtitle: profile.healthProfessionalType ?? 'N/A',
-        ),
-        _columnListTile(
-          title: 'Practitioner Type',
-          subtitle: profile.practitionerType ?? 'N/A',
         ),
         _columnListTile(
           title: 'Official Mobile',
@@ -212,43 +225,12 @@ class EBProfilePage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _rowListTile(
-          title: 'Public Mobile Number',
+          title: 'Contact Number',
           subtitle: contact.publicMobileNumber ?? 'N/A',
         ),
         _rowListTile(
-          title: 'Landline Number',
-          subtitle: contact.landLineNumber ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Public Email',
+          title: 'Email',
           subtitle: contact.publicEmail ?? 'N/A',
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCurrentWorkDetails(CurrentWorkDetails? workDetails) {
-    if (workDetails == null) {
-      return const Text('No current work details available.');
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _rowListTile(
-          title: 'Currently Working',
-          subtitle: workDetails.currentlyWorking ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Purpose of Work',
-          subtitle: workDetails.purposeOfWork ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Work Status',
-          subtitle: workDetails.chooseWorkStatus ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Reason for Not Working',
-          subtitle: workDetails.reasonForNotWorking ?? 'N/A',
         ),
       ],
     );
@@ -261,10 +243,6 @@ class EBProfilePage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _rowListTile(
-          title: 'Category',
-          subtitle: registration.category ?? 'N/A',
-        ),
         ...registration.registrationData
                 ?.map((data) => _buildRegistrationDatum(data)) ??
             [],
@@ -277,16 +255,8 @@ class EBProfilePage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _rowListTile(
-          title: 'Registered With Council',
-          subtitle: data.registeredWithCouncil ?? 'N/A',
-        ),
-        _rowListTile(
           title: 'Registration Number',
           subtitle: data.registrationNumber ?? 'N/A',
-        ),
-        _rowListTile(
-          title: 'Registration Certificate',
-          subtitle: data.registrationCertificate ?? 'N/A',
         ),
       ],
     );
@@ -325,7 +295,8 @@ class EBProfilePage extends ConsumerWidget {
     required String title,
     required String subtitle,
   }) {
-    return Padding(
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 200),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

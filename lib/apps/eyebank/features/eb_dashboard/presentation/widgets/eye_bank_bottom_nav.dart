@@ -30,6 +30,7 @@ class EyeBankBottomNav extends StatelessWidget {
         color: Colors.black,
         fontSize: 12,
       ),
+      mouseCursor: SystemMouseCursors.click,
       unselectedLabelStyle: applyRobotoFont(
         fontWeight: FontWeight.w500,
         color: Colors.grey,

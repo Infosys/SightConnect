@@ -16,6 +16,7 @@ dependencies:
 
   # For Form Builder
   flutter_form_builder: ^9.3.0
+  form_builder_extra_fields: ^10.1.0
   form_builder_validators: ^10.0.1
 
   # For State Management
@@ -40,6 +41,7 @@ dependencies:
   path_provider: any
   path: any
   uuid: ^3.0.7
+ 
 
 dev_dependencies:
   flutter_test:
