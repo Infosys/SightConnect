@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+final ValueNotifier<bool> globalRebuildNotifier = ValueNotifier<bool>(false);
 
 class PageWidget extends StatelessWidget {
   const PageWidget({
@@ -20,30 +24,39 @@ class PageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('PageWidget: $name');
     if (elements.isEmpty) {
       return Container();
     }
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: elements.map((panel) {
-        if (panel.elements == null) {
-          return Container();
-        } else {
-          return AppCard(
-            title: null,
-            marginBottom: 16,
-            child: Wrap(
-              runSpacing: 16,
-              alignment: WrapAlignment.start,
-              children: elements.map((field) {
-                return getField(field, formKey, readOnly);
-              }).toList(),
-            ),
+    return ValueListenableBuilder<bool>(
+        valueListenable: globalRebuildNotifier,
+        builder: (context, value, child) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: elements.map((panel) {
+              if (panel.elements == null) {
+                return Container();
+              } else {
+                return AppCard(
+                  title: null,
+                  marginBottom: 16,
+                  child: Wrap(
+                    runSpacing: 16,
+                    alignment: WrapAlignment.start,
+                    children: elements.map((field) {
+                      return getField(
+                        field,
+                        formKey,
+                        readOnly,
+                      );
+                    }).toList(),
+                  ),
+                );
+              }
+            }).toList(),
           );
-        }
-      }).toList(),
-    );
+        });
   }
 }

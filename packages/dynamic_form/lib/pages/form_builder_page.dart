@@ -8,8 +8,6 @@ import 'package:dynamic_form/shared/widgets/form_stepper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-final ValueNotifier<bool> globalRebuildNotifier = ValueNotifier<bool>(false);
-
 class FormBuilderPage extends StatefulWidget {
   const FormBuilderPage({
     super.key,

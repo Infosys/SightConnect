@@ -96,6 +96,7 @@ class ElementClassModel {
   int? step;
   List<Conditions>? conditions;
   List<ElementClassModel>? elements;
+  String? visibleIf;
 
   ElementClassModel({
     this.type,
@@ -119,6 +120,7 @@ class ElementClassModel {
     this.dependantField,
     this.elements,
     this.inputType,
+    this.visibleIf,
   });
 
   factory ElementClassModel.fromJson(Map<String, dynamic> json) =>
@@ -156,6 +158,7 @@ class ElementClassModel {
             ? []
             : List<ElementClassModel>.from(
                 json["elements"]!.map((x) => ElementClassModel.fromJson(x))),
+        visibleIf: json["visibleIf"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -188,6 +191,7 @@ class ElementClassModel {
         "elements": elements == null
             ? []
             : List<dynamic>.from(elements!.map((x) => x.toJson())),
+        "visibleIf": visibleIf,
       };
 }
 

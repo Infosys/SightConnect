@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +54,6 @@ class FormStepperViewState extends State<FormStepperView> {
 
   @override
   Widget build(BuildContext context) {
-    log("FormStepperView Build");
     if (widget.pages.isEmpty) {
       return Container();
     } else if (widget.pages.length == 1) {
