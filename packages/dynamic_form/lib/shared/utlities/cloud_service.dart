@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:file_picker/file_picker.dart';
@@ -10,9 +12,10 @@ class CloudService {
     BaseOptions(baseUrl: baseUrl),
   );
 
-  Future<String> _getFile(String fileId) async {
+  Future<String> _getFile(String fileId, String source) async {
     try {
-      final url = "$baseUrl/services/filems/api/file/download/$fileId";
+      final url =
+          "$baseUrl/services/filems/api/file/download/$fileId?source=$source";
       Log.d({"url": url});
       return url;
     } catch (e) {
@@ -22,8 +25,7 @@ class CloudService {
   }
 
   Future<String> uploadImage(PlatformFile file) async {
-    const endpoint = 
-    "/services/filems/api/file/sync-upload?doc_type=EYEBANK";
+    const endpoint = "/services/filems/api/file/sync-upload?doc_type=EYEBANK";
     // "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
 
     MultipartFile multipartFile;
@@ -48,8 +50,11 @@ class CloudService {
       Log.d({"uploadFile": response.data});
       if (response.statusCode == 200) {
         final body = response.data;
+        log(body.toString());
         final fileId = body['id'];
-        return _getFile(fileId);
+        final sourceName = body['sourceName'];
+
+        return _getFile(fileId, sourceName);
       } else {
         throw Exception("Failed to upload file");
       }

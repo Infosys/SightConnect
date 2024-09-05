@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:dotted_border/dotted_border.dart';
@@ -175,22 +176,52 @@ class ImageDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('ImageDisplay: $url');
     if (url == null && url!.isEmpty) {
       return const SizedBox();
     }
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius ?? 8),
-      child: Image.network(
-        url!,
-        height: height ?? 300,
-        width: width ?? 300,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return const Icon(Icons.error);
-        },
-      ),
-    );
+    if (_getFileType(url!) == null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        child: Image.network(
+          url!,
+          height: height ?? 300,
+          width: width ?? 300,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error);
+          },
+        ),
+      );
+    } else if (["jpg", "jpeg", "png"].contains(_getFileType(url!))) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        child: Image.network(
+          url!,
+          height: height ?? 300,
+          width: width ?? 300,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error);
+          },
+        ),
+      );
+    } else {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
+        child: const Icon(
+          Icons.file_copy,
+          size: 100,
+        ),
+      );
+    }
+  }
+
+  String? _getFileType(String url) {
+    final uri = Uri.parse(url);
+    final fileType = uri.queryParameters['source']?.split(".").last;
+    return fileType;
   }
 }
 
