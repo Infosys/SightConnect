@@ -78,17 +78,62 @@ class _OrganTissueSearchScreenState
       },
       child: Scaffold(
         appBar: AppBar(
-          title: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Search...',
-              border: InputBorder.none,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "Search by Tissue ID, Cell Count, Donor Age",
+                      hintStyle: applyRobotoFont(
+                        color: Colors.grey,
+                        fontSize: 14.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.all(8),
+                    ),
+                    onSubmitted: (value) {
+                      query = value;
+                      _pagingController.refresh();
+                    },
+                  ),
+                ),
+              ],
             ),
-            onChanged: (value) {
-              setState(() {
-                query = value;
-                _pagingController.refresh();
-              });
-            },
           ),
         ),
         body: PagedListView<int, Content>(

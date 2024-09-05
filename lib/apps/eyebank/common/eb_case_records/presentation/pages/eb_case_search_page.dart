@@ -166,22 +166,27 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
         useState<_IdentifierDataType>(_IdentifierDataType.MOBILE);
     final List<PopupMenuEntry> filterOptions = getFilterOptions(selectedFilter);
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ),
       title: Container(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
             Expanded(
               child: TextField(
                 focusNode: focusNode,
                 decoration: InputDecoration(
                   hintText: getHintText(selectedFilter.value),
+                  hintStyle: applyRobotoFont(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide.none,
@@ -208,7 +213,7 @@ class _EBSearchAppBar extends HookWidget implements PreferredSizeWidget {
                   ),
                   filled: true,
                   fillColor: Colors.white,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  contentPadding: const EdgeInsets.all(8),
                 ),
                 onSubmitted: (value) {
                   onSubmitted(value.trim());

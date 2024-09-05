@@ -19,7 +19,7 @@ class EBCaseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _showDetails(context),
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(bottom: 8.0),
         padding: const EdgeInsets.all(8.0),
@@ -39,8 +39,9 @@ class EBCaseCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildDetailColumn('Case ID', item.caseId ?? ''),
+                _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
                 const SizedBox(width: 8),
                 _buildDetailColumn(
                     'Intimate Date', item.intimateDate.formateDate),
@@ -51,16 +52,19 @@ class EBCaseCard extends StatelessWidget {
                 _buildDetailColumn(
                     'Notifier Name', item.notifierBrief?.name ?? ''),
                 const Spacer(),
-                IconButton(
-                  onPressed: onTap,
-                  icon: const Icon(
-                    Icons.timeline_outlined,
-                    size: 20,
+                TextButton(
+                  onPressed: () => _showDetails(context),
+                  child: Text(
+                    'Details',
+                    style: applyRobotoFont(
+                      fontSize: 12.0,
+                      color: AppColor.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 )
               ],
             ),
-            const SizedBox(height: 8),
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
               runAlignment: WrapAlignment.spaceBetween,
@@ -79,7 +83,6 @@ class EBCaseCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
           ],
         ),
       ),
@@ -103,21 +106,19 @@ class EBCaseCard extends StatelessWidget {
               ),
               _buildDetailColumn('Case ID', item.caseId ?? ''),
               _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
-              _buildDetailColumn('Performer ID', item.performerId ?? ''),
               _buildDetailColumn('Intimate Date',
                   item.intimateDate.formatDateTimeWithFullMonthName),
-              _buildDetailColumn(
-                  'Death Date', item.deathDate.formatDateTimeWithFullMonthName),
-              _buildDetailColumn(
-                  'Body Location', item.bodyLocation?.addressLine1 ?? ""),
-              _buildDetailColumn('Donor Name', item.donorBrief?.name ?? ''),
-              _buildDetailColumn(
-                  'Donor Contact', item.donorBrief?.contact ?? ''),
               _buildDetailColumn(
                   'Notifier Name', item.notifierBrief?.name ?? ''),
               _buildDetailColumn(
                   'Notifier Contact', item.notifierBrief?.contact ?? ''),
-              _buildDetailColumn('Active Stages', ''),
+              _buildDetailColumn('Donor Name', item.donorBrief?.name ?? ''),
+              _buildDetailColumn(
+                  'Donor Contact', item.donorBrief?.contact ?? ''),
+              _buildDetailColumn(
+                  'Death Date', item.deathDate.formatDateTimeWithFullMonthName),
+              _buildDetailColumn(
+                  'Body Location', item.bodyLocation?.addressLine1 ?? ""),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -167,18 +168,17 @@ class EBCaseCard extends StatelessWidget {
   }
 
   Widget _buildDetailColumn(String label, dynamic value) {
-    if (value == null || value == '') {
-      return SizedBox.fromSize();
-    }
-
     return Container(
-      constraints: const BoxConstraints(maxWidth: 120),
+      constraints: const BoxConstraints(
+        maxWidth: 120,
+        maxHeight: 60,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: applyFiraSansFont(
               fontSize: 10.0,
@@ -188,7 +188,7 @@ class EBCaseCard extends StatelessWidget {
           const SizedBox(height: 4.0),
           Text(
             value.toString(),
-            maxLines: 1,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: applyRobotoFont(
               fontSize: 12.0,

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
@@ -16,21 +16,21 @@ class ChooseRoleDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.f({
-      "roles": roles,
-    });
-    var selectedRole = useState<Role?>(
-        roles.contains(Role.ROLE_PATIENT) ? Role.ROLE_PATIENT : roles.first);
+    final String? activeRole = PersistentAuthStateService.authState.activeRole;
+    var selectedRole = useState<Role?>(roles.firstWhere((role) {
+      return role?.name == activeRole;
+    }, orElse: () {
+      return roles.contains(Role.ROLE_PATIENT)
+          ? Role.ROLE_PATIENT
+          : roles.first;
+    }));
 
     final loc = context.loc!;
 
     return PopScope(
       canPop: false,
       child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 5,
-          sigmaY: 5,
-        ),
+        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: AlertDialog(
           backgroundColor: AppColor.white,
           shape: RoundedRectangleBorder(
@@ -48,13 +48,6 @@ class ChooseRoleDialog extends HookWidget {
                   ),
                 ),
               ),
-              // const SizedBox(height: 2),
-              // Text(
-              //   loc.roleNote,
-              //   style: applyFiraSansFont(
-              //     fontSize: 10,
-              //   ),
-              // ),
               const Divider(
                 color: AppColor.primary,
                 thickness: 1.4,

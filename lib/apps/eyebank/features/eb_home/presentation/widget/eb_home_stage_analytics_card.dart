@@ -100,7 +100,7 @@ class EBStageStatsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      width: min(145, MediaQuery.of(context).size.width / 2.2),
+      width: min(150, MediaQuery.of(context).size.width / 2.2),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,

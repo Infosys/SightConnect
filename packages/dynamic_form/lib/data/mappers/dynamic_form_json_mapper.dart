@@ -98,7 +98,7 @@ class DynamicFormJsonMapper {
                   maxRepeat: element.maxRepeat ?? 1,
                   inputType: element.inputType,
                   prefix: element.prefix,
-                  visibleIf: getVisibleIf(element.visibleIf),
+                  visibleIf: element.visibleIf,
                 ),
               );
             }
@@ -115,18 +115,18 @@ class DynamicFormJsonMapper {
     }
   }
 
-  getVisibleIf(String? visibleIf) {
-    try {
-      if (visibleIf ==
-          'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == true') {
-        return 'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == 1';
-      }
-      return visibleIf;
-    } catch (e) {
-      debugPrint('DynamicFormJsonMapper getVisibleIf: $e');
-      rethrow;
-    }
-  }
+  // getVisibleIf(String? visibleIf) {
+  //   try {
+  //     if (visibleIf ==
+  //         'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == true') {
+  //       return 'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == 1';
+  //     }
+  //     return visibleIf;
+  //   } catch (e) {
+  //     debugPrint('DynamicFormJsonMapper getVisibleIf: $e');
+  //     rethrow;
+  //   }
+  // }
 
   _getInitialValType(DynamicFormType type, ElementClassModel element) {
     try {

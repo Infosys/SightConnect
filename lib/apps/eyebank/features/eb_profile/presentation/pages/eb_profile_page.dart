@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/l
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/app_info_service.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -66,8 +67,22 @@ class EBProfilePage extends ConsumerWidget {
                         child: _buildRegistrationAcademic(
                             profile.registrationAcademic),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 24),
                       _buildLogoutButton(context, ref, loc),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "App Version: ${AppInfoService.appVersion}",
+                            style: applyRobotoFont(
+                              fontWeight: FontWeight.normal,
+                              color: AppColor.grey,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 16 * 4),
                     ],
                   ),
@@ -98,12 +113,19 @@ class EBProfilePage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "${profile.personalInformation?.firstName ?? ''} ${profile.personalInformation?.lastName ?? ''}",
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          Chip(
+            padding: const EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
+            backgroundColor: AppColor.pureBlue,
+            label: Text(
+                "${profile.personalInformation?.firstName ?? ''} ${profile.personalInformation?.lastName ?? ''}",
+                style: applyFiraSansFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.black,
+                )),
           ),
           const SizedBox(height: 8),
           _buildPersonalInfo(profile),

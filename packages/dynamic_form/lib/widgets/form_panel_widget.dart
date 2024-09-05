@@ -191,7 +191,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
       radius: const Radius.circular(16),
       color: Colors.grey.shade300,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: FormBuilderField(
           enabled: !widget.readOnly,
           validator: (value) {
@@ -287,8 +287,12 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                       IconButton(
                         onPressed:
                             widget.readOnly ? null : () => removePanel(key),
-                        icon: const Icon(Icons.delete,
-                            color: Color.fromARGB(255, 242, 100, 90)),
+                        icon: Icon(
+                          Icons.delete,
+                          color: widget.readOnly
+                              ? Colors.grey
+                              : const Color.fromARGB(255, 242, 100, 90),
+                        ),
                       ),
                     ],
                   ),

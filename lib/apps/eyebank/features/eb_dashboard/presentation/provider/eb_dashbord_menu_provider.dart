@@ -44,7 +44,7 @@ class EbDashboardMenuProvider extends ChangeNotifier {
     ),
     MenuItem(
       id: 1,
-      title: "Recipient Records",
+      title: "Recipients Records",
       icon: Icons.folder,
     ),
     MenuItem(
