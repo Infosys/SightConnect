@@ -8,9 +8,9 @@ class EyeBankErrorCard {
   static void showErrorDialog(EBFailure failure, BuildContext context) {
     int statusCode = failure.statusCode ?? 500;
     String statusMessage = failure.errorMessage;
-    String? details = failure.errorObject?.detail;
+    // String? details = failure.errorObject?.detail;
     String? errorMessage = failure.errorObject?.message;
-    String displayMessage = errorMessage ?? details ?? "An error occurred";
+    String displayMessage = errorMessage ?? _getErrorMessage(statusCode);
     if (failure is EBServerFailure) {
       showDialog(
         context: context,
@@ -40,10 +40,10 @@ class EyeBankErrorCard {
 
   static void showErrorToast(EBFailure failure, BuildContext context) {
     int statusCode = failure.statusCode ?? 500;
-    // String statusMessage = failure.errorMessage;
-    String? details = failure.errorObject?.detail;
+    String statusMessage = failure.errorMessage;
+    // String? details = failure.errorObject?.detail;
     String? errorMessage = failure.errorObject?.message;
-    String displayMessage = errorMessage ?? details ?? "An error occurred";
+    String displayMessage = errorMessage ?? _getErrorMessage(statusCode);
     if (failure is EBServerFailure) {
       Fluttertoast.showToast(
         msg: "Error: $statusCode\n$displayMessage",
@@ -70,9 +70,9 @@ class EyeBankErrorCard {
   static void showErrorSncakBar(EBFailure failure, BuildContext context) {
     int statusCode = failure.statusCode ?? 500;
     String statusMessage = failure.errorMessage;
-    String? details = failure.errorObject?.detail;
+    // String? details = failure.errorObject?.detail;
     String? errorMessage = failure.errorObject?.message;
-    String displayMessage = errorMessage ?? details ?? "An error occurred";
+    String displayMessage = errorMessage ?? _getErrorMessage(statusCode);
     if (failure is EBServerFailure) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -103,23 +103,6 @@ class ErrorCard extends StatelessWidget {
   const ErrorCard(
       {Key? key, required this.statusCode, this.statusMessage, this.details})
       : super(key: key);
-
-  String _getErrorMessage(int statusCode) {
-    switch (statusCode) {
-      case 400:
-        return 'Bad Request: The server cannot process the request.';
-      case 401:
-        return 'Unauthorized: Authentication is required.';
-      case 403:
-        return 'Forbidden: You don\'t have permission to access this resource.';
-      case 404:
-        return 'Not Found: The requested resource could not be found.';
-      case 500:
-        return 'Internal Server Error: Something went wrong on the server.';
-      default:
-        return 'An error occurred. Please try again later.';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,5 +135,22 @@ class ErrorCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+String _getErrorMessage(int statusCode) {
+  switch (statusCode) {
+    case 400:
+      return 'Bad Request: The server cannot process the request.';
+    case 401:
+      return 'Unauthorized: Authentication is required.';
+    case 403:
+      return 'Forbidden: You don\'t have permission to access this resource.';
+    case 404:
+      return 'Not Found: The requested resource could not be found.';
+    case 500:
+      return 'Internal Server Error: Something went wrong on the server.';
+    default:
+      return 'An error occurred. Please try again later.';
   }
 }
