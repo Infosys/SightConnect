@@ -151,6 +151,7 @@ flutter:
     - assets/drawer_icons/
     - assets/nav_icons/
     - assets/images/animation_up.gif
+    - assets/images/distance_va_instruction.svg
 
   #   - images/a_dot_ham.jpeg
 

@@ -299,7 +299,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
     await ref.read(distanceTumblingTestProvider).saveVisionAcuityResponseToDB();
     navigator
       ..pop()
-      // ..pop()
+      ..pop()
       ..pop();
   }
 
@@ -325,7 +325,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
           ..pop()
           ..pop()
           ..pop()
-          // ..pop()
+          ..pop()
           ..pop()
           ..pop()
           ..pop()
@@ -339,7 +339,7 @@ class DistanceVisualAcuitySuccessDialog extends HookConsumerWidget {
           ..pop()
           ..pop()
           ..pop()
-          // ..pop()
+          ..pop()
           ..pop()
           ..pop()
           ..pop()
