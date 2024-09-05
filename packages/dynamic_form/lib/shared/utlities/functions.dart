@@ -212,9 +212,8 @@ class VisibiltyWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: computeExp(field.visibleIf, formKey.currentState?.instantValue),
-      child: child,
-    );
+    final isVisible =
+        computeExp(field.visibleIf, formKey.currentState?.instantValue);
+    return isVisible ? child : const SizedBox.shrink();
   }
 }
