@@ -194,8 +194,8 @@ class _OrganRequestCard extends StatelessWidget {
             spacing: 16.0,
             runSpacing: 8.0,
             children: [
-              _buildDetailColumn('Donor Name:', recipientName),
-              _buildDetailColumn('Donor Age:', recipientAge),
+              _buildDetailColumn('Recipient Name:', recipientName),
+              _buildDetailColumn('Recipient  Age:', recipientAge),
               _buildDetailColumn('Procedures:', procedures),
               _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
             ],

@@ -48,6 +48,7 @@ class FormChip extends HookWidget {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       backgroundColor: Colors.grey[200],
+
       selectedColor: Theme.of(context).primaryColor,
       onChanged: (value) {
         selectedValue.value = value!;
