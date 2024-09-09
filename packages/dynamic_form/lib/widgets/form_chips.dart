@@ -47,7 +47,7 @@ class FormChip extends HookWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      backgroundColor: Colors.grey[200],
+      // backgroundColor: Colors.grey[200],
 
       selectedColor: Theme.of(context).primaryColor,
       onChanged: (value) {

@@ -61,6 +61,7 @@ class RecentCases extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 8),
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

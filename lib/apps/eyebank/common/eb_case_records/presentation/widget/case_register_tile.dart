@@ -41,7 +41,7 @@ class EBCaseCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildDetailColumn('Encounter ID', item.encounterId ?? ''),
+                _buildDetailColumn('ID', item.encounterId ?? ''),
                 const SizedBox(width: 8),
                 _buildDetailColumn(
                     'Intimate Date', item.intimateDate.formateDate),
@@ -171,7 +171,7 @@ class EBCaseCard extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(
         maxWidth: 120,
-        maxHeight: 60,
+        maxHeight: 50,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,13 +186,15 @@ class EBCaseCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4.0),
-          Text(
-            value.toString(),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: applyRobotoFont(
-              fontSize: 12.0,
-              color: Colors.black,
+          Flexible(
+            child: Text(
+              value.toString(),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 12.0,
+                color: Colors.black,
+              ),
             ),
           ),
         ],

@@ -136,6 +136,8 @@ class ElementClassEntity {
   final String? inputType;
   final dynamic initialValue;
   final String? visibleIf;
+  final String? setValueIf;
+  final String? setValueExpression;
 
   ElementClassEntity({
     required this.type,
@@ -162,6 +164,8 @@ class ElementClassEntity {
     this.maxRepeat,
     this.inputType,
     this.visibleIf,
+    this.setValueIf,
+    this.setValueExpression,
   });
 
   factory ElementClassEntity.fromJson(Map<String, dynamic> json) =>
