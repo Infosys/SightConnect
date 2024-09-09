@@ -38,8 +38,11 @@ class EBCaseCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              runAlignment: WrapAlignment.start,
+              alignment: WrapAlignment.start,
               children: [
                 _buildDetailColumn('ID', item.encounterId ?? ''),
                 const SizedBox(width: 8),
@@ -51,7 +54,30 @@ class EBCaseCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 _buildDetailColumn(
                     'Notifier Name', item.notifierBrief?.name ?? ''),
-                const Spacer(),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    runAlignment: WrapAlignment.spaceBetween,
+                    runSpacing: 8,
+                    children: [
+                      if (item.activeStages.isEmpty)
+                        ..._buildActiveStageChips(
+                          ["CASE CLOSED"],
+                          AppColor.grey,
+                        ),
+                      ..._buildActiveStageChips(
+                        item.activeStages
+                            .map((e) => e.displayValue.toUpperCase())
+                            .toList(),
+                        AppColor.primary,
+                      ),
+                    ],
+                  ),
+                ),
                 TextButton(
                   onPressed: () => _showDetails(context),
                   child: Text(
@@ -63,24 +89,6 @@ class EBCaseCard extends StatelessWidget {
                     ),
                   ),
                 )
-              ],
-            ),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.start,
-              runAlignment: WrapAlignment.spaceBetween,
-              runSpacing: 8,
-              children: [
-                if (item.activeStages.isEmpty)
-                  ..._buildActiveStageChips(
-                    ["CASE CLOSED"],
-                    AppColor.grey,
-                  ),
-                ..._buildActiveStageChips(
-                  item.activeStages
-                      .map((e) => e.displayValue.toUpperCase())
-                      .toList(),
-                  AppColor.primary,
-                ),
               ],
             ),
           ],
