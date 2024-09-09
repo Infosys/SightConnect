@@ -108,6 +108,10 @@ class OptometristTriageMapper {
       eyeScanAssistance: ref.read(feedBackProvider).eyeScanAssistance,
       redEye: ref.read(feedBackProvider).isRedEye,
       cataract: ref.read(feedBackProvider).isCataract,
+      redEyeOD: ref.read(feedBackProvider).isRedEyeRightEye,
+      cataractOD: ref.read(feedBackProvider).isCataractRightEye,
+      redEyeOS: ref.read(feedBackProvider).isRedEyeLeftEye,
+      cataractOS: ref.read(feedBackProvider).isCataractLeftEye,
       languageUsed:
           ref.read(globalLanguageProvider).currentLocale?.languageCode,
       longDistanceUsed:

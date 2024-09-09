@@ -67,6 +67,10 @@ _$OptometristTriageResponseImpl _$$OptometristTriageResponseImplFromJson(
       eyeScanAssistance: json['eyeScanAssistance'] as bool?,
       redEye: json['redEye'] as bool?,
       cataract: json['cataract'] as bool?,
+      redEyeOS: json['redEyeOS'] as bool?,
+      redEyeOD: json['redEyeOD'] as bool?,
+      cataractOD: json['cataractOD'] as bool?,
+      cataractOS: json['cataractOS'] as bool?,
       languageUsed: json['languageUsed'] as String?,
       longDistanceUsed: json['longDistanceUsed'] as String?,
     );
@@ -123,6 +127,10 @@ Map<String, dynamic> _$$OptometristTriageResponseImplToJson(
       'eyeScanAssistance': instance.eyeScanAssistance,
       'redEye': instance.redEye,
       'cataract': instance.cataract,
+      'redEyeOS': instance.redEyeOS,
+      'redEyeOD': instance.redEyeOD,
+      'cataractOD': instance.cataractOD,
+      'cataractOS': instance.cataractOS,
       'languageUsed': instance.languageUsed,
       'longDistanceUsed': instance.longDistanceUsed,
     };
