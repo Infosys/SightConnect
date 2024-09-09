@@ -61,8 +61,9 @@ class EBCaseCard extends StatelessWidget {
                 Expanded(
                   child: Wrap(
                     crossAxisAlignment: WrapCrossAlignment.start,
-                    runAlignment: WrapAlignment.spaceBetween,
-                    runSpacing: 8,
+                    runAlignment: WrapAlignment.start,
+                    spacing: 8,
+                    runSpacing: 4,
                     children: [
                       if (item.activeStages.isEmpty)
                         ..._buildActiveStageChips(
