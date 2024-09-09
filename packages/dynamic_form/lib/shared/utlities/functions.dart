@@ -23,8 +23,9 @@ import '../../widgets/form_text_area.dart';
 Widget getField(
   ElementClassEntity? field,
   GlobalKey<FormBuilderState> key,
-  bool readOnly,
-) {
+  bool readOnly, {
+  Function(Object?)? callBack,
+}) {
   if (field == null) {
     return Container();
   }
@@ -49,7 +50,8 @@ Widget getField(
             field: field,
             onChanged: (value) {
               globalRebuildNotifier.value = !globalRebuildNotifier.value;
-              debugPrint(value.toString());
+              key.currentState?.setInternalFieldValue(field.name, value);
+              callBack?.call(value);
             }),
       );
 
@@ -60,7 +62,6 @@ Widget getField(
         child: FormRadio(
           field: field,
           onChanged: (value) {
-            globalRebuildNotifier.value = !globalRebuildNotifier.value;
             debugPrint(value.toString());
           },
         ),

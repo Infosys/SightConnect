@@ -318,6 +318,10 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                         ),
                         widget.globalFormKey,
                         widget.readOnly,
+                        callBack: (value) {
+                          formatedInitialValue[
+                              '${widget.field.elements![i].name}_$key'] = value;
+                        },
                       ),
                     ),
                 ],
