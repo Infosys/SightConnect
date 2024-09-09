@@ -309,6 +309,11 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                           name: '${widget.field.elements![i].name}_$key',
                           initialValue: formatedInitialValue[
                               '${widget.field.elements![i].name}_$key'],
+                          choices: _getFilteredChoices(
+                            widget.field.elements?[i].name ?? '',
+                            widget.field.elements?[i].choices,
+                            formKey.currentState?.instantValue ?? {},
+                          ),
                         ),
                         widget.globalFormKey,
                         widget.readOnly,
@@ -321,5 +326,31 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         ),
       ],
     );
+  }
+
+  List<ChoiceElementEntity> _getFilteredChoices(
+    String fieldName,
+    List<ChoiceElementEntity>? choices,
+    Map<String, dynamic> valueMap,
+  ) {
+    if (choices == null || choices.isEmpty) {
+      return [];
+    }
+
+    final List<String> occupiedChoices = [];
+    for (var element in valueMap.entries) {
+      if (element.key.contains(fieldName)) {
+        occupiedChoices.add(element.value.toString());
+      }
+    }
+
+    final List<ChoiceElementEntity> filteredChoices = [];
+    for (var element in choices) {
+      if (!occupiedChoices.contains(element.name)) {
+        filteredChoices.add(element);
+      }
+    }
+
+    return filteredChoices.isEmpty ? [] : filteredChoices;
   }
 }
