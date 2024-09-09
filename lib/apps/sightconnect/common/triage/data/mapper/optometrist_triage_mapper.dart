@@ -106,8 +106,8 @@ class OptometristTriageMapper {
       visualAcuityAssistance: ref.read(feedBackProvider).visualAcuityAssistance,
       visualAcuityAided: ref.read(feedBackProvider).visualAcuityAided,
       eyeScanAssistance: ref.read(feedBackProvider).eyeScanAssistance,
-      redEye: ref.read(feedBackProvider).isRedEye,
-      cataract: ref.read(feedBackProvider).isCataract,
+      redEye: null, //logic implemented on backend
+      cataract: null, //logic implemented on backend
       redEyeOD: ref.read(feedBackProvider).isRedEyeRightEye,
       cataractOD: ref.read(feedBackProvider).isCataractRightEye,
       redEyeOS: ref.read(feedBackProvider).isRedEyeLeftEye,
