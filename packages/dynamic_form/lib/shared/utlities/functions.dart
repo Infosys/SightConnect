@@ -208,13 +208,18 @@ _getInitialValue(
     Log.i('Initial Value: $value');
     field = field.copyWith(
       initialValue: value.toString(),
-      readOnly: true,
+      readOnly: value != null && value.toString().isNotEmpty,
     );
-    // Use Future.microtask to defer the state update
+
     Future.microtask(() {
-      formKey.currentState?.fields[field!.name]?.didChange(value.toString());
+      final currentField = formKey.currentState?.fields[field?.name];
+      if (currentField != null && currentField.value != value.toString()) {
+        currentField.didChange(value.toString());
+        globalRebuildNotifier.value = !globalRebuildNotifier.value;
+      }
     });
   }
+
   return field;
 }
 
