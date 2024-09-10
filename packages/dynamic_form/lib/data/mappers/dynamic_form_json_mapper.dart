@@ -77,7 +77,7 @@ class DynamicFormJsonMapper {
                   initialValue:
                       _getInitialValType(_mapToFormType(element.type), element),
                   type: _mapToFormType(element.type),
-                  name: element.name.toString(),
+                  name: element.name.toString().trim(),
                   title: element.title ?? '',
                   isRequired: element.isRequired ?? false,
                   requiredErrorText: element.requiredErrorText ?? '',
@@ -132,12 +132,12 @@ class DynamicFormJsonMapper {
     try {
       if (type == DynamicFormType.TEXTFIELD ||
           type == DynamicFormType.TEXTAREA) {
-        if (initialValues?[element.name.toString()] == null) {
+        if (initialValues?[element.name.toString().trim()] == null) {
           return null;
         }
-        return initialValues?[element.name.toString()].toString();
+        return initialValues?[element.name.toString().trim()].toString();
       } else {
-        return initialValues?[element.name.toString()];
+        return initialValues?[element.name.toString().trim()];
       }
     } catch (e) {
       debugPrint('DynamicFormJsonMapper _getInitialValType: $e');
