@@ -99,11 +99,7 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
-                  enableIf: getDummyExpression(element.visibleIf),
-                  resetValueIf: getDummyExpression(element.visibleIf),
-                  requiredIf: getDummyExpression(element.visibleIf),
-                  setValueIf: getDummyExpression(element.visibleIf),
-                  setValueExpression: getDummyExpression(element.visibleIf),
+                  setValueExpression: getDummyExpression(element.name),
                 ),
               );
             }
@@ -120,12 +116,30 @@ class DynamicFormJsonMapper {
     }
   }
 
-  getDummyExpression(String? visibleIf) {
-    try {
-      return visibleIf;
-    } catch (e) {
-      debugPrint('DynamicFormJsonMapper getVisibleIf: $e');
-      rethrow;
+  getDummyExpression(String fieldName) {
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics') {
+      return 'sum corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics') {
+      return 'sum corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics.volume';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.colloid.metrics') {
+      return 'sum corneaRetrievalRequest.hemodilution.properties.colloid.metrics.volume';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused') {
+      return 'corneaRetrievalRequest.hemodilution.properties.colloid.metrics';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused') {
+      return 'corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
+      return 'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics';
     }
   }
 

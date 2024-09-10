@@ -68,48 +68,6 @@ class PageEntity {
       };
 }
 
-// class PageElementEntity {
-//   final FormPanelType type;
-//   final String name;
-//   final List<ElementClassEntity> elements;
-//   final bool repeats;
-//   final int? minRepeat;
-//   final int? maxRepeat;
-//   final List<dynamic>? initialValue;
-
-//   PageElementEntity({
-//     required this.type,
-//     required this.name,
-//     required this.elements,
-//     required this.repeats,
-//     required this.minRepeat,
-//     required this.maxRepeat,
-//     this.initialValue,
-//   });
-
-//   factory PageElementEntity.fromJson(Map<String, dynamic> json) =>
-//       PageElementEntity(
-//         type: json["type"],
-//         name: json["name"],
-//         elements: List<ElementClassEntity>.from(
-//             json["elements"].map((x) => ElementClassEntity.fromJson(x))),
-//         repeats: json["repeats"],
-//         minRepeat: json["minRepeat"],
-//         maxRepeat: json["maxRepeat"],
-//         initialValue: json["initialValue"],
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "type": type,
-//         "name": name,
-//         "elements": List<dynamic>.from(elements.map((x) => x.toJson())),
-//         "repeats": repeats,
-//         "minRepeat": minRepeat,
-//         "maxRepeat": maxRepeat,
-//         "initialValue": initialValue,
-//       };
-// }
-
 class ElementClassEntity {
   final DynamicFormType type;
   final String name;
@@ -244,11 +202,16 @@ class ElementClassEntity {
         "inputType": inputType,
         "initialValue": initialValue,
         "visibleIf": visibleIf,
+        "enableIf": enableIf,
+        "resetValueIf": resetValueIf,
+        "requiredIf": requiredIf,
+        "setValueIf": setValueIf,
+        "setValueExpression": setValueExpression,
       };
 
   @override
   String toString() {
-    return 'ElementClassEntity{type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType initialValue: $initialValue, visibleIf: $visibleIf}';
+    return 'ElementClassEntity(type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType, initialValue: $initialValue, visibleIf: $visibleIf, enableIf: $enableIf, resetValueIf: $resetValueIf, requiredIf: $requiredIf, setValueIf: $setValueIf, setValueExpression: $setValueExpression)';
   }
 
   ElementClassEntity copyWith({

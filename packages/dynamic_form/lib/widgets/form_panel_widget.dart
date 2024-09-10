@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
+import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
@@ -99,6 +100,32 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     }
   }
 
+  createDynamicExpression() {
+    final String setValueExpression = widget.field.setValueExpression ?? '';
+
+    String operatorValue = setValueExpression.split(' ').first;
+    String fieldValue = setValueExpression.split(' ').last;
+    String finalExpression = '';
+
+    switch (operatorValue) {
+      case 'sum':
+        for (var key in repeatedPanelKeys) {
+          finalExpression += '${fieldValue}_$key + ';
+          if (repeatedPanelKeys.last == key) {
+            finalExpression =
+                finalExpression.substring(0, finalExpression.length - 3);
+          }
+        }
+    }
+    final expressionValue = ArithmeticExpressionEvaluator.evaluate(
+        finalExpression, formKey.currentState?.instantValue ?? {});
+
+    Log.f({
+      'expressionValue': expressionValue,
+      'finalExpression': finalExpression,
+    });
+  }
+
   _createdPrefilledPanels() {
     try {
       List<dynamic> prefilledPanels = widget.field.initialValue ?? [];
@@ -185,6 +212,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    if (widget.field.setValueExpression != null) {
+      createDynamicExpression();
+    }
 
     return DottedBorder(
       borderType: BorderType.RRect,
@@ -208,6 +238,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
           },
           builder: (field) {
             return FormBuilder(
+              onChanged: () {},
               key: formKey,
               enabled: !widget.readOnly,
               child: SizedBox(
