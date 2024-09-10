@@ -79,7 +79,7 @@ jobs:
           debug: false
 
       - name: Upload AAB
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: app-release-${{ env.VERSION_NUMBER}}
           path: ./build/app/outputs/bundle/release/app-release-${{ env.VERSION_NUMBER}}.aab
