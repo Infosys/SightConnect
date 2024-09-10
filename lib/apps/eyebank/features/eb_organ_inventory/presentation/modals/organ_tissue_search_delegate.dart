@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -141,9 +142,12 @@ class _OrganTissueSearchScreenState
           builderDelegate: PagedChildBuilderDelegate<Content>(
             itemBuilder: (context, item, index) {
               return InkWell(
-                onTap: () => _showDetailsBottomSheet(context, item),
+                onDoubleTap: () => _showDetailsBottomSheet(context, item),
                 child: Container(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12.0,
+                    horizontal: 16.0,
+                  ),
                   margin: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -166,15 +170,14 @@ class _OrganTissueSearchScreenState
                         runAlignment: WrapAlignment.spaceBetween,
                         runSpacing: 16.0,
                         children: [
+                          _buildDetailColumn('Tissue ID', item.tissueId ?? ''),
                           _buildDetailColumn(
-                              'Tissue ID', item.tissueId ?? '--'),
-                          _buildDetailColumn(
-                              'Cell Count', item.cellCount ?? '--'),
+                              'Cell Count', item.cellCount ?? ''),
                           _buildDetailColumn(
                             'Donor Age',
                             item.donorAge != null
                                 ? item.donorAge.toString()
-                                : "--",
+                                : "",
                           ),
                           _buildDetailColumn(
                             'Tissue Expiry',
@@ -219,6 +222,7 @@ class _OrganTissueSearchScreenState
   }
 
   Widget _buildDetailColumn(String label, dynamic value) {
+    final isVisible = label == "Tissue ID";
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -232,13 +236,31 @@ class _OrganTissueSearchScreenState
           ),
         ),
         const Spacer(),
-        Text(
-          value.toString(),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: applyRobotoFont(
-            fontSize: 12.0,
-            color: AppColor.black,
+        InkWell(
+          onTap: !isVisible
+              ? null
+              : () {
+                  if (value != null && value != '') {
+                    Clipboard.setData(ClipboardData(text: value.toString()));
+                  }
+                },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            decoration: !isVisible
+                ? null
+                : BoxDecoration(
+                    color: AppColor.pureBlue,
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+            child: Text(
+              value.toString(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: applyRobotoFont(
+                fontSize: 12.0,
+                color: AppColor.black,
+              ),
+            ),
           ),
         ),
       ],
