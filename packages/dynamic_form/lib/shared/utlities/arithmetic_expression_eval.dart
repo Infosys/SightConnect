@@ -59,10 +59,22 @@ class ValueExpression extends Expression {
 
   @override
   dynamic evaluate(Map<String, dynamic> valueMap) {
+    var evaluatedValue = value;
     if (value is String && valueMap.containsKey(value)) {
-      return valueMap[value];
+      evaluatedValue = valueMap[value];
     }
-    return value;
+    if (evaluatedValue == null) {
+      return 0; // Treat null as 0
+    }
+    if (evaluatedValue is String) {
+      if (int.tryParse(evaluatedValue) != null) {
+        return int.parse(evaluatedValue);
+      }
+      if (double.tryParse(evaluatedValue) != null) {
+        return double.parse(evaluatedValue);
+      }
+    }
+    return evaluatedValue;
   }
 }
 
@@ -160,3 +172,33 @@ class ArithmeticExpressionEvaluator {
     }
   }
 }
+
+// // Example usage
+// void main() {
+//   var valueMap = {
+//     'a': '5',
+//     'b': '3',
+//     'c': '2',
+//     'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961528028':
+//         '10',
+//     'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961849814':
+//         '20',
+//     'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725962008657':
+//         null
+//   };
+//   var expression1 = 'a + b * (c - 1)';
+//   var expression2 = '(a + b) * c';
+//   var expression3 = 'a + (b * c) - (a / b)';
+//   var expression4 =
+//       'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961528028 + corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961849814 + corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725962008657';
+
+//   var result1 = ArithmeticExpressionEvaluator.evaluate(expression1, valueMap);
+//   var result2 = ArithmeticExpressionEvaluator.evaluate(expression2, valueMap);
+//   var result3 = ArithmeticExpressionEvaluator.evaluate(expression3, valueMap);
+//   var result4 = ArithmeticExpressionEvaluator.evaluate(expression4, valueMap);
+
+//   print('Result of "$expression1": $result1'); // Output: 8
+//   print('Result of "$expression2": $result2'); // Output: 16
+//   print('Result of "$expression3": $result3'); // Output: 10.333333333333334
+//   print('Result of "$expression4": $result4'); // Output: 30
+// }

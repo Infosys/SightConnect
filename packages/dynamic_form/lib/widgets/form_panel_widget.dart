@@ -123,6 +123,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     Log.f({
       'expressionValue': expressionValue,
       'finalExpression': finalExpression,
+      'instantValue': formKey.currentState?.instantValue,
     });
   }
 
@@ -191,7 +192,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
   }
 
   String getUniqueKey() {
-    return uuid.v4();
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 
   List<dynamic> _formatValue(Map<String, dynamic> value) {
