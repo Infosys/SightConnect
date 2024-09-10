@@ -4,6 +4,7 @@ import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
 import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
+import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:uuid/uuid.dart';
@@ -76,7 +77,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     with AutomaticKeepAliveClientMixin {
   final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
-  Map<String, dynamic> formatedInitialValue = {};
+  Map<String, dynamic> formattedInitialValues = {};
   final Uuid uuid = const Uuid();
   int maxRepeats = 0;
   int minRepeats = 0;
@@ -100,7 +101,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     }
   }
 
-  createDynamicExpression() {
+  evaluateDynamicExpression() {
     final String setValueExpression = widget.field.setValueExpression ?? '';
 
     String operatorValue = setValueExpression.split(' ').first;
@@ -141,9 +142,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         var key = getUniqueKey();
         repeatedPanelKeys.add(key);
       }
-      formatedInitialValue = _formatInitialValue(prefilledPanels);
+      formattedInitialValues = _formatInitialValue(prefilledPanels);
       // Log.d(
-      //     "RepeatingFieldPanel _createdPrefilledPanels: $formatedInitialValue");
+      //     "RepeatingFieldPanel _createdPrefilledPanels: $formattedInitialValues");
     } catch (e) {
       Log.e("RepeatingFieldPanel _createdPrefilledPanels error: $e");
     }
@@ -176,9 +177,6 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     setState(() {
       repeatedPanelKeys.add(getUniqueKey());
     });
-    if (widget.field.setValueExpression != null) {
-      createDynamicExpression();
-    }
   }
 
   void removePanel(String key) {
@@ -193,6 +191,10 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         formKey.currentState?.fields[element]?.reset();
         formKey.currentState?.removeInternalFieldValue(element);
       });
+    }
+    if (widget.field.setValueExpression != null) {
+      evaluateDynamicExpression();
+      globalRebuildNotifier.value = !globalRebuildNotifier.value;
     }
 
     // Trigger a rebuild to ensure UI updates correctly
@@ -337,7 +339,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                       child: getField(
                         widget.field.elements![i].copyWith(
                           name: '${widget.field.elements![i].name}_$key',
-                          initialValue: formatedInitialValue[
+                          initialValue: formattedInitialValues[
                               '${widget.field.elements![i].name}_$key'],
                           choices: _getFilteredChoices(
                             '${widget.field.elements![i].name}_$key',
@@ -349,8 +351,14 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                         widget.globalFormKey,
                         widget.readOnly,
                         callBack: (value) {
-                          formatedInitialValue[
+                          formattedInitialValues[
                               '${widget.field.elements![i].name}_$key'] = value;
+
+                          if (widget.field.setValueExpression != null) {
+                            evaluateDynamicExpression();
+                            globalRebuildNotifier.value =
+                                !globalRebuildNotifier.value;
+                          }
                         },
                       ),
                     ),

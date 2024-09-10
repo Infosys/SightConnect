@@ -73,7 +73,7 @@ class ValueExpression extends Expression {
       if (double.tryParse(evaluatedValue) != null) {
         return double.parse(evaluatedValue);
       }
-      Log.e('Error: Value "$evaluatedValue" is not a valid number.');
+      // Log.e('Error: Value "$evaluatedValue" is not a valid number.');
       return 0; // Return 0 for invalid number strings
     }
     return evaluatedValue;
@@ -176,7 +176,9 @@ class ArithmeticExpressionEvaluator {
   static dynamic evaluate(String expression, Map<String, dynamic> valueMap) {
     try {
       var exp = ExpressionFactory.parse(expression);
-      return exp.evaluate(valueMap);
+      final result = exp.evaluate(valueMap);
+      Log.f('Result of "$expression": $result');
+      return result;
     } catch (e) {
       Log.e('Error evaluating arithmetic expression: $expression $e');
       return null;
@@ -195,24 +197,33 @@ void main() {
     'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961849814':
         '20',
     'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725962008657':
-        null
+        null,
+    'corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused':
+        '15',
+    'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused':
+        '25'
   };
+
   var expression1 = 'a + b * (c - 1)';
   var expression2 = '(a + b) * c';
   var expression3 = 'a + (b * c) - (a / b)';
   var expression4 =
       'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961528028 + corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725961849814 + corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume_1725962008657';
   var expression5 = 'a'; // Simple value expression
+  var expression6 =
+      'corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused';
 
   var result1 = ArithmeticExpressionEvaluator.evaluate(expression1, valueMap);
   var result2 = ArithmeticExpressionEvaluator.evaluate(expression2, valueMap);
   var result3 = ArithmeticExpressionEvaluator.evaluate(expression3, valueMap);
   var result4 = ArithmeticExpressionEvaluator.evaluate(expression4, valueMap);
   var result5 = ArithmeticExpressionEvaluator.evaluate(expression5, valueMap);
+  var result6 = ArithmeticExpressionEvaluator.evaluate(expression6, valueMap);
 
   print('Result of "$expression1": $result1'); // Output: 8
   print('Result of "$expression2": $result2'); // Output: 16
   print('Result of "$expression3": $result3'); // Output: 10.333333333333334
   print('Result of "$expression4": $result4'); // Output: 30
   print('Result of "$expression5": $result5'); // Output: 5
+  print('Result of "$expression6": $result6'); // Output: 40
 }

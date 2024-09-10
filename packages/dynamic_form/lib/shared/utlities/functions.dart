@@ -38,9 +38,7 @@ Widget getField(
         formKey: key,
         child: FormTextField(
           field: _getInitialValue(field, key),
-          onChanged: (value) {
-            debugPrint(value);
-          },
+          onChanged: callBack,
           formKey: key,
         ),
       );
@@ -208,7 +206,14 @@ _getInitialValue(
     final value = ArithmeticExpressionEvaluator.evaluate(
         field!.setValueExpression!, formKey.currentState?.instantValue ?? {});
     Log.i('Initial Value: $value');
-    field = field.copyWith(initialValue: value);
+    field = field.copyWith(
+      initialValue: value.toString(),
+      readOnly: true,
+    );
+    // Use Future.microtask to defer the state update
+    Future.microtask(() {
+      formKey.currentState?.fields[field!.name]?.didChange(value.toString());
+    });
   }
   return field;
 }

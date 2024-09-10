@@ -141,6 +141,15 @@ class DynamicFormJsonMapper {
         'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
       return 'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics';
     }
+    if (fieldName ==
+        "corneaRetrievalRequest.hemodilution.properties.crystalloid.ABC") {
+      return "corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused + corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused";
+    }
+
+    if (fieldName ==
+        "corneaRetrievalRequest.hemodilution.properties.crystalloid.BC") {
+      return "corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused";
+    }
   }
 
   _getInitialValType(DynamicFormType type, ElementClassModel element) {
