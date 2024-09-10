@@ -1,3 +1,4 @@
+import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -20,7 +21,12 @@ class FormTextField extends StatelessWidget {
     return FormBuilderTextField(
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      initialValue: field.initialValue?.toString(),
+      initialValue: field.setValueExpression != null
+          ? ArithmeticExpressionEvaluator.evaluate(
+              field.setValueExpression ?? '',
+              formKey.currentState?.instantValue ?? {},
+            ).toString()
+          : field.initialValue?.toString(),
       name: field.name,
       keyboardType: _getKeyBoardType(),
       decoration: InputDecoration(

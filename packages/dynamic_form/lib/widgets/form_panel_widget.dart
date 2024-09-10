@@ -125,6 +125,11 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
       'finalExpression': finalExpression,
       'instantValue': formKey.currentState?.instantValue,
     });
+
+    widget.globalFormKey.currentState?.setInternalFieldValue(
+      widget.field.name,
+      expressionValue,
+    );
   }
 
   _createdPrefilledPanels() {
