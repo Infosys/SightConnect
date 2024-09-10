@@ -96,7 +96,7 @@ class DioService extends StateNotifier<Dio> {
       DioTokenInterceptor(ref, state),
       LogInterceptor(
         requestHeader: true,
-        requestBody: false,
+        requestBody: true,
         request: true,
         responseBody: false,
         responseHeader: false,

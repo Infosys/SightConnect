@@ -227,15 +227,8 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                const Text(
-                                  'Repeating Panel',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
                                 TextButton.icon(
                                   onPressed: widget.readOnly ? null : addPanel,
                                   icon: const Icon(Icons.add),

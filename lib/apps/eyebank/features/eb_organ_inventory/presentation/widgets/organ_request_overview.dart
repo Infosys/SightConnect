@@ -40,7 +40,7 @@ class OrganRequestOverview extends ConsumerWidget {
         },
         itemBuilder: (context, item, index) {
           return _OrganRequestCard(
-            recipientAge: item.recipientDOB ?? '',
+            recipientAge: _getDob(item.recipientDOB),
             recipientName: item.recipientName ?? '',
             encounterId: item.encounterId ?? '',
             tissueTypeRequested: item.tissueTypeRequested ?? '',
@@ -95,6 +95,14 @@ class OrganRequestOverview extends ConsumerWidget {
         defaultPageSize: 10,
       ),
     );
+  }
+
+  _getDob(String? dob) {
+    if (dob == null) {
+      return '';
+    }
+    final date = DateTime.parse(dob);
+    return date.formateDate;
   }
 }
 
@@ -194,8 +202,8 @@ class _OrganRequestCard extends StatelessWidget {
             spacing: 16.0,
             runSpacing: 8.0,
             children: [
-              _buildDetailColumn('Donor Name:', recipientName),
-              _buildDetailColumn('Donor Age:', recipientAge),
+              _buildDetailColumn('Recipient Name:', recipientName),
+              _buildDetailColumn('Recipient  DOB:', recipientAge),
               _buildDetailColumn('Procedures:', procedures),
               _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
             ],

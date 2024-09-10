@@ -1,7 +1,6 @@
 import 'package:dynamic_form/pages/dynamic_form_page.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/models/eb_submit_form_data_request_model.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/data/respositories/eb_repository_impl.dart';
-import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enums.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.dart';
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
@@ -46,7 +45,6 @@ class OrganRequestButton extends StatelessWidget {
                 backButtonIcon: Icons.close,
                 onSubmit: (formResponse, mode) async {
                   try {
-                    logger.f(formResponse);
                     final repo = ref.read(ebRepositoryProvider);
                     final profile = ref.read(globalEBProvider);
                     final performId = profile.userId.toString();
@@ -66,7 +64,7 @@ class OrganRequestButton extends StatelessWidget {
                     final res = await repo.saveIntimationForm(
                       submitData,
                       intimationData.stageVersion,
-                      EBStageName.CORNEA_REQUEST.value,
+                      intimationData.stageName,
                     );
                     res.fold((l) {
                       logger.e(l);
