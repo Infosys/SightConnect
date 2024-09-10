@@ -120,11 +120,11 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     final expressionValue = ArithmeticExpressionEvaluator.evaluate(
         finalExpression, formKey.currentState?.instantValue ?? {});
 
-    Log.f({
-      'expressionValue': expressionValue,
-      'finalExpression': finalExpression,
-      'instantValue': formKey.currentState?.instantValue,
-    });
+    // Log.f({
+    //   'expressionValue': expressionValue,
+    //   'finalExpression': finalExpression,
+    //   'instantValue': formKey.currentState?.instantValue,
+    // });
 
     widget.globalFormKey.currentState?.setInternalFieldValue(
       widget.field.name,
@@ -176,6 +176,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     setState(() {
       repeatedPanelKeys.add(getUniqueKey());
     });
+    if (widget.field.setValueExpression != null) {
+      createDynamicExpression();
+    }
   }
 
   void removePanel(String key) {
@@ -218,9 +221,6 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    if (widget.field.setValueExpression != null) {
-      createDynamicExpression();
-    }
 
     return DottedBorder(
       borderType: BorderType.RRect,

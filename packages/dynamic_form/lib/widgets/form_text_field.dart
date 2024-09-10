@@ -1,10 +1,10 @@
-import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../data/entities/dynamic_form_json_entity.dart';
 
-class FormTextField extends StatelessWidget {
+class FormTextField extends HookWidget {
   const FormTextField({
     super.key,
     required this.field,
@@ -18,15 +18,13 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller =
+        useTextEditingController(text: field.initialValue?.toString());
+    if (field.name == '') {}
     return FormBuilderTextField(
+      controller: controller,
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      initialValue: field.setValueExpression != null
-          ? ArithmeticExpressionEvaluator.evaluate(
-              field.setValueExpression ?? '',
-              formKey.currentState?.instantValue ?? {},
-            ).toString()
-          : field.initialValue?.toString(),
       name: field.name,
       keyboardType: _getKeyBoardType(),
       decoration: InputDecoration(

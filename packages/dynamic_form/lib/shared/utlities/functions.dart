@@ -1,6 +1,8 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
+import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/bool_expression_eval.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
@@ -35,7 +37,7 @@ Widget getField(
         field: field,
         formKey: key,
         child: FormTextField(
-          field: field,
+          field: _getInitialValue(field, key),
           onChanged: (value) {
             debugPrint(value);
           },
@@ -198,6 +200,17 @@ Widget getField(
     default:
       return const SizedBox.shrink();
   }
+}
+
+_getInitialValue(
+    ElementClassEntity? field, GlobalKey<FormBuilderState> formKey) {
+  if (field?.setValueExpression != null) {
+    final value = ArithmeticExpressionEvaluator.evaluate(
+        field!.setValueExpression!, formKey.currentState?.instantValue ?? {});
+    Log.i('Initial Value: $value');
+    field = field.copyWith(initialValue: value);
+  }
+  return field;
 }
 
 class VisibiltyWrapper extends StatefulWidget {
