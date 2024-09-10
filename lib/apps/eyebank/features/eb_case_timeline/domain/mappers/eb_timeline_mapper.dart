@@ -18,7 +18,7 @@ class EBTimelineMapper {
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: m.serviceRequestId,
         stage: _getStageName(m.stage),
-        title: m.title,
+        title: tempStageName(m.stage, m.title),
         stageVersion: _getStageVersion(m.stage, configModel),
         status: _getCaseStatus(m.status ?? ""),
         initiateDate: m.initiateDate,
@@ -47,7 +47,7 @@ class EBTimelineMapper {
         timelineVersion: configModel.timelineVersion,
         serviceRequestId: null,
         stage: _getStageName(stage.stageName),
-        title: stage.title,
+        title: tempStageName(stage.stageName, stage.title),
         stageVersion: stage.stageVersion,
         status: EBStatus.UNKNOWN,
         initiateDate: null,
@@ -58,6 +58,15 @@ class EBTimelineMapper {
 
     //logger.d("FINAL STAGES $data");
     return data;
+  }
+
+  static tempStageName(String? stageName, String? title) {
+    final stage = _getStageName(stageName);
+    if (stage == EBStageName.ADVERSE_REACTION) {
+      return "FOLLOW UP";
+    } else {
+      return title;
+    }
   }
 
   static EBStageName? _getStageName(String? stageName) {
