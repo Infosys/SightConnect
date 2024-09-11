@@ -205,11 +205,6 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         formKey.currentState?.removeInternalFieldValue(element);
       });
     }
-    // if (widget.field.setValueExpression != null) {
-    //   evaluateDynamicExpression();
-    //   globalRebuildNotifier.value = !globalRebuildNotifier.value;
-    // }
-
     // Trigger a rebuild to ensure UI updates correctly
     setState(() {});
   }
