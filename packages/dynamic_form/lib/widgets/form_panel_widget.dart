@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
@@ -75,6 +77,7 @@ class RepeatingFieldPanel extends StatefulWidget {
 
 class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     with AutomaticKeepAliveClientMixin {
+  Timer? _debounceTimer;
   final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
   Map<String, dynamic> formattedInitialValues = {};
@@ -99,6 +102,16 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         repeatedPanelKeys.add(getUniqueKey());
       }
     }
+  }
+
+  void _debounceEvaluateAndRebuild() {
+    if (_debounceTimer?.isActive ?? false) {
+      _debounceTimer?.cancel();
+    }
+    _debounceTimer = Timer(const Duration(seconds: 2), () {
+      evaluateDynamicExpression();
+      globalRebuildNotifier.value = !globalRebuildNotifier.value;
+    });
   }
 
   evaluateDynamicExpression() {
@@ -192,10 +205,10 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         formKey.currentState?.removeInternalFieldValue(element);
       });
     }
-    if (widget.field.setValueExpression != null) {
-      evaluateDynamicExpression();
-      globalRebuildNotifier.value = !globalRebuildNotifier.value;
-    }
+    // if (widget.field.setValueExpression != null) {
+    //   evaluateDynamicExpression();
+    //   globalRebuildNotifier.value = !globalRebuildNotifier.value;
+    // }
 
     // Trigger a rebuild to ensure UI updates correctly
     setState(() {});
@@ -355,9 +368,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                               '${widget.field.elements![i].name}_$key'] = value;
 
                           if (widget.field.setValueExpression != null) {
-                            evaluateDynamicExpression();
-                            globalRebuildNotifier.value =
-                                !globalRebuildNotifier.value;
+                            _debounceEvaluateAndRebuild();
                           }
                         },
                       ),

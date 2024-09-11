@@ -43,6 +43,7 @@ class FormTextField extends HookWidget {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
+
       validator: (value) {
         value = value ?? '';
         if (field.isRequired && value.isEmpty) {
