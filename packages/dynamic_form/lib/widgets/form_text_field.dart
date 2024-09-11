@@ -18,15 +18,15 @@ class FormTextField extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (field.name ==
-        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
-      print('Initial Value: ${field.initialValue}');
-      print('Title: ${field.title}');
-      print('Description: ${field.description}');
-      print('FieldName: ${field.name}');
-      //print smae filed name for form text field
-      print("FormKey: ${formKey.currentState?.fields[field.name]}");
-    }
+    // if (field.name ==
+    //     'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
+    //   print('Initial Value: ${field.initialValue}');
+    //   print('Title: ${field.title}');
+    //   print('Description: ${field.description}');
+    //   print('FieldName: ${field.name}');
+    //   //print smae filed name for form text field
+    //   print("FormKey: ${formKey.currentState?.fields[field.name]}");
+    // }
     final controller =
         useTextEditingController(text: field.initialValue?.toString());
 

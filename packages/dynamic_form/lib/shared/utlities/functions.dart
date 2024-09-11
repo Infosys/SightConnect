@@ -210,23 +210,29 @@ Widget getField(
 
 _getInitialValue(
     ElementClassEntity? field, GlobalKey<FormBuilderState> formKey) {
-  if (field?.setValueExpression != null) {
-    final value = ArithmeticExpressionEvaluator.evaluate(
-        field!.setValueExpression!, formKey.currentState?.instantValue ?? {});
-    Log.i('Initial Value: $value');
-    field = field.copyWith(
-      initialValue: value.toString(),
-      readOnly: value != null && value.toString().isNotEmpty,
-    );
-
-    Future.microtask(() {
-      final currentField = formKey.currentState?.fields[field?.name];
-      if (currentField != null && currentField.value != value.toString()) {
-        currentField.didChange(value.toString());
-        globalRebuildNotifier.value = !globalRebuildNotifier.value;
-      }
-    });
+  if (field == null ||
+      field.setValueExpression == null ||
+      field.setValueExpression == 'null' ||
+      field.setValueExpression!.isEmpty) {
+    return field;
   }
+
+  Log.f('Field: ${field.name} setValueExpression: ${field.setValueExpression}');
+  final value = ArithmeticExpressionEvaluator.evaluate(
+      field.setValueExpression!, formKey.currentState?.instantValue ?? {});
+  Log.i('Initial Value: $value');
+  field = field.copyWith(
+    initialValue: value.toString(),
+    readOnly: value != null && value.toString().isNotEmpty,
+  );
+
+  Future.microtask(() {
+    final currentField = formKey.currentState?.fields[field?.name];
+    if (currentField != null && currentField.value != value.toString()) {
+      currentField.didChange(value.toString());
+      globalRebuildNotifier.value = !globalRebuildNotifier.value;
+    }
+  });
 
   return field;
 }
