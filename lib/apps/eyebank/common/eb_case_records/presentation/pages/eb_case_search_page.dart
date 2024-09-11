@@ -136,6 +136,7 @@ class EBCaseSearchPageState extends ConsumerState<EBCaseSearchPage> {
                           builder: (context) => EbCaseTimeLinePage(
                             encounterID: item.encounterId,
                             timlineVersion: item.timelineVersion,
+                            timelineName: item.timelineName,
                           ),
                         ),
                       );

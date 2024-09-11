@@ -10,22 +10,25 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class EbCaseTimeLinePage extends ConsumerWidget {
   final String? encounterID;
   final String? timlineVersion;
+  final String? timelineName;
 
   const EbCaseTimeLinePage({
     super.key,
     required this.encounterID,
     this.timlineVersion,
+    this.timelineName,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final name = timelineName?.replaceAll('_', ' ');
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(ebCaseTimeLineProvider);
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Case Timeline'),
+          title: Text(name ?? ""),
           actions: [
             TextButton.icon(
               style: TextButton.styleFrom(

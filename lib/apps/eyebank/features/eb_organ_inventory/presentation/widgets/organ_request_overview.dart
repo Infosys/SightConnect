@@ -54,6 +54,7 @@ class OrganRequestOverview extends ConsumerWidget {
               navigator.push(
                 MaterialPageRoute(
                   builder: (context) => OrganInventoryTimline(
+                    timelineName: "CORNEA_TRANSPLANT",
                     encounterID: item.encounterId,
                     timlineVersion: "0.0.1",
                   ),

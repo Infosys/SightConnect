@@ -18,22 +18,25 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class OrganInventoryTimline extends ConsumerWidget {
   final String? encounterID;
   final String? timlineVersion;
+  final String? timelineName;
 
   const OrganInventoryTimline({
     super.key,
     required this.encounterID,
     this.timlineVersion,
+    this.timelineName,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final name = timelineName?.replaceAll('_', ' ');
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(ebOrganTimelineProvider);
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Tissue Timeline'),
+          title: Text(name ?? ''),
         ),
         body: ref
             .watch(ebOrganTimelineProvider(
