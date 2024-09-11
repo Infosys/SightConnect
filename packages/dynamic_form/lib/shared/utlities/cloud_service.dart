@@ -24,12 +24,12 @@ class CloudService {
     }
   }
 
-  Future<String> uploadImage(PlatformFile file) async {
+  Future<String> uploadImage(PlatformFile file, [bool useBytes = false]) async {
     const endpoint = "/services/filems/api/file/sync-upload?doc_type=EYEBANK";
-    // "/services/filems/api/file/sync-upload?doc_type=PROFILE_PIC";
 
     MultipartFile multipartFile;
-    if (kIsWeb) {
+
+    if (kIsWeb || useBytes) {
       multipartFile = MultipartFile.fromBytes(
         file.bytes!,
         filename: file.name,
@@ -62,46 +62,5 @@ class CloudService {
       Log.e(e);
       rethrow;
     }
-  }
-
-  Map<String, String> parseUrl(String url) {
-    Map<String, String> mp = {};
-    String baseUrl = "";
-    String endpoint = "";
-    String fileId = "";
-    int slashcount = 0;
-    for (int i = 0; i < url.length; i++) {
-      if (url[i] == '/') {
-        slashcount++;
-      }
-      if (slashcount < 3) {
-        baseUrl += url[i];
-      } else {
-        endpoint += url[i];
-      }
-    }
-
-    for (int i = endpoint.length - 1; i >= 0; i--) {
-      if (endpoint[i] == '/') {
-        break;
-      }
-
-      fileId += endpoint[i];
-    }
-    fileId = _reverseFileId(fileId);
-
-    mp["baseUrl"] = baseUrl;
-    mp["endPoint"] = endpoint;
-    mp["fileId"] = fileId;
-
-    return mp;
-  }
-
-  String _reverseFileId(String input) {
-    String reversed = '';
-    for (int i = input.length - 1; i >= 0; i--) {
-      reversed += input[i];
-    }
-    return reversed;
   }
 }

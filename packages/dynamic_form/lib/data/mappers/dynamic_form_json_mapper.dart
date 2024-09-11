@@ -255,6 +255,8 @@ class DynamicFormJsonMapper {
           return DynamicFormType.HIDDEN;
         case 'DURATION':
           return DynamicFormType.DURATION;
+        case 'SIGNATURE':
+          return DynamicFormType.SIGNATURE;
         default:
           return DynamicFormType.DEFAULT;
       }

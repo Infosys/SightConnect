@@ -15,6 +15,7 @@ enum DynamicFormType {
   DATE,
   DISPLAY,
   DURATION,
+  SIGNATURE,
   HIDDEN,
 }
 
