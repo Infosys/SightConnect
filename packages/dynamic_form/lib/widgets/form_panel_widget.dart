@@ -341,12 +341,12 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                           name: '${widget.field.elements![i].name}_$key',
                           initialValue: formattedInitialValues[
                               '${widget.field.elements![i].name}_$key'],
-                          choices: _getFilteredChoices(
-                            '${widget.field.elements![i].name}_$key',
-                            widget.field.elements?[i].name ?? '',
-                            widget.field.elements?[i].choices,
-                            formKey.currentState?.instantValue ?? {},
-                          ),
+                          // choices: _getFilteredChoices(
+                          //   '${widget.field.elements![i].name}_$key',
+                          //   widget.field.elements?[i].name ?? '',
+                          //   widget.field.elements?[i].choices,
+                          //   formKey.currentState?.instantValue ?? {},
+                          // ),
                         ),
                         widget.globalFormKey,
                         widget.readOnly,
