@@ -196,10 +196,9 @@ class EBCaseCard extends StatelessWidget {
           ),
           const SizedBox(height: 4.0),
           Flexible(
-            child: Text(
+            child: SelectableText(
               value.toString(),
               maxLines: 2,
-              overflow: TextOverflow.ellipsis,
               style: applyRobotoFont(
                 fontSize: 12.0,
                 color: Colors.black,
