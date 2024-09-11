@@ -133,102 +133,86 @@ class _OrganRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const CircleAvatar(
-                maxRadius: 16,
-                backgroundColor: AppColor.pureBlue,
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 16,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    requestedBy.formatTitle(),
-                    style: applyRobotoFont(
-                      fontSize: 12.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "Tissue Requested: $tissueTypeRequested",
-                    style: applyRobotoFont(
-                      fontSize: 10.0,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Tooltip(
-                message: "Reject Request",
-                child: TextButton(
-                  onPressed: onReject,
-                  style: TextButton.styleFrom(
-                    foregroundColor: AppColor.red,
-                  ),
-                  child: const Text('Reject'),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8.0),
-          Wrap(
-            spacing: 16.0,
-            runSpacing: 8.0,
-            children: [
-              _buildDetailColumn('Recipient Name:', recipientName),
-              _buildDetailColumn('Recipient  DOB:', recipientAge),
-              _buildDetailColumn('Procedures:', procedures),
-              _buildDetailColumn('Requested Date:', requestedDate?.formateDate),
-            ],
-          ),
-          const SizedBox(height: 8.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // text button
-              Tooltip(
-                message: "View Timeline",
-                child: InkWell(
-                  onTap: onTimeLine,
-                  child: Text(
-                    'Show Timeline',
-                    style: applyRobotoFont(
-                      fontSize: 12.0,
-                      color: AppColor.primary,
-                    ),
+    return InkWell(
+      onTap: onTimeLine,
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const CircleAvatar(
+                  maxRadius: 16,
+                  backgroundColor: AppColor.pureBlue,
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 16,
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+                const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      requestedBy.formatTitle(),
+                      style: applyRobotoFont(
+                        fontSize: 12.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Tissue Requested: $tissueTypeRequested",
+                      style: applyRobotoFont(
+                        fontSize: 10.0,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Tooltip(
+                  message: "Reject Request",
+                  child: TextButton(
+                    onPressed: onReject,
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColor.red,
+                    ),
+                    child: const Text('Reject'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Wrap(
+              spacing: 16.0,
+              runSpacing: 8.0,
+              children: [
+                _buildDetailColumn('Recipient Name:', recipientName),
+                _buildDetailColumn('Recipient  DOB:', recipientAge),
+                _buildDetailColumn('Procedures:', procedures),
+                _buildDetailColumn(
+                    'Requested Date:', requestedDate?.formateDate),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

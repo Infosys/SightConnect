@@ -142,7 +142,7 @@ class _OrganTissueSearchScreenState
           builderDelegate: PagedChildBuilderDelegate<Content>(
             itemBuilder: (context, item, index) {
               return InkWell(
-                onDoubleTap: () => _showDetailsBottomSheet(context, item),
+                onTap: () => _showDetailsBottomSheet(context, item),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 12.0,
