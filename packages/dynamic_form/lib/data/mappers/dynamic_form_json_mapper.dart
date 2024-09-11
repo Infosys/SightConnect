@@ -99,7 +99,8 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
-                  setValueExpression: getDummyExpression(element.name),
+                  setValueExpression: element.setValueExpression,
+                  ensureUnique: element.ensureUnique ?? false,
                 ),
               );
             }
@@ -113,42 +114,6 @@ class DynamicFormJsonMapper {
     } catch (e) {
       debugPrint('DynamicFormJsonMapper _getElements: $e');
       rethrow;
-    }
-  }
-
-  getDummyExpression(String fieldName) {
-    if (fieldName ==
-        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics') {
-      return 'sum corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume';
-    }
-    if (fieldName ==
-        'corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics') {
-      return 'sum corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics.volume';
-    }
-    if (fieldName ==
-        'corneaRetrievalRequest.hemodilution.properties.colloid.metrics') {
-      return 'sum corneaRetrievalRequest.hemodilution.properties.colloid.metrics.volume';
-    }
-    if (fieldName ==
-        'corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused') {
-      return 'corneaRetrievalRequest.hemodilution.properties.colloid.metrics';
-    }
-    if (fieldName ==
-        'corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused') {
-      return 'corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics';
-    }
-    if (fieldName ==
-        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
-      return 'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics';
-    }
-    if (fieldName ==
-        "corneaRetrievalRequest.hemodilution.properties.crystalloid.ABC") {
-      return "corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused + corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused";
-    }
-
-    if (fieldName ==
-        "corneaRetrievalRequest.hemodilution.properties.crystalloid.BC") {
-      return "corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused";
     }
   }
 
@@ -267,8 +232,6 @@ class DynamicFormJsonMapper {
           return DynamicFormType.FILE;
         case 'TEXTAREA':
           return DynamicFormType.TEXTAREA;
-        case 'conditional':
-          return DynamicFormType.CONDITIONAL;
         case 'PANEL':
           return DynamicFormType.PANEL;
         case 'DATE':

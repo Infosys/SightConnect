@@ -10,7 +10,6 @@ enum DynamicFormType {
   FILE,
   DEFAULT,
   TEXTAREA,
-  CONDITIONAL,
   PANEL,
   DATE,
   DISPLAY,

@@ -70,19 +70,19 @@ class EBFormManagePage extends ConsumerWidget {
                   json: data,
                   initialValue: initialVal,
                   onSubmit: (data, mode) {
-                    logger.f(data);
-                    // _handleSubmit(
-                    //   ref: ref,
-                    //   stageVersion: stageVersion,
-                    //   encounterId: encounterId,
-                    //   serviceRequestId: serviceRequestId,
-                    //   stageName: stageName,
-                    //   data: data,
-                    //   mode: mode,
-                    //   timelineName: timelineName,
-                    //   timelineVersion: timelineVersion,
-                    //   context: context,
-                    // );
+                    // logger.f(data);
+                    _handleSubmit(
+                      ref: ref,
+                      stageVersion: stageVersion,
+                      encounterId: encounterId,
+                      serviceRequestId: serviceRequestId,
+                      stageName: stageName,
+                      data: data,
+                      mode: mode,
+                      timelineName: timelineName,
+                      timelineVersion: timelineVersion,
+                      context: context,
+                    );
                   },
                 );
               },

@@ -97,6 +97,9 @@ class ElementClassModel {
   List<Conditions>? conditions;
   List<ElementClassModel>? elements;
   String? visibleIf;
+  String? setValueIf;
+  String? setValueExpression;
+  bool? ensureUnique;
 
   ElementClassModel({
     this.type,
@@ -121,6 +124,9 @@ class ElementClassModel {
     this.elements,
     this.inputType,
     this.visibleIf,
+    this.setValueIf,
+    this.setValueExpression,
+    this.ensureUnique,
   });
 
   factory ElementClassModel.fromJson(Map<String, dynamic> json) =>
@@ -159,6 +165,9 @@ class ElementClassModel {
             : List<ElementClassModel>.from(
                 json["elements"]!.map((x) => ElementClassModel.fromJson(x))),
         visibleIf: json["visibleIf"],
+        setValueIf: json["setValueIf"].toString(),
+        setValueExpression: json["setValueExpression"].toString(),
+        ensureUnique: json["ensureUnique"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -192,6 +201,9 @@ class ElementClassModel {
             ? []
             : List<dynamic>.from(elements!.map((x) => x.toJson())),
         "visibleIf": visibleIf,
+        "setValueIf": setValueIf,
+        "setValueExpression": setValueExpression,
+        "ensureUnique": ensureUnique,
       };
 }
 

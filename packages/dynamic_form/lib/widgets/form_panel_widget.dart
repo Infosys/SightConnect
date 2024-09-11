@@ -349,12 +349,14 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                           name: '${widget.field.elements![i].name}_$key',
                           initialValue: formattedInitialValues[
                               '${widget.field.elements![i].name}_$key'],
-                          // choices: _getFilteredChoices(
-                          //   '${widget.field.elements![i].name}_$key',
-                          //   widget.field.elements?[i].name ?? '',
-                          //   widget.field.elements?[i].choices,
-                          //   formKey.currentState?.instantValue ?? {},
-                          // ),
+                          choices: _getFilteredChoices(
+                            ensureUnique:
+                                widget.field.elements![i].ensureUnique,
+                            key: '${widget.field.elements![i].name}_$key',
+                            fieldName: widget.field.elements?[i].name ?? '',
+                            choices: widget.field.elements?[i].choices,
+                            valueMap: formKey.currentState?.instantValue ?? {},
+                          ),
                         ),
                         widget.globalFormKey,
                         widget.readOnly,
@@ -377,12 +379,16 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     );
   }
 
-  List<ChoiceElementEntity> _getFilteredChoices(
-    String key,
-    String fieldName,
-    List<ChoiceElementEntity>? choices,
-    Map<String, dynamic> valueMap,
-  ) {
+  List<ChoiceElementEntity> _getFilteredChoices({
+    required bool ensureUnique,
+    required String key,
+    required String fieldName,
+    required List<ChoiceElementEntity>? choices,
+    required Map<String, dynamic> valueMap,
+  }) {
+    if (!ensureUnique) {
+      return choices ?? [];
+    }
     if (choices == null || choices.isEmpty) {
       return [];
     }

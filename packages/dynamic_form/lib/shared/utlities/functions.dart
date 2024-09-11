@@ -14,6 +14,7 @@ import 'package:dynamic_form/widgets/form_duration.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_panel_widget.dart';
 import 'package:dynamic_form/widgets/form_radio.dart';
+import 'package:dynamic_form/widgets/form_signature.dart';
 import 'package:dynamic_form/widgets/form_slider.dart';
 import 'package:dynamic_form/widgets/form_switch.dart';
 import 'package:dynamic_form/widgets/form_text_field.dart';
@@ -192,8 +193,15 @@ Widget getField(
           },
         ),
       );
-    case DynamicFormType.CONDITIONAL:
-      return const SizedBox.shrink();
+    case DynamicFormType.SIGNATURE:
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
+        child: SignatureFormField(
+          field: field,
+          formKey: key,
+        ),
+      );
 
     default:
       return const SizedBox.shrink();
