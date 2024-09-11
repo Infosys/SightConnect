@@ -13,13 +13,7 @@ class EBCaseRecordsPage extends StatelessWidget {
         ),
         body: () {
           return const MobileCaseSearchWidget();
-
-          // return WebCaseSearchWidget(
-          //   data: data,
-          //   pageSize: 10,
-          //   searchFunction: searchFunction,
-          //   onTap: (item) => _onTap(context, item),
-          // );
+          // return const WebCaseSearchWidget();
         }(),
       ),
     );
