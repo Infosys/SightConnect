@@ -41,6 +41,7 @@ dependencies:
   path_provider: any
   path: any
   uuid: ^3.0.7
+  petitparser: ^6.0.2
  
 
 dev_dependencies:

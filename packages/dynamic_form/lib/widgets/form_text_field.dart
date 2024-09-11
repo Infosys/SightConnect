@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../data/entities/dynamic_form_json_entity.dart';
 
-class FormTextField extends StatelessWidget {
+class FormTextField extends HookWidget {
   const FormTextField({
     super.key,
     required this.field,
@@ -17,10 +18,23 @@ class FormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (field.name ==
+        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
+      print('Initial Value: ${field.initialValue}');
+      print('Title: ${field.title}');
+      print('Description: ${field.description}');
+      print('FieldName: ${field.name}');
+      //print smae filed name for form text field
+      print("FormKey: ${formKey.currentState?.fields[field.name]}");
+    }
+    final controller =
+        useTextEditingController(text: field.initialValue?.toString());
+
     return FormBuilderTextField(
+      key: ValueKey(field.name), //
+      controller: controller,
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      initialValue: field.initialValue?.toString(),
       name: field.name,
       keyboardType: _getKeyBoardType(),
       decoration: InputDecoration(

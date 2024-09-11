@@ -1,8 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
+import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
+import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:uuid/uuid.dart';
@@ -75,7 +77,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     with AutomaticKeepAliveClientMixin {
   final formKey = GlobalKey<FormBuilderState>();
   List<String> repeatedPanelKeys = [];
-  Map<String, dynamic> formatedInitialValue = {};
+  Map<String, dynamic> formattedInitialValues = {};
   final Uuid uuid = const Uuid();
   int maxRepeats = 0;
   int minRepeats = 0;
@@ -99,6 +101,38 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     }
   }
 
+  evaluateDynamicExpression() {
+    final String setValueExpression = widget.field.setValueExpression ?? '';
+
+    String operatorValue = setValueExpression.split(' ').first;
+    String fieldValue = setValueExpression.split(' ').last;
+    String finalExpression = '';
+
+    switch (operatorValue) {
+      case 'sum':
+        for (var key in repeatedPanelKeys) {
+          finalExpression += '${fieldValue}_$key + ';
+          if (repeatedPanelKeys.last == key) {
+            finalExpression =
+                finalExpression.substring(0, finalExpression.length - 3);
+          }
+        }
+    }
+    final expressionValue = ArithmeticExpressionEvaluator.evaluate(
+        finalExpression, formKey.currentState?.instantValue ?? {});
+
+    // Log.f({
+    //   'expressionValue': expressionValue,
+    //   'finalExpression': finalExpression,
+    //   'instantValue': formKey.currentState?.instantValue,
+    // });
+
+    widget.globalFormKey.currentState?.setInternalFieldValue(
+      widget.field.name,
+      expressionValue,
+    );
+  }
+
   _createdPrefilledPanels() {
     try {
       List<dynamic> prefilledPanels = widget.field.initialValue ?? [];
@@ -108,9 +142,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         var key = getUniqueKey();
         repeatedPanelKeys.add(key);
       }
-      formatedInitialValue = _formatInitialValue(prefilledPanels);
+      formattedInitialValues = _formatInitialValue(prefilledPanels);
       // Log.d(
-      //     "RepeatingFieldPanel _createdPrefilledPanels: $formatedInitialValue");
+      //     "RepeatingFieldPanel _createdPrefilledPanels: $formattedInitialValues");
     } catch (e) {
       Log.e("RepeatingFieldPanel _createdPrefilledPanels error: $e");
     }
@@ -158,13 +192,17 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         formKey.currentState?.removeInternalFieldValue(element);
       });
     }
+    if (widget.field.setValueExpression != null) {
+      evaluateDynamicExpression();
+      globalRebuildNotifier.value = !globalRebuildNotifier.value;
+    }
 
     // Trigger a rebuild to ensure UI updates correctly
     setState(() {});
   }
 
   String getUniqueKey() {
-    return uuid.v4();
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 
   List<dynamic> _formatValue(Map<String, dynamic> value) {
@@ -208,6 +246,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
           },
           builder: (field) {
             return FormBuilder(
+              onChanged: () {},
               key: formKey,
               enabled: !widget.readOnly,
               child: SizedBox(
@@ -300,11 +339,27 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                       child: getField(
                         widget.field.elements![i].copyWith(
                           name: '${widget.field.elements![i].name}_$key',
-                          initialValue: formatedInitialValue[
+                          initialValue: formattedInitialValues[
                               '${widget.field.elements![i].name}_$key'],
+                          choices: _getFilteredChoices(
+                            '${widget.field.elements![i].name}_$key',
+                            widget.field.elements?[i].name ?? '',
+                            widget.field.elements?[i].choices,
+                            formKey.currentState?.instantValue ?? {},
+                          ),
                         ),
                         widget.globalFormKey,
                         widget.readOnly,
+                        callBack: (value) {
+                          formattedInitialValues[
+                              '${widget.field.elements![i].name}_$key'] = value;
+
+                          if (widget.field.setValueExpression != null) {
+                            evaluateDynamicExpression();
+                            globalRebuildNotifier.value =
+                                !globalRebuildNotifier.value;
+                          }
+                        },
                       ),
                     ),
                 ],
@@ -314,5 +369,32 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         ),
       ],
     );
+  }
+
+  List<ChoiceElementEntity> _getFilteredChoices(
+    String key,
+    String fieldName,
+    List<ChoiceElementEntity>? choices,
+    Map<String, dynamic> valueMap,
+  ) {
+    if (choices == null || choices.isEmpty) {
+      return [];
+    }
+
+    final List<String> occupiedChoices = [];
+    for (var element in valueMap.entries) {
+      if (element.key.contains(fieldName) && element.key != key) {
+        occupiedChoices.add(element.value.toString());
+      }
+    }
+
+    final List<ChoiceElementEntity> filteredChoices = [];
+    for (var element in choices) {
+      if (!occupiedChoices.contains(element.name)) {
+        filteredChoices.add(element);
+      }
+    }
+
+    return filteredChoices.isEmpty ? [] : filteredChoices;
   }
 }

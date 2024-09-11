@@ -1,6 +1,8 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
-import 'package:dynamic_form/shared/utlities/expression_eval.dart';
+import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
+import 'package:dynamic_form/shared/utlities/bool_expression_eval.dart';
+import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
@@ -23,8 +25,9 @@ import '../../widgets/form_text_area.dart';
 Widget getField(
   ElementClassEntity? field,
   GlobalKey<FormBuilderState> key,
-  bool readOnly,
-) {
+  bool readOnly, {
+  Function(Object?)? callBack,
+}) {
   if (field == null) {
     return Container();
   }
@@ -34,10 +37,8 @@ Widget getField(
         field: field,
         formKey: key,
         child: FormTextField(
-          field: field,
-          onChanged: (value) {
-            debugPrint(value);
-          },
+          field: _getInitialValue(field, key),
+          onChanged: callBack,
           formKey: key,
         ),
       );
@@ -49,7 +50,8 @@ Widget getField(
             field: field,
             onChanged: (value) {
               globalRebuildNotifier.value = !globalRebuildNotifier.value;
-              debugPrint(value.toString());
+              key.currentState?.setInternalFieldValue(field.name, value);
+              callBack?.call(value);
             }),
       );
 
@@ -60,7 +62,6 @@ Widget getField(
         child: FormRadio(
           field: field,
           onChanged: (value) {
-            globalRebuildNotifier.value = !globalRebuildNotifier.value;
             debugPrint(value.toString());
           },
         ),
@@ -197,6 +198,29 @@ Widget getField(
     default:
       return const SizedBox.shrink();
   }
+}
+
+_getInitialValue(
+    ElementClassEntity? field, GlobalKey<FormBuilderState> formKey) {
+  if (field?.setValueExpression != null) {
+    final value = ArithmeticExpressionEvaluator.evaluate(
+        field!.setValueExpression!, formKey.currentState?.instantValue ?? {});
+    Log.i('Initial Value: $value');
+    field = field.copyWith(
+      initialValue: value.toString(),
+      readOnly: value != null && value.toString().isNotEmpty,
+    );
+
+    Future.microtask(() {
+      final currentField = formKey.currentState?.fields[field?.name];
+      if (currentField != null && currentField.value != value.toString()) {
+        currentField.didChange(value.toString());
+        globalRebuildNotifier.value = !globalRebuildNotifier.value;
+      }
+    });
+  }
+
+  return field;
 }
 
 class VisibiltyWrapper extends StatefulWidget {

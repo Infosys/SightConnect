@@ -99,6 +99,7 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
+                  setValueExpression: getDummyExpression(element.name),
                 ),
               );
             }
@@ -115,18 +116,41 @@ class DynamicFormJsonMapper {
     }
   }
 
-  // getVisibleIf(String? visibleIf) {
-  //   try {
-  //     if (visibleIf ==
-  //         'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == true') {
-  //       return 'preliminaryRequest.isMedicoLegalCase == true && preliminaryRequest.isDonationPermitted == 1';
-  //     }
-  //     return visibleIf;
-  //   } catch (e) {
-  //     debugPrint('DynamicFormJsonMapper getVisibleIf: $e');
-  //     rethrow;
-  //   }
-  // }
+  getDummyExpression(String fieldName) {
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics') {
+      return 'sum corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics.volume';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics') {
+      return 'sum corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics.volume';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.colloid.metrics') {
+      return 'sum corneaRetrievalRequest.hemodilution.properties.colloid.metrics.volume';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused') {
+      return 'corneaRetrievalRequest.hemodilution.properties.colloid.metrics';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused') {
+      return 'corneaRetrievalRequest.hemodilution.properties.crystalloid.metrics';
+    }
+    if (fieldName ==
+        'corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused') {
+      return 'corneaRetrievalRequest.hemodilution.properties.bloodProducts.metrics';
+    }
+    if (fieldName ==
+        "corneaRetrievalRequest.hemodilution.properties.crystalloid.ABC") {
+      return "corneaRetrievalRequest.hemodilution.properties.bloodProducts.totalTranfused + corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused";
+    }
+
+    if (fieldName ==
+        "corneaRetrievalRequest.hemodilution.properties.crystalloid.BC") {
+      return "corneaRetrievalRequest.hemodilution.properties.colloid.totalTranfused + corneaRetrievalRequest.hemodilution.properties.crystalloid.totalTranfused";
+    }
+  }
 
   _getInitialValType(DynamicFormType type, ElementClassModel element) {
     try {
