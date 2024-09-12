@@ -65,8 +65,8 @@ pipeline {
                                 ssh -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
                                 cd Eyebank
                                 mv build.zip ${BUILD_NUMBER}.zip
-                                rm -rf /var/www/Eyebank/
-                                unzip {BUILD_NUMBER}.zip -d /var/www/Eyebank/
+                                rm -rf /var/www/Eyebank
+                                unzip ${BUILD_NUMBER}.zip -d /var/www/Eyebank/
                                 chmod -R 777 /var/www/Eyebank/
                                 """
                     }
