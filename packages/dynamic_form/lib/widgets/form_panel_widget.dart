@@ -102,6 +102,10 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
         repeatedPanelKeys.add(getUniqueKey());
       }
     }
+    // Trigger evaluation on initialization
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _debounceEvaluateAndRebuild();
+    });
   }
 
   void _debounceEvaluateAndRebuild() {
