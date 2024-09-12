@@ -1,7 +1,6 @@
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';
-import 'package:eye_care_for_all/shared/constants/app_images.dart';
 
 List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
       // {
@@ -14,7 +13,7 @@ List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
       {
         "title": "Live Forever",
         "description": "Consider Eye Donation.",
-        "image": AppImages.patientCover4,
+        "image": "assets/images/patient_home_footer.jpg",
         "designation": 'Pledge Your Eyes Today.',
       },
 

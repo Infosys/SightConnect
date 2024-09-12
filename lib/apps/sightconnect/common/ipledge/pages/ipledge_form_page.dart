@@ -195,7 +195,8 @@ void showIplegeDialog(BuildContext context) {
             ),
             const SizedBox(height: 8),
             Text(
-              "Your kindness has made a real difference",
+              "Your kindness has made a real difference.",
+              textAlign: TextAlign.center,
               style: applyFiraSansFont(),
             )
           ],

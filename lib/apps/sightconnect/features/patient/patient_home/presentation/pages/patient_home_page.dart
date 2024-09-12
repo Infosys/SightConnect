@@ -92,8 +92,8 @@ class PatientHomePage extends ConsumerWidget {
                     },
                     btnText:
                         loc.patientHomePageVolunteerInviteeCardJoinUsNowButton,
-                    color: AppColor.altGreen,
-                    backgroundColor: AppColor.altGreen.withOpacity(0.1),
+                    color: AppColor.primary,
+                    backgroundColor: AppColor.primary.withOpacity(0.1),
                     svgImagePath: "assets/images/triage_card_bg.svg",
                     title: loc.patientHomePageVolunteerInviteeCardTitle,
                     description: [

@@ -279,7 +279,7 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       return Future.value(roles.first);
     }
 
-    if (kIsWeb && isUserBeta) {
+    if (kIsWeb && !isUserBeta) {
       logger.d("isUserBeta: $isUserBeta");
       if (currentRoles.contains("ROLE_EYEBANK_TECHNICIAN")) {
         logger.d("contains ROLE_EYEBANK_TECHNICIAN");
