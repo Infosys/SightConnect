@@ -59,9 +59,8 @@ pipeline {
                         
                                 sh """
                                 ssh -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
-                                cd MiniAppWebbuild-dev
-                                bash update-frontend.sh
-                                
+                                ls
+                
                                 """
                             
                     }
