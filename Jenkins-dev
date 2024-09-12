@@ -60,7 +60,10 @@ pipeline {
                                 sh """
                                 ssh -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
                                 ls
-                
+                                rm build.zip
+                                rm -R /var/www/Eyebank
+                                unzip build.zip -d /var/www/Eyebank/
+                                chmod -R 777 /var/www/Eyebank/
                                 """
                             
                     }
