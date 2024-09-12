@@ -4,12 +4,20 @@ import 'package:eye_care_for_all/shared/constants/app_icon.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 
 List<Map<String, dynamic>> getCarouselData(AppLocalizations loc) => [
+      // {
+      //   "title": loc.fakeDataSourceGetCarouselDataTitle,
+      //   "description": loc.fakeDataSourceGetCarouselDataDescription,
+      //   "image": AppImages.patientCover4,
+      //   "designation": 'Eye Specialist, LVPEI',
+      // },
+
       {
-        "title": loc.fakeDataSourceGetCarouselDataTitle,
-        "description": loc.fakeDataSourceGetCarouselDataDescription,
+        "title": "Live Forever",
+        "description": "Consider Eye Donation.",
         "image": AppImages.patientCover4,
-        "designation": 'Eye Specialist, LVPEI',
+        "designation": 'Pledge Your Eyes Today.',
       },
+
       // {
       //   "title": loc.homeCarousal2Title,
       //   "description": loc.homeCarousal2Description,

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/pages/ipledge_form_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -44,61 +45,71 @@ class PatientFooter extends HookWidget {
               itemBuilder: (context, index, _) {
                 var data = displayData[index];
 
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(AppSize.km),
-                        child: Image.asset(
-                          data["image"],
-                          fit: BoxFit.cover,
-                        ),
+                return InkWell(
+                  onTap: () {
+                    final navigator = Navigator.of(context);
+                    navigator.push(
+                      MaterialPageRoute(
+                        builder: (context) => const IPledgeFormPage(),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSize.km,
-                          vertical: AppSize.km,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(AppSize.km),
+                          child: Image.asset(
+                            data["image"],
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            AutoSizeText(
-                              data["title"],
-                              minFontSize: 14,
-                              maxLines: 2,
-                              style: applyFiraSansFont(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSize.km,
+                            vertical: AppSize.km,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AutoSizeText(
+                                data["title"],
+                                minFontSize: 14,
+                                maxLines: 2,
+                                style: applyFiraSansFont(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.ks),
-                            AutoSizeText(
-                              data["description"],
-                              maxLines: 3,
-                              minFontSize: 12,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyRobotoFont(
-                                fontSize: 14,
+                              const SizedBox(height: AppSize.ks),
+                              AutoSizeText(
+                                data["description"],
+                                maxLines: 3,
+                                minFontSize: 12,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.km),
-                            AutoSizeText(
-                              data["designation"],
-                              maxLines: 3,
-                              minFontSize: 12,
-                              overflow: TextOverflow.ellipsis,
-                              style: applyRobotoFont(
-                                fontSize: 12,
-                                color: AppColor.grey,
+                              const SizedBox(height: AppSize.km),
+                              AutoSizeText(
+                                data["designation"],
+                                maxLines: 3,
+                                minFontSize: 12,
+                                overflow: TextOverflow.ellipsis,
+                                style: applyRobotoFont(
+                                  fontSize: 12,
+                                  color: AppColor.grey,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
