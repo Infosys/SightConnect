@@ -42,7 +42,8 @@ pipeline {
                         sh """
                             ssh -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
                             mkdir -p Eyebank
-                            exit
+                            """
+                        sh """
                             sftp -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
                             cd Eyebank
                             put build.zip
