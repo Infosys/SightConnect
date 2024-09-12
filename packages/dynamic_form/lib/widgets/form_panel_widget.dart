@@ -104,7 +104,9 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     }
     // Trigger evaluation on initialization
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _debounceEvaluateAndRebuild();
+      if (widget.field.setValueExpression != null) {
+        _debounceEvaluateAndRebuild();
+      }
     });
   }
 
