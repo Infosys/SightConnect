@@ -21,7 +21,7 @@ class FormDateTimePicker extends HookWidget {
         final initialValue = field.initialValue;
 
         if (initialValue != null) {
-          return DateTime.parse(initialValue);
+          return DateTime.tryParse(initialValue.toString());
         }
 
         return null;

@@ -12,6 +12,7 @@ class EBTimelineModel with _$EBTimelineModel {
     String? stage,
     String? assessmentVersion,
     String? status,
+    String? differentiator,
     @TimestampConverter() DateTime? initiateDate,
     @TimestampConverter() DateTime? recentUpdated,
     List<EBTimelineModel>? stages,

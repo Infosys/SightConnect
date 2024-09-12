@@ -14,6 +14,7 @@ _$EBTimelineModelImpl _$$EBTimelineModelImplFromJson(
       stage: json['stage'] as String?,
       assessmentVersion: json['assessmentVersion'] as String?,
       status: json['status'] as String?,
+      differentiator: json['differentiator'] as String?,
       initiateDate:
           const TimestampConverter().fromJson(json['initiateDate'] as String?),
       recentUpdated:
@@ -31,6 +32,7 @@ Map<String, dynamic> _$$EBTimelineModelImplToJson(
       'stage': instance.stage,
       'assessmentVersion': instance.assessmentVersion,
       'status': instance.status,
+      'differentiator': instance.differentiator,
       'initiateDate': const TimestampConverter().toJson(instance.initiateDate),
       'recentUpdated':
           const TimestampConverter().toJson(instance.recentUpdated),

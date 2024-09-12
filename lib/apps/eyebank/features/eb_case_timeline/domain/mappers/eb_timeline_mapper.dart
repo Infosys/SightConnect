@@ -5,75 +5,76 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enu
 
 class EBTimelineMapper {
   static List<EBTimelineEntity> mapToEntity(
-      List<EBTimelineModel> model, EbTimelineConfigModel configModel) {
-    // logger.d("EBTimelineMapper.mapToEntity");
-    // logger.d(model);
-    // logger.d("configModel");
-    // logger.d(configModel);
-    List<EBTimelineEntity> data = [];
+    List<EBTimelineModel> ebModel,
+    EbTimelineConfigModel configModel,
+  ) {
+    List<EBTimelineEntity> data =
+        ebModel.map((m) => _mapModelToEntity(m, configModel)).toList();
 
-    for (var m in model) {
-      data.add(EBTimelineEntity(
-        timelineName: configModel.timelineName,
-        timelineVersion: configModel.timelineVersion,
-        serviceRequestId: m.serviceRequestId,
-        stage: _getStageName(m.stage),
-        title: tempStageName(m.stage, m.title),
-        stageVersion: _getStageVersion(m.stage, configModel),
-        status: _getCaseStatus(m.status ?? ""),
-        initiateDate: m.initiateDate,
-        recentUpdatedTime: m.recentUpdated,
-        subStages: null,
-      ));
-    }
-    // logger.f("ACTIVE STAGES: $data}");
     final newConfigModel = configModel.copyWith(
       stages: configModel.stages!
-          .where((stage) => !model.any((element) {
-                // logger.i({
-                //   "element.stage": element.stage,
-                //   "stage.stageName": stage.stageName
-                // });
-                return element.stage == stage.stageName;
-              }))
+          .where((stage) =>
+              !ebModel.any((element) => element.stage == stage.stageName))
           .toList(),
     );
 
-    // logger.d("newConfigModel: $newConfigModel");
+    data.addAll(newConfigModel.stages!
+        .map((stage) => _mapStageToEntity(stage, configModel)));
 
-    for (var stage in newConfigModel.stages!) {
-      data.add(EBTimelineEntity(
-        timelineName: configModel.timelineName,
-        timelineVersion: configModel.timelineVersion,
-        serviceRequestId: null,
-        stage: _getStageName(stage.stageName),
-        title: tempStageName(stage.stageName, stage.title),
-        stageVersion: stage.stageVersion,
-        status: EBStatus.UNKNOWN,
-        initiateDate: null,
-        recentUpdatedTime: null,
-        subStages: null,
-      ));
-    }
-
-    //logger.d("FINAL STAGES $data");
     return data;
   }
 
-  static tempStageName(String? stageName, String? title) {
-    final stage = _getStageName(stageName);
-    if (stage == EBStageName.ADVERSE_REACTION) {
-      return "FOLLOW UP";
-    } else {
-      return title;
+  static EBTimelineEntity _mapModelToEntity(
+      EBTimelineModel ebModel, EbTimelineConfigModel configModel) {
+    return EBTimelineEntity(
+      timelineName: configModel.timelineName,
+      timelineVersion: configModel.timelineVersion,
+      title: _getStageTitle(configModel, ebModel),
+      serviceRequestId: ebModel.serviceRequestId,
+      stage: _getStageName(ebModel.stage),
+      stageVersion: _getStageVersion(ebModel.stage, configModel),
+      status: _getCaseStatus(ebModel.status ?? ""),
+      initiateDate: ebModel.initiateDate,
+      recentUpdatedTime: ebModel.recentUpdated,
+      subStages: null,
+    );
+  }
+
+  static EBTimelineEntity _mapStageToEntity(
+      Stage stage, EbTimelineConfigModel configModel) {
+    return EBTimelineEntity(
+      timelineName: configModel.timelineName,
+      timelineVersion: configModel.timelineVersion,
+      serviceRequestId: null,
+      stage: _getStageName(stage.stageName),
+      title: stage.title,
+      stageVersion: stage.stageVersion,
+      status: EBStatus.UNKNOWN,
+      initiateDate: null,
+      recentUpdatedTime: null,
+      subStages: null,
+    );
+  }
+
+  static String _getStageTitle(
+      EbTimelineConfigModel configModel, EBTimelineModel m) {
+    for (var stage in configModel.stages!) {
+      if (stage.stageName == m.stage) {
+        return m.differentiator != null
+            ? "${stage.title} - ${m.differentiator}"
+            : stage.title!;
+      }
     }
+    return "";
   }
 
   static EBStageName? _getStageName(String? stageName) {
-    const stages = EBStageName.values;
-    for (var i = 0; i < stages.length; i++) {
-      if (stages[i].name == stageName) {
-        return stages[i];
+    if (stageName == null) {
+      return null;
+    }
+    for (var stage in EBStageName.values) {
+      if (stage.name == stageName) {
+        return stage;
       }
     }
     return null;
@@ -90,10 +91,9 @@ class EBTimelineMapper {
   }
 
   static EBStatus _getCaseStatus(String status) {
-    const statuses = EBStatus.values;
-    for (var i = 0; i < statuses.length; i++) {
-      if (statuses[i].value == status) {
-        return statuses[i];
+    for (var s in EBStatus.values) {
+      if (s.value == status) {
+        return s;
       }
     }
     return EBStatus.UNKNOWN;
