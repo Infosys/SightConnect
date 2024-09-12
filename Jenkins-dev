@@ -9,7 +9,7 @@ pipeline {
     ACCESS_TOKEN = credentials('github-access-token')
     DOWNLOAD_PATH = "artifact.zip"  // Specify the desired file location
 
-    VM_IPS = "infyeyecareadm@10.205.248.93" 
+    VM_IPS = "infyeyecareadm@10.205.248.93"
   }
 
   stages {
@@ -40,30 +40,33 @@ pipeline {
                     sh "unzip -o ${env.DOWNLOAD_PATH}"
                     for (def ip : vmIps) {
                         sh """
-                            
+
                             sftp -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
+                            mkdir -p Eyebank
+                            cd Eyebank
                             put build.zip
-                        
+                            mv build.zip ${BUILD_NUMBER}.zip
                             """
                     }
                 }
             }
         }
-        
+
         stage('Deploy to VMs') {
             steps {
                 script {
+                    def startTime = currentBuild.startTimeInMillis
+                    def date = new Date(startTime)
                     def vmIps = VM_IPS.split(',')
                     for (def ip : vmIps) {
-                        
+
                                 sh """
                                 ssh -i ~/pem/care-dev.pem  $ip 'bash -s' <<EOF
-                                ls
-                                rm -rf /var/www/Eyebank
-                                unzip build.zip -d /var/www/Eyebank/
+                                cd Eyebank
+                                rm -rf /var/www/Eyebank/
+                                unzip {BUILD_NUMBER}.zip -d /var/www/Eyebank/
                                 chmod -R 777 /var/www/Eyebank/
                                 """
-                            
                     }
                 }
             }
