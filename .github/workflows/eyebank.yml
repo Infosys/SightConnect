@@ -31,7 +31,7 @@ jobs:
     -   name: zip
         run: cd build/web && zip -r build.zip . && cp build.zip ../.. && cd .. && cd ..
     -   name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: BuildArtifactZIP
           path: build.zip
