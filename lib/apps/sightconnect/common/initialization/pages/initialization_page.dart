@@ -4,6 +4,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/a
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/role_error_dialog.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/referral/presentation/modals/referral_collect_sheet.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
@@ -19,6 +20,7 @@ import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -267,12 +269,34 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   Future<Role?> _showProfileSelectionDialog(NavigatorState navigator) {
     final currentRoles = PersistentAuthStateService.authState.roles;
+    final isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+
     if (currentRoles == null) {
       return Future.value(null);
     }
     var roles = roleListMapper(currentRoles);
     if (roles.length == 1) {
       return Future.value(roles.first);
+    }
+
+    if (kIsWeb && !isUserBeta) {
+      logger.d("isUserBeta: $isUserBeta");
+      if (currentRoles.contains("ROLE_EYEBANK_TECHNICIAN")) {
+        logger.d("contains ROLE_EYEBANK_TECHNICIAN");
+        return Future.value(Role.ROLE_EYEBANK_TECHNICIAN);
+      } else {
+        return showDialog<Role>(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return RoleErrorDialog.roleErrorDialog(
+              () async {
+                await _invalidateAndLogout();
+              },
+            );
+          },
+        );
+      }
     }
 
     return showDialog<Role>(
