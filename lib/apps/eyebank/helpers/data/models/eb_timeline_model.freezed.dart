@@ -25,6 +25,7 @@ mixin _$EBTimelineModel {
   String? get stage => throw _privateConstructorUsedError;
   String? get assessmentVersion => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
+  String? get differentiator => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get initiateDate => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -49,6 +50,7 @@ abstract class $EBTimelineModelCopyWith<$Res> {
       String? stage,
       String? assessmentVersion,
       String? status,
+      String? differentiator,
       @TimestampConverter() DateTime? initiateDate,
       @TimestampConverter() DateTime? recentUpdated,
       List<EBTimelineModel>? stages});
@@ -72,6 +74,7 @@ class _$EBTimelineModelCopyWithImpl<$Res, $Val extends EBTimelineModel>
     Object? stage = freezed,
     Object? assessmentVersion = freezed,
     Object? status = freezed,
+    Object? differentiator = freezed,
     Object? initiateDate = freezed,
     Object? recentUpdated = freezed,
     Object? stages = freezed,
@@ -96,6 +99,10 @@ class _$EBTimelineModelCopyWithImpl<$Res, $Val extends EBTimelineModel>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      differentiator: freezed == differentiator
+          ? _value.differentiator
+          : differentiator // ignore: cast_nullable_to_non_nullable
               as String?,
       initiateDate: freezed == initiateDate
           ? _value.initiateDate
@@ -127,6 +134,7 @@ abstract class _$$EBTimelineModelImplCopyWith<$Res>
       String? stage,
       String? assessmentVersion,
       String? status,
+      String? differentiator,
       @TimestampConverter() DateTime? initiateDate,
       @TimestampConverter() DateTime? recentUpdated,
       List<EBTimelineModel>? stages});
@@ -148,6 +156,7 @@ class __$$EBTimelineModelImplCopyWithImpl<$Res>
     Object? stage = freezed,
     Object? assessmentVersion = freezed,
     Object? status = freezed,
+    Object? differentiator = freezed,
     Object? initiateDate = freezed,
     Object? recentUpdated = freezed,
     Object? stages = freezed,
@@ -172,6 +181,10 @@ class __$$EBTimelineModelImplCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      differentiator: freezed == differentiator
+          ? _value.differentiator
+          : differentiator // ignore: cast_nullable_to_non_nullable
               as String?,
       initiateDate: freezed == initiateDate
           ? _value.initiateDate
@@ -198,6 +211,7 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
       this.stage,
       this.assessmentVersion,
       this.status,
+      this.differentiator,
       @TimestampConverter() this.initiateDate,
       @TimestampConverter() this.recentUpdated,
       final List<EBTimelineModel>? stages})
@@ -217,6 +231,8 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
   @override
   final String? status;
   @override
+  final String? differentiator;
+  @override
   @TimestampConverter()
   final DateTime? initiateDate;
   @override
@@ -234,7 +250,7 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
 
   @override
   String toString() {
-    return 'EBTimelineModel(serviceRequestId: $serviceRequestId, title: $title, stage: $stage, assessmentVersion: $assessmentVersion, status: $status, initiateDate: $initiateDate, recentUpdated: $recentUpdated, stages: $stages)';
+    return 'EBTimelineModel(serviceRequestId: $serviceRequestId, title: $title, stage: $stage, assessmentVersion: $assessmentVersion, status: $status, differentiator: $differentiator, initiateDate: $initiateDate, recentUpdated: $recentUpdated, stages: $stages)';
   }
 
   @override
@@ -249,6 +265,8 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
             (identical(other.assessmentVersion, assessmentVersion) ||
                 other.assessmentVersion == assessmentVersion) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.differentiator, differentiator) ||
+                other.differentiator == differentiator) &&
             (identical(other.initiateDate, initiateDate) ||
                 other.initiateDate == initiateDate) &&
             (identical(other.recentUpdated, recentUpdated) ||
@@ -265,6 +283,7 @@ class _$EBTimelineModelImpl implements _EBTimelineModel {
       stage,
       assessmentVersion,
       status,
+      differentiator,
       initiateDate,
       recentUpdated,
       const DeepCollectionEquality().hash(_stages));
@@ -291,6 +310,7 @@ abstract class _EBTimelineModel implements EBTimelineModel {
       final String? stage,
       final String? assessmentVersion,
       final String? status,
+      final String? differentiator,
       @TimestampConverter() final DateTime? initiateDate,
       @TimestampConverter() final DateTime? recentUpdated,
       final List<EBTimelineModel>? stages}) = _$EBTimelineModelImpl;
@@ -308,6 +328,8 @@ abstract class _EBTimelineModel implements EBTimelineModel {
   String? get assessmentVersion;
   @override
   String? get status;
+  @override
+  String? get differentiator;
   @override
   @TimestampConverter()
   DateTime? get initiateDate;
