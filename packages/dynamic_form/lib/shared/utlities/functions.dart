@@ -200,6 +200,15 @@ Widget getField(
         child: SignatureFormField(
           field: field,
           formKey: key,
+          onChanged: (signaturePng) {
+            if (signaturePng == null) {
+              key.currentState?.setInternalFieldValue(field.name, null);
+              return;
+            }
+            key.currentState?.setInternalFieldValue(field.name, signaturePng);
+
+            debugPrint(signaturePng.toString());
+          },
         ),
       );
 
@@ -219,7 +228,9 @@ _getInitialValue(
 
   Log.f('Field: ${field.name} setValueExpression: ${field.setValueExpression}');
   final value = ArithmeticExpressionEvaluator.evaluate(
-      field.setValueExpression!, formKey.currentState?.instantValue ?? {});
+    field.setValueExpression!,
+    formKey.currentState?.instantValue ?? {},
+  );
   Log.i('Initial Value: $value');
   field = field.copyWith(
     initialValue: value.toString(),
