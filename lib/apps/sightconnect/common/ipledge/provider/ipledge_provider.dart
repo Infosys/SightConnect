@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/data/models/ipledge_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/data/repository/ipledge_repository.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
@@ -5,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ipledgeProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => IpledgeProvider(ref.watch(globalPatientProvider)),
+  (ref) => IpledgeProvider(
+      ref.watch(globalPatientProvider), ref.watch(iPledgeRepositoryProvider)),
 );
 
 class IpledgeProvider extends ChangeNotifier {
   final GlobalPatientProvider globalPatientProvider;
+  final IPledgeRepository _iPledgeRepository;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final fullName = TextEditingController();
   final dob = TextEditingController();
@@ -26,12 +30,13 @@ class IpledgeProvider extends ChangeNotifier {
   final pincode = TextEditingController();
   final localityAndTown = TextEditingController();
   final cityAndDistrict = TextEditingController();
+  final additionalInfo = TextEditingController();
 
   bool isLoading = false;
 
   bool isIAgreeAndAccepted = false;
 
-  IpledgeProvider(this.globalPatientProvider) {
+  IpledgeProvider(this.globalPatientProvider, this._iPledgeRepository) {
     fullName.text =
         globalPatientProvider.activeUser?.profile?.patient?.name ?? "";
     dob.text = _getPatientDOB() ?? "";
@@ -83,23 +88,28 @@ class IpledgeProvider extends ChangeNotifier {
   Future<void> submitPledge() async {
     isLoading = true;
     notifyListeners();
-    await Future.delayed(const Duration(milliseconds: 500));
-    logger.i({
-      "fullName": fullName.text,
-      "dob": dob.text,
-      "mobile": mobile.text,
-      "email": email.text,
-      "kinName": kinName.text,
-      "kinMobile": kinMobile.text,
-      "kinRelationship": kinRelationship.text,
-      "Address": address.text,
-      "state": state.text,
-      "pincode": pincode.text,
-      "localityAndTown": localityAndTown.text,
-      "cityAndDistrict": cityAndDistrict.text,
-    });
-    isLoading = false;
-    notifyListeners();
+    final requestData = IPledgeModel(
+      kinName: kinName.text,
+      kinContact: kinMobile.text,
+      kinRelation: kinRelationship.text,
+      pledgeType: "IPLEDGE",
+      additionalInfo: additionalInfo.text,
+      patientId: globalPatientProvider.activeUser?.profile?.patient?.patientId,
+    );
+
+    final response = await _iPledgeRepository.saveIPledgeData(requestData);
+    return response.fold(
+      (l) {
+        logger.e({"Ipledge Provider": l.errorMessage});
+        isLoading = false;
+        notifyListeners();
+        throw l;
+      },
+      (r) {
+        isLoading = false;
+        notifyListeners();
+      },
+    );
   }
 
   @override

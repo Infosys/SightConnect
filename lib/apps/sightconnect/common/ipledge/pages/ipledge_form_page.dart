@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/pincod
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/relationship_field.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/state_field.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/sumbit_button.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
@@ -144,13 +145,15 @@ class IPledgeFormPage extends ConsumerWidget {
                   ],
                 ),
               ),
-              const AppCard(
+              AppCard(
                 title: "Additional Details",
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AdditionalField(),
+                    AdditionalField(
+                      additionalController: model.additionalInfo,
+                    ),
                   ],
                 ),
               ),
@@ -164,13 +167,18 @@ class IPledgeFormPage extends ConsumerWidget {
           model.setIAgreeAndAccepted(value!);
         },
         onPressed: () async {
-          if (model.formKey.currentState!.validate()) {
-            await model.submitPledge();
-            if (context.mounted) {
-              showIplegeDialog(context);
+          try {
+            if (model.formKey.currentState!.validate()) {
+              await model.submitPledge();
+              if (context.mounted) {
+                showIplegeDialog(context);
+              }
+            } else {
+              Fluttertoast.showToast(
+                  msg: "Please fill all the required fields");
             }
-          } else {
-            Fluttertoast.showToast(msg: "Please fill all the required fields");
+          } on Failure catch (e) {
+            Fluttertoast.showToast(msg: e.errorMessage);
           }
         },
       ),

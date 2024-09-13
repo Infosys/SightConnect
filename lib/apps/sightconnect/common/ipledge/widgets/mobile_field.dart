@@ -27,7 +27,7 @@ class MobileField extends StatelessWidget {
         value = value ?? "";
         if (value.isEmpty) {
           return "Mobile Number is required";
-        } else if (Regex.isMobile(value)) {
+        } else if (!Regex.isMobile(value)) {
           return "Invalid Mobile Number";
         } else {
           return null;
