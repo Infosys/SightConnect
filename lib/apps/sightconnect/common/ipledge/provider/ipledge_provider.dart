@@ -92,7 +92,7 @@ class IpledgeProvider extends ChangeNotifier {
       kinName: kinName.text,
       kinContact: kinMobile.text,
       kinRelation: kinRelationship.text,
-      pledgeType: "IPLEDGE",
+      pledgeType: "EYE_DONATION",
       additionalInfo: additionalInfo.text,
       patientId: globalPatientProvider.activeUser?.profile?.patient?.patientId,
     );
