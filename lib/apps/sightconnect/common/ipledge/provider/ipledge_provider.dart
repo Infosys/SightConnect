@@ -1,5 +1,6 @@
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -33,14 +34,45 @@ class IpledgeProvider extends ChangeNotifier {
   IpledgeProvider(this.globalPatientProvider) {
     fullName.text =
         globalPatientProvider.activeUser?.profile?.patient?.name ?? "";
-    dob.text =
-        globalPatientProvider.activeUser?.profile?.patient?.dayOfBirth ?? "";
+    dob.text = _getPatientDOB() ?? "";
     mobile.text =
         globalPatientProvider.activeUser?.profile?.patient?.phoneNumber ?? "";
     gender.text =
         globalPatientProvider.activeUser?.profile?.patient?.gender?.name ?? "";
     email.text =
         globalPatientProvider.activeUser?.profile?.patient?.email ?? "";
+
+    _prefillAddress();
+  }
+
+  String? _getPatientDOB() {
+    try {
+      final dob = DateTime(
+              int.parse(globalPatientProvider
+                      .activeUser?.profile?.patient?.yearOfBirth ??
+                  ""),
+              int.parse(globalPatientProvider
+                      .activeUser?.profile?.patient?.monthOfBirth ??
+                  ""),
+              int.parse(globalPatientProvider
+                      .activeUser?.profile?.patient?.dayOfBirth ??
+                  ""))
+          .formateDate;
+      return dob;
+    } catch (e) {
+      logger.e({"Ipledge Provider": e});
+      return null;
+    }
+  }
+
+  void _prefillAddress() {
+    final address = globalPatientProvider.activeUser?.profile?.patient?.address;
+    if (address != null && address.isNotEmpty) {
+      state.text = address.first.state ?? "";
+      pincode.text = address.first.pincode ?? "";
+      localityAndTown.text = address.first.district ?? "";
+      cityAndDistrict.text = address.first.state ?? "";
+    }
   }
 
   void setIAgreeAndAccepted(bool value) {

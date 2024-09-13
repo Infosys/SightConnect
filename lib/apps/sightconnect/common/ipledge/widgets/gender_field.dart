@@ -44,15 +44,15 @@ class GenderField extends HookWidget {
                     value: GenderEnum.male.value,
                     groupValue: selectedGender.value,
                     onChanged: (value) {
-                      selectedGender.value = value!;
-                      genderController?.text = value;
+                      // selectedGender.value = value!;
+                      // genderController?.text = value;
                     },
                   ),
                   Text(
                     GenderEnum.male.displayValue,
                     style: applyRobotoFont(
                       fontSize: 14,
-                      color: AppColor.darkGrey,
+                      color: AppColor.grey,
                     ),
                   ),
                 ],
@@ -63,15 +63,15 @@ class GenderField extends HookWidget {
                     value: GenderEnum.female.value,
                     groupValue: selectedGender.value,
                     onChanged: (value) {
-                      selectedGender.value = value!;
-                      genderController?.text = value;
+                      // selectedGender.value = value!;
+                      // genderController?.text = value;
                     },
                   ),
                   Text(
                     GenderEnum.female.displayValue,
                     style: applyRobotoFont(
                       fontSize: 14,
-                      color: AppColor.darkGrey,
+                      color: AppColor.grey,
                     ),
                   ),
                 ],
@@ -83,15 +83,15 @@ class GenderField extends HookWidget {
                     value: GenderEnum.others.value,
                     groupValue: selectedGender.value,
                     onChanged: (value) {
-                      selectedGender.value = value!;
-                      genderController?.text = value;
+                      // selectedGender.value = value!;
+                      // genderController?.text = value;
                     },
                   ),
                   Text(
                     GenderEnum.others.displayValue,
                     style: applyRobotoFont(
                       fontSize: 14,
-                      color: AppColor.darkGrey,
+                      color: AppColor.grey,
                     ),
                   ),
                 ],

@@ -18,15 +18,17 @@ class EmailField extends StatelessWidget {
         );
       },
       validator: (value) {
-        value = value ?? "";
-        if (value.isEmpty) {
-          return "Email is required";
-        }
         return null;
+
+        // value = value ?? "";
+        // if (value.isEmpty) {
+        //   return "Email is required";
+        // }
+        // return null;
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
-        labelText: "Email *",
+        labelText: "Email",
       ),
     );
   }

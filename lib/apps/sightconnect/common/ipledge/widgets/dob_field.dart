@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,6 +21,7 @@ class DOBField extends StatelessWidget {
         }
         return null;
       },
+      enabled: false,
       inputFormatters: [DateInputFormatter()],
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
@@ -29,22 +29,22 @@ class DOBField extends StatelessWidget {
         hintText: "DD-MM-YYYY",
         suffixIcon: IconButton(
           onPressed: () async {
-            try {
-              final selectedDateTime = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
-              );
-              if (selectedDateTime != null) {
-                dobController?.text =
-                    "${selectedDateTime.day.toString().padLeft(2, '0')}-${selectedDateTime.month.toString().padLeft(2, '0')}-${selectedDateTime.year}";
-              }
-            } catch (e) {
-              logger.e(e);
-            }
+            // try {
+            //   final selectedDateTime = await showDatePicker(
+            //     context: context,
+            //     initialDate: DateTime.now(),
+            //     firstDate: DateTime(1900),
+            //     lastDate: DateTime.now(),
+            //   );
+            //   if (selectedDateTime != null) {
+            //     dobController?.text =
+            //         "${selectedDateTime.day.toString().padLeft(2, '0')}-${selectedDateTime.month.toString().padLeft(2, '0')}-${selectedDateTime.year}";
+            //   }
+            // } catch (e) {
+            //   logger.e(e);
+            // }
           },
-          icon: const Icon(Icons.calendar_today),
+          icon: const Icon(Icons.calendar_today, color: Colors.grey),
         ),
       ),
     );

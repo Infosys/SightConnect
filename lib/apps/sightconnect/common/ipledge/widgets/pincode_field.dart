@@ -17,6 +17,7 @@ class PincodeField extends StatelessWidget {
           TextPosition(offset: pincodeController?.text.length ?? 0),
         );
       },
+      enabled: false,
       validator: (value) {
         value = value ?? "";
         if (value.isEmpty) {

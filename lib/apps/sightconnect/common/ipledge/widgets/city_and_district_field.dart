@@ -27,7 +27,7 @@ class CityAndDistrictField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         label: Text(
-          "City/ District *",
+          "City/ District",
           maxLines: 2,
         ),
       ),

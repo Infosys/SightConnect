@@ -27,7 +27,7 @@ class LocalityAndTownField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         label: Text(
-          "Locality/ Town *",
+          "Locality/ Town",
           maxLines: 2,
         ),
       ),

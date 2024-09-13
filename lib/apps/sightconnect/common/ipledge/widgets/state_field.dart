@@ -33,7 +33,7 @@ class StateField extends StatelessWidget {
             return null;
           },
           decoration: const InputDecoration(
-            labelText: 'State *',
+            labelText: 'State',
           ),
           onChanged: (value) {
             onSelected?.call(value);

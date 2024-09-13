@@ -28,7 +28,7 @@ class AddressField extends StatelessWidget {
       maxLines: 2,
       decoration: const InputDecoration(
         label: Text(
-          "Address (House No, Building, Street, Area) *",
+          "Address (House No, Building, Street, Area)",
           maxLines: 2,
         ),
       ),

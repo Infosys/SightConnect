@@ -47,11 +47,17 @@ class IPledgeFormPage extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    NameField(nameController: model.fullName),
+                    NameField(
+                      nameController: model.fullName,
+                      enabled: false,
+                    ),
                     const SizedBox(height: AppSize.km),
                     DOBField(dobController: model.dob),
                     const SizedBox(height: AppSize.km),
-                    MobileField(mobileController: model.mobile),
+                    MobileField(
+                      mobileController: model.mobile,
+                      enabled: false,
+                    ),
                     const SizedBox(height: AppSize.km),
                     GenderField(genderController: model.gender),
                     const SizedBox(height: AppSize.km),

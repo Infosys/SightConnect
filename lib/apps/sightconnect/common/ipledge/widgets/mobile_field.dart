@@ -4,9 +4,11 @@ class MobileField extends StatelessWidget {
   const MobileField({
     super.key,
     this.mobileController,
+    this.enabled = true,
   });
 
   final TextEditingController? mobileController;
+  final bool enabled;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -19,6 +21,7 @@ class MobileField extends StatelessWidget {
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.phone,
+      enabled: enabled,
       validator: (value) {
         value = value ?? "";
         if (value.isEmpty) {

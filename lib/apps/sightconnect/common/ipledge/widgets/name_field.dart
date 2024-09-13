@@ -4,7 +4,10 @@ class NameField extends StatelessWidget {
   const NameField({
     super.key,
     this.nameController,
+    this.enabled = true,
   });
+
+  final bool enabled;
 
   final TextEditingController? nameController;
   @override
@@ -24,6 +27,7 @@ class NameField extends StatelessWidget {
         }
         return null;
       },
+      enabled: enabled,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         labelText: "Full Name *",
