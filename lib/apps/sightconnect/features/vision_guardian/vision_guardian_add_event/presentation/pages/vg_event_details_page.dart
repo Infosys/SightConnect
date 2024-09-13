@@ -232,12 +232,12 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
               );
             },
           ),
-          ListTile(
-            title: const Text("Settings"),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          // ListTile(
+          //   title: const Text("Settings"),
+          //   onTap: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
         ],
       ),
     );
