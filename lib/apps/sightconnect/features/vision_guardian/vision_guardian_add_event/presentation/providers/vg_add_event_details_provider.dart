@@ -253,6 +253,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       Map<String, String> fileMap = {};
+      
       if (_image != null && _image?.path.isNotEmpty == true) {
         String file =
             await fileMsProvider.uploadImage(File(_image?.path ?? ""));
@@ -268,7 +269,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       } else {
         actors = {
           "role": "VISION_GUARDIAN",
-          "identifier": globalVGProvider.userId.toString(),
+          "identifier": vgUserDataProvider.userId.toString(),
           "isOwner": true
         };
       }
@@ -347,8 +348,9 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       filterListEvents(-1, "ALL");
       isLoading = false;
       notifyListeners();
-    } catch (e) {
+    } catch (e, s) {
       logger.e(e);
+      logger.e(s);
       isLoading = false;
       notifyListeners();
       rethrow;

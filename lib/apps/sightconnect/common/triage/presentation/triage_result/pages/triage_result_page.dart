@@ -38,7 +38,7 @@ class TriageResultPage extends ConsumerWidget {
 
         ref.read(accessibilityProvider).resetBrightness();
         if (PersistentAuthStateService.authState.activeRole ==
-            "ROLE_VOLUNTEER") {
+            "ROLE_VOLUNTEER" || PersistentAuthStateService.authState.activeRole == "ROLE_VISION_GUARDIAN") {
           Navigator.push(
               context,
               MaterialPageRoute(
