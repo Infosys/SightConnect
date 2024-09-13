@@ -228,45 +228,6 @@ class ImageDisplay extends StatelessWidget {
   }
 }
 
-class UploadFileButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  const UploadFileButton({
-    super.key,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Column(
-        children: [
-          Icon(
-            Icons.cloud_upload_sharp,
-            color: Colors.grey.shade400,
-            size: 72,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Choose your file here',
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Supported files: PNG, JPEG, JPG, PDF, DOCX, DOC',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Max size: 5MB',
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class ImageGrid extends StatelessWidget {
   const ImageGrid({
     super.key,
@@ -345,6 +306,45 @@ class ImageGrid extends StatelessWidget {
         //     buttonType: UploadButtonType.addImage,
         //   ),
       ],
+    );
+  }
+}
+
+class UploadFileButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  const UploadFileButton({
+    super.key,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Column(
+        children: [
+          Icon(
+            Icons.cloud_upload_sharp,
+            color: Colors.grey.shade400,
+            size: 72,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Choose your file here',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Supported files: PNG, JPEG, JPG, PDF, DOCX, DOC',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Max size: 5MB',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+        ],
+      ),
     );
   }
 }

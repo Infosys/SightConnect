@@ -1,7 +1,6 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
-import 'package:dynamic_form/shared/widgets/app_stepper.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
-import 'package:flutter/material.dart' hide Stepper;
+import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class FormStepperView extends StatefulWidget {
@@ -98,16 +97,22 @@ class FormStepperViewState extends State<FormStepperView> {
       );
     }
 
-    return AppStepper(
+    return Stepper(
+      elevation: 0,
+      controller: _scrollController,
+      physics: const ClampingScrollPhysics(),
+      type: widget.axis == Axis.horizontal
+          ? StepperType.horizontal
+          : StepperType.vertical,
       currentStep: _currentStep,
       onStepTapped: _onStepTapped,
       onStepContinue: _nextStep,
       onStepCancel: _previousStep,
       steps: widget.pages.map((page) {
-        return AppStep(
+        return Step(
           isActive: _currentStep == widget.pages.indexOf(page),
-          state: AppStepState.indexed,
-          title: Text(page.name),
+          state: StepState.indexed,
+          title: const SizedBox(),
           content: PageWidget(
             readOnly: widget.readOnly,
             elements: page.elements,
@@ -116,10 +121,31 @@ class FormStepperViewState extends State<FormStepperView> {
           ),
         );
       }).toList(),
-      type: widget.axis == Axis.horizontal
-          ? AppStepperType.horizontal
-          : AppStepperType.vertical,
-      controller: _scrollController,
+      controlsBuilder: (BuildContext context, ControlsDetails details) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              if (_currentStep > 0)
+                OutlinedButton(
+                  onPressed: details.onStepCancel,
+                  child: const Text('BACK'),
+                ),
+              if (_currentStep < widget.pages.length - 1)
+                ElevatedButton(
+                  onPressed: details.onStepContinue,
+                  child: const Text('NEXT'),
+                ),
+              if (_currentStep == widget.pages.length - 1)
+                ElevatedButton(
+                  onPressed: widget.readOnly ? null : _handleSubmit,
+                  child: const Text('SUBMIT'),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
