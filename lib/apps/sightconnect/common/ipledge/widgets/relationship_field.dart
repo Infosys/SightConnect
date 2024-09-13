@@ -13,43 +13,25 @@ class RelationShipField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Autocomplete<String>(
-      fieldViewBuilder: (
-        BuildContext context,
-        TextEditingController fieldController,
-        FocusNode focusNode,
-        VoidCallback onFieldSubmitted,
-      ) {
-        return TextFormField(
-          controller: fieldController,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          focusNode: focusNode,
-          onFieldSubmitted: (_) => onFieldSubmitted(),
-          validator: (value) {
-            value = value ?? "";
-            if (value.isEmpty) {
-              return "Relationship is required";
-            }
-            return null;
-          },
-          decoration: const InputDecoration(labelText: "Relationship *"),
-          onChanged: (value) {
-            onSelected?.call(value);
-          },
+    return DropdownButtonFormField<String>(
+      value: initialValue,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: const InputDecoration(labelText: "Relationship *"),
+      items: relationShips.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
         );
+      }).toList(),
+      onChanged: (String? newValue) {
+        onSelected?.call(newValue ?? "");
       },
-      displayStringForOption: (String option) => option,
-      optionsBuilder: (TextEditingValue textEditingValue) {
-        if (textEditingValue.text.isEmpty) {
-          return const Iterable<String>.empty();
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Relationship is required";
         }
-        return relationShips.where((String option) {
-          return option
-              .toLowerCase()
-              .contains(textEditingValue.text.toLowerCase().trim());
-        });
+        return null;
       },
-      onSelected: onSelected,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/regex/regex.dart';
 import 'package:flutter/material.dart';
 
 class MobileField extends StatelessWidget {
@@ -26,8 +27,11 @@ class MobileField extends StatelessWidget {
         value = value ?? "";
         if (value.isEmpty) {
           return "Mobile Number is required";
+        } else if (Regex.isMobile(value)) {
+          return "Invalid Mobile Number";
+        } else {
+          return null;
         }
-        return null;
       },
       decoration: const InputDecoration(
         labelText: 'Mobile Number *',

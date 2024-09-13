@@ -19,87 +19,88 @@ class GenderField extends HookWidget {
   Widget build(BuildContext context) {
     final selectedGender = useState<String>(genderController?.text ?? "");
 
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Text(
-              "Gender *",
-              style: applyRobotoFont(
-                fontSize: 14,
-                color: AppColor.grey,
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            "Gender *",
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.grey,
             ),
           ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                children: [
-                  Radio(
-                    value: GenderEnum.male.value,
-                    groupValue: selectedGender.value,
-                    onChanged: (value) {
-                      // selectedGender.value = value!;
-                      // genderController?.text = value;
-                    },
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              children: [
+                Radio(
+                  activeColor: selectedGender.value == GenderEnum.male.value
+                      ? Colors.grey
+                      : null,
+                  value: GenderEnum.male.value,
+                  groupValue: selectedGender.value,
+                  onChanged: (value) {
+                    // selectedGender.value = value!;
+                    // genderController?.text = value;
+                  },
+                ),
+                Text(
+                  GenderEnum.male.displayValue,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.grey,
                   ),
-                  Text(
-                    GenderEnum.male.displayValue,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
-                    ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Radio(
+                  value: GenderEnum.female.value,
+                  groupValue: selectedGender.value,
+                  onChanged: (value) {
+                    // selectedGender.value = value!;
+                    // genderController?.text = value;
+                  },
+                ),
+                Text(
+                  GenderEnum.female.displayValue,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.grey,
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  Radio(
-                    value: GenderEnum.female.value,
-                    groupValue: selectedGender.value,
-                    onChanged: (value) {
-                      // selectedGender.value = value!;
-                      // genderController?.text = value;
-                    },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Radio<String>(
+                  value: GenderEnum.others.value,
+                  groupValue: selectedGender.value,
+                  onChanged: (value) {
+                    // selectedGender.value = value!;
+                    // genderController?.text = value;
+                  },
+                ),
+                Text(
+                  GenderEnum.others.displayValue,
+                  style: applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.grey,
                   ),
-                  Text(
-                    GenderEnum.female.displayValue,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Radio<String>(
-                    value: GenderEnum.others.value,
-                    groupValue: selectedGender.value,
-                    onChanged: (value) {
-                      // selectedGender.value = value!;
-                      // genderController?.text = value;
-                    },
-                  ),
-                  Text(
-                    GenderEnum.others.displayValue,
-                    style: applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

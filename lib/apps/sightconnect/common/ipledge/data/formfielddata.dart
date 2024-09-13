@@ -1,3 +1,5 @@
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/patient_response_model.dart';
+
 const List<String> states = [
   'Andhra Pradesh',
   'Arunachal Pradesh',
@@ -37,40 +39,5 @@ const List<String> states = [
   'Puducherry'
 ];
 
-List<String> relationShips = [
-  'Father',
-  'Mother',
-  'Brother',
-  'Sister',
-  'Son',
-  'Daughter',
-  'Grandfather',
-  'Grandmother',
-  'Grandson',
-  'Granddaughter',
-  'Uncle',
-  'Aunt',
-  'Nephew',
-  'Niece',
-  'Cousin',
-  'Husband',
-  'Wife',
-  'Father-in-law',
-  'Mother-in-law',
-  'Brother-in-law',
-  'Sister-in-law',
-  'Son-in-law',
-  'Daughter-in-law',
-  'Grandfather-in-law',
-  'Grandmother-in-law',
-  'Grandson-in-law',
-  'Granddaughter-in-law',
-  'Uncle-in-law',
-  'Aunt-in-law',
-  'Nephew-in-law',
-  'Niece-in-law',
-  'Cousin-in-law',
-  'Husband-in-law',
-  'Wife-in-law',
-  'Other'
-];
+List<String> relationShips =
+    FamilyRelationShip.values.map((e) => e.name).toList();

@@ -16,6 +16,7 @@ import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class IPledgeFormPage extends ConsumerWidget {
@@ -42,6 +43,17 @@ class IPledgeFormPage extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              AppCard(
+                title: "Important",
+                child: Text(
+                  "If you wish to update the locked fields, please do so in the profile page.",
+                  style: applyRobotoFont(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSize.ks),
               AppCard(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -152,9 +164,13 @@ class IPledgeFormPage extends ConsumerWidget {
           model.setIAgreeAndAccepted(value!);
         },
         onPressed: () async {
-          await model.submitPledge();
-          if (context.mounted) {
-            showIplegeDialog(context);
+          if (model.formKey.currentState!.validate()) {
+            await model.submitPledge();
+            if (context.mounted) {
+              showIplegeDialog(context);
+            }
+          } else {
+            Fluttertoast.showToast(msg: "Please fill all the required fields");
           }
         },
       ),
