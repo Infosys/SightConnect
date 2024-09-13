@@ -7,8 +7,10 @@ import 'package:dynamic_form/shared/utlities/cloud_service.dart';
 import 'package:dynamic_form/shared/utlities/file_picker.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FormFile extends HookWidget {
   const FormFile({
@@ -67,7 +69,7 @@ class FormFile extends HookWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ImagePicker(
+              ImagePickerWidget(
                 state: state,
                 field: field,
                 images: images,
@@ -91,8 +93,8 @@ class FormFile extends HookWidget {
   }
 }
 
-class ImagePicker extends StatelessWidget {
-  const ImagePicker({
+class ImagePickerWidget extends StatelessWidget {
+  const ImagePickerWidget({
     super.key,
     required this.state,
     required this.field,
@@ -147,11 +149,12 @@ class ImagePicker extends StatelessWidget {
               ),
             const SizedBox(height: 16.0),
             if (images.value.isEmpty)
-              InitialUploadButton(
+              UploadButton(
                 onChanged: onChanged,
                 images: images,
                 state: state,
                 isLoading: isLoading,
+                buttonType: UploadButtonType.initialUpload,
               ),
           ],
         ),
@@ -334,126 +337,164 @@ class ImageGrid extends StatelessWidget {
             onTap: () => showAllImages.value = !showAllImages.value,
           ),
         // if (images.value.isNotEmpty)
-        //   AddImageButton(
+        //   UploadButton(
         //     onChanged: onChanged,
         //     images: images,
         //     state: state,
         //     isLoading: isLoading,
+        //     buttonType: UploadButtonType.addImage,
         //   ),
       ],
     );
   }
 }
 
-class AddImageButton extends StatelessWidget {
-  const AddImageButton({
-    super.key,
-    required this.onChanged,
-    required this.images,
-    required this.state,
-    required this.isLoading,
-  });
-
-  final Function(List<String>) onChanged;
-  final ValueNotifier<List<String>> images;
-  final FormFieldState<List<String>> state;
-  final ValueNotifier<bool> isLoading;
-
-  Future<String> uploadFile(PlatformFile file) async {
-    return CloudService().uploadImage(file);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 100,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Center(
-        child: InkWell(
-          onTap: () async {
-            try {
-              isLoading.value = true;
-              final files = await FilePickerService.pickFiles();
-              if (files != null) {
-                for (var file in files.files) {
-                  final url = await uploadFile(file);
-                  images.value = List.from(images.value)..add(url);
-                }
-                onChanged(images.value);
-                state.didChange(images.value);
-              } else {
-                debugPrint('No images selected.');
-              }
-            } catch (e) {
-              debugPrint('Error picking images: $e');
-            } finally {
-              isLoading.value = false;
-            }
-          },
-          child: const Icon(
-            Icons.add,
-            size: 42,
-          ),
-        ),
-      ),
-    );
-  }
+enum UploadButtonType {
+  addImage,
+  initialUpload,
 }
 
-class InitialUploadButton extends StatelessWidget {
-  const InitialUploadButton({
+class UploadButton extends StatelessWidget {
+  const UploadButton({
     super.key,
     required this.onChanged,
     required this.images,
     required this.state,
     required this.isLoading,
+    required this.buttonType,
   });
 
   final Function(List<String>) onChanged;
   final ValueNotifier<List<String>> images;
   final FormFieldState<List<String>> state;
   final ValueNotifier<bool> isLoading;
+  final UploadButtonType buttonType;
 
   Future<String> uploadFile(PlatformFile file) async {
     return CloudService().uploadImage(file);
   }
 
+  Future<String> uploadImage(XFile file) async {
+    return CloudService().uploadImage(PlatformFile(
+      name: file.name,
+      path: file.path,
+      size: await file.length(),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: UploadFileButton(
-            onPressed: () async {
-              try {
-                isLoading.value = true;
-                final files = await FilePickerService.pickFiles();
+    return buttonType == UploadButtonType.initialUpload
+        ? Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: UploadFileButton(
+                  onPressed: () => _handleButtonPress(context),
+                ),
+              ),
+            ],
+          )
+        : Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Center(
+              child: InkWell(
+                onTap: () => _handleButtonPress(context),
+                child: const Icon(
+                  Icons.add,
+                  size: 42,
+                ),
+              ),
+            ),
+          );
+  }
 
-                if (files != null) {
-                  for (var file in files.files) {
-                    final url = await uploadFile(file);
-                    images.value = List.from(images.value)..add(url);
+  void _handleButtonPress(BuildContext context) async {
+    if (kIsWeb) {
+      final files = await FilePickerService.pickFiles();
+      if (files != null) {
+        try {
+          isLoading.value = true;
+          for (var file in files.files) {
+            final url = await uploadFile(file);
+            images.value = List.from(images.value)..add(url);
+          }
+          onChanged(images.value);
+          state.didChange(images.value);
+        } catch (e) {
+          debugPrint('Error picking images: $e');
+        } finally {
+          isLoading.value = false;
+        }
+      }
+    } else {
+      _showBottomSheet(context);
+    }
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('Take a photo'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  final picker = ImagePicker();
+                  final pickedFile =
+                      await picker.pickImage(source: ImageSource.camera);
+                  if (pickedFile != null) {
+                    try {
+                      isLoading.value = true;
+                      final url = await uploadImage(pickedFile);
+                      images.value = List.from(images.value)..add(url);
+                      onChanged(images.value);
+                      state.didChange(images.value);
+                    } catch (e) {
+                      debugPrint('Error uploading image: $e');
+                    } finally {
+                      isLoading.value = false;
+                    }
                   }
-                  onChanged(images.value);
-                  state.didChange(images.value);
-                } else {
-                  debugPrint('No images selected.');
-                }
-              } catch (e) {
-                debugPrint('Error picking images: $e');
-              } finally {
-                isLoading.value = false;
-              }
-            },
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Pick from gallery'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  final files = await FilePickerService.pickFiles();
+                  if (files != null) {
+                    try {
+                      isLoading.value = true;
+                      for (var file in files.files) {
+                        final url = await uploadFile(file);
+                        images.value = List.from(images.value)..add(url);
+                      }
+                      onChanged(images.value);
+                      state.didChange(images.value);
+                    } catch (e) {
+                      debugPrint('Error picking images: $e');
+                    } finally {
+                      isLoading.value = false;
+                    }
+                  }
+                },
+              ),
+            ],
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }
