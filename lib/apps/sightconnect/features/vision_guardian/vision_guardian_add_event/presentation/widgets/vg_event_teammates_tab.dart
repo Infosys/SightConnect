@@ -8,6 +8,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../shared/constants/app_color.dart';
 import '../providers/vg_add_member_provider.dart';
+import 'vg_empty_result_card.dart';
+import 'vg_event_teammates_data_cards.dart';
 
 class EventTeammatesTab extends HookConsumerWidget {
   const EventTeammatesTab({super.key});
@@ -15,30 +17,30 @@ class EventTeammatesTab extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    // var model = ref.watch(visionGuadianAddMemberProvider);
+    var model = ref.watch(visionGuadianAddMemberProvider);
     var addMember = useState<bool>(false);
-    // var data = model.teammateList;
-    // var loading = model.loading;
+    var data = model.teammateList;
+    var loading = model.loading;
 
     var nameController1 = useTextEditingController();
     var mobileController1 = useTextEditingController();
 
-    // ref.listen(visionGuadianAddMemberProvider, (previous, next) {
-    //   if (next.error) {
-    //     Fluttertoast.showToast(
-    //       msg: loc.vgErrorFetchingTeammatesDetails,
-    //     );
-    //   }
-    // });
+    ref.listen(visionGuadianAddMemberProvider, (previous, next) {
+      if (next.error) {
+        Fluttertoast.showToast(
+          msg: loc.vgErrorFetchingTeammatesDetails,
+        );
+      }
+    });
 
-    // if (loading) {
-    //   return const Center(
-    //     child: CircularProgressIndicator.adaptive(),
-    //   );
-    // }
-    // if (data.isEmpty) {
-    //   return const VisionGuardianEmptyResultCard(type: "teammates");
-    // }
+    if (loading) {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
+    if (data.isEmpty) {
+      return const VisionGuardianEmptyResultCard(type: "teammates");
+    }
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -47,30 +49,30 @@ class EventTeammatesTab extends HookConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Text(
-            //   "${loc.vgTeammates}(${data.length})",
-            //   style: applyRobotoFont(
-            //     fontSize: 18,
-            //     fontWeight: FontWeight.w500,
-            //     color: AppColor.black,
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: AppSize.kl,
-            // ),
-            // Flexible(
-            //   child: Column(mainAxisSize: MainAxisSize.min, children: [
-            //     ...data.map((e) {
-            //       return TeammatesDataCards(
-            //         data: e[0],
-            //         type: "default",
-            //       );
-            //     })
-            //   ]),
-            // ),
-            // const SizedBox(
-            //   height: AppSize.km,
-            // ),
+            Text(
+              "${loc.vgTeammates}(${data.length})",
+              style: applyRobotoFont(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: AppColor.black,
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.kl,
+            ),
+            Flexible(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                ...data.map((e) {
+                  return TeammatesDataCards(
+                    data: e[0],
+                    type: "default",
+                  );
+                })
+              ]),
+            ),
+            const SizedBox(
+              height: AppSize.km,
+            ),
             Visibility(
               visible: addMember.value,
               child: Container(

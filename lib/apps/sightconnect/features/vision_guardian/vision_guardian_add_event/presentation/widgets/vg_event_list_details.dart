@@ -59,10 +59,10 @@ class VisionEventListDetails extends ConsumerWidget {
               ref
                   .read(addEventDetailsProvider)
                   .setEventId(response[index].id.toString());
-              SharedPreferenceService.storeEventId(
-                  response[index].id.toString());
-              logger.f(
-                  "Event id in event list details page : ${SharedPreferenceService.getEventId!}");
+              // SharedPreferenceService.storeEventId(
+              //     response[index].id.toString());
+              // logger.f(
+              //     "Event id in event list details page : ${SharedPreferenceService.getEventId!}");
               Navigator.push(
                 context,
                 MaterialPageRoute(

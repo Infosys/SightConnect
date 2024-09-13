@@ -34,8 +34,8 @@ class _EventPatientsTabState extends ConsumerState<EventPatientsTab>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final model = ref.watch(addEventDetailsProvider);
-      model.setEventId(SharedPreferenceService.getEventId!);
+      // final model = ref.watch(addEventDetailsProvider);
+      // model.setEventId(SharedPreferenceService.getEventId!);
       // model.loadingToggle();
     });
   }

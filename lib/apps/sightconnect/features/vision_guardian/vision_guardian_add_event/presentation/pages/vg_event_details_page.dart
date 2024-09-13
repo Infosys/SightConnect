@@ -16,6 +16,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../shared/constants/app_color.dart';
 import '../../../../../../../shared/constants/app_size.dart';
+import '../providers/vg_add_event_details_provider.dart';
+import 'vg_add_event_details_page.dart';
 
 class VisionGuardianEventDetailsPage extends HookConsumerWidget {
   const VisionGuardianEventDetailsPage({super.key, required this.eventDetails});
@@ -218,24 +220,24 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
               );
             },
           ),
-          // ListTile(
-          //   title: const Text("Create New Event"),
-          //   onTap: () {
-          //     ref.read(addEventDetailsProvider).setIsLoading();
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => const VGAddEventDetailsPage(),
-          //       ),
-          //     );
-          //   },
-          // ),
-          // ListTile(
-          //   title: const Text("Settings"),
-          //   onTap: () {
-          //     Navigator.pop(context);
-          //   },
-          // ),
+          ListTile(
+            title: const Text("Create New Event"),
+            onTap: () {
+              ref.read(addEventDetailsProvider).setIsLoading();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VGAddEventDetailsPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("Settings"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );

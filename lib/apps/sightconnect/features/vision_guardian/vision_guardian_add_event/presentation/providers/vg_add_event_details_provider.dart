@@ -8,7 +8,6 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/repository/vg_add_event_respository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/file_ms_service.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
@@ -16,13 +15,15 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import 'vg_user_data_provider.dart';
+
 final addEventDetailsProvider =
     ChangeNotifierProvider.autoDispose<AddEventDetailsNotifier>((ref) {
   return AddEventDetailsNotifier(
     vgAddEventRepository: ref.watch(vgAddEventRepository),
     globalVGProvider: ref.read(globalVGProvider),
     fileMsProvider: ref.read(fileMsServiceProvider),
-    globalVolunteerProvider: ref.read(globalVolunteerProvider),
+    vgUserDataProvider: ref.read(vgUserDataProvider),
   );
 });
 
@@ -30,12 +31,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
   final VgAddEventRepository vgAddEventRepository;
   final GlobalVGProvider globalVGProvider;
   final FileMsService fileMsProvider;
-  final GlobalVolunteerProvider globalVolunteerProvider;
+  final VGUserDataProvider vgUserDataProvider;
   AddEventDetailsNotifier({
     required this.vgAddEventRepository,
     required this.globalVGProvider,
     required this.fileMsProvider,
-    required this.globalVolunteerProvider,
+    required this.vgUserDataProvider,
   }) {
     List<VisionGuardianEventModel> previousList = [];
     getVgEvents(previousList, "default");
@@ -126,20 +127,20 @@ class AddEventDetailsNotifier extends ChangeNotifier {
 
       List<VisionGuardianPatientResponseModel> response;
 
-      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
         response = await vgAddEventRepository.getTriageReport(queryData: {
           "campaignEventId": eventId,
-          "performerId": [globalVolunteerProvider.userId],
+          "performerId": [vgUserDataProvider.userId],
           "pageable": {"page": offset, "size": 10}
         });
         // response = response + responseVolunteer;
-      } else {
-        response = await vgAddEventRepository.getTriageReport(queryData: {
-          "campaignEventId": eventId,
-          "performerId": [globalVGProvider.userId],
-          "pageable": {"page": offset, "size": 10}
-        });
-      }
+      // } else {
+      //   response = await vgAddEventRepository.getTriageReport(queryData: {
+      //     "campaignEventId": eventId,
+      //     "performerId": [globalVGProvider.userId],
+      //     "pageable": {"page": offset, "size": 10}
+      //   });
+      // }
 
       setEventPatients(previousList + response);
       setSearchEventPatients(previousList + response);
@@ -158,10 +159,10 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     try {
       eventLoading = true;
       List<VisionGuardianEventModel> response;
-      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
         response = await vgAddEventRepository.getVGEvents(
           queryData: {
-            "actorIdentifier": globalVolunteerProvider.userId.toString(),
+            "actorIdentifier": vgUserDataProvider.userId.toString(),
             "eventStatusFilter":
                 eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
             "pageable": {
@@ -171,20 +172,20 @@ class AddEventDetailsNotifier extends ChangeNotifier {
             },
           },
         );
-      } else {
-        response = await vgAddEventRepository.getVGEvents(
-          queryData: {
-            "actorIdentifier": globalVGProvider.userId.toString(),
-            "eventStatusFilter":
-                eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
-            "pageable": {
-              "page": type == "search" ? searchEventOffset : eventOffset,
-              "size": 10,
-              "title-like": eventSearchQuery,
-            },
-          },
-        );
-      }
+      // } else {
+      //   response = await vgAddEventRepository.getVGEvents(
+      //     queryData: {
+      //       "actorIdentifier": globalVGProvider.userId.toString(),
+      //       "eventStatusFilter":
+      //           eventStatusFilter.isEmpty ? "ALL" : eventStatusFilter,
+      //       "pageable": {
+      //         "page": type == "search" ? searchEventOffset : eventOffset,
+      //         "size": 10,
+      //         "title-like": eventSearchQuery,
+      //       },
+      //     },
+      //   );
+      // }
 
       setEventList(previousList + response, type);
       if (type == "search") {
@@ -261,12 +262,12 @@ class AddEventDetailsNotifier extends ChangeNotifier {
       if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
         actors = {
           "role": "VOLUNTEER",
-          "identifier": globalVolunteerProvider.userId.toString(),
+          "identifier": vgUserDataProvider.userId.toString(),
           "isOwner": true
         };
       } else {
         actors = {
-          "role": "MEDICAL_DOCTOR",
+          "role": "VISION_GUARDIAN",
           "identifier": globalVGProvider.userId.toString(),
           "isOwner": true
         };
@@ -449,7 +450,7 @@ class AddEventDetailsNotifier extends ChangeNotifier {
     logger.d("page");
     if (eventPatientController.position.pixels ==
             eventPatientController.position.maxScrollExtent &&
-        (newEventPatientList.length == 10 )) {
+        (newEventPatientList.length == 10)) {
       offset = offset + 1;
       getEventPatientTriageReport(listOfEventPatients);
     }

@@ -14,6 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../shared/constants/app_color.dart';
 import '../../../../../../../shared/constants/app_size.dart';
+import '../../../vision_guardian_add_event/presentation/providers/vg_user_data_provider.dart';
 
 class VisionGuardianHomePage extends ConsumerWidget {
   const VisionGuardianHomePage({super.key});
@@ -21,10 +22,7 @@ class VisionGuardianHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    var name =
-        PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER"
-            ? ref.watch(globalVolunteerProvider).name
-            : ref.watch(globalVGProvider).name;
+    var name = ref.watch(vgUserDataProvider).getName ?? "";
 
     return Scaffold(
       backgroundColor: AppColor.scaffold,
