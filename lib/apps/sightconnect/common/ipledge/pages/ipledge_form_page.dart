@@ -27,8 +27,8 @@ class IPledgeFormPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(ipledgeProvider);
     if (model.isLoading) {
-      return Container(
-          child: const Center(
+      return const Scaffold(
+          body: Center(
         child: CircularProgressIndicator(),
       ));
     }
@@ -49,25 +49,11 @@ class IPledgeFormPage extends ConsumerWidget {
                   children: [
                     NameField(nameController: model.fullName),
                     const SizedBox(height: AppSize.km),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DOBField(
-                            dobController: model.dob,
-                          ),
-                        ),
-                        const SizedBox(width: AppSize.km),
-                        Expanded(
-                          child: MobileField(
-                            mobileController: model.mobile,
-                          ),
-                        )
-                      ],
-                    ),
+                    DOBField(dobController: model.dob),
                     const SizedBox(height: AppSize.km),
-                    GenderField(
-                      genderController: model.gender,
-                    ),
+                    MobileField(mobileController: model.mobile),
+                    const SizedBox(height: AppSize.km),
+                    GenderField(genderController: model.gender),
                     const SizedBox(height: AppSize.km),
                     EmailField(emailController: model.email)
                   ],

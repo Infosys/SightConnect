@@ -1,12 +1,14 @@
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final ipledgeProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => IpledgeProvider(),
+  (ref) => IpledgeProvider(ref.watch(globalPatientProvider)),
 );
 
 class IpledgeProvider extends ChangeNotifier {
+  final GlobalPatientProvider globalPatientProvider;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final fullName = TextEditingController();
   final dob = TextEditingController();
@@ -28,7 +30,18 @@ class IpledgeProvider extends ChangeNotifier {
 
   bool isIAgreeAndAccepted = false;
 
-  IpledgeProvider();
+  IpledgeProvider(this.globalPatientProvider) {
+    fullName.text =
+        globalPatientProvider.activeUser?.profile?.patient?.name ?? "";
+    dob.text =
+        globalPatientProvider.activeUser?.profile?.patient?.dayOfBirth ?? "";
+    mobile.text =
+        globalPatientProvider.activeUser?.profile?.patient?.phoneNumber ?? "";
+    gender.text =
+        globalPatientProvider.activeUser?.profile?.patient?.gender?.name ?? "";
+    email.text =
+        globalPatientProvider.activeUser?.profile?.patient?.email ?? "";
+  }
 
   void setIAgreeAndAccepted(bool value) {
     isIAgreeAndAccepted = value;
@@ -55,5 +68,24 @@ class IpledgeProvider extends ChangeNotifier {
     });
     isLoading = false;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    fullName.dispose();
+    dob.dispose();
+    mobile.dispose();
+    gender.dispose();
+    email.dispose();
+    kinName.dispose();
+    kinMobile.dispose();
+    kinRelationship.dispose();
+    address.dispose();
+    state.dispose();
+    pincode.dispose();
+    localityAndTown.dispose();
+    cityAndDistrict.dispose();
+
+    super.dispose();
   }
 }
