@@ -2,6 +2,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_list_details.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/widgets/vg_event_search.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -57,8 +58,7 @@ class VisionGuardianEventPage extends HookConsumerWidget {
           ),
         ),
       ),
-      floatingActionButton: PersistentAuthStateService.authState.activeRole ==
-              "ROLE_VISION_GUARDIAN"
+      floatingActionButton: _enableFloatingButton()
           ? InkWell(
               onTap: () {
                 ref.read(addEventDetailsProvider).setIsLoading();
@@ -131,5 +131,17 @@ class VisionGuardianEventPage extends HookConsumerWidget {
         }),
       ),
     );
+  }
+
+  bool _enableFloatingButton() {
+    final permissions = PersistentAuthStateService.authState.permissions;
+    logger.f(permissions);
+    if (permissions != null &&
+        permissions.isNotEmpty &&
+        permissions.contains("EVENT_CREATOR")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
