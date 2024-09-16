@@ -1,5 +1,4 @@
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_advice_cards.dart';
-import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_expert_help_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_eye_result_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/widgets/cataract_report_details_header.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';

@@ -159,7 +159,7 @@ class InitializationProvider extends ChangeNotifier {
         response.id.toString(),
       );
       return true;
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
   }

@@ -2,9 +2,7 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_eye_assessment/data/contracts/vg_eye_assessment_repository.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_eye_assessment/data/repository/vg_eye_assessment_respository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -91,17 +89,17 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
 
       List<VisionGuardianPatientResponseModel> response;
 
-        response = await vgEyeAssessmentRepository.getVgEyeAssessmentReports(
-            practitionerId: vgUserDataProvider.getUserId??0,
-            queryparams: {
-              "page": offset,
-              "size": 10,
-              "category": statusfilter == "ALL" ? "" : statusfilter,
-              "sort": ["encounterStartDate"]
-            });
+      response = await vgEyeAssessmentRepository.getVgEyeAssessmentReports(
+          practitionerId: vgUserDataProvider.getUserId ?? 0,
+          queryparams: {
+            "page": offset,
+            "size": 10,
+            "category": statusfilter == "ALL" ? "" : statusfilter,
+            "sort": ["encounterStartDate"]
+          });
 
       // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
-      
+
       // } else {
       //   response = await vgEyeAssessmentRepository.getVgEyeAssessmentReports(
       //       practitionerId: globalVGProvider.userId,
