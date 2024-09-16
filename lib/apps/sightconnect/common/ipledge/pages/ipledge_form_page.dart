@@ -125,7 +125,7 @@ class IPledgeFormPage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     AddressField(
-                      enabled: !model.isPledgingDone,
+                      enabled: false,
                       addressController: model.address,
                     ),
                     const SizedBox(height: AppSize.km),
@@ -133,7 +133,7 @@ class IPledgeFormPage extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: StateField(
-                            enabled: !model.isPledgingDone,
+                            enabled: false,
                             initialValue: model.state.text,
                             onSelected: (value) {
                               model.state.text = value;
@@ -153,14 +153,14 @@ class IPledgeFormPage extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: LocalityAndTownField(
-                            enabled: !model.isPledgingDone,
+                            enabled: false,
                             localityController: model.localityAndTown,
                           ),
                         ),
                         const SizedBox(width: AppSize.km),
                         Expanded(
                           child: CityAndDistrictField(
-                            enabled: !model.isPledgingDone,
+                            enabled: false,
                             cityController: model.cityAndDistrict,
                           ),
                         ),

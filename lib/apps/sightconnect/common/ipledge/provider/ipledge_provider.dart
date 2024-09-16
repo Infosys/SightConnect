@@ -48,6 +48,14 @@ class IpledgeProvider extends ChangeNotifier {
         globalPatientProvider.activeUser?.profile?.patient?.gender?.name ?? "";
     email.text =
         globalPatientProvider.activeUser?.profile?.patient?.email ?? "";
+    address.text = globalPatientProvider
+            .activeUser?.profile?.patient?.address?.first.line
+            ?.trim()
+            .replaceAll(';', ' ') ??
+        "";
+    state.text = globalPatientProvider
+            .activeUser?.profile?.patient?.address?.first.state ??
+        "";
 
     _prefillAddress();
     _getPledgeInfo();

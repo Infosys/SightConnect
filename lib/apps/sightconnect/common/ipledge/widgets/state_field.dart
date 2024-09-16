@@ -22,6 +22,9 @@ class StateField extends StatelessWidget {
         FocusNode focusNode,
         VoidCallback onFieldSubmitted,
       ) {
+        if (initialValue != null) {
+          fieldController.text = initialValue!;
+        }
         return TextFormField(
           enabled: enabled,
           controller: fieldController,
