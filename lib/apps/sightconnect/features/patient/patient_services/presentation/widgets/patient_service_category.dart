@@ -68,8 +68,8 @@ class PatientServiceCategory extends ConsumerWidget {
           Wrap(
             runSpacing: Responsive.isMobile(context) ? 10 : 20,
             spacing: Responsive.isMobile(context) ? 10 : 20,
-            alignment:
-                !isUserBeta ? WrapAlignment.start : WrapAlignment.spaceAround,
+            alignment: WrapAlignment.start,
+            runAlignment: WrapAlignment.start,
             children: displayServices
                 .map(
                   (miniapp) => InkWell(
