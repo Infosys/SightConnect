@@ -54,6 +54,10 @@ class OptometristTriageResponse with _$OptometristTriageResponse {
     bool? eyeScanAssistance,
     bool? redEye,
     bool? cataract,
+    bool? redEyeOS,
+    bool? redEyeOD,
+    bool? cataractOD,
+    bool? cataractOS,
     String? languageUsed,
     String? longDistanceUsed,
   }) = _OptometristTriageResponse;

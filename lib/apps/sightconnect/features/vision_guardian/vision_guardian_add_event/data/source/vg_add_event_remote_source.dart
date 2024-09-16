@@ -5,12 +5,13 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/visi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_patient_response_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/models/volunteer_post_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vg_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/dio_service.dart';
 import 'package:eye_care_for_all/shared/services/exceptions.dart';
 import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../presentation/providers/vg_user_data_provider.dart';
 
 var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(
   (ref) {
@@ -42,7 +43,7 @@ var vgAddEventRemoteSource = Provider(
     ref.read(dioProvider),
     ref.read(getTriageModelProvider),
     ref.read(globalVGProvider),
-    ref.read(globalVolunteerProvider),
+    ref.read(vgUserDataProvider),
   ),
 );
 
@@ -88,9 +89,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   final Dio _dio;
   final GetTriageModelNotifier getTriageModelProvider;
   final GlobalVGProvider globalVGProvider;
-  final GlobalVolunteerProvider globalVolunteerProvider;
+  final VGUserDataProvider vgUserDataProvider;
   VgAddEventRemoteSourceImpl(this._dio, this.getTriageModelProvider,
-      this.globalVGProvider, this.globalVolunteerProvider);
+      this.globalVGProvider, this.vgUserDataProvider);
 
   @override
   Future<List<VisionGuardianEventModel>> getVGEvents({
@@ -160,15 +161,15 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
   Future deleteVGEvents({required String eventId}) async {
     final endpoint = "/services/triage/api/v2/campaign-events/$eventId";
     Map<String, dynamic> queryParameters;
-    if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+    // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
       queryParameters = {
-        "login-actor-id": globalVolunteerProvider.user!.id!,
+        "login-actor-id": vgUserDataProvider.getUserId!,
       };
-    } else {
-      queryParameters = {
-        "login-actor-id": globalVGProvider.user!.id!,
-      };
-    }
+    // } else {
+    //   queryParameters = {
+    //     "login-actor-id": globalVGProvider.user!.id!,
+    //   };
+    // }
 
     try {
       final response =
@@ -218,7 +219,7 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
         logger.f("newResponse: $newResponse");
       } else {
         newResponse = {
-          "role": "MEDICAL_PRACTITIONER",
+          "role": "VISION_GUARDIAN",
           "identifier": "${patientresponse.data[0]["id"]}",
           "isOwner": false
         };
@@ -365,6 +366,8 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
       List<VisionGuardianPatientResponseModel> data = (response.data as List)
           .map((e) => VisionGuardianPatientResponseModel.fromJson(e))
           .toList();
+      logger.f("response: $response");
+      logger.f("data: $data");
 
       return data;
     } on DioException catch (e) {

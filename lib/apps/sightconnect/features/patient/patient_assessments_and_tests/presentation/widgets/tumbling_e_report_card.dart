@@ -4,10 +4,13 @@ import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../../main.dart';
 
-class TumblingEReportCard extends StatelessWidget {
+enum VisionScale { logmar, snellen }
+
+class TumblingEReportCard extends HookWidget {
   const TumblingEReportCard({
     super.key,
     this.tumblingEData,
@@ -17,12 +20,15 @@ class TumblingEReportCard extends StatelessWidget {
   final String? observationDescription;
   @override
   Widget build(BuildContext context) {
+    var isShortDistanceSnellen = useState<bool>(true);
+    var isLongDistanceSnellen = useState<bool>(true);
     List<ObservationBriefEntity> shortDistance =
         tumblingEData!.where((element) => element.code == "Near").toList();
     List<ObservationBriefEntity> longDistance =
         tumblingEData!.where((element) => element.code == "Distance").toList();
     final loc = context.loc!;
-    logger.d("shortDistance : ${shortDistance.map((e) => e.toString()) } \n longDistance : ${longDistance.map((e) => e.toString())}");
+    logger.d(
+        "shortDistance : ${shortDistance.map((e) => e.toString())} \n longDistance : ${longDistance.map((e) => e.toString())}");
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
@@ -71,13 +77,56 @@ class TumblingEReportCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      Text(
-                        "Short Distance Visual Acuity",
-                        style: applyRobotoFont(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.black,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Short Distance Visual Acuity",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.black,
+                            ),
+                          ),
+                          PopupMenuButton<VisionScale>(
+                            elevation: 2,
+                            tooltip: "Select Vision Scale",
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: AppColor.black,
+                            ),
+                            onSelected: (VisionScale result) {
+                              if (result == VisionScale.snellen) {
+                                isShortDistanceSnellen.value = true;
+                              } else {
+                                isShortDistanceSnellen.value = false;
+                              }
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<VisionScale>>[
+                              PopupMenuItem<VisionScale>(
+                                value: VisionScale.snellen,
+                                child: Text('Snellen',
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: isShortDistanceSnellen.value
+                                            ? AppColor.primary
+                                            : AppColor.black)),
+                              ),
+                              PopupMenuItem<VisionScale>(
+                                value: VisionScale.logmar,
+                                child: Text('Logmar',
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: !isShortDistanceSnellen.value
+                                            ? AppColor.primary
+                                            : AppColor.black)),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 10),
                       GridView.builder(
@@ -117,7 +166,11 @@ class TumblingEReportCard extends StatelessWidget {
                                     textAlign: TextAlign.left,
                                   ),
                                   Text(
-                                    "${shortDistance[index].observationValue}",
+                                    isShortDistanceSnellen.value
+                                        ? lookUpSnellenTablefromLogMarValue(
+                                            shortDistance[index]
+                                                .observationValue)
+                                        : "${shortDistance[index].observationValue}",
                                     style: applyRobotoFont(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
@@ -133,69 +186,116 @@ class TumblingEReportCard extends StatelessWidget {
                           );
                         },
                       ),
-                        const SizedBox(height: 10),
-                        Text(
-                          "Long Distance Visual Acuity",
-                          style: applyRobotoFont(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black,
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Long Distance Visual Acuity",
+                            style: applyRobotoFont(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 10),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.all(16),
-                          itemCount: longDistance.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: 1.4,
-                            crossAxisSpacing: 0,
-                            mainAxisSpacing: 0,
-                          ),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: EdgeInsets.only(
-                                left: AppSize.width(context) * 0.03,
-                                top: AppSize.height(context) * 0.01,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColor.black.withOpacity(0.1),
-                                ),
-                              ),
-                              child: Center(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      longDistance[index].bodySite ?? "",
-                                      style: applyRobotoFont(
-                                        fontSize: 12,
+                          PopupMenuButton<VisionScale>(
+                            elevation: 2,
+                            tooltip: "Select Vision Scale",
+                            icon: const Icon(
+                              Icons.arrow_drop_down,
+                              color: AppColor.black,
+                            ),
+                            onSelected: (VisionScale result) {
+                              if (result == VisionScale.snellen) {
+                                isLongDistanceSnellen.value = true;
+                              } else {
+                                isLongDistanceSnellen.value = false;
+                              }
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<VisionScale>>[
+                              PopupMenuItem<VisionScale>(
+                                value: VisionScale.snellen,
+                                child: Text('Snellen',
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w400,
-                                      ),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(
-                                      "${longDistance[index].observationValue}",
-                                      style: applyRobotoFont(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: getColorBasedOnObservationValue(
-                                          longDistance[index].observationValue,
-                                        ),
-                                      ),
-                                      textAlign: TextAlign.left,
-                                    )
-                                  ],
-                                ),
+                                        color: isLongDistanceSnellen.value
+                                            ? AppColor.primary
+                                            : AppColor.black)),
                               ),
-                            );
-                          },
+                              PopupMenuItem<VisionScale>(
+                                value: VisionScale.logmar,
+                                child: Text('Logmar',
+                                    style: applyRobotoFont(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: !isLongDistanceSnellen.value
+                                            ? AppColor.primary
+                                            : AppColor.black)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.all(16),
+                        itemCount: longDistance.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.4,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 0,
                         ),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.only(
+                              left: AppSize.width(context) * 0.03,
+                              top: AppSize.height(context) * 0.01,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColor.black.withOpacity(0.1),
+                              ),
+                            ),
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    longDistance[index].bodySite ?? "",
+                                    style: applyRobotoFont(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  Text(
+                                    isLongDistanceSnellen.value
+                                        ? lookUpSnellenTablefromLogMarValue(
+                                            longDistance[index]
+                                                .observationValue)
+                                        : "${longDistance[index].observationValue}",
+                                    style: applyRobotoFont(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      color: getColorBasedOnObservationValue(
+                                        longDistance[index].observationValue,
+                                      ),
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -215,5 +315,30 @@ Color getColorBasedOnObservationValue(double? value) {
     return AppColor.orange;
   } else {
     return AppColor.green;
+  }
+}
+
+String lookUpSnellenTablefromLogMarValue(double logMar) {
+  switch (logMar) {
+    case 1.0:
+      return "20/200";
+    case 0.699:
+      return "20/100";
+    case 0.602:
+      return "20/80";
+    case 0.495:
+      return "20/62.5";
+    case 0.398:
+      return "20/50";
+    case 0.301:
+      return "20/40";
+    case 0.176:
+      return "20/31.77";
+    case 0.097:
+      return "20/25";
+    case 0.0:
+      return "20/20";
+    default:
+      return "null";
   }
 }

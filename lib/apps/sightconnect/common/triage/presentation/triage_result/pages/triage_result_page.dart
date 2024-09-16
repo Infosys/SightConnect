@@ -6,7 +6,8 @@ import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/severity.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_home/presentation/widgets/helpline_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_home/presentation/widgets/nearby_vision_centers_list.dart';
-import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/data/model/vg_event_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_add_event/presentation/pages/vg_event_details_page.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
@@ -18,12 +19,17 @@ import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_add_event_details_provider.dart';
+import '../../../../../features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_event_data_provider.dart';
+
 class TriageResultPage extends ConsumerWidget {
   const TriageResultPage({
     required this.triageResult,
     super.key,
   });
+
   final TriagePostModel triageResult;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final model = ref.watch(triageResultProvider(triageResult));
@@ -38,11 +44,24 @@ class TriageResultPage extends ConsumerWidget {
 
         ref.read(accessibilityProvider).resetBrightness();
         if (PersistentAuthStateService.authState.activeRole ==
-            "ROLE_VOLUNTEER") {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const VisionGuardianDashboardPage()));
+                "ROLE_VOLUNTEER" ||
+            PersistentAuthStateService.authState.activeRole ==
+                "ROLE_VISION_GUARDIAN") {
+          ref.invalidate(addEventDetailsProvider);
+          VisionGuardianEventModel eventDetails =
+              ref.read(vgEventDataCacheProvider).getEventDetails!;
+
+          ref
+              .read(addEventDetailsProvider)
+              .setEventId(eventDetails.id.toString());
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  VisionGuardianEventDetailsPage(eventDetails: eventDetails),
+            ),
+            (route) => false,
+          );
         } else {
           Navigator.popUntil(context, (route) => route.isFirst);
         }
@@ -58,12 +77,24 @@ class TriageResultPage extends ConsumerWidget {
             onTap: () {
               ref.read(accessibilityProvider).resetBrightness();
               if (PersistentAuthStateService.authState.activeRole ==
-                  "ROLE_VOLUNTEER") {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const VisionGuardianDashboardPage()));
+                      "ROLE_VOLUNTEER" ||
+                  PersistentAuthStateService.authState.activeRole ==
+                      "ROLE_VISION_GUARDIAN") {
+                ref.invalidate(addEventDetailsProvider);
+                VisionGuardianEventModel eventDetails =
+                    ref.read(vgEventDataCacheProvider).getEventDetails!;
+
+                ref
+                    .read(addEventDetailsProvider)
+                    .setEventId(eventDetails.id.toString());
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VisionGuardianEventDetailsPage(
+                        eventDetails: eventDetails),
+                  ),
+                  (route) => false,
+                );
               } else {
                 Navigator.popUntil(context, (route) => route.isFirst);
               }

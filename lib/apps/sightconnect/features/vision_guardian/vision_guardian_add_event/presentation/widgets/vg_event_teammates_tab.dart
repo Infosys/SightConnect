@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -15,7 +16,7 @@ class EventTeammatesTab extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loc = context.loc!;
-    // var model = ref.watch(visionGuadianAddMemberProvider);
+    ref.watch(visionGuadianAddMemberProvider);
     var addMember = useState<bool>(false);
     // var data = model.teammateList;
     // var loading = model.loading;
@@ -115,7 +116,9 @@ class EventTeammatesTab extends HookConsumerWidget {
                                   Fluttertoast.showToast(
                                     msg: loc.vgTeamMateAddedSuccessfully,
                                   );
-                                }).catchError((error) {
+                                }).catchError((error, s) {
+                                  logger
+                                      .e({"error - $error " "stacktrace - $s"});
                                   Fluttertoast.showToast(
                                       msg: loc.vgSomethingWentWrong);
                                 });

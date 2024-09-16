@@ -16,13 +16,14 @@ import 'shared/services/shared_preference.dart';
 
 Logger logger = Logger();
 bool visionAcuityIsSwipeMode = false;
+
 Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   if (kDebugMode) {
     HttpOverrides.global = MyHttpOverrides();
   }
-  ApiConstant.setupEnv(AppEnvironment.development);
+  ApiConstant.setupEnv(AppEnvironment.production);
   logger.i('App Environment: ${ApiConstant.appEnvironment}');
   await PersistentAuthStateService.intializeAuth();
   await SharedPreferenceService.init();

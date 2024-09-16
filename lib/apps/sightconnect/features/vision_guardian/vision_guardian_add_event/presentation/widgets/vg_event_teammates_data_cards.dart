@@ -15,6 +15,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../../shared/constants/app_color.dart';
 import '../../../../../../../shared/constants/app_size.dart';
 import '../../../../../../../shared/theme/text_theme.dart';
+import '../providers/vg_user_data_provider.dart';
 
 class TeammatesDataCards extends HookConsumerWidget {
   const TeammatesDataCards({super.key, required this.data, required this.type});
@@ -89,7 +90,7 @@ class TeammatesDataCards extends HookConsumerWidget {
                                   var userId = PersistentAuthStateService
                                               .authState.activeRole ==
                                           "ROLE_VOLUNTEER"
-                                      ? ref.read(globalVolunteerProvider).userId
+                                      ? ref.read(vgUserDataProvider).userId
                                       : ref.read(globalVGProvider).userId;
                                   var navigator = Navigator.of(context);
                                   var model = ref.read(addEventDetailsProvider);
