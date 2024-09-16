@@ -68,29 +68,6 @@ class IPledgeFormPage extends ConsumerWidget {
                     ),
               const SizedBox(height: AppSize.ks),
               AppCard(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    NameField(
-                      nameController: model.fullName,
-                      enabled: false,
-                    ),
-                    const SizedBox(height: AppSize.km),
-                    DOBField(dobController: model.dob),
-                    const SizedBox(height: AppSize.km),
-                    MobileField(
-                      mobileController: model.mobile,
-                      enabled: false,
-                    ),
-                    const SizedBox(height: AppSize.km),
-                    GenderField(genderController: model.gender),
-                    const SizedBox(height: AppSize.km),
-                    EmailField(emailController: model.email)
-                  ],
-                ),
-              ),
-              AppCard(
                 title: 'Kin Details',
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -115,6 +92,30 @@ class IPledgeFormPage extends ConsumerWidget {
                       mobileController: model.kinMobile,
                       enabled: !model.isPledgingDone,
                     ),
+                  ],
+                ),
+              ),
+              AppCard(
+                title: 'Personal Details',
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    NameField(
+                      nameController: model.fullName,
+                      enabled: false,
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    DOBField(dobController: model.dob),
+                    const SizedBox(height: AppSize.km),
+                    MobileField(
+                      mobileController: model.mobile,
+                      enabled: false,
+                    ),
+                    const SizedBox(height: AppSize.km),
+                    GenderField(genderController: model.gender),
+                    const SizedBox(height: AppSize.km),
+                    EmailField(emailController: model.email)
                   ],
                 ),
               ),
