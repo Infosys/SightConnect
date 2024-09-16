@@ -192,7 +192,7 @@ class IPledgeFormPage extends ConsumerWidget {
               padding: const EdgeInsets.all(12.0),
               child: Center(
                   child: Text(
-                      'Pleding Done On ${model.pledgeDate?.formatDateTimeMonthNameWithTime}')),
+                      'Pledging Done On ${model.pledgeDate?.formatDateTimeMonthNameWithTime}')),
             )
           : SumbitButton(
               isChecked: model.isIAgreeAndAccepted,
