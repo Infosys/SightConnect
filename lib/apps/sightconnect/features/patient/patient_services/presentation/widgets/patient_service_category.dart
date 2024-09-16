@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/pages/ipledge_form_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/triage_member_selection/pages/triage_member_selection_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/pages/visual_acuity_instructional_video_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/pages/patient_eyes_capture_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_services/data/data/local_source.dart';
-import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_services/presentation/widgets/i_pledge_service.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/l10n/app_localizations.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
@@ -95,7 +95,7 @@ class PatientServiceCategory extends ConsumerWidget {
                       } else if (miniapp == MiniApp.IPLEDGE) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const IPledgeService(),
+                            builder: (context) => const IPledgeFormPage(),
                           ),
                         );
                       } else if (miniapp == MiniApp.CATARACT_EYE_TEST &&
