@@ -40,7 +40,7 @@ var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(
 
 var vgAddEventRemoteSource = Provider(
   (ref) => VgAddEventRemoteSourceImpl(
-    ref.read(dioProvider),
+    ref.watch(dioProvider),
     ref.read(getTriageModelProvider),
     ref.read(globalVGProvider),
     ref.read(vgUserDataProvider),
@@ -162,9 +162,9 @@ class VgAddEventRemoteSourceImpl implements VgAddEventRemoteSource {
     final endpoint = "/services/triage/api/v2/campaign-events/$eventId";
     Map<String, dynamic> queryParameters;
     // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
-      queryParameters = {
-        "login-actor-id": vgUserDataProvider.getUserId!,
-      };
+    queryParameters = {
+      "login-actor-id": vgUserDataProvider.getUserId!,
+    };
     // } else {
     //   queryParameters = {
     //     "login-actor-id": globalVGProvider.user!.id!,

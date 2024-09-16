@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/shared/services/exceptions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var consentRepositoryProvider = Provider<ConsentRepository>((ref) {
-  return ConsentRepositoryImpl(ref.read(dioProvider));
+  return ConsentRepositoryImpl(ref.watch(dioProvider));
 });
 
 class ConsentRepositoryImpl implements ConsentRepository {
