@@ -130,14 +130,96 @@ class TriageFeedbackDialog extends HookConsumerWidget {
                         value: feedback.isCataract,
                         onChanged: (value) {
                           feedback.isCataract = value;
+                          if(feedback.isCataract == false){
+                            feedback.cataractLeftEye = false;
+                            feedback.cataractRightEye = false;
+                          }
                         }),
+                    Visibility(
+                      visible: feedback.isCataract,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Left Eye / OS",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Checkbox(
+                                value: feedback.isCataractLeftEye,
+                                onChanged: (value) {
+                                  feedback.cataractLeftEye = value ?? false;
+                                },
+                              ),
+                              Text(
+                                "Right Eye / OD",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Checkbox(
+                                value: feedback.isCataractRightEye,
+                                onChanged: (value) {
+                                  feedback.cataractRightEye = value ?? false;
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: AppSize.ks),
                     AssistanceCheckBox(
                         question: "Does patient have Red Eye?",
                         value: feedback.isRedEye,
                         onChanged: (value) {
                           feedback.isRedEye = value;
+                          if(feedback.isRedEye == false){
+                            feedback.redEyeLeftEye = false;
+                            feedback.redEyeRightEye = false;
+                          }
                         }),
+                    Visibility(
+                      visible: feedback.isRedEye,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Left Eye / OS",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Checkbox(
+                                value: feedback.isRedEyeLeftEye,
+                                onChanged: (value) {
+                                  feedback.redEyeLeftEye = value ?? false;
+                                },
+                              ),
+                              Text(
+                                "Right Eye / OD",
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Checkbox(
+                                value: feedback.isRedEyeRightEye,
+                                onChanged: (value) {
+                                  feedback.redEyeRightEye = value ?? false;
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: AppSize.ks),
                     Text(
                       loc.optoLeaveFeedback,

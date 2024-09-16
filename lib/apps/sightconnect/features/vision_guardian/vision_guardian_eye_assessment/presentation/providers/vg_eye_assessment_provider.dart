@@ -8,13 +8,15 @@ import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../vision_guardian_add_event/presentation/providers/vg_user_data_provider.dart';
+
 final visionGuardianEyeAssessmentProvider =
     ChangeNotifierProvider.autoDispose<VisionGuardianEyeAssessmentNotifier>(
         (ref) {
   return VisionGuardianEyeAssessmentNotifier(
     vgEyeAssessmentRepository: ref.watch(vgEyeAssessmentRepository),
     globalVGProvider: ref.read(globalVGProvider),
-    globalVolunteerProvider: ref.read(globalVolunteerProvider),
+    vgUserDataProvider: ref.read(vgUserDataProvider),
   );
 });
 
@@ -23,7 +25,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   var checkedFilter = "";
   final VgEyeAssessmentRepository vgEyeAssessmentRepository;
   final GlobalVGProvider globalVGProvider;
-  final GlobalVolunteerProvider globalVolunteerProvider;
+  final VGUserDataProvider vgUserDataProvider;
   List<VisionGuardianPatientResponseModel> listOfPatientDetails = [];
   List<VisionGuardianPatientResponseModel> searchResults = [];
   String patientStatusFiltervalue = "";
@@ -35,7 +37,7 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
   VisionGuardianEyeAssessmentNotifier({
     required this.vgEyeAssessmentRepository,
     required this.globalVGProvider,
-    required this.globalVolunteerProvider,
+    required this.vgUserDataProvider,
   }) {
     List<VisionGuardianPatientResponseModel> previousList = [];
     getEyeAssessmentPatientsReport(previousList);
@@ -89,25 +91,27 @@ class VisionGuardianEyeAssessmentNotifier extends ChangeNotifier {
 
       List<VisionGuardianPatientResponseModel> response;
 
-      if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
         response = await vgEyeAssessmentRepository.getVgEyeAssessmentReports(
-            practitionerId: globalVolunteerProvider.userId,
+            practitionerId: vgUserDataProvider.getUserId??0,
             queryparams: {
               "page": offset,
               "size": 10,
               "category": statusfilter == "ALL" ? "" : statusfilter,
               "sort": ["encounterStartDate"]
             });
-      } else {
-        response = await vgEyeAssessmentRepository.getVgEyeAssessmentReports(
-            practitionerId: globalVGProvider.userId,
-            queryparams: {
-              "page": offset,
-              "size": 10,
-              "category": statusfilter == "ALL" ? "" : statusfilter,
-              "sort": ["encounterStartDate"]
-            });
-      }
+
+      // if (PersistentAuthStateService.authState.activeRole == "ROLE_VOLUNTEER") {
+      
+      // } else {
+      //   response = await vgEyeAssessmentRepository.getVgEyeAssessmentReports(
+      //       practitionerId: globalVGProvider.userId,
+      //       queryparams: {
+      //         "page": offset,
+      //         "size": 10,
+      //         "category": statusfilter == "ALL" ? "" : statusfilter,
+      //         "sort": ["encounterStartDate"]
+      //       });
+      // }
 
       setPatientDetails(previousList + response);
 

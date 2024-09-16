@@ -19,7 +19,6 @@ import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/data/loc
 import 'package:eye_care_for_all/apps/sightconnect/common/visual_acuity/features/visual_acuity_tumbling/presentation/providers/visual_acuity_test_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/service_type.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/domain/enum/test_type.dart';
-import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_volunteer_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/services/app_info_service.dart';
 import 'package:eye_care_for_all/shared/services/failure.dart';
@@ -29,6 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../features/optometritian/optometritian_dashboard/presentation/provider/optometritian_add_patient_provider.dart';
+import '../../../../features/vision_guardian/vision_guardian_add_event/presentation/providers/vg_user_data_provider.dart';
 import '../../../visual_acuity/features/distance_visual_acuity_tumbling/presentation/providers/distance_visual_acuity_test_provider.dart';
 import '../../domain/repositories/triage_urgency_repository.dart';
 import '../../domain/usecases/get_distance_visual_acuity_response_locally_usecase.dart';
@@ -56,7 +56,7 @@ var triageProvider = ChangeNotifierProvider(
       ref.watch(triageUrgencyRepositoryProvider),
       ref.watch(triageLocalSourceProvider),
       ref.watch(saveTriageUseCaseForEvent),
-      ref.watch(globalVolunteerProvider),
+      ref.watch(vgUserDataProvider),
     );
   },
 );
@@ -64,7 +64,7 @@ var triageProvider = ChangeNotifierProvider(
 class TriageProvider extends ChangeNotifier {
   final SaveTriageUseCase _saveTriageUseCase;
   final SaveTriageUseCaseForEvent _saveTriageUseCaseForEvent;
-  final GlobalVolunteerProvider _globalVolunteerProvider;
+  final VGUserDataProvider _vgUserDataProvider;
 
   final GetTriageEyeScanResponseLocallyUseCase
       _getTriageEyeScanResponseLocallyUseCase;
@@ -89,7 +89,7 @@ class TriageProvider extends ChangeNotifier {
       this._triageUrgencyRepository,
       this._triageLocalSource,
       this._saveTriageUseCaseForEvent,
-      this._globalVolunteerProvider);
+      this._vgUserDataProvider);
 
   Future<Either<Failure, TriagePostModel>> saveTriage(int currentStep) async {
     List<PostTriageImagingSelectionModel> imageSelection =
@@ -216,10 +216,20 @@ class TriageProvider extends ChangeNotifier {
             .call(GetTriageEyeScanResponseLocallyParam())
             .then((value) => value.fold((l) => [], (r) => r));
 
-    List<PostTriageObservationsModel> observations =
+    List<PostTriageObservationsModel> shortDistanceVisualAcuity =
         await _getVisionAcuityTumblingResponseLocallyUseCase
             .call(GetVisionAcuityTumblingResponseLocallyParam())
             .then((value) => value.fold((l) => [], (r) => r));
+
+    List<PostTriageObservationsModel> distanceVisualAcuity =
+        await _getDistanceVisualAcuityResponseLocallyUseCase
+            .call(GetDistanceVisualAcuityResponseLocallyParam())
+            .then((value) => value.fold((l) => [], (r) => r));
+
+    List<PostTriageObservationsModel> observations = [
+      ...shortDistanceVisualAcuity,
+      ...distanceVisualAcuity
+    ];
 
     List<PostTriageQuestionModel> questionResponse =
         await _getQuestionnaireResponseLocallyUseCase
@@ -357,7 +367,7 @@ class TriageProvider extends ChangeNotifier {
       return [
         Performer(
           role: PerformerRole.VOLUNTEER,
-          identifier: _globalVolunteerProvider.userId,
+          identifier: _vgUserDataProvider.userId,
         ),
       ];
     } else {

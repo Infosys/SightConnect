@@ -71,6 +71,10 @@ mixin _$OptometristTriageResponse {
   bool? get eyeScanAssistance => throw _privateConstructorUsedError;
   bool? get redEye => throw _privateConstructorUsedError;
   bool? get cataract => throw _privateConstructorUsedError;
+  bool? get redEyeOS => throw _privateConstructorUsedError;
+  bool? get redEyeOD => throw _privateConstructorUsedError;
+  bool? get cataractOD => throw _privateConstructorUsedError;
+  bool? get cataractOS => throw _privateConstructorUsedError;
   String? get languageUsed => throw _privateConstructorUsedError;
   String? get longDistanceUsed => throw _privateConstructorUsedError;
 
@@ -131,6 +135,10 @@ abstract class $OptometristTriageResponseCopyWith<$Res> {
       bool? eyeScanAssistance,
       bool? redEye,
       bool? cataract,
+      bool? redEyeOS,
+      bool? redEyeOD,
+      bool? cataractOD,
+      bool? cataractOS,
       String? languageUsed,
       String? longDistanceUsed});
 }
@@ -193,6 +201,10 @@ class _$OptometristTriageResponseCopyWithImpl<$Res,
     Object? eyeScanAssistance = freezed,
     Object? redEye = freezed,
     Object? cataract = freezed,
+    Object? redEyeOS = freezed,
+    Object? redEyeOD = freezed,
+    Object? cataractOD = freezed,
+    Object? cataractOS = freezed,
     Object? languageUsed = freezed,
     Object? longDistanceUsed = freezed,
   }) {
@@ -373,6 +385,22 @@ class _$OptometristTriageResponseCopyWithImpl<$Res,
           ? _value.cataract
           : cataract // ignore: cast_nullable_to_non_nullable
               as bool?,
+      redEyeOS: freezed == redEyeOS
+          ? _value.redEyeOS
+          : redEyeOS // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      redEyeOD: freezed == redEyeOD
+          ? _value.redEyeOD
+          : redEyeOD // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cataractOD: freezed == cataractOD
+          ? _value.cataractOD
+          : cataractOD // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cataractOS: freezed == cataractOS
+          ? _value.cataractOS
+          : cataractOS // ignore: cast_nullable_to_non_nullable
+              as bool?,
       languageUsed: freezed == languageUsed
           ? _value.languageUsed
           : languageUsed // ignore: cast_nullable_to_non_nullable
@@ -439,6 +467,10 @@ abstract class _$$OptometristTriageResponseImplCopyWith<$Res>
       bool? eyeScanAssistance,
       bool? redEye,
       bool? cataract,
+      bool? redEyeOS,
+      bool? redEyeOD,
+      bool? cataractOD,
+      bool? cataractOS,
       String? languageUsed,
       String? longDistanceUsed});
 }
@@ -500,6 +532,10 @@ class __$$OptometristTriageResponseImplCopyWithImpl<$Res>
     Object? eyeScanAssistance = freezed,
     Object? redEye = freezed,
     Object? cataract = freezed,
+    Object? redEyeOS = freezed,
+    Object? redEyeOD = freezed,
+    Object? cataractOD = freezed,
+    Object? cataractOS = freezed,
     Object? languageUsed = freezed,
     Object? longDistanceUsed = freezed,
   }) {
@@ -680,6 +716,22 @@ class __$$OptometristTriageResponseImplCopyWithImpl<$Res>
           ? _value.cataract
           : cataract // ignore: cast_nullable_to_non_nullable
               as bool?,
+      redEyeOS: freezed == redEyeOS
+          ? _value.redEyeOS
+          : redEyeOS // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      redEyeOD: freezed == redEyeOD
+          ? _value.redEyeOD
+          : redEyeOD // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cataractOD: freezed == cataractOD
+          ? _value.cataractOD
+          : cataractOD // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      cataractOS: freezed == cataractOS
+          ? _value.cataractOS
+          : cataractOS // ignore: cast_nullable_to_non_nullable
+              as bool?,
       languageUsed: freezed == languageUsed
           ? _value.languageUsed
           : languageUsed // ignore: cast_nullable_to_non_nullable
@@ -741,6 +793,10 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
       this.eyeScanAssistance,
       this.redEye,
       this.cataract,
+      this.redEyeOS,
+      this.redEyeOD,
+      this.cataractOD,
+      this.cataractOS,
       this.languageUsed,
       this.longDistanceUsed})
       : _questionResponse = questionResponse,
@@ -868,13 +924,21 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
   @override
   final bool? cataract;
   @override
+  final bool? redEyeOS;
+  @override
+  final bool? redEyeOD;
+  @override
+  final bool? cataractOD;
+  @override
+  final bool? cataractOS;
+  @override
   final String? languageUsed;
   @override
   final String? longDistanceUsed;
 
   @override
   String toString() {
-    return 'OptometristTriageResponse(id: $id, uuid: $uuid, patientId: $patientId, patientAge: $patientAge, patientGender: $patientGender, patientEducation: $patientEducation, patientProfession: $patientProfession, source: $source, reportId: $reportId, enounterId: $enounterId, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, physicalAssessmentStartTime: $physicalAssessmentStartTime, physicalAssessmentEndTime: $physicalAssessmentEndTime, capturedBy: $capturedBy, overallUrgency: $overallUrgency, questionnaireRemarks: $questionnaireRemarks, questionResponse: $questionResponse, questionnaireUrgency: $questionnaireUrgency, questionnaireReview: $questionnaireReview, observations: $observations, observationsRemarks: $observationsRemarks, observationsUrgency: $observationsUrgency, observationReview: $observationReview, mediaCapture: $mediaCapture, eyeScanReview: $eyeScanReview, assessmentCompleted: $assessmentCompleted, acuityTestcompleted: $acuityTestcompleted, eyeScanCompleted: $eyeScanCompleted, mobileAssessmentCompleted: $mobileAssessmentCompleted, physicalAssessmentCompleted: $physicalAssessmentCompleted, overallReview: $overallReview, questionnaireScore: $questionnaireScore, observationScore: $observationScore, eyeScanScore: $eyeScanScore, overallScore: $overallScore, assessmentAssistance: $assessmentAssistance, visualAcuityAssistance: $visualAcuityAssistance, visualAcuityAided: $visualAcuityAided, eyeScanAssistance: $eyeScanAssistance, redEye: $redEye, cataract: $cataract, languageUsed: $languageUsed, longDistanceUsed: $longDistanceUsed)';
+    return 'OptometristTriageResponse(id: $id, uuid: $uuid, patientId: $patientId, patientAge: $patientAge, patientGender: $patientGender, patientEducation: $patientEducation, patientProfession: $patientProfession, source: $source, reportId: $reportId, enounterId: $enounterId, organizationCode: $organizationCode, assessmentCode: $assessmentCode, assessmentStartTime: $assessmentStartTime, assessmentEndTime: $assessmentEndTime, physicalAssessmentStartTime: $physicalAssessmentStartTime, physicalAssessmentEndTime: $physicalAssessmentEndTime, capturedBy: $capturedBy, overallUrgency: $overallUrgency, questionnaireRemarks: $questionnaireRemarks, questionResponse: $questionResponse, questionnaireUrgency: $questionnaireUrgency, questionnaireReview: $questionnaireReview, observations: $observations, observationsRemarks: $observationsRemarks, observationsUrgency: $observationsUrgency, observationReview: $observationReview, mediaCapture: $mediaCapture, eyeScanReview: $eyeScanReview, assessmentCompleted: $assessmentCompleted, acuityTestcompleted: $acuityTestcompleted, eyeScanCompleted: $eyeScanCompleted, mobileAssessmentCompleted: $mobileAssessmentCompleted, physicalAssessmentCompleted: $physicalAssessmentCompleted, overallReview: $overallReview, questionnaireScore: $questionnaireScore, observationScore: $observationScore, eyeScanScore: $eyeScanScore, overallScore: $overallScore, assessmentAssistance: $assessmentAssistance, visualAcuityAssistance: $visualAcuityAssistance, visualAcuityAided: $visualAcuityAided, eyeScanAssistance: $eyeScanAssistance, redEye: $redEye, cataract: $cataract, redEyeOS: $redEyeOS, redEyeOD: $redEyeOD, cataractOD: $cataractOD, cataractOS: $cataractOS, languageUsed: $languageUsed, longDistanceUsed: $longDistanceUsed)';
   }
 
   @override
@@ -958,6 +1022,10 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
             (identical(other.eyeScanAssistance, eyeScanAssistance) || other.eyeScanAssistance == eyeScanAssistance) &&
             (identical(other.redEye, redEye) || other.redEye == redEye) &&
             (identical(other.cataract, cataract) || other.cataract == cataract) &&
+            (identical(other.redEyeOS, redEyeOS) || other.redEyeOS == redEyeOS) &&
+            (identical(other.redEyeOD, redEyeOD) || other.redEyeOD == redEyeOD) &&
+            (identical(other.cataractOD, cataractOD) || other.cataractOD == cataractOD) &&
+            (identical(other.cataractOS, cataractOS) || other.cataractOS == cataractOS) &&
             (identical(other.languageUsed, languageUsed) || other.languageUsed == languageUsed) &&
             (identical(other.longDistanceUsed, longDistanceUsed) || other.longDistanceUsed == longDistanceUsed));
   }
@@ -1010,6 +1078,10 @@ class _$OptometristTriageResponseImpl implements _OptometristTriageResponse {
         eyeScanAssistance,
         redEye,
         cataract,
+        redEyeOS,
+        redEyeOD,
+        cataractOD,
+        cataractOS,
         languageUsed,
         longDistanceUsed
       ]);
@@ -1075,6 +1147,10 @@ abstract class _OptometristTriageResponse implements OptometristTriageResponse {
       final bool? eyeScanAssistance,
       final bool? redEye,
       final bool? cataract,
+      final bool? redEyeOS,
+      final bool? redEyeOD,
+      final bool? cataractOD,
+      final bool? cataractOS,
       final String? languageUsed,
       final String? longDistanceUsed}) = _$OptometristTriageResponseImpl;
 
@@ -1173,6 +1249,14 @@ abstract class _OptometristTriageResponse implements OptometristTriageResponse {
   bool? get redEye;
   @override
   bool? get cataract;
+  @override
+  bool? get redEyeOS;
+  @override
+  bool? get redEyeOD;
+  @override
+  bool? get cataractOD;
+  @override
+  bool? get cataractOS;
   @override
   String? get languageUsed;
   @override

@@ -43,6 +43,8 @@ class MyApp extends ConsumerWidget {
         ? InitializationPage.routeName
         : LoginPage.routeName;
 
+    
+
     return ref.watch(isJailBrokenProvider).maybeWhen(
       data: (data) {
         logger.d("isJailBrokenProvider: $data");

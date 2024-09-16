@@ -9,7 +9,6 @@ import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
 import 'package:eye_care_for_all/shared/theme/app_shadow.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/loading_overlay.dart';
@@ -34,8 +33,8 @@ class _EventPatientsTabState extends ConsumerState<EventPatientsTab>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final model = ref.watch(addEventDetailsProvider);
-      model.setEventId(SharedPreferenceService.getEventId!);
+      // final model = ref.watch(addEventDetailsProvider);
+      // model.setEventId(SharedPreferenceService.getEventId!);
       // model.loadingToggle();
     });
   }

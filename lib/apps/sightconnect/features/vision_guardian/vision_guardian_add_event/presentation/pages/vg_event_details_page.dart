@@ -209,13 +209,15 @@ class VisionGuardianEventDetailsPage extends HookConsumerWidget {
             title: const Text("Home"),
             onTap: () async {
               await SharedPreferenceService.clearEventId();
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VisionGuardianDashboardPage(),
-                ),
-                (route) => false,
-              );
+              if (context.mounted) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VisionGuardianDashboardPage(),
+                  ),
+                  (route) => false,
+                );
+              }
             },
           ),
           // ListTile(
