@@ -28,7 +28,8 @@ class SumbitButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CheckboxListTile.adaptive(
-            value: isChecked,
+            value: true,
+            enabled: false,
             controlAffinity: ListTileControlAffinity.leading,
             onChanged: onCheckPressed,
             title: InkWell(
@@ -40,7 +41,7 @@ class SumbitButton extends StatelessWidget {
                   children: [
                     TextSpan(
                       text:
-                          'I agree to the privacy policy and terms of service.',
+                          'You have already agreed to the privacy policy & terms of service',
                       style: applyRobotoFont(
                         fontSize: 14,
                       ),

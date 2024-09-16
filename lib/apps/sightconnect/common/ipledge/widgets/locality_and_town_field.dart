@@ -14,13 +14,13 @@ class LocalityAndTownField extends StatelessWidget {
     return TextFormField(
       enabled: enabled,
       controller: localityController,
-      validator: (value) {
-        value = value ?? "";
-        if (value.isEmpty) {
-          return "Locality/ Town is required";
-        }
-        return null;
-      },
+      // validator: (value) {
+      //   value = value ?? "";
+      //   if (value.isEmpty) {
+      //     return "Locality/ Town is required";
+      //   }
+      //   return null;
+      // },
       onChanged: (value) {
         localityController?.text = value;
         localityController?.selection = TextSelection.fromPosition(

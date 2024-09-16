@@ -31,13 +31,13 @@ class StateField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           focusNode: focusNode,
           onFieldSubmitted: (_) => onFieldSubmitted(),
-          validator: (value) {
-            value = value ?? "";
-            if (value.isEmpty) {
-              return "State is required";
-            }
-            return null;
-          },
+          // validator: (value) {
+          //   value = value ?? "";
+          //   if (value.isEmpty) {
+          //     return "State is required";
+          //   }
+          //   return null;
+          // },
           decoration: const InputDecoration(
             labelText: 'State',
           ),

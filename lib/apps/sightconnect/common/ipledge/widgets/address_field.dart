@@ -14,13 +14,13 @@ class AddressField extends StatelessWidget {
     return TextFormField(
       enabled: enabled,
       controller: addressController,
-      validator: (value) {
-        value = value ?? "";
-        if (value.isEmpty) {
-          return "Address is required";
-        }
-        return null;
-      },
+      // validator: (value) {
+      //   value = value ?? "";
+      //   if (value.isEmpty) {
+      //     return "Address is required";
+      //   }
+      //   return null;
+      // },
       onChanged: (value) {
         addressController?.text = value;
         addressController?.selection = TextSelection.fromPosition(

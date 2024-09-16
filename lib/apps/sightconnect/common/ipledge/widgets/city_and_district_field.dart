@@ -14,13 +14,13 @@ class CityAndDistrictField extends StatelessWidget {
     return TextFormField(
       enabled: enabled,
       controller: cityController,
-      validator: (value) {
-        value = value ?? "";
-        if (value.isEmpty) {
-          return "City/ District is required";
-        }
-        return null;
-      },
+      // validator: (value) {
+      //   value = value ?? "";
+      //   if (value.isEmpty) {
+      //     return "City/ District is required";
+      //   }
+      //   return null;
+      // },
       onChanged: (value) {
         cityController?.text = value;
         cityController?.selection = TextSelection.fromPosition(

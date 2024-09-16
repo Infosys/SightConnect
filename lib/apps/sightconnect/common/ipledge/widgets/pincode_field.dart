@@ -18,13 +18,13 @@ class PincodeField extends StatelessWidget {
         );
       },
       enabled: false,
-      validator: (value) {
-        value = value ?? "";
-        if (value.isEmpty) {
-          return "Pincode is required";
-        }
-        return null;
-      },
+      // validator: (value) {
+      //   value = value ?? "";
+      //   if (value.isEmpty) {
+      //     return "Pincode is required";
+      //   }
+      //   return null;
+      // },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
         labelText: "Pincode *",
