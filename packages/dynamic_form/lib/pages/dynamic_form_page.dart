@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/data/mappers/dynamic_form_json_mapper.dart';
 import 'package:dynamic_form/data/models/dynamic_form_json_model.dart';
 import 'package:dynamic_form/pages/form_builder_page.dart';
+import 'package:dynamic_form/services/api_service.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/form_error_widget.dart';
 import 'package:dynamic_form/shared/widgets/loader_widget.dart';
@@ -19,6 +21,7 @@ class DynamicFormPage extends StatefulWidget {
     this.readOnly = false,
     this.initialValue,
     this.subTitle,
+    this.overrideDio,
     required this.title,
     required this.json,
   });
@@ -33,6 +36,7 @@ class DynamicFormPage extends StatefulWidget {
   final bool readOnly;
   final String title;
   final String? subTitle;
+  final Dio? overrideDio;
 
   @override
   State<DynamicFormPage> createState() => _DynamicFormPageState();
@@ -45,6 +49,9 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
   void initState() {
     super.initState();
     _futureJson = _loadJson();
+    if (widget.overrideDio != null) {
+      ApiService().overrideDio(widget.overrideDio!);
+    }
   }
 
   Future<ResponseJsonEntity>? _loadJson() async {
