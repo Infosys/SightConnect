@@ -21,7 +21,8 @@ class IPledgeRepositoryImpl implements IPledgeRepository {
   @override
   Future<Either<Failure, List<IPledgeModel>>> getIPledgeData() async {
     try {
-      final response = await _dio.get('/pledge');
+      const url = '/pledge';
+      final response = await _dio.get(url);
       final List<IPledgeModel> iPledgeModel =
           (response.data as List).map((e) => IPledgeModel.fromJson(e)).toList();
       return Right(iPledgeModel);
@@ -41,7 +42,12 @@ class IPledgeRepositoryImpl implements IPledgeRepository {
       IPledgeModel iPledgeModel) async {
     try {
       logger.d(iPledgeModel.toJson());
-      await _dio.post('/pledge', data: iPledgeModel.toJson());
+      const url = '/pledge';
+      final response = await _dio.post(
+        url,
+        data: iPledgeModel.toJson(),
+      );
+      logger.d(response.data);
       return const Right(null);
     } on DioException catch (e) {
       return Left(ServerFailure(

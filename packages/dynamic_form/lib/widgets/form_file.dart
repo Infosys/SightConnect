@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
 import 'package:dynamic_form/shared/utlities/cloud_service.dart';
 import 'package:dynamic_form/shared/utlities/file_picker.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
@@ -429,6 +430,12 @@ class UploadButton extends StatelessWidget {
           state.didChange(images.value);
         } catch (e) {
           debugPrint('Error picking images: $e');
+          if (context.mounted) {
+            DynamicFormModals.showSnackBar(
+              context: context,
+              message: 'Error uploading file',
+            );
+          }
         } finally {
           isLoading.value = false;
         }
@@ -462,6 +469,12 @@ class UploadButton extends StatelessWidget {
                       state.didChange(images.value);
                     } catch (e) {
                       debugPrint('Error uploading image: $e');
+                      if (context.mounted) {
+                        DynamicFormModals.showSnackBar(
+                          context: context,
+                          message: 'Error uploading file',
+                        );
+                      }
                     } finally {
                       isLoading.value = false;
                     }
@@ -484,6 +497,12 @@ class UploadButton extends StatelessWidget {
                       onChanged(images.value);
                       state.didChange(images.value);
                     } catch (e) {
+                      if (context.mounted) {
+                        DynamicFormModals.showSnackBar(
+                          context: context,
+                          message: 'Error uploading file',
+                        );
+                      }
                       debugPrint('Error picking images: $e');
                     } finally {
                       isLoading.value = false;
