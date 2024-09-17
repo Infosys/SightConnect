@@ -19,6 +19,7 @@ class FormBuilderPage extends StatefulWidget {
     required this.enableDraft,
     required this.canPop,
     required this.readOnly,
+    this.subTitle,
   });
   final String title;
   final List<PageEntity> pages;
@@ -29,6 +30,7 @@ class FormBuilderPage extends StatefulWidget {
   final bool canPop;
   final bool enableDraft;
   final bool readOnly;
+  final String? subTitle;
   @override
   State<FormBuilderPage> createState() => _FormBuilderPageState();
 }
@@ -48,7 +50,20 @@ class _FormBuilderPageState extends State<FormBuilderPage> {
       onPopInvoked: _onPopInvoked,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.title),
+              if (widget.subTitle != null)
+                Text(
+                  widget.subTitle!,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+            ],
+          ),
           actions: [
             if (widget.enableDraft)
               TextButton.icon(

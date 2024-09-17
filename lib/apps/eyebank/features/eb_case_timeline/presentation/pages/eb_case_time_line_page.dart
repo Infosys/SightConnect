@@ -96,6 +96,7 @@ class EbCaseTimeLinePage extends ConsumerWidget {
           timelineName: event.timelineName,
           timelineVersion: event.timelineVersion,
           status: event.status,
+          subTitle: event.subTitle,
         ),
       ),
     );

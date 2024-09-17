@@ -27,17 +27,17 @@ class EBTimelineMapper {
   static EBTimelineEntity _mapModelToEntity(
       EBTimelineModel ebModel, EbTimelineConfigModel configModel) {
     return EBTimelineEntity(
-      timelineName: configModel.timelineName,
-      timelineVersion: configModel.timelineVersion,
-      title: _getStageTitle(configModel, ebModel),
-      serviceRequestId: ebModel.serviceRequestId,
-      stage: _getStageName(ebModel.stage),
-      stageVersion: _getStageVersion(ebModel.stage, configModel),
-      status: _getCaseStatus(ebModel.status ?? ""),
-      initiateDate: ebModel.initiateDate,
-      recentUpdatedTime: ebModel.recentUpdated,
-      subStages: null,
-    );
+        timelineName: configModel.timelineName,
+        timelineVersion: configModel.timelineVersion,
+        title: _getStageTitle(configModel, ebModel),
+        serviceRequestId: ebModel.serviceRequestId,
+        stage: _getStageName(ebModel.stage),
+        stageVersion: _getStageVersion(ebModel.stage, configModel),
+        status: _getCaseStatus(ebModel.status ?? ""),
+        initiateDate: ebModel.initiateDate,
+        recentUpdatedTime: ebModel.recentUpdated,
+        subStages: null,
+        subTitle: _getStageSubTitle(configModel, ebModel));
   }
 
   static EBTimelineEntity _mapStageToEntity(
@@ -53,6 +53,7 @@ class EBTimelineMapper {
       initiateDate: null,
       recentUpdatedTime: null,
       subStages: null,
+      subTitle: null,
     );
   }
 
@@ -66,6 +67,16 @@ class EBTimelineMapper {
       }
     }
     return "";
+  }
+
+  static String? _getStageSubTitle(
+      EbTimelineConfigModel configModel, EBTimelineModel m) {
+    for (var stage in configModel.stages!) {
+      if (stage.stageName == m.stage) {
+        return m.differentiator;
+      }
+    }
+    return null;
   }
 
   static EBStageName? _getStageName(String? stageName) {

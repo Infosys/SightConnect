@@ -18,6 +18,8 @@ class DynamicFormPage extends StatefulWidget {
     this.canPop = false,
     this.readOnly = false,
     this.initialValue,
+    this.subTitle,
+    required this.title,
     required this.json,
   });
 
@@ -29,6 +31,8 @@ class DynamicFormPage extends StatefulWidget {
   final IconData backButtonIcon;
   final bool canPop;
   final bool readOnly;
+  final String title;
+  final String? subTitle;
 
   @override
   State<DynamicFormPage> createState() => _DynamicFormPageState();
@@ -80,6 +84,7 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
             readOnly: widget.readOnly,
             pages: pages,
             title: title,
+            subTitle: widget.subTitle,
             onSubmit: widget.onSubmit,
             layoutType: formLayout,
             backButtonIcon: widget.backButtonIcon,

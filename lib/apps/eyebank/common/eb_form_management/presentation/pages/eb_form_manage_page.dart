@@ -15,6 +15,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class EBFormManagePage extends ConsumerWidget {
   final String title;
+  final String? subTitle;
   final String? stageName;
   final String? stageVersion;
   final String? serviceRequestId;
@@ -33,6 +34,7 @@ class EBFormManagePage extends ConsumerWidget {
     required this.timelineName,
     required this.timelineVersion,
     this.status,
+    this.subTitle,
   });
 
   @override
@@ -64,6 +66,8 @@ class EBFormManagePage extends ConsumerWidget {
                 final initialVal = json.formData;
 
                 return DynamicFormPage(
+                  subTitle: subTitle,
+                  title: title,
                   readOnly: _openInReadMode(status),
                   canPop: _openInReadMode(status) ? false : true,
                   enableDraft: true,

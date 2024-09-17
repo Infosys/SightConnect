@@ -5,6 +5,7 @@ class EBTimelineEntity {
   final String? timelineVersion;
   final String? serviceRequestId;
   final String? title;
+  final String? subTitle;
   final EBStageName? stage;
   final String? stageVersion;
   final EBStatus? status;
@@ -23,6 +24,7 @@ class EBTimelineEntity {
     this.initiateDate,
     this.recentUpdatedTime,
     this.subStages,
+    this.subTitle,
   });
 
   //to string
