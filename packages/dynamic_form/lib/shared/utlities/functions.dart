@@ -241,10 +241,13 @@ _getInitialValue(
   }
 
   Log.f('Field: ${field.name} setValueExpression: ${field.setValueExpression}');
-  final value = ArithmeticExpressionEvaluator.evaluate(
-    field.setValueExpression!,
-    formKey.currentState?.instantValue ?? {},
-  );
+  final value = field.lookUp != null
+      ? _getlookUpValue(field, formKey)
+      : ArithmeticExpressionEvaluator.evaluate(
+          field.setValueExpression!,
+          formKey.currentState?.instantValue ?? {},
+        );
+
   Log.i('Initial Value: $value');
   field = field.copyWith(
     initialValue: value.toString(),
@@ -260,6 +263,14 @@ _getInitialValue(
   });
 
   return field;
+}
+
+dynamic _getlookUpValue(
+    ElementClassEntity field, GlobalKey<FormBuilderState> formKey) {
+  final key = formKey.currentState?.fields[field.setValueExpression]?.value;
+  final value = field.lookUp?[key];
+  Log.f('LookUp Value: $value');
+  return value;
 }
 
 class VisibiltyWrapper extends StatefulWidget {

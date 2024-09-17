@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
 import 'package:dynamic_form/services/api_service.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
@@ -21,6 +23,7 @@ class FormAutoComplete extends StatefulWidget {
 class _FormAutoCompleteState extends State<FormAutoComplete> {
   List<String> _options = [];
   bool _isLoading = false;
+  Timer? _debounce;
 
   Future<void> _fetchOptions(String query) async {
     setState(() {
@@ -44,6 +47,24 @@ class _FormAutoCompleteState extends State<FormAutoComplete> {
       });
       Log.e('Error fetching options: $error');
     }
+  }
+
+  void _onTextChanged(String value) {
+    Log.d('Text field changed: $value');
+    if (value.isEmpty) {
+      return;
+    }
+
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      _fetchOptions(value);
+    });
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
   }
 
   @override
@@ -75,13 +96,7 @@ class _FormAutoCompleteState extends State<FormAutoComplete> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               focusNode: focusNode,
               onFieldSubmitted: (_) => onFieldSubmitted(),
-              onChanged: (value) {
-                Log.d('Text field changed: $value');
-                if (value.isEmpty) {
-                  return;
-                }
-                _fetchOptions(value);
-              },
+              onChanged: _onTextChanged,
             );
           },
           displayStringForOption: (String option) => option,

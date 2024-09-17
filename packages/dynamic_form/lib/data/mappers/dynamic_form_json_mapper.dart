@@ -99,8 +99,11 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
-                  setValueExpression: element.setValueExpression,
+                  setValueExpression: element.setValueExpression ??
+                      _getdummysetValueExpression(
+                          element.name.toString().trim()),
                   ensureUnique: element.ensureUnique ?? false,
+                  lookUp: _getdummyLookUp(element.name.toString().trim()),
                 ),
               );
             }
@@ -115,6 +118,31 @@ class DynamicFormJsonMapper {
       debugPrint('DynamicFormJsonMapper _getElements: $e');
       rethrow;
     }
+  }
+
+  String? _getdummysetValueExpression(String name) {
+    if (name == 'corneaRetrievalRequest.recoveryInformation.expirationDate') {
+      return 'corneaRetrievalRequest.recoveryInformation.storageMedium';
+    }
+    return null;
+  }
+
+  Map? _getdummyLookUp(String name) {
+    if (name == 'corneaRetrievalRequest.recoveryInformation.expirationDate') {
+      return {
+        'MK': '4 days',
+        'Cornisol': '14 days',
+        'Optisol-GS': '14 days',
+        'Eusol-C': '14 days',
+        'Life 4-C': '14 days',
+        '100% ETOH': 'One year',
+        '95% ETOH': 'One year',
+        '70% EOH': 'One year',
+        'Moist Chamber': '24 hrs',
+        'Glycerin': 'One year',
+      };
+    }
+    return null;
   }
 
   _getInitialValType(DynamicFormType type, ElementClassModel element) {
