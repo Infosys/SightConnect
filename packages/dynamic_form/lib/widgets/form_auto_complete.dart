@@ -61,9 +61,16 @@ class _FormAutoCompleteState extends State<FormAutoComplete> {
           ) {
             return TextFormField(
               decoration: InputDecoration(
+                hintText: widget.field.placeholder,
+                labelText: widget.field.title,
                 suffixIcon: _isLoading
-                    ? const CircularProgressIndicator()
-                    : const Icon(Icons.search),
+                    ? const SizedBox(
+                        width: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : null,
               ),
               controller: fieldController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
