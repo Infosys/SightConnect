@@ -244,6 +244,8 @@ class DynamicFormJsonMapper {
           return DynamicFormType.DURATION;
         case 'SIGNATURE':
           return DynamicFormType.SIGNATURE;
+        case 'AUTOCOMPLETE':
+          return DynamicFormType.AUTOCOMPLETE;
         default:
           return DynamicFormType.DEFAULT;
       }

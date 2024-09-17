@@ -48,9 +48,9 @@ class _FormAutoCompleteState extends State<FormAutoComplete> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderField<dynamic>(
+    return FormBuilderField<String>(
       name: widget.field.name,
-      initialValue: widget.field.initialValue,
+      initialValue: widget.field.initialValue.toString(),
       builder: (field) {
         return Autocomplete<String>(
           fieldViewBuilder: (
@@ -63,12 +63,11 @@ class _FormAutoCompleteState extends State<FormAutoComplete> {
               decoration: InputDecoration(
                 hintText: widget.field.placeholder,
                 labelText: widget.field.title,
-                suffixIcon: _isLoading
+                suffix: _isLoading
                     ? const SizedBox(
                         width: 18,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
+                        height: 18,
+                        child: CircularProgressIndicator(),
                       )
                     : null,
               ),
