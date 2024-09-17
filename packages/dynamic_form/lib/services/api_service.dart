@@ -2,12 +2,10 @@ import 'package:dio/dio.dart';
 
 class ApiService {
   static final ApiService _instance = ApiService._internal();
-  late final Dio dio;
+  Dio dio;
 
   // Private constructor
-  ApiService._internal() {
-    dio = Dio();
-  }
+  ApiService._internal() : dio = Dio();
 
   // Factory constructor to return the same instance
   factory ApiService() {
@@ -15,11 +13,15 @@ class ApiService {
   }
 
   // Method to override Dio instance (if needed)
-  void overrideDio(Dio overrideDio) {
-    dio = overrideDio;
+  void overrideDio(Dio? overrideDio) {
+    // Ensure dio is not null before overriding
+    if (overrideDio != null) {
+      dio = overrideDio;
+    }
   }
 
-  static Future<List<String>> getOptions({required String endPoint}) async {
+  static Future<List<String>> getOptions(
+      {required String endPoint, String? query}) async {
     return Future.delayed(const Duration(seconds: 5), () {
       return [
         'Option 1',

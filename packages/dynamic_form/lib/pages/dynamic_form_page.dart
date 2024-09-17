@@ -49,9 +49,7 @@ class _DynamicFormPageState extends State<DynamicFormPage> {
   void initState() {
     super.initState();
     _futureJson = _loadJson();
-    if (widget.overrideDio != null) {
-      ApiService().overrideDio(widget.overrideDio!);
-    }
+    ApiService().overrideDio(widget.overrideDio);
   }
 
   Future<ResponseJsonEntity>? _loadJson() async {

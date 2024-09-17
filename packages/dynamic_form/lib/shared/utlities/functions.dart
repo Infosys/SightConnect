@@ -4,12 +4,12 @@ import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/bool_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
+import 'package:dynamic_form/widgets/form_auto_complete.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_date_picker.dart';
 import 'package:dynamic_form/widgets/form_date_time_picker.dart';
 import 'package:dynamic_form/widgets/form_display.dart';
-import 'package:dynamic_form/widgets/form_drop_down.dart';
 import 'package:dynamic_form/widgets/form_duration.dart';
 import 'package:dynamic_form/widgets/form_file.dart';
 import 'package:dynamic_form/widgets/form_panel_widget.dart';
@@ -47,7 +47,7 @@ Widget getField(
       return VisibiltyWrapper(
         field: field,
         formKey: key,
-        child: FormDropDown(
+        child: FormAutoComplete(
             field: field,
             onChanged: (value) {
               globalRebuildNotifier.value = !globalRebuildNotifier.value;
@@ -55,6 +55,17 @@ Widget getField(
               callBack?.call(value);
             }),
       );
+    // return VisibiltyWrapper(
+    //   field: field,
+    //   formKey: key,
+    //   child: FormDropDown(
+    //       field: field,
+    //       onChanged: (value) {
+    //         globalRebuildNotifier.value = !globalRebuildNotifier.value;
+    //         key.currentState?.setInternalFieldValue(field.name, value);
+    //         callBack?.call(value);
+    //       }),
+    // );
 
     case DynamicFormType.RADIO:
       return VisibiltyWrapper(
