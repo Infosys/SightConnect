@@ -121,17 +121,13 @@ class DynamicFormJsonMapper {
 
   _getDummyStartDate(String name) {
     if (name == "intimationRequest.notificationDate") {
-      return "";
-    } else {
-      return null;
+      return "TODAY-5d";
     }
   }
 
   _getDummyEndDate(String name) {
     if (name == "intimationRequest.notificationDate") {
-      return "";
-    } else {
-      return null;
+      return "TODAY+5d";
     }
   }
 
