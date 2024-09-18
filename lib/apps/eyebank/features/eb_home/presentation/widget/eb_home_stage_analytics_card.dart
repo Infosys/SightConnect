@@ -60,8 +60,7 @@ class EbHomeStageAnalyticsCard extends ConsumerWidget {
                       }).toList(),
                     );
                   },
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
+                  loading: () => const Center(child: SizedBox()),
                   error: (error, stack) {
                     logger.e(error);
                     String msg = "";
