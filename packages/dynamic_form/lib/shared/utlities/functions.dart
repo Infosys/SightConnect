@@ -150,7 +150,7 @@ Widget getField(
       );
     case DynamicFormType.DATETIME:
       return VisibiltyWrapper(
-        field: field,
+        field: _getInitialValue(field, key),
         formKey: key,
         child: FormDateTimePicker(
           field: field,
@@ -179,7 +179,7 @@ Widget getField(
 
     case DynamicFormType.DATE:
       return VisibiltyWrapper(
-        field: field,
+        field: _getInitialValue(field, key),
         formKey: key,
         child: FormDatePicker(
           field: field,
@@ -267,7 +267,12 @@ _getInitialValue(
 
 dynamic _getlookUpValue(
     ElementClassEntity field, GlobalKey<FormBuilderState> formKey) {
-  final key = formKey.currentState?.fields[field.setValueExpression]?.value;
+  Log.f({
+    'Field': field.name,
+    'LookUp': field.lookUp,
+    'LookUp Key': formKey.currentState?.instantValue[field.setValueExpression],
+  });
+  final key = formKey.currentState?.instantValue[field.setValueExpression];
   final value = field.lookUp?[key];
   Log.f('LookUp Value: $value');
   return value;

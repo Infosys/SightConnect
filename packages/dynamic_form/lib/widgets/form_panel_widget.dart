@@ -352,18 +352,23 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                       padding: const EdgeInsets.only(bottom: 4),
                       child: getField(
                         widget.field.elements![i].copyWith(
-                          name: '${widget.field.elements![i].name}_$key',
-                          initialValue: formattedInitialValues[
-                              '${widget.field.elements![i].name}_$key'],
-                          choices: _getFilteredChoices(
-                            ensureUnique:
-                                widget.field.elements![i].ensureUnique,
-                            key: '${widget.field.elements![i].name}_$key',
-                            fieldName: widget.field.elements?[i].name ?? '',
-                            choices: widget.field.elements?[i].choices,
-                            valueMap: formKey.currentState?.instantValue ?? {},
-                          ),
-                        ),
+                            name: '${widget.field.elements![i].name}_$key',
+                            initialValue: formattedInitialValues[
+                                '${widget.field.elements![i].name}_$key'],
+                            choices: _getFilteredChoices(
+                              ensureUnique:
+                                  widget.field.elements![i].ensureUnique,
+                              key: '${widget.field.elements![i].name}_$key',
+                              fieldName: widget.field.elements?[i].name ?? '',
+                              choices: widget.field.elements?[i].choices,
+                              valueMap:
+                                  formKey.currentState?.instantValue ?? {},
+                            ),
+                            setValueExpression: widget.field.elements![i]
+                                        .setValueExpression ==
+                                    null
+                                ? null
+                                : '${widget.field.elements![i].setValueExpression}_$key'),
                         widget.globalFormKey,
                         widget.readOnly,
                         callBack: (value) {

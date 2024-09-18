@@ -99,9 +99,7 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
-                  setValueExpression: element.setValueExpression ??
-                      _getdummysetValueExpression(
-                          element.name.toString().trim()),
+                  setValueExpression: _getdummysetValueExpression(element.name),
                   ensureUnique: element.ensureUnique ?? false,
                   lookUp: _getdummyLookUp(element.name.toString().trim()),
                 ),
@@ -130,7 +128,7 @@ class DynamicFormJsonMapper {
   Map? _getdummyLookUp(String name) {
     if (name == 'corneaRetrievalRequest.recoveryInformation.expirationDate') {
       return {
-        'MK': '4 days',
+        'MK': DateTime.now().add(const Duration(days: 14)).toIso8601String(),
         'Cornisol': '14 days',
         'Optisol-GS': '14 days',
         'Eusol-C': '14 days',
