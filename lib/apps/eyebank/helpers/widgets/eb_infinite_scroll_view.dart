@@ -102,13 +102,12 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
       onRefresh: () async {
         _pagingController.refresh();
       },
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (widget.enableSearch || widget.enableFilter)
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: CustomScrollView(
+        slivers: [
+          if (widget.enableSearch || widget.enableFilter)
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              sliver: SliverToBoxAdapter(
                 child: Row(
                   children: [
                     Expanded(
@@ -156,54 +155,52 @@ class EbInfiniteScrollViewState<T> extends State<EbInfiniteScrollView<T>> {
                   ],
                 ),
               ),
-            PagedListView<int, T>(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              pagingController: _pagingController,
-              builderDelegate: PagedChildBuilderDelegate<T>(
-                itemBuilder: widget.itemBuilder,
-                firstPageErrorIndicatorBuilder: (context) => Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Error loading data'),
-                      const SizedBox(height: 8),
-                      ElevatedButton(
-                        onPressed: () => _pagingController.refresh(),
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                ),
-                firstPageProgressIndicatorBuilder: (context) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                newPageErrorIndicatorBuilder: (context) => Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Error loading data'),
-                      ElevatedButton(
-                        onPressed: () =>
-                            _pagingController.retryLastFailedRequest(),
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                ),
-                newPageProgressIndicatorBuilder: (context) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                noItemsFoundIndicatorBuilder: (context) => const Center(
-                  child: Text('No items found'),
-                ),
-                noMoreItemsIndicatorBuilder: (context) => const Center(
-                  child: SizedBox(),
+            ),
+          PagedSliverList<int, T>(
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<T>(
+              itemBuilder: widget.itemBuilder,
+              firstPageErrorIndicatorBuilder: (context) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Error loading data'),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () => _pagingController.refresh(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
                 ),
               ),
+              firstPageProgressIndicatorBuilder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              newPageErrorIndicatorBuilder: (context) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Error loading data'),
+                    ElevatedButton(
+                      onPressed: () =>
+                          _pagingController.retryLastFailedRequest(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+              newPageProgressIndicatorBuilder: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              noItemsFoundIndicatorBuilder: (context) => const Center(
+                child: Text('No items found'),
+              ),
+              noMoreItemsIndicatorBuilder: (context) => const Center(
+                child: SizedBox(),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

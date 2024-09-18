@@ -7,7 +7,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/domain/enums/global_eb_enu
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_infinite_scroll_view.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'filter_bottom_sheet.dart';
 
@@ -30,7 +30,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           size: pageSize,
           startDate: filterMap['Start Date'],
           endDate: filterMap['End Date'],
-          encounterStage: filterMap['Timeline Stage'],
+          encounterStage: filterMap['Filter by Stage'],
         );
         final records = await ref.read(ebGetRecordsProvider(params).future);
         return records.content ?? [];
@@ -65,7 +65,7 @@ class MobileCaseSearchWidget extends ConsumerWidget {
           type: FilterType.date,
         ),
         Filter(
-          name: 'Timeline Stage',
+          name: 'Filter by Stage',
           type: FilterType.dropdown,
           dropdownOptions:
               EBStageName.options.map((e) => e.name.toUpperCase()).toList(),
