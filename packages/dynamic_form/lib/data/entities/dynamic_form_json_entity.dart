@@ -81,7 +81,6 @@ class ElementClassEntity {
   final List<ChoiceElementEntity>? choices;
   final String placeholder;
   final int maxSize;
-
   final int min;
   final int max;
   final int step;
@@ -94,9 +93,10 @@ class ElementClassEntity {
   final String? inputType;
   final dynamic initialValue;
   final String? visibleIf;
-
   final String? setValueExpression;
   final bool ensureUnique;
+  final String? startDate;
+  final String? endDate;
 
   ElementClassEntity({
     required this.type,
@@ -125,6 +125,8 @@ class ElementClassEntity {
     this.inputType,
     this.visibleIf,
     this.setValueExpression,
+    this.startDate,
+    this.endDate,
   });
 
   factory ElementClassEntity.fromJson(Map<String, dynamic> json) =>
@@ -163,6 +165,8 @@ class ElementClassEntity {
         visibleIf: json["visibleIf"],
         setValueExpression: json["setValueExpression"],
         ensureUnique: json["ensureUnique"],
+        startDate: json["startDate"],
+        endDate: json["endDate"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -196,11 +200,13 @@ class ElementClassEntity {
         "visibleIf": visibleIf,
         "setValueExpression": setValueExpression,
         "ensureUnique": ensureUnique,
+        "startDate": startDate,
+        "endDate": endDate,
       };
 
   @override
   String toString() {
-    return 'ElementClassEntity(type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType, initialValue: $initialValue, visibleIf: $visibleIf, setValueExpression: $setValueExpression, ensureUnique: $ensureUnique)';
+    return 'ElementClassEntity(type: $type, name: $name, title: $title, description: $description, isRequired: $isRequired, requiredErrorText: $requiredErrorText, readOnly: $readOnly, validators: $validators, choices: $choices, placeholder: $placeholder, maxSize: $maxSize, min: $min, max: $max, step: $step, conditions: $conditions, dependantField: $dependantField, elements: $elements, repeats: $repeats, minRepeat: $minRepeat, maxRepeat: $maxRepeat, inputType: $inputType, initialValue: $initialValue, visibleIf: $visibleIf, setValueExpression: $setValueExpression, ensureUnique: $ensureUnique, startDate: $startDate, endDate: $endDate)';
   }
 
   ElementClassEntity copyWith({
@@ -229,6 +235,8 @@ class ElementClassEntity {
     String? visibleIf,
     String? setValueExpression,
     bool? ensureUnique,
+    String? startDate,
+    String? endDate,
   }) {
     return ElementClassEntity(
       type: type ?? this.type,
@@ -256,6 +264,8 @@ class ElementClassEntity {
       visibleIf: visibleIf ?? this.visibleIf,
       setValueExpression: setValueExpression ?? this.setValueExpression,
       ensureUnique: ensureUnique ?? this.ensureUnique,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
     );
   }
 }
