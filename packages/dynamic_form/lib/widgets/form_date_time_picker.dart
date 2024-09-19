@@ -12,7 +12,7 @@ class FormDateTimePicker extends HookWidget {
     required this.onChanged,
   });
   final ElementClassEntity field;
-  final Function(DateTime?) onChanged;
+  final Function(String?) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,9 @@ class FormDateTimePicker extends HookWidget {
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       name: field.name,
-      onChanged: onChanged,
+      onChanged: (value) {
+        onChanged(value?.toUtc().toIso8601String());
+      },
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,

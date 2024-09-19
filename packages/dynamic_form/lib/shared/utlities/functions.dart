@@ -241,17 +241,15 @@ _getInitialValue(
   }
 
   Log.f('Field: ${field.name} setValueExpression: ${field.setValueExpression}');
-  final value = field.lookUp != null
-      ? _getlookUpValue(field, formKey)
-      : ArithmeticExpressionEvaluator.evaluate(
-          field.setValueExpression!,
-          formKey.currentState?.instantValue ?? {},
-        );
+  final value = ArithmeticExpressionEvaluator.evaluate(
+    field.setValueExpression!,
+    formKey.currentState?.instantValue ?? {},
+  );
 
   Log.i('Initial Value: $value');
   field = field.copyWith(
     initialValue: value.toString(),
-    readOnly: value != null && value.toString().isNotEmpty,
+    readOnly: field.setValueExpression != null,
   );
 
   Future.microtask(() {
@@ -263,19 +261,6 @@ _getInitialValue(
   });
 
   return field;
-}
-
-dynamic _getlookUpValue(
-    ElementClassEntity field, GlobalKey<FormBuilderState> formKey) {
-  Log.f({
-    'Field': field.name,
-    'LookUp': field.lookUp,
-    'LookUp Key': formKey.currentState?.instantValue[field.setValueExpression],
-  });
-  final key = formKey.currentState?.instantValue[field.setValueExpression];
-  final value = field.lookUp?[key];
-  Log.f('LookUp Value: $value');
-  return value;
 }
 
 class VisibiltyWrapper extends StatefulWidget {

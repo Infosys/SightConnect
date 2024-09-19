@@ -99,7 +99,7 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
-                  setValueExpression: _getdummysetValueExpression(element.name),
+                  setValueExpression: _getdummysetValueExpression(element),
                   ensureUnique: element.ensureUnique ?? false,
                   lookUp: _getdummyLookUp(element.name.toString().trim()),
                 ),
@@ -118,17 +118,18 @@ class DynamicFormJsonMapper {
     }
   }
 
-  String? _getdummysetValueExpression(String name) {
-    if (name == 'corneaRetrievalRequest.recoveryInformation.expirationDate') {
+  String? _getdummysetValueExpression(ElementClassModel ele) {
+    if (ele.name ==
+        'corneaRetrievalRequest.recoveryInformation.expirationDate') {
       return 'corneaRetrievalRequest.recoveryInformation.storageMedium';
     }
-    return null;
+    return ele.setValueExpression;
   }
 
   Map? _getdummyLookUp(String name) {
     if (name == 'corneaRetrievalRequest.recoveryInformation.expirationDate') {
       return {
-        'MK': DateTime.now().add(const Duration(days: 14)).toIso8601String(),
+        'MK': '2024-09-19T06:30:00.000Z',
         'Cornisol': '14 days',
         'Optisol-GS': '14 days',
         'Eusol-C': '14 days',
