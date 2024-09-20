@@ -99,10 +99,14 @@ class DynamicFormJsonMapper {
                   inputType: element.inputType,
                   prefix: element.prefix,
                   visibleIf: element.visibleIf,
-                  setValueExpression: element.setValueExpression,
+                  setValueExpression: _getdummysetValueExpression(element),
                   ensureUnique: element.ensureUnique ?? false,
+
                   startDate: _getDummyStartDate(element.name),
                   endDate: _getDummyEndDate(element.name),
+
+                  lookUp: _getdummyLookUp(element.name.toString().trim()),
+
                 ),
               );
             }
@@ -119,6 +123,7 @@ class DynamicFormJsonMapper {
     }
   }
 
+
   _getDummyStartDate(String name) {
     if (name == "intimationRequest.notificationDate") {
       return "TODAY-5d";
@@ -129,6 +134,32 @@ class DynamicFormJsonMapper {
     if (name == "intimationRequest.notificationDate") {
       return "TODAY+5d";
     }
+
+  String? _getdummysetValueExpression(ElementClassModel ele) {
+    if (ele.name ==
+        'corneaRetrievalRequest.recoveryInformation.expirationDate') {
+      return 'corneaRetrievalRequest.recoveryInformation.storageMedium';
+    }
+    return ele.setValueExpression;
+  }
+
+  Map? _getdummyLookUp(String name) {
+    if (name == 'corneaRetrievalRequest.recoveryInformation.expirationDate') {
+      return {
+        'MK': '2024-09-19T06:30:00.000Z',
+        'Cornisol': '14 days',
+        'Optisol-GS': '14 days',
+        'Eusol-C': '14 days',
+        'Life 4-C': '14 days',
+        '100% ETOH': 'One year',
+        '95% ETOH': 'One year',
+        '70% EOH': 'One year',
+        'Moist Chamber': '24 hrs',
+        'Glycerin': 'One year',
+      };
+    }
+    return null;
+
   }
 
   _getInitialValType(DynamicFormType type, ElementClassModel element) {
@@ -258,6 +289,8 @@ class DynamicFormJsonMapper {
           return DynamicFormType.DURATION;
         case 'SIGNATURE':
           return DynamicFormType.SIGNATURE;
+        case 'AUTOCOMPLETE':
+          return DynamicFormType.AUTOCOMPLETE;
         default:
           return DynamicFormType.DEFAULT;
       }

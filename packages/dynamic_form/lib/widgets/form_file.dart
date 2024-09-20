@@ -3,8 +3,8 @@ import 'dart:math' as math;
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/services/api_service.dart';
 import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
-import 'package:dynamic_form/shared/utlities/cloud_service.dart';
 import 'package:dynamic_form/shared/utlities/file_picker.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:file_picker/file_picker.dart';
@@ -372,11 +372,11 @@ class UploadButton extends StatelessWidget {
   final UploadButtonType buttonType;
 
   Future<String> uploadFile(PlatformFile file) async {
-    return CloudService().uploadImage(file);
+    return ApiService().uploadImage(file);
   }
 
   Future<String> uploadImage(XFile file) async {
-    return CloudService().uploadImage(PlatformFile(
+    return ApiService().uploadImage(PlatformFile(
       name: file.name,
       path: file.path,
       size: await file.length(),

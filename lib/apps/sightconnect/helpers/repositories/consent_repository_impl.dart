@@ -18,14 +18,15 @@ class ConsentRepositoryImpl implements ConsentRepository {
   ConsentRepositoryImpl(this._dio);
 
   @override
-  Future<ConsentModel> getConsent({String type = "PRIVACY_POLICY"}) async {
+  Future<List<ConsentModel>> getConsent({String type = "PRIVACY_POLICY"}) async {
     final endPoint = "/services/orchestration/api/v2/consent?type=$type";
     try {
       log("current token is : ${_dio.options.headers["Authorization"]}");
       log("token from persistent : ${PersistentAuthStateService.authState.accessToken}");
       log("dio headers are : ${_dio.options.headers}");
       final response = await _dio.get(endPoint);
-      return ConsentModel.fromJson(response.data);
+      logger.f(response.data.toString());
+      return (response.data as List).map((e) => ConsentModel.fromJson(e)).toList();
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);
       rethrow;

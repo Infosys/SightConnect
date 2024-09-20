@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/data/enums/enums.dart';
 import 'package:dynamic_form/shared/modals/dynamic_form_modals.dart';
 import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/functions.dart';
@@ -121,12 +122,52 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
   }
 
   evaluateDynamicExpression() {
-    final String setValueExpression = widget.field.setValueExpression ?? '';
+    for (var key in repeatedPanelKeys) {
+      for (var element in widget.field.elements!) {
+        if (element.setValueExpression == null) {
+          continue;
+        }
+
+        dynamic expressionValue;
+
+        if (element.lookUp != null) {
+          expressionValue = formKey
+              .currentState?.instantValue["${element.setValueExpression}_$key"];
+          expressionValue = element.lookUp![expressionValue];
+          formKey.currentState?.patchValue({
+            '${element.name}_$key': element.type == DynamicFormType.DATETIME ||
+                    element.type == DynamicFormType.DATE
+                ? DateTime.tryParse(expressionValue)
+                : expressionValue,
+          });
+        }
+
+        Log.d({
+          'expressionValue': expressionValue,
+          'finalExpression': element.setValueExpression,
+          "elementName": '${element.name}_$key',
+          'instantValue': formKey.currentState?.instantValue,
+          "cureentSTtae": formKey.currentState?.value,
+          "lookUp": element.lookUp,
+        });
+      }
+    }
+    final expressionValue = _arthimeticExpressionEval(widget.field);
+    widget.globalFormKey.currentState?.setInternalFieldValue(
+      widget.field.name,
+      expressionValue,
+    );
+  }
+
+  _arthimeticExpressionEval(ElementClassEntity element) {
+    if (element.setValueExpression == null) {
+      return null;
+    }
+    final String setValueExpression = widget.field.setValueExpression!;
 
     String operatorValue = setValueExpression.split(' ').first;
     String fieldValue = setValueExpression.split(' ').last;
     String finalExpression = '';
-
     switch (operatorValue) {
       case 'sum':
         for (var key in repeatedPanelKeys) {
@@ -140,16 +181,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
     final expressionValue = ArithmeticExpressionEvaluator.evaluate(
         finalExpression, formKey.currentState?.instantValue ?? {});
 
-    // Log.f({
-    //   'expressionValue': expressionValue,
-    //   'finalExpression': finalExpression,
-    //   'instantValue': formKey.currentState?.instantValue,
-    // });
-
-    widget.globalFormKey.currentState?.setInternalFieldValue(
-      widget.field.name,
-      expressionValue,
-    );
+    return expressionValue;
   }
 
   _createdPrefilledPanels() {
@@ -370,9 +402,7 @@ class _RepeatingFieldPanelState extends State<RepeatingFieldPanel>
                           formattedInitialValues[
                               '${widget.field.elements![i].name}_$key'] = value;
 
-                          if (widget.field.setValueExpression != null) {
-                            _debounceEvaluateAndRebuild();
-                          }
+                          _debounceEvaluateAndRebuild();
                         },
                       ),
                     ),

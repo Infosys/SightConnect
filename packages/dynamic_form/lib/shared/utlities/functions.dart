@@ -4,6 +4,7 @@ import 'package:dynamic_form/shared/utlities/arithmetic_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/bool_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:dynamic_form/shared/widgets/page_widget.dart';
+import 'package:dynamic_form/widgets/form_auto_complete.dart';
 import 'package:dynamic_form/widgets/form_check_box.dart';
 import 'package:dynamic_form/widgets/form_chips.dart';
 import 'package:dynamic_form/widgets/form_date_picker.dart';
@@ -41,6 +42,19 @@ Widget getField(
           field: _getInitialValue(field, key),
           onChanged: callBack,
           formKey: key,
+        ),
+      );
+    case DynamicFormType.AUTOCOMPLETE:
+      return VisibiltyWrapper(
+        field: field,
+        formKey: key,
+        child: FormAutoComplete(
+          field: field,
+          onChanged: (value) {
+            // globalRebuildNotifier.value = !globalRebuildNotifier.value;
+            // key.currentState?.setInternalFieldValue(field.name, value);
+            callBack?.call(value);
+          },
         ),
       );
     case DynamicFormType.DROPDOWN:
@@ -136,7 +150,7 @@ Widget getField(
       );
     case DynamicFormType.DATETIME:
       return VisibiltyWrapper(
-        field: field,
+        field: _getInitialValue(field, key),
         formKey: key,
         child: FormDateTimePicker(
           field: field,
@@ -165,7 +179,7 @@ Widget getField(
 
     case DynamicFormType.DATE:
       return VisibiltyWrapper(
-        field: field,
+        field: _getInitialValue(field, key),
         formKey: key,
         child: FormDatePicker(
           field: field,
@@ -231,10 +245,11 @@ _getInitialValue(
     field.setValueExpression!,
     formKey.currentState?.instantValue ?? {},
   );
+
   Log.i('Initial Value: $value');
   field = field.copyWith(
     initialValue: value.toString(),
-    readOnly: value != null && value.toString().isNotEmpty,
+    readOnly: field.setValueExpression != null,
   );
 
   Future.microtask(() {

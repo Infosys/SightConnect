@@ -5,6 +5,7 @@ import 'package:eye_care_for_all/apps/eyebank/helpers/modals/form_preview_sheet.
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler_card.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_eb_provider.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class OrganRequestButton extends StatelessWidget {
                 title: intimationData.name ?? '',
                 json: intimationData.stage,
                 backButtonIcon: Icons.close,
+                overrideDio: ref.watch(dioProvider),
                 onSubmit: (formResponse, mode) async {
                   try {
                     final repo = ref.read(ebRepositoryProvider);

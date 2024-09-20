@@ -16,6 +16,7 @@ enum DynamicFormType {
   DURATION,
   SIGNATURE,
   HIDDEN,
+  AUTOCOMPLETE,
 }
 
 enum FormLayoutType {

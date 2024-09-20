@@ -232,7 +232,7 @@ class InitializationProvider extends ChangeNotifier {
   Future<bool> getEighteenPlusDeclarationStatus() async {
     final consentRepository = _ref.read(consentRepositoryProvider);
     final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
-    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+    if (consent.first.consentStatus == ConsentStatus.ACKNOWLEDGED) {
       return true;
     } else {
       return false;
@@ -242,7 +242,7 @@ class InitializationProvider extends ChangeNotifier {
   Future<bool> getConsentStatus() async {
     final consentRepository = _ref.read(consentRepositoryProvider);
     final consent = await consentRepository.getConsent(type: "PRIVACY_POLICY");
-    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+    if (consent.first.consentStatus == ConsentStatus.ACKNOWLEDGED) {
       return true;
     } else {
       return false;
