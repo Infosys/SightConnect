@@ -22,7 +22,6 @@ ConsentModel _$ConsentModelFromJson(Map<String, dynamic> json) {
 mixin _$ConsentModel {
   int? get templateId => throw _privateConstructorUsedError;
   String? get consentVersion => throw _privateConstructorUsedError;
-  String? get templateType => throw _privateConstructorUsedError;
   ConsentStatus get consentStatus => throw _privateConstructorUsedError;
   String? get acknowledgeDate => throw _privateConstructorUsedError;
 
@@ -41,7 +40,6 @@ abstract class $ConsentModelCopyWith<$Res> {
   $Res call(
       {int? templateId,
       String? consentVersion,
-      String? templateType,
       ConsentStatus consentStatus,
       String? acknowledgeDate});
 }
@@ -61,7 +59,6 @@ class _$ConsentModelCopyWithImpl<$Res, $Val extends ConsentModel>
   $Res call({
     Object? templateId = freezed,
     Object? consentVersion = freezed,
-    Object? templateType = freezed,
     Object? consentStatus = null,
     Object? acknowledgeDate = freezed,
   }) {
@@ -73,10 +70,6 @@ class _$ConsentModelCopyWithImpl<$Res, $Val extends ConsentModel>
       consentVersion: freezed == consentVersion
           ? _value.consentVersion
           : consentVersion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      templateType: freezed == templateType
-          ? _value.templateType
-          : templateType // ignore: cast_nullable_to_non_nullable
               as String?,
       consentStatus: null == consentStatus
           ? _value.consentStatus
@@ -101,7 +94,6 @@ abstract class _$$ConsentModelImplCopyWith<$Res>
   $Res call(
       {int? templateId,
       String? consentVersion,
-      String? templateType,
       ConsentStatus consentStatus,
       String? acknowledgeDate});
 }
@@ -119,7 +111,6 @@ class __$$ConsentModelImplCopyWithImpl<$Res>
   $Res call({
     Object? templateId = freezed,
     Object? consentVersion = freezed,
-    Object? templateType = freezed,
     Object? consentStatus = null,
     Object? acknowledgeDate = freezed,
   }) {
@@ -131,10 +122,6 @@ class __$$ConsentModelImplCopyWithImpl<$Res>
       consentVersion: freezed == consentVersion
           ? _value.consentVersion
           : consentVersion // ignore: cast_nullable_to_non_nullable
-              as String?,
-      templateType: freezed == templateType
-          ? _value.templateType
-          : templateType // ignore: cast_nullable_to_non_nullable
               as String?,
       consentStatus: null == consentStatus
           ? _value.consentStatus
@@ -154,7 +141,6 @@ class _$ConsentModelImpl implements _ConsentModel {
   const _$ConsentModelImpl(
       {this.templateId,
       this.consentVersion,
-      this.templateType,
       this.consentStatus = ConsentStatus.PENDING,
       this.acknowledgeDate});
 
@@ -166,8 +152,6 @@ class _$ConsentModelImpl implements _ConsentModel {
   @override
   final String? consentVersion;
   @override
-  final String? templateType;
-  @override
   @JsonKey()
   final ConsentStatus consentStatus;
   @override
@@ -175,7 +159,7 @@ class _$ConsentModelImpl implements _ConsentModel {
 
   @override
   String toString() {
-    return 'ConsentModel(templateId: $templateId, consentVersion: $consentVersion, templateType: $templateType, consentStatus: $consentStatus, acknowledgeDate: $acknowledgeDate)';
+    return 'ConsentModel(templateId: $templateId, consentVersion: $consentVersion, consentStatus: $consentStatus, acknowledgeDate: $acknowledgeDate)';
   }
 
   @override
@@ -187,8 +171,6 @@ class _$ConsentModelImpl implements _ConsentModel {
                 other.templateId == templateId) &&
             (identical(other.consentVersion, consentVersion) ||
                 other.consentVersion == consentVersion) &&
-            (identical(other.templateType, templateType) ||
-                other.templateType == templateType) &&
             (identical(other.consentStatus, consentStatus) ||
                 other.consentStatus == consentStatus) &&
             (identical(other.acknowledgeDate, acknowledgeDate) ||
@@ -197,8 +179,8 @@ class _$ConsentModelImpl implements _ConsentModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, templateId, consentVersion,
-      templateType, consentStatus, acknowledgeDate);
+  int get hashCode => Object.hash(
+      runtimeType, templateId, consentVersion, consentStatus, acknowledgeDate);
 
   @JsonKey(ignore: true)
   @override
@@ -218,7 +200,6 @@ abstract class _ConsentModel implements ConsentModel {
   const factory _ConsentModel(
       {final int? templateId,
       final String? consentVersion,
-      final String? templateType,
       final ConsentStatus consentStatus,
       final String? acknowledgeDate}) = _$ConsentModelImpl;
 
@@ -229,8 +210,6 @@ abstract class _ConsentModel implements ConsentModel {
   int? get templateId;
   @override
   String? get consentVersion;
-  @override
-  String? get templateType;
   @override
   ConsentStatus get consentStatus;
   @override

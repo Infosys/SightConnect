@@ -25,6 +25,7 @@ class ConsentRepositoryImpl implements ConsentRepository {
       log("token from persistent : ${PersistentAuthStateService.authState.accessToken}");
       log("dio headers are : ${_dio.options.headers}");
       final response = await _dio.get(endPoint);
+      logger.f(response.data.toString());
       return (response.data as List).map((e) => ConsentModel.fromJson(e)).toList();
     } on DioException catch (e) {
       DioErrorHandler.handleDioError(e);

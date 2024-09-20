@@ -8,7 +8,6 @@ class ConsentModel with _$ConsentModel {
   const factory ConsentModel({
     int? templateId,
     String? consentVersion,
-    String? templateType,
     @Default(ConsentStatus.PENDING) ConsentStatus consentStatus,
     String? acknowledgeDate,
   }) = _ConsentModel;
