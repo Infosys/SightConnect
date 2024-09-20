@@ -1,4 +1,5 @@
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/shared/utlities/date_time_expression_eval.dart';
 import 'package:dynamic_form/shared/utlities/log_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -52,6 +53,8 @@ class FormDateTimePicker extends HookWidget {
       validator: field.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
+      lastDate: DateTimeExpressionEvaluator.evaluate(field.endDate),
+      firstDate: DateTimeExpressionEvaluator.evaluate(field.startDate),
     );
   }
 }
