@@ -101,12 +101,9 @@ class DynamicFormJsonMapper {
                   visibleIf: element.visibleIf,
                   setValueExpression: _getdummysetValueExpression(element),
                   ensureUnique: element.ensureUnique ?? false,
-
                   startDate: _getDummyStartDate(element.name),
                   endDate: _getDummyEndDate(element.name),
-
                   lookUp: _getdummyLookUp(element.name.toString().trim()),
-
                 ),
               );
             }
@@ -123,7 +120,6 @@ class DynamicFormJsonMapper {
     }
   }
 
-
   _getDummyStartDate(String name) {
     if (name == "intimationRequest.notificationDate") {
       return "TODAY-5d";
@@ -134,6 +130,7 @@ class DynamicFormJsonMapper {
     if (name == "intimationRequest.notificationDate") {
       return "TODAY+5d";
     }
+  }
 
   String? _getdummysetValueExpression(ElementClassModel ele) {
     if (ele.name ==
@@ -159,7 +156,6 @@ class DynamicFormJsonMapper {
       };
     }
     return null;
-
   }
 
   _getInitialValType(DynamicFormType type, ElementClassModel element) {
