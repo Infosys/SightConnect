@@ -80,7 +80,7 @@ class EighteenPlusDeclaration extends HookConsumerWidget {
                                   .getEighteenPlusDeclarationStatus()) {
                                 navigator.pop(true);
                               } else {
-                                await model.sumbitConsent(consent: data);
+                                await model.sumbitConsent(consent: data.first);
                                 navigator.pop(true);
                               }
                             } catch (e) {
