@@ -53,7 +53,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                     Expanded(
                       child: AppWebView(
                         url:
-                            "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}",
+                            "${ApiConstant.baseUrl}/dam/${data.templateId}?langId=${lang}",
                       ),
                     ),
                     const Padding(
@@ -77,7 +77,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                   Expanded(
                     child: AppWebView(
                       url:
-                          "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}",
+                          "${ApiConstant.baseUrl}/dam/${data.templateId}?langId=${lang}",
                     ),
                   ),
                   Padding(
@@ -113,7 +113,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                                             navigator.pop(true);
                                           } else {
                                             await model.sumbitConsent(
-                                                consent: data.first);
+                                                consent: data);
                                             navigator.pop(true);
                                           }
                                         } catch (e) {

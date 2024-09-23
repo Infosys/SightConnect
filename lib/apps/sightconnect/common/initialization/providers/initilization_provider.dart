@@ -44,7 +44,7 @@ class InitializationProvider extends ChangeNotifier {
     } else if (role == Role.ROLE_EYEBANK_TECHNICIAN) {
       return _checkEyeBankTechnicianExist(phone, role);
     } else {
-      throw ServerFailure(errorMessage: "Invalid Role");
+      throw ServerFailure(errorMessage: "Profile Not Found");
     }
   }
 
@@ -230,21 +230,31 @@ class InitializationProvider extends ChangeNotifier {
   }
 
   Future<bool> getEighteenPlusDeclarationStatus() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
-    if (consent.first.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-      return true;
-    } else {
+    try {
+      final consentRepository = _ref.read(consentRepositoryProvider);
+      final consent =
+          await consentRepository.getConsent(type: "AGE_DECLARATION");
+      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }
 
   Future<bool> getConsentStatus() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "PRIVACY_POLICY");
-    if (consent.first.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-      return true;
-    } else {
+    try {
+      final consentRepository = _ref.read(consentRepositoryProvider);
+      final consent =
+          await consentRepository.getConsent(type: "PRIVACY_POLICY");
+      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }
