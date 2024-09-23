@@ -23,12 +23,11 @@ abstract class BaseRoleStrategy implements RoleStrategy {
     try {
       final isConsentAccepted = await checkConsent(navigator);
       if (isConsentAccepted) {
-        // final isReferralAccepted = await checkReferral(navigator);
-         await registerUser(navigator);
-        // if (isReferralAccepted) {
-        //   await registerUser(navigator);
-        //   return true;
-        // }
+        final isReferralAccepted = await checkReferral(navigator);
+        if (isReferralAccepted) {
+          await registerUser(navigator);
+          return true;
+        }
       }
       return false;
     } catch (e) {

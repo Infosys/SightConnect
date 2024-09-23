@@ -15,6 +15,7 @@ import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/failure.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -115,9 +116,9 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       return Future.value(roles.first);
     }
     // Allow only Beta users to select EyeBank Technician role
-    // if (isUserBeta && kIsWeb) {
-    //   return Future.value(Role.ROLE_EYEBANK_TECHNICIAN);
-    // }
+    if (!isUserBeta && kIsWeb) {
+      return Future.value(Role.ROLE_EYEBANK_TECHNICIAN);
+    }
     return showDialog<Role>(
       context: context,
       barrierDismissible: false,

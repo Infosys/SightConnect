@@ -15,10 +15,10 @@ class PatientRoleStrategy extends BaseRoleStrategy {
       bool? referralResult =
           await UserInteractionHandler.showReferralCollectSheet(
               navigator.context);
-      return referralResult ?? false;
+      return referralResult ?? true;
     } catch (e) {
       debugPrint('Error in checkReferral: $e');
-      return false;
+      return true;
     }
   }
 
