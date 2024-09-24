@@ -230,6 +230,7 @@ class InitializationProvider extends ChangeNotifier {
   }
 
   Future<bool> getConsentStatus() async {
+    // return false;
     try {
       final consentRepository = _ref.read(consentRepositoryProvider);
       final consents = await consentRepository.getConsent();

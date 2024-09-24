@@ -5,7 +5,7 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_lang
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
-import 'package:eye_care_for_all/shared/constants/app_size.dart';
+import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -148,58 +148,64 @@ class _PendingConsentTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final url = ApiConstant.isDev
-        ? "${ApiConstant.baseUrl}/services/templates/api/static/template/${consent.templateId}"
-        : "${ApiConstant.baseUrl}/dam/${consent.templateId}?langId=${langCode}";
+        ? "/services/templates/api/static/template/${consent.templateId}"
+        : "/dam/${consent.templateId}?langId=${langCode}";
     String eighteenPlusConsent =
         "This app is intended for users aged 18 and above. By clicking 'I Agree', you are confirming that you are 18 years or older";
-    return ExpansionTile(
-      title: Text('${AppConsentFormPage.formatTitle(consent.templateType)}'),
-      childrenPadding: const EdgeInsets.all(8),
-      children: [
-        if (consent.templateType == "AGE_DECLARATION")
-          Text(
-            eighteenPlusConsent,
-            style: Theme.of(context).textTheme.bodySmall,
-          )
-        else
-          SizedBox(
-            height: AppSize.height(context) * 0.5,
-            child: AppWebView(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ExpansionTile(
+        backgroundColor: AppColor.grey.withOpacity(0.1),
+        visualDensity: VisualDensity.compact,
+        title: Text('${AppConsentFormPage.formatTitle(consent.templateType)}'),
+        childrenPadding: const EdgeInsets.all(5),
+        children: [
+          if (consent.templateType == "AGE_DECLARATION")
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
+              child: Text(
+                eighteenPlusConsent,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            )
+          else
+            AppWebView(
               url: url,
             ),
+          CheckboxListTile(
+            title: const Text('Accepted'),
+            value: consent.consentStatus == ConsentStatus.ACKNOWLEDGED,
+            onChanged: (bool? value) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Confirm Consent'),
+                    content: Text(
+                        'Do you accept the consent for template ${AppConsentFormPage.formatTitle(consent.templateType)}?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          onAccept(value);
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Accept'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
           ),
-        CheckboxListTile(
-          title: const Text('Accepted'),
-          value: consent.consentStatus == ConsentStatus.ACKNOWLEDGED,
-          onChanged: (bool? value) {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Confirm Consent'),
-                  content: Text(
-                      'Do you accept the consent for template ${AppConsentFormPage.formatTitle(consent.templateType)}?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        onAccept(value);
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Accept'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
