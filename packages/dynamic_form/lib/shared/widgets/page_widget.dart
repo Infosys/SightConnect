@@ -1,67 +1,62 @@
+import 'dart:developer';
+
 import 'package:dynamic_form/data/entities/dynamic_form_json_entity.dart';
+import 'package:dynamic_form/shared/utlities/functions.dart';
 import 'package:dynamic_form/shared/widgets/app_card.dart';
-import 'package:dynamic_form/shared/widgets/app_responsive_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import '../utlities/functions.dart';
+final ValueNotifier<bool> globalRebuildNotifier = ValueNotifier<bool>(false);
 
-class PageWidget extends StatefulWidget {
+class PageWidget extends StatelessWidget {
   const PageWidget({
     super.key,
-    required this.name,
     required this.elements,
     required this.formKey,
+    required this.name,
+    this.readOnly = false,
   });
-  final String name;
-  final List<PageElementEntity> elements;
+
+  final List<ElementClassEntity> elements;
   final GlobalKey<FormBuilderState> formKey;
+  final String name;
+  final bool readOnly;
 
-  @override
-  State<PageWidget> createState() => _PageWidgetState();
-}
-
-class _PageWidgetState extends State<PageWidget> {
   @override
   Widget build(BuildContext context) {
-    if (widget.elements.isEmpty) {
+    log('PageWidget: $name');
+    if (elements.isEmpty) {
       return Container();
     }
 
-    return ExpansionTile(
-      initiallyExpanded: true,
-      title: Text(
-        widget.name,
-        style: const TextStyle(fontSize: 16.0),
-      ),
-      children: widget.elements.map((panel) {
-        if (panel.elements.isEmpty) {
-          return Container();
-        }
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AppCard(
-            title: panel.name,
-            child: Wrap(
-              runSpacing: 16,
-              children: _buildFields(panel.elements, widget.formKey),
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  List<Widget> _buildFields(List<ElementElementClassEntity>? fields,
-      GlobalKey<FormBuilderState> key) {
-    if (fields == null || fields.isEmpty) {
-      return [];
-    }
-
-    return fields.map((field) {
-      return AppResponsiveWidget(
-        widget: getField(field, key),
-      );
-    }).toList();
+    return ValueListenableBuilder<bool>(
+        valueListenable: globalRebuildNotifier,
+        builder: (context, value, child) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: elements.map((panel) {
+              if (panel.elements == null) {
+                return Container();
+              } else {
+                return AppCard(
+                  title: null,
+                  marginBottom: 16,
+                  child: Wrap(
+                    runSpacing: 16,
+                    alignment: WrapAlignment.start,
+                    children: elements.map((field) {
+                      return getField(
+                        field,
+                        formKey,
+                        readOnly,
+                      );
+                    }).toList(),
+                  ),
+                );
+              }
+            }).toList(),
+          );
+        });
   }
 }

@@ -1,5 +1,5 @@
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';

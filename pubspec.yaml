@@ -41,7 +41,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   cached_network_image: ^3.3.0
   flutter_svg: ^2.0.7
-  intl: any
+  intl:  ^0.19.0
   connectivity_plus: ^4.0.2
   dotted_border: ^2.0.0+3
   carousel_slider: ^4.2.1
@@ -86,6 +86,7 @@ dependencies:
   go_router: ^14.2.1
   # app_settings: ^5.1.1
   flutter_email_sender: ^6.0.3
+  timelines: ^0.1.0
 
   flutter_miniapp_web_runner:
     path: packages/flutter_miniapp_web_runner/
@@ -107,6 +108,17 @@ dependencies:
   shimmer: ^3.0.0
   workmanager: ^0.5.2
   fl_chart: ^0.68.0
+  infinite_scroll_pagination: ^4.0.0
+  font_awesome_flutter: ^10.7.0
+  flutter_cache_manager: any
+
+
+
+
+dependency_overrides:
+  intl: ^0.18.1
+
+  
 
 # dependency_overrides:
 #   camera:
@@ -152,6 +164,7 @@ flutter:
     - assets/nav_icons/
     - assets/images/animation_up.gif
     - assets/images/distance_va_instruction.svg
+
 
   #   - images/a_dot_ham.jpeg
 

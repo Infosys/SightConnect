@@ -17,9 +17,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../main.dart';
+import '../../../../../../../services/persistent_auth_service.dart';
 import '../../../../../../../shared/constants/api_constant.dart';
 import '../../../../../../../shared/constants/app_color.dart';
-import '../../../../../../../shared/services/persistent_auth_service.dart';
 import '../../domain/enum/mini_app.dart';
 
 class PatientServiceCategory extends ConsumerWidget {

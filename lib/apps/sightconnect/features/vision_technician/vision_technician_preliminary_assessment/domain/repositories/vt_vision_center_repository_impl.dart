@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../main.dart';
-import '../../../../../../../shared/services/dio_service.dart';
-import '../../../../../../../shared/services/failure.dart';
+import '../../../../../../../services/dio_service.dart';
+import '../../../../../../../services/failure.dart';
 import '../../data/model/vision_center_models.dart';
 
 abstract class VTVisionCenterRepository {

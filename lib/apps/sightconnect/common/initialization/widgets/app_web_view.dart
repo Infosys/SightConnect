@@ -1,3 +1,4 @@
+import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_miniapp_web_runner/flutter_miniapp_web_runner.dart';
@@ -19,10 +20,14 @@ class AppWebView extends HookWidget {
           initialUrlRequest: URLRequest(
             url: WebUri(url),
           ),
-          // initialSettings: InAppWebViewSettings(
-          //   preferredContentMode: UserPreferredContentMode.MOBILE,
-          //   textZoom: AppSize.width(context) ~/ 2,
-          // ),
+          initialSettings: InAppWebViewSettings(
+            preferredContentMode: UserPreferredContentMode.MOBILE,
+            textZoom: AppSize.width(context) ~/ 2,
+          ),
+          onReceivedServerTrustAuthRequest: (controller, challenge) async {
+            return ServerTrustAuthResponse(
+                action: ServerTrustAuthResponseAction.PROCEED);
+          },
           onProgressChanged: (controller, p) {
             progress.value = p / 100;
             if (progress.value == 100) {

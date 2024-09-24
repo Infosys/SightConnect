@@ -11,22 +11,33 @@ class FormChip extends HookWidget {
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
-  final Function(String?)? onChanged;
+  final Object field;
+  final Function(Object?)? onChanged;
+
+  Object? getInitialValue() {
+    try {
+      final ElementClassEntity fieldEntity = field as ElementClassEntity;
+      return fieldEntity.initialValue;
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final options = field.mapValueChoices!;
-    var selectedValue = useState<String>('');
+    final ElementClassEntity fieldEntity = field as ElementClassEntity;
+    final options = fieldEntity.choices!;
+    var selectedValue = useState<Object>(getInitialValue() ?? '');
 
-    return FormBuilderChoiceChip<String>(
+    return FormBuilderChoiceChip<Object?>(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      name: field.name,
+      initialValue: getInitialValue(), // Set the initial value
+      name: fieldEntity.name,
       spacing: 10,
       runSpacing: 10,
       avatarBorder: const CircleBorder(),
       decoration: InputDecoration(
-        labelText: field.title,
+        labelText: fieldEntity.title,
         labelStyle: const TextStyle(color: Colors.black),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 20.0,
@@ -36,25 +47,27 @@ class FormChip extends HookWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
+      // backgroundColor: Colors.grey[200],
+
       selectedColor: Theme.of(context).primaryColor,
       onChanged: (value) {
         selectedValue.value = value!;
         onChanged?.call(value);
       },
-      validator: field.isRequired
+      validator: fieldEntity.isRequired
           ? FormBuilderValidators.compose([
               FormBuilderValidators.required(),
             ])
           : null,
       options: options
-          .map((option) => FormBuilderChipOption(
-                value: option.value,
+          .map((option) => FormBuilderChipOption<Object?>(
+                value: option.name,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    option.text,
+                    option.title,
                     style: TextStyle(
-                      color: selectedValue.value == option.value
+                      color: selectedValue.value == option.name
                           ? Colors.white
                           : Colors.black,
                       fontSize: 10,

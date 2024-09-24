@@ -1,7 +1,7 @@
 name: superapp_scanner
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+
 
 environment:
   sdk: '>=3.2.1 <4.0.0'
@@ -24,6 +24,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # To add assets to your package, add an assets section, like this:
   # assets:

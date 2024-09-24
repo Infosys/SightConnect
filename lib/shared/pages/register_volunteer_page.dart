@@ -7,10 +7,10 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/volunteer_exp
 import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/volunteer_pending.dart';
 import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';

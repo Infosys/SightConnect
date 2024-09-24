@@ -11,18 +11,34 @@ class FormTimePicker extends HookWidget {
     required this.field,
     required this.onChanged,
   });
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(DateTime?) onChanged;
 
   @override
   Widget build(BuildContext context) {
+    DateTime? getInitialValue() {
+      try {
+        return field.initialValue != null
+            ? DateFormat.jm().parse(field.initialValue as String)
+            : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
     return FormBuilderDateTimePicker(
       autofocus: false,
+      initialValue: getInitialValue(),
+      format: DateFormat.jm(), // Display time in 'hh:mm a' format
+      valueTransformer: (DateTime? value) {
+        return value
+            ?.toUtc()
+            .toIso8601String(); // Send value in UTC ISO 8601 format
+      },
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      format: DateFormat.jm(),
       inputType: InputType.time,
       decoration: InputDecoration(
-        labelText: field.name,
+        labelText: field.title,
         suffixIcon: const Icon(Icons.watch_outlined),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),

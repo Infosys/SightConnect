@@ -10,31 +10,43 @@ class FormRadio extends StatelessWidget {
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
-  final Function(dynamic)? onChanged;
+  final Object field;
+  final Function(Object?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderRadioGroup<String>(
+    final ElementClassEntity fieldEntity = field as ElementClassEntity;
+
+    Object? getInitialValue() {
+      final Object? initialValue = fieldEntity.initialValue;
+      if (initialValue != null &&
+          fieldEntity.choices!.any((item) => item.name == initialValue)) {
+        return initialValue;
+      }
+      return null;
+    }
+
+    return FormBuilderRadioGroup<Object?>(
+      initialValue: getInitialValue(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       wrapDirection: Axis.vertical,
       wrapAlignment: WrapAlignment.start,
       wrapRunAlignment: WrapAlignment.start,
       separator: const SizedBox(height: 10),
-      name: field.name,
+      name: fieldEntity.name,
       decoration: InputDecoration(
-        hintText: field.name,
+        hintText: fieldEntity.name,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
       onChanged: onChanged,
-      validator: field.isRequired
+      validator: fieldEntity.isRequired
           ? FormBuilderValidators.compose([FormBuilderValidators.required()])
           : null,
-      options: field.mapValueChoices!
-          .map((element) => FormBuilderFieldOption(
-                value: element.value,
-                child: Text(element.text),
+      options: fieldEntity.choices!
+          .map((element) => FormBuilderFieldOption<Object?>(
+                value: element.name,
+                child: Text(element.title),
               ))
           .toList(),
     );

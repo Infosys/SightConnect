@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_preliminary_assessment/data/model/device_model.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../main.dart';
-import '../../../../../../../shared/services/dio_service.dart';
-import '../../../../../../../shared/services/exceptions.dart';
+import '../../../../../../../services/dio_service.dart';
+import '../../../../../../../services/exceptions.dart';
 
 // TO DO : When Tenant and org data is updated on url, change the hardcoded data with dynamic data from sharedPreference
 

@@ -8,12 +8,13 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/performers_profile_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../eyebank/features/eb_profile/data/repositories/eb_profile_repository_impl.dart';
 import '../../../features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 
 var initializationProvider =
@@ -40,8 +41,10 @@ class InitializationProvider extends ChangeNotifier {
     } else if (role == Role.ROLE_OPTOMETRIST) {
       //only for testing
       return true;
+    } else if (role == Role.ROLE_EYEBANK_TECHNICIAN) {
+      return _checkEyeBankTechnicianExist(phone, role);
     } else {
-      throw ServerFailure(errorMessage: "Invalid Role");
+      throw ServerFailure(errorMessage: "Profile Not Found");
     }
   }
 
@@ -52,8 +55,11 @@ class InitializationProvider extends ChangeNotifier {
     } catch (e) {
       rethrow;
     }
-    // Triage Database logout
-    await TriageDBHelper().deleteFullDatabase();
+    if (!kIsWeb) {
+      // Triage Database logout
+      await TriageDBHelper().deleteFullDatabase();
+    }
+
     // Shared Preference logout
     await SharedPreferenceService.clearAll();
     // Flutter Secure Storage logout
@@ -96,6 +102,35 @@ class InitializationProvider extends ChangeNotifier {
     required String mobile,
   }) async {
     return await _ref.read(keycloakRepositoryProvider).sendOtp(mobile: mobile);
+  }
+
+  Future<bool> _checkEyeBankTechnicianExist(String phone, Role role) async {
+    final response =
+        await _ref.read(ebProfileRepositoryProvider).getEBProfile(phone);
+    return response.fold((failure) {
+      logger.e("Eye Bank Technician Profile Not Found: $failure");
+      throw failure;
+    }, (result) async {
+      logger.d("Eye Bank Technician Profile Found: $result");
+
+      if (result.practiceGrants == null) {
+        return false;
+      }
+
+      bool isRoleAvailable = result.practiceGrants!
+          .any((element) => element.grantRole == role.name);
+
+      if (isRoleAvailable) {
+        final profile = result;
+        await PersistentAuthStateService.authState.saveUserProfileId(
+          profile.id.toString(),
+        );
+        return true;
+      } else {
+        // if result is empty then user is not found
+        return false;
+      }
+    });
   }
 
   Future<bool> _checkVisionTechnicianExist(String phone, Role role) async {
@@ -159,7 +194,7 @@ class InitializationProvider extends ChangeNotifier {
         response.id.toString(),
       );
       return true;
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       throw ServerFailure(errorMessage: "Invalid Role");
     }
   }
@@ -194,22 +229,34 @@ class InitializationProvider extends ChangeNotifier {
     });
   }
 
-  Future<bool> getEighteenPlusDeclarationStatus() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
-    if (consent.first.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // Future<bool> getEighteenPlusDeclarationStatus() async {
+  //   return true;
+  //   // try {
+  //   //   final consentRepository = _ref.read(consentRepositoryProvider);
+  //   //   final consent =
+  //   //       await consentRepository.getConsent(type: "AGE_DECLARATION");
+  //   //   if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+  //   //     return true;
+  //   //   } else {
+  //   //     return false;
+  //   //   }
+  //   // } catch (e) {
+  //   //   return false;
+  //   // }
+  // }
 
   Future<bool> getConsentStatus() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "PRIVACY_POLICY");
-    if (consent.first.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+    try {
+      final consentRepository = _ref.read(consentRepositoryProvider);
+      final consents = await consentRepository.getConsent();
+
+      for (var consent in consents) {
+        if (consent.consentStatus != ConsentStatus.ACKNOWLEDGED) {
+          return false;
+        }
+      }
       return true;
-    } else {
+    } catch (e) {
       return false;
     }
   }

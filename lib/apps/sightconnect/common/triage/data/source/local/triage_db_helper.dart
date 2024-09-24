@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path/path.dart';
 // import 'package:sqflite/sqflite.dart';

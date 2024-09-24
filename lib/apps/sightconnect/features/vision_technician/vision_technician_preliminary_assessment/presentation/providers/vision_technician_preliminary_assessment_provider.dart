@@ -29,10 +29,10 @@ import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vi
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_profile/data/model/vt_profile_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_vt_provider.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/app_info_service.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/app_info_service.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -115,8 +115,8 @@ class VtTriageProvider extends ChangeNotifier {
     logger.d("triageUrgency called");
 
     bool triagePosted = _preliminaryAssessmentHelperProvider.triagePosted;
-    bool carePlanPosted = _preliminaryAssessmentHelperProvider.carePlanPosted;
-    bool isTest = _preliminaryAssessmentHelperProvider.isTest;
+    // bool carePlanPosted = _preliminaryAssessmentHelperProvider.carePlanPosted;
+    // bool isTest = _preliminaryAssessmentHelperProvider.isTest;
 
     if (!triagePosted) {
       logger.d("inside Triage Posted, triagePostedValue = $triagePosted");

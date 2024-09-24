@@ -7,21 +7,24 @@ class FormTextArea extends StatelessWidget {
   const FormTextArea({
     super.key,
     required this.field,
+    required this.formKey,
     this.onChanged,
   });
 
-  final ElementElementClassEntity field;
+  final ElementClassEntity field;
   final Function(String?)? onChanged;
+  final GlobalKey<FormBuilderState> formKey;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       autofocus: false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      initialValue: field.initialValue?.toString(),
       name: field.name,
       decoration: InputDecoration(
-        labelText: field.name,
-        hintText: field.name,
+        labelText: field.title,
+        hintText: field.description,
         contentPadding: const EdgeInsets.symmetric(
           vertical: 20.0,
           horizontal: 20.0,
@@ -47,6 +50,7 @@ class FormTextArea extends StatelessWidget {
       },
       onChanged: onChanged,
       maxLines: field.max,
+      enabled: field.readOnly ? false : true,
     );
   }
 }

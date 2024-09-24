@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_post_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_update_model.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 
 abstract class TriageRepository {
   Future<Either<Failure, DiagnosticReportTemplateFHIRModel>> getAssessment();

@@ -5,17 +5,19 @@ class AppCard extends StatelessWidget {
     super.key,
     required this.child,
     this.marginBottom,
+    this.paddingAll = 16.0,
     this.title,
   });
   final Widget child;
   final String? title;
   final double? marginBottom;
+  final double paddingAll;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: marginBottom ?? 0.0),
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(paddingAll),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),

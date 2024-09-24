@@ -13,6 +13,9 @@ class AppUpgrader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb || kDebugMode) {
+      return child;
+    }
     return UpgradeAlert(
       dialogStyle: UpgradeDialogStyle.cupertino,
       showIgnore: (kDebugMode || ApiConstant.isDev) ? true : false,

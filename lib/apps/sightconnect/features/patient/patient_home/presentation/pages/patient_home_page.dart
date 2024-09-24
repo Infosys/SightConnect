@@ -19,7 +19,7 @@ import 'package:eye_care_for_all/shared/widgets/translation_pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../shared/services/app_info_service.dart';
+import '../../../../../../../services/app_info_service.dart';
 
 class PatientHomePage extends ConsumerWidget {
   const PatientHomePage({super.key});
@@ -92,8 +92,8 @@ class PatientHomePage extends ConsumerWidget {
                     },
                     btnText:
                         loc.patientHomePageVolunteerInviteeCardJoinUsNowButton,
-                    color: AppColor.altGreen,
-                    backgroundColor: AppColor.altGreen.withOpacity(0.1),
+                    color: AppColor.primary,
+                    backgroundColor: AppColor.primary.withOpacity(0.1),
                     svgImagePath: "assets/images/triage_card_bg.svg",
                     title: loc.patientHomePageVolunteerInviteeCardTitle,
                     description: [

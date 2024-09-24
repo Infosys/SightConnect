@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/body_site.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/triage_diagnostic_report_template_FHIR_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_search_page/presentation/providers/vision_technician_search_provider.dart';
-import 'package:eye_care_for_all/shared/services/file_ms_service.dart';
+import 'package:eye_care_for_all/services/file_ms_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';

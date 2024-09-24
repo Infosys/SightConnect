@@ -1,7 +1,7 @@
 name: dynamic_form
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+
 
 environment:
   sdk: ">=3.1.0 <4.0.0"
@@ -11,15 +11,38 @@ dependencies:
   flutter:
     sdk: flutter
   
+  # Logging
+  logger: ^2.0.2
+
+  # For Form Builder
   flutter_form_builder: ^9.3.0
-  flutter_hooks: ^0.20.5
+  form_builder_extra_fields: ^10.1.0
   form_builder_validators: ^10.0.1
-  image_picker: ^1.1.2
-  intl: ^0.19.0
-  json_annotation: ^4.9.0
-  logger:
+
+  # For State Management
+  flutter_hooks: ^0.20.5
+
+  # For Image Picker and File Picker
   file_picker:
+  image_picker: ^1.1.2
+
+  # For Decorations
   dotted_border: ^2.1.0
+
+  # For Date Format
+  intl: ^0.19.0
+
+  # THIS IS FOR FILE UPLOAD TO CLOUDINARY
+  dio: ^5.6.0
+  
+  # THIS IS FOR PDF VIEWER
+  flutter_pdfview: any
+  flutter_cache_manager: any
+  path_provider: any
+  path: any
+  uuid: ^3.0.7
+  petitparser: ^6.0.2
+ 
 
 dev_dependencies:
   flutter_test:
@@ -31,10 +54,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # To add assets to your package, add an assets section, like this:
-  assets:
-    - assets/
+  # assets:
+    # - assets/
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see

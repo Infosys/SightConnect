@@ -1,0 +1,177 @@
+import 'package:eye_care_for_all/apps/eyebank/backlog/dashboard/presentation/pages/admin_request_detail_page.dart';
+import 'package:eye_care_for_all/shared/constants/app_size.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../../shared/constants/app_color.dart';
+import '../../../../../../shared/theme/text_theme.dart';
+
+class AdminPaginatedDataSource extends DataTableSource {
+  final BuildContext context;
+  final List<Map<String, String>> data;
+  AdminPaginatedDataSource({
+    required this.context,
+    required this.data,
+  });
+
+  @override
+  DataRow? getRow(int index) {
+    if (index >= data.length) {
+      return null; // No more rows to display
+    }
+
+    return DataRow.byIndex(
+      index: index,
+      cells: [
+        DataCell(
+          onTap: () {
+            final navigator = Navigator.of(context);
+            navigator.push(MaterialPageRoute(builder: (context) {
+              return const AdminRequestDetailPage();
+            }));
+          },
+          Text(
+            "${data[index]['RequestID']}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+                fontSize: 14,
+                color: AppColor.blue,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["ExpiryDate"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CircleAvatar(
+                  backgroundColor: AppColor.lightBlueOpacity,
+                  maxRadius: 18,
+                  child: Icon(
+                    Icons.person,
+                    color: AppColor.blue,
+                    size: 20,
+                  )),
+              const SizedBox(width: AppSize.ks),
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${data[index]["RequestedBy"]}",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyRobotoFont(
+                        fontSize: 14,
+                        color: AppColor.black,
+                      ),
+                    ),
+                    Text(
+                      "ID 234532",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: applyRobotoFont(
+                        fontSize: 10,
+                        color: AppColor.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["TransplantationTechnique"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["Tissue"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Text(
+            "${data[index]["Eye"]}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: applyRobotoFont(
+              fontSize: 14,
+              color: AppColor.black,
+            ),
+          ),
+        ),
+        DataCell(
+          onTap: () {},
+          Chip(
+            backgroundColor: _getColor(data[index]["Priority"] ?? ''),
+            label: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "${data[index]["Priority"]}",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: applyRobotoFont(
+                  fontSize: 12,
+                  color: AppColor.black,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get rowCount => data.length;
+
+  @override
+  int get selectedRowCount => 0;
+}
+
+_getColor(String priority) {
+  switch (priority) {
+    case "High":
+      return AppColor.lightRed;
+    case "Medium":
+      return AppColor.yellow.withOpacity(0.2);
+    case "Low":
+      return AppColor.lightGreen;
+    default:
+      return AppColor.grey;
+  }
+}

@@ -10,5 +10,21 @@ enum DynamicFormType {
   FILE,
   DEFAULT,
   TEXTAREA,
-  CONDITIONAL,
+  PANEL,
+  DATE,
+  DISPLAY,
+  DURATION,
+  SIGNATURE,
+  HIDDEN,
+  AUTOCOMPLETE,
+}
+
+enum FormLayoutType {
+  STEPPER,
+  PANEL,
+}
+
+enum DynamicFormSavingType {
+  DRAFT,
+  SAVE,
 }
