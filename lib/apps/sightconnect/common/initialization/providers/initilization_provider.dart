@@ -229,22 +229,6 @@ class InitializationProvider extends ChangeNotifier {
     });
   }
 
-  // Future<bool> getEighteenPlusDeclarationStatus() async {
-  //   return true;
-  //   // try {
-  //   //   final consentRepository = _ref.read(consentRepositoryProvider);
-  //   //   final consent =
-  //   //       await consentRepository.getConsent(type: "AGE_DECLARATION");
-  //   //   if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-  //   //     return true;
-  //   //   } else {
-  //   //     return false;
-  //   //   }
-  //   // } catch (e) {
-  //   //   return false;
-  //   // }
-  // }
-
   Future<bool> getConsentStatus() async {
     try {
       final consentRepository = _ref.read(consentRepositoryProvider);
@@ -257,6 +241,7 @@ class InitializationProvider extends ChangeNotifier {
       }
       return true;
     } catch (e) {
+      logger.e("getConsentStatus: $e");
       return false;
     }
   }
