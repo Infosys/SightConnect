@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../data/model/vg_event_model.dart';
 
-var vgEventDataCacheProvider = ChangeNotifierProvider((ref) => VgEventDataCacheProvider());
+var vgEventDataCacheProvider =
+    ChangeNotifierProvider((ref) => VgEventDataCacheProvider());
 
 class VgEventDataCacheProvider extends ChangeNotifier {
-
 //declaration of variables
   VisionGuardianEventModel? eventDetails;
   int eventId = 0;

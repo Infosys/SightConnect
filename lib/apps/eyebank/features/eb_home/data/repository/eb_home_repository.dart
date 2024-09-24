@@ -4,7 +4,7 @@ import 'package:eye_care_for_all/apps/eyebank/features/eb_home/data/models/eb_ho
 import 'package:eye_care_for_all/apps/eyebank/helpers/widgets/eb_error_handler.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/eb_failure.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EBHomeRepository {
   // GET : Eye bank stage statistics

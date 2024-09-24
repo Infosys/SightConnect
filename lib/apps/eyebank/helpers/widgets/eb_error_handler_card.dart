@@ -40,7 +40,7 @@ class EyeBankErrorCard {
 
   static void showErrorToast(EBFailure failure, BuildContext context) {
     int statusCode = failure.statusCode ?? 500;
-    String statusMessage = failure.errorMessage;
+    // String statusMessage = failure.errorMessage;
     // String? details = failure.errorObject?.detail;
     String? errorMessage = failure.errorObject?.message;
     String displayMessage = errorMessage ?? _getErrorMessage(statusCode);
