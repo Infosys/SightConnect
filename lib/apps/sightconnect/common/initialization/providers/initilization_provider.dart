@@ -229,31 +229,33 @@ class InitializationProvider extends ChangeNotifier {
     });
   }
 
-  Future<bool> getEighteenPlusDeclarationStatus() async {
-    try {
-      final consentRepository = _ref.read(consentRepositoryProvider);
-      final consent =
-          await consentRepository.getConsent(type: "AGE_DECLARATION");
-      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
-  }
+  // Future<bool> getEighteenPlusDeclarationStatus() async {
+  //   return true;
+  //   // try {
+  //   //   final consentRepository = _ref.read(consentRepositoryProvider);
+  //   //   final consent =
+  //   //       await consentRepository.getConsent(type: "AGE_DECLARATION");
+  //   //   if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+  //   //     return true;
+  //   //   } else {
+  //   //     return false;
+  //   //   }
+  //   // } catch (e) {
+  //   //   return false;
+  //   // }
+  // }
 
   Future<bool> getConsentStatus() async {
     try {
       final consentRepository = _ref.read(consentRepositoryProvider);
-      final consent =
-          await consentRepository.getConsent(type: "PRIVACY_POLICY");
-      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-        return true;
-      } else {
-        return false;
+      final consents = await consentRepository.getConsent();
+
+      for (var consent in consents) {
+        if (consent.consentStatus != ConsentStatus.ACKNOWLEDGED) {
+          return false;
+        }
       }
+      return true;
     } catch (e) {
       return false;
     }

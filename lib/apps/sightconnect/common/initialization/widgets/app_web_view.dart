@@ -24,6 +24,10 @@ class AppWebView extends HookWidget {
             preferredContentMode: UserPreferredContentMode.MOBILE,
             textZoom: AppSize.width(context) ~/ 2,
           ),
+          onReceivedServerTrustAuthRequest: (controller, challenge) async {
+            return ServerTrustAuthResponse(
+                action: ServerTrustAuthResponseAction.PROCEED);
+          },
           onProgressChanged: (controller, p) {
             progress.value = p / 100;
             if (progress.value == 100) {

@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/18plus_declaration.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/app_consent_form.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/referral/presentation/modals/referral_collect_sheet.dart';
@@ -50,10 +49,8 @@ abstract class BaseRoleStrategy implements RoleStrategy {
   @override
   Future<bool> checkConsent(NavigatorState navigator) async {
     try {
-      bool is18PlusAccepted =
-          await checkEighteenPlusDeclarationStatus(ref, navigator);
       bool isConsentAccepted = await checkConsentStatus(ref, navigator);
-      return is18PlusAccepted && isConsentAccepted;
+      return isConsentAccepted;
     } catch (e) {
       debugPrint('Error in checkConsent: $e');
       return false;
@@ -82,20 +79,6 @@ abstract class BaseRoleStrategy implements RoleStrategy {
 
     return isConsentAccepted;
   }
-
-  Future<bool> checkEighteenPlusDeclarationStatus(
-      WidgetRef ref, NavigatorState navigator) async {
-    final model = ref.read(initializationProvider);
-    bool is18PlusAccepted = await model.getEighteenPlusDeclarationStatus();
-
-    if (!is18PlusAccepted) {
-      is18PlusAccepted =
-          await UserInteractionHandler.show18PlusDeclaration(navigator) ??
-              false;
-    }
-
-    return is18PlusAccepted;
-  }
 }
 
 class UserInteractionHandler {
@@ -113,20 +96,6 @@ class UserInteractionHandler {
       );
     } catch (e) {
       debugPrint('Error in showReferralCollectSheet: $e');
-      return null;
-    }
-  }
-
-  static Future<bool?> show18PlusDeclaration(NavigatorState navigator) async {
-    try {
-      return await showDialog<bool>(
-        context: navigator.context,
-        builder: (context) {
-          return const EighteenPlusDeclaration();
-        },
-      );
-    } catch (e) {
-      debugPrint('Error in show18PlusDeclaration: $e');
       return null;
     }
   }

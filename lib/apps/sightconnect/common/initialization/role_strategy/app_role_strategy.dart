@@ -73,27 +73,12 @@ class VisionGuardianRoleStrategy extends BaseRoleStrategy {
 
 class VolunteerRoleStrategy extends BaseRoleStrategy {
   VolunteerRoleStrategy(WidgetRef ref) : super(ref);
-
-  @override
-  Future<bool> checkConsent(NavigatorState navigator) {
-    return Future.value(true);
-  }
 }
 
 class OptometristRoleStrategy extends BaseRoleStrategy {
   OptometristRoleStrategy(WidgetRef ref) : super(ref);
-
-  @override
-  Future<bool> checkConsent(NavigatorState navigator) {
-    return Future.value(true);
-  }
 }
 
 class EyeBankRoleStrategy extends BaseRoleStrategy {
   EyeBankRoleStrategy(WidgetRef ref) : super(ref);
-
-  @override
-  Future<bool> checkConsent(NavigatorState navigator) {
-    return Future.value(true);
-  }
 }
