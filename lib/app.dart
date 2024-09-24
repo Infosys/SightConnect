@@ -1,13 +1,11 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/app_info_service.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
 import 'package:eye_care_for_all/shared/pages/secure_page.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
 import 'package:eye_care_for_all/shared/router/app_router.dart';
 import 'package:eye_care_for_all/shared/theme/app_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_feedback_better.dart';
@@ -49,50 +47,41 @@ class MyApp extends ConsumerWidget {
         if (data) {
           return const SecurePage();
         } else {
-          return MediaQuery(
-            data: mediaQueryData.copyWith(
-              textScaler: Responsive.isMobile(context)
-                  ? TextScaler.linear(
-                      ref.watch(globalTextScaleFactorProvider).textScaleFactor,
-                    )
-                  : const TextScaler.linear(1.3),
-            ),
-            child: AppFeedbackBetter(
-              child: MaterialApp(
-                title: AppInfoService.appName,
-                locale: ref.watch(globalLanguageProvider).currentLocale,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                navigatorObservers: [matomoObserver],
-                supportedLocales: appLocales.map((e) => Locale(e.locale)),
-                debugShowCheckedModeBanner: ApiConstant.isDev,
-                themeMode: ref.watch(themeProvider),
-                theme: ref.watch(themeProvider) == ThemeMode.light
-                    ? AppTheme.getLightTheme(context)
-                    : AppTheme.getDarkTheme(context),
-                routes: AppRouter.routes,
+          return AppFeedbackBetter(
+            child: MaterialApp(
+              title: AppInfoService.appName,
+              locale: ref.watch(globalLanguageProvider).currentLocale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              navigatorObservers: [matomoObserver],
+              supportedLocales: appLocales.map((e) => Locale(e.locale)),
+              debugShowCheckedModeBanner: ApiConstant.isDev,
+              themeMode: ref.watch(themeProvider),
+              theme: ref.watch(themeProvider) == ThemeMode.light
+                  ? AppTheme.getLightTheme(context)
+                  : AppTheme.getDarkTheme(context),
+              routes: AppRouter.routes,
 
-                initialRoute: initialRoute,
-                navigatorKey: AppRouter.navigatorKey,
-                onUnknownRoute: AppRouter.onUnknownRoute,
+              initialRoute: initialRoute,
+              navigatorKey: AppRouter.navigatorKey,
+              onUnknownRoute: AppRouter.onUnknownRoute,
 
-                // builder: (context, child) {
-                //   return ref.watch(internetProvider).maybeWhen(
-                //         data: (value) {
-                //           if (!value) {
-                //             return const InternetLostPage();
-                //           } else {
-                //             return child!;
-                //           }
-                //         },
-                //         orElse: () => const InternetLostPage(),
-                //       );
-                // },
-              ),
+              // builder: (context, child) {
+              //   return ref.watch(internetProvider).maybeWhen(
+              //         data: (value) {
+              //           if (!value) {
+              //             return const InternetLostPage();
+              //           } else {
+              //             return child!;
+              //           }
+              //         },
+              //         orElse: () => const InternetLostPage(),
+              //       );
+              // },
             ),
           );
         }
