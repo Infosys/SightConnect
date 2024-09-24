@@ -12,9 +12,9 @@ import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/pincod
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/relationship_field.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/state_field.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/widgets/sumbit_button.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:eye_care_for_all/shared/widgets/app_card.dart';
 import 'package:flutter/material.dart';

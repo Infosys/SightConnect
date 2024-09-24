@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../main.dart';
