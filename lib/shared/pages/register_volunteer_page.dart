@@ -9,6 +9,7 @@ import 'package:eye_care_for_all/env.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/token_refresh_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
@@ -57,7 +58,11 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                       volunteerId: volunteerId.value!,
                     );
                   } else if (value.status == Status.ACTIVE) {
-                    return const VolunteerApproved();
+                    if (PersistentAuthStateService.authState.roles!
+                        .contains("ROLE_VOLUNTEER")) {
+                      return const VolunteerApproved();
+                    }
+                    return const VolunteerPending();
                   } else if (value.status == Status.REJECTED ||
                       value.status == Status.REVOKED ||
                       value.status == Status.SUSPENDED) {
@@ -347,7 +352,6 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                       .postVolunteer(
                                                           volunteerPostModel)
                                                       .then((value) async {
-                                                    isLoading.value = false;
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -359,26 +363,39 @@ class RegisterVolunteerPage extends HookConsumerWidget {
                                                       ),
                                                     );
 
-                                                    // ref.read(
-                                                    //     dioRefreshTokenProvider);
+                                                    await ref
+                                                        .watch(
+                                                            dioRefreshTokenProvider)
+                                                        .then((value) async {
+                                                      logger.f(
+                                                          "refresh token new");
+                                                      logger.f(
+                                                          "roles : ${PersistentAuthStateService.authState.roles}");
 
-                                                    Navigator.pushAndRemoveUntil(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const InitializationPage()),
-                                                        (route) => false);
+                                                      // ref.read(
+                                                      //     dioRefreshTokenProvider);
+                                                      isLoading.value = false;
+                                                      Navigator.pushAndRemoveUntil(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const InitializationPage()),
+                                                          (route) => false);
+                                                    });
                                                   });
                                                 } on DioException catch (e) {
                                                   DioErrorHandler
                                                       .handleDioError(e);
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                      content: Text(
-                                                          "An error occured while registering as a volunteer. Please try again later."),
-                                                    ),
-                                                  );
+                                                  if (context.mounted) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                            "An error occured while registering as a volunteer. Please try again later."),
+                                                      ),
+                                                    );
+                                                  }
                                                   return;
                                                 }
                                               } else {

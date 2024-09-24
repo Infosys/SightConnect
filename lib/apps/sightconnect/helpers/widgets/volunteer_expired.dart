@@ -4,8 +4,10 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/models/volunteer_post
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/volunteer_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/volunteer_approved.dart';
 import 'package:eye_care_for_all/env.dart';
+import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/token_refresh_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -260,7 +262,6 @@ class VolunteerExpired extends HookConsumerWidget {
                                         .extendVolunteer(
                                             volunteerPostModel, volunteerId)
                                         .then((value) async {
-                                      isLoading.value = false;
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         const SnackBar(
@@ -272,12 +273,23 @@ class VolunteerExpired extends HookConsumerWidget {
 
                                       // ref.read(dioRefreshTokenProvider);
 
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const InitializationPage()),
-                                          (route) => false);
+                                      await ref
+                                          .watch(dioRefreshTokenProvider)
+                                          .then((value) async {
+                                        logger.f("refresh token new");
+                                        logger.f(
+                                            "roles : ${PersistentAuthStateService.authState.roles}");
+
+                                        // ref.read(
+                                        //     dioRefreshTokenProvider);
+                                        isLoading.value = false;
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const InitializationPage()),
+                                            (route) => false);
+                                      });
                                     });
                                   } on DioException catch (e) {
                                     DioErrorHandler.handleDioError(e);

@@ -1,4 +1,8 @@
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/initialization_page.dart';
 import 'package:eye_care_for_all/env.dart';
+import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/token_refresh_service.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +38,9 @@ class VolunteerPending extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
                   const SizedBox(
                     height: AppSize.km,
                   ),
-
                   RichText(
                     text: TextSpan(
                       text: "Thank you ",
@@ -68,7 +70,6 @@ class VolunteerPending extends ConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
-
                   Text(
                     "In the meantime, if you have any questions or need further assistance, please don't hesitate to contact us at : ",
                     style: applyRobotoFont(
@@ -91,7 +92,6 @@ class VolunteerPending extends ConsumerWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-
                   Center(
                     child: Text(
                       'We look forward to having you on our team!',
@@ -102,29 +102,69 @@ class VolunteerPending extends ConsumerWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
                   const SizedBox(height: 24),
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          try {
+                            await ref
+                                .watch(dioRefreshTokenProvider)
+                                .then((value) async {
+                              logger.f("refresh token new");
+                              logger.f(
+                                  "roles : ${PersistentAuthStateService.authState.roles}");
+                            });
 
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       ref.read(dioRefreshTokenProvider).when(data: (value) {
-                  //         logger.f("refresh token value : $value");
-                  //         PersistentAuthStateService.authState
-                  //             .setActiveRole(null);
-                  //         Navigator.pushAndRemoveUntil(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //                 builder: (context) =>
-                  //                     const InitializationPage()),
-                  //             (route) => false);
-                  //       }, loading: () {
-                  //         return const Center(
-                  //             child: CircularProgressIndicator.adaptive());
-                  //       }, error: (error, stackTrace) {
-                  //         logger.f("error : $error");
-                  //       });
-                  //     },
-                  //     child: const Text("Switch to Volunteer")),
+                            if (PersistentAuthStateService.authState.roles!
+                                .contains("ROLE_VOLUNTEER")) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        "You have received volunteer approval"),
+                                  ),
+                                );
+                              }
+                            } else {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        "You have not received volunteer approval"),
+                                  ),
+                                );
+                              }
+                            }
+
+                            if (context.mounted) {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const InitializationPage()),
+                                  (route) => false);
+                            }
+                          } catch (e) {
+                            logger.e(e);
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Something went wrong"),
+                                ),
+                              );
+                            }
+                            if (context.mounted) {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const InitializationPage()),
+                                  (route) => false);
+                            }
+                          }
+                        },
+                        child: const Text("Check Approval Status")),
+                  ),
                 ],
               ),
             ),
