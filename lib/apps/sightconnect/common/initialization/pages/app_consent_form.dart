@@ -1,6 +1,7 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/app_web_view.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/models/consent_model.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_language_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/constants/api_constant.dart';
@@ -49,6 +50,10 @@ class AppConsentFormPage extends HookConsumerWidget {
                         return _AcceptedConsentTile(consent: consent);
                       }
                       return _PendingConsentTile(
+                        langCode: ref
+                            .watch(globalLanguageProvider)
+                            .currentLocale
+                            ?.languageCode,
                         consent: consent,
                         onAccept: (value) {
                           _updateConsentStatus(
@@ -131,13 +136,18 @@ class _PendingConsentTile extends StatelessWidget {
   const _PendingConsentTile({
     required this.consent,
     required this.onAccept,
+    this.langCode,
   });
 
   final ConsentModel consent;
   final ValueChanged<bool?> onAccept;
+  final String? langCode;
 
   @override
   Widget build(BuildContext context) {
+    final url = ApiConstant.isDev
+        ? "${ApiConstant.baseUrl}/services/templates/api/static/template/${consent.templateId}"
+        : "${ApiConstant.baseUrl}/dam/${consent.templateId}?langId=${langCode}";
     String eighteenPlusConsent =
         "This app is intended for users aged 18 and above. By clicking 'I Agree', you are confirming that you are 18 years or older";
     return ExpansionTile(
@@ -153,7 +163,7 @@ class _PendingConsentTile extends StatelessWidget {
           SizedBox(
             height: AppSize.height(context) * 0.5,
             child: AppWebView(
-              url: "${ApiConstant.baseUrl}/dam/${consent.templateId}",
+              url: url,
             ),
           ),
         CheckboxListTile(
@@ -191,154 +201,3 @@ class _PendingConsentTile extends StatelessWidget {
     );
   }
 }
-// import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-// import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/app_web_view.dart';
-// import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_repository_impl.dart';
-// import 'package:eye_care_for_all/main.dart';
-// import 'package:eye_care_for_all/services/exceptions.dart';
-// import 'package:eye_care_for_all/shared/constants/api_constant.dart';
-// import 'package:eye_care_for_all/shared/constants/app_size.dart';
-// import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-// import 'package:eye_care_for_all/shared/widgets/custom_app_bar.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_hooks/flutter_hooks.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-// import '../../../helpers/providers/global_language_provider.dart';
-
-// final appConsentFormProvider = FutureProvider((ref) {
-//   final consentRepository = ref.watch(consentRepositoryProvider);
-//   return consentRepository.getConsent(type: "PRIVACY_POLICY");
-// });
-
-// class AppConsentFormPage extends HookConsumerWidget {
-//   const AppConsentFormPage({super.key, this.isPreview = false});
-//   final bool isPreview;
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     var selectedValue = useState<bool>(false);
-//     var isApiLoading = useState<bool>(false);
-//     final loc = context.loc!;
-
-//     return PopScope(
-//       canPop: false,
-//       child: Scaffold(
-//         appBar: CustomAppbar(
-//           title: Text(loc.privacyPolicyTitle),
-//           automaticallyImplyLeading: false,
-//           leadingIcon: isPreview ? null : const SizedBox(),
-//         ),
-//         body: Container(
-//           padding: const EdgeInsets.symmetric(horizontal: 8),
-//           height: AppSize.height(context),
-//           width: AppSize.width(context),
-//           child: ref.watch(appConsentFormProvider).when(
-//             data: (data) {
-//               final lang =
-//                   ref.watch(globalLanguageProvider).currentLocale?.languageCode;
-//               if (isPreview) {
-//                 return Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   crossAxisAlignment: CrossAxisAlignment.stretch,
-//                   children: [
-//                     Expanded(
-//                       child: AppWebView(
-//                         url:
-//                             "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}",
-//                       ),
-//                     ),
-//                     const Padding(
-//                       padding: EdgeInsets.symmetric(
-//                         horizontal: AppSize.km,
-//                         vertical: AppSize.km / 2,
-//                       ),
-//                       child: ElevatedButton(
-//                         onPressed: null,
-//                         child: Text("Accepted"),
-//                       ),
-//                     ),
-//                   ],
-//                 );
-//               }
-
-//               return Column(
-//                 mainAxisSize: MainAxisSize.min,
-//                 crossAxisAlignment: CrossAxisAlignment.stretch,
-//                 children: [
-//                   Expanded(
-//                     child: AppWebView(
-//                       url:
-//                           "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}",
-//                     ),
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.symmetric(
-//                       horizontal: AppSize.km,
-//                       vertical: AppSize.km / 2,
-//                     ),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.stretch,
-//                       children: [
-//                         CheckboxListTile.adaptive(
-//                           controlAffinity: ListTileControlAffinity.leading,
-//                           title: Text(loc.consentPageCheckbox),
-//                           value: selectedValue.value,
-//                           onChanged: (value) {
-//                             selectedValue.value = value ?? false;
-//                           },
-//                         ),
-//                         isApiLoading.value
-//                             ? const Center(
-//                                 child: CircularProgressIndicator.adaptive(),
-//                               )
-//                             : ElevatedButton(
-//                                 onPressed: !selectedValue.value
-//                                     ? null
-//                                     : () async {
-//                                         final navigator = Navigator.of(context);
-//                                         final model =
-//                                             ref.read(initializationProvider);
-//                                         try {
-//                                           isApiLoading.value = true;
-//                                           if (await model.getConsentStatus()) {
-//                                             navigator.pop(true);
-//                                           } else {
-//                                             await model.sumbitConsent(
-//                                                 consent: data.first);
-//                                             navigator.pop(true);
-//                                           }
-//                                         } catch (e) {
-//                                           logger.e(e);
-//                                           Fluttertoast.showToast(
-//                                               msg: loc.somethingWentWrong);
-//                                         } finally {
-//                                           isApiLoading.value = false;
-//                                         }
-//                                       },
-//                                 child: Text(loc.proceedButton),
-//                               )
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               );
-//             },
-//             error: (e, s) {
-//               final msg = DioErrorHandler.getErrorMessage(e);
-//               return Center(
-//                 child: Text(msg),
-//               );
-//             },
-//             loading: () {
-//               return const Center(
-//                 child: CircularProgressIndicator.adaptive(),
-//               );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
