@@ -45,6 +45,11 @@ class AppConsentFormPage extends HookConsumerWidget {
             data: (data) {
               final lang =
                   ref.watch(globalLanguageProvider).currentLocale?.languageCode;
+              final url = ApiConstant.isDev
+                  ? "${ApiConstant.baseUrl}/services/templates/api/static/template/${data.first.templateId}"
+                  : "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}";
+
+                  logger.f("webview url: $url");
               if (isPreview) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
@@ -52,8 +57,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                   children: [
                     Expanded(
                       child: AppWebView(
-                        url:
-                            "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}",
+                        url: url,
                       ),
                     ),
                     const Padding(
@@ -76,8 +80,7 @@ class AppConsentFormPage extends HookConsumerWidget {
                 children: [
                   Expanded(
                     child: AppWebView(
-                      url:
-                          "${ApiConstant.baseUrl}/dam/${data.first.templateId}?langId=${lang}",
+                      url: url,
                     ),
                   ),
                   Padding(
