@@ -65,6 +65,14 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "2.11.0"
+  audio_session:
+    dependency: transitive
+    description:
+      name: audio_session
+      sha256: "343e83bc7809fbda2591a49e525d6b63213ade10c76f15813be9aed6657b3261"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.1.21"
   auto_size_text:
     dependency: "direct main"
     description:
@@ -241,6 +249,14 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "2.0.3"
+  chewie:
+    dependency: transitive
+    description:
+      name: chewie
+      sha256: "8bc4ac4cf3f316e50a25958c0f5eb9bb12cf7e8308bb1d74a43b230da2cfc144"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "1.7.5"
   cli_util:
     dependency: transitive
     description:
@@ -859,6 +875,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_widget_from_html:
+    dependency: "direct main"
+    description:
+      name: flutter_widget_from_html
+      sha256: "9e2a6201c4d2eb910b6b3ebb2a9f5c490fc61c9a1aa35eafdde38f0fc659cf4c"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.15.2"
+  flutter_widget_from_html_core:
+    dependency: transitive
+    description:
+      name: flutter_widget_from_html_core
+      sha256: b1048fd119a14762e2361bd057da608148a895477846d6149109b2151d2f7abf
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.15.2"
   fluttertoast:
     dependency: "direct main"
     description:
@@ -915,6 +947,54 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "4.0.0"
+  fwfh_cached_network_image:
+    dependency: transitive
+    description:
+      name: fwfh_cached_network_image
+      sha256: "8e44226801bfba27930673953afce8af44da7e92573be93f60385d9865a089dd"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.14.3"
+  fwfh_chewie:
+    dependency: transitive
+    description:
+      name: fwfh_chewie
+      sha256: "37bde9cedfb6dc5546176f7f0c56af1e814966cb33ec58f16c9565ed93ccb704"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.14.8"
+  fwfh_just_audio:
+    dependency: transitive
+    description:
+      name: fwfh_just_audio
+      sha256: "38dc2c55803bd3cef33042c473e0c40b891ad4548078424641a32032f6a1245f"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.15.2"
+  fwfh_svg:
+    dependency: transitive
+    description:
+      name: fwfh_svg
+      sha256: "550b1014d12b5528d8bdb6e3b44b58721f3fb1f65d7a852d1623a817008bdfc4"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.8.3"
+  fwfh_url_launcher:
+    dependency: transitive
+    description:
+      name: fwfh_url_launcher
+      sha256: b9f5d55a5ae2c2c07243ba33f7ba49ac9544bdb2f4c16d8139df9ccbebe3449c
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.9.1"
+  fwfh_webview:
+    dependency: transitive
+    description:
+      name: fwfh_webview
+      sha256: f67890bc0d6278da98bd197469ae9511c859f7db327e92299fe0ea0cf46c4057
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.15.2"
   gauge_indicator:
     dependency: "direct main"
     description:
@@ -1195,6 +1275,30 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "6.8.0"
+  just_audio:
+    dependency: transitive
+    description:
+      name: just_audio
+      sha256: d8e8aaf417d33e345299c17f6457f72bd4ba0c549dc34607abb5183a354edc4d
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.9.40"
+  just_audio_platform_interface:
+    dependency: transitive
+    description:
+      name: just_audio_platform_interface
+      sha256: "0243828cce503c8366cc2090cefb2b3c871aa8ed2f520670d76fd47aa1ab2790"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "4.3.0"
+  just_audio_web:
+    dependency: transitive
+    description:
+      name: just_audio_web
+      sha256: "0edb481ad4aa1ff38f8c40f1a3576013c3420bf6669b686fe661627d49bc606c"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "0.4.11"
   jwt_decoder:
     dependency: "direct main"
     description:
@@ -1323,6 +1427,14 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "1.0.6"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "1.0.0"
   nm:
     dependency: transitive
     description:
@@ -1571,6 +1683,14 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "1.5.1"
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "6.1.2"
   pub_semver:
     dependency: transitive
     description:
@@ -1932,10 +2052,10 @@ packages:
     dependency: transitive
     description:
       name: string_scanner
-      sha256: "688af5ed3402a4bde5b3a6c15fd768dbf2621a614950b17f04626c431ab3c4c3"
+      sha256: "556692adab6cfa87322a115640c11f13cb77b3f076ddcc5d6ae3c20242bedcde"
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
-    version: "1.3.0"
+    version: "1.2.0"
   superapp_scanner:
     dependency: "direct main"
     description:
@@ -2127,14 +2247,70 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "3.0.2"
+  video_player:
+    dependency: transitive
+    description:
+      name: video_player
+      sha256: e30df0d226c4ef82e2c150ebf6834b3522cf3f654d8e2f9419d376cdc071425d
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "2.9.1"
+  video_player_android:
+    dependency: transitive
+    description:
+      name: video_player_android
+      sha256: e343701aa890b74a863fa460f5c0e628127ed06a975d7d9af6b697133fb25bdf
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "2.7.1"
+  video_player_avfoundation:
+    dependency: transitive
+    description:
+      name: video_player_avfoundation
+      sha256: d1e9a824f2b324000dc8fb2dcb2a3285b6c1c7c487521c63306cc5b394f68a7c
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "2.6.1"
+  video_player_platform_interface:
+    dependency: transitive
+    description:
+      name: video_player_platform_interface
+      sha256: "236454725fafcacf98f0f39af0d7c7ab2ce84762e3b63f2cbb3ef9a7e0550bc6"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "6.2.2"
+  video_player_web:
+    dependency: transitive
+    description:
+      name: video_player_web
+      sha256: "8e9cb7fe94e49490e67bbc15149691792b58a0ade31b32e3f3688d104a0e057b"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "2.2.0"
   vm_service:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: "3923c89304b715fb1eb6423f017651664a03bf5f4b29983627c4da791f74a4ec"
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
-    version: "14.2.4"
+    version: "14.2.1"
+  wakelock_plus:
+    dependency: transitive
+    description:
+      name: wakelock_plus
+      sha256: f268ca2116db22e57577fb99d52515a24bdc1d570f12ac18bb762361d43b043d
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "1.1.4"
+  wakelock_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: wakelock_plus_platform_interface
+      sha256: "422d1cdbb448079a8a62a5a770b69baa489f8f7ca21aef47800c726d404f9d16"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "1.2.1"
   watcher:
     dependency: transitive
     description:
@@ -2159,6 +2335,38 @@ packages:
       url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
     source: hosted
     version: "2.4.3"
+  webview_flutter:
+    dependency: transitive
+    description:
+      name: webview_flutter
+      sha256: "6869c8786d179f929144b4a1f86e09ac0eddfe475984951ea6c634774c16b522"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "4.8.0"
+  webview_flutter_android:
+    dependency: transitive
+    description:
+      name: webview_flutter_android
+      sha256: "6e64fcb1c19d92024da8f33503aaeeda35825d77142c01d0ea2aa32edc79fdc8"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "3.16.7"
+  webview_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: webview_flutter_platform_interface
+      sha256: d937581d6e558908d7ae3dc1989c4f87b786891ab47bb9df7de548a151779d8d
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "2.10.0"
+  webview_flutter_wkwebview:
+    dependency: transitive
+    description:
+      name: webview_flutter_wkwebview
+      sha256: "9c62cc46fa4f2d41e10ab81014c1de470a6c6f26051a2de32111b2ee55287feb"
+      url: "https://infyartifactory.jfrog.io/artifactory/api/pub/pub.dev-remote/"
+    source: hosted
+    version: "3.14.0"
   win32:
     dependency: transitive
     description:

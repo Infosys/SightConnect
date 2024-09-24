@@ -80,6 +80,7 @@ dependencies:
   date_picker_timeline: ^1.2.5
   stomp_dart_client: ^1.0.3
   gauge_indicator: ^0.4.3
+  flutter_widget_from_html: ^0.15.2
   # in_app_update: ^4.2.2
   upgrader: ^9.0.0
   geocoding: ^3.0.0
