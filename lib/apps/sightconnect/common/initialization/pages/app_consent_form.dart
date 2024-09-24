@@ -77,6 +77,11 @@ class AppConsentFormPage extends HookConsumerWidget {
     );
   }
 
+  static formatTitle(String? type) {
+    if (type == null) return '';
+    return type.replaceAll('_', ' ');
+  }
+
   Future<void> _updateConsentStatus(
     ValueNotifier<bool> isLoading,
     List<ConsentModel> consents,
@@ -123,7 +128,7 @@ class _AcceptedConsentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: const Icon(Icons.check, color: Colors.green),
-      title: Text('${consent.templateType}'),
+      title: Text('${AppConsentFormPage.formatTitle(consent.templateType)}'),
       subtitle: const Text('Accepted'),
     );
   }
@@ -148,7 +153,7 @@ class _PendingConsentTile extends StatelessWidget {
     String eighteenPlusConsent =
         "This app is intended for users aged 18 and above. By clicking 'I Agree', you are confirming that you are 18 years or older";
     return ExpansionTile(
-      title: Text('${consent.templateType}'),
+      title: Text('${AppConsentFormPage.formatTitle(consent.templateType)}'),
       childrenPadding: const EdgeInsets.all(8),
       children: [
         if (consent.templateType == "AGE_DECLARATION")
@@ -173,7 +178,7 @@ class _PendingConsentTile extends StatelessWidget {
                 return AlertDialog(
                   title: const Text('Confirm Consent'),
                   content: Text(
-                      'Do you accept the consent for template ${consent.templateType}?'),
+                      'Do you accept the consent for template ${AppConsentFormPage.formatTitle(consent.templateType)}?'),
                   actions: [
                     TextButton(
                       onPressed: () {
