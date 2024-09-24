@@ -33,48 +33,45 @@ class AppConsentFormPage extends HookConsumerWidget {
         appBar: AppBar(
           title: Text(loc.privacyPolicyTitle),
         ),
-        body: IgnorePointer(
-          ignoring: isPreview,
-          child: Stack(
-            children: [
-              consentAsyncValue.when(
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, stack) => Center(child: Text('Error: $error')),
-                data: (consents) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: consents.length,
-                    itemBuilder: (context, index) {
-                      final consent = consents[index];
-                      if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-                        return _AcceptedConsentTile(consent: consent);
-                      }
-                      return _PendingConsentTile(
-                        langCode: ref
-                            .watch(globalLanguageProvider)
-                            .currentLocale
-                            ?.languageCode,
-                        consent: consent,
-                        onAccept: (value) {
-                          _updateConsentStatus(
-                            isLoading,
-                            consents,
-                            index,
-                            ref,
-                            context,
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
+        body: Stack(
+          children: [
+            consentAsyncValue.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Center(child: Text('Error: $error')),
+              data: (consents) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: consents.length,
+                  itemBuilder: (context, index) {
+                    final consent = consents[index];
+                    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+                      return _AcceptedConsentTile(consent: consent);
+                    }
+                    return _PendingConsentTile(
+                      langCode: ref
+                          .watch(globalLanguageProvider)
+                          .currentLocale
+                          ?.languageCode,
+                      consent: consent,
+                      onAccept: (value) {
+                        _updateConsentStatus(
+                          isLoading,
+                          consents,
+                          index,
+                          ref,
+                          context,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+            if (isLoading.value)
+              const Center(
+                child: CircularProgressIndicator(),
               ),
-              if (isLoading.value)
-                const Center(
-                  child: CircularProgressIndicator(),
-                ),
-            ],
-          ),
+          ],
         ),
       ),
     );
