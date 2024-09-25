@@ -32,100 +32,98 @@ class AppCheckboxList<T> extends HookWidget {
   Widget build(BuildContext context) {
     final selectedValues = useState<List<T>>(initialValues ?? []);
 
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (title != null)
-            Padding(
-              padding: const EdgeInsets.only(left: 8, top: 8),
-              child: Text(
-                title!,
-                style: titleStyle ??
-                    applyRobotoFont(
-                      fontSize: 14,
-                      color: AppColor.darkGrey,
-                    ),
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.only(left: 8, top: 8),
+            child: Text(
+              title!,
+              style: titleStyle ??
+                  applyRobotoFont(
+                    fontSize: 14,
+                    color: AppColor.darkGrey,
+                  ),
             ),
-          if (title != null) const SizedBox(height: 8),
-          if (direction == "VERTICAL")
-            Column(
-              children: items
-                  .map(
-                    (item) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: selectedValues.value.contains(item),
-                            onChanged: (value) {
-                              if (value == true) {
-                                selectedValues.value = [
-                                  ...selectedValues.value,
-                                  item
-                                ];
-                              } else {
-                                selectedValues.value = selectedValues.value
-                                    .where((i) => i != item)
-                                    .toList();
-                              }
-                              onChanged?.call(selectedValues.value);
-                            },
-                          ),
-                          Text(
+          ),
+        if (title != null) const SizedBox(height: 8),
+        if (direction == "VERTICAL")
+          Column(
+            children: items
+                .map(
+                  (item) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: selectedValues.value.contains(item),
+                          onChanged: (value) {
+                            if (value == true) {
+                              selectedValues.value = [
+                                ...selectedValues.value,
+                                item
+                              ];
+                            } else {
+                              selectedValues.value = selectedValues.value
+                                  .where((i) => i != item)
+                                  .toList();
+                            }
+                            onChanged?.call(selectedValues.value);
+                          },
+                        ),
+                        Text(
+                          displayItems[items.indexOf(item)].toString(),
+                          style:
+                              const TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        if (direction == "HORIZONTAL")
+          Wrap(
+            children: items
+                .map(
+                  (item) => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Checkbox(
+                          value: selectedValues.value.contains(item),
+                          onChanged: (value) {
+                            if (value == true) {
+                              selectedValues.value = [
+                                ...selectedValues.value,
+                                item
+                              ];
+                            } else {
+                              selectedValues.value = selectedValues.value
+                                  .where((i) => i != item)
+                                  .toList();
+                            }
+                            onChanged?.call(selectedValues.value);
+                          },
+                        ),
+                        Flexible(
+                          child: Text(
                             displayItems[items.indexOf(item)].toString(),
                             style: const TextStyle(
                                 fontSize: 14, color: Colors.grey),
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(width: AppSize.kl)
+                      ],
                     ),
-                  )
-                  .toList(),
-            ),
-          if (direction == "HORIZONTAL")
-            Wrap(
-              children: items
-                  .map(
-                    (item) => Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Checkbox(
-                            value: selectedValues.value.contains(item),
-                            onChanged: (value) {
-                              if (value == true) {
-                                selectedValues.value = [
-                                  ...selectedValues.value,
-                                  item
-                                ];
-                              } else {
-                                selectedValues.value = selectedValues.value
-                                    .where((i) => i != item)
-                                    .toList();
-                              }
-                              onChanged?.call(selectedValues.value);
-                            },
-                          ),
-                          Flexible(
-                            child: Text(
-                              displayItems[items.indexOf(item)].toString(),
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.grey),
-                            ),
-                          ),
-                          const SizedBox(width: AppSize.kl)
-                        ],
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-        ],
-      ),
+                  ),
+                )
+                .toList(),
+          ),
+      ],
     );
   }
 }

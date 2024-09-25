@@ -1,6 +1,6 @@
 //import riverpod provider as PatientProvider
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as riverpod;
 
 import '../../../../../../../services/failure.dart';
 import '../../data/models/uhi_search_model.dart';
