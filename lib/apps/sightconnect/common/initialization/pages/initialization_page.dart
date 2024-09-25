@@ -1,4 +1,3 @@
-import 'package:eye_care_for_all/apps/eyebank/features/eb_dashboard/presentation/pages/eb_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/modals/shimmer_error_sheet.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
@@ -135,7 +134,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       Role.ROLE_VISION_GUARDIAN: const VisionGuardianDashboardPage(),
       Role.ROLE_OPTOMETRIST: const OptometritianDashboardPage(),
       Role.ROLE_VOLUNTEER: const VisionGuardianDashboardPage(),
-      Role.ROLE_EYEBANK_TECHNICIAN: const EBDashboardPage(),
     };
 
     if (rolePages.containsKey(role)) {
