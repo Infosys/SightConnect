@@ -1,12 +1,10 @@
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dashboard/presentation/providers/patient_dashboard_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_home/presentation/pages/patient_home_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/providers/global_patient_provider.dart';
 import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/pincode_dialog_page.dart';
-import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -70,29 +68,16 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
           ),
           error: (error, stackTrace) {
             return Scaffold(
-              body: Center(
-                  child: Text(
-                error.toString(),
-              ) //CircularProgressIndicator(),
-                  ),
+              body: Center(child: Text(error.toString())),
             );
           },
         );
   }
 
   Widget _buildPage(WidgetRef ref, BuildContext context) {
-    return Stack(
+    return const Stack(
       children: [
-        const PatientHomePage(),
-        Visibility(
-          visible: ref.watch(patientDashboardProvider).isVisible,
-          child: const Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: AppBottomNavBar(),
-          ),
-        ),
+        PatientHomePage(),
       ],
     );
   }

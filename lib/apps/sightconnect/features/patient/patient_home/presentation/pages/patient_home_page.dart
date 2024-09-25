@@ -12,6 +12,7 @@ import 'package:eye_care_for_all/shared/constants/app_images.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/register_volunteer_page.dart';
+import 'package:eye_care_for_all/shared/widgets/app_bottom_nav_bar.dart';
 import 'package:eye_care_for_all/shared/widgets/app_drawer.dart';
 import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
 import 'package:eye_care_for_all/shared/widgets/text_scale_pop_up.dart';
@@ -47,6 +48,7 @@ class PatientHomePage extends ConsumerWidget {
           },
         ),
         appBar: const PatientHomePageAppBar(),
+        bottomNavigationBar: const AppBottomNavBar(),
         body: AppUpgrader(
           child: Container(
             height: AppSize.height(context),
