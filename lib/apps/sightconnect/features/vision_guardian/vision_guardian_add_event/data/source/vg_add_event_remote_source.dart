@@ -40,7 +40,7 @@ var getEventsDataProvider = FutureProvider<List<VisionGuardianEventModel>>(
 
 var vgAddEventRemoteSource = Provider(
   (ref) => VgAddEventRemoteSourceImpl(
-    ref.read(dioProvider),
+    ref.watch(dioProvider),
     ref.read(getTriageModelProvider),
     ref.read(globalVGProvider),
     ref.read(vgUserDataProvider),
