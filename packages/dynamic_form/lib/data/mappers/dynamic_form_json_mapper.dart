@@ -101,9 +101,9 @@ class DynamicFormJsonMapper {
                   visibleIf: element.visibleIf,
                   setValueExpression: _getdummysetValueExpression(element),
                   ensureUnique: element.ensureUnique ?? false,
-                  startDate: _getDummyStartDate(element.name),
-                  endDate: _getDummyEndDate(element.name),
-                  lookUp: _getdummyLookUp(element.name.toString().trim()),
+                  // startDate: _getDummyStartDate(element.name),
+                  // endDate: _getDummyEndDate(element.name),
+                  // lookUp: _getdummyLookUp(element.name.toString().trim()),
                 ),
               );
             }
