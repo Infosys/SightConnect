@@ -3,7 +3,6 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:eye_care_for_all/services/exceptions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -36,9 +35,6 @@ class AppWebView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var isLoading = useState<bool>(false);
-    var progress = useState<double>(0.0);
-
     return ref.watch(consentHtmlProvider(url)).when(
       data: (data) {
         return SingleChildScrollView(
@@ -47,13 +43,8 @@ class AppWebView extends HookConsumerWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12),
-                child: HtmlWidget(
-                  data,
-                ),
+                child: HtmlWidget(data),
               ),
-              progress.value < 1.0
-                  ? LinearProgressIndicator(value: progress.value)
-                  : Container(),
             ],
           ),
         );
