@@ -9,6 +9,7 @@ void shimmerErrorBottomSheet({
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
+    isDismissible: false,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
     ),
