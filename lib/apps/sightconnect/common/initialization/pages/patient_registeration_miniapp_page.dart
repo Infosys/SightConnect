@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp.dart';
 import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:flutter_miniapp_web_runner/presentation/pages/miniapp_display_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matomo_tracker/matomo_tracker.dart';
 
 class PatientRegistrationMiniappPage extends StatelessWidget {
@@ -32,7 +33,10 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
       actionName: "Patient Registration Miniapp Page View",
       child: MiniAppDisplayPage(
         onBack: () {
-          Navigator.of(context).pop(null);
+          Fluttertoast.showToast(
+              msg:
+                  "Oops! It looks like you tried to navigate back. Please complete the registration process");
+          // Navigator.of(context).pop(null);
         },
         token: PersistentAuthStateService.authState.accessToken ?? "",
         injectionModel: MiniAppInjectionModel(
