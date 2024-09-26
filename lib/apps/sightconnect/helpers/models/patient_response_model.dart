@@ -152,7 +152,8 @@ enum IdentifierType {
   HPR_ID,
   COUNTER_ID,
   MR_CODE,
-  ABHA_MOBILE
+  ABHA_MOBILE,
+  LVPEI_INTEGRATION_ID
 }
 
 enum RelatedPartyStatus {
