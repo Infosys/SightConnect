@@ -314,7 +314,7 @@ class TriageStepsDrawer extends ConsumerWidget {
                         ]),
                   ),
                 ]),
-            const SizedBox(height: AppSize.kl + 10),
+            const Spacer(),
             Row(
               children: [
                 const SizedBox(
@@ -348,7 +348,10 @@ class TriageStepsDrawer extends ConsumerWidget {
                   ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(
+              height: AppSize.ks,
+            ),
           ],
         ),
       ),
