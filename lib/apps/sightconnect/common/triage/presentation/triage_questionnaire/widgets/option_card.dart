@@ -316,7 +316,7 @@ class OptionCard extends StatelessWidget {
                           onPressed: () {
                             onNoButtonPressed(false, false);
                           },
-                          child: const Text("Previous Question"),
+                          child: const Text("Back"),
                         ),
                       ),
                       Expanded(
