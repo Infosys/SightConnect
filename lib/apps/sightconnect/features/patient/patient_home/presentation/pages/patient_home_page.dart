@@ -128,7 +128,6 @@ class PatientHomePage extends ConsumerWidget {
             ),
           ),
         ),
-        bottomNavigationBar: const AppBottomNavBar(),
       ),
     );
   }
