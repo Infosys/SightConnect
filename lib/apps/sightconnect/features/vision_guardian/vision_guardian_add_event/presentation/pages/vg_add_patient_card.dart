@@ -15,7 +15,6 @@ class VisionGuardianAddPatient extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final loc = context.loc!;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppbar(

@@ -56,3 +56,26 @@ extension StringExtension on String? {
     return str.replaceAll("_", " ").toLowerCase().sentenceCase();
   }
 }
+
+extension StringExtensions on String? {
+  String formatNumber() {
+    if (this == null) {
+      return '0'; // Default value for null
+    }
+
+    int? number = int.tryParse(this!);
+    if (number == null) {
+      return '0'; // Default value for non-numeric strings
+    }
+
+    if (number >= 1000000000) {
+      return '${(number / 1000000000).toStringAsFixed(1)}B';
+    } else if (number >= 1000000) {
+      return '${(number / 1000000).toStringAsFixed(1)}M';
+    } else if (number >= 1000) {
+      return '${(number / 1000).toStringAsFixed(1)}K';
+    } else {
+      return number.toString();
+    }
+  }
+}

@@ -6,7 +6,7 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/service/face_distance
 import 'package:eye_care_for_all/apps/sightconnect/helpers/service/face_distance_detector_service_ios.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/face_distance_painter.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/permission_service.dart';
+import 'package:eye_care_for_all/services/permission_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

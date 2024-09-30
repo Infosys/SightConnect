@@ -1,34 +1,26 @@
-import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/18plus_declaration.dart';
-import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/app_consent_form.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/modals/shimmer_error_sheet.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
-import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/patient_registeration_miniapp_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
-import 'package:eye_care_for_all/apps/sightconnect/common/referral/presentation/modals/referral_collect_sheet.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/role_strategy/app_role_strategy.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/role_strategy/base_role_strategy.dart';
+import 'package:eye_care_for_all/apps/sightconnect/common/initialization/widgets/splash_shimmer.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/presentation/pages/optometritian_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_dashboard/presentation/pages/patient_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_guardian/vision_guardian_dashboard/presentation/pages/vg_dashboard_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/vision_technician/vision_technician_dashboard/presentation/pages/vision_technician_dashboard_page.dart';
+import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/constants/app_size.dart';
-import 'package:eye_care_for_all/shared/pages/pulsar_effect_page.dart';
-import 'package:eye_care_for_all/shared/responsive/responsive.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/geocoding_service.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/widgets/app_upgrader.dart';
-import 'package:eye_care_for_all/shared/widgets/blur_overlay.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/widgets/choose_role_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_miniapp_web_runner/data/model/miniapp_injection_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:matomo_tracker/matomo_tracker.dart';
-
-import '../../../../../shared/services/location_service.dart';
-import '../../../helpers/models/keycloak.dart';
 
 class InitializationPage extends ConsumerStatefulWidget {
-  static const String routeName = '/initialization';
+  static const String routeName = '/intialization';
   const InitializationPage({super.key});
 
   @override
@@ -45,23 +37,20 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         final role = PersistentAuthStateService.authState.activeRole;
 
         if (role != null) {
-          logger.d("with role: $role");
-          _profileVerification(roleMapper(role)!);
+          logger.d("ACTIVE ROLE: $role");
+          await _profileVerification(roleMapper(role)!);
         } else {
           final selectedProfile = await _showProfileSelectionDialog(navigator);
-          logger.d("Selected Role: $selectedProfile");
+          logger.d("Selected Profile: $selectedProfile");
           if (selectedProfile != null) {
             final role = roleToString(selectedProfile);
             await PersistentAuthStateService.authState.setActiveRole(role);
 
             // Update the headers with the selected role
-
             ref.read(dioProvider.notifier).updateHeaders(activeRole: role);
-
-            logger.d("Active Role: $role");
-            _profileVerification(selectedProfile);
+            await _profileVerification(selectedProfile);
           } else {
-            logger.d("Role Not Found");
+            logger.d("Role not found");
             await _invalidateAndLogout("Role not found. Please login again.");
           }
         }
@@ -76,201 +65,58 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
       final userExist =
           await ref.read(initializationProvider).checkUserAlreadyExist(role);
       logger.d("User Exist: $userExist");
+
+      final roleHandler = _getRoleHandler(role);
       if (userExist) {
-        _handleExistingUser(navigator, role);
+        logger.d("Existing User Exist: $userExist");
+        await roleHandler.initializeExistingUser(navigator);
       } else {
-        _handleNewUser(navigator, role);
+        logger.d("New User Exist: $userExist");
+        await roleHandler.initializeNewUser(navigator);
       }
+      await _navigateBasedOnRole(navigator, role);
+    } on Failure catch (e) {
+      logger.e("profileVerification: $e");
+      _showErrorBottomSheet(e.errorMessage);
     } catch (e) {
-      logger.e("checkUserAlreadyExist: $e");
-      // In case of any other error, logout the user
-      await _invalidateAndLogout("Server Error. Please login again.");
+      logger.e("profileVerification: $e");
+      _showErrorBottomSheet("Something went wrong. Please try again.");
     }
   }
 
-  Future<void> _handleNewUser(NavigatorState navigator, Role role) async {
-    try {
-      if (role == Role.ROLE_PATIENT) {
-        final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
-        if (isAccepted != null && isAccepted && mounted) {
-          await _handleReferral(navigator, role);
-        } else {
-          // User stay on the same page
-        }
-      } else if (role == Role.ROLE_VISION_TECHNICIAN) {
-        await _invalidateAndLogout("You are not authorized to login.");
-      } else if (role == Role.ROLE_VISION_GUARDIAN) {
-        await _invalidateAndLogout("You are not authorized to login.");
-      } else if (role == Role.ROLE_OPTOMETRIST) {
-        await _invalidateAndLogout("You are not authorized to login.");
-      }
-    } catch (e) {
-      logger.e("_handleNewUser: $e");
-      await _invalidateAndLogout("Server Error. Please login again.");
+  RoleStrategy _getRoleHandler(Role role) {
+    switch (role) {
+      case Role.ROLE_PATIENT:
+        return PatientRoleStrategy(ref);
+      case Role.ROLE_VISION_TECHNICIAN:
+        return VisionTechnicianRoleStrategy(ref);
+      case Role.ROLE_VISION_GUARDIAN:
+        return VisionGuardianRoleStrategy(ref);
+      case Role.ROLE_OPTOMETRIST:
+        return OptometristRoleStrategy(ref);
+      case Role.ROLE_VOLUNTEER:
+        return VolunteerRoleStrategy(ref);
+      case Role.ROLE_EYEBANK_TECHNICIAN:
+        return EyeBankRoleStrategy(ref);
+      default:
+        throw UnimplementedError('Role not implemented');
     }
-  }
-
-  Future<void> _handleReferral(NavigatorState navigator, Role role) async {
-    bool? referralResult = await showReferralCollectSheet(navigator.context);
-    if (referralResult == true) {
-      await _registerUser(navigator, role);
-    } else {
-      await _registerUser(navigator, role);
-    }
-  }
-
-  Future<void> _handleExistingUser(NavigatorState navigator, Role role) async {
-    try {
-      final isAccepted = await _verifyRoleSpecificConsent(navigator, role);
-      if (isAccepted != null && isAccepted) {
-        await _navigateBasedOnRole(navigator, role);
-      } else {
-        // User stay on the same page
-      }
-    } catch (e) {
-      logger.e("_handleExistingUser: $e");
-      await _invalidateAndLogout("Server Error. Please login again.");
-    }
-  }
-
-  Future<bool?> _verifyRoleSpecificConsent(
-      NavigatorState navigator, Role role) async {
-    try {
-      final model = ref.read(initializationProvider);
-      if (role == Role.ROLE_OPTOMETRIST) {
-        // Skip consent and 18+ declaration for optometrist
-        return true;
-      } else if (role == Role.ROLE_PATIENT) {
-        // 18+ declaration and consent check for patient
-        // bool is18PlusDeclarationAccepted =
-        //     await model.getEighteenPlusDeclarationStatus();
-        bool is18PlusDeclarationAccepted =
-            await model.getEighteenPlusDeclarationStatus();
-        bool isConsentAccepted = await model.getConsentStatus();
-        if (is18PlusDeclarationAccepted && isConsentAccepted) {
-          return true;
-        } else {
-          if (!is18PlusDeclarationAccepted) {
-            is18PlusDeclarationAccepted =
-                await _show18PlusDeclaration(navigator, role) ?? false;
-          }
-          if (!isConsentAccepted) {
-            isConsentAccepted =
-                await _showConsentForm(navigator, role) ?? false;
-          }
-        }
-        return is18PlusDeclarationAccepted && isConsentAccepted;
-      } else {
-        // Check consent for vision technician and guardian
-        bool isConsentAccepted = await model.getConsentStatus();
-        if (!isConsentAccepted) {
-          isConsentAccepted = await _showConsentForm(navigator, role) ?? false;
-        }
-        return isConsentAccepted;
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<bool?> _show18PlusDeclaration(
-      NavigatorState navigator, Role role) async {
-    bool? consentGiven = await showDialog(
-        context: context,
-        builder: (context) {
-          return const EighteenPlusDeclaration();
-        });
-    return consentGiven;
-  }
-
-  Future<bool?> _showConsentForm(NavigatorState navigator, Role role) async {
-    bool? consentGiven = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) {
-          return const AppConsentFormPage();
-        },
-      ),
-    );
-    return consentGiven;
-  }
-
-  Future<void> _registerUser(NavigatorState navigator, Role role) async {
-    String? pinCode;
-
-    try {
-      final locationData = await LocationService.getLocationWithPermissions();
-      logger.d("locationData: $locationData");
-      pinCode = "";
-      if (locationData == null) {
-        pinCode = "";
-      } else {
-        List<String> addressData =
-            await GeocodingService.getPincodeFromLocation();
-        pinCode = addressData[0];
-        logger.f("pinCode is  $pinCode");
-      }
-    } on Exception catch (e) {
-      logger.e("Error in getting location data: $e");
-      pinCode = "";
-    }
-
-    final status = await navigator.push<bool?>(
-      MaterialPageRoute(
-        builder: (context) => PatientRegistrationMiniappPage(
-          actionType: MiniAppActionType.REGISTER,
-          displayName: "Register Patient",
-          pinCode: pinCode,
-        ),
-      ),
-    );
-    logger.d("Registration Status: $status");
-
-    if (status == null || status == false) {
-      // api failed or manual back press
-      Fluttertoast.showToast(msg: "Patient Registration Failed");
-      await _showRegistrationDialog(role);
-    } else if (status) {
-      // patient register successfully
-      Fluttertoast.showToast(msg: "Patient Registered Successfully");
-      await _profileVerification(role);
-    }
-  }
-
-  Future<void> _showRegistrationDialog(Role role) async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return BlurDialogBox(
-          title: const Text("Registration Required"),
-          content: const Text("Please register to continue"),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                await _invalidateAndLogout();
-              },
-              child: const Text("Try with another account"),
-            ),
-            TextButton(
-              onPressed: () async {
-                Navigator.of(context).pop();
-                _profileVerification(role);
-              },
-              child: const Text("Register"),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   Future<Role?> _showProfileSelectionDialog(NavigatorState navigator) {
     final currentRoles = PersistentAuthStateService.authState.roles;
+    final isUserBeta = PersistentAuthStateService.authState.isUserTypeBeta;
+
     if (currentRoles == null) {
       return Future.value(null);
     }
-    final roles = roleListMapper(currentRoles);
+    var roles = roleListMapper(currentRoles);
     if (roles.length == 1) {
       return Future.value(roles.first);
+    }
+    // Allow only Beta users to select EyeBank Technician role
+    if (!isUserBeta && kIsWeb) {
+      return Future.value(Role.ROLE_EYEBANK_TECHNICIAN);
     }
     return showDialog<Role>(
       context: context,
@@ -297,8 +143,22 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
         ),
         (route) => false,
       );
-    } else {
-      throw Exception("Invalid Role");
+    }
+  }
+
+  void _showErrorBottomSheet(String message) {
+    shimmerErrorBottomSheet(
+      context: context,
+      message: message,
+      retryInitialization: _retryInitialization,
+      invalidateAndLogout: _invalidateAndLogout,
+    );
+  }
+
+  void _retryInitialization() {
+    final role = PersistentAuthStateService.authState.activeRole;
+    if (role != null) {
+      _profileVerification(roleMapper(role)!);
     }
   }
 
@@ -315,33 +175,6 @@ class _InitializationPageState extends ConsumerState<InitializationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AppUpgrader(
-      child: TraceableWidget(
-        actionName: "InitializationPage",
-        path: InitializationPage.routeName,
-        child: Scaffold(
-          body: Stack(
-            children: <Widget>[
-              Positioned.fill(
-                child: Image.asset(
-                  'assets/logo/splash_bg.png',
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Pulsar(
-                child: Center(
-                  child: Image.asset(
-                    "assets/logo/splash_icon_transparant.png",
-                    width: Responsive.isMobile(context)
-                        ? AppSize.width(context) * 0.3
-                        : AppSize.width(context) * 0.2,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return const SplashShimmer();
   }
 }

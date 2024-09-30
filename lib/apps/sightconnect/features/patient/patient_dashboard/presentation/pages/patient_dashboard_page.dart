@@ -68,11 +68,7 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
           ),
           error: (error, stackTrace) {
             return Scaffold(
-              body: Center(
-                  child: Text(
-                error.toString(),
-              ) //CircularProgressIndicator(),
-                  ),
+              body: Center(child: Text(error.toString())),
             );
           },
         );
@@ -82,15 +78,6 @@ class _PatientDashboardPageState extends ConsumerState<PatientDashboardPage> {
     return const Stack(
       children: [
         PatientHomePage(),
-        // Visibility(
-        //   visible: ref.watch(patientDashboardProvider).isVisible,
-        //   child: const Positioned(
-        //     bottom: 0,
-        //     left: 0,
-        //     right: 0,
-        //     child: AppBottomNavBar(),
-        //   ),
-        // ),
       ],
     );
   }

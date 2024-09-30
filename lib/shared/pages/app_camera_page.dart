@@ -8,10 +8,10 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/models/keycloak.dart'
 import 'package:eye_care_for_all/apps/sightconnect/helpers/service/eye_detector_service.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/eye_detector_painter.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/permission_service.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
 import 'package:eye_care_for_all/shared/pages/app_camera_image_preview.dart';
-import 'package:eye_care_for_all/shared/services/permission_service.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
 import 'package:eye_care_for_all/shared/widgets/app_camera_preview_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

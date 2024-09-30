@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/data/models/optometrician_dashboard_model.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/contract/optometrician_dashboard_repository.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_dashboard/source/remote/optometrician_dashboard_remote_source.dart';
-import 'package:eye_care_for_all/shared/services/exceptions.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/network_info.dart';
+import 'package:eye_care_for_all/services/exceptions.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/network_info.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var optometricianDashboardRepositoryProvider =

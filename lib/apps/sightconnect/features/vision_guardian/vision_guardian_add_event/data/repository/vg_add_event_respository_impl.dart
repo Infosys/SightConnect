@@ -5,10 +5,7 @@ import 'package:eye_care_for_all/main.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 var vgAddEventRepository = Provider(
-  (ref) => VgAddEventRepositoryImpl(
-    ref.watch(vgAddEventRemoteSource),
-  ),
-);
+    (ref) => VgAddEventRepositoryImpl(ref.watch(vgAddEventRemoteSource)));
 
 class VgAddEventRepositoryImpl extends VgAddEventRepository {
   VgAddEventRemoteSource remoteDataSource;

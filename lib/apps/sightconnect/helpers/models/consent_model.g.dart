@@ -10,6 +10,7 @@ _$ConsentModelImpl _$$ConsentModelImplFromJson(Map<String, dynamic> json) =>
     _$ConsentModelImpl(
       templateId: (json['templateId'] as num?)?.toInt(),
       consentVersion: json['consentVersion'] as String?,
+      templateType: json['templateType'] as String?,
       consentStatus:
           $enumDecodeNullable(_$ConsentStatusEnumMap, json['consentStatus']) ??
               ConsentStatus.PENDING,
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$ConsentModelImplToJson(_$ConsentModelImpl instance) =>
     <String, dynamic>{
       'templateId': instance.templateId,
       'consentVersion': instance.consentVersion,
+      'templateType': instance.templateType,
       'consentStatus': _$ConsentStatusEnumMap[instance.consentStatus]!,
       'acknowledgeDate': instance.acknowledgeDate,
     };

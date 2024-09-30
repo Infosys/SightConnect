@@ -42,6 +42,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     model.selectedOptions.containsValue(true);
     model.getQuestionnaire(questionnaireSections);
     var pageController = usePageController();
+    var yesButtonPressed = useState<bool>(false);
+    var noButtonPressed = useState<bool>(false);
 
     final loc = context.loc!;
 
@@ -106,15 +108,52 @@ class TriageQuestionnairePage extends HookConsumerWidget {
               return PageView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: pageController,
+                  //   if (yesButtonPressed.value == true ||
+                  //       noButtonPressed.value == true) {
+                  //     yesButtonPressed.value = false;
+                  //     noButtonPressed.value = false;
+                  //     return;
+                  //   } else if (pageController.page! < index + 0.5) {
+                  //     var question = model.questionnaireSections[index];
+                  //     var isLastQuestion =
+                  //         (model.questionnaireSections.length - 1 == index);
+
+                  //     Map<String, Map<String, int>> finalValueMap =
+                  //         _getWeightageAnswerCode(question.answerOption ?? []);
+                  //     model.addQuestionnaireAnswer(
+                  //       question.id!,
+                  //       "No",
+                  //       _getAnswerWeightage(finalValueMap, "No").toInt(),
+                  //       _getAnswerCode(finalValueMap, "No"),
+                  //     );
+
+                  //     if (isLastQuestion) {
+                  //       model.saveQuestionaireResponse();
+                  //       await model.saveQuestionaireResponseToDB();
+                  //       ref.read(triageStepperProvider).goToNextStep();
+                  //     }
+                  //   }
+                  // },
+
                   scrollDirection: Axis.horizontal,
                   itemCount: model.questionnaireSections.length,
                   itemBuilder: (context, index) {
+                    pageController.addListener(() {
+                      if (pageController.page == index.toDouble()) {
+                        ref.read(questionnaireIndexProvider.notifier).state =
+                            index;
+                      }
+                    });
+
+                    index;
+                    logger.d({"index": index});
                     var question = model.questionnaireSections[index];
                     var isLastQuestion =
                         (model.questionnaireSections.length - 1 == index);
 
-                    Map<String, Map<String, int>> finalValueMap =
-                        _getWeightageAnswerCode(question.answerOption ?? []);
+                    Map<String, Map<String, int>> finalValueMap =_getWeightageAnswerCode(question.answerOption ?? []);
+
+                    Map<int, bool?> responseMap = {};
 
                     if (question.type == QuestionnaireType.Group) {
                       return Center(
@@ -247,19 +286,21 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                       return OptionCard(
                         totalGroupQuestion: model.totalGroupQuestion(),
                         question: question,
-                        index: ref
-                            .watch(questionnaireIndexProvider.notifier)
-                            .state,
+                        index: index,
                         total: model.questionnaireSections.length,
+                    
+                        //NO BUTTON PRESSED START
+
                         onNoButtonPressed: (bool isNav, bool isForward) async {
                           if (isNav == false) {
-                            ref
-                                .read(questionnaireIndexProvider.notifier)
-                                .state++;
+                            noButtonPressed.value = true;
+                            responseMap = {index: false};
+                            logger.d(responseMap);
                             model.addQuestionnaireAnswer(
                               question.id!,
                               "No",
-                              _getAnswerWeightage(finalValueMap, "No").toInt(),
+                             _getAnswerWeightage(finalValueMap, "No")
+                                  .toInt(),
                               _getAnswerCode(finalValueMap, "No"),
                             );
 
@@ -275,52 +316,51 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                                 curve: Curves.easeIn,
                               );
                             }
-                          } else {
-                            if (isForward == true) {
-                              ref
-                                  .read(questionnaireIndexProvider.notifier)
-                                  .state++;
-                            } else {
-                              ref
-                                  .read(questionnaireIndexProvider.notifier)
-                                  .state--;
-                            }
-                            model.addQuestionnaireAnswer(
-                              question.id!,
-                              "No",
-                              _getAnswerWeightage(finalValueMap, "No").toInt(),
-                              _getAnswerCode(finalValueMap, "No"),
-                            );
-
-                            if (isLastQuestion) {
-                              model.saveQuestionaireResponse();
-
-                              await model.saveQuestionaireResponseToDB();
-                              ref.read(triageStepperProvider).goToNextStep();
-                            } else {
-                              if (isForward == true) {
-                                pageController.animateToPage(
-                                  index + 1,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeIn,
-                                );
-                              } else {
-                                pageController.animateToPage(
-                                  index - 1,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeIn,
-                                );
-                              }
-                            }
                           }
-                        },
-                        onYesButtonPressed: () async {
-                          ref.read(questionnaireIndexProvider.notifier).state++;
 
                           model.addQuestionnaireAnswer(
                             question.id!,
+                            "No",
+                            _getAnswerWeightage(finalValueMap, "No")
+                                .toInt(),
+                            _getAnswerCode(finalValueMap, "No"),
+                          );
+
+                          if (isLastQuestion) {
+                            model.saveQuestionaireResponse();
+
+                            await model.saveQuestionaireResponseToDB();
+                            ref.read(triageStepperProvider).goToNextStep();
+                          } else {
+                            if (isForward == true) {
+                              pageController.animateToPage(
+                                index + 1,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeIn,
+                              );
+                            } else {
+                              pageController.animateToPage(
+                                index - 1,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeIn,
+                              );
+                            }
+                          }
+                        },
+
+                        //NO BUTTON PRESSED END
+
+                        //YES BUTTON PRESSED START
+
+                        onYesButtonPressed: () async {
+                          yesButtonPressed.value = true;
+                          responseMap = {index: true};
+                          logger.d(responseMap);
+                          model.addQuestionnaireAnswer(
+                            question.id!,
                             "Yes",
-                            _getAnswerWeightage(finalValueMap, "Yes").toInt(),
+                            _getAnswerWeightage(finalValueMap, "Yes")
+                                .toInt(),
                             _getAnswerCode(finalValueMap, "Yes"),
                           );
 
@@ -337,6 +377,8 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                             );
                           }
                         },
+
+                        //YES BUTTON PRESSED END
                       );
                     } else if (question.type == QuestionnaireType.String) {
                       return TriageTextTypeQuestion(
@@ -381,6 +423,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
                           ),
                           TextButton(
                             onPressed: () async {
+                              yesButtonPressed.value = true;
                               if (isLastQuestion) {
                                 model.saveQuestionaireResponse();
 
@@ -408,6 +451,7 @@ class TriageQuestionnairePage extends HookConsumerWidget {
       ),
     );
   }
+}
 
   Map<String, Map<String, int>> _getWeightageAnswerCode(
       List<AnswerOptionModel> answerOption) {
@@ -440,4 +484,4 @@ class TriageQuestionnairePage extends HookConsumerWidget {
     String answerString = answer.toLowerCase();
     return finalValueMap[answerString]?["answerCode"] ?? 0;
   }
-}
+

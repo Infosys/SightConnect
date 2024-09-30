@@ -8,9 +8,9 @@ import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/consent_
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/keycloak_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/repositories/performers_profile_repository_impl.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
-import 'package:eye_care_for_all/shared/services/persistent_auth_service.dart';
-import 'package:eye_care_for_all/shared/services/shared_preference.dart';
+import 'package:eye_care_for_all/services/failure.dart';
+import 'package:eye_care_for_all/services/persistent_auth_service.dart';
+import 'package:eye_care_for_all/services/shared_preference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -41,7 +41,7 @@ class InitializationProvider extends ChangeNotifier {
       //only for testing
       return true;
     } else {
-      throw ServerFailure(errorMessage: "Invalid Role");
+      throw ServerFailure(errorMessage: "Profile Not Found");
     }
   }
 
@@ -52,8 +52,11 @@ class InitializationProvider extends ChangeNotifier {
     } catch (e) {
       rethrow;
     }
-    // Triage Database logout
-    await TriageDBHelper().deleteFullDatabase();
+    if (!kIsWeb) {
+      // Triage Database logout
+      await TriageDBHelper().deleteFullDatabase();
+    }
+
     // Shared Preference logout
     await SharedPreferenceService.clearAll();
     // Flutter Secure Storage logout
@@ -194,22 +197,20 @@ class InitializationProvider extends ChangeNotifier {
     });
   }
 
-  Future<bool> getEighteenPlusDeclarationStatus() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "AGE_DECLARATION");
-    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   Future<bool> getConsentStatus() async {
-    final consentRepository = _ref.read(consentRepositoryProvider);
-    final consent = await consentRepository.getConsent(type: "PRIVACY_POLICY");
-    if (consent.consentStatus == ConsentStatus.ACKNOWLEDGED) {
+    // return false;
+    try {
+      final consentRepository = _ref.read(consentRepositoryProvider);
+      final consents = await consentRepository.getConsent();
+
+      for (var consent in consents) {
+        if (consent.consentStatus != ConsentStatus.ACKNOWLEDGED) {
+          return false;
+        }
+      }
       return true;
-    } else {
+    } catch (e) {
+      logger.e("getConsentStatus: $e");
       return false;
     }
   }

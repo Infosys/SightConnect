@@ -100,6 +100,55 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                         fit: BoxFit.fill,
                       ),
                       Positioned(
+                        bottom: 30,
+                        left: 30,
+                        child: IntrinsicHeight(
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      VisualAcuityFaceDistancePage(
+                                    minDistance: 35,
+                                    maxDistance: 45,
+                                    title: loc.vaDistanceToFace,
+                                    onProceed: () {
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VisualAcuityTumblingRightEyeInstruction(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                            style: OutlinedButton.styleFrom(
+                              side: const BorderSide(
+                                color: AppColor.grey,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12.0),
+                              child: Text(
+                                loc.skipButton,
+                                style: applyRobotoFont(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColor.grey,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
                         top: 30,
                         left: 0,
                         right: 0,
@@ -159,52 +208,6 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                                 ),
                               ],
                             ),
-                            Transform.translate(
-                              offset: const Offset(20, -40),
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          VisualAcuityFaceDistancePage(
-                                        minDistance: 35,
-                                        maxDistance: 45,
-                                        title: loc.vaDistanceToFace,
-                                        onProceed: () {
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const VisualAcuityTumblingRightEyeInstruction(),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  );
-                                },
-                                style: OutlinedButton.styleFrom(
-                                  side: const BorderSide(
-                                    color: AppColor.grey,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0),
-                                  child: Text(
-                                    loc.skipButton,
-                                    style: applyRobotoFont(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColor.grey,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -213,7 +216,7 @@ class VisualAcuityDemoPage extends HookConsumerWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

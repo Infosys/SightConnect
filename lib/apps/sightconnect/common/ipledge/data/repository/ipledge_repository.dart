@@ -2,9 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/ipledge/data/models/ipledge_model.dart';
 import 'package:eye_care_for_all/main.dart';
-import 'package:eye_care_for_all/shared/services/dio_service.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
+import 'package:eye_care_for_all/services/dio_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../../../services/failure.dart';
 
 abstract class IPledgeRepository {
   Future<Either<Failure, List<IPledgeModel>>> getIPledgeData(int patientID);

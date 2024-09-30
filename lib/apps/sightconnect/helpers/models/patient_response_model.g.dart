@@ -207,6 +207,7 @@ const _$IdentifierTypeEnumMap = {
   IdentifierType.COUNTER_ID: 'COUNTER_ID',
   IdentifierType.MR_CODE: 'MR_CODE',
   IdentifierType.ABHA_MOBILE: 'ABHA_MOBILE',
+  IdentifierType.LVPEI_INTEGRATION_ID: 'LVPEI_INTEGRATION_ID',
 };
 
 _$MedicalRecordModelImpl _$$MedicalRecordModelImplFromJson(

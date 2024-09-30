@@ -2,10 +2,10 @@ import 'package:eye_care_for_all/apps/sightconnect/common/referral/data/models/r
 import 'package:eye_care_for_all/apps/sightconnect/common/referral/data/repository/referral_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/referral/presentation/widgets/referral_code_error.dart';
 import 'package:eye_care_for_all/main.dart';
+import 'package:eye_care_for_all/services/failure.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';
 import 'package:eye_care_for_all/shared/constants/app_size.dart';
 import 'package:eye_care_for_all/shared/extensions/widget_extension.dart';
-import 'package:eye_care_for_all/shared/services/failure.dart';
 import 'package:eye_care_for_all/shared/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
