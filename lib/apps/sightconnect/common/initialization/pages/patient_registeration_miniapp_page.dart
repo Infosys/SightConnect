@@ -33,10 +33,13 @@ class PatientRegistrationMiniappPage extends StatelessWidget {
       actionName: "Patient Registration Miniapp Page View",
       child: MiniAppDisplayPage(
         onBack: () {
-          Fluttertoast.showToast(
-              msg:
-                  "Oops! It looks like you tried to navigate back. Please complete the registration process");
-          // Navigator.of(context).pop(null);
+          if (actionType == MiniAppActionType.REGISTER) {
+            Fluttertoast.showToast(
+                msg:
+                    "Oops! It looks like you tried to navigate back. Please complete the registration process");
+          } else {
+            Navigator.of(context).pop(null);
+          }
         },
         token: PersistentAuthStateService.authState.accessToken ?? "",
         injectionModel: MiniAppInjectionModel(
