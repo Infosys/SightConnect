@@ -18,6 +18,10 @@ dependencies:
   dio: ^5.4.0
   freezed_annotation: ^2.4.1
   logger: ^2.0.2+1
+
+dependency_overrides:
+  webview_flutter_android: 3.16.1
+
  
  
 
