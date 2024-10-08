@@ -52,5 +52,7 @@ distance_acuity : old code for long distance acuity, not used anymore
 dev_backup : backup of development branch before the introduction of new design and long distance visual acuity.
 
 
-
+A temporary fix for InAppWebView has been added.
+In android/build.gradle, configurations.all{} has been added.
+In pubspec, a dependency override has been added for webview_flutter_android: 3.16.1
              
