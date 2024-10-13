@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/widgets/triage_test_counter_indicator.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/widgets/helpers/show_triage_bottom_sheet.dart';
 import 'package:eye_care_for_all/shared/constants/app_icon.dart';

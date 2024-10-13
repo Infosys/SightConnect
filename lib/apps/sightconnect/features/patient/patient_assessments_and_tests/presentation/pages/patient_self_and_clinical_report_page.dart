@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/presentation/widgets/patient_clinical_test_reports.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_assessments_and_tests/presentation/widgets/patient_self_test_reports.dart';
 import 'package:eye_care_for_all/shared/constants/app_color.dart';

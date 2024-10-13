@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/provider/eye_scan_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_cataract_eye_scan/presentation/widgets/arrow_button.dart';

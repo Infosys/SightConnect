@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/pages/login_page.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/initialization/providers/initilization_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_notification/presentation/pages/patient_notification_page.dart';

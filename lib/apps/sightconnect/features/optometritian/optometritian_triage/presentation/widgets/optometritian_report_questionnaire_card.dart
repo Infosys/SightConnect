@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/data/models/optometrician_triage_response.dart';
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/presentation/providers/optometrician_triage_provider.dart';
 import 'package:eye_care_for_all/apps/sightconnect/features/optometritian/optometritian_triage/presentation/providers/optometritian_report_provider.dart';

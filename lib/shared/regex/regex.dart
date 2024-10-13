@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 class Regex {
   static bool isMobile(String mobile) {
     return RegExp(r"^(?:[+0]9)?[0-9]{10}$").hasMatch(mobile);

@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 import 'package:eye_care_for_all/apps/sightconnect/features/patient/patient_profile/data/repositories/patient_authentication_repository_impl.dart';
 import 'package:eye_care_for_all/apps/sightconnect/helpers/models/patient_response_model.dart';
 import 'package:eye_care_for_all/services/persistent_auth_service.dart';

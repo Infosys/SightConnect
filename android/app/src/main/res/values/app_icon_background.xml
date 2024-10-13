@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2024 Infosys Ltd.
+  ~ Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  -->
+
 <resources>
     <color name="app_icon_background">#FFDD04</color>
 </resources>

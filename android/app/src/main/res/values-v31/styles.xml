@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2024 Infosys Ltd.
+  ~ Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  -->
+
 <resources>
     <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">

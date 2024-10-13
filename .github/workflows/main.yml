@@ -13,26 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        # with:
-        #   token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Set up Python
-      #   uses: actions/setup-python@v2
-      #   with:
-      #     python-version: '3.x'  
-          
-      # - name: Increment build number
-      #   run: python .github/scripts/increment_version.py
-
-      # - name: Commit changes
-      #   run: |
-      #     git config --global user.name 'GitHub Actions'
-      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      #     git add .
-      #     git commit -m "Increment build number [skip ci]"
-      #     git tag -a v${{ github.run_number }} -m "Version ${{ github.run_number }}"
-      #     git push origin --tags
-      #     git push  
       - name: env create
         run: echo "VERSION_NUMBER=$GITHUB_REF_NAME" >> $GITHUB_ENV
       # - name: tagcreation

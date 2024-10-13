@@ -1,3 +1,9 @@
+/*
+ * Copyright 2024 Infosys Ltd.
+ * Use of this source code is governed by Apache License 2.0 that can be found in the LICENSE file or at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ */
+
 // ignore_for_file: file_names
 
 import 'package:eye_care_for_all/apps/sightconnect/common/triage/domain/models/enums/action_type.dart';
