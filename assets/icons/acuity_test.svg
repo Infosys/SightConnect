@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="acuity_test" data-name="acuity test" transform="translate(-49.707 -155.707)">
+    <g id="Group_16492" data-name="Group 16492" transform="translate(50 156)">
+      <g id="visual_acuity_test" data-name="visual acuity test" transform="translate(0 0)">
+        <rect id="Rectangle_15092" data-name="Rectangle 15092" width="16" height="16" transform="translate(-0.293 -0.293)" fill="#a177ff" opacity="0"/>
+        <g id="Group_39691" data-name="Group 39691" transform="translate(0.642)">
+          <path id="tumbling_E" data-name="tumbling E" d="M0,0V1.541H6.166V3.083H0V4.624H6.166V6.165H0V7.707H7.707V0Z" transform="translate(3.083 7.707) rotate(-90)" fill="#a177ff"/>
+          <path id="tumbling_E-2" data-name="tumbling E" d="M0,0V1.027H4.11V2.055H0V3.083H4.11V4.11H0V5.138H5.138V0Z" transform="translate(5.138 15.414) rotate(180)" fill="#a177ff"/>
+          <path id="tumbling_E-3" data-name="tumbling E" d="M0,0V1.028H4.11V2.055H0V3.083H4.11V4.111H0V5.138H5.138V0Z" transform="translate(9.248 10.276)" fill="#a177ff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

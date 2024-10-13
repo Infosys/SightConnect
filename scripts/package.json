@@ -1,0 +1,29 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app-translations": "node ./appTranslations.js",
+    "app-translations:arb": "node ./appTranslationsARB.js",
+    "app-translations:arb:watch": "nodemon -i ./outputs ./appTranslationsARB.js",
+    "app-translations:dart": "node ./appTranslationsDart.js",
+    "app-translations:dart:watch": "nodemon -i ./outputs ./appTranslationsDart.js",
+    "arb-to-excel": "node ./arbToExcel.js",
+    "update-arbs": "ts-node ./updateArbs.ts",
+    "update-arbs:watch": "nodemon -i ./outputs ./updateArbs.ts",
+    "app-excel-diff": "node ./appExcelDiff.js"
+  },
+  "keywords": [],
+  "author": "Nandan Reddy",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.21",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

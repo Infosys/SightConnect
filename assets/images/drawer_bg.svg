@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="412" height="892" viewBox="0 0 412 892">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_6594" data-name="Rectangle 6594" width="412" height="892" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <filter id="Ellipse_16" x="246" y="-28" width="288" height="288" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="menu_bg1" data-name="menu bg1" clip-path="url(#clip-path)">
+    <g id="Group_1057" data-name="Group 1057" opacity="0.496">
+      <g id="Group_72" data-name="Group 72" transform="translate(26 460)" opacity="0.2" style="mix-blend-mode: normal;isolation: isolate">
+        <g id="Ellipse_11" data-name="Ellipse 11" transform="translate(-145 -430)" fill="none" stroke="#fff" stroke-width="2">
+          <circle cx="119" cy="119" r="119" stroke="none"/>
+          <circle cx="119" cy="119" r="118" fill="none"/>
+        </g>
+        <g id="Ellipse_12" data-name="Ellipse 12" transform="translate(-65 288)" fill="none" stroke="#fff" stroke-width="2">
+          <circle cx="87" cy="87" r="87" stroke="none"/>
+          <circle cx="87" cy="87" r="86" fill="none"/>
+        </g>
+        <g id="Ellipse_14" data-name="Ellipse 14" transform="translate(323 -14)" fill="none" stroke="#fff" stroke-width="2">
+          <circle cx="53" cy="53" r="53" stroke="none"/>
+          <circle cx="53" cy="53" r="52" fill="none"/>
+        </g>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Ellipse_16)">
+        <circle id="Ellipse_16-2" data-name="Ellipse 16" cx="120" cy="120" r="120" transform="translate(270 -12)" fill="#fff" opacity="0.1"/>
+      </g>
+    </g>
+  </g>
+</svg>

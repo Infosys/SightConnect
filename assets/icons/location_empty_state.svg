@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="56" viewBox="0 0 64 56">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_39629" d="M6.415,24.43c6.8-1.528,6.491.956,16.853-.864,10.98-1.929,24.189-6.612,33.925-3.023s7.293,18.982,2.461,22.552S44.589,41.022,32.28,41.784s-12.929,3.156-20.93,0C-1.833,34.714-.383,25.958,6.415,24.43Z" transform="translate(-1.332 -8.224)" fill="#22bf85"/>
+    </clipPath>
+  </defs>
+  <g id="location_empty_state_icon" transform="translate(-424.441 0)">
+    <rect id="Rectangle_15112" width="64" height="56" transform="translate(424.441 0)" fill="#fff" opacity="0"/>
+    <g id="Group_39732" transform="translate(425.441 3)">
+      <g id="Mask_Group_40" transform="translate(0 14.767)" clip-path="url(#clip-path)">
+        <rect id="Rectangle_15111" width="64.557" height="42.826" transform="translate(-1.061 -6.161)" fill="#eaeaea"/>
+        <path id="Path_39626" d="M703.54,254.014v-2.629h-8.956v-8.224h-2.432v8.224H676.208v-8.224h-2.432v8.224H649.185v-8.224h-2.432v8.224h-7.771v2.629h7.771V264.24h-7.771v2.629h7.771v10.956h-7.771v2.629h20.877v5.531h2.432v-5.531h11.485v5.531h2.432v-5.531H703.54v-2.63H676.208V266.87H703.54v-2.63h-8.956V254.014Zm-29.763,0v3.214H649.185v-3.214Zm-24.591,5.843h24.591v4.383H649.185Zm0,17.968V266.87h10.674v10.956Zm24.591,0H662.291V266.87h11.485Zm18.376-13.586H676.208V254.014h15.944Z" transform="translate(-640.043 -249.322)" fill="#f7faff"/>
+      </g>
+      <g id="Group_39731" transform="translate(18)">
+        <path id="Path_39627" d="M794.9,162.556c0,6.934-13,22.382-13,22.382s-13-15.448-13-22.382a13.008,13.008,0,0,1,26,0Z" transform="translate(-768.903 -150)" fill="#bbb"/>
+        <path id="Path_39628" d="M814.472,186.725a5.947,5.947,0,1,1-5.943-5.74A5.844,5.844,0,0,1,814.472,186.725Z" transform="translate(-795.529 -174.715)" fill="#fff" style="mix-blend-mode: normal;isolation: isolate"/>
+        <ellipse id="Ellipse_681" cx="3.504" cy="3.385" rx="3.504" ry="3.385" transform="translate(9.496 37.231)" fill="#bbb"/>
+      </g>
+    </g>
+  </g>
+</svg>

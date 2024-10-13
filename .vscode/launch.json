@@ -1,0 +1,37 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter (Chrome)",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "EYE_CARE_FOR_ALL_INFOSYS",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "EYE_CARE_FOR_ALL_INFOSYS (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "EYE_CARE_FOR_ALL_INFOSYS (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter (Chrome, Disable Web Security)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-browser-flag=--disable-web-security"
+            ]
+        }
+    ]
+}
